@@ -891,8 +891,8 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: |-
-        Comma-separated list of relationship objects that should be included in the response.
-        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
+        Values must not contain spaces. `case` and `assignee` return nothing, without an error, if the caller lacks the `cases_read` permission.
       explode: false
       in: query
       name: include
@@ -1888,6 +1888,7 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
+      example: logs
       in: path
       name: product
       required: true
@@ -2194,7 +2195,8 @@ components:
       schema:
         $ref: "#/components/schemas/ServiceDefinitionSchemaVersions"
     SearchIssuesIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.case`, and `issue.team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.bits_investigation`, `issue.case`, `issue.impacted_sessions`, `issue.impacted_users`, `issue.pull_requests`, `issue.team_owners`, and `issue.watches`.
       explode: false
       in: query
       name: include
@@ -2656,7 +2658,7 @@ components:
       description: |-
         The trace ID. Accepts either a hexadecimal string of up to 32 characters (128-bit trace ID)
         or a decimal string of up to 39 digits. Hexadecimal IDs are case-insensitive, and shorter
-        values are left-padded with zeros.
+        values are left-padded with zeros. Values made only of digits are treated as decimal.
         Use the `trace_id` attribute of a span returned by the Search spans or Get a list of spans endpoints.
         Values in any other format, such as UUIDs, return `400 Bad Request`. A well-formed ID with
         no matching trace returns `404 Not Found`.
@@ -3899,11 +3901,13 @@ components:
           type: integer
         traceID:
           description: The lower 64 bits of the trace ID, as an unsigned 64-bit integer.
-          example: 12345678901234567890
+          example: 12376211733897805824
           format: int64
           type: integer
         traceIDFull:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -5588,6 +5592,16 @@ components:
         xray_services:
           $ref: "#/components/schemas/XRayServicesList"
       type: object
+    AccessPolicyEffect:
+      description: The effect applied when an email address matches the policy. Deny policies take precedence over allow policies.
+      enum:
+        - allow
+        - deny
+      example: allow
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
     AccessTokenListItem:
       description: An access token entry returned by the personal access tokens list endpoint. May represent either a personal or a service access token.
       properties:
@@ -5901,6 +5915,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegration"
         - $ref: "#/components/schemas/GCPIntegration"
         - $ref: "#/components/schemas/GeminiIntegration"
+        - $ref: "#/components/schemas/GithubIntegration"
         - $ref: "#/components/schemas/GitlabIntegration"
         - $ref: "#/components/schemas/GreyNoiseIntegration"
         - $ref: "#/components/schemas/HTTPIntegration"
@@ -5928,6 +5943,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegrationUpdate"
         - $ref: "#/components/schemas/GCPIntegrationUpdate"
         - $ref: "#/components/schemas/GeminiIntegrationUpdate"
+        - $ref: "#/components/schemas/GithubIntegrationUpdate"
         - $ref: "#/components/schemas/GitlabIntegrationUpdate"
         - $ref: "#/components/schemas/GreyNoiseIntegrationUpdate"
         - $ref: "#/components/schemas/HTTPIntegrationUpdate"
@@ -32480,6 +32496,38 @@ components:
       type: string
       x-enum-varnames:
         - CREATE_SNAPSHOT
+    CreateStatusPageEmailAccessPolicyRequest:
+      description: Request object for creating a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestData"
+      required:
+        - data
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestData:
+      description: The data object for creating a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - type
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestDataAttributes:
+      description: Attributes for creating a status page email access policy.
+      properties:
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy. Supports an exact address (`user@example.com`), all addresses in a domain (`@example.com`), or all addresses in subdomains (`@*.example.com`).
+          example: "@example.com"
+          type: string
+      required:
+        - effect
+        - pattern
+      type: object
     CreateStatusPageRequest:
       description: Request object for creating a status page.
       example:
@@ -32507,6 +32555,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -32556,17 +32605,23 @@ components:
             $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems"
           type: array
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -32575,7 +32630,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -32645,15 +32701,17 @@ components:
           $ref: "#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType"
       type: object
     CreateStatusPageRequestDataAttributesType:
-      description: The type of the status page controlling how the status page is accessed.
+      description: The type of the status page controlling how the status page is accessed. Public pages are accessible to anyone, internal pages are accessible to authenticated users in the Datadog organization, and private pages are accessible only to users matching an allow email access policy and no deny email access policy.
       enum:
         - public
         - internal
+        - private
       example: public
       type: string
       x-enum-varnames:
         - PUBLIC
         - INTERNAL
+        - PRIVATE
     CreateStatusPageRequestDataAttributesVisualizationLayout:
       description: The layout of components on the status page. Defaults to `list`. `grid` requires `visualization_type` to be `component_name_only`; changing `visualization_type` to any other value resets the layout to `list`.
       enum:
@@ -62301,16 +62359,22 @@ components:
       description: Relationship object that should be included in the response.
       enum:
         - assignee
+        - bits_investigation
         - case
-        - team_owners
+        - pull_requests
         - samples
+        - team_owners
+        - watches
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
+        - BITS_INVESTIGATION
         - CASE
-        - TEAM_OWNERS
+        - PULL_REQUESTS
         - SAMPLES
+        - TEAM_OWNERS
+        - WATCHES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -63091,6 +63155,187 @@ components:
       description: "Git Repository URL"
       example: "https://github.com/organization/example-repository"
       type: string
+    GithubApp:
+      description: GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppPrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+        - github_app_id
+        - github_installation_id
+        - private_key
+      type: object
+    GithubAppGithubAppId:
+      description: The numeric ID of the GitHub App.
+      example: "123456"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      example: "789012"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppPrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppType:
+      description: The credential type for `GithubApp`.
+      enum:
+        - GithubApp
+      example: GithubApp
+      type: string
+      x-enum-varnames:
+        - GITHUBAPP
+    GithubAppUpdate:
+      description: Update to GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppUpdateHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppUpdatePrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+      type: object
+    GithubAppUpdateGithubAppId:
+      description: The numeric ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdatePrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubCredentials:
+      description: Supported GitHub connection credentials.
+      oneOf:
+        - $ref: "#/components/schemas/GithubApp"
+        - $ref: "#/components/schemas/GithubPersonalAccessToken"
+    GithubCredentialsUpdate:
+      description: Supported GitHub connection credentials for an update.
+      oneOf:
+        - $ref: "#/components/schemas/GithubAppUpdate"
+        - $ref: "#/components/schemas/GithubPersonalAccessTokenUpdate"
+    GithubIntegration:
+      description: GitHub connection integration.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentials"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+        - credentials
+      type: object
+    GithubIntegrationType:
+      description: The GitHub integration type.
+      enum:
+        - Github
+      example: Github
+      type: string
+      x-enum-varnames:
+        - GITHUB
+    GithubIntegrationUpdate:
+      description: GitHub connection integration update.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentialsUpdate"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessToken:
+      description: GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+        - access_token
+      type: object
+    GithubPersonalAccessTokenAccessToken:
+      description: GitHub personal access token.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenType:
+      description: The credential type for `GithubPersonalAccessToken`.
+      enum:
+        - GithubPersonalAccessToken
+      example: GithubPersonalAccessToken
+      type: string
+      x-enum-varnames:
+        - GITHUBPERSONALACCESSTOKEN
+    GithubPersonalAccessTokenUpdate:
+      description: Update to GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessTokenUpdateAccessToken:
+      description: GitHub personal access token.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GithubWebhookTrigger:
       description: 'Trigger a workflow from a GitHub webhook. To trigger a workflow from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id", select application/json for the content type, and be highly recommend enabling SSL verification for security. The workflow must be published.'
       properties:
@@ -73031,6 +73276,36 @@ components:
         state:
           $ref: "#/components/schemas/IssueState"
       type: object
+    IssueBitsInvestigationReference:
+      description: The Bits AI investigation linked to the issue.
+      properties:
+        id:
+          description: Bits AI investigation identifier.
+          example: "6c2b3c2e-6b8f-4c3a-9a7e-1d2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueBitsInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    IssueBitsInvestigationRelationship:
+      description: |-
+        Bits AI investigation linked to the issue, returned when `bits_investigation` is requested
+        in the `include` query parameter.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueBitsInvestigationReference"
+      required:
+        - data
+      type: object
+    IssueBitsInvestigationType:
+      description: Type of the object.
+      enum: ["bits_investigation"]
+      example: "bits_investigation"
+      type: string
+      x-enum-varnames:
+        - BITS_INVESTIGATION
     IssueCase:
       description: The case attached to the issue.
       properties:
@@ -73100,6 +73375,10 @@ components:
           $ref: "#/components/schemas/CasePriority"
         status:
           $ref: "#/components/schemas/CaseStatus"
+        status_group:
+          $ref: "#/components/schemas/CaseStatusGroup"
+        status_name:
+          $ref: "#/components/schemas/CaseStatusName"
         title:
           description: Title of the case.
           example: "Error: HTTP error"
@@ -73251,6 +73530,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
         - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
@@ -73280,6 +73561,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
       example: "PYTHON"
@@ -73310,6 +73592,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
     IssuePlatform:
@@ -73318,6 +73601,7 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
@@ -73329,11 +73613,96 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
         - ROKU
         - UNKNOWN
+    IssuePullRequest:
+      description: A pull request linked to an issue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssuePullRequestAttributes"
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssuePullRequestAttributes:
+      description: Object containing the information of a pull request linked to an issue.
+      properties:
+        closed_at:
+          description: Timestamp of when the pull request was closed. Omitted if the pull request is not closed.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        linked_at:
+          description: Timestamp of when the pull request was linked to the issue.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        merged_at:
+          description: Timestamp of when the pull request was merged. Omitted if the pull request is not merged.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        reason:
+          $ref: "#/components/schemas/IssuePullRequestReason"
+        url:
+          description: URL of the pull request.
+          example: "https://github.com/DataDog/example/pull/123"
+          type: string
+      type: object
+    IssuePullRequestReason:
+      description: Why the pull request is linked to the issue. `fix` means the pull request fixes the issue, and `trigger` means the pull request introduced the issue.
+      enum:
+        - unknown
+        - fix
+        - trigger
+      example: "fix"
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - FIX
+        - TRIGGER
+    IssuePullRequestReference:
+      description: A pull request linked to the issue.
+      properties:
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+      type: object
+    IssuePullRequestType:
+      description: Type of the object.
+      enum: ["error_tracking_pull_request"]
+      example: "error_tracking_pull_request"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_PULL_REQUEST
+    IssuePullRequestsRelationship:
+      description: Relationship between the issue and its linked pull requests. Returned when `pull_requests` is included and the issue has linked pull requests.
+      properties:
+        data:
+          description: Array of pull requests linked to the issue.
+          items:
+            $ref: "#/components/schemas/IssuePullRequestReference"
+          type: array
+      required:
+        - data
+      type: object
     IssueReference:
       description: The issue the search result corresponds to.
       properties:
@@ -73369,16 +73738,22 @@ components:
         - regressed_at
       type: object
     IssueRelationships:
-      description: Relationship between the issue and an assignee, case and/or teams.
+      description: Relationship between the issue and other resources, such as an assignee, case, teams, pull requests, watches, samples, or a Bits AI investigation.
       properties:
         assignee:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
+        bits_investigation:
+          $ref: "#/components/schemas/IssueBitsInvestigationRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        pull_requests:
+          $ref: "#/components/schemas/IssuePullRequestsRelationship"
         samples:
           $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
+        watches:
+          $ref: "#/components/schemas/IssueWatchesRelationship"
       type: object
     IssueResponse:
       description: Response containing error tracking issue data.
@@ -73885,6 +74260,146 @@ components:
       type: string
       x-enum-varnames:
         - USER
+    IssueWatch:
+      description: |-
+        An active watch on an issue. A watch moves an ignored issue back to open when its condition is met.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueWatchAttributes"
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueWatchAction:
+      description: Action applied to the issue when the watch condition is met.
+      properties:
+        from:
+          $ref: "#/components/schemas/IssueState"
+        kind:
+          $ref: "#/components/schemas/IssueWatchActionKind"
+        to:
+          $ref: "#/components/schemas/IssueState"
+      required:
+        - kind
+      type: object
+    IssueWatchActionKind:
+      description: Kind of watch action.
+      enum:
+        - CHANGE_ISSUE_STATE
+      example: "CHANGE_ISSUE_STATE"
+      type: string
+      x-enum-varnames:
+        - CHANGE_ISSUE_STATE
+    IssueWatchAttributes:
+      description: Object containing the information of a watch.
+      properties:
+        action:
+          $ref: "#/components/schemas/IssueWatchAction"
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+        started_at:
+          description: Timestamp of when the watch started.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/IssueWatchStatus"
+      type: object
+    IssueWatchCondition:
+      description: |-
+        Condition that triggers the watch action. The fields that are set depend on `kind`:
+        `OCCURRENCES` uses `threshold`, `CARDINALITY` uses `threshold` and `projection`,
+        `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
+      properties:
+        duration:
+          description: Time that must elapse before the condition is met, as a Go duration string.
+          example: "168h0m0s"
+          type: string
+        kind:
+          $ref: "#/components/schemas/IssueWatchConditionKind"
+        operands:
+          description: Nested conditions combined by `ANY` or `ALL`.
+          items:
+            $ref: "#/components/schemas/IssueWatchCondition"
+          type: array
+        projection:
+          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          example: ["@usr.id"]
+          items:
+            description: Attribute path.
+            example: "@usr.id"
+            type: string
+          type: array
+        threshold:
+          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          example: 100
+          format: int64
+          type: integer
+      required:
+        - kind
+      type: object
+    IssueWatchConditionKind:
+      description: Kind of watch condition.
+      enum:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+      example: "OCCURRENCES"
+      type: string
+      x-enum-varnames:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+    IssueWatchReference:
+      description: An active watch on the issue.
+      properties:
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+      type: object
+    IssueWatchStatus:
+      description: Status of the watch.
+      enum:
+        - ACTIVE
+      example: "ACTIVE"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+    IssueWatchType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_watch"]
+      example: "error_tracking_issue_watch"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_WATCH
+    IssueWatchesRelationship:
+      description: Relationship between the issue and its active watches. Returned when `watches` is included and the issue has an active watch.
+      properties:
+        data:
+          description: Array of active watches on the issue.
+          items:
+            $ref: "#/components/schemas/IssueWatchReference"
+          type: array
+      required:
+        - data
+      type: object
     IssuesSearchRequest:
       description: Search issues request payload.
       properties:
@@ -74035,12 +74550,20 @@ components:
       description: Object containing the information of a search result.
       properties:
         impacted_sessions:
-          description: Count of sessions impacted by the issue over the queried time window.
+          description: |-
+            Count of sessions impacted by the issue over the queried time window.
+            Returned for RUM, LLM Observability, browser, and mobile searches,
+            or when `issue.impacted_sessions` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 12
           format: int64
           type: integer
         impacted_users:
-          description: Count of users impacted by the issue over the queried time window.
+          description: |-
+            Count of users impacted by the issue over the queried time window.
+            Returned for RUM, browser, and mobile searches,
+            or when `issue.impacted_users` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 4
           format: int64
           type: integer
@@ -74057,6 +74580,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
     IssuesSearchResultIssueRelationship:
       description: Relationship between the search result and the corresponding issue.
       properties:
@@ -104628,6 +105153,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -104662,17 +105188,23 @@ components:
           example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
           type: string
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -104681,7 +105213,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -109735,7 +110268,9 @@ components:
         attributes:
           $ref: "#/components/schemas/PrunedTraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -111024,9 +111559,12 @@ components:
       description: The definition of a RUM operation's journey, used to detect it from RUM events.
       properties:
         rum_steps:
-          description: The ordered list of steps composing the RUM journey.
+          description: |-
+            The ordered list of steps composing the RUM journey.
+            `null` when the operation has no steps. On create and update, `null` and an empty list are equivalent.
           items:
             $ref: "#/components/schemas/RUMOperationJourneyStep"
+          nullable: true
           type: array
       required:
         - rum_steps
@@ -111146,6 +111684,7 @@ components:
           description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
+          nullable: true
           type: array
         journey_rum:
           $ref: "#/components/schemas/RUMOperationJourneyRum"
@@ -111164,6 +111703,7 @@ components:
             - "team:checkout"
           items:
             type: string
+          nullable: true
           type: array
         updated_at:
           description: The timestamp when the RUM operation was last updated.
@@ -111433,7 +111973,8 @@ components:
         - attributes
       type: object
     RUMOperationUser:
-      description: A Datadog user referenced by a RUM operation.
+      description: A Datadog user referenced by a RUM operation. `null` when the user could not be resolved.
+      nullable: true
       properties:
         email:
           description: The email of the user.
@@ -111449,6 +111990,7 @@ components:
           type: string
         uuid:
           description: The UUID of the user.
+          example: "abc12345-1234-5678-abcd-ef1234567890"
           readOnly: true
           type: string
       type: object
@@ -111459,10 +112001,36 @@ components:
           items:
             $ref: "#/components/schemas/RUMOperationResponseData"
           type: array
+        links:
+          $ref: "#/components/schemas/RUMOperationsListResponseLinks"
         meta:
           $ref: "#/components/schemas/RUMOperationsListResponseMeta"
       required:
         - data
+      type: object
+    RUMOperationsListResponseLinks:
+      description: Pagination links for a list of RUM operations.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        last:
+          description: Link to the last page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=150"
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=100"
+          type: string
+        prev:
+          description: Link to the previous page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=50"
+          type: string
       type: object
     RUMOperationsListResponseMeta:
       description: Metadata for a list of RUM operations.
@@ -121977,15 +122545,25 @@ components:
       enum:
         - issue
         - issue.assignee
+        - issue.bits_investigation
         - issue.case
+        - issue.impacted_sessions
+        - issue.impacted_users
+        - issue.pull_requests
         - issue.team_owners
+        - issue.watches
       example: "issue.case"
       type: string
       x-enum-varnames:
         - ISSUE
         - ISSUE_ASSIGNEE
+        - ISSUE_BITS_INVESTIGATION
         - ISSUE_CASE
+        - ISSUE_IMPACTED_SESSIONS
+        - ISSUE_IMPACTED_USERS
+        - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
+        - ISSUE_WATCHES
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -135371,12 +135949,14 @@ components:
           example: {"@state": "success", "@version": "abc"}
           type: object
         compute:
-          description: The compute data.
+          description: |-
+            Map of compute ID (`c0`, `c1`, ... in request order) to the computed value, or to a list of
+            `{time, value}` points for a `timeseries` compute.
           type: object
         computes:
           additionalProperties:
             $ref: "#/components/schemas/SpansAggregateBucketValue"
-          description: A map of the metric name -> value for regular compute or list of values for a timeseries.
+          description: Not returned by this endpoint. Read the values from `compute` instead.
           type: object
       type: object
     SpansAggregateBucketType:
@@ -135602,7 +136182,9 @@ components:
             type: string
           type: array
         trace_id:
-          description: Id of the trace to which the span belongs.
+          description: |-
+            ID of the trace to which the span belongs: a 32-character hexadecimal string for 128-bit trace IDs,
+            or a decimal string for 64-bit trace IDs. Pass it unchanged to Get a trace by ID.
           example: "1234567890987654321"
           type: string
         type:
@@ -135613,7 +136195,8 @@ components:
     SpansCompute:
       description: |-
         A compute rule to compute metrics or timeseries.
-        All computes in a request must have the same `type`, and `timeseries` computes must use the same `interval`.
+        All computes in a request must have the same `type` (defaults to `total` when omitted),
+        and `timeseries` computes must use the same `interval`.
         To get both totals and timeseries, send separate requests.
       properties:
         aggregation:
@@ -136057,7 +136640,16 @@ components:
           type: string
         query:
           default: "*"
-          description: The search query - following the span search syntax.
+          description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
         to:
@@ -136466,11 +137058,14 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136481,6 +137076,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136643,12 +137241,15 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           nullable: true
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136660,6 +137261,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136671,6 +137275,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
+          nullable: true
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -136789,6 +137394,143 @@ components:
       type: string
       x-enum-varnames:
         - STATUS_PAGES
+    StatusPageEmailAccessPolicyArrayResponse:
+      description: Response object for a list of status page email access policies.
+      properties:
+        data:
+          description: A list of status page email access policy data objects.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+          type: array
+        included:
+          description: Resources related to the email access policies, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyData:
+      description: The data object for a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataAttributes"
+        id:
+          description: The ID of the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationships"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - id
+        - relationships
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataAttributes:
+      description: Attributes of a status page email access policy.
+      properties:
+        created_at:
+          description: Timestamp of when the email access policy was created.
+          example: "2026-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy.
+          example: "@example.com"
+          type: string
+      required:
+        - created_at
+        - effect
+        - pattern
+      type: object
+    StatusPageEmailAccessPolicyDataRelationships:
+      description: Relationships of a status page email access policy.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser"
+        status_page:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPage"
+      required:
+        - created_by_user
+        - status_page
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser:
+      description: The Datadog user who created the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData:
+      description: The data object identifying the Datadog user who created the email access policy.
+      properties:
+        id:
+          description: The ID of the Datadog user who created the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPage:
+      description: The status page associated with the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPageData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPageData:
+      description: The data object identifying the status page associated with the email access policy.
+      properties:
+        id:
+          description: The ID of the status page associated with the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPageDataType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyIncluded:
+      description: An included resource related to a status page email access policy.
+      oneOf:
+        - $ref: "#/components/schemas/StatusPagesUser"
+        - $ref: "#/components/schemas/StatusPageAsIncluded"
+    StatusPageEmailAccessPolicyResponse:
+      description: Response object for a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+        included:
+          description: Resources related to the email access policy, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyType:
+      default: email_access_policies
+      description: Status page email access policy resource type.
+      enum:
+        - email_access_policies
+      example: email_access_policies
+      type: string
+      x-enum-varnames:
+        - EMAIL_ACCESS_POLICIES
     StatusPagesComponent:
       description: Response object for a single component.
       properties:
@@ -137779,7 +138521,9 @@ components:
         root:
           $ref: "#/components/schemas/SummarizedSpan"
         traceId:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
       required:
@@ -142229,15 +142973,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -142541,12 +143289,13 @@ components:
       properties:
         rule_ids:
           description: >-
-            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list. Must contain the UUID of every active rule in the org (at most 1,000); omitting any active rule returns a 400 error.
           example:
             - "00000000-0000-0000-0000-000000000001"
             - "00000000-0000-0000-0000-000000000002"
           items:
             type: string
+          maxItems: 1000
           type: array
       type: object
     TagIndexingRuleOrderData:
@@ -142597,15 +143346,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -148332,8 +149085,10 @@ components:
         attributes:
           $ref: "#/components/schemas/TraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
-          example: "0000000000000000abc1230000000000"
+          description: |-
+            The lower 64 bits of the trace ID, as a decimal string.
+            The full trace ID is in each span's `traceIDFull`.
+          example: "12376211733897805824"
           type: string
         type:
           $ref: "#/components/schemas/TraceType"
@@ -151627,7 +152382,12 @@ components:
           nullable: true
           type: boolean
         pending_usage_limit:
-          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          description: |-
+            The limit to apply to the organization-wide quota at 00:00 UTC on the first day of the next calendar month. Must be a non-negative integer in the usage units defined by the quota namespace. This value is not checked against current usage.
+
+            Setting this field replaces any previously scheduled limit. The server sets `pending_effective_from`.
+
+            Omitting this field preserves the scheduled change, even when increasing `usage_limit`. Setting `enforced=false` clears the scheduled change. To cancel it explicitly, use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending`.
           example: 50000
           format: int64
           minimum: 0
@@ -180555,7 +181315,9 @@ paths:
       x-menu-order: 1
   /api/v2/error-tracking/issues/{issue_id}:
     get:
-      description: Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+      description: |-
+        Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.
       operationId: GetIssue
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
@@ -214962,7 +215724,20 @@ paths:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
         among existing rules; use the reorder endpoint to change the evaluation order.
+        Every rule that matches a metric applies, in `rule_order`; a rule with
+        `override_previous_rules` set to `false` (merge) adds to the tags configured by earlier
+        rules, and a rule with `override_previous_rules` set to `true` replaces them.
         Requires the `Manage Tags for Metrics` permission.
+
+        Limits:
+        - An org can have at most 1,000 active tag indexing rules. Creating a rule when the org
+          already has 1,000 active rules returns a 403 error with the title
+          `Tag indexing rule limit reached`.
+        - Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;
+          requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.
+        - `name` can be at most 200 characters, and `metric_name_matches` can contain at most
+          50 patterns of at most 200 characters each. Requests that exceed these limits return a
+          400 error.
       operationId: CreateTagIndexingRule
       requestBody:
         content:
@@ -215014,6 +215789,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                rule_limit_reached:
+                  summary: The org already has 1,000 active tag indexing rules.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rule limit reached
+                tag_indexing_rules_unavailable:
+                  summary: The org has more than 700,000 custom metrics.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rules unavailable
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
@@ -215042,7 +215830,8 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
-        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
+        The UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID
+        returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -215213,7 +216002,10 @@ paths:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
         Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        reorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and
+        `metric_name_matches` can contain at most 50 patterns of at most 200 characters each;
+        requests that exceed these limits return a 400 error.
+        Requires the `Manage Tags for Metrics` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
@@ -258440,7 +259232,7 @@ paths:
                       - attributes:
                           by:
                             host: my-hostname
-                          computes:
+                          compute:
                             c0: 19
                         id: abc-123
                         type: bucket
@@ -258454,6 +259246,12 @@ paths:
           $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Request Timeout
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -258481,7 +259279,16 @@ paths:
         [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api
       operationId: ListSpansGet
       parameters:
-        - description: Search query following spans syntax.
+        - description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "@datacenter:us @role:db"
           in: query
           name: filter[query]
@@ -261529,6 +262336,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -261848,6 +262656,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
@@ -261888,6 +262697,236 @@ paths:
       tags:
         - Status Pages
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email:
+    get:
+      description: Lists the email access policies for a private status page.
+      operationId: ListEmailAccessPolicies
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00.000Z"
+                          effect: allow
+                          pattern: "@example.com"
+                        id: 00000000-0000-0000-0000-000000000001
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000003
+                              type: users
+                          status_page:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: status_pages
+                        type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyArrayResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: List email access policies
+      tags:
+        - Status Pages
+      x-menu-order: 38
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_read
+    post:
+      description: Creates an email access policy for a private status page.
+      operationId: CreateEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      effect: allow
+                      pattern: "@example.com"
+                    type: email_access_policies
+            schema:
+              $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00.000Z"
+                        effect: allow
+                        pattern: "@example.com"
+                      id: 00000000-0000-0000-0000-000000000001
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000003
+                            type: users
+                        status_page:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000002
+                            type: status_pages
+                      type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Create an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 37
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email/{policy_id}:
+    delete:
+      description: Deletes an email access policy from a private status page.
+      operationId: DeleteEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: The ID of the email access policy.
+          in: path
+          name: policy_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Delete an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 39
       x-permission:
         operator: AND
         permissions:
@@ -263583,7 +264622,7 @@ paths:
           - status_pages_incident_write
   /api/v2/statuspages/{page_id}/publish:
     post:
-      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.
       operationId: PublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -263603,6 +264642,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Publish status page
       tags:
@@ -263613,9 +264653,10 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/statuspages/{page_id}/unpublish:
     post:
-      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.
       operationId: UnpublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -263635,6 +264676,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Unpublish status page
       tags:
@@ -263645,6 +264687,7 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/stegadography/get-widgets:
     post:
       description: |-
@@ -269201,15 +270244,21 @@ paths:
         A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
         no trace with this ID is available, such as when the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
+        For very large traces, use Get a pruned trace by ID, or set `include_fields` to keep only the tags you need.
       operationId: GetTraceByID
       parameters:
         - $ref: "#/components/parameters/TraceIDPathParameter"
         - description: |-
-            List of span fields to include in the response. When omitted, every available field is returned.
+            Tag keys to keep in each span's `meta` and `metrics`, for example `http.status_code` or `error.message`.
+            Each value is matched against tag keys by exact name, with or without a leading `@`.
+            Passing `meta` or `metrics` doesn't return the whole map.
+            Core span fields such as `service`, `resource`, `name`, `duration`, IDs, and timestamps, and the `env` tag
+            in `meta`, are always returned.
+            When omitted, all tags are returned.
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
-            - service
-            - resource
+            - http.status_code
+            - error.message
           in: query
           name: include_fields
           required: false
@@ -269242,10 +270291,10 @@ paths:
                             service: web-store
                             spanID: 9876543210987654321
                             startTime: 1716800000000000000
-                            traceID: 12345678901234567890
+                            traceID: 12376211733897805824
                             traceIDFull: 0000000000000000abc1230000000000
                             type: web
-                      id: "0000000000000000abc1230000000000"
+                      id: "12376211733897805824"
                       type: trace
               schema:
                 $ref: "#/components/schemas/TraceResponse"
@@ -270365,7 +271414,7 @@ paths:
     get:
       description: |-
         Lists usage quotas for the caller's organization in a quota namespace. You can optionally include
-        descendant organizations in the same datacenter as the caller. Requires the `billing_read` or
+        descendant organizations in the same data center as the caller. Requires the `billing_read` or
         `billing_edit` permission.
       operationId: ListQuotas
       parameters:
@@ -270376,7 +271425,7 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same datacenter are supported.
+        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same data center are supported.
           in: query
           name: include_descendants
           required: false
@@ -270471,6 +271520,10 @@ paths:
       description: |-
         Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
         Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        Set `create_only=true` to atomically create exactly one quota in the caller's organization and reject an
+        existing quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.
+        Repeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`
+        even if the first request succeeded; reconcile the outcome before retrying or importing the quota.
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
@@ -270511,9 +271564,16 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same datacenter are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
+        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Create one quota without updating an existing quota. Requires exactly one item that specifies `usage_limit` and `enforced`, omits `pending_usage_limit`, and sets `include_descendants=false`. The quota belongs to the caller's organization. An existing quota returns `409` without being modified.
+          in: query
+          name: create_only
           required: false
           schema:
             default: false
@@ -270579,13 +271639,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
+          description: Bad Request. Returned when `create_only=true` is combined with multiple items, `pending_usage_limit`, or `include_descendants=true`, or when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a nonexistent quota reports an error in the item's `error` field. If only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              examples:
+                already_exists:
+                  value:
+                    errors:
+                      - detail: A quota already exists for this namespace and scope. Import it before managing it with Terraform.
+                        meta:
+                          error_code: already_exists
+                          quota_id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        status: "409"
+                        title: Conflict
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. With `create_only=true`, a quota already exists for this namespace and scope in the caller's organization. The existing quota is unchanged. The error's `meta` contains `error_code` set to `already_exists` and `quota_id` set to the existing quota's opaque ID. Import the existing quota before managing it with Terraform.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -270616,6 +271692,14 @@ paths:
         Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -270663,11 +271747,106 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: |-
+        Returns a usage quota's current configuration by its opaque identifier. Scheduled limits are returned separately until they take effect, after which they are returned as the current limit.
+
+        By default, you can retrieve quotas from your organization and authorized descendant organizations in the same data center. Set `include_descendants=false` to restrict access to your organization.
+
+        A quota remains readable after its associated user, role, or team is deleted. Requires `billing_read` or `billing_edit`.
+      operationId: GetQuota
+      parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        usage_limit: 120000
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_read
+        - AuthZ:
+            - billing_edit
+      summary: Get a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 27
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_read
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -270757,6 +271936,14 @@ paths:
         Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeletePendingQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -274803,6 +275990,8 @@ tags:
       JIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within
       Workflow Automation and App Builder.
 
+      To authenticate with your own GitHub App or personal access token, create a GitHub connection.
+
       We offer granular access control for editing and resolving connections.
     externalDocs:
       description: Find out more at
@@ -275384,19 +276573,25 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
+    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
+    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
+    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
+    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
+    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
