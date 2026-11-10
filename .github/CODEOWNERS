@@ -71,6 +71,7 @@ hugo/go.sum                                                                     
 hugo/archetypes/                                                                             @DataDog/documentation
 hugo/data/                                                                                   @DataDog/documentation
 hugo/config/_default/menus/                                                                  @DataDog/documentation
+shared/left_nav/                                                                             @DataDog/documentation
 hugo/config/_default/params.yaml                                                             @DataDog/documentation
 hugo/config/_default/params.*.yaml                                                           @DataDog/documentation
 hugo/layouts/shortcodes/**/*.md                                                              @DataDog/documentation

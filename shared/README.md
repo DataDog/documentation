@@ -1,9 +1,9 @@
 # `shared/`
 
 Data read by more than one site in this monorepo. Astro reads these files
-through the `@shared` alias. Hugo mounts `i18n/` and `regions.yaml` in
-`hugo/config/_default/config.yaml`, and will mount the others as it adopts
-each one.
+through the `@shared` alias. Hugo mounts `i18n/` and `regions.yaml`, and
+imports `left_nav/` as a module, in `hugo/config/_default/config.yaml`. It will
+mount the others as it adopts each one.
 
 Documentation lives here rather than in file headers, because these files are
 edited by scripts as well as by hand, and most YAML libraries drop comments on a
@@ -35,6 +35,20 @@ a leading zero (`"065115117704"`) or that YAML would read as a number.
 To add a region, add one block. Astro reads it through
 `astro/src/config/regions.ts`. Hugo reads it as `site.Data.regions` in templates,
 and its scripts get it through `hugo/assets/scripts/config/regions.config.js`.
+
+## `left_nav/`
+
+The docs left nav, one `main.{lang}.yaml` file per locale under
+`left_nav/config/_default/menus/`. Hugo reads it as `.Site.Menus.main`. Astro
+reads it in `astro/src/lib/componentUtils/docsNavMenu.ts` for the mobile nav.
+
+Hugo can't mount config files, so `left_nav/` is a local Hugo module rather than
+a mount. Hugo merges a module's `config/` directory into the site config, the
+same way the footer menus arrive from `websites-modules`. Keep the
+`config/_default/menus/` layout, or Hugo won't find the files.
+
+Only `main.en.yaml` is edited by hand. The other locales come from the
+translation pipeline (see `translate.yaml`).
 
 ## `site_support.yaml`
 
