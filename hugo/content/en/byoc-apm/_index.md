@@ -75,43 +75,29 @@ The Preview supports Amazon EKS only. Other cloud providers and on-premises depl
 
 ## Preview capabilities
 
-BYOC APM supports these capabilities in the Preview:
+The following table lists the capabilities that BYOC APM supports and doesn't support in the Preview:
 
-- OTLP trace ingestion and span storage in your cloud account
-- Historical span queries
-- RED metrics: request rate, errors, and latency
-- [Service pages][4] and [resource pages][5]
-- [Catalog][6] entries
-- [Monitors on trace metrics][7]
-
-BYOC APM doesn't support these capabilities in the Preview:
-
-- Trace queries and Live Search
-- Some aggregations and the scatter plot
-- Cluster selection in [Trace Explorer][9]
-- The service dependency graph
-- Span links and span events
-- Pipeline customization
-- Datadog Agent ingestion
-- Percentiles
-- Retention filters
-- Sensitive Data Scanner
-- [Custom metrics generated from spans][10]
-- Service remapping configuration
-- Enrichments
-- The distribution widget
-- Some monitor types
-- Calculated fields
+| Area | Supported | Not supported |
+| --- | --- | --- |
+| Ingestion | OTLP trace ingestion and span storage in your cloud account | Datadog Agent ingestion, pipeline customization |
+| Search and analytics | Historical span queries | Trace queries, Live Search, some aggregations, the scatter plot, calculated fields, cluster selection in [Trace Explorer][9] |
+| Metrics | RED metrics: request rate, errors, and latency | Percentiles, the distribution widget, [custom metrics generated from spans][10] |
+| Services | [Service pages][4], [resource pages][5], [Catalog][6] entries | The service dependency graph, service remapping configuration |
+| Monitors | [Monitors on trace metrics][7] | Some monitor types |
+| Span data | | Span links, span events, enrichments |
+| Data management | | Retention filters, Sensitive Data Scanner |
 
 Datadog hides some unsupported features in the UI.
 
 ## Responsibilities
 
+You and Datadog share responsibility for a BYOC APM deployment. The data plane runs in your cloud account, so your team operates it and responds first when an issue occurs there. Datadog supplies the software that runs in the data plane, and runs the control plane and the APM UI.
+
 | Owner | Responsibilities |
 | --- | --- |
-| You | Operate the data plane: Kubernetes, cloud infrastructure, deployment, upgrades, and versioning. You are the first to respond when an issue occurs in the data plane. |
-| Datadog Operator | Automates data plane deployment and upgrades. |
-| Datadog | Runs the APM UI and supplies the ingestion pipeline. |
+| You | Operate the data plane: the Kubernetes cluster, cloud infrastructure, deployment, upgrades, and versioning. Pay for the compute and object storage that the data plane uses. |
+| Datadog Operator | Automates deployment and upgrades of the data plane in your Kubernetes cluster. |
+| Datadog | Supplies the Datadog Operator and the ingestion pipeline. Runs the control plane and the APM UI. |
 
 ## Further reading
 
