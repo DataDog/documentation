@@ -24,7 +24,7 @@ A postmortem is a structured document that captures what happened during an inci
 - Drive accountability for remediation work
 - Build organizational knowledge to reduce the frequency and severity of future incidents
 
-Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems to [Datadog Notebooks][1], [Confluence][2], [Google Drive][3], or [Notion][8]. Postmortems generated as Datadog Notebooks embed directly in the Post-Incident tab, where you can view, edit, and track their status and ownership without leaving the incident.
+Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems to [Datadog Notebooks][1], [Notion][8], [Confluence][2], or [Google Drive][3]. Postmortems generated as Datadog Notebooks embed directly in the Post-Incident tab, where you can view, edit, and track their status and ownership without leaving the incident.
 
 ## Permissions
 
@@ -58,9 +58,9 @@ For the full list of variables available to postmortem templates, see [Templates
 View and edit your postmortem based on its destination:
 
 - **Datadog Notebooks**: Embedded in the **Post-Incident** tab. Read and edit without leaving Datadog. Multiple users can edit simultaneously with cursor markers. Add inline comments. Changes are reflected in the underlying notebook.
+- **Notion**: Edit in Notion (click the link in the **Post-Incident** tab to open your Notion workspace).
 - **Confluence**: Edit in Confluence (click the link in the **Post-Incident** tab to open your Confluence workspace).
 - **Google Drive**: Edit in Google Docs (click the link in the **Post-Incident** tab to open Google Docs).
-- **Notion**: Edit in Notion (click the link in the **Post-Incident** tab to open your Notion workspace).
 
 ## Convert timestamps to date chips
 
