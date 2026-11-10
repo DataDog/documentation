@@ -11,10 +11,9 @@ further_reading:
 
 ## Prerequisites
 
-- [Remote Configuration][3] enabled for your organization and the Agent's API key
-- [Remote updates][4] enabled on each target VM Agent (`remote_updates: true`)
-- Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][5].
+- Agent version 7.82 or later. To upgrade your Agents, see [Upgrade Agents][5].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
+- [Remote Configuration][3] enabled for your organization and the Agent's API key
 
 ## Modify tags across multiple Agents
 
