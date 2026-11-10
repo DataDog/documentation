@@ -151,7 +151,7 @@ kubectl explain datadogbyoccluster.spec --recursive
 
 The required engine component entries are `metastore`, `indexer`, `searcher`, `controlPlane`, and `janitor`. The optional `compactor` and `readOnlyMetastore` entries enable those workloads when configured. Each component supports replica and resource configuration, with additional settings for storage and scheduling.
 
-Datadog strongly recommends enabling `compactor`, as shown in the example. Set its resource requests and limits using the [sizing guide][4].
+Datadog strongly recommends enabling `compactor` to isolate compaction from indexing and scale compactors independently. Set its resource requests and limits using the [sizing guide][4].
 
 The primary and read-only metastores require a database connection Secret reference under `database.uriSecretRef`. The Operator deploys the metastore workloads; you provision and operate their PostgreSQL databases. See [Metastore read replicas][5].
 
