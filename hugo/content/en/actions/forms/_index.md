@@ -76,13 +76,9 @@ Forms can include a start page shown before the first question, and an end page 
 
 To add or customize a start or end page:
 1. From the [Forms][2] page, click a form to open it in the editor.
-1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}.
+1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}. If no start page exists, click the plus **+** icon to add one.
 1. Edit the title and message.
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to apply your changes.
-
-To remove a start page, hover over {{< ui >}}Start Page{{< /ui >}} in the {{< ui >}}Pages{{< /ui >}} panel, click the trash <i class="icon-trash"></i> icon, and confirm.
-
-When a form has a start page or more than one question page, the form's title and description move to a separate card above the form. To split a form's questions across multiple pages, see [Pages][5].
 
 ## Form settings
 
@@ -97,7 +93,7 @@ From the [Forms][2] page, click a form to open it in the editor. In the editor h
 | Import Form | Import fields from a PDF or JSON file into the current form. |
 | Export Form (JSON) | Download the form as a JSON file. |
 
-For more information on managing responses, see [Form responses][6].
+For more information on managing responses, see [Form responses][5].
 
 ## Share a form
 
@@ -114,7 +110,7 @@ Add individual users or teams as recipients. Enable {{< ui >}}Notify added teamm
 
 Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
 
-Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][7] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
+Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][6] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Share with external users" level="h3" expanded=false %}}
@@ -131,7 +127,7 @@ The following options are available:
 Post a form to a Slack channel so your team can respond without leaving Slack.
 
 To share a form in Slack:
-1. Invite the Datadog app to the Slack channel. For setup steps, see the [Slack integration][8].
+1. Invite the Datadog app to the Slack channel. For setup steps, see the [Slack integration][7].
 1. In the channel, run `/dd` and select {{< ui >}}Share a Form{{< /ui >}}.
 1. Search for the form by name, then select it.
 1. Click {{< ui >}}Send to Channel{{< /ui >}}.
@@ -149,8 +145,8 @@ Datadog posts a card with the form's title and description. Respondents click {{
 Not every field can be rendered in a Slack modal. The following are not available in Slack:
 
 - Ranking components
-- Dropdowns that use [dynamic options][9]
-- [Conditional fields][10]
+- Dropdowns that use [dynamic options][8]
+- [Conditional fields][9]
 - Checkbox components with minimum or maximum selection limits
 
 If only optional fields are affected, the form is still fillable in Slack and Datadog warns that `Some fields aren't available in Slack and won't appear in the fill-out modal.` Those fields do not appear in the modal.
@@ -162,7 +158,7 @@ Forms that are no longer accepting responses cannot be shared.
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
 
-To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][11].
+To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][10].
 
 ## Add a form to a dashboard
 
@@ -172,7 +168,7 @@ To add a form to a dashboard from the form editor:
 1. Under {{< ui >}}Add to Dashboard{{< /ui >}}, select an existing dashboard or create one, then click {{< ui >}}Add{{< /ui >}}.
 
 You can also add a form to a dashboard directly from the dashboard:
-1. Navigate to a [dashboard][12].
+1. Navigate to a [dashboard][11].
 1. Click **Add Widgets** to open the side panel.
 1. Click the **Apps** tab.
 1. Select **Form Widget**.
@@ -180,18 +176,18 @@ You can also add a form to a dashboard directly from the dashboard:
 
 ## Add automation
 
-After creating a form, you can add an [action][13] or [workflow blueprint][14] that triggers automatically when a form is submitted.
+After creating a form, you can add an [action][12] or [workflow blueprint][13] that triggers automatically when a form is submitted.
 1. From the [Forms][2] page, click a form.
 1. At the top of the form, select {{< ui >}}Automation{{< /ui >}}.
 1. Choose an action or blueprint.
-1. The action or blueprint opens in a workflow canvas, where you can [edit it][15].
+1. The action or blueprint opens in a workflow canvas, where you can [edit it][14].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
-**Note**: Automations triggered by forms appear under [Workflow Automation][16].
+**Note**: Automations triggered by forms appear under [Workflow Automation][15].
 
 ## Create and manage forms with MCP
 
-Connect an external AI agent to the [Datadog MCP Server][17] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][18]. You can also ask [Bits Chat][19] to build a form from anywhere in Datadog. For a list of available tools, see [Forms][20] in the Datadog MCP Server tools reference.
+Connect an external AI agent to the [Datadog MCP Server][16] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][17]. You can also ask [Bits Chat][18] to build a form from anywhere in Datadog. For a list of available tools, see [Forms][19] in the Datadog MCP Server tools reference.
 
 ## Manage access
 
@@ -210,19 +206,18 @@ By default, only the creator of a form can access it. To change the permissions 
 [2]: https://app.datadoghq.com/forms
 [3]: /bits_ai/bits_chat/
 [4]: /actions/forms/components/
-[5]: /actions/forms/components/#pages
-[6]: /actions/forms/responses/
-[7]: /internal_developer_portal/self_service_actions/
-[8]: /integrations/slack/
-[9]: /actions/forms/components/#dynamic-dropdown-options
-[10]: /actions/forms/components/#conditional-fields
-[11]: /actions/forms/guide/prefill/
-[12]: /dashboards/
-[13]: https://app.datadoghq.com/actions/action-catalog/
-[14]: https://app.datadoghq.com/workflow/blueprints
-[15]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
-[16]: https://app.datadoghq.com/workflow
-[17]: /mcp_server/
-[18]: /mcp_server/setup/#toolsets
-[19]: /bits_ai/bits_chat/
-[20]: /mcp_server/tools/#forms
+[5]: /actions/forms/responses/
+[6]: /internal_developer_portal/self_service_actions/
+[7]: /integrations/slack/
+[8]: /actions/forms/components/#dynamic-dropdown-options
+[9]: /actions/forms/components/#conditional-fields
+[10]: /actions/forms/guide/prefill/
+[11]: /dashboards/
+[12]: https://app.datadoghq.com/actions/action-catalog/
+[13]: https://app.datadoghq.com/workflow/blueprints
+[14]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
+[15]: https://app.datadoghq.com/workflow
+[16]: /mcp_server/
+[17]: /mcp_server/setup/#toolsets
+[18]: /bits_ai/bits_chat/
+[19]: /mcp_server/tools/#forms
