@@ -3372,8 +3372,8 @@ Lists one page of teams in your organization. Use the results to find team IDs.
 - Find the Payments team.
 
 ### `get_team`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Returns details for a team, including its name, handle, description, and member count.
 
 - Show the details of the Payments team.
