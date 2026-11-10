@@ -4,18 +4,15 @@ description: Automatically detect potential application and infrastructure issue
 aliases:
   - /tracing/watchdog
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Watchdog"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Watchdog releases! (App login required)."
-  - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
-    tag: "Blog"
-    text: "Introducing Bits AI, your new DevOps copilot"
   - link: "/logs/"
     tag: "Documentation"
     text: "Collect your logs"
   - link: "/tracing/"
     tag: "Documentation"
     text: "Collect your traces"
+  - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
+    tag: "Blog"
+    text: "Introducing Bits AI, your new DevOps copilot"
   - link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
     tag: "Blog"
     text: "Automated root cause analysis with Watchdog RCA"
@@ -31,6 +28,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cnm-network-health"
     tag: "Blog"
     text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
+  - link: "https://www.datadoghq.com/blog/deployment-gates/"
+    tag: "Blog"
+    text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
+  - link: "https://app.datadoghq.com/release-notes?category=Watchdog"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Watchdog releases! (App login required)."
 algolia:
   tags: ['watchdog']
 cascade:

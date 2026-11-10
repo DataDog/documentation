@@ -19,6 +19,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
+  tag: "Blog"
+  text: "Diagnose frontend performance issues with RUM Profiling"
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.

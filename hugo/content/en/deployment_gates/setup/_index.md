@@ -2,6 +2,9 @@
 title: Set Up Deployment Gates
 description: "Compare inline and preconfigured Deployment Gates and follow the setup walkthrough for your chosen configuration source."
 further_reading:
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"

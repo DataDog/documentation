@@ -13,6 +13,9 @@ further_reading:
 - link: "continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn how to set up CD Visibility"
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
 algolia:
   tags: ["cd gates"]
 ---

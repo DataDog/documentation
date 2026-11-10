@@ -18,6 +18,9 @@ further_reading:
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which container to include in the Agent Autodiscovery"
+- link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+  tag: "Blog"
+  text: "Manage Kubernetes observability with DatadogInstrumentation"
 ---
 
 [Autodiscovery][1] enables you to set static configurations for dynamic resources like containers.

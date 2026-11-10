@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-remote-configuration/"
   tag: "Blog"
   text: "Configure RUM SDKs remotely from Datadog"
+- link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
+  tag: "Blog"
+  text: "Diagnose frontend performance issues with RUM Profiling"
 ---
 
 ## Overview

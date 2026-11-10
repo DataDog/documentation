@@ -26,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
   tag: "Blog"
   text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

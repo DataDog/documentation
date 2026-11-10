@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
+- link: "https://www.datadoghq.com/blog/infrastructure-monitoring-basic/"
+  tag: "Blog"
+  text: "Match monitoring depth to workload needs with Infrastructure Basic"
 ---
 
 ## Overview

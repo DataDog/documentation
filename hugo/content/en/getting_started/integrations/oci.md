@@ -2,18 +2,21 @@
 title: Getting Started with Oracle Cloud Infrastructure (OCI)
 description: "Integrate your Oracle Cloud Infrastructure environment with Datadog for comprehensive monitoring"
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/monitor-oci-with-datadog/'
-      tag: 'Blog'
-      text: 'Monitor Oracle Cloud Infrastructure with Datadog'
-    - link: 'https://www.datadoghq.com/blog/datadog-oci-quickstart/'
-      tag: 'Blog'
-      text: 'Accelerate Oracle Cloud Infrastructure monitoring with Datadog OCI QuickStart'
     - link: '/integrations/oracle-cloud-infrastructure'
       tag: 'Documentation'
       text: 'Oracle Cloud Infrastructure integration'
     - link: '/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'Guide'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
+    - link: 'https://www.datadoghq.com/blog/monitor-oci-with-datadog/'
+      tag: 'Blog'
+      text: 'Monitor Oracle Cloud Infrastructure with Datadog'
+    - link: 'https://www.datadoghq.com/blog/datadog-oci-quickstart/'
+      tag: 'Blog'
+      text: 'Accelerate Oracle Cloud Infrastructure monitoring with Datadog OCI QuickStart'
+    - link: "https://www.datadoghq.com/blog/highlights-from-oracle-ai-world-2026/"
+      tag: "Blog"
+      text: "Highlights from Oracle AI World 2026"
 ---
 
 {{< jqmath-vanilla >}}
