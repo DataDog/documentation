@@ -11133,7 +11133,7 @@ menu:
       url: account_management/billing/rum/
       parent: account_management_billing
       weight: 1511
-    - name: CI Visibility
+    - name: CI/CD Optimization
       identifier: account_management_billing_ci_visibility
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
