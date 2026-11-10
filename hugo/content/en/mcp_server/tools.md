@@ -3435,8 +3435,8 @@ Permanently deletes a team. The tool asks you to confirm before it deletes the t
 - Delete the Payments team.
 
 ### `add_team_membership`
-Toolset: `teams`\
-Permissions required: `Teams Read` and `MCP Write`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read` and `MCP Write`*\
 Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. If you grant the admin role, the tool asks you to confirm first.
 
 - Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
