@@ -1,0 +1,24 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "Anthropic Secrets Manager Connection exampleactionconnection",
+      "external_secrets_manager": {
+        "type": "aws_secrets_manager",
+        "connection_id": "string",
+        "region": "us-east-1"
+      },
+      "integration": {
+        "type": "Anthropic",
+        "credentials": {
+          "type": "AnthropicAPIKey",
+          "api_token": {
+            "type": "aws_secrets_manager",
+            "secret_id": "example/anthropic",
+            "key": "api_token"
+          }
+        }
+      }
+    }
+  }
+}

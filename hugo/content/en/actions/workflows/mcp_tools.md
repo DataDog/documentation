@@ -16,11 +16,15 @@ further_reading:
   text: "Workflow Automation"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 The [Datadog MCP Server][1] lets AI agents build and manage workflows through the [Model Context Protocol (MCP)][2].
 
-The `workflows` toolset gives AI clients such as Claude Code, Cursor, and OpenAI Codex access to your workflows, Action Catalog, workflow schema, and execution data. Using natural language, you can create and update workflows, validate their specifications, run published workflows, and investigate execution results.
+The `workflows` toolset gives AI clients such as Claude Code, Cursor, and OpenAI Codex access to your workflows, Action Catalog, workflow schema, and run data. Using natural language, you can create and update workflows, validate their specifications, run published workflows, and investigate run results.
 
 ## Use cases
 
@@ -58,13 +62,13 @@ Workflow Automation MCP tools use the user's existing Datadog permissions. Opera
 
 | Permission       | Capabilities                                                                          |
 |------------------|----------------------------------------------------------------------------------------|
-| Workflows Read   | Find and retrieve workflows, schemas, and actions, validate specifications, and inspect executions |
+| Workflows Read   | Find and retrieve workflows, schemas, and actions, validate specifications, and inspect runs |
 | Workflows Write  | Create, update, publish, unpublish, and permanently delete workflows                   |
-| Workflows Run    | Start workflows and cancel running executions                                          |
+| Workflows Run    | Start workflows and cancel runs in progress                                           |
 
 ## Available tools
 
-The `workflows` toolset exposes the following tools, grouped by the part of the workflow life cycle they support. This includes finding and inspecting workflows, discovering specifications and actions, creating and managing workflows, validating specifications, running and inspecting executions, and debugging steps. When you make an automation request in natural language, your AI client calls these tools on your behalf. It chains their results together to produce your desired output. See the [Datadog MCP Server tools reference][5] for full details on each tool, including permissions and example requests.
+The `workflows` toolset exposes the following tools, grouped by the part of the workflow life cycle they support. This includes finding and inspecting workflows, discovering specifications and actions, creating and managing workflows, validating specifications, managing workflow runs, and debugging steps. When you make an automation request in natural language, your AI client calls these tools on your behalf. It chains their results together to produce your desired output. See the [Datadog MCP Server tools reference][5] for full details on each tool, including permissions and example requests.
 
 ### Workflow discovery
 
@@ -86,7 +90,7 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 - [`delete_datadog_workflow`][15]
 - [`validate_datadog_workflow`][16]
 
-### Workflow execution
+### Workflow runs {#workflow-execution}
 
 - [`execute_datadog_workflow`][17]
 - [`get_datadog_workflow_instance`][18]

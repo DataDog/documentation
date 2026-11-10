@@ -47,12 +47,14 @@ Configurez des règles de modification de la gravité pour ajuster la gravité d
 1. Optionnellement, cliquez sur **Add Severity** pour filtrer les résultats par niveau de gravité. La règle correspond à la gravité ajustée par Datadog de chaque résultat, avant tout ajustement défini par l'utilisateur.
 1. Définissez l'action de modification de la gravité :
     - **Définir sur un niveau spécifique** : Définit les résultats correspondants sur une gravité fixe. Choisissez parmi **Info / None**, **Low**, **Medium**, **High** ou **Critical**.
-      <div class="alert alert-info"><strong>Info / None</strong> n'est valide que pour certains types de résultats ; consultez <a href="#severity-floors-by-finding-type">Severity floors by finding type</a>.</div>
+      <div class="alert alert-info"><strong>Info / None</strong> n'est valide que pour certains types de résultats ; consultez <a href="#severity-floors-by-finding-type">Seuils inférieurs de gravité par type de résultat</a>.</div>
     - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. See [Severity floors by finding type](#severity-floors-by-finding-type) for the lowest severity a finding type can shift down to, and [Evaluation order](#evaluation-order) for what happens when a finding is already at that bound.
 1. Optionnellement, saisissez une **Description** expliquant pourquoi la règle s'applique. Ce texte apparaît dans le panneau de répartition de la gravité lorsqu'un utilisateur consulte un résultat modifié.
 1. Cliquez sur **Enregistrer**. La règle s'applique immédiatement aux nouveaux résultats et commence à vérifier les résultats existants dans l'heure qui suit.
 
 **Remarque** : Vous ne pouvez pas utiliser `@severity` ou `@severity_details.user_adjusted` dans la requête de règle. Les règles de modification de gravité sont évaluées par rapport à la gravité ajustée par Datadog (`@severity_details.adjusted.value`), et non par rapport à la valeur `@severity` stockée dans le résultat.
+
+Vous pouvez également créer des règles de modification de la sévérité grâce à l'[API][3] ou via la ressource Terraform [`datadog_security_findings_severity_modifier_rule`][4].
 
 ## Ordre d'évaluation {#evaluation-order}
 
@@ -75,7 +77,7 @@ Pour les résultats disposant d'un score CVSS (vulnérabilité d'image de conten
 
 {{< img src="security/automation_pipelines/severity_breakdown.png" alt="Un panneau latéral de résultat affichant la répartition de la gravité, avec la gravité d'origine, le score CVSS et le vecteur CVSS ; la règle d'automatisation qui a déclenché le changement ; ainsi que le niveau de gravité résultant et le score CVSS ajusté." style="width:100%;" >}}
 
-## Severity floors by finding type {#severity-floors-by-finding-type}
+## Seuils inférieurs de gravité par type de résultat {#severity-floors-by-finding-type}
 
 Tous les types de résultats n'utilisent pas la même échelle de gravité. Le tableau suivant indique la gravité la plus basse disponible pour chaque type de résultat :
 
@@ -96,7 +98,7 @@ Tous les types de résultats n'utilisent pas la même échelle de gravité. Le t
 
 **Info / None** n'est pas disponible pour les types de résultats qui utilisent **Low** comme gravité la plus basse. Inclure de tels types de résultats dans la règle et sélectionner **Info / None** entraîne une erreur de validation.
 
-## Findings with Unknown severity {#findings-with-unknown-severity}
+## Résultat de gravité inconnue {#findings-with-unknown-severity}
 
 Les règles de modificateur de gravité traitent les résultats avec une gravité **Unknown** comme suit :
 
@@ -107,7 +109,7 @@ Les règles de modificateur de gravité traitent les résultats avec une gravit�
 
 Pour les résultats de vulnérabilité qui ont un score CVSS ajusté par Datadog, un modificateur de gravité met également à jour le score ajusté stocké dans `@severity_details.user_adjusted`. Le score mis à jour est défini approximativement sur le point médian de la plage CVSS v3 de la gravité cible :
 
-| Target severity | CVSS v3 range |
+| Gravité cible | Plage CVSS v3 |
 |---|---|
 | None | 0.0 |
 | Low | 0.1–3.9 |
@@ -117,12 +119,14 @@ Pour les résultats de vulnérabilité qui ont un score CVSS ajusté par Datadog
 
 Le vecteur CVSS d'origine n'est jamais modifié. Aucun vecteur synthétique n'est généré pour correspondre au score ajusté. Comme une règle ne correspond que lorsqu'elle modifie la gravité du résultat, le score n'est ajusté que lorsque la gravité elle-même change ; voir [Ordre d'évaluation](#evaluation-order).
 
-## Auto-closed and passed findings {#auto-closed-and-passed-findings}
+## Résultats fermés automatiquement et réussis {#auto-closed-and-passed-findings}
 
-Les modificateurs de gravité ne sont ni effacés ni mis à jour pour les findings qui passent à l'état auto-fermé ou lorsque le résultat de l'évaluation est **pass**. Si la règle qui a modifié initialement un finding est ultérieurement modifiée ou supprimée, ces findings conservent la gravité définie lors de leur clôture.
+Les modificateurs de gravité ne sont ni effacés ni mis à jour pour les résultats qui passent à l'état auto-fermé ou lorsque le résultat de l'évaluation est **pass**. Si la règle qui a modifié initialement un résultat est ultérieurement modifiée ou supprimée, ces résultats conservent la gravité définie lors de leur clôture.
 
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /fr/api/latest/security-monitoring/create-a-severity-modifier-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_severity_modifier_rule

@@ -49,6 +49,8 @@ From a selected issue, you can trigger a [Bits Investigation][2]. Bits Investiga
 
 To start a Bits Investigation, click {{< ui >}}Investigate further with Bits{{< /ui >}}. Click {{< ui >}}View full investigation{{< /ui >}} to open the complete investigation in a new tab. For more information, see [Bits Investigation][2].
 
+To investigate device health from an AI agent, such as Claude Code or Cursor, use the [`get_ndm_device`][4] and [`search_ndm_interfaces`][5] tools in the Datadog MCP Server.
+
 ### Apply a proposed fix
 
 Take action directly from the issue panel by applying the proposed fix (such as rolling back the configuration to the last trusted version). See a diff of the exact configuration change to be applied.
@@ -68,3 +70,5 @@ The issue panel also shows other devices and dependencies potentially affected b
 [1]: https://app.datadoghq.com/devices/health
 [2]: /bits_ai/bits_investigation/
 [3]: https://app.datadoghq.com/devices
+[4]: /mcp_server/tools/#get_ndm_device
+[5]: /mcp_server/tools/#search_ndm_interfaces

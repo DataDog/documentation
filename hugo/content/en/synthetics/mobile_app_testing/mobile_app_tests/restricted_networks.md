@@ -70,6 +70,8 @@ The following is the list of IP ranges associated with the real devices used for
 `3.111.139.20`<br>
 `54.255.17.88`<br>
 `3.64.247.89`<br>
+`137.174.189.0/26`<br>
+`23.83.156.64/26`<br>
 
 
 ### HTTP steps

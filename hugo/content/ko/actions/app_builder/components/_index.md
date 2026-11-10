@@ -9,7 +9,7 @@ further_reading:
   text: 표
 - link: /actions/app_builder/build/
   tag: 설명서
-  text: 앱 빌드
+  text: 앱 빌드하기
 - link: /actions/app_builder/expressions/
   tag: 설명서
   text: JavaScript 표현식
@@ -18,12 +18,6 @@ further_reading:
   text: App Builder를 사용하여 타사 통합을 위한 셀프 서비스 앱 빌드
 title: 구성 요소
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder는 정부 기관용 Datadog 사이트 US1-FED에서 미리 보기로 제공되고 있습니다.
-</div>
-{{< /site-region >}}
-
 ## 개요 {#overview}
 이 페이지에서는 App Builder에서 앱을 생성할 때 사용할 수 있는 UI 구성 요소 목록을 제공합니다.
 
@@ -31,7 +25,7 @@ App Builder는 정부 기관용 Datadog 사이트 US1-FED에서 미리 보기로
 
 이벤트를 트리거할 수 있는 모든 구성 요소의 경우 [이벤트 및 반응][13]에 사용 가능한 반응 목록이 제공됩니다. 이러한 구성 요소는 [사용자 지정 반응][14]도 사용할 수 있습니다.
 
-App Builder에서 JavaScript를 사용하는 방법에 대한 자세한 내용은 [JavaScript 표현식][7]을 참조하세요. 구성 요소를 템플릿으로 저장하는 방법에 대한 자세한 내용은 [재사용 가능한 모듈][12]을 참조하세요.
+App Builder에서 JavaScript를 사용하는 방법에 대한 자세한 내용은 [JavaScript 표현식][7]을 참조하세요. 구성 요소를 템플릿으로 저장하는 방법에 대한 자세한 내용은 [재사용 가능 모듈][12]을 참조하세요.
 <br>
 
 ## 사용 가능한 구성 요소 {#available-components}
@@ -154,7 +148,7 @@ Label
 Options
 : 사용자가 선택할 수 있는 확인란의 목록입니다. 형식은 각 객체가 `label` 및 `value` 키-값 쌍으로 구성된 객체 배열입니다. 최소 옵션 수는 1개입니다.<br>
 **값**: 표현식<br>
-**예시**:<br>
+**예**:<br>
 :     ```json
       ${[
         {
@@ -195,7 +189,7 @@ Reaction
 
 속성 및 값 쌍을 JSON 형식으로 표시합니다.
 
-#### 예시 {#example-2}
+#### 예 {#example-2}
 
 이 구성 요소를 컨텍스트 내에서 조회하려면 [Metrics Explorer 및 Monitors Builder][2] 앱 블루프린트를 참조하세요.
 {{% /collapse-content %}}
@@ -215,7 +209,7 @@ Is Visible
 
 속성 및 값 쌍을 JSON 형식으로 표시합니다.
 
-#### 예시 {#example-3}
+#### 예 {#example-3}
 
 이 구성 요소를 컨텍스트 내에서 조회하려면 [Metrics Explorer 및 Monitors Builder][2] 앱 블루프린트를 참조하세요.
 {{% /collapse-content %}}
@@ -244,7 +238,7 @@ Is Visible
 
 속성 및 값 쌍을 JSON 형식으로 표시합니다.
 
-#### 예시 {#example-4}
+#### 예 {#example-4}
 
 이 구성 요소의 사용 방법을 보여주는 예시는 [사용자 지정 차트][10]를 참조하세요.
 
@@ -700,7 +694,7 @@ Label
 Options
 : 사용자가 선택할 수 있는 라디오 버튼 옵션의 목록입니다. 형식은 각 객체가 `label` 및 `value` 키-값 쌍으로 구성된 객체 배열입니다.<br>
 **값**: 표현식<br>
-**예시**:<br>
+**예**:<br>
 :    ```json
      ${[
        {
@@ -784,7 +778,7 @@ Reaction
 
 속성 및 값 쌍을 JSON 형식으로 표시합니다.
 
-#### 관계 {#relationships}
+#### 연관성 {#relationships}
 
 앱 내 React 렌더러와 구성 요소 간의 데이터 종속성을 표시합니다.
 
@@ -864,7 +858,7 @@ Placeholder text
 Options
 : 사용자가 선택할 수 있는 선택 옵션의 목록입니다. 형식은 각 객체가 `label` 및 `value` 키-값 쌍으로 구성된 객체 배열입니다. <br>
 **값**: 표현식<br>
-**예시**:<br>
+**예**:<br>
 :     ```json
       ${[
         {
@@ -879,7 +873,7 @@ Options
       ```
 
 Default value
-: 선택 항목이 로드될 때 선택되는 값입니다.<br>
+: 선택 구성 요소가 로드될 때 선택되는 값입니다.<br>
 **값**: 문자열 또는 표현식
 
 Is Multiselect
@@ -966,7 +960,7 @@ State Function
 
 #### 탭 {#tabs}
 
-탭 보기 목록입니다. ({{< ui >}}\+{{< /ui >}})를 사용하여 추가 보기를 추가하십시오.
+탭 보기 목록입니다. 보기를 더 추가하려면 ({{< ui >}}\+{{< /ui >}})를 사용하세요.
 
 
 #### 스타일 {#style-1}
@@ -1218,7 +1212,7 @@ Is Visible
 
 속성 및 값 쌍을 JSON 형식으로 표시합니다.
 
-#### 관계 {#relationships-1}
+#### 연관성 {#relationships-1}
 
 앱의 표 데이터와 구성 요소 간의 데이터 종속성을 표시합니다.
 
@@ -1326,7 +1320,7 @@ State Function
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>질문이나 피드백이 있으신가요? [Datadog 커뮤니티 슬랙][5]의 {{< ui >}}#app-builder{{< /ui >}} 채널에 참여하세요.
+<br>질문이나 피드백이 있으신가요? [Datadog Community Slack][5]의 {{< ui >}}#app-builder{{< /ui >}} 채널에 참여하세요.
 
 
 [1]: /ko/actions/app_builder/events

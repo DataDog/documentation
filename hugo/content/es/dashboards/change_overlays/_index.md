@@ -1,58 +1,55 @@
 ---
-description: Superpón tus eventos de cambios en gráficos para correlacionar anomalías
-  en el rendimiento con los cambios en tu aplicación.
+description: Superponga sus eventos de cambio en los gráficos para correlacionar las
+  anomalías de rendimiento con los cambios en su aplicación.
 further_reading:
 - link: /tracing/services/deployment_tracking/
   tag: Documentación
-  text: Empezando con el seguimiento de implementaciones APM
+  text: Introducción al seguimiento de implementaciones de APM
 - link: https://www.datadoghq.com/blog/datadog-deployment-tracking/
   tag: Blog
-  text: Implementaciones de código en monitores con el seguimiento de implementaciones
-    APM de Datadog
+  text: Haga un seguimiento de las implementaciones de código con el seguimiento de
+    implementaciones en Datadog APM.
 - link: https://www.datadoghq.com/blog/faulty-deployment-detection/
   tag: Blog
-  text: Liberar código con confianza gracias a la detección automática de errores
-    de implementación
+  text: Publique código con confianza con la detección automática de implementaciones
+    defectuosas
 - link: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
   tag: Documentación
-  text: Empezando con el seguimiento de implementaciones RUM
+  text: Introducción al seguimiento de implementaciones de RUM
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/
   tag: Blog
-  text: Solución de problemas en implementaciones frontend fallidas con el seguimiento
+  text: Solucione problemas de implementaciones de frontend defectuosas con el seguimiento
     de implementaciones en RUM
 - link: https://www.datadoghq.com/blog/change-overlays/
   tag: Blog
-  text: Detectar y corregir rápidamente las implementaciones fallidas con las superposiciones
+  text: Detecte y revierta rápidamente las implementaciones defectuosas con superposiciones
     de cambios
-title: Cambiar superposiciones
+title: Superposiciones de cambios
 ---
+## Descripción general {#overview}
 
-## Información general
+A medida que los equipos iteran, implementan código y realizan cambios en sus aplicaciones y servicios, identificar el cambio exacto que causó un aumento en los errores, una mayor latencia o tiempos de carga de página más lentos puede ser un desafío. Utilice las superposiciones de cambios para visualizar cambios en su tablero, como implementaciones o indicadores de funciones, y correlacione rápidamente los problemas de rendimiento con ellos.
 
-A medida que los equipos iteran, despliegan código y realizan cambios en sus aplicaciones y servicios, identificar el cambio exacto que provocó un pico de errores, un aumento de la latencia o una ralentización de los tiempos de carga de las páginas puede resultar complicado. Utiliza las superposiciones de cambios para visualizar cambios en tu dashboard, como despliegues o marcadores de funciones, y correlacionar rápidamente los problemas de rendimiento con ellos.
+## Superponer cambios en gráficos {#overlay-changes-on-graphs}
 
-## Superponer cambios en gráficos
+Para comenzar, haga clic en {{< ui >}}Show Overlays{{< /ui >}} en la esquina superior derecha de su tablero. Ahora puede habilitar la línea de tiempo de [Seguimiento de cambios][16] y las superposiciones de cambios en los widgets de series temporales.
 
-Para empezar, haz clic en **Show Overlays** (Mostrar superposiciones) en la esquina superior derecha de tu dashboard. Ahora puedes activar la línea de tiempo [Change Tracking][16] y cambiar las superposiciones en los widgets de series de tiempo.
+{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Botón de superposiciones en el encabezado del tablero" style="width:100%;">}}
 
-{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Botón Overlays (Superposiciones) en el encabezado del dashboard" style="width:100%;">}}
+Cuando se activa, la barra de búsqueda {{< ui >}}Service{{< /ui >}} muestra el servicio {{< ui >}}Most Relevant{{< /ui >}} de forma predeterminada. Datadog selecciona automáticamente el servicio al que se hace referencia con mayor frecuencia en las consultas que admiten los widgets del tablero.
 
-Cuando se activa, la barra de búsqueda **Servicio** muestra el servicio **más relevante** por defecto. Datadog selecciona automáticamente el servicio más frecuentemente mencionado en las consultas, que apoyan los widgets del dashboard.
+Anule la detección automática de servicios utilizando la barra de búsqueda para encontrar el servicio de interés. 
 
-Anula la detección automática de servicios, utilizando la barra de búsqueda para encontrar el servicio que te interese. 
+Todos los cambios mostrados en la línea de tiempo de cambios y como superposiciones se vinculan al servicio seleccionado. 
+Utilice el menú desplegable {{< ui >}}Show On{{< /ui >}} para limitar las superposiciones de cambios a los widgets relevantes o mostrarlas en todos los widgets de su tablero.
 
-Todos los cambios mostrados en la línea de tiempo de los cambios y como superposiciones están vinculados al servicio seleccionado. 
-Utiliza el menú desplegable **Mostrar en** para limitar las superposiciones de cambios a los widgets pertinentes o mostrarlas en todos los widgets de tu dashboard.
+Para ver detalles adicionales o realizar acciones adicionales, haga clic en una superposición de cambios o en un cambio dentro de la línea de tiempo de cambios.
 
-Para ver más detalles o realizar acciones adicionales, haz clic en una superposición de cambios o en un cambio dentro de la línea de tiempo de los cambios.
+### Cambios de implementación en el contexto {#scope-deployment-changes}
 
-## FAQ
+Para implementaciones de APM, se debe especificar un `env`. Si tiene una variable de plantilla `env` o `datacenter` configurada en su tablero, las implementaciones se filtran para coincidir con la selección. De lo contrario, el `env` tiene como valor predeterminado `prod`. 
 
-### ¿A qué se delimitan los cambios de despliegues?
-En las implementaciones de APM debe especificarse `env`. Si tienes una variable de plantilla `env` o `datacenter` establecida en tu dashboard, las implementaciones se filtran para que coincidan con la selección. De lo contrario, `env` cambia por defecto a `prod`. 
-
-
-## Para leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

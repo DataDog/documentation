@@ -2,7 +2,7 @@
   "data": {
     "attributes": {
       "description": "My agent policy",
-      "enabled": true,
+      "enabled": false,
       "hostTagsLists": [
         [
           "env:test"

@@ -87,41 +87,6 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application times out while calling a downstream dependency because the dependency responds too slowly, causing request failures that impact end users and increase the risk of cascading failures upstream.
       recommendation_prerequisite: APM + RUM
-    - category: Performance
-      recommendation_type: Missing Cache
-      scope: Backend services
-      recommendation_description: A service performs expensive, repeated work on the request path that could be served from a short-lived cache, reducing tail latency and downstream load.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Tail Latency
-      scope: Backend services
-      recommendation_description: A service exhibits extreme tail latency driven by slow downstream spans on the critical path, often from unbounded dependency latency or sequential calls that could run concurrently.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Excessive Serialization
-      scope: Backend services
-      recommendation_description: A service spends a significant share of request time on CPU-bound serialization or parsing work, adding avoidable latency and CPU overhead.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Unbounded Payload
-      scope: Backend services
-      recommendation_description: A service accepts request parameters without size or range bounds, allowing oversized inputs to drive expensive downstream work, tail latency, and timeouts.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Resource Contention
-      scope: Backend services
-      recommendation_description: Request handling is serialized behind a synchronization primitive or long-running critical section, causing tail latency under concurrency.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Reliability
-      recommendation_type: Connection Pool Exhaustion
-      scope: Backend services
-      recommendation_description: A service repeatedly exhausts its connection pool to a downstream dependency, queueing requests and causing latency spikes or failures under load.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Reliability
-      recommendation_type: Error Misclassification
-      scope: Backend services
-      recommendation_description: A service surfaces expected outcomes as errors in APM, inflating endpoint error rates and obscuring real reliability regressions.
-      recommendation_prerequisite: APM + AI Recs (Preview)
 ---
 
 APM Recommendations help you improve your applications' performance and reliability by surfacing optimization opportunities from your collected telemetry. These recommendations are designed to:

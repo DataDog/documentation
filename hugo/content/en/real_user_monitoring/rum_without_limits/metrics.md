@@ -23,7 +23,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 
 **Notes**:
 - The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
-- All queries for the below metrics include `@session.type:user`.
+- All queries for the below metrics include `@session.type:user`, except the `rum.measure.lighthouse.*` metrics, which come from browser Synthetic test audits rather than real-user sessions. See [Lighthouse audits][5].
 - If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
@@ -35,6 +35,11 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
 | `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
+| `rum.measure.lighthouse.performance` | Lighthouse Performance category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.accessibility` | Lighthouse Accessibility category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.best_practices` | Lighthouse Best Practices category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.seo` | Lighthouse SEO category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.agentic` | Lighthouse Agentic category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
 | `rum.measure.session.action` | Count of actions | Default | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
@@ -86,3 +91,4 @@ Metrics can be managed through [APIs][3] or Datadog's dedicated [Terraform modul
 [2]: /real_user_monitoring/platform/generate_metrics/
 [3]: /api/latest/rum-metrics/
 [4]: https://registry.terraform.io/providers/DataDog/datadog/3.60.0/docs/resources/rum_metric
+[5]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/#lighthouse-audits

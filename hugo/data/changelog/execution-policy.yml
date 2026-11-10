@@ -1,0 +1,19 @@
+entries:
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41125
+    operations:
+      - CreateExecutionPolicy
+      - GetExecutionPolicy
+      - ListExecutionPolicies
+      - UpdateExecutionPolicy
+    title: Add Slack support to Execution Policy API
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41556
+    operations:
+      - CreateExecutionPolicy
+      - GetExecutionPolicy
+      - ListExecutionPolicies
+      - UpdateExecutionPolicy
+    title: Status Pages - Private pages API spec

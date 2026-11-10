@@ -5,9 +5,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
       tag: "Blog"
       text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
-    - link: "/gpu_monitoring/fleet"
+    - link: "/gpu_monitoring/explorer"
       tag: "Documentation"
-      text: "GPU Monitoring Fleet Page"
+      text: "GPU Monitoring Explorer"
 ---
 
 ## Overview
@@ -20,6 +20,7 @@ The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highligh
 
 Click on the section titles below to access the corresponding section:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Fleet Health](#fleet-health)
 - [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
@@ -32,11 +33,11 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 Datadog GPU Monitoring provides observability for both on-premises and cloud devices within a single, unified view.
 
-This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
+This visualization provides a real-time breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
-The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
+The funnel also highlights any performance issues or provisioning inefficiencies, such as idle or ineffective GPU devices and how they're trending monthly.
 
-{{< img src="gpu_monitoring/funnel-4.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays fleet size by clusters, hosts, and devices; device counts for each funnel stage with month-over-month trends; and Kubernetes allocation." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
@@ -45,27 +46,46 @@ The steps of the funnel are defined as follows:
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-## Cost & Utilization
-
-{{< img src="gpu_monitoring/cost-and-utilization.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
-
-Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
-
-**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
-
-Click on either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags like service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click on any entity to open it in the [Fleet Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Fleet Explorer][1] page to shut down pods or resize your cluster.
-
-## Allocation and Provisioning
-
-Use this section to gain insights into GPU allocation and capacity. This helps you to troubleshoot failed workloads due to GPU constraints, and improve the operational efficiency of your fleet.
-
-### Device allocation over time
+### Capacity forecasting
 
 AI workloads can experience unpredictable spikes in resource usage. As a result, it's important to align available GPUs with incoming workloads. This section helps you to identify if you're overallocating GPUs that end up sitting idle, or underprovisioning resources that stall critical jobs.
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
 
-{{< img src="gpu_monitoring/allocation.png" alt="Total, Allocated and Active device counts over time" style="width:90%;" >}}
+Procuring hardware can be a time-consuming process. Use the **Device Allocation Over Time** widget to understand historical demand over your selected time frame and forecast future capacity needs.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="Device Allocation Over Time widget showing total, allocated, active, and effective device counts over the past week, with a dotted one-week forecast extending past the current time." style="width:90%;" >}}
+
+You can also use {{< ui >}}Group by{{< /ui >}} to group device allocation by tags such as cluster, provider, GPU device, device type, or cloud provider. This breaks down your fleet's total, allocated, active, and effective device counts by that tag.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Device Allocation Over Time widget grouped by cluster with the Active view selected, showing a stacked bar chart of active devices per cluster over the past week and a list of top clusters by active device count." style="width:90%;" >}}
+
+## Fleet Health
+
+The Fleet Health section allows you to spot hardware health issues across your entire fleet at a glance. You can group by cluster, rack, NVLink domain, or provider to see a health topology visualization over the selected time frame. For example, if you group by rack, each tile represents a rack, and each square in the tile represents a host in that rack. Click any host to view its related GPU devices.
+
+The visualization is colored by XID error severity:
+- Red: Critical XID
+- Orange: Non-critical XID
+- Green: Healthy
+
+With this color coding, you can spot whether hardware issues are isolated to a particular group. Hover over a host to see the exact XID error code.
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health. Each tile lists its host and GPU counts." style="width:90%;" >}}
+
+## Cost & Utilization
+
+{{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
+
+Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
+
+**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
+
+Click either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags such as service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click any entity to open it in the [Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Explorer][1] page to shut down pods or resize your cluster.
+
+## Allocation and Provisioning
+
+Use this section to gain insights into GPU allocation and capacity. This helps you to troubleshoot failed workloads due to GPU constraints, and improve the operational efficiency of your fleet.
 
 ### Cloud provider instance breakdown
 

@@ -5,118 +5,135 @@ algolia:
   - custom metrics
   - estimated usage metrics
 description: Découvrez comment l'expérience des métriques personnalisées dans Datadog
-  a été mise à jour pour refléter la tarification par nom de métrique, y compris les
-  modifications apportées à la fenêtre de gestion des tags, au panneau latéral des
-  métriques, à la page de gestion du volume, à la page du plan et de l'utilisation,
-  ainsi qu'aux métriques d'utilisation estimées.
+  a été mise à jour pour refléter Metric Name Pricing, y compris les changements apportés
+  à la fenêtre modale Manage Tags, au panneau latéral Metric, à la page Volume Management,
+  à la page Plan & Usage, et aux métriques d'utilisation estimée.
 further_reading:
 - link: /account_management/billing/metric_name_pricing/
   tag: Documentation
-  text: Tarification par nom de métrique pour les métriques personnalisées
+  text: Tarification par nom de métrique pour les Custom Metrics
 - link: /metrics/metrics-without-limits/
   tag: Documentation
   text: Metrics without Limits™
 - link: /account_management/billing/usage_metrics/
   tag: Documentation
-  text: Métriques d'estimation d'utilisation
+  text: Métriques d'utilisation estimée
 - link: /metrics/volume/
   tag: Documentation
-  text: Gestion du volume des métriques
-title: Modifications de l'expérience des métriques pour la tarification par nom de
-  métrique
+  text: Gestion du volume de métriques
+title: Modifications de l'expérience des métriques pour Metric Name Pricing
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-Avec le [modèle de facturation de tarification par nom de métrique][1] pour les métriques personnalisées, Datadog a mis à jour l'expérience des métriques pour refléter la manière dont l'utilisation est mesurée. Ce guide décrit ce qui a changé dans l'interface utilisateur et les API de Datadog pour les organisations utilisant la tarification par nom de métrique.
+Avec le [modèle de facturation Metric Name Pricing][1] pour les métriques personnalisées, Datadog a mis à jour l'expérience des métriques pour refléter la manière dont l'utilisation est mesurée. Ce guide décrit ce qui a changé dans l'interface utilisateur et les API de Datadog pour les organisations sur Metric Name Pricing.
 
-**Remarque** : Cette page s'applique uniquement si votre organisation utilise [la tarification par nom de métrique][1]. Si votre contrat utilise la tarification par séries temporelles (cardinalité), votre expérience des métriques reste inchangée.
+**Remarque** : Cette page s'applique uniquement si votre organisation est sur [Metric Name Pricing][1]. Si votre contrat utilise la tarification par série temporelle (cardinalité), votre expérience des métriques reste inchangée.
 
 ## Résumé des changements {#summary-of-changes}
 
 | Fonctionnalité | Description |
 |---------|-------------|
-| [Fenêtre de gestion des tags](#manage-tags-modal) | Estime l'impact des modifications de tags sur le volume de points au lieu du volume de cardinalité. |
-| [Panneau latéral des métriques](#metric-side-panel) | Affiche le volume de points ingérés et indexés au lieu du volume de séries temporelles. |
-| [Page de gestion du volume](#volume-management-page) | Les graphiques d'aperçu du volume affichent de nouvelles dimensions de facturation pour la tarification par nom de métrique. |
-| [Page de plan et d'utilisation](#plan--usage-page) | Reflète la répartition de la facturation de la tarification par nom de métrique. |
-| [Métriques d'utilisation estimées](#estimated-usage-metrics) | De nouvelles métriques de volume de points remplacent les métriques d'utilisation estimées basées sur la cardinalité. |
+| [Fenêtre modale Manage Tags](#manage-tags-modal) | Estime l'impact des changements de tags sur le volume de points au lieu du volume de cardinalité. |
+| [Panneau latéral Metric](#metric-side-panel) | Affiche le volume de points ingérés et indexés au lieu du volume de séries temporelles. |
+| [Page Volume Management](#volume-management-page) | Les graphiques de vue d'ensemble du volume affichent les nouvelles dimensions de facturation pour Metric Name Pricing. |
+| [Page Plan & Usage](#plan--usage-page) | Reflète la répartition de la facturation de Metric Name Pricing. |
+| [Métriques d'utilisation estimée](#estimated-usage-metrics) | De nouvelles métriques de volume de points remplacent les métriques d'utilisation estimée basées sur la cardinalité. |
 
-## Fenêtre de gestion des tags {#manage-tags-modal}
+## Fenêtre modale Manage Tags {#manage-tags-modal}
 
-Lors de la configuration des tags sur les métriques personnalisées, la fenêtre **Gestion des tags** estime l'impact des modifications de tags sur le **volume de points** au lieu du volume de cardinalité.
+Lors de la configuration des tags sur des métriques personnalisées, la fenêtre modale {{< ui >}}Manage Tags{{< /ui >}} estime l'impact des changements de tags sur le **volume de points** au lieu du volume de cardinalité.
 
-{{< img src="metrics/guide/metric_name_pricing_experience/manage-tags-modal.png" alt="La fenêtre de gestion des tags affiche un graphique de projection d'utilisation avec trois lignes : utilisation depuis le début du mois, utilisation avec la configuration actuelle et utilisation avec la configuration proposée. Les tags datacenter et service sont configurés dans l'onglet Inclure les tags." style="width:100%;" >}}
+{{< img src="metrics/guide/metric_name_pricing_experience/manage-tags-modal.png" alt="Fenêtre modale Manage Tags affichant un graphique de projection d'utilisation avec trois lignes : month-to-date usage, usage with current configuration, et usage with proposed configuration. Les tags datacenter et service sont configurés dans l'onglet Include tags." style="width:100%;" >}}
 
-Pour plus d'informations sur la configuration des tags, voir [Metrics without Limits™][2].
+Pour plus d'informations sur la configuration des tags, consultez [Metrics without Limits™][2].
 
-## Panneau latéral des métriques {#metric-side-panel}
+## Panneau latéral Metric {#metric-side-panel}
 
-Le panneau latéral des détails des métriques affiche **le volume de points ingérés et indexés** au lieu du volume de séries temporelles.
+Le panneau latéral des détails de la métrique affiche le **volume de points ingérés et indexés** au lieu du volume de séries temporelles.
 
-Pour ouvrir le panneau latéral des métriques, cliquez sur n'importe quel nom de métrique sur la [page Résumé des métriques][3].
+Pour ouvrir le panneau latéral Metric, cliquez sur n'importe quel nom de métrique sur la [page Metrics Summary][3].
 
-{{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="Le panneau latéral des détails des métriques affiche les POINTS INGÉRÉS et les POINTS INDEXÉS en haut, aux côtés des Hôtes et des Valeurs de Balises." style="width:100%;" >}}
+{{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="Panneau latéral des détails de la métrique affichant INGESTED POINTS et INDEXED POINTS en haut, ainsi que Hosts et Tag Values." style="width:100%;" >}}
 
-## Page de gestion du volume {#volume-management-page}
+## Page Volume Management {#volume-management-page}
 
-Les graphiques de l'aperçu du volume sur la [page de gestion du volume des métriques][4] affichent les nouvelles dimensions de facturation pour la tarification par nom de métrique :
+Les graphiques Volume Overview sur la [page Metrics Volume Management][4] affichent les dimensions de facturation suivantes pour Metric Name Pricing :
 
-- Noms de métriques uniques estimés
-- Volume de points indexés facturables
-- Ratio de points ingérés à indexés
+- Estimated unique metric names
+- Billable indexed point volume
+- Ingested-to-indexed points ratio
 
-{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Trois graphiques d'aperçu des volumes pour la tarification par nom de métrique : Noms de métriques uniques estimés (nombre de métriques avec plus de 100 points indexés depuis le début du mois), Points totaux estimés (total des points indexés dépassant l'allocation de 10M par métrique depuis le début du mois), et Ratio estimé de points ingérés à indexés." style="width:100%;" >}}
+{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Trois graphiques Volume Overview pour Metric Name Pricing : 'Estimated Unique Metric Names' (nombre de métriques avec plus de 100 points indexés depuis le début du mois), 'Estimated Total Points' (nombre total de points indexés dépassant l'allocation de 10M par métrique depuis le début du mois) et 'Estimated Ingested to Indexed Points Ratio'." style="width:100%;" >}}
 
-## Page Plan & Utilisation {#plan-usage-page}
+## Page Plan & Usage {#plan-usage-page}
 
-La [page Plan & Utilisation][5] reflète la répartition de la facturation par nom de métrique (Metric Name Pricing) pour les organisations sous le nouveau modèle.
+La [page Plan & Usage][5] reflète la répartition de la facturation de Metric Name Pricing pour les organisations sur le nouveau modèle.
 
-{{< img src="metrics/guide/metric_name_pricing_experience/plan-usage-page.png" alt="La page de répartition des coûts Plan & Utilisation affiche les Points Indexés, les Points Ingérés et les Noms de Métriques comme des éléments distincts dans le tableau Résumé et le graphique de répartition des coûts cumulatifs." style="width:100%;" >}}
+{{< img src="metrics/guide/metric_name_pricing_experience/plan-usage-page.png" alt="La page Plan & Usage Cost Breakdown affichant Indexed Points, Ingest Points, et Metric Names en tant que postes de produit distincts dans le tableau Summary et le graphique Cumulative Cost Breakdown." style="width:100%;" >}}
 
-## Métriques d'utilisation estimées {#estimated-usage-metrics}
+## Métriques d'utilisation estimée {#estimated-usage-metrics}
 
-Datadog fournit des métriques d'utilisation estimées afin que vous puissiez surveiller votre utilisation de la tarification par nom de métrique (Metric Name Pricing) en temps réel. Utilisez ces métriques pour configurer des moniteurs et des tableaux de bord pour la visibilité des coûts.
+Datadog fournit des métriques d'utilisation estimée afin que vous puissiez surveiller votre utilisation de Metric Name Pricing en temps réel. Utilisez ces métriques pour configurer des monitors et des dashboards pour la visibilité des coûts.
 
-<div class="alert alert-warning">Métriques d'utilisation estimées basées sur la cardinalité (<code>datadog.estimated_usage.metrics.custom</code> et les métriques associées) ne sont plus disponibles pour les organisations utilisant la tarification par nom de métrique. Tous les moniteurs, tableaux de bord ou autres actifs utilisant les métriques basées sur la cardinalité ont cessé de recevoir des données. Utilisez les métriques de points-volume énumérées ci-dessous à la place.</div>
+<div class="alert alert-warning">Métriques d'utilisation estimée basées sur la cardinalité (<code>datadog.estimated_usage.metrics.custom</code> et les métriques associées) ne sont plus disponibles pour les organisations utilisant la tarification basée sur le nom des métriques. Tous les monitors, dashboards ou autres ressources qui utilisent les métriques basées sur la cardinalité ont cessé de recevoir des données. Utilisez plutôt les métriques de volume de points listées ci-dessous.</div>
 
-### Métriques d'utilisation facturables {#billable-usage-metrics}
+### Métriques d'utilisation facturable {#billable-usage-metrics}
 
 Utilisez ces métriques pour estimer votre utilisation facturable depuis le début du mois :
 
-| Métrique | Ce qu'elle représente |
-|--------|-------------------|
-| `datadog.estimated_usage.billable.metrics` | Nombre de noms de métriques avec plus de 100 points indexés, depuis le début du mois. |
-| `datadog.estimated_usage.billable.points` | Somme des points indexés au-dessus des 10 millions de points inclus par nom de métrique, depuis le début du mois. |
-| `datadog.estimated_usage.metrics.points.ratio` | Comparaison des points ingérés totaux aux points indexés totaux. |
+#### `datadog.estimated_usage.billable.metrics` {#datadogestimated-usagebillablemetrics}
 
-### Métriques d'utilisation de points-volume {#points-volume-usage-metrics}
+* **Ce qu'elle représente :** Nombre de noms de métriques avec plus de 100 points indexés, depuis le début du mois.
+* **Réponse à la question de facturation :** Combien de noms de métriques sont facturables jusqu'à présent ce mois-ci ?
+
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_metrics_example_09012026.png" alt="Exemple montrant le nombre de noms de métriques facturables depuis le début du mois" >}}
+
+#### `datadog.estimated_usage.billable.points` {#datadogestimated-usagebillablepoints}
+
+* **Ce qu'elle représente :** Somme des points indexés au-delà des 10 millions inclus par nom de métrique, depuis le début du mois.
+* **Réponses aux questions de facturation :**
+  * Quel est mon volume total de points indexés facturables jusqu'à présent ce mois-ci ?
+  * Quels noms de métriques contribuent à mon volume de points indexés facturables et en quelles quantités ?
+
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_points_example_08042026.png" alt="Exemple montrant le volume total de points indexés facturables depuis le début du mois" >}}
+
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_points_bymetric_example_08042026.png" alt="Exemple montrant le volume de points indexés facturables ventilé par nom de métrique" >}}
+
+#### `datadog.estimated_usage.metrics.points.ratio` {#datadogestimated-usagemetricspointsratio}
+
+* **Ce qu'elle représente :** Comparaison du total des points ingérés au total des points indexés.
+* **Réponse à la question de facturation :** Quel est le rapport entre les points ingérés et les points indexés ?
+
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_points_ratio_example_08042026.png" alt="Exemple montrant le rapport entre les points ingérés et les points indexés" >}}
+
+### Métriques d'utilisation du volume de points {#points-volume-usage-metrics}
 
 Pour une analyse plus granulaire, utilisez les métriques en temps réel et horaires suivantes :
 
 | Métrique | Ce qu'elle représente |
 |--------|-------------------|
-| `datadog.estimated_usage.metrics.points.indexed` | Points de métriques personnalisées indexées estimées sur une fenêtre de 60 minutes glissantes. |
-| `datadog.estimated_usage.metrics.points.indexed.by_tag` | Points de métriques personnalisées indexées estimées sur une fenêtre de 60 minutes glissantes, décomposés par étiquettes d'attribution d'utilisation. |
-| `datadog.estimated_usage.metrics.points.indexed.hourly` | Points de métriques personnalisées indexées estimées soumis chaque heure, pour des calculs cumulés depuis le début du mois. |
-| `datadog.estimated_usage.metrics.points.ingested` | Points de métriques personnalisées ingérées estimées sur une fenêtre de 60 minutes glissantes. |
-| `datadog.estimated_usage.metrics.points.ingested.hourly` | Points de métriques personnalisées ingérées estimées soumis chaque heure, pour des calculs cumulés depuis le début du mois. |
+| `datadog.estimated_usage.metrics.points.indexed` | Points de métrique personnalisés indexés estimés sur une fenêtre glissante de 60 minutes. |
+| `datadog.estimated_usage.metrics.points.indexed.by_tag` | Points de métrique personnalisés indexés estimés sur une fenêtre glissante de 60 minutes, ventilés par tags d'attribution d'utilisation. |
+| `datadog.estimated_usage.metrics.points.indexed.hourly` | Nombre total estimé de points de métriques personnalisées indexés soumis chaque heure, pour les calculs cumulés depuis le début du mois. |
+| `datadog.estimated_usage.metrics.points.ingested` | Nombre estimé de points de métriques personnalisées ingérés sur une fenêtre glissante de 60 minutes. |
+| `datadog.estimated_usage.metrics.points.ingested.hourly` | Nombre total estimé de points de métriques personnalisées ingérés soumis chaque heure, pour les calculs cumulés depuis le début du mois. |
 
-Pour plus d'informations, consultez [Métriques d'utilisation estimées][6].
+Pour plus d'informations, consultez [Métriques d'utilisation estimée][6].
 
-## Gestion de votre utilisation des métriques {#managing-your-metric-usage}
+## Gérer votre utilisation des métriques {#managing-your-metric-usage}
 
-Pour optimiser votre utilisation sous la tarification par nom de métrique, utilisez les outils suivants :
+Pour optimiser votre utilisation avec la tarification par nom de métrique, utilisez les outils suivants :
 
-- **Noms de métriques** : Utilisez [Filtrage côté agent][9] pour empêcher l'envoi de métriques personnalisées inutilisées ou indésirables à Datadog, réduisant ainsi le nombre de noms de métriques facturables.
-- **Points indexés et ingérés** : Utilisez [Métriques sans limites™][2] pour configurer des listes d'autorisation ou de blocage par métrique, ou [Règles d'indexation des étiquettes][10] pour appliquer des configurations d'étiquettes à l'échelle de l'organisation à travers les groupes de métriques, réduisant le volume de points indexés et votre dépassement par métrique.
+- **Noms de métriques** : Utilisez le [ filtrage côté Agent][9] pour empêcher l'envoi de métriques personnalisées inutilisées ou indésirables à Datadog, réduisant ainsi le nombre de noms de métriques facturables.
+- **Points indexés et ingérés** : Utilisez [Metrics without Limits™][2] pour configurer des listes d'autorisation ou de blocage de tags par métrique, ou [Tag Indexing Rules][10] pour appliquer des configurations de tags à l'échelle de l'organisation sur des groupes de métriques, réduisant ainsi le volume de points indexés et votre surplus par métrique.
 
 ## Dépannage {#troubleshooting}
 
 Pour toute question technique, contactez [l'assistance Datadog][7].
 
-Pour toute question concernant la facturation, contactez votre Customer Success Manager.
+Pour toute question relative à la facturation, contactez votre responsable [Customer Success][8].
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

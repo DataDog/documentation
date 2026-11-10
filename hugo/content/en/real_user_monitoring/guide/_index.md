@@ -17,7 +17,6 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/create-charts-with-rum-custom-metrics" >}}Create charts with RUM custom metrics{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
@@ -65,6 +64,6 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your Session Replays with Shadow DOM components{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Tests From Session Replay{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk tickets with Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -107,7 +107,7 @@ Remove rules that are no longer needed. When you delete a rule, Datadog recomput
 
 ### Override rules for a specific metric
 
-To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
+To exempt a metric from tag rules, open the metric's details side panel in the Metrics Catalog, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
 
 To reapply rules, restore the metric's default configuration from the same panel.
 
@@ -186,12 +186,31 @@ You can review and remove these exemptions from the Tag Indexing Rules page. Dat
 
 - **Safe to remove**: Based on Datadog's analysis across your account's tag indexing rules, removing the exemption is expected to reduce your custom metrics usage.
 - **Needs review**: Removing the exemption may affect your custom metrics usage, or your tag indexing rules may not preserve all tags included in the existing MWL configuration. Review these exemptions carefully to avoid breaking dashboards, monitors, or other assets that depend on those tags.
+> **Note**: Datadog does not recommend creating a separate Tag Indexing Rule for each exemption that needs review. If your existing Tag Indexing Rules cannot govern these metrics appropriately, keep them as exemptions.
 
 Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
 
+## Limits
+
+Tag Indexing Rules have the following limits:
+
+- **Rules per organization**: An organization can have up to 1,000 active Tag Indexing Rules. Deleted rules do not count toward this limit. When your organization reaches the limit, you cannot create new rules until you delete rules that are no longer needed. The API returns a `403` error for create requests that exceed the limit.
+- **Rule name**: Up to 200 characters.
+- **Metric name patterns per rule**: Up to 50 entries in `metric_name_matches`.
+- **Metric name pattern**: Up to 200 characters. Patterns can contain letters, numbers, dots (`.`), and underscores (`_`), with an optional single trailing `*` (for example, `http.*`).
+- **Reordering**: Reordering applies to the full list of rules. When you reorder rules through the API, provide the complete ordered list of every active rule. Requests that omit any rule are rejected with a `400` error.
+
+Create or update requests that exceed the rule name or metric name pattern limits are rejected with a `400` error that describes the invalid field.
+
+The 1,000-rule limit is a safeguard, not a target. Most accounts need approximately 10-20 rules. See [Best practices](#best-practices).
+
 ## Best practices
 
-Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Use Metrics without Limits™ when an individual metric requires a deliberate exception to the broader policy.
+Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Most accounts need approximately 10-20 rules to govern their metrics. Create rules for groups of metrics with shared tag requirements, rather than a separate rule for each metric or exemption.
+
+Because Datadog evaluates rules in order and each rule builds on or replaces the results of earlier rules, large rule sets interact in ways that are difficult to predict and maintain. To keep your rule set small, use prefix patterns such as `http.*`, or add several entries to a single rule's metric name patterns, instead of creating one rule per metric.
+
+For metrics that your Tag Indexing Rules cannot govern appropriately, use [Metrics without Limits™][2] to configure them individually, or keep their existing exemptions.
 
 ### Create the Golden Rule first
 

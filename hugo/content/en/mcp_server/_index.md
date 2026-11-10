@@ -49,7 +49,6 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
 {{< card-grid card_width="100px" >}}
   {{< image-card href="/mcp_server/setup/?tab=cursor" src="integrations_logos/cursor_avatar.svg" alt="Cursor" tooltip="Cursor" >}}
   {{< image-card href="/mcp_server/setup/?tab=claudecode" src="integrations_logos/claude-code_avatar.svg" alt="Claude Code" tooltip="Claude Code" >}}
-  {{< image-card href="/mcp_server/setup/?tab=geminicli" src="integrations_logos/google-gemini_avatar.svg" alt="Gemini CLI" tooltip="Gemini CLI" >}}
   {{< image-card href="/mcp_server/setup/?tab=vscode" src="integrations_logos/vscode_avatar.svg" alt="VS Code" tooltip="VS Code" >}}
   {{< image-card href="/mcp_server/setup/?tab=warp" src="integrations_logos/warp_avatar.png" alt="Warp" tooltip="Warp" >}}
   {{< image-card href="/mcp_server/setup/?tab=devin" src="integrations_logos/devin.png" alt="Devin" tooltip="Devin" >}}
@@ -62,6 +61,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=copilotcli" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
   {{< image-card href="/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
   {{< image-card href="/mcp_server/setup/?tab=grokbuild" src="integrations_logos/grok.png" alt="Grok Build" tooltip="Grok Build" >}}
+  {{< image-card href="/mcp_server/setup/?tab=antigravity" src="integrations_logos/antigravity.svg" alt="Antigravity" tooltip="Antigravity" >}}
   {{< image-card href="/mcp_server/setup/?tab=other" src="icons/developers.png" alt="Custom Agent" tooltip="Custom Agent" >}}
 {{< /card-grid >}}
 
@@ -100,11 +100,9 @@ Write operations require the corresponding permission, such as `monitors_write`,
 
 ## Fair-use rate limits
 
-The MCP Server comes with the following fair-use limits:
-- 50 requests/10 seconds tool call burst limits
-- 100,000 monthly tool calls.
+The MCP Server has a fair-use burst limit of 50 tool calls per 10 seconds. There is no monthly limit on tool calls.
 
-These limits are **subject to change** and can be adjusted if your use case requires more. Contact [Datadog support][37] for requests or questions.
+This limit is **subject to change**, and Datadog can raise it if your use case requires more. Contact [Datadog support][37] for requests or questions.
 
 ## Monitoring the Datadog MCP Server tool calls
 

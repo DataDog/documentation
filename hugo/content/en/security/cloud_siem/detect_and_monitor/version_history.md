@@ -2,7 +2,7 @@
 title: Version History
 disable_toc: false
 further_reading:
-- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule"
   tag: "Documentation"
   text: "Create a custom rule"
 ---

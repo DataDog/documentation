@@ -124,6 +124,8 @@ When enabling additional Datadog features, always use the Datadog or OpenTelemet
 
 The installation script provides a sample OpenTelemetry Collector configuration at `/etc/datadog-agent/otel-config.yaml` that you can use as a starting point.
 
+After you edit `datadog.yaml` or `otel-config.yaml`, [restart the Agent][14] to apply the changes.
+
 {{% collapse-content title="Sample otel-config.yaml file from installation" level="p" %}}
 Sample `otel-config.yaml` from installation will look something like this:
 {{< code-block lang="yaml" filename="otel-config.yaml" collapsible="true" >}}
@@ -338,3 +340,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [11]: /opentelemetry/integrations/collector_health_metrics/
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 [13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/run-otel-local.sh
+[14]: /agent/configuration/agent-commands/#restart-the-agent

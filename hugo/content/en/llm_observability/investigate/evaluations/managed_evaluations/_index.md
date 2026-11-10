@@ -1,6 +1,6 @@
 ---
-title: Managed Evaluations
-description: Learn how to configure managed evaluations for your LLM applications.
+title: Managed Evaluators
+description: Learn how to configure managed evaluators for your LLM applications.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
@@ -20,25 +20,25 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application. Agent Observability associates evaluations with individual
+Managed evaluators are built-in tools to assess your LLM application. Agent Observability associates evaluations with individual
 spans so you can view the inputs and outputs that led to a specific evaluation.
 
 Learn more about the [compatibility requirements][2].
 
-## Create new evaluations
+## Create new evaluators {#create-new-evaluations}
 
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1].
-1. Click on the {{< ui >}}Create Evaluation{{< /ui >}} button on the top right corner.
-1. Select a specific managed evaluation. This will open the evalution editor window.
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][1].
+1. Click on the {{< ui >}}Create Evaluator{{< /ui >}} button on the top right corner.
+1. Select a specific managed evaluator. This will open the evaluator editor window.
 
-After you click {{< ui >}}Save and Publish{{< /ui >}}, the evaluation goes live. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable them later.
+After you click {{< ui >}}Save and Publish{{< /ui >}}, the evaluator goes live. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable it later.
 
-## Edit existing evaluations
+## Edit existing evaluators {#edit-existing-evaluations}
 
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1].
-1. Hover over the evaluation you want to edit and click the {{< ui >}}Edit{{< /ui >}} button.
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][1].
+1. Hover over the evaluator you want to edit and click the {{< ui >}}Edit{{< /ui >}} button.
 
-### Supported managed evaluations
+### Supported managed evaluators
 
 - [Language Mismatch][3] - Flags responses that are written in a different language than the user’s input
 - [Sensitive Data Scanning][4] - Flags the presence of sensitive or regulated information in model inputs or outputs

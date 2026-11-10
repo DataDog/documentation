@@ -30,7 +30,7 @@ Ce document répertorie certaines des métriques disponibles dans Observability 
 - Créez vos propres [dashboards][1], [notebooks][2] et [monitors][3] avec ces métriques.
 - Utilisez le [Metrics Summary][5] pour voir les métadonnées et les tags disponibles pour les métriques. Vous pouvez également voir quels dashboards, notebooks, monitors et SLOs utilisent ces métriques.
 
-Consultez [Getting Started with Tags][4] pour plus d'informations sur la façon d'utiliser les tags pour regrouper les métriques par pipelines, Workers et composants spécifiques.
+Consultez [Débuter avec les tags][4] pour plus d'informations sur la façon d'utiliser les tags pour regrouper les métriques par pipelines, Workers et composants spécifiques.
 
 Toutes les métriques sont taguées avec les éléments suivants :
 
@@ -109,10 +109,10 @@ Cœurs CPU alloués
 
 Utilisation du CPU
 : **Métrique** : `pipelines.cpu_usage_seconds_total`
- : **Description :** La quantité de temps CPU consommée par le processus Worker en secondes (dans l'espace utilisateur et système). Le taux par seconde de cette métrique indique la proportion de CPU utilisée par le Worker.
+: **Description :** La quantité de temps CPU consommée par le processus Worker en secondes (dans l'espace utilisateur et système). Le taux par seconde de cette métrique indique la proportion de CPU utilisée par le Worker.
 
 Octets disponibles du répertoire de données
- : **Métrique** : `pipelines.data_dir_available_bytes`
+: **Métrique** : `pipelines.data_dir_available_bytes`
 : **Description :** L'espace de stockage libre restant sur le système de fichiers où le Worker stocke ses données de tampon et d'état. Utile pour surveiller les tampons disque.
 
 Capacité en octets du répertoire de données
@@ -124,8 +124,8 @@ Limite de mémoire
 : **Description :** La mémoire maximale que le Worker est autorisé à utiliser, telle que définie par les limites du conteneur ou du cgroup.
 
 Utilisation de la mémoire
- : **Métrique** : `pipelines.resident_memory_used_bytes`
- : **Description :** La quantité de mémoire RSS utilisée par le processus Worker en octets.
+: **Métrique** : `pipelines.resident_memory_used_bytes`
+: **Description :** La quantité de mémoire RSS utilisée par le processus Worker en octets.
 
 Temps de disponibilité du Worker
 : **Métrique**: `pipelines.uptime_seconds`
@@ -143,7 +143,7 @@ Rechargements du Worker
 
 Ces métriques sont disponibles pour les sources, les processeurs et les destinations.
 
-- Utilisez le tag `component_id` pour filtrer ou regrouper par composants individuels.
+- Utilisez le tag `component_id` pour filtrer ou regrouper par composants individuels. Consultez [Trouver l’ID du composant][7] pour les instructions.
 - Utilisez le tag `component_type` pour filtrer ou regrouper par type de source, de processeur ou de destination, comme `quota` pour le processeur Quota.
 - Utilisez le tag `component_kind` pour filtrer ou regrouper par `source`, `transform` (processeur) ou `sink` (destination).
 
@@ -257,7 +257,7 @@ Utilisation du CPU
 : **Métrique** : `pipelines.component_cpu_usage_ns_total`
 : **Description** : Le temps CPU consommé par un composant, en nanosecondes. Utilisez cette métrique pour attribuer le coût CPU à chaque processeur. Disponible dans la version 2.18 du Worker et dans les versions ultérieures pour Linux et MacOS.
 : **Disponible pour ces processeurs de log** : <br>- Processeur personnalisé<br>- Déduplication<br>- Table d'enrichissement<br>- Analyseur Grok<br>- Analyser JSON<br>- Analyser XML<br>- Réduire<br>- Remapper vers OCSF<br>- Sensitive Data Scanner<br>- Diviser le tableau<br>- Processeurs de log de limitation
- : **Disponible pour ces processeurs de métriques** : <br>- Agrégat <br>- Métriques de limite de cardinalité des tags
+: **Disponible pour ces processeurs de métriques** : <br>- Agrégat <br>- Métriques de limite de cardinalité des tags
 
 Utilisation
 : **Métrique** : `pipelines.utilization`
@@ -307,7 +307,7 @@ Données abandonnées intentionnellement ou non
 ### Performances {#performance-2}
 
 Utilisation
-: **Métrique** : `pipelines.utilization`
+: **Métrique** : `pipelines.utilization`
 : **Description** : L'activité du composant. Une valeur de `0` indique un composant inactif qui attend une entrée. Une valeur proche de `1` indique un composant qui n'est jamais inactif, ce qui signifie que le composant est probablement un goulot d'étranglement dans la topologie de traitement qui crée une contre-pression. Cela peut entraîner la suppression d'événements.
 
 ### Tampon {#buffer-2}
@@ -364,15 +364,15 @@ Ces métriques sont émises par les destinations qui envoient des données via H
 - Utilisez le tag `component_type` pour filtrer ou regrouper par type de destination.
 
 `pipelines.http_client_requests_sent_total`
-: **Description**: Le nombre de requêtes HTTP envoyées, étiquetées par méthode de requête.
+: **Description**: Le nombre de requêtes HTTP envoyées, taguées par méthode de requête.
 : **Type de métrique**: count
 
 `pipelines.http_client_responses_total`
-: **Description**: Le nombre de réponses HTTP reçues, étiquetées par statut de réponse.
+: **Description**: Le nombre de réponses HTTP reçues, taguées par statut de réponse.
 : **Type de métrique**: count
 
 `pipelines.http_client_errors_total`
-: **Description**: Le nombre d'erreurs client HTTP, étiquetées par type d'erreur.
+: **Description**: Le nombre d'erreurs client HTTP, taguées par type d'erreur.
 : **Type de métrique**: count
 
 `pipelines.http_client_rtt_seconds`
@@ -380,11 +380,11 @@ Ces métriques sont émises par les destinations qui envoient des données via H
 : **Type de métrique**: distribution
 
 `pipelines.http_client_response_rtt_seconds`
-: **Description**: Temps d'aller-retour, en secondes, des requêtes HTTP, étiqueté par statut de réponse.
+: **Description**: Temps d'aller-retour, en secondes, des requêtes HTTP, tagué par statut de réponse.
 : **Type de métrique**: distribution
 
 `pipelines.http_client_error_rtt_seconds`
-: **Description** : Le temps d'aller-retour, en secondes, des requêtes HTTP ayant abouti à une erreur, étiqueté par type d'erreur.
+: **Description** : Le temps d'aller-retour, en secondes, des requêtes HTTP ayant abouti à une erreur, tagué par type d'erreur.
 : **Type de métrique** : distribution
 
 ## Métriques de concurrence adaptative {#adaptive-concurrency-metrics}
@@ -436,3 +436,4 @@ Ces métriques fournissent des informations sur le contrôleur de concurrence ad
 [4]: /fr/getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://docs.datadoghq.com/fr/account_management/billing/usage_metrics/
+[7]: /fr/observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#find-the-component-id

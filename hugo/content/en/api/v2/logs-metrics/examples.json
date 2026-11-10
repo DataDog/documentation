@@ -12,7 +12,7 @@
                   "path": "@duration"
                 },
                 "filter": {
-                  "query": "service:web* AND @http.status_code:[200 TO 299]"
+                  "query": "service:web-api AND @http.status_code:[200 TO 299]"
                 },
                 "group_by": [
                   {
@@ -63,7 +63,7 @@
                 "path": "@duration"
               },
               "filter": {
-                "query": "service:web* AND @http.status_code:[200 TO 299]"
+                "query": "service:web-api AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
@@ -137,7 +137,7 @@
               "path": "@duration"
             },
             "filter": {
-              "query": "service:web* AND @http.status_code:[200 TO 299]"
+              "query": "service:web-api AND @http.status_code:[200 TO 299]"
             },
             "group_by": [
               {
@@ -198,7 +198,7 @@
                 "path": "@duration"
               },
               "filter": {
-                "query": "service:web* AND @http.status_code:[200 TO 299]"
+                "query": "service:web-api AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
@@ -256,7 +256,7 @@
                 "path": "@duration"
               },
               "filter": {
-                "query": "service:web* AND @http.status_code:[200 TO 299]"
+                "query": "service:web-api AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
@@ -324,7 +324,7 @@
               "include_percentiles": true
             },
             "filter": {
-              "query": "service:web* AND @http.status_code:[200 TO 299]"
+              "query": "service:web-api AND @http.status_code:[200 TO 299]"
             },
             "group_by": [
               {

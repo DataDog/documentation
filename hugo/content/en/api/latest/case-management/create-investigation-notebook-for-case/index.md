@@ -1,3 +1,3 @@
 ---
-title: Create investigation notebook for case
+title: Create investigation notebook for work item
 ---

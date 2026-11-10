@@ -40,9 +40,40 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.36 — 2026-11-03
+
+*Bundled in chart: `0.6.0`.*
+
+#### Changed
+
+- Protects searchers from excessive memory usage during wildcard searches, and makes filters on multi-value fields more efficient.
+- Reduces indexing memory retention and log-processing overhead.
+- Improves ingestion reliability by preventing the loss of recently acknowledged logs after an unexpected indexer restart.
+
+#### Helm chart changes
+
+<div class="alert alert-warning">
+<strong>Breaking change</strong>: Defaults <code>indexer.podManagementPolicy</code> to <code>Parallel</code>, so indexers start concurrently during scale-out instead of one at a time. Kubernetes does not allow changing this field on an existing StatefulSet. Before upgrading, either set <code>indexer.podManagementPolicy: OrderedReady</code> to keep the current policy, or migrate the indexer StatefulSet by following <a href="https://github.com/DataDog/helm-charts/tree/main/charts/cloudprem#upgrading-indexers-to-parallel">Upgrading indexers to <code>Parallel</code></a>.
+</div>
+
+- Enables gossip message compression by default with `config.gossip_protocol_version: 1`. If any node runs a binary version older than v0.1.33, keep `config.gossip_protocol_version: 0` until all nodes run v0.1.33 or later. Then, set it to `1`.
+
+### v0.1.35 — 2026-10-20
+
+*Bundled in chart: `0.5.6`.*
+
+#### Changed
+
+- Updates the trusted root certificate authorities, and removes `emSign ECC Root CA - G3` from the trusted roots.
+
+#### Helm chart changes
+
+- Exports `QW_CLUSTER_ID` to all BYOC Logs pods, using `config.cluster_id` when set.
+- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC Logs telemetry with an unrelated host.
+
 ### v0.1.34 — 2026-09-23
 
-*Bundled in chart: `0.5.3`.*
+*Bundled in chart: `0.5.5`.*
 
 #### Changed
 
@@ -56,7 +87,8 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 #### Helm chart changes
 
 - Enables availability zone-aware scheduling by default, and populates the availability zone from pod labels on all Kubernetes versions.
-- Sets `QW_ENABLE_IN_MEMORY_INDEXING=true` and `QW_DISABLE_LOAD_ESTIMATION=true` on indexers by default, and sets `QW_INDEXING_MAX_WRITE_THROUGHPUT` based on `indexer.podSize`. Values in `indexer.extraEnv` or `environment` take precedence.
+- Sets `QW_ENABLE_IN_MEMORY_INDEXING=true` on indexers by default, and sets `QW_INDEXING_MAX_WRITE_THROUGHPUT` based on `indexer.podSize` unless `indexer.resources` is set. Values in `indexer.extraEnv` or `environment` take precedence.
+- Fixes the load-estimation configuration in chart `0.5.5`: sets `QW_DISABLE_LOAD_ESTIMATION=true` on searchers by default and removes it from indexer defaults. This disables search load estimation to improve search latency under load; setting the variable on indexers had no effect. Explicit values in `searcher.extraEnv` or `environment` take precedence.
 - Uses the readiness endpoint for startup probes, removes default readiness probes, and sets liveness probe timeouts to 5 seconds.
 - Increases the compactor termination grace period to 300 seconds.
 

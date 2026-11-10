@@ -181,10 +181,10 @@ By default, `cmake --install` places the shared library and public headers into 
 To install them in a specific location, use `cmake --install build --prefix <INSTALL_DIR>` instead.
 
 ### Dynamic Linking
-Link against `libdd_trace_cpp.so`, making sure the shared library is in `LD_LIBRARY_PATH`.
+Link against `libdd-trace-cpp.so`, and make sure the shared library is in `LD_LIBRARY_PATH`.
 
 ````bash
-clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
+clang -std=c++17 -o tracer_example tracer_example.cpp -ldd-trace-cpp
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
 ````

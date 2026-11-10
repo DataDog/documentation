@@ -28,12 +28,12 @@ jobs:
         id: octo-sts
         uses: DataDog/dd-octo-sts-action@96a25462dbcb10ebf0bfd6e2ccc917d2ab235b9a # v1.0.4
         with:
-          scope: DataDog/datadog-api-spec
+          scope: ddoghq/datadog-api-spec
           policy: documentation.github.post-review-status.pull-request
       - name: Post PR review status check
         uses: DataDog/github-actions/post-review-status@65b4875f33ad773d7ba4b005a2cb5f35020295f3 # v2.3.0
         with:
           github-token: ${{ steps.octo-sts.outputs.token }}
+          owner: ddoghq
           repo: datadog-api-spec
           context: documentation/master
-

@@ -27,7 +27,7 @@ further_reading:
 <div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
 
 In Observability Pipelines, a pipeline is a sequential path with three types of components:
-- [Source][1]: Receives data from your data source (for example, the Datadog Agent).
+- [Sources][1]: Receive data from your data sources (for example, the Datadog Agent).
 - [Processors][2]: Enrich and transform your data.
 - [Destinations][3]: Where your processed data is sent.
 
@@ -50,12 +50,18 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
-1. Select and set up a [log source][3].
+1. Select and set up a [log source][3]. To add more sources, see [Add another source](#add-another-log-source).
 1. Select and set up [destinations][5] for your processed logs.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+
+#### Add another source {#add-another-log-source}
+
+{{< img src="observability_pipelines/setup/another_source.png" alt="The Pipelines page showing two sources sending logs to one processor group and one destination." style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_source %}}
 
 #### Add another processor group
 
@@ -88,12 +94,18 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Metrics Pipeline{{< /ui >}}.
-1. Select and set up a [metrics source][3].
+1. Select and set up a [metrics source][3]. To add more sources, see [Add another source](#add-another-metrics-source).
 1. Select and set up [destinations][5] for your processed metrics.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
+
+#### Add another source {#add-another-metrics-source}
+
+{{< img src="observability_pipelines/setup/another_source_metrics.png" alt="The Pipelines page showing two sources sending metrics to one processor group and one destination." style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_source %}}
 
 #### Add another processor group
 
@@ -167,7 +179,18 @@ To clone a pipeline in the UI:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to clone.
-1. Click the cog at the top right side of the page, then select {{< ui >}}Clone{{< /ui >}}.
+1. Click the cog at the top right side of the page, then select {{< ui >}}Clone Pipeline{{< /ui >}}.
+
+## Search for a component
+
+To find a source, processor, or destination in a pipeline:
+
+1. Navigate to [Observability Pipelines][4].
+1. Select a pipeline.
+1. Click the cog at the top right side of the page, then select {{< ui >}}Search Components{{< /ui >}}.
+1. Enter the component's ID or type.
+
+{{< img src="observability_pipelines/setup/search_components.png" alt="The component search box showing sources and processors with their component IDs." style="width:80%;" >}}
 
 ## Delete a pipeline
 
@@ -175,15 +198,15 @@ To delete a pipeline in the UI:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to delete.
-1. Click the cog at the top right side of the page, then select {{< ui >}}Delete{{< /ui >}}.
+1. Click the cog at the top right side of the page, then select {{< ui >}}Delete Pipeline{{< /ui >}}.
 
 **Note**: You cannot delete an active pipeline. You must stop all Workers for a pipeline before you can delete it.
 
 ## Pipeline requirements and limits
 
 - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
-- For log pipelines:
-  - You can add a total of three destinations for a log pipeline.
+- You can add a total of 10 sources for a pipeline.
+- You can add a total of 20 destinations for a pipeline.
 
 ## Further Reading
 

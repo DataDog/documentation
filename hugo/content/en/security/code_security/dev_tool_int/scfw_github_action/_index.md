@@ -4,12 +4,15 @@ description: Keep malicious packages out of your CI/CD runners with Datadog's Gi
 is_beta: true
 disable_toc: false
 further_reading:
-- link: "https://securitylabs.datadoghq.com/articles/introducing-supply-chain-firewall/"
-  tag: "Blog"
-  text: "Introducing Supply-Chain Firewall: Protecting Developers from Malicious Open Source Packages"
 - link: "/security/code_security/#supply-chain-security-preview"
   tag: "Documentation"
   text: "Supply Chain Security"
+- link: "https://securitylabs.datadoghq.com/articles/introducing-supply-chain-firewall/"
+  tag: "Blog"
+  text: "Introducing Supply-Chain Firewall: Protecting Developers from Malicious Open Source Packages"
+- link: "https://www.datadoghq.com/blog/supply-chain-firewall-code-security/"
+  tag: "Blog"
+  text: "Block malicious packages across your organization with Supply Chain Firewall and Datadog Code Security"
 ---
 
 The Supply Chain Firewall GitHub Action installs Datadog's [Supply Chain Firewall][1] (SCFW) and configures it to intercept supported package manager commands in all subsequent workflow steps. When active, SCFW inspects each supported package manager command before allowing it to run.

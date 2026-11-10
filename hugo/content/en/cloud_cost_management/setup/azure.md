@@ -24,6 +24,11 @@ To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Az
 
 Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. To determine your account type, see the [Azure documentation][10].
 
+<div id="unused-commitment-costs" class="alert alert-warning">
+<strong>Unused reservation and savings plan costs</strong>
+<p>Azure includes unused reservation and savings plan costs in billing account exports. Exports at a lower scope, such as a subscription, resource group, EA department, or MCA invoice section, don't include them, so commitment utilization, unused costs, and savings are incomplete in Datadog. To track your commitments, create your exports at the billing account scope. For more information, see Microsoft's <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/view-amortized-costs">amortized benefit costs documentation</a>.</p>
+</div>
+
 <div class="alert alert-info">
 <strong>Pay as you go (PAYG) accounts</strong>
 <p>Datadog Cloud Cost Management requires <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports from Azure. PAYG (Microsoft Online Services Program) subscriptions typically provide only <strong>Usage details (usage only)</strong> exports, so they can't be set up for CCM. For the export types available to each Azure account type, see Microsoft's <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports">Cost Management exports documentation</a>.</p>

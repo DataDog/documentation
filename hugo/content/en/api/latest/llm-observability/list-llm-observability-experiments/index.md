@@ -1,3 +1,3 @@
 ---
-title: List LLM Observability experiments
+title: List LLM Observability offline experiments
 ---

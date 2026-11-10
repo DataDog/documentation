@@ -1,3 +1,3 @@
 ---
-title: Update case priority
+title: Update work item priority
 ---

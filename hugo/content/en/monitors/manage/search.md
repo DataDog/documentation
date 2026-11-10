@@ -44,6 +44,7 @@ There are a few caveats regarding quoted fields:
 
 * You may use `.` with or without surrounding quotes, as it commonly appears in some fields. For example, `metric:system.cpu.idle` is valid.
 * Wildcard search is not supported inside quoted strings. For example, `"chef-client*"` does not return a monitor titled `"chef-client failing"` because the `*` is treated literally.
+* To use a wildcard in a value that contains a colon, escape the colon with a backslash (`\`) instead of using quotes. For example, `tag:service\:*` returns all monitors that have a `service` tag, regardless of its value.
 
 ## Attributes
 

@@ -1,0 +1,24 @@
+{{- /*
+  Recursively flattens `node`'s own menu entry plus its full subtree into a
+  []map{"url": <trimmed URL>, "identifier": <top-level identifier>}, where "identifier"
+  is always the value passed in (the top-level ancestor's own .Identifier), not the
+  descendant's own.
+
+  Helper for nav/flattened-menu.html, which caches the result of walking the whole menu
+  this way ONCE per build via hugo.Store -- see that file for why. This file itself still
+  recurses via `partial`, but since its output is cached, it only runs once per language,
+  not once per page.
+
+  Params: dict "node" <a menu entry with .URL/.Children> "identifier" <top-level identifier>
+*/ -}}
+{{- $node := .node -}}
+{{- $topID := .identifier -}}
+{{- $url := trim ($node.URL | relLangURL) "/" -}}
+{{- $list := slice -}}
+{{- if ne $url "" -}}
+    {{- $list = $list | append (dict "url" $url "identifier" $topID) -}}
+{{- end -}}
+{{- range $node.Children -}}
+    {{- $list = $list | append (partial "nav/flatten-subtree-entries.html" (dict "node" . "identifier" $topID)) -}}
+{{- end -}}
+{{- return $list -}}

@@ -21,7 +21,7 @@ further_reading:
 - link: /containers/guide/container-discovery-management/
   tag: Documentación
   text: Gestión de descubrimiento de contenedores
-title: Auto-configuración de Autodiscovery
+title: Autodiscovery Auto-Configuration
 ---
 Cuando el Agent se ejecuta como un contenedor, [Autodiscovery][44] intenta descubrir otros contenedores basándose en archivos de configuración predeterminados llamados `auto_conf.yaml`. Puede encontrar estos archivos en las carpetas `conf.d/<INTEGRATION>.d/` correspondientes para las siguientes integraciones:
 
@@ -35,13 +35,13 @@ Cuando el Agent se ejecuta como un contenedor, [Autodiscovery][44] intenta descu
 | [Couchbase][11]                | [auto_conf.yaml][12]    |
 | [Elastic][13]                  | [auto_conf.yaml][14]    |
 | [Etcd][15]                     | [auto_conf.yaml][16]    |
-| [External DNS][17]             | [auto_conf.yaml][18]    |
+| [DNS externo][17]             | [auto_conf.yaml][18]    |
 | [Istio][19]                    | [auto_conf.yaml][20]    |
-| [Kube APIserver][21]           | [auto_conf.yaml][22]    |
+| [APIserver de Kube][21]           | [auto_conf.yaml][22]    |
 | [Kube Controller Manager][23]  | [auto_conf.yaml][24]    |
 | [KubeDNS][21]                  | [auto_conf.yaml][25]    |
 | [Kube Scheduler][26]           | [auto_conf.yaml][27]    |
-| [Kubernetes State][21]         | [auto_conf.yaml][28]    |
+| [Estado de Kubernetes][21]         | [auto_conf.yaml][28]    |
 | [Kyototycoon][29]              | [auto_conf.yaml][30]    |
 | [MemCached][31]                | [auto_conf.yaml][32]    |
 | [Presto][33]                   | [auto_conf.yaml][34]    |
@@ -50,12 +50,12 @@ Cuando el Agent se ejecuta como un contenedor, [Autodiscovery][44] intenta descu
 | [Riak][37]                     | [auto_conf.yaml][38]    |
 | [Tomcat][39]                   | [auto_conf.yaml][40]    |
 
-Los archivos de configuración `auto_conf.yaml` cubren todos los parámetros necesarios para configurar una integración específica, con sus correspondientes [Autodiscovery Templates Variables][41] implementadas para tener en cuenta el entorno contenedorizado.
+Los archivos de configuración `auto_conf.yaml` cubren todos los parámetros necesarios para configurar una integración específica, con sus correspondientes [Variables de plantillas de Autodiscovery][41] implementadas para tener en cuenta el entorno en contenedores.
 
 ## Anular la configuración automática {#override-auto-configuration}
-Cada `auto_conf.yaml` archivo proporciona una configuración predeterminada. Para anular esto en Kubernetes, puede agregar una configuración personalizada en [Kubernetes annotations][45] o usar el [`DatadogInstrumentation` recurso personalizado][47]. Para Docker, utilice [Docker Labels][46].
+Cada archivo `auto_conf.yaml` proporciona una configuración predeterminada. Para anular esto en Kubernetes, puede agregar una configuración personalizada en [anotaciones de Kubernetes][45] o usar el [`DatadogInstrumentation` recurso personalizado][47]. Para Docker, use [etiquetas de Docker][46].
 
-Las Kubernetes annotations tienen prioridad sobre los recursos `DatadogInstrumentation` y los archivos `auto_conf.yaml`. `DatadogInstrumentation` los recursos tienen prioridad sobre `auto_conf.yaml` archivos, y `auto_conf.yaml` archivos tienen prioridad sobre la configuración de Autodiscovery establecida en el Datadog Operator y en los Helm charts. Para usar Datadog Operator o Helm para configurar Autodiscovery para una integración en la tabla de esta página, debe [deshabilitar la configuración automática](#disable-auto-configuration).
+Las anotaciones de Kubernetes tienen prioridad sobre los recursos `DatadogInstrumentation` y los archivos `auto_conf.yaml`. Los recursos `DatadogInstrumentation` tienen prioridad sobre los archivos `auto_conf.yaml`, y los archivos `auto_conf.yaml` tienen prioridad sobre la configuración de Autodiscovery establecida en Datadog Operator y los charts de Helm. Para usar Datadog Operator o Helm para configurar Autodiscovery para una integración en la tabla de esta página, debe [deshabilitar la configuración automática](#disable-auto-configuration).
 
 ## Deshabilitar la configuración automática {#disable-auto-configuration}
 
@@ -85,7 +85,7 @@ spec:
               value: "redisdb istio"
 ```
 
-Luego aplique la nueva configuración.
+Luego, aplique la nueva configuración.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -100,14 +100,27 @@ datadog:
     - istio
 ```
 {{% /tab %}}
-{{% tab "Agent en contenedor" %}}
-Para deshabilitar la(s) integración(es) de configuración automática con su Agent en contenedor (DaemonSet manual, Docker, ECS), agregue la variable de entorno `DD_IGNORE_AUTOCONF`:
+{{% tab "Agent contenedorizado" %}}
+Para deshabilitar la(s) integración(es) de configuración automática con su agente en contenedores (DaemonSet manual, Docker, ECS), agregue la variable de entorno `DD_IGNORE_AUTOCONF`:
 
 ```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Detección de configuración {#configuration-discovery}
+
+A partir de la versión 7.82 del Agent, varias integraciones (por ejemplo, [Pulsar][48]) incluyen archivos `auto_conf.yaml` que contienen un campo `discovery` y una lista `instances` vacía. En estos casos, el Agent intenta crear una configuración válida para la integración en tiempo de ejecución examinando el servicio. Cada integración define su propio método de descubrimiento. Por ejemplo, una integración puede sondear los puertos de contenedor expuestos en busca de un punto de conexión de métricas o usar el nombre del contenedor para distinguir componentes que comparten la misma imagen. Si se encuentra una configuración válida, el Agent programa una instancia de verificación.
+
+Para evitar métricas duplicadas, el Agent omite el descubrimiento de configuración para una integración si existe:
+- cualquier instancia de la misma integración configurada para el mismo contenedor o a nivel del servidor
+- cualquier instancia de una verificación genérica de OpenMetrics o Prometheus configurada para el mismo contenedor
+- cualquier instancia a nivel del servidor de una verificación genérica de OpenMetrics o Prometheus que emita métricas bajo el mismo espacio de nombres raíz que la integración
+
+Además, a partir de la versión 7.83 del Agent, todas las instancias de verificación creadas por este mecanismo incluyen la etiqueta `dd_config_discovery:true` en sus métricas. Use esta etiqueta para identificar o excluir estas métricas en las consultas.
+
+Para evitar el descubrimiento de configuración para una integración, [deshabilite su configuración automática](#disable-auto-configuration).
 
 ## Lecturas adicionales {#further-reading}
 
@@ -160,3 +173,4 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [45]: /es/containers/kubernetes/integrations/?tab=annotations#configuration
 [46]: /es/containers/docker/integrations/
 [47]: /es/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+[48]: https://github.com/DataDog/integrations-core/tree/master/pulsar/datadog_checks/pulsar/data/auto_conf.yaml

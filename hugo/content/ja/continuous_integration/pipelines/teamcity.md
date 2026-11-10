@@ -8,85 +8,99 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: CI Visibility のトラブルシューティング
-title: TeamCity パイプラインでトレースを設定する
+title: CI Visibility 向け TeamCity セットアップ
 ---
+## 概要 {#overview}
 
-## Overview
+[TeamCity][1] は、ソフトウェア開発プロセスを最適化および自動化する継続的インテグレーションおよび配信サーバーです。
 
-[TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
+TeamCity 向けに CI Visibility をセットアップして、パイプライン実行に関するデータを収集し、パフォーマンスのボトルネックをデバッグし、運用上の問題に対処し、開発ワークフローを最適化します。
 
-Set up tracing in TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
+### 互換性 {#compatibility}
 
-### Compatibility
-
-| Pipeline Visibility | Platform | Definition |
+| Pipeline Visibility | プラットフォーム | 定義 |
 |---|---|---|
-| [Partial retries][14] | Retry build triggers | View partially retried pipeline executions. |
-| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [部分的な再試行][14] | ビルドトリガーを再試行する | 部分的に再試行されたパイプライン実行を表示します。|
+| [キュータイム][15] | キュータイム | パイプラインのジョブが処理される前にキューに残っている時間を表示します。|
+| [パイプラインの障害理由][16] | パイプラインの障害理由 | エラーメッセージからパイプラインの障害理由を特定します。|
+| [クリティカルパスで CI ジョブをフィルタリングする][17] | クリティカルパスで CI ジョブをフィルタリングする | クリティカルパスのジョブでフィルタリングします。|
+| [実行時間][18] | 実行時間  | パイプラインによるジョブ実行時間を表示します。|
 
-The following TeamCity versions are supported:
+以下の TeamCity バージョンに対応しています。
 
-- TeamCity >= 2021.2 or later
+- TeamCity 2021.2 以降
 
-## Configure the Datadog integration
+### 用語 {#terminology}
 
-The integration between [TeamCity][1] and Datadog CI Visibility is provided through a TeamCity plugin.
-To activate the integration:
-1. Download the [Datadog CI Integration plugin][5] on the TeamCity server by going to
-**Administration** -> **Plugins** -> **Browse Plugin Repository**.
-2. If you don't already have one, add a [TeamCity composite build][6] as the last build of the build chain. This build must have
-a dependency on the current last build of the chain and no other builds depending on it. Build chains not having a
-composite build as their last build are ignored by the plugin. Below is an example of an expected build chain,
-in which `Aggregating Results` is the last composite build:
-{{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:90%;">}}
-The final composite build must be properly configured in terms of version control settings, with
-the VCS Root attached and the [VCS Trigger][13] configured.
-3. The following configuration parameters need to be present for TeamCity projects:
-   * **datadog.ci.api.key**: Your [Datadog API Key][2].
-   * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}.
-   * **datadog.ci.enabled**: `true` (`false`
-   can be used to disable the plugin for a specific project).
+次の表に、Datadog CI Visibility と TeamCity の概念の対応を示します。
 
-   These configuration parameters should not have type **Password**, as that prevents the plugin from correctly reading their values.
-   They can be added either to TeamCity subprojects or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
-   to all its subprojects. For example, to enable the plugin for all projects, add **datadog.ci.enabled** with the
-   value `true` to the Root Project. More information on defining configuration parameters
-   is available in the [TeamCity Project Hierarchy][9] documentation.
-4. To enable the plugin, click on **Enable uploaded plugins** in the **Administration** -> **Plugins** page.
-Alternatively, restart the TeamCity server.
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| パイプライン                   | ビルドチェーン |
+| ジョブ                        | ビルド       |
+| _Datadog では利用不可_ | ステップ        |
 
-## Visualize pipeline data in Datadog
+## Datadog インテグレーションを構成する {#configure-the-datadog-integration}
 
-View your data on the [**CI Pipeline List**][3] and [**Executions**][4] pages after the pipelines finish.
+[TeamCity][1] と Datadog CI Visibility のインテグレーションは、TeamCity プラグインを通じて提供されます。Datadog CI Integration プラグインの[ソースコード][8]は、Apache 2.0 ライセンスでオープンソース化されています。
 
-The **CI Pipeline List** page shows data for only the [default branch][12] of each repository.
+インテグレーションを設定するには、以下の手順を実行します。
 
-## Configure Git user information
+1. TeamCity サーバーで [Datadog CI インテグレーションプラグイン][5]をダウンロードするには、以下に移動します。
+{{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Plugins{{< /ui >}} -> {{< ui >}}Browse Plugin Repository{{< /ui >}}。
+2. まだ作成していない場合は、ビルドチェーンの最終ビルドとして [TeamCity 複合条件ビルド][6]を追加します。このビルドはチェーンの現在の最終ビルドに依存している必要があり、他のビルドがこのビルドに依存していてはいけません。
 
-The plugin retrieves the Git author name and email based on the [TeamCity username style][7].
-Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they
-provide information about the user email. When one of the other username styles is used (**UserId** or **Author Name**),
-the plugin automatically generates an email for the user by appending `@Teamcity` to the username.
-For example, if the **UserId** username style is used and the Git author username is `john.doe`,
-the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11],
-and can be modified in the VCS Root settings.
+   複合条件ビルドで終了しないビルドチェーンは、プラグインによって無視されます。たとえば、`Aggregating Results` が最終複合条件ビルドであると想定されるビルドチェーンを検討します。
 
-<div class="alert alert-warning"><strong>Note:</strong> The Git author email is used for
-<a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
-therefore there might be cost implications when username styles not providing email
-(<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="https://docs.datadoghq.com/help/" target="_blank">Reach out to the Datadog support team</a> if you have any questions about your use case.
+   {{< img src="ci/teamcity_build_chain.png" alt="最終複合条件ビルドがある TeamCity ビルドチェーン" style="width:100%;">}}
+
+   最終複合条件ビルドは、バージョン管理設定の観点から適切に構成されている必要があり、VCS ルートがアタッチされ、[VCS トリガー][13]が構成されている必要があります。
+
+3. TeamCity プロジェクトには、以下の構成パラメーターが存在する必要があります。
+
+   * **datadog.ci.api.key**: [Datadog API Key][2]。プラグインバージョン 0.0.5 以降で**パスワード**タイプをサポートしています。
+   * **datadog.ci.site**:{{< region-param key="dd_site" code="true" >}}
+   * **datadog.ci.enabled**: `true` (`false` 特定のプロジェクトでプラグインを無効にするために使用できます)。
+
+   これらは、TeamCity サブプロジェクトまたは [TeamCity ルートプロジェクト][10]のいずれかに追加できます。ルートプロジェクトに追加すると、すべてのサブプロジェクトに伝播されます。たとえば、すべてのプロジェクトでプラグインを有効にするには、ルートプロジェクトに `true` の値を持つ `datadog.ci.enabled` を追加します。
+
+   構成パラメーターの定義の詳細については、[TeamCity プロジェクト階層のドキュメント][9]を参照してください。
+
+4. プラグインを有効にするには、{{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Plugins{{< /ui >}} ページで {{< ui >}}Enable uploaded plugins{{< /ui >}} をクリックします。
+または、TeamCity サーバーを再起動します。
+
+## 高度な構成 {#advanced-configuration}
+
+### Git ユーザー情報を構成する {#configure-git-user-information}
+
+プラグインは、[TeamCity ユーザー名スタイル][7]に基づいて Git の作成者名とメールアドレスを取得します。Datadog では、{{< ui >}}Author Name and Email{{< /ui >}} または {{< ui >}}Author Email{{< /ui >}} のユーザー名スタイルを使用することを推奨しています。これらは
+ユーザーのメールアドレスに関する情報を提供するためです。
+
+他のユーザー名スタイル ({{< ui >}}UserId{{< /ui >}} または {{< ui >}}Author Name{{< /ui >}}) が使用されている場合、プラグインはユーザー名に `@Teamcity` を追加して、ユーザーのメールアドレスを自動的に生成します。たとえば、{{< ui >}}UserId{{< /ui >}} ユーザー名スタイルが使用され、Git の作成者ユーザー名が `john.doe` である場合、プラグインは Git の作成者メールアドレスとして `john.doe@Teamcity` を生成します。ユーザー名のスタイルは [VCS Roots][11] に対して定義されており、VCS Root 設定で変更できます。
+
+<div class="alert alert-danger"> Git の作成者メールアドレスは、
+<a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility">課金目的</a>で使用されるため、
+メールアドレスを提供しないユーザー名スタイル
+(<strong>UserId</strong> または<strong>作成者名</strong>) が使用されるとコストに影響する可能性があります。ユースケースについてご質問がある場合は、<a href="/help/">Datadog のサポートチームまでお問い合わせください</a>。
 </div>
 
-## プラグインリポジトリ
+## Datadog でパイプラインデータを視覚化する {#visualize-pipeline-data-in-datadog}
 
-Datadog CI Integration プラグインの[ソースコード][8]は、Apache 2.0 ライセンスでオープンソース化されています。
+パイプラインが終了した後に、[**CI パイプラインリスト**][3]および[**実行**][4]ページでデータを確認できます。
 
-## トラブルシューティング
+[{{< ui >}}CI Pipeline List{{< /ui >}}] (CI パイプラインリスト) ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。詳しくは、[CI パイプラインの検索と管理][12]を参照してください。
 
-Datadog CI Integration プラグインによって生成されたすべてのログは `teamcity-server.log` ファイルに保存され、TeamCity Server から **Administration** -> **Diagnostic** -> **Server Logs** にアクセスしてアクセスすることが可能です。これらのログを確認することで、プラグインに関する問題についての追加情報を得ることができます。
+## トラブルシューティング {#troubleshooting}
 
-## 参考資料
+Datadog CI Integration プラグインによって生成されたすべてのログは `teamcity-server.log` ファイル内に保存され、
+{{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Diagnostic{{< /ui >}} -> {{< ui >}}Server Logs{{< /ui >}} に移動して TeamCity サーバーからアクセスできます。
+プラグインに関する問題の追加コンテキストを取得するには、これらのログをチェックしてください。
+
+### テスト実行が TeamCity ジョブにリンクされていない {#test-runs-are-not-linked-to-teamcity-jobs}
+
+Datadog CI Integration プラグインは、TeamCity パイプラインまたはジョブの実行と Test Optimization のテスト実行を関連付けません。対応する CI Visibility ジョブが**テスト実行: 0** と表示されている間、テストが Test Optimization に表示される場合があります。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -98,11 +112,13 @@ Datadog CI Integration プラグインによって生成されたすべてのロ
 [6]: https://www.jetbrains.com/help/teamcity/composite-build-configuration.html
 [7]: https://www.jetbrains.com/help/teamcity/git.html#General+Settings
 [8]: https://github.com/DataDog/ci-teamcity-plugin
-[9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
-[10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
-[11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
-[12]: https://docs.datadoghq.com/ja/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[9]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Project+Hierarchy
+[10]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Root+Project
+[11]: https://www.jetbrains.com/help/teamcity/configuring-vcs-roots.html
+[12]: /ja/continuous_integration/search/#search-for-pipelines
 [13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
 [14]: /ja/glossary/#partial-retry
 [15]: /ja/glossary/#queue-time
 [16]: /ja/glossary/#pipeline-failure
+[17]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /ja/glossary/#pipeline-execution-time

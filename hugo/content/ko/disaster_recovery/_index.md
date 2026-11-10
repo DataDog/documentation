@@ -4,11 +4,15 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/ddr-mitigates-cloud-provider-outages/
   tag: 블로그
-  text: Datadog Disaster Recovery는 클라우드 제공업체 중단 문제 완화
+  text: Datadog Disaster Recovery로 클라우드 공급자 중단 문제 완화하기
 site_support_id: datadog_disaster_recovery
 title: Datadog Disaster Recovery
 ---
-Datadog Disaster Recovery(DDR)는 클라우드 제공업체 리전이나 해당 리전 내 Datadog 서비스에 장애가 발생하더라도 관측 가능성을 유지합니다. DDR을 사용하면 다른 리전에 보조 Datadog 조직을 미리 구성하고 리소스를 복제할 수 있습니다. 장애 조치를 수행하면 보조 사이트에 팀에 필요한 대시보드, 모니터, 사용자가 이미 준비되어 있습니다.
+{{< callout header="제한적 제공" url="#" btn_hidden="true" >}}
+Datadog Disaster Recovery는 현재 제한적으로 제공됩니다. 조직의 제공 가능 여부를 확인하려면 Datadog 계정 팀에 문의하세요.
+{{< /callout >}}
+
+Datadog Disaster Recovery(DDR)는 클라우드 공급자 리전이나 해당 리전 내 Datadog 서비스에 장애가 발생하더라도 관측 가능성을 유지합니다. DDR을 사용하면 다른 리전에 보조 Datadog 조직을 미리 구성하고 리소스를 복제할 수 있습니다. 장애 조치를 수행하면 보조 사이트에 팀에 필요한 대시보드, 모니터, 사용자가 이미 준비되어 있습니다.
 
 DDR은 액티브-패시브 모델을 사용합니다. 보조 사이트는 동기화된 상태를 유지하지만 장애 조치를 결정하기 전까지는 패시브 상태로 유지됩니다. 장애 조치는 자동으로 수행되지 않으며, 전환 시점은 사용자가 직접 선택합니다.
 
@@ -119,7 +123,7 @@ Datadog은 오픈 소스 [datadog-sync-cli][8] 도구를 사용하여 사용자�
 
 [Remote Configuration(RC)][11]을 사용하면 인프라에 배포된 Datadog Agent의 동작을 원격으로 구성하고 변경할 수 있습니다.
 
-Remote Configuration은 사용자의 DDR 조직을 포함한 새 조직에서 기본적으로 활성화됩니다. 새로 생성하는 모든 API 키는 Agent와 함께 사용할 수 있도록 RC가 활성화됩니다. 자세한 내용은 [Remote Configuration 설명서][11]를 참조하세요.
+Remote Configuration은 사용자의 DDR 조직을 포함한 새 조직에서 기본적으로 활성화됩니다. 새로 생성하는 모든 API 키는 Agent와 함께 사용할 수 있도록 RC가 활성화됩니다. 자세한 내용은 [Remote Configuration 문서][11]를 참조하세요.
 
 Datadog에서는 장애 조치를 보다 효과적으로 제어하기 위해 Remote Configuration 사용을 강력히 권장합니다. RC의 대안으로 Agent를 수동으로 구성하거나 Puppet, Ansible 또는 Chef와 같은 구성 관리 도구를 사용할 수도 있습니다.
 
@@ -144,7 +148,7 @@ DDR 조직의 [Fleet Automation][100] > {{< ui >}}Configure Agents{{< /ui >}}로
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="장애 조치에 필요한 호스트 및 텔레메트리 범위 지정" style="width:80%;" >}}
 
-<div class="alert alert-danger">Cloud Integrations는 기본 또는 DDR Datadog 사이트 중 한 곳에서만 실행할 수 있으며, 두 사이트에서 동시에 실행할 수는 없습니다. 따라서 장애 조치를 수행하면 기본 사이트에서는 Cloud Integration 데이터 수집이 중단됩니다. <strong>통합 장애 조치 중에는 Integrations가 DDR 데이터 센터에서만 실행됩니다.</strong> 장애 조치가 해제되면 통합 데이터를 기본 조직에서 다시 수집하도록 장애 조치 정책을 비활성화합니다.</div>
+<div class="alert alert-danger">클라우드 통합은 기본 또는 DDR Datadog 사이트 중 한 곳에서만 실행할 수 있으며, 두 사이트에서 동시에 실행할 수는 없습니다. 따라서 장애 조치를 수행하면 기본 사이트에서는 클라우드 통합 데이터 수집이 중단됩니다. <strong>통합 장애 조치 중에는 통합이 DDR 데이터 센터에서만 실행됩니다.</strong> 장애 조치가 해제되면 통합 데이터를 기본 조직에서 다시 수집하도록 장애 조치 정책을 비활성화합니다.</div>
 
 [100]: https://app.datadoghq.com/fleet
 
@@ -152,11 +156,11 @@ DDR 조직의 [Fleet Automation][100] > {{< ui >}}Configure Agents{{< /ui >}}로
 
 {{% tab "수동으로" %}}
 
-장애 조치 또는 장애 조치 훈련 중에 아래 예시와 같이 Datadog Agent의 `datadog.yaml` 구성 파일을 업데이트하고 Agent를 다시 시작합니다.
+장애 조치 또는 장애 조치 훈련 중에 아래 예시와 같이 Datadog Agent의 `datadog.yaml` 구성 파일을 업데이트하고 Agent를 다시 시작하세요.
 
-- `enabled: true` 는 Agent가 {{< tooltip text="metadata" tooltip="Agent 및 인프라 호스트에 대한 데이터입니다. 예: `host name`, `host tags`, `Agent version`" >}} 를 DDR Datadog 사이트로 전송하여 DDR 조직에서 Agent 및 인프라 호스트를 조회할 수 있도록 합니다. 이를 통해 장애 조치 조직에서 Agent 및 인프라 호스트를 확인할 수 있습니다.
+- `enabled: true`는 Agent가 {{< tooltip text="metadata" tooltip="Agent 및 인프라 호스트에 대한 데이터입니다. 예: `host name`, `host tags`, `Agent version`" >}} 정보를 DDR Datadog 사이트로 전송하여 DDR 조직에서 Agent 및 인프라 호스트를 조회할 수 있도록 합니다. 이를 통해 장애 조치 조직에서 Agent 및 인프라 호스트를 확인할 수 있습니다.
 
-- `failover_metrics`, `failover_logs` 및 `failover_apm`은 기본적으로 `false`입니다. 이를 `true`로 설정하면 Agent가 DDR 조직으로 {{< tooltip text="telemetry" tooltip="Datadog 플랫폼으로 전송되는 데이터입니다. 예: `logs`, `metrics`, `traces`" >}} 전송을 시작합니다.
+- `failover_metrics`, `failover_logs` 및 `failover_apm`은 `false`가 기본값 입니다. 이를 `true`로 설정하면 Agent가 DDR 조직으로 {{< tooltip text="telemetry" tooltip="Datadog 플랫폼으로 전송되는 데이터입니다. 예: `logs`, `metrics`, `traces`" >}} 전송을 시작합니다.
 
 ```shell
 multi_region_failover:
@@ -264,17 +268,17 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Cloud Integrations에서 DDR 장애 조치 활성화 및 테스트" level="h4" id="id-for-cloud" %}}
+{{% collapse-content title="클라우드 통합에서 DDR 장애 조치 활성화 및 테스트" level="h4" id="id-for-cloud" %}}
 
-DDR 조직의 랜딩 페이지에서 Cloud Integrations의 장애 조치를 테스트할 수 있습니다.
+DDR 조직의 랜딩 페이지에서 클라우드 통합의 장애 조치를 테스트할 수 있습니다.
 
 {{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="DDR 조직에서 장애 조치 정책 활성화" style="width:80%;" >}}
 
-장애 조치 랜딩 페이지에서 DDR 조직의 상태를 확인하거나 {{< ui >}}Fail over your integrations{{< /ui >}}를 클릭하여 Cloud Integrations의 장애 조치를 테스트할 수 있습니다.
+장애 조치 랜딩 페이지에서 DDR 조직의 상태를 확인하거나 {{< ui >}}Fail over your integrations{{< /ui >}}를 클릭하여 클라우드 통합의 장애 조치를 테스트할 수 있습니다.
 
 장애 조치가 해제되면 DDR 조직에서 **장애 조치 정책을 비활성화**하여 통합 데이터를 기본 조직에서 다시 수집합니다.
 
-테스트 중에는 통합 텔레메트리가 두 조직에 분산되어 전송됩니다. 장애 조치 테스트를 취소하면 Integrations가 다시 기본 데이터 센터에서 실행됩니다.
+테스트 중에는 통합 텔레메트리가 두 조직에 분산되어 전송됩니다. 장애 조치 테스트를 취소하면 통합이 다시 기본 데이터 센터에서 실행됩니다.
 
 {{% /collapse-content %}}
 

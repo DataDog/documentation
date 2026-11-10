@@ -1,6 +1,6 @@
 ---
 title: Evaluations
-description: Learn how to configure Evaluations for your LLM application.
+description: Learn how to configure Evaluators for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
@@ -16,15 +16,15 @@ further_reading:
 
 ## Overview
 
-Agent Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability offers several ways to support evaluations. Evaluators can be configured by navigating to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
 
-### Custom LLM-as-a-judge evaluations
+### Custom LLM-as-a-judge evaluators
 
-[Custom LLM-as-a-judge evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
+[Custom LLM-as-a-judge evaluators][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluators to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
 
-### Managed evaluations
+### Managed evaluators
 
-Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the Agent Observability application.
+Datadog builds and supports [managed evaluators][2] to support common use cases. You can enable and configure them within the Agent Observability application.
 
 ### Submit end-user feedback
 
@@ -36,7 +36,7 @@ You can also submit [external evaluations][3] using Datadog's API. Use this appr
 
 ### Building custom evaluators
 
-For developers building custom evaluators, see the [Evaluation Developer Guide][10].
+For developers building custom evaluators, see the [Evaluator Developer Guide][10].
 
 ### Evaluation integrations
 
@@ -58,7 +58,9 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 ### Permissions
 
-[`Agent Observability Write` permissions][7] are necessary to configure evaluations.
+[`Agent Observability Write` permissions][7] are necessary to configure evaluators.
+
+To restrict an application's evaluator configs to specific teams or roles, see [Data Access Control in Agent Observability][14].
 
 ### Retrieving spans
 
@@ -80,3 +82,4 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 [11]: /llm_observability/investigate/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /llm_observability/investigate/evaluations/end_user_feedback
+[14]: /llm_observability/data_governance/access_control/

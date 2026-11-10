@@ -29,7 +29,7 @@ Set up CI Visibility for AWS CodePipeline to collect data about pipeline executi
 |---|---|---|
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
 | *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#collect-job-logs). |
+| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 | [Custom spans][18] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
@@ -122,13 +122,13 @@ The event pattern sets up the integration only for the `first-pipeline` and `sec
 
 If you are using [Test Optimization][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
 
-### Collect job logs
+### Logs Storage
 
-The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
+The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable Logs Storage for your CodeBuild actions, see the [AWS log forwarding guide][16].
 
 <div class="alert alert-warning">If you use custom CloudWatch log group or log stream names for your CodeBuild actions, enable <a href="/integrations/amazon_web_services/#resource-collection">Cloud Resource Collection</a> in the AWS integration so that Datadog can resolve the custom log group and stream configuration.</div>
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][21]. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
 
 ### Add the pipeline execution ID as an environment variable
 
@@ -170,3 +170,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [18]: /glossary/#custom-span
 [19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [20]: /glossary/#pipeline-execution-time
+[21]: /logs/guide/best-practices-for-log-management/

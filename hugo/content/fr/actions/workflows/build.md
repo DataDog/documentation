@@ -136,18 +136,26 @@ Vous pouvez configurer votre workflow pour qu'il vous envoie une notification en
 - PagerDuty
 - E-mail
 
+Les notifications sont configurées depuis l'éditeur de workflow, à l'un des emplacements suivants :
+- Cliquez sur le nom du workflow en haut de l'éditeur pour ouvrir la fenêtre contextuelle du titre du workflow, puis faites défiler jusqu'à la section {{< ui >}}Notifications{{< /ui >}}.
+- Cliquez sur {{< ui >}}cog icon{{< /ui >}} dans le coin supérieur droit de l'éditeur et sélectionnez {{< ui >}}Edit permissions{{< /ui >}}. La section {{< ui >}}Notifications{{< /ui >}} se trouve en bas de la fenêtre modale.
+
+Les modifications effectuées depuis la fenêtre contextuelle du titre du workflow sont enregistrées immédiatement. Les modifications effectuées depuis {{< ui >}}Edit permissions{{< /ui >}} la fenêtre modale sont appliquées lorsque vous cliquez sur {{< ui >}}Save{{< /ui >}}.
+
 Pour ajouter une notification :
-1. Dans le panneau de configuration du workflow, faites défiler jusqu'à la section {{< ui >}}Notifications{{< /ui >}}.
+1. Ouvrez {{< ui >}}Notifications{{< /ui >}} la section en utilisant l'une des méthodes décrites ci-dessus.
 1. Pour ajouter une notification si le workflow réussit :
-   1. Cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}) à côté de {{< ui >}}Notify on success{{< /ui >}}.
+   1. Cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}) à côté de {{< ui >}}On success{{< /ui >}}, ou cliquez sur {{< ui >}}Add success notification{{< /ui >}} si aucune notification de succès n'est encore configurée.
    1. Sélectionnez l'intégration que vous souhaitez utiliser pour les notifications.
    1. Remplissez les champs requis pour l'intégration spécifiée.
-   1. Cliquez sur {{< ui >}}Save{{< /ui >}} pour enregistrer votre workflow.
+   1. Cliquez sur {{< ui >}}Save{{< /ui >}} pour ajouter la notification.
 1. Pour ajouter une notification si le workflow échoue :
-   1. Cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}) à côté de {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}) à côté de {{< ui >}}On failure{{< /ui >}}, ou cliquez sur {{< ui >}}Add failure notification{{< /ui >}} si aucune notification d'échec n'est encore configurée.
    1. Sélectionnez l'intégration que vous souhaitez utiliser pour les notifications.
    1. Remplissez les champs requis pour l'intégration spécifiée.
-   1. Cliquez sur {{< ui >}}Save{{< /ui >}} pour enregistrer votre workflow.
+   1. Cliquez sur {{< ui >}}Save{{< /ui >}} pour ajouter la notification.
+
+Pour modifier ou supprimer une notification existante, cliquez dessus dans {{< ui >}}Notifications{{< /ui >}} la section et mettez à jour ses champs, ou utilisez son icône de suppression pour la supprimer.
 
 ## Gestion des erreurs {#error-handling}
 

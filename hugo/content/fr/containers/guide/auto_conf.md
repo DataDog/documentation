@@ -109,6 +109,19 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 {{% /tab %}}
 {{< /tabs >}}
 
+## Découverte de configuration {#configuration-discovery}
+
+À partir de la version 7.82 de l'Agent, plusieurs intégrations (par exemple, [Pulsar][48]) sont livrées avec des fichiers `auto_conf.yaml` qui contiennent un champ `discovery` et une liste `instances` vide. Dans ces cas, l'Agent tente de créer une configuration valide pour l'intégration au moment de l'exécution en examinant le service. Chaque intégration définit sa propre méthode de découverte. Par exemple, une intégration peut sonder les ports exposés du conteneur à la recherche d'un endpoint de métriques, ou utiliser le nom du conteneur pour distinguer les composants qui partagent la même image. Si une configuration valide est trouvée, l'Agent planifie une instance de check.
+
+Pour éviter les métriques en double, l'Agent ignore la découverte de configuration pour une intégration s'il existe :
+- toute instance de la même intégration configurée pour le même conteneur ou au niveau du host
+- toute instance d'un check OpenMetrics ou Prometheus générique configuré pour le même conteneur
+- toute instance au niveau du host d'un check OpenMetrics ou Prometheus générique qui émet des métriques sous le même espace de noms racine que l'intégration
+
+De plus, à partir de la version 7.83 de l'Agent, toutes les instances de check créées par ce mécanisme incluent le tag `dd_config_discovery:true` dans leurs métriques. Utilisez ce tag pour identifier ou exclure ces métriques dans les requêtes.
+
+Pour empêcher la découverte de configuration pour une intégration, [désactivez sa configuration automatique](#disable-auto-configuration).
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -160,3 +173,4 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [45]: /fr/containers/kubernetes/integrations/?tab=annotations#configuration
 [46]: /fr/containers/docker/integrations/
 [47]: /fr/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+[48]: https://github.com/DataDog/integrations-core/tree/master/pulsar/datadog_checks/pulsar/data/auto_conf.yaml

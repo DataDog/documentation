@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40545
+    operations:
+      - GetGovernanceControl
+      - ListGovernanceControls
+      - UpdateGovernanceControl
+    title: Allow null default_value in governance control parameter definitions

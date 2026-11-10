@@ -17,6 +17,9 @@ further_reading:
   text: 연결
 title: 실행 정책
 ---
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">실행 정책은 귀하의 <a href="/getting_started/site">Datadog 사이트</a>에서는 지원되지 않습니다 ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## 개요 {#overview}
 
 실행 정책을 통해 팀원에 대한 정보, 작업 실행 위치, 그리고 실행할 수 있는 작업을 제어할 수 있습니다. 각 실행 정책은 액션 집합에 대한 단일 허용/거부 규칙과 규칙이 적용되는 Agent로 구성됩니다. Agent 태그를 통해 해당 Agent를 선택합니다. 실행 정책은 프라이빗 액션 권한을 부여할 때 다음 두 가지 주요 이점을 제공합니다.

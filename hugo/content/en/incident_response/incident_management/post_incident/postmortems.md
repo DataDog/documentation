@@ -24,7 +24,7 @@ A postmortem is a structured document that captures what happened during an inci
 - Drive accountability for remediation work
 - Build organizational knowledge to reduce the frequency and severity of future incidents
 
-Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems to [Datadog Notebooks][1], [Confluence][2], or [Google Drive][3]. Postmortems generated as Datadog Notebooks embed directly in the Post-Incident tab, where you can view, edit, and track their status and ownership without leaving the incident.
+Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems to [Datadog Notebooks][1], [Notion][8], [Confluence][2], or [Google Drive][3]. Postmortems generated as Datadog Notebooks embed directly in the Post-Incident tab, where you can view, edit, and track their status and ownership without leaving the incident.
 
 ## Permissions
 
@@ -58,8 +58,29 @@ For the full list of variables available to postmortem templates, see [Templates
 View and edit your postmortem based on its destination:
 
 - **Datadog Notebooks**: Embedded in the **Post-Incident** tab. Read and edit without leaving Datadog. Multiple users can edit simultaneously with cursor markers. Add inline comments. Changes are reflected in the underlying notebook.
+- **Notion**: Edit in Notion (click the link in the **Post-Incident** tab to open your Notion workspace).
 - **Confluence**: Edit in Confluence (click the link in the **Post-Incident** tab to open your Confluence workspace).
 - **Google Drive**: Edit in Google Docs (click the link in the **Post-Incident** tab to open Google Docs).
+
+## Convert timestamps to date chips
+
+Postmortems often record times as plain text, such as `Jul 23, 4:30 pm UTC`. You can convert this text into [date chips][7], which display the time in each reader's own time zone.
+
+Times in a postmortem are often recorded in different time zones by different responders. Conversion makes them uniform. As long as each time states its time zone, you do not need to standardize times by hand while drafting.
+
+This option is available on notebooks with the **Postmortem** notebook type.
+
+To convert timestamps in a postmortem:
+
+1. Open the postmortem notebook.
+1. Click the kebab menu in the upper right and select **Convert timestamps**.
+1. Review the detected timestamps. Each entry shows the original text and the resolved time. If a timestamp has no explicit offset, Datadog interprets it in the time zone of the person performing the conversion. If it has no year, Datadog infers one.
+1. Clear the checkbox for any timestamp you want to leave as plain text.
+1. Click **Convert**.
+
+{{< img src="/incident_response/incident_management/post_incident/postmortems/convert_timestamps.png" alt="The Convert timestamps dialog listing detected timestamps with checkboxes, each showing the time it resolves to." style="width:80%;" >}}
+
+**Note**: Datadog doesn't convert datetime text that's part of a link, such as a link to an event in the incident timeline. A date chip cannot also be a link.
 
 ## Postmortem status and owner
 
@@ -104,3 +125,5 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [4]: /incident_response/incident_management/setup_and_configuration/templates
 [5]: /actions/workflows/
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#incident-variables
+[7]: /notebooks/#smart-chips
+[8]: /integrations/notion/

@@ -3,133 +3,146 @@ aliases:
 - /fr/logs/historical-views
 - /fr/logs/archives/rehydrating/
 description: Enregistrez des événements de log depuis vos archives dans Datadog.
+further_reading:
+- link: logs/archives
+  tag: Documentation
+  text: Documentation des archives de logs
+- link: /logs/explorer/archive_search/
+  tag: Documentation
+  text: Archive Search
 title: Réintégration à partir des archives
 ---
+<div class="alert alert-info">
+<strong><a href="/logs/explorer/archive_search/">Archive Search</a> est le moyen recommandé pour accéder aux logs archivés.</strong><br>
+Elle diffuse les résultats en temps réel directement depuis votre archive sans réindexation, et ne facture que les données analysées. Lorsque vous avez besoin d'un accès complet à la plateforme ou d'une rétention plus longue, utilisez le mode <strong>Search & Rehydration</strong> d'Archive Search.
+</div>
 
-## Présentation
+## Présentation {#overview}
 
-La fonction Log Rehydration* vous permet d'enregistrer des événements de log depuis les archives optimisées pour le stockage des clients dans le [Log Explorer][1] de Datadog, un produit spécialement conçu pour les recherches. Vous pouvez ainsi utiliser Datadog pour analyser ou rechercher des événements de log trop vieux ou exclus de l'indexation.
+La fonction Log Rehydration* vous permet de capturer des événements de log depuis les archives optimisées pour le stockage dont le client est propriétaire dans le [Log Explorer][1] de Datadog optimisé pour la recherche. Vous pouvez alors utiliser Datadog pour analyser ou rechercher des événements de log qui sont soit trop vieux soit exclus de l'indexage.
 
-## Vues historiques
+### Vues historiques {#historical-views}
 
-Grâce aux vues historiques, les équipes réintègrent des événements de log archivés en définissant une période et un filtre de requête afin de répondre efficacement à des cas d'utilisation spécifiques et inattendus.
+Avec les vues historiques, les équipes réhydratent les événements de log archivés par plage temporelle et filtre de requête pour répondre efficacement à des cas d'utilisation spécifiques et imprévus. En créant des vues historiques avec des requêtes spécifiques (par exemple, sur un ou plusieurs services, endpoints d'URL ou identifiants client), vous pouvez réduire le temps et le coût liés à la réhydratation de vos logs. Ceci est particulièrement utile lors de la réhydratation sur des plages temporelles plus larges.
 
-Pour créer une vue historique :
+**Fonctionnalités clés :**
+- Réhydratez jusqu'à 1 milliard d'événements de log par vue historique
+- Les filtres d'exclusion d'index ne s'appliquent pas aux vues historiques, il n'est donc pas nécessaire de modifier les filtres d'exclusion lorsque vous réhydratez à partir des archives
+- Si vous téléchargez des vues historiques au format CSV, les données sont limitées aux 90 derniers jours
 
-1. Accédez à la [page de configuration][2] de votre compte Datadog.
-2. Sélectionnez l'onglet [**Rehydrate From Archives**][3].
-3. Cliquez sur **New Historical View**.
+## Prérequis {#prerequisites}
 
-Les filtres d'exclusion d'index ne s'appliquent pas aux vues historiques. Vous n'avez donc pas besoin de modifier vos filtres d'exclusion lorsque vous réintégrez du contenu depuis les archives.
+Avant de pouvoir réhydrater des logs à partir des archives, vous devez effectuer les étapes de configuration suivantes :
 
-Si vous téléchargez des vues historiques au format CSV, les données sont limitées aux 90 derniers jours.
+### Configuration des archives {#archive-configuration}
 
-### Ajouter des vues historiques
+Vous devez disposer d'une archive externe configurée pour y réhydrater des données. Pour archiver vos logs dans les destinations disponibles (Amazon S3, Azure Storage ou Google Cloud Storage), consultez [Log Archives][8].
 
-1. **Choisissez l'intervalle** pour laquelle vous souhaitez réintégrer des événements de log.
+### Autorisations et authentification {#permissions-and-authentication}
 
-2. **Sélectionnez l'archive** depuis laquelle vous souhaitez réintégrer les événements de log. Seules les archives [configurées pour utiliser la délégation de rôles](#autorisations) peuvent être réintégrées.
+Datadog nécessite l'autorisation de lire vos archives pour réhydrater le contenu. Les archives doivent être configurées avec une authentification appropriée :
 
-3. (Facultatif) **Estimez la taille des scans** pour obtenir le volume total de données compressées contenues dans votre archive pour la période sélectionnée.
+- **S3** : Vous devez utiliser la délégation de rôle (rôles IAM).
+- **Azure Storage** : Vous devez utiliser Microsoft Entra ID avec le rôle Storage Blob Data Contributor.
+- **Google Cloud Storage** : Vous devez utiliser un compte de service avec le rôle Lecteur des objets de stockage.
 
-4. **Nommez votre vue historique**. Les noms doivent commencer par une lettre minuscule et ne peuvent contenir que des lettres minuscules, des nombres et le caractère `-` (tiret).
+Seules les archives disposant d'une authentification appropriée sont disponibles pour la réhydratation. Pour des instructions de configuration détaillées, consultez [les autorisations spécifiques au cloud](#cloud-specific-permissions).
 
-5. **Saisissez la requête**. La syntaxe de requête est identique à celle des [recherches dans le Log Explorer][4]. Assurez-vous que vos logs sont [archivés avec leurs tags][5] si vous utilisez des tags (tels que `env:prod` ou `version:x.y.z`) dans la requête de réintégration.
+## Réhydratation des logs avec des vues historiques {#rehydrating-logs-with-historical-views}
 
-6. Définissez le nombre maximal de logs devant être réintégrés dans cette vue historique. Si vous atteignez la limite de réintégration, le rechargement s'arrête, mais vous pouvez toujours accéder aux logs réintégrés.
+1. Accédez à la page [Réhydratation][3].
+2. Cliquez sur {{< ui >}}New Historical View{{< /ui >}}.
+3. Sélectionnez la période pour la réhydratation.
+4. Choisissez l'archive à partir de laquelle vous souhaitez réhydrater les événements de log. Seules les archives [configurées pour utiliser la délégation de rôle](#permissions) sont disponibles pour la réhydratation.
+5. (Facultatif) Estimez la taille de l'analyse et obtenez la quantité totale de données compressées contenues dans votre archive pour la période sélectionnée.
+6. Nommez votre vue historique. Les noms doivent commencer par une lettre minuscule et ne peuvent contenir que des lettres minuscules, des chiffres et le caractère `-`.
+7. Définissez la requête d'indexation à l'aide de la [syntaxe de recherche du Log Explorer][4]. Assurez-vous que vos logs sont [archivés avec leurs tags][5] si vous utilisez des tags (tels que `env:prod` ou `version:x.y.z`) dans la requête de réhydratation.
+8. Définissez la limite de logs (nombre maximal de logs à réhydrater). Lorsque la limite de réhydratation est atteinte, le rechargement des logs s'arrête, mais vous avez toujours accès aux logs réhydratés.
+9. Définissez la période de rétention des logs réhydratés. Cela définit la durée pendant laquelle les logs réhydratés restent consultables. Les rétentions disponibles sont basées sur votre contrat, la valeur par défaut est de 15 jours.
+10. (Facultatif) [Configurez les notifications de fin](#rehydration-notifications) via [integrations][6] avec la syntaxe @handle.
 
-7. Définissez la période de rétention des logs réintégrés (les rétentions disponibles dépendent de votre contrat ; elle est de 15 jours par défaut).
+Pour plus d'informations sur la taille de scan de réhydratation, consultez [Comprendre les tailles de scan de réhydratation](#understanding-rehydration-scan-sizes).
 
-8. (Facultatif) **Recevez une notification** à la fin du processus de réintégration grâce aux [intégrations][6] en utilisant la syntaxe @nom.
 
-{{< img src="logs/archives/log_rehydration_setup.png" alt="Réintégration depuis une archive" style="width:75%;">}}
+## Gestion des vues historiques {#historical-views-management}
 
-**Remarque** : la requête est appliquée _après_ que les fichiers correspondant à l'intervalle ont été téléchargés depuis votre archive. Pour réduire vos coûts de transfert de données cloud, réduisez la plage de dates sélectionnée.
+### Affichage du contenu d'une vue historique {#viewing-historical-view-content}
 
-#### Réintégration à l'aide d'une requête
+**Depuis la page de vue historique** :
+Après avoir sélectionné « Rehydrate from Archive », la vue historique est marquée comme « PENDING » jusqu'à ce que son contenu soit prêt à être interrogé.
 
-Créez des vues historiques avec des requêtes spécifiques (par exemple, sur un ou plusieurs services, endpoints d'URL ou ID clients) pour réduire la durée et les coûts de réintégration de vos logs. Cette méthode est particulièrement utile lorsque vous cherchez à réintégrer des logs sur un large intervalle. Vous pouvez réintégrer jusqu'à 1 milliard d'événements de logs par vue historique créée.
+Une fois le contenu réhydraté, la vue historique est marquée comme « ACTIVE » et le lien dans la colonne de requête mène à la Log Explorer.
 
-#### Notification
+**Depuis le Log Explorer** :
+Dans le Log Explorer, ouvrez la facette {{< ui >}}Index{{< /ui >}} dans le sélecteur d'index. Sélectionnez les index historiques à inclure dans votre recherche.
 
-Des événements se déclenchent automatiquement au début et à la fin de la réintégration. Ces événements sont disponibles dans votre [Events Explorer][7].
+{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="90%">}}
 
-Lorsque vous créez une vue historique, vous pouvez utiliser les template variables intégrées pour personnaliser la notification déclenchée à la fin de la réintégration :
+### Annulation des vues historiques en cours {#canceling-ongoing-historical-views}
+
+Annulez les réhydratations en cours depuis la page [Rehydration][3] pour arrêter les jobs avec des plages temporelles incorrectes ou des fautes de frappe dans la requête d'indexation.
+
+Les logs qui ont déjà été indexés restent interrogeables jusqu'à la fin de la période de rétention sélectionnée pour la vue historique. Tous les logs scannés et indexés seront toujours facturés.
+
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Annulation des réhydratations de vues historiques en cours dans Datadog" width="90%" >}}
+
+### Suppression des vues historiques {#deleting-historical-views}
+
+Les vues historiques restent dans Datadog jusqu'à ce qu'elles dépassent la période de rétention sélectionnée, à moins que vous ne choisissiez de les supprimer plus tôt. Pour supprimer manuellement une vue historique, sélectionnez l'icône de suppression à l'extrême droite de la vue et confirmez l'action.
+
+La vue historique est définitivement supprimée un jour après le lancement de la suppression. D'ici là, l'équipe peut annuler la suppression.
+
+### Affichage des vues historiques supprimées {#viewing-deleted-historical-views}
+
+Affichez les vues historiques supprimées jusqu'à 1 an dans le passé à l'aide du menu déroulant {{< ui >}}View{{< /ui >}} :
+
+{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Affichage des vues historiques supprimées dans Datadog" width="90%" >}}
+
+## Configuration avancée {#advanced-configuration}
+
+### Notifications de réhydratation {#rehydration-notifications}
+
+Les événements sont déclenchés automatiquement lorsqu'une réhydratation commence et se termine. Ces événements sont disponibles dans votre [Events Explorer][7].
+
+Vous pouvez utiliser les variables de modèle intégrées pour personnaliser la notification déclenchée à la fin de la réhydratation :
 
 | Variable                      | Description                                                                  |
 |-------------------------------|------------------------------------------------------------------------------|
-| `{{archive}}`                 | Nom des archives utilisées pour la réintégration.                           |
-| `{{from}}`                    | Début de l'intervalle sélectionné pour la réintégration.                    |
-| `{{to}}`                      | Fin de l'intervalle sélectionné pour la réintégration.                      |
-| `{{scan_size}}`               | Taille totale des fichiers traités pendant la réintégration.                |
-| `{{number_of_indexed_logs}}`  | Nombre total de logs réintégrés.                                         |
-| `{{explorer_url}}`            | Lien direct vers les logs réintégrés.                                      |
+| `{{archive}}`                 | Name of the archives used for the rehydration.                           |
+| `{{from}}`                    | Start of the time range selected for the rehydration.                    |
+| `{{to}}`                      | End of the time range selected for the rehydration.                      |
+| `{{scan_size}}`               | Total size of the files processed during the rehydration.                |
+| `{{number_of_indexed_logs}}`  | Total number of rehydrated logs.                                         |
+| `{{explorer_url}}`            | Lien direct vers les logs réhydratés.                                      |
 
-### Afficher le contenu d'une vue historique
+### Limite par défaut pour les vues historiques {#default-limit-for-historical-views}
 
-#### Depuis la page de la vue historique
+Les administrateurs disposant de l'autorisation `Logs Write Archives` peuvent configurer des contrôles par défaut pour garantir une utilisation efficace de Log Rehydration* au sein des équipes. Cliquez sur {{< ui >}}Settings{{< /ui >}} pour configurer :
 
-Lorsque vous sélectionnez « Rehydrate from Archive », la vue historique est marquée comme « pending » jusqu'à ce que son contenu puisse être interrogé.
+- {{< ui >}}Default Rehydration volume limit{{< /ui >}} : Définissez le nombre par défaut de logs (en millions) pouvant être réhydratés par vue historique. Si la limite est atteinte, la réhydratation s'arrête automatiquement, mais les logs déjà réhydratés restent accessibles. Les administrateurs peuvent également autoriser le dépassement de cette limite lors de la création d'une vue.
 
-Une fois le contenu réintégré, la vue historique est considérée comme active, et le lien dans la colonne de la requête redirige vers la vue historique, dans le Log Explorer.
+- {{< ui >}}Rehydration retention periods{{< /ui >}} : Choisissez les périodes de rétention disponibles lors de la création de réhydratations. Seules les durées sélectionnées (par exemple, 3, 7, 15, 30, 45, 60, 90 ou 180 jours) apparaissent dans le menu déroulant lors de la sélection de la durée pendant laquelle les logs doivent rester consultables dans Datadog.
 
-#### Depuis le Log Explorer
+### Permissions spécifiques au cloud {#cloud-specific-permissions}
 
-Vous pouvez également accéder directement à la vue historique depuis le Log Explorer, à partir du sélecteur d'index.
-
-{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
-
-### Annuler des vues historiques pour les réintégrations en cours
-
-Accédez à la page Rehydrate from Archives pour annuler des réintégrations en cours. Cette fonctionnalité vous permet d'annuler les réintégrations pour lesquelles l'intervalle ou la requête d'indexation sont incorrects.
-
-Les logs qui ont déjà été indexés demeurent interrogeables jusqu'à la fin de la période de rétention sélectionnée pour la vue historique en question. De même, tous les logs qui ont déjà été analysés et indexés vous seront facturés.
-
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Annuler des réintégrations en cours" width="75%" >}}
-
-### Supprimer des vues historiques
-
-Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que la période de rétention sélectionnée expire, mais vous pouvez aussi choisir de les supprimer plus tôt si vous n'avez plus besoin de la vue. Vous pouvez indiquer qu'une vue historique doit être supprimée en sélectionnant l'icône de suppression à droite de la vue, puis en confirmant votre choix.
-
-Après 1 jour, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 jour pour annuler la suppression.
-
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true" width="75%" >}}
-
-### Afficher des vues historiques supprimées
-
-Affichez les vues historiques supprimées jusqu'à 1 an en arrière à l'aide du menu déroulant `View` :
-
-{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Supprimer les vues historiques" width="75%" >}}
-
-## Configurer la réintégration d'archive
-
-### Définir une archive Datadog
-
-Une archive externe doit être configurée afin de pouvoir réintégrer ses données. [Suivez ce guide][8] pour archiver vos logs dans les emplacements disponibles.
-
-### Autorisations
-
-Datadog doit avoir un accès en lecture à vos archives afin de réintégrer leur contenu. Cette autorisation peut être modifiée à tout moment.
+Datadog nécessite la permission de lire vos archives pour en réhydrater le contenu. Cette permission peut être modifiée à tout moment.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
-{{< /site-region >}}
+{{% tab "Amazon S3" %}}
 
-Afin de réintégrer des événements de log depuis vos archives, Datadog utilise le rôle IAM du compte AWS que vous avez configuré pour [votre intégration AWS][1]. Si vous n'avez pas encore créé ce rôle, [suivez ces étapes pour y remédier][2]. Pour autoriser ce rôle à réintégrer des événements de log depuis vos archives, ajoutez la déclaration d'autorisation suivante à ses stratégies IAM. Veillez à modifier les noms de compartiment et, si nécessaire, spécifiez les chemins contenant vos archives de log.
+Pour réhydrater des événements de log à partir de vos archives, Datadog utilise le rôle IAM de votre compte AWS que vous avez configuré pour [votre intégration AWS][1]. Si vous n'avez pas encore créé ce rôle, [suivez ces étapes pour le faire][2]. Si ce rôle possède la stratégie issue de [Définir les permissions d'archive][4], ignorez l'instruction suivante. Sinon, ajoutez l'instruction de permission suivante aux politiques IAM du rôle. Veillez à modifier les noms des buckets et, si vous le souhaitez, à spécifier les chemins contenant vos archives de logs.
 
 ```json
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
+      "Sid": "DatadogRehydrateLogArchives",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": "s3:GetObject",
       "Resource": [
-        "arn:aws:s3:::<NOM_DU_BUCKET_1_/_CHEMIN_FACULTATIF_DU_BUCKET_1>/*",
-        "arn:aws:s3:::<NOM_DU_BUCKET_2_/_CHEMIN_FACULTATIF_DU_BUCKET_2>/*"
+        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
       ]
     },
     {
@@ -137,30 +150,31 @@ Afin de réintégrer des événements de log depuis vos archives, Datadog utilis
       "Effect": "Allow",
       "Action": "s3:ListBucket",
       "Resource": [
-        "arn:aws:s3:::<NOM_DU_BUCKET_1>",
-        "arn:aws:s3:::<NOM_DU_BUCKET_2>"
+        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
       ]
     }
   ]
 }
 ```
 
-#### Ajout de la délégation de rôles aux archives S3
+#### Ajout de la délégation de rôle aux archives S3 {#adding-role-delegation-to-s3-archives}
 
-Datadog prend uniquement en charge la réintégration des archives qui ont été configurées pour utiliser la délégation de rôle afin d'autoriser l'accès. Après avoir modifié votre rôle IAM Datadog afin d'inclure la stratégie IAM ci-dessus, vérifiez que chaque archive de votre [page de configuration des archives][3] possède la bonne combinaison de compte AWS et de rôle.
+Datadog prend en charge la réhydratation uniquement à partir d'archives utilisant la délégation de rôle pour accorder l'accès. Après avoir modifié votre rôle IAM Datadog pour inclure la stratégie IAM précédente, assurez-vous que chaque archive sur votre [page de configuration d'archive][3] dispose de la bonne combinaison Compte AWS + Rôle.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôles aux archives S3" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôle aux archives S3" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /fr/integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+[4]: /fr/logs/log_configuration/archives/?tab=awss3#set-permissions
 {{% /tab %}}
 
-{{% tab "Stockage Azure" %}}
+{{% tab "Azure Storage" %}}
 
-Datadog utilise un groupe Azure AD avec le rôle Storage Blob Data Contributor restreint au compte de stockage de vos archives afin de réintégrer des événements de log. Vous pouvez accorder ce rôle à votre compte de service Datadog depuis la page Contrôle d'accès (IAM) de votre compte de stockage. Pour ce faire, [attribuez le rôle Storage Blob Data Contributor à votre app d'intégration Datadog][1].
+Datadog utilise un groupe Microsoft Entra ID avec le rôle Storage Blob Data Contributor, limité au compte de stockage de vos archives, pour réhydrater les événements de log. Vous pouvez accorder ce rôle à votre compte de service Datadog depuis la page Access Control (IAM) de votre compte de stockage en [attribuant le rôle Storage Blob Data Contributor à votre application d'intégration Datadog][1].
 
-{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="La réintégration depuis Stockage Azure nécessite le rôle Storage Blob Data Contributor" style="width:75%;">}}
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="La réhydratation depuis le stockage Azure nécessite le rôle Storage Blob Data Contributor" style="width:75%;">}}
 
 
 [1]: /fr/logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
@@ -168,18 +182,34 @@ Datadog utilise un groupe Azure AD avec le rôle Storage Blob Data Contributor 
 
 {{% tab "Google Cloud Storage" %}}
 
-Afin de réintégrer des événements de log depuis vos archives, Datadog utilise un compte de service disposant du rôle Storage Object Viewer. Pour accorder ce rôle à votre compte de service Datadog, accédez à la [page d'administration de Google Cloud IAM][1], modifiez les autorisations du compte de service, ajoutez un autre rôle, puis sélectionnez Storage > Storage Object Viewer.
+Pour réhydrater les logs depuis vos archives, Datadog utilise un compte de service avec le rôle Lecteur des objets du stockage. Vous pouvez accorder ce rôle à votre compte de service Datadog depuis la [page d'administration IAM de Google Cloud][1] en modifiant les autorisations du compte de service, en ajoutant un autre rôle, puis en sélectionnant {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}}.
 
-{{< img src="logs/archives/log_archives_gcs_role.png" alt="La réintégration depuis GCS nécessite le rôle Storage Object Viewer" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_gcs_role.png" alt="La réhydratation depuis GCS nécessite le rôle Lecteur des objets du stockage" style="width:75%;">}}
+
+Le rôle {{< ui >}}Storage Object Viewer{{< /ui >}} est la configuration recommandée par Datadog. Si votre organisation exige un rôle personnalisé à privilèges limités, les autorisations individuelles suivantes sont requises pour la réhydratation :
+
+- `storage.objects.get`
+- `storage.objects.list`
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
-*Log Rehydration est une marque déposée de Datadog, Inc.
+
+## Comprendre les tailles d'analyse de réhydratation {#understanding-rehydration-scan-sizes}
+
+La requête est appliquée _après_ que les fichiers correspondant à la période ont été téléchargés depuis votre archive. Par conséquent, la taille de l'analyse de réhydratation est basée sur le **volume total de logs récupérés depuis l'archive**, et non sur le nombre de logs correspondant à la requête. Le stockage d'archive est basé sur le temps, donc les requêtes limitées à des filtres spécifiques (tels que `service:A`) récupèrent néanmoins tous les logs dans la fenêtre temporelle sélectionnée. Cela inclut les logs d'autres services (tels que `service:A` et `service:B`).
+
+Réduire la plage de dates est le moyen le plus efficace de limiter la taille de l'analyse et de minimiser les coûts de transfert de données cloud, car les filtres de requête sont appliqués après le téléchargement des données
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Log Rehydration est une marque de commerce de Datadog, Inc.
 
 [1]: /fr/logs/explorer/
-[2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /fr/logs/explorer/search/
 [5]: /fr/logs/archives/?tab=awss3#datadog-tags

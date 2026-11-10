@@ -112,22 +112,21 @@ Connectez Vertex AI à Agent Observability avec votre compte Google Cloud Platfo
 [4]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 {{% /tab %}}
 
-{{% tab "Passerelle IA" %}}
-<div class="alert alert-danger">Si vous êtes soumis à la loi HIPAA, il vous incombe de vous assurer que vous vous connectez uniquement à une passerelle IA soumise à un accord d'association commerciale (BAA) et répondant à toutes les exigences de conformité HIPAA.</div>
+{{% tab "Fournisseur personnalisé" %}}
+<div class="alert alert-danger">Si vous êtes soumis à la loi HIPAA, il vous incombe de vous assurer que vous vous connectez uniquement à un fournisseur personnalisé soumis à un accord d'association commerciale (BAA) et répondant à toutes les exigences de conformité HIPAA.</div>
 
-Votre passerelle IA doit être compatible avec la [spécification de l'API OpenAI][2].
+L'endpoint de votre fournisseur personnalisé doit être compatible avec la [spécification de l'API OpenAI][2].
 
-Connectez votre passerelle IA à Agent Observability avec votre URL de base, votre clé d'API et vos en-têtes.
+Connectez votre fournisseur personnalisé à Agent Observability avec votre URL de base, votre clé d'API et vos en-têtes.
 
 1. Dans Datadog, accédez à [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
-1. Cliquez sur l'onglet {{< ui >}}Configure{{< /ui >}}, puis cliquez sur {{< ui >}}New{{< /ui >}} pour créer une nouvelle passerelle.
+1. Sélectionnez la tuile {{< ui >}}Custom Provider for Agent Observability{{< /ui >}}.
+1. Cliquez sur l'onglet {{< ui >}}Configure{{< /ui >}}, puis cliquez sur {{< ui >}}New{{< /ui >}} pour créer un fournisseur.
 1. Suivez les instructions sur la tuile.
-   - Indiquez un nom pour votre passerelle.
+   - Saisissez un nom pour votre fournisseur.
    - Sélectionnez votre fournisseur.
    - Indiquez votre URL de base.
    - Fournissez votre clé d'API et, éventuellement, tous les en-têtes.
-
-{{< img src="llm_observability/configuration/ai-gateway-tile-3.png" alt="La tuile de configuration de la passerelle IA dans Agent Observability. Liste les instructions pour configurer une passerelle IA" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/api-reference/introduction

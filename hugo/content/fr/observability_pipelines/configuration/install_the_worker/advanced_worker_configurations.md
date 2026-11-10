@@ -15,7 +15,7 @@ title: Configurations avancées du Worker
 ---
 ## Présentation {#overview}
 
-Ce document explique [ l'amorçage ](#bootstrap-options) de l'Observability Pipelines Worker, [ les autres options de configuration du Worker ](#other-worker-configuration-options), et comment [ activer l'endpoint de check de santé, ainsi que les sondes de vivacité et de préparation ](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
+Ce document explique [ l'amorçage ](#bootstrap-options) de l'Observability Pipelines Worker, [ les autres options de configuration du Worker ](#other-worker-configuration-options), et comment [ activer l'endpoint de check de santé, ainsi que les sondes d'activité et de disponibilité ](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
 
 ## Options d'amorçage {#bootstrap-options}
 
@@ -44,7 +44,7 @@ Voici une liste d'options d'amorçage, avec leurs variables d'environnement de p
 : &nbsp;&nbsp;&nbsp;&nbsp;`api`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`address`: `"127.0.0.1:8686" # optional`
 : Remarque: Le paramètre `address` est facultatif. Il s'agit de l'adresse réseau sur laquelle l'API doit se lier. Si vous exécutez le Worker dans un conteneur Docker, liez-le à `0.0.0.0`. Sinon, l'API n'est pas exposée en dehors du conteneur.
 : **Description**: Activez l'API Observability Pipelines Worker afin de pouvoir visualiser les processus du Worker avec la commande `tap` ou `top`. Consultez [Exécutez les commandes run, tap et top sur le Worker][8] pour en savoir plus. Si vous utilisez les charts Helm fournis lors de la [configuration d'un pipeline][7], alors l'API a déjà été activée. Sinon, assurez-vous que la variable d'environnement `DD_OP_API_ENABLED` est définie sur `true` dans `/etc/observability-pipelines-worker/bootstrap.yaml`. Cela configure l'API pour qu'elle écoute sur `localhost` et le port `8686`, ce qui est attendu par l'interface de ligne de commande pour `tap`.
-<br><br>Consultez [Activer la sonde de vivacité et de disponibilité](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes) pour savoir comment exposer l'endpoint `/health`.
+<br><br>Consultez [Activer la sonde d'activité et de disponibilité](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes) pour savoir comment exposer l'endpoint `/health`.
 
 `api_key`
 : **Variable d'environnement de pipeline**: `DD_API_KEY`
@@ -102,11 +102,11 @@ Voici une liste d'options d'amorçage, avec leurs variables d'environnement de p
 
 Utilisez la variable d'environnement `VECTOR_HOSTNAME` pour attribuer un nom de host unique et vous aider à identifier le Worker.
 
-## Activer l'endpoint de check de santé ainsi que les sondes de vivacité et de préparation {#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes}
+## Activer l'endpoint de check de santé ainsi que les sondes d'activité et de disponibilité {#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes}
 
-Configurez la vérification de l'état de santé de votre équilibreur de charge avec l'endpoint `/health` pour vérifier que le Worker est opérationnel.
+Configurez le check de l'état de santé de votre équilibreur de charge avec l'endpoint `/health` pour vérifier que le Worker est opérationnel. Consultez les [configurations de l'équilibreur de charge][13] pour plus de recommandations sur la configuration d'un équilibreur de charge devant le Worker.
 
-Pour Kubernetes, les sondes de vivacité et de préparation sont déjà activées dans le [helm chart][9] et le fichier [values.yaml][10].
+Pour Kubernetes, les sondes d'activité et de disponibilité sont activées par défaut dans le [helm chart][9] et dans le fichier [values.yaml][10]. Ces sondes vérifient un socket TCP sur le port de l'API du Worker au lieu de l'endpoint `/health`.
 
 Pour d'autres installations telles que celles basées sur des VM, vous devez définir `DD_OP_API_ENABLED` sur `true` et définir `DD_OP_API_ADDRESS` sur `0.0.0.0:8686` pour exposer l'endpoint `/health`. Un exemple de configuration :
 
@@ -132,3 +132,4 @@ api:
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
 [11]: /fr/remote_configuration/#security-considerations
 [12]: /fr/observability_pipelines/configuration/secrets_management/
+[13]: /fr/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#load-balancer-configurations

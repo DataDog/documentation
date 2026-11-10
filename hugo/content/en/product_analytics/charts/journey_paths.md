@@ -1,6 +1,13 @@
 ---
 title: Journey Paths
 description: See the most common paths users take between two events, including paths for sessions that dropped off before reaching the second event.
+further_reading:
+- link: "https://www.datadoghq.com/blog/product-analytics-journey-paths/"
+  tag: "Blog"
+  text: "Understand the top paths users take to convert or drop off with Journey Paths"
+- link: "https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics"
+  tag: "Learning Center"
+  text: "Define User Behavior with Labeled Actions in Product Analytics"
 ---
 
 Journey paths show the most common paths users take between selected events.
@@ -45,3 +52,7 @@ You can refine journey path charts in various ways to zero in on the paths you w
 6. Click an event to open a menu with options to view the session replays or the users associated with that path. Or, hold **Option** (macOS) or **Alt** (Windows/Linux) and click an event to hide it from the diagram.
 
 7. Use {{< ui >}}More Paths{{< /ui >}} and {{< ui >}}Fewer Paths{{< /ui >}} to control how many paths are displayed.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,3 +1,3 @@
 ---
-title: Agent Observability 実験スパンを一覧表示する (v1)
+title: Agent Observability 実験のスパンの一覧表示 (v1)
 ---

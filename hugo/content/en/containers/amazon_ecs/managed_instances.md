@@ -101,6 +101,7 @@ Use the [AWS CLI][1] to execute the following command:
 aws ecs create-daemon \
 --daemon-name <DAEMON_NAME> \
 --daemon-task-definition-arn <DAEMON_TASK_DEFINITION_ARN> \
+--cluster-arn <CLUSTER_ARN> \
 --capacity-provider-arns <CAPACITY_PROVIDER_ARN>
 ```
 
