@@ -3444,7 +3444,7 @@ Adds a user to a team using their UUID. Your permissions and the team's settings
 ### `delete_team_membership`
 Toolset: `teams`\
 Permissions required: `Teams Read` and `MCP Write`\
-Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. Requires explicit confirmation.
+Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. The tool asks you to confirm before it removes the user.
 
 - Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team.
 
