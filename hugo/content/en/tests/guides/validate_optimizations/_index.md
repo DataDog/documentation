@@ -32,7 +32,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 Use [ddtest][15] to check Test Optimization locally. It compares test results with and without instrumentation. It then uses temporary tests to check supported features, including Early Flake Detection, Auto Test Retries, and Test Management. Validation uses a local intake and requires no Datadog account, API key, or Datadog Agent. It does not send validation results to Datadog or change Datadog settings.
 
-Datadog recommends using a [local coding agent](#use-a-local-coding-agent-recommended) for onboarding and local validation. The agent follows ddtest's instructions to set up instrumentation, run validation, resolve blockers, and explain the results. To run the commands yourself, use the [manual instructions](#run-ddtest-yourself).
+Datadog recommends using a local coding agent for onboarding and local validation, as described in the [Use a local coding agent](#use-a-local-coding-agent-recommended) section. The agent follows ddtest's instructions to set up instrumentation, run validation, resolve blockers, and explain the results. To run the commands yourself, see the [Run ddtest yourself](#run-ddtest-yourself) section.
 
 Local validation supports these languages and frameworks:
 
