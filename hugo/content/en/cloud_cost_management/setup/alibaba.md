@@ -28,6 +28,9 @@ Before you set up Cloud Cost Management for Alibaba Cloud, make sure you have:
 
 ## Setup
 
+### Configure the Alibaba Cloud integration
+Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account, and follow the steps to configure the Alibaba Cloud integration.
+
 ### Subscribe to FOCUS bills in Alibaba Cloud
 Subscribe to cost reports in FinOps Open Cost and Usage Specification (FOCUS) format, delivered to an Object Storage Service (OSS) bucket:
 
@@ -37,9 +40,6 @@ Subscribe to cost reports in FinOps Open Cost and Usage Specification (FOCUS) fo
 4. If this is your first OSS subscription, click **Authorize** to grant the service access.
 
 Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
-
-### Configure the Alibaba Cloud integration
-Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account, and follow the steps to configure the Alibaba Cloud integration.
 
 ### Enable Cloud Cost Management
 In the Alibaba Cloud integration tile, enable the toggle for Cloud Cost Management and provide:
