@@ -3395,7 +3395,7 @@ Lists the teams a user belongs to and their role on each team.
 ### `get_team_hierarchy`
 *Toolset: **teams***\
 *Permissions Required: `Teams Read`*\
-Lists one page of parent-child relationships between teams. Filter by parent team or sub-team ID.
+Lists parent-child relationships between teams, one page at a time. Filter by parent team or sub-team ID.
 
 - Which teams are children of the Payments team?
 
