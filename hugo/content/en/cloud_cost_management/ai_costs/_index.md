@@ -97,7 +97,7 @@ The following tags are available for all supported AI providers:
 | Tag&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Tag description |
 |---|---|
 | `providername` | The AI provider. |
-| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, `chatgpt_enterprise`, or `openai`). |
+| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, or `anthropic_platform`). |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
 | `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
 | `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
@@ -205,6 +205,8 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 {{% tab "ChatGPT Enterprise" %}}
 
 ChatGPT Enterprise is in Preview.
+
+ChatGPT Enterprise costs are estimates. OpenAI's Costs API reports usage costs, including an estimated USD amount for credit-priced usage, rather than final invoice amounts. Because these costs are estimates, they don't count toward the spend that Datadog bills for Cloud Cost Management.
 
 | Tag | Label | Description |
 |---|---|---|
