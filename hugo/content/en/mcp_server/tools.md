@@ -411,9 +411,9 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
+Tools for [APM][50], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules.
 
-<div class="alert alert-info">Tools marked <em>Preview</em> in the <code>apm</code> toolset require Preview access. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
+<div class="alert alert-info">The <code>apm</code> toolset is not enabled by default. Add <code>apm</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,apm</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -426,10 +426,10 @@ Retrieves the current health status (ok/warning/critical) for one or more APM se
 ### `apm_investigate_errors`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Analyzes trace dependencies for a service's resource to identify downstream services statistically correlated with its errors. Returns ranked anomalous paths with correlation scores. A higher score indicates a stronger correlation with the errors.
+Analyzes the trace dependencies of a service resource to find downstream services that correlate with its errors. Returns anomalous paths ranked by correlation score, where a higher score means a stronger correlation.
 
-- Why is `POST /api/checkout` on the checkout service throwing errors in prod since 2pm?
-- Which downstream dependency is driving the error spike on the payments service's `GET /charge` endpoint between 10:00 and 10:30?
+- Why is `POST /api/checkout` on the checkout service throwing errors in prod since 2 PM?
+- Which downstream dependency is driving the error spike on the payments service's `GET /charge` endpoint between 10 AM and 10:30 AM?
 - Find the root cause of elevated errors on the `GET /orders` resource of the orders service in staging over the last hour.
 
 ### `apm_latency_bottleneck_summary`
@@ -464,13 +464,6 @@ Discovers available tag keys on spans within a time range.
 - What tags are available on spans for `service:checkout`?
 - Show me the tag keys I can filter by in APM.
 
-### `apm_get_primary_tag_keys`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves the primary tag keys configured for the organization.
-
-- What are my organization's primary tag keys?
-
 ### `apm_query_trace`
 *Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read`*\
@@ -480,6 +473,13 @@ Runs a read-only SQL query against a trace's spans to answer a specific question
 - Get the attributes for span `xyz789` along with the root span's attributes.
 - How many database calls happened in this trace, and which one took the longest?
 - Which of the child spans under span `xyz789` was slowest?
+
+### `apm_get_primary_tag_keys`
+*Toolset: **apm** (Preview)*\
+*Permissions Required: `APM Read`*\
+Retrieves the primary tag keys configured for the organization.
+
+- What are my organization's primary tag keys?
 
 ### `search_apm_sampling_rules`
 *Toolset: **apm** (Preview)*\
