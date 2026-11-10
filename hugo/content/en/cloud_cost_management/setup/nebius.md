@@ -1,5 +1,5 @@
 ---
-title: Nebius
+title: Nebius Cloud
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

@@ -4276,7 +4276,7 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
       weight: 205
-    - name: Nebius
+    - name: Nebius Cloud
       url: cloud_cost_management/setup/nebius/
       parent: cloud_cost_setup
       identifier: cloud_cost_nebius
@@ -4355,7 +4355,7 @@ menu:
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 207
+      weight: 209
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost

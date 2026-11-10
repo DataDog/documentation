@@ -29,11 +29,12 @@ Before you set up Cloud Cost Management for Alibaba Cloud, make sure you have:
 ## Setup
 
 ### Subscribe to FOCUS bills in Alibaba Cloud
-In the **Expenses and Costs** console, go to **Bills > Bill Subscription** and click **Create Bill Subscription** to subscribe to cost reports in FOCUS format with all available subscription fields, delivered to an Object Storage Service (OSS) bucket:
+Subscribe to cost reports in FinOps Open Cost and Usage Specification (FOCUS) format, delivered to an Object Storage Service (OSS) bucket:
 
 1. Create an OSS bucket to receive the cost reports, or use an existing one.
-2. Enable bill subscription with the FOCUS format and all available subscription fields, selecting your bucket as the destination.
-3. If this is your first OSS subscription, click **Authorize** to grant the service access.
+2. In the **Expenses and Costs** console, go to **Bills > Bill Subscription** and click **Create Bill Subscription**.
+3. Select the FOCUS format and all available subscription fields, and select your OSS bucket as the destination.
+4. If this is your first OSS subscription, click **Authorize** to grant the service access.
 
 Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
 
@@ -72,7 +73,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `chargedescription`                | A self-contained summary that explains the purpose and price of a charge.|
 | `chargefrequency`  | An indication of how often a charge occurs, helping to identify if it's recurring, and to forecast future charges.|
 | `chargesubcategory`| Represents the sub-level classification of a charge based on the nature of how it is billed.|
-| `commitmentdiscountcategory`| Whether the usage was reserved but not used.|
+| `commitmentdiscountcategory`| Indicates whether the commitment discount is based on usage quantity or on cost (spend).|
 | `commitmentdiscountid`| The identifier assigned to a commitment discount by the provider.|
 | `commitmentdiscountname`| The display name assigned to a commitment discount.|
 | `commitmentdiscounttype`| A provider-assigned name to identify the type of commitment discount applied.|
