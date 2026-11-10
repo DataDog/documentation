@@ -1979,7 +1979,7 @@
     "request_schema_description": "Search issues request payload."
   },
   "GetIssue": {
-    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.",
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
     "summary": "Get the details of an error tracking issue"
   },
   "DeleteIssueAssignee": {
@@ -1997,6 +1997,12 @@
     "summary": "Update the state of an issue",
     "request_description": "Update issue state request payload.",
     "request_schema_description": "Update issue state request payload."
+  },
+  "GetEUDMDevices": {
+    "summary": "Get all devices"
+  },
+  "GetEUDMDevice": {
+    "summary": "Get a device"
   },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
@@ -4452,13 +4458,13 @@
     "summary": "List tag indexing rules"
   },
   "CreateTagIndexingRule": {
-    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nEvery rule that matches a metric applies, in `rule_order`; a rule with\n`override_previous_rules` set to `false` (merge) adds to the tags configured by earlier\nrules, and a rule with `override_previous_rules` set to `true` replaces them.\nRequires the `Manage Tags for Metrics` permission.\n\nLimits:\n- An org can have at most 1,000 active tag indexing rules. Creating a rule when the org\n  already has 1,000 active rules returns a 403 error with the title\n  `Tag indexing rule limit reached`.\n- Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;\n  requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.\n- `name` can be at most 200 characters, and `metric_name_matches` can contain at most\n  50 patterns of at most 200 characters each. Requests that exceed these limits return a\n  400 error.",
+    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Create a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule."
   },
   "ReorderTagIndexingRules": {
-    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID\nreturns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Reorder tag indexing rules",
     "request_description": "",
     "request_schema_description": "Request body for reordering tag indexing rules."
@@ -4472,7 +4478,7 @@
     "summary": "Get a tag indexing rule"
   },
   "UpdateTagIndexingRule": {
-    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and\n`metric_name_matches` can contain at most 50 patterns of at most 200 characters each;\nrequests that exceed these limits return a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.",
     "summary": "Update a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for updating a tag indexing rule."
@@ -8363,7 +8369,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nSet `create_only=true` to atomically create exactly one quota in the caller's organization and reject an\nexisting quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.\nRepeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`\neven if the first request succeeded; reconcile the outcome before retrying or importing the quota.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."

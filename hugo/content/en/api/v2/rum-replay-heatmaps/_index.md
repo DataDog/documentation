@@ -1,4 +1,4 @@
 ---
-title: RUM Replay Heatmaps
+title: Rum Replay Heatmaps
 headless: true
 ---

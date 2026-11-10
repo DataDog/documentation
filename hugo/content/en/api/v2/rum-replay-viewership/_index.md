@@ -1,4 +1,4 @@
 ---
-title: RUM Replay Viewership
+title: Rum Replay Viewership
 headless: true
 ---
