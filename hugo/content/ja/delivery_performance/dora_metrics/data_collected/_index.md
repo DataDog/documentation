@@ -17,7 +17,7 @@ further_reading:
   text: タグの概要
 title: DORA Metrics のデータ収集
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 DORA Metrics は、関連付けられているフィールドとタグを含むイベントを生成します。
 
@@ -122,7 +122,7 @@ DORA Metrics でのカスタムタグの使用に関する詳細については�
 [3]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /ja/getting_started/tagging/
-[7]: /ja/api/latest/dora-metrics/
+[7]: /ja/api/latest/delivery-performance/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/ja/metrics/
 [10]: /ja/delivery_performance/dora_metrics/setup/

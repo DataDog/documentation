@@ -21,7 +21,6 @@ title: Security 가이드
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Cloud SIEM용 Azur 구성 가이드{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Security 위협에 대한 인증 로그 모니터링{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Cloud SIEM이 분석할 로그 사용자 지정{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/" >}}STIX 위협 인텔리전스 수집{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security 가이드:" >}}
@@ -47,10 +46,10 @@ title: Security 가이드
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Workload Protection 가이드:" >}}
-    {{< nextlink href="/security/workload_protection/guide/dual-shipping-sub-orgs-and-infra" >}}여러 조직으로 안전하게 Workload Protection 이중 전달하기{{< /nextlink >}}
+    {{< nextlink href="/security/workload_protection/guide/dual-shipping-sub-orgs-and-infra" >}}여러 조직으로 안전하게 Workload Protection 이중 전달{{< /nextlink >}}
     {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Workload Protection Security 신호 조정을 위한 모범 사례{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Sensitive Data Scanner 가이드:" >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}민감한 데이터 발견 사항 조사{{< /nextlink >}}
+   {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}민감한 데이터 발견 결과 조사{{< /nextlink >}}
 {{< /whatsnext >}}

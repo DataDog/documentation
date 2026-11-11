@@ -11,10 +11,13 @@ description: Effectuez des recherches et des analyses sur l'ensemble de vos logs
 further_reading:
 - link: logs/explorer/live_tail
   tag: Documentation
-  text: Afficher un aperçu de vos logs dans la vue Live Tail
+  text: Afficher un aperçu de vos logs dans Live Tail
 - link: logs/explorer/saved_views/
   tag: Documentation
   text: Configurer automatiquement votre vue Log Explorer
+- link: https://learn.datadoghq.com/courses/log-explorer
+  tag: Centre d'apprentissage
+  text: Bien démarrer avec le Log Explorer
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: Blog
   text: Ajouter une URL Log Explorer à votre presse-papiers
@@ -23,45 +26,42 @@ further_reading:
   text: Envoyer des logs de flux Amazon VPS à Amazon Kinesis Data Firehose et Datadog
 - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
   tag: Blog
-  text: Accélérez les enquêtes avec l'analyse des journaux alimentée par l'IA
-- link: https://learn.datadoghq.com/courses/log-explorer
-  tag: Centre d'apprentissage
-  text: Commencez avec Log Explorer
-title: LogxmExplorer
+  text: Accélérez les enquêtes grâce au parsing des logs optimisé par l'IA
+title: Log Explorer
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-L'[**Log Explorer**][1] constitue votre point de départ pour le dépannage et l'exploration des journaux. Que vous commenciez de zéro, à partir d'un [Saved View][2], ou que vous arriviez ici depuis un autre contexte, tel que des monitor notifications ou des dashboard widgets, vous pouvez rechercher et filtrer, regrouper, visualiser et exporter des journaux dans Log Explorer.
+Le [**Log Explorer**][1] est votre point de départ pour explorer les logs et résoudre les problèmes qui y sont liés. Que vous partiez de zéro, d'une [Saved View][2] ou que vous arriviez ici depuis un autre contexte, comme des notifications de monitor ou des widgets de dashboard, vous pouvez rechercher, filtrer, regrouper, visualiser et exporter des logs dans le Log Explorer.
 
-{{< img src="/logs/explore.png" alt="Explorez vos journaux ingérés" style="width:100%;">}}
+{{< img src="/logs/explore.png" alt="Explorez vos logs ingérés" style="width:100%;">}}
 
-## Rechercher et filtrer {#search-and-filter}
+## Recherchez et filtrez {#search-and-filter}
 
-{{< ui >}}Search{{< /ui >}} et {{< ui >}}Filter{{< /ui >}} sur les journaux pour affiner, élargir ou réorienter votre attention sur un sous-ensemble de journaux adapté à votre intérêt actuel.
+{{< ui >}}Search{{< /ui >}} et {{< ui >}}Filter{{< /ui >}} les logs pour affiner, élargir ou réorienter votre recherche vers un sous-ensemble de logs correspondant à vos besoins du moment.
 
-  - Pour en savoir plus sur la recherche de journaux dans Log Explorer, lisez [Search Logs][3].
-  - Pour commencer à créer des requêtes et à utiliser des facettes dans Log Explorer, lisez [Log Search Syntax][4].
-  - Pour apprendre comment [Watchdog Insights][9] met en évidence des journaux anormaux et des valeurs aberrantes dans les journaux d'erreurs dans votre contexte de recherche, lisez [Watchdog Insights for Logs][5].
+  - Pour en savoir plus sur la recherche de logs dans le Log Explorer, lisez [Search Logs][3].
+  - Pour commencer à créer des requêtes et à utiliser des facettes dans le Log Explorer, lisez [Log Search Syntax][4].
+  - Pour savoir comment [Watchdog Insights][9] permet de repérer les logs anormaux et les valeurs aberrantes parmi les logs d'erreur dans le cadre de votre recherche, lisez [Watchdog Insights for Logs][5].
 
 ## Analysez {#analyze}
 
-{{< ui >}}Group{{< /ui >}} vos journaux interrogés en entités de niveau supérieur telles que des champs, des modèles et des transactions afin de dériver ou de consolider des informations. 
+{{< ui >}}Group{{< /ui >}} les logs de votre recherche en entités de plus haut niveau, telles que des champs, des modèles et des transactions, afin d'en tirer ou d'en consolider des informations. 
 
 Pour commencer à identifier des patterns et à agréger les logs par sous-ensembles d'événements, consultez la section [Analyse de logs][6].
 
 ## Visualisez {#visualize}
 
-{{< ui >}}Visualize{{< /ui >}} le résultat de vos filtres et agrégations pour mieux comprendre vos journaux et recueillir des informations décisives. Par exemple, vous pouvez afficher vos journaux dans une liste pour organiser vos données de journaux en colonnes, ou dans un graphique temporel pour mesurer vos données de journaux au fil du temps. 
+{{< ui >}}Visualize{{< /ui >}} le résultat de vos filtres et agrégations pour mieux comprendre vos logs et recueillir des informations décisives. Par exemple, vous pouvez afficher vos logs sous forme de liste pour organiser vos données de log en colonnes, ou sous forme de graphique de série temporelle pour suivre leur évolution au fil du temps. 
 
 Pour commencer à visualiser vos données de log dans le Log Explorer, consultez la section [Visualisations de log][7].
 
-## Exportez {#export}
+## Export{#export}
 
-Vous pouvez également {{< ui >}}export{{< /ui >}} votre vue de Log Explorer pour la réutiliser plus tard ou dans différents contextes. 
+Vous pouvez également {{< ui >}}export{{< /ui >}} votre vue du Log Explorer pour la réutiliser ultérieurement ou dans différents contextes. 
 
 Pour découvrir comment exporter vos requêtes et visualisations de log, consultez la section [Exporter des logs][8].
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

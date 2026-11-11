@@ -37,7 +37,7 @@ Datadog의 [Logging without Limits][1]\*를 사용하면 스토리지 및 쿼리
 
 1. [메트릭 생성][5] 페이지로 이동합니다.
 1. {{< ui >}}Generate Metrics{{< /ui >}} 탭을 선택합니다.
-1. {{< ui >}}+New Metric{{< /ui >}}을 클릭합니다.
+1. {{< ui >}}\+ New Metric{{< /ui >}}를 클릭합니다.
 
 {{< ui >}}Export{{< /ui >}} 메뉴에서 {{< ui >}}Generate new metric{{< /ui >}} 옵션을 선택하여 Analytics 검색에서 메트릭을 생성할 수도 있습니다.
 

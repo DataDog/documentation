@@ -30,3 +30,11 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Add Custom Topology Map Widget
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41054
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Journey Paths widget definition
