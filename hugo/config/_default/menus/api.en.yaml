@@ -15283,6 +15283,18 @@ menu:
           - ListExperimentMetricGroups
         unstable: []
         order: 11
+    - name: List experiment holdouts
+      url: /api/latest/experiments/list-experiment-holdouts/
+      identifier: experiments-list-experiment-holdouts
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentHoldouts
+        unstable: []
+        order: 55
     - name: Get experiment diagnostics
       url: /api/latest/experiments/get-experiment-diagnostics/
       identifier: experiments-get-experiment-diagnostics
@@ -16107,6 +16119,30 @@ menu:
           - GetSavedFilter
         unstable: []
         order: 23
+    - name: Export feature flag change history
+      url: /api/latest/feature-flags/export-feature-flag-change-history/
+      identifier: feature-flags-export-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportFeatureFlagHistory
+        unstable: []
+        order: 26
+    - name: List feature flag change history
+      url: /api/latest/feature-flags/list-feature-flag-change-history/
+      identifier: feature-flags-list-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlagHistory
+        unstable: []
+        order: 25
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout
