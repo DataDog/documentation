@@ -65,11 +65,9 @@ Static and runtime detection analyze different parts of an application. Knowing 
 | Component | Static SCA | Runtime SCA |
 |---|---|---|
 | Open source libraries | Detected when listed in a supported lockfile or manifest. | Detected when a service loads the library. |
-| Go and .NET runtimes | Not detected. | Detected. |
+| Go and .NET runtimes | Detected. | Detected. |
 | Other language runtimes, such as the PHP interpreter and the JVM | Not detected. | Not detected. |
 | Operating system packages and standalone binaries | Not detected. | Not detected. |
-
-<!-- TODO (Pierre-Louis): Runtime SCA language runtime coverage (Go and .NET only) is from your Slack answer on 2026-10-27. Confirm the static SCA column: does static SCA detect Go or .NET runtime vulnerabilities, for example from the Go version in `go.mod`? The answer also applies to the runtime sentence on the Static SCA setup page. -->
 
 To detect vulnerabilities in operating system packages, container images, and language runtimes installed through an operating system package manager, use [Cloud Security Vulnerabilities][35]. Cloud Security Vulnerabilities supports [official operating system vendor packages only][38], so it doesn't detect language runtimes compiled from source.
 
