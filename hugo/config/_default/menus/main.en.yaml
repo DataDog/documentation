@@ -6059,6 +6059,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_setup
       weight: 1
+    - name: Dynamic Resource Allocation
+      url: gpu_monitoring/dra/
+      parent: gpu_monitoring_setup
+      identifier: gpu_monitoring_dra
+      weight: 101
     - name: Summary
       url: gpu_monitoring/summary/
       parent: gpu_monitoring

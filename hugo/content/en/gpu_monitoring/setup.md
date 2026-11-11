@@ -22,7 +22,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
   - [Install the Datadog Agent on Kubernetes][1]
   - [Install the Datadog Agent on Docker][7]
   - [Install the Datadog Agent on non-containerized Linux][8]
-- The NVIDIA drivers are installed on the hosts. If using Kubernetes, the NVIDIA device plugin for Kubernetes is installed ([directly][3], or through [NVIDIA GPU Operator][4])
+- The NVIDIA drivers are installed on the hosts. If using Kubernetes, the NVIDIA device plugin for Kubernetes is installed ([directly][3], or through [NVIDIA GPU Operator][4]). If your GPUs are allocated through Dynamic Resource Allocation (DRA) instead, also follow [Set Up GPU Monitoring with Dynamic Resource Allocation][15].
 
 #### Minimum version requirements
 
@@ -529,3 +529,4 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
 [12]: /getting_started/integrations/oci/
 [13]: /infrastructure/process?tab=linuxwindows#installation
 [14]: /containers/datadog_operator/providers/
+[15]: /gpu_monitoring/dra/
