@@ -270,4 +270,4 @@ If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/C
 [7]: https://www.npmjs.com/package/jest-image-snapshot
 [8]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 [9]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
-[10]: /tests/guides/test_automation_exclusions/
+[10]: /tests/flaky_management/code_annotations/
