@@ -217,7 +217,7 @@ In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select
 The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
 {{< /callout >}}
 
-For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the {{< ui >}}Model configuration{{< /ui >}} section, which is collapsed by default, to refine how the model behaves. Model configuration is part of the monitor definition. To change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
 
 | Setting | Description |
 |---|---|
