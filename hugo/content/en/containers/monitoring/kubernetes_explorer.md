@@ -490,6 +490,8 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 {{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="A link to a pod dashboard from Live Containers overview" style="width:80%;">}}
 
+With [Kubernetes Actions][12], you can also run actions on a resource from its side panel, such as deleting a pod or rolling back a Deployment.
+
 ### Resource utilization
 
 _For the Resource Utilization page, see [Resource Utilization][6]_.
@@ -722,3 +724,4 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 [9]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 [10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/
 [11]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[12]: /containers/monitoring/kubernetes_actions/
