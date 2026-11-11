@@ -30,7 +30,7 @@ title: Kubernetes 向け App and API Protection
 ---
 このページでは、Kubernetes 向け [App and API Protection][11] をセットアップして、サポートされている Kubernetes Ingress プロキシおよびゲートウェイを自動的に構成し、インフラストラクチャーのエッジで API の検出、脅威検知、インラインブロッキングを実行する方法について説明します。
 
-## 概要 {#overview}
+## 概要{#overview}
 
 Kubernetes 向け App and API Protection は、Kubernetes クラスター内のサポートされている Ingress プロキシおよびゲートウェイを自動的に構成し、Application Security のモニタリングを有効にします。これにより、手動でのプロキシ設定が不要になり、個々のサービスを変更したり、アプリケーションフリート全体にトレーサーをデプロイしたりすることなく、API 全体を網羅するセキュリティカバレッジが提供されます。
 
@@ -113,20 +113,23 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-このオプションには、Datadog Operator バージョン 1.27.1 以降が必要です。
+このオプションには、Datadog Operator バージョン 1.31.0 以降が必要です。
 
-`DatadogAgent` リソースにアノテーションを追加します。サイドカーモードがデフォルトであるため、インジェクターを有効にするだけで十分です。
+`DatadogAgent` リソースの `spec.features.appsec.injector` セクションでインジェクターを構成します。サイドカーモードがデフォルトであるため、インジェクターを有効にするだけで十分です。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
-コンフィギュレーションを適用します。
+構成を適用します。
 
 ```bash
 kubectl apply -f datadog-agent.yaml
@@ -137,58 +140,58 @@ kubectl apply -f datadog-agent.yaml
 
 ### サイドカー構成リファレンス{#sidecar-configuration-reference}
 
-すべてのサイドカーパラメーターは、`datadog.appsec.injector.sidecar` の下にネストされた Helm 値として、または `DatadogAgent` アノテーション (Datadog Operator バージョン 1.27.1 以降) として指定可能です。
+すべての sidecar パラメーターは、`datadog.appsec.injector.sidecar` の下にネストされた Helm 値として、または `spec.features.appsec.injector.sidecar` の下の `DatadogAgent` フィールドとして利用できます (Datadog Operator バージョン 1.31.0 以降)。
 
 `sidecar.image`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.image`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.image`
 : **型**: String
 : **既定値**: `ghcr.io/datadog/dd-trace-go/service-extensions-callout`
 : **説明**: サイドカーコンテナイメージ
 
 `sidecar.imageTag`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.image_tag`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.imageTag`
 : **型**: String
 : **既定値**: `v2.6.0`
 : **説明**: サイドカーコンテナイメージタグ
 
 `sidecar.port`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.port`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.port`
 : **型**: Integer
 : **既定値**: `8080`
 : **説明**: サイドカープロセッサーの gRPC リスニングポート
 
 `sidecar.healthPort`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.health_port`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.healthPort`
 : **型**: Integer
 : **既定値**: `8081`
 : **説明**: サイドカープロセッサーのヘルスチェック用ポート
 
 `sidecar.bodyParsingSizeLimit`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.body_parsing_size_limit`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.bodyParsingSizeLimit`
 : **型**: Integer
 : **既定値**: `0`
 : **説明**: 処理するリクエストボディの最大サイズ (バイト単位)。`0` はボディ処理を無効にします。ボディパースを完全に無効にするには `-1` を使用します。
 
 `sidecar.resources.requests.cpu`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.resources.requests.cpu`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.resources.requests.cpu`
 : **型**: String
 : **デフォルト**: `10m`
 : **説明**: サイドカーコンテナの CPU リクエスト
 
 `sidecar.resources.requests.memory`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.resources.requests.memory`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.resources.requests.memory`
 : **型**: String
 : **デフォルト**: `128Mi`
 : **説明**: サイドカーコンテナのメモリリクエスト
 
 `sidecar.resources.limits.cpu`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.resources.limits.cpu`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.resources.limits.cpu`
 : **型**: String
 : **デフォルト**: `""`
 : **説明**: サイドカーコンテナの CPU 制限 (オプション)
 
 `sidecar.resources.limits.memory`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.sidecar.resources.limits.memory`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.sidecar.resources.limits.memory`
 : **型**: String
 : **デフォルト**: `""`
 : **説明**: サイドカーコンテナのメモリ制限 (オプション)
@@ -292,23 +295,28 @@ Helm または Datadog Operator を使用して、Datadog Cluster Agent をセ�
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-このオプションには、Datadog Operator バージョン 1.27.1 以降が必要です。
+このオプションには、Datadog Operator バージョン 1.31.0 以降が必要です。
 
-`DatadogAgent` リソースにアノテーションを追加します。サービス名のアノテーションは必須であり、ご使用のセキュリティプロセッサーサービスと一致している必要があります。
+`DatadogAgent` リソースの `spec.features.appsec.injector` セクションでインジェクターを構成します。プロセッサーサービス名は必須であり、使用するセキュリティプロセッサーサービスと一致している必要があります。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.mode: "external"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
-    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        mode: external
+        processor:
+          service:
+            name: datadog-aap-extproc-service  # Required: must match your security processor service name
+            namespace: datadog
 ```
 
-コンフィギュレーションを適用します。
+構成を適用します。
 
 ```bash
 kubectl apply -f datadog-agent.yaml
@@ -364,52 +372,54 @@ Datadog Cluster Agent は、クラスター内で実行された成功または�
 
 ## 構成リファレンス{#configuration-reference}
 
+**注**:  `agent.datadoghq.com/appsec.*` アノテーションは Datadog Operator バージョン 1.31.0 で非推奨となり、バージョン 1.32.0 で削除されます。代わりに `spec.features.appsec.injector` を使用してインジェクターを構成します。これら 2 つのソースは排他的です。:  `spec.features.appsec.injector` が設定されている場合、CRD で値が未設定のフィールドも含め、アノテーションは完全に無視されます。そのため、構成全体を 1 つのステップで移行します。
+
 ### 自動構成オプション{#automatic-configuration-options}
 
 `enabled`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.enabled`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.enabled`
 : **型**: Boolean
 : **デフォルト**: `false`
 : **説明**: インテグレーションの有効化または無効化
 
 `mode`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.mode`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.mode`
 : **型**: String
 : **デフォルト**: `""`空の場合、デフォルトはサイドカー
 : **説明**: インジェクションモード : `"sidecar"` または `"external"`
 
 `autoDetect`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.autoDetect`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.autoDetect`
 : **型**: Boolean
 : **デフォルト**: `true`
 : **説明**: サポートされているプロキシを自動的に検出して構成する
 
 `proxies`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.proxies`
-: **型**: JSON 配列
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.proxies`
+: **型**: 文字列の配列
 : **デフォルト**: `[]`
 : **説明**: 設定するプロキシタイプの手動リスト。有効な値については、「[セットアップページ][10]」を参照してください。
 
 `processor.service.name`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.processor.service.name`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.processor.service.name`
 : **型**: String
 : **デフォルト**: なし
 : **説明**: **必須。**セキュリティプロセッサー Kubernetes サービスの名前
 
 `processor.service.namespace`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.processor.service.namespace`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.processor.service.namespace`
 : **型**: String
 : **デフォルト**: Cluster Agent が実行されている名前空間がデフォルト
 : **説明**: セキュリティプロセッサーサービスがデプロイされている名前空間
 
 `processor.address`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.processor.address`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.processor.address`
 : **型**: String
 : **デフォルト**: `{service.name}.{service.namespace}.svc`
 : **説明**: 完全なサービスアドレスのオーバーライド
 
 `processor.port`
-: **Datadog Operator アノテーション**: `agent.datadoghq.com/appsec.injector.processor.port`
+: **Datadog Operator フィールド**: `spec.features.appsec.injector.processor.port`
 : **型**: Integer
 : **デフォルト**: `443`
 : **説明**: セキュリティプロセッサーサービスのポート

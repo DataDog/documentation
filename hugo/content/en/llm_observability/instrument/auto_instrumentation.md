@@ -7,6 +7,12 @@ aliases:
     - /llm_observability/setup/auto_instrumentation
     - /llm_observability/sdk/auto_instrumentation
     - /llm_observability/instrumentation/auto_instrumentation/
+    - /llm_observability/instrument/agentic/python/
+    - /llm_observability/instrument/agentic/nodejs/
+    - /llm_observability/instrument/agentic/java/
+    - /llm_observability/instrumentation/agentic/python/
+    - /llm_observability/instrumentation/agentic/nodejs/
+    - /llm_observability/instrumentation/agentic/java/
 further_reading:
     - link: '/llm_observability/instrument/sdk/'
       tag: 'Documentation'
@@ -26,7 +32,125 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 <div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrument/sdk">Agent Observability SDK reference</a> for how to add manual instrumentation.</div>
 
 
-### Supported frameworks and libraries
+## Set up automatic instrumentation
+
+Configure the [instrumentation environment variables][20] before initializing the SDK. Then follow the setup for your language.
+
+{{< agent-only >}}
+Apply the guidelines from the [instrumentation overview](/llm_observability/instrument.md) throughout setup. Inspect the installed SDK version and reuse it if it supports the required instrumentation. If an update is required, explain why and ask before changing the dependency. Do not delay instrumentation for an update required only by optional Prompt Management. Use the project's existing package manager, as identified by its lockfiles.
+{{< /agent-only >}}
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+1. Install `ddtrace` with the application's package manager if it is not installed:
+
+   ```bash
+   pip install ddtrace
+   # Or, for Poetry:
+   poetry add ddtrace
+   # Or, for uv:
+   uv add ddtrace
+   ```
+
+2. Load the application's configuration, then import `ddtrace.auto` before other application imports. For an application that uses `python-dotenv`:
+
+   ```python
+   from dotenv import load_dotenv
+
+   load_dotenv()
+
+   import ddtrace.auto
+
+   # Import and run the application after SDK initialization.
+   ```
+
+If configuration is available before process startup, you can use the [SDK command-line setup][1] instead. Do not combine application-level configuration loading with `ddtrace-run`.
+
+{{< agent-only >}}
+Use the existing configuration-loading mechanism; the example does not require adding `python-dotenv`. Keep `ddtrace.auto` as the first import after any environment or configuration-loading imports. Do not add extraneous comments to application code.
+{{< /agent-only >}}
+
+[1]: /llm_observability/instrument/sdk/?tab=python#command-line-setup
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The Datadog Node.js SDK requires Node.js 22 or later for `dd-trace` 6.x, or Node.js 18 or later for `dd-trace` 5.x. See [Node.js compatibility requirements][3]. For Node.js versions earlier than 20.6, follow the [SDK command-line setup][2] instead of the loader setup below. For Next.js applications, follow the [Next.js instrumentation guide][1] instead of the steps below.
+
+1. Install `dd-trace` with the application's package manager if it is not installed:
+
+   ```bash
+   npm install dd-trace
+   # Or, for pnpm:
+   pnpm add dd-trace
+   # Or, for Yarn:
+   yarn add dd-trace
+   ```
+
+   For Node.js 18 or 20, install `dd-trace@5` instead.
+
+2. Configure loader hooks before the Node.js process starts. The hooks instrument supported frameworks that use ESM and TypeScript imports. For example, set `NODE_OPTIONS` in the existing `package.json` startup command:
+
+   ```json
+   {
+     "scripts": {
+       "start": "NODE_OPTIONS=\"--import dd-trace/register.js\" node app.js"
+     }
+   }
+   ```
+
+   You can also set the option in an existing `Dockerfile` or startup script. Preserve any other required `NODE_OPTIONS` values.
+
+3. Load configuration, then import `dd-trace/init` before other application imports. For an application that uses `dotenv`:
+
+   ```typescript
+   import 'dotenv/config';
+   import 'dd-trace/init';
+
+   // Import and run the application after SDK initialization.
+   ```
+
+For initialization entirely at process startup, see the [SDK command-line setup][2]. Use one initialization method.
+
+{{< agent-only >}}
+Do not apply these instructions to other JavaScript runtimes. For Next.js, follow the [Next.js guide](/llm_observability/guide/nextjs_guide.md) instead.
+
+When using the loader-hook and entrypoint-import method above, set `NODE_OPTIONS="--import dd-trace/register.js"` before the Node.js process starts. Setting it after load time does not work. Use existing startup infrastructure. Load the application's configuration before `dd-trace/init` and keep that import before other application imports. Do not introduce a configuration loader solely to match the example or add extraneous comments.
+{{< /agent-only >}}
+
+[1]: /llm_observability/guide/nextjs_guide/
+[2]: /llm_observability/instrument/sdk/?tab=nodejs#command-line-setup
+[3]: /tracing/trace_collection/compatibility/nodejs/
+{{% /tab %}}
+{{% tab "Java" %}}
+
+1. Download the `dd-java-agent` JAR from the [Datadog Java agent releases][1].
+2. Attach the agent before the application starts by passing a JVM argument:
+
+   ```bash
+   java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+   ```
+
+   For an existing startup script or `Dockerfile`, you can set `JAVA_TOOL_OPTIONS` instead. For example, in a shell:
+
+   ```bash
+   export JAVA_TOOL_OPTIONS="-javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+   Preserve any other required JVM options.
+
+The agent instruments supported LLM providers and frameworks at startup without additional code changes.
+
+[1]: https://github.com/DataDog/dd-trace-java/releases
+{{% /tab %}}
+{{< /tabs >}}
+
+After setup, [instrument prompts][21] and run the application to view traces.
+
+[20]: /llm_observability/instrument/#configure-environment-variables
+[21]: /llm_observability/instrument/#instrument-prompts
+
+## Supported frameworks and libraries
 {{< tabs >}}
 {{% tab "Python" %}}
 | Framework                                       | Supported Versions | Tracer Version |

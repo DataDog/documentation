@@ -150,15 +150,19 @@ AI Gateway tries the next provider or fallback destination when the current one 
 
 ## Control model access
 
-Access policies control who can call each model and routing rule. A policy lists models, routing rules, or both, and the users, [Datadog teams][13], and service accounts who can use them.
+Access policies control who can call each model and routing rule. A policy lists providers, models, routing rules, or a combination of them, and the users, [Datadog teams][13], and service accounts who can use them.
 
-A caller can use a model when they have **Runner** or **Editor** access on at least one policy that contains that provider and model. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+Selecting a provider includes all its models, including models added later. Selecting individual models or routing rules includes only those resources. A policy with no selections grants no access.
+
+A caller can use models included in the default policy. For other models, they need **Runner** or **Editor** access on a policy that includes them. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+
+AI Gateway denies access if no policy grants it.
 
 ### Default policy
 
-The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It applies to models and routing rules that are not in another policy, and it allows everyone to access them until you restrict access. New models stay available through this policy until you add them to an access policy.
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It grants everyone in your organization access to the selected resources.
 
-After you add a model or routing rule to an access policy, the default policy no longer applies to it. Callers must have access through the new policy to continue using the model or routing rule.
+Adding a resource to another access policy does not remove access granted by the default policy.
 
 ### Access policies
 
@@ -176,10 +180,9 @@ Access to a routing rule follows that rule's targets, so a change to the targets
 
 For tighter control over who can call models:
 
-- Restrict the default policy so new models are not available to everyone.
+- Include only resources approved for everyone in the default policy.
 - Create an access policy for each set of approved models.
 - Grant **Runner** only to the users, teams, and service accounts that need it.
-- Before you restrict the default policy, keep an administrator on a policy that can restore access.
 - Review policy membership and routing rule targets regularly.
 
 ## Set budgets

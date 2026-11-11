@@ -13,3 +13,13 @@ entries:
       - UpdateRUMOperation
       - UpdateRUMOperationStrongLink
     title: Promote RUM Operations endpoints from preview to stable
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41046
+    operations:
+      - CreateRUMOperation
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperations
+      - UpdateRUMOperation
+    title: Align RUM operations spec with responses

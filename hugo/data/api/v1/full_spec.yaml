@@ -9765,13 +9765,11 @@ components:
     MonitorFormulaAndFunctionCostDataSource:
       description: Data source for cost queries.
       enum:
-        - metrics
         - cloud_cost
         - datadog_usage
       example: "cloud_cost"
       type: string
       x-enum-varnames:
-        - METRICS
         - CLOUD_COST
         - DATADOG_USAGE
     MonitorFormulaAndFunctionCostQueryDefinition:
@@ -10213,6 +10211,34 @@ components:
         - DATABASE_QUERIES
         - NETWORK
         - NETWORK_PATH
+    MonitorFormulaAndFunctionMetricQueryDataSource:
+      description: Data source for metrics queries.
+      enum:
+        - metrics
+      example: "metrics"
+      type: string
+      x-enum-varnames:
+        - METRICS
+    MonitorFormulaAndFunctionMetricQueryDefinition:
+      description: A formula and functions metrics query. The `aggregator` field is required for `cost alert` monitors and not allowed for metric or query alert monitors.
+      properties:
+        aggregator:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionCostAggregator"
+        data_source:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricQueryDataSource"
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        query:
+          description: The metrics query definition.
+          example: "avg:system.cpu.user{*}"
+          type: string
+      required:
+        - name
+        - data_source
+        - query
+      type: object
     MonitorFormulaAndFunctionMetricsAggregator:
       description: Aggregator for metrics queries.
       enum:
@@ -10282,6 +10308,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
       additionalProperties: false
       description: A column definition for reference table queries.
@@ -36993,6 +37020,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "422":
           content:
             application/json:
@@ -37096,6 +37129,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a pipeline
@@ -37135,6 +37174,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a pipeline
@@ -37254,6 +37299,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a pipeline
