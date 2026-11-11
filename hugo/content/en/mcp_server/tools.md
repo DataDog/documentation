@@ -420,7 +420,7 @@ Responses from these tools can include values from the user's ECS resources, suc
 ### `search_datadog_ecs_resources`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Searches for [Amazon ECS][102] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Filter by tags such as cluster, service, environment, team, or task status, and include specific tag keys on each result. Tag filtering is case-insensitive, so a mixed-case tag value matches: `ecs_service:BillingAPI` and `ecs_service:billingapi` find the same service. Results are paginated.
+Searches for [Amazon ECS][102] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Filter by tags such as cluster, service, environment, team, or task status, and include specific tag keys on each result. Results are paginated.
 
 - Show me the running tasks in the `prod` ECS cluster.
 - Find ECS services in `us-east-1` that belong to the `payments` team.
