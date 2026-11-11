@@ -39,82 +39,25 @@ On Kubernetes 1.34 and later, the kubelet reports DRA allocations through the Po
 
 ## Step 1: Attribute GPUs to pods
 
-The Agent matches each DRA device to a physical GPU by reading the [CDI][6] specifications that the DRA driver writes to `/var/run/cdi` on the host. The Agent container must be able to read that directory.
+The Agent matches each DRA device to a physical GPU by reading the [CDI][6] specifications that the DRA driver writes to `/var/run/cdi` on the host.
 
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
+With Datadog Operator 1.33.0 or later, or Datadog Helm chart 3.266.0 or later, enabling GPU Monitoring mounts this directory into the Agent container. No additional configuration is required. On GKE Autopilot, the Operator does not mount it, because the path is not in the Autopilot workload allowlist.
 
-With Datadog Operator 1.33.0 or later, enabling GPU Monitoring mounts the host's `/var/run/cdi` directory into the Agent container. No additional configuration is required.
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  features:
-    gpu:
-      enabled: true
-  override:
-    nodeAgent:
-      image:
-        tag: 7.85.4
-    clusterAgent:
-      image:
-        tag: 7.85.4
-```
-
-This also applies when GPU Monitoring is enabled through a [Datadog Agent Profile][1] on a mixed cluster.
-
-On GKE Autopilot, the Operator does not mount `/var/run/cdi`, because the path is not in the Autopilot workload allowlist.
-
-[1]: /gpu_monitoring/setup/#set-up-gpu-monitoring-on-a-mixed-kubernetes-cluster
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-With Datadog Helm chart 3.266.0 or later, setting `datadog.gpuMonitoring.enabled: true` mounts the host's `/var/run/cdi` directory into the Agent container. No additional configuration is required.
+If you deploy the Agent with your own manifests, or use an older Operator or Helm chart version, add a read-only `hostPath` volume for `/var/run/cdi` and mount it at `/host/var/run/cdi` in the `agent` container. With the Operator, set it under `spec.override.nodeAgent.volumes` and `spec.override.nodeAgent.containers.agent.volumeMounts`:
 
 ```yaml
-datadog:
-  gpuMonitoring:
-    enabled: true
-agents:
-  image:
-    tag: 7.85.4
-clusterAgent:
-  image:
-    tag: 7.85.4
+volumes:
+  - name: cdi
+    hostPath:
+      path: /var/run/cdi
+      type: DirectoryOrCreate
+containers:
+  - name: agent
+    volumeMounts:
+      - name: cdi
+        mountPath: /host/var/run/cdi
+        readOnly: true
 ```
-
-On a mixed cluster, set this in the Helm deployment that targets GPU nodes.
-
-{{% /tab %}}
-{{% tab "Manual (DaemonSet)" %}}
-
-If you deploy the Agent with your own manifests, or use an Operator or Helm chart version older than the minimum, add a read-only `hostPath` volume for `/var/run/cdi` to the Agent DaemonSet and mount it at `/host/var/run/cdi` in the `agent` container:
-
-```yaml
-spec:
-  template:
-    spec:
-      volumes:
-        - name: cdi
-          hostPath:
-            path: /var/run/cdi
-            type: DirectoryOrCreate
-      containers:
-        - name: agent
-          volumeMounts:
-            - name: cdi
-              mountPath: /host/var/run/cdi
-              readOnly: true
-```
-
-With the Datadog Operator, add the same volume and mount under `spec.override.nodeAgent.volumes` and `spec.override.nodeAgent.containers.agent.volumeMounts`.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-info">Without access to <code>/var/run/cdi</code>, the Agent falls back to matching whole GPUs by the DRA device name (<code>gpu-0</code>, <code>gpu-1</code>, ...). In that mode, MIG instances allocated through DRA are not attributed to pods.</div>
 
