@@ -2819,6 +2819,53 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 
 <div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/investigate/metrics/">Datadog platform Agent Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
 
+### Submit conversation costs (unreleased)
+
+These APIs require Datadog backend support and a released tracer exposing the method. They submit conversation billing independently of token-based LLM span pricing. Only ElevenLabs is supported.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace.llmobs import LLMObs
+
+# details is a completed response already obtained by your application.
+submitted = LLMObs.submit_conversation_cost(details)
+
+# In an application-verified post-call transcription webhook handler:
+submitted = LLMObs.submit_conversation_cost(
+    verified_event["data"], source="post_call_transcription"
+)
+```
+
+`LLMObs.submit_conversation_cost(conversation, *, provider="elevenlabs", source="conversation_details", total_cost=None, agent_service=None)` accepts an ElevenLabs SDK response model or raw response dictionary. `agent_service` overrides the configured application for this observation.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+const llmobs = require('dd-trace').llmobs
+
+// details is a completed response already obtained by your application.
+const submitted = llmobs.submitConversationCost(details)
+
+// In an application-verified post-call transcription webhook handler:
+llmobs.submitConversationCost(verifiedEvent.data, {
+  source: 'post_call_transcription'
+})
+```
+
+`llmobs.submitConversationCost(conversation, options)` accepts an SDK response object or raw webhook data. Options are `provider` (`'elevenlabs'`), `source` (`'conversation_details'` or `'post_call_transcription'`), `totalCost`, and `mlApp`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The application verifies webhook authenticity before submission. No new tracer environment variable is required. The return value is `false` when disabled, unfinished, or invalid, and when provider amounts are absent without an override. A `true` result describes local submission; delivery and conflict rejection are asynchronous. The active tenant routing context is retained.
+
+An optional `total_cost` (Python) or `totalCost` (Node.js) supplies a finite, nonnegative USD total, including zero. Supply it on the first submission. Raw provider amounts remain unchanged. Repeated sources share one billing owner; late missing values can be filled, while conflicting known amounts are rejected. Do not also annotate the same conversation charge onto response spans.
+
+This API uses reported USD billing, without inferring tokens or allocating a platform charge across turns. It does not backfill per-turn usage. See [cost coverage and units](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased).
+
 ### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 

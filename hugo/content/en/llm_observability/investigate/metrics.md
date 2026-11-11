@@ -29,6 +29,18 @@ Agent Observability also stores two other kinds of data, which have their own re
 
 <div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics, except LLM token and cost metric tags. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
+### Conversation costs (unreleased)
+
+| Metric Name | Description | Metric Type | Tags |
+|-------------|-------------|-------------|------|
+| `ml_obs.span.conversation.cost` | Accepted conversation total in nanodollars (USD × 1e9), once per conversation. | Count | `ml_app`, `service`, `env`, `version`, `model_provider`, `charge_scope`, `cost_source` |
+
+For ElevenLabs, `model_provider:elevenlabs` and `charge_scope:conversation` identify hosted conversation billing. `cost_source:provider` uses the reported USD total or complete USD component pair; `cost_source:user` uses an explicit user override. Unavailable totals do not emit a zero point. Explicit zeros are retained.
+
+Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Component enrichment updates the billing workflow without another total metric.
+
+Platform charges are separate from token counts and token-modality pricing. Do not add the conversation total to its LLM/platform breakdowns. See [provider-reported conversation costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased) for availability and covered charges.
+
 ### Span metrics
 
 | Metric Name | Description | Metric Type | Tags |

@@ -74,6 +74,19 @@ Audio in streamed chat completions is not captured.
 
 Integrations don't fetch images referenced by a remote URL or a file ID. They capture only images that the application sends inline as base64 data. When an integration cannot capture media, it records a text marker such as `[image]` or `[audio]` in the message.
 
+## Conversation billing (unreleased)
+
+ElevenLabs audio capture and billing have separate availability. Python billing uses `LLMObs.submit_conversation_cost`; Node.js billing uses `llmobs.submitConversationCost`. Both require Datadog backend support and a released tracer exposing that API.
+
+| Billing API | Minimum tracer version | Verified provider SDK schema |
+| --- | --- | --- |
+| Python `submit_conversation_cost` | Unreleased | `elevenlabs` 2.70.0 and 2.75.0 |
+| Node.js `submitConversationCost` | Unreleased | `@elevenlabs/elevenlabs-js` 2.75.0 |
+
+Opt in by submitting a completed conversation-details response your application already obtained, or verified post-call transcription webhook data. The tracer makes no extra ElevenLabs requests and performs no polling. USD billing can be delayed; absent cost fields remain unknown.
+
+Conversation charges include the reported LLM and platform amounts and have one conversation owner. Captured audio duration and `context_usage` are not billing measurements. See [conversation billing setup](/llm_observability/instrument/sdk/#submit-conversation-costs-unreleased) and [covered costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased).
+
 ## OpenTelemetry instrumentation
 
 Datadog extracts media from [OpenTelemetry spans][2] that contain the following [GenAI message parts][7]. No additional instrumentation is needed if your application already emits these parts:
