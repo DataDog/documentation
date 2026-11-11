@@ -72,7 +72,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 **Requirements**:
 - Datadog Terraform provider version 3.70 or later.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
-- Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+- Your account has the `workload_identity_federation_read` and `workload_identity_federation_write` permissions.
 
 Setting up Workload Identity Federation for AWS involves two parts:
 1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
@@ -273,7 +273,7 @@ Workload Identity Federation for the Agent allows you to authenticate your Agent
 - A supported Agent version and type based on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
 - An Agent running in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, an ECS task, or an EKS pod).
 - A configured [Datadog-AWS integration][4] with your AWS account added. 
-- The `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+- The `workload_identity_federation_read` and `workload_identity_federation_write` permissions.
 
 #### Supported Agent versions and AWS credentials
 
