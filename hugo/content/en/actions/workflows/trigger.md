@@ -314,18 +314,7 @@ curl -X POST \
 
 In later steps of your workflow, use `Source.api.requestBody` to reference the body of the incoming API request. `Source.api.requestBody` contains the raw request body as a string, regardless of the body's format.
 
-If the request uses the `meta.payload` format, Datadog also maps the payload fields to the workflow's [input parameters][5]. For any other format, parse `Source.api.requestBody` yourself. For example, the following request sends a JSON body:
-
-{{< code-block lang="shell" >}}
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
-  -d '{"alert_id": "12345", "severity": "high"}' \
-  https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
-{{< /code-block >}}
-
-To reference the `severity` field, use `${JSON.parse(Source.api.requestBody).severity}`. `Source.api.requestBody.severity` doesn't work, because `Source.api.requestBody` is a string.
+If the request uses the `meta.payload` format, Datadog also maps the payload fields to the workflow's [input parameters][5]. For any other format, parse `Source.api.requestBody` yourself. If the request body is JSON, parse it with `JSON.parse()` before accessing individual fields. For example, use `${JSON.parse(Source.api.requestBody).my_field}` instead of `Source.api.requestBody.my_field`.
 
 ## Scheduled triggers
 
