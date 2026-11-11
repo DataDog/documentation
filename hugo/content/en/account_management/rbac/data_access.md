@@ -31,7 +31,7 @@ Data Access Control allows you to create a Restricted Dataset, specifying data t
 To view all of your Restricted Datasets, navigate to [Organization Settings][6]. In the left pane, under the {{< ui >}}Access{{< /ui >}} heading, select [Access Control][7]. This action opens the {{< ui >}}Data Access Control{{< /ui >}} tab, which has three sections:
 
 - {{< ui >}}Restricted Datasets{{< /ui >}}: The Restricted Datasets in your organization, with the teams or roles that can access each one and the data it covers.
-- {{< ui >}}Unrestricted Access{{< /ui >}}: The teams and roles with [unrestricted access](#unrestricted-user-groups) to a telemetry type.
+- {{< ui >}}Unrestricted User Groups{{< /ui >}}: The teams and roles with [unrestricted access](#unrestricted-user-groups) to a telemetry type.
 - {{< ui >}}Data Hidden by Default{{< /ui >}}: The telemetry types where [data outside a Restricted Dataset](#strict-mode) is hidden by default.
 
 ### Create a Restricted Dataset
@@ -45,7 +45,7 @@ To create a Restricted Dataset:
 1. In the left pane, under {{< ui >}}Access{{< /ui >}}, select [Access Control][7].
 1. In the {{< ui >}}Restricted Datasets{{< /ui >}} section, click {{< ui >}}New Policy{{< /ui >}}.
 
-    {{< img src="/account_management/rbac/restricted_dataset-4.png" alt="The New Policy page with the Restricted Datasets tab selected, showing the Choose Data Scope, Designate Users with Access, and Name Policy fields.">}}
+    {{< img src="/account_management/rbac/restricted_dataset-4.png" alt="The New Policy page with the Restricted Datasets tab selected and an Unrestricted User Groups tab beside it, showing the Choose Data Scope, Designate Users with Access, and Name Policy fields.">}}
 
 1. Under {{< ui >}}Choose Data Scope{{< /ui >}}, define the data to restrict:
     1. Next to {{< ui >}}In Product{{< /ui >}}, select a product. See [Supported telemetry types](#supported-telemetry).
@@ -114,14 +114,14 @@ A team, role, or agent with unrestricted access for a telemetry type sees all da
 To grant unrestricted access:
 
 1. Navigate to [Access Control][7].
-1. In the {{< ui >}}Unrestricted Access{{< /ui >}} section, click {{< ui >}}New{{< /ui >}}.
+1. Click {{< ui >}}New Policy{{< /ui >}}, then select the {{< ui >}}Unrestricted User Groups{{< /ui >}} tab.
 1. Under {{< ui >}}Designate User Groups{{< /ui >}}, add the teams, roles, or agents.
 1. Under {{< ui >}}Choose Content Scope{{< /ui >}}, select {{< ui >}}Data{{< /ui >}}, {{< ui >}}Assets{{< /ui >}}, or {{< ui >}}Infrastructure{{< /ui >}}. Next to {{< ui >}}Users can always view{{< /ui >}}, select one or more telemetry types.
 1. Save the policy. 
 
-The {{< ui >}}Unrestricted Access{{< /ui >}} section lists these teams, roles, and agents, along with the telemetry types they can view.
+The {{< ui >}}Unrestricted User Groups{{< /ui >}} section lists these teams, roles, and agents, along with the telemetry types they can view.
 
-**Note:** Unrestricted access lets an agent read all data of that telemetry type, including data in Restricted Datasets created later. When an agent needs only some restricted data, add it to the specific Restricted Datasets instead. Reserve unrestricted access for agents whose work requires every record of a telemetry type, and review the {{< ui >}}Unrestricted Access{{< /ui >}} section regularly.
+**Note:** Unrestricted access lets an agent read all data of that telemetry type, including data in Restricted Datasets created later. When an agent needs only some restricted data, add it to the specific Restricted Datasets instead. Reserve unrestricted access for agents whose work requires every record of a telemetry type, and review the {{< ui >}}Unrestricted User Groups{{< /ui >}} section regularly.
 
 Unrestricted access pairs especially well with the {{< ui >}}Restricted{{< /ui >}} setting because it lets designated admins keep working without being added to every dataset.
 
