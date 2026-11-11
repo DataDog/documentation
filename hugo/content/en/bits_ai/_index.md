@@ -35,58 +35,43 @@ further_reading:
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate tasks such as alert investigations, code fixes, or security triage.
 
-The Bits AI home page is the central place in Datadog to work with Bits AI. From the Bits AI home page, you can:
+In Datadog, Bits AI is the central place to work with Bits. From Bits AI, you can:
 
 - Chat with Bits
 - Review the work Bits does autonomously across your environment
 - Create custom automations
 - Manage Bits AI settings and usage for your organization
 
-Learn about Bits AI pricing on [AI Credits][1].
+Learn about Bits AI pricing in [AI Credits][1].
 
 ## Bits Chat
 
-Use Bits Chat to search and act across Datadog in natural language. Ask Bits to investigate an incident, explore your telemetry, build a dashboard, or query your data with DDSQL.
+Use Bits Chat to search and act across Datadog in natural language. For example, ask Bits to investigate an incident, explore your telemetry, build a dashboard, or query your data with DDSQL.
 
-For example, you can ask:
-
-- `Why is the error rate spiking on the web-store service?`
-- `Build me a dashboard to show latency, errors, and request rates for my service`
-- `Investigate why EC2 costs changed between January and February`
-
-Bits Chat is available in Datadog, the Datadog mobile app, Slack, and Microsoft Teams. Bits Chat uses your Datadog role to fetch data, so it can only access the resources that you have permission to view or modify.
+Bits Chat uses your Datadog role to fetch data, so it can only access the resources that you have permission to view or modify.
 
 For more information, see [Bits Chat][2].
 
 ## Autonomous Ops
 
-Bits Autonomous Operations (Autonomous Ops) lets you assign ongoing operational work to Bits, instead of starting Bits on one incident at a time. Autonomous Ops connects [Bits Detection][5], [Bits Investigation][6], and [Bits Remediation][7] so that Bits can take an issue from detection through resolution.
+Autonomous Ops lets you assign Bits as the first on-call responder for your systems. When an issue occurs, Bits triages it and decides whether to handle the issue or hand it off to someone on your team.
 
-With Autonomous Ops, Bits watches the system resources, monitor alerts, or Slack channels that you specify. For each issue, Bits:
+For each issue, Bits:
 
-1. Detects the issue from your existing telemetry and alerts, and adds monitoring where coverage is missing.
-2. Triages the issue and investigates the root cause.
-3. Recommends next steps to fix the issue. If you set up remediation actions, Bits can take those actions after you approve them.
-
-Autonomous Ops handles service degradations, such as rising error rates or latency on an endpoint, as well as infrastructure issues across Kubernetes, Amazon ECS, AWS Lambda, and hosts.
-
-You can work with Bits in Datadog, in Slack, or with the Datadog MCP Server.
+1. Triages the alert to decide whether it needs action.
+1. Investigates the root cause.
+1. Recommends next steps, and can take remediation actions within the guardrails that you define.
+1. Verifies that the issue is resolved.
 
 For more information, see [Bits Autonomous Operations][8].
 
-## Custom Automations
+## Custom automations
 
-Use Custom Automations to rerun a [Bits Chat][2] request on a schedule and send the results to you or your team. For example, you can use Custom Automations to send a daily summary of error rates and p95 latency for a service.
+Custom automations are agents built with [Bits Agent Builder][10] that do a specific task. For each custom automation, you define the trigger or schedule, the agent instructions, and the tools that the agent can use.
 
-When you create a custom automation, Bits:
+You can build a custom automation for almost any task in Datadog that requires an agent step. For example, a custom automation can send your team's Slack channel a daily summary of error rates for a service. Or, a custom automation can review the logs for each new security signal, decide if the signal is a false positive, then notify the team if the signal needs follow-up.
 
-- Runs a custom Bits agent with instructions to repeat the same queries, filters, and analysis on new data each time
-- Runs on a schedule in your time zone, such as daily, every weekday, weekly, every other week, or monthly
-- Sends the results to the specified destination, such as a Slack channel or email address
-
-From the Custom Automations page, you can change an automation's schedule, destination, or report contents. You can also run, pause, resume, or delete an automation. To manage automations from Chat, ask Bits which reports you receive, or ask Bits to stop sending a report.
-
-Custom Automations run on a schedule. For automations that run in response to an event, such as a monitor alert, use [Bits Agent Builder][10] or [Workflow Automation][11]. To automate code changes, use [Bits Code automations][3].
+<div class="alert alert-info">For a preconfigured agent that handles ongoing operational work, use <a href="#autonomous-ops">Autonomous Ops</a> instead of a custom automation.</div>
 
 ## Settings
 
@@ -117,9 +102,6 @@ For more information, see [Bits AI Settings][4].
 [2]: /bits_ai/bits_chat/
 [3]: /bits_ai/bits_code/automations/
 [4]: /bits_ai/bits_settings/
-[5]: /bits_ai/bits_detection/
-[6]: /bits_ai/bits_investigation/
-[7]: /bits_ai/bits_remediation/
 [8]: /bits_ai/bits_autonomous_operations/
 [10]: /actions/agents/
 [11]: /actions/workflows/
