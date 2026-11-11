@@ -50,6 +50,12 @@ An incident's **visibility** determines what users in your Datadog organization 
 
 On the [Datadog Incidents page][5], you can search for private incidents using the **Visibility** facet on the left. You can also add conditions around incident visibility when defining incident [notification rules][2].
 
+### Separate security incidents from operational incidents
+
+To handle security incidents separately from operational incidents, create a dedicated incident type for them. Each incident type has its own settings and incident automations, so you can run a workflow that applies only to security incidents.
+
+Incident types don't have their own access controls. To restrict who can see sensitive incidents, declare them as private incidents.
+
 ### Private incidents in Slack
 
 When you declare private incidents, Datadog creates private Slack channels instead of public channels.

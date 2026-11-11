@@ -7,13 +7,6 @@ Use these variables to access common test execution data such as failure message
 `{{synthetics.failed_step.failure.message}}`
 : The error message (for example, `Element's content should match the given regex`).
 
-`{{synthetics.failed_step.url}}`
-: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
-
-`{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
-: **Note:** Review the [conditional alerting][1] page for an example of how to use this variable in a notification.
-
 `{{synthetics.result.step_count}}`
 : Number of steps (for example, `4`).
 
@@ -23,5 +16,3 @@ Use these variables to access common test execution data such as failure message
 `{{tags}}`
 : Lists all the tags added to the synthetics test.
 : To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
-
-[1]: /synthetics/notifications/conditional_alerting/
