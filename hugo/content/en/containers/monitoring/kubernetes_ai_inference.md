@@ -9,7 +9,7 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-inference/"
  btn_hidden="false" header="Join the Preview!">}}
-The Inference Workloads view is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Inference Workloads is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 Use the [Inference Workloads view][1] in the Kubernetes Explorer to monitor AI inference workloads running on Kubernetes. The AI inference view provides insight from endpoint to compute, simplifying troubleshooting, investigation, and debugging. Use it to monitor relevant pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment and correlate node activity with related metrics, logs, and traces.
