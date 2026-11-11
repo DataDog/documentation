@@ -39,7 +39,7 @@ Subscribe to cost reports in FinOps Open Cost and Usage Specification (FOCUS) fo
 3. Select the FOCUS format and all available subscription fields, and select your OSS bucket as the destination.
 4. If this is your first OSS subscription, click **Authorize** to grant the service access.
 
-Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
+Alibaba Cloud regenerates the current month's cost report daily and finalizes it at 12:00 on the 3rd of the following month. Costs are billed in USD on the international site.
 
 ### Enable Cloud Cost Management
 In the Alibaba Cloud integration tile, enable the toggle for Cloud Cost Management and provide:
@@ -48,7 +48,7 @@ In the Alibaba Cloud integration tile, enable the toggle for Cloud Cost Manageme
 
 ### Historical data
 
-Datadog automatically ingests up to 12 months of available historical cost data from your subscribed FOCUS bill exports.
+Datadog automatically ingests up to 12 months of available historical cost data from your FOCUS cost reports.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
@@ -60,7 +60,7 @@ You can visualize your ingested data using the following cost types:
 | `alibaba_cloud.usage`                                    | Usage quantity of resources over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your FOCUS cost export and help you discover and understand cost data.
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your FOCUS cost reports and help you discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
 
