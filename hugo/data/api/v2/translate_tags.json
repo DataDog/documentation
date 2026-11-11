@@ -131,6 +131,10 @@
     "name": "Change Management",
     "description": "View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "chatgpt-enterprise-integration": {
+    "name": "ChatGPT Enterprise Integration",
+    "description": "Manage your Datadog ChatGPT Enterprise integration accounts and account resources\ndirectly through the Datadog API. See the\n[ChatGPT Enterprise integration page](https://docs.datadoghq.com/integrations/chatgpt-enterprise/) for\nmore information."
+  },
   "cloud-authentication": {
     "name": "Cloud Authentication",
     "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
