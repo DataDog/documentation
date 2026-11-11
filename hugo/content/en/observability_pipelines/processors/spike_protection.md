@@ -76,9 +76,11 @@ You can take the following actions on a spiking group:
 
 ## Health metrics
 
-For [component metrics][6] and [processor buffer metrics][7] emitted by all processors, see the [Pipelines Usage Metrics][8] documentation.
+See [Processor buffer metrics][6] for more information on metrics emitted by all processors.
 
 ### Spike Protection metrics
+
+The following metrics are specific to the Spike Protection processor:
 
 `pipelines.spike_protection_triggered_events_total`
 : **Description**: The number of events received while their group was spiking. Use the `spike_name` and `partition` tags to filter or group by Spike Protection processor and group.
@@ -89,7 +91,7 @@ For [component metrics][6] and [processor buffer metrics][7] emitted by all proc
 : **Metric type**: count
 
 `pipelines.spike_protection_overflow_destination_sent_events_total`
-: **Description**: The number of events routed to the overflow destination. The `reason` tag is `spike_active` for events from a spiking group and `too_many_buckets` for events from new groups after the group limit is reached.
+: **Description**: The number of events routed to the overflow destination. The `reason` tag has a `spike_active` value for events from a spiking group and `too_many_buckets` for events from new groups after the group limit is reached.
 : **Metric type**: count
 
 `pipelines.spike_protection_buckets_count`
@@ -123,6 +125,4 @@ The Spike Volume processor detects and responds to log volume spikes as follows:
 [3]: /observability_pipelines/destinations/datadog_archives/
 [4]: /observability_pipelines/destinations/azure_storage/
 [5]: /observability_pipelines/destinations/google_cloud_storage/
-[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
-[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#component-metrics
