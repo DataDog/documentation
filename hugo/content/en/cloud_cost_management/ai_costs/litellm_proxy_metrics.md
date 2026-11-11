@@ -40,7 +40,7 @@ The metrics:
    ddtrace-run litellm --config config.yaml
    ```
 
-2. Choose where the metrics go. By default, `ddtrace` sends them over OTLP. See [Exporters and destinations](#exporters-and-destinations).
+2. Make sure the proxy can reach the Datadog Agent's [DogStatsD][6] endpoint. By default, `ddtrace` sends the metrics there, to the same `DD_DOGSTATSD_URL` the tracer uses for its other metrics. See [Exporters and destinations](#exporters-and-destinations).
 3. Optionally, add tags with `DD_LITELLM_USAGE_METRICS_TAGS` and declare provider IDs in `model_info`. See [Optional tags](#optional-tags) and [Provider IDs for bill matching](#provider-ids-for-bill-matching).
 
 ### Configuration
@@ -48,19 +48,27 @@ The metrics:
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_LITELLM_USAGE_METRICS_ENABLED` | `false` | Emit usage and cost metrics for LiteLLM proxy calls. |
-| `DD_LITELLM_USAGE_METRICS_EXPORTER` | `otlp` | `otlp` or `dogstatsd`. |
+| `DD_LITELLM_USAGE_METRICS_EXPORTER` | `dogstatsd` | `dogstatsd` sends the metrics to the Datadog Agent. `otlp` sends them over OTLP, and is only for backends other than Datadog. |
 | `DD_LITELLM_USAGE_METRICS_TAGS` | (none) | Comma-separated list of [optional tags](#optional-tags) to add. |
 | `DD_LITELLM_USAGE_METRICS_CLIENT_SOURCE` | (none) | Name of the client application that uses this proxy, sent as the `trajectory.client_source` tag. |
 
 ## Exporters and destinations
 
+### DogStatsD
+
+DogStatsD is the default exporter (`DD_LITELLM_USAGE_METRICS_EXPORTER=dogstatsd`), and the one to use with Datadog. `ddtrace` sends the series to the Datadog Agent's [DogStatsD][6] endpoint at `DD_DOGSTATSD_URL`, over UDP or a Unix socket. The Agent stores the counters as `rate` metrics with a 10-second interval and the durations as distributions, the same types that every other source of these metric names, such as the Datadog AI gateways, uses. Use `.as_count()` to get token and cost totals.
+
+A failed send, such as one to a port with no listener, logs a warning.
+
 ### OTLP
 
-OTLP is the default exporter. With `DD_LITELLM_USAGE_METRICS_EXPORTER=otlp`, `ddtrace` sends OTLP/HTTP protobuf metrics with delta temporality. The destination is chosen in this order:
+<div class="alert alert-warning">Use the OTLP exporter only to send the metrics to a backend other than Datadog, such as an OpenTelemetry Collector that forwards to another system. Datadog stores these OTLP counters as <code>count</code> metrics, while other sources of the same metric names send <code>rate</code> metrics. Datadog keeps one type per metric name in an org and applies it to every point, so mixing the two changes the type of every source's points and can make totals off by up to 10 times.</div>
+
+With `DD_LITELLM_USAGE_METRICS_EXPORTER=otlp`, `ddtrace` sends OTLP/HTTP protobuf metrics with delta temporality. The destination is chosen in this order:
 
 1. **A configured endpoint**: `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`, or `OTEL_EXPORTER_OTLP_ENDPOINT` followed by `/v1/metrics`. Headers come from `OTEL_EXPORTER_OTLP_METRICS_HEADERS`. Use this for an OpenTelemetry Collector.
-2. **Datadog's OTLP intake**: when agentless mode is on (`DD_AGENTLESS_ENABLED=true`), metrics go to `https://otlp.<DD_SITE>/v1/metrics`, with `DD_API_KEY` sent as the `dd-api-key` header. The API key is sent only to this intake.
-3. **The Datadog Agent's OTLP receiver** on port 4318. The Agent enables this receiver only when it is configured, for example with `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318`. See [OTLP Ingestion by the Datadog Agent][5].
+2. **Datadog's OTLP intake**: when agentless mode is on (`DD_AGENTLESS_ENABLED=true`), metrics go to `https://otlp.<DD_SITE>/v1/metrics`, with `DD_API_KEY` sent as the `dd-api-key` header. The API key is sent only to this intake. Because of the type conflict described above, prefer DogStatsD for Datadog.
+3. **The Datadog Agent's OTLP receiver** on port 4318. The Agent enables this receiver only when it is configured, for example with `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318`. See [OTLP Ingestion by the Datadog Agent][5]. Because of the type conflict described above, prefer DogStatsD for Datadog.
 
 Only OTLP/HTTP is supported. If `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL` (or, if unset, `OTEL_EXPORTER_OTLP_PROTOCOL`) is `grpc`, the metrics are not enabled. Set `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=http/protobuf` and point `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` at an OTLP/HTTP endpoint.
 
@@ -68,15 +76,11 @@ Exports are compressed with gzip (`Content-Encoding: gzip`), which every OTLP re
 
 An export that fails with status 429, 502, 503, or 504, a refused connection, or a timeout is retried. While the endpoint stays unavailable, failed exports are kept for later attempts, up to 64 MiB in total; the oldest data is dropped first. Other failures log a warning.
 
-### DogStatsD
-
-With `DD_LITELLM_USAGE_METRICS_EXPORTER=dogstatsd`, `ddtrace` sends the same series to the Datadog Agent's [DogStatsD][6] endpoint. A failed send, such as one to a port with no listener, logs a warning.
-
 ### Cost units
 
 | Destination | Cost unit |
 |---|---|
-| Datadog Agent OTLP receiver, Datadog OTLP intake, or DogStatsD | USD |
+| DogStatsD, Datadog Agent OTLP receiver, or Datadog OTLP intake | USD |
 | Any other OTLP endpoint, such as an OpenTelemetry Collector | Integer billionths of a dollar (unit `{nanoUSD}`), following the semantic conventions |
 
 ## Metrics
