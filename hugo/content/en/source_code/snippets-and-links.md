@@ -36,14 +36,12 @@ further_reading:
   text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
-## Overview
-
 Code snippets and context links connect what you see in Datadog to the source code behind it:
 
-- **Context links** take you from a stack frame, flame graph, test run, or code finding to the file, Git blame, or commit in your repository.
 - **Code snippets** display the relevant lines of code inline in Datadog, so you can read the code without leaving the page.
+- **Context links** take you from a stack frame, flame graph, test run, or code finding in Datadog to the file, Git blame, or commit in your repository.
 
-For example, in Error Tracking, you can preview code snippets in a stack trace or click {{< ui >}}View{{< /ui >}} on a frame to open the file in your repository.
+For example, in [Error Tracking][9], you can preview code snippets in a stack trace or click {{< ui >}}View{{< /ui >}} on a frame to open the file in your repository.
 
 To use code snippets and context links, connect your Git repositories with a [source code management provider integration][10]. Most products also need Git information attached to their data. For example, APM-based products use [service mapping][11], and RUM uses source maps uploaded with Git metadata.
 
@@ -199,5 +197,6 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[9]: /error_tracking/
 [10]: /source_code/source-code-management/
 [11]: /source_code/service-mapping/

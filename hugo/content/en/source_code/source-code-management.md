@@ -16,8 +16,6 @@ further_reading:
   text: "Learn about the Bitbucket Source Code Integration"  
 ---
 
-## Overview
-
 To use most source code-related features, you must connect your Git repositories to Datadog through Datadog's first-party source code management (SCM) provider integrations. After connecting your repositories, Datadog may store the contents of your repositories for up to 7 days to reduce repeated requests to the repository and support feature performance.
 
 ## Source code management providers

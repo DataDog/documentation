@@ -3,8 +3,6 @@ title: Kubernetes Resource Mapping for Source Code Integration
 description: "Learn how to connect Kubernetes cluster resources to the source code that was used to deploy them using annotations."
 ---
 
-## Overview
-
 Datadog's source code and resource mapping allow you to connect cluster resources to the source code
 that was used to deploy them, using Kubernetes annotations.
 
