@@ -24,12 +24,11 @@ further_reading:
 Before you set up Cloud Cost Management for Alibaba Cloud, make sure you have:
 
 - An Alibaba Cloud account on the international site
-- The [Alibaba Cloud integration][1] installed in Datadog
 
 ## Setup
 
 ### Configure the Alibaba Cloud integration
-Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account, and follow the steps to configure the Alibaba Cloud integration.
+Navigate to [Provider Settings on the cloud cost page][1], add an Alibaba Cloud account, and follow the steps to configure the Alibaba Cloud integration.
 
 ### Subscribe to FOCUS bills in Alibaba Cloud
 Subscribe to cost reports in FinOps Open Cost and Usage Specification (FOCUS) format, delivered to an Object Storage Service (OSS) bucket:
@@ -97,5 +96,4 @@ The following out-of-the-box tags are available for filtering and grouping data:
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/alibaba_cloud/
-[2]: https://app.datadoghq.com/cost/setup
+[1]: https://app.datadoghq.com/cost/setup

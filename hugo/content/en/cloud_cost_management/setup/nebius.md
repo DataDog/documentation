@@ -24,12 +24,11 @@ further_reading:
 Before you set up Cloud Cost Management for Nebius Cloud, make sure you have:
 
 - A Nebius Cloud account
-- The [Nebius Cloud integration][1] installed in Datadog
 
 ## Setup
 
 ### Configure the Nebius Cloud integration
-Navigate to [Provider Settings on the cloud cost page][2], add a Nebius Cloud account, and follow the steps to configure the Nebius Cloud integration.
+Navigate to [Provider Settings on the cloud cost page][1], add a Nebius Cloud account, and follow the steps to configure the Nebius Cloud integration.
 
 ### Configure a cost export
 In the Nebius console, navigate to **Billing > Export > Periodic Export** and create an export in FinOps Open Cost and Usage Specification (FOCUS) format to a Nebius Object Storage bucket. Datadog reads the exported cost reports directly from this bucket.
@@ -89,5 +88,4 @@ The following out-of-the-box tags are available for filtering and grouping data:
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/nebius_cloud/
-[2]: https://app.datadoghq.com/cost/setup
+[1]: https://app.datadoghq.com/cost/setup
