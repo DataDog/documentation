@@ -24,7 +24,7 @@ To set up a new Collector instead, see [Install the DDOT Collector on Kubernetes
 
 1. Check that the DDOT Collector includes every component your configuration uses. Compare the receivers, processors, exporters, connectors, and extensions in your configuration with the [included components][4]. If your configuration uses a component that the DDOT Collector doesn't include, the Collector doesn't start.
 1. Store your Datadog API key in a Kubernetes secret, as described in [Store your Datadog API key][5]. The DDOT Collector sends data about itself and its host to Datadog, so it needs the API key even if your pipelines don't use the Datadog Exporter.
-1. Add these variables to the Collector's `env` list. You don't need to change your pipeline configuration:
+1. Add these variables to the Collector's environment: `spec.env` for the Operator, `extraEnvs` for the Collector Helm chart, or `collectors.<COLLECTOR_NAME>.env` for kube-stack. You don't need to change your pipeline configuration:
 
    ```yaml
    - name: DD_API_KEY
