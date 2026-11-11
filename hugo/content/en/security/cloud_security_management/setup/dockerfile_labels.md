@@ -52,7 +52,7 @@ The following labels are also supported:
 Keep the following in mind:
 - Set labels in the **final build stage** of a multi-stage Dockerfile. Labels set in earlier stages are not part of the final image.
 - Labels are inherited from base images. Labels you set in your Dockerfile override inherited values.
-- The filename in `com.datadoghq.image.source_path` must be a Dockerfile or Containerfilename, such as `Dockerfile`, `Dockerfile.prod`, `api.Dockerfile`, or `Containerfile`.
+- The filename in `com.datadoghq.image.source_path` must be a Dockerfile or Containerfile name, such as `Dockerfile`, `Dockerfile.prod`, `api.Dockerfile`, or `Containerfile`.
 - Datadog builds Dockerfile links for repositories hosted on GitHub, GitLab, Bitbucket, and Azure DevOps.
 
 ## Choose a method
@@ -155,20 +155,22 @@ Pass labels with `docker build --label`. To add the commit revision, use `git re
 
 ```bash
 docker build \
+  --file docker/api/Dockerfile \
   --label org.opencontainers.image.source="https://github.com/org/repo" \
   --label org.opencontainers.image.revision="$(git rev-parse HEAD)" \
   --label com.datadoghq.image.source_path="docker/api/Dockerfile" \
   -t myapp:latest .
 ```
 
-If you scan images with the Datadog Security CLI, you can also use OCI annotations, which the CLI reads:
+If you scan images with the Datadog Security CLI, you can also use OCI annotations, which the CLI reads. Labels work with any build. Annotations are kept only when you push to a registry or export an OCI image, not in the local Docker image store. For example:
 
 ```bash
-docker build \
+docker buildx build \
+  --file docker/api/Dockerfile \
   --annotation org.opencontainers.image.source="https://github.com/org/repo" \
   --annotation org.opencontainers.image.revision="$(git rev-parse HEAD)" \
   --annotation com.datadoghq.image.source_path="docker/api/Dockerfile" \
-  -t myapp:latest .
+  -t registry.example.com/myapp:latest --push .
 ```
 
 The Datadog Security CLI can also add this metadata at scan time with the `--dockerfile` flag. See [Link Dockerfile to vulnerabilities][6].
@@ -211,7 +213,7 @@ Add the labels to these files manually. See [Add labels at build time](#add-labe
 
 - Rebuild and redeploy the image after you add the labels.
 - Confirm that the labels are in the final build stage. Use `docker inspect` to check the built image.
-- Confirm that the filename in `com.datadoghq.image.source_path` is a Dockerfile or Containerfilename.
+- Confirm that the filename in `com.datadoghq.image.source_path` is a Dockerfile or Containerfile name.
 - Confirm that the repository is hosted on GitHub, GitLab, Bitbucket, or Azure DevOps.
 
 ## Further reading
