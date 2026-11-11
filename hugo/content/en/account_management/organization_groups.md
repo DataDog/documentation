@@ -45,7 +45,7 @@ Administrators in the owner organization have access to the **Organization Group
 
 ### Default group for child organizations
 
-When you create a child organization, Datadog automatically adds it to the Organization Group of its immediate parent organization. The child organization immediately receives that group's policies and shared roles.
+When you create a child organization, Datadog automatically adds it to the Organization Group of its immediate parent organization. The child organization immediately receives the parent organization group's policies and shared roles.
 
 This behavior applies whether you create the child organization in the UI, through the API (`POST /api/v1/org`), or with Terraform. You can also create a child organization directly from an Organization Group in the UI.
 
