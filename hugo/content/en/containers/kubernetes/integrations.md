@@ -52,7 +52,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 
 Otherwise, configure an integration:
 
-1. Choose a configuration method: `DatadogInstrumentation`, Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart.
+1. Choose a configuration method: the `DatadogInstrumentation` custom resource (recommended), Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
@@ -416,12 +416,12 @@ Customize check tagging in a `DatadogInstrumentation` resource or with pod annot
 
 #### Tag cardinality
 
-Set the tag cardinality level for a specific check to `low`, `orchestrator`, or `high`. This overrides the global Agent tag cardinality setting for metrics collected by that check. If omitted, the check inherits the Agent setting.
+Set the tag cardinality level for a specific check to `low`, `orchestrator`, or `high`. This setting overrides the global Agent tag cardinality setting for metrics collected by that check. If omitted, the check inherits the Agent setting.
 
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Set `checkTagCardinality` on the check entry. This example configures a Redis check for the `redis` container in the `redis` StatefulSet:
+Set `checkTagCardinality` on the check entry. The following example configures a Redis check for the `redis` container in the `redis` StatefulSet:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -475,15 +475,26 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-These settings only affect metrics collected by integration checks. To configure DogStatsD tag cardinality, use the global `dogstatsd_tag_cardinality` configuration parameter or the `DD_DOGSTATSD_TAG_CARDINALITY` environment variable.
+These settings affect only metrics collected by integration checks, not metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global `dogstatsd_tag_cardinality` configuration parameter or the `DD_DOGSTATSD_TAG_CARDINALITY` environment variable.
+
+For more information about tag cardinality, see [Per-check tag configuration][27].
 
 #### Disable Autodiscovery tags
 
 To suppress container and pod tags added by Autodiscovery, set `ignoreAutodiscoveryTags: true` on the check entry in `spec.config.checks`. The default is `false`. This setting does not remove tags explicitly configured on the check or tags emitted by the integration itself.
 
-For annotation-based configurations, set `"ignore_autodiscovery_tags": true` alongside `init_config` and `instances` in the check's JSON configuration.
+For annotation-based configurations, set `ignore_autodiscovery_tags` alongside `init_config` and `instances` in the check's JSON configuration. For example, add this annotation to a pod with a container named `redis`:
 
-For more information about tag cardinality, see [Per-check tag configuration][27].
+```yaml
+ad.datadoghq.com/redis.checks: |
+  {
+    "redisdb": {
+      "ignore_autodiscovery_tags": true,
+      "init_config": {},
+      "instances": [{"host": "%%host%%", "port": 6379}]
+    }
+  }
+```
 
 ### Auto-configuration
 
@@ -551,7 +562,7 @@ To apply this configuration to your Postgres containers:
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Create this resource in the namespace of the targeted Postgres workload.
+Create the following resource in the namespace of the targeted Postgres workload:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -581,9 +592,9 @@ spec:
         service: pg_service
 ```
 
-Use the API version, kind, and name of your workload in `targetRef`. The Agent must have access to `/var/log/postgres.log` to collect the file. See [Collect logs from a container local log file][30].
+Use the API version, kind, and name of your workload in `targetRef`. The Agent must have access to `/var/log/postgres.log` to collect the file. For more information, see [Collect logs from a container local log file][30].
 
-Save the resource as `postgres-instrumentation.yaml` and apply it:
+Save the resource as `postgres-instrumentation.yaml`, apply it, and check its status:
 
 ```shell
 kubectl apply -f postgres-instrumentation.yaml

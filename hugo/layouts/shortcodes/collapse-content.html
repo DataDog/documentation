@@ -1,4 +1,8 @@
 {{- $headingLevel := default "h3" (.Get "level") -}}
+{{- $headingClass := "header-text-inner" -}}
+{{- with .Get "heading_class" -}}
+  {{- $headingClass = printf "%s %s" $headingClass . -}}
+{{- end -}}
 {{- $isExpanded := default false (.Get "expanded") -}}
 {{- $accordionId := default "" (.Get "id") -}}
 <details class="collapsible-section" {{ if $isExpanded }}open{{ end }} {{ if ne $accordionId "" }}id="{{ $accordionId }}"{{- end -}}>
@@ -11,7 +15,7 @@
       </div>
       <div class="header-text">
         {{- $title := .Get "title" | .Page.RenderString -}}
-        {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel $title $headingLevel | safeHTML }}
+        {{ printf "<%s class='%s'>%s</%s>" $headingLevel $headingClass $title $headingLevel | safeHTML }}
       </div>
     </div>
   </summary>

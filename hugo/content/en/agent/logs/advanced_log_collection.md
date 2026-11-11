@@ -107,7 +107,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][10], apply this resource for the `cardpayment` Deployment:
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -130,6 +130,8 @@ spec:
             name: exclude_datadoghq_users
             pattern: '\w+@datadoghq.com'
 ```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -258,7 +260,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][10], apply this resource for the `cardpayment` Deployment:
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -281,6 +283,8 @@ spec:
             name: include_datadoghq_users
             pattern: '\w+@datadoghq.com'
 ```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -367,7 +371,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][10], apply this resource for the `cardpayment` Deployment:
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -388,6 +392,8 @@ spec:
         log_processing_rules:
           - type: exclude_truncated
 ```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -479,7 +485,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][10], apply this resource for the `cardpayment` Deployment:
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -503,6 +509,8 @@ spec:
             replace_placeholder: "[masked_credit_card]"
             pattern: '(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})'
 ```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -619,7 +627,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][10], apply this resource for the `postgres` Deployment:
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `postgres` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -642,6 +650,8 @@ spec:
             name: log_start_with_date
             pattern: '\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])'
 ```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -902,4 +912,3 @@ Integration-specific rules completely override global rules for the particular i
 [6]: /agent/configuration/agent-commands/#agent-information
 [7]: /agent/logs/auto_multiline_detection
 [8]: /agent/logs/auto_multiline_detection_legacy
-[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
