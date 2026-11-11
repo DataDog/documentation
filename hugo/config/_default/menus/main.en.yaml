@@ -6973,11 +6973,16 @@ menu:
       parent: source_code_integration
       identifier: sci_resource_mapping
       weight: 3
-    - name: Features
-      url: source_code/features/
+    - name: Code Snippets and Context Links
+      url: source_code/snippets-and-links/
       parent: source_code_integration
-      identifier: sci_features
+      identifier: sci_snippets_and_links
       weight: 4
+    - name: PR Comments
+      url: source_code/pr-comments/
+      parent: source_code_integration
+      identifier: sci_pr_comments
+      weight: 5
     - name: IDE Plugins
       url: ide_plugins/
       pre: ide
