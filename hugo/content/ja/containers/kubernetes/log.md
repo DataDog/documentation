@@ -1,49 +1,52 @@
 ---
 aliases:
 - /ja/agent/kubernetes/log
-description: Datadog Agent を使用して、Kubernetes 上で実行されているコンテナ化されたアプリケーションからログを収集するよう構成します。
+description: Kubernetes 上で Datadog Agent を使用して、コンテナ化されたアプリケーションからのログ収集を構成します。
 further_reading:
-- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
-  tag: ブログ
-  text: Datadog を使用して Amazon EKS on Fargate のログを監視する
 - link: /agent/kubernetes/apm/
   tag: ドキュメント
-  text: アプリケーションのトレースを収集する
+  text: アプリケーショントレースの収集
 - link: /agent/kubernetes/prometheus/
   tag: ドキュメント
-  text: Prometheus のメトリクスを収集する
+  text: Prometheus メトリクスの収集
 - link: /agent/kubernetes/integrations/
   tag: ドキュメント
-  text: アプリケーションのメトリクスやログを自動的に収集する
+  text: アプリケーションのメトリクスとログを自動で収集
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
-  text: データ収集を一部のコンテナのみに制限する
+  text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
-  text: コンテナから出力されるすべてのデータにタグを付ける
+  text: コンテナから送信された全データにタグを割り当てる
 - link: /containers/troubleshooting/log-collection
   tag: ドキュメント
-  text: コンテナのログ収集のトラブルシューティング
+  text: コンテナログ収集のトラブルシューティング
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: ブログ
+  text: Datadog を使用して Fargate 上の Amazon EKS のログを監視します。
+- link: https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/
+  tag: ブログ
+  text: DatadogInstrumentation で Kubernetes の監視可能性を管理する
 - link: https://www.datadoghq.com/architecture/monitoring-container-apps-logs/
-  tag: アーキテクチャセンター
-  text: 'コンテナアプリの監視: ログ'
-title: Kubernetes のログ収集
+  tag: Architecture Center
+  text: Container Apps の監視 - ログ
+title: Kubernetes ログの収集
 ---
-このページでは、Kubernetes のログファイルからログを収集する方法について説明します。
+このページでは、Kubernetes ログファイルからのログの収集について説明します。
 
-コンテナ化されたアプリケーションが標準出力および標準エラー (`stdout`/`stderr`) にログを書き込む場合、コンテナランタイムと Kubernetes が自動的にログを管理します。デフォルトでは、[Kubernetes はこれらのログストリームをファイルとして保存します][13]。保存先はホスト上の `/var/log/pods` フォルダと、各 Pod およびコンテナのサブフォルダです。
+コンテナ化されたアプリケーションが標準出力と標準エラー出力 (`stdout`/`stderr`) にログを書き込むと、コンテナランタイムと Kubernetes が自動的にログを管理します。デフォルトのパターンは、[Kubernetes がこれらのログストリームをファイルとしてホスト上の `/var/log/pods` フォルダーおよび各 Pod とコンテナのサブフォルダーに保存する][13] ことです。
 
-Datadog Agent は、以下の手順でこれらのコンテナの Kubernetes のログファイルを収集できます。このオプションは、Kubernetes が作成する Pod の一時的な性質に適しており、Docker ソケットからログを収集するよりもリソース効率が高くなります。Datadog は、Kubernetes でのログ収集にこの方法を推奨しています。
+Datadog Agent は、以下の手順に従ってこれらの Kubernetes ログファイルを収集できます。このオプションは、Kubernetes が作成する Pod の一時的な性質に対してスケールしやすく、Docker ソケットからログを収集するよりもリソース効率に優れています。Datadog は Kubernetes におけるログ収集方法としてこの方法を推奨します。
 
-また、Datadog Agent は、Docker ソケット経由で Docker API に繰り返しリクエストを送信してログを収集することもできます。ただし、Kubernetes クラスターのコンテナランタイムとして Docker が必要です。これには、ログファイルを使用する場合よりも多くのリソースが必要です。Docker ソケットを使用してログを収集する方法については、[Docker ソケットを使用したログの収集][1] を参照してください。コンテナ化されたアプリケーションがコンテナ内に保存されたログファイルに書き込んでいる場合、ログ収集が複雑になる可能性があります。[ファイルからのログ収集](#from-a-container-local-log-file)を参照してください。
+また、Datadog Agent は Docker ソケットを通じて Docker API に対して繰り返しリクエストを行うことでログを収集することもできます。ただし、これには Kubernetes クラスターのコンテナランタイムとして Docker が必要です。これはログファイルを使用する方法よりもリソースを多く消費します。Docker ソケットを使用したログ収集については、[Docker ソケットによるログ収集][1] を参照してください。コンテナ化されたアプリケーションがコンテナ内のログファイルに書き込んでいる場合、ログ収集が複雑になる可能性があります。[log collection from a file](#from-a-container-local-log-file) を参照してください。
 
 ## セットアップ {#setup}
 
-### ログ収集 {#log-collection}
+### ログ収集{#log-collection}
 
 アプリケーションログの収集を開始する前に、Kubernetes クラスターで Datadog Agent が実行されていることを確認してください。
 
-DaemonSet でログ収集を手動で構成する方法については、[DaemonSet ログ収集][9] を参照してください。それ以外の場合は、以下の手順に従ってください。
+DaemonSet で手動でログ収集を構成するには、[DaemonSet ログ収集][9] を参照してください。そうでない場合は、以下の手順に従ってください。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -66,19 +69,19 @@ spec:
       containerCollectAll: true
 ```
 
-次に、新しい構成を適用します。
+次に、新しいコンフィギュレーションを適用します。
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-追加の例については、[ログ、メトリクス、APM 収集が有効なサンプルマニフェスト][1] を参照してください。`features.logCollection.containerCollectAll` を `true` に設定すると、デフォルトですべての検出されたコンテナからログを収集できます。`false` (デフォルト) に設定されている場合、ログ収集を有効にするには Autodiscovery のログ構成を指定する必要があります。詳細については、[ログの検出 - フィルタリング](#filtering)を参照してください。
+追加の例については、[ログ、メトリクス、および APM 収集が有効なサンプルマニフェスト][1] を参照してください。デフォルトで、検出されたすべてのコンテナからログを収集するには、`features.logCollection.containerCollectAll` を `true` に設定できます。`false` (デフォルト) に設定されている場合、ログ収集を有効にするには Autodiscovery のログ構成を指定する必要があります。詳細については、[Log discovery - Filtering](#filtering) を参照してください。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Helm でログ収集を有効にするには、[datadog-values.yaml][1] ファイルを以下のログ収集構成で更新します。次に、Datadog Helm チャートをアップグレードします。
+Helm でログ収集を有効にするには、次のログ収集構成で [datadog-values.yaml][1] ファイルを更新します。次に、Datadog Helm チャートをアップグレードします。
 
 ```yaml
 datadog:
@@ -87,13 +90,13 @@ datadog:
     containerCollectAll: true
 ```
 
-`datadog.logs.containerCollectAll` を `true` に設定すると、デフォルトですべての検出されたコンテナからログを収集できます。`false` (デフォルト) に設定されている場合、ログ収集を有効にするには Autodiscovery のログ構成を指定する必要があります。詳細については、[ログの検出 - フィルタリング](#filtering)を参照してください。
+デフォルトで、検出されたすべてのコンテナからログを収集するには、`datadog.logs.containerCollectAll` を `true` に設定できます。`false` (デフォルト) に設定されている場合、ログ収集を有効にするには Autodiscovery のログ構成を指定する必要があります。詳細については、[Log discovery - Filtering](#filtering) を参照してください。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-### 非特権 {#unprivileged}
+### 非特権{#unprivileged}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -122,8 +125,8 @@ spec:
           - <DOCKER_GROUP_ID>
 ```
 
--  `<USER_ID>` を Agent の実行に使用する UID に置き換えます。
--  `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に置き換えます。
+- `<USER_ID>` を Agent を実行する UID に置き換えます。
+- `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に変更します。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
@@ -139,71 +142,71 @@ datadog:
       - <DOCKER_GROUP_ID>
 ```
 
--  `<USER_ID>` を Agent を実行する UID に置き換えます。
--  `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に置き換えます。
+- `<USER_ID>` を Agent を実行する UID に置き換えます。
+- `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に変更します。
 
 {{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-<strong>非特権インストールに関する警告</strong>
+<strong>非特権インストールの警告</strong>
 <br/><br/>
-非特権インストールを実行する場合、Agent は <code>/var/log/pods</code>のログファイルを読み取れる必要があります。
+非特権インストールを実行する場合、Agent は次の場所にあるログファイルを読み取る必要があります。 <code>/var/log/pods</code>。
 <br/><br/>
-containerd ランタイムを使用している場合、 <code>/var/log/pods</code> のログファイルは <code>root</code> グループのメンバーが読み取れます。上記の手順では、Agent は <code>root</code> グループで実行されます。操作は不要です。
+containerd ランタイムを使用している場合、 <code>/var/log/pods</code> にあるログファイルは、 <code>root</code> グループのメンバーが読み取り可能です。上記の手順に従うと、Agent は <code>root</code> グループのメンバーが読み取り可能です。特にアクションは必要ありません。
 <br/><br/>
-Docker ランタイムを使用している場合、 <code>/var/log/pods</code> のログファイルは <code>/var/lib/docker/containers</code>へのシンボリックリンクであり、 <code>root</code> ユーザーのみがそのリンク先をたどることができます。そのため、Docker ランタイムでは、<code>root</code> 以外の Agent は <code>/var/log/pods</code>のログを読み取れません。Docker ソケットを Agent コンテナにマウントする必要があります。これにより、Docker デーモンを介して Pod ログを取得できるようになります。
+Docker ランタイムを使用している場合、 <code>/var/log/pods</code> にあるログファイルは <code>/var/lib/docker/containers</code>へのシンボリックリンクであり、これは <code>root</code> ユーザーのみがたどることができます。したがって、Docker ランタイムを使用する場合、<code>root</code> 以外の Agent が <code>/var/log/pods</code>内のログを読み取ることはできません。Docker ソケットを Agent コンテナにマウントする必要があります。これにより、Agent は Docker デーモン経由で Pod のログを取得できるようになります。
 <br/><br/>
-Docker ソケットがマウントされている場合に <code>/var/log/pods</code> からログを収集するには、環境変数 <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> ( <code>logs_config.k8s_container_use_file</code> は <code>datadog.yaml</code>におけるもの) を <code>true</code>に設定します。これにより、Agent は強制的にファイル収集モードを使用します。
+Docker ソケットがマウントされている環境で <code>/var/log/pods</code> からログを収集するには、環境変数 <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (または <code>logs_config.k8s_container_use_file</code> ( <code>datadog.yaml</code>内の)) を <code>true</code>に設定してください。これにより、Agent はファイル収集モードを使用するように強制されます。
 </div>
 
-## ログの検出 {#log-discovery}
+## ログの検出{#log-discovery}
 
-Kubernetes の Datadog Agent は、DaemonSet (Datadog Operator または Helm によって管理) によってデプロイされます。この DaemonSet は、クラスターの各ノードに Agent Pod のレプリカを 1 つずつスケジュールします。各 Agent Pod は、それぞれのノードにある他の Pod やコンテナのログを報告します。[Container Collect All] 機能が有効な場合、Agent は検出されたすべてのコンテナのログをデフォルトのタグセットとともに報告します。
+Kubernetes の Datadog Agent は、DaemonSet によってデプロイされます (Datadog Operator または Helm によって管理されます)。この DaemonSet は、クラスターの各ノードに Agent Pod のレプリカを 1 つスケジュールします。各 Agent Pod は、それぞれのノード上の他の Pod およびコンテナのログを報告します。「Container Collect All」機能が有効になっていると、Datadog Agent はデフォルトのタグセットを使用して、検出されたすべてのコンテナのログを報告します。
 
-### フィルタリング {#filtering}
+### フィルタリング{#filtering}
 
-[Container Collect All] が有効な場合、ログの収集対象とするコンテナを設定できます。これは、必要に応じて Datadog Agent のログが収集されるのを防ぐのに役立ちます。これを行うには、Datadog Agent に構成を渡して収集対象を制御するか、Kubernetes Pod に構成を渡して特定のログをより明示的に除外します。
+「Container Collect All」が有効になっている場合、ログを収集するコンテナを構成できます。これは、必要に応じて Datadog Agent のログの収集を防ぐのに役立ちます。これは、Datadog Agent に取得対象を制御する構成を渡すか、特定のログをより明示的に除外するための構成を Kubernetes Pod に渡すことで実現できます。
 
-`DD_CONTAINER_EXCLUDE_LOGS` や `ad.datadoghq.com/logs_exclude` のような方法でログをフィルタリングする場合、[Autodiscovery アノテーション][19]、[`DatadogInstrumentation` CRD][23]、または [Autodiscovery 構成ファイル][20] で明示的に定義されたログ収集構成に関係なく、Agent はログ収集を無視します。
+`DD_CONTAINER_EXCLUDE_LOGS` や `ad.datadoghq.com/logs_exclude` のような方法でログをフィルタリングする場合、Agent は [Autodiscovery アノテーション][19]、[`DatadogInstrumentation` CRD][23]、または [Autodiscovery 構成ファイル][20]で明示的に定義されたログ収集構成に関係なく、ログ収集を無視します。
 
-[Container Collect All] が無効 (デフォルト) の場合、すべてがデフォルトで除外されるため、フィルタリングを追加する必要はありません。選択した Pod のみを収集対象にするには、対象の Pod に対して [Autodiscovery アノテーション][19]、[`DatadogInstrumentation` CRD][23]、または [Autodiscovery 構成ファイル][20] を使用してログ構成を有効にします。
+「Container Collect All」が無効 (デフォルト) の場合、すべてがデフォルトで除外されるため、フィルタリングを追加する必要はありません。選択した Pod のみを収集対象に含めるには、対象の Pod に対して [Autodiscovery アノテーション][19]、[`DatadogInstrumentation` CRD][23]、または [Autodiscovery 構成ファイル][20]でログ構成を有効にできます。
 
-フィルタリングの詳細については、[コンテナ検出の管理][8] を参照してください。
+フィルタリングの詳細については、[コンテナ検出の管理][8]を参照してください。
 
 ### タグ付け {#tagging}
 
-Datadog Agent は、Kubernetes コンテナからのログにデフォルトの [Kubernetes タグ][14] と、抽出されたカスタムタグを付与します。[Container Collect All] が有効な場合、Agent はコンテナのショートイメージ名と一致する `source` タグおよび `service` タグを持つコンテナのログを報告します。例えば、`gcr.io/owner/example-image:latest` コンテナイメージを使用するコンテナからのログには、`source`、`service`、および `short_image` タグの値として `example-image` が設定されます。
+Datadog Agent は、Kubernetes コンテナからのログにデフォルトの [Kubernetes タグ][14]およびカスタムで抽出されたタグを付与します。「Container Collect All」が有効な場合、Datadog Agent はコンテナのショートイメージ名に一致する `source` および `service` タグを持つコンテナのログを報告します。たとえば、`gcr.io/owner/example-image:latest` コンテナイメージを使用しているコンテナからのログは、`example-image` が`source`、`service`、および `short_image` タグの値になります。
 
-`service` タグは、[Unified Service Tagging][4] の Pod ラベル `tags.datadoghq.com/service: "<SERVICE>"` によって設定することもできます。`source` および `service` 属性について詳しくは、[予約済み属性][11] を参照してください。
+`service`タグは、[Unified Service Tagging][4] Pod ラベル `tags.datadoghq.com/service: "<SERVICE>"` によって設定することもできます。`source` および `service` 属性の詳細については、[予約済み属性][11]を参照してください。
 
-`source` タグはログにとって重要です。これは、[すぐに使用できるログパイプライン][15] がこのタグを使用してフィルタリングされるためです。ただし、これらのパイプラインは必要に応じて完全にカスタマイズできます。ログのタグをさらにカスタマイズする手順については、以下の[インテグレーションログ](#integration-logs)セクションを参照してください。
+`source`タグは、[標準のログパイプライン][15]がこのタグを使用してフィルタリングされるため、ログにとって重要です。ただし、これらのパイプラインは必要に応じて完全にカスタマイズできます。ログのタグをさらにカスタマイズする手順については、以下の [Integration Logs](#integration-logs) セクションを参照してください。
 
-## インテグレーションログ {#integration-logs}
+## インテグレーションログ{#integration-logs}
 
-[Autodiscovery][10] を使用すると、テンプレートを使用してコンテナのログ収集やその他の機能を構成できます。ログ収集を構成するには、次のいずれかの方法を使用します。
+[Autodiscovery][10] では、テンプレートを使ってコンテナ上でログ収集およびその他の機能の構成を行うことができます。ログ収集を構成するには、次のいずれかの方法を使用します。
 
 - [Autodiscovery アノテーション](#autodiscovery-annotations) (推奨)
-- [`DatadogInstrumentation`CRD](#datadoginstrumentation-crd) (新規)
+- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd) (新規)
 - [Autodiscovery 構成ファイル](#autodiscovery-configuration-files)
 
-これらのログ構成に `source` タグおよび `service` タグを設定することを強く推奨します。`source` タグを Datadog の [すぐに使用できるログパイプライン][15] のいずれかに一致させると、ログが自動的に強化されます。また、[Datadog のパイプラインライブラリ][16] も参照できます。`service` タグは [Unified Service Tagging][4] を強化し、ログを同じサービスのメトリクスやトレースとリンクさせます。`source` と `service` が省略された場合、Agent は (設定されている場合は) Unified Service Tagging の `service` タグにフォールバックし、それ以外の場合はコンテナのショートイメージ名を使用します。
+これらのログ構成に `source` タグと `service` タグを設定することを強く推奨します。`source` タグを Datadog の[標準ログ パイプライン][15]のいずれかに一致させると、ログが自動的にエンリッチされます。また、[Datadog のパイプライン ライブラリ][16]も参照できます。`service` タグは [Unified Service Tagging][4] を有効にし、ログを同じサービスのメトリクスやトレースとリンクさせます。`source` と `service` が省略された場合、Agent は Unified Service Tagging の `service` タグ (設定されている場合) にフォールバックし、それ以外の場合はコンテナのショートイメージ名にフォールバックします。
 
-### Autodiscovery アノテーション {#autodiscovery-annotations}
+### Autodiscovery アノテーション{#autodiscovery-annotations}
 
-Autodiscovery を使用すると、Agent はすべての Pod アノテーションからインテグレーションテンプレートを自動的に検索します。
+Autodiscovery では、Agent が自動的にすべてのポッドアノテーションを対象にインテグレーションテンプレートを検索します。
 
 特定のコンテナに特定の構成を適用するには、JSON 形式のログ構成を含むアノテーション `ad.datadoghq.com/<CONTAINER_NAME>.logs` を Pod に追加します。
 
-**注**: Autodiscovery アノテーションは、イメージ**ではなく**、名前でコンテナを識別します。`<CONTAINER_NAME>` を `.spec.containers[i].name` と照合しようとします。`.spec.containers[i].image` とは照合しません。
+**注**: Autodiscovery アノテーションはコンテナを名前で識別し、イメージでは識別**しません**。それは `<CONTAINER_NAME>` を `.spec.containers[i].name` に一致させようとし、`.spec.containers[i].image` には一致させません。
 
 <div class="alert alert-info">
-Kubernetes Pod を<i>直接</i>定義する場合 ( <code>kind:Pod</code>を使用)、次のセクションに示すように、各 Pod の <code>metadata</code> セクションにアノテーションを追加します。
+Kubernetes Pod を <i>直接</i> ( <code>kind:Pod</code>を使用して) 定義する場合は、以下のセクションに示すように、各 Pod のアノテーションをその <code>metadata</code> セクションに追加してください。
 <br/><br/>
-Kubernetes Pod を<i>間接的に</i>定義する場合 (レプリケーションコントローラー、ReplicaSet、または Deployment を使用)、 <code>.spec.template.metadata</code>の下にある Pod テンプレートに Pod アノテーションを追加します。</div>
+Kubernetes Pod を<i>間接的</i> (ReplicationController、ReplicaSet、または Deployment を使用) に定義する場合は、Pod アノテーションを <code>.spec.template.metadata</code>下の Pod テンプレートに追加してください。</div>
 
-#### 単一のコンテナを構成する{#configure-a-single-container}
-Pod 内の特定のコンテナのログ収集を構成するには、Pod に次のアノテーションを追加します。
+#### 単一コンテナの構成{#configure-a-single-container}
+Pod 内の特定のコンテナについてログ収集を構成するには、次のアノテーションを Pod に追加します。
 
 ```yaml
 apiVersion: v1
@@ -220,9 +223,9 @@ spec:
 # (...)
 ```
 
-#### ログ Autodiscovery アノテーションの例 {#example-log-autodiscovery-annotations}
+#### ログ Autodiscovery アノテーションの例{#example-log-autodiscovery-annotations}
 
-次の Pod アノテーションは、例として示すコンテナのインテグレーションテンプレートを定義します。これは Deployment 自体ではなく、Pod テンプレートのアノテーション内で定義されます。このログ構成は、`app` コンテナからのすべてのログに、`source:java`、`service:example-app`、および追加タグ `foo:bar` を設定します。
+次の Pod アノテーションは、サンプルコンテナのインテグレーションテンプレートを定義します。これは Deployment 自体ではなく、Pod テンプレートのアノテーションで定義されます。このログ構成は、`app` コンテナからのすべてのログに対して、`source:java`、`service:example-app` および追加のタグ `foo:bar` を付与します。
 
 ```yaml
 apiVersion: apps/v1
@@ -247,8 +250,8 @@ spec:
           image: owner/example-image:latest
 ```
 
-#### 2 つの異なるコンテナを構成する {#configure-two-different-containers}
-Pod 内の 2 つの異なるコンテナ `<CONTAINER_NAME_1>` および `<CONTAINER_NAME_2>` に 2 つの異なるインテグレーションテンプレートを適用するには、Pod に次のアノテーションを追加します。
+#### 2 つの異なるコンテナの構成{#configure-two-different-containers}
+Pod 内の 2 つの異なるコンテナ `<CONTAINER_NAME_1>` と `<CONTAINER_NAME_2>` に 2 つの異なるインテグレーションテンプレートを適用するには、次のアノテーションを Pod に追加します。
 
 ```yaml
 apiVersion: v1
@@ -268,9 +271,9 @@ spec:
 # (...)
 ```
 
-### DatadogInstrumentation CRD{#datadoginstrumentation-crd}
+### DatadogInstrumentation CRD {#datadoginstrumentation-crd}
 
-Pod や Deployment にアノテーションを付ける代わりに、[`DatadogInstrumentation` カスタムリソース][23] を使用してログ収集を構成できます。次の例は、`app` Deployment の一部である `example` コンテナ用です。
+Pod やデプロイメントにアノテーションを付ける代わりに、[`DatadogInstrumentation` カスタムリソース][23]を使用してログ収集を構成できます。以下の例は、`example` デプロイメントの `app` コンテナ部分に対するものです。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -293,11 +296,11 @@ spec:
 ```
 
 ### Autodiscovery 構成ファイル {#autodiscovery-configuration-files}
-Datadog Agent に構成ファイルを提供することで、一致するイメージ識別子を使用するコンテナを検出した際に、Agent が指定されたインテグレーションを実行するようにできます。これにより、一連のコンテナイメージに適用される汎用的なログ構成を作成できます。
+Datadog Agent に構成ファイルを提供することで、Agent は一致するイメージ識別子を使用するコンテナを検出したときに、指定されたインテグレーションを実行できます。これにより、一連のコンテナイメージに適用される汎用的なログ構成を作成できます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-`override.nodeAgent.extraConfd.configDataMap` でオーバーライドすることにより、インテグレーションごとにログ収集をカスタマイズできます。このメソッドは ConfigMap を作成し、目的の構成ファイルを Agent コンテナにマウントします。
+`override.nodeAgent.extraConfd.configDataMap` でオーバーライドすることで、インテグレーションごとにログ収集をカスタマイズできます。このメソッドは、ConfigMap を作成し、必要な構成ファイルを Agent コンテナにマウントします。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -319,13 +322,13 @@ spec:
               service: example-service
 ```
 
-`<CONTAINER_IMAGE>` は、これを適用する対象のコンテナのショートイメージ名と一致させる必要があります。その他の例については、[ConfigMap マッピングを使用した][1] サンプルマニフェストを参照してください。
+`<CONTAINER_IMAGE>` は、この設定を適用したいコンテナのショートイメージ名と一致する必要があります。追加の例については、[ConfigMap マッピングを含む][1]サンプルマニフェストを参照してください。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-extraconfd.yaml
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-`datadog.confd` 内でインテグレーションごとにログ収集をカスタマイズできます。このメソッドは ConfigMap を作成し、目的の構成ファイルを Agent コンテナにマウントします。
+`datadog.confd` 内でインテグレーションごとにログ収集をカスタマイズできます。このメソッドは、ConfigMap を作成し、必要な構成ファイルを Agent コンテナにマウントします。
 
 ```yaml
 datadog:
@@ -339,27 +342,27 @@ datadog:
         service: example-service
 ```
 
-`<CONTAINER_IMAGE>` は、これを適用する対象のコンテナのショートイメージ名と一致させる必要があります。
+`<CONTAINER_IMAGE>` は、この設定を適用したいコンテナのショートイメージ名と一致する必要があります。
 
 {{% /tab %}}
 
-{{% tab "キーバリューストア" %}}
-以下の etcd コマンドは、カスタム `password` パラメータを持つ Redis インテグレーションテンプレートを作成し、正しい `source` および `service` 属性でログにタグを付けます。
+{{% tab "key-value ストア" %}}
+以下の etcd コマンドは、カスタム `password` パラメーターを持つ Redis インテグレーションテンプレートを作成し、ログに正しい `source` 属性と `service` 属性をタグ付けします。
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": ["env:prod"]}]'
 ```
 
-3 つの値はそれぞれリストであることに注意してください。Autodiscovery は、共有リストインデックスに基づいて、リストの項目をインテグレーション構成に組み立てます。この場合、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成を作成します。
+3 つの値はいずれもリストであることに注意してください。Autodiscovery は、共有リストインデックスに基づいてインテグレーション構成にリスト項目を組み立てます。この場合、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成を構成します。
 
-auto-conf ファイルとは異なり、**キーバリューストアでは、コンテナ識別子として短いイメージ名または長いイメージ名を使用できます。**例えば、`redis` または `redis:latest` などです。
+auto-conf ファイルとは異なり、**キーバリューストアではコンテナ識別子としてショートイメージ名またはロングイメージ名を使用できます**。たとえば、`redis` や `redis:latest` です。
 
-Autodiscovery では、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートのソースとして使用できます。
+Autodiscovery では、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートソースとして使用できます。
 
-キーバリューストアを使用するには、Agent の `datadog.yaml` 構成ファイルで設定し、このファイルをコンテナ化された Agent 内にマウントします。または、キーバリューストアを環境変数としてコンテナ化された Agent に渡すこともできます。
+キーバリューストアを使用するには、Agent `datadog.yaml` 構成ファイルで構成し、このファイルをコンテナ化された Agent 内にマウントします。または、コンテナ化された Agent に key-value ストアを環境変数として渡します。
 
-#### `datadog.yaml` 内{#in-datadogyaml}
+#### `datadog.yaml` 内 {#in-datadogyaml}
 
 `datadog.yaml` ファイルで、キーバリューストアの `<KEY_VALUE_STORE_IP>` アドレスと `<KEY_VALUE_STORE_PORT>` を設定します。
 
@@ -392,11 +395,11 @@ Autodiscovery では、[Consul][1]、Etcd、および Zookeeper をインテグ�
       password:
   ```
 
-その後、[Agent を再起動][2] して構成の変更を適用します。
+次に、[Agent を再起動][2] して、構成の変更を適用します。
 
-#### 環境変数では {#in-environment-variables}
+#### 環境変数内 {#in-environment-variables}
 
-キーバリューストアをテンプレートソースとして有効にすると、Agent は `/datadog/check_configs` というキーの下でテンプレートを探します。Autodiscovery は、次のようなキーバリュー階層を想定しています。
+key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下にテンプレートを探します。Autodiscovery では、このような key-value 階層を使用する必要があります。
 
 ```yaml
 /datadog/
@@ -406,32 +409,32 @@ Autodiscovery では、[Consul][1]、Etcd、および Zookeeper をインテグ�
     ...
 ```
 
-**注**: 特定のコンテナに特定の構成を適用する場合、キーバリューストアを使用すると、Autodiscovery は `<CONTAINER_IMAGE>` と `.spec.containers[0].image` を照合して、**image** によってコンテナを識別します。
+**注**: key-value ストアを使用している場合、Autodiscovery は特定の構成を特定のコンテナに適用するために、`<CONTAINER_IMAGE>` と `.spec.containers[0].image` の一致を試みることで、コンテナを**イメージ**で識別します。
 
 [1]: /ja/integrations/consul/
 [2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
-コンテナのショートイメージ名よりも細かい粒度でログ構成を一連のコンテナに適用するには、[Autodiscovery コンテナ識別子][22] を参照してください。
+コンテナのショートイメージ名よりも細かい単位でログ構成を一連のコンテナに一致させるには、[Autodiscovery コンテナ識別子][22]を参照してください。
 
-## 高度なログ収集 {#advanced-log-collection}
+## 高度なログの収集 {#advanced-log-collection}
 
-Autodiscovery ログラベルを使用して、高度なログ収集処理ロジックを適用します。例:
+Autodiscovery ログラベルを使用して、高度なログ収集の処理ロジックを適用します。たとえば、以下のようにします。
 
-* [Datadog に送信する前にログをフィルタリング][5]。
-* [ログから機密データを削除][6]。
-* [複数行の集約に進む][7]。
+* [Datadog へ送信する前にログを絞り込む][5]。
+* [ログの機密データのスクラビング][6]。
+* [複数行の集約の実行][7]。
 
-### コンテナのローカルログファイルから {#from-a-container-local-log-file}
+### コンテナローカルのログファイルから {#from-a-container-local-log-file}
 
-Datadog では、コンテナ化されたアプリケーションに対して `stdout` および `stderr` 出力ストリームを使用することを推奨しています。これにより、ログ収集をより自動的に設定できます。
+Datadog は、コンテナ化されたアプリケーションで `stdout` および `stderr` 出力ストリームを使用することを推奨しています。これにより、ログ収集をより自動的にセットアップできます。
 
-ただし、Agent はアノテーションに基づいてファイルから直接ログを収集することもできます。これらのログを収集するには、`ad.datadoghq.com/<CONTAINER_NAME>.logs` および `type: file` 構成で `path` を使用します。このようなアノテーションが付いたファイルから収集されたログには、コンテナ自体から送信されるログと同じタグセットが自動的に付与されます。Datadog では、コンテナ化されたアプリケーションに対して `stdout` および `stderr` 出力ストリームを使用することを推奨しています。これにより、ログ収集を自動的に設定できます。詳細については、[推奨構成](#recommended-configurations)を参照してください。
+ただし、Agent はアノテーションに基づいてファイルから直接ログを収集することもできます。これらのログを収集するには、`ad.datadoghq.com/<CONTAINER_NAME>.logs` を `type: file` および `path` 構成で使用します。そのようなアノテーションを持つファイルから収集されたログは、コンテナ自体のログと同じタグセットで自動的にタグ付けされます。Datadog は、コンテナ化されたアプリケーションで `stdout` および `stderr` 出力ストリームを使用することを推奨しています。これにより、ログ収集を自動的にセットアップできます。詳細については、[推奨構成](#recommended-configurations)を参照してください。
 
-これらのファイルパスは、Agent コンテナからの**相対パス**です。そのため、Agent が適切にログファイルを参照できるように、ログファイルを含むディレクトリをアプリケーションコンテナと Agent コンテナの両方にマウントする必要があります。
+これらのファイルパスは、Agent コンテナを基準とした**相対**パスです。したがって、ログファイルを含むディレクトリをアプリケーションと Agent コンテナの両方にマウントして、Agent が適切に可視化できるようにする必要があります。
 
-例えば、共有 `hostPath` ボリュームを使用してこれを行うことができます。以下の Pod は、`/var/log/example/app.log` というファイルにログを出力しています。これは `/var/log/example` ディレクトリで行われ、volume と volumeMount によってこれが `hostPath` として設定されています。
+たとえば、共有 `hostPath` ボリュームを使用してこれを行うことができます。以下の Pod は、ファイル `/var/log/example/app.log` にログを出力しています。これは `/var/log/example` ディレクトリで行われており、ボリュームと volumeMount がこれを `hostPath` として設定しています。
 
 ```yaml
 apiVersion: v1
@@ -461,7 +464,7 @@ spec:
          path: /var/log/example
 ```
 
-Agent コンテナが同じログファイルを読み取れるように、対応する volume および volumeMount パスを Agent コンテナに設定する必要があります。
+Agent コンテナに同等のボリュームと VolumeMount パスを設定し、同じログファイルを読み込むことができるようにする必要があります。
 
 ```yaml
   containers:
@@ -478,9 +481,9 @@ Agent コンテナが同じログファイルを読み取れるように、対�
     # (...)
 ```
 #### 推奨構成 {#recommended-configurations}
-- この方法は特定の Pod では有効ですが、この方法を使用するアプリケーションが複数あると煩雑になる可能性があります。複数のレプリカが同じログパスを使用している場合も、問題が発生する可能性があります。可能であれば、Datadog は [Autodiscovery テンプレート変数][17] `%%kube_pod_name%%` を活用することを推奨します。例えば、`path` を設定して、この変数 `"path": "/var/log/example/%%kube_pod_name%%/app.log"` を参照させることができます。その場合、アプリケーション Pod もこの新しいパスに合わせてログファイルを書き込む必要があります。[Downward API][18] を使用して、アプリケーションが自身の Pod 名を特定できるようにします。
+- この戦略は特定の Pod では機能しますが、複数のアプリでこの戦略を使用すると煩雑になる可能性があります。複数のレプリカが同じログパスを使用している場合にも、問題が発生する可能性があります。可能であれば、Datadog は [Autodiscovery テンプレート変数][17] `%%kube_pod_name%%` を活用することを推奨します。たとえば、`path` をこの変数を参照するように設定できます。`"path": "/var/log/example/%%kube_pod_name%%/app.log"`アプリケーション Pod は、この新しいパスを使用してログファイルを書き込む必要があります。[Downward API][18] を使用して、アプリケーションがその Pod 名を特定するのに役立てることができます。
 
-- コンテナでこの種のアノテーションを使用する場合、`stdout` および `stderr` のログはコンテナから自動的に収集されません。コンテナの出力ストリームとファイルの両方から収集する必要がある場合は、アノテーションでこれを明示的に有効にします。例:
+- コンテナでこの種のアノテーションを使用する場合、`stdout` および `stderr` ログはコンテナから自動的に収集されません。コンテナの出力ストリームとファイルの両方からの収集が必要な場合は、アノテーションでこれを明示的に有効にしてください。例:
   ```yaml
   ad.datadoghq.com/<CONTAINER_IMAGE>.logs: |
     [
@@ -489,13 +492,13 @@ Agent コンテナが同じログファイルを読み取れるように、対�
     ]
   ```
 
-- この種の組み合わせを使用する場合、`source` および `service` にはファイルから収集されるログのデフォルト値がないため、アノテーションで明示的に設定する必要があります。
+- この種の組み合わせを使用する場合、ファイルから収集されるログには `source` および `service` のデフォルト値がないため、アノテーションで明示的に設定する必要があります。
 
 ## トラブルシューティング {#troubleshooting}
 
-トラブルシューティングの手順については、[コンテナログ収集のトラブルシューティング][21] を参照してください。
+トラブルシューティング手順については、[コンテナログ収集トラブルシューティング][21] を参照してください。
 
-## 詳細情報 {#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

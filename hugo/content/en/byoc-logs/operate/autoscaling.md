@@ -21,6 +21,8 @@ The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for
 
 ## Before you begin
 
+The following Helm instructions cover indexers and standalone compactors. For a `DatadogBYOCCluster`, see the [Configure autoscaling with the Operator](#configure-autoscaling-with-the-operator) section.
+
 Before you enable autoscaling, you need:
 
 - A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
@@ -114,8 +116,56 @@ kubectl describe hpa <RELEASE_NAME>-compactor -n <NAMESPACE_NAME>
 
 If `kubectl get hpa` shows `<unknown>` in the `TARGETS` column, the HPA cannot read CPU metrics. Check that the metrics API is running and that the target pods have CPU requests.
 
+## Configure autoscaling with the Operator
+
+The Operator supports `autoscaling` on indexers, searchers, compactors, and individual pipeline Worker entries. Before you configure autoscaling:
+
+- Install Kubernetes Metrics Server or the metrics API used by your HPA.
+- Set resource requests.
+- Provision enough node capacity for the maximum replica count.
+
+Merge an `autoscaling` object into the corresponding component of `byoc-cluster.yaml`. For example:
+
+```yaml
+spec:
+  components:
+    indexer:
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+        limits:
+          memory: 16Gi
+      autoscaling:
+        minReplicas: 2
+        maxReplicas: 10
+        metrics:
+          - type: Resource
+            resource:
+              name: cpu
+              target:
+                type: Utilization
+                averageUtilization: 70
+        behavior:
+          scaleDown:
+            stabilizationWindowSeconds: 300
+```
+
+The Operator's `autoscaling` object does not use the Helm chart's `enabled` field. When `autoscaling` is set, the HPA manages the replica count and the component's `replicas` setting is ignored. Omit `autoscaling` to manage a fixed replica count through the custom resource.
+
+Apply the complete manifest and inspect the generated HPAs:
+
+```shell
+kubectl apply -f byoc-cluster.yaml
+kubectl get hpa -n <NAMESPACE_NAME>
+kubectl describe hpa <CLUSTER_NAME>-indexer -n <NAMESPACE_NAME>
+```
+
+For Workers, place the settings on the matching entry in `spec.components.pipelines`. Size [persistent buffers and termination grace periods][2] to account for scale-down. Keep searcher capacity available for the reverse connection to Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /byoc-logs/operate/sizing/
+[2]: /byoc-logs/operate/disk_buffer_durability/
