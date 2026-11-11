@@ -44,9 +44,9 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 With Datadog Operator **v1.30+** or Datadog Helm chart **v3.241.0+**, the `DatadogInstrumentation` controller is enabled by default and requires no additional setup.
 
-{{% collapse-content title="Legacy setup (Operator < v1.30 or Helm chart < v3.241.0)" level="h4" expanded=false id="legacy-setup" %}}
+{{% collapse-content title="Legacy setup (Datadog Operator before v1.30, Helm chart before v3.241.0)" level="h3" heading_class="h4" expanded=false id="legacy-setup" %}}
 
-For earlier versions, enable the DDI controller with the following steps.
+For earlier versions, enable the `DatadogInstrumentation` controller:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -201,10 +201,10 @@ Each entry in `checks` accepts the following fields:
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
 `checkTagCardinality`
-: Optional. Overrides the Agent's check tag cardinality with `low`, `orchestrator`, or `high`. If omitted, the check inherits the Agent setting. This does not affect DogStatsD metrics.
+: Optional. Overrides the Agent's check tag cardinality setting for this check. Accepted values: `low`, `orchestrator`, or `high`. If omitted, the check inherits the Agent setting. This field does not affect DogStatsD metrics.
 
 `ignoreAutodiscoveryTags`
-: Optional. Set to `true` to suppress container and pod tags added by Autodiscovery. Defaults to `false`. Explicitly configured tags and tags emitted by the integration are retained.
+: Optional. Set to `true` to suppress container and pod tags added by Autodiscovery. Defaults to `false`. The check keeps explicitly configured tags and tags emitted by the integration.
 
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 

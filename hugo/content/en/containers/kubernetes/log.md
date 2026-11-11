@@ -169,9 +169,9 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-Exclusions such as `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude` take precedence over explicit log collection configuration. This applies to the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], and [Autodiscovery configuration files][20].
+Exclusions such as `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude` take precedence over explicit log collection configuration, including configuration from the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], and [Autodiscovery configuration files][20].
 
-When "Container Collect All" is disabled (the default), the Agent only collects logs with an explicit log configuration. Select workloads with the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], or [Autodiscovery configuration files][20].
+When "Container Collect All" is disabled (the default), the Agent collects logs only from containers that have an explicit log configuration. To collect logs from selected workloads, configure them with the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], or [Autodiscovery configuration files][20].
 
 See [Container Discovery Management][8] to learn more about filtering.
 
@@ -193,9 +193,11 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 
 Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
 
-### Configure logs with `DatadogInstrumentation` {#datadoginstrumentation-crd}
+<!-- vale Datadog.headings = NO -->
+### `DatadogInstrumentation` CRD {#datadoginstrumentation-crd}
+<!-- vale Datadog.headings = YES -->
 
-Use a `DatadogInstrumentation` resource to configure log collection without modifying application pod templates. Enable [Agent log collection](#log-collection). Create the resource in the same namespace as the target workload.
+Use a `DatadogInstrumentation` resource to configure log collection without modifying application pod templates. This method requires [Agent log collection](#log-collection) to be enabled. Create the resource in the same namespace as the target workload.
 
 The following example collects logs from the `app` container in the `example` Deployment:
 
@@ -203,7 +205,7 @@ The following example collects logs from the `app` container in the `example` De
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogInstrumentation
 metadata:
-  name: example-logs
+  name: java-logs
   namespace: <WORKLOAD_NAMESPACE>
 spec:
   targetRef:
@@ -219,11 +221,11 @@ spec:
           - foo:bar
 ```
 
-Save the resource as `java-logs.yaml` and apply it:
+Save the resource as `java-logs.yaml`, apply it, and check its status:
 
 ```shell
 kubectl apply -f java-logs.yaml
-kubectl describe datadoginstrumentation example-logs -n <WORKLOAD_NAMESPACE>
+kubectl describe datadoginstrumentation java-logs -n <WORKLOAD_NAMESPACE>
 ```
 
 #### Configure multiple containers
@@ -467,13 +469,14 @@ For example, use a shared `hostPath` volume for an application that writes to `/
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Apply this resource in the namespace of the targeted workload:
+Apply the following resource in the namespace of the targeted workload. The `logger` workload must also write its logs to `/var/log/example` on a `hostPath` volume, as shown in the **Annotations** tab:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogInstrumentation
 metadata:
   name: logger-logs
+  namespace: <WORKLOAD_NAMESPACE>
 spec:
   targetRef:
     apiVersion: apps/v1
@@ -541,7 +544,7 @@ For either method, mount the same host directory into the Agent container so it 
 #### Recommended configurations
 - This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy. You can also run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example, you can set your `path` to reference this variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. Your application pod then needs to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
 
-- File log configurations replace automatic collection of `stdout` and `stderr` for that container. To collect both, add a second log entry for the container output streams. For DDI, use the following `spec.config.logs` entries:
+- File log configurations replace automatic collection of `stdout` and `stderr` for that container. To collect both, add a second log entry for the container output streams. For `DatadogInstrumentation`, use the following `spec.config.logs` entries:
 
   ```yaml
   logs:
@@ -581,7 +584,7 @@ For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [5]: /agent/logs/advanced_log_collection/?tab=annotations#filter-logs
 [6]: /agent/logs/advanced_log_collection/?tab=annotations#scrub-sensitive-data-from-your-logs
-[7]: /agent/logs/advanced_log_collection/?tab=annotations#multi-line-aggregation
+[7]: /agent/logs/advanced_log_collection/?tab=annotations#manually-aggregate-multi-line-logs
 [8]: /agent/guide/autodiscovery-management/
 [9]: /containers/guide/kubernetes_daemonset/#log-collection
 [10]: /getting_started/containers/autodiscovery
