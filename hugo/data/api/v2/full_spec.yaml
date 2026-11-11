@@ -50775,6 +50775,119 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_DIAGNOSTICS
+    ExperimentsExperimentHoldoutV2DTOArray:
+      description: "Response containing the holdouts an experiment is attached to."
+      properties:
+        data:
+          description: "Holdouts the experiment is attached to, in evaluation order."
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOData"
+          type: array
+      required:
+        - data
+      type: object
+    ExperimentsExperimentHoldoutV2DTOData:
+      description: "A holdout the experiment is attached to."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributes"
+        id:
+          description: "Identifier of the holdout."
+          example: e1e2e3e4-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataType"
+      required:
+        - type
+        - id
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributes:
+      description: "Attributes of a holdout that the experiment is attached to."
+      properties:
+        evaluation_order:
+          description: >-
+            Zero-based position of this MANAGED holdout in the experiment's evaluation order. The GLOBAL holdout is evaluated first. Null for EXTERNAL holdouts.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        holdout_type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType"
+        key:
+          description: "Key of the holdout."
+          example: q3-global-holdout
+          type: string
+        kind:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesKind"
+        name:
+          description: "Display name of the holdout."
+          example: Q3 global holdout
+          type: string
+        state:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesState"
+        traffic_allocation:
+          description: "Share of subjects the holdout holds back, from 0 to 1."
+          example: 0.05
+          format: double
+          type: number
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType:
+      description: >-
+        How Datadog serves a MANAGED holdout. GLOBAL holdouts apply to every eligible experiment of a subject type. SELECTIVE holdouts apply only to the experiments attached to them. Null for EXTERNAL holdouts.
+      enum:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+      example: GLOBAL
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesKind:
+      description: >-
+        Whether Datadog serves the holdout. Datadog serves MANAGED holdouts. EXTERNAL holdouts record what your own feature flagging system holds back, and Datadog does not serve them.
+      enum:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+      example: MANAGED
+      type: string
+      x-enum-varnames:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesState:
+      description: >-
+        Lifecycle phase of the holdout. PENDING holdouts have not started including experiments. INCLUDING holdouts are adding experiments. WAITING_FOR_ANALYSIS holdouts have stopped including experiments but have not started analysis. ANALYSING holdouts are in their analysis window. COMPLETE applies only to EXTERNAL holdouts that have ended their analysis window but are not archived.
+      enum:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+      example: INCLUDING
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataType:
+      default: experiment-holdouts
+      description: Experiment holdout resource type.
+      enum:
+        - experiment-holdouts
+      example: experiment-holdouts
+      type: string
+      x-enum-varnames:
+        - EXPERIMENT_HOLDOUTS
     ExperimentsExperimentMetricGroupMutationV2:
       description: "Response containing the saved experiment metric group and result refresh information."
       properties:
@@ -50901,6 +51014,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -50975,6 +51090,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -51157,6 +51274,8 @@ components:
               events_end_date: "2026-08-22T00:00:00Z"
               events_start_date: "2026-08-01T00:00:00Z"
               experiment_type: STANDARD
+              holdout_ids:
+                - a1a2a3a4-0000-0000-0000-000000000000
               hypothesis: A clearer checkout button increases purchase conversion
               name: Checkout button test
               pipeline_table_suffix: a1b2c3d4
@@ -51202,6 +51321,8 @@ components:
                 events_end_date: "2026-08-22T00:00:00Z"
                 events_start_date: "2026-08-01T00:00:00Z"
                 experiment_type: STANDARD
+                holdout_ids:
+                  - a1a2a3a4-0000-0000-0000-000000000000
                 hypothesis: A clearer checkout button increases purchase conversion
                 name: Checkout button test
                 pipeline_table_suffix: a1b2c3d4
@@ -51256,6 +51377,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -51313,6 +51436,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -51383,6 +51508,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is designed to test."
           example: A clearer checkout button increases purchase conversion
@@ -53378,6 +53513,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -53453,6 +53590,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -53556,6 +53695,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is intended to test."
           example: A clearer checkout button increases purchase conversion
@@ -53691,7 +53840,8 @@ components:
       nullable: true
       properties:
         allocation_key:
-          description: "Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events."
+          description: >-
+            Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events.
           type: string
         entry_point:
           $ref: >-
@@ -183296,6 +183446,8 @@ paths:
                           events_end_date: "2026-08-22T00:00:00Z"
                           events_start_date: "2026-08-01T00:00:00Z"
                           experiment_type: STANDARD
+                          holdout_ids:
+                            - a1a2a3a4-0000-0000-0000-000000000000
                           hypothesis: A clearer checkout button increases purchase conversion
                           name: Checkout button test
                           pipeline_table_suffix: a1b2c3d4
@@ -183496,6 +183648,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -187017,6 +187170,8 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids:
+                          - a1a2a3a4-0000-0000-0000-000000000000
                         hypothesis: A clearer checkout button increases purchase conversion
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
@@ -187247,6 +187402,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -187786,6 +187942,102 @@ paths:
       tags:
         - Experiments
       x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+  /api/v2/experiments/{experiment_id}/holdouts:
+    get:
+      description: >-
+        List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.
+      operationId: ListExperimentHoldouts
+      parameters:
+        - description: "The UUID of the experiment."
+          in: path
+          name: experiment_id
+          required: true
+          schema:
+            description: "The UUID of the experiment."
+            example: 550e8400-e29b-41d4-a716-446655440000
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          evaluation_order: 0
+                          holdout_type: GLOBAL
+                          key: q3-global-holdout
+                          kind: MANAGED
+                          name: Q3 global holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.05
+                        id: e1e2e3e4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order: 1
+                          holdout_type: SELECTIVE
+                          key: checkout-holdout
+                          kind: MANAGED
+                          name: Checkout holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: f1f2f3f4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order:
+                          holdout_type:
+                          key: partner-holdout
+                          kind: EXTERNAL
+                          name: Partner holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: a1a2a3a4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+              schema:
+                $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed experiment ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Missing or invalid authentication.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The caller lacks the `product_analytics_experiments_read` permission or lacks permission to view this experiment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No experiment with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: List experiment holdouts
+      tags:
+        - Experiments
+      x-menu-order: 55
       x-permission:
         operator: AND
         permissions:
