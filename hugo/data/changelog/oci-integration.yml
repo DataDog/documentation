@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41636
+    operations:
+      - CreateTenancyConfig
+      - GetTenancyConfig
+      - GetTenancyConfigs
+      - UpdateTenancyConfig
+    title: Add missing fields to OCI tenancy config response schema

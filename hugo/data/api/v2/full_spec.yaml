@@ -147621,6 +147621,12 @@ components:
     TenancyConfigDataAttributes:
       description: Attributes of an OCI tenancy integration configuration, including authentication details, region settings, and collection options.
       properties:
+        account_tags:
+          description: List of Datadog tags applied to data collected from the tenancy.
+          items:
+            description: A Datadog tag in key:value format (for example, env:prod).
+            type: string
+          type: array
         billing_plan_id:
           description: The identifier of the billing plan associated with the OCI tenancy.
           format: int32
@@ -147636,9 +147642,23 @@ components:
         dd_compartment_id:
           description: The OCID of the OCI compartment used by the Datadog integration stack.
           type: string
+        dd_iac_version:
+          description: The version of the Datadog infrastructure-as-code stack applied to the tenancy (for example, 1.2.0).
+          type: string
         dd_stack_id:
           description: The OCID of the OCI Resource Manager stack used by the Datadog integration.
           type: string
+        defined_tags:
+          description: List of OCI defined tags applied to the Datadog-managed connector hubs.
+          items:
+            description: An OCI defined tag in `Namespace.key:value` format (for example, `Operations.CostCenter:42`).
+            type: string
+          type: array
+        events_collection_enabled:
+          description: Whether resource change events collection from OCI is enabled for the tenancy.
+          type: boolean
+        grace_resource:
+          $ref: "#/components/schemas/TenancyConfigDataAttributesGraceResource"
         home_region:
           description: The home region of the OCI tenancy (for example, us-ashburn-1).
           type: string
@@ -147654,12 +147674,25 @@ components:
         resource_collection_enabled:
           description: Whether resource collection from OCI is enabled for the tenancy.
           type: boolean
+        service_quota_collection_enabled:
+          description: Whether service quota collection from OCI is enabled for the tenancy.
+          type: boolean
         tenancy_name:
           description: The human-readable name of the OCI tenancy.
           type: string
         user_ocid:
           description: The OCID of the OCI user used by the Datadog integration for authentication.
           type: string
+      type: object
+    TenancyConfigDataAttributesGraceResource:
+      description: Access control details for the tenancy configuration, used to determine whether the requesting user can edit it.
+      properties:
+        resource_id:
+          description: The identifier of the access control resource for the tenancy configuration.
+          type: string
+        user_can_edit:
+          description: Whether the requesting user has permission to edit the tenancy configuration.
+          type: boolean
       type: object
     TenancyConfigDataAttributesLogsConfig:
       description: Log collection configuration for an OCI tenancy, indicating which compartments and services have log collection enabled.
@@ -147679,6 +147712,15 @@ components:
             description: An OCI service name for which log collection is enabled (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope log collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesMetricsConfig:
       description: Metrics collection configuration for an OCI tenancy, indicating which compartments and services are included or excluded.
@@ -147698,27 +147740,39 @@ components:
             description: An OCI service name excluded from metrics collection (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope metrics collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesRegionsConfig:
       description: Region configuration for an OCI tenancy, indicating which regions are available, enabled, or disabled for data collection.
       properties:
         available:
-          description: List of OCI regions available for data collection in the tenancy.
+          description: List of OCI regions available for data collection in the tenancy. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
         disabled:
-          description: List of OCI regions explicitly disabled for data collection.
+          description: List of OCI regions explicitly disabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-phoenix-1).
             type: string
+          nullable: true
           type: array
         enabled:
-          description: List of OCI regions enabled for data collection.
+          description: List of OCI regions enabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
       type: object
     TenancyConfigList:
@@ -147726,10 +147780,20 @@ components:
       example:
         data:
           - attributes:
+              account_tags:
+                - env:prod
+              billing_plan_id: 2
               config_version: 2
               cost_collection_enabled: true
               dd_compartment_id: ocid.compartment.test
+              dd_iac_version: "1.2.0"
               dd_stack_id: ocid.stack.test
+              defined_tags:
+                - Operations.CostCenter:42
+              events_collection_enabled: false
+              grace_resource:
+                resource_id: oci-integration-configuration:ocid.tenancy.test
+                user_can_edit: true
               home_region: us-ashburn-1
               logs_config:
                 compartment_tag_filters:
@@ -147737,12 +147801,19 @@ components:
                 enabled: true
                 enabled_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
               metrics_config:
                 compartment_tag_filters:
                   - compartment.test
                 enabled: true
                 excluded_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
+              parent_tenancy_name: parent-tenancy
               regions_config:
                 available:
                   - us-ashburn-1
@@ -147752,6 +147823,8 @@ components:
                 enabled:
                   - us-ashburn-1
               resource_collection_enabled: true
+              service_quota_collection_enabled: false
+              tenancy_name: test-tenancy
               user_ocid: ocid.user.test
             id: ocid.tenancy.test
             type: oci_tenancy
@@ -215747,12 +215820,14 @@ paths:
             start with `app.` and end with `.count`. The exception is a value whose only `*` is at the end (for
             example, `http.request*`): it matches names that start with that text and is case-sensitive.
             Spaces are treated as `*`. Only one value is accepted; repeating the parameter returns
-            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. An empty value
-            is ignored.
+            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. Surrounding spaces
+            are ignored, and an empty or spaces-only value is ignored. The value can be at most 200 characters (the
+            longest metric name); a longer value returns `400 Bad Request`.
           in: query
           name: filter[metrics.id]
           required: false
           schema:
+            maxLength: 200
             pattern: "^[a-zA-Z0-9_.* ]*$"
             type: string
         - description: |-
@@ -244042,9 +244117,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/automation/default_inbox_rules:
     get:
       description: |-
@@ -247459,9 +247531,6 @@ paths:
           - security_monitoring_findings_write
           - appsec_vm_write
           - data_scanner_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
