@@ -135,7 +135,9 @@ To update the SDK versions:
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Instrumentation rules let you control which processes SSI automatically instruments on Linux hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies. To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20].
+Instrumentation rules let you control which processes SSI automatically instruments on Linux hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
+
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20].
 
 {{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="The APM Instrumentation Rules page with Hosts selected, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 

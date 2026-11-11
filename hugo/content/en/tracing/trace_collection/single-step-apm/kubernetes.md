@@ -354,7 +354,9 @@ By default, SSI instruments all services in all namespaces in your cluster. To r
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies. To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title.
+Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies.
+
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title.
 
 {{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="The APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards above an empty list of instrumentation rules" style="width:100%;" >}}
 

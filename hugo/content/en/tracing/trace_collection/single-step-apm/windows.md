@@ -153,7 +153,9 @@ To enable products, [set environment variables][3] in your application configura
 
 Instrumentation rules let you control which processes SSI automatically instruments on Windows hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies. To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5].
+You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
+
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5].
 
 {{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="The APM Instrumentation Rules page with Hosts selected, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 
