@@ -153,19 +153,18 @@ To enable products, [set environment variables][3] in your application configura
 
 Instrumentation rules let you control which processes SSI automatically instruments on Windows hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
-
-A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][8] enabled.
-
-To create and manage instrumentation rules and host groups, you need the **APM Workload Selection Write** [permission][9].
-
-To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5]. {{< ui >}}Hosts{{< /ui >}} is selected by default in the dropdown in the page title.
+You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies. To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5].
 
 {{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="The APM Instrumentation Rules page with Hosts selected, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 
+#### Prerequisites for instrumentation rules
+
+- **Agent**: v7.73 or later on each host, with SSI and [Remote Configuration][8] enabled. Hosts that meet these requirements are eligible for instrumentation rules.
+- **Permissions**: The **APM Workload Selection Write** [permission][9], which is required to create and manage instrumentation rules and host groups.
+
 #### Set the default behavior
 
-The default behavior applies to processes on eligible hosts that don't match any instrumentation rule. It also applies when you haven't created any rules.
+The default behavior applies to processes on eligible hosts that do not match any instrumentation rule. It also applies when you have not created any rules.
 
 1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
 1. Select one of the following options:
@@ -175,7 +174,7 @@ The default behavior applies to processes on eligible hosts that don't match any
 
 #### Create host groups
 
-Host groups are reusable collections of hosts that you can target with instrumentation rules. Use host groups to apply rules to part of your fleet, such as canary hosts for a gradual rollout.
+Host groups are reusable collections of hosts that you can target with instrumentation rules.
 
 To create a host group:
 
@@ -189,7 +188,7 @@ To create a host group:
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
+Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that do not belong to any other group, so you can see which hosts are left to group. You cannot edit its host list.
 
 If you delete a host group, Datadog removes the group's rules, and the Agent stops applying them the next time it polls Remote Configuration.
 

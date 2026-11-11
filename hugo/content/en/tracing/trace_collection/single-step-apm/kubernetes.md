@@ -354,15 +354,14 @@ By default, SSI instruments all services in all namespaces in your cluster. To r
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies.
-
-A cluster is eligible for instrumentation rules when it runs Datadog Cluster Agent v7.84.2 or later with [Remote Configuration][101] enabled. Datadog delivers rules to eligible clusters through Remote Configuration.
-
-To create and manage instrumentation rules and cluster groups, you need the **APM Workload Selection Write** [permission][103].
-
-To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title. Rules, cluster groups, and evaluation order for Kubernetes are managed separately from those for hosts.
+Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies. To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title.
 
 {{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="The APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards above an empty list of instrumentation rules" style="width:100%;" >}}
+
+#### Prerequisites for instrumentation rules
+
+- **Cluster Agent**: v7.84.2 or later on each cluster, with [Remote Configuration][101] enabled. Clusters that meet these requirements are eligible for instrumentation rules.
+- **Permissions**: The **APM Workload Selection Write** [permission][103], which is required to create and manage instrumentation rules and cluster groups.
 
 #### Set the default behavior
 
@@ -379,7 +378,7 @@ The default behavior controls whether the workload targeting in your Agent confi
 
 #### Create cluster groups
 
-Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules. Use cluster groups to apply rules to some of your clusters, such as canary clusters for a gradual rollout.
+Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules.
 
 To create a cluster group:
 
@@ -393,7 +392,7 @@ To create a cluster group:
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list. This group is different from the {{< ui >}}All clusters{{< /ui >}} targeting option, which applies a rule to every eligible cluster.
+Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that do not belong to any other group, so you can see which clusters are left to group. You cannot edit its cluster list.
 
 If you delete a cluster group, Datadog removes the group's rules, and the Cluster Agent stops applying them the next time it polls Remote Configuration.
 
