@@ -598,7 +598,7 @@ spec:
 
 If the Operator doesn't detect OpenShift, such as when the Operator pod runs on a node without the OpenShift label, excplicitly set the provider with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation.
 
-To disable automatic detection and configure all settings manually, set the `agent.datadoghq.com/cluster-provider` annotation to `default` and use the full configuration shown previously. For the settings each provider applies, see the [providers documentation][3].
+To disable automatic detection, set the agent.datadoghq.com/cluster-provider annotation to default. Then manually configure all settings using the full configuration in [Configure OpenShift with automatic detection](#configure-openshift-with-automatic-detection). For the settings each provider applies, see the [providers documentation][3].
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 [2]: https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#role-based-access-to-ssc_configuring-internal-oauth
