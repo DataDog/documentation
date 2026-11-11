@@ -29,6 +29,7 @@ noreply@datadoghq.com
 alert@datadoghq.com
 billing@datadoghq.com
 marketplace-subscriptions@datadoghq.com
+security@datadoghq.com
 ```
 
 Add these as domains:
