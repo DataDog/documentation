@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "effect": "allow",
+      "pattern": "@example.com"
+    },
+    "type": "email_access_policies"
+  }
+}

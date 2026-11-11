@@ -47,7 +47,27 @@ For the best level of support, always run the latest LTS release of Node.js, and
 
 For more information about Node.js release, see the [official Node.js documentation][4].
 
+### ECMAScript modules (ESM)
 
+Runtime Software Composition Analysis reports the packages your application loads. Packages loaded as ECMAScript modules (ESM), through `import` statements or `import()` calls, are reported only when the Datadog ESM loader is registered. This requires `dd-trace` 6.24.0 or later (5.135.0 or later on the v5 release line):
+
+```sh
+node --import dd-trace/register.js --require dd-trace/init app.js
+```
+
+Without the ESM loader, only packages loaded with `require()` are reported.
+
+This also applies to frameworks that load packages with `import()` at runtime, such as Next.js. Keep the startup options from the [tracer setup][45] and add the ESM loader:
+
+```sh
+NODE_OPTIONS='--import dd-trace/register.js --require dd-trace/init' next start
+```
+
+#### Limitations
+
+- On Node.js 18.19 and later, use `--import dd-trace/register.js`. Packages loaded as ESM are not reported with `--loader dd-trace/loader-hook.mjs`.
+- Packages bundled into your application output (for example, with esbuild or webpack) are not reported, because they are not loaded from `node_modules` at runtime. Packages kept external to the bundle are reported.
+- With Yarn Plug'n'Play, use Yarn 4.11.0 or later. Earlier versions fail at startup when the ESM loader is registered on Node.js 22.22.3+, 24.11.1+, 25.1+, or 26.
 
 ### Operating system support
 
@@ -154,3 +174,4 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 [42]: https://github.com/sequelize/sequelize
 [43]: https://github.com/apollographql/apollo-server
 [44]: https://www.npmjs.com/package/apollo-server-core
+[45]: /tracing/trace_collection/dd_libraries/nodejs/

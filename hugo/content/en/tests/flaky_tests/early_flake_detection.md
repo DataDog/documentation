@@ -37,9 +37,11 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
+Retries added by Early Flake Detection are not billed as test spans. For details, see [CI/CD Optimization Billing][10].
+
 ## Exclude individual tests from retries
 
-Use a code annotation to exclude individual tests from Early Flake Detection, Auto Test Retries, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
+Use a code annotation to exclude individual tests from Early Flake Detection, Auto Test Retries, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][11] for examples and version requirements.
 
 ## Setup
 
@@ -97,7 +99,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 {{% /tab %}}
 
@@ -122,7 +124,7 @@ The following Datadog library versions add pagination support on the known tests
 | `dd-trace-dotnet`      | 3.42.0          |
 | `ddtrace` (Python)     | 4.6.0           |
 | `datadog-ci` (Ruby)    | 1.27.0          |
-| `dd-trace-go/v2`       | 2.8.0           |
+| `ddtest` (Go)          | 1.14.0          |
 | `dd-sdk-swift-testing` | 2.6.7           |
 
 ## Explore results in the Test Optimization Explorer
@@ -164,4 +166,5 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /tests/explorer/
 [9]: /help/
-[10]: /tests/guides/test_automation_exclusions/
+[10]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[11]: /tests/guides/test_automation_exclusions/

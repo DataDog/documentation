@@ -1,8 +1,7 @@
 # Datadog region (data center) definitions — single source of truth.
 #
-# Consumed by Astro via the `@shared` alias. Hugo will mount this as data
-# after the Astro API docs ship; until then Hugo keeps its own copy in
-# hugo/config/_default/params.yaml and hugo/assets/scripts/config/regions.config.js.
+# Consumed by Astro via the `@shared` alias, and by Hugo as `site.Data.regions`
+# (mounted in hugo/config/_default/config.yaml).
 #
 # To add a data center, add one block below. Nothing else in Astro should
 # need editing — see astro/src/config/regions.ts and the generated CSS in
@@ -16,7 +15,7 @@
 #   exact_domains fully-qualified hosts that map to this region (oncall,
 #                 browser-intake). Used when a spec enum lists whole hostnames
 #                 instead of bare site domains.
-#   values        per-region substitution values (was regions.config.js)
+#   values        per-region substitution values
 
 regions:
   - key: us
@@ -192,9 +191,7 @@ regions:
       synthetics_intake_endpoint: intake.synthetics.us3.datadoghq.com
       synthetics_tunnel_endpoint: tunnel-us3.synthetics.datadoghq.com
       tcp_endpoint: The US3 TCP endpoint is not supported.
-      # filled: absent from regions.config.js; see FILL note in the region plan
       tcp_endpoint_port: The US3 TCP endpoint port is not supported.
-      # filled: absent from regions.config.js; see FILL note in the region plan
       tcp_endpoint_port_ssl: The US3 TCP endpoint port is not supported.
       traces_endpoint: trace.agent.us3.datadoghq.com
       traces_endpoint_private_link: trace.agent.us3.datadoghq.com
@@ -792,7 +789,6 @@ regions:
       flutter_web_rum_cdn_path: datadog-rum-slim-v6.js
       functions_endpoint: The US2-FED functions endpoint is not supported.
       functions_port: The US2-FED functions endpoint port is not supported.
-      # filled: absent from regions.config.js; see FILL note in the region plan
       goose_mcp_install_deeplink: N/A
       hipaa_logs_legacy: N/A
       http_endpoint: http-intake.logs.us2.ddog-gov.com

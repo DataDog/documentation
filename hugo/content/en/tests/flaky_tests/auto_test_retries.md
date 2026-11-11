@@ -18,9 +18,11 @@ further_reading:
 Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
 a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
+Retries added by Auto Test Retries are not billed as test spans. For details, see [CI/CD Optimization Billing][9].
+
 ## Exclude individual tests from retries
 
-Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][9] for examples and version requirements.
+Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
 
 ## Setup
 
@@ -124,7 +126,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Compatibility
 
-`orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 ### Configuration
 
@@ -267,4 +269,5 @@ If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/C
 [6]: /logs/log_configuration/indexes/#add-indexes
 [7]: https://www.npmjs.com/package/jest-image-snapshot
 [8]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
-[9]: /tests/guides/test_automation_exclusions/
+[9]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[10]: /tests/guides/test_automation_exclusions/

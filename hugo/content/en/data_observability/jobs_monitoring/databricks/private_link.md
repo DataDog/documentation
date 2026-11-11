@@ -63,6 +63,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Select the service principal created above.
    1. Click the **Secrets** tab, then click **Generate secret**.
    1. Set the secret's lifetime in days (maximum 730 days).
+   1. Set the secret's scope to `all-apis`.
    1. Click **Generate**.
    1. Make the Databricks credentials available to the runner using **one** of the following methods:
       - **Cloud secret storage** (AWS Secrets Manager, AWS Parameter Store, Azure Key Vault, or Google Cloud Secret Manager): Store the credentials as a JSON blob:
