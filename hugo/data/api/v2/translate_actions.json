@@ -4496,7 +4496,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.",
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.\n\nA `404 Not Found` response means that no metric with this name exists in your organization. A\n`400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the\nqueried window. For no data, the error message says so and names the window that was queried, which can\ndiffer from the requested one.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "GetMetricTagCardinalityDetails": {
@@ -4532,7 +4532,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually\nmeans that the metric has no tag configuration, but it is also returned when no metric with this name exists\nin your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,\nwith different messages: `No tag configuration for <metric_name>` when the metric exists without a tag\nconfiguration, and `<metric_name> not found` when no metric with this name exists in your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
