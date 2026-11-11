@@ -22,7 +22,7 @@ algolia:
 
 A Deployment Gate is an automated checkpoint between your deployment stages. When performing a production rollout, it checks service health from signals Datadog already collects, and pauses the workflow when a required check fails. This prevents errors and other issues from reaching a wider user base.
 
-When a gate fails, Datadog centralizes the deployed version, failed [rules](#rules), and failure reasons. You can follow the associated traces to start investigating the problem.
+When a gate fails, the Evaluations page shows the deployed version, the failed rules, and why each rule failed. You can follow the associated traces to start investigating the problem.
 
 {{< img src="/deployment_gates/evaluations_rule_failure.png" alt="The Deployment Gates Evaluations page with a side panel showing a failed monitor rule evaluation." style="width:100%" >}}
 
