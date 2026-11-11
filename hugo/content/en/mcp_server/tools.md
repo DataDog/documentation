@@ -39,6 +39,10 @@ See [Set Up the Datadog MCP Server][1] for more information on connecting to the
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
+## User-controlled content in tool results
+
+Some tools return content that users or monitored systems can set, such as tags, Docker labels, form responses, process command lines, and SQL queries. This content can include text that your AI agent might interpret as instructions. The MCP Server returns this content as data and does not run it, but it can't control how your agent interprets it. Review any actions your agent proposes based on this content, and grant only the [permissions][100] and [toolsets][1] your workflows need.
+
 ## Core tools
 
 The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
@@ -3696,6 +3700,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
+[100]: /mcp_server/setup#required-permissions
 
 ## Further reading
 
