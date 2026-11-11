@@ -117,7 +117,7 @@ The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][8], l
 [1]: https://developer.apple.com/documentation/kernel/mach
 [3]: /real_user_monitoring/application_monitoring/ios
 [4]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
-[5]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
+[5]: /real_user_monitoring/setup/enable_rum/track_application_startups/?platform=ios
 [6]: /real_user_monitoring/setup/data_collected/?platform=ios#error-attributes
 [7]: /real_user_monitoring/track_critical_operations/?tab=ios
 [8]: https://app.datadoghq.com/rum/profiling

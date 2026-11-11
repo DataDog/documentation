@@ -11,7 +11,7 @@ further_reading:
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn about Synthetic browser tests'
-- link: '/real_user_monitoring/application_monitoring/browser/tracking_user_actions'
+- link: '/real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser'
   tag: 'Documentation'
   text: 'Learn about RUM actions'
 - link: '/real_user_monitoring/session_replay'

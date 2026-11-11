@@ -40,7 +40,7 @@ further_reading:
 - link: '/real_user_monitoring/setup/install/?platform=browser'
   tag: 'Documentation'
   text: 'RUM Browser Client-Side Setup'
-- link: '/real_user_monitoring/application_monitoring/browser/tracking_user_actions'
+- link: '/real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser'
   tag: 'Documentation'
   text: 'Tracking User Actions'
 - link: '/data_security/real_user_monitoring'

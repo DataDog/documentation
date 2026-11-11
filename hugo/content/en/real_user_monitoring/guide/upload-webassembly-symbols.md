@@ -93,6 +93,6 @@ You can view uploaded files on the [RUM Debug Symbols page][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/upload-javascript-source-maps/
-[2]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/#configure-webassembly-error-tracking
+[2]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser#configure-webassembly-error-tracking
 [3]: /logs/log_collection/javascript/#webassembly-errors
 [4]: https://app.datadoghq.com/source-code/setup/rum

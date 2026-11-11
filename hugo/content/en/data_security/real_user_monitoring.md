@@ -141,7 +141,7 @@ See [privacy options specific to Session Replay][19]. Masking in Session Replay 
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [5]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
-[6]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[6]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#declare-a-name-for-click-actions
 [7]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [8]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios#modify-rum-events
 [9]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=android#modify-rum-events

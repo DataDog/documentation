@@ -948,7 +948,7 @@ attributes:
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.type
-    description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`. 
+    description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#manually-track-actions-and-send-custom-events), it is set to `custom`. 
     product_source:
       - icon-rum
       - android

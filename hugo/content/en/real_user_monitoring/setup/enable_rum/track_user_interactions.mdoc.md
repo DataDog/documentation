@@ -4,6 +4,9 @@ content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
     label: "SDK"
+aliases:
+  - /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
+  - /real_user_monitoring/browser/tracking_user_actions/
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 

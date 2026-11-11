@@ -119,6 +119,6 @@ This example searches within the actions event type for all view names using the
 [3]: /real_user_monitoring/setup/data_collected/?platform=browser#event-specific-attributes
 [4]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[6]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm
-[7]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[6]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser
+[7]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser#manual-error-reporting
 [8]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=ios#manually-report-errors

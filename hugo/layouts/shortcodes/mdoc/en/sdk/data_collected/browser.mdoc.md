@@ -161,6 +161,7 @@ For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is 
 | `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
+| `error.causes`  | [Array][17] | An optional list of errors providing additional context. This attribute is used to display errors separately and enhance formatting. For more information, see the [MDN documentation][18]. |
 
 #### Source errors
 
@@ -218,9 +219,11 @@ Source errors include code-level information about the error. For more informati
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[11]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors#error-sources
+[11]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
+[13]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#automatically-track-user-interactions
 [14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#manually-track-actions-and-send-custom-events
-[15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
+[15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser#track-graphql-requests
 [16]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
+[17]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[18]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

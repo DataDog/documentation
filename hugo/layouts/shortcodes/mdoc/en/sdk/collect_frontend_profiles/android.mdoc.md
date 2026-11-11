@@ -152,7 +152,7 @@ The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][13], 
 [5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android
 [6]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works
 [7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
-[8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
+[8]: /real_user_monitoring/setup/enable_rum/track_application_startups/?platform=android
 [9]: /real_user_monitoring/setup/data_collected/?platform=android#error-attributes
 [10]: https://developer.android.com/topic/performance/tracing
 [11]: https://developer.android.com/topic/performance/issues/launch-time#time-initial

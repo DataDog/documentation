@@ -38,6 +38,8 @@ aliases:
 - /real_user_monitoring/error_tracking/unity
 - /real_user_monitoring/error_tracking/mobile/unity/
 - /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/unity/
+- /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+- /real_user_monitoring/browser/collecting_browser_errors/
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 

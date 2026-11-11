@@ -522,7 +522,7 @@ Datadog also provides integrations for frontend frameworks and platforms. Each i
 [2]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [3]: /real_user_monitoring/
 [4]: /real_user_monitoring/guide/upload-javascript-source-maps
-[5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
+[5]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser
 [6]: https://github.com/DataDog/build-plugins/releases/tag/v3.3.0
 [7]: https://github.com/DataDog/browser-sdk/releases/tag/v7.6.0
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v7.10.0

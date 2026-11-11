@@ -4,6 +4,14 @@ content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
     label: "SDK"
+aliases:
+  - /real_user_monitoring/application_monitoring/android/application_launch_monitoring/
+  - /real_user_monitoring/android/application_launch_monitoring/
+  - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/android
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/application_launch_monitoring
+  - /real_user_monitoring/application_monitoring/ios/application_launch_monitoring/
+  - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/application_launch_monitoring/
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
