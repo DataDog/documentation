@@ -21937,6 +21937,19 @@ menu:
         unstable:
           - v2
         order: 10
+    - name: Delete a user profile
+      url: /api/latest/rum-audience-management/delete-a-user-profile/
+      identifier: rum-audience-management-delete-a-user-profile
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserProfile
+        unstable:
+          - v2
+        order: 11
     - name: Query users
       url: /api/latest/rum-audience-management/query-users/
       identifier: rum-audience-management-query-users
