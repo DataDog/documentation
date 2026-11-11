@@ -29,23 +29,24 @@ Cloud Security Misconfigurations には、クラウドリソースの構成を�
 | [AWS Foundational Security Best Practices][13]  | v1.0.0                         | `aws-fsbp`                          | Cloud                    |
 | [Brazil LGPD][44]                               | 2018                           | `lgpd`                              | Cloud                    |
 | [California CCPA/CPRA][38]                      | Nov 2022                       | `ccpa`                              | Cloud                    |
-| [CIS AlmaLinux 9][16]                           | v2.0.0                         | `cis-almalinux9`                    | インフラストラクチャー           |
+| [CIS AlmaLinux 9][16]                           | v3.0.0                         | `cis-almalinux9`                    | インフラストラクチャー           |
 | [CIS Amazon Linux 2023][25]                     | v1.0.0                         | `cis-al2023`                        | インフラストラクチャー           |
-| [CIS Amazon Linux 2][25]                        | v3.0.0                         | `cis-amzn2`                         | インフラストラクチャー           |
+| [CIS Amazon Linux 2][25]                        | v4.0.0                         | `cis-amzn2`                         | インフラストラクチャー           |
 | [CIS AWS Foundations Benchmark*][2]             | v5.0.0、v4.0.0、v3.0.0、v1.5.0 | `cis-aws`                           | Cloud                    |
 | [CIS Azure Foundations Benchmark][3]            | v4.0.0、v2.0.0                 | `cis-azure`                         | Cloud                    |
-| [CIS Docker Benchmark][4]                       | v1.2                           | `cis-docker`                        | インフラストラクチャー           |
+| [CIS Docker Benchmark][4]                       | v1.9.0                         | `cis-docker`                        | インフラストラクチャー           |
 | [CIS GCP Foundations Benchmark][22]             | v3.0.0                         | `cis-gcp`                           | Cloud                    |
 | [CIS GKE][34]                                   | v1.6.0                         | `cis-gke`                           | Cloud                    |
 | [CIS Kubernetes (AKS) Benchmark**][5]           | v1.4.0                         | `cis-aks`                           | Cloud およびインフラストラクチャー |
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.7.0、v1.4.0                 | `cis-eks`                           | Cloud およびインフラストラクチャー |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | インフラストラクチャー           |
-| [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | インフラストラクチャー           |
-| [CIS Red Hat Linux 8][24]                       | v3.0.0                         | `cis-rhel8`                         | インフラストラクチャー           |
-| [CIS Red Hat Linux 9][24]                       | v2.0.0                         | `cis-rhel9`                         | インフラストラクチャー           |
-| [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | インフラストラクチャー           |
-| [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | インフラストラクチャー           |
-| [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | インフラストラクチャー           |
+| [CIS Red Hat Linux 7][24]                       | v4.0.0                         | `cis-rhel7`                         | インフラストラクチャー           |
+| [CIS Red Hat Linux 8][24]                       | v4.0.0                         | `cis-rhel8`                         | インフラストラクチャー           |
+| [CIS Red Hat Linux 9][24]                       | v3.0.0                         | `cis-rhel9`                         | インフラストラクチャー           |
+| [CIS Red Hat Linux 10][24]                      | v1.0.1                         | `cis-rhel10`                        | インフラストラクチャー           |
+| [CIS Ubuntu 20.04][23]                          | v3.0.0                         | `cis-ubuntu2004`                    | インフラストラクチャー           |
+| [CIS Ubuntu 22.04][23]                          | v3.0.0                         | `cis-ubuntu2204`                    | インフラストラクチャー           |
+| [CIS Ubuntu 24.04][23]                          | v2.0.0                         | `cis-ubuntu2404`                    | インフラストラクチャー           |
 | [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | Cloud                    |
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Essential Cloud Security Controls][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
@@ -73,7 +74,7 @@ Cloud Security Misconfigurations には、クラウドリソースの構成を�
 - CIS ベンチマークのコンプライアンスルールは、CIS の自動化された推奨事項に従っています。CIS 認証を取得する場合、Datadog は、全体的なセキュリティ評価の一環として、手動の推奨事項も確認することを推奨します。
 - Datadog はまた、Datadog の社内セキュリティ専門家が開発した推奨事項である Essential Cloud Security Controls も提供しています。このルールセットは、Datadog で観測した一般的なクラウドセキュリティリスクに基づいており、クラウドセキュリティに初めて取り組むユーザーがクラウド環境全体で影響力の大きい誤構成を修正できるよう支援することを目的としています。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

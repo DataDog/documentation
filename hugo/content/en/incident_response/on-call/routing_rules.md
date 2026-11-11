@@ -13,6 +13,8 @@ aliases:
 
 Routing rules determine how alerts are directed within your team. Instead of sending all alerts through a single escalation policy, you can create rules that route alerts based on metadata such as priority, tags, monitor status, or time of day.
 
+Routing rules are configured per Team. There are no organization-wide routing rules, so each Team defines its own.
+
 ## Create a routing rule
 
 Rules are evaluated from top to bottom. The last rule must be a fallback that routes all unmatched alerts to an escalation policy.
