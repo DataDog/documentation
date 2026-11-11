@@ -96,7 +96,7 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 {{< img src="bits_ai/bits_remediation/verify_resolution.png" alt="A completed Verify resolution step with an issue status of Resolved, explaining that the monitor returned to OK and showing a graph of the error rate back at baseline levels" style="width:100%;" >}}
 
 To verify that issues are resolved:
-* In the target investigation, click {{< ui >}}Verify resolution{{< /ui >}}.
+* In the target investigation, click {{< ui >}}Verify Resolution{{< /ui >}}.
 
 If you verify right after an action runs, the status might show **Not resolved yet** while pre-fix errors are still in that window. Wait for the related monitor to recover, then click {{< ui >}}Check Again{{< /ui >}}.
 

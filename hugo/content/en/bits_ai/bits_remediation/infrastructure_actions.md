@@ -4,6 +4,10 @@ description: "Set up and run infrastructure actions from Bits Investigation."
 site_support_id: bits_remediation
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
+  One-click infrastructure actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
+
 During an investigation, Bits can recommend and take action on your infrastructure, such as rolling back a Kubernetes deployment or rebooting an EC2 instance. An infrastructure action can resolve an infrastructure-related root cause, or reduce the impact of an issue while you work on a longer-term fix. To let Bits run a recommended action, click {{< ui >}}Approve{{< /ui >}} in the investigation or in a Slack notification.
 
 Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. Guardrails define which actions Bits can take, where those actions apply, and who needs to approve them.
@@ -22,7 +26,7 @@ For Kubernetes infrastructure, Bits runs actions through an ownerless [Private A
 
 ### Requirements
 
-- The Datadog Agent and Cluster Agent are installed on your cluster with the Datadog Operator 1.29.0 or later, or the Datadog Helm chart 3.265.0 or later. The Cluster Agent must be version 7.84.0 or later.
+- The Datadog Agent and Cluster Agent are installed on your cluster with the [latest version][11] of the Datadog Operator, or the Datadog Helm chart 3.265.0 or later. The Cluster Agent must be version 7.84.0 or later.
 - Remote Configuration must be enabled for your organization in {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Remote Configuration{{< /ui >}}.
 - The API key that the Agent uses has the {{< ui >}}Remote Configuration{{< /ui >}} and {{< ui >}}Private Action Runner{{< /ui >}} capabilities enabled. Enable them in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}][4].
 - To set up a Private Action Runner, you need the Datadog Admin role.
@@ -128,7 +132,7 @@ To set up actions for Kubernetes:
    {{% /tab %}}
    {{< /tabs >}}
 
-1. Go to [{{< ui >}}Actions{{< /ui >}} > {{< ui >}}Action Catalog{{< /ui >}} > {{< ui >}}Private Action Runners{{< /ui >}}][6] and confirm that the runner shows as **Active**. Its creator should be an API key, not a user.
+1. Go to [{{< ui >}}Automation{{< /ui >}} > {{< ui >}}Action Catalog{{< /ui >}} > {{< ui >}}Private Action Runners{{< /ui >}}][6] and confirm that the runner shows as **Active**. Its creator should be an API key, not a user.
 
 1. Kubernetes Actions doesn't grant the permissions needed for StatefulSet, DaemonSet, CronJob, Job, ConfigMap, and PersistentVolumeClaim actions. To let Bits run those actions, grant the Cluster Agent's service account additional permissions. First, find the service account in the namespace where you installed the Agent:
 
@@ -191,7 +195,7 @@ To set up actions for Kubernetes:
 
 ### Supported Kubernetes actions
 
-The following table lists the supported actions for Private Action Runners in Kubernetes clusters. You allow actions by adding them to the allowlist in the Datadog Agent configuration. For information about adding actions to the allowlist, see the [Enable Kubernetes actions](#enable-kubernetes-actions) section.
+The following table lists the Kubernetes actions that Bits supports. You allow actions by adding them to the allowlist in the Datadog Agent configuration. For information about adding actions to the allowlist, see the [Enable Kubernetes actions](#enable-kubernetes-actions) section.
 
 | Action ID                                                  | Description                                                  |
 | ---------------------------------------------------------- | ------------------------------------------------------------ |
@@ -240,6 +244,14 @@ To set up actions for AWS:
 
 1. [Create a guardrail][8] for the actions you want Bits to run, scoped to the resources you want Bits to run them on.
 
+## Run an action
+
+When an investigation recommends an infrastructure action:
+
+1. In the investigation, under {{< ui >}}Next Steps{{< /ui >}}, review the proposed action, its target, and its parameter values.
+1. Click {{< ui >}}Approve{{< /ui >}} in the investigation, or in the Slack approval request. Only the approvers named on the guardrail can approve. In Slack, the message updates in place with who approved the action and the run status.
+1. After the action runs, click {{< ui >}}Verify Resolution{{< /ui >}} to [confirm that the issue is resolved][10].
+
 [1]: /actions/private_actions/
 [2]: /integrations/amazon_web_services/
 [3]: /actions/private_actions/set_up_agent_based/
@@ -249,3 +261,5 @@ To set up actions for AWS:
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
 [8]: /bits_ai/bits_remediation/guardrails/#create-a-guardrail
 [9]: /bits_ai/bits_remediation/guardrails/
+[10]: /bits_ai/bits_remediation/#validate-that-issues-are-resolved
+[11]: https://github.com/DataDog/datadog-operator/releases
