@@ -72,7 +72,7 @@ Datadog sends each ingested log to the first index that has a matching [filter][
 
 To make sure Cloud SIEM receives your security logs, move `cloud-siem-xxxx` to the first position, or at least above any index that has a filter overlapping with your security log sources.
 
-<div class="alert alert-info">If the setup page doesn't display the warning, go to {{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > <a href="https://app.datadoghq.com/logs/pipelines/indexes">{{< ui >}}Indexes{{< /ui >}}</a>, click the {{< ui >}}Move to{{< /ui >}} icon for the <code>cloud-siem-xxxx</code> index, and go to step 3.</div>
+<div class="alert alert-info">If the setup page doesn't display the warning, go to {{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > <a href="https://app.datadoghq.com/logs/pipelines/indexes">{{< ui >}}Indexes{{< /ui >}}</a>, click the {{< ui >}}Move to{{< /ui >}} icon for the <code>cloud-siem-xxxx</code> index, and continue to step 3.</div>
 
 1. Click {{< ui >}}Reorder index in Logs Configuration{{< /ui >}}.
 
