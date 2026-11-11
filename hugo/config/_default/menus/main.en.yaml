@@ -4219,25 +4219,25 @@ menu:
       parent: network_path
       identifier: network_path_setup
       weight: 502
-    - name: On-Demand Tests
-      url: network_monitoring/network_path/on_demand_tests/
-      parent: network_path
-      identifier: network_path_on_demand_tests
-      weight: 503
     - name: List View
       url: network_monitoring/network_path/list_view/
       parent: network_path
       identifier: network_path_list_view
-      weight: 504
+      weight: 503
     - name: Path View
       url: network_monitoring/network_path/path_view/
       parent: network_path
       identifier: network_path_path_view
-      weight: 505
+      weight: 504
     - name: Autonomous Systems View
       url: network_monitoring/network_path/as_view/
       parent: network_path
       identifier: network_path_as_view
+      weight: 505
+    - name: On-Demand Tests
+      url: network_monitoring/network_path/on_demand_tests/
+      parent: network_path
+      identifier: network_path_on_demand_tests
       weight: 506
     - name: Monitors
       url: monitors/types/network_path/

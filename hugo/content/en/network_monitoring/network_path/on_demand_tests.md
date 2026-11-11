@@ -1,5 +1,5 @@
 ---
-title: Network Path On-Demand Tests
+title: On-Demand Tests
 description: "Run a Network Path traceroute from a Datadog Agent host on demand, from Network Path or Bits Chat, using a Private Action Runner."
 is_beta: true
 further_reading:
@@ -20,17 +20,12 @@ further_reading:
 
 Network Path on-demand tests run a `traceroute` from a Datadog Agent host to a destination when you request it. Use on-demand tests to check a path right after a network change, such as a firewall rule or routing update, or to investigate a connectivity issue as it happens.
 
-You can run an on-demand test in two ways:
-
-- **From [Network Path][1]**: Click {{< ui >}}Run Test Now{{< /ui >}} on an existing path.
-- **From [Bits Chat][2]**: Ask Bits Chat to run a Network Path test from a source host to a destination. Bits Chat uses the [`run_network_path`][3] tool in the Datadog MCP Server.
-
-On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
+You can run an on-demand test from Network Path or from Bits Chat. On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
 
 ## Prerequisites
 
-- The Datadog Agent on the source host must meet the [Private Action Runner requirements][7].
-- A [Private Action Runner][4] in the Datadog Agent on the source host, enrolled as ownerless. An ownerless runner uses an API key with the Private Action Runner capability. See [Enrollment and ownership][5].
+- The Datadog Agent on the source host must meet the [Private Action Runner requirements][6].
+- A Private Action Runner in the Datadog Agent on the source host, enrolled as ownerless. An ownerless runner uses an API key with the Private Action Runner capability. See [Enrollment and ownership][5].
 
 ## Setup
 
@@ -57,9 +52,11 @@ On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Ag
        - com.datadoghq.remoteaction.networks.runNetworkPath
    ```
 
-   For other runner options, see [Enrollment and ownership][5] and [Change the allowlist][6].
+   See [Change the allowlist][1] for details.
 
 3. Restart the Agent to apply the configuration changes.
+
+[1]: /actions/private_actions/set_up_agent_based/?tab=linux#change-the-allowlist
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -82,18 +79,20 @@ On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Ag
        - com.datadoghq.remoteaction.networks.runNetworkPath
    ```
 
-   For other runner options, see [Enrollment and ownership][5] and [Change the allowlist][6].
+   See [Change the allowlist][1] for details.
 
 3. Restart the Agent to apply the configuration changes.
+
+[1]: /actions/private_actions/set_up_agent_based/?tab=windows#change-the-allowlist
 
 {{% /tab %}}
 {{< /tabs >}}
 
-After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][8] and confirm that the runner for the source host is listed.
+After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][7] and confirm that the runner for the source host is listed.
 
 ### Execution policy
 
-[Create an Execution Policy][9] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
+[Create an Execution Policy][8] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
 
 ### Permissions
 
@@ -106,7 +105,7 @@ On-demand tests use the following permissions:
 | Connections Resolve (`connections_resolve`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
 | Private Action Runner Contribute (`on_prem_runner_use`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
 
-To use the Datadog MCP Server, users also need the MCP permissions described in [Required permissions][10]. To grant permissions, see [Datadog Role Permissions][11].
+To use the Datadog MCP Server, users also need the MCP permissions described in [Required permissions][9]. To grant permissions, see [Datadog Role Permissions][10].
 
 ## Run an on-demand test
 
@@ -127,7 +126,7 @@ Ask [Bits Chat][2] to run a test, and include the source host and the destinatio
 Run a Network Path test from web-01.example.com to google.com on TCP port 443.
 ```
 
-Bits Chat asks you to approve the action, runs the test, and replies with the result and an analysis after the test completes.
+Bits Chat asks you to approve the action, runs the test, and replies with the result and an analysis after the test completes. Bits Chat uses the [`run_network_path`][3] tool in the Datadog MCP Server.
 
 ## View results
 
@@ -145,9 +144,8 @@ On-demand test results appear in the {{< ui >}}Test Runs{{< /ui >}} tab of a par
 [3]: /mcp_server/tools/#run_network_path
 [4]: /actions/private_actions/
 [5]: /actions/private_actions/enroll_runner/#ownerless-runners
-[6]: /actions/private_actions/set_up_agent_based/?tab=linux#change-the-allowlist
-[7]: /actions/private_actions/set_up_agent_based/#prerequisites
-[8]: https://app.datadoghq.com/actions/private-action-runners
-[9]: /actions/private_actions/execution_policies/#create-an-execution-policy
-[10]: /mcp_server/setup/#required-permissions
-[11]: /account_management/rbac/permissions/
+[6]: /actions/private_actions/set_up_agent_based/#prerequisites
+[7]: https://app.datadoghq.com/actions/private-action-runners
+[8]: /actions/private_actions/execution_policies/#create-an-execution-policy
+[9]: /mcp_server/setup/#required-permissions
+[10]: /account_management/rbac/permissions/
