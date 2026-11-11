@@ -34,6 +34,7 @@ After setup, Datadog:
 
 - GPU Monitoring is [set up][3] on your GPU nodes.
 - The NVIDIA DRA driver is installed and allocates the GPUs on these nodes.
+- The [Cluster Agent][9] is enabled, with [Cluster Checks Runners][8], to collect DRA resource metrics (Step 2). The Cluster Agent is enabled by default in the Datadog Operator and the Helm chart.
 
 On Kubernetes 1.34 and later, the kubelet reports DRA allocations through the PodResources API by default (`KubeletPodResourcesDynamicResources` feature gate). No kubelet changes are required.
 
@@ -242,3 +243,4 @@ Other Kubernetes State metrics disappeared
 [6]: https://github.com/cncf-tags/container-device-interface
 [7]: /integrations/kubernetes_state_core/
 [8]: /containers/cluster_agent/clusterchecks/#cluster-check-runners
+[9]: /containers/cluster_agent/
