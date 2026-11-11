@@ -2240,6 +2240,10 @@
     "description": "Get the diagnostics produced by an experiment's latest analysis run. Each diagnostic includes its category, and the response includes an overall diagnostic or pipeline lifecycle status.",
     "summary": "Get experiment diagnostics"
   },
+  "ListExperimentHoldouts": {
+    "description": "List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.",
+    "summary": "List experiment holdouts"
+  },
   "ListExperimentMetricGroups": {
     "description": "List every decision and non-decision metric group attached to an experiment. Metric references are returned in their stored order. An incomplete draft can have no decision group and returns only the groups that exist.",
     "summary": "List experiment metric groups"
