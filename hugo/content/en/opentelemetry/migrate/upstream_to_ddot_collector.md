@@ -37,17 +37,18 @@ To set up a new Collector instead, see [Install the DDOT Collector on Kubernetes
        secretKeyRef:
          name: datadog-secret
          key: site
-   - name: NODE_NAME
+   - name: K8S_NODE_NAME
      valueFrom:
        fieldRef:
          fieldPath: spec.nodeName
    - name: DD_HOSTNAME
-     value: $(NODE_NAME)-<CLUSTER_NAME>
+     value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
    ```
 
-   `DD_HOSTNAME` gives each node a consistent hostname. Without it, the Collector exits if it can't detect a hostname, such as on a node without cloud provider metadata. Keep `NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands `$(NODE_NAME)` only from variables defined earlier in the list. Replace `<CLUSTER_NAME>` with your cluster's name.
+   `DD_HOSTNAME` gives each node a consistent hostname. Without it, the Collector exits if it can't detect a hostname, such as on a node without cloud provider metadata. Keep `K8S_NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands `$(K8S_NODE_NAME)` only from variables defined earlier in the list. Replace `<CLUSTER_NAME>` with your cluster's name.
 
-   With the kube-stack chart, leave out `NODE_NAME` and set `DD_HOSTNAME` to `$(K8S_NODE_NAME)-<CLUSTER_NAME>`. The chart defines `K8S_NODE_NAME` for you, and it reorders `env` entries, so `$(NODE_NAME)` isn't expanded.
+   With either Helm chart (Collector or kube-stack), leave out `K8S_NODE_NAME` and set `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>`. Both charts define `OTEL_K8S_NODE_NAME` before your entries.
+
 1. Choose an image tag. Replace `<DDOT_VERSION>` in the next steps with version 7.84.4 or later. Earlier versions can fail to start when your configuration doesn't use the Datadog Exporter. For available tags, see [datadog/ddot-collector][6] on Docker Hub.
 
 ## Change the image
@@ -168,7 +169,7 @@ kubectl logs daemonset/<DAEMONSET_NAME>
 : The Collector can't find its API key. Check that `DD_API_KEY` is set from your secret, and that the secret is in the Collector's namespace.
 
 `unable to reliably determine the host name`
-: Set `DD_HOSTNAME`, as described in [Before you switch](#before-you-switch). If `DD_HOSTNAME` is set but the error continues, check that its value doesn't contain an unexpanded `$(NODE_NAME)`.
+: Set `DD_HOSTNAME`, as described in [Before you switch](#before-you-switch). If `DD_HOSTNAME` is set but the error continues, check that its value doesn't contain an unexpanded `$(K8S_NODE_NAME)` or `$(OTEL_K8S_NODE_NAME)`.
 
 `exec: "/otelcol-contrib": stat /otelcol-contrib: no such file or directory`
 : Your Collector chart values set `command.name`. Remove it.
