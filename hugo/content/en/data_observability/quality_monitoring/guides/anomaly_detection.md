@@ -69,7 +69,7 @@ The following seasonal patterns are detected. How much history the model uses de
 | Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. | About the last 3 months |
 | Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. | Up to 400 days |
 
-Not all seasonal patterns are available for all metric types. The model requires at least two complete cycles of normal history to detect a pattern, and typically detects it after three or more. For example, the model can detect a weekly pattern after two weeks of history, but usually detects it after three or more weeks. Backfilled history counts toward these cycles the same way as history the monitor collected itself.
+Not all seasonal patterns are available for all metric types. The model requires at least two complete cycles of normal history to detect a pattern, and typically detects it after three or more. For example, the model can detect a weekly pattern after two weeks of history, but usually detects it after three or more weeks.
 
 ## Trends
 
