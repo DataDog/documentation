@@ -2342,42 +2342,78 @@
     "request_description": "",
     "request_schema_description": "Request to partially update a saved filter."
   },
+  "DeleteFlagSuggestion": {
+    "description": "Deletes a pending suggestion or discards an approved suggestion that has not been\napplied. Requires editor access to the flag, or contributor access for the suggestion's\ncreator. Applied and rejected suggestions return `409 Conflict`. A missing or already\ndiscarded suggestion returns `204 No Content`.",
+    "summary": "Delete or discard a flag change suggestion"
+  },
+  "GetFlagSuggestion": {
+    "description": "Returns a feature flag change suggestion by ID. Use `lifecycle_status` to distinguish\npending, approved, applied, rejected, and discarded suggestions. An approved suggestion\nhas not yet been applied; an applied suggestion has changed the flag.",
+    "summary": "Get a flag change suggestion"
+  },
+  "ApplyFlagSuggestion": {
+    "description": "Applies a previously approved feature flag change suggestion. Requires contributor or\neditor access to the flag. Pending, rejected, or discarded suggestions return `409 Conflict`.\nAn already applied suggestion also returns `409 Conflict`, except that retrying an applied\nexperiment action succeeds. This endpoint does not require a request body.\n\nWhen an `ALLOCATIONS` suggestion is applied, either by this endpoint or by an approval that applies it,\neach exposure schedule with `autostart` set to `true`, no `absolute_start_time`, and no future\n`scheduled_start_time` starts at apply time. This includes a schedule that is already running, so a\nsuggestion that omits its `absolute_start_time` restarts its rollout. If its `selection_interval_ms` is\ngreater than `0`, every step except the last uses that interval. An `absolute_start_time` in the\nsuggestion is kept, including one set by the allocations request that built the suggestion, so time spent\nwaiting for approval counts toward its rollout steps.\nSchedules with `apm_retention`, in the suggestion or on the saved schedule, are the exception: apply does\nnot start them, and they start only through the exposure schedule start endpoint. When the suggestion omits\n`apm_retention` or `absolute_start_time` for a saved schedule with `apm_retention`, apply keeps the saved\nvalues, so a running schedule keeps its start, unless the suggestion changes its rollout strategy, which\nstops it.",
+    "summary": "Apply an approved flag change suggestion"
+  },
+  "ApproveFlagSuggestion": {
+    "description": "Approves a feature flag change suggestion and applies the change immediately by default.\nSet `apply` to `false` to approve without applying, then call `ApplyFlagSuggestion` later.\nUntil it is applied or deleted, an approved suggestion still blocks conflicting changes.\nRequires editor access to the flag or the Feature Flag Approvals Override permission.\nA creator cannot approve their own suggestion unless they have override permission.\nApplied or discarded suggestions return `409 Conflict`. Retrying approval of an already\napplied experiment action with `apply` set to `true` succeeds.",
+    "summary": "Approve a flag change suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to approve a feature flag change suggestion."
+  },
+  "RejectFlagSuggestion": {
+    "description": "Rejects a pending feature flag change suggestion without applying the change. Requires\neditor access to the flag or the Feature Flag Approvals Override permission. Rejecting\nan already rejected suggestion succeeds. Approved, applied, or discarded suggestions\nreturn `409 Conflict`.",
+    "summary": "Reject a flag change suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to reject a feature flag change suggestion."
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
+    "description": "Updates an existing feature flag's metadata, including its name,\ndescription, distribution channel, and tags. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.\n\nTo change the lifecycle, set `staleness_status` to `ACTIVE` (temporary) or `PERMANENT`.\nEither value clears any snooze; omit it to keep the lifecycle. Send `staleness_status` in a\nseparate request from `distribution_channel`. Do not copy the top-level `staleness_status`\nfrom a response into the request: that legacy response field is always `ACTIVE`, so\ncopying it makes a `PERMANENT` flag temporary.\n\nWhen backend approvals are enabled and a distribution channel change requires approval,\ncallers without the Feature Flag Approvals Override permission receive `201 Created`\nwith a suggestion instead of an updated flag. No fields in the request are applied.\nThe suggestion contains only the distribution channel change. To update other fields, such as\nname, description, JSON schema, and tags, send a separate request without `distribution_channel`.\n\nWhile backend approvals are enabled, a request that includes `distribution_channel`\nreturns `409 Conflict` if a distribution channel suggestion for the flag is pending, or\napproved but not yet applied. No fields are applied, including for callers with override\npermission.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
   },
   "ArchiveFeatureFlag": {
-    "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
+    "description": "Archives a feature flag. Archived flags are hidden from the main list but remain accessible\nand can be unarchived.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion. The change is not applied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Archive a feature flag"
   },
   "CreateAllocationsForFeatureFlagInEnvironment": {
-    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "description": "Creates a new targeting rule (allocation) for a feature flag in an environment.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `202 Accepted` with an\n`approval-required` resource. No allocation is created and no suggestion is persisted.\nThe resource ID is the flag ID. Submit its `property`, `action`, `suggestion`, and `environment_id`\nto `CreateFlagSuggestion`, together with `notification_rule_targets`, to request approval.\nThe suggestion value contains the complete desired allocation set, including the new rule.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict`, including for callers with\noverride permission or when approval is no longer required.",
     "summary": "Create targeting rules for a flag env",
     "request_description": "",
     "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
   },
   "UpdateAllocationsForFeatureFlagInEnvironment": {
-    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "description": "Updates targeting rules (allocations) for a feature flag in an environment. This operation\nreplaces the existing allocation set with the request payload.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion. The change is not applied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.\n\nWhen approval is required, combining allocation replacement with `default_variant_key`\nreturns `400 Bad Request`. Omit that parameter and submit the default variant change\nseparately with `CreateFlagSuggestion` using the `DEFAULT_VARIANT` property and the variant ID.",
     "summary": "Update targeting rules for a flag",
     "request_description": "",
     "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
   },
   "DisableFeatureFlagEnvironment": {
-    "description": "Disable a feature flag in a specific environment.",
+    "description": "Disables a feature flag in a specific environment.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion, in the same format as the `GetFlagSuggestion` response. The change is not\napplied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Disable a feature flag in an environment"
   },
   "EnableFeatureFlagEnvironment": {
-    "description": "Enable a feature flag in a specific environment.",
+    "description": "Enables a feature flag in a specific environment.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion, in the same format as the `GetFlagSuggestion` response. The change is not\napplied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Enable a feature flag in an environment"
   },
+  "UpdateFeatureFlagApprovals": {
+    "description": "Enables or disables the approval requirement for a feature flag. Requires the Feature\nFlag Write permission and contributor or editor access to the flag. Disabling approvals\nalso requires the Feature Flag Approvals Override permission, even if approvals are already disabled.\nThis operation updates the setting directly and does not create a suggestion. Changing the setting\nreturns `409 Conflict` when a pending experiment request or a running approved experiment uses the flag.",
+    "summary": "Set the approval requirement for a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to change whether a feature flag requires approval."
+  },
+  "CreateFlagSuggestion": {
+    "description": "Creates a persisted suggestion for a feature flag change that requires approval.\nThe change is not applied until the suggestion is approved and applied. Requires\ncontributor or editor access to the flag. The request must contain at least one\n`notification_rule_targets` handle for review notifications.\n\nUse this endpoint to submit the proposed change from the `202 Accepted` approval-required\nresponse of `CreateAllocationsForFeatureFlagInEnvironment`. Other approval-gated mutation endpoints\nreturn `201 Created` with a persisted suggestion. Do not submit those suggestions again.\n\nAn `environment_id` is required for `ALLOCATIONS`, `DEFAULT_VARIANT`, and `OVERRIDE_VARIANT`.\nFor allocation and variant changes, `suggestion` is a JSON-encoded string, not a nested\nJSON object. Conflicting suggestions that are pending, or approved but not yet applied,\nreturn `409 Conflict`.\n\nThe allocations in an `ALLOCATIONS` suggestion are validated with the rules that\n`UpdateAllocationsForFeatureFlagInEnvironment` applies to a change that requires approval, including the\nrules for request fields, targeting rules and their `ONE_OF` and `NOT_ONE_OF` value limits, variant and\nmetric references, draft allocations, and exposure schedules. A schedule with `apm_retention` that has not\nstarted must be started with the exposure schedule start endpoint, not with `autostart` or an\n`absolute_start_time`. That endpoint's Product Analytics Experiments Write permission checks also apply.\nIf that endpoint would reject the allocations, this endpoint returns the same error: `400 Bad Request` for\ninvalid allocations, for example a `UNIFORM_INTERVALS` schedule with a `selection_interval_ms` of `0`,\n`403 Forbidden` when the caller lacks the Experiments Write permission the lineup needs, and\n`409 Conflict` for a lineup that changes or omits a draft allocation.",
+    "summary": "Create a flag change suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to create a feature flag change suggestion."
+  },
   "UnarchiveFeatureFlag": {
-    "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
+    "description": "Unarchives a previously archived feature flag, making it visible in the main list again.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion. The change is not applied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Unarchive a feature flag"
   },
   "CreateVariantForFeatureFlag": {
@@ -2387,11 +2423,11 @@
     "request_schema_description": "Request to add a variant to a feature flag."
   },
   "DeleteVariantFromFeatureFlag": {
-    "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion, in the same format as the `GetFlagSuggestion` response. The change is not\napplied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Delete a variant"
   },
   "UpdateVariantForFeatureFlag": {
-    "description": "Updates the name and value of an existing variant on a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "description": "Updates the name and value of an existing variant on a feature flag.\n\nWhen backend approvals are enabled and this change requires approval, callers without\nthe Feature Flag Approvals Override permission receive `201 Created` with a persisted\nsuggestion, in the same format as the `GetFlagSuggestion` response. The change is not\napplied until the suggestion is approved and applied.\nUse the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,\n`RejectFlagSuggestion`, or `DeleteFlagSuggestion`.\n\nA conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,\nincluding for callers with override permission or when approval is no longer required.",
     "summary": "Update a variant",
     "request_description": "",
     "request_schema_description": "Request to update an existing variant's name and value."
