@@ -263,6 +263,47 @@ curl -L -X PUT "{{< region-param key="custom_costs_endpoint" >}}" \
 
 Cost data appears in Datadog after 24 hours.
 
+### Mark a file as AI provider costs
+
+If a file contains the costs of an AI provider, such as a model API or an AI platform that Datadog doesn't integrate with natively, you can mark the file as an AI provider file. The costs of the file then appear on the [**AI Costs** page][11], next to your other AI costs.
+
+Line items from an AI provider file get two additional tags:
+
+| Tag | Description |
+| ----------| ----------------------------------|
+| `custom_ai_provider` | Set to `true` for line items from an AI provider file. |
+| `ai_vendor` | The AI provider, derived from the `ProviderName` of the line item. |
+
+You can mark a file as an AI provider file when you upload it, or change it later. When you change it, Datadog recomputes the costs for the months that the file covers.
+
+In Datadog:
+
+1. To mark a new file, navigate to [**Cloud Cost > Settings > Custom Costs**][3], click the {{< ui >}}\+ Upload Costs{{< /ui >}} button, and turn on {{< ui >}}AI provider{{< /ui >}} before uploading the file.
+1. To change an existing file, click the file in the [**Custom Costs**][3] list and turn {{< ui >}}AI provider{{< /ui >}} on or off.
+
+To mark a file as an AI provider file programmatically, add the `ai_provider=true` query parameter to the `PUT api/v2/cost/custom_costs` endpoint.
+
+For example, using cURL:
+
+```curl
+curl -L -X PUT "{{< region-param key="custom_costs_endpoint" >}}?ai_provider=true" \
+-H "Content-Type: multipart/form-data" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-F "file=${file};type=text/json"
+```
+
+To change an existing file, use the [`PATCH api/v2/cost/custom_costs/{file_id}`][12] endpoint.
+
+For example, using cURL:
+
+```curl
+curl -L -X PATCH "{{< region-param key="custom_costs_endpoint" >}}/${file_id}" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{"data": {"type": "cost_metadata", "id": "'"${file_id}"'", "attributes": {"ai_provider": true}}}'
+
 ## Cost metric types
 
 You can visualize your ingested data using the following cost types:
@@ -285,6 +326,8 @@ All costs submitted to Custom Costs appear in these metrics. For example, if a $
 
 You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cloud Cost Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
 
+Costs from [AI provider files](#mark-a-file-as-ai-provider-costs) also appear on the [**AI Costs** page][11].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -299,3 +342,5 @@ You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cl
 [8]: /dashboards
 [9]: /notebooks
 [10]: /monitors/types/cloud_cost/
+[11]: https://app.datadoghq.com/cost/summarize/ai-costs
+[12]: /api/latest/cloud-cost-management/#update-custom-costs-file
