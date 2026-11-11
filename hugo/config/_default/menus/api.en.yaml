@@ -19980,6 +19980,75 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
+    - name: OpenAI Codex Integration
+      url: /api/latest/openai-codex-integration/
+      identifier: openai-codex-integration
+      generated: true
+    - name: Update an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/update-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-update-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/get-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-get-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/delete-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-delete-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/create-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-create-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Codex integration accounts
+      url: /api/latest/openai-codex-integration/list-openai-codex-integration-accounts/
+      identifier: openai-codex-integration-list-openai-codex-integration-accounts
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAICodexIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

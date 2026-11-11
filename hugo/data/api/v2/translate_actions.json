@@ -3138,6 +3138,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
   },
+  "ListOpenAICodexIntegrationAccounts": {
+    "description": "List OpenAI Codex integration accounts.",
+    "summary": "List OpenAI Codex integration accounts"
+  },
+  "CreateOpenAICodexIntegrationAccount": {
+    "description": "Create an OpenAI Codex integration account.",
+    "summary": "Create an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Codex integration account."
+  },
+  "DeleteOpenAICodexIntegrationAccount": {
+    "description": "Delete an OpenAI Codex integration account.",
+    "summary": "Delete an OpenAI Codex integration account"
+  },
+  "GetOpenAICodexIntegrationAccount": {
+    "description": "Get an OpenAI Codex integration account.",
+    "summary": "Get an OpenAI Codex integration account"
+  },
+  "UpdateOpenAICodexIntegrationAccount": {
+    "description": "Update an OpenAI Codex integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Codex integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"
