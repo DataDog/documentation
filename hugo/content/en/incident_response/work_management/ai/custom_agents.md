@@ -16,7 +16,7 @@ further_reading:
 <div class="alert alert-danger">AI features for Work Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Join the Preview for the Work Management integration with Claude">}} Assign work items to Claude managed agents.{{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Join the Preview for the Work Management integration with Claude">}} Assign work items to Claude managed agents. Fill out the form to request access.{{< /callout >}}
 
 ## Overview
 
