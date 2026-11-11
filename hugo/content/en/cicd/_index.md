@@ -53,10 +53,9 @@ Set up CI/CD Optimization for a repository in one continuous, guided process. Af
 ## Get started with CI/CD Optimization
 
 {{< whatsnext desc="Get started with CI/CD Optimization:" >}}
-    {{< nextlink href="/continuous_integration/pipelines/" >}}CI Pipeline Setup{{< /nextlink >}}
-    {{< nextlink href="/tests/setup/" >}}Test Suite Setup{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="/tests/" >}}Test Optimization{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/explorer/" >}}Explorer{{< /nextlink >}}
-    {{< nextlink href="/tests/flaky_management/" >}}Flaky Test Management{{< /nextlink >}}
     {{< nextlink href="/cicd/features/" >}}Features{{< /nextlink >}}
     {{< nextlink href="/monitors/types/ci/?tab=pipelines" >}}Monitors{{< /nextlink >}}
     {{< nextlink href="/cicd/guides/" >}}Guides{{< /nextlink >}}
@@ -69,5 +68,5 @@ Set up CI/CD Optimization for a repository in one continuous, guided process. Af
 
 [1]: /continuous_integration/explorer/
 [2]: /tests/flaky_management/
-[3]: /continuous_integration/pipelines/
+[3]: /continuous_integration/#set-up-ci-visibility
 [4]: /tests/setup/
