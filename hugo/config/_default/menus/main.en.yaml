@@ -1669,6 +1669,16 @@ menu:
       identifier: bits_remediation
       parent: bits_ai
       weight: 10
+    - name: Infrastructure Actions
+      url: bits_ai/bits_remediation/infrastructure_actions
+      identifier: bits_remediation_infrastructure_actions
+      parent: bits_remediation
+      weight: 1001
+    - name: Bits Guardrails
+      url: bits_ai/bits_remediation/guardrails
+      identifier: bits_remediation_guardrails
+      parent: bits_remediation
+      weight: 1002
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -3771,6 +3781,11 @@ menu:
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
       weight: 812
+    - name: DatadogBYOCCluster CRD
+      url: containers/datadog_operator/crd_byoccluster
+      identifier: containers_datadog_operator_crd_byoccluster
+      parent: containers_datadog_operator
+      weight: 813
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -5918,36 +5933,41 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 40501
+    - name: Code Evaluators
+      url: llm_observability/investigate/evaluations/code_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_code_evaluations
+      weight: 40502
     - name: Language Mismatch
       url: llm_observability/investigate/evaluations/language_mismatch
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
-      weight: 40502
+      weight: 40503
     - name: Sensitive Data Scanner
       url: llm_observability/investigate/evaluations/managed_evaluations/security_and_safety_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_sensitive_data_scanner
-      weight: 40503
+      weight: 40504
     - name: End-User Feedback
       url: llm_observability/investigate/evaluations/end_user_feedback
       parent: llm_obs_evaluations
       identifier: llm_obs_end_user_feedback
-      weight: 40504
+      weight: 40505
     - name: External Evaluations
       url: llm_observability/investigate/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
-      weight: 40505
+      weight: 40506
     - name: Evaluator Developer Guide
       url: llm_observability/investigate/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
-      weight: 40506
+      weight: 40507
     - name: Compatibility
       url: llm_observability/investigate/evaluations/compatibility
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
-      weight: 40507
+      weight: 40508
     - name: Annotation Queues
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
@@ -7927,6 +7947,11 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
+    - name: Datadog Operator
+      url: /byoc-logs/install/datadog_operator
+      parent: cloudprem_install
+      identifier: cloudprem_datadog_operator
+      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem

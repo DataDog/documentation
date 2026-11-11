@@ -1,3 +1,3 @@
 ---
-title: Rum Replay Sessions
+title: RUM Replay Sessions
 ---

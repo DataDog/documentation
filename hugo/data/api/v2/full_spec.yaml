@@ -891,8 +891,8 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: |-
-        Comma-separated list of relationship objects that should be included in the response.
-        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
+        Values must not contain spaces. `case` and `assignee` return nothing, without an error, if the caller lacks the `cases_read` permission.
       explode: false
       in: query
       name: include
@@ -1888,6 +1888,7 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
+      example: logs
       in: path
       name: product
       required: true
@@ -2194,7 +2195,8 @@ components:
       schema:
         $ref: "#/components/schemas/ServiceDefinitionSchemaVersions"
     SearchIssuesIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.case`, and `issue.team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.bits_investigation`, `issue.case`, `issue.impacted_sessions`, `issue.impacted_users`, `issue.pull_requests`, `issue.team_owners`, and `issue.watches`.
       explode: false
       in: query
       name: include
@@ -62988,16 +62990,22 @@ components:
       description: Relationship object that should be included in the response.
       enum:
         - assignee
+        - bits_investigation
         - case
-        - team_owners
+        - pull_requests
         - samples
+        - team_owners
+        - watches
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
+        - BITS_INVESTIGATION
         - CASE
-        - TEAM_OWNERS
+        - PULL_REQUESTS
         - SAMPLES
+        - TEAM_OWNERS
+        - WATCHES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -73899,6 +73907,36 @@ components:
         state:
           $ref: "#/components/schemas/IssueState"
       type: object
+    IssueBitsInvestigationReference:
+      description: The Bits AI investigation linked to the issue.
+      properties:
+        id:
+          description: Bits AI investigation identifier.
+          example: "6c2b3c2e-6b8f-4c3a-9a7e-1d2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueBitsInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    IssueBitsInvestigationRelationship:
+      description: |-
+        Bits AI investigation linked to the issue, returned when `bits_investigation` is requested
+        in the `include` query parameter.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueBitsInvestigationReference"
+      required:
+        - data
+      type: object
+    IssueBitsInvestigationType:
+      description: Type of the object.
+      enum: ["bits_investigation"]
+      example: "bits_investigation"
+      type: string
+      x-enum-varnames:
+        - BITS_INVESTIGATION
     IssueCase:
       description: The case attached to the issue.
       properties:
@@ -73968,6 +74006,10 @@ components:
           $ref: "#/components/schemas/CasePriority"
         status:
           $ref: "#/components/schemas/CaseStatus"
+        status_group:
+          $ref: "#/components/schemas/CaseStatusGroup"
+        status_name:
+          $ref: "#/components/schemas/CaseStatusName"
         title:
           description: Title of the case.
           example: "Error: HTTP error"
@@ -74119,6 +74161,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
         - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
@@ -74148,6 +74192,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
       example: "PYTHON"
@@ -74178,6 +74223,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
     IssuePlatform:
@@ -74186,6 +74232,7 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
@@ -74197,11 +74244,96 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
         - ROKU
         - UNKNOWN
+    IssuePullRequest:
+      description: A pull request linked to an issue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssuePullRequestAttributes"
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssuePullRequestAttributes:
+      description: Object containing the information of a pull request linked to an issue.
+      properties:
+        closed_at:
+          description: Timestamp of when the pull request was closed. Omitted if the pull request is not closed.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        linked_at:
+          description: Timestamp of when the pull request was linked to the issue.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        merged_at:
+          description: Timestamp of when the pull request was merged. Omitted if the pull request is not merged.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        reason:
+          $ref: "#/components/schemas/IssuePullRequestReason"
+        url:
+          description: URL of the pull request.
+          example: "https://github.com/DataDog/example/pull/123"
+          type: string
+      type: object
+    IssuePullRequestReason:
+      description: Why the pull request is linked to the issue. `fix` means the pull request fixes the issue, and `trigger` means the pull request introduced the issue.
+      enum:
+        - unknown
+        - fix
+        - trigger
+      example: "fix"
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - FIX
+        - TRIGGER
+    IssuePullRequestReference:
+      description: A pull request linked to the issue.
+      properties:
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+      type: object
+    IssuePullRequestType:
+      description: Type of the object.
+      enum: ["error_tracking_pull_request"]
+      example: "error_tracking_pull_request"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_PULL_REQUEST
+    IssuePullRequestsRelationship:
+      description: Relationship between the issue and its linked pull requests. Returned when `pull_requests` is included and the issue has linked pull requests.
+      properties:
+        data:
+          description: Array of pull requests linked to the issue.
+          items:
+            $ref: "#/components/schemas/IssuePullRequestReference"
+          type: array
+      required:
+        - data
+      type: object
     IssueReference:
       description: The issue the search result corresponds to.
       properties:
@@ -74237,16 +74369,22 @@ components:
         - regressed_at
       type: object
     IssueRelationships:
-      description: Relationship between the issue and an assignee, case and/or teams.
+      description: Relationship between the issue and other resources, such as an assignee, case, teams, pull requests, watches, samples, or a Bits AI investigation.
       properties:
         assignee:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
+        bits_investigation:
+          $ref: "#/components/schemas/IssueBitsInvestigationRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        pull_requests:
+          $ref: "#/components/schemas/IssuePullRequestsRelationship"
         samples:
           $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
+        watches:
+          $ref: "#/components/schemas/IssueWatchesRelationship"
       type: object
     IssueResponse:
       description: Response containing error tracking issue data.
@@ -74753,6 +74891,146 @@ components:
       type: string
       x-enum-varnames:
         - USER
+    IssueWatch:
+      description: |-
+        An active watch on an issue. A watch moves an ignored issue back to open when its condition is met.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueWatchAttributes"
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueWatchAction:
+      description: Action applied to the issue when the watch condition is met.
+      properties:
+        from:
+          $ref: "#/components/schemas/IssueState"
+        kind:
+          $ref: "#/components/schemas/IssueWatchActionKind"
+        to:
+          $ref: "#/components/schemas/IssueState"
+      required:
+        - kind
+      type: object
+    IssueWatchActionKind:
+      description: Kind of watch action.
+      enum:
+        - CHANGE_ISSUE_STATE
+      example: "CHANGE_ISSUE_STATE"
+      type: string
+      x-enum-varnames:
+        - CHANGE_ISSUE_STATE
+    IssueWatchAttributes:
+      description: Object containing the information of a watch.
+      properties:
+        action:
+          $ref: "#/components/schemas/IssueWatchAction"
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+        started_at:
+          description: Timestamp of when the watch started.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/IssueWatchStatus"
+      type: object
+    IssueWatchCondition:
+      description: |-
+        Condition that triggers the watch action. The fields that are set depend on `kind`:
+        `OCCURRENCES` uses `threshold`, `CARDINALITY` uses `threshold` and `projection`,
+        `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
+      properties:
+        duration:
+          description: Time that must elapse before the condition is met, as a Go duration string.
+          example: "168h0m0s"
+          type: string
+        kind:
+          $ref: "#/components/schemas/IssueWatchConditionKind"
+        operands:
+          description: Nested conditions combined by `ANY` or `ALL`.
+          items:
+            $ref: "#/components/schemas/IssueWatchCondition"
+          type: array
+        projection:
+          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          example: ["@usr.id"]
+          items:
+            description: Attribute path.
+            example: "@usr.id"
+            type: string
+          type: array
+        threshold:
+          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          example: 100
+          format: int64
+          type: integer
+      required:
+        - kind
+      type: object
+    IssueWatchConditionKind:
+      description: Kind of watch condition.
+      enum:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+      example: "OCCURRENCES"
+      type: string
+      x-enum-varnames:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+    IssueWatchReference:
+      description: An active watch on the issue.
+      properties:
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+      type: object
+    IssueWatchStatus:
+      description: Status of the watch.
+      enum:
+        - ACTIVE
+      example: "ACTIVE"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+    IssueWatchType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_watch"]
+      example: "error_tracking_issue_watch"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_WATCH
+    IssueWatchesRelationship:
+      description: Relationship between the issue and its active watches. Returned when `watches` is included and the issue has an active watch.
+      properties:
+        data:
+          description: Array of active watches on the issue.
+          items:
+            $ref: "#/components/schemas/IssueWatchReference"
+          type: array
+      required:
+        - data
+      type: object
     IssuesSearchRequest:
       description: Search issues request payload.
       properties:
@@ -74903,12 +75181,20 @@ components:
       description: Object containing the information of a search result.
       properties:
         impacted_sessions:
-          description: Count of sessions impacted by the issue over the queried time window.
+          description: |-
+            Count of sessions impacted by the issue over the queried time window.
+            Returned for RUM, LLM Observability, browser, and mobile searches,
+            or when `issue.impacted_sessions` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 12
           format: int64
           type: integer
         impacted_users:
-          description: Count of users impacted by the issue over the queried time window.
+          description: |-
+            Count of users impacted by the issue over the queried time window.
+            Returned for RUM, browser, and mobile searches,
+            or when `issue.impacted_users` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 4
           format: int64
           type: integer
@@ -74925,6 +75211,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
     IssuesSearchResultIssueRelationship:
       description: Relationship between the search result and the corresponding issue.
       properties:
@@ -111902,9 +112190,12 @@ components:
       description: The definition of a RUM operation's journey, used to detect it from RUM events.
       properties:
         rum_steps:
-          description: The ordered list of steps composing the RUM journey.
+          description: |-
+            The ordered list of steps composing the RUM journey.
+            `null` when the operation has no steps. On create and update, `null` and an empty list are equivalent.
           items:
             $ref: "#/components/schemas/RUMOperationJourneyStep"
+          nullable: true
           type: array
       required:
         - rum_steps
@@ -112024,6 +112315,7 @@ components:
           description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
+          nullable: true
           type: array
         journey_rum:
           $ref: "#/components/schemas/RUMOperationJourneyRum"
@@ -112042,6 +112334,7 @@ components:
             - "team:checkout"
           items:
             type: string
+          nullable: true
           type: array
         updated_at:
           description: The timestamp when the RUM operation was last updated.
@@ -112311,7 +112604,8 @@ components:
         - attributes
       type: object
     RUMOperationUser:
-      description: A Datadog user referenced by a RUM operation.
+      description: A Datadog user referenced by a RUM operation. `null` when the user could not be resolved.
+      nullable: true
       properties:
         email:
           description: The email of the user.
@@ -112327,6 +112621,7 @@ components:
           type: string
         uuid:
           description: The UUID of the user.
+          example: "abc12345-1234-5678-abcd-ef1234567890"
           readOnly: true
           type: string
       type: object
@@ -112337,10 +112632,36 @@ components:
           items:
             $ref: "#/components/schemas/RUMOperationResponseData"
           type: array
+        links:
+          $ref: "#/components/schemas/RUMOperationsListResponseLinks"
         meta:
           $ref: "#/components/schemas/RUMOperationsListResponseMeta"
       required:
         - data
+      type: object
+    RUMOperationsListResponseLinks:
+      description: Pagination links for a list of RUM operations.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        last:
+          description: Link to the last page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=150"
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=100"
+          type: string
+        prev:
+          description: Link to the previous page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=50"
+          type: string
       type: object
     RUMOperationsListResponseMeta:
       description: Metadata for a list of RUM operations.
@@ -122856,15 +123177,25 @@ components:
       enum:
         - issue
         - issue.assignee
+        - issue.bits_investigation
         - issue.case
+        - issue.impacted_sessions
+        - issue.impacted_users
+        - issue.pull_requests
         - issue.team_owners
+        - issue.watches
       example: "issue.case"
       type: string
       x-enum-varnames:
         - ISSUE
         - ISSUE_ASSIGNEE
+        - ISSUE_BITS_INVESTIGATION
         - ISSUE_CASE
+        - ISSUE_IMPACTED_SESSIONS
+        - ISSUE_IMPACTED_USERS
+        - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
+        - ISSUE_WATCHES
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -143274,15 +143605,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -143586,12 +143921,13 @@ components:
       properties:
         rule_ids:
           description: >-
-            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list. Must contain the UUID of every active rule in the org (at most 1,000); omitting any active rule returns a 400 error.
           example:
             - "00000000-0000-0000-0000-000000000001"
             - "00000000-0000-0000-0000-000000000002"
           items:
             type: string
+          maxItems: 1000
           type: array
       type: object
     TagIndexingRuleOrderData:
@@ -143642,15 +143978,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -181610,7 +181950,9 @@ paths:
       x-menu-order: 1
   /api/v2/error-tracking/issues/{issue_id}:
     get:
-      description: Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+      description: |-
+        Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.
       operationId: GetIssue
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
@@ -216196,7 +216538,20 @@ paths:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
         among existing rules; use the reorder endpoint to change the evaluation order.
+        Every rule that matches a metric applies, in `rule_order`; a rule with
+        `override_previous_rules` set to `false` (merge) adds to the tags configured by earlier
+        rules, and a rule with `override_previous_rules` set to `true` replaces them.
         Requires the `Manage Tags for Metrics` permission.
+
+        Limits:
+        - An org can have at most 1,000 active tag indexing rules. Creating a rule when the org
+          already has 1,000 active rules returns a 403 error with the title
+          `Tag indexing rule limit reached`.
+        - Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;
+          requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.
+        - `name` can be at most 200 characters, and `metric_name_matches` can contain at most
+          50 patterns of at most 200 characters each. Requests that exceed these limits return a
+          400 error.
       operationId: CreateTagIndexingRule
       requestBody:
         content:
@@ -216248,6 +216603,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                rule_limit_reached:
+                  summary: The org already has 1,000 active tag indexing rules.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rule limit reached
+                tag_indexing_rules_unavailable:
+                  summary: The org has more than 700,000 custom metrics.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rules unavailable
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
@@ -216276,7 +216644,8 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
-        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
+        The UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID
+        returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -216447,7 +216816,10 @@ paths:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
         Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        reorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and
+        `metric_name_matches` can contain at most 50 patterns of at most 200 characters each;
+        requests that exceed these limits return a 400 error.
+        Requires the `Manage Tags for Metrics` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
@@ -216816,6 +217188,11 @@ paths:
 
         To compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`
         instead of calling this endpoint for each metric.
+
+        A `404 Not Found` response means that no metric with this name exists in your organization. A
+        `400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the
+        queried window. For no data, the error message says so and names the window that was queried, which can
+        differ from the requested one.
       operationId: EstimateMetricsOutputSeries
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -216837,7 +217214,7 @@ paths:
             type: boolean
         - description: |-
             The number of hours of look back (from now) to estimate cardinality with.
-            If unspecified, it defaults to 0 hours (the most recent data).
+            If unspecified, it defaults to 0 hours (the most recent data). Values below 0 return `400 Bad Request`.
           example: 0
           in: query
           name: filter[hours_ago]
@@ -216863,7 +217240,9 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+        - description: |-
+            A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+            Smaller values return `400 Bad Request`.
           example: 6
           in: query
           name: filter[timespan_h]
@@ -216871,6 +217250,7 @@ paths:
           schema:
             format: int32
             maximum: 2147483647
+            minimum: 1
             type: integer
       responses:
         "200":
@@ -217349,9 +217729,9 @@ paths:
       description: |-
         Returns the tag configuration for the given metric name.
 
-        A metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually
-        means that the metric has no tag configuration, but it is also returned when no metric with this name exists
-        in your organization.
+        A metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,
+        with different messages: `No tag configuration for <metric_name>` when the metric exists without a tag
+        configuration, and `<metric_name> not found` when no metric with this name exists in your organization.
 
         To list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`
         instead of calling this endpoint for each metric.
@@ -229496,6 +229876,53 @@ paths:
         - Rum Audience Management
       x-menu-order: 8
       x-unstable: "**Note**: This endpoint may be subject to changes."
+  /api/v2/product-analytics/users/{user_id}:
+    delete:
+      description: |-
+        Delete a Product Analytics user profile.
+        Deletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.
+        This only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.
+      operationId: DeleteUserProfile
+      parameters:
+        - description: The ID of the user to delete, as sent in the `usr.id` attribute.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: user-1234
+            type: string
+      responses:
+        "202":
+          description: Deletion accepted; the profile will be removed asynchronously
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete a user profile
+      tags:
+        - Rum Audience Management
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/{entity}/mapping:
     get:
       description: Get entity mapping configuration including all available attributes and their properties
@@ -277019,19 +277446,25 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
+    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
+    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
+    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
+    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
+    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.

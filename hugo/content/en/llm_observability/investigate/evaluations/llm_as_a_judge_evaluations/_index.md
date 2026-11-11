@@ -36,6 +36,8 @@ Custom LLM-as-a-judge evaluators use an LLM to judge the performance of another 
 
 Evaluators can also send the images and audio attached to your spans to the LLM judge. See [Image and Audio Evaluators][19].
 
+For checks that don't need an LLM, such as detecting empty tool results, use [code evaluators][20] instead.
+
 ## Create a custom LLM-as-a-judge evaluator
 
 You can create and manage custom evaluators from the [Evaluators page][1] in Agent Observability. You can provide an evaluator description to generate an evaluator, use and build on existing [LLM-as-a-judge evaluator templates][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
@@ -511,13 +513,15 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluator
 
 ### Test and preview
 
-The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
+The pane on the left shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluator{{< /ui >}} to pre-fill inputs to your evaluator with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 
 ## Viewing and using results
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluator, Datadog automatically runs your evaluator on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluator later.
+
+Each time you save, Datadog keeps a new version of the evaluator. To view, compare, or restore versions, see [Evaluator Versions][20].
 
 Results are available across Agent Observability in near-real-time for published evaluators. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
@@ -542,6 +546,7 @@ For example:
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
+- Filter by the evaluator version that produced the result (example, `@evaluation.helpfulness-check.eval_version:3`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
@@ -618,3 +623,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 [19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
+[20]: /llm_observability/investigate/evaluations/code_evaluations
