@@ -6053,6 +6053,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_ai_gateway
       weight: 604
+    - name: Sessions
+      url: llm_observability/configure/ai_gateway_sessions
+      parent: llm_obs_ai_gateway
+      identifier: llm_obs_ai_gateway_sessions
+      weight: 60401
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
