@@ -120,6 +120,10 @@ Review Mode displays:
 
    {{< img src="llm_observability/evaluations/annotation_queues/review.png" alt="The annotation review interface showing the annotation panel on the left and trace details on the right. The left panel displays label controls including failure_type checkboxes for hallucination, formatting_error, and refusal, plus a requires_escalation assessment with Pass and Fail buttons and a Save button at the bottom. The right panel shows the trace details for citizen_agent with a span tree, evaluation results, and expandable sections for Input and Output displaying JSON-formatted data about a weather information query." style="width:100%;" >}}
 
+### Customizing the interaction view
+
+Use a custom App to display the interaction you are reviewing. Open the view menu and select {{< ui >}}Create a custom view{{< /ui >}} to start building with a local coding agent. Preview the view and apply it to the annotation workspace. See [Create Custom Annotation Views][18] for setup instructions.
+
 ### Applying labels
 
 For each trace:
@@ -430,3 +434,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [15]: /account_management/#email-subscriptions
 [16]: /llm_observability/data_governance/
 [17]: /llm_observability/data_governance/access_control/
+[18]: /llm_observability/guide/custom_annotation_views/
