@@ -11,11 +11,11 @@ further_reading:
 
 Test Parallelization helps you shorten test runs and use CI resources more efficiently by balancing test files across CI nodes or local workers. It uses test duration data from Test Optimization to balance the workload so CI nodes finish at roughly the same time.
 
-Pair it with [Test Impact Analysis][1] to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change. Test Parallelization automatically scales down the CI node count to match the remaining workload. This saves the cost and time of provisioning and setting up unnecessary runners.
+Pair Test Parallelization with [Test Impact Analysis][1] to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change. Test Parallelization automatically scales down the CI node count to match the remaining workload. This saves the cost and time of provisioning and setting up unnecessary runners.
 
 ## Setup
 
-Before setting up Test Parallelization, set up [Test Optimization][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then [choose your language and framework][3] and follow the instructions for GitHub Actions, CircleCI, or local workers on one CI node.
+Before setting up Test Parallelization, set up [Test Optimization][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then [choose your CI provider, language, and framework][3] and follow the instructions.
 
 ## Compatibility
 

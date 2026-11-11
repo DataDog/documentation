@@ -56,16 +56,16 @@ curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh
 
 ## Configure your CI jobs
 
-`ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples use the repository root and Bash. {% #3-replace-the-existing-test-command %}
+`ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples assume that tests run from the repository root in a Bash shell. {% #3-replace-the-existing-test-command %}
 
 {% if equals($prog_lang, "ruby") %}
 
-Repeat your [Ruby Test Optimization setup](/tests/setup/ruby/) in the planning job before `ddtest plan`, including the auto-instrumentation action or orb if used. Test discovery needs the `datadog-ci` gem installed in the same Ruby/Bundler environment as the tests. Keep this setup in every test job too.
+Repeat your [Ruby Test Optimization setup](/tests/setup/ruby/) in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Test discovery needs the `datadog-ci` gem installed in the same Ruby and Bundler environment as the tests. Keep this setup in every test job too.
 
 {% /if %}
 {% if equals($prog_lang, "python") %}
 
-Repeat your [Python Test Optimization setup](/tests/setup/python/) in the planning job before `ddtest plan`, including the auto-instrumentation action or orb if used. Full discovery needs `ddtrace` available in the environment used by pytest; `ddtest` enables its pytest plugin. Keep this setup in every test job too.
+Repeat your [Python Test Optimization setup](/tests/setup/python/) in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Full discovery needs `ddtrace` available in the environment used by pytest; `ddtest` enables its pytest plugin. Keep this setup in every test job too.
 
 {% /if %}
 {% if equals($prog_lang, "javascript") %}
@@ -519,7 +519,7 @@ bin/ddtest plan
 cat .testoptimization/runner/parallel-runners.txt
 ```
 
-Use the count in `.testoptimization/runner/parallel-runners.txt` to create jobs indexed **0** through **count minus one**. Share the complete `.testoptimization/` directory, including hidden files, with each test job in the same pipeline.
+Use the count in `.testoptimization/runner/parallel-runners.txt` to create jobs indexed `0` through `<COUNT> - 1`. Share the complete `.testoptimization/` directory, including hidden files, with each test job in the same pipeline.
 
 In each test job, set `DDTEST_CI_NODE_INDEX` to that job's zero-based index and run its assignment:
 
@@ -543,7 +543,7 @@ rm -rf .testoptimization
 bin/ddtest run
 ```
 
-`run` creates a plan and starts up to **4 local workers**. Omit `--ci-node`; no separate planning job or artifact transfer is needed.
+`ddtest run` creates a plan and starts up to four local workers (the maximum parallelism set in the preceding table). Omit `--ci-node`; no separate planning job or artifact transfer is needed.
 
 If the existing job is already sharded, preserve its suite boundary or consolidate it first. Running this command unchanged on every shard repeats the full suite.
 
@@ -564,7 +564,7 @@ Keep your existing instrumentation and apply the same environment settings to pl
 
 ### RSpec
 
-`ddtest` uses executable `bin/rspec` when present, otherwise `bundle exec rspec`.
+`ddtest` uses the `bin/rspec` executable when present, otherwise `bundle exec rspec`.
 
 Remove test file and directory paths from your custom command and `.rspec` so they do not run on multiple workers. Use the include/exclude settings above and keep other options.
 
@@ -585,7 +585,7 @@ Use the same settings for planning and execution.
 
 ### Minitest {% #minitest %}
 
-For Rails, `ddtest` uses executable `bin/rails test` when present, otherwise `bundle exec rails test`. Preserve any setup and options from custom Rake tasks, but use the Rails test command: a `rake test` override does not receive assigned files correctly.
+For Rails, `ddtest` runs `bin/rails test` when `bin/rails` is executable, otherwise `bundle exec rails test`. Preserve any setup and options from custom Rake tasks, but use the Rails test command: a `rake test` override does not receive assigned files correctly.
 
 For non-Rails projects, `ddtest` uses `bundle exec rake test`. Add `TEST_FILES` handling after the existing task configuration:
 
@@ -676,7 +676,7 @@ Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `
 
 ### Cucumber.js {% #cucumber %}
 
-Preserve profiles, support code, paths, tags, and name filters in a [custom Cucumber command](/tests/test_parallelization/best_practices/#cucumberjs). Use tag or name filters instead of scenario-line or rerun selections: `ddtest` assigns whole feature files. Run preparation and other frameworks from mixed test scripts separately.
+Preserve profiles, support code, paths, tags, and name filters in a [custom Cucumber command](/tests/test_parallelization/best_practices/#cucumberjs). Use tag or name filters instead of scenario-line or rerun selections: `ddtest` assigns whole feature files. If a test script also runs preparation steps or other frameworks, run those separately.
 
 {% /if %}
 <!-- End cucumber -->
@@ -686,7 +686,7 @@ Preserve profiles, support code, paths, tags, and name filters in a [custom Cucu
 
 ### Cypress {% #cypress %}
 
-Keep its [Test Optimization plugin and support-file instrumentation](/tests/setup/javascript/?tab=cypress).
+Keep the Cypress [Test Optimization plugin and support-file instrumentation](/tests/setup/javascript/?tab=cypress).
 
 `ddtest` supplies `--spec`. Move any existing `--spec` selection to a file glob in your CI environment:
 
@@ -750,6 +750,6 @@ Check that:
 
 - The plan covers the intended suite without unexpected omissions or duplicates. Test Impact Analysis can exclude skipped files.
 - CI node and worker counts respect your capacity, and concurrent workers have [isolated resources](/tests/test_parallelization/best_practices/#isolate-workers).
-- Tests, failures, and skips appear in [Test Optimization Explorer](/tests/explorer/), and test and coverage reports upload.
+- Tests, failures, and skips appear in [Test Optimization Explorer](/tests/explorer/), and test and coverage reports upload successfully.
 
 Compare CI cost and duration with your previous setup, then [adjust the parallelism budget](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget). {% #4-measure-ci-savings %}

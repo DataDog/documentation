@@ -17,7 +17,7 @@ Use these options after [setting up your first CI run](/tests/test_parallelizati
 
 ## Choose a parallelism budget
 
-Set `--min-parallelism` and `--max-parallelism` on `ddtest plan`, or on `ddtest run` when it plans automatically. In CI-node mode these values count nodes. On one node, they count worker processes.
+Set `--min-parallelism` and `--max-parallelism` on `ddtest plan`, or on `ddtest run` when it plans automatically. In CI-node mode, these values count nodes. On one node, they count worker processes.
 
 Start within your CPU, memory, concurrency, and cost limits. The setup examples' maximum of 10 nodes is an example budget, not a CLI default. Both CLI bounds default to the available physical CPU count.
 
@@ -38,7 +38,7 @@ bin/ddtest run --ci-node "$CI_NODE_INDEX" --ci-node-workers 2 \
   --worker-env 'DB_NAME=testdb{{nodeIndex}}_{{workerIndex}}'
 {{< /code-block >}}
 
-Create the matching resources before tests run. Adapt the variable name to what your application reads; `ddtest` does not create databases. Keep services, fixtures, application readiness checks, and browser installation in every execution job. Cypress processes sharing a machine must not contend for the same Xvfb display.
+`ddtest` does not create databases, so create the matching resources before tests run. Adapt the variable name to what your application reads. Keep services, fixtures, application readiness checks, and browser installation in every execution job. Cypress processes sharing a machine must not contend for the same Xvfb display.
 
 Use unique report output paths or separate upload names to avoid overwriting another worker's results. See [Worker environment variables](/tests/test_parallelization/configuration/#worker-environment-variables) for session names and templates.
 
@@ -154,11 +154,11 @@ if [ -f .testoptimization/tests-discovery/tests.json ]; then
 fi
 {{< /code-block >}}
 
-`ddtest` rejects missing or corrupt caches, mismatched platform/framework or include/exclude settings, unavailable source commits, and changes under the effective test root. In monorepos, invalidation is scoped to the project directory. Refresh the cache after successful full discovery.
+`ddtest` rejects missing or corrupt caches, mismatched platform or framework settings, mismatched include or exclude settings, unavailable source commits, and changes under the effective test root. In monorepos, invalidation is scoped to the project directory. Refresh the cache after successful full discovery.
 
 Include dependencies, configuration, and collection-affecting selectors such as `PYTEST_ADDOPTS` or RSpec tags in your CI cache key. These settings can change the selected tests without changing test files. This cache is an input to a **new plan**, not a replacement for planning.
 
-Use `--force-full-test-discovery` to request full discovery even when Test Impact Analysis or test skipping is disabled, such as on a default branch. **A valid discovery cache can still be reused with this flag.** Without this flag, suite mode does not read or refresh the full-discovery cache.
+Use `--force-full-test-discovery` to request full discovery even when Test Impact Analysis or test skipping is disabled, such as on a default branch. A valid discovery cache can still be reused with this flag. Without this flag, suite mode does not read or refresh the full-discovery cache.
 
 To collect tests again, remove the internal cache and disable importing a restored cache for that run. Skip the CI cache restore step and omit `--test-discovery-cache`:
 
@@ -261,7 +261,7 @@ Follow the [Test Parallelization compatibility requirements](/tests/test_paralle
 | `--coverage` | `coverage.enabled: true` |
 | `--passWithNoTests` | `passWithNoTests: true` |
 
-Preserve existing include/exclude rules, setup, teardown, snapshot policy, coverage provider, and thresholds. For example, if an existing object configuration needs project, reporting, and coverage overrides, extend it in `vitest.ci.config.ts`:
+Preserve existing include and exclude rules, setup, teardown, snapshot policy, coverage provider, and thresholds. For example, if an existing object configuration needs project, reporting, and coverage overrides, extend it in `vitest.ci.config.ts`:
 
 {{< code-block lang="typescript" filename="vitest.ci.config.ts" >}}
 import base from './vitest.config'
@@ -296,7 +296,7 @@ bin/ddtest run --ci-node "$CI_NODE_INDEX"
 
 Run preparation and npm life cycle commands before `ddtest`; the adapter does not invoke package scripts. Keep environment variables and Node.js loaders in the execution environment. Regenerate the plan after changing configuration or selection.
 
-`ddtest` executes only the project/pool specifications for assigned canonical file paths. A file selected by multiple projects can run in each project. Remove native `test.shard` to avoid splitting an assignment again. Use Vitest directly for watch mode, UI, benchmarks, snapshot updates, and report merging.
+`ddtest` executes only the project and pool specifications for assigned canonical file paths. A file selected by multiple projects can run in each project. Remove native `test.shard` to avoid splitting an assignment again. Use Vitest directly for watch mode, UI, benchmarks, snapshot updates, and report merging.
 
 ## Configure Minitest in non-Rails projects
 

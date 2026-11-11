@@ -26,7 +26,7 @@ For errors such as `run_plan_load_failed` or `run_ci_node_test_files_missing`:
 
 On GitHub Actions, use `include-hidden-files: true` when uploading. Artifact paths are relative to the workspace, even if shell steps set a different working directory.
 
-On CircleCI, use the same pipeline-specific save/restore key without prefix fallback keys. A revision-only key can restore a different run's plan. Do not generate a replacement plan independently in each worker.
+On CircleCI, use the same pipeline-specific key for saving and restoring the cache, without prefix fallback keys. A revision-only key can restore a different run's plan. Do not generate a replacement plan independently in each worker.
 
 ## Planning is slow for Ruby or Python
 
@@ -65,7 +65,13 @@ See [runtime tags](/tests/test_parallelization/configuration/#stabilize-runtime-
 
 Python test files with the same basename can conflict under pytest's default import mode. `ddtest` separates them when the selected runner count is sufficient. When distributing files, it retains all otherwise runnable files and warns if duplicate basenames must share a runner, including with a single runner.
 
-Add `__init__.py` files so the tests have distinct fully qualified module names, rename conflicting files, or configure pytest with `--import-mode=importlib`. Basename warnings can still appear after imports are fixed. Splitting does not prevent collisions during full discovery, which collects tests before distribution. Investigate warnings listing files missing from full-discovery results: those files are not scheduled.
+To resolve conflicts, do one of the following:
+
+- Add `__init__.py` files so the tests have distinct fully qualified module names.
+- Rename the conflicting files.
+- Configure pytest with `--import-mode=importlib`.
+
+Basename warnings can still appear after you fix imports. Splitting does not prevent collisions during full discovery, which collects tests before distribution. If a warning lists files missing from full-discovery results, investigate them: those files are not scheduled.
 
 In [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode), normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. Forced full discovery also applies them during planning. `ddtest` treats a suite-mode worker's pytest exit code 5 as success, so an entirely deselected run can succeed. Check the selectors and planned files when no tests execute. Test mode preserves exit-code-5 failures from pytest workers, but an empty plan can still succeed without starting pytest.
 

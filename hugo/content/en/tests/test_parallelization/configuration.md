@@ -17,7 +17,7 @@ For the guided setup, see [Set Up Test Parallelization](/tests/test_parallelizat
 
 ## Environment variables
 
-Most `ddtest` settings can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables. An explicit framework also selects its platform. If detection finds multiple matching platforms or frameworks, select them explicitly.
+Most `ddtest` settings can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables. Setting the framework explicitly also sets the platform. If detection finds multiple matching platforms or frameworks, select them explicitly.
 
 Use `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with the JavaScript frameworks listed below. Keep the same settings in planning and execution.
 
@@ -158,7 +158,7 @@ If no split can meet the target, `ddtest` logs a warning. It selects the split w
 
 ## Custom test commands
 
-Use `--command` to override the base command for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, Playwright, or WebdriverIO. The override applies to planning and execution. Vitest uses its Node.js API and rejects both `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`; use `--vitest-config` and [Vitest configuration](/tests/test_parallelization/best_practices/#vitest).
+Use `--command` to override the base command for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, Playwright, or WebdriverIO. The override applies to planning and execution. Vitest uses its Node.js API and rejects both `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`. Instead, use `--vitest-config` and [Vitest configuration](/tests/test_parallelization/best_practices/#vitest).
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec --tag smoke"
@@ -213,19 +213,25 @@ bin/ddtest run --platform python --framework pytest
 
 Alternatively, pass `--test-skipping-mode suite` to both commands. The default is `test`. To return to test-level skipping, select `test` and regenerate the plan.
 
-Suite mode reduces planning overhead by skipping pytest collection. It trades individual-test skipping for whole-suite skipping, and individual test counts are unavailable during planning. `ddtest` keeps files runnable when their suites are new or lack matching source-file metadata from Test Optimization. It applies TIA skipping in the plan, so the Datadog library does not skip retained files again during execution. Test reporting and coverage collection remain enabled.
+Suite mode reduces planning overhead by skipping pytest collection. It trades individual-test skipping for whole-suite skipping, and individual test counts are unavailable during planning. `ddtest` keeps files runnable when their suites are new or lack matching source-file metadata from Test Optimization. It applies Test Impact Analysis skipping in the plan, so the Datadog library does not skip retained files again during execution. Test reporting and coverage collection remain enabled.
 
 File discovery uses the configured file patterns and filters to `.py` files. It excludes files under `.venv`, `venv`, `.tox`, `__pycache__`, `node_modules`, `site-packages`, and `.git`, even when selected explicitly.
 
-Normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. When pytest collection runs during planning, it also applies these selectors. Cached discovery can reuse an earlier selection; [include selectors in cache keys and refresh the cache](/tests/test_parallelization/best_practices/#cache-test-discovery) after changes. A worker with no matching tests succeeds in suite mode, so an entirely deselected run can succeed. Test failures and collection errors from workers still fail the run. Test mode preserves pytest exit-code-5 failures from workers, but an empty plan can succeed without starting pytest.
+Pytest selectors and exit codes behave as follows:
 
-Files containing the literal `datadog_itr_unskippable` marker remain runnable, as do files beneath a `conftest.py` containing it. This conservative text check also recognizes comments. For dynamically constructed or imported markers, add a comment containing `datadog_itr_unskippable` to the affected file or ancestor `conftest.py`. Such comments protect DDTest planning; use actual pytest unskippable markers when running pytest directly with Test Impact Analysis.
+- Normal file-only planning does not apply selectors such as `-k` and `-m`. Pytest applies them during execution.
+- When pytest collection runs during planning, it also applies these selectors.
+- Cached discovery can reuse an earlier selection. After changing selectors, [include them in cache keys and refresh the cache](/tests/test_parallelization/best_practices/#cache-test-discovery).
+- A worker with no matching tests succeeds in suite mode, so an entirely deselected run can succeed. Test failures and collection errors from workers still fail the run.
+- Test mode preserves pytest exit-code-5 failures from workers, but an empty plan can succeed without starting pytest.
+
+Files containing the literal `datadog_itr_unskippable` marker remain runnable, as do files beneath a `conftest.py` containing it. This conservative text check also recognizes comments. For dynamically constructed or imported markers, add a comment containing `datadog_itr_unskippable` to the affected file or ancestor `conftest.py`. Such comments protect `ddtest` planning; use actual pytest unskippable markers when running pytest directly with Test Impact Analysis.
 
 Use test mode for custom collectors that group multiple suites into one file. Suite mode does not read or refresh the full-discovery cache. `--force-full-test-discovery` restores collection and cache updates without changing the suite-level skipping rules. `--strict-discovery` alone does not enable collection.
 
 ## JavaScript test discovery and instrumentation
 
-JavaScript discovery uses each framework's native configuration. When the framework supports Test Impact Analysis, skipping operates at suite level. WebdriverIO supports balancing without TIA skipping.
+JavaScript discovery uses each framework's native configuration. When the framework supports Test Impact Analysis, skipping operates at suite level. WebdriverIO supports balancing without Test Impact Analysis skipping.
 
 | Framework | Discovery behavior | Execution behavior |
 | --------- | ------------------ | ------------------ |
@@ -293,7 +299,7 @@ A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`
 
 To reuse Test Impact Analysis decisions from CI on your local machine, supply the runtime tags from the intended CI environment. For example, Linux CI and a macOS development machine have different runtime tags, so they do not automatically share skippable tests.
 
-1. Open a CI test run in [Test Optimization](https://app.datadoghq.com/ci/test-runs). In the test details panel, find the `os` and `runtime` sections.
+1. Open a CI test run in [Test Optimization Explorer](https://app.datadoghq.com/ci/test-runs). In the test details panel, find the `os` and `runtime` sections.
 2. Copy `os.architecture`, `os.platform`, `os.version`, `runtime.name`, and `runtime.version` exactly as reported by that CI run.
 3. Commit your local changes before running `ddtest`. Test Impact Analysis uses committed changes to determine which tests can be skipped.
 4. Pass the copied tags as a JSON object to `--runtime-tags`, or set `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS`.
