@@ -21,7 +21,7 @@ Datadog supports OpenTelemetry-compatible instrumentations which provides observ
 
 1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby SDKs.
 
-1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Ensure the Datadog Agent is [running][24] to use OpenTelemetry instrumentation with Datadog SDKs.
+1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Make sure the Datadog Agent is [running][24] to use OpenTelemetry instrumentation with Datadog SDKs. With [DDOT SDKs][31], the SDK sends spans over OTLP to your Collector instead. Tracing instrumentation libraries work with DDOT SDKs.
 
 1. **Disable duplicate instrumentation**: When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
 Datadog instrumentation to prevent duplicate spans from appearing in the trace.
@@ -461,3 +461,4 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 [16]: /opentelemetry/interoperability/environment_variable_support
 [24]: /getting_started/tracing/#set-up-datadog-apm
 [25]: /opentelemetry/compatibility/#api-support
+[31]: /opentelemetry/instrument/dd_sdks/
