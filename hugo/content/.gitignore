@@ -113,6 +113,10 @@
 /*/real_user_monitoring/application_monitoring/cpp/data_collected.md
 /*/real_user_monitoring/application_monitoring/cpp/setup.md
 /*/real_user_monitoring/application_monitoring/cpp/troubleshooting.md
+/*/real_user_monitoring/application_monitoring/electron/advanced_configuration.md
+/*/real_user_monitoring/application_monitoring/electron/data_collected.md
+/*/real_user_monitoring/application_monitoring/electron/setup.md
+/*/real_user_monitoring/application_monitoring/electron/troubleshooting.md
 /*/observability_pipelines/configuration/install_the_worker/_index.md
 /en/session_replay/_index.md
 /*/session_replay/privacy_options.md

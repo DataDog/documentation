@@ -285,7 +285,7 @@ For a full list of available parameters for instances, including `namespace` and
 
 3. Go into your [Fleet Automation][16] page and filter for the `openmetrics` integration to view detailed information about the status of your checks.
 
-4. Go into your [Metric summary][12] page to see the metrics collected from this example pod. This configuration will collect the metric `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
+4. Go into your [Metrics Catalog][12] page to see the metrics collected from this example pod. This configuration will collect the metric `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
 
     {{< img src="integrations/guide/prometheus_kubernetes/openmetrics_v2_collected_metric_kubernetes.png" alt="Prometheus metric collected kubernetes">}}
 
@@ -511,7 +511,7 @@ Official integrations have their own dedicated directories. There's a default in
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [10]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [11]: /resources/yaml/prometheus.yaml
-[12]: https://app.datadoghq.com/metric/summary
+[12]: https://app.datadoghq.com/metric/catalog
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/common/types/prometheus.go#L57-L123

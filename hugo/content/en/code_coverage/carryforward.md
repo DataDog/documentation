@@ -16,8 +16,6 @@ further_reading:
     text: "Organize coverage data with flags"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
-
 ## Overview
 
 In large repositories, CI pipelines often run only the subset of test jobs that are relevant to the files changed in a pull request. For example, a PR that touches only frontend code may skip backend unit tests and integration tests. When that happens, only some of the coverage reports are uploaded for the commit, and the total coverage metric drops because the data from the skipped jobs is missing.
@@ -90,14 +88,9 @@ Carried-forward data is automatically replaced as soon as a real report is uploa
 - Fresh reports uploaded for the commit
 - Carried-forward reports for flags where no fresh report was uploaded
 
-## Use with PR Gates
-
-While carryforward is in Preview, Datadog recommends starting with a non-blocking [PR Gate][3] to observe how carryforward affects evaluation before enforcing it as a merge requirement.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /code_coverage/flags
 [2]: /code_coverage/flags#add-flags-to-coverage-reports
-[3]: /code_coverage/configuration#pr-gates

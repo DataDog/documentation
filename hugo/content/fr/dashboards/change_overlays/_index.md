@@ -1,58 +1,55 @@
 ---
-description: Superposer vos événements de changement sur des graphiques pour corréler
-  les anomalies de performances avec les changements de votre application
+description: Superposez vos événements de changement sur les graphiques pour corréler
+  les anomalies de performance avec les changements dans votre application
 further_reading:
 - link: /tracing/services/deployment_tracking/
   tag: Documentation
-  text: Débuter avec le suivi des déploiements APM
+  text: Prise en main du suivi de déploiement APM
 - link: https://www.datadoghq.com/blog/datadog-deployment-tracking/
   tag: Blog
-  text: Surveiller les déploiements de code avec le suivi des déploiements dans Datadog
+  text: Surveillez les déploiements de code avec le suivi de déploiement dans Datadog
     APM
 - link: https://www.datadoghq.com/blog/faulty-deployment-detection/
   tag: Blog
-  text: Déployer du code en toute confiance avec la détection automatique des déploiements
+  text: Publiez du code en toute confiance avec la détection automatique de déploiements
     défectueux
 - link: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
   tag: Documentation
-  text: Débuter avec le suivi des déploiements RUM
+  text: Prise en main du suivi de déploiement RUM
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/
   tag: Blog
   text: Dépanner les problèmes de déploiement frontend avec le suivi des déploiements
     dans RUM
 - link: https://www.datadoghq.com/blog/change-overlays/
   tag: Blog
-  text: Repérer et annuler rapidement les déploiements défectueux avec les superpositions
+  text: Repérez et annulez rapidement les déploiements défectueux avec les superpositions
     de changements
-title: Superpositions de changements
+title: Les superpositions de changements
 ---
+## Présentation {#overview}
 
-## Section Overview
+À mesure que les équipes itèrent, déploient du code et apportent des changements à leurs applications et services, identifier le changement exact ayant causé un pic d'erreurs, une latence accrue ou des temps de chargement de page plus lents peut s'avérer difficile. Utilisez les superpositions de changements pour visualiser les changements sur votre dashboard, tels que les déploiements ou les feature flags, et corrélez-les rapidement aux problèmes de performance.
 
-Lorsque les équipes itèrent, déploient du code et apportent des changements à leurs applications et services, identifier le changement exact qui a causé un pic d'erreurs, une latence accrue ou des temps de chargement de page plus lents peut être difficile. Utilisez les superpositions de changements pour visualiser les changements sur votre dashboard comme les déploiements ou les feature flags, et corrélez rapidement les problèmes de performances avec eux.
+## Superposer des changements sur les graphiques {#overlay-changes-on-graphs}
 
-## Superposer les changements sur les graphiques
+Pour commencer, cliquez sur {{< ui >}}Show Overlays{{< /ui >}} dans le coin supérieur droit de votre dashboard. Vous pouvez désormais activer la chronologie [Change Tracking][16] et superposer des changements sur les widgets de séries temporelles.
 
-Pour commencer, cliquez sur **Show Overlays** dans le coin supérieur droit de votre dashboard. Vous pouvez maintenant activer la chronologie [Change Tracking][16] et les superpositions de changements sur les widgets de séries temporelles.
+{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Bouton Superpositions dans l'en-tête du dashboard" style="width:100%;">}}
 
-{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Bouton Overlays sur l'en-tête du dashboard" style="width:100%;">}}
+Une fois activée, la barre de recherche {{< ui >}}Service{{< /ui >}} affiche le service {{< ui >}}Most Relevant{{< /ui >}} par défaut. Datadog sélectionne automatiquement le service le plus fréquemment référencé dans les requêtes prenant en charge les widgets du dashboard.
 
-Lorsqu'elle est activée, la barre de recherche **Service** affiche le service **Most Relevant** par défaut. Datadog sélectionne automatiquement le service le plus fréquemment référencé dans les requêtes prenant en charge les widgets du dashboard.
+Remplacez la détection automatique de service en utilisant la barre de recherche pour trouver le service souhaité. 
 
-Remplacez la détection automatique de service en utilisant la barre de recherche pour trouver le service d'intérêt.
+Tous les changements affichés sur la chronologie des changements et sous forme de superpositions sont liés au service sélectionné. 
+Utilisez le menu déroulant {{< ui >}}Show On{{< /ui >}} pour limiter les superpositions de changements aux widgets pertinents, ou affichez-les sur tous les widgets de votre dashboard.
 
-Tous les changements affichés sur la chronologie de changements et sous forme de superpositions sont liés au service sélectionné.
-Utilisez le menu déroulant **Show On** pour limiter les superpositions de changements aux widgets pertinents, ou les afficher sur tous les widgets de votre dashboard.
+Pour afficher des détails supplémentaires ou effectuer d'autres actions, cliquez sur une superposition de changement ou sur un changement dans la chronologie des changements.
 
-Pour afficher des détails supplémentaires ou effectuer des actions supplémentaires, cliquez sur une superposition de changement ou un changement dans la chronologie de changements.
+### Définissez le périmètre des changements de déploiement {#scope-deployment-changes}
 
-## FAQ
+Pour les déploiements APM, un `env` doit être spécifié. Si vous avez une variable de modèle `env` ou `datacenter` définie dans votre dashboard, les déploiements sont filtrés pour correspondre à la sélection. Sinon, le `env` est défini par défaut sur `prod`. 
 
-### Comment les changements de déploiements sont-ils délimités ?
-Pour les déploiements APM, un `env` doit être spécifié. Si vous avez une variable de modèle `env` ou `datacenter` définie dans votre dashboard, les déploiements sont filtrés pour correspondre à la sélection. Sinon, l'`env` est défini par défaut sur `prod`.
-
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

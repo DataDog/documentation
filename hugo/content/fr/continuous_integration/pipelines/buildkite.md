@@ -7,61 +7,81 @@ further_reading:
   text: Explorer les résultats et les performances de l'exécution du pipeline
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
-  text: Dépannage de CI Visibility
+  text: Dépannage de CI Visibility
 - link: /continuous_integration/pipelines/custom_tags_and_measures/
   tag: Documentation
-  text: Étendre Pipeline Visibility en ajoutant des tags et des mesures personnalisés
+  text: Étendez Pipeline Visibility en ajoutant des tags et des mesures personnalisés
 title: Configuration de Buildkite pour CI Visibility
 ---
-
-## Section Overview
+## Présentation {#overview}
 
 [Buildkite][1] est une plateforme d'intégration et de déploiement continus qui vous permet d'exécuter des builds sur votre propre infrastructure, vous offrant un contrôle total sur la sécurité et la personnalisation de votre environnement de build tout en gérant l'orchestration dans le cloud.
 
-Configurez CI Visibility pour Buildkite afin d'optimiser l'utilisation de vos ressources, de réduire les coûts généraux et d'améliorer la vitesse et la qualité du cycle de vie de développement logiciel.
+Configurez CI Visibility pour Buildkite afin d'optimiser l'utilisation de vos ressources, de réduire les frais généraux et d'améliorer la vitesse et la qualité de votre cycle de vie de développement logiciel.
 
-### Compatibilité
+### Compatibilité {#compatibility}
 
 | Pipeline Visibility | Plateforme | Définition |
 |---|---|---|
-| [Tentatives partielles][9] | Pipelines partiels | Consultez les exécutions de pipelines faisant lʼobjet de nouvelles tentatives. |
-| Mise en corrélation des métriques d'infrastructure | Mise en corrélation des métriques d'infrastructure | Mettre en corrélation les tâches avec les [métriques d'infrastructure des hosts][6] pour les agents Buildkite. |
-| [Étapes manuelles][12] | Étapes manuelles | Consultez les pipelines déclenchés manuellement. |
-| [Temps de mise en file d'attente][13] | Temps de mise en file d'attente | Afficher le temps pendant lequel les tâches de pipeline restent dans la file d'attente avant le traitement. |
-| [Tags personnalisés][10] [et mesures au moment de l'exécution][11] | Tags et mesures personnalisés au moment de l'exécution | Configurer des [tags et des mesures personnalisés][6] au moment de l'exécution. |
-| [Spans personnalisées][14] | Spans personnalisées | Configurer des spans personnalisées pour vos pipelines. |
-| [Filtrer les tâches CI sur le chemin critique][17] | Filtrer les tâches CI sur le chemin critique | Filtrer par tâches sur le chemin critique. |
-| [Temps d'exécution][18] | Durée d'exécution  | Afficher le temps pendant lequel les pipelines ont exécuté des tâches. |
+| [Nouvelles tentatives partielles][9] | Pipelines partiellement relancés | Visualisez les exécutions de pipeline partiellement relancées. |
+| Corrélation des métriques d'infrastructure | Corrélation des métriques d'infrastructure | Corrélez les jobs aux [métriques de host d'infrastructure][6] pour les agents Buildkite. |
+| [Étapes manuelles][12] | Étapes manuelles | Visualisez les pipelines déclenchés manuellement. |
+| [Temps d'attente en file][13] | Temps d'attente en file | Visualisez la durée pendant laquelle les jobs de pipeline restent dans la file d'attente avant d'être traités. |
+| [Tags personnalisés][10] [et mesures au moment de l'exécution][11] | Tags personnalisés et mesures au moment de l'exécution | Configurez des [tags et mesures personnalisés][6] au moment de l'exécution. |
+| [Spans personnalisés][14] | Spans personnalisés | Configurez des spans personnalisés pour vos pipelines. |
+| [Filtrer les jobs CI sur le chemin critique][17] | Filtrer les jobs CI sur le chemin critique | Filtrez par jobs sur le chemin critique. |
+| [Execution time][18] | Temps d'exécution  | Affichez la durée pendant laquelle les pipelines exécutent des jobs. |
+| Corrélation des logs | Corrélation des logs | Corrélez les spans de pipeline et de job aux logs et activez la [collecte des logs de job][20]. |
 
-### Termes
 
-Ce tableau présente le mappage des concepts entre Datadog CI Visibility et Buildkite :
+### Terminologie {#terminology}
 
-| Datadog                    | Buildkite                       |
+Ce tableau présente la correspondance des concepts entre Datadog CI Visibility et Buildkite :
+
+| Datadog | Buildkite |
 |----------------------------|---------------------------------|
-| Pipeline                   | Build (exécution d'un pipeline) |
-| Job                        | Job (exécution d'un step)       |
+| Pipeline | Build (exécution d'un pipeline) |
+| Job | Job (exécution d'une étape) |
 
-## Configurer l'intégration Datadog
+## Configurer l'intégration Datadog {#configure-the-datadog-integration}
 
-Pour configurer l'intégration Datadog pour [Buildkite][1] :
+Pour configurer l'intégration Datadog pour [Buildkite][1] :
 
-1. Accédez à **Settings > Notification Services** dans Buildkite et cliquez sur le bouton **Add** à côté de **Datadog Pipeline Visibility**.
-2. Renseignez les informations suivantes dans le formulaire :
-   * **Description** : une description pour aider à identifier l'intégration à l'avenir, telle que `Datadog CI Visibility integration`.
-   * **API key** : votre [clé d'API Datadog][2].
-   * **Datadog site** : `{{< region-param key="dd_site" code="true" >}}`
-   * **Pipelines** : sélectionnez tous les pipelines ou les sous-ensembles de pipelines que vous souhaitez tracer.
-   * **Branch filtering** : laissez ce champ vide pour tracer toutes les branches ou sélectionnez le sous-ensemble de branches que vous souhaitez tracer.
-3. Cliquez sur **Add Datadog Pipeline Visibility Notification** pour enregistrer l'intégration.
+1. Allez dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification Services{{< /ui >}} dans Buildkite et cliquez sur le bouton {{< ui >}}Add{{< /ui >}} à côté de {{< ui >}}Datadog Pipeline Visibility{{< /ui >}}.
+2. Remplissez le formulaire avec les informations suivantes :
+   * {{< ui >}}Description{{< /ui >}} : Une description pour aider à identifier l'intégration à l'avenir, telle que `Datadog CI Visibility integration`.
+   * {{< ui >}}API key{{< /ui >}} : Votre [clé d'API Datadog][2].
+   * {{< ui >}}Datadog site{{< /ui >}} : `{{< region-param key="dd_site" code="true" >}}`
+   * {{< ui >}}Pipelines{{< /ui >}} : Sélectionnez tous les pipelines ou le sous-ensemble de pipelines que vous souhaitez tracer.
+   * {{< ui >}}Branch filtering{{< /ui >}} : Laissez vide pour tracer toutes les branches ou sélectionnez le sous-ensemble de branches que vous souhaitez tracer.
+3. Cliquez sur {{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} pour enregistrer l'intégration.
 
-## Configuration avancée
+### Collecter les logs des jobs {#collect-job-logs}
 
-### Appliquer des tags personnalisés
+Exportez les logs de job de l'Agent Buildkite en tant que logs OpenTelemetry vers l'[endpoint des logs OTLP Datadog][23]. Pour activer l'exportation, suivez la [documentation d'exportation des logs de job OpenTelemetry][22] de Buildkite.
 
-Exécutez la commande `buildkite-agent meta-data set` pour ajouter des tags personnalisés aux traces Buildkite. Tous les tags de métadonnées avec une clé commençant par `dd_tags.` sont ajoutés aux spans de tâche et de pipeline. Ces tags peuvent vous servir à créer des facettes basées sur des chaînes afin de rechercher et d'organiser vos pipelines.
+Datadog facture les logs séparément de CI Visibility. Configurez la rétention des logs, les filtres d'exclusion et les index dans [Log Management][21]. Pour limiter ces règles aux logs Buildkite, filtrez sur les tags `datadog.product:cipipeline` et `source:buildkite`.
 
-Le YAML ci-dessous implémente un pipeline simple doté de tags pour le nom d'équipe et la version de Go.
+{{% collapse-content title="Intégration Datadog Buildkite (héritée)" level="h4" expanded=false id="legacy-buildkite-integration-job-log-collection" %}}
+
+L'intégration Datadog Buildkite est une méthode héritée pour collecter les logs de job. Si vous ne pouvez pas utiliser OpenTelemetry, contactez votre représentant Datadog.
+
+Pour obtenir des instructions d'installation et de configuration, consultez la [documentation de l'intégration Buildkite][19].
+
+<div class="alert alert-warning">Cette intégration récupère les logs de job via l'API Buildkite. La collecte de logs peut consommer une part importante de votre limite de débit de l'API Buildkite.</div>
+
+{{% /collapse-content %}}
+
+## Configuration avancée {#advanced-configuration}
+
+### Définir des tags personnalisés {#set-custom-tags}
+
+Des tags personnalisés peuvent être ajoutés aux traces Buildkite en utilisant la commande `buildkite-agent meta-data set`.
+Tous les tags de métadonnées dont la clé commence par `dd_tags.` sont ajoutés aux spans de job et de pipeline. Ces
+tags peuvent être utilisés pour créer des facettes afin de rechercher et d'organiser les pipelines.
+
+Le YAML ci-dessous illustre un pipeline simple où les tags pour le nom de l'équipe et la version de Go ont
+été définis.
 
 ```yaml
 steps:
@@ -72,21 +92,21 @@ steps:
     label: Run tests
 ```
 
-Les tags suivants s'affichent dans la span racine ainsi que dans la span de tâche pertinente dans Datadog.
+Les tags suivants s'affichent dans le span racine ainsi que dans le span de job pertinent dans Datadog.
 
 - `team: backend`
-- `go.version: go version go1.17 darwin/amd64` (la sortie varie selon l'exécuteur)
+- `go.version: go version go1.17 darwin/amd64` (la sortie dépend du runner)
 
-Le pipeline résultant ressemble à ce qui suit :
+Le pipeline résultant ressemble à ce qui suit :
 
 {{< img src="ci/buildkite-custom-tags.png" alt="Trace de pipeline Buildkite avec des tags personnalisés" style="width:100%;">}}
 
-Toute métadonnée avec une clé commençant par `dd-measures.` et contenant une valeur numérique sera définie comme
-un tag de métrique qui peut être utilisé pour créer des mesures numériques.
+Toute métadonnée dont la clé commence par `dd-measures.` et contient une valeur numérique sera définie comme
+un tag de métrique pouvant être utilisé pour créer des mesures numériques.
 
 Vous pouvez utiliser la commande `buildkite-agent meta-data set` pour créer ces tags.
 
-Par exemple, vous pouvez mesurer la taille du binaire dans un pipeline avec cette commande :
+Par exemple, vous pouvez mesurer la taille du binaire dans un pipeline avec cette commande :
 
 ```yaml
 steps:
@@ -96,40 +116,40 @@ steps:
     label: Go build
 ```
 
-Les tags indiqués sous la span de pipeline sont alors appliqués au pipeline obtenu :
+Les tags indiqués sous le span de pipeline sont alors appliqués au pipeline obtenu :
 
 - `binary_size: 502` (la sortie dépend de la taille du fichier)
 
-Ici, la valeur de `binary_size` vous permet de représenter l'évolution de la taille du binaire.
+Dans cet exemple, vous pouvez utiliser la valeur de `binary_size` pour tracer l'évolution de la taille du binaire au fil du temps.
 
-### Mettre les métriques d'infrastructure en corrélation avec les tâches
+### Corréler les métriques d'infrastructure aux jobs {#correlate-infrastructure-metrics-to-jobs}
 
-Si vous utilisez des agents Buildkite, vous pouvez mettre en corrélation les tâches avec l'infrastructure qui les exécute.
-Pour que cette fonctionnalité fonctionne, installez l'[Agent Datadog][7] sur les hosts exécutant les agents Buildkite.
+Si vous utilisez des agents Buildkite, vous pouvez corréler les jobs avec l'infrastructure qui les exécute.
+Pour que cette fonctionnalité fonctionne, installez le [Datadog Agent][7] sur les hosts exécutant les agents Buildkite.
 
-## Afficher les pipelines partiels et en aval
+## Afficher les pipelines partiels et en aval {#view-partial-and-downstream-pipelines}
 
 Vous pouvez utiliser les filtres suivants pour personnaliser votre requête de recherche dans le [CI Visibility Explorer][15].
 
-{{< img src="ci/partial_retries_search_tags.png" alt="La page des exécutions de pipeline avec Partial Pipeline:retry saisi dans la requête de recherche" style="width:100%;">}}
+{{< img src="ci/partial_retries_search_tags.png" alt="La page des exécutions de pipeline avec « Partial Pipeline:retry » saisi dans la requête de recherche." style="width:100%;">}}
 
-| Nom de la facette | ID de facette | Valeurs possibles |
+| Nom de la facette | ID de la facette | Valeurs possibles |
 |---|---|---|
-| Downstream Pipeline | `@ci.pipeline.downstream` | `true`, `false` |
-| Manually Triggered | `@ci.is_manual` | `true`, `false` |
+| Pipeline en aval | `@ci.pipeline.downstream` | `true`, `false` |
+| Déclenché manuellement | `@ci.is_manual` | `true`, `false` |
 | Partial Pipeline | `@ci.partial_pipeline` | `retry`, `paused`, `resumed` |
 
-Vous pouvez également appliquer ces filtres à l'aide du panneau de facettes sur le côté gauche de la page.
+Vous pouvez également appliquer ces filtres en utilisant le panneau des facettes sur le côté gauche de la page.
 
-{{< img src="ci/partial_retries_facet_panel.png" alt="Le panneau de facettes avec la facette Partial Pipeline développée et la valeur Retry sélectionnée, la facette Partial Retry développée et la valeur true sélectionnée" style="width:20%;">}}
+{{< img src="ci/partial_retries_facet_panel.png" alt="Le panneau des facettes avec la facette « Partial Pipeline » développée et la valeur « Retry » sélectionnée, ainsi que la facette « Partial Retry » développée et la valeur « true » sélectionnée." style="width:20%;">}}
 
-## Visualiser les données de pipeline dans Datadog
+## Visualisez les données de pipeline dans Datadog {#visualize-pipeline-data-in-datadog}
 
-Les pages [**CI Pipeline List**][3] et [**Executions**][4] se remplissent de données une fois les pipelines terminés.
+Les pages [**Liste des pipelines CI**][3] et [**Exécutions**][4] sont alimentées en données une fois les pipelines terminés.
 
-La page **CI Pipeline List** affiche des données uniquement pour la branche par défaut de chaque référentiel. Pour plus d'informations, consultez la section [Rechercher et gérer les pipelines CI][16].
+La page {{< ui >}}CI Pipeline List{{< /ui >}} affiche uniquement les données de la branche par défaut de chaque dépôt. Pour plus d'informations, consultez [Rechercher et gérer les pipelines CI][16].
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -151,3 +171,8 @@ La page **CI Pipeline List** affiche des données uniquement pour la branche par
 [16]: /fr/continuous_integration/search/#search-for-pipelines
 [17]: /fr/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /fr/glossary/#pipeline-execution-time
+[19]: /fr/integrations/buildkite/
+[20]: /fr/continuous_integration/pipelines/buildkite/#collect-job-logs
+[21]: /fr/logs/
+[22]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
+[23]: /fr/opentelemetry/setup/otlp_ingest/logs/
