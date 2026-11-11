@@ -27,6 +27,43 @@ further_reading:
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
 
 {{< tabs >}}
+{{% tab "Antigravity" %}}
+
+Install the Datadog plugin from the Antigravity marketplace. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1].
+
+**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it to avoid conflicts.
+
+[1]: https://github.com/datadog-labs/antigravity-plugin
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. Install the Datadog plugin from the Antigravity marketplace, using either the CLI or the app:
+   - **CLI**: Run the following command:
+     <pre><code>agy plugin install datadog</code></pre>
+
+     If you're prompted to choose a marketplace, specify it directly with `agy plugin install datadog@antigravity-plugins-partners`. Run `agy plugin list` to confirm that the plugin is installed and enabled. Plugins installed with the CLI are also available in the Antigravity app and IDE.
+   - **App or IDE**: In the left sidebar, select {{< ui >}}Skills & Customizations{{< /ui >}} (or go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Customizations{{< /ui >}}). Open the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, and click {{< ui >}}Install{{< /ui >}}. If prompted, restart Antigravity to load the plugin's MCP server and skills. You can also open the plugin controls by typing `/plugin` in the chat input.
+
+1. Run `/ddsetup` in Antigravity to connect the plugin to your Datadog account. During setup, select your [Datadog site][2].
+
+1. Follow the agent's instructions to refresh the MCP servers, then complete the OAuth login flow in your browser.
+
+1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. After making any configuration change, refresh the MCP servers for the new setting to take effect. If the plugin stops working after a plugin update, run `/ddsetup` again to reconnect.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "ChatGPT" %}}
 
 Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
@@ -54,6 +91,7 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
+1. When prompted to choose the region where your account is hosted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -708,6 +746,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
+- `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
@@ -724,6 +763,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
+- `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
 - `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].
@@ -744,7 +784,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
-- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -752,6 +791,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 
 | Client | Developer | Notes |
 |--------|------|------|
+| [Antigravity][87] | Google | Datadog [Antigravity plugin][88] recommended. |
 | [ChatGPT][59] | OpenAI | In Preview, and available for US1 customers only. |
 | [Cursor][3] | Cursor | Datadog [Cursor plugin][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
@@ -1016,3 +1056,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
 [86]: /getting_started/site/
+[87]: https://antigravity.google/
+[88]: https://github.com/datadog-labs/antigravity-plugin

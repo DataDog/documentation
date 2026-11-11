@@ -7,7 +7,7 @@ title: 評価器の互換性
 ---
 ## 評価器の互換性 {#evaluator-compatibility}
 
-サポートされているサードパーティ LLM プロバイダーは、OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、Vertex AI、およびカスタムプロバイダーです。
+サポートされているサードパーティ LLM プロバイダーは、OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、Vertex AI、Baseten、Fireworks AI、Together AI、および Custom Provider です。
 
 ### マネージド評価器 {#managed-evaluators}
 

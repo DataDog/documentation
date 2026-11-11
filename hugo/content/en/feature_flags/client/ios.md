@@ -315,7 +315,7 @@ Link the `DatadogOpenFeatureProvider` product to your app target. The bridge dep
 
 Initialize Datadog and enable Flags as shown in [Initialize the SDK](#initialize-the-sdk). Then create a `DatadogProvider` and register it with `OpenFeatureAPI.shared`:
 
-{{< code-block lang="swift" >}}
+```swift
 import DatadogCore
 import DatadogFlags
 import DatadogOpenFeatureProvider
@@ -337,7 +337,7 @@ Flags.enable(with: flagsConfiguration)
 let context = MutableContext(targetingKey: "user-123")
 let provider = DatadogProvider()
 await OpenFeatureAPI.shared.setProviderAndWait(provider: provider, initialContext: context)
-{{< /code-block >}}
+```
 
 `setProviderAndWait` is `async` and does not throw. After it returns, the provider is ready and flag evaluations use cached values.
 

@@ -5,31 +5,39 @@ further_reading:
   text: OpenTelemetry Collector のセットアップ
 title: Apache Spark メトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/spark_metrics.png" alt="Spark ダッシュボードでの OpenTelemetry Apache Spark メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/spark_metrics.png" alt="Spark ダッシュボードの OpenTelemetry Apache Spark メトリクス" style="width:100%;" >}}
+[Apache Spark receiver][1] は、[Spark Overview][4] ダッシュボードに表示される Apache Spark メトリクスを収集します。
 
-[Apache Spark レシーバー][1]は、Apache Spark メトリクスの収集と [Spark Overview][4] ダッシュボードへのアクセスを可能にします。`apachesparkreceiver` の最新バージョンの仕様に従ってレシーバーを構成してください。
+詳細については、[Apache Spark receiver][1] に関する OpenTelemetry プロジェクトのドキュメントを参照してください。
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [Apache Spark レシーバー][1]を参照してください。
+## セットアップ {#setup}
 
-## セットアップ
+この例では、OpenTelemetry Collector Contrib v0.154.0 のコンポーネント識別子を使用しています。他のバージョンやディストリビューションの場合は、そのディストリビューションがサポートする識別子を使用します。以前のバージョンでは、このレシーバーの名前は `apachespark` です。
 
-Datadog で使用するために OpenTelemetry で Apache Spark メトリクスを収集するには:
+Apache Spark receiver は、実行中の Spark アプリケーションがその Web UI ポートで提供する REST API を読み取ります。
 
-1. OpenTelemetry Collector の構成で [Apache Spark レシーバー][1]を構成します。
-2. OpenTelemetry Collector が [Datadog にエクスポートするように構成されている][3]ことを確認します。
+Collector 構成に以下の行を追加し、`endpoint` を Spark アプリケーションの Web UI のアドレスに設定します。
 
-詳細な構成オプションと要件については、[Apache Spark レシーバーのドキュメント][1]を参照してください。
+```yaml
+receivers:
+  apache_spark:
+    endpoint: http://localhost:4040
+```
 
-## 収集されたデータ
+構成のメトリクスパイプラインの `receivers` リストに `apache_spark` を追加します。すでにそのパイプラインにあるプロセッサーはそのまま維持します。Datadog OTLP メトリクスインテークはデルタメトリクスのみを受け付けますが、このレシーバーは累積合計を生成するため、パイプラインには `cumulativetodelta` が必要です。[推奨される Collector セットアップ][3]にはそれが含まれています。
+
+すべての構成オプションについては、[Apache Spark receiver のドキュメント][1]を参照してください。
+
+## 収集データ {#data-collected}
 
 {{< mapping-table resource="apachespark.csv">}}
 
-詳細は [OpenTelemetry メトリクス マッピング][2] を参照してください。
+OpenTelemetry と Datadog のメトリクス名の完全なマッピングについては、[OpenTelemetry メトリクスマッピング][2]を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
