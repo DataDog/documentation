@@ -44,20 +44,44 @@ The Agent matches each DRA device to a physical GPU by reading the [CDI][6] spec
 
 With Datadog Operator 1.33.0 or later, or Datadog Helm chart 3.266.0 or later, enabling GPU Monitoring mounts this directory into the Agent container. No additional configuration is required. On GKE Autopilot, the Operator does not mount it, because the path is not in the Autopilot workload allowlist.
 
-If you deploy the Agent with your own manifests, or use an older Operator or Helm chart version, add a read-only `hostPath` volume for `/var/run/cdi` and mount it at `/host/var/run/cdi` in the `agent` container. With the Operator, set it under `spec.override.nodeAgent.volumes` and `spec.override.nodeAgent.containers.agent.volumeMounts`:
+If you deploy the Agent with your own manifests, or use an older Operator or Helm chart version, add a read-only `hostPath` volume for `/var/run/cdi` and mount it at `/host/var/run/cdi` in the `agent` container.
+
+Agent DaemonSet:
 
 ```yaml
-volumes:
-  - name: cdi
-    hostPath:
-      path: /var/run/cdi
-      type: DirectoryOrCreate
-containers:
-  - name: agent
-    volumeMounts:
-      - name: cdi
-        mountPath: /host/var/run/cdi
-        readOnly: true
+spec:
+  template:
+    spec:
+      volumes:
+        - name: cdi
+          hostPath:
+            path: /var/run/cdi
+            type: DirectoryOrCreate
+      containers:
+        - name: agent
+          volumeMounts:
+            - name: cdi
+              mountPath: /host/var/run/cdi
+              readOnly: true
+```
+
+Datadog Operator (`DatadogAgent` override, where `containers` is a map keyed by container name):
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      volumes:
+        - name: cdi
+          hostPath:
+            path: /var/run/cdi
+            type: DirectoryOrCreate
+      containers:
+        agent:
+          volumeMounts:
+            - name: cdi
+              mountPath: /host/var/run/cdi
+              readOnly: true
 ```
 
 <div class="alert alert-info">Without access to <code>/var/run/cdi</code>, the Agent falls back to matching whole GPUs by the DRA device name (<code>gpu-0</code>, <code>gpu-1</code>, ...). In that mode, MIG instances allocated through DRA are not attributed to pods.</div>
