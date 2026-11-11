@@ -22,24 +22,9 @@ Use this processor to protect your destinations and budget from sudden bursts, s
 
 **Note**: The Spike Protection processor requires Worker version 2.24.0 or later.
 
-### How spike detection works
-
-1. The processor groups the logs that match its filter by the attributes you select, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline. In the UI and in metric names, groups are called buckets.
-1. The Workers report the byte volume of each group to Datadog. Datadog computes the average volume and the standard deviation of each group over the last 24 hours in one-hour intervals.
-1. A group is spiking when both of these conditions are true:
-    - Its volume is higher than the average by more than the configured number of standard deviations (the spike threshold). The default threshold is 5 standard deviations.
-    - Its volume is higher than the configured minimum threshold. The default minimum threshold is 100 GB.
-1. While a group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} only to that group's logs. Logs from other groups are not affected.
-1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to normal before then. To stop the spike action sooner, dismiss the spike. See the [Manage spikes](#manage-spikes) section for more information. After the spike expires, the group is evaluated again against its baseline. If the volume is still abnormally high, a new spike is triggered.
-
-**Notes**:
-
-- A new group requires approximately 5 hours of history before a spike can be detected for it.
-- Workers synchronize their volumes and the spike state with Datadog approximately every 15 seconds. As a result, a spike can take up to 15 seconds to apply to all Workers.
-
 ### Limits
 
-- Each pipeline can track up to 1,000 groups. The limit applies to the entire pipeline. If the pipeline has more than one Spike Protection processor, the groups of all processors count toward the same limit. After the limit is reached, the processor applies the spike action to logs that belong to new groups.
+Each pipeline can track up to 1,000 groups. The limit applies to the entire pipeline. If the pipeline has more than one Spike Protection processor, the groups of all processors count toward the same limit. After the limit is reached, the processor applies the spike action to logs that belong to new groups.
 
 ## Setup
 
@@ -68,7 +53,7 @@ If you group logs by `service` and `status`, the processor tracks a separate bas
 - `service:checkout` with `status:info`
 - `service:checkout` with `status:error`.
 
-If the `checkout` service starts sending 50 times more `info` logs than usual, only the `service:checkout` and `status:info` group spikes. The processor continues to send the `checkout` service's `error` logs and logs from all other services to the next step in the pipeline.
+If the `checkout` service starts sending 50 times more `info` logs than usual, only the `service:checkout` and `status:info` group is spiking. The processor continues to send the `checkout` service's `error` logs and logs from all other services to the next step in the pipeline.
 
 ## Manage spikes
 
@@ -86,7 +71,7 @@ After you deploy the pipeline, you can view and manage the spikes for each group
 
 You can take the following actions on a spiking group:
 
-- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the group immediately, for example, if the volume increase is expected. The spike action doesn't apply to the group until the current spike expires, even if its volume is still above the baseline.
+- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the group immediately, such as when the volume increase is expected. The spike action doesn't apply to the group until the current spike expires, even if its volume is still above the baseline.
 - {{< ui >}}Delete{{< /ui >}}: Remove the spike event. The group goes back to being evaluated against its baseline and can spike again as soon as its volume is above the threshold.
 
 ## Health metrics
@@ -114,6 +99,24 @@ For [component metrics][6] and [processor buffer metrics][7] emitted by all proc
 `pipelines.spike_protection_buckets_usage`
 : **Description**: The number of groups tracked in the pipeline as a percentage of the group limit. The value ranges from `0` to `100`.
 : **Metric type**: gauge
+
+## How the processor works
+
+The Spike Volume processor detects and responds to log volume spikes as follows:
+
+1. The processor groups the logs that match its filter by the attributes you select, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline. In the UI and in metric names, groups are called buckets.
+1. The Workers report the byte volume of each group to Datadog. Datadog computes the average volume and the standard deviation of each group over the last 24 hours in one-hour intervals.
+1. A group is spiking when both of these conditions are true:
+    - Its volume is higher than the average by more than the configured number of standard deviations (the spike threshold). The default threshold is 5 standard deviations.
+    - Its volume is higher than the configured minimum threshold. The default minimum threshold is 100 GB.
+1. While a group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} only to that group's logs. Logs from other groups are not affected.
+1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to normal before then. To stop the spike action sooner, dismiss the spike. See the [Manage spikes](#manage-spikes) section for more information. After the spike expires, the group is evaluated again against its baseline. If the volume is still abnormally high, a new spike is triggered.
+
+**Notes**:
+
+- A new group requires approximately 5 hours of history before a spike can be detected for it.
+- Workers synchronize their volumes and the spike state with Datadog approximately every 15 seconds. As a result, a spike can take up to 15 seconds to apply to all Workers.
+
 
 [1]: /observability_pipelines/processors/quota/
 [2]: /observability_pipelines/search_syntax/logs/
