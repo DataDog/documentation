@@ -301,10 +301,10 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
   -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
-  -d { "meta": { "payload": { \
-    "example_input1": "...", \
-    "example_input2": "..." \
-  } } } \
+  -d '{ "meta": { "payload": {
+    "example_input1": "...",
+    "example_input2": "..."
+  } } }' \
   https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
    {{< /code-block >}}
 1. Click {{< ui >}}Save{{< /ui >}}.
@@ -312,7 +312,22 @@ curl -X POST \
 
 ### Access the API request body
 
-In later steps of your workflow, use `Source.api.requestBody` to reference the payload of the incoming API request. If the request body is JSON, parse it with `JSON.parse()` before accessing individual fields. For example, use `${JSON.parse(Source.api.requestBody).my_field}` instead of `Source.api.requestBody.my_field`.
+The request body doesn't need to use the `meta.payload` format. A workflow accepts any request body, and the raw body is always available in later steps of your workflow as `Source.api.requestBody`. This lets you trigger a workflow from a service that sends its own payload format.
+
+Datadog parses the request body only when it uses the `meta.payload` format, which maps fields to the workflow's input parameters. For any other format, Datadog passes the body to the workflow as a raw string, and you parse it yourself. If the request body is JSON, parse it with `JSON.parse()` before accessing individual fields.
+
+For example, the following request sends a JSON body that doesn't use the `meta.payload` format:
+
+{{< code-block lang="shell" >}}
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -d '{"alert_id": "12345", "severity": "high"}' \
+  https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
+{{< /code-block >}}
+
+To reference the `severity` field in a later step, use `${JSON.parse(Source.api.requestBody).severity}`. Using `Source.api.requestBody.severity` doesn't work, because `Source.api.requestBody` is a string.
 
 ## Scheduled triggers
 
