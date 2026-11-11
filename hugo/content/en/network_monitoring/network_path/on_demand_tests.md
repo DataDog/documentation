@@ -14,8 +14,7 @@ further_reading:
     text: "Execution Policies"
 ---
 
-<!-- TODO: Confirm the Preview status and replace this alert with the standard Preview callout if needed. -->
-<div class="alert alert-info">Network Path on-demand tests are in Preview.</div>
+<div class="alert alert-info">Network Path on-demand tests are in Preview. Contact your Datadog representative to request access.</div>
 
 ## Overview
 
@@ -112,8 +111,6 @@ To use the Datadog MCP Server, users also need the MCP permissions described in 
 ## Run an on-demand test
 
 ### From Network Path
-
-<!-- TODO: Confirm the UI location and labels after Run Test Now ships. -->
 
 1. Open a path in [Network Path][1].
 2. Click {{< ui >}}Run Test Now{{< /ui >}}. Datadog runs the test from the path's source host to its destination with the same protocol and port.
