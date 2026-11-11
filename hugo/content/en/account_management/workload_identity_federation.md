@@ -1,11 +1,11 @@
 ---
 title: Workload Identity Federation
-description: Authenticate the Datadog Terraform provider and Datadog Agent with Workload Identity Federation, using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
+description: Authenticate the Datadog Terraform provider, GitHub Actions workflows, and the Datadog Agent with Workload Identity Federation, using cloud and GitHub OIDC credentials instead of static API keys with AWS STS authentication and identity mapping.
 aliases:
     - /account_management/cloud_authentication/
     - /account_management/cloud_provider_authentication/
 algolia:
-  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'delegated auth']
+  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'github actions', 'delegated auth']
 further_reading:
 - link: "/getting_started/integrations/terraform/"
   tag: "Documentation"
@@ -25,13 +25,14 @@ further_reading:
 
 Workload Identity Federation lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys.
 
-This page covers setup for two identity providers: AWS (for the Terraform provider and the Agent) and GitHub Actions.
+This page covers setup for two identity providers: AWS (for the Terraform provider and the Agent) and GitHub (for GitHub Actions).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <p>Workload Identity Federation is available for the following:</p>
 <ul>
 <li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
 <li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
+<li><b>GitHub Actions</b>: Authenticate a workflow by exchanging its GitHub OIDC token for a short-lived Datadog credential. In Preview.</li>
 </ul>
 {{< /site-region >}}
 
@@ -259,6 +260,130 @@ provider "datadog" {
 ```
 
 The Terraform provider automatically uses your configured AWS credentials to authenticate with Datadog.
+
+## Set up Workload Identity Federation for GitHub Actions
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation for GitHub Actions is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+<div class="alert alert-warning">Workload Identity Federation for GitHub Actions is in Preview and is available on commercial sites only. It is not available on US1-FED or US2-FED.</div>
+
+A GitHub Actions workflow exchanges its GitHub OIDC token for a short-lived Datadog credential, so you do not need to store static API or application keys as GitHub secrets. Two mapping types are available:
+
+- **Identity mapping**: the workflow receives a Datadog access token for calling Datadog API endpoints as a Datadog user or service account.
+- **Intake mapping**: the workflow receives a Datadog API key for sending telemetry such as logs and metrics.
+
+**Requirements**:
+- Your account has the `workload_identity_federation_write` permission to create mappings.
+- Your workflow grants the `id-token: write` permission so GitHub can issue its OIDC token.
+- Your Datadog organization UUID, shown on the [**Organization Settings** > **Workload Identity Federation**][6] page.
+
+Setting up Workload Identity Federation for GitHub Actions involves two parts:
+1. [Creating a GitHub mapping in Datadog](#create-a-github-mapping-in-datadog)
+2. [Using the GitHub action in a workflow](#use-the-github-action-in-a-workflow)
+
+### Create a GitHub mapping in Datadog
+
+GitHub mappings match claims from the workflow's OIDC token instead of an AWS ARN pattern.
+
+#### Using the UI
+
+1. Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab (for API access) or the **Intake Mappings** tab (for telemetry).
+2. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
+3. Select **GitHub** as the **Identity Provider**.
+4. Define the **claim matchers** that determine which workflows the mapping applies to. See [Match claims safely](#match-claims-safely).
+5. For an identity mapping, search for and select a **Target Identity**: the Datadog user or service account the workflow authenticates as.
+6. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+#### Using the API
+
+Create mappings with the `/api/v2/wif/github/persona_mapping` (identity) and `/api/v2/wif/github/intake_mapping` (intake) endpoints. Both take a `claim_matchers` object; identity mappings also take the `account_identifier` of the target Datadog user or service account.
+
+**Example**: An API call that maps workflows from one GitHub repository to a Datadog service account, `terraform-service-account@myorg.com`.
+
+```bash
+# Example: map a GitHub repository to a Datadog service account
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/wif/github/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "github_oidc_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "claim_matchers": {
+        "sub": "repo:my-org/.*",
+        "repository": "my-org/my-repo",
+        "repository_owner_id": "123456789"
+      }
+    }
+  }
+}'
+```
+
+For the full request and response schemas, including the intake mapping endpoint, see the [Cloud Authentication API reference](https://docs.datadoghq.com/api/latest/cloud-authentication/).
+
+### Match claims safely
+
+Claim matchers are regular expressions matched against the full value of each claim in the workflow's OIDC token.
+
+**Required claim**: every mapping must include a `sub` matcher that pins a GitHub owner, such as `repo:my-org/.*`. This scopes the mapping to a single GitHub organization or user.
+
+**Recommended claims**: pin `repository_owner_id` or `repository_id` exactly (these claims accept literal digits only), and narrow the mapping further with `repository` plus `ref` or `environment`. Other supported claims include `workflow`, `workflow_ref`, `job_workflow_ref`, `event_name`, `actor`, and `repository_visibility`.
+
+<div class="alert alert-warning">Wildcards can over-match. A pattern like <code>.*datadoghq.com</code> also matches <code>evildatadoghq.com</code>, because <code>.*</code> matches any prefix. Match exact values, or anchor patterns to a known prefix such as <code>my-org/</code>, instead of using a leading <code>.*</code>.</div>
+
+### Use the GitHub action in a workflow
+
+The official [datadog-workload-identity-federation-github-action](https://github.com/DataDog/datadog-workload-identity-federation-github-action) exchanges the workflow's OIDC token for a Datadog credential. Pin a released tag such as `@v1`.
+
+The action has two entry points, one per mapping type:
+
+| Mapping type | Action path | Output |
+|---|---|---|
+| Identity mapping | `DataDog/datadog-workload-identity-federation-github-action/identity@v1` | `access_token` |
+| Intake mapping | `DataDog/datadog-workload-identity-federation-github-action/intake@v1` | `api_key` |
+
+Both entry points take the same inputs: `org_uuid` (required) and `site` (defaults to `datadoghq.com`).
+
+**Example**: A workflow that uses an identity mapping to call the Datadog API.
+
+```yaml
+name: Call the Datadog API
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # Needed to federate the OIDC token.
+    steps:
+      - name: Get Datadog access token
+        id: wif
+        uses: DataDog/datadog-workload-identity-federation-github-action/identity@v1
+        with:
+          org_uuid: <YOUR_ORG_UUID>
+          site: datadoghq.com
+
+      - name: Fetch the current user profile
+        env:
+          DD_ACCESS_TOKEN: ${{ steps.wif.outputs.access_token }}
+          DD_SITE: datadoghq.com
+        run: |
+          set -euo pipefail
+          curl -fsS \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${DD_ACCESS_TOKEN}" \
+            "https://api.${DD_SITE}/api/v2/current_user"
+```
+
+The action requests the GitHub OIDC token for the audience `datadog/<org_uuid>`, so the mapping and the workflow must belong to the same Datadog organization. For an intake mapping, use the `intake` entry point; it takes the same inputs and outputs an `api_key` scoped to the mapping for sending telemetry.
 
 ## Set up Workload Identity Federation for the Datadog Agent
 
