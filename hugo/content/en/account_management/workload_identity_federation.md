@@ -25,7 +25,7 @@ further_reading:
 
 Workload Identity Federation lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys.
 
-AWS is the only supported cloud provider.
+This page covers setup for two identity providers: AWS (for the Terraform provider and the Agent) and GitHub Actions.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <p>Workload Identity Federation is available for the following:</p>
@@ -290,7 +290,7 @@ Workload Identity Federation support depends on Agent version, Agent type, and h
 
 **All Agents**: Core Agents plus the Trace Agent, standalone DogStatsD, the Private Action Runner, the IoT Agent, and the Heroku Agent.
 
-The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. AWS is the only supported cloud provider. Azure, Google Cloud, and generic OIDC providers are not supported.
+The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. The Agent supports AWS credentials only.
 
 <div class="alert alert-info">For an unsupported Agent type, cloud provider, or way of supplying credentials, <a href="/help/">open a feature request with Datadog Support</a>.</div>
 
