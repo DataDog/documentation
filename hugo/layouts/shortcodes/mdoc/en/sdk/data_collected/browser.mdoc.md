@@ -150,7 +150,7 @@ For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is 
 ### WebSocket attributes
 
 {% callout url="" header="Preview" btn_hidden=true %}
-WebSocket monitoring is in Preview. The collected attributes may change before general availability.
+WebSocket monitoring is in Preview. The collected attributes may change before general availability. You do not need to request access: enable it with `betaTrackWebSockets`.
 {% /callout %}
 
 For WebSocket connections (`resource.type:websocket`) collected with `betaTrackWebSockets`, the following attributes are collected in addition to the other [resource attributes](#resource-attributes). `resource.url` does not include the query string. `resource.duration` is the time the connection was tracked, from its creation until it closed or tracking ended. `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][18]. See [Track WebSocket connections][17] for configuration details.
