@@ -25,7 +25,7 @@ further_reading:
 
 Choose your CI provider, platform, and test framework to see the recommended configuration for your suite. {% #adopt-ddtest-in-ci %}
 
-{% collapse-content title="Concepts: CI nodes, workers, and plans" level="h3" id="concepts" %}
+{% collapse-content title="Concepts: CI nodes, workers, and plans" level="h2" id="concepts" %}
 
 - A **CI node** is one execution environment, such as a GitHub Actions job.
 - A **worker** is a test process started by `ddtest`. Each CI node runs one worker by default.
@@ -550,7 +550,7 @@ If the existing job is already sharded, preserve its suite boundary or consolida
 {% /if %}
 <!-- End single -->
 
-{% collapse-content title="Custom test commands" level="h4" id="configure-your-framework" %}
+{% collapse-content title="Custom test commands" level="h3" id="configure-your-framework" %}
 
 Keep options such as tags, seeds, and formatters. To customize test file selection, use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`.
 
@@ -562,7 +562,7 @@ Keep your existing instrumentation and apply the same environment settings to pl
 <!-- rspec -->
 {% if equals($platform, "rspec") %}
 
-### RSpec
+#### RSpec
 
 `ddtest` uses the `bin/rspec` executable when present, otherwise `bundle exec rspec`.
 
@@ -583,7 +583,7 @@ Use the same settings for planning and execution.
 <!-- minitest -->
 {% if equals($platform, "minitest") %}
 
-### Minitest {% #minitest %}
+#### Minitest {% #minitest %}
 
 For Rails, `ddtest` runs `bin/rails test` when `bin/rails` is executable, otherwise `bundle exec rails test`. Preserve any setup and options from custom Rake tasks, but use the Rails test command: a `rake test` override does not receive assigned files correctly.
 
@@ -604,13 +604,13 @@ end
 <!-- python -->
 {% if equals($prog_lang, "python") %}
 
-### Python (pytest) {% #pytest %}
+#### Python (pytest) {% #pytest %}
 
 Activate your virtual environment before calling `ddtest`, which runs `python -m pytest` by default.
 
 Keep existing `PYTEST_ADDOPTS`; `ddtest` adds `--ddtrace` to load the pytest plugin.
 
-{% collapse-content title="Custom launchers, configuration, or suite roots" level="h3" id="pytest-custom-command" %}
+{% collapse-content title="Custom launchers, configuration, or suite roots" level="h5" id="pytest-custom-command" %}
 
 For an existing command such as `uv run pytest -c config/pytest.ini -q tests/unit tests/integration`, add these settings to your CI environment, preserving any existing `PYTEST_ADDOPTS`:
 
@@ -636,7 +636,7 @@ Keep your package manager, lockfile, and `NODE_OPTIONS` loaders. `ddtest` reuses
 <!-- jest -->
 {% if equals($platform, "jest") %}
 
-### Jest {% #jest %}
+#### Jest {% #jest %}
 
 Test Optimization supports `jest-circus` with the `node` or `jsdom` test environment.
 
@@ -648,7 +648,7 @@ Retain existing flags such as `--runInBand` in a [custom Jest command](/tests/te
 <!-- vitest -->
 {% if equals($platform, "vitest") %}
 
-### Vitest {% #vitest %}
+#### Vitest {% #vitest %}
 
 Install Vitest and any configured coverage or environment packages in the project.
 
@@ -664,7 +664,7 @@ Run from the package directory and run any package-script preparation before `dd
 <!-- mocha -->
 {% if equals($platform, "mocha") %}
 
-### Mocha {% #mocha %}
+#### Mocha {% #mocha %}
 
 Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `ddtest` uses the suite paths during discovery and runs only each worker's assigned test files. Shared setup runs in every worker. For command-line options, see [Mocha command overrides](/tests/test_parallelization/best_practices/#mocha).
 
@@ -674,7 +674,7 @@ Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `
 <!-- cucumber -->
 {% if equals($platform, "cucumber") %}
 
-### Cucumber.js {% #cucumber %}
+#### Cucumber.js {% #cucumber %}
 
 Preserve profiles, support code, paths, tags, and name filters in a [custom Cucumber command](/tests/test_parallelization/best_practices/#cucumberjs). Use tag or name filters instead of scenario-line or rerun selections: `ddtest` assigns whole feature files. If a test script also runs preparation steps or other frameworks, run those separately.
 
@@ -684,7 +684,7 @@ Preserve profiles, support code, paths, tags, and name filters in a [custom Cucu
 <!-- cypress -->
 {% if equals($platform, "cypress") %}
 
-### Cypress {% #cypress %}
+#### Cypress {% #cypress %}
 
 Keep the Cypress [Test Optimization plugin and support-file instrumentation](/tests/setup/javascript/?tab=cypress).
 
@@ -703,7 +703,7 @@ Start the application and wait for it to be ready in every test job. Install the
 <!-- playwright -->
 {% if equals($platform, "playwright") %}
 
-### Playwright {% #playwright %}
+#### Playwright {% #playwright %}
 
 Remove native `--shard` options. Keep browser installation, project dependencies, and setup/teardown in Playwright configuration. Preserve selected projects and other flags in a [custom Playwright command](/tests/test_parallelization/best_practices/#playwright).
 
@@ -713,7 +713,7 @@ Remove native `--shard` options. Keep browser installation, project dependencies
 <!-- webdriverio -->
 {% if equals($platform, "webdriverio") %}
 
-### WebdriverIO {% #webdriverio %}
+#### WebdriverIO {% #webdriverio %}
 
 Use WebdriverIO with the local runner and the Mocha or Jasmine adapter.
 
