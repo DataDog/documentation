@@ -227,7 +227,7 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand t
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a multiplier on bound width that is roughly equivalent to a number of standard deviations: `3` by default, from `0.1` (narrowest bounds) to `6` (widest bounds). In the API, this is the `sensitivity` option. Configured minimum bound sizes still apply. |
 | {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
 
-To choose how to tune a monitor:
+Use the following guidelines to tune a monitor:
 
 - To get more or fewer alerts across the whole series, adjust {{< ui >}}Sensitivity{{< /ui >}}. Bounds scale with how much the metric normally varies.
 - To avoid alerts on deviations smaller than a fixed amount, such as fewer than 1,000 rows from the predicted value, set a minimum bound size.
