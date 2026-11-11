@@ -452,7 +452,7 @@ Concise mode leaves out the task definition's tags and these fields of each cont
 - Show me the port mappings and IAM roles in the task definition that this task runs.
 - Get a concise version of the task definition for ECS service `billing-api` in cluster `prod`.
 
-**Note**: The tool returns a task definition revision only if Datadog has collected it. You must also be able to see that revision, or a newer revision of the same family, in the [ECS Explorer][101]. Datadog collects a revision when a task runs it, or when the revision is registered while Datadog is collecting ECS resources from the AWS account. An older `ACTIVE` revision may not be available if no task has run it since Datadog started collecting.
+**Note**: The tool returns a task definition revision only if Datadog still has it. You must also be able to see that revision, or a newer revision of the same family, in the [ECS Explorer][101]. Datadog collects a revision when a task runs it, or when the revision is registered while Datadog is collecting ECS resources from the AWS account. Datadog keeps a revision for about seven days after it last collects it. An older `ACTIVE` revision that no task has run in that time may not be available.
 
 ## APM
 
