@@ -72,6 +72,8 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
 | `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
 
+Journey Monitoring also uses the `rum.measure.journey` and `rum.measure.journey.duration` metrics, which measure journey starts, conversions, and time to convert. For details, see [Journey Monitoring][6].
+
 ## When metrics are computed
 
 Metrics are captured at different points in a session or view life cycle:
@@ -97,3 +99,4 @@ If you need performance metrics beyond the ones listed above, [create custom met
 [2]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
 [3]: /real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/
 [5]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/#lighthouse-audits
+[6]: /journey_monitoring/details_report/#kpi-source-and-retention
