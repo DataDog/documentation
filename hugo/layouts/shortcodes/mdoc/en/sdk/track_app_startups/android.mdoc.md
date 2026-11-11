@@ -2,6 +2,10 @@
 
 The Android SDK automatically creates an `ApplicationLaunch` view during initialization and measures the time to initial display (TTID) for it. No setup is required for TTID.
 
+{% alert level="danger" %}
+The `application_start` action is not collected in Android SDK versions 3.5.0+. The `rum.measure.app.startup_time metric` is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
+{% /alert %}
+
 ## Manual tracking
 
 The time to full display (TTFD) isn't measured automatically. Call `GlobalRumMonitor.get().reportAppFullyDisplayed()` when your app reaches its own definition of "fully drawn":

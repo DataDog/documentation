@@ -4,6 +4,10 @@ The iOS SDK automatically creates an `ApplicationLaunch` view during initializat
 
 The SDK drops TTID if the first frame is rendered more than 60 seconds after launch, and doesn't collect TTID for background launches.
 
+{% alert level="danger" %}
+The `application_start` action is not collected in iOS SDK versions 3.5.0+. The `rum.measure.app.startup_time metric` is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
+{% /alert %}
+
 ## Manual tracking
 
 Every app defines "fully drawn" differently, so the SDK doesn't automatically measure the time to full display (TTFD). Call `RUMMonitor.shared().reportAppFullyDisplayed()` when your app reaches that state:
