@@ -60,7 +60,7 @@ For Custom SQL monitors, select a model type for your metric: **Freshness**, **P
 
 The model adjusts for seasonal patterns, trends, and past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
 
-The following seasonal patterns are detected. How much history the model uses depends on the pattern:
+The model detects the following seasonal patterns. The amount of history it uses depends on the pattern:
 
 | Pattern | Description | History used |
 |---------|-------------|--------------|
