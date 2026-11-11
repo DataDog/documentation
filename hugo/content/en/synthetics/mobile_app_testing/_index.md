@@ -65,7 +65,7 @@ You may create a test using one of the following options:
   1. Select a {{< ui >}}version{{< /ui >}} or click {{< ui >}}Always run the latest version{{< /ui >}} to use the latest version of your mobile application whenever your test is run.
   1. Add a {{< ui >}}name{{< /ui >}} for your test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}} that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-  1. Select the [{{< ui >}}devices{{< /ui >}}](#devices) to run your test on.
+  1. Select the [{{< ui >}}devices{{< /ui >}}](#locations-and-devices) to run your test on.
   1. Set [retry conditions](#test-retries) for your test.
   1. Set the [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and {{< ui >}}alert conditions{{< /ui >}} for your test monitor. 
   1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
@@ -148,7 +148,7 @@ For iOS tests, add the appropriate `key:value` pairs in the Advanced Options sec
 {{% /tab %}}
 {{< /tabs >}}
 
-## Devices
+## Locations and devices
 
 Choose the locations your test runs from and the devices it runs on:
 
@@ -162,19 +162,13 @@ Choose the locations your test runs from and the devices it runs on:
 
 4. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to save your test configuration.
 
-**Notes**:
-- Tests on devices in the United States run from AWS US West (Oregon). Tests on devices in Europe run from AWS Germany (Frankfurt).
-- Not all devices are available in every location. For more details, see the list of [supported devices][16].
+Not all devices are available in every location. For more details, see the list of [supported devices][16].
 
 ### Routed locations
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Routed locations for mobile app tests are in Preview. To request access, contact your Datadog account team.
-{{< /callout >}}
-
 Use routed locations to test your mobile app as if the device were in another country. They're useful when your mobile app only works in a specific country, or to see how it behaves for users in other regions.
 
-With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select. Your mobile app sees the device as being in that country.
+With a routed location, the device itself doesn't move. Its network traffic goes out through an IP address in the country you select. Your mobile app sees the device as being in that country.
 
 A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's GPS location, time zone, or language.
 
@@ -183,7 +177,8 @@ Tests that use routed locations work the same way as tests on physical locations
 - **Mix locations**: Select routed locations on their own or together with physical locations.
 - **Record**: The recorder offers the locations selected on the test. Check how your mobile app behaves in a routed location before you save your steps.
 - **Run**: Run the test on a schedule, with {{< ui >}}Run Test Now{{< /ui >}}, or from your CI/CD pipelines.
-- **Review results**: Test results, the test details page, and the Synthetic Monitoring & Testing Results Explorer show the routed country or city as the test location. For example, a test that runs from Brazil shows **Brazil** as its location, even though the device is hosted elsewhere.
+- **Review results**: Test results, the test details page, and the Synthetic Monitoring & Testing Results Explorer show the routed country or city as the test location. For example, a test that runs from Brazil shows **Brazil** as its location, even if the device is hosted elsewhere.
+- **Alert**: Each routed location has its own timeline on the test details page and can trigger the test's monitor. Alerts name the routed location.
 
 Not all devices support routed locations. For details, see the list of [supported devices][16].
 
@@ -241,7 +236,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. For a [routed location](#routed-locations), the notification names the routed country or city, such as Brazil. Each routed location can trigger the monitor on its own. Pre-filled monitor messages are included in the message body section:
 
     {{< img src="/mobile_app_testing/mobile_app_synthetic_monitor.png" alt="Mobile app testing monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
