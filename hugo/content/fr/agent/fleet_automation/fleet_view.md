@@ -26,7 +26,7 @@ Pour chaque Datadog Agent, vous pouvez voir :
 - La version de l'Agent
 - Si l'Agent présente des intégrations non configurées ou mal configurées
 - Les services que l'Agent surveille
-- Le statut de configuration à distance de l'Agent
+- Le statut de Remote Configuration de l'Agent
 - Les produits activés sur l'Agent
 - Les événements Audit Trail de l'Agent, y compris les modifications de configuration, les mises à niveau et les flares
 
@@ -48,6 +48,8 @@ Pour chaque Collecteur OTel, vous pouvez voir :
 Sélectionnez un Datadog Agent ou un collecteur OTel pour afficher sa configuration, ses intégrations connectées, ses événements d'audit et un onglet de support pour envoyer un flare à distance.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="Le panneau de détails de l'Agent affichant la configuration, les intégrations connectées et les événements d'audit." style="width:100%;" >}}
+
+Le statut **Remote Configuration** de l'Agent indique s'il peut recevoir une configuration de Datadog. Son statut **Remote Agent Management** indique si la gestion à distance est activée. Un Agent peut apparaître dans Fleet View et être connecté à Remote Configuration alors que la gestion à distance est **NOT ENABLED**. Pour activer les mises à niveau et les modifications de configuration sur les VM, consultez [Activer la gestion à distance de l'Agent][8].
 
 ## Recherchez et filtrez {#search-and-filter}
 
@@ -121,7 +123,7 @@ La plupart des fonctionnalités de la vue Kubernetes sont disponibles sans exige
 |---|---|
 | Afficher la configuration `DatadogAgent` | Datadog Operator v1.24 ou version ultérieure |
 | Afficher les valeurs du Helm Chart | Datadog Helm Chart v3.157.0 ou version ultérieure |
-| Modifier la configuration | [Remote Configuration][6] activé et Datadog Operator v1.27 ou version ultérieure |
+| Edit configuration (Preview) | [Remote Configuration][6] activée et Datadog Operator v1.27 ou version ultérieure |
 | Modifier la configuration sans définir un nom de cluster | Datadog Operator v1.30.0 ou version ultérieure |
 | Afficher les intégrations sur un Agent de cluster | Agent v7.72.0 ou version ultérieure |
 | Afficher le statut de l'intégration sur un Agent de cluster | Agent v7.79.0 ou version ultérieure |
@@ -159,7 +161,7 @@ Cliquez sur un cluster pour afficher :
 
 Dans l'onglet {{< ui >}}Configuration{{< /ui >}}, vous pouvez afficher la configuration :
 
-- **Datadog Operator v1.24 ou version ultérieure** : Affichez la configuration de la ressource personnalisée `DatadogAgent`. Avec Datadog Operator v1.27 ou version ultérieure, vous pouvez également modifier la configuration depuis cet onglet.
+- **Datadog Operator v1.24 ou version ultérieure** : Affichez la configuration de la ressource personnalisée `DatadogAgent`. Avec Datadog Operator v1.27 ou version ultérieure, vous pouvez également modifier la configuration depuis cet onglet. La modification est en préversion. Pour obtenir des instructions, consultez [Configurer l'Agent sur Kubernetes][9].
 - **Datadog Helm Chart v3.157.0 ou version ultérieure** : Affichez les valeurs du Helm Chart (`values.yaml`).
 
 ### Limitations {#limitations}
@@ -181,3 +183,5 @@ Par rapport à la vue par défaut, la vue Kubernetes présente les limitations s
 [5]: /fr/containers/datadog_operator
 [6]: /fr/agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /fr/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /fr/agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes

@@ -108,6 +108,8 @@ Configure las reglas de creación de tickets para crear tickets automáticamente
 
 **Nota**: Las reglas de creación de tickets solo crean tickets para nuevos hallazgos. Datadog no crea tickets retroactivos para hallazgos existentes cuando usted crea una regla.
 
+También puede crear reglas de creación de tickets con la [API][7] o el [`datadog_security_findings_ticket_creation_rule`][8] recurso de Terraform.
+
 ## Identificar tickets creados automáticamente {#identify-automatically-created-tickets}
 
 {{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Ventana emergente de ticket de Work Management que muestra una incidencia creada por una Regla de Automatización, indicada con un icono de rayo, y un enlace para visualizar todos los hallazgos con tickets que fueron creados a partir de la misma regla." style="width:60%;" >}}
@@ -118,7 +120,7 @@ Los tickets creados por una regla están marcados con un indicador de rayo en el
 
 Cuando Datadog identifica un hallazgo, lo evalúa con respecto a su secuencia de reglas de creación de tickets. Comenzando con la primera regla, si hay una coincidencia, Datadog crea un ticket utilizando la configuración de esa regla y deja de evaluar más. Si no ocurre ninguna coincidencia, Datadog pasa a la siguiente regla. Este proceso continúa hasta que se encuentra una coincidencia o se revisan todas las reglas sin encontrar ninguna.
 
-## Daily ticket limit {#daily-ticket-limit}
+## Límite de ticket diario {#daily-ticket-limit}
 
 Cada regla tiene un límite diario de tickets configurable que se restablece a la medianoche UTC. Cuando se alcanza el límite, Datadog crea un ticket final en el mismo proyecto explicando que la regla alcanzó su límite diario, luego deja de crear tickets por el resto de ese día. Los hallazgos que exceden el límite no se registran retroactivamente cuando el límite se restablece, pero puede crear tickets para ellos manualmente.
 
@@ -140,3 +142,5 @@ Cuando deshabilita o elimina una regla de creación de tickets, los tickets que 
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /es/security/ticketing_integrations/
+[7]: /es/api/latest/security-monitoring/create-a-ticket-creation-rule/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_ticket_creation_rule

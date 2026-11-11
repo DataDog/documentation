@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. **Exposure SQL Models** tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse. If you randomize subjects outside of Datadog Feature Flags, create an Exposure SQL Model for bring-your-own randomization. For a Datadog Feature Flag experiment whose decision metrics use warehouse data, an Exposure SQL Model can supply exposure records as an alternative to Datadog's default exported exposure logs.
+Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. **Exposure SQL Models** tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse. If you randomize subjects outside of Datadog Feature Flags, create an Exposure SQL Model for bring-your-own randomization. For a Datadog Feature Flag experiment whose decision metrics use warehouse data, an Exposure SQL Model can supply exposure records as an alternative to Datadog's default exported exposure logs. To record Datadog Feature Flags exposures in your warehouse, see [Record Feature Flag Exposures in Your Own Data Store][7].
 
 
 Similar to [Metric SQL Models][2], Exposure SQL Models are SQL queries that describe exposure data in your warehouse. Exposure SQL Models return the following columns:
@@ -80,6 +80,8 @@ To create an Exposure SQL Model:
 
 {{< img src="/product_analytics/experiment/exposure-sql/create-exposure-sql-model.png" alt="The Create Exposure SQL Model page showing a SQL editor with an example exposure query and a mapping panel that maps query columns to Datadog fields." style="width:80%;" >}}
 
+For experiments with [identity resolution][6], include both identifiers in the model output and map them under {{< ui >}}Subject columns{{< /ui >}}. Keep rows where the additional identifier is unknown so those participants remain in the experiment population.
+
 For large exposure tables, use [SQL template variables][5] to push Datadog's date filters into your query and reduce the amount of data your warehouse scans on each run.
 
 ## Create experiments using Exposure SQL Models
@@ -124,3 +126,5 @@ To view a simplified version of the pipeline logic, click {{< ui >}}Copy SQL{{< 
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /experiments/plan_and_launch_experiments/
 [5]: /experiments/concepts/sql_template_variables/
+[6]: /experiments/concepts/identity_resolution/
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/

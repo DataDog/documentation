@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
+- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
+  tag: "Blog"
+  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview

@@ -13,21 +13,24 @@ further_reading:
 - link: /security/application_security/how-appsec-works/#built-in-protection
   tag: ドキュメント
   text: アプリケーションセキュリティモニタリングの仕組み
-- link: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+- link: /dynamic_instrumentation/
   tag: ドキュメント
   text: Dynamic Instrumentation
 - link: /security/workload_protection/
   tag: ドキュメント
   text: Workload Protection のセットアップ
+- link: https://www.datadoghq.com/blog/single-step-instrumentation-rules/
+  tag: ブログ
+  text: Single Step Instrumentation ルールを使用して、ホスト全体でサービスのトレーシングを管理します。
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
-  text: Datadog 監査証跡の使用
+  text: Datadog Audit Trail の使用
 - link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
   tag: ブログ
-  text: リモート構成で Datadog コンポーネントにリアルタイムの更新を適用
+  text: Remote Configuration で Datadog コンポーネントにリアルタイムの更新を適用
 title: Remote Configuration
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Remote Configuration は Datadog の機能で、インフラストラクチャーにデプロイされた Datadog コンポーネント (Agent、SDK、Observability Pipelines Worker など) における一部の製品機能の動作をリモートで構成および変更することが可能です。Remote Configuration を使用すると、オンデマンドで環境内の Datadog コンポーネントに構成を適用し、管理コストを削減し、チーム間の摩擦を減らし、問題解決時間を短縮することができます。
 
@@ -102,6 +105,7 @@ Datadog は、Datadog コンポーネントが受信し適用した構成の機�
 - お客様の Datadog コンポーネントと Datadog の間の通信は、HTTPS を使用して暗号化され、お客様の Datadog API キーを使用して認証と認可が行われます。ただし、プライベートアクションランナーの場合は JWT トークンが代わりに使用されます。
 - [`api_keys_write`][5] 権限を持つユーザーのみが、API キーでリモート構成機能を有効または無効にし、サポートされている製品機能を使用することが認可されます。
 - Datadog UI を通じて送信されたお客様の構成変更は、リクエスト元の Datadog コンポーネントによって署名および検証され、構成のインテグレーションが確認されます。
+- Remote Configuration が有効な場合、コンポーネントは定期的に、ポート 8042/TCP で TLS を使用して Datadog への接続テストを実行します。これは HTTPS ではなく、生の TLS 接続です。このテストはプロトコル開発に使用されます。顧客データや顧客を特定する情報は一切含まれません。この接続は Remote Configuration が有効な間のみ使用され、機能を損なうことなく安全にブロックできます。
 
 ### ロールベースのアクセス {#role-based-access}
 
@@ -124,9 +128,13 @@ Remote Configuration を有効にすると、次の製品に影響します。�
 
 ## Remote Configuration を有効にする {#enable-remote-configuration}
 
-ほとんどの場合、Remote Configuration は組織に対してデフォルトで有効になっています。[Remote Configuration][8] 設定ページから、組織で Remote Configuration が有効になっているかどうかを確認できます。有効にする必要がある場合は、次のようにします。
-1. RBAC 権限に [`org_management`][7] が含まれていることを確認し、組織のリモート構成を有効にできるようにします。
-1. 組織の設定ページで、[Remote Configuration][8] を有効にします。これにより、組織全体の Datadog コンポーネントが Datadog から構成を受信できるようになります。
+ほとんどの場合、Remote Configuration は組織に対してデフォルトで有効になっています。[Remote Configuration][8] 設定ページから、組織で Remote Configuration が有効になっているかどうかを確認できます。
+{{< site-region region="gov,gov2" >}}
+**注**: US1-FED および US2-FED では、Remote Configuration はデフォルトでは有効になっていません。
+{{< /site-region >}}
+Remote Configuration を有効にするには、次のようにします。
+1. RBAC 権限に [`org_management`][7] が含まれていることを確認し、組織の Remote Configuration を有効にできるようにします。
+1. [{{< ui >}}Organization Settings{{< /ui >}}] (組織設定) ページから、[Remote Configuration][8] を有効にします。これにより、組織全体の Datadog コンポーネントが Datadog から構成を受信できるようになります。
 1. 下記の[製品固有の構成](#product-specific-configuration)ガイダンスに従って、Remote Configuration のセットアップを完了します。
 
 ### 製品固有の構成 {#product-specific-configuration}
@@ -136,13 +144,14 @@ Remote Configuration を有効にすると、次の製品に影響します。�
 | 製品                 | セットアップ手順                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Fleet Automation のセットアップ][31]                                                                                   |
+| AAP (App and API protection) | [App and API protection のセットアップ][33]                                                                         |
 | APM                     | [ランタイムでの構成](/tracing/guide/remote_config/)                                                      |
-| Dynamic Instrumentation | [Dynamic Instrumentation スタートアップガイド](/dynamic_instrumentation/#getting-started)                      |
+| Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Observability Pipelines に使用している API キーで [Remote Configuration が有効化][32]されていることを確認してください。|
 | Sensitive Data Scanner  | [クラウドストレージ](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
 | Private Action Runner   | [Private Actions の概要](/actions/private_actions/)                                                          |
-| Feature Flag           | [サーバー側の Feature Flag](/feature_flags/server/)                                                            |
+| Feature Flags           | [サーバー側の Feature Flags](/feature_flags/server/)                                                            |
 
 ## ベストプラクティス {#best-practices}
 
@@ -171,7 +180,7 @@ Datadog では、Remote Configuration をグローバルに無効にするので
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /ja/security/default_rules/#cat-workload-security
 [10]: /ja/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
-[11]: /ja/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[11]: /ja/tracing/trace_collection/dynamic_instrumentation
 [12]: /ja/security/application_security/how-appsec-works/#built-in-protection
 [13]: /ja/account_management/audit_trail
 [14]: /ja/monitors/
@@ -180,7 +189,6 @@ Datadog では、Remote Configuration をグローバルに無効にするので
 [17]: /ja/agent/configuration/network
 [18]: /ja/agent/configuration/proxy/
 [19]: /ja/internal_developer_portal/catalog/
-[20]: /ja/dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /ja/tracing/trace_collection/runtime_config/
 [23]: /ja/remote_configuration#opting-out-of-remote-configuration
@@ -190,7 +198,7 @@ Datadog では、Remote Configuration をグローバルに無効にするので
 [27]: /ja/agent/fleet_automation/fleet_view/#send-a-remote-flare
 [28]: /ja/security/sensitive_data_scanner/?tab=usingtheagent
 [29]: /ja/agent/fleet_automation/upgrade_agents/
-[30]: /ja/actions/private_actions/use_private_actions/
+[30]: /ja/actions/private_actions/
 [31]: /ja/agent/guide/setup_remote_config
 [32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1
 [33]: /ja/security/application_security/setup/

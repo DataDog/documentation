@@ -6,22 +6,22 @@ aliases:
 description: 서비스, 리소스, 트레이스, 스팬, 계측 및 분산 트레이싱을 위한 기타 주요 개념을 포함한 필수 APM 용어를 알아보세요.
 further_reading:
 - link: /tracing/trace_collection/
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션에서 APM 트레이싱을 설정하는 방법 알아보기
 - link: /internal_developer_portal/catalog/
-  tag: 설명서
-  text: Datadog에 보고하는 서비스를 발견하고 카탈로그에 등록하기
+  tag: 문서
+  text: Datadog에 보고하는 서비스 검색 및 카탈로그화
 - link: /tracing/services/service_page/
-  tag: 설명서
+  tag: 문서
   text: Datadog 서비스에 관해 자세히 알아보기
 - link: /tracing/services/resource_page/
-  tag: 설명서
+  tag: 문서
   text: 리소스 성능 및 트레이스 자세히 살펴보기
 - link: /tracing/trace_explorer/trace_view/
-  tag: 설명서
+  tag: 문서
   text: Datadog에서 트레이스를 읽는 방법 알아보기
 - link: /monitors/types/apm/
-  tag: 설명서
+  tag: 문서
   text: APM 모니터링에 대해 알아보기
 title: APM 이용 약관
 ---
@@ -42,7 +42,7 @@ _스팬_ 및 _인덱스_와 같은 중요한 APM 용어에 대한 추가 정의 
 | [트레이스 컨텍스트 전파](#trace-context-propagation)| 서비스 간에 트레이스 식별자를 전달하는 방법으로, Datadog이 개별 스팬을 완전한 분산 트레이스로 연결할 수 있게 합니다. |
 | [보존 필터](#retention-filters) | 보존 필터는 Datadog UI 내에서 설정된 태그 기반 제어로, Datadog에서 15일 동안 인덱싱할 스팬을 결정합니다.                                                                                              |
 | [Ingestion Control](#ingestion-controls) | Ingestion Control은 15분 동안 실시간 검색 및 분석을 위해 최대 100%의 트레이스를 Datadog에 전송하는 데 사용됩니다.
-| [계측](#instrumentation) | 계측은 애플리케이션에 코드를 추가하여 관찰 가능성 데이터를 캡처하고 보고하는 프로세스입니다. |
+| [계측](#instrumentation) | 계측은 애플리케이션에 코드를 추가하여 관측 가능성 데이터를 캡처하고 보고하는 프로세스입니다. |
 | [Baggage](#baggage) | Baggage는 키-값 쌍 형태로 트레이스, 메트릭 및 로그 간에 전달되는 컨텍스트 정보입니다. |
 
 ## 서비스 {#services}
@@ -66,12 +66,12 @@ _스팬_ 및 _인덱스_와 같은 중요한 APM 용어에 대한 추가 정의 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="서비스 페이지" >}}
 
 <div class="alert alert-info">
-서비스 페이지에서 기대했던 HTTP 엔드포인트가 보이지 않나요? APM에서 엔드포인트는 서비스 이름 외에도 서비스에 연결됩니다. 트레이스의 진입점 스팬의 `span.name`으로도 연결됩니다. 예를 들어, 위의 웹 스토어 서비스에서 `web.request`는 진입점 스팬입니다. 자세한 내용은 <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">여기</a>에서 확인하세요.
+서비스 페이지에서 기대했던 HTTP 엔드포인트가 보이지 않나요? APM에서 엔드포인트는 서비스 이름 외에도 서비스에 연결됩니다. 이때 트레이스의 진입점 스팬에 있는 <code>span.name</code> 값도 사용됩니다. 예를 들어, 위의 web-store 서비스에서는 <code>web.request</code> 이 진입점 스팬에 해당합니다. 자세한 내용은 <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">여기</a>에서 확인하세요.
 </div>
 
 ## 리소스 {#resources}
 
-리소스는 고객 애플리케이션의 특정 도메인을 나타냅니다. 일반적으로 이들은 계측된 웹 엔드포인트, 데이터베이스 쿼리 또는 백그라운드 작업일 수 있습니다. 웹 서비스의 경우, 이러한 리소스는 정적 스팬 이름 `web.request`으로 그룹화된 동적 웹 엔드포인트가 될 수 있습니다. 데이터베이스 서비스에서는 이러한 것이 스팬 이름 `db.query`를 가진 데이터베이스 쿼리가 됩니다. 예를 들어 `web-store` 서비스에는 체크아웃, 장바구니 업데이트, 항목 추가 등을 처리하는 리소스(웹 엔드포인트)가 자동으로 계측되어 있습니다. 리소스 이름은 HTTP 메서드와 HTTP 경로의 조합일 수 있으며, 예를 들어 `GET /productpage` 또는 `ShoppingCartController#checkout`과 같은 형식입니다. 
+리소스는 고객 애플리케이션의 특정 도메인을 나타냅니다. 일반적으로 이들은 계측된 웹 엔드포인트, 데이터베이스 쿼리 또는 백그라운드 작업일 수 있습니다. 웹 서비스의 경우, 이러한 리소스는 정적 스팬 이름 `web.request`으로 그룹화된 동적 웹 엔드포인트가 될 수 있습니다. 데이터베이스 서비스에서는 이러한 것이 스팬 이름 `db.query`를 가진 데이터베이스 쿼리가 됩니다. 예를 들어, `web-store` 서비스에는 체크아웃, 장바구니 업데이트, 항목 추가 등을 처리하는 리소스(웹 엔드포인트)가 자동으로 계측되어 있습니다. 리소스 이름은 HTTP 메서드와 HTTP 경로의 조합일 수 있으며, 예를 들어 `GET /productpage` 또는 `ShoppingCartController#checkout`과 같은 형식입니다. 
 
 각 리소스는 특정 엔드포인트에 범위가 지정된 [리소스 페이지][7]와 [트레이스 메트릭][15]을 가지고 있습니다. 트레이스 메트릭은 다른 Datadog 메트릭처럼 사용될 수 있으며 대시보드로 내보내거나 모니터링를 생성하는 데 사용할 수 있습니다. [리소스 페이지]에서는 모든 [트레이스](#trace)의 스팬[21]을 집계한 스팬 요약 위젯, 요청의 지연 분포 및 이 엔드포인트에 대한 요청을 보여주는 트레이스를 확인할 수 있습니다.
 
@@ -99,7 +99,7 @@ UI에서 [태그 기반 필터를 설정][19]하여 15일 동안 스팬을 인�
 
 ## 계측 {#instrumentation}
 
-계측은 애플리케이션에 코드를 추가하여 트레이스, 메트릭 및 로그와 같은 관찰 가능성 데이터를 Datadog에 캡처하고 보고하는 프로세스입니다. Datadog은 다양한 프로그래밍 언어와 프레임워크를 위한 계측 라이브러리를 제공합니다.
+계측은 애플리케이션에 코드를 추가하여 트레이스, 메트릭 및 로그와 같은 관측 가능성 데이터를 Datadog에 캡처하고 보고하는 프로세스입니다. Datadog은 다양한 프로그래밍 언어와 프레임워크를 위한 계측 라이브러리를 제공합니다.
 
 Datadog Agent를 [단일 단계 계측][24] 방식으로 설치하면 애플리케이션을 자동으로 계측할 수 있으며, 코드에 [Datadog SDK를 수동으로 추가][25]하면 애플리케이션을 계측할 수 있습니다.
 

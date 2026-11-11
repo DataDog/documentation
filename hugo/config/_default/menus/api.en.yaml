@@ -1830,8 +1830,7 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRulesForMetric
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Update a tag indexing rule exemption
       url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
@@ -1955,8 +1954,7 @@ menu:
           - v2
         operationids:
           - UpdateTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 19
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
@@ -1968,8 +1966,7 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 18
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
@@ -1981,8 +1978,7 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 20
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
@@ -1994,8 +1990,7 @@ menu:
           - v2
         operationids:
           - ReorderTagIndexingRules
-        unstable:
-          - v2
+        unstable: []
         order: 17
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
@@ -2007,8 +2002,7 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 16
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
@@ -2020,8 +2014,7 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRules
-        unstable:
-          - v2
+        unstable: []
         order: 15
     - name: List tag indexing rule exemptions
       url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
@@ -2123,9 +2116,9 @@ menu:
           - CreateDerivedMetric
         unstable: []
         order: 28
-    - name: Get a list of metrics
-      url: /api/latest/metrics/get-a-list-of-metrics/
-      identifier: metrics-get-a-list-of-metrics
+    - name: List all metrics with volumes and query activity
+      url: /api/latest/metrics/list-all-metrics-with-volumes-and-query-activity/
+      identifier: metrics-list-all-metrics-with-volumes-and-query-activity
       parent: metrics
       generated: true
       params:
@@ -4565,8 +4558,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsSeverity
-        unstable:
-          - v2
+        unstable: []
         order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
@@ -5152,8 +5144,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsAssignee
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
@@ -6745,6 +6736,19 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Get a usage quota
+      url: /api/latest/usage-metering/get-a-usage-quota/
+      identifier: usage-metering-get-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetQuota
+        unstable:
+          - v2
+        order: 27
     - name: Delete a usage quota
       url: /api/latest/usage-metering/delete-a-usage-quota/
       identifier: usage-metering-delete-a-usage-quota
@@ -7762,6 +7766,686 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Gateway
+      url: /api/latest/ai-gateway/
+      identifier: ai-gateway
+      generated: true
+    - name: Get an AI Gateway routing rule
+      url: /api/latest/ai-gateway/get-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-get-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 28
+    - name: Replace an AI Gateway routing rule
+      url: /api/latest/ai-gateway/replace-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-replace-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 29
+    - name: Create an AI Gateway routing rule
+      url: /api/latest/ai-gateway/create-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-create-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 27
+    - name: List AI Gateway routing rules
+      url: /api/latest/ai-gateway/list-ai-gateway-routing-rules/
+      identifier: ai-gateway-list-ai-gateway-routing-rules
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRoutingRules
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an AI Gateway routing rule
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-delete-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 30
+    - name: Update an AI Gateway rate limit
+      url: /api/latest/ai-gateway/update-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-update-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 43
+    - name: Get an AI Gateway rate limit
+      url: /api/latest/ai-gateway/get-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-get-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 42
+    - name: Archive an AI Gateway rate limit
+      url: /api/latest/ai-gateway/archive-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-archive-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 44
+    - name: Get AI Gateway rate limit usage
+      url: /api/latest/ai-gateway/get-ai-gateway-rate-limit-usage/
+      identifier: ai-gateway-get-ai-gateway-rate-limit-usage
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimitUsage
+        unstable:
+          - v2
+        order: 45
+    - name: Create an AI Gateway rate limit
+      url: /api/latest/ai-gateway/create-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-create-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 41
+    - name: List AI Gateway rate limits
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limits/
+      identifier: ai-gateway-list-ai-gateway-rate-limits
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimits
+        unstable:
+          - v2
+        order: 40
+    - name: Set a model pricing override
+      url: /api/latest/ai-gateway/set-a-model-pricing-override/
+      identifier: ai-gateway-set-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 25
+    - name: Get a model pricing override
+      url: /api/latest/ai-gateway/get-a-model-pricing-override/
+      identifier: ai-gateway-get-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 24
+    - name: Delete a model pricing override
+      url: /api/latest/ai-gateway/delete-a-model-pricing-override/
+      identifier: ai-gateway-delete-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 23
+    - name: Update a model for an AI Gateway provider
+      url: /api/latest/ai-gateway/update-a-model-for-an-ai-gateway-provider/
+      identifier: ai-gateway-update-a-model-for-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModel
+        unstable:
+          - v2
+        order: 21
+    - name: Delete a model from an AI Gateway provider
+      url: /api/latest/ai-gateway/delete-a-model-from-an-ai-gateway-provider/
+      identifier: ai-gateway-delete-a-model-from-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModel
+        unstable:
+          - v2
+        order: 22
+    - name: Add multiple models to an AI Gateway provider
+      url: /api/latest/ai-gateway/add-multiple-models-to-an-ai-gateway-provider/
+      identifier: ai-gateway-add-multiple-models-to-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkCreateAiGatewayModels
+        unstable:
+          - v2
+        order: 20
+    - name: Add a model to an AI Gateway provider
+      url: /api/latest/ai-gateway/add-a-model-to-an-ai-gateway-provider/
+      identifier: ai-gateway-add-a-model-to-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayModel
+        unstable:
+          - v2
+        order: 19
+    - name: List models for an AI Gateway provider
+      url: /api/latest/ai-gateway/list-models-for-an-ai-gateway-provider/
+      identifier: ai-gateway-list-models-for-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModels
+        unstable:
+          - v2
+        order: 18
+    - name: Update an AI Gateway provider
+      url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
+      identifier: ai-gateway-update-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayProvider
+        unstable:
+          - v2
+        order: 16
+    - name: Get an AI Gateway provider
+      url: /api/latest/ai-gateway/get-an-ai-gateway-provider/
+      identifier: ai-gateway-get-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayProvider
+        unstable:
+          - v2
+        order: 15
+    - name: Delete an AI Gateway provider
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-provider/
+      identifier: ai-gateway-delete-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayProvider
+        unstable:
+          - v2
+        order: 17
+    - name: Create an AI Gateway provider
+      url: /api/latest/ai-gateway/create-an-ai-gateway-provider/
+      identifier: ai-gateway-create-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayProvider
+        unstable:
+          - v2
+        order: 14
+    - name: List AI Gateway providers
+      url: /api/latest/ai-gateway/list-ai-gateway-providers/
+      identifier: ai-gateway-list-ai-gateway-providers
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayProviders
+        unstable:
+          - v2
+        order: 13
+    - name: List models available from a provider integration
+      url: /api/latest/ai-gateway/list-models-available-from-a-provider-integration/
+      identifier: ai-gateway-list-models-available-from-a-provider-integration
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayProviderModels
+        unstable:
+          - v2
+        order: 12
+    - name: Get an AI Gateway routing policy
+      url: /api/latest/ai-gateway/get-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-get-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayPolicy
+        unstable:
+          - v2
+        order: 10
+    - name: Delete an AI Gateway routing policy
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-delete-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: Create or replace an AI Gateway routing policy
+      url: /api/latest/ai-gateway/create-or-replace-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-create-or-replace-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertAiGatewayPolicy
+        unstable:
+          - v2
+        order: 9
+    - name: List AI Gateway routing policies
+      url: /api/latest/ai-gateway/list-ai-gateway-routing-policies/
+      identifier: ai-gateway-list-ai-gateway-routing-policies
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayPolicies
+        unstable:
+          - v2
+        order: 8
+    - name: List AI Gateway models by canonical ID
+      url: /api/latest/ai-gateway/list-ai-gateway-models-by-canonical-id/
+      identifier: ai-gateway-list-ai-gateway-models-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModelsByCanonical
+        unstable:
+          - v2
+        order: 7
+    - name: Update an AI Gateway model group
+      url: /api/latest/ai-gateway/update-an-ai-gateway-model-group/
+      identifier: ai-gateway-update-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 34
+    - name: Get an AI Gateway model group
+      url: /api/latest/ai-gateway/get-an-ai-gateway-model-group/
+      identifier: ai-gateway-get-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 33
+    - name: Delete an AI Gateway model group
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-model-group/
+      identifier: ai-gateway-delete-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 35
+    - name: Create an AI Gateway model group
+      url: /api/latest/ai-gateway/create-an-ai-gateway-model-group/
+      identifier: ai-gateway-create-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 32
+    - name: List AI Gateway model groups
+      url: /api/latest/ai-gateway/list-ai-gateway-model-groups/
+      identifier: ai-gateway-list-ai-gateway-model-groups
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModelGroups
+        unstable:
+          - v2
+        order: 31
+    - name: Replace AI Gateway governance controls
+      url: /api/latest/ai-gateway/replace-ai-gateway-governance-controls/
+      identifier: ai-gateway-replace-ai-gateway-governance-controls
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayGovernance
+        unstable:
+          - v2
+        order: 37
+    - name: Get AI Gateway governance controls
+      url: /api/latest/ai-gateway/get-ai-gateway-governance-controls/
+      identifier: ai-gateway-get-ai-gateway-governance-controls
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayGovernance
+        unstable:
+          - v2
+        order: 36
+    - name: Replace an AI Gateway data capture override
+      url: /api/latest/ai-gateway/replace-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-replace-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 52
+    - name: Delete an AI Gateway data capture override
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-delete-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 51
+    - name: Create an AI Gateway data capture override
+      url: /api/latest/ai-gateway/create-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-create-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 50
+    - name: Get the AI Gateway data capture configuration
+      url: /api/latest/ai-gateway/get-the-ai-gateway-data-capture-configuration/
+      identifier: ai-gateway-get-the-ai-gateway-data-capture-configuration
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayDataCaptureConfiguration
+        unstable:
+          - v2
+        order: 49
+    - name: Get an AI Gateway budget instance summary
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budget-instance-summary/
+      identifier: ai-gateway-get-an-ai-gateway-budget-instance-summary
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudgetInstancesSummary
+        unstable:
+          - v2
+        order: 39
+    - name: Reset a budget instance's spend
+      url: /api/latest/ai-gateway/reset-a-budget-instances-spend/
+      identifier: ai-gateway-reset-a-budget-instances-spend
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResetAiGatewayBudgetInstanceSpend
+        unstable:
+          - v2
+        order: 46
+    - name: List AI Gateway budget instance dimension values
+      url: /api/latest/ai-gateway/list-ai-gateway-budget-instance-dimension-values/
+      identifier: ai-gateway-list-ai-gateway-budget-instance-dimension-values
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgetInstanceDimensions
+        unstable:
+          - v2
+        order: 47
+    - name: Override a budget instance's capacity
+      url: /api/latest/ai-gateway/override-a-budget-instances-capacity/
+      identifier: ai-gateway-override-a-budget-instances-capacity
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - OverrideAiGatewayBudgetInstanceCapacity
+        unstable:
+          - v2
+        order: 48
+    - name: List AI Gateway budget instances
+      url: /api/latest/ai-gateway/list-ai-gateway-budget-instances/
+      identifier: ai-gateway-list-ai-gateway-budget-instances
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgetInstances
+        unstable:
+          - v2
+        order: 38
+    - name: Get an AI Gateway budget's current period
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budgets-current-period/
+      identifier: ai-gateway-get-an-ai-gateway-budgets-current-period
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudgetCurrentPeriod
+        unstable:
+          - v2
+        order: 6
+    - name: Update an AI Gateway budget
+      url: /api/latest/ai-gateway/update-an-ai-gateway-budget/
+      identifier: ai-gateway-update-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayBudget
+        unstable:
+          - v2
+        order: 5
+    - name: Get an AI Gateway budget
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budget/
+      identifier: ai-gateway-get-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudget
+        unstable:
+          - v2
+        order: 3
+    - name: Archive an AI Gateway budget
+      url: /api/latest/ai-gateway/archive-an-ai-gateway-budget/
+      identifier: ai-gateway-archive-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayBudget
+        unstable:
+          - v2
+        order: 4
+    - name: Create an AI Gateway budget
+      url: /api/latest/ai-gateway/create-an-ai-gateway-budget/
+      identifier: ai-gateway-create-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayBudget
+        unstable:
+          - v2
+        order: 2
+    - name: List AI Gateway budgets
+      url: /api/latest/ai-gateway/list-ai-gateway-budgets/
+      identifier: ai-gateway-list-ai-gateway-budgets
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgets
+        unstable:
+          - v2
+        order: 1
     - name: AI Guard
       url: /api/latest/ai-guard/
       identifier: ai-guard
@@ -10050,6 +10734,49 @@ menu:
           - ListInvestigations
         unstable: []
         order: 2
+    - name: Bits Security Analyst
+      url: /api/latest/bits-security-analyst/
+      identifier: bits-security-analyst
+      generated: true
+    - name: Get a Bits Security Analyst investigation
+      url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
+      identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Count Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/count-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-count-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CountSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 2
+    - name: List Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/list-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-list-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 1
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
       identifier: ci-visibility-github-accounts
@@ -10521,18 +11248,6 @@ menu:
           - ListCloudWorkloadSecurityAgentRules
         unstable: []
         order: 12
-    - name: Download the Workload Protection policy (US1-FED)
-      url: /api/latest/csm-threats/download-the-workload-protection-policy-us1-fed/
-      identifier: csm-threats-download-the-workload-protection-policy-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DownloadCloudWorkloadPolicyFile
-        unstable: []
-        order: 17
     - name: Update a Workload Protection policy
       url: /api/latest/csm-threats/update-a-workload-protection-policy/
       identifier: csm-threats-update-a-workload-protection-policy
@@ -11712,6 +12427,110 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get a Custom OIDC provider
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
+      identifier: cloud-authentication-get-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 18
+    - name: Delete a Custom OIDC provider
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-provider/
+      identifier: cloud-authentication-delete-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 20
+    - name: Create a Custom OIDC provider
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
+      identifier: cloud-authentication-create-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 19
+    - name: List all Custom OIDC providers
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-providers/
+      identifier: cloud-authentication-list-all-custom-oidc-providers
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthProviders
+        unstable:
+          - v2
+        order: 17
+    - name: Get a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-get-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 22
+    - name: Delete a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-delete-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 24
+    - name: Create a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-create-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 23
+    - name: List all Custom OIDC persona mappings
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-persona-mappings/
+      identifier: cloud-authentication-list-all-custom-oidc-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 21
     - name: Get a GitHub cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
@@ -14113,6 +14932,36 @@ menu:
           - v2
         operationids:
           - ListElasticCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
+    - name: End User Device Monitoring
+      url: /api/latest/end-user-device-monitoring/
+      identifier: end-user-device-monitoring
+      generated: true
+    - name: Get a device
+      url: /api/latest/end-user-device-monitoring/get-a-device/
+      identifier: end-user-device-monitoring-get-a-device
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevice
+        unstable:
+          - v2
+        order: 2
+    - name: Get all devices
+      url: /api/latest/end-user-device-monitoring/get-all-devices/
+      identifier: end-user-device-monitoring-get-all-devices
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevices
         unstable:
           - v2
         order: 1
@@ -20217,6 +21066,58 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Managed Archives
+      url: /api/latest/rum-managed-archives/
+      identifier: rum-managed-archives
+      generated: true
+    - name: Create or update an archive configuration
+      url: /api/latest/rum-managed-archives/create-or-update-an-archive-configuration/
+      identifier: rum-managed-archives-create-or-update-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMArchiveConfig
+        unstable: []
+        order: 3
+    - name: Get an archive configuration
+      url: /api/latest/rum-managed-archives/get-an-archive-configuration/
+      identifier: rum-managed-archives-get-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMArchiveConfig
+        unstable: []
+        order: 2
+    - name: Delete an archive configuration
+      url: /api/latest/rum-managed-archives/delete-an-archive-configuration/
+      identifier: rum-managed-archives-delete-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMArchiveConfig
+        unstable: []
+        order: 4
+    - name: List archive configurations
+      url: /api/latest/rum-managed-archives/list-archive-configurations/
+      identifier: rum-managed-archives-list-archive-configurations
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMArchiveConfigs
+        unstable: []
+        order: 1
     - name: RUM Operations
       url: /api/latest/rum-operations/
       identifier: rum-operations
@@ -20341,6 +21242,82 @@ menu:
           - CreateRUMOperation
         unstable: []
         order: 2
+    - name: RUM Recovery
+      url: /api/latest/rum-recovery/
+      identifier: rum-recovery
+      generated: true
+    - name: Search archived sessions
+      url: /api/latest/rum-recovery/search-archived-sessions/
+      identifier: rum-recovery-search-archived-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRUMArchiveSessions
+        unstable: []
+        order: 1
+    - name: Cancel a batch recovery request
+      url: /api/latest/rum-recovery/cancel-a-batch-recovery-request/
+      identifier: rum-recovery-cancel-a-batch-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMRecoveryBatchRequest
+        unstable: []
+        order: 6
+    - name: Get recovery request progress
+      url: /api/latest/rum-recovery/get-recovery-request-progress/
+      identifier: rum-recovery-get-recovery-request-progress
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoveryRequest
+        unstable: []
+        order: 3
+    - name: Create a recovery request
+      url: /api/latest/rum-recovery/create-a-recovery-request/
+      identifier: rum-recovery-create-a-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMRecoveryRequest
+        unstable: []
+        order: 2
+    - name: List batch recovery requests
+      url: /api/latest/rum-recovery/list-batch-recovery-requests/
+      identifier: rum-recovery-list-batch-recovery-requests
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMRecoveryBatchRequests
+        unstable: []
+        order: 4
+    - name: Estimate recoverable sessions
+      url: /api/latest/rum-recovery/estimate-recoverable-sessions/
+      identifier: rum-recovery-estimate-recoverable-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoverySessionCount
+        unstable: []
+        order: 5
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
       identifier: rum-remote-config
@@ -21025,7 +22002,7 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Rum Metrics
+    - name: RUM Metrics
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
       generated: true
@@ -21089,7 +22066,7 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
-    - name: Rum Replay Heatmaps
+    - name: RUM Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
       generated: true
@@ -21141,7 +22118,7 @@ menu:
           - ListReplayHeatmapSnapshots
         unstable: []
         order: 2
-    - name: Rum Replay Playlists
+    - name: RUM Replay Playlists
       url: /api/latest/rum-replay-playlists/
       identifier: rum-replay-playlists
       generated: true
@@ -21253,7 +22230,7 @@ menu:
           - ListRumReplayPlaylists
         unstable: []
         order: 2
-    - name: Rum Replay Sessions
+    - name: RUM Replay Sessions
       url: /api/latest/rum-replay-sessions/
       identifier: rum-replay-sessions
       generated: true
@@ -21269,7 +22246,7 @@ menu:
           - GetSegments
         unstable: []
         order: 1
-    - name: Rum Replay Viewership
+    - name: RUM Replay Viewership
       url: /api/latest/rum-replay-viewership/
       identifier: rum-replay-viewership
       generated: true
@@ -21321,7 +22298,7 @@ menu:
           - ListRumReplaySessionWatchers
         unstable: []
         order: 4
-    - name: Rum Retention Filters
+    - name: RUM Retention Filters
       url: /api/latest/rum-retention-filters/
       identifier: rum-retention-filters
       generated: true
@@ -21771,82 +22748,6 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
-    - name: Salesforce Integration
-      url: /api/latest/salesforce-integration/
-      identifier: salesforce-integration
-      generated: true
-    - name: Delete a connected Salesforce organization
-      url: /api/latest/salesforce-integration/delete-a-connected-salesforce-organization/
-      identifier: salesforce-integration-delete-a-connected-salesforce-organization
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteSalesforceOrganization
-        unstable: []
-        order: 2
-    - name: Get all connected Salesforce organizations
-      url: /api/latest/salesforce-integration/get-all-connected-salesforce-organizations/
-      identifier: salesforce-integration-get-all-connected-salesforce-organizations
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSalesforceOrganizations
-        unstable: []
-        order: 1
-    - name: Update a Salesforce incident template
-      url: /api/latest/salesforce-integration/update-a-salesforce-incident-template/
-      identifier: salesforce-integration-update-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentTemplate
-        unstable: []
-        order: 5
-    - name: Delete a Salesforce incident template
-      url: /api/latest/salesforce-integration/delete-a-salesforce-incident-template/
-      identifier: salesforce-integration-delete-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentTemplate
-        unstable: []
-        order: 6
-    - name: Create a Salesforce incident template
-      url: /api/latest/salesforce-integration/create-a-salesforce-incident-template/
-      identifier: salesforce-integration-create-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentTemplate
-        unstable: []
-        order: 4
-    - name: Get all Salesforce incident templates
-      url: /api/latest/salesforce-integration/get-all-salesforce-incident-templates/
-      identifier: salesforce-integration-get-all-salesforce-incident-templates
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentTemplates
-        unstable: []
-        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards
@@ -23517,6 +24418,42 @@ menu:
           - ListComponents
         unstable: []
         order: 10
+    - name: Delete an email access policy
+      url: /api/latest/status-pages/delete-an-email-access-policy/
+      identifier: status-pages-delete-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEmailAccessPolicy
+        unstable: []
+        order: 39
+    - name: Create an email access policy
+      url: /api/latest/status-pages/create-an-email-access-policy/
+      identifier: status-pages-create-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEmailAccessPolicy
+        unstable: []
+        order: 37
+    - name: List email access policies
+      url: /api/latest/status-pages/list-email-access-policies/
+      identifier: status-pages-list-email-access-policies
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEmailAccessPolicies
+        unstable: []
+        order: 38
     - name: Update status page
       url: /api/latest/status-pages/update-status-page/
       identifier: status-pages-update-status-page
@@ -24255,6 +25192,75 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Temporal Cloud OpenMetrics Integration
+      url: /api/latest/temporal-cloud-openmetrics-integration/
+      identifier: temporal-cloud-openmetrics-integration
+      generated: true
+    - name: Update a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/update-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-update-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/get-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-get-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/delete-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-delete-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/create-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-create-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Temporal Cloud OpenMetrics accounts
+      url: /api/latest/temporal-cloud-openmetrics-integration/list-temporal-cloud-openmetrics-accounts/
+      identifier: temporal-cloud-openmetrics-integration-list-temporal-cloud-openmetrics-accounts
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporalCloudOpenMetricsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization

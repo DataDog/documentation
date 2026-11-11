@@ -26,7 +26,7 @@ This page explains how to track different kinds of workflow activity and workflo
 
 ## Out-of-the-box dashboard
 
-The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][2] and search for {{< ui >}}Workflows Overview{{< /ui >}}.
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and runs. To find the dashboard, go to your [Dashboard list][2] and search for {{< ui >}}Workflows Overview{{< /ui >}}.
 
 {{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
 
@@ -61,7 +61,7 @@ The list of available metrics is:
 | `datadog.workflows.steps.executions.started`   | Number of workflow instance steps that have started.   |
 | `datadog.workflows.steps.executions.completed` | Number of workflow instance steps that have completed. |
 
-To create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
+To create a monitor that tracks whether daily workflow runs exceed a certain threshold, perform the following steps:
 
 1. Go to [New Monitor][4] and select the {{< ui >}}Metric{{< /ui >}} monitor type.
 1. Under {{< ui >}}Define the metric{{< /ui >}}, for {{< ui >}}a{{< /ui >}}, fill in `datadog.workflows.executions.started`.
@@ -78,7 +78,7 @@ To create a monitor that tracks whether daily workflow executions exceed a certa
 Workflow has executed {{warn_threshold}} times in the last day; manual action might be needed to avoid alerting.
 {{/is_warning}}
 {{#is_alert}}
-Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
+Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic runs for the day.
 {{/is_alert}}
 {{< /code-block >}}
 1. Click {{< ui >}}Create{{< /ui >}}.
@@ -99,11 +99,11 @@ You can also filter the output by {{< ui >}}Status{{< /ui >}} to see only `info`
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
-To track billing for your workflow executions, perform the following steps:
+To track billing for your workflow runs, perform the following steps:
 
 1. Navigate to the [Usage Attribution][6] page.
-1. Under {{< ui >}}Products{{< /ui >}} on the left, search for {{< ui >}}Workflow Executions{{< /ui >}}.
-1. Hover over {{< ui >}}Workflow Executions{{< /ui >}} and click {{< ui >}}Only{{< /ui >}} to view usage attribution for only workflows.
+1. Under {{< ui >}}Products{{< /ui >}} on the left, search for {{< ui >}}Workflow Runs{{< /ui >}}.
+1. Hover over {{< ui >}}Workflow Runs{{< /ui >}} and click {{< ui >}}Only{{< /ui >}} to view usage attribution for only workflows.
 
 
 ## Further reading

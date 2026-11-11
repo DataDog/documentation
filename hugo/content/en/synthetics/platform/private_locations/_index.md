@@ -155,9 +155,11 @@ If the traffic between your private location and Datadog has to go through a pro
 
 #### Blocking reserved IPs
 
-By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the {{< ui >}}Block reserved IPs{{< /ui >}} button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
+New private locations block the reserved IP ranges by default ([IPv4 address registry][6] and [IPv6 address registry][7]). To disable the block, turn off {{< ui >}}Block reserved IPs{{< /ui >}} or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
 
-If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
+Some of the endpoints you want to test might be in the blocked reserved IP ranges. To allow access to them, add their IPs, CIDRs, or domain names. This adds the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
+
+For recommended egress settings and examples, see [Private Location Network Security Hardening][35].
 
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
@@ -186,7 +188,7 @@ Run this command to boot your private location worker by mounting your configura
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
@@ -206,7 +208,7 @@ This command starts a Docker container and makes your private location ready to 
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 2. Start your container with:
 
@@ -273,7 +275,7 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
               secretName: private-location-worker-config
     ```
 
-    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
@@ -306,7 +308,9 @@ Alternatively:
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
+
+In multi-container mode, the Helm chart creates a Kubernetes NetworkPolicy by default. To disable it, set `multiContainer.networkPolicy.create` to `false`.
 
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
@@ -347,7 +351,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 ```
 **Notes:**
 
-- If you have blocked reserved IPs, configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
+- Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][31] to your private location container.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
@@ -387,7 +391,7 @@ Create a new Fargate task definition that matches the following. Replace each pa
 }
 ```
 
-**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+**Note**: AWS Fargate does not support the `NET_ADMIN` capability. The private location still blocks reserved IPs for API tests. The block does not protect Chrome and Edge browser tests. To disable the block, set `enableDefaultBlockedIpRanges` to `false`.
 
 {{< /tab >}}
 
@@ -474,7 +478,7 @@ If you didn't save all the configuration in the secret manager, you can still pa
 }
 ```
 
-**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+**Note**: AWS Fargate does not support the `NET_ADMIN` capability. The private location still blocks reserved IPs for API tests. The block does not protect Chrome and Edge browser tests. To disable the block, set `enableDefaultBlockedIpRanges` to `false`.
 
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 
@@ -521,7 +525,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
               name: private-location-worker-config
     ```
 
-    **Note:** If you have blocked reserved IPs, configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
@@ -599,20 +603,13 @@ Additional parameters can be added:
 
 | Optional Parameter | Definition | Value | Default Value | Type |
 |---|---|---|---|---|
-| APPLYDEFAULTFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
+| APPLYFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
 | APPLYFIREWALLDEFAULTBLOCKRULES | Blocks reserved IP addresses for each browser you have installed (Chrome, Edge, and Firefox). Blocking loopback connections is not possible in Windows Firewall. | 0 | N/A | 0: Disabled<br>1: Enabled |
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
-
-To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
-
-Example:
-
-```cmd
-set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
-```
+| ENABLE_FIPS | Enables FIPS 140-2 cryptographic mode. The Windows host must be running in Windows FIPS mode to use this option. Available in private location v1.63.0 or later. | 0 | N/A | 0: Disabled<br>1: Enabled |
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
@@ -655,7 +652,7 @@ default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
 
 {{% tab "Windows standalone" %}}
 
-To install root certificates for private locations on a standalone Windows process with `synthetics-private-location.exe`, use the following steps:
+To install root certificates for private locations on a standalone Windows process with `synthetics-pl-worker.exe`, use the following steps:
 
 1. Open your Windows command prompt or PowerShell.
 
@@ -664,16 +661,12 @@ To install root certificates for private locations on a standalone Windows proce
 Example:
 
 ```text
-set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-pl-worker.exe --config "C:\ProgramData\Datadog-Synthetics\worker-config.json"
 ```
 
-To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+FIPS 140-2 cryptographic mode is not available for the standalone Windows worker. It applies only to the Windows service. Enable FIPS mode during installation with the **Enable FIPS 140-2 cryptographic mode** option or the `ENABLE_FIPS=1` MSI parameter. For the installer parameters, see the [Install your private location][101] section.
 
-```text
-set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
-```
-
-The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+[101]: /synthetics/platform/private_locations/?tab=windowsviacli#install-your-private-location
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -749,7 +742,7 @@ readinessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
   ],
   "timeout": 2,
   "interval": 10,
@@ -1044,3 +1037,4 @@ Restricting a Private Location may limit other users from adding it to a test or
 [33]: /synthetics/guide/kerberos-authentication/
 [34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
+[35]: /synthetics/platform/private_locations/network_security/

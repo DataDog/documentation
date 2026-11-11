@@ -59,7 +59,7 @@ TLS verification is enabled by default, and may prevent the Agent from connectin
 
 First, ensure that the Cluster Agent is deployed and able to send data to the node Agent.
 
-Then, review the query used to scale the external metrics in the Metrics Summary. Only valid queries autoscale. If there are multiple queries, **all** queries are ignored if **any** of the queries are invalid.
+Then, review the query used to scale the external metrics in the Metrics Catalog. Only valid queries autoscale. If there are multiple queries, **all** queries are ignored if **any** of the queries are invalid.
 
 When reaching out for further assistance for HPA metrics, provide the following to [Datadog support][6]:
   - A `describe` output of the HPA manifest:

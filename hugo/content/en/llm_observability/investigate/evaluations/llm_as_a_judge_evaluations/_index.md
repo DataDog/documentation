@@ -111,15 +111,15 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, Amazon Bedrock, Baseten, Fireworks AI, or Together AI models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
+For Anthropic, Amazon Bedrock, Baseten, Fireworks AI, or Together AI models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
 
 Evaluators that include audio use OpenAI audio models and require [Keyword Search Output](#keyword-search-output). See [Image and Audio Evaluators][19].
 
 For custom providers, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - {{< ui >}}Boolean{{< /ui >}}: True/false results (for example, "Did the model follow instructions?")
@@ -363,7 +363,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="post-processing" %}}
 1. Select the {{< ui >}}JSON{{< /ui >}} output type.
 
 2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you conduct a more complex assessment than just using Boolean, Score, or Categorical structured output.
@@ -468,7 +468,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Custom Provider)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the {{< ui >}}Boolean{{< /ui >}} output type.
    <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
@@ -521,6 +521,8 @@ Select a span to show JSON data available for use in an evaluation. Then, click 
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluator, Datadog automatically runs your evaluator on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluator later.
 
+Each time you save, Datadog keeps a new version of the evaluator. To view, compare, or restore versions, see [Evaluator Versions][20].
+
 Results are available across Agent Observability in near-real-time for published evaluators. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
@@ -544,6 +546,7 @@ For example:
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
+- Filter by the evaluator version that produced the result (example, `@evaluation.helpfulness-check.eval_version:3`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression

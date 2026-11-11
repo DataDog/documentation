@@ -274,8 +274,6 @@ site_support_ids:
     regions: [gov, gov2]
   service_override_removal:
     regions: [gov, gov2]
-  setup_remote_config:
-    regions: [gov, gov2]
   snmp_profile_manager:
     regions: [gov, gov2]
   software_delivery_mcp_tools:
