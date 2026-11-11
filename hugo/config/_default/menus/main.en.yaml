@@ -6326,41 +6326,46 @@ menu:
       parent: cicd_explorer
       identifier: cicd_explorer_search_and_manage
       weight: 405
-    - name: Flaky Test Management
-      url: tests/flaky_management/
-      parent: cicd
-      identifier: cicd_flaky_management
-      weight: 7
-    - name: Working with Flaky Tests
-      url: tests/flaky_tests/
-      parent: cicd_flaky_management
-      identifier: cicd_flaky_management_working_with
-      weight: 501
     - name: Features
       url: cicd/features/
       parent: cicd
       identifier: cicd_features
       weight: 8
-    - name: Automatic Job Retries
-      url: continuous_integration/pipelines/automatic_retries/
-      parent: cicd_features
-      identifier: cicd_features_automatic_job_retries
-      weight: 600
-    - name: Early Flake Detection
-      url: tests/flaky_tests/early_flake_detection/
-      parent: cicd_features
-      identifier: cicd_features_early_flake_detection
-      weight: 601
     - name: Auto Test Retries
       url: tests/flaky_tests/auto_test_retries/
       parent: cicd_features
       identifier: cicd_features_auto_test_retries
+      weight: 600
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_features
+      identifier: cicd_features_automatic_job_retries
+      weight: 601
+    - name: Developer Workflows
+      url: tests/developer_workflows/
+      parent: cicd_features
+      identifier: cicd_features_developer_workflows
       weight: 602
+    - name: Early Flake Detection
+      url: tests/flaky_tests/early_flake_detection/
+      parent: cicd_features
+      identifier: cicd_features_early_flake_detection
+      weight: 603
+    - name: Flaky Management
+      url: tests/flaky_management/
+      parent: cicd_features
+      identifier: cicd_flaky_management
+      weight: 604
+    - name: Working with Flaky Tests
+      url: tests/flaky_tests/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_working_with
+      weight: 501
     - name: Test Impact Analysis
       url: tests/test_impact_analysis/
       parent: cicd_features
       identifier: cicd_features_tia
-      weight: 603
+      weight: 605
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: cicd_features_tia
@@ -6415,7 +6420,7 @@ menu:
       url: tests/test_parallelization/
       parent: cicd_features
       identifier: cicd_features_parallelization
-      weight: 604
+      weight: 606
     - name: Setup
       url: tests/test_parallelization/setup/
       parent: cicd_features_parallelization
@@ -6436,16 +6441,11 @@ menu:
       parent: cicd_features_parallelization
       identifier: cicd_features_parallelization_troubleshooting
       weight: 60404
-    - name: Developer Workflows
-      url: tests/developer_workflows/
-      parent: cicd_features
-      identifier: cicd_features_developer_workflows
-      weight: 605
     - name: Legacy Features
       url: cicd/features/legacy/
       parent: cicd_features
       identifier: cicd_features_legacy
-      weight: 606
+      weight: 607
     - name: Monitors
       url: monitors/types/ci/?tab=pipelines
       parent: cicd
