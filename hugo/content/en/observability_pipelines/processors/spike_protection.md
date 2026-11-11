@@ -106,7 +106,7 @@ The following metrics are specific to the Spike Protection processor:
 
 The Spike Volume processor detects and responds to log volume spikes as follows:
 
-1. The processor groups the logs that match its filter by the attributes you select, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline. In the UI and in metric names, groups are called buckets.
+1. The processor groups the logs that match its filter by the attributes you select, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline.
 1. The Workers report the byte volume of each group to Datadog. Datadog computes the average volume and the standard deviation of each group over the last 24 hours in one-hour intervals.
 1. A group is spiking when both of these conditions are true:
     - Its volume is higher than the average by more than the configured number of standard deviations (the spike threshold). The default threshold is 5 standard deviations.
