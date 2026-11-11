@@ -30,7 +30,7 @@ aliases:
 
 ### Installation
 
-PHP uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ. We also recommend setting `DD_TRACE_STATS_COMPUTATION_ENABLED` to `true`.
+PHP uses auto-instrumentation to inject and extract the metadata that Data Streams Monitoring needs to measure end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services that send messages to or consume messages from Kafka or RabbitMQ. Datadog also recommends setting `DD_TRACE_STATS_COMPUTATION_ENABLED` to `true`.
 
 {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -52,9 +52,9 @@ datadog.trace.stats_computation_enabled = On
 {{% /tab %}}
 {{< /tabs >}}
 
-As with other PHP tracer settings, set it at the server level, so that it is on before any of your code runs. See [PHP SDK configuration][4] for how to set it for your web server or the CLI.
+As with other PHP SDK settings, set these at the server level so that they take effect before any of your code runs. To set them for your web server or the CLI, see [Configuring the PHP SDK][4].
 
-Data Streams Monitoring identifies your service by `DD_SERVICE`. If it is not set, the tracer's default service name is used: `web.request` for web requests, and the script's filename for CLI scripts. Set `DD_SERVICE` on each service so that it appears under its own name in Data Streams Monitoring.
+Data Streams Monitoring identifies your service by `DD_SERVICE`. If `DD_SERVICE` is not set, the SDK uses a default service name: `web.request` for web requests, and the script's filename for CLI scripts. Set `DD_SERVICE` on each service so that it appears under its own name in Data Streams Monitoring.
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
