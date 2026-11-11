@@ -11,6 +11,9 @@ further_reading:
 - link: "/llm_observability/build_with_ai/mcp_server/"
   tag: "Documentation"
   text: "Connect AI agents to Agent Observability"
+- link: "https://www.datadoghq.com/blog/improving-insights-agent-observability/"
+  tag: "Blog"
+  text: "How we use Insights to improve the agent behind Insights"
 ---
 
 ## Overview

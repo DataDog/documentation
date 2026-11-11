@@ -952,41 +952,56 @@ menu:
       identifier: otel_kubernetes_metrics
       parent: otel_integrations
       weight: 810
+    - name: MongoDB Metrics
+      url: opentelemetry/integrations/mongodb_metrics/
+      identifier: otel_mongodb_metrics
+      parent: otel_integrations
+      weight: 811
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: PostgreSQL Metrics
       url: opentelemetry/integrations/postgres_metrics/
       identifier: otel_postgres_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
+    - name: RabbitMQ Metrics
+      url: opentelemetry/integrations/rabbitmq_metrics/
+      identifier: otel_rabbitmq_metrics
+      parent: otel_integrations
+      weight: 816
+    - name: Redis Metrics
+      url: opentelemetry/integrations/redis_metrics/
+      identifier: otel_redis_metrics
+      parent: otel_integrations
+      weight: 817
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 818
     - name: SQL Server Metrics
       url: opentelemetry/integrations/sqlserver_metrics/
       identifier: otel_sqlserver_metrics
       parent: otel_integrations
-      weight: 816
+      weight: 819
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 817
+      weight: 820
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -1654,6 +1669,16 @@ menu:
       identifier: bits_remediation
       parent: bits_ai
       weight: 10
+    - name: Infrastructure Actions
+      url: bits_ai/bits_remediation/infrastructure_actions
+      identifier: bits_remediation_infrastructure_actions
+      parent: bits_remediation
+      weight: 1001
+    - name: Bits Guardrails
+      url: bits_ai/bits_remediation/guardrails
+      identifier: bits_remediation_guardrails
+      parent: bits_remediation
+      weight: 1002
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -3476,6 +3501,11 @@ menu:
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 10302
+    - name: Inference Workloads
+      url: containers/monitoring/kubernetes_ai_inference
+      parent: infrastructure_livecontainers_explorer
+      identifier: infrastructure_livecontainers_inference_workloads
+      weight: 10303
     - name: Remediation
       url: containers/bits_ai_kubernetes_remediation
       parent: infrastructure_livecontainers_explorer
@@ -3751,6 +3781,11 @@ menu:
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
       weight: 812
+    - name: DatadogBYOCCluster CRD
+      url: containers/datadog_operator/crd_byoccluster
+      identifier: containers_datadog_operator_crd_byoccluster
+      parent: containers_datadog_operator
+      weight: 813
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -3828,71 +3863,76 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
       weight: 102
+    - name: MicroVMs
+      url: serverless/aws_lambda/lambda_microvm
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_microvm
+      weight: 103
     - name: Durable Functions
       url: serverless/aws_lambda/durable_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_durable_functions
-      weight: 103
+      weight: 104
     - name: Lambda Metrics
       url: serverless/aws_lambda/metrics
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_metrics
-      weight: 104
+      weight: 105
     - name: Distributed Tracing
       url: serverless/aws_lambda/distributed_tracing
       identifier: serverless_distributed_tracing
       parent: serverless_aws_lambda
-      weight: 105
+      weight: 106
     - name: Log Collection
       url: serverless/aws_lambda/logs
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
-      weight: 106
+      weight: 107
     - name: Remote Instrumentation
       url: serverless/aws_lambda/remote_instrumentation
       identifier: serverless_aws_lambda_remote_instrumentation
       parent: serverless_aws_lambda
-      weight: 107
+      weight: 108
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 108
+      weight: 109
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 109
+      weight: 110
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 110
+      weight: 111
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 111
+      weight: 112
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 112
+      weight: 113
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 113
+      weight: 114
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 114
+      weight: 115
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 115
+      weight: 116
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless_aws
@@ -5239,16 +5279,21 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
       weight: 10309
+    - name: Databricks Lakebase
+      url: database_monitoring/setup_postgres/lakebase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_lakebase
+      weight: 10310
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 10310
+      weight: 10311
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 10311
+      weight: 10312
     - name: MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm_setup
@@ -5414,26 +5459,36 @@ menu:
       parent: dbm_setup_clickhouse
       identifier: dbm_setup_clickhouse_cloud
       weight: 10902
+    - name: IBM Db2
+      url: database_monitoring/setup_db2/
+      parent: dbm_setup
+      identifier: dbm_setup_db2
+      weight: 110
+    - name: Self-hosted
+      url: database_monitoring/setup_db2/selfhosted
+      parent: dbm_setup_db2
+      identifier: dbm_setup_db2_selfhosted
+      weight: 11001
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm_setup
       identifier: dbm_setup_documentdb
-      weight: 110
+      weight: 111
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/amazon_documentdb
       parent: dbm_setup_documentdb
       identifier: dbm_setup_documentdb_amazon_documentdb
-      weight: 11001
+      weight: 11101
     - name: Troubleshooting
       url: database_monitoring/setup_documentdb/troubleshooting
       parent: dbm_setup_documentdb
       identifier: dbm_troubleshooting_documentdb
-      weight: 11002
+      weight: 11102
     - name: Provision the Agent with Terraform
       url: database_monitoring/setup_agent_terraform/
       parent: dbm_setup
       identifier: dbm_setup_agent_terraform
-      weight: 111
+      weight: 112
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
@@ -5828,26 +5883,6 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
       weight: 304
-    - name: Agentic Instrumentation
-      url: llm_observability/instrument/agentic/
-      parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_agentic
-      weight: 305
-    - name: Python
-      url: llm_observability/instrument/agentic/python
-      parent: llm_obs_instrumentation_agentic
-      identifier: llm_obs_instrumentation_agentic_python
-      weight: 30501
-    - name: Node.js
-      url: llm_observability/instrument/agentic/nodejs
-      parent: llm_obs_instrumentation_agentic
-      identifier: llm_obs_instrumentation_agentic_nodejs
-      weight: 30502
-    - name: Java
-      url: llm_observability/instrument/agentic/java
-      parent: llm_obs_instrumentation_agentic
-      identifier: llm_obs_instrumentation_agentic_java
-      weight: 30503
     - name: Correlate with APM
       url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
@@ -5908,36 +5943,41 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 40501
+    - name: Code Evaluators
+      url: llm_observability/investigate/evaluations/code_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_code_evaluations
+      weight: 40502
     - name: Language Mismatch
       url: llm_observability/investigate/evaluations/language_mismatch
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
-      weight: 40502
+      weight: 40503
     - name: Sensitive Data Scanner
       url: llm_observability/investigate/evaluations/managed_evaluations/security_and_safety_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_sensitive_data_scanner
-      weight: 40503
+      weight: 40504
     - name: End-User Feedback
       url: llm_observability/investigate/evaluations/end_user_feedback
       parent: llm_obs_evaluations
       identifier: llm_obs_end_user_feedback
-      weight: 40504
+      weight: 40505
     - name: External Evaluations
       url: llm_observability/investigate/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
-      weight: 40505
+      weight: 40506
     - name: Evaluator Developer Guide
       url: llm_observability/investigate/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
-      weight: 40506
+      weight: 40507
     - name: Compatibility
       url: llm_observability/investigate/evaluations/compatibility
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
-      weight: 40507
+      weight: 40508
     - name: Annotation Queues
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
@@ -6488,10 +6528,10 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
-    - name: Just-In-Time (JIT) Gates
-      url: deployment_gates/setup/jit/
+    - name: Inline Gates
+      url: deployment_gates/setup/inline/
       parent: deployment_gates_setup
-      identifier: deployment_gates_setup_jit
+      identifier: deployment_gates_setup_inline
       weight: 1
     - name: Preconfigured Gates
       url: deployment_gates/setup/preconfigured/
@@ -7305,126 +7345,131 @@ menu:
       url: observability_pipelines/destinations/amazon_security_lake/
       parent: observability_pipelines_destinations
       weight: 403
+    - name: Azure Data Explorer
+      identifier: observability_pipelines_azure_data_explorer
+      url: observability_pipelines/destinations/azure_data_explorer/
+      parent: observability_pipelines_destinations
+      weight: 404
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
-      weight: 404
+      weight: 405
     - name: ClickHouse
       identifier: observability_pipelines_clickhouse
       url: observability_pipelines/destinations/clickhouse/
       parent: observability_pipelines_destinations
-      weight: 405
+      weight: 406
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
-      weight: 406
+      weight: 407
     - name: Databricks (Zerobus)
       identifier: observability_pipelines_databricks
       url: observability_pipelines/destinations/databricks/
       parent: observability_pipelines_destinations
-      weight: 407
+      weight: 408
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
-      weight: 409
+      weight: 410
     - name: Datadog BYOC Logs
       url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_byoc_logs
-      weight: 410
+      weight: 411
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 411
+      weight: 412
     - name: Datadog Metrics
       url: observability_pipelines/destinations/datadog_metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_metrics
-      weight: 412
+      weight: 413
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 413
+      weight: 414
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 414
+      weight: 415
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 415
+      weight: 416
     - name: Google SecOps
       url: observability_pipelines/destinations/google_secops/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_secops
-      weight: 416
+      weight: 417
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 417
+      weight: 418
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 418
+      weight: 419
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 419
+      weight: 420
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 420
+      weight: 421
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 421
+      weight: 422
     - name: OpenTelemetry
       url: observability_pipelines/destinations/opentelemetry/metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_destinations_opentelemetry
-      weight: 422
+      weight: 423
     - name: Prometheus
       url: /observability_pipelines/destinations/prometheus/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_prometheus
-      weight: 423
+      weight: 424
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 424
+      weight: 425
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 425
+      weight: 426
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 426
+      weight: 427
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 427
+      weight: 428
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 428
+      weight: 429
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
@@ -7917,6 +7962,11 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
+    - name: Datadog Operator
+      url: /byoc-logs/install/datadog_operator
+      parent: cloudprem_install
+      identifier: cloudprem_datadog_operator
+      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem
@@ -10681,6 +10731,11 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
       weight: 5
+    - name: Lift and Interval Calculations
+      url: experiments/statistics/lift_and_interval_calculations
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_lift_and_interval_calculations
+      weight: 6
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
@@ -11098,7 +11153,7 @@ menu:
       url: account_management/billing/rum/
       parent: account_management_billing
       weight: 1511
-    - name: CI Visibility
+    - name: CI/CD Optimization
       identifier: account_management_billing_ci_visibility
       url: account_management/billing/ci_visibility/
       parent: account_management_billing

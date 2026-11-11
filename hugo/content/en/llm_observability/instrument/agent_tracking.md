@@ -11,8 +11,6 @@ further_reading:
     text: "Agent Monitoring"
 ---
 
-<div class="alert alert-info">Agent Tracking is in Preview.</div>
-
 ## Overview
 
 Agent Tracking groups the spans in your application by the agent that produced them, so you can monitor each agent, compare its versions, and see how its configuration changed between versions.

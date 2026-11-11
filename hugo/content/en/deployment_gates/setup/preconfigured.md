@@ -2,9 +2,9 @@
 title: Set Up Preconfigured Deployment Gates
 description: "Create gates and rules in Datadog in advance, then reference them by service and environment at deployment time."
 further_reading:
-- link: "/deployment_gates/setup/jit"
+- link: "/deployment_gates/setup/inline"
   tag: "Documentation"
-  text: "Set up Just-In-Time (JIT) Deployment Gates"
+  text: "Set up inline Deployment Gates"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"
@@ -12,7 +12,7 @@ further_reading:
 
 With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
-Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].
+Looking to define rules in your deployment configuration? See [Inline Deployment Gates][5].
 
 ## Create a gate
 
@@ -584,6 +584,6 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /api/latest/deployment-gates
-[5]: /deployment_gates/setup/jit
+[5]: /deployment_gates/setup/inline
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
 [7]: https://app.datadoghq.com/ci/deployment-gates/evaluations
