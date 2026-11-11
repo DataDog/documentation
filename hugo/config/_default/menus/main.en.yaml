@@ -8646,6 +8646,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_ci_cd
       weight: 103
+    - name: Link Images to Dockerfiles
+      url: security/cloud_security_management/setup/dockerfile_labels
+      parent: csm_setup
+      identifier: csm_setup_dockerfile_labels
+      weight: 105
     - name: Set Up CloudTrail Logs
       url: security/cloud_security_management/setup/cloudtrail_logs
       parent: csm_setup
