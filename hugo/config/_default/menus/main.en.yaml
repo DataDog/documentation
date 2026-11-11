@@ -6136,69 +6136,64 @@ menu:
       parent: cicd
       identifier: cicd_ci_visibility
       weight: 1
-    - name: CI Pipeline Setup
-      url: continuous_integration/pipelines/
-      parent: cicd
-      identifier: cicd_pipeline_setup
-      weight: 2
     - name: AWS CodePipeline
       url: continuous_integration/pipelines/awscodepipeline/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_awscodepipeline
       weight: 101
     - name: Azure Pipelines
       url: continuous_integration/pipelines/azure/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_azure
       weight: 102
     - name: Buildkite
       url: continuous_integration/pipelines/buildkite/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_buildkite
       weight: 103
     - name: CircleCI
       url: continuous_integration/pipelines/circleci/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_circleci
       weight: 104
     - name: Codefresh
       url: continuous_integration/pipelines/codefresh/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_codefresh
       weight: 105
     - name: GitHub Actions
       url: continuous_integration/pipelines/github/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_github
       weight: 106
     - name: GitLab
       url: continuous_integration/pipelines/gitlab/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_gitlab
       weight: 107
     - name: Jenkins
       url: continuous_integration/pipelines/jenkins/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_jenkins
       weight: 108
     - name: TeamCity
       url: continuous_integration/pipelines/teamcity/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_teamcity
       weight: 109
     - name: Other CI Providers
       url: continuous_integration/pipelines/custom/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_custom
       weight: 110
     - name: Custom Commands
       url: continuous_integration/pipelines/custom_commands/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_custom_commands
       weight: 112
     - name: Custom Tags and Measures
       url: continuous_integration/pipelines/custom_tags_and_measures/
-      parent: cicd_pipeline_setup
+      parent: cicd_ci_visibility
       identifier: cicd_pipeline_custom_tags_and_measures
       weight: 113
     - name: Test Optimization
