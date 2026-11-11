@@ -1,6 +1,6 @@
 ---
-title: Create Custom Annotation Views
-description: Build, preview, and use a custom App to display interactions in an annotation queue.
+title: Built-in and Custom Annotation Views
+description: Review interactions with built-in views or build, preview, and publish a custom annotation view.
 further_reading:
   - link: /llm_observability/investigate/annotation_queues/
     tag: Documentation
@@ -15,18 +15,74 @@ further_reading:
 
 ## Overview
 
-Build custom annotation views with [Datadog Apps][1] to display the interaction you are reviewing. Use a local coding agent to build a view that fits your review workflow. For example, display tool calls as a timeline and highlight failed steps.
+Annotation views control how the annotation workspace displays the interaction you are reviewing. Choose a built-in view for conversations, structured data, or generated web pages. Build a custom view with [Datadog Apps][1] when your review workflow needs a different presentation.
 
-The annotation workspace helps you install the Datadog Apps skill and generate a prompt for your agent. Then preview the published App with the selected interaction.
+Use the same interaction view while applying individual annotations or reviewing [final scores][8].
 
 ## Prerequisites
 
 - An [annotation queue][2] with an interaction to review.
-- Access to the {{< ui >}}Create a custom view{{< /ui >}} option in the annotation workspace.
-- A local coding agent and Node.js version 20.12.0 or later. See the [Datadog Apps prerequisites][3].
-- Permission to create and publish Datadog Apps in the organization where you review annotations. See [App permissions][4].
+- Access to the view menu in the annotation workspace.
+
+## Use a built-in view
+
+1. Open an interaction in an annotation queue.
+2. Open the view menu.
+3. Under {{< ui >}}Default Views{{< /ui >}}, select a view:
+
+   | View | Use it to |
+   |------|-----------|
+   | {{< ui >}}Trace Conversation{{< /ui >}} | Review messages and tool calls as a conversation. |
+   | {{< ui >}}Data Explorer{{< /ui >}} | Examine JSON objects and arrays from the selected span's output. |
+   | {{< ui >}}Web Page Renderer{{< /ui >}} | Preview HTML and CSS from the selected span's output. |
+
+Select {{< ui >}}Full Interaction{{< /ui >}} to return to the standard trace or session view.
+
+### Review a trace conversation
+
+Use {{< ui >}}Trace Conversation{{< /ui >}} to follow messages and tool calls across a trace:
+
+- Search message content, span names, and services.
+- Enable {{< ui >}}System messages{{< /ui >}} to include system and context messages.
+- Select a message or tool call to select its associated span.
+- Switch between {{< ui >}}Chat{{< /ui >}} and {{< ui >}}Span{{< /ui >}} to review the conversation or the selected span's input and output.
+- Copy individual messages, tool calls, inputs, or outputs for further review.
+
+A preview trace can contain truncated span content. Check the preview notice when interpreting a conversation.
+
+### Explore structured output
+
+Use {{< ui >}}Data Explorer{{< /ui >}} when the selected span returns a JSON object or array:
+
+- Search for keys or values.
+- Use {{< ui >}}Structured{{< /ui >}} to explore nested fields and expand or collapse objects and arrays.
+- Use {{< ui >}}JSON{{< /ui >}} to inspect the formatted JSON output.
+
+Selecting another span updates the output and resets the search and expansion state. If the span has no supported structured output, select another span or use {{< ui >}}Full Interaction{{< /ui >}}.
+
+### Preview web page output
+
+Use {{< ui >}}Web Page Renderer{{< /ui >}} to review generated page output. Supported formats include raw or fenced HTML and JSON with `document`, `html`, or `code` fields. JSON can also include separate `css` and `javascript` or `js` fields.
+
+The preview renders HTML and CSS with scripts disabled. Content that depends on JavaScript or external resources may appear incomplete. Select a span with page output to display its preview.
+
+## Use a published custom view
+
+1. Open the view menu in an annotation queue interaction.
+2. Search for a view under {{< ui >}}My Custom Views{{< /ui >}} or {{< ui >}}All Custom Views{{< /ui >}}.
+3. Select the view to display the interaction with that App.
+
+Select the star next to a custom view to keep it at the top of its group. Custom views follow [App permissions][4].
+
+The workspace remembers the last view that loaded successfully for your user and organization in the same browser. Copy the interaction URL to share the selected view. Recipients need access to the queue and, for custom views, the App.
 
 ## Create a custom view
+
+To create a custom view, you need:
+
+- Access to {{< ui >}}Create a custom view{{< /ui >}} in the view menu.
+- A local coding agent and Node.js version 20.12.0 or later. See the [Datadog Apps prerequisites][3].
+- Permission to create and publish Datadog Apps in the organization where you review annotations. See [App permissions][4].
 
 Open an interaction in an annotation queue. In the view menu, select {{< ui >}}Create a custom view{{< /ui >}}.
 
@@ -105,3 +161,4 @@ Select {{< ui >}}Refresh{{< /ui >}} to retry loading the list.
 [5]: /actions/datadog_apps/#build-and-upload-your-app
 [6]: /actions/datadog_apps/#publish-and-manage-your-apps
 [7]: /account_management/api-app-keys/#actions-api-access
+[8]: /llm_observability/guide/annotation_final_scores/

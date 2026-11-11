@@ -122,7 +122,9 @@ Review Mode displays:
 
 ### Customizing the interaction view
 
-Use a custom App to display the interaction you are reviewing. Open the view menu and select {{< ui >}}Create a custom view{{< /ui >}} to start building with a local coding agent. Preview the view and apply it to the annotation workspace. See [Create Custom Annotation Views][18] for setup instructions.
+Open the view menu to choose how the workspace displays an interaction. Use {{< ui >}}Trace Conversation{{< /ui >}} for messages and tool calls. Use {{< ui >}}Data Explorer{{< /ui >}} for structured output or {{< ui >}}Web Page Renderer{{< /ui >}} for generated HTML and CSS. Select {{< ui >}}Full Interaction{{< /ui >}} for the standard trace or session view.
+
+To build a view with a local coding agent, select {{< ui >}}Create a custom view{{< /ui >}}. See [Built-in and Custom Annotation Views][18] for view controls, custom-view setup, and publishing instructions.
 
 ### Applying labels
 
@@ -130,6 +132,12 @@ For each trace:
 1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
 2. **Apply labels**: Fill in the configured labels based on your assessment.
 3. Annotations are autosaved.
+
+### Reviewing final scores
+
+Use {{< ui >}}Finalized Score{{< /ui >}} to review annotator responses and record final label values for an interaction. Review suggested values, assessments, and reasoning, resolve pending suggestions, and click {{< ui >}}Save{{< /ui >}}. Users who can manage the queue can save final scores.
+
+The queue's {{< ui >}}Final Scores{{< /ui >}} table shows the reviewed results. See [Review Annotation Final Scores][19] for response summaries, evaluation comparisons, and export options.
 
 ### Adding comments
 
@@ -435,3 +443,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [16]: /llm_observability/data_governance/
 [17]: /llm_observability/data_governance/access_control/
 [18]: /llm_observability/guide/custom_annotation_views/
+[19]: /llm_observability/guide/annotation_final_scores/
