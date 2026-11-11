@@ -1676,7 +1676,7 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 Tools for [GPU Monitoring][97], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, and ranking GPU kernels.
 
-<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
+<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter; for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
 
 All tools in this toolset are read-only. For setup steps, see [GPU Monitoring MCP tools][98].
 
