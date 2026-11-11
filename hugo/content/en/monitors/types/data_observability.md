@@ -217,12 +217,12 @@ In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select
 The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
 {{< /callout >}}
 
-For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the {{< ui >}}Model configuration{{< /ui >}} section, which is collapsed by default, to refine how the model behaves. Model configuration is part of the monitor definition. To change it on an existing monitor, edit the monitor. It is separate from [bound annotations](#annotate-bounds), which you add from the monitor's status page.
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the {{< ui >}}Model configuration{{< /ui >}} section, which is collapsed by default, to refine how the model behaves. Model configuration is part of the monitor definition. To change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
 
 | Setting | Description |
 |---|---|
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
-| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's own units: rows for Row Count, and percentage points for percentage metrics such as Nullness. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. The model can still set a wider bound. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's own units: seconds for Freshness, rows for Row Count, percentage points for percentage metrics such as Nullness, and the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value, and a value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a multiplier on bound width that is roughly equivalent to a number of standard deviations: `3` by default, from `0.1` (narrowest bounds) to `6` (widest bounds). In the API, this is the `sensitivity` option. Configured minimum bound sizes still apply. |
 | {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
@@ -231,7 +231,7 @@ To choose how to tune a monitor:
 
 - To get more or fewer alerts across the whole series, adjust {{< ui >}}Sensitivity{{< /ui >}}. Bounds scale with how much the metric normally varies.
 - To avoid alerts on deviations smaller than a fixed amount, such as fewer than 1,000 rows from the predicted value, set a minimum bound size.
-- To correct how the model handled specific points, such as a missed alert or a false alert, [annotate the bounds](#annotate-bounds).
+- To correct how the model handled specific points, such as a missed alert or a false alert, annotate the bounds. See the [Annotate bounds](#annotate-bounds) section.
 
 ### Monitor schedule
 
