@@ -170,19 +170,21 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 
 ## Configure what RUM collects
 
-After you enable RUM, the SDK collects some data automatically. Some features need an extra step to turn on, and others are optional. Use the following pages to review the defaults and configure what the SDK collects:
+After you enable RUM, the SDK collects some data automatically. Some features need an extra step to turn on, and others are optional.
 
-- [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/): Configure the session sample rate and retrieve session IDs.
-- [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/): Stop data collection and clear data stored on the device.
-- [Track Errors and Crashes](/real_user_monitoring/setup/enable_rum/track_errors/): Collect errors and crashes, and upload debug symbols to get readable stack traces.
-- [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/): Track network requests as RUM resources.
-- [Track Application Startups](/real_user_monitoring/setup/enable_rum/track_application_startups/): Measure how long your application takes to start.
-- [Track UI Latency](/real_user_monitoring/setup/enable_rum/track_ui_latency/): Measure rendering performance, Core Web Vitals, and mobile vitals.
-- [Track Navigation](/real_user_monitoring/setup/enable_rum/track_navigation/): Track views automatically or manually.
-- [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/): Track user interactions automatically and send custom actions.
-- [Track Frustration Signals](/real_user_monitoring/setup/enable_rum/track_frustration_signals/): Surface rage clicks, dead clicks, and error taps.
-- [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/): Track events that occur while your application runs in the background.
-- [Advanced Configuration](/real_user_monitoring/setup/enable_rum/advanced_configuration/): Review initialization parameters and other advanced options.
+{% whatsnext desc="Use the following pages to review the defaults and configure what the SDK collects" %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/manage_sessions/" %}Manage Sessions: Configure the session sample rate and retrieve session IDs.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/manage_data_collection/" %}Manage Data Collection: Stop data collection and clear data stored on the device.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_errors/" %}Track Errors and Crashes: Collect errors and crashes, and upload debug symbols to get readable stack traces.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_network_requests/" %}Track Network Requests: Track network requests as RUM resources.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_application_startups/" %}Track Application Startups: Measure how long your application takes to start.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/" %}Track UI Latency: Measure rendering performance, Core Web Vitals, and mobile vitals.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_navigation/" %}Track Navigation: Track views automatically or manually.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_user_interactions/" %}Track User Interactions: Track user interactions automatically and send custom actions.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_frustration_signals/" %}Track Frustration Signals: Surface rage clicks, dead clicks, and error taps.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/track_background_events/" %}Track Background Events: Track events that occur while your application runs in the background.{% /nextlink %}
+{% nextlink href="/real_user_monitoring/setup/enable_rum/advanced_configuration/" %}Advanced Configuration: Review initialization parameters and other advanced options.{% /nextlink %}
+{% /whatsnext %}
 
 ## Start monitoring
 
