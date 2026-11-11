@@ -23,26 +23,28 @@ further_reading:
     text: "Troubleshoot Test Parallelization"
 ---
 
-Choose your CI provider, platform, and test framework to see the recommended configuration for your suite. {% #adopt-ddtest-in-ci %}
+## Overview
 
-{% collapse-content title="Concepts: CI nodes, workers, and plans" level="h2" id="concepts" %}
+Test Parallelization shortens CI test runs by splitting test files across CI nodes based on test durations from Test Optimization. This balances the workload so nodes finish at about the same time. With [Test Impact Analysis][1], it also uses fewer CI nodes when fewer tests need to run.
 
-- A **CI node** is one execution environment, such as a GitHub Actions job.
-- A **worker** is a test process started by `ddtest`. Each CI node runs one worker by default.
-- A **plan** is the `.testoptimization/` directory containing the selected test files, parallelism, and assignments.
+This page uses the following terms:
 
-{% /collapse-content %}
+- **CI node**: One execution environment, such as a GitHub Actions job.
+- **Worker**: A test process started by `ddtest`. Each CI node runs one worker by default.
+- **Plan**: The `.testoptimization/` directory that lists the selected test files, the parallelism, and which files go to each CI node.
+
+Select your CI provider, platform, and test framework to see the recommended configuration for your suite. {% #adopt-ddtest-in-ci %}
 
 ## Prerequisites
 
-- Confirm that your framework, runtime, and Datadog library meet the [Test Parallelization compatibility requirements](/tests/test_parallelization/#compatibility).
-- Set up [Test Optimization](/tests/setup/) for the suite. Reuse its credentials, `DD_SITE`, `DD_SERVICE`, and instrumentation.
+- Confirm that your framework, runtime, and Datadog library meet the [Test Parallelization compatibility requirements][2].
+- Set up [Test Optimization][3] for the suite. Reuse its credentials, `DD_SITE`, `DD_SERVICE`, and instrumentation.
 - Install Git and check out the repository.
 - Use the same runtime, dependencies, configuration, environment, project directory, and source revision for planning and execution.
 
 {% if not(equals($platform, "webdriverio")) %}
 
-To skip unaffected tests, enable [Test Impact Analysis](/tests/test_impact_analysis/) for the service.
+To skip unaffected tests, enable [Test Impact Analysis][1] for the service.
 
 {% /if %}
 
@@ -60,30 +62,30 @@ curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh
 
 {% if equals($prog_lang, "ruby") %}
 
-Repeat your [Ruby Test Optimization setup](/tests/setup/ruby/) in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Test discovery needs the `datadog-ci` gem installed in the same Ruby and Bundler environment as the tests. Keep this setup in every test job too.
+Repeat your [Ruby Test Optimization setup][4] in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Test discovery needs the `datadog-ci` gem installed in the same Ruby and Bundler environment as the tests. Keep this setup in every test job too.
 
 {% /if %}
 {% if equals($prog_lang, "python") %}
 
-Repeat your [Python Test Optimization setup](/tests/setup/python/) in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Full discovery needs `ddtrace` available in the environment used by pytest; `ddtest` enables its pytest plugin. Keep this setup in every test job too.
+Repeat your [Python Test Optimization setup][5] in the planning job before `ddtest plan`, including the auto-instrumentation GitHub Action or CircleCI orb, if you use one. Full discovery needs `ddtrace` available in the environment used by pytest; `ddtest` enables its pytest plugin. Keep this setup in every test job too.
 
 {% /if %}
 {% if equals($prog_lang, "javascript") %}
 
 JavaScript file discovery does not require auto-instrumentation, but planning needs a Datadog connection to retrieve settings, test durations, and Test Impact Analysis decisions. For Agentless mode, set `DD_API_KEY`, `DD_SITE`, and `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` in every job that runs `ddtest`. For Agent-based setups, make the same Agent connection available to planning and test jobs.
 
-Install the dependencies used by your test configuration and discovery hooks, including any Datadog SDK imports they contain. Keep your [JavaScript Test Optimization setup](/tests/setup/javascript/) in every test job before `ddtest run`.
+Install the dependencies used by your test configuration and discovery hooks, including any Datadog SDK imports they contain. Keep your [JavaScript Test Optimization setup][6] in every test job before `ddtest run`.
 
 {% /if %}
 
 {% if equals($ci_provider, "other_ci_single_node") %}
 
-Set `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` to the maximum number of local workers your CI node can support. See [parallelism tuning](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget).
+Set `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` to the maximum number of local workers your CI node can support. See [parallelism tuning][7].
 
 {% /if %}
 {% if not(equals($ci_provider, "other_ci_single_node")) %}
 
-Set `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` to the maximum number of CI nodes in your budget. See [parallelism tuning](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget).
+Set `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` to the maximum number of CI nodes in your budget. See [parallelism tuning][7].
 
 {% /if %}
 
@@ -115,7 +117,7 @@ Restore dependency caches and run your installation command before planning and 
 
 {% /if %}
 
-See [dependency caching](/tests/test_parallelization/best_practices/#cache-project-dependencies) for cache examples. {% #ci-examples %}
+See [dependency caching][8] for cache examples. {% #ci-examples %}
 
 <!-- actions -->
 {% if equals($ci_provider, "github_actions") %}
@@ -277,7 +279,7 @@ For workflows with several suites, put each suite's `DD_TEST_OPTIMIZATION_RUNNER
 <!-- circleci -->
 {% if equals($ci_provider, "circleci") %}
 
-Enable [dynamic configuration](https://circleci.com/docs/guides/orchestrate/dynamic-config/) to pass the planned node count to a continuation workflow. Keep one setup workflow and continue immediately after planning. Extend an existing continuation if you have one; preserve its parameters, contexts, filters, and unrelated jobs. CircleCI allows one continuation per pipeline, within six hours of creation. {% #circleci %}
+Enable [dynamic configuration][9] to pass the planned node count to a continuation workflow. Keep one setup workflow and continue immediately after planning. Extend an existing continuation if you have one; preserve its parameters, contexts, filters, and unrelated jobs. CircleCI allows one continuation per pipeline, within six hours of creation. {% #circleci %}
 
 In `.circleci/config.yml`, retain your executor and setup steps. Use the same `environment` settings in both jobs and retain their existing variables. Keep credentials in CircleCI contexts or project settings. The `cimg/base` image below is a placeholder for the **existing test image** with the selected language runtime:
 
@@ -554,7 +556,7 @@ If the existing job is already sharded, preserve its suite boundary or consolida
 
 Keep options such as tags, seeds, and formatters. To customize test file selection, use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`.
 
-Keep your existing instrumentation and apply the same environment settings to planning and execution. See [Custom test commands](/tests/test_parallelization/configuration/#custom-test-commands).
+Keep your existing instrumentation and apply the same environment settings to planning and execution. See [Custom test commands][10].
 
 <!-- ruby -->
 {% if equals($prog_lang, "ruby") %}
@@ -620,7 +622,7 @@ PYTEST_ADDOPTS: "-c config/pytest.ini -q"
 DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION: "{tests/unit,tests/integration}/**/test_*.py"
 ```
 
-Adapt the quoted glob to your **files**, using braces for multiple roots. Keep file paths out of `PYTEST_ADDOPTS`; `ddtest` supplies each worker's files. Alternate configuration files and collection overrides may also need a matching glob. See [pytest discovery](/tests/test_parallelization/configuration/#pytest-test-discovery).
+Adapt the quoted glob to your **files**, using braces for multiple roots. Keep file paths out of `PYTEST_ADDOPTS`; `ddtest` supplies each worker's files. Alternate configuration files and collection overrides may also need a matching glob. See [pytest discovery][11].
 
 Install `ddtrace` in the launcher's environment. For wrappers such as tox, allow Datadog and CI environment variables through.
 
@@ -640,7 +642,7 @@ Keep your package manager, lockfile, and `NODE_OPTIONS` loaders. `ddtest` reuses
 
 Test Optimization supports `jest-circus` with the `node` or `jsdom` test environment.
 
-Retain existing flags such as `--runInBand` in a [custom Jest command](/tests/test_parallelization/best_practices/#jest).
+Retain existing flags such as `--runInBand` in a [custom Jest command][12].
 
 {% /if %}
 <!-- End jest -->
@@ -654,7 +656,7 @@ Install Vitest and any configured coverage or environment packages in the projec
 
 For a non-default configuration file, also set `DD_TEST_OPTIMIZATION_RUNNER_VITEST_CONFIG` to its path in your CI environment.
 
-**Do not set `--command` or `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`** for Vitest. Put projects, filters, reporters, output paths, and coverage options in [Vitest configuration](/tests/test_parallelization/best_practices/#vitest).
+**Do not set `--command` or `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`** for Vitest. Put projects, filters, reporters, output paths, and coverage options in [Vitest configuration][13].
 
 Run from the package directory and run any package-script preparation before `ddtest`; it does not run npm life cycle scripts. Keep Vitest's setup and teardown.
 
@@ -666,7 +668,7 @@ Run from the package directory and run any package-script preparation before `dd
 
 #### Mocha {% #mocha %}
 
-Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `ddtest` uses the suite paths during discovery and runs only each worker's assigned test files. Shared setup runs in every worker. For command-line options, see [Mocha command overrides](/tests/test_parallelization/best_practices/#mocha).
+Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `ddtest` uses the suite paths during discovery and runs only each worker's assigned test files. Shared setup runs in every worker. For command-line options, see [Mocha command overrides][14].
 
 {% /if %}
 <!-- End mocha -->
@@ -676,7 +678,7 @@ Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `
 
 #### Cucumber.js {% #cucumber %}
 
-Preserve profiles, support code, paths, tags, and name filters in a [custom Cucumber command](/tests/test_parallelization/best_practices/#cucumberjs). Use tag or name filters instead of scenario-line or rerun selections: `ddtest` assigns whole feature files. If a test script also runs preparation steps or other frameworks, run those separately.
+Preserve profiles, support code, paths, tags, and name filters in a [custom Cucumber command][15]. Use tag or name filters instead of scenario-line or rerun selections: `ddtest` assigns whole feature files. If a test script also runs preparation steps or other frameworks, run those separately.
 
 {% /if %}
 <!-- End cucumber -->
@@ -686,7 +688,7 @@ Preserve profiles, support code, paths, tags, and name filters in a [custom Cucu
 
 #### Cypress {% #cypress %}
 
-Keep the Cypress [Test Optimization plugin and support-file instrumentation](/tests/setup/javascript/?tab=cypress).
+Keep the Cypress [Test Optimization plugin and support-file instrumentation][16].
 
 `ddtest` supplies `--spec`. Move any existing `--spec` selection to a file glob in your CI environment:
 
@@ -695,7 +697,7 @@ DD_TEST_OPTIMIZATION_RUNNER_COMMAND: 'pnpm exec cypress run --browser electron'
 DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION: 'cypress/e2e/smoke-*.cy.js'
 ```
 
-Start the application and wait for it to be ready in every test job. Install the required browser and [isolate resources](/tests/test_parallelization/best_practices/#isolate-workers), including Xvfb displays, when workers share a node.
+Start the application and wait for it to be ready in every test job. Install the required browser and [isolate resources][17], including Xvfb displays, when workers share a node.
 
 {% /if %}
 <!-- End cypress -->
@@ -705,7 +707,7 @@ Start the application and wait for it to be ready in every test job. Install the
 
 #### Playwright {% #playwright %}
 
-Remove native `--shard` options. Keep browser installation, project dependencies, and setup/teardown in Playwright configuration. Preserve selected projects and other flags in a [custom Playwright command](/tests/test_parallelization/best_practices/#playwright).
+Remove native `--shard` options. Keep browser installation, project dependencies, and setup/teardown in Playwright configuration. Preserve selected projects and other flags in a [custom Playwright command][18].
 
 {% /if %}
 <!-- End playwright -->
@@ -727,7 +729,7 @@ Keep browser capabilities, services, hooks, reporters, and application setup. `d
 
 Remote cloud grids and grouped specs such as `[['setup.js', 'case.js']]` are unsupported. Flatten groups only if the files can run independently.
 
-Keep [WebdriverIO instrumentation](/tests/setup/javascript/?tab=webdriverio) for test reporting; Test Impact Analysis skipping and per-test coverage are unsupported. [Isolate ports and report paths](/tests/test_parallelization/best_practices/#isolate-workers) when workers share a node.
+Keep [WebdriverIO instrumentation][19] for test reporting; Test Impact Analysis skipping and per-test coverage are unsupported. [Isolate ports and report paths][17] when workers share a node.
 
 {% /if %}
 <!-- End webdriverio -->
@@ -749,7 +751,28 @@ cat .testoptimization/runner/test-files.txt
 Check that:
 
 - The plan covers the intended suite without unexpected omissions or duplicates. Test Impact Analysis can exclude skipped files.
-- CI node and worker counts respect your capacity, and concurrent workers have [isolated resources](/tests/test_parallelization/best_practices/#isolate-workers).
-- Tests, failures, and skips appear in [Test Optimization Explorer](/tests/explorer/), and test and coverage reports upload successfully.
+- CI node and worker counts respect your capacity, and concurrent workers have [isolated resources][17].
+- Tests, failures, and skips appear in [Test Optimization Explorer][20], and test and coverage reports upload successfully.
 
-Compare CI cost and duration with your previous setup, then [adjust the parallelism budget](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget). {% #4-measure-ci-savings %}
+Compare CI cost and duration with your previous setup, then [adjust the parallelism budget][7]. {% #4-measure-ci-savings %}
+
+[1]: /tests/test_impact_analysis/
+[2]: /tests/test_parallelization/#compatibility
+[3]: /tests/setup/
+[4]: /tests/setup/ruby/
+[5]: /tests/setup/python/
+[6]: /tests/setup/javascript/
+[7]: /tests/test_parallelization/best_practices/#choose-a-parallelism-budget
+[8]: /tests/test_parallelization/best_practices/#cache-project-dependencies
+[9]: https://circleci.com/docs/guides/orchestrate/dynamic-config/
+[10]: /tests/test_parallelization/configuration/#custom-test-commands
+[11]: /tests/test_parallelization/configuration/#pytest-test-discovery
+[12]: /tests/test_parallelization/best_practices/#jest
+[13]: /tests/test_parallelization/best_practices/#vitest
+[14]: /tests/test_parallelization/best_practices/#mocha
+[15]: /tests/test_parallelization/best_practices/#cucumberjs
+[16]: /tests/setup/javascript/?tab=cypress
+[17]: /tests/test_parallelization/best_practices/#isolate-workers
+[18]: /tests/test_parallelization/best_practices/#playwright
+[19]: /tests/setup/javascript/?tab=webdriverio
+[20]: /tests/explorer/
