@@ -58,18 +58,18 @@ For Custom SQL monitors, select a model type for your metric: **Freshness**, **P
 
 ## Seasonality
 
-The model uses up to 400 days of history to adjust for seasonal patterns, trends, and past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
+The model adjusts for seasonal patterns, trends, and past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
 
-The following seasonal patterns are detected:
+The following seasonal patterns are detected. How much history the model uses depends on the pattern:
 
-| Pattern | Description |
-|---------|-------------|
-| Hour of day | Metrics that follow intraday patterns, such as higher row counts during business hours. |
-| Hour of week | Metrics with consistent patterns across a full week at hourly granularity. |
-| Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. |
-| Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. |
+| Pattern | Description | History used |
+|---------|-------------|--------------|
+| Hour of day | Metrics that follow intraday patterns, such as higher row counts during business hours. | About the last month |
+| Hour of week | Metrics with consistent patterns across a full week at hourly granularity. | About the last 3 months |
+| Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. | About the last 3 months |
+| Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. | Up to 400 days |
 
-Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal history before it can detect a given pattern.
+Not all seasonal patterns are available for all metric types. The model requires at least two complete cycles of normal history to detect a pattern, and typically detects it after three or more. For example, the model can detect a weekly pattern after two weeks of history, but usually detects it after three or more weeks. Backfilled history counts toward these cycles the same way as history the monitor collected itself.
 
 ## Trends
 
