@@ -30,7 +30,7 @@ aliases:
 
 ### Installation
 
-PHP uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ. Datadog also recommends setting `DD_TRACE_STATS_COMPUTATION_ENABLED` to `true`.
+PHP uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ. We also recommend setting `DD_TRACE_STATS_COMPUTATION_ENABLED` to `true`.
 
 {{< tabs >}}
 {{% tab "Environment variables" %}}
