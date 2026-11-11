@@ -554,6 +554,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Synapse Dedicated SQL Pool
+      recommendation_type: Delete Idle Azure Synapse Dedicated SQL Pool
+      recommendation_description: Identifies Azure Synapse dedicated SQL pools that are online and billing for on-demand compute but ran no queries over the past 30 days, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Delete Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU metrics.
