@@ -417,6 +417,12 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
+      recommendation_type: Delete Idle Azure Functions Premium Plan
+      recommendation_description: Identifies Azure Functions Premium plans with no function executions or HTTP requests, and recommends deleting the plan and its function apps.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: App Service Plan
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
