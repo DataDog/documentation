@@ -189,9 +189,9 @@ datadog-security-cli image myapp:latest --output json
 
 ## Link Dockerfile to vulnerabilities
 
-To link detected vulnerabilities back to the Dockerfile that built an image, add image source labels to your images. With these labels, Datadog displays a preview of the Dockerfile in the Container Image Vulnerabilities panel and enables source-based remediation. For the full list of labels, and for how to add them with Datadog pull requests or at build time, see [Link Container Images to Dockerfiles][15].
+To link detected vulnerabilities back to the Dockerfile that built an image, add image source labels to your images. With these labels, Datadog displays a preview of the Dockerfile in the Container Image Vulnerabilities panel and enables source-based remediation. For the full list of labels and the ways to add them, see [Link Container Images to Dockerfiles][15].
 
-Image source labels set in your Dockerfile also apply to images scanned by Agentless Scanning. The Datadog Security CLI also reads OCI annotations, and `org.opencontainers.image.revision` is recommended to pin the link to the commit that built the image:
+Image source labels set in your Dockerfile also apply to images scanned by Agentless Scanning. The Datadog Security CLI also reads OCI annotations. Adding `org.opencontainers.image.revision` is recommended, to pin the link to the commit that built the image:
 
 ```bash
 docker build \

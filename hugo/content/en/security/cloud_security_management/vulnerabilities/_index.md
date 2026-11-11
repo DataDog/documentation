@@ -113,7 +113,7 @@ For non-flattened, single-stage container images built from a public base image,
 
 When Datadog detects a CVE on a running container image, it can link the CVE directly to the Dockerfile and commit that introduced the vulnerable package. This closes the gap between a production alert and the code change that caused it, giving developers the context they need to remediate at the source rather than chasing package versions across registries.
 
-To enable this code-to-cloud mapping, add image source labels to your container images. Datadog uses these labels to display a preview of the Dockerfile inside the Container Image Vulnerabilities panel and to surface the repository, commit, and file path associated with the vulnerability. You can add the labels by merging pull requests that Datadog opens from the Cloud Security Setup page, or by setting labels and annotations at build time.
+To enable this code-to-cloud mapping, add image source labels to your container images. Datadog uses these labels to preview the Dockerfile in the Container Image Vulnerabilities panel. It also shows the repository, commit, and file path for the vulnerability. To add the labels, merge pull requests that Datadog opens from the Cloud Security Setup page, or set the labels at build time.
 
 To set up source linking, see [Link Container Images to Dockerfiles][22].
 

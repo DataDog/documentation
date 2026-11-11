@@ -52,7 +52,7 @@ The following labels are also supported:
 Keep the following in mind:
 - Set labels in the **final build stage** of a multi-stage Dockerfile. Labels set in earlier stages are not part of the final image.
 - Labels are inherited from base images. Labels you set in your Dockerfile override inherited values.
-- The file name in `com.datadoghq.image.source_path` must be a Dockerfile or Containerfile name, such as `Dockerfile`, `Dockerfile.prod`, `api.Dockerfile`, or `Containerfile`.
+- The filename in `com.datadoghq.image.source_path` must be a Dockerfile or Containerfilename, such as `Dockerfile`, `Dockerfile.prod`, `api.Dockerfile`, or `Containerfile`.
 - Datadog builds Dockerfile links for repositories hosted on GitHub, GitLab, Bitbucket, and Azure DevOps.
 
 ## Choose a method
@@ -90,7 +90,7 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
    - {{< ui >}}In progress{{< /ui >}}: A Datadog pull request for the Dockerfile is open.
    - {{< ui >}}Labeled{{< /ui >}}: The final build stage has both image source labels.
 
-   To find specific Dockerfiles, search or filter by repository or status.
+   To find specific Dockerfiles, search, filter by repository, or filter by status.
 1. Select the Dockerfiles to label, create the pull requests, and confirm. Datadog opens one pull request per repository, with up to 20 Dockerfiles per pull request and up to 10 pull requests per submission.
 1. Review and merge the pull requests in GitHub, then rebuild and redeploy your images. Datadog links vulnerabilities to Dockerfiles for images built after the merge.
 
@@ -189,7 +189,7 @@ The Datadog Security CLI can also add this metadata at scan time with the `--doc
 - **Use build variables**: Set label values from an `ARG`, for example `LABEL org.opencontainers.image.source="$REPO_URL"`. Datadog pull requests don't change labels whose values come from build variables.
 - **Override at build time**: Labels passed with `docker build --label` override labels set in the Dockerfile.
 - **Monorepos**: Give each Dockerfile its own `com.datadoghq.image.source_path` value, relative to the repository root.
-- **Pin to a commit**: Add `org.opencontainers.image.revision` in your CI build, as shown in [In the build command](#in-the-build-command).
+- **Pin to a commit**: Add `org.opencontainers.image.revision` in your CI build, as shown in the [build command example](#in-the-build-command).
 
 ## Troubleshooting
 
@@ -211,7 +211,7 @@ Add the labels to these files manually. See [Add labels at build time](#add-labe
 
 - Rebuild and redeploy the image after you add the labels.
 - Confirm that the labels are in the final build stage. Use `docker inspect` to check the built image.
-- Confirm that the file name in `com.datadoghq.image.source_path` is a Dockerfile or Containerfile name.
+- Confirm that the filename in `com.datadoghq.image.source_path` is a Dockerfile or Containerfilename.
 - Confirm that the repository is hosted on GitHub, GitLab, Bitbucket, or Azure DevOps.
 
 ## Further reading
