@@ -1,6 +1,5 @@
 ---
 title: Configure Test Optimization
-type: multi-code-lang
 aliases:
 - /continuous_integration/tests/setup/
 ---

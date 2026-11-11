@@ -6201,11 +6201,11 @@ menu:
       parent: cicd
       identifier: cicd_test_optimization
       weight: 3
-    - name: Test Suite Setup
+    - name: Language Setup
       url: tests/setup/
-      parent: cicd
+      parent: cicd_test_optimization
       identifier: cicd_test_setup
-      weight: 4
+      weight: 200
     - name: .NET
       url: tests/setup/dotnet/
       parent: cicd_test_setup
@@ -6268,27 +6268,27 @@ menu:
       weight: 20903
     - name: Network Settings
       url: tests/network/
-      parent: cicd_test_setup
+      parent: cicd_test_optimization
       identifier: cicd_test_setup_network
       weight: 210
     - name: Tests in Containers
       url: tests/containers/
-      parent: cicd_test_setup
+      parent: cicd_test_optimization
       identifier: cicd_test_setup_containers
       weight: 211
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests/
-      parent: cicd_test_setup
+      parent: cicd_test_optimization
       identifier: cicd_test_setup_correlate_logs
       weight: 212
     - name: Browser Tests with RUM
       url: tests/browser_tests/
-      parent: cicd_test_setup
+      parent: cicd_test_optimization
       identifier: cicd_test_setup_browser_tests
       weight: 213
     - name: Swift Tests with RUM
       url: tests/swift_tests/
-      parent: cicd_test_setup
+      parent: cicd_test_optimization
       identifier: cicd_test_setup_swift_tests
       weight: 214
     - name: Explorer
