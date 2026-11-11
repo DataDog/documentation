@@ -73,12 +73,12 @@ helm install opentelemetry-operator open-telemetry/opentelemetry-operator   \
      --version 0.127.0                                                      \
      --set "manager.createRbacPermissions=true"                             \
      --set "manager.collectorImage.repository=datadog/ddot-collector"       \
-     --set "manager.collectorImage.tag={{< version key="agent_version" >}}"
+     --set "manager.collectorImage.tag=7.85.3"
 ```
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-info">
-For FED, set the tag to <code>{{< version key="agent_version" >}}-fips</code> to use the FIPS-compliant DDOT image.
+For FED, set the tag to <code>7.85.3-fips</code> to use the FIPS-compliant DDOT image.
 See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.
 </div>
 {{% /site-region %}}
@@ -506,7 +506,7 @@ touch node-collector-values.yaml
 mode: daemonset
 image:
   repository: datadog/ddot-collector
-  tag: {{< version key="agent_version" >}}
+  tag: 7.85.3
 ports:
   jaeger-compact:
     enabled: false
@@ -519,7 +519,7 @@ ports:
 {{< /code-block >}}
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">For FED, set <code>tag: {{< version key="agent_version" >}}-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+<div class="alert alert-info">For FED, set <code>tag: 7.85.3-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
 
 <div class="alert alert-info">The Collector Helm chart publishes the OTLP ports on each node by default (<code>hostPort: 4317</code> for gRPC and <code>hostPort: 4318</code> for HTTP), so application pods can reach the Collector instance running on the same node. See <a href="#instrument-your-application">Instrument your application</a>.</div>
@@ -643,7 +643,7 @@ Your `node-collector-values.yaml` file should look something like this:
 mode: daemonset
 image:
   repository: datadog/ddot-collector
-  tag: {{< version key="agent_version" >}}
+  tag: 7.85.3
 presets:
   hostMetrics: # Add an hostmetrics receiver to the metrics pipeline
     enabled: true

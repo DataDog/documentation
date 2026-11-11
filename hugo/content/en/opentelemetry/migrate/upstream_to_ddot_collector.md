@@ -49,7 +49,7 @@ To set up a new Collector instead, see [Install the DDOT Collector on Kubernetes
 
    With either Helm chart (Collector or kube-stack), leave out `K8S_NODE_NAME` and set `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>`. Both charts define `OTEL_K8S_NODE_NAME` before your entries.
 
-1. Choose an image tag. Replace `<DDOT_VERSION>` in the next steps with version 7.84.4 or later. Earlier versions can fail to start when your configuration doesn't use the Datadog Exporter. For available tags, see [datadog/ddot-collector][6] on Docker Hub.
+1. Choose an image tag. Replace `<DDOT_VERSION>` in the next steps with version 7.85.3 or later. Versions before 7.84.4 can fail to start when your configuration doesn't use the Datadog Exporter. For available tags, see [datadog/ddot-collector][6] on Docker Hub.
 
 ## Change the image
 
