@@ -348,9 +348,7 @@ By default, SSI instruments all services in all namespaces in your cluster. To r
 {{< tabs >}}
 {{% tab "Instrumentation rules in Datadog (v7.84.2+)" %}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/" btn_hidden="false" header="Join the Preview!" >}}
-Instrumentation rules for Kubernetes are in Preview. Use this form to request access.
-{{< /callout >}}
+<div class="alert alert-info">Instrumentation rules for Kubernetes are in Preview. <a href="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/">Sign up for access.</a></div>
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
