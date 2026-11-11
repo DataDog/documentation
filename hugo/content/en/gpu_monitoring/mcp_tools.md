@@ -25,7 +25,7 @@ GPU Monitoring MCP tools are in Early Access Preview. Contact your Customer Succ
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents access your [GPU Monitoring][2] data through the Model Context Protocol (MCP). The `gpu-monitoring` toolset lets agents list self-hosted LLM inference deployments, measure their serving performance, inspect their configuration, and rank GPU kernels. Use these tools in MCP-compatible clients such as Claude Code, Codex CLI, Cursor, or Claude Desktop.
+The [Datadog MCP Server][1] lets AI agents access your [GPU Monitoring][2] data through the Model Context Protocol (MCP). The `gpu-monitoring` toolset lets agents list self-hosted LLM inference deployments, measure their serving performance, inspect their configuration, profile their forward passes, and rank and track GPU kernels. Use these tools in MCP-compatible clients such as Claude Code, Codex CLI, Cursor, or Claude Desktop.
 
 ## Setup
 
@@ -119,9 +119,17 @@ The `gpu-monitoring` toolset includes the following tools. For required permissi
 `gpu_monitoring_get_inference_configuration`
 : Reports how an inference deployment's engines (vLLM, SGLang) are configured: model, parallelism, KV cache, batching, and scheduling, with the source of every value.
 
+`gpu_monitoring_get_inference_forward_pass_profile`
+: Shows how an inference engine spends its forward passes: the split between decode and prefill, how pass time grows with batch size and scheduled tokens, and whether speculative decoding runs.
+
+`gpu_monitoring_find_inference_forward_pass_traces`
+: Finds individual forward passes of an inference engine (vLLM, SGLang), filtered by phase, batch size, and scheduled tokens, newest or slowest first.
+
 `gpu_monitoring_rank_gpu_kernels`
 : Ranks the GPU kernels a training or inference workload ran by total time, from the kernel spans profiled at kernel level.
 
+`gpu_monitoring_get_gpu_kernel_trend`
+: Follows one GPU kernel of a training or inference workload over time, through the traces profiled at kernel level. Uses a kernel from `gpu_monitoring_rank_gpu_kernels`.
 ## Troubleshooting
 
 | Issue | Likely cause |

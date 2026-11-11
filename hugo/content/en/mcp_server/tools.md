@@ -1674,7 +1674,7 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 ## GPU Monitoring
 
-Tools for [GPU Monitoring][97], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, and ranking GPU kernels.
+Tools for [GPU Monitoring][97], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels.
 
 <div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter; for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
 
@@ -1702,12 +1702,33 @@ Reports how an inference deployment's engines (vLLM, SGLang) are configured: mod
 - How is my `llama-70b` deployment configured?
 - Do the decode workers in this deployment have configuration drift?
 
+### `gpu_monitoring_get_inference_forward_pass_profile`
+*Toolset: **gpu-monitoring***\
+Shows how an inference engine spends its forward passes: the split between decode and prefill, how pass time grows with batch size and scheduled tokens, and whether speculative decoding runs. Returns time splits and cost curves, with span coverage. Missing measurements are listed as unavailable.
+
+- How does forward pass time scale with batch size for this deployment?
+- Is speculative decoding running on my vLLM deployment?
+
+### `gpu_monitoring_find_inference_forward_pass_traces`
+*Toolset: **gpu-monitoring***\
+Finds individual forward passes of an inference engine (vLLM, SGLang), filtered by phase, batch size, and scheduled tokens, newest or slowest first. Returns matching passes with trace ID, worker, and duration, kernel counts and time when profiled, and the number of matches.
+
+- Find the slowest prefill passes for this deployment in the last hour.
+- Show me decode passes with a batch size of 64.
+
 ### `gpu_monitoring_rank_gpu_kernels`
 *Toolset: **gpu-monitoring***\
 Ranks the GPU kernels a training or inference workload ran by total time, from the kernel spans profiled at kernel level. Returns each kernel's total time, share, calls, and mean duration; spans of 10 seconds or more, listed separately by kernel; and, for an inference engine, how much of pass time was kernel time.
 
 - Which GPU kernels take the most time in this deployment?
 - Rank the top GPU kernels for my training job over the last hour.
+
+### `gpu_monitoring_get_gpu_kernel_trend`
+*Toolset: **gpu-monitoring***\
+Follows one GPU kernel of a training or inference workload over time, through the traces profiled at kernel level. Uses a kernel from `gpu_monitoring_rank_gpu_kernels`. Returns, for each time bucket, the launches, duration percentiles (p50, p95, p99, max), and summed time, with launches of 10 seconds or more counted separately.
+
+- Has this attention kernel gotten slower over the past day?
+- Show me the p99 duration of this kernel over time.
 
 ## Investigations
 
