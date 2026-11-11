@@ -141,10 +141,10 @@ For more information, see [Send Custom Actions][8].
 
 There is no strict limit on the number of user actions, such as clicks or custom actions, that the Datadog RUM Browser SDK can track per session or page. However, there are technical limitations on individual event sizes and the payload sent. For details, see [Troubleshooting][9]. Also consider the following:
 
-* **Sampling** - You can configure the SDK to sample a percentage of user actions using the `sampleRate` and `trackInteractions` options. This helps control the volume of data sent to Datadog. For more information, see [Advanced Configuration][10].
+* **Sampling** - The SDK doesn't sample individual actions. To control the volume of data sent to Datadog, set `sessionSampleRate` to collect a percentage of sessions, or set `trackUserInteractions` to `false` to turn off automatic click tracking. For more information, see [Manage Sessions][10].
 * **Performance** - The SDK batches and sends events periodically. In cases of high-frequency actions, such as repeated clicks, the SDK may deduplicate or group actions, for example, through rage click detection to avoid flooding.
 
-As a best practice, if you expect a high volume of user actions, consider adjusting your sampling configuration and monitor your Datadog event usage.
+As a best practice, if you expect a high volume of user actions, consider adjusting your session sample rate and monitor your Datadog event usage.
 
 For the attributes and timing telemetry collected for actions, see [Data Collected][11].
 
@@ -157,5 +157,5 @@ For the attributes and timing telemetry collected for actions, see [Data Collect
 [7]: /real_user_monitoring/setup/additional_plugins/?platform=browser#privacy-plugin
 [8]: /real_user_monitoring/guide/send-rum-custom-actions
 [9]: /real_user_monitoring/reference/troubleshooting/?platform=browser
-[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser
+[10]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser#configure-the-session-sample-rate
 [11]: /real_user_monitoring/setup/data_collected/?platform=browser#action-attributes
