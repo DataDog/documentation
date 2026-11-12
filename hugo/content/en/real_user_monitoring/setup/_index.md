@@ -59,7 +59,7 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/setup/install/?platform=maui" src="integrations_logos/maui_large.svg" alt=".NET MAUI" title=".NET MAUI" >}}
 {{< /card-grid >}}
 
-The Android SDK supports the Android ecosystem, including Android TV, Android Automotive OS, and Amazon Fire OS. The iOS SDK supports the Apple ecosystem, including iOS, iPadOS, tvOS, and visionOS.
+The Android SDK supports the Android ecosystem, including Android TV, Android Automotive OS, and Amazon Fire OS. The iOS SDK supports the Apple ecosystem, including iOS, iPadOS, tvOS, watchOS, and visionOS.
 
 ### Capabilities and platform support
 
