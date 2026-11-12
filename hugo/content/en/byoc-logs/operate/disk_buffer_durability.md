@@ -71,6 +71,10 @@ The `max_size` value is expressed in bytes (100 GB = 100,000,000,000 bytes). Whe
 
 ## Persistent storage for the buffer
 
+Choose the configuration for your deployment method. Configure the buffer size in the Observability Pipeline independently of the Worker's volume size.
+
+### Helm
+
 Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB (about 129 GB) persistent volume to each Worker. The extra capacity leaves headroom above the buffer size:
 
 ```yaml
@@ -87,7 +91,37 @@ persistence:
 
 The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain` policies also keep the volume when its Worker is scaled down or the StatefulSet is deleted.
 
+### Datadog Operator
+
+For a `DatadogBYOCCluster`, configure storage on the matching entry in `spec.components.pipelines`. For the same 100 GB buffer, the following entry requests 120 GiB of persistent storage and allows 3600 seconds for shutdown:
+
+```yaml
+spec:
+  components:
+    pipelines:
+      - name: default
+        pipelineID: "<PIPELINE_ID>"
+        replicas: 2
+        ports:
+          - name: otlp-grpc
+            port: 4317
+        terminationGracePeriodSeconds: 3600
+        storage:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              storageClassName: "<STORAGE_CLASS>"
+              resources:
+                requests:
+                  storage: 120Gi
+```
+
+Merge these settings into the existing entry, preserving its name, pipeline ID, source ports, other settings, and any other pipeline entries. Choose storage requirements before creating the Worker. Apply the complete `byoc-cluster.yaml` manifest and verify that its PVCs are bound. Configure the pipeline's disk buffer separately in Datadog; creating a PVC does not enable destination buffering.
+
 ## Draining Workers before shutdown
+
+For Operator deployments, set `terminationGracePeriodSeconds` on the matching entry in `spec.components.pipelines`. For standalone Worker Helm deployments, set it in the Worker's values file.
 
 During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Logs engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 

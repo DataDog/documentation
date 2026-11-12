@@ -4558,8 +4558,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsSeverity
-        unstable:
-          - v2
+        unstable: []
         order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
@@ -5145,8 +5144,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsAssignee
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
@@ -7785,9 +7783,9 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: Replace an AI Gateway routing rule
-      url: /api/latest/ai-gateway/replace-an-ai-gateway-routing-rule/
-      identifier: ai-gateway-replace-an-ai-gateway-routing-rule
+    - name: Update an AI Gateway routing rule
+      url: /api/latest/ai-gateway/update-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-update-an-ai-gateway-routing-rule
       parent: ai-gateway
       generated: true
       params:
@@ -14937,6 +14935,36 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: End User Device Monitoring
+      url: /api/latest/end-user-device-monitoring/
+      identifier: end-user-device-monitoring
+      generated: true
+    - name: Get a device
+      url: /api/latest/end-user-device-monitoring/get-a-device/
+      identifier: end-user-device-monitoring-get-a-device
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevice
+        unstable:
+          - v2
+        order: 2
+    - name: Get all devices
+      url: /api/latest/end-user-device-monitoring/get-all-devices/
+      identifier: end-user-device-monitoring-get-all-devices
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevices
+        unstable:
+          - v2
+        order: 1
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs
@@ -15255,6 +15283,18 @@ menu:
           - ListExperimentMetricGroups
         unstable: []
         order: 11
+    - name: List experiment holdouts
+      url: /api/latest/experiments/list-experiment-holdouts/
+      identifier: experiments-list-experiment-holdouts
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentHoldouts
+        unstable: []
+        order: 55
     - name: Get experiment diagnostics
       url: /api/latest/experiments/get-experiment-diagnostics/
       identifier: experiments-get-experiment-diagnostics
@@ -16079,6 +16119,30 @@ menu:
           - GetSavedFilter
         unstable: []
         order: 23
+    - name: Export feature flag change history
+      url: /api/latest/feature-flags/export-feature-flag-change-history/
+      identifier: feature-flags-export-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportFeatureFlagHistory
+        unstable: []
+        order: 26
+    - name: List feature flag change history
+      url: /api/latest/feature-flags/list-feature-flag-change-history/
+      identifier: feature-flags-list-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlagHistory
+        unstable: []
+        order: 25
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout
@@ -21909,6 +21973,19 @@ menu:
         unstable:
           - v2
         order: 10
+    - name: Delete a user profile
+      url: /api/latest/rum-audience-management/delete-a-user-profile/
+      identifier: rum-audience-management-delete-a-user-profile
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserProfile
+        unstable:
+          - v2
+        order: 11
     - name: Query users
       url: /api/latest/rum-audience-management/query-users/
       identifier: rum-audience-management-query-users

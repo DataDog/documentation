@@ -23,7 +23,7 @@ title: Fuente del Datadog Agent
 Utilice la fuente del Datadog Agent de Observability Pipelines para recibir registros o métricas del Datadog Agent.
 
 **Notas**:
-- Si está utilizando la distribución de Datadog del Collector de OpenTelemetry (DDOT) para recopilar registros o métricas, debe [utilizar la fuente de OpenTelemetry para enviar esos datos a Observability Pipelines][4].
+- Si está utilizando el Collector del Agent, el OpenTelemetry Collector que se ejecuta junto al Datadog Agent como un proceso independiente, para recopilar registros o métricas, debe [usar la fuente de OpenTelemetry para enviar esos datos a Observability Pipelines][4].
 - El Datadog Agent envía registros y métricas etiquetados con `ddsource` y `ddtags`, no con `source` y `tags`. Cuando defina consultas o filtros de procesador para estos eventos, utilice `ddsource` y `ddtags` en su lugar.
 
 ## Requisitos previos {#prerequisites}
@@ -40,7 +40,7 @@ Después de seleccionar la fuente del Datadog Agent en la UI de la canalización
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
-### Configuración de TLS opcional {#optional-tls-settings}
+### Configuración opcional de TLS {#optional-tls-settings}
 
 {{% observability_pipelines/tls_settings %}}
 

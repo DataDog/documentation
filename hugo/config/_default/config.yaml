@@ -34,6 +34,20 @@ defaultContentLanguageInSubdir: false
 build:
   noJSConfigInAssets: true
 
+# Astro serves the API endpoint pages (/api/latest/<tag>/<endpoint>/), so Hugo
+# doesn't render them. The pages stay in .Site.AllPages, and the search index
+# builds API records from the OpenAPI specs and tag pages, not endpoint HTML.
+# Set here rather than in front matter so it covers every language, and
+# survives build-api-pages.js regenerating the endpoint pages.
+cascade:
+  - build:
+      render: never
+      list: always
+      publishResources: false
+    target:
+      kind: page
+      path: "/api/latest/*/*"
+
 caches:
     getjson:
         dir: :cacheDir/:project

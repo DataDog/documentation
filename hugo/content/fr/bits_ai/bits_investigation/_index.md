@@ -36,6 +36,7 @@ Bits Investigation est un agent IA autonome qui examine les problèmes de produc
    {{< nextlink href="bits_ai/bits_investigation/knowledge_sources" >}}Sources de connaissances{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_investigation/chat_bits_investigation" >}}Discussion avec Bits Investigation{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_investigation/improve_accuracy" >}}Améliorez la précision de Bits Investigation{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_investigation/mcp_api_cli" >}}MCP, API, CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin {#further-reading}

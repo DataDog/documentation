@@ -550,6 +550,16 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
+    - name: インフラストラクチャーモード
+      identifier: agent_configuration_infrastructure_modes
+      url: agent/configuration/infrastructure-modes/
+      parent: agent_configuration
+      weight: 610
+    - name: Agent Data Plane
+      identifier: agent_configuration_agent_data_plane
+      url: agent/configuration/agent-data-plane/
+      parent: agent_configuration
+      weight: 611
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -645,7 +655,7 @@ menu:
       url: agent/troubleshooting/windows_containers
       weight: 1010
       parent: agent_troubleshooting
-    - name: Agent ランタイムコンフィギュレーション
+    - name: Agent ランタイム構成
       identifier: agent_troubleshooting_runtime_configuration
       url: agent/troubleshooting/config
       weight: 1011
@@ -665,12 +675,12 @@ menu:
       identifier: agent_guides
       parent: agent
       weight: 12
-    - name: Data Security
+    - name: データセキュリティ
       identifier: agent_security
       url: data_security/agent/
       parent: agent
       weight: 13
-    - name: Integrations
+    - name: インテグレーション
       url: integrations/
       identifier: integrations_top_level
       pre: integrations
@@ -887,7 +897,7 @@ menu:
       identifier: otel_dbm
       parent: otel_explore
       weight: 704
-    - name: Integrations
+    - name: インテグレーション
       url: opentelemetry/integrations/
       identifier: otel_integrations
       parent: opentelemetry_top_level
@@ -1094,7 +1104,7 @@ menu:
       parent: dev_tools
       identifier: dev_tools_authorization
       weight: 1
-    - name: Datadog の OAuth2
+    - name: Datadog における OAuth2
       url: extend/authorization/oauth2_in_datadog/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_in_datadog
@@ -1149,7 +1159,7 @@ menu:
       url: extend/custom_checks/prometheus/
       parent: custom_checks
       weight: 302
-    - name: Integrations
+    - name: インテグレーション
       url: extend/integrations/
       parent: dev_tools
       identifier: dev_tools_integrations
@@ -1199,7 +1209,7 @@ menu:
       url: extend/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
-    - name: Agent Integration Developer Tool のインストール
+    - name: Agent Integration 開発者ツールのインストール
       identifier: dev_tools_integrations_install_developer_tool
       url: extend/integrations/python/
       parent: dev_tools_integrations
@@ -1250,7 +1260,7 @@ menu:
       parent: administrators_guide
       identifier: administrators_guide_getting_started
       weight: 1
-    - name: Plan
+    - name: プラン
       url: administrators_guide/plan/
       parent: administrators_guide
       identifier: administrators_guide_plan
@@ -1544,12 +1554,17 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
+    - name: トレースを使用して Agent を改善する
+      url: actions/agents/improve_agents_with_traces/
+      identifier: bits_ai_agent_builder_improve_with_traces
+      parent: bits_ai_agent_builder
+      weight: 101
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
-    - name: Bits Chat を使用
+    - name: Bits Chat を使用する
       url: bits_ai/bits_chat/usage
       identifier: bits_ai_bits_chat_usage
       parent: bits_ai_bits_chat
@@ -1564,7 +1579,7 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 301
-    - name: 自動化
+    - name: オートメーション
       url: bits_ai/bits_code/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
@@ -1599,7 +1614,7 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 701
-    - name: Bits Investigation の統合と設定
+    - name: Integrations と設定
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
@@ -1619,6 +1634,11 @@ menu:
       identifier: bits_ai_sre_improve_accuracy
       parent: bits_ai_sre
       weight: 705
+    - name: MCP、API、CLI
+      url: bits_ai/bits_investigation/mcp_api_cli
+      identifier: bits_ai_sre_mcp_api_cli
+      parent: bits_ai_sre
+      weight: 706
     - name: Bits ライブデバッガー
       url: tracing/live_debugger/bits-live-debugger
       identifier: bits_ai_live_debugger
@@ -2304,7 +2324,7 @@ menu:
       parent: internal_developer_portal
       identifier: external_provider_status
       weight: 7
-    - name: Integrations
+    - name: インテグレーション
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
       identifier: idp_integrations
@@ -2390,10 +2410,10 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits Code
-      url: bits_ai/bits_code
+    - name: Bits Investigation
+      url: error_tracking/bits_investigation
       parent: error_tracking
-      identifier: error_tracking_bits_ai_dev_agent
+      identifier: error_tracking_bits_investigation
       weight: 5
     - name: モニター
       url: error_tracking/monitors
@@ -2557,7 +2577,7 @@ menu:
       identifier: event_ingest
       parent: events
       weight: 1
-    - name: Pipelines とプロセッサー
+    - name: パイプラインとプロセッサー
       url: events/pipelines_and_processors/
       identifier: overview
       parent: events
@@ -2612,6 +2632,11 @@ menu:
       identifier: string_builder_processor
       parent: overview
       weight: 210
+    - name: VRL Processor
+      url: events/pipelines_and_processors/vrl_processor
+      identifier: vrl_processor
+      parent: overview
+      weight: 211
     - name: エクスプローラー
       url: events/explorer/
       identifier: events_explorer
@@ -2758,7 +2783,7 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_responder_roles
       weight: 204
-    - name: 自動化
+    - name: オートメーション
       url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
@@ -2798,7 +2823,7 @@ menu:
       parent: incidents
       identifier: analytics_and_reporting
       weight: 4
-    - name: Integrations
+    - name: インテグレーション
       url: incident_response/incident_management/setup_and_configuration/integrations
       parent: incidents
       identifier: incidents_integrations
@@ -2838,11 +2863,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Google Meet
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_meet
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_meet
+      weight: 508
     - name: Zoom
       url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
       parent: incidents_integrations
       identifier: incidents_integrations_zoom
-      weight: 508
+      weight: 509
     - name: ガイド
       url: incident_response/incident_management/guides/
       parent: incidents
@@ -2859,7 +2889,7 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Page
+    - name: ページ
       url: incident_response/on-call/pages/
       parent: oncall
       identifier: oncall_pages
@@ -2904,11 +2934,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
-    - name: Integrations
+    - name: インテグレーション
       url: incident_response/on-call/integrations/
       parent: oncall
       identifier: oncall_integrations
       weight: 8
+    - name: ServiceNow
+      url: incident_response/on-call/integrations/servicenow/
+      parent: oncall_integrations
+      identifier: oncall_integrations_servicenow
+      weight: 801
     - name: ガイド
       url: incident_response/on-call/guides/
       parent: oncall
@@ -2920,6 +2955,26 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
+    - name: コンポーネント
+      url: incident_response/status_pages/components/
+      parent: status_pages
+      identifier: status_pages_components
+      weight: 1
+    - name: 通知
+      url: incident_response/status_pages/notices/
+      parent: status_pages
+      identifier: status_pages_notices
+      weight: 2
+    - name: 通知テンプレート
+      url: incident_response/status_pages/templates/
+      parent: status_pages
+      identifier: status_pages_templates
+      weight: 3
+    - name: サブスクリプション
+      url: incident_response/status_pages/subscriptions/
+      parent: status_pages
+      identifier: status_pages_subscriptions
+      weight: 4
     - name: Work Management
       url: incident_response/work_management/
       pre: case-management
@@ -2989,6 +3044,11 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
+    - name: トレースを使用して Agent を改善する
+      url: actions/agents/improve_agents_with_traces/
+      parent: agents
+      identifier: agents_improve_with_traces
+      weight: 1
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
@@ -3461,7 +3521,7 @@ menu:
       parent: containers_docker
       identifier: containers_docker_tag
       weight: 303
-    - name: Integrations
+    - name: インテグレーション
       url: containers/docker/integrations/
       parent: containers_docker
       identifier: containers_docker_integrations
@@ -3526,7 +3586,7 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
       weight: 409
-    - name: Integrations
+    - name: インテグレーション
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
@@ -3908,6 +3968,11 @@ menu:
       parent: serverless_container_apps
       identifier: serverless_container_apps_manual
       weight: 1
+    - name: Managed OpenTelemetry Agent
+      url: serverless/azure_container_apps/otel_managed_agent
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_otel_managed_agent
+      weight: 2
     - name: Azure データベースとメッセージングサービス
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -4084,7 +4149,7 @@ menu:
       parent: ndm
       identifier: ndm_summary
       weight: 302
-    - name: Integrations
+    - name: インテグレーション
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
@@ -4361,6 +4426,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_ai_costs
       weight: 5
+    - name: AI Gateway の割り当て
+      url: cloud_cost_management/ai_costs/ai_gateway_allocation
+      parent: cloud_cost_ai_costs
+      identifier: cloud_cost_ai_gateway_allocation
+      weight: 501
     - name: レポート
       url: cloud_cost_management/reporting
       parent: cloud_cost
@@ -4376,7 +4446,7 @@ menu:
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
       weight: 602
-    - name: Dashboard
+    - name: ダッシュボード
       url: cloud_cost_management/reporting/dashboards
       parent: cloud_cost_reporting
       identifier: cloud_cost_dashboards
@@ -4837,21 +4907,26 @@ menu:
       parent: tracing_services
       identifier: tracing_env_remapping_rules
       weight: 909
+    - name: リソース名前変更ルール
+      url: tracing/services/resource_renaming_rules
+      parent: tracing_services
+      identifier: tracing_resource_renaming_rules
+      weight: 910
     - name: タグエンリッチメント
       url: tracing/services/tag_enrichment
       parent: tracing_services
       identifier: tracing_tag_enrichment
-      weight: 910
+      weight: 911
     - name: 統合オーバーライドの削除
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 911
+      weight: 912
     - name: APM モニター
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 912
+      weight: 913
     - name: エンドポイント監視可能性
       url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
@@ -4927,7 +5002,7 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
       weight: 1308
-    - name: Data Security
+    - name: データセキュリティ
       url: tracing/configure_data_security/
       parent: tracing
       identifier: tracing_data_security
@@ -5109,7 +5184,7 @@ menu:
       parent: dbm_setup
       identifier: dbm_setup_architecture
       weight: 101
-    - name: Agent インテグレーションのオーバーヘッド
+    - name: Agent Integration のオーバーヘッド
       url: database_monitoring/agent_integration_overhead
       parent: dbm_setup
       identifier: dbm_agent_integration_overhead
@@ -5419,16 +5494,21 @@ menu:
       parent: dbm
       identifier: dbm_workbench
       weight: 7
+    - name: Database Monitoring の PR レビュー
+      url: database_monitoring/pr_reviews/
+      parent: dbm
+      identifier: dbm_pr_reviews
+      weight: 8
     - name: トラブルシューティング
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 8
+      weight: 9
     - name: ガイド
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 9
+      weight: 10
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5519,16 +5599,31 @@ menu:
       identifier: redshift
       parent: data_warehouses
       weight: 4000000
+    - name: ClickHouse Cloud
+      url: data_observability/quality_monitoring/data_warehouses/clickhouse
+      identifier: clickhouse_cloud_data_obs
+      parent: data_warehouses
+      weight: 5000000
+    - name: Microsoft Fabric Warehouse
+      url: data_observability/quality_monitoring/data_warehouses/fabric
+      identifier: data_obs_fabric_warehouse
+      parent: data_warehouses
+      weight: 6000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
       parent: quality_monitoring
       weight: 250000
-    - name: Iceberg テーブル (AWS Glue)
+    - name: AWS Glue
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Amazon Athena クエリ履歴
+      url: data_observability/quality_monitoring/data_lakes/amazon_athena
+      identifier: amazon_athena_query_history
+      parent: data_lakes
+      weight: 2000000
     - name: トランザクションデータベース
       url: data_observability/quality_monitoring/transactional_databases
       identifier: transactional_databases
@@ -5763,6 +5858,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_prompt_tracking
       weight: 311
+    - name: Agent 追跡
+      url: llm_observability/instrument/agent_tracking
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_agent_tracking
+      weight: 312
     - name: マルチモーダル
       url: llm_observability/instrument/multimodal
       parent: llm_obs_instrumentation
@@ -5868,11 +5968,16 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Data Access Control
-      url: llm_observability/improve/access_control
+    - name: オンライン実験
+      url: llm_observability/improve/online_experiments
       parent: llm_obs_improve
-      identifier: llm_obs_improve_access_control
+      identifier: llm_obs_online_experiments
       weight: 504
+    - name: Prompt Experimentation
+      url: llm_observability/improve/online_experiments/prompt_experimentation
+      parent: llm_obs_improve
+      identifier: llm_obs_prompt_experimentation
+      weight: 505
     - name: 構成
       url: llm_observability/configure/
       parent: llm_obs
@@ -5883,21 +5988,26 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
-    - name: Prompt Experimentation
-      url: llm_observability/configure/prompt_experimentation
-      parent: llm_obs_configure
-      identifier: llm_obs_prompt_experimentation
-      weight: 602
     - name: 自動化ルール
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
+    - name: AI Gateway
+      url: llm_observability/configure/ai_gateway
+      parent: llm_obs_configure
+      identifier: llm_obs_ai_gateway
+      weight: 604
     - name: データガバナンス
       url: llm_observability/data_governance
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 7
+    - name: Data Access Control
+      url: llm_observability/data_governance/access_control
+      parent: llm_obs_data_security_and_rbac
+      identifier: llm_obs_data_governance_access_control
+      weight: 701
     - name: Lapdog
       url: llm_observability/lapdog
       parent: llm_obs
@@ -5944,6 +6054,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_inference
       weight: 6
+    - name: 継続的トレーシング
+      url: gpu_monitoring/tracing/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_tracing
+      weight: 7
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -5955,132 +6070,352 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: CI/CD 最適化
+      url: cicd/
+      pre: ci
+      identifier: cicd
+      parent: software_delivery_heading
+      weight: 5000
     - name: CI Visibility
       url: continuous_integration/
-      pre: ci
-      identifier: ci
-      parent: software_delivery_heading
-      weight: 10000
-    - name: CI/CD 最適化
-      url: continuous_integration/cicd_optimization/
-      parent: ci
-      identifier: cicd_optimization
+      parent: cicd
+      identifier: cicd_ci_visibility
       weight: 1
-    - name: Pipeline Visibility
+    - name: CI Pipeline セットアップ
       url: continuous_integration/pipelines/
-      parent: ci
-      identifier: pipeline_visibility
-      weight: 1
+      parent: cicd
+      identifier: cicd_pipeline_setup
+      weight: 2
     - name: AWS CodePipeline
       url: continuous_integration/pipelines/awscodepipeline/
-      parent: pipeline_visibility
-      identifier: ci_awscodepipeline
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_awscodepipeline
       weight: 101
     - name: Azure Pipelines
       url: continuous_integration/pipelines/azure/
-      parent: pipeline_visibility
-      identifier: ci_azure
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_azure
       weight: 102
     - name: Buildkite
       url: continuous_integration/pipelines/buildkite/
-      parent: pipeline_visibility
-      identifier: ci_buildkite
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_buildkite
       weight: 103
     - name: CircleCI
       url: continuous_integration/pipelines/circleci/
-      parent: pipeline_visibility
-      identifier: ci_circleci
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_circleci
       weight: 104
     - name: Codefresh
       url: continuous_integration/pipelines/codefresh/
-      parent: pipeline_visibility
-      identifier: ci_codefresh
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_codefresh
       weight: 105
     - name: GitHub Actions
       url: continuous_integration/pipelines/github/
-      parent: pipeline_visibility
-      identifier: ci_github
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_github
       weight: 106
     - name: GitLab
       url: continuous_integration/pipelines/gitlab/
-      parent: pipeline_visibility
-      identifier: ci_gitlab
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_gitlab
       weight: 107
     - name: Jenkins
       url: continuous_integration/pipelines/jenkins/
-      parent: pipeline_visibility
-      identifier: ci_jenkins
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_jenkins
       weight: 108
     - name: TeamCity
       url: continuous_integration/pipelines/teamcity/
-      parent: pipeline_visibility
-      identifier: ci_teamcity
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_teamcity
       weight: 109
     - name: その他の CI プロバイダー
       url: continuous_integration/pipelines/custom/
-      parent: pipeline_visibility
-      identifier: ci_custom
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom
       weight: 110
-    - name: 自動ジョブ再試行
-      url: continuous_integration/pipelines/automatic_retries/
-      parent: pipeline_visibility
-      identifier: ci_automatic_retries
-      weight: 111
     - name: カスタムコマンド
       url: continuous_integration/pipelines/custom_commands/
-      parent: pipeline_visibility
-      identifier: ci_custom_commands
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_commands
       weight: 112
     - name: カスタムタグと測定値
       url: continuous_integration/pipelines/custom_tags_and_measures/
-      parent: pipeline_visibility
-      identifier: ci_custom_tags_and_measures
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_tags_and_measures
       weight: 113
-    - name: 検索と管理
-      url: continuous_integration/search/
-      parent: ci
-      identifier: ci_search
-      weight: 2
-    - name: エクスプローラー
-      url: continuous_integration/explorer
-      parent: ci
-      identifier: ci_explorer
+    - name: Test Optimization
+      url: tests/
+      parent: cicd
+      identifier: cicd_test_optimization
       weight: 3
+    - name: テストスイートのセットアップ
+      url: tests/setup/
+      parent: cicd
+      identifier: cicd_test_setup
+      weight: 4
+    - name: .NET
+      url: tests/setup/dotnet/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_dotnet
+      weight: 201
+    - name: Go
+      url: tests/setup/go/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_go
+      weight: 202
+    - name: Java と JVM 言語
+      url: tests/setup/java/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_java
+      weight: 203
+    - name: JavaScript と TypeScript
+      url: tests/setup/javascript/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_javascript
+      weight: 204
+    - name: Python
+      url: tests/setup/python/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_python
+      weight: 205
+    - name: Ruby
+      url: tests/setup/ruby/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_ruby
+      weight: 206
+    - name: Swift
+      url: tests/setup/swift/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift
+      weight: 207
+    - name: JUnit レポートのアップロード
+      url: tests/setup/junit_xml/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_junit_xml
+      weight: 208
+    - name: Bazel
+      url: tests/setup/bazel/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_bazel
+      weight: 209
+    - name: Go テスト用 Bazel ルール
+      url: tests/setup/bazel/go/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_go
+      weight: 20901
+    - name: Java テスト用 Bazel ルール
+      url: tests/setup/bazel/java/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_java
+      weight: 20902
+    - name: Python テスト用 Bazel ルール
+      url: tests/setup/bazel/python/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_python
+      weight: 20903
+    - name: ネットワーク設定
+      url: tests/network/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_network
+      weight: 210
+    - name: Containers でのテスト
+      url: tests/containers/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_containers
+      weight: 211
+    - name: ログとテストの相関付け
+      url: tests/correlate_logs_and_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_correlate_logs
+      weight: 212
+    - name: RUM を使用したブラウザテスト
+      url: tests/browser_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_browser_tests
+      weight: 213
+    - name: RUM を使用した Swift テスト
+      url: tests/swift_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift_tests
+      weight: 214
+    - name: エクスプローラー
+      url: continuous_integration/explorer/
+      parent: cicd
+      identifier: cicd_explorer
+      weight: 6
     - name: 検索構文
       url: continuous_integration/explorer/search_syntax/
-      parent: ci_explorer
-      identifier: ci_explorer_search_syntax
-      weight: 301
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_syntax
+      weight: 401
     - name: パイプライン実行の検索
       url: continuous_integration/explorer/facets/
-      parent: ci_explorer
-      identifier: ci_explorer_facets
-      weight: 302
+      parent: cicd_explorer
+      identifier: cicd_explorer_facets
+      weight: 402
     - name: エクスポート
       url: continuous_integration/explorer/export/
-      parent: ci_explorer
-      identifier: ci_explorer_export
-      weight: 303
+      parent: cicd_explorer
+      identifier: cicd_explorer_export
+      weight: 403
     - name: Saved Views
       url: continuous_integration/explorer/saved_views/
-      parent: ci_explorer
-      identifier: ci_explorer_saved_views
-      weight: 304
+      parent: cicd_explorer
+      identifier: cicd_explorer_saved_views
+      weight: 404
+    - name: 検索と管理
+      url: continuous_integration/search/
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_and_manage
+      weight: 405
+    - name: 不安定なテストの管理
+      url: tests/flaky_management/
+      parent: cicd
+      identifier: cicd_flaky_management
+      weight: 7
+    - name: 不安定なテストの扱い方
+      url: tests/flaky_tests/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_working_with
+      weight: 501
+    - name: 機能
+      url: cicd/features/
+      parent: cicd
+      identifier: cicd_features
+      weight: 8
+    - name: 自動ジョブ再試行
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_features
+      identifier: cicd_features_automatic_job_retries
+      weight: 600
+    - name: 不安定さの早期検出
+      url: tests/flaky_tests/early_flake_detection/
+      parent: cicd_features
+      identifier: cicd_features_early_flake_detection
+      weight: 601
+    - name: テストの自動再試行
+      url: tests/flaky_tests/auto_test_retries/
+      parent: cicd_features
+      identifier: cicd_features_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis/
+      parent: cicd_features
+      identifier: cicd_features_tia
+      weight: 603
+    - name: 仕組み
+      url: tests/test_impact_analysis/how_it_works/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_how_it_works
+      weight: 60301
+    - name: トラブルシューティング
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_troubleshooting
+      weight: 60302
+    - name: セットアップ
+      url: tests/test_impact_analysis/setup/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_setup
+      weight: 60303
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_dotnet
+      weight: 6030301
+    - name: JavaScript と TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_javascript
+      weight: 6030302
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_python
+      weight: 6030303
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_swift
+      weight: 6030304
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_java
+      weight: 6030305
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_ruby
+      weight: 6030306
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_go
+      weight: 6030307
+    - name: テスト並列化
+      url: tests/test_parallelization/
+      parent: cicd_features
+      identifier: cicd_features_parallelization
+      weight: 604
+    - name: セットアップ
+      url: tests/test_parallelization/setup/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_setup
+      weight: 60401
+    - name: 構成
+      url: tests/test_parallelization/configuration/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_configuration
+      weight: 60402
+    - name: ベストプラクティス
+      url: tests/test_parallelization/best_practices/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_best_practices
+      weight: 60403
+    - name: トラブルシューティング
+      url: tests/test_parallelization/troubleshooting/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_troubleshooting
+      weight: 60404
+    - name: 開発者のワークフロー
+      url: tests/developer_workflows/
+      parent: cicd_features
+      identifier: cicd_features_developer_workflows
+      weight: 605
+    - name: レガシー機能
+      url: cicd/features/legacy/
+      parent: cicd_features
+      identifier: cicd_features_legacy
+      weight: 606
     - name: モニター
       url: monitors/types/ci/?tab=pipelines
-      parent: ci
-      identifier: ci_monitors
-      weight: 4
+      parent: cicd
+      identifier: cicd_monitors
+      weight: 9
     - name: ガイド
-      url: continuous_integration/guides/
-      parent: ci
-      identifier: ci_guides
-      weight: 5
+      url: cicd/guides/
+      parent: cicd
+      identifier: cicd_guides
+      weight: 10
     - name: トラブルシューティング
-      url: continuous_integration/troubleshooting/
-      parent: ci
-      identifier: ci_troubleshooting
-      weight: 6
+      url: cicd/troubleshooting/
+      parent: cicd
+      identifier: cicd_troubleshooting
+      weight: 11
+    - name: CI パイプライン
+      url: cicd/troubleshooting/pipelines/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_pipeline
+      weight: 901
+    - name: テスト
+      url: cicd/troubleshooting/tests/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_tests
+      weight: 902
     - name: CD Visibility
       url: continuous_delivery/
       pre: ci
@@ -6153,277 +6488,16 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
-    - name: JustInTime (JIT) ゲート
-      url: deployment_gates/setup/jit/
+    - name: インラインゲート
+      url: deployment_gates/setup/inline/
       parent: deployment_gates_setup
-      identifier: deployment_gates_setup_jit
+      identifier: deployment_gates_setup_inline
       weight: 1
     - name: 事前設定済みゲート
       url: deployment_gates/setup/preconfigured/
       parent: deployment_gates_setup
       identifier: deployment_gates_setup_preconfigured
       weight: 2
-    - name: 調査
-      url: deployment_gates/explore/
-      parent: deployment_gates
-      identifier: deployment_gates_explore
-      weight: 2
-    - name: Test Optimization
-      url: tests/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: tests
-      weight: 40000
-    - name: CI/CD 最適化
-      url: continuous_integration/cicd_optimization/
-      parent: tests
-      identifier: tests_cicd_optimization
-      weight: 1
-    - name: セットアップ
-      url: tests/setup/
-      parent: tests
-      identifier: tests_setup
-      weight: 1
-    - name: .NET
-      url: tests/setup/dotnet/
-      parent: tests_setup
-      identifier: tests_setup_dotnet
-      weight: 101
-    - name: Java と JVM 言語
-      url: tests/setup/java/
-      parent: tests_setup
-      identifier: tests_setup_java
-      weight: 102
-    - name: JavaScript と TypeScript
-      url: tests/setup/javascript/
-      parent: tests_setup
-      identifier: tests_setup_javascript
-      weight: 103
-    - name: Python
-      url: tests/setup/python/
-      parent: tests_setup
-      identifier: tests_setup_python
-      weight: 104
-    - name: Ruby
-      url: tests/setup/ruby/
-      parent: tests_setup
-      identifier: tests_setup_ruby
-      weight: 105
-    - name: Swift
-      url: tests/setup/swift/
-      parent: tests_setup
-      identifier: tests_setup_swift
-      weight: 106
-    - name: Go
-      url: tests/setup/go/
-      parent: tests_setup
-      identifier: tests_setup_go
-      weight: 107
-    - name: JUnit レポートのアップロード
-      url: tests/setup/junit_xml/
-      parent: tests_setup
-      identifier: tests_setup_junit_xml
-      weight: 108
-    - name: Bazel
-      url: tests/setup/bazel/
-      parent: tests_setup
-      identifier: tests_setup_bazel
-      weight: 109
-    - name: Java
-      url: tests/setup/bazel/java/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_java
-      weight: 10901
-    - name: Python
-      url: tests/setup/bazel/python/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_python
-      weight: 10902
-    - name: Go
-      url: tests/setup/bazel/go/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_go
-      weight: 10903
-    - name: ネットワーク設定
-      url: tests/network/
-      parent: tests
-      identifier: tests_network
-      weight: 2
-    - name: Containers でのテスト
-      url: tests/containers/
-      parent: tests
-      identifier: tests_containers
-      weight: 3
-    - name: エクスプローラー
-      url: tests/explorer/
-      parent: tests
-      identifier: tests_explorer
-      weight: 4
-    - name: 検索構文
-      url: tests/explorer/search_syntax
-      parent: tests_explorer
-      identifier: tests_explorer_search_syntax
-      weight: 401
-    - name: テスト実行の検索
-      url: tests/explorer/facets/
-      parent: tests_explorer
-      identifier: tests_explorer_facets
-      weight: 402
-    - name: エクスポート
-      url: tests/explorer/export/
-      parent: tests_explorer
-      identifier: tests_explorer_export
-      weight: 403
-    - name: Saved Views
-      url: tests/explorer/saved_views/
-      parent: tests_explorer
-      identifier: tests_explorer_saved_views
-      weight: 404
-    - name: モニター
-      url: monitors/types/ci/?tab=tests
-      parent: tests
-      identifier: tests_monitors
-      weight: 5
-    - name: テストヘルス
-      url: tests/test_health
-      parent: tests
-      identifier: tests_test_health
-      weight: 6
-    - name: 不安定なテストの管理
-      url: tests/flaky_management
-      parent: tests
-      identifier: tests_flaky_management
-      weight: 7
-    - name: 不安定なテストの扱い方
-      url: tests/flaky_tests
-      parent: tests
-      identifier: tests_flaky_tests
-      weight: 8
-    - name: 不安定さの早期検出
-      url: tests/flaky_tests/early_flake_detection
-      parent: tests_flaky_tests
-      identifier: tests_early_flake_detection
-      weight: 801
-    - name: テストの自動再試行
-      url: tests/flaky_tests/auto_test_retries
-      parent: tests_flaky_tests
-      identifier: tests_auto_test_retries
-      weight: 802
-    - name: Test Impact Analysis
-      url: tests/test_impact_analysis
-      parent: tests
-      identifier: test_impact_analysis
-      weight: 9
-    - name: セットアップ
-      url: tests/test_impact_analysis/setup/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_setup
-      weight: 1001
-    - name: .NET
-      url: tests/test_impact_analysis/setup/dotnet/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_dotnet
-      weight: 9101
-    - name: JavaScript と TypeScript
-      url: tests/test_impact_analysis/setup/javascript/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_javascript
-      weight: 9102
-    - name: Python
-      url: tests/test_impact_analysis/setup/python/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_python
-      weight: 9103
-    - name: Swift
-      url: tests/test_impact_analysis/setup/swift/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_swift
-      weight: 9104
-    - name: Java
-      url: tests/test_impact_analysis/setup/java/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_java
-      weight: 9105
-    - name: Ruby
-      url: tests/test_impact_analysis/setup/ruby/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_ruby
-      weight: 9106
-    - name: Go
-      url: tests/test_impact_analysis/setup/go/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_go
-      weight: 9107
-    - name: 仕組み
-      url: tests/test_impact_analysis/how_it_works/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_how_it_works
-      weight: 902
-    - name: トラブルシューティング
-      url: tests/test_impact_analysis/troubleshooting/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_troubleshooting
-      weight: 903
-    - name: テスト並列化
-      url: tests/test_parallelization/
-      parent: tests
-      identifier: test_parallelization
-      weight: 10
-    - name: セットアップ
-      url: tests/test_parallelization/setup/
-      parent: test_parallelization
-      identifier: test_parallelization_setup
-      weight: 1001
-    - name: 構成
-      url: tests/test_parallelization/configuration/
-      parent: test_parallelization
-      identifier: test_parallelization_configuration
-      weight: 1002
-    - name: ベストプラクティス
-      url: tests/test_parallelization/best_practices/
-      parent: test_parallelization
-      identifier: test_parallelization_best_practices
-      weight: 1003
-    - name: トラブルシューティング
-      url: tests/test_parallelization/troubleshooting/
-      parent: test_parallelization
-      identifier: test_parallelization_troubleshooting
-      weight: 1004
-    - name: 開発者のワークフロー
-      url: tests/developer_workflows
-      parent: tests
-      identifier: tests_developer_workflows
-      weight: 11
-    - name: Code Coverage
-      url: tests/code_coverage
-      parent: tests
-      identifier: tests_code_coverage
-      weight: 12
-    - name: RUM を使用したブラウザテストのインスツルメント
-      url: tests/browser_tests
-      parent: tests
-      identifier: tests_browser_tests
-      weight: 13
-    - name: RUM を使用した Swift テストのインスツルメント
-      url: tests/swift_tests
-      parent: tests
-      identifier: tests_swift_tests
-      weight: 14
-    - name: ログとテストの相関付け
-      url: tests/correlate_logs_and_tests
-      parent: tests
-      identifier: tests_correlate_logs_and_tests
-      weight: 15
-    - name: ガイド
-      url: tests/guides/
-      parent: tests
-      identifier: tests_guides
-      weight: 16
-    - name: トラブルシューティング
-      url: tests/troubleshooting/
-      parent: tests
-      identifier: tests_troubleshooting
-      weight: 17
     - name: Code Coverage
       url: code_coverage/
       pre: ci
@@ -6713,6 +6787,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
+    - name: Workflow Automation
+      url: feature_flags/concepts/workflow_automation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_workflow_automation
+      weight: 322
     - name: ユースケース
       url: feature_flags/use_cases
       parent: feature_flags
@@ -6824,11 +6903,16 @@ menu:
       parent: sci_service_mapping
       identifier: sci_service_mapping_ruby
       weight: 7
+    - name: OpenTelemetry
+      url: source_code/service-mapping/opentelemetry/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_opentelemetry
+      weight: 8
     - name: その他の言語
       url: source_code/service-mapping/other/
       parent: sci_service_mapping
       identifier: sci_service_mapping_other
-      weight: 8
+      weight: 9
     - name: リソースマッピング
       url: source_code/resource-mapping/
       parent: source_code_integration
@@ -6855,16 +6939,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
       weight: 101
-    - name: Error Tracking
-      url: ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 102
-    - name: ログ
-      url: ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 103
     - name: VS Code とカーソル
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6880,16 +6954,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: ログ
-      url: ide_plugins/vscode/logs/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_logs
-      weight: 103
-    - name: 例外リプレイ
-      url: ide_plugins/vscode/exception_replay/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_exception_replay
-      weight: 104
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -7036,6 +7100,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7146,66 +7215,71 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
       weight: 311
+    - name: インテグレーションパイプライン
+      url: observability_pipelines/processors/integration_pipelines
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_integration_pipelines
+      weight: 312
     - name: JSON をパース
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 312
+      weight: 313
     - name: XML をパース
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 313
+      weight: 314
     - name: クォータ
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 314
+      weight: 315
     - name: リデュース
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 315
+      weight: 316
     - name: OCSF にリマップ
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 316
+      weight: 317
     - name: サンプル
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 317
+      weight: 318
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 318
+      weight: 319
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 319
-    - name: タグ許可 / ブロックリスト
+      weight: 320
+    - name: タグ許可/ブロックリスト
       url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_allow_block_list
-      weight: 320
+      weight: 321
     - name: タグ
       url: observability_pipelines/processors/tags/
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 321
+      weight: 322
     - name: タグカーディナリティ制御
       url: observability_pipelines/processors/tag_cardinality_control
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
-      weight: 322
+      weight: 323
     - name: スロットル
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 324
+      weight: 325
     - name: 送信先
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -7261,7 +7335,7 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
       weight: 411
-    - name: Datadog メトリクス
+    - name: Datadog Metrics
       url: observability_pipelines/destinations/datadog_metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_metrics
@@ -7311,6 +7385,16 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
+    - name: Prometheus
+      url: /observability_pipelines/destinations/prometheus/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_prometheus
+      weight: 423
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
@@ -7457,56 +7541,61 @@ menu:
       url: logs/log_collection/maui/
       parent: log_collection
       weight: 109
+    - name: Electron
+      identifier: log_electron
+      url: logs/log_collection/electron/
+      parent: log_collection
+      weight: 110
     - name: "C#"
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 110
+      weight: 111
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 111
+      weight: 112
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 112
+      weight: 113
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 113
+      weight: 114
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 114
+      weight: 115
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 115
+      weight: 116
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 116
+      weight: 117
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
       identifier: log_collection_opentelemetry
-      weight: 115
+      weight: 116
     - name: Agent Integrations
       url: logs/log_collection/agent_checks/
       parent: log_collection
       identifier: log_collection_agent_checks
-      weight: 116
+      weight: 117
     - name: その他のインテグレーション
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 117
+      weight: 118
     - name: ログコンフィギュレーション
       url: logs/log_configuration/
       parent: log_management
@@ -7572,6 +7661,11 @@ menu:
       parent: log_configuration
       identifier: log_optimizer
       weight: 213
+    - name: 外部ソース
+      url: logs/log_configuration/external_sources/
+      parent: log_configuration
+      identifier: log_configuration_external_sources
+      weight: 214
     - name: ログエクスプローラー
       url: logs/explorer/
       parent: log_management
@@ -7667,6 +7761,11 @@ menu:
       url: logs/explorer/findings/
       parent: log_explorer
       weight: 516
+    - name: Federated Logs
+      identifier: log_explorer_federated_logs
+      url: logs/explorer/federated_logs/
+      parent: log_explorer
+      weight: 517
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -7727,26 +7826,36 @@ menu:
       parent: log_management
       identifier: log_reports
       weight: 8
+    - name: 移行
+      url: logs/migration/
+      parent: log_management
+      identifier: log_migration
+      weight: 9
+    - name: 移行ツール
+      url: logs/migration/migration_tools/
+      parent: log_migration
+      identifier: log_migration_migration_tools
+      weight: 901
     - name: ガイド
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 9
-    - name: Data Security
+      weight: 10
+    - name: データセキュリティ
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 10
+      weight: 11
     - name: トラブルシューティング
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 11
+      weight: 12
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1101
+      weight: 1201
     - name: BYOC Logs
       pre: upload-wui
       url: byoc-logs/
@@ -8050,6 +8159,16 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: TAXII 脅威インテリジェンスを取り込む
+      url: security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_taxii_threat_intelligence
+      weight: 10201
+    - name: STIX 脅威インテリジェンスを取り込む
+      url: security/cloud_siem/ingest_and_enrich/stix_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_stix_threat_intelligence
+      weight: 10202
     - name: ミュートされたインジケーター
       url: security/cloud_siem/ingest_and_enrich/muted_indicators
       parent: cloud_siem_ingest_and_enrich
@@ -8180,7 +8299,7 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 11
-    - name: Data Security
+    - name: データセキュリティ
       url: data_security/cloud_siem/
       parent: cloud_siem
       identifier: siem_data_security
@@ -8572,7 +8691,7 @@ menu:
       parent: csm_review_remediate
       identifier: csm_remediate_with_ai
       weight: 103
-    - name: オーナーシップ Agent
+    - name: Ownership Agent
       url: security/cloud_security_management/review_remediate/ownership_agent
       parent: csm_review_remediate
       identifier: csm_ownership_agent
@@ -8799,11 +8918,6 @@ menu:
       identifier: ai_guard
       parent: security_platform_heading
       weight: 60000
-    - name: AI Guard を始める
-      url: /security/ai_guard/onboarding/
-      identifier: ai_guard_onboarding
-      parent: ai_guard
-      weight: 1
     - name: AI Guard のセットアップ
       url: /security/ai_guard/setup/
       identifier: ai_guard_setup
@@ -8824,16 +8938,21 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
-    - name: HTTP API
-      url: /security/ai_guard/setup/http_api/
-      identifier: ai_guard_http_api
-      parent: ai_guard_setup
+    - name: ポリシーの管理
+      url: /security/ai_guard/policies/
+      identifier: ai_guard_policies
+      parent: ai_guard
+      weight: 3
+    - name: 機密データのマスキング
+      url: /security/ai_guard/sensitive_data_redaction/
+      identifier: ai_guard_sensitive_data_redaction
+      parent: ai_guard
       weight: 4
-    - name: セキュリティシグナル
+    - name: シグナルのトリアージと調査
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 3
+      weight: 5
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
@@ -9252,6 +9371,11 @@ menu:
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
       weight: 7043
+    - name: ネットワークセキュリティ
+      url: synthetics/platform/private_locations/network_security
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_network_security
+      weight: 7044
     - name: APM の接続
       url: synthetics/platform/apm/
       parent: synthetics_platform
@@ -9372,7 +9496,7 @@ menu:
       parent: synthetics
       identifier: synthetics_troubleshooting
       weight: 13
-    - name: Data Security
+    - name: データセキュリティ
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
@@ -9479,7 +9603,7 @@ menu:
       parent: journey_monitoring
       identifier: journey_monitoring_configure_journeys
       weight: 1
-    - name: 提案されたジャーニー
+    - name: 推奨ジャーニー
       url: journey_monitoring/suggested_journeys/
       parent: journey_monitoring
       identifier: journey_monitoring_suggested_journeys
@@ -9930,11 +10054,41 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_supported_versions
       weight: 107
+    - name: Electron
+      url: real_user_monitoring/application_monitoring/electron
+      parent: application_monitoring
+      identifier: rum_electron
+      weight: 206
+    - name: セットアップ
+      url: real_user_monitoring/application_monitoring/electron/setup
+      parent: rum_electron
+      identifier: rum_electron_setup
+      weight: 101
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/electron/error_tracking
+      parent: rum_electron
+      identifier: rum_electron_error_tracking
+      weight: 102
+    - name: 高度な構成
+      url: real_user_monitoring/application_monitoring/electron/advanced_configuration
+      parent: rum_electron
+      identifier: rum_electron_advanced_configuration
+      weight: 103
+    - name: 収集データ
+      url: real_user_monitoring/application_monitoring/electron/data_collected
+      parent: rum_electron
+      identifier: rum_electron_data_collected
+      weight: 104
+    - name: トラブルシューティング
+      url: real_user_monitoring/application_monitoring/electron/troubleshooting
+      parent: rum_electron
+      identifier: rum_electron_troubleshooting
+      weight: 105
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: セットアップ
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -9964,7 +10118,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: セットアップ
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -9999,7 +10153,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: セットアップ
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -10055,7 +10209,7 @@ menu:
       parent: rum_dashboards
       identifier: rum_dashboards_testing_and_deployment
       weight: 102
-    - name: 使用方法
+    - name: 使用量
       url: real_user_monitoring/platform/dashboards/usage
       parent: rum_dashboards
       identifier: rum_dashboards_usage
@@ -10070,7 +10224,7 @@ menu:
       parent: real_user_monitoring_platform
       identifier: rum_monitors
       weight: 402
-    - name: Custom Metrics を生成
+    - name: Custom Metrics の生成
       url: real_user_monitoring/platform/generate_metrics
       parent: real_user_monitoring_platform
       identifier: rum_generate_metrics
@@ -10280,7 +10434,7 @@ menu:
       parent: rum
       identifier: rum_guides
       weight: 16
-    - name: Data Security
+    - name: データセキュリティ
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
@@ -10381,11 +10535,16 @@ menu:
       parent: pa_profiles
       identifier: pa_identity_resolution
       weight: 501
+    - name: プランの追跡
+      url: product_analytics/tracking_plans
+      parent: product_analytics
+      identifier: pa_tracking_plans
+      weight: 6
     - name: 収集データ
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 6
+      weight: 7
     - name: サーバーサイドのイベント
       url: product_analytics/data_collected/server_side_events
       parent: pa_data_collected
@@ -10395,22 +10554,22 @@ menu:
       url: product_analytics/export_pipelines/
       parent: product_analytics
       identifier: pa_export_pipelines
-      weight: 7
+      weight: 8
     - name: ユーザビリティ
       url: product_analytics/usability
       parent: product_analytics
       identifier: pa_usability
-      weight: 8
+      weight: 9
     - name: ガイド
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 9
+      weight: 10
     - name: トラブルシューティング
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 10
+      weight: 11
     - name: 実験
       url: experiments/
       pre: experiment-wui
@@ -10437,21 +10596,26 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 3
+    - name: 実験承認
+      url: experiments/approvals/
+      parent: pa_experiments
+      identifier: pa_experiments_approvals
+      weight: 4
     - name: 実験結果の読み取り
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 4
+      weight: 5
     - name: 実験診断
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 5
+      weight: 6
     - name: コンセプト
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 6
+      weight: 7
     - name: サブジェクトタイプ
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10462,21 +10626,31 @@ menu:
       parent: pa_experiments_concepts
       identifier: pa_experiments_exposure_sql
       weight: 2
+    - name: ID の解決
+      url: experiments/concepts/identity_resolution
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_identity_resolution
+      weight: 3
     - name: SQL テンプレート変数
       url: experiments/concepts/sql_template_variables
       parent: pa_experiments_concepts
       identifier: pa_experiments_sql_template_variables
-      weight: 3
+      weight: 4
     - name: 累積影響
       url: experiments/concepts/cumulative_impact
       parent: pa_experiments_concepts
       identifier: pa_experiments_cumulative_impact
-      weight: 4
+      weight: 5
+    - name: Holdouts
+      url: experiments/holdouts/
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_holdouts
+      weight: 6
     - name: 統計
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 7
+      weight: 8
     - name: 分析手法
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10506,22 +10680,22 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 8
+      weight: 9
     - name: トラブルシューティング
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 10
+      weight: 11
     - name: Experiments MCP ツール
       url: experiments/mcp_tools
       parent: pa_experiments
       identifier: pa_experiments_mcp_tools
-      weight: 11
+      weight: 12
     - name: ガイド
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 12
+      weight: 13
     - name: Session Replay
       url: session_replay/
       pre: play-circle
@@ -10819,7 +10993,7 @@ menu:
       parent: account_management
       identifier: safety_center
       weight: 14
-    - name: プランと使用方法
+    - name: プランと使用量
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
@@ -10884,7 +11058,7 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
-    - name: 使用属性
+    - name: 使用の帰属
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
@@ -10984,6 +11158,11 @@ menu:
       url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
+    - name: 共有ロール
+      identifier: account_management_organization_groups_shared_roles
+      url: account_management/organization_groups/shared_roles/
+      parent: account_management_organization_groups
+      weight: 101
     - name: ガイド
       identifier: account_management_guides
       url: account_management/guide/
@@ -11005,7 +11184,7 @@ menu:
       url: disaster_recovery/recommended_settings/
       parent: disaster_recovery
       weight: 1
-    - name: Data Security
+    - name: データセキュリティ
       url: data_security/
       pre: security-lock
       identifier: data_security
@@ -11046,12 +11225,12 @@ menu:
       url: /tracing/configure_data_security/
       parent: data_security
       weight: 7
-    - name: PCI Compliance
+    - name: PCI コンプライアンス
       identifier: data_security_pci_compliance
       url: data_security/pci_compliance/
       parent: data_security
       weight: 8
-    - name: HIPAA Compliance
+    - name: HIPAA コンプライアンス
       identifier: data_security_hipaa_compliance
       url: data_security/hipaa_compliance/
       parent: data_security

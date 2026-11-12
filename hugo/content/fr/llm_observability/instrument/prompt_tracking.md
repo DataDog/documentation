@@ -4,12 +4,15 @@ aliases:
 description: Utilisez le suivi des prompts pour suivre vos modèles de prompt et leurs
   versions.
 further_reading:
-- link: https://www.datadoghq.com/blog/llm-prompt-tracking
-  tag: Blog
-  text: Suivez, comparez et optimisez vos prompts LLM avec Datadog LLM Observability.
 - link: https://learn.datadoghq.com/courses/llm-obs-investigations
   tag: Centre d'apprentissage
   text: Enquêter avec le LLM Observability
+- link: https://www.datadoghq.com/blog/llm-prompt-tracking
+  tag: Blog
+  text: Suivez, comparez et optimisez vos prompts LLM avec Datadog LLM Observability.
+- link: https://www.datadoghq.com/blog/agent-observability-prompt-management/
+  tag: Blog
+  text: Gérez et déployez des prompts LLM avec Datadog
 title: Suivi des prompts
 ---
 ## Présentation {#overview}
