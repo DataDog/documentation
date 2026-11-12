@@ -1,0 +1,9 @@
+entries:
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41531
+    operations:
+      - GetEUDMDevice
+      - GetEUDMDevices
+    title: Add unstable OpenAPI spec for End User Device Monitoring device 
+      endpoints
