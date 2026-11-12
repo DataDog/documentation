@@ -61,7 +61,7 @@ To set up an Integration Pipelines processor:
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
 1. (Optional) Click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row to import and manage custom pipelines. See [Custom pipelines](#custom-pipelines) for more information.
 1. Click {{< ui >}}Save{{< /ui >}}.
-1. If you enabled or disabled integration or custom pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
+1. If you made changes to integration or custom pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
 
 ### Preprocessing options
 
@@ -83,9 +83,9 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 ## Custom pipelines
 
-In Log Management, you can create custom pipelines to process logs that don't match an integration pipeline. You can import those custom pipelines into the Integration Pipelines processor. The Integration Pipelines processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
+In [Log Management][3], you can create custom pipelines to process your logs. You can import those custom pipelines into the Integration Pipelines processor. The processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
 
-Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipelines{{< /ui >}} tab, from top to bottom. Each log goes through every enabled custom pipeline whose filter it matches, including logs already processed by an integration pipeline.
+Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipelines{{< /ui >}} tab, from top to bottom. Each log is processed by every enabled custom pipeline whose filter it matches, including logs previously processed by an integration pipeline.
 
 **Note**: Custom pipelines require Worker version 2.25.0 or later. Upgrade all Workers in the pipeline before deploying custom pipelines.
 
@@ -95,19 +95,19 @@ Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipeli
 
 1. In the Integration Pipelines processor, click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
 1. Click {{< ui >}}Import Pipelines{{< /ui >}}.
-1. In the {{< ui >}}Import Custom Pipelines{{< /ui >}} modal, select the Log Management pipelines you want to import. You can search pipelines by name, ID, or filter.
+1. In the {{< ui >}}Import Custom Pipelines{{< /ui >}} modal, select the Log Management pipelines you want to import. You can search pipelines by name, ID, or filter. The toggle for each pipeline reflects whether the pipeline is enabled or disabled in Log Management.
     {{< img src="observability_pipelines/processors/integration_pipelines_import_custom_pipelines.png" alt="The Import Custom Pipelines modal listing Log Management pipelines, with three pipelines selected for import." style="width:100%;" >}}
 1. Click {{< ui >}}Import{{< /ui >}}.
-1. Click {{< ui >}}Save{{< /ui >}}, then redeploy your pipeline.
+1. Click {{< ui >}}Save{{< /ui >}}, then redeploy your log pipeline.
 
 **Notes**:
 
-- Importing a pipeline creates a copy in the processor. Later changes to the pipeline in Log Management are not synced. To apply them, import the pipeline again and redeploy your pipeline.
+- Importing a custom pipeline creates a copy in the processor. Later changes to the custom pipeline in Log Management are not synced. To apply the changes, import the custom pipeline again and redeploy your log pipeline.
 - Deleting a custom pipeline from the processor does not affect the original pipeline in Log Management.
-- An imported pipeline keeps its enabled state from Log Management. For example, if a pipeline is disabled in Log Management, it is imported as disabled.
-- An imported pipeline keeps the ID it has in Log Management. Importing the same pipeline again overwrites the existing custom pipeline, including its name, filter, enabled state, and processors.
-- A cloned pipeline gets a new ID, so importing the original pipeline again does not overwrite the clone.
-- A pipeline without a filter in Log Management is assigned the `*` filter, which matches all logs.
+- An imported custom pipeline keeps its enabled or disabled state from Log Management.
+- An imported custom pipeline keeps the ID it has in Log Management. Importing the same pipeline again overwrites the existing custom pipeline, including its name, filter, enabled state, and processors.
+- A cloned custom pipeline is assigned a new ID, so importing the original pipeline again does not overwrite the clone.
+- A custom pipeline without a filter in Log Management is assigned the `*` filter, which matches all logs.
 
 ### Manage custom pipelines
 
@@ -118,7 +118,7 @@ In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
 - Edit a pipeline's name and filter query. Processors can't be edited in Observability Pipelines. To change them, edit the pipeline in Log Management and import it again.
 - Clone or delete a pipeline.
 
-After making changes, click {{< ui >}}Save{{< /ui >}}, then redeploy your pipeline for the changes to take effect.
+After making changes, click {{< ui >}}Save{{< /ui >}}, then redeploy your log pipeline for the changes to take effect.
 
 {{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab listing two enabled custom pipelines with edit, disable, clone, delete, and reorder actions." style="width:100%;" >}}
 
@@ -174,3 +174,4 @@ See [Processor buffer metrics][2] for more information on metrics emitted by all
 
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#buffer
+[3]: /logs/log_configuration/pipelines/
