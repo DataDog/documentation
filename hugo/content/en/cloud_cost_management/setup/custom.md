@@ -303,6 +303,7 @@ curl -L -X PATCH "{{< region-param key="custom_costs_endpoint" >}}/${file_id}" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
 -d '{"data": {"type": "cost_metadata", "id": "'"${file_id}"'", "attributes": {"ai_provider": true}}}'
+```
 
 ## Cost metric types
 
