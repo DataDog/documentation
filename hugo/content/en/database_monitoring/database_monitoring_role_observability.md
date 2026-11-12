@@ -13,13 +13,13 @@ further_reading:
   text: "Role-based access control"
 ---
 
-{{< callout url="https://app.datadoghq.com/forms/share/e5e882f61f3c52f41b235035f4a9af213cc0605812945c987859a9490d10c1b6" btn_hidden="false" header="Open Preview" >}}
-Database Monitoring Role Observability is in open preview. APIs may change before general availability.
+{{< callout url="https://app.datadoghq.com/forms/share/e5e882f61f3c52f41b235035f4a9af213cc0605812945c987859a9490d10c1b6" btn_hidden="false" header="Preview" >}}
+Database Monitoring Role Observability is in preview. APIs may change before general availability.
 {{< /callout >}}
 
 ## Overview
 
-Role Observability shows who can access your PostgreSQL data and how they got that access, without connecting to the database or querying system catalogs yourself. Once enabled with the `collect_roles.enabled` option in `conf.d/postgres.d/conf.yaml` (off by default), Datadog collects role and privilege information from each monitored instance every 10 minutes and resolves it into a view of effective access, surfacing the relationships, inheritance, and membership behind every grant.
+Role Observability shows who can access your PostgreSQL data and how they got that access, without connecting to the database or querying system catalogs yourself. After you enable Role Observability with the `collect_roles.enabled` option in `conf.d/postgres.d/conf.yaml` (off by default), Datadog collects role and privilege information from each monitored instance every 10 minutes and resolves it into a view of effective access. Role Observability surfaces the relationships, inheritance, and membership behind every grant.
 
 This page explains how to:
 
@@ -31,14 +31,13 @@ This page explains how to:
 
 - A PostgreSQL database monitored by [Database Monitoring][3].
 - Datadog Agent version 7.86 or later.
-- The feature is in open preview and gated behind a feature flag. To opt in, contact your Datadog account manager or fill out the request form at the top of this page.
-- Role collection enabled in the Agent. Set `collect_roles.enabled: true` in `conf.d/postgres.d/conf.yaml` (off by default) and restart the Agent. To confirm data is flowing for a given instance, call [`GET /access/status`](#using-the-api).
+- Role collection enabled in the Agent. Set `collect_roles.enabled: true` in `conf.d/postgres.d/conf.yaml` and restart the Agent. `collect_roles.enabled` is `false` by default. To confirm data is flowing for a given instance, call `GET /access/status`. See [Using the API](#using-the-api) for more information.
 
-## Access role data
+## Query role and access data
 
-Role Observability data is available through the Datadog API and the [Datadog MCP server][2]. No UI is available for this feature.
+Role Observability data is available through the Datadog API and the [Datadog MCP server][2].
 
-Every answer is computed from the latest role and privilege snapshot that Database Monitoring collected for the instance. Role Observability reads collected metadata only: it does not connect to your database, run queries as the role, or change any grant.
+Role Observability computes every answer from the latest role and privilege snapshot that Database Monitoring collected for the instance. Role Observability reads collected metadata only: it does not connect to your database, run queries as the role, or change any grant.
 
 ### Using the MCP server
 
@@ -128,7 +127,17 @@ The application key must belong to a user or service account with the [**Databas
 
 Most endpoints also accept optional filters such as `filter[privilege]` and `filter[column]`, and are paginated with `page[size]` and `page[cursor]`.
 
-Each result reports access in two modes: `without_set_role`, for access the role has directly or through membership, and `via_set_role`, for access it can get only after `SET ROLE`. Each mode is `usable`, `blocked` (a grant exists, but a database `CONNECT` or schema `USAGE` check fails), `unknown` (the collected data can't prove it either way), or `not_applicable` (the privilege does not apply to this object type, for example `INSERT` on a function). The response also includes a representative path from the role to the grant.
+Each result reports access in two modes:
+- `without_set_role`, for access the role has directly or through membership
+- `via_set_role`, for access it can get only after `SET ROLE`
+
+Each mode is one of:
+- `usable`
+- `blocked` (a grant exists, but a database `CONNECT` or schema `USAGE` check fails)
+- `unknown` (the collected data can't prove it either way)
+- `not_applicable` (the privilege does not apply to this object type, for example `INSERT` on a function)
+
+The response also includes a representative path from the role to the grant.
 
 If `meta.resolution_status` is `partial`, some access could not be resolved and `meta.warnings` explains why. In that case, an empty result does not prove that nobody has access. A `404` with `role_data_not_collected` means no data has been collected yet, so check `/access/status`.
 
@@ -138,7 +147,7 @@ Role Observability answers questions about who can access your PostgreSQL data. 
 
 - **PostgreSQL only.** Other database engines are not covered.
 - **Scope is per monitored database.** Each view is scoped to a single database monitored by Database Monitoring. There is no single API call to compare roles or privileges across instances. To compare two instances, use the MCP server and ask a coding agent to fetch and diff the data.
-- **Data refreshes every 10 minutes.** Role and privilege changes made between refresh cycles are not visible until the next one. Set `collect_roles.enabled: true` in `conf.d/postgres.d/conf.yaml` to turn collection on; it is off by default.
+- **Data refreshes every 10 minutes.** Role and privilege changes made between refresh cycles are not visible until the next one.
 - **Row-level security is not surfaced.** Policies defined with `CREATE POLICY` are not included. Role Observability reflects grant-level access only.
 - **No data sensitivity classification.** Role Observability shows access to database objects. It does not describe the sensitivity of the data those objects contain. Pair it with a data classification tool to identify who can read sensitive columns or tables.
 - **APIs may change.** The feature is in open preview, so endpoint shapes, parameter names, and response formats can change before general availability.

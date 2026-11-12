@@ -5469,7 +5469,7 @@ menu:
       parent: dbm
       identifier: dbm_pr_reviews
       weight: 8
-    - name: Database Monitoring Role Observability
+    - name: Role Observability
       url: database_monitoring/database_monitoring_role_observability/
       parent: dbm
       identifier: dbm_role_observability
