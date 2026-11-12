@@ -89,7 +89,7 @@ Trigger when the query meets one of the following conditions compared to a thres
 
 #### No data and below alerts
 
-`NO DATA` is a state given when no logs match the monitor query during the time frame.
+When no logs match the monitor query during the time frame, the monitor can enter the `NO DATA` state. This happens only if no data is enabled for the monitor or the monitor has groups.
 
 To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given time frame across all aggregate groups.
 
