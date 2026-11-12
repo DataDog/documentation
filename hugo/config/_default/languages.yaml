@@ -1,3 +1,8 @@
+# Merge module language config (the shared left nav menus in shared/left_nav)
+# into every language. Without this, a language gets module menus only if it
+# also has menu files in hugo/config/_default/menus/.
+_merge: deep
+
 en:
   languageName: "English"
   weight: 1

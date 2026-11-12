@@ -1,7 +1,7 @@
 /**
  * Builds the documentation navigation tree from Hugo's main menu YAML at build
  * time. This is the same source Hugo's mobile nav uses for its accordion
- * (`.Site.Menus.main` → `config/_default/menus/main.{lang}.yaml`).
+ * (`.Site.Menus.main` → `shared/left_nav/config/_default/menus/main.{lang}.yaml`).
  *
  * Hugo stores the menu as a flat list where hierarchy is expressed with
  * `identifier` / `parent` and ordering with `weight`. This module rebuilds that
@@ -42,7 +42,7 @@ const MenuFileSchema = z.object({
 // Eagerly load every `main.{lang}.yaml` so a missing locale falls back to
 // English rather than failing the build.
 const menuFilesByPath = import.meta.glob<string>(
-  "@hugo-site/config/_default/menus/main.*.yaml",
+  "@shared/left_nav/config/_default/menus/main.*.yaml",
   { query: "?raw", import: "default", eager: true },
 );
 
