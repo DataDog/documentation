@@ -25,22 +25,22 @@ After you enable Bits Detection, it initializes monitoring for the 100 most crit
 
 Your team's existing monitors stay in place. Bits Detection works alongside them, adding adaptive coverage for the parts of your system that change too quickly to model by hand.
 
-<div class="alert alert-info">
-Using Bits Detection requires the following permissions:
-<ul>
-  <li>To enable coverage:
-    <ul>
-      <li>Bits Investigations Write</li>
-      <li>Monitors Write</li>
-    </ul>
-  </li>
-  <li>To set up a notification destination:
-    <ul>
-      <li>Monitor Configuration Policy Write</li>
-    </ul>
-  </li>
-</ul>
-For details, see the <a href="#permissions">Permissions</a> section.</div>
+### Permissions {#permissions}
+
+Bits Detection uses existing Datadog role-based access control (RBAC) permissions. There are no permissions specific to Bits Detection.
+
+| Action                                                                  | Required permissions |
+|:------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------- |
+| View the Coverage page and scope details                                | Bits Investigations Read (`bits_investigations_read`) |
+| View critical endpoints                                                 | APM Read (`apm_read`) |
+| View Bits Detection monitors                                            | Monitors Read (`monitors_read`) |
+| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) |
+| Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`) |
+| Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`) |
+
+To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Write and Monitors Write.
+
+For details on assigning permissions to roles, see [Access Control][6].
 
 You can enable Bits Detection for additional services from several entry points:
 
@@ -140,23 +140,6 @@ Use feedback to tune Bits Detection for your environment. You can flag alerts as
 **Provide feedback on resource criticality**
 
 Bits Detection uses criticality to determine which resources should have managed monitoring coverage. From the [service monitoring overview][2], click {{< ui >}}Mark as Not Critical{{< /ui >}} next to an endpoint that should not have critical coverage, or {{< ui >}}Add a New Endpoint{{< /ui >}} to mark one as critical.
-
-## Permissions
-
-Bits Detection uses existing Datadog role-based access control (RBAC) permissions. There are no permissions specific to Bits Detection.
-
-| Action                                                                  | Required permissions |
-|:------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------- |
-| View the Coverage page and scope details                                | Bits Investigations Read (`bits_investigations_read`) |
-| View critical endpoints                                                 | APM Read (`apm_read`) |
-| View Bits Detection monitors                                            | Monitors Read (`monitors_read`) |
-| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) |
-| Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`) |
-| Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`) |
-
-To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Write and Monitors Write.
-
-For details on assigning permissions to roles, see [Access Control][6].
 
 ## Further reading
 
