@@ -11133,6 +11133,16 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
+    - name: Finalized Usage Metrics
+      identifier: account_management_billing_finalized_usage_metrics
+      url: account_management/billing/usage_metrics/finalized_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150401
+    - name: Estimated Usage Metrics
+      identifier: account_management_billing_estimated_usage_metrics
+      url: account_management/billing/usage_metrics/estimated_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150402
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/

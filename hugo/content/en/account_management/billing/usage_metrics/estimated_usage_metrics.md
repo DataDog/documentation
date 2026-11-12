@@ -1,6 +1,12 @@
 ---
 title: Estimated Usage Metrics
 further_reading:
+    - link: "/account_management/billing/usage_metrics/"
+      tag: "Documentation"
+      text: "Usage Metrics"
+    - link: "/account_management/billing/usage_metrics/finalized_usage_metrics/"
+      tag: "Documentation"
+      text: "Finalized Usage Metrics"
     - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations"
       tag: "Blog"
       text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
