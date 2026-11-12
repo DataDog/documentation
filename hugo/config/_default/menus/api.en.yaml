@@ -11214,18 +11214,6 @@ menu:
       url: /api/latest/csm-threats/
       identifier: csm-threats
       generated: true
-    - name: Update a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/update-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-update-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 15
     - name: Get a Workload Protection agent rule (US1-FED)
       url: /api/latest/csm-threats/get-a-workload-protection-agent-rule-us1-fed/
       identifier: csm-threats-get-a-workload-protection-agent-rule-us1-fed
@@ -11238,30 +11226,6 @@ menu:
           - GetCloudWorkloadSecurityAgentRule
         unstable: []
         order: 13
-    - name: Delete a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/delete-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-delete-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 16
-    - name: Create a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/create-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-create-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 14
     - name: Get all Workload Protection agent rules (US1-FED)
       url: /api/latest/csm-threats/get-all-workload-protection-agent-rules-us1-fed/
       identifier: csm-threats-get-all-workload-protection-agent-rules-us1-fed

@@ -6885,25 +6885,9 @@
     "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
-  "CreateCloudWorkloadSecurityAgentRule": {
-    "description": "Create a new agent rule with the given parameters.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Create a Workload Protection agent rule (US1-FED)",
-    "request_description": "The definition of the new agent rule",
-    "request_schema_description": "Request object that includes the Agent rule to create"
-  },
-  "DeleteCloudWorkloadSecurityAgentRule": {
-    "description": "Delete a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Delete a Workload Protection agent rule (US1-FED)"
-  },
   "GetCloudWorkloadSecurityAgentRule": {
     "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
-  },
-  "UpdateCloudWorkloadSecurityAgentRule": {
-    "description": "Update a specific agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Update a Workload Protection agent rule (US1-FED)",
-    "request_description": "New definition of the agent rule",
-    "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListSecurityMonitoringCriticalAssets": {
     "description": "Get the list of all critical assets.",
