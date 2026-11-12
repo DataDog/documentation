@@ -61,19 +61,19 @@ Use **Test connection** to send one short request to the endpoint before you sav
 
 Runs send synthetic prompts:
 
-| Setting | Description | Range |
+| Setting | Description | Values |
 | --- | --- | --- |
-| Concurrency | Number of requests in flight at once. | 1 to 32 |
-| Requests | Number of requests measured. Every turn of a conversation counts. | 1 to 5,000 |
-| Warmup requests | Requests sent before measuring, with their own concurrency. | 0 to 100 |
+| Concurrency | Number of requests in flight at once. | 1 to 1,024 |
+| Requests | Number of requests measured. Every turn of a conversation counts. | 1 to 10,000 |
+| Warmup requests | Requests sent before measuring, with their own concurrency. | 0 to 1,000 |
 | Input and output tokens | Tokens per turn, as a mean and a standard deviation. | Up to 1,000,000 |
-| Conversations | Number of synthetic conversations generated and cycled through. | 1 to 5,000 |
-| Turns | Requests per conversation, as a mean and a standard deviation. Later turns resend the conversation's history. | 1 to 20 |
-| Random seed | Optional. Runs with the same seed send the same prompts, which makes runs easier to compare. | 0 to 2,147,483,647 |
+| Conversations | Number of synthetic conversations generated and cycled through. | 1 to 10,000 |
+| Turns | Requests per conversation, as a mean and a standard deviation. Later turns resend the conversation's history. | 1 to 50 |
+| Random seed | Optional. Runs with the same seed send the same prompts, which makes runs easier to compare. | Integer |
 
 Runs from Datadog can instead replay the **AgentX** scenario, the coding agent traces published by [SemiAnalysis](https://inferencex.semianalysis.com/infx/agentx), with up to 128 concurrent sessions and a profiling phase of 15 to 60 minutes.
 
-A run that lasts longer than the benchmark's maximum duration is stopped: 1 to 60 minutes, or up to 2 hours for a scenario.
+A run that lasts longer than the benchmark's maximum duration, up to 24 hours, is stopped.
 
 ### Targets
 
@@ -108,7 +108,7 @@ Search
 Curve
 : Runs every concurrency level you list, up to 16 levels, to show how latency and throughput change with load.
 
-Sweeps go up to a concurrency of 128. Each step of a sweep is a run that you can open on its own.
+Sweeps go up to a concurrency of 1,024, or 128 for the AgentX scenario. Each step of a sweep is a run that you can open on its own.
 
 ## Run benchmarks in your Kubernetes cluster
 
