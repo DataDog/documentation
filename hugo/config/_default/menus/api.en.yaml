@@ -8882,6 +8882,32 @@ menu:
       url: /api/latest/agent-health/
       identifier: agent-health
       generated: true
+    - name: Get an Agent Health issue
+      url: /api/latest/agent-health/get-an-agent-health-issue/
+      identifier: agent-health-get-an-agent-health-issue
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAgentHealthIssue
+        unstable:
+          - v2
+        order: 3
+    - name: List Agent Health issues
+      url: /api/latest/agent-health/list-agent-health-issues/
+      identifier: agent-health-list-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthIssues
+        unstable:
+          - v2
+        order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
       identifier: agent-health-list-active-agent-health-issues

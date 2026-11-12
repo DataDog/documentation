@@ -161,6 +161,14 @@
     "description": "Returns the active Agent Health issues for a node Agent or Cluster Agent resource.",
     "summary": "List active Agent Health issues"
   },
+  "ListAgentHealthIssues": {
+    "description": "List Agent Health issues across your organization. Only open issues are returned.\nReturns `403` if you lack the `hosts_read` permission.\n\nResults use a stable order: severity rank (`high`, `medium`, `low`, then other values),\nthen `first_seen_at` descending with missing timestamps last, then issue ID ascending.\nUse `page[size]` and the zero-based `page[number]` to paginate. Invalid page values\nreturn a `400` JSON:API error response. `meta.page.total_filtered_count` is the number\nof issues matching the filters, and `meta.page.total_count` the number of open issues\nin the organization.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "summary": "List Agent Health issues"
+  },
+  "GetAgentHealthIssue": {
+    "description": "Get an Agent Health issue and its available remediation in your organization.\nOnly open issues are returned. The `remediation` attribute is omitted when\nthe issue has no remediation.\n\nReturns `404` if the issue does not exist, is not open, belongs to another\norganization, or you do not have access to its data. This response does not\nreveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.",
+    "summary": "Get an Agent Health issue"
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
