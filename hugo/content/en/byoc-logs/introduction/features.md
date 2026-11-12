@@ -56,6 +56,8 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 - Bits Investigation (Preview)
 - MCP Server (Preview)
 
+<div class="alert alert-info">Bits Investigation and MCP Server are in <strong>Preview</strong>, which gives you early access to these features before their official release. Datadog is actively optimizing how these features query BYOC Logs data, so you might experience less-than-optimal query performance.</div>
+
 ## Unsupported features
 
 BYOC Logs does not support the following features:
