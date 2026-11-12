@@ -1992,7 +1992,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
+        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `ai-gateway-route`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -9333,8 +9333,13 @@ components:
         routing_rules:
           items:
             $ref: "#/components/schemas/AiGatewayModelGroupRoutingRule"
-            description: Routing rule in the group.
+            description: Viewable routing rule in the group. Hidden route identities are omitted.
           type: array
+        routing_rules_restricted:
+          description: Whether some saved routes are hidden from the caller. Omit routing_rule_slugs to preserve all memberships; replacing the visible selection also preserves saved hidden memberships.
+          example: true
+          readOnly: true
+          type: boolean
         updated_at:
           description: Time when the resource was last updated.
           example: "2026-08-24T12:00:00Z"
@@ -10369,18 +10374,19 @@ components:
         - XHIGH
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
-      default: configured
       description: >-
-        How a tier orders its targets. Omitted or null defaults to configured, which preserves target order. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       nullable: true
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayPolicyAttributes:
       description: Routing policy configuration.
       properties:
@@ -11271,10 +11277,61 @@ components:
       required:
         - restricted_details
       type: object
+    AiGatewayRoutingClassifier:
+      description: Saved classified-tier settings. Provider and model are empty when the caller cannot view the provider.
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence.
+          example: 0.5
+          format: double
+          type: number
+        context:
+          description: Traffic context for the classifier.
+          example: Requests come from engineers.
+          type: string
+        model:
+          description: Viewable decision model, or an empty string.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Viewable decision-model provider slug, or an empty string.
+          example: openai
+          type: string
+      required:
+        - provider
+        - model
+        - confidence_threshold
+      type: object
+    AiGatewayRoutingClassifierRequest:
+      description: Decision model and settings for a classified tier. Omission preserves the saved classifier; null clears it. Newly selected models require provider View.
+      nullable: true
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence. Omission preserves a saved value; new classifiers and explicit null default to 0.5.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+        context:
+          description: Traffic context for the classifier. Omission preserves saved context.
+          example: Requests come from engineers.
+          maxLength: 2000
+          type: string
+        model:
+          description: Decision model on the provider. Omit together with provider to preserve the saved selection.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
+          example: openai
+          type: string
+      type: object
     AiGatewayRoutingReasoningLevel:
       description: >-
-        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. Omitted or null clears an override on full replacement. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request or the destination cannot
-        otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
+        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. On update, omission preserves a saved target override; null explicitly clears it. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request
+        or the destination cannot otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
       enum:
         - none
         - minimal
@@ -11303,7 +11360,7 @@ components:
           format: date-time
           type: string
         route_id:
-          description: Stable numeric route identifier used by scoped policies.
+          description: Stable numeric route identifier used by scoped policies and `ai-gateway-route` restriction policies.
           example: 123
           format: int64
           type: integer
@@ -11319,6 +11376,7 @@ components:
           format: date-time
           type: string
       required:
+        - route_id
         - tiers
         - created_at
         - updated_at
@@ -11373,16 +11431,28 @@ components:
         - data
       type: object
     AiGatewayRoutingRuleReplaceAttributes:
-      description: Attributes used to replace an AI Gateway routing rule.
+      description: Partial route update. Omit tiers to preserve the entire graph, including hidden selections. Saved target IDs retain omitted settings. Replacing tiers must explicitly retain or remove every hidden occurrence.
       properties:
+        expected_updated_at:
+          description: Saved route revision. A mismatched value returns 409 without changes.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        removed_target_ids:
+          description: Parent-local saved occurrence IDs explicitly removed from the submitted tiers. IDs must be distinct, belong to this route, and not also be retained.
+          items:
+            example: 901
+            format: int64
+            minimum: 1
+            type: integer
+          type: array
+          uniqueItems: true
         tiers:
           items:
             $ref: "#/components/schemas/AiGatewayRoutingRuleTierRequest"
             description: Routing fallback tier.
           minItems: 1
           type: array
-      required:
-        - tiers
       type: object
     AiGatewayRoutingRuleReplaceData:
       description: Data used to replace an AI Gateway routing rule.
@@ -11435,6 +11505,10 @@ components:
     AiGatewayRoutingRuleTarget:
       description: Model target or reference to another routing rule.
       properties:
+        default:
+          description: Present and true for the default classified destination.
+          example: true
+          type: boolean
         id:
           description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
           example: 901
@@ -11457,8 +11531,12 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric, present only for non-default targets in classified tiers.
+          example: Short factual questions.
+          type: string
         slug:
-          description: Organization-unique resource slug.
+          description: Referenced route slug. Omitted when the caller lacks View; only the parent-local occurrence ID remains.
           example: coding-fallback
           type: string
         type:
@@ -11476,8 +11554,13 @@ components:
     AiGatewayRoutingRuleTargetRequest:
       description: Model target or reference to another routing rule used to create or replace a rule.
       properties:
+        default:
+          description: Whether this is the single default classified destination. Omission preserves a saved value; null clears it.
+          example: false
+          nullable: true
+          type: boolean
         id:
-          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
+          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale, foreign, duplicate, or destination-changing ID is rejected. Hidden route targets can be retained using only this parent-local ID and type.
           example: 901
           format: int64
           minimum: 1
@@ -11498,15 +11581,21 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          example: Short factual questions.
+          maxLength: 300
+          nullable: true
+          type: string
         slug:
-          description: Organization-unique routing rule slug. Allowed only in configured tiers.
+          description: Organization-unique routing rule slug. New references require route View. Omit to retain a saved target by its parent-local ID. Allowed only in configured tiers.
           example: coding-fallback
           type: string
         type:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTargetType"
         weight:
           description: >-
-            Relative weight in a weighted_affinity tier. Omitted or null defaults to 1. Weights need not total 100. Must be omitted or null in configured tiers.
+            Relative weight in a weighted_affinity tier. Omission preserves a saved target weight; new targets and explicit null default to 1. Weights need not total 100. Must be omitted or null in configured tiers.
           example: 70
           format: int64
           maximum: 10000
@@ -11529,6 +11618,8 @@ components:
     AiGatewayRoutingRuleTier:
       description: Routing fallback tier containing targets and their effective ordering.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifier"
         ordering:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTierOrdering"
         ordering_issue:
@@ -11548,11 +11639,13 @@ components:
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayRoutingRuleTierOrderingIssue:
       description: >-
         Stored tier ordering is inconsistent. mixed means targets have different supported orderings, and unknown means a target has an unsupported ordering. The tier is reported as configured without weights. Replace the rule to repair it. Omitted for consistent tiers. A forced deletion cannot rewrite a surviving tier with an unknown issue.
@@ -11568,6 +11661,8 @@ components:
     AiGatewayRoutingRuleTierRequest:
       description: Routing fallback tier used to create or replace a rule.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifierRequest"
         ordering:
           $ref: "#/components/schemas/AiGatewayNullableRoutingRuleTierOrdering"
         targets:
@@ -75876,6 +75971,10 @@ components:
     JSONAPIErrorItem:
       description: API error response body
       properties:
+        code:
+          description: An application-specific error code.
+          example: invalid_request
+          type: string
         detail:
           description: A human-readable explanation specific to this occurrence of the error.
           example: Missing required attribute in body
@@ -156804,8 +156903,6 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
-            data_observability_catalog_read: Read Data Observability catalog resources and owners.
-            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
@@ -231354,7 +231451,8 @@ paths:
   /api/v2/providers/{id}:
     delete:
       description: >-
-        Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access. This also applies when force=true. Existing cascades remain and can affect policies the caller cannot edit. Delete a provider by ID. Providers used by routing rules return provider_in_use with HTTP 409 and the affected rules in error metadata. Retry with force=true to remove provider targets and delete rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Requires `ai_gateway_config_write` and provider View/Edit. Models and pricing inherit provider access. Every affected route and policy membership requires the corresponding Edit permission; force=true never bypasses authorization. Providers used by routing rules return provider_in_use with HTTP 409. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable; visible route entries contain id, slug, and editable. Hidden dependencies are omitted from every collection and reported only by restricted_dependencies. A blocked response changes no configuration; an authorized editor must first remove the blocking references. Retry with force=true to confirm an authorized cascade that removes provider targets and deletes rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue
+        fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
       operationId: DeleteAiGatewayProvider
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderID"
@@ -231367,7 +231465,31 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: provider_in_use
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: false
+                              id: 123
+                              slug: coding
+                          rules_to_update: []
+                        status: "409"
+                        title: Provider is used by routing rules
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -235684,8 +235806,8 @@ paths:
     delete:
       description: |-
         Deletes the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
-        Deleting a provider policy restores normal unrestricted defaults.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
+        Deleting a provider or route policy restores normal unrestricted defaults.
       operationId: DeleteRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -235712,7 +235834,7 @@ paths:
     get:
       description: |-
         Retrieves the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_read`.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_read`.
       operationId: GetRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -235758,6 +235880,7 @@ paths:
         #### Supported resources
         Restriction policies can be applied to the following resources:
         - AI Gateway Providers: `ai-gateway-provider`
+        - AI Gateway Routes: `ai-gateway-route`
         - Dashboards: `dashboard`
         - Integration Services: `integration-service`
         - Integration Webhooks: `integration-webhook`
@@ -235787,17 +235910,18 @@ paths:
         - Feature Flags: `feature-flag`
         - Network Path Configs: `network-path-config`
 
-        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.
-        The editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.
-        Reading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires
+        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.
+        The editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.
+        Reading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires
         `ai_gateway_config_write` and follows standard restriction-policy authorization, including
         administrator recovery and self-lockout checks.
-        Providers without a restriction policy retain the normal unrestricted defaults.
+        Providers and routes without a restriction policy retain the normal unrestricted defaults.
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
         ----------------------------|--------------------------
         AI Gateway Providers        | `viewer`, `editor`
+        AI Gateway Routes           | `viewer`, `editor`
         Dashboards                  | `viewer`, `editor`
         Integration Services        | `viewer`, `editor`
         Integration Webhooks        | `viewer`, `editor`
@@ -236671,7 +236795,8 @@ paths:
   /api/v2/routing-rules:
     delete:
       description: >-
-        Delete a routing rule. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Delete a route with `ai_gateway_config_write` and route View/Edit. Every affected route and policy membership requires the corresponding Edit permission. The force=true parameter confirms impact and never bypasses authorization. A denied or unavailable check changes no configuration. Visible dependencies include editable; hidden dependencies are omitted and reported only by restricted_dependencies. A blocked response means an authorized editor must first remove blocking references. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable. Route deletion entries contain rule, reason, and editable; update entries contain rule, removed_tiers, and editable. Each rule contains route_id, slug, tiers, created_at, and updated_at with hidden nested selections redacted. The removed_tiers array identifies original tier numbers removed entirely by the cascade. Already-authorized
+        in-flight operations may finish. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted. Restriction cleanup occurs only after confirmed deletion. Cleanup failure returns 500 with configuration_deleted=true and permissions_cleanup_failed=true; refresh instead of assuming the route still exists.
       operationId: DeleteAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -236682,7 +236807,42 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: routing_rule_referenced
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: true
+                              reason: requested
+                              rule:
+                                created_at: "2026-08-24T12:00:00Z"
+                                route_id: 123
+                                slug: coding
+                                tiers:
+                                  - ordering: configured
+                                    targets:
+                                      - id: 901
+                                        model: gpt-5.2-codex
+                                        provider: prod-us
+                                        type: model
+                                updated_at: "2026-08-24T12:00:00Z"
+                          rules_to_update: []
+                        status: "409"
+                        title: Routing rule is in use
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -236702,7 +236862,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
-      description: List all routing rules for the organization.
+      description: List the organization's routing rules that the caller has View access to. Requires `ai_gateway_config_read`. Hidden route references are omitted from nested targets.
       operationId: ListAiGatewayRoutingRules
       responses:
         "200":
@@ -236747,7 +236907,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
-        Create an organization-owned routing rule. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
+        Create an organization-owned route with `ai_gateway_config_write`. New provider/model and route references require View. New routes use standard unrestricted defaults. To restrict configuration access, create the route and then apply a restriction policy using its numeric route_id. Sharing follows standard restriction-policy propagation and does not grant or revoke policy-authorized inference. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
       operationId: CreateAiGatewayRoutingRule
       requestBody:
         content:
@@ -236840,7 +237000,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Replace a routing rule's tiers. The slug is immutable; data capture is managed independently. This is a full replacement: omitted or null ordering resets the tier to configured, and omitted or null weights in a weighted_affinity tier reset to 1. Omitted or null reasoning_level clears a model destination's reasoning override. Replacing a rule repairs tiers reported with an ordering_issue.
+        Update a route with `ai_gateway_config_write` and route View/Edit. The slug is immutable; data capture is managed independently. Omitting tiers preserves the entire graph. When tiers are supplied, saved parent-local target IDs retain omitted destination and reasoning, weight, rubric, and default settings. Omitted ordering/classifier settings preserve the saved same-position tier. Explicit null resets nullable settings. New references require View on their resources. A hidden target omitted from tiers must be explicitly listed in removed_target_ids, otherwise the update fails without changes. expected_updated_at rejects stale updates with 409. Sharing-only saves do not replace target rows. Hidden and missing routes return the same 404; visible non-editors receive 403. Inference authorization is unchanged.
       operationId: UpdateAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -236886,7 +237046,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - ai_gateway_config_write
-      summary: Replace an AI Gateway routing rule
+      summary: Update an AI Gateway routing rule
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
@@ -236900,7 +237060,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/routing-rules/get:
     get:
-      description: Get a routing rule by its organization-unique slug.
+      description: Get a routing rule by slug with `ai_gateway_config_read` and route View. Hidden and missing routes both return 404. Hidden target identities are omitted; parent-local target IDs remain available for retention.
       operationId: GetAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
