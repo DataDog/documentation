@@ -15,7 +15,7 @@ Use this guide to set up and manage Azure automated log forwarding. You can conf
 
 The ARM template deploys resources from a series of Azure services (storage accounts and Azure Container Apps jobs) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of Container Apps jobs deployed to a subscription and region of your choice. Storage accounts and Container Apps jobs are deployed in each of the subscriptions forwarding logs to Datadog.
 
-**Note**: Since August 3, 2026, new deployments run the control plane on Azure Container Apps jobs by default. Deployments created before that date keep their [Azure Function apps][15] control plane, and updating them does not migrate it. Log forwarding works the same way with either control plane. To migrate an existing deployment to Container Apps jobs, use the [migration script][25].
+**Note**: Since August 3, 2026, new deployments run the control plane on Azure Container Apps jobs by default. Deployments created before that date keep their Azure Function apps control plane, and updating them does not migrate it. Log forwarding works the same way with either control plane. To migrate an existing deployment to Container Apps jobs, use the [migration script][25].
 
 **Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
 
@@ -219,7 +219,6 @@ The script first discovers any instances running in each subscription, then prom
 [12]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/web-and-mobile#website-contributor
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
-[15]: https://learn.microsoft.com/azure/azure-functions/functions-overview
 [16]: https://app.datadoghq.com/integrations/azure
 [17]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal
 [18]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables
