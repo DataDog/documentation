@@ -47,6 +47,11 @@ a mount. Hugo merges a module's `config/` directory into the site config, the
 same way the footer menus arrive from `websites-modules`. Keep the
 `config/_default/menus/` layout, or Hugo won't find the files.
 
+Hugo only merges module menus into a language that already has menu config in
+the site, so `hugo/config/_default/languages.yaml` sets `_merge: deep`. Without
+it, any language with no files in `hugo/config/_default/menus/` loses its left
+nav.
+
 Only `main.en.yaml` is edited by hand. The other locales come from the
 translation pipeline (see `translate.yaml`).
 
