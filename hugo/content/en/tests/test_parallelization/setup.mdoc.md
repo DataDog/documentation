@@ -56,23 +56,6 @@ Install the latest `ddtest` into `bin` in the planning and test environments. Us
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
 ```
 
-## Skip workers for empty plans
-
-A successful plan can contain no runnable files, for example when Test Impact Analysis skips every discovered file. Gate worker allocation on `has_tests` to avoid checkout, dependency installation, and browser setup for an empty plan. The planning job still runs.
-
-{% if equals($ci_provider, "github_actions") %}
-
-Expose `steps.plan.outputs.has_tests` as a planning-job output and add `if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}` to the test job. GitHub evaluates this condition before expanding the matrix. Compare against the string `'true'` because step outputs are strings.
-
-{% /if %}
-{% if equals($ci_provider, "circleci") %}
-
-Pass `.testoptimization/circleci/parameters.json` to `continuation/continue`. The file contains `parallelism` and a Boolean `has_tests`. Declare both pipeline parameters in the continuation configuration and add `when: << pipeline.parameters.has_tests >>` to the test workflow. Merge other continuation parameters into the same JSON object if needed, and keep unrelated workflows outside this condition.
-
-{% /if %}
-
-A condition on an individual step does not prevent worker allocation. Runner counts and GitHub matrix artifacts remain positive for compatibility, including empty plans. Adopt the conditions in the following GitHub Actions or CircleCI examples; upgrading `ddtest` alone does not change scheduling. Treat planning failures and missing CI outputs as errors, not as successful empty plans.
-
 ## Configure your CI jobs
 
 `ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples assume that tests run from the repository root in a Bash shell. {% #3-replace-the-existing-test-command %}

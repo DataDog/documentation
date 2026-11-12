@@ -328,7 +328,7 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 | `.testoptimization/github/config` | GitHub Actions matrix output, written when `ddtest` detects GitHub Actions. |
 | `.testoptimization/circleci/parameters.json` | CircleCI continuation parameters: `parallelism` and a Boolean `has_tests`, written when CircleCI is detected. |
 
-In GitHub Actions, `ddtest plan` appends `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The `github/config` artifact retains its single `matrix=` assignment. A successful plan sets `has_tests=false` when no files remain runnable. See [Skip workers for empty plans][9] for job and workflow conditions that prevent worker allocation.
+In GitHub Actions, `ddtest plan` appends `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The `github/config` artifact retains its single `matrix=` assignment. A successful plan sets `has_tests=false` when no files remain runnable. See [CI setup examples][9] for job and workflow conditions that prevent worker allocation.
 
 The HTTP cache under `.testoptimization/cache/http/` supplies Test Optimization data to the Datadog SDKs. Keep it with the plan. Files under `runner/cache/` and `tests-discovery/` are internal to `ddtest`; use the supported file lists for custom integrations.
 
@@ -357,4 +357,4 @@ fi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[9]: /tests/test_parallelization/setup/#skip-workers-for-empty-plans
+[9]: /tests/test_parallelization/setup/#configure-your-ci-jobs
