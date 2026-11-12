@@ -1,4 +1,4 @@
-Bits Testing can run from a [private location](/synthetics/bits_testing/#run-bits-testing-from-a-private-location) using remote execution, or from the following Datadog managed locations:
+Bits Testing can run from a [private location][bits-testing-private-location] using remote execution, or from the following managed locations:
 
 **AWS**:
 | Americas           | Asia Pacific      | EMEA           |
@@ -24,3 +24,5 @@ Bits Testing can run from a [private location](/synthetics/bits_testing/#run-bit
 | Region    | Location   |
 |-----------|------------|
 | Americas  | Virginia   |
+
+[bits-testing-private-location]: /synthetics/bits_testing/#run-bits-testing-from-a-private-location

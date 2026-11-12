@@ -49,7 +49,7 @@ To trigger a Bits Testing job, your role must include the `synthetics_read` and 
 1. On the Bits Testing page, describe the coverage you want in plain language, or select a suggested prompt. For example, ask Bits Testing to increase coverage generally, or to focus on specific features.
 1. Confirm the starting URL. Leave {{< ui >}}Restrict Discovery to the start URL domain{{< /ui >}} enabled to keep Bits Testing from following links to a different domain. Turn it off if your application's sign-in flow redirects off-site and back.
 1. Select a location to run the Bits Testing job from:
-   - A Datadog managed location. See the [Supported locations](#supported-locations) section.
+   - A managed location. See the [Supported locations](#supported-locations) section.
    - A [private location][5] running remote execution. See [Run Bits Testing from a private location](#run-bits-testing-from-a-private-location).
 1. Optionally, select a [profile](#profiles).
 1. Select a review mode:
