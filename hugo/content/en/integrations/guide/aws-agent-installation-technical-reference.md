@@ -44,7 +44,7 @@ When you select EKS, the stack also creates:
 
 | Resource | Name | Purpose |
 |---|---|---|
-| AWS Marketplace subscription function and IAM role | auto-named | Accepts the one-time, account-level agreement for the Datadog Operator EKS add-on |
+| AWS Marketplace subscription Lambda function and IAM role | auto-named | Accepts the one-time, account-level agreement for the Datadog Operator EKS add-on |
 | IAM permissions boundary | `datadog-instrumenter-eks-ascp-boundary` under `/datadog/instrumenter-boundaries/` | Limits the permissions available to the per-cluster credential synchronization role |
 
 ### Created as needed, for EC2 instances
@@ -70,7 +70,7 @@ Datadog creates the following AWS resources during instrumentation:
 | Resource | Name | Purpose |
 |---|---|---|
 | EKS add-on | `datadog_operator` | Runs the Datadog Operator, which creates and maintains the Agent resources inside the cluster |
-| EKS add-ons | `aws-secrets-store-csi-driver-provider` and `eks-pod-identity-agent` | Synchronize the Datadog credentials from AWS Secrets Manager into the cluster; Datadog creates these add-ons only when they are absent |
+| EKS add-ons | `aws-secrets-store-csi-driver-provider` and `eks-pod-identity-agent` | Synchronize the Datadog credentials from AWS Secrets Manager into the cluster. Datadog creates these add-ons only when they are absent |
 | Secrets Manager secret | `/datadog/eks-instrumenter/<ACCOUNT_ID>/<CLUSTER_NAME>` | Holds the Datadog API key for the cluster |
 | Secrets Manager secret | `/datadog/eks-instrumenter/<ACCOUNT_ID>/<CLUSTER_NAME>/service-access-token` | Holds the cluster-specific Datadog Service Access Token |
 | IAM role and inline policy | `dd-eks-ascp-sync-<CLUSTER_NAME>-<HASH>` and `dd-eks-instrumenter-ascp-sync-policy` | Let the credential synchronization service account read only the two cluster-specific secrets |
@@ -159,7 +159,7 @@ On EKS, Datadog excludes:
 - Clusters with EKS Fargate profiles
 - Clusters with an existing `datadog_operator` add-on that Datadog did not install
 
-Datadog retries clusters that are still being created or updated. For supported node configurations and other cluster requirements, see [Prerequisites][2].
+Datadog retries clusters that are still being created or updated. For supported node configurations and other cluster requirements, see [Prerequisites][2] on the installation guide.
 
 ## Security, auditing, and change control
 
@@ -241,8 +241,8 @@ A Lambda configuration update that is still in progress is left alone and retrie
 
 A rule is not a one-time selection. Datadog re-evaluates its query over time and reacts to the change events forwarded from your account. Datadog instruments a resource as soon as it detects a match, in either of the following cases:
 
-- **It was created after you saved the rule.** Resource creation events, including `RunInstances`, `CreateFunction`, and `CreateCluster`, are forwarded, so a new matching EC2 instance, Lambda function, or EKS cluster is picked up within minutes.
-- **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, and `TagResource` and `UntagResource` on Lambda and EKS. This supports writing a rule such as `@Tags:datadog:true` first, then tagging resources into it as you go.
+- **It was created after you saved the rule.** Resource creation events, including `RunInstances`, `CreateFunction`, and `CreateCluster`, are forwarded, so a new matching EC2 instance, Lambda function, or EKS cluster is detected within minutes.
+- **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, and `TagResource` and `UntagResource` on Lambda and EKS. This supports writing a rule such as `@Tags:datadog:true` first, then adding tags to resources accordingly as you go.
 
 A rule you built by selecting specific resources holds a query naming those resources, so nothing else ever matches it.
 
@@ -288,7 +288,7 @@ Datadog performs cleanup in this order:
 1. Datadog revokes the Service Access Token for the installation.
 1. Datadog removes the Pod Identity association and scoped IAM role that it created.
 
-The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads. Datadog preserves the API key and both cluster-specific AWS Secrets Manager secrets. If the cluster is added to a rule again, Datadog creates a replacement Service Access Token and updates the retained token secret.
+The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads. Datadog preserves both cluster-specific AWS Secrets Manager secrets, including the secret that holds the API key. If the cluster is added to a rule again, Datadog creates a replacement Service Access Token and updates the retained token secret.
 
 ## Further reading
 

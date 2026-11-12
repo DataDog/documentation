@@ -198,7 +198,7 @@ Once you have enabled logs, find them in the [Log Explorer][15] using either the
 
 You can instrument eligible Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters directly through the AWS integration. See [Install Datadog Instrumentation through the AWS Integration][64].
 
-#### EC2
+#### Install the Agent manually on EC2
 
 By default the Datadog AWS integration crawls the CloudWatch API for AWS-provided metrics, but you can gain even deeper visibility into your EC2 instances with the [Datadog Agent][16]. The Agent is a lightweight daemon that reports metrics and events, and can also be configured for logs and traces. The [Agent Installation][17] section of the Datadog application provides instructions for installing the Agent on a wide variety of operating systems. Many operating systems (for example, Amazon Linux) have one-step installation commands that you can run from the instance terminal to install the Agent:
 {{< img src="getting_started/integrations/integrations-agent-installation.png" alt="The 'Agent' section of the 'Integrations' tab in Datadog. Along the left are displayed a list of supported operating systems for the Datadog Agent. 'Amazon Linux' is highlighted from this list. On the right is displayed 'Use our easy one-step install'. The command for installing the Agent is displayed below this, with the DD_API_KEY section obfuscated.">}}
