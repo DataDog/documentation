@@ -109,7 +109,7 @@ For matching requests, the SDK automatically extracts operation type, operation 
 ## Track WebSocket connections
 
 {{< callout header="Preview" btn_hidden="true" >}}
-WebSocket monitoring is in Preview. The `betaTrackWebSockets` option and the collected attributes may change before general availability. You do not need to request access: set `betaTrackWebSockets` to `true` to enable it.
+WebSocket monitoring is in Preview. The `betaTrackWebSockets` option and the collected attributes may change before general availability. You do not need to request access. To enable it, set `betaTrackWebSockets` to `true`.
 {{< /callout >}}
 
 The Browser SDK can collect [WebSocket][11] connections. Each connection is reported as a RUM Resource event with `resource.type:websocket`. The event summarizes the tracked lifetime of the connection: how long it took to open, how long it stayed open, how it closed, and how many messages were exchanged in each direction. Use these events in the RUM Explorer to investigate failed, slow, or unexpectedly closed connections.
@@ -118,7 +118,7 @@ This feature requires Browser SDK v7.16.0 or later.
 
 ### Set up WebSocket tracking
 
-Set [`betaTrackWebSockets`][14] to `true` during SDK initialization. WebSocket collection runs only when resource collection is enabled (`trackResources: true`).
+Set [`betaTrackWebSockets`][12] to `true` during SDK initialization. WebSocket collection runs only when resource collection is enabled (`trackResources: true`).
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -132,7 +132,7 @@ datadogRum.init({
 })
 ```
 
-The SDK reports connections that are still open when the user leaves the page or the session ends. The `resource.websocket.tracking_end_reason` attribute indicates why tracking stopped. See [WebSocket attributes][15].
+The SDK reports connections that are still open when the user leaves the page or the session ends. The `resource.websocket.tracking_end_reason` attribute indicates why tracking stopped. See [WebSocket attributes][13].
 
 ### Redact sensitive data in WebSocket URLs
 
@@ -142,12 +142,12 @@ Datadog builds the WebSocket resource from events that the SDK sends, so you can
 
 You can modify the following properties of these events:
 
-| Attribute                             | Type   | Description                                                                         |
-| ------------------------------------- | ------ | ----------------------------------------------------------------------------------- |
-| `vital.websocket.url`                 | String | The URL of the WebSocket connection.                                                |
-| `vital.websocket.requested_protocols` | Array  | The subprotocols requested by the application when opening the connection.          |
-| `vital.websocket.selected_protocol`   | String | The subprotocol selected by the server.                                             |
-| `vital.websocket.close_reason`        | String | The reason the connection was closed, as provided by the application or the server. |
+| Attribute                             | Type   | Description                                                        |
+| ------------------------------------- | ------ | ------------------------------------------------------------------ |
+| `vital.websocket.url`                 | String | The URL of a WebSocket connection.                                 |
+| `vital.websocket.requested_protocols` | Array  | The subprotocols requested when opening a WebSocket connection.    |
+| `vital.websocket.selected_protocol`   | String | The subprotocol selected by the server for a WebSocket connection. |
+| `vital.websocket.close_reason`        | String | The reason a WebSocket connection was closed.                      |
 
 For example, to redact a room identifier from the WebSocket URL:
 
@@ -157,7 +157,7 @@ datadogRum.init({
     betaTrackWebSockets: true,
     beforeSend: (event) => {
         if (event.type === 'vital' && event.vital.type === 'websocket') {
-            // The URL is not present on every WebSocket event, so check it exists
+            // The URL is not present on every WebSocket event, so check that it exists
             if (event.vital.websocket.url) {
                 event.vital.websocket.url = event.vital.websocket.url.replace(/\/rooms\/[^/]+/, '/rooms/REDACTED')
             }
@@ -246,5 +246,5 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
-[14]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#betatrackwebsockets
-[15]: /real_user_monitoring/application_monitoring/browser/data_collected/#websocket-attributes
+[12]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#betatrackwebsockets
+[13]: /real_user_monitoring/application_monitoring/browser/data_collected/#websocket-attributes
