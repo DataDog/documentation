@@ -6390,6 +6390,416 @@ components:
       type: string
       x-enum-varnames:
         - AGENT_HEALTH_ISSUES
+    AgentHealthIssueAttributes:
+      description: Attributes of an open Agent Health issue.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueData:
+      description: An open Agent Health issue.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueDataArray:
+      description: The open Agent Health issues on this page.
+      example:
+        - attributes:
+            category: configuration
+            description: The Agent configuration file contains an invalid value.
+            first_seen_at: "2026-11-01T10:00:00Z"
+            issue_name: Invalid Config
+            issue_type: invalid_config
+            resource_id: my-hostname
+            resource_kind: host
+            resource_type: host
+            severity: high
+            state: open
+            tags:
+              - env:prod
+            title: Invalid Agent configuration
+            updated_at: "2026-11-09T08:00:00Z"
+          id: invalid-config:4828e7d6c704c4a3
+          type: agent_health_issues
+      items:
+        $ref: "#/components/schemas/AgentHealthIssueData"
+      type: array
+    AgentHealthIssueDetailAttributes:
+      description: Attributes of an open Agent Health issue, including available remediation.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        remediation:
+          script:
+            content: "..."
+            filename: fix.sh
+            language: bash
+            language_version: "5"
+            requires_root: true
+          steps:
+            - order: 1
+              text: Open datadog.yaml
+          summary: Fix the invalid configuration value.
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        remediation:
+          $ref: "#/components/schemas/AgentHealthRemediation"
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueDetailData:
+      description: An open Agent Health issue with available remediation.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          remediation:
+            script:
+              content: "..."
+              filename: fix.sh
+              language: bash
+              language_version: "5"
+              requires_root: true
+            steps:
+              - order: 1
+                text: Open datadog.yaml
+            summary: Fix the invalid configuration value.
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueDetailAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueResourceType:
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
+    AgentHealthIssueResponse:
+      description: A response containing an open Agent Health issue and available remediation.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDetailData"
+      required:
+        - data
+      type: object
+    AgentHealthIssueTags:
+      description: Tags associated with the issue. Omitted when empty.
+      example:
+        - env:prod
+      items:
+        description: A tag associated with the issue.
+        type: string
+      type: array
+    AgentHealthIssuesResponse:
+      description: A paginated response containing open Agent Health issues.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDataArray"
+        meta:
+          $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    AgentHealthIssuesResponseMeta:
+      description: Pagination metadata for the matching Agent Health issues.
+      example:
+        page:
+          total_count: 3
+          total_filtered_count: 1
+      properties:
+        page:
+          $ref: "#/components/schemas/AgentHealthIssuesResponsePage"
+      required:
+        - page
+      type: object
+    AgentHealthIssuesResponsePage:
+      description: Pagination counts for the Agent Health issues.
+      example:
+        total_count: 3
+        total_filtered_count: 1
+      properties:
+        total_count:
+          description: The total number of open issues in the organization, ignoring filters.
+          example: 3
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of open issues matching the filters, across all pages.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_count
+        - total_filtered_count
+      type: object
+    AgentHealthRemediation:
+      description: Remediation for the issue. Omitted when no remediation is available.
+      example:
+        script:
+          content: "..."
+          filename: fix.sh
+          language: bash
+          language_version: "5"
+          requires_root: true
+        steps:
+          - order: 1
+            text: Open datadog.yaml
+        summary: Fix the invalid configuration value.
+      properties:
+        script:
+          $ref: "#/components/schemas/AgentHealthRemediationScript"
+        steps:
+          $ref: "#/components/schemas/AgentHealthRemediationSteps"
+        summary:
+          description: A summary of how to remediate the issue.
+          example: Fix the invalid configuration value.
+          type: string
+      type: object
+    AgentHealthRemediationScript:
+      description: A script that can be used to remediate the issue.
+      properties:
+        content:
+          description: The content of the script.
+          example: "..."
+          type: string
+        filename:
+          description: The filename of the script.
+          example: fix.sh
+          type: string
+        language:
+          description: The language of the script.
+          example: bash
+          type: string
+        language_version:
+          description: The language version used by the script.
+          example: "5"
+          type: string
+        requires_root:
+          description: Whether the script requires root privileges.
+          example: true
+          type: boolean
+      type: object
+    AgentHealthRemediationStep:
+      description: A step to remediate the issue.
+      properties:
+        order:
+          description: The order in which to perform the step.
+          example: 1
+          format: int64
+          type: integer
+        text:
+          description: The instructions for the step.
+          example: Open datadog.yaml
+          type: string
+      type: object
+    AgentHealthRemediationSteps:
+      description: Steps to remediate the issue.
+      example:
+        - order: 1
+          text: Open datadog.yaml
+      items:
+        $ref: "#/components/schemas/AgentHealthRemediationStep"
+      type: array
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -156903,6 +157313,8 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_observability_catalog_read: Read Data Observability catalog resources and owners.
+            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
@@ -159314,6 +159726,265 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 1
+  /api/v2/agenthealth/issues:
+    get:
+      description: |-
+        List Agent Health issues across your organization. Only open issues are returned.
+        Returns `403` if you lack the `hosts_read` permission.
+
+        Results use a stable order: severity rank (`high`, `medium`, `low`, then other values),
+        then `first_seen_at` descending with missing timestamps last, then issue ID ascending.
+        Use `page[size]` and the zero-based `page[number]` to paginate. Invalid page values
+        return a `400` JSON:API error response. `meta.page.total_filtered_count` is the number
+        of issues matching the filters, and `meta.page.total_count` the number of open issues
+        in the organization.
+
+        Each filter accepts up to 50 comma-separated exact values of at most 256 characters
+        each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
+        is treated as absent.
+      operationId: ListAgentHealthIssues
+      parameters:
+        - description: The number of issues to return per page, from 1 to 100. Defaults to 25.
+          example: 25
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 25
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: The zero-based page number, from 0 to 1000000. Defaults to 0.
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            maximum: 1000000
+            minimum: 0
+            type: integer
+        - description: |-
+            Filter by a comma-separated list of exact `severity` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: high,medium
+          in: query
+          name: filter[severity]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `category` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: configuration
+          in: query
+          name: filter[category]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `issue_type` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: invalid_config
+          in: query
+          name: filter[issue_type]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_kind` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: host,deployment
+          in: query
+          name: filter[resource_kind]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_id` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: my-hostname
+          in: query
+          name: filter[resource_id]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: configuration
+                          description: The Agent configuration file contains an invalid value.
+                          first_seen_at: "2026-11-01T10:00:00Z"
+                          issue_name: Invalid Config
+                          issue_type: invalid_config
+                          resource_id: my-hostname
+                          resource_kind: host
+                          resource_type: host
+                          severity: high
+                          state: open
+                          tags:
+                            - env:prod
+                          title: Invalid Agent configuration
+                          updated_at: "2026-11-09T08:00:00Z"
+                        id: invalid-config:4828e7d6c704c4a3
+                        type: agent_health_issues
+                    meta:
+                      page:
+                        total_count: 3
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssuesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: List Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/issues/{issue_id}:
+    get:
+      description: |-
+        Get an Agent Health issue and its available remediation in your organization.
+        Only open issues are returned. The `remediation` attribute is omitted when
+        the issue has no remediation.
+
+        Returns `404` if the issue does not exist, is not open, belongs to another
+        organization, or you do not have access to its data. This response does not
+        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+      operationId: GetAgentHealthIssue
+      parameters:
+        - description: |-
+            The unique identifier of the issue. It can contain `:` and must be percent-encoded
+            by clients when included in the path.
+          example: invalid-config:4828e7d6c704c4a3
+          in: path
+          name: issue_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: configuration
+                        description: The Agent configuration file contains an invalid value.
+                        first_seen_at: "2026-11-01T10:00:00Z"
+                        issue_name: Invalid Config
+                        issue_type: invalid_config
+                        remediation:
+                          script:
+                            content: "..."
+                            filename: fix.sh
+                            language: bash
+                            language_version: "5"
+                            requires_root: true
+                          steps:
+                            - order: 1
+                              text: Open datadog.yaml
+                          summary: Fix the invalid configuration value.
+                        resource_id: my-hostname
+                        resource_kind: host
+                        resource_type: host
+                        severity: high
+                        state: open
+                        tags:
+                          - env:prod
+                        title: Invalid Agent configuration
+                        updated_at: "2026-11-09T08:00:00Z"
+                      id: invalid-config:4828e7d6c704c4a3
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssueResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: Get an Agent Health issue
+      tags:
+        - Agent Health
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -277902,7 +278573,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
-  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+  - description: >-
+      List open Agent Health issues across your organization and get an issue with its available remediation. Issues are reported by node Agents, Cluster Agents, and OpenTelemetry collectors. The meaning of `resource_id` depends on `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
     name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
