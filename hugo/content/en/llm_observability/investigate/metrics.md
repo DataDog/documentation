@@ -76,6 +76,17 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 | `ml_obs.span.llm.input.cache_read.cost` | Estimated cache read input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.non_cached.cost` | Estimated non cached input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 
+### Cost and token breakdown metrics
+
+Use these Count metrics to group usage and spend by token modality, I/O direction, and cache or reasoning category. Cost values are measured in **nanodollars**, and token values are measured in **tokens**.
+
+| Metric Name | Description | Metric Type | Tags |
+|-------------|-------------|-------------|------|
+| `ml_obs.span.llm.cost` | Estimated cost from LLM and embedding spans, plus user-provided tool-span costs | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `input_without_output`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_match`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `source`, `span_kind`, `token_modality`, `ttl`, `version` |
+| `ml_obs.span.llm.tokens` | Input and output token usage from LLM spans | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `token_modality`, `ttl`, `version` |
+
+Embedding tokens are available through `ml_obs.span.embedding.input.tokens`. Tags appear when the corresponding span data or breakdown is available. These metrics also support [custom tags][10]. For breakdown tag values and query examples, see the [Metrics section of the Cost page][9].
+
 ### Trace metrics
 
 | Metric Name | Description | Metric Type | Tags |
@@ -204,3 +215,5 @@ The following metrics are deprecated, and are maintained only for backward compa
 [6]: /data_security/data_retention_periods/
 [7]: /llm_observability/data_governance/#traces-and-spans
 [8]: /llm_observability/data_governance/
+[9]: /llm_observability/investigate/cost/#metrics
+[10]: /llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics
