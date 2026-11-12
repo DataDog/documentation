@@ -44,12 +44,12 @@ The Remediation Inbox answers one question: **what are the most impactful fixes 
 - Findings from at least one supported product:
   - [Software Composition Analysis][3] (SCA) library vulnerabilities
   - [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
-- The following [permissions][13]:
+- The [permissions][13] for the actions you take:
 
-  | Action | Required permissions |
-  |---|---|
-  | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
-  | Create work items, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Action | Required permissions |
+|---|---|
+| View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
+| Create work items, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see [Enable remediation capabilities](#enable-remediation-capabilities).
 
@@ -115,12 +115,12 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
-{{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing the Know before you remediate summary, the Remediate with AI button, the ticketing, assignee, and pull request details, and the list of vulnerabilities the fix closes" width="100%">}}
-
 - **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead.
 - **Ticketing, Assignee, and PRs**: The remediation work item, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
+
+{{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing the Know before you remediate summary, the Remediate with AI button, the ticketing, assignee, and pull request details, and the list of vulnerabilities the fix closes" width="100%">}}
 
 ## Remediate
 
@@ -134,19 +134,19 @@ In the **Tracking** column or the side panel, select an assignee. If the remedia
 
 Click **Create Security Case**, optionally select a Work Management [project][5], and click **Create**. If you do not select a project, the work item is created in the default **Security Remediation** project.
 
-To route remediation work items to Jira, ServiceNow, or Linear, configure the third-party integration on the Work Management project. See [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool).
+To create tickets in Jira, ServiceNow, or Linear from remediation work items, see [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool).
 
 ### Remediate with AI
 
 From the side panel, click **Remediate with AI** and choose one of the following:
 
-{{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options and a section to verify the fix with the Code Security MCP Server" width="80%">}}
-
-- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item.
+- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item. Requires [Bits Code setup][8].
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
 To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the finding is gone before you commit.
+
+{{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options and a section to verify the fix with the Code Security MCP Server" width="80%">}}
 
 ### Link a pull request
 
