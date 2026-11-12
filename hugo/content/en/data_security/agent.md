@@ -190,7 +190,7 @@ agent diagnose show-metadata agent-telemetry
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
 | transactions.http_errors                    | Count of transaction HTTP errors per HTTP code                                                                         |
-| forwarder.http_errors                       | Count of HTTP error responses from Datadog intakes, tagged by forwarder and status class (4xx or 5xx)                  |
+| forwarder.http_errors                       | Count of HTTP errors from Datadog intakes per HTTP code, endpoint, and forwarder                                       |
 | **Database**                                |                                                                                                                        |
 | oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)                              |
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                                        |
