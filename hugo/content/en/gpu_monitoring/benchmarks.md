@@ -19,11 +19,11 @@ Benchmarks in GPU Monitoring are in Preview. To request access, contact <a href=
 
 ## Overview
 
-Before you change a model server's version, its batching settings, or the GPUs it runs on, you need to know how the change affects your users. Benchmarks in GPU Monitoring send controlled load to an OpenAI-compatible chat completions endpoint and measure what users experience: how long the first token takes, how fast tokens stream after it, and how many requests and tokens the endpoint serves per second. Because the runs are in Datadog, you can read them next to your GPU, inference server, and cost data, and compare each run with earlier ones.
+Before you change a model server's version, its deployments settings, kernels, or the GPUs it runs on, you need to know how the change affects your users. Benchmarks in GPU Monitoring send controlled load to an ChatCompletion endpoint and measure what users experience: how long the first token takes, how fast tokens stream after it, and how many requests and tokens the endpoint serves per second. Because the runs are in Datadog, you can read them next to your GPU, inference server, and cost data, and compare each run with earlier ones.
 
 With Benchmarks, you can answer questions such as:
 
-- **How does my endpoint perform under load?** Measure time to first token and time per output token at the concurrency you expect.
+- **How does my endpoint perform under load?** Measure time to first token (TTFT) and time per output token at the concurrency you expect.
 - **Did my last change make things better or worse?** Rerun the same benchmark after a change and compare the results.
 - **How much load can my deployment take?** Run a load sweep to find the highest concurrency that stays within your latency targets.
 
@@ -71,7 +71,7 @@ Runs send synthetic prompts:
 | Turns | Requests per conversation, as a mean and a standard deviation. Later turns resend the conversation's history. | 1 to 20 |
 | Random seed | Optional. Runs with the same seed send the same prompts, which makes runs easier to compare. | 0 to 2,147,483,647 |
 
-Runs from Datadog can instead replay the **AgentX** scenario, the coding agent traces published by SemiAnalysis, with up to 128 concurrent sessions and a profiling phase of 15 to 60 minutes.
+Runs from Datadog can instead replay the **AgentX** scenario, the coding agent traces published by [SemiAnalysis](https://inferencex.semianalysis.com/infx/agentx), with up to 128 concurrent sessions and a profiling phase of 15 to 60 minutes.
 
 A run that lasts longer than the benchmark's maximum duration is stopped: 1 to 60 minutes, or up to 2 hours for a scenario.
 
@@ -181,8 +181,6 @@ If your cluster can't pull from Datadog's public registries, mirror the benchmar
 ### Create a benchmark that runs in your cluster
 
 When you create the benchmark, choose your cluster as its location. Endpoints can then be internal URLs, including `http://` services in your cluster.
-
-Runs in your cluster don't support custom headers or the AgentX scenario.
 
 ## Further reading
 
