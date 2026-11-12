@@ -314,4 +314,4 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [21]: /tests/setup/junit_xml/#adding-code-owners
 [22]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
-[23]: /tests/guides/test_automation_exclusions/
+[23]: /tests/flaky_management/code_annotations/

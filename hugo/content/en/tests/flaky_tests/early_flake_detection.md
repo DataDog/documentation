@@ -167,4 +167,4 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [8]: /tests/explorer/
 [9]: /help/
 [10]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
-[11]: /tests/guides/test_automation_exclusions/
+[11]: /tests/flaky_management/code_annotations/

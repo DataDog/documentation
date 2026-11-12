@@ -26,16 +26,26 @@ Apply either annotation independently, or combine them to exclude a test from bo
 
 ## Prerequisites and scope
 
-Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads. An annotation only affects automation that the Datadog library supports for that framework.
+Code annotations are supported for JavaScript/TypeScript and Ruby. Other languages are not supported.
 
-Annotations apply to individual test declarations. An annotated parameterized declaration applies to every generated test case. They preserve framework skips, test filters, and expected-failure behavior. They do not override [Test Impact Analysis][5]: a test or file excluded by Test Impact Analysis remains excluded. The annotations do not disable test discovery or flakiness reporting.
+Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads.
 
-Apply annotations in test source code. Setting a span tag with the same name does not change test execution. The annotations control execution without changing the test's configured state in Flaky Tests Management.
+Annotations follow these scope rules:
+
+- An annotation affects only automation that the Datadog library supports for that framework.
+- Annotations apply to individual test declarations. An annotation on a parameterized declaration applies to every generated test case.
+- Annotations preserve framework skips, test filters, and expected-failure behavior.
+- Annotations do not override [Test Impact Analysis][5]. A test or file that Test Impact Analysis excludes remains excluded.
+- Annotations do not disable test discovery or flakiness reporting.
+- Annotations take effect only in test source code. Manually setting a `test.test_management.*` annotation tag on a span does not change test execution.
+- Annotations control execution without changing the test's configured state in Flaky Tests Management.
 
 ## Language-specific setup
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
+
+### SDK requirements
 
 Use a supported `dd-trace` version:
 
@@ -45,6 +55,15 @@ Use a supported `dd-trace` version:
 | v6 | [6.24.0][9] |
 
 Configure [Test Optimization for JavaScript and TypeScript][10] for the test framework.
+
+### Annotation names
+
+`dd-trace` provides one helper for each annotation:
+
+- `preventFailureSuppression`: Protects a test from Datadog quarantine and disabling.
+- `noAutoRetry`: Excludes a test from Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries.
+
+Cucumber.js uses scenario tags instead of helpers.
 
 ### Annotate test callbacks
 
@@ -108,9 +127,16 @@ In Playwright serial groups, `noAutoRetry` excludes the entire group from Datado
 
 {{% tab "Ruby" %}}
 
+### SDK requirements
+
 Use the `datadog-ci` gem version [1.43.0][11] or later. Configure [Test Optimization for Ruby][12] and load Datadog's instrumentation before defining tests.
 
-Use `datadog_prevent_failure_suppression` to protect tests from Datadog quarantine and disabling. Use `datadog_no_auto_retry` to exclude Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Apply either annotation independently, or combine them.
+### Annotation names
+
+`datadog-ci` provides one annotation for each behavior:
+
+- `datadog_prevent_failure_suppression`: Protects a test from Datadog quarantine and disabling.
+- `datadog_no_auto_retry`: Excludes a test from Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries.
 
 ### RSpec
 
