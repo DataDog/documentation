@@ -2220,7 +2220,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update or delete pipelines, use [Pup][101] (`pup obs-pipelines update` or `pup obs-pipelines delete`) or the [Observability Pipelines API][88].
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits AI in the pipeline builder. You can also update or delete pipelines with [Pup][101] (`pup obs-pipelines update` or `pup obs-pipelines delete`) or the [Observability Pipelines API][88], but updates made this way go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][102].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3880,6 +3880,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
 [101]: /cli/
+[102]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 
 ## Further reading
 
