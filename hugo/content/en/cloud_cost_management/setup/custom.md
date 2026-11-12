@@ -271,8 +271,8 @@ Datadog adds the following tags to line items from an AI provider file:
 
 | Tag | Description |
 | ----------| ----------------------------------|
-| `custom_ai_provider` | Set to `true` for line items from an AI provider file. |
-| `ai_vendor` | The AI provider, derived from the `ProviderName` of the line item. |
+| `custom_ai_provider` | Set to `true` for line items from an AI provider custom file. |
+| `ai_vendor` | The AI provider but normalized, derived from the `ProviderName` of the line item. Example: `Alice Bob AI` gives `alice_bob_ai`. |
 
 You can mark a file as an AI provider file when you upload it, or change the setting later. When you change the setting, Datadog recomputes costs for the months that the file covers.
 
