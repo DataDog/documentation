@@ -15,3 +15,9 @@ entries:
     operations:
       - DeleteUserProfile
     title: Add endpoint to delete a Product Analytics user profile
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - DeleteUserProfile
+    title: Add AI Gateway route permissions and safe editing
