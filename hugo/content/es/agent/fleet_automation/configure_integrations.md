@@ -11,7 +11,6 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentación
   text: API de Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Configuración de Agent Integrations
 ---
 Fleet Automation puede implementar, actualizar y eliminar archivos de configuración de [integración][1] (`conf.d`) en sus Agents de forma remota. Seleccione los Agents de destino por servidor o etiqueta, elija una integración y Fleet Automation enviará el cambio de configuración a toda su flota.

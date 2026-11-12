@@ -1,17 +1,19 @@
 ---
+description: Cree reglas de detección para las evaluaciones de AI guard, investigue
+  las señales que generan y alerte sobre la actividad de AI guard.
 further_reading:
 - link: /security/ai_guard/
   tag: Documentación
   text: AI Guard
-- link: /security/ai_guard/onboarding/
+- link: /security/ai_guard/setup/
   tag: Documentación
-  text: Comience con AI Guard
+  text: Configurar AI Guard
 - link: /security/detection_rules/
   tag: Documentación
   text: Reglas de detección
-title: Señales de security de AI Guard
+title: Clasifique e investigue las señales de AI guard
 ---
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard no está disponible en el {{< region-param key="dd_site_name" >}} sitio.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard no está disponible en el {{< region-param key="dd_site_name" >}} sitio.</div>
 {{< /site-region >}}
 
 Las señales de seguridad de AI Guard proporcionan visibilidad sobre las amenazas y ataques que AI Guard detecta en sus aplicaciones. Estas señales se basan en [señales de seguridad de AAP (Protección de aplicaciones y API)][1] y se integran con los flujos de trabajo de monitoreo de seguridad de Datadog.
@@ -55,17 +57,9 @@ Para crear reglas de detección de AI Guard:
          <td>Dirigirse a tipos de ataque específicos</td>
          <td>
            <ul>
-             <li><code>jailbreak</code></li>
-             <li><code>indirect-prompt-injection</code></li>
-             <li><code>destructive-tool-call</code></li>
-             <li><code>denial-of-service-tool-call</code></li>
-             <li><code>security-exploit</code></li>
-             <li><code>authority-override</code></li>
-             <li><code>role-play</code></li>
-             <li><code>instruction-override</code></li>
-             <li><code>obfuscation</code></li>
-             <li><code>system-prompt-extraction</code></li>
-             <li><code>data-exfiltration</code></li>
+             <li><a href="/security/ai_guard/#attack-categories">Etiquetas de categoría de ataque</a></li>
+             <li><code>tool-blocked</code> y <code>tool-allowed</code>, agregadas por las políticas de herramientas</li>
+             <li><code>regexp-blocked</code>, agregadas por reglas personalizadas</li>
            </ul>
          </td>
        </tr>
@@ -133,6 +127,24 @@ Cuando hace clic en un tramo en el explorador, puede ver:
 
 Además, puede hacer clic en {{< ui >}}Explore in graph view{{< /ui >}} para ver las solicitudes de la conversación graficadas, o ver el tramo en [APM][8] o [Agent Observability][9].
 
+## Alerte sobre la actividad de AI guard con Datadog Monitors {#set-up-datadog-monitors}
+
+Para crear monitores que generen alertas al alcanzar determinados umbrales, puede usar [Datadog Monitors][10]. Puede monitorear las evaluaciones de AI guard mediante trazas de APM o métricas. Para ambos tipos de monitores, debe establecer las condiciones de alerta, asignar un nombre a la alerta y configurar Notifications; Datadog recomienda usar Slack.
+
+### Monitor de APM {#apm-monitor}
+
+Siga las instrucciones para crear un [monitor de APM][11] y establezca su contexto en {{< ui >}}Trace Analytics{{< /ui >}}.
+
+- Para monitorear las evaluaciones denegadas, utilice la consulta `@ai_guard.action:DENY`.
+- Para monitorear el tráfico bloqueado, utilice la consulta `@ai_guard.blocked:true`.
+
+### Monitor de métricas {#metric-monitor}
+
+Siga las instrucciones para crear un [monitor de métricas][12].
+
+- Para monitorear las evaluaciones denegadas, utilice la métrica `datadog.ai_guard.evaluations` con la etiqueta `action:deny`.
+- Para monitorear el tráfico bloqueado, utilice la métrica `datadog.ai_guard.evaluations` con la etiqueta `blocking_enabled:true`.
+
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -143,6 +155,9 @@ Además, puede hacer clic en {{< ui >}}Explore in graph view{{< /ui >}} para ver
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://app.datadoghq.com/security/ai-guard/investigate
-[7]: /es/security/ai_guard/setup/#blocking-policy
+[7]: /es/security/ai_guard/policies/#blocking-policy
 [8]: /es/tracing/
 [9]: /es/llm_observability/
+[10]: /es/monitors/
+[11]: /es/monitors/types/apm/?tab=traceanalytics
+[12]: /es/monitors/types/metric/
