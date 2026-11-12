@@ -18,7 +18,7 @@ Cada atributo de segmentación incluye lo siguiente:
 
 - **Clave de atributo**: El identificador al que hace referencia en las reglas de segmentación, por ejemplo `country` o `user.plan`. Las claves son únicas dentro de su organización y distinguen entre mayúsculas y minúsculas.
 - **Tipo de datos**: `Boolean`, `String`, `Number` o `Semver`. El tipo de datos determina qué operadores están disponibles cuando utiliza el atributo en una regla de segmentación.
-- **Canal de distribución**: Qué SDK informan este atributo en su contexto de evaluación: **Cliente y servidor**, **Solo cliente** o **Solo servidor**. Los atributos Semver solo están disponibles para los SDK de cliente.
+- **Canal de distribución**: Qué SDK informan este atributo en su contexto de evaluación: **Cliente y servidor**, **Solo cliente** o **Solo servidor**.
 - **Descripción** (opcional): Notas para otros usuarios sobre lo que representa el atributo.
 
 Los atributos de segmentación son para toda la organización: una vez definidos, un atributo está disponible para las reglas de segmentación en todos los Feature Flags y entornos.

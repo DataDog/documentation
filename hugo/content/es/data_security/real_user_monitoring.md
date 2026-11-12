@@ -111,6 +111,8 @@ Tiene algunas opciones disponibles para eliminar información de identificación
 #### Enmascarar nombres de acciones {#mask-action-names}
 De forma predeterminada, si desea enmascarar todos los nombres de acciones, puede usar la opción `enablePrivacyForActionName` junto con la configuración de privacidad `mask`. Esta operación sustituye automáticamente todos los nombres de acciones no anulados por el marcador de posición `Masked Element`. Esta configuración también está diseñada para ser compatible con los [atributos de anulación HTML][16] existentes.
 
+Para mantener visibles los nombres de acciones útiles mientras se ocultan datos confidenciales, utilice el [complemento de privacidad][22]. El complemento genera una lista de cadenas estáticas y seguras permitidas durante la compilación. Con el nivel de privacidad `mask-unless-allowlisted`, el SDK muestra solo el texto que coincide con la lista de cadenas permitidas.
+
 #### Datos no estructurados {#unstructured-data}
 La PII incluida inadvertidamente en datos no estructurados, como el nombre de una persona en un cuadro de texto, solo puede eliminarse mediante una solicitud de eliminación de datos para un marco de tiempo especificado.
 
@@ -159,3 +161,4 @@ Consulte las [opciones de privacidad específicas para Session Replay][19]. El e
 [19]: /es/session_replay/privacy_options?platform=browser
 [20]: https://www.datadoghq.com/private-beta/product-analytics/
 [21]: /es/security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
+[22]: /es/real_user_monitoring/application_monitoring/browser/build_plugins/privacy/
