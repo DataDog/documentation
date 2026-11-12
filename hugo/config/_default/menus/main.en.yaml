@@ -7302,7 +7302,7 @@ menu:
       weight: 413
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
-      url: /observability_pipelines/destinations/datadog_archives/google_cloud_storage/
+      url: observability_pipelines/destinations/datadog_archives/google_cloud_storage/
       parent: observability_pipelines_destinations
       weight: 414
     - name: Google Pub/Sub

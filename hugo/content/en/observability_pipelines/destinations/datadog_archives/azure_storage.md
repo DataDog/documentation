@@ -6,7 +6,7 @@ aliases:
     - /observability_pipelines/destinations/azure_storage/
 code_lang: azure_storage
 type: multi-code-lang
-weight: 2
+code_lang_weight: 2
 products:
 - name: Logs
   icon: logs

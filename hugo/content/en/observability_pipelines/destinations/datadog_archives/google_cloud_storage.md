@@ -6,7 +6,7 @@ aliases:
     - /observability_pipelines/destinations/google_cloud_storage/
 code_lang: google_cloud_storage
 type: multi-code-lang
-weight: 3
+code_lang_weight: 3
 products:
 - name: Logs
   icon: logs
@@ -17,7 +17,7 @@ products:
 
 ## Overview
 
-<div class="alert alert-info">For Worker versions 2.7 and later, the Datadog Archives - Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
+<div class="alert alert-info">For Worker versions 2.7 and later, the Datadog Archives - Google Cloud Storage destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
 Use the Datadog Archives - Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][21]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 
