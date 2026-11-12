@@ -67,7 +67,7 @@ Configure [Test Optimization for JavaScript and TypeScript][10] for the test fra
 - `preventFailureSuppression`
 - `noAutoRetry`
 
-Cucumber.js uses scenario tags instead of helpers.
+Cucumber.js uses the scenario tags `@datadog:prevent_failure_suppression` and `@datadog:no_auto_retry` instead of helpers.
 
 ### Annotate test callbacks
 
@@ -111,21 +111,16 @@ Tags on a `Scenario Outline` apply to every example.
 
 ### Framework requirements
 
-- Jest requires the `jest-circus` runner. The legacy Jest Jasmine runner does not enforce these helpers.
-- Cypress requires version 12 or later. Datadog retries also require [test isolation][6] to be enabled.
-- Playwright requires version 1.38 or later.
-- Vitest requires version 1.6 or later. Both helpers support initialized workers, Browser Mode, and no-worker-tracer mode. No-worker-tracer mode requires isolated workers and Vitest 3.2.6 or later.
-- WebdriverIO requires version 9 or later with the Mocha or Jasmine adapter.
-- Cucumber.js supports serial scenarios from version 7. In parallel mode, exclusions for quarantine, disabling, and Attempt to Fix require version 11 or later.
+For supported test frameworks and versions, see [Test Optimization compatibility][13].
 
 Explicit framework retries, such as `jest.retryTimes`, Mocha retries, Playwright retry settings, and Cucumber.js `--retry`, remain available when `noAutoRetry` is present.
 
 In Playwright serial groups, `noAutoRetry` excludes the entire group from Datadog retries so tests run with their prerequisites. Explicit Playwright retry settings still apply.
 
-[6]: /tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.135.0
 [9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.24.0
 [10]: /tests/setup/javascript/
+[13]: /tests/setup/javascript/#compatibility
 
 {{% /tab %}}
 
@@ -198,9 +193,9 @@ To view runs of tests with annotations, search in the [Test Optimization Explore
 - `@test.test_management.prevent_failure_suppression:true`
 - `@test.test_management.no_auto_retry:true`
 
-Datadog reports each annotation as `true` when present and omits its tag when absent. Reported skipped tests also include annotations when the instrumentation discovers them. Tests excluded by selection or Test Impact Analysis remain excluded.
+Datadog reports each annotation as `true` when present and omits its tag when absent. Reported skipped tests also include annotations when the instrumentation discovers them.
 
-Flaky Tests Management tags continue to describe assigned states, even when an annotation overrides the execution behavior. For example, a protected test can retain `test.test_management.is_quarantined:true` while its final failure still fails the test command. An excluded Attempt to Fix assignment does not produce Attempt to Fix retries or a completion result.
+Flaky Tests Management tags continue to describe assigned states, even when an annotation overrides the execution behavior. For example, a test with the **Prevent failure suppression** annotation can retain `test.test_management.is_quarantined:true` while its failure still fails the test command.
 
 ## Further reading
 
