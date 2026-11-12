@@ -770,6 +770,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -1058,3 +1059,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /infrastructure/process/
