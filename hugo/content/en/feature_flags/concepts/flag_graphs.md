@@ -52,7 +52,23 @@ Select a view for both client and server evaluations:
 
 Use **Color by** to color the series by **Variant** or **SDK**.
 
-**Note**: **Unknown SDK** means that evaluations arrived without SDK identification. Upgrade the SDK that sends these evaluations to a version that reports its SDK name. See the [client-side][2] and [server-side][3] setup pages for SDK version requirements. For Java, SDK identification requires `dd-java-agent` and `dd-openfeature` version 1.68.0 or later; use the same version for both packages. If evaluations pass through a Datadog Agent, upgrade the Agent to version 7.84.0 or later so it preserves SDK identification.
+**Note**: **Unknown SDK** means that evaluations arrived without SDK identification. Upgrade the SDK that sends these evaluations to a version that reports its SDK name.
+
+For server-side evaluations, the following minimum SDK versions report SDK identification:
+
+| Server SDK | Minimum version |
+| ---------- | --------------- |
+| .NET | 3.57.0 |
+| Go | 2.11.0 |
+| Java | 1.68.0 |
+| Node.js | 5.131.0 on the 5.x release line, or 6.20.0 on the 6.x release line |
+| PHP | 1.27.0 |
+| Python | 4.16.0 |
+| Ruby | 2.43.0 |
+
+For Java, use the same version of `dd-java-agent` and `dd-openfeature`. If evaluations pass through a Datadog Agent, use Agent version 7.84.0 or later so it preserves SDK identification.
+
+These versions apply to SDK identification in the **Evaluations** graph. See the [client-side][2] and [server-side][3] setup pages for other SDK requirements.
 
 If you use OpenTelemetry (OTLP) evaluation metrics, you can graph them on a dashboard. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
