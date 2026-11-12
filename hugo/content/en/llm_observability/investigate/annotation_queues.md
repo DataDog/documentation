@@ -38,7 +38,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 
 ### Step 1: Configure queue settings
 
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] and select your project.
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] and select your project.
 2. Click {{< ui >}}Create Queue{{< /ui >}}.
 3. On the {{< ui >}}About{{< /ui >}} tab, configure:
    - {{< ui >}}Name{{< /ui >}}: Descriptive name reflecting the queue's purpose (for example, "Failed Evaluations Review - Q1 2026")
@@ -103,7 +103,7 @@ Traces matching the rule's filters are added to the queue as they arrive. Annota
 
 ### Accessing your queues
 
-Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating.
+Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating.
 
 **Note**: When an annotation task is newly assigned to you, Datadog sends an email with the queue name, the user who assigned it, and a direct link to open the assigned interaction. To opt out, disable Agent Observability annotation assignment emails in [Personal Settings email subscriptions][15].
 
@@ -293,7 +293,7 @@ Each final value follows its label's type: Boolean, categorical, score, or text.
 To review and save final scores, you need:
 
 - An annotation queue with a label schema and an interaction to review.
-- Access to {{< ui >}}Finalized Score{{< /ui >}} in the annotation workspace.
+- Access to {{< ui >}}Final Score{{< /ui >}} in the annotation workspace.
 - Permission to manage the queue to save or update final scores. Other users with access to the queue can view final scores.
 
 ### Review and save a final score
@@ -380,7 +380,7 @@ use the {{< ui >}}Annotation Labels{{< /ui >}} facet to filter traces by labels 
 ### Editing queue schema
 
 You can modify a queue's label schema after creation:
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
 2. Open the queue.
 3. If the Details panel is hidden, click {{< ui >}}View Details{{< /ui >}}.
 4. Click {{< ui >}}Edit{{< /ui >}}.
@@ -393,7 +393,7 @@ You can modify a queue's label schema after creation:
 
 Export annotated traces for analysis or use in other workflows:
 
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
 2. Open the queue.
 3. Select traces (or select all).
 4. Click {{< ui >}}Export{{< /ui >}}.
@@ -456,7 +456,7 @@ curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
 
 Transfer annotated traces to datasets for experiment evaluation:
 
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
 2. Open the queue.
 3. Select traces to transfer.
 4. Click {{< ui >}}Add to Dataset{{< /ui >}}.
@@ -523,7 +523,7 @@ See [Datasets][3] for more information about using datasets in offline experimen
 ### Deleting queues
 
 To delete a queue:
-1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2].
 2. Open the queue.
 3. Click {{< ui >}}Delete{{< /ui >}} in the Details panel.
 
