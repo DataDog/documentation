@@ -23,3 +23,18 @@ entries:
       - ListRUMOperations
       - UpdateRUMOperation
     title: Align RUM operations spec with responses
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateRUMOperation
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperation
+      - DeleteRUMOperationStrongLink
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperationStrongLinks
+      - ListRUMOperations
+      - UpdateRUMOperation
+      - UpdateRUMOperationStrongLink
+    title: Add AI Gateway route permissions and safe editing

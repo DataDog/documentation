@@ -67,9 +67,11 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 ## Optional step
 
-In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. For example, if the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
+To make a step optional, such as a step that closes a pop-up, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. If the step fails after its timeout (60 seconds by default), the test runs the next step.
 
-{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Optional step" style="width:50%">}}
+This option also displays {{< ui >}}If this step fails, mark test as failed{{< /ui >}}, which is selected by default. With it selected, the test still fails after the remaining steps run. To keep the test passing when the optional step fails, clear this option.
+
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Step advanced options with continue to next step selected and mark test as failed cleared." style="width:50%">}}
 
 ## Exit on success
 
@@ -108,7 +110,7 @@ Opening your subtest in the main window means that your subtest is the continuat
 
 ### Set failure behavior
 
-Click {{< ui >}}If this step fails, continue to next step{{< /ui >}} and {{< ui >}}If this step fails, mark test as failed{{< /ui >}} to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+Select {{< ui >}}If this step fails, continue to next step{{< /ui >}} so the parent test continues if the subtest fails. {{< ui >}}If this step fails, mark test as failed{{< /ui >}} is selected by default. With it selected, the parent test fails after its remaining steps run. To keep the parent test passing when the subtest fails, clear this option.
 
 ### Set success behavior
 

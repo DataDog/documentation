@@ -82,6 +82,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | - **Apple ecosystem**: iOS only.<br> - **Flutter** Session Replay is in Preview. |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
+| WebSocket monitoring | {{< X >}} |  |  |  |  |  |  |  |  |  |  | **Browser** WebSocket monitoring is in Preview. See [Track WebSocket connections][5]. |
 
 ## Supported endpoints for SDK domains
 
@@ -147,3 +148,4 @@ Continue to [Create a RUM Application](/real_user_monitoring/setup/create_applic
 [2]: /real_user_monitoring/guide/proxy-rum-data
 [3]: /integrations/content_security_policy_logs
 [4]: /real_user_monitoring/remote_configuration/
+[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser#track-websocket-connections

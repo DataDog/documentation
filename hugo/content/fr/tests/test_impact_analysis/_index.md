@@ -135,7 +135,7 @@ La reconstitution de la couverture est effectuée dans la mesure du possible. Po
 
 ### Java, .NET et Go {#java-net-and-go}
 
-Avec `dd-trace-java`, `dd-trace-dotnet` et `dd-trace-go`, aucune configuration supplémentaire n'est nécessaire pour reconstituer la couverture. Ces bibliothèques détectent automatiquement quand les tests s'exécutent avec un moteur de couverture de code et reconstituent les données de couverture de code des tests non exécutés par Test Impact Analysis.
+Avec `dd-trace-java`, `dd-trace-dotnet` et `ddtest instrument`, aucune configuration supplémentaire n'est nécessaire pour le backfill. Ces bibliothèques détectent automatiquement quand les tests s'exécutent avec un moteur de couverture de code et reconstituent les données de couverture de code des tests non exécutés par Test Impact Analysis.
 
 ### JavaScript {#javascript}
 

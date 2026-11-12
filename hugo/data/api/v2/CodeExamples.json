@@ -602,6 +602,13 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "UpdateCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Custom Costs file returns \"OK\" response"
+    }
+  ],
   "UpdateCostGCPUsageCostConfig": [
     {
       "group": "cloud_cost_management",

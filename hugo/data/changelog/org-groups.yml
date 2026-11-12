@@ -27,3 +27,32 @@ entries:
       - UpdateOrgGroupPolicy
       - UpdateOrgGroupPolicyOverride
     title: Add Org Groups endpoints to add and remove org group memberships
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - BulkUpdateOrgGroupMemberships
+      - CreateOrgGroup
+      - CreateOrgGroupMemberships
+      - CreateOrgGroupPolicy
+      - CreateOrgGroupPolicyOverride
+      - DeleteOrgGroup
+      - DeleteOrgGroupMembership
+      - DeleteOrgGroupMemberships
+      - DeleteOrgGroupPolicy
+      - DeleteOrgGroupPolicyOverride
+      - GetOrgGroup
+      - GetOrgGroupMembership
+      - GetOrgGroupPolicy
+      - GetOrgGroupPolicyOverride
+      - ListOrgGroupMemberships
+      - ListOrgGroupPolicies
+      - ListOrgGroupPolicyConfigs
+      - ListOrgGroupPolicyOverrides
+      - ListOrgGroupPolicySuggestions
+      - ListOrgGroups
+      - UpdateOrgGroup
+      - UpdateOrgGroupMembership
+      - UpdateOrgGroupPolicy
+      - UpdateOrgGroupPolicyOverride
+    title: Add AI Gateway route permissions and safe editing

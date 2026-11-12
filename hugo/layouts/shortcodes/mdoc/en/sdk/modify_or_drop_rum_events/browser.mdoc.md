@@ -145,7 +145,7 @@ window.DD_RUM &&
 ```
 {% /if %}
 
-**Note**: View events cannot be dropped.
+**Note**: View events and WebSocket events (`vital.type:websocket`) cannot be dropped. For WebSocket events, the SDK still sends the event and logs a warning to the browser console.
 
 ## Modifiable attributes
 
@@ -164,9 +164,15 @@ You can update the following event properties:
 | `error.stack`                 | String | The stack trace or complementary information about the error.                                                                                                                             |
 | `error.resource.url`           | String | The resource URL that triggered the error.                                                                                                                                                |
 | `resource.url`                 | String | The resource URL.                                                                                                                                                                         |
+| `vital.websocket.url`          | String | The URL of a WebSocket connection. Only for events with `vital.type:websocket`. See [Redact sensitive data in WebSocket URLs][12].                                                        |
+| `vital.websocket.requested_protocols` | Array  | The subprotocols requested when opening a WebSocket connection. Only for events with `vital.type:websocket`.                                                                              |
+| `vital.websocket.selected_protocol` | String | The subprotocol selected by the server for a WebSocket connection. Only for events with `vital.type:websocket`.                                                                           |
+| `vital.websocket.close_reason` | String | The reason a WebSocket connection was closed. Only for events with `vital.type:websocket`.                                                                                                |
 | `long_task.scripts.source_url` | String | The script resource url                                                                                                                                                                   |
 | `long_task.scripts.invoker`    | String | A meaningful name indicating how the script was called                                                                                                                                    |
 | `context`                      | Object | Attributes added with the [Global Context API](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes), the [View Context API](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-view-attributes), or when generating events manually (for example, `addError` and **`addAction`**). |
+
+The `vital.websocket.*` properties require Browser SDK v7.16.0 or later.
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][1].
 
@@ -181,3 +187,4 @@ The RUM Browser SDK ignores modifications made to event properties not listed ab
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [11]: /real_user_monitoring/guide/enrich-and-control-rum-data
+[12]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser#redact-sensitive-data-in-websocket-urls

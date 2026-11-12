@@ -182,7 +182,7 @@ Para usar el método de Inicio rápido, su rol de usuario de Datadog debe tener 
 
 ### Instrucciones{#instructions}
 
-1. En la [página de integración de Google Cloud][200], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. En la [página de integración de Google Cloud][200], seleccione {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Haga clic en {{< ui >}}Quick Start{{< /ui >}}.
 3. Haga clic en {{< ui >}}Copy{{< /ui >}} en la sección de script de configuración.<br>
    **Nota**: Datadog recomienda ejecutar este script localmente a través de la [CLI de gcloud][201], ya que puede ser más rápido. Esto requiere tener sus credenciales de Google Cloud disponibles localmente y tener instalada la gcloud CLI en su máquina.
@@ -222,7 +222,7 @@ Para usar el método de Inicio rápido, su rol de usuario de Datadog debe tener 
 
 ### Instrucciones{#instructions-1}
 
-1. En la [página de integración de Google Cloud][500], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. En la [página de integración de Google Cloud][500], seleccione {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Seleccione {{< ui >}}Terraform{{< /ui >}}.
 3. En {{< ui >}}Provide GCP Resources{{< /ui >}}, agregue los ID de proyecto y de carpeta sobre los cuales desee hacer un seguimiento.
 4. Seleccione las carpetas y los proyectos sobre los cuales desee hacer un seguimiento.
@@ -254,7 +254,7 @@ Para usar el método de Inicio rápido, su rol de usuario de Datadog debe tener 
 
 ### Instrucciones{#instructions-2}
 
-1. En la [página de integración de Google Cloud][600], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. En la [página de integración de Google Cloud][600], seleccione {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Haga clic en {{< ui >}}Manual{{< /ui >}}.
 3. Copie el valor {{< ui >}}Datadog Principal{{< /ui >}} y haga clic en {{< ui >}}Open the Google Console{{< /ui >}}.
 4. Cree una cuenta de servicio:
@@ -282,9 +282,9 @@ Para usar el método de Inicio rápido, su rol de usuario de Datadog debe tener 
 
 #### Validación {#validation}
 
-Para visualizar sus métricas, use el menú de la izquierda para navegar a {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} y busque `gcp`:
+Para ver sus métricas, vaya a la página {{< ui >}}Metrics Catalog{{< /ui >}} y busque `gcp`:
 
-{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="La página de Resumen de métricas en Datadog filtrada para métricas que comienzan con GCP" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="La página Metrics Catalog de Datadog, filtrada para mostrar las métricas que comienzan con GCP" style="width:100%;" >}}
 
 ### Integraciones de Google Cloud {#google-cloud-integrations}
 
