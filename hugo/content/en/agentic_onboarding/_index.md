@@ -249,14 +249,6 @@ Send the prompt that matches the product you want to set up:
 
 {{% tab "Real User Monitoring" %}}
 {{< code-block lang="text" >}}Add Datadog Real User Monitoring to my project{{< /code-block >}}
-
-{{< skill-callout
-    title="Set up RUM with an agent"
-    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided RUM setup."
-    action_name="copy_dd_orchestrator_rum_setup_prompt"
-    lang="text" >}}
-Using skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md setup Datadog RUM in my project
-{{< /skill-callout >}}
 {{% /tab %}}
 
 {{% tab "Product Analytics" %}}
