@@ -22,9 +22,9 @@ further_reading:
 AI Guard for coding agents is in Preview.
 {{< /callout >}}
 
-AI Guard can protect the coding agents that developers run on their computers, such as Claude Code, Codex, and Cursor. AI Guard evaluates the prompts, tool calls, and tool results of each coding agent session in real time, and can block unsafe actions before they run.
+AI Guard can protect the coding agents that developers run on their computers, such as Claude Code, Codex, and Cursor. AI Guard evaluates the prompts, tool calls, and tool results of each coding agent session in real time. It can block unsafe actions before they run.
 
-AI Guard treats the developer as trusted. AI Guard flags actions that don't match what the developer asked the coding agent to do, such as instructions hidden in files or web pages (indirect prompt injection), attempts to read or send credentials, destructive commands, and the installation of malicious packages.
+AI Guard treats the developer as trusted, and flags actions that don't match what the developer asked for. Examples include instructions hidden in files or web pages (indirect prompt injection), attempts to read or send credentials, destructive commands, and malicious package installations.
 
 ## How AI Guard for coding agents works
 
@@ -88,7 +88,7 @@ AI Guard for coding agents doesn't use the Datadog Agent or the Datadog SDK. Tra
    bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security-mode observe --security-privacy unredacted
    ```
 
-   When prompted, select your Datadog site. The installer stores both keys in the operating system keychain, and turns on AI Guard for each supported coding agent it finds: Claude Code, Codex, Cursor, GitHub Copilot CLI, and Kiro CLI.
+   When prompted, select your Datadog site. The installer stores both keys in the operating system keychain. Then it turns on AI Guard for each supported coding agent that it finds.
 
 1. Restart your coding agents.
 
@@ -99,7 +99,7 @@ To set other options at installation time, see the [Configuration options](#conf
 {{% /tab %}}
 {{% tab "Managed fleets (MDM)" %}}
 
-To deploy AI Guard for coding agents with an MDM or UEM product, such as Jamf Pro or Microsoft Intune, follow the [Managed Endpoint Administrator Guide][1].
+To deploy AI Guard with an MDM or UEM product, such as Jamf Pro or Microsoft Intune, follow the [Managed Endpoint Administrator Guide][1].
 
 [1]: https://github.com/datadog-labs/trajectory/blob/main/docs/MANAGED-ENDPOINTS.md
 {{% /tab %}}
@@ -107,7 +107,7 @@ To deploy AI Guard for coding agents with an MDM or UEM product, such as Jamf Pr
 
 ### Enable AI Guard without the installer
 
-To turn on AI Guard with your own tooling, for example from a secrets vault, store both keys in the keychain and run the setup command:
+To turn on AI Guard with your own tooling, such as a secrets vault, store both keys in the keychain and run the setup command:
 
 ```bash
 <COMMAND_THAT_PRINTS_YOUR_API_KEY> | trajectory config set-secret dd_api_key --stdin
@@ -171,7 +171,7 @@ trajectory plugins modules evaluator configure agent-security ai_guard --privacy
 
 ## Configure policies {#configure-policies}
 
-Coding agents have their own AI Guard policies, separate from the policies for custom agents. Coding agent policies have the same [policy settings][8] as custom agent policies, but their scope is a coding agent, such as Claude Code or Codex, instead of a service and environment.
+Coding agents have their own AI Guard policies, separate from the policies for custom agents. Coding agent policies have the same [policy settings][8] as custom agent policies. Their scope is a coding agent, such as Claude Code or Codex, instead of a service and environment.
 
 To manage coding agent policies, select {{< ui >}}Coding Agents{{< /ui >}} on the AI Guard {{< ui >}}Policies{{< /ui >}} tab, then [edit or create a policy][9]. Policies range from least to most specific:
 
@@ -180,7 +180,7 @@ To manage coding agent policies, select {{< ui >}}Coding Agents{{< /ui >}} on th
 
 When more than one policy matches a request, AI Guard applies the most specific one. Inheritance works the same as for custom agent policies. See [Policy scope and inheritance][10].
 
-For [tools policies][11], use the tool name that the coding agent uses, for example `Bash` for the shell tool in Claude Code. For [sensitive data scanning][12], redaction is monitoring only: AI Guard reports findings, but Trajectory doesn't redact the data that the coding agent sends to the model.
+For [tools policies][11], use the tool name that the coding agent uses, for example `Bash` for the shell tool in Claude Code. [Sensitive data scanning][12] is monitoring only. AI Guard reports findings, but Trajectory doesn't redact the data that the coding agent sends to the model.
 
 ## Turn on blocking {#turn-on-blocking}
 
@@ -197,7 +197,7 @@ To view coding agent evaluations, go to the AI Guard [{{< ui >}}Investigate{{< /
 
 ## Disable AI Guard for coding agents {#disable}
 
-To turn off AI Guard for coding agents and remove its hooks, run the following command with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect. Trajectory observability continues to work.
+To turn off AI Guard and remove its hooks, run the following command with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect. Trajectory observability continues to work.
 
 ```bash
 trajectory plugins security disable --clients cc,codex,cursor --remove-hooks
