@@ -113,7 +113,7 @@ The following metrics are specific to the Spike Protection processor:
 
 ## How the processor works
 
-The Spike Volume processor detects and responds to log volume spikes as follows:
+The Spike Protection processor detects and responds to log volume spikes as follows:
 
 1. The processor groups logs that match its filter by the configured group-by attributes, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline.
 1. For each log group, the Worker computes the average log volume and the standard deviation across one-hour intervals over the previous 24 hours.
