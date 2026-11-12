@@ -48,13 +48,13 @@ Use search, facets, the metrics table, and the metric details side panel to find
 
 Search your metrics by metric name or tag using the {{< ui >}}Metric{{< /ui >}} or {{< ui >}}Tag{{< /ui >}} search fields:
 
-{{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
+{{< img src="metrics/summary/tag_advanced_filtering.png" alt="The Metrics Catalog page with NOT team:* entered in the Tag search field." style="width:75%;">}}
 
 **Note**: Tag values are retained in the {{< ui >}}Tag{{< /ui >}} search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
 
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
-{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary page with fuzzy search searching shopist checkout" style="width:75%;">}}
+{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The Metrics Catalog page with a fuzzy search for shopist checkout in the Metric search field." style="width:75%;">}}
 
 Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
@@ -82,9 +82,9 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 #### Configuration facets
 
+- {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled.
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
-- {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
 
 {{< img src="metrics/catalog/facet_panel_2026-11-03.png" alt="The facet panel with the Core, Usage, and Configuration facet groups expanded." style="width:40%;" >}}
 
@@ -130,7 +130,7 @@ To download the metrics table, click the download icon ({{< ui >}}Download as CS
 
 Click any metric name to open its details side panel, which shows the metric's metadata and tags:
 
-{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
+{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="The metric details side panel, showing ingested and indexed custom metrics, hosts, tag values, metadata, and the tags table." style="width:75%;">}}
 
 The side panel shows the following details for the metric:
 
@@ -311,6 +311,8 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 {{< img src="metrics/catalog/actions_menu_2026-11-04.png" alt="The Actions menu, with the Manage Metric Name Filtering Rules, Manage Agent-Side Tag Aggregation Rules, Manage Percentile Aggregations, and Manage Historical Metrics options." style="width:60%;" >}}
 
+* {{< ui >}}Manage Metric Name Filtering Rules{{< /ui >}} (Preview): Drop custom metrics by name in the Datadog Agent before ingestion. See the [Agent-Side Filtering for Custom Metrics][47] guide for more information.
+* {{< ui >}}Manage Agent-Side Tag Aggregation Rules{{< /ui >}} (Preview): Remove tags and re-aggregate custom metrics in the Datadog Agent before they're sent to Datadog. See the [Agent-Side Tag Aggregation][48] guide for more information.
 * {{< ui >}}Manage Percentile Aggregations{{< /ui >}}: Enable or disable percentile, threshold, and standard deviation queries across multiple distribution metrics. See the [Distributions page][31] for more information.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
@@ -332,7 +334,7 @@ To configure tags on a single metric, follow these steps. To configure tags on m
 
 1. Click your custom metric name in the metrics table to open the metric's details side panel.
 2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
-3. Select {{< ui >}}Include tags...{{< /ui >}} or {{< ui >}}Exclude tags...{{< /ui >}} to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+3. Select {{< ui >}}Include tags...{{< /ui >}} or {{< ui >}}Exclude tags...{{< /ui >}} to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][0] documentation.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting {{< ui >}}Save{{< /ui >}}.
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
@@ -357,11 +359,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Timeseries generated from the Datadog Events platform.
-| Agent Observability       | Timeseries emitted by the Agent Observability product using the `lmobs_to_metrics` service.
+| Agent Observability       | Timeseries emitted by the Agent Observability product using the `llmobs_to_metrics` service.
 | Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
-| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
+| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipelines][20] including error and performance metrics.
 | Other                   | Timeseries that don't have a DD integration counterpart.
 | Processes               | Timeseries generated from the Datadog [Processes][22] product.
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
@@ -418,3 +420,5 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [44]: /metrics/guide/custom_metrics_governance/
 [45]: /metrics/guide/tag-indexing-rules/
 [46]: https://app.datadoghq.com/metric/settings
+[47]: /metrics/guide/agent-filtering-for-custom-metrics/
+[48]: /metrics/guide/agent-side-tag-aggregation/
