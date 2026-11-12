@@ -37,3 +37,10 @@ entries:
       - CreateVariantForFeatureFlag
       - UpdateVariantForFeatureFlag
     title: Fix Feature Flags variant request and response schemas
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41164
+    operations:
+      - ExportFeatureFlagHistory
+      - ListFeatureFlagHistory
+    title: Add Feature Flags change history list and CSV export endpoints

@@ -59,7 +59,7 @@ Some SSO providers might detect Datadog's browser tests as bots and prevent them
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
 ### Passkeys
-Datadog Synthetic Monitoring supports [Passkeys][4], a security method that eliminates the risks of phishing, all forms of password theft, and replay attacks.
+Datadog Synthetic Monitoring supports [passkeys][4], a security method that reduces the risks of phishing, password theft, and replay attacks. In browser tests, passkeys work only on Google Chrome and Microsoft Edge.
 
 Create a Virtual Authenticator global variable and import it in your test. Then, record any passkey-related steps inside the browser.
 
@@ -82,15 +82,17 @@ Alternatively, you can configure your Datadog Browser Tests to authenticate usin
 
 - Specific headers
 - Cookies
-- Basic Auth, Digest Auth, AWS Signature, NTLM, Kerberos, or Auth 2.0 credentials
+- HTTP Basic, Digest, or NTLM credentials (username and password)
 
-See [authentication methods][10] for more information.
+For more information, see the [Advanced options][10] section.
 
 These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
 
 You can manually apply these headers, cookies, and credentials to the recording page, then record the steps your test performs after login. During test execution, the browser test automatically authenticates using your specified configuration and executes all recorded steps.
 
 {{< img src="synthetics/guide/app_that_requires_login/browser_test_adv_options_2.png" alt="Login to your app with browser test configuration options">}}
+
+For applications that use other authentication methods, such as SSO, passkeys, or MFA, see the [Include the login steps in your recording][11] section.
 
 ## Account security
 
@@ -117,4 +119,5 @@ For more information about account security, see [Synthetic Monitoring Data Secu
 [7]: /synthetics/settings/?tab=specifyvalue#global-variables
 [8]: /synthetics/browser_tests/test_steps#a-global-variable
 [9]: /data_security/synthetics
-[10]: /synthetics/guide/authentication-protocols/?tab=basicaccess#authentication-methods
+[10]: /synthetics/browser_tests/?tab=requestoptions#advanced-options
+[11]: #include-the-login-steps-in-your-recording

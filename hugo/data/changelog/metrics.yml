@@ -158,3 +158,10 @@ entries:
       - ListTagConfigurations
     title: Document the metric name filter length limit on the list metrics 
       endpoint
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41619
+    operations:
+      - EstimateMetricsOutputSeries
+      - ListTagConfigurationByName
+    title: Document estimate error responses and tag configuration 404 messages

@@ -2240,6 +2240,10 @@
     "description": "Get the diagnostics produced by an experiment's latest analysis run. Each diagnostic includes its category, and the response includes an overall diagnostic or pipeline lifecycle status.",
     "summary": "Get experiment diagnostics"
   },
+  "ListExperimentHoldouts": {
+    "description": "List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.",
+    "summary": "List experiment holdouts"
+  },
   "ListExperimentMetricGroups": {
     "description": "List every decision and non-decision metric group attached to an experiment. Metric references are returned in their stored order. An incomplete draft can have no decision group and returns only the groups that exist.",
     "summary": "List experiment metric groups"
@@ -2331,6 +2335,14 @@
   "StopExposureSchedule": {
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
+  },
+  "ListFeatureFlagHistory": {
+    "description": "Returns the organization's feature flag change events, newest first.\nEach event includes a readable description of the change.\nAll filters are optional, and events must match every filter you set. Without a date range, the whole history is listed.\nResults are paginated with `page[limit]` and `page[offset]`; follow `links.next` to read further back.",
+    "summary": "List feature flag change history"
+  },
+  "ExportFeatureFlagHistory": {
+    "description": "Exports the organization's feature flag change events as a CSV file, newest first, without pagination.\nIt accepts the same filters as the List feature flag change history endpoint, and its columns match the CSV export on the flag history page:\nFlag Version, Flag Name, Flag Key, Flag UUID, Action, User Name, User Email, User Type, Environment, and Timestamp.\n\nIf an export fails before the file starts, the response is a JSON:API error. Large exports stream as they are read.\nIf an export fails after streaming starts, the connection closes before the file ends, so the download fails instead of\nreturning a file with missing rows. An export must finish within the 60-second request timeout. If an export times out,\nnarrow the date range.",
+    "summary": "Export feature flag change history"
   },
   "GetSavedFilter": {
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
@@ -4496,7 +4508,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.",
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.\n\nA `404 Not Found` response means that no metric with this name exists in your organization. A\n`400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the\nqueried window. For no data, the error message says so and names the window that was queried, which can\ndiffer from the requested one.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "GetMetricTagCardinalityDetails": {
@@ -4532,7 +4544,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually\nmeans that the metric has no tag configuration, but it is also returned when no metric with this name exists\nin your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,\nwith different messages: `No tag configuration for <metric_name>` when the metric exists without a tag\nconfiguration, and `<metric_name> not found` when no metric with this name exists in your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
