@@ -52,7 +52,7 @@ Any fixed date can be entered as part of a range. For example:
 For example, on November 11, 2026 at 11:00 a.m.:
 
 - `Dec 1 - Dec 5` resolves to December 1 to 5, 2025.
-- `9:00 am - 3:00 pm` resolves to 9:00 a.m. to 3:00 p.m. on November 10. The start also moves back, even though 9:00 a.m. on November 11 is in the past.
+- `9:00 am - 3:00 pm` resolves to 9:00 a.m. to 3:00 p.m. on November 10. The start time also moves back, even though 9:00 a.m. on November 11 is in the past.
 
 If you include a year and the date is in the future, such as `Dec 1, 2026 - Dec 5, 2026`, the time frame can't be applied.
 
