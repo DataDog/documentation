@@ -2265,6 +2265,107 @@ Creates a pipeline from a name and a configuration in the [Observability Pipelin
 - Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
 - Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
 
+## On-Call
+
+Tools for [Datadog On-Call][101], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
+
+<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>). Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `list_oncall_pages`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Searches On-Call pages and returns their status, urgency, responders, and timestamps. Filter by fields such as `status`, `urgency`, `team`, `service`, `tags`, and responder name or email.
+
+- Which pages are still unresolved for the `payments` team?
+- List the high-urgency pages created in the last 24 hours.
+
+### `get_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call page by its UUID or page key, including its status, title, responders, and related resources.
+
+- Show me the details of page `PAGE-123`.
+- Who responded to this page, and is it resolved?
+
+### `create_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Page`*\
+Pages a team or a single user through On-Call. Paging a team notifies whoever the team's escalation policy has on call. Paging a user notifies only that user, through their own notification rules, with no escalation. Set the urgency to `low` or `high`, and optionally add a description and tags. Adding a `service:<name>` tag associates the page with that service.
+
+- Page the `payments` team with high urgency: checkout error rate is above 5%.
+- Send a low-urgency page to the on-call responder for `checkout-api` about elevated latency.
+
+<div class="alert alert-warning">This tool notifies real people. Confirm the target and urgency before your agent creates a page.</div>
+
+### `list_oncall_schedules`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists On-Call schedules, optionally filtered by name, team, user, tags, or schedule type. Use this tool to find a schedule's ID before calling the other schedule tools.
+
+- List the On-Call schedules for the `payments` team.
+- Find the schedule named `Platform Primary`.
+
+### `get_oncall_schedule`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call schedule by its ID, including its name, time zone, tags, and layers.
+
+- Show me the layers and time zone of the `Platform Primary` schedule.
+
+### `get_oncall_schedule_calendar`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves the calendar for an On-Call schedule over a time window of up to 45 days, including each shift, who covers it, and any overrides applied.
+
+- Who is covering the `Platform Primary` schedule over the holidays?
+- Show me next week's shifts for the `payments` schedule.
+
+### `get_oncall_schedule_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns who is on call for a schedule, including their name and email. Returns the current rotation position by default, and can also return the previous and next positions or evaluate a specific point in time.
+
+- Who is on call for the `Platform Primary` schedule?
+- Who is next on call for the `payments` schedule?
+
+### `get_oncall_team_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns the current on-call responders for a team: the responders who would be notified first, plus the rest of the escalation chain. Optionally provide page tags to evaluate a specific routing rule.
+
+- Who would get paged if I paged the `payments` team?
+- Who is on call for the `payments` team for `env:prod` and `service:checkout-api`?
+
+### `list_oncall_schedule_overrides`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists the overrides on an On-Call schedule within a time window of up to 45 days, including who is covering and who they are covering for.
+
+- What overrides are scheduled on the `Platform Primary` schedule this month?
+
+### `create_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Overrides an On-Call schedule for a time window, putting a specific user on call instead of whoever the rotation would pick. Use this tool to record shift swaps and ad-hoc cover.
+
+- Put Alex on call for the `Platform Primary` schedule from Friday 6 PM to Monday 9 AM.
+- I'm covering Sam's shift on the `payments` schedule tomorrow. Record the swap.
+
+### `remove_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Removes an override from an On-Call schedule. An override that has not started yet is deleted. An override that is in progress ends immediately and remains visible as inactive.
+
+- Remove my override on the `Platform Primary` schedule for this weekend.
+
+### `get_oncall_analytics`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Aggregates On-Call event data over a time window of up to 90 days to measure page volume, acknowledgment and resolution times, escalation activity, and shift duration. Optionally filter and group results by event attributes, such as team, urgency, or schedule.
+
+- How many pages did each team receive in the last 30 days?
+- What is the p90 time to resolve high-urgency pages for the `payments` team this quarter?
+
 ## Onboarding
 
 Agentic onboarding tools for guided Datadog setup and configuration.
@@ -3879,6 +3980,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
+[101]: /incident_response/on-call/
 
 ## Further reading
 
