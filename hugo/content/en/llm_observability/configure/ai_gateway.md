@@ -12,6 +12,9 @@ further_reading:
   - link: "/account_management/org_settings/service_accounts/"
     tag: "Documentation"
     text: "Service accounts"
+  - link: "/llm_observability/configure/ai_gateway_sessions/"
+    tag: "Documentation"
+    text: "AI Gateway sessions"
 
 ---
 
@@ -135,6 +138,8 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 6. Review and save the rule, then copy its identifier into the `model` field of your requests.
 
 Configure [data capture](#configure-data-capture) through organization defaults and scoped overrides under {{< ui >}}Policies{{< /ui >}}.
+
+A {{< ui >}}Weighted{{< /ui >}} step assigns traffic shares to sessions, not to individual requests, so each conversation keeps returning to the same destination. To identify a conversation, send the `x-session-id` header. See [AI Gateway sessions][16].
 
 ### Model served by any provider
 
@@ -389,6 +394,9 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 `websocket_not_supported`
 : HTTP `426`. A `GET /responses` request, such as a Codex WebSocket connection, was rejected. AI Gateway serves OpenAI Responses only over `POST /responses`, buffered or streamed with `stream: true`. In Codex, set `supports_websockets=false` for the AI Gateway provider.
 
+`session_destination_unavailable`
+: HTTP `409`. The request's session is pinned to a destination that can no longer serve it, for example because the destination was removed from the routing rule. The response sets `X-Should-Retry: false`. Start a new conversation with a new session ID. See [Session destination unavailable][17].
+
 `requested_provider_unavailable`
 : HTTP `400`. The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active.
 
@@ -440,3 +448,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
+[16]: /llm_observability/configure/ai_gateway_sessions/
+[17]: /llm_observability/configure/ai_gateway_sessions/#session-destination-unavailable
