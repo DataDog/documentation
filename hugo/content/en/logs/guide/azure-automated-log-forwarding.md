@@ -15,7 +15,7 @@ Use this guide to set up and manage Azure automated log forwarding. You can conf
 
 The ARM template deploys resources from a series of Azure services (storage accounts and Azure Container Apps jobs) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of Container Apps jobs deployed to a subscription and region of your choice. Storage accounts and Container Apps jobs are deployed in each of the subscriptions forwarding logs to Datadog.
 
-**Note**: New deployments run the control plane on Azure Container Apps jobs by default. Deployments created earlier keep their [Azure Function][15] app control plane until they are migrated.
+**Note**: New deployments run the control plane on Azure Container Apps jobs by default. Deployments created earlier keep their [Azure Function][15] app control plane. Updating an existing deployment does not migrate it to Container Apps jobs.
 
 **Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
 
@@ -182,7 +182,7 @@ The ARM template grants the control plane only the permissions needed to manage 
    - This is needed to manage (create and delete) forwarder storage accounts and Container Apps jobs.
 
 - [Reader and Data Access][23] role at the **resource group** level, for the log-forwarding resource groups in the selected subscriptions.
-   - This is needed to create diagnostic settings that send logs to the forwarder storage accounts, which requires the ListKeys permission on those storage accounts.
+   - This is needed to create diagnostic settings that send logs to the forwarder storage accounts, which requires the `listKeys` permission on those storage accounts.
 
 - [Container Apps Jobs Contributor][24] role at the **control plane resource group** level, for updating the control plane Container Apps jobs. Deployments with a Function app control plane use the [Website Contributor][12] role instead.
 
