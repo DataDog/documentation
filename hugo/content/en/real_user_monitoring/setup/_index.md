@@ -75,10 +75,10 @@ The following table shows which RUM capabilities are supported on each platform:
 | Feature flag tracking and release tracking | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} |  |  |
 | Error tracking and source mapping | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
+| Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
 | Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  | **Apple ecosystem**: Not available on tvOS or watchOS. |
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
-| Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | {{< X >}} |  |
+| Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | **Electron** attaches user and account attributes to renderer logs. Global context set in the main process applies to RUM events only. To add global context to logs, set it with the Browser Logs SDK in each renderer. |
 | Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | - **Apple ecosystem**: iOS only.<br> - **Flutter** Session Replay is in Preview. |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
