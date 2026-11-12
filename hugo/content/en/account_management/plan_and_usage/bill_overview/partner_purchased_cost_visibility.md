@@ -38,7 +38,6 @@ Your partner shares your rates with Datadog. Datadog uses those rates and your u
 
 ### Estimated cost accuracy
 
-- **Tiered on-demand pricing is not supported.** Cost data is not shown for the active Error Tracking and LLM Observability SKUs.
 - **Percent-based products are not supported.** Cost data is not shown for the Audit Trail or Premier Support SKUs.
 - **All costs are estimated.** Costs are calculated from the rates your partner provides, so historical costs are estimates as well, even after a month closes. In most cases, the costs in Bill Overview match your partner invoice. Minor differences (a few cents) can occur because of nuances in billing calculations. If you notice significant discrepancies, contact your partner.
 
