@@ -108,7 +108,8 @@ CPU cores allocated
 
 CPU usage
 : **Metric**: `pipelines.cpu_usage_seconds_total`
-: **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
+: **Description:** The CPU time consumed by the Worker process, in seconds, in both user and system space. The per-second rate of this metric is the number of CPU cores the Worker uses: for example, a rate of `1.5` means the Worker keeps one and a half cores busy. Compare it against `pipelines.cpu_max_cores` to see how close the Worker is to its CPU limit.
+: **How it is measured**: On Linux, the kernel tracks the CPU time each thread spends running on a CPU. The Worker reads this value with `getrusage(RUSAGE_SELF)`, which returns the sum over all threads of the process, including threads that have already exited. This metric therefore covers all of the Worker's work: sources, processors, destinations, and background tasks.
 
 Data directory available bytes
 : **Metric**: `pipelines.data_dir_available_bytes`
@@ -254,9 +255,12 @@ Data dropped intentionally or unintentionally
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
-: **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later for Linux and MacOS.
+: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later for Linux and MacOS.
+: **How it is measured**: On Linux, the kernel tracks the CPU time each thread spends running on a CPU. Each time the processor runs, the Worker reads this value with `clock_gettime(CLOCK_THREAD_CPUTIME_ID)` on the thread the processor is running on, before and after the work, and adds the difference to the metric.
 : **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
 : **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
+: In Worker version 2.26 and later, this metric is available for all processors.
+: **Note**: The sum of this metric across all components does not equal `pipelines.cpu_usage_seconds_total`, because it does not cover sources, destinations, and some background tasks of the Worker.
 
 Utilization
 : **Metric**: `pipelines.utilization`
