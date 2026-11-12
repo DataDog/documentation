@@ -3066,7 +3066,7 @@ Deletes one or more custom detection rules by ID. Only custom (non-default) rule
 ### `propose_datadog_security_detection_rule`
 *Toolset: **security** (Preview)*\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate more than a few rules, use [detection rule migration][108].
+Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate many rules at once, use [bulk migration][108].
 
 - Translate this Splunk rule into a Cloud SIEM detection rule: `<SPL query>`.
 - Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
@@ -4018,7 +4018,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
 [107]: /integrations/kube_apiserver_metrics/
-[108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/
+[108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/#bulk-migrate-detection-rules-in-the-ui
 
 ## Further reading
 
