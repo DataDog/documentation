@@ -47,7 +47,7 @@ To get started with Cloud Security, review the following:
 
 The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
 
-To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
+You can run Agentless scanners in your own cloud account (self-hosted) or let Datadog run them for you (Datadog-hosted, in Preview for AWS). To compare the options, see [Choose where scanners run][10]. To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
 ## Deploy the Agent for deeper context
 
@@ -138,3 +138,4 @@ For information on disabling Cloud Security, see the following:
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/cloud_security_management/setup/ci_cd
+[10]: /security/cloud_security_management/setup/agentless_scanning#choose-where-scanners-run

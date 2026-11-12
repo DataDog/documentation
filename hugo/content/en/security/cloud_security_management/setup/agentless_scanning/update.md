@@ -9,6 +9,8 @@ further_reading:
     text: "Cloud Security Agentless Scanning"
 ---
 
+The steps on this page apply to self-hosted scanners. If you use Datadog-hosted scanning, Datadog updates the scanner automatically, and you don't need to take any action. For more information, see [Choose where scanners run][4].
+
 ## Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly so you can get access to new features and bug fixes as they are released.
@@ -32,3 +34,4 @@ For usage examples, see the [GitHub repository][3].
 [1]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases
 [3]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples
+[4]: /security/cloud_security_management/setup/agentless_scanning#choose-where-scanners-run
