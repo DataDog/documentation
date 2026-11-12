@@ -255,13 +255,13 @@ Data dropped intentionally or unintentionally
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
-: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later for Linux and MacOS.
-: **How it is measured**: On Linux, the kernel tracks the CPU time each thread spends running on a CPU. A processor can run on several threads at the same time. Each time the processor runs on a thread, the Worker reads that thread's CPU time with `clock_gettime(CLOCK_THREAD_CPUTIME_ID)` before and after the work, and adds the difference to the metric.
-: **Note**: On Windows, this metric is only a rough estimate. Windows updates a thread's CPU time only at each scheduler tick, typically every 15.6 milliseconds, so a short run of a processor is counted as either zero or a full tick.
+: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later for Linux and macOS. The Worker also emits this metric on Windows, but only as a rough estimate.
+: **How it is measured**: On Linux and macOS, the operating system tracks the CPU time each thread spends running on a CPU. A processor can run on several threads at the same time. Each time the processor runs on a thread, the Worker reads that thread's CPU time with `clock_gettime(CLOCK_THREAD_CPUTIME_ID)` before and after the work, and adds the difference to the metric.
+: **Note**: On Windows, the operating system updates a thread's CPU time only at each scheduler tick, typically every 15.6 milliseconds, so a short run of a processor is counted as either zero or a full tick.
 : **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
 : **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
-: In Worker version 2.26 and later, this metric is available for all processors.
-: **Note**: The sum of this metric across all components does not equal `pipelines.cpu_usage_seconds_total`, because it does not cover sources, destinations, and some background tasks of the Worker.
+: **Note**: The preceding processor lists apply to Worker versions 2.18 through 2.25. In Worker version 2.26 and later, this metric is available for all processors.
+: **Note**: The sum of this metric across all processors does not equal `pipelines.cpu_usage_seconds_total`, because it does not cover sources, destinations, and some background tasks of the Worker.
 
 Utilization
 : **Metric**: `pipelines.utilization`
