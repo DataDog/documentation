@@ -25,9 +25,24 @@ After you enable Bits Detection, it initializes monitoring for the 100 most crit
 
 Your team's existing monitors stay in place. Bits Detection works alongside them, adding adaptive coverage for the parts of your system that change too quickly to model by hand.
 
-You can enable Bits Detection for additional services from several entry points:
+<div class="alert alert-info">
+Using Bits Detection requires the following permissions:
+<ul>
+  <li>To enable coverage:
+    <ul>
+      <li>Bits Investigations Write</li>
+      <li>Monitors Write</li>
+    </ul>
+  </li>
+  <li>To set up a notification destination:
+    <ul>
+      <li>Monitor Configuration Policy Write</li>
+    </ul>
+  </li>
+</ul>
+For details, see the <a href="#permissions">Permissions</a> section.</div>
 
-<div class="alert alert-info">Enabling coverage requires the Bits Investigations Write and Monitors Write permissions. Setting up a notification destination also requires the Monitor Configuration Policy Write permission. For details, see the <a href="#permissions">Permissions</a> section.</div>
+You can enable Bits Detection for additional services from several entry points:
 
 ### Option 1: Bits Detection Coverage Page {#enable-from-bits-ai}
 1. In Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5] and click {{< ui >}}Enable New Detection Coverage{{< /ui >}}.
