@@ -34932,6 +34932,49 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFileUpdateAttributes:
+      description: Attributes of a Custom Costs file that can be updated.
+      properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: true
+          type: boolean
+      required:
+        - ai_provider
+      type: object
+    CustomCostsFileUpdateData:
+      description: Custom Costs file to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CustomCostsFileUpdateAttributes"
+        id:
+          description: ID of the Custom Costs file.
+          example: "00000000-0000-0000-0000-000000000007"
+          type: string
+        type:
+          $ref: "#/components/schemas/CustomCostsFileUpdateType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CustomCostsFileUpdateRequest:
+      description: Request for updating a Custom Costs file.
+      properties:
+        data:
+          $ref: "#/components/schemas/CustomCostsFileUpdateData"
+      required:
+        - data
+      type: object
+    CustomCostsFileUpdateType:
+      default: cost_metadata
+      description: Type of the Custom Costs file resource.
+      enum:
+        - cost_metadata
+      example: cost_metadata
+      type: string
+      x-enum-varnames:
+        - COST_METADATA
     CustomCostsFileUploadRequest:
       description: Request for uploading a Custom Costs file.
       items:
@@ -156903,6 +156946,8 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_observability_catalog_read: Read Data Observability catalog resources and owners.
+            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
@@ -174320,6 +174365,73 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 32
+    patch:
+      description: >-
+        Mark whether a Custom Costs file holds AI provider costs. Datadog then recomputes the costs for the months that the file covers.
+      operationId: UpdateCustomCostsFile
+      parameters:
+        - $ref: "#/components/parameters/FileID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      ai_provider: true
+                    id: 00000000-0000-0000-0000-000000000007
+                    type: cost_metadata
+            schema:
+              $ref: "#/components/schemas/CustomCostsFileUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        billed_cost: 100.5
+                        billing_currency: USD
+                        charge_period:
+                          end: 1706745600000
+                          start: 1704067200000
+                        name: my_file.json
+                        provider_names:
+                          - my_provider
+                        status: ACTIVE
+                        uploaded_at: 1704067200000
+                      id: 00000000-0000-0000-0000-000000000007
+                      type: cost_metadata
+                    meta:
+                      version: "1.0"
+              schema:
+                $ref: "#/components/schemas/CustomCostsFileUploadResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update Custom Costs file
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 78
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/gcp_uc_config:
     get:
       description: List the Google Cloud Usage Cost configs.
