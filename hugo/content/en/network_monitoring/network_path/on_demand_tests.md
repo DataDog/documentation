@@ -14,13 +14,13 @@ further_reading:
     text: "Execution Policies"
 ---
 
-<div class="alert alert-info">Network Path on-demand tests are in Preview. Contact your Datadog representative to request access.</div>
+<div class="alert alert-info">On-demand tests on Network Path are in Preview. Contact your Datadog representative to request access.</div>
 
 ## Overview
 
-Network Path on-demand tests run a `traceroute` from a Datadog Agent host to a destination when you request it. Use on-demand tests to check a path right after a network change, such as a firewall rule or routing update, or to investigate a connectivity issue as it happens.
+On-demand tests allow you to run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update, or to investigate a connectivity issue as it happens.
 
-You can run an on-demand test from Network Path or from Bits Chat. On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
+You can run an on-demand test from the Network Path UI or from Bits Chat. On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
 
 ## Prerequisites
 
@@ -28,8 +28,6 @@ You can run an on-demand test from Network Path or from Bits Chat. On-demand tes
 - A Private Action Runner in the Datadog Agent on the source host, enrolled as ownerless. An ownerless runner uses an API key with the Private Action Runner capability. See [Enrollment and ownership][5].
 
 ## Setup
-
-### Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -94,9 +92,11 @@ After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Pr
 
 [Create an Execution Policy][8] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
 
+{{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with the Allow effect, the Remote Action integration with Run network path selected, and a target that matches the Agent with the tag hostname:auth-dotnet" style="width:60%;" >}}
+
 ### Permissions
 
-On-demand tests use the following permissions:
+On-demand tests use the following permissions. To grant permissions, see [Datadog Role Permissions][10].
 
 | Permission | Allows |
 |---|---|
@@ -105,11 +105,11 @@ On-demand tests use the following permissions:
 | Connections Resolve (`connections_resolve`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
 | Private Action Runner Contribute (`on_prem_runner_use`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
 
-To use the Datadog MCP Server, users also need the MCP permissions described in [Required permissions][9]. To grant permissions, see [Datadog Role Permissions][10].
+To use the Datadog MCP Server, users also need the MCP permissions described in [Required permissions][9].
 
 ## Run an on-demand test
 
-### From Network Path
+### From the Network Path UI
 
 1. Open a path in [Network Path][1].
 2. Click {{< ui >}}Run Test Now{{< /ui >}}. Datadog runs the test from the path's source host to its destination with the same protocol and port.
