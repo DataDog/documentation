@@ -498,6 +498,12 @@ multifiltersearch:
       recommendation_type: Migrate Managed Disk from Premium SSD to Premium SSD v2
       recommendation_description: Identifies attached Premium SSD data disks that would cost less as Premium SSD v2 provisioned for their measured peak IOPS and throughput, and recommends converting them.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk
+      recommendation_type: Migrate Managed Disk from Premium SSD to Standard SSD
+      recommendation_description: Identifies attached Premium SSD disks whose peak IOPS and throughput stay well within Standard SSD limits, and recommends migrating them to Standard SSD.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
