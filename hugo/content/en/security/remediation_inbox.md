@@ -85,9 +85,9 @@ Remediations are split into status tabs. The inbox opens on **To Triage**.
 | To Triage | No action has been taken. No work item is attached. |
 | Open | A work item is attached, and work has not started. |
 | In Progress | A work item is attached, and work is in progress. |
-| Closed | The work item attached to the remediation is closed. |
+| Closed | The remediation does not contain any open finding. |
 
-The status of a remediation follows the status of its [remediation work item](#track-remediation-progress).
+Until all of its findings are closed, the status of a remediation follows the status of its [remediation work item](#track-remediation-progress).
 
 ### Remediation table
 
