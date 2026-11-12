@@ -89,7 +89,7 @@ Trigger when the query meets one of the following conditions compared to a thres
 
 #### No data and below alerts
 
-When no logs match the monitor query during the time frame, the monitor can enter the `NO DATA` state. This happens only if no data is enabled for the monitor or the monitor has groups.
+If configured by the missing-data setting, a log monitor will enter `NO DATA` when no logs match its query, or when a previously active group stops reporting. By default, count queries evaluate the absence of data as a zero result against their thresholds, while other aggregations, such as average, retain their last known status.
 
 To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given time frame across all aggregate groups.
 
