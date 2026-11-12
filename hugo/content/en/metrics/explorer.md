@@ -90,6 +90,16 @@ You can optionally add functions to your query using the function button. Not al
 
 Use the {{< ui >}}Split Graph{{< /ui >}} button to view the data split into individual graphs by values for tags such as region, service, or environment.
 
+#### Tag menu
+
+In Metrics Explorer split view, click a tag chip in an individual graph's title to open a menu with these options:
+
+- {{< ui >}}Filter by{{< /ui >}}: Add the chip's `key:value` to the Explorer queries. The graphs refresh to show data matching that value, and split view stays open.
+- {{< ui >}}Remove{{< /ui >}}: Remove the tag from the query filters to show all values for that tag again. This option replaces {{< ui >}}Filter by{{< /ui >}} when the tag already filters every query and the chip appears active. {{< ui >}}Remove{{< /ui >}} is not available for event-based data sources.
+- {{< ui >}}Copy to clipboard{{< /ui >}}: Copy the chip's `key:value`.
+
+Chips labeled {{< ui >}}No &lt;key&gt; value{{< /ui >}} and calendar-shift chips do not have a menu. Dashboard Split Graph widgets do not have a tag menu.
+
 ### Export
 
 Use the {{< ui >}}Export{{< /ui >}} button (<i class="icon-export"></i>) to export your graph:
