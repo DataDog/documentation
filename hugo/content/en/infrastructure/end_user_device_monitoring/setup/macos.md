@@ -8,6 +8,9 @@ further_reading:
    - link: "/infrastructure/end_user_device_monitoring/setup/"
      tag: "Documentation"
      text: "Set up End User Device Monitoring"
+   - link: "/network_monitoring/network_path/"
+     tag: "Documentation"
+     text: "Network Path"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
@@ -132,6 +135,141 @@ To confirm that the Agent installed on a device, use one of the following method
 {{% /tab %}}
 {{< /tabs >}}
 
+## Set up Network Path
+
+[Network Path][2] traces the route from a device to a destination and shows the hop where latency or packet loss is introduced.
+
+On Agent 7.85 or later, each end-user device runs **basic dynamic tests** by default. The Agent selects up to 20 destinations per hour from the device's observed traffic. The first selection runs about five minutes after the Agent starts, and later selections run once per hour. You cannot change this interval.
+
+Basic dynamic tests are included with End User Device Monitoring:
+
+- They follow the [include and exclude filters][3] you configure.
+- They do not appear on the [Plan & Usage][4] page.
+- They do not contribute to billable usage.
+
+For Agent versions earlier than 7.85, see [Earlier Agent versions](#earlier-agent-versions).
+
+### Basic dynamic tests
+
+Agent 7.85 or later is required, with `infrastructure_mode: end_user_device` set. Basic dynamic tests turn on with that configuration.
+
+The Agent enables traceroute for these tests. If `traceroute.enabled` is set to `false` in `/opt/datadog-agent/etc/system-probe.yaml`, basic dynamic tests do not run. Remove that setting, or set it to `true`, and restart the Agent.
+
+By default, basic dynamic tests skip destinations that have no domain name. To include those destinations, add the following to `/opt/datadog-agent/etc/datadog.yaml`:
+
+```yaml
+network_path:
+  collector:
+    monitor_ip_without_domain: true
+```
+
+#### Filter destinations
+
+Filters control which observed destinations are eligible. Basic dynamic tests select up to 20 destinations per hour from the destinations that pass these filters. Filters are applied in order, and a later filter overrides an earlier one.
+
+Add filters to `/opt/datadog-agent/etc/datadog.yaml`:
+
+```yaml
+network_path:
+  collector:
+    filters:
+      # Exclude a domain, then include one host within it.
+      - match_domain: '*.example.com'
+        type: exclude
+      - match_domain: 'api.example.com'
+        type: include
+```
+
+For the full filter syntax, including IP ranges and wildcards, see [Filter syntax][3].
+
+Restart the Agent after you save the file.
+
+#### Confirm that tests are running
+
+About five minutes after the Agent starts, open [Network Path][5]. Paths from the device appear with that device as the source. If no paths appear, confirm that the Agent is 7.85 or later, that the device has traffic to a destination with a domain name, and that your filters do not exclude that destination.
+
+#### Turn off basic dynamic tests
+
+To stop basic dynamic tests on a device, add the following to `/opt/datadog-agent/etc/datadog.yaml` and restart the Agent:
+
+```yaml
+network_path:
+  connections_monitoring:
+    eudm_basic_tests_enabled: false
+```
+
+### Full dynamic tests
+
+Full dynamic tests monitor the connections that [Cloud Network Monitoring][6] observes. They replace basic dynamic tests on that device.
+
+Full dynamic tests are billed as [Network Path tests][7] and appear on the [Plan & Usage][4] page.
+
+Agent 7.85 or later is required.
+
+1. Enable Cloud Network Monitoring in `/opt/datadog-agent/etc/system-probe.yaml`:
+
+   ```yaml
+   network_config:
+     enabled: true
+   ```
+
+2. Enable dynamic tests in `/opt/datadog-agent/etc/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       enabled: true
+   ```
+
+   The same [include and exclude filters][3] apply. For workers, test interval, and time-to-live settings, see [Dynamic tests][8]. Those interval settings apply to full dynamic tests only.
+
+3. Restart the Agent.
+
+### Scheduled tests
+
+Scheduled tests monitor endpoints that you list, such as a critical API or a SaaS application.
+
+Scheduled tests replace basic dynamic tests on that device. Scheduled tests are billed as [Network Path tests][7] and appear on the [Plan & Usage][4] page.
+
+1. Turn off basic dynamic tests in `/opt/datadog-agent/etc/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       eudm_basic_tests_enabled: false
+   ```
+
+2. Enable traceroute in `/opt/datadog-agent/etc/system-probe.yaml`:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+3. Create `/opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml` and list each destination:
+
+   ```yaml
+   init_config:
+     min_collection_interval: 60 # in seconds
+   instances:
+     # Leave port unset when protocol is UDP. A UDP port can make traceroute report the destination as unreachable.
+     - hostname: zoom.us
+       protocol: TCP
+       port: 443
+   ```
+
+   For optional settings such as timeout and tags, see [Scheduled tests][9].
+
+4. Restart the Agent.
+
+### Earlier Agent versions
+
+| Agent version | Network Path on the device |
+| --- | --- |
+| 7.85 or later | Basic dynamic tests select up to 20 destinations per hour. These tests are not billed and do not appear on the Plan & Usage page. |
+| 7.74 to 7.84 | Dynamic tests from the device are billed as [Network Path tests][7]. Basic dynamic tests are not available. Upgrade to Agent 7.85 or later to use basic dynamic tests. |
+| 7.73 or earlier | Network Path traffic from the device is not billed. |
+
 ## Troubleshooting
 
 For detailed steps, see [Agent Troubleshooting][1].
@@ -141,3 +279,11 @@ For detailed steps, see [Agent Troubleshooting][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/
+[2]: /network_monitoring/network_path/
+[3]: /network_monitoring/network_path/setup/#filter-syntax
+[4]: /account_management/plan_and_usage/
+[5]: https://app.datadoghq.com/network/path
+[6]: /network_monitoring/cloud_network_monitoring/
+[7]: https://www.datadoghq.com/pricing/?product=network-monitoring
+[8]: /network_monitoring/network_path/setup/#dynamic-tests
+[9]: /network_monitoring/network_path/setup/#scheduled-tests

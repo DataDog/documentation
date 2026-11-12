@@ -390,6 +390,8 @@ Agent `v7.79+` is required.
 
 2. Add additional configuration details in the `/opt/datadog-agent/etc/datadog.yaml` file or reference the [example configuration file][3]:
 
+   <div class="alert alert-info">On <a href="/infrastructure/end_user_device_monitoring/setup/macos/#set-up-network-path">end-user devices</a>, basic dynamic tests are already enabled. Skip this step to keep them. Complete this step only when you want full dynamic tests, which replace basic dynamic tests.</div>
+
    ```yaml
    network_path:
      connections_monitoring:
@@ -444,7 +446,7 @@ Agent `v7.73+` is required.
 
 2. Enable `network_path` to monitor CNM connections by creating or editing the `%ProgramData%\Datadog\datadog.yaml` file:
 
-   <div class="alert alert-info">If enabling Network Path on <a href="/infrastructure/end_user_device_monitoring/">End User Devices</a>, skip this step.</div>
+   <div class="alert alert-info">On <a href="/infrastructure/end_user_device_monitoring/setup/windows/#set-up-network-path">end-user devices</a>, basic dynamic tests are already enabled. Skip this step to keep them. Complete this step only when you want full dynamic tests, which replace basic dynamic tests.</div>
 
    ```yaml
    network_path:
