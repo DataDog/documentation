@@ -18,6 +18,15 @@ further_reading:
 - link: /account_management/billing/ai_credits/
   tag: ドキュメント
   text: AI クレジット
+- link: https://www.datadoghq.com/blog/datadog-mcp-apps/
+  tag: ブログ
+  text: 'Datadog MCP Apps: AI ワークフロー向けインタラクティブ体験'
+- link: https://www.datadoghq.com/blog/introducing-bits-chat/
+  tag: ブログ
+  text: Bits Chat を使用して Datadog 全体で検索や操作を行い、より迅速に問題を解決
+- link: https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/
+  tag: ブログ
+  text: Bits Chat の Cloud Cost スキルを使用してコストに関するあらゆる質問により迅速に回答
 title: Bits Chat
 ---
 ## 概要 {#overview}
@@ -61,7 +70,7 @@ Bits Chat を使用するには、**Bits Chat へのアクセス**権限を持�
 
 カスタムロールのこの権限を管理するには、**組織設定** > **ロール**に移動し、ロールを選択し、**一般許可**で **Bits Chat へのアクセス**を切り替えます。
 
-#### Bits Chat を通じたデータアクセス　{#data-access-through-bits-chat}
+#### Bits Chat を介したデータアクセス {#data-access-through-bits-chat}
 
 Bits Chat は、Datadog ロールを使用してデータを取得するため、表示または変更権限を持つリソースにのみアクセスできます。例えば、ロールが特定のログインデックスのセットへのアクセスを制限している場合、Bits Chat はそのインデックスからのみログをクエリできます。同様に、ダッシュボードを編集する権限がない場合、Bits Chat が代わりにそのダッシュボードを編集することはできません。
 
@@ -125,10 +134,11 @@ Bits Chat Reports ページは、組織が Bits Chat をどのように使用し
 
 ### ウェブアプリケーション {#web-application}
 Datadog ウェブアプリケーションで Bits Chat を開く方法はいくつかあります。
-- ナビゲーションバーの右上で、{{< ui >}}Ask Bits{{< /ui >}} をクリック
-- Bits Chat と統合された Datadog 製品で、{{< ui >}}Ask Bits{{< /ui >}} をクリックする、または {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (きらきら星アイコン)
-- <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> を押す
-- 左側のナビゲーションパネルで、{{< ui >}}Bits AI{{< /ui >}} をクリック
+- [Bits Chat][11] に移動する。
+- ナビゲーションバーの右上で、[{{< ui >}}Ask Bits{{< /ui >}}] (Bits に尋ねる) をクリックする。
+- Bits Chat と統合された Datadog 製品で、{{< ui >}}Ask Bits{{< /ui >}} をクリックする、または {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (きらきら星アイコン) をクリックする。
+- <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> を押す。
+- 左側のナビゲーションパネルで、[{{< ui >}}Bits AI{{< /ui >}}] をクリックする。
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="ダッシュボードリストの横に Bits Chat パネルが開く" style="width:40%;">}}
 
@@ -137,21 +147,22 @@ Datadog ウェブアプリケーションで Bits Chat を開く方法はいく�
 Bits にシステムやアクティブなインシデントについて質問してください。Bits は、Datadog の公開ドキュメント、テレメトリ、および所有権に関するコンテキストを持っています。
 
 1. [モバイルアプリをダウンロードしてログイン][2]します。
-2. ホーム画面で、{{< ui >}}Bits Assistant{{< /ui >}} をタップします。
+2. ホーム画面で、[{{< ui >}}Bits Chat{{< /ui >}}] をタップします。
 3. 音声またはテキストで Bits Chat とのチャットを開始します。
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="Bits AI を使用したモバイルアプリホームダッシュボードのビュー" style="width:40%;" >}}
 
 ### Slack {#slack}
-1. [Datadog アカウントを Slack ワークスペースに接続][1]します。
-1. Slack で `/dd connect` コマンドを使用して、接続するアカウントのリストを表示します。
-1. ドロップダウンで、Datadog アカウントの名前を選択します。
-1. Bits AI に必要な追加の権限を承認します。
+Bits に質問したり、インシデントを宣言したり、調査を開始したり、コードを変更したりできます。Bits Chat はメッセージスレッドで返信するため、チームは質問、コンテキスト、回答を 1 か所にまとめることができます。
 
-セットアップが完了したら、自然言語で `@Datadog` にクエリを送信できます。`@Datadog Are there any issues with example-service's dependencies?`
+1. [Bits Chat 設定][12]で Slack ワークスペースを選択します。
+2. **Slack アカウントを接続**をクリックし、Datadog が両方の製品であなたを認識できるよう権限を付与してください。
+3. (オプション) ワークスペースに**権限を付与**をクリックし、Bits Chat が関連する Slack の会話を読み取れるようにします。
+
+セットアップが完了したら、Datadog App を使用して、ワークスペース内のチャンネルに自然言語で `@Datadog` にクエリを送信できます。
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Slack におけるサービス依存関係クエリの例の出力" style="width:60%;">}}
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/slack/?tab=applicationforslack
@@ -164,3 +175,5 @@ Bits にシステムやアクティブなインシデントについて質問し
 [8]: /ja/ddsql_reference/data_directory/
 [9]: /ja/cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/ask/usage
+[11]: https://app.datadoghq.com/ask
+[12]: https://app.datadoghq.com/ask/settings
