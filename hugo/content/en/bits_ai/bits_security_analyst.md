@@ -242,7 +242,7 @@ You can create security notification rules to get a notification when Bits Secur
 
 ## Access investigations through the API
 
-Use the [Bits Security Analyst API][9], in Preview, to list investigations, look up the investigations of a signal, and get an investigation's verdict, conclusion, evidence, and suggested next steps. AI agents connected to the [Datadog MCP Server][10] can use the same API through [code execution][11], with no extra setup.
+Use the [Bits Security Analyst API][9], in Preview, to list investigations, look up the investigations of a signal, and get an investigation's verdict, conclusion, evidence, and suggested next steps. AI agents connected to the [Datadog MCP Server][10] can use the same API through [code execution][11].
 
 ## Disable Bits Security Analyst
 
