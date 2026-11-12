@@ -265,8 +265,26 @@ The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, 
 
 | Tag | Label | Description |
 |---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `copilot_user` | GitHub User | The GitHub username of the user who generated the cost. |
 | `organization_name` | Organization | The GitHub organization that the cost belongs to. |
 | `repository_name` | Repository | The GitHub repository that the cost belongs to. |
+
+The `model_name`, `user_email`, and `copilot_user` tags are available on Copilot AI credit costs when the GitHub Costs integration is connected to a GitHub enterprise account. If the integration is connected to a single GitHub organization, Copilot costs are not broken down by user. For more information, see the [GitHub setup instructions][101].
+
+**Additional tags**
+
+The following GitHub Copilot tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `copilot_user_email` | The email address or SAML single sign-on identity that GitHub reports for the user. |
+| `copilot_user_email_source` | Where GitHub got the user's email address: `verified_domain` for a verified domain email, or `saml_name_id` for a SAML single sign-on identity. |
+| `copilot_user_name` | The GitHub display name of the user who generated the cost, when set. |
+| `model` | The Copilot model as GitHub reports it, including the model selection mode (for example, `Auto: Claude Opus 4.6`). |
+
+[101]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}
