@@ -26,6 +26,8 @@ Conventional AI reviewers infer how a change behaves from the diff and the repos
 
 Bits Code Review is non-blocking. Its review is not a required check, and merging and deploying remain your decision.
 
+**Note**: During the Preview, Bits Code Review is limited to approximately 2,000 pull request reviews per week.
+
 ## How it works
 
 1. **Detect the pull request**: Bits Code Review picks up a pull request when it is opened in a repository in scope. It reviews the pull request again when you push new commits.
@@ -52,34 +54,9 @@ Bits Code Review supports only GitHub repositories. Repositories hosted on GitLa
 
 In the GitHub integration's feature list, Bits Code Review relies on these permission bundles: {{< ui >}}Read Repository Contents{{< /ui >}}, {{< ui >}}Pull Request Information{{< /ui >}}, and {{< ui >}}Pull Request Comments{{< /ui >}}. Other Software Delivery features, such as Code Coverage, CI Visibility, and Test Optimization, are not required.
 
-## Enable automatic reviews
-
-Automatic reviews are opt-in. To enable them, go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Code Review{{< /ui >}}][7] and choose the scope:
-
-- **Repository**: In the {{< ui >}}Repository{{< /ui >}} tab, turn on {{< ui >}}Review Enabled{{< /ui >}} for a repository. Bits Code Review reviews every pull request in that repository, regardless of the owning team.
-- **Team**: In the {{< ui >}}Team{{< /ui >}} tab, turn on a GitHub team. Bits Code Review reviews every pull request owned by that team, in any repository.
-
-Enabling either scope is enough for a pull request to be reviewed.
-
-**Note**: The {{< ui >}}Team{{< /ui >}} tab lists GitHub teams, not [Datadog Teams][8]. Ownership is based on your repository's `CODEOWNERS` file. `CODEOWNERS` entries that name an individual user rather than a team are not supported. If you belong to several GitHub teams, enable each team whose pull requests you want reviewed.
-
 ## Request a review on demand
 
-To review a single pull request without enabling automatic reviews, comment `@datadog review` on the pull request. Bits Code Review reviews the pull request and posts its findings as comments.
-
-## Customize reviews
-
-Bits Code Review uses the same [custom instructions][9] as Bits Code. It reads the following files from the repository root:
-
-- `AGENTS.md`, `agents.md`, or `agent.md`
-- `CLAUDE.md` or `claude.md`
-- `.cursorrules`
-- `.windsurfrules`
-- `.github/copilot-instructions.md`
-
-Use these files to describe team or repository review conventions, such as architecture rules, patterns to flag, or areas to ignore. Custom instructions extend the default review: Bits Code Review still reports its baseline findings, plus whatever your instructions add.
-
-There is no file dedicated to Bits Code Review. Other coding agents read the same files, so your instructions apply to them too. To scope instructions to reviews only, add a line to `AGENTS.md` that points review agents to a separate file, for example: `Review agents should also read reviewers.md.`
+To request a review of a single pull request, comment `@datadog review` on the pull request. Bits Code Review reviews the pull request and posts its findings as comments.
 
 ## Give feedback on reviews
 
@@ -95,6 +72,3 @@ React to a Bits Code Review comment with 👍 or 👎, reply to it, or apply its
 [4]: /real_user_monitoring/
 [5]: /tracing/live_debugger/
 [6]: /integrations/github/
-[7]: https://app.datadoghq.com/code/settings/code-review
-[8]: /account_management/teams/
-[9]: /bits_ai/bits_code/setup/#configure-custom-instructions
