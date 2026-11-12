@@ -29,3 +29,18 @@ entries:
       - ListMetrics
       - ListSubjectTypes
     title: Add users and role assignments includes to ListIncidentResponders
+  - change_type: added
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41644
+    operations:
+      - ListExperimentHoldouts
+    title: Add experiment holdouts to the Experiments API
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41644
+    operations:
+      - CreateExperiment
+      - GetExperiment
+      - ListExperiments
+      - PatchExperiment
+    title: Add experiment holdouts to the Experiments API

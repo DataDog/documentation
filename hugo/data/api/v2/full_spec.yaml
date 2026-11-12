@@ -1888,6 +1888,7 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
+      example: logs
       in: path
       name: product
       required: true
@@ -2765,6 +2766,82 @@ components:
         example: "550e8400-e29b-41d4-a716-446655440010"
         format: uuid
         type: string
+    feature_flag_history_end_date:
+      description: Only include changes made before this time, for example `2026-02-01T00:00:00Z`. The bound is exclusive, so a change made exactly at this time is not included. Omit for no upper bound. Must be after `start_date` when both are set.
+      in: query
+      name: end_date
+      required: false
+      schema:
+        example: "2026-02-01T00:00:00Z"
+        format: date-time
+        type: string
+    feature_flag_history_environment_id:
+      description: Only include changes to this environment. Changes to the flag itself, which have no environment, are always included.
+      in: query
+      name: environment_id
+      required: false
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440001"
+        format: uuid
+        type: string
+    feature_flag_history_feature_flag_id:
+      description: Only include changes to this feature flag.
+      in: query
+      name: feature_flag_id
+      required: false
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440000"
+        format: uuid
+        type: string
+    feature_flag_history_include_suggestion_events:
+      description: |-
+        Also include review events for change requests that needed approval: rejected requests and requests still pending review. Applies only to organizations with flag approvals enabled.
+      in: query
+      name: include_suggestion_events
+      required: false
+      schema:
+        default: false
+        example: false
+        type: boolean
+    feature_flag_history_start_date:
+      description: Only include changes made after this time, for example `2026-01-01T00:00:00Z`. The bound is exclusive, so a change made exactly at this time is not included. Omit for no lower bound.
+      in: query
+      name: start_date
+      required: false
+      schema:
+        example: "2026-01-01T00:00:00Z"
+        format: date-time
+        type: string
+    feature_flag_history_tags:
+      description: |-
+        Only include changes to flags that have all of these exact tags, as repeated parameters, such as `tags=env:prod&tags=tier:1`. Values of the form `team:<handle>` match any selected team and are combined with `teams`. Empty values are ignored.
+      example:
+        - env:prod
+        - tier:1
+      explode: true
+      in: query
+      name: tags
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
+    feature_flag_history_teams:
+      description: |-
+        Only include changes to flags that belong to at least one of these teams. Use team handles without the `team:` prefix, as repeated parameters, such as `teams=checkout&teams=payments`. Handles from `teams` and `team:<handle>` values from `tags` are treated as one set. Handles that are empty, have surrounding white space, or include the `team:` prefix return a `400 Bad Request` error.
+      example:
+        - checkout
+        - payments
+      explode: true
+      in: query
+      name: teams
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
     feature_flag_id:
       description: The ID of the feature flag.
       in: path
@@ -3087,6 +3164,14 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/AIGuardAction"
+        extra_tags:
+          description: |-
+            The span tags that tracers should add to the `ai_guard` span. Each item contains a
+            backend-defined key and value, and clients should not assume a fixed set of keys.
+            Example keys include `ai_guard.evaluate_id` and `ai_guard.evaluation_context`.
+          items:
+            $ref: "#/components/schemas/AIGuardExtraTag"
+          type: array
         global_prob:
           description: The global threat probability, between `0` and `1`. Included only when computed.
           example: 0.005218505859375
@@ -3213,6 +3298,21 @@ components:
       type: string
       x-enum-varnames:
         - EVALUATIONS
+    AIGuardExtraTag:
+      description: A span tag for tracers to add to the `ai_guard` span.
+      properties:
+        key:
+          description: The span tag key.
+          example: ai_guard.evaluate_id
+          type: string
+        value:
+          description: The span tag value.
+          example: a76a703c-324f-42ed-af33-9b17d65e28af
+          type: string
+      required:
+        - key
+        - value
+      type: object
     AIGuardGlobalConfidenceThreshold:
       description: The global confidence threshold applied to every threat category.
       example: 0.8
@@ -15762,6 +15862,29 @@ components:
       type: string
       x-enum-varnames:
         - UPSERT_ARBITRARY_RULE
+    ArbitraryRuleMappingTransform:
+      description: >-
+        Only supported for `proportional_timeseries` and `even_timeseries` rules. Creates a synthetic tag from timeseries input rows before `tag_transforms` are applied.
+      properties:
+        mapping:
+          additionalProperties: {}
+          description: Recursive mapping node. Each `match_on_values` branch contains a value and a nested node.
+          example:
+            default: other
+            match_on_tag: service
+            match_on_values:
+              - node:
+                  default: web-team
+                value: web-store
+          type: object
+        synthetic_tag:
+          description: The name of the synthetic tag created by the mapping.
+          example: "team"
+          type: string
+      required:
+        - synthetic_tag
+        - mapping
+      type: object
     ArbitraryRuleResponse:
       description: The definition of `ArbitraryRuleResponse` object.
       example:
@@ -15983,6 +16106,9 @@ components:
           description: The `attributes` `enabled`.
           example: false
           type: boolean
+        is_ootb:
+          description: Whether the rule is an out-of-the-box rule provided by Datadog. Omitted when `false`.
+          type: boolean
         last_modified_user_uuid:
           description: The `attributes` `last_modified_user_uuid`.
           example: ""
@@ -16007,6 +16133,8 @@ components:
         rejected:
           description: The `attributes` `rejected`.
           type: boolean
+        rule_category:
+          $ref: "#/components/schemas/ArbitraryRuleResponseDataAttributesRuleCategory"
         rule_name:
           description: The `attributes` `rule_name`.
           example: ""
@@ -16021,6 +16149,14 @@ components:
           description: The `attributes` `updated`.
           example: ""
           format: date-time
+          type: string
+        valid_from_date:
+          description: The first date the rule applies to. Omitted when the rule has no start date.
+          format: date
+          type: string
+        valid_through_date:
+          description: The last date the rule applies to. Omitted when the rule has no end date.
+          format: date
           type: string
         version:
           description: The `attributes` `version`.
@@ -16066,6 +16202,15 @@ components:
         - condition
         - tag
       type: object
+    ArbitraryRuleResponseDataAttributesRuleCategory:
+      description: Rule category. Omitted for custom rules.
+      enum:
+        - custom
+        - ai_gateway
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+        - AI_GATEWAY
     ArbitraryRuleResponseDataAttributesStrategy:
       description: The definition of `ArbitraryRuleResponseDataAttributesStrategy` object.
       properties:
@@ -16108,10 +16253,24 @@ components:
         granularity:
           description: The `strategy` `granularity`.
           type: string
+        mapping_transform:
+          $ref: "#/components/schemas/ArbitraryRuleMappingTransform"
         method:
           description: The `strategy` `method`.
           example: ""
           type: string
+        static_tags:
+          description: Tags added to every cost row allocated by the rule.
+          items:
+            $ref: "#/components/schemas/ArbitraryRuleResponseDataAttributesStrategyAllocatedByItemsAllocatedTagsItems"
+          type: array
+        supporting_timeseries:
+          additionalProperties: {}
+          description: Integration metrics query used to calculate coverage.
+          nullable: true
+          type: object
+        tag_transforms:
+          $ref: "#/components/schemas/ArbitraryRuleTagTransforms"
       required:
         - method
       type: object
@@ -16287,6 +16446,60 @@ components:
       type: string
       x-enum-varnames:
         - ARBITRARY_RULE_STATUS
+    ArbitraryRuleTagTransforms:
+      description: >-
+        Only supported for `proportional_timeseries` and `even_timeseries` rules. Applies tag key renames and tag value transforms to timeseries input rows after `mapping_transform`.
+      properties:
+        tag_key_rename:
+          additionalProperties:
+            type: string
+          description: Map of source tag key to renamed tag key.
+          type: object
+        tag_value_transforms:
+          additionalProperties:
+            $ref: "#/components/schemas/ArbitraryRuleTagValueTransform"
+          description: Map of tag key to the transform applied to its values.
+          type: object
+      type: object
+    ArbitraryRuleTagValueTransform:
+      description: A transform applied to the values of one tag key.
+      properties:
+        default:
+          description: The value used when no `map` entry matches.
+          type: string
+        map:
+          additionalProperties:
+            type: string
+          description: Lookup map from input value to output value, for `lookup_map`.
+          type: object
+        pattern:
+          description: The regular expression, for `regex_extract` and `regex_replace`.
+          type: string
+        replacement:
+          description: The replacement string, for `string_replace` and `regex_replace`.
+          type: string
+        target:
+          description: The substring to replace, for `string_replace`.
+          type: string
+        type:
+          $ref: "#/components/schemas/ArbitraryRuleTagValueTransformType"
+      required:
+        - type
+      type: object
+    ArbitraryRuleTagValueTransformType:
+      description: The kind of transform.
+      enum:
+        - string_replace
+        - regex_extract
+        - regex_replace
+        - lookup_map
+      example: string_replace
+      type: string
+      x-enum-varnames:
+        - STRING_REPLACE
+        - REGEX_EXTRACT
+        - REGEX_REPLACE
+        - LOOKUP_MAP
     ArchiveSearchCreateRehydration:
       description: |-
         Rehydration settings. Include this object to index the matched logs into a retained historical view.
@@ -18106,7 +18319,6 @@ components:
           type: string
         created_at:
           description: The timestamp when the AWS CUR config was created.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
         error_messages:
           description: The error messages for the AWS CUR config.
@@ -18135,11 +18347,9 @@ components:
           type: string
         status_updated_at:
           description: The timestamp when the AWS CUR config status was updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
         updated_at:
           description: The timestamp when the AWS CUR config status was updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
       required:
         - account_id
@@ -18283,14 +18493,14 @@ components:
             account_id: "123456789123"
             bucket_name: dd-cost-bucket
             bucket_region: us-east-1
-            created_at: "2023-01-01T12:00:00.000000"
+            created_at: "2023-01-01T12:00:00Z"
             error_messages: []
             months: 36
             report_name: dd-report-name
             report_prefix: dd-report-prefix
             status: active
-            status_updated_at: "2023-01-01T12:00:00.000000"
-            updated_at: "2023-01-01T12:00:00.000000"
+            status_updated_at: "2023-01-01T12:00:00Z"
+            updated_at: "2023-01-01T12:00:00Z"
           id: "123456789123"
           type: aws_cur_config
       properties:
@@ -18909,7 +19119,6 @@ components:
           type: string
         created_at:
           description: The timestamp when the Azure config was created.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
         dataset_type:
           description: The dataset type of the Azure config.
@@ -18949,7 +19158,6 @@ components:
           type: string
         status_updated_at:
           description: The timestamp when the Azure config status was last updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
         storage_account:
           description: The name of the storage account where the Azure Export is saved.
@@ -18961,7 +19169,6 @@ components:
           type: string
         updated_at:
           description: The timestamp when the Azure config was last updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
       required:
         - account_id
@@ -43190,6 +43397,455 @@ components:
           format: int64
           type: integer
       type: object
+    DeviceBaseArray:
+      description: Response body for the list devices endpoint.
+      properties:
+        data:
+          description: List of devices matching the request.
+          items:
+            $ref: "#/components/schemas/DeviceBaseData"
+          type: array
+        links:
+          $ref: "#/components/schemas/DeviceBaseArrayLinks"
+        meta:
+          $ref: "#/components/schemas/DeviceBaseArrayMeta"
+      required:
+        - data
+      type: object
+    DeviceBaseArrayLinks:
+      description: Links related to the current page of devices.
+      properties:
+        next:
+          description: URL of the next page of devices. Present only when more devices remain.
+          example: /api/v2/eudm/devices?page%5Bcursor%5D=TEFQVE9QLURFTU8tMDAx&page%5Blimit%5D=1
+          type: string
+        self:
+          description: URL of the current request.
+          example: /api/v2/eudm/devices?page%5Blimit%5D=1
+          type: string
+      type: object
+    DeviceBaseArrayMeta:
+      description: Metadata about the list devices response.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeviceBaseArrayMetaPage"
+      type: object
+    DeviceBaseArrayMetaPage:
+      description: Pagination information for the list devices response.
+      properties:
+        after:
+          description: |-
+            Cursor to pass as `page[cursor]` to get the next page.
+            Present only when more devices remain.
+          example: TEFQVE9QLURFTU8tMDAx
+          type: string
+      type: object
+    DeviceBaseData:
+      description: A single device entry as returned by the list devices endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeviceBaseDataAttributes"
+        id:
+          description: Unique identifier of the device. Matches the Datadog host identifier.
+          example: LAPTOP-DEMO-001
+          type: string
+        type:
+          $ref: "#/components/schemas/DeviceDetailsDataType"
+      required:
+        - type
+        - id
+      type: object
+    DeviceBaseDataAttributes:
+      description: Common health and identity attributes shared by every End User Device Monitoring device record.
+      properties:
+        agent_key:
+          description: Public key of the Datadog Agent installed on the device.
+          type: string
+        agent_version:
+          description: Version of the Datadog Agent installed on the device.
+          type: string
+        battery_critical:
+          description: Whether the device's battery health has degraded to a critical level.
+          type: boolean
+        battery_max_capacity_pct:
+          description: Maximum battery capacity expressed as a percentage of the device's design capacity.
+          format: int64
+          type: integer
+        cpu_cores:
+          description: Number of physical CPU cores on the device.
+          format: int64
+          type: integer
+        cpu_logical_processors:
+          description: Number of logical CPU processors (hardware threads) on the device.
+          format: int64
+          type: integer
+        cpu_model:
+          description: Human-readable name of the device's CPU model.
+          type: string
+        cpu_usage:
+          description: Average CPU usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        disk_usage:
+          description: Average disk usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        employee:
+          $ref: "#/components/schemas/DeviceEmployee"
+        geo_ip:
+          $ref: "#/components/schemas/DeviceGeoIP"
+        ip_address:
+          description: Last observed IPv4 or IPv6 address of the device.
+          type: string
+        issues:
+          description: |-
+            List of issue identifiers currently affecting the device.
+          items:
+            description: Identifier of a single issue currently affecting the device.
+            type: string
+          type: array
+        kernel_name:
+          description: Name of the operating system kernel running on the device.
+          type: string
+        last_reboot:
+          description: Timestamp of the most recent device reboot, in RFC 3339 format.
+          type: string
+        last_seen:
+          description: Timestamp of the most recent telemetry received from the device, in RFC 3339 format.
+          type: string
+        manufacturer:
+          description: Manufacturer of the device.
+          type: string
+        mem_usage:
+          description: Average memory usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        memory_total_kb:
+          description: Total amount of physical memory available on the device, in kilobytes.
+          format: int64
+          type: integer
+        model_name:
+          description: Marketing or product name of the device model.
+          type: string
+        model_number:
+          description: Manufacturer-assigned model number of the device.
+          type: string
+        os:
+          description: |-
+            Operating system family running on the device, as reported by the Datadog Agent
+            (for example, `macOS`, `Windows`, or `linux`). Empty when unknown.
+          type: string
+        os_version:
+          description: Operating system version running on the device.
+          type: string
+        resource_id:
+          description: Datadog resource identifier for the device.
+          type: string
+        serial_number:
+          description: Serial number assigned to the device by its manufacturer.
+          type: string
+        status:
+          $ref: "#/components/schemas/DeviceStatus"
+        type:
+          description: Hardware type of the device (for example, `laptop` or `desktop`). `unknown` when the type cannot be determined.
+          type: string
+        uptime:
+          description: Time elapsed since the device last booted, in seconds.
+          format: double
+          type: number
+        wlan_bssid:
+          description: |-
+            BSSID (MAC address of the access point) of the wireless network the device is
+            currently connected to.
+          type: string
+        wlan_rssi:
+          description: Received signal strength indicator of the device's current wireless connection, in dBm.
+          format: double
+          type: number
+        wlan_ssid:
+          description: SSID of the wireless network the device is currently connected to.
+          type: string
+      type: object
+    DeviceDetails:
+      description: Response body for the get device endpoint, returning a single device with full attribute detail.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeviceDetailsData"
+      type: object
+    DeviceDetailsData:
+      description: A single device entry with full attribute detail.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeviceDetailsDataAttributes"
+        id:
+          description: Unique identifier of the device. Matches the Datadog host identifier.
+          example: LAPTOP-DEMO-001
+          type: string
+        type:
+          $ref: "#/components/schemas/DeviceDetailsDataType"
+      required:
+        - type
+        - id
+      type: object
+    DeviceDetailsDataAttributes:
+      description: |-
+        Extended set of attributes for a single End User Device Monitoring device,
+        including Cloud Network Monitoring and battery metrics.
+      properties:
+        agent_key:
+          description: Public key of the Datadog Agent installed on the device.
+          type: string
+        agent_version:
+          description: Version of the Datadog Agent installed on the device.
+          type: string
+        battery_charge_pct:
+          description: Current battery charge level as a percentage between 0 and 100.
+          format: int64
+          type: integer
+        battery_charge_rate:
+          description: |-
+            Rate at which the battery is charging or discharging, in milliamperes.
+            Negative values indicate discharge.
+          format: int64
+          type: integer
+        battery_critical:
+          description: Whether the device's battery health has degraded to a critical level.
+          type: boolean
+        battery_cycle_count:
+          description: Number of full charge cycles the battery has gone through.
+          format: int64
+          type: integer
+        battery_max_capacity_pct:
+          description: Maximum battery capacity expressed as a percentage of the device's design capacity.
+          format: int64
+          type: integer
+        cnm_enabled:
+          description: Whether Cloud Network Monitoring is enabled on the device.
+          type: boolean
+        cpu_cores:
+          description: Number of physical CPU cores on the device.
+          format: int64
+          type: integer
+        cpu_logical_processors:
+          description: Number of logical CPU processors (hardware threads) on the device.
+          format: int64
+          type: integer
+        cpu_model:
+          description: Human-readable name of the device's CPU model.
+          type: string
+        cpu_usage:
+          description: Average CPU usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        disk_usage:
+          description: Average disk usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        employee:
+          $ref: "#/components/schemas/DeviceEmployee"
+        geo_ip:
+          $ref: "#/components/schemas/DeviceGeoIP"
+        ip_address:
+          description: Last observed IPv4 or IPv6 address of the device.
+          type: string
+        issues:
+          description: |-
+            List of issue identifiers currently affecting the device.
+          items:
+            description: Identifier of a single issue currently affecting the device.
+            type: string
+          type: array
+        kernel_name:
+          description: Name of the operating system kernel running on the device.
+          type: string
+        last_reboot:
+          description: Timestamp of the most recent device reboot, in RFC 3339 format.
+          type: string
+        last_seen:
+          description: Timestamp of the most recent telemetry received from the device, in RFC 3339 format.
+          type: string
+        manufacturer:
+          description: Manufacturer of the device.
+          type: string
+        mem_usage:
+          description: Average memory usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        memory_total_kb:
+          description: Total amount of physical memory available on the device, in kilobytes.
+          format: int64
+          type: integer
+        model_name:
+          description: Marketing or product name of the device model.
+          type: string
+        model_number:
+          description: Manufacturer-assigned model number of the device.
+          type: string
+        os:
+          description: |-
+            Operating system family running on the device, as reported by the Datadog Agent
+            (for example, `macOS`, `Windows`, or `linux`). Empty when unknown.
+          type: string
+        os_version:
+          description: Operating system version running on the device.
+          type: string
+        packet_sent:
+          description: |-
+            Number of TCP packets sent by the device over the query window,
+            as reported by Cloud Network Monitoring.
+          format: double
+          type: number
+        resource_id:
+          description: Datadog resource identifier for the device.
+          type: string
+        retransmit:
+          description: Number of TCP packets retransmitted by the device over the query window.
+          format: double
+          type: number
+        retransmit_pct:
+          description: Percentage of sent TCP packets that were retransmitted, between 0 and 100.
+          format: double
+          type: number
+        serial_number:
+          description: Serial number assigned to the device by its manufacturer.
+          type: string
+        status:
+          $ref: "#/components/schemas/DeviceStatus"
+        tcp_canceled:
+          description: Number of TCP connection attempts canceled by the device over the query window.
+          format: double
+          type: number
+        tcp_established:
+          description: Number of TCP connections established by the device over the query window.
+          format: double
+          type: number
+        tcp_establishment_failure_pct:
+          description: Percentage of TCP connection attempts that failed, between 0 and 100.
+          format: double
+          type: number
+        tcp_establishment_failures:
+          description: Number of TCP connection attempts that failed over the query window.
+          format: double
+          type: number
+        tcp_host_unreachable:
+          description: Number of TCP connection attempts that failed because the host was unreachable.
+          format: double
+          type: number
+        tcp_network_unreachable:
+          description: Number of TCP connection attempts that failed because the network was unreachable.
+          format: double
+          type: number
+        tcp_refusals:
+          description: Number of TCP connection attempts refused by the remote host over the query window.
+          format: double
+          type: number
+        tcp_timeouts:
+          description: Number of TCP connection attempts that timed out over the query window.
+          format: double
+          type: number
+        type:
+          description: Hardware type of the device (for example, `laptop` or `desktop`). `unknown` when the type cannot be determined.
+          type: string
+        uptime:
+          description: Time elapsed since the device last booted, in seconds.
+          format: double
+          type: number
+        wlan_bssid:
+          description: |-
+            BSSID (MAC address of the access point) of the wireless network the device is
+            currently connected to.
+          type: string
+        wlan_rssi:
+          description: Received signal strength indicator of the device's current wireless connection, in dBm.
+          format: double
+          type: number
+        wlan_ssid:
+          description: SSID of the wireless network the device is currently connected to.
+          type: string
+      type: object
+    DeviceDetailsDataType:
+      default: devices
+      description: Devices resource type.
+      enum:
+        - devices
+      example: devices
+      type: string
+      x-enum-varnames:
+        - DEVICES
+    DeviceEmployee:
+      description: |-
+        Directory information about the employee associated with the device,
+        sourced from a customer reference table.
+        Absent when no reference table is configured or the device has no match.
+      properties:
+        city:
+          description: City where the employee is based.
+          type: string
+        country:
+          description: Country where the employee is based.
+          type: string
+        department:
+          description: Department the employee belongs to.
+          type: string
+        email:
+          description: Email address of the employee.
+          type: string
+        name:
+          description: Full name of the employee.
+          type: string
+        office:
+          description: Office the employee is assigned to.
+          type: string
+        team:
+          description: Team the employee belongs to.
+          type: string
+      type: object
+    DeviceGeoIP:
+      description: |-
+        Location derived from the device's public IP address.
+        Absent when no location data is available.
+      properties:
+        geo_city:
+          description: City resolved from the device's public IP address.
+          type: string
+        geo_country_iso_code:
+          description: ISO 3166-1 alpha-2 country code resolved from the device's public IP address.
+          type: string
+        geo_latitude:
+          description: Latitude resolved from the device's public IP address.
+          format: double
+          type: number
+        geo_longitude:
+          description: Longitude resolved from the device's public IP address.
+          format: double
+          type: number
+        geo_subdivision_iso_code:
+          description: |-
+            ISO 3166-2 subdivision code (for example, a state or province)
+            resolved from the device's public IP address.
+          type: string
+        public_ip_address:
+          description: Public IPv4 or IPv6 address of the device.
+          type: string
+      type: object
+    DeviceStatus:
+      description: |-
+        Health status of the device, computed from its issues and recent telemetry.
+        `inactive` means the device stopped reporting. `unknown` means no telemetry is available yet.
+      enum:
+        - healthy
+        - degraded
+        - critical
+        - inactive
+        - unknown
+      example: healthy
+      type: string
+      x-enum-varnames:
+        - HEALTHY
+        - DEGRADED
+        - CRITICAL
+        - INACTIVE
+        - UNKNOWN
     DeviceTagsBySource:
       description: Tags associated with a device from a specific source.
       properties:
@@ -50119,6 +50775,119 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_DIAGNOSTICS
+    ExperimentsExperimentHoldoutV2DTOArray:
+      description: "Response containing the holdouts an experiment is attached to."
+      properties:
+        data:
+          description: "Holdouts the experiment is attached to, in evaluation order."
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOData"
+          type: array
+      required:
+        - data
+      type: object
+    ExperimentsExperimentHoldoutV2DTOData:
+      description: "A holdout the experiment is attached to."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributes"
+        id:
+          description: "Identifier of the holdout."
+          example: e1e2e3e4-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataType"
+      required:
+        - type
+        - id
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributes:
+      description: "Attributes of a holdout that the experiment is attached to."
+      properties:
+        evaluation_order:
+          description: >-
+            Zero-based position of this MANAGED holdout in the experiment's evaluation order. The GLOBAL holdout is evaluated first. Null for EXTERNAL holdouts.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        holdout_type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType"
+        key:
+          description: "Key of the holdout."
+          example: q3-global-holdout
+          type: string
+        kind:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesKind"
+        name:
+          description: "Display name of the holdout."
+          example: Q3 global holdout
+          type: string
+        state:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesState"
+        traffic_allocation:
+          description: "Share of subjects the holdout holds back, from 0 to 1."
+          example: 0.05
+          format: double
+          type: number
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType:
+      description: >-
+        How Datadog serves a MANAGED holdout. GLOBAL holdouts apply to every eligible experiment of a subject type. SELECTIVE holdouts apply only to the experiments attached to them. Null for EXTERNAL holdouts.
+      enum:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+      example: GLOBAL
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesKind:
+      description: >-
+        Whether Datadog serves the holdout. Datadog serves MANAGED holdouts. EXTERNAL holdouts record what your own feature flagging system holds back, and Datadog does not serve them.
+      enum:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+      example: MANAGED
+      type: string
+      x-enum-varnames:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesState:
+      description: >-
+        Lifecycle phase of the holdout. PENDING holdouts have not started including experiments. INCLUDING holdouts are adding experiments. WAITING_FOR_ANALYSIS holdouts have stopped including experiments but have not started analysis. ANALYSING holdouts are in their analysis window. COMPLETE applies only to EXTERNAL holdouts that have ended their analysis window but are not archived.
+      enum:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+      example: INCLUDING
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataType:
+      default: experiment-holdouts
+      description: Experiment holdout resource type.
+      enum:
+        - experiment-holdouts
+      example: experiment-holdouts
+      type: string
+      x-enum-varnames:
+        - EXPERIMENT_HOLDOUTS
     ExperimentsExperimentMetricGroupMutationV2:
       description: "Response containing the saved experiment metric group and result refresh information."
       properties:
@@ -50245,6 +51014,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -50319,6 +51090,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -50501,6 +51274,8 @@ components:
               events_end_date: "2026-08-22T00:00:00Z"
               events_start_date: "2026-08-01T00:00:00Z"
               experiment_type: STANDARD
+              holdout_ids:
+                - a1a2a3a4-0000-0000-0000-000000000000
               hypothesis: A clearer checkout button increases purchase conversion
               name: Checkout button test
               pipeline_table_suffix: a1b2c3d4
@@ -50546,6 +51321,8 @@ components:
                 events_end_date: "2026-08-22T00:00:00Z"
                 events_start_date: "2026-08-01T00:00:00Z"
                 experiment_type: STANDARD
+                holdout_ids:
+                  - a1a2a3a4-0000-0000-0000-000000000000
                 hypothesis: A clearer checkout button increases purchase conversion
                 name: Checkout button test
                 pipeline_table_suffix: a1b2c3d4
@@ -50600,6 +51377,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -50657,6 +51436,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -50727,6 +51508,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is designed to test."
           example: A clearer checkout button increases purchase conversion
@@ -52722,6 +53513,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -52797,6 +53590,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -52900,6 +53695,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is intended to test."
           example: A clearer checkout button increases purchase conversion
@@ -53035,7 +53840,8 @@ components:
       nullable: true
       properties:
         allocation_key:
-          description: "Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events."
+          description: >-
+            Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events.
           type: string
         entry_point:
           $ref: >-
@@ -56512,6 +57318,259 @@ components:
         - value_type
         - variants
       type: object
+    FeatureFlagChangeEvent:
+      description: A change made to a feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagChangeEventAttributes"
+        id:
+          description: The ID of the change event.
+          example: "550e8400-e29b-41d4-a716-446655440005"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/FeatureFlagChangeEventType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FeatureFlagChangeEventAction:
+      description: The kind of change.
+      enum:
+        - created
+        - updated
+        - deleted
+        - archived
+        - unarchived
+        - scheduled
+        - started
+        - paused
+        - unpaused
+        - stopped
+      example: "updated"
+      type: string
+      x-enum-varnames:
+        - CREATED
+        - UPDATED
+        - DELETED
+        - ARCHIVED
+        - UNARCHIVED
+        - SCHEDULED
+        - STARTED
+        - PAUSED
+        - UNPAUSED
+        - STOPPED
+    FeatureFlagChangeEventAttributes:
+      description: Attributes of a feature flag change event.
+      properties:
+        action:
+          $ref: "#/components/schemas/FeatureFlagChangeEventAction"
+        change_metadata:
+          description: Additional details about the change, as a JSON-encoded string.
+          example: '{"variant_key": "control"}'
+          nullable: true
+          type: string
+        creation_source:
+          $ref: "#/components/schemas/FeatureFlagChangeEventCreationSource"
+        description:
+          description: A readable sentence describing the change, as shown on the flag history page and in the Action column of the CSV export.
+          example: 'Changed flag name from "Mobile Feature Rollout" to "Mobile Feature Toggle".'
+          type: string
+        environment:
+          $ref: "#/components/schemas/FeatureFlagChangeEventEnvironment"
+        feature_flag:
+          $ref: "#/components/schemas/FeatureFlagChangeEventFlag"
+        new_value:
+          description: The value after the change, serialized as a string.
+          example: "Mobile Feature Toggle"
+          nullable: true
+          type: string
+        previous_value:
+          description: The value before the change, serialized as a string.
+          example: "Mobile Feature Rollout"
+          nullable: true
+          type: string
+        property:
+          $ref: "#/components/schemas/FeatureFlagChangeEventProperty"
+        suggestion_review:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionReview"
+        timestamp:
+          description: When the change was made.
+          example: "2023-10-02T14:30:00Z"
+          format: date-time
+          type: string
+        user_id:
+          description: The ID of the user who made the change. Null when no user made the change.
+          example: "00000000-0000-0000-0000-000000000001"
+          nullable: true
+          type: string
+        version_number:
+          description: The version of the feature flag the change produced.
+          example: 3
+          format: int64
+          type: integer
+      required:
+        - action
+        - property
+        - timestamp
+        - version_number
+        - feature_flag
+      type: object
+    FeatureFlagChangeEventCreationSource:
+      description: "Where the change was made: `UI` for the Datadog app, or `MCP` for a Model Context Protocol (MCP) client."
+      enum:
+        - UI
+        - MCP
+      example: "UI"
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - UI
+        - MCP
+    FeatureFlagChangeEventEnvironment:
+      description: The environment the change applies to. Null for a change to the flag itself rather than to one environment.
+      nullable: true
+      properties:
+        id:
+          description: The ID of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        is_production:
+          description: Whether the environment is a production environment.
+          example: true
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "Production"
+          type: string
+      required:
+        - id
+        - name
+        - is_production
+      type: object
+    FeatureFlagChangeEventFlag:
+      description: The feature flag the change applies to.
+      properties:
+        id:
+          description: The ID of the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        key:
+          description: The key of the feature flag.
+          example: "mobile-feature-toggle"
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Mobile Feature Toggle"
+          type: string
+      required:
+        - id
+        - name
+        - key
+      type: object
+    FeatureFlagChangeEventProperty:
+      description: The part of the feature flag the change applies to.
+      enum:
+        - FLAG
+        - FLAG_NAME
+        - FLAG_DESCRIPTION
+        - JSON_SCHEMA
+        - DISTRIBUTION_CHANNEL
+        - REQUIRE_APPROVAL
+        - VARIANT
+        - VARIANT_NAME
+        - VARIANT_VALUE
+        - ALLOCATIONS
+        - ROLLOUT
+        - ENVIRONMENT_STATUS
+        - DEFAULT_VARIANT
+        - OVERRIDE_VARIANT
+        - STALENESS_STATUS
+        - SAVED_FILTER
+      example: "FLAG_NAME"
+      type: string
+      x-enum-varnames:
+        - FLAG
+        - FLAG_NAME
+        - FLAG_DESCRIPTION
+        - JSON_SCHEMA
+        - DISTRIBUTION_CHANNEL
+        - REQUIRE_APPROVAL
+        - VARIANT
+        - VARIANT_NAME
+        - VARIANT_VALUE
+        - ALLOCATIONS
+        - ROLLOUT
+        - ENVIRONMENT_STATUS
+        - DEFAULT_VARIANT
+        - OVERRIDE_VARIANT
+        - STALENESS_STATUS
+        - SAVED_FILTER
+    FeatureFlagChangeEventSuggestionLifecycleStatus:
+      description: Where the change request is in its lifecycle.
+      enum:
+        - pending
+        - approved
+        - applied
+        - rejected
+        - discarded
+      example: "rejected"
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - APPROVED
+        - APPLIED
+        - REJECTED
+        - DISCARDED
+    FeatureFlagChangeEventSuggestionReview:
+      description: |-
+        Review details of a change request that needed approval.
+        Present on review events, which `include_suggestion_events` adds.
+        Also present on a change that an approved change request applied, even when `include_suggestion_events` is `false`.
+      properties:
+        lifecycle_status:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionLifecycleStatus"
+        requester_comment:
+          description: The comment left by the person who requested the change.
+          example: "Ready for production."
+          type: string
+        reviewer_comment:
+          description: The comment left by the reviewer.
+          example: "Roll out to staging first."
+          type: string
+        status:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionStatus"
+        suggestion_created_by:
+          description: The ID of the user who requested the change.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+      required:
+        - status
+        - lifecycle_status
+      type: object
+    FeatureFlagChangeEventSuggestionStatus:
+      description: The review status of the change request.
+      enum:
+        - pending
+        - approved
+        - rejected
+      example: "rejected"
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - APPROVED
+        - REJECTED
+    FeatureFlagChangeEventType:
+      description: The resource type.
+      enum:
+        - "change-events"
+      example: "change-events"
+      type: string
+      x-enum-varnames:
+        - CHANGE_EVENTS
     FeatureFlagDistributionChannel:
       description: The distribution channel for the feature flag.
       enum:
@@ -56654,6 +57713,60 @@ components:
       required:
         - environment_id
         - status
+      type: object
+    FeatureFlagHistoryPaginationMeta:
+      description: Pagination metadata for feature flag change history.
+      properties:
+        page:
+          $ref: "#/components/schemas/FeatureFlagHistoryPaginationMetaPage"
+      type: object
+    FeatureFlagHistoryPaginationMetaPage:
+      description: Pagination metadata for feature flag change history responses.
+      properties:
+        first_offset:
+          description: Offset of the first page.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Offset of the last page.
+          example: 75
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of events returned on this page.
+          example: 25
+          format: int64
+          type: integer
+        next_offset:
+          description: Offset of the next page, or null when there is no next page.
+          example: 25
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Number of matching events skipped before this page.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Offset of the previous page, or null when there is no previous page.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: |-
+            Total number of events matching the filters, independent of the page size.
+            It counts experiment proposals that you cannot read, which are left out of the pages, so a page can hold fewer events than `limit`.
+          example: 100
+          format: int64
+          type: integer
+        type:
+          description: The pagination method. Always `offset_limit`.
+          example: offset_limit
+          type: string
       type: object
     FeatureFlagListItem:
       description: A feature flag resource for list responses.
@@ -60924,6 +62037,45 @@ components:
       description: The definition of the `GCPCredentialsUpdate` object.
       oneOf:
         - $ref: "#/components/schemas/GCPServiceAccountUpdate"
+    GCPCudMetadataConfig:
+      description: >-
+        The BigQuery table the committed use discount (CUD) metadata is read from. Only returned when CUD metadata is configured for the account.
+      properties:
+        dataset_id:
+          description: The BigQuery dataset ID of the CUD metadata export.
+          example: "billing_cud_metadata"
+          type: string
+        project_id:
+          description: The Google Cloud project ID of the CUD metadata export.
+          example: "my-cud-project-123"
+          type: string
+        table_id:
+          description: The BigQuery table ID of the CUD metadata export.
+          example: "cud_metadata_export"
+          type: string
+      required:
+        - project_id
+        - dataset_id
+        - table_id
+      type: object
+    GCPCudMetadataErrorCodes:
+      description: >-
+        The error codes reported for the committed use discount (CUD) metadata export. Only returned when CUD metadata is configured for the account.
+      items:
+        description: A CUD metadata error code.
+        format: int32
+        maximum: 2147483647
+        type: integer
+      type: array
+    GCPCudMetadataState:
+      description: >-
+        The state of the Google Cloud committed use discount (CUD) metadata export. Only returned when CUD metadata is configured for the account.
+      type: string
+    GCPCudMetadataStatusUpdatedAt:
+      description: >-
+        The timestamp when the committed use discount (CUD) metadata state was last updated. Only returned when CUD metadata is configured for the account.
+      example: "2023-01-01T12:00:00Z"
+      type: string
     GCPIntegration:
       description: The definition of the `GCPIntegration` object.
       properties:
@@ -61293,8 +62445,15 @@ components:
           type: string
         created_at:
           description: The timestamp when the Google Cloud Usage Cost config was created.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
+        cud_metadata_config:
+          $ref: "#/components/schemas/GCPCudMetadataConfig"
+        cud_metadata_error_codes:
+          $ref: "#/components/schemas/GCPCudMetadataErrorCodes"
+        cud_metadata_state:
+          $ref: "#/components/schemas/GCPCudMetadataState"
+        cud_metadata_status_updated_at:
+          $ref: "#/components/schemas/GCPCudMetadataStatusUpdatedAt"
         dataset:
           description: The export dataset name used for the Google Cloud Usage Cost Report.
           example: "billing"
@@ -61334,11 +62493,9 @@ components:
           type: string
         status_updated_at:
           description: The timestamp when the Google Cloud Usage Cost config status was updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
         updated_at:
           description: The timestamp when the Google Cloud Usage Cost config status was updated.
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
           type: string
       required:
         - account_id
@@ -61606,7 +62763,7 @@ components:
           attributes:
             account_id: 123456_A123BC_12AB34
             bucket_name: dd-cost-bucket
-            created_at: "2023-01-01T12:00:00.000000"
+            created_at: "2023-01-01T12:00:00Z"
             dataset: billing
             error_messages: []
             export_prefix: datadog_cloud_cost_usage_export
@@ -61615,8 +62772,8 @@ components:
             project_id: my-project-123
             service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
             status: active
-            status_updated_at: "2023-01-01T12:00:00.000000"
-            updated_at: "2023-01-01T12:00:00.000000"
+            status_updated_at: "2023-01-01T12:00:00Z"
+            updated_at: "2023-01-01T12:00:00Z"
           id: "123456789123"
           type: gcp_uc_config
       properties:
@@ -61648,6 +62805,14 @@ components:
         created_at:
           description: The `attributes` `created_at`.
           type: string
+        cud_metadata_config:
+          $ref: "#/components/schemas/GCPCudMetadataConfig"
+        cud_metadata_error_codes:
+          $ref: "#/components/schemas/GCPCudMetadataErrorCodes"
+        cud_metadata_state:
+          $ref: "#/components/schemas/GCPCudMetadataState"
+        cud_metadata_status_updated_at:
+          $ref: "#/components/schemas/GCPCudMetadataStatusUpdatedAt"
         dataset:
           description: The `attributes` `dataset`.
           type: string
@@ -84180,6 +85345,21 @@ components:
         userName:
           description: Unique identifier for the User.
           type: string
+      type: object
+    ListFeatureFlagHistoryResponse:
+      description: Response containing feature flag change events, newest first.
+      properties:
+        data:
+          description: The change events.
+          items:
+            $ref: "#/components/schemas/FeatureFlagChangeEvent"
+          type: array
+        links:
+          $ref: "#/components/schemas/FeatureFlagsPaginationLinks"
+        meta:
+          $ref: "#/components/schemas/FeatureFlagHistoryPaginationMeta"
+      required:
+        - data
       type: object
     ListFeatureFlagsResponse:
       description: Response containing a list of feature flags.
@@ -116115,7 +117295,7 @@ components:
       example:
         data:
           attributes:
-            Query: example:query AND test:true
+            query: example:query AND test:true
           type: validate_query
       properties:
         data:
@@ -116137,12 +117317,13 @@ components:
     RulesValidateQueryRequestDataAttributes:
       description: The definition of `RulesValidateQueryRequestDataAttributes` object.
       properties:
-        Query:
-          description: The `attributes` `Query`.
-          example: ""
+        query:
+          description: >-
+            The tag pipeline rule query to validate, in Datadog tag query syntax: `tag:value` terms combined with `AND`, `OR`, and `NOT`.
+          example: "example:query AND test:true"
           type: string
       required:
-        - Query
+        - query
       type: object
     RulesValidateQueryRequestDataType:
       default: validate_query
@@ -142972,15 +144153,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -143284,12 +144469,13 @@ components:
       properties:
         rule_ids:
           description: >-
-            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list. Must contain the UUID of every active rule in the org (at most 1,000); omitting any active rule returns a 400 error.
           example:
             - "00000000-0000-0000-0000-000000000001"
             - "00000000-0000-0000-0000-000000000002"
           items:
             type: string
+          maxItems: 1000
           type: array
       type: object
     TagIndexingRuleOrderData:
@@ -143340,15 +144526,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -146979,6 +148169,12 @@ components:
     TenancyConfigDataAttributes:
       description: Attributes of an OCI tenancy integration configuration, including authentication details, region settings, and collection options.
       properties:
+        account_tags:
+          description: List of Datadog tags applied to data collected from the tenancy.
+          items:
+            description: A Datadog tag in key:value format (for example, env:prod).
+            type: string
+          type: array
         billing_plan_id:
           description: The identifier of the billing plan associated with the OCI tenancy.
           format: int32
@@ -146994,9 +148190,23 @@ components:
         dd_compartment_id:
           description: The OCID of the OCI compartment used by the Datadog integration stack.
           type: string
+        dd_iac_version:
+          description: The version of the Datadog infrastructure-as-code stack applied to the tenancy (for example, 1.2.0).
+          type: string
         dd_stack_id:
           description: The OCID of the OCI Resource Manager stack used by the Datadog integration.
           type: string
+        defined_tags:
+          description: List of OCI defined tags applied to the Datadog-managed connector hubs.
+          items:
+            description: An OCI defined tag in `Namespace.key:value` format (for example, `Operations.CostCenter:42`).
+            type: string
+          type: array
+        events_collection_enabled:
+          description: Whether resource change events collection from OCI is enabled for the tenancy.
+          type: boolean
+        grace_resource:
+          $ref: "#/components/schemas/TenancyConfigDataAttributesGraceResource"
         home_region:
           description: The home region of the OCI tenancy (for example, us-ashburn-1).
           type: string
@@ -147012,12 +148222,25 @@ components:
         resource_collection_enabled:
           description: Whether resource collection from OCI is enabled for the tenancy.
           type: boolean
+        service_quota_collection_enabled:
+          description: Whether service quota collection from OCI is enabled for the tenancy.
+          type: boolean
         tenancy_name:
           description: The human-readable name of the OCI tenancy.
           type: string
         user_ocid:
           description: The OCID of the OCI user used by the Datadog integration for authentication.
           type: string
+      type: object
+    TenancyConfigDataAttributesGraceResource:
+      description: Access control details for the tenancy configuration, used to determine whether the requesting user can edit it.
+      properties:
+        resource_id:
+          description: The identifier of the access control resource for the tenancy configuration.
+          type: string
+        user_can_edit:
+          description: Whether the requesting user has permission to edit the tenancy configuration.
+          type: boolean
       type: object
     TenancyConfigDataAttributesLogsConfig:
       description: Log collection configuration for an OCI tenancy, indicating which compartments and services have log collection enabled.
@@ -147037,6 +148260,15 @@ components:
             description: An OCI service name for which log collection is enabled (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope log collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesMetricsConfig:
       description: Metrics collection configuration for an OCI tenancy, indicating which compartments and services are included or excluded.
@@ -147056,27 +148288,39 @@ components:
             description: An OCI service name excluded from metrics collection (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope metrics collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesRegionsConfig:
       description: Region configuration for an OCI tenancy, indicating which regions are available, enabled, or disabled for data collection.
       properties:
         available:
-          description: List of OCI regions available for data collection in the tenancy.
+          description: List of OCI regions available for data collection in the tenancy. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
         disabled:
-          description: List of OCI regions explicitly disabled for data collection.
+          description: List of OCI regions explicitly disabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-phoenix-1).
             type: string
+          nullable: true
           type: array
         enabled:
-          description: List of OCI regions enabled for data collection.
+          description: List of OCI regions enabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
       type: object
     TenancyConfigList:
@@ -147084,10 +148328,20 @@ components:
       example:
         data:
           - attributes:
+              account_tags:
+                - env:prod
+              billing_plan_id: 2
               config_version: 2
               cost_collection_enabled: true
               dd_compartment_id: ocid.compartment.test
+              dd_iac_version: "1.2.0"
               dd_stack_id: ocid.stack.test
+              defined_tags:
+                - Operations.CostCenter:42
+              events_collection_enabled: false
+              grace_resource:
+                resource_id: oci-integration-configuration:ocid.tenancy.test
+                user_can_edit: true
               home_region: us-ashburn-1
               logs_config:
                 compartment_tag_filters:
@@ -147095,12 +148349,19 @@ components:
                 enabled: true
                 enabled_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
               metrics_config:
                 compartment_tag_filters:
                   - compartment.test
                 enabled: true
                 excluded_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
+              parent_tenancy_name: parent-tenancy
               regions_config:
                 available:
                   - us-ashburn-1
@@ -147110,6 +148371,8 @@ components:
                 enabled:
                   - us-ashburn-1
               resource_collection_enabled: true
+              service_quota_collection_enabled: false
+              tenancy_name: test-tenancy
               user_ocid: ocid.user.test
             id: ocid.tenancy.test
             type: oci_tenancy
@@ -149653,7 +150916,7 @@ components:
             configs:
               - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
                 client_id: 1234abcd-1234-abcd-1234-1234abcd1234
-                created_at: "2023-01-01T12:00:00.000000"
+                created_at: "2023-01-01T12:00:00Z"
                 dataset_type: actual
                 error_messages: []
                 export_name: dd-actual-export
@@ -149662,10 +150925,10 @@ components:
                 months: 36
                 scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
                 status: active
-                status_updated_at: "2023-01-01T12:00:00.000000"
+                status_updated_at: "2023-01-01T12:00:00Z"
                 storage_account: dd-storage-account
                 storage_container: dd-storage-container
-                updated_at: "2023-01-01T12:00:00.000000"
+                updated_at: "2023-01-01T12:00:00Z"
           id: "123456789123"
           type: azure_uc_configs
       properties:
@@ -151206,7 +152469,6 @@ components:
           attributes:
             enabled: true
             last_version: 1
-            name: Updated Ruleset
             rules:
               - enabled: true
                 mapping:
@@ -151248,6 +152510,7 @@ components:
                     - http_status
                     - status_description
                   table_name: http_status_codes
+          id: Updated Ruleset
           type: update_ruleset
       properties:
         data:
@@ -158776,6 +160039,9 @@ paths:
                     data:
                       attributes:
                         action: ALLOW
+                        extra_tags:
+                          - key: ai_guard.evaluate_id
+                            value: a76a703c-324f-42ed-af33-9b17d65e28af
                         global_prob: 0.005218505859375
                         is_blocking_enabled: false
                         reason: No rule match.
@@ -171008,14 +172274,14 @@ paths:
                           account_id: "123456789123"
                           bucket_name: dd-cost-bucket
                           bucket_region: us-east-1
-                          created_at: "2023-01-01T12:00:00.000000"
+                          created_at: "2023-01-01T12:00:00Z"
                           error_messages: []
                           months: 36
                           report_name: dd-report-name
                           report_prefix: dd-report-prefix
                           status: active
-                          status_updated_at: "2023-01-01T12:00:00.000000"
-                          updated_at: "2023-01-01T12:00:00.000000"
+                          status_updated_at: "2023-01-01T12:00:00Z"
+                          updated_at: "2023-01-01T12:00:00Z"
                         id: "123"
                         type: aws_cur_config
               schema:
@@ -171087,14 +172353,14 @@ paths:
                         account_id: "123456789123"
                         bucket_name: dd-cost-bucket
                         bucket_region: us-east-1
-                        created_at: "2023-01-01T12:00:00.000000"
+                        created_at: "2023-01-01T12:00:00Z"
                         error_messages: []
                         months: 36
                         report_name: dd-report-name
                         report_prefix: dd-report-prefix
                         status: active
-                        status_updated_at: "2023-01-01T12:00:00.000000"
-                        updated_at: "2023-01-01T12:00:00.000000"
+                        status_updated_at: "2023-01-01T12:00:00Z"
+                        updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: aws_cur_config
               schema:
@@ -171191,14 +172457,14 @@ paths:
                         account_id: "123456789123"
                         bucket_name: dd-cost-bucket
                         bucket_region: us-east-1
-                        created_at: "2023-01-01T12:00:00.000000"
+                        created_at: "2023-01-01T12:00:00Z"
                         error_messages: []
                         months: 36
                         report_name: dd-report-name
                         report_prefix: dd-report-prefix
                         status: active
-                        status_updated_at: "2023-01-01T12:00:00.000000"
-                        updated_at: "2023-01-01T12:00:00.000000"
+                        status_updated_at: "2023-01-01T12:00:00Z"
+                        updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: aws_cur_config
               schema:
@@ -171253,14 +172519,14 @@ paths:
                           account_id: "123456789123"
                           bucket_name: dd-cost-bucket
                           bucket_region: us-east-1
-                          created_at: "2023-01-01T12:00:00.000000"
+                          created_at: "2023-01-01T12:00:00Z"
                           error_messages: []
                           months: 36
                           report_name: dd-report-name
                           report_prefix: dd-report-prefix
                           status: active
-                          status_updated_at: "2023-01-01T12:00:00.000000"
-                          updated_at: "2023-01-01T12:00:00.000000"
+                          status_updated_at: "2023-01-01T12:00:00Z"
+                          updated_at: "2023-01-01T12:00:00Z"
                         id: "123"
                         type: aws_cur_config
               schema:
@@ -171309,7 +172575,7 @@ paths:
                           configs:
                             - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
                               client_id: 1234abcd-1234-abcd-1234-1234abcd1234
-                              created_at: "2023-01-01T12:00:00.000000"
+                              created_at: "2023-01-01T12:00:00Z"
                               dataset_type: actual
                               error_messages: []
                               export_name: dd-actual-export
@@ -171318,10 +172584,10 @@ paths:
                               months: 36
                               scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
                               status: active
-                              status_updated_at: "2023-01-01T12:00:00.000000"
+                              status_updated_at: "2023-01-01T12:00:00Z"
                               storage_account: dd-storage-account
                               storage_container: dd-storage-container
-                              updated_at: "2023-01-01T12:00:00.000000"
+                              updated_at: "2023-01-01T12:00:00Z"
                         id: "123456789123"
                         type: azure_uc_configs
               schema:
@@ -171388,7 +172654,7 @@ paths:
                         configs:
                           - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
                             client_id: 1234abcd-1234-abcd-1234-1234abcd1234
-                            created_at: "2023-01-01T12:00:00.000000"
+                            created_at: "2023-01-01T12:00:00Z"
                             dataset_type: actual
                             error_messages: []
                             export_name: dd-actual-export
@@ -171397,10 +172663,10 @@ paths:
                             months: 36
                             scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
                             status: active
-                            status_updated_at: "2023-01-01T12:00:00.000000"
+                            status_updated_at: "2023-01-01T12:00:00Z"
                             storage_account: dd-storage-account
                             storage_container: dd-storage-container
-                            updated_at: "2023-01-01T12:00:00.000000"
+                            updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: azure_uc_configs
               schema:
@@ -171492,7 +172758,7 @@ paths:
                         configs:
                           - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
                             client_id: 1234abcd-1234-abcd-1234-1234abcd1234
-                            created_at: "2023-01-01T12:00:00.000000"
+                            created_at: "2023-01-01T12:00:00Z"
                             dataset_type: actual
                             error_messages: []
                             export_name: dd-actual-export
@@ -171501,10 +172767,10 @@ paths:
                             months: 36
                             scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
                             status: active
-                            status_updated_at: "2023-01-01T12:00:00.000000"
+                            status_updated_at: "2023-01-01T12:00:00Z"
                             storage_account: dd-storage-account
                             storage_container: dd-storage-container
-                            updated_at: "2023-01-01T12:00:00.000000"
+                            updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: azure_uc_configs
               schema:
@@ -171551,7 +172817,7 @@ paths:
                         configs:
                           - account_id: 1234abcd-1234-abcd-1234-1234abcd1234
                             client_id: 1234abcd-1234-abcd-1234-1234abcd1234
-                            created_at: "2023-01-01T12:00:00.000000"
+                            created_at: "2023-01-01T12:00:00Z"
                             dataset_type: actual
                             error_messages: []
                             export_name: dd-actual-export
@@ -171560,10 +172826,10 @@ paths:
                             months: 36
                             scope: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
                             status: active
-                            status_updated_at: "2023-01-01T12:00:00.000000"
+                            status_updated_at: "2023-01-01T12:00:00Z"
                             storage_account: dd-storage-account
                             storage_container: dd-storage-container
-                            updated_at: "2023-01-01T12:00:00.000000"
+                            updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: azure_uc_configs
               schema:
@@ -172978,7 +174244,7 @@ paths:
                       - attributes:
                           account_id: 123456_A123BC_12AB34
                           bucket_name: dd-cost-bucket
-                          created_at: "2023-01-01T12:00:00.000000"
+                          created_at: "2023-01-01T12:00:00Z"
                           dataset: billing
                           error_messages: []
                           export_prefix: datadog_cloud_cost_usage_export
@@ -172987,8 +174253,8 @@ paths:
                           project_id: my-project-123
                           service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
                           status: active
-                          status_updated_at: "2023-01-01T12:00:00.000000"
-                          updated_at: "2023-01-01T12:00:00.000000"
+                          status_updated_at: "2023-01-01T12:00:00Z"
+                          updated_at: "2023-01-01T12:00:00Z"
                         id: "123456789123"
                         type: gcp_uc_config
               schema:
@@ -173047,7 +174313,7 @@ paths:
                       attributes:
                         account_id: 123456_A123BC_12AB34
                         bucket_name: dd-cost-bucket
-                        created_at: "2023-01-01T12:00:00.000000"
+                        created_at: "2023-01-01T12:00:00Z"
                         dataset: billing
                         error_messages: []
                         export_prefix: datadog_cloud_cost_usage_export
@@ -173056,8 +174322,8 @@ paths:
                         project_id: my-project-123
                         service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
                         status: active
-                        status_updated_at: "2023-01-01T12:00:00.000000"
-                        updated_at: "2023-01-01T12:00:00.000000"
+                        status_updated_at: "2023-01-01T12:00:00Z"
+                        updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: gcp_uc_config
               schema:
@@ -173148,7 +174414,7 @@ paths:
                       attributes:
                         account_id: 123456_A123BC_12AB34
                         bucket_name: dd-cost-bucket
-                        created_at: "2023-01-01T12:00:00.000000"
+                        created_at: "2023-01-01T12:00:00Z"
                         dataset: billing
                         error_messages: []
                         export_prefix: datadog_cloud_cost_usage_export
@@ -173157,8 +174423,8 @@ paths:
                         project_id: my-project-123
                         service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
                         status: active
-                        status_updated_at: "2023-01-01T12:00:00.000000"
-                        updated_at: "2023-01-01T12:00:00.000000"
+                        status_updated_at: "2023-01-01T12:00:00Z"
+                        updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: gcp_uc_config
               schema:
@@ -173204,7 +174470,7 @@ paths:
                       attributes:
                         account_id: 123456_A123BC_12AB34
                         bucket_name: dd-cost-bucket
-                        created_at: "2023-01-01T12:00:00.000000"
+                        created_at: "2023-01-01T12:00:00Z"
                         dataset: billing
                         error_messages: []
                         export_prefix: datadog_cloud_cost_usage_export
@@ -173213,8 +174479,8 @@ paths:
                         project_id: my-project-123
                         service_account: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
                         status: active
-                        status_updated_at: "2023-01-01T12:00:00.000000"
-                        updated_at: "2023-01-01T12:00:00.000000"
+                        status_updated_at: "2023-01-01T12:00:00Z"
+                        updated_at: "2023-01-01T12:00:00Z"
                       id: "123456789123"
                       type: gcp_uc_config
               schema:
@@ -181498,6 +182764,185 @@ paths:
       tags:
         - Error Tracking
       x-menu-order: 3
+  /api/v2/eudm/devices:
+    get:
+      operationId: GetEUDMDevices
+      parameters:
+        - description: |-
+            Filter devices to those currently associated with any of the given BSSID values.
+            Each value must be a MAC-48 address; repeat the parameter to pass several values.
+          explode: true
+          in: query
+          name: bssid
+          required: false
+          schema:
+            items:
+              example: 00:00:5e:00:53:01
+              pattern: "^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$"
+              type: string
+            type: array
+          style: form
+        - description: |-
+            Maximum number of devices to return in one page. Must be a positive integer.
+            If not set, the response contains all matching devices.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            example: 100
+            format: int64
+            minimum: 1
+            type: integer
+        - description: |-
+            Opaque cursor that selects the next page. Use the `meta.page.after` value
+            of the previous response. Devices are ordered by ID.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          cpu_usage: 12.4
+                          disk_usage: 38.2
+                          issues: []
+                          last_seen: "2026-05-20T10:15:30Z"
+                          manufacturer: Apple
+                          mem_usage: 47.1
+                          model_name: MacBook Pro
+                          os: macOS
+                          os_version: macOS 15.6.1 arm64
+                          status: healthy
+                        id: LAPTOP-DEMO-001
+                        type: devices
+                    links:
+                      next: /api/v2/eudm/devices?page%5Bcursor%5D=TEFQVE9QLURFTU8tMDAx&page%5Blimit%5D=1
+                      self: /api/v2/eudm/devices?page%5Blimit%5D=1
+                    meta:
+                      page:
+                        after: TEFQVE9QLURFTU8tMDAx
+              schema:
+                $ref: "#/components/schemas/DeviceBaseArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get all devices
+      tags:
+        - End User Device Monitoring
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - end_user_devices_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/eudm/devices/{device_id}:
+    get:
+      operationId: GetEUDMDevice
+      parameters:
+        - description: Unique identifier of the device to fetch. Matches the Datadog host identifier.
+          in: path
+          name: device_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        battery_charge_pct: 82
+                        battery_charge_rate: 1200
+                        battery_cycle_count: 134
+                        battery_max_capacity_pct: 96
+                        cnm_enabled: true
+                        cpu_cores: 10
+                        cpu_logical_processors: 10
+                        cpu_model: Apple M1 Pro
+                        cpu_usage: 12.4
+                        disk_usage: 38.2
+                        ip_address: 192.0.2.10
+                        issues: []
+                        kernel_name: Darwin
+                        last_seen: "2026-05-20T10:15:30Z"
+                        manufacturer: Apple
+                        mem_usage: 47.1
+                        memory_total_kb: 16777216
+                        model_name: MacBook Pro
+                        model_number: MacBookPro18,3
+                        os: macOS
+                        os_version: macOS 15.6.1 arm64
+                        packet_sent: 98213.0
+                        retransmit: 112.0
+                        retransmit_pct: 0.11
+                        serial_number: TESTDEVICE001
+                        status: healthy
+                        tcp_canceled: 1.0
+                        tcp_established: 1482.0
+                        tcp_establishment_failure_pct: 0.6
+                        tcp_establishment_failures: 9.0
+                        tcp_host_unreachable: 1.0
+                        tcp_network_unreachable: 0.0
+                        tcp_refusals: 3.0
+                        tcp_timeouts: 4.0
+                        uptime: 432000
+                        wlan_bssid: 00:00:5e:00:53:01
+                        wlan_rssi: -55.0
+                        wlan_ssid: corp-wifi
+                      id: LAPTOP-DEMO-001
+                      type: devices
+              schema:
+                $ref: "#/components/schemas/DeviceDetails"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a device
+      tags:
+        - End User Device Monitoring
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - end_user_devices_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/events:
     get:
       description: |-
@@ -182001,6 +183446,8 @@ paths:
                           events_end_date: "2026-08-22T00:00:00Z"
                           events_start_date: "2026-08-01T00:00:00Z"
                           experiment_type: STANDARD
+                          holdout_ids:
+                            - a1a2a3a4-0000-0000-0000-000000000000
                           hypothesis: A clearer checkout button increases purchase conversion
                           name: Checkout button test
                           pipeline_table_suffix: a1b2c3d4
@@ -182201,6 +183648,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -185722,6 +187170,8 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids:
+                          - a1a2a3a4-0000-0000-0000-000000000000
                         hypothesis: A clearer checkout button increases purchase conversion
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
@@ -185952,6 +187402,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -186491,6 +187942,102 @@ paths:
       tags:
         - Experiments
       x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+  /api/v2/experiments/{experiment_id}/holdouts:
+    get:
+      description: >-
+        List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.
+      operationId: ListExperimentHoldouts
+      parameters:
+        - description: "The UUID of the experiment."
+          in: path
+          name: experiment_id
+          required: true
+          schema:
+            description: "The UUID of the experiment."
+            example: 550e8400-e29b-41d4-a716-446655440000
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          evaluation_order: 0
+                          holdout_type: GLOBAL
+                          key: q3-global-holdout
+                          kind: MANAGED
+                          name: Q3 global holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.05
+                        id: e1e2e3e4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order: 1
+                          holdout_type: SELECTIVE
+                          key: checkout-holdout
+                          kind: MANAGED
+                          name: Checkout holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: f1f2f3f4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order:
+                          holdout_type:
+                          key: partner-holdout
+                          kind: EXTERNAL
+                          name: Partner holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: a1a2a3a4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+              schema:
+                $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed experiment ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Missing or invalid authentication.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The caller lacks the `product_analytics_experiments_read` permission or lacks permission to view this experiment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No experiment with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: List experiment holdouts
+      tags:
+        - Experiments
+      x-menu-order: 55
       x-permission:
         operator: AND
         permissions:
@@ -188265,6 +189812,166 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/feature-flags/history:
+    get:
+      description: |-
+        Returns the organization's feature flag change events, newest first.
+        Each event includes a readable description of the change.
+        All filters are optional, and events must match every filter you set. Without a date range, the whole history is listed.
+        Results are paginated with `page[limit]` and `page[offset]`; follow `links.next` to read further back.
+      operationId: ListFeatureFlagHistory
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_history_start_date"
+        - $ref: "#/components/parameters/feature_flag_history_end_date"
+        - $ref: "#/components/parameters/feature_flag_history_teams"
+        - $ref: "#/components/parameters/feature_flag_history_tags"
+        - $ref: "#/components/parameters/feature_flag_history_feature_flag_id"
+        - $ref: "#/components/parameters/feature_flag_history_environment_id"
+        - $ref: "#/components/parameters/feature_flag_history_include_suggestion_events"
+        - description: Maximum number of events to return. Defaults to `25`. Values above `50` return `50` events. Non-positive or empty values use the default. A non-integer value returns a `400 Bad Request` error.
+          example: 25
+          in: query
+          name: page[limit]
+          schema:
+            default: 25
+            format: int64
+            maximum: 50
+            minimum: 1
+            type: integer
+        - description: Number of matching events to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a `400 Bad Request` error.
+          example: 0
+          in: query
+          name: page[offset]
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action: "updated"
+                          change_metadata:
+                          creation_source: "UI"
+                          description: 'Changed flag name from "Mobile Feature Rollout" to "Mobile Feature Toggle".'
+                          environment:
+                          feature_flag:
+                            id: "550e8400-e29b-41d4-a716-446655440000"
+                            key: "mobile-feature-toggle"
+                            name: "Mobile Feature Toggle"
+                          new_value: "Mobile Feature Toggle"
+                          previous_value: "Mobile Feature Rollout"
+                          property: "FLAG_NAME"
+                          timestamp: "2023-10-02T14:30:00Z"
+                          user_id: "00000000-0000-0000-0000-000000000001"
+                          version_number: 3
+                        id: "550e8400-e29b-41d4-a716-446655440005"
+                        type: "change-events"
+                    links:
+                      first: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                      last: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                      self: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                    meta:
+                      page:
+                        first_offset: 0
+                        last_offset: 0
+                        limit: 25
+                        offset: 0
+                        total: 1
+                        type: offset_limit
+              schema:
+                $ref: "#/components/schemas/ListFeatureFlagHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: List feature flag change history
+      tags:
+        - Feature Flags
+      x-menu-order: 25
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+  /api/v2/feature-flags/history/export:
+    get:
+      description: |-
+        Exports the organization's feature flag change events as a CSV file, newest first, without pagination.
+        It accepts the same filters as the List feature flag change history endpoint, and its columns match the CSV export on the flag history page:
+        Flag Version, Flag Name, Flag Key, Flag UUID, Action, User Name, User Email, User Type, Environment, and Timestamp.
+
+        If an export fails before the file starts, the response is a JSON:API error. Large exports stream as they are read.
+        If an export fails after streaming starts, the connection closes before the file ends, so the download fails instead of
+        returning a file with missing rows. An export must finish within the 60-second request timeout. If an export times out,
+        narrow the date range.
+      operationId: ExportFeatureFlagHistory
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_history_start_date"
+        - $ref: "#/components/parameters/feature_flag_history_end_date"
+        - $ref: "#/components/parameters/feature_flag_history_teams"
+        - $ref: "#/components/parameters/feature_flag_history_tags"
+        - $ref: "#/components/parameters/feature_flag_history_feature_flag_id"
+        - $ref: "#/components/parameters/feature_flag_history_environment_id"
+        - $ref: "#/components/parameters/feature_flag_history_include_suggestion_events"
+      responses:
+        "200":
+          content:
+            text/csv:
+              examples:
+                default:
+                  value: "Flag Version,Flag Name,Flag Key,Flag UUID,Action,User Name,User Email,User Type,Environment,Timestamp\n3,Mobile Feature Toggle,mobile-feature-toggle,550e8400-e29b-41d4-a716-446655440000,\"Changed flag name from \"\"Mobile Feature Rollout\"\" to \"\"Mobile Feature Toggle\"\".\",Jane Doe,jane.doe@example.com,User,All,\"Mon, Oct 2, 2023, 2:30:00 pm UTC\""
+              schema:
+                type: string
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: Export feature flag change history
+      tags:
+        - Feature Flags
+      x-menu-order: 26
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
   /api/v2/feature-flags/saved-filters/{saved_filter_id}:
     get:
       description: |-
@@ -214923,12 +216630,14 @@ paths:
             start with `app.` and end with `.count`. The exception is a value whose only `*` is at the end (for
             example, `http.request*`): it matches names that start with that text and is case-sensitive.
             Spaces are treated as `*`. Only one value is accepted; repeating the parameter returns
-            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. An empty value
-            is ignored.
+            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. Surrounding spaces
+            are ignored, and an empty or spaces-only value is ignored. The value can be at most 200 characters (the
+            longest metric name); a longer value returns `400 Bad Request`.
           in: query
           name: filter[metrics.id]
           required: false
           schema:
+            maxLength: 200
             pattern: "^[a-zA-Z0-9_.* ]*$"
             type: string
         - description: |-
@@ -215714,7 +217423,20 @@ paths:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
         among existing rules; use the reorder endpoint to change the evaluation order.
+        Every rule that matches a metric applies, in `rule_order`; a rule with
+        `override_previous_rules` set to `false` (merge) adds to the tags configured by earlier
+        rules, and a rule with `override_previous_rules` set to `true` replaces them.
         Requires the `Manage Tags for Metrics` permission.
+
+        Limits:
+        - An org can have at most 1,000 active tag indexing rules. Creating a rule when the org
+          already has 1,000 active rules returns a 403 error with the title
+          `Tag indexing rule limit reached`.
+        - Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;
+          requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.
+        - `name` can be at most 200 characters, and `metric_name_matches` can contain at most
+          50 patterns of at most 200 characters each. Requests that exceed these limits return a
+          400 error.
       operationId: CreateTagIndexingRule
       requestBody:
         content:
@@ -215766,6 +217488,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                rule_limit_reached:
+                  summary: The org already has 1,000 active tag indexing rules.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rule limit reached
+                tag_indexing_rules_unavailable:
+                  summary: The org has more than 700,000 custom metrics.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rules unavailable
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
@@ -215794,7 +217529,8 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
-        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
+        The UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID
+        returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -215965,7 +217701,10 @@ paths:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
         Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        reorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and
+        `metric_name_matches` can contain at most 50 patterns of at most 200 characters each;
+        requests that exceed these limits return a 400 error.
+        Requires the `Manage Tags for Metrics` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
@@ -216334,6 +218073,11 @@ paths:
 
         To compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`
         instead of calling this endpoint for each metric.
+
+        A `404 Not Found` response means that no metric with this name exists in your organization. A
+        `400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the
+        queried window. For no data, the error message says so and names the window that was queried, which can
+        differ from the requested one.
       operationId: EstimateMetricsOutputSeries
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -216355,7 +218099,7 @@ paths:
             type: boolean
         - description: |-
             The number of hours of look back (from now) to estimate cardinality with.
-            If unspecified, it defaults to 0 hours (the most recent data).
+            If unspecified, it defaults to 0 hours (the most recent data). Values below 0 return `400 Bad Request`.
           example: 0
           in: query
           name: filter[hours_ago]
@@ -216381,7 +218125,9 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+        - description: |-
+            A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+            Smaller values return `400 Bad Request`.
           example: 6
           in: query
           name: filter[timespan_h]
@@ -216389,6 +218135,7 @@ paths:
           schema:
             format: int32
             maximum: 2147483647
+            minimum: 1
             type: integer
       responses:
         "200":
@@ -216867,9 +218614,9 @@ paths:
       description: |-
         Returns the tag configuration for the given metric name.
 
-        A metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually
-        means that the metric has no tag configuration, but it is also returned when no metric with this name exists
-        in your organization.
+        A metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,
+        with different messages: `No tag configuration for <metric_name>` when the metric exists without a tag
+        configuration, and `<metric_name> not found` when no metric with this name exists in your organization.
 
         To list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`
         instead of calling this endpoint for each metric.
@@ -229014,6 +230761,53 @@ paths:
         - Rum Audience Management
       x-menu-order: 8
       x-unstable: "**Note**: This endpoint may be subject to changes."
+  /api/v2/product-analytics/users/{user_id}:
+    delete:
+      description: |-
+        Delete a Product Analytics user profile.
+        Deletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.
+        This only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.
+      operationId: DeleteUserProfile
+      parameters:
+        - description: The ID of the user to delete, as sent in the `usr.id` attribute.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: user-1234
+            type: string
+      responses:
+        "202":
+          description: Deletion accepted; the profile will be removed asynchronously
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete a user profile
+      tags:
+        - Rum Audience Management
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/{entity}/mapping:
     get:
       description: Get entity mapping configuration including all available attributes and their properties
@@ -243133,9 +244927,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/automation/default_inbox_rules:
     get:
       description: |-
@@ -246550,9 +248341,6 @@ paths:
           - security_monitoring_findings_write
           - appsec_vm_write
           - data_scanner_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
@@ -267426,7 +269214,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      Query: example:query AND test:true
+                      query: example:query AND test:true
                     type: validate_query
             schema:
               $ref: "#/components/schemas/RulesValidateQueryRequest"
@@ -267556,7 +269344,6 @@ paths:
                     attributes:
                       enabled: true
                       last_version: 1
-                      name: Updated Ruleset
                       rules:
                         - enabled: true
                           name: Add Cost Center Tag
@@ -267591,6 +269378,7 @@ paths:
                               - http_status
                               - status_description
                             table_name: http_status_codes
+                    id: Updated Ruleset
                     type: update_ruleset
             schema:
               $ref: "#/components/schemas/UpdateRulesetRequest"
@@ -271480,6 +273268,10 @@ paths:
       description: |-
         Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
         Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        Set `create_only=true` to atomically create exactly one quota in the caller's organization and reject an
+        existing quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.
+        Repeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`
+        even if the first request succeeded; reconcile the outcome before retrying or importing the quota.
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
@@ -271523,6 +273315,13 @@ paths:
         - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Create one quota without updating an existing quota. Requires exactly one item that specifies `usage_limit` and `enforced`, omits `pending_usage_limit`, and sets `include_descendants=false`. The quota belongs to the caller's organization. An existing quota returns `409` without being modified.
+          in: query
+          name: create_only
           required: false
           schema:
             default: false
@@ -271588,13 +273387,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
+          description: Bad Request. Returned when `create_only=true` is combined with multiple items, `pending_usage_limit`, or `include_descendants=true`, or when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a nonexistent quota reports an error in the item's `error` field. If only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              examples:
+                already_exists:
+                  value:
+                    errors:
+                      - detail: A quota already exists for this namespace and scope. Import it before managing it with Terraform.
+                        meta:
+                          error_code: already_exists
+                          quota_id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        status: "409"
+                        title: Conflict
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. With `create_only=true`, a quota already exists for this namespace and scope in the caller's organization. The existing quota is unchanged. The error's `meta` contains `error_code` set to `already_exists` and `quota_id` set to the existing quota's opaque ID. Import the existing quota before managing it with Terraform.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -276151,6 +277966,10 @@ tags:
       description: Elastic Cloud integration.
       url: https://docs.datadoghq.com/integrations/elastic-cloud/
     name: Elastic Cloud Integration
+  - description: |-
+      Inspect devices reported by the Datadog Agent on end-user laptops, desktops,
+      and mobile devices, including their health, hardware, and connectivity attributes.
+    name: End User Device Monitoring
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
@@ -276506,19 +278325,25 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
+    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
+    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
+    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
+    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
+    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
