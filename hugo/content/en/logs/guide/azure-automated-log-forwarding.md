@@ -173,7 +173,7 @@ The ARM template grants the control plane only the permissions needed to manage 
 #### Permissions used
 
 - [Monitoring Reader][22] role at the **subscription** level for the selected subscriptions.
-   - This is needed to discover resources in the selected subscriptions.
+   - This is needed to list the resources in the selected subscriptions.
 
 - [Monitoring Contributor][10] role at the **subscription** level for the selected subscriptions.
    - This is needed to discover resources with available diagnostic settings and enable log output to storage.
@@ -182,7 +182,7 @@ The ARM template grants the control plane only the permissions needed to manage 
    - This is needed to manage (create and delete) forwarder storage accounts and Container Apps jobs.
 
 - [Reader and Data Access][23] role at the **resource group** level, for the log-forwarding resource groups in the selected subscriptions.
-   - This is needed to point diagnostic settings at the forwarder storage accounts.
+   - This is needed to create diagnostic settings that send logs to the forwarder storage accounts, which requires the ListKeys permission on those storage accounts.
 
 - [Container Apps Jobs Contributor][24] role at the **control plane resource group** level, for updating the control plane Container Apps jobs. Deployments with a Function app control plane use the [Website Contributor][12] role instead.
 
