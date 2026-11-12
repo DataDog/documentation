@@ -41,24 +41,27 @@ Trajectory runs in observe mode, which records results without blocking, or in e
 
 ## Supported coding agents
 
-| Agent              | Guardrails¹     | Supply chain protection²   | Sensitive data redaction³ |
-|--------------------|-----------------|----------------------------|---------------------------|
-| Claude Code        | Full            | Packages                   | Monitoring only           |
-| Codex              | Full            | Packages                   | Monitoring only           |
-| Cursor             | Full            | Packages                   | Monitoring only           |
-| GitHub Copilot CLI | Full            | Packages                   | Monitoring only           |
-| Kiro CLI           | Full⁴           | Packages                   | Monitoring only           |
-| Antigravity CLI    | Monitoring only | Packages (monitoring only) | Monitoring only           |
+AI Guard supports these coding agents:
 
-¹ Guardrails evaluate prompts and tool calls.
+- Claude Code
+- Codex
+- Cursor
+- GitHub Copilot CLI
+- Kiro CLI
 
-² Supply chain protection analyzes package installations with [Supply Chain Firewall][2]. Skill scanning, which checks extensions such as skills, is in development.
-
-³ Sensitive data redaction detects secrets. Blocking secrets is in development.
-
-⁴ Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
+Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
 
 AI Guard for coding agents supports the platforms that Trajectory supports. For agent versions and platform requirements, see [Supported Clients][3] in the Trajectory documentation.
+
+## Supported features
+
+AI Guard provides the following protections for coding agents:
+
+- **Guardrails**: Checks each prompt and tool call for threats, such as prompt injection, credential theft, and destructive commands. AI Guard can block unsafe prompts and tool calls.
+- **Supply chain protection**: Checks each package that a coding agent installs with [Supply Chain Firewall][2], and can block malicious packages. Protection for coding agent extensions, such as skills, is in development.
+- **Sensitive data redaction**: Detects secrets, such as API keys and passwords, in coding agent sessions. This feature is monitoring only: AI Guard reports secrets, but doesn't block or redact them. Blocking secrets is in development.
+
+Guardrails and supply chain protection block actions only after you [turn on blocking](#turn-on-blocking).
 
 ## Prerequisites
 
@@ -121,7 +124,6 @@ Replace the `--clients` value with the client IDs of the coding agents you want 
 | Cursor             | `cursor`  |
 | GitHub Copilot CLI | `copilot` |
 | Kiro CLI           | `kiro`    |
-| Antigravity CLI    | `agy`     |
 
 ## Configuration options {#configuration-options}
 
