@@ -1,5 +1,5 @@
 ---
-title: Control Test Automation with Code Annotations
+title: Test Code Annotations
 description: Protect individual tests from Datadog quarantine, disabling, and automatic retries with code annotations.
 further_reading:
   - link: "/tests/flaky_management/"
@@ -17,20 +17,24 @@ further_reading:
 
 Use code annotations to exclude individual tests from Datadog automation. For example, protect a critical test from quarantine or disabling, or prevent Datadog from retrying a test with side effects.
 
+The supported test code annotations include:
 | Annotation | Effect |
 |------------|--------|
-| Prevent failure suppression | Keeps a test eligible to run despite Datadog disabling and prevents Datadog quarantine from suppressing its failures. It does not prevent retries or turn passing tests into failures. |
+| Prevent failure suppression | Overrides the {{< ui >}}Quarantined{{< /ui >}} and {{< ui >}}Disabled{{< /ui >}} states in [Flaky Test Management][8]. With this annotation, a disabled test still runs, and a quarantined test's failures still fail the build. This annotation doesn't affect retries. |
 | Disable automatic retries | Excludes a test from Datadog [Auto Test Retries][1], [Early Flake Detection][2], and [Attempt to Fix][3] retries. Explicit retries configured in the test framework remain available. |
 
 Apply either annotation independently, or combine them to exclude a test from both behaviors.
 
-## Prerequisites and scope
+## Prerequisites
+
+
+Annotations require [Test Optimization][4] set up with a Datadog SDK for your test framework. They don't work with [JUnit XML report uploads][9], because the SDK applies annotations while tests run, and a JUnit XML upload happens after tests finish.
+
+## Scope of test code annotations
 
 Code annotations are supported for JavaScript/TypeScript and Ruby. Other languages are not supported.
 
-Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads.
-
-Annotations follow these scope rules:
+Test code annotations follow these scope rules:
 
 - An annotation affects only automation that the Datadog library supports for that framework.
 - Annotations apply to individual test declarations. An annotation on a parameterized declaration applies to every generated test case.
@@ -60,8 +64,8 @@ Configure [Test Optimization for JavaScript and TypeScript][10] for the test fra
 
 `dd-trace` provides one helper for each annotation:
 
-- `preventFailureSuppression`: Protects a test from Datadog quarantine and disabling.
-- `noAutoRetry`: Excludes a test from Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries.
+- `preventFailureSuppression`
+- `noAutoRetry`
 
 Cucumber.js uses scenario tags instead of helpers.
 
@@ -91,7 +95,7 @@ test('critical behavior', preventFailureSuppression(noAutoRetry(async ({ page })
 })))
 ```
 
-### Cucumber.js
+### Annotate Cucumber.js scenarios
 
 Use native scenario tags instead of wrapping step definitions:
 
@@ -135,8 +139,8 @@ Use the `datadog-ci` gem version [1.43.0][11] or later. Configure [Test Optimiza
 
 `datadog-ci` provides one annotation for each behavior:
 
-- `datadog_prevent_failure_suppression`: Protects a test from Datadog quarantine and disabling.
-- `datadog_no_auto_retry`: Excludes a test from Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries.
+- `datadog_prevent_failure_suppression`
+- `datadog_no_auto_retry`
 
 ### RSpec
 
@@ -187,9 +191,9 @@ Tags on a `Scenario Outline` apply to every example.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Find annotated test executions
+## Find annotated test runs
 
-Search in the [Test Optimization Explorer][7] with:
+To view runs of tests with annotations, search in the [Test Optimization Explorer][7] with:
 
 - `@test.test_management.prevent_failure_suppression:true`
 - `@test.test_management.no_auto_retry:true`
@@ -208,3 +212,5 @@ Flaky Tests Management tags continue to describe assigned states, even when an a
 [4]: /tests/setup/
 [5]: /tests/test_impact_analysis/
 [7]: /tests/explorer/
+[8]: /tests/flaky_management/#change-a-flaky-tests-state
+[9]: /tests/setup/junit_xml/
