@@ -68416,8 +68416,11 @@ components:
       description: "Trigger a workflow when an incident is declared."
       properties:
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         tagCondition:
           $ref: "#/components/schemas/IncidentCondition"
       type: object
@@ -69116,8 +69119,11 @@ components:
         executionLimit:
           $ref: "#/components/schemas/ExecutionLimit"
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         tagCondition:
           $ref: "#/components/schemas/IncidentCondition"
       type: object
@@ -69435,8 +69441,11 @@ components:
         executionLimit:
           $ref: "#/components/schemas/ExecutionLimit"
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         tagCondition:
           $ref: "#/components/schemas/IncidentCondition"
       type: object
@@ -70677,8 +70686,11 @@ components:
         executionLimit:
           $ref: "#/components/schemas/ExecutionLimit"
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         tagCondition:
           $ref: "#/components/schemas/IncidentCondition"
       type: object
@@ -70728,8 +70740,11 @@ components:
         executionLimit:
           $ref: "#/components/schemas/ExecutionLimit"
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         tagCondition:
           $ref: "#/components/schemas/IncidentCondition"
       type: object
@@ -71713,8 +71728,11 @@ components:
         executionLimit:
           $ref: "#/components/schemas/ExecutionLimit"
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         serialExecution:
           $ref: "#/components/schemas/SerialExecution"
         tagCondition:
@@ -71734,8 +71752,11 @@ components:
       description: "Trigger a workflow on a schedule for an incident."
       properties:
         incidentType:
-          description: "The type of incident that triggers the workflow."
+          deprecated: true
+          description: "Deprecated. Use `incidentTypes` instead. The type of incident that triggers the workflow."
           type: string
+        incidentTypes:
+          $ref: "#/components/schemas/IncidentTriggerIncidentTypes"
         rrule:
           description: "The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string."
           example: "DTSTART:20241220T151700Z\nRRULE:FREQ=MONTHLY"
@@ -72494,6 +72515,21 @@ components:
           description: "Version of the incident manual trigger."
           type: string
       type: object
+    IncidentTriggerIncidentType:
+      description: "An incident type that triggers the workflow."
+      properties:
+        id:
+          description: "The ID of the incident type."
+          example: ""
+          type: string
+      required:
+        - id
+      type: object
+    IncidentTriggerIncidentTypes:
+      description: "The types of incident that trigger the workflow."
+      items:
+        $ref: "#/components/schemas/IncidentTriggerIncidentType"
+      type: array
     IncidentTriggerWrapper:
       description: "Schema for an incident-based trigger."
       properties:
@@ -156903,6 +156939,8 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_observability_catalog_read: Read Data Observability catalog resources and owners.
+            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
