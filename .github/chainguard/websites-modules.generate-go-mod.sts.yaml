@@ -2,7 +2,7 @@
 # (jobs process-clients-for-preview-branches and process-clients-for-main-branch)
 issuer: https://token.actions.githubusercontent.com
 
-subject: "repo:ddoghq/websites-modules:pull_request"
+subject: "repo:ddoghq@230443989/websites-modules@1455615238:pull_request"
 
 permissions:
   contents: write
