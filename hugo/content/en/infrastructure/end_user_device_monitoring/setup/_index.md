@@ -26,7 +26,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 
 - [Live Processes][5]
 - [Logs][6]
-- [Network Path][7]
+- [Network Path][7] on [macOS][21] or [Windows][22]
 - [WiFi/WLAN integration][8]
 - [Windows Crash Detection integration][9]
 - [Windows Event Log][13]
@@ -37,7 +37,7 @@ Once devices start populating, start exploring End User Devices by:
 2. **Asking Bits about device health and trends.** Open [Bits Chat][16] and ask questions about the fleet in natural language. For example, ask which devices are using the most CPU, which laptops have low battery capacity, or which users lost connectivity.
 3. **Querying device data with the Datadog MCP Server.** Connect an AI client, such as Cursor or Claude, to the [Datadog MCP Server][17] to retrieve device metrics, logs, and related telemetry through that client. See [Set up the Datadog MCP Server][18] to get started.
 4. **Reviewing battery health.** Create a dashboard with [battery metrics][20] such as maximum capacity, cycle count, and charge status to identify laptops to replace.
-5. **Tracking latency to destinations.** Set up [Network Path][7] on monitored devices to measure latency from a device to a destination, such as a SaaS application, and find the hop where delay is introduced. Read [Trace network paths from user devices to SaaS applications][19] for examples.
+5. **Tracking latency to destinations.** Set up [Network Path][7] on monitored [macOS][21] or [Windows][22] devices to measure latency from a device to a destination, such as a SaaS application, and find the hop where delay is introduced. On Agent 7.85 or later, basic dynamic tests select up to 20 destinations per hour from observed traffic. Read [Trace network paths from user devices to SaaS applications][19] for examples.
 
 
 ## Further reading
@@ -58,3 +58,5 @@ Once devices start populating, start exploring End User Devices by:
 [18]: /mcp_server/setup/
 [19]: /infrastructure/end_user_device_monitoring/#trace-network-paths-from-user-devices-to-saas-applications
 [20]: /integrations/battery/#data-collected
+[21]: /infrastructure/end_user_device_monitoring/setup/macos/#set-up-network-path
+[22]: /infrastructure/end_user_device_monitoring/setup/windows/#set-up-network-path
