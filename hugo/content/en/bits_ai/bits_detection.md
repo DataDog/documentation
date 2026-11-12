@@ -96,7 +96,11 @@ The Monitor List groups Bits Detection monitors by service. For each service, yo
 
 ### Manage Bits Detection notifications
 
-Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams. Creating or editing a notification rule requires the Monitor Configuration Policy Write permission. For details, see the [Permissions](#permissions) section. To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
+Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams.
+
+Creating or editing a notification rule requires the Monitor Configuration Policy Write permission. For details, see the [Permissions](#permissions) section.
+
+To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
 
 1. In {{< ui >}}Match notifications with specific tags{{< /ui >}}, review the query. Datadog pre-fills the rule with tags for the selected service and Bits Detection-managed monitors. You can filter further.
 1. In {{< ui >}}Choose routing conditions and recipients{{< /ui >}}, select {{< ui >}}Manual Routing{{< /ui >}} or {{< ui >}}Dynamic Routing{{< /ui >}}.
