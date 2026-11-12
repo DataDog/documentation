@@ -13,8 +13,10 @@ logs_error_grouping_context_options:
   - id: server
     default: true
   - id: android
+    label: Android ecosystem
   - id: flutter
   - id: ios
+    label: Apple ecosystem
   - id: react_native
 
 rum_error_grouping_context_options:
@@ -22,8 +24,8 @@ rum_error_grouping_context_options:
   - id: browser
     default: true
   - id: android
-    label: Android Ecosystem
+    label: Android ecosystem
   - id: flutter
   - id: ios
-    label: Apple Ecosystem
+    label: Apple ecosystem
   - id: react_native

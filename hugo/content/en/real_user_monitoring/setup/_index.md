@@ -47,8 +47,8 @@ Select an application type to start collecting RUM data:
 
 {{< card-grid card_width="210" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=browser" src="integrations_logos/javascript_large.svg" alt="Browser" title="Browser" >}}
-  {{< image-card href="/real_user_monitoring/setup/install/?platform=android" src="integrations_logos/android_large.svg" alt="Android" title="Android Ecosystem" >}}
-  {{< image-card href="/real_user_monitoring/setup/install/?platform=ios" src="integrations_logos/ios_large.svg" alt="Apple" title="Apple Ecosystem" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=android" src="integrations_logos/android_large.svg" alt="Android" title="Android ecosystem" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=ios" src="integrations_logos/ios_large.svg" alt="Apple" title="Apple ecosystem" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=flutter" src="integrations_logos/flutter_large.svg" alt="Flutter" title="Flutter" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=react_native" src="integrations_logos/react-native_large.svg" alt="React Native" title="React Native" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" title="Kotlin Multiplatform" >}}
@@ -67,7 +67,7 @@ The Android SDK supports the Android ecosystem, including Android TV, Android Au
 
 The following table shows which RUM capabilities are supported on each platform:
 
-| Feature | Browser | Android Ecosystem | Apple Ecosystem | Flutter | React Native | Kotlin Multiplatform | C++ | Electron | Roku | Unity | .NET MAUI | Notes |
+| Feature | Browser | Android ecosystem | Apple ecosystem | Flutter | React Native | Kotlin Multiplatform | C++ | Electron | Roku | Unity | .NET MAUI | Notes |
 |---------|---------|-------------------|-----------------|---------|--------------|----------------------|-----|----------|------|-------|-----------|-------|
 | Send logs to Datadog | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Distributed tracing of network requests | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
@@ -76,11 +76,11 @@ The following table shows which RUM capabilities are supported on each platform:
 | Error tracking and source mapping | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
-| Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  |  |
+| Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  | **Apple ecosystem**: Not available on tvOS or watchOS. |
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
 | Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | {{< X >}} |  |
 | Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | **Flutter** Session Replay is in Preview. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | - **Apple ecosystem**: iOS only.<br> - **Flutter** Session Replay is in Preview. |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
 
 ## Supported endpoints for SDK domains
