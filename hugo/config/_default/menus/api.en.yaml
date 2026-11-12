@@ -12423,6 +12423,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: ChatGPT Enterprise Integration
+      url: /api/latest/chatgpt-enterprise-integration/
+      identifier: chatgpt-enterprise-integration
+      generated: true
+    - name: Update a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/update-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-update-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/get-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-get-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/delete-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-delete-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/create-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-create-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List ChatGPT Enterprise integration accounts
+      url: /api/latest/chatgpt-enterprise-integration/list-chatgpt-enterprise-integration-accounts/
+      identifier: chatgpt-enterprise-integration-list-chatgpt-enterprise-integration-accounts
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListChatGPTEnterpriseIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication

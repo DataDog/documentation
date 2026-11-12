@@ -3102,6 +3102,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListChatGPTEnterpriseIntegrationAccounts": {
+    "description": "List ChatGPT Enterprise integration accounts.",
+    "summary": "List ChatGPT Enterprise integration accounts"
+  },
+  "CreateChatGPTEnterpriseIntegrationAccount": {
+    "description": "Create a ChatGPT Enterprise integration account.",
+    "summary": "Create a ChatGPT Enterprise integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a ChatGPT Enterprise integration account."
+  },
+  "DeleteChatGPTEnterpriseIntegrationAccount": {
+    "description": "Delete a ChatGPT Enterprise integration account.",
+    "summary": "Delete a ChatGPT Enterprise integration account"
+  },
+  "GetChatGPTEnterpriseIntegrationAccount": {
+    "description": "Get a ChatGPT Enterprise integration account.",
+    "summary": "Get a ChatGPT Enterprise integration account"
+  },
+  "UpdateChatGPTEnterpriseIntegrationAccount": {
+    "description": "Update a ChatGPT Enterprise integration account. Only the fields provided are changed.",
+    "summary": "Update a ChatGPT Enterprise integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a ChatGPT Enterprise integration account."
+  },
   "ListDatabricksIntegrationAccounts": {
     "description": "List Databricks integration accounts.",
     "summary": "List Databricks integration accounts"

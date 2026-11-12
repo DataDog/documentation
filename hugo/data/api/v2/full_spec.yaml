@@ -24662,6 +24662,293 @@ components:
           example: infra_host
           type: string
       type: object
+    ChatGPTEnterpriseAgentConsoleIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Activity, token consumption, credits, and estimated usage costs across ChatGPT Chat, ChatGPT Work, and Codex, shown in Agent Console with breakdowns by product, model, and user where OpenAI provides them. Data already available from OpenAI appears within 1 hour of enabling this dataflow.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `true`; set to `false` to stop collection.
+          example: true
+          type: boolean
+      required:
+        - enabled
+      type: object
+    ChatGPTEnterpriseAgentConsoleIntegrationDataflowResponse:
+      description: >-
+        Activity, token consumption, credits, and estimated usage costs across ChatGPT Chat, ChatGPT Work, and Codex, shown in Agent Console with breakdowns by product, model, and user where OpenAI provides them.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ChatGPTEnterpriseCloudCostDataIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        ChatGPT Enterprise costs from the OpenAI Costs API, so that ChatGPT Enterprise spend can be analyzed in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). These costs are excluded from Cloud Cost Management spend-monitored billing. Reported costs are estimates, not final invoice amounts.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    ChatGPTEnterpriseCloudCostDataIntegrationDataflowResponse:
+      description: >-
+        ChatGPT Enterprise costs from the OpenAI Costs API, so that ChatGPT Enterprise spend can be analyzed in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). These costs are excluded from Cloud Cost Management spend-monitored billing. Reported costs are estimates, not final invoice amounts.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ChatGPTEnterpriseIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the ChatGPT Enterprise integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthRequest"
+    ChatGPTEnterpriseIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the ChatGPT Enterprise integration account.
+      oneOf:
+        - $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthResponse"
+    ChatGPTEnterpriseIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the ChatGPT Enterprise integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthUpdate"
+    ChatGPTEnterpriseIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an admin key created in the OpenAI Admin Console of your ChatGPT Enterprise workspace, not in the API Platform admin-key console, with the **Costs** permission set to **Read**.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with ChatGPT Enterprise.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    ChatGPTEnterpriseIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    ChatGPTEnterpriseIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an admin key created in the OpenAI Admin Console of your ChatGPT Enterprise workspace, not in the API Platform admin-key console, with the **Costs** permission set to **Read**. Only the fields provided are changed; omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with ChatGPT Enterprise.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    ChatGPTEnterpriseIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a ChatGPT Enterprise integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the ChatGPT Enterprise integration account.
+          example: chatgpt-enterprise-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    ChatGPTEnterpriseIntegrationAccountCreateData:
+      description: Data envelope for creating a ChatGPT Enterprise integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ChatGPTEnterpriseIntegrationAccountCreateRequest:
+      description: Request payload to create a ChatGPT Enterprise integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    ChatGPTEnterpriseIntegrationAccountResponse:
+      description: Response payload for a single ChatGPT Enterprise integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    ChatGPTEnterpriseIntegrationAccountResponseAttributes:
+      description: Attributes of a ChatGPT Enterprise integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the ChatGPT Enterprise integration account.
+          example: chatgpt-enterprise-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    ChatGPTEnterpriseIntegrationAccountResponseData:
+      description: Data envelope of a ChatGPT Enterprise integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the ChatGPT Enterprise integration account.
+          example: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    ChatGPTEnterpriseIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the ChatGPT Enterprise integration account.
+      properties:
+        openai_org_id:
+          description: >-
+            OpenAI API Platform organization ID (`org-...`) that the Costs API uses for your Enterprise usage. This is not the ChatGPT workspace UUID or your Datadog organization ID. A value that does not match `^org-[A-Za-z0-9]+$` is rejected with a `422` response.
+          example: org-AbC123dEf456
+          type: string
+      required:
+        - openai_org_id
+      type: object
+    ChatGPTEnterpriseIntegrationAccountSettingsResponse:
+      description: Settings configured on the ChatGPT Enterprise integration account.
+      properties:
+        openai_org_id:
+          description: >-
+            OpenAI API Platform organization ID (`org-...`) that the Costs API uses for your Enterprise usage. This is not the ChatGPT workspace UUID or your Datadog organization ID. A value that does not match `^org-[A-Za-z0-9]+$` is rejected with a `422` response.
+          example: org-AbC123dEf456
+          type: string
+      required:
+        - openai_org_id
+      type: object
+    ChatGPTEnterpriseIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: >-
+        Settings for updating the ChatGPT Enterprise integration account. Only the fields provided are changed.
+      properties:
+        openai_org_id:
+          description: >-
+            OpenAI API Platform organization ID (`org-...`) that the Costs API uses for your Enterprise usage. This is not the ChatGPT workspace UUID or your Datadog organization ID. A value that does not match `^org-[A-Za-z0-9]+$` is rejected with a `422` response.
+          example: org-AbC123dEf456
+          type: string
+      type: object
+    ChatGPTEnterpriseIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a ChatGPT Enterprise integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the ChatGPT Enterprise integration account.
+          example: chatgpt-enterprise-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountSettingsUpdate"
+      type: object
+    ChatGPTEnterpriseIntegrationAccountUpdateData:
+      description: Data envelope for updating a ChatGPT Enterprise integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the ChatGPT Enterprise integration account to update.
+          example: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ChatGPTEnterpriseIntegrationAccountUpdateRequest:
+      description: Request payload to update a ChatGPT Enterprise integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    ChatGPTEnterpriseIntegrationAccountsResponse:
+      description: Response payload for a list of ChatGPT Enterprise integration accounts.
+      properties:
+        data:
+          description: List of ChatGPT Enterprise integration accounts.
+          items:
+            $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    ChatGPTEnterpriseIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from ChatGPT Enterprise, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow requires a ChatGPT Enterprise workspace with access to the OpenAI Costs API; a dataflow enabled without it is stored but collects no data.
+      properties:
+        chatgpt-enterprise-agent-console:
+          $ref: "#/components/schemas/ChatGPTEnterpriseAgentConsoleIntegrationDataflowRequest"
+        chatgpt-enterprise-cloud-cost-data:
+          $ref: "#/components/schemas/ChatGPTEnterpriseCloudCostDataIntegrationDataflowRequest"
+      type: object
+    ChatGPTEnterpriseIntegrationDataflowsResponse:
+      description: Data Datadog collects from ChatGPT Enterprise, keyed by dataflow id.
+      properties:
+        chatgpt-enterprise-agent-console:
+          $ref: "#/components/schemas/ChatGPTEnterpriseAgentConsoleIntegrationDataflowResponse"
+        chatgpt-enterprise-cloud-cost-data:
+          $ref: "#/components/schemas/ChatGPTEnterpriseCloudCostDataIntegrationDataflowResponse"
+      type: object
     CircleCIAPIKey:
       description: The definition of the `CircleCIAPIKey` object.
       properties:
@@ -200588,6 +200875,265 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/chatgpt-enterprise/accounts:
+    get:
+      description: List ChatGPT Enterprise integration accounts.
+      operationId: ListChatGPTEnterpriseIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            chatgpt-enterprise-agent-console:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            chatgpt-enterprise-cloud-cost-data:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: chatgpt-enterprise-acme
+                          settings:
+                            openai_org_id: org-AbC123dEf456
+                        id: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ChatGPT Enterprise integration accounts
+      tags:
+        - ChatGPT Enterprise Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a ChatGPT Enterprise integration account.
+      operationId: CreateChatGPTEnterpriseIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          chatgpt-enterprise-agent-console:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          chatgpt-enterprise-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: chatgpt-enterprise-acme
+                        settings:
+                          openai_org_id: org-AbC123dEf456
+                      id: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a ChatGPT Enterprise integration account
+      tags:
+        - ChatGPT Enterprise Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/chatgpt-enterprise/accounts/{account_id}:
+    delete:
+      description: Delete a ChatGPT Enterprise integration account.
+      operationId: DeleteChatGPTEnterpriseIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a ChatGPT Enterprise integration account
+      tags:
+        - ChatGPT Enterprise Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a ChatGPT Enterprise integration account.
+      operationId: GetChatGPTEnterpriseIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          chatgpt-enterprise-agent-console:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          chatgpt-enterprise-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: chatgpt-enterprise-acme
+                        settings:
+                          openai_org_id: org-AbC123dEf456
+                      id: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a ChatGPT Enterprise integration account
+      tags:
+        - ChatGPT Enterprise Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a ChatGPT Enterprise integration account. Only the fields provided are changed.
+      operationId: UpdateChatGPTEnterpriseIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          chatgpt-enterprise-agent-console:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          chatgpt-enterprise-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: chatgpt-enterprise-acme
+                        settings:
+                          openai_org_id: org-AbC123dEf456
+                      id: 3e8a1f6b-9c2d-4b7e-8a5f-6d1c4e9b2a03
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a ChatGPT Enterprise integration account
+      tags:
+        - ChatGPT Enterprise Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/databricks/accounts:
     get:
       description: List Databricks integration accounts.
@@ -277851,6 +278397,15 @@ tags:
   - description: >-
       View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
     name: Change Management
+  - description: |-
+      Manage your Datadog ChatGPT Enterprise integration accounts and account resources
+      directly through the Datadog API. See the
+      [ChatGPT Enterprise integration page](https://docs.datadoghq.com/integrations/chatgpt-enterprise/) for
+      more information.
+    externalDocs:
+      description: ChatGPT Enterprise integration.
+      url: https://docs.datadoghq.com/integrations/chatgpt-enterprise/
+    name: ChatGPT Enterprise Integration
   - description: |-
       Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
     name: Cloud Authentication
