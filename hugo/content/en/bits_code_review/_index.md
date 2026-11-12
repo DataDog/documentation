@@ -58,6 +58,20 @@ In the GitHub integration's feature list, Bits Code Review relies on these permi
 
 To request a review of a single pull request, comment `@datadog review` on the pull request. Bits Code Review reviews the pull request and posts its findings as comments.
 
+## Give custom instructions
+
+Bits Code Review uses the same [custom instructions][7] as Bits Code. It reads the following files from the repository root:
+
+- `AGENTS.md`, `agents.md`, or `agent.md`
+- `CLAUDE.md` or `claude.md`
+- `.cursorrules`
+- `.windsurfrules`
+- `.github/copilot-instructions.md`
+
+Use these files to describe team or repository review conventions, such as architecture rules, patterns to flag, or areas to ignore. Custom instructions extend the default review: Bits Code Review still reports its baseline findings, plus whatever your instructions add.
+
+There is no file dedicated to Bits Code Review. Other coding agents read the same files, so your instructions apply to them too. To scope instructions to reviews only, add a line to `AGENTS.md` that points review agents to a separate file, for example: `Review agents should also read reviewers.md.`
+
 ## Give feedback on reviews
 
 React to a Bits Code Review comment with 👍 or 👎, reply to it, or apply its suggestion. After the pull request merges, Bits Code Review reads this feedback from GitHub to evaluate the quality of its reviews. It does not post anything to your pull request during this evaluation.
@@ -72,3 +86,4 @@ React to a Bits Code Review comment with 👍 or 👎, reply to it, or apply its
 [4]: /real_user_monitoring/
 [5]: /tracing/live_debugger/
 [6]: /integrations/github/
+[7]: /bits_ai/bits_code/setup/#configure-custom-instructions
