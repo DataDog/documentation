@@ -24,15 +24,15 @@ The two primary sources for exploring usage as metrics at Datadog are finalized 
 
 ## Finalized Usage Metrics
 
-<!-- TODO: Add the image from the source doc that appears under the "Finalized Usage Metrics" heading. -->
+{{< img src="account_management/billing/usage_metrics/finalized-usage-query.png" alt="Query using the Usage source for Indexed Logs with an hourly sum rollup" style="width:100%;" >}}
 
-Processed usage that reflects the values you are billed on. Use finalized usage metrics in dashboards and usage monitors to view your usage trends over time and to keep your usage on track with what you expect. May have 2-20 hours of latency depending on the product.
+Processed usage that reflects the values you are billed on. Use finalized usage metrics in dashboards and usage monitors to view your usage trends over time and to keep your usage on track with what you expect. May have 4-24 hours of latency depending on the product.
 
 [Finalized Usage Metrics][1]
 
 ## Estimated Usage Metrics
 
-<!-- TODO: Add the image from the source doc that appears under the "Estimated Usage Metrics" heading. -->
+{{< img src="account_management/billing/usage_metrics/estimated-usage-query.png" alt="Metrics query for datadog.estimated_usage.hosts summed across everything" style="width:100%;" >}}
 
 Near real-time estimated usage with a margin of error (typically 5-20% off from billed usage). Use EUMs to quickly view how your changes impact your usage and to catch unexpected spikes early.
 

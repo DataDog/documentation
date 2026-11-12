@@ -28,23 +28,23 @@ Most places you'd use metrics (explorer, dashboards, notebooks, monitors), you c
 
    Click **Metrics** where the query is and select **Usage** instead, to select it as the source for your data.
 
-   <!-- TODO: Add the screenshot from the source doc for step 2 (switching the query source from Metrics to Usage). -->
+   {{< img src="account_management/billing/usage_metrics/select-usage-source.png" alt="Query source dropdown on a graph editor with Usage selected instead of Metrics" style="width:100%;" >}}
 
 3. View your usage.
 
    Select the product you'd like to view usage for, and filter or group by product-specific and Usage Attribution tags
 
-   <!-- TODO: Add the screenshot from the source doc for step 3 (selecting a product and filtering or grouping by tags). -->
+   {{< img src="account_management/billing/usage_metrics/filter-group-usage.png" alt="Usage query for Infra Hosts filtered by child_org_name:self and grouped by env, with an hourly sum rollup" style="width:100%;" >}}
 
 ## Monitors
 
 Using your finalized usage metrics, you can also create custom monitors to ensure your usage stays consistent with your expectations. To create a usage monitor, select the Usage option on the New Monitor page:
 
-<!-- TODO: Add the screenshot from the source doc of the Usage option on the New Monitor page. -->
+{{< img src="account_management/billing/usage_metrics/new-monitor-usage-option.png" alt="Usage option on the New Monitor page" style="width:20%;" >}}
 
 Then you can create Usage Threshold monitors or Usage Change monitors, as depicted below:
 
-<!-- TODO: Add the screenshot from the source doc of the Usage Threshold and Usage Change monitor options. -->
+{{< img src="account_management/billing/usage_metrics/usage-monitor-types.png" alt="Usage monitor setup with the Usage Threshold and Usage Change monitor types, the usage query, and alert conditions" style="width:80%;" >}}
 
 ## Supported Products
 
@@ -57,46 +57,46 @@ Expected latency buckets:
 | --- | --- |
 | Agent Observability | Same Day |
 | AI Credits | Same Day |
-| APM | Next Day |
 | App Builder Published Apps | Same Day |
 | Audit Trail | Same Day |
-| CI Pipeline Visibility | Next Day |
-| Containers | Next Day |
 | Custom Events | Same Day |
-| Custom Metrics | Next Day |
 | DBM Hosts | Same Day |
-| Incident Response | Next Day |
-| Error Tracking | Next Day |
-| Event Management | Next Day |
 | Fargate APM | Same Day |
-| Flex Logs Compute | Next Day |
-| Flex Logs Stored | Next Day |
 | Incident Management | Same Day |
-| Indexed Logs | Next Day |
-| Indexed Points | Next Day |
-| Indexed Spans | Next Day |
-| Infra Hosts | Next Day |
-| Infra vCPU | Next Day |
-| Ingest Points | Next Day |
 | Ingested Logs | Same Day |
-| Ingested Points | Next Day |
-| Ingested Spans | Next Day |
 | Logs Forwarding | Same Day |
-| Metric Names | Next Day |
 | Mobile App Testing and Monitoring | Same Day |
 | NDM Wireless Access Points | Same Day |
 | NetFlow Records | Same Day |
 | Network Devices | Same Day |
 | Parallel Testing Slots | Same Day |
 | Product Analytics | Same Day |
-| RUM | Next Day |
-| Session Replay | Next Day |
-| Static Code Analysis (SAST) | Next Day |
-| Static Software Composition Analysis (SCA) | Next Day |
 | Synthetics API Test Runs | Same Day |
 | Synthetics Browser Test Runs | Same Day |
 | Test Optimization | Same Day |
 | Workflow Executions | Same Day |
+| APM | Next Day |
+| CI Pipeline Visibility | Next Day |
+| Containers | Next Day |
+| Custom Metrics | Next Day |
+| Error Tracking | Next Day |
+| Event Management | Next Day |
+| Flex Logs Compute | Next Day |
+| Flex Logs Stored | Next Day |
+| Incident Response | Next Day |
+| Indexed Logs | Next Day |
+| Indexed Points | Next Day |
+| Indexed Spans | Next Day |
+| Infra Hosts | Next Day |
+| Infra vCPU | Next Day |
+| Ingest Points | Next Day |
+| Ingested Points | Next Day |
+| Ingested Spans | Next Day |
+| Metric Names | Next Day |
+| RUM | Next Day |
+| Session Replay | Next Day |
+| Static Code Analysis (SAST) | Next Day |
+| Static Software Composition Analysis (SCA) | Next Day |
 
 ## Frequently Asked Questions
 
