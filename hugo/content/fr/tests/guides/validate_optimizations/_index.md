@@ -17,33 +17,131 @@ further_reading:
   text: En savoir plus sur la Gestion des tests irréguliers
 title: Validez les optimisations.
 ---
-Cette page explique comment vérifier que les optimisations offertes par Test Optimization fonctionnent comme prévu. Le guide suppose que [Test Optimization][12] fonctionne déjà pour le dépôt en cours de validation, et il présente les étapes pour valider les optimisations pour un **dépôt unique**.
+Cette page explique comment vérifier que les optimisations offertes par [Test Optimization][12] fonctionnent comme prévu pour un **dépôt unique**. Utilisez la validation locale pour vérifier la compatibilité des bibliothèques et les fonctionnalités prises en charge, ou validez le workflow complet dans Datadog après avoir configuré Test Optimization.
 
-<div class="alert alert-warning">Exécutez ces validations uniquement dans une branche de fonctionnalité et ne les fusionnez pas dans votre branche par défaut ou principale.</div>
+<div class="alert alert-warning">Exécutez ces validations dans une branche de fonctionnalité. Ne fusionnez pas les tests temporaires ou la configuration de service dédiée de l'Option 2 dans votre branche par défaut ou principale.</div>
 
 ## Prérequis {#prerequisites}
 
 Ces optimisations nécessitent une [bibliothèque native prise en charge][12]. Les téléchargements de fichiers XML JUnit ne sont pas pris en charge.
 
-## Option 1 : Valider localement avec un agent de codage {#option-1-validate-locally-with-a-coding-agent}
+## Option 1 : Validez localement avec ddtest {#option-1-validate-locally-with-ddtest}
 
 {{< callout url="#" btn_hidden="true" header="Rejoignez la Preview !" >}}
-  La validation par agent de codage local est en préversion et ne prend en charge que les projets JavaScript et TypeScript qui utilisent le package npm [`dd-trace`][15].
-  
-  [15]: https://www.npmjs.com/package/dd-trace
+  La validation locale avec ddtest est en préversion.
 {{< /callout >}}
 
-À l'aide de l'invite fournie ci-dessous, demandez à un agent de codage local (un assistant IA capable d'inspecter et d'exécuter des commandes dans votre dépôt local) d'inspecter le package `dd-trace` installé et d'exécuter son runbook de validation Test Optimization. Cette méthode vérifie la compatibilité de la bibliothèque locale et la configuration CI. Elle vérifie également Early Flake Detection, Auto Test Retries et Flaky Test Management sans modifier les paramètres Datadog ni envoyer de résultats de validation à Datadog.
+Utilisez [ddtest][15] pour vérifier Test Optimization localement. Il compare les résultats des tests avec et sans instrumentation. Il utilise ensuite des tests temporaires pour vérifier les fonctionnalités prises en charge, notamment Early Flake Detection, Auto Test Retries et Test Management. La validation utilise un point de réception local et ne nécessite ni compte Datadog, ni clé d'API, ni Datadog Agent. Elle n'envoie pas les résultats de validation à Datadog et ne modifie pas les paramètres Datadog.
 
-Le runbook se trouve à `ci/runbook.md` par rapport à la racine du package `dd-trace` installé.
+Datadog recommande d'utiliser un agent de codage local pour la mise en place et la validation locale. L'agent suit les instructions de ddtest pour configurer l'instrumentation, exécuter la validation, résoudre les blocages et expliquer les résultats. Pour exécuter les commandes vous-même, utilisez les [instructions manuelles](#run-ddtest-yourself).
 
-Transmettez cette invite à votre agent de codage local :
+La validation locale prend en charge ces langages et frameworks :
 
-```text
-Locate the installed dd-trace package, then read and execute its ci/runbook.md.
+| Langage | Frameworks de test |
+| --- | --- |
+| JavaScript et TypeScript | Jest, Vitest, Mocha, Playwright, Cypress, Cucumber, WebdriverIO |
+| Python | pytest |
+| Ruby | RSpec, Minitest |
+| Java (Maven ou Gradle) | JUnit 4, JUnit 5, TestNG, Spock, Cucumber JVM, Karate, ScalaTest, MUnit |
+
+Consultez la [documentation ddtest][15] pour connaître les exigences d'exécution, la configuration spécifique au framework et les limitations des fonctionnalités.
+
+### Installez ddtest {#install-ddtest}
+
+La validation locale nécessite [ddtest v1.16.0][18] ou une version ultérieure. Si ddtest est déjà installé, vérifiez sa version avec `ddtest --version` et relancez l'installateur pour effectuer la mise à niveau.
+
+Installez la dernière version sur macOS ou Linux :
+
+```bash
+curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
-Cette méthode d'agent de codage est un check local qui n'exerce pas l'intégralité du workflow Datadog. Pour valider les workflows complets de [prévention](#step-2-prevention), d'[atténuation](#step-3-mitigation) et de [remédiation](#step-4-remediation), ou pour valider un langage autre que JavaScript ou TypeScript, utilisez l'[Option 2, ci-dessous](#option-2-validate-the-full-workflow).
+Sur Windows, exécutez l'installateur dans PowerShell :
+
+```powershell
+irm https://github.com/DataDog/ddtest/releases/latest/download/install.ps1 | iex
+```
+
+Les installateurs vérifient le téléchargement par rapport aux sommes de contrôle de la version. Consultez [l'installation de ddtest][17] pour la sélection de la version et les répertoires d'installation personnalisés.
+
+### Utilisez un agent de codage local (recommandé) {#use-a-local-coding-agent-recommended}
+
+Ouvrez une copie locale Git du dépôt dans un agent de codage capable d'inspecter les fichiers et d'exécuter des commandes. Après avoir installé ddtest, fournissez cette invite :
+
+```text
+Use ddtest to onboard this repository to Test Optimization.
+```
+
+Examinez les modifications proposées et fournissez tous les détails d'environnement demandés par l'agent. L'agent exécute la validation locale et rapporte les résultats, y compris les liens vers les rapports HTML et toutes les vérifications ayant échoué ou non validées.
+
+### Exécutez ddtest vous-même {#run-ddtest-yourself}
+
+#### Étape 1 : Inspectez la configuration des tests {#step-1-inspect-the-test-setup}
+
+Commencez à partir d'une copie locale Git du dépôt. Installez les dépendances de test du projet et préparez tous les navigateurs, bases de données ou autres services requis par les tests. Exécutez ensuite :
+
+```bash
+ddtest onboard
+```
+
+La commande détecte le langage, le framework de test et le fournisseur CI, puis renvoie l'action de configuration ou de validation suivante.
+
+Pour les configurations JavaScript prises en charge, prévisualisez les modifications exactes de configuration avec `--apply`. Par exemple :
+
+```bash
+ddtest onboard --framework jest --apply
+```
+
+Après avoir examiné les modifications, ajoutez `--yes` pour les appliquer et exécutez la validation locale :
+
+```bash
+ddtest onboard --framework jest --apply --yes
+```
+
+Si la validation réussit, passez à [Examiner les résultats](#step-3-review-the-results).
+
+Pour les configurations sans édition automatique, suivez les instructions de configuration renvoyées par `ddtest onboard`. Pour afficher des instructions de configuration manuelle détaillées, exécutez `ddtest onboard --instructions`.
+
+Si le dépôt contient plusieurs frameworks ou fournisseurs CI, sélectionnez-en un explicitement. Par exemple :
+
+```bash
+ddtest onboard --framework jest --ci-provider github
+```
+
+Utilisez la même sélection pour les commandes de validation ultérieures. Exécutez la validation séparément pour chaque framework et fournisseur CI que vous souhaitez vérifier.
+
+#### Étape 2 : Exécutez la validation locale {#step-2-run-local-validation}
+
+Pour inspecter toutes les configurations de test CI découvertes sans installer de SDK Datadog ni exécuter de tests, exécutez :
+
+```bash
+ddtest testdrive --all --check-only
+```
+
+Les vérifications de configuration seules ne valident pas le comportement des fonctionnalités. Exécutez la validation locale complète :
+
+```bash
+ddtest testdrive --all
+```
+
+Examinez l'aperçu des commandes et des modifications, puis confirmez l'exécution. Dans un terminal non interactif, ajoutez `--yes` après avoir examiné l'aperçu.
+
+Pour valider une commande de test spécifique, utilisez `--command` au lieu de `--all`. Par exemple :
+
+```bash
+ddtest testdrive --framework jest --command "npm test"
+```
+
+Une vérification réussie d'une commande ne valide pas les autres configurations CI. Résolvez toute dépendance manquante, configuration non prise en charge ou autre blocage signalé par ddtest, puis relancez la validation.
+
+#### Étape 3 : Examinez les résultats {#step-3-review-the-results}
+
+Ouvrez le rapport HTML lié dans la sortie de la commande, généralement `.testoptimization/report.html`. Le `.testoptimization/testdrive.json` correspondant contient des résultats lisibles par machine. Examinez la comparaison de référence, les vérifications des fonctionnalités et toutes les configurations qui restent non validées. La prise en charge des fonctionnalités varie selon le framework et le SDK Datadog ; les fonctionnalités non prises en charge sont listées dans le rapport.
+
+Conservez les rapports pour examen et relancez une validation complète après avoir modifié les fichiers sources, les dépendances ou les runtimes. Ajoutez `.testoptimization/` à `.gitignore` pour exclure les rapports locaux des commits.
+
+La validation locale vérifie le comportement de la bibliothèque et la configuration CI. Pour valider le traitement Datadog, les PR Gates et les workflows complets de [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation) et [Remediation](#step-4-remediation), ou pour valider un langage ou un framework non pris en charge, utilisez [Option 2](#option-2-validate-the-full-workflow).
 
 ## Option 2 : Valider le workflow complet {#option-2-validate-the-full-workflow}
 
@@ -573,4 +671,7 @@ Test Optimization aide à remédier aux flaky tests grâce à Attempt to Fix et 
 [12]: /fr/tests/
 [13]: /fr/tests/test_impact_analysis/
 [14]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20fix_in_progress%3Atrue
+[15]: https://github.com/DataDog/ddtest#try-test-optimization-locally
 [16]: /fr/tests/flaky_management/#bits-ai-powered-flaky-test-fixes
+[17]: https://github.com/DataDog/ddtest#installation
+[18]: https://github.com/DataDog/ddtest/releases/tag/v1.16.0

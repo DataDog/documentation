@@ -17,7 +17,7 @@ further_reading:
     défaut de Session Replay
 title: Sécurité des données Real User Monitoring (RUM)
 ---
-<div class="alert alert-info">Cette page concerne la sécurité des données envoyées à Datadog. Si vous recherchez des produits et fonctionnalités de sécurité cloud et applicative, consultez la section <a href="/security/" target="_blank">Sécurité</a>.</div>
+<div class="alert alert-info">Cette page concerne la sécurité des données envoyées à Datadog. Si vous recherchez des produits et fonctionnalités de sécurité cloud et applicative, consultez la section <a href="/security/" target="_blank">Security</a>.</div>
 
 ## Présentation {#overview}
 Real User Monitoring (RUM) fournit des contrôles pour mettre en œuvre les exigences de confidentialité et garantir que les organisations de toute taille n'exposent pas d'informations sensibles ou personnelles. Les données sont stockées sur des instances cloud gérées par Datadog et chiffrées au repos. Les comportements par défaut et les options configurables décrits sur cette page sont conçus pour protéger la confidentialité des utilisateurs finaux et empêcher la collecte d'informations organisationnelles sensibles. En savoir plus sur [la confidentialité chez Datadog][1].
@@ -111,6 +111,8 @@ Vous disposez de plusieurs options pour supprimer les informations personnelleme
 #### Masquer les noms d'action {#mask-action-names}
 Par défaut, si vous souhaitez masquer tous les noms d'action, vous pouvez utiliser l'option `enablePrivacyForActionName` conjointement avec le paramètre de confidentialité `mask`. Cette opération remplace automatiquement tous les noms d'action non remplacés par l'espace réservé `Masked Element`. Ce paramètre est également conçu pour être compatible avec les [HTML override attributes][16] existants.
 
+Pour garder les noms d'actions utiles visibles tout en masquant les données sensibles, utilisez le [plugin de confidentialité][22]. Le plugin génère une liste d'autorisation de chaînes statiques sûres au moment de la compilation. Avec le niveau de confidentialité `mask-unless-allowlisted`, le SDK affiche uniquement le texte qui correspond à la liste d'autorisation.
+
 #### Données non structurées {#unstructured-data}
 Les PII incluses par inadvertance dans des données non structurées, comme le nom d'une personne dans une zone de texte, ne peuvent être supprimées que par une demande de suppression de données pour une période donnée.
 
@@ -159,3 +161,4 @@ Consultez les [options de confidentialité spécifiques à Session Replay][19]. 
 [19]: /fr/session_replay/privacy_options?platform=browser
 [20]: https://www.datadoghq.com/private-beta/product-analytics/
 [21]: /fr/security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
+[22]: /fr/real_user_monitoring/application_monitoring/browser/build_plugins/privacy/

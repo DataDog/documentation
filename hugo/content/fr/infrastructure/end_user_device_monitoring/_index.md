@@ -70,6 +70,10 @@ Avec le traçage de chemin réseau, vous pouvez :
 [6]: /fr/agent/fleet_automation/
 [7]: /fr/logs/
 
+## Configurez End User Device Monitoring {#set-up-end-user-device-monitoring}
+
+Après avoir reçu la confirmation de votre accès à Preview, consultez [Configurez End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) pour connaître les plateformes prises en charge et les instructions d’installation propres à chaque appareil.
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
