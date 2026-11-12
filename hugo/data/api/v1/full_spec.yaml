@@ -10306,6 +10306,7 @@ components:
         - database_queries
         - network
         - network_path
+        - llm_observability
       example: "rum"
       type: string
       x-enum-varnames:
@@ -10319,6 +10320,7 @@ components:
         - DATABASE_QUERIES
         - NETWORK
         - NETWORK_PATH
+        - LLM_OBSERVABILITY
     MonitorFormulaAndFunctionMetricQueryDataSource:
       description: Data source for metrics queries.
       enum:
