@@ -38,7 +38,7 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 
 | Method                                                        | Use case                                                                                                                                       |
 |---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits AI in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs.           |
+| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits Security Assistant in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs. |
 | [MCP Server tool][1]                                          | Translate a single rule from an AI agent with the `propose_datadog_security_detection_rule` tool. Returns a proposed rule without creating it. |
 | [Rule proposal API][2]                                        | Translate a single rule with an API call. Returns a proposed rule without creating it.                                                         |
 
@@ -64,11 +64,14 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 ## Translate a single rule in the rule editor
 
 1. Open the [rule editor][7].
-2. In the chat, paste the source rule and describe what you want.
-3. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
-4. Save the rule. Saved rules start disabled, so they don't generate signals until you [enable them][11].
+2. Click {{< ui >}}Bits Security Assistant{{< /ui >}} to open the chat.
+3. Paste the source rule and describe what you want.
+4. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
+5. Check the {{< ui >}}Enabled{{< /ui >}} toggle at the top of the rule editor, then save the rule. An enabled rule starts generating signals as soon as you save it.
 
-For example, this step 2 prompt changes the rule's threshold and time window:
+{{< img src="security/cloud_siem/migrate_detection_rules/rule_editor_chat.png" alt="The Cloud SIEM rule editor with the Bits Security Assistant chat open. The chat shows a Splunk rule pasted as a prompt and the assistant's explanation, and the editor shows the generated query and condition." style="width:100%;" >}}
+
+For example, this step 3 prompt changes the rule's threshold and time window:
 
 ```text
 Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes instead of 2+ IPs in 5 minutes:
