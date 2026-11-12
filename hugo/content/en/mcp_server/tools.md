@@ -2220,7 +2220,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update or delete pipelines, use [Pup][101] (`pup obs-pipelines update` or `pup obs-pipelines delete`) or the [Observability Pipelines API][88].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3879,6 +3879,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
+[101]: /cli/
 
 ## Further reading
 
