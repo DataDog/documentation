@@ -453,7 +453,7 @@ To add global attributes, track users and accounts, or modify and drop events, s
 [16]: https://reactnative.dev/docs/global-requestIdleCallback
 [17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
+[20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#step-5---add-app-hang-reporting
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration

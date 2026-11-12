@@ -16,11 +16,11 @@ RUM computes metrics over 100% of your ingested traffic, even when you retain on
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/" >}}
-    <h3>Out-of-the-box metrics</h3>
+    <h3>Out-of-the-Box Metrics</h3>
     Use the metrics Datadog automatically computes for every RUM application.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/measure_health_with_metrics/create_custom_metrics/" >}}
-    <h3>Create custom metrics</h3>
+    <h3>Create Custom Metrics</h3>
     Create custom metrics from your RUM events.
     {{< /nextlink >}}
 {{< /whatsnext >}}

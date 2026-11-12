@@ -7,7 +7,7 @@ This page lists integrated libraries you can use for React Native applications.
 
 ## React Navigation
 
-### Setup
+### React Navigation setup
 
 **Note**: This package is an integration for [`react-navigation`][1] library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
@@ -23,7 +23,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-navigation
 ```
 
-### Track view navigation
+### Track view navigation with React Navigation
 To track changes in navigation as RUM Views, set the `onReady` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
 
 Returning `null` in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
@@ -57,7 +57,7 @@ function App() {
 
 **Note**: This package is an integration for `react-native-navigation` library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
-### Setup
+### React Native Navigation setup
 
 To install with npm, run:
 
@@ -71,7 +71,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native-navigation
 ```
 
-### Track view navigation
+### Track view navigation with React Native Navigation
 
 To start tracking your navigation events, add the following lines before setting up your navigation. You can use the optional `ViewNamePredicate` callback to replace the automatically detected View name with something more relevant to your use case, based on the [`ComponentDidAppearEvent`][2].
 
@@ -92,7 +92,7 @@ DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 
 **Note**: This package is an integration for the `@apollo/client` library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
-### Setup
+### Apollo Client setup
 
 To install with npm, run:
 

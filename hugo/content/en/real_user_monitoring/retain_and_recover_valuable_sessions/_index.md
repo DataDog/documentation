@@ -16,15 +16,15 @@ RUM without Limits lets you control which sessions are retained out of your full
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/" >}}
-    <h3>Configure retention filters</h3>
+    <h3>Configure Retention Filters</h3>
     Choose which sessions Datadog retains.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/" >}}
-    <h3>Control volumes with quotas</h3>
+    <h3>Control Volumes with Quotas</h3>
     Cap the number of sessions retained per day.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/retain_and_recover_valuable_sessions/recover_sessions_from_managed_archives/" >}}
-    <h3>Recover sessions from Managed Archives</h3>
+    <h3>Recover Sessions from Managed Archive</h3>
     Store all ingested sessions and recover specific sessions when needed.
     {{< /nextlink >}}
 {{< /whatsnext >}}

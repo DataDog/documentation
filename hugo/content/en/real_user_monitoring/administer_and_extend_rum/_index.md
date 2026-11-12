@@ -1,6 +1,6 @@
 ---
 title: Administer and Extend RUM
-description: "Manage RUM dashboards, monitors, permissions, and correlations with other telemetry."
+description: "Manage RUM dashboards, monitors, permissions, correlations with other telemetry, and export pipelines."
 aliases:
   - /real_user_monitoring/platform/
 further_reading:
@@ -29,6 +29,10 @@ After you start collecting data for your RUM applications, use these capabilitie
     {{< nextlink href="/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/" >}}
     <h3>Correlate RUM with Other Telemetry</h3>
     Connect RUM events with Agent Observability, logs, and Synthetic tests.
+    {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/rum_export/" >}}
+    <h3>Export Pipelines</h3>
+    Forward your RUM and Product Analytics events to your own cloud storage for warehouse loading or long-term retention.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -13,7 +13,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
   - /real_user_monitoring/mobile_and_tv_monitoring/ios/application_launch_monitoring/
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

@@ -5,7 +5,7 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

@@ -91,7 +91,7 @@ further_reading:
   tag: "Documentation"
   text: "Monitor hybrid React Native applications"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 <!-- Browser -->
 

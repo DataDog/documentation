@@ -29,7 +29,7 @@ further_reading:
     tag: "Documentation"
     text: "Explore the performance timeseries panel"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

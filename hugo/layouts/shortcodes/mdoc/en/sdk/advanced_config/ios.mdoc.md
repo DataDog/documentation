@@ -146,7 +146,7 @@ To add custom attributes, user information, account information, and other conte
 [4]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#automatically-track-user-interactions
 [5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#automatically-track-views
 [6]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios#exclude-urls-from-rum-resource-tracking
-[7]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
+[7]: /error_tracking/frontend/mobile/ios/#step-5---add-app-hang-reporting
 [8]: https://www.ntppool.org/en/
 [9]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
 [10]: /real_user_monitoring/remote_configuration/

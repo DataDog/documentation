@@ -51,11 +51,11 @@ A RUM application represents a single web or mobile application, or one environm
 
 A session groups the activity of a single user on your web or mobile application. A session includes all related navigation events (views), user actions, network requests (resources), crashes and errors, and other events and signals that collectively produce a faithful representation of the user experience.
 
-A session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically. For other limits that apply to sessions, see [Technical limitations](#technical-limitations).
+A session can last up to 4 hours and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically. For other limits that apply to sessions, see [Technical limitations](#technical-limitations).
 
 ## View
 
-A view represents a web page, mobile screen, or hybrid web view that a user visits. Views track metrics like load time, [Core Web Vitals or Mobile Vitals](#vitals), and the actions, resources, and errors that occur while the view is active.
+A view represents a web page, mobile screen, or hybrid web view that a user visits. Views track metrics such as load time, [Core Web Vitals or Mobile Vitals](#vitals), and the actions, resources, and errors that occur while the view is active.
 
 To learn more, see [Track Navigation][4].
 

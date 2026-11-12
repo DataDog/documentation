@@ -4,6 +4,7 @@ description: "Track user activity across web and native components in hybrid mob
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
+    label: "SDK"
 aliases:
 - /real_user_monitoring/application_monitoring/web_view_tracking/
 - /real_user_monitoring/application_monitoring/android/web_view_tracking/
@@ -54,7 +55,7 @@ further_reading:
   tag: "Blog"
   text: "Monitor your hybrid mobile applications with Datadog"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

@@ -470,7 +470,7 @@ To request support for a web server that is not listed here, [fill out this form
 [8]: /integrations/content_security_policy_logs/
 [9]: /agentic_onboarding/setup/
 [10]: /real_user_monitoring/setup/install/?platform=browser
-[11]: /private-beta/rum-sdk-auto-injection/
+[11]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
 [12]: /real_user_monitoring/remote_configuration/
 [13]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
 [14]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser

@@ -11,7 +11,7 @@ aliases:
   - /real_user_monitoring/application_monitoring/ios/sdk_performance_impact/
   - /real_user_monitoring/mobile_and_tv_monitoring/ios/sdk_performance_impact
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

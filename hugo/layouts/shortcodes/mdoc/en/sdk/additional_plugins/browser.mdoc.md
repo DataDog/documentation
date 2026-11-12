@@ -159,7 +159,7 @@ The Source maps build plugin automatically uploads JavaScript source maps to Dat
 
 The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata. It can associate source maps with events by debug ID or by service and version.
 
-#### Prerequisites
+#### Source maps prerequisites
 
 - A Datadog API key, set with `auth.apiKey` or the `DATADOG_API_KEY` environment variable.
 - Source maps enabled in your bundler configuration. The plugin uploads source maps but does not generate them. See [Upload JavaScript Source Maps][4] for bundler-specific source map generation setup.
@@ -167,7 +167,7 @@ The plugin hooks into the build process, discovers all `.js` files with correspo
 - For service and version uploads, initialize the RUM SDK with `service` and `version` parameters that match the plugin configuration.
 - The Datadog build plugin installed and registered with your bundler. See [Installation](#installation).
 
-#### Configuration
+#### Source maps configuration
 
 The following environment variables override configuration values:
 
@@ -376,7 +376,7 @@ For example, a static `Order value` label can remain readable in an action name 
 Element-level privacy overrides (for example, `data-dd-privacy="mask"`) still take precedence over the build-time allowlist.
 {% /alert %}
 
-#### Prerequisites
+#### Privacy plugin prerequisites
 
 - RUM Browser SDK v7 or later.
 - The Datadog build plugin installed and registered with your bundler. See [Installation](#installation).
@@ -456,13 +456,13 @@ When viewing errors in [Error Tracking][2], Datadog can display the source code 
 
 At build time, the plugin injects a snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads `window.DD_SOURCE_CODE_CONTEXT` to tag errors with the correct service and version for source code resolution. This works with [uploaded source maps][4]: source maps provide the file mapping, and `window.DD_SOURCE_CODE_CONTEXT` provides the service and version association.
 
-#### Prerequisites
+#### Source code context prerequisites
 
 - Source maps uploaded to Datadog, either through the [Source Maps](#source-maps) build plugin or [manually][4].
 - The RUM SDK initialized with matching `service` and `version` parameters.
 - The Datadog build plugin installed and registered with your bundler. See [Installation](#installation).
 
-#### Configuration
+#### Source code context configuration
 
 Configure the `rum.sourceCodeContext` object in your build plugin options:
 
@@ -471,7 +471,7 @@ Configure the `rum.sourceCodeContext` object in your build plugin options:
 | `rum.sourceCodeContext.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
 | `rum.sourceCodeContext.version` | String | No | None | Release version. If omitted, source code context is not associated with a specific version. If set, must match the RUM SDK `version` initialization parameter. |
 
-#### Example
+#### Source code context example
 
 The following example shows source code context combined with source maps, a common pairing:
 

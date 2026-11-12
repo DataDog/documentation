@@ -9894,7 +9894,7 @@ menu:
       parent: rum_retain_and_recover_valuable_sessions
       identifier: rum_retain_and_recover_valuable_sessions_control_volumes_with_quotas
       weight: 602
-    - name: Recover Sessions from Managed Archives
+    - name: Recover Sessions from Managed Archive
       url: real_user_monitoring/retain_and_recover_valuable_sessions/recover_sessions_from_managed_archives/
       parent: rum_retain_and_recover_valuable_sessions
       identifier: rum_retain_and_recover_valuable_sessions_recover_sessions_from_managed_archives
@@ -10054,6 +10054,11 @@ menu:
       parent: rum_administer_and_extend_rum
       identifier: rum_administer_and_extend_rum_correlate_with_other_telemetry
       weight: 904
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum_administer_and_extend_rum
+      identifier: rum_administer_and_extend_rum_export
+      weight: 905
     - name: Agent Observability
       url: real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/llm_observability
       parent: rum_administer_and_extend_rum_correlate_with_other_telemetry

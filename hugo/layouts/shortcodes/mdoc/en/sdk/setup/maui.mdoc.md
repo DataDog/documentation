@@ -21,7 +21,7 @@ Add a `PackageReference` to [`Datadog.Maui`][3] in your MAUI project's `.csproj`
 
 {% step title="Initialize the SDK" %}
 
-The SDK exposes two initialization patterns. Choose the pattern that matches your app's hosting style. See [Configure tracking consent](#configure-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][4] to initialize the library.
+The SDK exposes two initialization patterns. Choose the pattern that matches your app's hosting style. See the **Configure tracking consent (GDPR compliance)** step to add GDPR compliance for your EU users, and [other configuration options][4] to initialize the library.
 
 #### Pattern 1: Builder extensions (recommended)
 

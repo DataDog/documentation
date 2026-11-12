@@ -28,7 +28,7 @@ aliases:
   - /real_user_monitoring/frustration_signals
   - /real_user_monitoring/browser/frustration_signals/
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

@@ -8,7 +8,7 @@ aliases:
   - /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
   - /real_user_monitoring/browser/monitoring_resource_performance/
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

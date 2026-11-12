@@ -1,4 +1,4 @@
-To configure tracking consent, see [Configure tracking consent][1].
+To configure tracking consent, see the **Configure tracking consent (GDPR compliance)** step in [Install the Datadog SDK][1].
 
 ### Clear all data
 
@@ -8,4 +8,4 @@ Use `ClearAllData` to clear all data that has not been sent to Datadog.
 DatadogSdk.Instance.ClearAllData();
 ```
 
-[1]: /real_user_monitoring/setup/install/?platform=unity#configure-tracking-consent-gdpr-compliance
+[1]: /real_user_monitoring/setup/install/?platform=unity

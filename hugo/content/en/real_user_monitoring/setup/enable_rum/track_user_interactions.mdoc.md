@@ -8,7 +8,7 @@ aliases:
   - /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
   - /real_user_monitoring/browser/tracking_user_actions/
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

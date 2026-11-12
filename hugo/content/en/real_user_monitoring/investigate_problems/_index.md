@@ -16,11 +16,11 @@ After Datadog retains your RUM sessions, explore them in the RUM Explorer, triag
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/explore_retained_data/" >}}
-    <h3>Explore retained data</h3>
+    <h3>Explore Retained Data</h3>
     Examine RUM data collected from your applications.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/triage_errors_and_crashes/" >}}
-    <h3>Triage errors and crashes</h3>
+    <h3>Triage Errors and Crashes</h3>
     Search, manage, and resolve errors collected from your web and mobile applications with Error Tracking.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/troubleshoot_with_ai/" >}}

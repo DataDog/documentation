@@ -1,4 +1,4 @@
-To configure tracking consent, see [Configure tracking consent][1].
+To configure tracking consent, see the **Configure tracking consent (GDPR compliance)** step in [Install the Datadog SDK][1].
 
 ### Stop the current session
 
@@ -48,4 +48,4 @@ dd_core_destroy(core);
 {% /tab %}
 {% /tabs %}
 
-[1]: /real_user_monitoring/setup/install/?platform=cpp#configure-tracking-consent-gdpr-compliance
+[1]: /real_user_monitoring/setup/install/?platform=cpp

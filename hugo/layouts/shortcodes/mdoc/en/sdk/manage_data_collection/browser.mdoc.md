@@ -1,4 +1,4 @@
-To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=browser#configure-tracking-consent-gdpr-compliance).
+To configure tracking consent, see the **Configure tracking consent (GDPR compliance)** step in [Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=browser).
 
 ### Access the internal context
 

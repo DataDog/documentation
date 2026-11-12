@@ -6,6 +6,7 @@ aliases:
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
+    label: "SDK"
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
@@ -17,7 +18,7 @@ further_reading:
   tag: "Blog"
   text: "Unify APM and RUM data for full-stack visibility"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

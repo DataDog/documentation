@@ -67,21 +67,21 @@ The Android SDK supports the Android ecosystem, including Android TV, Android Au
 
 The following table shows which RUM capabilities are supported on each platform:
 
-| Feature | Browser | Android Ecosystem | Apple Ecosystem | Flutter | React Native | Kotlin Multiplatform | C++ | Roku | Unity | .NET MAUI | Notes |
-|---------|---------|-------------------|-----------------|---------|--------------|----------------------|-----|------|-------|-----------|-------|
-| Send logs to Datadog | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
-| Track views and actions | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom`.<br> - **C++**, **Roku**, and **Unity** support only manual action tracking.<br> - **C++** and **Roku** support only manual view tracking. |
-| Feature flag tracking and release tracking | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |  |
-| Error tracking and source mapping | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
-| Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  |
-| Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
-| Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
-| Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | **Flutter** Session Replay is in Preview. |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
+| Feature | Browser | Android Ecosystem | Apple Ecosystem | Flutter | React Native | Kotlin Multiplatform | C++ | Electron | Roku | Unity | .NET MAUI | Notes |
+|---------|---------|-------------------|-----------------|---------|--------------|----------------------|-----|----------|------|-------|-----------|-------|
+| Send logs to Datadog | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
+| Track views and actions | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom`.<br> - **C++**, **Roku**, and **Unity** support only manual action tracking.<br> - **C++** and **Roku** support only manual view tracking. |
+| Feature flag tracking and release tracking | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} |  |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
+| Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
+| Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | {{< X >}} |  |
+| Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | **Flutter** Session Replay is in Preview. |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
 
 ## Supported endpoints for SDK domains
 

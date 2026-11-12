@@ -23,7 +23,7 @@ further_reading:
   tag: "Documentation"
   text: "Create and manage feature flags in Datadog"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 
@@ -39,7 +39,7 @@ By enriching your RUM data with feature flag data, you can:
 - Correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster
 - Simplify data collection and analysis and focus on troubleshooting
 
-Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, React Native, Kotlin Multiplatform, and Unity SDKs. You can create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution](#custom-feature-flag-management).
+Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, React Native, Kotlin Multiplatform, and Unity SDKs. You can create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own custom feature flag management solution.
 
 ## Set up RUM monitoring
 
@@ -98,6 +98,8 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, Re
 {% partial file="sdk/track_feature_flags/unavailable.mdoc.md" /%}
 {% /if %}
 
+<!-- Browser, Android, iOS, Flutter, or React Native -->
+{% if includes($platform, ["browser", "android", "ios", "flutter", "react_native"]) %}
 ## Set up a feature flag integration
 
 You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners listed below.
@@ -150,6 +152,9 @@ You can start collecting feature flag data with [custom feature flag management 
 {% partial file="sdk/track_feature_flags/react_native_integrations.mdoc.md" /%}
 {% /if %}
 
+{% /if %}
+<!-- end Browser, Android, iOS, Flutter, or React Native -->
+
 ## View and analyze your feature flags
 
 After you set up your feature flag data collection, navigate to the [{% ui %}Feature Flag Tracking{% /ui %}](https://app.datadoghq.com/rum/feature-flags) tab within RUM.
@@ -194,7 +199,7 @@ These out-of-the-box graphs are aggregated across your flag variants, helping yo
 - The {% ui %}Performance{% /ui %} tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
 
 ### Build custom views from feature flag data using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer](https://app.datadoghq.com/rum/explorer) to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards](/dashboards/) and [monitors](/monitors/#create-monitors).
+Search through all the data collected by RUM in the [RUM Explorer](https://app.datadoghq.com/rum/explorer) to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards](/dashboards/) and [monitors](/monitors/types/real_user_monitoring/).
 
 You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute to scope down and focus on events where users were shown a specific user experience.
 

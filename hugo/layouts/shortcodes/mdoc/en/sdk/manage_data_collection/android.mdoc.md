@@ -1,4 +1,4 @@
-To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=android#configure-tracking-consent-gdpr-compliance).
+To configure tracking consent, see the **Configure tracking consent (GDPR compliance)** step in [Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=android).
 
 The Android SDK first stores events and only uploads events when the [intake specifications](/real_user_monitoring/setup/install/?platform=android) conditions are met.
 

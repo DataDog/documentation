@@ -1,5 +1,5 @@
 ---
-title: Recover Sessions from Managed Archives
+title: Recover Sessions from Managed Archive
 description: Store all ingested RUM sessions and recover specific sessions for full investigation when needed.
 aliases:
   - /real_user_monitoring/managed_archive/

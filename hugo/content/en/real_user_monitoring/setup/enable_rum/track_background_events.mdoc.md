@@ -13,7 +13,7 @@ further_reading:
   tag: 'Documentation'
   text: 'RUM data collected'
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This section contains reference documentation for Real User Monitoring, including SDK API references, performance impact, external resources, and troubleshooting.
+This section contains reference documentation for Real User Monitoring, including external resources such as API references, SDK performance impact, and troubleshooting.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/reference/external_resources/" >}}
@@ -18,7 +18,7 @@ This section contains reference documentation for Real User Monitoring, includin
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/reference/sdk_performance_impact/" >}}
     <h3>SDK Performance Impact</h3>
-    Learn about how the SDK impacts performance of your application.
+    Learn how the SDK affects your application's performance.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/reference/troubleshooting/" >}}
     <h3>Troubleshooting</h3>

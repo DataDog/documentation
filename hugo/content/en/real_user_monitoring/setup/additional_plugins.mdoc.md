@@ -59,7 +59,7 @@ further_reading:
   tag: "Blog"
   text: "Get better RUM data with our custom React components"
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

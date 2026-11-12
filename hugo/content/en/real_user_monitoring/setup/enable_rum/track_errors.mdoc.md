@@ -41,7 +41,7 @@ aliases:
 - /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
 - /real_user_monitoring/browser/collecting_browser_errors/
 ---
-This page has instructions for each SDK. Choose your SDK in the SDK menu above.
+Select your SDK in the **SDK** filter to see its instructions.
 
 ## Overview
 

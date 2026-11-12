@@ -133,7 +133,7 @@ The Datadog Flutter SDK has packages for working with both [`webview_flutter`][8
 
 Datadog provides [`datadog_grpc_interceptor`][6] for use with the [grpc Flutter package][7]. The gRPC interceptor automatically tracks gRPC requests as RUM Resources and enables distributed tracing with APM.
 
-### Setup
+### gRPC setup
 
 Add `datadog_grpc_interceptor` to your `pubspec.yaml` or by running `flutter pub add datadog_grpc_interceptor` from your terminal:
 
@@ -175,7 +175,7 @@ final stub = GreeterClient(channel, interceptors: [datadogInterceptor]);
 
 Datadog provides [`datadog_gql_link`][1] for use with most GraphQL Flutter libraries, including `graphql_flutter` and `ferry`. The link automatically tracks GraphQL requests as RUM resources, adds query names, mutation names, and variables as attributes of the Resource, and enables distributed tracing in APM.
 
-### Setup
+### GraphQL setup
 
 Add `datadog_gql_link` to your `pubspec.yaml` or by running `flutter pub add datadog_gql_link` from your terminal:
 
@@ -216,7 +216,7 @@ For most Dio setups, use Datadog Tracking Http Client instead of the specialized
 
 Datadog provides [`datadog_dio`][11] for use with the [Dio Flutter package][12]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
 
-### Setup
+### Dio setup
 
 Add `datadog_dio` to your `pubspec.yaml` or by running `flutter pub add datadog_dio` from your terminal:
 

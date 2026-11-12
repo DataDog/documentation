@@ -1,6 +1,6 @@
 The iOS SDK first stores events locally and only uploads events when the [intake specifications](/real_user_monitoring/setup/install/?platform=ios) conditions are met.
 
-To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=ios#configure-tracking-consent-gdpr-compliance).
+To configure tracking consent, see the **Configure tracking consent (GDPR compliance)** step in [Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=ios).
 
 ### Clear all data
 
