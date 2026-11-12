@@ -88,7 +88,9 @@ You can optionally add functions to your query using the function button. Not al
 
 ### Split graph
 
-Use the {{< ui >}}Split Graph{{< /ui >}} button to view the data split into individual graphs by values for tags such as region, service, or environment.
+Click the {{< ui >}}Split Graph{{< /ui >}} button and select one or more tags to split the data into individual graphs. Each graph represents a unique combination of values for the selected tags. For example, select `service` and `region` to display one graph for each service and region combination.
+
+Saving a graph split by multiple tags to a dashboard creates a standard group of individual graphs.
 
 ### Export
 
