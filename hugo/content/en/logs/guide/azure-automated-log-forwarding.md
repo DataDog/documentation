@@ -13,7 +13,7 @@ further_reading:
 
 Use this guide to set up and manage Azure automated log forwarding. You can configure log forwarding directly in Datadog or deploy it with an Azure Resource Manager (ARM) template.
 
-The ARM template deploys resources from a series of Azure services (storage accounts and Azure Container Apps jobs) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of Container Apps jobs deployed to a subscription and region of your choice. Storage accounts and Container Apps jobs are deployed in each of the subscriptions forwarding logs to Datadog.
+The ARM template deploys storage accounts and Azure Container Apps jobs into your subscriptions. These resources collect and forward logs to Datadog, and automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of Container Apps jobs deployed to a subscription and region of your choice. Storage accounts and Container Apps jobs are deployed in each of the subscriptions forwarding logs to Datadog.
 
 **Note**: Since August 3, 2026, new deployments run the control plane on Azure Container Apps jobs by default. Deployments created before that date keep their Azure Function app control plane, and updating a deployment does not change its control plane type. Log forwarding works the same way with either control plane. To migrate an existing deployment to Container Apps jobs, use the [migration script][25].
 
