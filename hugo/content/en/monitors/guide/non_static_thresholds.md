@@ -1,6 +1,6 @@
 ---
 title: How to monitor non-static thresholds
-description: "Monitor variable thresholds using seasonal patterns, reference metrics, and composite monitors for dynamic alerting scenarios."
+description: "Monitor variable thresholds using relative thresholds (Preview), seasonal patterns, reference metrics, and composite monitors."
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"
@@ -16,9 +16,74 @@ A typical metric monitor triggers an alert if a single metric goes above a speci
 
 Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible, you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
 
-This guide covers common use cases for alerting on non-static thresholds:
+Choose an approach based on the comparison you need:
+  - [Use a **relative threshold (Preview)** to compare a metric to its historical baseline](#relative-thresholds)
   - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
   - [Alert based on the value of another **reference** metric](#reference-threshold)
+
+## Relative thresholds
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Relative thresholds, also called dynamic thresholds, are in Preview for metric monitors.
+{{< /callout >}}
+
+A relative threshold compares the evaluated value of a metric monitor to a historical baseline from the same query. Datadog calculates the baseline using a separate time window and aggregation, then multiplies it by a factor to determine the threshold. The threshold adapts as the baseline changes. For monitors grouped by tags, each group uses its own historical baseline.
+
+Use a relative threshold when the alert boundary should follow a metric's historical level. For example, alert when the average CPU usage over five minutes exceeds 150% of its historical average. A threshold of 150% of the baseline means 50% above the baseline, not a 150% increase.
+
+### Configure a relative threshold
+
+The following example compares each host's average CPU usage over five minutes to 150% of its average CPU usage over one week.
+
+{{< tabs >}}
+{{% tab "UI Configuration" %}}
+
+1. Create a [metric monitor][6] with the **Threshold** detection method.
+2. Query `avg:system.cpu.user{env:prod} by {host}`.
+3. Evaluate the average over the last five minutes.
+4. In **Set alert conditions**, configure a relative threshold. Trigger when the evaluated value is above 150% of the average over the last week.
+
+{{% /tab %}}
+{{% tab "JSON Example" %}}
+
+```json
+{
+  "name": "CPU usage above its historical baseline",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"avg\").last(\"5m\") > threshold",
+  "message": "CPU usage exceeds 150% of its historical average.",
+  "options": {
+    "thresholds": {
+      "critical_query": "formula(\"query1\").rollup(\"avg\").last(\"1w\").multiplier(1.5)"
+    },
+    "variables": [
+      {
+        "data_source": "metrics",
+        "name": "query1",
+        "query": "avg:system.cpu.user{env:prod} by {host}"
+      }
+    ]
+  }
+}
+```
+
+The main `query` compares the evaluated value to the `threshold` keyword. The `options.thresholds.critical_query` expression defines that threshold:
+
+- `formula("query1")` uses the same metric query as the monitor.
+- `.rollup("avg").last("1w")` calculates the historical average over one week.
+- `.multiplier(1.5)` scales that baseline to 150%. The multiplier is a factor, so use `1.5`, not `150`.
+
+For example, if a host's historical average is 20%, the alert threshold is 30%. To detect a drop below 80% of the baseline, use `< threshold` in the main query and `.multiplier(0.8)` in the threshold query.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Preview considerations
+
+- Relative thresholds support metric monitors with formulas and functions.
+- A group needs historical data to establish its baseline. A new group without a historical baseline cannot be evaluated against a relative threshold.
+
+For a comparison to the same time in a previous week, use the [seasonal threshold example](#seasonal-threshold). For a comparison to a different metric, use the [reference threshold example](#reference-threshold).
 
 ## Seasonal threshold
 
@@ -187,3 +252,4 @@ The last monitor is a Composite monitor, which sends an alert only if the two pr
 [3]: /integrations/nginx/?tab=host#data-collected
 [4]: /account_management/billing/usage_metrics/#types-of-usage
 [5]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
+[6]: /monitors/types/metric/
