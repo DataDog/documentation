@@ -770,6 +770,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -784,7 +785,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
-- `gpu-monitoring`: Tools for [GPU Monitoring][89], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
+- `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -1059,4 +1060,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
-[89]: /gpu_monitoring/
+[89]: /infrastructure/process/
+[90]: /gpu_monitoring/
