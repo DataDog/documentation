@@ -65594,13 +65594,6 @@ components:
           type: string
         assignment_source:
           $ref: "#/components/schemas/GovernanceControlDetectionAssignmentSource"
-        control_id:
-          deprecated: true
-          description: |-
-            DEPRECATED: mirrors `detection_type` for backward compatibility; use `detection_type`
-            instead.
-          example: "unused_api_keys"
-          type: string
         created_at:
           description: The date and time when the detection was created.
           example: "2024-03-01T12:00:00Z"
@@ -65654,7 +65647,6 @@ components:
           $ref: "#/components/schemas/GovernanceControlDetectionState"
       required:
         - state
-        - control_id
         - resource_id
         - detection_type
         - resource_type
@@ -193178,7 +193170,6 @@ paths:
                           assigned_team: "platform-security"
                           assigned_to: "11111111-2222-3333-4444-555555555555"
                           assignment_source: "manual"
-                          control_id: "unused_api_keys"
                           created_at: "2024-03-01T12:00:00Z"
                           detection_type: "unused_api_keys"
                           display_name: "CI Deploy Key"
@@ -193472,7 +193463,6 @@ paths:
                         assigned_team: "platform-security"
                         assigned_to: "11111111-2222-3333-4444-555555555555"
                         assignment_source: "manual"
-                        control_id: "unused_api_keys"
                         created_at: "2024-03-01T12:00:00Z"
                         detection_type: "unused_api_keys"
                         display_name: "CI Deploy Key"
@@ -193568,7 +193558,6 @@ paths:
                         assigned_team: "platform-security"
                         assigned_to: "11111111-2222-3333-4444-555555555555"
                         assignment_source: "manual"
-                        control_id: "unused_api_keys"
                         created_at: "2024-03-01T12:00:00Z"
                         detection_type: "unused_api_keys"
                         display_name: "CI Deploy Key"
