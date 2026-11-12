@@ -56,3 +56,12 @@ entries:
       - UpdateAiGatewayRoutingRule
       - UpsertAiGatewayPolicy
     title: Make the AI Gateway configuration API public in Preview
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41527
+    operations:
+      - CreateAiGatewayRoutingRule
+      - GetAiGatewayRoutingRule
+      - ListAiGatewayRoutingRules
+      - UpdateAiGatewayRoutingRule
+    title: Add classified routing to AI Gateway routing rules
