@@ -60,16 +60,16 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
-|   | Java | Python | .NET | Node.js | Go | Ruby |
-| - | ---- | ------ | ---- | ------- | -- | ---- |
-| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Azure Service Bus | | | {{< X >}} | | | |
-| Google Pub/Sub | {{< X >}} | {{< X >}} | | {{< X >}} | | |
-| IBM MQ | {{< X >}} | | {{< X >}} | | | |
-| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+|   | Java | Python | .NET | Node.js | Go | Ruby | PHP |
+| - | ---- | ------ | ---- | ------- | -- | ---- | --- |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Azure Service Bus | | | {{< X >}} | | | | |
+| Google Pub/Sub | {{< X >}} | {{< X >}} | | {{< X >}} | | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | {{< X >}} |
 
 Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
@@ -87,6 +87,7 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
   {{< image-card href="/data_streams/nodejs/" src="integrations_logos/node.png" alt="Node" >}}
   {{< image-card href="/data_streams/go" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/data_streams/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/data_streams/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
 

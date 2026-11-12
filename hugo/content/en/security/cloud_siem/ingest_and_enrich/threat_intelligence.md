@@ -40,11 +40,12 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
 1. For each log, Datadog extracts the relevant attributes:
     - **IPs**: IPv4 and IPv6 addresses found anywhere in the log.
     - **Domains and hostnames**: The values in the following attributes (when present):
-      - `DNS_QUESTION_NAME`
-      - `DNS_ANSWER_NAME`
-      - `HTTP_URL`
-      - `HTTP_URL_DETAILS_DOMAIN`
-      - `HOSTNAME`
+      - `dns.question.name`
+      - `dns.answer.name`
+      - `http.url`
+      - `http.url_details.domain`
+      - `http.url_details.host`
+      - `hostname`
     - **File hashes**: SHA1, SHA256, and ssdeep hashes found in file- and process-related log attributes.
     - **AWS account IDs**: Values from AWS-related log attributes (for example, `userIdentity.accountId`).
     - **Container image names**: Values from container runtime logs.

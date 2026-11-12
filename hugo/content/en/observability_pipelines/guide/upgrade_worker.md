@@ -14,6 +14,44 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.25.2
+
+To upgrade to Worker version 2.25.2:
+
+- Docker: Run the `docker pull` command for the [2.25.2 image][67].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.2`.
+
+Worker version 2.25.2 gives you access to the following:
+
+#### Fixes
+
+- Fixed a regression introduced in Worker 2.25.1 that could prevent Workers on commercial Datadog sites outside US1 from loading their pipelines after startup, causing repeated `RC client wasn't initialized, will retry` errors.
+
+## Worker version 2.25.1
+
+To upgrade to Worker version 2.25.1:
+
+- Docker: Run the `docker pull` command for the [2.25.1 image][66].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.1`.
+
+Worker version 2.25.1 gives you access to the following:
+
+#### Security
+
+- The Microsoft Sentinel destination now verifies server certificates and hostnames for Azure OAuth token requests and log ingestion requests.
+
+#### Fixes
+
+- The Microsoft Sentinel destination now:
+    - Splits batches into multiple requests as needed, so each request stays under the Azure 1 MB request size limit.
+    - Refreshes its Azure OAuth token 60 seconds before the token expires. If a refresh fails, it logs an error and retries every 2 seconds until a refresh succeeds, then returns to that schedule.
+    - Times out Azure OAuth token requests after 30 seconds and retries them like any other failed refresh.
+- The `rc_version` tag on pipeline component metrics and the `op_component.rc_version` field in component logs now report the latest configuration version that each component runs, including components that a pipeline update didn't change.
+
 ## Worker version 2.25.0
 
 To upgrade to Worker version 2.25.0:
@@ -1014,3 +1052,5 @@ Worker version 2.7.0 gives you access to the following:
 [63]: /observability_pipelines/sources/prometheus/
 [64]: /observability_pipelines/destinations/prometheus/
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
+[66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
+[67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2

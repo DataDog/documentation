@@ -53,6 +53,12 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 
    {{< img src="llm_observability/evaluations/annotation_queues/schema_edit.png" alt="The Edit Queue modal showing the Schema tab with label configuration on the left and a preview pane on the right. The left panel displays fields for configuring a categorical label named failure_type with three categories: hallucination, formatting_error, and refusal. Checkboxes enable Assessment Criteria and Reasoning options. The right preview pane shows how the label appears to annotators with checkboxes for each category, Pass/Fail assessment buttons, and a reasoning text field." style="width:100%;" >}}
 
+#### Importing evaluation labels
+
+When you create a queue from a completed experiment, Datadog automatically adds the experiment's evaluator scorers as blank, editable labels. Existing evaluator result values are not copied into the queue. Review the imported labels and edit or remove them as needed before creating the queue.
+
+For other queue creation flows, use {{< ui >}}Add Evaluation as Label{{< /ui >}} on the {{< ui >}}Schema{{< /ui >}} tab to add available evaluation labels manually.
+
 ### Step 2: Select traces for annotation
 
 You can create add traces to queue manually from Trace Explorer or populate queues automatically using Automation Rules.
@@ -119,7 +125,18 @@ Review Mode displays:
 For each trace:
 1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
 2. **Apply labels**: Fill in the configured labels based on your assessment.
-3. Annotations are be autosaved.
+3. Annotations are autosaved.
+
+### Adding comments
+
+Use the {{< ui >}}Comments{{< /ui >}} panel to discuss the interaction with other reviewers while you annotate it. Comments are associated with the trace being reviewed. For span interactions, the comment is associated with the corresponding span.
+
+To add a comment:
+1. Expand the {{< ui >}}Comments{{< /ui >}} panel.
+2. Click {{< ui >}}Add comment{{< /ui >}}.
+3. Enter your comment and click {{< ui >}}Save{{< /ui >}}.
+
+You can edit or delete comments that you created.
 
 ### Best practices for annotation
 
