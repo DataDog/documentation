@@ -48,13 +48,13 @@ Use search, facets, the metrics table, and the metric details side panel to find
 
 Search your metrics by metric name or tag using the {{< ui >}}Metric{{< /ui >}} or {{< ui >}}Tag{{< /ui >}} search fields:
 
-{{< img src="metrics/catalog/tag_advanced_filtering_2026-11-12.png" alt="The Metrics Catalog page with shopist in the Metric search field and NOT team:* in the Tag search field, displayed as ! team:*." style="width:75%;">}}
+{{< img src="metrics/catalog/tag_advanced_filtering_2026-11-12.png" alt="The Metrics Catalog page with shopist in the Metric search field and NOT team:* in the Tag search field, displayed as ! team:*." style="width:100%;">}}
 
 **Note**: Tag values are retained in the {{< ui >}}Tag{{< /ui >}} search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
 
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
-{{< img src="metrics/catalog/metric_advanced_filtering_fuzzy_2026-11-12.png" alt="The Metrics Catalog page with a fuzzy search for shopist checkout in the Metric search field." style="width:75%;">}}
+{{< img src="metrics/catalog/metric_advanced_filtering_fuzzy_2026-11-12.png" alt="The Metrics Catalog page with a fuzzy search for shopist checkout in the Metric search field." style="width:100%;">}}
 
 Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
