@@ -2,7 +2,7 @@
 title: JavaScript and TypeScript Tests
 code_lang: javascript
 type: multi-code-lang
-code_lang_weight: 20
+code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/javascript
   - /continuous_integration/tests/javascript
