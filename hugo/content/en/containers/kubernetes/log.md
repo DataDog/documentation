@@ -460,7 +460,7 @@ Use `spec.config.logs` in a `DatadogInstrumentation` resource or Autodiscovery l
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-To collect logs from a file, set `type: file` and `path` in a `DatadogInstrumentation` log entry or an Autodiscovery log annotation. The Agent adds the same container tags as it does for logs from the container output streams. For additional guidance, see [Recommended configurations](#recommended-configurations).
+To collect logs from a file, set `type: file` and `path` in a `DatadogInstrumentation` log entry or an Autodiscovery log annotation. The Agent adds the same container tags as it does for logs from the container output streams. For additional guidance, see the [Recommended configurations](#recommended-configurations) section.
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 

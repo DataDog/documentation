@@ -483,7 +483,7 @@ For more information about tag cardinality, see [Per-check tag configuration][27
 
 To suppress container and pod tags added by Autodiscovery, set `ignoreAutodiscoveryTags: true` on the check entry in `spec.config.checks`. The default is `false`. This setting does not remove tags explicitly configured on the check or tags emitted by the integration itself.
 
-For annotation-based configurations, set `ignore_autodiscovery_tags` alongside `init_config` and `instances` in the check's JSON configuration. For example, add this annotation to a pod with a container named `redis`:
+For annotation-based configurations, set `ignore_autodiscovery_tags` alongside `init_config` and `instances` in the check's JSON configuration. For example, add the following annotation to a pod with a container named `redis`:
 
 ```yaml
 ad.datadoghq.com/redis.checks: |
