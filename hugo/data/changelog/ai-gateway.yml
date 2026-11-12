@@ -71,3 +71,16 @@ entries:
       - UpdateAiGatewayModelGroup
       - UpdateAiGatewayRoutingRule
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41623
+    operations:
+      - CreateAiGatewayBudget
+      - CreateAiGatewayRoutingRule
+      - DeleteAiGatewayBudget
+      - DeleteAiGatewayRoutingRule
+      - GetAiGatewayBudget
+      - GetAiGatewayRoutingRule
+      - UpdateAiGatewayBudget
+      - UpdateAiGatewayRoutingRule
+    title: Add Terraform support for AI Gateway budgets and routing rules
