@@ -1,3 +1,3 @@
 ---
-title: Agent Observability の実験を更新してください
+title: Agent Observability 実験の更新
 ---

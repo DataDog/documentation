@@ -80,10 +80,10 @@ Before you create an experiment metric from Agent Observability data:
 
 - [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
 - To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
-- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value.
-- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
+- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value or a `pass` or `fail` assessment.
+- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Online Experiments][17].
 
-<div class="alert alert-warning"><strong>Supported evaluation type</strong>: Experiment metrics support only Agent Observability evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types are not available in the metric picker.</div>
+<div class="alert alert-info"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw Boolean and categorical values cannot be used directly as experiment metrics.</div>
 
 ### Create a metric from Agent Observability data
 
@@ -112,11 +112,15 @@ The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their co
 
 Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 
-1. Search for and select the custom score evaluation you want to measure.
+1. Search for and select the evaluation you want to measure.
 1. Review the evaluation details, such as its ML application, scope, prompt, and model.
-1. Configure the aggregation and any filters. Evaluation metrics default to the average score.
+1. Configure the aggregation and any filters. Evaluation metrics default to {{< ui >}}Average of Assessment score{{< /ui >}}, which measures pass rate.
 
-Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run.
+The picker lists evaluations of all types received by Agent Observability during the selected time range, including those without an assessment. Pass rate measures the assessment, regardless of the evaluation's result type. Datadog derives `assessment_score` from the assessment, where `pass` is `1` and `fail` is `0`. Pass rate is the average of these values, so it ranges from 0 to 1. Evaluations without an assessment are excluded from both the numerator and the denominator.
+
+Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run. If the pass-rate preview is empty, submit evaluations with pass or fail assessments within the selected time range. Historical evaluations are not backfilled with `assessment_score`.
+
+For score evaluations, select {{< ui >}}Score value{{< /ui >}} to measure the raw score instead. Existing metrics that use score values retain their configuration.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing the faithfulness, user_score, and verbosity score evaluations, with faithfulness selected." style="width:90%;" >}}
 
@@ -131,7 +135,7 @@ After you configure either source:
 [14]: /llm_observability/instrument/
 [15]: /llm_observability/investigate/cost/
 [16]: /llm_observability/investigate/evaluations/
-[17]: /experiments/guide/run_online_experiment_on_llm_application/
+[17]: /llm_observability/improve/online_experiments/
 
 {{% /tab %}}
 {{% tab "Warehouse" %}}

@@ -250,7 +250,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Creating offline experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
-- **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
+- **Setting up and exploring Patterns**: Estimate the cost of a [Patterns][12] run, create and update Patterns configurations, start on-demand runs, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
 - **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in offline experiments.
 
 ## Available tools
@@ -361,14 +361,28 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 
 ### Patterns tools
 
+<div class="alert alert-warning">A Patterns run calls the configuration's model through your LLM integration account, and the provider bills that account for the run. The Datadog MCP Server instructs agents to ask for confirmation before they start a run.</div>
+
+`estimate_llmobs_topic_discovery_cost`
+: Estimate the cost of a Patterns run for a model, given the expected mean input token count per record and the number of records to sample. Returns the estimated output tokens and the estimated cost. By default, the estimate is capped at a budget limit, and `is_budget_reached` is `true` when the uncapped cost reaches that limit. Cache and tool costs are not included. Use this to size a configuration's query and sampling before you create it.
+
+`create_llmobs_pattern_config`
+: Create a Patterns configuration. Define the spans to cluster with `evp_query`, `sampling_ratio`, `num_records`, and `time_frame_duration_ms`. Define the LLM integration that runs the clustering with `integration_provider`, `account_id`, and `model_name`. Optionally, customize clustering with `clustering_instructions`, `hierarchy_depth`, and up to 30 `seed_topics`, compute each topic's coverage of your datasets with `coverage`, and set a recurring `schedule` and `notification_recipients`. Creating a configuration does not start a run. Configuration names must be unique within the org.
+
+`update_llmobs_pattern_config`
+: Update an existing Patterns configuration. Only the fields you pass change. List fields (`coverage`, `seed_topics`, `notification_recipients`) are replaced as a whole. Pass `clear_schedule=true` to stop recurring runs. Updating a configuration does not start a run.
+
 `list_llmobs_pattern_configs`
-: List all Patterns configurations for the org. Returns each config's `id`, `name`, `evp_query`, sampling settings, and timestamps. Start here to find a `config_id`.
+: List all Patterns configurations for the org. Returns each complete config, including its `id`, `name`, `evp_query`, sampling, model, schedule, and notification settings. Start here to find a `config_id`.
 
 `get_llmobs_pattern_config`
-: Get the most-recently-modified Patterns configuration for the org.
+: Get a Patterns configuration by `config_id`. Omit `config_id` to get the most-recently-modified configuration for the org.
+
+`trigger_llmobs_pattern_run`
+: Start an on-demand Patterns run for an existing configuration. Returns the new run's `run_id`, `config_id`, and `status`. Runs take several minutes. Poll `get_llmobs_pattern_run_status` with the `config_id` until the returned `id` matches the saved `run_id` and its `status` is `completed`, then read its topics with `get_llmobs_patterns`, passing both `config_id` and `run_id`.
 
 `get_llmobs_pattern_run_status`
-: Get the status and per-activity progress of the most recent Patterns run for a config. Use this to check whether clustering is running, completed, or failed before reading topics.
+: Get the status and per-activity progress of the most recent Patterns run for a config. Returns the run's `id`, `status`, current step, and progress. Use this to check whether clustering is running, completed, or failed before reading topics. This tool takes only a `config_id`. To track a specific run, compare the returned `id` with the `run_id` returned by `trigger_llmobs_pattern_run`.
 
 `list_llmobs_pattern_runs`
 : List all completed Patterns runs for a config, newest first. Returns each run's `id`, `status`, timestamps, and the `config_snapshot` used.
@@ -381,6 +395,8 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 
 `get_llmobs_pattern_points`
 : Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
+
+Reading configurations, runs, and topics requires Agent Observability read permission. Creating or updating a configuration and starting a run require Agent Observability read and write permissions.
 
 ### Annotation queue tools
 
@@ -455,6 +471,14 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 4. **Read specific records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 records by ID.
 5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
 
+### Patterns setup
+
+1. **Size the run**: Sample a few spans that match your query with `search_llmobs_spans` to approximate the mean input token count per record, then use `estimate_llmobs_topic_discovery_cost` to estimate the cost for your model and sample size. If the estimate isn't available or `is_budget_reached` is `true`, start with a smaller sample.
+2. **Create a configuration**: Use `create_llmobs_pattern_config` with the span query, sampling settings, and LLM integration account. Optionally, add a recurring `schedule`.
+3. **Start a run**: After you confirm the cost, use `trigger_llmobs_pattern_run` with the new `config_id`. Save the returned `run_id`.
+4. **Wait for completion**: Poll `get_llmobs_pattern_run_status` with the `config_id` until the returned `id` matches the saved `run_id` and its `status` is `completed`.
+5. **Refine**: Read the topics with `get_llmobs_patterns`, passing the `config_id` and the saved `run_id`. To adjust clustering, use `update_llmobs_pattern_config` to change fields such as `clustering_instructions`, `seed_topics`, or `hierarchy_depth`, then start another run.
+
 ### Patterns analysis
 
 1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
@@ -479,6 +503,8 @@ After connecting, try prompts like:
 - Create a new experiment called "prompt-v2-test" in my project `my-chatbot-project` and return its experiment ID so I can attach evaluation metrics to it.
 - List the datasets in my `my-project` project and show me a sample of records from the dataset named `qa-golden-set`, including its schema.
 - I have a CSV of new test cases. Add them to the `qa-golden-set` dataset in `my-project` as a new version. Show me a preview first.
+- Set up Patterns for `@ml_app:customer-support-bot` over the past 7 days, sampling 1000 interactions. Estimate the cost first, then create the configuration and start a run after I approve. When the run completes, summarize the top-level topics and their share of traffic.
+- Rerun my `support-topics` Patterns configuration and compare the new topic distribution with the previous run.
 
 ## Combine with other Datadog tools
 
@@ -513,3 +539,4 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [9]: /llm_observability/build_with_ai/claude_code_skills
 [10]: /llm_observability/investigate/annotation_queues
 [11]: /llm_observability/investigate/insights/
+[12]: /llm_observability/investigate/patterns/

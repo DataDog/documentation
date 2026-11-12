@@ -1,3 +1,3 @@
 ---
-title: Delete Agent Observability offline experiments
+title: Delete Agent Observability experiments
 ---

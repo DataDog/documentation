@@ -1,83 +1,110 @@
 ---
-description: Ve información detallada sobre eventos RUM individuales, incluidos el
-  contexto, las cascadas y los datos de rendimiento en el panel lateral.
+description: Vea información detallada sobre eventos de RUM individuales, incluyendo
+  contexto, cascadas, series temporales de rendimiento y datos de rendimiento en el
+  panel lateral.
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentación
-  text: Buscar tus eventos
+  text: Busque sus eventos
+- link: /real_user_monitoring/application_monitoring/mobile_vitals/#performance-timeseries
+  tag: Documentación
+  text: Métricas vitales móviles y series temporales de rendimiento
 title: Panel lateral de eventos
 ---
+## Descripción general {#overview}
 
-## Información general
+El Real User Monitoring (RUM) Explorer muestra eventos individuales en un panel lateral. Para abrir el panel lateral de eventos en el [RUM Explorer][1], haga clic en una fila de la tabla en el tipo de visualización {{< ui >}}List{{< /ui >}}.
 
-El Real User Monitoring (RUM) Explorer muestra eventos individuales en un panel lateral. Para abrir el panel lateral de eventos en el [RUM Explorer][1], haz clic en una fila de la tabla en el tipo de visualización **List** (Lista).
+Use el encabezado del panel lateral para ver información contextual sobre sus usuarios (entorno, país) y detalles específicos del evento como la ruta de la vista y el tipo de carga. Para ejecuciones de prueba Synthetic, haga clic en el ID de la prueba para ver el resultado.
 
-Utiliza el encabezado del panel lateral para ver información contextual sobre tus usuarios (entorno, país) y detalles específicos del evento como la ruta de visualización y el tipo de carga. Para las ejecuciones de tests de Synthetic Monitoring, haz clic en el ID de test para ver el resultado.
+La visualización de distribución en la parte superior le ayuda a entender si la vista actual está cerca de la mediana o es un valor anómalo. Use el menú desplegable para cambiar entre {{< tooltip text="Loading Time" tooltip="Tiempo hasta que la página está lista y no ocurre ninguna solicitud de red ni mutación del DOM. Las aplicaciones móviles tienen un tiempo de carga diferente, reportado manualmente. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Más información</a>" >}}, o métricas vitales web y móviles como {{< tooltip text="Time To First Byte" tooltip="Tiempo transcurrido hasta que se ha recibido el primer byte de la vista. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Más información</a>" >}}, {{< tooltip text="FCP" tooltip="First Contentful Paint: Tiempo en el que el navegador renderiza por primera vez cualquier texto, imagen o SVG. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="LCP" tooltip="Largest Contentful Paint: Tiempo en el que se renderiza el objeto DOM más grande en el viewport. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="CLS" tooltip="Cumulative Layout Shift: Cuantifica el movimiento inesperado de la página debido a contenido cargado dinámicamente. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="INP" tooltip="Interaction to Next Paint: Duración más larga entre la interacción de un usuario y el siguiente renderizado. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, frecuencia de actualización y promedio de memoria. Ajuste el rango de tiempo para ver los datos por día, semana o mes.
 
-La visualización de la distribución en la parte superior te ayuda a entender si la vista actual está cerca de la mediana o es un valor atípico. Utiliza el menú desplegable para cambiar entre {{< tooltip text="Tiempo de carga" tooltip="Tiempo hasta que la página está lista y no sucede ninguna solicitud de red o mutación DOM. Las aplicaciones móviles tienen un tiempo de carga diferente, informado de forma manual. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Más información</a>" >}}, o signos vitales móviles y web como {{< tooltip text="Tiempo hasta el primer byte" tooltip="Tiempo que pasa hasta que se recibe el primer byte de la vista. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Más información</a>" >}}, {{< tooltip text="FCP" tooltip="Primera imagen con contenido: tiempo hasta que el navegador renderiza por primera vez texto, imagen o SVG. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="LCP" tooltip="Imagen más grande con contenido: tiempo hasta que se renderiza el objeto DOM más grande en el puerto de la vista. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="CLS" tooltip="Cambio acumulativo del diseño: cuantifica movimientos inesperados de la página causados por contenido cargado dinámicamente. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, {{< tooltip text="INP" tooltip="Interacción hasta la próxima imagen: duración más larga entre la interacción de un usuario y la próxima imagen. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Más información</a>" >}}, Frecuencia de actualización y Promedio de memoria. Ajusta el intervalo de tiempo para ver los datos por día, semana o mes.
+{{< img src="real_user_monitoring/explorer/events/side-panel-overview-2.png" alt="Panel lateral de RUM Explorer que muestra la visualización de distribución, la línea de tiempo de cascada y las opciones de filtro" width="100%" >}}
 
-{{< img src="real_user_monitoring/explorer/events/side-panel-overview-2.png" alt="Panel lateral del RUM Explorer que muestra la visualización de la distribución, cronología de la cascada y opciones de filtro" width="100%" >}}
+Haga clic en cualquier pestaña para ver sus detalles correspondientes e investigar aspectos específicos del evento. Consulte [Pestañas adicionales](#additional-tabs) para obtener una lista completa.
 
-Haz clic en cualquier pestaña para ver los detalles correspondientes e investigar aspectos concretos del evento. Consulta la lista completa en [Pestañas adicionales](#additional-tabs).
+## Navegue entre sesiones de usuario {#navigate-between-user-sessions}
 
-## Pestaña Cascada
+Cuando `@usr.id` está configurado en el SDK de RUM y filtra el RUM Explorer por un valor de `@usr.id` específico, aparecen los botones {{< ui >}}Previous{{< /ui >}} y {{< ui >}}Next{{< /ui >}} en el panel lateral de la sesión. Use estos botones para navegar entre las sesiones de ese usuario sin regresar a la lista de RUM Explorer.
 
-La pestaña **Cascada** muestra una línea de tiempo interactiva de los eventos asociados a esta vista. Las superposiciones muestran marcadores clave de rendimiento, como [Core Web Vitals][3] o los tiempos móviles, con indicadores de éxito o fallo.
+Solo las sesiones retenidas por [filtros de retención][5] aparecen en la navegación. Las sesiones no retenidas se omiten. Por ejemplo, si un usuario tuvo tres sesiones y solo se retuvieron la primera y la tercera, los botones se desplazan directamente entre esas dos sin indicación de que ocurrió una sesión en medio.
 
-{{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacción con la línea de tiempo de la cascada en la pestaña Cascada" video="true" width="80%" >}}
+Para configurar `@usr.id`, consulte [Configuración avanzada][6].
 
-### Filtrar la cascada
+{{< img src="real_user_monitoring/explorer/events/rum-explorer-session-continuity.png" alt="Panel lateral de sesión de RUM Explorer con los botones de navegación Anterior y Siguiente resaltados, que muestran un tooltip con la pantalla de inicio de sesión y el motivo de finalización." style="width:100%;" >}}
 
-Controla qué eventos aparecen en la cascada:
+## Pestaña Waterfall{#waterfall-tab}
 
-- **Por ruta crítica**: haz clic en el conmutador **Critical Events** (Eventos críticos) para ver solo los eventos que afectan directamente a tus plazos clave de rendimiento.
-- **Por atributo**: utiliza los botones de filtro situados encima de la cascada. Haz clic en un filtro para acceder a opciones adicionales como la URL del recurso, el nombre de acción, el mensaje de error, etc.
-- **Por intervalo de tiempo**: arrastra los selectores de tiempo en el minimapa, o expande la barra lateral izquierda y haz clic en una temporización para filtrar a eventos anteriores a ese punto.
+La pestaña {{< ui >}}Waterfall{{< /ui >}} muestra una línea de tiempo interactiva de los eventos asociados con esta vista. Las superposiciones muestran marcadores de rendimiento clave, incluidos [Core Web Vitals][3] o tiempos móviles, con indicadores de aprobado o reprobado.
 
-La barra lateral izquierda muestra los tiempos clave, incluidos los tiempos personalizados de la [API addTiming][4].
+{{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacción con la línea de tiempo de cascada en la pestaña Waterfall" video="true" width="80%" >}}
 
-### Inspección de eventos
+### Filtrado de la cascada{#filtering-the-waterfall}
 
-Pasa el ratón por encima de cualquier evento de la cascada para ver su marca de tiempo, duración y factores contribuyentes (secuencias de comandos, estilo/diseño u otro procesamiento). Pasa el ratón por encima de un Core Web Vital para ver su definición, umbral y comparación con tu p75.
+Controle qué eventos aparecen en la cascada:
 
-{{< img src="real_user_monitoring/Explorer/events/specific-times-1.png" alt="Menú emergente de Tiempo de carga que muestra detalles de rendimiento, indicadores de umbral y comparación con el rendimiento p75" width="100%" >}}
+- **Por ruta crítica**: Haga clic en el interruptor {{< ui >}}Critical Events{{< /ui >}} para ver solo los eventos que afectan directamente sus tiempos de rendimiento clave.
+- **Por atributo**: Use los botones de filtro sobre la cascada. Haga clic en un filtro para acceder a opciones adicionales como la URL del recurso, el nombre de la acción, el mensaje de error y más.
+- **Por rango de tiempo**: Arrastre los selectores de tiempo en el minimapa, o expanda la barra lateral izquierda y haga clic en un tiempo para filtrar los eventos anteriores a ese punto.
 
-### Telemetría conectada
+La barra lateral izquierda revela tiempos clave, incluidos los tiempos personalizados de la [API addTiming][4].
 
-Haz clic en los eventos de la cascada para acceder a los datos relacionados:
+### Inspección de eventos {#inspecting-events}
 
-- **Recursos**: ve trazas de backend conectadas.
-- **Frames de animación largos**: accede a los perfiles asociados para analizar el rendimiento.
+Pase el cursor sobre cualquier evento en la cascada para ver su marca de tiempo, duración y factores contribuyentes (scripts, estilo/diseño u otro procesamiento). Pase el cursor sobre un Core Web Vital para ver su definición, umbral y cómo se compara con su p75.
 
-## Pestañas adicionales
+{{< img src="real_user_monitoring/explorer/events/specific-times-1.png" alt="Ventana emergente de tiempo de carga que muestra detalles de rendimiento, indicadores de umbral y comparación con el rendimiento de p75" width="100%" >}}
 
-Utiliza las otras pestañas para explorar datos relacionados:
+### Telemetría conectada {#connected-telemetry}
 
-Reproducir
-: ve una repetición visual de la sesión del usuario.
+Haga clic en los eventos en la cascada para acceder a los datos relacionados:
 
-Errores
-: ve los errores asociados con el evento.
+- {{< ui >}}Resources{{< /ui >}}: Vea los seguimientos de backend conectados.
+- {{< ui >}}Long Animation Frames{{< /ui >}}: Acceda a los perfiles asociados para el análisis de rendimiento.
 
-Recursos
-: inspecciona todos los recursos cargados durante el evento.
+## Series temporales de rendimiento {#performance-timeseries}
 
-Trazas
-: ve las trazas de backend conectadas al evento.
+{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="¡Únase a la vista previa!">}}
+Las series temporales de rendimiento están en versión preliminar y la recopilación está desactivada de forma predeterminada. Para habilitarlas, únase a la versión preliminar. Datadog envía instrucciones de configuración a los clientes participantes.
+{{< /callout >}}
 
-Indicadores de características
-: muestra los indicadores evaluados durante el evento.
+{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="La sección de series temporales de rendimiento de un panel lateral de RUM, que muestra un gráfico interactivo de Memoria y CPU durante la duración de una sesión" style="width:100%;" >}}
 
-Acciones
-: revisa las acciones del usuario capturadas durante la sesión.
+Para las sesiones de los SDK de iOS y Android, la sección {{< ui >}}Performance Timeseries{{< /ui >}} muestra un gráfico {{< ui >}}Memory & CPU{{< /ui >}} del uso de recursos de su aplicación, capturado cada segundo durante la sesión. Está disponible en los paneles laterales de sesión, vista y operación.
 
-Logs
-: accede a los logs asociados al evento.
+El gráfico cubre la sesión completa. Cuando lo abre desde una vista o una operación, los marcadores muestran dónde comienza y termina esa vista u operación, para que pueda leer su uso de recursos en comparación con todo lo que se ejecutó a su alrededor. Los períodos en los que la aplicación estuvo en segundo plano aparecen sombreados.
 
-Atributos
-: ve los atributos de contexto recopilados. Añade atributos personalizados con la [API Global Context][2].
+Para saber qué mide cada serie, consulte [Mobile Vitals][7].
 
-## Referencias adicionales
+## Pestañas adicionales {#additional-tabs}
+
+Utilice las otras pestañas para explorar datos relacionados:
+
+{{< ui >}}Replay{{< /ui >}}
+: Vea una reproducción visual de la sesión del usuario.
+
+{{< ui >}}Errors{{< /ui >}}
+: Visualizar errores asociados con el evento.
+
+{{< ui >}}Resources{{< /ui >}}
+: Inspeccione todos los recursos cargados durante el evento.
+
+{{< ui >}}Traces{{< /ui >}}
+: Visualizar seguimientos de backend conectados al evento.
+
+{{< ui >}}Feature Flags{{< /ui >}}
+: Visualizar banderas de funciones evaluadas durante el evento.
+
+{{< ui >}}Actions{{< /ui >}}
+: Revise las acciones del usuario capturadas durante la sesión.
+
+{{< ui >}}Logs{{< /ui >}}
+: Acceda a los registros asociados con el evento.
+
+{{< ui >}}Attributes{{< /ui >}}
+: Visualizar los atributos de contexto recopilados. Agregue atributos personalizados con la [Global Context API][2].
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -85,3 +112,6 @@ Atributos
 [2]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: /es/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [4]: /es/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings
+[5]: /es/real_user_monitoring/rum_without_limits/retention_filters
+[6]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[7]: /es/real_user_monitoring/application_monitoring/mobile_vitals/#performance-timeseries

@@ -64,17 +64,17 @@ To provide clarity when querying, the metric source and equivalent metrics are d
 
 ## View detailed mappings
 
-For a comprehensive view of how specific OTel and Datadog metrics relate, check the Metrics Summary page:
+For a comprehensive view of how specific OTel and Datadog metrics relate, check the Metrics Catalog page:
 
-1. Navigate to [{{< ui >}}Metrics > Summary{{< /ui >}}][2].
+1. Navigate to the [Metrics Catalog][2].
 2. Search for a known Datadog or OTel metric.
 3. Open the {{< ui >}}Metric Details{{< /ui >}} side panel.
 
-Alternatively, click {{< ui >}}Edit in Metrics Summary{{< /ui >}} when inputting a metric in the query editor.
+Alternatively, click {{< ui >}}Edit in Metrics Catalog{{< /ui >}} when inputting a metric in the query editor.
 
 This panel displays metric mappings, including complex relationships. For example, it shows how `system.cpu.utilization` maps to multiple Datadog metrics like `system.cpu.idle`, `system.cpu.user`, and others.
 
-{{< img src="/metrics/otel/mappings.png" alt="Metrics Summary Details panel showing OTel and Datadog mappings" style="width:100%;" >}}
+{{< img src="/metrics/otel/mappings.png" alt="Metrics Catalog Details panel showing OTel and Datadog mappings" style="width:100%;" >}}
 
 You can also see the tag-based logic used for these mappings. Hover over an equivalent metric to see the specific conditions. For example, hovering over `system.cpu.idle` shows that it maps to `system.cpu.utilization` when `state=idle`, and the value is multiplied by 100.
 
@@ -85,5 +85,5 @@ You can also see the tag-based logic used for these mappings. Hover over an equi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
-[2]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/metric/catalog
 [3]: /dashboards/functions/telemetry_source/

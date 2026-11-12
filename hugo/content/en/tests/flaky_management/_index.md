@@ -130,6 +130,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit. Datadog also checks recent preceding commits, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
+      - Retries after the first execution are not billed as test spans. For details, see [CI/CD Optimization Billing][22].
     - Runs tests even if they are marked as `Disabled`.
     - If all retries pass, marks the fix as {{< ui >}}in progress{{< /ui >}} in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
@@ -203,6 +204,12 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 | {{< ui >}}Environment Dependency{{< /ui >}} | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
 | {{< ui >}}Unknown{{< /ui >}}             | Test is flaky for an unknown reason. |
 
+## How code owners are assigned
+
+Flaky Tests Management assigns code owners to each flaky test based on the `CODEOWNERS` file that your test runs report. Each time a flaky test runs on the default branch, Flaky Tests Management updates the test's code owners to match that run. After you change your `CODEOWNERS` file, the new code owners appear the next time the test runs on the default branch.
+
+If a flaky test has never run on the default branch, it keeps the code owners reported by the runs where it flaked.
+
 ## Receive notifications
 
 Set up notifications to track changes to your flaky tests. Notifications are sent when:
@@ -210,7 +217,7 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 - A user or policy changes the state of a flaky test.
 - The remediation flow for a flaky test succeeds or fails.
 
-You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings. To learn how Flaky Tests Management assigns code owners to a flaky test, see the [How code owners are assigned](#how-code-owners-are-assigned) section.
 
 Notifications are bundled over a short period to reduce noise. The weekly digest summary is only sent to notification rules that have code owners configured.
 
@@ -235,7 +242,7 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
 | [.NET][6]       | 3.13.0+                       | 3.23.0+                      |
-| [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
+| [Go][7]         | ddtest 1.14.0+                | ddtest 1.14.0+               |
 | [Java][8]       | 1.47.0+                       | 1.52.0+                      |
 | [JavaScript][9] | 5.44.0+                       | 5.59.0+                      |
 | [Python][10]    | 3.3.0+                        | 3.8.0+                       |
@@ -243,6 +250,13 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 | [Swift][12]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Troubleshooting
+
+### Code owners on a flaky test are out of date
+
+The code owners of a flaky test update when the test runs on the default branch. If a flaky test still shows old code owners after you change your `CODEOWNERS` file, check the following:
+
+- **The test has not run on the default branch since the change.** Run your test suite on the default branch.
+- **Your test runs do not report code owners.** In the [Test Optimization Explorer][19], check the {{< ui >}}Test Code Owners{{< /ui >}} facet on the test's runs. If it is empty, make sure the `CODEOWNERS` file is in one of the [supported locations][20] so that the Datadog SDK or `datadog-ci` can find it. For JUnit XML reports, see [Adding code owners][21].
 
 ### Disabled flaky tests are not automatically moved to Fixed
 
@@ -290,3 +304,7 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/
 [18]: /api/latest/test-optimization/
+[19]: /tests/explorer/
+[20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
+[21]: /tests/setup/junit_xml/#adding-code-owners
+[22]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features

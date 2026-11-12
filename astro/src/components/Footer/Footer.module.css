@@ -1,0 +1,1097 @@
+/* Ported from ~/dd/websites-modules/assets/styles/components/_footer.scss.
+   Hugo-identical — pixel values and behaviors must match the Hugo site exactly. */
+
+.footer {
+  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-bg);
+  padding-bottom: var(--hugo-footer-padding-bottom);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding-bottom: var(--hugo-footer-padding-bottom-tablet);
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer {
+    padding-bottom: var(--hugo-footer-padding-bottom-desktop);
+  }
+}
+
+/* Bootstrap-identical container max-widths — same as Header.module.css */
+.footer__container {
+  display: block;
+  width: 100%;
+  padding-inline: 12px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .footer__container {
+    max-width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__container {
+    max-width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__container {
+    max-width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .footer__container {
+    max-width: 1336px;
+  }
+}
+
+/* --- Docs blurb row (intro) --------------------------------------------- */
+
+.footer__blurb-row {
+  display: flex;
+  flex-direction: column;
+  padding-block: 30px; /* py-3 */
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .footer__blurb-row {
+    padding-block: 36px; /* py-md-36 */
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__blurb-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 50px; /* py-lg-5 */
+    gap: 0;
+  }
+}
+
+.footer__blurb-copy {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer__blurb-copy {
+    text-align: start;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__blurb-copy {
+    width: 75%;
+  }
+}
+
+.footer__blurb-heading {
+  color: var(--hugo-footer-text-strong);
+  font-weight: 600;
+  margin: 0;
+}
+
+.footer__blurb-desc {
+  color: var(--hugo-footer-text-strong);
+  /* Upstream's `font-regular` is grouped with `.font-light` and sets 200, not
+     the 400 the name suggests, so this paragraph renders at the body's Light
+     200. Size and line-height both come from `.font-22`. */
+  font-weight: 200;
+  font-size: 22px; /* .font-22 */
+  line-height: 30px; /* .font-22 */
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.footer__blurb-cta {
+  width: 100%;
+  text-align: start;
+}
+
+@media (min-width: 992px) {
+  .footer__blurb-cta {
+    width: 25%;
+    text-align: end;
+  }
+}
+
+.footer__cta-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: var(--hugo-footer-btn-height);
+  width: 100%;
+  padding: 0;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-cta-primary-bg);
+  border: 1px solid var(--hugo-footer-cta-primary-border);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.footer__cta-primary:hover {
+  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-cta-primary-bg-hover);
+  border-color: var(--hugo-footer-cta-primary-border-hover);
+}
+
+.footer__cta-primary:lang(ja),
+.footer__cta-primary:lang(ko) {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .footer__cta-primary {
+    min-height: var(--hugo-footer-btn-min-height-tablet);
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__cta-primary {
+    min-width: var(--hugo-footer-btn-min-width-desktop);
+    width: auto;
+    line-height: 22px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.footer__cta-primary span {
+  margin-bottom: 2px;
+}
+
+/* --- Footer content wrapper --------------------------------------------- */
+
+.footer__content {
+  padding-block: 20px;
+}
+
+@media (min-width: 768px) {
+  .footer__content {
+    padding-block: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__content {
+    padding-block: 36px;
+  }
+}
+
+/* --- Nav: shared reset --------------------------------------------------- */
+
+.footer__nav {
+  margin-bottom: 28px;
+}
+
+@media (min-width: 768px) {
+  .footer__nav {
+    margin-bottom: 36px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__nav {
+    margin-bottom: 48px;
+  }
+}
+
+/* Self-contained reset, as upstream: the footer must not depend on a CSS
+   reset being present on the page.
+
+   `ul` and `button` are wrapped in `:where()` so they carry no specificity. Upstream can use bare
+   type selectors here because its own component rules are two classes deep
+   (`.footer-nav .footer-section-header`) and outrank them; ours are single
+   BEM classes, so an unwrapped `.footer__nav button` would beat them and
+   clobber the headers' border, color, and font, and `.footer__nav ul` would
+   zero out the link lists' margins. Their only other competition is the UA
+   stylesheet, which any author rule outranks regardless of specificity.
+
+   `a` is deliberately NOT wrapped: it has to beat the site's global link
+   color, which a zero-specificity rule would lose to. Nothing in this
+   component sets color or text-decoration on a nav link, so there is no
+   conflict to lose. */
+:where(.footer__nav) :where(ul) {
+  list-style: none;
+  margin-block: 0;
+  padding-left: 0;
+}
+
+.footer__nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer__nav a:hover,
+.footer__nav a:active {
+  color: var(--hugo-footer-link-muted);
+}
+
+.footer__nav a:focus-visible {
+  color: var(--hugo-footer-link-muted);
+  outline: 2px solid var(--hugo-footer-accent);
+  outline-offset: 2px;
+}
+
+:where(.footer__nav) :where(button) {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+:where(.footer__nav) button:disabled {
+  cursor: default;
+}
+
+:where(.footer__nav) button:focus-visible {
+  outline: 2px solid var(--hugo-footer-accent);
+  outline-offset: 2px;
+}
+
+/* --- Nav: top-level grid ------------------------------------------------- */
+
+/* Upstream rides Bootstrap's grid; here the gutter is applied directly —
+   negative margin on the row, matching padding on each cell. */
+.footer__sections {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -12px;
+  row-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .footer__sections {
+    row-gap: 36px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__sections {
+    row-gap: 28px;
+  }
+}
+
+.footer__product-section,
+.footer__link-sections-cell {
+  width: 100%;
+  padding-inline: 12px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) {
+  .footer__product-section {
+    width: 66.6667%;
+  }
+
+  .footer__link-sections-cell {
+    width: 33.3333%;
+  }
+}
+
+/* --- Nav: section headers (Product / Resources / Blog / About) ----------- */
+
+.footer__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--hugo-footer-text-strong);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  cursor: pointer;
+  padding-bottom: 16px;
+  width: 100%;
+  border-bottom: 1px solid var(--hugo-footer-border-gray-darker);
+  text-transform: capitalize;
+}
+
+.footer__section-header--open {
+  color: var(--hugo-footer-accent);
+  border-bottom-color: var(--hugo-footer-text-strong);
+}
+
+@media (min-width: 768px) {
+  .footer__section-header {
+    display: block;
+    text-align: start;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    cursor: default;
+    border-bottom-color: var(--hugo-footer-border-translucent);
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__section-header {
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+}
+
+/* --- Nav: accordion caret ------------------------------------------------ */
+
+/* Upstream's accordion headers are plain `<p>` elements with no affordance at
+   all; the caret is an addition here, to give the `<button>` headers a visible
+   open/closed state. The asset is websites-modules' own `angle-down-wui.svg`,
+   which is a bare path with no sizing, so it needs an explicit box and fill. */
+.footer__caret {
+  display: block;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.15s ease;
+}
+
+.footer__caret svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.footer__section-header--open .footer__caret,
+.footer__category-header--open .footer__caret {
+  transform: rotate(180deg);
+}
+
+/* The accordion is mobile-only, so the affordance is too. */
+@media (min-width: 768px) {
+  .footer__caret {
+    display: none;
+  }
+}
+
+/* --- Nav: panels --------------------------------------------------------- */
+
+/* Below the tablet breakpoint the panels are collapsed until the controller
+   opens one. Collapsing in CSS (rather than waiting for hydration) is what
+   keeps the footer from flashing fully expanded on a slow connection. */
+@media (max-width: 767.98px) {
+  .footer__section-panel:not(.footer__section-panel--open),
+  .footer__category-panel:not(.footer__category-panel--open) {
+    display: none;
+  }
+}
+
+/* --- Nav: plain link lists ----------------------------------------------- */
+
+.footer__menu-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  margin-top: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--hugo-footer-border-gray-darker);
+}
+
+@media (min-width: 768px) {
+  .footer__menu-list {
+    margin-top: 8px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.footer__menu-item {
+  color: var(--hugo-footer-menu-item);
+  font-size: 14px;
+  /* Upstream sets no weight here, so the links inherit the body's Light 200.
+     Stated explicitly rather than inherited: the `font: inherit` button reset
+     above means an omitted weight is easy to misread as an oversight, and the
+     headers and subcategory labels around it all carry an explicit weight. */
+  font-weight: 200;
+  line-height: 18px;
+}
+
+/* --- Nav: Resources / Blog / About --------------------------------------- */
+
+.footer__link-sections {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .footer__link-sections {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 0;
+  }
+}
+
+/* At desktop the three lists fold into two columns, with Resources — the
+   longest — spanning both rows of the second one. */
+@media (min-width: 1200px) {
+  .footer__link-sections {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-content: start;
+    row-gap: 36px;
+  }
+
+  .footer__link-section--resources {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .footer__link-section--blog {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .footer__link-section--about {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* --- Nav: product categories --------------------------------------------- */
+
+/* Column-wrap flow: a fixed max-height plus `flex-wrap` turns the single
+   column of categories into several. The height must stay above the tallest
+   column, or the flow wraps where it likes and invents extra columns. */
+.footer__category-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-inline: -12px;
+}
+
+@media (min-width: 768px) {
+  .footer__category-list {
+    max-height: 1050px;
+    row-gap: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__category-list {
+    row-gap: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__category-list {
+    max-height: 850px;
+  }
+}
+
+.footer__category-wrapper {
+  width: 100%;
+  padding-inline: 12px;
+  box-sizing: border-box;
+}
+
+/* The 3-column band runs until the 4-column desktop starts at 1200px, so the
+   reordering has to cover the whole band, not just up to 992px. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .footer__category-wrapper {
+    width: 33.3333%;
+    order: var(--footer-tablet-order, 0);
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__category-wrapper {
+    width: 25%;
+  }
+}
+
+.footer__category-block {
+  border-bottom: 1px solid var(--hugo-footer-border-gray-darker);
+}
+
+@media (min-width: 768px) {
+  .footer__category-block {
+    border-bottom: none;
+  }
+}
+
+/* Forces a column break in the flow above. The basis has to be a length: a
+   percentage would resolve against the list's height, which is itself derived
+   from this item, so the spec makes it fall back to auto and nothing breaks. */
+.footer__column-break {
+  display: none;
+  width: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .footer__column-break {
+    flex-basis: 900px;
+    order: var(--footer-tablet-order, 0);
+  }
+
+  .footer__column-break--tablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__column-break {
+    flex-basis: 750px;
+  }
+
+  .footer__column-break--desktop {
+    display: block;
+  }
+}
+
+.footer__category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: var(--hugo-footer-link-muted);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  padding-block: 16px;
+}
+
+.footer__category-header--open {
+  padding-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  .footer__category-header {
+    display: block;
+    width: fit-content;
+    font-size: 16px;
+    line-height: 20px;
+    padding-block: 0;
+    margin-bottom: 8px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__category-header {
+    margin-bottom: 12px;
+  }
+}
+
+.footer__category-label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 4px;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1200px) {
+  .footer__category-label {
+    column-gap: 8px;
+  }
+}
+
+.footer__category-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--hugo-footer-accent);
+}
+
+.footer__category-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* --- Nav: subcategories --------------------------------------------------- */
+
+.footer__subcategory-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: 20px;
+  row-gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .footer__subcategory-list {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__subcategory-list {
+    row-gap: 16px;
+  }
+}
+
+.footer__subcategory-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/* Inside a category the list is just a run of links — no rule, no bottom gap. */
+.footer__subcategory .footer__menu-list {
+  margin-top: 6px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .footer__subcategory .footer__menu-list {
+    margin-top: 8px;
+  }
+}
+
+/* --- Logo + mobile app row ------------------------------------------------ */
+
+.footer__app-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-inline: -12px;
+}
+
+@media (min-width: 768px) {
+  .footer__app-row {
+    justify-content: space-between;
+  }
+}
+
+.footer__logo-link,
+.footer__app-cell {
+  width: 50%;
+  padding-inline: 12px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .footer__app-cell {
+    width: 33.3333%;
+  }
+}
+
+.footer__logo {
+  display: block;
+  max-width: 114px;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .footer__logo {
+    max-width: 196px;
+  }
+}
+
+.footer__download-app {
+  color: var(--hugo-footer-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: left;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+.footer__app-links {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.footer__app-links svg {
+  display: block;
+}
+
+/* --- Footer bottom-row top divider -------------------------------------- */
+
+/* Upstream: `.border-top.border-gray-darker.pt-36.pt-xl-12` — the padding sits
+   on the divider element itself, not on a separate spacer. */
+.footer__border-top {
+  border-top: 1px solid var(--hugo-footer-border-gray-darker);
+  padding-top: 36px;
+}
+
+@media (min-width: 1200px) {
+  .footer__border-top {
+    padding-top: 12px;
+  }
+}
+
+/* --- Bottom row --------------------------------------------------------- */
+
+.footer__bottom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+@media (min-width: 1200px) {
+  .footer__bottom-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
+.footer__lang-cell {
+  order: 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .footer__lang-cell {
+    order: 2;
+    justify-content: flex-end;
+    width: 16.6667%; /* col-xl-2 */
+  }
+}
+
+.footer__legal-cell {
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 28px; /* mb-28 */
+  gap: 0;
+}
+
+@media (min-width: 1200px) {
+  .footer__legal-cell {
+    order: 1;
+    justify-content: flex-start;
+    width: 66.6667%; /* col-xl-8 */
+    margin-bottom: 0;
+  }
+}
+
+.footer__social-cell {
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 28px; /* mb-28 */
+}
+
+@media (min-width: 1200px) {
+  .footer__social-cell {
+    order: 3;
+    justify-content: flex-end;
+    width: 16.6667%; /* col-xl-2 */
+    margin-bottom: 0;
+  }
+}
+
+.footer__copyright {
+  width: 100%;
+  text-align: center;
+  font-size: var(--hugo-footer-copyright-font-size);
+  line-height: 18px;
+  margin-right: 8px;
+  color: var(--hugo-footer-text);
+}
+
+@media (min-width: 768px) {
+  .footer__copyright {
+    width: auto;
+    text-align: start;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__copyright {
+    font-size: var(--hugo-footer-copyright-font-size-desktop);
+    line-height: 20px;
+    margin-right: 12px;
+  }
+}
+
+.footer__legal-item {
+  display: flex;
+  align-items: center;
+  color: var(--hugo-footer-text-strong);
+  font-size: var(--hugo-footer-link-font-size);
+}
+
+.footer__legal-item a {
+  color: var(--hugo-footer-text-strong);
+  text-decoration: none;
+  font-size: var(--hugo-footer-link-font-size);
+  padding: 0;
+}
+
+.footer__legal-item a:hover {
+  opacity: 0.5;
+}
+
+/* --- Social links ------------------------------------------------------- */
+
+.footer__social-item {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--hugo-footer-text-strong);
+}
+
+.footer__social-item--spaced {
+  margin-right: 1.75rem;
+}
+
+@media (min-width: 1200px) {
+  .footer__social-item--spaced {
+    margin-right: 1.25rem; /* me-xl-2 */
+  }
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  font-size: inherit;
+  line-height: 1;
+}
+
+.footer__social-link:hover {
+  opacity: 0.5;
+}
+
+.footer__social-link :global(.social-icon) {
+  font-size: 18px;
+}
+
+/* Match Hugo: the youtube-tetra glyph sits in a padded 42x42 viewBox, so Hugo
+   renders it larger (30px vs 18px) to optically match the other social icons. */
+.footer__social-link :global(.social-icon--youtube-tetra) {
+  font-size: 30px;
+}
+
+/* --- Language toggle ---------------------------------------------------- */
+
+.footer__lang-toggle {
+  position: relative;
+  width: auto;
+  min-width: var(--hugo-lang-toggle-min-width);
+  max-width: var(--hugo-lang-toggle-max-width);
+  height: var(--hugo-lang-toggle-height);
+  border-radius: 2px;
+  border: 1px solid var(--hugo-footer-border-gray);
+  background: transparent;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .footer__lang-toggle {
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__lang-toggle {
+    width: var(--hugo-lang-toggle-max-width);
+  }
+}
+
+.footer__lang-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 1px;
+  padding: 2px 8px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.footer__lang-button:hover {
+  background: #323232;
+}
+
+@media (min-width: 768px) {
+  .footer__lang-button {
+    border-radius: 3px;
+  }
+}
+
+.footer__lang-button > span {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--hugo-footer-text-strong);
+}
+
+@media (min-width: 768px) {
+  .footer__lang-button > span {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__lang-button > span {
+    font-size: 17px;
+    line-height: 22px;
+  }
+}
+
+.footer__lang-button-label {
+  margin-bottom: 2px;
+}
+
+.footer__lang-caret {
+  display: flex;
+  align-items: center;
+  transform: translate(0, -1px) rotate(180deg);
+  transition: transform 0.15s ease;
+}
+
+.footer__lang-caret--open {
+  transform: translate(0, 2px) rotate(0);
+}
+
+.footer__lang-popup {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: var(--hugo-footer-popup-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  gap: 2px;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.footer__lang-popup:not(.footer__lang-popup--open) {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .footer__lang-popup {
+    padding: 4px;
+    gap: 4px;
+    border-radius: 6px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__lang-popup {
+    border-radius: 8px;
+    bottom: calc(100% + 4px);
+  }
+}
+
+.footer__lang-item {
+  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-popup-bg);
+  padding: 2px 8px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__lang-item:hover {
+  background: var(--hugo-footer-popup-hover);
+  text-decoration: none;
+  opacity: 1;
+  color: var(--hugo-footer-text-strong);
+}
+
+@media (min-width: 768px) {
+  .footer__lang-item {
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__lang-item {
+    padding: 6px 16px;
+  }
+}
+
+.footer__lang-primary {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 2px;
+}
+
+@media (min-width: 768px) {
+  .footer__lang-primary {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__lang-primary {
+    font-size: 17px;
+    line-height: 22px;
+  }
+}
+
+.footer__lang-secondary {
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--hugo-footer-popup-secondary);
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .footer__lang-secondary {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__lang-secondary {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

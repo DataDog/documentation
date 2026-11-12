@@ -5,3 +5,9 @@ entries:
     operations:
       - CreateEvent
     title: Remove bearer token auth from the CreateEvent intake endpoint
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40922
+    operations:
+      - CreateEvent
+    title: Deprecate V1 Post an event and drop the V2 category caveat

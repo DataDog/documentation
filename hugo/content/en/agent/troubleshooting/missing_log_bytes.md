@@ -47,6 +47,8 @@ Backpressure occurs when a stage in the Agent's logs pipeline cannot keep up, sl
 4. Apply one relevant change, then follow the [Verify the result](#verify-the-result) section under representative log volume before addressing another component.
 5. If the Agent remains unable to process the required volume, follow the [Reduce log volume](#reduce-log-volume) section.
 
+To detect missing log bytes without searching the Agent log file, use the `datadog.agent.logs.bytes_missed` metric. This metric counts the bytes that the Agent did not read from rotated files before closing them. Create a [metric monitor][13] on this metric to receive an alert when the Agent loses log data.
+
 ### Interpret Logs Agent Backpressure
 
 Agent versions 7.82.0 and later include a **Logs Agent Backpressure** section in the [status command][1]. The section reports recent utilization for the processor, batching strategy, sender workers, and destinations. It retains peak utilization for approximately 10 hours and detailed saturation duration for 30 minutes.
@@ -229,3 +231,4 @@ If the steps on this page do not resolve the issue, [contact Datadog Support][9]
 [10]: /agent/configuration/agent-log-files/
 [11]: /logs/explorer/
 [12]: /agent/logs/advanced_log_collection/#manually-aggregate-multi-line-logs
+[13]: /monitors/types/metric/

@@ -36,10 +36,18 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.id}}` | The incident's public ID. |
 | `{{incident.title}}` | The incident title. |
 | `{{incident.severity}}` | The incident severity (for example, `SEV-1`, `SEV-2`). |
+| `{{incident.severity_number}}` | The numeric part of the incident severity, such as `1` for `SEV-1`. Empty if there is no numeric value. |
 | `{{incident.status}}` | The incident [status level][1]. |
 | `{{incident.created}}` | Timestamp when the incident was created. |
 | `{{incident.detected}}` | Timestamp when the incident was detected. |
 | `{{incident.resolved}}` | Timestamp when the incident was resolved. |
+| `{{incident.time_to_detect}}` | Time from the earliest impact start to detection. |
+| `{{incident.time_to_internal_response}}` | Time from detection to declaration. |
+| `{{incident.time_to_repair}}` | Time from detection to the latest recorded impact end. |
+| `{{incident.time_to_resolve}}` | Time from declaration to resolution. |
+| `{{incident.time_from_detect_to_resolve}}` | Time from detection to resolution. |
+| `{{incident.mean_time_to_<metric>_<window>}}` | Average duration for other incidents of the same type. Replace `<metric>` with `detect`, `internal_response`, `repair`, or `resolve`. Replace `<window>` with `30_days`, `90_days`, or `12_months` (365 days). Example: `{{incident.mean_time_to_resolve_30_days}}`. |
+| `{{incident.mean_time_from_detect_to_resolve_<window>}}` | Average time from detection to resolution for other incidents of the same type. Replace `<window>` with `30_days`, `90_days`, or `12_months` (365 days). |
 | `{{incident.customer_impacted}}` | `True` or `False`, depending on whether an impact has been added to the incident. |
 | `{{incident.customer_impact}}` | A description of the impacts and their duration. |
 | `{{incident.scope_of_impact}}` | A list of the impact descriptions. |
@@ -95,6 +103,7 @@ Channel name templates support a different, smaller set of variables than notifi
 | `{{dd}}` | The two-digit day of month the incident was created, in the timezone you configure for the channel name template. |
 | `{{severity}}` | The incident's severity. |
 | `{{severity_number}}` | The incident's severity, as a number (for example, `1` for `SEV-1`). |
+| `{{status}}` | The incident's status (for example, `active`, `stable`, or `resolved`). |
 | `{{random_adjective}}` | A random adjective. |
 | `{{random_noun}}` | A random noun. |
 | `{{slug}}` | A slug value. When the slug source is set to `servicenow`, this displays the ServiceNow record number. |

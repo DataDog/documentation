@@ -22,3 +22,44 @@ entries:
       - GetMonthlyUsageAttribution
     title: Add deprecation notice for estimated usage types in Usage Metering 
       API endpoints
+  - change_type: added
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41201
+    operations:
+      - CreateTemporaryGrantRequest
+      - DeleteRequestedTemporaryGrant
+      - DeleteTemporaryGrantRequest
+      - GetMyTemporaryGrantRequest
+      - GetTemporaryGrantRequest
+      - ListMyTemporaryGrantRequests
+      - ListTemporaryGrantRequests
+      - UpdateTemporaryGrantRequest
+    title: Publish temporary AI-credit grant request APIs in preview
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41154
+    operations:
+      - GetMonthlyUsageAttribution
+    title: Clarify monthly usage attribution month restriction
+  - change_type: added
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41506
+    operations:
+      - GetQuota
+    title: Publish usage quota lookup and include_descendants access control
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41506
+    operations:
+      - CreateQuotas
+      - DeletePendingQuota
+      - DeleteQuota
+      - ListQuotas
+      - UpdateQuota
+    title: Publish usage quota lookup and include_descendants access control
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41559
+    operations:
+      - CreateQuotas
+    title: Document create-only usage quotas

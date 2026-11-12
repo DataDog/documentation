@@ -16,6 +16,9 @@ further_reading:
 - link: '/journey_monitoring/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview
@@ -96,7 +99,7 @@ When no matching operation represents a critical action, follow [Create operatio
 
 Each operation row also shows its execution count and success rate, calculated using the `rum.measure.operation` metric, and its p75 latency, calculated using the `rum.measure.operation.duration` metric.
 
-<div class="alert alert-tip">If Bits AI is enabled for your organization, launch a <a href="/real_user_monitoring/ai_investigations/operation_ai_investigation/">Bits Investigation</a> from an operation to troubleshoot failures or latency regressions.</div>
+<div class="alert alert-tip">If Bits AI is enabled for your organization, launch a <a href="/real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring">Bits Investigation</a> from an operation to troubleshoot failures or latency regressions.</div>
 
 Click an operation to open its performance side panel. The panel shows:
 - The list of SLOs and monitors configured for the operation

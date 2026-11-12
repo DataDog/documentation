@@ -1,0 +1,83 @@
+---
+/**
+ * Prev/next and numbered links for a statically paginated list. Each page is
+ * its own URL, built by `hrefForPage`. Renders nothing for a single page.
+ */
+import styles from "./Pagination.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { paginationItems } from "./paginationItems";
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  hrefForPage: (pageNumber: number) => string;
+  labels: { navLabel: string; previous: string; next: string };
+}
+
+const { currentPage, totalPages, hrefForPage, labels } = Astro.props;
+const cl = classListFactory(styles);
+const items = paginationItems(currentPage, totalPages);
+const hasPrevious = currentPage > 1;
+const hasNext = currentPage < totalPages;
+---
+
+{
+  totalPages > 1 && (
+    <nav class={cl("pagination")} aria-label={labels.navLabel}>
+      {hasPrevious ? (
+        <a
+          class={cl("pagination__previous")}
+          href={hrefForPage(currentPage - 1)}
+          rel="prev"
+        >
+          {labels.previous}
+        </a>
+      ) : (
+        <span
+          class={cl("pagination__previous", "pagination__previous--disabled")}
+          aria-disabled="true"
+        >
+          {labels.previous}
+        </span>
+      )}
+      <ol class={cl("pagination__list")}>
+        {items.map((item) => (
+          <li class={cl("pagination__item")}>
+            {item === "ellipsis" ? (
+              <span class={cl("pagination__ellipsis")} aria-hidden="true">
+                …
+              </span>
+            ) : item === currentPage ? (
+              <span
+                class={cl("pagination__page", "pagination__page--current")}
+                aria-current="page"
+              >
+                {item}
+              </span>
+            ) : (
+              <a class={cl("pagination__page")} href={hrefForPage(item)}>
+                {item}
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+      {hasNext ? (
+        <a
+          class={cl("pagination__next")}
+          href={hrefForPage(currentPage + 1)}
+          rel="next"
+        >
+          {labels.next}
+        </a>
+      ) : (
+        <span
+          class={cl("pagination__next", "pagination__next--disabled")}
+          aria-disabled="true"
+        >
+          {labels.next}
+        </span>
+      )}
+    </nav>
+  )
+}

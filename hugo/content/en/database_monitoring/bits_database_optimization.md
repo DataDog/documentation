@@ -16,7 +16,7 @@ further_reading:
   text: "How Bits Database Optimization proves a query rewrite is faster"
 ---
 
-<div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL and MySQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+<div class="alert alert-info">Bits Database Optimization is available for PostgreSQL and MySQL, and in Preview for SQL Server. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
 
 ## Overview
 
@@ -47,11 +47,35 @@ Optimization candidates are selected automatically from Database Monitoring tele
 
 The instances included in Continuous Optimizations are listed below the toggle. To remove an instance, click the minus (**-**) button on the right side of its row, then click **Save**.
 
+{{< img src="database_monitoring/database_optimization_continuous_optimizations_toggle.png" alt="The Bits Database Optimization configuration panel, showing the Continuous Optimizations toggle and a list of included database instances with their tags." style="width:100%;">}}
+
 When continuous optimizations are enabled, Bits Database Optimization selects eligible queries from the included instances on an ongoing basis until the limit of 50 distinct queries per database instance per month is reached. Queries are prioritized by total execution duration.
 
 Each analyzed query counts toward this limit even when no optimization is found. After a query has been analyzed, it is not analyzed again in the same month. The limit resets at the start of each month (UTC).
 
 Bits Database Optimization is priced according to AI credits. For details, see the [AI credits pricing page][5].
+
+## SQL Server (Preview)
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Database Optimization for SQL Server is in Preview. To request access, click <strong>Get Early Access</strong> in the SQL Server banner on the <a href="https://app.datadoghq.com/databases/optimizations">Optimizations</a> page, or contact your Datadog representative.
+{{< /callout >}}
+
+### Requirements
+
+In addition to the [prerequisites](#prerequisites), SQL Server requires:
+
+- **Schema collection** enabled on each SQL Server instance. Schema collection is off by default for SQL Server. Set `collect_schemas.enabled: true` in the instance configuration. See [Exploring Database Schemas][8].
+- **Continuous optimizations** turned on. See [Enable continuous optimizations](#enable-continuous-optimizations). SQL Server optimizations come only from continuous optimizations.
+
+### Recommended
+
+- **Datadog Agent 7.86 or later.** Upgrading the Agent helps Bits Database Optimization produce higher-quality optimizations for SQL Server.
+
+### Limitations
+
+- Automated pull requests are not available for SQL Server during the Preview.
+- Queries that use temporary tables or table variables are not analyzed.
 
 ## Viewing optimizations
 
@@ -68,7 +92,7 @@ To filter the query list by optimization type, select an option from **Optimizat
 The Optimization panel includes a summary of the query issue, the optimized query used in the simulation, and a visualization of the Simulated Performance Impact.
 
 Explore the Simulated Performance Impact visualization for more details about improvements:
-  - Hover over the improvement summary (for example, "96.9x faster") to view before-and-after execution times, logical reads, and shared blocks dirtied. The table shows the average, median, P95, and maximum for each metric.
+  - Hover over the improvement summary (for example, "96.9x faster") to view before-and-after execution times, logical reads, and write activity (dirtied blocks for PostgreSQL, write work for MySQL, or logical writes for SQL Server). The table shows the average, median, P95, and maximum for each metric.
   - Hover over each item in the visualization to view more details.
 
 {{< img src="database_monitoring/database_optimization_simulated_performance_impact.png" alt="An example Simulated Performance Impact visualization, showing a query optimized to 96.9x faster." style="width:100%;">}}
@@ -97,3 +121,4 @@ To review the PR for the optimization fix to your database, select **Review PR b
 [5]: https://www.datadoghq.com/pricing/?product=ai-credits#products
 [6]: /bits_ai/
 [7]: https://app.datadoghq.com/databases/optimizations
+[8]: /database_monitoring/schema_explorer/

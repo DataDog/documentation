@@ -14,6 +14,9 @@ further_reading:
   - link: "/real_user_monitoring/operations_monitoring/"
     tag: "Documentation"
     text: "Operations Monitoring"
+  - link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+    tag: "Blog"
+    text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

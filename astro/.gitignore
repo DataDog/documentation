@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.astro/
+.claude/*local*
+test-results/
+playwright-report/
+
+# SDK code examples, staged by `yarn fetch:examples` from the six
+# datadog-api-client-* repos. Build input, never committed.
+api-code-examples/
+
+# API spec bundle, staged by `yarn fetch:spec` from the published
+# latest-api-docs.tar.gz. Build input, never committed. The .incoming sibling is
+# the fetch's scratch directory, only present mid-fetch or after a failed one.
+api-spec/
+api-spec.incoming/
+
+# yarn v2 or greater
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

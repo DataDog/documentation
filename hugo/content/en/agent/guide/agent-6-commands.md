@@ -16,7 +16,6 @@ List of commands to start the Datadog Agent:
 
 | Platform   | Command                                                            |
 |------------|--------------------------------------------------------------------|
-| AIX        | `startsrc -s datadog-agent`                                        |
 | Linux      | See the [Agent documentation][3] for your OS.                      |
 | Docker     | Use the [installation command][4].                                 |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
@@ -30,7 +29,6 @@ List of commands to stop the Datadog Agent:
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
-| AIX        | `stopsrc -s datadog-agent`                                                       |
 | Linux      | See the [Agent documentation][3] for your OS.                                    |
 | Docker     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
@@ -59,7 +57,6 @@ List of commands to display the status of the Datadog Agent:
 
 | Platform        | Command                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
-| AIX             | `lssrc -s datadog-agent`                                                      |
 | Linux           | See the [Agent documentation][3] for your OS.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
@@ -73,7 +70,6 @@ List of commands to display the status of your Datadog Agent and enabled integra
 
 | Platform   | Command                                              |
 |------------|------------------------------------------------------|
-| AIX        | `datadog-agent status`                               |
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
 | Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |

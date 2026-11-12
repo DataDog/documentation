@@ -7,13 +7,13 @@ further_reading:
   tag: 블로그
   text: Datadog을 사용하여 Synthetic 프라이빗 위치 모니터링하기
 - link: /getting_started/synthetics/private_location
-  tag: 설명서
+  tag: 문서
   text: 프라이빗 위치로 시작하기
 - link: /synthetics/private_locations/monitoring
-  tag: 설명서
+  tag: 문서
   text: 프라이빗 위치 모니터링하기
 - link: /synthetics/private_locations/dimensioning
-  tag: 설명서
+  tag: 문서
   text: 프라이빗 위치 규모 측정
 - link: https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/
   tag: 아키텍처 센터
@@ -84,11 +84,13 @@ FIPS 지원이 필요한 경우, Docker Hub에서 [FIPS 준수 이미지][26]를
 
 | 시스템 | 요구 사항 |
 |---|---|
-| OS | Windows Server 2022, Windows Server 2019, Windows Server 2016, 또는 Windows 10. |
+| OS | Windows Server 2025, Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows 11 또는 Windows 10. |
 | RAM | 최소 4GB. 8GB 권장. |
 | CPU | 64비트를 지원하는 Intel 또는 AMD 프로세서. 2.8GHz 이상의 프로세서 권장. |
 
-**참고**: Windows 프라이빗 위치에서 브라우저 테스트를 실행하려면 브라우저(예: Chrome, Edge 또는 Firefox)가 Windows 컴퓨터에 설치되어 있어야 합니다.
+**참고:** 브라우저 테스트를 수행하려면 Windows 서버에 브라우저가 설치되어 있어야 합니다.
+- Windows Private Location 1.71.0 이상: Chrome 및 Firefox는 포함되어 있습니다. Edge는 별도로 설치하세요.
+- Windows Private Location 1.70.0 이하: Chrome, Edge 및 Firefox를 설치하세요.
 
 MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 이상을 설치해야 합니다.
 
@@ -109,7 +111,7 @@ MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 �
 
 | 포트 | 엔드포인트                               | 설명                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | 프라이빗 위치에서 테스트 구성을 가져오고 [AWS Signature Version 4 protocol][1]을 기반으로 한 내부 프로토콜을 사용하여 Datadog에 테스트 결과를 푸시하는 데 사용됩니다.{{< site-region region="gov,gov2" >}} 버전 `1.32.0` 이상에서는 **컨테이너화된 Linux 프라이빗 위치**에서의 요청이 FIPS(연방 정보 처리 표준)를 준수합니다. **Windows 프라이빗 위치**의 경우, FIPS 준수 암호화는 버전 `1.63.0` 이상에서 지원됩니다.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | 프라이빗 위치에서 테스트 구성을 가져오고 [AWS Signature Version 4 프로토콜][1]을 기반으로 한 내부 프로토콜을 사용하여 Datadog에 테스트 결과를 푸시하는 데 사용됩니다.{{< site-region region="gov,gov2" >}} 버전 `1.32.0` 이상에서는 **컨테이너화된 Linux 프라이빗 위치**에서의 요청이 FIPS(연방 정보 처리 표준)를 준수합니다. **Windows 프라이빗 위치**의 경우, FIPS 준수 암호화는 버전 `1.63.0` 이상에서 지원됩니다.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -125,18 +127,18 @@ MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 �
 
 ### 프라이빗 위치 만들기 {#create-your-private-location}
 
-[**Synthetic Monitoring** > **Settings** > **Private Locations**][22]로 이동하여 **Add Private Location**을 클릭하세요.
+[{{< ui >}}Synthetic Monitoring{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Private Locations{{< /ui >}}][22]로 이동하고 {{< ui >}}Add Private Location{{< /ui >}}를 클릭합니다.
 
 {{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="프라이빗 위치 생성하기" style="width:90%;">}}
 
 프라이빗 위치 세부 정보를 입력합니다.
 
-1. 프라이빗 위치의 **이름**과 **설명**을 지정하세요.
-2. 프라이빗 위치와 연결하려는 **태그**를 추가하세요.
-3. 기존의 **API 키** 중 하나를 선택하세요. API 키를 선택하면 프라이빗 위치와 Datadog 간의 통신이 가능해집니다. 기존 API 키가 없는 경우, **Generate API key**를 클릭하여 전용 페이지에서 생성하세요. `Name` 및 `API key` 필드만 필수입니다.
-4. 프라이빗 위치에 대한 액세스를 설정하고 **Save Location and Generate Configuration File**을 클릭합니다. Datadog이 프라이빗 위치를 생성하고 관련 구성 파일을 생성합니다.
+1. 프라이빗 위치의 {{< ui >}}Name{{< /ui >}} 및 {{< ui >}}Description{{< /ui >}}을 지정합니다.
+2. 프라이빗 위치와 연결하려는 {{< ui >}}Tags{{< /ui >}}를 추가합니다.
+3. 기존의 {{< ui >}}API Keys{{< /ui >}} 중 하나를 선택합니다. API 키를 선택하면 프라이빗 위치와 Datadog 간의 통신이 가능해집니다. 기존 API 키가 없는 경우, {{< ui >}}Generate API key{{< /ui >}}를 클릭하여 전용 페이지에서 생성하세요. `Name` 및 `API key` 필드만 필수입니다.
+4. 프라이빗 위치에 대한 액세스 권한을 설정하고 {{< ui >}}Save Location and Generate Configuration File{{< /ui >}}을 클릭합니다. Datadog이 프라이빗 위치를 생성하고 관련 구성 파일을 생성합니다.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="프라이빗 위치에 세부 정보 추가하기" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="프라이빗 위치에 세부 정보 추가" style="width:85%;">}}
 
 ### 프라이빗 위치 구성{#configure-your-private-location}
 
@@ -148,11 +150,11 @@ MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 �
 
 프라이빗 위치와 Datadog 간의 트래픽이 프록시를 통과해야 하는 경우, 관련 `proxyDatadog` 파라미터를 생성된 구성 파일에 추가하려면 프록시 URL을 `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`로 지정하세요.
 
-{{<img src="synthetics/private_locations/pl_proxy_1.png" alt="프라이빗 로케이션 구성 파일에 프록시 추가하기" style="width:90%;">}}
+{{<img src="synthetics/private_locations/pl_proxy_1.png" alt="프라이빗 로케이션 구성 파일에 프록시 추가" style="width:90%;">}}
 
 #### 예약 IP 차단 {#blocking-reserved-ips}
 
-기본적으로, Synthetics 사용자는 모든 IP를 사용하여 엔드포인트에서 Synthetic 테스트를 생성할 수 있습니다. 네트워크 내의 민감한 내부 IP에서 사용자가 테스트를 생성하지 못하도록 하려면, **Block reserved IPs** 토글을 클릭하여 기본 예약 IP 범위([IPv4 주소 레지스트리][6] 및 [IPv6 주소 레지스트리][7])를 차단하고 관련 `enableDefaultBlockedIpRanges` 파라미터를 생성된 구성 파일에서 `true`로 설정하세요.
+기본적으로, Synthetics 사용자는 모든 IP를 사용하여 엔드포인트에서 Synthetic 테스트를 생성할 수 있습니다. 네트워크 내의 민감한 내부 IP에서 사용자가 테스트를 생성하지 못하도록 하려면, {{< ui >}}Block reserved IPs{{< /ui >}} 버튼을 토글하여 기본 예약 IP 범위([IPv4 주소 레지스트리][6] 및 [IPv6 주소 레지스트리][7])를 차단하고, 관련 `enableDefaultBlockedIpRanges` 파라미터를 생성된 구성 파일에서 `true`로 설정하세요.
 
 테스트하려는 엔드포인트 중 일부가 차단된 예약 IP 범위 내에 위치하는 경우, 해당 IP 및/또는 CIDR을 허용 목록에 추가하여 관련 `allowedIPRanges` 파라미터를 생성된 구성 파일에 추가할 수 있습니다.
 
@@ -164,7 +166,7 @@ MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 �
 
 {{< img src="synthetics/private_locations/pl_view_file_1.png" alt="예약 IP 구성" style="width:90%;">}}
 
-Datadog은 시크릿을 저장하지 않으므로 **설치 지침 보기**를 클릭하기 전에 로컬에 저장하시기 바랍니다.
+Datadog은 시크릿을 저장하지 않으므로 {{< ui >}}View Installation Instructions{{< /ui >}}를 클릭하기 전에 로컬에 저장하시기 바랍니다.
 
 **참고:** 더 많은 워커를 추가하거나 다른 호스트에 워커를 설치하기로 결정한 경우, 이러한 시크릿을 다시 참조할 수 있어야 합니다.
 
@@ -177,7 +179,7 @@ Datadog은 시크릿을 저장하지 않으므로 **설치 지침 보기**를 �
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-이 명령을 실행하여 구성 파일을 컨테이너에 마운트하여 프라이빗 위치 워커를 부팅합니다. `<MY_WORKER_CONFIG_FILE_NAME>.json` 파일이 루트 홈 폴더가 아닌 `/etc/docker`에 있는지 확인하세요.
+이 명령을 실행하여 구성 파일을 컨테이너에 마운트하여 프라이빗 위치 워커를 부팅합니다. 아래 명령의 `$PWD`는 명령을 실행하는 디렉토리를 의미하므로, `<MY_WORKER_CONFIG_FILE_NAME>.json` 파일이 저장된 경로로 바꾸어야 합니다. 콜론 앞의 경로(호스트 머신에서의 위치)는 어떤 디렉토리든 상관없지만, 콜론 뒤의 경로(`/etc/datadog/synthetics-check-runner.json`)는 워커가 컨테이너 내부에서 구성을 찾을 것으로 예상하는 위치이므로 정확히 일치해야 합니다.
 
 ```shell
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
@@ -390,7 +392,7 @@ OpenShift의 경우 `anyuid` SCC로 프라이빗 위치를 실행하세요. 이�
 
 {{% tab "AWS Secret Manager를 사용하는 Fargate" %}}
 
-AWS Secret Manager에서 이전에 생성된 프라이빗 위치 구성의 일부 또는 전체를 저장할 시크릿을 생성합니다. 구성 파일에서는 `publicKey`를 그대로 유지할 수 없다는 점에 유의하세요. 예:
+AWS Secret Manager에서 이전에 생성된 프라이빗 위치 구성의 일부 또는 전체를 저장할 시크릿을 생성합니다. 구성 파일에서는 `publicKey`를 그대로 유지할 수 없다는 점에 유의하세요. 예시:
 
 ```json
 {
@@ -407,7 +409,7 @@ AWS Secret Manager에서 이전에 생성된 프라이빗 위치 구성의 일�
 
 작업 정의와 AWS Fargate 인스턴스가 Secret Manager에서 저장된 시크릿을 읽을 수 있도록 필요한 권한을 허용해야 합니다. 자세한 내용은 [Amazon ECS에서 Secrets Manager 시크릿을 사용하여 민감한 데이터 지정하기][25]를 참조하세요.
 
-이전 단계에서 생성한 시크릿의 ARN으로 시크릿 목록의 값을 교체하여 다음 예와 일치하는 Fargate 작업 정의를 생성합니다. 예: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+이전 단계에서 생성한 시크릿의 ARN으로 시크릿 목록의 값을 교체하여 다음 예와 일치하는 Fargate 작업 정의를 생성합니다. 예시: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
 
 Secret Manager에 모든 구성을 저장해 두지 않았다면, 계속해서 하드코딩된 문자열 인수로 값을 전달할 수 있습니다.
 
@@ -533,8 +535,8 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS 모니터�
 {{% tab "Windows(GUI 사용)" %}}
 
 1. [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` 파일][101]을 다운로드한 후 프라이빗 위치를 설치할 머신에서 이 파일을 실행합니다.
-1. 시작 페이지에서 **Next**를 클릭하고 EULA를 읽은 후 이용약관에 동의하세요. **Next**를 클릭하세요.
-1. 애플리케이션을 설치할 위치를 수정하거나 기본 설정을 유지합니다. **Next**를 클릭하세요.
+1. 시작 페이지에서 {{< ui >}}Next{{< /ui >}}를 클릭하고 EULA를 읽은 후 이용약관에 동의합니다. {{< ui >}}Next{{< /ui >}}를 클릭합니다.
+1. 애플리케이션을 설치할 위치를 수정하거나 기본 설정을 유지합니다. {{< ui >}}Next{{< /ui >}}를 클릭합니다.
 1. Windows 프라이빗 위치를 설정하려면 다음 중 하나를 수행하세요.
    - Datadog Synthetics Private Location Worker에 대한 JSON 구성을 붙여 넣습니다. 이 파일은 [프라이빗 위치를 생성할 때][102] Datadog에 의해 생성됩니다.
    - Datadog Synthetics Private Location Worker에 대한 JSON 설정이 포함된 파일의 파일 경로를 찾아보거나 입력하세요.
@@ -564,9 +566,9 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS 모니터�
    FIPS 140-2 암호화 모드 활성화
    :안전한 통신을 위해 FIPS 준수 암호화 모듈을 활성화합니다. 이 옵션을 사용하려면 Windows 호스트가 Windows FIPS 모드에서 실행되어야 합니다. 프라이빗 위치 v1.63.0 이상에서 지원됩니다.
 
-1. **Next** 및 **Install**을 클릭하여 설치 프로세스를 시작합니다.
+1. {{< ui >}}Next{{< /ui >}} 및 {{< ui >}}Install{{< /ui >}}을 클릭하여 설치 프로세스를 시작합니다.
 
-프로세스가 완료되면 설치 완료 페이지에서 **Finish**를 클릭합니다.
+프로세스가 완료되면 설치 완료 페이지에서 {{< ui >}}Finish{{< /ui >}}를 클릭합니다.
 
 <div class="alert alert-danger">JSON 구성을 입력한 경우, Windows 서비스가 해당 구성으로 실행됩니다. 구성을 입력하지 않은 경우, 명령 프롬프트에서 <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> 을 실행하거나 <code>start menu</code> 바로 가기를 사용하여 Synthetics Private Location Worker를 시작하세요.</div>
 
@@ -605,7 +607,7 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS 모니터�
 
 FIPS 140-2 암호화 모드를 활성화하려면 작업 실행 파일을 실행하기 전에 `ENABLE_FIPS=1` 환경 변수를 설정하세요. 이 옵션을 사용하려면 Windows 호스트가 Windows FIPS 모드에서 실행되어야 합니다. 프라이빗 위치 v1.63.0 이상에서 지원됩니다.
 
-예:
+예시:
 
 ```cmd
 set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
@@ -654,11 +656,11 @@ Windows 서비스의 프라이빗 위치에 루트 인증서를 설치하려면 
 
 `synthetics-private-location.exe`이 있는 독립형 Windows 프로세스의 프라이빗 위치에 루트 인증서를 설치하려면 다음 단계를 따르세요.
 
-1. Windows 명령 프롬프트 또는 PowerShell을 여세요.
+1. Windows 명령 프롬프트 또는 PowerShell을 엽니다.
 
-2. 환경 변수를 설정하고 실행 파일을 호출하세요.
+2. 환경 변수를 설정하고 실행 파일을 호출합니다.
 
-예:
+예시:
 
 ```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
@@ -675,9 +677,9 @@ set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 생존 및 준비 프로브 설정{#set-up-liveness-and-readiness-probes}
+#### 생존성 및 준비 프로브 설정{#set-up-liveness-and-readiness-probes}
 
-작업자가 올바르게 실행되는지 오케스트레이터가 확인할 수 있도록 라이브니스 또는 레디니스 프로브를 추가하세요.
+워커가 올바르게 실행되는지 오케스트레이터가 확인할 수 있도록 생존성 또는 준비 프로브를 추가하세요.
 
 준비 프로브의 경우, 프라이빗 위치 배포에서 포트 `8080`에 프라이빗 위치 상태 프로브를 활성화해야 합니다. 자세한 내용은 [프라이빗 위치 구성][5]을 참조하세요.
 
@@ -798,7 +800,7 @@ readinessProbe:
 
 <div class="alert alert-warning">프라이빗 위치 상태 검사를 추가하는 이 방법은 더 이상 지원되지 않습니다. Datadog은 생존성 및 준비 프로브 사용을 권장합니다.</div>
 
-프라이빗 위치 컨테이너의 `/tmp/liveness.date` 파일은 Datadog에서 성공적인 폴링이 있을 때마다 업데이트됩니다(기본값 2초). 일정 시간 동안 폴링이 수행되지 않으면 컨테이너는 건강하지 않은 것으로 간주됩니다. 예를 들어: 지난 1분 동안 가져오기가 없었습니다.
+프라이빗 위치 컨테이너의 `/tmp/liveness.date` 파일은 Datadog에서 성공적인 폴링이 있을 때마다 업데이트됩니다(기본값 2초). 일정 시간 동안 폴링이 수행되지 않으면 컨테이너는 건강하지 않은 것으로 간주됩니다(예: 지난 1분 동안 가져오기가 없었습니다).
 
 아래 구성을 사용하여 `livenessProbe`로 컨테이너의 상태 검사를 설정하세요.
 
@@ -906,7 +908,7 @@ livenessProbe:
 
 ### 프라이빗 위치 이미지 업그레이드{#upgrade-a-private-location-image}
 
-기존 프라이빗 위치를 업그레이드하려면 프라이빗 위치 사이드 패널에서 **기어** 아이콘을 클릭한 후 **설치 지침**을 클릭하세요.
+기존 프라이빗 위치를 업그레이드하려면 프라이빗 위치 사이드 패널에서 {{< ui >}}Gear{{< /ui >}} 아이콘을 클릭한 후 {{< ui >}}Installation instructions{{< /ui >}}를 클릭하세요.
 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="프라이빗 위치에 대한 설정 워크플로에 접근하세요." style="width:90%;" >}}
 
@@ -914,13 +916,34 @@ livenessProbe:
 
 **참고**: `docker run`을 사용하여 프라이빗 위치 이미지를 시작하고 이전에 `latest` 태그를 사용하여 프라이빗 위치 이미지를 설치한 경우, `docker run` 명령에 `--pull=always`을 추가해야 합니다. 이를 통해 동일한 `latest` 태그를 사용하여 로컬에 존재할 수 있는 이미지의 캐시된 버전에 의존하기보다는 최신 버전을 가져오도록 합니다.
 
-### 내부 엔드포인트 테스트하기{#test-your-internal-endpoint}
+#### Windows 프라이빗 위치 업그레이드 {#upgrade-a-windows-private-location}
+
+1. 업그레이드하거나 변경하기 전에 구성 파일(`C:\ProgramData\Datadog Synthetics Private Location\config.json`)을 백업합니다.
+2. 최신 [MSI 설치 프로그램][34]을 다운로드하여 실행하고 지침을 따릅니다. 구성을 수정하거나 업데이트하라는 메시지가 표시되면 항상 백업한 파일을 사용하세요.
+3. 설치 프로그램의 **Modify** 옵션을 사용하는 경우 기존 구성 파일을 선택합니다. 필드를 비워 두거나 새 구성을 생성하면 현재 구성이 대체됩니다.
+4. 프라이빗 위치 워커 서비스가 실행 중이며 올바른 구성 파일을 참조하고 있는지 확인합니다.
+
+### 최신 브라우저 버전 실행 {#run-the-latest-browser-versions}
+
+`latest` 이미지의 Chrome, Edge 및 Firefox 버전은 테스트를 거친 후 각 프라이빗 위치 릴리스와 함께 업데이트됩니다. 결과적으로, 이러한 버전은 브라우저 공급업체에서 출시한 최신 버전보다 이전 버전일 수 있습니다. 옵트인 `browsers-latest` 이미지를 사용하여 최신 브라우저와 해당 보안 패치를 더 빨리 실행하세요. 그러면 프라이빗 위치에 대해 보고된 브라우저 취약점(CVE)을 줄일 수 있습니다.
+
+`browsers-latest` 이미지는 매주 다시 빌드됩니다. 이를 사용하려면 `latest` 대신 `browsers-latest` 태그를 가져옵니다.
+
+```shell
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:browsers-latest
+```
+
+워커를 특정 주간 빌드에 고정하려면 `X.Y.Z-rc.N-browsers-YYYY-MM-DD` 형식으로 함께 게시된 날짜가 지정된 변경 불가능한 태그를 풀링하세요. FIPS 호환 이미지는 `datadog/synthetics-private-location-worker-fips:browsers-latest`로 게시됩니다.
+
+**참고**: `browsers-latest` 브라우저는 Datadog 관리 위치에서 검증되지 않았으므로, 브라우저 테스트가 `latest` 이미지보다 불안정할 수 있습니다. 이 채널은 안정성을 희생하는 대신 최신 브라우저 버전을 제공합니다.
+
+### 내부 엔드포인트 테스트{#test-your-internal-endpoint}
 
 하나 이상의 프라이빗 위치 워커가 Datadog에 보고를 시작하면 프라이빗 위치 상태가 녹색으로 표시됩니다.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="프라이빗 위치 보고" style="width:90%;">}}
 
-프라이빗 위치 목록의 **설정** 페이지에서 `REPORTING` 상태와 관련 모니터 상태를 확인할 수 있습니다.
+프라이빗 위치 목록의 {{< ui >}}Settings{{< /ui >}} 페이지에서 `REPORTING` 상태와 관련 모니터링 상태를 확인할 수 있습니다.
 
 {{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="프라이빗 위치 상태 및 모니터 상태" style="width:100%;">}}
 
@@ -932,7 +955,7 @@ livenessProbe:
 
 ## 프라이빗 위치에서 Synthetic 테스트 시작하기{#launch-synthetic-tests-from-your-private-location}
 
-API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 **프라이빗 위치**를 선택하세요.
+API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 {{< ui >}}Private Locations{{< /ui >}}를 선택하세요.
 
 {{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="프라이빗 위치에 Synthetic 테스트 할당하기" style="width:90%;">}}
 
@@ -940,9 +963,9 @@ API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 
 
 ## 프라이빗 위치 확장{#scale-your-private-location}
 
-하나의 구성 파일로 여러 작업자를 단일 프라이빗 위치에서 실행할 수 있기 때문에, 작업자를 추가하거나 제거하여 프라이빗 위치를 **수평 확장**할 수 있습니다. 이때, `concurrency` 파라미터를 설정하고 프라이빗 위치에서 실행할 테스트의 유형과 수에 일치하는 작업자 리소스를 할당해야 합니다.
+하나의 구성 파일로 여러 워커를 단일 프라이빗 위치에서 실행할 수 있기 때문에, 워커를 추가하거나 제거하여 프라이빗 위치를 **수평 확장**할 수 있습니다. 이때, `concurrency` 파라미터를 설정하고 프라이빗 위치에서 실행할 테스트의 유형과 수에 일치하는 워커 리소스를 할당해야 합니다.
 
-프라이빗 위치 작업자가 처리할 수 있는 부하를 증가시켜 **수직 확장**할 수도 있습니다. 유사하게, 작업자가 실행할 수 있는 최대 테스트 수를 조정하기 위해 `concurrency` 파라미터를 사용하고 작업자에게 할당된 리소스를 업데이트해야 합니다.
+프라이빗 위치 워커가 처리할 수 있는 부하를 증가시켜 **수직 확장**할 수도 있습니다. 유사하게, 워커가 실행할 수 있는 최대 테스트 수를 조정하기 위해 `concurrency` 파라미터를 사용하고 워커에게 할당된 리소스를 업데이트해야 합니다.
 
 자세한 내용은 [프라이빗 위치 규모 측정][18]을 참조하세요.
 
@@ -958,7 +981,7 @@ API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 
 
 기본적으로 Datadog Admin 역할을 가진 사용자만 프라이빗 위치를 생성하고, 삭제하며, 프라이빗 위치 설치 가이드에 액세스할 수 있습니다.
 
-[Datadog Admin 및 Datadog Standard 역할][20]을 가진 사용자는 프라이빗 위치를 보고, 검색하고, 프라이빗 위치에 Synthetic 테스트를 할당할 수 있습니다. 사용자를 이러한 두 개의 [기본 역할][19] 중 하나로 업그레이드하여 [**프라이빗 위치** 페이지][22]에 대한 액세스를 부여하세요.
+[Datadog Admin 및 Datadog Standard 역할][20]을 가진 사용자는 프라이빗 위치를 보고, 검색하고, 프라이빗 위치에 Synthetic 테스트를 할당할 수 있습니다. 사용자를 이러한 2개의 [기본 역할][19] 중 하나로 업그레이드하여 [**프라이빗 위치** 페이지][22]에 대한 액세스를 부여하세요.
 
 [사용자 정의 역할 기능][21]을 사용하는 경우, `synthetics_private_location_read` 및 `synthetics_private_location_write` 권한이 포함된 사용자 정의 역할에 사용자를 추가하세요.
 
@@ -969,13 +992,13 @@ API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 
 [세분화된 액세스 제어][24]를 사용해 테스트 기반 역할, 팀, 개인 사용자 액세스 제한하는 방법은 다음과 같습니다.
 
 1. 양식의 권한 섹션을 엽니다.
-2. **Edit Access**를 클릭합니다.
-  {{< img src="synthetics/settings/grace_2.png" alt="프라이빗 위치 구성 양식에서 테스트에 대한 권한을 설정합니다." style="width:100%;" >}}
-3. **Restrict Access**를 클릭합니다.
+2. {{< ui >}}Edit Access{{< /ui >}}를 클릭합니다.
+  {{< img src="synthetics/settings/grace_2.png" alt="프라이빗 위치 구성 양식에서 테스트에 대한 권한 설정" style="width:100%;" >}}
+3. {{< ui >}}Restrict Access{{< /ui >}}를 클릭합니다.
 4. 팀, 역할 또는 사용자를 선택합니다.
-5. **Add**를 클릭합니다.
-6. 각 역할에 연결하려는 액세스 수준을 선택합니다.
-7. **Done**을 클릭합니다.
+5. {{< ui >}}Add{{< /ui >}}를 클릭합니다.
+6. 각 항목에 연결하려는 액세스 수준을 선택합니다.
+7. {{< ui >}}Done{{< /ui >}}을 클릭합니다.
 
 <div class="alert alert-info">열람자 액세스 권한이 없어도 해당하는 프라이빗 위치의 결과를 볼 수 있습니다. <br><br>
 프라이빗 위치를 제한하면 다른 사용자가 테스트에 추가하거나 편집하는 것을 제한할 수 있지만, 권한이 있는 사용자가 테스트에 추가한 경우 위치의 이름은 여전히 볼 수 있습니다.</div>
@@ -983,8 +1006,8 @@ API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 
 | 액세스 수준 | PL 지침 조회 | PL 메트릭 조회 | 테스트에서 PL 사용 | PL 구성 편집 |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |
 | 액세스 없음    |                      |                 |                |                        |
-| 열람자| {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
-| 편집자 | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
+| 열람자       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
+| 편집자       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
 
 ## 추가 자료 {#further-reading}
 
@@ -1018,3 +1041,4 @@ API, 다단계 API 또는 브라우저 테스트를 생성하고, 관심 있는 
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 [32]: /ko/synthetics/platform/private_locations/configuration
 [33]: /ko/synthetics/guide/kerberos-authentication/
+[34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi

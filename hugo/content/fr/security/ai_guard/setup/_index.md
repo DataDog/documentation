@@ -20,10 +20,10 @@ Avant de configurer AI Guard, assurez-vous d'avoir tout ce dont vous avez besoin
 - Certaines étapes de configuration nécessitent des autorisations Datadog spécifiques. Un administrateur peut avoir besoin de créer un nouveau rôle avec les autorisations requises et de vous l'attribuer :
   | Autorisation                                    | Type  | Description                                                                                                                                                                                                     |
   |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Écriture | Requis pour appeler l'API d'évaluation AI Guard et pour créer une clé d'application avec la portée `ai_guard_evaluate`.                                                                                                 |
-  | **AI Guard View** (`ai_guard_view`)           | Lecture  | Requis pour afficher l'interface utilisateur d'AI Guard, y compris les signaux, les spans et les paramètres en lecture seule (politiques de blocage de service, sensibilité d'évaluation, politiques d'outils, liste d'autorisation d'outils). Également requis pour signaler les faux positifs. |
-  | **AI Guard Write** (`ai_guard_write`)         | Écriture | Requis pour modifier la configuration d'AI Guard, y compris les politiques de blocage, l'analyse des données sensibles, les politiques d'outils, le blocage d'outils, la liste d'autorisation d'outils et les seuils de sensibilité d'évaluation.                           |
-  | **User Access Manage** (`user_access_manage`) | Écriture | Requis pour créer un jeu de données restreint qui [limite l'accès aux spans AI Guard](#limit-access) avec le contrôle d'accès aux données.                                                                                         |
+  | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Écriture | Requis pour appeler l'API d'évaluation AI Guard et pour créer une clé d'application avec le périmètre `ai_guard_evaluate`.                                                                                                 |
+  | **AI Guard View** (`ai_guard_view`)           | Read  | Requis pour afficher l'interface utilisateur d'AI Guard, y compris les signaux, les spans et les paramètres en lecture seule (politiques de blocage de services, règles personnalisées, sensibilité d'évaluation, politiques d'outils, liste d'autorisation d'outils). Également requis pour signaler les faux positifs. |
+  | **AI Guard Write** (`ai_guard_write`)         | Write | Requis pour modifier la configuration d'AI Guard, y compris les politiques de blocage, les règles personnalisées, l'analyse des données sensibles, les politiques d'outils, le blocage d'outils, la liste d'autorisation d'outils et les seuils de sensibilité d'évaluation.                           |
+  | **User Access Manage** (`user_access_manage`) | Écriture | Requis pour créer un jeu de données restreint qui [limite l'accès aux spans AI Guard](#limit-access) avec Data Access Control.                                                                                         |
 
 ### Limites d'utilisation {#usage-limits}
 
@@ -37,7 +37,7 @@ Si vous dépassez ces limites, ou si vous prévoyez de les dépasser bientôt, c
 
 Pour utiliser AI Guard, vous devez disposer d'au moins une clé d'API et une clé d'application définies dans vos services Agent, généralement à l'aide de variables d'environnement. Suivez les instructions sur [Clés d'API et d'application][2] pour créer les deux.
 
-Lors de l'ajout de [scopes][3] pour la **clé d'application**, ajoutez le scope `ai_guard_evaluate`. L'utilisateur qui crée la clé d'application doit disposer de l'autorisation [AI Guard Evaluate](#1-check-prerequisites).
+Lors de l'ajout de [périmètres][3] pour la **clé d'application**, ajoutez le périmètre `ai_guard_evaluate`. L'utilisateur qui crée la clé d'application doit disposer de l'autorisation [AI Guard Evaluate](#1-check-prerequisites).
 
 ## 3. Instrumenter votre application {#instrumentation}
 
@@ -84,6 +84,7 @@ AI Guard fournit des paramètres pour contrôler la manière dont les évaluatio
 
 Sur la page {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6], vous pouvez configurer les politiques qui déterminent les actions qu'AI Guard doit entreprendre lorsqu'il détecte du contenu non sécurisé. Pour chaque politique, vous déterminez :
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy) : Surveiller uniquement ou bloquer les requêtes non sécurisées
+- [{{< ui >}}Custom rules{{< /ui >}}](#custom-rules) : Mots-clés et expressions régulières qu'AI Guard signale toujours comme non sécurisés
 - [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning) : Si AI Guard doit rechercher et masquer les données sensibles
 - [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context) : Informations supplémentaires sur le service qu'AI Guard utilise lors de l'évaluation pour réduire les faux positifs
 
@@ -97,7 +98,19 @@ Vous pouvez configurer le blocage à différents niveaux de granularité, les pa
 - **À l'échelle de l'organisation** : Appliquez une politique de blocage par défaut à tous les services et environnements.
 - **Par environnement** : Remplacez la valeur par défaut de l'organisation pour un environnement spécifique.
 - **Par service** : Remplacez la valeur par défaut de l'organisation pour un service spécifique.
-- **Par service et environnement** : Remplacez tout ce qui précède pour un service spécifique dans un environnement spécifique (par exemple, activez le blocage en production mais pas en staging).
+- **Par service et environnement** : Remplacez tout ce qui précède pour un service spécifique dans un environnement spécifique (par exemple, activez le blocage en production mais pas en pré-production).
+
+#### Règles personnalisées {#custom-rules}
+
+Les règles personnalisées signalent comme non sécurisés les messages qui correspondent à un mot-clé ou à une expression régulière. Contrairement à la [sensibilité d'évaluation](#evaluation-sensitivity) et au [contexte d'évaluation](#evaluation-context), les règles personnalisées sont déterministes : un message qui correspond à une règle est toujours signalé. Les règles personnalisées nécessitent une correspondance exacte, elles ne détectent donc pas les variations du contenu que vous souhaitez bloquer.
+
+AI Guard vérifie les règles personnalisées par rapport au dernier message de chaque appel d'évaluation, y compris les prompts utilisateur, les réponses de l'assistant, les arguments d'appel d'outil et les résultats d'appel d'outil. Lorsqu'un message correspond à une règle, AI Guard renvoie `DENY` avec la catégorie d'attaque `regexp-blocked`, et `reason` indique le nom de la règle correspondante. Le blocage de la requête par AI Guard dépend de la [politique de blocage](#blocking-policy).
+
+Lorsque vous créez ou modifiez une politique, ajoutez des règles sous {{< ui >}}Custom Rules{{< /ui >}} :
+- {{< ui >}}Keywords{{< /ui >}} : Mots ou expressions à signaler. La correspondance ignore la casse et ne concerne que les mots entiers. Par exemple, `confidential` correspond à `Confidential` mais pas à `confidentiality`. L'ensemble des mots-clés est limité à 1,000 caractères.
+- {{< ui >}}Regular expressions{{< /ui >}} : Cliquez sur {{< ui >}}Add an Expression{{< /ui >}}, puis saisissez un nom et un motif. Chaque motif est limité à 1,000 caractères et utilise la [syntaxe regex de Sensitive Data Scanner][21]. Le nom est facultatif, mais Datadog le recommande : AI Guard l'affiche lorsqu'une règle correspond.
+
+Comme pour la [politique de blocage](#blocking-policy), les règles personnalisées suivent le même ordre de priorité, les paramètres les plus spécifiques étant prioritaires. Une politique hérite des règles personnalisées de son parent. Pour les remplacer, activez le commutateur {{< ui >}}Overridden{{< /ui >}}. Les règles héritées restent dans le formulaire, vous pouvez donc les conserver, les modifier ou les supprimer. La politique ne fusionne pas ses règles avec les règles parentes.
 
 #### Analyse des données sensibles {#sensitive-data-scanning}
 
@@ -105,7 +118,7 @@ AI Guard peut détecter des informations personnellement identifiables (PII) tel
 
 Lorsque l'analyse est activée, AI Guard analyse le dernier message de chaque appel d'évaluation, y compris les invites utilisateur, les réponses de l'assistant, les arguments d'appel d'outil et les résultats d'appel d'outil. Les résultats apparaissent sur les traces APM pour une meilleure visibilité. Avec {{< ui >}}Scanning and redacting{{< /ui >}}, AI Guard renvoie également le remplacement pour chaque valeur sensible qu'une règle modifie. La rédaction n'est prise en charge qu'avec une intégration manuelle du SDK : consultez [Sensitive Data Redaction][20] pour la configurer et appliquer les remplacements.
 
-Par défaut, AI Guard recherche un ensemble standard de secrets, tels que les clés AWS et les clés Datadog API. Pour personnaliser les [règles d'analyse][14] qu'utilise AI Guard, accédez à {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], où vous pouvez activer ou désactiver des règles individuelles, et créer des groupes d'analyse avec des règles personnalisées, limitées spécifiquement aux évaluations AI Guard.
+Par défaut, AI Guard recherche un ensemble standard de secrets, tels que les clés AWS et les clés d'API Datadog. Pour personnaliser les [règles d'analyse][14] qu'utilise AI Guard, accédez à {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], où vous pouvez activer ou désactiver des règles individuelles, et créer des groupes d'analyse avec des règles personnalisées, limitées spécifiquement aux évaluations AI Guard.
 
 ### Bloquer des outils spécifiques {#block-specific-tools}
 
@@ -123,7 +136,7 @@ La sensibilité de l'évaluation est une valeur comprise entre 0,0 et 1,0, avec 
 
 Vous pouvez fournir à AI Guard un contexte supplémentaire sur un service, tel que son objectif et le type de données qu'il traite. AI Guard utilise ce contexte lors de l'évaluation pour mieux distinguer le comportement légitime de l'agent des menaces réelles, ce qui aide à réduire les faux positifs.
 
-Pour ajouter un contexte d'évaluation pour un service, accédez à {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Cliquez sur {{< ui >}}Edit{{< /ui >}} à côté de la politique par défaut, ou ajoutez ou modifiez une politique de service, puis saisissez votre contexte dans le champ {{< ui >}}Evaluation context{{< /ui >}} (jusqu'à 1 000 caractères). Exemple :
+Pour ajouter un contexte d'évaluation pour un service, accédez à {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Cliquez sur {{< ui >}}Edit{{< /ui >}} à côté de la politique par défaut, ou ajoutez ou modifiez une politique de service, puis saisissez votre contexte dans le champ {{< ui >}}Evaluation context{{< /ui >}} (jusqu'à 1 000 caractères). Par exemple :
 
 ```text
 This is a fintech app. Requests to query account balances or initiate transfers are expected and authorized.
@@ -142,7 +155,7 @@ AI Guard évalue la conversation complète, y compris votre invite système, lor
 #### Que faut-il inclure {#what-to-include}
 
 Dans votre invite système, décrivez :
-- **Objectif de l'agent** : Le rôle et la portée prévue de l'agent.
+- **Objectif de l'Agent** : Le rôle et le périmètre prévu de l'agent.
 - **Données autorisées** : Les catégories de données que l'agent est censé lire, écrire ou exporter.
 - **Outils autorisés** : Les outils et opérations que l'agent est autorisé à appeler.
 
@@ -169,7 +182,7 @@ Avec ce contexte, AI Guard traite les requêtes SQL et les exportations de fichi
 
 #### Limitations {#limitations}
 
-N'utilisez pas l'invite système pour contourner les contrôles de sécurité d'AI Guard ou pour donner des instructions directement à AI Guard. AI Guard évalue l'invite système dans le cadre du contexte de la conversation et ignore les instructions qui tentent de désactiver ou d'affaiblir ses propres contrôles de sécurité.
+N'utilisez pas l'invite système pour contourner les checks de sécurité d'AI Guard ou pour donner des instructions directement à AI Guard. AI Guard évalue l'invite système dans le cadre du contexte de la conversation et ignore les instructions qui tentent de désactiver ou d'affaiblir ses propres checks de sécurité.
 
 ## 6. (Facultatif) Limiter l'accès aux AI Guard spans {#limit-access}
 
@@ -207,3 +220,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /fr/security/ai_guard/setup/sensitive_data_redaction/
+[21]: /fr/security/sensitive_data_scanner/scanning_rules/custom_rules/

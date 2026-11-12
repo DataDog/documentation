@@ -1,8 +1,6 @@
 ---
 aliases:
 - /fr/containers/monitoring/autoscaling
-cascade:
-  site_support_id: containers_autoscaling
 description: Mise à l'échelle automatique des charges de travail Kubernetes à l'aide
   des métriques Datadog et de recommandations de mise à l'échelle intelligentes
 further_reading:

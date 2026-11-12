@@ -133,7 +133,7 @@ For more information, see the GitHub documentation for [status checks][11].
 [3]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=test_optimization
 [4]: /tests/flaky_tests/early_flake_detection
 [5]: /tests/#supported-features
-[6]: /source_code/features/#pr-comments
+[6]: /source_code/pr-comments/
 [7]: /tests/#setup
 [8]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
 [9]: /tests/flaky_management

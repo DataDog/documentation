@@ -135,7 +135,7 @@ PATs use the same permissions as application keys:
 |------------|-------------|
 | `user_app_keys` | Create and manage your own PATs |
 | `org_app_keys_read` | View PATs for all users in the organization |
-| `org_app_keys_write` | Create, edit, and revoke PATs for any user in the organization |
+| `org_app_keys_write` | Edit and revoke PATs for any user in the organization |
 
 For more information about permissions, see [Role Based Access Control][3].
 

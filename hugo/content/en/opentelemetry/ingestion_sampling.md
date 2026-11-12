@@ -41,7 +41,7 @@ With this method, the Datadog Agent receives traces directly from OpenTelemetry 
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="OpenTelemetry APM Metrics computation using the Datadog Agent" style="width:100%;" >}}
 
-Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions on [OTLP Ingestion by the Datadog Agent][15].
+Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions in [Set Up the Agent's OTLP Endpoint][15].
 
 ## Reducing ingestion volume
 
@@ -61,12 +61,28 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 #### Considerations
 
-Head-based sampling affects the computation of APM metrics. Only sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, which perform metrics computation.
-
-To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
+Head-based sampling reduces the spans available for APM metric computation. For DDOT SDKs, see [trace metric extrapolation][27].
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
+#### Trace metric extrapolation for Datadog SDKs
+
+DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
+
+Use these minimum versions for automatic extrapolation:
+
+| Component computing trace metrics | Minimum version |
+| --- | --- |
+| Span Metrics Connector (SMC) in OpenTelemetry Collector Contrib | [0.148.0][24] |
+| Datadog connector in OpenTelemetry Collector Contrib | [0.159.0][25] |
+| Datadog connector in DDOT, or the Datadog Agent OTLP receiver | [7.82.0][26] |
+
+To configure trace metrics from sampled spans:
+
+1. Use a [supported DDOT SDK version][23].
+2. Preserve `tracestate` and place the metrics connector before any Collector sampling processors.
+
+Extrapolation is automatic when a valid `ot.th` threshold is present. For accurate counts, the recorded probability must match the spans actually exported.
 
 ### Tail-based sampling
 
@@ -82,7 +98,7 @@ A limitation of tail-based sampling is that all spans for a given trace must be 
 
 The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
 
-To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][20] before the sampling processor.
+Configure the [`span_metrics` connector][20] before the sampling processor. For DDOT SDKs that sample traces before export, follow the [trace metric extrapolation requirements][27].
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -102,6 +118,7 @@ To configure probabilistic sampling, do one of the following:
   ```yaml
   apm_config:
     # ...
+    # features: ["probabilistic_sampler_full_trace_id"] #Uncomment if you also sample with the OTel Collector.
     probabilistic_sampler:
         enabled: true
         sampling_percentage: 51 #In this example, 51% of traces are captured.
@@ -110,8 +127,12 @@ To configure probabilistic sampling, do one of the following:
 
 **If you use a mixed setup of Datadog SDKs and OTel SDKs**:
 
-- Probabilistic sampling will apply to spans originating from both Datadog and OTel SDKs.
-- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
+- Probabilistic sampling applies to spans from both Datadog and OTel SDKs.
+- If you send spans to both the Datadog Agent **and** OTel Collector instances, configure the Agent to make the same sampling decisions as the Collector:
+  1. Set the same seed in the Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and the Collector (`hash_seed`).
+  2. Add `probabilistic_sampler_full_trace_id` to the Agent's APM features. Set `DD_APM_FEATURES` to `probabilistic_sampler_full_trace_id`, or add `features: ["probabilistic_sampler_full_trace_id"]` under `apm_config`. If you already set APM features, add the flag to the existing list.
+
+  By default, the Agent hashes only the lower 64 bits of the trace ID, and the Collector hashes all 128 bits. Without the flag, the two make different decisions for the same trace, even with the same seed. The Agent matches the Collector only in the Collector's `hash_seed` mode, which is the default.
 
 <div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
@@ -119,7 +140,7 @@ To configure probabilistic sampling, do one of the following:
 
 - The probabilistic sampler will ignore the sampling priority of spans that are set at the SDK level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
 - Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
-- For consistent sampling all tracers must support [128-bit trace IDs][17].
+- If you enable `probabilistic_sampler_full_trace_id`, all SDKs must generate and propagate [128-bit trace IDs][17]. If an SDK drops the upper 64 bits of the trace ID, the Agent makes a different sampling decision for that SDK's spans, and traces are incomplete.
 
 ## Monitoring ingested volumes in Datadog
 
@@ -144,7 +165,6 @@ For more information, see [Unified Service Tagging][18].
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [6]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
-[7]: /dashboards/functions/#add-a-function
 [8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
@@ -156,3 +176,10 @@ For more information, see [Unified Service Tagging][18].
 [18]: /getting_started/tagging/unified_service_tagging/#opentelemetry
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[21]: https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/#sampling-threshold-value-th
+[22]: https://github.com/open-telemetry/oteps/blob/main/text/trace/0235-sampling-threshold-in-trace-state.md
+[23]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/#sampling-and-trace-metrics
+[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
+[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
+[26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0
+[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks

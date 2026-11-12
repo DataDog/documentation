@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40995
+    operations:
+      - CreateOrgConnections
+      - ListOrgConnections
+      - UpdateOrgConnections
+    title: 'Add missing Org Connection connection types to API specs '

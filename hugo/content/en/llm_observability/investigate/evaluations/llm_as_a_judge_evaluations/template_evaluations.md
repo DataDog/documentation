@@ -26,13 +26,15 @@ aliases:
 
 Datadog provides LLM-as-a-judge templates for the following evaluators: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluator. 
 
+For audio and image evaluators, Datadog also provides the Transcription Accuracy, Audio Quality, User Interruptions, Vocal Affect, Explicit Content, and Sensitive Imagery templates. See [Image and Audio Evaluators][27].
+
 For best practices and details on how to create LLM-as-a-judge evaluators, read [Create a custom LLM-as-a-judge evaluator][17].
 
 To select a template:
 1. In Datadog, navigate to the [Agent Observability Evaluators][11] page
 1. Click on the {{< ui >}}Create Evaluator{{< /ui >}} button
 1. Select the template of your choice
-    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
+    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="The Create Evaluator page in Agent Observability, showing the option to describe your own evaluator and the available templates." style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
 1. (Optional) Select the application you would like the evaluator to run for and set any desired span filters.
@@ -414,3 +416,4 @@ result = triage_agent.run_sync(
 [24]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
 [25]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
 [26]: /llm_observability/instrument/sdk?tab=python#prompt-tracking
+[27]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations#templates

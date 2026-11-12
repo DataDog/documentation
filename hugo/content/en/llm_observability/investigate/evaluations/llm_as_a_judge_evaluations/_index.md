@@ -34,6 +34,10 @@ Custom LLM-as-a-judge evaluators use an LLM to judge the performance of another 
 - **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluators][16] for the full walkthrough, use cases, and prompt examples.
 - **Session scope**—feed every trace in a user session (and every span in those traces) to the LLM judge in a single prompt, so the evaluation can reason across an entire multi-turn interaction. See [Session-Level Evaluators][17] for the full walkthrough, use cases, and prompt examples.
 
+Evaluators can also send the images and audio attached to your spans to the LLM judge. See [Image and Audio Evaluators][19].
+
+For checks that don't need an LLM, such as detecting empty tool results, use [code evaluators][20] instead.
+
 ## Create a custom LLM-as-a-judge evaluator
 
 You can create and manage custom evaluators from the [Evaluators page][1] in Agent Observability. You can provide an evaluator description to generate an evaluator, use and build on existing [LLM-as-a-judge evaluator templates][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
@@ -45,7 +49,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the Agent Observability [Evaluators page][1]. Select {{< ui >}}Create Evaluator{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluators page after selecting Create Evaluator." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Describe your evaluator page in Agent Observability, shown after selecting Create Evaluator." style="width:100%;" >}}
 1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluator runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
@@ -107,13 +111,15 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, Amazon Bedrock, Baseten, Fireworks AI, or Together AI models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
+For Anthropic, Amazon Bedrock, Baseten, Fireworks AI, or Together AI models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
+
+Evaluators that include audio use OpenAI audio models and require [Keyword Search Output](#keyword-search-output). See [Image and Audio Evaluators][19].
 
 For custom providers, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - {{< ui >}}Boolean{{< /ui >}}: True/false results (for example, "Did the model follow instructions?")
@@ -357,7 +363,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="post-processing" %}}
 1. Select the {{< ui >}}JSON{{< /ui >}} output type.
 
 2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you conduct a more complex assessment than just using Boolean, Score, or Categorical structured output.
@@ -462,7 +468,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Custom Provider)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the {{< ui >}}Boolean{{< /ui >}} output type.
    <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
@@ -507,13 +513,15 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluator
 
 ### Test and preview
 
-The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
+The pane on the left shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluator{{< /ui >}} to pre-fill inputs to your evaluator with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 
 ## Viewing and using results
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluator, Datadog automatically runs your evaluator on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluator later.
+
+Each time you save, Datadog keeps a new version of the evaluator. To view, compare, or restore versions, see [Evaluator Versions][20].
 
 Results are available across Agent Observability in near-real-time for published evaluators. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
@@ -532,12 +540,13 @@ For example:
 @evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view for the cashri-langgraph application. In the search box, the user has entered `@evaluation.prompt_injection.value:found` and matching traces are populated below." style="width:100%;" >}}
 
 
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
+- Filter by the evaluator version that produced the result (example, `@evaluation.helpfulness-check.eval_version:3`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
@@ -613,3 +622,5 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [16]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
+[19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
+[20]: /llm_observability/investigate/evaluations/code_evaluations

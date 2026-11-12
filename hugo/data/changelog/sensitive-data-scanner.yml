@@ -1,0 +1,23 @@
+entries:
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40963
+    operations:
+      - CreateScanningRule
+      - ListScanningGroups
+      - ListStandardPatterns
+      - UpdateScanningRule
+    title: Expose recommended Sensitive Data Scanner suppressions
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41124
+    operations:
+      - CreateScanningGroup
+      - CreateScanningRule
+      - DeleteScanningGroup
+      - DeleteScanningRule
+      - ListScanningGroups
+      - ReorderScanningGroups
+      - UpdateScanningGroup
+      - UpdateScanningRule
+    title: Document empty meta in Sensitive Data Scanner responses
