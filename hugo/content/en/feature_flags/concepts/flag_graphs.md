@@ -50,7 +50,9 @@ Select a view for both client and server evaluations:
 - **Unique**: Count of distinct targeting keys within each variant, SDK, and time bucket
 - **Total**: Count of all evaluations, including repeated evaluations of the same targeting key
 
-Use **Color by** to color the series by **Variant** or **SDK**. Evaluations without an SDK name appear as **Unknown SDK**.
+Use **Color by** to color the series by **Variant** or **SDK**.
+
+**Note**: **Unknown SDK** means that evaluations arrived without SDK identification. Upgrade the SDK that sends these evaluations to a version that reports its SDK name. See the [client-side][2] and [server-side][3] setup pages for SDK version requirements. For Java, SDK identification requires `dd-java-agent` and `dd-openfeature` version 1.68.0 or later; use the same version for both packages. If evaluations pass through a Datadog Agent, upgrade the Agent to version 7.84.0 or later so it preserves SDK identification.
 
 If you use OpenTelemetry (OTLP) evaluation metrics, you can graph them on a dashboard. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
@@ -73,3 +75,5 @@ The **Evaluations** graph does not support dashboard export. To graph OTLP evalu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/guide/server_flag_evaluation_metrics/
+[2]: /feature_flags/client/
+[3]: /feature_flags/server/
