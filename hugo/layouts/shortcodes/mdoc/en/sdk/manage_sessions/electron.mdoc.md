@@ -13,6 +13,16 @@ The main process manages sessions for itself and for the renderer processes that
 
 `sessionReplaySampleRate` and `profilingSampleRate` apply to sampled sessions only. With `sessionSampleRate: 0`, no session records Session Replay or is profiled.
 
+## Stop a session
+
+Call `stopSession` in the main process to end the current session, for example when an end user signs out of a shared or kiosk device. The next end user interaction in any window starts a new session.
+
+```typescript
+import { stopSession } from '@datadog/electron-sdk';
+
+stopSession();
+```
+
 ## Session expiration
 
 All RUM events generated during a session, from the main process and the renderer processes, share the same `session.id`. Windows opened before `init` completes send no data, including the interactions that keep the session alive. If end users interact only with such windows, the session expires after 15 minutes of inactivity and no new session starts. For details, see [Troubleshooting][1].
