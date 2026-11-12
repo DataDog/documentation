@@ -241,7 +241,7 @@ If the skill does not appear in your agent, restart the agent. If you already in
 4. Work with your agent to build and preview the view locally. Review the result and approve uploading and publishing it to the target organization. For details, see [Build and upload your App][21] and [Publish and manage your Apps][22].
 5. Return to the setup dialog and open the {{< ui >}}Use your view{{< /ui >}} tab.
 
-#### Use API keys instead of browser authorization
+#### Alternative: use API keys instead of browser authorization
 
 For CI or environments where browser sign-in is unavailable:
 
@@ -288,7 +288,9 @@ Use final scores to record a reviewed set of label values for an interaction in 
 
 Each final value follows its label's type: Boolean, categorical, score, or text. You can also record a pass/fail assessment where the label supports it and add reasoning. Individual annotations remain available after you save a final score.
 
-### Final-score access
+### Final score access requirements
+
+To review and save final scores, you need:
 
 - An annotation queue with a label schema and an interaction to review.
 - Access to {{< ui >}}Finalized Score{{< /ui >}} in the annotation workspace.
@@ -315,7 +317,7 @@ When an interaction has no saved final score, the workspace prepares suggested v
 
 | Label type | Suggested final value |
 |------------|-----------------------|
-| Boolean | The most frequent value. For pass/fail labels, the majority assessment is used when available. |
+| Boolean | The most frequent value. For pass/fail labels, the summary uses the majority assessment when available. |
 | Categorical | Options selected by more than half of the reviewers who provided a value for that label. |
 | Score | The most frequent numeric value. |
 | Text | Enter the final text value after reviewing the individual responses. |
@@ -334,7 +336,7 @@ Use {{< ui >}}Compare evaluations{{< /ui >}}, when available, to compare reviewe
 2. Enable {{< ui >}}Compare evaluations{{< /ui >}}.
 3. Review the final-score and evaluation columns for each label. Hover over an evaluation result to see whether it agrees with the final value.
 
-The comparison pairs results by label name and value type. If there is no matching evaluation, no final value, or an unavailable evaluation result, the table explains the missing comparison. Session-level snapshot evaluations are unavailable for this comparison.
+The comparison pairs results by label name and value type. If there is no matching evaluation, no final value, or no available evaluation result, the table explains why the comparison is missing. Session-level snapshot evaluations are unavailable for this comparison.
 
 For export options, see [Exporting annotated data][27] and [Adding to datasets][26].
 
