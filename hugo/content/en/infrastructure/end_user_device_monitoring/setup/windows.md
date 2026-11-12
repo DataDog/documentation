@@ -10,10 +10,6 @@ further_reading:
      text: "Set up End User Device Monitoring"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
-End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
-
 There are two ways to deploy the Datadog Agent on Windows devices for End User Device Monitoring. Choose the method that fits your environment:
 
 - **Manual install**: Run a PowerShell command directly on the device. Use this method to test a single machine or for devices that are not managed by a mobile device management (MDM) solution.
