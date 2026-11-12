@@ -179,7 +179,7 @@ import { DruidsEnvironmentWithThemeInput } from '@datadog/apps-frontend/druids/r
 </DatadogAppProvider>
 ```
 
-[1]: /actions/datadog_apps/#ui-components
+[1]: /actions/datadog_apps/build/#ui-components
 
 {{% /tab %}}
 {{% tab "Dashboard" %}}
@@ -316,4 +316,4 @@ After you embed the app, check the following on the surface where you embedded i
 [2]: https://app.datadoghq.com/app-builder/apps/list
 [3]: https://www.npmjs.com/package/@datadog/apps-frontend
 [4]: https://www.npmjs.com/package/@datadog/apps-frontend?activeTab=code
-[5]: /actions/datadog_apps/#share-embedded-app-state-with-deep-links
+[5]: /actions/datadog_apps/build/#share-embedded-app-state-with-deep-links
