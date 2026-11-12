@@ -24,8 +24,8 @@ You can run an on-demand test from the Network Path UI or from Bits Chat. On-dem
 
 ## Prerequisites
 
+- An API key for the Agent with the **Private Action Runner** capability. See [Enrollment and ownership][5].
 - The Datadog Agent on the source host must meet the [Private Action Runner requirements][6].
-- A Private Action Runner in the Datadog Agent on the source host, enrolled as ownerless. An ownerless runner uses an API key with the Private Action Runner capability. See [Enrollment and ownership][5].
 
 ## Setup
 
