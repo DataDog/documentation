@@ -2611,6 +2611,11 @@ menu:
       parent: change_tracking_change_types
       identifier: change_tracking_feature_flags
       weight: 101
+    - name: Investigate Changes
+      url: change_tracking/investigate/
+      parent: change_tracking
+      identifier: change_tracking_investigate
+      weight: 3
     - name: Event Management
       url: events/
       pre: events
