@@ -226,3 +226,52 @@ export const chevronRightIcon = icon({
   presentation: 'fill="none" stroke="currentColor" stroke-width="2"',
   body: '<polyline points="9 18 15 12 9 6"></polyline>',
 });
+
+/** Shown in the send button while an answer streams, which then stops it. */
+export const stopIcon = icon({
+  viewBox: "0 0 24 24",
+  body: '<rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"></rect>',
+});
+
+export const retryIcon = icon({
+  viewBox: "0 0 24 24",
+  presentation: STROKED,
+  body:
+    '<polyline points="1 4 1 10 7 10"></polyline>' +
+    '<path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"></path>',
+});
+
+export const chevronDownIcon = icon({
+  viewBox: "0 0 24 24",
+  presentation: STROKED,
+  body: '<polyline points="6 9 12 15 18 9"></polyline>',
+});
+
+// -- Research timeline steps ---------------------------------------------------
+
+const ACTIVITY_STEP_BODIES = {
+  understand:
+    '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/>',
+  search:
+    '<circle cx="11" cy="11" r="6.5"/><line x1="20" y1="20" x2="15.6" y2="15.6"/>',
+  read:
+    '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>' +
+    '<polyline points="14 3 14 8 19 8"/>' +
+    '<line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>',
+  write:
+    '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  note: '<circle cx="12" cy="12" r="1.5"/>',
+} as const;
+
+/** A timeline step's icon. Reading further into a page reuses the read icon. */
+export function activityStepIcon(kind: string): string {
+  const key = kind === "more" ? "read" : kind;
+  const body =
+    key in ACTIVITY_STEP_BODIES
+      ? ACTIVITY_STEP_BODIES[key as keyof typeof ACTIVITY_STEP_BODIES]
+      : ACTIVITY_STEP_BODIES.note;
+  return renderIcon(
+    { viewBox: "0 0 24 24", presentation: STROKED, body },
+    { size: 12 },
+  );
+}
