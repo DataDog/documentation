@@ -446,6 +446,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Azure
+      resource_type: Microsoft Fabric Capacity
+      recommendation_type: Pause Idle Microsoft Fabric Capacity
+      recommendation_description: Identifies active Microsoft Fabric capacities whose billed compute mostly goes unused, and recommends pausing them when no workload needs them.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
       resource_type: Foundry Account
       recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies Azure Foundry accounts already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
