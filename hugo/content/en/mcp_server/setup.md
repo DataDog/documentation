@@ -758,6 +758,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 - `derived-metrics`: Tools for creating, updating, and deleting [derived metrics][85] from formulas and named metric queries.
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+- `ecs`: Tools for searching and describing [Amazon ECS][89] resources and retrieving task definitions that Datadog monitors, across all AWS accounts and regions.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
@@ -1058,3 +1059,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /containers/amazon_ecs/
