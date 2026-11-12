@@ -9,3 +9,9 @@ entries:
       - ListConnections
       - UpdateConnection
     title: Fix rum-audience-management spec drift against service behavior
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41590
+    operations:
+      - DeleteUserProfile
+    title: Add endpoint to delete a Product Analytics user profile

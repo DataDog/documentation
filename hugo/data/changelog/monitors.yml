@@ -16,3 +16,31 @@ entries:
       - GetMonitorNotificationRules
       - UpdateMonitorNotificationRule
     title: Add rule_options to Monitor Notification Rule
+  - change_type: modified
+    date: '2026-11-04'
+    link: https://github.com/DataDog/documentation/pull/41311
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add metric formula and function variable type for monitors
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41645
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add the LLM Observability data source to monitor formula queries

@@ -1,12 +1,15 @@
 ---
 title: Deployment Gates
-description: "Reduce deployment incidents by evaluating monitors and APM Faulty Deployment Detection during a rollout, so your pipeline can halt releases when regressions are detected."
+description: "Reduce deployment incidents by evaluating monitors and Watchdog Faulty Deployment Detection during a rollout, so your pipeline can halt releases when regressions are detected."
 aliases:
   - /deployment_gates/explore
 further_reading:
 - link: "/deployment_gates/setup"
   tag: "Documentation"
   text: "Set up Deployment Gates"
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Deployment Gates"
 - link: "continuous_delivery"
   tag: "Documentation"
   text: "Learn about Continuous Delivery Visibility"
@@ -17,81 +20,64 @@ algolia:
   tags: ["cd gates"]
 ---
 
-Deployment Gates allow you to reduce the likelihood and impact of incidents caused by deployments.
+A Deployment Gate is an automated checkpoint between your deployment stages. During a production rollout, the gate checks service health using signals Datadog already collects. When a [rule](#rules) fails, the gate returns a failing verdict so your pipeline can pause the rollout. This helps keep errors and other issues from reaching a wider user base.
 
-When performing a production rollout, you can use Deployment Gates to evaluate the impact of new changes with [monitors][1] and [APM Faulty Deployment Detection][2]. When your gate detects a performance regression, you can automatically halt the release, preventing unstable code from reaching a wider user base. You can then use Deployment Gates as the entry point to investigate the problem.
+When a gate fails, the [{{< ui >}}Evaluations{{< /ui >}}][5] page shows the deployed version, the failed rules, and why each rule failed. You can follow the associated traces to start investigating the problem.
 
-{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" alt="The Deployment Gates Evaluations page, listing recent gate evaluations with their status and failing rules" style="width:100%" >}}
+{{< img src="/deployment_gates/evaluations_rule_failure.png" alt="The Deployment Gates Evaluations page with a side panel showing a failed monitor rule evaluation." style="width:100%" >}}
 
 For setup instructions, see [Set up Deployment Gates][3].
 
 ## How Deployment Gates work
 
-A Deployment Gate has two main components:
+A Deployment Gate evaluates one or more [rules](#rules) to decide whether a deployment should proceed. It is defined for a given service and environment.
 
-- **Gate**: Defined for a given service, environment, and optional identifier, a gate evaluates one or more rules to decide whether a deployment should proceed.
-- **Rule**: A [rule](#rules) checks the status of one or more [monitors][1] or runs [APM Faulty Deployment Detection][2] on the deployed version. The outcome determines whether the associated gate should pass or fail.
+After receiving a gate [evaluation](#evaluations) verdict, your deployment pipeline decides what to do next—for example, halting the deployment or performing a rollback.
 
-Although a gate reports whether a regression is detected, it doesn't stop a deployment on its own. After receiving a gate evaluation result, your deployment pipeline decides what to do next—for example, halting the deployment, performing a rollback, or alerting your team.
+### Where gate configurations are stored
 
-### Configuration sources
+A Deployment Gate configuration can be:
 
-A gate's configuration source refers to how the gate is defined: in the evaluation request itself, or in Datadog ahead of time.
-
-- **JIT**: A Just-In-Time (JIT) Deployment Gate is defined in your deployment configuration, such as a JSON configuration file passed to the [`datadog-ci` CLI][4] or the payload of an API call. The configuration is sent with each evaluation request. There is no setup in Datadog.
-- **Preconfigured**: A preconfigured Deployment Gate is created ahead of time in Datadog, then referenced in an evaluation request.
-
-Use the following table to choose the right source for your gate:
-
-|  | JIT | Preconfigured |
-|---|---|---|
-| **Where the gate is defined** | In your deployment configuration or CI step | In Datadog |
-| **Setup in Datadog** | None | Create the gate and its rules before the first evaluation |
-| **What the evaluation request contains** | The full gate configuration, including service, environment, and rules | Service, environment, and optionally an identifier, which identify the preconfigured gate |
-| **Does the gate have an ID?** | No, the gate exists only within each evaluation | Yes, the gate persists between evaluations |
-| **Shown on the [Evaluations][5] page?** | Yes, even though the gate isn't stored in Datadog | Yes |
-| **Best for** | Managing rules as code alongside your pipeline, and teams that own their own gate configuration | Sharing rules across services, managing gates centrally, and editing rules outside of CI |
-
-You can use different configuration sources for different gates. If you're unsure where to start, use JIT gates. They require no setup in Datadog, and you can iterate on rules directly in your deployment configuration.
+- **Inline**: The gate is defined in code alongside your deployment configuration. The gate configuration is sent with each evaluation request. There is no setup in Datadog.
+  - To create an inline gate, see [Set Up Inline Deployment Gates][8].
+- **Preconfigured**: The gate is created and stored in Datadog.
+  - To create a preconfigured gate, see [Set Up Preconfigured Deployment Gates][9].
 
 ## Rules
 
-A rule is a check that a Deployment Gate runs to decide whether a deployment can proceed. Each gate contains one or more rules, and an [active](#evaluation-modes) gate passes only if all of its active rules pass. When your pipeline requests a gate [evaluation](#evaluations), Datadog evaluates each rule against the service, environment, and version being deployed. Each rule resolves to `pass` or `fail`, and the gate's result is based on those outcomes. 
+There are two types of rules: [monitor rules](#monitor-rules) and [Watchdog Faulty Deployment Detection rules](#watchdog-faulty-deployment-detection-rules). A single gate can combine multiple rules of different types.
 
-Each rule has a [type](#rule-types) and options specific to its type. Rules belong to the gate's [configuration source](#configuration-sources): JIT gates send their rules with each evaluation request, and preconfigured gates keep their rules in Datadog. 
+Rules can watch health indicators over a configurable period ranging from 1 minute to 2 hours.
 
-You can set an individual rule's [evaluation mode](#evaluation-modes) to dry run, independently of the gate's evaluation mode. In an active gate, a dry run rule that fails is recorded but doesn't affect the gate's outcome.
+### Monitor rules
 
-### Rule types
+A monitor rule checks the state of one or more [monitors][1] you have already set up in Datadog. The rule fails if a monitor enters an `Alert` or `No Data` status.
 
-Deployment Gates support two rule types:
+### Watchdog Faulty Deployment Detection rules
 
-- [Monitor][1]: Checks the state of one or more monitors over a configurable period of up to 2 hours. The rule fails if a monitor enters an `Alert` or `No Data` status during that period. Specify the monitors to check with a monitor search query or monitor IDs.
-- [APM Faulty Deployment Detection][2]: Uses [Watchdog][6] to compare the deployed version against previous versions of the same service. The rule fails if the analysis detects new types of errors or a significant increase in error rates. The analysis runs over a configurable period of up to 2 hours.
-
-A gate can have one or more rules, including any combination of monitor and APM Faulty Deployment Detection rules.
+A [Watchdog Faulty Deployment Detection][2] rule compares the deployed version against previous versions of the same service. The rule fails if the analysis detects new types of errors or a significant increase in error rates.
 
 ## Evaluations
 
-An evaluation is a single run of a gate's rules against a specific deployment. Evaluations are asynchronous: your pipeline triggers an evaluation, then checks back for the result while the rules run in the background.
+An evaluation is a single run of a gate's rules against a specific deployment. Your pipeline requests a gate evaluation, and Datadog immediately returns an evaluation ID. The evaluation eventually resolves to `pass` or `fail`.
 
-1. **Your pipeline requests a gate evaluation.** The request identifies the service, environment, and version being deployed. For a [JIT](#configuration-sources) gate, the request also contains the gate's rules. For a [preconfigured](#configuration-sources) gate, Datadog uses the service, environment, and optional identifier to find the gate. The version is required if the gate has an APM Faulty Deployment Detection rule.
-2. **Datadog starts the evaluation.** The API immediately returns an evaluation ID, and each rule runs for its configured duration.
-3. **Your pipeline polls for the result.** Your pipeline uses the evaluation ID to check the evaluation's status, which stays `in_progress` while the rules run. The [`datadog-ci` CLI][4] and the [GitHub Action][7] handle polling for you: they wait until the evaluation completes or a configurable timeout is reached.
-4. **The evaluation resolves to `pass` or `fail`.** The gate passes if all of its active rules pass, and fails if any active rule fails. Your pipeline then decides how to proceed based on the result.
-
-Each evaluation and its per-rule results, including the reason a rule failed, are recorded on the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][5] page. On this page, you can also identify frequently failing rules and gates and track patterns over time.
+Evaluations for both inline and preconfigured gates appear on the [{{< ui >}}Evaluations{{< /ui >}}][5] page.
 
 ### Evaluation modes
 
-Gates and rules each have an evaluation mode, which determines whether their results affect your deployment:
+There are two evaluation modes: [dry run](#dry-run-mode) and [active](#active-mode). You can set the evaluation mode separately on each gate and each rule. The mode determines whether their verdicts affect your deployment.
 
-- **Active**: The result counts. An active gate returns its actual result (`pass` or `fail`) to your pipeline, and an active rule's result counts toward the gate's result.
-- **Dry run**: The result is recorded on the [Evaluations][5] page but doesn't affect your deployment. A dry run gate always returns `pass` to your pipeline, and a dry run rule's result is excluded from the gate's result.
+#### Dry run mode
 
-Dry run lets you see how a gate or rule behaves against real deployments before it can block one, which is useful when onboarding or adding a new rule. When the results match what you expect, switch to active.
+Use dry run to see which deployments would pause and why, while deployments continue as usual.
 
-For JIT gates, set the evaluation mode with the `dry_run` field in the evaluation request (`dryRun` in `datadog-ci` configuration files). For preconfigured gates, use the {{< ui >}}Evaluation Mode{{< /ui >}} setting on the gate or rule.
+The verdict of a gate in dry run mode is recorded on [{{< ui >}}Evaluations{{< /ui >}}][5] but doesn't affect your deployment. That is, a dry run gate always returns `pass` to your pipeline. A dry-run rule's verdict doesn't count toward its associated gate's verdict.
+
+#### Active mode
+
+Use active mode when you're ready for your workflow to pause when a required check fails.
+
+An active gate returns its true verdict (`pass` or `fail`) to your pipeline. An active rule's verdict counts toward the associated gate's verdict.
 
 ## Further reading
 
@@ -100,7 +86,6 @@ For JIT gates, set the evaluation mode with the `dry_run` field in the evaluatio
 [1]: /monitors/
 [2]: /watchdog/faulty_deployment_detection/
 [3]: /deployment_gates/setup
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
 [5]: https://app.datadoghq.com/ci/deployment-gates/evaluations
-[6]: /watchdog
-[7]: https://github.com/DataDog/deployment-gate-github-action
+[8]: /deployment_gates/setup/inline
+[9]: /deployment_gates/setup/preconfigured

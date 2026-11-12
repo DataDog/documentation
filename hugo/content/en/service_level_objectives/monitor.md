@@ -8,15 +8,18 @@ further_reading:
 - link: "/monitors/"
   tag: "Documentation"
   text: "More information about Monitors"
+- link: "https://learn.datadoghq.com/courses/understanding-slos"
+  tag: "Learning Center"
+  text: "Understanding Service Level Objectives (SLOs)"
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
 - link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
   tag: "Blog"
   text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
-- link: "https://learn.datadoghq.com/courses/understanding-slos"
-  tag: "Learning Center"
-  text: "Understanding Service Level Objectives (SLOs)"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 
 ---
 
