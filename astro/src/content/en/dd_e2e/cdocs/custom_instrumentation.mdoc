@@ -1,0 +1,81 @@
+---
+title: "Cdocs Test Page: Filterable Content (E2E Fixture)"
+description: Proof-of-concept test fixture exercising the Astro cdocs pipeline (filter resolution, cookie persistence, and server-side content dropping). Not real product documentation.
+content_filters:
+  - trait_id: prog_lang
+    option_group_id: custom_instrumentation_language_options
+    label: "Language"
+  - trait_id: api_type
+    option_group_id: custom_instrumentation_api_options
+    label: "API"
+further_reading:
+  - link: 'tracing/guide/instrument_custom_method'
+    text: 'Instrument a custom method to get deep visibility into your business logic'
+---
+
+<!-- API availability notices (nested conditionals) -->
+
+{% if equals($prog_lang, "cpp") %}
+{% if equals($api_type, "otel_api") %}
+{% alert level="danger" %}
+C++ does not support the OpenTelemetry API. Select **Datadog** from the API dropdown to see C++ custom instrumentation documentation.
+{% /alert %}
+{% /if %}
+{% /if %}
+
+{% if equals($prog_lang, "elixir") %}
+{% if equals($api_type, "dd_api") %}
+{% alert level="danger" %}
+Elixir does not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see Elixir custom instrumentation documentation.
+{% /alert %}
+{% /if %}
+{% /if %}
+
+<!-- OpenTelemetry API content -->
+
+{% if equals($api_type, "otel_api") %}
+
+{% if equals($prog_lang, "elixir") %}
+Datadog does not provide an Elixir SDK. To send traces to Datadog, use the OpenTelemetry SDK for Elixir.
+{% /if %}
+
+{% if not(includes($prog_lang, ["cpp", "elixir"])) %}
+
+## Overview
+
+{% partial file="@partials/dd_e2e/opentelemetry/traces/otel-custom-instrumentation-overview.mdoc" /%}
+
+{% if equals($prog_lang, "java") %}
+{% partial file="@partials/dd_e2e/opentelemetry/traces/java.mdoc" /%}
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+{% partial file="@partials/dd_e2e/opentelemetry/traces/python.mdoc" /%}
+{% /if %}
+
+{% /if %}
+{% /if %}
+
+<!-- Datadog API content -->
+
+{% if equals($api_type, "dd_api") %}
+{% if not(equals($prog_lang, "elixir")) %}
+
+## Overview
+
+Use the Datadog API to programmatically create, modify, or delete traces. This is useful for tracing in-house code not captured by automatic instrumentation.
+
+{% if equals($prog_lang, "java") %}
+{% partial file="@partials/dd_e2e/tracing/custom_instrumentation/dd_api/java.mdoc" /%}
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+{% partial file="@partials/dd_e2e/tracing/custom_instrumentation/dd_api/python.mdoc" /%}
+{% /if %}
+
+{% if equals($prog_lang, "cpp") %}
+{% partial file="@partials/dd_e2e/tracing/custom_instrumentation/dd_api/cpp.mdoc" /%}
+{% /if %}
+
+{% /if %}
+{% /if %}

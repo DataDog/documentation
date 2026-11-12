@@ -7,10 +7,6 @@ further_reading:
   text: "Detect and resolve endpoint issues across your fleet with Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
-End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
-
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
 
 End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce to help answer questions such as:
@@ -36,10 +32,13 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | Capability                        | Description                                                                                                                                                                                               |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Device performance monitoring** | Monitor overall system health metrics such as CPU, memory, disk, and network utilization to identify underperforming devices.                                                                             |
+| **Startup performance** | Measure how long devices take to start and become ready for use, and find devices with slow startups. |
 | **Battery health** | Plan hardware life cycles with battery metrics such as maximum capacity, cycle count, and charge status.                                                                              |
 | **Process visibility**            | Use [Live Processes][1] to monitor resource usage by individual processes and identify applications affecting device performance.                                                                         |
 | **Logs collection**               | Use [Logs][7] to collect and explore logs from end-user devices and applications for troubleshooting crashes, errors, and performance issues.                                                             |
+| **Events** | Review hand-curated events from the device, such as application hangs and crashes, failed installations, and unexpected reboots, to reconstruct what happened. |
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
+| **Network connections for access points** | See the network connection between a device and the access point it is associated with. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
 | **Network traffic**         | See traffic volume per destination along with latency and error rate.                                                        |
 | **Network path tracing**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
@@ -47,6 +46,14 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Identity mapping**         | Map devices back to the end user for pattern and cohort analysis.                                          | 
 
 ## Featured workflows
+
+### Review fleet issues in Command Center
+
+Open [Command Center][5] to see active endpoint issues across the fleet, ranked by severity. Each issue includes the affected devices, a root cause summary from [Bits Investigation][8], and a recommended next step. Each issue is also a [work item][9], so you can assign an owner, set a priority, and track the issue through resolution. Read [Detect and resolve endpoint issues across your fleet with Datadog][10] for this workflow.
+
+### Open an access point in Network Device Monitoring
+
+From a device, open the access point it is connected to in [Network Device Monitoring][11]. Compare that device's connection with access point health and the network connections on the access point to see whether a connectivity issue affects one device or everyone associated with that access point. End-user devices also appear next to network devices on the [device topology map][12].
 
 ### Trace network paths from user devices to SaaS applications
 
@@ -67,6 +74,15 @@ With network path tracing, you can:
 [5]: https://app.datadoghq.com/end-user-devices
 [6]: /agent/fleet_automation/
 [7]: /logs/
+[8]: /bits_ai/bits_investigation/
+[9]: /incident_response/work_management/view_and_manage/
+[10]: https://www.datadoghq.com/blog/auto-detected-endpoint-issues/
+[11]: /network_monitoring/devices/
+[12]: /network_monitoring/devices/topology/
+
+## Set up End User Device Monitoring
+
+Follow [Set up End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) for supported platforms and device-specific installation instructions.
 
 ## Further reading
 

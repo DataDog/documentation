@@ -19,7 +19,7 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 
 ## 전제 조건 {#prerequisites}
 
-목적지를 구성하기 전에 BYOC Logs 클러스터를 배포해야 합니다. [BYOC Logs 설치 섹션][3]에서 설치 방법을 확인하세요.
+로그를 수신하려면 실행 중인 BYOC Logs 클러스터가 필요합니다. Operator 배포의 경우, 먼저 파이프라인과 해당 대상을 생성한 다음 파이프라인 ID를 사용하여 클러스터와 관리형 Worker를 배포하십시오. 별도로 관리되는 Worker의 경우, 클러스터를 배포하고 Worker를 설치하기 전에 해당 수집 엔드포인트를 확보하십시오. [BYOC Logs 설치 가이드][3]를 참조하십시오.
 
 ## 설정 {#setup}
 
@@ -45,6 +45,8 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="BYOC Logs 목적지 설정" style="width:35%;" >}}
 
 ## 시크릿 기본값 {#secret-defaults}
+
+`DatadogBYOCCluster`가 관리하는 Worker의 경우, Operator는 BYOC Logs 인덱서 엔드포인트, Datadog 사이트 및 공유 API 키를 제공합니다. 배포 전에 파이프라인 대상을 구성한 다음 `spec.components.pipelines[].pipelineID`에 파이프라인 ID를 제공하십시오. 다음 수동 엔드포인트 설정은 독립형 Worker에 적용됩니다. [Datadog Operator를 사용하여 BYOC Logs 설치][10]를 참조하십시오.
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -99,3 +101,4 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 [7]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [9]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /ko/byoc-logs/install/datadog_operator/

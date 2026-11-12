@@ -2,8 +2,6 @@
 aliases:
 - /fr/observability_pipelines/destinations/datadog_apm/
 - /fr/observability_pipelines/destinations/opentelemetry/traces/
-- /fr/observability_pipelines/destinations/opentelemetry/metrics/
-- /fr/observability_pipelines/destinations/prometheus/
 description: Découvrez les destinations disponibles pour l'Observability Pipelines
   Worker.
 disable_toc: false
@@ -85,12 +83,16 @@ Voici les destinations disponibles :
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [Client HTTP/S][3]
+- [OpenTelemetry][5]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /fr/observability_pipelines/destinations/datadog_metrics/
 [2]: /fr/observability_pipelines/destinations/elasticsearch/
 [3]: /fr/observability_pipelines/destinations/http_client/
 [4]: /fr/observability_pipelines/destinations/splunk_hec/metrics
+[5]: /fr/observability_pipelines/destinations/opentelemetry/metrics
+[6]: /fr/observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -109,7 +111,7 @@ Le tableau suivant répertorie les destinations et les champs qui prennent en ch
 | Datadog Archives  | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Azure Blob        | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Elasticsearch     | Index (mode Bulk)<br><br>Type, Dataset, Namespace (mode Data streams) | Le Worker écrit les logs dans l'index `datadog-op`.<br><br>Le Worker supprime les logs si l'un de ces champs ne peut pas être résolu. |
-| Google Chronicle  | Type de log                            | Utilise par défaut le type de log `DATADOG`.                                                                                            |
+| Google SecOps     | Type de log                            | Utilise par défaut le type de log `DATADOG`.                                                                                            |
 | Google Cloud      | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Opensearch        | Index (mode Bulk)<br><br>Type, Dataset, Namespace (mode Data streams) | Le Worker écrit les logs dans l'index `datadog-op`.<br><br>Le Worker supprime les logs si l'un de ces champs ne peut pas être résolu. |
 | Prometheus*        | ID de locataire                           | Le Worker supprime la métrique.  |
@@ -127,7 +129,7 @@ Si vous souhaitez acheminer des logs en fonction du champ d'ID d'application du 
 
 #### Champs d'événement {#event-fields}
 
-Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événements de log. Exemple :
+Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événements de log. Par exemple :
 
 ```
 {{ application_id }}
@@ -135,7 +137,7 @@ Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événeme
 
 #### Spécificateurs Strftime {#strftime-specifiers}
 
-Utilisez les [spécificateurs strftime][3] pour la date et l'heure. Exemple :
+Utilisez les [spécificateurs strftime][3] pour la date et l'heure. Par exemple :
 
 ```
 year=%Y/month=%m/day=%d

@@ -57,7 +57,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **MariaDB**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **MariaDB**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, **ClickHouse**, and **IBM Db2**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -71,6 +71,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
   {{< image-card href="/database_monitoring/setup_postgres/heroku" src="integrations_logos/heroku.png" alt="PostgreSQL" >}}
   {{< image-card href="/database_monitoring/setup_postgres/supabase/cloud" src="integrations_logos/supabase.png" alt="Supabase Cloud" title="Supabase Cloud" >}}
   {{< image-card href="/database_monitoring/setup_postgres/supabase/agent" src="integrations_logos/supabase.png" alt="Supabase Self-Hosted" title="Supabase Self-Hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/lakebase" src="integrations_logos/databricks.png" alt="Databricks Lakebase" title="Databricks Lakebase" >}}
 {{< /card-grid >}}
 <p></p>
 
@@ -134,6 +135,15 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< card-grid >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
+{{< /card-grid >}}
+<p></p>
+
+<!-- vale Datadog.headings = NO -->
+### IBM Db2
+<!-- vale Datadog.headings = YES -->
+
+{{< card-grid >}}
+  {{< image-card href="/database_monitoring/setup_db2/selfhosted" src="integrations_logos/ibm_db2.png" alt="Self-hosted" title="Self-hosted" >}}
 {{< /card-grid >}}
 <p></p>
 

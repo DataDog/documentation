@@ -41,10 +41,12 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Connect to these data lake catalogs:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+{{< whatsnext desc="Connect to these data lake sources:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}
@@ -77,8 +79,42 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Data sent to Datadog
+
+Quality Monitoring runs aggregate queries in your data warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog, not row-level data from your tables.
+
+[Custom SQL monitors][2] are the exception, because you control what the query returns:
+
+- The query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that return full rows, such as `SELECT *`, fail validation and are not stored.
+- If the query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series.
+
+For example, the following query stores each distinct `region` value alongside its count:
+
+```sql
+SELECT region, COUNT(*) AS dd_value
+FROM <database>.<schema>.orders
+WHERE status = 'FAILED'
+GROUP BY region
+```
+
+<div class="alert alert-warning">If you group by a column that contains sensitive data, such as <code>email</code> or <code>user_id</code>, those values are sent to Datadog. Group only by non-sensitive columns. If your warehouse supports column masking, you can also mask sensitive columns so that Datadog reads masked values.</div>
+
+Column masking support varies by warehouse:
+
+| Warehouse | Column masking |
+|---|---|
+| Databricks | [Unity Catalog column masks][3] |
+| Snowflake | [Masking policies][4] (requires Enterprise Edition or higher) |
+| BigQuery | [Data masking][5]. Grant the Datadog service account the BigQuery Masked Reader role. |
+| Redshift | [Dynamic data masking][6] |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_observability/lineage/
+[2]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
+[3]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
+[4]: https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
+[5]: https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro
+[6]: https://docs.aws.amazon.com/redshift/latest/dg/t_ddm.html

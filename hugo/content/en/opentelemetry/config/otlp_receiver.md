@@ -8,7 +8,7 @@ further_reading:
   text: "Setting Up the OpenTelemetry Collector"
 - link: "/opentelemetry/otlp_ingest_in_the_agent/"
   tag: "Documentation"
-  text: "OTLP Ingestion by the Datadog Agent"
+  text: "Set Up the Agent's OTLP Endpoint"
 - link: "https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/"
   tag: "Architecture Center"
   text: "Datadog Agent OTLP Receiver in Kubernetes"

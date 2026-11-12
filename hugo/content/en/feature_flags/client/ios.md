@@ -315,7 +315,7 @@ Link the `DatadogOpenFeatureProvider` product to your app target. The bridge dep
 
 Initialize Datadog and enable Flags as shown in [Initialize the SDK](#initialize-the-sdk). Then create a `DatadogProvider` and register it with `OpenFeatureAPI.shared`:
 
-{{< code-block lang="swift" >}}
+```swift
 import DatadogCore
 import DatadogFlags
 import DatadogOpenFeatureProvider
@@ -337,7 +337,7 @@ Flags.enable(with: flagsConfiguration)
 let context = MutableContext(targetingKey: "user-123")
 let provider = DatadogProvider()
 await OpenFeatureAPI.shared.setProviderAndWait(provider: provider, initialContext: context)
-{{< /code-block >}}
+```
 
 `setProviderAndWait` is `async` and does not throw. After it returns, the provider is ready and flag evaluations use cached values.
 
@@ -444,11 +444,29 @@ final class FeatureFlagEventObserver {
 
 ## Control flag evaluation telemetry and experiment participation
 
-The following examples require `dd-sdk-ios` version `3.22.0` or later. Flag evaluation opt-out and experimentation opt-out are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out](/feature_flags/concepts/opt_out/) for shared concepts.
+Flag evaluation telemetry opt-out requires `dd-sdk-ios` version `3.21.0` or later. Experimentation opt-out requires version `3.22.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][3] for shared concepts.
+
+### Control flag evaluation telemetry
+
+In version `3.21.0` or later, enable telemetry opt-out when creating the client. Supply the user's preference as Boolean `true`:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let flagsClient = FlagsClient.create(configuration: .init(
+    enableEvaluationTelemetryOptOutParameter: true
+))
+let context = FlagsEvaluationContext(targetingKey: "user-123", attributes: [
+    "dd_evaluation_telemetry_opt_out": .bool(true)
+])
+try await flagsClient.setEvaluationContext(context)
+{{< /code-block >}}
+
+The latest context update suppresses telemetry immediately, including during a pending or failed assignment refresh. The control also suppresses telemetry while the initial cached policy is unknown. It does not delete previously recorded events or RUM annotations.
 
 ### Configure the client
 
-After initializing Datadog and enabling Flags, configure both controls when you first create the client. This example suppresses flag evaluation telemetry and immediately excludes the user from experiment allocations:
+After initializing Datadog and enabling Flags, configure both controls when you first create the client. The following example requires version `3.22.0` or later. It suppresses flag evaluation telemetry and immediately excludes the user from experiment allocations:
 
 {{< code-block lang="swift" >}}
 import DatadogFlags
@@ -472,12 +490,14 @@ Run the asynchronous call from an async function and handle errors using the app
 
 When enabled, flag evaluation opt-out suppresses new evaluation events, aggregated counts, and automatic RUM flag annotations. Only Boolean `true` activates the context attribute. It does not change flag values or suppress experiment exposures, and it does not delete previously recorded telemetry.
 
+Version `3.22.0` adds `FlagsError.invalidContext` and `FlagEvaluationError.invalidContext`. Update exhaustive error switches when upgrading.
+
 ### Choose an experimentation policy
 
 | Mode | Behavior with a valid opt-out timestamp |
 | --- | --- |
 | `.disabled` | Ignore the timestamp. This is the default. |
-| `.immediate` | Exclude all experiment allocations, including holdouts. Ordinary feature allocations remain available. |
+| `.immediate` | Exclude all experiment allocations. Ordinary feature allocations remain available. |
 | `.futureExperimentsOnly` | Exclude allocations activated at or after the timestamp, or without activation metadata. Earlier allocations remain eligible. |
 
 Future-experiments-only mode checks allocation activation time, not previous enrollment. An older allocation can assign a user for the first time. Both enabled modes take effect immediately; a future timestamp does not schedule a preference change.
@@ -624,3 +644,5 @@ final class CheckoutFlagTests: XCTestCase {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /account_management/api-app-keys/#client-tokens
+
+[3]: /feature_flags/concepts/opt_out/

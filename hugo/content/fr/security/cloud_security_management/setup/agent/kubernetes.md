@@ -206,6 +206,7 @@ Lorsqu'il est activé, le Datadog Agent utilise eBPF pour observer l'accès aux 
 **Prérequis** :
 - Datadog Agent **7.79.0 ou version ultérieure**. Sur Kubernetes, utilisez **7.81.0 ou version ultérieure** pour une couverture de signal la plus complète.
 - Linux uniquement (dépendance eBPF). Consultez [Workload Protection setup][11] pour les distributions et les versions de noyau prises en charge.
+- Sur les nœuds Bottlerocket, le `spc_t`type SELinux  pour `system-probe`. La politique SELinux de Bottlerocket limite un conteneur non privilégié aux fichiers de son propre pod. Sans ce type, seule l'image de l'Agent reçoit les signaux d'exécution. Les onglets ci-dessous montrent comment le définir.
 
 Les signaux d'exécution s'appliquent aux gestionnaires de paquets du système d'exploitation (`apt`, `yum` ou `apk`) dans les résultats de vulnérabilité des images de conteneur.
 
@@ -228,6 +229,21 @@ spec:
           enabled: true
 ```
 
+Si vos nœuds exécutent Bottlerocket, définissez également le type SELinux du pod de l'Agent de nœud. Cette surcharge remplace le contexte de sécurité du pod ; conservez donc `runAsUser: 0` :
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
+```
+
 Appliquez les modifications et redémarrez le Datadog Agent.
 
 {{% /tab %}}
@@ -245,6 +261,20 @@ datadog:
     enrichment:
       usage:
         enabled: true
+```
+
+Si vos nœuds exécutent Bottlerocket, ajoutez également ce qui suit à votre fichier `datadog-values.yaml` :
+
+```yaml
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Redémarrez l'Agent.
@@ -266,6 +296,18 @@ hostPID: true
   value: "true"
 - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
   value: "true"
+```
+
+Si vos nœuds exécutent Bottlerocket, ajoutez également `seLinuxOptions` au contexte de sécurité du conteneur `system-probe` :
+
+```yaml
+# system-probe container
+securityContext:
+  seLinuxOptions:
+    user: system_u
+    role: system_r
+    type: spc_t
+    level: s0
 ```
 
 Redémarrez l'Agent.

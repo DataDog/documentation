@@ -19,7 +19,19 @@ Client applications can have separate preferences for flag evaluation telemetry 
 
 These controls are independent. Suppressing flag evaluation telemetry does not exclude a subject from experiments. Excluding a subject from experiments does not suppress flag evaluation telemetry.
 
-This page describes the shared concepts for client SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the platform's [client SDK guide][1] before using a control. For platform configuration and examples, see [JavaScript][2], [iOS and tvOS][4], or [Android and Android TV][5].
+This page describes the shared concepts for client SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the platform's [client SDK guide][1] before using a control. For platform configuration and examples, see the [JavaScript guide][2], [iOS guide][4], and [Android guide][5].
+
+## SDK support
+
+The controls have different minimum SDK versions:
+
+| SDK | Flag evaluation telemetry opt-out | Experimentation opt-out |
+| --- | --- | --- |
+| Browser (`@datadog/openfeature-browser`) | `2.2.0` | `2.2.0` |
+| iOS (`DatadogFlags`) | `3.21.0` | `3.22.0` |
+| Android (`dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`) | `3.16.0` | `3.17.0` |
+
+Use Android Flags and OpenFeature artifacts from the same release. Precomputed experimentation opt-out also requires delivery-service support for the selected policy.
 
 ## Choose a control
 
@@ -35,13 +47,15 @@ Use both controls if the application requires both behaviors. Do not use exposur
 
 ## Flag evaluation opt-out
 
-Subject-level flag evaluation opt-out requires explicit SDK activation and Boolean `true` in the `dd_evaluation_telemetry_opt_out` evaluation context attribute. Missing attributes, `false`, and other types do not activate suppression. For example, the string `'true'` is not Boolean `true`.
+Subject-level flag evaluation opt-out requires explicit SDK activation. Browser, iOS, and OpenFeature integrations use Boolean `true` in the `dd_evaluation_telemetry_opt_out` evaluation context attribute. Missing attributes, `false`, and other types do not activate suppression. For example, the string `'true'` is not Boolean `true`.
+
+For the native Android client, use `setEvaluationTelemetryOptOut(true)`. Its targeting context contains strings, so a string context attribute cannot activate telemetry suppression.
 
 The control suppresses new evaluation events, aggregated evaluation counts, and automatic RUM flag annotations where the SDK provides those integrations. It does not suppress exposures or change experiment eligibility. It does not remove queued events or existing RUM annotations.
 
 The control itself does not change targeting or flag values. If targeting rules use the opt-out attribute, changing its value can change assignments. Context refresh behavior depends on the SDK.
 
-To resume flag evaluation telemetry, set the attribute to `false` or remove it through the SDK's context update API. Preserve the subject identifier and other targeting attributes.
+To resume flag evaluation telemetry, set the attribute to `false` or remove it through the SDK's context update API. For native Android, call `setEvaluationTelemetryOptOut(false)`. Preserve the subject identifier and other targeting attributes.
 
 ### Client-wide telemetry settings
 
@@ -61,7 +75,7 @@ The application selects an experimentation policy and stores each subject's pref
 | Immediate | Skip every allocation that logs experiment exposures when a valid preference timestamp is present. |
 | Future experiments only | Keep exposure-logging allocations activated strictly before the preference timestamp. Skip allocations activated at or after it, or without activation metadata. |
 
-The policy applies to control variants, treatment variants, 100% experiment allocations, and holdouts. Evaluation continues through ordinary feature allocations in their existing order. If none match, the SDK returns the application default.
+The policy applies to control variants, treatment variants, and 100% experiment allocations. Browser holdouts use the same policy. Evaluation continues through ordinary feature allocations in their existing order. If none match, the SDK returns the application default.
 
 ### Immediate withdrawal
 

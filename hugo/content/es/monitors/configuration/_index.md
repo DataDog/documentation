@@ -337,24 +337,44 @@ Si configura etiquetas o dimensiones en su consulta, estos valores estarán disp
 
 Todos los usuarios pueden visualizar todos los seguimientos, independientemente del equipo o rol con el que estén asociados. De forma predeterminada, solo los usuarios vinculados a roles con el [permiso de escritura de seguimientos][11] pueden editar seguimientos. El [rol de Datadog Admin y el rol estándar de Datadog][12] tienen el permiso de escritura de seguimientos de forma predeterminada. Si su organización utiliza [roles personalizados][13], otros roles personalizados pueden tener el permiso de escritura de seguimientos. Para obtener más información sobre cómo configurar RBAC para seguimientos y migrar seguimientos de la configuración bloqueada al uso de restricciones de roles, consulte la guía sobre [Cómo configurar RBAC para seguimientos][14].
 
-Puede restringir aún más su seguimiento especificando una lista de [equipos][17], [roles][15] o usuarios autorizados para editarlo. El creador del seguimiento tiene derechos de edición sobre el seguimiento de forma predeterminada. La edición incluye cualquier actualización a la configuración del seguimiento, eliminar el seguimiento y silenciar el seguimiento por cualquier cantidad de tiempo.
+Puede restringir aún más su seguimiento especificando una lista de [equipos][17], [roles][15] o usuarios autorizados para editarlo o silenciarlo. El creador del seguimiento tiene derechos de edición sobre el seguimiento de forma predeterminada.
 
 **Nota**: Las limitaciones se aplican tanto en la interfaz de usuario como en la API.
 
+### Niveles de acceso {#access-levels}
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+El nivel de acceso Muter y los controles de acceso a tiempos de inactividad están en Preview.
+{{< /callout >}}
+
+Cada equipo, rol o usuario en un seguimiento restringido tiene uno de los siguientes niveles de acceso:
+
+| Nivel de acceso | Permisos |
+|--------------|-------------|
+| Viewer       | Visualizar el seguimiento. |
+| Muter        | Visualizar y silenciar el seguimiento. Los usuarios con nivel Muter no pueden editar ni eliminar el seguimiento. |
+| Editor       | Visualizar, silenciar, editar y eliminar el seguimiento. |
+
+Utilice el nivel de acceso Muter para permitir que los ingenieros de guardia u otros miembros del equipo de respuesta silencien un seguimiento durante un incidente o una ventana de mantenimiento sin darles acceso para cambiar su configuración. Si su organización no tiene el nivel de acceso Muter, solo los usuarios con nivel Editor pueden silenciar un seguimiento.
+
+Para silenciar un seguimiento, un usuario también necesita el [permiso Manage Downtimes][11]. Un tiempo de inactividad solo silencia los seguimientos a los que su creador tiene acceso de tipo Muter o Editor. Para obtener más información, consulte [Downtimes][18].
+
+**Nota**: Restringir el acceso de edición a un seguimiento también impide que los usuarios con acceso Viewer lo silencien, incluso mediante tiempos de inactividad. Para permitir que estos usuarios silencien el seguimiento, asígneles el nivel de acceso Muter.
+
 ### Controles de acceso granulares {#granular-access-controls}
 
-Utilice [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar un seguimiento:
+Utilice [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar o silenciar un seguimiento:
 1. Mientras edita o configura un seguimiento, busque la sección {{< ui >}}Define permissions and audit notifications{{< /ui >}}.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Opciones de configuración del seguimiento para definir permisos" style="width:70%;" >}}
 1. Haga clic en {{< ui >}}Edit Access{{< /ui >}}.
 1. Haga clic en {{< ui >}}Restrict Access{{< /ui >}}.
 1. El cuadro de diálogo se actualiza para mostrar que los miembros de su organización tienen acceso {{< ui >}}Viewer{{< /ui >}} de forma predeterminada.
-1. Use el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar el seguimiento.
+1. Use el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar o silenciar el seguimiento.
 1. Haga clic en {{< ui >}}Add{{< /ui >}}.
-1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}. Para otorgar a la selección acceso solo para silenciar, cambie {{< ui >}}Editor{{< /ui >}} a {{< ui >}}Muter{{< /ui >}}.
 1. Haga clic en {{< ui >}}Done{{< /ui >}}.
 
-**Nota:** Para mantener su acceso de edición al seguimiento, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro antes de guardar.
+**Nota:** Para mantener su acceso de edición al seguimiento, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro, con acceso de {{< ui >}}Editor{{< /ui >}}, antes de guardar.
 
 Para restaurar el acceso general a un seguimiento con acceso restringido, siga los pasos a continuación:
 1. Mientras visualiza un seguimiento, haga clic en el menú desplegable {{< ui >}}More{{< /ui >}}.
@@ -383,3 +403,4 @@ Para restaurar el acceso general a un seguimiento con acceso restringido, siga l
 [15]: /es/account_management/rbac/
 [16]: /es/account_management/rbac/granular_access
 [17]: /es/account_management/teams/
+[18]: /es/monitors/downtimes/#permissions

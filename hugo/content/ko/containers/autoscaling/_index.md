@@ -1,8 +1,6 @@
 ---
 aliases:
 - /ko/containers/monitoring/autoscaling
-cascade:
-  site_support_id: containers_autoscaling
 description: Datadog 메트릭과 지능형 스케일링 권장 사항을 사용하여 Kubernetes 워크로드 자동 확장
 further_reading:
 - link: /infrastructure/containers/kubernetes_resource_utilization

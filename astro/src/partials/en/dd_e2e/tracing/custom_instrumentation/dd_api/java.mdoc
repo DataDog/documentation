@@ -1,0 +1,21 @@
+A partial begins here.
+
+{% alert level="info" %}
+The Datadog Java tracer interoperates with the `opentracing-api` library for custom instrumentation.
+{% /alert %}
+
+### Add custom span tags {% #add-custom-span-tags-java %}
+
+Add custom tags to your spans corresponding to any dynamic value in your application code:
+
+```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null) {
+  span.setTag("customer.id", customerId);
+}
+```
+
+A partial ends here.

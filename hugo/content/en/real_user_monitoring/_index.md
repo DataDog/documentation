@@ -127,6 +127,7 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/electron/setup/" src="integrations_logos/rum-electron_large.svg" alt="Electron" >}}
 {{< /card-grid >}}
 
 ### Capabilities and platform support
@@ -150,6 +151,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | **Flutter** Session Replay is in Preview. |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | Only partially supported for all **mobile** and **Roku** devices. |
+| WebSocket monitoring | {{< X >}} |  |  |  |  |  |  |  | **Browser** WebSocket monitoring is in Preview. See [Track WebSocket connections][22]. |
 
 ## Supported endpoints for SDK domains
 
@@ -304,3 +306,4 @@ You must have edit access to restore general access to a restricted application.
 [19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
 [20]: /real_user_monitoring/guide/proxy-rum-data
 [21]: /integrations/content_security_policy_logs
+[22]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-websocket-connections

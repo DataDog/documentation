@@ -8,11 +8,10 @@ further_reading:
 - link: '/real_user_monitoring/rum_without_limits/'
   tag: Documentation
   text: RUM without Limits
+- link: "https://www.datadoghq.com/blog/rum-managed-archive/"
+  tag: "Blog"
+  text: "Store and recover user sessions with RUM Managed Archive"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview!">}}
-Managed Archive is in Preview.
-{{< /callout >}}
 
 ## Overview
 
@@ -77,8 +76,6 @@ To enable session storage for an application:
 4. Toggle {{< ui >}}Enable Managed Archive{{< /ui >}} on and select the storage period.
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_setup.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
-
-<div class="alert alert-info">It takes 24 hours for a newly ingested session to appear in the Managed Archive.</div>
 
 Configuration is done at the application level, which means you can apply different storage strategies per application.
 

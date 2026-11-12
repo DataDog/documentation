@@ -52,7 +52,7 @@ The web options below apply to `DatadogProvider`, the recommended browser provid
 
 Default: `true`. Set to `false` to disable.
 
-- **Web** (`@datadog/openfeature-browser`): `enableExposureLogging`
+- **Web** (`@datadog/openfeature-browser`): `trackExposures` (version 2.3.0 and later). Earlier versions use `enableExposureLogging`, which is deprecated.
 - **Android** (`dd-sdk-android-flags`): `trackExposures`
 - **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackExposures`
 - **iOS** (`DatadogFlags`): `trackExposures`

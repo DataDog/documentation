@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/llm_observability/monitoring/prompt_management/
-description: Prompt Management を使用して、Python アプリケーションで管理対象プロンプトの作成、バージョン管理、取得を行います。
+description: Prompt Management を使用して、Python、Go、および JavaScript アプリケーションで管理対象プロンプトの作成、バージョン管理、取得を行います。
 further_reading:
 - link: /llm_observability/instrument/prompt_tracking
   tag: ドキュメント
@@ -14,7 +14,7 @@ further_reading:
   text: Agent Observability SDK
 title: Prompt Management
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Prompt Management は、LLM アプリケーションで使用されるプロンプトの一元化されたレジストリを提供します。プロンプトテンプレートをアプリケーションコードや構成ファイルにハードコーディングする代わりに、Agent Observability を通じてプロンプトを作成、バージョン管理、更新し、実行時に取得します。
 
@@ -123,7 +123,7 @@ response = client.chat.completions.create(
 
 取得に失敗し、フォールバックが提供されていない場合、`get_prompt()` は `ValueError` を発生させます。フォールバックは認証を置き換えるものではありません。`DD_API_KEY` は常に必要であり、`DD_APP_KEY` が設定されている場合は `DD_ENV` も必要です。
 
-管理対象プロンプトは、テンプレート内で他の管理対象プロンプトを参照することはできません。プロンプトを構成するには、アプリケーションコード内でそれらを組み合わせるか、最終的なプロバイダー向けプロンプトを単一のプロンプトとして管理します。
+プロンプト構成を使用しない場合は、アプリケーションコード内でプロンプトを組み合わせるか、最終的なプロバイダー向けプロンプトを単一のプロンプトとして管理します。1 つの管理対象プロンプトを別のプロンプトに含めるには、[構成によるプロンプトの再利用](#reuse-prompts-with-composition)を参照してください。プロンプト構成はプレビュー版です。
 
 ### バージョンを選択 {#select-a-version}
 
@@ -219,9 +219,10 @@ Agent Observability ですでに追跡されているプロンプトを管理対
 Prompt Editor で:
 
 1. 1 つ以上のメッセージを追加し、それぞれに {{< ui >}}System{{< /ui >}}、{{< ui >}}User{{< /ui >}}、または {{< ui >}}Assistant{{< /ui >}} の役割を割り当てます。
-2. 任意のメッセージで `{variable_name}}` 構文を使用して、動的コンテンツを追加します。
-3. オプション: {{< ui >}}Run{{< /ui >}} をクリックして、サンプル値でプロンプトをテストします。
-4. {{< ui >}}Save Prompt{{< /ui >}} をクリックして、保存ダイアログを開きます。
+2. 任意のメッセージで `{{variable_name}}` 構文を使用して、動的コンテンツを追加します。
+3. オプション: メッセージプレースホルダーのプレビューにアクセスできる場合は、[{{< ui >}}Add Message Placeholder{{< /ui >}}] をクリックします。「[実行時にメッセージを挿入する](#insert-messages-at-runtime)」セクションを参照してください。
+4. オプション: [{{< ui >}}Run{{< /ui >}}] をクリックして、サンプル値でプロンプトをテストします。
+5. [{{< ui >}}Save Prompt{{< /ui >}}] をクリックして、保存ダイアログを開きます。
 
 ユーザークエリとコンテキストが変数として挿入されるように、プロンプトを構成します。
 
@@ -286,9 +287,148 @@ created_version = LLMObs.create_prompt_version(
 
 Prompt Management API を使用して、プロンプトおよびプロンプトのバージョンを作成、取得、更新、削除します。エンドポイントのスキーマ、リクエストのメディアタイプ、および例については、[Agent Observability API リファレンス][8] を参照してください。
 
-## プロンプト構成のバージョン管理 {#version-prompt-configuration}
+## 実行時にメッセージを挿入する{#insert-messages-at-runtime}
 
-<div class="alert alert-info"><strong>プレビュー:</strong> バージョン管理されたプロンプト構成はプレビュー版で利用できます。アクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>またはカスタマーサクセスマネージャーにお問い合わせください。</div>
+<div class="alert alert-info"><strong>プレビュー:</strong> メッセージプレースホルダーはプレビューで利用可能です。アクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>またはカスタマーサクセスマネージャーにお問い合わせください。</div>
+
+メッセージプレースホルダーは、実行時に保存されたプロンプトに会話履歴やツールとのやり取りを挿入します。テキスト変数 (`{{question}}` など) は、メッセージ内のテキストを置き換えます。メッセージプレースホルダーは、完全なメッセージのリストを挿入します。
+
+プロンプトバージョンには、実行時に渡すメッセージではなく、プレースホルダーの名前と位置が保存されます。プロンプト内で履歴を移動するには、新しいプロンプトバージョンを公開します。アプリケーションコードを変更する必要はありません。
+
+**プレビュー SDK へのアクセス:** 使用する言語向けの SDK バージョンについては、[Datadog サポート](https://www.datadoghq.com/support/)またはカスタマーサクセスマネージャーにお問い合わせください。
+
+### プレースホルダーを定義する{#define-the-placeholder}
+
+プロンプトエディターで [{{< ui >}}Add Message Placeholder{{< /ui >}}] をクリックし、`history` などの名前を入力します。上下の矢印ボタンを使用して、メッセージ間でプレースホルダーを移動します。プロンプト内のテキスト変数とは異なる名前を使用してください。エディターは、保存前に互換性のある SDK 要件を表示します。
+
+{{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="システム指示と質問変数を含むユーザー メッセージの間に履歴メッセージプレースホルダーがあるプロンプトエディター。" >}}
+
+Python SDK で同じプロンプトを作成するには、履歴が属する場所に `"type": "placeholder"` を持つ項目を追加します。
+
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.create_prompt(
+    "support-assistant",
+    [
+        {"role": "system", "content": "You are a concise assistant for {{plan}} customers."},
+        {"type": "placeholder", "name": "history"},
+        {"role": "user", "content": "{{question}}"},
+    ],
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+プレースホルダー名 `history` は、アプリケーションが実行時にメッセージを渡すために使用するキーです。これはメッセージロールではありません。セットアップ要件と環境 ID については、「[Python SDK を使用する](#use-the-python-sdk)」セクションを参照してください。
+
+### 実行時の値を指定する{#supply-runtime-values}
+
+プロンプトを取得し、テキスト変数を含むリストを渡します。SDK は、プレースホルダーの位置に履歴メッセージを順番に挿入します。
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+prompt = LLMObs.get_prompt("support-assistant")
+
+variables = {
+    "plan": "enterprise",
+    "question": "Can I export the report?",
+    "history": [
+        {"role": "user", "content": "Where are reports located?"},
+        {"role": "assistant", "content": "Under Analytics."},
+    ],
+}
+messages = prompt.format(**variables)
+```
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "support-assistant")
+if err != nil {
+	return err
+}
+
+variables := map[string]any{
+	"plan":     "enterprise",
+	"question": "Can I export the report?",
+	"history": []map[string]any{
+		{"role": "user", "content": "Where are reports located?"},
+		{"role": "assistant", "content": "Under Analytics."},
+	},
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+	return err
+}
+messages := rendered.Messages
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+```javascript
+const prompt = await tracer.llmobs.getPrompt('support-assistant')
+
+const variables = {
+  plan: 'enterprise',
+  question: 'Can I export the report?',
+  history: [
+    { role: 'user', content: 'Where are reports located?' },
+    { role: 'assistant', content: 'Under Analytics.' }
+  ]
+}
+const messages = prompt.format(variables)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+結果には 4 つのメッセージが含まれ、プレースホルダー項目はありません。
+
+```json
+[
+  {"role": "system", "content": "You are a concise assistant for enterprise customers."},
+  {"role": "user", "content": "Where are reports located?"},
+  {"role": "assistant", "content": "Under Analytics."},
+  {"role": "user", "content": "Can I export the report?"}
+]
+```
+
+フォーマットされたメッセージをモデルプロバイダーに渡します。挿入されたメッセージに `{{variable}}` 構文が含まれている場合、SDK はそれをそのままリテラルテキストとして残します。
+
+他の管理対象プロンプトと同じ [プロンプト追跡](#track-prompt-usage) ワークフローを使用します。プロンプトメタデータは、実行時の値ではなくプレースホルダーの定義を保持します。展開されたメッセージは、既存の入力キャプチャおよびプライバシー設定に従います。
+
+### ツールインタラクションを含める {#include-tool-interactions}
+
+プレースホルダーは、ツール呼び出しやツール応答を挿入することもできます。モデルプロバイダーのメッセージ形式を使用してください。たとえば、OpenAI Chat Completions 形式では、各ツールレスポンスの `tool_call_id` を、そのツール呼び出しの `id` に設定します。
+
+```python
+variables["history"] = [
+    {
+        "role": "assistant",
+        "tool_calls": [{
+            "id": "call_1",
+            "type": "function",
+            "function": {"name": "get_plan", "arguments": "{}"},
+        }],
+    },
+    {"role": "tool", "tool_call_id": "call_1", "content": "enterprise"},
+]
+messages = prompt.format(**variables)
+```
+
+SDK は、これらのメッセージをそのまま挿入します。アプリケーションがツールを実行し、そのレスポンスを提供します。
+
+### メッセージプレースホルダーの要件と制限{#message-placeholder-requirements-and-limits}
+
+- すべてのプレースホルダーに対してリストを渡してください。空のリスト (`[]`) の場合、メッセージは挿入されません。
+- 挿入されるメッセージには、テキスト、アシスタントのツール呼び出し、またはツールレスポンスを含めることができます。SDK はツールを実行したり、プロバイダー固有のフィールドを検証したりしません。
+- プロンプトで同じプレースホルダー名が複数回使用されている場合、それぞれの箇所に同じリストが挿入されます。異なるプレースホルダー名には、異なるリストを渡すことができます。
+- ネストされたプレースホルダーや、画像や音声などのマルチモーダルコンテンツはサポートされていません。
+
+## プロンプト構成のバージョン管理 {#version-prompt-configuration}
 
 設定をプロンプトと一緒に保存することで、両方を 1 つのバージョンとして更新したり、ロールバックしたりできます。構成は次の用途に使用します。
 
@@ -300,8 +440,8 @@ Prompt Management API を使用して、プロンプトおよびプロンプト�
 
 ### 構成を追加 {#add-configuration}
 
-1. {{< ui >}}Prompts{{< /ui >}} ページで、{{< ui >}}New Prompt{{< /ui >}} をクリックして、テンプレートを作成します。
-2. {{< ui >}}Save Prompt{{< /ui >}} をクリックします。プロンプト ID を入力し、{{< ui >}}Configuration (optional){{< /ui >}} を展開して、設定を追加します。
+1. [{{< ui >}}Prompts{{< /ui >}}] ページで、[{{< ui >}}New Prompt{{< /ui >}}] をクリックして、テンプレートを作成します。
+2. [{{< ui >}}Save Prompt{{< /ui >}}] をクリックします。プロンプト ID を入力し、[{{< ui >}}Configuration (optional){{< /ui >}}] を展開して、設定を追加します。
 
    ```json
    {
@@ -310,7 +450,7 @@ Prompt Management API を使用して、プロンプトおよびプロンプト�
    }
    ```
 
-3. `<MODEL_NAME>` をこれらの設定をサポートするモデルに置き換え、{{< ui >}}Create prompt{{< /ui >}} をクリックします。
+3. `<MODEL_NAME>` をこれらの設定をサポートするモデルに置き換え、[{{< ui >}}Create prompt{{< /ui >}}] をクリックします。
 
 エディターには有効な JSON オブジェクトが必要です。この例のテキストはプレースホルダーであり、保存された構成ではありません。
 
@@ -318,17 +458,17 @@ Prompt Management API を使用して、プロンプトおよびプロンプト�
 
 ### 構成の更新 {#update-configuration}
 
-1. プロンプトバージョンを開き、{{< ui >}}Configuration{{< /ui >}} タブを選択します。
-2. {{< ui >}}Update configuration{{< /ui >}} をクリックして、設定を編集します。
-3. {{< ui >}}Save version{{< /ui >}} をクリックします。保存する前に差分を確認するには、まず {{< ui >}}Review changes{{< /ui >}} をクリックします。
+1. プロンプトバージョンを開き、[{{< ui >}}Configuration{{< /ui >}}] タブを選択します。
+2. [{{< ui >}}Update configuration{{< /ui >}}] をクリックして、設定を編集します。
+3. [{{< ui >}}Save version{{< /ui >}}] をクリックします。保存する前に差分を確認するには、まず [{{< ui >}}Review changes{{< /ui >}}] をクリックします。
 
 {{< img src="llm_observability/monitoring/configuration-tab-app-configured-cropped.png" alt="保存されたモデル設定と [Update Configuration] (構成を更新) ボタンを表示した [Configuration] タブ" style="width:100%;" >}}
 
-これにより、元のバージョンを上書きせずに新しいバージョンが作成されます。{{< ui >}}Compare{{< /ui >}} を使用して、構成の変更内容を確認します。
+これにより、元のバージョンを上書きせずに新しいバージョンが作成されます。[{{< ui >}}Compare{{< /ui >}}] を使用すると、構成の変更内容を確認できます。
 
 準備ができたら、そのバージョンを環境にデプロイします。その環境を取得するアプリケーションは、選択されたテンプレートと構成をまとめて受け取ります。両方をロールバックするには、以前のバージョンをデプロイします。保存するだけでは、環境が提供するバージョンは変更されません。
 
-### アプリケーションでの構成の使用 {#use-configuration-in-your-application}
+### アプリケーションでの構成の使用{#use-configuration-in-your-application}
 
 アプリケーションの環境にデプロイされたプロンプトを取得し、その構成をモデルクライアントに渡します。
 
@@ -351,7 +491,7 @@ model = config["model"]
 temperature = config.get("temperature", 0.2)
 ```
 
-[モデル呼び出し](#retrieve-format-and-use-a-prompt)では、これらの値を `prompt.format(...)` とともに使用します。
+[モデル呼び出し](#retrieve-format-and-use-a-prompt)でこれらの値を `prompt.format(...)` とともに使用します。
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -394,13 +534,97 @@ if !ok {
 
 **API での作成:** [Prompt Management API][8] を使用して、プロンプトとバージョンを作成することもできます。`config` を省略すると、新しいプロンプトでは空の構成が作成され、新しいバージョンでは最新の構成が継承されます。`{}` を送信してクリアします。
 
-## 高度な使用方法 {#advanced-usage}
+## 構成によるプロンプトの再利用{#reuse-prompts-with-composition}
 
-### 1 つの環境から複数のバージョンを提供 {#serve-multiple-versions-from-one-environment}
+<div class="alert alert-info"><strong>プレビュー:</strong> プロンプトの構成はプレビュー版で利用可能です。アクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>またはカスタマーサクセスマネージャーにお問い合わせください。</div>
 
-Prompt Management は、Datadog の Feature Flags 製品に基づいています。各環境では、`get_prompt()` の呼び出しはデフォルトのバージョンに解決されます。また、ターゲティングルールに一致する呼び出しには、別のバージョンを提供することもできます。
+プロンプトの構成を使用すると、あるプロンプトに別のプロンプトを含めることができるため、共有の指示をコピーすることなく再利用できます。たとえば、サポートアシスタントと請求アシスタントの両方に、同じ対応ポリシーを含めることができます。別のプロンプトを含めるには、次の2つの方法があります。
 
-たとえば、ターゲティングルールを使用して、`production` 内の一部のユーザーに不安定なプロンプトバージョンをロールアウトし、それ以外のユーザーには引き続き安定版を提供できます。
+- **チャットメッセージ**: チャットプロンプトから一部またはすべてのメッセージを含めます。
+- **テキスト**: テキストプロンプトの内容をメッセージ内に挿入します。
+
+各インクルードは、特定のバージョンを指し示します。含まれているプロンプトの新しいバージョンを公開しても、すでにそれを含んでいるプロンプトは変更されません。
+
+### チャットメッセージを含める{#include-chat-messages}
+
+#### UI で{#in-the-ui-1}
+
+次の例では、共有応答ポリシーをサポートアシスタントのプロンプトに追加します。
+
+1. ID `response-policy` と {{< ui >}}System{{< /ui >}} メッセージ「`Answer concisely. If you do not know the answer, say so.`」を持つプロンプトを保存します。
+2. [{{< ui >}}Prompts{{< /ui >}}] ページで、[{{< ui >}}New Prompt{{< /ui >}}] をクリックします。プロンプトエディターで [{{< ui >}}Include Prompt{{< /ui >}}]をクリックし、`response-policy` バージョン 1 を選択して、[{{< ui >}}Add prompt{{< /ui >}}] をクリックします。
+3. インクルードされているプロンプトの後に、「{{question}}」を含む {{< ui >}}User{{< /ui >}} メッセージを追加します。`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}、プロンプト ID として「support-assistant-composed」を入力し、[{{< ui >}}Create prompt{{< /ui >}}] をクリックします。
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="システムメッセージとして含まれている応答ポリシーバージョン 1 と、その後に続く質問変数を含むユーザーメッセージを表示する Playground。" style="width:100%;" >}}
+
+プロンプトは次のようになります。
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+アプリケーションは、通常通り[プロンプトを取得してフォーマットします](#retrieve-format-and-use-a-prompt)。インクルードされているメッセージが取得したプロンプトにすでに含まれているため、`response-policy` を別にフェッチする必要はありません。
+
+デフォルトでは、インクルードによって、含まれるプロンプトのすべてのメッセージが順番に追加されます。一部のメッセージのみを含める、並べ替える、または繰り返すには、プロンプトエディターで [{{< ui >}}Included Prompt{{< /ui >}}] をクリックし、[{{< ui >}}Customize messages{{< /ui >}}] を選択します。カスタマイズしても、インクルードされているプロンプトは変更されません。
+
+#### API で{#with-the-api}
+
+`include` オブジェクトを `template.messages` で使用すると、チャットプロンプトの特定のバージョンが参照されます。この例では、バージョン 1 のチャットプロンプト `response-policy` を想定しています。これをインクルードするプロンプトを作成するには、この JSON ボディを `POST /api/v2/llm-obs/v1/prompts` に送信します。
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+認証およびメッセージ選択のオプションについては、「[Agent Observability プロンプトの作成][11]」を参照してください。
+
+### メッセージ内のテキストをインクルードする{#include-text-in-a-message}
+
+メッセージ全体ではなくフレーズを再利用するには、[{{< ui >}}Include Prompt{{< /ui >}}] をクリックし、テキストプロンプトとバージョンを選択し、[{{< ui >}}Insert text{{< /ui >}}] をクリックします。参照は、最後に編集可能なメッセージの末尾に追加されます。それを必要な場所に移動してください。
+
+たとえば、`response-style` のバージョン 1 に `Answer concisely.` が含まれている場合、次のように記述します。
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+解決されたテンプレートは次のとおりです。
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+参照は、追加のスペースや改行なしで、含まれているテキストに正確に解決されます。必ずバージョンを指定してください。指定しない場合、「{{>response-style}}」はインクルードではなく、リテラルテキストのままになります。プレビューアクセス権なしでプロンプトを作成する場合、インライン参照はそのままリテラルテキストになります。以前に保存された構成バージョンは引き続き使用可能です。
+
+API リクエストでは、テキスト `template` またはチャットメッセージの `content` で同じ構文を使用してください。
+
+### インクルードを確認して更新する{#review-and-update-includes}
+
+保存されたバージョンでは、{{< ui >}}Prompt Template{{< /ui >}} に作成した参照が表示されます。{{< ui >}}Resolved Prompt{{< /ui >}} には、実行時変数が入力される前の展開されたメッセージが表示されます。
+
+共有ポリシーが変更された場合は、その {{< ui >}}Used By{{< /ui >}} タブを使用して、それを参照しているプロンプトを見つけてください。使用しているプロンプトを開き、インクルードを新しいソースバージョンに置き換えた後、更新されたプロンプトをテストして、保存し、デプロイしてください。ソースが後で削除されても、既存のバージョンは元のコンテンツのままになります。
+
+## 高度な使用方法{#advanced-usage}
+
+### 1 つの環境から複数のバージョンを提供する{#serve-multiple-versions-from-one-environment}
+
+Prompt Management は、Datadog の Feature Flags 製品に基づいています。各環境で、`get_prompt()` の呼び出しはデフォルトのバージョンに解決されます。また、ターゲティングルールに一致する呼び出しには、別のバージョンを提供することもできます。
+
+たとえば、ターゲティングルールを使用して、`production` 内の一部のユーザーに不安定なプロンプトバージョンをロールアウトし、それ以外のユーザーには引き続き安定版を提供することができます。
 
 ```python
 ## DD_ENV=production
@@ -410,25 +634,25 @@ prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstab
 
 これを構成するには、次のようにします。
 
-1. プロンプトのバージョン一覧で、環境にカーソルを合わせて {{< ui >}}Targeting Rules{{< /ui >}} をクリックします。
+1. プロンプトのバージョン一覧で、環境にカーソルを合わせて [{{< ui >}}Targeting Rules{{< /ui >}}] をクリックします。
 
-   {{< img src="llm_observability/monitoring/prompt-environment-targeting-rules-link.png" alt="現在 1 つのプロンプトバージョンを提供している環境と、ターゲティングルールへのリンクを示す環境パネル" style="width:60%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-environment-targeting-rules-link.png" alt="現在 1 つのプロンプトバージョンを提供している環境と、ターゲティングルールへのリンクを示す環境パネル。" style="width:60%;" >}}
 
-2. {{< ui >}}Add Targeting Rule{{< /ui >}} をクリックします。
+2. [{{< ui >}}Add Targeting Rule{{< /ui >}}] をクリックします。
 
-   {{< img src="llm_observability/monitoring/prompt-targeting-rules-default-version.png" alt="ルールが一致しない場合に提供されるデフォルトバージョンと [Add Targeting Rule] (ターゲティングルールを追加) ボタンを表示する、環境の [Targeting Rules] (ターゲティングルール) パネル" style="width:100%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-targeting-rules-default-version.png" alt="ルールが一致しない場合に提供されるデフォルトバージョンと [Add Targeting Rule] ボタンを表示する、環境の [Targeting Rules] パネル。" style="width:100%;" >}}
 
 3. ルールのフィルターを定義します。たとえば、属性 `tag=unstable` を渡す `get_prompt()` の呼び出しに一致させ、結果のバリアントを不安定なプロンプトバージョンに設定します。
 
-   {{< img src="llm_observability/monitoring/prompt-targeting-rule-tag-filter.png" alt="タグ属性が unstable に設定されている条件に一致するターゲティングルールのフィルタービルダー" style="width:100%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-targeting-rule-tag-filter.png" alt="タグ属性が「unstable」に設定されている条件に一致するターゲティングルールのフィルタービルダー。" style="width:100%;" >}}
 
 4. ルールを保存します。`tag=unstable` を使用した呼び出しは一致したバージョンに解決され、それ以外の呼び出しはすべてデフォルトバージョンにフォールバックします。
 
 ターゲティングルールで参照される属性を、キーワード引数として `get_prompt()` に渡します。一致する属性を渡さない呼び出しは、引き続き環境のデフォルトバージョンに解決されます。
 
-ターゲティングルールに関係なく特定のバージョンを取得するには、[Select a version](#select-a-version) (バージョンを選択) の説明に従って `version` を渡します。
+ターゲティングルールに関係なく特定のバージョンを取得するには、「[バージョンを選択](#select-a-version)」の説明に従って `version` を渡します。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -442,3 +666,4 @@ prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstab
 [8]: /ja/api/latest/agent-observability/
 [9]: /ja/api/latest/feature-flags/list-environments/
 [10]: /ja/llm_observability/configure/prompt_experimentation/
+[11]: /ja/api/latest/agent-observability/create-an-agent-observability-prompt/

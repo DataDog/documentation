@@ -163,7 +163,7 @@ _Nécessite: Ruby 3.1+_ et [une activation manuelle][2]
 
 Taille réelle du tas (Aperçu, v2.18.0+)
 : La quantité de mémoire tas allouée par chaque méthode qui n'a pas encore été récupérée par le ramasse-miettes. Ceci est utile pour étudier l'utilisation globale de la mémoire de votre service et identifier les fuites de mémoire potentielles.<br />
-_Nécessite : Ruby 3.1+_ et [une activation manuelle][2] (Actuellement non compatible avec Ruby 4)
+_Nécessite : Ruby 3.1+_ et [une activation manuelle][2]
 
 Profilage GVL (dans la chronologie) (v2.11.0+)
 : Enregistre le temps pendant lequel les threads sont empêchés de travailler par d'autres threads « voisins bruyants », y compris les threads d'arrière-plan. Ceci est utile pour étudier les pics de latence dans l'application lors de l'utilisation de la visualisation chronologique.<br />

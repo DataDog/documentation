@@ -30,6 +30,7 @@ Conditional branching allows your Synthetic Monitoring tests to adapt to differe
 
 This guide covers three use cases for conditional branching. Each use case applies one or more of these step execution options:
 - {{< ui >}}If this step fails, continue to next step{{< /ui >}}
+- {{< ui >}}If this step fails, mark test as failed{{< /ui >}}
 - {{< ui >}}If this step succeeds, stop this test and mark it as passed{{< /ui >}}
 - {{< ui >}}Always run this step{{< /ui >}}
 
@@ -46,12 +47,13 @@ To set up this pattern:
 1. Create a subtest that represents journey A:
    1. Add a step that checks for the journey A element (for example, a step that asserts or clicks on a journey A header). 
    1. Add the remaining journey A steps inside that subtest.
-2. In the subtest's advanced options, enable the following:
+2. In the subtest's advanced options, configure the following:
    - {{< ui >}}If this step fails, continue to next step{{< /ui >}}: Prevents a failure from stopping the entire test.
+   - {{< ui >}}If this step fails, mark test as failed{{< /ui >}}: Selected by default. Clear this option so the test does not fail when journey A is not found.
    - {{< ui >}}If this step succeeds, stop this test and mark it as passed{{< /ui >}}: Ends the test and does not run the other journey when journey A is found.
 3. Add a second subtest for journey B: a step that checks for the journey B element, followed by the journey B steps.
-4. Enable {{< ui >}}If this step fails, continue to next step{{< /ui >}} on the journey B subtest.
-5. Order the subtests so the test runs journey A first, then journey B. Whichever condition matches runs to completion; the other subtest fails silently and the test continues.
+4. Select {{< ui >}}If this step fails, continue to next step{{< /ui >}} on the journey B subtest. Keep {{< ui >}}If this step fails, mark test as failed{{< /ui >}} selected so the test fails when neither journey is found.
+5. Order the subtests so the test runs journey A first, then journey B. If journey A matches, the test stops and passes. Otherwise, journey A fails without failing the test, and journey B runs.
 
 {{< img src="synthetics/guide/conditional_logic/subtests.png" alt="Subtest configuration showing if/else step execution options" style="width:60%;" >}}
 
@@ -70,11 +72,11 @@ To set up this pattern:
 
 1. Add a step that interacts with the target element (for example, clicking an {{< ui >}}Add to Cart{{< /ui >}} button or selecting a size from a {{< ui >}}Select a Size{{< /ui >}} dropdown).
 2. In the step's advanced options, set a {{< ui >}}User Specified Locator{{< /ui >}} using XPath or CSS that targets only available elements (for example, `.size.available` or a class that indicates in-stock status).
-3. Enable {{< ui >}}If this step fails, continue to next step{{< /ui >}} so the test continues if no matching element is found.
+3. Select {{< ui >}}If this step fails, continue to next step{{< /ui >}} so the test continues if no matching element is found. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default) so the test does not fail.
 4. Add a follow-up step or subtest that tries the next option (for example, a different size or product).
 5. If the UI has filters or search, add steps that narrow the page to available items first so the locator targets only the correct elements.
 
-{{< img src="synthetics/guide/conditional_logic/if_this_step_fails.png" alt="Step advanced options showing User Specified Locator and allow failure settings" style="width:60%;" >}}
+{{< img src="synthetics/guide/conditional_logic/if_this_step_fails.png" alt="Step advanced options with continue to next step selected and mark test as failed cleared." style="width:60%;" >}}
 
 ## Always run specific steps
 

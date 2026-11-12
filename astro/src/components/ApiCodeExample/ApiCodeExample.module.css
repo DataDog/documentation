@@ -1,0 +1,129 @@
+.api-code-example {
+  margin-bottom: var(--space-lg);
+}
+
+.api-code-example__heading {
+  margin: 0 0 var(--space-sm);
+}
+
+.api-code-example__pre {
+  background: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm);
+  overflow-x: auto;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  max-height: var(--code-max-height);
+  margin: 0;
+}
+
+.api-code-example__pre code {
+  font-family: var(--font-family-mono);
+  background: none;
+  padding: 0;
+}
+
+.api-code-example__accordion,
+.api-code-example__card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  /* Code Example transition: Allow keyword interpolation for the details-content */
+  interpolate-size: allow-keywords;
+}
+
+/* Code Example transition: Hide the content by default. */
+.api-code-example__accordion::details-content {
+  block-size: 0;
+  overflow: hidden;
+  /* Code Example transition: Keep content visible through closing phase. */
+  transition:
+    block-size 0.35s ease,
+    content-visibility 0.35s allow-discrete;
+}
+
+/* Code Example transition: Show the content when the accordion is open */
+.api-code-example__accordion[open]::details-content {
+  block-size: auto;
+}
+
+/* Code Example transition: No transition for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .api-code-example__accordion::details-content {
+    transition: none;
+  }
+}
+
+.api-code-example__accordion-header {
+  background: var(--color-bg-hover);
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  color: var(--color-text-muted);
+  list-style: none;
+}
+
+.api-code-example__accordion-header::-webkit-details-marker {
+  display: none;
+}
+
+.api-code-example__accordion-header:hover {
+  background: var(--color-border-strong);
+}
+
+.api-code-example__accordion[open]
+  > .api-code-example__accordion-header
+  .api-code-example__accordion-icon {
+  transform: rotate(90deg);
+}
+
+.api-code-example__accordion-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+}
+
+.api-code-example__accordion-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.api-code-example__accordion[open] .api-code-example__accordion-header-content {
+  color: var(--color-brand)
+}
+
+.api-code-example__label {
+  background: var(--color-bg-hover);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+}
+
+.api-code-example__accordion .api-code-example__code-block,
+.api-code-example__card .api-code-example__code-block {
+  margin: 0;
+}
+
+.api-code-example__accordion
+  .api-code-example__code-block
+  :global(.code-block) {
+  margin-bottom: 0;
+}
+
+.api-code-example__accordion .api-code-example__pre,
+.api-code-example__card .api-code-example__pre {
+  border: none;
+  border-bottom: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: 0;
+}

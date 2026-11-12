@@ -58,7 +58,7 @@ To get started, click {{< ui >}}Support{{< /ui >}} on the bottom-left corner of 
 
 {{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
-AI assistant appears on your screen. You can ask AI assistant questions or select {{< ui >}}Live Chat With Support{{< /ui >}}.
+AI assistant appears on your screen. You can ask AI assistant questions or select {{< ui >}}Live Chat with Human{{< /ui >}}.
 
 When a new chat is opened, you are asked if you have a **technical** or **sales** question.
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.

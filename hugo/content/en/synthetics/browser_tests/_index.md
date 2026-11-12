@@ -99,20 +99,22 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
-   * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+   * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. To view them, open the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results and click any Fetch or XHR resource row. The captured payloads are also included when you export a test run with {{< ui >}}Actions{{< /ui >}} > {{< ui >}}Export as HAR{{< /ui >}}.
 
-     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.</div>
+     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test or to exported HAR files.</div>
 
      Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
 
-   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
+   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the `user-agent` header to [identify Datadog scripts][1].
+
+     **Note**: The browser controls some headers, such as `Host` and `Referer`. When the test runs, Synthetic Monitoring ignores values you set for these headers, and the test result shows this warning: `Headers with wrong format were ignored.`
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
 
-[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=browsertests#user-agent
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
 [3]: /synthetics/browser_tests/test_results#resources
 [4]: /data_security/data_retention_periods/

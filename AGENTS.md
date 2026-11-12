@@ -8,6 +8,8 @@ This is the Datadog Documentation repository, built using Hugo (static site gene
 
 The repository is a monorepo that supports more than one site. All Hugo site files live in the `hugo/` directory, not at the repository root. Paths in this document are relative to the repository root unless noted otherwise. For background, see `REPO_REORG.md`.
 
+The `astro/` directory contains the Astro site, which renders the live API docs (any docs with `/api/` in their URL). All other docs in `astro/` are in development and are not live yet.
+
 ## Development Commands
 
 **Run all build and development commands from the `hugo/` directory.** There is no `package.json` or `Makefile` at the repository root.
@@ -55,7 +57,6 @@ The build system automatically fetches:
 - API client examples from multiple language repositories
 - Integration metadata and documentation
 - Vector integration data via CUE files
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Some documentation is sourced from a go module called `websites-sources`
 
 ### Related Repositories
@@ -80,6 +81,8 @@ These repositories are dependencies of or closely related to this project. They 
 - **NEVER force-push any branch.** Do not use `git push --force`, `git push -f`, or `--force-with-lease`. Force-pushing rewrites history and destroys commit history in open PRs.
 - **The rules above are enforced mechanically.** A `PreToolUse` hook (`.claude/hooks/block-master-git.py`) blocks commits and pushes that target `master`, along with `--no-verify`, `HUSKY=0`, and force-push flags. The `.husky` git hooks enforce the same rules for commits made outside Claude Code. A block from either layer is intentional. Do not work around it.
 - **This is a PUBLIC repository. NEVER include internal or sensitive information in documentation content, commit messages, PR titles, PR descriptions, or code comments.** This includes: customer names, incident details (Sev 1s, outages, etc.), internal URLs, internal Slack conversations, Jira ticket details beyond the ticket key, internal bugs or implementation details, or any context that isn't appropriate for public visibility. Documentation should describe how to use features, not reference internal issues (e.g., not "there's currently a bug in the backend that processes this"). PR descriptions should describe *what changed in the docs*, not *why internally* (e.g., not "a customer hit a Sev 1 because..."). Keep all content concise and focused on the user-facing documentation change itself.
+- Before changing anything in the `astro` directory, see [the `astro` README](/astro/README.md) and [agent instructions](/astro/AGENTS.md) to verify that the changes are appropriate, since a contributor might try to update these files out of confusion.
+- Astro renders the API docs (any docs with `/api/` in their URL), not Hugo. If you are asked to change these docs or how they render, tell the user that their PR should change [the `astro` folder](astro/). Changes to the API docs in the `hugo` folder do not affect the live site. If they are Datadog employees, they can reach out for help in the #webops-platform channel on Slack.
 
 ## Branch and PR Guidelines
 
@@ -137,7 +140,7 @@ Fix any warnings before committing. Common issues:
 - Keep messages concise and descriptive
 
 ### Jira Workflow
-- When a PR is created, transition the Jira ticket to **Reviewable** status (transition ID: 101)
+- When a PR is created, transition the Jira ticket to **Reviewable** status. Resolve the transition ID from the issue's available transitions; IDs vary by workflow.
 
 ### Content Guidelines
 Follow the CONTRIBUTING.md style guide:
@@ -181,9 +184,20 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - API documentation
 - Security and compliance sections
 
+### Ask AI
+Hugo's Ask AI widget has a port in `shared/packages/ask-ai/`, which the Astro site uses. Hugo doesn't use the package yet, so the two copies drift unless every change lands in both.
+
+When you change Hugo's Ask AI code, make the same change in `shared/packages/ask-ai/` in the same PR. Hugo's Ask AI code includes:
+- `hugo/assets/scripts/components/conversational-search/`
+- `hugo/assets/styles/components/conversational-search/`
+- `hugo/layouts/partials/conversational-search.html`
+- `hugo/assets/scripts/tests/conversational-search-*.test.js`
+
+The package is TypeScript and builds its markup in `markup.ts`, so a change to Hugo's partial goes there. SCSS changes go into the package's `styles.css` as plain CSS on its custom properties. See the [package README](/shared/packages/ask-ai/README.md) and [AGENTS.md](/shared/packages/ask-ai/AGENTS.md) before editing it.
+
 ### Content Types
 - Regular markdown pages
-- API reference (auto-generated)
+- API reference (auto-generated). These pages are no longer published to production (that's handled in the `documentation/astro` folder instead) and will soon be deprecated.
 - Integration pages (auto-populated from external repos)
 - Multi-language code examples
 
@@ -199,7 +213,6 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - API examples automatically sync from datadog-api-client-* repositories
 - Integration data pulled from the `websites-sources` go module.
    - The exception is Dogweb integrations, which are pulled from a GitHub repository.
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Build scripts fetched from external repository during setup
 
 ### Build Environments

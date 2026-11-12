@@ -1,0 +1,47 @@
+import { z } from "zod";
+
+export const CodeExampleEntrySchema = z
+  .object({
+    description: z
+      .string()
+      .describe("Human-readable description of this example"),
+    code: z.string().describe("The raw source code"),
+    syntax: z.string().describe("Syntax highlighting language identifier"),
+    regionVariants: z
+      .record(
+        z.string(),
+        z
+          .object({
+            code: z.string(),
+          })
+          .strict(),
+      )
+      .optional()
+      .describe(
+        'Optional per-region variants of this entry. When present, the UI renders one wrapper per region with `data-region="<key>"` so the visible variant updates reactively with the site selector. `code` above is the fallback used when no region is active. Used for curl.',
+      ),
+  })
+  .strict();
+
+export const CodeExampleSetSchema = z
+  .object({
+    language: z
+      .string()
+      .describe("Language identifier (e.g. 'python', 'ruby')"),
+    label: z.string().describe("Display label (e.g. 'Python', 'Ruby')"),
+    entries: z
+      .array(CodeExampleEntrySchema)
+      .describe("One or more code examples for this language"),
+    instructions: z
+      .object({
+        exampleFile: z.string(),
+        runCommandByRegion: z.record(z.string(), z.string()),
+      })
+      .strict()
+      .optional()
+      .describe("How to run an SDK example, shown below it"),
+  })
+  .strict();
+
+export type CodeExampleEntry = z.infer<typeof CodeExampleEntrySchema>;
+export type CodeExampleSet = z.infer<typeof CodeExampleSetSchema>;
