@@ -1,5 +1,5 @@
 ---
-title: Configure Test Optimization
+title: Language Setup for Test Optimization
 aliases:
 - /continuous_integration/tests/setup/
 ---
