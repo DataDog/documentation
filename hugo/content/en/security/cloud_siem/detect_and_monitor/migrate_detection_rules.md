@@ -24,10 +24,9 @@ Detection rule migration translates the detection logic of third-party SIEM rule
 Datadog uses AI to generate each detection rule from the source rule and the logs your organization sends.
 Each generated rule is a proposal. Datadog doesn't create a rule in Cloud SIEM until you publish or save it.
 
-Detection rule migration supports Splunk, with more third-party SIEMs planned.
+Detection rule migration supports Splunk and natural language.
 
-Every method below uses the same AI agent, designed by Datadog detection engineers.
-A rule gets the same translation quality whether you translate it alone or migrate it in bulk.
+All methods on this page use the same AI agent, so a rule gets the same translation whether you translate it alone or migrate it in bulk.
 
 Use detection rule migration for rules that detect security threats, such as brute-force logins or privilege escalation.
 These become Cloud SIEM detection rules that generate security signals.
@@ -66,10 +65,10 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 
 1. Open the [rule editor][7].
 2. In the chat, paste the source rule and describe what you want.
-3. Refine the draft by chatting or by editing the rule directly. The chat and the rule editor stay in sync, so you can switch between them as you adjust settings such as the query, conditions, or description, and preview the matching logs. See [Create a Custom Rule][10].
-4. Save the rule.
+3. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
+4. Save the rule. Saved rules start disabled, so they don't generate signals until you [enable them][11].
 
-For example:
+For example, this step 2 prompt changes the rule's threshold and time window:
 
 ```text
 Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes instead of 2+ IPs in 5 minutes:
@@ -82,14 +81,7 @@ Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minute
 
 ## Bulk migrate detection rules in the UI
 
-### How it works
-
-1. Export your detection rules from the source platform.
-2. Upload the export to Datadog and start a migration.
-3. Datadog generates a detection rule proposal for each source rule. Proposals appear as Datadog translates them, so you can start reviewing before the migration completes.
-4. Review each proposal, then publish the ones you want to Cloud SIEM.
-
-Large migrations can take a few hours to complete.
+Export your rules from the source platform and upload them to Datadog. Datadog generates a detection rule proposal for each rule, which you review before you publish it to Cloud SIEM.
 
 ### Migrate from Splunk
 
@@ -97,15 +89,22 @@ Large migrations can take a few hours to complete.
 2. Copy the export query, run it in Splunk, and export the results as a CSV file.
 3. Upload one or more CSV files.
 4. Name the migration and deselect any rules you don't want to migrate.
-5. Click {{< ui >}}Start Migration{{< /ui >}}.
+5. Click {{< ui >}}Start Migration{{< /ui >}}. Large migrations can take a few hours to complete.
 
 ### Review and publish proposals
 
-Open a migration from the [Migrations][9] page to follow its progress. Tabs group proposals by status: ready to publish, needs review, and in progress.
+Open a migration from the [Migrations][9] page to follow its progress. Proposals appear as Datadog translates them, so you can start reviewing before the migration completes. Tabs group proposals by status:
 
-Open a proposal to compare the source rule with the proposed detection rule, then publish it. You can also select several proposals and publish them at once.
+{{< ui >}}Ready to publish{{< /ui >}}
+: Datadog translated the rule. Open the proposal to compare the source rule with the proposed detection rule, then publish it. You can also select several proposals and publish them at once.
 
-Published rules are disabled, so they don't generate signals until you enable them. Open a published rule from the migration to enable it.
+{{< ui >}}Needs review{{< /ui >}}
+: Datadog couldn't translate the rule. Open it to read why the translation failed, then use that explanation to translate the rule manually in the [rule editor][7].
+
+{{< ui >}}In progress{{< /ui >}}
+: Datadog is still translating the rule.
+
+Published rules start disabled, so they don't generate signals until you [enable them][11].
 
 ## Translation limitations
 
@@ -118,7 +117,7 @@ Different field names
 : Source fields rarely map one-to-one to Datadog attributes. Check that the proposed query uses attributes your logs contain.
 
 Unsupported logic
-: Detection rule migration doesn't support some source rule logic. Rules that use it fail to translate, or the proposal approximates the logic.
+: Detection rule migration doesn't support some source rule logic, such as `lookup` tables or `calculated_risk_score` in Splunk. Rules that use it fail to translate and appear in {{< ui >}}Needs review{{< /ui >}}, or the proposal approximates the logic.
 
 ## Further reading
 
@@ -134,3 +133,4 @@ Unsupported logic
 [8]: https://app.datadoghq.com/security/siem/rules
 [9]: https://app.datadoghq.com/security/siem/detections/migrations
 [10]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/
+[11]: /security/detection_rules/#enable-or-disable-rules
