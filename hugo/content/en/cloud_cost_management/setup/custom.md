@@ -294,7 +294,9 @@ curl -L -X PUT "{{< region-param key="custom_costs_endpoint" >}}?ai_provider=tru
 ```
 
 To change the AI provider setting of an existing file, use the [`PATCH api/v2/cost/custom_costs/{file_id}`][12] endpoint. Set `ai_provider` to `false` to unmark the file.
-To get the `file_id`, you can either get it from the Upload response: `PUT api/v2/cost/custom_costs` then get the field `data.id`, or from the list of files using: `GET api/v2/cost/custom_costs` then get the field `data[].id`.
+You can get the `file_id` from either the upload response or the file list:
+- Upload response: `data.id` from `PUT api/v2/cost/custom_costs`
+- File list: `data[].id` from `GET api/v2/cost/custom_costs`
 
 For example, using cURL:
 
