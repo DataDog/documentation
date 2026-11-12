@@ -58,8 +58,8 @@ AI Guard for coding agents supports the platforms that Trajectory supports. For 
 AI Guard provides the following protections for coding agents:
 
 - **Guardrails**: Checks each prompt and tool call for threats, such as prompt injection, credential theft, and destructive commands. AI Guard can block unsafe prompts and tool calls.
-- **Supply chain protection**: Checks each package that a coding agent installs with [Supply Chain Firewall][2], and can block malicious packages. Protection for coding agent extensions, such as skills, is in development.
-- **Sensitive data redaction**: Detects secrets, such as API keys and passwords, in coding agent sessions. This feature is monitoring only: AI Guard reports secrets, but doesn't block or redact them. Blocking secrets is in development.
+- **Supply chain protection**: Checks each package that a coding agent installs with [Supply Chain Firewall][2], and can block malicious packages.
+- **Sensitive data scanning**: Detects secrets, such as API keys and passwords, in coding agent sessions. AI Guard reports secrets, but doesn't block or redact them.
 
 Guardrails and supply chain protection block actions only after you [turn on blocking](#turn-on-blocking).
 
@@ -82,7 +82,7 @@ AI Guard for coding agents doesn't use the Datadog Agent or the Datadog SDK. Tra
    export DD_APP_KEY=<YOUR_APPLICATION_KEY>
    ```
 
-1. Run the Trajectory installer in observe mode, with the unredacted privacy mode:
+1. Run the Trajectory installer in observe mode. This command sets the [privacy mode](#privacy-mode) to `unredacted`, which stores the full prompts and tool content in Datadog:
 
    ```bash
    bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security-mode observe --security-privacy unredacted
@@ -167,7 +167,7 @@ trajectory plugins modules evaluator configure agent-security ai_guard --privacy
 
 1. Run `trajectory plugins security status` to check that AI Guard is turned on, and in which mode.
 1. Run `trajectory doctor` to check the Trajectory installation, including the keys. If Trajectory can't read the keys, evaluations fail and the coding agent continues without protection.
-1. Start a session in a protected coding agent, then confirm that its evaluations appear on the AI Guard [{{< ui >}}Investigate{{< /ui >}}][7] tab.
+1. Start a session in a protected coding agent, then confirm that its evaluations appear on the AI Guard {{< ui >}}Investigate{{< /ui >}} tab.
 
 ## Configure policies {#configure-policies}
 
@@ -187,13 +187,17 @@ For [tools policies][11], use the tool name that the coding agent uses, for exam
 After you review the results in observe mode and adjust your policies:
 
 1. In the coding agent policy, set {{< ui >}}Enforcement mode{{< /ui >}} to {{< ui >}}Block unsafe{{< /ui >}}. See [Edit or create a policy][9].
-1. On each developer computer, set the [mode](#mode) to `enforce`.
+1. On each developer computer, set the [mode](#mode) to `enforce`. Replace `<CLIENT_IDS>` with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect:
+
+   ```bash
+   trajectory plugins security setup --mode enforce --clients <CLIENT_IDS> --yes
+   ```
 
 Trajectory handles blocked requests in each coding agent, so blocking doesn't require changes to the coding agents.
 
 ## View results {#view-results}
 
-To view coding agent evaluations, go to the AI Guard [{{< ui >}}Investigate{{< /ui >}}][7] tab and filter on `@ai_guard.coding_agent:*`. To keep every evaluation, [create a retention filter for AI Guard spans][13]. To restrict who can view the evaluations, see [Limit access to AI Guard spans][14].
+To view coding agent evaluations, filter on `@ai_guard.coding_agent:*` on the AI Guard {{< ui >}}Investigate{{< /ui >}} tab. To keep every evaluation, [create a retention filter for AI Guard spans][13]. To restrict who can view the evaluations, see [Limit access to AI Guard spans][14].
 
 ## Disable AI Guard for coding agents {#disable}
 
@@ -213,7 +217,6 @@ trajectory plugins security disable --clients cc,codex,cursor --remove-hooks
 [4]: /security/ai_guard/setup/#permissions
 [5]: /security/ai_guard/setup/#create-keys
 [6]: https://github.com/datadog-labs/trajectory/blob/main/docs/MANAGED-ENDPOINTS.md
-[7]: https://app.datadoghq.com/security/ai-guard/
 [8]: /security/ai_guard/policies/#policy-settings
 [9]: /security/ai_guard/policies/#edit-or-create-a-policy
 [10]: /security/ai_guard/policies/#policy-scope-and-inheritance
