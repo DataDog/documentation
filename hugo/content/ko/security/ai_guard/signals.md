@@ -1,17 +1,18 @@
 ---
+description: AI Guard 평가를 위한 탐지 규칙을 생성하고, 규칙이 생성한 신호를 조사하며, AI Guard 활동에 대한 경보를 설정하세요.
 further_reading:
 - link: /security/ai_guard/
-  tag: 설명서
+  tag: 문서
   text: AI Guard
-- link: /security/ai_guard/onboarding/
-  tag: 설명서
-  text: AI Guard 시작
+- link: /security/ai_guard/setup/
+  tag: 문서
+  text: AI Guard 설정하기
 - link: /security/detection_rules/
-  tag: 설명서
+  tag: 문서
   text: 탐지 규칙
-title: AI Guard Security 시그널
+title: AI Guard 신호 분류 및 조사
 ---
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard는 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard는 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 AI Guard 보안 신호는 AI Guard가 애플리케이션에서 탐지한 위협 및 공격에 대한 가시성을 제공합니다. 이러한 신호는 [AAP(애플리케이션 및 API 보호) 보안 신호][1]를 기반으로 구축되며 Datadog의 보안 모니터링 워크플로와 통합됩니다.
@@ -29,7 +30,7 @@ Datadog은 구성된 탐지 규칙에 따라 위협을 탐지하면 AI Guard 보
 
 ## 탐지 규칙 생성 {#create-detection-rules}
 
-알림을 받을 임계값을 정의하여 사용자 지정 탐지 규칙을 생성할 수 있습니다. 예를 들어 10분 동안 5건 이상의 `DENY` 액션이 발생할 경우 등이 있습니다. AI Guard 평가가 해당 임계값을 초과하면 보안 신호가 생성됩니다.
+알림을 받을 임계값을 정의하여 사용자 지정 탐지 규칙을 생성할 수 있습니다. 예를 들어 10분 동안 5건을 초과하는 `DENY` 액션이 발생할 경우 등이 있습니다. AI Guard 평가가 해당 임계값을 초과하면 보안 신호가 생성됩니다.
 
 AI Guard 탐지 규칙을 생성하려면 다음 단계를 따르세요.
 1. Datadog에서 [AI Guard 탐지 규칙 탐색기][2]로 이동한 다음 {{< ui >}}New Rule{{< /ui >}}을 클릭합니다.
@@ -55,17 +56,9 @@ AI Guard 탐지 규칙을 생성하려면 다음 단계를 따르세요.
          <td>특정 공격 유형 타겟팅</td>
          <td>
            <ul>
-             <li><code>jailbreak</code></li>
-             <li><code>indirect-prompt-injection</code></li>
-             <li><code>destructive-tool-call</code></li>
-             <li><code>denial-of-service-tool-call</code></li>
-             <li><code>security-exploit</code></li>
-             <li><code>authority-override</code></li>
-             <li><code>role-play</code></li>
-             <li><code>instruction-override</code></li>
-             <li><code>obfuscation</code></li>
-             <li><code>system-prompt-extraction</code></li>
-             <li><code>data-exfiltration</code></li>
+             <li><a href="/security/ai_guard/#attack-categories">공격 범주 태그</a></li>
+             <li><code>tool-blocked</code> 및 <code>tool-allowed</code>, 도구 정책에 의해 추가됨</li>
+             <li><code>regexp-blocked</code>, 사용자 지정 규칙에 의해 추가됨</li>
            </ul>
          </td>
        </tr>
@@ -116,15 +109,15 @@ AI Guard 보안 신호에서 직접 케이스를 생성하거나 연결할 수 �
 
 ## 스팬으로 추가 컨텍스트 가져오기 {#get-additional-context-with-spans}
 
-AI Guard 스팬은 수행된 평가와 그 이유에 대한 자세한 정보를 제공합니다. [Investigate][6] 페이지나 신호에서 스팬을 열면 AI Agent가 사용한 특정 프롬프트에 대한 컨텍스트를 얻고, 정확한 입력 및 출력을 읽고, AI Guard가 도구 호출을 안전하지 않은 것으로 평가하는 데 기여한 공격 범주를 확인할 수 있습니다.
+AI Guard 스팬은 수행된 평가와 그 이유에 대한 자세한 정보를 제공합니다. [Investigate][6] 페이지나 신호에서 스팬을 열면 AI 에이전트가 사용한 특정 프롬프트에 대한 컨텍스트를 얻고, 정확한 입력 및 출력을 읽고, AI Guard가 도구 호출을 안전하지 않은 것으로 평가하는 데 기여한 공격 범주를 확인할 수 있습니다.
 
 ### 스팬에 대한 컨텍스트 가져오기 {#get-context-on-a-span}
 
 탐색기에서 스팬을 클릭하면 다음을 확인할 수 있습니다.
 - 요청이 발생한 서비스 및 환경
 - 해당 서비스에 대해 구성된 [차단 정책][7]. 이 정책은 AI Guard가 안전하지 않은 요청을 차단할지, 아니면 차단하지 않고 탐지 및 태그만 지정할지를 결정합니다.
-- Agent와 상호 작용한 사용자
-- Agent의 특정 입력 및 출력과 해당 데이터가 LLM에서 왔는지 외부 도구에서 왔는지 여부
+- 에이전트와 상호 작용한 사용자
+- 에이전트의 특정 입력 및 출력과 해당 데이터가 LLM에서 왔는지 외부 도구에서 왔는지 여부
 - AI Guard가 각 요청을 안전 또는 안전하지 않음으로 평가했는지 여부
 - AI Guard가 요청을 차단했는지 여부
 - AI Guard가 호출을 안전하지 않은 것으로 평가한 경우, 포함된 공격 범주
@@ -132,6 +125,24 @@ AI Guard 스팬은 수행된 평가와 그 이유에 대한 자세한 정보를 
 - 탐색기에서 스팬을 필터링하는 데 사용할 수 있는 추가 태그
 
 또한 {{< ui >}}Explore in graph view{{< /ui >}}을 클릭하여 대화의 요청을 그래프로 확인하거나 [APM][8] 또는 [Agent Observability][9]에서 스팬을 볼 수 있습니다.
+
+## Datadog Monitors를 사용하여 AI Guard 활동에 대한 경보 설정 {#set-up-datadog-monitors}
+
+특정 임계값에서 경보를 받기 위한 모니터를 생성하려면 [Datadog Monitors][10]를 사용할 수 있습니다. APM 트레이스 또는 메트릭을 사용하여 AI Guard 평가를 모니터링할 수 있습니다. 두 가지 유형의 모니터 모두 경보 조건을 설정하고 경보 이름을 지정하며 Notifications를 정의해야 합니다. Datadog은 Slack 사용을 권장합니다.
+
+### APM 모니터 {#apm-monitor}
+
+지침에 따라 [APM 모니터][11]를 생성하고 범위를 {{< ui >}}Trace Analytics{{< /ui >}}로 설정하세요.
+
+- 거부된 평가를 모니터링하려면 쿼리 `@ai_guard.action:DENY`을 사용하세요.
+- 차단된 트래픽을 모니터링하려면 쿼리 `@ai_guard.blocked:true`를 사용하세요.
+
+### 메트릭 모니터 {#metric-monitor}
+
+지침에 따라 [메트릭 모니터][12]를 생성하세요.
+
+- 거부된 평가를 모니터링하려면 태그 `action:deny`와 함께 메트릭 `datadog.ai_guard.evaluations`을 사용하세요.
+- 차단된 트래픽을 모니터링하려면 태그 `blocking_enabled:true`과 함께 메트릭 `datadog.ai_guard.evaluations`을 사용하세요.
 
 ## 추가 자료 {#further-reading}
 
@@ -143,6 +154,9 @@ AI Guard 스팬은 수행된 평가와 그 이유에 대한 자세한 정보를 
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://app.datadoghq.com/security/ai-guard/investigate
-[7]: /ko/security/ai_guard/setup/#blocking-policy
+[7]: /ko/security/ai_guard/policies/#blocking-policy
 [8]: /ko/tracing/
 [9]: /ko/llm_observability/
+[10]: /ko/monitors/
+[11]: /ko/monitors/types/apm/?tab=traceanalytics
+[12]: /ko/monitors/types/metric/
