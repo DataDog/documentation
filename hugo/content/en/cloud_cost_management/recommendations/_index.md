@@ -502,7 +502,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Migrate Managed Disk from Premium SSD to Standard SSD
-      recommendation_description: Identifies attached Premium SSD disks whose peak IOPS and throughput stay well within Standard SSD limits, and recommends migrating them to Standard SSD.
+      recommendation_description: Identifies attached Premium SSD disks whose measured peak IOPS and throughput fit within Standard SSD limits, and recommends migrating them to Standard SSD.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
