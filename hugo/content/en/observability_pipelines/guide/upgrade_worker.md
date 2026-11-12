@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.25.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.26.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,90 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.26.0
+
+To upgrade to Worker version 2.26.0:
+
+- Docker: Run the `docker pull` command for the [2.26.0 image][68].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects Generate Metrics processors with indexed group-by fields. Tag keys now use the last field name followed by trailing array indices: <code>items[0]</code> produces <code>items_0</code>, <code>items[-1]</code> produces <code>items_-1</code>, and <code>http.items[2].status[4]</code> produces <code>status_4</code>. Update dashboards, monitors, alerts, notebooks, and other queries to use the corrected keys. Historical datapoints remain available under the old keys.</div>
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects histograms received without a sum, including those from OpenTelemetry and Prometheus sources. The sources preserve a missing sum. The Prometheus destination omits the corresponding <code>_sum</code> series; update Prometheus queries that calculate averages to tolerate a missing sum. The Datadog Metrics destination uses bucket-derived sum and average estimates when no sum is reported. Histogram quantile queries are unaffected.</div>
+
+<div class="alert alert-warning"><strong>Upgrade action:</strong> This change affects Custom Processor programs that call <code>to_unix_timestamp</code> with <code>unit: "nanoseconds"</code>. Before upgrading, replace bare nanosecond calls with <code>to_unix_timestamp!(ts, unit: "nanoseconds")</code>. An out-of-range conversion aborts processing and drops that event. Alternatively, deploy <code>to_unix_timestamp(ts, unit: "nanoseconds") ?? 0</code> with Worker 2.26.0 to supply a fallback. The fallback form does not compile on the previous Worker version. Other units are unaffected.</div>
+
+<div class="alert alert-warning"><strong>Breaking change for Integration Pipelines Preview users:</strong> Update dashboards and monitors before upgrading:<br><br><code>pipelines.integration_pipelines_ingested_events_total</code> becomes <code>pipelines.sawmill_ingested_events_total</code>, and <code>pipelines.integration_pipelines_ingested_event_bytes_total</code> becomes <code>pipelines.sawmill_ingested_event_bytes_total</code>.<br><br>The <code>integration_id</code> tag becomes <code>sawmill_pipeline_id</code>. Named pipelines also have a <code>sawmill_pipeline_name</code> tag. The telemetry <code>component_type</code> becomes <code>sawmill</code>; the pipeline configuration type remains <code>integration_pipelines</code>.<br><br><code>pipelines.integration_pipelines_modified_events_total</code> and <code>pipelines.integration_pipelines_modified_event_bytes_total</code> are removed. Use the <code>is_transformed:true</code> tag on the ingested metrics to count transformed events and bytes. For each integration pipeline's total, sum both <code>is_transformed</code> values. Use that total as the denominator of its transformed percentage. These metrics count processing by each selected integration pipeline, not unique logs entering the processor. Byte counts measure events before normalization.</div>
+
+Worker version 2.26.0 gives you access to the following:
+
+#### Security
+
+- The Databricks (Zerobus) destination now verifies server certificates and hostnames for OAuth and Unity Catalog schema requests.
+
+#### New features
+
+- The Custom Processor now includes a `range` function that creates an array of integers from an inclusive start to an exclusive end, with an optional step.
+- The Datadog Agent source now accepts the v3 series metrics intake format used by Datadog Agent 7.81.0 and newer.
+
+#### Enhancements
+
+- The Custom Processor now:
+    - Supports changing metric types between counter and gauge in metrics pipelines by assigning to `.type`, while preserving the value and kind.
+    - Accepts `critical` as well as `crit` in its `to_syslog_severity` function.
+    - Has improved performance and lower memory allocation when assigning objects and arrays.
+- The Datadog Metrics destination now uses the v3 metrics intake API.
+- The Worker now:
+    - Aggregates grouped discarded-event counts over 10-minute windows and supports up to 30,000 distinct `group` values per Worker. Excess values lose only the `group` tag; counts are preserved.
+    - Collects `pipelines.host.*` metrics every 5 seconds.
+    - Preserves first-scrape counter values and histogram observations in its internal telemetry.
+    - Reports `pipelines.component_cpu_usage_ns_total` for every processor, including aggregation after Generate Metrics processors.
+    - Reports disk-buffer lifecycle events in its logs and the `pipelines.topology_disk_buffer_lifecycle_events_total` counter. The `event` tag is `removed`, `replacement_unreferenced`, or `unreferenced`.
+- HTTP-based destinations now accept UTF-8 characters in non-template endpoint paths and queries. Hostnames must remain ASCII. HTTP Client and OpenTelemetry destination URI templates still require ASCII.
+- Sources using character-delimited or newline-delimited framing now report oversized dropped frames as errors. They increment `pipelines.component_errors_total` with `error_code:decoder_frame_too_long`.
+
+#### Fixes
+
+- The Worker now:
+    - Initializes pipeline configuration on commercial Datadog sites outside US1.
+    - Times out configuration requests after 30 seconds, including reading the response, and retries on the next poll. Connection establishment times out after 10 seconds.
+    - Sends configured proxy credentials for HTTP requests to AWS endpoints through an HTTP forward proxy. HTTPS proxy connections are unchanged.
+    - Sends a full destination batch immediately when an event fills the next batch by itself. This applies to Databricks (Zerobus), Elasticsearch, and New Relic destinations.
+- The Custom Processor now:
+    - Supports its hashing and encryption functions, including `sha1`, `sha2`, `sha3`, `md5`, `hmac`, `xxhash`, `seahash`, `crc`, `encrypt`, `decrypt`, `encrypt_ip`, and `decrypt_ip`.
+    - Handles consecutive comment lines inside a block when later comments contain non-ASCII characters or quotes.
+- The Generate Metrics processor now forwards distribution metrics that arrive more than 10 seconds late when metric aggregation is enabled, which is the default. Late counters remain dropped.
+- The Datadog Metrics destination now uses exact histogram sums when available and valid. For histograms without sums, it retains bucket-derived estimates for sums and averages.
+- The Google Pub/Sub source now:
+    - Uses the system certificate authorities consistently with other components.
+    - Shuts down promptly while connecting, retrying, or waiting on an acknowledgement-enabled stream.
+    - Honors configured TLS verification, server name, application protocol, and proxy settings.
+- The WebSocket source now rejects a handshake response that specifies an unrequested subprotocol.
+- For Integration Pipelines Preview users, the Integration Pipelines processor now:
+    - Processes date, service, and status remapping consistently with Datadog Log Management.
+    - Resolves each filter key to its designated root field or tag, not both, consistently with Datadog Log Management. String truncation limits count UTF-16 code units.
+    - Keeps source-set timestamps at the top level so date remappers can replace them. A top-level `timestamp` parsed earlier, for example with `parse_timestamp`, is treated as source-set and can be overwritten by date remappers. String and numeric payload dates are unaffected.
+    - Selects built-in pipelines from all `source:` tags, including events with multiple source tags.
+    - Uses top-level `ddsource`, `ddtags`, and `ddsourcecategory` values when present. Copies inside a JSON `message` remain available as attributes.
+- Search queries now:
+    - Ignore full-text prefixes, terms, and phrases that contain no words.
+    - Match phrases consistently when another phrase has already matched the same field.
+    - Match phrases when a failed partial match overlaps the actual match.
+    - Handle range queries with mixed brackets, including an inclusive upper bound where specified.
+
+#### Removed metrics
+
+- The following Worker health metrics are removed. Update dashboards and monitors to use their replacements, with the `pipelines.` prefix when querying Worker telemetry:
+    - `buffer_max_byte_size` → `buffer_max_size_bytes`
+    - `buffer_max_event_size` → `buffer_max_size_events`
+    - `source_buffer_max_byte_size` → `source_buffer_max_size_bytes`
+    - `source_buffer_max_event_size` → `source_buffer_max_size_events`
+    - `transform_buffer_max_byte_size` → `transform_buffer_max_size_bytes`
+    - `transform_buffer_max_event_size` → `transform_buffer_max_size_events`
+    - `internal_metrics_cardinality_total` → `internal_metrics_cardinality`. The replacement is a gauge of the current metric count.
 
 ## Worker version 2.25.2
 
@@ -1054,3 +1138,4 @@ Worker version 2.7.0 gives you access to the following:
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
 [66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
 [67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
+[68]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
