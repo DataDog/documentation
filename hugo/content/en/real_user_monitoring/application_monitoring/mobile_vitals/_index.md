@@ -177,7 +177,7 @@ After collection is enabled, timeseries are captured for all sessions.
 
 Two series are collected:
 
-- **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
+- **CPU usage**: the percentage of the device's total CPU capacity consumed by your application, across all cores and capped at 100%, where 100% means all cores are fully used. For example, an app fully using 2 cores of an 8-core device reports 25%. This differs from the CPU ticks per second reported for a view.
 - **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
 
 ### Enable collection
@@ -188,8 +188,6 @@ Performance timeseries requires the following minimum SDK versions:
 |---------|-----------------|
 | iOS     | 3.21.0          |
 | Android | 3.16.0          |
-
-These are the first versions that report the `@session.has_timeseries` attribute, which identifies sessions with timeseries data in the RUM Explorer. Earlier versions can collect timeseries but do not report this attribute.
 
 Timeseries collection is an experimental API, so you must opt in to it explicitly. Enable it on the RUM configuration before you enable RUM:
 
@@ -207,36 +205,47 @@ Datadog.initialize(
 
 var rumConfig = RUM.Configuration(applicationID: "<RUM_APPLICATION_ID>")
 rumConfig.timeseries = .default // memory + CPU
-// or, to collect memory only:
-// rumConfig.timeseries = RUM.Configuration.Timeseries(collectTypes: [.memory])
+// or, to collect CPU only:
+// rumConfig.timeseries = RUM.Configuration.Timeseries(collectTypes: [.cpu])
 RUM.enable(with: rumConfig)
 ```
 
-`timeseries` is a property of `RUM.Configuration`, not an initializer parameter. Set it on the configuration instance before calling `RUM.enable(with:)`. On watchOS, only memory is collected.
+**Note**: On watchOS, only memory is collected.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
 ```kotlin
+import com.datadog.android.Datadog
+import com.datadog.android.core.configuration.Configuration
+import com.datadog.android.privacy.TrackingConsent
 import com.datadog.android.rum.ExperimentalRumApi
 import com.datadog.android.rum.Rum
 import com.datadog.android.rum.RumConfiguration
 import com.datadog.android.rum.timeseries.TimeseriesConfiguration
 import com.datadog.android.rum.timeseries.TimeseriesType
 
+val configuration = Configuration.Builder(
+    clientToken = "<CLIENT_TOKEN>",
+    env = "<ENV_NAME>"
+).build()
+Datadog.initialize(context, configuration, TrackingConsent.GRANTED)
+
 @OptIn(ExperimentalRumApi::class)
 val rumConfig = RumConfiguration.Builder(applicationId)
     .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT) // CPU + memory
-    // or, to collect memory only:
-    // .setTimeseriesConfiguration(TimeseriesConfiguration(setOf(TimeseriesType.MEMORY)))
+    // or, to collect CPU only:
+    // .setTimeseriesConfiguration(TimeseriesConfiguration(setOf(TimeseriesType.CPU)))
     .build()
-Rum.enable(rumConfig) // Datadog.initialize(...) must be called before
+Rum.enable(rumConfig)
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 Passing an empty set of types disables timeseries collection on both SDKs.
+
+To find sessions with timeseries data in the [RUM Explorer][3], filter on `@session.has_timeseries:true`.
 
 ## Further Reading
 
