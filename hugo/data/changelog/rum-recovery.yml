@@ -10,3 +10,14 @@ entries:
       - SearchRUMArchiveSessions
       - UpdateRUMRecoveryBatchRequest
     title: Publish Managed Archives API documentation
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateRUMRecoveryRequest
+      - GetRUMRecoveryRequest
+      - GetRUMRecoverySessionCount
+      - ListRUMRecoveryBatchRequests
+      - SearchRUMArchiveSessions
+      - UpdateRUMRecoveryBatchRequest
+    title: Add AI Gateway route permissions and safe editing

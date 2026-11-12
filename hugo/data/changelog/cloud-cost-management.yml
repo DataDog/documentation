@@ -67,3 +67,27 @@ entries:
       - UpdateTagPipelinesRuleset
       - ValidateQuery
     title: Document cost onboarding fields and fix timestamp and query schemas
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateUnitCost
+      - DeleteUnitCost
+      - GetBudget
+      - GetCommitmentsCommitmentList
+      - GetCommitmentsCoverageScalar
+      - GetCommitmentsCoverageTimeseries
+      - GetCommitmentsOnDemandHotspotsScalar
+      - GetCommitmentsSavingsScalar
+      - GetCommitmentsSavingsTimeseries
+      - GetCommitmentsUtilizationScalar
+      - GetCommitmentsUtilizationTimeseries
+      - GetCostTagKey
+      - GetUnitCost
+      - ListCostCloudAccountsV2
+      - ListCostTagKeys
+      - ListCostTags
+      - ListUnitCosts
+      - SearchCostRecommendations
+      - UpdateUnitCost
+    title: Add AI Gateway route permissions and safe editing
