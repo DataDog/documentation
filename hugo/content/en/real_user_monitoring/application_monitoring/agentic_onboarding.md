@@ -11,4 +11,4 @@ description: Instrument your frontend application with one prompt using LLM codi
 Using skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md setup Datadog RUM in my project
 {{< /skill-callout >}}
 
-{{< include-markdown "agentic_onboarding/setup" >}}
+{{< include-markdown "agentic_onboarding" >}}
