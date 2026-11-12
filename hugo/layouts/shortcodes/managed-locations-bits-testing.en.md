@@ -1,4 +1,4 @@
-Bits Testing can run from a [private location][101] using remote execution, or from the following managed locations:
+Bits Testing can run from a private location using remote execution (see [Run Bits Testing from a private location][101]), or from the following managed locations:
 
 **AWS**:
 | Americas           | Asia Pacific      | EMEA           |
