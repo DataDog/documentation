@@ -90,7 +90,7 @@ After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Pr
 
 ### Execution policy
 
-[Create an Execution Policy][8] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
+[Create an Execution Policy][8] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests. This requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
 
 {{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with the Allow effect, the Remote Action integration with Run network path selected, and a target that matches the Agent with the tag hostname:auth-dotnet" style="width:60%;" >}}
 
