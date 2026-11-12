@@ -1396,6 +1396,12 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
+  "UpdateCustomCostsFile": {
+    "description": "Mark whether a Custom Costs file holds AI provider costs. Datadog then recomputes the costs for the months that the file covers.",
+    "summary": "Update Custom Costs file",
+    "request_description": "",
+    "request_schema_description": "Request for updating a Custom Costs file."
+  },
   "ListCostGCPUsageCostConfigs": {
     "description": "List the Google Cloud Usage Cost configs.",
     "summary": "List Google Cloud Usage Cost configs"

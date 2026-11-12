@@ -13163,6 +13163,18 @@ menu:
           - ListCostGCPUsageCostConfigs
         unstable: []
         order: 11
+    - name: Update Custom Costs file
+      url: /api/latest/cloud-cost-management/update-custom-costs-file/
+      identifier: cloud-cost-management-update-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomCostsFile
+        unstable: []
+        order: 78
     - name: Get Custom Costs file
       url: /api/latest/cloud-cost-management/get-custom-costs-file/
       identifier: cloud-cost-management-get-custom-costs-file
