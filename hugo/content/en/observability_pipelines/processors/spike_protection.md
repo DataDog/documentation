@@ -1,6 +1,6 @@
 ---
 title: Spike Protection Processor
-description: Learn how to use the Spike Protection processor to detect unexpected surges in log volume and drop, keep, or route the logs of spiking groups.
+description: Learn how to use the Spike Protection processor to detect unexpected surges in log volume and drop, keep, or route logs in spiking groups.
 disable_toc: false
 products:
 - name: Logs
@@ -24,7 +24,7 @@ Use this processor to protect your destinations and control costs during sudden 
 
 ### Limits
 
-Each pipeline can track up to 1,000 log groups. If the pipeline has more than one Spike Protection processor, log groups from all processors count toward the 1,000-group limit. After the limit is reached, the processor applies the spike action to logs that belong to new groups.
+Each pipeline can track up to 1,000 log groups. If the pipeline has more than one Spike Protection processor, log groups from all processors count toward the 1,000-group limit. The processor applies the configured spike action to logs that belong to groups created after the limit was reached.
 
 ## Setup
 
@@ -72,15 +72,15 @@ After you deploy the pipeline, you can view and manage the spikes for each group
 1. Click {{< ui >}}Manage spikes{{< /ui >}}.
 1. Click the {{< ui >}}Spike Details{{< /ui >}} tab to see tracked log groups, their status, and the time the current spike started. Each group has one of the following statuses:
     - {{< ui >}}Active{{< /ui >}}: The log group is currently spiking and the spike action applies to its logs.
-    - {{< ui >}}Dismissed{{< /ui >}}: The spike was dismissed, so the spike action does not apply to the group's logs for the remainder of the spike. A spike stays active for 12 hours. See [How the processor works](#how-the-processor-works) for more information.
+    - {{< ui >}}Dismissed{{< /ui >}}: The spike was dismissed, so the spike action does not apply to the group's logs for the remainder of the spike. A spike stays active for 12 hours after it is first triggered. See [How the processor works](#how-the-processor-works) for more information.
     - {{< ui >}}Not triggered{{< /ui >}}: The log group is not spiking.
 1. Click a log group to see its graphs:
-    - {{< ui >}}Bucket volume{{< /ui >}}: The byte volume logs the group is receiving. Use it to see how close the group is to spiking.
+    - {{< ui >}}Bucket volume{{< /ui >}}: The byte volume of logs the group is receiving. Use it to see how close the group is to spiking.
     - {{< ui >}}Events spike protected{{< /ui >}}: The number of logs the processor acted on while the group was spiking.
 
 You can take the following actions on a spiking group:
 
-- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the log group immediately, such as when the volume increase is expected. The spike action remains disabled for the group until the current spike expires, even if the group's volume remains above the baseline. A spike expires 12 hours after it was first triggered. See [How the processor works](#how-the-processor-works) for more information.
+- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the log group immediately, such as when the volume increase is expected. The spike action remains disabled for the group until the current spike expires, even if the group's volume remains above the baseline. A spike expires 12 hours after it is first triggered. See [How the processor works](#how-the-processor-works) for more information.
 - {{< ui >}}Delete{{< /ui >}}: Remove the spike event. The log group goes back to being evaluated against its baseline and can spike again as soon as its volume is above the threshold.
 
 ## Health metrics
