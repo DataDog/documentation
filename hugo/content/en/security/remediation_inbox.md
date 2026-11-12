@@ -37,7 +37,7 @@ The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. Instea
 
 The Remediation Inbox answers one question: **what are the most impactful fixes to make today?** From a remediation, you can review its impact, assign an owner, track the work in a [Work Management][2] work item, and generate a pull request with AI.
 
-<!-- TODO: screenshot of the Remediations tab -->
+{{< img src="security/remediation_inbox/remediations_tab.png" alt="The Remediations tab of Security Inbox, with filters, status tabs, and a list of package updates showing the critical and high findings each one closes, its scope, and its tracking status" width="100%">}}
 
 ## Prerequisites
 
@@ -115,6 +115,8 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
+{{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing the Know before you remediate summary, the Remediate with AI button, the ticketing, assignee, and pull request details, and the list of vulnerabilities the fix closes" width="100%">}}
+
 - **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead.
 - **Ticketing, Assignee, and PRs**: The remediation work item, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
@@ -126,7 +128,7 @@ Taking action on a remediation creates a _remediation work item_ in [Work Manage
 
 ### Assign an owner
 
-In the **Ticketing** column or the side panel, select an assignee. If the remediation does not have a work item yet, Datadog creates one.
+In the **Tracking** column or the side panel, select an assignee. If the remediation does not have a work item yet, Datadog creates one.
 
 ### Create a work item
 
@@ -136,15 +138,15 @@ To route remediation work items to Jira, ServiceNow, or Linear, configure the th
 
 ### Remediate with AI
 
-<!-- TODO: confirm which third-party coding agents are supported -->
-
 From the side panel, click **Remediate with AI** and choose one of the following:
 
-- **Fix with Bits Code**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item.
+{{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options and a section to verify the fix with the Code Security MCP Server" width="80%">}}
+
+- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item.
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
-To check the fix from your coding agent, connect the [Datadog MCP Server][7].
+To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the finding is gone before you commit.
 
 ### Link a pull request
 
@@ -165,16 +167,19 @@ Findings that belong to a remediation work item show the linked work item in the
 | Remediation work items | Assign owners, create work items, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Sync remediation work items to Jira, ServiceNow, or Linear. | See [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool). |
 | AI summary | The **Know before you remediate** summary. | Enable generative AI features for your organization. |
-| Fix with Bits Code | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
+| Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
-| Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Datadog MCP Server][7]. |
+| Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Code Security MCP Server][7]. |
 
 ### Route remediation work items to your ticketing tool
 
-<!-- TODO: steps to select a Work Management project with a Jira, ServiceNow, or Linear integration -->
+Remediation work items can create tickets in Jira, ServiceNow, or Linear. Ticket creation and syncing are managed in Work Management:
 
-See [Third party tickets][11] in the Work Management documentation and [Ticketing Integrations][12].
+1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation work items. If you do not select a project when you create remediation work items, configure the default **Security Remediation** project.
+1. When a remediation work item is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
+
+For more information, see [Ticketing Integrations][12].
 
 ## Limitations
 
@@ -197,6 +202,6 @@ See [Third party tickets][11] in the Work Management documentation and [Ticketin
 [8]: /bits_ai/bits_code/setup/
 [9]: /integrations/github/
 [10]: /source_code/
-[11]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [12]: /security/ticketing_integrations/
 [13]: /account_management/rbac/permissions/
+[14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
