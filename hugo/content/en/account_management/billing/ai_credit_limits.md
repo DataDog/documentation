@@ -85,7 +85,7 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 | [Bits Chat][1] | All Bits Chat usage, including chats inside an investigation, rolls up to the email address of the user interacting with Bits Chat. |
 | [Bits Investigation][2] | Manually started investigations roll up to the email address of the user who initiated the action.<br>Investigations started through the API roll up to the user or service account that owns the API key, and count toward that account's limits.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
 | [Bits Code][3] | All Bits Code usage rolls up to the email address of the user interacting with Bits Code. |
-| [Bits Agent Builder][4] | Agent runs for workflows roll up to the identity in the workflow's [{{< ui >}}Run as{{< /ui >}}][14] setting: the owner, the user who triggered the run, or a service account.<br>Runs as a service account roll up to **Autonomous Agents** and count toward that service account's limits. They're also broken out by the individual service account. |
+| [Bits Agent Builder][4] | Agent runs for workflows roll up to the identity in the workflow's [{{< ui >}}Run as{{< /ui >}}][14] setting: {{< ui >}}Owner{{< /ui >}}, {{< ui >}}Initiator{{< /ui >}} (the user who triggered the run), or {{< ui >}}Service Account{{< /ui >}}.<br>Agent runs that use a service account roll up to **Autonomous Agents** and count toward that service account's limits. They're also broken out by the individual service account. |
 
 ## Get alerted before reaching a limit
 
