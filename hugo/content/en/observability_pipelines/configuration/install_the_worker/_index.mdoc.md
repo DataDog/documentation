@@ -47,7 +47,7 @@ content_filters:
 <!-- Linux - Overview -->
 {% if equals($platform, "linux") %}
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics, and then route them to different destinations.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route logs and metrics to different destinations.
 
 The Worker supports major Linux distributions, such as:
 
