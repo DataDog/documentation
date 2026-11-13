@@ -96,7 +96,7 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
 
 ## Control which requests AI Guard evaluates
 
-By default, AI Guard evaluates every supported call that an automatic integration instruments. To skip evaluations for specific requests, add custom tags to AI Guard spans, or run your own logic after each evaluation without turning off the whole integration, register an AI Guard middleware. Middlewares require `dd-trace-py` 4.17.0 or later and are available only in Python. See [Filter and observe evaluations with middlewares][9].
+By default, AI Guard evaluates every supported call that an automatic integration instruments. To skip evaluations for specific requests, add custom tags to AI Guard spans, or run your own logic after each evaluation without turning off the whole integration, register an AI Guard middleware. Middlewares require `dd-trace-py` 4.17.0 or later and are available only in Python. A skipped request proceeds without an evaluation, and tags that a middleware sets aren't filtered, so never set keys equal to `ai_guard` or starting with `ai_guard.`. See [Filter and observe evaluations with middlewares][9].
 
 [1]: /security/ai_guard/setup/sdk/
 [2]: /security/ai_guard/setup/manual_integrations/
