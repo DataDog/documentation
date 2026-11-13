@@ -26,6 +26,8 @@ If you can change your tracing provider initialization, Option A is recommended.
 
 ## Prerequisites
 
+Use the SDK versions and credentials in the [server getting-started guides][1]. Set `DD_SITE` if the organization uses a site other than `datadoghq.com`.
+
 Follow the Datadog [Server-Side Feature Flags][1] installation guide for your language.
 
 ## Option A: Register the Datadog SDK as the TracerProvider
@@ -39,7 +41,8 @@ In this option, the Datadog SDK replaces the OTel SDK as the `TracerProvider`. Y
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -64,7 +67,8 @@ For more detail, see [OpenTelemetry API Support for .NET](/opentelemetry/instrum
 {{% tab "Go" %}}
 
 {{< code-block lang="bash" filename=".env" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -116,7 +120,8 @@ For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrumen
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
@@ -125,7 +130,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.Client;
-import datadog.trace.api.openfeature.Provider;
+import com.datadog.openfeature.Provider;
 
 // Register the Datadog OpenFeature provider
 OpenFeatureAPI api = OpenFeatureAPI.getInstance();
@@ -142,7 +147,8 @@ Client client = api.getClient("my-app");
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -154,11 +160,6 @@ import { OpenFeature } from '@openfeature/server-sdk';
 import * as otel from '@opentelemetry/api';
 
 tracer.init({
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-    },
-  },
 });
 
 // Register the Datadog SDK as the OpenTelemetry TracerProvider
@@ -180,7 +181,8 @@ For more detail, see [OpenTelemetry API Support for Node.js](/opentelemetry/inst
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -207,7 +209,8 @@ For more detail, see [OpenTelemetry API Support for Python](/opentelemetry/instr
 {{% tab "Ruby" %}}
 
 {{< code-block lang="bash" filename=".env" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -220,16 +223,8 @@ require 'datadog/opentelemetry'
 require 'open_feature/sdk'
 require 'datadog/open_feature/provider'
 
-# Enable remote configuration and OpenFeature integration
-Datadog.configure do |c|
-  c.remote.enabled = true
-  c.open_feature.enabled = true
-end
-
 # Register the Datadog OpenFeature provider
-OpenFeature::SDK.configure do |c|
-  c.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
-end
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
 
 client = OpenFeature::SDK.build_client
 
@@ -245,7 +240,8 @@ For more detail, see [OpenTelemetry API Support for Ruby](/opentelemetry/instrum
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -275,14 +271,15 @@ For more detail, see [OpenTelemetry API Support for PHP](/opentelemetry/instrume
 
 ## Option B: Run the Datadog SDK alongside OpenTelemetry
 
-In this option, your existing OTel SDK remains the `TracerProvider` for tracing. Add the Datadog SDK only for feature flag delivery through Remote Configuration. Your OTel SDK initialization, exporters, and instrumentation stay unchanged.
+In this option, your existing OTel SDK remains the `TracerProvider` for tracing. Add the Datadog SDK for agentless feature flag delivery. Your OTel SDK initialization, exporters, and instrumentation stay unchanged.
 
 {{< tabs >}}
 {{% tab ".NET" %}}
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -306,7 +303,8 @@ var client = Api.Instance.GetClient("my-service");
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -316,15 +314,11 @@ DD_ENV=<YOUR_ENVIRONMENT>
 import (
     "log"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
     ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
     "github.com/open-feature/go-sdk/openfeature"
 )
 
 func main() {
-    tracer.Start()
-    defer tracer.Stop()
-
     // Register the Datadog OpenFeature provider
     flagProvider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
     if err != nil {
@@ -349,7 +343,8 @@ func main() {
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
@@ -360,7 +355,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.Client;
-import datadog.trace.api.openfeature.Provider;
+import com.datadog.openfeature.Provider;
 
 // Register the Datadog OpenFeature provider
 OpenFeatureAPI api = OpenFeatureAPI.getInstance();
@@ -375,7 +370,8 @@ Client client = api.getClient("my-app");
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -387,11 +383,6 @@ import { OpenFeature } from '@openfeature/server-sdk';
 
 tracer.init({
   plugins: false,
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-    },
-  },
 });
 
 // Register the Datadog OpenFeature provider
@@ -405,18 +396,16 @@ OpenFeature.setProvider(tracer.openfeature);
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 {{< code-block lang="python" filename="app.py" >}}
-from ddtrace import tracer
 from openfeature import api
 from ddtrace.openfeature import DataDogProvider
-
-tracer.configure()
 
 # Register the Datadog OpenFeature provider
 provider = DataDogProvider()
@@ -431,7 +420,8 @@ client = api.get_client()
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -442,15 +432,8 @@ require 'datadog'
 require 'open_feature/sdk'
 require 'datadog/open_feature/provider'
 
-Datadog.configure do |c|
-  c.remote.enabled = true
-  c.open_feature.enabled = true
-end
-
 # Register the Datadog OpenFeature provider
-OpenFeature::SDK.configure do |c|
-  c.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
-end
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
 
 client = OpenFeature::SDK.build_client
 
@@ -464,7 +447,8 @@ client = OpenFeature::SDK.build_client
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -603,7 +587,7 @@ $isEnabled = $client->getBooleanValue('my-flag', false, $context);
 {{% /tab %}}
 {{< /tabs >}}
 
-In both integration options, feature flags evaluate the same way. Flag configurations are delivered through the same Remote Configuration channel.
+In both integration options, feature flags evaluate the same way. Flag configurations use agentless delivery by default. Agent Remote Configuration remains an optional source.
 
 For complete setup instructions, typed getters, evaluation context requirements, and testing patterns, see your language's [server-side SDK documentation][1].
 

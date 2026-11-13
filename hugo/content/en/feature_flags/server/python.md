@@ -24,85 +24,44 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management. Starting in `ddtrace` 4.14.0, it loads flag configuration directly from the Datadog-managed CDN by default.
+The Datadog Python SDK receives flag configuration directly from Datadog by default and evaluates flags locally. No Datadog Agent or tracing instrumentation is required. The provider implements [OpenFeature][1].
 
-This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+## Getting started
 
-Agentless delivery changes only the flag configuration source. Python sends experiment exposure events and aggregated Event Platform Proxy (EVP) flag evaluation events through a supported local relay.
+Use `ddtrace` 4.17.0 or later and `openfeature-sdk` 0.10.0 or later. Create a Boolean flag named `my-flag`. Enable its **Server** distribution channel and enable it in the target environment.
 
-## Prerequisites
-
-Before setting up the Python Feature Flags SDK, ensure you have:
-
-- **Datadog Python SDK** `ddtrace` version 4.14.0 or later
-- **OpenFeature Python SDK** `openfeature-sdk`: version 0.5.0 or later (version 0.7.0 or later required if you use provider event handlers to wait for initialization)
-- A Datadog [API key][3]
-- Your Datadog site
-
-Set the following environment variables:
+Install the SDKs:
 
 ```bash
-# Required: Agentless configuration delivery
-export DD_API_KEY=<YOUR_API_KEY>
-export DD_SITE={{< region-param key="dd_site" code="true" >}}
-export DD_ENV=<YOUR_ENVIRONMENT>
-
-# Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
-
-# Recommended: Service identification
-export DD_SERVICE=<YOUR_SERVICE_NAME>
+pip install 'ddtrace>=4.17.0' 'openfeature-sdk>=0.10.0'
 ```
 
-No Feature Flags enablement or source setting is required. Register the provider as shown in [Initialize the SDK](#initialize-the-sdk) to begin polling. Installing or initializing `ddtrace` alone does not create Feature Flags CDN traffic.
+Set the application API key and flag environment before startup:
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
+```bash
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
+```
 
-## Installation
+Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
-Install the Datadog Python SDK and OpenFeature SDK:
+Register the provider and evaluate the flag:
 
-{{< code-block lang="bash" >}}
-pip install ddtrace openfeature-sdk
-{{< /code-block >}}
-
-Or add them to your `requirements.txt`:
-
-{{< code-block lang="text" filename="requirements.txt" >}}
-ddtrace>=4.14.0
-openfeature-sdk>=0.5.0
-{{< /code-block >}}
-
-If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
-
-{{< code-block lang="bash" >}}
-pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-grpc
-{{< /code-block >}}
-
-Or add them to your `requirements.txt`:
-
-{{< code-block lang="text" filename="requirements.txt" >}}
-opentelemetry-sdk>=1.41.0
-opentelemetry-exporter-otlp-proto-grpc>=1.41.0
-{{< /code-block >}}
-
-## Initialize the SDK
-
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider starts the selected configuration source and waits up to 10 seconds for its first configuration.
-
-{{< code-block lang="python" >}}
-from openfeature import api
+```python
 from ddtrace.openfeature import DataDogProvider
+from openfeature import api
 
-# Create and register the Datadog provider
-provider = DataDogProvider()
-api.set_provider(provider)
-
-# Create an OpenFeature client
+api.set_provider_and_wait(DataDogProvider())
 client = api.get_client()
+enabled = client.get_boolean_value("my-flag", False)
+print(enabled)
+```
 
-# Your application code here
-{{< /code-block >}}
+Provider initialization starts configuration polling. No `ddtrace-run`, tracing setup, Feature Flags enablement, or source setting is required for a new setup. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][8].
+
+## Initialization options
+
+`set_provider_and_wait` waits for initial configuration, with a default provider timeout of 10 seconds. Handle initialization errors if the application must continue with default values. Use `api.set_provider(DataDogProvider())` for background initialization.
 
 ## Set the evaluation context
 
@@ -214,7 +173,7 @@ if maintenance_mode:
 
 ## Waiting for provider initialization
 
-Provider registration waits up to 10 seconds for the selected source to deliver its first configuration. If configuration arrives, the provider emits `PROVIDER_READY`. If the wait times out, registration completes with the provider in an error state, and evaluations return caller-provided default values until configuration arrives. Use an event handler to wait for a later ready event:
+Blocking registration waits up to 10 seconds for the first configuration and raises an error if the wait expires. Background registration returns before initialization completes. The provider can recover when configuration arrives later. Use an event handler to observe readiness after background registration:
 
 {{< code-block lang="python" >}}
 import threading
@@ -235,7 +194,7 @@ api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
 provider = DataDogProvider()
 api.set_provider(provider)
 
-# Wait for the provider to be ready if registration timed out
+# Wait for background initialization to complete
 if ready_event.wait(timeout=30):
     print("Provider is ready")
 else:
@@ -245,7 +204,7 @@ else:
 client = api.get_client()
 {{< /code-block >}}
 
-<div class="alert alert-info">Provider event handlers require OpenFeature SDK 0.7.0 or later. Most applications can use the default 10-second initialization timeout and handle caller-provided default values if configuration is unavailable.</div>
+The provider continues polling after an initialization timeout. Evaluations return caller-provided defaults until valid configuration arrives.
 
 Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the initialization timeout.
 
@@ -258,7 +217,7 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][9] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposures and EVP flag evaluation events. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+In agentless mode, Python sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. [`serverless-init`][11] is an optional relay. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
 
 ## Cleanup
 
@@ -280,7 +239,6 @@ from openfeature import api
 from openfeature.evaluation_context import EvaluationContext
 from openfeature.provider.in_memory_provider import InMemoryProvider, InMemoryFlag
 
-
 @pytest.fixture
 def client():
     flags = {
@@ -293,19 +251,16 @@ def client():
             variants={"light": "light", "dark": "dark"},
         ),
     }
-    api.set_provider(InMemoryProvider(flags))
+    api.set_provider_and_wait(InMemoryProvider(flags))
     yield api.get_client()
     api.shutdown()
-
 
 def test_boolean_flag_returns_default_variant(client):
     assert client.get_boolean_value("new-checkout-flow", True) is False
 
-
 def test_string_flag_with_context(client):
     ctx = EvaluationContext(targeting_key="user-123")
     assert client.get_string_value("ui-theme", "dark", ctx) == "light"
-
 
 def test_missing_flag_returns_default(client):
     assert client.get_boolean_value("does-not-exist", True) is True
@@ -319,17 +274,18 @@ def test_missing_flag_returns_default(client):
 
 Verify the following:
 
-- `ddtrace` is version 4.14.0 or later.
+- `ddtrace` is version 4.17.0 or later and `openfeature-sdk` is version 0.10.0 or later.
 - `DD_FEATURE_FLAGS_ENABLED` is unset or set to `true`.
 - `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is unset or set to `agentless`.
 - `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is unset. Setting it to `true` selects Agent Remote Configuration during the migration window when no explicit source is set.
 - Application code registers `DataDogProvider` with the OpenFeature API.
-- `DD_API_KEY`, `DD_SITE`, and `DD_ENV` are configured in the application process.
+- `DD_API_KEY` and `DD_ENV` are configured in the application process.
+- `DD_SITE` matches the organization's site. Its default is `datadoghq.com`.
 - The application can make outbound HTTPS requests to Datadog.
 
 Set `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flags agentless endpoint.
 
-### Agent Remote Configuration not working
+### Agent delivery not working
 
 Verify the following:
 

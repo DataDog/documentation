@@ -13,59 +13,49 @@ further_reading:
   text: "Learn about Remote Configuration"
 ---
 
-Datadog Feature Flags [server-side SDKs][3] evaluate flags locally from flag configuration. The _configuration source_ determines how the SDK receives that configuration; it does not change OpenFeature evaluation semantics.
+Datadog Feature Flags [server SDKs][3] evaluate flags locally. The configuration source determines how they receive flag configuration.
 
 ## Choose a configuration source
 
-These configuration source options are available for supported server SDKs:
+| Source | Configuration delivery | Requirements |
+|---|---|---|
+| `agentless` | The SDK polls the Datadog-managed CDN over HTTPS. This is the default for new setups. | An API key in the application and outbound HTTPS. PHP requires an explicit source setting. |
+| `remote_config` | A Datadog Agent receives configuration and delivers it to the SDK. | A reachable Agent with Remote Configuration enabled and an API key. Java also requires `-javaagent`. |
 
-`agentless`
-: The SDK periodically fetches flag configuration from the Datadog-managed CDN over HTTPS.
-  - Polling begins when application code initializes or accesses the Datadog OpenFeature provider.
-  - No Datadog Agent is required for flag configuration.
-
-`remote_config`
-: The Datadog Agent receives flag configuration through Remote Configuration and delivers it to the SDK.
-  - Selecting `remote_config` enables the Feature Flags Remote Configuration subscription.
-  - Requires a Datadog Agent with Remote Configuration enabled.
-
-Agentless delivery is the default in [supported SDK versions](#use-agentless-delivery). Other server SDKs use [Agent Remote Configuration](#use-agent-remote-configuration) for flag delivery.
-
-Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` only when you want to select a source explicitly:
-
-{{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
-{{< /code-block >}}
-
-The SDK resolves the source once during initialization. Restart the application to change sources.
+Use the [language getting-started guides][3] for the minimum setup. Restart the application after changing the configuration source.
 
 ## Use agentless delivery
 
-Use these versions or later with agentless delivery:
+Use these versions or later:
 
-| SDK | Recommended version |
+| SDK | Minimum version for this guide |
 |---|---|
-| Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
-| Node.js `dd-trace` | 6.12.0 |
-| Python `ddtrace` | 4.14.0 |
-| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
-| Ruby `datadog` | 2.46.0 |
+| Java `dd-openfeature` | 1.69.0 |
+| Node.js `dd-trace` | 6.24.0 |
+| Python `ddtrace` | 4.17.0 |
+| .NET tracer and `Datadog.FeatureFlags.OpenFeature` | 3.57.0 and 2.3.2 |
+| Ruby `datadog` | 2.49.0 |
+| Go `dd-trace-go` | 2.12.0 |
+| PHP `datadog/dd-trace` | 1.28.0 |
 
-Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
-
-Configure the API key, Datadog site, and environment in the application process:
+Configure the application before startup:
 
 ```bash
-DD_API_KEY=<DATADOG_API_KEY>
-DD_SITE={{< region-param key="dd_site" code="true" >}}
-DD_ENV=<YOUR_ENVIRONMENT>
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], [.NET][7], or [Ruby][8] setup instructions.
+Set `DD_SITE` outside `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}. `DD_ENV` must select the intended flag environment. `DD_SERVICE` and `DD_VERSION` are optional attribution settings.
 
-No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
+Initialize the Datadog provider as shown on the language page. No source or enablement setting is required for a new setup, except PHP. For PHP, set this before the process starts:
 
-Agentless delivery changes only the flag configuration source. For the Feature Flags event delivery paths, see [Send feature flag telemetry][6].
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+```
+
+Java agentless delivery uses the standalone `dd-openfeature` SDK. .NET requires automatic instrumentation, and PHP requires its native extension.
+
+Flag configuration and event delivery use separate connections. See [Send feature flag telemetry][6] for exposures and aggregated evaluation events.
 
 ### Configure agentless delivery
 
@@ -107,32 +97,56 @@ Datadog-managed agentless delivery is not available for Datadog for Government i
 
 ### Migrate an existing Remote Configuration setup
 
-Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. This deprecated setting is a compatibility bridge, not the long-term configuration.
+Upgrading an SDK does not necessarily change an existing application's configuration source. The deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` setting can retain Remote Configuration when no source is selected explicitly.
 
-When you are ready to use agentless delivery:
+#### Switch to CDN delivery
 
-1. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`.
-2. For the Datadog-managed endpoint, configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application.
-3. Initialize the provider and verify that it receives flag updates.
-4. Remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`. Do not leave the deprecated setting enabled after the migration is complete.
+1. Install the SDK version from the [agentless version table](#use-agentless-delivery) or later. Use the initialization code from its language guide.
+2. Add `DD_API_KEY` to the application process. An API key configured only on the Agent is not available to the SDK.
+3. Keep the same `DD_ENV` to select the intended flag environment. Set `DD_SITE` to the organization's Datadog site.
+4. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` explicitly during the migration.
+5. Remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` from deployment configuration. Remove Ruby `config.open_feature.enabled` and Node.js `experimental.flaggingProvider.enabled` settings from application code.
+6. Restart the application and its workers. Initialize the provider and wait for initial configuration where the SDK supports it. PHP waits during the first evaluation.
+7. Evaluate a known flag with a configured value different from the caller-provided default. Inspect evaluation details for errors. Change the flag remotely and confirm that the application receives the update.
+8. If the application uses experiment exposures or evaluation events, verify those separately. A successful flag evaluation does not prove event delivery.
 
-To remain on Agent Remote Configuration temporarily, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`, then remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`. Your API key remains on the Agent.
+After migration, the explicit source is optional except in PHP. Keep it when the deployment should select agentless delivery explicitly.
 
-If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false`, replace it with `DD_FEATURE_FLAGS_ENABLED=false`.
+For Java, use `com.datadog.openfeature.Provider` from `dd-openfeature` 1.69.0 or later. The standalone SDK does not require `-javaagent`. Keep the Java agent if the application uses APM or another agent feature.
 
-Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, applications without an explicit source use agentless delivery. Set `remote_config` explicitly before the deprecated legacy setting is removed if you want to remain on Agent delivery.
+Do not disable global Remote Configuration or remove the Datadog Agent if other products use them. Changing the Feature Flags source does not change those products.
 
-## Use Agent Remote Configuration
+#### Remain on Agent delivery or roll back
 
-Set the source to `remote_config` to use Agent-managed delivery:
+Set the source explicitly before removing legacy enablement settings:
 
-{{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
-{{< /code-block >}}
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
 
-For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java-agent` versions. Use the same version for both components.
+Keep the Agent's API key, network access, and Remote Configuration setup. Java also needs `dd-java-agent` loaded with `-javaagent`. Restart the application and verify flag updates. The SDK does not automatically switch between CDN and Agent configuration delivery after a delivery failure.
 
-Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
+If the legacy setting was `false`, replace it with `DD_FEATURE_FLAGS_ENABLED=false` to keep Feature Flags disabled.
+
+<a id="use-agent-remote-configuration"></a>
+
+## Use Agent delivery
+
+Use Datadog Agent 7.55 or later. Enable Remote Configuration for the organization and Agent, and configure the API key on the Agent. See [Remote Configuration][1] for setup and network requirements.
+
+Set this in the application before startup:
+
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
+
+For Java, use `dd-openfeature` and `dd-java-agent` 1.69.0 or later. Load the Java agent into the JVM:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+```
+
+See the [Java setup][4] for provider registration. The in-process Java agent and the separate Datadog Agent are both required for Java Remote Configuration.
 
 ### Agent availability
 
@@ -147,41 +161,33 @@ With Agent Remote Configuration, the SDK receives flag configuration from the Da
 
 ### Enable or disable feature flags
 
-`DD_FEATURE_FLAGS_ENABLED` defaults to `true`, so new setups do not need to set it. Set it to `false` to disable the provider and both configuration delivery paths:
-
-{{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_ENABLED=false
-{{< /code-block >}}
+Set `DD_FEATURE_FLAGS_ENABLED=false` to disable the provider and both delivery paths. A new setup does not need an explicit `true` value. In PHP, `true` alone does not activate delivery; select the source explicitly.
 
 ### Activation and billing
 
-Server Feature Flags billing is based on configuration requests made through Remote Configuration or the CDN. Installing the tracer does not activate either delivery path by itself.
+Configuration requests through the CDN or Remote Configuration contribute to server Feature Flags billing.
 
-- With the default agentless source, CDN polling starts only when application code initializes or accesses the Datadog OpenFeature provider.
-- Explicitly selecting `remote_config` starts the Agent Feature Flags subscription. It does not require application code to initialize the provider.
+- In Java, Go, Python, Ruby, Node.js, and .NET, agentless polling starts when application code initializes or accesses the provider.
+- In PHP, the explicit source setting activates delivery during process startup. Provider registration alone does not activate it.
+- Selecting `remote_config` enables the Feature Flags Remote Configuration subscription. It can start before provider initialization.
 
 ### Configuration precedence
 
-| Configuration | Result |
+Use an explicit source during migration to avoid differences in how language SDKs interpret legacy settings.
+
+| Setting | Result |
 |---|---|
-| `DD_FEATURE_FLAGS_ENABLED=false` | Disables the provider and both delivery paths, regardless of other settings. |
-| Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` | Selects CDN delivery. Polling begins when application code initializes or accesses the provider. |
-| Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` | Selects Agent delivery and enables the Feature Flags Remote Configuration subscription. |
-| Blank or whitespace-only `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` | Treats the source as unset, so the legacy migration setting or the agentless default applies. |
-| Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=offline` or another unsupported nonblank value | Fails closed when application code accesses the provider. The SDK does not select CDN or Remote Configuration delivery. |
-| No source and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` | Preserves Remote Configuration during the migration window. |
-| No source and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false` | Keeps the provider and both delivery paths disabled. |
-| Neither `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` nor `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is set | Selects agentless delivery. Polling begins when application code initializes or accesses the provider. |
+| `DD_FEATURE_FLAGS_ENABLED=false` | Disables Feature Flags regardless of the source. |
+| Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` | Selects CDN delivery. PHP also uses it to activate delivery. |
+| Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` | Selects Agent delivery. |
+| Legacy enablement without an explicit source | Can preserve Agent delivery or disabled behavior. Remove it when migrating. |
+| No source or legacy settings | Uses agentless delivery when the provider initializes, except PHP, which requires explicit source selection. |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration/
-[2]: /feature_flags/server/nodejs/
 [3]: /feature_flags/server/
-[4]: /feature_flags/server/java/
-[5]: /feature_flags/server/python/
+[4]: /feature_flags/server/java/#use-agent-delivery
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
-[7]: /feature_flags/server/dotnet/
-[8]: /feature_flags/server/ruby/

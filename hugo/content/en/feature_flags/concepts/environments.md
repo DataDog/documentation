@@ -90,11 +90,12 @@ Set `DD_ENV` in your deployment environment (shell, container, or orchestrator),
 
 {{< code-block lang="bash" >}}
 export DD_ENV=staging-us  # Must match an environment query in Feature Flags
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+export DD_API_KEY='<DATADOG_API_KEY>'
+# Required only for PHP
+# export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 {{< /code-block >}}
 
-This applies to Python, Go, Java, Node.js, Ruby, and .NET server SDKs. See [Server-Side Feature Flags](/feature_flags/server/) for language-specific setup.
+This applies to all server SDKs. PHP also requires explicit source selection. Set `DD_SITE` outside the default US1 site. See [Server-Side Feature Flags](/feature_flags/server/) for language-specific setup.
 
 ## Further reading
 
