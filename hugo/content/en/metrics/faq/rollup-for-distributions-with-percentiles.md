@@ -28,3 +28,14 @@ Unlike COUNT, GAUGE, and RATE metric types which aggregate first in time and the
 
 _Example: Suppose you're graphing on a dashboard timeframe of the Past 4 hours, p99:distribution.rollup(60)._
 Datadog merges the sketch data server-side to represent a rollup interval of a minute (for every minute within the dashboard timeframe of 4 hours). After the rollup is calculated, Datadog calculates a 99th percentile value for each minute interval.
+
+## How do I choose a rollup interval?
+You will need to pick a rollup interval that matches the granularity you need.
+
+For short timeframes, e.g. the past four hours, a 60-second interval works well. For longer timeframes, a larger roll-up window keeps the graph readable.
+
+Simply click on the rollup selector in the query editor and enter the interval in seconds.
+
+The interval is used by Datadog to merge the sketches before the percentile is calculated.
+
+Distributions with percentiles are stored as DDSketches, and Datadog merges them in time and space at the same time. Because of this, the time aggregator has no effect on the result and only the time bucket size matters.
