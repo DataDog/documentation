@@ -65,6 +65,18 @@ Analyze trends in GPU resources and metrics (including GPU utilization, power, a
 
 {{< img src="gpu_monitoring/inference-page3.png" alt="GPU Monitoring Inference page showing key metrics for a model deployment, such as time-to-first-token and output tokens." style="width:100%;" >}}
 
+### Benchmark your inference endpoints
+
+{{< callout btn_hidden="true" >}}
+[Benchmarks](/gpu_monitoring/benchmarks) in GPU Monitoring are in Preview. To request access, contact <a href="/help/">Datadog support</a> or your account team.
+{{< /callout >}}
+
+Send controlled load to an OpenAI-compatible inference endpoint, from Datadog or from inside your Kubernetes cluster, and measure what your users experience: time to first token, time per output token, and throughput.
+
+- Compare each run with earlier ones to see whether a change to your model server, its settings, or its GPUs made things better or worse.
+- Read each run next to the GPU and inference server metrics of the deployment that served it.
+- Run load sweeps to find the highest concurrency that stays within your latency targets.
+
 ### Safeguard device reliability
 GPUs are an expensive and scarce resource with higher failure rates than standard servers. GPU Monitoring provides out-of-the-box monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
 
