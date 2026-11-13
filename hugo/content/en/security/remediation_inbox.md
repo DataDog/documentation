@@ -130,11 +130,16 @@ Taking action on a remediation creates a _remediation case_ in [Work Management]
 
 In the **Tracking** column or the side panel, select an assignee. If the remediation does not have a case yet, Datadog creates one.
 
-### Create a case
+### Create a case or ticket
 
-Click **Create Security Case**, optionally select a Work Management [project][5], and click **Create**. If you do not select a project, the case is created in the default **Security Remediation** project.
+In the **Tracking** column or the side panel, click **Add Ticket** and select a ticketing app:
 
-To create tickets in Jira, ServiceNow, or Linear from remediation cases, see [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool).
+- **Work Management**: Datadog creates the remediation case in the default **Security Remediation** project, or in the [project][5] you select.
+- **Jira**, **ServiceNow**, or **Linear**: Select a template that defines where the ticket is created, such as the Jira space and ticket type, the ServiceNow table and assignment group, or the Linear team. You can also create a template in the dialog. Optionally, change the linked Work Management project and the assignee, then click **Create**. Datadog creates the ticket and links it to a new remediation case.
+
+If a remediation already has a case without a ticket, open the menu next to the case, select **Route to app**, choose Jira, ServiceNow, or Linear, select a template, and click **Confirm**.
+
+The ticket appears in the **Tracking** column and in the side panel of the remediation.
 
 ### Remediate with AI
 
@@ -177,19 +182,12 @@ Status updates can take up to an hour to appear.
 | Capability | What it unlocks | How to enable |
 |---|---|---|
 | Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
-| Third-party tickets | Sync remediation cases to Jira, ServiceNow, or Linear. | See [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool). |
+| Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Third-party tickets][14]. |
 | AI summary | The **Know before you remediate** summary. | Available by default. Not available for organizations that opted out of AI features or are HIPAA-enabled. |
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8], connect your GitHub repositories, and turn on the **AI Products** toggle in [AI Credits admin controls][16]. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
 | Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Code Security MCP Server][7]. |
-
-### Route remediation cases to your ticketing tool
-
-Remediation cases can create tickets in Jira, ServiceNow, or Linear. Ticket creation and syncing are managed in Work Management:
-
-1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation cases. If you do not select a project when you create remediation cases, configure the default **Security Remediation** project.
-1. When a remediation case is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
 
 ## Further reading
 
@@ -209,3 +207,6 @@ Remediation cases can create tickets in Jira, ServiceNow, or Linear. Ticket crea
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /mcp_server/setup/
 [16]: /account_management/billing/ai_credits/#admin-controls
+[17]: /integrations/jira/
+[18]: /integrations/servicenow/
+[19]: /integrations/linear/
