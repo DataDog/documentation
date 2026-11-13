@@ -31,7 +31,9 @@ products:
 <div class="alert alert-danger">The Remediation Inbox is not available on the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">The Remediation Inbox is in Preview.</div>
+{{< callout url="#" header="false" btn_hidden="true" >}}
+The Remediation Inbox is in Preview.
+{{< /callout >}}
 
 The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. Instead of listing individual findings, it groups findings by the single fix that resolves them, such as one package upgrade in a repository or one container image update. Each group is a **remediation**.
 
