@@ -47,6 +47,7 @@ These are the available processors:
 - [Remap to OCSF Processor][14]
 - [Sample Processor][15]
 - [Sensitive Data Scanner Processor][16]
+- [Spike Protection Processor (Preview)][21]
 - [Split Array][17]
 - [Tags][18]
 - [Throttle][19]
@@ -71,6 +72,7 @@ These are the available processors:
 [18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
 [20]: /observability_pipelines/processors/integration_pipelines/
+[21]: /observability_pipelines/processors/spike_protection/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
