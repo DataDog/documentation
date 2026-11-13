@@ -325,6 +325,47 @@ components:
       schema:
         format: uuid
         type: string
+    AiGatewayRateLimitInstanceLimit:
+      description: Maximum number of rate limit counters to return.
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 50
+        format: int64
+        maximum: 500
+        minimum: 1
+        type: integer
+    AiGatewayRateLimitInstanceOffset:
+      description: Number of rate limit counters to skip.
+      in: query
+      name: offset
+      required: false
+      schema:
+        default: 0
+        format: int64
+        minimum: 0
+        type: integer
+    AiGatewayRateLimitInstanceSort:
+      description: Sort order for rate limit counters.
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: "#/components/schemas/AiGatewayRateLimitInstanceSort"
+    AiGatewayRateLimitInstanceSplitDim:
+      description: Keep only counters whose split dimension equals a value, written as `<dim>=<value>`, such as `split_dim=user_id=<uuid>&split_dim=model=gpt-4o`. Dimensions use the `split_dims` names `user_id`, `team_id`, `model`, `provider`, and `tag:<key>`. Repeat the parameter to filter on several dimensions; a counter must match all of them. Each dimension may appear once and must be a per-value dimension of the rate limit.
+      example:
+        - user_id=11111111-1111-1111-1111-111111111111
+      explode: true
+      in: query
+      name: split_dim
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
     AiGatewayRoutingRuleForceDelete:
       description: Delete referencing tiers and recursively delete parent rules left without tiers.
       in: query
@@ -11329,13 +11370,17 @@ components:
           example: true
           type: boolean
         input_tokens_per_minute:
-          description: Maximum input tokens per rolling minute shared by all matching traffic. Null when this rule does not limit input tokens.
+          description: Maximum input tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit input tokens.
           example: 500000
           format: int64
           maximum: 100000000000
           minimum: 1
           nullable: true
           type: integer
+        is_template:
+          description: Whether the selector gives each matching value its own allowance, that is, whether it has at least one per_value entry. Returned even when scope_restricted hides the selector.
+          example: false
+          type: boolean
         mode:
           $ref: "#/components/schemas/AiGatewayRateLimitMode"
         monitor_id:
@@ -11349,7 +11394,7 @@ components:
           example: Default rate limit
           type: string
         output_tokens_per_minute:
-          description: Maximum output tokens per rolling minute shared by all matching traffic. Null when this rule does not limit output tokens.
+          description: Maximum output tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit output tokens.
           example: 200000
           format: int64
           maximum: 100000000000
@@ -11357,7 +11402,7 @@ components:
           nullable: true
           type: integer
         requests_per_minute:
-          description: Maximum requests per rolling minute shared by all matching traffic. Null when this rule does not limit requests.
+          description: Maximum requests per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit requests.
           example: 1000
           format: int64
           maximum: 10000000
@@ -11373,6 +11418,8 @@ components:
           description: Whether provider or model scope metadata was withheld. Omit unchanged scope fields on an unrelated update to preserve their saved values.
           example: false
           type: boolean
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -11386,6 +11433,13 @@ components:
           format: uuid
           nullable: true
           type: string
+        template_split_dims:
+          description: Dimensions of the selector's per_value entries, such as user_id or tag:env, each matching value of which gets its own allowance. Empty unless is_template is true. Returned even when scope_restricted hides the selector.
+          example: []
+          items:
+            description: A selector dimension, such as user_id, team_id, model, provider, or tag:<key>.
+            type: string
+          type: array
         updated_at:
           description: Last modification timestamp.
           example: "2026-09-15T14:30:00Z"
@@ -11444,6 +11498,8 @@ components:
           minimum: 1
           nullable: true
           type: integer
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -11481,6 +11537,236 @@ components:
       required:
         - data
       type: object
+    AiGatewayRateLimitInstanceAttributes:
+      description: One counter of a template rate limit and its live usage.
+      properties:
+        first_seen:
+          description: When the gateway first recorded a request for this counter.
+          example: "2026-10-28T10:00:00Z"
+          format: date-time
+          type: string
+        input_tokens:
+          description: Input tokens counted in the rolling one-minute window.
+          example: 15000
+          format: int64
+          type: integer
+        input_tokens_per_minute:
+          description: The rate limit's per-counter input token limit. Null when it doesn't limit input tokens.
+          example: 100000
+          format: int64
+          nullable: true
+          type: integer
+        instance_key:
+          description: Opaque canonical key identifying the counter.
+          example: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        last_seen:
+          description: When the gateway last recorded a request for this counter; up to a few minutes behind live traffic.
+          example: "2026-10-28T10:05:00Z"
+          format: date-time
+          type: string
+        limited_requests:
+          description: Requests this counter rejected in the last 15 minutes (ENFORCE).
+          example: 0
+          format: int64
+          type: integer
+        output_tokens:
+          description: Output tokens counted in the rolling one-minute window.
+          example: 4000
+          format: int64
+          type: integer
+        output_tokens_per_minute:
+          description: The rate limit's per-counter output token limit. Null when it doesn't limit output tokens.
+          example: 20000
+          format: int64
+          nullable: true
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        requests:
+          description: Requests counted in the rolling one-minute window.
+          example: 42
+          format: int64
+          type: integer
+        requests_per_minute:
+          description: The rate limit's per-counter request limit. Null when it doesn't limit requests.
+          example: 60
+          format: int64
+          nullable: true
+          type: integer
+        split_dims:
+          additionalProperties:
+            type: string
+          description: The counter's value for each per-value dimension. user_id and team_id values are raw UUIDs.
+          example:
+            user_id: 11111111-1111-1111-1111-111111111111
+          type: object
+        usage_known:
+          description: False when this counter's usage wasn't read because the request already read the most counters it may. Its usage then reads as zero.
+          example: true
+          type: boolean
+        utilization:
+          description: The fullest of the rate limit's limits in the rolling window, as a fraction. 1 or more means the counter is at its limit.
+          example: 0.7
+          format: double
+          type: number
+        would_limit_requests:
+          description: Requests this counter would have rejected in the last 15 minutes (ALERT).
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_key
+        - split_dims
+        - first_seen
+        - last_seen
+        - requests
+        - input_tokens
+        - output_tokens
+        - limited_requests
+        - would_limit_requests
+        - utilization
+        - usage_known
+      type: object
+    AiGatewayRateLimitInstanceListResponse:
+      description: Response containing counters of a template rate limit.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitInstanceResource"
+            description: One counter of a template rate limit.
+          type: array
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstanceResource:
+      description: One counter of a template rate limit.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceAttributes"
+        id:
+          description: Counter ID, the rate limit UUID and instance key joined by `|`.
+          example: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstanceSort:
+      default: utilization_desc
+      description: Sort order for rate limit counters.
+      enum:
+        - utilization_desc
+        - last_seen_desc
+        - key_asc
+      example: utilization_desc
+      type: string
+      x-enum-varnames:
+        - UTILIZATION_DESC
+        - LAST_SEEN_DESC
+        - KEY_ASC
+    AiGatewayRateLimitInstanceType:
+      description: AI Gateway rate limit counter resource type.
+      enum:
+        - rate-limit-instances
+      example: rate-limit-instances
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES
+    AiGatewayRateLimitInstancesSummaryAttributes:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        instance_count:
+          description: Number of counters.
+          example: 14
+          format: int64
+          type: integer
+        limited_requests:
+          description: Requests the counters rejected in the last 15 minutes (ENFORCE), totaled over the counters whose usage was read.
+          example: 25
+          format: int64
+          type: integer
+        limiting_count:
+          description: Counters that limited, or would have limited, a request in the last 15 minutes.
+          example: 2
+          format: int64
+          type: integer
+        max_utilization:
+          description: Utilization of the fullest counter.
+          example: 1.2
+          format: double
+          type: number
+        near_limit_count:
+          description: Counters at 80% or more of a limit in the rolling window.
+          example: 3
+          format: int64
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        scope_restricted:
+          description: True when the caller can't see the template's selector because it lists a provider or model the caller can't access. The counters are then hidden, and every count is zero.
+          example: false
+          type: boolean
+        truncated:
+          description: True when some recently active counters' usage wasn't read, so the counts may be low.
+          example: false
+          type: boolean
+        would_limit_requests:
+          description: Requests the counters would have rejected in the last 15 minutes (ALERT), totaled over the counters whose usage was read.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_count
+        - near_limit_count
+        - limiting_count
+        - max_utilization
+        - truncated
+      type: object
+    AiGatewayRateLimitInstancesSummaryResource:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryAttributes"
+        id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstancesSummaryResponse:
+      description: Response containing the aggregate of a template rate limit's counters.
+      properties:
+        data:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResource"
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstancesSummaryType:
+      description: AI Gateway rate limit counter summary resource type.
+      enum:
+        - rate-limit-instances-summary
+      example: rate-limit-instances-summary
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES_SUMMARY
     AiGatewayRateLimitListResponse:
       description: Response containing AI Gateway rate limits.
       properties:
@@ -11526,6 +11812,36 @@ components:
           $ref: "#/components/schemas/AiGatewayRateLimitResource"
       required:
         - data
+      type: object
+    AiGatewayRateLimitSelector:
+      description: Dimension rules for a template rate limit, which gives each matched user, Team, or value its own allowance with the rule's limits. Can't be combined with user_id, team_id, or tags, and can't be changed after creation. Omit for a rule with one shared allowance.
+      items:
+        $ref: "#/components/schemas/AiGatewayRateLimitSelectorEntry"
+      nullable: true
+      type: array
+    AiGatewayRateLimitSelectorEntry:
+      description: One dimension rule in a template rate limit selector.
+      properties:
+        dim:
+          description: "Dimension to match: user_id, team_id, model, provider, or tag:<key>. Reserved metadata tag keys are rejected."
+          example: user_id
+          type: string
+        per_value:
+          default: false
+          description: Give each matched value its own allowance when true. Otherwise, matched values share the allowance within the other separated dimensions.
+          example: true
+          type: boolean
+        values:
+          description: Allowed dimension values. Omit to match any value; with per_value true, a request must still carry the dimension to match. An explicit list must contain at least one value. Listed team_id values must be existing Teams without open membership.
+          example:
+            - 11111111-1111-1111-1111-111111111111
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - dim
+        - per_value
       type: object
     AiGatewayRateLimitType:
       description: AI Gateway rate limit resource type.
@@ -165161,7 +165477,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 48
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -165220,7 +165536,7 @@ paths:
       summary: List AI Gateway budget instance dimension values
       tags:
         - AI Gateway
-      x-menu-order: 47
+      x-menu-order: 49
       x-permission:
         operator: OR
         permissions:
@@ -165277,7 +165593,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 46
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
@@ -179052,7 +179368,7 @@ paths:
       summary: Get the AI Gateway data capture configuration
       tags:
         - AI Gateway
-      x-menu-order: 49
+      x-menu-order: 51
       x-permission:
         operator: OR
         permissions:
@@ -179105,7 +179421,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 50
+      x-menu-order: 52
       x-permission:
         operator: OR
         permissions:
@@ -179152,7 +179468,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 51
+      x-menu-order: 53
       x-permission:
         operator: OR
         permissions:
@@ -179215,7 +179531,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 52
+      x-menu-order: 54
       x-permission:
         operator: OR
         permissions:
@@ -233207,6 +233523,7 @@ paths:
                           created_by: user@example.com
                           enabled: true
                           input_tokens_per_minute: 500000
+                          is_template: false
                           mode: ALERT
                           name: Default rate limit
                           output_tokens_per_minute: 200000
@@ -233214,6 +233531,7 @@ paths:
                           revision: 1
                           tags:
                             provider: openai
+                          template_split_dims: []
                           updated_at: "2026-09-15T14:30:00Z"
                           updated_by: user@example.com
                         id: 33333333-3333-3333-3333-333333333333
@@ -233240,7 +233558,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.
+      description: Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.
       operationId: CreateAiGatewayRateLimit
       requestBody:
         content:
@@ -233261,6 +233579,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233268,6 +233587,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-01T00:00:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233402,6 +233722,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233409,6 +233730,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233437,7 +233759,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
-      description: Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
+      description: Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
       operationId: UpdateAiGatewayRateLimit
       parameters:
         - $ref: "#/components/parameters/AiGatewayRateLimitID"
@@ -233460,6 +233782,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233467,6 +233790,7 @@ paths:
                         revision: 2
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233496,6 +233820,120 @@ paths:
         operator: OR
         permissions:
           - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances:
+    get:
+      description: List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.
+      operationId: ListAiGatewayRateLimitInstances
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSort"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceLimit"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceOffset"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          first_seen: "2026-10-28T10:00:00Z"
+                          input_tokens: 15000
+                          input_tokens_per_minute:
+                          instance_key: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                          last_seen: "2026-10-28T10:05:00Z"
+                          limited_requests: 0
+                          output_tokens: 4000
+                          output_tokens_per_minute:
+                          rate_limit_id: 33333333-3333-3333-3333-333333333333
+                          requests: 42
+                          requests_per_minute: 60
+                          split_dims:
+                            user_id: 11111111-1111-1111-1111-111111111111
+                          usage_known: true
+                          utilization: 0.7
+                          would_limit_requests: 0
+                        id: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                        type: rate-limit-instances
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstanceListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: List AI Gateway rate limit counters
+      tags:
+        - AI Gateway
+      x-menu-order: 46
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances/summary:
+    get:
+      description: Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.
+      operationId: GetAiGatewayRateLimitInstancesSummary
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        instance_count: 14
+                        limited_requests: 25
+                        limiting_count: 2
+                        max_utilization: 1.2
+                        near_limit_count: 3
+                        rate_limit_id: 33333333-3333-3333-3333-333333333333
+                        scope_restricted: false
+                        truncated: false
+                        would_limit_requests: 0
+                      id: 33333333-3333-3333-3333-333333333333
+                      type: rate-limit-instances-summary
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get an AI Gateway rate limit counter summary
+      tags:
+        - AI Gateway
+      x-menu-order: 47
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
