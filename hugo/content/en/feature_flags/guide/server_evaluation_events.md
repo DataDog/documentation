@@ -19,8 +19,6 @@ Datadog Feature Flags server SDKs can send aggregated flag evaluation events to 
 
 Use these SDK versions or later for the evaluation-event privacy behavior described in this guide. For Node.js, use the listed version or later within the same major release line:
 
-<!-- Release readiness: .NET tracer 3.57.0 and PHP 1.27.0 are released. Before publishing, confirm the released .NET provider package containing the evaluation-event hook and replace the provider requirement below with its released version. -->
-
 | SDK | Minimum version | Event delivery |
 |---|---|---|
 | Node.js `dd-trace` | 6.20.0 (6.x) or 5.131.0 (5.x) | Local relay with direct fallback |
@@ -28,12 +26,11 @@ Use these SDK versions or later for the evaluation-event privacy behavior descri
 | Python `ddtrace` | 4.16.0 | Local relay with direct fallback |
 | Go `dd-trace-go/v2` | 2.11.0 | Local relay with direct fallback |
 | Ruby `datadog` | 2.46.0 | Local relay required; no direct fallback |
-| .NET `dd-trace-dotnet` | 3.57.0 | Local relay with direct fallback |
 | PHP `dd-trace-php` | 1.27.0 | Agent required; no direct fallback |
 
 Direct fallback requires the `agentless` configuration source. PHP uses Agent Remote Configuration and supports evaluation events through both the native PHP client and OpenFeature.
 
-.NET evaluation events also require a `Datadog.FeatureFlags.OpenFeature` package with evaluation-event support. Provider versions through 2.3.2 do not include this support. The tracer must be loaded with [automatic instrumentation][7]; installing the provider alone is not sufficient.
+.NET provider versions through `Datadog.FeatureFlags.OpenFeature` 2.3.2 do not emit EVP flag evaluation events. See the [.NET setup][7] for configuration delivery, experiment exposures, and OTLP evaluation metrics.
 
 This guide does not describe client-side SDK telemetry.
 
@@ -87,7 +84,7 @@ With `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, the SDKs that support di
 
 For direct delivery:
 
-1. Use an SDK that supports direct fallback, at a version listed in the [Overview](#overview) table. For .NET, also meet the OpenFeature provider requirement described in the [Overview](#overview).
+1. Use an SDK that supports direct fallback, at a version listed in the [Overview](#overview) table.
 2. Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process, as described in [agentless setup][5]. Store the API key in a secret manager.
 3. Allow outbound HTTPS to the event intake for the selected Datadog site, in addition to the flag configuration endpoint.
 4. Initialize the provider using the [language-specific setup instructions][9].
@@ -100,7 +97,7 @@ With `remote_config`, event delivery remains Agent-backed. Supplying an applicat
 
 Event delivery is best effort. Pending events can be lost when a process exits abruptly, a runtime freezes, a buffer fills, or the network is unavailable.
 
-Python 4.16.0, Go 2.11.0, and .NET 3.57.0 can retry a batch directly after a local HTTP `404` or `405`. A confirmed connection failure before sending can also trigger this retry. A timeout or connection reset can leave delivery uncertain. The SDK does not replay that batch through direct intake when the local receiver might already have accepted it. Later batches can use direct intake. Do not treat direct fallback as a durable event queue or a guarantee that every evaluation is delivered.
+Python 4.16.0 and Go 2.11.0 can retry a batch directly after a local HTTP `404` or `405`. A confirmed connection failure before sending can also trigger this retry. A timeout or connection reset can leave delivery uncertain. The SDK does not replay that batch through direct intake when the local receiver might already have accepted it. Later batches can use direct intake. Do not treat direct fallback as a durable event queue or a guarantee that every evaluation is delivered.
 
 For Node.js, keep `dd-trace` external to a single-file application bundle and make its installed package available at runtime. The evaluation-event worker needs its JavaScript file and dependencies. If it cannot load, evaluation events are disabled for that provider while local flag evaluation and experiment exposures continue.
 
@@ -133,6 +130,6 @@ EVP flag evaluation event counts are available with either value of `observe_ful
 [4]: /api/latest/feature-flags/#get-an-environment
 [5]: /feature_flags/concepts/configuration_sources/#use-agentless-delivery
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
-[7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[7]: /feature_flags/server/dotnet/
 [8]: /api/latest/feature-flags/#update-an-environment
 [9]: /feature_flags/server/

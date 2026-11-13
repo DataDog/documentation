@@ -30,12 +30,12 @@ The following table shows the Feature Flags functionality available in each SDK 
 | Node.js `dd-trace` | 6.20.0 (6.x) or 5.131.0 (5.x) | Supported | Supported | Supported | Local relay with direct fallback |
 | Python `ddtrace` | 4.16.0 | Supported | Supported | Supported | Local relay with direct fallback |
 | Go `dd-trace-go/v2` | 2.11.0 | Supported | Supported | Supported | Local relay with direct fallback |
-| .NET `dd-trace-dotnet` | 3.57.0 | Supported | Supported | Supported with an updated OpenFeature provider | Local relay with direct fallback |
+| .NET `dd-trace-dotnet` | 3.56.0 | Supported | Supported | Not supported by OpenFeature provider versions through 2.3.2 | Local relay with direct fallback for exposures |
 | Ruby `datadog` | 2.46.0 | Supported | Supported with a compatible relay | Supported with a compatible relay | Local relay required; no direct fallback |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. The Java runtime must support loading `dd-java-agent` with the `-javaagent` JVM option. You can pass this option in the Java command or through `JAVA_TOOL_OPTIONS`.
 
-.NET CDN delivery requires the Datadog .NET tracer to be loaded with [automatic instrumentation][12], alongside the OpenFeature provider. Installing the provider alone is not sufficient. Evaluation events require an OpenFeature provider package with evaluation-event support; versions through 2.3.2 do not include it. See [Server-Side Evaluation Events and Privacy][16] for the version requirements.
+.NET CDN delivery requires the Datadog .NET tracer to be loaded with [automatic instrumentation][12], alongside `Datadog.FeatureFlags.OpenFeature` 2.3.1 or later. Installing the provider alone is not sufficient. Provider versions through 2.3.2 do not emit EVP flag evaluation events.
 
 For Node.js, use the listed version or later within the same major release line. The listed versions provide the capabilities shown in the table, including evaluation-event privacy controls where supported. Earlier versions can support a subset of these capabilities; see the language setup pages. PHP uses Agent Remote Configuration for flag delivery.
 
@@ -75,8 +75,8 @@ Direct fallback means the SDK can send authenticated EVP events to Datadog when 
 Note the following behavior:
 
 - Experiment exposure events are emitted only for flags associated with an experiment.
-- Java, Node.js, Python, Go, .NET, and Ruby aggregate EVP flag evaluation events and send them by default in the versions listed above. Ruby requires a compatible local telemetry relay for both event types and does not support direct fallback.
-- .NET 3.57.0 supports direct fallback for experiment exposures and evaluation events with an updated OpenFeature provider. Tracer 3.56.0 supports direct fallback for exposures only; tracer 3.54.0 requires a compatible local relay for exposures.
+- Java, Node.js, Python, Go, and Ruby aggregate EVP flag evaluation events and send them by default in the versions listed above. Ruby requires a compatible local telemetry relay for both event types and does not support direct fallback.
+- .NET tracer 3.56.0 supports direct fallback for experiment exposures. Tracer 3.54.0 requires a compatible local relay for exposures.
 - To disable only the EVP flag evaluation event path, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
 
 The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. For no-Agent serverless environments, configure the serverless telemetry path for your platform before you enable this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
@@ -96,7 +96,7 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
 2. Evaluate a flag associated with an experiment, then confirm that the experiment receives an exposure event.
 3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
-4. For Java, Node.js, Python, Go, .NET, and Ruby, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+4. For Java, Node.js, Python, Go, and Ruby, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
 5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ## Agent-backed Remote Configuration

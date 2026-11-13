@@ -308,7 +308,7 @@ await Api.Instance.ShutdownAsync();
 
 With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
 
-Tracer 3.57.0 adds aggregated EVP flag evaluation events, including direct fallback in agentless mode. These events also require a `Datadog.FeatureFlags.OpenFeature` package with evaluation-event support; provider versions through 2.3.2 do not include it. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only evaluation events. See [Server-Side Evaluation Events and Privacy][11] for the version requirements, privacy controls, and delivery limits. The `feature_flag.evaluations` OTLP metric remains a separate signal.
+Provider versions through `Datadog.FeatureFlags.OpenFeature` 2.3.2 do not emit aggregated EVP flag evaluation events. Experiment exposures and the `feature_flag.evaluations` OTLP metric are separate signals. See [Server-Side Evaluation Events and Privacy][11] for evaluation-event support in other server SDKs.
 
 ## Testing
 
