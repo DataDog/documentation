@@ -796,6 +796,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
+- `fleet-automation`: ([Sign up][95]) Tools for monitoring and managing Datadog Agent deployments, upgrade schedules, and Agent and package versions across an organization's fleet of hosts with [Fleet Automation][94].
 - `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
@@ -1083,3 +1084,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [91]: /account_management/rbac/mcp_access/
 [92]: https://app.datadoghq.com/organization-settings/oauth-applications
 [93]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client
+[94]: /agent/fleet_automation/
+[95]: https://www.datadoghq.com/product-preview/fleet-automation-mcp-toolset/
