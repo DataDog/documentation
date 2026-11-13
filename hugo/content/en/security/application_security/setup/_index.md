@@ -86,4 +86,4 @@ To set up your application with a coding assistant, see [Agentic Onboarding][1].
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
 
-[1]: /security/application_security/agentic_onboarding/
+[1]: /agentic_onboarding/

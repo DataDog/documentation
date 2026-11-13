@@ -35,7 +35,7 @@ Additional features are available depending on the source of the error. See [sup
 
 ## Setup
 {{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
-    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding{{< /nextlink >}}
+    {{< nextlink href="/agentic_onboarding/" >}}Agentic Onboarding{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}
