@@ -10,6 +10,9 @@ further_reading:
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Learn about Feature Flags"
+- link: "/change_tracking/change_types/feature_flags/"
+  tag: "Documentation"
+  text: "Track Feature Flag Changes"
 ---
 
 ## Overview
@@ -36,8 +39,14 @@ Navigate to {{< ui >}}Feature Flags{{< /ui >}} > [{{< ui >}}Global Flag History{
 
 {{< img src="/feature_flags/flag_history_global-2.png" alt="Global flag history view" style="width:100%;" >}}
 
+## View flag changes alongside service performance
+
+When a flag's targeting, rollout, or status changes in an environment, Datadog sends an event to [Change Tracking][2]. These events appear on the affected services' Change Tracking timelines. Use them to check whether a flag change lines up with a spike in errors or latency. See [Track Feature Flag Changes][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/feature-flags/global-history
+[2]: /change_tracking/
+[3]: /change_tracking/change_types/feature_flags/
