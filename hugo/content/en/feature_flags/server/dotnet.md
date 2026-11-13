@@ -94,7 +94,7 @@ var client = Api.Instance.GetClient("my-service");
 
 ### Non-blocking initialization
 
-Use `SetProvider` to register the provider without waiting. Flag evaluations return default values until the configuration is received.
+Start `SetProviderAsync` without awaiting it to register the provider in the background. Flag evaluations return default values until the configuration is received.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -102,7 +102,7 @@ using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
-Api.Instance.SetProvider(provider);
+_ = Api.Instance.SetProviderAsync(provider);
 
 // Create an OpenFeature client
 var client = Api.Instance.GetClient("my-service");
@@ -238,6 +238,7 @@ With non-blocking registration, evaluations return default values until the firs
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 using OpenFeature.Constant;
 
 var taskCompletionSource = new TaskCompletionSource<bool>();
@@ -257,7 +258,7 @@ Api.Instance.AddHandler(ProviderEventTypes.ProviderError, (eventDetails) =>
 
 // Set provider
 var provider = new DatadogProvider();
-Api.Instance.SetProvider(provider);
+_ = Api.Instance.SetProviderAsync(provider);
 
 // Wait for provider to be ready (with timeout)
 var timeout = Task.Delay(TimeSpan.FromSeconds(30));
@@ -355,7 +356,7 @@ Before the first valid configuration, evaluations return caller defaults. After 
 ### Remote Configuration not working
 
 Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is the [required version](#prerequisites)
+- Datadog Agent is version 7.55 or later. See [Server SDK Configuration Sources][9].
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
 - The SDK can communicate with the Agent

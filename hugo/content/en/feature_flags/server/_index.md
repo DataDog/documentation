@@ -77,6 +77,24 @@ Java uses the standalone `dd-openfeature` dependency. .NET still requires the tr
 
 `DD_SERVICE` and `DD_VERSION` are optional attribution settings. Metrics, tracing, and custom polling settings are not required to receive flags.
 
+## Collect traces with flag evaluations
+
+Use this optional setup to inspect request errors and latency by flag variant. Configure APM tracing, then enable [APM trace enrichment][13] for a supported SDK. The SDK attaches flag evaluation data to the active request trace.
+
+For Java, load `dd-java-agent` 1.69.0 or later to collect traces and attach flag evaluations. See [Collect traces with flag evaluations in Java][16]. Keep the application's existing flag configuration source when adding tracing.
+
+To add only Feature Flags to an existing OpenTelemetry setup, use [Option B: Run the Datadog SDK alongside OpenTelemetry][17]. This keeps the existing tracing provider and exporter.
+
+## Optional telemetry
+
+Configuration delivery, event delivery, metrics, and APM tracing use separate paths:
+
+- [Send feature flag telemetry][15]: experiment exposures and aggregated flag evaluation events, with supported direct delivery or a local relay.
+- [Server-side flag evaluation metrics][6]: the separate `feature_flag.evaluations` OTLP metric.
+- [APM trace enrichment][13]: flag evaluation data attached to APM traces.
+
+Set `DD_FEATURE_FLAGS_ENABLED=false` to disable Feature Flags. See [Activation and billing][14] for when delivery starts.
+
 ## Migrate from Agent delivery
 
 An existing deployment can remain on Agent delivery because of legacy enablement settings. Follow [Migrate an existing Remote Configuration setup][7] to move credentials into the application, select agentless delivery, and verify updates.
@@ -92,16 +110,6 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 For Java, also load `dd-java-agent` 1.69.0 or later with `-javaagent`. Use `dd-openfeature` 1.69.0 or later. See the [Java Remote Configuration setup][12].
 
 See [Server SDK Configuration Sources][8] for Agent requirements, source precedence, and delivery settings.
-
-## Optional telemetry and tracing
-
-Configuration delivery, event delivery, metrics, and APM tracing use separate paths:
-
-- [Send feature flag telemetry][15]: experiment exposures and aggregated flag evaluation events, with supported direct delivery or a local relay.
-- [Server-side flag evaluation metrics][6]: the separate `feature_flag.evaluations` OTLP metric.
-- [APM trace enrichment][13]: flag evaluation data attached to APM traces.
-
-Set `DD_FEATURE_FLAGS_ENABLED=false` to disable Feature Flags. See [Activation and billing][14] for when delivery starts.
 
 ## Testing with in-memory providers
 
@@ -173,3 +181,5 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [14]: /feature_flags/concepts/configuration_sources/#activation-and-billing
 
 [15]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[16]: /feature_flags/server/java/#collect-traces-with-flag-evaluations
+[17]: /feature_flags/implementation_patterns/opentelemetry/#option-b-run-the-datadog-sdk-alongside-opentelemetry

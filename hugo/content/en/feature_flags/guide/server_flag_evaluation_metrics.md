@@ -22,7 +22,7 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP event egress use the standard tracer URL on port 8126. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Those events use a direct or local relay connection. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
 
 ## Prerequisites
 
@@ -32,20 +32,11 @@ Before setting up flag evaluation metrics, confirm the following:
 - For Agent-backed deployments, Datadog Agent 7.32.0 or later is running and can receive OTLP metrics.
 - For no-Agent serverless deployments, your platform has a supported serverless telemetry path configured.
 - For Java, Node.js, and Python serverless environments, see [Send feature flag telemetry][7].
-- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
-- Your server-side tracer meets the minimum version for flag evaluation metrics support:
-
-| Language | Minimum tracer version |
-| -------- | ---------------------- |
-| .NET     | 3.44.0                 |
-| Go       | 2.8.0                  |
-| Java     | 1.62.0                 |
-| Node.js  | 5.99.0                 |
-| PHP      | 1.21.1                 |
-| Python   | 4.7.0                  |
-| Ruby     | 2.32.0                 |
+- Your application uses the SDK versions in the [server getting-started guides][1] or later.
 
 Agentless configuration delivery and this metric use independent paths. An agentless SDK can emit the metric when you configure the required OTLP path through a supported Agent-backed or serverless telemetry setup.
+
+Keep the application's existing flag configuration source. Enabling metrics does not require Agent Remote Configuration. Do not add `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`; it can change an implicit agentless source to Remote Configuration.
 
 ## Step 1: Configure an OTLP receiver
 
@@ -72,7 +63,7 @@ The Java provider records `feature_flag.evaluations` through the OpenTelemetry S
 {{% tab "Gradle (Groovy)" %}}
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
-    implementation platform('io.opentelemetry:opentelemetry-bom:1.47.0')
+    implementation platform('io.opentelemetry:opentelemetry-bom:1.66.0')
     implementation 'io.opentelemetry:opentelemetry-sdk-metrics'
     implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
 }
@@ -82,7 +73,7 @@ dependencies {
 {{% tab "Gradle (Kotlin)" %}}
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
-    implementation(platform("io.opentelemetry:opentelemetry-bom:1.47.0"))
+    implementation(platform("io.opentelemetry:opentelemetry-bom:1.66.0"))
     implementation("io.opentelemetry:opentelemetry-sdk-metrics")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")
 }
@@ -96,7 +87,7 @@ dependencies {
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-bom</artifactId>
-            <version>1.47.0</version>
+            <version>1.66.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -174,7 +165,6 @@ services:
 
   app-go:
     environment:
-      - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
       - DD_METRICS_OTEL_ENABLED=true
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://datadog-agent:4318
     depends_on:

@@ -26,6 +26,8 @@ further_reading:
 
 The Datadog Java provider implements the [OpenFeature](https://openfeature.dev/) standard and evaluates flags locally. Agentless mode is the default. The provider receives flag configuration directly from Datadog without a Datadog Agent or `dd-java-agent`.
 
+<a id="installation"></a>
+
 ## Getting started
 
 Use Java 11 or later. Create a Boolean flag named `my-feature`. Enable its **Server** distribution channel and enable it in the target environment.
@@ -315,6 +317,21 @@ The standalone provider sends experiment exposures and aggregated flag evaluatio
 The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
 
 For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+
+### Collect traces with flag evaluations
+
+Use this optional setup to inspect request errors and latency by flag variant. Configure [Java APM tracing][22] and verify that traces reach Datadog. Use `dd-java-agent` 1.69.0 or later.
+
+Enable [APM trace enrichment][21] and load the Java agent when starting the application:
+
+```bash
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
+java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+```
+
+Evaluate flags during traced requests. The SDK attaches flag evaluation data to the active trace's root span. Keep the application's existing flag configuration source. Tracing and enrichment do not require changing it.
+
+The minimum setup in [Getting started](#getting-started) remains sufficient to receive and evaluate flags. Add the Java agent when collecting traces or attaching evaluations to them.
 
 ### Use Agent delivery
 
@@ -657,4 +674,6 @@ When the selected configuration path supports exposures, exposures appear only f
 [14]: /getting_started/site/
 [18]: /feature_flags/concepts/configuration_sources/#agent-availability
 [19]: /feature_flags/guide/record_exposures_in_your_own_data_store/
-[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm
+[20]: /tracing/trace_collection/dd_libraries/java/#add-the-java-sdk-to-the-jvm
+[21]: /feature_flags/guide/apm_trace_enrichment/
+[22]: /tracing/trace_collection/dd_libraries/java/

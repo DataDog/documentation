@@ -17,12 +17,12 @@ further_reading:
 
 You can add [Datadog Feature Flags][1] to an application that uses [OpenTelemetry (OTel)][2] for tracing. Datadog supports two integration options. In both cases, feature flags evaluate correctly and your existing OpenTelemetry API instrumentation code remains the same.
 
-Choose an integration option based on whether you can change your tracing provider initialization:
+Choose an integration option based on your goal:
 
-- **Option A:** Register the Datadog SDK as the TracerProvider
-- **Option B:** Run the Datadog SDK alongside OpenTelemetry
+- **Add Feature Flags to existing OpenTelemetry tracing:** Use [Option B](#option-b-run-the-datadog-sdk-alongside-opentelemetry) to keep the existing tracing provider and exporter.
+- **Collect traces with Datadog:** Use [Option A](#option-a-register-the-datadog-sdk-as-the-tracerprovider) to replace the OpenTelemetry tracing provider with the Datadog tracing integration.
 
-If you can change your tracing provider initialization, Option A is recommended. If you cannot change your tracing provider, use Option B to adopt feature flags without changing your OTel trace pipeline.
+To attach flag evaluations to Datadog traces, configure the Datadog tracing integration and enable [APM trace enrichment][4] for a supported SDK. Flag configuration can continue to use agentless delivery with either option.
 
 ## Prerequisites
 
@@ -33,6 +33,8 @@ Follow the Datadog [Server-Side Feature Flags][1] installation guide for your la
 ## Option A: Register the Datadog SDK as the TracerProvider
 
 In this option, the Datadog SDK replaces the OTel SDK as the `TracerProvider`. Your existing OpenTelemetry API instrumentation code — spans, attributes, events, and context propagation — stays the same.
+
+Option A requires the language's Datadog tracing integration in addition to its Feature Flags provider. Configure trace delivery using that integration's setup instructions.
 
 <div class="alert alert-warning">Remove any existing OpenTelemetry TracerProvider and exporter initialization to avoid duplicate traces.</div>
 
@@ -118,14 +120,23 @@ For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrumen
 {{% /tab %}}
 {{% tab "Java" %}}
 
+For Java tracing, configure [Java APM][5] and load `dd-java-agent` 1.69.0 or later with `-javaagent`. Set `DD_TRACE_OTEL_ENABLED=true` to use the Java agent's OpenTelemetry API support. Enable [APM trace enrichment][4] to attach flag evaluations to those traces:
+
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
 DD_API_KEY=<DATADOG_API_KEY>
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 {{< /code-block >}}
+
+Start the application with the Java agent:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+```
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -598,3 +609,5 @@ For complete setup instructions, typed getters, evaluation context requirements,
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
 [3]: /feature_flags/guide/server_flag_evaluation_metrics/
+[4]: /feature_flags/guide/apm_trace_enrichment/
+[5]: /tracing/trace_collection/dd_libraries/java/
