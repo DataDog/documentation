@@ -65,10 +65,6 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 
-<div class="alert alert-danger">
-  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
-</div>
-
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
@@ -265,99 +261,15 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 {{% tab "Cypress" %}}
 
-### Cypress version 10 or later
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
-Use the Cypress API documentation to [learn how to use plugins][1] for `cypress>=10`.
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
+```
 
-In your `cypress.config.js` file, set the following:
+Automatic instrumentation requires `dd-trace>=5.97.0` on the v5 release line or `dd-trace>=6.0.0` on the v6 release line, and Cypress 10.2 or later. Your Cypress version must also meet the compatibility requirements for your `dd-trace` major version. Datadog configures the Cypress plugin and support file automatically, so no changes to `cypress.config.js` or your support file are required.
 
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents: require('dd-trace/ci/cypress/plugin'),
-    supportFile: 'cypress/support/e2e.js'
-  }
-})
-{{< /code-block >}}
-
-Add the following line to the **top level** of your `supportFile`:
-
-{{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
-// Your code can be before this line
-// require('./commands')
-require('dd-trace/ci/cypress/support')
-// Also supported:
-// import 'dd-trace/ci/cypress/support'
-// Your code can also be after this line
-// Cypress.Commands.add('login', (email, pw) => {})
-{{< /code-block >}}
-
-If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      // your previous code is before this line
-      return require('dd-trace/ci/cypress/plugin')(on, config)
-    }
-  }
-})
-{{< /code-block >}}
-
-#### Cypress `after:run` event
-Datadog requires the [`after:run`][2] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      require('dd-trace/ci/cypress/plugin')(on, config)
-      // other plugins
-      on('after:run', (details) => {
-        // other 'after:run' handlers
-        // important that this function call is returned
-        return require('dd-trace/ci/cypress/after-run')(details)
-      })
-    }
-  }
-})
-{{< /code-block >}}
-
-#### Cypress `after:spec` event
-Datadog requires the [`after:spec`][3] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      require('dd-trace/ci/cypress/plugin')(on, config)
-      // other plugins
-      on('after:spec', (...args) => {
-        // other 'after:spec' handlers
-        // Important that this function call is returned
-        // Important that all the arguments are passed
-        return require('dd-trace/ci/cypress/after-spec')(...args)
-      })
-    }
-  }
-})
-{{< /code-block >}}
-
-Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
-
-{{< code-block lang="shell" >}}
-DD_TEST_SESSION_NAME=ui-tests yarn test:ui
-{{< /code-block >}}
-
+**Note**: If you set a value for `NODE_OPTIONS` in your test command, preserve `-r dd-trace/ci/init` with `${NODE_OPTIONS:-}`.
 
 ### Adding custom tags to tests
 
@@ -404,9 +316,6 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
-[1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
-[2]: https://docs.cypress.io/api/plugins/after-run-api
-[3]: https://docs.cypress.io/api/plugins/after-spec-api
 [4]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
