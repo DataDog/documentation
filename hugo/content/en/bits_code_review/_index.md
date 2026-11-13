@@ -53,7 +53,12 @@ Bits Code Review supports only GitHub repositories. Repositories hosted on GitLa
 | The Datadog [GitHub App][6] installed on the repositories in scope, with `Contents: Read`, `Issues: Read & Write`, and `Pull Requests: Read & Write` | `Contents: Read` lets Bits Code Review read the code change. Write access lets it post the review and inline comments. It also lets it add status reactions to the pull request and to `@datadog review` comments: 👀 while it works, then 👍 when it finishes. |
 | The `pull_request` and `issue_comment` webhook events | `pull_request` tells Bits Code Review when a pull request is opened or updated. `issue_comment` lets it detect `@datadog review` comments. |
 
-In the GitHub integration's feature list, Bits Code Review relies on these permission bundles: {{< ui >}}Read Repository Contents{{< /ui >}}, {{< ui >}}Pull Request Information{{< /ui >}}, and {{< ui >}}Pull Request Comments{{< /ui >}}. These bundles do not subscribe to the `issue_comment` event. To use `@datadog review`, also enable {{< ui >}}Bits Code: Monitor CI Status{{< /ui >}}. Other Software Delivery features, such as Code Coverage, CI Visibility, and Test Optimization, are not required.
+Your GitHub App must meet the requirements of the following Datadog features in the [GitHub integration][8]:
+
+- {{< ui >}}Read Repository Contents{{< /ui >}}
+- {{< ui >}}Pull Request Information{{< /ui >}}
+- {{< ui >}}Pull Request Comments{{< /ui >}}
+- {{< ui >}}Bits Code: Monitor CI Status{{< /ui >}}, if you want to use `@datadog review`. This feature sends pull request comments to Datadog, which Bits Code Review needs to detect the command.
 
 ## Request a review on demand
 
@@ -61,7 +66,7 @@ To request a review of a single pull request, comment `@datadog review` on the p
 
 ## Give custom instructions
 
-Bits Code Review takes into account the global custom instructions you define for Bits Code. To set them, go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][8] and use the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
+Bits Code Review takes into account the global custom instructions you define for Bits Code. To set them, go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][9] and use the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
 
 Use these instructions to describe your review conventions, such as architecture rules, patterns to flag, or areas to ignore. Global agent instructions also apply to your other Bits Code sessions.
 
@@ -80,4 +85,5 @@ React to a Bits Code Review comment with 👍 or 👎, or reply to it, to share 
 [5]: /tracing/live_debugger/
 [6]: /integrations/github/
 [7]: /tracing/live_debugger/#requirements
-[8]: https://app.datadoghq.com/code/settings
+[8]: /integrations/github/#update-an-existing-github-app
+[9]: https://app.datadoghq.com/code/settings
