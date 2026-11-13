@@ -258,6 +258,12 @@ print(details.error)    // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
+<!-- Publication gate: confirm the first SDK release supporting CACHED before merging this addition. -->
+
+In SDK versions that support the `CACHED` evaluation reason, a successful evaluation from flags restored from persistent storage reports `CACHED`. After a network response replaces those flags, successful evaluations use the reasons supplied by that response. Check the error field as well: a missing flag or type mismatch returns an error and the default value, rather than a successful cached evaluation.
+
+`CACHED` describes where the evaluated assignment came from. It does not mean the configuration is fresh, matches a newly requested evaluation context, or that an OpenFeature client has finished initialisation.
+
 ## Observe state changes
 
 <div class="alert alert-info">State observation with <code>FlagsClient.state</code> is available in <code>dd-sdk-ios</code> 3.11.0 and later.</div>
