@@ -11258,6 +11258,11 @@ menu:
       url: account_management/workload_identity_federation/
       parent: account_management
       weight: 19
+    - name: Custom OAuth Clients
+      identifier: account_management_custom_oauth_clients
+      url: account_management/custom_oauth_clients/
+      parent: account_management
+      weight: 20
     - name: Disaster Recovery
       url: disaster_recovery/
       pre: disaster-recovery-wui
