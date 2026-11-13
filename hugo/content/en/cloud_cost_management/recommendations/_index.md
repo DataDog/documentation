@@ -508,7 +508,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Downsize Database for MySQL Compute
-      recommendation_description: Identifies Azure Database for MySQL flexible servers whose peak CPU, memory, connections and IOPS would stay low on fewer vCores, and recommends scaling compute down.
+      recommendation_description: Identifies Azure Database for MySQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
