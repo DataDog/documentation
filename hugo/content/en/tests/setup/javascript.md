@@ -267,8 +267,6 @@ Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your t
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 ```
 
-Automatic instrumentation requires `dd-trace>=5.97.0` on the v5 release line or `dd-trace>=6.0.0` on the v6 release line, and Cypress 10.2 or later. Your Cypress version must also meet the compatibility requirements for your `dd-trace` major version. Datadog configures the Cypress plugin and support file automatically, so no changes to `cypress.config.js` or your support file are required.
-
 **Note**: If you set a value for `NODE_OPTIONS` in your test command, preserve `-r dd-trace/ci/init` with `${NODE_OPTIONS:-}`.
 
 ### Adding custom tags to tests
