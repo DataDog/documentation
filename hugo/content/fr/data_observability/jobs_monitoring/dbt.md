@@ -56,7 +56,7 @@ Utilisez cette option si vous souhaitez utiliser un jeton de service {{< ui >}}S
 2. Copiez l'URL du webhook Datadog.
 3. Dans dbt Cloud, accédez à {{< ui >}}Account Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} > {{< ui >}}Create New Webhook{{< /ui >}}.
 4. Collez l'URL du webhook Datadog dans le champ URL du webhook.
-5. Activez les événements {{< ui >}}Job Run Started{{< /ui >}} et {{< ui >}}Job Run Completed{{< /ui >}}. Pour étendre l'ingestion à des jobs spécifiques, sélectionnez ces jobs dans la configuration du webhook de dbt Cloud.
+5. Activez les événements {{< ui >}}Run started{{< /ui >}}, {{< ui >}}Run completed{{< /ui >}} et {{< ui >}}Run errored{{< /ui >}}. Pour étendre l'ingestion à des jobs spécifiques, sélectionnez ces jobs dans la configuration du webhook de dbt Cloud.
 6. Enregistrez le webhook dans dbt Cloud.
 7. Copiez le secret HMAC depuis dbt Cloud, collez-le dans le champ {{< ui >}}HMAC secret from dbt Cloud{{< /ui >}} dans Datadog, puis cliquez sur {{< ui >}}Save{{< /ui >}}.
 

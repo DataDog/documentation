@@ -11,6 +11,9 @@ further_reading:
 - link: /security/detection_rules/
   tag: Documentación
   text: Reglas de detección
+- link: https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/
+  tag: Blog
+  text: Detecte cuando su agente de IA copie una inyección de prompt autorreplicante
 title: Clasifique e investigue las señales de AI guard
 ---
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard no está disponible en el {{< region-param key="dd_site_name" >}} sitio.</div>
@@ -129,21 +132,21 @@ Además, puede hacer clic en {{< ui >}}Explore in graph view{{< /ui >}} para ver
 
 ## Alerte sobre la actividad de AI guard con Datadog Monitors {#set-up-datadog-monitors}
 
-Para crear monitores que generen alertas al alcanzar determinados umbrales, puede usar [Datadog Monitors][10]. Puede monitorear las evaluaciones de AI guard mediante trazas de APM o métricas. Para ambos tipos de monitores, debe establecer las condiciones de alerta, asignar un nombre a la alerta y configurar Notifications; Datadog recomienda usar Slack.
+Para crear monitores que emitan alertas al alcanzar determinados umbrales, puede usar [Datadog Monitors][10]. Puede monitorear las evaluaciones de AI guard mediante trazas de APM o métricas. Para ambos tipos de monitor, debe establecer sus condiciones de alerta, el nombre de la alerta y definir las notificaciones; Datadog recomienda usar Slack.
 
 ### Monitor de APM {#apm-monitor}
 
 Siga las instrucciones para crear un [monitor de APM][11] y establezca su contexto en {{< ui >}}Trace Analytics{{< /ui >}}.
 
-- Para monitorear las evaluaciones denegadas, utilice la consulta `@ai_guard.action:DENY`.
-- Para monitorear el tráfico bloqueado, utilice la consulta `@ai_guard.blocked:true`.
+- Para monitorear las evaluaciones denegadas, use la consulta `@ai_guard.action:DENY`.
+- Para monitorear el tráfico bloqueado, use la consulta `@ai_guard.blocked:true`.
 
 ### Monitor de métricas {#metric-monitor}
 
 Siga las instrucciones para crear un [monitor de métricas][12].
 
-- Para monitorear las evaluaciones denegadas, utilice la métrica `datadog.ai_guard.evaluations` con la etiqueta `action:deny`.
-- Para monitorear el tráfico bloqueado, utilice la métrica `datadog.ai_guard.evaluations` con la etiqueta `blocking_enabled:true`.
+- Para monitorear las evaluaciones denegadas, use la métrica `datadog.ai_guard.evaluations` con la etiqueta `action:deny`.
+- Para monitorear el tráfico bloqueado, use la métrica `datadog.ai_guard.evaluations` con la etiqueta `blocking_enabled:true`.
 
 ## Lecturas adicionales {#further-reading}
 

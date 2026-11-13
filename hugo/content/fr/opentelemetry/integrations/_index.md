@@ -25,7 +25,7 @@ Par exemple, le fichier [`dockerstatsreceiver`][15] `metadata.yaml` répertorie 
 
 ## Intégrations OpenTelemetry prises en charge par Datadog {#datadog-supported-opentelemetry-integrations}
 
-Datadog prend en charge les intégrations OpenTelemetry suivantes. Vous ne trouvez pas l'intégration dont vous avez besoin ? [Demandez-la][21].
+Datadog prend en charge les Integrations OpenTelemetry suivantes. Vous ne trouvez pas l'intégration dont vous avez besoin ? [Demandez-la][21].
 
 ### APM (Application Performance Monitoring) {#apm-application-performance-monitoring}
 
@@ -63,10 +63,13 @@ Surveillez les serveurs web et les technologies de proxy :
 
 Surveillez les systèmes de base de données et de messagerie :
 
+- [MongoDB Metrics][22] - Suivez les performances de la base de données MongoDB
 - [Métriques MySQL][11] - Surveillez les performances de la base de données MySQL
 - [Métriques PostgreSQL][19] - Surveillez les performances de la base de données PostgreSQL
+- [Redis Metrics][23] - Suivez les performances et l'utilisation de la mémoire de Redis
 - [Métriques SQL Server][20] - Surveillez les performances de la base de données SQL Server
 - [Métriques Kafka][12] - Surveillez la plateforme de messagerie Apache Kafka
+- [RabbitMQ Metrics][24] - Surveillez les brokers et les files d'attente RabbitMQ
 
 ### Big data et traitement {#big-data-and-processing}
 
@@ -103,3 +106,6 @@ Pour demander une nouvelle intégration ou partager vos commentaires sur une int
 [19]: /fr/opentelemetry/integrations/postgres_metrics/
 [20]: /fr/opentelemetry/integrations/sqlserver_metrics/
 [21]: https://www.datadoghq.com/product-preview/otel-integrations/
+[22]: /fr/opentelemetry/integrations/mongodb_metrics/
+[23]: /fr/opentelemetry/integrations/redis_metrics/
+[24]: /fr/opentelemetry/integrations/rabbitmq_metrics/

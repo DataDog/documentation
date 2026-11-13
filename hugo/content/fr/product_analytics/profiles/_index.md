@@ -35,7 +35,7 @@ La page [User Profiles][7] répertorie les utilisateurs qui interagissent avec v
 Chaque profil possède des attributs pour vous aider à mieux segmenter vos utilisateurs. Vous pouvez effectuer une recherche en texte intégral ou trier et filtrer en fonction de l'un de ces attributs. Vous pouvez également personnaliser cette page avec des attributs pertinents pour vos besoins analytiques. Consultez la section [Attributs personnalisés](#use-custom-attributes-to-enrich-profiles) pour savoir comment faire.
 
 
-{{% collapse-content title="Liste des attributs des profils utilisateur" level="h4" expanded=true id="user-profile-attributes" %}}
+{{% collapse-content title="Liste des attributs des profils utilisateur" level="h4" expanded=false id="user-profile-attributes" %}}
 
 <!-- #### User attributes  -->
 User ID `REQUIRED`
@@ -53,6 +53,28 @@ First Seen
 
 Last Seen
 : `type:timestamp`  <br> La date de la session la plus récente de l'utilisateur.
+
+<!-- #### First touch attribution  -->
+Premier référent
+: `type:string`  <br> L'URL de la page depuis laquelle l'utilisateur a accédé à l'application lors de sa première session. Vide si l'utilisateur a accédé directement à l'application.
+
+Host du premier référent
+: `type:string`  <br> Le nom d'hôte de la page depuis laquelle l'utilisateur a accédé à l'application lors de sa première session. Vide si l'utilisateur a accédé directement à l'application.
+
+Première campagne UTM
+: `type:string`  <br> La valeur du paramètre `utm_campaign` dans l'URL de la première session de l'utilisateur.
+
+Premier contenu UTM
+: `type:string`  <br> La valeur du paramètre `utm_content` dans l'URL de la première session de l'utilisateur.
+
+Premier support UTM
+: `type:string`  <br> La valeur du paramètre `utm_medium` dans l'URL de la première session de l'utilisateur.
+
+Première source UTM
+: `type:string`  <br> La valeur du paramètre `utm_source` dans l'URL de la première session de l'utilisateur.
+
+Premier terme UTM
+: `type:string`  <br> La valeur du paramètre `utm_term` dans l'URL de la première session de l'utilisateur.
 
 
 <!-- #### application based attributes  -->
