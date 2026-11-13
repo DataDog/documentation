@@ -152,7 +152,7 @@ To check the fix from your coding agent, set up the [Code Security MCP Server][7
 
 ### Link a pull request
 
-If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. Datadog links the pull request to the remediation through a child case, and its status appears in the inbox.
+If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. Datadog links the pull request to the remediation through a child case, and its status appears in the inbox. Only GitHub pull requests are supported.
 
 ## Track remediation progress
 
@@ -180,13 +180,6 @@ Remediation cases can create tickets in Jira, ServiceNow, or Linear. Ticket crea
 
 1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation cases. If you do not select a project when you create remediation cases, configure the default **Security Remediation** project.
 1. When a remediation case is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
-
-## Limitations
-
-- Remediations are available for Software Composition Analysis and Cloud Security Vulnerabilities findings.
-- Bits Code opens one code session per remediation.
-- Pull request linking supports GitHub only.
-- Saved views are not available on the **Remediations** tab.
 
 ## Further reading
 
