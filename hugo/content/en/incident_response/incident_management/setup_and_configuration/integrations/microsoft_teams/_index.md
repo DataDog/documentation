@@ -104,7 +104,7 @@ The author of a synced message does not need an Incident Management or Incident 
 <div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings.
 
 <div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
 
@@ -119,27 +119,9 @@ To enable meeting summaries for incident Microsoft Teams meetings:
 5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
 6. Save your settings.
 
-Meeting summaries are generated for Microsoft Teams meetings attached to an incident. When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
+When a Microsoft Teams meeting attached to an incident starts, a Datadog Transcriber attempts to join. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin.
 
-- The **incident timeline**, under a **Meeting Summary** entry.
-- The **incident chat channel**, both in the meeting card thread and as a message to the channel.
-
-When the meeting ends, a final post-meeting summary is posted to the same locations.
-
-#### Re-inviting the transcriber
-
-If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
-
-1. Open the incident in Datadog.
-2. In the incident header, open the menu for the linked Microsoft Teams meeting.
-3. Click **Add Transcriber** (the robot icon) beside the meeting.
-4. Admit the Datadog Transcriber from the meeting lobby so transcription can begin.
-
-The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
-
-Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
-
-A re-invite prompt can appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. The prompt covers timeouts while waiting for admission or participants, everyone leaving the meeting, and removal of the transcriber. Select **Yes** to re-invite it or **No** to dismiss the prompt. Connect your chat account to Datadog before using this action.
+For details on where summaries are posted, reviewing summaries, and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
 
 ## Using the Datadog tab in Microsoft Teams
 
@@ -174,4 +156,4 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
-[7]: /account_management/billing/incident_response/#allocate-seats
+[7]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries

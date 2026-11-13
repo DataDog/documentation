@@ -29,14 +29,14 @@ If you are using the official MCP Python SDK to connect to an MCP server with an
    pip install ddtrace
    ```
 
-2. Set the required environment variables:
+2. Set the required environment variables. Replace `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
 
    ```shell
    export DD_LLMOBS_ENABLED=true
    export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
    export DD_LLMOBS_AGENTLESS_ENABLED=true
    export DD_API_KEY=<YOUR_API_KEY>
-   export DD_SITE={{< region-param key="dd_site" >}}
+   export DD_SITE=<YOUR_DD_SITE>
    ```
 
 3. Run your application with the `ddtrace-run` command:
@@ -59,14 +59,14 @@ If you are using the official MCP JavaScript SDK to connect to an MCP server wit
    npm install dd-trace
    ```
 
-2. Set the required environment variables:
+2. Set the required environment variables. Replace `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
 
    ```shell
    export DD_LLMOBS_ENABLED=true
    export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
    export DD_LLMOBS_AGENTLESS_ENABLED=true
    export DD_API_KEY=<YOUR_API_KEY>
-   export DD_SITE={{< region-param key="dd_site" >}}
+   export DD_SITE=<YOUR_DD_SITE>
    ```
 
 3. Run your application:

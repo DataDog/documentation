@@ -3,46 +3,45 @@ cascade:
   algolia:
     rank: 70
     tags:
-    - pipeline cd
-    - pipelines cd
+    - cd pipeline
+    - cd pipelines
 further_reading:
 - link: /continuous_delivery/explorer
   tag: Documentación
-  text: Aprende a consultar y visualizar los despliegues
+  text: Aprenda a consultar y visualizar implementaciones
 - link: /continuous_delivery/features
   tag: Documentación
-  text: Más información sobre las funciones de CD Visibility
+  text: Aprenda sobre las características de CD Visibility
 title: CD Visibility en Datadog
 ---
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la vista previa" >}}
-CD Visibility está en Vista previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility está en visión preliminar. El acceso está limitado a las organizaciones ya inscritas.
 {{< /callout >}}
 
-## Información general
+## Descripción general {#overview}
 
-CD Visibility proporciona una visión del estado de tu CD desde el punto de vista del despliegue, mostrando métricas y resultados importantes de tus despliegues.
+CD Visibility proporciona una vista del estado de su CD centrada en las implementaciones, mostrando métricas y resultados importantes de sus implementaciones.
 
-## Configurar
+## Configuración {#setup}
 
-{{< whatsnext desc="Selecciona tu proveedor de despliegues para configurar CD Visibility en Datadog:" >}}
+{{< whatsnext desc="Seleccione su proveedor de implementaciones para configurar CD Visibility en Datadog:" >}}
     {{< nextlink href="continuous_delivery/deployments/argocd" >}}Argo CD{{< /nextlink >}}
     {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}Proveedores de CI (GitLab, Jenkins, CircleCI y más){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-info">Si utilizas un proveedor que no es compatible, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">rellena este formulario para solicitar asistencia</a>.</div>
+<div class="alert alert-info">Si está utilizando un proveedor que no es compatible, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">complete este formulario para solicitar soporte</a>.</div>
 
-## Uso de datos de despliegues
+## Use datos de implementación {#use-deployment-data}
 
-Al crear un [dashboard][1] o un [notebook][2], puedes utilizar datos de despliegue en tu consulta de búsqueda, lo que actualiza las opciones del widget de visualización. Para obtener más información, consulta la [documentación sobre dashboards][3] y [documentación sobre notebooks][4].
+Al crear un [dashboard][1] o un [notebook][2], puede usar datos de implementación en su consulta de búsqueda, lo que actualiza las opciones del widget de visualización. Para obtener más información, consulte los [Dashboards][3] y la [documentación de Notebooks][4].
 
-## Compartir datos de despliegues
+## Comparta datos de implementación {#share-deployment-data}
 
-Puedes exportar tu consulta de búsqueda a una [vista guardada][5] haciendo clic en el botón **Export** (Exportar).
+Puede exportar su consulta de búsqueda a una [vista guardada][5] haciendo clic en el botón {{< ui >}}Export{{< /ui >}}.
 
-{{< img src="continuous_delivery/explorer/deployment_executions_export.png" alt="Los resultados de las ejecuciones de despliegues aparecen en el Explorador de CD Visibility" width="100%" >}}
+{{< img src="continuous_delivery/explorer/deployment_executions_export.png" alt="Resultados de ejecución de despliegue que aparecen en el Explorador de CD Visibility" width="100%" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -13,3 +13,11 @@ entries:
     operations:
       - TriggerInvestigation
     title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - GetInvestigation
+      - ListInvestigations
+      - TriggerInvestigation
+    title: Add AI Gateway route permissions and safe editing

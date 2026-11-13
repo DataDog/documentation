@@ -92,7 +92,11 @@ The following steps enable Explorer's resource views without collecting the metr
 
 #### Limitations
 
-The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server. An [upstream informer-based migration][16] tracks improvements to its scalability.
+The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
+
+**Note**: OpenTelemetry Collector Contrib v0.164.0 added the [`receiver.k8sobjects.useInformerObserver`][16] feature gate, which mitigates this issue. The gate is in alpha and disabled by default.
+
+Before enabling it, upgrade the Collector image to v0.164.0 or later. Enabling the gate increases the Collector's memory usage; if your current memory limits aren't sufficient, raise them based on your cluster size.
 
 Recommendations:
 
@@ -277,7 +281,7 @@ For a complete application-telemetry Collector example, see the [DaemonSet colle
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /account_management/api-app-keys/#api-keys
-[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.164.0/receiver/k8sobjectsreceiver/documentation.md#feature-gates
 [17]: /containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
@@ -301,6 +305,10 @@ The [`opentelemetry-kube-stack`][1] Helm chart installs the OpenTelemetry Operat
 #### Limitations
 
 The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
+
+**Note**: OpenTelemetry Collector Contrib v0.164.0 added the [`receiver.k8sobjects.useInformerObserver`][11] feature gate, which mitigates this issue. The gate is in alpha and disabled by default.
+
+Before enabling it, upgrade the Collector image to v0.164.0 or later. Enabling the gate increases the `cluster` collector's memory usage; if your current memory limits aren't sufficient, raise them based on your cluster size.
 
 Recommendations:
 
@@ -335,6 +343,7 @@ Open the [Kubernetes Explorer][8] and filter by your cluster name. All core Kube
 [8]: https://app.datadoghq.com/orchestration/overview
 [9]: /containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 [10]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#install-with-values-files
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.164.0/receiver/k8sobjectsreceiver/documentation.md#feature-gates
 
 {{% /tab %}}
 {{< /tabs >}}

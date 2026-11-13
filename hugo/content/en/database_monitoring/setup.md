@@ -18,6 +18,7 @@ To set up Database Monitoring, review the supported setup architectures, then fo
     {{< nextlink href="database_monitoring/setup_oracle" >}}Oracle{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_mongodb" >}}MongoDB{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_clickhouse" >}}ClickHouse{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/setup_db2" >}}IBM Db2{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_documentdb" >}}Amazon DocumentDB{{< /nextlink >}}
 {{< /whatsnext >}}
 

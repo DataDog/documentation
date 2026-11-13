@@ -25,6 +25,12 @@ Esta página cubre la configuración y el uso de {{< tooltip glossary="remote_co
 | **[Agent upgrades][10]** | Actualice sus Agents de forma remota | Linux: 7.69.0+<br>Windows: 7.71.1+ |
 | **[Agent configuration][13]** | Configure sus Agents de forma remota | 7.73+ |
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+En US1-FED y US2-FED, las actualizaciones de Agent requieren la versión 7.85.0 o posterior tanto en Linux como en Windows. La recopilación remota de flare no es compatible; utilice <a href="/agent/troubleshooting/send_a_flare/#manual-submission">envío manual de flare</a> en su lugar.
+</div>
+{{< /site-region >}}
+
 Datadog recomienda actualizar sus Agents regularmente para asegurarse de tener acceso a las funciones más recientes.
 
 ## Requisitos previos {#prerequisites}
@@ -35,6 +41,12 @@ Datadog recomienda actualizar sus Agents regularmente para asegurarse de tener a
 
 ## Habilite Remote Configuration {#enable-remote-configuration}
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Remote Configuration no está habilitada de forma predeterminada para las organizaciones en US1-FED o US2-FED. Habilítela en <a href="https://app.datadoghq.com/organization-settings/remote-config">Organization Settings &gt; Remote Configuration</a> siguiendo los pasos a continuación.
+</div>
+{{< /site-region >}}
+
 En la mayoría de los casos, Remote Configuration está habilitada de forma predeterminada para su organización. Puede verificar si Remote Configuration está habilitada en su organización desde la página de configuración de [Remote Configuration][3]. Si necesita habilitarla:
 1. Asegúrese de que sus permisos de RBAC incluyan [`org_management`][1] para que pueda habilitar Remote Configuration para su organización.
 1. Desde la página Organization Settings de su organización, habilite [Remote Configuration][3]. Esto permite que los componentes de Datadog en toda su organización reciban configuraciones de Datadog.
@@ -44,6 +56,8 @@ En la mayoría de los casos, Remote Configuration está habilitada de forma pred
 Para actualizar o configurar de forma remota los Agents en máquinas virtuales de Linux o Windows, habilite Remote Configuration y establezca `remote_updates` en `true` en cada Agent de destino. Remote Configuration permite que el Agent reciba configuración de Datadog. El ajuste `remote_updates` habilita las actualizaciones remotas y los cambios de configuración del Agent.
 
 A partir de la versión 7.73.0 del Agent, `remote_updates` tiene como valor predeterminado `true`. En versiones anteriores compatibles, establézcalo explícitamente en `true`.
+
+Los Agents que informan a US1-FED o US2-FED, o que se ejecutan en modo FIPS, requieren la habilitación explícita de Remote Configuration. Establezca `remote_configuration.enabled` en `true` siguiendo los pasos a continuación. Habilitar `remote_updates` por sí solo no habilita Remote Configuration.
 
 1. Habilite Remote Configuration para su organización y [en la clave de API del Agent](#enable-remote-configuration-on-the-api-key).
 1. En el [archivo de configuración][16] del Agent, habilite los siguientes ajustes. `remote_updates` es un ajuste de nivel superior:
@@ -87,7 +101,7 @@ Deshabilite la clave de API de su elección en la página [API Keys][5]. Necesit
 
 ### A nivel de Agent {#at-the-agent-level}
 
-A partir de la versión 7.47.0 del Agent, `remote_configuration.enabled` se establece en `true` de forma predeterminada en el Agent. Esta configuración hace que el Agent solicite actualizaciones de configuración al sitio de Datadog.
+A partir de la versión 7.47.0 de Agent, Remote Configuration está habilitada de forma predeterminada, excepto para los Agents que informan a GovCloud o se ejecutan en modo FIPS. Para esos Agents, habilítela explícitamente como se describe en [Habilitar la administración remota de Agent](#enable-remote-agent-management).
 
 Si no desea que su Agent envíe solicitudes de configuración a Datadog, puede establecer `remote_configuration.enabled` en `false` en el Agent.
 

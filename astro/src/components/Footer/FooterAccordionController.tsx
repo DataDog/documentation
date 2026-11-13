@@ -11,7 +11,7 @@
  */
 import { useEffect } from "preact/hooks";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 import { belowTabletMediaQuery } from "@lib/cssUtils/breakpoints";
@@ -42,15 +42,13 @@ export default function FooterAccordionController({
   openCategoryHeaderClass,
 }: Props) {
   useEffect(() => {
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) {
-      return;
-    }
-    return attachAccordion(loaded.nav, {
-      openClass,
-      openCategoryClass,
-      openHeaderClass,
-      openCategoryHeaderClass,
+    return withExternalContext(externalContext, (loaded) => {
+      return attachAccordion(loaded.nav, {
+        openClass,
+        openCategoryClass,
+        openHeaderClass,
+        openCategoryHeaderClass,
+      });
     });
   }, []);
 

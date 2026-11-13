@@ -209,3 +209,25 @@ describe("viewsBuilder curl examples", () => {
     });
   });
 });
+
+describe("endpoint URLs for per-region hosts", () => {
+  // The on-call operations list one host per region in their `site` enum,
+  // and each region's URL is built from its own host.
+  it("uses each region's on-call host", async () => {
+    const view = await getOperationView(
+      "rendering-shapes",
+      "resolve-on-call-page",
+    );
+    const urlsByRegion = view?.variants[0]?.regionUrls ?? {};
+
+    expect(urlsByRegion.us).toBe(
+      "https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+    );
+    expect(urlsByRegion.us3).toBe(
+      "https://teal.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+    );
+    expect(urlsByRegion.eu).toBe(
+      "https://beige.oncall.datadoghq.eu/api/v2/on-call/pages/{page_id}/resolve",
+    );
+  });
+});

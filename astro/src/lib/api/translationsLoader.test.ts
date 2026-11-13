@@ -1,13 +1,9 @@
 /**
- * Smoke tests for the translation overlay loader. These exercise the real
- * overlay files rather than fixtures so the test catches schema drift if a
- * future overlay update changes the expected shape.
- *
- * Because that data is live, the live-data assertions check *shape* — a key
- * resolves, and resolves to genuinely translated text — never an exact phrase.
- * Upstream re-translates frequently (a translation drop rewrote the v1
- * `ListAPIKeys` summary), and pinning a string here only breaks the build for
- * a copy edit that is not this loader's concern.
+ * Tests for the translation overlay loader. These run against the frozen
+ * overlays in `tests/fixtures/api/{v1,v2}/translate_*.json` (wired by
+ * `vitest.unit.config.ts`), so exact strings are safe to pin. The check that
+ * the live overlays still load lives in
+ * `tests/integration/translationsLoader.live.test.ts`.
  */
 
 import { describe, it, expect } from "vitest";
@@ -17,12 +13,6 @@ import {
   translateAction,
 } from "./translationsLoader";
 
-/**
- * Hiragana, katakana, or CJK ideographs. Presence of any proves the overlay
- * returned translated text rather than falling through to the English spec.
- */
-const JAPANESE_SCRIPT = /[\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/;
-
 describe("translation overlays", () => {
   it("returns an empty bundle for English", () => {
     const overlay = getTranslationOverlay("v1", "en");
@@ -30,18 +20,36 @@ describe("translation overlays", () => {
     expect(Object.keys(overlay.actions).length).toBe(0);
   });
 
+  it("reads the fixture overlays, not the live ones", () => {
+    // Guards against the redirect in `vitest.unit.config.ts` going missing,
+    // which would silently put every assertion below back on live data.
+    const overlay = getTranslationOverlay("v1", "ja");
+    expect(Object.keys(overlay.tags)).toEqual([
+      "aws-integration",
+      "dashboards",
+    ]);
+    expect(Object.keys(overlay.actions)).toEqual(["ListDashboards"]);
+  });
+
   it("loads the Japanese tag overlay for v1", () => {
     const overlay = getTranslationOverlay("v1", "ja");
-    const name = overlay.tags["aws-integration"]?.name;
-    expect(name).toEqual(expect.any(String));
-    expect(name).toMatch(JAPANESE_SCRIPT);
+    expect(overlay.tags["aws-integration"]?.name).toBe(
+      "AWS インテグレーション",
+    );
   });
 
   it("loads the Japanese action overlay for v1", () => {
     const overlay = getTranslationOverlay("v1", "ja");
-    const op = overlay.actions["ListAPIKeys"];
-    expect(op?.summary).toEqual(expect.any(String));
-    expect(op?.summary).toMatch(JAPANESE_SCRIPT);
+    expect(overlay.actions["ListDashboards"]?.summary).toBe(
+      "すべてのダッシュボードを取得する",
+    );
+  });
+
+  it("keeps each version's overlay separate", () => {
+    expect(getTranslationOverlay("v2", "fr").tags["incidents"]?.name).toBe(
+      "Incidents",
+    );
+    expect(getTranslationOverlay("v2", "ja").tags).toEqual({});
   });
 
   // `zz` is reserved for private use in ISO 3166 and is never a real content

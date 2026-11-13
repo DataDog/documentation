@@ -48,10 +48,11 @@ Use agentless delivery when the serverless runtime can make outbound HTTPS reque
 2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][7] or [Cloud Run containers][8] for examples. For .NET, load the tracer with [automatic instrumentation][12].
 3. Configure the API key, Datadog site, and environment in the serverless application:
 
-   {{< code-block lang="bash" >}}
+   ```bash
    DD_API_KEY=<DATADOG_API_KEY>
    DD_SITE={{< region-param key="dd_site" code="true" >}}
-   DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
+   DD_ENV=<YOUR_ENVIRONMENT>
+   ```
 
 4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], [Python][9], [.NET][13], or [Ruby][14] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
 5. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
