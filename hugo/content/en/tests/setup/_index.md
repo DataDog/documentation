@@ -5,6 +5,14 @@ aliases:
 - /continuous_integration/tests/setup/
 ---
 
+{{< skill-callout
+    title="Set up Test Optimization with an agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided Test Optimization setup."
+    action_name="copy_dd_orchestrator_test_optimization_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, set up Datadog Test Optimization for this project
+{{< /skill-callout >}}
+
 For information about configuration options for [Test Optimization][1], choose your language:
 
 {{< card-grid card_width="75px" >}}

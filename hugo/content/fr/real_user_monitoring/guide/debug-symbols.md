@@ -26,8 +26,8 @@ Utilisez la [page Symboles de débogage RUM][1] pour voir si des symboles de dé
 S'il n'y a pas de symboles de débogage pour votre application, [téléchargez-les][2].
 
 <div class="alert alert-danger">
-Assurez-vous que la taille de chaque symbole de débogage ne dépasse pas la limite de **500 Mo**, sinon le téléchargement sera rejeté.
-Pour les dSYM iOS, des fichiers individuels allant jusqu'à **2 Go** sont pris en charge. 
+Assurez-vous que la taille de chaque symbole de débogage ne dépasse pas la limite de <strong>500 Mo</strong>, sinon le téléversement sera rejeté.
+Pour les dSYM iOS, les fichiers individuels allant jusqu'à <strong>2 Go</strong> sont pris en charge. 
 </div>
 
 ### Les tags des symboles de débogage ne correspondent pas {#debug-symbol-tags-do-not-match}

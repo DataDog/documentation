@@ -2,41 +2,47 @@
 algolia:
   tags:
   - airgap
-  - con airgap
+  - airgapped
   - air gap
-  - con air gap
+  - air gapped
   - air-gap
-  - con air-gap
+  - air-gapped
 aliases:
 - /es/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
+description: Instale el Datadog Agent en servidores con acceso restringido a internet
+  utilizando métodos alternativos, incluyendo la configuración de proxy y paquetes
+  sin conexión.
 further_reading:
 - link: /agent/
   tag: Documentación
-  text: Más información sobre el Datadog Agent
+  text: Obtenga más información sobre el Datadog Agent
 - link: /agent/configuration/proxy/
   tag: Documentación
-  text: Más información sobre el proxy
-title: Instalar el Agent en un servidor con conectividad limitada a Internet
+  text: Obtenga más información sobre el Proxy
+title: Instalación del Agent en un servidor con conectividad a internet limitada
 ---
-
-El comando de instalación de una línea proporcionado en las [instrucciones de instalación del Agent][1] requiere acceso HTTPS saliente a distintos endpoints para funcionar correctamente y es posible que no funcione con servidores que tengan acceso limitado a Internet. Concretamente, nos referimos a estos:
+El comando de instalación de una sola línea proporcionado en las [instrucciones de instalación del Agent][1] requiere acceso HTTPS de salida a algunos endpoints diferentes para funcionar correctamente y podría no funcionar con servidores que tienen acceso limitado a internet. Específicamente, estos son:
 
 * Para la instalación en sistemas Debian/Ubuntu:
-  * https://keys.datadoghq.com - Almacenamiento de claves de firma pública de Datadog.
+  * https://keys.datadoghq.com - Almacenamiento de claves públicas de firma de Datadog.
   * https://apt.datadoghq.com - Repositorio de paquetes APT de Datadog.
 * Para la instalación en sistemas basados en RedHat y SUSE:
-  * https://keys.datadoghq.com - Almacenamiento de claves de firma pública de Datadog.
+  * https://keys.datadoghq.com - Almacenamiento de claves públicas de firma de Datadog.
   * https://yum.datadoghq.com - Repositorio de paquetes RPM de Datadog.
+* Para la instalación en sistemas AIX:
+  * https://dd-agent-aix.s3.amazonaws.com - Repositorio de paquetes AIX de Datadog.
 
-Para servidores sin acceso directo a Internet, el Agent se puede configurar para enrutarse a través de un proxy; consulta [Configuración del proxy del Agent][2]. En el caso de servidores con conectividad a Internet de salida limitada, el Agent se puede instalar mediante el paquete correspondiente, en función del sistema operativo del servidor. Las [instrucciones de instalación del Agent][1] explican cómo utilizar los comandos de instalación de una línea paso a paso.
+Para servidores sin acceso directo a internet, el Agent puede configurarse para enrutar su tráfico a través de un proxy; consulte [Configuración del proxy del Agent][2]. Para servidores con conectividad a internet de salida limitada, el Agent puede instalarse utilizando el paquete correspondiente para el sistema operativo del servidor. Las [instrucciones de instalación del Agent][1] contienen instrucciones paso a paso debajo de los comandos de instalación de una sola línea.
 
-Si el sistema de destino no puede acceder directamente al repositorio de paquetes, descarga el paquete del repositorio utilizando otro servidor y, luego, transfiérelo al sistema de destino para instalarlo de forma local.
+Si el sistema de destino tiene bloqueado el acceso directo al repositorio de paquetes, descargue el paquete del repositorio utilizando otro servidor y luego transfiéralo al sistema de destino para una instalación local.
 
-Los paquetes RPM para el Agent 6 están disponibles en [https://yum.datadoghq.com/stable/6/][3], y para el Agent 7, en [https://yum.datadoghq.com/stable/7/][4]. Los paquetes DEB están disponibles en [https://apt.datadoghq.com/pool/d/da/][5].
+Los paquetes RPM para el Agent 6 están disponibles en [https://yum.datadoghq.com/stable/6/][3], para el Agent 7 en [https://yum.datadoghq.com/stable/7/][4], y los paquetes DEB están disponibles en [https://apt.datadoghq.com/pool/d/da/][5].
 
-**Nota**: El paquete agrupa todos los recursos necesarios para ejecutar el Agent y llevar a cabo los checks (con independencia de si la integración está habilitada o no). En cuanto a los requisitos, Python v2.7 o posteriores y sysstat son necesarios y otras dependencias son obligatorias en función de los checks que estén habilitados.
+**Nota**: El paquete incluye todos los recursos necesarios para ejecutar el Agent y las comprobaciones (independientemente de si la integración está habilitada o no). En cuanto a los requisitos estrictos, se requieren Python 2.7+ y sysstat; otras dependencias son obligatorias dependiendo de qué comprobaciones estén habilitadas.
 
-Una vez que paquete se ha transferido al sistema de destino, puede instalarse de forma local utilizando el comando gestor de paquetes apropiado. Para yum, el comando seguiría el patrón:
+Para sistemas AIX, el Agent 7 se distribuye como paquetes BFF, disponibles en [https://dd-agent-aix.s3.amazonaws.com/stable/][8] (por ejemplo, `datadog-agent-7-latest.aix.ppc64.bff`). El paquete BFF incluye el entorno de ejecución de Python integrado, OpenSSL y otras dependencias, por lo que no se requiere Python del sistema ni bibliotecas adicionales en el servidor de destino.
+
+Una vez que el paquete se haya transferido al sistema de destino, se puede instalar localmente utilizando el comando del administrador de paquetes apropiado. Para yum, el comando seguiría el patrón:
 
 ```bash
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
@@ -48,15 +54,21 @@ Para instalar un archivo deb en el directorio actual para distribuciones basadas
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-Una vez instalado, añade un archivo `datadog.yaml` copiando `datadog.yaml.example`. A continuación, actualiza `datadog.yaml` con la [clave de API][6] de tu organización. Esto se puede hacer mediante un solo comando:
+Para instalar un archivo BFF en el directorio actual para AIX:
+
+```bash
+sudo installp -acXYd datadog-agent-7-latest.aix.ppc64.bff datadog-agent
+```
+
+Una vez instalado, agregue un archivo `datadog.yaml` copiando `datadog.yaml.example`. Luego, actualice `datadog.yaml` con la [clave de API][6] de su organización. Esto se puede hacer con un solo comando:
 
 ```bash
 sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
 ```
 
-Por último, [inicia el Agent][7] con el comando indicado, según tu sistema.
+Luego, [inicie el Agent][7] usando el comando apropiado para su sistema.
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -67,3 +79,4 @@ Por último, [inicia el Agent][7] con el comando indicado, según tu sistema.
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /es/agent/configuration/agent-commands/#start-the-agent
+[8]: https://dd-agent-aix.s3.amazonaws.com/stable/

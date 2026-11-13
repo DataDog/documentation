@@ -1,4 +1,6 @@
 ---
+description: OpenTelemetry, Prometheus 또는 OpenMetrics를 사용하여 Micrometer에서 Datadog으로
+  애플리케이션 메트릭을 전송하십시오.
 further_reading:
 - link: https://docs.micrometer.io/micrometer/reference/implementations/otlp.html
   tag: 외부 사이트
@@ -8,32 +10,31 @@ further_reading:
   text: Micrometer Prometheus
 title: Micrometer로 메트릭 전송하기
 ---
+## 개요 {#overview}
 
-## 개요
+[Micrometer][1]은 메트릭에 액세스하여 해당 차원 전반에서 분석할 수 있도록 지원하는 벤더 중립적 인터페이스입니다. 메트릭을 제출하기 위한 추상화 계층으로 Java Spring Boot 애플리케이션과 함께 자주 사용됩니다.
 
-[Micrometer][1]는 벤더 중립형 인터페이스로, 이를 이용해 메트릭에 접근해 여러 차원 전반에서 메트릭을 분석할 수 있습니다. Java Spring Boot 애플리케이션과 함께 메트릭 전송용 추상화 계층으로 사용됩니다.
+Micrometer는 Datadog과 통합하는 다양한 방법을 제공합니다. 이 가이드에서는 Agent를 사용하여 Datadog으로 메트릭을 전송할 때 Datadog이 권장하는 옵션을 설명합니다.
 
-Micrometer는 Datadog과 통합하는 다양한 방법을 제공합니다. 이 가이드에서는 Agent를 사용해 메트릭을 Datadog으로 전송하는 Datadog 권장 옵션을 설명합니다.
+## OpenTelemetry {#opentelemetry}
 
-## OpenTelemetry
+Datadog Agent의 OpenTelemetry Protocol (OTLP) 수집 기능을 사용하면 Datadog Agent의 관측성 기능을 활용할 수 있습니다.
 
-Datadog Agent의 OpenTelemetry Protocol(OTLP) 수집 기능으로 Datadog Agent의 가시성을 활용할 수 있습니다.
-
-{{< whatsnext desc="다음 문서에서 설명한 설정을 참조하세요." >}}
-    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Datadog Agent로 OTLP 수집{{< /nextlink >}}
+{{< whatsnext desc="다음 문서에 설명된 구성을 참조하십시오:" >}}
+    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Agent의 OTLP 엔드포인트 설정{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Prometheus 및 OpenMetrics
+## Prometheus 및 OpenMetrics {#prometheus-and-openmetrics}
 
-Prometheus 또는 OpenMetrics 통합으로 애플리케이션 메트릭을 Datadog에 전송합니다. 
+Prometheus 또는 OpenMetrics Integrations를 사용하여 애플리케이션 메트릭을 Datadog으로 전송하십시오. 
 
-{{< whatsnext desc="다음 문서에서 설명한 설정을 참조하세요." >}}
+{{< whatsnext desc="다음 문서에 설명된 구성을 참조하십시오:" >}}
     {{< nextlink href="/integrations/guide/prometheus-host-collection/#overview" >}}호스트에서 Prometheus 및 OpenMetrics 메트릭 수집{{< /nextlink >}}
     {{< nextlink href="/containers/kubernetes/prometheus/?tab=kubernetesadv2" >}}Kubernetes Prometheus 및 OpenMetrics 메트릭 수집{{< /nextlink >}}
     {{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Docker Prometheus 및 OpenMetrics 메트릭 수집{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

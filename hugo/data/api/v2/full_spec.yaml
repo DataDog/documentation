@@ -325,6 +325,47 @@ components:
       schema:
         format: uuid
         type: string
+    AiGatewayRateLimitInstanceLimit:
+      description: Maximum number of rate limit counters to return.
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 50
+        format: int64
+        maximum: 500
+        minimum: 1
+        type: integer
+    AiGatewayRateLimitInstanceOffset:
+      description: Number of rate limit counters to skip.
+      in: query
+      name: offset
+      required: false
+      schema:
+        default: 0
+        format: int64
+        minimum: 0
+        type: integer
+    AiGatewayRateLimitInstanceSort:
+      description: Sort order for rate limit counters.
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: "#/components/schemas/AiGatewayRateLimitInstanceSort"
+    AiGatewayRateLimitInstanceSplitDim:
+      description: Keep only counters whose split dimension equals a value, written as `<dim>=<value>`, such as `split_dim=user_id=<uuid>&split_dim=model=gpt-4o`. Dimensions use the `split_dims` names `user_id`, `team_id`, `model`, `provider`, and `tag:<key>`. Repeat the parameter to filter on several dimensions; a counter must match all of them. Each dimension may appear once and must be a per-value dimension of the rate limit.
+      example:
+        - user_id=11111111-1111-1111-1111-111111111111
+      explode: true
+      in: query
+      name: split_dim
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
     AiGatewayRoutingRuleForceDelete:
       description: Delete referencing tiers and recursively delete parent rules left without tiers.
       in: query
@@ -1992,7 +2033,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
+        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `ai-gateway-route`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -6390,6 +6431,416 @@ components:
       type: string
       x-enum-varnames:
         - AGENT_HEALTH_ISSUES
+    AgentHealthIssueAttributes:
+      description: Attributes of an open Agent Health issue.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueData:
+      description: An open Agent Health issue.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueDataArray:
+      description: The open Agent Health issues on this page.
+      example:
+        - attributes:
+            category: configuration
+            description: The Agent configuration file contains an invalid value.
+            first_seen_at: "2026-11-01T10:00:00Z"
+            issue_name: Invalid Config
+            issue_type: invalid_config
+            resource_id: my-hostname
+            resource_kind: host
+            resource_type: host
+            severity: high
+            state: open
+            tags:
+              - env:prod
+            title: Invalid Agent configuration
+            updated_at: "2026-11-09T08:00:00Z"
+          id: invalid-config:4828e7d6c704c4a3
+          type: agent_health_issues
+      items:
+        $ref: "#/components/schemas/AgentHealthIssueData"
+      type: array
+    AgentHealthIssueDetailAttributes:
+      description: Attributes of an open Agent Health issue, including available remediation.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        remediation:
+          script:
+            content: "..."
+            filename: fix.sh
+            language: bash
+            language_version: "5"
+            requires_root: true
+          steps:
+            - order: 1
+              text: Open datadog.yaml
+          summary: Fix the invalid configuration value.
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        remediation:
+          $ref: "#/components/schemas/AgentHealthRemediation"
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueDetailData:
+      description: An open Agent Health issue with available remediation.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          remediation:
+            script:
+              content: "..."
+              filename: fix.sh
+              language: bash
+              language_version: "5"
+              requires_root: true
+            steps:
+              - order: 1
+                text: Open datadog.yaml
+            summary: Fix the invalid configuration value.
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueDetailAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueResourceType:
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
+    AgentHealthIssueResponse:
+      description: A response containing an open Agent Health issue and available remediation.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDetailData"
+      required:
+        - data
+      type: object
+    AgentHealthIssueTags:
+      description: Tags associated with the issue. Omitted when empty.
+      example:
+        - env:prod
+      items:
+        description: A tag associated with the issue.
+        type: string
+      type: array
+    AgentHealthIssuesResponse:
+      description: A paginated response containing open Agent Health issues.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDataArray"
+        meta:
+          $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    AgentHealthIssuesResponseMeta:
+      description: Pagination metadata for the matching Agent Health issues.
+      example:
+        page:
+          total_count: 3
+          total_filtered_count: 1
+      properties:
+        page:
+          $ref: "#/components/schemas/AgentHealthIssuesResponsePage"
+      required:
+        - page
+      type: object
+    AgentHealthIssuesResponsePage:
+      description: Pagination counts for the Agent Health issues.
+      example:
+        total_count: 3
+        total_filtered_count: 1
+      properties:
+        total_count:
+          description: The total number of open issues in the organization, ignoring filters.
+          example: 3
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of open issues matching the filters, across all pages.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_count
+        - total_filtered_count
+      type: object
+    AgentHealthRemediation:
+      description: Remediation for the issue. Omitted when no remediation is available.
+      example:
+        script:
+          content: "..."
+          filename: fix.sh
+          language: bash
+          language_version: "5"
+          requires_root: true
+        steps:
+          - order: 1
+            text: Open datadog.yaml
+        summary: Fix the invalid configuration value.
+      properties:
+        script:
+          $ref: "#/components/schemas/AgentHealthRemediationScript"
+        steps:
+          $ref: "#/components/schemas/AgentHealthRemediationSteps"
+        summary:
+          description: A summary of how to remediate the issue.
+          example: Fix the invalid configuration value.
+          type: string
+      type: object
+    AgentHealthRemediationScript:
+      description: A script that can be used to remediate the issue.
+      properties:
+        content:
+          description: The content of the script.
+          example: "..."
+          type: string
+        filename:
+          description: The filename of the script.
+          example: fix.sh
+          type: string
+        language:
+          description: The language of the script.
+          example: bash
+          type: string
+        language_version:
+          description: The language version used by the script.
+          example: "5"
+          type: string
+        requires_root:
+          description: Whether the script requires root privileges.
+          example: true
+          type: boolean
+      type: object
+    AgentHealthRemediationStep:
+      description: A step to remediate the issue.
+      properties:
+        order:
+          description: The order in which to perform the step.
+          example: 1
+          format: int64
+          type: integer
+        text:
+          description: The instructions for the step.
+          example: Open datadog.yaml
+          type: string
+      type: object
+    AgentHealthRemediationSteps:
+      description: Steps to remediate the issue.
+      example:
+        - order: 1
+          text: Open datadog.yaml
+      items:
+        $ref: "#/components/schemas/AgentHealthRemediationStep"
+      type: array
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -9333,8 +9784,13 @@ components:
         routing_rules:
           items:
             $ref: "#/components/schemas/AiGatewayModelGroupRoutingRule"
-            description: Routing rule in the group.
+            description: Viewable routing rule in the group. Hidden route identities are omitted.
           type: array
+        routing_rules_restricted:
+          description: Whether some saved routes are hidden from the caller. Omit routing_rule_slugs to preserve all memberships; replacing the visible selection also preserves saved hidden memberships.
+          example: true
+          readOnly: true
+          type: boolean
         updated_at:
           description: Time when the resource was last updated.
           example: "2026-08-24T12:00:00Z"
@@ -10369,18 +10825,19 @@ components:
         - XHIGH
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
-      default: configured
       description: >-
-        How a tier orders its targets. Omitted or null defaults to configured, which preserves target order. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       nullable: true
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayPolicyAttributes:
       description: Routing policy configuration.
       properties:
@@ -10899,6 +11356,14 @@ components:
     AiGatewayRateLimitAttributes:
       description: Attributes of an AI Gateway rate limit.
       properties:
+        cost_microcents_per_minute:
+          description: Maximum priced spend per rolling minute, in microcents of 1e-8 USD each, shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit cost.
+          example: 100000000
+          format: int64
+          maximum: 10000000000000
+          minimum: 1
+          nullable: true
+          type: integer
         created_at:
           description: Creation timestamp.
           example: "2026-09-01T00:00:00Z"
@@ -10913,13 +11378,17 @@ components:
           example: true
           type: boolean
         input_tokens_per_minute:
-          description: Maximum input tokens per rolling minute shared by all matching traffic. Null when this rule does not limit input tokens.
+          description: Maximum input tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit input tokens.
           example: 500000
           format: int64
           maximum: 100000000000
           minimum: 1
           nullable: true
           type: integer
+        is_template:
+          description: Whether the selector gives each matching value its own allowance, that is, whether it has at least one per_value entry. Returned even when scope_restricted hides the selector.
+          example: false
+          type: boolean
         mode:
           $ref: "#/components/schemas/AiGatewayRateLimitMode"
         monitor_id:
@@ -10933,7 +11402,7 @@ components:
           example: Default rate limit
           type: string
         output_tokens_per_minute:
-          description: Maximum output tokens per rolling minute shared by all matching traffic. Null when this rule does not limit output tokens.
+          description: Maximum output tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit output tokens.
           example: 200000
           format: int64
           maximum: 100000000000
@@ -10941,7 +11410,7 @@ components:
           nullable: true
           type: integer
         requests_per_minute:
-          description: Maximum requests per rolling minute shared by all matching traffic. Null when this rule does not limit requests.
+          description: Maximum requests per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit requests.
           example: 1000
           format: int64
           maximum: 10000000
@@ -10957,6 +11426,8 @@ components:
           description: Whether provider or model scope metadata was withheld. Omit unchanged scope fields on an unrelated update to preserve their saved values.
           example: false
           type: boolean
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -10970,6 +11441,13 @@ components:
           format: uuid
           nullable: true
           type: string
+        template_split_dims:
+          description: Dimensions of the selector's per_value entries, such as user_id or tag:env, each matching value of which gets its own allowance. Empty unless is_template is true. Returned even when scope_restricted hides the selector.
+          example: []
+          items:
+            description: A selector dimension, such as user_id, team_id, model, provider, or tag:<key>.
+            type: string
+          type: array
         updated_at:
           description: Last modification timestamp.
           example: "2026-09-15T14:30:00Z"
@@ -10989,6 +11467,8 @@ components:
         - scope_restricted
         - name
         - tags
+        - is_template
+        - template_split_dims
         - mode
         - enabled
         - revision
@@ -11000,6 +11480,14 @@ components:
     AiGatewayRateLimitCreateAttributes:
       description: Attributes used to create an AI Gateway rate limit.
       properties:
+        cost_microcents_per_minute:
+          description: Maximum priced spend per rolling minute, in microcents of 1e-8 USD each. At most 10000000000000, that is $100,000. In `ENFORCE` mode, requests to a model with no pricing are rejected, because their cost can't be counted.
+          example: 100000000
+          format: int64
+          maximum: 10000000000000
+          minimum: 1
+          nullable: true
+          type: integer
         input_tokens_per_minute:
           description: Maximum input tokens per rolling minute.
           format: int64
@@ -11021,13 +11509,15 @@ components:
           nullable: true
           type: integer
         requests_per_minute:
-          description: Maximum requests per rolling minute. At least one of `requests_per_minute`, `input_tokens_per_minute`, and `output_tokens_per_minute` is required.
+          description: Maximum requests per rolling minute. At least one of `requests_per_minute`, `input_tokens_per_minute`, `output_tokens_per_minute`, and `cost_microcents_per_minute` is required.
           example: 600
           format: int64
           maximum: 10000000
           minimum: 1
           nullable: true
           type: integer
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -11065,6 +11555,258 @@ components:
       required:
         - data
       type: object
+    AiGatewayRateLimitInstanceAttributes:
+      description: One counter of a template rate limit and its live usage.
+      properties:
+        cost_microcents:
+          description: Priced spend, in microcents, counted in the rolling one-minute window. 0 when the rate limit doesn't limit cost.
+          example: 25000000
+          format: int64
+          type: integer
+        cost_microcents_per_minute:
+          description: The rate limit's per-counter spend limit, in microcents. Null when it doesn't limit cost.
+          example: 100000000
+          format: int64
+          nullable: true
+          type: integer
+        first_seen:
+          description: When the gateway first recorded a request for this counter.
+          example: "2026-10-28T10:00:00Z"
+          format: date-time
+          type: string
+        input_tokens:
+          description: Input tokens counted in the rolling one-minute window.
+          example: 15000
+          format: int64
+          type: integer
+        input_tokens_per_minute:
+          description: The rate limit's per-counter input token limit. Null when it doesn't limit input tokens.
+          example: 100000
+          format: int64
+          nullable: true
+          type: integer
+        instance_key:
+          description: Opaque canonical key identifying the counter.
+          example: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        last_seen:
+          description: When the gateway last saw this counter hot, that is near or at a limit or limiting; up to a few minutes behind live traffic.
+          example: "2026-10-28T10:05:00Z"
+          format: date-time
+          type: string
+        limited_requests:
+          description: Requests this counter rejected in the last 15 minutes (ENFORCE).
+          example: 0
+          format: int64
+          type: integer
+        output_tokens:
+          description: Output tokens counted in the rolling one-minute window.
+          example: 4000
+          format: int64
+          type: integer
+        output_tokens_per_minute:
+          description: The rate limit's per-counter output token limit. Null when it doesn't limit output tokens.
+          example: 20000
+          format: int64
+          nullable: true
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        requests:
+          description: Requests counted in the rolling one-minute window.
+          example: 42
+          format: int64
+          type: integer
+        requests_per_minute:
+          description: The rate limit's per-counter request limit. Null when it doesn't limit requests.
+          example: 60
+          format: int64
+          nullable: true
+          type: integer
+        split_dims:
+          additionalProperties:
+            type: string
+          description: The counter's value for each per-value dimension. user_id and team_id values are raw UUIDs.
+          example:
+            user_id: 11111111-1111-1111-1111-111111111111
+          type: object
+        usage_known:
+          description: False when this counter's usage wasn't read because the request already read the most counters it may. Its usage then reads as zero.
+          example: true
+          type: boolean
+        utilization:
+          description: The fullest of the rate limit's limits in the rolling window, as a fraction. 1 or more means the counter is at its limit.
+          example: 0.7
+          format: double
+          type: number
+        would_limit_requests:
+          description: Requests this counter would have rejected in the last 15 minutes (ALERT).
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_key
+        - split_dims
+        - first_seen
+        - last_seen
+        - requests
+        - input_tokens
+        - output_tokens
+        - limited_requests
+        - would_limit_requests
+        - utilization
+        - usage_known
+      type: object
+    AiGatewayRateLimitInstanceListResponse:
+      description: Response containing counters of a template rate limit.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitInstanceResource"
+            description: One counter of a template rate limit.
+          type: array
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstanceResource:
+      description: One counter of a template rate limit.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceAttributes"
+        id:
+          description: Counter ID, the rate limit UUID and instance key joined by `|`.
+          example: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstanceSort:
+      default: utilization_desc
+      description: Sort order for rate limit counters.
+      enum:
+        - utilization_desc
+        - last_seen_desc
+        - key_asc
+      example: utilization_desc
+      type: string
+      x-enum-varnames:
+        - UTILIZATION_DESC
+        - LAST_SEEN_DESC
+        - KEY_ASC
+    AiGatewayRateLimitInstanceType:
+      description: AI Gateway rate limit counter resource type.
+      enum:
+        - rate-limit-instances
+      example: rate-limit-instances
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES
+    AiGatewayRateLimitInstancesSummaryAttributes:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        instance_count:
+          description: Number of counters that were near or at a limit, or limited a request, in the last hour. Counters with room to spare aren't recorded.
+          example: 14
+          format: int64
+          type: integer
+        limited_requests:
+          description: Requests the counters rejected in the last 15 minutes (ENFORCE), totaled over the counters whose usage was read.
+          example: 25
+          format: int64
+          type: integer
+        limiting_count:
+          description: Counters that limited, or would have limited, a request in the last 15 minutes.
+          example: 2
+          format: int64
+          type: integer
+        max_utilization:
+          description: Utilization of the fullest counter.
+          example: 1.2
+          format: double
+          type: number
+        near_limit_count:
+          description: Counters at 80% or more of a limit in the rolling window.
+          example: 3
+          format: int64
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        scope_restricted:
+          description: True when the caller can't see the template's selector because it lists a provider or model the caller can't access. The counters are then hidden, and every count is zero.
+          example: false
+          type: boolean
+        truncated:
+          description: True when some recently active counters' usage wasn't read, so the counts may be low.
+          example: false
+          type: boolean
+        would_limit_requests:
+          description: Requests the counters would have rejected in the last 15 minutes (ALERT), totaled over the counters whose usage was read.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_count
+        - near_limit_count
+        - limiting_count
+        - max_utilization
+        - truncated
+      type: object
+    AiGatewayRateLimitInstancesSummaryListResponse:
+      description: Response containing the counter summary of every template rate limit in the organization.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResource"
+            description: The aggregate of one template rate limit's counters.
+          type: array
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstancesSummaryResource:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryAttributes"
+        id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstancesSummaryResponse:
+      description: Response containing the aggregate of a template rate limit's counters.
+      properties:
+        data:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResource"
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstancesSummaryType:
+      description: AI Gateway rate limit counter summary resource type.
+      enum:
+        - rate-limit-instances-summary
+      example: rate-limit-instances-summary
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES_SUMMARY
     AiGatewayRateLimitListResponse:
       description: Response containing AI Gateway rate limits.
       properties:
@@ -11111,6 +11853,36 @@ components:
       required:
         - data
       type: object
+    AiGatewayRateLimitSelector:
+      description: Dimension rules for a template rate limit, which gives each matched user, Team, or value its own allowance with the rule's limits. Can't be combined with user_id, team_id, or tags, and can't be changed after creation. Omit for a rule with one shared allowance.
+      items:
+        $ref: "#/components/schemas/AiGatewayRateLimitSelectorEntry"
+      nullable: true
+      type: array
+    AiGatewayRateLimitSelectorEntry:
+      description: One dimension rule in a template rate limit selector.
+      properties:
+        dim:
+          description: "Dimension to match: user_id, team_id, model, provider, or tag:<key>. Reserved metadata tag keys are rejected."
+          example: user_id
+          type: string
+        per_value:
+          default: false
+          description: Give each matched value its own allowance when true. Otherwise, matched values share the allowance within the other separated dimensions.
+          example: true
+          type: boolean
+        values:
+          description: Allowed dimension values. Omit to match any value; with per_value true, a request must still carry the dimension to match. An explicit list must contain at least one value. Listed team_id values must be existing Teams without open membership.
+          example:
+            - 11111111-1111-1111-1111-111111111111
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - dim
+        - per_value
+      type: object
     AiGatewayRateLimitType:
       description: AI Gateway rate limit resource type.
       enum:
@@ -11122,6 +11894,13 @@ components:
     AiGatewayRateLimitUpdateAttributes:
       description: Attributes used to update an AI Gateway rate limit. Only sent fields are changed.
       properties:
+        cost_microcents_per_minute:
+          description: Spend limit in microcents per rolling minute. Set to 0 to remove the cost limit. Null is ignored. At least one limit must remain.
+          format: int64
+          maximum: 10000000000000
+          minimum: 0
+          nullable: true
+          type: integer
         enabled:
           description: Whether this rate limit is active.
           type: boolean
@@ -11194,6 +11973,11 @@ components:
     AiGatewayRateLimitUsageAttributes:
       description: Live consumption of one AI Gateway rate limit.
       properties:
+        cost_microcents:
+          description: Priced spend, in microcents, counted in the rolling one-minute window. Only rules with a cost limit count it, so it is 0 for other rules and for the untracked and total entries.
+          example: 25000000
+          format: int64
+          type: integer
         input_tokens:
           description: Input tokens counted in the rolling one-minute window.
           example: 45000
@@ -11271,10 +12055,61 @@ components:
       required:
         - restricted_details
       type: object
+    AiGatewayRoutingClassifier:
+      description: Saved classified-tier settings. Provider and model are empty when the caller cannot view the provider.
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence.
+          example: 0.5
+          format: double
+          type: number
+        context:
+          description: Traffic context for the classifier.
+          example: Requests come from engineers.
+          type: string
+        model:
+          description: Viewable decision model, or an empty string.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Viewable decision-model provider slug, or an empty string.
+          example: openai
+          type: string
+      required:
+        - provider
+        - model
+        - confidence_threshold
+      type: object
+    AiGatewayRoutingClassifierRequest:
+      description: Decision model and settings for a classified tier. Omission preserves the saved classifier; null clears it. Newly selected models require provider View.
+      nullable: true
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence. Omission preserves a saved value; new classifiers and explicit null default to 0.5.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+        context:
+          description: Traffic context for the classifier. Omission preserves saved context.
+          example: Requests come from engineers.
+          maxLength: 2000
+          type: string
+        model:
+          description: Decision model on the provider. Omit together with provider to preserve the saved selection.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
+          example: openai
+          type: string
+      type: object
     AiGatewayRoutingReasoningLevel:
       description: >-
-        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. Omitted or null clears an override on full replacement. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request or the destination cannot
-        otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
+        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. On update, omission preserves a saved target override; null explicitly clears it. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request
+        or the destination cannot otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
       enum:
         - none
         - minimal
@@ -11303,7 +12138,7 @@ components:
           format: date-time
           type: string
         route_id:
-          description: Stable numeric route identifier used by scoped policies.
+          description: Stable numeric route identifier used by scoped policies and `ai-gateway-route` restriction policies.
           example: 123
           format: int64
           type: integer
@@ -11319,6 +12154,7 @@ components:
           format: date-time
           type: string
       required:
+        - route_id
         - tiers
         - created_at
         - updated_at
@@ -11373,16 +12209,28 @@ components:
         - data
       type: object
     AiGatewayRoutingRuleReplaceAttributes:
-      description: Attributes used to replace an AI Gateway routing rule.
+      description: Partial route update. Omit tiers to preserve the entire graph, including hidden selections. Saved target IDs retain omitted settings. Replacing tiers must explicitly retain or remove every hidden occurrence.
       properties:
+        expected_updated_at:
+          description: Saved route revision. A mismatched value returns 409 without changes.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        removed_target_ids:
+          description: Parent-local saved occurrence IDs explicitly removed from the submitted tiers. IDs must be distinct, belong to this route, and not also be retained.
+          items:
+            example: 901
+            format: int64
+            minimum: 1
+            type: integer
+          type: array
+          uniqueItems: true
         tiers:
           items:
             $ref: "#/components/schemas/AiGatewayRoutingRuleTierRequest"
             description: Routing fallback tier.
           minItems: 1
           type: array
-      required:
-        - tiers
       type: object
     AiGatewayRoutingRuleReplaceData:
       description: Data used to replace an AI Gateway routing rule.
@@ -11435,6 +12283,10 @@ components:
     AiGatewayRoutingRuleTarget:
       description: Model target or reference to another routing rule.
       properties:
+        default:
+          description: Present and true for the default classified destination.
+          example: true
+          type: boolean
         id:
           description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
           example: 901
@@ -11457,8 +12309,12 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric, present only for non-default targets in classified tiers.
+          example: Short factual questions.
+          type: string
         slug:
-          description: Organization-unique resource slug.
+          description: Referenced route slug. Omitted when the caller lacks View; only the parent-local occurrence ID remains.
           example: coding-fallback
           type: string
         type:
@@ -11476,8 +12332,13 @@ components:
     AiGatewayRoutingRuleTargetRequest:
       description: Model target or reference to another routing rule used to create or replace a rule.
       properties:
+        default:
+          description: Whether this is the single default classified destination. Omission preserves a saved value; null clears it.
+          example: false
+          nullable: true
+          type: boolean
         id:
-          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
+          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale, foreign, duplicate, or destination-changing ID is rejected. Hidden route targets can be retained using only this parent-local ID and type.
           example: 901
           format: int64
           minimum: 1
@@ -11498,15 +12359,21 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          example: Short factual questions.
+          maxLength: 300
+          nullable: true
+          type: string
         slug:
-          description: Organization-unique routing rule slug. Allowed only in configured tiers.
+          description: Organization-unique routing rule slug. New references require route View. Omit to retain a saved target by its parent-local ID. Allowed only in configured tiers.
           example: coding-fallback
           type: string
         type:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTargetType"
         weight:
           description: >-
-            Relative weight in a weighted_affinity tier. Omitted or null defaults to 1. Weights need not total 100. Must be omitted or null in configured tiers.
+            Relative weight in a weighted_affinity tier. Omission preserves a saved target weight; new targets and explicit null default to 1. Weights need not total 100. Must be omitted or null in configured tiers.
           example: 70
           format: int64
           maximum: 10000
@@ -11529,6 +12396,8 @@ components:
     AiGatewayRoutingRuleTier:
       description: Routing fallback tier containing targets and their effective ordering.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifier"
         ordering:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTierOrdering"
         ordering_issue:
@@ -11548,11 +12417,13 @@ components:
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayRoutingRuleTierOrderingIssue:
       description: >-
         Stored tier ordering is inconsistent. mixed means targets have different supported orderings, and unknown means a target has an unsupported ordering. The tier is reported as configured without weights. Replace the rule to repair it. Omitted for consistent tiers. A forced deletion cannot rewrite a surviving tier with an unknown issue.
@@ -11568,6 +12439,8 @@ components:
     AiGatewayRoutingRuleTierRequest:
       description: Routing fallback tier used to create or replace a rule.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifierRequest"
         ordering:
           $ref: "#/components/schemas/AiGatewayNullableRoutingRuleTierOrdering"
         targets:
@@ -30110,6 +30983,15 @@ components:
           example: 12
           format: int64
           type: integer
+        flags:
+          additionalProperties:
+            $ref: "#/components/schemas/CoverageSummaryFlagStats"
+          description: |-
+            Coverage statistics broken down by flag. Each entry contains only coverage percentages.
+            Branch summaries include the flags of the latest covered commit, including coverage carried forward
+            to that commit. Pull request summaries include flags across all commits of the pull request.
+          nullable: true
+          type: object
         patch_coverage:
           description: Overall patch coverage percentage.
           example: 70.1
@@ -30166,6 +31048,22 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/CoverageSummaryType"
+      type: object
+    CoverageSummaryFlagStats:
+      description: Coverage statistics for a specific flag.
+      properties:
+        patch_coverage:
+          description: Patch coverage percentage for the flag.
+          example: 70.0
+          format: double
+          nullable: true
+          type: number
+        total_coverage:
+          description: Total coverage percentage for the flag.
+          example: 75.0
+          format: double
+          nullable: true
+          type: number
       type: object
     CoverageSummaryResponse:
       description: Response object containing code coverage summary.
@@ -32739,7 +33637,7 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             components:
               - name: API
                 position: 0
@@ -32758,10 +33656,10 @@ components:
                 position: 2
                 type: component
             domain_prefix: status-page-us1
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -32786,7 +33684,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         components:
           description: The components displayed on the status page.
@@ -32816,14 +33714,14 @@ components:
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -32837,7 +33735,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -34837,6 +35735,49 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFileUpdateAttributes:
+      description: Attributes of a Custom Costs file that can be updated.
+      properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: true
+          type: boolean
+      required:
+        - ai_provider
+      type: object
+    CustomCostsFileUpdateData:
+      description: Custom Costs file to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CustomCostsFileUpdateAttributes"
+        id:
+          description: ID of the Custom Costs file.
+          example: "00000000-0000-0000-0000-000000000007"
+          type: string
+        type:
+          $ref: "#/components/schemas/CustomCostsFileUpdateType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CustomCostsFileUpdateRequest:
+      description: Request for updating a Custom Costs file.
+      properties:
+        data:
+          $ref: "#/components/schemas/CustomCostsFileUpdateData"
+      required:
+        - data
+      type: object
+    CustomCostsFileUpdateType:
+      default: cost_metadata
+      description: Type of the Custom Costs file resource.
+      enum:
+        - cost_metadata
+      example: cost_metadata
+      type: string
+      x-enum-varnames:
+        - COST_METADATA
     CustomCostsFileUploadRequest:
       description: Request for uploading a Custom Costs file.
       items:
@@ -75631,12 +76572,14 @@ components:
         - to
       type: object
     IssuesSearchRequestDataAttributesOrderBy:
-      description: The attribute to sort the search results by.
+      description: |-
+        The attribute to sort the search results by, in descending order. Defaults to `TOTAL_COUNT`.
       enum:
         - TOTAL_COUNT
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
       example: "IMPACTED_SESSIONS"
       type: string
       x-enum-varnames:
@@ -75644,9 +76587,12 @@ components:
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
     IssuesSearchRequestDataAttributesPersona:
-      description: Persona for the search. Either track(s) or persona(s) must be specified.
-      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND"]
+      description: |-
+        Persona for the search. Either `track` or `persona` must be specified.
+        Ignored if `track` is specified.
+      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND", "AGENT"]
       example: "BACKEND"
       type: string
       x-enum-varnames:
@@ -75654,15 +76600,19 @@ components:
         - BROWSER
         - MOBILE
         - BACKEND
+        - AGENT
     IssuesSearchRequestDataAttributesTrack:
-      description: Track of the events to query. Either track(s) or persona(s) must be specified.
-      enum: ["trace", "logs", "rum"]
+      description: |-
+        Track of the events to query. Either `track` or `persona` must be specified.
+        If both are specified, `persona` is ignored.
+      enum: ["trace", "logs", "rum", "llmobs"]
       example: "trace"
       type: string
       x-enum-varnames:
         - TRACE
         - LOGS
         - RUM
+        - LLMOBS
     IssuesSearchRequestDataType:
       description: Type of the object.
       enum: ["search_request"]
@@ -75708,7 +76658,7 @@ components:
         impacted_sessions:
           description: |-
             Count of sessions impacted by the issue over the queried time window.
-            Returned for RUM, LLM Observability, browser, and mobile searches,
+            Returned for RUM and LLM Observability tracks, for browser, mobile, and agent personas,
             or when `issue.impacted_sessions` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 12
@@ -75717,7 +76667,7 @@ components:
         impacted_users:
           description: |-
             Count of users impacted by the issue over the queried time window.
-            Returned for RUM, browser, and mobile searches,
+            Returned for the RUM track, for browser and mobile personas,
             or when `issue.impacted_users` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 4
@@ -75876,6 +76826,10 @@ components:
     JSONAPIErrorItem:
       description: API error response body
       properties:
+        code:
+          description: An application-specific error code.
+          example: invalid_request
+          type: string
         detail:
           description: A human-readable explanation specific to this occurrence of the error.
           example: Missing required attribute in body
@@ -81811,6 +82765,15 @@ components:
           example: openai
           nullable: true
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -81850,6 +82813,7 @@ components:
         - evp_query
         - sampling_ratio
         - num_records
+        - min_cluster_size
         - hierarchy_depth
         - scope
         - created_at
@@ -81887,6 +82851,15 @@ components:
           example: openai
           nullable: true
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -81927,6 +82900,7 @@ components:
         - evp_query
         - sampling_ratio
         - num_records
+        - min_cluster_size
         - hierarchy_depth
         - scope
         - created_at
@@ -82039,6 +83013,15 @@ components:
           description: Integration provider for a bring-your-own-model configuration.
           example: openai
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers. Must be at least 2 and less than `num_records`. Required when creating a configuration.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -89216,8 +90199,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include or exclude percentile aggregations for distribution metrics.
-            Only present when the `metric_type` is `distribution`.
+            Whether percentile aggregations are enabled for a `distribution`, `exponential_histogram`,
+            or `explicit_histogram` metric.
           example: true
           type: boolean
         metric_type:
@@ -89248,8 +90231,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include/exclude percentiles for a distribution metric.
-            Defaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.
+            Include percentile aggregations for metric types `distribution`, `exponential_histogram`,
+            and `explicit_histogram`. Omit this field to keep the current setting.
           example: true
           type: boolean
         metric_type:
@@ -89311,12 +90294,14 @@ components:
         - EXPLICIT_HISTOGRAM
     MetricTagConfigurationMetricTypes:
       default: gauge
-      description: The metric's type.
+      description: The metric's type. Contact your Customer Success Manager for instructions on using native histogram types.
       enum:
         - gauge
         - count
         - rate
         - distribution
+        - exponential_histogram
+        - explicit_histogram
       example: count
       type: string
       x-enum-varnames:
@@ -89324,6 +90309,8 @@ components:
         - COUNT
         - RATE
         - DISTRIBUTION
+        - EXPONENTIAL_HISTOGRAM
+        - EXPLICIT_HISTOGRAM
     MetricTagConfigurationResponse:
       description: Response object which includes a single metric's tag configuration.
       properties:
@@ -89353,8 +90340,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include/exclude percentiles for a distribution metric.
-            Defaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.
+            Include percentile aggregations for metric types `distribution`, `exponential_histogram`,
+            and `explicit_histogram`. Omit this field to keep the current setting.
           example: true
           type: boolean
         tags:
@@ -106319,12 +107306,12 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             domain_prefix: status-page-us1-east
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1 East
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -106356,7 +107343,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         domain_prefix:
           description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
@@ -106364,14 +107351,14 @@ components:
           type: string
         email_header_image:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -106385,7 +107372,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -129410,6 +130397,7 @@ components:
         - application_security
         - api_security
         - workload_activity
+        - workload_hardening
       type: string
       x-enum-varnames:
         - LOG_DETECTION
@@ -129419,6 +130407,7 @@ components:
         - APPLICATION_SECURITY
         - API_SECURITY
         - WORKLOAD_ACTIVITY
+        - WORKLOAD_HARDENING
     SecurityMonitoringRuleTypeTest:
       description: The rule type.
       enum:
@@ -144679,10 +145668,13 @@ components:
         - modified_by
       type: object
     TagRuleCreateAttributes:
-      description: Attributes that can be supplied when creating a tag rule.
+      description: |-
+        Attributes that can be supplied when creating a tag rule. If `tag_value_patterns`
+        contains `*`, set `required` and `negated` to different values. If both are `false`,
+        the rule has no effect. If both are `true`, no value can satisfy the rule.
       properties:
         enabled:
-          description: Whether the rule is currently enforced. Defaults to `true` for newly created rules.
+          description: The API ignores this value on creation and always enables new rules. To disable a rule, use the "Update a tag rule" endpoint.
           example: true
           type: boolean
         name:
@@ -144701,26 +145693,35 @@ components:
           $ref: "#/components/schemas/TagRuleCreateType"
         scope:
           description: |-
-            The scope the rule applies within. Typically an environment, team, or
-            organization-level identifier used to limit where the rule is enforced.
-          example: "env"
+            The scope the rule applies within. For logs and spans, use a search query, such
+            as `env:prod`, or `*` to match all telemetry. For metrics, use a metric selector
+            with an optional tag filter, such as `system.cpu.*{env:prod}`. A metric wildcard
+            is allowed only once, at the end of the metric selector.
+          example: "env:prod"
           type: string
         source:
           $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: The tag key that the rule governs (for example, `service`).
+          description: |-
+            The tag key that the rule governs (for example, `service`). Allowed characters
+            are ASCII letters, digits, underscores, hyphens, periods, and slashes. The keys
+            `host` and `device` are not supported in any letter case.
           example: "service"
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: |-
-            One or more patterns that valid values for the tag key must match. At least one
-            pattern is required.
+            Between 1 and 30 non-empty patterns that valid values for the tag key must match.
+            Allowed characters are ASCII letters, digits, underscores, colons, hyphens,
+            periods, commas, slashes, and asterisks.
           example:
             - "api"
             - "web"
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
           minItems: 1
           type: array
       required:
@@ -144803,13 +145804,15 @@ components:
           $ref: "#/components/schemas/TagRuleScoreRelationship"
       type: object
     TagRuleResourceType:
-      description: JSON:API resource type for a tag rule.
+      description: JSON:API resource type for a tag rule. Requests accept `tag_rule` or `tag_policy`; responses use `tag_policy`.
       enum:
         - tag_rule
-      example: "tag_rule"
+        - tag_policy
+      example: "tag_policy"
       type: string
       x-enum-varnames:
         - TAG_RULE
+        - TAG_POLICY
     TagRuleResponse:
       description: A single tag rule.
       properties:
@@ -144890,13 +145893,15 @@ components:
         - id
       type: object
     TagRuleScoreResourceType:
-      description: JSON:API resource type for a tag rule compliance score.
+      description: JSON:API resource type for a tag rule compliance score. Responses use `tag_policy_score`.
       enum:
         - tag_rule_score
-      example: "tag_rule_score"
+        - tag_policy_score
+      example: "tag_policy_score"
       type: string
       x-enum-varnames:
         - TAG_RULE_SCORE
+        - TAG_POLICY_SCORE
     TagRuleScoreResponse:
       description: A tag rule compliance score.
       properties:
@@ -144925,6 +145930,7 @@ components:
       description: |-
         How the rule is enforced. `blocking` rejects telemetry that violates the rule.
         `surfacing` only highlights non-compliant telemetry without blocking it.
+        RUM supports only `surfacing` rules.
       enum:
         - blocking
         - surfacing
@@ -144936,7 +145942,9 @@ components:
     TagRuleUpdateAttributes:
       description: |-
         Mutable attributes of a tag rule. Each field is optional; omitting a field leaves its
-        current value unchanged. The `source` of a rule cannot be changed.
+        current value unchanged. The `source` of a rule cannot be changed. Tag keys, patterns,
+        and metrics scopes have the same constraints as on creation. If the effective
+        `tag_value_patterns` contains `*`, set `required` and `negated` to different values.
       properties:
         enabled:
           description: Whether the rule is currently enforced.
@@ -144957,12 +145965,16 @@ components:
           type: string
         tag_key:
           description: The tag key that the rule governs.
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: One or more patterns that valid values for the tag key must match.
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
+          minItems: 1
           type: array
       type: object
     TagRuleUpdateData:
@@ -156804,6 +157816,8 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_observability_catalog_read: Read Data Observability catalog resources and owners.
+            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
@@ -159215,6 +160229,265 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 1
+  /api/v2/agenthealth/issues:
+    get:
+      description: |-
+        List Agent Health issues across your organization. Only open issues are returned.
+        Returns `403` if you lack the `hosts_read` permission.
+
+        Results use a stable order: severity rank (`high`, `medium`, `low`, then other values),
+        then `first_seen_at` descending with missing timestamps last, then issue ID ascending.
+        Use `page[size]` and the zero-based `page[number]` to paginate. Invalid page values
+        return a `400` JSON:API error response. `meta.page.total_filtered_count` is the number
+        of issues matching the filters, and `meta.page.total_count` the number of open issues
+        in the organization.
+
+        Each filter accepts up to 50 comma-separated exact values of at most 256 characters
+        each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
+        is treated as absent.
+      operationId: ListAgentHealthIssues
+      parameters:
+        - description: The number of issues to return per page, from 1 to 100. Defaults to 25.
+          example: 25
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 25
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: The zero-based page number, from 0 to 1000000. Defaults to 0.
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            maximum: 1000000
+            minimum: 0
+            type: integer
+        - description: |-
+            Filter by a comma-separated list of exact `severity` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: high,medium
+          in: query
+          name: filter[severity]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `category` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: configuration
+          in: query
+          name: filter[category]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `issue_type` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: invalid_config
+          in: query
+          name: filter[issue_type]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_kind` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: host,deployment
+          in: query
+          name: filter[resource_kind]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_id` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: my-hostname
+          in: query
+          name: filter[resource_id]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: configuration
+                          description: The Agent configuration file contains an invalid value.
+                          first_seen_at: "2026-11-01T10:00:00Z"
+                          issue_name: Invalid Config
+                          issue_type: invalid_config
+                          resource_id: my-hostname
+                          resource_kind: host
+                          resource_type: host
+                          severity: high
+                          state: open
+                          tags:
+                            - env:prod
+                          title: Invalid Agent configuration
+                          updated_at: "2026-11-09T08:00:00Z"
+                        id: invalid-config:4828e7d6c704c4a3
+                        type: agent_health_issues
+                    meta:
+                      page:
+                        total_count: 3
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssuesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: List Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/issues/{issue_id}:
+    get:
+      description: |-
+        Get an Agent Health issue and its available remediation in your organization.
+        Only open issues are returned. The `remediation` attribute is omitted when
+        the issue has no remediation.
+
+        Returns `404` if the issue does not exist, is not open, belongs to another
+        organization, or you do not have access to its data. This response does not
+        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+      operationId: GetAgentHealthIssue
+      parameters:
+        - description: |-
+            The unique identifier of the issue. It can contain `:` and must be percent-encoded
+            by clients when included in the path.
+          example: invalid-config:4828e7d6c704c4a3
+          in: path
+          name: issue_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: configuration
+                        description: The Agent configuration file contains an invalid value.
+                        first_seen_at: "2026-11-01T10:00:00Z"
+                        issue_name: Invalid Config
+                        issue_type: invalid_config
+                        remediation:
+                          script:
+                            content: "..."
+                            filename: fix.sh
+                            language: bash
+                            language_version: "5"
+                            requires_root: true
+                          steps:
+                            - order: 1
+                              text: Open datadog.yaml
+                          summary: Fix the invalid configuration value.
+                        resource_id: my-hostname
+                        resource_kind: host
+                        resource_type: host
+                        severity: high
+                        state: open
+                        tags:
+                          - env:prod
+                        title: Invalid Agent configuration
+                        updated_at: "2026-11-09T08:00:00Z"
+                      id: invalid-config:4828e7d6c704c4a3
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssueResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: Get an Agent Health issue
+      tags:
+        - Agent Health
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -164304,7 +165577,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 48
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -164363,7 +165636,7 @@ paths:
       summary: List AI Gateway budget instance dimension values
       tags:
         - AI Gateway
-      x-menu-order: 47
+      x-menu-order: 49
       x-permission:
         operator: OR
         permissions:
@@ -164420,7 +165693,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 46
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
@@ -170791,8 +172064,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific branch in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoverageBranchSummary
       requestBody:
         content:
@@ -170857,8 +172130,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific commit in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
 
         The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).
       operationId: GetCodeCoverageCommitSummary
@@ -170997,8 +172270,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific pull request in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoveragePRSummary
       requestBody:
         content:
@@ -174221,6 +175494,73 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 32
+    patch:
+      description: >-
+        Mark whether a Custom Costs file holds AI provider costs. Datadog then recomputes the costs for the months that the file covers.
+      operationId: UpdateCustomCostsFile
+      parameters:
+        - $ref: "#/components/parameters/FileID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      ai_provider: true
+                    id: 00000000-0000-0000-0000-000000000007
+                    type: cost_metadata
+            schema:
+              $ref: "#/components/schemas/CustomCostsFileUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        billed_cost: 100.5
+                        billing_currency: USD
+                        charge_period:
+                          end: 1706745600000
+                          start: 1704067200000
+                        name: my_file.json
+                        provider_names:
+                          - my_provider
+                        status: ACTIVE
+                        uploaded_at: 1704067200000
+                      id: 00000000-0000-0000-0000-000000000007
+                      type: cost_metadata
+                    meta:
+                      version: "1.0"
+              schema:
+                $ref: "#/components/schemas/CustomCostsFileUploadResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update Custom Costs file
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 78
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/gcp_uc_config:
     get:
       description: List the Google Cloud Usage Cost configs.
@@ -178128,7 +179468,7 @@ paths:
       summary: Get the AI Gateway data capture configuration
       tags:
         - AI Gateway
-      x-menu-order: 49
+      x-menu-order: 51
       x-permission:
         operator: OR
         permissions:
@@ -178181,7 +179521,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 50
+      x-menu-order: 52
       x-permission:
         operator: OR
         permissions:
@@ -178228,7 +179568,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 51
+      x-menu-order: 53
       x-permission:
         operator: OR
         permissions:
@@ -178291,7 +179631,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 52
+      x-menu-order: 54
       x-permission:
         operator: OR
         permissions:
@@ -182505,7 +183845,9 @@ paths:
           - monitors_downtime
   /api/v2/error-tracking/issues/search:
     post:
-      description: Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.
+      description: |-
+        Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.
+        Returns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.
       operationId: SearchIssues
       parameters:
         - $ref: "#/components/parameters/SearchIssuesIncludeQueryParameter"
@@ -193894,7 +195236,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleSource"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -193940,8 +195282,8 @@ paths:
                           score:
                             data:
                               id: "123-v1-1779315066097-1779401466097"
-                              type: "tag_rule_score"
-                        type: "tag_rule"
+                              type: "tag_policy_score"
+                        type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -193949,7 +195291,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRulesListResponse"
           description: OK
@@ -194044,7 +195386,7 @@ paths:
                           - "web"
                         version: 1
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: Created
@@ -194094,7 +195436,8 @@ paths:
       description: |-
         Delete a tag rule. By default the rule is soft-deleted so it can be recovered later
         and so that historical score data remains queryable. Pass `hard_delete=true` to remove
-        the rule permanently.
+        the rule permanently. Deleting a `blocking` rule additionally requires the
+        `telemetry_rules_activate` permission.
       operationId: DeleteTagRule
       parameters:
         - description: The unique identifier of the tag rule to delete.
@@ -194176,7 +195519,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleInclude"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -194222,8 +195565,8 @@ paths:
                         score:
                           data:
                             id: "123-v1-1779315066097-1779401466097"
-                            type: "tag_rule_score"
-                      type: "tag_rule"
+                            type: "tag_policy_score"
+                      type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -194231,7 +195574,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -194282,6 +195625,9 @@ paths:
         Update one or more attributes of an existing tag rule. Only the fields supplied in the
         request body are modified; omitted fields retain their current values. The rule's
         `source` cannot be changed after creation.
+        Promoting a rule from `surfacing` to `blocking` additionally requires the
+        `telemetry_rules_activate` permission, and your organization must have access to
+        blocking rules. You can't promote RUM rules to `blocking`.
       operationId: UpdateTagRule
       parameters:
         - description: The unique identifier of the tag rule to update.
@@ -194332,7 +195678,7 @@ paths:
                           - "web"
                         version: 2
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -194393,7 +195739,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -194423,7 +195769,7 @@ paths:
                         ts_start: 1779315066097
                         version: 1
                       id: "123-v1-1779315066097-1779401466097"
-                      type: "tag_rule_score"
+                      type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleScoreResponse"
           description: OK
@@ -211369,6 +212715,7 @@ paths:
                             evp_query: "@ml_app:support-bot"
                             hierarchy_depth: 2
                             id: a7c8d9e0-1234-5678-9abc-def012345678
+                            min_cluster_size: 15
                             name: Support chatbot topics
                             num_records: 1000
                             sampling_ratio: 0.1
@@ -211429,6 +212776,7 @@ paths:
                     attributes:
                       evp_query: "@ml_app:support-bot"
                       hierarchy_depth: 2
+                      min_cluster_size: 15
                       name: Support chatbot topics
                       num_records: 1000
                       sampling_ratio: 0.1
@@ -211449,6 +212797,7 @@ paths:
                         created_at: "2024-01-15T10:30:00Z"
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
+                        min_cluster_size: 15
                         name: Support chatbot topics
                         num_records: 1000
                         sampling_ratio: 0.1
@@ -211518,6 +212867,7 @@ paths:
                         created_at: "2024-01-15T10:30:00Z"
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
+                        min_cluster_size: 15
                         name: Support chatbot topics
                         num_records: 1000
                         sampling_ratio: 0.1
@@ -218627,6 +219977,16 @@ paths:
                           - datacenter
                       id: http.endpoint.request
                       type: manage_tags
+                explicit_histogram:
+                  value:
+                    data:
+                      attributes:
+                        include_percentiles: true
+                        metric_type: explicit_histogram
+                        tags:
+                          - service
+                      id: example.request.duration
+                      type: manage_tags
               schema:
                 $ref: "#/components/schemas/MetricTagConfigurationResponse"
           description: Success
@@ -218663,8 +220023,8 @@ paths:
           - metrics_read
     patch:
       description: |-
-        Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations
-        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed
+        Update the tag configuration of a metric, percentile aggregations of a distribution or native histogram metric,
+        or custom aggregations of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true, the behavior changes
         from an allow-list to a deny-list, and tags in the defined list will not be queryable.
         Can only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires
         a tag configuration to be created first.
@@ -218741,8 +220101,8 @@ paths:
           - metric_tags_write
     post:
       description: |-
-        Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.
-        Optionally, include percentile aggregations on any distribution metric. By setting `exclude_tags_mode`
+        Define queryable tag keys for an existing count, gauge, rate, distribution, or native histogram metric.
+        Distribution and native histogram metrics support percentile aggregations. By setting `exclude_tags_mode`
         to true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are
         not queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`
         permission.
@@ -231352,7 +232712,8 @@ paths:
   /api/v2/providers/{id}:
     delete:
       description: >-
-        Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access. This also applies when force=true. Existing cascades remain and can affect policies the caller cannot edit. Delete a provider by ID. Providers used by routing rules return provider_in_use with HTTP 409 and the affected rules in error metadata. Retry with force=true to remove provider targets and delete rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Requires `ai_gateway_config_write` and provider View/Edit. Models and pricing inherit provider access. Every affected route and policy membership requires the corresponding Edit permission; force=true never bypasses authorization. Providers used by routing rules return provider_in_use with HTTP 409. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable; visible route entries contain id, slug, and editable. Hidden dependencies are omitted from every collection and reported only by restricted_dependencies. A blocked response changes no configuration; an authorized editor must first remove the blocking references. Retry with force=true to confirm an authorized cascade that removes provider targets and deletes rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue
+        fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
       operationId: DeleteAiGatewayProvider
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderID"
@@ -231365,7 +232726,31 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: provider_in_use
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: false
+                              id: 123
+                              slug: coding
+                          rules_to_update: []
+                        status: "409"
+                        title: Provider is used by routing rules
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -232242,6 +233627,7 @@ paths:
                           created_by: user@example.com
                           enabled: true
                           input_tokens_per_minute: 500000
+                          is_template: false
                           mode: ALERT
                           name: Default rate limit
                           output_tokens_per_minute: 200000
@@ -232249,6 +233635,7 @@ paths:
                           revision: 1
                           tags:
                             provider: openai
+                          template_split_dims: []
                           updated_at: "2026-09-15T14:30:00Z"
                           updated_by: user@example.com
                         id: 33333333-3333-3333-3333-333333333333
@@ -232275,7 +233662,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.
+      description: Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.
       operationId: CreateAiGatewayRateLimit
       requestBody:
         content:
@@ -232296,6 +233683,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -232303,6 +233691,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-01T00:00:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -232330,6 +233719,63 @@ paths:
         operator: OR
         permissions:
           - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/instances/summary:
+    get:
+      description: Aggregate the counters of every template rate limit in the organization in one call, with one summary per template in the order the rate limit list returns them. Each summary is the one the single-template counter summary endpoint returns without split_dim, including scope_restricted and truncated. Rate limits with one shared allowance are left out. Summaries are cached for up to 15 seconds.
+      operationId: ListAiGatewayRateLimitInstancesSummaries
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          instance_count: 14
+                          limited_requests: 25
+                          limiting_count: 2
+                          max_utilization: 1.2
+                          near_limit_count: 3
+                          rate_limit_id: 33333333-3333-3333-3333-333333333333
+                          scope_restricted: false
+                          truncated: false
+                          would_limit_requests: 0
+                        id: 33333333-3333-3333-3333-333333333333
+                        type: rate-limit-instances-summary
+                      - attributes:
+                          instance_count: 0
+                          limited_requests: 0
+                          limiting_count: 0
+                          max_utilization: 0
+                          near_limit_count: 0
+                          rate_limit_id: 44444444-4444-4444-4444-444444444444
+                          scope_restricted: true
+                          truncated: false
+                          would_limit_requests: 0
+                        id: 44444444-4444-4444-4444-444444444444
+                        type: rate-limit-instances-summary
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryListResponse"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: List AI Gateway rate limit counter summaries
+      tags:
+        - AI Gateway
+      x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -232437,6 +233883,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -232444,6 +233891,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -232472,7 +233920,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
-      description: Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
+      description: Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
       operationId: UpdateAiGatewayRateLimit
       parameters:
         - $ref: "#/components/parameters/AiGatewayRateLimitID"
@@ -232495,6 +233943,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -232502,6 +233951,7 @@ paths:
                         revision: 2
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -232531,6 +233981,120 @@ paths:
         operator: OR
         permissions:
           - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances:
+    get:
+      description: List the hot counters of a template rate limit, one per matched user, Team, or value, with their live usage. Only counters at 80% or more of a limit, or that limited or would have limited a request, in the last hour are listed. A counter appears within a few minutes of becoming hot. Usage is read for at most 200 counters per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.
+      operationId: ListAiGatewayRateLimitInstances
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSort"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceLimit"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceOffset"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          first_seen: "2026-10-28T10:00:00Z"
+                          input_tokens: 15000
+                          input_tokens_per_minute:
+                          instance_key: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                          last_seen: "2026-10-28T10:05:00Z"
+                          limited_requests: 0
+                          output_tokens: 4000
+                          output_tokens_per_minute:
+                          rate_limit_id: 33333333-3333-3333-3333-333333333333
+                          requests: 42
+                          requests_per_minute: 60
+                          split_dims:
+                            user_id: 11111111-1111-1111-1111-111111111111
+                          usage_known: true
+                          utilization: 0.7
+                          would_limit_requests: 0
+                        id: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                        type: rate-limit-instances
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstanceListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: List AI Gateway rate limit counters
+      tags:
+        - AI Gateway
+      x-menu-order: 46
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances/summary:
+    get:
+      description: Aggregate a template rate limit's hot counters (those near or at a limit, or limiting, in the last hour), including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.
+      operationId: GetAiGatewayRateLimitInstancesSummary
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        instance_count: 14
+                        limited_requests: 25
+                        limiting_count: 2
+                        max_utilization: 1.2
+                        near_limit_count: 3
+                        rate_limit_id: 33333333-3333-3333-3333-333333333333
+                        scope_restricted: false
+                        truncated: false
+                        would_limit_requests: 0
+                      id: 33333333-3333-3333-3333-333333333333
+                      type: rate-limit-instances-summary
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get an AI Gateway rate limit counter summary
+      tags:
+        - AI Gateway
+      x-menu-order: 47
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -235682,8 +237246,8 @@ paths:
     delete:
       description: |-
         Deletes the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
-        Deleting a provider policy restores normal unrestricted defaults.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
+        Deleting a provider or route policy restores normal unrestricted defaults.
       operationId: DeleteRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -235710,7 +237274,7 @@ paths:
     get:
       description: |-
         Retrieves the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_read`.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_read`.
       operationId: GetRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -235756,6 +237320,7 @@ paths:
         #### Supported resources
         Restriction policies can be applied to the following resources:
         - AI Gateway Providers: `ai-gateway-provider`
+        - AI Gateway Routes: `ai-gateway-route`
         - Dashboards: `dashboard`
         - Integration Services: `integration-service`
         - Integration Webhooks: `integration-webhook`
@@ -235785,17 +237350,18 @@ paths:
         - Feature Flags: `feature-flag`
         - Network Path Configs: `network-path-config`
 
-        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.
-        The editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.
-        Reading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires
+        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.
+        The editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.
+        Reading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires
         `ai_gateway_config_write` and follows standard restriction-policy authorization, including
         administrator recovery and self-lockout checks.
-        Providers without a restriction policy retain the normal unrestricted defaults.
+        Providers and routes without a restriction policy retain the normal unrestricted defaults.
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
         ----------------------------|--------------------------
         AI Gateway Providers        | `viewer`, `editor`
+        AI Gateway Routes           | `viewer`, `editor`
         Dashboards                  | `viewer`, `editor`
         Integration Services        | `viewer`, `editor`
         Integration Webhooks        | `viewer`, `editor`
@@ -236669,7 +238235,8 @@ paths:
   /api/v2/routing-rules:
     delete:
       description: >-
-        Delete a routing rule. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Delete a route with `ai_gateway_config_write` and route View/Edit. Every affected route and policy membership requires the corresponding Edit permission. The force=true parameter confirms impact and never bypasses authorization. A denied or unavailable check changes no configuration. Visible dependencies include editable; hidden dependencies are omitted and reported only by restricted_dependencies. A blocked response means an authorized editor must first remove blocking references. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable. Route deletion entries contain rule, reason, and editable; update entries contain rule, removed_tiers, and editable. Each rule contains route_id, slug, tiers, created_at, and updated_at with hidden nested selections redacted. The removed_tiers array identifies original tier numbers removed entirely by the cascade. Already-authorized
+        in-flight operations may finish. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted. Restriction cleanup occurs only after confirmed deletion. Cleanup failure returns 500 with configuration_deleted=true and permissions_cleanup_failed=true; refresh instead of assuming the route still exists.
       operationId: DeleteAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -236680,7 +238247,42 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: routing_rule_referenced
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: true
+                              reason: requested
+                              rule:
+                                created_at: "2026-08-24T12:00:00Z"
+                                route_id: 123
+                                slug: coding
+                                tiers:
+                                  - ordering: configured
+                                    targets:
+                                      - id: 901
+                                        model: gpt-5.2-codex
+                                        provider: prod-us
+                                        type: model
+                                updated_at: "2026-08-24T12:00:00Z"
+                          rules_to_update: []
+                        status: "409"
+                        title: Routing rule is in use
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -236700,7 +238302,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
-      description: List all routing rules for the organization.
+      description: List the organization's routing rules that the caller has View access to. Requires `ai_gateway_config_read`. Hidden route references are omitted from nested targets.
       operationId: ListAiGatewayRoutingRules
       responses:
         "200":
@@ -236745,7 +238347,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
-        Create an organization-owned routing rule. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
+        Create an organization-owned route with `ai_gateway_config_write`. New provider/model and route references require View. New routes use standard unrestricted defaults. To restrict configuration access, create the route and then apply a restriction policy using its numeric route_id. Sharing follows standard restriction-policy propagation and does not grant or revoke policy-authorized inference. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
       operationId: CreateAiGatewayRoutingRule
       requestBody:
         content:
@@ -236838,7 +238440,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Replace a routing rule's tiers. The slug is immutable; data capture is managed independently. This is a full replacement: omitted or null ordering resets the tier to configured, and omitted or null weights in a weighted_affinity tier reset to 1. Omitted or null reasoning_level clears a model destination's reasoning override. Replacing a rule repairs tiers reported with an ordering_issue.
+        Update a route with `ai_gateway_config_write` and route View/Edit. The slug is immutable; data capture is managed independently. Omitting tiers preserves the entire graph. When tiers are supplied, saved parent-local target IDs retain omitted destination and reasoning, weight, rubric, and default settings. Omitted ordering/classifier settings preserve the saved same-position tier. Explicit null resets nullable settings. New references require View on their resources. A hidden target omitted from tiers must be explicitly listed in removed_target_ids, otherwise the update fails without changes. expected_updated_at rejects stale updates with 409. Sharing-only saves do not replace target rows. Hidden and missing routes return the same 404; visible non-editors receive 403. Inference authorization is unchanged.
       operationId: UpdateAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -236884,7 +238486,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - ai_gateway_config_write
-      summary: Replace an AI Gateway routing rule
+      summary: Update an AI Gateway routing rule
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
@@ -236898,7 +238500,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/routing-rules/get:
     get:
-      description: Get a routing rule by its organization-unique slug.
+      description: Get a routing rule by slug with `ai_gateway_config_read` and route View. Hidden and missing routes both return 404. Hidden target identities are omitted; parent-local target IDs remain available for retention.
       operationId: GetAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -251689,88 +253291,7 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
-    post:
-      description: |-
-        Create a new agent rule with the given parameters.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: CreateCloudWorkloadSecurityAgentRule
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: My Agent rule
-                      enabled: true
-                      expression: exec.file.name == "sh"
-                      name: my_agent_rule
-                    type: agent_rule
-            schema:
-              $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest"
-        description: "The definition of the new agent rule"
-        required: true
-      responses:
-        "200":
-          content:
-            "application/json":
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: My Agent rule
-                        enabled: true
-                        expression: exec.file.name == "sh"
-                        name: my_agent_rule
-                      id: abc-123
-                      type: agent_rule
-              schema:
-                $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-codegen-request-body-name: body
-      x-menu-order: 14
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
   /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
-    delete:
-      description: |-
-        Delete a specific agent rule.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: DeleteCloudWorkloadSecurityAgentRule
-      parameters:
-        - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
-      responses:
-        "204":
-          description: OK
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-menu-order: 16
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
     get:
       description: |-
         Get the details of a specific agent rule.
@@ -251810,68 +253331,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
-    patch:
-      description: |-
-        Update a specific agent rule.
-        Returns the agent rule object when the request is successful.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: UpdateCloudWorkloadSecurityAgentRule
-      parameters:
-        - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: My Agent rule
-                      enabled: true
-                      expression: exec.file.name == "sh"
-                    id: 3dd-0uc-h1s
-                    type: agent_rule
-            schema:
-              $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest"
-        description: "New definition of the agent rule"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: My Agent rule
-                        enabled: true
-                        expression: exec.file.name == "sh"
-                        name: my_agent_rule
-                      id: abc-123
-                      type: agent_rule
-              schema:
-                $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConcurrentModificationResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-codegen-request-body-name: body
-      x-menu-order: 15
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
       description: Get the list of all critical assets.
@@ -264051,7 +265510,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       components:
                         - name: API
                           position: 0
@@ -264070,10 +265529,10 @@ paths:
                           position: 2
                           type: component
                       domain_prefix: status-page-us1
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -264388,12 +265847,12 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       domain_prefix: status-page-us1-east
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1 East
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
@@ -277740,7 +279199,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
-  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+  - description: >-
+      List open Agent Health issues across your organization and get an issue with its available remediation. Issues are reported by node Agents, Cluster Agents, and OpenTelemetry collectors. The meaning of `resource_id` depends on `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
     name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
@@ -278430,7 +279890,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule.
+      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams

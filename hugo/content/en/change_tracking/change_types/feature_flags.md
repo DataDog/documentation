@@ -42,7 +42,7 @@ Each event includes:
 - The previous and new values, including targeting rules and variants
 - A link back to the feature flag in Datadog
 
-To associate a Datadog Feature Flag change with a service, [instrument your flag evaluation code][4] with the Datadog tracing library. Datadog uses the resulting APM traces to automatically detect which services evaluate the flag. See [Automatically detect affected services](#automatically-detect-affected-services) for details.
+To associate a Datadog Feature Flag change with a service, [instrument your flag evaluation code][4] with the Datadog SDK. Datadog uses the resulting APM traces to automatically detect which services evaluate the flag. See [Automatically detect affected services](#automatically-detect-affected-services) for details.
 
 ### LaunchDarkly flags
 
@@ -129,18 +129,19 @@ Example request:
 
 ## Automatically detect affected services
 
-In addition to tracking feature flag configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
+In addition to tracking feature flag configuration changes, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
 
 ### Trace-based enrichment
-Trace-based enrichment uses APM traces to automatically associate feature flag changes with the relevant Datadog services. The following section details how to implement it in your codebase.
+
+Trace-based enrichment uses APM traces to automatically associate feature flag changes with the relevant Datadog services.
 
 #### Setup
 
-To automatically detect services using a feature flag, instrument your feature flag evaluation code with the Datadog SDK. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
+To automatically detect services using a feature flag, instrument your feature flag evaluation code with the Datadog SDK. Datadog then detects all services that evaluate a specific flag, even if they weren't originally tagged.
 
 1. [Instrument your feature flag evaluation code][4] using the Datadog SDK.
 1. Create a custom span with the operation name `experiments.IsEnabled` to track feature flag evaluations.
-3. Tag the span with `experiment_id:<flag-id>`, where `<flag-id>` matches the feature flag ID.
+1. Tag the span with `experiment_id:<flag-id>`, where `<flag-id>` matches the feature flag ID.
 
 For example:
 
@@ -155,7 +156,7 @@ with tracer.trace("experiments.IsEnabled") as span:
 
 ### Metrics-based enrichment
 
-Metric-based enrichment uses Datadog metrics to enrich your feature flag changes with service context. The following section explains how to implement it in your codebase.
+Metrics-based enrichment uses Datadog metrics to enrich your feature flag changes with service context.
 
 #### Setup
 
@@ -180,6 +181,8 @@ statsd.gauge(
 ## Remediate feature flag changes with Workflow Automation
 
 When you identify that a feature flag change caused an issue, you can immediately toggle its state without leaving Datadog. This feature uses [Workflow Automation][2] to toggle LaunchDarkly flags directly from Change Tracking timelines.
+
+For Datadog Feature Flags, use a [kill switch][9] to turn off a feature without redeploying, or [create a workflow that disables a flag when a monitor alerts][10].
 
 <div class="alert alert-info">This feature requires Workflow Automation. See <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Workflow Automation pricing</a>.</div>
 
@@ -209,10 +212,11 @@ To toggle feature flags on or off from inside Datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/launchdarkly/#setup
-[2]: https://app.datadoghq.com/actions/connections
+[2]: /actions/workflows/
 [3]: /api/latest/events/
 [4]: /tracing/trace_collection/
-[5]: https://app.datadoghq.com/apm/settings
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
 [8]: /feature_flags/
+[9]: /feature_flags/use_cases/kill_switches/
+[10]: /feature_flags/concepts/workflow_automation/#example-disable-a-flag-when-a-monitor-alerts

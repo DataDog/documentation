@@ -76,7 +76,7 @@ Lambda 계측은 전적으로 Datadog에서 실행됩니다. Datadog은 함수�
 
 1. Datadog은 함수의 현재 구성 및 태그를 읽고 [Lambda 전제 조건][3]을 충족하는지 확인합니다.
 2. Datadog은 함수가 이미 계측되었는지 확인합니다. Datadog은 Datadog 레이어, Datadog 핸들러 또는 Datadog이 적용하지 않은 Datadog 환경 변수가 포함된 함수는 건너뜁니다. 또한 Datadog은 [원격 계측][4]으로 관리되는 함수를 건너뛰고 두 가지 이유 중 무엇이 적용되는지 보고합니다.
-3. Datadog은 함수의 런타임, 아키텍처, 리전 및 AWS 파티션에 대한 Datadog 레이어 버전을 확인합니다. Datadog은 설치를 재현할 수 있도록 당시 가장 최신 버전이 아닌 검증된 레이어 버전을 적용합니다.
+3.Datadog은 계측 규칙에 지정된 계층 버전을 사용하여 함수의 런타임, 아키텍처, 리전 및 AWS 파티션을 기반으로 일치하는 계층을 식별합니다.
 4. Datadog은 원하는 전체 구성을 계산하고 실제로 변경하기 전에 변경할 내용을 정확히 기록합니다.
 5. Datadog은 함수의 실행 역할이 Datadog 조직으로 텔레메트리를 보낼 수 있도록 권한을 부여합니다. [Lambda 텔레메트리 인증 방법](#how-lambda-telemetry-is-authenticated) 섹션을 참조하세요.
 6. Datadog은 `lambda:UpdateFunctionConfiguration`을 한 번 호출하여 전체 레이어 목록과 환경 맵을 제출합니다. Datadog은 AWS가 성공을 보고한 후에만 변경 사항을 적용된 것으로 표시합니다.
@@ -87,11 +87,14 @@ Lambda 업데이트는 교체 방식 작업입니다. 즉, 제출된 레이어 �
 
 | 변경 | 적용 대상 |
 |---|---|
-| Datadog 확장 프로그램 레이어(`Datadog-Extension` 또는 `Datadog-Extension-ARM`)을 추가합니다. | 지원되는 모든 런타임 |
+| Datadog 확장 프로그램 레이어(`Datadog-Extension` 또는 `Datadog-Extension-ARM`)를 추가합니다. | 지원되는 모든 런타임 |
 | 해당 Datadog 트레이싱 레이어를 추가합니다. | Node.js, Python, Ruby, Java 및 .NET |
 | `DD_SITE` 및 `DD_ORG_UUID` | 를 설정합니다. |지원되는 모든 런타임
+| 계측 규칙의 APM 및 Logs 토글에 맞춰 `DD_TRACE_ENABLED` 및 `DD_SERVERLESS_LOGS_ENABLED`를 `true` 또는 `false`로 설정하고 기존 값을 덮어씁니다. | 지원되는 모든 런타임 |
 | 핸들러를 Datadog 핸들러로 리디렉션하고 원본을 `DD_LAMBDA_HANDLER` | 에 이동합니다. |Node.js 및 Python
 | `AWS_LAMBDA_EXEC_WRAPPER`를 `/opt/datadog_wrapper` | 로 설정합니다. |Java 및 .NET
+
+계측 규칙은 `DD_TRACE_ENABLED` 및 `DD_SERVERLESS_LOGS_ENABLED`보다 우선합니다. 대상 함수에서 이 중 하나가 변경되면 Datadog은 계측 규칙과 일치하도록 다시 설정합니다. 제거 시 Datadog은 각 변수의 원래 값을 복원하거나 계측 전에 함수가 설정하지 않은 경우 해당 변수를 제거합니다.
 
 Datadog은 함수 코드, 메모리 크기, 시간 초과, VPC 구성, 동시성 또는 기타 함수 설정을 변경하지 않습니다.
 
@@ -159,11 +162,11 @@ Datadog은 적용 대상 리소스에 대해 사용자가 정의한 상태를 �
   - **EC2**: 이벤트는 CloudFormation 스택의 EventBridge 규칙에서 발생합니다.
   - **Lambda**: `datadog-agent-resource-update-rule-lambda` 규칙은 함수 생성, 구성 업데이트, 태그 및 태그 해제 이벤트를 전달합니다.
 - EC2의 경우, 이미 Agent가 있는 인스턴스는 불필요한 활동을 방지하기 위해 더 낮은 빈도로 다시 확인됩니다.
-- Lambda의 경우, Datadog은 변경이 필요한 함수에 대해서만 계정의 Lambda API를 호출합니다. 이미 현재 레이어 버전을 사용하는 플릿은 함수별 작업이 발생하지 않습니다.
+- Lambda의 경우, Datadog은 변경이 필요한 함수에 대해서만 계정의 Lambda API를 호출합니다. 함수가 이미 계측 규칙의 계층 버전 및 APM과 Logs 설정과 일치하는 플릿은 함수별 활동을 생성하지 않습니다.
 
 ### Lambda 함수가 새 레이어 버전을 가져오는 방법 {#how-lambda-functions-pick-up-new-layer-versions}
 
-Datadog은 적용 대상 함수의 레이어를 최초 계측 시 적용된 버전이 아닌 현재 Datadog이 배포하는 버전과 비교합니다. Datadog이 새 레이어 버전을 릴리스하면 적용 대상 함수가 해당 버전으로 업데이트됩니다. 따라서 사용자가 별도의 조치를 취하지 않아도 함수는 Datadog의 레이어 릴리스에 맞춰 업데이트됩니다.
+Datadog은 대상 함수의 계층을 계측 규칙에 설정된 버전과 비교합니다. 대상 함수의 계층이 수동으로 변경되면 Datadog은 이를 계측 규칙의 버전으로 다시 설정합니다. Datadog은 사용자를 대신하여 계측 규칙의 계층 버전을 업그레이드하지 않습니다. 대상 함수는 사용자가 계측 규칙을 편집하는 경우에만 새 계층 버전을 선택합니다. 버전을 설정할 위치에 대한 자세한 내용은 설정 가이드의 [Datadog 계측 설치][8]를 참조하세요.
 
 진행 중인 Lambda 구성 업데이트는 그대로 두었다가 잠시 후 다시 시도하므로, Datadog이 이미 적용 중인 변경 사항과 충돌하지 않습니다.
 
@@ -216,3 +219,4 @@ Datadog은 시도 간 지연 시간을 늘려가며 자동으로 재시도합니
 [5]: https://docs.datadoghq.com/ko/account_management/workload_identity_federation/
 [6]: https://docs.datadoghq.com/ko/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
 [7]: https://docs.datadoghq.com/ko/integrations/guide/aws-agent-installation/#choose-how-your-rule-matches-resources
+[8]: https://docs.datadoghq.com/ko/integrations/guide/aws-agent-installation/#install-datadog-instrumentation

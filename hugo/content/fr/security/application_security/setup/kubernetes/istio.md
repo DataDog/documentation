@@ -24,10 +24,10 @@ Vous pouvez activer App and API Protection au sein d'un maillage de services Ist
 Avant de commencer, vérifiez que vous disposez des éléments suivants :
 
 - Un cluster Kubernetes en cours d'exécution avec [Istio][1] installé.
-- Le [Datadog Agent est installé et configuré][2] dans votre cluster Kubernetes.
+- Le [Datadog Agent est installé et configuré][2] dans votre cluster Kubernetes.
   - Activez et configurez [Remote Configuration][3] pour permettre le blocage des attaquants via l'interface utilisateur Datadog.
   - Activez [APM][4] dans l'Agent. Cela permet au service de processeur de sécurité d'envoyer ses propres traces à l'Agent.
-    - Optionnellement, activez le [Cluster Agent Admission Controller][5] pour injecter automatiquement les informations de host du Datadog Agent dans le service du processeur de sécurité App and API Protection.
+    - Optionnellement, activez le [Cluster Agent Admission Controller][5] pour injecter automatiquement les informations de host du Datadog Agent dans le service du processeur de sécurité App and API Protection.
 
 ## Configuration automatisée avec App and API Protection pour Kubernetes {#automated-configuration-with-app-and-api-protection-for-kubernetes}
 
@@ -62,15 +62,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Ajoutez des annotations à votre ressource `DatadogAgent`. Le mode sidecar est le mode par défaut, il suffit donc d'activer l'injecteur :
+Cette option nécessite la version 1.31.0 ou ultérieure de Datadog Operator.
+
+Configurez l'injecteur dans la section `spec.features.appsec.injector` de votre ressource `DatadogAgent`. Le mode sidecar est le mode par défaut, il suffit donc d'activer l'injecteur :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 Appliquez avec :

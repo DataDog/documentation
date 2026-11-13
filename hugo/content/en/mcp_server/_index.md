@@ -16,6 +16,9 @@ further_reading:
 - link: "mcp_server/code_execution"
   tag: "Documentation"
   text: "Code Execution with the MCP Server"
+- link: "account_management/rbac/mcp_access"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
@@ -98,6 +101,8 @@ Because your AI client controls what it sends to its model provider, limiting wh
 
 Write operations require the corresponding permission, such as `monitors_write`, and the MCP Server checks it on each tool call. A read-only user's call to a write-enabled tool is rejected.
 
+Administrators can also turn off the MCP Server or its write tools for the entire organization. They can restrict which actions each AI client can perform, even when a user can perform those actions elsewhere in Datadog. See [Access Control for MCP][41].
+
 ## Fair-use rate limits
 
 The MCP Server has a fair-use burst limit of 50 tool calls per 10 seconds. There is no monthly limit on tool calls.
@@ -157,3 +162,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /account_management/rbac/
 [39]: /account_management/rbac/data_access/
 [40]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[41]: /account_management/rbac/mcp_access/

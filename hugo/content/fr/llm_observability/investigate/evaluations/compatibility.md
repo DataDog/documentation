@@ -7,7 +7,7 @@ title: Compatibilité des évaluateurs
 ---
 ## Compatibilité des évaluateurs {#evaluator-compatibility}
 
-Les fournisseurs LLM tiers pris en charge sont OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI et Custom Provider.
+Les fournisseurs LLM tiers pris en charge sont OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI et Custom Provider.
 
 ### Évaluateurs gérés {#managed-evaluators}
 
@@ -15,34 +15,34 @@ Les évaluateurs gérés sont pris en charge pour les configurations suivantes.
 
 | Évaluateur                       | Version DD-trace  |  Fournisseur LLM                 | Span applicable |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
-| [Inadéquation de langue][10]         | Entièrement pris en charge   | Auto-hébergé                   | Tous les types de span  |
+| [Language Mismatch][10]         | Entièrement pris en charge   | Auto-hébergé                   | Tous les types de span  |
 
-### Évaluateurs personnalisés LLM-as-a-judge {#custom-llm-as-a-judge-evaluators}
+### Évaluateurs LLM-as-a-judge personnalisés {#custom-llm-as-a-judge-evaluators}
 
-Les évaluateurs personnalisés LLM-as-a-judge sont pris en charge pour les configurations suivantes.
+Les évaluateurs LLM-as-a-judge personnalisés sont pris en charge pour les configurations suivantes.
 
 | Évaluateur        | Version DD-trace | Fournisseur LLM                  | Span applicable |
 | ---------------- | ---------------- | ----------------------------- | --------------- |
-| [Booléen][11]    | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Boolean][11]    | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
 | [Score][11]      | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
-| [Catégoriel][11]| Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Categorical][11]| Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
 | [JSON][11]       | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
 
-#### Modèles d'évaluateur LLM-as-a-judge {#llm-as-a-judge-evaluator-templates}
+#### Modèles d’évaluateurs LLM-as-a-judge {#llm-as-a-judge-evaluator-templates}
 
-Les modèles existants pour les évaluateurs personnalisés LLM-as-a-judge sont pris en charge pour les configurations suivantes.
+Les modèles existants pour les évaluateurs LLM-as-a-judge personnalisés sont pris en charge pour les configurations suivantes.
 
 | Évaluateur               | Version DD-trace | Fournisseur LLM                  | Span applicable |
 | ----------------------- | ---------------- | ----------------------------- | --------------- |
-| [Défaut de réponse][5]  | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Failure to Answer][5]  | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
 | [Hallucination][4]      | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | LLM uniquement        |
 | [Sentiment][6]          | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
-| [Toxicité][7]           | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
-| [Injection de prompt][8]   | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
-| [Pertinence du sujet][9]    | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
-| [Sélection d'outil][1]             | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
-| [Exactitude des arguments de l'outil][2]  | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
-| [Exhaustivité de l'objectif][3]          | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
+| [Toxicity][7]           | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Prompt Injection][8]   | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Topic Relevancy][9]    | Entièrement pris en charge  | Tous les fournisseurs LLM tiers | Tous les types de span  |
+| [Tool Selection][1]             | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
+| [Tool Argument Correctness][2]  | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
+| [Goal Completeness][3]          | Entièrement pris en charge | Tous les fournisseurs LLM tiers | LLM uniquement |
 
 
 [1]: /fr/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection

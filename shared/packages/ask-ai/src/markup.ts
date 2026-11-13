@@ -18,10 +18,12 @@ import {
   fullscreenModeIcon,
   infoIcon,
   plusIcon,
+  retryIcon,
   sendIcon,
   sidebarModeIcon,
   sparkAiIcon,
   sparkPurpleIcon,
+  stopIcon,
   thumbsDownIcon,
   thumbsUpIcon,
   viewModeIcon,
@@ -268,7 +270,10 @@ function buildFooter(): HTMLDivElement {
   const send = element("button", "conv-search-send", {
     "aria-label": STRINGS.send,
   });
-  appendIcon(send, sendIcon({ size: 16 }));
+  // The panel toggles `.is-stop` while an answer streams, which swaps the
+  // visible icon and makes the button stop the answer.
+  appendIcon(send, sendIcon({ size: 16, className: "conv-search-send-icon" }));
+  appendIcon(send, stopIcon({ size: 16, className: "conv-search-stop-icon" }));
 
   inputContainer.append(input, send);
   footer.append(inputContainer, buildDisclaimer());
@@ -338,24 +343,24 @@ export function buildMessage(
   return { messageElement, contentElement };
 }
 
-export function buildLoadingIndicator(initialStatus: string): {
-  wrapper: HTMLDivElement;
-  statusElement: HTMLSpanElement;
-} {
-  const wrapper = element(
-    "div",
-    "conv-search-message conv-search-message-assistant conv-search-loading-state",
-  );
+/**
+ * The notice that replaces a failed answer. `retry` is present only when a
+ * retry can help; the panel wires it.
+ */
+export function buildTurnError(
+  message: string,
+  retryable: boolean,
+): { box: HTMLDivElement; retry: HTMLButtonElement | null } {
+  const box = element("div", "conv-search-turn-error", { role: "alert" });
+  box.appendChild(text("p", message));
 
-  const indicator = element("div", "conv-search-loading-indicator");
-  const statusElement = text("span", initialStatus, "conv-search-status-text");
-  indicator.append(
-    element("span", "conv-search-loading-spinner"),
-    statusElement,
-  );
+  if (!retryable) return { box, retry: null };
 
-  wrapper.appendChild(indicator);
-  return { wrapper, statusElement };
+  const retry = element("button", "conv-search-retry", { type: "button" });
+  appendIcon(retry, retryIcon({ size: 14 }));
+  retry.appendChild(text("span", STRINGS.tryAgain));
+  box.appendChild(retry);
+  return { box, retry };
 }
 
 export function buildMessageActionsRow(): HTMLDivElement {

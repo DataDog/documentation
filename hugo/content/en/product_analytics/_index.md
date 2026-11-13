@@ -197,7 +197,7 @@ Use the following features to inform your product change decisions, such as chan
 [14]: /real_user_monitoring/application_monitoring/browser
 [15]: /real_user_monitoring/application_monitoring/ios
 [16]: /real_user_monitoring/application_monitoring/android
-[17]: /product_analytics/agentic_onboarding
+[17]: /agentic_onboarding/
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
 [21]: /api/latest/product-analytics/#send-server-side-events
