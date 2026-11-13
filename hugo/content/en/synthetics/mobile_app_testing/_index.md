@@ -48,8 +48,6 @@ Optionally, link Synthetic mobile test data with RUM mobile data if the [RUM SDK
 
 You can create mobile app tests in Datadog by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][12] and selecting {{< ui >}}Mobile Application Test{{< /ui >}}.
 
-{{< img src="mobile_app_testing/new_test_2.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
-
 ## Configuration
 
 You may create a test using one of the following options:
@@ -67,7 +65,7 @@ You may create a test using one of the following options:
   1. Select a {{< ui >}}version{{< /ui >}} or click {{< ui >}}Always run the latest version{{< /ui >}} to use the latest version of your mobile application whenever your test is run.
   1. Add a {{< ui >}}name{{< /ui >}} for your test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}} that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-  1. Select the [{{< ui >}}devices{{< /ui >}}](#devices) to run your test on.
+  1. Select the [{{< ui >}}devices{{< /ui >}}](#locations-and-devices) to run your test on.
   1. Set [retry conditions](#test-retries) for your test.
   1. Set the [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and {{< ui >}}alert conditions{{< /ui >}} for your test monitor. 
   1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
@@ -150,24 +148,39 @@ For iOS tests, add the appropriate `key:value` pairs in the Advanced Options sec
 {{% /tab %}}
 {{< /tabs >}}
 
-## Devices
+## Locations and devices
 
-On the device selection screen, you can choose to test mobile devices that are located in either Europe (EU) or the United States (US). 
-To configure a mobile test to use either EU or US hosted devices:
+Choose the locations your test runs from and the devices it runs on:
 
-1. Open the edit test page for an existing mobile test or create a new one.
-2. Expand the {{< ui >}}Devices{{< /ui >}} section and choose the device location(s) for your test:
-   - {{< ui >}}All locations{{< /ui >}}: Runs tests in both the EU and US.
-   - {{< ui >}}EU{{< /ui >}}: Runs tests only in the EU.
-   - {{< ui >}}US{{< /ui >}}: Runs tests only in the US.
+1. Create a mobile test, or open the edit page of an existing one.
+2. Expand the {{< ui >}}Locations and Devices{{< /ui >}} section and select one or more locations from the {{< ui >}}Locations{{< /ui >}} dropdown:
+   - **Physical** locations, {{< ui >}}Europe (Frankfurt){{< /ui >}} and {{< ui >}}United States{{< /ui >}}: The test runs on devices hosted in that region.
+   - **Routed** locations, grouped by region: The test runs on a hosted device whose network traffic goes out through the country or city you select. See [Routed locations](#routed-locations).
 3. Use the {{< ui >}}Select Device(s){{< /ui >}} dropdown to select the devices you want to test on.
+
+   {{< img src="mobile_app_testing/locations_and_devices_mat.png" alt="The Locations dropdown in the Locations and Devices section, with Europe (Frankfurt) and United States under Physical, and countries such as Argentina, Bolivia (La Paz), Brazil, and Canada under Routed, grouped by region." style="width:100%;" >}}
+
 4. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to save your test configuration.
 
-**Notes**: 
-- Tests executed on US-hosted devices are run from AWS US West (Oregon). Similarly, tests on EU-hosted devices are run from AWS Germany (Frankfurt).
-- Not all devices are available in both the EU and US. For more details, see the list of [supported devices][16].
+Not all devices are available in every location. For more details, see the list of [supported devices][16].
 
-{{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selecting one or more mobile devices in US and EU regions" video=true >}}
+### Routed locations
+
+Use routed locations to test your mobile app as if the device were in another country. They're useful when your mobile app only works in a specific country, or to see how it behaves for users in other regions.
+
+With a routed location, the device itself doesn't move. Its network traffic goes out through an IP address in the country you select. Your mobile app sees the device as being in that country.
+
+A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's GPS location, time zone, or language.
+
+Tests that use routed locations work the same way as tests on physical locations:
+
+- **Mix locations**: Select routed locations on their own or together with physical locations.
+- **Record**: The recorder offers the locations selected on the test. Check how your mobile app behaves in a routed location before you save your steps.
+- **Run**: Run the test on a schedule, with {{< ui >}}Run Test Now{{< /ui >}}, or from your CI/CD pipelines.
+- **Review results**: Test results, the test details page, and the Synthetic Monitoring & Testing Results Explorer show the routed country or city as the test location. For example, a test that runs from Brazil shows **Brazil** as its location, even if the device is hosted elsewhere.
+- **Alert**: Each routed location has its own timeline on the test details page and can trigger the test's monitor. Alerts name the routed location.
+
+Not all devices support routed locations. For details, see the list of [supported devices][16].
 
 ### Mobile device families
 
@@ -223,7 +236,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. For a [routed location](#routed-locations), the notification names the routed country or city, such as Brazil. Each routed location can trigger the monitor on its own. Pre-filled monitor messages are included in the message body section:
 
     {{< img src="/mobile_app_testing/mobile_app_synthetic_monitor.png" alt="Mobile app testing monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
