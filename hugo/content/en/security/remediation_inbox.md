@@ -181,8 +181,6 @@ Remediation cases can create tickets in Jira, ServiceNow, or Linear. Ticket crea
 1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation cases. If you do not select a project when you create remediation cases, configure the default **Security Remediation** project.
 1. When a remediation case is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
 
-For more information, see [Ticketing Integrations][12].
-
 ## Limitations
 
 - Remediations are available for Software Composition Analysis and Cloud Security Vulnerabilities findings.
@@ -204,7 +202,6 @@ For more information, see [Ticketing Integrations][12].
 [8]: /bits_ai/bits_code/setup/
 [9]: /integrations/github/
 [10]: /source_code/
-[12]: /security/ticketing_integrations/
 [13]: /account_management/rbac/permissions/
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /mcp_server/setup/
