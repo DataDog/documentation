@@ -49,7 +49,7 @@ The Remediation Inbox answers one question: **what are the most impactful fixes 
 | Action | Required permissions |
 |---|---|
 | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
-| Create cases, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Create cases, assign owners, link pull requests, and generate fixes with Bits Code | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see [Enable remediation capabilities](#enable-remediation-capabilities).
 
