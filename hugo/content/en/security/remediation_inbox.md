@@ -85,9 +85,9 @@ Remediations are split into status tabs. The inbox opens on **To Triage**.
 | To Triage | No action has been taken. No case is attached. |
 | Open | A case is attached, and work has not started. |
 | In Progress | A case is attached, and work is in progress. |
-| Closed | The remediation does not contain any open finding. |
+| Closed | The remediation has no open findings and no fix in progress. |
 
-Until all of its findings are closed, the status of a remediation follows the status of its [remediation case](#track-remediation-progress).
+The status of a remediation follows the status of its [remediation case](#track-remediation-progress), which Datadog updates automatically. See [Remediation lifecycle](#remediation-lifecycle).
 
 ### Remediation table
 
@@ -161,6 +161,16 @@ Each fix, whether a Bits Code session or a linked pull request, is recorded as a
 While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. Findings stay open until the pull request merges and the next scan confirms the fix.
 
 Findings that belong to a remediation case show the linked case in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel. This lets anyone investigating a finding see that a fix is already underway.
+
+### Remediation lifecycle
+
+Datadog updates the status of remediation cases automatically:
+
+- A remediation case closes when the remediation has no open findings and no fix is in progress. Findings can leave a remediation by being fixed, muted, or expiring.
+- A remediation case moves to **In Progress** when a fix, such as a Bits Code session or a linked pull request, is in progress.
+- A closed remediation case reopens if the remediation has open findings again within 30 days of closing, including cases closed manually.
+
+Status updates can take up to an hour to appear.
 
 ## Enable remediation capabilities
 
