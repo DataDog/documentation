@@ -3531,6 +3531,11 @@ menu:
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_remediation
       weight: 10304
+    - name: Kubernetes Actions
+      url: containers/monitoring/kubernetes_actions
+      parent: infrastructure_livecontainers_explorer
+      identifier: infrastructure_livecontainers_kubernetes_actions
+      weight: 10305
     - name: Amazon ECS Explorer
       url: containers/monitoring/amazon_elastic_container_explorer
       parent: infrastructure_livecontainers
