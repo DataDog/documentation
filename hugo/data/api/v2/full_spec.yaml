@@ -12923,12 +12923,14 @@ components:
             $ref: "#/components/schemas/GuardrailMetric"
           type: array
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
+          description: >-
+            The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule.
           example: "prod-rollout"
           type: string
         name:
@@ -12986,7 +12988,8 @@ components:
         attributes:
           $ref: "#/components/schemas/Allocation"
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -13121,7 +13124,8 @@ components:
           nullable: true
           type: string
         allocation_id:
-          description: "The unique identifier (UUID) of the targeting rule allocation this progressive rollout belongs to. This is not the allocation key that SDKs report in evaluation results and exposure events."
+          description: >-
+            The unique identifier (UUID) of the targeting rule allocation this progressive rollout belongs to. This is not the allocation key that SDKs report in evaluation results and exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -28345,7 +28349,8 @@ components:
         saved filter with `saved_filter_id`. The two shapes are mutually exclusive.
       properties:
         attribute:
-          description: The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
+          description: >-
+            The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
           example: "user_tier"
           type: string
         operator:
@@ -28359,7 +28364,8 @@ components:
           format: uuid
           type: string
         value:
-          description: Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
+          description: >-
+            Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
           example: ["premium", "enterprise"]
           items:
             description: Target value for the selected operator.
@@ -32248,14 +32254,22 @@ components:
           example: false
           type: boolean
         name:
-          description: The name of the environment.
+          description: >-
+            The name of the environment. Required on every request and unique within the organization. Must contain 1 to 200 ASCII characters, start with a letter or digit, and contain only letters, digits, spaces, underscores, hyphens, and periods.
           example: "env-search-term"
           type: string
+        observe_full_evaluation_data:
+          description: >-
+            Controls whether feature flag evaluation events may include original targeting identifiers and full evaluation context. When true, SDKs may include this data. When false, SDKs hash targeting identifiers and omit evaluation context. If omitted, defaults to false.
+          example: true
+          type: boolean
         queries:
-          description: List of queries to define the environment scope.
+          description: >-
+            Required list of at least one exact DD_ENV value associated with this environment. Values cannot be used by another environment in the same organization. Wildcards and search expressions are not supported.
           example: ["staging", "test"]
           items:
-            description: A query string used to match the environment scope.
+            description: >-
+              An exact DD_ENV value containing 1 to 200 ASCII characters. Must start with a letter and contain only letters, digits, underscores, hyphens, colons, periods, and slashes.
             type: string
           minItems: 1
           type: array
@@ -58483,7 +58497,8 @@ components:
           nullable: true
           type: object
         default_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -58519,7 +58534,8 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -58546,7 +58562,8 @@ components:
       description: Environment-specific settings for a feature flag in list responses.
       properties:
         default_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -58582,7 +58599,8 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -58738,7 +58756,8 @@ components:
           $ref: "#/components/schemas/FeatureFlagStalenessDetails"
         staleness_status:
           deprecated: true
-          description: Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
+          description: >-
+            Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
           example: "ACTIVE"
           type: string
         staleness_status_override:
@@ -58895,7 +58914,8 @@ components:
         - ENABLED
         - DISABLED
     FeatureFlagsPaginationLinks:
-      description: Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
+      description: >-
+        Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
       properties:
         first:
           description: Link to the first page.
@@ -107194,15 +107214,18 @@ components:
           $ref: "#/components/schemas/Version"
       type: object
     PatchSavedFilterAttributes:
-      description: Fields to update. At least one of `name`, `description`, or `targeting_rules` must have a non-null value. Omitted or null fields are preserved. The creation type cannot be changed.
+      description: >-
+        Fields to update. At least one of `name`, `description`, or `targeting_rules` must have a non-null value. Omitted or null fields are preserved. The creation type cannot be changed.
       properties:
         description:
-          description: The new description. Send an empty string to clear the description. If omitted or null, the existing description is preserved.
+          description: >-
+            The new description. Send an empty string to clear the description. If omitted or null, the existing description is preserved.
           example: Updated early access users.
           nullable: true
           type: string
         last_updated_at:
-          description: The `updated_at` value returned by a previous read, as an RFC 3339 timestamp. If it differs from the stored update time, truncated to seconds, the request returns a 409 response. For metadata-only updates, this check does not prevent all concurrent writes. This field alone does not constitute an update.
+          description: >-
+            The `updated_at` value returned by a previous read, as an RFC 3339 timestamp. If it differs from the stored update time, truncated to seconds, the request returns a 409 response. For metadata-only updates, this check does not prevent all concurrent writes. This field alone does not constitute an update.
           example: "2026-01-02T12:00:00Z"
           format: date-time
           nullable: true
@@ -107214,7 +107237,8 @@ components:
           nullable: true
           type: string
         targeting_rules:
-          description: The complete replacement targeting rules, combined with OR. Conditions within each rule are combined with AND. Replaces all existing rules. Values are not appended. Must contain at least one rule. Saved filters cannot reference other saved filters.
+          description: >-
+            The complete replacement targeting rules, combined with OR. Conditions within each rule are combined with AND. Replaces all existing rules. Values are not appended. Must contain at least one rule. Saved filters cannot reference other saved filters.
           items:
             $ref: "#/components/schemas/SavedFilterTargetingRuleRequest"
           minItems: 1
@@ -107222,7 +107246,8 @@ components:
           type: array
       type: object
     PatchSavedFilterConflictResponse:
-      description: A stale update, duplicate name, or other conflict, or a resource listing consumer flags requiring approval.
+      description: >-
+        A stale update, duplicate name, or other conflict, or a resource listing consumer flags requiring approval.
       oneOf:
         - $ref: "#/components/schemas/SavedFilterJSONAPIErrorResponse"
         - $ref: "#/components/schemas/SavedFilterApprovalConflictResponse"
@@ -107238,7 +107263,8 @@ components:
         - attributes
       type: object
     PatchSavedFilterForbiddenResponse:
-      description: An authentication or permission error, or a resource listing consumer flags that the caller cannot edit.
+      description: >-
+        An authentication or permission error, or a resource listing consumer flags that the caller cannot edit.
       oneOf:
         - $ref: "#/components/schemas/SavedFilterAPIErrorResponse"
         - $ref: "#/components/schemas/SavedFilterJSONAPIErrorResponse"
@@ -122675,7 +122701,8 @@ components:
           example: Early access users
           type: string
         targeting_rules:
-          description: Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
+          description: >-
+            Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
           items:
             $ref: "#/components/schemas/SavedFilterTargetingRule"
           type: array
@@ -122768,7 +122795,8 @@ components:
         operator:
           $ref: "#/components/schemas/SavedFilterConditionOperator"
         value:
-          description: Values used by the condition operator. Values must satisfy the selected operator and the organization targeting limits.
+          description: >-
+            Values used by the condition operator. Values must satisfy the selected operator and the organization targeting limits.
           example:
             - test-user-1
             - test-user-2
@@ -122782,7 +122810,8 @@ components:
         - value
       type: object
     SavedFilterCreationType:
-      description: How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
+      description: >-
+        How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
       enum:
         - RULES
         - LIST
@@ -152948,23 +152977,33 @@ components:
       description: Attributes for updating an environment.
       properties:
         is_production:
-          description: Indicates whether this is a production environment.
+          description: >-
+            Indicates whether this is a production environment. If omitted, resets to false. Include the existing value to preserve it.
           example: false
           type: boolean
         name:
-          description: The name of the environment.
+          description: >-
+            The name of the environment. Required on every request and unique within the organization. Must contain 1 to 200 ASCII characters, start with a letter or digit, and contain only letters, digits, spaces, underscores, hyphens, and periods.
           example: "Environment XYZ789"
           type: string
+        observe_full_evaluation_data:
+          description: >-
+            Controls whether feature flag evaluation events may include original targeting identifiers and full evaluation context. When true, SDKs may include this data. When false, SDKs hash targeting identifiers and omit evaluation context. If omitted, the existing value is preserved.
+          example: true
+          type: boolean
         queries:
-          description: List of queries to define the environment scope.
+          description: >-
+            Required list of at least one exact DD_ENV value associated with this environment. Values cannot be used by another environment in the same organization. Wildcards and search expressions are not supported.
           example: ["staging", "test"]
           items:
-            description: A query string used to match the environment scope.
+            description: >-
+              An exact DD_ENV value containing 1 to 200 ASCII characters. Must start with a letter and contain only letters, digits, underscores, hyphens, colons, periods, and slashes.
             type: string
           minItems: 1
           type: array
         require_feature_flag_approval:
-          description: Indicates whether feature flag changes require approval in this environment.
+          description: >-
+            Indicates whether feature flag changes require approval in this environment. If omitted, resets to false. Include the existing value to preserve it.
           example: true
           type: boolean
       type: object
@@ -154005,12 +154044,14 @@ components:
             $ref: "#/components/schemas/GuardrailMetricRequest"
           type: array
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
+          description: >-
+            The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule.
           example: "prod-rollout"
           type: string
         name:
@@ -190201,13 +190242,15 @@ paths:
           name: key
           schema:
             type: string
-        - description: Filter by archived status. If `true`, return only archived flags. If `false`, return only flags that are not archived. If omitted, return both.
+        - description: >-
+            Filter by archived status. If `true`, return only archived flags. If `false`, return only flags that are not archived. If omitted, return both.
           example: false
           in: query
           name: is_archived
           schema:
             type: boolean
-        - description: Deprecated alias for `page[limit]`. Use `page[limit]` for new requests. Used only when `page[limit]` is absent. When both parameters are omitted, the server defaults to `25`. Values that exceed `50` are set to `50`; non-positive or empty values use the server default.
+        - description: >-
+            Deprecated alias for `page[limit]`. Use `page[limit]` for new requests. Used only when `page[limit]` is absent. When both parameters are omitted, the server defaults to `25`. Values that exceed `50` are set to `50`; non-positive or empty values use the server default.
           example: 10
           in: query
           name: limit
@@ -190217,7 +190260,8 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Deprecated alias for `page[offset]`. Used only when `page[offset]` is absent. Defaults to `0`. Negative or empty values are set to `0`.
+        - description: >-
+            Deprecated alias for `page[offset]`. Used only when `page[offset]` is absent. Defaults to `0`. Negative or empty values are set to `0`.
           example: 0
           in: query
           name: offset
@@ -190226,7 +190270,8 @@ paths:
             format: int64
             minimum: 0
             type: integer
-        - description: Filter by exact tag values using repeated parameters, such as `tags=env:prod&tags=purpose:sitemap`. A flag must have all ordinary tags. Values of the form `team:<handle>` match any selected team and are combined with `teams` into one set. The result must match all ordinary tags, any selected team, and all other filters. Empty values are ignored.
+        - description: >-
+            Filter by exact tag values using repeated parameters, such as `tags=env:prod&tags=purpose:sitemap`. A flag must have all ordinary tags. Values of the form `team:<handle>` match any selected team and are combined with `teams` into one set. The result must match all ordinary tags, any selected team, and all other filters. Empty values are ignored.
           example:
             - env:prod
             - purpose:sitemap
@@ -190238,7 +190283,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by team handles without the `team:` prefix. Use repeated parameters to filter by multiple team handles, such as `teams=checkout&teams=payments`. A flag must belong to at least one selected team. Team handles from `teams` and `team:<handle>` values from tags are treated as a single set and combined with ordinary tags and other filters using AND logic. Duplicate handles do not duplicate results. Unknown handles do not match any flags. Empty handles, surrounding white space, or using the `team:` prefix return a bad request error. Response tags are unchanged.
+        - description: >-
+            Filter by team handles without the `team:` prefix. Use repeated parameters to filter by multiple team handles, such as `teams=checkout&teams=payments`. A flag must belong to at least one selected team. Team handles from `teams` and `team:<handle>` values from tags are treated as a single set and combined with ordinary tags and other filters using AND logic. Duplicate handles do not duplicate results. Unknown handles do not match any flags. Empty handles, surrounding white space, or using the `team:` prefix return a bad request error. Response tags are unchanged.
           example:
             - checkout
             - payments
@@ -190250,7 +190296,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by status across production environments. Use repeated parameters to match any selected status. `ENABLED` matches at least one enabled production environment without a variant override. `OVERRIDDEN` matches at least one enabled production environment with a variant override. `DISABLED` matches flags whose associated production environments are all disabled. A flag can match both `ENABLED` and `OVERRIDDEN` in different environments. Flags without associated production environments do not match. This does not filter by a specific environment. Unknown values do not match any status.
+        - description: >-
+            Filter by status across production environments. Use repeated parameters to match any selected status. `ENABLED` matches at least one enabled production environment without a variant override. `OVERRIDDEN` matches at least one enabled production environment with a variant override. `DISABLED` matches flags whose associated production environments are all disabled. A flag can match both `ENABLED` and `OVERRIDDEN` in different environments. Flags without associated production environments do not match. This does not filter by a specific environment. Unknown values do not match any status.
           example:
             - ENABLED
             - OVERRIDDEN
@@ -190262,19 +190309,22 @@ paths:
               $ref: "#/components/schemas/FeatureFlagProductionStatus"
             type: array
           style: form
-        - description: Filter by SDK availability. `CLIENT` returns flags with channel `CLIENT` or `ALL`. `SERVER` returns flags with channel `SERVER` or `ALL`. `ALL`, an empty value, or omission applies no channel restriction; it does not select only flags whose channel is `ALL`. Values are case-insensitive and surrounding white space is ignored. Invalid values return a bad request error.
+        - description: >-
+            Filter by SDK availability. `CLIENT` returns flags with channel `CLIENT` or `ALL`. `SERVER` returns flags with channel `SERVER` or `ALL`. `ALL`, an empty value, or omission applies no channel restriction; it does not select only flags whose channel is `ALL`. Values are case-insensitive and surrounding white space is ignored. Invalid values return a bad request error.
           example: CLIENT
           in: query
           name: distribution_channel
           schema:
             $ref: "#/components/schemas/FeatureFlagDistributionChannel"
-        - description: Case-insensitive substring search on flag names, keys, and tag names. Combined with all other filters. An empty value applies no search restriction.
+        - description: >-
+            Case-insensitive substring search on flag names, keys, and tag names. Combined with all other filters. An empty value applies no search restriction.
           example: checkout
           in: query
           name: search
           schema:
             type: string
-        - description: Filter by variant value types using repeated parameters. A flag must match at least one selected type. Empty values are ignored. Invalid types return a bad request error.
+        - description: >-
+            Filter by variant value types using repeated parameters. A flag must match at least one selected type. Empty values are ignored. Invalid types return a bad request error.
           example:
             - BOOLEAN
             - STRING
@@ -190286,7 +190336,8 @@ paths:
               $ref: "#/components/schemas/ValueType"
             type: array
           style: form
-        - description: Filter by creator UUIDs using repeated parameters. A flag must match at least one creator. Empty values are ignored. Invalid UUIDs return a bad request error.
+        - description: >-
+            Filter by creator UUIDs using repeated parameters. A flag must match at least one creator. Empty values are ignored. Invalid UUIDs return a bad request error.
           example:
             - 550e8400-e29b-41d4-a716-446655440010
           explode: true
@@ -190298,7 +190349,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by feature flag UUIDs using repeated parameters. A flag must match at least one ID and all other filters. Duplicate IDs return each flag once. Unknown IDs and IDs from other organizations do not match any flags. Empty or invalid UUIDs return a bad request error. Pagination still applies.
+        - description: >-
+            Filter by feature flag UUIDs using repeated parameters. A flag must match at least one ID and all other filters. Duplicate IDs return each flag once. Unknown IDs and IDs from other organizations do not match any flags. Empty or invalid UUIDs return a bad request error. Pagination still applies.
           example:
             - 550e8400-e29b-41d4-a716-446655440000
           explode: true
@@ -190310,26 +190362,30 @@ paths:
               type: string
             type: array
           style: form
-        - description: "Filter by the computed staleness status: `ACTIVE`, `STALE`, or `PERMANENT`. Values are case-insensitive and surrounding white space is ignored. An empty value or omission applies no restriction. Invalid values return a bad request error. Read the computed result from `staleness_details.staleness_status`, not the legacy `staleness_status` response field."
+        - description: >-
+            Filter by the computed staleness status: `ACTIVE`, `STALE`, or `PERMANENT`. Values are case-insensitive and surrounding white space is ignored. An empty value or omission applies no restriction. Invalid values return a bad request error. Read the computed result from `staleness_details.staleness_status`, not the legacy `staleness_status` response field.
           example: STALE
           in: query
           name: staleness_status
           schema:
             $ref: "#/components/schemas/FeatureFlagStalenessStatus"
-        - description: Filter to flags that reference this saved filter in their targeting conditions. An empty value or omission applies no restriction. An invalid UUID returns a bad request error.
+        - description: >-
+            Filter to flags that reference this saved filter in their targeting conditions. An empty value or omission applies no restriction. An invalid UUID returns a bad request error.
           example: 550e8400-e29b-41d4-a716-446655440020
           in: query
           name: saved_filter_id
           schema:
             format: uuid
             type: string
-        - description: Sort by `name`, `updated_at`, `created_at`, or `evaluations`. Use a comma-separated list for multiple sort fields and prefix a field with `-` for descending order. The default is `updated_at` descending. When favorites are enabled, the authenticated user's favorite flags take precedence over the selected ordering. Unknown fields return a bad request error.
+        - description: >-
+            Sort by `name`, `updated_at`, `created_at`, or `evaluations`. Use a comma-separated list for multiple sort fields and prefix a field with `-` for descending order. The default is `updated_at` descending. When favorites are enabled, the authenticated user's favorite flags take precedence over the selected ordering. Unknown fields return a bad request error.
           example: -updated_at
           in: query
           name: sort
           schema:
             type: string
-        - description: Maximum number of flags to return. Defaults to `25` and is capped at `50`. Values that exceed `50` are set to `50`. Non-positive or empty values use the default. A non-integer value returns a bad request error. Takes precedence over `limit` when both are present. Pagination applies even when no pagination parameters are supplied.
+        - description: >-
+            Maximum number of flags to return. Defaults to `25` and is capped at `50`. Values that exceed `50` are set to `50`. Non-positive or empty values use the default. A non-integer value returns a bad request error. Takes precedence over `limit` when both are present. Pagination applies even when no pagination parameters are supplied.
           example: 25
           in: query
           name: page[limit]
@@ -190339,7 +190395,8 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: Number of matching flags to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a bad request error. Takes precedence over `offset` when both are present.
+        - description: >-
+            Number of matching flags to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a bad request error. Takes precedence over `offset` when both are present.
           example: 0
           in: query
           name: page[offset]
@@ -190503,28 +190560,28 @@ paths:
     get:
       description: |-
         Returns a list of environments for the organization.
-        Supports filtering by name, key, and DD_ENV.
+        Use `dd_env` to filter by an exact DD_ENV value in an environment's `queries` list.
       operationId: ListFeatureFlagsEnvironments
       parameters:
-        - description: Filter environments by name (partial matching).
+        - description: This parameter is currently ignored. Use dd_env to filter environments.
           example: "env-search-term"
           in: query
           name: name
           schema:
             type: string
-        - description: Filter environments by key (partial matching).
+        - description: This parameter is currently ignored. Use dd_env to filter environments.
           example: "env-partial"
           in: query
           name: key
           schema:
             type: string
-        - description: Filter environments by queries that contain the provided DD_ENV value.
+        - description: Filter environments whose queries list contains an exact match for the provided DD_ENV value.
           example: "staging"
           in: query
           name: dd_env
           schema:
             type: string
-        - description: Maximum number of results to return.
+        - description: This parameter is currently ignored. All matching environments are returned.
           example: 10
           in: query
           name: limit
@@ -190534,7 +190591,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Number of results to skip.
+        - description: This parameter is currently ignored. All matching environments are returned.
           example: 0
           in: query
           name: offset
@@ -190588,6 +190645,7 @@ paths:
                   data:
                     attributes:
                       name: staging-environment
+                      observe_full_evaluation_data: true
                       queries:
                         - staging
                         - canary
@@ -190604,14 +190662,13 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
                         is_production: false
-                        key: staging-environment
                         name: staging-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - staging
+                          - canary
                         require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
                       id: 00000000-0000-0000-0000-000000000017
                       type: environments
               schema:
@@ -190702,14 +190759,12 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
                         is_production: false
-                        key: staging-environment
                         name: staging-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - staging
                         require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
                       id: 00000000-0000-0000-0000-000000000018
                       type: environments
               schema:
@@ -190743,9 +190798,18 @@ paths:
         permissions:
           - feature_flag_environment_config_read
     put:
-      description: |-
-        Updates an existing environment's metadata such as
-         name and description.
+      description: >-
+        Updates an environment's name, DD_ENV values, and settings.
+
+
+        Every request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.
+
+        To preserve the current name and DD_ENV values, get the environment first and include those values in the request.
+
+
+        Omitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.
+
+        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.
       operationId: UpdateFeatureFlagsEnvironment
       parameters:
         - $ref: "#/components/parameters/environment_id"
@@ -190757,10 +190821,13 @@ paths:
                 value:
                   data:
                     attributes:
+                      is_production: true
                       name: production-environment
+                      observe_full_evaluation_data: true
                       queries:
                         - production
                         - prod-us
+                      require_feature_flag_approval: true
                     type: environments
             schema:
               $ref: "#/components/schemas/UpdateEnvironmentRequest"
@@ -190774,14 +190841,13 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
-                        is_production: false
-                        key: production-environment
+                        is_production: true
                         name: production-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - production
-                        require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
+                          - prod-us
+                        require_feature_flag_approval: true
                       id: 00000000-0000-0000-0000-000000000019
                       type: environments
               schema:
@@ -191258,11 +191324,15 @@ paths:
           - feature_flag_config_read
   /api/v2/feature-flags/saved-filters/{saved_filter_id}:
     get:
-      description: |-
+      description: >-
         Returns a saved filter by ID, including its full targeting rules, conditions, and values.
+
         Supports both saved lists and saved rules. Targeting rules are combined with OR,
+
         and conditions within each rule are combined with AND.
+
         Returns the stored filter definition rather than evaluating it against users or organizations.
+
         Archived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.
       operationId: GetSavedFilter
       parameters:
@@ -192183,8 +192253,9 @@ paths:
           - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}/variants/{variant_id}:
     delete:
-      description: |-
+      description: >-
         Deletes a variant from a feature flag.
+
 
         When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
       operationId: DeleteVariantFromFeatureFlag
@@ -192234,8 +192305,9 @@ paths:
         permissions:
           - feature_flag_config_write
     put:
-      description: |-
+      description: >-
         Updates the name and value of an existing variant on a feature flag.
+
 
         When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
       operationId: UpdateVariantForFeatureFlag
