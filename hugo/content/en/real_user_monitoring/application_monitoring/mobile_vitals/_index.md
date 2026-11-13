@@ -177,7 +177,7 @@ After collection is enabled, timeseries are captured for all sessions.
 
 Two series are collected:
 
-- **CPU usage**: the percentage of the device's total CPU capacity, across all cores, that your application consumes. The value is capped at 100%, which represents all cores fully in use. For example, an app fully using 2 cores of an 8-core device reports 25%. This differs from the CPU ticks per second reported for a view.
+- **CPU usage**: the percentage of the device's total CPU capacity, across all cores, that your application consumes. The value is capped at 100%, which means all cores are fully used. For example, an app fully using 2 cores of an 8-core device reports 25%. This differs from the CPU ticks per second reported for a view.
 - **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
 
 ### Enable collection
