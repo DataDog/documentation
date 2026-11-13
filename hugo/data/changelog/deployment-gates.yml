@@ -25,3 +25,14 @@ entries:
       - ListDeploymentGateEvaluations
       - ListDeploymentRuleEvaluations
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41737
+    operations:
+      - CreateDeploymentRule
+      - GetDeploymentGateRules
+      - GetDeploymentRule
+      - ListDeploymentRuleEvaluations
+      - TriggerDeploymentGatesEvaluation
+      - UpdateDeploymentRule
+    title: Add bits_deployment_analysis Deployment Gates rule type

@@ -1,0 +1,23 @@
+{
+  "data": {
+    "attributes": {
+      "configuration": {
+        "dry_run": false,
+        "rules": [
+          {
+            "dry_run": false,
+            "name": "bits deployment analysis",
+            "options": {
+              "duration": 900
+            },
+            "type": "bits_deployment_analysis"
+          }
+        ]
+      },
+      "env": "production",
+      "identifier": "pre",
+      "service": "my-service"
+    },
+    "type": "deployment_gates_evaluation_request"
+  }
+}

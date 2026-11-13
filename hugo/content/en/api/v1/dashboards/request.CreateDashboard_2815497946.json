@@ -19,6 +19,7 @@
             "request_type": "topology",
             "query": {
               "data_source": "data_streams",
+              "service": "",
               "filters": [
                 "env:prod"
               ],
