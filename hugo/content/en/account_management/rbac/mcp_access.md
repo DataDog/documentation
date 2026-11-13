@@ -16,9 +16,7 @@ further_reading:
     text: "Mobile and Third-Party Access"
 ---
 
-## Overview
-
-The [Datadog MCP Server][1] lets AI agents and clients, such as Claude Code, Cursor, and ChatGPT, read and act on Datadog data on behalf of a signed-in user. Datadog provides multiple layers of governance over MCP access: you can specify which users can access the MCP Server, whether they can write through it, and which actions are not allowed through an individual AI client (even when the user can perform those actions elsewhere in Datadog).
+The [Datadog MCP Server][1] lets AI agents and clients, such as Claude Code, Cursor, and ChatGPT, read and act on Datadog data on behalf of a signed-in user. You can control which users can access the MCP Server, whether they can write through it, and which actions each AI client can perform, even when the user can perform those actions elsewhere in Datadog.
 
 Datadog evaluates MCP access in layers. A request through the MCP Server succeeds only if every layer allows it:
 
@@ -27,7 +25,7 @@ Datadog evaluates MCP access in layers. A request through the MCP Server succeed
 | 1 | [{{< ui >}}MCP Access{{< /ui >}} organization setting](#enable-or-disable-the-datadog-mcp-server) | Entire organization | On |
 | 2 | [{{< ui >}}MCP Write Access{{< /ui >}} organization setting](#enable-or-disable-mcp-write-access) | Entire organization | Off |
 | 3 | [IP allowlist](#restrict-network-access) | Entire organization | Off |
-| 4 | [{{< ui >}}MCP Read{{< /ui >}} and {{< ui >}}MCP Write{{< /ui >}} permissions](#control-mcp-access-for-specific-users) | Per role | Datadog Read Only role: MCP Read<br>Datadog Standard and Admin roles: MCP Read and MCP Write |
+| 4 | [{{< ui >}}MCP Read{{< /ui >}} and {{< ui >}}MCP Write{{< /ui >}} role permissions](#control-mcp-access-for-specific-users) | Per role | - Datadog Read Only role: MCP Read<br>- Datadog Standard and Admin roles: MCP Read and MCP Write |
 | 5 | [OAuth application scopes](#restrict-actions-for-a-specific-ai-client) | Per AI client | All requested scopes allowed |
 | 6 | [Standard Datadog access controls](#standard-access-controls-apply-to-mcp) | Per user, resource, and dataset | Same as in the Datadog UI and API |
 
@@ -86,7 +84,7 @@ To give specific users MCP access that differs from the managed roles, assign th
 
 Each AI client that connects to the MCP Server through OAuth, such as Claude Code, is registered as an OAuth application in your organization. Each application requests a set of scopes, which correspond to Datadog permissions.
 
-Use [Application Scope Management][5] to remove scopes from an AI client's OAuth application. **A removed scope blocks that action through the AI client, even if the user has the permission to perform it elsewhere in Datadog.** For example, a user with {{< ui >}}Dashboards Write{{< /ui >}} can still edit dashboards in the Datadog UI, but cannot edit them through Claude Code if you remove the `dashboards_write` scope from the Claude Code OAuth application.
+Use [Application Scope Management][5] to remove scopes from an AI client's OAuth application. A removed scope blocks that action through the AI client, even if the user has permission to perform it elsewhere in Datadog. For example, a user with {{< ui >}}Dashboards Write{{< /ui >}} can still edit dashboards in the Datadog UI, but cannot edit them through Claude Code if you remove the `dashboards_write` scope from the Claude Code OAuth application.
 
 Scope changes apply to every user in your organization who uses that AI client.
 
@@ -105,7 +103,7 @@ You need the Datadog Admin role, or a role with both the {{< ui >}}Org Authorize
 
 **Note**: Removing a scope revokes existing authorizations that include that scope. Affected users must reauthorize the AI client to regain access with the remaining allowed scopes. Adding a scope does not add it to existing authorizations; users must reauthorize to receive it.
 
-### Example: allow agents to write only to notebooks
+### Example: Allow agents to write only to Notebooks
 
 To let agents read data across Datadog but only write to Notebooks:
 
@@ -118,7 +116,7 @@ Users can still perform other write actions in the Datadog UI, subject to their 
 
 ### Scopes apply only to OAuth connections
 
-Application scopes restrict MCP connections that authenticate through OAuth. A user who configures an AI client with an API key and application key, or with a personal access token, bypasses the OAuth application's scopes. That connection has the access of the key or token instead.
+Application scopes restrict MCP connections that authenticate through OAuth. A user who configures an AI client with an API key and application key, or with a personal or service access token, bypasses the OAuth application's scopes. That connection has the access of the key or token instead.
 
 To limit key-based MCP connections:
 
@@ -128,11 +126,12 @@ To limit key-based MCP connections:
 
 ## Standard access controls apply to MCP
 
-Apart from the MCP-specific controls on this page, the MCP Server follows the same access controls the user has everywhere else in Datadog. The MCP Server authenticates as the signed-in user and calls Datadog APIs with that user's credentials, so:
+In addition to the MCP-specific controls on this page, the MCP Server follows the same access controls the user has everywhere else in Datadog. The MCP Server authenticates as the signed-in user and calls Datadog APIs with that user's credentials, so:
 
 - **Role permissions**: A user needs the standard permission for the underlying resource in addition to {{< ui >}}MCP Read{{< /ui >}} or {{< ui >}}MCP Write{{< /ui >}}. For example, creating a monitor through the MCP Server requires {{< ui >}}Monitors Write{{< /ui >}}. See [Role Based Access Control][9].
 - **Restricted datasets**: [Data Access Control][10] and [log restriction queries][11] limit which logs, spans, and other telemetry the MCP Server returns to a user.
 - **Restricted assets**: [Granular access controls][12] on dashboards, monitors, notebooks, and other resources apply to MCP requests. A user cannot view or edit a resource through the MCP Server if they cannot view or edit it in the Datadog UI.
+
 ## Audit MCP activity
 
 Every MCP Server tool call is recorded in [Audit Trail][13] with the tool name, arguments, user identity, and client. See [Track tool calls in Audit Trail][15].
