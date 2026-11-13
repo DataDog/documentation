@@ -16,10 +16,11 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script>
             const redirect_url = '{{ .Permalink | absURL }}'
-            const params = new URLSearchParams(window.location.search)
+            let query = window.location.search
             {{- if $hasPlatformFilter }}
             // The target page has an SDK selector. Keep the SDK from the old URL (for example
             // /real_user_monitoring/android/...) so readers don't land on the default SDK.
+            const params = new URLSearchParams(query)
             if (!params.has('platform')) {
                 const sdkBySegment = {
                     'browser': 'browser',
@@ -34,14 +35,15 @@
                     'unity': 'unity',
                     'maui': 'maui'
                 }
-                const segment = window.location.pathname.toLowerCase().split('/').find((s) => sdkBySegment[s])
+                const segment = window.location.pathname.toLowerCase().split('/').find((s) => Object.prototype.hasOwnProperty.call(sdkBySegment, s))
                 if (segment) {
+                    // Rebuild the query only when adding the SDK, so other parameters keep their exact encoding.
                     params.set('platform', sdkBySegment[segment])
+                    query = `?${ params.toString() }`
                 }
             }
             {{- end }}
-            const query = params.toString()
-            window.location = `${ redirect_url }${ query ? `?${ query }` : '' }${ window.location.hash }`
+            window.location = `${ redirect_url }${ query }${ window.location.hash }`
         </script>
         <meta http-equiv="refresh" content="10; url={{ .Permalink | absURL }}" />
     </head>
