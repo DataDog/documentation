@@ -4224,6 +4224,13 @@ components:
             **Note:** This field is deprecated. Instead, use `monitored_resource_configs` with `type=gce_instance`
           example: "$KEY1:$VALUE1,$KEY2:$VALUE2"
           type: string
+        id:
+          description: |-
+            The Datadog-assigned ID of the GCP integration account.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          format: uuid
+          readOnly: true
+          type: string
         is_cspm_enabled:
           description: |-
             When enabled, Datadog will activate the Cloud Security Monitoring product for this service account. Note: This requires resource_collection_enabled to be set to true.
