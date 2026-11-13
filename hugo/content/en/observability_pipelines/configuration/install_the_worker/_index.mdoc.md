@@ -47,6 +47,13 @@ content_filters:
 <!-- Linux - Overview -->
 {% if equals($platform, "linux") %}
 
+The Observability Pipelines Worker supports major Linux distributions, such as:
+
+- Amazon Linux
+- CentOS
+- Red Hat Enterprise Linux (RHEL)
+- Ubuntu
+
 {% alert level="danger" %}
 For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
 {% /alert %}
