@@ -33587,7 +33587,7 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             components:
               - name: API
                 position: 0
@@ -33606,10 +33606,10 @@ components:
                 position: 2
                 type: component
             domain_prefix: status-page-us1
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -33634,7 +33634,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         components:
           description: The components displayed on the status page.
@@ -33664,14 +33664,14 @@ components:
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -33685,7 +33685,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -107256,12 +107256,12 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             domain_prefix: status-page-us1-east
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1 East
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -107293,7 +107293,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         domain_prefix:
           description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
@@ -107301,14 +107301,14 @@ components:
           type: string
         email_header_image:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -107322,7 +107322,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -265403,7 +265403,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       components:
                         - name: API
                           position: 0
@@ -265422,10 +265422,10 @@ paths:
                           position: 2
                           type: component
                       domain_prefix: status-page-us1
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -265740,12 +265740,12 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       domain_prefix: status-page-us1-east
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1 East
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
