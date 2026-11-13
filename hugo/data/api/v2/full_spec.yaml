@@ -30931,6 +30931,15 @@ components:
           example: 12
           format: int64
           type: integer
+        flags:
+          additionalProperties:
+            $ref: "#/components/schemas/CoverageSummaryFlagStats"
+          description: |-
+            Coverage statistics broken down by flag. Each entry contains only coverage percentages.
+            Branch summaries include the flags of the latest covered commit, including coverage carried forward
+            to that commit. Pull request summaries include flags across all commits of the pull request.
+          nullable: true
+          type: object
         patch_coverage:
           description: Overall patch coverage percentage.
           example: 70.1
@@ -30987,6 +30996,22 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/CoverageSummaryType"
+      type: object
+    CoverageSummaryFlagStats:
+      description: Coverage statistics for a specific flag.
+      properties:
+        patch_coverage:
+          description: Patch coverage percentage for the flag.
+          example: 70.0
+          format: double
+          nullable: true
+          type: number
+        total_coverage:
+          description: Total coverage percentage for the flag.
+          example: 75.0
+          format: double
+          nullable: true
+          type: number
       type: object
     CoverageSummaryResponse:
       description: Response object containing code coverage summary.
@@ -171964,8 +171989,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific branch in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoverageBranchSummary
       requestBody:
         content:
@@ -172030,8 +172055,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific commit in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
 
         The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).
       operationId: GetCodeCoverageCommitSummary
@@ -172170,8 +172195,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific pull request in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoveragePRSummary
       requestBody:
         content:
