@@ -18,12 +18,12 @@ further_reading:
 
 Datadog is changing how AWS metric tag filters are stored and evaluated. Previously, a tag filter was scoped to a CloudWatch **namespace** and written as a comma-separated list of tag terms. These filters move into a single field that supports:
 
-- Scoping a filter to a specific AWS **resource type** (for example, an ELB load balancer or an SQS queue) instead of an entire namespace.
-- Richer tag expressions using explicit `AND`, `OR`, and `NOT` operators instead of a flat comma-separated list.
+- Scoping a filter to a specific AWS **resource type** (for example, an ELB load balancer or an SQS queue) instead of an entire namespace
+- Writing richer tag expressions with explicit `AND`, `OR`, and `NOT` operators instead of a flat comma-separated list
 
-For most organizations this change is transparent and requires no action. Existing filters are preserved through the migration. A few cases change how specific metrics are scoped, and those cases are described in [Metric behavior changes](#metric-behavior-changes).
+For most organizations, this change requires no action, and existing filters are preserved through the migration. A few cases change how specific metrics are scoped. For details, see the [Metric behavior changes](#metric-behavior-changes) section.
 
-As part of this change, the **v1** AWS integration tag filtering API is deprecated. See [Migrate off the v1 filtering API](#migrate-off-the-v1-filtering-api).
+As part of this change, the v1 AWS integration tag filtering API is deprecated. See the [Migrate off the v1 filtering API](#migrate-off-the-v1-filtering-api) section.
 
 ## Why this change
 
@@ -38,17 +38,17 @@ You are affected if both of the following are true:
 - You have the Datadog AWS integration installed.
 - You have one or more AWS metric tag filters configured.
 
-Most affected organizations see no change in collected metrics. Review [Metric behavior changes](#metric-behavior-changes) to determine whether any of your filters fall into a case that changes behavior.
+Most affected organizations see no change in collected metrics. To determine whether any of your filters fall into a case that changes behavior, review the [Metric behavior changes](#metric-behavior-changes) section.
 
 ## Metric behavior changes
 
-After your organization is migrated, your existing filters continue to apply, except in the cases below, where a metric can no longer be scoped the same way.
+After your organization is migrated, your existing filters continue to apply, except in the following cases, where a metric can no longer be scoped the same way.
 
 ### Step Functions account-level and service-integration metrics
 
-Some Step Functions (`AWS/States`) metrics are reported at the account level and are not tied to a specific resource. Because a resource-type filter has no resource to match on, it no longer drops these metrics, and they start being collected.
+Some Step Functions (`AWS/States`) metrics are reported at the account level and are not tied to a specific resource. Because a resource-type filter has no resource to match on, it no longer drops these metrics, and Datadog collects them.
 
-If you have a tag filter on Step Functions before migration, the following metrics are no longer dropped by that filter:
+If you had a Step Functions tag filter before migration, that filter no longer drops the following metrics:
 
 _Account-level metrics:_
 
@@ -83,7 +83,7 @@ Step Functions metrics that describe Lambda invocations resolve to the `lambda/f
 
 ### Amazon DocumentDB and Amazon Neptune metrics
 
-Amazon DocumentDB and Amazon Neptune metrics resolve to the `rds` resource type, so your **Amazon RDS** tag filter also applies to them. If your RDS filter excludes resources, matching DocumentDB and Neptune metrics can stop being collected.
+Amazon DocumentDB and Amazon Neptune metrics resolve to the `rds` resource type, so your **Amazon RDS** tag filter also applies to them. If your RDS filter excludes resources, Datadog stops collecting matching DocumentDB and Neptune metrics.
 
 ## Filter term normalization
 
@@ -91,30 +91,32 @@ When a legacy comma-separated filter moves to the new expression format, some te
 
 ## Migrate off the v1 filtering API
 
-The v1 AWS integration tag filtering API has been deprecated and is scheduled to be sunset on March 17, 2027 (a four-month migration window):
+The v1 AWS integration tag filtering API is deprecated and is scheduled for sunset on March 17, 2027:
 
-- Endpoint: `https://api.datadoghq.com/api/v1/integration/aws/filtering`
-- Reference: [AWS Integration API documentation][1]
+- **Endpoint**: `/api/v1/integration/aws/filtering`
+- **Reference**: [AWS Integration API documentation][1]
 
-Manage your AWS metric tag filters through the [AWS integration configuration][2] in Datadog, or through the v2 AWS Integration API. After the v1 endpoint is sunset, requests to it no longer take effect. Existing filters are not deleted; you manage them through the supported paths instead.
+Manage your AWS metric tag filters through the [AWS integration configuration][2] in Datadog, or through the [v2 AWS Integration API][1]. After the v1 endpoint is sunset, requests to it no longer take effect. Existing filters are not deleted; you manage them through the supported paths instead.
 
-Alongside the v1 API, the `tag_filters` field in the v2 AWS metrics configuration is also deprecated, in favor of resource-type tag filters. The field continues to apply during the migration, but configure new filters using resource-type tag filters instead.
+Alongside the v1 API, the `tag_filters` field in the v2 AWS metrics configuration is deprecated in favor of the `resource_type_tag_filters` field. The `tag_filters` field continues to apply during the migration, but configure new filters using `resource_type_tag_filters` instead. After you set `resource_type_tag_filters` for an account, `tag_filters` no longer controls which metrics are collected for that account.
 
 ### If you use Terraform
 
-If you manage AWS tag filters with the Datadog Terraform provider, no action is required for the API migration. Resource-type tag filters are supported in the Datadog Terraform provider in version 4.30.0 and later, through the `resource_type_tag_filters` block on the `datadog_integration_aws_account` resource. The `tag_filters` block is deprecated in favor of `resource_type_tag_filters`, and the two are mutually exclusive on an account. On earlier provider versions, your existing `tag_filters` configuration is left untouched and continues to apply without errors or drift.
+If you manage AWS tag filters with the Datadog Terraform provider, no action is required for the API migration. Datadog Terraform provider version 4.30.0 and later supports resource-type tag filters through the `resource_type_tag_filters` block on the `datadog_integration_aws_account` resource. The `tag_filters` block is deprecated in favor of `resource_type_tag_filters`, and the two are mutually exclusive on an account. On earlier provider versions, your existing `tag_filters` configuration is left untouched and continues to apply without errors or drift.
 
-After your organization is migrated, your Terraform `tag_filters` continue to control filtering until you make a manual change to the resource-type tag filters through the Datadog UI or v2 API. After that point, your Terraform `tag_filters` no longer control which metrics are filtered. To keep managing filters in Terraform, move your configuration to `resource_type_tag_filters`.
+<div class="alert alert-warning">After your organization is migrated, your Terraform <code>tag_filters</code> continue to control filtering until you make a manual change to the resource-type tag filters through the Datadog UI or v2 API. After that point, your Terraform <code>tag_filters</code> no longer control which metrics are filtered. To keep managing filters in Terraform, move your configuration to <code>resource_type_tag_filters</code>.</div>
 
 ## Next steps
 
-1. Review your AWS metric tag filters on Step Functions, Amazon RDS, and AWS Lambda against the cases in [Metric behavior changes](#metric-behavior-changes).
-2. Confirm the metrics listed above are collected or filtered the way you expect, and update any dashboards or monitors that rely on them.
+1. Review your AWS metric tag filters on Step Functions, Amazon RDS, and AWS Lambda against the cases in the [Metric behavior changes](#metric-behavior-changes) section.
+2. Confirm that the metrics listed in the [Metric behavior changes](#metric-behavior-changes) section are collected or filtered the way you expect, and update any dashboards or monitors that rely on them.
 3. If you call the v1 filtering endpoint from scripts, CI jobs, or other integrations, move those calls to the [AWS integration configuration][2] or the v2 AWS Integration API.
 
-## Get help
+## Need help?
 
 If you need help identifying which of your filters, monitors, or dashboards are affected, contact [Datadog Support][3].
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
