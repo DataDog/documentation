@@ -269,8 +269,6 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 
 **Note**: If you set a value for `NODE_OPTIONS` in your test command, preserve `-r dd-trace/ci/init` with `${NODE_OPTIONS:-}`.
 
-If your Cypress tests do not appear in Datadog, see [Cypress troubleshooting](#cypress-tests-do-not-appear-in-datadog).
-
 ### Adding custom tags to tests
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
