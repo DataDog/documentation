@@ -17,6 +17,8 @@ The DDOT Collector is in Preview.
 
 Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. You don't need the Datadog Agent.
 
+To install the Collector and instrument an application with Datadog's installer script, see the [Kubernetes quickstart][73].
+
 Already run the upstream OpenTelemetry Collector? To switch it to the DDOT Collector by changing its image, see [Migrate to the DDOT Collector][72].
 
 ## Requirements
@@ -747,8 +749,6 @@ ports:
 {{% /collapse-content %}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/README.md
-[2]: /getting_started/site/
-[3]: /containers/guide/changing_container_registry/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -940,7 +940,6 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
-[3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://opentelemetry.io/docs/platforms/kubernetes/helm/collector/
 [5]: https://kubernetes.io/docs/tasks/tools/#kubectl
 [12]: /opentelemetry/instrument/otel_sdks/
@@ -959,3 +958,4 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [68]: /opentelemetry/compatibility/
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
 [72]: /opentelemetry/migrate/upstream_to_ddot_collector/
+[73]: /opentelemetry/getting_started/kubernetes/

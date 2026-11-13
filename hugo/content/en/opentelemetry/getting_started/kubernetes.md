@@ -24,9 +24,11 @@ For other environments and installation options, see [Send OpenTelemetry Data to
 ## Prerequisites
 
 - A Kubernetes cluster with cluster-admin access through `kubectl`.
-- [Helm][4] 3 or later, and `git`.
+- [Helm][4] v4 or later, and `git`.
 - A [Datadog API key][5].
 - An application that runs in the cluster as a Deployment, written in Java, Python, Node.js, or .NET.
+
+This quickstart and the DDOT Collector require Kubernetes. On other platforms, [send OpenTelemetry data to Datadog][17] with the Agent's Collector or an upstream OpenTelemetry Collector.
 
 ## 1. Download the installer
 
