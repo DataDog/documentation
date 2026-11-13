@@ -269,6 +269,8 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 
 **Note**: If you set a value for `NODE_OPTIONS` in your test command, preserve `-r dd-trace/ci/init` with `${NODE_OPTIONS:-}`.
 
+If your Cypress tests do not appear in Datadog, see [Cypress troubleshooting](#cypress-tests-do-not-appear-in-datadog).
+
 ### Adding custom tags to tests
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
@@ -449,6 +451,71 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Troubleshooting
+
+### Cypress tests do not appear in Datadog
+
+Automatic instrumentation is expected to work without changes to your Cypress configuration. If your Cypress tests do not appear in Datadog after following the setup instructions, an unexpected Cypress configuration might prevent automatic instrumentation. [Contact Datadog Support](/help/) with details of your Cypress configuration so the issue can be investigated. As a workaround, try registering the Datadog plugin and browser support manually as described below.
+
+#### Register the Datadog plugin
+
+Add the Datadog plugin to `setupNodeEvents` in your `cypress.config.js` file. Preserve any existing plugin setup and return the configuration from the Datadog plugin:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // Register your other plugins here.
+      return require('dd-trace/ci/cypress/plugin')(on, config)
+    },
+    supportFile: 'cypress/support/e2e.js'
+  }
+})
+{{< /code-block >}}
+
+#### Load the Datadog browser support
+
+Add the following import at the top level of your configured support file. Keep any existing support code:
+
+{{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
+require('dd-trace/ci/cypress/support')
+// For ES modules, use:
+// import 'dd-trace/ci/cypress/support'
+{{< /code-block >}}
+
+#### Preserve existing Cypress event handlers
+
+Datadog uses the Cypress `after:run` and `after:spec` events. If you register your own handlers for these events, call the corresponding Datadog handler from your existing handler. Return its result and pass through all event arguments:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      const updatedConfig = require('dd-trace/ci/cypress/plugin')(on, config)
+
+      on('after:run', (details) => {
+        // Run your existing after:run handler here.
+        return require('dd-trace/ci/cypress/after-run')(details)
+      })
+
+      on('after:spec', (...args) => {
+        // Run your existing after:spec handler here.
+        return require('dd-trace/ci/cypress/after-spec')(...args)
+      })
+
+      return updatedConfig
+    },
+    supportFile: 'cypress/support/e2e.js'
+  }
+})
+{{< /code-block >}}
+
+Run your tests again with the reporting configuration from the setup instructions. If they still do not appear in Datadog, continue troubleshooting with Datadog Support.
 
 ### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
