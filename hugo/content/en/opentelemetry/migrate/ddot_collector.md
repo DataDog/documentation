@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Set Up the Agent's Collector"
@@ -37,7 +37,7 @@ Before you begin, review your configuration to see if your existing config is su
 
 1. Examine your existing upstream OpenTelemetry Collector configuration file (`otel-config.yaml`).
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
-1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+1. If your setup uses components not included in the Agent by default, follow [Add Components to the Agent's Collector][4].
 1. If your configuration uses `span_name_as_resource_name` or `span_name_remappings`, review the [New Operation Name Mappings guide][11]. The Agent's Collector enables these new mappings by default.
 
 <div class="alert alert-info">The Agent's Collector can use different configuration defaults than the upstream OpenTelemetry Collector. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from the upstream Collector.</div>
@@ -94,7 +94,7 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+In this case, you need to follow [Add Components to the Agent's Collector][4].
 
 [4]: /opentelemetry/setup/ddot_collector/custom_components
 {{% /tab %}}
