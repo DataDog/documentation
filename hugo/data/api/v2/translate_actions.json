@@ -2048,6 +2048,22 @@
     "request_description": "",
     "request_schema_description": "Request to create an experiment draft."
   },
+  "ListBandits": {
+    "description": "List the organization's bandits, newest first by default. Each item is a summary; use Get bandit for its setup, active policy, and latest refresh. Bandits must be enabled for the organization.",
+    "summary": "List bandits"
+  },
+  "GetBandit": {
+    "description": "Get a bandit: its setup, the policy it serves, its latest refresh, and the arm most likely to be best. When the caller lacks feature flag and environment read permissions, the response omits `datadog_flag_configuration` and `meta.warnings` includes `datadog_flag_configuration_omitted`. Bandits must be enabled for the organization.",
+    "summary": "Get bandit"
+  },
+  "GetBanditResults": {
+    "description": "Get what a bandit's refreshes have learned: each arm's estimate and probability of being best from the latest saved refresh, and each arm's point estimate over time. `start` and `end` narrow only `point_estimates`; the latest estimates ignore them. Observation counts are on Get bandit traffic summary. Bandits must be enabled for the organization.",
+    "summary": "Get bandit results"
+  },
+  "GetBanditTrafficSummary": {
+    "description": "Get what a bandit has observed, as of its latest saved refresh: observation counts, subjects, and each arm's valid observations and subjects in total and per UTC day. An observation is a subject's reward on the arm it was exposed to, counted on the UTC day of its anchor time. `start` and `end` narrow only `daily`; the totals ignore them. Bandits must be enabled for the organization.",
+    "summary": "Get bandit traffic summary"
+  },
   "ListExposureSQLModels": {
     "description": "List exposure SQL models. Returns a paginated list of the SQL models that experiment exposures are read from for the organization. Models maintained by Datadog are not included: they cannot be modified and cannot be used as an experiment's assignment source.",
     "summary": "List exposure SQL models"

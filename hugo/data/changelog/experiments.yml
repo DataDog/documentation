@@ -104,3 +104,12 @@ entries:
       - UpdateMetricCollection
       - UpdateMetricSQLModel
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - GetBandit
+      - GetBanditResults
+      - GetBanditTrafficSummary
+      - ListBandits
+    title: Add the bandit reads to the Experiments API
