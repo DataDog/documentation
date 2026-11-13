@@ -40,6 +40,8 @@ cascade:
 
 {{< header-list header="AWS guides" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag=" AWS" >}}AWS integration automatic setup with CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-agent-installation" tag=" AWS" >}}Install Datadog instrumentation through the AWS integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-agent-installation-technical-reference" tag=" AWS" >}}AWS integration instrumentation technical reference{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-terraform-setup" tag=" AWS" >}}AWS integration automatic setup with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}AWS integration multi-account setup for Organizations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}AWS integration manual setup{{< /nextlink >}}

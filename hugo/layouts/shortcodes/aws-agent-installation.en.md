@@ -12,9 +12,15 @@ For **AWS Lambda functions**, Datadog needs permissions to:
 - Add and remove the Datadog Lambda layers on a function (AWS Lambda).
 - Identify Lambda@Edge functions so Datadog can skip them (Amazon CloudFront).
 
-For both workloads, Datadog also uses Amazon EventBridge to maintain instrumentation as your AWS resources change.
+For **Amazon EKS clusters**, Datadog needs permissions to:
 
-<div class="alert alert-info">All write actions run inside your own AWS account through the role created by the CloudFormation stack. Datadog does not hold persistent write credentials to your account.</div>
+- Inspect clusters and manage the Datadog Operator and prerequisite add-ons (Amazon EKS).
+- Store the API key and cluster-specific Service Access Token, and update the token secret when a replacement token is needed (AWS Secrets Manager).
+- Manage the scoped credential synchronization role and Pod Identity association (IAM and Amazon EKS).
+
+For all workloads, Datadog also uses Amazon EventBridge to maintain instrumentation as your AWS resources change.
+
+<div class="alert alert-info">All AWS write actions run inside your own AWS account through the role created by the CloudFormation stack. Datadog does not hold persistent write credentials to your account.</div>
 
 The CloudFormation stack you approve during setup adds these permissions to your AWS integration IAM role, scoped to the workloads you selected. There is no policy to apply manually.
 
