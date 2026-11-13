@@ -2147,16 +2147,11 @@ menu:
       url: metrics/units/
       parent: metrics_explorer
       weight: 601
-    - name: Summary
-      identifier: metrics_summary
-      url: metrics/summary/
+    - name: Catalog
+      identifier: metrics_catalog
+      url: metrics/catalog/
       parent: metrics_top_level
       weight: 7
-    - name: Volume
-      identifier: metrics_volume
-      url: metrics/volume/
-      parent: metrics_top_level
-      weight: 8
     - name: Advanced Filtering
       url: metrics/advanced-filtering/
       parent: metrics_top_level
