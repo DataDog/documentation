@@ -417,8 +417,26 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
+      recommendation_type: Delete Empty Azure App Service Plan
+      recommendation_description: Identifies dedicated Azure App Service Plans that have hosted no apps for at least two weeks, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: App Service Plan
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Downsize App Service Plan
+      recommendation_description: Identifies App Service Plans whose peak CPU and memory would stay low on the next smaller size, and recommends moving them to it to cut on-demand plan charges.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Upgrade Azure App Service Plan
+      recommendation_description: Identifies App Service Plans on Standard or Premium v2 sizes where a Premium v3 size with at least the same vCPU and memory costs less, and recommends upgrading them.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
@@ -554,6 +572,24 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Downsize SQL Server Database vCores
+      recommendation_description: Identifies provisioned vCore SQL Server Databases whose peak CPU, workers, log write and data IO would stay low on fewer vCores, and recommends downsizing them to cut on-demand compute and SQL license charges.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Enable Auto-Pause on Serverless SQL Server Database
+      recommendation_description: Identifies serverless SQL Server Databases with auto-pause disabled that sat idle for long stretches, and recommends enabling auto-pause so compute stops billing while they are idle.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Elastic Pool
+      recommendation_type: Downsize Azure SQL Elastic Pool
+      recommendation_description: Identifies Azure SQL elastic pools whose peak utilization would stay low on a smaller size, and recommends downsizing them, at most two sizes at a time, to cut on-demand eDTU or vCore charges.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
       resource_type: SQL Managed Instance
       recommendation_type: Downsize SQL Managed Instance
       recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay low on a smaller vCore size, and recommends downsizing them, at most two sizes at a time, to cut on-demand compute and SQL license charges.
@@ -570,11 +606,17 @@ multifiltersearch:
       recommendation_type: Delete Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Delete Stopped (Allocated) Azure VM Instance
+      recommendation_description: Identifies Azure VMs stopped without being deallocated, which Azure still bills for compute, and recommends deleting or deallocating them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type.
+      recommendation_description: VM instance that can be downsized to a smaller instance type. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU and, when available, memory metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: Azure
