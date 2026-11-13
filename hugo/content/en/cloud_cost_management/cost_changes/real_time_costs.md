@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Real-Time Costs provide near real-time estimates of your compute costs on AWS, Azure, and Google Cloud, including Kubernetes cost allocation, so that you can react to cost changes in minutes and hours, instead of days. Datadog generates estimates from real-time usage data that the Datadog Agent collects, and prices that usage with your recent average hourly costs from Cloud Cost Management billing data.
+Real-Time Costs estimates your AWS, Azure, and Google Cloud compute costs in near real time, so that you can react to cost changes in minutes or hours instead of days. Datadog generates estimates from real-time usage data that the Datadog Agent collects, and prices that usage with your recent average hourly costs from Cloud Cost Management billing data.
 
 <div class="alert alert-info">Real-time costs for Azure and Google Cloud are in Preview.</div>
 
@@ -30,20 +30,20 @@ Real-time costs are available for:
 |---|---|---|---|
 | AWS | Amazon EC2 instances and Kubernetes running on EC2 | `aws.cost.net.amortized.realtime.estimated` | Recent average hourly net amortized EC2 prices by instance type, region, and AWS account |
 | Azure (Preview) | Azure Virtual Machines compute and Kubernetes running on Azure VMs | `azure.cost.amortized.realtime.estimated` | Recent average hourly amortized VM prices by instance type, region, and Azure subscription |
-| Google Cloud (Preview) | Compute Engine vCPU and memory and Kubernetes running on Compute Engine | `gcp.cost.amortized.realtime.estimated` | Recent average hourly amortized vCPU and memory prices by machine type, region, and Google Cloud project |
+| Google Cloud (Preview) | Compute Engine instances (vCPU and memory) and Kubernetes running on Compute Engine | `gcp.cost.amortized.realtime.estimated` | Recent average hourly amortized vCPU and memory prices by machine type, region, and Google Cloud project |
 
 Real-time costs cover compute only. The following charges are excluded:
-- **AWS**: EBS, networking, and similar services.
-- **Azure**: Everything other than Virtual Machines compute usage (`chargetype:Usage`), such as managed disks, storage, bandwidth, and networking. Unused Azure capacity reservations are also excluded.
-- **Google Cloud**: Everything other than the vCPU (Core) and memory (RAM) SKUs of Compute Engine instances, such as Persistent Disk, GPUs, networking, OS licenses, and external IP addresses. Credits and reservation charges are also excluded.
+- **AWS**: EBS, networking, and other charges outside Amazon EC2 instance compute.
+- **Azure**: Managed disks, storage, bandwidth, networking, and other charges outside Virtual Machines compute usage (`chargetype:Usage`). Unused Azure capacity reservations are also excluded.
+- **Google Cloud**: Persistent Disk, GPUs, networking, OS licenses, external IP addresses, and other charges outside the vCPU (Core) and memory (RAM) SKUs of Compute Engine instances. Credits and reservation charges are also excluded.
 
 ## Requirements
 
 Real-Time Costs is available for Cloud Cost Management Enterprise customers.
 
-- Cloud Cost Management is enabled for the AWS account, Azure subscription, or Google Cloud project
-- The Datadog Agent is installed on each EC2 instance, Azure VM, or Compute Engine instance
-- (Optional) To see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup guide in [Container Cost Allocation][2]
+- Cloud Cost Management is enabled for the AWS account, Azure subscription, or Google Cloud project.
+- The Datadog Agent is installed on each EC2 instance, Azure VM, or Compute Engine instance.
+- (Optional) To see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup guide in [Container Cost Allocation][2].
 
 ## How to query real-time costs
 
@@ -56,15 +56,15 @@ Find real-time costs under the standard {{< ui >}}Metrics{{< /ui >}} source in M
 | Google Cloud | `sum:gcp.cost.amortized.realtime.estimated{*}.as_count().rollup(sum, 300)` |
 
 Query real-time costs with:
-- the `sum` or `sum by` aggregation
-- as `count` (learn more about [rate vs count metrics][1])
-- rollup `sum`, minimum of 5 minutes (300 seconds in the preceding queries, because real-time costs update every 5 minutes)
+- The `sum` or `sum by` aggregation
+- The `.as_count()` modifier (learn more about [rate vs count metrics][1])
+- A `sum` rollup of at least 5 minutes (300 seconds in the preceding queries, because real-time costs update every 5 minutes)
 
-Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly costs can be helpful to better understand usage patterns before buying Savings Plans and reservations.
+Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly costs help you understand usage patterns before you buy Savings Plans and reservations.
 
 ## Real-time Kubernetes allocation
 
-Similar to the existing container cost allocation, EC2 instance, Azure VM, and Compute Engine instance costs are broken down into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service, or env, and **out-of-the-box Kubernetes tags**:
+As with container cost allocation, Datadog breaks down EC2 instance, Azure VM, and Compute Engine instance costs into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service, or env, and **out-of-the-box Kubernetes tags**:
 - `allocated_spend_type`, which splits compute costs into CPU and memory used by a workload (`usage`), requested by a workload but not used (`workload_idle`), and not reserved by any workload (`cluster_idle`)
 - `kube_cluster_name`
 - `kube_namespace`
@@ -79,19 +79,19 @@ Nodes that are idle or running no pods keep their Kubernetes tags, such as `kube
 
 ## Tags
 
-Tags for real-time costs are similar to those on other Cloud Cost Management metrics, but not identical:
+Tags for real-time costs differ from tags on other Cloud Cost Management metrics in the following ways:
 - All tag values are lowercase, normalized like Metrics data.
 - Tag Pipelines and Custom Allocation Rules are not applied.
 - Some billing-specific tags (from the AWS Cost and Usage Report, Azure cost exports, or Google Cloud billing exports) and FOCUS tags may not exist on real-time cost metrics. Real-time costs come primarily from usage data that the Datadog Agent collects, not from billing data.
 
 ## Accuracy
 
-For hosts monitored by the Datadog Agent, real-time costs aim to be within 10% of the daily compute costs in your billing data. The billing data used for the comparison depends on the provider:
+For instances monitored by the Agent, Datadog targets real-time cost estimates within 10% of the daily compute costs in your billing data. The billing data used for the comparison depends on the provider:
 - **AWS**: EC2 costs from your AWS Cost and Usage Report
 - **Azure**: Amortized Virtual Machines usage costs from your Azure cost export
 - **Google Cloud**: Amortized Compute Engine vCPU and memory costs from your Google Cloud billing export
 
-Because real-time costs prioritize low-latency delivery, temporary drops or gaps in data may occasionally occur, especially for Azure and Google Cloud while in Preview. For long-term cost trend analysis, Datadog recommends using Cloud Cost metrics based on direct billing data, which include final credits.
+Real-time costs are optimized for low-latency delivery, so temporary drops or gaps in data can occur, especially for Azure and Google Cloud while in Preview. For long-term cost trend analysis, Datadog recommends Cloud Cost Management metrics based on billing data. These metrics include final credits.
 
 - Sources of variance include:
   - Hourly averages that shift with your recent mix of on-demand (pay-as-you-go), commitment (Savings Plans, reservations, committed use discounts), and spot spending
@@ -103,9 +103,9 @@ Because real-time costs prioritize low-latency delivery, temporary drops or gaps
 - Overestimation can occur when:
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
 
-To reduce variance, filter to an account, subscription, or project that is both included in Cloud Cost Management and has the Datadog Agent on all its instances.
+To reduce variance, filter to an account, subscription, or project that Cloud Cost Management covers and where the Datadog Agent runs on every instance.
 
-You can use the `estimated_hourly_cost` and `estimated_daily_cost` tags to understand the estimated unit cost of an instance type per hour and per day.
+Use the `estimated_hourly_cost` and `estimated_daily_cost` tags to see the estimated cost of an instance type per hour and per day.
 
 [1]: /metrics/types/?tab=rate#metric-types
 [2]: /cloud_cost_management/allocation/container_cost_allocation/
