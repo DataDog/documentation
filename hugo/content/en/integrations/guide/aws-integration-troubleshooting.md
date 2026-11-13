@@ -29,6 +29,10 @@ The `sts:Assumerole` permission error indicates an issue with the trust policy a
 The **Resolve all AWS permissions issues** button in the AWS Integration page allows you to use a CloudFormation QuickStart stack to update your Datadog integration IAM role and resolve missing permissions issues. 
 Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls Datadog's public API [endpoint][13] and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It also attaches the `SecurityAudit` Managed AWS policy if it is not present.
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-info">
+Before you create the stack, set the <code>DatadogSite</code> parameter to {{< region-param key="dd_site" code="true" >}}. The parameter defaults to <code>datadoghq.com</code>, and <strong>Resolve All AWS Permissions Issues</strong> does not set it from the Datadog site you started on. The stack uses this value to retrieve the required IAM permissions from that site. If the stack form does not include <code>DatadogSite</code>, you are on an older template. Attach the AWS integration IAM policy and the <code>SecurityAudit</code> managed policy to your existing integration role instead.
+</div>{{< /site-region >}}
+
 The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix, followed by a unique hash to avoid colliding with any existing policies you have configured. You can view the CloudFormation template in Datadog's public [cloudformation-template repository][14].
 
 <div class="alert alert-danger">
