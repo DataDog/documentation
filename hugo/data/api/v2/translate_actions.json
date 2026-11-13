@@ -3164,6 +3164,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
   },
+  "ListNebiusCloudIntegrationAccounts": {
+    "description": "List Nebius Cloud integration accounts.",
+    "summary": "List Nebius Cloud integration accounts"
+  },
+  "CreateNebiusCloudIntegrationAccount": {
+    "description": "Create a Nebius Cloud integration account.",
+    "summary": "Create a Nebius Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Nebius Cloud integration account."
+  },
+  "DeleteNebiusCloudIntegrationAccount": {
+    "description": "Delete a Nebius Cloud integration account.",
+    "summary": "Delete a Nebius Cloud integration account"
+  },
+  "GetNebiusCloudIntegrationAccount": {
+    "description": "Get a Nebius Cloud integration account.",
+    "summary": "Get a Nebius Cloud integration account"
+  },
+  "UpdateNebiusCloudIntegrationAccount": {
+    "description": "Update a Nebius Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update a Nebius Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Nebius Cloud integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"

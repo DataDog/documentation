@@ -93078,6 +93078,488 @@ components:
       type: string
       x-enum-varnames:
         - NDK_SYMBOL_FILE
+    NebiusCloudCostCollectionIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Cloud cost data read from a Nebius Object Storage bucket export and used by [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Enabling it requires a bucket holding your cost export and a Nebius access key pair that can read it; a request that enables this dataflow without them is rejected with a `422` response.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowSettingsRequest"
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowResponse:
+      description: >-
+        Cloud cost data read from a Nebius Object Storage bucket export and used by [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Requires a bucket holding your cost export and a Nebius access key pair that can read it; without both this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowSettingsResponse"
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Cloud Cost Management dataflow. Only the fields provided are changed.
+      properties:
+        access_key_id:
+          description: >-
+            ID of the Nebius Object Storage (S3-compatible) access key used to read the cost export bucket. Required when this dataflow is enabled.
+          example: AKID0123456789ABCDEF
+          type: string
+        access_key_secret:
+          description: >-
+            Secret access key for the access key ID. Required when this dataflow is enabled. Omit it on update to keep the stored one; an empty string is rejected with a `422` response.
+          example: wJalrXUtnFEMIstaticaccesskey
+          type: string
+          writeOnly: true
+        bucket_name:
+          description: >-
+            Name of the Nebius Object Storage bucket holding your cost export. Required when this dataflow is enabled; a request that enables it without the bucket fields and access keys is rejected with a `422` response.
+          example: nebius-cost-exports
+          type: string
+        bucket_prefix_path:
+          description: >-
+            Prefix path within the bucket that locates the cost export, combining the export name and path prefix.
+          example: cost-export/2026/
+          type: string
+        bucket_region:
+          description: >-
+            Region of the Nebius Object Storage bucket, such as `eu-north1`. Required when this dataflow is enabled.
+          example: eu-north1
+          type: string
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowSettingsResponse:
+      description: Settings of the Cloud Cost Management dataflow.
+      properties:
+        access_key_id:
+          description: ID of the Nebius Object Storage access key used to read the cost export bucket.
+          example: AKID0123456789ABCDEF
+          type: string
+        bucket_name:
+          description: Name of the Nebius Object Storage bucket holding the cost export.
+          example: nebius-cost-exports
+          type: string
+        bucket_prefix_path:
+          description: Prefix path within the bucket that locates the cost export.
+          example: cost-export/2026/
+          type: string
+        bucket_region:
+          description: Region of the Nebius Object Storage bucket, such as `eu-north1`.
+          example: eu-north1
+          type: string
+      type: object
+    NebiusCloudIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Nebius Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthRequest"
+    NebiusCloudIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Nebius Cloud integration account.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthResponse"
+    NebiusCloudIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Nebius Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthUpdate"
+    NebiusCloudIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Nebius Cloud integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    NebiusCloudIntegrationAccountCreateData:
+      description: Data envelope for creating a Nebius Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    NebiusCloudIntegrationAccountCreateRequest:
+      description: Request payload to create a Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountResponse:
+      description: Response payload for a single Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountResponseAttributes:
+      description: Attributes of a Nebius Cloud integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    NebiusCloudIntegrationAccountResponseData:
+      description: Data envelope of a Nebius Cloud integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Nebius Cloud integration account.
+          example: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthRequest:
+      additionalProperties: false
+      description: >-
+        Service-account key pair authentication, the only method Nebius Cloud integration accounts support. Create a service account in the Nebius console, add it to the admin group, upload an authorized key pair to it, and issue a static API key with the OBSERVABILITY scope through the Nebius CLI.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        private_key:
+          description: >-
+            The private key of the authorized key pair, in PEM format. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        public_key_id:
+          description: >-
+            ID of the public key half of the authorized key pair, such as `publickey-xxxxxxxx`. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: publickey-yyyyyyyy
+          type: string
+        service_account_id:
+          description: Non-secret ID of the Nebius service account the account authenticates as.
+          example: serviceaccount-xxxxxxxx
+          type: string
+        static_api_key:
+          description: >-
+            Nebius static API key with the OBSERVABILITY scope, used to query logs. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: eyJhbGciOi...static-api-key
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - service_account_id
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthResponse:
+      description: The service-account key pair authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        public_key_id:
+          description: ID of the public key half of the authorized key pair. Omitted when unset.
+          example: publickey-yyyyyyyy
+          type: string
+        service_account_id:
+          description: ID of the Nebius service account the account authenticates as.
+          example: serviceaccount-xxxxxxxx
+          type: string
+      required:
+        - auth_type
+        - service_account_id
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthType:
+      default: nebius_service_account
+      description: The authentication method type.
+      enum:
+        - nebius_service_account
+      example: nebius_service_account
+      type: string
+      x-enum-varnames:
+        - NEBIUS_SERVICE_ACCOUNT
+    NebiusCloudIntegrationAccountServiceAccountAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Service-account key pair authentication, the only method Nebius Cloud integration accounts support. Only the fields provided are changed; omit `private_key` and `static_api_key` to keep the stored ones.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        private_key:
+          description: >-
+            The private key of the authorized key pair, in PEM format. Omit it to keep the stored one; an empty string is rejected with a `422` response.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        public_key_id:
+          description: >-
+            ID of the public key half of the authorized key pair. Omit it to keep the stored public key ID, send `null` or an empty string to remove it, or send a value to replace it. Removing it is rejected with a `422` response while log, resource, or service-quota collection is enabled.
+          example: publickey-yyyyyyyy
+          nullable: true
+          type: string
+        service_account_id:
+          description: >-
+            Non-secret ID of the Nebius service account the account authenticates as. It cannot be cleared; sending `null` or an empty string is rejected with a `422` response.
+          example: serviceaccount-xxxxxxxx
+          type: string
+        static_api_key:
+          description: >-
+            Nebius static API key with the OBSERVABILITY scope. Omit it to keep the stored one; an empty string is rejected with a `422` response.
+          example: eyJhbGciOi...static-api-key
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    NebiusCloudIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Nebius Cloud integration account.
+      properties:
+        account_tags:
+          description: >-
+            Tags applied to all metrics, logs, and resources collected from this Nebius Cloud account. Defaults to no tags.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            type: string
+          type: array
+        tenant_id:
+          description: >-
+            ID of the Nebius tenant to monitor, the organizational workspace identifier. Found in the Nebius console under Administration > Organization.
+          example: tenant-12345678
+          type: string
+      required:
+        - tenant_id
+      type: object
+    NebiusCloudIntegrationAccountSettingsResponse:
+      description: Settings configured on the Nebius Cloud integration account.
+      properties:
+        account_tags:
+          description: Tags applied to all data collected from this Nebius Cloud account.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            type: string
+          type: array
+        tenant_id:
+          description: ID of the Nebius tenant being monitored.
+          example: tenant-12345678
+          type: string
+      required:
+        - tenant_id
+      type: object
+    NebiusCloudIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Nebius Cloud integration account. Only the fields provided are changed.
+      properties:
+        account_tags:
+          description: >-
+            Tags applied to all metrics, logs, and resources collected from this Nebius Cloud account. Sending it replaces the whole list; send an empty array to remove all tags, or omit it to keep the stored list.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            type: string
+          type: array
+        tenant_id:
+          description: >-
+            ID of the Nebius tenant to monitor. An empty value is ignored and the stored tenant ID is kept.
+          example: tenant-12345678
+          type: string
+      type: object
+    NebiusCloudIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Nebius Cloud integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsUpdate"
+      type: object
+    NebiusCloudIntegrationAccountUpdateData:
+      description: Data envelope for updating a Nebius Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Nebius Cloud integration account to update.
+          example: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    NebiusCloudIntegrationAccountUpdateRequest:
+      description: Request payload to update a Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountsResponse:
+      description: Response payload for a list of Nebius Cloud integration accounts.
+      properties:
+        data:
+          description: List of Nebius Cloud integration accounts.
+          items:
+            $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Nebius Cloud, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to stop or start it, and use `settings` to configure what it collects. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow except `nebius-cloud-cost-collection` runs as the service account in `authentication`, using its authorized key pair and the static API key; enabling one of them without those keys is rejected with a `422` response, and one enabled with keys that later expire is stored but collects no data.
+      properties:
+        nebius-cloud-cost-collection:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowRequest"
+        nebius-cloud-logs:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowRequest"
+        nebius-cloud-resources:
+          $ref: "#/components/schemas/NebiusCloudResourcesIntegrationDataflowRequest"
+        nebius-cloud-service-quota-collection:
+          $ref: "#/components/schemas/NebiusCloudServiceQuotaCollectionIntegrationDataflowRequest"
+      type: object
+    NebiusCloudIntegrationDataflowsResponse:
+      description: Data Datadog collects from Nebius Cloud, keyed by dataflow id.
+      properties:
+        nebius-cloud-cost-collection:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowResponse"
+        nebius-cloud-logs:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowResponse"
+        nebius-cloud-resources:
+          $ref: "#/components/schemas/NebiusCloudResourcesIntegrationDataflowResponse"
+        nebius-cloud-service-quota-collection:
+          $ref: "#/components/schemas/NebiusCloudServiceQuotaCollectionIntegrationDataflowResponse"
+      type: object
+    NebiusCloudLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Logs from your Nebius tenant: Kubernetes control plane and audit logs, tenant-level audit events, compute serial console logs, cloud apps and AI inference logs, PostgreSQL logs, and MLflow logs, collected from the services named in `settings.enabled_services`. `enabled_services` is the sole source of truth for what is collected; `enabled` set to `false` stops log collection, while `true` on its own changes nothing. Defaults to no services.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects logs. Defaults to `false`. Set to `false` to stop log collection; sending `true` on its own changes nothing, because `settings.enabled_services` is the sole source of truth.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowSettingsRequest"
+      type: object
+    NebiusCloudLogsIntegrationDataflowResponse:
+      description: >-
+        Logs from your Nebius tenant: Kubernetes control plane and audit logs, tenant-level audit events, compute serial console logs, cloud apps and AI inference logs, PostgreSQL logs, and MLflow logs, collected from the services named in `settings.enabled_services`.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects logs. Absent when no service is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowSettingsResponse"
+      type: object
+    NebiusCloudLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the logs dataflow. Only the fields provided are changed.
+      properties:
+        enabled_services:
+          description: >-
+            Nebius log integrations to collect. One of `nebius-cloud-compute`, `nebius-cloud-kubernetes`, `nebius-cloud-mlflow`, `nebius-cloud-postgresql`, `nebius-cloud-applications`, or `default` for the streams shared by every service. A non-empty list is the sole source of truth and replaces the stored list: those services are collected and any others stop. An empty list stops log collection entirely. Omit it to keep the stored list.
+          example:
+            - nebius-cloud-compute
+            - nebius-cloud-kubernetes
+            - default
+          items:
+            type: string
+          type: array
+      type: object
+    NebiusCloudLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the logs dataflow.
+      properties:
+        enabled_services:
+          description: >-
+            Nebius log integrations collected, such as `nebius-cloud-compute` and `default`. Absent when no service is enabled.
+          example:
+            - nebius-cloud-compute
+            - nebius-cloud-kubernetes
+            - default
+          items:
+            type: string
+          type: array
+      type: object
+    NebiusCloudResourcesIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Metadata about resources in your Nebius tenant, such as compute instances and Kubernetes clusters.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudResourcesIntegrationDataflowResponse:
+      description: >-
+        Metadata about resources in your Nebius tenant, such as compute instances and Kubernetes clusters.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudServiceQuotaCollectionIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Usage metrics tracked against your Nebius service quotas, such as `nebius_cloud.servicequota.percentage_used` and `nebius_cloud.servicequota.limit`.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudServiceQuotaCollectionIntegrationDataflowResponse:
+      description: >-
+        Usage metrics tracked against your Nebius service quotas, such as `nebius_cloud.servicequota.percentage_used` and `nebius_cloud.servicequota.limit`.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured.
+          example: true
+          type: boolean
+      type: object
     NodeType:
       additionalProperties: {}
       description: A tree-sitter node type definition for a given language, describing the node's structure, subtypes, and fields.
@@ -202377,6 +202859,317 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/nebius-cloud/accounts:
+    get:
+      description: List Nebius Cloud integration accounts.
+      operationId: ListNebiusCloudIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: nebius_service_account
+                            public_key_id: publickey-yyyyyyyy
+                            service_account_id: serviceaccount-xxxxxxxx
+                          dataflows:
+                            nebius-cloud-cost-collection:
+                              enabled: true
+                              settings:
+                                access_key_id: AKID0123456789ABCDEF
+                                bucket_name: nebius-cost-exports
+                                bucket_prefix_path: cost-export/2026/
+                                bucket_region: eu-north1
+                            nebius-cloud-logs:
+                              enabled: true
+                              settings:
+                                enabled_services:
+                                  - nebius-cloud-compute
+                                  - nebius-cloud-kubernetes
+                                  - default
+                            nebius-cloud-resources:
+                              enabled: true
+                            nebius-cloud-service-quota-collection:
+                              enabled: true
+                          name: nebius-prod
+                          settings:
+                            account_tags:
+                              - env:prod
+                              - team:ai
+                            tenant_id: tenant-12345678
+                        id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Nebius Cloud integration accounts
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Nebius Cloud integration account.
+      operationId: CreateNebiusCloudIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/nebius-cloud/accounts/{account_id}:
+    delete:
+      description: Delete a Nebius Cloud integration account.
+      operationId: DeleteNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Nebius Cloud integration account.
+      operationId: GetNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Nebius Cloud integration account. Only the fields provided are changed.
+      operationId: UpdateNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/snowflake/accounts:
     get:
       description: List Snowflake integration accounts.
@@ -279460,6 +280253,15 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/monitors/create/types/
     name: Monitors
+  - description: |-
+      Manage your Datadog Nebius Cloud integration accounts and account resources
+      directly through the Datadog API. See the
+      [Nebius Cloud integration page](https://docs.datadoghq.com/integrations/nebius_cloud/) for
+      more information.
+    externalDocs:
+      description: Nebius Cloud integration.
+      url: https://docs.datadoghq.com/integrations/nebius_cloud/
+    name: Nebius Cloud Integration
   - description: |-
       The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information.
     name: Network Device Monitoring
