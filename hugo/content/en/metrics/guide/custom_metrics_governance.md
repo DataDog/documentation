@@ -85,9 +85,6 @@ Individual teams might have limited insights into the costs of the metrics and t
 #### Find the source of your largest custom metrics
 <div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
-<!-- TODO(screenshot): Recapture to show the "See in Metrics Catalog" icon label in the Plan & Usage custom metrics table. -->
-{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="The Top Custom Metrics table on the Plan & Usage page, with an icon that opens a metric in the Metrics Catalog." style="width:90%;" >}}
-
 To identify which team or service is responsible for your top custom metric names:
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
@@ -107,8 +104,7 @@ All users in your organization can see out-of-the-box, real-time estimated custo
 
 On the Metrics Catalog page, sort the metrics table by volume to identify your organization's largest metrics as well as the metric names spiking in volume (likely causes of any unexpected overage).
 
-<!-- TODO(screenshot): Replace with a Metrics Catalog screenshot, and update the alt text. -->
-{{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Metrics Volume Management page" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/metrics_catalog_page_2026-11-12.png" alt="The Metrics Catalog page with the metrics table sorted by Est. Indexed Metrics, and the Est. Indexed Metrics and Change in Volume columns highlighted." style="width:90%;" >}}
 
 For more information, see the [Metrics Catalog][8] documentation.
 

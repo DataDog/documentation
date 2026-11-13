@@ -58,8 +58,7 @@ The usage graphs on the [Metrics Catalog page][3] display the following Metric N
 - Billable indexed point volume
 - Ingested-to-indexed points ratio
 
-<!-- TODO(screenshot): The current image shows the retired "Volume Overview" heading and "Hide Graphs" link. Recapture the graphs in Catalog from an org on Metric Name Pricing, or crop off the heading row as a stopgap. -->
-{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Metric Name Pricing usage graphs: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
+{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs-2026-11-12.png" alt="Three Metric Name Pricing usage graphs: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
 
 ## Plan & Usage page
 
