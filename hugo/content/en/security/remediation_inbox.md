@@ -35,7 +35,7 @@ products:
 
 The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. Instead of listing individual findings, it groups findings by the single fix that resolves them, such as one package upgrade in a repository or one container image update. Each group is a **remediation**.
 
-Use the Remediation Inbox to find the fixes that close the most critical findings. From a remediation, you can review its impact, assign an owner, track the work in a Datadog case in [Work Management][2], and generate a pull request with AI.
+Use the Remediation Inbox to find the fixes that close the most critical findings. From a remediation, you can review its impact, assign an owner, track the work in a **remediation case** in [Work Management][2], and generate a pull request with AI.
 
 To open the Remediation Inbox, go to [Security Inbox > Remediations][11] in Datadog.
 
@@ -43,10 +43,12 @@ To open the Remediation Inbox, go to [Security Inbox > Remediations][11] in Data
 
 ## Prerequisites
 
-- Findings from at least one supported product:
-  - [Software Composition Analysis][3] (SCA) library vulnerabilities
-  - [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
-- The [permissions][13] for the actions you take:
+Findings from at least one supported product:
+
+- [Software Composition Analysis][3] (SCA) library vulnerabilities
+- [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
+
+You also need the [permissions][13] for the actions you take:
 
 | Action | Required permissions |
 |---|---|
@@ -61,8 +63,8 @@ A remediation groups the open findings that a single change resolves:
 
 | Product | Remediation | Example |
 |---|---|---|
-| Software Composition Analysis | Update one package in one repository. | Update `lodash` in `my-org/web-app` |
-| Cloud Security Vulnerabilities | Update one container image, bump a base image, or update one OS package. | Upgrade `my-registry/api:1.4` |
+| Software Composition Analysis | Update one package in one repository | Update `lodash` in `my-org/web-app` |
+| Cloud Security Vulnerabilities | Update one container image, bump a base image, or update one OS package | Update `my-registry/api:1.4` |
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
 
@@ -70,9 +72,9 @@ Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the 
 
 Remediations are ranked by the findings they close:
 
-1. Number of critical findings.
-1. Number of high findings, when the number of critical findings is equal.
-1. Total number of findings, when both counts are equal.
+1. Number of critical findings
+1. Number of high findings, when the number of critical findings is equal
+1. Total number of findings, when both counts are equal
 
 For example, a remediation that closes 5 critical findings ranks above one that closes 2 critical and 50 high findings.
 
@@ -89,11 +91,11 @@ Remediations are split into status tabs. The inbox opens on **To Triage**.
 | In Progress | A case is attached, and work is in progress. |
 | Closed | The remediation has no open findings and no fix in progress. |
 
-The status of a remediation follows the status of its remediation case, which Datadog updates automatically. See the [Remediation lifecycle](#remediation-lifecycle) section.
+The status of a remediation follows the status of its remediation case. See the [Remediation lifecycle](#remediation-lifecycle) section.
 
 ### Remediation table
 
-Each row is one remediation. Reading left to right, a row answers four questions:
+Each row is one remediation. From left to right, each row answers four questions:
 
 - **What is the fix?** The change to make, such as the package or image to update and the target version.
 - **What does it resolve?** The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
@@ -124,7 +126,7 @@ Click a remediation to open its side panel:
 
 ## Remediate
 
-Taking action on a remediation creates a **remediation case** in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
+Taking action on a remediation creates its remediation case in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
 
 ### Assign an owner
 
@@ -156,9 +158,9 @@ From the side panel, click **Remediate with AI** and choose one of the following
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
-To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default. Add `cases` to the `toolsets` parameter.
+To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default, so add `cases` to the `toolsets` parameter.
 
-To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the finding is gone before you commit.
+To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the findings are resolved before you commit.
 
 {{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options" width="80%">}}
 
@@ -168,7 +170,7 @@ If you fixed the issue outside Datadog, click **Link PR** in the side panel and 
 
 ## Track remediation progress
 
-Datadog records each fix, whether a Bits Code session or a linked pull request, as a child case of the remediation case. Child cases can have their own owner, which lets several people work on parts of the same remediation.
+Datadog records each fix, whether a Bits Code session or a linked pull request, as a child case of the remediation case. Child cases can have their own owners, which lets several people work on parts of the same remediation.
 
 While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. Findings stay open until the pull request merges and the next scan confirms the fix.
 
@@ -178,15 +180,15 @@ Findings that belong to a remediation case show the linked case in the SCA and C
 
 Datadog updates the status of remediation cases automatically:
 
-- A remediation case closes when the remediation has no open findings and no fix is in progress. Findings can leave a remediation by being fixed, muted, or expiring.
-- A remediation case moves to **In Progress** when a fix, such as a Bits Code session or a linked pull request, is in progress.
-- A closed remediation case reopens if the remediation has open findings again within 30 days of closing, including cases closed manually.
+- A remediation case moves to **In Progress** when a fix starts, such as a Bits Code session or a linked pull request.
+- A remediation case closes when the remediation has no open findings and no fix is in progress. Findings leave a remediation when they are fixed, muted, or expired.
+- A closed remediation case, including one closed manually, reopens if the remediation has open findings again within 30 days.
 
 Status updates can take up to an hour to appear.
 
 ## Enable remediation capabilities
 
-| Capability | What it unlocks | How to enable |
+| Capability | What it enables | How to enable |
 |---|---|---|
 | Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Third-party tickets][14]. |
@@ -194,7 +196,7 @@ Status updates can take up to an hour to appear.
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8], connect your GitHub repositories, and turn on the **AI Products** toggle in [AI Credits admin controls][16]. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
-| Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Code Security MCP Server][7]. |
+| Fix verification from your coding agent | Check fixes before you commit. | Set up the [Code Security MCP Server][7]. |
 
 ## Further reading
 
@@ -210,7 +212,7 @@ Status updates can take up to an hour to appear.
 [8]: /bits_ai/bits_code/setup/
 [9]: /integrations/github/
 [10]: /source_code/
-[11]: https://app.datadoghq.com/security/inbox?si-tab=remediation
+[11]: https://app.datadoghq.com/security/issues?si-tab=remediation
 [13]: /account_management/rbac/permissions/
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /mcp_server/setup/
