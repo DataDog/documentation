@@ -41,6 +41,8 @@ PHP       | [v1.4.0][15]
 .NET      | [v.2.53.2][13]
 C++       | [v0.2.2][14]
 
+**Ruby**: Standalone Sidekiq and Solid Queue tracing integrations do not automatically start Remote Configuration. See [Ruby application requirements][16] for the Rack startup requirement and local sampling configuration.
+
 ## See sampling rates by resource in the Ingestion Control page
 
 To see configured sampling rates by resource, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
@@ -56,7 +58,7 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 ## Remotely configure sampling rules for the service
 
 To configure sampling rates for the service by resource name: 
-1. Click {{< ui >}}Manage Ingestion rate{{< /ui >}}. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+1. Click {{< ui >}}Manage Ingestion rate{{< /ui >}}. If the remote configuration option is disabled, make sure that the listed [requirements](#requirements) are all met.
    {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
 1. Click {{< ui >}}Add new rule{{< /ui >}} to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
 1. Click {{< ui >}}Apply{{< /ui >}} to save the configuration.
@@ -86,3 +88,4 @@ From the {{< ui >}}Service Ingestion Summary{{< /ui >}}, resources for which the
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
 [15]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
+[16]: /tracing/guide/remote_config/#ruby-application-requirements
