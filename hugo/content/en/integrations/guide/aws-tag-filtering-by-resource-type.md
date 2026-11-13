@@ -25,7 +25,7 @@ As part of this change, the v1 AWS integration tag filtering API is deprecated. 
 ## Timeline
 
 - **Migration to resource-type scoping**: Datadog migrates organizations. No action is required, and existing filters are preserved.
-- **UI signal (November 17, 2026)**: After this release, the [AWS integration configuration][2] in Datadog shows resource-type tag filters for accounts that have been migrated. If an account still shows the legacy namespace-scoped filters, it has not been migrated.
+- **UI signal (November 17, 2026)**: After this release, the [AWS integration configuration][2] in Datadog shows resource-type tag filters. The v1 filtering API and the v2 `tag_filters` field continue to work, and Datadog evaluates those legacy filters as resource-type filters. Writing resource-type tag filters through the v2 API or the Datadog UI is the signal that an account has migrated. Datadog recommends moving your configuration to `resource_type_tag_filters` so that your filtering behaves as resource-type scoping.
 - **v1 filtering API sunset (March 17, 2027)**: The v1 filtering API and the v2 `tag_filters` field manage the same legacy filters, and both are sunset on this date. After the sunset, resource-type tag filters (`resource_type_tag_filters`) are the only supported way to manage AWS metric tag filtering through the API, for all configuration paths, including Terraform.
 
 ## Why this change
