@@ -924,12 +924,14 @@ After your application sends telemetry to the Collector, verify that data appear
 
 ## RED metrics
 
+**Note**: These options apply to the upstream OpenTelemetry Collector. If you run the [Datadog Distribution of OTel Collector (DDOT)][12] or the [Datadog Exporter and Connector][17], see those pages instead.
+
 Datadog APM uses RED (Rate, Error, Duration) metrics to power the Catalog, Service Page, Resource Page, and anything built on `trace.*` metrics. In an OpenTelemetry setup, there are three ways to produce them. Each one covers all of your traffic when its sampling behavior is accounted for.
 
 | Source | How to configure | Sampling behavior | Billing |
 |---|---|---|---|
 | Span metrics connector (recommended) | Use the recommended configuration for your environment in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector). | Aggregates every span it receives. Place it upstream of any sampling processor. | Included in APM. |
-| HTTP metrics from the SDK | Set [`trace_metrics.instrumentation_metrics_calc`](#dd-otel-metric-config-header) to `true`. Set [`raw_instrumentation_metrics_drop`](#dd-otel-metric-config-header) to keep or drop the raw metrics. | Unaffected by span sampling. The SDK aggregates over every request before export. Only the [`http.server.request.duration` and `http.client.request.duration`][15] metrics power RED metrics. | The attributes used for RED metrics are included in APM. The raw HTTP metrics are billed as [custom metrics][14] unless you drop them. |
+| HTTP metrics from the SDK ([`http.[server\|client].request.duration`][15]) | Set [`trace_metrics.instrumentation_metrics_calc`](#dd-otel-metric-config-header) to `true`. Set [`raw_instrumentation_metrics_drop`](#dd-otel-metric-config-header) to keep or drop the raw metrics. | Unaffected by span sampling. The SDK aggregates over every request before export. | The attributes used for RED metrics are included in APM. The raw HTTP metrics are billed as [custom metrics][14] unless you drop them. |
 | Spans in the Datadog backend | To compute RED metrics in the backend from the spans you send, add the `compute_stats=true` header to the exporter that sends traces. See [Send traces to the OTLP intake][16]. | Computed from the spans the intake receives. Sampling upstream of the intake leaves spans out of the calculation, so send unsampled spans to cover all traffic. | Included in APM. |
 
 Give each upstream Collector its own `span_metrics` connector in a [gateway deployment][11]: a gateway that receives already-sampled spans produces undercounted metrics.
@@ -1041,4 +1043,5 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [14]: /metrics/custom_metrics/
 [15]: https://opentelemetry.io/docs/specs/semconv/http/http-metrics/
 [16]: /opentelemetry/setup/otlp_ingest/traces/
+[17]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
