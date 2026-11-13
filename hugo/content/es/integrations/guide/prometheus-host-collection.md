@@ -1,39 +1,38 @@
 ---
 further_reading:
-- link: recopilación_logs/log
+- link: logs/log_collection
   tag: Documentación
-  text: Recopilación de logs
+  text: Recopile sus registros
 - link: /infrastructure/process
   tag: Documentación
-  text: Recopilación de procesos
-- link: rastreo
+  text: Recopile sus procesos
+- link: tracing
   tag: Documentación
-  text: Recopilar trazas
-- link: developers/prometheus
+  text: Recopile sus trazas
+- link: extend/prometheus
   tag: Documentación
-  text: Escritura de tu propio check personalizado de Prometheus
-title: Recopilación de métricas de Prometheus y OpenMetrics de un host
+  text: Escriba su propia verificación personalizada de Prometheus
+title: Recopilación de métricas de Prometheus y OpenMetrics desde un servidor
 ---
+Recopile las métricas de Prometheus y OpenMetrics que expone su aplicación en sus hosts mediante el Datadog Agent y las Integrations [Datadog-OpenMetrics][1] o [Datadog-Prometheus][2].
 
-Recopila tus métricas de Prometheus y OpenMetrics expuestas desde la aplicación que se ejecuta en tus hosts, utilizando el Datadog Agent e integraciones [Datadog-OpenMetrics][1] o [Datadog-Prometheus][2].
+## Descripción general {#overview}
 
-## Información general
+A partir de la versión 6.5.0, el Agent incluye verificaciones de [OpenMetrics][3] y [Prometheus][4] capaces de extraer métricas de los puntos de conexión de Prometheus. Datadog recomienda utilizar la verificación de OpenMetrics, ya que es más eficiente y es totalmente compatible con el formato de texto de Prometheus. Para un uso más avanzado de la interfaz `OpenMetricsCheck`, incluida la creación de una verificación personalizada, consulte la sección [Developer Tools][5]. Utilice la verificación de Prometheus solo cuando el punto de conexión de métricas no admita un formato de texto.
 
-A partir de la versión 6.5.0, el Agent incluye checks de [OpenMetrics][3] y [Prometheus][4] capaces de extraer los endpoints de Prometheus. Datadog recomienda usar el check de OpenMetrics, ya que es más eficiente y es compatible con el formato de texto de Prometheus. Consulta usos más avanzados de la interfaz de `OpenMetricsCheck`, incluido cómo escribir un check personalizado, en la sección de [Herramientas de desarrollo][5]. Usa el check de Prometheus solo cuando el endpoint de las métricas no sea compatible con un formato de texto.
+Esta página explica el uso básico de estas verificaciones, lo que le permite importar a Datadog todas las métricas que expone mediante Prometheus.
 
-Esta página explica el uso básico de estos checks, que permiten importar todas tus métricas expuestas de Prometheus en Datadog.
+## Configuración {#setup}
 
-## Configuración
+### Instalación {#installation}
 
-### Instalación
+[Instale el Datadog Agent para su sistema operativo correspondiente][6]. Las verificaciones de OpenMetrics y Prometheus están incluidas en el paquete del [Datadog Agent][7], por lo que no necesita instalar nada más en sus contenedores o hosts.
 
-[Instala el Datadog Agent para tu sistema operativo correspondiente][6]. Los checks de OpenMetrics y Prometheus están incluidos en el paquete del [Datadog Agent][7], por lo que no necesitas instalar nada más en tus contenedores o hosts.
+### Configuración {#configuration}
 
-### Configuración
+Para recopilar sus métricas expuestas:
 
-Para recopilar tus métricas expuestas:
-
-1. Edita el archivo `openmetrics.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][8]. Para ver todas las opciones de configuración disponibles, consulta el [openmetrics.d/conf.yaml de ejemplo][9]. Esta es la configuración mínima requerida, necesaria para habilitar la integración:
+1. Edite el archivo `openmetrics.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][8]. Consulte el [archivo de ejemplo openmetrics.d/conf.yaml][9] para ver todas las opciones de configuración disponibles. Esta es la configuración mínima necesaria para habilitar la integración:
 
     ```yaml
     init_config:
@@ -45,61 +44,61 @@ Para recopilar tus métricas expuestas:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
     ```
 
-   Con los siguientes valores de parámetros de configuración:
+     With the following configuration placeholder values:
 
-   | Parámetro                | Descripción                                                              |
+    | Placeholder             | Description                                                                                                                                                                                                            |
     | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `<PORT>`                | Puerto al que conectarse para acceder al endpoint de Prometheus.                                                                                                                                                         |
-    | `<ENDPOINT>`             | URL para las métricas proporcionadas por el contenedor, en formato Prometheus.                                                                                                                                                     |
-    | `<NAMESPACE>`            | Configura el espacio de nombres para que se anteponga a cada métrica cuando se visualice en Datadog.                                                                                                                                                   |
-    | `<METRIC_TO_FETCH>`      | Métricas clave de Prometheus a recuperar del endpoint de Prometheus.                                                                                                                                                     |
-    | `<DATADOG_METRIC_NAME>` | Parámetro opcional que, si se configura, transforma la métrica clave `<METRIC_TO_FETCH>` en `<DATADOG_METRIC_NAME>` en Datadog. <br>Si decides no utilizar esta opción, pasa una lista de cadenas, en lugar de pares `key:value`. |
+    | `<PORT>`                | Port to connect to in order to access the Prometheus endpoint.                                                                                                                                                         |
+    | `<ENDPOINT>`            | URL for the metrics served by the container, in Prometheus format.                                                                                                                                                     |
+    | `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                                   |
+    | `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                                     |
+    | `<DATADOG_METRIC_NAME>` | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<DATADOG_METRIC_NAME>` in Datadog. <br>If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
-2. [Reinicia el Agent][10] para empezar a recopilar tus métricas.
+2. [Reinicie el Agent][10] para comenzar a recopilar sus métricas.
 
-### Parámetros disponibles
+### Parámetros disponibles {#parameters-available}
 
-A continuación, encontrarás una lista con todos los parámetros que se pueden utilizar en tus`instances`:
+A continuación encontrará la lista completa de parámetros que se pueden utilizar para su `instances`:
 
-| Nombre                                    | Tipo                                    | Necesidad | Valor por defecto | Descripción                                                                                                                                                                                                                                                          |
+| Nombre                                    | Tipo                                    | Obligatoriedad | Valor predeterminado | Descripción                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `openmetrics_endpoint`                        | cadena                                  | obligatorio  | ninguno          | La URL que expone métricas en el formato OpenMetrics.                                                                           |
-| `namespace`                             | cadena                                  | obligatorio  | ninguno          | El espacio de nombres que debe añadirse antes de los espacios de nombres de todas las métricas. Tus métricas se recopilan con el formato `namespace.metric_name`.                                                                                                                                          |
-| `metrics`                               | Lista de cadenas o elementos `key:value`  | obligatorio  | ninguno          | Lista de pares `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` para las métricas que se obtendrán del endpoint de Prometheus.<br> `<NEW_METRIC_NAME>` es opcional. Si se configura, transforma el nombre en Datadog. Esta lista debe contener al menos una métrica.                            |
-| `raw_metric_prefix`             | cadena                                  | opcional  | ninguno          | Prefijo que se elimina de los nombres de todas las métricas expuestas, si están presentes.                                                                                                                 |
-| `health_service_check`                  | booleano                                 | opcional  | verdadero          | Envía un check de servicio que informe sobre el estado del endpoint de Prometheus. El check se denomina `<NAMESPACE>.prometheus.health`.                                                                                                                                         |
-| `label_to_hostname`                     | cadena                                  | opcional  | ninguno          | Sobrescribe el nombre de host con el valor de una etiqueta (label).                                                                                                                                                                                                                   |
-| `label_joins`                           | objecto                                  | opcional  | ninguno          | La unión de etiquetas (labels) permite apuntar a una métrica y recuperar su etiqueta mediante una asignación 1:1.                                                                                                                                                                               |
-| `labels_mapper`                         | Lista del elemento clave:valor               | opcional  | ninguno          | El asignador de etiquetas (labels) permite renombrar algunas de ellas. Formato: `<LABEL_TO_RENAME>: <NEW_LABEL_NAME>`.                                                                                                                                                                    |
-| `type_overrides`                        | Lista del elemento clave:valor               | opcional  | ninguno          | La sobrescritura del tipo te permite anular un tipo en la carga útil de Prometheus o escribir una métrica que no esté escrita (se ignoran por defecto).<br> Los tipos `<METRIC_TYPE>` admitidos son `gauge`, `monotonic_count`, `histogram` y `summary`.                                             |
-| `tags`                                  | Lista del elemento clave:valor               | opcional  | ninguno          | Lista de etiquetas (tags) para adjuntar a cada métrica, evento, y check de servicio emitido por esta integración.<br> [Más información sobre el etiquetado][5].                                                                                                                                     |
-| `send_distribution_buckets`             | booleano                                 | opcional  | falso         | Configura `send_distribution_buckets` como `true` para enviar y convertir los histogramas de OpenMetrics en [métricas de distribución][15]. <br>Los `collect_histogram_buckets` deben configurarse como `true` (valor por defecto).<br> **Nota**: Para OpenMetrics v2, utiliza `collect_counters_with_distributions`                                                                              |
-| `send_distribution_counts_as_monotonic` | booleano                                 | opcional  | falso         | Configura `send_distribution_counts_as_monotonic` como `true` para enviar recuentos de histograma/resumen de OpenMetrics como recuentos monotónicos.                                                                                                                                              |
-| `collect_histogram_buckets`               | booleano                                 | opcional  | verdadero          | Configura `collect_histogram_buckets` como `true` para enviar el bucket del histograma.                                                                                                                                                                                               |
-| `send_monotonic_counter`                | booleano                                 | opcional  | verdadero          | O envía recuentos como recuentos monotónicos. Para ello, consulta el [tema relevante en GitHub][9].                                                                                                                                                                                             |
-| `exclude_labels`                        | lista de cadenas                          | opcional  | ninguno          | Lista de etiquetas (labels) que deben excluirse.                                                                                                                                                                                                                                       |
-| `ssl_cert`                              | cadena                                  | opcional  | ninguno          | Si tu endpoint de Prometheus está protegido, aquí tienes los parámetros para configurarlo:<br> Puede ser: sólo la ruta al certificado, y en tal caso debes especificar la clave privada, o puede ser la ruta a un archivo que contenga tanto el certificado como la clave privada. |
-| `ssl_private_key`                       | cadena                                  | opcional  | ninguno          | Necesario si el certificado no incluye la clave privada.<br> **ADVERTENCIA**: La clave privada de tu certificado local no debe estar cifrada.                                                                                                                          |
-| `ssl_ca_cert`                           | cadena                                  | opcional  | ninguno          | La ruta a la autoridad de certificación (CA) de confianza, utilizada para generar certificados personalizados.                                                                                                                                                                                                  |
-| `timeout`                               | entero                                 | opcional  | 10            | Define un tiempo de espera en segundos para la consulta de Prometheus/OpenMetrics.                                                                                                                                                                                                       |
-| `max_returned_metrics`                  | entero                                 | opcional  | 2000          | Por defecto, el check se limita a 2000 métricas. Aumenta este límite, si es necesario.                                                                                                                                                                                   |
-| `bearer_token_auth`                     | booleano                                 | opcional  | falso         | Configura `bearer_token_auth` como `true` para añadir una cabecera de autenticación de token de portador. **Nota**: Si no se configura `bearer_token_path`, se utiliza `/var/run/secrets/kubernetes.io/serviceaccount/token` como ruta por defecto.                                                       |
-| `bearer_token_path`                     | cadena                                  | opcional  | ninguno          | La ruta a un archivo de token de portador de cuenta de servicio de Kubernetes (asegúrate de que el archivo existe y está montado correctamente). **Nota**: Configura `bearer_token_auth` como `true` para habilitar la adición del token a las cabeceras HTTP para la autenticación.                                          |
-| `collect_counters_with_distributions`   | booleano                                 | opcional  | falso         | Si además se recopilan o no las métricas del contador de observaciones que terminan en `.sum` y `.count` al enviar buckets de histogramas como métricas de distribución de Datadog. Esto habilita implícitamente la opción `histogram_buckets_as_distributions`. |
+| `openmetrics_endpoint`                        | cadena                                  | obligatorio  | ninguno          | La URL que expone las métricas en el formato OpenMetrics.                                                                           |
+| `namespace`                             | cadena                                  | obligatorio  | ninguno          | El espacio de nombres que se antepondrá a los espacios de nombres de todas las métricas. Sus métricas se recopilan con el formato `namespace.metric_name`.                                                                                                                                          |
+| `metrics`                               | lista de cadenas o `key:value` elementos | requerido  | ninguno          | Lista de pares `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` para las métricas que se obtendrán del punto de conexión de Prometheus.<br> `<NEW_METRIC_NAME>` es opcional. Transforma el nombre en Datadog si se establece. Esta lista debe contener al menos una métrica.                            |
+| `raw_metric_prefix`             | cadena                                  | opcional  | ninguno          | Un prefijo que se elimina de todos los nombres de métricas expuestos, si está presente.                                                                                                                 |
+| `health_service_check`                  | booleano                                 | opcional  | true          | Envíe una comprobación de servicio que informe sobre el estado del punto de conexión de Prometheus. La comprobación se llama `<NAMESPACE>.prometheus.health`.                                                                                                                                         |
+| `label_to_hostname`                     | cadena                                  | opcional  | ninguno          | Anule el nombre de host con el valor de una etiqueta.                                                                                                                                                                                                                   |
+| `label_joins`                           | objeto                                  | opcional  | ninguno          | La unión de etiquetas le permite apuntar a una métrica y recuperar su etiqueta mediante una asignación 1:1.                                                                                                                                                                               |
+| `labels_mapper`                         | lista de elementos clave:valor               | opcional  | ninguno          | El asignador de etiquetas le permite renombrar algunas etiquetas. Formato: `<LABEL_TO_RENAME>: <NEW_LABEL_NAME>`.                                                                                                                                                                    |
+| `type_overrides`                        | lista de elementos clave:valor               | opcional  | ninguno          | La anulación de tipo permite anular un tipo en la carga útil de Prometheus o asignar un tipo a una métrica sin tipo (se ignoran de forma predeterminada).<br> Los `<METRIC_TYPE>` admitidos son `gauge`, `monotonic_count`, `histogram` y `summary`.                                             |
+| `tags`                                  | lista de elementos clave:valor               | opcional  | ninguno          | Lista de etiquetas para adjuntar a cada métrica, evento y comprobación de servicio emitidos por esta integración.<br> [Obtenga más información sobre etiquetar][5].                                                                                                                                     |
+| `send_distribution_buckets`             | booleano                                 | opcional  | false         | Establezca `send_distribution_buckets` en `true` para enviar y convertir histogramas de OpenMetrics a [Métricas de distribución][15]. <br>`collect_histogram_buckets` debe establecerse en `true` (valor predeterminado).<br> **Nota**: Para OpenMetrics v2, use `collect_counters_with_distributions` en su lugar.                                                                              |
+| `send_distribution_counts_as_monotonic` | booleano                                 | opcional  | false         | Establezca `send_distribution_counts_as_monotonic` en `true` para enviar conteos de histograma/resumen de OpenMetrics como conteos monotónicos.                                                                                                                                              |
+| `collect_histogram_buckets`               | booleano                                 | opcional  | true          | Establezca `collect_histogram_buckets` en `true` para enviar el bucket de histogramas.                                                                                                                                                                                               |
+| `send_monotonic_counter`                | booleano                                 | opcional  | true          | Para enviar los conteos como conteos monotónicos, consulte el [problema relevante en GitHub][9].                                                                                                                                                                                             |
+| `exclude_labels`                        | lista de cadenas                          | opcional  | ninguno          | Lista de etiquetas a excluir.                                                                                                                                                                                                                                       |
+| `ssl_cert`                              | cadena                                  | opcional  | ninguno          | Si su punto de conexión de Prometheus está protegido, aquí están los ajustes para configurarlo:<br> Puede ser: solo la ruta al certificado y, por lo tanto, debe especificar la clave privada, o puede ser la ruta a un archivo que contenga tanto el certificado como la clave privada. |
+| `ssl_private_key`                       | cadena                                  | opcional  | ninguno          | Necesario si el certificado no incluye la clave privada.<br> **ADVERTENCIA**: La clave privada de su certificado local debe estar sin cifrar.                                                                                                                          |
+| `ssl_ca_cert`                           | cadena                                  | opcional  | ninguno          | La ruta a la CA de confianza utilizada para generar certificados personalizados.                                                                                                                                                                                                  |
+| `timeout`                               | entero                                 | opcional  | 10            | Establezca un tiempo de espera en segundos para la consulta de Prometheus/OpenMetrics.                                                                                                                                                                                                       |
+| `max_returned_metrics`                  | entero                                  | opcional  | 2000          | La verificación se limita a 2000 métricas de forma predeterminada. Aumente este límite si es necesario.                                                                                                                                                                                   |
+| `bearer_token_auth`                     | booleano                                 | opcional  | false         | Establezca `bearer_token_auth` en `true` para agregar un encabezado de autenticación de token de portador. **Nota**: Si `bearer_token_path` no está configurado, `/var/run/secrets/kubernetes.io/serviceaccount/token` se utiliza como ruta predeterminada.                                                       |
+| `bearer_token_path`                     | cadena                                  | opcional  | ninguno          | La ruta a un archivo de token de portador de cuenta de servicio de Kubernetes (asegúrese de que el archivo exista y esté montado correctamente). **Nota**: Establezca `bearer_token_auth` en `true` para habilitar la adición del token a los encabezados HTTP para la autenticación.                                          |
+| `collect_counters_with_distributions`   | boolean                                 | opcional  | false         | Si también se deben recopilar las métricas del contador de observaciones que terminan en `.sum` y `.count` al enviar los buckets del histograma como métricas de distribución de Datadog. Esto habilita implícitamente la opción `histogram_buckets_as_distributions`. |
 
-**Nota**: Todos los parámetros, excepto `send_distribution_buckets` y `send_distribution_counts_as_monotonic`, son compatibles con el check de OpenMetrics y también con el check de Prometheus.
+**Nota**: Todos los parámetros, excepto `send_distribution_buckets` y `send_distribution_counts_as_monotonic`, son compatibles tanto con la verificación de OpenMetrics como con la verificación de Prometheus.
 
-## Para empezar
+## Primeros pasos {#getting-started}
 
-### Recopilación sencilla de métrica
+### Recopilación simple de métricas {#simple-metric-collection}
 
-Para empezar a recopilar métricas expuestas por Prometheus, sigue estos pasos:
+Para comenzar a recopilar métricas expuestas por Prometheus, siga estos pasos:
 
-1. Para iniciar una versión local de Prometheus que se monitorice a sí misma, consulta la documentación [Empezando con Prometheus][11].
+1. Siga la documentación de [Prometheus Getting Started][11] para iniciar una versión local de Prometheus que se monitoree a sí misma.
 
-2. [Instala el Datadog Agent para tu plataforma][6].
+2. [Instale el Datadog Agent para su plataforma][6].
 
-3. Edita el archivo `openmetrics.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][8] con el siguiente contenido:
+3. Edite el archivo `openmetrics.d/conf.yaml` en la carpeta `conf.d/` en la raíz de su [directorio de configuración del Agent][8] con el siguiente contenido:
 
     ```yaml
     init_config:
@@ -111,28 +110,27 @@ Para empezar a recopilar métricas expuestas por Prometheus, sigue estos pasos:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
     ```
 
-4. [Reinicia el Agent][12].
+4. [Reinicie el Agent][12].
 
-5. Ve a tu [página de resumen de métricas][13] para ver las métricas recopiladas: `prometheus_target_interval_length_seconds*`
+5. Vaya a su [página de Metrics Catalog][13] para ver las métricas recopiladas: `prometheus_target_interval_length_seconds*`
 
-    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Métricas de Prometheus recopiladas">}}
+    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Métrica de Prometheus recopilada">}}
 
-## De la integración personalizada a la oficial
+## De integración personalizada a oficial {#from-custom-to-official-integration}
 
-Por defecto, todas las métricas recuperadas por el check genérico de Prometheus se consideran métricas personalizadas. Si estás monitorizando software comercial y crees que merece tener una integración oficial, no dudes en [contribuir][5].
+De forma predeterminada, todas las métricas recuperadas por la verificación genérica de Prometheus se consideran Custom Metrics. Si está monitoreando software listo para usar y cree que merece una integración oficial, ¡no dude en [contribuir][5]!
 
-Las integraciones oficiales tienen sus propios directorios específicos. Hay un mecanismo de instancia por defecto en el check genérico para codificar la configuración predeterminada y los metadatos de métricas. Por ejemplo, consulta la integración [kube-proxy][14].
+Las integraciones oficiales tienen sus propios directorios dedicados. Existe un mecanismo de instancia predeterminado en la verificación genérica para codificar de forma rígida la configuración predeterminada y los metadatos de las métricas. Por ejemplo, consulte la integración [kube-proxy][14].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/integrations/openmetrics/
 [2]: /es/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /es/developers/custom_checks/prometheus/
+[5]: /es/extend/custom_checks/prometheus/
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /es/getting_started/tagging/
 [8]: /es/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -140,6 +138,6 @@ Las integraciones oficiales tienen sus propios directorios específicos. Hay un 
 [10]: /es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://prometheus.io/docs/prometheus/latest/getting_started/
 [12]: /es/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[13]: https://app.datadoghq.com/metric/summary
+[13]: https://app.datadoghq.com/metric/catalog
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: /es/metrics/distributions/

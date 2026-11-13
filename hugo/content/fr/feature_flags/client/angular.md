@@ -502,7 +502,7 @@ Le fournisseur Angular utilise le fournisseur de navigateur Datadog, qui prend �
 
 | Option | Par défaut | Utilisation |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Envoyer les événements d'exposition vers l'ingestion d'expositions. |
+| `trackExposures` | `true` | Envoyez les événements d'exposition au point de collecte des expositions. Disponible à partir de la version 2.3.0. Remplace l'option `enableExposureLogging` dépréciée. Pour enregistrer les expositions dans votre propre magasin de données, consultez [Enregistrer les expositions aux Feature Flags dans votre propre magasin de données][5]. |
 | `enableFlagEvaluationTracking` | `true` | Envoyer la télémétrie d'évaluation agrégée. |
 | `enableRumFeatureFlagTracking` | `true` | Ajouter les évaluations d'indicateurs aux événements RUM lorsque le RUM Browser est disponible. L'activation de cette option peut augmenter le nombre d'événements facturés par RUM. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Intervalle de vidage pour la télémétrie d'évaluation. |
@@ -564,3 +564,4 @@ La structure des indicateurs du SDK Web nécessite `variants`, `defaultVariant` 
 [2]: /fr/account_management/api-app-keys/#client-tokens
 [3]: /fr/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /fr/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /fr/feature_flags/guide/record_exposures_in_your_own_data_store/

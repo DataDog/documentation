@@ -222,7 +222,7 @@ registro
 : El archivo que enumera y almacena las métricas recopiladas por cada integración.
 
 métricas
-: La lista de lo que se recopila de su sistema mediante cada integración. Puede encontrar las métricas para cada integración en el archivo `metadata.csv` de esa integración y en la tabla **Datos recopilados** en la página de documentación de la integración. En esa tabla, una métrica enumerada con *Shown as \<unit\>* ya tiene una unidad definida en los metadatos de la integración. Una métrica sin esta notación no tiene una unidad establecida de forma predeterminada, por lo que debe configurar una manualmente en la página de [metric summary][48]. Para obtener más información sobre las métricas, consulte la página para desarrolladores de [Metrics][42]. También puede configurar [métricas personalizadas][43], por lo que si la integración no ofrece una métrica de forma inmediata, generalmente puede agregarla.
+: La lista de lo que se recopila de su sistema mediante cada integración. Puede encontrar las métricas para cada integración en el archivo `metadata.csv` de esa integración y en la tabla **Datos recopilados** en la página de documentación de la integración. En esa tabla, una métrica enumerada con *Shown as \<unit\>* ya tiene una unidad definida en los metadatos de la integración. Una métrica sin esta notación no tiene una unidad establecida de forma predeterminada, por lo que debe configurar una manualmente en la página de [Metrics Catalog][48]. Para obtener más información sobre las métricas, consulte la página para desarrolladores de [Metrics][42]. También puede configurar [métricas personalizadas][43], por lo que si la integración no ofrece una métrica de forma inmediata, generalmente puede agregarla.
 
 parámetros
 : Utilice los parámetros en el archivo `conf.yaml` para controlar los accesos entre su fuente de datos de integración y el Agent. El archivo `conf.yaml.example` de las integraciones individuales tiene enumerados todos los parámetros requeridos y no requeridos.
@@ -283,4 +283,4 @@ etiquetado
 [45]: /es/account_management/rbac/permissions/#integrations
 [46]: /es/integrations/
 [47]: /es/containers/kubernetes/integrations/#tag-cardinality
-[48]: https://app.datadoghq.com/metric/summary
+[48]: https://app.datadoghq.com/metric/catalog

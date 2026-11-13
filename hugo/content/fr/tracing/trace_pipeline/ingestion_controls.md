@@ -119,6 +119,7 @@ Le tableau répertorie les taux d'échantillonnage appliqués par ressource du s
 {{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Tableau des taux d'échantillonnage par ressource" style="width:100%;">}}
 
 - La colonne `Ingested bytes` affiche les octets ingérés à partir des spans du service et de la ressource, tandis que la colonne `Downstream bytes` affiche les octets ingérés à partir des spans où la décision d'échantillonnage est prise à partir de ce service et de cette ressource, y compris les octets provenant des services en aval dans la chaîne d'appel.
+- La colonne `Ingested traces` compte les traces qui commencent au niveau du service et de la ressource. Les ressources qui n'apparaissent que sur les spans enfants, comme les méthodes internes, affichent `0` traces ingérées. Les octets de leurs spans apparaissent toujours dans la colonne `Ingested bytes`.
 - La colonne `Configuration` indique où le taux d'échantillonnage de la ressource est appliqué : 
   - `Automatic` si le [mécanisme par défaut d'échantillonnage basé sur le début de la trace][4] de l'Agent s'applique.
   - `Local Configured` si une [sampling rule][8] a été définie localement dans le SDK.
