@@ -180,8 +180,8 @@ Datadog uses the following permissions for EKS instrumentation:
 | `eks:DescribeCluster`, `eks:ListFargateProfiles` | Read the selected cluster's status and exclude clusters with Fargate profiles |
 | `eks:CreateAddon`, `eks:DescribeAddon`, `eks:UpdateAddon`, `eks:DescribeUpdate`, `eks:DeleteAddon`, `eks:TagResource` | Install and manage the Datadog Operator, AWS Secrets Store CSI Driver Provider, and EKS Pod Identity Agent add-ons |
 | `eks:CreatePodIdentityAssociation`, `eks:DescribePodIdentityAssociation`, `eks:ListPodIdentityAssociations`, `eks:DeletePodIdentityAssociation` | Give the credential synchronization service account access to its scoped IAM role |
-| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource` | Create the cluster-specific API key and Service Access Token secrets, or reuse existing ones that Datadog created |
-| `secretsmanager:PutSecretValue`, `secretsmanager:UpdateSecretVersionStage` | Store and activate a replacement Service Access Token in its retained secret |
+| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource`, `secretsmanager:DeleteSecret` | Create the cluster-specific API key and Service Access Token secrets, reuse existing ones that Datadog created, and delete Datadog-owned copies during uninstall |
+| `secretsmanager:PutSecretValue`, `secretsmanager:UpdateSecretVersionStage` | Store and activate a replacement Service Access Token in its secret |
 | `iam:GetRole`, `iam:CreateRole`, `iam:PutRolePolicy`, `iam:PassRole`, `iam:TagRole`, `iam:DeleteRolePolicy`, `iam:DeleteRole` | Create the credential synchronization role, scope it to the cluster's API key and Service Access Token secrets, pass it to EKS Pod Identity, and remove the role during uninstall |
 
 Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API key and Service Access Token secrets for the selected cluster. `iam:CreateRole` is restricted to role names matching `dd-eks-ascp-sync-*` in your account, and `iam:PassRole` is restricted to EKS Pod Identity (`pods.eks.amazonaws.com`).
@@ -300,7 +300,7 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 
 - **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Layers and environment variables you added yourself are left in place.
-- **EKS**: Datadog removes the managed Agent resources and Operator add-on, revokes the Service Access Token, and removes the Pod Identity association and scoped IAM role it created. For the removal order and the resources Datadog retains, see [Remove EKS instrumentation][23] in the technical reference.
+- **EKS**: Datadog removes the managed Agent resources and Operator add-on, revokes the Service Access Token, removes the Pod Identity association and scoped IAM role it created, and deletes the Datadog-owned credential secrets. For the removal order and the resources Datadog retains, see [Remove EKS instrumentation][23] in the technical reference.
 
 ## Troubleshooting
 
@@ -366,4 +366,4 @@ If instrumentation reports an add-on error, open the cluster's **Add-ons** tab i
 [20]: /agent/fleet_automation/fleet_view/
 [21]: https://app.datadoghq.com/orchestration/overview/pod
 [22]: https://repost.aws/knowledge-center/eks-managed-add-on
-[23]: /integrations/guide/aws-agent-installation-technical-reference/#remove-eks-instrumentation
+[23]: /integrations/guide/aws-agent-installation-technical-reference/#remove-datadog-instrumentation

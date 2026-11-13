@@ -278,17 +278,15 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 
 - **EC2**: Datadog removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Datadog first compares its record of the original configuration against the function's current configuration, so it does not remove a layer or variable it did not add. The telemetry authorization for the execution role is left in place, because the role may be shared with other functions.
+- **EKS**: Datadog performs cleanup in this order:
 
-### Remove EKS instrumentation
+  1. The Datadog Operator deletes the `DatadogAgent` custom resource it created and its dependent Kubernetes resources.
+  1. After the Operator reports that cleanup is complete, Datadog deletes the `datadog_operator` EKS add-on that it installed.
+  1. Datadog revokes the Service Access Token for the installation, then deletes its Datadog-owned AWS Secrets Manager secret.
+  1. Datadog removes the Pod Identity association and scoped IAM role that it created.
+  1. Datadog deletes the Datadog-owned AWS Secrets Manager secret that contains the API key copy.
 
-Datadog performs cleanup in this order:
-
-1. The Datadog Operator deletes the `DatadogAgent` custom resource it created and its dependent Kubernetes resources.
-1. After the Operator reports that cleanup is complete, Datadog deletes the `datadog_operator` EKS add-on that it installed.
-1. Datadog revokes the Service Access Token for the installation.
-1. Datadog removes the Pod Identity association and scoped IAM role that it created.
-
-The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads. Datadog preserves both cluster-specific AWS Secrets Manager secrets, including the secret that holds the API key. If the cluster is added to a rule again, Datadog creates a replacement Service Access Token and updates the retained token secret.
+  The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads. Datadog validates each credential secret's ownership metadata before deleting it and does not revoke the Datadog API key itself. If the AWS integration role cannot delete a secret, or if its ownership metadata does not match the cluster, Datadog preserves the secret.
 
 ## Further reading
 
