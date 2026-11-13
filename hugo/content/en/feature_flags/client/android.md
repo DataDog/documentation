@@ -300,8 +300,6 @@ Cancel the collection job when the observing component stops. For example, colle
 
 ## Control flag evaluation telemetry and experiment participation
 
-<div class="alert alert-warning">Experimentation opt-out targets the unreleased Android SDK version <code>3.17.0</code>. The experimentation examples require that release. Evaluation telemetry opt-out is available in <code>3.16.0</code>.</div>
-
 Flag evaluation telemetry opt-out requires version `3.16.0` or later. Experimentation opt-out requires version `3.17.0` or later. Use the same version of `dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][4] for shared concepts.
 
 ### Control flag evaluation telemetry

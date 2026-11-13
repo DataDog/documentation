@@ -31,7 +31,7 @@ The controls have different minimum SDK versions:
 | --- | --- | --- |
 | Browser (`@datadog/openfeature-browser`) | `2.2.0` | `2.2.0` |
 | iOS (`DatadogFlags`) | `3.21.0` | `3.22.0` |
-| Android (`dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`) | `3.16.0` | `3.17.0` (planned; unreleased) |
+| Android (`dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`) | `3.16.0` | `3.17.0` |
 
 Use Android Flags and OpenFeature artifacts from the same release. Precomputed experimentation opt-out also requires delivery-service support for the selected policy.
 
