@@ -10826,7 +10826,7 @@ components:
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
       description: >-
-        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination. Its targets are model targets that each name one provider, not "*". Besides the default, it needs 1 to 9 destinations, each with a different rubric. Classified routing is in Preview: saving a classified tier returns 403 Forbidden unless the feature is enabled for the organization.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
       enum:
         - configured
         - weighted_affinity
@@ -12050,8 +12050,7 @@ components:
           example: gpt-6-luna
           type: string
         provider:
-          description: >-
-            Decision-model provider slug. It must name a provider of type `openai`, `baseten`, or `typesafe`, the provider types that serve a decision model. Omit together with model to preserve the saved selection.
+          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
           example: openai
           type: string
       type: object
@@ -12303,14 +12302,13 @@ components:
           minimum: 1
           type: integer
         provider:
-          description: Provider slug. weighted_affinity and classified tiers require an explicit provider and do not allow "*".
+          description: Provider slug. weighted_affinity requires an explicit provider and does not allow "*".
           example: prod-us
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
         rubric:
-          description: >-
-            Destination rubric in a classified tier: when the decision model picks this destination. Up to 300 characters after leading and trailing spaces are trimmed, and different for each destination in the tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
           example: Short factual questions.
           maxLength: 300
           nullable: true
@@ -128047,7 +128045,7 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
       type: object
     SecurityMonitoringCriticalAssetSeverity:
-      description: Severity associated with this critical asset. Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
+      description: Severity associated with this dynamic severity rule (previously called critical assets). Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
       enum:
         - info
         - low
@@ -253226,7 +253224,7 @@ paths:
           - security_monitoring_cws_agent_rules_read
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
-      description: Get the list of all critical assets.
+      description: Get the list of all dynamic severity rules (previously called critical assets).
       operationId: ListSecurityMonitoringCriticalAssets
       responses:
         "200":
@@ -253260,8 +253258,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 52
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     post:
-      description: Create a new critical asset.
+      description: Create a new dynamic severity rule (previously called critical assets).
       operationId: CreateSecurityMonitoringCriticalAsset
       requestBody:
         content:
@@ -253320,9 +253322,13 @@ paths:
         - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 53
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
     get:
-      description: Get the list of critical assets that affect a specific existing rule by the rule's ID.
+      description: Get the list of dynamic severity rules (previously called critical assets) that affect a specific existing rule by the rule's ID.
       operationId: GetCriticalAssetsAffectingRule
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringRuleID"
@@ -253360,9 +253366,13 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
   /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
     delete:
-      description: Delete a specific critical asset.
+      description: Delete a specific dynamic severity rule (previously called critical assets).
       operationId: DeleteSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253384,8 +253394,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
     get:
-      description: Get the details of a specific critical asset.
+      description: Get the details of a specific dynamic severity rule (previously called critical assets).
       operationId: GetSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253423,8 +253437,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 54
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     patch:
-      description: Update a specific critical asset.
+      description: Update a specific dynamic severity rule (previously called critical assets).
       operationId: UpdateSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253487,6 +253505,10 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/integration_config:
     get:
       description: |-
