@@ -88,3 +88,10 @@ entries:
     operations:
       - GetUsageBillableSummary
     title: Expose Error Tracking usage in the billable summary
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41719
+    operations:
+      - GetUsageSummary
+    title: Clarify Feature Flags usage summary fields include server-side 
+      requests and 10x weighting
