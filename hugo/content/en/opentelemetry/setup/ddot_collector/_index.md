@@ -96,7 +96,7 @@ By default, the DDOT Collector includes these components. This list matches DDOT
 - [cumulativetodeltaprocessor][27]
 - [deltatorateprocessor][76] (available since version 7.85.0)
 - [filterprocessor][28]
-- [groupbyattributeprocessor][29]
+- [groupbyattrsprocessor][29]
 - [k8sattributesprocessor][30]
 - [memorylimiterprocessor][31]
 - [probabilisticsamplerprocessor][32]
@@ -154,7 +154,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{% /collapse-content %}}
 
-The DDOT Collector and the Agent's Collector both include the [DD Flare Extension][52]. The converter adds it to your configuration as `ddflare/dd-autoconfigured` unless your configuration already defines a `ddflare` extension. With the Agent's Collector, the extension adds the Collector's diagnostic information to an Agent flare.
+The DDOT Collector and the Agent's Collector both include the [DD Flare Extension][52]. With the Agent's Collector, the extension adds the Collector's diagnostic information to an Agent flare.
 
 ## OpenTelemetry Collector versions
 

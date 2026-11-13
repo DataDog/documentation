@@ -842,7 +842,7 @@ menu:
       identifier: otel-setup-ddot-install
       parent: otel-setup-agent
       weight: 4042
-    - name: Custom Components in the Agent
+    - name: Add Components to the Agent's Collector
       url: /opentelemetry/setup/ddot_collector/custom_components
       identifier: otel-setup-ddot-custom
       parent: otel-setup-agent
