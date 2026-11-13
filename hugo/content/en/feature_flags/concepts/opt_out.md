@@ -29,9 +29,9 @@ The controls have different minimum SDK versions:
 
 | SDK | Flag evaluation telemetry opt-out | Experimentation opt-out |
 | --- | --- | --- |
-| Browser (`@datadog/openfeature-browser`) | `2.2.0` | `2.2.0` |
-| iOS (`DatadogFlags`) | `3.21.0` | `3.22.0` |
-| Android (`dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`) | `3.16.0` | `3.17.0` |
+| [Browser][2] (`@datadog/openfeature-browser`) | `2.2.0` | `2.2.0` |
+| [iOS][4] (`DatadogFlags`) | `3.21.0` | `3.22.0` |
+| [Android][5] (`dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`) | `3.16.0` | `3.17.0` |
 
 Use Android Flags and OpenFeature artifacts from the same release. Precomputed experimentation opt-out also requires delivery-service support for the selected policy.
 
@@ -127,13 +127,13 @@ Configure the provider before initialization. Then supply the subject's preferen
 In server SDKs, these deployment settings activate support independently:
 
 ```bash
-DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
-DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
 ```
 
 The first setting enables the Boolean telemetry attribute; it does not suppress telemetry for every subject. The second selects the experimentation policy. Both controls default to disabled. Explicit provider options take precedence where available.
 
-For each subject who opts out, supply Boolean `true` and the stored timestamp in the corresponding context attributes. To resume telemetry, omit its attribute or supply Boolean `false`. To permit experimentation again, omit the timestamp. Do not send `null` or an empty string as an opt-in value.
+For each subject who opts out, supply Boolean `true` and the stored timestamp in the corresponding context attributes. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value. Do not send `null` or an empty string as an opt-in value.
 
 After configuration is ready, enabled experimentation modes reject malformed timestamps with an invalid-context error and return the application's default. Disabled mode ignores the timestamp attribute. Only SDKs with future-experiments-only support accept `future_experiments_only`.
 

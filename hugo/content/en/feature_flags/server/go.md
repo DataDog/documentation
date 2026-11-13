@@ -199,8 +199,8 @@ Both controls require `dd-trace-go/v2` version `2.12.0` or later. They are indep
 Set these variables before constructing the provider:
 
 ```bash
-DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
-DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
 ```
 
 Register the provider during startup. Pass both preferences with each subject's evaluation:
@@ -236,7 +236,7 @@ For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOpt
 
 Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. This checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
 
-Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, omit its attribute or set it to `false`. To permit experimentation again, omit the timestamp.
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
 
 ## Evaluate flags
 

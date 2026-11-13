@@ -234,8 +234,8 @@ Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimen
 Set these variables before constructing the provider:
 
 ```bash
-DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
-DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
 ```
 
 Initialize the provider during startup. Pass both preferences in a context for each evaluation:
@@ -260,7 +260,7 @@ For programmatic configuration, use `new Provider.Options().enableEvaluationTele
 
 Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
 
-Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, omit its attribute or set it to `false`. To permit experimentation again, omit the timestamp.
+Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
 
 ## Evaluate flags
 

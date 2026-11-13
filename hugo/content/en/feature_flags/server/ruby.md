@@ -156,8 +156,8 @@ Telemetry opt-out requires `datadog` version `2.47.0` or later. Experimentation 
 Set these variables before constructing the provider:
 
 ```bash
-DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
-DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
 ```
 
 Initialize the provider during startup. Pass the subject's preferences with each evaluation:
@@ -188,7 +188,7 @@ The equivalent provider options are `enable_evaluation_telemetry_opt_out_paramet
 
 Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future mode checks allocation activation, not prior enrollment.
 
-Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations where enabled. Exposures remain enabled for eligible allocations. Use a context for each request. To resume telemetry, omit its attribute or set it to `false`. To permit experimentation again, omit the timestamp.
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations where enabled. Exposures remain enabled for eligible allocations. Use a context for each request. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
 
 ## Evaluate flags
 
