@@ -2,7 +2,7 @@
 title: Python Tests
 code_lang: python
 type: multi-code-lang
-code_lang_weight: 30
+code_lang_weight: 40
 aliases:
   - /continuous_integration/setup_tests/python
   - /continuous_integration/tests/python

@@ -24,9 +24,9 @@ The Bazel integration keeps Datadog metadata fetches outside test execution. Dur
 Use the language-specific setup page for your Bazel test targets:
 
 {{< card-grid card_width="75px" >}}
+  {{< image-card href="/tests/setup/bazel/go/" src="integrations_logos/golang-avatar.png" alt="Go" >}}
   {{< image-card href="/tests/setup/bazel/java/" src="integrations_logos/java_avatar.svg" alt="Java" >}}
   {{< image-card href="/tests/setup/bazel/python/" src="integrations_logos/python_avatar.svg" alt="Python" >}}
-  {{< image-card href="/tests/setup/bazel/go/" src="integrations_logos/golang-avatar.png" alt="Go" >}}
 {{< /card-grid >}}
 
 ## Compatibility
