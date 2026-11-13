@@ -10,7 +10,7 @@ permissions:
 
 claim_pattern:
   event_name: "pull_request"
-  job_workflow_ref: 'ddoghq/websites-modules/\.github/workflows/workflow_automation\.yml@refs/pull/[0-9]+/merge'
+  job_workflow_ref: 'ddoghq/websites-modules/\.github/workflows/workflow_automation\.yml@refs/(pull/[0-9]+/merge|heads/main)'
   ref: "refs/pull/[0-9]+/merge"
   ref_type: "branch"
   repository: "ddoghq/websites-modules"
