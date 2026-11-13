@@ -6898,29 +6898,29 @@
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
-    "description": "Get the list of all critical assets.",
+    "description": "Get the list of all dynamic severity rules (previously called critical assets).",
     "summary": "Get all critical assets"
   },
   "CreateSecurityMonitoringCriticalAsset": {
-    "description": "Create a new critical asset.",
+    "description": "Create a new dynamic severity rule (previously called critical assets).",
     "summary": "Create a critical asset",
     "request_description": "The definition of the new critical asset.",
     "request_schema_description": "Request object that includes the critical asset that you would like to create."
   },
   "GetCriticalAssetsAffectingRule": {
-    "description": "Get the list of critical assets that affect a specific existing rule by the rule's ID.",
+    "description": "Get the list of dynamic severity rules (previously called critical assets) that affect a specific existing rule by the rule's ID.",
     "summary": "Get critical assets affecting a specific rule"
   },
   "DeleteSecurityMonitoringCriticalAsset": {
-    "description": "Delete a specific critical asset.",
+    "description": "Delete a specific dynamic severity rule (previously called critical assets).",
     "summary": "Delete a critical asset"
   },
   "GetSecurityMonitoringCriticalAsset": {
-    "description": "Get the details of a specific critical asset.",
+    "description": "Get the details of a specific dynamic severity rule (previously called critical assets).",
     "summary": "Get a critical asset"
   },
   "UpdateSecurityMonitoringCriticalAsset": {
-    "description": "Update a specific critical asset.",
+    "description": "Update a specific dynamic severity rule (previously called critical assets).",
     "summary": "Update a critical asset",
     "request_description": "New definition of the critical asset. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the critical asset."
