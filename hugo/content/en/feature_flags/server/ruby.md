@@ -149,6 +149,47 @@ context = OpenFeature::SDK::EvaluationContext.new(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `datadog` version `2.47.0` or later. Experimentation opt-out targets the unreleased version `2.49.0`, planned for the next minor release. The combined example requires that release. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][12] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass the subject's preferences with each evaluation:
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+Replace the example timestamp with the subject's stored preference.
+
+The equivalent provider options are `enable_evaluation_telemetry_opt_out_parameter: true` and `experimentation_opt_out_mode: :immediate`. Explicit provider options override deployment settings. Use `:disabled` to override an enabled deployment policy, or omit the option to use deployment settings.
+
+Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future mode checks allocation activation, not prior enrollment.
+
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations where enabled. Exposures remain enabled for eligible allocations. Use a context for each request. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
+
 ## Evaluate flags
 
 After creating the `OpenFeature` client, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
@@ -401,3 +442,5 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
+
+[12]: /feature_flags/concepts/opt_out/

@@ -67,6 +67,12 @@ Select your language or framework to view SDK-specific setup instructions:
 
 For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, version requirements, and telemetry egress.
 
+## Opt out individual subjects
+
+Configure evaluation telemetry and randomized assignments independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][12] for the support matrix, mode behavior, and language-specific examples.
+
+Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
+
 ## Prerequisites
 
 Requirements depend on the selected SDK and configuration source. Standard requirements include:
@@ -208,3 +214,5 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [9]: /feature_flags/server/nodejs/
 [10]: /feature_flags/server/java/
 [11]: /feature_flags/server/python/
+
+[12]: /feature_flags/concepts/opt_out/
