@@ -2,4 +2,4 @@
 title: Tag Rules
 ---
 
-**Note:** RUM supports `surfacing` rules only. `blocking` rules are not supported for RUM.
+**Note:** RUM supports only surfacing rules, not blocking rules.
