@@ -45,28 +45,28 @@ HTTP 테스트는 네트워크 외부 또는 내부에서 테스트를 실행하
 
    - **템플릿에서 테스트 생성하기**:
    
-     1. 사전에 채워진 템플릿 중 하나에 마우스를 올리고 **템플릿 보기**를 클릭합니다. 테스트 세부 정보, 요청 세부 정보, 어설션, 알림 조건 및 모니터링 설정이 포함된, 사전에 채워진 설정 정보가 표시되는 사이드 패널이 열립니다. 
-     2. **+Create Test**를 클릭하여 **Define Request** 페이지를 열고, 사전에 채워진 구성 옵션을 검토하고 편집할 수 있습니다. 표시되는 필드는 테스트 처음 생성 시 제공되는 필드와 동일합니다.
-     3. **Save Details**를 클릭하여 API 테스트를 제출합니다. <br /><br>
+     1. 사전에 채워진 템플릿 중 하나에 마우스를 올리고 {{< ui >}}View Template{{< /ui >}}을 클릭합니다. 이렇게 하면 {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Request Details{{< /ui >}}, {{< ui >}}Assertions{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, {{< ui >}}Monitor Settings{{< /ui >}} 등 사전에 채워진 구성 정보가 표시되는 사이드 패널이 열립니다. 
+     2. {{< ui >}}+Create Test{{< /ui >}}를 클릭하여 {{< ui >}}Define Request{{< /ui >}} 페이지를 열면 사전에 채워진 구성 옵션을 검토하고 편집할 수 있습니다. 표시되는 필드는 테스트 처음 생성 시 제공되는 필드와 동일합니다.
+     3. {{< ui >}}Save Details{{< /ui >}}를 클릭하여 API 테스트를 제출합니다<br /><br>.
 
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="템플릿이 표시된 Synthetics API 테스트 랜딩 페이지의 동영상" video="true" >}}
 
-  - **처음부터 테스트 빌드하기**:
+  - **</md_tag처음부터 테스트 빌드하기**:
     
-     1. 처음부터 테스트를 빌드하려면 **+ Start from scratch** 템플릿을 클릭한 다음 `HTTP`요청 유형을 선택하고 쿼리할 **URL**을 지정합니다. 
+     1. 테스트를 처음부터 빌드하려면 {{< ui >}}+ Start from scratch{{< /ui >}}템플릿을 클릭한 다음 `HTTP` 요청 유형을 선택하고 쿼리할 {{< ui >}}URL{{< /ui >}}을 지정합니다. 
         사용 가능한 방법은 `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` 및 `OPTIONS`입니다. `http` 및 `https` URL이 둘 다 지원됩니다.
 
         <div class="alert alert-info">자세한 옵션은 <a href=#advanced-options>고급 옵션</a>을 참조하세요.</div>
 
-     2. **Name** your HTTP test.
+     2. {{< ui >}}Name{{< /ui >}} HTTP 테스트의 이름을 지정합니다.
 
-     3. Add Environment **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
+     3. Add Environment {{< ui >}}Tags{{< /ui >}} HTTP 테스트에 Environment 태그 및 기타 태그를 추가합니다. 그런 다음 이러한 태그를 사용하여 [Synthetic Monitoring & Continuous Testing 페이지][3]에서 Synthetic 테스트를 필터링할 수 있습니다. 
      
-     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
+     4. Click {{< ui >}}Send{{< /ui >}}를 클릭하여 요청 구성을 테스트합니다. 화면 오른쪽에 응답 미리보기가 표시됩니다.<br /><br>
 
        {{< img src="getting_started/synthetics/api-test-config-4.png" alt="HTTP 요청 정의" style="width:90%;" >}}
 
-     5. Click **Create Test** to submit your API test.
+     5. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
 ### 스니펫 {#snippets}
 
@@ -77,43 +77,51 @@ HTTP 테스트는 네트워크 외부 또는 내부에서 테스트를 실행하
    {{< tabs >}}
 
    {{% tab "요청 옵션" %}}
-   * **HTTP 버전**: `HTTP/1.1 only`, `HTTP/2 only` 또는 `HTTP/2 fallback to HTTP/1.1`을(를) 선택합니다.
-   * **리디렉션 따르기**: 선택하면 요청을 수행할 때 HTTP 테스트에서 최대 10개의 리디렉션을 팔로우합니다.
-   * **서버 인증서 오류 무시하기**: 선택하면 SSL 인증서를 확인할 때 오류가 발생하더라도 HTTP 테스트가 연결을 계속합니다.
-   * **타임아웃**: 테스트 시간 초과로 간주하기까지의 시간을 초단위로 지정합니다.
-   * **요청 헤더**: HTTP 요청에 추가할 헤더를 정의합니다. 기본 헤더(예: `user-agent` 헤더)를 재정의할 수도 있습니다.
-   * **쿠키**: HTTP 요청에 추가할 쿠키를 정의합니다. `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` 형식을 사용하여 여러 개의 쿠키를 설정합니다.
+   * {{< ui >}}HTTP version{{< /ui >}}: `HTTP/1.1 only`, `HTTP/2 only`, 또는 `HTTP/2 fallback to HTTP/1.1`를 선택합니다.
+
+     CDN(Akamai, CloudFront, Fastly 등)을 앞단에 배치한 엔드포인트의 경우 HTTP 버전을 기본값인 `HTTP/2 with fallback to HTTP/1.1` 대신 `HTTP/2 only` 또는 `HTTP/1.1 only`로 설정합니다. 지원되는 HTTP 버전은 프로브마다 다르며, 기본 설정을 사용할 경우 다음과 같은 [HTTP 오류][1]가 간헐적으로 발생할 수 있습니다.
+     - `MALFORMED_RESPONSE: Unable to parse HTTP response`
+     - `Session closed without receiving a SETTINGS frame`
+     - `Error HTTP2: Error performing HTTP/2 request`
+   * {{< ui >}}Follow redirects{{< /ui >}}: 선택하면 요청을 수행할 때 HTTP 테스트에서 최대 10개의 리디렉션을 팔로우합니다.
+   * {{< ui >}}Ignore server certificate error{{< /ui >}}: 선택하면 SSL 인증서를 확인할 때 오류가 발생하더라도 HTTP 테스트가 연결을 계속합니다.
+   * {{< ui >}}Timeout{{< /ui >}}: 테스트 시간 초과로 간주하기까지의 시간을 초단위로 지정합니다.
+   * {{< ui >}}Request headers{{< /ui >}}: HTTP 요청에 추가할 헤더를 정의합니다. 기본 헤더(예: `user-agent` 헤더)를 재정의할 수도 있습니다.
+   * {{< ui >}}Cookies{{< /ui >}}: HTTP 요청에 추가할 쿠키를 정의합니다. `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` 형식을 사용하여 여러 개의 쿠키를 설정합니다.
+
+[1]: /ko/synthetics/api_tests/errors/#http-errors
 
    {{% /tab %}}
 
    {{% tab "인증" %}}
 
-   * **클라이언트 인증서**: 클라이언트 인증서(`.crt`) 및 연결된 개인 키(`.key`)를 `PEM` 형식으로 업로드하여 mTLS를 통해 인증합니다. 인증서를 변환하기 위해 `openssl` 라이브러리를 사용할 수 있습니다. 예를 들어 `PKCS12` 인증서를 `PEM` 형식의 개인 키 및 인증서로 변환합니다.
+   * {{< ui >}}Client Certificate{{< /ui >}}: 클라이언트 인증서(`.crt`) 및 연결된 개인 키(`.key`)를 `PEM` 형식으로 업로드하여 mTLS를 통해 인증합니다. 인증서를 변환하기 위해 `openssl` 라이브러리를 사용할 수 있습니다. 예를 들어 `PKCS12` 인증서를 `PEM` 형식의 개인 키 및 인증서로 변환합니다.
 
       ```
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
 
-   * **HTTP 기본 인증**: HTTP 기본 인증 자격 증명을 추가합니다.
-   * **Digest 인증**: Digest 인증 자격 증명을 추가합니다.
-   * **NTLM**: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
-   * **AWS Signature v4**: 액세스 키 ID와 시크릿 액세스 키를 입력합니다. Datadog은 요청에 대한 서명을 생성합니다. 이 옵션은 SigV4의 기본 구현을 사용합니다. Amazon S3와 같은 특정 서명은 기본적으로 지원되지 않습니다.
-     Amazon S3 버킷에 대한 '단일 청크' 전송 요청의 경우, 요청 본문의 SHA-256 해시값을 인코딩한 `x-amz-content-sha256`을(를) 헤더에 추가합니다(본문이 비어 있는 경우: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
-   * **OAuth 2.0**: 클라이언트 자격 증명 또는 리소스 소유자 비밀번호를 부여하고 액세스 토큰 URL을 입력합니다. 선택에 따라 클라이언트 ID와 시크릿, 또는 사용자 이름과 비밀번호를 입력합니다. 드롭다운 메뉴에서 API 토큰을 기본 인증 헤더로 전송하거나 본문에 클라이언트 자격 증명을 전송하는 옵션을 선택합니다. 필요시 대상, 리소스 및 범위와 같은 추가 정보를 제공할 수 있습니다(**Resource Owner Password**를 선택한 경우 클라이언트 ID 및 시크릿까지 제공).
+   * {{< ui >}}HTTP Basic Auth{{< /ui >}}: HTTP 기본 인증 자격 증명을 추가합니다.
+   * {{< ui >}}Digest Auth{{< /ui >}}: Digest 인증 자격 증명을 추가합니다.
+   * {{< ui >}}NTLM{{< /ui >}}: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
+   * {{< ui >}}AWS Signature v4{{< /ui >}}: 액세스 키 ID와 시크릿 액세스 키를 입력합니다. Datadog은 요청에 대한 서명을 생성합니다. 이 옵션은 SigV4의 기본 구현을 사용합니다. Amazon S3와 같은 특정 서명은 기본적으로 지원되지 않습니다.
+     Amazon S3 버킷에 대한 '단일 청크' 전송 요청의 경우, 요청 본문의 SHA-256 해시값을 인코딩한 `x-amz-content-sha256`을 헤더에 추가합니다(본문이 비어 있는 경우: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * {{< ui >}}OAuth 2.0{{< /ui >}}: 클라이언트 자격 증명 또는 리소스 소유자 비밀번호를 부여하고 액세스 토큰 URL을 입력합니다. 선택에 따라 클라이언트 ID와 시크릿, 또는 사용자 이름과 비밀번호를 입력합니다. 드롭다운 메뉴에서 API 토큰을 기본 인증 헤더로 전송하거나 본문에 클라이언트 자격 증명을 전송하는 옵션을 선택합니다. 필요시 대상, 리소스 및 범위와 같은 추가 정보를 제공할 수 있습니다({{< ui >}}Resource Owner Password{{< /ui >}}를 선택한 경우 클라이언트 ID 및 시크릿까지 제공).
+   * {{< ui >}}JWT{{< /ui >}}: 인증을 위해 서명된 JWT Bearer 토큰을 생성합니다. 서명 알고리즘(`HS256`, `RS256` 또는 `ES256`)을 선택하고 서명 키를 제공합니다. `HS256`의 경우 텍스트 시크릿을 입력하거나 `RS256` 및 `ES256`의 경우 PEM 형식의 개인 키를 업로드합니다. 다음 두 가지를 모두 허용합니다.{{ GLOBAL_VARIABLE }}` references. Enter payload claims as a JSON object; claims can be strings, numbers, Booleans, arrays, or nested objects. The `iat` (issued at) and `exp` (expiration) claims are auto-added by default. If you include `iat` or `exp` in the payload JSON, those values take precedence over the auto-generated ones. Optionally, set the expiration window in seconds (default: `3600`), add custom JWT header fields such as `kid` or `x5t`, and customize the token prefix in the `Authorization` header (default: `Bearer`).
 
    {{% /tab %}}
 
    {{% tab "쿼리 파라미터" %}}
 
-   * **인코딩 파라미터**: 인코딩이 필요한 쿼리 파라미터의 이름과 값을 추가합니다.
+   * {{< ui >}}Encode parameters{{< /ui >}}: 인코딩이 필요한 쿼리 파라미터의 이름과 값을 추가합니다.
 
    {{% /tab %}}
 
    {{% tab "요청 본문" %}}
 
-   * **본문 유형**: HTTP 요청에 추가하려는 요청 본문 유형(`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` 또는 `None`)을 선택합니다.
-   * **요청 본문**: HTTP 요청 본문의 내용을 추가합니다.
+   * {{< ui >}}Body type{{< /ui >}}: HTTP 요청에 추가하려는 요청 본문 유형(`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` 또는 `None`)을 선택합니다.
+   * {{< ui >}}Request body{{< /ui >}}: HTTP 요청 본문의 내용을 추가합니다.
        * 요청 본문은 `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`에 대해 최대 50KB로 제한됩니다.
        * 요청 본문은 `application/octet-stream`에 대해 3MB의 파일 1개로 제한됩니다.
        * 요청 본문은 `multipart/form-data`에 대해 3MB의 파일 3개로 제한됩니다.
@@ -121,14 +129,14 @@ HTTP 테스트는 네트워크 외부 또는 내부에서 테스트를 실행하
 
    {{% tab "프록시" %}}
 
-   * **프록시 URL**: HTTP 요청이 통과해야 하는 프록시의 URL을 지정합니다(`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **프록시 헤더**: 프록시에 대한 HTTP 요청에 포함할 헤더를 추가합니다.
+   * {{< ui >}}Proxy URL{{< /ui >}}: HTTP 요청이 통과해야 하는 프록시의 URL을 지정합니다(`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * {{< ui >}}Proxy header{{< /ui >}}: 프록시에 대한 HTTP 요청에 포함할 헤더를 추가합니다.
 
    {{% /tab %}}
 
    {{% tab "개인정보 보호" %}}
 
-   * **응답 본문을 저장하지 않음**: 이 옵션을 선택하면 런타임에 응답 본문이 저장되지 않도록 하고 실패한 JavaScript 어설션의 오류 메시지를 잘라냅니다. 이렇게 하면 테스트 결과에 민감한 데이터가 표시되지 않게 할 수 있지만, 실패 시 문제 해결이 더 어려워질 수 있습니다. 전체 보안 권장 사항은 [Synthetic Monitoring 데이터 보안][1]을 참조하세요.
+   * {{< ui >}}Do not save response body{{< /ui >}}: 이 옵션을 선택하면 런타임에 응답 본문이 저장되지 않도록 하고 실패한 JavaScript 어설션의 오류 메시지를 잘라냅니다. 이렇게 하면 테스트 결과에 민감한 데이터가 표시되지 않게 할 수 있지만, 실패 시 문제 해결이 더 어려워질 수 있습니다. 전체 보안 권장 사항은 [Synthetic Monitoring 데이터 보안][1]을 참조하세요.
 
 
 [1]: /ko/data_security/synthetics
@@ -148,7 +156,7 @@ JavaScript를 사용하여 HTTP API 테스트용 변수를 정의하세요.
 
 ### 어설션 정의 {#define-assertions}
 
-어설션은 예상되는 테스트 결과가 무엇인지 정의합니다. **Test URL**을 클릭하면 `response time`, `status code`, `header` `content-type`에 대한 기본 어설션이 응답을 기반으로 추가됩니다. 모니터링할 테스트에 대해 최소한 하나의 어설션을 정의해야 합니다.
+어설션은 예상되는 테스트 결과가 무엇인지 정의합니다. {{< ui >}}Test URL{{< /ui >}}을 클릭하면 `response time`, `status code`, `header`, `content-type` 에 대한 기본 어설션이 응답을 기반으로 추가됩니다. 모니터링할 테스트에 대해 최소한 하나의 어설션을 정의해야 합니다.
 
 <div class="alert alert-info">어설션 헤더, 본문 및 JavaScript 섹션은 어설션을 정의하는 데만 사용됩니다. 추가 HTTP 요청을 만드는 데는 사용할 수 없습니다.</div>
 
@@ -157,14 +165,15 @@ JavaScript를 사용하여 HTTP API 테스트용 변수를 정의하세요.
 
 | 유형          | 연산자                                                                                               | 값 유형                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 본문          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _문자열_ <br> _[정규식][6]_ |
-| 헤더        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _문자열_ <br> _[정규식][6]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5], <br> [`jsonschema`][7] | _String_ <br> _[Regex][6]_ <br> _String_, _[Regex][6]_ <br> _String_ |
+| body hash     | `md5`, `sha1`, `sha256`                                                                                 | _String_                                                        |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> `does not exist`, <br> `is less than`, `is less than or equal`, `is more than`, `is more than or equal` | _String_ <br> _[Regex][6]_ <br> _None_ <br> _Integer_ |
 | 응답 시간 | `is less than`                                                                                         | _정수(ms)_                                                  |
 | 상태 코드   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _정수_ <br> _[정규식][6]_                                                     |
 
 HTTP 테스트는 다음과 같은 `content-encoding` 헤더로 본문을 압축 해제할 수 있습니다. `br`, `deflate`, `gzip`, 및 `identity`
 
-**New Assertion**을 클릭하거나 응답 미리보기를 직접 클릭하여 API 테스트당 최대 20개의 어설션을 생성할 수 있습니다.
+{{< ui >}}New Assertion{{< /ui >}}을 클릭하거나 응답 미리보기를 직접 클릭하여 API 테스트당 최대 20개의 어설션을 생성할 수 있습니다.
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="HTTP 테스트의 성공 또는 실패를 판단할 어설션 정의하기" style="width:90%;" >}}
 
@@ -179,6 +188,7 @@ HTTP 테스트는 다음과 같은 `content-encoding` 헤더로 본문을 압축
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: https://json-schema.org/
 
 {{% /tab %}}
 {{% tab "JavaScript" %}}
@@ -192,7 +202,7 @@ JSON 응답을 처리할 때는 속성에 접근하기 전에 `JSON.parse(dd.res
 <div class="alert alert-info">
   <ul>
     <li>Windows 프라이빗 위치에서는 API 테스트에 대한 JavaScript 기능이 지원되지 않습니다.</li>
-    <li>실패한 JavaScript 어설션의 오류 메시지에 민감한 데이터가 포함될 수 있는 경우, <strong>Advanced Options</strong> > <strong>Privacy</strong>에서 <strong>Do not save response body</strong>를 활성화하세요. 이렇게 하면 어설션 오류 메시지를 잘라낼 수 있습니다.</li>
+    <li>실패한 JavaScript 어설션의 오류 메시지에 민감한 데이터가 포함될 수 있는 경우, {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Privacy{{< /ui >}}에서 {{< ui >}}Do not save response body{{< /ui >}}를 활성화하세요. 이렇게 하면 어설션 오류 메시지를 잘라낼 수 있습니다.</li>
   </ul>
 </div>
 
@@ -305,7 +315,7 @@ indicator.should.equal('none');
 
 ### 위치 선택 {#select-locations}
 
-HTTP 테스트를 실행할 **위치**를 선택합니다. HTTP 테스트는 네트워크 외부 또는 내부에서 테스트를 실행하려는 사용자의 선호도에 따라 관리형 위치와 [프라이빗 위치][1] 모두에서 실행될 수 있습니다.
+HTTP 테스트를 실행할 {{< ui >}}Locations{{< /ui >}}를 선택합니다. HTTP 테스트는 네트워크 외부 또는 내부에서 테스트를 실행하려는 사용자의 선호도에 따라 관리형 위치와 [프라이빗 위치][1] 모두에서 실행될 수 있습니다.
 
 {{% managed-locations %}}
 
@@ -326,7 +336,7 @@ HTTP 테스트는 다음과 같이 실행할 수 있습니다.
 API 테스트 생성은 [카탈로그][17] 및 기존 API 테스트에서 엔드포인트를 제안하여 테스트 양식을 관련 옵션으로 미리 채웁니다.
 APM 트레이스, 카탈로그 엔드포인트 검색 및 사용자가 생성한 기존 유사 Synthetic 테스트와 같은 기존 Datadog 데이터 소스를 사용하세요.
 
-API 테스트 **URL** 입력값을 입력하여 Synthetic Monitoring에서 엔드포인트 제안 또는 유사한 테스트를 얻습니다.
+API 테스트 {{< ui >}}URL{{< /ui >}} 입력값을 입력하여 Synthetic Monitoring에서 엔드포인트 제안 또는 유사한 테스트를 얻습니다.
 
    {{< img src="synthetics/api_tests/api-one-click.png" alt="기존 API 테스트에 대한 GET 검색을 보여주는 HTTP API 테스트" style="width:90%;" >}}
 
@@ -338,7 +348,7 @@ API 테스트 **URL** 입력값을 입력하여 Synthetic Monitoring에서 엔�
 
 ### 변수 사용 {#use-variables}
 
-HTTP 테스트의 URL, 고급 옵션 및 어설션에서 [**Settings** 페이지에 정의된 전역 변수][11]를 사용할 수 있습니다.
+HTTP 테스트의 URL, 고급 옵션 및 어설션에서 [{{< ui >}}Settings{{< /ui >}} 페이지에 정의된 전역 변수][11]를 사용할 수 있습니다.
 
 변수 목록을 표시하려면 원하는 필드에 `{{`을 입력하세요.
 
@@ -348,7 +358,23 @@ HTTP 테스트의 URL, 고급 옵션 및 어설션에서 [**Settings** 페이지
 
 하나 이상의 어설션을 충족하지 않거나 요청이 초기에 실패한 경우 테스트는 `FAILED`로 간주됩니다. 경우에 따라 엔드포인트 어설션을 테스트하지 않고도 테스트가 실패할 수 있습니다.
 
+{{< img src="synthetics/api_tests/api_test_summary_updated.png" alt="전체 가동 시간, 경보 타임라인, 최근 실행된 테스트 중 경고 상태에 있는 항목 목록이 포함된 Activity 탭을 보여주는 HTTP API 테스트 세부 정보 페이지" style="width:100%;">}}
+
+### 타임라인 요약 {#timeline-summary}
+
+{{< ui >}}Summary{{< /ui >}} 패널은 선택한 기간 동안 테스트 실행 전반에서 실패를 유발하는 고유한 문제를 식별합니다. 각 문제에 대해 패널에 표시되는 내용은 다음과 같습니다.
+
+- {{< ui >}}First seen{{< /ui >}}: 테스트 실행 과정에서 문제가 처음 발생한 시점
+- {{< ui >}}Last seen{{< /ui >}}: 테스트 실행 과정에서 가장 최근에 문제가 발생한 시점
+- {{< ui >}}Classification{{< /ui >}}: AI 실패 요약을 바탕으로 해당 문제가 {{< ui >}}True failure{{< /ui >}}(애플리케이션의 실제 문제)인지, {{< ui >}}Test Misconfiguration{{< /ui >}}(테스트 설정 문제)인지 여부
+- {{< ui >}}Description{{< /ui >}}: 오류에 대한 간략한 설명
+- {{< ui >}}Latest alerts{{< /ui >}}: 해당 문제와 관련하여 가장 최근에 나타난 경보 목록
+
 HTTP 및 SSL 오류 코드의 전체 목록은 [API 테스트 오류][12]를 참조하세요.
+
+## Bits Investigation 시작하기 {#launch-a-bits-investigation}
+
+Synthetic HTTP 테스트 실패의 근본 원인을 파악하려면 [Bits Investigation][18]을 시작하세요. Bits Investigation은 테스트 결과, 트레이스, 로그, 메트릭을 분석하여 근본 원인을 파악하고, 실패 유형(회귀 또는 구성 오류)을 표시합니다.
 
 ## 권한 {#permissions}
 
@@ -378,3 +404,4 @@ HTTP 및 SSL 오류 코드의 전체 목록은 [API 테스트 오류][12]를 참
 [15]: /ko/account_management/rbac/#create-a-custom-role
 [16]: /ko/synthetics/api_tests/errors/#http-errors
 [17]: /ko/api_catalog
+[18]: /ko/bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page

@@ -54,11 +54,11 @@ Configure device locations using the following steps:
 
    {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device Geomap, highlighting the All tab." style="width:100%;" >}}
 
-3. On the settings page, click {{< ui >}}+ Add mapping{{< /ui >}} and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
+3. On the settings page, click {{< ui >}}\+ Add mapping{{< /ui >}} and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
 
    {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Settings page of Device Geomap, displaying the Add Mapping screen with fields for location, latitude, and longitude." style="width:80%;" >}}
 
-4. To bulk import locations, select {{< ui >}}Import from CSV{{< /ui >}} from the {{< ui >}}+ Add mapping{{< /ui >}} dropdown. The CSV form provides a template you can download and use.
+4. To bulk import locations, select {{< ui >}}Import from CSV{{< /ui >}} from the {{< ui >}}\+ Add mapping{{< /ui >}} dropdown. The CSV form provides a template you can download and use.
 
    {{< img src="network_device_monitoring/geomap/mapping_csv.png" alt="Settings page of Device Geomap, displaying the Import from CSV option." style="width:90%;" >}}
 
@@ -82,7 +82,7 @@ If your CSV file fails to upload despite appearing correct, verify the following
 
 - No missing commas between fields
 - No extra spaces or special characters
-- Proper formatting according to the CSV template (available for download in the {{< ui >}}+ Add mapping{{< /ui >}} > {{< ui >}}Import from CSV{{< /ui >}} form)
+- Proper formatting according to the CSV template (available for download in the {{< ui >}}\+ Add mapping{{< /ui >}} > {{< ui >}}Import from CSV{{< /ui >}} form)
 
 ### Tagged device does not appear on map
 

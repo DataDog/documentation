@@ -1,0 +1,8 @@
+- Prometheusアドレス:
+    - Observability Pipelines Workerは、Prometheusクライアントからプッシュされたメトリクスを受信するために、`0.0.0.0:9091`のようなソケットアドレスでリッスンします。
+    - デフォルトの環境変数は`DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_ADDRESS`です。
+- プレーン認証を使用している場合:
+	- Prometheusエンドポイント認証のユーザー名:
+		- デフォルトの環境変数は`DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_USERNAME`です。
+	- Prometheusエンドポイント認証のパスワード:
+		- デフォルトの環境変数は`DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_PASSWORD`です。

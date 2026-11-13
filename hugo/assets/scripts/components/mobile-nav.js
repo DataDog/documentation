@@ -41,9 +41,19 @@ if (mobileNavbarTogglers.length && !document.body.classList.contains('aws-micros
 
 const announcementBanner = document.querySelector('div.announcement-banner');
 
-if ((announcementBanner && window.getComputedStyle(announcementBanner).getPropertyValue('display') === 'none') || (!announcementBanner)) {
-  mobileMenu.style.paddingTop = '65px';
+// Keeps the mobile nav flush with the navbar when there is no visible banner: no banner at all,
+// or one hidden through `hide_on_mobile`. The banner's display depends on the viewport width,
+// so this runs on load and on resize. An empty value lets the CSS padding (banner offset) apply.
+function updateMobileMenuPadding() {
+  if (!mobileMenu) return;
+  const isBannerHidden =
+    !announcementBanner ||
+    window.getComputedStyle(announcementBanner).getPropertyValue('display') === 'none';
+  mobileMenu.style.paddingTop = isBannerHidden ? '65px' : '';
 }
+
+updateMobileMenuPadding();
+window.addEventListener('resize', updateMobileMenuPadding);
 
 /* Open mobile nav (.dropdown-menu) 4th level where possible based off of desktop side nav state */
 function openMenu(menuItem) {

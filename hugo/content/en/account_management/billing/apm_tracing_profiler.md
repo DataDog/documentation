@@ -127,6 +127,29 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 | Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 8.5 * $1.70 | $14.45               |
 | Total                          |            |                                                                             | $50 + $14.45 | **$64.45 per month** |
 
+## APM Edge Devices
+
+APM Edge Devices is a billing option for monitoring Edge and IoT devices with APM, such as point-of-sale (POS) systems, medical devices, autonomous vehicles, and industrial systems. APM Edge Devices is the same APM product as standard APM billing, with a billing model designed for Edge and IoT device fleets. For pricing, contact [Sales][8] or your [Customer Success Manager][9].
+
+APM Edge Devices requires the standard Datadog Agent version 7.75.0 or later. The [Datadog IoT Agent][17] does not support APM.
+
+To identify a device as an APM Edge Device, configure the Datadog Agent to run in APM Edge mode with one of the following methods:
+
+- Set the `DD_APM_MODE` environment variable to `edge`:
+
+  ```shell
+  DD_APM_MODE=edge
+  ```
+
+- Add the following to the Agent's `datadog.yaml` configuration file:
+
+  ```yaml
+  apm_config:
+    mode: edge
+  ```
+
+**Note**: APM Edge Devices does not support OpenTelemetry. Contact [Sales][8] or your [Customer Success Manager][9] if your Edge or IoT devices require OpenTelemetry instrumentation.
+
 ## FAQ
 
 **1. What is classified as an APM host for billing?**
@@ -157,9 +180,9 @@ APM is billed on the basis of [hosts][5] deployed with agents sending traces and
 
 As of October 20, 2020, all existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
 
-**8. How do you estimate your ingested or indexed span volume?**
+**8. How do you estimate your ingested span volume or indexed span count?**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][14] documentation.
+Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.indexed_spans` for monitoring ingested span volume and indexed span counts. More information is available in the [Usage Metrics][14] documentation.
 
 **9. Is the Continuous Profiler available as a standalone product?**
 
@@ -194,3 +217,4 @@ Yes. Let Datadog know if you are interested in buying Data Streams Monitoring wi
 [14]: /tracing/trace_pipeline/metrics
 [15]: /universal_service_monitoring/
 [16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=aws-fargate#products
+[17]: /agent/iot/

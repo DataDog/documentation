@@ -569,7 +569,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [20]: /session_replay/privacy_options?platform=browser#configuration
 [21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
-[22]: /session_replay/browser/#usage
+[22]: /session_replay/
 [23]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/application_monitoring/browser/

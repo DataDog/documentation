@@ -131,7 +131,7 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
   -  ...
      env:
          - name: OTEL_RESOURCE_ATTRIBUTES
-           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment=<ENV>"
+           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment.name=<ENV>"
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
@@ -466,7 +466,7 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 | `service.version` | `version` |
 
 1: `deployment.environment` is deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][17].  
-2: `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+.
+2: `deployment.environment.name` is supported in Datadog Agent 7.58.0+, Datadog Exporter v0.110.0+, and Datadog OTLP intake.
 
 <div class="alert alert-danger">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
 
@@ -476,7 +476,7 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 To set resource attributes using environment variables, set `OTEL_RESOURCE_ATTRIBUTES` with the appropriate values:
 
 ```shell
-export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment=production,service.version=1.2.3"
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment.name=production,service.version=1.2.3"
 ```
 
 {{% /tab %}}
@@ -493,7 +493,7 @@ from opentelemetry.sdk.trace import TracerProvider
 
 resource = Resource(attributes={
    "service.name": "<SERVICE>",
-   "deployment.environment": "<ENV>",
+   "deployment.environment.name": "<ENV>",
    "service.version": "<VERSION>"
 })
 tracer_provider = TracerProvider(resource=resource)
@@ -503,7 +503,7 @@ tracer_provider = TracerProvider(resource=resource)
 
 {{% tab "Collector" %}}
 
-To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
+To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor modifies attributes before the Collector exports telemetry:
 
 ```yaml
 processors:
@@ -512,7 +512,7 @@ processors:
       - context: resource
         statements:
           - set(attributes["service.name"], "my-service")
-          - set(attributes["deployment.environment"], "production")
+          - set(attributes["deployment.environment.name"], "production")
           - set(attributes["service.version"], "1.2.3")
 ...
 ```

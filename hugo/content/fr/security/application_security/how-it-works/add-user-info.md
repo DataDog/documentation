@@ -3,47 +3,52 @@ aliases:
 - /fr/security_platform/application_security/add-user-info
 - /fr/security/application_security/add-user-info
 - /fr/security/application_security/threats/add-user-info/
+further_reading:
+- link: https://www.datadoghq.com/blog/app-api-protection-python-lambda-monitoring/
+  tag: Blog
+  text: Détectez les menaces à l'exécution dans les fonctions Python Lambda avec Datadog
+    AAP
 title: Surveillance et protection des utilisateurs
 ---
-## Aperçu
+## Présentation {#overview}
 
 Instrumentez vos services et suivez l'activité des utilisateurs pour détecter et bloquer les acteurs malveillants.
 
-[ Ajoutez des informations sur les utilisateurs authentifiés dans les traces ](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) pour identifier et bloquer les acteurs malveillants ciblant votre surface d'attaque authentifiée. Pour ce faire, définissez le tag d'identifiant utilisateur sur la trace APM en cours, fournissant l'instrumentation nécessaire pour qu'AAP bloque les attaquants authentifiés. Cela permet à AAP d'associer les attaques et les événements de logique métier aux utilisateurs.
+[Ajoutez des informations sur l'utilisateur authentifié aux traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) pour identifier et bloquer les acteurs malveillants ciblant votre surface d'attaque authentifiée. Pour ce faire, définissez le tag d'ID utilisateur sur la trace APM en cours d'exécution, en fournissant l'instrumentation nécessaire pour qu'AAP bloque les attaquants authentifiés. Cela permet à AAP d'associer les attaques et les événements de logique métier aux utilisateurs.
 
-[ Suivez les connexions et l'activité des utilisateurs ](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour détecter les prises de contrôle de compte et les abus de logique métier avec des règles de détection prêtes à l'emploi, et pour finalement bloquer les attaquants.
+[Suivez les connexions et l'activité des utilisateurs](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour détecter les prises de contrôle de compte et les abus de logique métier avec des règles de détection prêtes à l'emploi, et pour bloquer les attaquants.
 
-L'activité utilisateur personnalisée pour laquelle des règles de détection prêtes à l'emploi sont disponibles est la suivante:
+L'activité utilisateur personnalisée pour laquelle des règles de détection prêtes à l'emploi sont disponibles est la suivante :
 
-| Noms d'événements intégrés | Métadonnées requises | Règles associées                                                                                                                                                                                                       |
+| Noms d'événements intégrés   | Métadonnées requises                                    | Règles associées                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Activité limitée par le taux depuis l'IP][4]<br>[Activité non autorisée détectée][5] |
-| `users.login.success`  | L'identifiant utilisateur est obligatoire, des métadonnées optionnelles peuvent être ajoutées | [Attaque par Credential Stuffing][6]<br>[Attaque par force brute][12]<br>[Credential Stuffing distribué][13]               |
-| `users.login.failure`  | L'identifiant utilisateur et `usr.exists` sont obligatoires, des métadonnées optionnelles peuvent être ajoutées | [Attaque par Credential Stuffing][6]<br>[Attaque par force brute][12]<br>[Credential Stuffing distribué][13]  |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Créations excessives de comptes depuis une IP][7]                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Suppressions excessives de comptes depuis une IP][8]                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Tentatives de réinitialisation de mot de passe par force brute][9]                                                                                                         |
-| `payment.failure`      | Aucun                                                 | [Échecs de paiement excessifs depuis l'IP][10]                                                                                                        |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Activité limitée par le débit depuis une IP][4]<br>[Activité non autorisée détectée][5] |
+| `users.login.success`  | L'ID utilisateur est obligatoire, des métadonnées facultatives peuvent être ajoutées | [Attaque par credential stuffing][6]<br>[Attaque par force brute][12]<br>[Credential stuffing distribué][13]               |
+| `users.login.failure`  | L'ID utilisateur et `usr.exists` sont obligatoires, des métadonnées facultatives peuvent être ajoutées | [Attaque par credential stuffing][6]<br>[Attaque par force brute][12]<br>[Credential stuffing distribué][13]  |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Créations de comptes excessives depuis une IP][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Suppressions de comptes excessives depuis une IP][8]                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Tentatives de force brute sur la réinitialisation de mot de passe][9]                                                                                                         |
+| `payment.failure`      | Aucun                                                 | [Échecs de paiement excessifs depuis une IP][10]                                                                                                        |
 
-## Ajout d'informations sur les utilisateurs authentifiés aux traces et activation de la capacité de blocage des utilisateurs
+## Ajout d'informations sur l'utilisateur authentifié aux traces et activation de la fonctionnalité de blocage des utilisateurs {#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability}
 
 <div class="alert alert-info">
-<strong> Détection automatisée de l'activité des utilisateurs : </strong> Les bibliothèques de traçage Datadog tentent de détecter et de signaler automatiquement les événements d'activité des utilisateurs. Pour plus d'informations, voir <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Désactiver le suivi automatique des événements d'activité des utilisateurs</a>.
+<strong>Détection automatisée de l'activité utilisateur :</strong> Les SDK Datadog tentent de détecter et de signaler automatiquement les événements d'activité utilisateur. Pour plus d'informations, consultez <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Désactivation du suivi automatique des événements d'activité utilisateur</a>.
 </div>
 
-Vous pouvez [ajouter des balises personnalisées à votre span racine][3], ou utiliser les fonctions d'instrumentation décrites ci-dessous.
+Vous pouvez [ajouter des tags personnalisés à votre span racine][3], ou utiliser les fonctions d'instrumentation décrites ci-dessous.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
-Utilisez l'API du traceur Java pour ajouter des balises personnalisées à un span racine et ajouter des informations utilisateur afin de pouvoir surveiller les requêtes authentifiées dans l'application.
+Utilisez l'API du traceur Java pour ajouter des tags personnalisés à un span racine et ajoutez des informations utilisateur afin de pouvoir surveiller les requêtes authentifiées dans l'application.
 
-Les balises de surveillance des utilisateurs sont appliquées sur le span racine et commencent par le préfixe `usr` suivi du nom du champ. Par exemple, `usr.name` est une balise de surveillance des utilisateurs qui suit le nom de l'utilisateur.
+Les tags de surveillance utilisateur sont appliqués sur le span racine et commencent par le préfixe `usr` suivi du nom du champ. Par exemple, `usr.name` est un tag de surveillance utilisateur qui suit le nom de l'utilisateur.
 
 **Remarque** : Vérifiez que vous avez ajouté [les dépendances nécessaires à votre application][1].
 
-L'exemple ci-dessous montre comment obtenir le span racine, ajouter les balises de surveillance des utilisateurs pertinentes et activer la capacité de blocage des utilisateurs :
+L'exemple ci-dessous montre comment obtenir le span racine, ajouter les tags de surveillance utilisateur pertinents et activer la fonctionnalité de blocage des utilisateurs :
 
 ```java
 import io.opentracing.Span;
@@ -75,9 +80,9 @@ Blocking
 
 {{< programming-lang lang="dotnet" >}}
 
-Le package de traceur .NET fournit la fonction `SetUser()`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace.
+Le package du traceur .NET fournit la fonction `SetUser()`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace.
 
-L'exemple ci-dessous montre comment ajouter les balises de surveillance des utilisateurs pertinentes et activer la capacité de blocage des utilisateurs :
+L'exemple ci-dessous montre comment ajouter les tags de surveillance utilisateur pertinents et activer la fonctionnalité de blocage des utilisateurs :
 
 ```csharp
 
@@ -101,7 +106,7 @@ using Datadog.Trace;
     Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
 ```
 
-Pour des informations et des options, lisez [la documentation du traceur .NET][1].
+Pour plus d'informations et d'options, lisez [la documentation du traceur .NET][1].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 
@@ -109,9 +114,9 @@ Pour des informations et des options, lisez [la documentation du traceur .NET][1
 
 {{< programming-lang lang="go" >}}
 
-Le package de traceur Go fournit la fonction `SetUser()`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace. Pour plus d'options, voir [la documentation du traceur Go][2] (ou [documentation v1][1]).
+Le package du traceur Go fournit la fonction `SetUser()`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace. Pour plus d'options, consultez [la documentation du traceur Go][2] (ou [la documentation v1][1]).
 
-Cet exemple montre comment récupérer le span de traceur actuel, l'utiliser pour définir des balises de surveillance des utilisateurs et activer la capacité de blocage des utilisateurs. {{% tracing-go-v2 %}}
+Cet exemple montre comment récupérer le span de trace actuel, l'utiliser pour définir des tags de surveillance utilisateur et activer la fonctionnalité de blocage des utilisateurs. {{% tracing-go-v2 %}}
 
 ```go
 import (
@@ -136,9 +141,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Utilisez l'une des API suivantes pour ajouter des informations utilisateur à une trace afin de pouvoir surveiller les requêtes authentifiées dans l'application :
 
-{{% collapse-content title="set_user" level="h4" expanded="true" %}}
+{{% collapse-content title="set_user" level="h3" expanded="true" %}}
 
-À partir de `ddtrace` 1.1.0, la méthode `Datadog::Kit::Identity.set_user` est disponible. C'est l'API recommandée pour ajouter des informations utilisateur aux traces :
+À partir de `ddtrace` 1.1.0, la méthode `Datadog::Kit::Identity.set_user` est disponible. Il s'agit de l'API recommandée pour ajouter des informations utilisateur aux traces :
 
 ```ruby
 # Get the active trace
@@ -156,8 +161,8 @@ Datadog::Kit::Identity.set_user(
 
   # optional tags with known semantics
   name: 'Jean Example',
-  email:, 'jean.example@example.com',
-  session_id:, '987654321',
+  email: 'jean.example@example.com',
+  session_id: '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
@@ -167,17 +172,17 @@ Datadog::Kit::Identity.set_user(
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="set_tag" level="h4" expanded="false" id="ruby-set-tag" %}}
+{{% collapse-content title="set_tag" level="h3" expanded="false" id="ruby-set-tag" %}}
 
 Si `Datadog::Kit::Identity.set_user` ne répond pas à vos besoins, vous pouvez utiliser `set_tag` à la place.
 
-Les balises de surveillance des utilisateurs sont appliquées sur la trace et commencent par le préfixe `usr.` suivi du nom du champ. Par exemple, `usr.name` est une balise de surveillance des utilisateurs qui suit le nom de l'utilisateur.
+Les tags de surveillance utilisateur sont appliqués sur la trace et commencent par le préfixe `usr.` suivi du nom du champ. Par exemple, `usr.name` est un tag de surveillance utilisateur qui suit le nom de l'utilisateur.
 
-L'exemple ci-dessous montre comment obtenir la trace active et ajouter les balises de surveillance des utilisateurs pertinentes :
+L'exemple ci-dessous montre comment obtenir la trace active et ajouter des tags de surveillance utilisateur pertinents :
 
-**Notes** :
-- Les valeurs des balises doivent être des chaînes de caractères.
-- La balise `usr.id` est obligatoire.
+**Remarques** :
+- Les valeurs des tags doivent être des chaînes de caractères.
+- Le tag `usr.id` est obligatoire.
 
 ```ruby
 # Get the active trace
@@ -204,9 +209,9 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 Le traceur PHP fournit la fonction `\DDTrace\set_user()`, qui vous permet de surveiller et de bloquer les requêtes authentifiées.
 
-`\DDTrace\set_user()` ajoute les balises et les métadonnées utilisateur pertinentes à la trace et effectue automatiquement le blocage des utilisateurs.
+`\DDTrace\set_user()` ajoute les tags utilisateur et les métadonnées pertinents à la trace et effectue automatiquement le blocage des utilisateurs.
 
-L'exemple suivant montre comment définir des balises de surveillance des utilisateurs et activer le blocage des utilisateurs :
+L'exemple suivant montre comment définir des tags de surveillance utilisateur et activer le blocage des utilisateurs :
 
 ```php
 <?php
@@ -231,9 +236,9 @@ L'exemple suivant montre comment définir des balises de surveillance des utilis
 
 {{< programming-lang lang="nodejs" >}}
 
-Le package de traceur Node fournit la fonction `tracer.setUser(user)`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace.
+Le package du traceur Node fournit la fonction `tracer.setUser(user)`, qui vous permet de surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace.
 
-L'exemple ci-dessous montre comment ajouter des balises de surveillance des utilisateurs pertinentes et activer la capacité de blocage des utilisateurs :
+L'exemple ci-dessous montre comment ajouter les tags de surveillance d'utilisateur appropriés et activer la fonctionnalité de blocage des utilisateurs :
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -270,13 +275,13 @@ Pour des informations et des options, lisez [la documentation du traceur Node.js
 
 {{< programming-lang lang="python" >}}
 
-À partir de dd-trace-py v3.7, vous pouvez utiliser le nouveau SDK du traceur Python pour suivre les utilisateurs et les événements des utilisateurs.
+À partir de dd-trace-py v3.7, vous pouvez utiliser le nouveau SDK du traceur Python pour suivre les utilisateurs et les événements utilisateur.
 
-Dans les versions précédentes, vous pouvez surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace avec la fonction `set_user` fournie par le package de traceur Python.
+Dans les versions précédentes, vous pouvez surveiller les requêtes authentifiées en ajoutant des informations utilisateur à la trace avec la fonction `set_user` fournie par le package du traceur Python.
 
-{{% collapse-content title="SDK de suivi des utilisateurs" level="h4" expanded="true" id="python-user-info-sdk" %}}
+{{% collapse-content title="SDK de suivi utilisateur" level="h3" expanded="true" id="python-user-info-sdk" %}}
 
-À partir de dd-trace-py v3.7, cet exemple montre comment définir des balises de surveillance des utilisateurs et activer la capacité de blocage des utilisateurs :
+À partir de dd-trace-py v3.7, cet exemple montre comment définir des tags de surveillance utilisateur et activer la fonctionnalité de blocage des utilisateurs :
 
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
@@ -314,9 +319,9 @@ track_user(
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="API héritée" level="h4" expanded="false" id="python-user-info-legacy" %}}
+{{% collapse-content title="API héritée" level="h3" expanded="false" id="python-user-info-legacy" %}}
 
-Cet exemple montre comment définir des balises de surveillance des utilisateurs et activer la capacité de blocage des utilisateurs en utilisant l'API héritée ; cependant, l'utilisation du nouveau SDK de suivi des utilisateurs, décrit ci-dessus, est encouragée.
+Cet exemple montre comment définir des tags de surveillance utilisateur et activer la fonctionnalité de blocage des utilisateurs en utilisant l'API héritée ; cependant, l'utilisation du nouveau SDK de suivi utilisateur, décrit ci-dessus, est encouragée.
 
 ```python
 from ddtrace.contrib.trace_utils import set_user
@@ -333,11 +338,11 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## Ajout d'informations sur la logique métier (succès de connexion, échec de connexion, toute logique métier) aux traces
+## Ajout d'informations de logique métier (succès de connexion, échec de connexion, toute logique métier) aux traces {#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces}
 
 <div class="alert alert-info">
-<strong> Une note sur usr.id et usr.login : </strong> L'investigation des abus de connexion repose sur deux concepts similaires, mais différents. usr.id contient l'identifiant unique du compte utilisateur dans la base de données. Il est unique et immuable. Il est indisponible lorsque quelqu'un essaie de se connecter à un compte inexistant. Le blocage de l'utilisateur cible usr.id.</br>
-L'utilisateur n'est généralement pas conscient de son identifiant utilisateur. Au lieu de cela, il s'appuie sur des identifiants mutables (numéro de téléphone, nom d'utilisateur, adresse e-mail...). La chaîne utilisée par l'utilisateur pour se connecter à un compte doit être rapportée comme usr.login dans les événements de connexion.</br>
+<strong>Une note sur usr.id et usr.login : </strong> L'enquête sur les abus de connexion repose sur deux concepts similaires, mais différents. usr.id contient l'identifiant unique du compte utilisateur dans la base de données. Il est unique et immuable. Il est indisponible lorsque quelqu'un tente de se connecter à un compte inexistant. Le blocage d'utilisateur cible usr.id.</br>
+L'utilisateur n'est généralement pas conscient de son ID utilisateur. Au lieu de cela, il s'appuie sur des identifiants modifiables (numéro de téléphone, nom d'utilisateur, adresse e-mail...). La chaîne utilisée par l'utilisateur pour se connecter à un compte doit être signalée en tant que usr.login dans les événements de connexion.</br>
 Si aucun usr.login n'est fourni, usr.id sera utilisé à la place.</a>
 </div>
 
@@ -346,9 +351,9 @@ Si aucun usr.login n'est fourni, usr.id sera utilisé à la place.</a>
 
 À partir de dd-trace-java v1.8.0, vous pouvez utiliser l'API du traceur Java pour suivre les événements utilisateur.
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -378,7 +383,7 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="java-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="java-login-failure" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -395,8 +400,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
@@ -411,7 +416,7 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="java-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="java-custom-business" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -442,9 +447,9 @@ public class LoginController {
 
 À partir de dd-trace-dotnet v2.23.0, vous pouvez utiliser l'API du traceur .NET pour suivre les événements utilisateur.
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```csharp
 using Datadog.Trace.AppSec;
@@ -463,7 +468,7 @@ void OnLogonSuccess(string userId, string login...)
 
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="dotnet-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="dotnet-login-failure" %}}
 
 ```csharp
 using Datadog.Trace.AppSec;
@@ -483,7 +488,7 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="dotnet-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="dotnet-custom-business" %}}
 
 ```csharp
 void OnUserSignupComplete(string userId, ...)
@@ -506,9 +511,9 @@ void OnUserSignupComplete(string userId, ...)
 
 À partir de dd-trace-go v1.47.0, vous pouvez utiliser l'API du traceur Go pour suivre les événements utilisateur.
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple). {{% tracing-go-v2 %}}
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions). {{% tracing-go-v2 %}}
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```go
 import (
@@ -530,7 +535,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="go-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="go-login-failure" %}}
 
 ```go
 import (
@@ -548,7 +553,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="go-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="go-custom-business" %}}
 
 ```go
 import (
@@ -567,11 +572,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-À partir de dd-trace-rb v1.9.0, vous pouvez utiliser l'API du traceur Ruby pour suivre les événements utilisateur. La version v2.19.0 de dd-trace-rb introduit de nouvelles méthodes sous l'espace de noms `Datadog::Kit::AppSec::Events::V2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de dd-trace-rb v1.9.0, vous pouvez utiliser l'API du traceur Ruby pour suivre les événements utilisateur. La version v2.19.0 de dd-trace-rb introduit de nouvelles méthodes sous l'espace de noms `Datadog::Kit::AppSec::Events::V2`. Les méthodes de suivi d'événements existantes sont conservées pour des raisons de compatibilité.
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -588,7 +593,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="ruby-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="ruby-login-failure" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -601,7 +606,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="ruby-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="ruby-custom-business" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events'
@@ -615,20 +620,20 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migration vers les nouvelles méthodes de connexion pour le succès et l'échec
+#### Migration vers les nouvelles méthodes de succès et d'échec de connexion {#migrating-to-the-new-login-success-and-failure-methods}
 
 Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
-1. L'identifiant de connexion (email, nom d'utilisateur) est le premier paramètre et est obligatoire.
-2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
+1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
+2. L'objet/ID utilisateur est facultatif dans les événements de succès et a été supprimé des événements d'échec.
 3. Les métadonnées ont été simplifiées et ne nécessitent plus le champ `usr.login`.
-4. Les paramètres de trace et de span ne sont plus requis et sont automatiquement déduits.
+4. Les paramètres trace et span ne sont plus requis et sont automatiquement inférés.
 
-**Remarque** : les méthodes héritées `track_login_success` et `track_login_failure` sont obsolètes au profit des nouvelles méthodes `track_user_login_success` et `track_user_login_failure`, respectivement.
+**Remarque** : les anciennes méthodes `track_login_success` et `track_login_failure` sont obsolètes au profit des nouvelles méthodes `track_user_login_success` et `track_user_login_failure`, respectivement.
 
 Dans l'exemple suivant, le code commenté n'est plus nécessaire.
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+{{% collapse-content title="Succès de la connexion" level="h5" expanded="true" id="ruby-v2-migration-login-success" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -650,7 +655,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h5" expanded="false" id="ruby-v2-migration-login-failure" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -672,11 +677,11 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-À partir de dd-trace-php v0.84.0, vous pouvez utiliser l'API du traceur PHP pour suivre les événements utilisateur. La version v1.11.0 de dd-trace-php introduit de nouvelles méthodes sous l'espace de noms `\datadog\appsec\v2\`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de dd-trace-php v0.84.0, vous pouvez utiliser l'API du traceur PHP pour suivre les événements utilisateur. La version v1.11.0 de dd-trace-php introduit de nouvelles méthodes sous l'espace de noms `\datadog\appsec\v2\`. Les méthodes de suivi d'événements existantes sont conservées pour des raisons de compatibilité.
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```php
 <?php
@@ -695,7 +700,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="php-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="php-login-failure" %}}
 
 ```php
 <?php
@@ -711,7 +716,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="php-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="php-custom-business" %}}
 
 ```php
 <?php
@@ -722,19 +727,19 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-#### Migration vers les nouvelles méthodes de connexion pour le succès et l'échec
+#### Migration vers les nouvelles méthodes de succès et d'échec de connexion {#migrating-to-the-new-login-success-and-failure-methods-1}
 
 Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
-1. L'identifiant de connexion (email, nom d'utilisateur) est le premier paramètre et est obligatoire.
-2. Le tableau/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
+1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
+2. Le tableau/ID utilisateur est facultatif dans les événements de succès et a été supprimé des événements d'échec.
 3. Les métadonnées ont été simplifiées et ne nécessitent plus le champ `usr.login`.
 
-**Remarque** : les méthodes héritées `\datadog\appsec\track_user_login_success_event` et `\datadog\appsec\track_user_login_failure_event` sont obsolètes au profit des nouvelles méthodes `\datadog\appsec\v2\track_user_login_success` et `\datadog\appsec\v2\track_user_login_failure`, respectivement.
+**Remarque** : les anciennes méthodes `\datadog\appsec\track_user_login_success_event` et `\datadog\appsec\track_user_login_failure_event` sont obsolètes au profit des nouvelles méthodes `\datadog\appsec\v2\track_user_login_success` et `\datadog\appsec\v2\track_user_login_failure`, respectivement.
 
 Dans l'exemple suivant, le code commenté n'est plus nécessaire.
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h5" expanded="true" %}}
 
 ```php
 <?php
@@ -757,7 +762,7 @@ $metadata = [
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="php-migration-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h5" expanded="false" id="php-migration-login-failure" %}}
 
 ```php
 <?php
@@ -779,22 +784,22 @@ $metadata = [
 
 {{< programming-lang lang="nodejs" >}}
 
-À partir de dd-trace-js v3.13.1, vous pouvez utiliser l'API du traceur Node.js pour suivre les événements utilisateur. La version v5.48.0 de dd-trace-js introduit de nouvelles méthodes sous l'espace de noms `eventTrackingV2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de dd-trace-js v3.13.1, vous pouvez utiliser l'API du traceur Node.js pour suivre les événements utilisateur. La version v5.48.0 de dd-trace-js introduit de nouvelles méthodes sous l'espace de noms `eventTrackingV2`. Les méthodes de suivi d'événements existantes sont conservées pour des raisons de compatibilité.
 
 
-Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
+Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h3" expanded="true" %}}
 
 ```javascript
 const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
+  id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const user = 'user-id' // user could be just the ID
+// Alternatively: const user = 'user-id' (user can be just the ID string)
 const login = 'user@email.com'
 const metadata = { 'key': 'value' } // you can add arbitrary fields
 
@@ -804,7 +809,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="nodejs-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h3" expanded="false" id="nodejs-login-failure" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -821,7 +826,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="nodejs-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h3" expanded="false" id="nodejs-custom-business" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -834,19 +839,19 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migration vers les nouvelles méthodes de connexion pour le succès et l'échec
+#### Migration vers les nouvelles méthodes de succès et d'échec de connexion {#migrating-to-the-new-login-success-and-failure-methods-2}
 
 Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
-1. L'identifiant de connexion (email, nom d'utilisateur) est le premier paramètre et est obligatoire.
-2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
+1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
+2. L'objet/ID utilisateur est facultatif dans les événements de succès et a été supprimé des événements d'échec.
 3. Les métadonnées ont été simplifiées et ne nécessitent plus le champ `usr.login`.
 
-**Remarque** : les méthodes héritées `trackUserLoginSuccessEvent` et `trackUserLoginFailureEvent` sont obsolètes au profit des nouvelles méthodes `eventTrackingV2.trackUserLoginSuccess` et `eventTrackingV2.trackUserLoginFailure`, respectivement.
+**Remarque** : les anciennes méthodes `trackUserLoginSuccessEvent` et `trackUserLoginFailureEvent` sont obsolètes au profit des nouvelles méthodes `eventTrackingV2.trackUserLoginSuccess` et `eventTrackingV2.trackUserLoginFailure`, respectivement.
 
 Dans l'exemple suivant, le code commenté n'est plus nécessaire.
 
-{{% collapse-content title="Succès de connexion" level="h4" expanded="true" %}}
+{{% collapse-content title="Succès de la connexion" level="h5" expanded="true" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -869,7 +874,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Échec de connexion" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
+{{% collapse-content title="Échec de la connexion" level="h5" expanded="false" id="nodejs-migration-login-failure" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -896,13 +901,13 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 
 À partir de dd-trace-py v1.9.0, vous pouvez utiliser l'API du traceur Python pour suivre les événements utilisateur.
 
-À partir de dd-trace-py v3.7, vous pouvez utiliser le nouveau SDK du traceur Python pour suivre les utilisateurs et les événements des utilisateurs.
+À partir de dd-trace-py v3.7, vous pouvez utiliser le nouveau SDK du traceur Python pour suivre les utilisateurs et les événements utilisateur.
 
-Les exemples suivants montrent comment suivre les événements de connexion, les événements d'inscription ou les événements personnalisés.
+Les exemples suivants montrent comment suivre les événements de connexion, d'inscription ou les événements personnalisés.
 
-{{% collapse-content title="SDK de suivi des utilisateurs" level="h4" expanded="true" id="python-business-logic-sdk" %}}
+{{% collapse-content title="SDK de suivi utilisateur" level="h3" expanded="true" id="python-business-logic-sdk" %}}
 
-Disponible depuis la version 3.7 de dd-trace-py, `track_user_sdk` fournit 5 fonctions :
+Disponible depuis dd-trace-py v3.7, `track_user_sdk` fournit 5 fonctions :
 
 - `track_login_success`
 - `track_login_failure`
@@ -910,9 +915,9 @@ Disponible depuis la version 3.7 de dd-trace-py, `track_user_sdk` fournit 5 fonc
 - `track_custom_event`
 - `track_user`
 
-Disponible depuis la version 3.17 de dd-trace-py, `track_user_sdk` fournit cette fonction supplémentaire :
+Disponible depuis dd-trace-py v3.17, `track_user_sdk` fournit cette fonction supplémentaire :
 
-- `tracker_user_id`
+- `track_user_id`
 
 
 ```python
@@ -981,9 +986,9 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Application Toy FastAPI avec SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
+{{% collapse-content title="Application de démonstration FastAPI avec SDK" level="h3" expanded="false" id="python-business-logic-example" %}}
 
-L'exemple suivant est une application Toy entièrement fonctionnelle qui utilise le SDK de suivi des utilisateurs avec une base de données utilisateur en mémoire. Cet exemple illustre l'utilisation possible du SDK mais ne fournit pas les exigences nécessaires d'une application réelle, telles qu'un modèle de données persistant ou un système d'authentification sécurisé.
+L'exemple suivant est une application de démonstration entièrement fonctionnelle qui utilise le SDK de suivi des utilisateurs avec une base de données utilisateur en mémoire. Cet exemple illustre l'utilisation possible du SDK mais ne fournit pas les exigences nécessaires d'une application réelle, telles qu'un modèle de données persistant ou un système d'authentification sécurisé.
 
 ```python
 from uuid import uuid4
@@ -1089,9 +1094,9 @@ async def whoami(request: Request) -> User:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="API Legacy" level="h4" expanded="false" id="python-business-logic-legacy" %}}
+{{% collapse-content title="API héritée" level="h3" expanded="false" id="python-business-logic-legacy" %}}
 
-La méthode recommandée consiste à utiliser le nouveau SDK de suivi des utilisateurs (disponible depuis dd-trace-py v1.9) au lieu de l'API Legacy.
+La méthode privilégiée consiste à utiliser le nouveau SDK de suivi des utilisateurs (disponible depuis dd-trace-py v1.9) au lieu de l'API héritée.
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
@@ -1121,27 +1126,27 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
-### Suivi des informations de logique métier sans modifier le code
+### Suivi des informations de logique métier sans modifier le code {#tracking-business-logic-information-without-modifying-the-code}
 
-Si votre service a l'AAP activé et que la [Configuration à distance][1] est activée, vous pouvez créer une règle WAF personnalisée pour signaler toute demande correspondant à un tag de logique métier personnalisé. Cela ne nécessite aucune modification de votre application et peut être fait entièrement depuis Datadog.
+Si votre service a AAP activé et [Remote Configuration][1] activé, vous pouvez créer une règle WAF personnalisée pour marquer toute requête correspondante avec un tag de logique métier personnalisé. Cela ne nécessite aucune modification de votre application et peut être effectué entièrement depuis Datadog.
 
-Pour commencer, accédez à la [page de règle WAF personnalisée][2] et cliquez sur "Créer une nouvelle règle".
+Pour commencer, accédez à la [page Règle WAF personnalisée][2] et cliquez sur {{< ui >}}Create New Rule{{< /ui >}}.
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accédez au menu de règle WAF personnalisée depuis la page d'accueil de l'AAP en cliquant sur Protection, puis sur WAF en application et Règles personnalisées" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accédez au menu Règle WAF personnalisée depuis la page d'accueil AAP en cliquant sur Protection, puis sur WAF In-App et Règles personnalisées" style="width:100%;" >}}
 
-Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque tague la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
+Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie {{< ui >}}Business Logic{{< /ui >}}, vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre, ainsi qu'un endpoint spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque marque la trace et signale qu'elle doit être transmise à AAP. Si vous n'avez pas besoin de condition, vous pouvez définir une condition large pour tout faire correspondre.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Capture d'écran du formulaire qui apparaît lorsque vous cliquez sur le bouton Créer une nouvelle règle" style="width:50%;" >}}
 
-Une fois enregistré, la règle est déployée sur les instances du service qui ont la Configuration à distance activée.
+Une fois enregistrée, la règle est déployée sur les instances du service pour lesquelles Remote Configuration est activé.
 
 
 [1]: /fr/tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
-## Suivi automatique des événements d'activité des utilisateurs
+## Suivi automatique des événements d'activité utilisateur {#automatic-user-activity-event-tracking}
 
-Lorsque l'AAP est activé, les bibliothèques de traçage Datadog tentent de détecter automatiquement les événements d'activité des utilisateurs.
+Lorsque AAP est activé, les SDK Datadog tentent de détecter automatiquement les événements d'activité utilisateur.
 
 Les événements qui peuvent être détectés automatiquement sont :
 
@@ -1149,29 +1154,29 @@ Les événements qui peuvent être détectés automatiquement sont :
 - `users.login.failure`
 - `users.signup`
 
-### Modes de suivi automatique des événements d'activité des utilisateurs
+### Modes de suivi automatique des événements d'activité utilisateur {#automatic-user-activity-event-tracking-modes}
 
-Le suivi automatique des activités des utilisateurs offre les modes suivants :
+Le suivi automatique de l'activité utilisateur propose les modes suivants :
 
 - `identification` mode (nom court : `ident`) :
-  - Ce mode est le mode par défaut et collecte toujours l'identifiant de l'utilisateur, dans la limite du possible.
-  - L'identifiant de l'utilisateur est collecté en cas de succès ou d'échec de la connexion. En cas d'échec, l'identifiant de l'utilisateur est collecté, que l'utilisateur existe ou non.
-  - Lorsque le cadre instrumenté ne fournit pas clairement un identifiant d'utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant de l'utilisateur est déterminé au mieux en fonction des noms de champs de l'objet. Cette liste de noms de champs est considérée, classée par ordre de priorité :
+  - Ce mode est le mode par défaut et collecte toujours l'identifiant utilisateur dans la mesure du possible.
+  - L'identifiant utilisateur est collecté lors de la réussite et de l'échec de la connexion. En cas d'échec, l'identifiant utilisateur est collecté, que l'utilisateur existe ou non.
+  - Lorsque le framework instrumenté ne fournit pas clairement d'identifiant utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant utilisateur est déterminé au mieux en fonction des noms de champs de l'objet. Cette liste de noms de champs est prise en compte, classée par priorité :
     - `id`
     - `email`
     - `username`
     - `login`
     - `user`
-  - Si aucun identifiant d'utilisateur n'est disponible ou trouvé, l'événement utilisateur n'est pas émis.
+  - Si aucun identifiant utilisateur n'est disponible ou trouvé, l'événement utilisateur n'est pas émis.
 - `anonymization` mode (nom court : `anon`) :
-  - Ce mode est identique à `identification`, mais anonymise l'identifiant de l'utilisateur en le hachant (SHA256) et en tronquant le hachage résultant.
-- `disabled` mode :
-  - Les bibliothèques AAP ne *collectent* aucune identification utilisateur à partir de leurs instrumentations automatisées.
-  - Les événements de connexion des utilisateurs ne sont pas émis.
+  - Ce mode est identique à `identification`, mais anonymise l'identifiant utilisateur en le hachant (SHA256) et en tronquant le hachage résultant.
+- `disabled` mode :
+  - Les bibliothèques AAP *ne* collectent aucun identifiant utilisateur via leurs instrumentations automatisées.
+  - Les événements de connexion utilisateur ne sont pas émis.
 
-<div class="alert alert-info">Tous les modes n'affectent que l'instrumentation automatisée. Les modes ne s'appliquent pas à la collecte manuelle. La collecte manuelle est configurée à l'aide d'un SDK, et ces paramètres ne sont pas remplacés par l'instrumentation automatisée.</div>
+<div class="alert alert-info">Tous les modes affectent uniquement l'instrumentation automatisée. Les modes ne s'appliquent pas à la collecte manuelle. La collecte manuelle est configurée à l'aide d'un SDK, et ces paramètres ne sont pas remplacés par l'instrumentation automatisée.</div>
 
-### Configuration manuelle
+### Configuration manuelle {#manual-configuration}
 
 Les bibliothèques Datadog vous permettent de configurer l'auto-instrumentation en utilisant la variable d'environnement `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` avec le nom court du mode : `ident`|`anon`|`disabled`.
 
@@ -1179,22 +1184,22 @@ Le mode par défaut est le mode `identification` (nom court : `ident`).
 
 Par exemple, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
-### Modes obsolètes
+### Modes obsolètes {#deprecated-modes}
 
 <div class="alert alert-info">Les modes précédents sont obsolètes, mais la compatibilité sera maintenue jusqu'à la prochaine version majeure.</div>
 
 Les modes suivants sont obsolètes :
 
-- `safe` mode : La bibliothèque de trace n'inclut aucune information PII dans les métadonnées des événements. La bibliothèque de trace essaie de collecter l'identifiant utilisateur, et seulement si l'identifiant utilisateur est un [GUID][10] valide.
-- `extended` mode : La bibliothèque de trace essaie de collecter l'identifiant utilisateur et l'email de l'utilisateur. Dans ce mode, Datadog ne vérifie pas que le type de l'identifiant utilisateur soit un GUID. La bibliothèque de trace rapporte toute valeur pouvant être extraite de l'événement.
+- `safe` mode : La bibliothèque de trace n'inclut aucune information PII dans les métadonnées des événements. Le traceur tente de collecter l'ID utilisateur, et uniquement si l'ID utilisateur est un [GUID][11] valide
+- `extended` mode : La bibliothèque de trace tente de collecter l'ID utilisateur et l'e-mail de l'utilisateur. Dans ce mode, Datadog ne vérifie pas si le type de l'ID utilisateur est un GUID. La bibliothèque de trace rapporte toute valeur pouvant être extraite de l'événement.
 
-**Remarque** : Il pourrait y avoir des cas où la bibliothèque de trace ne pourra pas extraire d'informations de l'événement utilisateur. L'événement serait signalé avec des métadonnées vides. Dans ces cas, utilisez le [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour instrumenter manuellement les événements utilisateur.
+**Remarque** : Il peut y avoir des cas où la bibliothèque de trace ne sera pas en mesure d'extraire des informations de l'événement utilisateur. L'événement serait rapporté avec des métadonnées vides. Dans ces cas, utilisez le [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour instrumenter manuellement les événements utilisateur.
 
-## Désactivation du suivi des événements d'activité utilisateur
+## Désactivation du suivi des événements d'activité utilisateur {#disabling-user-activity-event-tracking}
 
-Pour désactiver la détection automatisée de l'activité utilisateur via votre [Catalogue de logiciels AAP][14], changez la variable d'environnement du mode de suivi automatique `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` en `disabled` sur le service que vous souhaitez désactiver. Tous les modes n'affectent que l'instrumentation automatisée et nécessitent que [Configuration à distance][15] soit activée.
+Pour désactiver la détection automatisée de l'activité utilisateur via votre [Catalogue AAP][14], modifiez la variable d'environnement du mode de suivi automatique `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` en `disabled` sur le service que vous souhaitez désactiver. Tous les modes affectent uniquement l'instrumentation automatisée et nécessitent que la [Remote Configuration][15] soit activée.
 
-Pour une configuration manuelle, vous pouvez définir la variable d'environnement `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` sur `false` sur votre service et le redémarrer. Cela doit être défini sur l'application hébergeant la bibliothèque de traçage Datadog, et non sur l'Agent Datadog.
+Pour une configuration manuelle, vous pouvez définir la variable d'environnement `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` à `false` sur votre service et le redémarrer. Ceci doit être défini sur l'application hébergeant le SDK Datadog, et non sur le Datadog Agent.
 
 [3]: /fr/tracing/trace_collection/custom_instrumentation/
 [4]: /fr/security/default_rules/bl-rate-limiting/
@@ -1209,3 +1214,7 @@ Pour une configuration manuelle, vous pouvez définir la variable d'environnemen
 [13]: /fr/security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
 [15]: /fr/tracing/guide/remote_config
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

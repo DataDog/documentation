@@ -7,6 +7,9 @@ algolia:
   - cost recommendation
   - cloud resources
   - cloud resource
+  - cost recommendation risk
+  - cost recommendation effort
+  - cost recommendation level of effort
 aliases:
 - /ja/cloud_cost_management/recommendations/savings
 description: Cost Recommendations を使用して、組織のクラウドリソースにかかる支出を削減する方法を学びましょう。
@@ -28,9 +31,27 @@ multifiltersearch:
   - category: Configure
     cloud_provider: Anthropic
     recommendation_description: プロンプトキャッシングを使用していない Anthropic API キーを特定し、入力トークンコストを削減するためにプロンプトキャッシングを有効にすることを推奨します。
-    recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
-    recommendation_type: Enable Anthropic Prompt Caching
-    resource_type: Anthropic API Key
+    recommendation_prerequisites: ''
+    recommendation_type: Enable Prompt Caching
+    resource_type: API Key
+  - category: Configure
+    cloud_provider: Anthropic
+    recommendation_description: 目標ヒット率を下回るプロンプトキャッシングを使用している Anthropic API キーを特定し、入力トークンコストを削減するためにキャッシュ構成の改善を推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: API Key
+  - category: Configure
+    cloud_provider: Anthropic
+    recommendation_description: 支出が最も高価なモデルに集中しているエンタープライズユーザーを特定し、より低コストのモデルを使用することを推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Reduce Top-Tier Model Usage
+    resource_type: Enterprise User
+  - category: Downsize
+    cloud_provider: AWS
+    recommendation_description: CPU およびメモリの使用率が低く、スケーリング戦略を調整することで縮小可能な、コンテナ化されていないワークロードを持つオートスケーリンググループ。
+    recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    recommendation_type: Downsize Auto Scaling Group
+    resource_type: Auto Scaling Group
   - category: Migrate
     cloud_provider: AWS
     recommendation_description: 旧世代インスタンスタイプを含むオートスケーリンググループ。
@@ -45,9 +66,9 @@ multifiltersearch:
     resource_type: Auto Scaling Group
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: コスト削減のために削除できる有料イベントを含む CloudTrail トレイル。
+    recommendation_description: コスト削減のために削除できる、有料イベントを含む CloudTrail トレイル。
     recommendation_prerequisites: ''
-    recommendation_type: Delete unnecessary CloudTrail trails
+    recommendation_type: Delete Unnecessary CloudTrail Trails
     resource_type: CloudTrail Trail
   - category: Terminate
     cloud_provider: AWS
@@ -57,15 +78,15 @@ multifiltersearch:
     resource_type: DynamoDB Table
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: 読み取り消費量 0、非レプリカ書き込み消費量 0 の DynamoDB テーブル。
+    recommendation_description: 2 つより多くのオンデマンドバックアップに課金が発生している DynamoDB テーブル。
     recommendation_prerequisites: ''
-    recommendation_type: Delete DynamoDB Table
+    recommendation_type: Delete Extra DynamoDB On-Demand Backups
     resource_type: DynamoDB Table
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: 2 つ以上のオンデマンドバックアップに課金が発生している DynamoDB テーブル。
+    recommendation_description: 読み取り消費量 0、非レプリカ書き込み消費量 0 の DynamoDB テーブル。
     recommendation_prerequisites: ''
-    recommendation_type: Delete Extra On-Demand Backups
+    recommendation_type: Delete Unused DynamoDB Table
     resource_type: DynamoDB Table
   - category: Downsize
     cloud_provider: AWS
@@ -106,6 +127,18 @@ multifiltersearch:
     recommendation_prerequisites: ''
     recommendation_type: Delete Old EBS Snapshots
     resource_type: EBS Snapshot
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: EC2 インスタンスに接続されていないボリューム。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Unattached EBS Volume
+    resource_type: EBS Volume
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: 読み取りまたは書き込みアクティビティがないボリューム。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Unused EBS Volume
+    resource_type: EBS Volume
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: 読み取りおよび書き込みでプロビジョニングされた IOPS の 80% 未満しか使用していない EBS
@@ -140,21 +173,9 @@ multifiltersearch:
     resource_type: EBS Volume
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: EC2 インスタンスに接続されていないボリューム。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate Unattached EBS Volume
-    resource_type: EBS Volume
-  - category: Terminate
-    cloud_provider: AWS
-    recommendation_description: 読み取りまたは書き込みアクティビティがないボリューム。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate Unused EBS Volume
-    resource_type: EBS Volume
-  - category: Terminate
-    cloud_provider: AWS
     recommendation_description: AWS コストと使用状況レポートでアイドル料金が発生している Elastic IP アドレス。
     recommendation_prerequisites: ''
-    recommendation_type: Delete Idle Elastic IP
+    recommendation_type: Release Idle Elastic IP
     resource_type: Elastic IP
   - category: Downsize
     cloud_provider: AWS
@@ -177,13 +198,6 @@ multifiltersearch:
     resource_type: EC2 Instance
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: カスタマイズ可能なしきい値未満の CPU およびメモリ使用率の EC2 インスタンス。この推奨事項は、Datadog
-      Agent を使用することなく CloudWatch メトリクスを使用して生成されます。
-    recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    recommendation_type: Terminate EC2 Instance
-    resource_type: EC2 Instance
-  - category: Terminate
-    cloud_provider: AWS
     recommendation_description: ノードが正常に機能していないことを示す、保留状態にある Kubernetes ノードをホストしている
       EC2 インスタンス。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
@@ -191,13 +205,20 @@ multifiltersearch:
     resource_type: EC2 Instance
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: コスト削減のために削除できるプルアクティビティがない ECR リポジトリ。
+    recommendation_description: カスタマイズ可能なしきい値未満の CPU およびメモリ使用率の EC2 インスタンス。この推奨事項は、Datadog
+      Agent を使用することなく CloudWatch メトリクスを使用して生成されます。
+    recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    recommendation_type: Terminate Unused EC2 Instance
+    resource_type: EC2 Instance
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: コスト削減のために削除できる、プルアクティビティがない ECR リポジトリ。
     recommendation_prerequisites: ''
     recommendation_type: Delete ECR Repository
     resource_type: ECR Repository
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: リクエストされた CPU またはメモリの 50% 未満を使用している ECS タスク。
+    recommendation_description: リクエストされた CPU またはメモリの 50% 未満しか使用していない ECS タスク。
     recommendation_prerequisites: '[Container Monitoring](/containers/)'
     recommendation_type: Downsize ECS Task Size
     resource_type: ECS Task Definition
@@ -206,45 +227,39 @@ multifiltersearch:
     recommendation_description: キャッシュヒットがなくレプリケーションもない ElastiCache Redis クラスター、またはキャッシュヒットがない
       Memcached クラスター。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate ElastiCache Cluster
+    recommendation_type: Delete Unused ElastiCache Cluster
     resource_type: ElastiCache Cluster
   - category: Terminate
     cloud_provider: AWS
     recommendation_description: リクエストアクティビティがない OpenSearch ドメイン。
     recommendation_prerequisites: ''
-    recommendation_type: Delete OpenSearch Domain
+    recommendation_type: Delete Unused OpenSearch Domain
     resource_type: OpenSearch Domain
   - category: Terminate
     cloud_provider: AWS
     recommendation_description: EC2 インスタンスに接続されていない、アクティブな接続のない Classic Elastic Load
       Balancer。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate Classic Load Balancer
+    recommendation_type: Delete Unused Classic Load Balancer
     resource_type: Classic Load Balancer
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: 処理中のトラフィックがない Application Load Balancer。
+    recommendation_description: トラフィックが処理されていない Application Load Balancer。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate Application Load Balancer
+    recommendation_type: Delete Application Load Balancer
     resource_type: Load Balancer
   - category: Terminate
     cloud_provider: AWS
     recommendation_description: 処理バイト数 0 のネットワークロードバランサー。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate Network Load Balancer
+    recommendation_type: Delete Network Load Balancer
     resource_type: Load Balancer
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: 過剰に割り当てられたプロビジョニング済みの同時実行数を持つ AWS Lambda 関数。
+    recommendation_description: プロビジョニング済みの同時実行数が過剰に割り当てられている AWS Lambda 関数。
     recommendation_prerequisites: ''
     recommendation_type: Downsize Lambda Provisioned Concurrency
     resource_type: Lambda
-  - category: Terminate
-    cloud_provider: AWS
-    recommendation_description: Lambda CloudWatch Logs の書き込み権限を削除して、不要なログ記録を防止します。
-    recommendation_prerequisites: ''
-    recommendation_type: Delete Lambda CloudWatch Logs and write permissions
-    resource_type: CloudWatch Log Group
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: 適切な保持ポリシーを設定することで、CloudWatch Logs のストレージコストを削減します。
@@ -255,11 +270,25 @@ multifiltersearch:
     cloud_provider: AWS
     recommendation_description: 接続数 0 の MQ ブローカー。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate MQ Broker
+    recommendation_type: Delete Unused MQ Broker
     resource_type: MQ Broker
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: データベース接続が 0、レプリカラグが 0 の RDS インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Unused RDS Instance
+    resource_type: RDS Instance
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: 過去 2 週間でプロビジョニングされた IOPS の 80% 未満を使用している RDS インスタンス。
+    recommendation_description: AWS Compute Optimizer がより小さいインスタンスタイプへの縮小を推奨している RDS
+      インスタンス。
+    recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
+    recommendation_type: Downsize RDS Instance
+    resource_type: RDS Instance
+  - category: Downsize
+    cloud_provider: AWS
+    recommendation_description: 過去 2 週間でプロビジョニングされた IOPS の 80% 未満しか使用していない RDS インスタンス。プロビジョニングされた
+      IOPS の設定を構成できない Amazon Aurora インスタンスには適用されません。
     recommendation_prerequisites: ''
     recommendation_type: Downsize RDS Instance Provisioned IOPS
     resource_type: RDS Instance
@@ -278,15 +307,9 @@ multifiltersearch:
     resource_type: RDS Instance
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: データベース接続が 0、レプリカラグが 0 の RDS インスタンス。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate Unused RDS Instance
-    resource_type: RDS Instance
-  - category: Terminate
-    cloud_provider: AWS
     recommendation_description: データベース接続数 0 の Redshift クラスター。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate Redshift Cluster
+    recommendation_type: Delete Redshift Cluster
     resource_type: Redshift Cluster
   - category: Migrate
     cloud_provider: AWS
@@ -296,47 +319,84 @@ multifiltersearch:
     resource_type: S3 Bucket
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: 標準的な S3 バケットで、非最新バージョン有効期限ライフサイクルがなく、Web サイト配信もしていない場合、30
-      日以上前の非最新バージョンストレージバイトが存在します。
+    recommendation_description: ストレージコストが最小限で、意味のあるオブジェクト API の使用 (Get、Put、Copy、Head、またはマルチパートアップロードのアクティビティ)
+      がない S3 バケット。
+    recommendation_prerequisites: '[Cloud Cost Management](https://www.datadoghq.com/product/cloud-cost-management)
+      or [Storage Management](https://www.datadoghq.com/product/storage-management)'
+    recommendation_type: Delete S3 Bucket
+    resource_type: S3 Bucket
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: 非最新バージョン有効期限ライフサイクルがなく、Web サイト配信もしていない標準的な S3 バケットで、30
+      日以上前の非最新バージョンストレージバイトが存在する場合。
     recommendation_prerequisites: '[Storage Lens](/integrations/amazon_s3_storage_lens/)'
     recommendation_type: Delete S3 noncurrent version objects
     resource_type: S3 Bucket
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: 7 日以上前の未完了のマルチパートアップロードを持ち、ストレージスペースを消費している S3 バケット。
+    recommendation_description: 7 日以上前の未完了のマルチパートアップロードがストレージスペースを消費している S3 バケット。
     recommendation_prerequisites: '[Storage Lens](/integrations/amazon_s3_storage_lens/)'
     recommendation_type: Delete abandoned S3 multipart uploads
     resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: バケットには頻繁にアクセスされないストレージクラスに小さなファイルが多く含まれ、最小請求サイズが原因でストレージコストが増加します。
+    recommendation_description: 頻繁にアクセスされないストレージクラスに小さなファイルが高い割合で含まれており、最小請求サイズが原因でストレージコストが増加しているバケット。
     recommendation_prerequisites: ''
     recommendation_type: Reduce small file count to reduce storage costs
     resource_type: S3 Bucket
-  - category: Terminate
-    cloud_provider: AWS
-    recommendation_description: GET または PUT リクエストがなく、ストレージコストが最小限の S3 バケット。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate S3 Bucket
-    resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: バケットには大きな早期削除料金があります。
+    recommendation_description: 多額の早期削除料金があるバケット。
     recommendation_prerequisites: ''
     recommendation_type: Transition S3 IA and Glacier objects to Intelligent-Tiering
     resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: ほぼすべてが GB 単位の標準ストレージ料金に由来するものの、GET リクエスト数の少なさは実際にはアクセスされるオブジェクトがごくわずかであることを示しているバケットのコスト。
+    recommendation_description: コストのほぼすべてが GB 単位の標準ストレージに由来するものの、アクセスされているオブジェクトがほとんどないことを
+      GET リクエストが示しているバケット。
     recommendation_prerequisites: ''
     recommendation_type: Transition S3 Standard objects to Intelligent Tiering
     resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: ほぼすべてが GB 単位の標準ストレージ料金に由来するものの、GET リクエスト数の少なさは実際にはアクセスされるプレフィックスのオブジェクトがごくわずかであることを示しているバケットプレフィックスのコスト。
+    recommendation_description: コストのほぼすべてが GB 単位の標準ストレージに由来するものの、アクセスされているオブジェクトがほとんどないことを
+      GET リクエストが示しているバケットプレフィックス。
     recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
     recommendation_type: Transition S3 objects to Infrequent Access by Prefix
     resource_type: S3 Bucket
+  - category: Migrate
+    cloud_provider: AWS
+    recommendation_description: バケットプレフィックスに、より安価なストレージへ移動するためのライフサイクル移行ルールがない、古い
+      Standard クラスのデータが存在する。
+    recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+    recommendation_type: Transition old Standard-class data
+    resource_type: S3 Bucket
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: 呼び出しがゼロの SageMaker エンドポイント。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Idle SageMaker Endpoint
+    resource_type: SageMaker Endpoint
+  - category: Downsize
+    cloud_provider: AWS
+    recommendation_description: CPU およびメモリの使用率が、同じファミリー内の次に小さいインスタンスのリソース内に収まる SageMaker
+      リアルタイム推論エンドポイント。GPU またはアクセラレータインスタンスを使用しているエンドポイント、またはマネージドスケーリングを使用しているエンドポイントは除外されます。
+    recommendation_prerequisites: ''
+    recommendation_type: Downsize SageMaker Endpoint
+    resource_type: SageMaker Endpoint
+  - category: Configure
+    cloud_provider: AWS
+    recommendation_description: トレーニングスクリプトがチェックポイントをサポートしている場合に、マネージドスポットトレーニングを使用してコストを削減できる
+      SageMaker トレーニングジョブ。
+    recommendation_prerequisites: ''
+    recommendation_type: Enable SageMaker Managed Spot Training
+    resource_type: SageMaker Training Job
+  - category: Terminate
+    cloud_provider: AWS
+    recommendation_description: 送信バイト数がない NAT ゲートウェイ。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Unused NAT Gateway
+    resource_type: VPC NAT Gateway
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: NAT ゲートウェイが必要なリソースは、同じアベイラビリティゾーン内のものを使用することで、不要なクロスゾーン転送料金を回避できます。
@@ -351,23 +411,55 @@ multifiltersearch:
     recommendation_type: Reduce NAT Gateway Within-VPC Transfers
     resource_type: VPC NAT Gateway
   - category: Terminate
-    cloud_provider: AWS
-    recommendation_description: 送信バイト数がない NAT ゲートウェイ。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate NAT Gateway
-    resource_type: VPC NAT Gateway
-  - category: Terminate
     cloud_provider: Azure
     recommendation_description: CPU 使用率が 5% 未満の AKS クラスター。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate AKS Cluster
+    recommendation_type: Delete AKS Cluster
     resource_type: AKS Cluster
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: Azure Advisor が削除を推奨している、デプロイされたアプリがない App Service
+      プラン。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Unused App Service Plan
+    resource_type: App Service Plan
+  - category: Migrate
+    cloud_provider: Azure
+    recommendation_description: スナップショットは Premium ストレージに保存されています。Standard ストレージに移行すると、データの耐久性を変更することなくコストを
+      60% 削減できます。
+    recommendation_prerequisites: ''
+    recommendation_type: Migrate Disk Snapshot to Standard Storage
+    resource_type: Managed Disk Snapshot
   - category: Downsize
     cloud_provider: Azure
     recommendation_description: コンテナアプリの最小レプリカ数が必要以上に設定されています。
     recommendation_prerequisites: ''
     recommendation_type: Downsize Container App
     resource_type: Container App
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: 設定されたルックバック期間内にリクエストがない Azure コンテナアプリ。
+    recommendation_prerequisites: ''
+    recommendation_type: Scale to Zero Azure Container App Replicas
+    resource_type: Container App
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: 正常なプルが一度も行われていないコンテナレジストリ。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Container Registry
+    resource_type: Container Registry
+  - category: Configure
+    cloud_provider: Azure
+    recommendation_description: 目標ヒット率を下回るプロンプトキャッシングを使用している Azure Foundry アカウントを特定し、入力トークンコストを削減するためにキャッシュ構成の改善を推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: Foundry Account
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: クラスターが少なくとも 60 日間停止している場合、未使用かつ停止中と見なされます。コスト削減のためにクラスターを削除することを推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Terminate Unused Stopped Data Explorer Cluster
+    resource_type: Data Explorer Cluster
   - category: Terminate
     cloud_provider: Azure
     recommendation_description: 転送されたバイト数が 0 のロードバランサー。
@@ -382,58 +474,108 @@ multifiltersearch:
     resource_type: Managed Disk
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: 読み取り / 書き込み操作がなく削除可能マネージドディスク。
+    recommendation_description: 読み取り / 書き込み操作がなく削除可能なマネージドディスク。
     recommendation_prerequisites: ''
     recommendation_type: Delete Unused Managed Disk
     resource_type: Managed Disk
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: 構成されたプロビジョニング済み IOPS のしきい値未満を使用しているマネージドディスク。
+    recommendation_description: 構成されたプロビジョニング済み IOPS のしきい値を下回っているマネージドディスク。
     recommendation_prerequisites: ''
     recommendation_type: Downsize Managed Disk IOPS
     resource_type: Managed Disk
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: 構成されたプロビジョニング済みスループットのしきい値未満を使用しているマネージドディスク。
+    recommendation_description: 構成されたプロビジョニング済みスループットのしきい値を下回っているマネージドディスク。
     recommendation_prerequisites: ''
     recommendation_type: Downsize Managed Disk Throughput
     resource_type: Managed Disk
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: 終了可能なコネクションがないデータベースサーバー。
+    recommendation_description: 終了可能な、コネクションがないデータベースサーバー。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate Database for MySQL
+    recommendation_type: Delete Database for MySQL
     resource_type: MySQL Database
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: 終了可能なコネクションがない SQL サーバー。
+    recommendation_description: 終了可能な、コネクションがない Azure Database for PostgreSQL サーバー。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate SQL Server
-    resource_type: SQL Server
+    recommendation_type: Delete Database for PostgreSQL
+    resource_type: Database for PostgreSQL
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: Get 操作も Set 操作もない Azure Managed Redis キャッシュ。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Azure Managed Redis
+    resource_type: Azure Managed Redis
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: 成功したコネクションがなく CPU 使用率が非常に低い、終了可能な SQL Server データベース。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete SQL Server Database
+    resource_type: SQL Server Database
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: サイズを縮小できる DTU 使用率が低い SQL サーバーデータベース。
+    recommendation_description: サイズを縮小できる、DTU 使用率が低い SQL Server データベース。
     recommendation_prerequisites: ''
     recommendation_type: Downsize SQL Server Database DTU
     resource_type: SQL Server Database
+  - category: Downsize
+    cloud_provider: Azure
+    recommendation_description: プロビジョニングされたストレージ容量の 20% 未満しか使用していない SQL Server データベース。
+    recommendation_prerequisites: ''
+    recommendation_type: Downsize SQL Server Database Storage
+    resource_type: SQL Server Database
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: 成功したコネクションがなく CPU 使用率が非常に低い終了可能な SQL サーバーデータベース。
+    recommendation_description: 過去 14 日間トランザクションがなく、使用容量もごくわずかなストレージアカウント。
     recommendation_prerequisites: ''
-    recommendation_type: Terminate SQL Server Database
-    resource_type: SQL Server Database
+    recommendation_type: Delete Storage Account
+    resource_type: Storage Account
+  - category: Terminate
+    cloud_provider: Azure
+    recommendation_description: ユーザー CPU が 5% 未満で使用可能なメモリが 90% 以上の VM インスタンス。この推奨事項は、Datadog
+      Agent を使用することなく Azure Monitor の CPU メトリクスを使用して生成されます。
+    recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    recommendation_type: Delete Azure VM Instance
+    resource_type: VM Instance
   - category: Downsize
     cloud_provider: Azure
     recommendation_description: 小さいインスタンスタイプにサイズを縮小できる VM インスタンス。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Azure VM Instance
     resource_type: VM Instance
+  - category: Migrate
+    cloud_provider: Azure
+    recommendation_description: より低価格な同等の Arm インスタンスタイプに移行可能な VM インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Migrate Azure VM Instance to Arm
+    resource_type: VM Instance
+  - category: Migrate
+    cloud_provider: Azure
+    recommendation_description: 推奨される最新の代替シリーズがあるレガシー世代シリーズで実行されている VM インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Upgrade Azure VM Instance
+    resource_type: VM Instance
+  - category: Downsize
+    cloud_provider: Azure
+    recommendation_description: サイズを縮小できる、使用率が低い VM インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Downsize Azure VM Scale Set
+    resource_type: VM Scale Set
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: ユーザー CPU が 5% 未満で使用可能なメモリが 90% 以上の VM インスタンス。
-    recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    recommendation_type: Terminate Azure VM Instance
-    resource_type: VM Instance
+    recommendation_description: シャットダウン可能な、使用率が低い VM インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Shutdown Azure VM Scale Set
+    resource_type: VM Scale Set
+  - category: Configure
+    cloud_provider: Cursor
+    recommendation_description: Auto Mode でないモデルの支出が著しい Cursor シートを特定し、モデルの選択として Auto
+      Mode の使用を推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Enable Cursor Auto Mode
+    resource_type: Cursor Seat
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: 過剰にプロビジョニングされた汎用 Databricks クラスターを特定し、コスト削減のために小さいインスタンスタイプへのサイズ変更を提案します。
@@ -494,24 +636,36 @@ multifiltersearch:
     recommendation_prerequisites: ''
     recommendation_type: Delete Unused Compute Global IP Address
     resource_type: Compute Global Address
+  - category: Terminate
+    cloud_provider: GCP
+    recommendation_description: CPU 使用率が低く、利用可能なメモリが多く、ネットワークアクティビティが最小限のコンピュートインスタンス。
+    recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    recommendation_type: Delete Compute Instance
+    resource_type: Compute Instance
   - category: Downsize
     cloud_provider: GCP
     recommendation_description: 小さいインスタンスタイプにサイズを縮小できる、CPU とメモリの使用率が低いコンピュートインスタンス。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Compute Instance
     resource_type: Compute Instance
-  - category: Terminate
+  - category: Downsize
     cloud_provider: GCP
-    recommendation_description: CPU 使用率が低く、利用可能なメモリが高く、ネットワークアクティビティが最小限のコンピュートインスタンス。
+    recommendation_description: CPU およびメモリの使用率が低く、スケーリング戦略を調整することで縮小可能な、コンテナ化されていないワークロードを持つコンピュートインスタンスグループ。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    recommendation_type: Terminate Compute Instance
-    resource_type: Compute Instance
+    recommendation_type: Downsize Compute Instance Group
+    resource_type: Compute Instance Group
   - category: Downsize
     cloud_provider: GCP
     recommendation_description: 削減可能なインスタンスの最小容量を持つコンピュートインスタンスグループオートスケーラー。
     recommendation_prerequisites: ''
     recommendation_type: Reduce Minimum Capacity
     resource_type: Compute Instance Group
+  - category: Terminate
+    cloud_provider: GCP
+    recommendation_description: 使用率が最小限で削除可能な CloudSQL インスタンス。
+    recommendation_prerequisites: ''
+    recommendation_type: Delete Cloud SQL Instance
+    resource_type: CloudSQL Instance
   - category: Downsize
     cloud_provider: GCP
     recommendation_description: 過剰にプロビジョニングされ、サイズを縮小できる CloudSQL インスタンス。
@@ -520,66 +674,73 @@ multifiltersearch:
     resource_type: CloudSQL Instance
   - category: Terminate
     cloud_provider: GCP
-    recommendation_description: 使用率が最小限で終了可能な CloudSQL インスタンス。
-    recommendation_prerequisites: ''
-    recommendation_type: Terminate CloudSQL Instance
-    resource_type: CloudSQL Instance
-  - category: Terminate
-    cloud_provider: GCP
-    recommendation_description: ライフサイクルルールの恩恵を受けて非現行オブジェクトバージョンを自動的に削除する Cloud Storage
+    recommendation_description: 非現行オブジェクトバージョンを自動的に削除するライフサイクルルールの恩恵を受けられる Cloud Storage
       バケット。
     recommendation_prerequisites: ''
     recommendation_type: Delete Noncurrent Cloud Storage Objects
     resource_type: Storage Bucket
   - category: Migrate
     cloud_provider: GCP
-    recommendation_description: ストレージバケット内のオブジェクトは、より良い料金のために自動的にアーカイブ層に移行できます。
+    recommendation_description: ストレージバケット内のオブジェクトは、より低コストなアーカイブ層に自動的に移行できます。
     recommendation_prerequisites: ''
     recommendation_type: Transition Cloud Storage Bucket to Autoclass
     resource_type: Storage Bucket
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: CPU が高いまたはメモリクラスターがアイドル状態の Kubernetes クラスター。
+    recommendation_description: CPU またはメモリのクラスターアイドル率が高い Kubernetes クラスター。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Reduce Cluster Idle
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: CPU が高いまたはメモリクラスターがアイドル状態の Kubernetes クラスター。
+    recommendation_description: CPU またはメモリのクラスターアイドル率が高い Kubernetes クラスター。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Reduce Cluster Idle
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: GCP
-    recommendation_description: CPU が高いまたはメモリクラスターがアイドル状態の Kubernetes クラスター。
+    recommendation_description: CPU またはメモリのクラスターアイドル率が高い Kubernetes クラスター。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Reduce Cluster Idle
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: コンテナは、リクエストされた CPU またはメモリのほんの一部しか使用していません。
+    recommendation_description: コンテナは、リクエストした CPU またはメモリのほんの一部しか使用していません。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: コンテナは、リクエストされた CPU またはメモリのほんの一部しか使用していません。
+    recommendation_description: コンテナは、リクエストした CPU またはメモリのほんの一部しか使用していません。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: GCP
-    recommendation_description: コンテナは、リクエストされた CPU またはメモリのほんの一部しか使用していません。
+    recommendation_description: コンテナは、リクエストした CPU またはメモリのほんの一部しか使用していません。
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
+  - category: Configure
+    cloud_provider: OpenAI
+    recommendation_description: 目標ヒット率を下回るプロンプトキャッシングを使用している OpenAI API キーを特定し、入力トークンコストを削減するためにキャッシュ構成の改善を推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: API Key
+  - category: Configure
+    cloud_provider: OpenAI
+    recommendation_description: 優先処理の支出が著しい OpenAI API キーを特定し、優先処理の追加料金を削減するためにレイテンシ許容トラフィックを
+      Standard に移行することを推奨します。
+    recommendation_prerequisites: ''
+    recommendation_type: Reduce OpenAI Priority Processing
+    resource_type: API Key
   headers:
   - filter_by: true
     id: category
     name: 推奨事項カテゴリー
   - filter_by: true
     id: cloud_provider
-    name: クラウドプロバイダー
+    name: プロバイダー
   - filter_by: true
     id: resource_type
     name: リソースタイプ
@@ -593,7 +754,7 @@ title: Cloud Cost Recommendations
 ---
 ## 概要 {#overview}
 
-[Cloud Cost Recommendations][1] は、クラウドリソースの使用を最適化することでクラウド支出を削減するための提案を提供します。Datadog は、監視可能性データと基盤となるクラウドプロバイダーの課金データを組み合わせて、孤立したクラウドリソース、旧世代クラウドリソース、または過剰プロビジョニングされたクラウドリソースを特定し、一連の推奨事項を生成します。
+[Cloud Cost Recommendations][1] は、クラウドリソースおよび AI/LLM API の使用を最適化することでクラウドおよび AI の支出を削減するための提案を提供します。Datadog は、監視可能性データと基盤となるプロバイダーの課金データを組み合わせて、孤立したクラウドリソース、旧世代クラウドリソース、過剰プロビジョニングされたクラウドリソース、および最適化されていない AI 使用を特定し、一連の推奨事項を生成します。
 
 推奨事項は毎日実行され、推奨事項がリリースされるとすぐにアカウントで自動的に更新されます。
 
@@ -605,6 +766,8 @@ title: Cloud Cost Recommendations
 このページでは、各推奨事項タイプに関する詳細なロジックや、監視可能性メトリクス、コストデータを確認することができます。
 
 推奨事項は[タグパイプライン][11]をサポートしており、組織の標準化されたタグを使用して推奨事項をフィルタリング、グループ化、および分析できます。タグパイプラインで構成されたタグルールは、推奨事項に自動的に適用され、[正規化されます][12]。
+
+Datadog MCP Server の [`cost_recommendations`][17] ツールを使用して、AI エージェントから推奨事項をクエリすることもできます。
 
 ## 推奨事項カテゴリー {#recommendation-categories}
 
@@ -622,10 +785,12 @@ title: Cloud Cost Recommendations
 
 以下は、Cloud Cost の推奨事項を受け取るために必要な要件です。
 
-- クラウドプロバイダーアカウント (希望するすべての Cloud Cost 推奨事項に適用)
+- プロバイダーアカウント (希望するすべての Cloud Cost 推奨事項に適用)
 - [AWS インテグレーションおよびリソース収集][3] (AWS 推奨事項に適用)
 - [Azure インテグレーションおよびリソース収集][8] (Azure 推奨事項に適用)
 - [GCP インテグレーションおよびリソース収集][10] (GCP 推奨事項に適用)
+- [OpenAI インテグレーション][18] (OpenAI 推奨事項に適用)
+- [Anthropic インテグレーション][19] (Anthropic 推奨事項に適用)
 - [Datadog Agent インテグレーション][5] (ダウンサイジング推奨事項に適用)
 
 ## セットアップ {#setup}
@@ -641,6 +806,25 @@ title: Cloud Cost Recommendations
 1. [Datadog Agent][5] をインストールします (ダウンサイジング推奨事項に必要)。
 
 **注**: Cloud Cost Recommendations は、お客様の非 USD 通貨での課金をサポートします。
+
+## リスクと労力 {#risk-and-level-of-effort}
+
+各推奨事項には、どの推奨事項から先に対処すべきかの優先順位付けに役立つ**リスク**スコアと**労力**スコアが含まれています。どちらのスコアも、{{< ui >}}Low{{< /ui >}}、{{< ui >}}Medium{{< /ui >}}、{{< ui >}}High{{< /ui >}} のスケールを使用します。これらは、[{{< ui >}}Active Recommendations{{< /ui >}}] (アクティブな推奨事項) テーブルおよび各推奨事項のサイドパネルの [{{< ui >}}Risk{{< /ui >}}] (リスク) 列と [{{< ui >}}Effort{{< /ui >}}] (労力) 列に表示されます。
+
+| リスク | 説明 |
+|--------|-------------|
+| {{< ui >}}Low{{< /ui >}} | 安全で簡単に元に戻せる: データのリスクがないまたは完全に復元可能、リソースの再作成が容易、分離されている、実行時の影響がない。|
+| {{< ui >}}Medium{{< /ui >}} | 復元可能だが手間がかかる: スナップショットや再プロビジョニングによってデータやリソースを復元可能、影響範囲が 1 つのアプリやワークロードに限定される、中断は短時間のみ。|
+| {{< ui >}}High{{< /ui >}} | 元に戻すのが困難、または誤った場合に影響が大きい: 不可逆的なデータ損失、再作成できないリソース、影響範囲が広い、またはライブワークロードでダウンタイムが発生する可能性がある。|
+
+
+| 労力 | 説明 |
+|--------|-------------|
+| {{< ui >}}Low{{< /ui >}} | 数分で完了する迅速な変更。通常はコンソールの切り替えや API 呼び出しが 1 回で済み、完全に自動化可能です。|
+| {{< ui >}}Medium{{< /ui >}} | 数時間から数日かかる中程度の作業。スクリプト作成、テスト、または他のチームとの調整が多少必要になります。|
+| {{< ui >}}High{{< /ui >}} | 数週間かかる大規模な作業。アーキテクチャの変更や、複数チーム間での調整が必要です。|
+
+[{{< ui >}}Risk{{< /ui >}}] 列と [{{< ui >}}Effort{{< /ui >}}] 列を使用して、リスクが低い、労力が少ない、またはその両方である推奨事項を優先します。
 
 ## 推奨事項ステータス {#recommendation-statuses}
 
@@ -675,7 +859,7 @@ title: Cloud Cost Recommendations
 - **サイドパネルから**: 推奨事項をクリックしてサイドパネルを開き、ステータスドロップダウンを使用して新しいステータスを選択します。
 
 ## 推奨事項のアクション実行 {#recommendation-action-taking}
-推奨事項に基づいてアクションを実行することで、節約してコストを最適化できます。Cloud Cost Recommendations は、Jira、ワンクリック Workflow Automation、Datadog Case Management をサポートしています。未使用の EBS および GP2 EBS ボリュームの推奨事項もワンクリック Workflow Automation をサポートしています。各アクション実行オプションの詳細は以下のとおりです。
+推奨事項に基づいてアクションを実行することで、節約してコストを最適化できます。Cloud Cost Recommendations は、Jira、ワンクリック Workflow Automation、Datadog Work Management をサポートしています。未使用の EBS および GP2 EBS ボリュームの推奨事項もワンクリック Workflow Automation をサポートしています。各アクション実行オプションの詳細は以下のとおりです。
 
 - **Jira**: 推奨サイドパネルから直接 Jira の課題を作成するか、{{< ui >}}Active Recommendations{{< /ui >}} リスト内の複数の推奨事項を選択して {{< ui >}}Create Jira issue{{< /ui >}} をクリックします。作成された問題にはタグが付けられ、Datadog の推奨事項にリンクされます。
 
@@ -686,7 +870,8 @@ title: Cloud Cost Recommendations
 
 - **[Bits Code][14] コード修正**: コード修正は、適用可能な S3 および DynamoDB の推奨事項、ならびに Kubernetes デプロイメントのダウンサイジング推奨事項に利用可能です。これらの状況で Bits Code は、Terraform または Helm チャートでクラウドリソースの変更とコスト最適化を実装するための実稼働準備が整ったプルリクエストを作成します。この機能を使用するには、[Bits Code のセットアップ][13]が必要です。
 - **ワンクリック Workflow Automation アクション**: アクションは限られたセットの推奨事項に対して利用可能で、ユーザーは Cloud Cost Management 内で {{< ui >}}Delete EBS Volume{{< /ui >}} をクリックするなどの提案されたアクションを直接実行できます。
-- **[コスト最適化の自動化][15]**: 推奨事項に基づいて継続的に自動化を設定し、定期的に実行します。自動化は特定のアカウント、リージョン、タグにスコープされ、事前アクションスナップショットや Slack または Microsoft Teams を通じたオプションの人間の承認などの安全策が含まれます。
+- **[コスト最適化の自動化][15]**: 推奨事項を定期的なスケジュールで継続的に処理する自動化を設定します。自動化は特定のアカウント、リージョン、タグにスコープされ、事前アクションスナップショットや Slack または Microsoft Teams を通じたオプションの人間の承認などの安全策が含まれます。
+- **[Notifications][16]**: アクションを実行せずに、一致する推奨事項の定期的な Slack サマリーを送信する Notifications ルールを設定します。
 - **[Datadog Case Management]**: ユーザーは推奨事項サイドパネルに移動し、{{< ui >}}Create Case{{< /ui >}} をクリックして推奨事項を管理し、アクションを実行するためのケースを生成できます。
 - **無視**: 推奨サイドパネルの {{< ui >}}Dismiss{{< /ui >}} を使用して、選択期間の推奨事項を非表示にし、理由を提供します。無視された推奨事項は {{< ui >}}Dismissed{{< /ui >}} タブに移動します。
 
@@ -710,6 +895,10 @@ title: Cloud Cost Recommendations
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /ja/cloud_cost_management/allocation/tag_pipelines/
 [12]: /ja/cloud_cost_management/tags/#how-tags-are-normalized
-[13]: /ja/bits_ai/bits_ai_dev_agent/setup
-[14]: /ja/bits_ai/bits_ai_dev_agent/
+[13]: /ja/bits_ai/bits_code/setup
+[14]: /ja/bits_ai/bits_code/
 [15]: /ja/cloud_cost_management/recommendations/cost_optimization_automation/
+[16]: /ja/cloud_cost_management/recommendations/notifications/
+[17]: /ja/mcp_server/tools/#cost_recommendations
+[18]: /ja/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[19]: /ja/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts

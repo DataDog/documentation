@@ -5,6 +5,9 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Overview'
+  - link: 'https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/'
+    tag: 'Architecture Center'
+    text: 'Monitoring Insurance Data Lakes on AWS using Datadog'
 ---
 ## Overview
 
@@ -16,7 +19,8 @@ Use these integrations to:
 - **Track table metrics** such as row counts and table sizes over time
 
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena Query History{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

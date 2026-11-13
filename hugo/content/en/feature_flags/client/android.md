@@ -13,6 +13,9 @@ further_reading:
 - link: "/real_user_monitoring/android/"
   tag: "Documentation"
   text: "Android and Android TV Monitoring"
+- link: "/feature_flags/guide/proxy_sdk_traffic/"
+  tag: "Guide"
+  text: "Proxy Feature Flag SDK Traffic"
 ---
 
 ## Overview
@@ -40,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -98,7 +105,6 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog A
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
@@ -292,6 +298,113 @@ val stateJob = lifecycleScope.launch {
 
 Cancel the collection job when the observing component stops. For example, collect from `lifecycleScope` in an Android `Activity` or `Fragment`, or from `viewModelScope` in a `ViewModel`.
 
+## Control flag evaluation telemetry and experiment participation
+
+Flag evaluation telemetry opt-out requires version `3.16.0` or later. Experimentation opt-out requires version `3.17.0` or later. Use the same version of `dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][4] for shared concepts.
+
+### Control flag evaluation telemetry
+
+In version `3.16.0` or later, enable telemetry opt-out on the underlying client. Supply the user's preference as a typed Boolean in the OpenFeature context:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+    .asOpenFeatureProvider()
+val initialContext = ImmutableContext(
+    targetingKey = "user-123",
+    attributes = mapOf("dd_evaluation_telemetry_opt_out" to Value.Boolean(true))
+)
+OpenFeatureAPI.setProviderAndWait(provider, initialContext = initialContext)
+{{< /code-block >}}
+
+Run `setProviderAndWait` from a coroutine. Update the preference with `OpenFeatureAPI.setEvaluationContext`, while preserving the targeting key and other attributes. The latest preference suppresses telemetry immediately, including during a pending or failed assignment refresh.
+
+For the native Flags client, use the typed setter instead of a string context attribute:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.setEvaluationTelemetryOptOut
+
+val flagsClient = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+flagsClient.setEvaluationTelemetryOptOut(true)
+{{< /code-block >}}
+
+Call `setEvaluationTelemetryOptOut(false)` to resume telemetry. Update this decision when the user or preference changes. The native targeting context contains strings; a string `"true"` does not activate suppression.
+
+### Configure the provider
+
+After initializing Datadog and enabling Flags, configure both controls before building the client. The following example requires version `3.17.0` or later. It suppresses flag evaluation telemetry and immediately excludes the user from experiment allocations:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.ExperimentationOptOutMode
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)
+    .build()
+    .asOpenFeatureProvider()
+
+val preferenceTimestamp = "2026-10-30T12:00:00Z" // Use the user's stored preference.
+val attributes = mapOf(
+    "tier" to Value.String("premium"),
+    "dd_evaluation_telemetry_opt_out" to Value.Boolean(true),
+    "dd_experimentation_opt_out_at" to Value.String(preferenceTimestamp)
+)
+OpenFeatureAPI.setProviderAndWait(
+    provider,
+    initialContext = ImmutableContext(targetingKey = "user-123", attributes = attributes)
+)
+{{< /code-block >}}
+
+Run `setProviderAndWait` from a coroutine. Configure the client at its original creation site; do not create another client with the same name to change these options.
+
+When enabled, flag evaluation opt-out suppresses new evaluation events, aggregated counts, and automatic RUM flag annotations. Use `Value.Boolean(true)`, not the string `"true"`. It does not change flag values or suppress experiment exposures, and it does not delete previously recorded telemetry.
+
+### Choose an experimentation policy
+
+| Mode | Behavior with a valid opt-out timestamp |
+| --- | --- |
+| `ExperimentationOptOutMode.DISABLED` | Ignore the timestamp. This is the default. |
+| `ExperimentationOptOutMode.IMMEDIATE` | Exclude all experiment allocations. Ordinary feature allocations remain available. |
+| `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` | Exclude allocations activated at or after the timestamp, or without activation metadata. Earlier allocations remain eligible. |
+
+Future-experiments-only mode checks allocation activation time, not previous enrollment. An older allocation can assign a user for the first time. Both enabled modes take effect immediately; a future timestamp does not schedule a preference change.
+
+Store the timestamp when the user chooses to opt out. Reuse it across application restarts and clients that share the preference. Use a valid timestamp with a timezone, such as `2026-10-30T12:00:00Z`. Invalid timestamps in an enabled mode prevent assignment requests and cause evaluations to return the application default with an invalid-context error.
+
+Enabled experimentation modes require backend support for the selected policy. During context changes, evaluations return application defaults until matching assignments are available. This also applies when the context has no opt-out timestamp.
+
+Version `3.17.0` adds `ErrorCode.INVALID_CONTEXT`. Update exhaustive Kotlin `when` expressions when upgrading.
+
+### Update the preference
+
+Update the context on the existing client instead of creating another client. Preserve the targeting key and other application attributes. To resume flag evaluation telemetry, set `dd_evaluation_telemetry_opt_out` to Boolean `false`. To permit experimentation again, remove `dd_experimentation_opt_out_at`.
+
+{{< code-block lang="kotlin" >}}
+val updatedAttributes = attributes.toMutableMap()
+updatedAttributes["dd_evaluation_telemetry_opt_out"] = Value.Boolean(false)
+updatedAttributes.remove("dd_experimentation_opt_out_at")
+OpenFeatureAPI.setEvaluationContext(
+    ImmutableContext(targetingKey = "user-123", attributes = updatedAttributes)
+)
+{{< /code-block >}}
+
+These controls do not replace an application consent system. Assignment requests and permitted experiment exposures can still contain user data.
+
 ## Advanced configuration
 
 ### Global configuration
@@ -300,11 +413,19 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
+
+`initializationTimeout(timeoutMs)`
+: Maximum time, in milliseconds, to wait for the first evaluation context to become ready. The timeout covers loading cached data, fetching assignments, reading and decoding the response, storing assignments, and publishing the ready state. It does not change the HTTP client's timeout. The assignment operation continues after the timeout and can move the client to `Ready` when it completes.
+
+The timeout applies only to the first `setEvaluationContext` call. That call consumes the timeout even if the operation fails or never starts. Later calls have no initialization timer. The default is `5_000` milliseconds. Set it to zero or a negative value to disable the timeout. When the timeout expires, the client becomes `Stale` if matching cached assignments are available. Otherwise, it becomes `Error`.
+
+<div class="alert alert-info"><code>initializationTimeout</code> is available in <code>dd-sdk-android-flags</code> 3.14.0 and later.</div>
 
 `trackExposures()`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.
@@ -588,3 +709,5 @@ class CheckoutFlagsTest {
 [1]: https://openfeature.dev/
 [2]: /account_management/api-app-keys/#client-tokens
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
+
+[4]: /feature_flags/concepts/opt_out/

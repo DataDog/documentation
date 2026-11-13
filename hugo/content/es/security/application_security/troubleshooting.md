@@ -4,40 +4,39 @@ aliases:
 further_reading:
 - link: /security/application_security/
   tag: Documentación
-  text: Monitorizar amenazas con Datadog App and API Protection
+  text: Monitoreo de amenazas con Datadog App and API Protection
 - link: /security/application_security/how-it-works/
   tag: Documentación
   text: Cómo funciona App and API Protection en Datadog
-title: Solucionar problemas de App and API Protection
+title: Solución de problemas de protección de aplicaciones y API
 ---
+## Descripción general {#overview}
 
-## Información general
+Si experimenta un comportamiento inesperado con Datadog App and API Protection (AAP), hay problemas comunes que puede investigar, como se menciona a continuación. Si continúa teniendo problemas, comuníquese con el [soporte de Datadog][1] para obtener más ayuda.
 
-Si experimentas un comportamiento inesperado al utilizar Datadog App and API Protection (AAP), existen algunos problemas comunes que puedes investigar, como se menciona a continuación. Si sigues teniendo problemas, ponte en contacto con el [servicio de asistencia de Datadog][1] para obtener más ayuda.
+## Límites de tasa de AAP {#aap-rate-limits}
 
-## Límites de frecuencia AAP
+Las trazas de AAP tienen un límite de tasa de 100 trazas por segundo. Las trazas enviadas después del límite no se reportan. Comuníquese con el [soporte de Datadog][1] si necesita cambiar el límite.
 
-Las trazas (traces) de AAP tienen un límite de 100 trazas por segundo. Las trazas enviadas más llá del límite no se informan. Si necesitas cambiar el límite, ponte en contacto con el [servicio de asistencia de Datadog][1].
+## No se detectaron trazas de seguridad por AAP {#no-security-traces-detected-by-aap}
 
-## AAP no detecta trazas de seguridad
+Hay una serie de pasos que deben ejecutarse correctamente para que la información de amenazas aparezca en el [Explorador de trazas y señales][2] de AAP. Es importante verificar cada paso al investigar este problema. Pasos adicionales de solución de problemas para lenguajes específicos se encuentran en la pestaña de lenguaje al final.
 
-Existe una serie de pasos que deben ejecutarse correctamente para que la información sobre amenazas aparezca en el [Explorador de trazas y señales][2] de AAP. Al investigar este problema, es importante verificar cada paso. Los pasos adicionales para solucionar problemas para lenguajes específicos se encuentran en la pestaña de lenguajes al final.
+### Confirme que AAP esté habilitado {#confirm-aap-is-enabled}
 
-### Confirmar que la AAP está habilitado
+Puede usar la métrica `datadog.apm.appsec_host` para verificar si AAP se está ejecutando.
 
-Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
+1. Vaya a **Metrics > Summary** en Datadog.
+2. Busque la métrica `datadog.apm.appsec_host`. Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se reportan con las etiquetas de métrica `host` y `service`.
+3. Seleccione la métrica y, en la sección **Tags**, busque `service` para ver qué servicios están ejecutando AAP.
 
-1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
-2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
-3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
+Si no ve `datadog.apm.appsec_host`, consulte las [instrucciones en la aplicación][3] para confirmar que todos los pasos de la configuración inicial estén completos.
 
-Si no ves `datadog.apm.appsec_host`, comprueba las [instrucciones en la aplicación][3] para confirmar que se han completado todos los pasos de la configuración inicial.
+Los datos de AAP se envían con trazas de APM. Consulte [solución de problemas de APM][4] para [confirmar la configuración de APM][5] y verificar si hay [errores de conexión][6].
 
-Los datos de AAP se envían con trazas de APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
+### Envíe un ataque de prueba a su aplicación {#send-a-test-attack-to-your-application}
 
-### Envío de un ataque de prueba a tu aplicación
-
- Para probar tu configuración de AAP, activa la regla [Analizador de seguridad detectado][7], ejecutando un archivo que contenga el siguiente script curl:
+ Para probar su configuración de AAP, active la regla [Security Scanner Detected][7] ejecutando un archivo que contenga el siguiente script de curl:
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
@@ -52,7 +51,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Nota:** El valor `dd-test-scanner-log` es compatible con las versiones más recientes.
+**Nota:** El valor `dd-test-scanner-log` es compatible en las versiones más recientes.
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -67,7 +66,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Nota:** El valor `dd-test-scanner-log` es compatible con las versiones más recientes.
+**Nota:** El valor `dd-test-scanner-log` es compatible en las versiones más recientes.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -75,11 +74,12 @@ done
  ```bash
  for ((i=1;i<=250;i++));
 do
-# Target existing service's routes
+# Target existing service's routes 
 curl https://your-application-url/existing-route -A Arachni/v1.0;
-# Target non existing service's routes
+# Target non existing service's routes 
 curl https://your-application-url/non-existing-route -A Arachni/v1.0;
 done
+
 ```
 
 {{< /programming-lang >}}
@@ -108,7 +108,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Nota:** El valor `dd-test-scanner-log` es compatible con las versiones más recientes.
+**Nota:** El valor `dd-test-scanner-log` es compatible en las versiones más recientes.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
@@ -122,7 +122,7 @@ curl https://your-application-url/existing-route -A dd-test-scanner-log;
 curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
-**Nota:** El valor `dd-test-scanner-log` es compatible con las versiones más recientes.
+**Nota:** El valor `dd-test-scanner-log` es compatible en las versiones más recientes.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -140,25 +140,25 @@ done
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Unos minutos después de habilitar tu aplicación y ejercitarla, si todo sale según lo esperado, aparecerá información sobre amenazas en el [Explorador de trazas y señales][2].
+Unos minutos después de habilitar su aplicación y probarla, y si tiene éxito, la información sobre amenazas aparece en el [Explorador de trazas y señales][2].
 
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Página con información sobre señales de seguridad, que muestra etiquetas, métricas, pasos a seguir sugeridos y direcciones IP de atacantes asociados a una amenaza." style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Página de detalles de Security Signal que muestra etiquetas, métricas, próximos pasos sugeridos y direcciones IP del atacante asociadas con una amenaza." style="width:100%;" >}}
 
-### Comprobar si las integraciones requeridas del rastreador están desactivadas
+### Verifique si las integraciones de tracer requeridas están desactivadas {#check-if-required-tracer-integrations-are-deactivated}
 
-AAP depende de ciertas integraciones del rastreador. Si están desactivadas, AAP no funcionará. Para ver si hay integraciones desactivadas, busca `disabled_integrations` en tus [logs de inicio][8].
+AAP depende de ciertas integraciones de tracer. Si están desactivadas, AAP no funcionará. Para ver si hay integraciones desactivadas, busque `disabled_integrations` en sus [registros de inicio][8].
 
 Las integraciones requeridas varían según el lenguaje.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-Para Java, si utiliza alguna de las siguientes tecnologías, se requiere la respectiva integración:
+Para Java, si utiliza alguna de las siguientes tecnologías, se requiere la integración respectiva:
 
 - grizzly
 - grizzly-filterchain
 - jersey
-- embarcadero
+- jetty
 - ratpack
 - ratpack-request-body (también requiere ratpack)
 - resteasy
@@ -173,22 +173,22 @@ Para Java, si utiliza alguna de las siguientes tecnologías, se requiere la resp
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-Para .NET, se requiere ASP.NET integración.
+Para .NET, se requiere la integración de ASP.NET.
 
-**Nota:** Si ASP.NET Core está deshabilitado, AAP debería seguir funcionando con este marco.
+**Nota:** Si ASP.NET Core está deshabilitado, AAP debería seguir funcionando con este framework.
 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-No se requiere integraciones para PHP.
+No hay integraciones requeridas para PHP.
 <p></p>
 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Los siguientes marcos Go deben ser instrumentados utilizando las integraciones APM predefinidas:
+Los siguientes frameworks de Go deben ser instrumentados utilizando las integraciones de APM listas para usar.
 
 {{% tracing-go-v2 %}}
 
@@ -198,7 +198,7 @@ Los siguientes marcos Go deben ser instrumentados utilizando las integraciones A
 - [Echo][11] ([v1][5])
 - [Chi][12] ([v1][6])
 
-Por favor, asegúrate de hacer referencia a los documentos apropiados para tu versión (v1.x o v2.x) de Go Tracer. Si tu marco no es compatible, [crea un nuevo incidente][7] en el repositorio Go.
+Por favor, asegúrese de consultar la documentación adecuada para su versión (v1.x o v2.x) del Go Tracer. Si su framework no es compatible, [cree una nueva incidencia][7] en el repositorio de Go.
 
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
@@ -216,16 +216,16 @@ Por favor, asegúrate de hacer referencia a los documentos apropiados para tu ve
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-Para Node.js, es necesario el HTTP integración.
+Para Node.js, se requiere la integración HTTP.
 <p></p>
 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Para Ruby, se requiere la versión [Rack][2] integración. También se requiere la versión Ruby tracer `1.0.0` o superior. Consulte la información sobre [migración de 0.x a 1.x][3].
+Para Ruby, se requiere la integración [Rack][2]. También se requiere la versión `1.0.0` o superior del tracer de Ruby. Consulte la información sobre la [migración de 0.x a 1.x][3].
 
-**Nota:** Rack puede añadirse manualmente o automáticamente con la integración [Rails][4] o [Sinatra][5]. Si se añade manualmente, el middleware del rastreador debe aparecer antes que el middleware de seguridad en el stack tecnológico de Rack.
+**Nota:** Rack puede agregarse manualmente o automáticamente con la integración de [Rails][4] o [Sinatra][5]. Si se agrega manualmente, el middleware del rastreador debe aparecer antes del middleware de seguridad en la pila de Rack.
 
 [2]: /es/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
@@ -235,71 +235,71 @@ Para Ruby, se requiere la versión [Rack][2] integración. También se requiere 
 
 {{< programming-lang lang="python" >}}
 
-Para Python, se requiere el WSGI integración junto con el integración para el
-framework que esté utilizando, como Django o Flask integración.
+Para Python, se requiere la integración de WSGI junto con la integración para el
+marco de trabajo que esté utilizando, como la integración de Django o Flask.
 <p></p>
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Comprobar la configuración del Datadog Agent
+### Verifique la configuración del Datadog Agent {#check-datadog-agent-configuration}
 
-Para resolver este paso del proceso, haz lo siguiente:
+ Para solucionar problemas en este paso del proceso, haga lo siguiente:
 
-- Comprueba los detalles del Agent que se está ejecutando en esta dirección `http://<agent-machine-name>:<agent-port>/info`, normalmente `http://localhost:8126/info`.
-- Asegúrate de que no hay errores de transmisión del Agent relacionados con tramos (spans) en los [logs de tu rastreador][7].
-- Si el Agent se instala en una máquina independiente, comprueba que `DD_AGENT_HOST` y, opcionalmente, `DD_TRACE_AGENT_PORT` están configurados, o que `DD_TRACE_AGENT_URL` está configurado para la biblioteca de rastreo de aplicaciones.
+- Verifique los detalles del Agent en ejecución en esta dirección `http://<agent-machine-name>:<agent-port>/info`, generalmente `http://localhost:8126/info`.
+- Asegúrese de que no haya errores de transmisión del Agente relacionados con los spans en sus [registros del tracer][10].
+- Si el Agente está instalado en una máquina separada, verifique que `DD_AGENT_HOST` y, opcionalmente, `DD_TRACE_AGENT_PORT` estén configurados, o que `DD_TRACE_AGENT_URL` esté configurado para el SDK de la aplicación.
 
-### Comprobar si los tramos se transmiten correctamente a Datadog
+### Verifique si los spans se transmiten correctamente a Datadog {#check-if-spans-are-successfully-transmitted-to-datadog}
 
-Los datos de AAP se envían a través de [tramos][9]. Para confirmar si los tramos se transmiten correctamente a Datadog, comprueba si tu rastreador contiene logs con un aspecto parecido al siguiente:
+Los datos de AAP se envían a través de [spans][9]. Para confirmar que los spans se transmiten correctamente a Datadog, verifique que sus registros del tracer contengan registros similares a este:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
 ```
 
-Si no se transmiten tramos, el rastreador contendrá logs con un aspecto parecido al siguiente:
+Si los spans no se están transmitiendo, entonces los registros del tracer contendrán registros similares a este:
 
 ```
 2021-11-29 21:18:48 CET | TRACE | INFO | (pkg/trace/info/stats.go:104 in LogStats) | No data received
 ```
 
-## Solucionar problemas por lenguaje
+## Solución de problemas por lenguaje {#troubleshooting-by-language}
 
-A continuación se indican los pasos adicionales para solucionar problemas para lenguajes específicos.
+A continuación se presentan pasos adicionales de solución de problemas para lenguajes específicos.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
-La biblioteca Java utiliza [SLF4J][1] para la generación de logs. Añade las siguientes marcas de tiempo de ejecución para que el rastreador genere logs en un archivo:
+La biblioteca de Java utiliza [SLF4J][1] para el registro. Agregue las siguientes banderas de tiempo de ejecución para que el SDK registre en un archivo:
 
 ```java
  -Ddatadog.slf4j.simpleLogger.defaultLogLevel=info
  -Ddatadog.slf4j.simpleLogger.logFile=dd.log
 ```
 
-Luego de que se inicia el servicio, el rastreador genera logs en un archivo especificado. Datadog recomienda utilizar `INFO` para el nivel de logs, ya que los logs `DEBUG` contienen muchos datos.
+Después de que el servicio se inicia, el SDK registra en el archivo especificado. Datadog recomienda usar `INFO` para el nivel de registro porque los registros `DEBUG` son detallados.
 
 [1]: https://www.slf4j.org/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-La biblioteca .NET genera logs en un archivo, pero no puede generar logs en `stdout`/`stderr`. El nivel de logs por defecto es `INFO`. Para habilitar logs `DEBUG`, configura `DD_TRACE_DEBUG=true`.
+La biblioteca .NET registra en un archivo y no puede registrar en `stdout`/`stderr`. El nivel de registro predeterminado es `INFO`. Para habilitar los registros `DEBUG`, establezca `DD_TRACE_DEBUG=true`.
 
-Los archivos de log están disponibles en los siguientes directorios:
+Los archivos de registro están disponibles en los siguientes directorios:
 
-| Plataforma   | Directorio de logs    |
+| Plataforma 	 | Directorio de registros 	|
 |------------|----------------|
-| Docker       | Directorio del contenedor `/var/log/datadog/dotnet/`. Una opción recomendada es montar la carpeta de logs en la máquina host utilizando [volúmenes][1]. |
-| Linux      | /var/log/datadog/dotnet/                                   |
-| Windows    | C:\ProgramData\Datadog .NET Tracer\logs                    |
+| Docker 	   | El directorio del contenedor `/var/log/datadog/dotnet/`. Una opción recomendada es montar la carpeta de registros en la máquina servidor usando [volumes][1]. |
+| Linux	     | /var/log/datadog/dotnet/	                                  |
+| Windows 	 | C:\ProgramData\Datadog .NET Tracer\logs                    |
 
 [1]: https://docs.docker.com/storage/volumes/
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-En PHP, para empezar a solucionar problemas con la extensión AAP de Datadog, habilita logs de depuración en el archivo `.ini` de la extensión AAP.
+Para PHP, para comenzar a solucionar problemas con la extensión AAP de Datadog, habilite los registros de depuración en el archivo `.ini` de la extensión AAP.
 
-El archivo `ini` de la extensión se encuentra normalmente en `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, aunque su localización puede variar dependiendo de tu instalación. Observa el principio del resultado de `phpinfo()` para identificar el directorio que se analiza en busca de archivos `.ini`, si los hay. En el archivo `.ini`, define las siguientes opciones de configuración con lo siguiente:
+El archivo `ini` de la extensión generalmente se encuentra en `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, pero la ubicación puede variar según su instalación. Revise el principio de la salida de `phpinfo()` para identificar el directorio que se analiza en busca de archivos `.ini`, si los hay. En el archivo `.ini`, establezca las siguientes opciones de configuración con lo siguiente:
 
 ```php
 datadog.appsec.log_level='debug'
@@ -307,42 +307,44 @@ datadog.appsec.helper_extra_args='--log_level=debug'
 datadog.appsec.helper_log_file='/tmp/helper.log'
 ```
 
-La extensión envía logs al archivo de log por defecto `php_error`. Si no hay logs en el archivo, añade lo siguiente al archivo `.ini`:
+La extensión envía los registros al archivo de registro `php_error` predeterminado. Si no hay registros en el archivo, agregue lo siguiente al archivo `.ini`:
 
 ```php
 datadog.appsec.log_file='tmp/extension.log'
 ```
 
-### La instalación no encuentra PHP
-Si el script de instalación no puede encontrar la versión correcta de PHP, puedes configurar el `--php-bin` en la localización del binario PHP, por ejemplo:
+### La instalación no encuentra PHP {#installation-fails-to-find-php}
+Si el script de instalación no puede encontrar la versión correcta de PHP, puede establecer `--php-bin` en la ubicación del binario de PHP, por ejemplo:
 
 ```
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
 ```
-### Fallo en la conexión con el auxiliar
-Si la extensión AAP no puede comunicarse con el proceso del auxiliar, se genera la siguiente advertencia:
+### Error en la conexión con el asistente {#connection-to-helper-failed}
+Si la extensión AAP no puede comunicarse con el proceso del asistente, aparece la siguiente advertencia:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Connection to helper failed and we are not going to attempt to launch it: dd_error
 ```
 
-La advertencia puede ir seguida de uno de estos mensajes de error:
+La advertencia podría ir seguida de uno de estos mensajes de error:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Could not open lock file /tmp/ddappsec.lock: Permission denied in Unknown on line 0
 ```
+
 ```
 PHP Warning:  Unknown: [ddappsec] Call to bind() failed: Permission denied
 ```
+
 ```
 PHP Warning:  Unknown: [ddappsec] Failed to unlink /tmp/ddappsec.sock: Operation not permitted
 ```
 
-Esto indica que el archivo de bloqueo o el archivo de socket utilizado por la extensión tiene permisos no válidos o que el usuario que ejecuta el proceso PHP no tiene acceso de escritura al directorio `tmp`.
+Esto indica que el archivo de bloqueo o el archivo de socket utilizado por la extensión tiene permisos no válidos, o que el usuario que ejecuta el proceso PHP no tiene acceso de escritura al directorio `tmp`.
 
-Si el archivo de bloqueo o el archivo de socket tienen permisos no válidos, puedes eliminarlos y reiniciar Apache/FPM o ajustar el `user:group` para que coincida con el que Apache/FPM utiliza, por ejemplo, `www-data`.
+Si el archivo de bloqueo o el archivo de socket tiene permisos no válidos, puede eliminarlos y reiniciar Apache/FPM o ajustar `user:group` para que coincida con el utilizado por Apache/FPM, por ejemplo, `www-data`.
 
-Si el usuario no tiene acceso de escritura al directorio tmp, puedes cambiar la localización del archivo de bloqueo y del archivo de socket modificando los siguientes parámetros en el archivo `.ini` de la extensión:
+Si el usuario no tiene acceso de escritura al directorio tmp, puede cambiar la ubicación del archivo de bloqueo y del archivo de socket modificando los siguientes ajustes en el archivo `.ini` de la extensión:
 
 ```
 datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
@@ -351,52 +353,41 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Confirmar que AAP está habilitado en la aplicación en ejecución
+#### Confirme que AAP esté habilitado en la aplicación en ejecución {#confirm-aap-is-enabled-in-the-running-application}
 
-Los [logs de inicio del rastreador][1] muestran la configuración del rastreador y si AAP está habilitado o no. Si `appsec` es `true`, entonces AAP está habilitado y en ejecución.
+Los [registros de inicio del SDK][1] muestran la configuración del SDK y si AAP está habilitado o no. Si `appsec` es `true`, entonces AAP está habilitado y en ejecución.
 
-Por ejemplo, el siguiente log de inicio muestra que AAP está deshabilitado:
+Por ejemplo, el siguiente registro de inicio muestra que AAP está deshabilitado:
 
 ```
 2022/02/17 14:49:00 Datadog Tracer v1.36.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2022-02-17T14:49:00+01:00","os_name":"Linux (Unknown Distribution)","os_version":"5.13.0","version":"v1.36.0","lang":"Go","lang_version":"go1.17.1","env":"prod","service":"grpcserver","agent_url":"http://localhost:8126/v0.4/traces","debug":false,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","service_mappings":null,"tags":{"runtime-id":"69d99219-b68f-4718-9419-fa173a79351e"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"profiler_code_hotspots_enabled":false,"profiler_endpoints_enabled":false,"dd_version":"","architecture":"amd64","global_service":"","lambda_mode":"false","appsec":false,"agent_features":{"DropP0s":false,"Stats":false,"StatsdPort":0}}
 ```
 
-#### Activa logs de depuración
+#### Habilite registros de depuración {#enable-debug-logs}
 
-Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca AAP generará logs para el resultado de error estándar.
+Habilite los registros de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca AAP registrará en la salida de error estándar.
 
-**Nota:** AAP solo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
+**Nota:** AAP solo genera registros cuando está habilitado. Use la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
 
 [1]: /es/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-Si has actualizado tu biblioteca Node.js de 1.x a 2.x, utiliza esta [guía de migración][1] para evaluar cualquier cambio de última hora.
+Utilice esta [guía de migración][1] para evaluar cualquier cambio importante si actualizó su biblioteca de Node.js de la versión 1.x a la 2.x.
 
-Si no ves información sobre amenazas AAP en el [Explorador de trazas y señales][2] para tu aplicación Node.js, sigue estos pasos para solucionar el problema:
+Si no ve información de amenazas de AAP en el [Explorador de traza y señales][2] para su aplicación de Node.js, siga estos pasos para solucionar el problema:
 
-1. Confirma que se está ejecutando la última versión de AAP, comprobando que `appsec_enabled` es `true` en los [logs de inicio][3]
-
-    a. Si no ves logs de inicio después de enviar una solicitud, añade la variable de entorno `DD_TRACE_STARTUP_LOGS=true` para habilitar los logs de inicio. Comprueba que los logs de inicio para `appsec_enabled` son `true`.
-
-    b. Si `appsec_enabled` es `false`, entonces AAP no se ha habilitado correctamente. Consulta las [instrucciones de instalación][4].
-
-    c. Si `appsec_enabled` no está en los logs de inicio, necesitas instalar la última versión de AAP. Consulta las [instrucciones de instalación][4].
-
-2. ¿Funciona el rastreador? ¿Puedes ver trazas relevantes en el dashboard de APM?
-
-    AAP depende del rastreador, por lo que si no ves trazas, es posible que el rastreador no esté funcionando. Consulta [Solucionar problemas de APM][5].
-
-3. En el directorio de tu aplicación, ejecuta el comando `npm explore @datadog/native-appsec -- npm run install` y reinicia tu aplicación.
-
-    a. Si no se encuentra `@datadog/native-appsec`, la instalación es incorrecta.
-
-    b. Si `@datadog/native-appsec` es encontrado al iniciar tu aplicación, añade el comando a tu script de inicio del tiempo de ejecución.
-
-    c. Si el rastreador sigue sin funcionar, es posible que estés ejecutando un tiempo de ejecución no compatible.
-
-4. Para habilitar logs, añade las siguientes variables de entorno:
-
+1. Confirme que la versión más reciente de AAP se está ejecutando verificando que `appsec_enabled` sea `true` en los [registros de inicio][3].
+   1. Si no ve registros de inicio después de haber enviado una solicitud, agregue la variable de entorno `DD_TRACE_STARTUP_LOGS=true` para habilitar los registros de inicio. Verifique en los registros de inicio que `appsec_enabled` sea `true`.
+   1. Si `appsec_enabled` es `false`, entonces AAP no se habilitó correctamente. Consulte las [instrucciones de instalación][4].
+   1. Si `appsec_enabled` no aparece en los registros de inicio, es necesario instalar la versión más reciente de AAP. Consulte las [instrucciones de instalación][4].
+2. Confirme que el SDK funciona buscando trazas relevantes en el panel de control de APM.<br />
+    AAP depende del SDK, por lo que si no ve trazas, es posible que el SDK no esté funcionando. Consulte [APM Troubleshooting][5].
+3. En el directorio de su aplicación, ejecute el comando `npm explore @datadog/native-appsec -- npm run install` y reinicie su aplicación.
+   1. Si `@datadog/native-appsec` no se encuentra, entonces la instalación es incorrecta.
+   1. Si `@datadog/native-appsec` se encuentra al iniciar su aplicación, agregue el comando a su script de inicio de tiempo de ejecución.
+   1. Si el SDK aún no funciona, es posible que esté ejecutando un tiempo de ejecución no compatible.
+4. Para habilitar los registros, agregue las siguientes variables de entorno:
     ```
     DD_TRACE_DEBUG=1
     DD_TRACE_LOG_LEVEL=info
@@ -405,30 +396,31 @@ Si no ves información sobre amenazas AAP en el [Explorador de trazas y señales
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /es/tracing/troubleshooting/tracer_startup_logs/
+[4]: /es/security/application_security/setup/nodejs/
 [5]: /es/tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Si no ves información sobre amenazas AAP en el [Explorador de trazas y señales][1] para tu aplicación Python, comprueba que AAP se está ejecutando y que tu rastreador está funcionando.
+Si no ve información de amenazas de AAP en el [Explorador de Trazas y Señales][1] para su aplicación de Python, verifique que AAP se esté ejecutando y que su trazador esté funcionando.
 
-1. Define el nivel de logs de tu aplicación en `DEBUG` para confirmar que AAP se está ejecutando:
+1. Establezca el nivel de registro de su aplicación en `DEBUG` para confirmar que AAP se está ejecutando:
 
    ```python
    import logging
    logging.basicConfig(level=logging.DEBUG)
    ```
-
-   A continuación, ejecuta cualquier llamada HTTP a la aplicación. Deberías ver el siguiente log:
-
+  
+   Luego, ejecute cualquier llamada HTTP a la aplicación. Debería ver el siguiente registro:
+  
    ```
    DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
    ```
+  
+   Si este registro no aparece, AAP no se está ejecutando.
 
-   Si este log no está presente, significa que AAP no se está ejecutando.
+2. ¿Está funcionando el SDK? ¿Puede ver trazas relevantes en el panel de APM?
 
-2. ¿Funciona el rastreador? ¿Puedes ver trazas relevantes en el dashboard de APM?
-
-   AAP depende del rastreador, por lo que si no ves trazas, es posible que el rastreador no esté funcionando. Consulta [Solucionar problemas de APM][2].
+   AAP depende del SDK. Si no ve trazas, es posible que el SDK no esté funcionando. Consulte [APM Troubleshooting][2].
 
 
 [1]: https://app.datadoghq.com/security/appsec/
@@ -436,7 +428,7 @@ Si no ves información sobre amenazas AAP en el [Explorador de trazas y señales
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-En Ruby, si no ves información sobre amenazas de AAP en el [Explorador de trazas y señales][1] después de unos minutos, habilita los diagnósticos del rastreador para [logs de depuración][2]. Por ejemplo:
+Para Ruby, si no ve información de amenazas de AAP en el [Trace and Signals Explorer][1] después de unos minutos, habilite los diagnósticos del trazador para [debug logs][2]. Por ejemplo:
 
 ```ruby
 Datadog.configure do |c|
@@ -445,26 +437,26 @@ Datadog.configure do |c|
 end
 ```
 
-Los logs de depuración contienen muchos datos pero son útiles. Si abres un ticket para el [servicio de asistencia de Datadog][1], reenvía los logs junto con tu solicitud.
+Los registros de depuración son detallados pero útiles. Si abre un ticket con [Datadog support][1], envíe los registros con su solicitud.
 
-#### ¿Está AAP correctamente habilitado?
+#### ¿Está AAP habilitado correctamente? {#is-aap-correctly-enabled}
 
-AAP se ha habilitado correctamente si ves logs como el siguiente:
+AAP se ha habilitado correctamente si ve registros como:
 
 ```
 D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
 D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
 ```
 
-Si no ves estos logs, comprueba lo siguiente:
+Si no ve esos registros, verifique lo siguiente:
 
-- Si las variables de entorno de AAP correctas están configuradas para el proceso de tu aplicación.
-- Si la última versión del gem está instalada.
-- Si el rastreador está configurado correctamente y envía trazas de APM a tu dashboard de APM.
+- Si las variables de entorno de AAP correctas están configuradas para su proceso de aplicación.
+- La última versión de la gema está instalada.
+- El SDK está configurado correctamente y enviando trazas de APM a su panel de APM.
 
-#### ¿Se llama a AAP en cada solicitud HTTP?
+#### ¿Se llama a AAP para cada solicitud HTTP? {#is-aap-called-for-each-http-request}
 
-Para confirmar que se llama a AAP en cada solicitud HTTP, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca estos logs:
+Para confirmar que se llama a AAP para cada solicitud HTTP, active un [ataque de prueba](#send-a-test-attack-to-your-application) y busque estos registros:
 
 ```
 D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
@@ -473,13 +465,13 @@ D, [2022-01-19T21:25:50.580371 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/contrib/rack/reactive/request.rb:34:in `block in subscribe') reacted to ["request.headers", "request.uri.raw", "request.query", "request.cookies", "request.body.raw"]: [{"version"=>"HTTP/1.1", "host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, "http://127.0.0.1:9292/", [], {}, ""]
 ```
 
-Si no ves estos logs, prueba lo siguiente:
+Si no ve esos registros, intente lo siguiente:
 
-- Comprueba si otro sistema de seguridad anterior no está filtrando las solicitudes basándose en el valor de cabecera del test, lo que impide que la solicitud llegue a la aplicación.
-- Envía otro [ataque de prueba](#send-a-test-attack-to-your-application) utilizando otro valor del Agent del usuario en el comando curl, para ver si la información sobre la amenaza se envía correctamente.
-- En la aplicación, busca los logs de la solicitud exacta que has ejecutado, para confirmar que la solicitud ha llegado a la aplicación y no ha sido respondida por otro sistema anterior.
+- Verifique que otro sistema de seguridad ascendente no esté filtrando las solicitudes según el valor del encabezado de prueba, lo que impediría que la solicitud llegue a la aplicación.
+- Envíe otro [ataque de prueba](#send-a-test-attack-to-your-application) usando otro valor de agente de usuario en el comando curl para ver si la información de la amenaza se envía correctamente.
+- Busque en los registros de la aplicación la solicitud exacta que ejecutó para confirmar que la solicitud llegó a la aplicación y que no fue respondida por otro sistema ascendente.
 
-Si la integración Rack se ha configurado manualmente, algunas veces el problema que impide el funcionamiento de AAP es uno conocido. Por ejemplo:
+Si la integración de Rack se configuró manualmente, a veces un problema conocido impide que AAP funcione. Por ejemplo:
 
 ```ruby
 Datadog.configure do |c|
@@ -488,19 +480,19 @@ Datadog.configure do |c|
   c.tracing.instrument :rack, web_service_name: "something", request_queuing: true
 ```
 
-Si `c.tracing.instrument :rack` está presente, elimínalo para ver si el check se aprueba.
+Si `c.tracing.instrument :rack` está presente, elimínelo para ver si la verificación pasa.
 
-#### ¿Detecta AAP las amenazas a la seguridad de las solicitudes HTTP?
+#### ¿Está AAP detectando amenazas de seguridad en las solicitudes HTTP? {#is-aap-detecting-http-request-security-threats}
 
-Para confirmar que AAP está detectando amenazas de seguridad, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca estos logs:
+Para confirmar que AAP está detectando amenazas de seguridad, active un [ataque de prueba](#send-a-test-attack-to-your-application) y busque estos registros:
 
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
 ```
-Si no ves estos logs, comprueba que otro sistema de seguridad anterior no está filtrando las solicitudes o alterándolas basándose en el valor de cabecera del test.
+Si no ve esos registros, verifique que otro sistema de seguridad ascendente no esté filtrando las solicitudes o alterándolas según el valor del encabezado de prueba.
 
-#### ¿El rastreador envía trazas con datos de seguridad?
-Los datos de AAP se envían con trazas de APM. Para confirmar que AAP detecta e inserta correctamente los datos de seguridad en las trazas, activa un [ataque de prueba](#send-a-test-attack-to-your-application) y busca los siguientes logs del rastreador:
+#### ¿Está el SDK enviando trazas con datos de seguridad? {#is-the-sdk-sending-traces-with-security-data}
+Los datos de AAP se envían con trazas de APM. Para confirmar que AAP detecta e inserta correctamente los datos de seguridad en las trazas, active un [ataque de prueba](#send-a-test-attack-to-your-application) y busque estos registros del trazador:
 
 ```
 Tags: [
@@ -529,74 +521,62 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Espera un minuto a que el Agent reenvíe las trazas y luego comprueba que estas aparecen en el dashboard de APM. La información de seguridad de las trazas puede tardar un tiempo adicional en ser procesada por Datadog, antes de aparecer como trazas de seguridad en el [Explorador de trazas y señales][1] de AAP.
+Espere un minuto a que el agente reenvíe las trazas, luego verifique que las trazas aparezcan en el panel de APM. La información de seguridad en las trazas puede tardar más tiempo en ser procesada por Datadog antes de aparecer como trazas de seguridad en el [Explorador de trazas y señales][1] de AAP.
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /es/tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Confirmar que AAP está habilitado
+### Confirme que las versiones del trazador estén actualizadas {#confirm-tracer-versions-are-updated}
 
-Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
+Consulte la documentación de configuración del producto de Protección de aplicaciones y API para validar que está utilizando la versión correcta del SDK. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de la biblioteca.
 
-1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
-2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas de métricas `host` y `service`.
-3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
+### Asegure la comunicación de los datos de telemetría {#ensure-the-communication-of-telemetry-data}
 
-Si no ves `datadog.apm.appsec_host`, comprueba las [instrucciones en la aplicación][3] para confirmar que se han completado todos los pasos de la configuración inicial.
+Asegúrese de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para Node.js) esté establecida en `true`, o que la propiedad del sistema correspondiente para su lenguaje esté habilitada. Por ejemplo, en Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-Los datos de AAP se envían con trazas de APM. Consulta [Solucionar problemas de APM][4] para [confirmar la configuración de APM][5] y comprobar si hay [errores de conexión][6].
+## Deshabilitar AAP {#disabling-aap}
 
-### Confirmar que las versiones del rastreador están actualizadas
+Para deshabilitar AAP, utilice uno de los siguientes métodos.
 
-Consulta la documentación de configuración del producto App and API Protection para confirmar que estás utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de la biblioteca.
+Si habilitó AAP utilizando la variable de entorno `DD_APPSEC_ENABLED=true`, utilice la sección DD_APPSEC_ENABLED a continuación.
+Si habilitó AAP utilizando [Remote Configuration][16], utilice el método de Remote Configuration a continuación.
 
-### Garantizar la comunicación de los datos de telemetría
+### DD_APPSEC_ENABLED {#dd-appsec-enabled}
 
-Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para Node.js) está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada. Por ejemplo, en Java: `-Ddd.instrumentation.telemetry.enabled=true`
+Si la variable de entorno `DD_APPSEC_ENABLED=true` está configurada para su servicio, elimine la variable de entorno `DD_APPSEC_ENABLED=true` de la configuración de su aplicación y reinicie su servicio.
 
-## Deshabiltar AAP
+Si su servicio es un servicio PHP, establezca explícitamente la variable de entorno en `DD_APPSEC_ENABLED=false` y, si corresponde, comente la marca `datadog.appsec.enabled = On` de su archivo de configuración `php.ini`. Luego, reinicie su servicio. 
 
-Para desactivar AAP, utiliza uno de los siguientes métodos.
+### Remote Configuration {#remote-configuration}
 
-Si habilitaste AAP utilizando la variable de entorno `DD_APPSEC_ENABLED=true`, utiliza la sección DD_APPSEC_ENABLED a continuación.
-Si habilitaste AAP mediante la [Configuración remota][16], utiliza el método de configuración remota que se indica a continuación.
+Si AAP se activó mediante [Remote Configuration][16], haga lo siguiente: 
+  1. Vaya a [{{< ui >}}Services{{< /ui >}}][15].
+  2. Seleccione {{< ui >}}App & API Protection in Monitoring Mode{{< /ui >}}.
+  3. En la faceta {{< ui >}}App & API Protection{{< /ui >}}, habilite {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}} y {{< ui >}}Ready to block{{< /ui >}}.
+  4. Haga clic en un servicio.
+  5. En los detalles del servicio, en {{< ui >}}App & API Protection{{< /ui >}}, haga clic en {{< ui >}}Deactivate{{< /ui >}}.
 
-### DD_APPSEC_ENABLED
+<div class="alert alert-info">Si AAP se activó mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, puede usar un botón de <strong>Desactivar</strong>. Si AAP se activó mediante la configuración local, el botón <strong>Desactivar</strong> no es una opción.</div>
 
-Si la variable de entorno `DD_APPSEC_ENABLED=true` está configurada para tu servicio, elimina la variable de entorno `DD_APPSEC_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio.
+### Deshabilitar en bloque {#bulk-disable}
 
-Si tu servicio es un servicio PHP, define explícitamente la variable de entorno `DD_APPSEC_ENABLED=false` y, si corresponde, comenta el indicador `datadog.appsec.enabled = On` en el archivo de configuración `php.ini`. A continuación, reinicia tu servicio.
+Para deshabilitar AAP en sus servicios de forma masiva, haga lo siguiente: 
+  1. Vaya a [{{< ui >}}Services{{< /ui >}}][15].
+  3. En la faceta {{< ui >}}App & API Protection{{< /ui >}}, habilite {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}} y {{< ui >}}Ready to block{{< /ui >}}.
+  3. Seleccione las casillas de verificación de los servicios en los que desea deshabilitar la detección de amenazas.
+  4. En {{< ui >}}Bulk Actions{{< /ui >}}, seleccione {{< ui >}}Deactivate Threat detection on (number of) services{{< /ui >}}.
 
-### Configuración remota
+  
+## ¿Necesita más ayuda? {#need-more-help}
 
-Si AAP se habilitó mediante [configuración remota][16], haz lo siguiente: 
-  1. Ve a [Services (Servicios)][15].
-  2. Selecciona **App & API Protection in Monitoring Mode** (App & API Protection en modo de monitorización).
-  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
-  4. Haz clic en un servicio.
-  5. En los detalles del servicio, en **App & API Protection**, haz clic en **Deactivate** (Desactivar).
+Si sigue teniendo problemas con AAP, comuníquese con [soporte de Datadog][1] con la siguiente información:
 
-<div class="alert alert-info">Si AAP se habilitó mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">configuración remota</a>, puedes utilizar el botón <strong>Deactivate</strong> (Desactivar). Si AAP se habilitó mediante configuración local, el botón <strong>Deactivate</strong> (Desactivar) no es una opción.</div>
+- Confirmación de que el [ataque de prueba](#send-a-test-attack-to-your-application) se envió correctamente
+- Tracer [startup][8] o [debug][10] registros
 
-### Desactivar en bloque
-
-Para deshabilitar AAP en tus servicios de forma masiva, haz lo siguiente: 
-  1. Ve a [Services (Servicios)][15].
-  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
-  3. Selecciona las casillas de verificación de servicios en las que quieres deshabilitar la detección de amenazas.
-  4. En **Bulk Actions** (Acciones en bloque), selecciona **Deactivate Threat detection on (number of) services** (Desactivar detección de amenazas en (número) servicios).
-
-
-## ¿Necesitas más ayuda?
-
-Si sigues teniendo problemas con AAP, ponte en contacto con el [servicio de asistencia de Datadog][1] con la siguiente información:
-
-- Confirmación de que el [ataque de prueba](#send-a-test-attack-to-your-application) se ha enviado correctamente
-- [Inicio][8] del rastreador o logs de [depuración][10]
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

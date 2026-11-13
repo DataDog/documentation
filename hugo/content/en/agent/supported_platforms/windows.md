@@ -108,7 +108,7 @@ Set the `/log <FILENAME>` msiexec option to configure an installation log file. 
 The main Agent configuration file is located at
 `C:\ProgramData\Datadog\datadog.yaml`. This file is used for host-wide settings such as the API key, selected Datadog site, proxy parameters, host tags, and log level.
 
-There is also a `datadog.yaml.example` file in the same directory, which is a fully commented reference with all available configuration options, useful for reference and copying specific settings.
+There is also a `datadog.yaml.example` file in the same directory, which is a fully commented reference with all available configuration options, useful for reference and copying specific settings. Alternatively, see the [example Agent configuration file for Windows][19] on GitHub.
 
 
 Configuration files for integrations are in:
@@ -285,5 +285,6 @@ After configuration is complete, [restart the Agent][11].
 [16]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [17]: /agent/faq/windows-agent-ddagent-user/
 [18]: https://docs.datadoghq.com/agent/troubleshooting/
+[19]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys

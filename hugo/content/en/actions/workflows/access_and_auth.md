@@ -21,6 +21,10 @@ further_reading:
   text: "See the list of workflow actions"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 A few tools control access and authentication for workflows and their components.
 
 ## Workflow identity

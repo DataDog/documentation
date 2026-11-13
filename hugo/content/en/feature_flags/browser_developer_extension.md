@@ -145,6 +145,20 @@ Selecting a different site in the dropdown changes which overrides apply. The ta
 
 After you clear overrides, the tab prompts you to reload. The page keeps applying the cleared overrides until you do.
 
+## Troubleshooting
+
+### Authentication error: Only one web auth flow is allowed at a time
+
+The error "Only one web auth flow is allowed at a time" can appear when you authenticate the extension. It likely means multiple browser windows are open with a Datadog login prompt.
+
+{{< img src="feature_flags/devtools_extension/flags-tab-auth-error.png" alt="The extension sign-in screen displaying the error: Only one web auth flow is allowed at a time." style="width:80%;" >}}
+
+To resolve the error:
+
+1. Close the additional browser windows showing the login prompt.
+2. Return to the **Feature Flags** tab in the browser extension.
+3. Click **Sign in to Datadog** and complete authentication.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

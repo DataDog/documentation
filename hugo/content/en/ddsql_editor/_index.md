@@ -75,7 +75,7 @@ Export the results of a saved query to:
   - [Create a custom metric from a DDSQL query](https://app.datadoghq.com/workflow/blueprints/create-a-metric-from-a-ddsql-query)
   - [Programmatically export the results of a DDSQL query](https://app.datadoghq.com/workflow/blueprints/export-ebs-volumes-not-in-ddsql-as-s3-csv)
   - [Schedule a Slack message for checking compliance of resources](https://app.datadoghq.com/workflow/blueprints/idle-compute-check-via-ddsql-with-slack-updates)
-- Alert on a DDSQL query in Preview (Logs, Metrics, RUM, Spans, and Product Analytics only; [contact support][8] for access)
+- [Alert on a DDSQL query][8] (Logs, Metrics, RUM, Spans, and Product Analytics only)
 
 {{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
 
@@ -94,5 +94,5 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 [5]: /help/
 [6]: /ddsql_reference/ddsql_default/
 [7]: https://docs.datadoghq.com/ddsql_editor/#save-and-share-queries
-[8]: /help/
+[8]: /monitors/types/analysis/
 [9]: /mcp_server/

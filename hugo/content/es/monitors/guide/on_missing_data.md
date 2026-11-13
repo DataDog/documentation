@@ -1,46 +1,45 @@
 ---
-description: Migra de las configuraciones heredadas Sin datos a las opciones Datos
-  perdidos para una mejor gestión de los datos perdidos en los monitores de métricas.
+description: Migre de las configuraciones heredadas No Data a las opciones On Missing
+  Data para un mejor manejo de datos faltantes en metric monitors.
 further_reading:
 - link: /api/latest/monitors/
   tag: API
-  text: Documentación de la API de monitores
-title: Migración a la configuración de On Missing Data
+  text: Documentación de la API de monitors.
+title: Migración a la configuración On Missing Data
 ---
+## Descripción general {#overview}
 
-## Información general
+Los metric monitors ofrecen opciones mejoradas para el manejo de datos faltantes, lo que le permite diferenciar entre los datos faltantes como un modo de falla y un estado saludable. 
 
-Los monitores de métricas ofrecen opciones mejoradas para gestionar los datos faltantes, lo que permite diferenciar entre los datos faltantes como un modo de fallo y un buen estado de mantenimiento. 
+Estas opciones se alinean con lo que está disponible en otros tipos de monitors como Logs, Events, CI, Database, Error Tracking y más.
 
-Estas opciones coinciden con lo que está disponible en otros tipos de monitores como logs, eventos, CI, base de datos, rastreo de errores y más.
+## Beneficios de usar las opciones On Missing Data {#benefits-of-using-on-missing-data-options}
 
-## Ventajas de utilizar las opciones de On Missing Data
+Al medir la cantidad de eventos incorrectos, como errores, los monitors deben reflejar un estado "OK" cuando no se detectan datos. Con las configuraciones heredadas No Data, los monitors informaban No Data. Las opciones de configuración On Missing Data permiten que los monitors reflejen los estados de salud con mayor precisión, mejorando la claridad.
 
-Cuando se mide el número de eventos incorrectos, como errores, los monitores deben reflejar un "OK" cuando no se detectan datos. Con las configuraciones legacy No Data, los monitores informarían No Data. Las opciones de configuración de On Missing Data permiten a los monitores reflejar los estados de mantenimiento con mayor precisión y mejora así la claridad.
+## Monitors gestionados a través de la interfaz de usuario {#monitors-managed-through-the-ui}
 
-## Monitores gestionados a través de la interfaz de usuario
+Si gestiona sus monitors desde la interfaz de usuario, la configuración se actualiza automáticamente la próxima vez que los edite. Para actualizar la configuración On Missing Data antes, consulte las siguientes secciones sobre cómo realizar ajustes a través de la API.
 
-Si gestionas tus monitores desde la interfaz de usuario, la configuración se actualizará automáticamente la próxima vez que los edites. Para actualizar antes la configuración de On Missing Data, consulta las siguientes secciones sobre ajustes a través de la API.
+## Monitors gestionados a través de la API o Terraform {#monitors-managed-through-the-api-or-terraform}
 
-## Monitores gestionados a través de la API o Terraform
+Si gestiona sus monitors con la API o Terraform, reemplace `notify_no_data` y `no_data_timeframe` con `on_missing_data`. El parámetro `no_data_timeframe` no es necesario ya que `on_missing_data` utiliza el mismo marco de tiempo que la ventana de tiempo.  
 
-Si gestionas tus monitores con la API o Terraform, sustituye `notify_no_data` y `no_data_timeframe` con `on_missing_data`. El parámetro `no_data_timeframe` no es necesario, ya que `on_missing_data` utiliza el mismo período de tiempo que la ventana de tiempo.  
+### Parámetros de la API {#api-parameters}
 
-### Parámetros de la API
+El parámetro anterior No Data, `notify_no_data`, sigue estando disponible en los monitors existentes y no se actualiza automáticamente a las nuevas funciones `on_missing_data`.
 
-El parámetro anterior No Data, `notify_no_data`, sigue estando disponible en los monitores existentes y no se actualizan automáticamente a las nuevas funciones de `on_missing_data`.
-
-| Parámetro                               | Descripción de la interfaz de usuario                                                                                     |
+| Parámetro                               | Descripción en la interfaz de usuario                                                                                     |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------|
-| `"on_missing_data": "show_and_notify_no_data"` | Si faltan datos Mostrar NO DATA y notificar a<br>(Anteriormente, "Notificar si faltan datos")                       |
-| `"on_missing_data": "show_no_data"`     | Si faltan datos Mostrar NO DATA<br>(Anteriormente, "No notificar si faltan datos")                           |
-| `"on_missing_data": "resolve"`          | Si faltan datos Mostrar OK                                                                       |
-| `"on_missing_data": "default"` si se utiliza la agregación por suma o por cuenta | Si faltan datos Evaluar como 0 (u otro valor predeterminado)                                  |
-| `"on_missing_data": "default"` si se utilizan todos los demás tipos de agregación | Si faltan datos Mostrar el último estado conocido |
+| `"on_missing_data": "show_and_notify_no_data"` | Si faltan datos {{< ui >}}Show NO DATA and notify{{< /ui >}}<br>(Anteriormente, "{{< ui >}}Notify if data is missing{{< /ui >}}")                       |
+| `"on_missing_data": "show_no_data"`     | Si faltan datos {{< ui >}}Show NO DATA{{< /ui >}}<br>(Anteriormente, "{{< ui >}}Do not notify if data is missing{{< /ui >}}")                           |
+| `"on_missing_data": "resolve"`          | Si faltan datos {{< ui >}}Show OK{{< /ui >}}                                                                       |
+| `"on_missing_data": "default"` si se utiliza la agregación de suma o recuento | Si faltan datos {{< ui >}}Evaluate as 0{{< /ui >}} (u otro valor predeterminado)                                  |
+| `"on_missing_data": "default"` si se utilizan todos los demás tipos de agregación | Si faltan datos {{< ui >}}Show last known status{{< /ui >}} |
 
-Para conocer todos los campos disponibles, consulta la [Documentación de la API][1].
+Para ver todos los campos disponibles, consulte la [Documentación de la API][1].
 
-He aquí un ejemplo del antes y el después de un monitor de JSON con esos campos:
+Aquí hay un ejemplo de antes y después de un JSON monitor con esos campos:
 
 **Antes**  
 {{< highlight yaml "hl_lines=11-12" >}}{ 
@@ -76,19 +75,19 @@ He aquí un ejemplo del antes y el después de un monitor de JSON con esos campo
 }  
 {{< /highlight >}}
 
-## Monitores de SLO
+## SLO basados en monitors {#monitor-based-slos}
 
-Los SLOs tratan el tiempo de actividad y caída del sistema de acuerdo con esta asignación:
+Los SLO tratan el uptime y el tiempo de inactividad de acuerdo con este mapeo:
 
-| Configuración de On Missing Data | Estado del monitor                 | Tratamiento de SLO               |
+| On Missing Data Configuration | Monitor Status                 | SLO Treatment               |
 |-------------------------------|--------------------------------|-----------------------------|
-| Mostrar OK                       | OK                             | Tiempo de actividad                      |
-| Mostrar No Data                  | Sin datos                        | Tiempo de actividad                      |
-| Mostrar No Data y notificar       | Sin datos                        | Caída del sistema                    |
-| Mostrar el último estado conocido        | Sea cual fuere el último estado   | Si es OK, tiempo de actividad<br>si es alerta, caída del sistema |
-| Evaluar como cero              | Depende de la configuración del umbral | Si es OK, tiempo de actividad<br>si es alerta, caída del sistema |
+| {{< ui >}}Show OK{{< /ui >}}                       | OK                             | Uptime                      |
+| {{< ui >}}Show No Data{{< /ui >}}                  | No Data                        | Uptime                      |
+| {{< ui >}}Show No Data and Notify{{< /ui >}}       | No Data                        | Downtime                    |
+| {{< ui >}}Show last known status{{< /ui >}}        | Cualquiera que haya sido el último estado   | If OK, Uptime<br>If Alert, Downtime |
+| {{< ui >}}Evaluate as zero{{< /ui >}}              | Depende de la configuración del umbral | If OK, Uptime<br>If Alert, Downtime |
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

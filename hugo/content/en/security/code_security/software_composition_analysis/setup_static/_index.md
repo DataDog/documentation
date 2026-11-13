@@ -41,6 +41,8 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Rust       | Cargo             | `cargo.lock`                             |
 | Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
+Static SCA detects vulnerabilities in the libraries listed in supported dependency manifests and lockfiles. Static SCA doesn't detect vulnerabilities in language runtimes other than Go and .NET, such as the PHP interpreter or the JVM. For coverage of language runtimes, see [Detection coverage by component type][28].
+
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Lockfile-less scanning
@@ -69,6 +71,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 - [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider) (excluding repositories that use [Git Large File Storage][21])
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
+- [Bitbucket Cloud](/security/code_security/software_composition_analysis/setup_static/?tab=bitbucketcloud#select-your-source-code-management-provider)
 
 To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][2].
 
@@ -96,7 +99,7 @@ If your Java project checks third-party JARs directly into the repository instea
 
 ## Select your source code management provider
 
-Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, and Azure DevOps.
+Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud Premium.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -132,6 +135,13 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+See the [Bitbucket source code setup instructions][1] to connect Bitbucket Cloud workspaces to Datadog.
+
+[1]: /integrations/bitbucket-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -267,3 +277,4 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
 [27]: /security/code_security/troubleshooting/#scan-java-jar-directories
+[28]: /security/code_security/software_composition_analysis/#detection-coverage-by-component-type

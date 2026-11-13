@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner Processor
+description: Learn how to use the Sensitive Data Scanner processor to detect and redact or hash sensitive information such as Personally Identifiable Information (PII) and Payment Card Industry (PCI) data in logs or traces.
 disable_toc: false
 further_reading:
 - link: "/logs/guide/regex_log_parsing/"
@@ -8,20 +9,20 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
   tag: "Blog"
   text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines Sensitive Data Scanner Optimization"
 products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-- name: Traces
-  icon: apm
-  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
 
 ## Overview
 
-The Sensitive Data Scanner processor scans logs or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
+The Sensitive Data Scanner processor scans logs to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 
@@ -31,7 +32,7 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 
 To set up the processor:
 
-1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [APM Query Syntax][17] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
     - Only events matching the filter are scanned and processed.
     - All events, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
@@ -43,7 +44,8 @@ To set up the processor:
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
 1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
-    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+    - If you are scanning the entire event, you can optionally exclude specific attributes so that match actions are not applied to them. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+        - If a value matched in an excluded attribute also appears in a scanned attribute of the same event, the processor treats the match as a false positive and drops it. To keep matching that value in other attributes, select {{< ui >}}Specific Attributes{{< /ui >}} instead and list only the attributes you want to scan.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
     - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
@@ -83,7 +85,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 1. Enter sample data in the {{< ui >}}Add sample data{{< /ui >}} field to verify that your regex pattern is valid.
 1. For {{< ui >}}Create keyword dictionary{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
-    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+    - If you are scanning the entire event, you can optionally exclude specific attributes so that match actions are not applied to them. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+        - If a value matched in an excluded attribute also appears in a scanned attribute of the same event, the processor treats the match as a false positive and drops it. To keep matching that value in other attributes, select {{< ui >}}Specific Attributes{{< /ui >}} instead and list only the attributes you want to scan.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
     - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
@@ -411,4 +414,3 @@ For [component metrics][13] and [processor buffer metrics][14] emitted by all pr
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [16]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
-[17]: /tracing/trace_explorer/query_syntax/

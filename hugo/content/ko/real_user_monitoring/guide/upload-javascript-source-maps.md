@@ -8,17 +8,20 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: 설명서
   text: 탐색기에서 Error Tracking 데이터 시각화
-- link: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
-  tag: 소스 코드
-  text: Sourcemaps 명령 레퍼런스
 - link: https://learn.datadoghq.com/courses/tracking-errors-rum-javascript
   tag: 학습 센터
   text: JavaScript 웹 애플리케이션용 RUM으로 오류 추적
+- link: https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/
+  tag: 블로그
+  text: React 에러 모니터링에 대한 실용 가이드
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
+  tag: 소스 코드
+  text: Sourcemaps 명령 참조
 title: JavaScript 소스 맵 업로드
 ---
 ## 개요 {#overview}
 
-프런트 엔드 JavaScript 소스 코드가 축소된 경우, Datadog에 소스 맵을 업로드하여 다양한 스택 트레이스의 난독화를 해제하세요. 어떤 오류에 대해서든, 관련 스택 트레이스의 각 프레임에 대한 파일 경로, 라인 번호 및 코드 스니펫에 액세스할 수 있습니다. Datadog은 스택 프레임을 리포지토리의 소스 코드로 연결할 수도 있습니다.
+프런트엔드 JavaScript 소스 코드가 축소된 경우, Datadog에 소스 맵을 업로드하여 다양한 스택 트레이스의 난독화를 해제하세요. 어떤 오류에 대해서든, 관련 스택 트레이스의 각 프레임에 대한 파일 경로, 라인 번호 및 코드 스니펫에 액세스할 수 있습니다. Datadog은 스택 프레임을 리포지토리의 소스 코드로 연결할 수도 있습니다.
 
 <div class="alert alert-info"><ul><li><a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring(RUM)</a>이 수집한 오류, <a href="/logs/log_collection/javascript/">Browser Logs Collection</a>에서 가져온 로그만 축소를 해제할 수 있습니다.</li><li>소스 맵 업로드를 빌드 프로세스의 일부분으로 자동화하려면 <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">빌드 플러그인: 소스 맵</a>을 참조하세요.</li></ul></div>
 
@@ -35,7 +38,7 @@ title: JavaScript 소스 맵 업로드
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-이름이 [SourceMapDevToolPlugin][1]인 기본 제공 웹팩 플러그인을 사용하여 소스 맵을 생성할 수 있습니다.
+이름이 [SourceMapDevToolPlugin][1]인 기본 제공 webpack 플러그인을 사용하여 소스 맵을 생성할 수 있습니다.
 
 `webpack.config.js` 파일의 구성 예시 참조:
 
@@ -112,12 +115,76 @@ export default defineConfig({
 
 ## 소스 맵 업로드 {#upload-your-source-maps}
 
-소스 맵을 업로드하는 가장 좋은 방법은 CI 파이프라인에 추가 단계를 하나 추가한 다음 [Datadog CLI][1]에서 전용 명령을 실행하는 것입니다. 이렇게 하면 `dist` 디렉터리 및 하위 디렉터리를 스캔하여 소스 맵과 관련 축소된 파일을 자동으로 업로드합니다.
+소스 맵을 업로드하려면 Debug ID(권장) 또는 서비스 및 버전 중 하나의 일치 방법을 선택하세요. Debug ID를 사용하면 마이크로 프론트엔드 간 소스 맵 해결이 가능합니다.
+
+{{< tabs >}}
+{{% tab "Debug ID(권장)" %}}
+
+Debug ID는 번들 URL, 서비스 또는 릴리스 버전에 의존하지 않고 JavaScript 번들을 해당 소스 맵에 연결합니다.
+
+다음 업로드 방법 중 하나를 선택하세요.
+
+#### Datadog 빌드 플러그인 {#datadog-build-plugins}
+
+Datadog 빌드 플러그인은 빌드 중에 Debug ID를 주입하고 소스 맵을 직접 업로드할 수 있습니다. `datadog-ci`를 별도로 설치하거나 실행할 필요가 없습니다.
+
+Debug ID 지원을 위해서는 [Datadog Build Plugin 버전 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) 이상이 필요합니다.
+
+빌드 플러그인에서 Debug ID 주입 및 소스 맵 업로드를 활성화하세요.
+
+```javascript
+datadogWebpackPlugin({
+  auth: {
+    apiKey: process.env.DATADOG_API_KEY,
+    site: 'datadoghq.com',
+  },
+  sourcemaps: {
+    debugId: true,
+    upload: true,
+  },
+});
+```
+
+플러그인은 해당 JavaScript 번들에 주입된 Debug ID와 함께 각 소스 맵을 업로드합니다.
+
+이 예시는 webpack을 사용합니다. 다른 지원되는 번들러에 대한 설치 및 구성 지침은 [Datadog 빌드 플러그인][8]을 참조하세요.
+
+#### `datadog-ci` {#datadog-ci}
+
+Debug ID 지원을 위해서는 [`@datadog/datadog-ci` 버전 5.24.0](https://github.com/DataDog/datadog-ci/releases/tag/v5.24.0) 이상이 필요합니다.
+
+1. `package.json` 파일에 `@datadog/datadog-ci`를 추가합니다(최신 버전을 사용 중이어야 함).
+2. [전용 Datadog API 키][6]를 만든 다음 이를 이름이 `DD_API_KEY`인 환경 변수 형식으로 내보냅니다.
+3. US1이 아닌 다른 사이트의 경우, [Datadog 사이트][7]로 `DD_SITE`를 내보내어 CLI를 구성합니다.
+4. 빌드 후 Debug ID를 주입합니다.
+
+   ```bash
+   datadog-ci sourcemaps inject /path/to/dist
+   ```
+
+5. 소스 맵 및 해당 JavaScript 번들을 업로드합니다.
+
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist --debug-id
+   ```
+
+`--service`, `--release-version` 또는 `--minified-path-prefix`을 `--debug-id`와 함께 전달하지 마세요.
+
+`inject` 명령은 JavaScript 번들과 소스 맵을 제자리에서 수정합니다. 빌드 후, 그리고 SRI 해시, 압축된 자산, 서명 또는 체크섬 매니페스트와 같은 바이트 의존적 아티팩트를 생성하기 전에 실행하세요. 업로드한 것과 동일한 수정된 아티팩트를 배포하세요.
+
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /ko/getting_started/site/
+[8]: /ko/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
+
+{{% /tab %}}
+{{% tab "서비스 및 버전" %}}
+
+서비스 및 버전을 사용하여 소스 맵을 업로드하려면 CI 파이프라인에 `datadog-ci sourcemaps upload` 명령을 실행하는 단계를 추가하세요. 이렇게 하면 `dist` 디렉터리 및 하위 디렉터리를 스캔하여 소스 맵과 관련 축소된 파일을 자동으로 업로드합니다.
 
 {{< site-region region="us" >}}
-1. `package.json` 파일에 `@datadog/datadog-ci`를 추가합니다(최신 버전을 사용 중이어야 함).
-2. [전용 Datadog API 키][1]를 만든 다음 이를 이름이 `DATADOG_API_KEY`인 환경 변수 형식으로 내보냅니다.
-3. 애플리케이션의 서비스마다 한 번씩 다음 명령 실행:
+1. `@datadog/datadog-ci`를 `package.json` 파일에 추가합니다(최신 버전을 사용 중이어야 함).
+2. [전용 Datadog API 키][1]를 만든 다음 이를 이름이 `DD_API_KEY`인 환경 변수 형식으로 내보냅니다.
+3. 애플리케이션의 서비스마다 한 번씩 다음 명령을 실행합니다.
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -130,11 +197,11 @@ export default defineConfig({
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2" >}}
-1. `package.json` 파일에 `@datadog/datadog-ci`를 추가합니다(최신 버전을 사용 중이어야 함).
-2. [전용 Datadog API 키][1]를 만든 다음 이를 이름이 `DATADOG_API_KEY`인 환경 변수 형식으로 내보냅니다.
+{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2,uk1" >}}
+1. `@datadog/datadog-ci`를 `package.json` 파일에 추가합니다(최신 버전을 사용 중이어야 함).
+2. [전용 Datadog API 키][1]를 만든 다음 이를 이름이 `DD_API_KEY`인 환경 변수 형식으로 내보냅니다.
 3. CLI가 파일을 {{<region-param key="dd_site_name">}} 사이트로 업로드할 때 다음 두 가지 환경 변수를 내보내도록 구성: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} 및 `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
-4. 애플리케이션의 서비스마다 한 번씩 다음 명령 실행:
+4. 애플리케이션의 서비스마다 한 번씩 다음 명령을 실행합니다.
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service my-service \
@@ -148,19 +215,25 @@ export default defineConfig({
 
 CLI는 CI의 성능 오버헤드를 최소화하기 위해 단기간에(일반적으로 몇 초) 필요한 최대 개수의 소스 맵을 업로드하도록 최적화되어 있습니다.
 
-**참고**: 소스 맵을 다시 업로드하더라도 버전이 변경되지 않은 경우 기존 것을 재정의하지 않습니다.
+**참고**: 소스 맵을 다시 업로드하더라도 버전이 변경되지 않은 경우 기존의 것을 재정의하지 않습니다.
 
 `--service` 및 `--release-version` 파라미터가 Error Tracking 이벤트, RUM 이벤트 및 브라우저 로그의 `service` 및 `version` 태그와 일치해야 합니다. 이러한 태그를 설정하는 방법에 대한 자세한 내용은 [브라우저 SDK 초기화 설명서][2] 또는 [브라우저 로그 수집 설명서][3]를 참조하세요.
 
 <div class="alert alert-info">애플리케이션에 서비스를 여러 개 정의한 경우, 서비스 수만큼 CI 명령을 실행해야 합니다. 이는 애플리케이션 전체에 소스 맵이 한 세트라도 마찬가지입니다.</div>
 
-Datadog은 예시 `dist` 디렉터리에 대하여 명령을 실행하면 사용자의 서버 또는 CDN이 `https://hostname.com/static/js/javascript.364758.min.js` 및 `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`에서 JavaScript 파일을 전송할 것으로 예상합니다.
+예시 `dist` 디렉터리에 대하여 명령을 실행하면 Datadog은 사용자의 서버 또는 CDN이 `https://hostname.com/static/js/javascript.364758.min.js` 및 `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`에서 JavaScript 파일을 전송할 것으로 예상합니다.
 
 확장자가 `.js.map`인 소스 맵만 스택 트레이스의 축소를 해제하는 데 올바로 작동합니다. `.mjs.map`과 같이 다른 확장자가 붙은 소스 맵은 수락은 되지만 스택 트레이스의 축소를 해제하지 않습니다.
 
-<div class="alert alert-info">서로 다른 하위 도메인에서 동일한 JavaScript 소스 파일을 제공하는 경우, 관련 소스 맵을 한 번만 업로드하고 전체 URL 대신 절대 접두사 경로를 사용하여 해당 소스 맵이 여러 하위 도메인에 적용되도록 하세요. 예를 들어, <code>/static/js</code> 를 <code>https://hostname.com/static/js</code>대신 지정합니다.</div>
+<div class="alert alert-info">서로 다른 하위 도메인에서 동일한 JavaScript 소스 파일을 제공하는 경우, 관련 소스 맵을 한 번만 업로드하고 전체 URL 대신 절대 접두사 경로를 사용하여 해당 소스 맵이 여러 하위 도메인에 적용되도록 하세요. 예를 들어, <code>/static/js</code> 로 지정하고, <code>https://hostname.com/static/js</code>를 사용하지 않습니다.</div>
 
-모든 업로드된 기호를 확인하고 소스 맵을 관리하려면 [RUM 디버그 기호 둘러보기][5] 페이지를 참조하세요.
+[2]: /ko/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[3]: /ko/logs/log_collection/javascript/#initialization-parameters
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[{{< ui >}}Explore RUM Debug Symbols{{< /ui >}}][5] 페이지에서 업로드된 모든 기호를 확인하고 소스 맵을 관리하세요.
 
 ### 스택 프레임을 소스 코드에 연결 {#link-stack-frames-to-your-source-code}
 
@@ -168,11 +241,29 @@ Datadog은 예시 `dist` 디렉터리에 대하여 명령을 실행하면 사용
 
 Datadog은 축소가 해제된 스택 프레임에 소스 코드에 대한 링크를 표시합니다.
 
+## Debug ID 업로드 문제 해결{#troubleshooting-debug-id-uploads}
+
+### 로컬 소스 맵 검사{#inspect-local-source-maps}
+
+특정 Debug ID에 대한 로컬 소스 맵을 찾으려면 다음을 실행하세요.
+
+```bash
+datadog-ci sourcemaps find /path/to/dist --debug-id 12345678-1234-1234-1234-123456789abc
+```
+
+Debug ID가 포함되지 않은 소스 맵을 찾으려면 다음을 실행하세요.
+
+```bash
+datadog-ci sourcemaps find /path/to/dist --missing-debug-id
+```
+
+`find` 명령은 로컬 `*.js.map` 파일만 검사합니다. Datadog이 아티팩트를 수신했는지 여부는 확인하지 않습니다.
+
 ## 간편한 문제 해결 {#troubleshoot-errors-with-ease}
 
 파일 경로 및 라인 번호에 대한 액세스 권한이 없으면 축소된 스택 트레이스는 코드 베이스를 문제 해결하는 데 도움이 되지 않습니다. 또한 코드 스니펫이 축소되어(길이가 긴 변환된 코드가 한 줄 있다는 뜻), 문제 해결 프로세스가 더 어려워집니다.
 
-다음 예시에 축소된 스택 트레이스를 표시했습니다.
+다음 예시는 축소된 스택 트레이스를 보여줍니다.
 
 {{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="축소된 스택 트레이스 Error Tracking" >}}
 
@@ -185,7 +276,5 @@ Datadog은 축소가 해제된 스택 프레임에 소스 코드에 대한 링�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/ko/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
-[3]: https://docs.datadoghq.com/ko/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum

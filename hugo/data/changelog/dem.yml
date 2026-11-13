@@ -1,0 +1,25 @@
+entries:
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - SearchInferredJourneys
+    title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - BatchGetJourneysByTestSuiteIDs
+      - CreateJourneyVariant
+      - CreateTestSuiteForJourney
+      - DeleteIgnoredInferredJourney
+      - DeleteJourney
+      - DeleteJourneyVariant
+      - GetJourney
+      - GetJourneyRecommendedTests
+      - IgnoreInferredJourney
+      - SearchInferredJourneys
+      - SearchJourneys
+      - UpdateJourney
+      - UpdateJourneyVariant
+    title: Add AI Gateway route permissions and safe editing

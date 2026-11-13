@@ -1,5 +1,6 @@
 ---
 title: Kafka Source
+description: Learn how to collect logs from Kafka topics using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

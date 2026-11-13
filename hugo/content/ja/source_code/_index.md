@@ -3,6 +3,10 @@ aliases:
 - /ja/integrations/guide/source-code-integration/
 description: APM と統合するソースコードインテグレーションを設定して、テレメトリをリポジトリとリンクし、CI パイプラインのアーティファクトに Git
   情報を埋め込み、ソースコード管理の統合を使用して Datadog 内でインラインコードスニペットを生成します。
+further_reading:
+- link: https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/
+  tag: ブログ
+  text: DatadogのBitbucket Cloudソースコード統合を使用して、コードのトラブルシューティングとセキュリティ保護をより迅速に行いましょう。
 title: ソースコードインテグレーション
 ---
 ## 概要 {#overview}
@@ -20,3 +24,7 @@ Datadog のソースコードインテグレーションを使用すると、Git
     {{< nextlink href="source_code/resource-mapping" >}}Kubernetes リソースマッピング{{< /nextlink >}}
     {{< nextlink href="source_code/features" >}}ソースコードインテグレーションの機能{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## 参考資料 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

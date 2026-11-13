@@ -1,10 +1,9 @@
 ---
-description: 애플리케이션을 재계측하지 않고 Azure Application Insights 분산 트레이스를 Datadog APM으로 가져오세요.
+description: 애플리케이션을 재계측하지 않고 Azure Application Insights 분산 트레이스를 Datadog APM으로 가져오십시오.
 further_reading:
 - link: /integrations/azure/
-  tag: 설명서
+  tag: 문서
   text: Microsoft Azure 통합
-private: true
 title: Azure App Insights 통합
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/azure-app-insights-integration/" header="미리 보기에 참여하세요" >}}

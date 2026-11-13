@@ -2,9 +2,6 @@
 title: Calculated Fields
 disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
-  tag: Blog
-  text: Accelerate investigations with AI-powered log parsing
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Calculated Fields Formulas"
@@ -14,12 +11,18 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
-- link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
-  tag: "Blog"
-  text: "Transform and enrich your logs at query time with Calculated Fields"
 - link: "https://learn.datadoghq.com/courses/enhance-log-querying"
   tag: "Learning Center"
   text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Accelerate investigations with AI-powered log parsing
+- link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
+  tag: "Blog"
+  text: "Transform and enrich your logs at query time with Calculated Fields"
+- link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+  tag: "Blog"
+  text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 
 ---
 
@@ -90,7 +93,7 @@ For a complete list of supported syntax, operators, and functions, see [Formulas
 
 ### Extraction
 
-Extraction uses Grok parsing rules to capture values from raw log messages or attributes. You can use AI-powered automatic parsing to generate Grok rules or manually define your own Grok patterns. Use Grok rules to:
+Extraction captures values from raw log messages or attributes using either a Grok pattern or a regex pattern. You can use Tap to Parse to generate either automatically, or manually define your own Grok pattern or regex. Use extraction to:
 - Capture values from raw log messages.
 - Retroactively extract attributes from already indexed logs without editing pipelines.
 - Test against sample logs.

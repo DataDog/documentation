@@ -1,33 +1,33 @@
 ---
-description: Utiliza la interfaz de línea de comandos Pup para interactuar con las
-  API de Datadog desde el terminal o flujos de trabajo de agentes de IA.
+description: Utilice la interfaz de línea de comandos Pup para interactuar con las
+  API de Datadog desde la terminal o flujos de trabajo de agentes de IA.
 further_reading:
 - link: https://github.com/DataDog/pup
   tag: GitHub
-  text: Repositorio de Pup CLI
+  text: Repositorio de la CLI de Pup
 - link: https://github.com/DataDog/pup/blob/main/README.md
   tag: GitHub
-  text: Documentación completa de Pup CLI
+  text: Documentación completa de la CLI de Pup
 - link: https://github.com/DataDog/pup/blob/main/docs/COMMANDS.md
   tag: GitHub
   text: Referencia de comandos
 - link: mcp_server/
   tag: Documentación
-  text: Servidor MCP de Datadog
-title: Pup CLI
+  text: Datadog MCP Server
+title: CLI de Pup
 ---
 ## Descripción general {#overview}
 
-[Pup CLI][1] es una interfaz de línea de comandos integral, lista para agentes de IA, que brinda a los agentes de IA acceso a la plataforma de observabilidad de Datadog. Expone [la superficie de la API de Datadog][9] para su uso en flujos de trabajo de agentes de IA y pipelines automatizados.
+[La CLI de Pup][1] es una interfaz de línea de comandos integral y lista para agentes de IA que brinda a los agentes de IA acceso a la plataforma de observabilidad de Datadog. Expone la [superficie de la API de Datadog][9] para su uso en flujos de trabajo de agentes de IA y pipelines automatizadas.
 
 Características clave:
 
-- **Comandos autodetectables**: Los comandos están estructurados para que los agentes puedan navegar por ellos sin documentación externa.
+- **Comandos autodescubribles**: Los comandos están estructurados para que los agentes puedan navegar por ellos sin documentación externa.
 - **Salida estructurada**: Las respuestas están disponibles en JSON y YAML para un parseo confiable.
-- **Autenticación con contexto**: OAuth2 y PKCE proporcionan acceso con contexto sin clave de API de larga duración.
-- **Amplia cobertura de productos**: Pup admite seguimiento, registros, métricas, RUM, seguridad y más.
+- **Autenticación con alcance limitado**: OAuth2 y PKCE proporcionan acceso con alcance limitado sin claves de API de larga duración.
+- **Amplia cobertura de productos**: Pup admite monitores, registros, métricas, RUM, seguridad y más.
 
-<div class="alert alert-info">Esta página cubre las características principales de Pup. Consulte la <a href="https://github.com/DataDog/pup/blob/main/README.md" target="_blank">documentación del repositorio de Pup</a> para la lista completa de características y comandos.</div>
+<div class="alert alert-info">Esta página cubre las características principales de Pup. Consulte la <a href="https://github.com/DataDog/pup/blob/main/README.md" target="_blank">documentación del repositorio de Pup</a> para obtener la lista completa de características y comandos.</div>
 
 ## Instalación {#installation}
 
@@ -38,7 +38,7 @@ brew tap datadog-labs/pack
 brew install datadog-labs/pack/pup
 {{< /code-block >}}
 
-### Compilar desde la fuente {#build-from-source}
+### Compilar desde el código fuente {#build-from-source}
 
 {{< code-block lang="bash" >}}
 git clone https://github.com/DataDog/pup.git && cd pup
@@ -48,7 +48,7 @@ cp target/release/pup /usr/local/bin/pup
 
 ### Descarga manual {#manual-download}
 
-Descargue los binarios preconstruidos de la [última versión][2].
+Descargue los binarios precompilados desde la [versión más reciente][2].
 
 ## Ejemplos de uso {#usage-examples}
 
@@ -72,63 +72,63 @@ pup dashboards get <DASHBOARD_ID>
 pup dashboards delete <DASHBOARD_ID> --yes
 {{< /code-block >}}
 
-## Áreas de producto soportadas {#supported-product-areas}
+## Áreas de producto compatibles {#supported-product-areas}
 
-Pup cubre la mayoría de las superficies principales de productos de Datadog. Consulte la [referencia de comandos][3] para la lista canónica de comandos específicos del producto. También puede ejecutar `pup --help` (o `pup agent schema` para salida legible por máquina) para la lista en vivo de comandos tal como se construyó.
+Pup cubre la mayoría de las principales superficies de productos de Datadog. Consulte la [referencia de comandos][3] para obtener la lista canónica de comandos específicos del producto. También puede ejecutar `pup --help` (o `pup agent schema` para obtener una salida legible por máquina) para ver la lista de comandos en vivo tal como fueron compilados.
 
 | Categoría | Ejemplos |
 |----------|----------|
 | Observabilidad central | Métricas, registros, eventos, RUM, APM, trazas |
 | Monitoreo y Alerting | Monitores, tableros, SLOs, sintéticos, tiempos de inactividad, flujos de trabajo |
-| Seguridad y Compliance | Reglas de seguridad, señales, hallazgos, registros de auditoría, amenazas de CSM |
-| Infrastructure y Nube | Servidores, etiquetas, contenedores, red, integraciones de AWS/GCP/Azure |
-| Incidentes y Operaciones | Incidentes, de guardia, gestión de incidencias, seguimiento de errores, catálogo de servicios |
-| CI/CD y Desarrollo | Visibilidad de CI, optimización de pruebas, métricas DORA, puertas de despliegue |
-| Organización y Acceso | Usuarios, claves de API, claves de aplicación, organizaciones |
-| Plataforma y Configuración | Medición de uso, gestión de costos, feature flags, observability pipelines |
+| Security and Compliance | Security rules, signals, findings, audit logs, CSM threats |
+| Infraestructura y nube | Hosts, etiquetas, contenedores, red, integraciones de AWS/GCP/Azure |
+| Incident and Operations | Incidents, on-call, work management, error tracking, service catalog |
+| CI/CD y desarrollo | Visibilidad de CI, optimización de pruebas, métricas DORA, puertas de despliegue |
+| Organización y acceso | Usuarios, claves de API, claves de aplicación, organizaciones |
+| Platform and Configuration | Usage metering, cost management, feature flags, pipelines de observabilidad |
 
-## Modo agente {#agent-mode}
+## Modo Agent {#agent-mode}
 
-Cuando Pup es invocado por un agente de codificación de IA, cambia automáticamente al modo agente, que devuelve respuestas JSON estructuradas optimizadas para el consumo de máquina. Las respuestas incluyen metadatos, detalles de errores y sugerencias. El modo agente también aprueba automáticamente los mensajes de confirmación.
+Cuando Pup es invocado por un agente de codificación de IA, cambia automáticamente al modo agente, el cual devuelve respuestas JSON estructuradas optimizadas para el consumo por máquina. Las respuestas incluyen metadatos, detalles de errores y sugerencias. El modo Agent también aprueba automáticamente las solicitudes de confirmación.
 
-El modo agente se detecta automáticamente para [agentes de codificación compatibles][4] cuando su variable de entorno está configurada. También puede habilitarlo explícitamente con la bandera `--agent` o configurando `FORCE_AGENT_MODE=1`.
+El modo Agent se detecta automáticamente para [agentes de codificación compatibles][4] cuando su variable de entorno está configurada. También puede habilitarlo explícitamente con la bandera `--agent` o configurando `FORCE_AGENT_MODE=1`.
 
-## Características adicionales {#additional-features}
+## Funciones adicionales {#additional-features}
 
-Pup incluye características adicionales que se pueden utilizar en flujos de trabajo de agentes de IA; siga los enlaces a continuación para más información:
+Pup incluye funciones adicionales que se pueden utilizar en flujos de trabajo de agentes de IA; siga los enlaces a continuación para obtener más información:
 
-- [**Runbooks**][5]: `pup runbooks` es un motor de ejecución local para procedimientos operativos definidos en YAML, codificando tareas de múltiples pasos utilizando `pup`, shell, HTTP y pasos de flujo de trabajo de Datadog.
-- [**Agent skills**][6]: Pup incluye habilidades y agentes de dominio integrados en el binario, instalables en cualquier asistente de codificación de IA con `pup skills install`.
-- [**ACP server**][7]: `pup acp serve` ejecuta un servidor de agente de IA local que conecta herramientas de codificación a Datadog Bits AI a través de protocolos compatibles con ACP y OpenAI.
+- [**Runbooks**][5]: `pup runbooks` es un motor de ejecución local para procedimientos operativos definidos en YAML, que codifica tareas de varios pasos utilizando `pup`, shell, HTTP y pasos de Datadog Workflow.
+- [**Habilidades del Agent**][6]: Pup incluye habilidades y agentes de dominio integrados en el binario, instalables en cualquier asistente de codificación de IA con `pup skills install`.
+- [**Servidor ACP**][7]: `pup acp serve` ejecuta un servidor de agente de IA local que conecta herramientas de codificación con Datadog Bits AI a través de ACP y protocolos compatibles con OpenAI.
 
 ## Autenticación {#authentication}
 
-Pup admite métodos de autenticación OAuth2 y claves de API. OAuth2 es preferido; ejecute `pup auth login` para autenticar a través de su navegador. Si OAuth2 no está disponible, Pup recurre a claves de API (`DD_API_KEY` y `DD_APP_KEY`). Consulte la [documentación de autenticación][8] para más detalles.
+Pup admite métodos de autenticación OAuth2 y clave de API. Se prefiere OAuth2; ejecute `pup auth login` para autenticarse a través de su navegador. Si OAuth2 no está disponible, Pup recurre a claves de API (`DD_API_KEY` y `DD_APP_KEY`). Consulte la [documentación de autenticación][8] para obtener más detalles.
 
-## Banderas globales {#global-flags}
+## Flags globales {#global-flags}
 
-| Bandera | Descripción |
+| Flag | Descripción |
 |------|-------------|
 | `-o, --output` | Formato de salida (`json`, `table`, `yaml`). Predeterminado: `json` |
-| `-y, --yes` | Omitir mensajes de confirmación para operaciones destructivas |
-| `--agent` | Habilitar modo agente |
-| `--no-agent` | Deshabilitar modo agente |
+| `-y, --yes` | Omitir las solicitudes de confirmación para operaciones destructivas |
+| `--agent` | Habilitar el modo agente |
+| `--no-agent` | Deshabilitar el modo agente |
 | `--read-only` | Bloquear todas las operaciones de escritura (crear, actualizar, eliminar) |
-| `--org <org>` | Utilice un perfil de organización nombrado para flujos de trabajo de múltiples cuentas (ejecute `pup auth login --org` para configurar) |
-| `-h, --help` | Imprima ayuda |
+| `--org <org>` | Usar un perfil de organización con nombre para flujos de trabajo de cuentas múltiples (ejecute `pup auth login --org` para configurar) |
+| `-h, --help` | Imprimir ayuda |
 
 ## Variables de entorno {#environment-variables}
 
 | Variable | Descripción |
 |----------|-------------|
-| `DD_ACCESS_TOKEN` | Token portador para [autenticación sin estado][10] |
-| `DD_API_KEY` | Clave de API de Datadog (opcional si se usa OAuth2 o `DD_ACCESS_TOKEN`) |
-| `DD_APP_KEY` | Clave de aplicación de Datadog (opcional si se usa OAuth2 o `DD_ACCESS_TOKEN`) |
+| `DD_ACCESS_TOKEN` | Token Bearer para [autenticación sin estado][10] |
+| `DD_API_KEY` | Clave de Datadog API (opcional si usa OAuth2 o `DD_ACCESS_TOKEN`) |
+| `DD_APP_KEY` | Clave de aplicación de Datadog (opcional si usa OAuth2 o `DD_ACCESS_TOKEN`) |
 | `DD_SITE` | Sitio de Datadog (predeterminado: `datadoghq.com`) |
 | `DD_AUTO_APPROVE` | Aprobar automáticamente operaciones destructivas (`true`/`false`) |
-| `DD_TOKEN_STORAGE` | Backend de almacenamiento de token (`keychain` o `file`, predeterminado: auto-detección) |
+| `DD_TOKEN_STORAGE` | Backend de almacenamiento de tokens (`keychain` o `file`, predeterminado: detección automática) |
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -42,6 +42,11 @@ content_filters:
 {% partial file="sdk/troubleshooting/cpp.mdoc.md" /%}
 {% /if %}
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/troubleshooting/electron.mdoc.md" /%}
+{% /if %}
+
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
 {% partial file="sdk/troubleshooting/maui.mdoc.md" /%}

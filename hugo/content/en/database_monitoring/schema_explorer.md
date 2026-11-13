@@ -27,6 +27,63 @@ instances:
     # dbname: '<DB_NAME>'
 ```
 
+### Tuning schema collection
+
+The `collect_schemas` options available and their defaults differ by database engine.
+
+{{< tabs >}}
+{{% tab "Postgres" %}}
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `true` | Set to `false` to disable schema collection. Enabled by default for Datadog Agent versions 7.80.0 and later. |
+| `max_tables` | `300` | Maximum number of tables the Agent collects from the instance. Tables beyond this limit are not collected. |
+| `max_columns` | `50` | Maximum number of columns the Agent collects per table. |
+| `max_query_duration` | `60` | Maximum duration, in seconds, of the query that collects schema information. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  max_tables: 1000
+```
+
+<div class="alert alert-info">Whether partitions count toward PostgreSQL's <code>max_tables</code> limit depends on the partitioning method. Declarative partitioning (<code>PARTITION BY</code>, PostgreSQL 10 and later) counts a table once regardless of partition count, but inheritance partitioning (<code>INHERITS</code>, the only option on PostgreSQL 9.6) counts the parent and each child separately. This means inheritance-partitioned databases can reach the default limit of 300 with far fewer logical tables than expected, crowding out other tables. If tables are missing from the Schemas page, check for inheritance partitioning and raise <code>max_tables</code> accordingly.</div>
+
+Raising `max_tables` increases the cost of each collection run. On instances with a large number of tables, also consider raising `max_query_duration` and `collection_interval` to reduce load on the database.
+{{% /tab %}}
+
+{{% tab "SQL Server" %}}
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `false` | Set to `true` to enable schema collection. |
+| `max_tables` | `300` | Maximum number of tables the Agent collects from the instance. Tables beyond this limit are not collected. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  max_tables: 1000
+```
+{{% /tab %}}
+
+{{% tab "MySQL" %}}
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `false` | Set to `true` to enable schema collection. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+| `max_execution_time` | `60` | Maximum duration, in seconds, of the query that collects schema information. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  collection_interval: 300
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Tables overview
 
 The Tables overview lists all tracked tables across your databases, grouped by table name, with the following columns:

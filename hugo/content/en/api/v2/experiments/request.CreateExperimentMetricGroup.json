@@ -1,0 +1,13 @@
+{
+  "data": {
+    "type": "experiment-metric-groups",
+    "attributes": {
+      "name": "ex-14bb9543f523edde",
+      "metrics": [
+        {
+          "metric_id": "550e8400-e29b-41d4-a716-446655440002"
+        }
+      ]
+    }
+  }
+}

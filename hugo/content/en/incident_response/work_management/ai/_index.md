@@ -5,11 +5,8 @@ aliases:
 - /service_management/case_management/mcp_server/
 - /incident_response/case_management/mcp_server/
 - /incident_response/case_management/ai/
+site_support_id: work_management_ai_site_support
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">AI features for Work Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog Work Management lets you assign work items to AI agents alongside people. It integrates with the Datadog MCP Server and custom agents built with Bits Agent Builder to automate work item triage, assignment, and resolution.
 
@@ -25,8 +22,6 @@ The Datadog MCP Server exposes a `cases` toolset so that AI agents that support 
 For setup instructions and full details on the `cases` toolset, see the [Datadog MCP Server documentation][1].
 
 ## Custom agents
-
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} Work Management integration with custom agents is in Preview.{{< /callout >}}
 
 Assign work items to specialized agents built with [Bits Agent Builder][3] to automate the full work item lifecycle, from initial triage to follow-up and resolution. For example use cases, agent archetypes, and manual and automated assignment, see [Custom Agents][4].
 

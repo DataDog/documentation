@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text="Prometheus destination" tooltip="Contact your account manager to request access." >}} to send metrics to Prometheus.
+Use Observability Pipelines' Prometheus destination to send metrics to Prometheus.
 
 ## Set up destination
 
@@ -52,9 +52,9 @@ Enter the tenant ID to add to outgoing requests. This field supports [template s
 
 The Worker doesn't always send metrics in the correct order for a given series because it doesn't reorder metrics. For example, if the first batch of metrics contains metrics with timestamps: `10:03`, `10:04`, `10:05` and the second batch contains metrics with timestamps: `10:01`, `10:02`, `10:06`, the Worker does not reorder those metrics before sending them out.
 
-Because the Prometheus OTLP receiver rejects out-of-order samples, the Worker logs a Bad Request (`400`) error and the entire second batch of metrics gets dropped, even if the OTLP receiver accepted some of the valid metrics in the batch.
+Because the Prometheus remote write receiver rejects out-of-order samples, the Worker logs a Bad Request (`400`) error and the entire second batch of metrics gets dropped, even if the remote write receiver accepted some of the valid metrics in the batch.
 
-Datadog recommends setting your OTLP receiver to allow out-of-order samples to prevent out-of-order samples from getting dropped.
+Datadog recommends setting your remote write receiver to allow out-of-order samples to prevent out-of-order samples from getting dropped.
 
 ## Troubleshooting
 
@@ -80,17 +80,17 @@ See [Enable debug logs][7] for instruction on enabling full debug logs.
 
 - Remote Write endpoint URL identifier:
 	- References the Remote Write endpoint URL. An example of an endpoint URL the identifier references: `http://localhost:9090/api/v1/write`.
-	- The default identifier is `DESTINATION_PROMETHEUS_ENDPOINT`.
+	- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT`.
 - Prometheus TLS passphrase identifier (when TLS is enabled):
-	- The default identifier is `DESTINATION_PROMETHEUS_KEY_PASS`.
+	- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_KEY_PASS`.
 - If you are using basic authentication:
 	- Prometheus username identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_USERNAME`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_USERNAME`.
 	- Prometheus password identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_PASSWORD`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_PASSWORD`.
 - If you are using bearer authentication:
 	- Prometheus bearer token identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_BEARER_TOKEN`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_BEARER_TOKEN`.
 
 {{% /tab %}}
 

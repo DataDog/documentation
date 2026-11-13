@@ -1,0 +1,8 @@
+- Prometheus 주소:
+    - Observability Pipelines Worker는 `0.0.0.0:9091`와 같은 소켓 주소에서 Prometheus 클라이언트가 푸시하는 메트릭을 수신합니다.
+    - 기본 환경 변수는 `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_ADDRESS`입니다.
+- 일반 인증을 사용하는 경우:
+	- Prometheus 엔드포인트 인증 사용자 이름:
+		- 기본 환경 변수는 `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_USERNAME`입니다.
+	- Prometheus 엔드포인트 인증 비밀번호:
+		- 기본 환경 변수는 `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_PASSWORD`입니다.

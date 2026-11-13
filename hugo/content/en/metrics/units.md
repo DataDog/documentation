@@ -26,15 +26,21 @@ For example, if you have a datapoint that is 3,000,000,000:
 * If you haven't specified a unit for this datapoint, "3G" is displayed.
 * If you specified this datapoint is in bytes, "3GB" is displayed.
 
+For metrics shipped by an out-of-the-box integration, you can check whether a
+unit is already defined by looking at that integration's Data Collected
+table: metric names followed by *Shown as \<unit\>* already have a unit set by
+the integration. Metrics without this notation do not have a unit configured
+by default, so you need to set one manually using the steps below.
+
 Click the full screen button on the top right-hand corner of the graph to see the units displayed at the bottom:
 
 {{< img src="metrics/units/metrics_units.png" alt="The units of a metric graph in full screen mode" style="width:100%;">}}
 
-On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the Metrics Catalog page for further analysis or edits.
 
 {{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded context menu (three vertical dots)" style="width:100%;">}}
 
-To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click {{< ui >}}Edit{{< /ui >}} under {{< ui >}}Metadata{{< /ui >}} and select a unit, such as `bit` or `byte` from the dropdown menu.
+To change a metric unit, navigate to the [Metrics Catalog][1] page and select a metric. Click {{< ui >}}Edit{{< /ui >}} under {{< ui >}}Metadata{{< /ui >}} and select a unit, such as `bit` or `byte` from the dropdown menu.
 
 ## Unit list
 
@@ -126,7 +132,7 @@ Time units between a minute and a year are split into multiple units to be more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
 [3]: /dashboards/guide/unit-override/
 

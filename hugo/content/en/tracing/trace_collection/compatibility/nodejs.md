@@ -315,7 +315,7 @@ For additional information or to discuss [leave a comment on this GitHub issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
-[64]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs#supported-frameworks-and-libraries
+[64]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs#supported-frameworks-and-libraries
 [65]: https://github.com/dotansimha/graphql-yoga
 [66]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#compatibility
 [67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript

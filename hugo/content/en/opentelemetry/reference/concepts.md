@@ -20,6 +20,8 @@ This page describes essential terms and concepts for OpenTelemetry and Datadog. 
 |------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Telemetry                    | The collection of metrics, logs, traces, and profiles that provide observations about the behaviors and performance of applications and infrastructure.                                                                                                                    |
 | [OpenTelemetry Collector][1] | A vendor-agnostic implementation for collecting and exporting telemetry data emitted by many processes. It can be configured to receive, process, and export telemetry to one or multiple destinations including storage backends and analysis tools.            |
+| [OTLP HTTP Exporter][7]      | An OTel Collector component that sends metrics, traces, and logs to an OTLP HTTP endpoint. Datadog recommends this exporter for new Collector configurations. |
+| [`span_metrics` Connector][8] | An OTel Collector component that generates request, error, and duration metrics from spans. These metrics power Datadog APM views. |
 | [Datadog Exporter][2]        | An OTel Collector component that lets you forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog.                                                                                                                                                               |
 | [OTLP Receiver][3]           | A component within the OpenTelemetry Collector responsible for accepting telemetry data in the OpenTelemetry Protocol (OTLP) format. OTLP is the native protocol for OpenTelemetry, designed for transferring telemetry data between the SDKs and the Collector. |
 | [Context Propagation][4]     | The mechanism used in distributed tracing to maintain trace context across different services.                                                                                                                                                                   |
@@ -35,3 +37,5 @@ This page describes essential terms and concepts for OpenTelemetry and Datadog. 
 [4]: /opentelemetry/reference/trace_context_propagation/
 [5]: /opentelemetry/schema_semantics/semantic_mapping/
 [6]: https://opentelemetry.io/docs/concepts/glossary/
+[7]: /opentelemetry/setup/collector_exporter/#otlp-http-exporter
+[8]: /opentelemetry/setup/collector_exporter/#span-metrics-connector

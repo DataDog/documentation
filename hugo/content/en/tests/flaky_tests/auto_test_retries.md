@@ -18,6 +18,8 @@ further_reading:
 Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
 a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
+Retries added by Auto Test Retries are not billed as test spans. For details, see [CI/CD Optimization Billing][9].
+
 ## Setup
 
 Ensure [Test Optimization][1] is configured for your test runs.
@@ -120,7 +122,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Compatibility
 
-`orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 ### Configuration
 
@@ -158,6 +160,33 @@ You can fine tune this behavior with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: `true`)
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: `1000`)
+
+### Dynamic Auto Test Retries
+
+`dd-trace-py >= 4.15.0`
+
+By default, Auto Test Retries applies the same retry limit to every failing test. Dynamic Auto Test Retries (Dynamic ATR) bases the number of retries on how long the test takes to run on its first attempt. Faster tests receive more retries and slower tests receive fewer.
+
+The retry budget for a test is determined once, from the duration of its initial attempt, and applies to all of its retries. A test stops being retried as soon as a retry passes.
+
+The default duration buckets are:
+
+| First attempt duration | Default retries |
+| ---------------------- | --------------- |
+| 5 seconds or less | 10 |
+| More than 5 seconds, up to 10 seconds | 5 |
+| More than 10 seconds, up to 30 seconds | 3 |
+| More than 30 seconds, up to 5 minutes | 2 |
+| More than 5 minutes | 1 |
+
+Every failing test is retried at least once, regardless of its duration.
+
+To enable Dynamic Auto Test Retries, set the following environment variables:
+
+* `DD_CIVISIBILITY_DYNAMIC_ATR_ENABLED` - set to `true` to base the number of retries on the test's first attempt duration instead of the flat `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` limit (default: `false`) - the flat limit is ignored while Dynamic ATR is enabled. Auto Test Retries must be enabled in [{{< ui >}}CI/CD Settings{{< /ui >}}][1].
+* `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` - five comma-separated integers between `1` and `20` that override the default budgets in the previous table, ordered from the fastest to the slowest duration bucket (for example, `10,4,1,1,1`). If this variable is unset or empty, the default budgets in the previous table are used. If `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` contains an invalid value, the library ignores it, logs a warning, and uses the default budgets.
+
+**Note**: The session-level limit `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` still applies when Dynamic ATR is enabled.
 
 [1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 
@@ -236,3 +265,4 @@ If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/C
 [6]: /logs/log_configuration/indexes/#add-indexes
 [7]: https://www.npmjs.com/package/jest-image-snapshot
 [8]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
+[9]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features

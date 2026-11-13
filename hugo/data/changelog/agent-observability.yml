@@ -1,0 +1,112 @@
+entries:
+  - change_type: added
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40713
+    operations:
+      - ListLLMObsPatternsTemplates
+    title: Document ListLLMObsPatternsTemplates endpoint
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - CreateLLMObsAnnotationQueueInteractions
+      - GetLLMObsAnnotatedInteraction
+      - GetLLMObsAnnotatedInteractions
+      - GetLLMObsAnnotatedInteractionsByTraceIDs
+    title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41240
+    operations:
+      - GetLLMObsCustomEvalConfig
+      - ListLLMObsCustomEvalConfigs
+      - UpdateLLMObsCustomEvalConfig
+    title: Fix LLM Obs custom evaluator provider names and add deterministic 
+      provider
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - AggregateLLMObsExperimentation
+      - BatchUpdateLLMObsDataset
+      - CloneLLMObsDataset
+      - CreateLLMObsAnnotationQueue
+      - CreateLLMObsAnnotationQueueInteractions
+      - CreateLLMObsDataset
+      - CreateLLMObsDatasetRecords
+      - CreateLLMObsExperiment
+      - CreateLLMObsExperimentEvents
+      - CreateLLMObsIntegrationInference
+      - CreateLLMObsProject
+      - CreateLLMObsPrompt
+      - CreateLLMObsPromptVersion
+      - DeleteLLMObsAnnotationQueue
+      - DeleteLLMObsAnnotationQueueInteractions
+      - DeleteLLMObsAnnotations
+      - DeleteLLMObsCustomEvalConfig
+      - DeleteLLMObsDatasetRecords
+      - DeleteLLMObsDatasets
+      - DeleteLLMObsExperiments
+      - DeleteLLMObsPatternsConfig
+      - DeleteLLMObsProjects
+      - DeleteLLMObsPrompt
+      - ExportLLMObsDataset
+      - GetLLMObsAnnotatedInteraction
+      - GetLLMObsAnnotatedInteractions
+      - GetLLMObsAnnotatedInteractionsByTraceIDs
+      - GetLLMObsAnnotationQueueLabelSchema
+      - GetLLMObsCustomEvalConfig
+      - GetLLMObsDatasetDraftState
+      - GetLLMObsPatternsConfig
+      - GetLLMObsPatternsRunStatus
+      - GetLLMObsPrompt
+      - GetLLMObsPromptVersion
+      - ListLLMObsAnnotationQueues
+      - ListLLMObsCustomEvalConfigs
+      - ListLLMObsDatasetRecords
+      - ListLLMObsDatasetVersions
+      - ListLLMObsDatasets
+      - ListLLMObsExperimentEvents
+      - ListLLMObsExperimentEventsV1
+      - ListLLMObsExperimentEventsV2
+      - ListLLMObsExperiments
+      - ListLLMObsIntegrationAccounts
+      - ListLLMObsIntegrationModels
+      - ListLLMObsPatternsClusteredPoints
+      - ListLLMObsPatternsConfigs
+      - ListLLMObsPatternsRuns
+      - ListLLMObsPatternsTopics
+      - ListLLMObsPatternsTopicsWithClusteredPoints
+      - ListLLMObsProjects
+      - ListLLMObsPromptVersions
+      - ListLLMObsPrompts
+      - ListLLMObsSpans
+      - LockLLMObsDatasetDraftState
+      - RestoreLLMObsDatasetVersion
+      - SearchLLMObsExperimentation
+      - SearchLLMObsSpans
+      - SimpleSearchLLMObsExperimentation
+      - TriggerLLMObsPatterns
+      - UnlockLLMObsDatasetDraftState
+      - UpdateLLMObsAnnotationQueue
+      - UpdateLLMObsAnnotationQueueLabelSchema
+      - UpdateLLMObsCustomEvalConfig
+      - UpdateLLMObsDataset
+      - UpdateLLMObsDatasetRecords
+      - UpdateLLMObsExperiment
+      - UpdateLLMObsProject
+      - UpdateLLMObsPrompt
+      - UpdateLLMObsPromptVersion
+      - UploadLLMObsDatasetRecordsFile
+      - UpsertLLMObsAnnotations
+      - UpsertLLMObsPatternsConfig
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41684
+    operations:
+      - GetLLMObsPatternsConfig
+      - ListLLMObsPatternsConfigs
+      - UpsertLLMObsPatternsConfig
+    title: Document min_cluster_size on LLM Observability topic discovery 
+      configs

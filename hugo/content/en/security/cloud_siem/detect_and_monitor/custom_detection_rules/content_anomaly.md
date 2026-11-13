@@ -126,7 +126,7 @@ $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 | Evaluation window | Yes | No | Yes |
 | Retention | 14 days | 30 days | 10 days |
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=content_anomaly
 [2]: https://www.unicode.org/reports/tr29/tr29-22.html
 [3]: https://en.wikipedia.org/wiki/Jaccard_index
 [4]: https://en.wikipedia.org/wiki/MinHash

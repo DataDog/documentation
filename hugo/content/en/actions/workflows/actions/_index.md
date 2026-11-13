@@ -16,6 +16,10 @@ further_reading:
   text: "Learn about integrations"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 Datadog provides a suite of workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
 - Add logic to control the execution path of your workflow.
 - Transform the data collected by an action.

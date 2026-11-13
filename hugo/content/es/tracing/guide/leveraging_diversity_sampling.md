@@ -3,51 +3,54 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentación
   text: Control de la indexación de trazas para la retención
-title: Comprender la política de retención de Datadog para retener eficazmente los
-  datos de traza
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: Centro de arquitectura
+  text: 'Dominio del rastreo distribuido: desafíos de volumen de datos y el enfoque
+    de Datadog para un muestreo eficiente'
+title: Comprenda la política de retención de Datadog para retener datos de trazas
+  de manera eficiente
 ---
+## Ingesta y retención de las trazas que le interesan {#ingesting-and-retaining-the-traces-you-care-about}
 
-## Ingerir y retener las trazas que te interesan
+La mayoría de las trazas generadas por sus aplicaciones son repetitivas y no es necesariamente relevante ingerirlas y retenerlas todas. Para las solicitudes exitosas, retener una **muestra representativa** del tráfico de sus aplicaciones es suficiente, ya que no es posible analizar docenas de solicitudes trazadas individuales cada segundo.
 
-La mayoría de las trazas (traces) generadas por tus aplicaciones son repetitivas, y no es necesariamente relevante ingerirlas y retenerlas a todas. En el caso de las solicitudes satisfactorias, basta con conservar una **muestra representativa** del tráfico de tus aplicaciones, ya que no es posible analizar decenas de solicitudes rastreadas cada segundo.
+Lo más importante son las trazas que contienen síntomas de posibles problemas en su infraestructura, es decir, **trazas con errores o latencia inusual**. Además, para **endpoints específicos que son críticos para su negocio**, es posible que desee retener el 100% del tráfico, para asegurarse de poder investigar y solucionar cualquier problema del cliente con gran detalle. 
 
-Las más importante son las trazas que contienen indicios de posibles problemas en tu infraestructura, es decir, **trazas con errores o latencia inusual**. Además, para **endpoints específicos que son críticos para tu negocio**, es posible que desees retener el 100% del tráfico, para asegurarte de investigar y solucionar cualquier problema del cliente en detalle.
-
-{{< img src="/tracing/guide/leveraging_diversity_sampling/relevant_traces.png" alt=" Las trazas relevantes se retienen al almacenar una combinación de trazas de alta latencia, trazas de errores y trazas críticas para el negocio." style="width:80%;" >}}
-
-
-## Cómo la política de retención de Datadog te ayuda a retener lo importante
-
-Datadog ofrece dos formas principales de retener los datos por más de 15 minutos:
-- El [Filtro de retención inteligente](#diversity-sampling-algorithm-intelligent-retention-filter) que siempre está activado.
-- [Filtros de retención personalizados basados en etiquetas](#tag-based-retention-filters) que puedes configurar manualmente.
-
-{{< img src="/tracing/guide/leveraging_diversity_sampling/datadog_captures_relevant_traces.png" alt="Datadog captura trazas de errores y latencia relevantes mediante el filtro de retención inteligente, y trazas críticas para el negocio mediante filtros de retención personalizados." style="width:80%;" >}}
+{{< img src="/tracing/guide/leveraging_diversity_sampling/relevant_traces.png" alt="Las trazas relevantes se retienen almacenando una combinación de trazas de alta latencia, trazas de error y trazas críticas para el negocio." style="width:80%;" >}}
 
 
-### Algoritmo de muestreo de diversidad: filtro de retención inteligente
+## Cómo le ayuda la política de retención de Datadog a retener lo que importa {#how-datadogs-retention-policy-helps-you-retain-what-matters}
 
-Por defecto, el filtro de retención inteligente mantiene una selección representativa de trazas sin necesidad de crear decenas de filtros de retención personalizados.
+Datadog ofrece dos formas principales de retener datos más allá de los 15 minutos: 
+- El [filtro de retención inteligente](#diversity-sampling-algorithm-intelligent-retention-filter) que siempre está habilitado.
+- [Filtros de retención personalizados basados en etiquetas](#tag-based-retention-filters) que puede configurar manualmente.
 
-Conserva al menos un tramo (y la traza distribuida asociada) para cada combinación de `environment`, `service`, `operation` y `resource` cada 15 minutos como máximo para los percentiles de latencia `p75`, `p90` y `p95`, así como una selección representativa de errores, para cada código de estado de respuesta distinto.
+{{< img src="/tracing/guide/leveraging_diversity_sampling/datadog_captures_relevant_traces.png" alt="Datadog captura trazas relevantes de errores y latencia a través del filtro de retención inteligente, y trazas críticas para el negocio a través de filtros de retención personalizados." style="width:80%;" >}}
 
-Para saber más, lee la [documentación del filtro de retención inteligente][1].
 
-### Filtros de retención basados en etiquetas
+### Algoritmo de muestreo de diversidad: filtro de retención inteligente {#diversity-sampling-algorithm-intelligent-retention-filter}
 
-Los [filtros de retención basados en etiquetas][2] proporcionan la flexibilidad necesaria para conservar las trazas más importantes para tu empresa. Cuando se indexan tramos con filtros de retención, también se almacena la traza asociada, lo que asegura que se mantenga la visibilidad de toda la solicitud y su contexto distribuido.
+De forma predeterminada, el filtro de retención inteligente mantiene una selección representativa de trazas sin que tenga que crear docenas de filtros de retención personalizados.
 
-## Búsqueda y análisis eficaces de datos de tramo indexados
+Mantiene al menos un tramo (y la traza distribuida asociada) para cada combinación de `environment`, `service`, `operation` y `resource` cada 15 minutos como máximo para los percentiles de latencia `p75`, `p90` y `p95`, así como una selección representativa de errores, para cada código de estado de respuesta distinto.
 
-El conjunto de datos recopilados por el muestreo de diversidad **no está muestreado de forma uniforme** (es decir, no es proporcionalmente representativo del tráfico completo). Está sesgado hacia los errores y las trazas de alta latencia. Si deseas hacer un análisis solo sobre un conjunto de datos muestreados de forma uniforme, excluye estos tramos que se muestrean por razones de diversidad añadiendo el parámetro de consulta `-retained_by:diversity_sampling` en el Trace Explorer.
+Para obtener más información, lea la [documentación del filtro de retención inteligente][1].
 
-Por ejemplo, para medir el número de operaciones de pago agrupadas por nivel de comerciante en tu aplicación, **excluir el conjunto de datos de muestreo de diversidad** asegura que realizas este análisis sobre un conjunto de datos representativo, y así las proporciones de pagos `basic`, `enterprise` y `premium` son realistas:
+### Filtros de retención basados en etiquetas {#tag-based-retention-filters}
 
-{{< img src="/tracing/guide/leveraging_diversity_sampling/checkout_ops_by_tier.png" alt="Número de operaciones de pago por nivel, análisis que excluye los datos de muestreo de diversidad" style="width:80%;" >}}
+Los [filtros de retención basados en etiquetas][2] ofrecen la flexibilidad de conservar las trazas que son más críticas para su negocio. Al indexar tramos con filtros de retención, también se almacena la traza asociada, lo que garantiza que mantenga la visibilidad de toda la solicitud y su contexto distribuido.
 
-Por otro lado, si deseas medir el número de comerciantes únicos por nivel de comerciante, **incluye el conjunto de datos de muestreo de diversidad** que podría capturar IDs de comerciantes adicionales no detectados por los filtros de retención personalizados:
+## Búsqueda y análisis eficaces de datos de tramos indexados {#searching-and-analyzing-indexed-span-data-effectively}
 
-{{< img src="/tracing/guide/leveraging_diversity_sampling/nb_merchants_by_merchant_tier.png" alt="Número de comerciantes por nivel, análisis que incluye los datos de muestreo de diversidad" style="width:80%;" >}}
+El conjunto de datos capturado por el muestreo de diversidad **no se muestrea de manera uniforme** (es decir, no es proporcionalmente representativo de todo el tráfico). Está sesgado hacia errores y rastreos de alta latencia. Si desea crear análisis solo a partir de un conjunto de datos muestreado de manera uniforme, excluya estos tramos que se muestrean por motivos de diversidad agregando el parámetro de consulta `-retained_by:diversity_sampling` en Trace Explorer.
+
+Por ejemplo, para medir la cantidad de operaciones de pago agrupadas por nivel de comerciante en su aplicación, **excluir el conjunto de datos de muestreo de diversidad** garantiza que realice este análisis a partir de un conjunto de datos representativo, por lo que las proporciones de `basic`, `enterprise` y `premium` pagos son realistas:
+
+{{< img src="/tracing/guide/leveraging_diversity_sampling/checkout_ops_by_tier.png" alt="Cantidad de operaciones de pago por nivel, análisis que excluyen los datos muestreados por diversidad" style="width:80%;" >}}
+
+Por otro lado, si desea medir la cantidad de comerciantes únicos por nivel de comerciante, **incluya el conjunto de datos de muestreo de diversidad** que podría capturar identificadores de comerciante adicionales no detectados por los filtros de retención personalizados:
+
+{{< img src="/tracing/guide/leveraging_diversity_sampling/nb_merchants_by_merchant_tier.png" alt="Cantidad de comerciantes únicos por nivel. análisis que incluyen datos muestreados por diversidad" style="width:80%;" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

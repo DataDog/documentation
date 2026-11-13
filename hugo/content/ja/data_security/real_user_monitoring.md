@@ -3,155 +3,158 @@ aliases:
 - /ja/real_user_monitoring/security/
 further_reading:
 - link: /data_security/
-  tag: Documentation
-  text: Datadog に送信されるデータの主要カテゴリを確認する
+  tag: ドキュメント
+  text: Datadog に送信されるデータの主なカテゴリを確認する
 - link: /data_security/synthetics/
-  tag: Documentation
-  text: Synthetic モニタリングのデータセキュリティ
-- link: /real_user_monitoring/session_replay/browser/privacy_options/
-  tag: Documentation
-  text: セッションリプレイのプライバシーオプション
+  tag: ドキュメント
+  text: Synthetic Monitoring のデータセキュリティ
+- link: /session_replay/privacy_options?platform=browser
+  tag: ドキュメント
+  text: Session Replay のプライバシーオプション
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: ブログ
-  text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-title: リアルユーザーモニタリングのデータセキュリティ
+  text: Session Replay のデフォルトのプライバシー設定でユーザーデータを難読化する
+title: Real User Monitoring のデータセキュリティ
 ---
+<div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドおよびアプリケーションのセキュリティ製品やセキュリティ機能をお探しの場合は、<a href="/security/" target="_blank">Security</a> セクションをご覧ください。</div>
 
-<div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
+## 概要 {#overview}
+Real User Monitoring (RUM) は、プライバシー要件を実装して、あらゆる規模の組織で機密情報や個人情報が公開されないようにするための、制御機能を提供します。データは、Datadog が管理するクラウドインスタンスに保存され、保存時に暗号化されます。このページで説明されているデフォルトの動作と構成可能なオプションは、ユーザーのプライバシーを保護し、組織の機密情報が収集されるのを防ぐように設計されています。[Datadog のプライバシー][1]の詳細をご覧ください。
 
-## 概要
-リアルユーザーモニタリング (RUM) は、プライバシー要件を実装し、あらゆる規模の組織が機密情報や個人情報を公開しないようにするためのコントロールを提供します。データは Datadog が管理するクラウドインスタンスに保存され、静止時は暗号化されます。このページで説明されているデフォルトの動作と構成可能なオプションは、エンドユーザーのプライバシーを保護し、組織の機密情報が収集されないように設計されています。[Datadog のプライバシー][13]の詳細についてはこちらをご覧ください。
+## 責任の共有 {#shared-responsibility}
 
-## 責任の共有
+ユーザーのデータを安全に保つ責任は、Datadog と、RUM SDK を活用する開発者の間で共有されます。
 
-The responsibility of keeping user data secure is shared between Datadog and developers who leverage the RUM SDKs.
+Datadog の責任は以下のとおりです。
 
-Datadog の責任は以下の通りです。
+- Datadog プラットフォームに送信および保存されるデータを安全に処理する、信頼性の高い製品を提供すること。
+- 社内ポリシーに従ってセキュリティ問題を特定すること。
 
-- Datadog プラットフォームにデータが転送され、保存される際、それを安全に取り扱う信頼性の高い製品を提供します。
-- 社内ポリシーに基づき、セキュリティ上の問題を確実に特定します。
+開発者の責任は以下のとおりです。
+- Datadog が提供する設定値およびデータプライバシーオプションを活用すること。
+- 環境内のコードの整合性を確保すること。
 
-開発者の責任は以下の通りです。
-- Datadog が提供する構成値とデータプライバシーオプションを活用します。
-- 自社の環境内のコードの整合性を確実に保ちます。
-
-## コンプライアンスフレームワーク
-RUM は、多くの規格や規制の枠組みに準拠するように構成することができます。以下が含まれますが、これらに限定されるものではありません。
+## コンプライアンスフレームワーク {#compliance-frameworks}
+RUM は、以下を含む (ただしこれらに限定されない) 多くの基準および規制フレームワークに準拠するように設定できます。
 
 - GDPR
-- HIPAA 
+- HIPAA
 - ISO
 - CCPA/CPRA
 
-## プライバシーに関する制限
-デフォルトでは、規制や規格の枠組みへの準拠を支援するために、ユーザーデータを保護するいくつかのプライバシー制限が設けられています。
+## プライバシー制限 {#privacy-restrictions}
+デフォルトでは、規制および基準フレームワークへの準拠を支援するために、ユーザーのデータを保護するプライバシー制限がいくつか適用されています。
 
-### ブラウザ RUM のクッキーの使用について
-Browser RUM requires first party cookies to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, you are responsible for configuring your pages to comply with the laws of those jurisdictions, including receiving consent to collect cookies before RUM is initialized.
+### ブラウザ RUM における Cookie の使用 {#browser-rum-use-of-cookies}
+ブラウザ RUM でデータを収集するには、ユーザーのブラウザでファーストパーティ Cookie を有効にする必要があります。お客様が事業を展開する管轄区域で義務付けられている場合、それらの管轄区域の法律を遵守するようにページを設定する責任はお客様にあります (RUM の初期化前に Cookie 収集の同意を得るなど)。
 
-### モバイル RUM の同意管理
-モバイル RUM の追跡は、ユーザーの同意がある場合のみ実行されます。エンドユーザーが RUM の追跡を承諾した場合、当社はそのユーザーのアクティビティとセッションの経験を追跡します。ユーザーが RUM の追跡を拒否した場合、当社はそのユーザーのアクティビティとセッションの経験を追跡しません。
+### モバイル RUM の同意管理 {#mobile-rum-consent-management}
+モバイル RUM のトラッキングは、ユーザーの同意が得られた場合にのみ実行されます。ユーザーが RUM トラッキングに同意した場合、Datadog はそのアクティビティとセッションエクスペリエンスを追跡します。ユーザーが RUM トラッキングを拒否した場合、Datadog はそのアクティビティとセッションエクスペリエンスを追跡しません。
 
-## プライバシーのオプション
-RUM でキャプチャしたデータの収集と編集に関しては、いくつかのオプションとツールがあります。
+## プライバシーオプション {#privacy-options}
+RUM によってキャプチャされたデータの収集および編集に関しては、いくつかのオプションとツールが用意されています。
 
-### Client token
-The browser RUM [client token][17] is used to match data from the end user's browser to a specific RUM application in Datadog. It is unencrypted and visible from the client side of an application.
+### クライアントトークン {#client-token}
+ブラウザ RUM の[クライアントトークン][2]は、ユーザーのブラウザからのデータを Datadog 内の特定の RUM アプリケーションと照合するために使用されます。これは暗号化されておらず、アプリケーションのクライアント側から見ることができます。
 
-Because the client token is only used to send data to Datadog, there is no risk of data loss due to this token; however, Datadog recommends good client token management to avoid other kinds of misuse, including:
+クライアントトークンは Datadog へのデータ送信にのみ使用されるため、このトークンが原因でデータが損失するリスクはありません。ただし、Datadog では、その他の種類の悪用を防ぐために、適切なクライアントトークン管理を推奨しています。以下にその例を示します。
 
-- Regularly [rotating the client token][18] to ensure that it is only used by your application
-- Automatically [filtering out bots][19] when capturing RUM data
+- そのアプリケーションでのみ使用されるように、[クライアントトークンを定期的にローテーション][3]する
+- RUM データのキャプチャ時に[ボットを自動的にフィルタリング][4]する
 
-#### Authenticated proxy
-One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not. 
+#### 認証済みプロキシ{#authenticated-proxy}
+クライアントトークンを使用してボットをフィルタリングする 1 つの方法は、認証済みプロキシを使用することです。この方法では、Datadog RUM Browser SDK を初期化する際に、`clientToken` の代わりにプレースホルダー文字列が使用されます。プロキシは実際のクライアントトークンを知っていますが、ユーザーは知りません。
 
-The proxy is configured to check for valid user information before passing the session data to Datadog, thereby confirming that a real user is signed in and transmitting traffic to be monitored. When receiving traffic, the proxy verifies that the data includes the placeholder string and replaces it with the real `clientToken` before forwarding the data to Datadog.
+プロキシは、セッションデータを Datadog に渡す前に有効なユーザー情報をチェックするように構成されています。これにより、実際のユーザーがサインインして監視対象のトラフィックを送信していることが確認されます。トラフィックを受信すると、プロキシはデータにプレースホルダー文字列が含まれていることを確認し、それを実際の `clientToken` に置き換えてから Datadog にデータを転送します。
 
-### イベント追跡
-[イベント][14]とは、サイトやアプリの特定の要素に対するユーザーのインタラクションのことです。イベントは、SDK を介して自動的にキャプチャされるか、カスタムアクションを介して送信されます。ユーザーインタラクションやページビューの自動追跡をオフにして、希望するインタラクションのみをキャプチャすることができます。デフォルトでは、RUM は SDK によって自動的に収集されたアクションからアクション名を生成するためにターゲットコンテンツを使用します。この動作は、任意の名前で[明示的にオーバーライド][5]することができます。
+### イベント追跡{#event-tracking}
+[イベント][5]とは、サイトやアプリの特定の要素に対するユーザーの操作のことです。イベントは、SDK を通じて自動的にキャプチャすることも、カスタムアクションを通じて送信することもできます。ユーザーの操作やページビューの自動追跡をオフにして、選択した操作のみをキャプチャするように設定できます。デフォルトでは、RUM はターゲットコンテンツを使用して、SDK によって自動的に収集されたアクションからアクション名を生成します。この動作は、任意の名前を使用して[明示的に上書き][6]できます。
 
-当社が自動的に追跡するデータには、主に技術的な情報が含まれており、その多くには個人を特定する情報は含まれていません。RUM によってキャプチャされたデータは、以下の方法の高度な構成オプションによって、Datadog に送信・保存される前にさらに編集を行うことができます。
+自動的に追跡されるデータには主に技術情報が含まれ、その多くには個人情報は含まれません。RUM によってキャプチャされたデータは、以下のメソッドの高度な設定オプションを通じて、Datadog に送信および保存される前にさらに編集 (削除) できます。
 
-- [beforeSend API][1]
-- [iOS][2]
-- [Android][3]
-- [Flutter][4]
-- [React Native][16]
+- [beforeSend API][7]
+- [iOS][8]
+- [Android][9]
+- [Flutter][10]
+- [React Native][11]
 
-### プロキシサーバーを経由して RUM イベントを送信する
-すべての RUM イベントを独自の[プロキシサーバー][15]を介して送信することで、エンドユーザーのデバイスが Datadog と直接通信することがないようにすることができます。
+### プロキシサーバー経由で RUM イベントを送信する {#transmit-rum-events-through-a-proxy-server}
+すべての RUM イベントを独自の[プロキシサーバー][12]経由で送信することで、ユーザーのデバイスが Datadog と直接通信しないようにすることができます。
 
-### ユーザーの身元の追跡
-デフォルトでは、**ユーザーの身元を追跡することはありません**。各セッションには一意の `session.id` が紐付けられ、データは匿名化されますが、傾向を把握することは可能です。名前やメールアドレスなどの[ユーザーデータ][6]をキャプチャするコードを書き、そのデータを使って RUM セッションを[充実させたり変更したり][7]するオプションもありますが、これは必須ではありません。
+### ユーザー ID の追跡 {#user-identity-tracking}
+デフォルトでは、**ユーザー ID の追跡は行われません**。各セッションに一意の `session.id` が関連付けられて、データが匿名化されますが、傾向を把握することは可能です。名前やメールアドレスなどの[ユーザーデータ][13]を取得するコードを記述し、そのデータを使用して RUM セッションを[エンリッチおよび変更][13]することもできますが、これは必須ではありません。
 
-### データ保持
-イベントキャプチャを構成した後、イベントは Datadog に保存されます。キャプチャしたイベントやプロパティが Datadog に保存される期間を決めることができます。
+### データ保持 {#data-retention}
+イベントキャプチャを設定すると、イベントが Datadog に保存されます。キャプチャしたイベントやプロパティを Datadog に保持する期間を決定できます。
 
-デフォルトでは、本番環境でのデータ保持は、
+デフォルトでは、本番環境のデータ保持期間は以下のとおりです。
 
-- セッション、ビュー、アクション、エラー、セッションの記録の場合は 30 日間です。
-- リソースやロングタスクの場合は 15 日間です。
+- セッション、ビュー、アクション、エラー、セッション記録は 30 日間。
+- リソースおよびロングタスクは 15 日間。
 
-Retention can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8]. Note that this retention extension does not apply to Session Replays, Resources, or Long Tasks.
+より長期間にわたってユーザーの行動を分析するためにデータ保持期間を延長するには (セッション、ビュー、アクションのみ)、[Product Analytics への参加][20]をリクエストできます。
 
-#### ロールベースのアクセス制御
-Datadog は、キャプチャした RUM データの閲覧者を管理するために、ロールベースのアクセス制御 (RBAC) を提供します。データアクセスのデフォルト設定は、ユーザーが追加されたロールに依存します。Datadog のロールには、3 つのタイプがあります。Administrator ロール、Standard ロール、Read Only ロールです。より詳細な RUM 固有の権限は、[Datadog ロールの権限][10]で定義されています。例えば、セッションリプレイを閲覧するためのアクセス権を付与したり、取り消したりすることができます。
+#### ロールベースのアクセス制御 {#role-based-access-control}
+Datadog は、キャプチャされた RUM データを誰が閲覧できるかを管理するために、ロールベースのアクセス制御 (RBAC) を提供しています。データアクセスのデフォルト設定は、ユーザーが追加されたロールによって異なります。Datadog で利用可能なロールには、Administrator、Standard、Read Only の 3 種類があります。RUM 固有のより詳細な権限は、[Datadog ロールの権限][15]で定義されています。たとえば、Session Replay を表示するためのアクセス権の付与/取り消しを行うことができます。
 
-### データの削除
-If you need to delete data stored by Datadog, for example, if potentially sensitive data has been leaked into RUM events, you can hard-delete data from within a given timeframe. With a hard delete, **all** data is deleted; it cannot be targeted to a specific application. If you need any data deleted, reach out to the [Datadog support team][9].
+### データの削除 {#data-deletion}
+Datadog に保存されているデータを削除する必要がある場合 (たとえば、RUM イベントに機密性の高いデータが漏洩してしまった場合など)、特定の期間内のデータを完全に削除できます。完全削除を行うと、**すべて**のデータが削除されます。特定のアプリケーションを対象にすることはできません。データの削除が必要な場合は、[Datadog サポートチーム][14]までご連絡ください。
 
-### 個人情報・機密情報の削除
-個人を特定できる情報 (PII) や、IP アドレスやジオロケーションなどの機密データを削除するためのオプションがいくつか用意されています。RUM に PII が表示される可能性のあるシナリオをいくつか紹介します。
+### 個人情報および機密データの削除 {#personal-and-sensitive-data-removal}
+個人を特定できる情報 (PII) や機密データ (IP アドレス、地理的位置情報など) を削除するためのオプションがいくつか用意されています。RUM に PII が含まれる可能性があるシナリオの例を以下に示します。
 
-- ボタンのアクション名 (例: "View full credit card number")
+- ボタンのアクション名 (例: "完全なクレジットカード番号を表示")
 - URL に表示される名前
-- アプリの開発者によってインスツルメンテーションされたカスタム追跡イベント
+- アプリの開発者によって計測されたカスタム追跡イベント
 
-#### 非構造化データ
-PII inadvertently included in unstructured data, such as an individual's name in a text box, can only be removed through a data deletion requisition for a specified timeframe.
+#### アクション名をマスクする {#mask-action-names}
+デフォルトでは、すべてのアクション名をマスクするには `enablePrivacyForActionName` オプションを `mask` プライバシー設定と組み合わせて使用できます。この操作により、上書きされていないすべてのアクション名が自動的にプレースホルダー `Masked Element` に置き換えられます。この設定は、既存の [HTML オーバーライド属性][16]と互換性を持つようにも設計されています。
 
-With respect to URLs, you have the option to track page views manually in order to remove any PII or use beforeSend to change the URL text.
+#### 非構造化データ {#unstructured-data}
+非構造化データに誤って含まれてしまった PII (テキストボックス内の個人名など) は、指定された期間のデータ削除リクエストを通じてのみ削除できます。
 
-また、すべての RUM イベントを独自の (プロキシ) サーバーを介して送信することで、エンドユーザーのデバイスが Datadog と直接通信することがないようにすることができます。
+URL に関しては、ページビューを手動で追跡して PII を削除する方法や、beforeSend を使用して URL テキストを変更する方法があります。
 
-#### IP アドレス
-RUM アプリケーションのセットアップ時に、IP またはジオロケーションデータを含めるかどうかを選択することができます。
+また、すべての RUM イベントを独自の (プロキシ) サーバー経由で送信することで、エンドユーザーのデバイスが Datadog と直接通信しないようにすることも可能です。
 
-{{< img src="data_security/data-security-rum-privacy-compliance-edit-rum-application.png" alt="RUM アプリケーションのセットアップページで、ジオロケーションとクライアント IP データを含めるかどうかを選択できます" style="width:100%;" >}}
+#### IP アドレス {#ip-address}
+RUM アプリケーションを初期化した後、[{{< ui >}}User Data Collection{{< /ui >}}] (ユーザーデータの収集) タブから、IP データや位置情報データを含めるかどうかを選択できます。
 
-IP データの収集を無効にすると、その変更はすぐに適用されます。無効にする前に収集されたイベントは、IP データが削除されることはありません。これはバックエンドで実行されるため、Browser SDK は引き続きデータを送信しますが、IP アドレスは Datadog バックエンドパイプラインによって省略され、処理時にドロップされます。
+{{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" alt="RUM アプリケーション管理ページから、位置情報データとクライアント IP データを含めるか除外するかを選択できます。" style="width:100%;" >}}
 
-#### 位置情報
-クライアント IP の削除に加えて、今後収集するすべてのデータから、ジオロケーション (国、都市、郡)、または GeoIP の収集を無効にすることも選択可能です。**Collect geolocation data** ボックスのチェックを外すと、その変更はすぐに適用されます。無効にする前に収集されたイベントは、ジオロケーションデータが削除されることはありません。データの省略はバックエンドレベルで行われます。つまり、Browser SDK は引き続きデータを送信しますが、ジオロケーションデータはバックエンドパイプラインによって省略され、処理時にドロップされます。
+IP データの収集を無効にすると、その変更は直ちに適用されます。無効にする前に収集されたイベントから IP データが削除されることはありません。これはバックエンドで実行されます。つまり、Browser SDK は引き続きデータを送信しますが、IP アドレスは Datadog のバックエンドパイプラインによって省略され、処理時に破棄されます。
 
-### 機密データスキャナーで機密データをプロアクティブに検索する
-[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [**Manage Sensitive Data** page][20].
+#### 位置情報{#geolocation}
+クライアント IP の削除に加えて、今後収集されるすべてのデータからの位置情報 (国、都市、郡) または GeoIP の収集を無効にすることもできます。[{{< ui >}}Collect geolocation data{{< /ui >}}] (位置情報データを収集する) ボックスのチェックを外すと、その変更は直ちに適用されます。無効にする前に収集されたイベントから、対応する位置情報データが削除されることはありません。データの省略はバックエンドレベルで行われます。つまり、Browser SDK は引き続きデータを送信しますが、位置情報データは Datadog のバックエンドパイプラインによって省略され、処理時に破棄されます。
 
-## セッションリプレイ固有のプライバシーオプション
-[セッションリプレイに固有のプライバシーオプション][12]を参照してください。
+### Sensitive Data Scanner を使用して機密データをプロアクティブに検索する{#proactively-search-for-sensitive-data-with-sensitive-data-scanner}
+[Sensitive Data Scanner][17] を使用すると、Datadog への取り込み時に機密データをプロアクティブに検索およびスクラブすることができます。RUM イベントは、Datadog 内にデータが保存される前にストリーム上でスキャンされます。このツールには、PII データを保存する前にスクラブ、ハッシュ化、または部分的に編集する機能があります。これは、すぐに使用できるパターンマッチングルール、またはお客様が作成したパターンマッチングルールを適用することで機能します。この機能を有効にしている場合は、[[{{< ui >}}Manage Sensitive Data{{< /ui >}}] (機密データの管理) ページ][18]で確認できます。
 
-### その他の参考資料
+## Session Replay 固有のプライバシーオプション{#session-replay-specific-privacy-options}
+[Session Replay 固有のプライバシーオプション][19]を参照してください。Session Replay でのマスキングは永続的です。マスクされた値がデバイスから送信されることはなく、後でマスクを解除することもできません。これは [Sensitive Data Scanner のマスキング][21]とは異なります。後者は、取り込み時に一致する値を難読化しますが、`Data Scanner Unmask` 権限を持つユーザーは元の値を表示できます。
+
+### 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
-[2]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
-[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
-[5]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[7]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[8]: /ja/help/
-[9]: /ja/help/
-[10]: /ja/account_management/rbac/permissions/#real-user-monitoring
-[11]: /ja/sensitive_data_scanner/
-[12]: /ja/real_user_monitoring/session_replay/browser/privacy_options
-[13]: https://www.datadoghq.com/privacy/
-[14]: /ja/real_user_monitoring/explorer/search/
-[15]: /ja/real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[16]: /ja/real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
-[17]: /ja/real_user_monitoring/browser/setup/#configuration
-[18]: /ja/account_management/api-app-keys/#add-an-api-key-or-client-token
-[19]: /ja/real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
-[20]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[1]: https://www.datadoghq.com/privacy/
+[2]: /ja/real_user_monitoring/application_monitoring/browser/setup/#configuration
+[3]: /ja/account_management/api-app-keys/#add-an-api-key-or-client-token
+[4]: /ja/real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
+[5]: /ja/real_user_monitoring/explorer/search/
+[6]: /ja/real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[7]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
+[8]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
+[9]: /ja/real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
+[10]: /ja/real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[11]: /ja/real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[12]: /ja/real_user_monitoring/guide/proxy-rum-data/?tab=npm
+[13]: /ja/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[14]: /ja/help/
+[15]: /ja/account_management/rbac/permissions/#real-user-monitoring
+[16]: /ja/session_replay/privacy_options?platform=browser#override-an-html-element
+[17]: /ja/security/sensitive_data_scanner/
+[18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[19]: /ja/session_replay/privacy_options?platform=browser
+[20]: https://www.datadoghq.com/private-beta/product-analytics/
+[21]: /ja/security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action

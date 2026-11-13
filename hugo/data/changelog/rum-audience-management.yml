@@ -1,0 +1,23 @@
+entries:
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41326
+    operations:
+      - CreateConnection
+      - GetAccountFacetInfo
+      - GetUserFacetInfo
+      - ListConnections
+      - UpdateConnection
+    title: Fix rum-audience-management spec drift against service behavior
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41590
+    operations:
+      - DeleteUserProfile
+    title: Add endpoint to delete a Product Analytics user profile
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - DeleteUserProfile
+    title: Add AI Gateway route permissions and safe editing

@@ -4,12 +4,13 @@ description: Control access to individual Datadog resources like dashboards, mon
 ---
 ## Manage access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, [Teams][1], or users.
+Some resources allow you to restrict access to individual resources by roles, [Teams][1], users, or agents.
 
 Use the different principals to control access patterns in your organization and encourage knowledge sharing and collaboration:
 - Use Teams to map access to functional groups in your organizations. For example, restrict editing of a dashboard to the application team that owns it.
 - Use roles to map access to personas. For example, restrict editing of payment methods to billing administrators.
 - Allocate access to individual users only when necessary.
+- Grant access to an agent when it needs to read or edit a restricted resource. For example, give a Bits AI agent edit access to a restricted monitor.
 
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
@@ -20,10 +21,11 @@ Use the different principals to control access patterns in your organization and
 | [Work Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Critical Assets][26]                            | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Dynamic Severity][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -42,9 +44,12 @@ Use the different principals to control access patterns in your organization and
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
+
+**Note:** Supported Bits AI agents can be granted access to these resources in the same way as users and service accounts. In the access modal, agents are listed under {{< ui >}}Agents and Automated Processes{{< /ui >}}.
 
 ### Elevate access to individual resources
 
@@ -75,4 +80,6 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [23]: /observability_pipelines/configuration/access_control/
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
-[26]: /security/cloud_siem/detect_and_monitor/critical_assets/#restrict-edit-permissions
+[26]: /security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
+[27]: /experiments/
+[28]: /incident_response/status_pages/#granular-access-control

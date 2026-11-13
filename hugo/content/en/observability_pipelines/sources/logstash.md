@@ -1,5 +1,6 @@
 ---
 title: Logstash Source
+description: Learn how to collect logs from a Logstash agent using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

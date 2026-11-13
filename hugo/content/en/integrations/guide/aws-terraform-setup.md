@@ -5,6 +5,9 @@ aliases:
     - /integrations/faq/aws-integration-with-terraform/
 disable_toc: true
 further_reading:
+- link: "https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/"
+  tag: "Architecture Center"
+  text: "A Guide to Integrating 100+ AWS Accounts with Datadog"
 - link: "https://www.datadoghq.com/blog/managing-datadog-with-terraform/"
   tag: "Blog"
   text: "Managing Datadog with Terraform"

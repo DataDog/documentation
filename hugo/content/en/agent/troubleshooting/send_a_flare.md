@@ -114,7 +114,14 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 ## ECS Fargate
 
-When using ECS Fargate platform v1.4.0, ECS tasks and services can be configured to allow access to running Linux containers by enabling [Amazon ECS Exec][5]. After enabling Amazon ECS exec, run the following command to send a flare:
+For ECS Fargate, Datadog recommends [sending a flare from the Datadog site](#send-a-flare-from-the-datadog-site). In Fleet Automation, identify your task by its Task ARN. This process does not require any changes to your ECS Task or Service.
+
+Alternatively, if Remote Configuration is not available or you need to run other Agent commands, use [Amazon ECS Exec][5]. ECS Fargate platform v1.4.0. To use it:
+
+1. Add the ECS Exec permissions to the task definition.
+2. Enable ECS Exec on the service.
+3. Redeploy the task.
+4. Run the following command to send a flare:
 
 ```bash
 aws ecs execute-command --cluster <CLUSTER_NAME> \
@@ -123,8 +130,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
     --interactive \
     --command "agent flare <CASE_ID>"
 ```
-
-**Note:** ECS Exec can only be enabled for new tasks. You must recreate existing tasks to use ECS Exec.
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6

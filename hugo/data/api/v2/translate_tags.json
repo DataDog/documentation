@@ -1,4 +1,12 @@
 {
+  "ai-gateway": {
+    "name": "AI Gateway",
+    "description": "AI Gateway routes your applications' LLM requests to the model providers you connect, and\napplies your organization's routing, access, spending, rate limit, and data capture rules.\n\nThese endpoints allow you to configure:\n\n- Providers: the model providers your organization connects, and the models and pricing each offers.\n- Routing rules: the named routes your applications call, and the models that serve each one.\n- Access: inbound routing policies and model groups that decide who can use which models.\n- Budgets and rate limits: spending caps and request limits, and their current usage.\n- Data capture and governance: what request data is recorded, and organization-wide controls."
+  },
+  "ai-guard": {
+    "name": "AI Guard",
+    "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
@@ -25,11 +33,15 @@
   },
   "action-connection": {
     "name": "Action Connection",
-    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
+    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nTo authenticate with your own GitHub App or personal access token, create a GitHub connection.\n\nWe offer granular access control for editing and resolving connections."
   },
   "actions-datastores": {
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
+  },
+  "agent-health": {
+    "name": "Agent Health",
+    "description": "List open Agent Health issues across your organization and get an issue with its available remediation. Issues are reported by node Agents, Cluster Agents, and OpenTelemetry collectors. The meaning of `resource_id` depends on `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`."
   },
   "agent-observability": {
     "name": "Agent Observability",
@@ -63,9 +75,17 @@
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
   },
+  "bits-security-analyst": {
+    "name": "Bits Security Analyst",
+    "description": "Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an\ninvestigation's verdict and findings, and count investigations."
+  },
   "ci-visibility-github-accounts": {
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
+  },
+  "ci-visibility-logs": {
+    "name": "CI Visibility Logs",
+    "description": "Send CI job logs over HTTP for CI Visibility."
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
@@ -96,16 +116,16 @@
     "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
-    "name": "Case Management",
-    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
+    "name": "Work Management",
+    "description": "View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
-    "name": "Case Management Attribute",
-    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Attribute",
+    "description": "View and configure custom attributes within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "case-management-type": {
-    "name": "Case Management Type",
-    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Type",
+    "description": "View and configure work item types within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "change-management": {
     "name": "Change Management",
@@ -113,7 +133,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
@@ -145,7 +165,7 @@
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+    "description": "The Containers API allows you to query container data for your organization.\nSee the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
   "customer-org": {
     "name": "Customer Org",
@@ -155,9 +175,9 @@
     "name": "DDSQL",
     "description": "Execute DDSQL queries against the Datadog data catalog and poll for their results.\nQueries are dispatched asynchronously: the initial request may return a `running` state with\na `query_id`, and clients poll the fetch endpoint until the response transitions to\n`completed` with a column-major result set."
   },
-  "dora-metrics": {
-    "name": "DORA Metrics",
-    "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
+  "dem": {
+    "name": "DEM",
+    "description": "Manage Digital Experience Monitoring journeys."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -183,9 +203,17 @@
     "name": "Data Observability",
     "description": "Manage and run data observability monitors."
   },
+  "databricks-integration": {
+    "name": "Databricks Integration",
+    "description": "Manage your Datadog Databricks integration accounts and account resources directly\nthrough the Datadog API. See the\n[Databricks integration page](https://docs.datadoghq.com/integrations/databricks/) for\nmore information."
+  },
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+  },
+  "delivery-performance": {
+    "name": "Delivery Performance",
+    "description": "Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/delivery_performance/) for more information.\n\n**Note**: Delivery Performance is not available in the US1-FED site."
   },
   "deployment-gates": {
     "name": "Deployment Gates",
@@ -198,6 +226,14 @@
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
+  "elastic-cloud-integration": {
+    "name": "Elastic Cloud Integration",
+    "description": "Manage your Datadog Elastic Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for\nmore information."
+  },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
   },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
@@ -217,7 +253,11 @@
   },
   "execution-policy": {
     "name": "Execution Policy",
-    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nand where. Each policy pairs an effect (allow or deny) with a pattern of actions,\nand can scope that decision to specific resources."
+  },
+  "experiments": {
+    "name": "Experiments",
+    "description": "Create and manage experiments, metrics, subject types, SQL models, and protocols."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
@@ -279,6 +319,10 @@
     "name": "Logs",
     "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
+  "logs-archive-searches": {
+    "name": "Logs Archive Searches",
+    "description": "Archive Search queries logs directly from long-term storage archives without prior\nrehydration and charges only for the data scanned.\n\nA search runs in one of two modes. By default, it scans the archive and retains up to\n100,000 matching logs for 24 hours on a dedicated results page. Include a `rehydration`\nobject to run a Search & Rehydration instead, which retains the matches for a longer\ncustom retention period and makes them available beyond Log Explorer, such as in Dashboards and Notebooks.\n\nA search requires the `logs_write_historical_view` or `logs_write_archive_search`\npermission. Rehydration requires `logs_write_historical_view`."
+  },
   "logs-archives": {
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
@@ -314,10 +358,6 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
-  },
-  "network-health-insights": {
-    "name": "Network Health Insights",
-    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
@@ -375,6 +415,10 @@
     "name": "Product Analytics",
     "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\n\n**Note**: Sending server-side events impacts billing. Review the [pricing page](https://www.datadoghq.com/pricing/?product=product-analytics#products)\nand contact your Customer Success Manager for more information."
   },
+  "product-catalog": {
+    "name": "Product Catalog",
+    "description": "Look up the Datadog SKUs that are generally available, together with the public list\nprices, allotments, and tiered pricing that apply to them on a given date."
+  },
   "rum": {
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
@@ -387,16 +431,24 @@
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-managed-archives": {
+    "name": "RUM Managed Archives",
+    "description": "Configure Managed Archives for RUM applications. Your organization must have Managed Archives enabled.\n\nRequires `rum_rehydration_filter_read` to list or get configurations, or `rum_rehydration_filter_write` to create, update, or delete them."
+  },
   "rum-operations": {
     "name": "RUM Operations",
-    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their strong links\nto features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+  },
+  "rum-recovery": {
+    "name": "RUM Recovery",
+    "description": "Search archived RUM sessions and recover individual sessions or query-based batches. Your organization must have Managed Archives enabled. Creating, counting, listing, and canceling batches also require batch recovery enablement.\n\nRequires `rum_rehydration_filter_read` for search and request details, or `rum_rehydration_index` to create, estimate recoverable sessions, list batches, or cancel recovery requests."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",
     "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
   },
-  "rum-retention-quota": {
-    "name": "RUM Retention Quota",
+  "rum-retention-quotas": {
+    "name": "RUM Retention Quotas",
     "description": "Manage RUM retention quota configurations for your organization's RUM applications."
   },
   "reference-tables": {
@@ -424,36 +476,36 @@
     "description": "Auto-generated tag Rum Audience Management"
   },
   "rum-metrics": {
-    "name": "Rum Metrics",
+    "name": "RUM Metrics",
     "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "rum-replay-heatmaps": {
-    "name": "Rum Replay Heatmaps",
+    "name": "RUM Replay Heatmaps",
     "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
   },
   "rum-replay-playlists": {
-    "name": "Rum Replay Playlists",
+    "name": "RUM Replay Playlists",
     "description": "Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration."
   },
   "rum-replay-sessions": {
-    "name": "Rum Replay Sessions",
-    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+    "name": "RUM Replay Sessions",
+    "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
-    "name": "Rum Replay Viewership",
+    "name": "RUM Replay Viewership",
     "description": "Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes."
   },
   "rum-retention-filters": {
-    "name": "Rum Retention Filters",
+    "name": "RUM Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
+  },
+  "rum-teams-ownership": {
+    "name": "Rum Teams Ownership",
+    "description": "Manage teams ownership mappings between RUM views and the teams that own them.\nSee <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>."
   },
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
-  },
-  "salesforce-integration": {
-    "name": "Salesforce Integration",
-    "description": "Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)\ndirectly through the Datadog API."
   },
   "scorecards": {
     "name": "Scorecards",
@@ -491,13 +543,13 @@
     "name": "Slack Integration",
     "description": "Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)\ndirectly through the Datadog API."
   },
+  "snowflake-integration": {
+    "name": "Snowflake Integration",
+    "description": "Manage your Datadog Snowflake integration accounts\ndirectly through the Datadog API. See the\n[Snowflake integration page](https://docs.datadoghq.com/integrations/snowflake_web/) for\nmore information."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
-  },
-  "spa": {
-    "name": "Spa",
-    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",
@@ -531,17 +583,33 @@
     "name": "Synthetics",
     "description": "Synthetic tests use simulated requests and actions so you can monitor the availability and performance of systems and applications. Datadog supports the following types of synthetic tests:\n- [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\n- [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)\nYou can use the Datadog API to create, manage, and organize tests and test suites programmatically.\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
-  "tag-policies": {
-    "name": "Tag Policies",
-    "description": "Tag Policies define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Policies can be\n`blocking` (data not matching the policy is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each policy reports a compliance `score` derived from how\nmuch recent telemetry adheres to the policy."
+  "tag-rules": {
+    "name": "Tag Rules",
+    "description": "Tag Rules define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be\n`blocking` (data not matching the rule is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each rule reports a compliance `score` derived from how\nmuch recent telemetry adheres to the rule."
   },
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
   },
+  "temporal-cloud-openmetrics-integration": {
+    "name": "Temporal Cloud OpenMetrics Integration",
+    "description": "Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources\ndirectly through the Datadog API. See the\n[Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for\nmore information."
+  },
   "test-optimization": {
     "name": "Test Optimization",
     "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."
+  },
+  "threat-intelligence": {
+    "name": "Threat Intelligence",
+    "description": "Ingest and manage threat intelligence data for security enrichment and investigation."
+  },
+  "timeseries-anomaly-investigations": {
+    "name": "Timeseries Anomaly Investigations",
+    "description": "Investigate metrics timeseries anomalies and return deterministic findings."
+  },
+  "twilio-integration": {
+    "name": "Twilio Integration",
+    "description": "Manage your Datadog Twilio integration accounts and account resources directly\nthrough the Datadog API. See the\n[Twilio integration page](https://docs.datadoghq.com/integrations/twilio/) for\nmore information."
   },
   "usage-metering": {
     "name": "Usage Metering",

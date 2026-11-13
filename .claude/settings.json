@@ -3,8 +3,9 @@
     "datadog-claude-plugins": {
       "source": {
         "source": "github",
-        "repo": "DataDog/claude-marketplace"
-      }
+        "repo": "ddoghq/claude-marketplace"
+      },
+      "autoUpdate": true
     }
   },
   "enabledPlugins": {

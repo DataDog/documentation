@@ -93,7 +93,7 @@ To update the severity level and root cause:
     From Slack, you can also update the title, severity, or status of an ongoing issue using the `/datadog incident update` command.
 
 To add the customer impact:
-1. Click {{< ui >}}+ Add{{< /ui >}} in the {{< ui >}}Impact{{< /ui >}} section.
+1. Click {{< ui >}}\+ Add{{< /ui >}} in the {{< ui >}}Impact{{< /ui >}} section.
 2. Change the timestamp to 15 minutes earlier, because that was when the first customer report came in.
 3. Add to descriptions field: `TEST: Some customers seeing pages loading slowly.`
 4. Click {{< ui >}}Save{{< /ui >}} to update the fields. The {{< ui >}}Impact{{< /ui >}} section updates to show how long the customer impact has been going on. All changes made on the {{< ui >}}Overview{{< /ui >}} page are added to the {{< ui >}}Timeline{{< /ui >}}.

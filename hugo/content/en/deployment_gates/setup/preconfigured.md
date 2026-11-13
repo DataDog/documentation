@@ -2,24 +2,17 @@
 title: Set Up Preconfigured Deployment Gates
 description: "Create gates and rules in Datadog in advance, then reference them by service and environment at deployment time."
 further_reading:
-- link: "/deployment_gates/setup/jit"
+- link: "/deployment_gates/setup/inline"
   tag: "Documentation"
-  text: "Set up Just-In-Time (JIT) Deployment Gates"
-- link: "/deployment_gates/explore"
-  tag: "Documentation"
-  text: "Learn about the Deployment Gates explorer"
+  text: "Set up inline Deployment Gates"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
-Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].
+Looking to define rules in your deployment configuration? See [Inline Deployment Gates][5].
 
 ## Create a gate
 
@@ -51,19 +44,21 @@ For the full schema and all available options, see the [Deployment Gates API ref
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
+The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either a search query or an explicit list of monitors. These selection methods are mutually exclusive. The rule can fail if at any time during the evaluation period:
 
-- No monitors match the query.
-- More than 50 monitors match the query.
-- Any matching monitor is in `ALERT` or `NO_DATA` state.
+- No monitor groups match the configured selection.
+- An explicit monitor ID does not exist or is unavailable to your organization.
+- More than 300 monitors match the configured selection.
+- Any matching monitor group is in `ALERT` or `NO_DATA` state.
 
 ##### Configuration settings
 
-- {{< ui >}}Search Query{{< /ui >}}: The query used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Filter on monitor tags:
+- {{< ui >}}Monitors matching query{{< /ui >}}: Enter a query based on the [Search Monitor syntax][1]. Filter on monitor tags:
   - Monitor static tags: `service:transaction-backend`
   - Tags within the monitor's query: `scope:"service:transaction-backend"`
   - Tags within a [monitor grouping][2]: `group:"service:transaction-backend"`
-- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the matching monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
+- {{< ui >}}Specific monitors{{< /ui >}}: Select individual monitors and, optionally, the exact groups to evaluate for each monitor. When no groups are selected, all groups for that monitor are evaluated.
+- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the selected monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
 
 ##### Example queries
 
@@ -72,15 +67,30 @@ The Monitor rule evaluates the state of a set of monitors over a configurable pe
 - `tag:"use_deployment_gates" team:payment`
 - `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
+##### Specific monitors API example
+
+```json
+"options": {
+  "monitor_ids": [
+    {"id": "12345678", "groups": []},
+    {"id": "87654321", "groups": ["service:api", "env:prod"]}
+  ],
+  "duration": 300
+}
+```
+
+Each `id` is a decimal monitor ID. Group values are exact group names. Do not send `query` with `monitor_ids`.
+
 **Notes**:
-- `group` filters evaluate only matching groups.
-- Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
+- `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
+- An explicit monitor ID that does not exist or is unavailable to your organization causes the rule to fail. If the monitor exists but is excluded because it is muted or its selected groups have no data, the rule applies the no-matching-groups behavior.
+- Muted monitors are automatically excluded from both selection modes.
 
 [1]: /monitors/manage/search/
 [2]: /monitors/manage/#triggered-monitors
 {{% /tab %}}
-{{% tab "APM Faulty Deployment Detection" %}}
-This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
+{{% tab "Watchdog Faulty Deployment Detection" %}}
+This rule type uses [Watchdog Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
 
 - New types of errors.
 - Significant increases in error rates compared to previous versions.
@@ -91,8 +101,8 @@ The analysis is automatically performed for all APM-instrumented services, and n
 
 - {{< ui >}}Operation Name{{< /ui >}}: Auto-populated from the service's [APM primary operation][3] settings.
 - {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- {{< ui >}}Included Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed.
-- {{< ui >}}Excluded Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+- {{< ui >}}Allowed Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed. Mutually exclusive with {{< ui >}}Excluded Resources{{< /ui >}}.
+- {{< ui >}}Excluded Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints). Mutually exclusive with {{< ui >}}Allowed Resources{{< /ui >}}.
 
 **Notes**:
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. To consider only a single primary tag, specify it when [requesting a gate evaluation](#evaluate-a-gate-from-your-pipeline).
@@ -118,7 +128,7 @@ The [datadog-ci][1] `deployment gate` command runs the evaluation in a single co
 datadog-ci deployment gate --service transaction-backend --env staging --identifier default
 ```
 
-If the Deployment Gate contains APM Faulty Deployment Detection rules, also specify the version (for example, `--version 1.0.1`).
+If the Deployment Gate contains Watchdog Faulty Deployment Detection rules, also specify the version (for example, `--version 1.0.1`).
 
 The command:
 
@@ -226,7 +236,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Required for APM Faulty Deployment Detection rules
+              - name: version # Required for Watchdog Faulty Deployment Detection rules
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -277,7 +287,7 @@ jobs:
           # Your deployment commands here
 ```
 
-If the Deployment Gate contains APM Faulty Deployment Detection rules, also specify the version (for example, `version: 1.0.1`).
+If the Deployment Gate contains Watchdog Faulty Deployment Detection rules, also specify the version (for example, `version: 1.0.1`).
 
 The action:
 
@@ -426,7 +436,7 @@ done
 
 The script:
 
-- Receives three inputs: `service`, `environment`, and `version`. `version` is required if the gate has APM Faulty Deployment Detection rules. You can also add `identifier` and `primary_tag` if needed.
+- Receives three inputs: `service`, `environment`, and `version`. `version` is required if the gate has Watchdog Faulty Deployment Detection rules. You can also add `identifier` and `primary_tag` if needed.
 - Sends a request to start the evaluation and records the `evaluation_id`. Handles HTTP response codes:
   - 5xx: server error, retries with delay.
   - 4xx: client error, evaluation fails.
@@ -485,8 +495,8 @@ EOF
 Optional attributes:
 
 - `identifier`: Optional, defaults to `default`.
-- `version`: Required for APM Faulty Deployment Detection rules.
-- `primary_tag`: Optional, scopes down APM Faulty Deployment Detection analysis to the selected primary tag.
+- `version`: Required for Watchdog Faulty Deployment Detection rules.
+- `primary_tag`: Optional, scopes down Watchdog Faulty Deployment Detection analysis to the selected primary tag.
 
 **Note**: A 404 HTTP response can mean the gate was not found, or the gate was found but has no rules.
 
@@ -574,6 +584,6 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /api/latest/deployment-gates
-[5]: /deployment_gates/setup/jit
+[5]: /deployment_gates/setup/inline
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
 [7]: https://app.datadoghq.com/ci/deployment-gates/evaluations

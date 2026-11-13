@@ -1,4 +1,4 @@
 ---
-title: Case Management
+title: Work Management
 headless: true
 ---

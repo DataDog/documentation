@@ -28,6 +28,7 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
 
 ## Prerequisites
 
+- A Windows private location (managed locations do not support Kerberos authentication).
 - A Windows site with Kerberos authentication integrated with Active Directory (usually hosted on IIS).
 - A Windows server that is domain-joined to the Active Directory.
 - A domain user account with Active Directory authentication access to the Windows site.
@@ -39,13 +40,11 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
 2. Set up the [Synthetic Monitoring private location worker][3] to run as a Windows service.
 3. Configure the private location service to use your Active Directory domain account credentials:
    - Open `services.msc`, navigate to {{< ui >}}Datadog Synthetics Worker{{< /ui >}} > {{< ui >}}Properties{{< /ui >}} > {{< ui >}}log on{{< /ui >}} > {{< ui >}}this account{{< /ui >}}, and enter your domain account credentials.
-4. Configure your tests to run from the Windows private location (managed locations do not support Kerberos authentication).
+4. Configure your tests:
+   - **Browser Tests**: Record your test from a browser session running directly on a domain-joined Windows host. For example, connect to your Windows private location using Remote Desktop Protocol (RDP) and record from there. Recording from a machine outside the Active Directory domain sends requests over the public internet without any Kerberos credentials attached, causing a login prompt.
+   - **API Tests**: Set the {{< ui >}}Domain{{< /ui >}} field under the {{< ui >}}Kerberos{{< /ui >}} tab to the full Service Principal Name (SPN) of the target service. For example, `HTTP/targetsite.yourdomain.com`, or `HTTP/targetsite.yourdomain.com:port` if the site is registered with a non-default port.
 
-<p style="text-align: center;"><em>No further configuration is necessary for Browser Tests.</em></p>
-
-5. Optionally, for API tests, you must also set the {{< ui >}}Domain{{< /ui >}} field to your Active Directory domain name under the {{< ui >}}Kerberos{{< /ui >}} tab. Navigate to {{< ui >}}Create/Edit API Test{{< /ui >}} > {{< ui >}}Define Request{{< /ui >}} > {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Authentication{{< /ui >}}.
-
-   {{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
+{{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
 
 ## Further Reading
 

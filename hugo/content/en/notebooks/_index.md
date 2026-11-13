@@ -164,7 +164,7 @@ To comment on a graph or an image, click on the comment icon to the right of the
 | **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking {{< ui >}}Resolve{{< /ui >}}. |
 | **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
 | **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
-| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the cog menu, select {{< ui >}}Notifications{{< /ui >}}. |
+| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>), select {{< ui >}}Notifications{{< /ui >}}. |
 
 ## Multiplayer experience in Notebooks
 
@@ -189,6 +189,8 @@ At the top of the notebook, you can see avatar images of all of the users curren
 ### Template variables
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
+
+A template variable whose tag key is `team` renders as the team filter, with hierarchy-aware selection and a combined list of Datadog Teams and `team` tag values. For more information, see [Team filter][9].
 
 <div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
 
@@ -219,7 +221,7 @@ You can switch between modes from within the notebook by selecting the dropdown 
 
 ### Version history
 
-From a notebook, click the cog icon and click {{< ui >}}Version history{{< /ui >}} to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
+From a notebook, click the version history icon (<i class="icon-clock-historical-wui"></i>) to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
 
 ### Graph snapshots
 
@@ -259,6 +261,12 @@ You must have edit access to restore general access to a restricted notebook. Co
 1. While viewing a notebook, click the {{< ui >}}Share{{< /ui >}} button in the upper right.
 1. Select {{< ui >}}My Org{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
+
+## Downloading a notebook
+
+To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>) in the upper right of the notebook. Then, select a {{< ui >}}Download as PDF{{< /ui >}} option. All graphs in the notebook must finish loading before you can download it.
+
+**Note**: PDF export is available only in the Datadog UI, for one notebook at a time. There is no API for exporting notebooks to PDF.
 
 ## Finding notebooks
 
@@ -305,3 +313,4 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 [6]: /notebooks/guide/version_history
 [7]: /account_management/rbac/
 [8]: /incident_response/incident_management/post_incident/postmortems
+[9]: /dashboards/template_variables/#team-filter

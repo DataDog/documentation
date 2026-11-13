@@ -1,69 +1,71 @@
 ---
 aliases:
 - /es/graphing/widgets/table/
-description: Visualiza datos tabulares con columnas, filas y funciones de clasificación
+description: Muestre datos tabulares con columnas, filas y capacidades de ordenamiento
   para un análisis detallado de métricas y eventos.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
-  text: Creación de dashboards con JSON
+  text: Creación de tableros mediante JSON
 - link: /dashboards/querying/
   tag: Documentación
-  text: Aprenda a crear una consulta para crear gráficas
+  text: Aprenda a crear una consulta de gráficos
+- link: https://learn.datadoghq.com/courses/discovering-table-list-widgets
+  tag: Centro de aprendizaje
+  text: Descubrimiento de widgets de Table, listar, SLO y Architecture
 title: Widget de tabla
 widget_type: query_table
 ---
+## Descripción general {#overview}
 
-## Información general
-
-La visualización de tablas muestra columnas de datos agregados agrupados por clave de etiqueta (tag). Utiliza las tablas para comparar valores entre muchos grupos de datos y ver tendencias, cambios y outliers.
+La visualización de tabla muestra columnas de datos agregados agrupados por clave de etiqueta. Use tablas para comparar valores entre muchos grupos de datos y ver tendencias, cambios y valores atípicos.
 
 {{< img src="/dashboards/widgets/table/table_conditional_formatting.png" alt="Widget de tabla con formato condicional" style="width:100%;">}}
 
-## Configuración
+## Configuración {#setup}
 
-### Configuración
+### Configuración {#configuration}
 
-1. Elige los datos para los que crear gráficas:
-    * Métrica: consulta la [Documentación principal de crear gráficas][1] para configurar una consulta a la métrica.
-    * Fuentes de datos no métrica: consulta la [Documentación de búsqueda de log][2] para configurar una consulta de evento.
+1. Elija los datos para graficar:
+    * Métrica: Consulte la [documentación principal de gráficos][1] para configurar una consulta de métrica.
+    * Fuentes de datos no métricas: Consulte la [documentación de búsqueda de registros][2] para configurar una consulta de evento.
 
-2. Añade columnas adicionales a la tabla utilizando los botones **+ Add Query** (+ Añadir consulta) y **+ Add Formula** (+ Añadir fórmula).
+2. Agregue columnas adicionales a la tabla usando los botones {{< ui >}}\+ Add Query{{< /ui >}} y {{< ui >}}\+ Add Formula{{< /ui >}}.
 
-### Opciones
+### Opciones {#options}
 
-* Cambia el nombre de los encabezados de columna al establecer alias, haz clic en el botón **as...** (como...).
-* Configura si se muestra o no la barra de búsqueda. **Auto** es el valor predeterminado y muestra la barra de búsqueda según el tamaño del widget, esto significa que si tu pantalla se hace demasiado pequeña, prioriza la visualización de los datos en el widget y oculta la barra de búsqueda, pero sigue estando disponible en el modo de pantalla completa.
+* Cambie el nombre de los encabezados de columna estableciendo alias, haga clic en el botón {{< ui >}}as...{{< /ui >}}.
+* Configure si se muestra o no la barra de búsqueda. {{< ui >}}Auto{{< /ui >}} es el valor predeterminado y muestra la barra de búsqueda dependiendo del tamaño del widget; esto significa que si su pantalla se vuelve demasiado pequeña, prioriza mostrar los datos en el widget y oculta la barra de búsqueda, pero sigue estando disponible en modo de pantalla completa.
 
-#### Formato de columnas
+#### Formato de columna {#column-formatting}
 
-Personaliza la visualización de los valores de las celdas de cada columna con las Reglas de formato de columna. Crea códigos de color para tus datos para visualizar tendencias y cambios.
-* Formato de umbral: resalta las celdas con colores cuando se cumplan determinados rangos de valores.
-* Formato de rango: codifica por colores las celdas con un rango de valores.
-* Formato de texto: sustituye las celdas por valores de texto de alias para mejorar la legibilidad.
-* Información de tendencias: visualiza las consultas de métricas y eventos.
+Personalice la visualización de los valores de las celdas para cada columna con Reglas de formato de columna. Cree códigos de color para sus datos a fin de visualizar tendencias y cambios.
+* Formato de umbral: resalte las celdas con colores cuando se cumplan rangos de valores específicos.
+* Formato de rango: codifique con colores las celdas con un rango de valores.
+* Formato de texto: reemplace las celdas con valores de texto de alias para mejorar la legibilidad.
+* Información de tendencias: visualice consultas de métricas y eventos.
 
-{{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Widget de tabla que muestra el formato condicional con indicadores de tendencia" style="width:100%;" >}}
+{{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Widget de tabla que muestra formato condicional con indicadores de tendencia" style="width:100%;" >}}
 
-#### Enlaces contextuales
+#### Enlaces de contexto {#context-links}
 
-Los [enlaces contextuales][10] están activados por defecto y pueden activarse o desactivarse. Los enlaces contextuales sirven de puente entre widgets de dashboard con otras páginas de Datadog, o con aplicaciones de terceros.
+Los [enlaces de contexto][10] están habilitados de forma predeterminada y se pueden activar o desactivar. Los enlaces de contexto conectan los widgets del dashboard con otras páginas en Datadog o aplicaciones de terceros.
 
-## Valores N/A
+## Valores N/A {#na-values}
 
-Las columnas del widget de tabla se consultan independientemente unas de otras. Los grupos solapados con nombres coincidentes se unen en tiempo real para formar las filas de la tabla. Como resultado de dicho proceso, puede haber situaciones sin solapamiento total, por lo que se muestran celdas N/A. Para mitigar esto:
-  * Amplía el límite de consultas a números más altos, para maximizar el solapamiento entre columnas.
-  * Ordena las tablas según la columna que consideres que "impulsa" la información.
+Las columnas en el widget de tabla se consultan independientemente unas de otras. Los grupos superpuestos con nombres coincidentes se unen en tiempo real para formar las filas de la tabla. Como resultado de ese proceso, puede haber situaciones sin superposición total, lo que muestra celdas N/A. Para mitigar esto:
+  * Amplíe el límite de consultas a números más altos para maximizar la superposición entre columnas
+  * Ordene las tablas según la columna que considere que "impulsa" la información
 
-## API
+## API {#api}
 
-Este widget se puede utilizar con la **API de dashboards**. Consulta la [Documentación de la API de dashboards][8] para obtener referencias adicionales.
+Este widget se puede utilizar con **Dashboards API**. Consulte la [documentación de Dashboards API][8] para obtener información adicional.
 
-La [definición del esquema de widget JSON][9] dedicada al widget de la tabla es:
+La [definición del esquema JSON del widget][9] dedicada para el widget de tabla es:
 
 {{< dashboards-widgets-api >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

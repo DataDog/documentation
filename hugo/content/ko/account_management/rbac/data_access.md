@@ -9,7 +9,7 @@ title: Data Access Control
 ---
 ## 개요 {#overview}
 
-Datadog의 데이터에는 민감한 정보가 포함될 수 있으므로 주의해서 다루어야 합니다. 민감한 데이터를 Datadog으로 수집하는 경우, Data Access Control을 통해 Datadog 조직 내의 관리자와 액세스 관리자가 이 데이터에 대한 액세스를 제어할 수 있습니다. Data Access Control을 사용하여 쿼리로 민감한 데이터를 식별하고 특정 [팀][1] 또는 [역할][2]에만 액세스를 허용할 수 있습니다.
+Datadog의 데이터에는 민감한 정보가 포함될 수 있으므로 주의해서 다루어야 합니다. 민감한 데이터를 Datadog으로 수집하는 경우, Data Access Control을 통해 Datadog 조직 내의 관리자와 액세스 관리자가 이 데이터에 대한 액세스를 제어할 수 있습니다. Data Access Control을 사용하여 쿼리로 민감한 데이터를 식별하고 특정 [Teams][1] 또는 [역할][2]에만 액세스를 허용할 수 있습니다.
 
 _Restricted Dataset_를 정의하면 해당 데이터 세트 경계 내의 모든 데이터에 대한 액세스가 제한됩니다. Restricted Dataset 외부의 데이터는 액세스가 제한되지 않으며 적절한 권한이 있는 사용자만 액세스할 수 있습니다. Data Access Control은 액세스 관리자가 데이터 세트에 포함된 민감한 데이터에 대해 허용된 사용자에게만 액세스 권한을 부여할 수 있는 직관적인 인터페이스를 제공합니다.
 
@@ -25,27 +25,27 @@ Data Access Control은 액세스 경계를 정의하는 데 사용할 수 있는
 
 ## 데이터 액세스 구성 {#configure-data-access}
 
-Data Access Control를 사용하면 지정된 팀 또는 역할의 사용자만 액세스할 수 있는 데이터를 지정하여 Restricted Dataset를 만들 수 있습니다.
+Data Access Control을 사용하면 지정된 팀 또는 역할의 사용자만 액세스할 수 있는 데이터를 지정하여 Restricted Dataset를 만들 수 있습니다.
 
-Restricted Dataset를 모두 보려면 [조직 설정][6]으로 이동하여 왼쪽의 {{< ui >}}Access{{< /ui >}} 제목 아래에서 [Data Access Control][7]를 선택합니다.
+Restricted Dataset를 모두 보려면 [조직 설정][6]으로 이동하여 왼쪽의 {{< ui >}}Access{{< /ui >}} 제목 아래에서 [Data Access Controls][7]를 선택합니다.
 
 ### Datadog 사이트 {#datadog-site}
 
 Datadog Admin 역할이 할당된 사용자 또는 조직 내에서 [`user_access_manage` 권한][5]을 지닌 역할의 사용자로 로그인합니다.
 
 1. [조직 설정][6]으로 이동합니다.
-1. 페이지 왼쪽에서 [Data Access Control][7]를 선택합니다.
+1. 페이지 왼쪽에서 [Data Access Controls][7]를 선택합니다.
 1. {{< ui >}}New Restricted Dataset{{< /ui >}}를 클릭합니다.
 
 Restricted Dataset를 만들려면 쿼리를 통해 제한할 데이터를 식별합니다.
 
 {{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Restricted Dataset 생성 대화 상자. service:hr 태그와 일치하는 RUM, APM, 로그 및 메트릭의 데이터를 선택합니다. Privileged access 팀에 대한 액세스 권한을 부여합니다.">}}
 
-이름 데이터 세트
+데이터 세트 이름 지정
 : 사용자가 데이터 세트에 어떤 데이터가 포함되어 있는지 알기 쉽게 나타내는 이름입니다.
 
 이 데이터 세트에 포함할 데이터 선택
-: 특정 사용자 세트로 제한할 데이터를 설명하는 경계 정의입니다. 경계는 액세스 관리자가 보호할 민감한 데이터의 범위를 정의할 수 있도록 제한 사항이 포함된 쿼리 문입니다. [지원되는 텔레메트리 유형][10]은 사용자 지정 메트릭, RUM 세션, APM 트레이스, 로그, 클라우드 비용, 오류 추적 이슈, Software Delivery 리포지토리 정보(CI Visibility pipelines) 및 Workload Protection Agent 이벤트입니다.
+: 특정 사용자 세트로 제한할 데이터를 설명하는 경계 정의입니다. 경계는 액세스 관리자가 보호할 민감한 데이터의 범위를 정의할 수 있도록 제한 사항이 포함된 쿼리 문입니다. [지원되는 텔레메트리 유형][10]은 사용자 지정 메트릭, RUM 세션, APM 트레이스, 로그, 클라우드 비용, Error Tracking 이슈, Software Delivery 리포지토리 정보(CI Visibility pipelines), Workload Protection Agent 이벤트 및 보안 신호(Cloud SIEM 신호만 해당)입니다.
 
 액세스 권한 부여
 : Restricted Dataset에 바인딩된 콘텐츠에 액세스할 수 있는 하나 이상의 팀 또는 역할을 선택하세요. 이 그룹의 구성원이 아닌 사용자는 이 데이터에 액세스할 수 없습니다.
@@ -66,12 +66,17 @@ Enterprise 플랜에서는 최대 100개의 Restricted Dataset를 생성할 수 
 - Error Tracking 이슈
 - 로그
 - RUM 세션
+- 보안 신호(Cloud SIEM 신호만 해당)
 - Software Delivery 리포지토리 정보(CI Visibility pipelines 내)
 - Workload Protection Agent 이벤트
 
 다음은 요청 시 미리 보기로 제공됩니다.
 - 사용자 지정 메트릭
     - **참고:** 표준 및 OpenTelemetry(OTel) 메트릭은 지원되지 않습니다.
+- Database Monitoring
+- 호스트
+- 프로세스
+- Containers
 
 ## 고급 구성 {#advanced-configuration}
 
@@ -88,9 +93,9 @@ Strict Mode는 텔레메트리 유형별로 구성됩니다. 텔레메트리 유
 
 Restricted Dataset는 Standard Mode와 Strict Mode 간에 공유할 수 없습니다(각 데이터 세트는 하나의 모드에 속함).
 
-**Strict Mode를 활성화하기 전**, 해당 텔레메트리 유형에 대해 이미 Restricted Dataset에 _포함되지 않은_ 데이터가 무엇인지 확인하세요. Strict Mode가 활성화되면 해당 데이터는 숨겨집니다. [Data Access Control][7] 페이지에서 기존 Restricted Dataset를 검토하여 적용 범위를 확인하세요.
+**Strict Mode를 활성화하기 전**, 해당 텔레메트리 유형에 대해 이미 Restricted Dataset에 _포함되지 않은_ 데이터가 무엇인지 확인하세요. Strict Mode가 활성화되면 해당 데이터는 숨겨집니다. [Data Access Controls][7] 페이지에서 기존 Restricted Dataset를 검토하여 적용 범위를 확인하세요.
 
-텔레메트리 유형의 제한 모드를 변경하려면 [Data Access Control][7]로 이동하세요. 사용자는 제한 모드를 변경할 수 있는 [`user_access_manage` 권한][5]이 있어야 합니다.
+텔레메트리 유형의 제한 모드를 변경하려면 [Data Access Controls][7]로 이동하세요. 사용자는 제한 모드를 변경할 수 있는 [`user_access_manage` 권한][5]이 있어야 합니다.
 
 ### Unrestricted User Group {#unrestricted-user-groups}
 
@@ -104,7 +109,7 @@ Unrestricted User Group은 지정된 관리자가 모든 Restricted Dataset에 �
 
 ## 사용량 제약 {#usage-constraints}
 
-Data Access Control를 켜면 Datadog에서 민감한 데이터에 대한 액세스를 제어하는 다른 기능을 비활성화하거나 제한합니다. 제한되는 기능은 아래에서 영향을 받는 기능 목록을 참조하세요.
+Data Access Control을 켜면 Datadog에서 민감한 데이터에 대한 액세스를 제어하는 다른 기능을 비활성화하거나 제한합니다. 제한되는 기능은 아래에서 영향을 받는 기능 목록을 참조하세요.
 
 ### Real User Monitoring(RUM) {#real-user-monitoring-rum}
 
@@ -220,15 +225,15 @@ Data Access Control을 구성하기 전에 액세스 전략을 평가하는 것�
 * {{< ui >}}Grant access:{{< /ui >}}
     * 서비스를 소유한 팀
 
-이 설정 예제는 `NewService`에서 지원되는 모든 데이터를 보호합니다.
+이 설정 예제는 `NewService`의 지원되는 모든 데이터를 보호합니다.
 
 ### 팀 및 역할 {#teams-and-roles}
 
-Data Access Control은 Datadog 역할 또는 팀을 통해 사용자에게 액세스 권한을 부여하는 것을 지원합니다. 액세스 권한을 부여할 때는 기존 액세스 제어 구성 및 액세스 전략을 고려하세요. 서비스 기반 접근 방식을 사용하고 있고, 이미 [카탈로그를 사용자 지정][9]하고 있다면 Data Access Control 구성에 팀을 포함하여 서비스 소유권 모델을 활용하세요.
+Data Access Control은 Datadog 역할 또는 팀을 통해 사용자에게 액세스 권한을 부여하는 것을 지원합니다. 액세스 권한을 부여할 때는 기존 액세스 제어 구성 및 액세스 전략을 고려하세요. 서비스 기반 접근 방식을 사용하고 있고, 이미 [카탈로그를 사용자 지정][9]하고 있다면 Data Access Control 구성에 Teams를 포함하여 서비스 소유권 모델을 활용하세요.
 
-**참고:** Data Access Control에 사용되는 팀은 `Anyone in the organization`이 아닌 팀 구성원 또는 관리자만 사용자를 추가하거나 제거할 수 있도록 설정해야 합니다.
+**참고:** Data Access Control에 사용되는 Teams는 `Anyone in the organization`이 아닌 팀 구성원 또는 관리자만 사용자를 추가하거나 제거할 수 있도록 설정해야 합니다.
 
-## 액세스 실행 {#access-enforcement}
+## 액세스 적용 {#access-enforcement}
 
 Data Access Control이 활성화된 Datadog 조직의 사용자는 Dashboard, Explorer 또는 API를 통해 액세스 권한이 있는 데이터에 대한 쿼리 결과만 볼 수 있습니다. Restricted Dataset는 권한이 없는 사용자에 대해 모든 Datadog 환경 및 진입점에서 Restricted Dataset에 정의된 데이터에 대한 액세스를 제거합니다.
 

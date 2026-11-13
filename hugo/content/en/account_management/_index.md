@@ -47,6 +47,8 @@ Under email subscriptions, you have access to the following reports:
 * Weekly Digest
 
 If you are unsure if an email digest is relevant to you, you can view an example by clicking the {{< ui >}}Example{{< /ui >}} link next to each email subscription. You can also use the {{< ui >}}Unsubscribe From All{{< /ui >}} button to unsubscribe from all email subscriptions.
+
+Deactivated users do not receive email digests. If an active user does not receive an email digest, see [Troubleshooting Email Delivery][17].
 {{% /site-region %}}
 
 
@@ -158,3 +160,4 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [14]: https://app.datadoghq.com/personal-settings/apps
 [15]: /account_management/organization_topology/
 [16]: /getting_started/access_for_enterprises/
+[17]: /account_management/email_delivery/troubleshooting_email_delivery/

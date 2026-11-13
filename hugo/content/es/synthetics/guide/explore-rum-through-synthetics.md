@@ -1,76 +1,75 @@
 ---
 aliases: null
-description: Los usuarios que no cuentan con RUM pueden ahora previsualizar los datos,
-  las sesiones y los errores de RUM desde los resultados de los tests de su navegador
-  Synthetic sin coste adicional.
+description: Los usuarios sin RUM ahora pueden obtener una vista previa de los datos,
+  las sesiones y los errores de RUM desde los resultados de sus pruebas de navegador
+  de Synthetic sin costo adicional.
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/browser_tests/
   tag: Documentación
-  text: Configurar un test de navegador
+  text: Configurar una prueba de navegador
 - link: /synthetics/settings/
   tag: Documentación
-  text: Parámetros de monitorización Synthetic
+  text: Configuración de Synthetic Monitoring
 title: Explorar una vista previa de las funciones de RUM en Synthetic Monitoring
 ---
+## Descripción general {#overview}
 
-## Información general
+<div class="alert alert-info">Si tiene Real User Monitoring, puede acceder a una vista previa de RUM, Session Replay, Error Tracking y datos de rendimiento adicionales de las ejecuciones de sus pruebas de navegador de Synthetic.</div>
 
-<div class="alert alert-info">Si tienes Real User Monitoring, puedes acceder a una vista previa de RUM, de Session Replay, de Seguimiento de errores y de los datos de rendimiento adicionales de las ejecuciones de tests de tu navegador Synthetic.</div>
+Las pruebas de navegador de Synthetic integran el SDK de Real User Monitoring, lo que le permite explorar:
 
-Los tests de tu navegador Synthetic integran el SDK de Real User Monitoring, lo que te permite explorar:
+- [Session Replay][1] para todas las pruebas. Puede acceder a contexto adicional más allá de las capturas de pantalla disponibles para cada paso y [Browser Dev Tools][2].
+- La sesión en el [RUM Explorer][3].
+- Errores agregados en sus diferentes pasos, pruebas y ejecuciones de prueba con [Error Tracking][4]. Puede definir el contexto del impacto del error y priorizar la corrección de los problemas más graves. 
+- Recursos adicionales e información de tiempo de RUM, incluidas capacidades adicionales de búsqueda y seguimiento.
 
-- [Session Replay][1] para todos los tests. Puedes acceder al contexto adicional, más allá de las capturas de pantalla disponibles para cada paso, y a las [herramientas de desarrollo del navegador][2].
-- La sesión en el [Explorador RUM][3].
-- Errores agregados a través de tus diferentes pasos, tests y ejecuciones de tests con el [Seguimiento de errores][4]. Puedes delimitar el impacto del error y priorizar la resolución de los problemas más graves. 
-- Recursos e información de tiempos adicionales de RUM, incluyendo funciones de búsqueda y monitorización adicionales.
-
-## Permitir datos Synthetic sobre aplicaciones RUM
+## Permitir datos de Synthetic en aplicaciones de RUM {#allow-synthetic-data-on-rum-applications}
 
 <div class="alert alert-danger">
-Si la aplicación de destino ya está instrumentada con RUM, no debes activar la recopilación de datos de RUM dentro de la configuración de Synthetic Test, ya que esto puede dar lugar a un comportamiento inesperado.</div>
+Si la aplicación de destino ya está instrumentada con RUM, no debe habilitar la recopilación de datos de RUM dentro de la configuración de la prueba Synthetic, ya que esto puede provocar un comportamiento inesperado.</div>
 
-En la grabación del test de tu navegador, haz clic en **Collect RUM Data on* (Recopilar datos de RUM de), arriba del botón **Start Recording** (Iniciar grabación), y selecciona una aplicación de la que recopilar datos. Después de guardar tu grabación y tu configuración del test, RUM recopila datos del test y genera grabaciones de sesiones de las ejecuciones de tests de tu navegador. 
+En la grabación de su prueba de navegador, haga clic en {{< ui >}}Collect RUM Data on{{< /ui >}} sobre el botón {{< ui >}}Start Recording{{< /ui >}} y seleccione una aplicación en la cual recopilar datos. Después de guardar su grabación y la configuración de la prueba, RUM recopila datos de prueba y genera grabaciones de sesión a partir de las ejecuciones de sus pruebas de navegador. 
 
-1. Ve a **Experiencia digital** > **Parámetros** (en Monitorización Synthetic y tests) > [**Parámetros de integración**][5].
-2. En **Recopilación de datos RUM Synthetic**, haz clic en **Enable Synthetic RUM data collection** (Habilitar la recopilación de datos RUM Synthetic) para permitir que Datadog recopile datos RUM de tus ejecuciones de tests.
-3. Haz clic en **Save RUM Data Collection** (Guardar recopilación de datos RUM).
-4. En **Aplicaciones de datos RUM Synthetic**, en el menú desplegable selecciona una aplicación RUM predeterminada, sugerida en el grabador de tests del navegador.
-5. Haz clic en **Save RUM Data Applications** (Guardar aplicaciones de datos RUM).
+1. Navegue a {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} (en Synthetic Monitoring & Testing) > [{{< ui >}}Integration Settings{{< /ui >}}][5].
+2. En {{< ui >}}Synthetic Data RUM Collection{{< /ui >}}, haga clic en {{< ui >}}Enable Synthetic RUM data collection{{< /ui >}} para permitir que Datadog recopile datos de RUM de sus ejecuciones de prueba.
+3. Haga clic en {{< ui >}}Save RUM Data Collection{{< /ui >}}.
+4. En {{< ui >}}Synthetic Data RUM Applications{{< /ui >}}, seleccione una aplicación de RUM predeterminada sugerida en el grabador de pruebas de navegador desde el menú desplegable. 
+5. Haga clic en {{< ui >}}Save RUM Data Applications{{< /ui >}}.
 
-Opcionalmente, haz clic en `Synthetic Tests Default` y selecciona otra aplicación RUM del menú desplegable. Esta aplicación se muestra en la grabación de tests del navegador.
+Opcionalmente, haga clic en {{< ui >}}Synthetic Tests Default{{< /ui >}} y seleccione otra aplicación de RUM en el menú desplegable. Esta aplicación se muestra en la grabación de la prueba de navegador.
 
-Para obtener más información, consulta los [parámetros de monitorización Synthetic][6].
+Para obtener más información, consulte [Synthetic Monitoring Settings][6].
 
-## Synthetic Monitoring a RUM Explorer
+## Synthetic Monitoring a RUM Explorer {#synthetic-monitoring-to-rum-explorer}
 
-Ve a tu [lista de tests de navegador][7] y haz clic en una ejecución de test de ejemplo.
+Navegue a su [lista de pruebas de navegador][7] y haga clic en una ejecución de prueba de muestra. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Panel lateral con detalles del paso del test" style="width:100%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Panel lateral de detalles del paso de prueba" style="width:100%;" >}}
 
-El panel lateral con detalles del paso aparece con `This Synthetic test generated data in Real User Monitoring` e incluye el ID de sesión y el botón **Go to the View in RUM** (Ir a la vista en RUM). 
+El panel lateral de detalles del paso aparece con `This Synthetic test generated data in Real User Monitoring` e incluye el ID de sesión y el botón {{< ui >}}Go to the View in RUM{{< /ui >}}. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Explorador Synthetics" style="width:80%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Synthetics Explorer" style="width:80%;" >}}
 
-Para ver los errores, los recursos y los datos de rendimiento de este paso de test en el [Explorador RUM][3], haz clic en **Go to the View in RUM** (Ir a la vista en RUM). Alternativamente, haz clic en el botón **Replay Session** (Reproducir sesión) o en **View all sessions in RUM** (Ver todas las sesiones en RUM) para explorar las repeticiones de sesión disponibles, capturadas en tu test de navegador.
+Para ver los errores, los recursos y los datos de rendimiento de este paso de prueba en el [RUM Explorer][3], haga clic en {{< ui >}}Go to the View in RUM{{< /ui >}}. Alternativamente, haga clic en el botón {{< ui >}}Replay Session{{< /ui >}} o en {{< ui >}}View all sessions in RUM{{< /ui >}} para explorar las reproducciones de sesión disponibles capturadas en su prueba de navegador.
 
-## RUM Explorer a Synthetic Monitoring
+## RUM Explorer a Synthetic Monitoring {#rum-explorer-to-synthetic-monitoring}
 
-En el Explorador RUM, ve a tu [lista de sesiones][8] y haz clic en una sesión con una repetición disponible.
+En el RUM Explorer, navegue a su [lista de sesiones][8] y haga clic en una sesión con una reproducción disponible. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Panel lateral con detalles de las sesiones" style="width:100%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Panel lateral de detalles de sesiones" style="width:100%;" >}}
 
-El panel de la sesión aparece con `This event was generated by a Synthetic test run` e incluye el ID del test y el botón **View Synthetic Test Result** (Ver resultado del test Synthetic).
+El panel de sesión aparece con `This event was generated by a Synthetic test run` e incluye el ID de prueba y el botón {{< ui >}}View Synthetic Test Result{{< /ui >}}.
 
-{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_session.png" alt="Detalles de las sesiones" style="width:80%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_session.png" alt="Detalles de sesiones" style="width:80%;" >}}
 
-Para volver a Synthetic Monitoring y a los resultados de tu test, haz clic en **View Synthetic Test Result** (Ver resultado de Synthetic Test).
+Para volver a Synthetic Monitoring y a los resultados de su prueba, haga clic en {{< ui >}}View Synthetic Test Result{{< /ui >}}.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/session_replay/browser/
-[2]: /es/session_replay/browser/dev_tools/
+[1]: /es/session_replay/
+[2]: /es/session_replay/dev_tools
 [3]: /es/real_user_monitoring/explorer/
 [4]: /es/real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations

@@ -1,3 +1,0 @@
----
-title: Métricas de DORA
----

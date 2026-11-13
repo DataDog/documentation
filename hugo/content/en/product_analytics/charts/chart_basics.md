@@ -1,72 +1,43 @@
 ---
 title: Chart Basics
 private: true
-description: Learn how to save charts and use chart templates in Datadog Product Analytics.
+description: Create, save, and share Product Analytics charts as needed to support user and product analysis. 
 further_reading:
-    - link: '/product_analytics/'
-      tag: Documentation
-      text: Product Analytics
     - link: '/dashboards/configure/'
       tag: Documentation
-      text: Configure Dashboards
-    - link: '/product_analytics/charts#deciding-which-chart-to-use'
-      tag: Documentation
-      text: Decide which chart to use
+      text: Configure dashboards
     - link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
       tag: "Blog"
       text: "Make faster, better product decisions with Datadog Product Analytics"
 ---
 
-## Overview
-
-Charts help you turn user data into actionable insights by visualizing trends, funnels, and key product metrics. Use charts to answer common product questions, such as how users move through a funnel, how engagement changes over time, and how adoption varies across segments.
-
-This page introduces the core charting capabilities available across Product Analytics, including:
-
-- [Creating charts](#create-a-chart)
-- [Saving individual charts](#save-a-chart)
-- [Sharing charts internally and externally](#share-a-chart)
-- [Using prebuilt chart templates](#start-from-a-template)
+Create, save, and share Product Analytics charts as needed to support user and product analysis. 
 
 ## Create a chart
-Create charts to explore user behavior and visualize product metrics. For example, use a funnel chart to understand where users drop off during onboarding.
 
-To create a chart, click {{< ui >}}New Chart{{< /ui >}} on the [{{< ui >}}Chart List{{< /ui >}} page][1] and select the chart type you want to build. For guidance on choosing the right option for your use case, see [Deciding which chart to use][2].
+Explore user behavior or visualize product metrics by creating a chart from scratch, or starting from a prebuilt template.
 
-{{< img src="product_analytics/chart_basics/pana_chart_basics_new2.png" alt="Chart List page showing the New Chart button with options to select a chart type." style="width:100%;" >}}
+To create a chart from scratch, in the Product Analytics sidebar, select {{< ui >}}Create New{{< /ui >}}, then select a chart type. 
 
+{{< img src="product_analytics/chart_basics/chart_basics_create.png" alt="Product Analytics sidebar showing the Create New button and the list of chart types to select from." style="width:50%;" >}}
 
-## Save a chart
-Save charts to track key product metrics over time and return to your analyses as the data evolves. For example, you can use a saved chart to follow weekly conversion rates or feature adoption.
+To create a chart from a template, from the Product Analytics {{< ui >}}Charts{{< /ui >}} page, click {{< ui >}}Explore all templates{{< /ui >}}. 
 
-Use the pencil icon to **edit** the name of the chart. Then, click {{< ui >}}Save{{< /ui >}} at the top-right corner to save the chart. You can view your saved chart on the [{{< ui >}}Chart List{{< /ui >}} page][1].
+{{< img src="product_analytics/chart_basics/chart_basics_template.png" alt="Charts page showing the Start with a Chart Template section and the Explore all templates link." style="width:100%;" >}}
 
-{{< img src="product_analytics/chart_basics/pana_chart_basics_save2.png" alt="Chart editor view showing the pencil icon for editing the chart name and the save button to save the chart." style="width:100%;" >}}
+## Save or share a chart
 
+Save a chart to track key product metrics over time, or share it so your team can act on the same insights.
 
-## Share a chart
-Share charts to make product insights available across dashboards, notebooks, and your teams. For example, you can add a conversion funnel to a weekly product dashboard to align stakeholders on product performance.
+{{< img src="product_analytics/chart_basics/chart_basics.png" alt="Chart editor with numbered callouts for the chart name field and the Share and Save buttons." style="width:100%;" >}}
 
-To add a chart to a dashboard or a notebook, click {{< ui >}}+ Add To{{< /ui >}} in the top-right corner of the chart. Then, select whether to add it to an existing dashboard or notebook, or to a new one.
+1. Click the chart name to rename it.
 
+2. Click {{< ui >}}Save{{< /ui >}} to save the chart to the {{< ui >}}Charts{{< /ui >}} page. Use the dropdown to save the chart to a dashboard or notebook. 
 
-To share a link to a chart, click {{< ui >}}Share{{< /ui >}} to copy the link to your clipboard. Then paste and share this link through the method of your choice. Team members with Datadog access are directed to the live chart in Product Analytics, while users without Datadog access see a static snapshot of the chart.
-
-{{< img src="product_analytics/chart_basics/pana_chart_basics_share_add.png" alt="Chart editor view showing the Add To button for sharing charts to a dashboard or to a notebook." style="width:100%;" >}}
-
-
-## Start from a template
-Start from a template to explore user behavior and product performance using pre-built chart configurations. For example, you can understand users' average time to convert, or see their conversion breakdown by country with a few clicks.
-
-To see the available templates, click {{< ui >}}Explore all templates{{< /ui >}} on the [{{< ui >}}Chart List{{< /ui >}} page][1]. Hover over your choice and click {{< ui >}}Create Chart{{< /ui >}} to edit and save your chart.
-
-{{< img src="product_analytics/chart_basics/pana_chart_basics_templates2.png" alt="Chart Templates side panel showing a list of available templates and the button to create a chart from a template." style="width:80%;" >}}
-
-
+   Click {{< ui >}}Share{{< /ui >}} to copy the chart to your clipboard. Use the dropdown to export the chart as a PNG, or to export the chart data to CSV, if available.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/saved-charts
-[2]: https://docs.datadoghq.com/product_analytics/charts#deciding-which-chart-to-use

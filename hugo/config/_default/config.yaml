@@ -34,6 +34,20 @@ defaultContentLanguageInSubdir: false
 build:
   noJSConfigInAssets: true
 
+# Astro serves the API endpoint pages (/api/latest/<tag>/<endpoint>/), so Hugo
+# doesn't render them. The pages stay in .Site.AllPages, and the search index
+# builds API records from the OpenAPI specs and tag pages, not endpoint HTML.
+# Set here rather than in front matter so it covers every language, and
+# survives build-api-pages.js regenerating the endpoint pages.
+cascade:
+  - build:
+      render: never
+      list: always
+      publishResources: false
+    target:
+      kind: page
+      path: "/api/latest/*/*"
+
 caches:
     getjson:
         dir: :cacheDir/:project
@@ -75,6 +89,10 @@ module:
        target: layouts/partials/footer_link.html
      - source: layouts/partials/language-selector-docs.html
        target: layouts/partials/language-selector-docs.html
+     - source: layouts/partials/footer/products-index.html
+       target: layouts/partials/footer/products-index.html
+     - source: layouts/partials/footer/category.html
+       target: layouts/partials/footer/category.html
      - source: layouts/partials/modals/modal-header-demo-signup.html
        target: layouts/partials/modals/modal-header-demo-signup.html
      - source: assets/styles/components/_demo-request-modal.scss
@@ -146,8 +164,10 @@ module:
       target: assets
     - source: assets
       target: assets
-    - source: i18n
+    - source: ../shared/i18n
       target: i18n
+    - source: ../shared/regions.yaml
+      target: data/regions.yaml
     - source: archetypes
       target: archetypes
     # custom mounts
@@ -155,6 +175,10 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    # v7 bundle lazy-loads Session Replay/Profiler via dynamic import() relative
+    # to its own URL (./chunks/<file>); those chunk files must ship alongside it
+    - source: "./node_modules/@datadog/browser-rum/bundle/chunks"
+      target: "assets/node_modules/chunks"
     - source: _vendor/content/en
       target: content
       lang: en

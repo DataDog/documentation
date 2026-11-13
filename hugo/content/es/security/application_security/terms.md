@@ -9,121 +9,119 @@ further_reading:
   text: App and API Protection
 - link: https://www.datadoghq.com/blog/datadog-threat-intelligence/
   tag: Blog
-  text: Acelerar las investigaciones de seguridad con la información sobre amenazas
-    de Datadog
+  text: Acelere las investigaciones de seguridad con Datadog Threat Intelligence
 title: Términos y conceptos
 ---
+Datadog App and API Protection monitorea amenazas y brinda protección contra ataques a nivel de aplicación que buscan explotar vulnerabilidades a nivel de código. Aprovecha el contexto de ejecución de código en tiempo de ejecución, los datos de traza y de error, y la atribución de usuario.
 
-Datadog App and API Protection supervisa las amenazas y ofrece protección contra los ataques a nivel de aplicación que pretenden explotar las vulnerabilidades a nivel de código. Aprovecha el contexto de ejecución del código en tiempo de ejecución, traza y los datos de errores, así como la atribución al usuario.
+## Términos generales de App and API Protection {#general-app-and-api-protection-terms}
 
-## Condiciones generales de App and API Protection
+intento de ataque
+: ¿Qué regla de seguridad fue activada por la traza?
 
-Intento de ataque
-: Qué regla de seguridad ha sido activada por la traza.
+biblioteca de Datadog
+: _también_ tracer, SDK
+: Una biblioteca específica de lenguaje de programación integrada en aplicaciones web. Datadog App and API Protection utiliza la biblioteca para monitorear y proteger. APM utiliza la misma biblioteca para instrumentar código para telemetría de rastreo.
 
-Biblioteca de Datadog
-: _también_ rastreador, biblioteca de rastreo
-: una biblioteca específica del lenguaje de programación incrustada en aplicaciones web. Datadog App and API Protection utiliza la biblioteca para monitorizar y proteger. APM utiliza la misma biblioteca para instrumentar código para rastrear telemetría.
+regla de detección
+: Una definición de lógica condicional que se aplica a los datos ingeridos y a las configuraciones en la nube. Cuando al menos una incidencia definida en una regla coincide durante un período de tiempo determinado, Datadog genera una _señal de seguridad_.
+: Consulte [Reglas de detección][10].
 
-Regla de detección
-: Definición de lógica condicional que se aplica a los datos ingeridos y a las configuraciones de la nube. Cuando coincide al menos un caso definido en una regla durante un periodo de tiempo determinado, Datadog genera una _señal de seguridad_.
-: Consulta [Reglas de detección][10].
+lista de permitidos (anteriormente filtro de exclusión)
+: Un mecanismo para descartar trazas de seguridad marcadas a través de la biblioteca de Datadog App and API Protection y las reglas de In-App WAF. La lista de permitidos se aplica a medida que las solicitudes se ingieren en Datadog (ingesta). La lista de permitidos ayuda a gestionar los falsos positivos y los costos de ingesta.
+: Consulte [Filtros de exclusión][11] en la aplicación.
 
-Lista de permisos (antiguo filtro de exclusión)
-: Mecanismo para descartar las trazas de seguridad marcadas por la biblioteca de Datadog App and API Protection y las reglas WAF en la aplicación. La lista de permisos se aplica a medida que las solicitudes se ingieren en Datadog (admisión), y ayuda a gestionar los falsos positivos y los costes de admisión.
-: Consulta [Filtros de exclusión][11] en la aplicación.
+Reglas de In-App WAF (anteriormente reglas de eventos)
+: Un conjunto de reglas ejecutadas en las bibliotecas de Datadog para detectar actividad de seguridad. Estas incluyen patrones de Web Application Firewall (WAF) que monitorean intentos de explotar vulnerabilidades conocidas.
+: Consulte [Reglas de In-App WAF][12].
 
-Reglas WAF en la aplicación (antiguas reglas de eventos)
-: Conjunto de reglas que se ejecutan en las bibliotecas de Datadog para detectar las actividades de seguridad. Incluyen patrones del firewall de aplicaciones web (WAF) que monitorizan los intentos de explotar las vulnerabilidades conocidas.
-: Consulta [Reglas WAF en la aplicación][12].
+Remote Configuration
+: Un mecanismo de la plataforma Datadog que permite actualizar la configuración del Agent de forma remota. Utilizado por Datadog App and API Protection para actualizar las reglas de In-App WAF, activar el producto y bloquear a los atacantes.
+: Consulte [Cómo funciona Remote Configuration][8].
 
-Configuración remota
-: Mecanismo de la plataforma Datadog que habilita la actualización remota de la configuración del Agent. Es utilizada por Datadog App and API Protection para actualizar las reglas WAF en la aplicación, activar el producto y bloquear a los atacantes.
-: Consulta [Cómo funciona la configuración remota][8].
+servicio
+: Una sola aplicación web, microservicio, API o función. Por lo general, cumple una función empresarial.
 
-Servicio
-: Una única aplicación web, microservicio, API o función. Normalmente sirve a una función empresarial.
+señal
+: Una detección de un ataque a una aplicación que afecta a sus servicios. Las señales identifican amenazas significativas para que usted las revise y deben ser clasificadas con alta prioridad.
+: Consulte [Explorador de señales][13] en la aplicación.
 
-Señal
-: Detección de un ataque a una aplicación que afecta a los servicios. Las señales identifican amenazas significativas para que se puedan revisar y darles un tratamiento de alta prioridad.
-: Consulta [Explorador de señales][13] en la aplicación.
+gravedad
+: Un indicador de la rapidez con la que se debe clasificar y abordar un intento de ataque. Se basa en una combinación de factores, incluido el impacto y el riesgo potencial del ataque. Los valores son Crítico, Alto, Medio, Bajo, Información.
 
-Gravedad
-: Indicador de la rapidez con la que se debe clasificar y abordar un intento de ataque. Se basa en una combinación de factores, incluido el impacto potencial y el riesgo del ataque. Los valores son Crítico, Alto, Medio, Bajo, Información.
+traza de seguridad
+: Una traza distribuida para la cual la actividad de seguridad ha sido marcada por reglas de WAF en la aplicación. La traza subyacente se comparte con APM, lo que permite investigaciones más profundas y rápidas.
 
-Traza de seguridad
-: Rastreo distribuido cuya actividad de seguridad ha sido marcada por reglas WAF en la aplicación. La traza subyacente se comparte con APM, lo que permite investigaciones más profundas y rápidas.
+solicitud sospechosa
+: Una traza distribuida para la cual la actividad de seguridad ha sido marcada por reglas de WAF en la aplicación. La traza subyacente se comparte con APM, lo que permite investigaciones más profundas y rápidas.
 
-Solicitud sospechosa
-: Rastreo distribuido cuya actividad de seguridad ha sido marcada por reglas WAF en la aplicación. La traza subyacente se comparte con APM, lo que permite investigaciones más profundas y rápidas.
+atribución de usuario
+: Un mecanismo que asigna solicitudes sospechosas a usuarios conocidos en sus sistemas.
+: Consulte [Seguimiento de la actividad del usuario][14].
 
-Asignación a usuarios
-: Mecanismo que asigna las solicitudes sospechosas a usuarios  que son conocidos en tus sistemas.
-: Consulta [Rastreo de la actividad del usuario][14].
+vulnerabilidad
+: Riesgo pasivo dentro de una aplicación. De [OWASP][1]: \"Una vulnerabilidad es un agujero o una debilidad en la aplicación, que puede ser un defecto de diseño o un error de implementación, que permite a un atacante causar daño a las partes interesadas de una aplicación." Las partes interesadas incluyen al propietario de la aplicación, los usuarios de la aplicación y otras entidades que dependen de la aplicación."
 
-Vulnerabilidad
-: Riesgo pasivo de una aplicación. De [OWASP][1]: "Una vulnerabilidad es un hueco o una debilidad en la aplicación. Puede ser un defecto de diseño o un error de implementación que permite a un atacante causar daño a las partes interesadas de una aplicación. Las partes interesadas incluyen al propietario de la aplicación, a los usuarios de la aplicación y a otras entidades que dependen de la aplicación."
-
-Calificación de trazas
-: Proceso mediante el cual Datadog ayuda a comprender el impacto de las trazas, etiquetándolas
+calificación de seguimiento
+: El proceso mediante el cual Datadog ayuda a comprender el impacto de las trazas, etiquetándolas
 como `Harmful Safe or Unknown`.
-: Consulta [Calificación de trazas][15].
+: Consulte [Calificación de seguimiento][15].
 
-Información sobre amenazas
-: Conjunto de reglas que se ejecutan en las bibliotecas de Datadog para detectar las amenazas. Incluyen patrones del firewall de aplicaciones web (WAF) que monitorizan los intentos de explotar las vulnerabilidades conocidas.
-: Consulta [Información sobre amenazas][16].
+Inteligencia de amenazas
+: Un conjunto de reglas ejecutadas en las bibliotecas de Datadog para detectar amenazas. Estas incluyen patrones de Web Application Firewall (WAF) que monitorean intentos de explotar vulnerabilidades conocidas.
+: Consulte [Inteligencia de amenazas][16]
 
 atacantes sospechosos
-: un precursor de las IPs marcadas. Las IPs sospechosas han alcanzado un umbral mínimo de tráfico de ataque para ser clasificadas como sospechosas, pero no el umbral para Flagged (Marcadas). Los umbrales no son configurables por el usuario.
-: Consulta [Attackers Explorer][17]
+: Un precursor de las IP marcadas. Las IP sospechosas han alcanzado un umbral mínimo de tráfico de ataque para ser clasificadas como sospechosas, pero no el umbral para ser marcadas. Los umbrales no son configurables por el usuario.
+: Consulte [Explorador de atacantes][17]
 
 atacantes marcados
-: IPs que envían grandes cantidades de tráfico de ataque. Se recomienda revisar y bloquear las IPs marcadas. Los umbrales no son configurables por el usuario.
-: Consulta [Attackers Explorer][17]
+: Las IPs que envían grandes cantidades de tráfico de ataque. Recomendamos revisar y bloquear las IPs marcadas. Los umbrales no son configurables por el usuario.
+: Consulte [Explorador de atacantes][17]
 
 huella digital del atacante
-: identificadores calculados a partir de las características de la solicitud para rastrear a un atacante a través de múltiples solicitudes.
-: ver [Huella digital del atacante][18]
+: Identificadores calculados a partir de las características de la solicitud para rastrear a un atacante a través de múltiples solicitudes.
+: Consulte [Huella digital del atacante][18]
 
-clúster atacante
-: Conjunto de atributos que identifican a un atacante en un ataque distribuido.
-: Ver [Agrupación ern clústeres de atacantes][19]
+clúster de atacantes
+: Un conjunto de atributos que identifica a un atacante a través de un ataque distribuido.
+: Consulte [Clustering de atacantes][19]
 
-## Términos de ataques y vulnerabilidades conocidas
+## Términos de ataques y vulnerabilidades conocidas {#attacks-and-known-vulnerabilities-terms}
 
-Open Web App and API Protection Project (OWASP)
-: Una fundación sin ánimo de lucro con varios proyectos para mejorar la seguridad de las aplicaciones web. OWASP es más conocida por el [OWASP Top 10][2], un amplio consenso sobre los riesgos de seguridad más críticos para las aplicaciones web.
+Open Web Application Security Project (OWASP)
+: Una fundación sin fines de lucro con varios proyectos para mejorar la seguridad de las aplicaciones web. OWASP es más conocida por el [OWASP Top 10][2], un amplio consenso sobre los riesgos de seguridad más críticos para las aplicaciones web.
 
-Secuencia de comandos en sitios cruzados o Cross-Site Scripting (XSS)
-: Tipo de ataque de inyección en el que se inyectan scripts maliciosos en sitios web por lo demás benignos y de confianza.
-: Consulta [XSS en OWASP][3].
+Cross-Site Scripting (XSS)
+: Un tipo de ataque de inyección en el que se inyectan scripts maliciosos en sitios web que, de otro modo, serían benignos y confiables.
+: Consulte [XSS en OWASP][3].
 
-Inyección de lenguaje de consulta estructurado (SQLi, Inyección SQL)
-: Tipo de ataque de inyección en el que se ejecuta una consulta SQL a través de los datos que el cliente ha introducido en la aplicación. Los comandos SQL se inyectan en la entrada del plano de datos para afectar a la ejecución de los comandos SQL predefinidos. Una correcta inyección SQL puede leer datos confidenciales de la base de datos, modificarlos (Insertar/Actualizar/Borrar), ejecutar operaciones de administración (como apagar el DBMS), recuperar el contenido de un archivo dado presente en el sistema de archivos del DBMS y, en algunos casos, enviar comandos al sistema operativo.
-: **Relacionado**: Cassandra Query Language Injection (CQLi), NoSQL Injection (NoSQLi) - Similar a SQLi pero para Cassandra Query Language y NoSQL.
-: Consulta [Inyección SQL en OWASP][4].
+Inyección de lenguaje de consulta estructurado (SQLi, inyección SQL)
+: Un tipo de ataque de inyección en el que se ejecuta una consulta SQL a través de los datos de entrada del cliente a la aplicación. Los comandos SQL se inyectan en la entrada del plano de datos para afectar la ejecución de comandos SQL predefinidos. Una explotación exitosa de inyección SQL puede leer datos confidenciales de la base de datos, modificar datos de la base de datos (Insertar/Actualizar/Eliminar), ejecutar operaciones de administración en la base de datos (como apagar el DBMS), recuperar el contenido de un archivo determinado presente en el sistema de archivos del DBMS y, en algunos casos, emitir comandos al sistema operativo.
+: **Relacionado**: Inyección de lenguaje de consulta Cassandra (CQLi), inyección NoSQL (NoSQLi) - Similar a SQLi pero para el lenguaje de consulta Cassandra y NoSQL.
+: Ver [Inyección SQL en OWASP][4].
 
-Falsificación de solicitudes del lado del servidor (SSRF)
-: Vulnerabilidad en la que una aplicación web obtiene acceso a un recurso remoto sin validar la URL proporcionada por el usuario. Permite a un atacante forzar a la aplicación a enviar una solicitud manipulada a un destino inesperado, incluso cuando está protegida por un cortafuegos, VPN u otro tipo de lista de control del acceso (ACL) a la red.
-: Consulta [Falsificación de solicitudes del lado del servidor en OWASP][5].
+Falsificación de solicitud del lado del servidor (SSRF)
+: Una vulnerabilidad donde una aplicación web obtiene un recurso remoto sin validar la URL proporcionada por el usuario. Permite a un atacante obligar a la aplicación a enviar una solicitud manipulada a un destino inesperado, incluso cuando está protegida por un firewall, VPN u otro tipo de lista de control de acceso (ACL) de red.
+: Ver [Falsificación de solicitud del lado del servidor en OWASP][5].
 
-Inclusión local de archivos (LFI)
-: Vulnerabilidad que permite a un atacante incluir un archivo localmente presente en el servidor durante el procesamiento de la solicitud. En la mayoría de los casos, esto permite al atacante leer información confidencial almacenada en los archivos del servidor. En los casos más graves, la explotación puede conducir a una secuencia de comandos en sitios cruzados (cross-site scripting) o a una ejecución remota del código.
-: Consulta [Tests para LFI en OWASP][6].
+Inclusión de archivos locales (LFI)
+: Una vulnerabilidad que permite a un atacante incluir un archivo presente localmente en el servidor durante el procesamiento de la solicitud. En la mayoría de los casos, esto permite al atacante leer información confidencial almacenada en archivos en el servidor. En casos más graves, la explotación puede conducir a secuencias de comandos en sitios cruzados o a la ejecución remota de código.
+: Consulte [pruebas de LFI en OWASP][6].
 
-Inclusión remota de archivos (RFI)
-: Vulnerabilidad similar a la inclusión local de archivos, pero que permite a un atacante incluir un archivo remoto durante el procesamiento de la solicitud. Los archivos utilizados en los ataques de inclusión remota de archivos suelen contener un código malicioso para PHP, JSP o tecnologías similares.
+Inclusión de archivos remotos (RFI)
+: Una vulnerabilidad similar a la inclusión de archivos locales, pero que permite a un atacante incluir un archivo remoto durante el procesamiento de la solicitud. Los archivos utilizados en los ataques de inclusión de archivos remotos con mayor frecuencia contienen código malicioso para PHP, JSP o tecnologías similares.
 
 Ejecución remota de código (RCE)
-: Vulnerabilidad que permite a un atacante ejecutar un código en una máquina de forma remota.
+: Una vulnerabilidad que permite a un atacante ejecutar código de forma remota en una máquina.
 
-Inyección de OGNLi (Object-Graph Navigation Language Injection)
-: Vulnerabilidad que permite a un atacante ejecutar su propia expresión OGNL en una aplicación Java, lo que suele conducir a la ejecución remota del código.
-: Consulta [OGNLi en OWASP Top 10][7].
+Inyección de lenguaje de navegación de grafos de objetos (OGNLi)
+: Una vulnerabilidad que permite a un atacante ejecutar su propia expresión OGNL en una aplicación Java, lo que comúnmente conduce a la ejecución remota de código.
+: Ver [OGNLi en OWASP Top 10][7].
 
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

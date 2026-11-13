@@ -177,7 +177,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][200], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. In the [Google Cloud integration page][200], select {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Click {{< ui >}}Quick Start{{< /ui >}}.
 3. Click {{< ui >}}Copy{{< /ui >}} in the setup script section.<br>
    **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.
@@ -217,7 +217,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][500], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. In the [Google Cloud integration page][500], select {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Select {{< ui >}}Terraform{{< /ui >}}.
 3. Under {{< ui >}}Provide GCP Resources{{< /ui >}}, add any project IDs and folder IDs to be monitored.
 4. Select any folders and projects to be monitored.
@@ -249,7 +249,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][600], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+1. In the [Google Cloud integration page][600], select {{< ui >}}\+ Add GCP Account{{< /ui >}}.
 2. Click {{< ui >}}Manual{{< /ui >}}.
 3. Copy the {{< ui >}}Datadog Principal{{< /ui >}} value, and click {{< ui >}}Open the Google Console{{< /ui >}}.
 4. Create a service account:
@@ -277,9 +277,9 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 #### Validation
 
-To view your metrics, use the left menu to navigate to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} and search for `gcp`:
+To view your metrics, go to the {{< ui >}}Metrics Catalog{{< /ui >}} page and search for `gcp`:
 
-{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metric Summary page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metrics Catalog page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
 
 ### Google Cloud integrations
 

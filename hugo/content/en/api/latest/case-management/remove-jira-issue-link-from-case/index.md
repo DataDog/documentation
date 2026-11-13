@@ -1,3 +1,3 @@
 ---
-title: Remove Jira issue link from case
+title: Remove Jira issue link from work item
 ---

@@ -112,7 +112,7 @@ Datadog provides out-of-the-box graphs for any given service. Use the dropdown a
 
 {{% apm-ootb-graphs %}}
 
-<div class="alert alert-tip">When you hover over a latency spike in the latency graph, click <strong>Investigate With Bits AI</strong> to launch an automated investigation. Bits AI analyzes tag divergence and bottlenecks across the affected traces. For more information, see <a href="/bits_ai/bits_chat/#latency-investigations">Latency investigations</a>.</div>
+<div class="alert alert-tip">When you hover over a latency spike in the latency graph, click <strong>Investigate With Bits AI</strong> to launch an automated investigation. Bits AI analyzes tag divergence and bottlenecks across the affected traces. For more information, see <a href="/bits_ai/bits_chat/">Bits Chat</a>.</div>
 
 ### Export
 
@@ -278,14 +278,6 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 {{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
 
 ### Frontend activity
-
-{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Join the Journey monitoring Preview to start using Frontend activity section!
-{{< /callout >}}
-
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Join the Operations monitoring Preview to start using Frontend activity section!
-{{< /callout >}}
 
 The Frontend activity tab connects your backend service to the [Real User Monitoring (RUM)][24] journeys, operations, and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
 

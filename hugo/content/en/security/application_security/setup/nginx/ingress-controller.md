@@ -15,12 +15,6 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 # Ingress-nginx support for Datadog
@@ -46,24 +40,29 @@ This setup requires:
 
 - The Datadog Cluster Agent `v7.79.0` or later.
 - For the Helm method, the Datadog Helm chart `v3.217.0` or later.
+- For the Datadog Operator method, the Datadog Operator `v1.31.0` or later.
 
 Enable automatic configuration using the Datadog Operator or Helm.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Add annotations to your `DatadogAgent` resource:
+Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
-    # Optional: override the path where the nginx-datadog module is mounted
-    # in the controller pod (default: /modules_mount)
-    # agent.datadoghq.com/appsec.nginx.module_mount_path: "/modules_mount"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        # Optional: override the path where the nginx-datadog module is mounted
+        # in the controller pod (default: /modules_mount)
+        # nginx:
+        #   moduleMountPath: /modules_mount
 ```
 
 Apply the configuration:

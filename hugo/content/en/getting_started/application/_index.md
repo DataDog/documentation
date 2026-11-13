@@ -161,7 +161,7 @@ Navigate to the [{{< ui >}}Monitors List{{< /ui >}}][23] in the app to get start
 [9]: /tracing/
 [10]: https://app.datadoghq.com/apm/home
 [11]: /real_user_monitoring/
-[12]: /session_replay/browser/
+[12]: /session_replay/
 [13]: https://app.datadoghq.com/rum/sessions
 [14]: /synthetics/
 [15]: https://app.datadoghq.com/synthetics/tests

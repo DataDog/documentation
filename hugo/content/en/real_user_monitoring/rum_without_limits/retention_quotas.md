@@ -58,4 +58,4 @@ Retention quotas can also be managed through [APIs][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/rum-retention-quota/
+[1]: /api/latest/rum-retention-quotas/

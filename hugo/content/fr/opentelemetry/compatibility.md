@@ -3,115 +3,116 @@ disable_sidebar: false
 further_reading:
 - link: /opentelemetry/troubleshooting/
   tag: Documentation
-  text: Dépannage OpenTelemetry
+  text: Dépannage d'OpenTelemetry
 title: Compatibilité entre Datadog et OpenTelemetry
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-Datadog propose plusieurs options de configuration pour s'adapter à divers cas d'utilisation, allant des implémentations complètes d'OpenTelemetry (OTel) aux configurations hybrides utilisant à la fois OpenTelemetry et des composants Datadog. Cette page couvre la compatibilité entre différentes configurations et les produits et fonctionnalités Datadog pris en charge, vous aidant à choisir la meilleure configuration pour vos besoins.
+Datadog propose plusieurs options de configuration pour répondre à divers cas d'utilisation, allant des implémentations OpenTelemetry (OTel) complètes aux configurations hybrides utilisant à la fois des composants OpenTelemetry et Datadog. Cette page couvre la compatibilité entre différentes configurations ainsi que les produits et fonctionnalités Datadog pris en charge, vous aidant à choisir la configuration la mieux adaptée à vos besoins.
 
 ## Configurations {#setups}
 
-Datadog prend en charge plusieurs configurations pour utiliser OpenTelemetry. La principale différence entre ces configurations réside dans le choix du SDK (OpenTelemetry ou Datadog) et le collecteur utilisé pour traiter et transmettre les données de télémétrie.
+Datadog prend en charge plusieurs configurations pour l'utilisation d'OpenTelemetry. La principale différence entre ces configurations réside dans le choix du SDK (OpenTelemetry ou Datadog) et du collecteur utilisé pour traiter et transférer les données de télémétrie.
 
-| Type de configuration | API | SDK | Collecteur/Agent |
-|--------------------------------------------|-------------------------|-------------|-----------------------------------------------|
-| [**SDK Datadog + DDOT (Recommandé)**][29] | API Datadog ou API OTel | SDK Datadog | Distribution Datadog du collecteur OTel (DDOT) |
-| [**SDK OTel + DDOT**][29] | API OTel | SDK OTel | Distribution Datadog du collecteur OTel (DDOT) |
-| [**SDK OTel + Collecteur OSS**][7] | API OTel | SDK OTel | Collecteur OTel (OSS) |
-| [**Ingestion directe OTLP**][28] | API OTel | SDK OTel | N/A (Direct vers le point de terminaison Datadog) |
+| Type de configuration                                           | API                     | SDK         | Collecteur/Agent                               |
+|------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
+| [**SDK Datadog + DDOT (Recommandé)**][29]           | API Datadog ou API OTel | SDK Datadog | Distribution Datadog du collecteur OTel (DDOT) |
+| [**SDK OTel + DDOT**][29]                            | API OTel                | SDK OTel    | Distribution Datadog du collecteur OTel (DDOT) |
+| [**SDK OTel + collecteur OTLP OTel**][7]         | API OTel                | SDK OTel    | Collecteur OTLP OTel                      |
+| [**Direct OTLP Ingest**][28]                         | API OTel                | SDK OTel    | N/A (Direct to Datadog endpoint)              |
 
 ## Compatibilité des fonctionnalités {#feature-compatibility}
 
-Le tableau suivant montre la compatibilité des fonctionnalités à travers différentes configurations :
+Le tableau suivant présente la compatibilité des fonctionnalités selon les différentes configurations :
 
-| Fonctionnalité | SDK Datadog + DDOT (Recommandé) | SDK OTel + DDOT | SDK OTel + Collecteur OSS | Ingestion directe OTLP |
+| Fonctionnalité | SDK Datadog + DDOT (Recommandé) | SDK OTel + DDOT | SDK OTel + collecteur OTLP OTel | Ingestion OTLP directe |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Traces, métriques, journaux corrélés][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Traces, métriques et logs corrélés][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Traçage distribué][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Observabilité LLM][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Métriques d'exécution][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Liens de span][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Métriques de trace][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Surveillance de base de données][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
-| [Liste des hôtes d'infrastructure][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| [Surveillance du réseau cloud][21] (CNM) | {{< X >}} | {{< X >}} | | |
-| [Surveillance des conteneurs en direct/Explorateur Kubernetes][20] | {{< X >}} | {{< X >}} | | |
-| [Processus en direct][16] | {{< X >}} | {{< X >}} | | |
-| [Surveillance des services universels][17] (USM) | {{< X >}} | {{< X >}} | | |
-| [Protection des applications et des API][11] (AAP) | {{< X >}} | | | |
-| [Profileur continu][12] | {{< X >}} | | | |
-| [Observabilité des données : Surveillance des travaux][13] (DJM) | {{< X >}} | | | |
-| [Surveillance des flux de données][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
-| [Surveillance des utilisateurs réels][22] (RUM) | {{< X >}} | | | |
-| [Intégration du code source][24] | {{< X >}} | | | |
+| [Agent Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Métrique de trace][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculé à partir des spans qui atteignent Datadog ; reflète tout échantillonnage côté OTel que vous configurez." >}}) |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
+| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
+| [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Live Container Monitoring][46] | {{< X >}} | {{< X >}} | | |
+| [Live Processes][16] | {{< X >}} | {{< X >}} | | |
+| [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
+| [App and API Protection][11] (AAP) | {{< X >}} | | | |
+| [Continuous Profiler][12] | {{< X >}} | | | |
+| [Data Observability: Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
+| [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel n'offre pas de fonctionnalité DSM" >}} | {{< tooltip text="N/A" tooltip="OTel n'offre pas de fonctionnalité DSM" >}} |
+| [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
+| [Source code integration][24] | {{< X >}} | | | |
 
-## Prise en charge de l’API {#api-support}
+## Prise en charge de l'API {#api-support}
 
-Les SDK Datadog fournissent une prise en charge des API OpenTelemetry Traces, Metrics et Logs dans différents langages. Recherchez votre langue dans le tableau ci-dessous pour les guides de configuration et les détails de support.
+Les SDK Datadog prennent en charge les API de traces, de métriques et de logs OpenTelemetry dans divers langages. Trouvez votre langage dans le tableau ci-dessous pour accéder aux guides de configuration et aux détails de prise en charge.
 
-| Langue | API Traces | API Metrics | API Logs |
+| Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Java][34] | {{< X >}} | {{< X >}} | *Pas encore supporté* |
+| [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Ruby][36] | {{< X >}} | Alpha | *Pas encore supporté* |
-| [PHP][37] | {{< X >}} | {{< X >}} | *Pas encore supporté* |
+| [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
+| [PHP][37] | {{< X >}} | {{< X >}} | {{< X >}} |
 
 ## Plus de détails {#more-details}
 
-### Observabilité LLM {#llm-observability}
+### Agent Observability {#agent-observability}
 
-Les traces OpenTelemetry qui ont [des attributs d'IA générative](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) sont automatiquement converties en traces d'Observabilité LLM. Pour désactiver cette conversion, voir [Désactivation de la conversion d'Observabilité LLM][38].
+Les traces OpenTelemetry qui possèdent des [attributs d'IA générative](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) sont automatiquement converties en Agent Observability traces. Pour désactiver cette conversion, consultez [Disabling Agent Observability conversion][38].
 
-### Métriques d'exécution {#runtime-metrics}
+### Métriques runtime {#runtime-metrics}
 
-- **Configurations du SDK Datadog** : Émettre des [Métriques d'exécution][23] en utilisant DogStatsD (port UDP 8125). Assurez-vous que DogStatsD est activé dans votre Agent Datadog.
-- **Configurations du SDK OpenTelemetry** : Suivez la spécification des [Métriques d'exécution OpenTelemetry][1] et elles sont généralement envoyées en utilisant OTLP (port 4317/4318).
+- **Configurations des SDK Datadog** : émettez des [Métriques Runtime][23] via DogStatsD (port UDP 8125). Assurez-vous que DogStatsD est activé dans votre Datadog Agent.
+- **Configurations du SDK OpenTelemetry** : Suivent la spécification [Métriques Runtime OpenTelemetry][1] et sont généralement envoyées via OTLP (port 4317/4318).
 
-### Surveillance des utilisateurs réels (RUM) {#real-user-monitoring-rum}
+### Real User Monitoring (RUM){#real-user-monitoring-rum}
 
-Pour activer la fonctionnalité complète de RUM, vous devez [injecter les en-têtes pris en charge][2] pour corréler RUM et traces.
+Pour activer la fonctionnalité RUM complète, vous devez [injecter les en-têtes pris en charge][2] afin de corréler RUM et les traces.
 
-### Surveillance du réseau cloud (CNM) {#cloud-network-monitoring-cnm}
+### Cloud Network Monitoring (CNM) {#cloud-network-monitoring-cnm}
 
-La surveillance au niveau des spans ou des points de terminaison n'est **pas** prise en charge.
+La surveillance au niveau du span ou du endpoint **n'est pas** prise en charge.
 
-Pour plus d'informations, consultez [Configuration de la surveillance du réseau cloud][3].
+Pour plus d'informations, consultez [Cloud Network Monitoring Setup][3].
 
-### Intégration du code source {#source-code-integration}
+### Source Code Integration {#source-code-integration}
 
 Pour les langages non pris en charge dans les configurations OpenTelemetry, [configurez le marquage de télémétrie][5] pour lier les données à un commit spécifique.
 
-## Niveaux de support {#support-levels}
+## Niveaux de prise en charge {#support-levels}
 
-Datadog fournit différents niveaux de prise en charge pour les composants et configurations OpenTelemetry :
+Datadog fournit différents niveaux de prise en charge pour les composants et configurations OpenTelemetry :
 
-- **Composants Datadog pris en charge** : Composants Datadog tels que le [Connecteur Datadog][39], l'[Exportateur Datadog][40] et le [Processeur d'attributs Infra][41]. Ces composants sont maintenus par Datadog, reçoivent des mises à jour régulières et sont prioritaires pour les corrections de bogues et les améliorations de fonctionnalités.
+- **Datadog Supported Components** : Composants appartenant à Datadog tels que le [Datadog Connector][39], [Datadog Exporter][40] et [Infra Attribute Processor][41]. Ces composants sont maintenus par Datadog, reçoivent des mises à jour régulières et sont prioritaires pour les corrections de bugs et les améliorations de fonctionnalités.
 
-- **Composants pris en charge par la communauté** : Composants OpenTelemetry [inclus avec le Collecteur DDOT][42] par défaut. Datadog aide à garantir que ces composants sont sécurisés, stables et compatibles.
+- **Composants pris en charge par la communauté** : composants OpenTelemetry [inclus dans le collecteur DDOT][42] par défaut. Datadog aide à garantir que ces composants sont sécurisés, stables et compatibles.
 
-- **Composants personnalisés** : Composants ou configurations OpenTelemetry non inclus par défaut, tels que [composants de Collecteur personnalisés][43] ou [instrumentation de runtimes non pris en charge][44]. Datadog fournit des conseils et de la documentation comme point de départ mais ne prend pas directement en charge la fonctionnalité de ces composants. Pour les problèmes liés aux composants personnalisés, engagez-vous avec la [communauté OpenTelemetry][45] ou les mainteneurs des composants.
+- **Composants personnalisés** : composants ou configurations OpenTelemetry qui ne sont pas inclus par défaut, tels que des [composants de collecteur personnalisés][43] ou l'[instrumentation d’exécutions non prise en charge][44]. Datadog fournit des conseils et une documentation comme point de départ, mais ne prend pas directement en charge la fonctionnalité de ces composants. Pour les problèmes liés aux composants personnalisés, adressez-vous à la [communauté OpenTelemetry][45] ou aux responsables des composants.
 
-## Support de la plateforme et de l'environnement {#platform-and-environment-support}
+## Prise en charge des plateformes et des environnements{#platform-and-environment-support}
 
-Bien que le Collecteur OpenTelemetry puisse être déployé dans de nombreux environnements, certaines plateformes ont des limitations spécifiques ou des exigences de support.
+Bien que l'OpenTelemetry Collector puisse être déployé dans de nombreux environnements, certaines plateformes présentent des limitations ou des exigences de prise en charge spécifiques.
 
-* **AWS EKS Fargate** : Cet environnement n'est **pas actuellement supporté** et entraînera une facturation incorrecte des hôtes d'infrastructure lorsqu'il est utilisé avec le Collecteur OpenTelemetry. Un support officiel est prévu pour une future version. Consultez le [guide de configuration du Collecteur][7] pour les informations les plus récentes.
+* **AWS EKS Fargate** : Cet environnement **n'est actuellement pas pris en charge** et entraînera une facturation incorrecte du host d'infrastructure lorsqu'il est utilisé avec le OpenTelemetry Collector. Une prise en charge officielle est prévue pour une version ultérieure. Consultez le [Collector setup guide][7] pour obtenir les informations les plus récentes.
 
-## Meilleures pratiques {#best-practices}
+## Bonnes pratiques {#best-practices}
 
-Lors de l'utilisation de Datadog et d'OpenTelemetry ensemble, Datadog recommande les meilleures pratiques suivantes pour garantir des performances optimales et éviter d'éventuels problèmes :
+Lorsque vous utilisez Datadog et OpenTelemetry ensemble, Datadog recommande les bonnes pratiques suivantes pour garantir des performances optimales et éviter les problèmes potentiels :
 
 - **Évitez l'instrumentation mixte** : Dans la plupart des cas, vous ne devez pas utiliser à la fois un SDK Datadog et un SDK OpenTelemetry dans la même application, car cela entraîne un comportement indéfini.
-  - **Exception** : Le support de certains langages, comme Python, nécessite que le SDK Datadog et le SDK OpenTelemetry soient installés.
-  - Suivez toujours la documentation d'instrumentation spécifique à chaque langage[8] pour vous assurer que vous utilisez la configuration correcte et prise en charge.
-- **Évitez l'Agent et le Collecteur séparé sur le même hôte** : Ne faites pas fonctionner l'Agent Datadog et un Collecteur OpenTelemetry séparé sur le même hôte, car cela peut causer des problèmes. Cependant, vous pouvez exécuter des Agents et des Collecteurs sur des hôtes différents au sein de la même flotte.
+  - **Exception** : La prise en charge de certains langages, tels que Python, nécessite l'installation à la fois du SDK Datadog et du SDK OpenTelemetry.
+  - Suivez toujours la [documentation d'instrumentation spécifique au langage][8] pour vous assurer d'utiliser la configuration correcte et prise en charge.
+- **Évitez d’exécuter Agent et Collector séparément sur le même host** : N’exécutez pas l’Agent Datadog et un Collector OpenTelemetry séparé sur le même host, car cela pourrait causer des problèmes. Cependant, vous pouvez exécuter des Agents et des Collectors sur des hôtes différents au sein du même parc.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -134,7 +135,7 @@ Lors de l'utilisation de Datadog et d'OpenTelemetry ensemble, Datadog recommande
 [17]: /fr/universal_service_monitoring/
 [18]: /fr/security/cloud_siem/
 [19]: /fr/opentelemetry/correlate/
-[20]: /fr/containers/
+[20]: /fr/containers/monitoring/kubernetes_explorer/
 [21]: /fr/network_monitoring/performance/
 [22]: /fr/opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
 [23]: /fr/tracing/metrics/runtime_metrics/
@@ -152,7 +153,7 @@ Lors de l'utilisation de Datadog et d'OpenTelemetry ensemble, Datadog recommande
 [35]: /fr/opentelemetry/instrument/api_support/go/
 [36]: /fr/opentelemetry/instrument/api_support/ruby/
 [37]: /fr/opentelemetry/instrument/api_support/php/
-[38]: /fr/llm_observability/instrumentation/otel_instrumentation/
+[38]: /fr/llm_observability/instrument/otel_instrumentation/
 [39]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
 [40]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
 [41]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
@@ -160,3 +161,4 @@ Lors de l'utilisation de Datadog et d'OpenTelemetry ensemble, Datadog recommande
 [43]: /fr/opentelemetry/setup/ddot_collector/custom_components
 [44]: /fr/opentelemetry/guide/instrument_unsupported_runtimes
 [45]: https://opentelemetry.io/community/
+[46]: /fr/containers/

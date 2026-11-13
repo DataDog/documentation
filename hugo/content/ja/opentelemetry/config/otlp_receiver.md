@@ -8,16 +8,18 @@ further_reading:
 - link: /opentelemetry/otlp_ingest_in_the_agent/
   tag: ドキュメント
   text: Datadog Agent による OTLP の取り込み
+- link: https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/
+  tag: Architecture Center
+  text: Kubernetes における Datadog Agent OTLP レシーバー
 title: OTLP レシーバー
 ---
-
-## 概要
+## 概要 {#overview}
 
 OTLP メトリクス、ログ、トレースを収集するには、Collector で [OTLP レシーバー][1]を構成します。
 
 詳しくは、OpenTelemetry プロジェクトドキュメントの [OTLP レシーバー][1]を参照してください。
 
-## セットアップ
+## セットアップ {#setup}
 
 Collector の構成に以下の行を追加します。
 
@@ -33,15 +35,15 @@ receivers:
        endpoint: "0.0.0.0:4317"
 ```
 
-## 収集されたデータ
+## 収集データ {#data-collected}
 
 トレース、メトリクス、ログ。
 
-## 完全な構成例
+## 完全な構成例{#full-example-configuration}
 
-Datadog Exporter を用いた実際に動作する構成の完全な例については、[`otlp.yaml`][2] を参照してください。
+Datadog エクスポーターを使用した完全な動作例の構成については、[`otlp.yaml`][2] を参照してください。
 
-## ログ出力例
+## ログ出力例{#example-logging-output}
 
 ```
 ResourceSpans #0
@@ -193,7 +195,7 @@ Span ID:
 Flags: 0
 ```
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

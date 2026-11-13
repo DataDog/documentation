@@ -28,16 +28,17 @@ Each cell has its own content type that indicates the kind of information the ce
 | Task               | Any changes made to incident tasks in the Post-Incident section of the Incident Details page.
 | Notification sent  | An update when a manual notification is sent by an incident responder.
 | Meeting Chat       | Any messages sent in a video conferencing meeting's chat.
+| Meeting Summary    | AI-generated summaries of an incident meeting, posted during and after the meeting. See [Meeting summaries][2].
 
 ### Responder notes
 
-Add responder notes directly to the timeline using the text box underneath the section tabs of the Incident Details page. You can also add responder notes [to the timeline from Slack][2]. You can customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. 
+Add responder notes directly to the timeline using the text box underneath the section tabs of the Incident Details page. You can also add responder notes [to the timeline from Slack][3]. You can customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. 
 
 For responder notes you author, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. 
 
 ### Graph cells
 
-Graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][3]. For 24 hours after a graph cell is added to the timeline, it has the same full interactive hover states found in Dashboards, Notebooks, and other pages. After 24 hours in the timeline, the graph is replaced with static images capturing what the graph was displaying. This is to ensure that graphs with data that has short retention have backups you can view after the live data for the graphs expires.
+Graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][4]. For 24 hours after a graph cell is added to the timeline, it has the same full interactive hover states found in Dashboards, Notebooks, and other pages. After 24 hours in the timeline, the graph is replaced with static images capturing what the graph was displaying. This is to ensure that graphs with data that has short retention have backups you can view after the live data for the graphs expires.
 
 ### Images
 
@@ -58,5 +59,6 @@ You can also add an image to an existing cell:
 
 
 [1]: /incident_response/incident_management/#integrations
-[2]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[3]: https://app.datadoghq.com/organization-settings/public-sharing/settings
+[2]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+[3]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[4]: https://app.datadoghq.com/organization-settings/public-sharing/settings

@@ -241,6 +241,8 @@ Group retention controls how long a monitor group is kept in the monitor's statu
 
 By default, a group keeps the status for 24 hours before it is dropped. Host monitors and service checks that notify on missing data keep the status for 48 hours.
 
+For monitors with many groups, dynamic group retention is enabled by default. Datadog automatically shortens the retention period for groups that stop reporting data. The more frequently groups appear and disappear, the shorter the retention period becomes, helping keep the monitor fast and efficient. This behavior affects only groups that have stopped reporting data; groups that are actively reporting are never removed.
+
 For the multi alert monitor types that support custom retention, you can set a value between 1 hour and 72 hours. Select {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
@@ -253,8 +255,6 @@ Some use cases to define a custom group retention time include:
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
 **Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
-
-<div class="alert alert-info"><strong>Preview: Dynamic group retention</strong><p>Dynamic group retention is in Preview and applies to newly created monitors. For monitors with a large number of groups, Datadog automatically shortens how long a group is kept after it stops reporting data. The more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent; groups actively reporting data are never removed.</p></div>
 
 #### New group delay
 
@@ -338,24 +338,44 @@ If you configure tags or dimensions in your query, these values are available fo
 
 All users can view all monitors, regardless of the team or role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
 
-You can further restrict your monitor by specifying a list of [teams][17], [roles][15], or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+You can further restrict your monitor by specifying a list of [teams][17], [roles][15], or users allowed to edit or mute it. The monitor's creator has edit rights on the monitor by default.
 
 **Note**: The limitations are applied both in the UI and API.
 
+### Access levels
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The Muter access level and downtime access controls are in Preview.
+{{< /callout >}}
+
+Each team, role, or user on a restricted monitor has one of the following access levels:
+
+| Access level | Permissions |
+|--------------|-------------|
+| Viewer       | View the monitor. |
+| Muter        | View and mute the monitor. Muters cannot edit or delete the monitor. |
+| Editor       | View, mute, edit, and delete the monitor. |
+
+Use the Muter access level to let on-call engineers or other responders silence a monitor during an incident or maintenance window without giving them access to change its configuration. If your organization does not have the Muter access level, only Editors can mute a monitor.
+
+To mute a monitor, a user also needs the [Manage Downtimes permission][11]. A downtime only silences the monitors that its creator has Muter or Editor access to. For more information, see [Downtimes][18].
+
+**Note**: Restricting edit access to a monitor also removes mute access for users with Viewer access, including through downtimes. To let these users mute the monitor, grant them the Muter access level.
+
 ### Granular access controls
 
-Use [granular access controls][16] to limit the teams, roles, or users that can edit a monitor:
+Use [granular access controls][16] to limit the teams, roles, or users that can edit or mute a monitor:
 1. While editing or configuring a monitor, find the {{< ui >}}Define permissions and audit notifications{{< /ui >}} section.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
 1. Click {{< ui >}}Edit Access{{< /ui >}}.
 1. Click {{< ui >}}Restrict Access{{< /ui >}}.
 1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
-1. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
+1. Use the dropdown to select one or more teams, roles, or users that may edit or mute the monitor.
 1. Click {{< ui >}}Add{{< /ui >}}.
-1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission. To give the selection mute-only access, change {{< ui >}}Editor{{< /ui >}} to {{< ui >}}Muter{{< /ui >}}.
 1. Click {{< ui >}}Done{{< /ui >}}.
 
-**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of before saving.
+**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of, with {{< ui >}}Editor{{< /ui >}} access, before saving.
 
 To restore general access to a monitor with restricted access, follow the steps below:
 1. While viewing a monitor, click the {{< ui >}}More{{< /ui >}} dropdown menu.
@@ -384,3 +404,4 @@ To restore general access to a monitor with restricted access, follow the steps 
 [15]: /account_management/rbac/
 [16]: /account_management/rbac/granular_access
 [17]: /account_management/teams/
+[18]: /monitors/downtimes/#permissions

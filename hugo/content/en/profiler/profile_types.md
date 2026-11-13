@@ -43,7 +43,7 @@ Live Heap (v1.61.0+)
 : The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate engine available for your JVM version.<br />
 _Requires: Java 11+_
 
-Wall Time in Native Code
+Wall Time
 : The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
 
 Class Load
@@ -166,7 +166,7 @@ _Requires: Ruby 3.1+_ and [manual enablement][2]
 
 Heap Live Size (Preview, v2.18.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 3.1+_ and [manual enablement][2] (Currently not compatible with Ruby 4)
+_Requires: Ruby 3.1+_ and [manual enablement][2]
 
 GVL profiling (in Timeline) (v2.11.0+)
 : Records time when threads are prevented from working by other "noisy neighbor" threads, including background threads. This is useful for investigating latency spikes in the application when using the timeline visualization.<br />

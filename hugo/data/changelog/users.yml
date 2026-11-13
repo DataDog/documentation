@@ -1,0 +1,13 @@
+entries:
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40697
+    operations:
+      - CreateUser
+    title: Add team hierarchy members endpoint
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40902
+    operations:
+      - CreateUser
+    title: Update team hierarchy members endpoint to preview

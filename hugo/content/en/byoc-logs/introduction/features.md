@@ -3,6 +3,10 @@ title: Supported Features
 description: Learn which Datadog Log Explorer features are supported in BYOC Logs
 aliases:
   - /cloudprem/introduction/features/
+further_reading:
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 ---
 
 ## Overview
@@ -52,6 +56,8 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 - Bits Investigation (Preview)
 - MCP Server (Preview)
 
+<div class="alert alert-info">Bits Investigation and MCP Server are in Preview. Queries these features run against BYOC Logs data might have reduced performance.</div>
+
 ## Unsupported features
 
 BYOC Logs does not support the following features:
@@ -69,5 +75,9 @@ BYOC Logs does not support the following features:
 - Advanced query capabilities:
   - Calculated fields
   - Grok extraction (query-time parsing)
+
+  ## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/logs-restriction-queries/

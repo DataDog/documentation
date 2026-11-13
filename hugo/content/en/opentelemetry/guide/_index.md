@@ -29,7 +29,6 @@ private: true
 {{< nextlink href="https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/" >}}Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/" >}}Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/" >}}Forward logs from the OpenTelemetry Collector with the Datadog Exporter{{< /nextlink >}}
-{{< nextlink href="https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/" >}}OTLP ingestion in the Agent{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/" >}}Learn more about AWS's managed Lambda Layer for OpenTelemetry{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/" >}}Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/" >}}Monitor runtime metrics from OTel-instrumented apps with Datadog APM{{< /nextlink >}}

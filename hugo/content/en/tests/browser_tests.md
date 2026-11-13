@@ -22,7 +22,7 @@ Test Optimization integrates with Datadog [Real User Monitoring][2] to provide y
 
 To enable RUM integration ensure that [Test Optimization][1] is set up for your tests and that the application being tested is instrumented using [RUM][2].
 
-RUM integration is supported for Cypress browser tests and Selenium-driven browser tests.
+RUM integration is supported for Cypress, Playwright, WebdriverIO, and Selenium-driven browser tests.
 
 #### Cypress
 
@@ -44,13 +44,21 @@ RUM integration is supported for Cypress browser tests and Selenium-driven brows
 * `dd-trace-js` >= 5.46.0
 * `browser-sdk` >= 5.15.0
 
+#### WebdriverIO
+
+* `webdriverio` >= 9.0.0 with the Mocha or Jasmine framework adapter
+* `dd-trace-js` >= 5.125.0 on the v5 release line, or >= 6.14.0 on the v6 release line
+* `browser-sdk` >= 5.15.0
+
+RUM integration requires a WebDriver BiDi browser session.
+
 <div class="alert alert-info">
 From Browser SDK v5.0.0, enable the <code>allowUntrustedEvents</code> initialization parameter during the tests to correctly capture clicks.
 </div>
 
 ## Connect browser tests and RUM
 
-If you use Cypress, Selenium, or Playwright to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
+If you use Cypress, Playwright, WebdriverIO, or Selenium to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
 If a test ends before its RUM session flushes, the session and test can appear unlinked. To give the session more time to flush, set the `DD_CIVISIBILITY_RUM_FLUSH_WAIT_MILLIS` environment variable to a value higher than the default of 500 milliseconds.
 

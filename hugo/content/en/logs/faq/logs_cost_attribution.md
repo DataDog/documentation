@@ -187,7 +187,7 @@ Use a [Category Processor][6] to create a new `online_archives` attribute to ind
 7. Enable **Override on conflict**.
 8. Click **Create**.
 
-<div class="alert alert-info"> The order of categories in a Category Processor is important. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, be sure that the matching queries and the order of the index Category Processor are the same as the actual order of the indexes, and that the category `true` is always checked before `false` in the Online Archives Category Processor.<br><br>
+<div class="alert alert-info"> The order of categories in a Category Processor is important. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, be sure that the matching queries and the order of the index Category Processor are the same as the actual order of the indexes, and that the category <code>true</code> is always checked before <code>false</code> in the Online Archives Category Processor.<br><br>
 If the index configurations are changed, you need to update the processor configuration to reflect the change.</div>
 
 

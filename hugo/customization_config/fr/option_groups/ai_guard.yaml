@@ -1,0 +1,8 @@
+# AI Guard option groups
+
+ai_guard_sdk_language_options:
+  - id: python
+    default: true
+  - id: node_js
+  - id: java
+  - id: ruby

@@ -56,6 +56,6 @@ Security notifications can be sent to [integrations][4], such as Jira, PagerDuty
 
 [1]: /security/notifications/variables/?tab=cloudsiem#template-variables
 [2]: /help/
-[3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=threshold#describe-your-playbook
+[3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule#describe-your-playbook
 [4]: /security/notifications/#integrations
 [5]: /integrations/webhooks/

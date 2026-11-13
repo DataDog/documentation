@@ -4,175 +4,169 @@ aliases:
 - /ja/continuous_integration/guides/pull_request_comments
 - /ja/continuous_integration/integrate_tests/developer_workflows
 - /ja/continuous_integration/tests/developer_workflows
-description: Datadog Test Optimization を、他の Datadog 機能と組み合わせて活用し、開発プロセスを加速する方法を学びましょう。
+description: Datadog Test Optimization を他の Datadog 機能と組み合わせて使用し、開発プロセスを加速する方法を学びます。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: ブログ
-  text: Datadog CI Visibility で GitHub Actions のワークフローを監視する
+  text: Datadog CI Visibility で GitHub Actions ワークフローを監視する
 - link: /integrations/github/
   tag: ドキュメント
-  text: GitHub インテグレーションについて
+  text: GitHub Integration について学ぶ
 - link: /integrations/guide/source-code-integration
   tag: ドキュメント
-  text: ソースコードインテグレーションについて
-- link: /service_management/case_management
+  text: Source Code Integration について学ぶ
+- link: /incident_response/work_management
   tag: ドキュメント
-  text: Case Management について学ぶ
-title: Datadog で開発者のワークフローを強化する
+  text: Work Management について学ぶ
+title: Datadog による開発者ワークフローの強化
 ---
+## 概要 {#overview}
 
-## 概要
+[Test Optimization][5] は、開発者向けの他の Datadog 製品や GitHub などの外部パートナーと統合され、以下のような機能によって開発者のワークフローを効率化します。
 
-[Test Optimization][5] は、GitHub などの外部パートナーだけでなく、開発者向けの他の Datadog 製品とも連携し、以下のような機能を通して開発者のワークフローを効率化します。
+- [GitHub プルリクエストのコメントでテストサマリーを有効にする](#test-summaries-in-github-pull-requests)
+- [GitHub の Issue を作成して開く](#create-and-open-github-issues) 
+- [Work Management を通じて Jira の Issue を作成する](#create-jira-issues)
+- [GitHub および IDE でテストを開く](#open-tests-in-github-and-your-ide)
 
-- [GitHub のプルリクエストコメントでテストサマリーを有効にする](#test-summaries-in-github-pull-requests)
-- [GitHub Issues を作成して開く](#create-and-open-github-issues)
-- [Case Management を介して Jira の課題を作成する](#create-jira-issues)
-- [GitHub や IDE でテストを開く](#open-tests-in-github-and-your-ide)
+これらの機能はすべての Test Optimization のお客様が利用でき、[Datadog GitHub integration][4] の使用は必須ではありません。
 
-これらの機能はすべての Test Optimization 利用者が利用でき、[Datadog GitHub 連携][4]を必須とするものではありません。
+## GitHub プルリクエスト内のテストサマリー {#test-summaries-in-github-pull-requests}
 
-## GitHub のプルリクエストにおけるテストサマリー
-
-Datadog は GitHub と連携し、テスト結果のサマリーをプルリクエストのコメントに直接表示します。各サマリーにはテスト実行の概要、不安定性の発生状況、失敗したテストのエラーメッセージ、パフォーマンスのリグレッション、コードカバレッジの変更点などが含まれます。
+Test Optimization は GitHub と統合され、テスト結果のサマリーをプルリクエストのコメントに直接表示します。各サマリーには、テスト実行の概要、テストの不安定性に関する情報、失敗したテストのエラーメッセージが含まれています。
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub プルリクエストコメントのプレビュー" style="width:100%;">}}
 
-この情報により、開発者はテスト結果について即時にフィードバックを得られ、プルリクエストの画面から離れることなく失敗テストや不安定テストのデバッグが可能になります。
+この情報により、開発者はテスト結果に関するフィードバックを即座に得ることができ、プルリクエストのビューを離れることなく、失敗したテストやフレーキーテストをデバッグできます。
 
-<div class="alert alert-info">この連携は、`github.com` 上でホストされているテストサービスにのみ対応しています。</div>
+<div class="alert alert-info">この統合は、`github.com` でホストされているテストサービスでのみ利用できます。</div>
 
-## テストサマリーの有効化
+## テストサマリーを有効にする{#enable-test-summaries}
 
-以下の手順で、プルリクエストでテストサマリーを有効にすることができます。
+次の手順で、プルリクエストのテストサマリーを有効にできます。
 
-1. [GitHub インテグレーション][4]をインストールします。
-   1. [GitHub インテグレーションタイル][6]の **Configuration** タブに移動し、**+ Create GitHub App** をクリックします。
-   1. アプリケーションにプルリクエストの読み取り権限と書き込み権限を与えます。
-1. [Test Optimization Settings ページ][3]に移動します。
-1. テストサマリーを有効にしたいリポジトリを選択します。
-1. **GitHub Comments** をトグルでオンにします。
+1. [GitHub integration][4] をインストールします。
+   1. [GitHub integration tile][6] の {{< ui >}}Configuration{{< /ui >}} タブに移動し、{{< ui >}}+ Create GitHub App{{< /ui >}} をクリックします。
+   1. アプリケーションにプルリクエストの読み取りおよび書き込み権限を付与します。
+1. [{{< ui >}}CI/CD Optimization{{< /ui >}} &gt; {{< ui >}}Settings{{< /ui >}} &gt; {{< ui >}}Repositories{{< /ui >}}][3] を開きます。
+1. 設定を適用する場所を選択します。
+   - {{< ui >}}Organization{{< /ui >}} タブを選択して、すべてのリポジトリでデフォルトで PR Comments を有効にします。
+   - {{< ui >}}Repository-specific{{< /ui >}} タブを選択して、単一のリポジトリで PR Comments を有効にします。
+1. {{< ui >}}General{{< /ui >}} で、{{< ui >}}PR Comments{{< /ui >}} をオンにします。
 
-{{< img src="ci/enable-settings-github-comments.png" alt="GitHub コメントが有効化された Test Optimization Settings タブ" style="width:100%;">}}
+{{< img src="ci/enable-settings-github-comments-1.png" alt="CI/CD Settings ページの PR Comments の切り替え。" style="width:100%;">}}
 
-コメントは、テストが実行される前にオープンされ、かつ有効になっているリポジトリで少なくとも 1 回テストが実行されたプルリクエストでのみ表示されます。
+コメントは、有効なリポジトリで少なくとも 1 回テストを実行したプルリクエストにのみ表示されます。
 
-## GitHub の課題を作成し、開く
+## GitHub の Issue を作成して開く{#create-and-open-github-issues}
 
-Test Optimization を使用すると、テストに関連するコンテキスト情報や、より効率的なデバッグワークフローを可能にする Datadog へのディープリンクを含んだプリセット済みの GitHub Issue を作成・オープンできます。Test Optimization から直接 Issue を作成することで、テストの失敗や不安定テストを追跡し、責任範囲を明確に保つのに役立ちます。
+Test Optimization を使用すると、テストに関連するコンテキストや Datadog へのディープリンクが含まれた、事前入力済みの GitHub Issue を作成して開くことができ、デバッグワークフローを効率化できます。Test Optimization から直接 Issue を作成することで、テストの失敗やフレーキーテストを追跡し、責任の所在を明確にできます。
 
-### アプリ内エントリーポイント
+### アプリ内のエントリーポイント{#in-app-entry-points}
 
-Test Optimization 内では、以下の 3 つの場所からプリセット済みの GitHub Issue を作成できます。
+Test Optimization 内の以下の 3 つの領域から、事前入力済みの GitHub Issue を作成できます。
 
-- [Commit Overview ページ (**Commits** テーブル)](#commit-overview)
-- [Branch Overview ページ](#branch-overview)
-- [Test Details サイドパネル](#test-details-view)
+- [コミット概要ページ ({{< ui >}}Commits{{< /ui >}}テーブルから)](#commit-overview) 
+- [ブランチ概要ページ](#branch-overview)
+- [テスト詳細サイドパネル](#test-details-view)
 
-#### コミット概要
+#### コミットの概要{#commit-overview}
 
-コミットの概要ページは、特定のブランチから、または特定のテスト内から発見することができます。
+コミットの概要ページは、特定のブランチから、または特定のテスト内から確認できます。
 
-{{< img src="ci/github_issues_commit_overview_updated.png" alt="Datadog GitHub 課題プレビュー" style="width:100%;">}}
+{{< img src="ci/github_issues_commit_overview_updated.png" alt="Datadog GitHub issues のプレビュー" style="width:100%;">}}
 
-Commit Overview ページでは、`Failed Tests` または `New Flaky Tests` テーブルの任意の行をクリックし、**Open issue in GitHub** を選択します。
+コミットの概要ページから、`Failed Tests` または `New Flaky Tests` テーブルの任意の行をクリックし、{{< ui >}}Open issue in GitHub{{< /ui >}} を選択します。
 
-#### ブランチ概要
-このページでは、**Flaky Tests** テーブルの任意の行をクリックし、**Open issue in GitHub** を選択します。
+#### ブランチの概要{#branch-overview}
+このページから、{{< ui >}}Flaky Tests{{< /ui >}} テーブルの任意の行をクリックし、{{< ui >}}Open issue in GitHub{{< /ui >}} を選択します。
 
-{{< img src="ci/github_issues_flaky_test_updated.png" alt="Datadog GitHub Issues の不安定テストテーブルプレビュー" style="width:100%;">}}
+{{< img src="ci/github_issues_flaky_test_updated.png" alt="Datadog GitHub issues のフレーキーテストテーブルのプレビュー" style="width:100%;">}}
 
-#### テスト詳細画面
-特定のテスト実行画面内で、**Actions** ボタンをクリックし、**Open issue in GitHub** を選択します。
+#### テスト詳細ビュー{#test-details-view}
+特定のテスト実行内から、{{< ui >}}Actions{{< /ui >}} ボタンをクリックして {{< ui >}}Open issue in GitHub{{< /ui >}} を選択します。
 
-{{< img src="ci/github_issues_detail_light.png" alt="Datadog GitHub Issues のテスト詳細画面プレビュー" style="width:100%;">}}
+{{< img src="ci/github_issues_detail_light.png" alt="Datadog GitHub issues のテスト詳細ビューのプレビュー" style="width:100%;">}}
 
-また、テストの詳細情報を他の場所に貼り付けるための Markdown 形式の Issue 説明をコピーすることもできます。Markdown の説明には、テスト実行リンク、サービス、ブランチ、コミット、作成者、エラーなどの情報が含まれます。
+テスト詳細を他の場所に貼り付けるために、Markdown 形式で Issue の説明をコピーすることもできます。Markdown 形式の説明には、テスト実行リンク、サービス、ブランチ、コミット、作成者、エラーなどの情報が含まれています。
 
-{{< img src="ci/github_issues_markdown.png" alt="GitHub Issues のための Markdown 形式の Issue 説明をコピーする" style="width:50%;">}}
+{{< img src="ci/github_issues_markdown.png" alt="GitHub issues 用に Markdown 形式で Issue の説明をコピーする" style="width:50%;">}}
 
-### GitHub のサンプル課題
-以下は、あらかじめ内容が入力された GitHub Issue のサンプル例です:
-{{< img src="ci/prefilled_github_issue.png" alt="プリセットされた GitHub Issue" style="width:80%;">}}
+### GitHub Issue のサンプル {#sample-github-issue}
+以下は、事前入力済みの GitHub Issue の例です。
+{{< img src="ci/prefilled_github_issue.png" alt="事前入力済みの GitHub Issue" style="width:80%;">}}
 
-## Jira の課題を作成する
+## Jira Issue の作成{#create-jira-issues}
 
-[Case Management][8] を利用すると、テストに関する重要なコンテキストや、より効率的なデバッグを行うための Datadog へのディープリンクを含む、あらかじめ内容が入力された Jira 課題を作成・オープンできます。Test Optimization から直接課題を作成することで、テストの失敗や不安定テストを追跡し、責任の所在を明確にするのに役立ちます。
+[Work Management][8] を使用すると、テストに関連する適切なコンテキストや、デバッグワークフローを効率化するための Datadog へのディープリンクを含む、事前入力済みの Jira Issue を作成して開くことができます。Test Optimization から直接 Issue を作成することで、テストの失敗やフレーキーテストを追跡し、責任の所在を明確にできます。
 
-Jira の課題ステータスを更新すると、Case Management 上のステータスも更新され、常に最新のケース状況が反映されます。
+Jira Issue のステータスを更新すると、Work Management のステータスも更新され、最新の作業項目のステータスが反映されます。
 
-### アプリ内エントリーポイント
+### アプリ内のエントリーポイント{#in-app-entry-points-1}
 
-[セットアップした Jira 連携][7]が完了した後、Test Optimization 内の 3つの場所からケースを作成できます:
+[Jira integration][7] を設定した後、Test Optimization 内の 3 つの領域から作業項目を作成できます。
 
-- [Commit Overview ページ (**Commits** テーブル)](#commit-overview-1)
-- [Flaky Tests セクション](#branch-overview-1)
-- [Test Runs サイドパネル](#test-runs-view)
+- [コミット概要ページ ({{< ui >}}Commits{{< /ui >}}テーブルから)](#commit-overview-1) 
+- [フレーキーテストセクション](#branch-overview-1)
+- [テスト実行サイドパネル](#test-runs-view)
 
-また、[Case Management][9] から `Shift + J` を押して、手動で Jira 課題を作成することも可能です。
+[Work Management][9] の作業項目から `Shift + J`をクリックして、手動で Jira Issue を作成できます。
 
-### コミット概要
+### コミットの概要{#commit-overview-1}
 
-コミットの概要ページは、特定のブランチから、または特定のテスト内から発見することができます。
+コミットの概要ページは、特定のブランチから、または特定のテスト内から確認できます。
 
-{{< img src="continuous_integration/case_failed_test.png" alt="Commit Overview ページで Case Management の課題を作成する" style="width:100%;">}}
+コミットの概要ページから、`Failed Tests` または `New Flaky Tests` テーブルの任意の行をクリックし、{{< ui >}}Create work item{{< /ui >}} を選択します。
 
-Commit Overview ページでは、`Failed Tests` または `New Flaky Tests` テーブルの任意の行をクリックし、**Create case** を選択します。
+#### ブランチの概要{#branch-overview-1}
+このページから、{{< ui >}}Flaky Tests{{< /ui >}} テーブルの任意の行をクリックし、{{< ui >}}Create work item{{< /ui >}} を選択します。
 
-#### ブランチ概要
-このページでは、**Flaky Tests** テーブルの任意の行をクリックし、**Create case** を選択します。
+#### テスト実行ビュー{#test-runs-view}
+特定のテスト実行内から、{{< ui >}}Actions{{< /ui >}} ボタンをクリックして{{< ui >}}Create work item{{< /ui >}} を選択します。
 
-{{< img src="continuous_integration/case_flaky_test.png" alt="Flaky Tests リストで Case Management の課題を作成する" style="width:100%;">}}
+Jira integration の設定に関する詳細については、[Work Management ドキュメント][7]を参照してください。
 
-#### テスト実行画
-特定のテスト実行画面内で、**Actions** ボタンをクリックし、**Create case** を選択します。
+## GitHub および IDE でテストを開く{#open-tests-in-github-and-your-ide}
 
-{{< img src="continuous_integration/case_test_runs.png" alt="Test Runs サイドパネルで Case Management の課題を作成する" style="width:100%;">}}
+### アプリ内のエントリーポイント{#in-app-entry-points-2}
 
-Jira 連携の設定についての詳細は、[Case Management のドキュメント][7]を参照してください。
+Datadog 内で失敗したテストやフレーキーテストを検出した後、そのテストを GitHub または IDE で開いて、すぐに修正できます。
 
-## GitHub と IDE でテストを開く
+テスト実行の {{< ui >}}Overview{{< /ui >}} タブにある {{< ui >}}Error Message{{< /ui >}} セクションで、{{< ui >}}View Code{{< /ui >}} ボタンをクリックすると、Visual Studio Code、IntelliJ、または GitHub でそのテストに関連するコード行を表示できます。
 
-### アプリ内エントリーポイント
+{{< img src="continuous_integration/error_message_code.png" alt="GitHub または IDE でソースコードを表示するためのクリック可能なボタン付きインラインコードスニペット" style="width:100%;">}}
 
-Datadog でテストが失敗した、あるいは不安定になったことを検出すると、そのテストを GitHub や IDE で開いてすぐに修正するオプションがあります。
+このドロップダウンのオプションの順序は、テストが記述された言語によって異なります。
 
-テスト実行の **Overview** タブにある **Error Message** セクションで **View Code** ボタンをクリックすると、Visual Studio Code、IntelliJ、または GitHub でそのテストの関連コード行を表示できます。
+- Java ベースのテストでは IntelliJ が優先されます
+- JavaScript および Python ベースのテストでは Visual Studio Code が優先されます
 
-{{< img src="continuous_integration/error_message_code.png" alt="GitHub または IDE でソースコードを表示するためのボタンがついたインラインコードスニペット" style="width:100%;">}}
+### GitHub でソースコードを表示する{#viewing-source-code-in-github}
 
-ドロップダウンのオプション順序は、テストが書かれた言語によって変わります:
+オプションで、[GitHub インテグレーション][10]を設定して、失敗したテストやフレーキーテストのソースコードを GitHub で開くことができます。
 
-- Java ベースのテストでは IntelliJ が優先される
-- JavaScript や Python ベースのテストでは Visual Studio Code が優先される
+テスト実行の {{< ui >}}Overview{{< /ui >}} タブにある {{< ui >}}Source Code{{< /ui >}} セクションで、{{< ui >}}View on GitHub{{< /ui >}} ボタンをクリックすると、そのテストに関連するコード行を GitHub で表示できます。
 
-### GitHub でソースコードを表示する
+{{< img src="continuous_integration/source_code_integration.png" alt="GitHub または IDE でソースコードを表示するためのクリック可能なボタン付きインラインコードスニペット" style="width:100%;">}}
 
-オプションとして、[GitHub 連携][10]を設定し、失敗または不安定テストのソースコードを GitHub で開くこともできます。
+### IDE プラグインのインストール{#installing-ide-plugins}
 
-テスト実行の **Overview** タブにある **Source Code** セクションで **View on GitHub** ボタンをクリックすると、そのテストの関連コード行を GitHub で表示できます。
+テストを IDE で表示するには、IDE プラグインおよび拡張機能が必要です。
 
-{{< img src="continuous_integration/source_code_integration.png" alt="GitHub または IDE でソースコードを表示するためのボタンがついたインラインコードスニペット" style="width:100%;">}}
+- VS Code 拡張機能がインストールされていない場合は、{{< ui >}}View in VS Code{{< /ui >}} をクリックして、VS Code で直接拡張機能を開き、インストールしてください。
+- IntelliJ プラグインがインストールされていない場合は、{{< ui >}}View in IntelliJ{{< /ui >}} をクリックして、拡張機能のインストールを行ってください。互換性のある Datadog のバージョンは、[プラグインバージョンページ][2]で確認できます。
 
-### IDE プラグインのインストール
-
-IDE でテストを閲覧するには、IDE プラグインまたは拡張機能が必要です。
-
-- VS Code 拡張機能がインストールされていない場合は、**View in VS Code** をクリックすると VS Code 内で直接拡張機能のインストール画面が開きます。
-- IntelliJ プラグインがインストールされていない場合は、**View in IntelliJ** をクリックすると拡張機能のインストールが可能です。互換性のある Datadog のバージョンは [Plugin Versions ページ][2]に記載されています。
-
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/continuous_integration/guides/pull_request_comments/
 [2]: https://plugins.jetbrains.com/plugin/19495-datadog/versions
-[3]: https://app.datadoghq.com/ci/settings/test-optimization
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /ja/integrations/github/
 [5]: /ja/continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
-[7]: /ja/service_management/case_management/settings/#jira
-[8]: /ja/service_management/case_management/view_and_manage#take-action
-[9]: https://app.datadoghq.com/cases
+[7]: /ja/incident_response/work_management/settings/#jira
+[8]: /ja/incident_response/work_management/view_and_manage#take-action
+[9]: https://app.datadoghq.com/work
 [10]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[11]: https://app.datadoghq.com/ci/test-repositories

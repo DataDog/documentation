@@ -8,13 +8,11 @@ further_reading:
   text: "Learn more about Audit Trail"
 ---
 
-<div class="alert alert-danger">
-Audit Event Forwarding is in Preview.
-</div>
-
 ## Overview
 
 Audit Event Forwarding allows you to send audit events from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. Audit events are forwarded in JSON format. You can add up to three destinations for each Datadog org.
+
+Audit Trail includes forwarding of up to 500 million audit events per month for each organization. Usage above this limit may be subject to additional billing.
 
 {{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="The Custom Destinations section showing an active Login-Event-to-SIEM destination with 10.4 MB of estimated audit events volume in the last 24 hours and @action:login as query to filter." >}}
 

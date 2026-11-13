@@ -1,23 +1,22 @@
-## Default Grouping
+## Default grouping
 
 Error Tracking intelligently groups similar errors into issues. This grouping is based on the following error properties:
 
 - `service`: The service where the error occurred.
 - `error.type` or `error.kind`: The class of the error.
 - `error.message`: A description of the error.
-- `error.stack`: The filename and function name of the top-most meaningful stack frame.
+- `error.stack`: The filename and function name of the top-most meaningful stack frame. See [Stack Traces in Error Tracking](/tracing/error_tracking/stack_traces/) for details.
 
 The error stack trace is the code path followed by an error between being thrown and being captured by Datadog instrumentation. Error Tracking evaluates the topmost stack frame (the **location** of the error) and uses it to group the error.
 
 If any stack frame properties differ for two given errors, the two errors are grouped under different issues. For example, Error Tracking does not group issues across services or error types. Error Tracking also ignores numbers, punctuation, and anything that is between quotes or parentheses: only word-like tokens are used.
 
 {% alert level="info" %}
-**Tip:** To ensure optimal grouping, enclose variables in your error messages in quotes or parentheses.
+- To help ensure optimal grouping, enclose variables in your error messages in quotes or parentheses.
+- To improve grouping accuracy, Error Tracking removes variable stack frame properties such as versions, ids, dates, and so on.
 {% /alert %}
 
-**Note**: To improve grouping accuracy, Error Tracking removes variable stack frame properties such as versions, ids, dates, and so on.
-
-## Custom Grouping
+## Custom grouping
 
 Error Tracking intelligently groups similar errors into issues with a default strategy. By using _custom fingerprinting_, you can gain full control over the grouping decision and customize the grouping behavior for your error spans.
 

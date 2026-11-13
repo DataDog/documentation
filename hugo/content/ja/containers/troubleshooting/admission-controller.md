@@ -1,4 +1,5 @@
 ---
+description: Datadog Cluster Agent Admission Controller およびライブラリインジェクションに関する一般的な問題のトラブルシューティング
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: ブログ
@@ -8,25 +9,27 @@ further_reading:
   text: Cluster Agent Admission Controller
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: ドキュメント
-  text: Kubernetes ライブラリの注入
+  text: Kubernetes ライブラリインジェクション
+- link: https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/
+  tag: アーキテクチャセンター
+  text: Datadog Operator と Admission Controller を使用してアプリをインスツルメントする
 title: Admission Controller のトラブルシューティング
 ---
+## 概要 {#overview}
 
-## 概要
+このページでは、Datadog Cluster Agent の [Admission Controller][1] に関するトラブルシューティングについて説明します。
 
-このページでは、Datadog Cluster Agent の [Admission Controller][1] のトラブルシューティングを紹介します。
+## 一般的な問題 {#common-problems}
 
-## 一般的な問題
+### 既存の Pod の更新 {#update-pre-existing-pods}
+Admission Controller は、Kubernetes クラスター内で新しい Pod が作成されたときに処理を行います。Pod の作成時に、Cluster Agent は Kubernetes からリクエストを受け取り、Pod にどのような変更を加えるか (変更がある場合) の詳細を返します。
 
-### 既存のポッドの更新
-Admission Controller は、Kubernetes クラスター内の新しいポッドの作成に対応します。ポッドの作成時に、Cluster Agent は Kubernetes からリクエストを受信し、ポッドにどのような変更を加えるか (もしあれば) の詳細を応答します。
+そのため、**Admission Controller はクラスター内の既存の Pod を変更しません**。Admission Controller を最近有効にした場合や、その他の環境変更を行った場合は、既存の Pod を削除し、Kubernetes に再作成させます。これにより、Admission Controller が Pod を確実に更新します。
 
-したがって、**Admission Controller はクラスター内の既存のポッドを変更しません**。最近 Admission Controller を有効にしたり、その他の環境変更を行った場合は、既存のポッドを削除して Kubernetes に再作成させてください。これにより、Admission Controller がポッドを確実に更新します。
+### ラベルとアノテーション {#labels-and-annotations}
+Cluster Agent は、作成された Pod のラベルとアノテーションに応答しますが、その Pod を作成したワークロード (Deployment、DaemonSet、CronJob など) には応答**しません**。Pod テンプレートがこれを適切に参照していることを確認します。
 
-### ラベルとアノテーション
-Cluster Agent は、作成されたポッドのラベルとアノテーションに応答します —そのポッドを作成したワークロード (デプロイメント、DaemonSet、CronJob など) には応答**しません**。ポッドテンプレートがこれを適宜参照するようにしてください。
-
-例えば、以下のテンプレートでは [APM 構成のラベル][2]と[ライブラリ注入のアノテーション][3]を設定しています。
+例えば、次のテンプレートでは、[APM 設定用のラベル][2] と [ライブラリインジェクション用のアノテーション][3] を設定します。
 
 ```yaml
 apiVersion: apps/v1
@@ -46,20 +49,21 @@ spec:
       #(...)
 ```
 
-### アプリケーションポッドが作成されない
+### アプリケーション Pod が作成されない {#application-pods-are-not-created}
 
-Admission Controller の注入モード (`socket`、`hostip`、`service`) は Cluster Agent の構成によって設定されます。例えば、Agent で `socket` モードを有効にしている場合、Admission Controller も `socket` モードを使用します。
+Admission Controller のインジェクションモード (`socket`、`hostip`、`service`) は、Cluster Agent の設定で決まります。例えば、Agent で `socket` モードが有効になっている場合、Admission Controller も `socket` モードを使用します。
 
-GKE Autopilot または OpenShift を使用している場合は、特定の注入モードを使用する必要があります。
+GKE Autopilot または OpenShift を使用している場合は、特定のインジェクションモードを使用する必要があります。
 
-#### GKE Autopilot
+#### GKE Autopilot {#gke-autopilot}
 
-GKE Autopilot は、`hostPath` を持つ `volumes` の使用を制限します。そのため、Admission Controller が `socket` モードを使用すると、ポッドは GKE Warden によってスケジューリングがブロックされます。
+GKE Autopilot は、`volumes` を持つ `hostPath` の使用を制限します。そのため、Admission Controller が `socket` モードを使用すると、Pod は GKE Warden によってスケジューリングをブロックされます。
 
-Helm チャートで GKE Autopilot モードを有効にすると、`socket` モードが無効になり、この現象が発生しなくなります。APM を有効にするには、ポートを有効にして、代わりに `hostip` または `service` メソッドを使用します。Admission Controller はデフォルトで `hostip` を使用します。
+Helm チャートで GKE Autopilot モードを有効にすると、これが発生しないように `socket` モードが無効になります。APM を有効にするには、ポートを有効にし、代わりに `hostip` または `service` メソッドを使用します。Admission Controller は、一致させるためにデフォルトで `hostip` に設定されます。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   apm:
@@ -73,16 +77,17 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-Autopilot に関する構成の詳細については、[Kubernetes Distributions][17] を参照してください。
+Autopilot に関する詳細な設定については、[Kubernetes ディストリビューション][17] を参照してください。
 
-#### OpenShift
+#### OpenShift {#openshift}
 
-OpenShift には `SecurityContextConstraints` (SCC) があり、これは `hostPath` を持つ `volume` など追加の権限を必要とするポッドをデプロイする際に必須です。Datadog コンポーネントは Datadog ポッド固有のアクティビティを許可するために SCC を使用してデプロイされますが、Datadog は他のポッド用の SCC は作成しません。Admission Controller がソケットベースの設定をアプリケーションポッドに追加することがあり、その結果ポッドのデプロイに失敗する場合があります。
+OpenShift には、`hostPath` を持つ `volume` など、追加の権限が必要な Pod をデプロイするために `SecurityContextConstraints` (SCC) があります。Datadog コンポーネントは、Datadog Pod 固有のアクティビティを許可するために SCC を使用してデプロイされますが、Datadog は他の Pod 用の SCC を作成しません。Admission Controller がソケットベースの構成をアプリケーション Pod に追加することで、デプロイに失敗する可能性があります。
 
-OpenShift を使用している場合は、`hostip` モードを使用してください。以下の構成は、ソケットオプションを無効化することで `hostip` モードを有効にします。
+OpenShift を使用している場合は、`hostip` モードを使用します。次の構成では、ソケットオプションを無効にして `hostip` モードを有効にします。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -106,6 +111,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   apm:
@@ -116,11 +122,11 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-OpenShift に関する構成の詳細については、[Kubernetes Distributions][18] を参照してください。
+OpenShift に関する詳細な構成については、[Kubernetes ディストリビューション][18] を参照してください。
 
-## Admission Controller のステータスの表示
+## Admission Controller のステータスの確認 {#view-admission-controller-status}
 
-Cluster Agent のステータス出力は、`MutatingWebhookConfiguration` 用の `datadog-webhook` が作成され、有効な証明書を持っていることを確認するための情報を提供します。
+Cluster Agent のステータス出力には、`datadog-webhook` 用の `MutatingWebhookConfiguration` が作成され、有効な証明書があることを確認するための情報が表示されます。
 
 次のコマンドを実行します。
 
@@ -128,13 +134,13 @@ Cluster Agent のステータス出力は、`MutatingWebhookConfiguration` 用�
 % kubectl exec -it <Cluster Agent Pod> -- agent status
 ```
 
-出力は以下のようになります。
+出力は次のようになります。
 
 ```
 ...
 Admission Controller
 ====================
-
+  
     Webhooks info
     -------------
       MutatingWebhookConfigurations name: datadog-webhook
@@ -157,7 +163,7 @@ Admission Controller
         Object selector: &LabelSelector{MatchLabels:map[string]string{admission.datadoghq.com/enabled: true,},MatchExpressions:[]LabelSelectorRequirement{},}
         Rule 1: Operations: [CREATE] - APIGroups: [] - APIVersions: [v1] - Resources: [pods]
         Service: default/datadog-admission-controller - Port: 443 - Path: /injecttags
-
+  
     Secret info
     -----------
     Secret name: webhook-certificate
@@ -168,11 +174,11 @@ Admission Controller
 ...
 ```
 
-この出力は `default` ネームスペースにデプロイされた Cluster Agent に対するものです。`Service` と `Secret` は使用するネームスペースと一致している必要があります。
+この出力は、`default` 名前空間にデプロイされた Cluster Agent に関連するものです。`Service` と `Secret` は、使用している名前空間と一致している必要があります。
 
-## Admission Controller のログの表示
+## Admission Controller のログの確認 {#view-admission-controller-logs}
 
-デバッグログは Admission Controller が正しくセットアップされているかを確認するのに役立ちます。以下の構成で[デバッグログを有効にします][3]。
+デバッグログは、Admission Controller が正しく構成されていることを確認するのに役立ちます。次の構成で [デバッグログを有効化][3] します。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -201,7 +207,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### `datadog-webhook` の検証
+### 検証 `datadog-webhook` {#validate-datadog-webhook}
 
 **ログの例**:
 
@@ -217,9 +223,9 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-`datadog-webhook` の Webhook が正常に照合されていない場合は、[構成の説明][1]に従って Admission Controller が正しく有効になっていることを確認してください。
+`datadog-webhook` Webhook が正常に調整されたことを確認できない場合は、[構成手順][1] に従って Admission Controller が正しく有効になっていることを確認します。
 
-### 注入の検証
+### インジェクションの検証 {#validate-injection}
 
 **ログの例**:
 
@@ -234,20 +240,21 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/auto_instrumentation.go:336 in injectLibInitContainer) | Injecting init container named "datadog-lib-python-init" with image "gcr.io/datadoghq/dd-lib-python-init:v1.18.0" into pod with generate name example-pod-123456789-
 ```
 
-あるポッドの注入でエラーが発生した場合は、Datadog の構成とポッドの構成を Datadog サポートに連絡してください。
+特定の Pod のインジェクションでエラーが発生した場合は、Datadog の構成と Pod の構成を添えて Datadog サポートにお問い合わせください。
 
-注入の試行が**どの**ポッドにも表示されない場合は、`mutateUnlabelled` 設定を確認し、ポッドのラベルが期待される値と一致していることを確認してください。これらが一致する場合、コントロールプレーン、Webhook、サービス間のネットワークに問題がある可能性があります。詳細は[ネットワーク](#networking)を参照してください。
+*いずれの* Pod に対してもインジェクションの試行が確認できない場合は、`mutateUnlabelled` の設定を確認し、Pod のラベルが想定される値と一致していることを確認します。これらが一致している場合は、コントロールプレーン、Webhook、サービス間のネットワークに問題がある可能性が高いです。詳細については、[ネットワーク](#networking)を参照してください。
 
-## ネットワーキング
+## ネットワーク {#networking}
 
-### ネットワークポリシー
+### ネットワークポリシー {#network-policies}
 
-Kubernetes の[ネットワークポリシー][5]は、ポッドへのトラフィックの異なるイングレス (受信) とイグレス (送信) のフローを制御するのに役立ちます。
+Kubernetes の [ネットワークポリシー][5] を使用すると、Pod へのさまざまなイングレス (インバウンド) およびエグレス (アウトバウンド) のトラフィックフローを制御できます。
 
-ネットワークポリシーを使用している場合、Datadog は、このポートを介したポッドへの接続性を確保するために、Cluster Agent に対応するポリシーを作成することを推奨します。以下の構成でこれを行うことができます。
+ネットワークポリシーを使用している場合、Datadog では、このポート経由で Pod に接続できるように、Cluster Agent 用の対応するポリシーを作成することを推奨します。次の構成で設定できます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -262,6 +269,7 @@ spec:
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   #(...)
@@ -272,47 +280,48 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-`flavor` を `kubernetes` に設定して `NetworkPolicy` リソースを作成します。
+`flavor` を `kubernetes` に設定して、`NetworkPolicy` リソースを作成します。
 
-また、Cilium ベースの環境では、`flavor` を `cilium` に設定して `CiliumNetworkPolicy` リソースを作成します。
+あるいは、Cilium ベースの環境では、`flavor` を `cilium` に設定して、`CiliumNetworkPolicy` リソースを作成します。
 
-### Kubernetes ディストリビューションのネットワークのトラブルシューティング
+### Kubernetes ディストリビューションのネットワークトラブルシューティング {#network-troubleshooting-for-kubernetes-distributions}
 
-ポッドが作成されると、Kubernetes クラスターはコントロールプレーンから `datadog-webhook` にリクエストを送信し、サービスを経由して、最後に Cluster Agent ポッドに到達します。このリクエストは、コントロールプレーンから Cluster Agent が存在するノードへの、Admission Controller ポート (`8000`) を介したインバウンド接続を必要とします。このリクエストが解決された後、Cluster Agent はポッドを変更して Datadog トレーサー用のネットワーク接続を構成します。
+Pod が作成されると、Kubernetes クラスターはコントロールプレーンから `datadog-webhook` へ、サービスを経由して、最終的に Cluster Agent Pod にリクエストを送信します。このリクエストには、コントロールプレーンから、Cluster Agent が配置されているノードへのインバウンド接続が必要です。接続には Admission Controller ポート (`8000`) を使用します。このリクエストが解決されると、Cluster Agent は Pod をミューテートして、Datadog SDK のネットワーク接続を構成します。
+Admission Controller サービスはポート 443 でトラフィックを受信し、ポート 8000 で Cluster Agent Pod に転送します。
 
-お使いの Kubernetes ディストリビューションによっては、セキュリティルールや Admission Controller の設定に追加要件が発生する場合があります。
+Kubernetes ディストリビューションによっては、セキュリティルールや Admission Controller の設定に追加の要件が必要になる場合があります。
 
-#### Amazon Elastic Kubernetes Service (EKS)
+#### Amazon Elastic Kubernetes Service (EKS) {#amazon-elastic-kubernetes-service-eks}
 
-EKS クラスターでは、デフォルトで Linux ベースのノードに Cluster Agent ポッドをデプロイできます。これらのノードとその EC2 インスタンスには、以下の[インバウンドルール][7]を持つ[セキュリティグループ][6]が必要です。
+EKS クラスターでは、デフォルトで、Linux ベースの任意のノードに Cluster Agent Pod をデプロイできます。これらのノードとその EC2 インスタンスには、次の [インバウンドルール][7] を持つ [セキュリティグループ][6] が必要です。
 - **プロトコル**: TCP
 - **ポート範囲**: `8000`、または `8000` をカバーする範囲
-- **ソース**: クラスターのセキュリティグループ、またはクラスターの追加セキュリティグループの_いずれか_の ID。これらの ID は EKS コンソールの EKS クラスターの _Networking_ タブで確認できます。
+- **ソース**: クラスターセキュリティグループまたはクラスターの追加セキュリティグループの_いずれか_の ID。これらの ID は、EKS コンソールの EKS クラスターの_ネットワーキング_タブで確認できます。
 
-このセキュリティグループルールは、コントロールプレーンがポート `8000` を介してノードとダウンストリームの Cluster Agent にアクセスすることを許可します。
+このセキュリティグループルールにより、コントロールプレーンはポート `8000` 経由でノードおよびダウンストリームの Cluster Agent にアクセスできるようになります。
 
-複数の[管理ノードグループ][8]があり、それぞれに個別のセキュリティグループがある場合は、各セキュリティグループにこのインバウンドルールを追加します。
+複数の [マネージドノードグループ][8] があり、それぞれに異なるセキュリティグループがある場合は、各セキュリティグループにこのインバウンドルールを追加します。
 
-##### コントロールプレーンのロギング
+##### コントロールプレーンのログ {#control-plane-logging}
 
-ネットワーク構成を検証するには、API サーバーの [EKS コントロールプレーンのロギング][9]を有効にします。これらのログは [CloudWatch コンソール][10]で見ることができます。
+ネットワーク構成を検証するには、API サーバーの [EKS コントロールプレーンログ][9] を有効にします。これらのログは [CloudWatch コンソール][10] で確認できます。
 
-次に、ポッドの一つを削除して Admission Controller 経由でリクエストを再トリガーします。リクエストが失敗すると、以下のようなログが表示されます。
+次に、Pod を 1 つ削除して、Admission Controller を介したリクエストを再度トリガーします。リクエストが失敗した場合は、次のようなログを確認できます。
 
 ```
 W0908 <TIMESTAMP> 10 dispatcher.go:202] Failed calling webhook, failing open datadog.webhook.auto.instrumentation: failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
 E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
 ```
 
-これらの失敗は、`default` ネームスペースにデプロイされた Cluster Agent に関連しています。使用するネームスペースに応じて DNS 名が調整されます。
+これらの失敗は、`default` 名前空間にデプロイされた Cluster Agent に関連しています。DNS 名は、使用されている名前空間に応じて変わります。
 
-また、`datadog.webhook.tags` や `datadodg.webhook.config` など、Admission Controller の他の Webhook での失敗が表示されることもあります。
+`datadog.webhook.tags` や `datadodg.webhook.config` など、他の Admission Controller Webhook でも失敗が発生する可能性があります。
 
-**注:** EKS はクラスターの CloudWatch ロググループ内に 2 つのログストリームを生成することがよくあります。これらのタイプのログの両方を確認してください。
+**注:** EKS では、クラスターの CloudWatch ロググループ内に 2 つのログストリームが生成されることがあります。これらの種類のログについては、両方を確認してください。
 
-#### Azure Kubernetes Service (AKS)
+#### Azure Kubernetes Service (AKS) {#azure-kubernetes-service-aks}
 
-[Admission Controller webhooks on AKS][11] を使用するには、以下の構成を使用します。
+[AKS で Admission Controller Webhook を使用する][11] には、次の構成を使用します。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -344,31 +353,32 @@ providers:
     enabled: true
 ```
 
-`providers.aks.enabled` オプションは環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` を設定します。
+`providers.aks.enabled` オプションは、環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` を設定します。
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Google Kubernetes Engine (GKE)
+#### Google Kubernetes Engine (GKE) {#google-kubernetes-engine-gke}
 
-[GKE プライベートクラスター][12]を使用している場合、コントロールプレーンからポート `8000` へのインバウンドアクセスを許可するようにファイアウォールルールを調整する必要があります。
+[GKE プライベートクラスター][12] を使用している場合は、コントロールプレーンからポート `8000` へのインバウンドアクセスを許可するようにファイアウォールルールを調整する必要があります。
 
-[ファイアウォールルールを追加][13]して、ポート `8000` の TCP 経由のイングレスを許可します。
+[ファイアウォールルールを追加][13] して、ポート `8000` での TCP によるイングレスを許可します。
 
-既存のルールを編集することもできます。デフォルトでは、クラスターのネットワークには `gke-<CLUSTER_NAME>-master` という名前のファイアウォールルールがあります。このルールの_ソースフィルター_に[クラスターのコントロールプレーンの CIDR ブロック][14]が含まれていることを確認してください。このルールを編集して、ポート `8000` のプロトコル `tcp` によるアクセスを許可します。
+既存のルールを編集することもできます。デフォルトでは、クラスターのネットワークには `gke-<CLUSTER_NAME>-master` という名前のファイアウォールルールがあります。このルールの_ソースフィルタ_に、[クラスターのコントロールプレーンの CIDR ブロック][14] が含まれていることを確認してください。このルールを編集して、プロトコル `tcp` のポート `8000` でのアクセスを許可します。
 
-詳細については、GKE ドキュメントの[特定のユースケースのためのファイアウォールルールの追加][15]を参照してください。
+詳細については、GKE ドキュメントの [特定のユースケース向けのファイアウォールルールの追加][15] を参照してください。
 
-#### Rancher
+#### Rancher {#rancher}
 
-EKS クラスターまたはプライベート GKE クラスターで Rancher を使用している場合は、追加の構成が必要です。詳細については、Rancher ドキュメントの [Rancher Webhook - Common Issues][16] を参照してください。
+Rancher を EKS クラスターまたはプライベート GKE クラスターで使用する場合は、追加の構成が必要です。詳細については、Rancher ドキュメントの [Rancher Webhook - 一般的な問題][16] を参照してください。
 
-**注**: Datadog の Admission Controller の Webhook は Rancher の Webhook と同じように動作するため、Datadog は Rancher の `9443` の代わりにポート `8000` にアクセスする必要があります。
+**注**: Datadog の Admission Controller Webhook は Rancher Webhook と同様に動作するため、Datadog には Rancher の `9443` ではなく、ポート `8000` へのアクセスが必要です。
 
-##### Rancher と EKS
-EKS クラスターで Rancher を使用するには、以下の構成で Cluster Agent ポッドをデプロイします。
+##### Rancher と EKS {#rancher-and-eks}
+Rancher を EKS クラスターで使用するには、次の構成で Cluster Agent Pod をデプロイします。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -382,6 +392,7 @@ spec:
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   #(...)
@@ -394,10 +405,10 @@ clusterAgent:
 
 また、このページの [Amazon EKS](#amazon-elastic-kubernetes-service-eks) セクションで説明されているように、セキュリティグループのインバウンドルールを追加する必要があります。
 
-##### Rancher と GKE
-プライベート GKE クラスターで Rancher を使用するには、ポート `8000` で TCP 経由のインバウンドアクセスを許可するようファイアウォールルールを編集します。このページの [GKE](#google-kubernetes-engine-gke) セクションを参照してください。
+##### Rancher と GKE {#rancher-and-gke}
+プライベート GKE クラスターで Rancher を使用するには、ファイアウォールルールを編集して、ポート `8000` での TCP によるインバウンドアクセスを許可します。このページの [GKE](#google-kubernetes-engine-gke) セクションを参照してください。
 
-## その他の参考資料
+## 詳細情報 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,5 @@
 ---
-title: Custom Agents
+title: AI Agents
 aliases:
 - /incident_response/case_management/ai/custom_agents/
 description: Learn how to use custom agents built with Bits Agent Builder to automate Work Management workflows in Datadog.
@@ -16,13 +16,13 @@ further_reading:
 <div class="alert alert-danger">AI features for Work Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} Work Management integration with custom agents is in Preview.{{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Join the Preview for the Work Management integration with Claude">}} Assign work items to Claude managed agents. Fill out the form to request access.{{< /callout >}}
 
 ## Overview
 
 Work Management integrates with [Bits Agent Builder][1], allowing you to move from manual to automated work item creation, triage, and resolution. Assign work items to custom agents to support your different workflows.
 
-## Create custom agents
+## Create custom Datadog agents
 
 Use [Bits Agent Builder][1] to create custom agents that can triage and resolve work items. Agents can perform any action from the [Action Catalog][2], including creating, updating, and resolving work items. Here are examples of agents you can build to use in Work Management:
 
@@ -51,6 +51,8 @@ Use [work item automation rules][3] to assign work items to agents automatically
 1. Define a trigger for when the rule should run.
 1. Select **Assign Agent** and choose the custom agent to assign matching work items to.
 1. Enable and name your rule.
+
+**Note**: Agents run using the permissions of the user who assigned the agent to the work item.
 
 ## Further reading
 
