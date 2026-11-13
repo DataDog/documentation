@@ -55,8 +55,8 @@ Use a supported `dd-trace` version:
 
 | Release line | Minimum version |
 |--------------|-----------------|
-| v5 | [5.135.0][8] |
-| v6 | [6.24.0][9] |
+| v5 | [5.136.0][8] |
+| v6 | [6.25.0][9] |
 
 Configure [Test Optimization for JavaScript and TypeScript][10] for the test framework.
 
@@ -67,7 +67,7 @@ Configure [Test Optimization for JavaScript and TypeScript][10] for the test fra
 - `preventFailureSuppression`
 - `noAutoRetry`
 
-Cucumber.js uses the scenario tags `@datadog:prevent_failure_suppression` and `@datadog:no_auto_retry` instead of helpers.
+Cucumber.js uses the scenario tags `@datadog_prevent_failure_suppression` and `@datadog_no_auto_retry` instead of helpers.
 
 ### Annotate test callbacks
 
@@ -100,7 +100,7 @@ test('critical behavior', preventFailureSuppression(noAutoRetry(async ({ page })
 Use native scenario tags instead of wrapping step definitions:
 
 ```gherkin
-@datadog:prevent_failure_suppression @datadog:no_auto_retry
+@datadog_prevent_failure_suppression @datadog_no_auto_retry
 Scenario: Critical behavior
   Given a customer has items in their cart
   When the customer completes checkout
@@ -117,8 +117,8 @@ Explicit framework retries, such as `jest.retryTimes`, Mocha retries, Playwright
 
 In Playwright serial groups, `noAutoRetry` excludes the entire group from Datadog retries so tests run with their prerequisites. Explicit Playwright retry settings still apply.
 
-[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.135.0
-[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.24.0
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.136.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.25.0
 [10]: /tests/setup/javascript/
 [13]: /tests/setup/javascript/#compatibility
 
