@@ -24,7 +24,7 @@ Use this processor to protect your destinations and control costs during sudden 
 
 ### Limits
 
-Each pipeline can track up to 1,000 log groups as buckets. If a pipeline has multiple Spike Protection processors, their log groups share this limit. Each processor applies its configured spike action to logs from groups created after the limit was reached.
+Each pipeline can track up to 1,000 log groups as buckets. If a pipeline has multiple Spike Protection processors, their log groups share this limit. After the pipeline reaches this limit, each processor applies its spike action to logs from any new log groups.
 
 ## Setup
 
@@ -36,7 +36,6 @@ To set up the Spike Protection processor:
 1. Click {{< ui >}}Configure spike groups{{< /ui >}}.
 1. In the {{< ui >}}Group by attributes{{< /ui >}} field, select or enter up to five attributes to group logs by. The default attributes are `service` and `status`.
     - If you don't select any attributes, the processor tracks all matching logs as a single group. See the [Group by example](#group-by-example) section for more information.
-    - **Note**: The maximum number of group-by attributes is 5.
 1. Leave {{< ui >}}Always keep error logs{{< /ui >}} enabled to never drop or reroute logs with any of the following status values, even during a spike:
     - `error`
     - `critical`
@@ -51,19 +50,19 @@ To set up the Spike Protection processor:
 1. In the {{< ui >}}Where to route a spike{{< /ui >}} dropdown menu, choose what to do with logs in a spiking group:
     - {{< ui >}}Drop events{{< /ui >}}: Drop the logs.
     - {{< ui >}}Keep (route to destination){{< /ui >}}: Send the logs to the next step in the pipeline. Use this option to monitor spikes without acting on them.
-    - {{< ui >}}Send to overflow destination{{< /ui >}}: Send the logs to an overflow destination in **Amazon S3**, **Azure Blob Storage**, or **Google Cloud Storage**. See the setup instructions for your cloud storage: [Amazon S3][3], [Azure Blob Storage][4], or [Google Cloud Storage][5].
+    - {{< ui >}}Send to overflow destination{{< /ui >}}: Send the logs to an overflow destination. See the setup instructions for [Amazon S3][3], [Azure Blob Storage][4], or [Google Cloud Storage][5].
 1. Click {{< ui >}}Done{{< /ui >}}.
 
 ### Group by example
 
-If you group logs by `service`, `status`, and `env` the processor tracks a separate baseline for each combination of values, such as:
+If you group logs by `service`, `status`, and `env`, the processor tracks a separate baseline for each combination of values, such as:
 
 - `service:checkout` with `env:prod` and `status:info`
 - `service:checkout` with `env:prod` and `status:error`
 - `service:checkout` with `env:dev` and `status:info`
 - `service:checkout` with `env:dev` and `status:error`
 
-If the `checkout` service in the `prod` environment starts sending 50 times more `info` logs than usual, only the `service:checkout`, `env:prod`, and `status:info` group is spiking. The processor continues to send the following logs from all other services to the next step in the pipeline:
+If the `checkout` service in the `prod` environment starts sending 50 times more `info` logs than usual, only the `service:checkout`, `env:prod`, and `status:info` group is spiking. The processor continues to send logs from all other groups to the next step in the pipeline, such as:
 
 - `service:checkout` with `env:prod` and `status:error`
 - `service:checkout` with `env:dev` and `status:info`
@@ -79,41 +78,40 @@ After you deploy the pipeline, you can view and manage the spikes for each group
 1. Select your pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}}.
 1. Click the down arrow on the Spike Protection processor to expand it.
 1. Click {{< ui >}}Manage spikes{{< /ui >}}.
-1. Click the {{< ui >}}Spike Details{{< /ui >}} tab to see tracked log groups, their status, and the time the current spike started. See [Log group status](#log-group-status) for more information.
+1. Click the {{< ui >}}Spike Details{{< /ui >}} tab to see tracked log groups, their status, and the time the current spike started. See the [Log group status](#log-group-status) section for more information.
 1. Click a log group to see its graphs:
-    - {{< ui >}}Bucket volume{{< /ui >}}: The byte volume of logs the group is receiving. Use it to see how close the group is to spiking.
+    - {{< ui >}}Bucket volume{{< /ui >}}: The volume, in bytes, of logs the group receives. Use it to see how close the group is to spiking.
     - {{< ui >}}Events spike protected{{< /ui >}}: The number of logs the processor acted on while the group was spiking.
-1. Click the mute volume button to dismiss the spike or the trash icon to remove the spike event. See [Dismiss or delete a spiking group](#dismiss-or-delete-a-spiking-group) for more information.
+1. Click the mute icon to dismiss the spike, or click the trash icon to delete it. See the [Dismiss or delete a spike](#dismiss-or-delete-a-spike) section for more information.
 
 ### Log group status
 
 Each log group has one of the following statuses:
 
-- {{< ui >}}Active{{< /ui >}}: The log group is currently spiking and the spike action applies to its logs.
-- {{< ui >}}Dismissed{{< /ui >}}: The spike was dismissed, so the spike action does not apply to the group's logs for the remainder of the spike. A spike stays active for 12 hours after it is first triggered. See [How the processor works](#how-the-processor-works) for more information.
+- {{< ui >}}Active{{< /ui >}}: The log group is spiking, and the spike action applies to its logs.
+- {{< ui >}}Dismissed{{< /ui >}}: The spike was dismissed, so the spike action does not apply to the group's logs for the remainder of the spike. See the [How the processor works](#how-the-processor-works) section for more information.
 - {{< ui >}}Not triggered{{< /ui >}}: The log group is not spiking.
 
-### Dismiss or delete a spiking group
+### Dismiss or delete a spike
 
 You can take the following actions on a spiking group:
 
-- {{< ui >}}Dismiss{{< /ui >}}: Immediately stop applying the spike action to the log group because of a false positive, such as when the volume increase is expected.
-    - The spike action remains disabled for the group until the current spike expires, even if the group's volume remains above the baseline. A spike expires 12 hours after it is first triggered. See [How the processor works](#how-the-processor-works) for more information.
-- {{< ui >}}Delete{{< /ui >}}: Remove the spike event. The log group goes back to being evaluated against its baseline and can spike again as soon as its volume is above the threshold.
+- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the log group immediately. Use this action for false positives, such as when the volume increase is expected. The action stays off until the spike expires 12 hours after it was triggered, even if the group's volume stays above the baseline.
+- {{< ui >}}Delete{{< /ui >}}: Remove the spike event. The processor evaluates the log group against its baseline again, and the group can spike again as soon as its volume is above the threshold.
 
-## Monitoring spikes and the number of buckets
+## Monitor spikes and log group usage
 
-The Spike Protection processors includes the following out-of-box monitors:
+The Spike Protection processor includes the following out-of-the-box monitors:
 
-- **Observability Pipelines Spike Protection Bucket Usage**: Tracks the number of buckets used for log groups and alerts when usage approaches the 1,000-bucket limit. See [Limits](#limits) for more information.
-- **Observability Pipelines Spike Protection Triggered**: Sends an alert for the log group's bucket that has exceeded the configured spike threshold.
+- **Observability Pipelines Spike Protection Bucket Usage**: Tracks the number of buckets used for log groups and alerts when usage approaches the 1,000-bucket limit. See the [Limits](#limits) section for more information.
+- **Observability Pipelines Spike Protection Triggered**: Alerts when a log group exceeds the configured spike threshold.
 
 To enable out-of-the-box monitors:
 
 1. Navigate to [Observability Pipelines][7].
 1. Click {{< ui >}}Enable monitors{{< /ui >}} for your pipeline.
 1. Click {{< ui >}}Start{{< /ui >}} to set up a monitor for one of the suggested use cases.<br>
-    The new metric monitor page is configured based on the use case you selected. You can update the configuration to further customize it. See the [Metric monitor documentation][] for more information.
+    The new metric monitor page is configured based on the use case you selected. You can update the configuration to further customize it. See the [Metric monitor documentation][8] for more information.
 
 ## Health metrics
 
@@ -132,7 +130,7 @@ The following metrics are specific to the Spike Protection processor:
 : **Metric type**: count
 
 `pipelines.spike_protection_overflow_destination_sent_events_total`
-: **Description**: The number of events routed to the overflow destination. The `reason` tag has the value:<br>- `spike_active` for events from a spiking group<br>-  `too_many_buckets` for events from new log groups created after the group limit has been reached.
+: **Description**: The number of events routed to the overflow destination. The `reason` tag has one of the following values:<br>- `spike_active`: Events from a spiking group.<br>- `too_many_buckets`: Events from new log groups created after the pipeline reached the log group limit.
 : **Metric type**: count
 
 `pipelines.spike_protection_buckets_count`
@@ -140,24 +138,22 @@ The following metrics are specific to the Spike Protection processor:
 : **Metric type**: gauge
 
 `pipelines.spike_protection_buckets_usage`
-: **Description**: The number of log groups tracked in the pipeline as a percentage of the group limit. The value ranges from `0` to `100`. See [Limits](#limits) for more information.
+: **Description**: The number of log groups tracked in the pipeline as a percentage of the group limit. The value ranges from `0` to `100`. See the [Limits](#limits) section for more information.
 : **Metric type**: gauge
 
 ## How the processor works
 
 The Spike Protection processor detects and responds to log volume spikes as follows:
 
-{{< img src="observability_pipelines/processors/spike_protection_flow.png" alt="Flowchart of how the Spike Protection processor filters a log, checks its group for a spike, and applies the spike action." style="width:60%;" >}}
-
-1. The processor groups logs that match its filter by the configured group-by attributes, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline.
-1. For each log group, the Worker computes the average log volume and the standard deviation across one-hour intervals over the previous 24 hours.
+1. The processor groups logs that match its filter query by the configured group-by attributes, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline.
+1. For each log group, the processor computes the average log volume and the standard deviation across one-hour intervals over the previous 24 hours.
 1. A group is spiking when both of these conditions are true:
     - The group's log volume is higher than the average by more than the configured number of standard deviations (the spike threshold). The default threshold is 5 standard deviations.
     - The group's log volume is higher than the configured minimum threshold. The default minimum threshold is 100 GB.
-1. When a log group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} to logs in that group. Logs from groups that are not spiking are not affected. See [Group by example](#group-by-example) for more information.
-1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to baseline before then.
-    - To stop the spike action sooner, dismiss the spike. See the [Manage spikes](#manage-spikes) section for more information.
-    - A spike expires 12 hours after it is triggered. The processor then evaluates the group against its baseline again. If the volume is still abnormally high, the processor triggers a new spike.
+1. When a log group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} to logs in that group. Logs from groups that are not spiking are not affected. See the [Group by example](#group-by-example) section for more information.
+1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to baseline. When the spike expires, the processor evaluates the group against its baseline again and triggers a new spike if the volume is still abnormally high. To stop the spike action sooner, dismiss the spike. See the [Dismiss or delete a spike](#dismiss-or-delete-a-spike) section for more information.
+
+{{< img src="observability_pipelines/processors/spike_protection_flow.png" alt="Flowchart of how the Spike Protection processor filters a log, checks its group for a spike, and applies the spike action." style="width:60%;" >}}
 
 **Notes**:
 
