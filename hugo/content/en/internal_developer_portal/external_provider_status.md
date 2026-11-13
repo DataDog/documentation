@@ -9,43 +9,99 @@ further_reading:
 - link: "watchdog/faulty_cloud_saas_api_detection/"
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Cloud & SaaS API Detection"
+- link: "integrations/statuspage/"
+  tag: "Documentation"
+  text: "Learn about the Atlassian Statuspage integration"
 ---
 
 ## Overview
 
 The [External Provider Status page][1] provides real-time visibility into the operational status of third-party services such as payment gateways, cloud platforms, and APIs. Use this page to identify performance issues early, reduce mean time to detection (MTTD), and minimize the impact of provider disruptions.
 
-{{< img src="internal_developer_portal/external_provider_status/external_provider_status_page.png" alt="External Provider Status page showing operational status of third-party dependencies" >}}
-
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_page.png" alt="External Provider Status page with a tile for each provider showing its status, performance graph, and calling services." >}}
 
 ## Key capabilities
-External Provider Status evaluates third-party service performance by monitoring service impact rather than relying on status page updates. It uses telemetry data from your applications for earlier and more accurate detection of external provider problems.
+External Provider Status detects provider degradations from live traffic instead of waiting for providers to update their status pages. Incidents that providers report on their own status pages appear alongside these detections.
 
 External Provider Status shows:
 
 - **Real-time status**: Monitor external provider health in a single view.
+- **Error and latency degradations**: Detect abnormal error rates and abnormal latency in provider APIs.
+- **Impacted endpoints**: See which provider API endpoints are affected by a degradation.
+- **Provider-reported incidents**: View incidents that providers declare on their public status pages.
+- **Custom providers**: Track reported incidents for any provider that publishes an Atlassian Statuspage.
 - **Service dependencies**: Map external providers to internal services (requires APM).
 - **Historical data**: View 90-day performance trends and incident history.
-- **Alerting**: Receive notifications when provider degradations occur. 
+- **Alerting**: Receive notifications when provider degradations occur.
+
+## Provider status
+
+Each provider tile shows a status badge:
+
+| Badge | Meaning |
+|-------|---------|
+| {{< ui >}}OPERATIONAL{{< /ui >}} | Datadog does not detect a degradation, and the provider does not report an ongoing incident. |
+| {{< ui >}}DEGRADED{{< /ui >}} | Datadog detects a degradation from live traffic to the provider. |
+| {{< ui >}}REPORTED INCIDENTS{{< /ui >}} | The provider reports an ongoing incident on its status page. |
+
+The tile also shows when the provider last degraded, a graph of recent performance, and the services in your organization that call the provider (requires APM). Use the {{< ui >}}Team{{< /ui >}} filter to show only providers used by a team's services.
+
+Click a tile to open the provider details. The details panel includes a link to the provider's status page, the services that depend on the provider, the 90-day history, and the list of degradations and reported incidents. Each degradation shows its type ({{< ui >}}High Error Rate{{< /ui >}}, {{< ui >}}High Latency{{< /ui >}}, or {{< ui >}}High Error Rate & Latency{{< /ui >}}), the number of impacted endpoints, its duration, and whether it is {{< ui >}}Ongoing{{< /ui >}} or {{< ui >}}Resolved{{< /ui >}}.
+
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_degradations.png" alt="Provider details panel with a 90-day history bar and a degradation that has a nested reported incident." >}}
+
+## Provider-reported incidents
+
+External Provider Status also displays incidents that providers declare on their public status pages. Reported incidents are available on [supported providers](#supported-providers).
+
+The {{< ui >}}Degradations & Reported Incidents{{< /ui >}} list contains two types of events:
+
+- **Degradations**: Datadog detects these events from live traffic. They show the {{< ui >}}DEGRADED{{< /ui >}} label.
+- **Reported incidents**: The provider declares these events on its status page. They include the incident title and a link to the incident.
+
+When a reported incident overlaps in time with a degradation that Datadog detects, the reported incident appears nested under that degradation.
+
+Use the {{< ui >}}Type{{< /ui >}} filter to show all events, only degradations, or only reported incidents. In the 90-day history bar, days with a reported incident and no detected degradation appear as {{< ui >}}Operational + Reported Incident{{< /ui >}}.
+
+## Add a custom provider
+
+To monitor a provider that External Provider Status does not support out of the box, add it as a custom provider using its public Atlassian Statuspage.
+
+<div class="alert alert-info">Datadog does not detect degradations from live traffic for custom providers. Custom providers show only the incidents reported on the provider's status page.</div>
+
+Adding a custom provider requires the `manage_integrations` permission.
+
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_custom_provider.png" alt="Add a Custom Provider modal with fields for the Atlassian Statuspage URL and display name." >}}
+
+1. On the [External Provider Status page][1], click {{< ui >}}Add Custom Provider{{< /ui >}} in the upper right corner.
+2. In {{< ui >}}Atlassian Statuspage URL{{< /ui >}}, enter the URL of the provider's public status page, such as `https://status.example.com`.
+3. In {{< ui >}}Display Name{{< /ui >}}, enter the name to display for the provider.
+4. Click {{< ui >}}Create Custom Provider{{< /ui >}}. The new provider tile appears in the list.
+
+External Provider Status uses the [Statuspage integration][2] to connect custom providers, and updates the integration settings when you add one.
+
+Custom providers support public Atlassian Statuspage pages only. A custom provider tile shows the current status, the 90-day history, and the incidents reported on the provider's status page.
 
 ## Configure notifications
 
 To receive notifications for external provider degradations:
 
-1. Click `Notify Me` in the upper right corner.
-2. Define the notification conditions:
-   - Choose which provider(s) to monitor. 
-   - Choose when to be alerted for the selected provider(s):
-     - Alert on any degradation.
-     - Alert only when degradation impacts your services.
-3. Set your notification preferences.
-4. Name the notification rule.
+1. Click {{< ui >}}Notify Me{{< /ui >}} in the upper right corner.
+2. Under {{< ui >}}Set scope{{< /ui >}}, select one or more providers, or keep {{< ui >}}Any Provider{{< /ui >}}.
+3. Optionally, to receive notifications only when a degradation affects your services, select the {{< ui >}}Notify only if provider has an impact on services{{< /ui >}} checkbox.
+4. Under {{< ui >}}Choose Recipients{{< /ui >}}, select the recipients.
+5. Under {{< ui >}}Name notification rule{{< /ui >}}, enter a name for the rule.
+6. Click {{< ui >}}Create{{< /ui >}}.
 
-{{< img src="internal_developer_portal/external_provider_status/external_provider_status_notifications.png" alt="Notification configuration modal for External Provider Status alerts" >}}
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_notifications.png" alt="Create New Notification Rule modal with Set scope, Choose Recipients, and Name notification rule steps." >}}
+
+Notification rules apply only to degradations that Datadog detects. Rules do not notify on provider-reported incidents or on custom providers, and you cannot filter by degradation type.
+
+To view and edit your existing rules, click {{< ui >}}Manage Notifications{{< /ui >}} in the upper right corner. The button shows the number of existing rules.
 
 ## Supported providers
 
-External Provider Status monitors the following third-party providers:
+External Provider Status monitors the following third-party providers. If your provider is not listed and has a public Atlassian Statuspage, see the [Add a custom provider](#add-a-custom-provider) section.
 
 
 | External Provider | API monitored |  
@@ -124,5 +180,6 @@ These services are monitored in the following regions:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/watchdog/external-provider-status
+[2]: /integrations/statuspage/
 
 
