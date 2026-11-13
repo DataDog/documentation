@@ -35,5 +35,3 @@ For short timeframes, e.g. the past four hours, a 60-second interval works well.
 
 Simply click on the rollup selector in the query editor and enter the interval in seconds.
 The interval is used by Datadog to merge the sketches before the percentile is calculated.
-
-Distributions with percentiles are stored as DDSketches, and Datadog merges them in time and space at the same time. Because of this, the time aggregator has no effect on the result and only the time bucket size matters.
