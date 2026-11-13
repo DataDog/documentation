@@ -21,6 +21,8 @@ further_reading:
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
 ---
 
+## Overview
+
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
@@ -39,7 +41,7 @@ See [Set Up the Datadog MCP Server][1] for more information on connecting to the
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
-## User-controlled content in tool results
+### User-controlled content in tool results
 
 Some tools return content that users or monitored systems can set, such as tags, Docker labels, form responses, process command lines, and SQL queries. This content can include text that your AI agent might interpret as instructions. The MCP Server returns this content as data and does not run it, but it can't control how your agent interprets it. Review any actions your agent proposes based on this content, and grant only the [permissions][100] and [toolsets][1] your workflows need.
 
