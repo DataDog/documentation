@@ -4486,6 +4486,11 @@ menu:
       parent: cloud_cost_ai_costs
       identifier: cloud_cost_ai_gateway_allocation
       weight: 501
+    - name: LiteLLM Proxy Metrics
+      url: cloud_cost_management/ai_costs/litellm_proxy_metrics
+      parent: cloud_cost_ai_costs
+      identifier: cloud_cost_ai_costs_litellm_proxy_metrics
+      weight: 502
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
