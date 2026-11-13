@@ -11,7 +11,7 @@ If your application uses React, Next.js, Angular, Vue, Nuxt, Salesforce Lightnin
 
 ## Setup
 
-{% collapse-content title="Option 1: Manual client-side setup" level="h3" %}
+{% collapse-content title="Option 1: Manual client-side setup" level="h4" %}
 
 Add the SDK directly to your frontend code when you need full control over initialization and configuration.
 
@@ -414,7 +414,7 @@ After you initialize the SDK, RUM starts collecting data. To choose what RUM tra
 
 {% /collapse-content %}
 
-{% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
+{% collapse-content title="Option 2: Agentic Onboarding" level="h4" %}
 
 Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
 
@@ -422,7 +422,7 @@ Use the [Agentic Onboarding][9] page to instrument your browser application usin
 
 {% /collapse-content %}
 
-{% collapse-content title="Option 3: Server-side auto-instrumentation (RUM only)" level="h3" %}
+{% collapse-content title="Option 3: Server-side auto-instrumentation (RUM only)" level="h4" %}
 
 Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
 

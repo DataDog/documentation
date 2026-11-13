@@ -80,7 +80,7 @@ When `NativeCrashReportEnabled = true`, an unhandled C# exception that crashes t
 
 Call `AddViewAttribute` from `OnNavigatedTo` instead — by then the SDK has started the destination view. See [Add view attributes][10].
 
-## `dotnet publish` finishes but symbols are not uploaded
+## Symbols aren't uploaded after `dotnet publish` finishes
 
 The MSBuild target skips silently when `datadog-ci` is missing or `DATADOG_API_KEY` is unset. The terminal logger hides those messages by default — add `-v n -tl:off` to `dotnet publish` to see them:
 

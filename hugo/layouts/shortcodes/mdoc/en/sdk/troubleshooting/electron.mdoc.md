@@ -15,7 +15,7 @@ Windows opened before `init` completes are not tracked until you reload them. Th
 
 To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Tracking consent][8].
 
-### `init` returns `false`
+### The `init` call returns `false`
 
 `init` returns `false` if the configuration is invalid.
 
