@@ -50,13 +50,46 @@ To use an integration that is not packaged with the Datadog Agent, you must buil
 
 Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][20] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
 
-Otherwise:
+Otherwise, configure an integration:
 
-1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, a Helm chart, or the `DatadogInstrumentation` custom resource) that suits your use case.
+1. Choose a configuration method: the `DatadogInstrumentation` custom resource (recommended), Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
 {{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+You can configure Autodiscovery checks and log collection for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove Autodiscovery configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <CR_NAME>
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerName: <CONTAINER_NAME>
+        initConfig:
+          <INIT_CONFIG>
+        instances:
+          - <INSTANCES_CONFIG>
+    logs:
+      - containerName: <CONTAINER_NAME>
+        <LOGS_CONFIG>
+```
+
+For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
 {{% tab "Annotations" %}}
 
 If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section, as shown:
@@ -107,38 +140,6 @@ spec:
 
 If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
 
-{{% /tab %}}
-{{% tab "DatadogInstrumentation CRD" %}}
-
-You can configure Autodiscovery checks and log collection for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove Autodiscovery configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: <CR_NAME>
-  namespace: default
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: <WORKLOAD_NAME>
-  config:
-    checks:
-      - integration: <INTEGRATION_NAME>
-        containerName: <CONTAINER_NAME>
-        initConfig:
-          <INIT_CONFIG>
-        instances:
-          - <INSTANCES_CONFIG>
-    logs:
-      - containerName: <CONTAINER_NAME>
-        <LOGS_CONFIG>
-```
-
-For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
-
-[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 {{% /tab %}}
 {{% tab "Local file" %}}
 
@@ -409,13 +410,48 @@ The `ad_identifiers` parameter takes a list, so you can supply multiple containe
 `<LOGS_CONFIG>`
 : The configuration parameters listed under `logs` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
 
-### Advanced annotation parameters
+### Advanced check configuration
 
-In addition to the core Autodiscovery annotations for checks, logs, and instances, you can use additional annotations to customize check behavior:
+Customize check tagging in a `DatadogInstrumentation` resource or with pod annotations.
 
 #### Tag cardinality
 
-Set the tag cardinality level for a specific check using the `check_tag_cardinality` annotation. This overrides the global Agent tag cardinality setting for metrics collected by that check.
+Set the tag cardinality level for a specific check to `low`, `orchestrator`, or `high`. This setting overrides the global Agent tag cardinality setting for metrics collected by that check. If omitted, the check inherits the Agent setting.
+
+{{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Set `checkTagCardinality` on the check entry. The following example configures a Redis check for the `redis` container in the `redis` StatefulSet:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: redis-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: redis
+  config:
+    checks:
+      - integration: redisdb
+        containerName: redis
+        checkTagCardinality: low
+        instances:
+          - host: "%%host%%"
+            port: 6379
+```
+
+For setup and supported fields, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
+
+Set the `check_tag_cardinality` annotation:
 
 ```yaml
 apiVersion: v1
@@ -436,9 +472,29 @@ spec:
     - name: '<CONTAINER_NAME>'
 ```
 
-<div class="alert alert-info">The <code>check_tag_cardinality</code> annotation only affects metrics collected by integration checks. It does not affect metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global <code>dogstatsd_tag_cardinality</code> configuration parameter or the <code>DD_DOGSTATSD_TAG_CARDINALITY</code> environment variable.</div>
+{{% /tab %}}
+{{< /tabs >}}
+
+These settings affect only metrics collected by integration checks, not metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global `dogstatsd_tag_cardinality` configuration parameter or the `DD_DOGSTATSD_TAG_CARDINALITY` environment variable.
 
 For more information about tag cardinality, see [Per-check tag configuration][27].
+
+#### Disable Autodiscovery tags
+
+To suppress container and pod tags added by Autodiscovery, set `ignoreAutodiscoveryTags: true` on the check entry in `spec.config.checks`. The default is `false`. This setting does not remove tags explicitly configured on the check or tags emitted by the integration itself.
+
+For annotation-based configurations, set `ignore_autodiscovery_tags` alongside `init_config` and `instances` in the check's JSON configuration. For example, add the following annotation to a pod with a container named `redis`:
+
+```yaml
+ad.datadoghq.com/redis.checks: |
+  {
+    "redisdb": {
+      "ignore_autodiscovery_tags": true,
+      "init_config": {},
+      "instances": [{"host": "%%host%%", "port": 6379}]
+    }
+  }
+```
 
 ### Auto-configuration
 
@@ -504,6 +560,50 @@ Here, `<PASSWORD>` corresponds to the password for the `datadog` user you create
 To apply this configuration to your Postgres containers:
 
 {{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Create the following resource in the namespace of the targeted Postgres workload:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: postgres-instrumentation
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: postgres
+  config:
+    checks:
+      - integration: postgres
+        containerName: postgres
+        instances:
+          - host: "%%host%%"
+            port: 5432
+            username: datadog
+            password: "%%env_PG_PASSWORD%%"
+    logs:
+      - containerName: postgres
+        type: file
+        path: /var/log/postgres.log
+        source: postgresql
+        service: pg_service
+```
+
+Use the API version, kind, and name of your workload in `targetRef`. The Agent must have access to `/var/log/postgres.log` to collect the file. For more information, see [Collect logs from a container local log file][30].
+
+Save the resource as `postgres-instrumentation.yaml`, apply it, and check its status:
+
+```shell
+kubectl apply -f postgres-instrumentation.yaml
+kubectl describe datadoginstrumentation postgres-instrumentation -n <WORKLOAD_NAMESPACE>
+```
+
+[30]: /containers/kubernetes/log/#from-a-container-local-log-file
+
+{{% /tab %}}
 {{% tab "Annotations" %}}
 
 In your pod manifest:

@@ -42,10 +42,11 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-To use `DatadogInstrumentation` (DDI), a controller in your Agent must be enabled to track and reconcile each CR.
+With Datadog Operator **v1.30+** or Datadog Helm chart **v3.241.0+**, the `DatadogInstrumentation` controller is enabled by default, so you do not need to enable it.
 
-<div class="alert alert-info">Skip setup if you're using <code>v1.30+</code> of the Datadog Operator or <code>v3.241.0+</code> of the Datadog Helm Chart since the
-controller is enabled by default starting from these versions.</div>
+{{% collapse-content title="Legacy setup (Datadog Operator before v1.30, Helm chart before v3.241.0)" level="h5" expanded=false id="legacy-setup" %}}
+
+For earlier versions, enable the `DatadogInstrumentation` controller:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -109,6 +110,8 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% /collapse-content %}}
 
 Make sure the `DatadogInstrumentation` CRD is installed before creating resources:
 
@@ -196,6 +199,12 @@ Each entry in `checks` accepts the following fields:
 
 `instances`
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
+
+`checkTagCardinality`
+: Optional. Overrides the Agent's check tag cardinality setting for this check. Accepted values: `low`, `orchestrator`, or `high`. If omitted, the check inherits the Agent setting. This field does not affect DogStatsD metrics.
+
+`ignoreAutodiscoveryTags`
+: Optional. Set to `true` to suppress container and pod tags added by Autodiscovery. Defaults to `false`. The check keeps explicitly configured tags and tags emitted by the integration.
 
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 
@@ -287,4 +296,4 @@ Auto-discovery IDs:
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
 [7]: https://argoproj.github.io/rollouts/
-[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation
+[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdv785#enable-apm-with-datadoginstrumentation

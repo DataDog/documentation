@@ -105,7 +105,36 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: exclude_at_match
+            name: exclude_datadoghq_users
+            pattern: '\w+@datadoghq.com'
+```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 <div class="alert alert-info">
 For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
@@ -229,7 +258,36 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: include_at_match
+            name: include_datadoghq_users
+            pattern: '\w+@datadoghq.com'
+```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
@@ -311,7 +369,34 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: exclude_truncated
+```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
@@ -398,7 +483,37 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 - The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `cardpayment` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: mask_sequences
+            name: mask_credit_cards
+            replace_placeholder: "[masked_credit_card]"
+            pattern: '(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})'
+```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
@@ -510,7 +625,36 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 ```
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+After you complete the [`DatadogInstrumentation` setup][10], apply the following resource to the `postgres` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: postgres-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: postgres
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: postgresql
+        service: database
+        log_processing_rules:
+          - type: multi_line
+            name: log_start_with_date
+            pattern: '\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])'
+```
+
+[10]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 

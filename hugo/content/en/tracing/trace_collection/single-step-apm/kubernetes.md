@@ -556,7 +556,7 @@ This method requires Datadog Agent and Cluster Agent **v7.85.0 or later**, with 
 - Datadog Operator **v1.31.0 or later**.
 - Datadog Helm chart **v3.255.0 or later**.
 
-##### Create a resource targeting your workload
+##### Create a resource targeting your workload {#enable-apm-with-datadoginstrumentation}
 
 Create and apply a `DatadogInstrumentation` resource in the same namespace of the workload you wish to target. This example instruments the `checkout` Deployment in the `apps` namespace with the default Java SDK:
 
