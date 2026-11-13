@@ -95,6 +95,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
   {{< nextlink href="/incident_response/on-call/pages">}}<u>Pages</u>: Trigger Pages from monitors, incidents, security signals, and other sources. Acknowledge, reassign, or resolve Pages, or promote them to incidents.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/compensation">}}<u>Compensation</u>: Define compensation plans and generate reports of how much to pay responders for on-call time.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/notification_preferences">}}<u>Notification Preferences</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
 {{< /whatsnext >}}
 
