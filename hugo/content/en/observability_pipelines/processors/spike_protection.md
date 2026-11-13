@@ -147,13 +147,17 @@ The following metrics are specific to the Spike Protection processor:
 
 The Spike Protection processor detects and responds to log volume spikes as follows:
 
+{{< img src="observability_pipelines/processors/spike_protection_flow.png" alt="Flowchart of how the Spike Protection processor filters a log, checks its group for a spike, and applies the spike action." style="width:60%;" >}}
+
 1. The processor groups logs that match its filter by the configured group-by attributes, such as `service` and `status`. Each unique combination of attribute values is tracked separately with its own baseline.
 1. For each log group, the Worker computes the average log volume and the standard deviation across one-hour intervals over the previous 24 hours.
 1. A group is spiking when both of these conditions are true:
     - The group's log volume is higher than the average by more than the configured number of standard deviations (the spike threshold). The default threshold is 5 standard deviations.
     - The group's log volume is higher than the configured minimum threshold. The default minimum threshold is 100 GB.
-1. When a log group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} to that group's logs. Logs from groups that are not spiking are not affected. See [Group by example](#group-by-example) for more information.
-1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to baseline before then. To stop the spike action sooner, dismiss the spike. See the [Manage spikes](#manage-spikes) section for more information. A spike expires 12 hours after it is triggered. The processor then evaluates the group against its baseline again. If the volume is still abnormally high, the processor triggers a new spike.
+1. When a log group is spiking, the processor applies the action selected in {{< ui >}}Where to route a spike{{< /ui >}} to logs in that group. Logs from groups that are not spiking are not affected. See [Group by example](#group-by-example) for more information.
+1. After a spike is triggered, it stays active for 12 hours, even if the group's volume returns to baseline before then.
+    - To stop the spike action sooner, dismiss the spike. See the [Manage spikes](#manage-spikes) section for more information.
+    - A spike expires 12 hours after it is triggered. The processor then evaluates the group against its baseline again. If the volume is still abnormally high, the processor triggers a new spike.
 
 **Notes**:
 
