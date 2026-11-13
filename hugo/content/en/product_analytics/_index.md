@@ -56,6 +56,14 @@ Product Analytics collects client-side user activity data through the Datadog SD
 
 To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your application and [enable Product Analytics](#enable-product-analytics) in Datadog. You can also [send server-side events through the API](#track-server-side-events-api).
 
+{{< skill-callout
+    title="Set up Product Analytics with an agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided Product Analytics setup."
+    action_name="copy_dd_orchestrator_product_analytics_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, set up Datadog Product Analytics in my project.
+{{< /skill-callout >}}
+
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
 
 ### Track client-side events (SDK)
