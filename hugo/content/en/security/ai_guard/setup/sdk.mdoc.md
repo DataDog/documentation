@@ -414,7 +414,7 @@ Middlewares are part of the security decision, not only observers of it:
 
 - **Skipping is an allow decision.** When `should_evaluate` returns `False`, AI Guard doesn't create a span or call the AI Guard service, and the request proceeds unevaluated. The evaluate method returns an `ALLOW` action with the reason `skipped by middleware` and the original messages. The remaining middlewares aren't checked, and `post_evaluate` isn't called. Skip only requests that you trust.
 - **Hook exceptions are contained.** If a hook raises an exception, the SDK logs it at debug level and ignores it, so a middleware never breaks the agent's model call. If `should_evaluate` raises, the evaluation runs.
-- **Don't modify the context.** `context.result` is the same object that the evaluate method returns, so changing it in `post_evaluate` changes the decision your code and the automatic integrations act on. Treat `context.result` and `context.request.messages` as read-only.
+- **Don't modify the context.** Treat `context.result` and `context.request.messages` as read-only. Modifying `context.result` changes the evaluation returned to direct SDK callers, but doesn't change AI Guard's blocking decision.
 - **Don't set reserved tags.** Tags that a middleware sets on `context.ai_guard_span` aren't filtered. Never set keys equal to `ai_guard` or starting with `ai_guard.`, which would misreport the evaluation in Datadog, or span control keys such as `service.name`, `manual.keep`, or `manual.drop`.
 
 ### Middleware context
