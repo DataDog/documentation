@@ -936,7 +936,7 @@ docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json
 
 Pour épingler un agent à une version hebdomadaire spécifique, utilisez le tag daté et immuable publié avec celui-ci, sous la forme `X.Y.Z-rc.N-browsers-YYYY-MM-DD`. Une image conforme à la norme FIPS est publiée sous la forme `datadog/synthetics-private-location-worker-fips:browsers-latest`.
 
-**Remarque** : les navigateurs `browsers-latest` ne sont pas validés sur les emplacements gérés par Datadog, les tests de navigateur peuvent donc être moins stables que sur l'image `latest`. Ce canal privilégie les versions de navigateur les plus récentes au détriment de la stabilité.
+**Remarque** : L'image `browsers-latest` sacrifie la stabilité au profit des versions de navigateur les plus récentes. Ces navigateurs ne sont pas validés sur les emplacements gérés par Datadog ; les tests de navigateur peuvent donc être moins stables que ceux utilisant la dernière image.
 
 ### Testez votre endpoint interne {#test-your-internal-endpoint}
 

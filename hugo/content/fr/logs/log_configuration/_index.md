@@ -3,9 +3,12 @@ aliases:
 - /fr/logs/processing
 description: Traiter, enrichir, contrôler et gérer vos logs depuis la page Logs Configuration
 further_reading:
+- link: https://learn.datadoghq.com/courses/debugging-log-pipelines
+  tag: Centre d'apprentissage
+  text: Débogage des pipelines de logs
 - link: /data_security/pci_compliance/
   tag: Documentation
-  text: Configurer une organisation Datadog conforme à la norme PCI
+  text: Conformité PCI DSS
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: Blog
   text: En savoir plus sur Logging without Limits*
@@ -15,32 +18,32 @@ further_reading:
 - link: /logs/guide/
   tag: Guide
   text: Guides supplémentaires sur la journalisation avec Datadog
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Architecture Center
+  text: Guide des stratégies d'indexation de Log Management avec Datadog
 title: Configuration des logs
 ---
+## Présentation {#overview}
 
-## Présentation
+Datadog Logging without Limits* dissocie l'ingestion et l'indexation des logs. Choisissez les logs à indexer et à conserver, ou à archiver, et gérez les paramètres et les contrôles de manière centralisée depuis la page de configuration des logs, accessible via [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
 
-La solution Logging without Limits* de Datadog dissocie l'ingestion des logs de leur indexation. Elle vous permet de choisir les logs que vous souhaitez indexer et conserver, ou archiver, et de gérer les paramètres et contrôles de façon globale depuis la page de configuration des logs, accessible depuis [**Logs > Configuration**][1].
+Vous pouvez également gérer les pipelines, les index et les archives de logs via un agent IA connecté au Datadog MCP Server. Activez la suite d'outils `logs-configuration` pour afficher, créer, mettre à jour, supprimer et réorganiser ces ressources. Consultez [Configurer le Datadog MCP Server][13] pour connecter votre agent. Pour connaître les outils disponibles et obtenir des exemples de prompts, consultez [Outils Logs Configuration][14].
 
-**Remarque** : consultez la section [Conformité PCI DSS][2] pour obtenir des informations sur la mise en place d'une organisation Datadog conforme à la norme PCI.
+## Options de configuration {#configuration-options}
 
-{{< img src="logs/log_configuration_overview1.mp4" alt="La section de configuration des logs dans l'application Datadog" video=true >}}
+- Contrôlez la manière dont vos logs sont traités avec les [pipelines][3] et les [processors][4].
+- Définissez des [attributs et des alias][5] pour unifier votre environnement de logs.
+- [Générez des métriques à partir des logs ingérés][6] pour synthétiser à moindre coût les données de logs issues de l'ensemble d'un flux ingéré.
+- Mettez en place un contrôle précis de votre budget de gestion des logs grâce aux [index de logs][7].
+- Transférez les logs ingérés vers votre propre bucket de stockage cloud pour les conserver en tant qu'[archive][8] à des fins de dépannage ultérieur ou d'audits de conformité.
+- [Recherchez dans une archive][12] avec Archive Search pour interroger les logs en temps réel directement depuis le stockage. Utilisez le mode **Search & Rehydration** lorsque vous avez besoin d'un accès complet à la plateforme ou d'une rétention plus longue.
+- Restreignez [l'accès aux données de logs][10] à l'aide de requêtes de restriction.
 
-## Options de configuration
-
-- Contrôlez le traitement de vos logs avec des [pipelines][3] et des [processeurs][4].
-- Définissez [des attributs et des alias][5] pour unifier votre environnement de logs.
-- [Générez des métriques à partir des logs ingérés][6] afin de synthétiser à moindre coût les données des logs d'un flux entier ingéré.
-- Contrôlez de façon extrêmement précise votre budget de gestion des logs grâce aux [index de logs][7].
-- Transférez vos logs ingérés vers votre propre compartiment de stockage dans le cloud pour conserver une [archive][8], afin d'anticiper de futurs dépannages ou audits.
-- [Réintégrez une archive][9] afin d'analyser ou d'étudier des événements de log anciens ou exclus de l'indexation.
-- Restreignez l'[accès aux données des logs][10] grâce à des requêtes de restriction.
-
-## LogxmExplorer
+## Log Explorer {#log-explorer}
 
 Une fois votre configuration terminée, commencez à examiner et à étudier vos logs dans le [Log Explorer][11].
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -55,6 +58,8 @@ Une fois votre configuration terminée, commencez à examiner et à étudier vos
 [6]: /fr/logs/log_configuration/logs_to_metrics/
 [7]: /fr/logs/log_configuration/indexes
 [8]: /fr/logs/log_configuration/archives/
-[9]: /fr/logs/log_configuration/rehydrating
 [10]: /fr/logs/guide/logs-rbac/
 [11]: /fr/logs/explorer/
+[12]: /fr/logs/explorer/archive_search/
+[13]: /fr/mcp_server/setup/
+[14]: /fr/mcp_server/tools/#logs-configuration

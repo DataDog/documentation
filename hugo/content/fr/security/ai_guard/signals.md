@@ -1,17 +1,22 @@
 ---
+description: Créez des règles de détection pour les évaluations d'AI Guard, examinez
+  les signaux qu'elles génèrent et alertez sur l'activité d'AI Guard.
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
   text: AI Guard
-- link: /security/ai_guard/onboarding/
+- link: /security/ai_guard/setup/
   tag: Documentation
-  text: Démarrez avec AI Guard
+  text: Configurer AI Guard
 - link: /security/detection_rules/
   tag: Documentation
   text: Règles de détection
-title: Signaux de sécurité AI Guard
+- link: https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/
+  tag: Blog
+  text: Détectez quand votre agent IA copie une injection de prompt auto-réplicable
+title: Effectuez le triage et examinez les signaux d'AI Guard
 ---
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard n'est pas disponible dans le {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard n'est pas disponible dans le {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 Les signaux de sécurité AI Guard offrent une visibilité sur les menaces et les attaques qu'AI Guard détecte dans vos applications. Ces signaux sont construits sur les [signaux de sécurité AAP (Application and API Protection)][1] et s'intègrent aux workflows de surveillance de la sécurité de Datadog.
@@ -55,17 +60,9 @@ Pour créer des règles de détection AI Guard :
          <td>Cibler des types d'attaques spécifiques</td>
          <td>
            <ul>
-             <li><code>jailbreak</code></li>
-             <li><code>indirect-prompt-injection</code></li>
-             <li><code>destructive-tool-call</code></li>
-             <li><code>denial-of-service-tool-call</code></li>
-             <li><code>security-exploit</code></li>
-             <li><code>authority-override</code></li>
-             <li><code>role-play</code></li>
-             <li><code>instruction-override</code></li>
-             <li><code>obfuscation</code></li>
-             <li><code>system-prompt-extraction</code></li>
-             <li><code>data-exfiltration</code></li>
+             <li><a href="/security/ai_guard/#attack-categories">Tags de catégorie d’attaque</a></li>
+             <li><code>tool-blocked</code> et <code>tool-allowed</code>, ajoutées par les politiques d'outils</li>
+             <li><code>regexp-blocked</code>, ajoutées par des règles personnalisées</li>
            </ul>
          </td>
        </tr>
@@ -133,6 +130,24 @@ Lorsque vous cliquez sur un span dans l'Explorer, vous pouvez voir :
 
 De plus, vous pouvez cliquer sur {{< ui >}}Explore in graph view{{< /ui >}} pour voir les requêtes de la conversation sous forme de graphique, ou afficher le span dans [APM][8] ou [Agent Observability][9].
 
+## Soyez alerté de l’activité d’AI Guard avec Datadog Monitors {#set-up-datadog-monitors}
+
+Pour créer des moniteurs qui déclenchent des alertes à certains seuils, vous pouvez utiliser [Datadog Monitors][10]. Vous pouvez surveiller les évaluations d’AI Guard à l’aide de traces APM ou de métriques. Pour les deux types de moniteurs, vous devez définir les conditions d’alerte et le nom de l’alerte, puis configurer les notifications ; Datadog recommande d’utiliser Slack.
+
+### Moniteur APM {#apm-monitor}
+
+Suivez les instructions pour créer un [moniteur APM][11], en définissant son périmètre sur {{< ui >}}Trace Analytics{{< /ui >}}.
+
+- Pour surveiller les évaluations refusées, utilisez la requête `@ai_guard.action:DENY`.
+- Pour surveiller le trafic bloqué, utilisez la requête `@ai_guard.blocked:true`.
+
+### Moniteur de métriques {#metric-monitor}
+
+Suivez les instructions pour créer un [moniteur de métriques][12].
+
+- Pour surveiller les évaluations refusées, utilisez la métrique `datadog.ai_guard.evaluations` avec le tag `action:deny`.
+- Pour surveiller le trafic bloqué, utilisez la métrique `datadog.ai_guard.evaluations` avec le tag `blocking_enabled:true`.
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -143,6 +158,9 @@ De plus, vous pouvez cliquer sur {{< ui >}}Explore in graph view{{< /ui >}} pour
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://app.datadoghq.com/security/ai-guard/investigate
-[7]: /fr/security/ai_guard/setup/#blocking-policy
+[7]: /fr/security/ai_guard/policies/#blocking-policy
 [8]: /fr/tracing/
 [9]: /fr/llm_observability/
+[10]: /fr/monitors/
+[11]: /fr/monitors/types/apm/?tab=traceanalytics
+[12]: /fr/monitors/types/metric/

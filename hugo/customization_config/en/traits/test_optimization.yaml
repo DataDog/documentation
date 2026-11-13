@@ -1,0 +1,5 @@
+traits:
+  - id: ci_provider
+    label: CI provider
+    type: text
+    internal_notes: The CI service and execution topology used to run jobs. Distinct from host (underlying infrastructure), prog_lang (programming language), and platform (test framework).

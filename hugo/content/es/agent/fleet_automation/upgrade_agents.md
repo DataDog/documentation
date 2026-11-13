@@ -7,12 +7,17 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentación
   text: API de Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Actualizar agentes
 ---
-Fleet Automation le permite actualizar de forma remota los Agents de Datadog en toda su flota sin acceso directo a servidores individuales. Puede activar las actualizaciones de inmediato, programarlas durante las ventanas de mantenimiento o automatizarlas a través de la API.
+Fleet Automation le permite actualizar de forma remota los Agents de Datadog en toda su flota sin acceso directo a servidores individuales. Puede activar las actualizaciones de inmediato, programarlas durante las ventanas de mantenimiento o automatizarlas a través de Terraform o la API.
 
 ## Requisitos previos {#prerequisites}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+En US1-FED y US2-FED, las actualizaciones remotas requieren Agent 7.85.0 o posterior tanto en Linux como en Windows. Si ejecuta una versión anterior, utilice las <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">instrucciones de instalación de Agent</a> para actualizarla antes de realizar la actualización a través de Fleet Automation.
+</div>
+{{< /site-region >}}
 
 - [Remote Configuration][7] habilitada para su organización y la clave de API del Agent
 - [Actualizaciones remotas][8] habilitadas en cada Agent de VM de destino (`remote_updates: true`)
@@ -71,6 +76,38 @@ La actualización remota de Agents en cargas de trabajo contenerizadas no es com
 ## Actualice Agents con la API {#upgrade-agents-with-the-api}
 
 Fleet Automation proporciona una API para activar actualizaciones de Agent de forma programática o en un horario recurrente. Inicie actualizaciones para cualquier conjunto de servidores con consultas de filtro, o cree horarios que se ejecuten durante ventanas de mantenimiento definidas con una versión de Agent especificada. Para obtener todos los detalles, consulte la [Fleet Automation API][3].
+
+## Programe las actualizaciones de Agent con Terraform {#schedule-agent-upgrades-with-terraform}
+
+Utilice el proveedor de Datadog para Terraform para crear y administrar como código los horarios de actualización de Agent. El recurso `datadog_fleet_schedule` define los servidores de destino, la versión de Agent y la ventana de mantenimiento recurrente. Fleet Automation realiza las actualizaciones de acuerdo con el horario.
+
+Antes de comenzar:
+
+- Verifique que los Agents cumplan con los [requisitos previos de actualización](#prerequisites).
+- [Configure el proveedor de Datadog para Terraform][9] (versión 4.22.0 o posterior).
+- Utilice una clave de aplicación con los permisos `agent_upgrade_write` y `hosts_read`.
+
+El siguiente ejemplo define un horario inactivo para los servidores que coinciden con `env:staging service:example`. El horario apunta a la versión más reciente de Agent (`version_to_latest = 0`). Especifica una ventana de mantenimiento de dos horas (`maintenance_window_duration = 120`, en minutos), que comienza a las 03:00 los martes y jueves en la zona horaria `America/New_York`.
+
+```hcl
+resource "datadog_fleet_schedule" "staging" {
+  name              = "Staging Agent upgrades"
+  query             = "env:staging service:example"
+  status            = "inactive"
+  version_to_latest = 0
+
+  rule = {
+    days_of_week                = ["Tue", "Thu"]
+    maintenance_window_duration = 120
+    start_maintenance_window    = "03:00"
+    timezone                    = "America/New_York"
+  }
+}
+```
+
+Reemplace la consulta de servidores y la ventana de mantenimiento con los valores para su entorno. Ejecute `terraform plan` para revisar los cambios y, luego, `terraform apply` para crear el horario. Cuando esté listo para habilitar las actualizaciones programadas, establezca `status` en `active` y aplique el cambio.
+
+Para ver todas las opciones admitidas e instrucciones para importar un horario existente, consulte la [documentación del recurso `datadog_fleet_schedule`][10].
 
 ## Proceso de actualización {#upgrade-process}
 
@@ -133,3 +170,5 @@ Después de actualizar, [habilite la administración remota del Agent][8] para u
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /es/agent/guide/setup_remote_config
 [8]: /es/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /es/getting_started/integrations/terraform/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/fleet_schedule

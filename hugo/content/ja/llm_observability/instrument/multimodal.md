@@ -1,5 +1,5 @@
 ---
-description: Agent Observability で LLM スパンに音声や画像を添付し、(自動または手動インスツルメンテーションにより) トレースビューでインラインでレンダリングできます。
+description: Agent Observability で LLM スパンに音声や画像を添付し、(自動または手動インスツルメンテーションにより) トレースビューで、インラインでレンダリングできます。
 further_reading:
 - link: /llm_observability/instrument/sdk/
   tag: ドキュメント
@@ -12,7 +12,7 @@ further_reading:
   text: Agent Observability HTTP API リファレンス
 title: マルチモーダルサポート
 ---
-## 概要{#overview}
+## 概要 {#overview}
 
 LLM スパンに画像や音声を添付して、音声エージェントや画像処理を行うエージェントのトラブルシューティングを行います。モデルが受信した画像を検査し、入力音声と出力音声をトレースビューで他のスパンデータと並べて直接再生できます。ログや別のストレージからインタラクションを再構築する必要はありません。音声会話の場合、各ターンのトランスクリプトを音声と並べて表示できます。
 
@@ -33,7 +33,7 @@ LLM スパンに画像や音声を添付して、音声エージェントや画�
 
 ## 自動インスツルメンテーション {#automatic-instrumentation}
 
-Datadog の [LLM インテグレーション][3]は以下のライブラリのメディアパーツを自動的に埋め込みます。コードの変更は必要ありません。
+[自動インスツルメンテーション][3]を有効にして、以下のライブラリからメディアをキャプチャします。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -42,12 +42,14 @@ Datadog の [LLM インテグレーション][3]は以下のライブラリの�
 | ----------- | -------------- | ------------------- |
 | OpenAI チャット補完 | 入力 `input_audio` コンテンツおよび出力音声 (モデルの音声トランスクリプトを含む)| >= 4.12.0 |
 | OpenAI Realtime API | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | >= 4.13.0 |
+| Amazon Nova 2 Sonic (`aws-sdk-bedrock-runtime`) | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | >= 4.17.0 |
+| ElevenLabs Agents (WebSocket) | 会話の入力および出力音声、トランスクリプト、およびクライアントツール呼び出し | >= 4.17.0 |
 | LiteLLM | OpenAI チャット補完形式の入力および出力音声 | >= 4.12.0 |
 | OpenAI チャット補完および Responses API | インライン base64 エンコード画像 | >= 4.15.0 |
 | OpenAI エージェント | インライン base64 エンコード画像 | >= 4.15.0 |
 | Anthropic | インライン base64 エンコード画像 | >= 4.15.0 |
 
-OpenAI Realtime API 会話の各ターンは、独自の LLM スパンを生成します。Raw `pcm16` および G.711 音声は、ブラウザで再生できるように WAV に変換されます。Realtime API インスツルメンテーションを無効にするには、`DD_OPENAI_REALTIME_ENABLED=false` を設定します。
+Nova 2 Sonic および ElevenLabs には、`ddtrace` 4.17以降が必要です。Nova 2 Sonic には Python 3.12 以降と`aws-sdk-bedrock-runtime` 0.11.0 以降も必要で、ElevenLabs には`elevenlabs` 2.70.0 以降が必要です。
 
 ストリーミングされたチャット補完 (`stream=True`) 内の音声はキャプチャされません。
 
@@ -58,11 +60,16 @@ OpenAI Realtime API 会話の各ターンは、独自の LLM スパンを生成�
 | ----------- | -------------- | ------------------- |
 | OpenAI チャット補完 | 入力 `input_audio` コンテンツおよび出力音声 (モデルの音声トランスクリプトを含む)| v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI エージェント | OpenAI チャット補完形式の入力および出力音声 | v6: >= 6.7.0; v5: >= 5.118.0 |
+| OpenAI Realtime API | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | v6: >= 6.17.0; v5: >= 5.128.0 |
+| Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | v6: >= 6.22.0; v5: >= 5.133.0 |
+| ElevenLabs Agents (WebSocket) | 会話の入力および出力音声、トランスクリプト、およびクライアントツール呼び出し | 近日公開 |
 
 ストリーミングされたチャット補完内の音声はキャプチャされません。
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="音声再生タイムライン、ユーザーとエージェントの発話セグメント、応答レイテンシーバッジ、およびターンのトランスクリプトを備えた、Agent Observability における音声会話。" caption="自動インスツルメンテーションでキャプチャされた音声会話の再生とターンのトランスクリプト。" style="width:100%;" >}}
 
 インテグレーションは、リモート URL やファイル ID によって参照される画像を取得しません。アプリケーションが base64 データとしてインラインで送信する画像のみをキャプチャします。インテグレーションは、メディアをキャプチャできない場合にはメッセージ内に `[image]` や `[audio]` といったテキストマーカーを記録します。
 
@@ -242,13 +249,13 @@ voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'o
 
 音声はプレーヤーとして表示され、その横にメッセージテキストが表示されます。音声会話の場合、そのテキストはターンのトランスクリプトになります。プレーヤーを選択して、音声を読み込んで再生します。
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、トランスクリプト「Hey, how are you?」付きのインラインオーディオプレーヤーが表示され、ASSISTANT からの出力メッセージには、「Click to play audio」というコントロールとトランスクリプト「Hey!」が表示されます。とても元気です。聞いてくれてありがとうございます。あなたはどうですか?" style="width:100%;" >}}
+{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、トランスクリプト「Hey, how are you?」付きのインラインオーディオプレーヤーが表示され、ASSISTANT からの出力メッセージには、「Click to play audio」というコントロールとトランスクリプト「Hey!」が表示されます。I'm doing great, thanks for asking.How about you?'." style="width:100%;" >}}
 
 ### 対応している形式 {#supported-formats}
 
 画像は、MIME タイプが `image/png`、`image/jpeg`、`image/webp`、`image/gif` のいずれかであり、宣言された MIME タイプがエンコードバイトと一致する場合にレンダリングされます。SVG 画像はレンダリングされません。トレースビューは外部へのリクエストを行わないため、リモート URL によって参照される画像は取得されず、テキストとして表示されます。
 
-音声はブラウザのネイティブオーディオプレーヤーで再生されます。対応しているコンテナには、`audio/wav`、`audio/mpeg`、`audio/ogg`、`audio/webm` などがあります。RAW フォーマット (`pcm16`、`g711_ulaw`、`g711_alaw` など) は再生されません。RAW 音声を添付する前に、WAV に変換してください。Python OpenAI Realtime API インテグレーションでは、この変換が自動的に行われます。
+音声はブラウザのネイティブオーディオプレーヤーで再生されます。対応しているコンテナには、`audio/wav`、`audio/mpeg`、`audio/ogg`、`audio/webm` などがあります。RAW フォーマット (`pcm16`、`g711_ulaw`、`g711_alaw` など) は再生されません。RAW 音声を添付する前に、WAV に変換してください。OpenAI Realtime API、Nova 2 Sonic、ElevenLabs の自動インテグレーションは、サポート対象の RAW 音声を WAV に変換します。
 
 ## 制限と動作{#limits-and-behavior}
 
@@ -258,10 +265,10 @@ voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'o
 
 ## ベストプラクティス {#best-practices}
 
-- **型指定されたメディアフィールドを使用してください。**メッセージの `content` に base64 文字列を埋め込むのではなく、`image_parts` と `audio_parts` を使用してメディアを添付してください。型指定されたフィールドのみがトレースビューでレンダリングされます。
-- **音声とともにトランスクリプトを添付してください。**メッセージの `content` をターントランスクリプトに設定してください。これにより、音声が再生される前であってもスパンが評価器により読み取り可能、検索可能、使用可能になります。
+- **型指定されたメディアフィールドを使用します。**メッセージの `content` に base64 文字列を埋め込むのではなく、`image_parts` と `audio_parts` を使用してメディアを添付します。型指定されたフィールドのみがトレースビューでレンダリングされます。
+- **音声とともにトランスクリプトを添付します。**メッセージの `content` をターンのトランスクリプトに設定します。これにより、音声が再生される前であってもスパンが評価器により読み取り可能、検索可能、使用可能になります。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

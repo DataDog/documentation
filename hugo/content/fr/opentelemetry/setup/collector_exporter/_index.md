@@ -37,7 +37,7 @@ title: Configurer le Collector OpenTelemetry
 Envoyez des traces, des métriques et des logs à Datadog en utilisant le Collector OpenTelemetry. Les configurations sur cette page sont testées avec la distribution OpenTelemetry Collector Contrib v0.154.0 et utilisent un pipeline de télémétrie basé sur OTLP avec les composants clés suivants :
 
 - **Exportateur HTTP OTLP** : envoie la télémétrie aux endpoints d'ingestion OTLP de Datadog.
-- **Connecteur de métriques de span** : génère des métriques RED (taux, erreur, durée) à partir des données de trace pour alimenter les fonctionnalités APM telles que le Service Catalog et la page Service.
+- **Span metrics connector** : génère des métriques RED (Rate, Error, Duration) à partir des données de trace pour alimenter les fonctionnalités APM telles que Catalog et Service Page.
 - **Processeur de détection de ressources** : détecte les attributs des ressources de host et de cloud, que Datadog utilise pour la résolution du nom de host et le marquage.
 - **Extension Datadog** : Transmet la configuration du Collector à Datadog pour Fleet Automation. Elle n'exporte pas de données de télémétrie.
 
@@ -929,7 +929,7 @@ Une fois que votre application envoie des données de télémétrie au Collector
 
 ### Connecteur de métriques de span {#span-metrics-connector}
 
-Le connecteur `span_metrics` génère des métriques RED à partir des données de trace. Ces métriques alimentent les fonctionnalités APM, notamment le Service Catalog, la page Service et la page Resource. Le connecteur est configuré avec des dimensions qui permettent à Datadog de calculer les tags de host, les services pairs et les noms d'opération à partir de vos traces.
+Le connecteur `span_metrics` génère des métriques RED à partir des données de trace. Ces métriques alimentent les fonctionnalités APM, notamment Catalog, Service Page et Resource Page. Le connecteur est configuré avec des dimensions qui permettent à Datadog de calculer les tags de host, les services pairs et les noms d'opération à partir de vos traces.
 
 Chaque configuration spécifique de l'environnement dans [Configurer et déployer le Collector](#2-configure-and-deploy-the-collector) inclut le bloc de connecteur `span_metrics` complet. Conservez toutes ses dimensions lors de l'adaptation de la configuration afin que Datadog puisse déduire les tags de host, les services pairs, les noms d'opération et les noms de ressource requis.
 

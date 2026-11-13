@@ -23,7 +23,7 @@ title: YAML에서 실험 메트릭 동기화
 - 메트릭 변경 사항이 승인된 후 CI에서 적용
 - 실험 관련 의사 결정에 사용할 수 있도록 동기화된 메트릭을 기본적으로 인증된 상태로 표시
 
-Metric Sync는 계획 후 적용하는 워크플로를 지원합니다. `plan` 명령은 YAML의 유효성을 검사하고 Datadog에서 적용할 변경 사항을 미리 보여줍니다. `execute` 명령은 YAML의 유효성을 검사하고, 쓰기 작업을 제출한 후 완료될 때까지 기다립니다. 결과에는 변경 건수, 객체 ID, 필드 변경 사항, 차단 사유, 경고 및 확인 가능한 오류 상세정보가 포함됩니다. 계획에는 적용 예정인 변경 사항이 표시되며, 작업이 실패한 경우 해당 변경 사항이 적용되었다고 단정할 수 없습니다.
+Metric Sync는 계획 후 적용하는 워크플로를 지원합니다. `plan` 명령은 YAML의 유효성을 검사하고 Datadog에서 적용할 변경 사항을 미리 보여줍니다. `execute` 명령은 YAML의 유효성을 검사하고, 쓰기 작업을 제출한 후 완료될 때까지 기다립니다. 결과에는 변경 건수, 객체 ID, 필드 변경 사항, 차단 사유, 경고 및 확인 가능한 오류 상세정보가 포함됩니다.
 
 ## 전제 조건 {#prerequisites}
 
@@ -32,8 +32,18 @@ Metric Sync를 사용하기 전에 다음 항목이 필요합니다.
 - Product Analytics 및 Experiments가 활성화된 Datadog 계정
 - 연결된 웨어하우스 [데이터 웨어하우스 연결][1]을 참조하세요.
 - 소스 쿼리의 열에 매핑할 `User`와 같은 기존 주체 유형
-- 실험 메트릭을 생성하고 업데이트하는 데 필요한 Product Analytics 권한 동기화된 메트릭은 기본적으로 인증된 상태로 표시되므로 사용자 지정 역할에도 Product Analytics Certified Metrics Write 권한이 필요합니다. [Product Analytics 권한][2]을 참조하세요.
+- [계획 및 실행을 위한 권한][7]에 설명된 Product Analytics 쓰기 권한입니다. [Product Analytics 권한][2]을 참조하세요.
 - CI 인증을 위한 Datadog API 키 및 애플리케이션 키 [API 키와 애플리케이션 키][3]를 참조하세요.
+
+### 계획 및 실행을 위한 권한 {#permissions-for-plans-and-execution}
+
+`plan`, `execute`, `status` 및 `result` 명령에는 Product Analytics Warehouse Model Write(`product_analytics_warehouse_model_write`)와 Product Analytics Metrics Write(`product_analytics_metrics_write`)가 둘 다 필요합니다. 서버 측 계획은 정의를 변경하지 않지만 실행과 동일한 쓰기 권한이 필요합니다. 계획 전용 애플리케이션 키 범위는 없습니다.
+
+`plan` 및 `execute`의 경우 `options.is_certified: true`에도 Product Analytics Certified Metrics Write(`product_analytics_certified_metrics_write`)가 필요합니다. 이 옵션의 기본값은 `true`입니다. `false`로 설정하면 이 인증 메트릭 요구 사항만 제거됩니다.
+
+자격 증명 없이 YAML을 확인하려면 `metric-sync validate ./metrics`를 실행하세요. 유효성 검사는 로컬에서 실행되며 서버 측 `plan`을 대체하지 않습니다.
+
+<div class="alert alert-warning">쓰기 권한이 있는 애플리케이션 키는 다음 명령을 실행하는 작업을 포함해 신뢰할 수 있는 CI 작업에만 부여하세요. <code>plan</code>.</div>
 
 ## CLI 설치 {#install-the-cli}
 
@@ -175,7 +185,35 @@ metric-sync version
 - `result`: 최종 상태에 도달한 계획 또는 실행 결과를 가져옵니다.
 - `version`: 빌드 메타데이터를 출력합니다.
 
-`--timeout 20m`을 사용하여 기본 명령 시간 제한인 10분을 변경하세요. 제출 후 명령 시간 제한이 초과되면 다시 제출하기 전에 `status`로 출력된 작업 ID를 확인하세요. 완료를 기다리지 않고 제출하려면 `--no-poll` 옵션을 사용한 다음 `status` 및 `result` 명령으로 확인하세요. `--no-poll` 명령이 성공하더라도 제출이 완료되었다는 사실만 확인할 수 있습니다.
+`--timeout 20m`을 사용하여 기본 명령 시간 제한인 10분을 변경하세요. 완료를 기다리지 않고 제출하려면 `--no-poll` 옵션을 사용한 다음 `status` 및 `result` 명령으로 확인하세요. `--no-poll` 명령이 성공하더라도 제출이 완료되었다는 사실만 확인할 수 있습니다.
+
+### 중단 및 실패한 작업 {#interrupted-and-failed-operations}
+
+실행 작업은 모든 소스 및 메트릭 변경 사항을 함께 적용합니다. 작업이 어느 단계에서든 실패하면 Datadog은 변경 사항을 전혀 적용하지 않습니다.
+
+Datadog이 제출을 수락하면 작업은 CLI와 독립적으로 실행됩니다. CLI를 중지하거나 CI 작업을 취소하거나 명령 시간 초과에 도달해도 서버 작업은 취소되지 않으며, 폴링 오류가 발생했다고 해서 작업이 실패한 것은 아닙니다. 작업 ID(`metric_sync_id`)를 `status` 및 `result`와 함께 사용하여 결과를 확인하세요. 작업 ID는 YAML의 안정적인 `sync_id` 값과 다릅니다.
+
+### 제출 재시도 {#retry-a-submission}
+
+결과를 확인하기 전에 명령이 중지되면 다시 제출하기 전에 다음 단계를 따르세요.
+
+1. 출력된 작업 ID를 사용해 `metric-sync status <METRIC_SYNC_ID>` 명령을 실행합니다.
+2. 작업이 여전히 실행 중이면 완료될 때까지 기다립니다.
+3. 작업에 성공했다면 재시도할 필요가 없습니다.
+4. 작업에 실패했다면 원인을 수정하고 새 멱등성 키를 사용하여 제출합니다.
+5. Datadog이 제출을 받았는지 확인할 수 없는 경우 동일한 `--idempotency-key`를 사용하여 동일한 정의와 옵션을 다시 제출합니다.
+
+   ```shell
+   metric-sync execute ./metrics --idempotency-key <EXECUTION_KEY>
+   ```
+
+제출하기 전에 키를 선택하고 해당 요청을 재시도할 때 다시 사용하세요. 일치하는 키와 요청에 대해 Datadog은 새 작업을 생성하는 대신 기존 작업을 반환합니다. 다른 요청에 키를 재사용하면 충돌이 발생하므로 `plan` 및 `execute`에는 별도의 키를 사용하세요.
+
+`--idempotency-key`를 생략하면 CLI가 키를 생성합니다. CI 작업 재실행이나 새로운 로컬 명령이 다른 키를 생성할 수 있으므로 Datadog에서는 이를 새로운 제출로 처리합니다. 동일한 제출을 재시도하려면 키를 명시적으로 설정하세요.
+
+동일한 파일과 옵션을 제출하는 CI 재시도는 생성된 키를 재사용하고 이전 결과를 반환할 수도 있습니다.
+
+서버 작업에 실패했는데 해당 키를 재사용하면 실패한 같은 작업이 반환됩니다. 원인을 수정하고 다음 시도에는 새 키를 사용하세요.
 
 ## GitHub Actions 예시 {#github-actions-example}
 
@@ -225,12 +263,14 @@ jobs:
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync execute ./metrics
+        run: metric-sync execute ./metrics --idempotency-key "example-checkout-execute-${GITHUB_RUN_ID}"
 ```
 
 Datadog API 키와 애플리케이션 키를 GitHub Actions 시크릿으로 저장하세요. 조직에서 `datadoghq.com` 이외의 Datadog 사이트를 사용하는 경우, 워크플로 환경에 `DD_SITE`를 추가하세요.
 
 이 워크플로의 실행이 중복되지 않도록 동기화 태그마다 동시성 그룹을 사용하세요. 계획 작업은 동일한 리포지토리에서 생성된 풀 리퀘스트에 대해서만 실행됩니다. 포크 리포지토리의 풀 리퀘스트에는 이러한 시크릿이 제공되지 않으므로 해당 기여에 대해서는 자격 증명 없이 `validate`를 실행한 다음 신뢰할 수 있는 워크플로에서 `plan`을 실행하세요.
+
+실행 키에는 동기화 태그, 명령 및 GitHub 실행 ID가 포함되며 해당 워크플로 실행에서 작업을 재실행할 때 실행 키는 동일하게 유지됩니다. 이러한 재시도에 대해 정의와 옵션을 변경하지 마세요. 새로운 워크플로 실행 시에는 다른 키를 사용합니다. 이전 작업이 여전히 실행 중이면 다른 작업을 시작하기 전에 결과를 확인하세요.
 
 ## 정의 참조 {#yaml-reference}
 
@@ -242,7 +282,7 @@ Datadog API 키와 애플리케이션 키를 GitHub Actions 시크릿으로 저�
 
 `sync_id`를 변경하면 이전 ID를 가진 객체가 삭제되고 그 자리에 새 객체가 생성될 수 있습니다. 객체 이름을 바꾸려면 `name`을 변경하고 `sync_tag` 및 `sync_id`는 기존 값을 유지하세요.
 
-소스와 해당 종속 메트릭을 두 번에 나누어 제출하여 제거하세요. 먼저 메트릭 정의를 제거하고 소스와 관련 없는 다른 모든 정의는 유지한 다음 `plan` 및 `execute`를 실행하세요. 그런 다음 소스를 제거하고 나머지 정의를 제출하세요. 소스와 메트릭을 한 번의 작업으로 제거하는 계획은 검증을 통과하더라도 실행 중 실패할 수 있습니다. 소스를 삭제하기 전에 다른 동기화 태그에서 해당 소스를 참조하는 항목도 제거해야 합니다.
+소스와 해당 종속 메트릭을 두 번에 나누어 제출하여 제거하세요. 먼저 메트릭 정의를 제거하고 소스 및 관련 없는 다른 모든 정의는 유지한 다음 `plan` 및 `execute`를 실행하세요. 그런 다음 소스를 제거하고 나머지 정의를 제출하세요. 소스와 메트릭을 한 번의 작업으로 제거하는 계획은 검증을 통과하더라도 실행 중 실패할 수 있습니다. 소스를 삭제하기 전에 다른 동기화 태그에서 해당 소스를 참조하는 항목도 제거해야 합니다.
 
 작업의 모든 파일은 동일한 `schema_version` 및 `sync_tag`를 사용해야 합니다. 기본값이 적용된 후에는 각 파일의 `options`가 일치해야 합니다. 예를 들어, `is_certified`를 생략하는 것은 해당 값을 `true`로 설정하는 것과 같습니다. 값이 비어 있지 않은 최상위 `reference_url` 및 `warehouse_connection_id` 값도 모든 파일에서 일치해야 합니다.
 
@@ -257,6 +297,10 @@ YAML로 기존 수동 생성 소스 또는 메트릭을 관리하려면 다음 �
 3. 제출할 모든 파일에서 `options.upgrade_mode: by_id`를 설정한 다음, `plan`을 실행하고 `execute`를 실행하기 전에 변경 사항을 검토합니다.
 
 기존 객체를 동기화 관리 대상으로 편입하면 YAML 정의가 적용되고 해당 객체에 동기화 소유권이 할당됩니다. 이후 동기화에서는 동일한 `sync_tag` 및 `sync_id`를 사용하여 해당 객체를 식별합니다. 유지하려는 설정 및 소스 매핑을 포함하세요. 필드를 생략하면 기본값이 적용되거나 매핑이 제거될 수 있습니다.
+
+채택은 기존 소스 및 메트릭 UUID를 유지하지만, 메트릭 계산이 변경되지 않은 경우에도 `options.is_certified` 설정(기본값 `true`)을 포함한 YAML의 모든 설정을 적용합니다. 이 옵션은 명시적으로 설정하세요. 제출 내의 모든 소스 및 메트릭에 값 하나가 적용되므로 각 객체에 대해 서로 다른 인증 상태를 설정할 수 없습니다.
+
+채택 시 기존 실험 결과를 다시 계산하지 않습니다. 실행 중인 실험에서 사용하는 객체를 채택하기 전에 모든 정의 설정을 검토합니다. 실행 후 Datadog에서 객체 ID, 설정 및 인증을 확인하세요. 채택 후 `options.is_certified`만 변경하는 것으로는 인증이 업데이트되지 않습니다. [CLI 제한 사항][6]을 참조하세요.
 
 ### 최상위 필드 {#top-level-fields}
 
@@ -293,7 +337,7 @@ YAML로 기존 수동 생성 소스 또는 메트릭을 관리하려면 다음 �
 | `reference_url` | 아니요 | 소스별 참조 URL |
 | `subject_types` | 예 | 소스에 대한 하나 이상의 주체 매핑 |
 | `measures` | 아니요 | 메트릭이 집계하는 열 |
-| `properties` | 아니요 | 메트릭 이벤트를 필터링하는 데 사용되는 열 소스 SQL에 이 열들을 포함하세요. |
+| `properties` | 아니요 | 메트릭 이벤트를 필터링하는 데 사용되는 열 소스 SQL에 이러한 열을 포함하세요. |
 
 ### 주체 유형 {#subject-types}
 
@@ -561,6 +605,8 @@ measure:
 
 ## CLI 제한 사항 {#cli-limitations}
 
+Metric Sync는 웨어하우스 메트릭 소스 및 메트릭을 관리합니다. 웨어하우스 할당(노출) 소스는 관리하지 않으므로 이러한 소스는 Datadog에서 관리하세요.
+
 `options.is_certified`만 변경하면 다른 변경 사항이 없는 기존 소스나 메트릭의 인증 상태는 업데이트되지 않습니다. YAML로 기존 정의를 관리한 후 Datadog에서 인증 상태를 확인하세요. 동기화에 성공했다는 사실만으로 인증 상태가 변경되었다고 단정할 수는 없습니다.
 
 CLI는 기존 정의를 내보내거나 Eppo YAML을 자동으로 변환하지 않습니다. YAML로 기존 메트릭을 관리하기 전에 전체 정의를 생성하고 검토합니다.
@@ -571,12 +617,13 @@ CLI는 기존 정의를 내보내거나 Eppo YAML을 자동으로 변환하지 �
 
 | 오류 | 확인할 사항 |
 | ----- | ------------- |
-| API에서 `403`을 반환합니다. | API/애플리케이션 키에 메트릭을 쓰기 위한 Product Analytics 권한이 있는지 확인합니다. `is_certified`가 활성화된 경우 해당 역할에 Product Analytics Certified Metrics Write 권한도 있는지 확인합니다. |
+| `plan`, `status` 또는 `result`의 경우에도 API는 `403`을 반환합니다. | [계획 및 실행을 위한 권한][7]을 확인하세요. 이러한 명령에는 쓰기 권한이 필요합니다. `is_certified: true`인 `plan` 및 `execute`에도 Product Analytics Certified Metrics Write 권한이 필요합니다. |
+| 폴링에 실패하거나 CLI 명령의 시간이 초과되거나 CI 작업이 취소됩니다. | 서버 작업은 계속될 수 있습니다. 저장된 작업 ID로 `status` 및 `result`을 확인하세요. 재시도하려면 동일한 `--idempotency-key`를 사용하여 동일한 파일과 옵션을 다시 제출합니다. [제출 재시도](#retry-a-submission)를 참조하세요. |
 | 웨어하우스 연결을 찾을 수 없습니다. | 대상 Datadog 조직에 웨어하우스 연결이 구성되어 있는지 확인합니다. `warehouse_connection_id`를 설정했다면 해당 값이 대상 조직에 속하는지 확인합니다. |
 | 주체 유형을 찾을 수 없습니다. | `subject_types[].name` 값이 기존 Datadog 주체 유형과 일치하는지 확인합니다. |
 | 작업은 성공했지만 결과에 변경 사항이 표시되지 않습니다. | 서비스가 적용할 변경 사항을 탐지하지 못했습니다. `options.is_certified`만 변경했다면 Datadog에서 인증 상태를 확인합니다. 동기화에 성공했다고 해서 이 설정이 변경되었다는 의미는 아닙니다. 작업이 실패했다고 해서 YAML이 Datadog의 설정과 일치하는 것으로 확인되는 것은 아닙니다. |
 | 동기화가 차단되었습니다. | 콘솔 출력에서 객체 상세정보와 차단 사유를 확인합니다. API 응답을 저장하려면 `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync.log`를 실행합니다. 가능한 원인으로는 실험 참조, 동기화 태그에 속하지 않으면서 해당 소스를 참조하는 메트릭, 편입 시 발생하는 충돌 등이 있습니다. 차단된 결과가 발생하면 0이 아닌 종료 상태 코드가 반환됩니다. |
-| 작업이 실패했습니다. | `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log`를 실행하여 확인 가능한 오류를 검색하고 API 응답을 검사합니다. 실패한 작업에 표시된 변경 사항은 실제 적용 여부가 확인되지 않은 상태입니다. 일부 서버 오류에서는 오류 상세정보가 반환되지 않으므로 지원 요청에 사용할 수 있도록 작업 ID를 보관합니다. |
+| 작업이 실패했습니다. | `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log`를 실행하여 확인 가능한 오류를 검색하고 API 응답을 검사합니다. 일부 서버 오류에서는 오류 상세정보가 반환되지 않으므로 지원 요청에 사용할 수 있도록 작업 ID를 보관합니다. |
 | 로컬 유효성 검사는 통과했지만 `plan`에서 YAML을 거부합니다. | 로컬 검사는 웨어하우스 쿼리를 확인하지 않습니다. 콘솔 출력에서 오류 상세정보를 확인합니다. API 응답을 저장하려면 `metric-sync plan ./metrics --log-file ./metric-sync.log`를 실행합니다. 해당 상세정보를 바탕으로 정의를 수정합니다. |
 
 [1]: /ko/experiments/guide/connecting_a_data_warehouse/
@@ -584,3 +631,5 @@ CLI는 기존 정의를 내보내거나 Eppo YAML을 자동으로 변환하지 �
 [3]: /ko/account_management/api-app-keys/
 [4]: #measure-references
 [5]: #filters
+[6]: #cli-limitations
+[7]: #permissions-for-plans-and-execution

@@ -227,7 +227,7 @@ After you create the provider, open it to copy its Claude Code settings or Codex
 
 ### Grant access to a subscription provider
 
-To use a subscription provider, a user needs access through the [default policy](#default-policy) or an [access policy](#access-policies). Grant access on the provider's {{< ui >}}Access{{< /ui >}} step when you create the provider. To grant access later, go to [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][16] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
+To use a subscription provider, a user needs access through the [default policy](#default-policy) or an [access policy](#access-policies). Grant access on the provider's {{< ui >}}Access{{< /ui >}} step when you create the provider. To grant access later, go to [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][17] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
 
 - {{< ui >}}All models{{< /ui >}}: Any model that each user's subscription includes. In a policy, select the provider itself rather than individual models.
 - {{< ui >}}Specific models{{< /ui >}}: Only the selected models, even if a user's subscription includes more. This option appears after you add models to the provider. In a policy, select the individual models.
@@ -437,6 +437,8 @@ To investigate a request:
 3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
 4. For a failed request, review the error type, the provider's error rate, and the request's trace before you change a routing rule or provider.
 
+For available metrics and tags, see [AI Gateway metrics][16].
+
 ## Configure data capture
 
 AI Gateway records supported inference requests in Agent Observability. Requests rejected before processing, such as authentication failures or malformed request bodies, might not appear there. The data capture mode controls whether a span includes prompt and response content.
@@ -583,4 +585,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
-[16]: https://app.datadoghq.com/llm/gateway/governance/general
+[16]: /llm_observability/investigate/metrics/#gateway-metrics
+[17]: https://app.datadoghq.com/llm/gateway/governance/general

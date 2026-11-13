@@ -45,6 +45,7 @@ Utilisez les différentes entités principales pour contrôler les schémas d'ac
 | [Suppressions de sécurité][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Tests Synthetic][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
@@ -80,3 +81,4 @@ Un utilisateur disposant de l'autorisation `user_access_manage` peut élever son
 [25]: /fr/getting_started/feature_flags/
 [26]: /fr/security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
 [27]: /fr/experiments/
+[28]: /fr/incident_response/status_pages/#granular-access-control

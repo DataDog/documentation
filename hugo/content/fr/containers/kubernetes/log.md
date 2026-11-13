@@ -4,9 +4,6 @@ aliases:
 description: Configurez la collecte de logs à partir d'applications conteneurisées
   exécutées sur Kubernetes à l'aide du Datadog Agent
 further_reading:
-- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
-  tag: Blog
-  text: Surveillez les logs d'Amazon EKS sur Fargate avec Datadog
 - link: /agent/kubernetes/apm/
   tag: Documentation
   text: Recueillir les traces de votre application
@@ -25,8 +22,14 @@ further_reading:
 - link: /containers/troubleshooting/log-collection
   tag: Documentation
   text: Dépannage de la collecte de logs de conteneurs
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Surveillez les logs d'Amazon EKS sur Fargate avec Datadog
+- link: https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/
+  tag: Blog
+  text: Gérez l'observabilité Kubernetes avec DatadogInstrumentation
 - link: https://www.datadoghq.com/architecture/monitoring-container-apps-logs/
-  tag: Centre d'architecture
+  tag: Architecture Center
   text: Surveillance des applications de conteneurs - Logs
 title: Collecte de logs Kubernetes
 ---

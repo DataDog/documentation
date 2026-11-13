@@ -43,6 +43,12 @@ Every organization in an organization group falls into at least one of the follo
 
 Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles. To view and manage organization groups, users in the owner organization need both the **Org Group Read** and **Org Group Write** permissions. No additional permissions are needed in member organizations. See [Datadog Role Permissions][2].
 
+### Default group for child organizations
+
+When you create a child organization, Datadog automatically adds it to the Organization Group of its immediate parent organization. The child organization immediately receives the parent organization group's policies and shared roles.
+
+This behavior applies whether you create the child organization in the UI, through the API (`POST /api/v1/org`), or with Terraform. You can also create a child organization directly from an Organization Group in the UI.
+
 ### Organization group policies
 
 An organization group policy targets a specific organization configuration and pairs it with a value and an enforcement tier. Policies are created by the owner organization and applied to all member organizations.

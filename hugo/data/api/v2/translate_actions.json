@@ -161,6 +161,14 @@
     "description": "Returns the active Agent Health issues for a node Agent or Cluster Agent resource.",
     "summary": "List active Agent Health issues"
   },
+  "ListAgentHealthIssues": {
+    "description": "List Agent Health issues across your organization. Only open issues are returned.\nReturns `403` if you lack the `hosts_read` permission.\n\nResults use a stable order: severity rank (`high`, `medium`, `low`, then other values),\nthen `first_seen_at` descending with missing timestamps last, then issue ID ascending.\nUse `page[size]` and the zero-based `page[number]` to paginate. Invalid page values\nreturn a `400` JSON:API error response. `meta.page.total_filtered_count` is the number\nof issues matching the filters, and `meta.page.total_count` the number of open issues\nin the organization.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "summary": "List Agent Health issues"
+  },
+  "GetAgentHealthIssue": {
+    "description": "Get an Agent Health issue and its available remediation in your organization.\nOnly open issues are returned. The `remediation` attribute is omitted when\nthe issue has no remediation.\n\nReturns `404` if the issue does not exist, is not open, belongs to another\norganization, or you do not have access to its data. This response does not\nreveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.",
+    "summary": "Get an Agent Health issue"
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
@@ -1166,13 +1174,13 @@
     "summary": "Delete a Storage Management configuration"
   },
   "GetCodeCoverageBranchSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a branch",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a branch."
   },
   "GetCodeCoverageCommitSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
@@ -1184,7 +1192,7 @@
     "request_schema_description": "Request object for getting per-file code coverage data."
   },
   "GetCodeCoveragePRSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a pull request",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a pull request."
@@ -1395,6 +1403,12 @@
   "GetCustomCostsFile": {
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
+  },
+  "UpdateCustomCostsFile": {
+    "description": "Mark whether a Custom Costs file holds AI provider costs. Datadog then recomputes the costs for the months that the file covers.",
+    "summary": "Update Custom Costs file",
+    "request_description": "",
+    "request_schema_description": "Request for updating a Custom Costs file."
   },
   "ListCostGCPUsageCostConfigs": {
     "description": "List the Google Cloud Usage Cost configs.",
@@ -1973,13 +1987,13 @@
     "request_schema_description": "Request for editing a downtime."
   },
   "SearchIssues": {
-    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
+    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.\nReturns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.",
     "summary": "Search error tracking issues",
     "request_description": "Search issues request payload.",
     "request_schema_description": "Search issues request payload."
   },
   "GetIssue": {
-    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.",
     "summary": "Get the details of an error tracking issue"
   },
   "DeleteIssueAssignee": {
@@ -1997,6 +2011,12 @@
     "summary": "Update the state of an issue",
     "request_description": "Update issue state request payload.",
     "request_schema_description": "Update issue state request payload."
+  },
+  "GetEUDMDevices": {
+    "summary": "Get all devices"
+  },
+  "GetEUDMDevice": {
+    "summary": "Get a device"
   },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
@@ -2234,6 +2254,10 @@
     "description": "Get the diagnostics produced by an experiment's latest analysis run. Each diagnostic includes its category, and the response includes an overall diagnostic or pipeline lifecycle status.",
     "summary": "Get experiment diagnostics"
   },
+  "ListExperimentHoldouts": {
+    "description": "List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.",
+    "summary": "List experiment holdouts"
+  },
   "ListExperimentMetricGroups": {
     "description": "List every decision and non-decision metric group attached to an experiment. Metric references are returned in their stored order. An incomplete draft can have no decision group and returns only the groups that exist.",
     "summary": "List experiment metric groups"
@@ -2325,6 +2349,14 @@
   "StopExposureSchedule": {
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
+  },
+  "ListFeatureFlagHistory": {
+    "description": "Returns the organization's feature flag change events, newest first.\nEach event includes a readable description of the change.\nAll filters are optional, and events must match every filter you set. Without a date range, the whole history is listed.\nResults are paginated with `page[limit]` and `page[offset]`; follow `links.next` to read further back.",
+    "summary": "List feature flag change history"
+  },
+  "ExportFeatureFlagHistory": {
+    "description": "Exports the organization's feature flag change events as a CSV file, newest first, without pagination.\nIt accepts the same filters as the List feature flag change history endpoint, and its columns match the CSV export on the flag history page:\nFlag Version, Flag Name, Flag Key, Flag UUID, Action, User Name, User Email, User Type, Environment, and Timestamp.\n\nIf an export fails before the file starts, the response is a JSON:API error. Large exports stream as they are read.\nIf an export fails after streaming starts, the connection closes before the file ends, so the download fails instead of\nreturning a file with missing rows. An export must finish within the 60-second request timeout. If an export times out,\nnarrow the date range.",
+    "summary": "Export feature flag change history"
   },
   "GetSavedFilter": {
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
@@ -2575,7 +2607,7 @@
     "request_schema_description": "Payload for creating a new tag rule."
   },
   "DeleteTagRule": {
-    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently. Deleting a `blocking` rule additionally requires the\n`telemetry_rules_activate` permission.",
     "summary": "Delete a tag rule"
   },
   "GetTagRule": {
@@ -2583,7 +2615,7 @@
     "summary": "Get a tag rule"
   },
   "UpdateTagRule": {
-    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.\nPromoting a rule from `surfacing` to `blocking` additionally requires the\n`telemetry_rules_activate` permission, and your organization must have access to\nblocking rules. You can't promote RUM rules to `blocking`.",
     "summary": "Update a tag rule",
     "request_description": "",
     "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
@@ -4406,8 +4438,8 @@
     "request_schema_description": "Request payload for updating a maintenance window."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
-    "summary": "Get a list of metrics"
+    "description": "Get a list of actively reporting metrics for your organization, with optional volumes, query activity,\nand tag configuration filters. When you need volumes, query activity, or tag configuration status for\nmany metrics, use this endpoint instead of calling per-metric endpoints (such as\n`GET /api/v2/metrics/{metric_name}/volumes` or `GET /api/v2/metrics/{metric_name}/tags`) in a loop,\nwhich is slower and quickly reaches rate limits. This endpoint does not return the tag keys or values\nthat a metric was submitted with.\n\nAlways paginate: send `page[size]` (up to 10000; a few hundred to a few thousand is typical) and follow\n`meta.pagination.next_cursor` (or `links.next`) until it is null or missing. Without `page[size]` or `page[cursor]`,\nthe response is not paginated: it returns matching metrics in one response, with no pagination metadata,\nup to a limit of 250,000 metrics by default (some organizations have a different limit). Metrics beyond\nthe limit are left out without any indication. Unpaginated requests in large organizations can also be\nslow or time out, and clients with response-size limits may fail or truncate the response.\nIf a request with `page[cursor]` returns `410 Gone`, the cursor has expired: restart from the first page\n(send `page[size]` without `page[cursor]`).\n\n- **Volumes**: `include=metric_volumes` adds the indexed and ingested volume of each metric. The volume is a\n  fixed one-hour value and is not affected by `window[seconds]`. Volumes are not returned inside `data`:\n  each metric with volume data has a `relationships.metric_volumes.data` reference, and the volumes\n  themselves are returned as `metric_volumes` resources in the top-level `included` array. To join them,\n  match `included[].id` to the `id` of `data[]` items with type `metrics`; both are the metric name.\n  `manage_tags` items in `data` repeat the same `id`, so skip them when joining. Metrics without volume\n  data, such as standard (non-custom) metrics, have no `metric_volumes` reference or entry.\n- **Top metrics by volume**: `sort=-metric_volumes.indexed_volume` together with `include=metric_volumes`\n  and `page[size]` (for example, `page[size]=20`) returns the metrics with the highest indexed volume\n  first. Sorting requires a paginated request.\n- **Volume for a family of metrics**: `filter[metrics.id]=http.request*` with `include=metric_volumes`\n  and `page[size]` returns volumes for every metric whose name starts with `http.request` (a value whose\n  only `*` is at the end is case-sensitive). A value without `*` matches names that contain it, ignoring\n  case.\n- **Unqueried metrics**: `filter[queried]=false` with `filter[queried][window][seconds]` (for example,\n  `2592000` for 30 days) and `page[size]` returns metrics that were not queried in that window.\n- **Metrics without a tag configuration**: `filter[configured]=false` with `page[size]` returns custom\n  metrics that have no Metrics without Limits&trade; tag configuration.\n- **Metric types**: if `filter[metric_type]` is omitted, metrics of all types are returned.\n\nExamples:\n- Top 20 metrics by indexed volume:\n  `GET /api/v2/metrics?include=metric_volumes&sort=-metric_volumes.indexed_volume&page[size]=20`\n- Metrics not queried in the last 30 days, with their volumes:\n  `GET /api/v2/metrics?filter[queried]=false&filter[queried][window][seconds]=2592000&include=metric_volumes&page[size]=1000`\n- Metrics without a tag configuration:\n  `GET /api/v2/metrics?filter[configured]=false&page[size]=1000`\n- Volumes for metrics whose name starts with `http.request`:\n  `GET /api/v2/metrics?filter[metrics.id]=http.request*&include=metric_volumes&page[size]=1000`\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`).\nPass them as standard URL query strings, URL-encoding the brackets if your client does not handle them.\nFor example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
+    "summary": "List all metrics with volumes and query activity"
   },
   "CreateDerivedMetric": {
     "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
@@ -4452,13 +4484,13 @@
     "summary": "List tag indexing rules"
   },
   "CreateTagIndexingRule": {
-    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nEvery rule that matches a metric applies, in `rule_order`; a rule with\n`override_previous_rules` set to `false` (merge) adds to the tags configured by earlier\nrules, and a rule with `override_previous_rules` set to `true` replaces them.\nRequires the `Manage Tags for Metrics` permission.\n\nLimits:\n- An org can have at most 1,000 active tag indexing rules. Creating a rule when the org\n  already has 1,000 active rules returns a 403 error with the title\n  `Tag indexing rule limit reached`.\n- Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;\n  requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.\n- `name` can be at most 200 characters, and `metric_name_matches` can contain at most\n  50 patterns of at most 200 characters each. Requests that exceed these limits return a\n  400 error.",
     "summary": "Create a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule."
   },
   "ReorderTagIndexingRules": {
-    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID\nreturns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Reorder tag indexing rules",
     "request_description": "",
     "request_schema_description": "Request body for reordering tag indexing rules."
@@ -4472,17 +4504,17 @@
     "summary": "Get a tag indexing rule"
   },
   "UpdateTagIndexingRule": {
-    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.",
+    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and\n`metric_name_matches` can contain at most 50 patterns of at most 200 characters each;\nrequests that exceed these limits return a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Update a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for updating a tag indexing rule."
   },
   "ListActiveMetricConfigurations": {
-    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.",
+    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.\n\nTo find which of many metrics are queried or not queried, use `GET /api/v2/metrics` with `filter[queried]`\ninstead of calling this endpoint for each metric.",
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).",
+    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).\nThis window only limits which tags are returned; it does not affect whether the metric is found.\n\nA `404 Not Found` response means that no metric with this exact name exists in your organization.\nMetric names must match exactly. Distribution metrics do not have suffixes such as `.avg` or `.count`,\nso use the base metric name.\n\nFor high-cardinality metrics, keep responses small with `filter[include_tag_values]=false`,\n`page[limit]`, and `filter[match]`.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -4490,7 +4522,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.\n\nA `404 Not Found` response means that no metric with this name exists in your organization. A\n`400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the\nqueried window. For no data, the error message says so and names the window that was queried, which can\ndiffer from the requested one.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "GetMetricTagCardinalityDetails": {
@@ -4526,23 +4558,23 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,\nwith different messages: `No tag configuration for <metric_name>` when the metric exists without a tag\nconfiguration, and `<metric_name> not found` when no metric with this name exists in your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
-    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires\na tag configuration to be created first.",
+    "description": "Update the tag configuration of a metric, percentile aggregations of a distribution or native histogram metric,\nor custom aggregations of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true, the behavior changes\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires\na tag configuration to be created first.",
     "summary": "Update a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
-    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric. By setting `exclude_tags_mode`\nto true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are\nnot queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`\npermission.",
+    "description": "Define queryable tag keys for an existing count, gauge, rate, distribution, or native histogram metric.\nDistribution and native histogram metrics support percentile aggregations. By setting `exclude_tags_mode`\nto true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are\nnot queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`\npermission.",
     "summary": "Create a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.",
+    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.\n\nTo get the last hour's indexed and ingested volumes for many metrics, use `GET /api/v2/metrics` with\n`include=metric_volumes` instead of calling this endpoint for each metric. Use this endpoint when you need\na longer look-back for a single metric.",
     "summary": "List distinct metric volumes by metric name"
   },
   "ListAiGatewayModelGroups": {
@@ -5367,6 +5399,10 @@
     "request_description": "",
     "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
+  "DeleteUserProfile": {
+    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
+    "summary": "Delete a user profile"
+  },
   "GetMapping": {
     "description": "Get entity mapping configuration including all available attributes and their properties",
     "summary": "Get mapping"
@@ -5410,7 +5446,7 @@
     "request_schema_description": "Request to create an AI Gateway provider."
   },
   "DeleteAiGatewayProvider": {
-    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access. This also applies when force=true. Existing cascades remain and can affect policies the caller cannot edit. Delete a provider by ID. Providers used by routing rules return provider_in_use with HTTP 409 and the affected rules in error metadata. Retry with force=true to remove provider targets and delete rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.",
+    "description": "Requires `ai_gateway_config_write` and provider View/Edit. Models and pricing inherit provider access. Every affected route and policy membership requires the corresponding Edit permission; force=true never bypasses authorization. Providers used by routing rules return provider_in_use with HTTP 409. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable; visible route entries contain id, slug, and editable. Hidden dependencies are omitted from every collection and reported only by restricted_dependencies. A blocked response changes no configuration; an authorized editor must first remove the blocking references. Retry with force=true to confirm an authorized cascade that removes provider targets and deletes rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.",
     "summary": "Delete an AI Gateway provider"
   },
   "GetAiGatewayProvider": {
@@ -5484,7 +5520,7 @@
     "summary": "List AI Gateway rate limits"
   },
   "CreateAiGatewayRateLimit": {
-    "description": "Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.",
+    "description": "Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.",
     "summary": "Create an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
@@ -5502,10 +5538,18 @@
     "summary": "Get an AI Gateway rate limit"
   },
   "UpdateAiGatewayRateLimit": {
-    "description": "Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
+    "description": "Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
     "summary": "Update an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway rate limit."
+  },
+  "ListAiGatewayRateLimitInstances": {
+    "description": "List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
+    "summary": "List AI Gateway rate limit counters"
+  },
+  "GetAiGatewayRateLimitInstancesSummary": {
+    "description": "Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
+    "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
     "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
@@ -5762,15 +5806,15 @@
     "request_schema_description": "Request body for toggling a report schedule."
   },
   "DeleteRestrictionPolicy": {
-    "description": "Deletes the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.\nDeleting a provider policy restores normal unrestricted defaults.",
+    "description": "Deletes the restriction policy associated with a specified resource.\nFor AI Gateway provider and route policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.\nDeleting a provider or route policy restores normal unrestricted defaults.",
     "summary": "Delete a restriction policy"
   },
   "GetRestrictionPolicy": {
-    "description": "Retrieves the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_read`.",
+    "description": "Retrieves the restriction policy associated with a specified resource.\nFor AI Gateway provider and route policies, requires `ai_gateway_config_read`.",
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.\nThe editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.\nReading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- AI Gateway Routes: `ai-gateway-route`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.\nThe editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.\nReading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders and routes without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nAI Gateway Routes           | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -5842,27 +5886,27 @@
     "request_schema_description": "Relationship to user."
   },
   "DeleteAiGatewayRoutingRule": {
-    "description": "Delete a routing rule. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.",
+    "description": "Delete a route with `ai_gateway_config_write` and route View/Edit. Every affected route and policy membership requires the corresponding Edit permission. The force=true parameter confirms impact and never bypasses authorization. A denied or unavailable check changes no configuration. Visible dependencies include editable; hidden dependencies are omitted and reported only by restricted_dependencies. A blocked response means an authorized editor must first remove blocking references. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable. Route deletion entries contain rule, reason, and editable; update entries contain rule, removed_tiers, and editable. Each rule contains route_id, slug, tiers, created_at, and updated_at with hidden nested selections redacted. The removed_tiers array identifies original tier numbers removed entirely by the cascade. Already-authorized in-flight operations may finish. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted. Restriction cleanup occurs only after confirmed deletion. Cleanup failure returns 500 with configuration_deleted=true and permissions_cleanup_failed=true; refresh instead of assuming the route still exists.",
     "summary": "Delete an AI Gateway routing rule"
   },
   "ListAiGatewayRoutingRules": {
-    "description": "List all routing rules for the organization.",
+    "description": "List the organization's routing rules that the caller has View access to. Requires `ai_gateway_config_read`. Hidden route references are omitted from nested targets.",
     "summary": "List AI Gateway routing rules"
   },
   "CreateAiGatewayRoutingRule": {
-    "description": "Create an organization-owned routing rule. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.",
+    "description": "Create an organization-owned route with `ai_gateway_config_write`. New provider/model and route references require View. New routes use standard unrestricted defaults. To restrict configuration access, create the route and then apply a restriction policy using its numeric route_id. Sharing follows standard restriction-policy propagation and does not grant or revoke policy-authorized inference. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.",
     "summary": "Create an AI Gateway routing rule",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway routing rule."
   },
   "UpdateAiGatewayRoutingRule": {
-    "description": "Replace a routing rule's tiers. The slug is immutable; data capture is managed independently. This is a full replacement: omitted or null ordering resets the tier to configured, and omitted or null weights in a weighted_affinity tier reset to 1. Omitted or null reasoning_level clears a model destination's reasoning override. Replacing a rule repairs tiers reported with an ordering_issue.",
-    "summary": "Replace an AI Gateway routing rule",
+    "description": "Update a route with `ai_gateway_config_write` and route View/Edit. The slug is immutable; data capture is managed independently. Omitting tiers preserves the entire graph. When tiers are supplied, saved parent-local target IDs retain omitted destination and reasoning, weight, rubric, and default settings. Omitted ordering/classifier settings preserve the saved same-position tier. Explicit null resets nullable settings. New references require View on their resources. A hidden target omitted from tiers must be explicitly listed in removed_target_ids, otherwise the update fails without changes. expected_updated_at rejects stale updates with 409. Sharing-only saves do not replace target rows. Hidden and missing routes return the same 404; visible non-editors receive 403. Inference authorization is unchanged.",
+    "summary": "Update an AI Gateway routing rule",
     "request_description": "",
     "request_schema_description": "Request to replace an AI Gateway routing rule."
   },
   "GetAiGatewayRoutingRule": {
-    "description": "Get a routing rule by its organization-unique slug.",
+    "description": "Get a routing rule by slug with `ai_gateway_config_read` and route View. Hidden and missing routes both return 404. Hidden target identities are omitted; parent-local target IDs remain available for retention.",
     "summary": "Get an AI Gateway routing rule"
   },
   "AggregateRUMEvents": {
@@ -5978,6 +6022,24 @@
     "summary": "Create the RUM configuration",
     "request_description": "The definition of the RUM configuration to create.",
     "request_schema_description": "Request body for creating the RUM configuration."
+  },
+  "ListRUMArchiveConfigs": {
+    "description": "Get the list of archive configurations for your organization.",
+    "summary": "List archive configurations"
+  },
+  "DeleteRUMArchiveConfig": {
+    "description": "Delete the archive configuration for a RUM application. Archived and recovered session data is not deleted.",
+    "summary": "Delete an archive configuration"
+  },
+  "GetRUMArchiveConfig": {
+    "description": "Get the archive configuration for a RUM application.",
+    "summary": "Get an archive configuration"
+  },
+  "UpdateRUMArchiveConfig": {
+    "description": "Create or update the archive configuration for a RUM application. The application ID in the path must match `data.id`. Disabling archiving does not delete archived sessions.",
+    "summary": "Create or update an archive configuration",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
   },
   "ListRumMetrics": {
     "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
@@ -6114,6 +6176,38 @@
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
+  },
+  "GetRUMRecoverySessionCount": {
+    "description": "Return the full estimated number of recoverable sessions and the configured maximum per batch. The estimate is not capped at that maximum. This endpoint does not create a recovery request. Narrow the query or time range if the estimate exceeds max_recoverable_sessions. Creation checks a fresh estimate and returns 400 if it exceeds the configured maximum.",
+    "summary": "Estimate recoverable sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "ListRUMRecoveryBatchRequests": {
+    "description": "List batch recovery requests for your organization. Set `type=batch`. Optional `from` and `to` bounds filter request creation time; `query` filters the queries stored on recovery requests.\nA filtered page can be empty or contain fewer than `limit` results and still include `meta.next_cursor`. Continue until the cursor is absent, keeping the filters unchanged between pages.",
+    "summary": "List batch recovery requests"
+  },
+  "CreateRUMRecoveryRequest": {
+    "description": "Start targeted or query-based batch recovery. Use the returned `data.id` to poll the recovery request for progress. Batch creation checks a fresh recoverable-session estimate against the configured maximum (100,000 by default), accepting estimates equal to the maximum. Use the count operation to check the current maximum; creation can still reject a changed estimate. Narrow the query or time range if the maximum is exceeded.\n\nCreation is not idempotent. After an uncertain response, check session search or batch listing before retrying.",
+    "summary": "Create a recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "GetRUMRecoveryRequest": {
+    "description": "Get progress for a targeted or batch recovery request. A `COMPLETED` request can include failed sessions; check individual session statuses for targeted recovery.",
+    "summary": "Get recovery request progress"
+  },
+  "UpdateRUMRecoveryBatchRequest": {
+    "description": "Cancel pending work for a batch recovery request. Work already in progress can finish, and recovered data is not removed. Requests in a terminal state return `409`.",
+    "summary": "Cancel a batch recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "SearchRUMArchiveSessions": {
+    "description": "Search archived RUM sessions. Use `meta.page.next_cursor` to retrieve the next page.",
+    "summary": "Search archived sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
@@ -6370,10 +6464,6 @@
   "GetAsmServiceByName": {
     "description": "Retrieve Application Security details for services matching the given name.\nReturns Application Security activation, compatibility, and product enablement\ninformation for each matching `(service, environment)` pair, along with a count\nof services that have Application Security Management (Threats) enabled.",
     "summary": "Get Application Security details for a service"
-  },
-  "DownloadCloudWorkloadPolicyFile": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Download the Workload Protection policy (US1-FED)"
   },
   "ListSecurityFindings": {
     "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
@@ -6803,25 +6893,9 @@
     "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
-  "CreateCloudWorkloadSecurityAgentRule": {
-    "description": "Create a new agent rule with the given parameters.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Create a Workload Protection agent rule (US1-FED)",
-    "request_description": "The definition of the new agent rule",
-    "request_schema_description": "Request object that includes the Agent rule to create"
-  },
-  "DeleteCloudWorkloadSecurityAgentRule": {
-    "description": "Delete a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Delete a Workload Protection agent rule (US1-FED)"
-  },
   "GetCloudWorkloadSecurityAgentRule": {
     "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
-  },
-  "UpdateCloudWorkloadSecurityAgentRule": {
-    "description": "Update a specific agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Update a Workload Protection agent rule (US1-FED)",
-    "request_description": "New definition of the agent rule",
-    "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListSecurityMonitoringCriticalAssets": {
     "description": "Get the list of all critical assets.",
@@ -7712,6 +7786,20 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
   },
+  "ListEmailAccessPolicies": {
+    "description": "Lists the email access policies for a private status page.",
+    "summary": "List email access policies"
+  },
+  "CreateEmailAccessPolicy": {
+    "description": "Creates an email access policy for a private status page.",
+    "summary": "Create an email access policy",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a status page email access policy."
+  },
+  "DeleteEmailAccessPolicy": {
+    "description": "Deletes an email access policy from a private status page.",
+    "summary": "Delete an email access policy"
+  },
   "ListComponents": {
     "description": "Lists all components for a status page.",
     "summary": "List components"
@@ -7849,11 +7937,11 @@
     "request_schema_description": "Request object for editing a maintenance update."
   },
   "PublishStatusPage": {
-    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.",
     "summary": "Publish status page"
   },
   "UnpublishStatusPage": {
-    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.",
     "summary": "Unpublish status page"
   },
   "GetStegadographyWidgets": {
@@ -8241,7 +8329,7 @@
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
   },
   "GetTraceByID": {
-    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.\nFor very large traces, use Get a pruned trace by ID, or set `include_fields` to keep only the tags you need.",
     "summary": "Get a trace by ID"
   },
   "ListTemporaryGrantRequests": {
@@ -8299,11 +8387,11 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same data center as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nSet `create_only=true` to atomically create exactly one quota in the caller's organization and reject an\nexisting quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.\nRepeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`\neven if the first request succeeded; reconcile the outcome before retrying or importing the quota.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
@@ -8312,8 +8400,12 @@
     "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Delete a usage quota"
   },
+  "GetQuota": {
+    "description": "Returns a usage quota's current configuration by its opaque identifier. Scheduled limits are returned separately until they take effect, after which they are returned as the current limit.\n\nBy default, you can retrieve quotas from your organization and authorized descendant organizations in the same data center. Set `include_descendants=false` to restrict access to your organization.\n\nA quota remains readable after its associated user, role, or team is deleted. Requires `billing_read` or `billing_edit`.",
+    "summary": "Get a usage quota"
+  },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "description": "Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."

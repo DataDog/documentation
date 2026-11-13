@@ -1,0 +1,31 @@
+{
+  "name": "Example-Monitor",
+  "type": "data-jobs alert",
+  "query": "formula(\"job_duration(run_query)\").detection(anomaly).by(name,workspace_name,entity_id) > 0",
+  "message": "Data jobs duration alert triggered",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "options": {
+    "variables": [
+      {
+        "name": "run_query",
+        "data_source": "data_quality_metrics",
+        "schema_version": "0.0.1",
+        "measure": "duration",
+        "filter": "search for databricks_job",
+        "run_filter": "env:prod",
+        "group_by": [
+          "name",
+          "workspace_name",
+          "entity_id"
+        ],
+        "monitor_options": {
+          "detection_type": "anomaly",
+          "consecutive_runs": 2
+        }
+      }
+    ]
+  }
+}

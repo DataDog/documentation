@@ -16,6 +16,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Dashboards"
+- link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
+  tag: "Blog"
+  text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 ---
 
 ## Overview

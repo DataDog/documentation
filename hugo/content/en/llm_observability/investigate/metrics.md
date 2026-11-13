@@ -27,7 +27,7 @@ Agent Observability also stores two other kinds of data, which have their own re
 - **Per-span operational data**: The cost, tokens, latency, and errors recorded on each trace or span. Metrics roll up from these values. Span data follows [Agent Observability trace retention][7] and is queried from the Traces explorer.
 - **Individual [evaluation results][1]** (evals): Quality and safety judgments, such as hallucination, faithfulness, or custom LLM-as-a-judge, attached to individual spans or experiment rows, including reasoning. These follow [Agent Observability trace and offline experiment retention][8]. The [Evaluation metrics](#evaluation-metrics) section describes the metrics that aggregate production evaluation results.
 
-<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics, except LLM token and cost metric tags. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
+<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics. The exceptions are LLM token and cost metric tags, and <a href="#gateway-metrics">AI Gateway tags</a>. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
 ### Span metrics
 
@@ -36,6 +36,10 @@ Agent Observability also stores two other kinds of data, which have their own re
 | `ml_obs.span` | Total number of spans with a span kind | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.duration` | Total duration of spans in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.error` | Number of errors that occurred in the span | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+| `ml_obs.span.time_to_first_token` | Time to the first generated output in a streaming LLM span, in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+| `ml_obs.span.time_per_output_token` | Average generation time per output token in a streaming LLM span, in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+
+Streaming latency metrics are available when spans include the corresponding timing data. For AI Gateway measurement rules, see [AI Gateway streaming latency][10].
 
 ### LLM token metrics
 
@@ -83,6 +87,59 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 | `ml_obs.trace` | Number of traces | Count | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 | `ml_obs.trace.duration` | Total duration of all traces across all spans | Distribution | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 | `ml_obs.trace.error` | Number of errors that occurred during the trace | Count | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
+
+### Gateway metrics
+
+[AI Gateway][9] adds tags to span count, error, duration, streaming latency, token, and cost metrics. To count LLM calls, filter `ml_obs.span` by `dd.ai_gateway_frntr:true` and `span_kind:llm`. Retries and fallbacks count as separate calls.
+
+Each tag is available when the AI Gateway span includes the related data. Metric samples recorded before these tags were available don't include them. Filtering by a tag excludes samples without it; unfiltered totals keep their existing history.
+
+| Tag | Description |
+|-----|-------------|
+| `dd.ai_gateway_frntr` | `true` for AI Gateway traffic. |
+| `gateway_provider_id` | ID of the configured AI Gateway provider account. |
+| `gateway_provider` | Slug of the configured AI Gateway provider account. |
+| `gateway_model_canonical` | Catalog model name, independent of the provider-specific model name or version. Each retry or fallback uses its resolved model. Models without a catalog match omit this tag. |
+| `gateway_router_id` | ID of the entry router. Retries and fallbacks keep this ID, including calls routed through another router. Direct calls omit it. |
+| `user_id` | Datadog user ID associated with the request. |
+| `team_id` | ID of the selected or uniquely inferred Datadog team. Omitted when multiple teams apply. |
+| `team_attribution` | `header` for an explicitly selected team, `single` for one inferred team, or `multiple` when more than one team applies. Calls with `multiple` remain in overall totals without a `team_id`. |
+| `gateway_outcome` | Call result: `ok`, `error`, or `canceled`. Canceled calls are excluded from error counts. |
+| `gateway.streaming` | `true` for streaming calls and `false` otherwise. |
+| `gateway_error_category` | Error category on failed calls: `http_401`, `http_403`, `http_429`, `http_500`, `http_503`, `other_4xx`, `other_5xx`, `timeout`, `credentials`, `unavailable`, `stream_error`, or `unknown`. |
+| `error_type` | Error type: `provider_http_error`, `timeout`, `credentials`, `unavailable`, `stream_read_error`, `early_close`, `provider_stream_error`, `incomplete_stream`, or `unknown`. |
+
+Use `gateway_error_category` to group failures by HTTP status or broad cause. Use `error_type` to distinguish causes within a category, such as `early_close` and `stream_read_error` within `stream_error`.
+
+#### Gateway pricing coverage
+
+Pricing coverage shows which AI Gateway calls have a complete cost estimate. Use it to assess how complete your cost totals are.
+
+| Metric Name | Description | Metric Type | Tags |
+|-------------|-------------|-------------|------|
+| `ml_obs.span.llm.pricing.count` | Number of AI Gateway LLM calls by pricing status | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider`, AI Gateway metric tags, and `gateway_pricing_status` |
+
+Each LLM call contributes one count, including calls without a cost estimate. The `gateway_pricing_status` tag is available only on this metric:
+
+| Value | Description |
+|-------|-------------|
+| `complete` | The cost estimate covers the full call, including calls with a valid zero cost. |
+| `partial` | The estimate is incomplete, for example because final usage or a price for cached tokens is missing. |
+| `inconsistent` | Token counts or cost components do not match their reported totals, or a cost value is negative. |
+| `unavailable` | There is not enough usage or pricing information to estimate the cost. |
+
+Pricing coverage does not change the reported cost. If pricing samples are missing for part of the selected time range, coverage for that traffic is unknown.
+
+#### Gateway streaming latency
+
+AI Gateway reports `ml_obs.span.time_to_first_token` and `ml_obs.span.time_per_output_token` for successful streaming LLM calls with valid timing data, including calls that use metadata-only capture.
+
+- **Time to first token (TTFT)**: Time from the start of an LLM call until AI Gateway receives the first generated text, reasoning, or tool arguments. TTFT ignores empty events, role announcements, and usage updates.
+- **Time per output token (TPOT)**: Average generation time per output token, calculated as `(last output time - first output time) / (output tokens - 1)`. The calculation excludes the wait for first output and the delay after the last output.
+
+TPOT requires a completed text-only stream, a matching final token count greater than one, and output received at different times. Calls with reasoning, tool calls, multiple choices, or missing token counts don't produce a TPOT sample, but they can still produce a TTFT sample.
+
+Both metrics reflect when AI Gateway receives output, so buffering and backpressure can affect the values. TPOT percentiles describe averages across LLM calls, not individual token intervals. AI Gateway omits missing timing data instead of reporting it as zero.
 
 ### Evaluation metrics
 
@@ -204,3 +261,5 @@ The following metrics are deprecated, and are maintained only for backward compa
 [6]: /data_security/data_retention_periods/
 [7]: /llm_observability/data_governance/#traces-and-spans
 [8]: /llm_observability/data_governance/
+[9]: /llm_observability/configure/ai_gateway/
+[10]: #gateway-streaming-latency

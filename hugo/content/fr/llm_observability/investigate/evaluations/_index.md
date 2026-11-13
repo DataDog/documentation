@@ -4,7 +4,7 @@ aliases:
 - /fr/llm_observability/configuration/
 - /fr/llm_observability/evaluations/
 - /fr/llm_observability/configure/evaluations/
-description: Apprenez à configurer Evaluators pour votre application LLM.
+description: Découvrez comment configurer Evaluators pour votre application LLM.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
@@ -13,11 +13,11 @@ title: Évaluations
 ---
 ## Présentation {#overview}
 
-Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Les évaluateurs peuvent être configurés en accédant à [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
+Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Vous pouvez configurer Evaluators en accédant à [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
 
-### Évaluateurs LLM-as-a-judge personnalisés {#custom-llm-as-a-judge-evaluators}
+### Évaluateurs personnalisés LLM-as-a-judge {#custom-llm-as-a-judge-evaluators}
 
-[Les évaluateurs LLM-as-a-judge personnalisés][1] vous permettent de définir votre propre logique d'évaluation à l'aide de prompts en langage naturel. Vous pouvez créer des évaluateurs personnalisés pour évaluer des critères subjectifs ou objectifs (comme le ton, l'utilité ou l'exactitude factuelle) et les exécuter à grande échelle sur vos traces et vos spans.
+[Les évaluateurs personnalisés LLM-as-a-judge][1] vous permettent de définir votre propre logique d'évaluation à l'aide de prompts en langage naturel. Vous pouvez créer des évaluateurs personnalisés pour évaluer des critères subjectifs ou objectifs (comme le ton, l'utilité ou la véracité) et les exécuter à grande échelle sur vos traces et spans.
 
 ### Évaluateurs gérés {#managed-evaluators}
 
@@ -33,7 +33,7 @@ Vous pouvez également soumettre des [évaluations externes][3] en utilisant l'A
 
 ### Création d'évaluateurs personnalisés {#building-custom-evaluators}
 
-Pour les développeurs qui créent des évaluateurs personnalisés, consultez le [Guide de développement des évaluateurs][10].
+Pour les développeurs créant des évaluateurs personnalisés, consultez le [Guide du développeur d'évaluateurs][10].
 
 ### Intégrations d'évaluations {#evaluation-integrations}
 
@@ -55,9 +55,9 @@ En plus d'évaluer les entrées et les sorties des requêtes LLM, des agents, de
 
 ### Autorisations {#permissions}
 
-Les [`Agent Observability Write` permissions][7] sont nécessaires pour configurer les évaluateurs.
+Les [`Agent Observability Write` autorisations][7] sont nécessaires pour configurer les évaluateurs.
 
-Pour restreindre les configurations d'évaluateur d'une application à des équipes ou des rôles spécifiques, consultez [Data Access Control in Agent Observability][14].
+Pour restreindre les configurations d'évaluateurs d'une application à des équipes ou des rôles spécifiques, consultez [Access Control des données dans Agent Observability][14].
 
 ### Récupération des spans {#retrieving-spans}
 
@@ -79,4 +79,4 @@ Agent Observability propose une [API d'exportation][9] que vous pouvez utiliser 
 [11]: /fr/llm_observability/investigate/annotation_queues
 [12]: /fr/security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /fr/llm_observability/investigate/evaluations/end_user_feedback
-[14]: /fr/llm_observability/improve/access_control/
+[14]: /fr/llm_observability/data_governance/access_control/
