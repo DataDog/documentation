@@ -41,31 +41,55 @@ This shows the total of combined client and server evaluations that fell through
 
 Use this count to confirm that targeting rules are working as expected and to see how traffic is distributed across targeting rules in a given environment, including the percentage of total traffic in the time range.
 
-### Client and server evaluations
+### Evaluations
 
-{{< img src="feature_flags/flag_graphs/evaluations.png" alt="Client and server evaluations graph split by variant" style="width:100%;" >}}
+The **Evaluations** graph shows client and server flag evaluations together, grouped by variant and SDK.
 
-Client SDK evaluations have two views, each grouped by variant:
+Select a view for both client and server evaluations:
 
-- **Unique**: Count of unique users or entities that evaluated each variant (deduplicated by targeting key)
-- **Total**: Count of all evaluations by variant, including repeated evaluations of the same targeting key
+- **Unique**: Count of distinct targeting keys within each variant, SDK, and time bucket
+- **Total**: Count of all evaluations, including repeated evaluations of the same targeting key
 
-Server SDK evaluations show a count of all evaluations by variant. This requires flag evaluation metrics to be enabled. See [Set Up Server-Side Flag Evaluation Metrics][1].
+Use **Color by** to color the series by **Variant** or **SDK**.
+
+**Note**: **Unknown SDK** means that evaluations arrived without SDK identification. Upgrade the SDK that sends these evaluations to a version that reports its SDK name.
+
+For server-side evaluations, the following minimum SDK versions report SDK identification:
+
+| Server SDK | Minimum version |
+| ---------- | --------------- |
+| .NET | 3.57.0 |
+| Go | 2.11.0 |
+| Java | 1.68.0 |
+| Node.js | 5.131.0 on the 5.x release line, or 6.20.0 on the 6.x release line |
+| PHP | 1.27.0 |
+| Python | 4.16.0 |
+| Ruby | 2.43.0 |
+
+For Java, use the same version of `dd-java-agent` and `dd-openfeature`. If evaluations pass through a Datadog Agent, use Agent version 7.84.0 or later so it preserves SDK identification.
+
+These versions apply to SDK identification in the **Evaluations** graph. See the [client-side][2] and [server-side][3] setup pages for other SDK requirements.
+
+If you use OpenTelemetry (OTLP) evaluation metrics, you can graph them on a dashboard. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
 ### Errors and latency
 
 {{< img src="feature_flags/flag_graphs/errors_latency.png" alt="Error and latency graphs" style="width:100%;" >}}
 
-Error rate and latency graphs are available for client evaluations. They are not available for server evaluations.
+Error rate and latency graphs use sampled Real User Monitoring (RUM) data and are available for client evaluations only. Changes to sampling or retention rates can cause shifts in these graphs that are unrelated to the flag.
 
 ## Export to a dashboard
 
-{{< img src="feature_flags/flag_graphs/dashboard_export.png" alt="Export graph to a dashboard" style="width:100%;" >}}
+{{< img src="feature_flags/flag_graphs/dashboard_export.png" alt="Save a latency graph to a dashboard from its sharing menu" style="width:100%;" >}}
 
-Choose **Save to dashboard** to add a graph to a Datadog dashboard. From there, you can filter and group the data for further insights.
+On an **Errors** or **Latency** graph, open the sharing menu and choose **Save to dashboard**. From the dashboard, you can filter and group the data for further insights.
+
+The **Evaluations** graph does not support dashboard export. To graph OTLP evaluation metrics on a dashboard, follow [Set Up Server-Side Flag Evaluation Metrics][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/guide/server_flag_evaluation_metrics/
+[2]: /feature_flags/client/
+[3]: /feature_flags/server/
