@@ -491,6 +491,20 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ## Example Agent Configurations
 {{% dbm-sqlserver-agent-config-examples %}}
 
+## Troubleshooting
+
+### Database shows as "Unmonitored"
+
+If an Azure SQL Database, Managed Instance, or Elastic Pool node appears under the **Unmonitored** tab in Database Monitoring even though the Agent can connect to it, this usually means the Agent's connection is working but a required setup step was not completed. Check the following:
+
+- Verify the Agent's SQL Server integration is enabled and configured correctly for your Azure deployment type.
+- Confirm that `dbm: true` is set in the `sqlserver.d/conf.yaml` instance configuration—without it, the check reports basic metrics only and the database is not classified as monitored by DBM.
+- Confirm the `datadog` login has the permissions required for your Azure SQL deployment type, as described in [Grant the Agent access](#grant-the-agent-access). A login that is missing a required grant (for example, `VIEW SERVER STATE` or `VIEW ANY DEFINITION` on Managed Instance) can connect successfully but be unable to collect the data DBM needs.
+- [Run the Agent's status subcommand](/agent/configuration/agent-commands/#agent-status-and-information) and confirm `sqlserver` appears under the **Checks** section without errors.
+- Check the Agent logs for connection or permission errors, which often point to a missing grant or an incorrect `azure` configuration block.
+
+See [Troubleshoot Common Issues](/database_monitoring/troubleshooting/?tab=sqlserver) for more general DBM troubleshooting steps.
+
 ## Install the Azure integration
 
 To collect more comprehensive database metrics and logs from Azure, install the [Azure integration][1].
