@@ -28,36 +28,32 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only designated teams, roles, or agents can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Control][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
+To view all of your Restricted Datasets, navigate to [Organization Settings][6]. In the left pane, under the {{< ui >}}Access{{< /ui >}} heading, select [Access Control][7]. This action opens the {{< ui >}}Data Access Control{{< /ui >}} tab, which has three sections:
 
-### Datadog site
+- {{< ui >}}Restricted Datasets{{< /ui >}}: The Restricted Datasets in your organization, with the teams or roles that can access each one and the data it covers.
+- {{< ui >}}Unrestricted User Groups{{< /ui >}}: The teams and roles with [unrestricted access](#unrestricted-user-groups) to a telemetry type.
+- {{< ui >}}Data Hidden by Default{{< /ui >}}: The telemetry types where [data outside a Restricted Dataset](#strict-mode) is hidden by default.
 
-Log in as a user assigned the Datadog Admin role, or any user with a role in your organization with the [`user_access_manage` permission][5].
-
-1. Navigate to [Organization Settings][6].
-1. On the left side of the page, select [Data Access Control][7].
-1. Click {{< ui >}}New Restricted Dataset{{< /ui >}}.
-
-In order to create a Restricted Dataset, identify the data to be restricted with a query.
-
-{{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
-
-Name Dataset
-: A descriptive name to help users understand what data is contained in the dataset.
-
-Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
-
-Grant access
-: Select one or more teams, roles, or agents that can access the content bound in the Restricted Dataset. Agents are listed under {{< ui >}}Agents and Automated Processes{{< /ui >}}. Users who are not members of the selected teams or roles, and agents that are not selected, are blocked from accessing this data.
-
-**Note:** A maximum of 50 principals (roles, teams, or agents) can be tied to a given Restricted Dataset.
-
-You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
-
-After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
+### Create a Restricted Dataset
 
 You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10 on other plans. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) can create up to 1,000 Restricted Datasets.
+
+To create a Restricted Dataset:
+
+1. Log in as a user with the Datadog Admin role, or with a role that has the [`user_access_manage` permission][5].
+1. Navigate to [Organization Settings][6].
+1. In the left pane, under {{< ui >}}Access{{< /ui >}}, select [Access Control][7].
+1. In the {{< ui >}}Restricted Datasets{{< /ui >}} section, click {{< ui >}}New Policy{{< /ui >}}.
+
+    {{< img src="/account_management/rbac/restricted_dataset-4.png" alt="The New Policy page with the Restricted Datasets tab selected and an Unrestricted User Groups tab beside it, showing the Choose Data Scope, Designate Users with Access, and Name Policy fields.">}}
+
+1. Under {{< ui >}}Choose Data Scope{{< /ui >}}, define the data to restrict:
+    1. Next to {{< ui >}}In Product{{< /ui >}}, select a product. See [Supported telemetry types](#supported-telemetry).
+    1. Next to {{< ui >}}Tagged{{< /ui >}}, select a tag key and one or more values. A Restricted Dataset can include up to 10 key:value pairs. If you need more, create an additional Restricted Dataset.
+    1. (Optional) To add another product to the same dataset, click {{< ui >}}New Product{{< /ui >}}.
+1. Under {{< ui >}}Designate Users with Access{{< /ui >}}, select the teams, roles, or agents that can access the data. Agents are listed under Agents and Automated Processes. Users who are not members of these groups can't access the data. You can add up to 50 teams, roles, or agents to a Restricted Dataset.
+1. Under {{< ui >}}Name Policy{{< /ui >}}, enter a descriptive name that helps users understand what data the dataset contains.
+1. Save the policy.
 
 ### Supported telemetry types {#supported-telemetry}
 
@@ -65,7 +61,7 @@ You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10
 - APM traces
 - Cloud costs
 - Custom metrics
-    - **Note:** Standard metrics are not supported
+    - **Note:** Standard metrics are not supported.
 - Error Tracking issues
 - Logs
 - RUM sessions
@@ -85,7 +81,7 @@ The following are available as a Preview upon request:
 
 ### Data not in a Restricted Dataset {#strict-mode}
 
-Each telemetry type has a setting that controls who can view data outside a Restricted Dataset. This setting appears in the {{< ui >}}Data not in dataset{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table.
+Each telemetry type has a setting that controls who can view data outside a Restricted Dataset. Telemetry types set to {{< ui >}}Restricted{{< /ui >}} appear in the {{< ui >}}Data Hidden by Default{{< /ui >}} section of the [Access Control][7] page. If no telemetry types are set to {{< ui >}}Restricted{{< /ui >}}, the section shows {{< ui >}}All Products Unrestricted{{< /ui >}}.
 
 {{< ui >}}Unrestricted{{< /ui >}} (default)
 : Data that is not in a Restricted Dataset, and untagged data, are visible to all users with appropriate permissions.
@@ -102,14 +98,12 @@ A telemetry type must have at least one Restricted Dataset before you can set it
 
 Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >}} and {{< ui >}}Restricted{{< /ui >}} settings. Each dataset belongs to one setting.
 
-**Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, identify any data for that telemetry type that is _not_ in a Restricted Dataset. After you save the change, that data is hidden from users without [unrestricted access](#unrestricted-user-groups). Review the {{< ui >}}Restricted Datasets{{< /ui >}} table on the [Data Access Control][7] page to confirm coverage.
+**Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, identify any data for that telemetry type that is _not_ in a Restricted Dataset. After you save the change, that data is hidden from users without [unrestricted access](#unrestricted-user-groups). Review the {{< ui >}}Restricted Datasets{{< /ui >}} section on the [Access Control][7] page to confirm coverage.
 
 To change the setting for a telemetry type, you must have the [`user_access_manage` permission][5].
 
-1. Navigate to [Data Access Control][7].
-1. In the {{< ui >}}Data Restrictions{{< /ui >}} table, hover over the row for the telemetry type, and click the edit (pencil) icon.
-1. Under the heading for data not in Restricted Datasets (for example, {{< ui >}}Logs data not in Restricted Datasets{{< /ui >}}), select {{< ui >}}Unrestricted{{< /ui >}} or {{< ui >}}Restricted{{< /ui >}}.
-1. Click {{< ui >}}Save{{< /ui >}}.
+1. Navigate to [Access Control][7].
+1. In the {{< ui >}}Data Hidden by Default{{< /ui >}} section, click {{< ui >}}Add New{{< /ui >}}.
 
 ### Unrestricted access {#unrestricted-user-groups}
 
@@ -117,9 +111,17 @@ Some users, such as high-privilege admins or central observability teams with ac
 
 A team, role, or agent with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or the setting for data not in a Restricted Dataset. Unrestricted access is granted to teams, roles, or agents (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM. To give an agent unrestricted access to more than one telemetry type, add it to each telemetry type separately.
 
-To grant unrestricted access, open the edit dialog for the telemetry type as described in [Data not in a Restricted Dataset](#strict-mode). Add the teams, roles, or agents to the unrestricted access field (for example, {{< ui >}}Roles and Teams with unrestricted access to all Logs data{{< /ui >}}), and click {{< ui >}}Save{{< /ui >}}. The {{< ui >}}Unrestricted Access{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table lists these teams, roles, and agents.
+To grant unrestricted access:
 
-**Note:** Unrestricted access lets an agent read all data of that telemetry type, including data in Restricted Datasets created later. When an agent needs only some restricted data, add it to the specific Restricted Datasets instead. Reserve unrestricted access for agents whose work requires every record of a telemetry type, and review the {{< ui >}}Unrestricted Access{{< /ui >}} column regularly.
+1. Navigate to [Access Control][7].
+1. Click {{< ui >}}New Policy{{< /ui >}}, then select the {{< ui >}}Unrestricted User Groups{{< /ui >}} tab.
+1. Under {{< ui >}}Designate User Groups{{< /ui >}}, add the teams, roles, or agents.
+1. Under {{< ui >}}Choose Content Scope{{< /ui >}}, select {{< ui >}}Data{{< /ui >}}, {{< ui >}}Assets{{< /ui >}}, or {{< ui >}}Infrastructure{{< /ui >}}. Next to {{< ui >}}Users can always view{{< /ui >}}, select one or more telemetry types.
+1. Save the policy. 
+
+The {{< ui >}}Unrestricted User Groups{{< /ui >}} section lists these teams, roles, and agents, along with the telemetry types they can view.
+
+**Note:** Unrestricted access lets an agent read all data of that telemetry type, including data in Restricted Datasets created later. When an agent needs only some restricted data, add it to the specific Restricted Datasets instead. Reserve unrestricted access for agents whose work requires every record of a telemetry type, and review the {{< ui >}}Unrestricted User Groups{{< /ui >}} section regularly.
 
 Unrestricted access pairs especially well with the {{< ui >}}Restricted{{< /ui >}} setting because it lets designated admins keep working without being added to every dataset.
 
@@ -291,10 +293,9 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [4]: /getting_started/tagging/
 [5]: /account_management/rbac/permissions/#access-management
 [6]: https://app.datadoghq.com/organization-settings/
-[7]: https://app.datadoghq.com/organization-settings/data-access-controls/
+[7]: https://app.datadoghq.com/organization-settings/access-controls
 [8]: /data_security/
 [9]: /internal_developer_portal/catalog/set_up/
-[10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/

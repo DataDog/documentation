@@ -757,27 +757,22 @@ menu:
       url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
-    - name: DDOT Collector (Recommended)
+    - name: DDOT Collector
       url: /opentelemetry/setup/ddot_collector
       identifier: otel-setup-ddot
       parent: otel_collect
       weight: 401
-    - name: Install the DDOT Collector
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
-      identifier: otel-setup-ddot-install
+    - name: Install on Kubernetes
+      url: /opentelemetry/setup/ddot_collector/kubernetes/
+      identifier: otel-setup-ddot-kubernetes
       parent: otel-setup-ddot
       weight: 4011
-    - name: Use Custom OTel Components
-      url: /opentelemetry/setup/ddot_collector/custom_components
-      identifier: otel-setup-ddot-custom
+    - name: Migrate to the DDOT Collector
+      url: /opentelemetry/migrate/upstream_to_ddot_collector/
+      identifier: otel-setup-ddot-migrate-upstream
       parent: otel-setup-ddot
       weight: 4012
-    - name: Migrate to the DDOT Collector
-      url: /opentelemetry/migrate/ddot_collector
-      identifier: otel-setup-ddot-migrate
-      parent: otel-setup-ddot
-      weight: 4013
-    - name: OpenTelemetry Collector
+    - name: Upstream OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
       parent: otel_collect
@@ -802,16 +797,11 @@ menu:
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
       weight: 40215
-    - name: OTLP Ingest in the Agent
-      url: /opentelemetry/setup/otlp_ingest_in_the_agent
-      identifier: otel-setup-otlp-ingest
-      parent: otel_collect
-      weight: 403
     - name: Direct OTLP Ingest
       url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
-      weight: 404
+      weight: 403
     - name: Traces Endpoint
       url: /opentelemetry/setup/otlp_ingest/traces
       parent: otel-setup-intake-endpoint
@@ -837,6 +827,31 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40234
       identifier: otel_setup_serverless
+    - name: Datadog Agent
+      url: /opentelemetry/setup/agent/
+      identifier: otel-setup-agent
+      parent: otel_collect
+      weight: 404
+    - name: Agent's OTLP Endpoint
+      url: /opentelemetry/setup/otlp_ingest_in_the_agent
+      identifier: otel-setup-otlp-ingest
+      parent: otel-setup-agent
+      weight: 4041
+    - name: Agent's Collector
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
+      identifier: otel-setup-ddot-install
+      parent: otel-setup-agent
+      weight: 4042
+    - name: Custom Components in the Agent
+      url: /opentelemetry/setup/ddot_collector/custom_components
+      identifier: otel-setup-ddot-custom
+      parent: otel-setup-agent
+      weight: 4043
+    - name: Migrate to the Agent's Collector
+      url: /opentelemetry/migrate/ddot_collector
+      identifier: otel-setup-ddot-migrate
+      parent: otel-setup-agent
+      weight: 4044
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -1047,11 +1062,16 @@ menu:
       parent: otel_guides_migration
       weight: 10033
       identifier: otel_guides_migration_operation_names
-    - name: Agent with DDOT Collector
+    - name: Migrate to the Agent's Collector
       url: /opentelemetry/migrate/ddot_collector/
       parent: otel_guides_migration
       weight: 10034
       identifier: otel_guides_migration_ddot_collector
+    - name: Migrate to the DDOT Collector
+      url: /opentelemetry/migrate/upstream_to_ddot_collector/
+      parent: otel_guides_migration
+      weight: 10035
+      identifier: otel_guides_migration_upstream_to_ddot_collector
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
@@ -5274,16 +5294,21 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
       weight: 10309
+    - name: Databricks Lakebase
+      url: database_monitoring/setup_postgres/lakebase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_lakebase
+      weight: 10310
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 10310
+      weight: 10311
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 10311
+      weight: 10312
     - name: MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm_setup
@@ -6772,56 +6797,61 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_experiments
       weight: 310
+    - name: Flag Evaluation and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 311
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 311
+      weight: 312
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 312
+      weight: 313
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 313
+      weight: 314
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 314
+      weight: 315
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 315
+      weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 316
+      weight: 317
     - name: Flag Key Obfuscation
       url: feature_flags/concepts/flag_key_obfuscation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
-      weight: 317
+      weight: 318
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_permissions
-      weight: 320
+      weight: 321
     - name: Approvals
       url: feature_flags/concepts/approvals
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
-      weight: 321
+      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 322
+      weight: 323
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -6948,11 +6978,16 @@ menu:
       parent: source_code_integration
       identifier: sci_resource_mapping
       weight: 3
-    - name: Features
-      url: source_code/features/
+    - name: Code Snippets and Context Links
+      url: source_code/snippets-and-links/
       parent: source_code_integration
-      identifier: sci_features
+      identifier: sci_snippets_and_links
       weight: 4
+    - name: PR Comments
+      url: source_code/pr-comments/
+      parent: source_code_integration
+      identifier: sci_pr_comments
+      weight: 5
     - name: IDE Plugins
       url: ide_plugins/
       pre: ide

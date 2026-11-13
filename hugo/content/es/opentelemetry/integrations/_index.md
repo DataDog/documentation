@@ -25,7 +25,7 @@ Por ejemplo, el archivo `metadata.yaml` de [`dockerstatsreceiver`][15] lista las
 
 ## Integraciones de OpenTelemetry compatibles con Datadog {#datadog-supported-opentelemetry-integrations}
 
-Datadog admite las siguientes integraciones de OpenTelemetry:
+Datadog admite las siguientes Integrations de OpenTelemetry. ¿No ve la integración que necesita? [Solicítela][21].
 
 ### APM (Application Performance Monitoring) {#apm-application-performance-monitoring}
 
@@ -74,6 +74,10 @@ Haga un seguimiento de los marcos de procesamiento de big data:
 
 - [Métricas de Apache Spark][13] - Haga un seguimiento de las métricas de rendimiento de Apache Spark
 
+## Solicite una integración o comparta sus comentarios {#request-an-integration-or-share-feedback}
+
+Para solicitar una nueva integración o compartir comentarios sobre una existente, complete el [formulario de OpenTelemetry Integrations Product Preview][21].
+
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,4 @@ Haga un seguimiento de los marcos de procesamiento de big data:
 [18]: /es/opentelemetry/integrations/kubernetes_metrics/
 [19]: /es/opentelemetry/integrations/postgres_metrics/
 [20]: /es/opentelemetry/integrations/sqlserver_metrics/
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/

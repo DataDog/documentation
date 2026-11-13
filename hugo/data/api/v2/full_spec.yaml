@@ -1992,7 +1992,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
+        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `ai-gateway-route`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -2766,6 +2766,82 @@ components:
         example: "550e8400-e29b-41d4-a716-446655440010"
         format: uuid
         type: string
+    feature_flag_history_end_date:
+      description: Only include changes made before this time, for example `2026-02-01T00:00:00Z`. The bound is exclusive, so a change made exactly at this time is not included. Omit for no upper bound. Must be after `start_date` when both are set.
+      in: query
+      name: end_date
+      required: false
+      schema:
+        example: "2026-02-01T00:00:00Z"
+        format: date-time
+        type: string
+    feature_flag_history_environment_id:
+      description: Only include changes to this environment. Changes to the flag itself, which have no environment, are always included.
+      in: query
+      name: environment_id
+      required: false
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440001"
+        format: uuid
+        type: string
+    feature_flag_history_feature_flag_id:
+      description: Only include changes to this feature flag.
+      in: query
+      name: feature_flag_id
+      required: false
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440000"
+        format: uuid
+        type: string
+    feature_flag_history_include_suggestion_events:
+      description: |-
+        Also include review events for change requests that needed approval: rejected requests and requests still pending review. Applies only to organizations with flag approvals enabled.
+      in: query
+      name: include_suggestion_events
+      required: false
+      schema:
+        default: false
+        example: false
+        type: boolean
+    feature_flag_history_start_date:
+      description: Only include changes made after this time, for example `2026-01-01T00:00:00Z`. The bound is exclusive, so a change made exactly at this time is not included. Omit for no lower bound.
+      in: query
+      name: start_date
+      required: false
+      schema:
+        example: "2026-01-01T00:00:00Z"
+        format: date-time
+        type: string
+    feature_flag_history_tags:
+      description: |-
+        Only include changes to flags that have all of these exact tags, as repeated parameters, such as `tags=env:prod&tags=tier:1`. Values of the form `team:<handle>` match any selected team and are combined with `teams`. Empty values are ignored.
+      example:
+        - env:prod
+        - tier:1
+      explode: true
+      in: query
+      name: tags
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
+    feature_flag_history_teams:
+      description: |-
+        Only include changes to flags that belong to at least one of these teams. Use team handles without the `team:` prefix, as repeated parameters, such as `teams=checkout&teams=payments`. Handles from `teams` and `team:<handle>` values from `tags` are treated as one set. Handles that are empty, have surrounding white space, or include the `team:` prefix return a `400 Bad Request` error.
+      example:
+        - checkout
+        - payments
+      explode: true
+      in: query
+      name: teams
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
     feature_flag_id:
       description: The ID of the feature flag.
       in: path
@@ -6314,6 +6390,416 @@ components:
       type: string
       x-enum-varnames:
         - AGENT_HEALTH_ISSUES
+    AgentHealthIssueAttributes:
+      description: Attributes of an open Agent Health issue.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueData:
+      description: An open Agent Health issue.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueDataArray:
+      description: The open Agent Health issues on this page.
+      example:
+        - attributes:
+            category: configuration
+            description: The Agent configuration file contains an invalid value.
+            first_seen_at: "2026-11-01T10:00:00Z"
+            issue_name: Invalid Config
+            issue_type: invalid_config
+            resource_id: my-hostname
+            resource_kind: host
+            resource_type: host
+            severity: high
+            state: open
+            tags:
+              - env:prod
+            title: Invalid Agent configuration
+            updated_at: "2026-11-09T08:00:00Z"
+          id: invalid-config:4828e7d6c704c4a3
+          type: agent_health_issues
+      items:
+        $ref: "#/components/schemas/AgentHealthIssueData"
+      type: array
+    AgentHealthIssueDetailAttributes:
+      description: Attributes of an open Agent Health issue, including available remediation.
+      example:
+        category: configuration
+        description: The Agent configuration file contains an invalid value.
+        first_seen_at: "2026-11-01T10:00:00Z"
+        issue_name: Invalid Config
+        issue_type: invalid_config
+        remediation:
+          script:
+            content: "..."
+            filename: fix.sh
+            language: bash
+            language_version: "5"
+            requires_root: true
+          steps:
+            - order: 1
+              text: Open datadog.yaml
+          summary: Fix the invalid configuration value.
+        resource_id: my-hostname
+        resource_kind: host
+        resource_type: host
+        severity: high
+        state: open
+        tags:
+          - env:prod
+        title: Invalid Agent configuration
+        updated_at: "2026-11-09T08:00:00Z"
+      properties:
+        category:
+          description: The category of the issue, such as `configuration`. Omitted when not set.
+          example: configuration
+          type: string
+        description:
+          description: The description of the issue. Omitted when empty.
+          example: The Agent configuration file contains an invalid value.
+          type: string
+        first_seen_at:
+          description: The time the issue was first seen, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+        remediation:
+          $ref: "#/components/schemas/AgentHealthRemediation"
+        resource_id:
+          description: >-
+            The identifier of the affected resource, interpreted according to `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+          example: my-hostname
+          type: string
+        resource_kind:
+          description: >-
+            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
+          example: host
+          type: string
+        resource_type:
+          description: The type of the affected resource. Omitted when empty.
+          example: host
+          type: string
+        severity:
+          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
+          example: high
+          type: string
+        state:
+          description: The state of the issue. Only issues with state `open` are returned.
+          example: open
+          type: string
+        tags:
+          $ref: "#/components/schemas/AgentHealthIssueTags"
+        title:
+          description: The title of the issue. Omitted when empty.
+          example: Invalid Agent configuration
+          type: string
+        updated_at:
+          description: The time the issue was last updated, in RFC 3339 format. Omitted when empty.
+          example: "2026-11-09T08:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - issue_type
+        - issue_name
+        - severity
+        - state
+        - resource_kind
+        - resource_id
+      type: object
+    AgentHealthIssueDetailData:
+      description: An open Agent Health issue with available remediation.
+      example:
+        attributes:
+          category: configuration
+          description: The Agent configuration file contains an invalid value.
+          first_seen_at: "2026-11-01T10:00:00Z"
+          issue_name: Invalid Config
+          issue_type: invalid_config
+          remediation:
+            script:
+              content: "..."
+              filename: fix.sh
+              language: bash
+              language_version: "5"
+              requires_root: true
+            steps:
+              - order: 1
+                text: Open datadog.yaml
+            summary: Fix the invalid configuration value.
+          resource_id: my-hostname
+          resource_kind: host
+          resource_type: host
+          severity: high
+          state: open
+          tags:
+            - env:prod
+          title: Invalid Agent configuration
+          updated_at: "2026-11-09T08:00:00Z"
+        id: invalid-config:4828e7d6c704c4a3
+        type: agent_health_issues
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthIssueDetailAttributes"
+        id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthIssueResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthIssueResourceType:
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
+    AgentHealthIssueResponse:
+      description: A response containing an open Agent Health issue and available remediation.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDetailData"
+      required:
+        - data
+      type: object
+    AgentHealthIssueTags:
+      description: Tags associated with the issue. Omitted when empty.
+      example:
+        - env:prod
+      items:
+        description: A tag associated with the issue.
+        type: string
+      type: array
+    AgentHealthIssuesResponse:
+      description: A paginated response containing open Agent Health issues.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthIssueDataArray"
+        meta:
+          $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    AgentHealthIssuesResponseMeta:
+      description: Pagination metadata for the matching Agent Health issues.
+      example:
+        page:
+          total_count: 3
+          total_filtered_count: 1
+      properties:
+        page:
+          $ref: "#/components/schemas/AgentHealthIssuesResponsePage"
+      required:
+        - page
+      type: object
+    AgentHealthIssuesResponsePage:
+      description: Pagination counts for the Agent Health issues.
+      example:
+        total_count: 3
+        total_filtered_count: 1
+      properties:
+        total_count:
+          description: The total number of open issues in the organization, ignoring filters.
+          example: 3
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of open issues matching the filters, across all pages.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_count
+        - total_filtered_count
+      type: object
+    AgentHealthRemediation:
+      description: Remediation for the issue. Omitted when no remediation is available.
+      example:
+        script:
+          content: "..."
+          filename: fix.sh
+          language: bash
+          language_version: "5"
+          requires_root: true
+        steps:
+          - order: 1
+            text: Open datadog.yaml
+        summary: Fix the invalid configuration value.
+      properties:
+        script:
+          $ref: "#/components/schemas/AgentHealthRemediationScript"
+        steps:
+          $ref: "#/components/schemas/AgentHealthRemediationSteps"
+        summary:
+          description: A summary of how to remediate the issue.
+          example: Fix the invalid configuration value.
+          type: string
+      type: object
+    AgentHealthRemediationScript:
+      description: A script that can be used to remediate the issue.
+      properties:
+        content:
+          description: The content of the script.
+          example: "..."
+          type: string
+        filename:
+          description: The filename of the script.
+          example: fix.sh
+          type: string
+        language:
+          description: The language of the script.
+          example: bash
+          type: string
+        language_version:
+          description: The language version used by the script.
+          example: "5"
+          type: string
+        requires_root:
+          description: Whether the script requires root privileges.
+          example: true
+          type: boolean
+      type: object
+    AgentHealthRemediationStep:
+      description: A step to remediate the issue.
+      properties:
+        order:
+          description: The order in which to perform the step.
+          example: 1
+          format: int64
+          type: integer
+        text:
+          description: The instructions for the step.
+          example: Open datadog.yaml
+          type: string
+      type: object
+    AgentHealthRemediationSteps:
+      description: Steps to remediate the issue.
+      example:
+        - order: 1
+          text: Open datadog.yaml
+      items:
+        $ref: "#/components/schemas/AgentHealthRemediationStep"
+      type: array
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -9257,8 +9743,13 @@ components:
         routing_rules:
           items:
             $ref: "#/components/schemas/AiGatewayModelGroupRoutingRule"
-            description: Routing rule in the group.
+            description: Viewable routing rule in the group. Hidden route identities are omitted.
           type: array
+        routing_rules_restricted:
+          description: Whether some saved routes are hidden from the caller. Omit routing_rule_slugs to preserve all memberships; replacing the visible selection also preserves saved hidden memberships.
+          example: true
+          readOnly: true
+          type: boolean
         updated_at:
           description: Time when the resource was last updated.
           example: "2026-08-24T12:00:00Z"
@@ -10293,18 +10784,19 @@ components:
         - XHIGH
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
-      default: configured
       description: >-
-        How a tier orders its targets. Omitted or null defaults to configured, which preserves target order. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       nullable: true
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayPolicyAttributes:
       description: Routing policy configuration.
       properties:
@@ -11195,10 +11687,61 @@ components:
       required:
         - restricted_details
       type: object
+    AiGatewayRoutingClassifier:
+      description: Saved classified-tier settings. Provider and model are empty when the caller cannot view the provider.
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence.
+          example: 0.5
+          format: double
+          type: number
+        context:
+          description: Traffic context for the classifier.
+          example: Requests come from engineers.
+          type: string
+        model:
+          description: Viewable decision model, or an empty string.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Viewable decision-model provider slug, or an empty string.
+          example: openai
+          type: string
+      required:
+        - provider
+        - model
+        - confidence_threshold
+      type: object
+    AiGatewayRoutingClassifierRequest:
+      description: Decision model and settings for a classified tier. Omission preserves the saved classifier; null clears it. Newly selected models require provider View.
+      nullable: true
+      properties:
+        confidence_threshold:
+          description: Minimum decision confidence. Omission preserves a saved value; new classifiers and explicit null default to 0.5.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+        context:
+          description: Traffic context for the classifier. Omission preserves saved context.
+          example: Requests come from engineers.
+          maxLength: 2000
+          type: string
+        model:
+          description: Decision model on the provider. Omit together with provider to preserve the saved selection.
+          example: gpt-6-luna
+          type: string
+        provider:
+          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
+          example: openai
+          type: string
+      type: object
     AiGatewayRoutingReasoningLevel:
       description: >-
-        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. Omitted or null clears an override on full replacement. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request or the destination cannot
-        otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
+        Optional reasoning effort preference for this model destination. Must be supported by the selected model and provider. For provider "*", every eligible provider must support the level. An explicit value overrides the request's reasoning setting, subject to model-group policy. Omitted or null preserves request and provider behavior; none is an explicit level, not the default. On update, omission preserves a saved target override; null explicitly clears it. Routing-rule references cannot set this field; each referenced model destination owns its override. If an override cannot be applied at runtime, the gateway keeps the destination and restores the caller's original reasoning settings, or preserves the provider default when omitted. It rechecks all applicable route and model-group policies against those settings before sending. Model-group max_reasoning_level enforces hard limits; the override is not an additional cap. Normal fallback applies if governance denies the resulting request
+        or the destination cannot otherwise serve it. Metrics and span tags record the override outcome and incompatibility reason. When response headers have not already been committed, `X-Ai-Gateway-Reasoning-Override` reports applied or not_applied for the returned attempt, and `X-Ai-Gateway-Reasoning-Override-Reason` reports the reason when not applied.
       enum:
         - none
         - minimal
@@ -11227,7 +11770,7 @@ components:
           format: date-time
           type: string
         route_id:
-          description: Stable numeric route identifier used by scoped policies.
+          description: Stable numeric route identifier used by scoped policies and `ai-gateway-route` restriction policies.
           example: 123
           format: int64
           type: integer
@@ -11243,6 +11786,7 @@ components:
           format: date-time
           type: string
       required:
+        - route_id
         - tiers
         - created_at
         - updated_at
@@ -11297,16 +11841,28 @@ components:
         - data
       type: object
     AiGatewayRoutingRuleReplaceAttributes:
-      description: Attributes used to replace an AI Gateway routing rule.
+      description: Partial route update. Omit tiers to preserve the entire graph, including hidden selections. Saved target IDs retain omitted settings. Replacing tiers must explicitly retain or remove every hidden occurrence.
       properties:
+        expected_updated_at:
+          description: Saved route revision. A mismatched value returns 409 without changes.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        removed_target_ids:
+          description: Parent-local saved occurrence IDs explicitly removed from the submitted tiers. IDs must be distinct, belong to this route, and not also be retained.
+          items:
+            example: 901
+            format: int64
+            minimum: 1
+            type: integer
+          type: array
+          uniqueItems: true
         tiers:
           items:
             $ref: "#/components/schemas/AiGatewayRoutingRuleTierRequest"
             description: Routing fallback tier.
           minItems: 1
           type: array
-      required:
-        - tiers
       type: object
     AiGatewayRoutingRuleReplaceData:
       description: Data used to replace an AI Gateway routing rule.
@@ -11359,6 +11915,10 @@ components:
     AiGatewayRoutingRuleTarget:
       description: Model target or reference to another routing rule.
       properties:
+        default:
+          description: Present and true for the default classified destination.
+          example: true
+          type: boolean
         id:
           description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
           example: 901
@@ -11381,8 +11941,12 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric, present only for non-default targets in classified tiers.
+          example: Short factual questions.
+          type: string
         slug:
-          description: Organization-unique resource slug.
+          description: Referenced route slug. Omitted when the caller lacks View; only the parent-local occurrence ID remains.
           example: coding-fallback
           type: string
         type:
@@ -11400,8 +11964,13 @@ components:
     AiGatewayRoutingRuleTargetRequest:
       description: Model target or reference to another routing rule used to create or replace a rule.
       properties:
+        default:
+          description: Whether this is the single default classified destination. Omission preserves a saved value; null clears it.
+          example: false
+          nullable: true
+          type: boolean
         id:
-          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale or foreign ID is rejected.
+          description: Saved target row ID. On replacement, retain this ID only within its original route and at most once. A stale, foreign, duplicate, or destination-changing ID is rejected. Hidden route targets can be retained using only this parent-local ID and type.
           example: 901
           format: int64
           minimum: 1
@@ -11422,15 +11991,21 @@ components:
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
+        rubric:
+          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          example: Short factual questions.
+          maxLength: 300
+          nullable: true
+          type: string
         slug:
-          description: Organization-unique routing rule slug. Allowed only in configured tiers.
+          description: Organization-unique routing rule slug. New references require route View. Omit to retain a saved target by its parent-local ID. Allowed only in configured tiers.
           example: coding-fallback
           type: string
         type:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTargetType"
         weight:
           description: >-
-            Relative weight in a weighted_affinity tier. Omitted or null defaults to 1. Weights need not total 100. Must be omitted or null in configured tiers.
+            Relative weight in a weighted_affinity tier. Omission preserves a saved target weight; new targets and explicit null default to 1. Weights need not total 100. Must be omitted or null in configured tiers.
           example: 70
           format: int64
           maximum: 10000
@@ -11453,6 +12028,8 @@ components:
     AiGatewayRoutingRuleTier:
       description: Routing fallback tier containing targets and their effective ordering.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifier"
         ordering:
           $ref: "#/components/schemas/AiGatewayRoutingRuleTierOrdering"
         ordering_issue:
@@ -11472,11 +12049,13 @@ components:
       enum:
         - configured
         - weighted_affinity
+        - classified
       example: configured
       type: string
       x-enum-varnames:
         - CONFIGURED
         - WEIGHTED_AFFINITY
+        - CLASSIFIED
     AiGatewayRoutingRuleTierOrderingIssue:
       description: >-
         Stored tier ordering is inconsistent. mixed means targets have different supported orderings, and unknown means a target has an unsupported ordering. The tier is reported as configured without weights. Replace the rule to repair it. Omitted for consistent tiers. A forced deletion cannot rewrite a surviving tier with an unknown issue.
@@ -11492,6 +12071,8 @@ components:
     AiGatewayRoutingRuleTierRequest:
       description: Routing fallback tier used to create or replace a rule.
       properties:
+        classifier:
+          $ref: "#/components/schemas/AiGatewayRoutingClassifierRequest"
         ordering:
           $ref: "#/components/schemas/AiGatewayNullableRoutingRuleTierOrdering"
         targets:
@@ -34761,6 +35342,49 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFileUpdateAttributes:
+      description: Attributes of a Custom Costs file that can be updated.
+      properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: true
+          type: boolean
+      required:
+        - ai_provider
+      type: object
+    CustomCostsFileUpdateData:
+      description: Custom Costs file to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CustomCostsFileUpdateAttributes"
+        id:
+          description: ID of the Custom Costs file.
+          example: "00000000-0000-0000-0000-000000000007"
+          type: string
+        type:
+          $ref: "#/components/schemas/CustomCostsFileUpdateType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CustomCostsFileUpdateRequest:
+      description: Request for updating a Custom Costs file.
+      properties:
+        data:
+          $ref: "#/components/schemas/CustomCostsFileUpdateData"
+      required:
+        - data
+      type: object
+    CustomCostsFileUpdateType:
+      default: cost_metadata
+      description: Type of the Custom Costs file resource.
+      enum:
+        - cost_metadata
+      example: cost_metadata
+      type: string
+      x-enum-varnames:
+        - COST_METADATA
     CustomCostsFileUploadRequest:
       description: Request for uploading a Custom Costs file.
       items:
@@ -50699,6 +51323,119 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_DIAGNOSTICS
+    ExperimentsExperimentHoldoutV2DTOArray:
+      description: "Response containing the holdouts an experiment is attached to."
+      properties:
+        data:
+          description: "Holdouts the experiment is attached to, in evaluation order."
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOData"
+          type: array
+      required:
+        - data
+      type: object
+    ExperimentsExperimentHoldoutV2DTOData:
+      description: "A holdout the experiment is attached to."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributes"
+        id:
+          description: "Identifier of the holdout."
+          example: e1e2e3e4-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataType"
+      required:
+        - type
+        - id
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributes:
+      description: "Attributes of a holdout that the experiment is attached to."
+      properties:
+        evaluation_order:
+          description: >-
+            Zero-based position of this MANAGED holdout in the experiment's evaluation order. The GLOBAL holdout is evaluated first. Null for EXTERNAL holdouts.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        holdout_type:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType"
+        key:
+          description: "Key of the holdout."
+          example: q3-global-holdout
+          type: string
+        kind:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesKind"
+        name:
+          description: "Display name of the holdout."
+          example: Q3 global holdout
+          type: string
+        state:
+          $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTODataAttributesState"
+        traffic_allocation:
+          description: "Share of subjects the holdout holds back, from 0 to 1."
+          example: 0.05
+          format: double
+          type: number
+      type: object
+    ExperimentsExperimentHoldoutV2DTODataAttributesHoldoutType:
+      description: >-
+        How Datadog serves a MANAGED holdout. GLOBAL holdouts apply to every eligible experiment of a subject type. SELECTIVE holdouts apply only to the experiments attached to them. Null for EXTERNAL holdouts.
+      enum:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+      example: GLOBAL
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - GLOBAL
+        - SELECTIVE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesKind:
+      description: >-
+        Whether Datadog serves the holdout. Datadog serves MANAGED holdouts. EXTERNAL holdouts record what your own feature flagging system holds back, and Datadog does not serve them.
+      enum:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+      example: MANAGED
+      type: string
+      x-enum-varnames:
+        - MANAGED
+        - EXTERNAL
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataAttributesState:
+      description: >-
+        Lifecycle phase of the holdout. PENDING holdouts have not started including experiments. INCLUDING holdouts are adding experiments. WAITING_FOR_ANALYSIS holdouts have stopped including experiments but have not started analysis. ANALYSING holdouts are in their analysis window. COMPLETE applies only to EXTERNAL holdouts that have ended their analysis window but are not archived.
+      enum:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+      example: INCLUDING
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - INCLUDING
+        - WAITING_FOR_ANALYSIS
+        - ANALYSING
+        - COMPLETE
+        - UNKNOWN
+    ExperimentsExperimentHoldoutV2DTODataType:
+      default: experiment-holdouts
+      description: Experiment holdout resource type.
+      enum:
+        - experiment-holdouts
+      example: experiment-holdouts
+      type: string
+      x-enum-varnames:
+        - EXPERIMENT_HOLDOUTS
     ExperimentsExperimentMetricGroupMutationV2:
       description: "Response containing the saved experiment metric group and result refresh information."
       properties:
@@ -50825,6 +51562,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -50899,6 +51638,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -51081,6 +51822,8 @@ components:
               events_end_date: "2026-08-22T00:00:00Z"
               events_start_date: "2026-08-01T00:00:00Z"
               experiment_type: STANDARD
+              holdout_ids:
+                - a1a2a3a4-0000-0000-0000-000000000000
               hypothesis: A clearer checkout button increases purchase conversion
               name: Checkout button test
               pipeline_table_suffix: a1b2c3d4
@@ -51126,6 +51869,8 @@ components:
                 events_end_date: "2026-08-22T00:00:00Z"
                 events_start_date: "2026-08-01T00:00:00Z"
                 experiment_type: STANDARD
+                holdout_ids:
+                  - a1a2a3a4-0000-0000-0000-000000000000
                 hypothesis: A clearer checkout button increases purchase conversion
                 name: Checkout button test
                 pipeline_table_suffix: a1b2c3d4
@@ -51180,6 +51925,8 @@ components:
           events_end_date: "2026-08-22T00:00:00Z"
           events_start_date: "2026-08-01T00:00:00Z"
           experiment_type: STANDARD
+          holdout_ids:
+            - a1a2a3a4-0000-0000-0000-000000000000
           hypothesis: A clearer checkout button increases purchase conversion
           name: Checkout button test
           pipeline_table_suffix: a1b2c3d4
@@ -51237,6 +51984,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -51307,6 +52056,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is designed to test."
           example: A clearer checkout button increases purchase conversion
@@ -53302,6 +54061,8 @@ components:
             events_end_date: "2026-08-22T00:00:00Z"
             events_start_date: "2026-08-01T00:00:00Z"
             experiment_type: STANDARD
+            holdout_ids:
+              - a1a2a3a4-0000-0000-0000-000000000000
             hypothesis: A clearer checkout button increases purchase conversion
             name: Checkout button test
             pipeline_table_suffix: a1b2c3d4
@@ -53377,6 +54138,8 @@ components:
         events_end_date: "2026-08-22T00:00:00Z"
         events_start_date: "2026-08-01T00:00:00Z"
         experiment_type: STANDARD
+        holdout_ids:
+          - a1a2a3a4-0000-0000-0000-000000000000
         hypothesis: A clearer checkout button increases purchase conversion
         name: Checkout button test
         pipeline_table_suffix: a1b2c3d4
@@ -53480,6 +54243,16 @@ components:
             Kind of experiment. STANDARD is an ordinary experiment. Other values, such as CANARY and HOLDOUT, identify experiments owned by another workflow. New kinds may be added; treat unknown values as non-standard.
           example: STANDARD
           type: string
+        holdout_ids:
+          description: >-
+            IDs of the holdouts the experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the list includes the GLOBAL holdout that the experiment would join if it started. `GET /api/v2/experiments/{experiment_id}/holdouts` returns their details.
+          example:
+            - a1a2a3a4-0000-0000-0000-000000000000
+          items:
+            description: "Identifier of a holdout."
+            format: uuid
+            type: string
+          type: array
         hypothesis:
           description: "Expected effect that the experiment is intended to test."
           example: A clearer checkout button increases purchase conversion
@@ -53615,7 +54388,8 @@ components:
       nullable: true
       properties:
         allocation_key:
-          description: "Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events."
+          description: >-
+            Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events.
           type: string
         entry_point:
           $ref: >-
@@ -57092,6 +57866,259 @@ components:
         - value_type
         - variants
       type: object
+    FeatureFlagChangeEvent:
+      description: A change made to a feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagChangeEventAttributes"
+        id:
+          description: The ID of the change event.
+          example: "550e8400-e29b-41d4-a716-446655440005"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/FeatureFlagChangeEventType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FeatureFlagChangeEventAction:
+      description: The kind of change.
+      enum:
+        - created
+        - updated
+        - deleted
+        - archived
+        - unarchived
+        - scheduled
+        - started
+        - paused
+        - unpaused
+        - stopped
+      example: "updated"
+      type: string
+      x-enum-varnames:
+        - CREATED
+        - UPDATED
+        - DELETED
+        - ARCHIVED
+        - UNARCHIVED
+        - SCHEDULED
+        - STARTED
+        - PAUSED
+        - UNPAUSED
+        - STOPPED
+    FeatureFlagChangeEventAttributes:
+      description: Attributes of a feature flag change event.
+      properties:
+        action:
+          $ref: "#/components/schemas/FeatureFlagChangeEventAction"
+        change_metadata:
+          description: Additional details about the change, as a JSON-encoded string.
+          example: '{"variant_key": "control"}'
+          nullable: true
+          type: string
+        creation_source:
+          $ref: "#/components/schemas/FeatureFlagChangeEventCreationSource"
+        description:
+          description: A readable sentence describing the change, as shown on the flag history page and in the Action column of the CSV export.
+          example: 'Changed flag name from "Mobile Feature Rollout" to "Mobile Feature Toggle".'
+          type: string
+        environment:
+          $ref: "#/components/schemas/FeatureFlagChangeEventEnvironment"
+        feature_flag:
+          $ref: "#/components/schemas/FeatureFlagChangeEventFlag"
+        new_value:
+          description: The value after the change, serialized as a string.
+          example: "Mobile Feature Toggle"
+          nullable: true
+          type: string
+        previous_value:
+          description: The value before the change, serialized as a string.
+          example: "Mobile Feature Rollout"
+          nullable: true
+          type: string
+        property:
+          $ref: "#/components/schemas/FeatureFlagChangeEventProperty"
+        suggestion_review:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionReview"
+        timestamp:
+          description: When the change was made.
+          example: "2023-10-02T14:30:00Z"
+          format: date-time
+          type: string
+        user_id:
+          description: The ID of the user who made the change. Null when no user made the change.
+          example: "00000000-0000-0000-0000-000000000001"
+          nullable: true
+          type: string
+        version_number:
+          description: The version of the feature flag the change produced.
+          example: 3
+          format: int64
+          type: integer
+      required:
+        - action
+        - property
+        - timestamp
+        - version_number
+        - feature_flag
+      type: object
+    FeatureFlagChangeEventCreationSource:
+      description: "Where the change was made: `UI` for the Datadog app, or `MCP` for a Model Context Protocol (MCP) client."
+      enum:
+        - UI
+        - MCP
+      example: "UI"
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - UI
+        - MCP
+    FeatureFlagChangeEventEnvironment:
+      description: The environment the change applies to. Null for a change to the flag itself rather than to one environment.
+      nullable: true
+      properties:
+        id:
+          description: The ID of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        is_production:
+          description: Whether the environment is a production environment.
+          example: true
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "Production"
+          type: string
+      required:
+        - id
+        - name
+        - is_production
+      type: object
+    FeatureFlagChangeEventFlag:
+      description: The feature flag the change applies to.
+      properties:
+        id:
+          description: The ID of the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        key:
+          description: The key of the feature flag.
+          example: "mobile-feature-toggle"
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Mobile Feature Toggle"
+          type: string
+      required:
+        - id
+        - name
+        - key
+      type: object
+    FeatureFlagChangeEventProperty:
+      description: The part of the feature flag the change applies to.
+      enum:
+        - FLAG
+        - FLAG_NAME
+        - FLAG_DESCRIPTION
+        - JSON_SCHEMA
+        - DISTRIBUTION_CHANNEL
+        - REQUIRE_APPROVAL
+        - VARIANT
+        - VARIANT_NAME
+        - VARIANT_VALUE
+        - ALLOCATIONS
+        - ROLLOUT
+        - ENVIRONMENT_STATUS
+        - DEFAULT_VARIANT
+        - OVERRIDE_VARIANT
+        - STALENESS_STATUS
+        - SAVED_FILTER
+      example: "FLAG_NAME"
+      type: string
+      x-enum-varnames:
+        - FLAG
+        - FLAG_NAME
+        - FLAG_DESCRIPTION
+        - JSON_SCHEMA
+        - DISTRIBUTION_CHANNEL
+        - REQUIRE_APPROVAL
+        - VARIANT
+        - VARIANT_NAME
+        - VARIANT_VALUE
+        - ALLOCATIONS
+        - ROLLOUT
+        - ENVIRONMENT_STATUS
+        - DEFAULT_VARIANT
+        - OVERRIDE_VARIANT
+        - STALENESS_STATUS
+        - SAVED_FILTER
+    FeatureFlagChangeEventSuggestionLifecycleStatus:
+      description: Where the change request is in its lifecycle.
+      enum:
+        - pending
+        - approved
+        - applied
+        - rejected
+        - discarded
+      example: "rejected"
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - APPROVED
+        - APPLIED
+        - REJECTED
+        - DISCARDED
+    FeatureFlagChangeEventSuggestionReview:
+      description: |-
+        Review details of a change request that needed approval.
+        Present on review events, which `include_suggestion_events` adds.
+        Also present on a change that an approved change request applied, even when `include_suggestion_events` is `false`.
+      properties:
+        lifecycle_status:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionLifecycleStatus"
+        requester_comment:
+          description: The comment left by the person who requested the change.
+          example: "Ready for production."
+          type: string
+        reviewer_comment:
+          description: The comment left by the reviewer.
+          example: "Roll out to staging first."
+          type: string
+        status:
+          $ref: "#/components/schemas/FeatureFlagChangeEventSuggestionStatus"
+        suggestion_created_by:
+          description: The ID of the user who requested the change.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+      required:
+        - status
+        - lifecycle_status
+      type: object
+    FeatureFlagChangeEventSuggestionStatus:
+      description: The review status of the change request.
+      enum:
+        - pending
+        - approved
+        - rejected
+      example: "rejected"
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - APPROVED
+        - REJECTED
+    FeatureFlagChangeEventType:
+      description: The resource type.
+      enum:
+        - "change-events"
+      example: "change-events"
+      type: string
+      x-enum-varnames:
+        - CHANGE_EVENTS
     FeatureFlagDistributionChannel:
       description: The distribution channel for the feature flag.
       enum:
@@ -57234,6 +58261,60 @@ components:
       required:
         - environment_id
         - status
+      type: object
+    FeatureFlagHistoryPaginationMeta:
+      description: Pagination metadata for feature flag change history.
+      properties:
+        page:
+          $ref: "#/components/schemas/FeatureFlagHistoryPaginationMetaPage"
+      type: object
+    FeatureFlagHistoryPaginationMetaPage:
+      description: Pagination metadata for feature flag change history responses.
+      properties:
+        first_offset:
+          description: Offset of the first page.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Offset of the last page.
+          example: 75
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of events returned on this page.
+          example: 25
+          format: int64
+          type: integer
+        next_offset:
+          description: Offset of the next page, or null when there is no next page.
+          example: 25
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Number of matching events skipped before this page.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Offset of the previous page, or null when there is no previous page.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: |-
+            Total number of events matching the filters, independent of the page size.
+            It counts experiment proposals that you cannot read, which are left out of the pages, so a page can hold fewer events than `limit`.
+          example: 100
+          format: int64
+          type: integer
+        type:
+          description: The pagination method. Always `offset_limit`.
+          example: offset_limit
+          type: string
       type: object
     FeatureFlagListItem:
       description: A feature flag resource for list responses.
@@ -65061,13 +66142,6 @@ components:
           type: string
         assignment_source:
           $ref: "#/components/schemas/GovernanceControlDetectionAssignmentSource"
-        control_id:
-          deprecated: true
-          description: |-
-            DEPRECATED: mirrors `detection_type` for backward compatibility; use `detection_type`
-            instead.
-          example: "unused_api_keys"
-          type: string
         created_at:
           description: The date and time when the detection was created.
           example: "2024-03-01T12:00:00Z"
@@ -65121,7 +66195,6 @@ components:
           $ref: "#/components/schemas/GovernanceControlDetectionState"
       required:
         - state
-        - control_id
         - resource_id
         - detection_type
         - resource_type
@@ -75351,6 +76424,10 @@ components:
     JSONAPIErrorItem:
       description: API error response body
       properties:
+        code:
+          description: An application-specific error code.
+          example: invalid_request
+          type: string
         detail:
           description: A human-readable explanation specific to this occurrence of the error.
           example: Missing required attribute in body
@@ -84813,6 +85890,21 @@ components:
           description: Unique identifier for the User.
           type: string
       type: object
+    ListFeatureFlagHistoryResponse:
+      description: Response containing feature flag change events, newest first.
+      properties:
+        data:
+          description: The change events.
+          items:
+            $ref: "#/components/schemas/FeatureFlagChangeEvent"
+          type: array
+        links:
+          $ref: "#/components/schemas/FeatureFlagsPaginationLinks"
+        meta:
+          $ref: "#/components/schemas/FeatureFlagHistoryPaginationMeta"
+      required:
+        - data
+      type: object
     ListFeatureFlagsResponse:
       description: Response containing a list of feature flags.
       properties:
@@ -88676,8 +89768,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include or exclude percentile aggregations for distribution metrics.
-            Only present when the `metric_type` is `distribution`.
+            Whether percentile aggregations are enabled for a `distribution`, `exponential_histogram`,
+            or `explicit_histogram` metric.
           example: true
           type: boolean
         metric_type:
@@ -88708,8 +89800,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include/exclude percentiles for a distribution metric.
-            Defaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.
+            Include percentile aggregations for metric types `distribution`, `exponential_histogram`,
+            and `explicit_histogram`. Omit this field to keep the current setting.
           example: true
           type: boolean
         metric_type:
@@ -88771,12 +89863,14 @@ components:
         - EXPLICIT_HISTOGRAM
     MetricTagConfigurationMetricTypes:
       default: gauge
-      description: The metric's type.
+      description: The metric's type. Contact your Customer Success Manager for instructions on using native histogram types.
       enum:
         - gauge
         - count
         - rate
         - distribution
+        - exponential_histogram
+        - explicit_histogram
       example: count
       type: string
       x-enum-varnames:
@@ -88784,6 +89878,8 @@ components:
         - COUNT
         - RATE
         - DISTRIBUTION
+        - EXPONENTIAL_HISTOGRAM
+        - EXPLICIT_HISTOGRAM
     MetricTagConfigurationResponse:
       description: Response object which includes a single metric's tag configuration.
       properties:
@@ -88813,8 +89909,8 @@ components:
           type: boolean
         include_percentiles:
           description: |-
-            Toggle to include/exclude percentiles for a distribution metric.
-            Defaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.
+            Include percentile aggregations for metric types `distribution`, `exponential_histogram`,
+            and `explicit_histogram`. Omit this field to keep the current setting.
           example: true
           type: boolean
         tags:
@@ -147621,6 +148717,12 @@ components:
     TenancyConfigDataAttributes:
       description: Attributes of an OCI tenancy integration configuration, including authentication details, region settings, and collection options.
       properties:
+        account_tags:
+          description: List of Datadog tags applied to data collected from the tenancy.
+          items:
+            description: A Datadog tag in key:value format (for example, env:prod).
+            type: string
+          type: array
         billing_plan_id:
           description: The identifier of the billing plan associated with the OCI tenancy.
           format: int32
@@ -147636,9 +148738,23 @@ components:
         dd_compartment_id:
           description: The OCID of the OCI compartment used by the Datadog integration stack.
           type: string
+        dd_iac_version:
+          description: The version of the Datadog infrastructure-as-code stack applied to the tenancy (for example, 1.2.0).
+          type: string
         dd_stack_id:
           description: The OCID of the OCI Resource Manager stack used by the Datadog integration.
           type: string
+        defined_tags:
+          description: List of OCI defined tags applied to the Datadog-managed connector hubs.
+          items:
+            description: An OCI defined tag in `Namespace.key:value` format (for example, `Operations.CostCenter:42`).
+            type: string
+          type: array
+        events_collection_enabled:
+          description: Whether resource change events collection from OCI is enabled for the tenancy.
+          type: boolean
+        grace_resource:
+          $ref: "#/components/schemas/TenancyConfigDataAttributesGraceResource"
         home_region:
           description: The home region of the OCI tenancy (for example, us-ashburn-1).
           type: string
@@ -147654,12 +148770,25 @@ components:
         resource_collection_enabled:
           description: Whether resource collection from OCI is enabled for the tenancy.
           type: boolean
+        service_quota_collection_enabled:
+          description: Whether service quota collection from OCI is enabled for the tenancy.
+          type: boolean
         tenancy_name:
           description: The human-readable name of the OCI tenancy.
           type: string
         user_ocid:
           description: The OCID of the OCI user used by the Datadog integration for authentication.
           type: string
+      type: object
+    TenancyConfigDataAttributesGraceResource:
+      description: Access control details for the tenancy configuration, used to determine whether the requesting user can edit it.
+      properties:
+        resource_id:
+          description: The identifier of the access control resource for the tenancy configuration.
+          type: string
+        user_can_edit:
+          description: Whether the requesting user has permission to edit the tenancy configuration.
+          type: boolean
       type: object
     TenancyConfigDataAttributesLogsConfig:
       description: Log collection configuration for an OCI tenancy, indicating which compartments and services have log collection enabled.
@@ -147679,6 +148808,15 @@ components:
             description: An OCI service name for which log collection is enabled (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope log collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesMetricsConfig:
       description: Metrics collection configuration for an OCI tenancy, indicating which compartments and services are included or excluded.
@@ -147698,27 +148836,39 @@ components:
             description: An OCI service name excluded from metrics collection (for example, compute).
             type: string
           type: array
+        resource_tag_filters:
+          additionalProperties:
+            description: List of resource tag filters for the OCI service.
+            items:
+              description: A resource tag filter in key:value format (for example, env:prod).
+              type: string
+            type: array
+          description: Map of OCI service names to the resource tag filters that scope metrics collection for that service.
+          type: object
       type: object
     TenancyConfigDataAttributesRegionsConfig:
       description: Region configuration for an OCI tenancy, indicating which regions are available, enabled, or disabled for data collection.
       properties:
         available:
-          description: List of OCI regions available for data collection in the tenancy.
+          description: List of OCI regions available for data collection in the tenancy. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
         disabled:
-          description: List of OCI regions explicitly disabled for data collection.
+          description: List of OCI regions explicitly disabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-phoenix-1).
             type: string
+          nullable: true
           type: array
         enabled:
-          description: List of OCI regions enabled for data collection.
+          description: List of OCI regions enabled for data collection. Returns `null` when no regions are set.
           items:
             description: An OCI region identifier (for example, us-ashburn-1).
             type: string
+          nullable: true
           type: array
       type: object
     TenancyConfigList:
@@ -147726,10 +148876,20 @@ components:
       example:
         data:
           - attributes:
+              account_tags:
+                - env:prod
+              billing_plan_id: 2
               config_version: 2
               cost_collection_enabled: true
               dd_compartment_id: ocid.compartment.test
+              dd_iac_version: "1.2.0"
               dd_stack_id: ocid.stack.test
+              defined_tags:
+                - Operations.CostCenter:42
+              events_collection_enabled: false
+              grace_resource:
+                resource_id: oci-integration-configuration:ocid.tenancy.test
+                user_can_edit: true
               home_region: us-ashburn-1
               logs_config:
                 compartment_tag_filters:
@@ -147737,12 +148897,19 @@ components:
                 enabled: true
                 enabled_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
               metrics_config:
                 compartment_tag_filters:
                   - compartment.test
                 enabled: true
                 excluded_services:
                   - compute
+                resource_tag_filters:
+                  compute:
+                    - env:prod
+              parent_tenancy_name: parent-tenancy
               regions_config:
                 available:
                   - us-ashburn-1
@@ -147752,6 +148919,8 @@ components:
                 enabled:
                   - us-ashburn-1
               resource_collection_enabled: true
+              service_quota_collection_enabled: false
+              tenancy_name: test-tenancy
               user_ocid: ocid.user.test
             id: ocid.tenancy.test
             type: oci_tenancy
@@ -156191,6 +157360,8 @@ components:
               Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_observability_catalog_read: Read Data Observability catalog resources and owners.
+            data_observability_catalog_write: Create, update, and delete Data Observability catalog resources and manage owners.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs externally.
@@ -158602,6 +159773,265 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 1
+  /api/v2/agenthealth/issues:
+    get:
+      description: |-
+        List Agent Health issues across your organization. Only open issues are returned.
+        Returns `403` if you lack the `hosts_read` permission.
+
+        Results use a stable order: severity rank (`high`, `medium`, `low`, then other values),
+        then `first_seen_at` descending with missing timestamps last, then issue ID ascending.
+        Use `page[size]` and the zero-based `page[number]` to paginate. Invalid page values
+        return a `400` JSON:API error response. `meta.page.total_filtered_count` is the number
+        of issues matching the filters, and `meta.page.total_count` the number of open issues
+        in the organization.
+
+        Each filter accepts up to 50 comma-separated exact values of at most 256 characters
+        each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
+        is treated as absent.
+      operationId: ListAgentHealthIssues
+      parameters:
+        - description: The number of issues to return per page, from 1 to 100. Defaults to 25.
+          example: 25
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 25
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: The zero-based page number, from 0 to 1000000. Defaults to 0.
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            maximum: 1000000
+            minimum: 0
+            type: integer
+        - description: |-
+            Filter by a comma-separated list of exact `severity` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: high,medium
+          in: query
+          name: filter[severity]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `category` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: configuration
+          in: query
+          name: filter[category]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `issue_type` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: invalid_config
+          in: query
+          name: filter[issue_type]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_kind` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: host,deployment
+          in: query
+          name: filter[resource_kind]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+        - description: |-
+            Filter by a comma-separated list of exact `resource_id` values, up to 50 values
+            of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
+            Blank entries are ignored; an all-blank filter is treated as absent.
+          example: my-hostname
+          in: query
+          name: filter[resource_id]
+          required: false
+          schema:
+            maxLength: 12850
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: configuration
+                          description: The Agent configuration file contains an invalid value.
+                          first_seen_at: "2026-11-01T10:00:00Z"
+                          issue_name: Invalid Config
+                          issue_type: invalid_config
+                          resource_id: my-hostname
+                          resource_kind: host
+                          resource_type: host
+                          severity: high
+                          state: open
+                          tags:
+                            - env:prod
+                          title: Invalid Agent configuration
+                          updated_at: "2026-11-09T08:00:00Z"
+                        id: invalid-config:4828e7d6c704c4a3
+                        type: agent_health_issues
+                    meta:
+                      page:
+                        total_count: 3
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssuesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: List Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/issues/{issue_id}:
+    get:
+      description: |-
+        Get an Agent Health issue and its available remediation in your organization.
+        Only open issues are returned. The `remediation` attribute is omitted when
+        the issue has no remediation.
+
+        Returns `404` if the issue does not exist, is not open, belongs to another
+        organization, or you do not have access to its data. This response does not
+        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+      operationId: GetAgentHealthIssue
+      parameters:
+        - description: |-
+            The unique identifier of the issue. It can contain `:` and must be percent-encoded
+            by clients when included in the path.
+          example: invalid-config:4828e7d6c704c4a3
+          in: path
+          name: issue_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: configuration
+                        description: The Agent configuration file contains an invalid value.
+                        first_seen_at: "2026-11-01T10:00:00Z"
+                        issue_name: Invalid Config
+                        issue_type: invalid_config
+                        remediation:
+                          script:
+                            content: "..."
+                            filename: fix.sh
+                            language: bash
+                            language_version: "5"
+                            requires_root: true
+                          steps:
+                            - order: 1
+                              text: Open datadog.yaml
+                          summary: Fix the invalid configuration value.
+                        resource_id: my-hostname
+                        resource_kind: host
+                        resource_type: host
+                        severity: high
+                        state: open
+                        tags:
+                          - env:prod
+                        title: Invalid Agent configuration
+                        updated_at: "2026-11-09T08:00:00Z"
+                      id: invalid-config:4828e7d6c704c4a3
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthIssueResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - hosts_read
+      summary: Get an Agent Health issue
+      tags:
+        - Agent Health
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -173608,6 +175038,73 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 32
+    patch:
+      description: >-
+        Mark whether a Custom Costs file holds AI provider costs. Datadog then recomputes the costs for the months that the file covers.
+      operationId: UpdateCustomCostsFile
+      parameters:
+        - $ref: "#/components/parameters/FileID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      ai_provider: true
+                    id: 00000000-0000-0000-0000-000000000007
+                    type: cost_metadata
+            schema:
+              $ref: "#/components/schemas/CustomCostsFileUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        billed_cost: 100.5
+                        billing_currency: USD
+                        charge_period:
+                          end: 1706745600000
+                          start: 1704067200000
+                        name: my_file.json
+                        provider_names:
+                          - my_provider
+                        status: ACTIVE
+                        uploaded_at: 1704067200000
+                      id: 00000000-0000-0000-0000-000000000007
+                      type: cost_metadata
+                    meta:
+                      version: "1.0"
+              schema:
+                $ref: "#/components/schemas/CustomCostsFileUploadResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update Custom Costs file
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 78
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/gcp_uc_config:
     get:
       description: List the Google Cloud Usage Cost configs.
@@ -182825,6 +184322,8 @@ paths:
                           events_end_date: "2026-08-22T00:00:00Z"
                           events_start_date: "2026-08-01T00:00:00Z"
                           experiment_type: STANDARD
+                          holdout_ids:
+                            - a1a2a3a4-0000-0000-0000-000000000000
                           hypothesis: A clearer checkout button increases purchase conversion
                           name: Checkout button test
                           pipeline_table_suffix: a1b2c3d4
@@ -183025,6 +184524,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -186546,6 +188046,8 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids:
+                          - a1a2a3a4-0000-0000-0000-000000000000
                         hypothesis: A clearer checkout button increases purchase conversion
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
@@ -186776,6 +188278,7 @@ paths:
                         events_end_date: "2026-08-22T00:00:00Z"
                         events_start_date: "2026-08-01T00:00:00Z"
                         experiment_type: STANDARD
+                        holdout_ids: []
                         name: Checkout button test
                         pipeline_table_suffix: a1b2c3d4
                         related_links: []
@@ -187315,6 +188818,102 @@ paths:
       tags:
         - Experiments
       x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+  /api/v2/experiments/{experiment_id}/holdouts:
+    get:
+      description: >-
+        List the holdouts an experiment is attached to, in evaluation order: MANAGED holdouts first, starting with the GLOBAL holdout, followed by EXTERNAL holdouts. For a draft experiment, the response includes the GLOBAL holdout that the experiment would join if it started. The response excludes archived and deleted holdouts, and MANAGED holdouts past their analysis window. EXTERNAL holdouts are listed until they are archived. MANAGED holdouts are listed only for experiments that use a Datadog feature flag, because Datadog serves holdouts only through its flags. The order matches the experiment's `holdout_ids` attribute.
+      operationId: ListExperimentHoldouts
+      parameters:
+        - description: "The UUID of the experiment."
+          in: path
+          name: experiment_id
+          required: true
+          schema:
+            description: "The UUID of the experiment."
+            example: 550e8400-e29b-41d4-a716-446655440000
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          evaluation_order: 0
+                          holdout_type: GLOBAL
+                          key: q3-global-holdout
+                          kind: MANAGED
+                          name: Q3 global holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.05
+                        id: e1e2e3e4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order: 1
+                          holdout_type: SELECTIVE
+                          key: checkout-holdout
+                          kind: MANAGED
+                          name: Checkout holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: f1f2f3f4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+                      - attributes:
+                          evaluation_order:
+                          holdout_type:
+                          key: partner-holdout
+                          kind: EXTERNAL
+                          name: Partner holdout
+                          state: INCLUDING
+                          traffic_allocation: 0.1
+                        id: a1a2a3a4-0000-0000-0000-000000000000
+                        type: experiment-holdouts
+              schema:
+                $ref: "#/components/schemas/ExperimentsExperimentHoldoutV2DTOArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed experiment ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Missing or invalid authentication.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The caller lacks the `product_analytics_experiments_read` permission or lacks permission to view this experiment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No experiment with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: List experiment holdouts
+      tags:
+        - Experiments
+      x-menu-order: 55
       x-permission:
         operator: AND
         permissions:
@@ -189089,6 +190688,166 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/feature-flags/history:
+    get:
+      description: |-
+        Returns the organization's feature flag change events, newest first.
+        Each event includes a readable description of the change.
+        All filters are optional, and events must match every filter you set. Without a date range, the whole history is listed.
+        Results are paginated with `page[limit]` and `page[offset]`; follow `links.next` to read further back.
+      operationId: ListFeatureFlagHistory
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_history_start_date"
+        - $ref: "#/components/parameters/feature_flag_history_end_date"
+        - $ref: "#/components/parameters/feature_flag_history_teams"
+        - $ref: "#/components/parameters/feature_flag_history_tags"
+        - $ref: "#/components/parameters/feature_flag_history_feature_flag_id"
+        - $ref: "#/components/parameters/feature_flag_history_environment_id"
+        - $ref: "#/components/parameters/feature_flag_history_include_suggestion_events"
+        - description: Maximum number of events to return. Defaults to `25`. Values above `50` return `50` events. Non-positive or empty values use the default. A non-integer value returns a `400 Bad Request` error.
+          example: 25
+          in: query
+          name: page[limit]
+          schema:
+            default: 25
+            format: int64
+            maximum: 50
+            minimum: 1
+            type: integer
+        - description: Number of matching events to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a `400 Bad Request` error.
+          example: 0
+          in: query
+          name: page[offset]
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action: "updated"
+                          change_metadata:
+                          creation_source: "UI"
+                          description: 'Changed flag name from "Mobile Feature Rollout" to "Mobile Feature Toggle".'
+                          environment:
+                          feature_flag:
+                            id: "550e8400-e29b-41d4-a716-446655440000"
+                            key: "mobile-feature-toggle"
+                            name: "Mobile Feature Toggle"
+                          new_value: "Mobile Feature Toggle"
+                          previous_value: "Mobile Feature Rollout"
+                          property: "FLAG_NAME"
+                          timestamp: "2023-10-02T14:30:00Z"
+                          user_id: "00000000-0000-0000-0000-000000000001"
+                          version_number: 3
+                        id: "550e8400-e29b-41d4-a716-446655440005"
+                        type: "change-events"
+                    links:
+                      first: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                      last: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                      self: "https://api.datadoghq.com/api/v2/feature-flags/history?page%5Blimit%5D=25&page%5Boffset%5D=0"
+                    meta:
+                      page:
+                        first_offset: 0
+                        last_offset: 0
+                        limit: 25
+                        offset: 0
+                        total: 1
+                        type: offset_limit
+              schema:
+                $ref: "#/components/schemas/ListFeatureFlagHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: List feature flag change history
+      tags:
+        - Feature Flags
+      x-menu-order: 25
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+  /api/v2/feature-flags/history/export:
+    get:
+      description: |-
+        Exports the organization's feature flag change events as a CSV file, newest first, without pagination.
+        It accepts the same filters as the List feature flag change history endpoint, and its columns match the CSV export on the flag history page:
+        Flag Version, Flag Name, Flag Key, Flag UUID, Action, User Name, User Email, User Type, Environment, and Timestamp.
+
+        If an export fails before the file starts, the response is a JSON:API error. Large exports stream as they are read.
+        If an export fails after streaming starts, the connection closes before the file ends, so the download fails instead of
+        returning a file with missing rows. An export must finish within the 60-second request timeout. If an export times out,
+        narrow the date range.
+      operationId: ExportFeatureFlagHistory
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_history_start_date"
+        - $ref: "#/components/parameters/feature_flag_history_end_date"
+        - $ref: "#/components/parameters/feature_flag_history_teams"
+        - $ref: "#/components/parameters/feature_flag_history_tags"
+        - $ref: "#/components/parameters/feature_flag_history_feature_flag_id"
+        - $ref: "#/components/parameters/feature_flag_history_environment_id"
+        - $ref: "#/components/parameters/feature_flag_history_include_suggestion_events"
+      responses:
+        "200":
+          content:
+            text/csv:
+              examples:
+                default:
+                  value: "Flag Version,Flag Name,Flag Key,Flag UUID,Action,User Name,User Email,User Type,Environment,Timestamp\n3,Mobile Feature Toggle,mobile-feature-toggle,550e8400-e29b-41d4-a716-446655440000,\"Changed flag name from \"\"Mobile Feature Rollout\"\" to \"\"Mobile Feature Toggle\"\".\",Jane Doe,jane.doe@example.com,User,All,\"Mon, Oct 2, 2023, 2:30:00 pm UTC\""
+              schema:
+                type: string
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: Export feature flag change history
+      tags:
+        - Feature Flags
+      x-menu-order: 26
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
   /api/v2/feature-flags/saved-filters/{saved_filter_id}:
     get:
       description: |-
@@ -192295,7 +194054,6 @@ paths:
                           assigned_team: "platform-security"
                           assigned_to: "11111111-2222-3333-4444-555555555555"
                           assignment_source: "manual"
-                          control_id: "unused_api_keys"
                           created_at: "2024-03-01T12:00:00Z"
                           detection_type: "unused_api_keys"
                           display_name: "CI Deploy Key"
@@ -192589,7 +194347,6 @@ paths:
                         assigned_team: "platform-security"
                         assigned_to: "11111111-2222-3333-4444-555555555555"
                         assignment_source: "manual"
-                        control_id: "unused_api_keys"
                         created_at: "2024-03-01T12:00:00Z"
                         detection_type: "unused_api_keys"
                         display_name: "CI Deploy Key"
@@ -192685,7 +194442,6 @@ paths:
                         assigned_team: "platform-security"
                         assigned_to: "11111111-2222-3333-4444-555555555555"
                         assignment_source: "manual"
-                        control_id: "unused_api_keys"
                         created_at: "2024-03-01T12:00:00Z"
                         detection_type: "unused_api_keys"
                         display_name: "CI Deploy Key"
@@ -215747,12 +217503,14 @@ paths:
             start with `app.` and end with `.count`. The exception is a value whose only `*` is at the end (for
             example, `http.request*`): it matches names that start with that text and is case-sensitive.
             Spaces are treated as `*`. Only one value is accepted; repeating the parameter returns
-            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. An empty value
-            is ignored.
+            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. Surrounding spaces
+            are ignored, and an empty or spaces-only value is ignored. The value can be at most 200 characters (the
+            longest metric name); a longer value returns `400 Bad Request`.
           in: query
           name: filter[metrics.id]
           required: false
           schema:
+            maxLength: 200
             pattern: "^[a-zA-Z0-9_.* ]*$"
             type: string
         - description: |-
@@ -217753,6 +219511,16 @@ paths:
                           - datacenter
                       id: http.endpoint.request
                       type: manage_tags
+                explicit_histogram:
+                  value:
+                    data:
+                      attributes:
+                        include_percentiles: true
+                        metric_type: explicit_histogram
+                        tags:
+                          - service
+                      id: example.request.duration
+                      type: manage_tags
               schema:
                 $ref: "#/components/schemas/MetricTagConfigurationResponse"
           description: Success
@@ -217789,8 +219557,8 @@ paths:
           - metrics_read
     patch:
       description: |-
-        Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations
-        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed
+        Update the tag configuration of a metric, percentile aggregations of a distribution or native histogram metric,
+        or custom aggregations of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true, the behavior changes
         from an allow-list to a deny-list, and tags in the defined list will not be queryable.
         Can only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires
         a tag configuration to be created first.
@@ -217867,8 +219635,8 @@ paths:
           - metric_tags_write
     post:
       description: |-
-        Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.
-        Optionally, include percentile aggregations on any distribution metric. By setting `exclude_tags_mode`
+        Define queryable tag keys for an existing count, gauge, rate, distribution, or native histogram metric.
+        Distribution and native histogram metrics support percentile aggregations. By setting `exclude_tags_mode`
         to true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are
         not queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`
         permission.
@@ -230478,7 +232246,8 @@ paths:
   /api/v2/providers/{id}:
     delete:
       description: >-
-        Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access. This also applies when force=true. Existing cascades remain and can affect policies the caller cannot edit. Delete a provider by ID. Providers used by routing rules return provider_in_use with HTTP 409 and the affected rules in error metadata. Retry with force=true to remove provider targets and delete rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Requires `ai_gateway_config_write` and provider View/Edit. Models and pricing inherit provider access. Every affected route and policy membership requires the corresponding Edit permission; force=true never bypasses authorization. Providers used by routing rules return provider_in_use with HTTP 409. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable; visible route entries contain id, slug, and editable. Hidden dependencies are omitted from every collection and reported only by restricted_dependencies. A blocked response changes no configuration; an authorized editor must first remove the blocking references. Retry with force=true to confirm an authorized cascade that removes provider targets and deletes rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue
+        fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
       operationId: DeleteAiGatewayProvider
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderID"
@@ -230491,7 +232260,31 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: provider_in_use
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: false
+                              id: 123
+                              slug: coding
+                          rules_to_update: []
+                        status: "409"
+                        title: Provider is used by routing rules
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -234808,8 +236601,8 @@ paths:
     delete:
       description: |-
         Deletes the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
-        Deleting a provider policy restores normal unrestricted defaults.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.
+        Deleting a provider or route policy restores normal unrestricted defaults.
       operationId: DeleteRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -234836,7 +236629,7 @@ paths:
     get:
       description: |-
         Retrieves the restriction policy associated with a specified resource.
-        For AI Gateway provider policies, requires `ai_gateway_config_read`.
+        For AI Gateway provider and route policies, requires `ai_gateway_config_read`.
       operationId: GetRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -234882,6 +236675,7 @@ paths:
         #### Supported resources
         Restriction policies can be applied to the following resources:
         - AI Gateway Providers: `ai-gateway-provider`
+        - AI Gateway Routes: `ai-gateway-route`
         - Dashboards: `dashboard`
         - Integration Services: `integration-service`
         - Integration Webhooks: `integration-webhook`
@@ -234911,17 +236705,18 @@ paths:
         - Feature Flags: `feature-flag`
         - Network Path Configs: `network-path-config`
 
-        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.
-        The editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.
-        Reading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires
+        AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.
+        The editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.
+        Reading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires
         `ai_gateway_config_write` and follows standard restriction-policy authorization, including
         administrator recovery and self-lockout checks.
-        Providers without a restriction policy retain the normal unrestricted defaults.
+        Providers and routes without a restriction policy retain the normal unrestricted defaults.
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
         ----------------------------|--------------------------
         AI Gateway Providers        | `viewer`, `editor`
+        AI Gateway Routes           | `viewer`, `editor`
         Dashboards                  | `viewer`, `editor`
         Integration Services        | `viewer`, `editor`
         Integration Webhooks        | `viewer`, `editor`
@@ -235795,7 +237590,8 @@ paths:
   /api/v2/routing-rules:
     delete:
       description: >-
-        Delete a routing rule. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.
+        Delete a route with `ai_gateway_config_write` and route View/Edit. Every affected route and policy membership requires the corresponding Edit permission. The force=true parameter confirms impact and never bypasses authorization. A denied or unavailable check changes no configuration. Visible dependencies include editable; hidden dependencies are omitted and reported only by restricted_dependencies. A blocked response means an authorized editor must first remove blocking references. Each JSON:API error item's `meta` contains blocked, restricted_dependencies, policies, rules_to_delete, and rules_to_update. Visible policy entries contain id, name, and editable. Route deletion entries contain rule, reason, and editable; update entries contain rule, removed_tiers, and editable. Each rule contains route_id, slug, tiers, created_at, and updated_at with hidden nested selections redacted. The removed_tiers array identifies original tier numbers removed entirely by the cascade. Already-authorized
+        in-flight operations may finish. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted. Restriction cleanup occurs only after confirmed deletion. Cleanup failure returns 500 with configuration_deleted=true and permissions_cleanup_failed=true; refresh instead of assuming the route still exists.
       operationId: DeleteAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -235806,7 +237602,42 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              examples:
+                protected_dependencies:
+                  value:
+                    errors:
+                      - code: routing_rule_referenced
+                        detail: An authorized editor must first remove blocking references. No configuration was changed.
+                        meta:
+                          blocked: true
+                          policies:
+                            - editable: false
+                              id: default
+                              name: Default policy
+                          restricted_dependencies: true
+                          rules_to_delete:
+                            - editable: true
+                              reason: requested
+                              rule:
+                                created_at: "2026-08-24T12:00:00Z"
+                                route_id: 123
+                                slug: coding
+                                tiers:
+                                  - ordering: configured
+                                    targets:
+                                      - id: 901
+                                        model: gpt-5.2-codex
+                                        provider: prod-us
+                                        type: model
+                                updated_at: "2026-08-24T12:00:00Z"
+                          rules_to_update: []
+                        status: "409"
+                        title: Routing rule is in use
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -235826,7 +237657,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
-      description: List all routing rules for the organization.
+      description: List the organization's routing rules that the caller has View access to. Requires `ai_gateway_config_read`. Hidden route references are omitted from nested targets.
       operationId: ListAiGatewayRoutingRules
       responses:
         "200":
@@ -235871,7 +237702,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
-        Create an organization-owned routing rule. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
+        Create an organization-owned route with `ai_gateway_config_write`. New provider/model and route references require View. New routes use standard unrestricted defaults. To restrict configuration access, create the route and then apply a restriction policy using its numeric route_id. Sharing follows standard restriction-policy propagation and does not grant or revoke policy-authorized inference. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.
       operationId: CreateAiGatewayRoutingRule
       requestBody:
         content:
@@ -235964,7 +237795,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Replace a routing rule's tiers. The slug is immutable; data capture is managed independently. This is a full replacement: omitted or null ordering resets the tier to configured, and omitted or null weights in a weighted_affinity tier reset to 1. Omitted or null reasoning_level clears a model destination's reasoning override. Replacing a rule repairs tiers reported with an ordering_issue.
+        Update a route with `ai_gateway_config_write` and route View/Edit. The slug is immutable; data capture is managed independently. Omitting tiers preserves the entire graph. When tiers are supplied, saved parent-local target IDs retain omitted destination and reasoning, weight, rubric, and default settings. Omitted ordering/classifier settings preserve the saved same-position tier. Explicit null resets nullable settings. New references require View on their resources. A hidden target omitted from tiers must be explicitly listed in removed_target_ids, otherwise the update fails without changes. expected_updated_at rejects stale updates with 409. Sharing-only saves do not replace target rows. Hidden and missing routes return the same 404; visible non-editors receive 403. Inference authorization is unchanged.
       operationId: UpdateAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -236010,7 +237841,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - ai_gateway_config_write
-      summary: Replace an AI Gateway routing rule
+      summary: Update an AI Gateway routing rule
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
@@ -236024,7 +237855,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/routing-rules/get:
     get:
-      description: Get a routing rule by its organization-unique slug.
+      description: Get a routing rule by slug with `ai_gateway_config_read` and route View. Hidden and missing routes both return 404. Hidden target identities are omitted; parent-local target IDs remain available for retention.
       operationId: GetAiGatewayRoutingRule
       parameters:
         - $ref: "#/components/parameters/AiGatewayRoutingRuleSlug"
@@ -244042,9 +245873,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/automation/default_inbox_rules:
     get:
       description: |-
@@ -247459,9 +249287,6 @@ paths:
           - security_monitoring_findings_write
           - appsec_vm_write
           - data_scanner_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
@@ -250821,88 +252646,7 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
-    post:
-      description: |-
-        Create a new agent rule with the given parameters.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: CreateCloudWorkloadSecurityAgentRule
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: My Agent rule
-                      enabled: true
-                      expression: exec.file.name == "sh"
-                      name: my_agent_rule
-                    type: agent_rule
-            schema:
-              $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest"
-        description: "The definition of the new agent rule"
-        required: true
-      responses:
-        "200":
-          content:
-            "application/json":
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: My Agent rule
-                        enabled: true
-                        expression: exec.file.name == "sh"
-                        name: my_agent_rule
-                      id: abc-123
-                      type: agent_rule
-              schema:
-                $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-codegen-request-body-name: body
-      x-menu-order: 14
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
   /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
-    delete:
-      description: |-
-        Delete a specific agent rule.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: DeleteCloudWorkloadSecurityAgentRule
-      parameters:
-        - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
-      responses:
-        "204":
-          description: OK
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-menu-order: 16
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
     get:
       description: |-
         Get the details of a specific agent rule.
@@ -250942,68 +252686,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
-    patch:
-      description: |-
-        Update a specific agent rule.
-        Returns the agent rule object when the request is successful.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: UpdateCloudWorkloadSecurityAgentRule
-      parameters:
-        - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: My Agent rule
-                      enabled: true
-                      expression: exec.file.name == "sh"
-                    id: 3dd-0uc-h1s
-                    type: agent_rule
-            schema:
-              $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest"
-        description: "New definition of the agent rule"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: My Agent rule
-                        enabled: true
-                        expression: exec.file.name == "sh"
-                        name: my_agent_rule
-                      id: abc-123
-                      type: agent_rule
-              schema:
-                $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConcurrentModificationResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a Workload Protection agent rule (US1-FED)
-      tags: ["CSM Threats"]
-      x-codegen-request-body-name: body
-      x-menu-order: 15
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_write
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
       description: Get the list of all critical assets.
@@ -276872,7 +278554,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
-  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+  - description: >-
+      List open Agent Health issues across your organization and get an issue with its available remediation. Issues are reported by node Agents, Cluster Agents, and OpenTelemetry collectors. The meaning of `resource_id` depends on `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
     name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.

@@ -122,6 +122,22 @@ Retrieves detailed information about a specific notebook by ID, including name, 
 - Get details for notebook abc-123-def.
 - Show me the contents of the debugging notebook from yesterday.
 
+### `get_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Retrieves a notebook's settings and its content as Markdown.
+
+- Show me the contents of notebook 12345678.
+- What did we write in the checkout latency investigation notebook?
+
+### `get_datadog_notebook_sections`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. A section's ID stays the same when its text changes, so you can use the ID to target a later edit.
+
+- List the sections in notebook 12345678.
+- Show me the root cause section of the incident notebook.
+
 ### `search_datadog_notebooks`
 *Toolset: **core***\
 *Permissions Required: `Notebooks Read`*\
@@ -248,6 +264,14 @@ Creates a new Datadog notebook.
 - Create a notebook to document the investigation into the checkout service latency spike.
 - Make a new notebook for our weekly performance review.
 
+### `create_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a notebook from Markdown content, with settings such as the time frame, tags, and owning teams. The Markdown represents graphs and other widgets as `dd-widget` code blocks.
+
+- Create a notebook from these investigation notes, with a graph of error rates for the checkout service.
+- Make a notebook for our weekly performance review with a graph of p95 latency for the web-store service.
+
 ### `edit_datadog_notebook`
 *Toolset: **core***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
@@ -255,6 +279,38 @@ Edits an existing Datadog notebook.
 
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
+
+### `edit_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Edits a notebook by replacing exact text in its Markdown, changing its settings, or both.
+
+- Change the status line in notebook 12345678 from "Investigating" to "Resolved".
+- Set the time frame of the incident notebook to the last 4 hours.
+
+### `append_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Adds Markdown content to the end of a notebook, or to the end of one section.
+
+- Add today's findings to the end of notebook 12345678.
+- Add a follow-up item to the next steps section of the incident notebook.
+
+### `replace_datadog_notebook_section`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Replaces one section of a notebook with new Markdown and leaves the other sections unchanged.
+
+- Rewrite the summary section of notebook 12345678 based on the latest findings.
+- Replace the timeline section of the incident notebook with this updated timeline.
+
+### `update_datadog_notebook_widget`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Replaces the definition of one widget in a notebook and leaves the rest of the notebook unchanged.
+
+- Change the error rate graph in notebook 12345678 to group by service.
+- Switch the latency widget in the incident notebook to show the last 24 hours.
 
 ## Agent Builder
 
@@ -2150,6 +2206,18 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
+## Notebooks
+
+Tools for working with [notebooks][57]. The `notebooks` toolset includes `clone_datadog_notebook` and every notebook tool in the Core tools section that lists **notebooks** as a toolset.
+
+### `clone_datadog_notebook`
+*Toolset: **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a copy of a notebook, including its content, time frame, template variables, and tags. The copy has the same access settings as the original unless you make it private. Copying a template creates a regular notebook from that template.
+
+- Make a copy of notebook 12345678 for this week's review.
+- Create a private copy of the incident response template notebook.
+
 ## Observability Pipelines
 
 Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
@@ -3381,96 +3449,6 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
-
-## Teams
-
-Tools for reading and managing [Datadog Teams](/account_management/teams/). Enable them with `toolsets=teams`.
-
-Read tools require `MCP Read`. Write tools require `MCP Write`, and your organization must enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
-
-### `list_teams`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists teams in your organization, one page at a time. Use the results to find team IDs.
-
-- Find the Payments team.
-
-### `get_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Returns details for a team, including its name, handle, description, and member count.
-
-- Show the details of the Payments team.
-
-### `get_team_memberships`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists team members and their roles, one page at a time.
-
-- Who belongs to the Payments team?
-
-### `get_user_teams`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the teams a user belongs to and their role on each team.
-
-- Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
-
-### `get_team_hierarchy`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists parent-child relationships between teams, one page at a time. Filter by parent team or sub-team ID.
-
-- Which teams are children of the Payments team?
-
-### `get_team_links`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the links published by a team.
-
-- Show the links for the Payments team.
-
-### `get_team_notification_rules`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the notification rules configured for a team.
-
-- Show the Payments team notification rules.
-
-### `create_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
-Creates a team with a handle, name, and optional description.
-
-- Create a team named Payments with the handle `payments`.
-
-### `update_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions).
-
-- Change the Payments team description to "Owns payment processing."
-
-### `delete_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
-Permanently deletes a team. The tool asks you to confirm before it deletes the team.
-
-- Delete the Payments team.
-
-### `add_team_membership`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). If you grant the admin role, the tool asks you to confirm first.
-
-- Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
-
-### `delete_team_membership`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). The tool asks you to confirm before it removes the user.
-
-- Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team.
 
 ## Watchdog
 

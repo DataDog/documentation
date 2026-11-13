@@ -773,6 +773,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -816,7 +817,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 
 The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
 
-For a complete overview of MCP access controls, including how to restrict the actions an individual AI client can perform, see [Access Control for MCP][89].
+For a complete overview of MCP access controls, including how to restrict the actions an individual AI client can perform, see [Access Control for MCP][90].
 
 ### User role permissions
 
@@ -890,7 +891,7 @@ Repeat for each client and each organization you authorized from.
 
 Revoking an authorization has no effect on Personal Access Tokens, Service Access Tokens, or API and application keys. Delete or rotate those in their own management pages.
 
-Administrators can disable an AI client or remove specific scopes from it for the entire organization. To do this, use the [{{< ui >}}Mobile and Third-Party Access{{< /ui >}}][90] page. See [Restrict actions for a specific AI client][91].
+Administrators can disable an AI client or remove specific scopes from it for the entire organization. To do this, use the [{{< ui >}}Mobile and Third-Party Access{{< /ui >}}][91] page. See [Restrict actions for a specific AI client][92].
 
 ### Personal or Service Access Token
 
@@ -943,7 +944,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
-**Note**: An AI client's [OAuth application scopes][91] do not apply to connections that use API and application keys or access tokens. These connections have the access of the key or token.
+**Note**: An AI client's [OAuth application scopes][92] do not apply to connections that use API and application keys or access tokens. These connections have the access of the key or token.
 
 ### Adding OAuth clients
 
@@ -976,7 +977,7 @@ If your AI client does not list Datadog MCP Server tools that create or modify r
 - **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
 - **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
 - **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
-- **OAuth application scopes**: If an administrator removed a scope from your AI client, you cannot use that client for actions that need the scope. This applies even if your role includes the permission. See [Restrict actions for a specific AI client][91].
+- **OAuth application scopes**: If an administrator removed a scope from your AI client, you cannot use that client for actions that need the scope. This applies even if your role includes the permission. See [Restrict actions for a specific AI client][92].
 
 After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
 
@@ -1068,6 +1069,7 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
-[89]: /account_management/rbac/mcp_access/
-[90]: https://app.datadoghq.com/organization-settings/oauth-applications
-[91]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client
+[89]: /infrastructure/process/
+[90]: /account_management/rbac/mcp_access/
+[91]: https://app.datadoghq.com/organization-settings/oauth-applications
+[92]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client

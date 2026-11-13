@@ -107,8 +107,8 @@ Example inline rules:
 [1]: /monitors/manage/search/
 [2]: /monitors/manage/#triggered-monitors
 {{% /tab %}}
-{{% tab "APM Faulty Deployment Detection" %}}
-This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
+{{% tab "Watchdog Faulty Deployment Detection" %}}
+This rule type uses [Watchdog Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
 
 - New types of errors.
 - Significant increases in error rates compared to previous versions.
@@ -126,7 +126,7 @@ Example inline rule:
 ```json
 {
   "type": "faulty_deployment_detection",
-  "name": "APM Faulty Deployment Detection",
+  "name": "Watchdog Faulty Deployment Detection",
   "options": {
     "duration": 900,
     "excluded_resources": ["GET /healthcheck"]
@@ -173,7 +173,7 @@ Example `gate-config.json`:
     },
     {
       "type": "faulty_deployment_detection",
-      "name": "APM Faulty Deployment Detection",
+      "name": "Watchdog Faulty Deployment Detection",
       "options": {
         "duration": 900,
         "excluded_resources": ["GET /healthcheck"]
@@ -237,7 +237,7 @@ data:
         },
         {
           "type": "faulty_deployment_detection",
-          "name": "APM Faulty Deployment Detection",
+          "name": "Watchdog Faulty Deployment Detection",
           "options": {
             "duration": 900,
             "excluded_resources": ["GET /healthcheck"]
@@ -328,7 +328,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Required for APM Faulty Deployment Detection rules
+              - name: version # Required for Watchdog Faulty Deployment Detection rules
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -397,7 +397,7 @@ Example `.github/gate-config.json`:
     },
     {
       "type": "faulty_deployment_detection",
-      "name": "APM Faulty Deployment Detection",
+      "name": "Watchdog Faulty Deployment Detection",
       "options": {
         "duration": 900,
         "excluded_resources": ["GET /healthcheck"]
@@ -470,7 +470,7 @@ PAYLOAD=$(cat <<EOF
           },
           {
             "type": "faulty_deployment_detection",
-            "name": "APM Faulty Deployment Detection",
+            "name": "Watchdog Faulty Deployment Detection",
             "options": {
               "duration": 900,
               "excluded_resources": ["GET /healthcheck"]
@@ -575,7 +575,7 @@ done
 
 The script:
 
-- Receives three inputs: `service`, `environment`, and `version`. `version` is required if one or more APM Faulty Deployment Detection rules are evaluated.
+- Receives three inputs: `service`, `environment`, and `version`. `version` is required if one or more Watchdog Faulty Deployment Detection rules are evaluated.
 - Sends a request to start the evaluation and records the `evaluation_id`. Handles HTTP response codes:
   - 5xx: server error, retries with delay.
   - 4xx: client error, evaluation fails.
@@ -636,7 +636,7 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
           },
           {
             "type": "faulty_deployment_detection",
-            "name": "APM Faulty Deployment Detection",
+            "name": "Watchdog Faulty Deployment Detection",
             "options": {
               "duration": 900,
               "excluded_resources": ["GET /healthcheck"]

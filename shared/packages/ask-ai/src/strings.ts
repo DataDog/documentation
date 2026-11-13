@@ -8,6 +8,7 @@ export const STRINGS = {
   changeView: "Change view",
   switchTo: "Switch to",
   send: "Send",
+  stopGenerating: "Stop generating",
   inputPlaceholder: "Ask a question...",
   info: "Info",
   disclaimerTooltip:
@@ -31,12 +32,25 @@ export const STRINGS = {
   copyResponse: "Copy response",
   copyCode: "Copy code",
   feedbackThanks: "Thanks for your feedback!",
+  feedbackFailed: "Couldn't send feedback. Try again.",
+  feedbackReasonsTitle: "What went wrong?",
+  feedbackReasonsOptional: "(optional)",
+  feedbackReasonsDismiss: "Not now",
+  feedbackReasonsSend: "Send",
+  feedbackReasonsSending: "Sending…",
+  feedbackReasonsFailed: "Couldn't send your feedback. Try again.",
+  feedbackReasonsThanks: "Thanks, this helps us improve!",
   copySucceeded: "Copied to clipboard!",
   copyFailed: "Copy failed",
 
-  requestCancelled: "Request cancelled.",
-  requestFailed: "Sorry, something went wrong. Please try again.",
-  emptyResponse: "No response received. Please try again.",
+  requestFailed: "Something went wrong while answering. Try again in a moment.",
+  emptyResponse: "No response received. Try again.",
+  // Retrying the same request can't help, so these must not invite a retry.
+  requestNotRetryable:
+    "Docs AI can't answer this request. Start a new question instead.",
+  requestRejected:
+    "Docs AI couldn't process this question. Try shortening or rephrasing it.",
+  tryAgain: "Try again",
 
   privacyPolicyUrl: "https://www.datadoghq.com/legal/privacy/",
   disclaimerBefore: "Your use of this AI-powered assistant is subject to our ",
@@ -44,31 +58,44 @@ export const STRINGS = {
   disclaimerAfter: ". Please do not submit sensitive or personal information.",
 } as const;
 
-/**
- * Rotated client-side while waiting for the first server `thinking` event.
- * Worded the same as the mapped server messages below, so the copy reads
- * consistently whichever arrives first.
- */
-export const LOADING_MESSAGES = [
-  "Understanding your question…",
-  "Searching the docs…",
-  "Reading the most relevant pages…",
-  "Drafting your response…",
-] as const;
+/** The research timeline above an answer. See `activity.ts`. */
+export const ACTIVITY_STRINGS = {
+  starting: "Thinking...",
+  reviewing: "Reviewing the documentation...",
+  headlineError: "Something went wrong",
+  stopped: "Stopped",
+  answerReady: "Answer ready",
 
-/**
- * Maps a backend `thinking` event to user-facing copy. Unknown keys fall
- * through to the server's own message, so a new backend stage still surfaces
- * something.
- */
-export const THINKING_MESSAGES: Record<string, string> = {
-  "Rewriting query...": "Understanding your question…",
-  "Searching documentation...": "Searching the docs…",
-  "Reviewing relevant pages": "Reading the most relevant pages…",
-  "Generating answer...": "Drafting your response…",
-  "Something went wrong. Please try again.":
-    "Something went wrong. Try asking again.",
-};
+  understanding: "Understanding your question",
+  understood: "Understood your question",
+  understandFailed: "Couldn't finish understanding your question",
+  finding: "Finding relevant pages",
+  lookedFor: "Looked for relevant pages",
+  noRelevantPages: "No relevant pages",
+  findingMore: "Finding more pages",
+  lookedForMore: "Looked for more pages",
+  noNewPages: "No new pages",
+  searchFailed: "Finding pages didn't finish",
+  searchStopped: "Stopped finding pages",
+  checkingMore: "Checking more of the page",
+  checkedMore: "Checked more of the page",
+  readFailed: "Checking didn't finish",
+  readStopped: "Stopped checking pages",
+  writing: "Writing the answer",
+  wrote: "Wrote the answer",
+  writeFailed: "Answer interrupted",
+  writeStopped: "Writing stopped",
+} as const;
+
+/** Offered after a thumbs-down. The ids are the feedback API's reason values. */
+export const FEEDBACK_REASONS = [
+  { id: "incorrect", label: "Incorrect" },
+  { id: "not_relevant", label: "Didn't answer my question" },
+  { id: "incomplete", label: "Missing details" },
+  { id: "refused", label: "Refused to answer" },
+  { id: "sources", label: "Wrong or broken links" },
+  { id: "other", label: "Other" },
+] as const;
 
 export const SUGGESTED_QUESTIONS = [
   "What is the Datadog Agent?",

@@ -4558,8 +4558,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsSeverity
-        unstable:
-          - v2
+        unstable: []
         order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
@@ -5145,8 +5144,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsAssignee
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
@@ -7785,9 +7783,9 @@ menu:
         unstable:
           - v2
         order: 28
-    - name: Replace an AI Gateway routing rule
-      url: /api/latest/ai-gateway/replace-an-ai-gateway-routing-rule/
-      identifier: ai-gateway-replace-an-ai-gateway-routing-rule
+    - name: Update an AI Gateway routing rule
+      url: /api/latest/ai-gateway/update-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-update-an-ai-gateway-routing-rule
       parent: ai-gateway
       generated: true
       params:
@@ -8884,6 +8882,32 @@ menu:
       url: /api/latest/agent-health/
       identifier: agent-health
       generated: true
+    - name: Get an Agent Health issue
+      url: /api/latest/agent-health/get-an-agent-health-issue/
+      identifier: agent-health-get-an-agent-health-issue
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAgentHealthIssue
+        unstable:
+          - v2
+        order: 3
+    - name: List Agent Health issues
+      url: /api/latest/agent-health/list-agent-health-issues/
+      identifier: agent-health-list-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthIssues
+        unstable:
+          - v2
+        order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
       identifier: agent-health-list-active-agent-health-issues
@@ -11190,18 +11214,6 @@ menu:
       url: /api/latest/csm-threats/
       identifier: csm-threats
       generated: true
-    - name: Update a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/update-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-update-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 15
     - name: Get a Workload Protection agent rule (US1-FED)
       url: /api/latest/csm-threats/get-a-workload-protection-agent-rule-us1-fed/
       identifier: csm-threats-get-a-workload-protection-agent-rule-us1-fed
@@ -11214,30 +11226,6 @@ menu:
           - GetCloudWorkloadSecurityAgentRule
         unstable: []
         order: 13
-    - name: Delete a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/delete-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-delete-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 16
-    - name: Create a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/create-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-create-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 14
     - name: Get all Workload Protection agent rules (US1-FED)
       url: /api/latest/csm-threats/get-all-workload-protection-agent-rules-us1-fed/
       identifier: csm-threats-get-all-workload-protection-agent-rules-us1-fed
@@ -13165,6 +13153,18 @@ menu:
           - ListCostGCPUsageCostConfigs
         unstable: []
         order: 11
+    - name: Update Custom Costs file
+      url: /api/latest/cloud-cost-management/update-custom-costs-file/
+      identifier: cloud-cost-management-update-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomCostsFile
+        unstable: []
+        order: 78
     - name: Get Custom Costs file
       url: /api/latest/cloud-cost-management/get-custom-costs-file/
       identifier: cloud-cost-management-get-custom-costs-file
@@ -15285,6 +15285,18 @@ menu:
           - ListExperimentMetricGroups
         unstable: []
         order: 11
+    - name: List experiment holdouts
+      url: /api/latest/experiments/list-experiment-holdouts/
+      identifier: experiments-list-experiment-holdouts
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentHoldouts
+        unstable: []
+        order: 55
     - name: Get experiment diagnostics
       url: /api/latest/experiments/get-experiment-diagnostics/
       identifier: experiments-get-experiment-diagnostics
@@ -16109,6 +16121,30 @@ menu:
           - GetSavedFilter
         unstable: []
         order: 23
+    - name: Export feature flag change history
+      url: /api/latest/feature-flags/export-feature-flag-change-history/
+      identifier: feature-flags-export-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportFeatureFlagHistory
+        unstable: []
+        order: 26
+    - name: List feature flag change history
+      url: /api/latest/feature-flags/list-feature-flag-change-history/
+      identifier: feature-flags-list-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlagHistory
+        unstable: []
+        order: 25
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout
