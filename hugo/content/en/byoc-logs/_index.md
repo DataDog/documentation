@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-datadog-byoc-logs/"
   tag: "Blog"
   text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC Logs"
+- link: "/byoc-apm/"
+  tag: "Documentation"
+  text: "BYOC APM (Preview)"
 aliases:
   - /cloudprem/
 ---
