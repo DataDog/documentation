@@ -5,34 +5,43 @@ further_reading:
   text: OpenTelemetry Collector のセットアップ
 title: Apache Web Server メトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="Apache ダッシュボード内の OpenTelemetry Apache メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="Apache ダッシュボードの OpenTelemetry Apache メトリクス" style="width:100%;" >}}
+[Apache receiver][1] は Apache Web Server メトリクスを収集します。
 
-[Apache レシーバー][1]は、Apache Web Server メトリクスの収集を可能にします。`apachereceiver` の最新バージョンの仕様に従ってレシーバーを構成してください。
+詳細については、[Apache receiver][1] に関する OpenTelemetry プロジェクトのドキュメントを参照してください。
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [Apache レシーバー][1]を参照してください。
+## セットアップ {#setup}
 
-## セットアップ
+この例では、OpenTelemetry Collector Contrib v0.154.0 のコンポーネント識別子を使用しています。他のバージョンやディストリビューションの場合は、そのディストリビューションがサポートする識別子を使用します。
 
-Datadog で使用するために OpenTelemetry で Apache Web Server メトリクスを収集するには:
+Apache receiver は、サーバーの `server-status?auto` ページを読み取ります。開始する前に、Apache サーバーで [`mod_status` を有効に][5]します。ステータスページにはサーバーとそのリクエストに関する詳細が表示されるため、アクセスを localhost などに制限します。
 
-1. OpenTelemetry Collector の構成で [Apache レシーバー][1]を構成します。
-2. OpenTelemetry Collector が [Datadog にエクスポートするように構成されている][4]ことを確認します。
+Collector 構成に以下の行を追加し、`endpoint` をステータスページのアドレスに設定します。
 
-詳細な構成オプションと要件については、[Apache レシーバーのドキュメント][1]を参照してください。
+```yaml
+receivers:
+  apache:
+    endpoint: http://localhost:8080/server-status?auto
+```
 
-## 収集されたデータ
+構成のメトリクスパイプラインの `receivers` リストに `apache` を追加します。すでにそのパイプラインにあるプロセッサーはそのまま維持します。Datadog OTLP メトリクスインテークはデルタメトリクスのみを受け付けますが、このレシーバーは累積合計を生成するため、パイプラインには `cumulativetodelta` が必要です。[推奨される Collector セットアップ][4]にはそれが含まれています。
+
+すべての構成オプションについては、[Apache receiver のドキュメント][1]を参照してください。
+
+## 収集データ {#data-collected}
 
 {{< mapping-table resource="apache.csv">}}
 
-詳細は [OpenTelemetry メトリクスマッピング][2]を参照してください。
+OpenTelemetry と Datadog のメトリクス名の完全なマッピングについては、[OpenTelemetry メトリクスマッピング][2]を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/apachereceiver
 [2]: /ja/opentelemetry/guide/metrics_mapping/
 [4]: /ja/opentelemetry/setup/collector_exporter/
+[5]: https://httpd.apache.org/docs/2.4/mod/mod_status.html

@@ -79,7 +79,7 @@ La instrumentación de Lambda se ejecuta completamente desde Datadog. Datadog no
 
 1. Datadog lee la configuración y las etiquetas actuales de la función, y verifica que cumpla con los [Lambda prerequisites][3].
 2. Datadog verifica si la función ya está instrumentada. Datadog omite una función que contiene capas de Datadog, un controlador de Datadog o variables de entorno de Datadog que Datadog no aplicó. Datadog también omite una función administrada por [remote instrumentation][4] e informa cuál de las dos razones aplica.
-3. Datadog resuelve las versiones de capa de Datadog para el tiempo de ejecución, la arquitectura, la región y la partición de AWS de la función. Datadog aplica las versiones de capa que ha validado en lugar de lo que sea más nuevo en ese momento, por lo que una instalación es reproducible.
+3.Datadog utiliza las versiones de capa especificadas en la regla de instrumentación para identificar las capas coincidentes según el entorno de ejecución, la arquitectura, la región y la partición de AWS de la función.
 4. Datadog calcula la configuración deseada completa y registra exactamente lo que está a punto de cambiar, antes de cambiar nada.
 5. Datadog autoriza al rol de ejecución de la función a enviar telemetría a su organización de Datadog. Consulte la sección [Cómo se autentica la telemetría de Lambda](#how-lambda-telemetry-is-authenticated).
 6. Datadog llama a `lambda:UpdateFunctionConfiguration` una vez, enviando la lista completa y el mapa de entorno. Datadog marca el cambio como aplicado solo después de que AWS informa el éxito.
@@ -93,8 +93,11 @@ Una actualización de Lambda es una operación de tipo reemplazo: la lista de ca
 | Agrega la capa de extensión de Datadog (`Datadog-Extension` o `Datadog-Extension-ARM`) | Todos los tiempos de ejecución compatibles |
 | Agrega la capa de rastreo de Datadog correspondiente | Node.js, Python, Ruby, Java y .NET |
 | Establece `DD_SITE` y `DD_ORG_UUID` | Todos los tiempos de ejecución compatibles |
+| Establece `DD_TRACE_ENABLED` y `DD_SERVERLESS_LOGS_ENABLED` en `true` o `false` para que coincidan con los interruptores de APM y Logs de la regla de instrumentación, sobrescribiendo los valores existentes | Todos los entornos de ejecución compatibles |
 | Redirige el controlador al controlador de Datadog y mueve el original a `DD_LAMBDA_HANDLER` | Node.js y Python |
 | Establece `AWS_LAMBDA_EXEC_WRAPPER` en `/opt/datadog_wrapper` | Java y .NET |
+
+La regla de instrumentación tiene prioridad para `DD_TRACE_ENABLED` y `DD_SERVERLESS_LOGS_ENABLED`: cuando se cambia cualquiera de ellos en una función cubierta, Datadog lo restablece para que coincida con la regla. Al desinstalar, Datadog restaura el valor original de cada variable o lo elimina si la función no lo había establecido antes de la instrumentación.
 
 Datadog no cambia el código de la función, el tamaño de la memoria, el tiempo de espera, la configuración de VPC, la concurrencia ni ninguna otra configuración de la función.
 
@@ -162,11 +165,11 @@ Datadog mantiene continuamente el estado que usted define en los recursos cubier
   - **EC2**: Los eventos provienen de la regla de EventBridge de la pila de CloudFormation.
   - **Lambda**: La regla `datadog-agent-resource-update-rule-lambda` envía eventos de creación de función, actualización de configuración, etiquetado y eliminación de etiquetas.
 - En EC2, las instancias que ya tienen el Agent se vuelven a verificar con menos frecuencia, para evitar actividades innecesarias.
-- En Lambda, Datadog llama a la API de Lambda en su cuenta solo para las funciones que necesitan un cambio. Una flota que ya cuenta con las versiones de capa actuales no genera actividad por función.
+- En Lambda, Datadog llama a la API de Lambda en su cuenta solo para las funciones que necesitan un cambio. Un conjunto de funciones que ya coincide con las versiones de capa y la configuración de APM y Logs de la regla de instrumentación no genera actividad por función.
 
 ### Cómo las funciones Lambda obtienen nuevas versiones de capa {#how-lambda-functions-pick-up-new-layer-versions}
 
-Datadog compara las capas de una función cubierta con las versiones que Datadog implementa, en lugar de compararlas con las versiones aplicadas en la instrumentación inicial. Cuando Datadog lanza nuevas versiones de capa, las funciones cubiertas se actualizan a ellas. Por lo tanto, sus funciones avanzan con los lanzamientos de capa de Datadog sin que usted tenga que realizar ninguna acción.
+Datadog compara las capas de una función cubierta con las versiones establecidas en la regla de instrumentación. Cuando una capa en una función cubierta se cambia manualmente, Datadog la restablece a la versión de la regla. Datadog no actualiza las versiones de capa en una regla por usted. Una función cubierta adopta una nueva versión de capa solo cuando usted edita la regla. Para obtener más información sobre dónde establecer las versiones, consulte [Instalar la instrumentación de Datadog][8] en la guía de configuración.
 
 Una actualización de configuración de Lambda que aún está en curso se deja intacta y se reintenta poco después, por lo que Datadog no compite con un cambio que ya se está aplicando.
 
@@ -219,3 +222,4 @@ Para eliminar la instrumentación, elimine los recursos de una regla, edite la c
 [5]: https://docs.datadoghq.com/es/account_management/workload_identity_federation/
 [6]: https://docs.datadoghq.com/es/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
 [7]: https://docs.datadoghq.com/es/integrations/guide/aws-agent-installation/#choose-how-your-rule-matches-resources
+[8]: https://docs.datadoghq.com/es/integrations/guide/aws-agent-installation/#install-datadog-instrumentation

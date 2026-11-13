@@ -45,6 +45,7 @@ title: Guides sur les intégrations
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Dépannage de l'intégration AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}Configurer les filtres de noms de métriques AWS avec l'API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Surveiller votre facture AWS{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-service-quotas" tag=" AWS" >}}Surveillez les quotas de service AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Erreur : Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}Flux de métriques AWS CloudWatch avec Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Utilisation d'Amazon CloudFormation{{< /nextlink >}}

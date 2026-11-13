@@ -19,7 +19,7 @@ Observability Pipelines の BYOC (Bring Your Own Cloud) Logs 送信先を使用�
 
 ## 前提条件 {#prerequisites}
 
-送信先を構成する前に、BYOC Logs クラスターをデプロイする必要があります。インストール方法については、[BYOC Logs インストールセクション][3]を参照してください。
+ログを受信するには、稼働中の BYOC Logs cluster が必要です。Operator deployment の場合は、まず pipeline とその送信先を作成し、pipeline ID を指定して cluster と管理対象 Worker をデプロイしてください。個別に管理する Worker の場合は、Worker をインストールする前に cluster をデプロイし、その取り込みエンドポイントを取得してください。[BYOC Logsインストールガイド][3]を参照してください。
 
 ## セットアップ {#setup}
 
@@ -45,6 +45,8 @@ Observability Pipelines の BYOC (Bring Your Own Cloud) Logs 送信先を使用�
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="BYOC Logs 送信先の設定" style="width:35%;" >}}
 
 ## シークレットのデフォルト{#secret-defaults}
+
+`DatadogBYOCCluster` によって管理される Worker の場合、Operator が BYOC Logs indexer のエンドポイント、Datadog site、共有 API キーを提供します。デプロイ前に pipeline の送信先を設定し、`spec.components.pipelines[].pipelineID` で pipeline ID を指定してください。以下の手動エンドポイント設定は、スタンドアロンWorkerに適用されます。[Datadog Operatorを使用したBYOC Logsのインストール][10]を参照してください。
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -99,3 +101,4 @@ Observability Pipelines の BYOC (Bring Your Own Cloud) Logs 送信先を使用�
 [7]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [9]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /ja/byoc-logs/install/datadog_operator/

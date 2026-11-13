@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: /account_management/billing/metric_name_pricing/
   tag: 설명서
-  text: Custom Metrics의 Metric Name 요금제
+  text: 사용자 지정 메트릭을 위한 Metric Name 요금제
 - link: /metrics/custom_metrics/
   tag: 설명서
   text: 사용자 지정 메트릭에 관해 자세히 알아보기
@@ -18,7 +18,7 @@ title: Custom Metrics 청구
 ---
 ## 개요 {#overview}
 
-**참고**: 이 페이지에서는 카디널리티 기반 Custom Metrics 청구 모델을 설명합니다. 계약에서 메트릭 이름 가격 책정 SKU를 사용하는 경우에는 [Custom Metrics의 Metric Name 요금제][15]를 참조하세요.
+**참고**: 이 페이지에서는 카디널리티 기반 Custom Metrics 청구 모델을 설명합니다. 계약에서 Metric Name 요금제 SKU를 사용하는 경우에는 대신 [사용자 지정 메트릭을 위한 Metric Name 요금제][15]를 참조하세요.
 
 메트릭이 [Datadog 통합 {{< translate key="integration_count" >}} 이상][1] 중 하나에서 제출되지 않은 경우, 해당 메트릭은 [사용자 지정 메트릭][2]으로 간주합니다. 일부 표준 통합도 사용자 지정 메트릭을 발생시킬 가능성이 있습니다. 자세한 내용은 [사용자 지정 메트릭 및 표준 통합][14]을 참조하세요.
 
@@ -88,7 +88,7 @@ Metrics without Limits™ 사용자의 경우, 사용량 페이지에 _수집된
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits}
 
-[Metrics without Limits™][3]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Summary 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][3]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -124,7 +124,7 @@ Metrics without Limits™를 사용하여 `endpoint` 및 `status` 태그만 유�
 [2]: /ko/metrics/types/?tab=rate#metric-types
 [3]: /ko/metrics/metrics-without-limits
 {{% /tab %}}
-{{% tab "게이지" %}}
+{{% tab "Gauge" %}}
 이 태깅 체계를 사용하여 GAUGE 메트릭에 대해 제출된 고유한 태그 값 조합의 수는 **4개**입니다.
 
 - `host:A`, `endpoint:X`, `status:200`
@@ -167,7 +167,7 @@ Metrics without Limits™를 사용하여 `endpoint` 및 `status` 태그만 유�
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits-1}
 
-[Metrics without Limits™][4]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Summary 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][4]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -255,7 +255,7 @@ Metrics without Limits™를 사용하여 구성된 메트릭의 경우(태그�
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits-2}
 
-[Metrics without Limits™][2]를 사용하여 태그 및 집계를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Summary 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][2]를 사용하여 태그 및 집계를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -296,9 +296,9 @@ Metrics without Limits™를 사용하여 구성된 메트릭의 경우(태그/�
 
 관리 사용자([Datadog Admin 역할][7]이 있는 사용자)는 시간당 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭의 월별 평균 개수를 확인할 수 있습니다. 맨 위의 사용자 지정 메트릭 표에는 [사용량 세부 정보 페이지][8]의 **인덱싱된** 사용자 지정 메트릭 평균 개수도 나열됩니다. 자세한 내용은 [사용량 세부 정보][9] 설명서를 참조하세요.
 
-특정 메트릭 이름의 사용자 지정 메트릭 개수를 실시간 추적하는 것과 관련한 자세한 내용은 [Metrics Summary 페이지][10]에서 메트릭 이름을 클릭하여 참조하세요. 메트릭의 세부 정보 사이드 패널에서 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭 개수를 조회할 수 있습니다. 
+특정 메트릭 이름의 사용자 지정 메트릭 개수를 실시간 추적하는 것과 관련한 자세한 내용은 [Metrics Catalog 페이지][10]에서 메트릭 이름을 클릭하여 참조하세요. 메트릭의 세부 정보 사이드 패널에서 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭 개수를 조회할 수 있습니다. 
 
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="Metrics Summary 사이드 패널" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="Metrics Catalog 사이드 패널" style="width:80%;">}}
 
 
 ## 할당 {#allocation}
@@ -308,7 +308,7 @@ Datadog 요금 플랜에 따라 특정 개수의 **수집된** 사용자 지정 
 - Pro: 호스트당 수집된 사용자 지정 메트릭 100개, 호스트당 인덱싱된 사용자 지정 메트릭 100개
 - Enterprise: 호스트당 수집된 사용자 지정 메트릭 200개, 호스트당 인덱싱된 사용자 지정 메트릭 200개
 
-이러한 할당은 인프라 전체에서 계수됩니다. 예를 들어 Pro 플랜을 이용 중이고 호스트 3개에 대하여 라이선싱된 경우, 인덱싱된 사용자 지정 메트릭 300개가 할당됩니다. 인덱싱된 사용자 지정 메트릭 300개는 각 호스트에 균등하게 나뉠 수 있거나, 하나의 호스트가 인덱싱된 메트릭 300개를 사용할 수도 있습니다. 아래 그래프에는 이 예시를 사용하여 할당된 사용자 지정 메트릭 개수를 초과하지 않는 상황을 표시했습니다.
+이러한 할당은 인프라 전체에서 계수됩니다. 예를 들어, Pro 플랜을 이용 중이고 호스트 3개에 대하여 라이선싱된 경우, 인덱싱된 사용자 지정 메트릭 300개가 할당됩니다. 인덱싱된 사용자 지정 메트릭 300개는 각 호스트에 균등하게 나뉠 수 있거나, 하나의 호스트가 인덱싱된 메트릭 300개를 사용할 수도 있습니다. 아래 그래프에는 이 예시를 사용하여 할당된 사용자 지정 메트릭 개수를 초과하지 않는 상황을 표시했습니다.
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="사용자 지정 메트릭 할당" >}}
 
@@ -316,9 +316,9 @@ Datadog 요금 플랜에 따라 특정 개수의 **수집된** 사용자 지정 
 
 ## 문제 해결 {#troubleshooting}
 
-기술적 지원이 필요한 경우에는 [Datadog 지원팀][13]에 문의하세요.
+기술 관련 문의는 [Datadog 지원팀][13]에 문의하세요.
 
-요금 청구와 관련한 질문이 있을 경우에는 담당 [고객 성공][12] 매니저에게 문의하세요.
+요금 청구 관련 문의는 [고객 성공][12] 관리자에게 문의하세요.
 
 [1]: /ko/integrations/
 [2]: /ko/metrics/custom_metrics/
@@ -329,7 +329,7 @@ Datadog 요금 플랜에 따라 특정 개수의 **수집된** 사용자 지정 
 [7]: /ko/account_management/users/default_roles/
 [8]: https://app.datadoghq.com/billing/usage
 [9]: /ko/account_management/plan_and_usage/usage_details/
-[10]: https://app.datadoghq.com/metric/summary
+[10]: https://app.datadoghq.com/metric/catalog
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
 [13]: /ko/help/

@@ -4,7 +4,7 @@ description: Review recent additions, modifications, and removals to Datadog API
 type: api
 layout: changelog
 build:
-  render: always
+  render: never
   list: never
   publishResources: false
 ---

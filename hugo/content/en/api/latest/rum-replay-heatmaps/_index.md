@@ -1,3 +1,3 @@
 ---
-title: Rum Replay Heatmaps
+title: RUM Replay Heatmaps
 ---

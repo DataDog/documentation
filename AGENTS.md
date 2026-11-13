@@ -57,7 +57,6 @@ The build system automatically fetches:
 - API client examples from multiple language repositories
 - Integration metadata and documentation
 - Vector integration data via CUE files
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Some documentation is sourced from a go module called `websites-sources`
 
 ### Related Repositories
@@ -185,6 +184,17 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - API documentation
 - Security and compliance sections
 
+### Ask AI
+Hugo's Ask AI widget has a port in `shared/packages/ask-ai/`, which the Astro site uses. Hugo doesn't use the package yet, so the two copies drift unless every change lands in both.
+
+When you change Hugo's Ask AI code, make the same change in `shared/packages/ask-ai/` in the same PR. Hugo's Ask AI code includes:
+- `hugo/assets/scripts/components/conversational-search/`
+- `hugo/assets/styles/components/conversational-search/`
+- `hugo/layouts/partials/conversational-search.html`
+- `hugo/assets/scripts/tests/conversational-search-*.test.js`
+
+The package is TypeScript and builds its markup in `markup.ts`, so a change to Hugo's partial goes there. SCSS changes go into the package's `styles.css` as plain CSS on its custom properties. See the [package README](/shared/packages/ask-ai/README.md) and [AGENTS.md](/shared/packages/ask-ai/AGENTS.md) before editing it.
+
 ### Content Types
 - Regular markdown pages
 - API reference (auto-generated). These pages are no longer published to production (that's handled in the `documentation/astro` folder instead) and will soon be deprecated.
@@ -203,7 +213,6 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - API examples automatically sync from datadog-api-client-* repositories
 - Integration data pulled from the `websites-sources` go module.
    - The exception is Dogweb integrations, which are pulled from a GitHub repository.
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Build scripts fetched from external repository during setup
 
 ### Build Environments

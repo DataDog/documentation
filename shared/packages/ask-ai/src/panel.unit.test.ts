@@ -33,6 +33,43 @@ function mockStream(chunks: string[]) {
   return fetchMock;
 }
 
+/**
+ * Serves `chunks`, then holds the stream open until the request is aborted,
+ * the way a real stream behaves when the reader presses stop mid-answer.
+ */
+function mockOpenStream(chunks: string[]) {
+  const encoder = new TextEncoder();
+  let index = 0;
+
+  const fetchMock = vi.fn((_url: string, init: RequestInit) =>
+    Promise.resolve({
+      ok: true,
+      status: 200,
+      body: {
+        getReader: () => ({
+          read: () =>
+            index < chunks.length
+              ? Promise.resolve({
+                  done: false,
+                  value: encoder.encode(chunks[index++]),
+                })
+              : new Promise((_resolve, reject) => {
+                  init.signal?.addEventListener("abort", () =>
+                    reject(new DOMException("Aborted", "AbortError")),
+                  );
+                }),
+        }),
+      },
+    }),
+  );
+
+  vi.stubGlobal("fetch", fetchMock);
+  return fetchMock;
+}
+
+/** Lets a pending stream deliver what it has queued. */
+const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
+
 function sse(type: string, content: string): string {
   return `data: ${JSON.stringify({ type, content })}\n`;
 }
@@ -331,10 +368,10 @@ describe("sending a message", () => {
     query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
     await panel.sendMessage();
 
-    const messages = document.querySelectorAll(".conv-search-message-content");
-    expect(messages[messages.length - 1]?.textContent).toBe(
+    expect(query(".conv-search-turn-error p").textContent).toBe(
       STRINGS.emptyResponse,
     );
+    expect(query(".conv-search-retry")).not.toBeNull();
   });
 
   it("reports a failed request without leaving the panel stuck", async () => {
@@ -348,11 +385,81 @@ describe("sending a message", () => {
     query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
     await panel.sendMessage();
 
-    const messages = document.querySelectorAll(".conv-search-message-content");
-    expect(messages[messages.length - 1]?.textContent).toBe(
+    expect(query(".conv-search-turn-error p").textContent).toBe(
       STRINGS.requestFailed,
     );
+    expect(query(".conv-search-retry")).not.toBeNull();
     expect(query<HTMLButtonElement>(".conv-search-send").disabled).toBe(false);
+  });
+
+  it("does not offer a retry when the request is rejected", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 400, body: null }),
+    );
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    expect(query(".conv-search-turn-error p").textContent).toBe(
+      STRINGS.requestRejected,
+    );
+    expect(document.querySelector(".conv-search-retry")).toBeNull();
+  });
+
+  it("shows a server error and retries the same question", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    mockStream([
+      sse("markdown_fragment", "partial"),
+      `data: ${JSON.stringify({ type: "error", content: "Busy. Try again.", retryable: true })}\n`,
+      "data: [DONE]\n",
+    ]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    expect(query(".conv-search-turn-error p").textContent).toBe(
+      "Busy. Try again.",
+    );
+    // The partial answer is discarded unless the server says to keep it.
+    expect(
+      query<HTMLElement>(".conv-search-turn .conv-search-message-content")
+        .hidden,
+    ).toBe(true);
+
+    const retryFetch = mockStream([
+      sse("markdown_fragment", "the answer"),
+      "data: [DONE]\n",
+    ]);
+    query<HTMLButtonElement>(".conv-search-retry").click();
+    await flush();
+    await flush();
+
+    expect(document.querySelector(".conv-search-turn-error")).toBeNull();
+    const body = JSON.parse(retryFetch.mock.calls[0]?.[1].body as string);
+    expect(body.data.attributes.query).toBe("how?");
+    // The failed question was dropped, so the retry is a first message again.
+    expect(body.data.attributes.history).toBeUndefined();
+  });
+
+  it("keeps the server's non-retryable error out of the copy", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    mockStream([
+      `data: ${JSON.stringify({ type: "error", content: "Try again.", retryable: false })}\n`,
+      "data: [DONE]\n",
+    ]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    expect(query(".conv-search-turn-error p").textContent).toBe(
+      STRINGS.requestNotRetryable,
+    );
+    expect(document.querySelector(".conv-search-retry")).toBeNull();
   });
 
   it("ignores an empty input", async () => {
@@ -390,6 +497,142 @@ describe("sending a message", () => {
       { role: "user", content: "first question" },
       { role: "assistant", content: "first" },
     ]);
+  });
+});
+
+describe("research timeline", () => {
+  it("shows the research above the answer and settles when it finishes", async () => {
+    mockStream([
+      sse("thinking", "Searching documentation..."),
+      `data: ${JSON.stringify({ type: "thinking", content: "Reviewing relevant pages", retrieved_pages: [{ title: "Agent", distinct_base_url: "/agent/" }] })}\n`,
+      sse("markdown_fragment", "an answer"),
+      "data: [DONE]\n",
+    ]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    const turn = query(".conv-search-turn");
+    const activity = turn.querySelector<HTMLElement>(".conv-search-activity");
+    expect(activity?.dataset["phase"]).toBe("done");
+    expect(activity?.textContent).toContain("Found 1 relevant page");
+    // The timeline comes first, then the answer.
+    expect(turn.firstElementChild).toBe(activity);
+  });
+});
+
+describe("stopping an answer", () => {
+  it("turns send into stop while an answer streams", async () => {
+    mockOpenStream([sse("markdown_fragment", "partial")]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    const sending = panel.sendMessage();
+    await flush();
+
+    const send = query<HTMLButtonElement>(".conv-search-send");
+    expect(send.classList.contains("is-stop")).toBe(true);
+    expect(send.getAttribute("aria-label")).toBe(STRINGS.stopGenerating);
+
+    send.click();
+    await sending;
+
+    expect(send.classList.contains("is-stop")).toBe(false);
+    expect(send.getAttribute("aria-label")).toBe(STRINGS.send);
+  });
+
+  it("keeps the partial answer and sends it as history", async () => {
+    mockOpenStream([sse("markdown_fragment", "partial answer")]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "first";
+    const sending = panel.sendMessage();
+    await flush();
+    query<HTMLButtonElement>(".conv-search-send").click();
+    await sending;
+
+    const turn = query(".conv-search-turn");
+    expect(
+      turn.querySelector(".conv-search-message-content")?.textContent,
+    ).toContain("partial answer");
+    expect(turn.querySelector(".conv-search-stream-caret")).toBeNull();
+    expect(
+      turn.querySelector<HTMLElement>(".conv-search-activity")?.dataset[
+        "phase"
+      ],
+    ).toBe("stopped");
+
+    const next = mockStream([sse("markdown_fragment", "ok"), "data: [DONE]\n"]);
+    query<HTMLTextAreaElement>(".conv-search-input").value = "second";
+    await panel.sendMessage();
+
+    const body = JSON.parse(next.mock.calls[0]?.[1].body as string);
+    expect(body.data.attributes.history).toEqual([
+      { role: "user", content: "first" },
+      { role: "assistant", content: "partial answer" },
+    ]);
+  });
+
+  it("removes the empty answer when stopped before any text", async () => {
+    mockOpenStream([]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    const sending = panel.sendMessage();
+    await flush();
+    query<HTMLButtonElement>(".conv-search-send").click();
+    await sending;
+
+    const turn = query(".conv-search-turn");
+    expect(turn.querySelector(".conv-search-message-content")).toBeNull();
+    expect(turn.querySelector(".conv-search-message-actions")).toBeNull();
+  });
+});
+
+describe("feedback", () => {
+  it("sends a rating signed with the answer's feedback token", async () => {
+    mockStream([
+      sse("markdown_fragment", "an answer"),
+      `data: ${JSON.stringify({ type: "feedback_token", token: "answer.1.sig" })}\n`,
+      "data: [DONE]\n",
+    ]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    const feedbackFetch = vi.fn().mockResolvedValue({ ok: true, status: 202 });
+    vi.stubGlobal("fetch", feedbackFetch);
+    query<HTMLButtonElement>('[data-action="thumbs-up"]').click();
+    await flush();
+
+    const [url, init] = feedbackFetch.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(`${CREDENTIALS.apiUrl}/feedback`);
+    expect(JSON.parse(init.body as string).data.attributes).toMatchObject({
+      feedback_token: "answer.1.sig",
+      rating: "up",
+    });
+    expect(
+      query('[data-action="thumbs-up"]').classList.contains("active"),
+    ).toBe(true);
+  });
+
+  it("only logs a rating when the answer has no feedback token", async () => {
+    mockStream([sse("markdown_fragment", "an answer"), "data: [DONE]\n"]);
+    mount();
+
+    query<HTMLTextAreaElement>(".conv-search-input").value = "how?";
+    await panel.sendMessage();
+
+    const feedbackFetch = vi.fn();
+    vi.stubGlobal("fetch", feedbackFetch);
+    query<HTMLButtonElement>('[data-action="thumbs-up"]').click();
+
+    expect(feedbackFetch).not.toHaveBeenCalled();
+    expect(
+      query('[data-action="thumbs-up"]').classList.contains("active"),
+    ).toBe(true);
   });
 });
 

@@ -24,7 +24,7 @@ Utilisez Metric Sync lorsque vous souhaitez :
 - Appliquez les modifications de métriques depuis la CI une fois qu'elles ont été approuvées.
 - Marquez par défaut les métriques synchronisées comme certifiées pour la prise de décision liée aux expériences.
 
-Metric Sync prend en charge un workflow de planification et d'application. La commande `plan` valide votre YAML et prévisualise les modifications que Datadog effectuerait. La commande `execute` valide le YAML, soumet une opération d'écriture et attend la fin du processus. Les résultats incluent le nombre de modifications, les ID d'objets, les modifications de champs, les raisons de blocage, les avertissements et les détails d'erreur disponibles. Les plans montrent les modifications proposées ; une opération ayant échoué ne confirme pas que ces modifications ont été appliquées.
+Metric Sync prend en charge un workflow de planification et d'application. La commande `plan` valide votre YAML et prévisualise les modifications que Datadog effectuerait. La commande `execute` valide le YAML, soumet une opération d'écriture et attend la fin du processus. Les résultats incluent le nombre de modifications, les ID d'objets, les modifications de champs, les raisons de blocage, les avertissements et les détails d'erreur disponibles.
 
 ## Prérequis {#prerequisites}
 
@@ -33,8 +33,18 @@ Avant d'utiliser Metric Sync, vous avez besoin de :
 - Un compte Datadog avec Product Analytics et Experiments activés.
 - Un entrepôt de données connecté. Consultez [Connectez un entrepôt de données][1].
 - Un type de sujet existant, tel que `User`, à associer à une colonne de la requête source.
-- Les autorisations Product Analytics requises pour créer et mettre à jour les métriques d'expérience. Les métriques synchronisées sont certifiées par défaut. Les rôles personnalisés nécessitent donc également l'autorisation Product Analytics Certified Metrics Write. Voir [Autorisations Product Analytics][2].
+- Les autorisations d'écriture Product Analytics décrites dans [Autorisations pour les plans et l'exécution][7]. Voir [Autorisations Product Analytics][2].
 - Une clé d'API Datadog et une clé d'application pour l'authentification CI. Voir [Clés d'API et d'application][3].
+
+### Autorisations pour les plans et l'exécution {#permissions-for-plans-and-execution}
+
+Les commandes `plan`, `execute`, `status` et `result` nécessitent à la fois Product Analytics Warehouse Model Write (`product_analytics_warehouse_model_write`) et Product Analytics Metrics Write (`product_analytics_metrics_write`). Un plan côté serveur ne modifie pas les définitions, mais il nécessite les mêmes autorisations d'écriture que l'exécution. Il n'existe pas de périmètre de clé d'application réservé à la planification.
+
+Pour `plan` et `execute`, `options.is_certified: true` nécessite également Product Analytics Certified Metrics Write (`product_analytics_certified_metrics_write`). Cette option est définie par défaut sur `true`. La définir sur `false` supprime uniquement cette exigence de métriques certifiées.
+
+Pour vérifier le YAML sans identifiants, exécutez `metric-sync validate ./metrics`. La validation s'exécute localement et ne remplace pas un `plan` côté serveur.
+
+<div class="alert alert-warning">Ne donnez la clé d'application avec droits d'écriture qu'aux jobs CI de confiance, y compris les jobs qui exécutent <code>plan</code>.</div>
 
 ## Installez l'interface de ligne de commande {#install-the-cli}
 
@@ -176,7 +186,35 @@ Les commandes effectuent les opérations suivantes :
 - `result` : Récupère le plan final ou le résultat final de l'exécution.
 - `version` : Affiche les métadonnées de build.
 
-Utilisez `--timeout 20m` pour modifier le délai d'expiration par défaut de 10 minutes pour les commandes. Si une commande expire après sa soumission, vérifiez l'ID d'opération affiché avec `status` avant de soumettre à nouveau. Pour soumettre sans attendre, utilisez `--no-poll`, puis vérifiez `status` et `result`. Une commande `--no-poll` réussie confirme uniquement la soumission.
+Utilisez `--timeout 20m` pour modifier le délai d'expiration par défaut de 10 minutes pour les commandes. Pour soumettre sans attendre, utilisez `--no-poll`, puis vérifiez `status` et `result`. Une commande `--no-poll` réussie confirme uniquement la soumission.
+
+### Opérations interrompues ou ayant échoué {#interrupted-and-failed-operations}
+
+Une opération d'exécution applique simultanément toutes les modifications apportées à ses sources et à ses métriques. Si l'opération échoue à une étape quelconque, Datadog n'applique aucune de ses modifications.
+
+Une fois que Datadog a accepté la soumission, l'opération s'exécute indépendamment de la CLI. L'arrêt de la CLI, l'annulation d'un job CI ou l'atteinte du délai d'expiration de la commande n'annulent pas l'opération serveur, et une erreur d'interrogation ne signifie pas que l'opération a échoué. Utilisez l'ID d'opération (`metric_sync_id`) avec `status` et `result` pour confirmer le résultat. L'ID de l'opération diffère des valeurs `sync_id` stables dans YAML.
+
+### Réessayer une soumission {#retry-a-submission}
+
+Si une commande s'arrête avant que vous ne voyiez le résultat, suivez ces étapes avant de soumettre à nouveau :
+
+1. Exécutez `metric-sync status <METRIC_SYNC_ID>` avec l'ID d'opération affiché.
+2. Si l'opération est toujours en cours, attendez qu'elle se termine.
+3. Si l'opération a réussi, vous n'avez pas besoin de réessayer.
+4. Si l'opération a échoué, corrigez la cause et effectuez une nouvelle soumission avec une nouvelle clé d'idempotence.
+5. Si vous ne pouvez pas confirmer que Datadog a reçu la soumission, soumettez à nouveau les mêmes définitions et options avec la même `--idempotency-key` :
+
+   ```shell
+   metric-sync execute ./metrics --idempotency-key <EXECUTION_KEY>
+   ```
+
+Choisissez la clé avant de soumettre la requête et réutilisez-la lors de ses nouvelles tentatives d'envoi. Pour une clé et une requête correspondantes, Datadog renvoie l'opération existante au lieu d'en créer une nouvelle. La réutilisation d'une clé avec une requête différente renvoie un conflit, utilisez donc des clés distinctes pour `plan` et `execute`.
+
+Lorsque vous omettez `--idempotency-key`, la CLI génère une clé. La réexécution d'un job CI ou une nouvelle commande locale peut générer une clé différente, Datadog la traite donc comme une nouvelle soumission. Pour réessayer la même soumission, définissez la clé explicitement.
+
+Une nouvelle tentative CI qui soumet les mêmes fichiers et options peut également réutiliser la clé générée et renvoyer le résultat précédent.
+
+Si l'opération serveur a échoué, la réutilisation de sa clé renvoie la même opération ayant échoué. Corrigez la cause et utilisez une nouvelle clé pour la tentative suivante.
 
 ## Exemple GitHub Actions {#github-actions-example}
 
@@ -226,12 +264,14 @@ jobs:
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync execute ./metrics
+        run: metric-sync execute ./metrics --idempotency-key "example-checkout-execute-${GITHUB_RUN_ID}"
 ```
 
 Stockez vos clés d'API et d'application Datadog en tant que secrets GitHub Actions. Si votre organisation utilise un site Datadog autre que `datadoghq.com`, ajoutez `DD_SITE` à l'environnement du workflow.
 
 Utilisez un groupe de concurrence pour chaque tag de synchronisation afin d'éviter que les exécutions de ce workflow ne se chevauchent. Le job de plan ne s'exécute que pour les pull requests provenant du même dépôt. Les pull requests provenant de forks ne reçoivent pas ces secrets ; exécutez `validate` sans identifiants pour ces contributions, puis exécutez `plan` dans un workflow approuvé.
+
+La clé d'exécution inclut le tag de synchronisation, la commande et l'ID d'exécution GitHub. Elle reste la même lorsque vous réexécutez des jobs dans cette exécution de workflow. Gardez les définitions et les options inchangées pour de telles tentatives. Une nouvelle exécution de workflow utilise une clé différente. Si une opération précédente est toujours en cours, vérifiez son résultat avant d'en démarrer une autre.
 
 ## Référence de définition {#yaml-reference}
 
@@ -258,6 +298,10 @@ Pour gérer une source manuelle ou une métrique existante avec YAML :
 3. Définissez `options.upgrade_mode: by_id` dans chaque fichier soumis, puis exécutez `plan` et examinez les modifications avant `execute`.
 
 L'adoption applique la définition YAML et attribue la propriété de synchronisation à l'objet existant. Les synchronisations ultérieures l'identifient par le même `sync_tag` et `sync_id`. Incluez les paramètres et les mappages de source que vous souhaitez conserver ; les champs omis peuvent utiliser les valeurs par défaut ou supprimer les mappages.
+
+L'adoption conserve les UUID de source et de métrique existants, mais applique tous les paramètres du YAML, y compris `options.is_certified` (par défaut `true`), même lorsque le calcul de la métrique est inchangé. Définissez cette option explicitement. Une valeur s'applique à chaque source et métrique de la soumission, vous ne pouvez donc pas définir un état de certification différent pour chaque objet.
+
+L'adoption ne recalcule pas les résultats d'expérience existants. Examinez tous les paramètres de définition avant d'adopter des objets utilisés par des expériences en cours. Après l'exécution, vérifiez les ID d'objet, les paramètres et la certification dans Datadog. Après l'adoption, la modification de `options.is_certified` uniquement ne met pas à jour la certification ; voir [limitations de la CLI][6].
 
 ### Champs de niveau supérieur {#top-level-fields}
 
@@ -562,6 +606,8 @@ L'API de synchronisation ne prend pas en charge `warehouse_metric_measure_id`. R
 
 ## Limitations de la CLI {#cli-limitations}
 
+Metric Sync gère les sources de métriques d'entrepôt et les métriques. Il ne gère pas les sources d'affectation (exposition) d'entrepôt ; gérez-les dans Datadog.
+
 La modification de `options.is_certified` uniquement ne met pas à jour la certification sur une source ou une métrique existante par ailleurs inchangée. Vérifiez la certification dans Datadog après avoir géré les définitions existantes avec YAML ; une synchronisation réussie ne confirme pas à elle seule un changement de certification.
 
 La CLI n'exporte pas les définitions existantes et ne convertit pas automatiquement le YAML Eppo. Créez et examinez les définitions complètes avant de gérer les métriques existantes avec YAML.
@@ -572,12 +618,13 @@ Pour l'adoption, utilisez `existing_id` avec `options.upgrade_mode: by_id`. Le p
 
 | Erreur | Que vérifier |
 | ----- | ------------- |
-| L'API renvoie `403`. | Confirmez que la clé d'API/d'application dispose des autorisations Product Analytics requises pour écrire des métriques. Si `is_certified` est activé, confirmez que le rôle dispose également de l'autorisation Product Analytics Certified Metrics Write. |
+| L'API renvoie `403`, y compris pour `plan`, `status` ou `result`. | Vérifiez les [autorisations pour les plans et l'exécution][7]. Ces commandes nécessitent des autorisations d'écriture. `plan` et `execute` avec `is_certified: true` nécessitent également l'autorisation Product Analytics Certified Metrics Write. |
+| L'interrogation échoue, le délai d'attente de la CLI expire ou un job CI est annulé. | L'opération serveur peut continuer. Vérifiez `status` et `result` avec l'ID d'opération enregistré. Pour réessayer, soumettez à nouveau les mêmes fichiers et options avec la même `--idempotency-key`. Voir [Réessayer une soumission](#retry-a-submission). |
 | Une connexion à l'entrepôt de données est introuvable. | Confirmez que l'organisation Datadog cible dispose d'une connexion à l'entrepôt de données configurée. Si vous définissez `warehouse_connection_id`, confirmez que cette valeur appartient à l'organisation cible. |
 | Un type de sujet est introuvable. | Confirmez que la valeur `subject_types[].name` correspond à un type de sujet Datadog existant. |
 | Un résultat réussi n'indique aucun changement. | Le service n'a détecté aucun changement à appliquer. Si vous avez modifié uniquement `options.is_certified`, vérifiez la certification dans Datadog ; une synchronisation réussie ne confirme pas que ce paramètre a changé. Une opération ayant échoué n'établit pas que le YAML correspond à Datadog. |
 | Une synchronisation est bloquée. | Lisez les détails de l'objet et les raisons du blocage dans la sortie de la console. Pour enregistrer la réponse de l'API, exécutez `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync.log`. Les causes possibles incluent les références d'expérience, les métriques en dehors du tag de synchronisation qui font référence à une source, et les conflits d'adoption. Un résultat bloqué entraîne un code de sortie non nul. |
-| Une opération échoue. | Exécutez `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log` pour récupérer les erreurs disponibles et inspecter la réponse de l'API. Il n'est pas confirmé que les modifications affichées pour une opération ayant échoué ont été appliquées. Certaines défaillances du serveur ne renvoient aucun détail sur l'erreur ; conservez l'identifiant de l'opération pour le support. |
+| Une opération échoue. | Exécutez `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log` pour récupérer les erreurs disponibles et inspecter la réponse de l'API. Certaines défaillances du serveur ne renvoient aucun détail sur l'erreur ; conservez l'identifiant de l'opération pour le support. |
 | La validation locale réussit, mais `plan` rejette le YAML. | Les checks locaux ne vérifient pas les requêtes de l'entrepôt de données. Lisez les détails de l'erreur dans la sortie de la console. Pour enregistrer la réponse de l'API, exécutez `metric-sync plan ./metrics --log-file ./metric-sync.log`. Utilisez ces détails pour corriger la définition. |
 
 [1]: /fr/experiments/guide/connecting_a_data_warehouse/
@@ -585,3 +632,5 @@ Pour l'adoption, utilisez `existing_id` avec `options.upgrade_mode: by_id`. Le p
 [3]: /fr/account_management/api-app-keys/
 [4]: #measure-references
 [5]: #filters
+[6]: #cli-limitations
+[7]: #permissions-for-plans-and-execution

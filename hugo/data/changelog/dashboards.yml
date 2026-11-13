@@ -38,3 +38,19 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Add Journey Paths widget definition
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41342
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Heatgrid label formatting to dashboard OpenAPI spec
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41713
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Deprecate `service` in data-streams Topology Map widgets

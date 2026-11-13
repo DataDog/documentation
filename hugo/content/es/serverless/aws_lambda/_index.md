@@ -5,12 +5,12 @@ further_reading:
 - link: /serverless/configuration/
   tag: Documentación
   text: Configure Serverless Monitoring
-- link: /integrations/amazon_lambda/
+- link: /integrations/amazon-lambda/
   tag: Documentación
   text: Integración de AWS Lambda
 - link: /serverless/guide/disable_serverless
   tag: Documentación
-  text: Deshabilite Serverless Monitoring
+  text: Deshabilitar Serverless Monitoring
 - link: /opentelemetry/setup/otlp_ingest/serverless/?tab=aws#lambda
   tag: Documentación
   text: Envíe trazas de AWS Lambda a Datadog con OTLP
@@ -53,6 +53,20 @@ title: Serverless Monitoring para AWS Lambda
 Datadog Serverless Monitoring para AWS Lambda le brinda visibilidad de sus funciones Lambda
 
 Para comenzar, siga las [instrucciones de instalación][1] para recopilar métricas, trazas y registros de sus aplicaciones sin servidor.
+
+## Tipos de cómputo de Lambda {#lambda-compute-types}
+
+El soporte de Datadog difiere según el tipo de cómputo de AWS Lambda:
+
+| Tipo de Lambda | Lo que ejecuta | Soporte de Datadog |
+|---|---|---|
+| Lambda Event Functions | Código que se ejecuta en respuesta a eventos o llamadas a API. Este es el tipo de función Lambda original. | Serverless Monitoring: métricas, trazas y registros, además de las capacidades en esta página. Consulte la página de cada capacidad para conocer los entornos de ejecución compatibles. |
+| Lambda Web Functions | Aplicaciones web y backends de API que sirven solicitudes HTTP directamente. | Métricas de CloudWatch, un dashboard listo para usar y monitores recomendados a través de la [integración de AWS Lambda][2]. |
+| Lambda MicroVMs | Entornos de cómputo aislados para cada usuario o trabajo, con una vida útil de hasta 8 horas. | Registros de CloudWatch a través del [Datadog Forwarder][3], incluida la suscripción automática de registros. |
+
+[Lambda Managed Instances][4] y [Lambda Durable Functions][5] son formas de ejecutar Event Functions, y Datadog admite ambas. Para conocer los entornos de ejecución compatibles, consulte cada página.
+
+En la documentación de Serverless Monitoring, "función Lambda" significa una Lambda Event Function, a menos que una página indique lo contrario. Las API de AWS, los SDK, la CLI de AWS, el tipo de recurso `AWS::Lambda::Function` y los ARN usan "función" para las Event Functions. Su instrumentación y código de infraestructura existentes siguen funcionando sin cambios. Para obtener más información, consulte [¿Qué es AWS Lambda?][6] en la documentación de AWS.
 
 ## Cómo funciona {#how-it-works}
 
@@ -115,3 +129,8 @@ Correlacione fácilmente los cambios de código, configuración e implementació
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/serverless/installation
+[2]: /es/integrations/amazon-lambda/
+[3]: /es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
+[4]: /es/serverless/aws_lambda/managed_instances/
+[5]: /es/serverless/aws_lambda/durable_functions/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html

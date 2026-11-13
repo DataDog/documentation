@@ -1,5 +1,11 @@
 import { addMessageActions, injectCodeCopyButtons } from "./actions";
-import { streamDocsAiChat } from "./client";
+import { ActivityTimeline, type ActivitySummary } from "./activity";
+import {
+  DocsAiRequestError,
+  sendDocsAiFeedback,
+  streamDocsAiChat,
+  type ServerErrorEvent,
+} from "./client";
 import type { DocsAiCredentials } from "./config";
 import { logAction, logError } from "./logger";
 import {
@@ -10,9 +16,9 @@ import {
 } from "./markdown";
 import {
   buildEmptyState,
-  buildLoadingIndicator,
   buildMessage,
   buildSuggestionButton,
+  buildTurnError,
   buildWidgetElements,
 } from "./markup";
 import {
@@ -22,12 +28,13 @@ import {
   showSourceTooltip,
 } from "./sources";
 import stylesheet from "./styles.css";
-import { LOADING_MESSAGES, STRINGS, THINKING_MESSAGES } from "./strings";
+import { STRINGS } from "./strings";
 import { pickQuestions } from "./suggestedQuestions";
 import type {
   AskAiActionPayload,
   ChatMessage,
   Dimension,
+  FeedbackSender,
   LogContext,
   LogContextProvider,
   ResizableMode,
@@ -58,7 +65,9 @@ const FOCUS_DELAY_MS = 300;
 
 /** Minimum gap between re-renders of a partial answer. */
 const RENDER_THROTTLE_MS = 50;
-const LOADING_MESSAGE_ROTATION_MS = 3000;
+
+/** Client errors a retry can still fix: a timeout and rate limiting. */
+const RETRYABLE_CLIENT_STATUSES = [408, 429];
 
 /** How close to the bottom counts as "following along", in px. */
 const NEAR_BOTTOM_PX = 100;
@@ -227,10 +236,6 @@ function requireElement<T extends Element>(
   return found;
 }
 
-function mapThinkingMessage(serverMessage: string): string {
-  return THINKING_MESSAGES[serverMessage] ?? serverMessage;
-}
-
 // -- Stylesheet ----------------------------------------------------------------
 //
 // One `<style>` for the document however many panels exist, counted so the last
@@ -257,18 +262,39 @@ function releaseStyles(): void {
   document.querySelector(`style[${STYLE_MARKER}]`)?.remove();
 }
 
-// -- Loading indicator ---------------------------------------------------------
-
-interface LoadingIndicator {
-  /** Replaces the rotating copy with a server-sent status, and stops rotating. */
-  updateStatus(text: string): void;
-  stop(): void;
-}
+// -- Turns ---------------------------------------------------------------------
 
 /** A message row and the element its body goes in. */
 interface MessageParts {
   messageElement: HTMLDivElement;
   contentElement: HTMLDivElement;
+}
+
+/** An assistant turn: the research timeline, then the answer body. */
+interface AssistantTurn extends MessageParts {
+  activity: ActivityTimeline;
+}
+
+interface TurnFailure {
+  /** Shown instead of the default copy, when it is non-empty. */
+  message?: string | undefined;
+  retryable?: boolean;
+  discardPartial?: boolean;
+}
+
+/**
+ * Places the streaming caret at the end of the last block of a partially
+ * rendered answer.
+ */
+function appendStreamCaret(container: HTMLElement): void {
+  const blocks = container.querySelectorAll(
+    "p, li, h1, h2, h3, h4, h5, h6, td, pre code",
+  );
+  const target = blocks[blocks.length - 1] ?? container;
+  const caret = document.createElement("span");
+  caret.className = "conv-search-stream-caret";
+  caret.setAttribute("aria-hidden", "true");
+  target.appendChild(caret);
 }
 
 // -- The panel -----------------------------------------------------------------
@@ -299,7 +325,13 @@ export class AskAiPanel {
   private isOpen = false;
   private isLoading = false;
   private requestController: AbortController | null = null;
-  private userCancelledRequest = false;
+  /** Set by the stop button, so the abort keeps what has streamed so far. */
+  private userStoppedRequest = false;
+  /**
+   * Bumped by every turn and by "New Question", so a turn that finishes late
+   * can tell that a newer one owns the composer.
+   */
+  private turnSeq = 0;
   private hasLoggedFirstOpen = false;
   private isSuggestionQuery = false;
   private isTornDown = false;
@@ -428,9 +460,14 @@ export class AskAiPanel {
       { signal },
     );
     this.overlay.addEventListener("click", () => this.close(), { signal });
-    this.sendButton.addEventListener("click", () => void this.sendMessage(), {
-      signal,
-    });
+    this.sendButton.addEventListener(
+      "click",
+      () => {
+        if (this.isLoading) this.stopGeneration();
+        else void this.sendMessage();
+      },
+      { signal },
+    );
 
     this.input.addEventListener(
       "keydown",
@@ -973,8 +1010,8 @@ export class AskAiPanel {
     this.conversationId = null;
     this.chatHistory = [];
     this.isSuggestionQuery = false;
-    this.isLoading = false;
-    this.sendButton.disabled = false;
+    this.turnSeq += 1;
+    this.setBusy(false);
 
     this.messagesContainer.replaceChildren();
     this.injectEmptyState();
@@ -1023,9 +1060,6 @@ export class AskAiPanel {
   private cancelInFlightRequest(): void {
     if (!this.requestController) return;
 
-    // Flags the abort as deliberate, so the catch reports a cancellation
-    // rather than an error.
-    this.userCancelledRequest = true;
     this.requestController.abort();
     this.requestController = null;
   }
@@ -1049,39 +1083,27 @@ export class AskAiPanel {
     return parts;
   }
 
-  private showLoadingIndicator(): LoadingIndicator {
+  /**
+   * Appends an assistant turn: the live research timeline, then the answer
+   * body, which stays hidden until the first answer token arrives.
+   */
+  private addAssistantTurn(): AssistantTurn {
     this.messagesContainer.querySelector(".conv-search-empty-state")?.remove();
 
-    const { wrapper, statusElement } = buildLoadingIndicator(
-      LOADING_MESSAGES[0],
-    );
-    this.messagesContainer.appendChild(wrapper);
+    const { messageElement, contentElement } = buildMessage("assistant");
+    messageElement.classList.add("conv-search-turn");
+    contentElement.hidden = true;
+
+    const activity = new ActivityTimeline({
+      onToggle: (expanded) =>
+        this.logInteraction({ action: "activity_toggled", expanded }),
+    });
+    messageElement.prepend(activity.root);
+
+    this.messagesContainer.appendChild(messageElement);
     this.scrollToBottom(true);
 
-    let messageIndex = 0;
-    let rotation: ReturnType<typeof setInterval> | null = setInterval(() => {
-      // Holds on the last message rather than looping back to the first, so it
-      // does not read as if the work restarted.
-      if (messageIndex < LOADING_MESSAGES.length - 1) messageIndex += 1;
-      statusElement.textContent = LOADING_MESSAGES[messageIndex] ?? "";
-    }, LOADING_MESSAGE_ROTATION_MS);
-
-    const stopRotating = (): void => {
-      if (rotation === null) return;
-      clearInterval(rotation);
-      rotation = null;
-    };
-
-    return {
-      updateStatus: (text) => {
-        stopRotating();
-        statusElement.textContent = text;
-      },
-      stop: () => {
-        stopRotating();
-        wrapper.remove();
-      },
-    };
+    return { messageElement, contentElement, activity };
   }
 
   private isNearBottom(): boolean {
@@ -1104,80 +1126,99 @@ export class AskAiPanel {
     const query = this.input.value.trim();
     if (!query || this.isLoading) return;
 
-    this.isLoading = true;
-    this.userCancelledRequest = false;
     this.input.value = "";
     this.input.style.height = "auto";
-    this.sendButton.disabled = true;
-
     this.addMessage("user", query);
+    await this.runTurn(query);
+  }
+
+  private async runTurn(query: string): Promise<void> {
+    const turnId = ++this.turnSeq;
+    this.userStoppedRequest = false;
+    this.setBusy(true);
 
     try {
       await this.streamAnswer(query);
     } catch (error) {
-      const wasCancelled =
-        this.userCancelledRequest &&
-        error instanceof Error &&
-        error.name === "AbortError";
-
-      if (wasCancelled) {
-        this.addMessage("assistant", STRINGS.requestCancelled);
-      } else {
-        logError(
-          "Conversational Search Response Error",
-          error,
-          this.logContext,
-        );
-        this.addMessage("assistant", STRINGS.requestFailed);
-      }
+      logError("Conversational Search Response Error", error, this.logContext);
     } finally {
-      this.isLoading = false;
-      this.sendButton.disabled = false;
-      this.requestController = null;
-      this.userCancelledRequest = false;
-      this.isSuggestionQuery = false;
-      this.input.focus();
+      // A newer turn, or a reset, owns the composer from here on.
+      if (this.turnSeq === turnId) {
+        this.setBusy(false);
+        this.requestController = null;
+        this.userStoppedRequest = false;
+        this.isSuggestionQuery = false;
+        this.input.focus();
+      }
     }
+  }
+
+  /** While a turn runs, the send button becomes a stop button. */
+  private setBusy(busy: boolean): void {
+    this.isLoading = busy;
+    this.sendButton.disabled = false;
+    this.sendButton.classList.toggle("is-stop", busy);
+    const label = busy ? STRINGS.stopGenerating : STRINGS.send;
+    this.sendButton.setAttribute("aria-label", label);
+    this.sendButton.title = busy ? label : "";
+  }
+
+  private stopGeneration(): void {
+    if (!this.isLoading || !this.requestController) return;
+    this.userStoppedRequest = true;
+    this.requestController.abort();
   }
 
   private async streamAnswer(query: string): Promise<void> {
     this.requestController = new AbortController();
     const startTime = Date.now();
-    const loadingIndicator = this.showLoadingIndicator();
 
     const isFirstMessage = this.chatHistory.length === 0;
     const isSuggestion = this.isSuggestionQuery;
     this.conversationId ??= generateConversationId();
+    const history = isFirstMessage ? [] : [...this.chatHistory];
     this.chatHistory.push({ role: "user", content: query });
 
-    let response: MessageParts | null = null;
-    let lastRenderTime = 0;
+    const turn = this.addAssistantTurn();
+    const { contentElement, activity } = turn;
 
-    /** Swaps the spinner for a message row, the first time content arrives. */
-    const ensureResponse = (): MessageParts => {
-      if (!response) {
-        loadingIndicator.stop();
-        response = this.addMessage("assistant");
-      }
-      return response;
-    };
+    let partial = "";
+    let serverError: ServerErrorEvent | null = null;
+    let feedbackToken: string | null = null;
+    let lastRenderTime = 0;
 
     let answer: string;
     try {
       answer = await streamDocsAiChat({
         credentials: this.credentials,
         query,
-        history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+        history,
         conversationId: this.conversationId,
         anchorUrl: window.location.href,
         rewriteQuery:
           isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
         signal: this.requestController.signal,
-        onThinking: (message) => {
-          loadingIndicator.updateStatus(mapThinkingMessage(message));
+        onThinking: (content, event) => {
+          activity.dispatch({
+            type: "thinking",
+            content,
+            retrieved_pages: event.retrieved_pages,
+            page: event.page,
+          });
+          this.scrollToBottom();
+        },
+        onServerError: (event) => {
+          serverError = event;
+        },
+        onFeedbackToken: (token) => {
+          feedbackToken = token;
         },
         onToken: (_token, fullMessage) => {
-          const { contentElement } = ensureResponse();
+          partial = fullMessage;
+          if (contentElement.hidden) {
+            activity.dispatch({ type: "answer" });
+            contentElement.hidden = false;
+          }
 
           const now = Date.now();
           if (now - lastRenderTime <= RENDER_THROTTLE_MS) return;
@@ -1189,21 +1230,153 @@ export class AskAiPanel {
           logError("Docs AI Streaming Error", error, this.logContext);
         },
       });
-    } finally {
-      loadingIndicator.stop();
-    }
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        if (this.userStoppedRequest) {
+          this.handleStoppedTurn(turn, query, partial, startTime);
+        } else {
+          activity.dispatch({ type: "stopped" });
+        }
+        return;
+      }
 
-    // A stream that ended without a single token still needs somewhere to say
-    // so.
-    const finalResponse = ensureResponse();
-
-    if (!answer) {
-      finalResponse.contentElement.textContent = STRINGS.emptyResponse;
+      logError("Conversational Search Response Error", error, this.logContext);
+      // A rejected request, such as a question that is too long, fails the
+      // same way on retry.
+      const rejected =
+        error instanceof DocsAiRequestError &&
+        error.status >= 400 &&
+        error.status < 500 &&
+        !RETRYABLE_CLIENT_STATUSES.includes(error.status);
+      this.failTurn(
+        turn,
+        query,
+        rejected ? { message: STRINGS.requestRejected, retryable: false } : {},
+      );
       return;
     }
 
+    // Assigned in a callback, which control-flow narrowing does not follow.
+    const failure = serverError as ServerErrorEvent | null;
+    if (failure) {
+      logError(
+        "Docs AI Server Error",
+        new Error(failure.code || "server_error"),
+        this.logContext,
+      );
+      const retryable = failure.retryable !== false;
+      this.failTurn(turn, query, {
+        // The server's copy invites a retry, so it is shown only when a retry
+        // can help.
+        message: retryable ? failure.content : undefined,
+        retryable,
+        discardPartial: failure.discard_partial !== false,
+      });
+      return;
+    }
+
+    if (!answer.trim()) {
+      this.failTurn(turn, query, {
+        message: STRINGS.emptyResponse,
+        retryable: true,
+      });
+      return;
+    }
+
+    activity.dispatch({ type: "done" });
+    contentElement.hidden = false;
     this.chatHistory.push({ role: "assistant", content: answer });
-    this.finalizeResponse(finalResponse, answer, startTime);
+    this.finalizeResponse(turn, answer, startTime, activity.summary(), {
+      feedbackToken,
+    });
+  }
+
+  /** Keeps what streamed before the reader pressed stop, if anything did. */
+  private handleStoppedTurn(
+    turn: AssistantTurn,
+    query: string,
+    partial: string,
+    startTime: number,
+  ): void {
+    const { contentElement, activity } = turn;
+    activity.dispatch({ type: "stopped" });
+    contentElement.querySelector(".conv-search-stream-caret")?.remove();
+    this.logInteraction({
+      action: "response_stopped",
+      partial_length: partial.length,
+      ...activity.summary(),
+    });
+
+    if (partial.trim()) {
+      this.chatHistory.push({ role: "assistant", content: partial });
+      this.finalizeResponse(turn, partial, startTime, activity.summary(), {
+        log: false,
+      });
+    } else {
+      contentElement.remove();
+      this.dropUnansweredQuery(query);
+    }
+  }
+
+  private failTurn(
+    turn: AssistantTurn,
+    query: string,
+    { message, retryable = true, discardPartial = true }: TurnFailure = {},
+  ): void {
+    const { messageElement, contentElement, activity } = turn;
+    activity.dispatch({ type: "error" });
+    contentElement.querySelector(".conv-search-stream-caret")?.remove();
+    if (discardPartial) {
+      contentElement.hidden = true;
+      contentElement.replaceChildren();
+    }
+    this.dropUnansweredQuery(query);
+
+    const fallback = retryable
+      ? STRINGS.requestFailed
+      : STRINGS.requestNotRetryable;
+    const { box, retry } = buildTurnError(
+      message?.trim() ? message : fallback,
+      retryable,
+    );
+
+    retry?.addEventListener(
+      "click",
+      () => {
+        if (this.isLoading) return;
+        this.logInteraction({ action: "retry_clicked" });
+        messageElement.remove();
+        void this.runTurn(query);
+      },
+      { signal: this.listeners.signal },
+    );
+
+    messageElement.appendChild(box);
+    this.scrollToBottom();
+  }
+
+  /**
+   * An unanswered question is not sent back as history, so a retry or a
+   * follow-up starts clean.
+   */
+  private dropUnansweredQuery(query: string): void {
+    const last = this.chatHistory[this.chatHistory.length - 1];
+    if (last?.role === "user" && last.content === query) this.chatHistory.pop();
+  }
+
+  /** Signs feedback with the answer's token. Failures are logged and rethrown. */
+  private feedbackSender(token: string): FeedbackSender {
+    const conversationId = this.conversationId;
+    return (feedback) =>
+      sendDocsAiFeedback({
+        credentials: this.credentials,
+        token,
+        conversationId,
+        ...feedback,
+      }).catch((error: unknown) => {
+        logError("Docs AI Feedback Error", error, this.logContext);
+        throw error;
+      });
   }
 
   /**
@@ -1216,6 +1389,7 @@ export class AskAiPanel {
   ): void {
     const { displayMarkdown, sources } = extractSources(fullMessage);
     contentElement.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+    appendStreamCaret(contentElement);
 
     if (sources.length > 0) {
       contentElement.appendChild(buildSourceCards(sources));
@@ -1227,18 +1401,30 @@ export class AskAiPanel {
     { messageElement, contentElement }: MessageParts,
     answer: string,
     startTime: number,
+    activitySummary: ActivitySummary,
+    {
+      log = true,
+      feedbackToken = null,
+    }: { log?: boolean; feedbackToken?: string | null } = {},
   ): void {
     contentElement.innerHTML = renderMessageWithSources(answer);
     injectCodeCopyButtons(contentElement, this.provideLogContext);
-    addMessageActions(messageElement, answer, this.provideLogContext);
+    addMessageActions(
+      messageElement,
+      answer,
+      this.provideLogContext,
+      feedbackToken ? this.feedbackSender(feedbackToken) : undefined,
+    );
     this.scrollToBottom();
 
+    if (!log) return;
     logAction(
       "Conversational Search Response",
       {
         action: "response_received",
         response_length: answer.length,
         latency_ms: Date.now() - startTime,
+        ...activitySummary,
       },
       this.logContext,
     );

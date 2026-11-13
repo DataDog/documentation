@@ -51,7 +51,7 @@ pnpm add @datadog/openfeature-browser @openfeature/angular-sdk @openfeature/web-
 
 Datadog 자격 증명이 포함된 `DatadogProvider` 인스턴스를 생성합니다. 실시간 브라우저 Feature Flags 구성을 위해서는 `applicationId`, `clientToken`, `site` 및 `env`가 필요합니다. 클라이언트 토큰을 생성하려면 [클라이언트 토큰][2]을 참조하세요.
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">브라우저 Feature Flags는 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">브라우저 Feature Flags는 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에 대해 지원되지 않습니다.</div>{{< /site-region >}}
 
 ```typescript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -78,7 +78,7 @@ Angular 모듈에서 `OpenFeatureModule`을 가져오고, `forRoot` 메서드를
 
 <div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같은 단일한 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
-<div class="alert alert-info">해당 <code>targetingKey</code> 항목은 백분율 기반 타겟팅의 무작위화 대상으로 사용됩니다. 플래그가 대상의 백분율(예: 50%)을 타겟팅할 때, <code>targetingKey</code> 는 사용자가 어떤 '버킷'에 속하는지 결정합니다. 사용자의 <code>targetingKey</code> 항목이 동일한 경우 주어진 플래그에 대해 항상 동일한 변형을 받습니다.</div>
+<div class="alert alert-info"> <code>targetingKey</code> 는 백분율 기반 타겟팅의 무작위화 대상으로 사용됩니다. 플래그가 대상의 백분율(예: 50%)을 타겟팅할 때, <code>targetingKey</code> 는 사용자가 어떤 '버킷'에 속하는지 결정합니다. 동일한 <code>targetingKey</code> 가 지정된 사용자는 주어진 플래그에 대해 항상 동일한 변형을 받습니다.</div>
 
 ### 정적 객체 사용 {#using-a-static-object}
 
@@ -233,7 +233,7 @@ export class MyComponent {
 {{% /tab %}}
 {{< /tabs >}}
 
-### String 플래그 {#string-flags}
+### 문자열 플래그 {#string-flags}
 
 문자열 플래그를 사용하여 여러 변형 또는 구성 문자열 중에서 선택합니다.
 
@@ -502,7 +502,7 @@ Angular 공급자는 다음과 같은 선택적 설정을 지원하는 Datadog �
 
 | 옵션 | 기본값 | 사용 |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | 노출 이벤트를 노출 수집기로 전송합니다. |
+| `trackExposures` | `true` | 노출 이벤트를 노출 수집기로 전송합니다. 버전 2.3.0 이상에서 사용할 수 있습니다. 지원이 중단된 `enableExposureLogging` 옵션을 대체합니다. 자체 데이터 저장소에 노출을 기록하려면 [자체 데이터 저장소에 Feature Flag 노출 기록][5]을 참조하세요. |
 | `enableFlagEvaluationTracking` | `true` | 집계된 평가 텔레메트리를 전송합니다. |
 | `enableRumFeatureFlagTracking` | `true` | 브라우저 RUM을 사용할 수 있는 경우 RUM 이벤트에 플래그 평가를 추가합니다. 이 옵션을 활성화하면 RUM 청구 이벤트 수가 증가할 수 있습니다. |
 | `flagEvaluationTrackingInterval` | `10000`ms | 평가 텔레메트리를 위한 플러시 간격입니다. |
@@ -564,3 +564,4 @@ Web SDK 플래그 형태에는 `variants`, `defaultVariant` 및 `disabled`가 �
 [2]: /ko/account_management/api-app-keys/#client-tokens
 [3]: /ko/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /ko/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /ko/feature_flags/guide/record_exposures_in_your_own_data_store/

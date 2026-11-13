@@ -57,6 +57,10 @@ Les colonnes du widget de tableau sont interrogées indépendamment les unes des
   * Augmentez la limite des requêtes à des nombres plus élevés, afin de maximiser le chevauchement entre les colonnes
   * Triez les tableaux selon la colonne que vous pourriez considérer comme « moteur » de l'analyse
 
+## Exporter au format CSV {#export-to-csv}
+
+Vous pouvez télécharger les données d'un widget de tableau sous forme de fichier CSV. L'exportation CSV fonctionne sur un widget à la fois, et Datadog Support peut la désactiver pour votre organisation. Pour plus de détails, consultez [Exporter les données d'un widget au format CSV][12].
+
 ## API {#api}
 
 Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation de l'API Dashboards][8] pour plus d'informations.
@@ -80,3 +84,4 @@ Le [schéma JSON][9] utilisé pour le widget Tableau est le suivant :
 [9]: /fr/dashboards/graphing_json/widget_json/
 [10]: /fr/dashboards/guide/context-links/
 [11]: /fr/dashboards/querying/#advanced-graphing
+[12]: /fr/dashboards/widgets/configuration/#export-widget-data-to-csv

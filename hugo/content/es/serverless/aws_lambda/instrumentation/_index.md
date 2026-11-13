@@ -44,16 +44,16 @@ El proceso de inicio rápido configura sus funciones Lambda sobre la marcha. Par
 
 Utilice la incorporación mediante agentes para configurar el monitoreo de sus funciones Lambda con asistencia de IA. La incorporación mediante agentes detecta los marcos de trabajo de su proyecto, aplica la configuración necesaria en el lugar y verifica que los datos fluyan. Dos rutas complementarias utilizan la misma cuenta de Datadog:
 
-- **CLI de configuración de IA**: Una herramienta de terminal independiente. Úsela cuando no desee instalar MCP Server.
+- **Pup CLI**: Ejecute `pup setup` desde su terminal. No necesita su propio asistente de codificación o modelo de IA, por lo que la configuración no utiliza los tokens de su modelo.
 - **MCP Server**: Configúrelo desde su IDE a través de un asistente de codificación como Claude Code o Cursor.
 
 {{< tabs >}}
-{{% tab "CLI de configuración de IA" %}}
+{{% tab "CLI de Pup" %}}
 
-Ejecute la CLI en el directorio de su proyecto (requiere Node.js 22+). Vincula su cuenta de Datadog y luego instrumenta su función Lambda:
+Ejecute `pup setup` en el directorio de su proyecto (requiere Node.js 22+). Vincula su cuenta de Datadog y luego instrumenta su función Lambda:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda
 ```
 
 Omita `--product` para ejecutar de forma interactiva, o agregue `--site` para dirigirse a su sitio de Datadog.

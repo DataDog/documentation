@@ -1,0 +1,26 @@
+{{- $integration_id := .Page.Params.app_id -}}
+{{- $integration_title := .Page.Title -}}
+{{- $intake := .Get "intake" | default "logs" -}}
+{{- $source := .Get "source" -}}
+
+{{- with .Get "id" }}{{ $integration_id = . }}{{ end -}}
+{{- with .Get "title" }}{{ $integration_title = . }}{{ end -}}
+
+{{- if not (in (slice "logs" "events") $intake) -}}
+  {{ errorf "integration-intake-url shortcode error: 'intake' must be 'logs' or 'events', got %q. %s" $intake .Position }}
+{{- end -}}
+
+{{- if eq $intake "logs" -}}
+<span class="copyable-inline-code shortcode-integration-intake-url">
+  <code>{{ partial "region-param.html" (dict "key" "http_endpoint_full") }}/api/v2/logs{{ with $source }}?ddsource={{ . | urlquery }}{{ end }}</code>
+  <button class="js-copy-inline-button" aria-label="Copy intake URL">
+    {{ partial "icon" (dict "name" "copy-wui" "color" "#632ca6" "size" "14px") }}
+    {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+  </button>
+</span>
+{{- else -}}
+  {{- if not $integration_id -}}
+    {{ errorf "integration-intake-url shortcode error: No integration ID found. Set 'app_id' in page frontmatter or pass 'id' param. %s" .Position }}
+  {{- end -}}
+<p class="shortcode-wrapper shortcode-integration-intake-url">Copy the intake URL from the <strong>Configure</strong> tab on the <a href="{{ printf "https://app.datadoghq.com/integrations/%s" $integration_id }}">{{ $integration_title }} integration tile</a>.</p>
+{{- end -}}

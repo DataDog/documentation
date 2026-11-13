@@ -24,7 +24,7 @@ further_reading:
 A pipeline consists of components that collect, process, and route your observability data. You can track the status of your pipelines and components in the following ways:
 
 - View health graphs of your [pipelines](#view-the-status-of-your-pipelines), [Workers](#view-the-status-of-your-workers), and [components](#view-the-status-of-your-pipeline-components) (sources, processors, and destinations).
-- Enable [out-of-the-box monitors](#out-of-the-box-monitors) that alert you if:
+- Enable [out-of-the-box monitors](#enable-out-of-the-box-monitors) that alert you if:
     - An Observability Pipelines Worker has high CPU or memory usage, or is dropping data.
     - A component is emitting errors.
     - A defined quota has been reached.
@@ -67,9 +67,9 @@ To view metrics for a source, processor, or destination:
 
 {{< img src="observability_pipelines/monitoring_and_troubleshooting/pipeline_health_graphs.png" alt="Health graphs showing events in and out, bytes in and out, errors, data dropped, utilization, and buffer events for a pipeline." style="width:35%;" >}}
 
-## Out-of-the-box monitors
+## Enable out-of-the-box monitors
 
-To see available out-of-the-box monitors:
+To view and enable out-of-the-box monitors:
 
 1. Navigate to [Observability Pipelines][1].
 1. Click {{< ui >}}Enable monitors{{< /ui >}} in the {{< ui >}}Monitors{{< /ui >}} column for your pipeline.

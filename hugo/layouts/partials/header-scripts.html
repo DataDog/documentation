@@ -85,7 +85,7 @@ hugo defaults to environment development with hugo server
 {{ end }}
 <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
 
-{{ $opts := dict "targetPath" "static/region-redirects.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $opts := dict "targetPath" "static/region-redirects.js" "params" (dict "regions" site.Data.regions.regions) "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/region-redirects.js" | js.Build $opts }}
 {{ if $isProd }}
   {{ $js = $js | fingerprint "sha512" }}
