@@ -284,6 +284,8 @@ The following GitHub Copilot tags aren't shown on the AI cost summary page, but 
 | `copilot_user_name` | The GitHub display name of the user who generated the cost. Available only if the user has set a display name. |
 | `model` | The Copilot model as GitHub reports it, including the model selection mode (for example, `Auto: Claude Opus 4.6`). |
 
+`user_email` copies `copilot_user_email` into the same user tag that other AI providers use, and is set only when `copilot_user_email` is an email address rather than a SAML single sign-on identity in another format. `copilot_user_name` is the user's display name (for example, `Jane Doe`), while `copilot_user` is their GitHub username (for example, `jdoe`).
+
 [101]: /cloud_cost_management/setup/saas_costs/?tab=github#setup
 
 {{% /tab %}}

@@ -712,6 +712,9 @@ Available tags depend on the source record. Credit-priced usage contributes an e
 | `product` | The product of usage, for example "actions" or "storage". |
 | `organization_name` | The GitHub organization. |
 | `repository_name` | The GitHub repository. |
+| `model_name` | The model that generated a GitHub Copilot cost. |
+| `user_email` | The email address of the user who generated a GitHub Copilot cost. Available only for GitHub enterprise accounts. |
+| `copilot_user` | The GitHub username of the user who generated a GitHub Copilot cost. Available only for GitHub enterprise accounts. |
 | `billing_currency` | The billing currency, for example "USD". |
 | `discount` | If the cost item is a discount. |
 
