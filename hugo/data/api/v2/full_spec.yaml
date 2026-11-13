@@ -2851,6 +2851,15 @@ components:
         example: "550e8400-e29b-41d4-a716-446655440000"
         format: uuid
         type: string
+    suggestion_id:
+      description: The ID of the feature flag change suggestion.
+      in: path
+      name: suggestion_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440020"
+        format: uuid
+        type: string
     variant_id:
       description: The ID of the variant.
       in: path
@@ -2880,6 +2889,14 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Conflict
+    FeatureFlagSuggestionCreated:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+      description: Created - Approval is required. A suggestion was created and the change has not been applied.
+    FeatureFlagSuggestionCreatedWithoutSchema:
+      description: Created - Approval is required. A suggestion was created and the change has not been applied.
     FindingsBadRequestResponse:
       content:
         application/json:
@@ -16053,6 +16070,37 @@ components:
           items:
             $ref: "#/components/schemas/ApplicationSecurityWafExclusionFilterResource"
           type: array
+      type: object
+    ApproveFlagSuggestionAttributes:
+      description: Approval options for the suggestion.
+      properties:
+        apply:
+          default: true
+          description: |-
+            Whether to apply the change immediately. Set to `false` to approve without applying, then
+            call `ApplyFlagSuggestion` later.
+          example: false
+          type: boolean
+        comment:
+          description: A comment explaining the approval.
+          example: Approved for rollout.
+          type: string
+      type: object
+    ApproveFlagSuggestionData:
+      description: The approval event to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ApproveFlagSuggestionAttributes"
+        type:
+          $ref: "#/components/schemas/ReviewFlagSuggestionDataType"
+      required: [type, attributes]
+      type: object
+    ApproveFlagSuggestionRequest:
+      description: Request to approve a feature flag change suggestion.
+      properties:
+        data:
+          $ref: "#/components/schemas/ApproveFlagSuggestionData"
+      required: [data]
       type: object
     AppsSortField:
       description: "The field and direction to sort apps by"
@@ -32042,6 +32090,62 @@ components:
       x-enum-varnames:
         - ACTIVE
         - PERMANENT
+    CreateFlagSuggestionAttributes:
+      description: Attributes for creating a feature flag change suggestion.
+      properties:
+        action:
+          description: The action proposed by the suggestion.
+          example: updated
+          type: string
+        comment:
+          description: A comment explaining the proposed change.
+          example: Restrict this flag to server applications.
+          type: string
+        environment_id:
+          description: |-
+            The ID of the target environment. Required for `ALLOCATIONS`, `DEFAULT_VARIANT`, and
+            `OVERRIDE_VARIANT` changes.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        notification_rule_targets:
+          description: |-
+            Handles to notify about the review, without the `@` prefix. For example, an email address
+            or a Slack channel name.
+          example: [requester@example.com]
+          items:
+            description: A notification handle.
+            type: string
+          minItems: 1
+          type: array
+        property:
+          description: The property to change. The property must require approval for this flag and environment.
+          example: DISTRIBUTION_CHANNEL
+          type: string
+        suggestion:
+          description: The proposed value as a string. For structured values, supply a JSON-encoded string.
+          example: SERVER
+          type: string
+        suggestion_metadata:
+          $ref: "#/components/schemas/FeatureFlagSuggestionMetadataRequest"
+      required: [action, property, notification_rule_targets]
+      type: object
+    CreateFlagSuggestionData:
+      description: The suggestion to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateFlagSuggestionAttributes"
+        type:
+          $ref: "#/components/schemas/FeatureFlagSuggestionDataType"
+      required: [type, attributes]
+      type: object
+    CreateFlagSuggestionRequest:
+      description: Request to create a feature flag change suggestion.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateFlagSuggestionData"
+      required: [data]
+      type: object
     CreateFormData:
       description: The data for creating a form.
       properties:
@@ -57774,6 +57878,63 @@ components:
         - type
         - attributes
       type: object
+    FeatureFlagApprovalRequired:
+      description: A proposed change requiring explicit submission through `CreateFlagSuggestion`.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagApprovalRequiredAttributes"
+        id:
+          description: The ID of the feature flag. This is not a suggestion ID.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/FeatureFlagApprovalRequiredDataType"
+      required: [id, type, attributes]
+      type: object
+    FeatureFlagApprovalRequiredAttributes:
+      description: The change to submit for approval.
+      properties:
+        action:
+          description: The proposed action.
+          example: updated
+          type: string
+        environment_id:
+          description: The ID of the environment targeted by the change.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        property:
+          description: The feature flag property to change.
+          example: ALLOCATIONS
+          type: string
+        suggestion:
+          description: The proposed value, serialized as a string. Allocation sets are JSON-encoded strings.
+          example: "[]"
+          type: string
+        suggestion_metadata:
+          $ref: "#/components/schemas/FeatureFlagSuggestionMetadata"
+      required: [property, action, suggestion]
+      type: object
+    FeatureFlagApprovalRequiredDataType:
+      description: The resource type for an approval-required response.
+      enum: [approval-required]
+      example: approval-required
+      type: string
+      x-enum-varnames: [APPROVAL_REQUIRED]
+    FeatureFlagApprovalRequiredResponse:
+      description: Approval-required response containing a proposed change. No suggestion has been persisted.
+      properties:
+        data:
+          $ref: "#/components/schemas/FeatureFlagApprovalRequired"
+      required: [data]
+      type: object
+    FeatureFlagApprovalsDataType:
+      description: The resource type for feature flag approval settings.
+      enum: [feature-flag-approvals]
+      example: feature-flag-approvals
+      type: string
+      x-enum-varnames: [FEATURE_FLAG_APPROVALS]
     FeatureFlagAttributes:
       description: Attributes of a feature flag.
       properties:
@@ -57835,7 +57996,11 @@ components:
         staleness_details:
           $ref: "#/components/schemas/FeatureFlagStalenessDetails"
         staleness_status:
-          description: Indicates the whether a feature flag is stale or not.
+          deprecated: true
+          description: |-
+            Legacy status retained for compatibility. This field is always `ACTIVE`; use
+            `staleness_details.staleness_status` for the computed status. Do not copy it into an update
+            request: sending `ACTIVE` makes a `PERMANENT` flag temporary and clears any snooze.
           example: "ACTIVE"
           type: string
         staleness_status_override:
@@ -58395,7 +58560,10 @@ components:
           $ref: "#/components/schemas/FeatureFlagStalenessDetails"
         staleness_status:
           deprecated: true
-          description: Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
+          description: |-
+            Legacy status retained for compatibility. This field is always `ACTIVE`; use
+            `staleness_details.staleness_status` for the computed status. Do not copy it into an update
+            request: sending `ACTIVE` makes a `PERMANENT` flag temporary and clears any snooze.
           example: "ACTIVE"
           type: string
         staleness_status_override:
@@ -58551,6 +58719,189 @@ components:
       x-enum-varnames:
         - ENABLED
         - DISABLED
+    FeatureFlagSuggestion:
+      description: A proposed feature flag change and its approval lifecycle.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagSuggestionAttributes"
+        id:
+          description: The unique identifier of the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/FeatureFlagSuggestionDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FeatureFlagSuggestionAttributes:
+      description: Attributes of a feature flag change suggestion.
+      properties:
+        action:
+          description: The action proposed by the suggestion.
+          example: updated
+          type: string
+        base_flag_history_id:
+          description: The ID of the flag history entry on which the suggestion is based.
+          example: "550e8400-e29b-41d4-a716-446655440021"
+          format: uuid
+          type: string
+        comment:
+          description: The comment supplied by the suggestion's creator.
+          example: Restrict this flag to server applications.
+          type: string
+        created_at:
+          description: The timestamp when the suggestion was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        current_status:
+          $ref: "#/components/schemas/FeatureFlagSuggestionAttributesCurrentStatus"
+        current_value:
+          description: The value before the proposed change, serialized as a string.
+          example: ALL
+          type: string
+        deleted_at:
+          description: The timestamp when the suggestion was deleted.
+          example: "2024-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        deleted_by:
+          description: The ID of the user who deleted the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440011"
+          format: uuid
+          type: string
+        environment_id:
+          description: The ID of the environment targeted by the change, if the change is environment-specific.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        feature_flag_id:
+          description: The ID of the feature flag that the suggestion changes.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        lifecycle_status:
+          $ref: "#/components/schemas/FeatureFlagSuggestionAttributesLifecycleStatus"
+        message:
+          description: A message explaining why a suggestion was created.
+          example: This flag requires approval for this change. A suggestion has been created and is pending review.
+          type: string
+        property:
+          description: The feature flag property to update.
+          example: DISTRIBUTION_CHANNEL
+          type: string
+        suggestion:
+          description: |-
+            The proposed value, serialized as a string. Structured values, such as variants and allocations,
+            are JSON-encoded strings.
+          example: SERVER
+          type: string
+        suggestion_metadata:
+          $ref: "#/components/schemas/FeatureFlagSuggestionMetadata"
+        updated_at:
+          description: The timestamp when the suggestion was last updated.
+          example: "2024-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The ID of the user who last updated the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440011"
+          format: uuid
+          type: string
+      required:
+        - created_at
+        - created_by
+        - feature_flag_id
+        - base_flag_history_id
+        - current_status
+        - lifecycle_status
+        - action
+        - property
+        - suggestion
+        - current_value
+      type: object
+    FeatureFlagSuggestionAttributesCurrentStatus:
+      description: The legacy review status. Use `lifecycle_status` to distinguish approval from application.
+      enum: [pending, approved, rejected]
+      example: pending
+      type: string
+      x-enum-varnames: [PENDING, APPROVED, REJECTED]
+    FeatureFlagSuggestionAttributesLifecycleStatus:
+      description: The lifecycle status of the suggestion.
+      enum: [pending, approved, applied, rejected, discarded]
+      example: pending
+      type: string
+      x-enum-varnames: [PENDING, APPROVED, APPLIED, REJECTED, DISCARDED]
+    FeatureFlagSuggestionDataType:
+      description: The resource type for feature flag suggestions.
+      enum:
+        - flag-suggestions
+      example: flag-suggestions
+      type: string
+      x-enum-varnames:
+        - FLAG_SUGGESTIONS
+    FeatureFlagSuggestionExperimentAction:
+      description: Server-generated reference to an experiment action requiring approval.
+      properties:
+        action:
+          description: The proposed experiment action.
+          example: start
+          type: string
+        experiment_id:
+          description: The ID of the experiment.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          format: uuid
+          type: string
+        version:
+          description: The version of the experiment action reference.
+          example: 1
+          format: int64
+          type: integer
+      required: [experiment_id, action, version]
+      type: object
+    FeatureFlagSuggestionMetadata:
+      description: Metadata associated with a suggestion. Fields other than `variant_id` are set by the server.
+      properties:
+        allow_draft_reorder:
+          description: Whether the server allows this allocation suggestion to reorder persisted drafts.
+          example: false
+          type: boolean
+        experiment_action:
+          $ref: "#/components/schemas/FeatureFlagSuggestionExperimentAction"
+        experiment_action_request_fingerprint:
+          description: Server-generated fingerprint of the experiment action request.
+          type: string
+        variant_id:
+          description: The ID of the variant targeted by the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+      type: object
+    FeatureFlagSuggestionMetadataRequest:
+      description: Client-settable metadata for a suggestion.
+      properties:
+        variant_id:
+          description: The ID of the variant targeted by the suggestion.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+      type: object
+    FeatureFlagSuggestionResponse:
+      description: Response containing a feature flag change suggestion.
+      properties:
+        data:
+          $ref: "#/components/schemas/FeatureFlagSuggestion"
+      required:
+        - data
+      type: object
     FeatureFlagsPaginationLinks:
       description: Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
       properties:
@@ -114380,6 +114731,30 @@ components:
         data:
           $ref: "#/components/schemas/AppKeyRegistrationData"
       type: object
+    RejectFlagSuggestionAttributes:
+      description: Rejection options for the suggestion.
+      properties:
+        comment:
+          description: A comment explaining the rejection.
+          example: Keep the existing configuration.
+          type: string
+      type: object
+    RejectFlagSuggestionData:
+      description: The rejection event to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RejectFlagSuggestionAttributes"
+        type:
+          $ref: "#/components/schemas/ReviewFlagSuggestionDataType"
+      required: [type, attributes]
+      type: object
+    RejectFlagSuggestionRequest:
+      description: Request to reject a feature flag change suggestion.
+      properties:
+        data:
+          $ref: "#/components/schemas/RejectFlagSuggestionData"
+      required: [data]
+      type: object
     RelationAttributes:
       description: Relation attributes.
       properties:
@@ -116883,6 +117258,12 @@ components:
           description: Target revision ID to revert to
           type: string
       type: object
+    ReviewFlagSuggestionDataType:
+      description: The resource type for reviewing feature flag suggestions.
+      enum: [flag-suggestion-events]
+      example: flag-suggestion-events
+      type: string
+      x-enum-varnames: [FLAG_SUGGESTION_EVENTS]
     Role:
       description: Role object returned by the API.
       properties:
@@ -152589,6 +152970,31 @@ components:
       required:
         - data
       type: object
+    UpdateFeatureFlagApprovalsAttributes:
+      description: The approval requirement for the flag.
+      properties:
+        enabled:
+          description: Whether approval is required. Disabling requires the Feature Flag Approvals Override permission.
+          example: true
+          type: boolean
+      required: [enabled]
+      type: object
+    UpdateFeatureFlagApprovalsData:
+      description: The feature flag approval setting to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateFeatureFlagApprovalsAttributes"
+        type:
+          $ref: "#/components/schemas/FeatureFlagApprovalsDataType"
+      required: [type, attributes]
+      type: object
+    UpdateFeatureFlagApprovalsRequest:
+      description: Request to change whether a feature flag requires approval.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateFeatureFlagApprovalsData"
+      required: [data]
+      type: object
     UpdateFeatureFlagAttributes:
       description: Attributes for updating a feature flag.
       properties:
@@ -152596,6 +153002,8 @@ components:
           description: The description of the feature flag.
           example: "Updated description for feature flag XYZ789"
           type: string
+        distribution_channel:
+          $ref: "#/components/schemas/FeatureFlagDistributionChannel"
         json_schema:
           description: JSON schema for validation when value_type is JSON.
           example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
@@ -152605,6 +153013,8 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        staleness_status:
+          $ref: "#/components/schemas/UpdateFeatureFlagStalenessStatus"
         tags:
           description: |-
             Tags associated with the feature flag. This field replaces the full set of
@@ -152646,6 +153056,20 @@ components:
       required:
         - data
       type: object
+    UpdateFeatureFlagStalenessStatus:
+      description: |-
+        The lifecycle to set. `ACTIVE` makes the flag temporary; `PERMANENT` excludes it from
+        staleness detection. Either value clears any snooze; omit the field to keep the lifecycle.
+        Do not copy the top-level `staleness_status` from a response into this field: that legacy
+        response field is always `ACTIVE`.
+      enum:
+        - ACTIVE
+        - PERMANENT
+      example: "PERMANENT"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - PERMANENT
     UpdateFlakyTestsRequest:
       description: Request to update the state of multiple flaky tests.
       properties:
@@ -191075,6 +191499,407 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/feature-flags/suggestions/{suggestion_id}:
+    delete:
+      description: |-
+        Deletes a pending suggestion or discards an approved suggestion that has not been
+        applied. Requires editor access to the flag, or contributor access for the suggestion's
+        creator. Applied and rejected suggestions return `409 Conflict`. A missing or already
+        discarded suggestion returns `204 No Content`.
+      operationId: DeleteFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/suggestion_id"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - Applied or rejected suggestions cannot be deleted.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Delete or discard a flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 33
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+    get:
+      description: |-
+        Returns a feature flag change suggestion by ID. Use `lifecycle_status` to distinguish
+        pending, approved, applied, rejected, and discarded suggestions. An approved suggestion
+        has not yet been applied; an applied suggestion has changed the flag.
+      operationId: GetFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/suggestion_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: 550e8400-e29b-41d4-a716-446655440021
+                        comment: Restrict this flag to server applications.
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: 550e8400-e29b-41d4-a716-446655440010
+                        current_status: pending
+                        current_value: ALL
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        lifecycle_status: pending
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                      id: 550e8400-e29b-41d4-a716-446655440020
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Get a flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 29
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/suggestions/{suggestion_id}/apply:
+    post:
+      description: |-
+        Applies a previously approved feature flag change suggestion. Requires contributor or
+        editor access to the flag. Pending, rejected, or discarded suggestions return `409 Conflict`.
+        An already applied suggestion also returns `409 Conflict`, except that retrying an applied
+        experiment action succeeds. This endpoint does not require a request body.
+
+        When an `ALLOCATIONS` suggestion is applied, either by this endpoint or by an approval that applies it,
+        each exposure schedule with `autostart` set to `true`, no `absolute_start_time`, and no future
+        `scheduled_start_time` starts at apply time. This includes a schedule that is already running, so a
+        suggestion that omits its `absolute_start_time` restarts its rollout. If its `selection_interval_ms` is
+        greater than `0`, every step except the last uses that interval. An `absolute_start_time` in the
+        suggestion is kept, including one set by the allocations request that built the suggestion, so time spent
+        waiting for approval counts toward its rollout steps.
+        Schedules with `apm_retention`, in the suggestion or on the saved schedule, are the exception: apply does
+        not start them, and they start only through the exposure schedule start endpoint. When the suggestion omits
+        `apm_retention` or `absolute_start_time` for a saved schedule with `apm_retention`, apply keeps the saved
+        values, so a running schedule keeps its start, unless the suggestion changes its rollout strategy, which
+        stops it.
+      operationId: ApplyFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/suggestion_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: 550e8400-e29b-41d4-a716-446655440021
+                        comment: Restrict this flag to server applications.
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: 550e8400-e29b-41d4-a716-446655440010
+                        current_status: approved
+                        current_value: ALL
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        lifecycle_status: applied
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                        updated_at: "2024-01-02T00:00:00Z"
+                        updated_by: 550e8400-e29b-41d4-a716-446655440011
+                      id: 550e8400-e29b-41d4-a716-446655440020
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Conflict - The suggestion is not approved or the proposed change conflicts with current configuration.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Apply an approved flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 31
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/suggestions/{suggestion_id}/approve:
+    post:
+      description: |-
+        Approves a feature flag change suggestion and applies the change immediately by default.
+        Set `apply` to `false` to approve without applying, then call `ApplyFlagSuggestion` later.
+        Until it is applied or deleted, an approved suggestion still blocks conflicting changes.
+        Requires editor access to the flag or the Feature Flag Approvals Override permission.
+        A creator cannot approve their own suggestion unless they have override permission.
+        Applied or discarded suggestions return `409 Conflict`. Retrying approval of an already
+        applied experiment action with `apply` set to `true` succeeds.
+      operationId: ApproveFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/suggestion_id"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      apply: false
+                      comment: Approved for rollout.
+                    type: flag-suggestion-events
+            schema:
+              $ref: "#/components/schemas/ApproveFlagSuggestionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: 550e8400-e29b-41d4-a716-446655440021
+                        comment: Restrict this flag to server applications.
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: 550e8400-e29b-41d4-a716-446655440010
+                        current_status: pending
+                        current_value: ALL
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        lifecycle_status: approved
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                        updated_at: "2024-01-02T00:00:00Z"
+                        updated_by: 550e8400-e29b-41d4-a716-446655440011
+                      id: 550e8400-e29b-41d4-a716-446655440020
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Conflict - The suggestion is already applied or discarded, or the proposed change conflicts with current configuration.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Approve a flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 30
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/suggestions/{suggestion_id}/reject:
+    post:
+      description: |-
+        Rejects a pending feature flag change suggestion without applying the change. Requires
+        editor access to the flag or the Feature Flag Approvals Override permission. Rejecting
+        an already rejected suggestion succeeds. Approved, applied, or discarded suggestions
+        return `409 Conflict`.
+      operationId: RejectFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/suggestion_id"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      comment: Keep the existing configuration.
+                    type: flag-suggestion-events
+            schema:
+              $ref: "#/components/schemas/RejectFlagSuggestionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: 550e8400-e29b-41d4-a716-446655440021
+                        comment: Restrict this flag to server applications.
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: 550e8400-e29b-41d4-a716-446655440010
+                        current_status: rejected
+                        current_value: ALL
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        lifecycle_status: rejected
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                        updated_at: "2024-01-02T00:00:00Z"
+                        updated_by: 550e8400-e29b-41d4-a716-446655440011
+                      id: 550e8400-e29b-41d4-a716-446655440020
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - The suggestion is already approved, applied, or discarded.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Reject a flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 32
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-
@@ -191143,13 +191968,30 @@ paths:
           - feature_flag_environment_config_read
     put:
       description: |-
-        Updates an existing feature flag's metadata such as
-         name and description. Does not modify targeting rules or allocations.
+        Updates an existing feature flag's metadata, including its name,
+        description, distribution channel, and tags. Does not modify targeting rules or allocations.
 
         To change the owning team, update `tags` and include a tag of the form
         `team:<team-handle>` in the array. `tags` is a full replacement of the
         existing tag set (including any `team:` tag), so include every tag you
         want to keep, not just the ones you're adding.
+
+        To change the lifecycle, set `staleness_status` to `ACTIVE` (temporary) or `PERMANENT`.
+        Either value clears any snooze; omit it to keep the lifecycle. Send `staleness_status` in a
+        separate request from `distribution_channel`. Do not copy the top-level `staleness_status`
+        from a response into the request: that legacy response field is always `ACTIVE`, so
+        copying it makes a `PERMANENT` flag temporary.
+
+        When backend approvals are enabled and a distribution channel change requires approval,
+        callers without the Feature Flag Approvals Override permission receive `201 Created`
+        with a suggestion instead of an updated flag. No fields in the request are applied.
+        The suggestion contains only the distribution channel change. To update other fields, such as
+        name, description, JSON schema, and tags, send a separate request without `distribution_channel`.
+
+        While backend approvals are enabled, a request that includes `distribution_channel`
+        returns `409 Conflict` if a distribution channel suggestion for the flag is pending, or
+        approved but not yet applied. No fields are applied, including for callers with override
+        permission.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191158,13 +192000,21 @@ paths:
           application/json:
             examples:
               default:
+                summary: Update flag metadata
                 value:
                   data:
                     attributes:
                       description: Updated description for the feature flag
-                      enabled: true
                       name: Updated Feature Flag XYZ789
                       tags: ["team:feature-flagging"]
+                    type: feature-flags
+              distribution_channel:
+                description: Creates a suggestion instead of updating the flag when approval is required.
+                summary: Update the distribution channel
+                value:
+                  data:
+                    attributes:
+                      distribution_channel: SERVER
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -191198,6 +192048,32 @@ paths:
               schema:
                 $ref: "#/components/schemas/FeatureFlagResponse"
           description: OK
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: "550e8400-e29b-41d4-a716-446655440021"
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: "550e8400-e29b-41d4-a716-446655440010"
+                        current_status: pending
+                        current_value: ALL
+                        feature_flag_id: "550e8400-e29b-41d4-a716-446655440000"
+                        lifecycle_status: pending
+                        message: >-
+                          This flag requires approval for this change. A suggestion has been created and is pending review.
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                      id: "550e8400-e29b-41d4-a716-446655440020"
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: |-
+            Created - A distribution channel suggestion was created because approval is required. No flag fields were updated.
         "400":
           content:
             application/json:
@@ -191216,6 +192092,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Conflict - A feature flag with this name already exists, a distribution channel suggestion is pending, or a pending experiment request or running approved experiment uses this flag.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191236,8 +192119,17 @@ paths:
   /api/v2/feature-flags/{feature_flag_id}/archive:
     post:
       description: |-
-        Archives a feature flag. Archived flags are
-        hidden from the main list but remain accessible and can be unarchived.
+        Archives a feature flag. Archived flags are hidden from the main list but remain accessible
+        and can be unarchived.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion. The change is not applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: ArchiveFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191270,6 +192162,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/FeatureFlagResponse"
           description: OK
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreated"
         "400":
           content:
             application/json:
@@ -191288,6 +192182,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - The flag is already archived or a conflicting suggestion is pending.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191308,7 +192208,17 @@ paths:
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/allocations:
     post:
       description: |-
-        Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
+        Creates a new targeting rule (allocation) for a feature flag in an environment.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `202 Accepted` with an
+        `approval-required` resource. No allocation is created and no suggestion is persisted.
+        The resource ID is the flag ID. Submit its `property`, `action`, `suggestion`, and `environment_id`
+        to `CreateFlagSuggestion`, together with `notification_rule_targets`, to request approval.
+        The suggestion value contains the complete desired allocation set, including the new rule.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict`, including for callers with
+        override permission or when approval is no longer required.
       operationId: CreateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191369,24 +192279,14 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
-                        environment_ids:
-                          - abc-123
-                        guardrail_metrics: []
-                        id: 00000000-0000-0000-0000-000000000016
-                        key: prod-rollout
-                        name: Production Rollout
-                        order_position: 0
-                        targeting_rules: []
-                        type: FEATURE_GATE
-                        updated_at: "2024-01-01T00:00:00+00:00"
-                        variant_weights:
-                          - value: 50
-                            variant_id: abc-123
-                      id: 00000000-0000-0000-0000-000000000015
-                      type: allocations
+                        action: updated
+                        environment_id: "550e8400-e29b-41d4-a716-446655440001"
+                        property: ALLOCATIONS
+                        suggestion: '[{"name":"Production Rollout","key":"prod-rollout","type":"FEATURE_GATE","targeting_rules":[],"variant_weights":[{"variant_id":"550e8400-e29b-41d4-a716-446655440002","value":100}],"guardrail_metrics":[]}]'
+                      id: "550e8400-e29b-41d4-a716-446655440000"
+                      type: approval-required
               schema:
-                $ref: "#/components/schemas/AllocationResponse"
+                $ref: "#/components/schemas/FeatureFlagApprovalRequiredResponse"
           description: Accepted - Approval required for this change
         "400":
           content:
@@ -191411,7 +192311,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Conflict
+          description: Conflict - A conflicting suggestion is pending or an allocation with this key already exists.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191429,12 +192329,34 @@ paths:
           - feature_flag_config_write
     put:
       description: |-
-        Updates targeting rules (allocations) for a specific feature flag in a specific environment.
-        This operation replaces the existing allocation set with the request payload.
+        Updates targeting rules (allocations) for a feature flag in an environment. This operation
+        replaces the existing allocation set with the request payload.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion. The change is not applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
+
+        When approval is required, combining allocation replacement with `default_variant_key`
+        returns `400 Bad Request`. Omit that parameter and submit the default variant change
+        separately with `CreateFlagSuggestion` using the `DEFAULT_VARIANT` property and the variant ID.
       operationId: UpdateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
         - $ref: "#/components/parameters/environment_id"
+        - description: |-
+            The key of the default variant to set. When approval is required, omit this parameter
+            and submit a `DEFAULT_VARIANT` suggestion separately.
+          in: query
+          name: default_variant_key
+          required: false
+          schema:
+            example: control
+            type: string
       requestBody:
         content:
           application/json:
@@ -191483,16 +192405,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListAllocationsResponse"
           description: OK
-        "202":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data: []
-              schema:
-                $ref: "#/components/schemas/ListAllocationsResponse"
-          description: Accepted - Approval required for this change
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreated"
         "400":
           content:
             application/json:
@@ -191516,7 +192430,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Conflict
+          description: |-
+            Conflict - A conflicting suggestion is pending or the allocation update conflicts with the current configuration.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191535,7 +192450,17 @@ paths:
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
     post:
       description: |-
-        Disable a feature flag in a specific environment.
+        Disables a feature flag in a specific environment.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion, in the same format as the `GetFlagSuggestion` response. The change is not
+        applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: DisableFeatureFlagEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191543,8 +192468,14 @@ paths:
       responses:
         "200":
           description: OK
-        "202":
-          description: Accepted - Approval required for this change
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreatedWithoutSchema"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           content:
             application/json:
@@ -191557,6 +192488,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - A conflicting suggestion is pending for this flag and environment.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191577,7 +192514,17 @@ paths:
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/enable:
     post:
       description: |-
-        Enable a feature flag in a specific environment.
+        Enables a feature flag in a specific environment.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion, in the same format as the `GetFlagSuggestion` response. The change is not
+        applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: EnableFeatureFlagEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191585,8 +192532,14 @@ paths:
       responses:
         "200":
           description: OK
-        "202":
-          description: Accepted - Approval required for this change
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreatedWithoutSchema"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           content:
             application/json:
@@ -191599,6 +192552,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - A conflicting suggestion is pending for this flag and environment.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191616,11 +192575,226 @@ paths:
         permissions:
           - feature_flag_config_write
           - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/require-approval:
+    post:
+      description: |-
+        Enables or disables the approval requirement for a feature flag. Requires the Feature
+        Flag Write permission and contributor or editor access to the flag. Disabling approvals
+        also requires the Feature Flag Approvals Override permission, even if approvals are already disabled.
+        This operation updates the setting directly and does not create a suggestion. Changing the setting
+        returns `409 Conflict` when a pending experiment request or a running approved experiment uses the flag.
+      operationId: UpdateFeatureFlagApprovals
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                    type: feature-flag-approvals
+            schema:
+              $ref: "#/components/schemas/UpdateFeatureFlagApprovalsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00+00:00"
+                        description: A sample feature flag
+                        key: feature-flag-abc123
+                        name: Feature Flag ABC 123
+                        require_approval: true
+                        updated_at: "2024-01-02T00:00:00+00:00"
+                        value_type: BOOLEAN
+                        variants:
+                          - id: 00000000-0000-0000-0000-000000000005
+                            key: variant-a
+                            name: Variant A
+                            value: "true"
+                          - id: 00000000-0000-0000-0000-000000000006
+                            key: variant-b
+                            name: Variant B
+                            value: "false"
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: feature-flags
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - A pending experiment request or a running approved experiment uses this flag.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+      summary: Set the approval requirement for a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 27
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/{feature_flag_id}/suggestions:
+    post:
+      description: |-
+        Creates a persisted suggestion for a feature flag change that requires approval.
+        The change is not applied until the suggestion is approved and applied. Requires
+        contributor or editor access to the flag. The request must contain at least one
+        `notification_rule_targets` handle for review notifications.
+
+        Use this endpoint to submit the proposed change from the `202 Accepted` approval-required
+        response of `CreateAllocationsForFeatureFlagInEnvironment`. Other approval-gated mutation endpoints
+        return `201 Created` with a persisted suggestion. Do not submit those suggestions again.
+
+        An `environment_id` is required for `ALLOCATIONS`, `DEFAULT_VARIANT`, and `OVERRIDE_VARIANT`.
+        For allocation and variant changes, `suggestion` is a JSON-encoded string, not a nested
+        JSON object. Conflicting suggestions that are pending, or approved but not yet applied,
+        return `409 Conflict`.
+
+        The allocations in an `ALLOCATIONS` suggestion are validated with the rules that
+        `UpdateAllocationsForFeatureFlagInEnvironment` applies to a change that requires approval, including the
+        rules for request fields, targeting rules and their `ONE_OF` and `NOT_ONE_OF` value limits, variant and
+        metric references, draft allocations, and exposure schedules. A schedule with `apm_retention` that has not
+        started must be started with the exposure schedule start endpoint, not with `autostart` or an
+        `absolute_start_time`. That endpoint's Product Analytics Experiments Write permission checks also apply.
+        If that endpoint would reject the allocations, this endpoint returns the same error: `400 Bad Request` for
+        invalid allocations, for example a `UNIFORM_INTERVALS` schedule with a `selection_interval_ms` of `0`,
+        `403 Forbidden` when the caller lacks the Experiments Write permission the lineup needs, and
+        `409 Conflict` for a lineup that changes or omits a draft allocation.
+      operationId: CreateFlagSuggestion
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action: updated
+                      comment: Restrict this flag to server applications.
+                      notification_rule_targets:
+                        - requester@example.com
+                      property: DISTRIBUTION_CHANNEL
+                      suggestion: SERVER
+                    type: flag-suggestions
+            schema:
+              $ref: "#/components/schemas/CreateFlagSuggestionRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: updated
+                        base_flag_history_id: 550e8400-e29b-41d4-a716-446655440021
+                        comment: Restrict this flag to server applications.
+                        created_at: "2024-01-01T00:00:00Z"
+                        created_by: 550e8400-e29b-41d4-a716-446655440010
+                        current_status: pending
+                        current_value: ALL
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        lifecycle_status: pending
+                        property: DISTRIBUTION_CHANNEL
+                        suggestion: SERVER
+                      id: 550e8400-e29b-41d4-a716-446655440020
+                      type: flag-suggestions
+              schema:
+                $ref: "#/components/schemas/FeatureFlagSuggestionResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request - Invalid request parameters or body.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - A conflicting suggestion is pending, or the lineup changes or omits a draft allocation.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
+      summary: Create a flag change suggestion
+      tags:
+        - Feature Flags
+      x-menu-order: 28
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
   /api/v2/feature-flags/{feature_flag_id}/unarchive:
     post:
       description: |-
-        Unarchives a previously archived feature flag,
-        making it visible in the main list again.
+        Unarchives a previously archived feature flag, making it visible in the main list again.
+
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion. The change is not applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: UnarchiveFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191652,6 +192826,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/FeatureFlagResponse"
           description: OK
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreated"
         "400":
           content:
             application/json:
@@ -191670,6 +192846,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict - The flag is not archived or a conflicting suggestion is pending.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -191778,12 +192960,22 @@ paths:
       description: |-
         Deletes a variant from a feature flag.
 
-        When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion, in the same format as the `GetFlagSuggestion` response. The change is not
+        applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: DeleteVariantFromFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
         - $ref: "#/components/parameters/variant_id"
       responses:
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreatedWithoutSchema"
         "204":
           description: No Content
         "400":
@@ -191829,7 +193021,15 @@ paths:
       description: |-
         Updates the name and value of an existing variant on a feature flag.
 
-        When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
+        When backend approvals are enabled and this change requires approval, callers without
+        the Feature Flag Approvals Override permission receive `201 Created` with a persisted
+        suggestion, in the same format as the `GetFlagSuggestion` response. The change is not
+        applied until the suggestion is approved and applied.
+        Use the returned suggestion ID with `GetFlagSuggestion`, `ApproveFlagSuggestion`,
+        `RejectFlagSuggestion`, or `DeleteFlagSuggestion`.
+
+        A conflicting suggestion that is pending, or approved but not yet applied, returns `409 Conflict` without applying the change,
+        including for callers with override permission or when approval is no longer required.
       operationId: UpdateVariantForFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -191852,6 +193052,8 @@ paths:
       responses:
         "200":
           description: OK
+        "201":
+          $ref: "#/components/responses/FeatureFlagSuggestionCreatedWithoutSchema"
         "400":
           content:
             application/json:
@@ -278795,7 +279997,7 @@ tags:
   - description: |-
       Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information.
     name: Fastly Integration
-  - description: Manage feature flags and environments.
+  - description: Manage feature flags, environments, and approval suggestions.
     name: Feature Flags
   - description: |-
       Manage automated deployments across your fleet of hosts.

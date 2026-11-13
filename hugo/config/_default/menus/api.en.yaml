@@ -16013,6 +16013,30 @@ menu:
           - UnarchiveFeatureFlag
         unstable: []
         order: 14
+    - name: Create a flag change suggestion
+      url: /api/latest/feature-flags/create-a-flag-change-suggestion/
+      identifier: feature-flags-create-a-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFlagSuggestion
+        unstable: []
+        order: 28
+    - name: Set the approval requirement for a feature flag
+      url: /api/latest/feature-flags/set-the-approval-requirement-for-a-feature-flag/
+      identifier: feature-flags-set-the-approval-requirement-for-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFeatureFlagApprovals
+        unstable: []
+        order: 27
     - name: Enable a feature flag in an environment
       url: /api/latest/feature-flags/enable-a-feature-flag-in-an-environment/
       identifier: feature-flags-enable-a-feature-flag-in-an-environment
@@ -16097,6 +16121,66 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Reject a flag change suggestion
+      url: /api/latest/feature-flags/reject-a-flag-change-suggestion/
+      identifier: feature-flags-reject-a-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RejectFlagSuggestion
+        unstable: []
+        order: 32
+    - name: Approve a flag change suggestion
+      url: /api/latest/feature-flags/approve-a-flag-change-suggestion/
+      identifier: feature-flags-approve-a-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ApproveFlagSuggestion
+        unstable: []
+        order: 30
+    - name: Apply an approved flag change suggestion
+      url: /api/latest/feature-flags/apply-an-approved-flag-change-suggestion/
+      identifier: feature-flags-apply-an-approved-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ApplyFlagSuggestion
+        unstable: []
+        order: 31
+    - name: Get a flag change suggestion
+      url: /api/latest/feature-flags/get-a-flag-change-suggestion/
+      identifier: feature-flags-get-a-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlagSuggestion
+        unstable: []
+        order: 29
+    - name: Delete or discard a flag change suggestion
+      url: /api/latest/feature-flags/delete-or-discard-a-flag-change-suggestion/
+      identifier: feature-flags-delete-or-discard-a-flag-change-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFlagSuggestion
+        unstable: []
+        order: 33
     - name: Patch a saved filter
       url: /api/latest/feature-flags/patch-a-saved-filter/
       identifier: feature-flags-patch-a-saved-filter
