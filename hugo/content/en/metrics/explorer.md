@@ -88,7 +88,7 @@ You can optionally add functions to your query using the function button. Not al
 
 ### Split graph
 
-Use the {{< ui >}}Split Graph{{< /ui >}} button to view the data split into individual graphs by values for tags such as region, service, or environment.
+Use the {{< ui >}}Split Graph{{< /ui >}} button to select one or more tags, such as region, service, or environment, and view one graph per combination of tag values. Saving to a dashboard creates a [split graph widget][12] for one tag or a group of graphs for multiple tags, with all split tags in the group title.
 
 ### Export
 
@@ -121,3 +121,4 @@ For more information, see the [Quick Graphs][7] documentation.
 [9]: /monitors/
 [10]: /dashboards/
 [11]: /account_management/rbac/permissions/#access-management
+[12]: /dashboards/widgets/split_graph/

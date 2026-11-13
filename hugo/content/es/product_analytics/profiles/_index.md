@@ -35,7 +35,7 @@ La página [User Profiles][7] lista a los usuarios que interactúan con su aplic
 Cada perfil tiene atributos para ayudarle a segmentar mejor a sus usuarios. Puede realizar una búsqueda de texto completo o clasificar y filtrar según cualquiera de estos atributos. También puede personalizar esta página con atributos relevantes para sus necesidades analíticas. Consulte la sección [Custom Attributes](#use-custom-attributes-to-enrich-profiles) para saber cómo.
 
 
-{{% collapse-content title="Lista de atributos del perfil de usuario" level="h4" expanded=true id="user-profile-attributes" %}}
+{{% collapse-content title="Lista de atributos del perfil de usuario" level="h4" expanded=false id="user-profile-attributes" %}}
 
 <!-- #### User attributes  -->
 ID de usuario `REQUIRED`
@@ -53,6 +53,28 @@ Visto por primera vez
 
 Visto por última vez
 : `type:timestamp`  <br> La fecha de la sesión más reciente del usuario.
+
+<!-- #### First touch attribution  -->
+Primera página de referencia
+: `type:string`  <br> La URL de la página que refirió al usuario en su primera sesión. Vacío si el usuario navegó directamente a la aplicación.
+
+Servidor de la primera página de referencia
+: `type:string`  <br> El nombre del servidor de la página que refirió al usuario en su primera sesión. Vacío si el usuario navegó directamente a la aplicación.
+
+Campaña UTM de la primera sesión
+: `type:string`  <br> El valor del parámetro `utm_campaign` en la URL de la primera sesión del usuario.
+
+Contenido UTM de la primera sesión
+: `type:string`  <br> El valor del parámetro `utm_content` en la URL de la primera sesión del usuario.
+
+Medio UTM de la primera sesión
+: `type:string`  <br> El valor del parámetro `utm_medium` en la URL de la primera sesión del usuario.
+
+Fuente UTM de la primera sesión
+: `type:string`  <br> El valor del parámetro `utm_source` en la URL de la primera sesión del usuario.
+
+Término UTM de la primera sesión
+: `type:string`  <br> El valor del parámetro `utm_term` en la URL de la primera sesión del usuario.
 
 
 <!-- #### application based attributes  -->
@@ -109,7 +131,7 @@ Versión del sistema operativo de la última sesión
 Nombre del navegador de la primera sesión
 : `type:string` <br> El navegador utilizado en la primera sesión del usuario (por ejemplo: Chrome, Safari).
 
-Nombre del navegador de la última sesión
+Nombre del último navegador
 : `type:string` <br> El navegador utilizado en la última sesión del usuario (por ejemplo: Chrome, Safari).
 
 Versión del navegador de la primera sesión

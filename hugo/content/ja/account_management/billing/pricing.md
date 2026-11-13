@@ -46,12 +46,12 @@ Indexed Span のボリュームと Ingested Span のボリュームの両方に�
 
 ## Log Management {#log-management}
 
-* **ログ**は、オペレーティングシステム、アプリケーション、または他のソースによって生成されたテキストベースのアクティビティの記録です。Datadog は、Datadog ログサービスに送信されたギガバイトの合計数に基づいて、収集されたログに対して課金します。
+* **ログ**は、オペレーティングシステム、アプリケーション、またはほかのソースによって生成されたテキストベースのアクティビティの記録です。Datadog は、Datadog ログサービスに送信されたギガバイトの合計数に基づいて、収集されたログに対して課金します。
 * **ログイベント**は、Datadog ログサービスによってインデックス化された 1 つのログです。Datadog は、選択した保持ポリシーに指定されている料金で、インデックス化のために送信されたログイベントの 100 万個ごとに課金します。
 
 ## Cloud SIEM {#cloud-siem}
 
-* **分析ログ**は、オペレーティングシステム、アプリケーション、または潜在的なセキュリティの脅威を検出するために分析された他のソースによって生成されたアクティビティのテキストベースの記録です。Datadog は、Datadog Cloud SIEM サービスによって分析された月ごとのイベント数に基づいて分析ログに課金します。
+* **分析ログ**は、オペレーティングシステム、アプリケーション、または潜在的なセキュリティの脅威を検出するために分析されたほかのソースによって生成されたアクティビティのテキストベースの記録です。Datadog は、Datadog Cloud SIEM サービスによって分析された月ごとのイベント数に基づいて分析ログに課金します。
 
 ## Synthetic Monitoring {#synthetic-monitoring}
 
@@ -100,10 +100,18 @@ Indexed Span のボリュームと Ingested Span のボリュームの両方に�
 
 ## CI Visibility {#ci-visibility}
 
-* Datadog は、CI Visibility サービスにテストとパイプラインのデータを送信する一意のコミッターの数を追跡します。
+* Datadog は、CI Visibility サービスにパイプラインデータを送信する一意のコミッターの数を追跡します。
 * **コミッター**とは、アクティブな git コミッターのことで、git 作成者のメールアドレスで識別されます。コミッターは、ある月に少なくとも 3 回コミットすれば課金対象としてカウントされます。
   * パイプラインが git リポジトリに関連付けられていない場合や、git メタデータが利用できない場合、パイプライン実行のトリガーとなった人のユーザー名が請求可能なコミッターとして使用されます。
-* Pipeline Visibility では、すべてのパイプライン、パイプラインステージ、パイプラインジョブが**パイプラインスパン**としてカウントされます。Testing Visibility では、個々のテスト実行が 1 つの**テストスパン**としてカウントされます。
+* すべてのパイプライン、パイプラインステージ、パイプラインジョブが**パイプラインスパン**としてカウントされます。
+
+## Test Optimization {#test-optimization}
+
+* Datadog は、Test Optimization にテストデータを送信する一意のコミッターの数を追跡します。
+* **コミッター**とは、アクティブな git コミッターのことで、git 作成者のメールアドレスで識別されます。コミッターは、ある月に少なくとも 3 回コミットすれば課金対象としてカウントされます。
+* 個々のテスト実行が 1 つの**テストスパン**としてカウントされます。テストの自動再試行によって追加された再試行など、Test Optimization 機能によって生成されるテストスパンは課金対象外です。Test Impact Analysis によってスキップされたテストも課金対象外です。
+
+詳細については、[CI/CD 最適化の課金][13]を参照してください。
 
 ## トラブルシューティング{#troubleshooting}
 
@@ -123,3 +131,4 @@ Indexed Span のボリュームと Ingested Span のボリュームの両方に�
 [10]: /ja/real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /ja/account_management/billing/metric_name_pricing/
+[13]: /ja/account_management/billing/ci_visibility/#counting-test-spans

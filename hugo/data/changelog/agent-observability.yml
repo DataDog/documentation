@@ -101,3 +101,12 @@ entries:
       - UpsertLLMObsAnnotations
       - UpsertLLMObsPatternsConfig
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41684
+    operations:
+      - GetLLMObsPatternsConfig
+      - ListLLMObsPatternsConfigs
+      - UpsertLLMObsPatternsConfig
+    title: Document min_cluster_size on LLM Observability topic discovery 
+      configs

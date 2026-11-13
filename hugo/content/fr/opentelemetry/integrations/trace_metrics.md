@@ -15,7 +15,9 @@ title: Métriques de trace
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="Métriques APM d'OpenTelemetry" style="width:100%;" >}}
 
-Pour envoyer des statistiques APM telles que les hits, les erreurs et la durée, configurez le [`span_metrics` connecteur][1]. Configurez le connecteur pour recevoir toutes les traces avant tous les processeurs d'échantillonnage, afin que les métriques de trace représentent le trafic non échantillonné.
+Pour envoyer des statistiques APM telles que les hits, les erreurs et la durée, configurez le [`span_metrics` connecteur][1]. Configurez le connecteur avant tout processeur d'échantillonnage afin qu'il calcule les métriques à partir de tous les spans reçus par le Collector.
+
+Pour les SDK DDOT (SDK Datadog en mode OpenTelemetry), consultez la [configuration de l'extrapolation des métriques de trace et les versions minimales][3].
 
 ## Configuration {#setup}
 
@@ -36,4 +38,5 @@ Pour des exemples de fichiers complets et fonctionnels, consultez le dépôt [`o
 
 [1]: /fr/opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /fr/tracing/metrics/metrics_namespace/
+[3]: /fr/opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

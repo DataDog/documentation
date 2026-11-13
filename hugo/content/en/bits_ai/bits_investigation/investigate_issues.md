@@ -124,7 +124,9 @@ Bits is able to run investigations on the following monitor types:
   - Outlier
   - Logs
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
-  - Composites
+  - Composites. For automatic investigations:
+    - At least one child monitor must be a supported type.
+    - Metric and log child monitors count only if the child monitor has a `service` tag, or its query filters or groups by `service`.
   - SLOs
   - Synthetics API and Browser tests
   - RUM

@@ -14,11 +14,11 @@ further_reading:
   text: Ejemplos de instrumentación personalizada
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: Blog
-  text: Monitoree aplicaciones de ASP.NET Core en contenedores
+  text: Monitoree aplicaciones ASP.NET Core en contenedores
 title: Requisitos de compatibilidad de .NET y .NET Core
 type: multi-code-lang
 ---
-El .NET Tracer de Datadog admite todos los lenguajes basados en .NET (por ejemplo, C#, F#, Visual Basic). Tiene [compatibilidad preliminar con aplicaciones con código no utilizado eliminado][12].
+El .NET Tracer de Datadog admite todos los lenguajes basados en .NET (por ejemplo, C#, F#, Visual Basic). Tiene [compatibilidad en versión preliminar con aplicaciones con código recortado][12].
 
 El .NET Tracer es de código abierto. Para obtener más información, consulte el [repositorio de .NET Tracer][1].
 
@@ -26,19 +26,19 @@ El .NET Tracer es de código abierto. Para obtener más información, consulte e
 
 El .NET Tracer admite la instrumentación automática en las siguientes versiones de .NET y .NET Core. También admite [.NET Framework][2].
 
-| Versión de .NET         | Fin de vida útil de Microsoft | Nivel de soporte        | Versión del paquete      |
+| Versión de .NET         | Fin del soporte de Microsoft | Nivel de soporte        | Versión del paquete      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 10              | _2028-11-14_   | [GA](#support-ga)    | más reciente (>= 3.31.0)   |
-| .NET 9               | _2026-11-10_   | [GA](#support-ga)    | más reciente (>= 3.6.0)    |
-| .NET 8               | _2026-11-10_   | [GA](#support-ga)    | más reciente (>= 2.42.0)   |
-| .NET 7               | 2024-05-14          | [GA](#support-ga)    | más reciente (>= 2.20.0)   |
-| .NET 6               | 2024-11-12     | [GA](#support-ga)    | más reciente (>= 2.0.0)    |
-| .NET 5               | 2022-05-10          | [GA](#support-ga)    | más reciente (>= 2.0.0)    |
-| .NET Core 3.1        | 2022-12-13     | [GA](#support-ga)    | más reciente               |
-| .NET Core 3.0        | 2020-03-03         | [EOL](#support-eol)  | No recomendado      |
-| .NET Core 2.2        | 2019-12-23     | [EOL](#support-eol)  | No recomendado      |
-| .NET Core 2.1        | 2021-08-21       | [EOL](#support-eol)  | No recomendado      |
-| .NET Core 2.0        | 2018-10-01       | [EOL](#support-eol)  | No recomendado      |
+| .NET 10              | _14 de noviembre de 2028_   | [GA](#support-ga)    | más reciente (>= 3.31.0)   |
+| .NET 9               | _10 de noviembre de 2026_   | [GA](#support-ga)    | más reciente (>= 3.6.0)    |
+| .NET 8               | _10 de noviembre de 2026_   | [GA](#support-ga)    | más reciente (>= 2.42.0)   |
+| .NET 7               | 14 de mayo de 2024          | [GA](#support-ga)    | más reciente (>= 2.20.0)   |
+| .NET 6               | 12 de noviembre de 2024     | [GA](#support-ga)    | más reciente (>= 2.0.0)    |
+| .NET 5               | 10 de mayo de 2022          | [GA](#support-ga)    | más reciente (>= 2.0.0)    |
+| .NET Core 3.1        | 13 de diciembre de 2022     | [GA](#support-ga)    | más reciente               |
+| .NET Core 3.0        | 3 de marzo de 2020         | [EOL](#support-eol)  | No recomendado      |
+| .NET Core 2.2        | 23 de diciembre de 2019     | [EOL](#support-eol)  | No recomendado      |
+| .NET Core 2.1        | 21 de agosto de 2021       | [EOL](#support-eol)  | No recomendado      |
+| .NET Core 2.0        | 1 de octubre de 2018       | [EOL](#support-eol)  | No recomendado      |
 
 Puede encontrar información adicional en la [Política de ciclo de vida de .NET y .NET Core de Microsoft][3], [Versiones de tiempo de ejecución de .NET al final de su vida útil](#end-of-life-net-runtime-versions) y [política de soporte de tiempo de ejecución de .NET](#net-runtime-support-policy).
 
@@ -74,8 +74,8 @@ El .NET Tracer admite distribuciones de Linux en la medida de lo posible, según
 | -------------------------|---------|---------------|---------------------------------------|---------------------------------|
 | Alpine Linux (x64)       | 3.14+   |  x64          | [GA](#support-ga)                     | más reciente (solo .NET 5+, v1.27.0+) |
 | Alpine Linux (arm64)     | 3.18+   |  arm64        | [GA](#support-ga)                     | más reciente (solo .NET 6+, v3.2.0+)  |
-| CentOS Linux             | 7+      |  x64          | [Mantenimiento](#support-maintenance)   | más reciente (fin de vida útil en v4.0.0)          |
-| CentOS Stream Linux      | 8       |  x64          | [Mantenimiento](#support-maintenance)   | más reciente (fin de vida útil en v4.0.0)          |
+| CentOS Linux             | 7+      |  x64          | [Mantenimiento](#support-maintenance)   | más reciente (fin de soporte en v4.0.0)          |
+| CentOS Stream Linux      | 8       |  x64          | [Mantenimiento](#support-maintenance)   | más reciente (fin de soporte en v4.0.0)          |
 | Debian                   | 10+     |  x64, arm64   | [GA](#support-ga)                     | más reciente                          |
 | Fedora                   | 29+     |  x64          | [GA](#support-ga)                     | más reciente                          |
 | openSUSE                 | 15+     |  x64          | [GA](#support-ga)                     | más reciente                          |
@@ -88,7 +88,10 @@ El .NET Tracer admite macOS solo para CI Test Optimization.
 
 | Sistema operativo         | Versión | Arquitecturas | Nivel de soporte           | Versión del paquete            |
 | -------------------------|---------|---------------|-------------------------|----------------------------|
-| macOS                    | 14.0+   |  x64, arm64   | [GA](#support-ga)       | más reciente                     |
+| macOS                    | 15.0+   |  x64, arm64   | [GA](#support-ga)       | más reciente                     |
+| macOS                    | 14.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.57.0                  |
+| macOS                    | 13.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.30.0                  |
+| macOS                    | 12.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.3.1                   |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
 | macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Agregado en 2.20.0)  |
 
@@ -96,7 +99,7 @@ El .NET Tracer admite macOS solo para CI Test Optimization.
 
 La [versión más reciente del .NET Tracer][4] puede instrumentar automáticamente las siguientes bibliotecas:
 
-| Marco de trabajo o biblioteca            | Paquete NuGet                                                                                        | Nombre de la integración     |
+| Framework o biblioteca            | Paquete NuGet                                                                                        | Nombre de la integración     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
 | ADO.NET                         | Todas las integraciones de AdoNet                                                                              | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
@@ -122,7 +125,7 @@ La [versión más reciente del .NET Tracer][4] puede instrumentar automáticamen
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                                        | `Npgsql`             |
 | Process                         | `System.Diagnostics.Process` 4.0+                                                                    | `Process`            |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+ .                                                                           | `RabbitMQ`           |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+.                                                                           | `RabbitMQ`           |
 | Redis (cliente de ServiceStack)     | `ServiceStack.Redis` 4.0.48+                                                                         | `ServiceStackRedis`  |
 | Redis (cliente StackExchange)    | `StackExchange.Redis` 1.0.187+                                                                       | `StackExchangeRedis` |
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
@@ -135,23 +138,23 @@ La [versión más reciente del .NET Tracer][4] puede instrumentar automáticamen
   - **Datadog Trace Agent**: La versión mínima requerida y recomendada es `7.76.1` para garantizar que los parámetros de autenticación se ofusquen automáticamente en los metadatos de la traza.
   - **Datadog Lambda Extension** (entornos Serverless): La versión mínima requerida es `v28.0.0`.
 
-¿No encuentra la biblioteca que busca? Primero, verifique si la biblioteca genera datos de observabilidad compatibles con OpenTelemetry (consulte [Uso de bibliotecas de instrumentación de OpenTelemetry][13] para obtener más detalles). Si no es así, Datadog continúa agregando soporte adicional. [Consulte al equipo de Datadog][5] para obtener ayuda.
+¿No ve la biblioteca que busca? Primero, verifique si la biblioteca produce datos de observabilidad compatibles con OpenTelemetry (consulte [Uso de bibliotecas de instrumentación de OpenTelemetry][13] para obtener más detalles). Si no, Datadog continúa agregando soporte adicional. [Consulte al equipo de Datadog][5] para obtener ayuda.
 
-## Versiones de tiempo de ejecución de .NET al final de su vida útil {#end-of-life-net-runtime-versions}
+## Versiones del entorno de ejecución de .NET que llegaron al final de su vida útil {#end-of-life-net-runtime-versions}
 
 El .NET Tracer funciona en .NET Core 2.0, 2.1, 2.2, 3.0 y 3.1, y en .NET 5 y 7, pero estas versiones llegaron al final de su vida útil y ya no cuentan con soporte de Microsoft. Consulte la [política de soporte de Microsoft][3] para obtener más detalles. Datadog recomienda usar la versión de parche más reciente de .NET 6 o .NET 8. Las versiones anteriores de .NET y .NET Core pueden presentar los siguientes problemas de tiempo de ejecución al habilitar la instrumentación automática:
 
 | Problema                                                                          | Versiones de .NET afectadas                                   | Solución                                                                           | Más información                        |
 |--------------------------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------|
-| Error del compilador JIT en Linux/x64                                                  | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5                 | Actualice .NET Core a la versión de parche más reciente o siga los pasos indicados en el informe de error enlazado | [DataDog/dd-trace-dotnet/issues/302][6] |
-| Error de búsqueda de recursos con una configuración regional distinta de `en-US` locale                                  | 2.0.0                                                    | Actualice .NET Core a la versión 2.0.3 o posterior                                                | [dotnet/runtime/issues/23938][7]        |
-| Error del compilador JIT que provoca un bloqueo al finalizar                                     | 2.0.0-2.2.x                                              | Actualice .NET Core a la versión 3.1.0 o posterior                                                | [dotnet/runtime/pull/11885][15]         |
+| Error del compilador JIT en Linux/x64                                                  | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5                 | Actualice .NET Core a la versión de parche más reciente o siga los pasos de la incidencia enlazada | [DataDog/dd-trace-dotnet/issues/302][6] |
+| Error de búsqueda de recursos con una configuración regional no `en-US`                                  | 2.0.0                                                    | Actualice .NET Core a 2.0.3 o superior                                                | [dotnet/runtime/issues/23938][7]        |
+| Error del compilador JIT que causa un bloqueo durante el cierre                                     | 2.0.0-2.2.x                                              | Actualice .NET Core a 3.1.0 o superior                                                | [dotnet/runtime/pull/11885][15]         |
 | Error del compilador JIT                                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5                     | Actualice .NET a 8.0.6 o superior                                                     | [dotnet/runtime/pull/73760][16]         |
-| Error del compilador JIT                                                               | Todas las versiones de .NET                                     | Actualmente no hay ninguna solución alternativa                                                              | [dotnet/runtime/issues/85777][17]       |
-| Error del tiempo de ejecución de .NET que provoca bloqueos cuando se usa con métricas de tiempo de ejecución | 6.0.0-6.0.10 | Actualice .NET a la versión 6.0.11 o superior, o deshabilite las métricas de tiempo de ejecución | [dotnet/runtime/pull/76431][18]                                                    |                                         |
-| Error del compilador JIT que provoca bloqueos                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Actualice .NET a 9.0.0 o superior                                                     | [dotnet/runtime/pull/95653][22]         |
-| Error del compilador JIT que provoca bloqueos                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x                  | Actualice .NET a 10.0.10 o superior                                                   | [dotnet/runtime/issues/127957][23]      |
-| Error del tiempo de ejecución de .NET que provoca bloqueos en filtros de excepciones (`catch ... when`)       | 9.x, 10.x                                                | Establezca `DD_PROFILING_EXCEPTION_ENABLED=0` o actualice a .NET 11 o superior             | [dotnet/runtime/issues/132462][24]      |
+| Error del compilador JIT                                                               | Todas las versiones de .NET                                     | No hay solución alternativa actual                                                              | [dotnet/runtime/issues/85777][17]       |
+| Error del tiempo de ejecución de .NET que causa bloqueos cuando se usa con métricas de tiempo de ejecución | 6.0.0-6.0.10 | Actualice .NET a 6.0.11 o superior o deshabilite las métricas de tiempo de ejecución | [dotnet/runtime/pull/76431][18]                                                    |                                         |
+| Error del compilador JIT que causa cierres inesperados                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Actualice .NET a 9.0.0 o superior                                                     | [dotnet/runtime/pull/95653][22]         |
+| Error del compilador JIT que causa cierres inesperados                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x                  | Actualice .NET a 10.0.10 o superior                                                   | [dotnet/runtime/issues/127957][23]      |
+| Error del entorno de ejecución de .NET que causa cierres inesperados en filtros de excepciones (`catch ... when`)       | 9.x, 10.x                                                | Establezca `DD_PROFILING_EXCEPTION_ENABLED=0` o actualice a .NET 11 o superior             | [dotnet/runtime/issues/132462][24]      |
 
 ## Versiones de Datadog Agent compatibles {#supported-datadog-agent-versions}
 
@@ -161,28 +164,28 @@ El .NET Tracer funciona en .NET Core 2.0, 2.1, 2.2, 3.0 y 3.1, y en .NET 5 y 7, 
 | [6.x][8]              | Más reciente          |
 | [5.x][9]              | Más reciente          |
 
-## Política de soporte de tiempo de ejecución de .NET {#net-runtime-support-policy}
+## Política de soporte del entorno de ejecución de .NET {#net-runtime-support-policy}
 
-El .NET Tracer depende del sistema operativo del servidor, el tiempo de ejecución de .NET, ciertas bibliotecas de .NET y el Datadog Agent/API. Estos sistemas de software de terceros admiten versiones específicas de .NET y .NET Core. Cuando el software externo ya no admite una versión de .NET, el .NET Tracer también limita su soporte para esa versión.
+El .NET Tracer depende del sistema operativo del servidor, el entorno de ejecución de .NET, ciertas bibliotecas de .NET y el Datadog Agent/API. Estos sistemas de software de terceros admiten versiones específicas de .NET y .NET Core. Cuando el software externo ya no admite una versión de .NET, el .NET Tracer también limita su soporte para esa versión.
 
 ### Niveles de soporte {#levels-of-support}
 
 | **Nivel**                                              | **Soporte proporcionado**                                                                                                                       |
 |--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Sin soporte</span>      |  Sin implementación. [Comuníquese con el soporte al cliente para solicitudes especiales.][10]                                                                   |
-| <span id="support-beta">Vista previa</span>                 |  Implementación inicial. Es posible que aún no contenga todas las funciones. Soporte para nuevas funciones y correcciones de errores y de seguridad, proporcionado en la medida de lo posible. |
-| <span id="support-ga">Disponibilidad general (GA)</span> |  Implementación completa de todas las funciones. Soporte completo para nuevas funciones y correcciones de errores y de seguridad.                                                 |
-| <span id="support-maintenance">Mantenimiento</span>      |  Implementación completa de las funciones existentes. No recibe nuevas funciones. Soporte solo para correcciones de errores y de seguridad.                           |
+| <span id="support-beta">Vista previa</span>                 |  Implementación inicial. Es posible que aún no contenga todas las funciones. Soporte para nuevas funciones y correcciones de errores y seguridad proporcionado en la medida de lo posible. |
+| <span id="support-ga">Disponibilidad general (GA)</span> |  Implementación completa de todas las funciones. Soporte completo para nuevas funciones y correcciones de errores y seguridad.                                                 |
+| <span id="support-maintenance">Mantenimiento</span>      |  Implementación completa de las funciones existentes. No recibe nuevas funciones. Soporte solo para correcciones de errores y seguridad.                           |
 | <span id="support-eol">Fin de vida útil (EOL)</span>        |  Sin soporte.                                                                                                                               |
 
-### Control de versiones de paquetes {#package-versioning}
+### Control de versiones del paquete {#package-versioning}
 
-El .NET Tracer utiliza [control de versiones semántico][11].
-Las actualizaciones de versión implican los siguientes cambios en el soporte de tiempo de ejecución:
+El .NET Tracer sigue el [versionado semántico][11].
+Las actualizaciones de versión implican los siguientes cambios en el soporte del entorno de ejecución:
 
-  - **Las actualizaciones de versión principal** (por ejemplo, de `1.0.0` a `2.0.0`) pueden cambiar el soporte de cualquier tiempo de ejecución de [Preview](#support-beta)/[GA](#support-ga) a [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Las actualizaciones de versión menor** (por ejemplo, de `1.0.0` a `1.1.0`) no reducirán el nivel de soporte para un tiempo de ejecución, pero pueden añadir soporte para uno.
-  - **Las actualizaciones de versión de parche** (por ejemplo, de `1.0.0` a `1.0.1`) no cambiarán el soporte para ningún tiempo de ejecución.
+  - **Las actualizaciones de versión mayor** (por ejemplo, de `1.0.0` a `2.0.0`) pueden cambiar el soporte para cualquier entorno de ejecución de [Preview](#support-beta)/[GA](#support-ga) a [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Las actualizaciones de versión menor** (por ejemplo, de `1.0.0` a `1.1.0`) no reducirán el nivel de soporte para un entorno de ejecución, pero pueden agregar soporte para otro.
+  - **Las actualizaciones de versión de parche** (por ejemplo, de `1.0.0` a `1.0.1`) no cambiarán el soporte para ningún entorno de ejecución.
 
 ## Lecturas adicionales {#further-reading}
 

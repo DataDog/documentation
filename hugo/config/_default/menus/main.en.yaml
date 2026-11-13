@@ -6114,6 +6114,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_tracing
       weight: 7
+    - name: MCP Tools
+      url: gpu_monitoring/mcp_tools/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_mcp_tools
+      weight: 8
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6797,56 +6802,61 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_experiments
       weight: 310
+    - name: Flag Evaluation and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 311
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 311
+      weight: 312
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 312
+      weight: 313
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 313
+      weight: 314
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 314
+      weight: 315
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 315
+      weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 316
+      weight: 317
     - name: Flag Key Obfuscation
       url: feature_flags/concepts/flag_key_obfuscation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
-      weight: 317
+      weight: 318
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_permissions
-      weight: 320
+      weight: 321
     - name: Approvals
       url: feature_flags/concepts/approvals
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
-      weight: 321
+      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 322
+      weight: 323
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -10508,6 +10518,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_request_access
       weight: 404
+    - name: MCP Access
+      url: account_management/rbac/mcp_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_mcp_access
+      weight: 405
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
