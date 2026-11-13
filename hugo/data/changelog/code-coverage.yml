@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41729
+    operations:
+      - GetCodeCoverageBranchSummary
+      - GetCodeCoverageCommitSummary
+      - GetCodeCoveragePRSummary
+    title: Add per-flag coverage to Code Coverage summary responses
