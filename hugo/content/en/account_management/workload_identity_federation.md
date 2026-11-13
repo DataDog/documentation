@@ -98,7 +98,7 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 <li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
 <li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
 </ul>
-To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response. An assumed-role ARN always ends in a session name that changes for every session, and a pattern without a trailing <code>/*</code> matches only that one exact session. End role patterns with <code>/*</code> to match every session that assumes the role.
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
 
 To create an identity mapping:
 
@@ -442,7 +442,7 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 <li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
 <li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
 </ul>
-To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response. An assumed-role ARN always ends in a session name that changes for every session, and a pattern without a trailing <code>/*</code> matches only that one exact session. End role patterns with <code>/*</code> to match every session that assumes the role.
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
 
 To create an intake mapping:
 
