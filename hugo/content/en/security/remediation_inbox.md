@@ -115,7 +115,7 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
-- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead.
+- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI products are turned off for your organization, a summary of the impact is shown instead.
 - **Ticketing, Assignee, and PRs**: The remediation case, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
@@ -168,7 +168,7 @@ Findings that belong to a remediation case show the linked case in the SCA and C
 |---|---|---|
 | Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Sync remediation cases to Jira, ServiceNow, or Linear. | See [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool). |
-| AI summary | The **Know before you remediate** summary. | Enable generative AI features for your organization. |
+| AI summary | The **Know before you remediate** summary. | Turn on AI products for your organization. See [AI Credits admin controls][16]. |
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
@@ -208,3 +208,4 @@ For more information, see [Ticketing Integrations][12].
 [13]: /account_management/rbac/permissions/
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /mcp_server/setup/
+[16]: /account_management/billing/ai_credits/#admin-controls
