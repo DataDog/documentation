@@ -2192,7 +2192,7 @@ Creates a pipeline from a name and a configuration in the [Observability Pipelin
 
 Tools for [Datadog On-Call][101], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
 
-<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>). Contact <a href="/help">Datadog support</a> to request access.</div>
+<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>).</div>
 
 ### `list_oncall_pages`
 *Toolset: **on-call***\
@@ -2216,7 +2216,7 @@ Retrieves an On-Call page by its UUID or page key, including its status, title, 
 Pages a team or a single user through On-Call. Paging a team notifies whoever the team's escalation policy has on call. Paging a user notifies only that user, through their own notification rules, with no escalation. Set the urgency to `low` or `high`, and optionally add a description and tags. Adding a `service:<name>` tag associates the page with that service.
 
 - Page the `payments` team with high urgency: checkout error rate is above 5%.
-- Send a low-urgency page to the on-call responder for `checkout-api` about elevated latency.
+- Send a low-urgency page to the `payments` team about elevated latency on `checkout-api`, tagged `service:checkout-api`.
 
 <div class="alert alert-warning">This tool notifies real people. Confirm the target and urgency before your agent creates a page.</div>
 
