@@ -80,6 +80,9 @@ Workload Protection
 : - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 : - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
+Network Path
+: - (Preview) Create and update Network Path scheduled tests and dynamic test filters from the Datadog UI, without restarting the Agent. See [Create tests in the UI][49].
+
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
@@ -146,6 +149,7 @@ Consult the documentation below for instructions specific to the product you're 
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
 | Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
+| Network Path            | [Create tests in the UI][49]                                                                |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
 | Data Observability      | [PostgreSQL](/data_observability/quality_monitoring/transactional_databases/postgres/#enable-remote-configuration) |
@@ -216,3 +220,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [46]: /account_management/rbac/permissions/#serverless
 [47]: /containers/autoscaling
 [48]: /feature_flags/
+[49]: /network_monitoring/network_path/setup/#create-tests-in-the-ui
