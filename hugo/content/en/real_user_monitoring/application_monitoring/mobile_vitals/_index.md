@@ -164,7 +164,7 @@ The following telemetry provide insight into your mobile application's performan
 ## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance timeseries is in Preview, and collection is off by default. To view timeseries in Datadog, join the Preview, then enable collection in the SDK as described in [Enable collection](#enable-collection).
+Performance timeseries is in Preview, and collection is off by default. To view timeseries in Datadog, join the Preview, then enable collection in the SDK as described in the [Enable collection](#enable-collection) section.
 {{< /callout >}}
 
 Performance timeseries is available on the iOS and Android SDKs.
@@ -177,7 +177,7 @@ After collection is enabled, timeseries are captured for all sessions.
 
 Two series are collected:
 
-- **CPU usage**: the percentage of the device's total CPU capacity consumed by your application, across all cores and capped at 100%, where 100% means all cores are fully used. For example, an app fully using 2 cores of an 8-core device reports 25%. This differs from the CPU ticks per second reported for a view.
+- **CPU usage**: the percentage of the device's total CPU capacity, across all cores, that your application consumes. The value is capped at 100%, which represents all cores fully in use. For example, an app fully using 2 cores of an 8-core device reports 25%. This differs from the CPU ticks per second reported for a view.
 - **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
 
 ### Enable collection
@@ -189,7 +189,7 @@ Performance timeseries requires the following minimum SDK versions:
 | iOS     | 3.21.0          |
 | Android | 3.16.0          |
 
-Timeseries collection is an experimental API, so you must opt in to it explicitly. Enable it on the RUM configuration before you enable RUM:
+Timeseries collection uses an experimental API, so you must opt in explicitly. Set the timeseries configuration on the RUM configuration before you enable RUM:
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -204,7 +204,7 @@ Datadog.initialize(
 )
 
 var rumConfig = RUM.Configuration(applicationID: "<RUM_APPLICATION_ID>")
-rumConfig.timeseries = .default // memory + CPU
+rumConfig.timeseries = .default // CPU + memory
 // or, to collect CPU only:
 // rumConfig.timeseries = RUM.Configuration.Timeseries(collectTypes: [.cpu])
 RUM.enable(with: rumConfig)
@@ -232,7 +232,7 @@ val configuration = Configuration.Builder(
 Datadog.initialize(context, configuration, TrackingConsent.GRANTED)
 
 @OptIn(ExperimentalRumApi::class)
-val rumConfig = RumConfiguration.Builder(applicationId)
+val rumConfig = RumConfiguration.Builder("<RUM_APPLICATION_ID>")
     .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT) // CPU + memory
     // or, to collect CPU only:
     // .setTimeseriesConfiguration(TimeseriesConfiguration(setOf(TimeseriesType.CPU)))
@@ -243,9 +243,9 @@ Rum.enable(rumConfig)
 {{% /tab %}}
 {{< /tabs >}}
 
-Passing an empty set of types disables timeseries collection on both SDKs.
+To disable timeseries collection on either SDK, pass an empty set of types.
 
-To find sessions with timeseries data in the [RUM Explorer][3], filter on `@session.has_timeseries:true`.
+To find sessions with timeseries data in the [RUM Explorer][6], filter on `@session.has_timeseries:true`.
 
 ## Further Reading
 
@@ -256,4 +256,5 @@ To find sessions with timeseries data in the [RUM Explorer][3], filter on `@sess
 [3]: /real_user_monitoring/explorer/events/#performance-timeseries
 [4]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
 [5]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
+[6]: /real_user_monitoring/explorer/
 
