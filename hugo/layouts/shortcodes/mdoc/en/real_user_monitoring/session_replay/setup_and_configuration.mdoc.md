@@ -558,8 +558,6 @@ To instrument your consolidated web and native Session Replay views for React Na
 1. Enable [webview tracking][25] for your React Native application.
 2. Enable [Session Replay][26] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
-
-**Note**: This feature is not compatible with React Native's [New Architecture][27] for Android.
 {% /if %}
 <!-- end React Native -->
 
@@ -933,7 +931,6 @@ See [Connect Session Replay to your third-party tools][30].
 [24]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=kotlin_multiplatform#instrument-your-web-views
 [25]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=react_native#instrument-your-web-views
 [26]: /session_replay/setup_and_configuration/?platform=browser#setup
-[27]: https://reactnative.dev/architecture/landing-page
 [28]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=flutter
 [29]: https://pub.dev/packages/datadog_session_replay
 [30]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
