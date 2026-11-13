@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://app.datadoghq.com/forms/share/425ec42e050693d6be9304a14b0df5eb1d1c32c191bedbb58ada77718464dc81" btn_hidden="false" header="Join the Preview!" >}}
-Database Monitoring for IBM Db2 is available in Preview after updating your Datadog Agent to version 7.86! Request access and share feedback about what functionality would help the most with your IBM Db2 instances.
+Database Monitoring for IBM Db2 is available in Preview for organizations using Datadog Agent version 7.86 or later! Request access and share feedback about what functionality would help the most with your IBM Db2 instances.
 {{< /callout >}}
 
 <!-- vale Datadog.headings = NO -->
