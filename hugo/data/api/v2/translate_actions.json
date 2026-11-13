@@ -5525,10 +5525,6 @@
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
   },
-  "ListAiGatewayRateLimitInstancesSummaries": {
-    "description": "Aggregate the counters of every template rate limit in the organization in one call, with one summary per template in the order the rate limit list returns them. Each summary is the one the single-template counter summary endpoint returns without split_dim, including scope_restricted and truncated. Rate limits with one shared allowance are left out. Summaries are cached for up to 15 seconds.",
-    "summary": "List AI Gateway rate limit counter summaries"
-  },
   "GetAiGatewayRateLimitUsage": {
     "description": "Get live usage for the organization's rate limits. Returns requests and tokens counted in the rolling one-minute window and requests limited in the last 15 minutes for each enabled rate limit, plus `untracked` (traffic no enforced rate limit covers) and `total` (all gateway traffic).",
     "summary": "Get AI Gateway rate limit usage"
@@ -5548,11 +5544,11 @@
     "request_schema_description": "Request to update an AI Gateway rate limit."
   },
   "ListAiGatewayRateLimitInstances": {
-    "description": "List the hot counters of a template rate limit, one per matched user, Team, or value, with their live usage. Only counters at 80% or more of a limit, or that limited or would have limited a request, in the last hour are listed. A counter appears within a few minutes of becoming hot. Usage is read for at most 200 counters per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
+    "description": "List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
     "summary": "List AI Gateway rate limit counters"
   },
   "GetAiGatewayRateLimitInstancesSummary": {
-    "description": "Aggregate a template rate limit's hot counters (those near or at a limit, or limiting, in the last hour), including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
+    "description": "Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
     "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
@@ -5914,17 +5910,17 @@
     "summary": "Get an AI Gateway routing rule"
   },
   "AggregateRUMEvents": {
-    "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
+    "description": "Aggregate RUM events into buckets of computed metrics and timeseries. Use this endpoint for counts, percentiles, top-N breakdowns, and timeseries. To read individual events, use `SearchRUMEvents` or `ListRUMEvents`.\n\n`filter` selects the events with the [RUM search syntax][1] and a time range (`from` and `to` accept date math such as `now-15m`, ISO 8601 dates, and timestamps in milliseconds). Each `compute` rule produces one value (`type: total`) or one list of time points (`type: timeseries`) per bucket, keyed `c0`, `c1`, and so on, in the response. Each `group_by` rule splits the events into buckets by a facet, returned in `by`. Use `histogram` on a numeric facet to bucket it by ranges.\n\n[1]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Aggregate RUM events",
     "request_description": "",
-    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization.\n`filter.indexes` is not supported and is ignored."
   },
   "GetRUMApplications": {
-    "description": "List all the RUM applications in your organization.",
+    "description": "List the enabled RUM applications of your organization. Applications deleted with `DeleteRUMApplication` are not returned.\nThe response is not paginated and does not include the `client_token`. Use `GetRUMApplication` to retrieve it.\nUse the `application_id` of an item as the `id` path parameter of the other application operations, and as `@application.id` in RUM event queries.",
     "summary": "List all the RUM applications"
   },
   "CreateRUMApplication": {
-    "description": "Create a new RUM application in your organization.",
+    "description": "Create a RUM application in your organization.\nThe application ID is generated by Datadog and returned in `data.attributes.application_id`. A client token is created with the application and returned in `data.attributes.client_token`. Use both to initialize the RUM SDK.\nThe application is created with the default retention filters unless `create_default_retention_filters` is `false`.",
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
@@ -5998,15 +5994,15 @@
     "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
-    "description": "Delete an existing RUM application in your organization.",
+    "description": "Delete an existing RUM application in your organization.\nThe application is disabled and its client token is revoked, so the RUM SDK stops sending events for it. The application cannot be re-enabled through the API, and its application ID cannot be reused.\nDeleting an application with Product Analytics enabled requires the `product_analytics_apps_write` permission.",
     "summary": "Delete a RUM application"
   },
   "GetRUMApplication": {
-    "description": "Get the RUM application with given ID in your organization.",
+    "description": "Get the RUM application with the given ID in your organization.\nUnlike `GetRUMApplications`, the response includes the `client_token` used to initialize the RUM SDK.",
     "summary": "Get a RUM application"
   },
   "UpdateRUMApplication": {
-    "description": "Update the RUM application with given ID in your organization.",
+    "description": "Update the RUM application with the given ID in your organization.\nThis is a partial update: only the attributes present in the request are changed. `data.id` must match the `id` path parameter.",
     "summary": "Update a RUM application",
     "request_description": "",
     "request_schema_description": "RUM application update request."
@@ -6112,14 +6108,14 @@
     "summary": "List teams ownership rules"
   },
   "ListRUMEvents": {
-    "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range. Use this endpoint to see your latest RUM events with a simple query. For long filters, use `SearchRUMEvents`. To compute counts, percentiles, or timeseries, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. Without `filter[from]` and `filter[to]`, the endpoint searches the last 15 minutes.\n\n[Results are paginated][1]: `page[limit]` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after` and `links.next`. Request `links.next`, or send `meta.page.after` as `page[cursor]` with the same other parameters, and repeat until they are absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Get a list of RUM events"
   },
   "SearchRUMEvents": {
-    "description": "List endpoint returns RUM events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex RUM events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range, as a list of individual events. Use this endpoint when the filter is too long for a query string, or to set `options`. To compute counts, percentiles, or timeseries instead of reading events, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. `filter.from` and `filter.to` accept date math (`now-15m`), ISO 8601 dates, and timestamps in milliseconds.\n\n[Results are paginated][1]: `page.limit` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after`. Send it as `page.cursor`, with the same `filter` and `sort`, to get the next page, and repeat until `meta.page.after` is absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Search RUM events",
     "request_description": "",
-    "request_schema_description": "The request for a RUM events list."
+    "request_schema_description": "The request for a RUM events list. All attributes are optional: without any, the request returns the first 10 events of the last 15 minutes."
   },
   "CreateRUMOperation": {
     "description": "Create a new RUM operation, defining the journey used to detect it from RUM events.",
