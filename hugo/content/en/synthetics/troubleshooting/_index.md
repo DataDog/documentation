@@ -254,7 +254,7 @@ Additionally, `ping` requires elevated privileges to create the raw socket. The 
 
 Chrome version 149 introduced stricter validation for request headers, which can cause subresource requests to fail with `net::ERR_INVALID_ARGUMENT`. Earlier Chrome versions were more permissive.
 
-**Solution**: Upgrade your private location to [version 1.69.1 or later][106] to resolve this issue.
+**Solution**: Upgrade your private location to [version 1.70.0 or later][106] to resolve this issue.
 
 [101]: /synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/

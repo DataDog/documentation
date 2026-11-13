@@ -141,9 +141,9 @@ The following script adds a custom attribute to a change event and adds a prefix
 
 ## Test the script
 
-Before you save the processor, you can preview what your script does to a sample event.
+Before you save the processor, you can preview what your script does to a sample event. The test validates the script the same way as when you save the processor.
 
-<div class="alert alert-warning">The test runs your script in your browser without the processor's validation. It doesn't check which fields you can update, allowed values, value types, blocked functions, or the script size limit. A script that works in the test can still be rejected when you save it, or can leave events unchanged in the pipeline. Also, some functions, such as <code>get_hostname</code> and <code>parse_proto</code>, can't run in the browser. If your script uses one of these functions, the test shows a warning. The test output might also differ from what the processor produces in the pipeline.</div>
+<div class="alert alert-warning">A script that passes validation can still fail when it runs in the pipeline. For example, it can set a value that doesn't match a field's accepted values, such as <code>.priority = 1</code>. When this happens, the processor doesn't apply any of the script's updates.</div>
 
 To test the script:
 
@@ -152,7 +152,7 @@ To test the script:
     You can also use the JSON object from the {{< ui >}}Event Attributes{{< /ui >}} tab of the event side panel. For more information, see [Navigate the Explorer][5]. If your script uses `message` or `tags`, add those fields at the top level of the JSON. The side panel JSON doesn't include them.
 
 1. Click {{< ui >}}Run{{< /ui >}}.
-1. Review the transformed event in the {{< ui >}}Output{{< /ui >}} pane. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab. Compile and runtime errors appear in the {{< ui >}}Errors{{< /ui >}} tab and are highlighted in the script editor.
+1. Review the transformed event in the {{< ui >}}Output{{< /ui >}} pane. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab. Errors from validation or from running the script on the sample event appear in the {{< ui >}}Errors{{< /ui >}} tab and in the script editor.
 
 {{< img src="events/pipelines/vrl_processor_test_sample.png" alt="Testing a VRL script against a sample alert event, with the transformed event in the Output tab" style="width:80%;" >}}
 
@@ -162,7 +162,7 @@ Scripts for VRL processors have the following limitations:
 
 - Scripts can be up to 10,000 bytes. For ASCII-only scripts, this is about 10,000 characters. Non-ASCII characters use more than one byte each, which reduces the maximum character count.
 - Fallible functions must handle their errors, for example with `!` (such as `parse_json!`), `??`, or `result, err = ...`. Scripts with unhandled errors do not compile.
-- The `get_secret`, `set_secret`, `remove_secret`, and `set_semantic_meaning` functions are not available.
+- The following functions are not available: `dns_lookup`, `encode_proto`, `get_env_var`, `get_hostname`, `get_secret`, `http_request`, `parse_proto`, `remove_secret`, `reverse_dns`, `set_secret`, `set_semantic_meaning`, and `validate_json_schema`.
 - Fields that belong to another event category are not available to the script. For example, `.status` is not available on change events. Writes to these fields are skipped, and the rest of the script still applies.
 - Metadata written with the `%` path is not saved to the event.
 - Timestamp values can't be stored in the event. For example, `.custom.processed_at = now()` causes a runtime error, which means that any changes from this processor are not applied. Convert timestamps to strings first, such as `format_timestamp!(now(), "%+")`.

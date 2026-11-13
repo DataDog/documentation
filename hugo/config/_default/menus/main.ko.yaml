@@ -9,7 +9,7 @@ menu:
     - name: Incident Response
       identifier: incident_response_heading
       weight: 3000000
-    - name: 작업 및 문제 해결
+    - name: 액션 및 문제 해결
       identifier: actions_heading
       weight: 4000000
     - name: 인프라
@@ -151,7 +151,7 @@ menu:
       url: getting_started/internal_developer_portal/
       parent: getting_started
       weight: 13
-    - name: 로그
+    - name: Logs
       identifier: getting_started_logs
       url: getting_started/logs/
       parent: getting_started
@@ -196,7 +196,7 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 21
-    - name: 앱 및 API 보호
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
@@ -550,6 +550,16 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
+    - name: 인프라 모드
+      identifier: agent_configuration_infrastructure_modes
+      url: agent/configuration/infrastructure-modes/
+      parent: agent_configuration
+      weight: 610
+    - name: Agent Data Plane
+      identifier: agent_configuration_agent_data_plane
+      url: agent/configuration/agent-data-plane/
+      parent: agent_configuration
+      weight: 611
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -772,7 +782,7 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel_collect
       weight: 402
-    - name: 컬렉터 메모리 제한
+    - name: Collector 메모리 제한
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
@@ -877,7 +887,7 @@ menu:
       identifier: otel_metrics_traces
       parent: otel_explore
       weight: 702
-    - name: RUM 및 트레이스
+    - name: RUM과 트레이스
       url: /opentelemetry/correlate/rum_and_traces/
       identifier: otel_rum
       parent: otel_explore
@@ -1523,7 +1533,7 @@ menu:
       identifier: cloudcraft_api_teams_list
       parent: cloudcraft_api_teams
       weight: 1
-    - name: Users
+    - name: 사용자
       url: cloudcraft/api/users/
       identifier: cloudcraft_api_users
       parent: cloudcraft_api
@@ -1544,6 +1554,11 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
+    - name: 트레이스를 사용하여 에이전트를 개선하세요
+      url: actions/agents/improve_agents_with_traces/
+      identifier: bits_ai_agent_builder_improve_with_traces
+      parent: bits_ai_agent_builder
+      weight: 101
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
@@ -1599,7 +1614,7 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 701
-    - name: Bits Investigation Integrations 및 설정
+    - name: Integrations 및 설정
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
@@ -1619,6 +1634,11 @@ menu:
       identifier: bits_ai_sre_improve_accuracy
       parent: bits_ai_sre
       weight: 705
+    - name: "MCP, API, CLI"
+      url: bits_ai/bits_investigation/mcp_api_cli
+      identifier: bits_ai_sre_mcp_api_cli
+      parent: bits_ai_sre
+      weight: 706
     - name: Bits Live Debugger
       url: tracing/live_debugger/bits-live-debugger
       identifier: bits_ai_live_debugger
@@ -1895,7 +1915,7 @@ menu:
       parent: alerting
       identifier: monitor_types
       weight: 4
-    - name: 알림
+    - name: Notifications
       url: monitors/notify/
       parent: alerting
       identifier: monitors_notify
@@ -1930,7 +1950,7 @@ menu:
       parent: monitors_manage
       identifier: monitors_manage_search
       weight: 701
-    - name: 확인 요약
+    - name: Check Summary
       url: monitors/manage/check_summary/
       parent: monitors_manage
       identifier: monitors_check_summary
@@ -2001,7 +2021,7 @@ menu:
       parent: slos
       identifier: slos_guides
       weight: 6
-    - name: 메트릭
+    - name: Metrics
       url: metrics/
       identifier: metrics_top_level
       pre: metric
@@ -2324,7 +2344,7 @@ menu:
       parent: idp_use_cases
       identifier: idp_use_cases_cloud_cost_management
       weight: 1002
-    - name: 앱 및 API 보호
+    - name: App and API Protection
       url: internal_developer_portal/use_cases/appsec_management
       parent: idp_use_cases
       identifier: idp_use_cases_appsec_management
@@ -2390,12 +2410,12 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits Code
-      url: bits_ai/bits_code
+    - name: Bits Investigation
+      url: error_tracking/bits_investigation
       parent: error_tracking
-      identifier: error_tracking_bits_ai_dev_agent
+      identifier: error_tracking_bits_investigation
       weight: 5
-    - name: 모니터
+    - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
@@ -2430,7 +2450,7 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_mobile
       weight: 102
-    - name: 재생 오류
+    - name: 오류 재생
       url: error_tracking/frontend/replay_errors
       parent: error_tracking_frontend
       identifier: error_tracking_replays
@@ -2440,7 +2460,7 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_rum
       weight: 104
-    - name: 로그
+    - name: Logs
       url: error_tracking/frontend/logs
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
@@ -2485,7 +2505,7 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_apm
       weight: 103
-    - name: 로그
+    - name: Logs
       url: error_tracking/backend/logs
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
@@ -2612,6 +2632,11 @@ menu:
       identifier: string_builder_processor
       parent: overview
       weight: 210
+    - name: VRL Processor
+      url: events/pipelines_and_processors/vrl_processor
+      identifier: vrl_processor
+      parent: overview
+      weight: 211
     - name: 탐색기
       url: events/explorer/
       identifier: events_explorer
@@ -2642,7 +2667,7 @@ menu:
       identifier: events_explorer_attributes
       parent: events_explorer
       weight: 305
-    - name: 알림
+    - name: Notifications
       url: events/explorer/notifications
       identifier: event_explorer_notifications
       parent: events_explorer
@@ -2838,11 +2863,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Google Meet
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_meet
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_meet
+      weight: 508
     - name: Zoom
       url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
       parent: incidents_integrations
       identifier: incidents_integrations_zoom
-      weight: 508
+      weight: 509
     - name: 가이드
       url: incident_response/incident_management/guides/
       parent: incidents
@@ -2909,6 +2939,11 @@ menu:
       parent: oncall
       identifier: oncall_integrations
       weight: 8
+    - name: ServiceNow
+      url: incident_response/on-call/integrations/servicenow/
+      parent: oncall_integrations
+      identifier: oncall_integrations_servicenow
+      weight: 801
     - name: 가이드
       url: incident_response/on-call/guides/
       parent: oncall
@@ -2920,6 +2955,26 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
+    - name: 구성 요소
+      url: incident_response/status_pages/components/
+      parent: status_pages
+      identifier: status_pages_components
+      weight: 1
+    - name: 공지사항
+      url: incident_response/status_pages/notices/
+      parent: status_pages
+      identifier: status_pages_notices
+      weight: 2
+    - name: 공지 템플릿
+      url: incident_response/status_pages/templates/
+      parent: status_pages
+      identifier: status_pages_templates
+      weight: 3
+    - name: 구독
+      url: incident_response/status_pages/subscriptions/
+      parent: status_pages
+      identifier: status_pages_subscriptions
+      weight: 4
     - name: Work Management
       url: incident_response/work_management/
       pre: case-management
@@ -2971,7 +3026,7 @@ menu:
       parent: case_management
       identifier: case_management_ai
       weight: 8
-    - name: 사용자 지정 Agent
+    - name: 사용자 지정 에이전트
       url: incident_response/work_management/ai/custom_agents
       parent: case_management_ai
       identifier: case_management_ai_custom_agents
@@ -2981,7 +3036,7 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 9
-    - name: Agent
+    - name: 에이전트
       weight: 7
     - name: Bits Agent Builder
       url: actions/agents/
@@ -2989,6 +3044,11 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
+    - name: 트레이스를 사용하여 에이전트 개선
+      url: actions/agents/improve_agents_with_traces/
+      parent: agents
+      identifier: agents_improve_with_traces
+      weight: 1
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
@@ -3301,7 +3361,7 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_ccm
       weight: 104
-    - name: 모니터
+    - name: Monitors
       url: datadog_cloudcraft/overlays/monitors/
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_monitors
@@ -3511,7 +3571,7 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
       weight: 406
-    - name: 앱 및 API 보호
+    - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
@@ -3803,7 +3863,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
       weight: 109
-    - name: 보안 함수
+    - name: 함수 보호
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
@@ -3878,7 +3938,7 @@ menu:
       parent: serverless
       identifier: serverless_azure
       weight: 2
-    - name: Azure 앱 서비스
+    - name: Azure App Service
       url: serverless/azure_app_service
       parent: serverless_azure
       identifier: serverless_app_services
@@ -3898,7 +3958,7 @@ menu:
       url: serverless/azure_app_service/windows_code
       parent: serverless_app_services
       weight: 403
-    - name: Azure 컨테이너 앱
+    - name: Azure Container Apps
       url: serverless/azure_container_apps
       parent: serverless_azure
       identifier: serverless_container_apps
@@ -3908,6 +3968,11 @@ menu:
       parent: serverless_container_apps
       identifier: serverless_container_apps_manual
       weight: 1
+    - name: 관리형 OpenTelemetry Agent
+      url: serverless/azure_container_apps/otel_managed_agent
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_otel_managed_agent
+      weight: 2
     - name: Azure 데이터베이스 및 메시징 서비스
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -3918,12 +3983,12 @@ menu:
       parent: serverless_azure_database_messaging_services
       identifier: serverless_azure_database_messaging_services_cosmosdb
       weight: 601
-    - name: 이벤트 허브
+    - name: Event Hubs
       url: serverless/azure_database_messaging_services/azure_event_hubs
       parent: serverless_azure_database_messaging_services
       identifier: serverless_azure_database_messaging_services_event_hubs
       weight: 602
-    - name: 서비스 버스
+    - name: Service Bus
       url: serverless/azure_database_messaging_services/azure_service_bus
       parent: serverless_azure_database_messaging_services
       identifier: serverless_azure_database_messaging_services_service_bus
@@ -3958,12 +4023,12 @@ menu:
       parent: serverless_google
       weight: 302
       identifier: serverless_gcr_jobs
-    - name: Cloud Run 함수
+    - name: Cloud Run Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_google
       weight: 303
       identifier: serverless_gcr_functions
-    - name: Cloud Run 함수(1세대)
+    - name: Cloud Run Functions(1세대)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_google
       weight: 304
@@ -4139,7 +4204,7 @@ menu:
       parent: nm_parent
       identifier: ndm_netflow
       weight: 4
-    - name: 모니터
+    - name: Monitors
       url: monitors/types/netflow
       parent: ndm_netflow
       identifier: ndm_netflow_monitors
@@ -4169,7 +4234,7 @@ menu:
       parent: network_path
       identifier: network_path_as_view
       weight: 505
-    - name: 모니터
+    - name: Monitors
       url: monitors/types/network_path/
       parent: network_path
       identifier: network_path_monitor
@@ -4361,6 +4426,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_ai_costs
       weight: 5
+    - name: AI Gateway 할당
+      url: cloud_cost_management/ai_costs/ai_gateway_allocation
+      parent: cloud_cost_ai_costs
+      identifier: cloud_cost_ai_gateway_allocation
+      weight: 501
     - name: 보고
       url: cloud_cost_management/reporting
       parent: cloud_cost
@@ -4391,7 +4461,7 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_optimization_automation
       weight: 700
-    - name: 알림
+    - name: Notifications
       url: cloud_cost_management/recommendations/notifications
       parent: cloud_cost_recommendations
       identifier: cloud_cost_notifications
@@ -4426,7 +4496,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_cost_changes
       weight: 9
-    - name: 모니터
+    - name: Monitors
       url: cloud_cost_management/cost_changes/monitors
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_cost_changes_monitors
@@ -4837,21 +4907,26 @@ menu:
       parent: tracing_services
       identifier: tracing_env_remapping_rules
       weight: 909
+    - name: 리소스 이름 바꾸기 규칙
+      url: tracing/services/resource_renaming_rules
+      parent: tracing_services
+      identifier: tracing_resource_renaming_rules
+      weight: 910
     - name: 태그 보강
       url: tracing/services/tag_enrichment
       parent: tracing_services
       identifier: tracing_tag_enrichment
-      weight: 910
+      weight: 911
     - name: 통합 재정의 제거
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 911
+      weight: 912
     - name: APM 모니터
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 912
+      weight: 913
     - name: Endpoint Observability
       url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
@@ -4862,7 +4937,7 @@ menu:
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 1002
-    - name: 모니터 엔드포인트
+    - name: 엔드포인트 모니터링
       url: internal_developer_portal/catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
@@ -4902,12 +4977,12 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
       weight: 1303
-    - name: 스택 추적
+    - name: 스택 트레이스
       url: tracing/error_tracking/stack_traces
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_stack_traces
       weight: 1304
-    - name: 모니터
+    - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_monitors
@@ -5334,7 +5409,7 @@ menu:
       parent: dbm_setup_clickhouse
       identifier: dbm_setup_clickhouse_selfhosted
       weight: 10901
-    - name: ClickHouse 클라우드
+    - name: ClickHouse Cloud
       url: database_monitoring/setup_clickhouse/cloud
       parent: dbm_setup_clickhouse
       identifier: dbm_setup_clickhouse_cloud
@@ -5419,16 +5494,21 @@ menu:
       parent: dbm
       identifier: dbm_workbench
       weight: 7
+    - name: Database Monitoring PR 검토
+      url: database_monitoring/pr_reviews/
+      parent: dbm
+      identifier: dbm_pr_reviews
+      weight: 8
     - name: 문제 해결하기
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 8
+      weight: 9
     - name: 가이드
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 9
+      weight: 10
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5519,16 +5599,31 @@ menu:
       identifier: redshift
       parent: data_warehouses
       weight: 4000000
+    - name: ClickHouse Cloud
+      url: data_observability/quality_monitoring/data_warehouses/clickhouse
+      identifier: clickhouse_cloud_data_obs
+      parent: data_warehouses
+      weight: 5000000
+    - name: Microsoft Fabric Warehouse
+      url: data_observability/quality_monitoring/data_warehouses/fabric
+      identifier: data_obs_fabric_warehouse
+      parent: data_warehouses
+      weight: 6000000
     - name: 데이터 레이크
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
       parent: quality_monitoring
       weight: 250000
-    - name: Iceberg 표(AWS Glue)
+    - name: AWS Glue
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Amazon Athena Query History
+      url: data_observability/quality_monitoring/data_lakes/amazon_athena
+      identifier: amazon_athena_query_history
+      parent: data_lakes
+      weight: 2000000
     - name: 트랜잭션 데이터베이스
       url: data_observability/quality_monitoring/transactional_databases
       identifier: transactional_databases
@@ -5763,6 +5858,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_prompt_tracking
       weight: 311
+    - name: 에이전트 추적
+      url: llm_observability/instrument/agent_tracking
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_agent_tracking
+      weight: 312
     - name: 멀티모달
       url: llm_observability/instrument/multimodal
       parent: llm_obs_instrumentation
@@ -5788,7 +5888,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
       weight: 403
-    - name: 메트릭
+    - name: Metrics
       url: llm_observability/investigate/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
@@ -5868,11 +5968,16 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Data Access Control
-      url: llm_observability/improve/access_control
+    - name: Online Experiments
+      url: llm_observability/improve/online_experiments
       parent: llm_obs_improve
-      identifier: llm_obs_improve_access_control
+      identifier: llm_obs_online_experiments
       weight: 504
+    - name: Prompt Experimentation
+      url: llm_observability/improve/online_experiments/prompt_experimentation
+      parent: llm_obs_improve
+      identifier: llm_obs_prompt_experimentation
+      weight: 505
     - name: 구성
       url: llm_observability/configure/
       parent: llm_obs
@@ -5883,21 +5988,26 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
-    - name: Prompt Experimentation
-      url: llm_observability/configure/prompt_experimentation
-      parent: llm_obs_configure
-      identifier: llm_obs_prompt_experimentation
-      weight: 602
     - name: 자동화 규칙
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
+    - name: AI Gateway
+      url: llm_observability/configure/ai_gateway
+      parent: llm_obs_configure
+      identifier: llm_obs_ai_gateway
+      weight: 604
     - name: 데이터 거버넌스
       url: llm_observability/data_governance
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 7
+    - name: Data Access Control
+      url: llm_observability/data_governance/access_control
+      parent: llm_obs_data_security_and_rbac
+      identifier: llm_obs_data_governance_access_control
+      weight: 701
     - name: Lapdog
       url: llm_observability/lapdog
       parent: llm_obs
@@ -5908,7 +6018,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_guide
       weight: 9
-    - name: GPU 모니터링
+    - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui
       identifier: gpu_monitoring
@@ -5944,6 +6054,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_inference
       weight: 6
+    - name: 지속적 추적
+      url: gpu_monitoring/tracing/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_tracing
+      weight: 7
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -5955,132 +6070,352 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: CI/CD 최적화
+      url: cicd/
+      pre: ci
+      identifier: cicd
+      parent: software_delivery_heading
+      weight: 5000
     - name: CI Visibility
       url: continuous_integration/
-      pre: ci
-      identifier: ci
-      parent: software_delivery_heading
-      weight: 10000
-    - name: CI/CD 최적화
-      url: continuous_integration/cicd_optimization/
-      parent: ci
-      identifier: cicd_optimization
+      parent: cicd
+      identifier: cicd_ci_visibility
       weight: 1
-    - name: Pipeline Visibility
+    - name: CI 파이프라인 설정
       url: continuous_integration/pipelines/
-      parent: ci
-      identifier: pipeline_visibility
-      weight: 1
+      parent: cicd
+      identifier: cicd_pipeline_setup
+      weight: 2
     - name: AWS CodePipeline
       url: continuous_integration/pipelines/awscodepipeline/
-      parent: pipeline_visibility
-      identifier: ci_awscodepipeline
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_awscodepipeline
       weight: 101
     - name: Azure Pipelines
       url: continuous_integration/pipelines/azure/
-      parent: pipeline_visibility
-      identifier: ci_azure
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_azure
       weight: 102
     - name: Buildkite
       url: continuous_integration/pipelines/buildkite/
-      parent: pipeline_visibility
-      identifier: ci_buildkite
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_buildkite
       weight: 103
     - name: CircleCI
       url: continuous_integration/pipelines/circleci/
-      parent: pipeline_visibility
-      identifier: ci_circleci
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_circleci
       weight: 104
     - name: Codefresh
       url: continuous_integration/pipelines/codefresh/
-      parent: pipeline_visibility
-      identifier: ci_codefresh
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_codefresh
       weight: 105
     - name: GitHub Actions
       url: continuous_integration/pipelines/github/
-      parent: pipeline_visibility
-      identifier: ci_github
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_github
       weight: 106
     - name: GitLab
       url: continuous_integration/pipelines/gitlab/
-      parent: pipeline_visibility
-      identifier: ci_gitlab
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_gitlab
       weight: 107
     - name: Jenkins
       url: continuous_integration/pipelines/jenkins/
-      parent: pipeline_visibility
-      identifier: ci_jenkins
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_jenkins
       weight: 108
     - name: TeamCity
       url: continuous_integration/pipelines/teamcity/
-      parent: pipeline_visibility
-      identifier: ci_teamcity
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_teamcity
       weight: 109
     - name: 기타 CI 공급자
       url: continuous_integration/pipelines/custom/
-      parent: pipeline_visibility
-      identifier: ci_custom
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom
       weight: 110
-    - name: 자동 작업 재시도
-      url: continuous_integration/pipelines/automatic_retries/
-      parent: pipeline_visibility
-      identifier: ci_automatic_retries
-      weight: 111
     - name: 사용자 지정 명령
       url: continuous_integration/pipelines/custom_commands/
-      parent: pipeline_visibility
-      identifier: ci_custom_commands
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_commands
       weight: 112
     - name: 사용자 지정 태그 및 측정 지표
       url: continuous_integration/pipelines/custom_tags_and_measures/
-      parent: pipeline_visibility
-      identifier: ci_custom_tags_and_measures
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_tags_and_measures
       weight: 113
-    - name: 검색 및 관리
-      url: continuous_integration/search/
-      parent: ci
-      identifier: ci_search
-      weight: 2
-    - name: 탐색기
-      url: continuous_integration/explorer
-      parent: ci
-      identifier: ci_explorer
+    - name: Test Optimization
+      url: tests/
+      parent: cicd
+      identifier: cicd_test_optimization
       weight: 3
+    - name: 테스트 모음 설정
+      url: tests/setup/
+      parent: cicd
+      identifier: cicd_test_setup
+      weight: 4
+    - name: .NET
+      url: tests/setup/dotnet/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_dotnet
+      weight: 201
+    - name: Go
+      url: tests/setup/go/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_go
+      weight: 202
+    - name: Java 및 JVM 언어
+      url: tests/setup/java/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_java
+      weight: 203
+    - name: JavaScript 및 TypeScript
+      url: tests/setup/javascript/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_javascript
+      weight: 204
+    - name: Python
+      url: tests/setup/python/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_python
+      weight: 205
+    - name: Ruby
+      url: tests/setup/ruby/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_ruby
+      weight: 206
+    - name: Swift
+      url: tests/setup/swift/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift
+      weight: 207
+    - name: JUnit 보고서 업로드
+      url: tests/setup/junit_xml/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_junit_xml
+      weight: 208
+    - name: Bazel
+      url: tests/setup/bazel/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_bazel
+      weight: 209
+    - name: Go 테스트를 위한 Bazel 규칙
+      url: tests/setup/bazel/go/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_go
+      weight: 20901
+    - name: Java 테스트를 위한 Bazel 규칙
+      url: tests/setup/bazel/java/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_java
+      weight: 20902
+    - name: Python 테스트를 위한 Bazel 규칙
+      url: tests/setup/bazel/python/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_python
+      weight: 20903
+    - name: 네트워크 설정
+      url: tests/network/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_network
+      weight: 210
+    - name: Containers에서 테스트
+      url: tests/containers/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_containers
+      weight: 211
+    - name: 로그와 테스트 상호 연결
+      url: tests/correlate_logs_and_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_correlate_logs
+      weight: 212
+    - name: RUM을 사용한 브라우저 테스트
+      url: tests/browser_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_browser_tests
+      weight: 213
+    - name: RUM을 사용한 Swift 테스트
+      url: tests/swift_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift_tests
+      weight: 214
+    - name: 탐색기
+      url: continuous_integration/explorer/
+      parent: cicd
+      identifier: cicd_explorer
+      weight: 6
     - name: 검색 구문
       url: continuous_integration/explorer/search_syntax/
-      parent: ci_explorer
-      identifier: ci_explorer_search_syntax
-      weight: 301
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_syntax
+      weight: 401
     - name: 파이프라인 실행 검색
       url: continuous_integration/explorer/facets/
-      parent: ci_explorer
-      identifier: ci_explorer_facets
-      weight: 302
+      parent: cicd_explorer
+      identifier: cicd_explorer_facets
+      weight: 402
     - name: 내보내기
       url: continuous_integration/explorer/export/
-      parent: ci_explorer
-      identifier: ci_explorer_export
-      weight: 303
+      parent: cicd_explorer
+      identifier: cicd_explorer_export
+      weight: 403
     - name: Saved Views
       url: continuous_integration/explorer/saved_views/
-      parent: ci_explorer
-      identifier: ci_explorer_saved_views
-      weight: 304
-    - name: 모니터
-      url: monitors/types/ci/?tab=pipelines
-      parent: ci
-      identifier: ci_monitors
-      weight: 4
-    - name: 가이드
-      url: continuous_integration/guides/
-      parent: ci
-      identifier: ci_guides
-      weight: 5
+      parent: cicd_explorer
+      identifier: cicd_explorer_saved_views
+      weight: 404
+    - name: 검색 및 관리
+      url: continuous_integration/search/
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_and_manage
+      weight: 405
+    - name: 불안정한 테스트 관리
+      url: tests/flaky_management/
+      parent: cicd
+      identifier: cicd_flaky_management
+      weight: 7
+    - name: 불안정한 테스트 다루기
+      url: tests/flaky_tests/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_working_with
+      weight: 501
+    - name: 기능
+      url: cicd/features/
+      parent: cicd
+      identifier: cicd_features
+      weight: 8
+    - name: 자동 작업 재시도
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_features
+      identifier: cicd_features_automatic_job_retries
+      weight: 600
+    - name: Early Flake Detection
+      url: tests/flaky_tests/early_flake_detection/
+      parent: cicd_features
+      identifier: cicd_features_early_flake_detection
+      weight: 601
+    - name: 자동 테스트 재시도
+      url: tests/flaky_tests/auto_test_retries/
+      parent: cicd_features
+      identifier: cicd_features_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis/
+      parent: cicd_features
+      identifier: cicd_features_tia
+      weight: 603
+    - name: 작동 방식
+      url: tests/test_impact_analysis/how_it_works/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_how_it_works
+      weight: 60301
     - name: 문제 해결하기
-      url: continuous_integration/troubleshooting/
-      parent: ci
-      identifier: ci_troubleshooting
-      weight: 6
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_troubleshooting
+      weight: 60302
+    - name: 설정
+      url: tests/test_impact_analysis/setup/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_setup
+      weight: 60303
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_dotnet
+      weight: 6030301
+    - name: JavaScript 및 TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_javascript
+      weight: 6030302
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_python
+      weight: 6030303
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_swift
+      weight: 6030304
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_java
+      weight: 6030305
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_ruby
+      weight: 6030306
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_go
+      weight: 6030307
+    - name: 테스트 병렬화
+      url: tests/test_parallelization/
+      parent: cicd_features
+      identifier: cicd_features_parallelization
+      weight: 604
+    - name: 설정
+      url: tests/test_parallelization/setup/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_setup
+      weight: 60401
+    - name: 구성
+      url: tests/test_parallelization/configuration/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_configuration
+      weight: 60402
+    - name: 모범 사례
+      url: tests/test_parallelization/best_practices/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_best_practices
+      weight: 60403
+    - name: 문제 해결하기
+      url: tests/test_parallelization/troubleshooting/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_troubleshooting
+      weight: 60404
+    - name: 개발자 워크플로
+      url: tests/developer_workflows/
+      parent: cicd_features
+      identifier: cicd_features_developer_workflows
+      weight: 605
+    - name: 레거시 기능
+      url: cicd/features/legacy/
+      parent: cicd_features
+      identifier: cicd_features_legacy
+      weight: 606
+    - name: Monitors
+      url: monitors/types/ci/?tab=pipelines
+      parent: cicd
+      identifier: cicd_monitors
+      weight: 9
+    - name: 가이드
+      url: cicd/guides/
+      parent: cicd
+      identifier: cicd_guides
+      weight: 10
+    - name: 문제 해결하기
+      url: cicd/troubleshooting/
+      parent: cicd
+      identifier: cicd_troubleshooting
+      weight: 11
+    - name: CI Pipelines
+      url: cicd/troubleshooting/pipelines/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_pipeline
+      weight: 901
+    - name: 테스트
+      url: cicd/troubleshooting/tests/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_tests
+      weight: 902
     - name: CD Visibility
       url: continuous_delivery/
       pre: ci
@@ -6137,7 +6472,7 @@ menu:
       identifier: cd_features_rollbacks_detection
       parent: cd_features
       weight: 302
-    - name: 모니터
+    - name: Monitors
       url: monitors/types/ci/?tab=deployments
       parent: cd
       identifier: cd_monitors
@@ -6153,277 +6488,16 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
-    - name: JustInTime(JIT) 게이트
-      url: deployment_gates/setup/jit/
+    - name: Inline Gates
+      url: deployment_gates/setup/inline/
       parent: deployment_gates_setup
-      identifier: deployment_gates_setup_jit
+      identifier: deployment_gates_setup_inline
       weight: 1
     - name: 사전 구성된 게이트
       url: deployment_gates/setup/preconfigured/
       parent: deployment_gates_setup
       identifier: deployment_gates_setup_preconfigured
       weight: 2
-    - name: 탐색
-      url: deployment_gates/explore/
-      parent: deployment_gates
-      identifier: deployment_gates_explore
-      weight: 2
-    - name: Test Optimization
-      url: tests/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: tests
-      weight: 40000
-    - name: CI/CD 최적화
-      url: continuous_integration/cicd_optimization/
-      parent: tests
-      identifier: tests_cicd_optimization
-      weight: 1
-    - name: 설정
-      url: tests/setup/
-      parent: tests
-      identifier: tests_setup
-      weight: 1
-    - name: .NET
-      url: tests/setup/dotnet/
-      parent: tests_setup
-      identifier: tests_setup_dotnet
-      weight: 101
-    - name: Java 및 JVM 언어
-      url: tests/setup/java/
-      parent: tests_setup
-      identifier: tests_setup_java
-      weight: 102
-    - name: JavaScript 및 TypeScript
-      url: tests/setup/javascript/
-      parent: tests_setup
-      identifier: tests_setup_javascript
-      weight: 103
-    - name: Python
-      url: tests/setup/python/
-      parent: tests_setup
-      identifier: tests_setup_python
-      weight: 104
-    - name: Ruby
-      url: tests/setup/ruby/
-      parent: tests_setup
-      identifier: tests_setup_ruby
-      weight: 105
-    - name: Swift
-      url: tests/setup/swift/
-      parent: tests_setup
-      identifier: tests_setup_swift
-      weight: 106
-    - name: Go
-      url: tests/setup/go/
-      parent: tests_setup
-      identifier: tests_setup_go
-      weight: 107
-    - name: JUnit 보고서 업로드
-      url: tests/setup/junit_xml/
-      parent: tests_setup
-      identifier: tests_setup_junit_xml
-      weight: 108
-    - name: Bazel
-      url: tests/setup/bazel/
-      parent: tests_setup
-      identifier: tests_setup_bazel
-      weight: 109
-    - name: Java
-      url: tests/setup/bazel/java/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_java
-      weight: 10901
-    - name: Python
-      url: tests/setup/bazel/python/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_python
-      weight: 10902
-    - name: Go
-      url: tests/setup/bazel/go/
-      parent: tests_setup_bazel
-      identifier: tests_setup_bazel_go
-      weight: 10903
-    - name: 네트워크 설정
-      url: tests/network/
-      parent: tests
-      identifier: tests_network
-      weight: 2
-    - name: Containers에서 테스트
-      url: tests/containers/
-      parent: tests
-      identifier: tests_containers
-      weight: 3
-    - name: 탐색기
-      url: tests/explorer/
-      parent: tests
-      identifier: tests_explorer
-      weight: 4
-    - name: 검색 구문
-      url: tests/explorer/search_syntax
-      parent: tests_explorer
-      identifier: tests_explorer_search_syntax
-      weight: 401
-    - name: 테스트 실행 검색
-      url: tests/explorer/facets/
-      parent: tests_explorer
-      identifier: tests_explorer_facets
-      weight: 402
-    - name: 내보내기
-      url: tests/explorer/export/
-      parent: tests_explorer
-      identifier: tests_explorer_export
-      weight: 403
-    - name: Saved Views
-      url: tests/explorer/saved_views/
-      parent: tests_explorer
-      identifier: tests_explorer_saved_views
-      weight: 404
-    - name: 모니터
-      url: monitors/types/ci/?tab=tests
-      parent: tests
-      identifier: tests_monitors
-      weight: 5
-    - name: 테스트 상태
-      url: tests/test_health
-      parent: tests
-      identifier: tests_test_health
-      weight: 6
-    - name: 불안정한 테스트 관리
-      url: tests/flaky_management
-      parent: tests
-      identifier: tests_flaky_management
-      weight: 7
-    - name: 불안정한 테스트 다루기
-      url: tests/flaky_tests
-      parent: tests
-      identifier: tests_flaky_tests
-      weight: 8
-    - name: Early Flake Detection
-      url: tests/flaky_tests/early_flake_detection
-      parent: tests_flaky_tests
-      identifier: tests_early_flake_detection
-      weight: 801
-    - name: 자동 테스트 재시도
-      url: tests/flaky_tests/auto_test_retries
-      parent: tests_flaky_tests
-      identifier: tests_auto_test_retries
-      weight: 802
-    - name: Test Impact Analysis
-      url: tests/test_impact_analysis
-      parent: tests
-      identifier: test_impact_analysis
-      weight: 9
-    - name: 설정
-      url: tests/test_impact_analysis/setup/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_setup
-      weight: 1001
-    - name: .NET
-      url: tests/test_impact_analysis/setup/dotnet/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_dotnet
-      weight: 9101
-    - name: JavaScript 및 TypeScript
-      url: tests/test_impact_analysis/setup/javascript/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_javascript
-      weight: 9102
-    - name: Python
-      url: tests/test_impact_analysis/setup/python/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_python
-      weight: 9103
-    - name: Swift
-      url: tests/test_impact_analysis/setup/swift/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_swift
-      weight: 9104
-    - name: Java
-      url: tests/test_impact_analysis/setup/java/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_java
-      weight: 9105
-    - name: Ruby
-      url: tests/test_impact_analysis/setup/ruby/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_ruby
-      weight: 9106
-    - name: Go
-      url: tests/test_impact_analysis/setup/go/
-      parent: test_impact_analysis_setup
-      identifier: test_impact_analysis_setup_go
-      weight: 9107
-    - name: 작동 방식
-      url: tests/test_impact_analysis/how_it_works/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_how_it_works
-      weight: 902
-    - name: 문제 해결하기
-      url: tests/test_impact_analysis/troubleshooting/
-      parent: test_impact_analysis
-      identifier: test_impact_analysis_troubleshooting
-      weight: 903
-    - name: 테스트 병렬화
-      url: tests/test_parallelization/
-      parent: tests
-      identifier: test_parallelization
-      weight: 10
-    - name: 설정
-      url: tests/test_parallelization/setup/
-      parent: test_parallelization
-      identifier: test_parallelization_setup
-      weight: 1001
-    - name: 구성
-      url: tests/test_parallelization/configuration/
-      parent: test_parallelization
-      identifier: test_parallelization_configuration
-      weight: 1002
-    - name: 모범 사례
-      url: tests/test_parallelization/best_practices/
-      parent: test_parallelization
-      identifier: test_parallelization_best_practices
-      weight: 1003
-    - name: 문제 해결하기
-      url: tests/test_parallelization/troubleshooting/
-      parent: test_parallelization
-      identifier: test_parallelization_troubleshooting
-      weight: 1004
-    - name: 개발자 워크플로
-      url: tests/developer_workflows
-      parent: tests
-      identifier: tests_developer_workflows
-      weight: 11
-    - name: Code Coverage
-      url: tests/code_coverage
-      parent: tests
-      identifier: tests_code_coverage
-      weight: 12
-    - name: RUM으로 브라우저 테스트 계측
-      url: tests/browser_tests
-      parent: tests
-      identifier: tests_browser_tests
-      weight: 13
-    - name: RUM으로 Swift 테스트 계측
-      url: tests/swift_tests
-      parent: tests
-      identifier: tests_swift_tests
-      weight: 14
-    - name: 로그와 테스트 상호 연결
-      url: tests/correlate_logs_and_tests
-      parent: tests
-      identifier: tests_correlate_logs_and_tests
-      weight: 15
-    - name: 가이드
-      url: tests/guides/
-      parent: tests
-      identifier: tests_guides
-      weight: 16
-    - name: 문제 해결하기
-      url: tests/troubleshooting/
-      parent: tests
-      identifier: tests_troubleshooting
-      weight: 17
     - name: Code Coverage
       url: code_coverage/
       pre: ci
@@ -6713,6 +6787,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
+    - name: Workflow Automation
+      url: feature_flags/concepts/workflow_automation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_workflow_automation
+      weight: 322
     - name: 사용 사례
       url: feature_flags/use_cases
       parent: feature_flags
@@ -6824,11 +6903,16 @@ menu:
       parent: sci_service_mapping
       identifier: sci_service_mapping_ruby
       weight: 7
+    - name: OpenTelemetry
+      url: source_code/service-mapping/opentelemetry/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_opentelemetry
+      weight: 8
     - name: 기타 언어
       url: source_code/service-mapping/other/
       parent: sci_service_mapping
       identifier: sci_service_mapping_other
-      weight: 8
+      weight: 9
     - name: 리소스 매핑
       url: source_code/resource-mapping/
       parent: source_code_integration
@@ -6855,16 +6939,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
       weight: 101
-    - name: Error Tracking
-      url: ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 102
-    - name: 로그
-      url: ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 103
     - name: VS Code &amp; Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6880,16 +6954,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: 로그
-      url: ide_plugins/vscode/logs/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_logs
-      weight: 103
-    - name: 예외 재생
-      url: ide_plugins/vscode/exception_replay/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_exception_replay
-      weight: 104
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -6946,7 +7010,7 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 107
-    - name: 내보내기 파이프라인
+    - name: 파이프라인 내보내기
       url: observability_pipelines/configuration/export_pipeline_configuration/
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
@@ -7036,6 +7100,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7146,66 +7215,71 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
       weight: 311
+    - name: 통합 Pipelines
+      url: observability_pipelines/processors/integration_pipelines
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_integration_pipelines
+      weight: 312
     - name: JSON 구문 분석
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 312
+      weight: 313
     - name: XML 구문 분석
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 313
+      weight: 314
     - name: 할당량
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 314
+      weight: 315
     - name: 축소
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 315
+      weight: 316
     - name: OCSF로 리매핑
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 316
+      weight: 317
     - name: 샘플
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 317
+      weight: 318
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 318
+      weight: 319
     - name: 배열 분할
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 319
+      weight: 320
     - name: 태그 허용/차단 목록
       url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_allow_block_list
-      weight: 320
+      weight: 321
     - name: 태그
       url: observability_pipelines/processors/tags/
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 321
+      weight: 322
     - name: 태그 카디널리티 제어
       url: observability_pipelines/processors/tag_cardinality_control
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
-      weight: 322
+      weight: 323
     - name: 스로틀
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 324
+      weight: 325
     - name: 목적지
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -7311,6 +7385,16 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
+    - name: Prometheus
+      url: /observability_pipelines/destinations/prometheus/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_prometheus
+      weight: 423
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
@@ -7457,62 +7541,67 @@ menu:
       url: logs/log_collection/maui/
       parent: log_collection
       weight: 109
+    - name: Electron
+      identifier: log_electron
+      url: logs/log_collection/electron/
+      parent: log_collection
+      weight: 110
     - name: "C#"
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 110
+      weight: 111
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 111
+      weight: 112
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 112
+      weight: 113
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 113
+      weight: 114
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 114
+      weight: 115
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 115
+      weight: 116
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 116
+      weight: 117
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
       identifier: log_collection_opentelemetry
-      weight: 115
+      weight: 116
     - name: Agent Integrations
       url: logs/log_collection/agent_checks/
       parent: log_collection
       identifier: log_collection_agent_checks
-      weight: 116
+      weight: 117
     - name: 기타 통합
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 117
+      weight: 118
     - name: 로그 구성
       url: logs/log_configuration/
       parent: log_management
       identifier: log_configuration
       weight: 2
-    - name: 파이프라인
+    - name: Pipelines
       url: logs/log_configuration/pipelines/
       parent: log_configuration
       identifier: log_pipelines
@@ -7572,6 +7661,11 @@ menu:
       parent: log_configuration
       identifier: log_optimizer
       weight: 213
+    - name: 외부 소스
+      url: logs/log_configuration/external_sources/
+      parent: log_configuration
+      identifier: log_configuration_external_sources
+      weight: 214
     - name: 로그 탐색기
       url: logs/explorer/
       parent: log_management
@@ -7667,6 +7761,11 @@ menu:
       url: logs/explorer/findings/
       parent: log_explorer
       weight: 516
+    - name: Federated Logs
+      identifier: log_explorer_federated_logs
+      url: logs/explorer/federated_logs/
+      parent: log_explorer
+      weight: 517
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -7707,7 +7806,7 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_dynamic_sampling
       weight: 708
-    - name: 모니터
+    - name: Monitors
       url: logs/error_tracking/monitors
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_monitors
@@ -7727,26 +7826,36 @@ menu:
       parent: log_management
       identifier: log_reports
       weight: 8
+    - name: 마이그레이션
+      url: logs/migration/
+      parent: log_management
+      identifier: log_migration
+      weight: 9
+    - name: 마이그레이션 도구
+      url: logs/migration/migration_tools/
+      parent: log_migration
+      identifier: log_migration_migration_tools
+      weight: 901
     - name: 가이드
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 9
+      weight: 10
     - name: 데이터 보안
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 10
+      weight: 11
     - name: 문제 해결하기
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 11
+      weight: 12
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1101
+      weight: 1201
     - name: BYOC Logs
       pre: upload-wui
       url: byoc-logs/
@@ -7919,7 +8028,7 @@ menu:
       parent: security_rules
       identifier: ootb_rules
       weight: 101
-    - name: 알림
+    - name: Notifications
       url: security/notifications/
       parent: security_platform
       identifier: security_notifications
@@ -8050,6 +8159,16 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: TAXII 위협 인텔리전스 수집
+      url: security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_taxii_threat_intelligence
+      weight: 10201
+    - name: STIX 위협 인텔리전스 수집
+      url: security/cloud_siem/ingest_and_enrich/stix_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_stix_threat_intelligence
+      weight: 10202
     - name: 뮤트된 표시기
       url: security/cloud_siem/ingest_and_enrich/muted_indicators
       parent: cloud_siem_ingest_and_enrich
@@ -8396,7 +8515,7 @@ menu:
       url: /security/code_security/dev_tool_int/mcp_server/troubleshooting/
       parent: dev_tool_int_mcp_server
       weight: 2
-    - name: SCFW GitHub 작업
+    - name: SCFW GitHub Action
       identifier: dev_tool_int_scfw_github_action
       url: /security/code_security/dev_tool_int/scfw_github_action/
       parent: dev_tool_int
@@ -8622,7 +8741,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_agentless_scanning
       weight: 1203
-    - name: 앱 및 API 보호
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
@@ -8799,11 +8918,6 @@ menu:
       identifier: ai_guard
       parent: security_platform_heading
       weight: 60000
-    - name: AI Guard 시작하기
-      url: /security/ai_guard/onboarding/
-      identifier: ai_guard_onboarding
-      parent: ai_guard
-      weight: 1
     - name: AI Guard 설정하기
       url: /security/ai_guard/setup/
       identifier: ai_guard_setup
@@ -8824,16 +8938,21 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
-    - name: HTTP API
-      url: /security/ai_guard/setup/http_api/
-      identifier: ai_guard_http_api
-      parent: ai_guard_setup
+    - name: 정책 관리
+      url: /security/ai_guard/policies/
+      identifier: ai_guard_policies
+      parent: ai_guard
+      weight: 3
+    - name: 민감 데이터 가리기
+      url: /security/ai_guard/sensitive_data_redaction/
+      identifier: ai_guard_sensitive_data_redaction
+      parent: ai_guard
       weight: 4
-    - name: 보안 신호
+    - name: 신호 분류 및 조사
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 3
+      weight: 5
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
@@ -8900,7 +9019,7 @@ menu:
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_policy_management
       weight: 20
-    - name: 변수 및 작업
+    - name: 변수 및 액션
       url: security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_variables_and_actions
@@ -9222,7 +9341,7 @@ menu:
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_test_summary
       weight: 6103
-    - name: 메트릭
+    - name: Metrics
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
@@ -9252,6 +9371,11 @@ menu:
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
       weight: 7043
+    - name: 네트워크 보안
+      url: synthetics/platform/private_locations/network_security
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_network_security
+      weight: 7044
     - name: APM 연결
       url: synthetics/platform/apm/
       parent: synthetics_platform
@@ -9272,7 +9396,7 @@ menu:
       url: synthetics/platform/downtime
       parent: synthetics_platform
       weight: 708
-    - name: Synthetic 데이터 탐색
+    - name: Synthetics 데이터 탐색
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
@@ -9322,7 +9446,7 @@ menu:
       parent: synthetics
       identifier: synthetics_guides
       weight: 11
-    - name: 알림
+    - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
@@ -9453,7 +9577,7 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_results_explorer
       weight: 4
-    - name: 메트릭
+    - name: Metrics
       url: continuous_testing/metrics/
       parent: continuous_testing
       identifier: continuous_testing_metrics
@@ -9930,11 +10054,41 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_supported_versions
       weight: 107
+    - name: Electron
+      url: real_user_monitoring/application_monitoring/electron
+      parent: application_monitoring
+      identifier: rum_electron
+      weight: 206
+    - name: 설정
+      url: real_user_monitoring/application_monitoring/electron/setup
+      parent: rum_electron
+      identifier: rum_electron_setup
+      weight: 101
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/electron/error_tracking
+      parent: rum_electron
+      identifier: rum_electron_error_tracking
+      weight: 102
+    - name: 고급 구성
+      url: real_user_monitoring/application_monitoring/electron/advanced_configuration
+      parent: rum_electron
+      identifier: rum_electron_advanced_configuration
+      weight: 103
+    - name: 데이터 수집됨
+      url: real_user_monitoring/application_monitoring/electron/data_collected
+      parent: rum_electron
+      identifier: rum_electron_data_collected
+      weight: 104
+    - name: 문제 해결하기
+      url: real_user_monitoring/application_monitoring/electron/troubleshooting
+      parent: rum_electron
+      identifier: rum_electron_troubleshooting
+      weight: 105
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: 설정
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -9964,7 +10118,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: 설정
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -9999,7 +10153,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: 설정
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -10065,7 +10219,7 @@ menu:
       parent: rum_dashboards
       identifier: rum_dashboards_errors
       weight: 104
-    - name: 모니터
+    - name: Monitors
       url: monitors/types/real_user_monitoring/
       parent: real_user_monitoring_platform
       identifier: rum_monitors
@@ -10195,7 +10349,7 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_error_grouping
       weight: 805
-    - name: 모니터
+    - name: Monitors
       url: real_user_monitoring/error_tracking/monitors
       parent: rum_error_tracking
       identifier: rum_error_tracking_monitors
@@ -10235,7 +10389,7 @@ menu:
       parent: rum
       identifier: rum_without_limits
       weight: 10
-    - name: 메트릭
+    - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
       identifier: rum_without_limits_metrics
@@ -10366,7 +10520,7 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
-    - name: 작업 관리
+    - name: 액션 관리
       url: product_analytics/action_management
       parent: product_analytics
       identifier: pa_action_management
@@ -10381,11 +10535,16 @@ menu:
       parent: pa_profiles
       identifier: pa_identity_resolution
       weight: 501
+    - name: Tracking Plans
+      url: product_analytics/tracking_plans
+      parent: product_analytics
+      identifier: pa_tracking_plans
+      weight: 6
     - name: 데이터 수집됨
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 6
+      weight: 7
     - name: 서버 측 이벤트
       url: product_analytics/data_collected/server_side_events
       parent: pa_data_collected
@@ -10395,22 +10554,22 @@ menu:
       url: product_analytics/export_pipelines/
       parent: product_analytics
       identifier: pa_export_pipelines
-      weight: 7
+      weight: 8
     - name: 사용성
       url: product_analytics/usability
       parent: product_analytics
       identifier: pa_usability
-      weight: 8
+      weight: 9
     - name: 가이드
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 9
+      weight: 10
     - name: 문제 해결하기
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 10
+      weight: 11
     - name: 실험
       url: experiments/
       pre: experiment-wui
@@ -10437,21 +10596,26 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 3
+    - name: Experiment Approvals
+      url: experiments/approvals/
+      parent: pa_experiments
+      identifier: pa_experiments_approvals
+      weight: 4
     - name: 실험 결과 읽기
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 4
+      weight: 5
     - name: 실험 진단
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 5
+      weight: 6
     - name: 개념
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 6
+      weight: 7
     - name: 주체 유형
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10462,21 +10626,31 @@ menu:
       parent: pa_experiments_concepts
       identifier: pa_experiments_exposure_sql
       weight: 2
+    - name: ID 확인
+      url: experiments/concepts/identity_resolution
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_identity_resolution
+      weight: 3
     - name: SQL 템플릿 변수
       url: experiments/concepts/sql_template_variables
       parent: pa_experiments_concepts
       identifier: pa_experiments_sql_template_variables
-      weight: 3
+      weight: 4
     - name: 누적 영향
       url: experiments/concepts/cumulative_impact
       parent: pa_experiments_concepts
       identifier: pa_experiments_cumulative_impact
-      weight: 4
+      weight: 5
+    - name: Holdouts
+      url: experiments/holdouts/
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_holdouts
+      weight: 6
     - name: 통계
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 7
+      weight: 8
     - name: 분석 방법
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10506,22 +10680,22 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 8
+      weight: 9
     - name: 문제 해결하기
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 10
+      weight: 11
     - name: 실험 MCP 도구
       url: experiments/mcp_tools
       parent: pa_experiments
       identifier: pa_experiments_mcp_tools
-      weight: 11
+      weight: 12
     - name: 가이드
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 12
+      weight: 13
     - name: Session Replay
       url: session_replay/
       pre: play-circle
@@ -10664,7 +10838,7 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_request_access
       weight: 404
-    - name: SAML기반 SSO
+    - name: SAML 기반 SSO
       url: account_management/saml/
       identifier: account_management_saml
       parent: account_management
@@ -10884,7 +11058,7 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
-    - name: 사용량 속성
+    - name: 사용량 귀속
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
@@ -10984,6 +11158,11 @@ menu:
       url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
+    - name: Shared Roles
+      identifier: account_management_organization_groups_shared_roles
+      url: account_management/organization_groups/shared_roles/
+      parent: account_management_organization_groups
+      weight: 101
     - name: 가이드
       identifier: account_management_guides
       url: account_management/guide/

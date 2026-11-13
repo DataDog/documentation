@@ -4719,10 +4719,14 @@ components:
         - $ref: "#/components/schemas/HeatgridThemeColors"
     HeatgridColorBin:
       additionalProperties: false
-      description: A color and optional lower threshold for a discrete bin.
+      description: A color, optional lower threshold, and optional label for a discrete bin.
       properties:
         color:
           $ref: "#/components/schemas/HeatgridColor"
+        label:
+          description: Name of the bin.
+          maxLength: 255
+          type: string
         lower_bound:
           description: Inclusive lower bound. Omit for the first bin.
           format: double
@@ -4856,12 +4860,15 @@ components:
       type: object
     HeatgridLabelColumn:
       additionalProperties: false
-      description: Configuration of the group label column.
+      description: Configuration of the group label column. Its width is sized automatically when omitted.
       properties:
+        text_formats:
+          description: Ordered string replacement rules for the group labels.
+          items:
+            $ref: "#/components/schemas/HeatgridTextFormatRule"
+          type: array
         width:
           $ref: "#/components/schemas/HeatgridLabelColumnWidth"
-      required:
-        - width
       type: object
     HeatgridLabelColumnWidth:
       description: Width of the label column.
@@ -4987,6 +4994,107 @@ components:
       x-enum-varnames:
         - ASC
         - DESC
+    HeatgridTextFormatMatch:
+      additionalProperties: false
+      description: Match a group label against a string.
+      properties:
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatMatchType"
+        value:
+          description: String to compare with the group label.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    HeatgridTextFormatMatchType:
+      description: Comparison used to match a group label.
+      enum:
+        - is
+        - is_not
+        - contains
+        - does_not_contain
+        - starts_with
+        - ends_with
+      example: is
+      type: string
+      x-enum-varnames:
+        - IS
+        - IS_NOT
+        - CONTAINS
+        - DOES_NOT_CONTAIN
+        - STARTS_WITH
+        - ENDS_WITH
+    HeatgridTextFormatReplace:
+      description: Replace all or part of a matching group label.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridTextFormatReplaceAll"
+        - $ref: "#/components/schemas/HeatgridTextFormatReplaceSubstring"
+    HeatgridTextFormatReplaceAll:
+      additionalProperties: false
+      description: Replace the entire matching group label.
+      properties:
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatReplaceAllType"
+        with:
+          description: Replacement string.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - with
+      type: object
+    HeatgridTextFormatReplaceAllType:
+      description: Replace the entire matching group label.
+      enum:
+        - all
+      example: all
+      type: string
+      x-enum-varnames:
+        - ALL
+    HeatgridTextFormatReplaceSubstring:
+      additionalProperties: false
+      description: Replace a substring of the matching group label.
+      properties:
+        substring:
+          description: Substring to replace.
+          example: ""
+          maxLength: 255
+          type: string
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatReplaceSubstringType"
+        with:
+          description: Replacement string.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - substring
+        - with
+      type: object
+    HeatgridTextFormatReplaceSubstringType:
+      description: Replace a substring of a matching group label.
+      enum:
+        - substring
+      example: substring
+      type: string
+      x-enum-varnames:
+        - SUBSTRING
+    HeatgridTextFormatRule:
+      additionalProperties: false
+      description: A rule for matching and optionally replacing a group label.
+      properties:
+        match:
+          $ref: "#/components/schemas/HeatgridTextFormatMatch"
+        replace:
+          $ref: "#/components/schemas/HeatgridTextFormatReplace"
+      required:
+        - match
+      type: object
     HeatgridThemeColors:
       description: Two color strings for the light and dark themes, in that order.
       example: ["#FFFFFF", "#000000"]
@@ -9765,13 +9873,11 @@ components:
     MonitorFormulaAndFunctionCostDataSource:
       description: Data source for cost queries.
       enum:
-        - metrics
         - cloud_cost
         - datadog_usage
       example: "cloud_cost"
       type: string
       x-enum-varnames:
-        - METRICS
         - CLOUD_COST
         - DATADOG_USAGE
     MonitorFormulaAndFunctionCostQueryDefinition:
@@ -9794,29 +9900,52 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsMonitorOptions:
+      description: Monitor configuration options for data jobs queries.
+      properties:
+        alert_on_every_failure:
+          description: |-
+            Alert separately for each failed run instead of on the count of trailing failures.
+            Only supported for `failed_runs` monitors with the `aastra` query dialect. It requires
+            a `> 0` threshold with no warning threshold, an evaluation window of at most two days,
+            and renotification disabled.
+          example: true
+          type: boolean
+      type: object
     MonitorFormulaAndFunctionDataJobsQueryDefinition:
       description: A formula and functions data jobs query.
       properties:
         job_type:
           description: |-
             The type of job being monitored. Valid values include:
-            `databricks.job`, `spark.application`, `airflow.dag`,
-            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            `databricks.job`, `spark.application`, `airflow.dag`, `dbt.job`, `glue.job`, `adf.pipeline`.
+            The `aastra` dialect also accepts `airflow.job`, `dbt.model`, and `dbt.test`.
             Custom job types are supported with the `custom.ol.` prefix.
           example: "databricks.job"
           type: string
         jobs_query:
-          description: Filter expression used to select the jobs to monitor.
+          description: |-
+            Filter expression used to select the jobs to monitor. Its syntax depends on `query_dialect`:
+            a metric tag filter such as `job_name:smoke*` for `metric`, or an Aastra entity search
+            such as ``search for databricks_job where `@team:data-eng` `` for `aastra`.
           example: "job_name:smoke*"
           type: string
+        monitor_options:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsMonitorOptions"
         name:
           description: Name of the query for use in formulas. Must be `run_query`.
           example: "run_query"
           type: string
         query_dialect:
           description: |-
-            Query dialect for data jobs queries. Currently only `metric` is supported.
+            Query dialect for data jobs queries. Valid values are `metric` and `aastra`.
           example: "metric"
+          type: string
+        run_filter:
+          description: |-
+            Optional filter on individual runs, using metrics filter syntax.
+            Only supported with the `aastra` query dialect.
+          example: "env:prod"
           type: string
       required:
         - name
@@ -9832,6 +9961,18 @@ components:
       type: string
       x-enum-varnames:
         - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityDetectionType:
+      description: |-
+        How a `data-jobs alert` job duration monitor detects a breach. Must match the
+        `.detection()` call in the monitor query. Required for job duration monitors.
+      enum:
+        - static
+        - anomaly
+      example: "anomaly"
+      type: string
+      x-enum-varnames:
+        - STATIC
+        - ANOMALY
     MonitorFormulaAndFunctionDataQualityDiffFunction:
       description: |-
         Function applied to the measure before it is compared against the predicted bounds.
@@ -9892,7 +10033,8 @@ components:
         The data quality measure to query. Common values include:
         `bytes`, `cardinality`, `custom`, `freshness`, `max`, `mean`, `min`,
         `nullness`, `percent_negative`, `percent_zero`, `row_count`, `stddev`,
-        `sum`, `uniqueness`. Additional values may be supported.
+        `sum`, `uniqueness`. `data-jobs alert` job duration monitors use `duration`.
+        Additional values may be supported.
       example: "row_count"
       type: string
     MonitorFormulaAndFunctionDataQualityModelBoundsOverride:
@@ -9962,6 +10104,14 @@ components:
     MonitorFormulaAndFunctionDataQualityMonitorOptions:
       description: Monitor configuration options for data quality queries.
       properties:
+        consecutive_runs:
+          description: |-
+            Number of consecutive runs that must breach before the monitor alerts.
+            Only supported by `data-jobs alert` job duration monitors. Defaults to `1`.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
         crontab_override:
           description: Crontab expression to override the default schedule.
           example: "* * * 10"
@@ -9974,6 +10124,8 @@ components:
           description: Custom WHERE clause for the query.
           example: "USER_ID = 123"
           type: string
+        detection_type:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDetectionType"
         group_by_columns:
           description: Columns to group results by.
           example: ["col1", "col2"]
@@ -10020,6 +10172,12 @@ components:
         name:
           description: Name of the query for use in formulas.
           example: "query1"
+          type: string
+        run_filter:
+          description: |-
+            Optional filter on individual runs, using metrics filter syntax.
+            Only supported by `data-jobs alert` job duration monitors.
+          example: "env:prod"
           type: string
         schema_version:
           description: Schema version for the data quality query.
@@ -10200,6 +10358,7 @@ components:
         - database_queries
         - network
         - network_path
+        - llm_observability
       example: "rum"
       type: string
       x-enum-varnames:
@@ -10213,6 +10372,35 @@ components:
         - DATABASE_QUERIES
         - NETWORK
         - NETWORK_PATH
+        - LLM_OBSERVABILITY
+    MonitorFormulaAndFunctionMetricQueryDataSource:
+      description: Data source for metrics queries.
+      enum:
+        - metrics
+      example: "metrics"
+      type: string
+      x-enum-varnames:
+        - METRICS
+    MonitorFormulaAndFunctionMetricQueryDefinition:
+      description: A formula and functions metrics query. The `aggregator` field is required for `cost alert` monitors and not allowed for metric or query alert monitors.
+      properties:
+        aggregator:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionCostAggregator"
+        data_source:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricQueryDataSource"
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        query:
+          description: The metrics query definition.
+          example: "avg:system.cpu.user{*}"
+          type: string
+      required:
+        - name
+        - data_source
+        - query
+      type: object
     MonitorFormulaAndFunctionMetricsAggregator:
       description: Aggregator for metrics queries.
       enum:
@@ -10282,6 +10470,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
       additionalProperties: false
       description: A column definition for reference table queries.
@@ -23290,17 +23479,17 @@ components:
           minItems: 1
           type: array
         query_string:
-          description: A search string for filtering services. When set, this replaces the `service` field.
+          description: A search string for filtering services. Replaces the deprecated `service` field.
           example: "service:myservice"
           type: string
         service:
-          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          deprecated: true
+          description: (deprecated) Name of the service. Use `query_string` instead.
           example: myservice
           type: string
       required:
         - data_source
         - filters
-        - service
       type: object
     TopologyQueryDataStreamsDataSource:
       description: Name of the data source.
@@ -23790,6 +23979,10 @@ components:
         dbm_normalized_queries_average:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         dbm_normalized_queries_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_tiered_sum:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         fargate_container_apm_and_profiler_average:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
@@ -36993,6 +37186,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "422":
           content:
             application/json:
@@ -37096,6 +37295,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a pipeline
@@ -37135,6 +37340,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a pipeline
@@ -37254,6 +37465,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogsAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a pipeline
@@ -37816,6 +38033,22 @@ paths:
         - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
         - `#` an integer or decimal number used to set the threshold.
+
+        **Data Jobs Alert Query**
+
+        Job status example: `formula("failed_runs(run_query)").by(group_keys).last(time_window) > #`
+
+        Job duration examples: `formula("job_duration(run_query)").detection(static).by(group_keys) > duration`
+        and `formula("job_duration(run_query)").detection(anomaly).by(group_keys) > 0`
+
+        - `run_query`: The name of the single query variable in `options.variables`. Job status monitors
+          use a data jobs query; job duration monitors use a data quality query with the `duration` measure.
+        - `group_keys`: The tags to group by, such as `entity_id,name,workspace_name`.
+        - `time_window`: Number of minutes (#m), hours (#h), or days (#d), up to `10d`.
+        - `#`: The number of trailing failed runs to alert above, as a non-negative integer.
+        - `duration`: The duration to alert above, such as `2h`, `30m`, or a number of seconds.
+        - `options.thresholds.critical`: Must equal the query threshold, in seconds for job duration.
+          Anomaly job duration monitors omit `options.thresholds`.
       operationId: CreateMonitor
       requestBody:
         content:

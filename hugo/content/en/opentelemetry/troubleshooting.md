@@ -286,7 +286,7 @@ To verify the configuration:
 
 **Resolution**:
 
-When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
+When you use the Agent's OTLP endpoint, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
 
 To verify the configuration:
 
@@ -303,8 +303,8 @@ To verify the configuration:
 
 - **Upstream Collector with the OTLP HTTP exporter**: Add the `span_metrics` connector. It generates the trace metrics that power the Catalog and service pages. It must be an exporter in your traces pipeline and a receiver in a metrics pipeline that exports to Datadog. It must also receive spans before any sampling, so that it counts all spans. See [Span metrics connector][10] and [Trace forward connector][15].
 - **Upstream Collector with the Datadog Exporter**: Add the Datadog Connector to calculate trace metrics. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Datadog Exporter and Connector][11].
-- **DDOT Collector or the Collector in the Agent**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Install the DDOT Collector on Kubernetes][16] or [Set Up the Collector in the Datadog Agent][14].
-- **OTLP Ingest in the Agent**: The Agent computes trace metrics by default. Check that APM is enabled in the Agent. Also check that your SDK doesn't set the `_dd.stats_computed` resource attribute, which tells the Agent to skip the computation. See [OTLP Ingest in the Agent][17].
+- **DDOT Collector or the Agent's Collector**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Install the DDOT Collector on Kubernetes][16] or [Set Up the Agent's Collector][14].
+- **Agent's OTLP endpoint**: The Agent computes trace metrics by default. Check that APM is enabled in the Agent. Also check that your SDK doesn't set the `_dd.stats_computed` resource attribute, which tells the Agent to skip the computation. See [Agent's OTLP endpoint][17].
 - **SDKs sending straight to the OTLP intake, with no Collector**: Datadog doesn't compute trace metrics by default for traces sent to the OTLP traces intake endpoint. Add the `compute_stats=true` header to your exporter configuration. The intake computes trace metrics only from the spans it receives, so sampling before the intake lowers them. Don't combine this header with the `span_metrics` connector in a Collector. See [Traces endpoint][12].
 - **All setups**: Set the `service.name` and `deployment.environment.name` resource attributes. Without `service.name`, OpenTelemetry SDKs report a default name such as `unknown_service`. See [Unified service tagging][13].
 
@@ -371,5 +371,5 @@ features:
 [13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [14]: /opentelemetry/setup/ddot_collector/install/
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
-[16]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[16]: /opentelemetry/setup/ddot_collector/kubernetes/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
