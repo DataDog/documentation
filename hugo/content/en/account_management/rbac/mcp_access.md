@@ -122,7 +122,7 @@ To limit key-based MCP connections:
 
 - Use [scoped application keys][7] that include only the permissions the agent needs.
 - Use keys from a [service account][8] that has only the required permissions.
-- Restrict who can create keys through the relevant role permissions.
+- Restrict who can create and manage application keys with the {{< ui >}}User App Keys{{< /ui >}} and {{< ui >}}Org App Keys Write{{< /ui >}} [permissions][16].
 
 ## Standard access controls apply to MCP
 
@@ -155,3 +155,4 @@ Every MCP Server tool call is recorded in [Audit Trail][13] with the tool name, 
 [13]: /account_management/audit_trail/
 [14]: /account_management/org_settings/ip_allowlist/
 [15]: /mcp_server/#track-tool-calls-in-audit-trail
+[16]: /account_management/rbac/permissions/#api-and-application-keys
