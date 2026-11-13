@@ -58,6 +58,8 @@ Learn how to use Agent Observability query interface to search, filter, and anal
 
 This enables you to quickly identify issues, monitor performance, and gain insights into your LLM application's behavior in production.
 
+To watch spans as they arrive, use [live mode][9]. It shows spans received in the last 15 minutes, before sampling and indexing. Live mode requires the Python SDK (`ddtrace` 4.12.0 or later) with APM tracing turned on.
+
 
 ### Correlate APM and Agent Observability
 
@@ -95,3 +97,4 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /llm_observability/configure/prompt_management
 [8]: /llm_observability/improve/online_experiments/prompt_experimentation/
+[9]: /llm_observability/investigate/querying/#live-mode
