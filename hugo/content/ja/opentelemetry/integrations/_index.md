@@ -7,7 +7,7 @@ title: Integrations
 ---
 このページでは、Datadog がサポートする OTel (OpenTelemetry) インテグレーションについて説明します。これらのインテグレーションでは、OpenTelemetry を使用して Datadog で可観測性データを収集および監視できます。
 
-## 概要 {#overview}
+## 概要{#overview}
 
 OTel (OpenTelemetry) インテグレーションは、OpenTelemetry 標準を使用してさまざまなソースから可観測性データ (メトリクス、トレース、ログ) を収集できるようにするコンポーネントです。これらのインテグレーションは、OpenTelemetry コレクターと連携するように設計されており、テレメトリデータを受信、処理し、Datadog などの可観測性バックエンドにエクスポートします。
 
@@ -25,7 +25,7 @@ Datadog は、サポートされている OpenTelemetry レシーバーからの
 
 ## Datadog がサポートする OpenTelemetry インテグレーション {#datadog-supported-opentelemetry-integrations}
 
-Datadog は次の OpenTelemetry インテグレーションをサポートしています。
+Datadog は次の OpenTelemetry インテグレーションをサポートしています。必要なインテグレーションが見つかりませんか。[リクエストしてください][21]。
 
 ### APM (Application Performance Monitoring) {#apm-application-performance-monitoring}
 
@@ -74,6 +74,10 @@ Web サーバーおよびプロキシテクノロジーを監視します。
 
 - [Apache Spark メトリクス][13] - Apache Spark のパフォーマンスメトリクスを追跡します。
 
+## インテグレーションのリクエストまたはフィードバックの共有 {#request-an-integration-or-share-feedback}
+
+新しいインテグレーションのリクエストまたは既存のものに関するフィードバックの共有を行うには、[OpenTelemetry インテグレーションの製品プレビューのフォーム][21]にご記入ください。
+
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,4 @@ Web サーバーおよびプロキシテクノロジーを監視します。
 [18]: /ja/opentelemetry/integrations/kubernetes_metrics/
 [19]: /ja/opentelemetry/integrations/postgres_metrics/
 [20]: /ja/opentelemetry/integrations/sqlserver_metrics/
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/

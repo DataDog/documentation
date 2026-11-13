@@ -13,20 +13,20 @@ End User Device Monitoring은 미리 보기로 제공되고 있습니다. 등록
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="정상 상태인 장치 4개, 장치 유형 및 운영 체제별 차트, 시스템 충돌이 표시된 노트북 1대가 포함된 장치 표를 보여주는 End User Devices 페이지" style="width:100%;" >}}
 
 End User Device Monitoring은 IT 팀이 직원의 물리적 및 가상 데스크톱과 노트북의 상태와 성능을 파악할 수 있도록 지원합니다. 직원에게 영향을 미치는 성능 및 연결 문제를 파악하고 조직 내 장치, 네트워크 및 애플리케이션의 상태를 통합적으로 확인하여 다음과 같은 질문에 답할 수 있도록 지원합니다.
-- 이 직원의 노트북은 특정 애플리케이션을 열 때마다 왜 느려집니까?
-- 사무실의 과부하가 발생한 Wi-Fi 액세스 포인트로 인해 영향을 받는 직원은 누구입니까?
-- Zoom, Microsoft Teams 또는 Google Meet 통화가 지연되는 원인은 장치, 네트워크, 애플리케이션 중 무엇입니까?
-- SaaS 애플리케이션으로 가는 경로 중 어디에서 지연 시간이 발생합니까?
-- 어떤 장치에서 블루스크린(Blue Screen of Death)으로 인한 충돌이 발생하며 그 빈도는 얼마나 됩니까?
-- 하드웨어 및 라이선스 인벤토리 계획을 위해 전체 장치에 설치된 소프트웨어와 각 소프트웨어의 버전은 무엇입니까?
-- 어떤 장치가 CPU, 메모리 또는 디스크 성능이 저하되어 점검이나 교체가 필요합니까?
-- 보고된 문제가 발생하기 직전에 장치에서 어떤 프로세스가 실행되고 어떤 로그나 이벤트가 발생했습니까?
+- 이 직원의 노트북은 특정 애플리케이션을 열 때마다 왜 느려지나요?
+- 사무실의 과부하가 발생한 Wi-Fi 액세스 포인트로 인해 영향을 받는 직원은 누구인가요?
+- Zoom, Microsoft Teams 또는 Google Meet 통화가 지연되는 원인은 장치, 네트워크, 애플리케이션 중 무엇인가요?
+- SaaS 애플리케이션으로 가는 경로 중 어디에서 지연 시간이 발생하나요?
+- 어떤 장치에서 블루스크린(Blue Screen of Death)으로 인한 충돌이 발생하며 그 빈도는 얼마나 되나요?
+- 하드웨어 및 라이선스 인벤토리 계획을 위해 전체 장치에 설치된 소프트웨어와 각 소프트웨어의 버전은 무엇인가요?
+- 어떤 장치가 CPU, 메모리 또는 디스크 성능이 저하되어 점검이나 교체가 필요하나요?
+- 보고된 문제가 발생하기 직전에 장치에서 어떤 프로세스가 실행되고 어떤 로그나 이벤트가 발생했나요?
 
 ## 작동 방식 {#how-it-works}
 
 End User Device Monitoring은 Datadog Agent를 사용하여 직원 데스크톱, 노트북 및 워크스테이션에서 직접 데이터를 수집합니다. Agent는 각 장치에서 시스템 메트릭, 네트워크 정보 및 로그를 수집하여 Datadog으로 전송하며, Datadog에서 해당 데이터를 모니터링하고 시각화할 수 있습니다.
 
-[End User Devices][5] 페이지는 조직의 장치 전반에 걸친 상태와 성능을 요약하는 기본 제공 대시보드 및 메트릭을 제공합니다. CPU, 메모리 및 네트워크 사용량을 포함하여 전체 장치의 요약 메트릭과 개별 장치의 상세 메트릭을 확인할 수 있습니다.
+[End User Devices][5] 페이지는 조직의 장치 전반에 걸친 상태와 성능을 요약하는 내장 대시보드 및 메트릭을 제공합니다. CPU, 메모리 및 네트워크 사용량을 포함하여 전체 장치의 요약 메트릭과 개별 장치의 상세 메트릭을 확인할 수 있습니다.
 
 [Fleet Automation][6]을 사용하여 해당 장치에 설치된 Agent를 관리하고 버전 상태 확인, 구성 일관성 검증, 필요한 통합의 활성화 여부 확인 등의 작업을 수행합니다.
 
@@ -66,6 +66,10 @@ Traceroute 시각화에서는 로컬 라우터와 ISP에서 공용 인터넷을 
 [5]: https://app.datadoghq.com/end-user-devices
 [6]: /ko/agent/fleet_automation/
 [7]: /ko/logs/
+
+## End User Device Monitoring 설정 {#set-up-end-user-device-monitoring}
+
+미리 보기 액세스가 승인되었다는 확인을 받은 후 지원되는 플랫폼과 장치별 설치 지침은 [End User Device Monitoring 설정](/infrastructure/end_user_device_monitoring/setup/)을 참조하세요.
 
 ## 추가 자료 {#further-reading}
 
