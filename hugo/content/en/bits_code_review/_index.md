@@ -20,9 +20,15 @@ further_reading:
   Bits Code Review is in Preview. To request access, contact your Datadog Customer Success Manager.
 {{< /callout >}}
 
-Bits Code Review is an AI agent that reviews your pull requests using your production data. It posts its findings as comments on the pull request before you merge.
+Bits Code Review is an AI agent that catches risky changes before they reach production. It reviews your pull requests against how your services behave in production, and posts its findings directly on the pull request, before you merge.
 
-Conventional AI reviewers infer how a change behaves from the diff and the repository alone. Bits Code Review checks those assumptions against how your services run in production. It uses the traces, logs, metrics, RUM events, and Live Debugger captures you already send to Datadog. This lets it flag issues that the diff alone does not reveal. For example, a change removes an endpoint that still serves production traffic, or relies on an incorrect assumption about runtime behavior.
+Most AI code reviewers only see the diff and the repository, so they have to guess how a change behaves at runtime. Bits Code Review replaces those guesses with evidence from the traces, logs, metrics, RUM events, and Live Debugger captures you already send to Datadog. It flags the issues a diff alone can't reveal, such as a change that:
+
+- Removes an endpoint that still serves production traffic
+- Relies on an incorrect assumption about runtime behavior
+- Attempts to fix a production issue that the code alone can't explain
+
+There's no new instrumentation to set up: Bits Code Review works with the telemetry your services already send.
 
 Bits Code Review is non-blocking. Its review is not a required check, and merging and deploying remain your decision.
 
