@@ -10826,7 +10826,7 @@ components:
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
       description: >-
-        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination. Its targets are model targets that each name one provider, not "*". Besides the default, it needs 1 to 9 destinations, each with a different rubric. Classified routing is in Preview: saving a classified tier returns 403 Forbidden unless the feature is enabled for the organization.
       enum:
         - configured
         - weighted_affinity
@@ -12050,7 +12050,8 @@ components:
           example: gpt-6-luna
           type: string
         provider:
-          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
+          description: >-
+            Decision-model provider slug. It must name a provider of type `openai`, `baseten`, or `typesafe`, the provider types that serve a decision model. Omit together with model to preserve the saved selection.
           example: openai
           type: string
       type: object
@@ -12302,13 +12303,14 @@ components:
           minimum: 1
           type: integer
         provider:
-          description: Provider slug. weighted_affinity requires an explicit provider and does not allow "*".
+          description: Provider slug. weighted_affinity and classified tiers require an explicit provider and do not allow "*".
           example: prod-us
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
         rubric:
-          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          description: >-
+            Destination rubric in a classified tier: when the decision model picks this destination. Up to 300 characters after leading and trailing spaces are trimmed, and different for each destination in the tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
           example: Short factual questions.
           maxLength: 300
           nullable: true
