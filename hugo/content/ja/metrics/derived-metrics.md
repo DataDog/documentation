@@ -45,6 +45,47 @@ title: 派生メトリクス
 
 派生メトリクスを削除するには、その派生メトリクスにカーソルを合わせ、右側に表示される {{< ui >}}Delete{{< /ui >}} アイコンをクリックします。
 
+## Terraform で派生メトリクスを管理する {#manage-derived-metrics-with-terraform}
+
+[`datadog_derived_metric` リソース][4]を使用して、Terraform で派生メトリクスの定義を作成、更新、削除します。
+
+開始する前に、[Datadog Terraform プロバイダーを設定][5]してください。アプリケーションキーには、**Metrics Read** (`metrics_read`) および **Manage Tags for Metrics** (`metric_tags_write`) の権限が必要です。詳細については、[API キーとアプリケーションキー][6]を参照してください。
+
+例えば、2 つの CPU メトリクスを組み合わせるには、このリソースを Terraform 設定に追加します。
+
+```hcl
+resource "datadog_derived_metric" "cpu_total" {
+  name = "custom.cpu.total"
+  definition = {
+    formula = "a + b"
+    queries = [
+      {
+        name        = "a"
+        data_source = "metrics"
+        query       = "avg:system.cpu.user{*}"
+      },
+      {
+        name        = "b"
+        data_source = "metrics"
+        query       = "avg:system.cpu.system{*}"
+      },
+    ]
+  }
+}
+```
+
+`terraform plan` を実行して変更を確認し、`terraform apply` を実行して派生メトリクスを作成します。
+
+`definition.formula` または `definition.queries` を変更すると、既存の定義が更新されます。`name` を変更すると、派生メトリクスが置き換えられます。
+
+既存の派生メトリクスを管理するには、そのリソース設定を追加し、名前でインポートしてください。
+
+```shell
+terraform import datadog_derived_metric.cpu_total "custom.cpu.total"
+```
+
+インポート後、`terraform plan` と `terraform apply` を実行して、設定した名前と定義を適用します。最初の適用で既存のメトリクスが更新されます。その後に `name` を変更すると、メトリクスが置き換えられます。
+
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -53,3 +94,6 @@ title: 派生メトリクス
 [1]: https://app.datadoghq.com/metric/generate-metrics
 [2]: /ja/metrics/custom_metrics/#naming-custom-metrics
 [3]: /ja/metrics/#querying-metrics
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/derived_metric
+[5]: /ja/integrations/terraform/#configuration
+[6]: /ja/account_management/api-app-keys/

@@ -63,3 +63,28 @@ entries:
     operations:
       - CreateQuotas
     title: Document create-only usage quotas
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateQuotas
+      - CreateTemporaryGrantRequest
+      - DeletePendingQuota
+      - DeleteQuota
+      - DeleteRequestedTemporaryGrant
+      - DeleteTemporaryGrantRequest
+      - GetMyTemporaryGrantRequest
+      - GetQuota
+      - GetTemporaryGrantRequest
+      - ListMyTemporaryGrantRequests
+      - ListQuotas
+      - ListTemporaryGrantRequests
+      - UpdateQuota
+      - UpdateTemporaryGrantRequest
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41667
+    operations:
+      - GetUsageBillableSummary
+    title: Expose Error Tracking usage in the billable summary

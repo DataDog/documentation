@@ -16,6 +16,9 @@ further_reading:
 - link: "mcp_server/code_execution"
   tag: "Documentation"
   text: "Code Execution with the MCP Server"
+- link: "account_management/rbac/mcp_access"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 - link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
   tag: "Blog"
   text: "Investigate Kubernetes resources with Datadog MCP tools"
@@ -770,6 +773,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -784,6 +788,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
+- `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -812,6 +817,8 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 ## Required permissions
 
 The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
+
+For a complete overview of MCP access controls, including how to restrict the actions an individual AI client can perform, see [Access Control for MCP][91].
 
 ### User role permissions
 
@@ -885,6 +892,8 @@ Repeat for each client and each organization you authorized from.
 
 Revoking an authorization has no effect on Personal Access Tokens, Service Access Tokens, or API and application keys. Delete or rotate those in their own management pages.
 
+Administrators can disable an AI client or remove specific scopes from it for the entire organization. To do this, use the [{{< ui >}}Mobile and Third-Party Access{{< /ui >}}][92] page. See [Restrict actions for a specific AI client][93].
+
 ### Personal or Service Access Token
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
@@ -936,6 +945,8 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
+**Note**: An AI client's [OAuth application scopes][93] do not apply to connections that use API and application keys or access tokens. These connections have the access of the key or token.
+
 ### Adding OAuth clients
 
 To allow-list a redirect URL, open [{{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}][80] in Organization Settings, enter the URL, and select {{< ui >}}Add URL{{< /ui >}}.
@@ -967,6 +978,7 @@ If your AI client does not list Datadog MCP Server tools that create or modify r
 - **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
 - **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
 - **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
+- **OAuth application scopes**: If an administrator removed a scope from your AI client, you cannot use that client for actions that need the scope. This applies even if your role includes the permission. See [Restrict actions for a specific AI client][93].
 
 After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
 
@@ -1058,3 +1070,8 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /infrastructure/process/
+[90]: /gpu_monitoring/
+[91]: /account_management/rbac/mcp_access/
+[92]: https://app.datadoghq.com/organization-settings/oauth-applications
+[93]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client

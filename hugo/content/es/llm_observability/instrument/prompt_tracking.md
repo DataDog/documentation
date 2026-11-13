@@ -3,13 +3,16 @@ aliases:
 - /es/llm_observability/monitoring/prompt_tracking/
 description: Utilice Prompt Tracking para rastrear sus plantillas de prompt y versiones.
 further_reading:
+- link: https://learn.datadoghq.com/courses/llm-obs-investigations
+  tag: Centro de aprendizaje
+  text: Investigue con LLM Observability
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
   text: Realice un seguimiento, compare y optimice sus prompts de LLM con Datadog
     LLM Observability
-- link: https://learn.datadoghq.com/courses/llm-obs-investigations
-  tag: Centro de aprendizaje
-  text: Investigue con LLM Observability
+- link: https://www.datadoghq.com/blog/agent-observability-prompt-management/
+  tag: Blog
+  text: Administre e implemente prompts de LLM con Datadog
 title: Prompt Tracking
 ---
 ## Descripción general {#overview}

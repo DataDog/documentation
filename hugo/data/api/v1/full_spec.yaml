@@ -23427,17 +23427,17 @@ components:
           minItems: 1
           type: array
         query_string:
-          description: A search string for filtering services. When set, this replaces the `service` field.
+          description: A search string for filtering services. Replaces the deprecated `service` field.
           example: "service:myservice"
           type: string
         service:
-          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          deprecated: true
+          description: (deprecated) Name of the service. Use `query_string` instead.
           example: myservice
           type: string
       required:
         - data_source
         - filters
-        - service
       type: object
     TopologyQueryDataStreamsDataSource:
       description: Name of the data source.
@@ -23927,6 +23927,10 @@ components:
         dbm_normalized_queries_average:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         dbm_normalized_queries_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_tiered_sum:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         fargate_container_apm_and_profiler_average:
           $ref: "#/components/schemas/UsageBillableSummaryBody"

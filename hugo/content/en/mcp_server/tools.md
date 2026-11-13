@@ -1752,6 +1752,64 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 - Delete tag rule `abc123`.
 - Permanently delete tag rule `abc123`.
 
+## GPU Monitoring
+
+Tools for [GPU Monitoring][101], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels.
+
+<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter; for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
+
+All tools in this toolset are read-only. For setup steps, see [GPU Monitoring MCP tools][102].
+
+### `gpu_monitoring_list_inference_deployments`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with throughput, latency, error rate, KV cache usage, and a health verdict, worst first. Hosted model providers are not covered. Returns deployments with KPIs and health checks against GPU Monitoring's thresholds, and each deployment's scope for `gpu_monitoring_get_inference_perf_summary`.
+
+- Which of my inference deployments are unhealthy?
+- List my inference deployments from the last hour.
+
+### `gpu_monitoring_get_inference_perf_summary`
+*Toolset: **gpu-monitoring***\
+Measures an inference workload's serving performance over a time window: requests, time to first token and inter-token latency, throughput, prefix cache hits, queueing, and KV cache usage. Uses the scope from `gpu_monitoring_list_inference_deployments`. Returns exact statistics for each deployment and layer, GPU busy time, and further metrics available in the scope.
+
+- Why is my `llama-70b` deployment slow?
+- Show me time to first token and KV cache usage for this deployment over the past 3 hours.
+
+### `gpu_monitoring_get_inference_configuration`
+*Toolset: **gpu-monitoring***\
+Reports how an inference deployment's engines (vLLM, SGLang) are configured: model, parallelism, KV cache, batching, and scheduling, with the source of every value. Returns the distinct configurations for each component (prefill, decode), with settings that disagree flagged as drift.
+
+- How is my `llama-70b` deployment configured?
+- Do the decode workers in this deployment have configuration drift?
+
+### `gpu_monitoring_get_inference_forward_pass_profile`
+*Toolset: **gpu-monitoring***\
+Shows how an inference engine spends its forward passes: the split between decode and prefill, how pass time grows with batch size and scheduled tokens, and whether speculative decoding runs. Returns time splits and cost curves, with span coverage. Missing measurements are listed as unavailable.
+
+- How does forward pass time scale with batch size for this deployment?
+- Is speculative decoding running on my vLLM deployment?
+
+### `gpu_monitoring_find_inference_forward_pass_traces`
+*Toolset: **gpu-monitoring***\
+Finds individual forward passes of an inference engine (vLLM, SGLang), filtered by phase, batch size, and scheduled tokens, newest or slowest first. Returns matching passes with trace ID, worker, and duration, kernel counts and time when profiled, and the number of matches.
+
+- Find the slowest prefill passes for this deployment in the last hour.
+- Show me decode passes with a batch size of 64.
+
+### `gpu_monitoring_rank_gpu_kernels`
+*Toolset: **gpu-monitoring***\
+Ranks the GPU kernels a training or inference workload ran by total time, from the kernel spans profiled at kernel level. Returns each kernel's total time, share, calls, and mean duration; spans of 10 seconds or more, listed separately by kernel; and, for an inference engine, how much of pass time was kernel time.
+
+- Which GPU kernels take the most time in this deployment?
+- Rank the top GPU kernels for my training job over the last hour.
+
+### `gpu_monitoring_get_gpu_kernel_trend`
+*Toolset: **gpu-monitoring***\
+Follows one GPU kernel of a training or inference workload over time, through the traces profiled at kernel level. Uses a kernel from `gpu_monitoring_rank_gpu_kernels`. Returns, for each time bucket, the launches, duration percentiles (p50, p95, p99, max), and summed time, with launches of 10 seconds or more counted separately.
+
+- Has this attention kernel gotten slower over the past day?
+- Show me the p99 duration of this kernel over time.
+
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
@@ -3450,96 +3508,6 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
-## Teams
-
-Tools for reading and managing [Datadog Teams](/account_management/teams/). Enable them with `toolsets=teams`.
-
-Read tools require `MCP Read`. Write tools require `MCP Write`, and your organization must enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
-
-### `list_teams`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists teams in your organization, one page at a time. Use the results to find team IDs.
-
-- Find the Payments team.
-
-### `get_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Returns details for a team, including its name, handle, description, and member count.
-
-- Show the details of the Payments team.
-
-### `get_team_memberships`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists team members and their roles, one page at a time.
-
-- Who belongs to the Payments team?
-
-### `get_user_teams`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the teams a user belongs to and their role on each team.
-
-- Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
-
-### `get_team_hierarchy`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists parent-child relationships between teams, one page at a time. Filter by parent team or sub-team ID.
-
-- Which teams are children of the Payments team?
-
-### `get_team_links`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the links published by a team.
-
-- Show the links for the Payments team.
-
-### `get_team_notification_rules`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`*\
-Lists the notification rules configured for a team.
-
-- Show the Payments team notification rules.
-
-### `create_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
-Creates a team with a handle, name, and optional description.
-
-- Create a team named Payments with the handle `payments`.
-
-### `update_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions).
-
-- Change the Payments team description to "Owns payment processing."
-
-### `delete_team`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
-Permanently deletes a team. The tool asks you to confirm before it deletes the team.
-
-- Delete the Payments team.
-
-### `add_team_membership`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). If you grant the admin role, the tool asks you to confirm first.
-
-- Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
-
-### `delete_team_membership`
-*Toolset: **teams***\
-*Permissions Required: `Teams Read` and `MCP Write`*\
-Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). The tool asks you to confirm before it removes the user.
-
-- Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team.
-
 ## Watchdog
 
 Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
@@ -3879,6 +3847,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
+[101]: /gpu_monitoring/
+[102]: /gpu_monitoring/mcp_tools/
 
 ## Further reading
 

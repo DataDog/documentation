@@ -11,7 +11,3 @@ Mejore de forma iterativa su aplicación de LLM con conjuntos de datos, experime
     {{< nextlink href="/llm_observability/improve/offline_experiments" >}}Offline Experiments{{< /nextlink >}}
     {{< nextlink href="/llm_observability/improve/online_experiments" >}}Online Experiments{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< whatsnext desc="Controle quién puede ver sus datos:" >}}
-    {{< nextlink href="/llm_observability/improve/access_control" >}}Data Access Control{{< /nextlink >}}
-{{< /whatsnext >}}

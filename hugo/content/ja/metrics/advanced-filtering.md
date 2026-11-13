@@ -9,13 +9,13 @@ further_reading:
   text: Metrics Explorer
 - link: /metrics/summary/
   tag: ドキュメント
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
 - link: /logs/explorer/search_syntax/
   tag: ドキュメント
-  text: ログクエリーフィルターと検索構文
+  text: ログクエリフィルターと検索構文
 - link: /dashboards/functions/exclusion/
   tag: ドキュメント
   text: 除外関数
@@ -23,9 +23,9 @@ title: 高度なフィルタリング
 ---
 ## 概要 {#overview}
 
-Metrics Explorer、モニター、またはダッシュボードを使用してメトリクスデータをクエリする場合、データをフィルタリングして、返される時系列のスコープを絞り込むことができます。メトリクスの右側にある **from** フィールドを使用することにより、任意のメトリクスをタグでフィルタリングできます。
+Metrics Explorer、モニター、またはダッシュボードを使用してメトリクスデータをクエリする場合、データをフィルタリングして、返される時系列のスコープを絞り込むことができます。メトリクスの右側にある {{< ui >}}from{{< /ui >}} フィールドを使用して、任意のメトリクスをタグでフィルタリングします。
 
-ブールまたはワイルドカードタグ値フィルターを使用して高度なフィルタリングを実行することもできます。ログ、トレース、ネットワーク・モニタリング、リアルユーザーモニタリング、Synthetics、セキュリティなど、メトリクスデータ以外のクエリについては、[ログ検索構文][1]ドキュメントを参照して、構成してください。
+ブールまたは Wildcard タグ値フィルターを使用して高度なフィルタリングを実行することもできます。ログ、トレース、ネットワーク・モニタリング、リアルユーザーモニタリング、Synthetics、セキュリティなど、メトリクスデータ以外のクエリについては、[ログ検索構文][1] ドキュメントを参照して、構成してください。
 
 ## ブールでフィルタリングされたクエリ {#boolean-filtered-queries}
 
@@ -43,14 +43,14 @@ Metrics Explorer、モニター、またはダッシュボードを使用して�
 * Include (含める) では `AND` ロジックを使用します
 * Exclude (除外する) では `OR` ロジックを使用します
 
-タグの詳細については、[タグの使い方の概要][2]をご覧ください。
+タグの詳細については、[タグの使い方の概要][2] をご覧ください。
 
-**注:** 記号ブール構文 (`!`, `,`) を、機能的構文演算子 (`NOT`, `AND`, `OR`, `IN`, `NOT IN`) で使用することはできません。以下のクエリは、_無効_ と見なされます:
+**注:** 記号ブール構文 (`!`, `,`) を、機能的構文演算子 (`NOT`, `AND`, `OR`, `IN`, `NOT IN`) で使用することはできません。以下のクエリは、_無効_ とみなされます。
 `avg:mymetric{env:prod AND !region:us-east}`
 
 ### ブールでフィルタリングされたクエリの例 {#boolean-filtered-query-examples}
 
-以下の例を使用するには、コードアイコン `</>` をクリックして UI にクエリエディターを表示し、クエリ例をコピーしてクエリエディターに貼り付けてください。
+以下の例を使用するには、コードアイコン {{< ui >}}</>{{< /ui >}} をクリックして UI にクエリエディターを表示し、クエリ例をコピーしてクエリエディターに貼り付けてください。
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
@@ -70,36 +70,36 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 {{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="ブールの例 NOT IN" style="width:100%;" >}}
 
-## ワイルドカードでフィルタリングされたクエリ {#wildcard-filtered-queries}
+## Wildcard でフィルタリングされたクエリ {#wildcard-filtered-queries}
 
 プレフィックス、サフィックス、および部分文字列のワイルドカードによるタグフィルタリングがサポートされています。
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
 
-### ワイルドカードでフィルタリングされたクエリの例 {#wildcard-filtered-query-examples}
+### Wildcard でフィルタリングされたクエリの例 {#wildcard-filtered-query-examples}
 
 ```
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="ワイルドカードをサフィックスとして使用" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="Wildcard をサフィックスとして使用" style="width:100%;" >}}
 
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="ワイルドカードをプレフィックスとして使用" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="Wildcard をプレフィックスとして使用" style="width:100%;" >}}
 
 ```
 avg:system.disk.utilized{region:*east*} by {region}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="ワイルドカードをインフィックスとして使用" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="Wildcard をインフィックスとして使用" style="width:100%;" >}}
 
 ## 除外関数 {#exclusion-functions}
 
-クエリに[除外関数][3]を追加することで、
+クエリに [除外関数][3] を追加することで、
 - N/A 値を除外します。
 - しきい値を満たしたメトリクスに、最小値または最大値を適用します。
 - しきい値以上または以下の値を除外します。
