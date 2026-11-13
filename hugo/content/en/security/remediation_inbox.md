@@ -91,7 +91,7 @@ Remediations are split into status tabs. The inbox opens on **To Triage**.
 | To Triage | No action has been taken. No case is attached. |
 | Open | A case is attached, and work has not started. |
 | In Progress | A case is attached, and work is in progress. |
-| Closed | The remediation has no open findings and no fix in progress. |
+| Closed | The remediation has no open findings. |
 
 The status of a remediation follows the status of its remediation case. See the [Remediation lifecycle](#remediation-lifecycle) section.
 
@@ -183,7 +183,7 @@ Findings that belong to a remediation case show the linked case in the SCA and C
 Datadog updates the status of remediation cases automatically:
 
 - A remediation case moves to **In Progress** when a fix starts, such as a Bits Code session or a linked pull request.
-- A remediation case closes when the remediation has no open findings and no fix is in progress. Findings leave a remediation when they are fixed, muted, or expired.
+- A remediation case closes when the remediation has no open findings. Findings leave a remediation when they are fixed, muted, or expired.
 - A closed remediation case, including one closed manually, reopens if the remediation has open findings again within 30 days.
 
 Status updates can take up to an hour to appear.
