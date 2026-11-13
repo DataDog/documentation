@@ -145618,10 +145618,13 @@ components:
         - modified_by
       type: object
     TagRuleCreateAttributes:
-      description: Attributes that can be supplied when creating a tag rule.
+      description: |-
+        Attributes that can be supplied when creating a tag rule. If `tag_value_patterns`
+        contains `*`, set `required` and `negated` to different values. If both are `false`,
+        the rule has no effect. If both are `true`, no value can satisfy the rule.
       properties:
         enabled:
-          description: Whether the rule is currently enforced. Defaults to `true` for newly created rules.
+          description: The API ignores this value on creation and always enables new rules. To disable a rule, use the "Update a tag rule" endpoint.
           example: true
           type: boolean
         name:
@@ -145640,26 +145643,35 @@ components:
           $ref: "#/components/schemas/TagRuleCreateType"
         scope:
           description: |-
-            The scope the rule applies within. Typically an environment, team, or
-            organization-level identifier used to limit where the rule is enforced.
-          example: "env"
+            The scope the rule applies within. For logs and spans, use a search query, such
+            as `env:prod`, or `*` to match all telemetry. For metrics, use a metric selector
+            with an optional tag filter, such as `system.cpu.*{env:prod}`. A metric wildcard
+            is allowed only once, at the end of the metric selector.
+          example: "env:prod"
           type: string
         source:
           $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: The tag key that the rule governs (for example, `service`).
+          description: |-
+            The tag key that the rule governs (for example, `service`). Allowed characters
+            are ASCII letters, digits, underscores, hyphens, periods, and slashes. The keys
+            `host` and `device` are not supported in any letter case.
           example: "service"
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: |-
-            One or more patterns that valid values for the tag key must match. At least one
-            pattern is required.
+            Between 1 and 30 non-empty patterns that valid values for the tag key must match.
+            Allowed characters are ASCII letters, digits, underscores, colons, hyphens,
+            periods, commas, slashes, and asterisks.
           example:
             - "api"
             - "web"
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
           minItems: 1
           type: array
       required:
@@ -145742,13 +145754,15 @@ components:
           $ref: "#/components/schemas/TagRuleScoreRelationship"
       type: object
     TagRuleResourceType:
-      description: JSON:API resource type for a tag rule.
+      description: JSON:API resource type for a tag rule. Requests accept `tag_rule` or `tag_policy`; responses use `tag_policy`.
       enum:
         - tag_rule
-      example: "tag_rule"
+        - tag_policy
+      example: "tag_policy"
       type: string
       x-enum-varnames:
         - TAG_RULE
+        - TAG_POLICY
     TagRuleResponse:
       description: A single tag rule.
       properties:
@@ -145829,13 +145843,15 @@ components:
         - id
       type: object
     TagRuleScoreResourceType:
-      description: JSON:API resource type for a tag rule compliance score.
+      description: JSON:API resource type for a tag rule compliance score. Responses use `tag_policy_score`.
       enum:
         - tag_rule_score
-      example: "tag_rule_score"
+        - tag_policy_score
+      example: "tag_policy_score"
       type: string
       x-enum-varnames:
         - TAG_RULE_SCORE
+        - TAG_POLICY_SCORE
     TagRuleScoreResponse:
       description: A tag rule compliance score.
       properties:
@@ -145864,6 +145880,7 @@ components:
       description: |-
         How the rule is enforced. `blocking` rejects telemetry that violates the rule.
         `surfacing` only highlights non-compliant telemetry without blocking it.
+        RUM supports only `surfacing` rules.
       enum:
         - blocking
         - surfacing
@@ -145875,7 +145892,9 @@ components:
     TagRuleUpdateAttributes:
       description: |-
         Mutable attributes of a tag rule. Each field is optional; omitting a field leaves its
-        current value unchanged. The `source` of a rule cannot be changed.
+        current value unchanged. The `source` of a rule cannot be changed. Tag keys, patterns,
+        and metrics scopes have the same constraints as on creation. If the effective
+        `tag_value_patterns` contains `*`, set `required` and `negated` to different values.
       properties:
         enabled:
           description: Whether the rule is currently enforced.
@@ -145896,12 +145915,16 @@ components:
           type: string
         tag_key:
           description: The tag key that the rule governs.
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: One or more patterns that valid values for the tag key must match.
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
+          minItems: 1
           type: array
       type: object
     TagRuleUpdateData:
@@ -195163,7 +195186,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleSource"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195209,8 +195232,8 @@ paths:
                           score:
                             data:
                               id: "123-v1-1779315066097-1779401466097"
-                              type: "tag_rule_score"
-                        type: "tag_rule"
+                              type: "tag_policy_score"
+                        type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -195218,7 +195241,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRulesListResponse"
           description: OK
@@ -195313,7 +195336,7 @@ paths:
                           - "web"
                         version: 1
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: Created
@@ -195363,7 +195386,8 @@ paths:
       description: |-
         Delete a tag rule. By default the rule is soft-deleted so it can be recovered later
         and so that historical score data remains queryable. Pass `hard_delete=true` to remove
-        the rule permanently.
+        the rule permanently. Deleting a `blocking` rule additionally requires the
+        `telemetry_rules_activate` permission.
       operationId: DeleteTagRule
       parameters:
         - description: The unique identifier of the tag rule to delete.
@@ -195445,7 +195469,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleInclude"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195491,8 +195515,8 @@ paths:
                         score:
                           data:
                             id: "123-v1-1779315066097-1779401466097"
-                            type: "tag_rule_score"
-                      type: "tag_rule"
+                            type: "tag_policy_score"
+                      type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -195500,7 +195524,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195551,6 +195575,9 @@ paths:
         Update one or more attributes of an existing tag rule. Only the fields supplied in the
         request body are modified; omitted fields retain their current values. The rule's
         `source` cannot be changed after creation.
+        Promoting a rule from `surfacing` to `blocking` additionally requires the
+        `telemetry_rules_activate` permission, and your organization must have access to
+        blocking rules. You can't promote RUM rules to `blocking`.
       operationId: UpdateTagRule
       parameters:
         - description: The unique identifier of the tag rule to update.
@@ -195601,7 +195628,7 @@ paths:
                           - "web"
                         version: 2
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195662,7 +195689,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195692,7 +195719,7 @@ paths:
                         ts_start: 1779315066097
                         version: 1
                       id: "123-v1-1779315066097-1779401466097"
-                      type: "tag_rule_score"
+                      type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleScoreResponse"
           description: OK
@@ -279756,7 +279783,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule.
+      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
