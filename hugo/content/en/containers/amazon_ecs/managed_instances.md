@@ -361,9 +361,80 @@ The Agent maintains socket files at `/var/run/datadog/apm.socket` and `/var/run/
 
 ### Log collection
 
-Container log collection through the agent is not supported in daemon mode on ECS Managed Instances.
+<div class="alert alert-info">Log collection with the <code>json-file</code> log driver requires Datadog Agent 7.XX.0+.</div>
 
-To collect container logs, use one of the following alternatives:
+The Agent daemon collects logs from containers that use the `json-file` log driver. ECS writes the logs of each of these containers to a directory on the instance. A log driver volume gives the Agent container read access to these directories.
+
+Consult the sample [datadog-agent-ecs-managed-instances-daemon-logs.json][38] file for a complete daemon task definition.
+
+**Update the daemon task definition** to enable log collection, add a log driver volume, and mount it in the Agent container:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            ...
+            "environment": [
+                ...
+                {
+                    "name": "DD_LOGS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+                    "value": "true"
+                }
+            ],
+            "mountPoints": [
+                ...
+                {
+                    "containerPath": "/var/log/ecs/json-file",
+                    "sourceVolume": "json_file_logs",
+                    "readOnly": true
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        ...
+        {
+            "name": "json_file_logs",
+            "logDriverVolumeConfiguration": {
+                "driver": "json-file"
+            }
+        }
+    ]
+}
+```
+
+The Agent reads the logs from `/var/log/ecs/json-file`, so mount the volume at that path. To register the daemon task definition, use a version of the AWS CLI or SDK that supports `logDriverVolumeConfiguration`.
+
+**Update the application task definitions** to use the `json-file` log driver. For each container whose logs you want to collect, set `logConfiguration`:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "<YOUR_APP_CONTAINER>",
+            ...
+            "logConfiguration": {
+                "logDriver": "json-file"
+            }
+        }
+    ]
+}
+```
+
+Register the updated task definitions, then update the daemon and your services to use the new revisions. Updating a daemon starts a rolling deployment that drains and replaces the container instances. For more information, see [Amazon ECS Managed Daemons][41].
+
+The Agent tags the logs with the tags of the container, such as its ECS task, service, and cluster.
+
+#### Containers that use another log driver
+
+The Agent collects logs only from containers that use the `json-file` log driver. When `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` is `true`, the Agent logs a warning and reports an error in the Agent status for each container that uses another log driver, such as `awslogs`. To avoid these messages, [exclude those containers from log collection][39], or leave `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` unset and configure logs for individual containers with [Autodiscovery labels][40].
+
+To collect logs from containers that use another log driver, use one of the following alternatives:
 
 - **AWS FireLens**: Configure a Fluent Bit sidecar in your application task definitions. See the [ECS Fargate log collection documentation][14] for setup instructions.
 - **`awslogs` log driver**: Route logs to Amazon CloudWatch Logs and forward them to Datadog using the [CloudWatch Logs Lambda forwarder][30] or a subscription filter.
@@ -711,3 +782,7 @@ Need help? Contact [Datadog support][26].
 [35]: /resources/json/datadog-agent-ecs-managed-instances-daemon-sysprobe.json
 [36]: /network_monitoring/cloud_network_monitoring/
 [37]: /resources/json/datadog-agent-ecs-managed-instances-daemon-apm.json
+[38]: /resources/json/datadog-agent-ecs-managed-instances-daemon-logs.json
+[39]: /containers/guide/container-discovery-management/
+[40]: /containers/amazon_ecs/logs/#autodiscovery-labels
+[41]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-daemons.html
