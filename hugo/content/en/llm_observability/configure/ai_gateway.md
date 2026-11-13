@@ -292,7 +292,7 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
 
 - **Billing**: Anthropic or OpenAI bills each request to the subscription of the user who sent it. A subscription provider has no integration account, so AI Gateway never sends your organization's provider credentials with subscription traffic.
 - **Models**: Without models on the provider, the vendor decides which models each user can use, based on their plan. Claude Code and Codex show their built-in model lists, which can include models that a user's access does not allow.
-- **Cost**: AI Gateway estimates subscription traffic cost at API list prices, unless you configure a custom price for the model. The reported cost is an API-equivalent estimate, not your subscription bill.
+- **Cost**: Traces record an API-equivalent cost for models with a price. Models you don't add to the provider have no price and are recorded as unpriced. The recorded cost is not your subscription bill.
 - **Budgets**: [Budgets](#set-budgets) don't count or block subscription traffic. If you select {{< ui >}}Track existing usage for current period{{< /ui >}} when you create a budget, its starting spend can include earlier subscription traffic.
 - **Rate limits**: A [rate limit](#set-rate-limits) that matches subscription traffic counts it together with other matching traffic. In Enforce mode, the rate limit rejects subscription requests over the limit.
 - **Routing rules**: A [routing rule](#route-requests-with-routing-rules) cannot include a subscription provider, and a destination for a [model served by any provider](#model-served-by-any-provider) skips subscription providers. Instead, Claude Code and Codex pin the provider with the `x-ai-gateway-provider` header.
