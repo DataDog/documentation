@@ -1,6 +1,6 @@
 ---
 title: How to monitor non-static thresholds
-description: "Monitor variable thresholds using seasonal patterns, reference metrics, and composite monitors for dynamic alerting scenarios."
+description: "Monitor variable thresholds using relative thresholds (Preview), seasonal patterns, reference metrics, and composite monitors."
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"
@@ -16,9 +16,24 @@ A typical metric monitor triggers an alert if a single metric goes above a speci
 
 Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible, you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
 
-This guide covers common use cases for alerting on non-static thresholds:
+Choose an approach based on the comparison you need:
+  - [Use a **relative threshold (Preview)** to compare a metric to its historical baseline](#relative-thresholds)
   - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
   - [Alert based on the value of another **reference** metric](#reference-threshold)
+
+## Relative thresholds
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Relative thresholds are in Preview for metric monitors.
+{{< /callout >}}
+
+A relative threshold compares the evaluated value of a metric monitor to a historical baseline from the same query. Datadog calculates a separate threshold for each group, so one monitor can cover resources with different normal values.
+
+For example, alert when the average job duration over five minutes exceeds `1.5x` its average over the last week.
+
+Choose a historical aggregation and a lookback window from 1 week to 6 months. Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor continues evaluating current values at its configured evaluation frequency.
+
+For configuration steps, query syntax, critical recovery thresholds, and Preview limitations, see the [Relative Thresholds guide][6].
 
 ## Seasonal threshold
 
@@ -187,3 +202,4 @@ The last monitor is a Composite monitor, which sends an alert only if the two pr
 [3]: /integrations/nginx/?tab=host#data-collected
 [4]: /account_management/billing/usage_metrics/#types-of-usage
 [5]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
+[6]: /monitors/guide/relative-thresholds/

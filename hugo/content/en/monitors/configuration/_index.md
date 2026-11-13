@@ -140,7 +140,9 @@ For more information, see the guide on how to [Customize monitor evaluation freq
 
 ### Thresholds
 
-Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
+Use thresholds to define when a monitor triggers an alert. A static threshold compares the evaluated value to a fixed number. Metric monitors also support [relative thresholds (Preview)](#relative-thresholds), which adapt to a historical baseline. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
+
+#### Static thresholds
 
 Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
 
@@ -157,6 +159,25 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
+#### Relative thresholds
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Relative thresholds are in Preview for metric monitors.
+{{< /callout >}}
+
+A relative threshold uses historical data from the same monitor query as its baseline. Datadog applies an optional multiplier to the aggregated baseline to calculate the threshold. For monitors grouped by tags, each group has its own baseline and threshold.
+
+To configure a relative threshold in **Set alert conditions**:
+
+1. Select a relative threshold and choose the alert direction.
+2. Select a historical aggregation and a lookback window from 1 week to 6 months. The historical window must be at least as long as the monitor's evaluation window.
+3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above `1.5x` the historical average and recover at or below `1.2x` that average.
+
+Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor's evaluation frequency continues to control how often Datadog compares current values to those thresholds.
+
+Relative thresholds support critical threshold queries and critical recovery threshold queries. Relative warning thresholds are not supported in Preview, and static and relative thresholds cannot be combined in the same monitor.
+
+For configuration examples, query syntax, and limitations, see the [Relative Thresholds guide][7].
 
 [1]: /monitors/guide/monitor_aggregators/
 [2]: /monitors/guide/as-count-in-monitor-evaluations/
@@ -164,6 +185,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [4]: /monitors/guide/custom_schedules
 [5]: /monitors/guide/recovery-thresholds/
 [6]: /monitors/types/log/
+[7]: /monitors/guide/relative-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 

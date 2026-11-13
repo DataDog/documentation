@@ -31,13 +31,20 @@ To create a metric monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-A threshold alert compares metric values to a static threshold.
+A threshold alert compares metric values to a static threshold or a relative threshold (Preview). A static threshold is a fixed number. A relative threshold adapts to a historical baseline from the same query.
 
 On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
 For more information, see the [Set alert conditions](#set-alert-conditions) section.
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Relative thresholds are in Preview.
+{{< /callout >}}
+
+For examples and Preview limitations, see [Relative thresholds][2].
+
 [1]: /metrics/distributions/
+[2]: /monitors/guide/relative-thresholds/
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -165,6 +172,8 @@ Trigger when the metric is one of the following:
 
 If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
+For static and relative threshold (Preview) settings, see [Thresholds in monitor configuration][9].
+
 ### Advanced alert conditions
 
 #### Data window
@@ -223,3 +232,4 @@ For instructions on the {{< ui >}}Configure notifications and automations{{< /ui
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
 [8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
+[9]: /monitors/configuration/?tab=thresholdalert#thresholds
