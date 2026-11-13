@@ -2151,12 +2151,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.25.6, @babel/runtime@npm:^7.8.4":
-  version: 7.25.6
-  resolution: "@babel/runtime@npm:7.25.6"
-  dependencies:
-    regenerator-runtime: "npm:^0.14.0"
-  checksum: 10/0c4134734deb20e1005ffb9165bf342e1074576621b246d8e5e41cc7cb315a885b7d98950fbf5c63619a2990a56ae82f444d35fe8c4691a0b70c2fe5673667dc
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.29.10, @babel/runtime@npm:^7.8.4":
+  version: 7.29.10
+  resolution: "@babel/runtime@npm:7.29.10"
+  checksum: 10/883bb39a09f4773cf46cdd7ba0080ef6b30ff996a4ed21f8d34511ec0836122e697716533da5efc9b5016f763110b19aa07e81cec6e2036fe72cb26aad556af2
   languageName: node
   linkType: hard
 
@@ -2693,12 +2691,12 @@ __metadata:
   linkType: hard
 
 "@grpc/grpc-js@npm:^1.14.6":
-  version: 1.14.6
-  resolution: "@grpc/grpc-js@npm:1.14.6"
+  version: 1.14.7
+  resolution: "@grpc/grpc-js@npm:1.14.7"
   dependencies:
     "@grpc/proto-loader": "npm:^0.8.0"
     "@js-sdsl/ordered-map": "npm:^4.4.2"
-  checksum: 10/cd1bf7fc031139f383fc7d6b45238608144ab673684602705537242023b2c51eb3382ae0b76c8d5533724848e8e63a196874ee74f05aff8b60dc2fe9aedf84a2
+  checksum: 10/12577c029ca4ae9c7191430a48e377005b3b1b26d8f519372cf418477698bfac789442077ada2c35be59bd1db89c55654ecebfa0bbb0b181bfed3427f06ac0a0
   languageName: node
   linkType: hard
 
@@ -5944,9 +5942,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.0.tgz":
-  version: 4.5.0
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.0.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.1.tgz":
+  version: 4.5.1
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.1.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.6.1"
     "@types/markdown-it": "npm:^14.1.2"
@@ -5971,7 +5969,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/f8bb96411b83a56047667d5bd9dede409274cc1335f734669d0dccd4ee7f9961195d915c17094d9344556c6c25953d8af173de302be18efba64d84599f9166c3
+  checksum: 10/fc7cc364d3d94495612d0b7f8bd1157c3aadaba3fe53365e023abbdcc3bf1bc43a3afd1f69134c9cc353709d31dffbbc84905edd808f8f3a038f240e6ece283b
   languageName: node
   linkType: hard
 
@@ -6944,7 +6942,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@babel/polyfill": "npm:^7.12.1"
     "@babel/preset-env": "npm:^7.24.0"
-    "@babel/runtime": "npm:^7.25.6"
+    "@babel/runtime": "npm:^7.29.10"
     "@datadog/browser-logs": "npm:^7.0.0"
     "@datadog/browser-rum": "npm:^7.0.0"
     "@datadog/datadog-ci": "npm:^2.36.0"
@@ -6956,7 +6954,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.0.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.5.1.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
@@ -13253,12 +13251,12 @@ __metadata:
   linkType: hard
 
 "qs@npm:^6.16.1":
-  version: 6.17.0
-  resolution: "qs@npm:6.17.0"
+  version: 6.17.1
+  resolution: "qs@npm:6.17.1"
   dependencies:
     es-define-property: "npm:^1.0.1"
     side-channel: "npm:^1.1.1"
-  checksum: 10/c6e6d98d25721c2eb61b2b8b0a99c299e335abd5b8dea3ae6b6335b51da38a0dbf83535c48c02c32745175ed7b96acb25772667647b1a6cc2cac69825f56c7f9
+  checksum: 10/032a642c783fa93277c703591643734519c1e96ed2a9ea83a371fda4187dd9d6c2e5b66a69378a77e5a824bf8c4d1d0654295c069a9ff6c55509c0112c459a28
   languageName: node
   linkType: hard
 
@@ -13467,13 +13465,6 @@ __metadata:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 10/d493e9e118abef5b099c78170834f18540c4933cedf9bfabc32d3af94abfb59a7907bd7950259cbab0a929ebca7db77301e8024e5121e6482a82f78283dfd20c
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.14.0":
-  version: 0.14.1
-  resolution: "regenerator-runtime@npm:0.14.1"
-  checksum: 10/5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
   languageName: node
   linkType: hard
 
