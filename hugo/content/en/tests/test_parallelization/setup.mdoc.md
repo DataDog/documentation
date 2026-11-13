@@ -50,7 +50,7 @@ To skip unaffected tests, enable [Test Impact Analysis][1] for the service.
 
 ## Install ddtest
 
-Install the latest `ddtest` into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job: {% #1-add-test-planning %}
+Install `ddtest` v1.17.0 or later into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job: {% #1-add-test-planning %}
 
 ```bash
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
@@ -258,7 +258,7 @@ jobs:
 
 {% /if %}
 
-`ddtest plan` writes `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The job condition skips empty plans before GitHub expands the matrix. Each job downloads the same plan and runs its zero-based node index.
+`ddtest plan` writes `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The `if` condition on `dd_test` skips the test jobs when the plan has no tests to run. Each job downloads the same plan and runs its zero-based node index.
 
 {% collapse-content title="Subdirectories and multiple suites" level="h4" id="suite-paths" %}
 
