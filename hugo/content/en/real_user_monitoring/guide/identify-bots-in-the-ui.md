@@ -3,7 +3,7 @@ title: Identify Bots in the RUM Explorer
 
 description: Identify incoming RUM requests.
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 algolia:
@@ -49,6 +49,6 @@ datadogRum.init({
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: https://github.com/monperrus/crawler-user-agents

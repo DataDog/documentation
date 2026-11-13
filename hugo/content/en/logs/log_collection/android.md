@@ -527,6 +527,7 @@ The following methods in `Logger.Builder` can be used when initializing the logg
 | `setBundleWithRumEnabled(true)`| Set to `true` (default) to bundle the logs with the current RUM context in your application. This parameter lets you display all the logs sent while a specific View is active by using the Datadog RUM Explorer.                                                        |
 | `setName(<LOGGER_NAME>)`   | Set `<LOGGER_NAME>` as the value for the `logger.name` attribute attached to all logs sent to Datadog.                                                                                                                                                                  |
 | `setRemoteSampleRate(<SAMPLE_RATE>)`   | Set the sampling rate for this logger. All the logs produced by the logger instance are randomly sampled according to the provided sample rate (default 100f = all logs). **Note**: The Logcat logs are not sampled.            |
+| `setRemoteLogThreshold(<LOG_PRIORITY>)` | Set the minimum log priority sent to Datadog. Logs with a lower priority aren't sent. The default value is -1 (allow all). |
 | `build()`                        | Build a new logger instance with all options set.                                                                                                                                                                                                                       |
 
 ### Global configuration
@@ -637,7 +638,7 @@ If your existing codebase is using Timber, you can forward all those logs to Dat
 [2]: https://github.com/DataDog/dd-sdk-android/blob/develop/CHANGELOG.md
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: /account_management/api-app-keys/#api-keys
-[5]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[5]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android#upload-debug-symbols-to-get-deobfuscated-stack-traces
 [6]: /logs/processing/attributes_naming_convention/
 [7]: /getting_started/tagging/
 [8]: https://source.android.com/security/app-sandbox

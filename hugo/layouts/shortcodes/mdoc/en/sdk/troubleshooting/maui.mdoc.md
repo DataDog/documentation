@@ -80,7 +80,7 @@ When `NativeCrashReportEnabled = true`, an unhandled C# exception that crashes t
 
 Call `AddViewAttribute` from `OnNavigatedTo` instead — by then the SDK has started the destination view. See [Add view attributes][10].
 
-## `dotnet publish` finishes but symbols are not uploaded
+## Symbols aren't uploaded after `dotnet publish` finishes
 
 The MSBuild target skips silently when `datadog-ci` is missing or `DATADOG_API_KEY` is unset. The terminal logger hides those messages by default — add `-v n -tl:off` to `dotnet publish` to see them:
 
@@ -93,12 +93,12 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 
 [1]: https://github.com/DataDog/dd-sdk-maui/issues
 [2]: /help/
-[3]: /real_user_monitoring/application_monitoring/maui/setup/#initialize-the-datadog-sdk
-[4]: /real_user_monitoring/application_monitoring/maui/setup/#set-tracking-consent-gdpr-compliance
+[3]: /real_user_monitoring/setup/install/?platform=maui
+[4]: /real_user_monitoring/setup/install/?platform=maui
 [5]: https://app.datadoghq.com/rum/application/create
 [6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-symbolicated-stack-traces
 [7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#managed-c-stack-traces
-[8]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events
-[9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#known-limitation-gesture-driven-navigation
-[10]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#add-view-attributes
+[8]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=maui
+[9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui#known-limitation-gesture-driven-navigation
+[10]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=maui#add-view-attributes
 [11]: /real_user_monitoring/application_monitoring/maui/error_tracking/#troubleshooting

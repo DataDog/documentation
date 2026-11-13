@@ -1,4 +1,121 @@
-### Custom errors
+[iOS Crash Reporting and Error Tracking][1] displays any issues in your application and the latest available errors. You can view error details and attributes, including JSON, in the [RUM Explorer][3].
+
+## Automatically report errors
+
+To report fatal crashes, add the Crash Reporting module and enable it after initializing the SDK:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+import DatadogCrashReporting
+
+Datadog.initialize(...)
+
+CrashReporting.enable()
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+@import DatadogCrashReporting;
+
+[DDDatadog initializeWithConfiguration:configuration trackingConsent:trackingConsent];
+
+[DDCrashReporter enable];
+```
+
+{% /tab %}
+{% /tabs %}
+
+To also report **App Hangs** (the app becomes unresponsive for too long), enable Crash Reporting and set an `appHangThreshold`, in seconds:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+RUM.enable(
+    with: RUM.Configuration(
+        applicationID: "<application id>",
+        appHangThreshold: 0.25
+    )
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<application id>"];
+configuration.appHangThreshold = 0.25;
+[DDRUM enableWith:configuration];
+```
+
+{% /tab %}
+{% /tabs %}
+
+To also report **Watchdog Terminations** (the OS kills the app for being unresponsive or using excessive resources), enable Crash Reporting and set `trackWatchdogTerminations`:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+RUM.enable(
+    with: RUM.Configuration(
+        applicationID: "<application id>",
+        trackWatchdogTerminations: true
+    )
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<application id>"];
+configuration.trackWatchdogTerminations = YES;
+[DDRUM enableWith:configuration];
+```
+
+{% /tab %}
+{% /tabs %}
+
+**Note**: App hangs and watchdog terminations are only monitored in the main app, not in app extensions or widgets.
+
+### Report errors from logs
+
+"Error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view. This requires the Logs feature to be enabled, and only applies to logs that are actually sent, so logs dropped by `remoteSampleRate` or `remoteLogThreshold` aren't reported:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogLogs
+
+let logger = Logger.create()
+
+logger.error("message")
+logger.critical("message")
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogLogs;
+
+DDLogger *logger = [DDLogger createWith:[DDLoggerConfiguration new]];
+[logger error:@"message"];
+[logger critical:@"message"];
+```
+
+{% /tab %}
+{% /tabs %}
+
+## Manually report errors
 
 To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
 
@@ -23,71 +140,79 @@ rum.addError(message: "error message.")
 {% /tab %}
 {% /tabs %}
 
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][2].
 
-### Automatically track errors
+For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=ios#error-attributes).
 
-All "error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view:
+## Upload debug symbols to get deobfuscated stack traces
+
+Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information (a process called symbolication), upload the `.dSYM` files generated in your application's build or distribution process. Datadog matches stack traces with symbol files using their `uuid` field.
+
+Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Make sure that the `DEBUG_INFORMATION_FORMAT` build setting is set to {% ui %}DWARF with dSYM File{% /ui %}. If Bitcode is enabled, download the `.dSYM` files from [App Store Connect][4] after it finishes processing your build.
+
+Upload your `.dSYM` files with one of the following tools. Re-uploading a `.dSYM` file with the same application version does not override the existing one.
 
 {% tabs %}
-{% tab label="Swift" %}
+{% tab label="Datadog CI" %}
 
-```swift
-import DatadogLogs
+Use the [`@datadog/datadog-ci`][5] command line tool:
 
-let logger = Logger.create()
+```sh
+export DATADOG_API_KEY="<API KEY>"
 
-logger.error("message")
-logger.critical("message")
+# if you have a zip file containing dSYM files
+npx @datadog/datadog-ci dsyms upload appDsyms.zip
+
+# if you have a folder containing dSYM files
+npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 ```
 
+To upload to a Datadog site other than US1, set the `DATADOG_SITE` environment variable (for example, `datadoghq.eu`).
+
 {% /tab %}
-{% tab label="Objective-C" %}
+{% tab label="Fastlane" %}
 
-```objective-c
-@import DatadogLogs;
+1. Add [`fastlane-plugin-datadog`][6] to your project:
 
-DDLogger *logger = [DDLogger create];
-[logger error:@"message"];
-[logger critical:@"message"];
+   ```sh
+   fastlane add_plugin datadog
+   ```
+
+2. Configure Fastlane to upload your symbols:
+
+   ```ruby
+   # download_dsyms action feeds dsym_paths automatically
+   lane :upload_dsym_with_download_dsyms do
+     download_dsyms
+     upload_symbols_to_datadog(api_key: "datadog-api-key")
+   end
+   ```
+
+{% /tab %}
+{% tab label="GitHub Actions" %}
+
+Use the [Datadog Upload dSYMs GitHub Action][7] in your GitHub Action jobs:
+
+```yaml
+- name: Upload dSYMs to Datadog
+  uses: DataDog/upload-dsyms-github-action@v1
+  with:
+    api_key: ${{ secrets.DATADOG_API_KEY }}
+    site: datadoghq.com
+    dsym_paths: |
+      path/to/dsyms/folder
+      path/to/zip/dsyms.zip
 ```
 
 {% /tab %}
 {% /tabs %}
 
-Similarly, all finished spans marked as error are reported as RUM errors:
+`.dSYM` files are limited to 2 GB each, and symbols are not available for crashes on simulators. For these limitations and other options, see [iOS Crash Reporting and Error Tracking][1].
 
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogTrace
-
-let span = Tracer.shared().startSpan(operationName: "operation")
-// ... capture the `error`
-span.setError(error)
-span.finish()
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-// ... capture the `error`
-id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
-[span setError:error];
-[span finish];
-```
-
-{% /tab %}
-{% /tabs %}
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/ios
-[3]: /real_user_monitoring/application_monitoring/ios/data_collected/
-[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
-[5]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
-[7]: https://www.ntppool.org/en/
-[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[9]: /real_user_monitoring/application_monitoring/ios/setup
+[1]: /error_tracking/frontend/mobile/ios/
+[2]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[4]: https://appstoreconnect.apple.com/
+[5]: https://www.npmjs.com/package/@datadog/datadog-ci
+[6]: https://github.com/DataDog/datadog-fastlane-plugin
+[7]: https://github.com/marketplace/actions/datadog-upload-dsyms

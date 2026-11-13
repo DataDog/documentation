@@ -5,7 +5,7 @@ aliases:
 - /monitors/monitor_types/real_user_monitoring
 - /monitors/create/types/real_user_monitoring/
 further_reading:
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Explore your RUM data"
 - link: "/monitors/notify/"
@@ -105,12 +105,12 @@ For more information about the {{< ui >}}Define permissions and audit notificati
 
 [1]: /real_user_monitoring/
 [2]: https://app.datadoghq.com/monitors/create/rum
-[3]: /real_user_monitoring/explorer/search/
-[4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
-[5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
+[4]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=facets#setup-facets-measures
+[5]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=measures#setup-facets-measures
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /real_user_monitoring/rum_without_limits
+[8]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [9]: https://app.datadoghq.com/monitors/templates?q=real%20user%20monitoring&origination=installed&p=1
 [10]: /real_user_monitoring/guide/alerting-with-rum/#choosing-between-monitoring-metrics-and-events
 [11]: /monitors/configuration/?tab=evaluateddata#permissions

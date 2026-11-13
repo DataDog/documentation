@@ -54,4 +54,4 @@ In the {{< ui >}}Network{{< /ui >}} tab, add a filter of the form `-url:intake-d
 
 [1]: /getting_started/site
 [2]: /real_user_monitoring/guide/proxy-rum-data
-[3]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method
+[3]: /real_user_monitoring/setup/install/?platform=browser

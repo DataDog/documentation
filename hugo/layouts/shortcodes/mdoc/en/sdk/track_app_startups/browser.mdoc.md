@@ -1,0 +1,1 @@
+Application startup tracking measures mobile app launch times and doesn't apply to Browser applications. To measure how fast your web pages load, see [Track UI Latency](/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser).

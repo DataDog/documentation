@@ -15,7 +15,7 @@ Windows opened before `init` completes are not tracked until you reload them. Th
 
 To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Tracking consent][8].
 
-### `init` returns `false`
+### The `init` call returns `false`
 
 `init` returns `false` if the configuration is invalid.
 
@@ -33,7 +33,7 @@ Also verify that the [Browser SDK is set up][4] in the pages loaded by the rende
 
 Renderer profiling relies on the JS Self-Profiling API, which requires the page to be served with the `Document-Policy: js-profiling` HTTP response header. Pages loaded from `file://` are not served with this header by default, so profiling is not available for them.
 
-To fix this, serve the renderer over a protocol where you control the response headers: a custom protocol that you handle with `protocol.handle`, or a local HTTP server. If you use a custom protocol, register it as privileged with the `standard` and `secure` privileges before the app is ready. See [Correlate RUM and Profiling][5] for the full setup.
+To fix this, serve the renderer over a protocol where you control the response headers: a custom protocol that you handle with `protocol.handle`, or a local HTTP server. If you use a custom protocol, register it as privileged with the `standard` and `secure` privileges before the app is ready. See [Collect Frontend Profiles][5] for the full setup.
 
 ### A custom duration vital never stops
 
@@ -48,10 +48,10 @@ Only returning `false` from `beforeSendRum` drops an event. Any other return val
 To fix this, return `false` for events that can be dropped, and modify the editable fields of the other events instead. See [Modify or drop RUM events][7].
 
 [1]: /help
-[2]: /real_user_monitoring/application_monitoring/electron/setup/#initialize-the-sdk-in-the-main-process
-[3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
-[4]: /real_user_monitoring/application_monitoring/browser/setup/
-[5]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=electron
-[6]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#custom-duration-vitals
-[7]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
-[8]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
+[2]: /real_user_monitoring/setup/install/?platform=electron#initialize-the-sdk-in-the-main-process
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#allowed-renderer-hosts
+[4]: /real_user_monitoring/setup/install/?platform=browser
+[5]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/?platform=electron
+[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=electron#custom-duration-vitals
+[7]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=electron
+[8]: /real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=electron#tracking-consent

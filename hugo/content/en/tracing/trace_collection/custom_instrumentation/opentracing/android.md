@@ -1073,4 +1073,4 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
 [10]: /tracing/trace_collection/custom_instrumentation/client-side/android/otel
 [11]: https://opentracing.io
-[12]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
+[12]: /error_tracking/frontend/mobile/android/?tab=us#upload-your-mapping-file

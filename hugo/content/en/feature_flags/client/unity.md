@@ -279,5 +279,5 @@ Keep calls to `DdFlags.Instance.CreateClient()` at your application boundary. Th
 [2]: https://openupm.com/packages/com.google.external-dependency-manager/
 [3]: https://github.com/DataDog/unity-package
 [4]: https://docs.unity3d.com/Manual/gradle-templates.html
-[5]: /real_user_monitoring/application_monitoring/unity/setup
+[5]: /real_user_monitoring/setup/install/?platform=unity
 [6]: /account_management/api-app-keys/#client-tokens

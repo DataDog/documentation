@@ -237,4 +237,4 @@ For Electron setup issues, such as a renderer host missing from `allowedRenderer
 [8]: /session_replay/setup_and_configuration/
 [9]: /session_replay/privacy_options/#image-masking
 [10]: /session_replay/troubleshooting/?platform=browser
-[11]: /real_user_monitoring/application_monitoring/electron/troubleshooting/
+[11]: /real_user_monitoring/reference/troubleshooting/?platform=electron

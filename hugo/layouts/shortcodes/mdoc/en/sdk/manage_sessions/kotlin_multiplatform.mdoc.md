@@ -1,48 +1,17 @@
-## Event and data management
+## Configure the session sample rate
 
-The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification][9] conditions are met.
-
-### Clear all data
-
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+Use `setSessionSampleRate(<sampleRate>)` in your RUM configuration to set the RUM sessions sample rate. The sample rate is a percentage between 0 and 100: `0` means no RUM events are sent, and `100` (the default) means all sessions are kept.
 
 ```kotlin
-Datadog.clearAllData()
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .setSessionSampleRate(100.0f)
+    .build()
+Rum.enable(rumConfig)
 ```
 
-### Stop data collection
+You can adjust the session sample rate, but Datadog recommends using [retention filters][1] to control retained volume. For the full parameter reference, see [Initialization parameters][2].
 
-You can use the `stopInstance` API to stop the SDK instance from collecting and uploading data further.
-
-```kotlin
-Datadog.stopInstance()
-```
-
-### Set remote log threshold
-
-You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is to allow all.
-
-```kotlin
-val logger = Logger.Builder()
-  .setRemoteLogThreshold(LogLevel.INFO)
-  .build()
-```
-
-## Track background events
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
-
-Add the following snippet during RUM configuration:
-
-```kotlin
-.trackBackgroundEvents(true)
-```
-
-{% alert level="info" %}
-Tracking background events may lead to additional sessions, which can impact billing. For questions, [contact Datadog support][a1].
-{% /alert %}
-
-## Retrieve the RUM session ID
+## Retrieve the session ID
 
 Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
 
@@ -54,14 +23,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 }
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
-[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
-[4]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
-[8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[a1]: https://docs.datadoghq.com/help/
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters

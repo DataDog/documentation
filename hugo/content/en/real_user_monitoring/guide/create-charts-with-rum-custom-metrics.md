@@ -2,13 +2,13 @@
 title: Create Charts with RUM Custom Metrics
 description: "Learn how to visualize your RUM custom metrics as charts in dashboards and notebooks."
 further_reading:
-- link: '/real_user_monitoring/platform/generate_metrics'
+- link: '/real_user_monitoring/measure_health_with_metrics/create_custom_metrics'
   tag: 'Documentation'
   text: 'Generate Custom Metrics from RUM Events'
 - link: '/real_user_monitoring/guide/alerting-with-rum'
   tag: 'Documentation'
   text: 'Create alerts with RUM data'
-- link: '/real_user_monitoring/platform/dashboards/'
+- link: '/real_user_monitoring/administer_and_extend_rum/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 - link: '/dashboards/'
@@ -84,6 +84,6 @@ Use a **Distribution** widget with a distribution metric that has percentile agg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/platform/generate_metrics
+[1]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /real_user_monitoring/platform/generate_metrics#percentile-aggregation
+[3]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics#percentile-aggregation

@@ -27,12 +27,14 @@ These events originate from the .NET MAUI SDK before being forwarded to the nati
 
 In Datadog, navigate to [**Digital Experience** > **Performance Monitoring** > **Application List**][6] to access your application's settings. To stop collecting client IPs or geolocation data, uncheck the corresponding settings.
 
-To customize or disable individual MAUI trackers in code, see [Advanced Configuration > Customize automatic tracking][7].
+To customize or disable individual MAUI trackers in code, see [Track Navigation][7], [Track User Interactions][8], and [Track Network Requests][9].
 
-[1]: /real_user_monitoring/application_monitoring/ios/data_collected/#event-specific-attributes
-[2]: /real_user_monitoring/application_monitoring/android/data_collected/#event-specific-attributes
-[3]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#view-naming-priority
-[4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#action-target-naming-priority
+[1]: /real_user_monitoring/setup/data_collected/?platform=ios#event-specific-attributes
+[2]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui#view-naming-priority
+[4]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui#action-target-naming-priority
 [5]: /real_user_monitoring/application_monitoring/maui/error_tracking/
 [6]: https://app.datadoghq.com/rum/list
-[7]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#customize-automatic-tracking
+[7]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui
+[8]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui
+[9]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui

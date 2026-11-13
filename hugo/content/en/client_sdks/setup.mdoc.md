@@ -34,6 +34,10 @@ Follow the instructions below to install and configure the Datadog SDK for your 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 
+This page describes how to instrument your React Native and Expo applications with the Datadog React Native SDK.
+
+The React Native SDK supports [Real User Monitoring (RUM)](/real_user_monitoring/), [Error Tracking](/error_tracking/frontend/mobile/reactnative/), [Product Analytics](/product_analytics/), and [Session Replay](/session_replay/?platform=react_native).
+
 The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
 
 {% tabs %}

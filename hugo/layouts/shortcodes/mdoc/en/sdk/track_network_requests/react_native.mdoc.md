@@ -1,21 +1,27 @@
-### Manually track RUM resources
+## Automated resource collection
 
-You can manually track RUM resources:
+To automatically track network requests as RUM resources, set `trackResources` to `true` in your RUM configuration:
 
 ```javascript
-DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
-//...
-DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
+rumConfiguration: {
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    trackResources: true,
+    firstPartyHosts: [
+        { match: 'example.com', propagatorTypes: [PropagatorType.DATADOG, PropagatorType.TRACECONTEXT] }
+    ]
+}
 ```
 
-### Manually send spans
+This automatically tracks [XMLHttpRequest][1] and Fetch requests as resources. Use `firstPartyHosts` to enable distributed tracing for requests made to those hosts.
 
-You can send spans manually:
+## Manual resource collection
+
+To track a custom resource, start it before it loads and stop it after:
 
 ```javascript
-const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
-//...
-DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
+DdRum.startResource('<RESOURCE_KEY>', 'GET', url, {}, Date.now());
+// ... perform the request ...
+DdRum.stopResource('<RESOURCE_KEY>', 200, 'xhr', undefined, {}, Date.now());
 ```
 
 ## Resource timings
@@ -25,4 +31,7 @@ Resource tracking provides the following timings:
 -   `First Byte`: The time between the scheduled request and the first byte of the response. This includes time for the request preparation on the native level, network latency, and the time it took the server to prepare the response.
 -   `Download`: The time it took to receive a response.
 
-[1]: https://app.datadoghq.com/rum/application/create
+For the attributes collected for resources, see [Data Collected][2].
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[2]: /real_user_monitoring/setup/data_collected/?platform=react_native

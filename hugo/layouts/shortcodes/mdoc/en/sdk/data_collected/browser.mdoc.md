@@ -16,7 +16,7 @@ There are additional [attributes specific to a given event type](#event-specific
 | Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a web page. It includes detailed loading timing information.                                                                                                              |
 | Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
 | Error     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
-| Action    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
+| Action    | 30 days   | RUM action events track user interactions during a user session and can also be manually sent to monitor custom user actions.                                                                                                                                 |
 
 The following diagram illustrates the RUM event hierarchy:
 
@@ -153,13 +153,13 @@ For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is 
 WebSocket monitoring is in Preview. The collected attributes may change before general availability. You do not need to request access. To enable it, set `betaTrackWebSockets` to `true`.
 {% /callout %}
 
-For WebSocket connections (`resource.type:websocket`) collected with `betaTrackWebSockets`, the following attributes are collected in addition to the other [resource attributes](#resource-attributes). See [Track WebSocket connections][17] for configuration details.
+For WebSocket connections (`resource.type:websocket`) collected with `betaTrackWebSockets`, the following attributes are collected in addition to the other [resource attributes](#resource-attributes). See [Track WebSocket connections][19] for configuration details.
 
 Some standard resource attributes have WebSocket-specific values:
 
 - `resource.url` does not include the query string.
 - `resource.duration` is the time the connection was tracked, from its creation until it closed or tracking ended.
-- `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][18].
+- `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][20].
 
 | Attribute                                     | Type        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | --------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -175,7 +175,7 @@ Some standard resource attributes have WebSocket-specific values:
 | `resource.websocket.closing_date`             | number (ms) | The date the application called `close()`, in milliseconds since the Unix epoch. Only present if the application closed the connection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `resource.websocket.closing_duration`         | number (ns) | Time spent in the closing state, between the start of the closing handshake and the closure of the connection. `0` if there was no closing handshake.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `resource.websocket.closed_date`              | number (ms) | The date the connection closed or, if tracking ended first, the date tracking ended, in milliseconds since the Unix epoch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `resource.websocket.close_code`               | number      | The close status code, as defined in [RFC 6455, section 7.4][19]. Only present if `resource.websocket.tracking_end_reason` is `close_event`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `resource.websocket.close_code`               | number      | The close status code, as defined in [RFC 6455, section 7.4][21]. Only present if `resource.websocket.tracking_end_reason` is `close_event`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `resource.websocket.close_reason`             | string      | The reason the connection was closed, as provided by the application or the server. Empty if no reason was provided. Only present if `resource.websocket.tracking_end_reason` is `close_event`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `resource.websocket.was_clean`                | Boolean     | Whether the connection was closed cleanly, meaning the closing handshake completed. Only present if `resource.websocket.tracking_end_reason` is `close_event`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `resource.websocket.close_initiator`          | string      | Which side started the closing handshake: `client` if the application called `close()`, `server` if the server started the closing handshake, or `unknown` if no closing handshake was observed (for example, if the opening handshake failed or the connection was lost).                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -210,6 +210,7 @@ Message statistics are reported separately for messages received by the browser 
 | `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
+| `error.causes`  | [Array][17] | An optional list of errors providing additional context. This attribute is used to display errors separately and enhance formatting. For more information, see the [MDN documentation][18]. |
 
 #### Source errors
 
@@ -260,19 +261,21 @@ Source errors include code-level information about the error. For more informati
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-loading-time-is-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[11]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors#error-sources
+[11]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
-[14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
-[15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
+[13]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#automatically-track-user-interactions
+[14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#manually-track-actions-and-send-custom-events
+[15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser#track-graphql-requests
 [16]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
-[17]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-websocket-connections
-[18]: https://datatracker.ietf.org/doc/html/rfc6455
-[19]: https://datatracker.ietf.org/doc/html/rfc6455#section-7.4
+[17]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[18]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause
+[19]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser#track-websocket-connections
+[20]: https://datatracker.ietf.org/doc/html/rfc6455
+[21]: https://datatracker.ietf.org/doc/html/rfc6455#section-7.4
