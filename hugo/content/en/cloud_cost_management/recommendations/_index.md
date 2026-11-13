@@ -516,6 +516,12 @@ multifiltersearch:
       recommendation_type: Delete Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: MySQL Database
+      recommendation_type: Downsize Database for MySQL Compute
+      recommendation_description: Identifies Azure Database for MySQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Azure Firewall
@@ -527,6 +533,12 @@ multifiltersearch:
       resource_type: Database for PostgreSQL
       recommendation_type: Delete Database for PostgreSQL
       recommendation_description: Azure Database for PostgreSQL server with no connections, which can be terminated.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Database for PostgreSQL
+      recommendation_type: Downsize Database for PostgreSQL Compute
+      recommendation_description: Identifies Azure Database for PostgreSQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -563,6 +575,12 @@ multifiltersearch:
       resource_type: Storage Account
       recommendation_type: Delete Storage Account
       recommendation_description: Storage Account with no transactions and negligible used capacity over the last 14 days.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Synapse Dedicated SQL Pool
+      recommendation_type: Delete Idle Synapse Dedicated SQL Pool
+      recommendation_description: Identifies online Synapse dedicated SQL pools with no logins and low DWU usage, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure

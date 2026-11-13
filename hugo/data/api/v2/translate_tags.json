@@ -585,7 +585,7 @@
   },
   "tag-rules": {
     "name": "Tag Rules",
-    "description": "Tag Rules define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be\n`blocking` (data not matching the rule is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each rule reports a compliance `score` derived from how\nmuch recent telemetry adheres to the rule."
+    "description": "Tag Rules define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be\n`blocking` (data not matching the rule is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each rule reports a compliance `score` derived from how\nmuch recent telemetry adheres to the rule. RUM supports only `surfacing` rules."
   },
   "teams": {
     "name": "Teams",

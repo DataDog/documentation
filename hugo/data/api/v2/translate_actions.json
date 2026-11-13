@@ -1174,13 +1174,13 @@
     "summary": "Delete a Storage Management configuration"
   },
   "GetCodeCoverageBranchSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a branch",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a branch."
   },
   "GetCodeCoverageCommitSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
@@ -1192,7 +1192,7 @@
     "request_schema_description": "Request object for getting per-file code coverage data."
   },
   "GetCodeCoveragePRSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a pull request",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a pull request."
@@ -1987,7 +1987,7 @@
     "request_schema_description": "Request for editing a downtime."
   },
   "SearchIssues": {
-    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
+    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.\nReturns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.",
     "summary": "Search error tracking issues",
     "request_description": "Search issues request payload.",
     "request_schema_description": "Search issues request payload."
@@ -2607,7 +2607,7 @@
     "request_schema_description": "Payload for creating a new tag rule."
   },
   "DeleteTagRule": {
-    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently. Deleting a `blocking` rule additionally requires the\n`telemetry_rules_activate` permission.",
     "summary": "Delete a tag rule"
   },
   "GetTagRule": {
@@ -2615,7 +2615,7 @@
     "summary": "Get a tag rule"
   },
   "UpdateTagRule": {
-    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.\nPromoting a rule from `surfacing` to `blocking` additionally requires the\n`telemetry_rules_activate` permission, and your organization must have access to\nblocking rules. You can't promote RUM rules to `blocking`.",
     "summary": "Update a tag rule",
     "request_description": "",
     "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
@@ -5520,7 +5520,7 @@
     "summary": "List AI Gateway rate limits"
   },
   "CreateAiGatewayRateLimit": {
-    "description": "Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.",
+    "description": "Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.",
     "summary": "Create an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
@@ -5538,10 +5538,18 @@
     "summary": "Get an AI Gateway rate limit"
   },
   "UpdateAiGatewayRateLimit": {
-    "description": "Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
+    "description": "Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
     "summary": "Update an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway rate limit."
+  },
+  "ListAiGatewayRateLimitInstances": {
+    "description": "List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
+    "summary": "List AI Gateway rate limit counters"
+  },
+  "GetAiGatewayRateLimitInstancesSummary": {
+    "description": "Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
+    "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
     "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
