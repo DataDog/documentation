@@ -44,6 +44,18 @@ Any fixed date can be entered as part of a range. For example:
 - `Jan 1 - Jan 2`
 - `6:00 am - 1:00 pm`
 
+**Note**: A time frame can't extend into the future. If you enter a date without a year, or a time without a date, Datadog fills in the missing parts using the current date. If the resulting time frame extends into the future, Datadog moves the entire time frame back:
+
+- A date without a year moves back to the previous year.
+- A time without a date moves back to the previous day.
+
+For example, on November 11, 2026 at 11:00 a.m.:
+
+- `Dec 1 - Dec 5` resolves to December 1 to 5, 2025.
+- `9:00 am - 3:00 pm` resolves to 9:00 a.m. to 3:00 p.m. on November 10. The start time also moves back, even though 9:00 a.m. on November 11 is in the past.
+
+If you include a year and the date is in the future, such as `Dec 1, 2026 - Dec 5, 2026`, the time frame can't be applied.
+
 ### Relative dates
 
 Relative dates update over time; they are calculated from the current time.
