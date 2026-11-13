@@ -140,7 +140,7 @@ To create tickets in Jira, ServiceNow, or Linear from remediation cases, see [Ro
 
 From the side panel, click **Remediate with AI** and choose one of the following:
 
-- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation case. Requires [Bits Code setup][8].
+- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. Datadog links the session and its pull request to the remediation through a child case. Requires [Bits Code setup][8].
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
@@ -150,7 +150,7 @@ To check the fix from your coding agent, set up the [Code Security MCP Server][7
 
 ### Link a pull request
 
-If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. The pull request is attached to the remediation case, and its status appears in the inbox.
+If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. Datadog links the pull request to the remediation through a child case, and its status appears in the inbox.
 
 ## Track remediation progress
 
