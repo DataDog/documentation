@@ -27,7 +27,7 @@ The [Customer Contracts][1] page gives Datadog partners a single view of their e
 
 To use Customer Contracts, you need:
 
-- A Datadog admin organization. If you don't have one, contact your Datadog partner team.
+- A Datadog admin organization. If you don't have one, see [Requesting an Admin Org][5].
 - The Billing Read (`billing_read`) permission in your admin organization. Users with this permission can view all of the information on the page. For information on managing permissions, see [Role Based Access Control][4].
 
 ## Access Customer Contracts
@@ -104,3 +104,4 @@ The {{< ui >}}Contacts{{< /ui >}} section of the contract detail panel lists the
 [2]: /account_management/plan_and_usage/partner_experience/customer_pricing/
 [3]: /account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
 [4]: /account_management/rbac/
+[5]: /partners/multi_tenant_billing/#requesting-an-admin-org
