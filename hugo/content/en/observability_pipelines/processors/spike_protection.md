@@ -39,7 +39,7 @@ To set up the Spike Protection processor:
 1. (Optional) In the {{< ui >}}Spike threshold{{< /ui >}} field, enter the number of standard deviations above the average that counts as a spike. The default is 5. Use a lower value to detect smaller spikes.
 1. (Optional) In the {{< ui >}}Minimum threshold{{< /ui >}} field, enter the volume below which spikes are not detected, and select the unit. The default is 100 GB.
 1. If you use group-by attributes, choose how to handle logs that are missing an attribute from the {{< ui >}}Logs missing a group-by attribute{{< /ui >}} dropdown menu:
-    - {{< ui >}}Group logs into a single default bucket{{< /ui >}}: Track logs that are missing one or more of the attributes as a single log group.
+    - {{< ui >}}Group logs into a single default bucket{{< /ui >}}: Track logs that are missing one or more of the attributes as a single log group and evaluate the group against its baseline.
     - {{< ui >}}Ignore (never treated as a spike){{< /ui >}}: Send logs that are missing one or more of the attributes to the next step in the pipeline without evaluating them.
 1. In the {{< ui >}}Where to route a spike{{< /ui >}} dropdown menu, choose what to do with logs in a spiking group:
     - {{< ui >}}Drop events{{< /ui >}}: Drop the logs.
