@@ -30,9 +30,11 @@ APM trace enrichment is available in the following SDKs:
 
 | Language | Minimum version |
 | -------- | --------------- |
-| Go       | 2.8.0           |
-| Java     | 1.64.1          |
-| Node.js  | 5.105.0         |
+| Go       | 2.12.0          |
+| Java     | 1.69.0          |
+| Node.js  | 6.24.0          |
+
+Use this optional setup after flags evaluate successfully. Keep the application's flag configuration source when adding tracing or enrichment.
 
 ## Prerequisites
 
@@ -40,6 +42,7 @@ Before setting up APM trace enrichment, confirm the following:
 
 - Server-side feature flags are already configured and flags are evaluating in your application.
 - [APM tracing][3] is enabled and traces are flowing to Datadog.
+- For Java, `dd-java-agent` 1.69.0 or later is loaded with `-javaagent`. See [Java tracing setup][5].
 
 ## How APM trace enrichment works
 
@@ -60,7 +63,7 @@ Set the following environment variable to enable span enrichment:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
 {{< /code-block >}}
 
-The enrichment environment variable is supported by all supported server-side SDKs. No code changes are required. Enabling the variable activates the enrichment hook automatically when the Datadog OpenFeature provider initializes. Node.js additionally supports code-level configuration as shown in the language tabs below.
+For the SDKs listed above, this variable activates enrichment when the Datadog OpenFeature provider initializes. Node.js also supports code-level configuration as shown below.
 
 ### Language-specific configuration
 
@@ -104,12 +107,18 @@ func main() {
 {{% /tab %}}
 {{% tab "Java" %}}
 
-No additional code configuration is needed. The `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED` environment variable enables span enrichment. Java also supports the system property `-Ddd.experimental.flagging.provider.span.enrichment.enabled=true` as an alternative.
+With Java APM tracing configured, set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true` and start the application with `dd-java-agent`:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+```
+
+Java also supports the system property `-Ddd.experimental.flagging.provider.span.enrichment.enabled=true` as an alternative to the enrichment environment variable.
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.Client;
-import datadog.trace.api.openfeature.Provider;
+import com.datadog.openfeature.Provider;
 
 OpenFeatureAPI api = OpenFeatureAPI.getInstance();
 api.setProviderAndWait(new Provider());
@@ -122,13 +131,14 @@ Client client = api.getClient("my-app");
 
 You can also enable span enrichment in code:
 
+Set only the enrichment option below. The deprecated outer `flaggingProvider.enabled` setting also selects Agent Remote Configuration when no source is explicit.
+
 {{< code-block lang="javascript" filename="app.js" >}}
 import tracer from 'dd-trace';
 
 tracer.init({
   experimental: {
     flaggingProvider: {
-      enabled: true,
       spanEnrichment: {
         enabled: true,
       },
@@ -230,3 +240,4 @@ Evaluations beyond these limits are dropped for that span.
 [2]: /feature_flags/server/
 [3]: /tracing/
 [4]: /feature_flags/use_cases/progressive_rollouts/
+[5]: /tracing/trace_collection/dd_libraries/java/

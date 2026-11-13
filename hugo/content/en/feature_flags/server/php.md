@@ -19,66 +19,35 @@ further_reading:
   text: "Feature Flag Graphs"
 ---
 
-## Overview
+## Getting started
 
-This page describes how to instrument your PHP application with the Datadog Feature Flags SDK. The PHP SDK uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+Use agentless delivery to receive flag configuration directly from Datadog. The SDK evaluates flags locally from cached configuration.
 
-The PHP SDK provides two application APIs:
+### Install the SDK
 
-- **Datadog PHP API**: Use `DDTrace\FeatureFlags\Client` with PHP 7 or PHP 8 applications.
-- **OpenFeature adapter**: Use `DDTrace\OpenFeature\DataDogProvider` with PHP 8 applications that use the [OpenFeature][1] standard API.
+Install the Datadog PHP extension version **1.28.0 or later**. Follow the [PHP library installation instructions][4]. The extension provides the Feature Flags API; an Agent and APM tracing are optional.
 
-Flag evaluation is local and fast. The SDK uses locally cached configuration data, so no network requests occur during evaluation.
+Use the Datadog PHP API with PHP 7 or later. For PHP 8 applications, you can also use the [OpenFeature][1] adapter.
 
-## Prerequisites
+### Configure flag delivery
 
-Before setting up the PHP Feature Flags SDK, ensure you have:
-
-- **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog [API key][3]** configured on the Agent
-- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later
-- **Supported PHP runtime**: PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
-- **OpenFeature PHP SDK** `open-feature/sdk` version 2.1 or later, if you use the OpenFeature adapter
-
-Set the following environment variables:
+Set these environment variables before PHP starts:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Enable Remote Configuration in the SDK
-export DD_REMOTE_CONFIG_ENABLED=true
-
-# Required: Service identification
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
-export DD_VERSION=<YOUR_APP_VERSION>
-
-# Required for flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
 {{< /code-block >}}
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+Set `DD_ENV` to your [Feature Flags environment][5]. Use a Datadog [API key][3]. For sites other than US1, also set `DD_SITE`. For the site selected on this page, use {{< region-param key="dd_site" code="true" >}}.
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
+PHP requires an explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` setting. Registering a provider or setting `DD_FEATURE_FLAGS_ENABLED=true` alone does not start configuration delivery. If `DD_FEATURE_FLAGS_ENABLED=false` is set, remove it or set it to `true`.
 
-## Installation
+### Evaluate a flag
 
-Feature Flagging is provided by Application Performance Monitoring (APM). Install and configure the Datadog PHP tracer by following [Tracing PHP Applications][4].
+Create a Boolean flag named `my-flag`. Enable its **Server** distribution channel and enable it in the target environment.
 
-If you use the OpenFeature adapter in a PHP 8 application, install the OpenFeature PHP SDK:
-
-{{< code-block lang="bash" >}}
-composer require open-feature/sdk:^2.1
-{{< /code-block >}}
-
-## Initialize the SDK
-
-Choose the API that matches your PHP runtime and application architecture.
-
-### PHP 7 and PHP 8: Datadog API
-
-Use `DDTrace\FeatureFlags\Client` directly in PHP 7 or PHP 8 applications:
+For PHP 7 or PHP 8, create the Datadog client and evaluate the flag:
 
 {{< code-block lang="php" >}}
 <?php
@@ -86,11 +55,18 @@ Use `DDTrace\FeatureFlags\Client` directly in PHP 7 or PHP 8 applications:
 use DDTrace\FeatureFlags\Client;
 
 $flags = new Client();
+$enabled = $flags->getBooleanValue('my-flag', false);
 {{< /code-block >}}
 
-### PHP 8: OpenFeature adapter
+Replace `my-flag` with a flag key from your environment. The example evaluates a global flag without targeting attributes.
 
-In PHP 8 applications, you can register Datadog as the OpenFeature provider:
+For the OpenFeature API on PHP 8, install `open-feature/sdk` version 2.1 or later:
+
+{{< code-block lang="bash" >}}
+composer require open-feature/sdk:^2.1
+{{< /code-block >}}
+
+Register the Datadog provider and evaluate a flag:
 
 {{< code-block lang="php" >}}
 <?php
@@ -102,11 +78,11 @@ use OpenFeature\OpenFeatureAPI;
 
 $api = OpenFeatureAPI::getInstance();
 $api->setProvider(new DataDogProvider());
-
 $client = $api->getClient('my-service');
+$enabled = $client->getBooleanValue('my-flag', false);
 {{< /code-block >}}
 
-The OpenFeature provider returns default values until Remote Configuration delivers the initial flag configuration. Initialize the provider early in application startup so flag configuration has time to load before business logic evaluates flags.
+Both APIs use the same extension and environment settings. The first evaluation waits up to 10 seconds for initial configuration. If configuration is unavailable, the SDK returns the supplied default value. Later evaluations use available updates without starting another initialization wait.
 
 ## Set the evaluation context
 
@@ -328,6 +304,50 @@ if ($maintenanceMode) {
 }
 {{< /code-block >}}
 
+## Additional configuration
+
+### Service identification and tracing
+
+Set `DD_SERVICE` and `DD_VERSION` to identify your application in telemetry. These settings are optional for receiving flags.
+
+{{< code-block lang="bash" >}}
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_VERSION=<YOUR_APP_VERSION>
+{{< /code-block >}}
+
+To add APM tracing, follow [Tracing PHP Applications][4]. For trace annotations, see [APM trace enrichment][9].
+
+### Agent delivery
+
+To receive flags through the Datadog Agent, configure the Agent with an [API key][3] and enable [Remote Configuration][2]. Set these application environment variables:
+
+{{< code-block lang="bash" >}}
+export DD_FEATURE_FLAGS_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+export DD_REMOTE_CONFIG_ENABLED=true
+export DD_ENV='<YOUR_ENVIRONMENT>'
+{{< /code-block >}}
+
+The application API stays the same. Configure service identification as needed for your application.
+
+### Migrate from Agent delivery
+
+Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` and provide `DD_API_KEY` in the PHP process environment. Keep `DD_ENV` matched to your flag environment. Set `DD_SITE` for sites other than US1, then remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` and restart PHP workers.
+
+Replacing only `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` with `DD_FEATURE_FLAGS_ENABLED=true` stops configuration delivery. PHP also requires an explicit source. To retain Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`.
+
+Keep Remote Configuration enabled if other Datadog products use it. For the shared migration procedure, see [Migrate an existing Remote Configuration setup][8].
+
+### Delivery settings
+
+The SDK polls for flag updates every 30 seconds. The request timeout is 5 seconds. Configure these values with `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` and `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS`.
+
+Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to change the first-evaluation timeout. Its default is `10000` milliseconds. Credentials, endpoint, and environment settings resolve at process startup. Restart PHP workers after changing them.
+
+Agentless delivery requires the PHP library's subprocess sidecar. The default `auto` sidecar mode uses a subprocess when available. Thread mode, including automatic fallback to thread mode, does not support agentless configuration.
+
+For additional source settings, see [Configuration sources][10].
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real Datadog provider, or replace feature flag evaluation with a test double in unit tests.
@@ -395,12 +415,14 @@ self::assertTrue($checkout->usesNewCheckoutFlow('user-123'));
 
 If feature flags unexpectedly always return default values, check the following:
 
-- Verify `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your application environment.
-- Verify Remote Configuration is enabled in your Datadog Agent configuration.
-- Ensure `DD_SERVICE` and `DD_ENV` are set and match the service and environment configured for your flag.
-- Confirm your Datadog PHP SDK version includes feature flags support.
-- Check that the PHP process can communicate with the Datadog Agent.
-- Check that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][7].
+- Verify the PHP extension version is 1.28.0 or later.
+- Verify `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` is set before PHP starts.
+- Verify `DD_FEATURE_FLAGS_ENABLED` is not set to `false`.
+- Verify the PHP process receives `DD_API_KEY`, `DD_ENV`, and the correct `DD_SITE`.
+- Verify `DD_ENV` matches the environment configured for your flag.
+- Check that the PHP sidecar can connect to Datadog and uses subprocess mode.
+- Inspect evaluation details to distinguish a returned default from a successful flag evaluation.
+- If you select `remote_config`, verify Agent connectivity and Remote Configuration settings. See [Agent availability][11].
 
 ### OpenFeature provider not found
 
@@ -423,15 +445,20 @@ If targeting rules do not match as expected:
 
 #### Flag evaluation metrics
 
-Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, confirm `DD_METRICS_OTEL_ENABLED=true` is set in your environment and that your PHP tracer version supports flag evaluation metrics. See [Set Up Server-Side Flag Evaluation Metrics][6] for Agent OTLP receiver setup and troubleshooting.
+The optional `feature_flag.evaluations` metric uses a separate OpenTelemetry (OTLP) export path. Set `DD_METRICS_OTEL_ENABLED=true` and configure an OTLP receiver to use this metric. These settings are not required to receive flags or send experiment exposures and evaluation-count events.
+
+Each evaluation emits a counter tagged with the flag key, result variant, and evaluation reason. For receiver setup and troubleshooting, see [Set Up Server-Side Flag Evaluation Metrics][6]. For visualization options, see [Feature Flag Graphs][7].
 
 #### Experiment exposures
 
-Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
+Agentless delivery sends experiment exposures and evaluation-count events through a local event proxy when available. Otherwise, the SDK sends these events directly to Datadog using `DD_API_KEY` and `DD_SITE`.
+
+Exposures appear only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
-2. Verify the Agent's `DD_API_KEY` is correct and the Agent is receiving events.
-3. Verify the evaluation context uses flat primitive attributes. Nested arrays, objects, and null values are ignored for exposure reporting.
+2. For agentless delivery, verify the PHP process has a valid `DD_API_KEY` and the correct `DD_SITE`.
+3. Verify the sidecar can reach a local event proxy or the Datadog event intake. With Agent delivery, check the Agent's API key.
+4. Use flat primitive attributes in the evaluation context. Nested arrays, objects, and null values are ignored for exposure reporting.
 
 ## Further reading
 
@@ -443,4 +470,8 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [4]: /tracing/trace_collection/dd_libraries/php/
 [5]: /feature_flags/concepts/environments/
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
-[7]: /feature_flags/concepts/configuration_sources/#agent-availability
+[7]: /feature_flags/concepts/flag_graphs/
+[8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[9]: /feature_flags/guide/apm_trace_enrichment/
+[10]: /feature_flags/concepts/configuration_sources/
+[11]: /feature_flags/concepts/configuration_sources/#agent-availability

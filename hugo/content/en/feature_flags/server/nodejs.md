@@ -27,77 +27,48 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. In `dd-trace` 6.12.0 and later, it loads flag configuration directly from the Datadog-managed CDN by default.
-
-Agentless Node.js evaluates flags locally and sends experiment exposure events. It prefers a compatible local Event Platform Proxy (EVP) relay. It sends exposure events directly when no compatible relay is available. It does not send EVP flag evaluation events.
+The Datadog Node.js SDK receives flag configuration directly from Datadog by default and evaluates flags locally. No Datadog Agent is required. The provider implements [OpenFeature][2].
 
 ## Getting started
 
-For the default agentless setup, you need:
+Use Node.js 22 or later and `dd-trace` 6.24.0 or later. Create a Boolean flag named `my-flag`. Enable its **Server** distribution channel and enable the flag in the target environment.
 
-- **Datadog Node.js SDK** `dd-trace` version **6.12.0 or later**
-- A Datadog [API key][3]
-- Your Datadog site
-- **@openfeature/server-sdk** version ~1.20.0
+Install the SDKs:
 
-## Installing and initializing
-
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and initialize the Datadog OpenFeature provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
-
-```shell
-npm install dd-trace@^6.12.0 @openfeature/server-sdk
+```bash
+npm install dd-trace@^6.24.0 @openfeature/server-sdk@~1.23.0
 ```
 
-### Configure agentless delivery
+Set the application API key and flag environment before startup:
 
-Configure the API key, Datadog site, and environment in the application process:
-
-```shell
-DD_API_KEY=<YOUR_API_KEY>
-DD_SITE={{< region-param key="dd_site" code="true" >}}
-DD_ENV=<YOUR_ENVIRONMENT>
+```bash
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-No Feature Flags enablement or source setting is required. Access `tracer.openfeature` and register it with OpenFeature, as shown below, to begin polling. Installing or initializing `dd-trace` alone does not create Feature Flags CDN traffic.
+Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
-Initialize the provider in code:
+Register the provider and evaluate the flag:
 
 ```javascript
-import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
+import { OpenFeature } from '@openfeature/server-sdk';
 
 tracer.init();
-
-// Accessing tracer.openfeature activates the default agentless source.
-// setProviderAndWait resolves after the selected source loads, so flags
-// evaluate against real configuration data instead of default values.
-try {
-  await OpenFeature.setProviderAndWait(tracer.openfeature);
-} catch (err) {
-  // If initialization fails, evaluations return default values until the
-  // provider receives its first configuration. Log the error so it's visible.
-  console.error('Datadog feature flag provider failed to initialize', err);
-}
+await OpenFeature.setProviderAndWait(tracer.openfeature);
+const enabled = await OpenFeature.getClient().getBooleanValue(
+  'my-flag', false, { targetingKey: 'user-123' }
+);
+console.log(enabled);
 ```
 
-These examples use ESM modules, where `await` is available at the top level. In CommonJS, wrap top-level `await` in an async function.
+Run this example as an ES module, such as `app.mjs`. In CommonJS, put the initialization code in an async function.
 
-Most applications also run other asynchronous startup tasks, such as opening database connections or loading configuration. Start their promises together with the provider promise and await them as a group, so total startup time stays close to the slowest task instead of the sum of all of them:
+Accessing `tracer.openfeature` starts configuration polling. No Feature Flags enablement or source setting is required for a new setup. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][8].
 
-```javascript
-// Start feature flag setup alongside your other startup tasks, then await them together.
-const [_, db] = await Promise.all([
-  // Catch here so a failed provider init does not reject the whole batch.
-  // Evaluations return default values until the provider receives its config.
-  OpenFeature.setProviderAndWait(tracer.openfeature).catch((err) => {
-    console.error('Datadog feature flag provider failed to initialize', err);
-  }),
-  connectToDatabase(), // your application's other async startup work
-]);
-// db is connected and the server can start; flags evaluate against real configuration, or fall back to defaults if initialization failed.
-```
+## Initialization options
 
-Blocking startup until the provider is ready, as shown above, works well for most applications. If your application must start serving requests before initialization completes, choose one of the following strategies.
+`setProviderAndWait` waits for initial configuration. If initialization fails, handle the error or let application startup fail. Evaluations return caller-provided defaults until configuration arrives.
 
 ### Accepting default values before initialization
 
@@ -172,13 +143,13 @@ app.get('/my-endpoint', async (req, res) => {
 
 ## Set the evaluation context
 
-Define who or what the flag evaluation applies to using an `EvaluationContext`. The evaluation context can include user or session information used to determine which flag variations should be returned. Call the `OpenFeature.setContext` method before evaluating flags to ensure proper targeting.
+Use an evaluation context to identify the user or entity for flag targeting. Pass the context to a client method, or set a shared context with `OpenFeature.setContext`.
 
 <div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ## Evaluate flags
 
-After creating the `OpenFeature` client as described in the [Installing and initializing](#installing-and-initializing) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
+After creating the `OpenFeature` client in [Getting started](#getting-started), evaluate flags throughout the application. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
 
 Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed getter_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
 
