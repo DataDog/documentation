@@ -28,7 +28,7 @@ When a user reports that they did not receive a Datadog email, use this page to 
    - **Delivered**: Ask the recipient to check their spam or junk folder, along with any mailbox rules or blocklists that filter Datadog mail.
    - **Bounced**: The receiving mail server rejected the message and returned a reason. Correct the address or mailbox if it is invalid or full. If the server filters or blocks Datadog mail, [add Datadog to your trusted senders][3] and share the reason and event timestamp with your email administrator.
    - **Dropped**: The address is suppressed. See [Email suppressions][4] for how to have it cleared.
-2. If email is still missing, contact [Datadog Support][5] for review.
+2. If email is still missing, contact [Datadog Support][5].
 
 ## Investigate a failed email
 
@@ -38,7 +38,9 @@ Trace a failure from the Email Delivery dashboard to the underlying audit event:
 2. Select **View audit events** to open the full Audit Trail for that delivery attempt.
 3. Click an individual audit event to inspect delivery details, including the SMTP code, mail server response, and recipient information.
 
-## Common reasons email fails
+{{< img src="/account_management/email_delivery/view_audit_events.png" alt="The View audit events option selected in the Audit Logs widget menu, shown alongside the Email Delivery Failures dashboard." style="width:100%;" >}}
+
+## Common reasons emails fail to deliver
 
 | Reason                                        | What it means                                                                                                                                                          | What to do                                                                                                                                                                                          |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
