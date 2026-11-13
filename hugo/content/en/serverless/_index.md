@@ -96,7 +96,7 @@ Datadog also provides a solution for [instrumenting your Cloud Run applications]
 
 Vercel is a platform for deploying frontend frameworks and serverless functions, such as Next.js applications. The [Vercel integration][15] collects logs, metrics, and traces through Vercel's Log Drains and Trace Drains. It requires no Datadog library or code changes. The {{< ui >}}Serverless{{< /ui >}} app view shows each Vercel project's requests, errors, and logs.
 
-Errors in Vercel Functions logs are grouped into issues in [Error Tracking][16]. This includes `console.error` output, errors logged with pino or winston, uncaught exceptions, and function crashes. Error Tracking works from logs alone, without traces, but Error Tracking for logs must be enabled in your organization. Issues use the Vercel project name as the `service` and appear on each project's page in the {{< ui >}}Serverless{{< /ui >}} app view. See [Vercel Error Tracking][17] for what the integration's log pipeline extracts.
+Errors in Vercel Functions logs are grouped into issues in [Error Tracking][16]. This includes `console.error` output, errors logged with Pino or Winston, uncaught exceptions, and function crashes. Error Tracking works from logs alone, without traces, but Error Tracking for logs must be enabled in your organization. Issues use the Vercel project name as the `service` and appear on each project's page in the {{< ui >}}Serverless{{< /ui >}} app view. See [Vercel Error Tracking][17] for what the integration's log pipeline extracts.
 
 To get started, install [Datadog from the Vercel Marketplace][18], then follow the [Vercel integration setup][19].
 
