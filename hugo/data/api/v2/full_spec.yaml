@@ -279783,7 +279783,9 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
+      much recent telemetry adheres to the rule. **Note:** RUM supports only surfacing rules,
+      not blocking rules.
+
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
