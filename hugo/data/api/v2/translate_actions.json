@@ -2607,7 +2607,7 @@
     "request_schema_description": "Payload for creating a new tag rule."
   },
   "DeleteTagRule": {
-    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently. Deleting a `blocking` rule additionally requires the\n`telemetry_rules_activate` permission.",
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
     "summary": "Delete a tag rule"
   },
   "GetTagRule": {
@@ -2615,7 +2615,7 @@
     "summary": "Get a tag rule"
   },
   "UpdateTagRule": {
-    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.\nPromoting a rule from `surfacing` to `blocking` additionally requires the\n`telemetry_rules_activate` permission, and your organization must have access to\nblocking rules. You can't promote RUM rules to `blocking`.",
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
     "summary": "Update a tag rule",
     "request_description": "",
     "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."

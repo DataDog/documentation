@@ -10826,7 +10826,7 @@ components:
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
       description: >-
-        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination. Its targets are model targets that each name one provider, not "*". Besides the default, it needs 1 to 9 destinations, each with a different rubric. Classified routing is in Preview: saving a classified tier returns 403 Forbidden unless the feature is enabled for the organization.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
       enum:
         - configured
         - weighted_affinity
@@ -12050,8 +12050,7 @@ components:
           example: gpt-6-luna
           type: string
         provider:
-          description: >-
-            Decision-model provider slug. It must name a provider of type `openai`, `baseten`, or `typesafe`, the provider types that serve a decision model. Omit together with model to preserve the saved selection.
+          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
           example: openai
           type: string
       type: object
@@ -12303,14 +12302,13 @@ components:
           minimum: 1
           type: integer
         provider:
-          description: Provider slug. weighted_affinity and classified tiers require an explicit provider and do not allow "*".
+          description: Provider slug. weighted_affinity requires an explicit provider and does not allow "*".
           example: prod-us
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
         rubric:
-          description: >-
-            Destination rubric in a classified tier: when the decision model picks this destination. Up to 300 characters after leading and trailing spaces are trimmed, and different for each destination in the tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
           example: Short factual questions.
           maxLength: 300
           nullable: true
@@ -32210,7 +32208,7 @@ components:
         options:
           $ref: "#/components/schemas/DeploymentRulesOptions"
         type:
-          description: The type of the deployment rule (faulty_deployment_detection or monitor).
+          description: The type of the deployment rule (faulty_deployment_detection, monitor, or bits_deployment_analysis).
           example: "faulty_deployment_detection"
           type: string
       required:
@@ -43295,10 +43293,10 @@ components:
       x-enum-varnames: [DEPLOYMENT_GATE_RULE_EVALUATION]
     DeploymentGateRuleEvaluationType:
       description: Type of deployment gate rule.
-      enum: [monitor, faulty_deployment_detection]
+      enum: [monitor, faulty_deployment_detection, bits_deployment_analysis]
       example: faulty_deployment_detection
       type: string
-      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION]
+      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION, BITS_DEPLOYMENT_ANALYSIS]
     DeploymentGateRuleEvaluationsResponse:
       description: Paginated deployment gate rule evaluations.
       properties:
@@ -43366,6 +43364,43 @@ components:
         data:
           $ref: "#/components/schemas/ListDeploymentRuleResponseData"
       type: object
+    DeploymentGatesBitsDeploymentAnalysisRule:
+      description: A Bits Deployment Analysis rule to evaluate as part of a deployment gate evaluation.
+      properties:
+        dry_run:
+          description: Rule-level dry run. When enabled, the rule is evaluated normally but it always returns `pass`. The real result is visible in the Datadog UI.
+          example: false
+          type: boolean
+        name:
+          description: Human-readable name for this rule.
+          example: "bits deployment analysis"
+          type: string
+        options:
+          $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRuleOptions"
+        type:
+          $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRuleType"
+      required:
+        - type
+        - name
+      type: object
+    DeploymentGatesBitsDeploymentAnalysisRuleOptions:
+      description: Options for a `bits_deployment_analysis` rule.
+      properties:
+        duration:
+          description: Evaluation window in seconds. Maximum 7200 (2 hours).
+          example: 900
+          format: int64
+          maximum: 7200
+          type: integer
+      type: object
+    DeploymentGatesBitsDeploymentAnalysisRuleType:
+      description: The type identifier for a Bits Deployment Analysis rule.
+      enum:
+        - bits_deployment_analysis
+      example: bits_deployment_analysis
+      type: string
+      x-enum-varnames:
+        - BITS_DEPLOYMENT_ANALYSIS
     DeploymentGatesEvaluationConfiguration:
       description: |-
         Inline rule definitions for a deployment gate evaluation. When provided, rules are evaluated
@@ -43575,6 +43610,7 @@ components:
       oneOf:
         - $ref: "#/components/schemas/DeploymentGatesMonitorRule"
         - $ref: "#/components/schemas/DeploymentGatesFDDRule"
+        - $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRule"
     DeploymentGatesFDDRule:
       description: A faulty deployment detection rule to evaluate as part of a deployment gate evaluation.
       properties:
@@ -43971,11 +44007,13 @@ components:
       enum:
         - faulty_deployment_detection
         - monitor
+        - bits_deployment_analysis
       example: faulty_deployment_detection
       type: string
       x-enum-varnames:
         - FAULTY_DEPLOYMENT_DETECTION
         - MONITOR
+        - BITS_DEPLOYMENT_ANALYSIS
     DeploymentRuleResponseDataAttributesUpdatedBy:
       description: Information about the user who updated the deployment rule.
       properties:
@@ -43995,7 +44033,9 @@ components:
         - id
       type: object
     DeploymentRulesOptions:
-      description: Options for deployment rule response representing either faulty deployment detection or monitor options.
+      description: |-
+        Options for deployment rule response representing either faulty deployment detection or monitor options.
+        Bits Deployment Analysis rules only accept `duration`, using the faulty deployment detection options shape.
       oneOf:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"
@@ -145618,13 +145658,10 @@ components:
         - modified_by
       type: object
     TagRuleCreateAttributes:
-      description: |-
-        Attributes that can be supplied when creating a tag rule. If `tag_value_patterns`
-        contains `*`, set `required` and `negated` to different values. If both are `false`,
-        the rule has no effect. If both are `true`, no value can satisfy the rule.
+      description: Attributes that can be supplied when creating a tag rule.
       properties:
         enabled:
-          description: The API ignores this value on creation and always enables new rules. To disable a rule, use the "Update a tag rule" endpoint.
+          description: Whether the rule is currently enforced. Defaults to `true` for newly created rules.
           example: true
           type: boolean
         name:
@@ -145643,35 +145680,26 @@ components:
           $ref: "#/components/schemas/TagRuleCreateType"
         scope:
           description: |-
-            The scope the rule applies within. For logs and spans, use a search query, such
-            as `env:prod`, or `*` to match all telemetry. For metrics, use a metric selector
-            with an optional tag filter, such as `system.cpu.*{env:prod}`. A metric wildcard
-            is allowed only once, at the end of the metric selector.
-          example: "env:prod"
+            The scope the rule applies within. Typically an environment, team, or
+            organization-level identifier used to limit where the rule is enforced.
+          example: "env"
           type: string
         source:
           $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: |-
-            The tag key that the rule governs (for example, `service`). Allowed characters
-            are ASCII letters, digits, underscores, hyphens, periods, and slashes. The keys
-            `host` and `device` are not supported in any letter case.
+          description: The tag key that the rule governs (for example, `service`).
           example: "service"
-          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: |-
-            Between 1 and 30 non-empty patterns that valid values for the tag key must match.
-            Allowed characters are ASCII letters, digits, underscores, colons, hyphens,
-            periods, commas, slashes, and asterisks.
+            One or more patterns that valid values for the tag key must match. At least one
+            pattern is required.
           example:
             - "api"
             - "web"
           items:
             description: A pattern that valid tag values must match.
-            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
-          maxItems: 30
           minItems: 1
           type: array
       required:
@@ -145754,15 +145782,13 @@ components:
           $ref: "#/components/schemas/TagRuleScoreRelationship"
       type: object
     TagRuleResourceType:
-      description: JSON:API resource type for a tag rule. Requests accept `tag_rule` or `tag_policy`; responses use `tag_policy`.
+      description: JSON:API resource type for a tag rule.
       enum:
         - tag_rule
-        - tag_policy
-      example: "tag_policy"
+      example: "tag_rule"
       type: string
       x-enum-varnames:
         - TAG_RULE
-        - TAG_POLICY
     TagRuleResponse:
       description: A single tag rule.
       properties:
@@ -145843,15 +145869,13 @@ components:
         - id
       type: object
     TagRuleScoreResourceType:
-      description: JSON:API resource type for a tag rule compliance score. Responses use `tag_policy_score`.
+      description: JSON:API resource type for a tag rule compliance score.
       enum:
         - tag_rule_score
-        - tag_policy_score
-      example: "tag_policy_score"
+      example: "tag_rule_score"
       type: string
       x-enum-varnames:
         - TAG_RULE_SCORE
-        - TAG_POLICY_SCORE
     TagRuleScoreResponse:
       description: A tag rule compliance score.
       properties:
@@ -145880,7 +145904,6 @@ components:
       description: |-
         How the rule is enforced. `blocking` rejects telemetry that violates the rule.
         `surfacing` only highlights non-compliant telemetry without blocking it.
-        RUM supports only `surfacing` rules.
       enum:
         - blocking
         - surfacing
@@ -145892,9 +145915,7 @@ components:
     TagRuleUpdateAttributes:
       description: |-
         Mutable attributes of a tag rule. Each field is optional; omitting a field leaves its
-        current value unchanged. The `source` of a rule cannot be changed. Tag keys, patterns,
-        and metrics scopes have the same constraints as on creation. If the effective
-        `tag_value_patterns` contains `*`, set `required` and `negated` to different values.
+        current value unchanged. The `source` of a rule cannot be changed.
       properties:
         enabled:
           description: Whether the rule is currently enforced.
@@ -145915,16 +145936,12 @@ components:
           type: string
         tag_key:
           description: The tag key that the rule governs.
-          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: One or more patterns that valid values for the tag key must match.
           items:
             description: A pattern that valid tag values must match.
-            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
-          maxItems: 30
-          minItems: 1
           type: array
       type: object
     TagRuleUpdateData:
@@ -195186,7 +195203,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleSource"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195232,8 +195249,8 @@ paths:
                           score:
                             data:
                               id: "123-v1-1779315066097-1779401466097"
-                              type: "tag_policy_score"
-                        type: "tag_policy"
+                              type: "tag_rule_score"
+                        type: "tag_rule"
                     included:
                       - attributes:
                           score: 80
@@ -195241,7 +195258,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_policy_score"
+                        type: "tag_rule_score"
               schema:
                 $ref: "#/components/schemas/TagRulesListResponse"
           description: OK
@@ -195336,7 +195353,7 @@ paths:
                           - "web"
                         version: 1
                       id: "123"
-                      type: "tag_policy"
+                      type: "tag_rule"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: Created
@@ -195386,8 +195403,7 @@ paths:
       description: |-
         Delete a tag rule. By default the rule is soft-deleted so it can be recovered later
         and so that historical score data remains queryable. Pass `hard_delete=true` to remove
-        the rule permanently. Deleting a `blocking` rule additionally requires the
-        `telemetry_rules_activate` permission.
+        the rule permanently.
       operationId: DeleteTagRule
       parameters:
         - description: The unique identifier of the tag rule to delete.
@@ -195469,7 +195485,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleInclude"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195515,8 +195531,8 @@ paths:
                         score:
                           data:
                             id: "123-v1-1779315066097-1779401466097"
-                            type: "tag_policy_score"
-                      type: "tag_policy"
+                            type: "tag_rule_score"
+                      type: "tag_rule"
                     included:
                       - attributes:
                           score: 80
@@ -195524,7 +195540,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_policy_score"
+                        type: "tag_rule_score"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195575,9 +195591,6 @@ paths:
         Update one or more attributes of an existing tag rule. Only the fields supplied in the
         request body are modified; omitted fields retain their current values. The rule's
         `source` cannot be changed after creation.
-        Promoting a rule from `surfacing` to `blocking` additionally requires the
-        `telemetry_rules_activate` permission, and your organization must have access to
-        blocking rules. You can't promote RUM rules to `blocking`.
       operationId: UpdateTagRule
       parameters:
         - description: The unique identifier of the tag rule to update.
@@ -195628,7 +195641,7 @@ paths:
                           - "web"
                         version: 2
                       id: "123"
-                      type: "tag_policy"
+                      type: "tag_rule"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195689,7 +195702,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195719,7 +195732,7 @@ paths:
                         ts_start: 1779315066097
                         version: 1
                       id: "123-v1-1779315066097-1779401466097"
-                      type: "tag_policy_score"
+                      type: "tag_rule_score"
               schema:
                 $ref: "#/components/schemas/TagRuleScoreResponse"
           description: OK
@@ -279783,7 +279796,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
+      much recent telemetry adheres to the rule.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
