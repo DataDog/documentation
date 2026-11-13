@@ -526,7 +526,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Database for PostgreSQL
       recommendation_type: Downsize Database for PostgreSQL Compute
-      recommendation_description: Identifies Azure Database for PostgreSQL flexible servers whose peak CPU, memory, connections and IOPS would stay low on fewer vCores, and recommends scaling compute down.
+      recommendation_description: Identifies Azure Database for PostgreSQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
