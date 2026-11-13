@@ -126,7 +126,7 @@ Use `similarity` to compare an output to an expected answer, or to find which of
 
 If the arguments are invalid, or if the similarity request fails, `similarity` throws an error. You can catch the error with `try`/`catch`. If you don't catch it, the evaluation reports an error.
 
-Scores for related text tend to be high. In testing, an unrelated sentence scored about 0.59 and a paraphrase scored about 0.99. A factually wrong answer on the same topic still scored about 0.95. Choose thresholds by testing on your own data. Semantic similarity measures how close two texts are in meaning and topic, not whether a response is factually correct.
+Scores for related text tend to be high. In testing, an unrelated sentence scored about 0.52 and a paraphrase scored about 0.99. A factually wrong answer on the same topic still scored about 0.91. Choose thresholds by testing on your own data. Semantic similarity measures how close two texts are in meaning and topic, not whether a response is factually correct.
 
 ### Example: Similarity to reference answers (span scope)
 
