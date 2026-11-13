@@ -30,7 +30,7 @@ Bits Code Review is non-blocking. Its review is not a required check, and mergin
 
 ## How it works
 
-1. **Detect the pull request**: Bits Code Review reviews a pull request in a repository in scope when the pull request is opened or marked ready for review. It reviews it again when you push new commits, change its base branch, or request a GitHub team as a reviewer. Draft pull requests are not reviewed automatically.
+1. **Detect the pull request**: Bits Code Review reviews a pull request in a repository in scope when the pull request is opened or marked ready for review. It reviews it again when you push new commits or change its base branch. Draft pull requests are not reviewed automatically.
 2. **Analyze the change**: It reads the code change, your custom instructions, and the production telemetry for the services the change affects.
 3. **Post the review**: Bits Code Review publishes a review on the pull request, with a summary verdict and inline comments anchored to the relevant lines. When a finding's lines are part of the diff, the finding can include a GitHub suggestion you can apply directly.
 
@@ -51,10 +51,9 @@ Bits Code Review supports only GitHub repositories. Repositories hosted on GitLa
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
 | The Datadog [GitHub App][6] installed on the repositories in scope, with `Contents: Read`, `Issues: Read & Write`, and `Pull Requests: Read & Write` | `Contents: Read` lets Bits Code Review read the code change. Write access lets it post the review and inline comments. It also lets it add status reactions to the pull request and to `@datadog review` comments: 👀 while it works, then 👍 when it finishes. |
-| `Members: Read`, if you scope reviews by GitHub team | Lets Bits Code Review match pull requests to the GitHub teams that own them. |
 | The `pull_request` and `issue_comment` webhook events | `pull_request` tells Bits Code Review when a pull request is opened or updated. `issue_comment` lets it detect `@datadog review` comments. |
 
-In the GitHub integration's feature list, Bits Code Review relies on these permission bundles: {{< ui >}}Read Repository Contents{{< /ui >}}, {{< ui >}}Pull Request Information{{< /ui >}}, and {{< ui >}}Pull Request Comments{{< /ui >}}. These bundles do not subscribe to the `issue_comment` event. To use `@datadog review`, also enable {{< ui >}}Bits Code: Monitor CI Status{{< /ui >}}. To scope reviews by GitHub team, also enable {{< ui >}}Link GitHub Teams{{< /ui >}}. Other Software Delivery features, such as Code Coverage, CI Visibility, and Test Optimization, are not required.
+In the GitHub integration's feature list, Bits Code Review relies on these permission bundles: {{< ui >}}Read Repository Contents{{< /ui >}}, {{< ui >}}Pull Request Information{{< /ui >}}, and {{< ui >}}Pull Request Comments{{< /ui >}}. These bundles do not subscribe to the `issue_comment` event. To use `@datadog review`, also enable {{< ui >}}Bits Code: Monitor CI Status{{< /ui >}}. Other Software Delivery features, such as Code Coverage, CI Visibility, and Test Optimization, are not required.
 
 ## Request a review on demand
 
