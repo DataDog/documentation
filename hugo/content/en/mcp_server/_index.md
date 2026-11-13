@@ -58,6 +58,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=claude" src="integrations_logos/claude_app.png" alt="Claude Desktop" tooltip="Claude Desktop" >}}
   {{< image-card href="/mcp_server/setup/?tab=goose" src="integrations_logos/goose.svg" alt="Goose" tooltip="Goose" >}}
   {{< image-card href="/mcp_server/setup/?tab=opencode" src="integrations_logos/opencode.svg" alt="OpenCode" tooltip="OpenCode" >}}
+  {{< image-card href="/mcp_server/setup/?tab=pi" src="integrations_logos/pi.svg" alt="Pi" tooltip="Pi" >}}
   {{< image-card href="/mcp_server/setup/?tab=copilotcli" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
   {{< image-card href="/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
   {{< image-card href="/mcp_server/setup/?tab=grokbuild" src="integrations_logos/grok.png" alt="Grok Build" tooltip="Grok Build" >}}

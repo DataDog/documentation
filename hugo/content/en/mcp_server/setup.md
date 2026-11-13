@@ -579,6 +579,39 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 [3]: https://opencode.ai/
 {{% /tab %}}
 
+{{% tab "Pi" %}}
+
+Install the [Datadog Pi plugin][1] to connect the [Pi coding agent][2] to the Datadog MCP Server. The plugin handles sign-in, connections to one or more Datadog organizations, and [toolset](#toolsets) selection.
+
+[1]: https://github.com/datadog-labs/pi-plugin
+[2]: https://pi.dev/
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. Install the plugin:
+
+   <pre><code>pi install npm:@datadog/pi-plugin</code></pre>
+
+1. Restart Pi.
+
+1. Run `/datadog` in Pi to open the connection screen. Select your [Datadog site][3] and complete the OAuth login flow in your browser. Your first connection becomes the default.
+
+1. Run `/datadog toolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+To connect another Datadog organization, run `/datadog` and select {{< ui >}}Connect another organization{{< /ui >}}. If your authorization expires, run `/datadog` and select {{< ui >}}Sign in again{{< /ui >}}. After updating the plugin, run `/reload` in Pi.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/pi-plugin">plugin repository</a> for all available commands, API key authentication for headless usage, and configuration options.</div>
+
+[3]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "VS Code" %}}
 
 For Copilot, install the [Datadog Copilot plugin][2] from the marketplace. For more information, see the instructions for the [Copilot CLI][3].
@@ -807,6 +840,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
+| [Pi][91] | Earendil | Datadog [Pi plugin][92] recommended. |
 | [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -1062,3 +1096,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [88]: https://github.com/datadog-labs/antigravity-plugin
 [89]: /infrastructure/process/
 [90]: /gpu_monitoring/
+[91]: https://pi.dev/
+[92]: https://github.com/datadog-labs/pi-plugin
