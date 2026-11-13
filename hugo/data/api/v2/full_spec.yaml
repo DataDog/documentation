@@ -76179,12 +76179,14 @@ components:
         - to
       type: object
     IssuesSearchRequestDataAttributesOrderBy:
-      description: The attribute to sort the search results by.
+      description: |-
+        The attribute to sort the search results by, in descending order. Defaults to `TOTAL_COUNT`.
       enum:
         - TOTAL_COUNT
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
       example: "IMPACTED_SESSIONS"
       type: string
       x-enum-varnames:
@@ -76192,9 +76194,12 @@ components:
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
     IssuesSearchRequestDataAttributesPersona:
-      description: Persona for the search. Either track(s) or persona(s) must be specified.
-      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND"]
+      description: |-
+        Persona for the search. Either `track` or `persona` must be specified.
+        Ignored if `track` is specified.
+      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND", "AGENT"]
       example: "BACKEND"
       type: string
       x-enum-varnames:
@@ -76202,15 +76207,19 @@ components:
         - BROWSER
         - MOBILE
         - BACKEND
+        - AGENT
     IssuesSearchRequestDataAttributesTrack:
-      description: Track of the events to query. Either track(s) or persona(s) must be specified.
-      enum: ["trace", "logs", "rum"]
+      description: |-
+        Track of the events to query. Either `track` or `persona` must be specified.
+        If both are specified, `persona` is ignored.
+      enum: ["trace", "logs", "rum", "llmobs"]
       example: "trace"
       type: string
       x-enum-varnames:
         - TRACE
         - LOGS
         - RUM
+        - LLMOBS
     IssuesSearchRequestDataType:
       description: Type of the object.
       enum: ["search_request"]
@@ -76256,7 +76265,7 @@ components:
         impacted_sessions:
           description: |-
             Count of sessions impacted by the issue over the queried time window.
-            Returned for RUM, LLM Observability, browser, and mobile searches,
+            Returned for RUM and LLM Observability tracks, for browser, mobile, and agent personas,
             or when `issue.impacted_sessions` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 12
@@ -76265,7 +76274,7 @@ components:
         impacted_users:
           description: |-
             Count of users impacted by the issue over the queried time window.
-            Returned for RUM, browser, and mobile searches,
+            Returned for the RUM track, for browser and mobile personas,
             or when `issue.impacted_users` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 4
@@ -183389,7 +183398,9 @@ paths:
           - monitors_downtime
   /api/v2/error-tracking/issues/search:
     post:
-      description: Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.
+      description: |-
+        Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.
+        Returns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.
       operationId: SearchIssues
       parameters:
         - $ref: "#/components/parameters/SearchIssuesIncludeQueryParameter"
