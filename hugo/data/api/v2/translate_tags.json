@@ -383,6 +383,10 @@
     "name": "On-Call Paging",
     "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
   },
+  "openai-codex-integration": {
+    "name": "OpenAI Codex Integration",
+    "description": "Manage your Datadog OpenAI Codex integration accounts and account resources\ndirectly through the Datadog API. See the\n[OpenAI Codex integration page](https://docs.datadoghq.com/integrations/openai-codex/) for\nmore information."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
