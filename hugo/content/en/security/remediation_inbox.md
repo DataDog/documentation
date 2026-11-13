@@ -35,7 +35,7 @@ products:
 
 The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. Instead of listing individual findings, it groups findings by the single fix that resolves them, such as one package upgrade in a repository or one container image update. Each group is a _remediation_.
 
-The Remediation Inbox answers one question: **what are the most impactful fixes to make today?** From a remediation, you can review its impact, assign an owner, track the work in a [Work Management][2] work item, and generate a pull request with AI.
+The Remediation Inbox answers one question: **what are the most impactful fixes to make today?** From a remediation, you can review its impact, assign an owner, track the work in a Datadog case in [Work Management][2], and generate a pull request with AI.
 
 {{< img src="security/remediation_inbox/remediations_tab.png" alt="The Remediations tab of Security Inbox, with filters, status tabs, and a list of package updates showing the critical and high findings each one closes, its scope, and its tracking status" width="100%">}}
 
@@ -49,7 +49,7 @@ The Remediation Inbox answers one question: **what are the most impactful fixes 
 | Action | Required permissions |
 |---|---|
 | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
-| Create work items, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Create cases, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see [Enable remediation capabilities](#enable-remediation-capabilities).
 
@@ -82,12 +82,12 @@ Remediations are split into status tabs. The inbox opens on **To Triage**.
 
 | Status | Meaning |
 |---|---|
-| To Triage | No action has been taken. No work item is attached. |
-| Open | A work item is attached, and work has not started. |
-| In Progress | A work item is attached, and work is in progress. |
+| To Triage | No action has been taken. No case is attached. |
+| Open | A case is attached, and work has not started. |
+| In Progress | A case is attached, and work is in progress. |
 | Closed | The remediation does not contain any open finding. |
 
-Until all of its findings are closed, the status of a remediation follows the status of its [remediation work item](#track-remediation-progress).
+Until all of its findings are closed, the status of a remediation follows the status of its [remediation case](#track-remediation-progress).
 
 ### Remediation table
 
@@ -96,7 +96,7 @@ Each row is one remediation. Reading left to right, a row answers four questions
 - **What is the fix?** The change to make, such as the package or image to update and the target version.
 - **What does it resolve?** The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
 - **What does it take, and who owns it?** Where the fix applies (repository and files) and the code owners or teams responsible for it.
-- **Where does it stand?** The assignee, the remediation work item or synced ticket, and any linked pull requests.
+- **Where does it stand?** The assignee, the remediation case or synced ticket, and any linked pull requests.
 
 Click a row to open its details in a side panel.
 
@@ -107,7 +107,7 @@ Use the filter bar to focus on the remediations your team can act on. Filters ap
 - **Ownership**, such as team, code owner, repository, or service, to see the fixes your team owns.
 - **Risk**, such as severity or exploit availability, to focus on the most urgent fixes.
 - **Vulnerability**, such as CVE or package, to track a specific issue across your environment.
-- **Triage**, such as the assignee of the remediation work item, to see the remediations you are in charge of.
+- **Triage**, such as the assignee of the remediation case, to see the remediations you are in charge of.
 
 Click **Edit Filters** to add or remove filters from the bar.
 
@@ -116,7 +116,7 @@ Click **Edit Filters** to add or remove filters from the bar.
 Click a remediation to open its side panel:
 
 - **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead.
-- **Ticketing, Assignee, and PRs**: The remediation work item, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
+- **Ticketing, Assignee, and PRs**: The remediation case, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
 
@@ -124,23 +124,23 @@ Click a remediation to open its side panel:
 
 ## Remediate
 
-Taking action on a remediation creates a _remediation work item_ in [Work Management][2]. A remediation has at most one remediation work item, which stores its owner, ticket, and fixes.
+Taking action on a remediation creates a _remediation case_ in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
 
 ### Assign an owner
 
-In the **Tracking** column or the side panel, select an assignee. If the remediation does not have a work item yet, Datadog creates one.
+In the **Tracking** column or the side panel, select an assignee. If the remediation does not have a case yet, Datadog creates one.
 
-### Create a work item
+### Create a case
 
-Click **Create Security Case**, optionally select a Work Management [project][5], and click **Create**. If you do not select a project, the work item is created in the default **Security Remediation** project.
+Click **Create Security Case**, optionally select a Work Management [project][5], and click **Create**. If you do not select a project, the case is created in the default **Security Remediation** project.
 
-To create tickets in Jira, ServiceNow, or Linear from remediation work items, see [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool).
+To create tickets in Jira, ServiceNow, or Linear from remediation cases, see [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool).
 
 ### Remediate with AI
 
 From the side panel, click **Remediate with AI** and choose one of the following:
 
-- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item. Requires [Bits Code setup][8].
+- **Fix with Bits**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation case. Requires [Bits Code setup][8].
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
@@ -150,34 +150,34 @@ To check the fix from your coding agent, set up the [Code Security MCP Server][7
 
 ### Link a pull request
 
-If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. The pull request is attached to the remediation work item, and its status appears in the inbox.
+If you fixed the issue outside of Datadog, click **Link PR** in the side panel and enter the GitHub pull request URL. The pull request is attached to the remediation case, and its status appears in the inbox.
 
 ## Track remediation progress
 
-Each fix, whether a Bits Code session or a linked pull request, is recorded as a child work item of the remediation work item. Child work items can have their own owner, which lets several people work on parts of the same remediation.
+Each fix, whether a Bits Code session or a linked pull request, is recorded as a child case of the remediation case. Child cases can have their own owner, which lets several people work on parts of the same remediation.
 
 While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. Findings stay open until the pull request merges and the next scan confirms the fix.
 
-Findings that belong to a remediation work item show the linked work item in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel. This lets anyone investigating a finding see that a fix is already underway.
+Findings that belong to a remediation case show the linked case in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel. This lets anyone investigating a finding see that a fix is already underway.
 
 ## Enable remediation capabilities
 
 | Capability | What it unlocks | How to enable |
 |---|---|---|
-| Remediation work items | Assign owners, create work items, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
-| Third-party tickets | Sync remediation work items to Jira, ServiceNow, or Linear. | See [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool). |
+| Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
+| Third-party tickets | Sync remediation cases to Jira, ServiceNow, or Linear. | See [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool). |
 | AI summary | The **Know before you remediate** summary. | Enable generative AI features for your organization. |
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
 | Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Code Security MCP Server][7]. |
 
-### Route remediation work items to your ticketing tool
+### Route remediation cases to your ticketing tool
 
-Remediation work items can create tickets in Jira, ServiceNow, or Linear. Ticket creation and syncing are managed in Work Management:
+Remediation cases can create tickets in Jira, ServiceNow, or Linear. Ticket creation and syncing are managed in Work Management:
 
-1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation work items. If you do not select a project when you create remediation work items, configure the default **Security Remediation** project.
-1. When a remediation work item is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
+1. In [Work Management][14], configure a Jira, ServiceNow, or Linear destination, and set up automatic ticket creation for the project that holds your remediation cases. If you do not select a project when you create remediation cases, configure the default **Security Remediation** project.
+1. When a remediation case is created in that project, Datadog creates the ticket. The ticket appears in the **Tracking** column of the inbox and in the side panel of the remediation.
 
 For more information, see [Ticketing Integrations][12].
 
