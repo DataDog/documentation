@@ -69,3 +69,16 @@ entries:
       - RestoreSourcemaps
       - UpdateRUMApplication
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41086
+    operations:
+      - AggregateRUMEvents
+      - CreateRUMApplication
+      - DeleteRUMApplication
+      - GetRUMApplication
+      - GetRUMApplications
+      - ListRUMEvents
+      - SearchRUMEvents
+      - UpdateRUMApplication
+    title: Document RUM applications, events and aggregate endpoints
