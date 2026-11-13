@@ -1,4 +1,4 @@
-Configure your application with the `DD_GIT_*` environment variables:
+Configure your application with the `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` environment variables:
 
 ```go
 export DD_GIT_COMMIT_SHA="<commitSha>"
