@@ -83,7 +83,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 ## Custom pipelines
 
-In [Log Management][3], you can create custom pipelines to process your logs. You can import those custom pipelines into the Integration Pipelines processor. The processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
+You can import custom pipelines created in [Log Management][3] into the Integration Pipelines processor to process your logs. The processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
 
 Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipelines{{< /ui >}} tab, from top to bottom. Each log is processed by every enabled custom pipeline whose filter it matches, including logs previously processed by an integration pipeline.
 
