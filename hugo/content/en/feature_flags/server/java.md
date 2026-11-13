@@ -227,6 +227,41 @@ EvaluationContext context = new MutableContext("user-123")
 
 The `targetingKey` (for example, `user-123`) is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.
 
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimentation opt-out targets the unreleased version `1.69.0`, planned for the next minor release. The combined example requires that release. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][20] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass both preferences in a context for each evaluation:
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new Provider());
+
+MutableContext context = new MutableContext("user-123")
+    .add("dd_evaluation_telemetry_opt_out", true)
+    .add("dd_experimentation_opt_out_at", "2026-10-30T12:00:00Z");
+boolean enabled = api.getClient().getBooleanValue("new-checkout", false, context);
+```
+
+Replace the example timestamp with the subject's stored preference. Preserve existing configuration delivery and Java agent requirements for the selected setup.
+
+For programmatic configuration, use `new Provider.Options().enableEvaluationTelemetryOptOutParameter(true)` and `.experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)`. Import `ExperimentationOptOutMode` from `com.datadog.openfeature`. Explicit options override deployment settings. `DEFAULT` uses deployment settings; `DISABLED` overrides them.
+
+Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
+
+Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, omit its attribute or set it to `false`. To permit experimentation again, omit the timestamp.
+
 ## Evaluate flags
 
 Evaluate feature flags using the OpenFeature client. All flag types are supported: Boolean, string, integer, double, and object.
@@ -672,3 +707,5 @@ When the selected configuration path supports exposures, exposures appear only f
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [18]: /feature_flags/concepts/configuration_sources/#agent-availability
 [19]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+
+[20]: /feature_flags/concepts/opt_out/

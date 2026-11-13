@@ -192,6 +192,52 @@ evalCtx := openfeature.NewEvaluationContext(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Control flag evaluation telemetry and experiment participation
+
+Both controls require `dd-trace-go/v2` version `2.12.0` or later. They are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][8] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Register the provider during startup. Pass both preferences with each subject's evaluation:
+
+```go
+import (
+    "context"
+    "log"
+
+    ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
+if err != nil {
+    log.Fatal(err)
+}
+if err := openfeature.SetProviderAndWait(provider); err != nil {
+    log.Printf("Feature Flags initialization failed: %v", err)
+}
+client := openfeature.NewClient("my-service")
+
+evalCtx := openfeature.NewEvaluationContext("user-123", map[string]any{
+    "dd_evaluation_telemetry_opt_out": true,
+    "dd_experimentation_opt_out_at": "2026-10-30T12:00:00Z",
+})
+enabled, err := client.BooleanValue(context.Background(), "new-checkout", false, evalCtx)
+```
+
+Place initialization in the application's startup function. Replace the example timestamp with the subject's stored preference.
+
+For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOptOutParameter` to a `*bool`. Set `ProviderConfig.ExperimentationOptOutMode` to `ExperimentationOptOutImmediate`, `ExperimentationOptOutFutureExperimentsOnly`, or `ExperimentationOptOutDisabled`. Explicit values override the environment; a nil Boolean pointer and `ExperimentationOptOutDefault` use the environment.
+
+Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. This checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
+
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, omit its attribute or set it to `false`. To permit experimentation again, omit the timestamp.
+
 ## Evaluate flags
 
 After setting up the provider and creating a client, you can evaluate flags throughout your application. Flag evaluation is local and fast—the SDK uses locally cached configuration data, so no network requests occur during evaluation.
@@ -375,3 +421,5 @@ func TestNewCheckoutFlow(t *testing.T) {
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[8]: /feature_flags/concepts/opt_out/
