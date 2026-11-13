@@ -1,26 +1,29 @@
 ---
-title: Datadog Archives Destination
+title: Amazon S3 (Datadog Archives) Destination
 description: Learn how to send logs to Amazon S3 in Datadog-rehydratable format for archiving and rehydration.
 disable_toc: false
+aliases:
+    - /observability_pipelines/destinations/datadog_archives/
+code_lang: amazon_s3
+type: multi-code-lang
+code_lang_weight: 1
 products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
-{{< product-availability >}}
-
 ## Overview
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
+Use the Datadog Archives - Amazon S3 destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
 **Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
 
-You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
+You can also [route logs to Snowflake using the Datadog Archives - Amazon S3 destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
 ## Prerequisites
 
-To use the Datadog Archives destination, you must install Datadog's [AWS integration][3] so you can configure [Datadog Log Archives](#configure-log-archives).
+To use the Datadog Archives - Amazon S3 destination, you must install Datadog's [AWS integration][3] so you can configure [Datadog Log Archives](#configure-log-archives).
 
 ## Configure Log Archives
 
@@ -101,9 +104,9 @@ See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline
 
-Configure the Datadog Archives destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The steps in this section are configured in the UI.
+Configure the Datadog Archives - Amazon S3 destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The steps in this section are configured in the UI.
 
-After you select the Datadog Archives destination in the pipeline UI:
+After you select the Datadog Archives - Amazon S3 destination in the pipeline UI:
 
 1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
@@ -119,7 +122,7 @@ After you select the Datadog Archives destination in the pipeline UI:
         - Glacier Instant Retrieval
         - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
-    - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
+    - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Datadog Archives - Amazon S3 destination setup.
 
 ### Optional settings
 
@@ -146,12 +149,12 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 ### Example destination and log archive setup
 
-If you enter the following values for your Datadog Archives destination:
+If you enter the following values for your Datadog Archives - Amazon S3 destination:
 - S3 Bucket Name: `test-op-bucket`
 - Prefix to apply to all object keys: `op-logs`
 - Storage class for the created objects: `Standard`
 
-{{< img src="observability_pipelines/setup/amazon_s3_destination.png" alt="The Datadog Archives destination setup with the example values" style="width:40%;" >}}
+{{< img src="observability_pipelines/setup/amazon_s3_destination.png" alt="The Datadog Archives - Amazon S3 destination setup with the example values" style="width:40%;" >}}
 
 Then these are the values you enter for configuring the S3 bucket for Log Archives:
 
@@ -163,15 +166,15 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 
 ## Using template syntax for dynamic partitioning
 
-When you set up the Datadog Archives destination (Amazon S3), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive based on the attribute value.
+When you set up the Datadog Archives - Amazon S3 destination, you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive based on the attribute value.
 
-{{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
+{{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives - Amazon S3 destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
 However, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
 
-If the {{< ui >}}Prefix{{< /ui >}} field for the Amazon S3 destination is `{{service}}/` and the Log Archive {{< ui >}}Path{{< /ui >}} is `/web-store/`, the archived log files are stored as `/web-store/<date>/<hour>/<filename>`.
+If the {{< ui >}}Prefix{{< /ui >}} field for the Datadog Archives - Amazon S3 destination is `{{service}}/` and the Log Archive {{< ui >}}Path{{< /ui >}} is `/web-store/`, the archived log files are stored as `/web-store/<date>/<hour>/<filename>`.
 
 ## Secret defaults
 
@@ -191,11 +194,11 @@ There are no secret identifiers to configure.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Route logs to Snowflake using the Datadog Archives destination
+## Route logs to Snowflake using the Datadog Archives - Amazon S3 destination {#route-logs-to-snowflake-using-the-datadog-archives-destination}
 
-You can route logs from Observability Pipelines to Snowflake using the Datadog Archives destination by configuring Snowpipe in Snowflake to automatically ingest those logs. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing. When logs are collected by Observability Pipelines, they are written to an S3 bucket. To set this up:
+You can route logs from Observability Pipelines to Snowflake using the Datadog Archives - Amazon S3 destination by configuring Snowpipe in Snowflake to automatically ingest those logs. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing. When logs are collected by Observability Pipelines, they are written to an S3 bucket. To set this up:
 1. Configure [Log Archives](#configure-log-archives).
-1. [Set up a pipeline][5] to use Datadog Archives as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+1. [Set up a pipeline][5] to use Datadog Archives - Amazon S3 as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions.
 
 ## How the destination works
