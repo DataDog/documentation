@@ -5,7 +5,8 @@ title: Troubleshooting Serverless Monitoring for AWS Step Functions
 ## I cannot see any traces
 
 #### Verify that your Step Function is configured to send all logs
-- Ensure that the `DD_TRACE_ENABLED` tag is set to `true` on the Step Function in your AWS console.
+- Verify that tracing is enabled. Check the [Generate APM Traces][9] settings in Datadog, or check that the `DD_TRACE_ENABLED` tag is set to `true` on the Step Function in your AWS console.
+- If a Step Function has the `DD_TRACE_ENABLED` tag set to `false`, the tag takes precedence over the configuration in Datadog, and the Step Function is not traced.
 - In your AWS console, open your Step Function's logging tab. Ensure that {{< ui >}}Log level{{< /ui >}} is set to `ALL`, and that {{< ui >}}Include execution data{{< /ui >}} is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
@@ -13,10 +14,10 @@ title: Troubleshooting Serverless Monitoring for AWS Step Functions
 - Check the Datadog Lambda Forwarder for error messages. Ensure that you have correctly set your API key and Datadog site.
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
-#### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
+#### Verify that logs are searchable on Live Search
 In Datadog, go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Log Stream{{< /ui >}}][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly.
 
-If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_ENABLED:true`.
+If you enable tracing with tags and set up the Forwarder and state machine tags correctly, the logs are tagged with `DD_TRACE_ENABLED:true`. If you enable tracing only in the [Generate APM Traces][9] settings in Datadog, the logs do not have this tag. In this case, verify the setting in Datadog instead.
 
 #### Verify that your Step Function is using the latest version
 - AWS may release updates to the Step Function API or introduce newer versions of the Step Function definitions. Older versions may result in unexpected log formatting or behavior.
@@ -67,7 +68,7 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 - You can also set the `DD_STEP_FUNCTIONS_TRACE_ENABLED` tag at the Forwarder-level to enable tracing for all Step Functions using that Forwarder on v3.121.0+.
 - The IAM role for the forwarder should have `tags:getResources` permission.
 - Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
-- To verify if logs are reaching the Datadog backend, open the {{< ui >}}Log Explorer{{< /ui >}} page and search `source:stepfunction` with the {{< ui >}}Live{{< /ui >}} search timeframe (which shows all logs going into Datadog's logs intake). If you cannot see any logs, check if there are any error logs on the Datadog Forwarder such as wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you see Step Functions logs, verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized) and you should see Step Function traces associated with the log in a few minutes.
+- To verify if logs are reaching the Datadog backend, open the {{< ui >}}Log Explorer{{< /ui >}} page and search `source:stepfunction` with the {{< ui >}}Live{{< /ui >}} search timeframe (which shows all logs going into Datadog's logs intake). If you cannot see any logs, check if there are any error logs on the Datadog Forwarder such as wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you see Step Functions logs and you enable tracing with tags, verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized). If you enable tracing only in the [Generate APM Traces][9] settings in Datadog, the logs do not have this tag. Step Function traces associated with the log appear in a few minutes.
 
 
 [1]: /logs
@@ -78,3 +79,4 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 [6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-step-functions-traces-with-downstream-lambda-traces
 [7]: /logs/log_configuration/indexes/#exclusion-filters
 [8]: /serverless/step_functions/distributed-maps
+[9]: https://app.datadoghq.com/logs/apm-traces#step_functions
