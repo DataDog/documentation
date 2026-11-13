@@ -20,10 +20,6 @@ a failing test case is retried either until it passes successfully or until ther
 
 Retries added by Auto Test Retries are not billed as test spans. For details, see [CI/CD Optimization Billing][9].
 
-## Exclude individual tests from retries
-
-Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
-
 ## Setup
 
 Ensure [Test Optimization][1] is configured for your test runs.
@@ -256,6 +252,10 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 ## Troubleshooting
 
 If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][4], find your repository or service, and toggle Auto Test Retries off.
+
+## Exclude individual tests from retries
+
+Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
 
 ## Further Reading
 
