@@ -31,7 +31,7 @@ To create a metric monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-A threshold alert compares metric values to a static threshold or a relative threshold (Preview). A static threshold is a fixed number. A relative threshold, also called a dynamic threshold, adapts to a historical baseline from the same query.
+A threshold alert compares metric values to a static threshold or a relative threshold (Preview). A static threshold is a fixed number. A relative threshold adapts to a historical baseline from the same query.
 
 On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 

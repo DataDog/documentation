@@ -24,18 +24,16 @@ Choose an approach based on the comparison you need:
 ## Relative thresholds
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Relative thresholds, also called dynamic thresholds, are in Preview for metric monitors.
+Relative thresholds are in Preview for metric monitors.
 {{< /callout >}}
 
 A relative threshold compares the evaluated value of a metric monitor to a historical baseline from the same query. Datadog calculates a separate threshold for each group, so one monitor can cover resources with different normal values.
 
-For example, alert when the average job duration over five minutes exceeds 150% of its average over the last week. A threshold of 150% of the baseline means 50% above the baseline, not a 150% increase.
+For example, alert when the average job duration over five minutes exceeds `1.5x` its average over the last week.
 
 Choose a historical aggregation and a lookback window from 1 week to 6 months. Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor continues evaluating current values at its configured evaluation frequency.
 
 For configuration steps, query syntax, critical recovery thresholds, and Preview limitations, see the [Relative Thresholds guide][6].
-
-Use a relative threshold to detect a known degree of change from a historical level. For a comparison to the same time in a previous week, use the [seasonal threshold example](#seasonal-threshold). For a comparison to a different metric, use the [reference threshold example](#reference-threshold).
 
 ## Seasonal threshold
 

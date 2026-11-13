@@ -1,33 +1,17 @@
 ---
 title: Relative Thresholds
 description: "Configure relative thresholds (Preview) to compare metric values with historical baselines, including query syntax, recovery thresholds, and limitations."
-further_reading:
-- link: "/monitors/types/metric/"
-  tag: "Documentation"
-  text: "Metric Monitors"
-- link: "/monitors/configuration/"
-  tag: "Documentation"
-  text: "Configure Monitors"
-- link: "/monitors/types/anomaly/"
-  tag: "Documentation"
-  text: "Anomaly Detection Monitors"
-- link: "/monitors/guide/non_static_thresholds/"
-  tag: "Documentation"
-  text: "How to Monitor Non-Static Thresholds"
-- link: "/api/latest/monitors/"
-  tag: "API"
-  text: "Monitors API"
 ---
 
 ## Overview
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Relative thresholds, also called dynamic thresholds, are in Preview and are available for metric monitors.
+Relative thresholds are in Preview and are available for metric monitors.
 {{< /callout >}}
 
 Relative thresholds let you alert when a metric deviates from its historical behavior, without choosing a fixed threshold.
 
-Instead of alerting when a metric exceeds a specific value, such as 100 ms, alert when it exceeds a percentage of its historical baseline. For example, alert when a metric exceeds 150% of its average over the past week.
+Instead of alerting when a metric exceeds a specific value, such as 100 ms, alert when it exceeds a multiple of its historical baseline. For example, alert when a metric exceeds `1.5x` its average over the past week.
 
 Relative thresholds are useful for metrics whose normal values vary between services, hosts, or other groups, or gradually change over time. They provide an alternative to static thresholds and anomaly detection when you want to detect a known degree of change.
 
@@ -40,7 +24,7 @@ A relative threshold compares two values:
 
 For example, configure a monitor to alert when:
 
-`Average over the last 5 minutes > 1.5 × Average over the last week`
+`Average over the last 5 minutes > 1.5x the average over the last week`
 
 If a service's historical average request latency is 200 ms, its alert threshold is 300 ms. If the historical average later increases to 250 ms, its alert threshold becomes 375 ms.
 
@@ -64,9 +48,9 @@ For example, a monitor grouped by `service` might have the following values:
 
 | Service | Historical average | Multiplier | Alert threshold |
 |---|---:|---:|---:|
-| Service A | 100 ms | 1.5 | 150 ms |
-| Service B | 400 ms | 1.5 | 600 ms |
-| Service C | 800 ms | 1.5 | 1200 ms |
+| Service A | 100 ms | `1.5x` | 150 ms |
+| Service B | 400 ms | `1.5x` | 600 ms |
+| Service C | 800 ms | `1.5x` | 1200 ms |
 
 Each service is evaluated independently against its own threshold.
 
@@ -84,7 +68,7 @@ To configure a relative threshold:
 6. Configure the alert direction and, optionally, a recovery threshold.
 7. Review the resulting thresholds and monitor behavior before saving.
 
-For an alert configured to trigger above the threshold, a multiplier of `1.5` triggers when the current value exceeds 150% of its historical baseline. A multiplier of `0.7` can detect a drop below 70% of the baseline when the alert direction is below the threshold.
+For example, set the alert threshold to `1.5x` the historical baseline to detect an increase. Set it to `0.7x` and choose the below direction to detect a drop.
 
 ### Query syntax
 
@@ -113,11 +97,11 @@ formula("<EXPRESSION>").rollup("<AGGREGATION>").last("<WINDOW>").multiplier(<FAC
 - `last`: The historical lookback window, such as `1w` or `1mo`.
 - `multiplier`: An optional numeric multiplier applied to the aggregated historical value.
 
-The multiplier applies to the result of the historical aggregation, rather than to individual datapoints. The multiplier is a factor: use `1.5` for 150% of the baseline, which is 50% above the baseline.
+The multiplier applies to the result of the historical aggregation, rather than to individual datapoints. For a `1.5x` threshold, use `.multiplier(1.5)` in the query.
 
 ### API example
 
-The following example alerts when the average job duration over 5 minutes exceeds 150% of its historical weekly average, grouped by job.
+The following example alerts when the average job duration over 5 minutes exceeds `1.5x` its historical weekly average, grouped by job.
 
 ```json
 {
@@ -145,8 +129,8 @@ Replace `example.job.duration` with your metric.
 
 In this example:
 
-- The monitor enters `ALERT` when the current average duration exceeds 150% of the historical weekly average.
-- The monitor recovers when the current average falls to or below 120% of the historical weekly average.
+- The monitor enters `ALERT` when the current average duration exceeds `1.5x` the historical weekly average.
+- The monitor recovers when the current average falls to or below `1.2x` the historical weekly average.
 - Each job has its own calculated threshold.
 
 See the [Monitors API][2] for additional configuration options.
@@ -177,7 +161,7 @@ Use relative thresholds to detect a meaningful change from an established baseli
 
 Monitor metrics such as request latency, processing duration, or queue processing time.
 
-For example, alert when a job's execution time is 50% higher than its historical average. This allows you to detect regressions even if different jobs have different execution times.
+For example, alert when a job's execution time exceeds `1.5x` its historical average. This allows you to detect regressions even if different jobs have different execution times.
 
 ### Monitor resources with different baselines
 
@@ -201,7 +185,7 @@ Relative thresholds are not appropriate for every monitoring scenario.
 
 If a metric has a clear failure boundary, use a static threshold.
 
-For example, alerting when disk usage exceeds 90% is usually more appropriate than alerting when disk usage is 50% higher than its historical average.
+For example, alerting when disk usage exceeds 90% is usually more appropriate than alerting when disk usage exceeds `1.5x` its historical average.
 
 A relative threshold can rise alongside sustained degradation, potentially allowing an unhealthy value to become part of the baseline.
 
@@ -234,10 +218,6 @@ For these cases, consider a static threshold or a monitor designed around the ex
 Historical thresholds update daily and are intended to detect deviations from longer-term behavior.
 
 If the expected range needs to adapt continuously to changing conditions, consider another detection method, such as anomaly detection.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/metric/
 [2]: /api/latest/monitors/#create-a-monitor

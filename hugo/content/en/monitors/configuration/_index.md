@@ -162,7 +162,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 #### Relative thresholds
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Relative thresholds, also called dynamic thresholds, are in Preview for metric monitors.
+Relative thresholds are in Preview for metric monitors.
 {{< /callout >}}
 
 A relative threshold uses historical data from the same monitor query as its baseline. Datadog applies an optional multiplier to the aggregated baseline to calculate the threshold. For monitors grouped by tags, each group has its own baseline and threshold.
@@ -171,7 +171,7 @@ To configure a relative threshold in **Set alert conditions**:
 
 1. Select a relative threshold and choose the alert direction.
 2. Select a historical aggregation and a lookback window from 1 week to 6 months. The historical window must be at least as long as the monitor's evaluation window.
-3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above 150% of the historical average and recover at or below 120% of that average.
+3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above `1.5x` the historical average and recover at or below `1.2x` that average.
 
 Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor's evaluation frequency continues to control how often Datadog compares current values to those thresholds.
 
