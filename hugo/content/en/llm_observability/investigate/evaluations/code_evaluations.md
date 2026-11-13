@@ -111,6 +111,51 @@ The evaluation fails with an error if your function returns:
 - A `reasoning` that is not a string
 - A `metadata` that is not an object
 
+### Semantic similarity
+
+Your function can call the built-in `similarity(a, b)` function to compare the meaning of two strings. It returns a number from -1 to 1, where 1 means the two texts have the same meaning. Identical strings return 1.
+
+Use `similarity` to compare an output to an expected answer, or to find which of several candidates is closest to a target.
+
+`similarity` has the following limits:
+
+- Both arguments must be strings.
+- Each string can be up to 32 KB (32,768 bytes).
+- Strings cannot contain NUL characters.
+- Your function can call `similarity` at most 50 times per evaluation.
+
+If the arguments are invalid, or if the similarity request fails, `similarity` throws an error. You can catch the error with `try`/`catch`. If you don't catch it, the evaluation reports an error.
+
+Scores for related text tend to be high. In testing, an unrelated sentence scored about 0.59 and a paraphrase scored about 0.99. A factually wrong answer on the same topic still scored about 0.95. Choose thresholds by testing on your own data. Semantic similarity measures how close two texts are in meaning and topic, not whether a response is factually correct.
+
+### Example: Similarity to reference answers (span scope)
+
+This function compares the span output to several reference answers and returns the highest similarity as a score.
+
+```javascript
+function __evalDeterministic(data) {
+    const output = String(data.meta?.output?.value ?? "").trim();
+    if (output === "") {
+        return null;
+    }
+    const references = [
+        "You can reset your password from the account settings page.",
+        "To reset your password, go to Settings and select Reset password.",
+    ];
+    try {
+        const best = Math.max(...references.map((r) => similarity(output, r)));
+        return {
+            value: best,
+            assessment: best > 0.8 ? "pass" : "fail",
+            reasoning: `Highest similarity to a reference answer: ${best.toFixed(2)}`,
+        };
+    } catch (e) {
+        console.log(`similarity failed: ${e}`);
+        return null;
+    }
+}
+```
+
 ### Example: Empty tool result (span scope)
 
 ```javascript
