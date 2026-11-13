@@ -115,7 +115,7 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
-- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI products are turned off for your organization, a summary of the impact is shown instead.
+- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI features are not available for your organization, a summary of the impact is shown instead.
 - **Ticketing, Assignee, and PRs**: The remediation case, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
@@ -178,8 +178,8 @@ Status updates can take up to an hour to appear.
 |---|---|---|
 | Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Sync remediation cases to Jira, ServiceNow, or Linear. | See [Route remediation cases to your ticketing tool](#route-remediation-cases-to-your-ticketing-tool). |
-| AI summary | The **Know before you remediate** summary. | Turn on AI products for your organization. See [AI Credits admin controls][16]. |
-| Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
+| AI summary | The **Know before you remediate** summary. | Available by default. Not available for organizations that opted out of AI features or are HIPAA-enabled. |
+| Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8], connect your GitHub repositories, and turn on the **AI Products** toggle in [AI Credits admin controls][16]. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
 | Fix verification from your IDE | Check fixes from your coding agent. | Set up the [Code Security MCP Server][7]. |
