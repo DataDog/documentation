@@ -9271,12 +9271,14 @@ components:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
       example: OPENAI_CHAT_COMPLETIONS
       type: string
       x-enum-varnames:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
     AiGatewayDataCaptureMode:
       description: Controls whether AI Gateway captures request and response content in addition to metadata.
       enum:
@@ -12101,6 +12103,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
       example: OPENAI_CHAT_COMPLETIONS
@@ -12112,6 +12116,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
     AiGatewayZDRMode:

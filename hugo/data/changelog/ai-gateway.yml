@@ -71,3 +71,22 @@ entries:
       - UpdateAiGatewayModelGroup
       - UpdateAiGatewayRoutingRule
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41721
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayModelGroup
+      - CreateAiGatewayProvider
+      - GetAiGatewayModelGroup
+      - GetAiGatewayProvider
+      - ListAiGatewayModelGroups
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayProviderModels
+      - ListAiGatewayProviders
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelGroup
+      - UpdateAiGatewayProvider
+    title: Add missing AI Gateway model operations
