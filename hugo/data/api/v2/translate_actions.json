@@ -3164,6 +3164,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
   },
+  "ListGitHubCostsIntegrationAccounts": {
+    "description": "List GitHub Costs integration accounts.",
+    "summary": "List GitHub Costs integration accounts"
+  },
+  "CreateGitHubCostsIntegrationAccount": {
+    "description": "Create a GitHub Costs integration account.",
+    "summary": "Create a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a GitHub Costs integration account."
+  },
+  "DeleteGitHubCostsIntegrationAccount": {
+    "description": "Delete a GitHub Costs integration account.",
+    "summary": "Delete a GitHub Costs integration account"
+  },
+  "GetGitHubCostsIntegrationAccount": {
+    "description": "Get a GitHub Costs integration account.",
+    "summary": "Get a GitHub Costs integration account"
+  },
+  "UpdateGitHubCostsIntegrationAccount": {
+    "description": "Update a GitHub Costs integration account. Only the fields provided are changed.",
+    "summary": "Update a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a GitHub Costs integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"
