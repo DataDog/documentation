@@ -144,6 +144,8 @@ From the side panel, click **Remediate with AI** and choose one of the following
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
+To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default: add `cases` to the `toolsets` parameter.
+
 To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the finding is gone before you commit.
 
 {{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options and a section to verify the fix with the Code Security MCP Server" width="80%">}}
@@ -205,3 +207,4 @@ For more information, see [Ticketing Integrations][12].
 [12]: /security/ticketing_integrations/
 [13]: /account_management/rbac/permissions/
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
+[15]: /mcp_server/setup/
