@@ -165,11 +165,19 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 Relative thresholds, also called dynamic thresholds, are in Preview for metric monitors.
 {{< /callout >}}
 
-A relative threshold uses historical data from the same monitor query as its baseline. Configure a baseline time window, an aggregation, and a multiplier. Datadog multiplies the aggregated baseline by the multiplier to calculate the threshold. For monitors grouped by tags, each group has its own baseline and threshold.
+A relative threshold uses historical data from the same monitor query as its baseline. Datadog applies an optional multiplier to the aggregated baseline to calculate the threshold. For monitors grouped by tags, each group has its own baseline and threshold.
 
-For example, a threshold of 150% of the historical average alerts when the evaluated value is more than 50% above that average. The monitor's evaluation window and the baseline window are separate settings.
+To configure a relative threshold in **Set alert conditions**:
 
-For configuration examples, see [Relative thresholds in the non-static thresholds guide][7].
+1. Select a relative threshold and choose the alert direction.
+2. Select a historical aggregation and a lookback window from 1 week to 6 months. The historical window must be at least as long as the monitor's evaluation window.
+3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above 150% of the historical average and recover at or below 120% of that average.
+
+Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor's evaluation frequency continues to control how often Datadog compares current values to those thresholds.
+
+Relative thresholds support critical threshold queries and critical recovery threshold queries. Relative warning thresholds are not supported in Preview, and static and relative thresholds cannot be combined in the same monitor.
+
+For configuration examples, query syntax, and limitations, see the [Relative Thresholds guide][7].
 
 [1]: /monitors/guide/monitor_aggregators/
 [2]: /monitors/guide/as-count-in-monitor-evaluations/
@@ -177,7 +185,7 @@ For configuration examples, see [Relative thresholds in the non-static threshold
 [4]: /monitors/guide/custom_schedules
 [5]: /monitors/guide/recovery-thresholds/
 [6]: /monitors/types/log/
-[7]: /monitors/guide/non_static_thresholds/#relative-thresholds
+[7]: /monitors/guide/relative-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 

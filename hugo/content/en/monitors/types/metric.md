@@ -44,7 +44,7 @@ Relative thresholds are in Preview.
 For examples and Preview limitations, see [Relative thresholds][2].
 
 [1]: /metrics/distributions/
-[2]: /monitors/guide/non_static_thresholds/#relative-thresholds
+[2]: /monitors/guide/relative-thresholds/
 {{% /tab %}}
 {{% tab "Change" %}}
 
