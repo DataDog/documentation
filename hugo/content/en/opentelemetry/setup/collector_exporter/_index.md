@@ -928,9 +928,9 @@ Datadog APM uses RED (Rate, Error, Duration) metrics to power the Catalog, Servi
 
 | Source | How to configure | Sampling behavior | Billing |
 |---|---|---|---|
-| Span metrics connector (recommended) | Use the recommended configuration for your environment in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector), which includes the connector. | Aggregates every span it receives. Place it upstream of any sampling processor, as the recommended configuration does with the [trace forward connector](#trace-forward-connector). | Included in APM. |
-| HTTP metrics from the SDK | Set [`trace_metrics.instrumentation_metrics_calc`](#dd-otel-metric-config-header) to `true`, and set [`raw_instrumentation_metrics_drop`](#dd-otel-metric-config-header) to `true` so that the raw metrics are not billed as custom metrics. | Unaffected by span sampling. The SDK aggregates the [HTTP request duration metric][15] over every request before export. | The attributes used for RED metrics are included in APM. The raw HTTP metrics are billed as [custom metrics][14] unless you set `raw_instrumentation_metrics_drop` to `true`. |
-| Spans in the Datadog backend | To compute RED metrics in the backend from the spans you send, add the `compute_stats=true` header to the exporter that sends traces. See [Send traces to the OTLP intake][16]. | Computed from the spans the intake receives, so any sampling upstream of the intake lowers the metrics. Send unsampled spans to cover all traffic. | Included in APM. |
+| Span metrics connector (recommended) | Use the recommended configuration for your environment in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector). | Aggregates every span it receives. Place it upstream of any sampling processor. | Included in APM. |
+| HTTP metrics from the SDK | Set [`trace_metrics.instrumentation_metrics_calc`](#dd-otel-metric-config-header) to `true`. Set [`raw_instrumentation_metrics_drop`](#dd-otel-metric-config-header) to keep or drop the raw metrics. | Unaffected by span sampling. The SDK aggregates over every request before export. Only the [`http.server.request.duration` and `http.client.request.duration`][15] metrics power RED metrics. | The attributes used for RED metrics are included in APM. The raw HTTP metrics are billed as [custom metrics][14] unless you drop them. |
+| Spans in the Datadog backend | To compute RED metrics in the backend from the spans you send, add the `compute_stats=true` header to the exporter that sends traces. See [Send traces to the OTLP intake][16]. | Computed from the spans the intake receives. Sampling upstream of the intake leaves spans out of the calculation, so send unsampled spans to cover all traffic. | Included in APM. |
 
 Give each upstream Collector its own `span_metrics` connector in a [gateway deployment][11]: a gateway that receives already-sampled spans produces undercounted metrics.
 
@@ -938,12 +938,12 @@ Not every language SDK emits HTTP metrics, there is no equivalent for RPC, datab
 
 Two fields in the [`dd-otel-metric-config` header](#dd-otel-metric-config-header) determine how Datadog handles HTTP metrics:
 
-| `instrumentation_metrics_calc` | `raw_instrumentation_metrics_drop` | Result |
+| `instrumentation_metrics_calc` (default `false`) | `raw_instrumentation_metrics_drop` (default `false`) | Result |
 |---|---|---|
 | `true` | `true` | HTTP metrics power APM RED metrics at reduced cardinality. Raw HTTP metrics are dropped, so they are not billed as custom metrics. |
 | `true` | `false` | HTTP metrics power APM RED metrics, and Datadog also retains the raw metrics at full cardinality as custom metrics for your own dashboards and monitors. |
 | `false` | `true` | HTTP metrics are dropped. Use this with the `span_metrics` connector to avoid custom metric costs for HTTP metrics. |
-| `false` | `false` (default) | Datadog retains all raw HTTP metrics at full cardinality as custom metrics. |
+| `false` | `false` | Datadog retains all raw HTTP metrics at full cardinality as custom metrics. |
 
 ## Key components
 
