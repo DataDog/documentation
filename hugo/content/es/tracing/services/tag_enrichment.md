@@ -10,10 +10,6 @@ further_reading:
   text: Catalog
 title: Enriquecimiento de etiquetas
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
-El enriquecimiento de etiquetas está en versión preliminar. Para solicitar acceso, complete este formulario.
-{{< /callout >}}
-
 ## Descripción general {#overview}
 
 Utilice reglas de enriquecimiento de etiquetas para agregar etiquetas a su telemetría sin cambios de código ni una nueva implementación. Puede utilizar valores de los metadatos de servicio que ya haya definido en el Catálogo, el valor de otra etiqueta o un valor fijo.

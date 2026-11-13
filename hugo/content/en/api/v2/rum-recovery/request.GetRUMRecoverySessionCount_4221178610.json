@@ -1,0 +1,10 @@
+{
+  "data": {
+    "type": "rum_recovery_count",
+    "attributes": {
+      "query": "service:rum18600-fixture",
+      "from": 1621077071000,
+      "to": 1636629071000
+    }
+  }
+}

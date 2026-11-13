@@ -4,29 +4,32 @@ aliases:
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación
-  text: Configuración de OpenTelemetry Collector
-title: Métricas de hosts
+  text: Configuración del OpenTelemetry Collector
+title: Métricas de servidor
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="/opentelemetry/collector_exporter/host_metrics.png" alt="Panel de métricas de servidores de OpenTelemetry" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/host_metrics.png" alt="Dashboard de métricas de host de OpenTelemetry" style="width:100%;" >}}
+<div class="alert alert-danger">Si ejecuta el <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a> con el Datadog Agent, no necesita el receptor de métricas de servidores. El Agent ya recopila métricas de servidores.</div>
 
-Para recopilar métricas de sistema como el uso de CPU, disco y memoria, activa el [receptor de métricas de host][1] en tu Collector.
+Para recopilar métricas del sistema como el uso de CPU, disco y memoria, habilite el [receptor de métricas de servidores][1] en su Collector. 
 
-Para obtener más información, incluidos los sistemas operativos compatibles, consulta la documentación del proyecto de OpenTelemetry para el [receptor de métricas de host][1].
+Para obtener más información, incluidos los sistemas operativos compatibles, consulte la documentación del proyecto OpenTelemetry para el [receptor de métricas de servidores][1].
 
 
-## Configuración
+## Configuración {#setup}
+
+Estos ejemplos utilizan identificadores de componentes de OpenTelemetry Collector Contrib v0.154.0. Para otras versiones o distribuciones, utilice los identificadores que admita esa distribución.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "Servidor" %}}
 
-Añade las siguientes líneas a tu configuración de Collector:
+Agregue las siguientes líneas a su configuración de Collector:
 
 ```yaml
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:
@@ -46,17 +49,18 @@ receivers:
       memory:
       network:
       processes:
+
 ```
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-Configura el receptor de métricas de host en cada nodo del que se necesite recopilar métricas. Para recopilar métricas de host de cada nodo en tu clúster, despliega el receptor de métricas de host como un DaemonSet Collector. Añade lo siguiente en la configuración de Collector:
+Configure el receptor de métricas de servidores en cada nodo del cual se deban recopilar métricas. Para recopilar métricas de servidores de cada nodo en su clúster, implemente el receptor de métricas de servidores como un Collector de tipo DaemonSet. Agregue lo siguiente en la configuración del Collector:
 
 ```yaml
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:
@@ -89,30 +93,29 @@ receivers:
 
 {{< /tabs >}}
 
-## Datos recopilados
+Agregue `host_metrics` a la lista `receivers` de la canalización de métricas en su configuración. Mantenga los procesadores que ya están en esa canalización: la ingesta de métricas OTLP de Datadog solo acepta métricas delta, y el receptor de métricas de servidores produce sumas acumulativas, por lo que la canalización necesita `cumulativetodelta`. La [configuración de Collector recomendada][5] lo incluye.
 
-Las métricas de hosts son recopiladas por el [receptor de métricas de host][4]. Para obtener información sobre la configuración del receptor, consulta [Exportador de Datadog recopilador de OpenTelemetry][5].
 
-La métricas, asignadas a métricas de Datadog, se utilizan en las siguientes vistas:
-- [Mapa de hosts de infraestructura][6]
-- [Lista de infraestructuras][7]
-- [Dashboards de hosts por defecto][8]
-- [Información de hosts de visualización de trazas de APM][9]
+## Datos recopilados {#data-collected}
 
-**Nota**: Para correlacionar métricas de trazas y hosts, configura [atributos universales de monitorización de servicios][10] para cada servicio y define el atributo de recurso `host.name` en el host subyacente correspondiente para instancias del servicio y del recopilador.
+Las métricas de servidores son recopiladas por el [receptor de métricas de servidores][4]. Para obtener información sobre cómo configurar el receptor, consulte [Configurar el OpenTelemetry Collector][5].
 
-La siguiente tabla muestra qué nombres de métrica de host de Datadog están asociados a los correspondientes nombres de métrica de host de OpenTelemetry y, si procede, qué matemática se aplica a la métrica de host de OTel para transformarla en unidades de Datadog durante la asignación.
+Las métricas, mapeadas a métricas de Datadog, se utilizan en las siguientes vistas:
+- [Mapa de servidores de infraestructura][6]
+- [Lista de infraestructura][7]
+- [Paneles predeterminados de servidores][8]
+- [Información del servidor en la vista de trazas de APM][9]
+
+**Nota**: Para correlacionar las métricas de trazas y de servidores, configure los [atributos de unified service tagging][10] para cada servicio y establezca el atributo de recurso `host.name` en el servidor subyacente correspondiente tanto para las instancias del servicio como para las del Collector. 
+
+La siguiente tabla enumera las métricas de servidores de OpenTelemetry recopiladas para las experiencias integradas de Datadog.
 
 {{< mapping-table resource="host.csv">}}
 
-Para obtener más información, consulta [Asignación de métricas de OpenTelemetry][2].
+Para ver la asignación completa entre los nombres de métricas de OpenTelemetry y Datadog, consulte [Asignación de métricas de OpenTelemetry][2].
 
 
-## Ejemplo completo de configuración
-
-Para ver un ejemplo completo de configuración en funcionamiento con el exportador de Datadog, consulta [`host-metrics.yaml`][3].
-
-## Ejemplo de salida de registro
+## Ejemplo de salida de registro {#example-logging-output}
 
 ```
 ResourceMetrics #1
@@ -161,11 +164,10 @@ Value: 1153183744
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /es/opentelemetry/guide/metrics_mapping/#host-metrics
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[5]: /es/opentelemetry/otel_collector_datadog_exporter/
+[5]: /es/opentelemetry/setup/collector_exporter/
 [6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [7]: https://app.datadoghq.com/infrastructure
-[8]: /es/opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[8]: /es/opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards
 [9]: /es/tracing/trace_explorer/trace_view/?tab=hostinfo
-[10]: /es/universal_service_monitoring/setup/
+[10]: /es/opentelemetry/correlate/#prerequisite-unified-service-tagging

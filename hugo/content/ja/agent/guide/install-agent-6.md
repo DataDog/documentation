@@ -4,118 +4,118 @@ further_reading:
   tag: ドキュメント
   text: Datadog Agent
 private: true
-title: Datadog Agent 6 をインストール
+title: Datadog Agent 6 のインストール
 ---
+このガイドでは、Agent 6 のインストールについて説明します。Datadog では、最新機能を利用するために Agent 7 をインストールするか、Agent 7 にアップグレードすることを推奨しています。Agent の最新バージョンのインストールについて詳しくは、[最新の Agent インストール手順][1]を参照してください。以前のバージョンから Agent 7 にアップグレードする方法については、[Datadog Agent v7 へのアップグレード][2]を参照してください。
 
-本ガイドでは Agent 6 のインストール方法を説明します。Datadog では、最新機能を利用するために Agent 7 のインストールまたはアップグレードを推奨しています。最新バージョンの Agent をインストールする方法については、[最新の Agent のインストール手順][1]を参照してください。以前のバージョンから Agent 7 にアップグレードする方法については、[Datadog Agent v7 へのアップグレード][2]を参照してください。
+## macOS {#macos}
 
-## macOS
+- Datadog Agent バージョン 6 には macOS 10.12 以上が必要です。
+- Agent 6.34 は、macOS 10.12 をサポートする最後のリリースです。
+- Agent 6.38 は、macOS 向けの最後の Agent 6 リリースです。
 
-- Datadog Agent バージョン 6 は macOS 10.12 以降が必要です。
-- Agent 6.34 は macOS 10.12 をサポートする最後のリリースです。
-- Agent 6.38 は macOS 用の Agent 6 の最終リリースです。
+### Agent をインストールする {#install-the-agent}
 
-### Agent のインストール
+#### コマンドライン {#command-line}
 
-#### コマンドライン
-
-次のコマンドを実行し、`MY_API_KEY` を Datadog の API キーに置き換えてください。
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY=MY_API_KEY DD_SITE="${site}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 {{< /code-block >}}
 
-Agent はログイン時に起動します。システムトレイから無効化できます。
+Agent はログイン時に実行されます。これは、システムトレイから無効にできます。
 
-#### LaunchDaemon
+#### LaunchDaemon {#launchdaemon}
 
-Datadog Agent は、`DD_SYSTEMDAEMON_INSTALL=true` および `DD_SYSTEMDAEMON_USER_GROUP=username:groupname` を指定することで、システム全体の LaunchDaemon としてインストールできます。`MY_API_KEY` を Datadog の API キーに置き換えてください。
+Datadog Agent は、`DD_SYSTEMDAEMON_INSTALL=true` と `DD_SYSTEMDAEMON_USER_GROUP=username:groupname` を指定することで、システム全体の LaunchDaemon としてインストールできます。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
 
 {{< code-block lang="shell" >}}
 DD_SYSTEMDAEMON_INSTALL=true DD_SYSTEMDAEMON_USER_GROUP=username:groupname DD_AGENT_MAJOR_VERSION=6 DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 {{< /code-block >}}
 
-Agent はシステム起動時に実行されます。`DD_SYSTEMDAEMON_USER_GROUP` 変数を使用して有効な非 root ユーザーとそのグループを指定する必要があります。Agent プロセスはこのユーザーとグループの下で実行されます。
+Agent はシステム起動時に実行されます。`DD_SYSTEMDAEMON_USER_GROUP` 変数を使用して、有効な非ルートユーザーとそのグループを指定する必要があります。Agent プロセスはこのユーザーおよびグループで実行されます。
 
-システム全体の LaunchDaemon でインストールされた場合、システムトレイアプリはサポートされません。
+システム全体の LaunchDaemon インストールでは、システムトレイアプリはサポートされていません。
 
-#### GUI
+#### GUI {#gui}
 
-1. Download and install the [DMG package][3].
-1. `/opt/datadog-agent/etc/datadog.yaml` に次の行を追加し、`MY_API_KEY` を Datadog の API キーに置き換えてください。
+1. [DMG パッケージ][3]をダウンロードしてインストールします。
+1. `MY_API_KEY` をご使用の Datadog API キーに置き換えて、次の行を `/opt/datadog-agent/etc/datadog.yaml` に追加します。
    {{< code-block lang="shell" >}}
 api_key: MY_API_KEY
 site: datad0g.com
 {{< /code-block >}}
 
-### Agent の管理
+### Agent を管理する {#manage-the-agent}
 
-Agent を管理するには、次のいずれかを使用します。
-- 単一ユーザーインストールの場合はシステムトレイの Datadog Agent アプリ。
-- システム全体の LaunchDaemon インストールの場合は `launchctl`。
+Agent を管理するには、以下を使用します。
+- システムトレイの Datadog Agent アプリ (シングルユーザーインストールの場合)。
+- `launchctl`(システム全体の LaunchDaemon インストールの場合)。
 - `datadog-agent` コマンド。バイナリは `/usr/local/bin` にあります。
 
-`/opt/datadog-agent/etc/conf.d.` でインテグレーションを有効または無効にできます。
+`/opt/datadog-agent/etc/conf.d.` でインテグレーションを有効化または無効化します。
 
-## Windows
+## Windows {#windows}
 
-リリース 6.11.0 以降では、Windows Agent のコアおよび APM/trace コンポーネントは `LOCAL_SYSTEM` アカウントではなく、`ddagentuser` アカウントで実行され、インストール時に作成されます。Datadog Agent バージョン 6.x から 6.11 以上へアップグレードする場合は、アップグレード前に [Windows Agent ユーザー][10]のドキュメントを参照してください。
+リリース 6.11.0 以降、Windows Agent のコアおよび APM/トレースコンポーネントは、`LOCAL_SYSTEM` アカウントではなく、`ddagentuser` アカウントで実行され、インストール時に作成されます。Datadog Agent バージョン 6.x から 6.11 以上にアップグレードする場合は、アップグレード前に [Windows Agent ユーザー][10]のドキュメントを確認してください。
 
-Windows インストーラーのすべての利用可能なバージョンへのリンクは、[JSON フォーマット][6]で利用可能です。
+Windows インストーラーの利用可能なすべてのバージョンのリンクは、[JSON 形式][6]で提供されています。
 
-### Agent のインストール
+### Agent をインストールする {#install-the-agent-1}
 
-#### 対話形式
-
-1. [Datadog Agent インストーラー][4]をダウンロードして実行します。
-1. `datadog-agent-6-latest.amd64.msi` を開き (管理者として)、インストーラーを実行します。
-1. 画面の指示に従ってライセンス契約に同意し、Datadog の API キーを入力します。
-1. Datadog のリージョンを入力します: {{< region-param key=dd_site code="true" >}}。
-1. 必要に応じて、プロンプトが表示されたら Datadog Agent Manager を起動します。
-
-#### 無人モード
+#### インタラクティブ {#interactive}
 
 1. [Datadog Agent インストーラー][4]をダウンロードして実行します。
-1. インストーラーをダウンロードしたディレクトリ内で、以下のいずれかのコマンドを実行し、`MY_API_KEY` を Datadog の API キーに置き換えてください。
-   - コマンドプロンプトの場合
+1. `datadog-agent-6-latest.amd64.msi` を開き、(管理者として) インストーラーを実行します。
+1. プロンプトに従ってライセンス契約に同意し、Datadog API キーを入力します。
+1. ご使用の Datadog リージョンを入力します。{{< region-param key=dd_site code="true" >}}。
+1. プロンプトが表示されたら、必要に応じて Datadog Agent Manager を起動します。
+
+#### 無人 {#unattended}
+
+1. [Datadog Agent インストーラー][4]をダウンロードして実行します。
+1. インストーラーをダウンロードしたディレクトリ内で、以下のいずれかのコマンドを実行します。`MY_API_KEY` はご使用の Datadog API キーに置き換えます。
+   - コマンドプロンプト:
      {{< code-block lang="shell" >}}
 start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"
 {{< /code-block >}}
-   - Powershell の場合
+   - PowerShell:
      {{< code-block lang="powershell" >}}
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"'
 {{< /code-block >}}
 
-`HOSTNAME` と `TAGS` はオプションの値です。使用可能なすべてのオプションについては、[Windows Agent のドキュメント][5]を参照してください。
+`HOSTNAME` と `TAGS` はオプションの値です。利用可能なすべてのオプションについては、[Windows Agent ドキュメント][5]を参照してください。
 
-#### Deployment to Azure
+#### Azure へのデプロイ {#deployment-to-azure}
 
-To install the Agent on Azure, follow the [Microsoft Azure documentation][8].
+Azure に Agent をインストールする場合は、[Microsoft Azure ドキュメント][8]の手順に従います。
 
-## Linux and Unix
+## Linux {#linux}
 
 {{< tabs >}}
 
 {{% tab "Debian" %}}
-### ワンステップインストレーション
+### ワンステップインストール {#one-step-install}
 
-ワンステップコマンドでは、Datadog Agent 用の APT パッケージがインストールされ、パスワードの入力を求められます。
-- マシンに Agent がインストールされておらず、インストール後に自動起動させたくない場合は、コマンドを実行する前に `DD_INSTALL_ONLY=true` を付与してください。
-- 既存の Agent コンフィギュレーションファイルがある場合、更新時に既存の値は保持されます。
-- 初回インストール時に、いくつかの Agent オプションを設定できます。詳細については、[install_script 構成オプション][101]を参照してください。
+ワンステップコマンドは、Datadog Agent の APT パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-Agent をインストールするには、以下のコマンドを実行し、`MY_API_KEY` を Datadog の API キーに置き換えてください。
+Agent をインストールするには、`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install}
 
-1. Set up APT so it can download through HTTPS and install `curl` and `gnupg`:
+1. HTTPS 経由でダウンロードし、`curl` および `gnupg` をインストールできるように APT を設定します。
    ```shell
    sudo apt-get update
    sudo apt-get install apt-transport-https curl gnupg
    ```
-1. Set up the Datadog Debian repo on your system and create a Datadog archive keyring:
+1. システムに Datadog Debian リポジトリを設定し、Datadog アーカイブキーリングを作成します。
    ```shell
    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
@@ -128,27 +128,27 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    ```
 
-1. Debian 8 またはそれ以前で実行する場合は、鍵束を `/etc/apt/trusted.gpg.d` にコピーします。
+1. Debian 8 以前を実行している場合は、キーリングを `/etc/apt/trusted.gpg.d` にコピーします。
    ```shell
    sudo cp -a /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d/
    ```
 
-1. Update your local APT repo and install the Agent:
+1. ローカルの APT リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo apt-get update
    sudo apt-get install datadog-agent datadog-signing-keys
    ```
 
-1. オプションとして、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 の構成をインポートします。
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. アップグレードでない場合、または古い構成を使用したくない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` を Datadog の API キーに置き換えてください。
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
-1. Datadog のリージョンを設定します。
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/'
                     /etc/datadog-agent/datadog.yaml"
@@ -166,23 +166,24 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
 {{% /tab %}}
 
 {{% tab "Ubuntu" %}}
-### ワンステップインストレーション
+### ワンステップインストール {#one-step-install-1}
 
-The one-step command installs the APT packages for the Datadog Agent and prompts you for your password. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+ワンステップコマンドは、Datadog Agent の APT パッケージをインストールし、パスワードの入力を求めます。Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-1}
 
-1. Set up APT so it can download through HTTPS and install `curl` and `gnupg`:
+1. HTTPS 経由でダウンロードし、`curl` および `gnupg` をインストールできるように APT を設定します。
    ```shell
    sudo apt-get update
    sudo apt-get install apt-transport-https curl gnupg
    ```
-1. Set up the Datadog Debian repo on your system and create a Datadog archive keyring:
+1. システムに Datadog Debian リポジトリを設定し、Datadog アーカイブキーリングを作成します。
    ```shell
    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
@@ -194,27 +195,27 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    ```
-1. Ubuntu 14 またはそれ以前で実行する場合は、鍵束を `/etc/apt/trusted.gpg.d` にコピーします。
+1. Ubuntu 14 以前を実行している場合は、キーリングを `/etc/apt/trusted.gpg.d` にコピーします。
    ```shell
    sudo cp -a /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d/
    ```
 
-1. Update your local APT repo and install the Agent:
+1. ローカルの APT リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo apt-get update
    sudo apt-get install datadog-agent datadog-signing-keys
    ```
 
-1. オプションとして、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 の構成をインポートします。
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. アップグレードでない場合、または古い構成を使用したくない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` を Datadog の API キーに置き換えてください。
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
-1. Datadog のリージョンを設定します。
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
@@ -235,26 +236,26 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 {{% /tab %}}
 
 {{% tab "Amazon Linux" %}}
-### ワンステップインストレーション
+### ワンステップインストール {#one-step-install-2}
 
-ワンステップコマンドでは、Datadog Agent 用の YUM パッケージがインストールされ、パスワードの入力を求められます。
-- マシンに Agent がインストールされておらず、インストール後に自動起動させたくない場合は、コマンドを実行する前に `DD_INSTALL_ONLY=true` を付与してください。
-- 既存の Agent コンフィギュレーションファイルがある場合、更新時に既存の値は保持されます。
-- 初回インストール時に、いくつかの Agent オプションを設定できます。詳細については、[install_script 構成オプション][101]を参照してください。
+ワンステップコマンドは、Datadog Agent の YUM パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-1. Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+1. `MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
    ```shell
    DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
    ```
 
-1. For Amazon Linux 2022 installations on Agent version <= 6.39. The Agent requires the `libxcrypt-compat` package:
+1. Amazon Linux 2022 でバージョン 6.39 以前の Agent をインストールする場合は、Agent に `libxcrypt-compat` パッケージが必要です。
    ```shell
    dnf install -y libxcrypt-compat
    ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-2}
 
-1. On an x86_64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+1. x86_64 ホストで、次の構成で `/etc/yum.repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -269,7 +270,7 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. On an arm64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+1. arm64 ホストで、次の構成で `/etc/yum.repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -284,36 +285,36 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. If upgrading from Agent 5 or 6, delete the obsolete RPM GPG key:
+1. Agent 5 または 6 からアップグレードする場合は、古い RPM GPG キーを削除します。
    ```shell
    sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
-1. Update your local yum repo and install the Agent:
+1. ローカルの yum リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo yum makecache
    sudo yum install datadog-agent
    ```
 
-1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Configure the Datadog region:
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
-1. Ensure the Agent user's permissions are correct::
+1. Agent ユーザーの権限が正しいことを確認します。
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
    ```
-1. Start the Agent: 
+1. Agent を起動します。
    - Amazon Linux 2.0:
      ```shell
      sudo systemctl restart datadog-agent.service
@@ -326,22 +327,23 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 [101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
-{{% tab "CentOS and RedHat" %}}
-### One-step install
+{{% tab "CentOS および RedHat" %}}
+### ワンステップインストール {#one-step-install-3}
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
-- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
-- If you have an existing Agent configuration file, existing values are retained during the update.
-- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
+ワンステップコマンドは、Datadog Agent の YUM パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-3}
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+1. 次の構成で `/etc/yum.repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -356,46 +358,46 @@ DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.co
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-   **Note**: The `repo_gpgcheck=0` option is a workaround for [a bug in DNF][102].
+   **注**: `repo_gpgcheck=0` オプションは、[DNF のバグ][102]に対する回避策です。
 
-1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+1. Agent 5 または Agent 6 の以前のバージョンからアップグレードする場合は、古い RPM GPG キーを削除します。
    ```shell
    sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
-1. Update your local yum repo and install the Agent:
+1. ローカルの yum リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo yum makecache
    sudo yum remove datadog-agent-base
    sudo yum install datadog-agent
    ```
 
-1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Configure the Datadog region:
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Ensure the Agent user's permissions are correct::
+1. Agent ユーザーの権限が正しいことを確認します。
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Start the Agent: 
-   - Centos or Red Hat 7 and higher:
+1. Agent を起動します。
+   - CentOS または Red Hat 7 以降:
      ```shell
      sudo systemctl restart datadog-agent.service
      ```
-   - Centos or Red Hat 6:
+   - CentOS または Red Hat 6:
      ```shell
      sudo initctl start datadog-agent
      ```
@@ -404,22 +406,23 @@ DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.co
 [102]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 
-{{% tab "Alma, Oracle, and Rocky" %}}
-### One-step install
+{{% tab "Alma、Oracle、Rocky" %}}
+### ワンステップインストール {#one-step-install-4}
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
-- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
-- If you have an existing Agent configuration file, existing values are retained during the update.
-- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
+ワンステップコマンドは、Datadog Agent の YUM パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-4}
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+1. 次の構成で `/etc/yum.repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -434,39 +437,39 @@ DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.co
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+1. Agent 5 または Agent 6 の以前のバージョンからアップグレードする場合は、古い RPM GPG キーを削除します。
    ```shell
    sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
-1. Update your local yum repo and install the Agent:
+1. ローカルの yum リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo yum makecache
    sudo yum remove datadog-agent-base
    sudo yum install datadog-agent
    ```
 
-1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Configure the Datadog region:
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Ensure the Agent user's permissions are correct::
+1. Agent ユーザーの権限が正しいことを確認します。
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
    ```
-
-1. Restart the Agent: 
+   
+1. Agent を再起動します。
    ```shell
    sudo systemctl restart datadog-agent.service
    ```
@@ -475,21 +478,22 @@ DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.co
 {{% /tab %}}
 
 {{% tab "Fedora" %}}
-### One-step install
+### ワンステップインストール {#one-step-install-5}
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
-- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
-- If you have an existing Agent configuration file, existing values are retained during the update.
-- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
+ワンステップコマンドは、Datadog Agent の YUM パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-5}
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+1. 次の構成で `/etc/yum.repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -504,38 +508,38 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+1. Agent 5 または Agent 6 の以前のバージョンからアップグレードする場合は、古い RPM GPG キーを削除します。
    ```shell
    sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
-1. Update your local yum repo and install the Agent:
+1. ローカルの yum リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo yum makecache
    sudo yum install datadog-agent
    ```
 
-1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Configure the Datadog region:
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Ensure the Agent user's permissions are correct::
+1. Agent ユーザーの権限が正しいことを確認します。
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
    ```
-
-1. Restart the Agent: 
+   
+1. Agent を再起動します。
    ```shell
    sudo systemctl restart datadog-agent.service
    ```
@@ -544,21 +548,22 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 {{% /tab %}}
 
 {{% tab "Suse" %}}
-### One-step install
+### ワンステップインストール {#one-step-install-6}
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
-- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
-- If you have an existing Agent configuration file, existing values are retained during the update.
-- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
+ワンステップコマンドは、Datadog Agent の YUM パッケージをインストールし、パスワードの入力を求めます。
+- Agent がマシンにまだインストールされておらず、インストール後に自動的に起動しないようにするには、コマンドを実行する前に、コマンドの先頭に `DD_INSTALL_ONLY=true` を追加します。
+- 既存の Agent 構成ファイルがある場合、更新時に既存の値が保持されます。
+- 初期インストールプロセス中に、Agent オプションの一部を構成できます。詳細については、[install_script 構成オプション][101]を確認してください。
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+`MY_API_KEY` をご使用の Datadog API キーに置き換えて、次のコマンドを実行します。
+
 ```shell
 DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
-### Multi-step install
+### マルチステップインストール {#multi-step-install-6}
 
-1. Set up the Datadog YUM repo by creating `/etc/zypp/repos.d/datadog.repo` with the following configuration:
+1. 次の構成で `/etc/zypp/repos.d/datadog.repo` を作成し、Datadog YUM リポジトリをセットアップします。
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -573,12 +578,12 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+1. Agent 5 または Agent 6 の以前のバージョンからアップグレードする場合は、古い RPM GPG キーを削除します。
    ```shell
    sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
-1. Update your local zypper repo and install the Agent:
+1. ローカルの zypper リポジトリを更新し、Agent をインストールします。
    ```shell
    sudo zypper refresh
    sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
@@ -589,17 +594,17 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
    sudo zypper install datadog-agent
    ```
 
-1. オプションとして、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 の構成をインポートします。
+1. オプションで、Agent 5.17 以上からアップグレードする場合は、既存の Agent 5 構成をインポートします。
    ```shell
    sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. アップグレードでない場合、または古い構成を使用したくない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` を Datadog の API キーに置き換えてください。
+1. アップグレードせず、古い構成も使用しない場合は、サンプル構成を所定の場所にコピーして Agent をインストールします。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```shell
    sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-1. Datadog のリージョンを設定します。
+1. Datadog リージョンを構成します。
    ```shell
    sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
    ```
@@ -608,8 +613,8 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
    ```
-
-1. Restart the Agent: 
+   
+1. Agent を再起動します。
    ```shell
    sudo systemctl restart datadog-agent.service
    ```
@@ -617,110 +622,48 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
 [101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
-{{% tab "AIX" %}}
-### ワンステップインストレーション
-
-The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. マシンに Agent がインストールされておらず、インストール後に自動起動させたくない場合は、コマンドを実行する前に `DD_INSTALL_ONLY=true` を付与してください。
-
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
-```shell
-DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
-```
-
-### Upgrade from a previous installation
-
-To install the Agent while keeping your existing configuration, run the following command:
-```shell
-DD_UPGRADE=true DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
-```
-
-For a full list of the available installation script environment variables, see [Basic Agent Usage for AIX][101].
-
-### Multi-step install
-
-1. Download the preferred BFF from the [datadog-unix-agent][102] repo releases.
-
-1. Install the artifact as root with `installp`:
-   ```shell
-   installp -aXYgd datadog-unix-agent-latest.powerpc.aix..bff datadog-unix-agent
-   ```
-
-1. If you don't have an existing configuration file, copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
-   ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Datadog のリージョンを設定します。
-   ```shell
-   sudo sh -c "sed \'s/# site:.*/site: datad0g.com/\' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Ensure that the Datadog Agent has the correct permissions:
-   ```shell
-   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 660 /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Stop the Agent service:
-   ```shell
-   sudo stopsrc -s datadog-agent
-   ```
-
-1. Verify the Agent service has stopped:
-   ```
-   sudo lssrc -s datadog-agent
-   ```
-
-1. Restart the Agent service:
-   ```shell
-   sudo startsrc -s datadog-agent
-   ```
-
-[101]: /ja/agent/basic_agent_usage/aix/#installation
-[102]: https://github.com/DataDog/datadog-unix-agent/releases
-{{% /tab %}}
-
 {{< /tabs >}}
 
-## Cloud and containers
+## クラウドとコンテナ {#cloud-and-containers}
 
 {{< tabs >}}
 
 {{% tab "Kubernetes" %}}
 
-Run the Datadog Agent directly in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs. You can deploy the Agent with a Helm chart, [the Datadog Operator][101] or directly with [a DaemonSet][102]. For more information about installing the Datadog Agent on different distributions, see the [Kubernetes distributions documentation][103].
+Kubernetes クラスターで直接 Datadog Agent を実行し、クラスターとアプリケーションのメトリクス、トレース、およびログの収集を開始します。Helm チャート、[Datadog Operator][101] を使用するか、または [DaemonSet][102] を直接使用して Agent をデプロイできます。さまざまなディストリビューションでの Datadog Agent のインストールに関する詳細については、[Kubernetes ディストリビューションのドキュメント][103]を参照してください。
 
-### Installing the Datadog Agent
+### Datadog Agent をインストールする {#installing-the-datadog-agent}
 
-To install the chart with a custom release name `RELEASE_NAME`:
+カスタムリリース名 `RELEASE_NAME` でチャートをインストールするには、次のようにします。
 
-1. [Install Helm][104].
-1. Add the Datadog Helm repository:
+1. [Helm をインストール][104]します。
+1. Datadog Helm リポジトリを追加します。
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    ```
 
-1. Fetch the latest version of newly added charts:
+1. 新しく追加されたチャートの最新バージョンを取得します。
    ```shell
    helm repo update
    ```
 
-1. Create an empty `values.yaml` file, and override any of the [default values][105] if desired. See the [Datadog `helm-charts` repo][106] for examples. 
-1. Deploy the Datadog Agent, replacing `MY_API_KEY` with your Datadog API key:
-   **With Helm v3+**:
+1. 空の `values.yaml` ファイルを作成し、必要に応じて[デフォルト値][105]をオーバーライドします。例については、[Datadog `helm-charts` リポジトリ][106]を参照してください。
+1. `MY_API_KEY` をご使用の Datadog API キーに置き換えて、Datadog Agent をデプロイします。
+   **Helm v3+ の場合**:
    ```shell
    helm install RELEASE_NAME -f datadog-values.yaml --set datadog.site='datad0g.com' --set agents.image.tag='6' --set datadog.apiKey=MY_API_KEY datadog/datadog
    ```
 
-   **With Helm v1 or v2**:
+   **Helm v1 または v2 の場合**:
    ```shell
    helm install -f datadog-values.yaml --name RELEASE_NAME --set datadog.site='datad0g.com' --set agents.image.tag='6' --set datadog.apiKey=MY_API_KEY datadog/datadog
    ```
 
-   This chart adds the Datadog Agent to all nodes in your cluster using a DaemonSet. Soon after installation, Datadog begins to report hosts and metrics data in your account.
+   このチャートは、DaemonSet を使用してクラスター内のすべてのノードに Datadog Agent を追加します。インストールが完了するとすぐに、Datadog で、ご使用のアカウントのホストおよびメトリクスのデータの報告が開始されます。
 
-### Enabling log collection
+### ログ収集を有効にする {#enabling-log-collection}
 
-To enable log collection with Helm, update your `datadog-values.yaml` file with the following log collection configuration:
+Helm でログ収集を有効にするには、次のログ収集構成で `datadog-values.yaml` ファイルを更新します。
 
 ```yaml
 datadog:
@@ -729,18 +672,19 @@ datadog:
     containerCollectAll: true
 ```    
 
-Then upgrade your Datadog Helm chart:
+次に、Datadog Helm チャートをアップグレードします。
+
 ```shell
 helm upgrade -f datadog-values.yaml RELEASE_NAME datadog/datadog
 ```
 
-### Enabling trace collection
+### トレース収集を有効にする {#enabling-trace-collection}
 
-Follow the dedicated [APM setup documentation][107] to learn how to collect your application traces in a Kubernetes environment.
+Kubernetes 環境でアプリケーションのトレースを収集する方法については、専用の [APM 設定ドキュメント][107]を参照してください。
 
-### Further Reading
+### 参考資料 {#further-reading}
 
-For information on available Agent features, see the [Kubernetes documentation][108].
+利用可能な Agent 機能の詳細については、[Kubernetes ドキュメント][108]を参照してください。
 
 [101]: /ja/containers/kubernetes/?tab=operator
 [102]: /ja/containers/kubernetes/?tab=daemonset
@@ -753,43 +697,45 @@ For information on available Agent features, see the [Kubernetes documentation][
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-### ワンステップインストレーション
+### ワンステップインストール {#one-step-install-7}
 
-The one-step installation command runs a signed Docker container which embeds the Datadog Agent to monitor your host. The Docker integration is enabled by default, as well as [Autodiscovery][101] in automatic configuration mode.
+ワンステップインストールコマンドは、ホストを監視するために Datadog Agent が組み込まれている署名済み Docker コンテナを実行します。Docker インテグレーションはデフォルトで有効になっており、[Autodiscovery][101] も自動構成モードで有効になっています。
 
-<div class="alert alert-info">You must not run more than one Datadog Agent per node. Running multiple Agents may result in unexpected behavior.</a></div>
+<div class="alert alert-info">1 つのノードで複数の Datadog Agent を実行しないでください。複数の Agent を実行すると、予期しない動作が発生する可能性があります。</a></div>
 
-For a one-step install, run the following command. Replace `MY_API_KEY` with your Datadog API key:
+ワンステップインストールを行うには、次のコマンドを実行します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
 
-On Amazon Linux v2:
+Amazon Linux v2 の場合:
+
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" gcr.io/datadoghq/agent:6
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" registry.datadoghq.com/agent:6
 ```
 
-On other operating systems:
+その他のオペレーティングシステムの場合:
+
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" gcr.io/datadoghq/agent:6
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" registry.datadoghq.com/agent:6
 ```
 
-#### Troubleshooting
+#### トラブルシューティング {#troubleshooting}
 
-If the one-step installation command does not work, it's possible that your system mounts the `cgroup` directory in an unexpected place or does not use CGroups for memory management. CGroups are required for the Docker check to succeed. To enable CGroups, see [the Setup documentation][102]. 
+ワンステップインストールコマンドが機能しない場合、システムが `cgroup` ディレクトリを予期しない場所にマウントしているか、メモリ管理に CGroups を使用していない可能性があります。Docker チェックが成功するためには、CGroups が必要です。CGroups を有効にするには、[設定ドキュメント][102]を参照してください。
 
-If CGroups are enabled, but the check is failing because of an unexpected `cgroup` directory location:
-1. Run `mount | grep "cgroup type tmpfs"` to retrieve the location of the `cgroup` directory.
-1. Replace the first occurrence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
+CGroups が有効になっているが、`cgroup` ディレクトリが予期しない場所にあるためにチェックが失敗する場合は、次のようにします。
+1. `mount | grep "cgroup type tmpfs"` を実行して、`cgroup` ディレクトリの場所を取得します。
+1. ワンステップインストールコマンドで最初に出現している `/sys/fs/cgroup` を、`cgroup` ディレクトリの場所に置き換えます。
 
-### Send custom metrics with DogStatsD
+### DogStatsD を使用してカスタムメトリクスを送信する {#send-custom-metrics-with-dogstatsd}
 
-By default, DogStatsD only listens to localhost. To listen to DogStatsD packets from other containers:
-1. Add `-e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` to the container's parameters. 
-1. Bind the container's statsd port to the hosts's IP by adding the `-p 8125:8125/udp` option to the container's parameters.
-1. Configure your client library to send UDP packets to the hosts's IP.
+デフォルトでは、DogStatsD は localhost のみをリッスンします。他のコンテナからの DogStatsD パケットをリッスンするには、次のようにします。
+1. コンテナのパラメーターに `-e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` を追加します。
+1. コンテナのパラメーターに `-p 8125:8125/udp` オプションを追加して、コンテナの statsd ポートをホストの IP にバインドします。
+1. UDP パケットをホストの IP に送信するようにクライアントライブラリを構成します。
 
-### Customize your Agent configuration
+### Agent 構成をカスタマイズする {#customize-your-agent-configuration}
 
-- For information on configuring the Agent, see [Docker Agent for Docker, containerd, and Podman][103].
-- To tune Autodiscovery, see [Docker Integrations Autodiscovery][104].
+- Agent の構成の詳細については、「[Docker、containerd、Podman に対応した Docker Agent][103]」を参照してください。
+- Autodiscovery を調整するには、[Docker インテグレーションと Autodiscovery][104] を参照してください。
 
 [101]: /ja/containers/docker/integrations/?tabs=docker
 [102]: /ja/containers/docker/?tab=standard#setup
@@ -799,9 +745,9 @@ By default, DogStatsD only listens to localhost. To listen to DogStatsD packets 
 {{% /tab %}}
 
 {{% tab "CoreOS" %}}
-Running CoreOS Container Linux is supported with the Docker runtime. For installation instructions, see [Docker][1].
+CoreOS Container Linux の実行は、Docker ランタイムでサポートされています。インストール手順については、[Docker][1] を参照してください。
 
-To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
+Kubernetes 上で CoreOS Tectonic を実行するには、[Kubernetes][2] を参照してください。
 
 [1]: ?tab=docker#cloud-and-containers
 [2]: ?tab=kubernetes#cloud-and-containers
@@ -809,13 +755,13 @@ To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
 {{% /tab %}}
 
 {{% tab "OpenShift" %}}
-Starting with version 6.1, the Datadog Agent supports monitoring OpenShift Origin and Enterprise clusters. Depending on your needs and the security constraints of your cluster, three deployment scenarios are supported:
+バージョン 6.1 以降では、Datadog Agent は OpenShift Origin および Enterprise クラスターの監視をサポートしています。ニーズとクラスターのセキュリティの制約に応じて、次の 3 つのデプロイシナリオがサポートされています。
 
-- [Restricted SCC operations][101]
-- [Host network SCC operations][102]
-- [Custom Datadog for all features][103]
+- [制限付き SCC オペレーション][101]
+- [ホストネットワーク SCC オペレーション][102]
+- [すべての機能に対応したカスタム Datadog][103]
 
-To install OpenShift, see the [Kubernetes installation instructions](?tab=kubernetes#cloud-and-containers). The Kubernetes integration targets OpenShift 3.7.0+ by default. For older versions of OpenShift, you must complete additional installation steps. For more information, see the [OpenShift integration documentation][104].
+OpenShift をインストールするには、[Kubernetes のインストール手順](?tab=kubernetes#cloud-and-containers)を参照してください。Kubernetes インテグレーションは、デフォルトで OpenShift 3.7.0 以上を対象としています。それより古いバージョンの OpenShift を使用する場合は、追加のインストール手順を完了する必要があります。詳しくは、[OpenShift インテグレーションドキュメント][104]を参照してください。
 
 [101]: /ja/integrations/openshift/?tab=helm#restricted-scc-operations
 [102]: /ja/integrations/openshift/?tab=helm#host
@@ -824,9 +770,9 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
 {{% /tab %}}
 
 {{% tab "Cloud Foundry" %}}
-<div class="alert alert-info">The Datadog Agent BOSH release only works on Ubuntu and Red Hat stemcells.</a></div>
+<div class="alert alert-info">Datadog Agent BOSH リリースは、Ubuntu および Red Hat のステムセルでのみ動作します。</a></div>
 
-1. Upload the Datadog Agent release to your BOSH Director:
+1. Datadog Agent リリースを BOSH Director にアップロードします。
 
    ```shell
    # BOSH CLI v1
@@ -836,7 +782,7 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
    bosh upload-release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
    ```
 
-2. Configure Datadog as an addon in your runtime config. Replace `MY_API_KEY` with your Datadog API key::
+2. ランタイム構成で Datadog をアドオンとして構成します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
 
    ```yaml
    # runtime.yml
@@ -864,7 +810,7 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
          #       directory: "."
    ```
 
-3. Add the runtime to your [runtime config][101]:
+3. [ランタイム構成][101]にランタイムを追加します。
 
    ```shell
    # BOSH cli v1
@@ -874,7 +820,7 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
    bosh update-runtime-config runtime.yml
    ```
 
-4. Redeploy any existing deployments:
+4. 既存のデプロイメントを再デプロイします。
    ```shell
    # BOSH cli v1
    bosh deployment myDeployment.yml
@@ -883,47 +829,48 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
    # BOSH cli v2
    bosh -n -d myDeployment deploy myDeployment.yml
    ```
-
+   
 [101]: https://bosh.io/docs/runtime-config/   
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Configuration management
+## 構成管理 {#configuration-management}
 
 {{< tabs >}}
 {{% tab "Ansible" %}}
 
-Installing the Agent with Ansible requires Ansible version 2.10 or higher.
+Ansible を使用して Agent をインストールするには、Ansible バージョン 2.10 以上が必要です。
 
-<div class="alert alert-info">The Datadog Ansible collection supports most Debian, RHEL-based and SUSE-based Linux distributions, macOS, and Windows.<br></div>
+<div class="alert alert-info">Datadog Ansible コレクションは、ほとんどの Debian、RHEL ベースおよび SUSE ベースの Linux ディストリビューション、macOS、および Windows に対応しています。<br></div>
 
-### Prerequisites
+### 前提条件{#prerequisites}
 
-#### Windows
-Before you can use the Datadog Ansible Collection to manage Windows hosts, you must install the `ansible.windows` collection:
+#### Windows {#windows-1}
+Datadog Ansible コレクションを使用して Windows ホストを管理するには、その前に `ansible.windows` コレクションをインストールする必要があります。
+
 ```shell
 ansible-galaxy collection install ansible.windows
 ```
 
-#### openSUSE and SLES
+#### openSUSE および SLES {#opensuse-and-sles}
 
-Before you can use the Datadog Ansible Collection to manage openSUSE/SLES hosts, you must install the `community.general` collection:
+Datadog Ansible コレクションを使用して openSUSE/SLES ホストを管理するには、その前に `community.general` コレクションをインストールする必要があります。
 
 ```shell
 ansible-galaxy collection install community.general
 ```
 
-### Install Datadog
+### Datadog をインストールする {#install-datadog}
 
-1. Install the Datadog Ansible collection from Ansible Galaxy on your Ansible server:
+1. Ansible サーバーに Ansible Galaxy から Datadog Ansible コレクションをインストールします。
    ```shell
    ansible-galaxy collection install datadog.dd
    ```
-   - The Datadog Ansible collection is also available through the [Red Hat Automation Hub][101] where it is officially certified by Red Hat.
-   - Installing the collection is recommended. If needed, you can also install Datadog using the [standalone role][102].
+   - Datadog Ansible コレクションは、Red Hat によって公式に認定されている [Red Hat Automation Hub][101] からも入手できます。
+   - コレクションのインストールが推奨されます。必要に応じて、[スタンドアロンロール][102]を使用して Datadog をインストールすることもできます。
 
-2. To deploy the Datadog Agent on hosts, add the Datadog role and your API key to your playbook. Replace `MY_API_KEY` with your Datadog API key:
+2. ホストに Datadog Agent をデプロイするには、Datadog ロールと API キーをプレイブックに追加します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```yaml
    - hosts: servers
    tasks:
@@ -936,15 +883,16 @@ ansible-galaxy collection install community.general
       datadog_site: "datad0g.com"
    ```
 
-   To ensure that the Agent can group your hosts together, only use node hostnames that the Datadog Agent is tracking. You can check what hostnames the Agent is tracking using the following command:
+   Agent がホストをグループ化できるように、Datadog Agent が追跡しているノードのホスト名のみを使用します。Agent が追跡しているホスト名は、次のコマンドを使用して確認できます。
 
    ```shell
    sudo datadog-agent status
    ```
 
-## Specific Agent checks
+## 特定の Agent チェック {#specific-agent-checks}
 
-To use a specific Agent check or integration on one of your nodes, you can use the `datadog_checks` variable. Here is an example for the process check:
+ノードで特定の Agent チェックまたはインテグレーションを使用するには、`datadog_checks` 変数を使用します。プロセスチェックの例を次に示します。
+
 ```yaml
 - hosts: servers
   tasks:
@@ -968,11 +916,11 @@ To use a specific Agent check or integration on one of your nodes, you can use t
             ignore_denied_access: true
 ```
 
-You can find more examples of the Agent role usage on the GitHub repo for the [standalone role][103].
+その他の Agent ロールの使用例は、[スタンドアロンロール][103]の GitHub リポジトリを参照してください。
 
-### Metrics and events
+### メトリクスとイベント {#metrics-and-events}
 
-To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [GitHub page][104].
+Ansible の実行後に Datadog でメトリクスとイベントを取得するには、Ansible コールバックプロジェクトの [GitHub ページ][104]を参照してください。
 
 [101]: https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/
 [102]: /ja/agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
@@ -981,24 +929,24 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
 
 {{% /tab %}}
 {{% tab "Puppet" %}}
-<div class="alert alert-info">Starting with version 2.9.0, the <code>datadog_agent</code> module supports both Windows and Linux nodes. Previous versions of the datadog_agent module only support Linux nodes.</a></div>
+<div class="alert alert-info">バージョン 2.9.0 以降では、 <code>datadog_agent</code> モジュールは Windows ノードと Linux ノードの両方に対応しています。datadog_agent モジュールの以前のバージョンで対応していたのは Linux ノードのみでした。</a></div>
 
-## Requirements:
-- Requires Puppet Open Source version >= 4.6 or Puppet Enterprise version >= 2016.4
+## 要件: {#requirements}
+- Puppet Open Source バージョン 4.6 以上、または Puppet Enterprise バージョン 2016.4 以上が必要です。
 
-## Install the Agent
+## Agent をインストールする {#install-the-agent-2}
 
-1. Install the `datadog_agent` module from the [Puppet Forge][101] on your Puppet server:
-   - For fresh installs, run the `module install command`:
+1. [Puppet Forge][101] から `datadog_agent` モジュールを Puppet サーバーにインストールします。
+   - 新規インストールの場合は、`module install command` を実行します。
      ```shell
      puppet module install datadog-datadog_agent
      ```
-   - If the module is already installed, upgrade it:
+   - モジュールがすでにインストールされている場合は、アップグレードしてください。
      ```shell
      puppet module upgrade datadog-datadog_agent
      ```
 
-2. To deploy the Datadog Agent on nodes, add this parametrized class to your manifests. Replace `MY_API_KEY` with your Datadog API key:
+2. ノードに Datadog Agent をデプロイするには、このパラメーター化されたクラスをマニフェストに追加します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```puppet
    node "db1.mydomain.com" {
       class { "datadog_agent":
@@ -1009,14 +957,14 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
    }
    ```
 
-   To ensure that the Agent can group your hosts together, only use node hostnames that the Datadog Agent is tracking. You can check what hostnames the Agent is tracking using the following command:
+   Agent がホストをグループ化できるように、Datadog Agent が追跡しているノードのホスト名のみを使用します。Agent が追跡しているホスト名は、次のコマンドを使用して確認できます。
 
    ```shell
    sudo datadog-agent status
    ```
 
-3. Enable reporting to Datadog on your Puppet server:
-   1. Add the following parameters to `/etc/puppet/puppet.conf`:
+3. Puppet サーバーで Datadog へのレポートを有効にします。
+   1. 以下のパラメーターを `/etc/puppet/puppet.conf` に追加します。
       ```conf
       [master]
       report = true
@@ -1028,7 +976,7 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
       pluginsync = true
       ```
 
-   1. In your manifest, add the `puppet_run_reports` option to your Puppet server. For example:
+   1. マニフェストで、Puppet サーバーに `puppet_run_reports` オプションを追加します。例:
       ```puppet
       node "puppet" {
          class { "datadog_agent":
@@ -1039,12 +987,12 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
          }
       }
       ```
-1. Run Puppet on your Puppet server to install all necessary dependencies.
-1. Restart your Puppet server to begin receiving Puppet data in Datadog.
+1. Puppet サーバーで Puppet を実行し、必要な依存関係をすべてインストールします。
+1. Puppet サーバーを再起動して、Datadog で Puppet データの受信を開始します。
 
-## Specific Agent checks
+## 特定の Agent チェック {#specific-agent-checks-1}
 
-To use a specific Agent check or integration on one of your nodes, see the relevant [integration manifest][102] for a code sample. Here is an example for the elasticsearch integration:
+いずれかのノードで特定の Agent チェックまたはインテグレーションを使用するには、関連する[インテグレーションマニフェスト][102]でコードサンプルを参照してください。Elasticsearch インテグレーションの例を以下に示します。
 
 ```puppet
 node "elastic-node1.mydomain.com" {
@@ -1057,7 +1005,7 @@ node "elastic-node1.mydomain.com" {
 }
 ```
 
-Refer to the [GitHub repository of the module][103] for more examples and advanced use cases.
+その他の例や高度なユースケースは、[モジュールの GitHub リポジトリ][103]を参照してください。
 
 [101]: https://forge.puppetlabs.com/modules/datadog/datadog_agent/readme
 [102]: https://github.com/DataDog/puppet-datadog-agent/tree/main/manifests/integrations
@@ -1067,20 +1015,20 @@ Refer to the [GitHub repository of the module][103] for more examples and advanc
 
 {{% tab "Chef" %}}
 
-<div class="alert alert-info">Requires Chef version 10.14.x or higher.</a></div>
+<div class="alert alert-info">Chef バージョン 10.14.x 以上が必要です。</a></div>
 
-1. Add the Datadog cookbook:
-   - If you are using [Berkshelf][101], add the cookbook to your Berksfile:
+1. Datadog クックブックを追加します。
+   - [Berkshelf][101] を使用している場合は、Berksfile にクックブックを追加します。
       ```shell
       cookbook 'datadog', '~> 4.0'
       ```
 
-   - If you're not using Berkshelf, install the cookbook in to your repository using Knife:
+   - Berkshelf を使用していない場合は、Knife を使用してリポジトリにクックブックをインストールします。
      ```shell
      knife cookbook site install datadog 
      ```
 
-1. Set the Datadog-specific attributes in either a role, environment, or another recipe. Replace `MY_API_KEY` with your Datadog API key:
+1. ロール、環境、または別のレシピのいずれかで Datadog 固有の属性を設定します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```chef
    node.default['datadog']['api_key'] = "MY_API_KEY"
 
@@ -1094,7 +1042,7 @@ Refer to the [GitHub repository of the module][103] for more examples and advanc
    node.default['datadog']['site'] = "datad0g.com"
    ```
 
-1. Upload the updated cookbook to your Chef server:
+1. 更新されたクックブックを Chef サーバーにアップロードします。
    ```shell
    berks upload
    # or
@@ -1104,17 +1052,17 @@ Refer to the [GitHub repository of the module][103] for more examples and advanc
    echo -e "e[0;31mmissing datadog cookbook - OKe[0m"
    ```
 
-1. Add the cookbook to your node's `run_list` or `role`:
+1. ノードの `run_list` または `role` にクックブックを追加します。
    ```chef
    "run_list": [
     "recipe[datadog::dd-agent]"
    ]
    ```
 
-1. Wait for the next scheduled `chef-client` run.
+1. 次に予定されている `chef-client` の実行を待ちます。
 
 
-For more information and examples, see the [Agent GitHub repository][102].
+詳細および例については、[Agent GitHub リポジトリ][102]を参照してください。
 
 [101]: https://docs.chef.io/workstation/berkshelf/
 [102]: https://github.com/DataDog/chef-datadog
@@ -1123,13 +1071,13 @@ For more information and examples, see the [Agent GitHub repository][102].
 
 {{% tab "SaltStack" %}}
 
-<div class="alert alert-info">The Datadog Saltstack formula only supports Debian-based and RedHat-based systems.<br><br>
-The following instructions add the Datadog formula to the <code>base</code> Salt environment. To add it to another Salt environment, replace references to <code>base</code> with the name of your Salt environment.</div>
+<div class="alert alert-info">Datadog Saltstack 計算式では、Debian ベースおよび RedHat ベースのシステムのみがサポートされます。<br><br>
+以下の手順では、Datadog 計算式を <code>base</code> Salt 環境に追加します。別の Salt 環境に追加するには、 <code>base</code> への参照をご使用の Salt 環境の名前に置き換えます。</div>
 
 <!-- vale Datadog.inclusive = NO -->
 
-### Install using `gitfs_remotes`
-1. Install the [Datadog formula][101] in the base environment of your Salt Master node, using the `gitfs_remotes` option in your Salt Master configuration file (by default `/etc/salt/master`):
+### `gitfs_remotes` を使用してインストールする{#install-using-gitfs-remotes}
+1. Salt Master 構成ファイル (デフォルトは `/etc/salt/master`) の `gitfs_remotes` オプションを使用して、Salt Master ノードのベース環境に [Datadog 計算式][101]をインストールします。
    ```yaml
    fileserver_backend:
    - roots # Active by default, necessary to be able to use the local salt files we define in the next steps
@@ -1142,23 +1090,23 @@ The following instructions add the Datadog formula to the <code>base</code> Salt
        - ref: 3.0 # Pin here the version of the formula you want to use
    ```
 
-1. Restart your Salt Master service:
+1. Salt Master サービスを再起動します。
    ```shell
    systemctl restart salt-master
    ```
-   or 
+   または 
    ```shell
    service salt-master restart
    ```
 
-### Install by cloning the Datadog formula
+### Datadog 計算式を複製してインストールする {#install-by-cloning-the-datadog-formula}
 
-1. Clone the [Datadog formula][101] on your Salt Master node:
+1. Salt Master ノードで [Datadog 計算式][101]を複製します。
    ```shell
    mkdir -p /srv/formulas && cd /srv/formulas
    git clone https://github.com/DataDog/datadog-formula.git
    ```
-1. Add the cloned formula to the base environment in the `file_roots` of your Salt Master configuration file (by default `/etc/salt/master`):
+1. 複製した計算式を Salt Master 構成ファイル (デフォルトは `/etc/salt/master`) の `file_roots` にあるベース環境に追加します。
    ```yaml
    file_roots:
      base:
@@ -1166,16 +1114,16 @@ The following instructions add the Datadog formula to the <code>base</code> Salt
        - /srv/formulas/datadog-formula/
    ```
 
-## Deploy the Agent to your hosts
+## ホストに Agent をデプロイする {#deploy-the-agent-to-your-hosts}
 
-1. Add the Datadog formula to your top file (by default `/srv/salt/top.sls`):
+1. Datadog 計算式をトップファイル (デフォルトは `/srv/salt/top.sls`) に追加します。
    ```yaml
    base:
      '*':
        - datadog
    ```
 
-1. Add a `datadog.sls` pillar file to your pillar directory (by default `/srv/pillar/`) and add your API key. Replace `MY_API_KEY` with your Datadog API key:
+1. `datadog.sls` pillar ファイルを pillar ディレクトリ (デフォルトは `/srv/pillar/`) に追加し、API キーを追加します。`MY_API_KEY` をご使用の Datadog API キーに置き換えます。
    ```yaml
    datadog:
      config:
@@ -1184,14 +1132,14 @@ The following instructions add the Datadog formula to the <code>base</code> Salt
        agent_version: <AGENT6_VERSION>
    ```
 
-1. Add the `datadog.sls` pillar file to the top pillar file (by default `/srv/pillar/top.sls`):
+1. `datadog.sls` pillar ファイルをトップ pillar ファイル (デフォルトは `/srv/pillar/top.sls`) に追加します。
    ```yaml
    base:
      '*':
        - datadog
    ```
 
-1. To use a specific Agent check or integration on one of your hosts, you can use the checks variable. Here is an example for the directory integration:
+1. いずれかのホストで特定の Agent チェックまたはインテグレーションを使用するには、チェック変数を使用します。ディレクトリインテグレーションの例を以下に示します。
    ```yaml
    datadog:
      config:
@@ -1206,20 +1154,20 @@ The following instructions add the Datadog formula to the <code>base</code> Salt
                name: "pillars"
    ```         
 
-Refer to the formula [GitHub repository][101] for logs configuration, check examples, and advanced use cases.
+ログ設定、チェックの例、高度なユースケースについては、計算式の [GitHub リポジトリ][101]を参照してください。
 <!-- vale Datadog.inclusive = YES -->
 [101]: https://github.com/DataDog/datadog-formula
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Install from source
+## ソースからインストールする {#install-from-source}
 
-Follow [the instructions in the Agent GitHub repository][11] to build the Agent 6 `.deb` and `.rpm` packages on Linux with Docker.
+[Agent GitHub リポジトリの手順][11]に従い、Docker を使用して Linux で Agent 6 の `.deb` および `.rpm` パッケージをビルドします。
 
-Alternatively, you can build the Agent binary for version 6 following the [Getting Started instructions][12].
+あるいは、[「はじめに」の手順][12]に従って、バージョン 6 の Agent バイナリをビルドすることもできます。
 
-## Further reading
+## 参考資料 {#further-reading-1}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -41,7 +41,7 @@ Monitor the health and performance of your OpenTelemetry Collector:
 
 - [Collector Health Metrics][4] - Track the performance of your OpenTelemetry Collector
 - [Datadog Extension][17] - View Collector configuration and build information in Datadog Infrastructure Monitoring
-- [OpAMP Extension][22] - View Collector configuration and health in Fleet Automation, as an alternative to the Datadog Extension
+- [OpAMP Extension][25] - View Collector configuration and health in Fleet Automation, as an alternative to the Datadog Extension
 
 ### Containers and hosts
 
@@ -65,10 +65,13 @@ Monitor web servers and proxy technologies:
 
 Monitor database and messaging systems:
 
+- [MongoDB Metrics][22] - Track MongoDB database performance
 - [MySQL Metrics][11] - Track MySQL database performance
 - [PostgreSQL Metrics][19] - Track PostgreSQL database performance
+- [Redis Metrics][23] - Track Redis performance and memory usage
 - [SQL Server Metrics][20] - Track SQL Server database performance
 - [Kafka Metrics][12] - Monitor Apache Kafka messaging platform
+- [RabbitMQ Metrics][24] - Monitor RabbitMQ brokers and queues
 
 ### Big data and processing
 
@@ -105,4 +108,7 @@ To request a new integration or share feedback about an existing one, fill out t
 [19]: /opentelemetry/integrations/postgres_metrics/
 [20]: /opentelemetry/integrations/sqlserver_metrics/
 [21]: https://www.datadoghq.com/product-preview/otel-integrations/
-[22]: /opentelemetry/integrations/opamp_extension/
+[22]: /opentelemetry/integrations/mongodb_metrics/
+[23]: /opentelemetry/integrations/redis_metrics/
+[24]: /opentelemetry/integrations/rabbitmq_metrics/
+[25]: /opentelemetry/integrations/opamp_extension/

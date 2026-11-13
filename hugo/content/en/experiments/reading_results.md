@@ -84,6 +84,10 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 - **Coverage**: The estimated proportion of your global metric total associated with the experiment's eligible population (excluding the effect of the experiment).
 - **Global lift**: The estimated change to your overall metric totals if the treatment were released to all eligible users. Datadog calculates global lift as the product of coverage and the experiment's local (relative) lift.
 
+## Holdout results
+
+For a [holdout][10], the scorecard compares the shipped-changes group with the control group. Preliminary results give an early read while changes roll out. The primary analysis measures the combined effect during the analysis phase. See [Interpret results][11].
+
 ## Exploring results
 
 From the metric scorecard, hover over a metric name to view exploration options. The options available depend on your metric's data source.
@@ -123,3 +127,5 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [7]: /experiments/global_lift/
 [8]: /experiments/statistics/multiple_testing_correction
 [9]: /experiments/diagnostics/
+[10]: /experiments/holdouts/
+[11]: /experiments/holdouts/#interpret-results

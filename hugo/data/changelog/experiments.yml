@@ -29,3 +29,78 @@ entries:
       - ListMetrics
       - ListSubjectTypes
     title: Add users and role assignments includes to ListIncidentResponders
+  - change_type: added
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41644
+    operations:
+      - ListExperimentHoldouts
+    title: Add experiment holdouts to the Experiments API
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41644
+    operations:
+      - CreateExperiment
+      - GetExperiment
+      - ListExperiments
+      - PatchExperiment
+    title: Add experiment holdouts to the Experiments API
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ArchiveExperimentProtocol
+      - ArchiveExposureSQLModel
+      - CancelExperiment
+      - ConcludeExperiment
+      - CreateExperiment
+      - CreateExperimentMetricGroup
+      - CreateExperimentMetricGroupFromCollection
+      - CreateExperimentProtocol
+      - CreateExposureSQLModel
+      - CreateMetric
+      - CreateMetricCollection
+      - CreateMetricSQLModel
+      - CreateSubjectType
+      - DeleteExperiment
+      - DeleteExperimentMetricGroup
+      - DeleteExperimentProtocol
+      - DeleteMetric
+      - DeleteMetricCollection
+      - DeleteSubjectType
+      - GetExperiment
+      - GetExperimentAnalysisPlan
+      - GetExperimentDiagnostics
+      - GetExperimentProtocol
+      - GetExperimentResults
+      - GetExperimentTrafficSummary
+      - GetExposureSQLModel
+      - GetMetric
+      - GetMetricCollection
+      - GetMetricSQLModel
+      - GetSubjectType
+      - ListExperimentHoldouts
+      - ListExperimentMetricGroups
+      - ListExperimentProtocols
+      - ListExperiments
+      - ListExposureSQLModels
+      - ListMetricCollections
+      - ListMetricSQLModels
+      - ListMetrics
+      - ListSubjectTypes
+      - PatchExperiment
+      - PatchExperimentProtocol
+      - PatchSubjectType
+      - PublishExperimentProtocol
+      - RefreshExperimentResults
+      - RefreshExperimentResultsForOrg
+      - ReplaceExperimentProtocol
+      - SetDefaultSubjectType
+      - StartExperiment
+      - UnarchiveExposureSQLModel
+      - UpdateExperimentAnalysisPlanAttributes
+      - UpdateExperimentMetricGroup
+      - UpdateExposureSQLModel
+      - UpdateMetric
+      - UpdateMetricCollection
+      - UpdateMetricSQLModel
+    title: Add AI Gateway route permissions and safe editing

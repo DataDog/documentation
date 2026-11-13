@@ -15,7 +15,7 @@ further_reading:
   text: "Getting started with monitors"
 - link: "metrics/summary/"
   tag: "Documentation"
-  text: "Learn more about the Metrics Summary"
+  text: "Learn more about the Metrics Catalog"
 ---
 
 ## Overview
@@ -64,7 +64,7 @@ The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 
 ## Explore, visualize, and monitor the metrics
 
-Use the [Metrics Summary][3] to see metadata and tags for the operational metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
+Use the [Metrics Catalog][3] to see metadata and tags for the operational metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
 
 Use tags to filter the metrics to specific teams, sources, and environments. You can then create [dashboards][5] for those metrics to visualize the data or create [monitors][6] to alert you if the metrics exceed a specified threshold.
 
@@ -75,6 +75,6 @@ Use tags to filter the metrics to specific teams, sources, and environments. You
 [1]: https://app.datadoghq.com/dash/integration/30378/cloud-siem-overview
 [2]: https://app.datadoghq.com/security/configuration/reports
 [3]: /metrics/types/?tab=distribution#metric-types
-[4]: https://app.datadoghq.com/metric/summary?filter=datadog.security.siem&window=604800
+[4]: https://app.datadoghq.com/metric/catalog?filter=datadog.security.siem&window=604800
 [5]: /getting_started/dashboards/
 [6]: /getting_started/monitors/

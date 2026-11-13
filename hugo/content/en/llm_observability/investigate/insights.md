@@ -11,6 +11,9 @@ further_reading:
 - link: "/llm_observability/build_with_ai/mcp_server/"
   tag: "Documentation"
   text: "Connect AI agents to Agent Observability"
+- link: "https://www.datadoghq.com/blog/improving-insights-agent-observability/"
+  tag: "Blog"
+  text: "How we use Insights to improve the agent behind Insights"
 ---
 
 ## Overview
@@ -39,14 +42,48 @@ Datadog groups findings with the same root cause into one insight. Later analyse
 | Cost | Inefficient prompt caching | Reusable prompt content that misses the provider cache and increases input token cost. |
 | Cost | Large tool results | Tool results that add unnecessary content to later model requests and increase token use or context pressure. |
 | Cost | Verbose model output | Model responses or reasoning that use more output tokens than the task requires. |
+| Cost | Frontier model sizing | Spend on premium models that warrants testing lower-cost alternatives. |
+| Reliability | Tool call errors | Recurring tool failures with a shared cause that block tasks, degrade results, or add recovery work. |
 | Reliability | Tool call retry loops | Repeated calls to the same tool that use nearly identical arguments and do not make progress. |
 | Reliability | Prompt rule violations | Agent behavior that breaks an explicit rule in a prompt, skill, or tool description. |
+
+### Frontier model sizing
+
+Frontier model sizing identifies applications with potential savings from testing lower-cost models in place of premium models. Use this insight to prioritize model evaluations, starting with the workloads that account for the most spend.
+
+The insight shows:
+
+- Observed total and average daily spend on premium models, and their share of the application's measured LLM cost
+- A breakdown by model and operation, with representative traces that show the work those models perform
+- Estimated daily savings under a scenario with unchanged usage and models that cost 80% less
+
+The savings scenario uses observed spend. It does not establish that a lower-cost model meets the same quality requirements. Spend totals exclude calls with unavailable cost data. The insight describes these coverage limits.
+
+Test lower-cost models on a sample of the observed tasks. Compare answer quality, task completion, response time, and cost per completed task with the existing models. Expand use where the lower-cost models meet your requirements.
+
+### Tool call errors
+
+Tool call error insights identify recurring failures of the same tool operation with a shared cause. Examples include invalid arguments, access failures, timeouts, rate limits, and unavailable dependencies. Failures can occur with different inputs, within one trace or across traces, without forming a retry loop.
+
+The insight shows the failing tool and operation, the shared trigger, failed-call and affected-trace counts for the analysis period, and linked examples. It also describes whether the agent recovered, returned a degraded result, or could not complete the task. Datadog checks both span errors and errors in returned tool content.
+
+An isolated transient error followed by successful recovery does not qualify. Recurring failures can qualify when recovery adds work or delays results.
+
+Apply the recommended fix for the cause, such as correcting argument validation, configuring the required permissions, or changing how the tool handles rate limits. Replay the affected requests and verify that the errors stop and the task succeeds.
 
 ## Understand impact and evidence
 
 Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem.
 
 Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
+
+### Wasted spend
+
+Some reliability insights also show wasted spend: the observed cost of LLM work that the issue made unusable. This can include a discarded response even when a later retry succeeds. It can also include all model calls in a failed trace when none of that work contributed to a usable outcome.
+
+Datadog counts each affected model call once and links the amount to supporting traces and spans. When the analysis reviews a sample, the amount covers the confirmed work in that sample. It is a lower bound on observed waste, without extrapolation to all application traffic. The insight also identifies missing cost data that limits the measured amount.
+
+Use the linked evidence to identify the discarded work and apply the insight's recommended fix. Replay the affected tasks to verify that they produce usable results without repeating that work. For an overview by application, see [Wasted Spend in the Cost Overview][3].
 
 ## Review and act on insights
 
@@ -76,3 +113,4 @@ Use Datadog MCP to list Agent Observability insights with status `for_review` fo
 
 [1]: https://app.datadoghq.com/llm/insights
 [2]: /llm_observability/build_with_ai/mcp_server/
+[3]: /llm_observability/investigate/cost/#view-costs-in-agent-observability

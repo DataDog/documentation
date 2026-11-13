@@ -1,37 +1,38 @@
 ---
+description: Déclenchez des workflows automatisés directement depuis les Dashboards
+  pour résoudre rapidement les problèmes et maintenir le bon fonctionnement du système.
 disable_toc: false
 further_reading:
-- link: /service_management/workflows/
+- link: /actions/workflows/
   tag: Documentation
   text: Workflow Automation
-title: Widget Exécuter un workflow
+title: Widget Run Workflow
 widget_type: run_workflow
 ---
+## Présentation {#overview}
 
-## Présentation
+Le widget Run Workflow vous permet d'automatiser des tâches critiques depuis les Dashboards. Déclenchez vos workflows depuis un Dashboard dès que vous prenez connaissance d'un problème affectant le bon fonctionnement de votre système. Cela permet de maintenir vos systèmes opérationnels en réduisant le délai de résolution et le risque d'erreurs.
 
-Le widget Exécuter un workflow vous permet d'automatiser des tâches importantes à partir de vos dashboards. Vous pouvez alors déclencher vos workflows depuis un dashboard dès que vous prenez connaissance d'un problème nuisant à l'intégrité de votre système. Vous avez ainsi la certitude que vos systèmes demeurent disponibles, grâce à un temps de résolution réduit ainsi qu'à un plus faible nombre d'erreurs.
+## Configuration {#configuration}
 
-## Configuration
+1. Sous {{< ui >}}Select the workflow{{< /ui >}}, recherchez votre workflow dans le menu déroulant.
+1. Associez les variables de modèle de dashboard aux paramètres d'entrée du workflow. Cela permet aux valeurs de vos variables de modèle de dashboard d'être mappées directement aux paramètres d'entrée lorsque vous exécutez le workflow.
+1. Saisissez un titre pour le widget et cliquez sur {{< ui >}}Save{{< /ui >}}.
 
-1. Sous **Select the workflow**, recherchez votre workflow dans le menu déroulant.
-1. Mappez des template variables de dashboard aux paramètres d'entrée de votre workflow. De cette manière, les valeurs de vos template variables de dashboard sont associées directement aux paramètres d'entrée lors de l'exécution du workflow.
-1. Attribuez un titre au widget, puis cliquez sur **Save**.
-
-{{< img src="dashboards/widgets/trigger-from-dashboard2.png" alt="Cliquez sur Run Workflow pour déclencher un workflow à partir du widget Dashboard." >}}
+{{< img src="dashboards/widgets/trigger-from-dashboard2.png" alt="Cliquez sur Run Workflow pour déclencher un workflow depuis le widget Dashboard." >}}
 
 Pour exécuter le workflow, procédez comme suit :
-1. Cliquez sur **Run Workflow** dans votre widget de dashboard.
-1. Les template variables que vous avez mappées aux entrées du workflow s'affichent automatiquement sous **Execution parameters**. Saisissez les valeurs des paramètres d'exécution qui ne sont pas mappés ou modifiez des valeurs existantes si nécessaire.
-1. Cliquez sur **Run** pour exécuter le workflow.
+1. Cliquez sur {{< ui >}}Run Workflow{{< /ui >}} sur votre widget de dashboard.
+1. Sous {{< ui >}}Run parameters{{< /ui >}}, toutes les variables de modèle que vous avez mappées aux entrées du workflow sont automatiquement renseignées. Saisissez les valeurs des paramètres d'exécution non mappés ou modifiez les valeurs existantes si nécessaire.
+1. Cliquez sur {{< ui >}}Run{{< /ui >}} pour exécuter le workflow.
 
-## API
+## API {#api}
 
-Ce widget peut être utilisé avec l'**[API Dashboards][1]**. Le tableau ci-dessous définit le [schéma JSON du widget][2] :
+Ce widget peut être utilisé avec le **[Dashboards API][1]**. Consultez le tableau suivant pour la [widget JSON schema definition][2] :
 
 {{< dashboards-widgets-api >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
