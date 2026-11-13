@@ -54,3 +54,33 @@ entries:
       - ListFeatureFlags
       - UpdateSavedFilterAttributes
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41611
+    operations:
+      - ApplyFlagSuggestion
+      - ApproveFlagSuggestion
+      - CreateFlagSuggestion
+      - DeleteFlagSuggestion
+      - GetFlagSuggestion
+      - RejectFlagSuggestion
+      - UpdateFeatureFlagApprovals
+    title: Document Feature Flag updates and approvals
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41611
+    operations:
+      - ArchiveFeatureFlag
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - CreateFeatureFlag
+      - DeleteVariantFromFeatureFlag
+      - DisableFeatureFlagEnvironment
+      - EnableFeatureFlagEnvironment
+      - GetFeatureFlag
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - UnarchiveFeatureFlag
+      - UpdateAllocationsForFeatureFlagInEnvironment
+      - UpdateFeatureFlag
+      - UpdateVariantForFeatureFlag
+    title: Document Feature Flag updates and approvals
