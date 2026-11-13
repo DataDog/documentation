@@ -7090,6 +7090,11 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
       weight: 110
+    - name: Manage Pipelines with AI Agents
+      url: observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_manage_pipelines_with_ai_agents
+      weight: 111
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
