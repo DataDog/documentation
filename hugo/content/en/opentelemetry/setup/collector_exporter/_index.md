@@ -37,7 +37,7 @@ further_reading:
 Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The inline configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.161.0 and use an OTLP-based telemetry pipeline with the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Catalog and Service Page.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Catalog and Service Page. For the other ways to produce RED metrics, see [RED metrics](#red-metrics).
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
@@ -922,11 +922,34 @@ After your application sends telemetry to the Collector, verify that data appear
 4. If you send logs through OTLP, go to {{< ui >}}Logs Explorer{{< /ui >}} and search for your service name.
 5. In [Fleet Automation][9], confirm that the Collector and its configuration appear.
 
+## RED metrics
+
+Datadog APM uses RED (Rate, Error, Duration) metrics to power the Catalog, Service Page, Resource Page, and anything built on `trace.*` metrics. In an OpenTelemetry setup, there are three ways to produce them. Use one source only: enabling two computes trace metrics twice and double counts your traffic.
+
+| Source | How to configure | Accuracy | Billing |
+|---|---|---|---|
+| [Span metrics connector](#span-metrics-connector) (recommended) | Default in the configurations on this page. | All spans, when the connector runs upstream of sampling. | Included in APM. |
+| HTTP metrics from the SDK | Remove the `span_metrics` and `forward/traces_sample` connectors, and set `instrumentation_metrics_calc` to `true`. | All requests, because SDKs aggregate before sampling. HTTP services only. | The attributes used for RED metrics are included in APM. Other HTTP metrics are [custom metrics][14] unless dropped. |
+| Spans in the Datadog backend | Send spans and no RED metrics. | Post-sampling spans only, so metrics undercount traffic. | Included in APM. |
+
+To keep metrics accurate with the `span_metrics` connector, place it upstream of any sampling processor (see [Trace forward connector](#trace-forward-connector)), and give each upstream Collector its own connector in a [gateway deployment][11].
+
+Before choosing SDK HTTP metrics, note that not every language SDK emits them, there is no equivalent for RPC, database, or messaging spans, and only `http.[server|client].request.duration` is stable in the OpenTelemetry specification.
+
+Whichever source you use, two fields in the [`dd-otel-metric-config` header](#dd-otel-metric-config-header) determine how Datadog handles HTTP metrics:
+
+| `instrumentation_metrics_calc` | `raw_instrumentation_metrics_drop` | Result |
+|---|---|---|
+| `true` | `true` | HTTP metrics power APM RED metrics at reduced cardinality. Raw HTTP metrics are dropped, so they are not billed as custom metrics. |
+| `true` | `false` | HTTP metrics power APM RED metrics, and Datadog also retains the raw metrics at full cardinality as custom metrics for your own dashboards and monitors. |
+| `false` | `true` | HTTP metrics are dropped. Use this with the `span_metrics` connector to avoid custom metric costs for HTTP metrics. |
+| `false` | `false` (default) | Datadog retains all raw HTTP metrics at full cardinality as custom metrics. |
+
 ## Key components
 
 ### Span metrics connector
 
-The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces. For how this source compares to the alternatives, see [RED metrics](#red-metrics).
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
@@ -966,7 +989,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OpenTelemetry Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields control whether HTTP instrumentation metrics power APM RED metrics and whether Datadog retains them as custom metrics. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector. For the full behavior of these fields, see <a href="#red-metrics">RED metrics</a>.</div>
 
 ### Trace forward connector
 
@@ -1015,4 +1038,5 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [12]: /opentelemetry/setup/ddot_collector/install/
 [13]: /opentelemetry/integrations/kubernetes_metrics/
+[14]: /metrics/custom_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
