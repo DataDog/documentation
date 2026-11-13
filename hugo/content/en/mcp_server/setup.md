@@ -818,6 +818,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
+- `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -839,7 +840,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
-| [Pi][90] | Earendil | Datadog [Pi plugin][91] recommended. |
+| [Pi][91] | Earendil | Datadog [Pi plugin][92] recommended. |
 | [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -1094,5 +1095,6 @@ After you change any of these settings, refresh the tool list in your AI client.
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
 [89]: /infrastructure/process/
-[90]: https://pi.dev/
-[91]: https://github.com/datadog-labs/pi-plugin
+[90]: /gpu_monitoring/
+[91]: https://pi.dev/
+[92]: https://github.com/datadog-labs/pi-plugin

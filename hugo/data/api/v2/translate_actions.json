@@ -1174,13 +1174,13 @@
     "summary": "Delete a Storage Management configuration"
   },
   "GetCodeCoverageBranchSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a branch",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a branch."
   },
   "GetCodeCoverageCommitSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
@@ -1192,7 +1192,7 @@
     "request_schema_description": "Request object for getting per-file code coverage data."
   },
   "GetCodeCoveragePRSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a pull request",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a pull request."
@@ -2607,7 +2607,7 @@
     "request_schema_description": "Payload for creating a new tag rule."
   },
   "DeleteTagRule": {
-    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently. Deleting a `blocking` rule additionally requires the\n`telemetry_rules_activate` permission.",
     "summary": "Delete a tag rule"
   },
   "GetTagRule": {
@@ -2615,7 +2615,7 @@
     "summary": "Get a tag rule"
   },
   "UpdateTagRule": {
-    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.\nPromoting a rule from `surfacing` to `blocking` additionally requires the\n`telemetry_rules_activate` permission, and your organization must have access to\nblocking rules. You can't promote RUM rules to `blocking`.",
     "summary": "Update a tag rule",
     "request_description": "",
     "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
