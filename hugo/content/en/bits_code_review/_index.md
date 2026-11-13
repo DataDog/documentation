@@ -44,7 +44,7 @@ Bits Code Review does not post a comment every time it runs. It posts nothing wh
 
 ### Data sources
 
-Bits Code Review does not require a dedicated data source. It uses the core Datadog telemetry your services already send, such as [APM][1] traces, [logs][2], [metrics][3], and [RUM][4] events. It adapts to what each service has enabled.
+Bits Code Review uses core Datadog telemetry, such as [APM][1] traces, [logs][2], [metrics][3], and [RUM][4] events. It adapts to what each service has enabled.
 
 Coverage follows your instrumentation. For the most detailed inputs, enable [Live Debugger][5] on the services you work in. Live Debugger captures require a tracer that supports Dynamic Instrumentation. For supported versions, see the [Live Debugger requirements][7]. During the Preview, Live Debugger captures are available only for services that Datadog has enabled.
 
