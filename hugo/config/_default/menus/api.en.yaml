@@ -6812,6 +6812,18 @@ menu:
           - GetUsageObservabilityPipelines
         unstable: []
         order: 3
+    - name: Get monthly usage by resource
+      url: /api/latest/usage-metering/get-monthly-usage-by-resource/
+      identifier: usage-metering-get-monthly-usage-by-resource
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageMonthlyResources
+        unstable: []
+        order: 28
     - name: Get hourly usage for Lambda traced invocations
       url: /api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/
       identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -7913,19 +7925,6 @@ menu:
         unstable:
           - v2
         order: 45
-    - name: List AI Gateway rate limit counter summaries
-      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counter-summaries/
-      identifier: ai-gateway-list-ai-gateway-rate-limit-counter-summaries
-      parent: ai-gateway
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListAiGatewayRateLimitInstancesSummaries
-        unstable:
-          - v2
-        order: 55
     - name: Create an AI Gateway rate limit
       url: /api/latest/ai-gateway/create-an-ai-gateway-rate-limit/
       identifier: ai-gateway-create-an-ai-gateway-rate-limit
