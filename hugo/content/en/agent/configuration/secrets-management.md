@@ -1221,7 +1221,7 @@ The following `vault_session` fields control how the Agent authenticates to Vaul
 | `vault_kubernetes_jwt` | Kubernetes service account JWT token as a string. |
 | `vault_kubernetes_jwt_path` | Path to the Kubernetes JWT token file. Defaults to `/var/run/secrets/kubernetes.io/serviceaccount/token`. |
 | `vault_kubernetes_mount_path` | Vault mount path for the Kubernetes auth method. |
-| `implicit_auth` | Set to `true` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
+| `implicit_auth` | Set to `"true"` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
 
 ##### Other `secret_backend_config` options for Vault
 
