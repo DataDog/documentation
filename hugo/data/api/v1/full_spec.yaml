@@ -23928,6 +23928,10 @@ components:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         dbm_normalized_queries_sum:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
+        error_tracking_tiered_sum:
+          $ref: "#/components/schemas/UsageBillableSummaryBody"
         fargate_container_apm_and_profiler_average:
           $ref: "#/components/schemas/UsageBillableSummaryBody"
         fargate_container_apm_and_profiler_sum:
