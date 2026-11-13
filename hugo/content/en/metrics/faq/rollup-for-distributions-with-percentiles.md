@@ -34,4 +34,4 @@ You will need to pick a rollup interval that matches the granularity you need.
 For short timeframes, e.g. the past four hours, a 60-second interval works well. For longer timeframes, a larger roll-up window keeps the graph readable.
 
 Simply click on the rollup selector in the query editor and enter the interval in seconds.
-The interval is used by Datadog to merge the sketches before the percentile is calculated.
+If the field is left empty, an interval is picked by Datadog based on the graph's timeframe.
