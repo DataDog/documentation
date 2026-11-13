@@ -17,3 +17,18 @@ entries:
       - UpdateIssueAssignee
       - UpdateIssueState
     title: Add samples to the Get error tracking issue endpoint
+  - change_type: added
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41747
+    operations:
+      - SnoozeIssue
+    title: Document the SnoozeIssue preview endpoint for Error Tracking
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41747
+    operations:
+      - GetIssue
+      - SearchIssues
+      - UpdateIssueAssignee
+      - UpdateIssueState
+    title: Document the SnoozeIssue preview endpoint for Error Tracking

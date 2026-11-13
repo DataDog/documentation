@@ -76102,6 +76102,45 @@ components:
       required:
         - data
       type: object
+    IssueSnoozeRequest:
+      description: Snooze issue request payload.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueSnoozeRequestData"
+      required:
+        - data
+      type: object
+    IssueSnoozeRequestData:
+      description: Snooze issue request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueSnoozeRequestDataAttributes"
+        id:
+          description: Issue identifier.
+          example: "c1726a66-1f64-11ee-b338-da7ad0900002"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSnoozeRequestDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueSnoozeRequestDataAttributes:
+      description: Object describing an issue snooze request.
+      properties:
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+      required:
+        - condition
+      type: object
+    IssueSnoozeRequestDataType:
+      description: Type of the object.
+      enum: ["error_tracking_issue"]
+      example: "error_tracking_issue"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE
     IssueState:
       description: State of the issue
       enum:
@@ -76366,18 +76405,29 @@ components:
         `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
       properties:
         duration:
-          description: Time that must elapse before the condition is met, as a Go duration string.
+          description: |-
+            Time that must elapse from when the watch started, as a Go duration string, such as `24h`, or `168h` for a
+            week.
           example: "168h0m0s"
           type: string
         kind:
           $ref: "#/components/schemas/IssueWatchConditionKind"
         operands:
           description: Nested conditions combined by `ANY` or `ALL`.
+          example:
+            - duration: 168h
+              kind: ELAPSED_TIME
+            - kind: OCCURRENCES
+              threshold: 100
           items:
             $ref: "#/components/schemas/IssueWatchCondition"
           type: array
         projection:
-          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          description: |-
+            Attributes whose distinct values `CARDINALITY` counts, in search syntax: `@` for attributes, such as
+            `@usr.id` or `@account.id`, and no prefix for tags and reserved fields, such as `org_id` or `service`.
+            Only use attributes that the issue's errors carry: a condition on an attribute they don't carry is never
+            met.
           example: ["@usr.id"]
           items:
             description: Attribute path.
@@ -76385,7 +76435,9 @@ components:
             type: string
           type: array
         threshold:
-          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          description: |-
+            Number of new occurrences, or of distinct values for `CARDINALITY`, that meets the condition, counted from
+            when the watch started.
           example: 100
           format: int64
           type: integer
@@ -183989,6 +184041,113 @@ paths:
       tags:
         - Error Tracking
       x-menu-order: 4
+  /api/v2/error-tracking/issues/{issue_id}/snooze:
+    post:
+      description: |-
+        Snooze an issue by `issue_id`: move it to `IGNORED` until a condition is met, then back to `OPEN`.
+        The condition can be a number of occurrences, a number of distinct values of an attribute such as `@usr.id`,
+        an elapsed time, or any or all of several conditions.
+        Snoozing an issue that is already snoozed replaces its snooze. Updating the state of the issue with
+        `UpdateIssueState` cancels the snooze.
+        The response includes the watch that reopens the issue.
+      operationId: SnoozeIssue
+      parameters:
+        - $ref: "#/components/parameters/IssueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      condition:
+                        kind: ANY
+                        operands:
+                          - duration: 168h
+                            kind: ELAPSED_TIME
+                          - kind: OCCURRENCES
+                            threshold: 100
+                    id: c1726a66-1f64-11ee-b338-da7ad0900002
+                    type: error_tracking_issue
+            schema:
+              $ref: "#/components/schemas/IssueSnoozeRequest"
+        description: Snooze issue request payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        error_message: "object of type 'NoneType' has no len()"
+                        error_type: builtins.TypeError
+                        service: test-service
+                        state: IGNORED
+                      id: c1726a66-1f64-11ee-b338-da7ad0900002
+                      relationships:
+                        watches:
+                          data:
+                            - id: e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d
+                              type: error_tracking_issue_watch
+                      type: issue
+                    included:
+                      - attributes:
+                          action:
+                            from: IGNORED
+                            kind: CHANGE_ISSUE_STATE
+                            to: OPEN
+                          condition:
+                            kind: ANY
+                            operands:
+                              - duration: 168h0m0s
+                                kind: ELAPSED_TIME
+                              - kind: OCCURRENCES
+                                threshold: 100
+                          started_at: "2025-01-01T00:00:00Z"
+                          status: ACTIVE
+                        id: e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d
+                        type: error_tracking_issue_watch
+              schema:
+                $ref: "#/components/schemas/IssueResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - error_tracking_read
+            - error_tracking_write
+      summary: Snooze an issue
+      tags:
+        - Error Tracking
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
   /api/v2/error-tracking/issues/{issue_id}/state:
     put:
       description: Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.

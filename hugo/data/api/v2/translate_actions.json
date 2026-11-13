@@ -2006,6 +2006,12 @@
     "request_description": "Update issue assignee request payload.",
     "request_schema_description": "Update issue assignee request payload."
   },
+  "SnoozeIssue": {
+    "description": "Snooze an issue by `issue_id`: move it to `IGNORED` until a condition is met, then back to `OPEN`.\nThe condition can be a number of occurrences, a number of distinct values of an attribute such as `@usr.id`,\nan elapsed time, or any or all of several conditions.\nSnoozing an issue that is already snoozed replaces its snooze. Updating the state of the issue with\n`UpdateIssueState` cancels the snooze.\nThe response includes the watch that reopens the issue.",
+    "summary": "Snooze an issue",
+    "request_description": "Snooze issue request payload.",
+    "request_schema_description": "Snooze issue request payload."
+  },
   "UpdateIssueState": {
     "description": "Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.",
     "summary": "Update the state of an issue",
