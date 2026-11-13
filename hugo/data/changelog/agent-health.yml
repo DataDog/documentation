@@ -5,3 +5,10 @@ entries:
     operations:
       - ListAgentHealthHostIssues
     title: document agent health host issues endpoint
+  - change_type: added
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41538
+    operations:
+      - GetAgentHealthIssue
+      - ListAgentHealthIssues
+    title: Add Agent Health issues list and get endpoints

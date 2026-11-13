@@ -42,7 +42,7 @@ Depure flujos de trabajo complejos de LLM con visibilidad detallada de la ejecuc
 
 {{< img src="llm_observability/index/llm_example_eval_light.png" alt="Vista detallada de un tramo en Agent Observability, pestaña Evaluations. Muestra una evaluación de alucinación con 'Contradicción confirmada', la salida marcada, la cita de contexto y una explicación de por qué se marcó." style="width:100%">}}
 
-Asegúrese de que sus agentes o aplicaciones LLM cumplan con los estándares de calidad con evaluaciones en línea. Para obtener información completa sobre las evaluaciones alojadas y gestionadas por Datadog, la ingesta de evaluaciones personalizadas y las capacidades de monitoreo de seguridad, consulte la [documentación de Evaluations][5].
+Ayude a sus agentes o aplicaciones de LLM a cumplir con los estándares de calidad mediante evaluaciones en línea. Para obtener información completa sobre los evaluadores alojados y gestionados por Datadog, la ingesta de evaluaciones personalizadas y las capacidades de monitoreo de seguridad, consulte la [documentación de Evaluations][5].
 
 ### Consulte las trazas y tramos de su aplicación LLM {#query-your-llm-applications-traces-and-spans}
 
@@ -92,4 +92,4 @@ Aprenda a hacer un seguimiento de aplicaciones de LLM agénticas, que utilizan m
 [5]: /es/llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /es/llm_observability/configure/prompt_management
-[8]: /es/llm_observability/configure/prompt_experimentation
+[8]: /es/llm_observability/improve/online_experiments/prompt_experimentation/

@@ -91,6 +91,7 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
+1. When prompted to choose the region where your account is hosted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -753,6 +754,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
+- `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
@@ -769,12 +771,14 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
+- `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
 - `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -789,7 +793,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
-- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
+- `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -1064,3 +1068,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /infrastructure/process/
+[90]: /gpu_monitoring/

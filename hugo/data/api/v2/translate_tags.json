@@ -41,7 +41,7 @@
   },
   "agent-health": {
     "name": "Agent Health",
-    "description": "View Agent Health issues reported for node Agents and Cluster Agents."
+    "description": "List open Agent Health issues across your organization and get an issue with its available remediation. Issues are reported by node Agents, Cluster Agents, and OpenTelemetry collectors. The meaning of `resource_id` depends on `resource_kind`: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`."
   },
   "agent-observability": {
     "name": "Agent Observability",
@@ -230,6 +230,10 @@
   "elastic-cloud-integration": {
     "name": "Elastic Cloud Integration",
     "description": "Manage your Datadog Elastic Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for\nmore information."
+  },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
   },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
@@ -472,27 +476,27 @@
     "description": "Auto-generated tag Rum Audience Management"
   },
   "rum-metrics": {
-    "name": "Rum Metrics",
+    "name": "RUM Metrics",
     "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "rum-replay-heatmaps": {
-    "name": "Rum Replay Heatmaps",
+    "name": "RUM Replay Heatmaps",
     "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
   },
   "rum-replay-playlists": {
-    "name": "Rum Replay Playlists",
+    "name": "RUM Replay Playlists",
     "description": "Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration."
   },
   "rum-replay-sessions": {
-    "name": "Rum Replay Sessions",
+    "name": "RUM Replay Sessions",
     "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
-    "name": "Rum Replay Viewership",
+    "name": "RUM Replay Viewership",
     "description": "Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes."
   },
   "rum-retention-filters": {
-    "name": "Rum Retention Filters",
+    "name": "RUM Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
   "rum-teams-ownership": {
@@ -581,7 +585,7 @@
   },
   "tag-rules": {
     "name": "Tag Rules",
-    "description": "Tag Rules define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be\n`blocking` (data not matching the rule is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each rule reports a compliance `score` derived from how\nmuch recent telemetry adheres to the rule."
+    "description": "Tag Rules define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be\n`blocking` (data not matching the rule is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each rule reports a compliance `score` derived from how\nmuch recent telemetry adheres to the rule. RUM supports only `surfacing` rules."
   },
   "teams": {
     "name": "Teams",

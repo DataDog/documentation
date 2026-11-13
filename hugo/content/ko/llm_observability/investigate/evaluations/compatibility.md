@@ -7,7 +7,7 @@ title: 평가자 호환성
 ---
 ## 평가자 호환성 {#evaluator-compatibility}
 
-지원되는 타사 LLM 공급자는 OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI 및 Custom Provider입니다.
+지원되는 타사 LLM 공급자는 OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI 및 Custom Provider입니다.
 
 ### 관리형 평가자 {#managed-evaluators}
 

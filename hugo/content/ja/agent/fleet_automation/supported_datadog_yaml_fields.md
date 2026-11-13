@@ -10,7 +10,6 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: ドキュメント
   text: Fleet Automation API
-site_support_id: fleet-automation-standard-features
 title: サポートされているdatadog.yaml設定フィールド
 ---
 Fleet Automationは、[Agentを設定][1]する際に`datadog.yaml`フィールドのサブセットをサポートしています。提供されたすべての変更はスキーマに対して検証され、ここに記載されていないフィールドはスキーマ検証エラーとして拒否されます。
@@ -19,7 +18,7 @@ Fleet Automationは、[Agentを設定][1]する際に`datadog.yaml`フィール�
 
 {{% fa-config-fields %}}
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

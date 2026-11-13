@@ -64,13 +64,19 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
 4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
 5. Click {{< ui >}}Activate{{< /ui >}}. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
-6. If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
+6. Confirm that the `cloud-siem-xxxx` index is above any other log index that has a filter matching your security logs. If it isn't, or if the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", [reorder the Cloud SIEM index](#reorder-the-cloud-siem-index).
 
 ### Reorder the Cloud SIEM index
 
-{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying that the index configuration needs attention" style="width:80%;">}}
+Datadog sends each ingested log to the first index that has a matching [filter][27]. If an index above `cloud-siem-xxxx` has a filter that matches your security logs, that index receives those logs instead, and Cloud SIEM doesn't analyze them. In this scenario, Content Packs stay in `Waiting for logs` status. This can happen even when the setup page doesn't display a warning about the index position.
+
+To make sure Cloud SIEM receives your security logs, move `cloud-siem-xxxx` to the first position, or at least above any index that has a filter overlapping with your security log sources.
+
+<div class="alert alert-info">If the setup page doesn't display the warning, go to {{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > <a href="https://app.datadoghq.com/logs/pipelines/indexes">{{< ui >}}Indexes{{< /ui >}}</a>, click the {{< ui >}}Move to{{< /ui >}} icon for the <code>cloud-siem-xxxx</code> index, and continue to step 3.</div>
 
 1. Click {{< ui >}}Reorder index in Logs Configuration{{< /ui >}}.
+
+{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying that the index configuration needs attention" style="width:80%;">}}
 
 2. Confirm the modal title says "Move cloud-siem-xxxx to..." and that the `cloud-siem-xxxx` text in the index column is light purple.
 
@@ -145,3 +151,4 @@ Contact [support][26] to disable Cloud SIEM.
 [24]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
 [26]: /help/
+[27]: /logs/log_configuration/indexes/#indexes-filters
