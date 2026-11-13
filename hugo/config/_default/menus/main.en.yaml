@@ -6336,6 +6336,11 @@ menu:
       parent: cicd_flaky_management
       identifier: cicd_flaky_management_working_with
       weight: 501
+    - name: Code Annotations
+      url: tests/flaky_management/code_annotations/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_code_annotations
+      weight: 502
     - name: Features
       url: cicd/features/
       parent: cicd
