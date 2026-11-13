@@ -29,7 +29,7 @@ Test Impact Analysis는 테스트 모음을 분석하여 각 테스트가 다루
 
 커밋당 실행되는 테스트 수를 최소화함으로써 Test Impact Analysis는 [불안정한 테스트][2]가 파이프라인을 방해하는 빈도를 줄입니다. 테스트의 불안정성이 테스트 중인 코드 변경과 관련이 없을 때는 특히 답답할 수 있습니다. 사용 중인 테스트 서비스에 대해 Test Impact Analysis를 활성화한 후, 각 커밋을 관련 테스트로 제한하여 코드 변경과 관련 없는 불안정한 테스트가 임의로 빌드를 중단시키지 않도록 할 수 있습니다.
 
-### 기본 구성 제한 사항 {#out-of-the-box-configuration-limitations}
+### 기본 제공 구성 제한 사항 {#out-of-the-box-configuration-limitations}
 
 기본 구성을 사용할 경우, Test Impact Analysis가 실행되어야 할 테스트를 건너뛰게 만드는 알려진 상황이 있습니다. 구체적으로, Test Impact Analysis는 다음 항목의 변경 사항을 자동으로 탐지할 수 없습니다.
 
@@ -38,7 +38,7 @@ Test Impact Analysis는 테스트 모음을 분석하여 각 테스트가 다루
 - 외부 서비스
 - 데이터 기반 테스트에서 데이터 파일 변경 사항
 
-이러한 시나리오에서는 기본 구성을 사용할 경우 Test Impact Analysis가 영향을 받는 테스트를 건너뛸 수 있습니다.
+이러한 시나리오에서는 기본 제공 구성을 사용할 경우 Test Impact Analysis가 영향을 받는 테스트를 건너뛸 수 있습니다.
 
 이러한 시나리오에서 테스트를 건너뛰지 않도록 보장하기 위해 사용할 수 있는 몇 가지 구성 메커니즘이 있습니다.
 
@@ -52,7 +52,7 @@ Test Impact Analysis는 테스트 모음을 분석하여 각 테스트가 다루
 
 Test Impact Analysis는 각 테스트가 다루는 파일과 커밋이 변경하는 파일을 대조하여 건너뛸 테스트를 결정합니다. 이어지는 동작은 매칭이 의도적으로 보수적인 알려진 사례이므로 무엇을 예상해야 하는지 알 수 있습니다.
 
-<div class="alert alert-info">이 섹션의 모든 동작은 설계상 안전합니다. 즉, <strong>더 많은</strong> 테스트가 실행될 수만 있으며 실행되어야 할 테스트를 건너뛰는 일은 절대 없습니다. Datadog이 자동으로 탐지할 수 없는 코드 변경 사항은 <a href="#out-of-the-box-configuration-limitations">기본 구성 제한 사항</a>을 참조하세요.</div>
+<div class="alert alert-info">이 섹션의 모든 동작은 설계상 안전합니다. 즉, <strong>더 많은</strong> 테스트가 실행될 수만 있으며 실행되어야 할 테스트를 건너뛰는 일은 절대 없습니다. Datadog이 자동으로 탐지할 수 없는 코드 변경 사항은 <a href="#out-of-the-box-configuration-limitations">기본 제공 구성 제한 사항</a>을 참조하세요.</div>
 
 ### 규모 제한 {#scale-limits}
 
@@ -89,7 +89,7 @@ Test Impact Analysis를 위한 Datadog 라이브러리를 설정한 후 [{{< ui 
 Test Impact Analysis는 세 가지 수준에서 구성할 수 있으며, 하위 수준은 상위 수준의 값을 재정의할 수 있습니다.
 
 - **조직 기본값**: 재정의되지 않는 한 모든 리포지토리에 적용됩니다. {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}를 열고 {{< ui >}}Organization{{< /ui >}} 탭을 선택합니다.
-- **리포지토리**: 특정 리포지토리에 대한 조직 기본값을 재정의합니다. {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}} 경로를 열고 {{< ui >}}Repository-specific{{< /ui >}} 탭을 선택한 다음 리포지토리를 선택합니다.
+- **리포지토리**: 특정 리포지토리에 대한 조직 기본값을 재정의합니다. {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}를 열고 {{< ui >}}Repository-specific{{< /ui >}} 탭을 선택한 다음 리포지토리를 선택합니다.
 - **테스트 서비스**: 특정 테스트 서비스에 대한 리포지토리 설정을 재정의합니다. 리포지토리를 열고 대상 테스트 서비스에 대한 재정의를 편집합니다.
 
 리포지토리 및 테스트 서비스 수준에서 각 설정은 상위 수준의 값을 {{< ui >}}Inherit{{< /ui >}}하거나 현재 수준에서 {{< ui >}}Custom{{< /ui >}} 값으로 설정할 수 있습니다.
@@ -134,7 +134,7 @@ Test Impact Analysis가 작동하려면 테스트를 실행하는 호스트에�
 
 ### Java, .NET 및 Go {#java-net-and-go}
 
-`dd-trace-java`, `dd-trace-dotnet` 및 `dd-trace-go`를 사용하면 백필에 추가 구성이 필요하지 않습니다. 이러한 라이브러리는 테스트가 코드 적용 범위 엔진과 함께 실행될 때를 자동으로 감지하고 Test Impact Analysis가 건너뛴 테스트의 코드 적용 범위 데이터를 백필합니다.
+`dd-trace-java`, `dd-trace-dotnet` 및 `ddtest instrument`를 사용하면 백필에 추가 구성이 필요하지 않습니다. 이러한 라이브러리는 테스트가 코드 적용 범위 엔진과 함께 실행될 때를 자동으로 탐지하고 Test Impact Analysis가 건너뛴 테스트의 코드 적용 범위 데이터를 백필합니다.
 
 ### JavaScript {#javascript}
 

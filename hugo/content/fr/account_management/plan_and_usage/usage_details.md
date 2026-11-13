@@ -1,165 +1,168 @@
 ---
 aliases:
 - /fr/account_management/billing/usage_details/
-description: Surveillez votre utilisation de Datadog dans tous les produits avec des
-  résumés depuis le début du mois, des tendances d'utilisation, les principales métriques
-  custom et l'utilisation des logs par index.
+description: Surveillez votre utilisation de Datadog pour tous les produits grâce
+  aux récapitulatifs depuis le début du mois, aux tendances d'utilisation, aux principales
+  Custom Metrics et à l'utilisation des logs par index.
 title: Utilisation détaillée
 ---
+{{< callout url="" btn_hidden="true" header="Nouveau : Bill Overview" respect-site-support="false" >}}
+Une nouvelle expérience Bill Overview est désormais disponible en disponibilité limitée et commencera à être déployée automatiquement pour toutes les organisations à partir de mars 2026. [En savoir plus](/account_management/plan_and_usage/bill_overview/).
+{{< /callout >}}
 
-## Présentation
+## Présentation {#overview}
 
-Les administrateurs peuvent accéder à la page [Usage][1] en survolant leur nom d'utilisateur en bas à gauche, puis en accédant à :  
-`Plan & Usage` --> `Usage`.
+Les administrateurs peuvent accéder à la page [Usage][1] en survolant leur nom d'utilisateur en bas à gauche, puis en accédant à :
+`Plan & Usage`--> `Usage`.
 
-La page Usage affiche vos informations d'utilisation pour chaque catégorie de produits. Accédez à l'onglet d'un produit pour afficher l'utilisation de cette catégorie de produits en particulier, ou sélectionnez l'onglet « All » pour afficher l'utilisation de tous les produits. Chaque onglet fournit les informations suivantes :
+La page Usage affiche l'utilisation regroupée par catégorie de produit. Vous pouvez accéder à l'onglet d'un produit pour afficher l'utilisation propre à cette catégorie de produit, ou à l'onglet « All » pour afficher l'utilisation de tous les produits. Chaque onglet fournit les informations suivantes :
 
-* Month-to-Date Summary
-* Overall Usage (current and historical)
+* Récapitulatif depuis le début du mois
+* Utilisation globale (actuelle et historique)
 
-Certains onglets contiennent également des outils supplémentaires :
+Certains onglets de produits contiennent également des outils supplémentaires :
 
-* Onglet Custom Metrics : Top Custom Metrics
-* Onglet Log Management : Logs Usage By Index
+* Onglet Custom Metrics : principales Custom Metrics
+* Onglet Log Management : utilisation des logs par index
 
-## Month-to-Date Summary
+## Récapitulatif depuis le début du mois {#month-to-date-summary}
 
-Cette section résume votre utilisation pour le mois en cours. L'onglet « All » indique des données sur votre utilisation des hosts d'infrastructure, des conteneurs, des métriques custom, des hosts APM, des logs et de toute autre partie de la plateforme utilisée pendant le mois en cours.
+Cette section récapitule votre utilisation depuis le début du mois. Dans l'onglet « All », consultez votre utilisation depuis le début du mois des hosts d'infrastructure, des Containers, des Custom Metrics, des hosts APM, des logs et de toute autre partie de la plateforme que vous avez utilisée au cours du mois. 
 
-{{< img src="account_management/billing/usage-details-v2-01.png" alt="Résumé de l'utilisation - Onglet All" >}}
+{{< img src="account_management/billing/usage-details-v2-01.png" alt="Résumé de l'utilisation - onglet All" >}}
 
-Chaque onglet spécifique à un produit affiche votre utilisation mensuelle des produits dans cette catégorie.
+Dans les onglets spécifiques aux produits, consultez votre utilisation depuis le début du mois des produits de cette catégorie.
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Résumé de l'utilisation - Network" >}}
 
-L'utilisation depuis le début du mois affichée ci-dessus correspond à l'utilisation « All », qui inclut l'utilisation non facturable comme les périodes d'essai des produits. La plupart des comptes peuvent consulter l'utilisation « Billable », qui n'affiche que l'utilisation contribuant à votre facture finale. La vue « Billable » détaille votre utilisation par engagements, allocations et utilisation à la demande.
+L'utilisation depuis le début du mois indiquée ci-dessus correspond à l'utilisation « All », qui inclut l'utilisation non facturable telle que les essais de produits. La plupart des comptes peuvent consulter l'utilisation « Billable », qui montre uniquement l'utilisation contribuant à votre facture finale. La vue « Billable » détaille votre utilisation par engagements, allocations et utilisation à la demande.
 
 {{< img src="account_management/billing/UsageTilesWithAllPills.png" alt="Résumé de l'utilisation - Billable" >}}
-Pour les utilisateurs de l'API, des endpoints sont disponibles pour accéder à l'utilisation [All][2] et à l'utilisation [Billable][3].
+Pour les utilisateurs de l'API, des endpoints sont disponibles pour accéder à l'utilisation [« All »][2] et à l'utilisation [« Billable »][3].
 
-L'utilisation de chaque produit pour le mois en cours est calculée comme suit :
+L'utilisation depuis le début du mois pour chaque produit est calculée comme suit :
 
-| Produit                   | Rôle                                                                                                                |
+| Produit                   | Description                                                                                                                |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Infra. Hosts             | Affiche le 99e centile de tous les hosts d'infrastructure distincts pour toutes les heures du mois actuel.                         |
-| Conteneurs               | Affiche la limite supérieure de tous les conteneurs distincts pour toutes les heures du mois actuel.                                    |
-| Hosts APM                | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.                                    |
-| Profiled Hosts           | Affiche le 99e centile de tous les hosts profilés distincts pour toutes les heures du mois actuel.                               |
-| Profiled Containers      | Affiche la moyenne de tous les conteneurs profilés distincts pour toutes les heures du mois actuel.                                  |
-| Métriques custom           | Affiche le nombre moyen de [métriques custom][4] distinctes pour toutes les heures du mois actuel.                               |
-| Métriques custom ingérées  | Affiche le nombre moyen de métriques custom INGÉRÉES distinctes pour toutes les heures du mois actuel.                           |
-| Logs ingérés            | Affiche la somme de tous les octets de logs ingérés pour toutes les heures du mois actuel.                                                |
-| Indexed Logs             | Affiche la somme de tous les événements de log indexés pour toutes les heures du mois actuel.                                                |
-| Scanned Logs             | Affiche la somme de tous les octets des logs analysés par le scanner de données sensibles pour toutes les heures du mois actuel.                       |
-| Spans ingestées           | Afficher la somme de toutes les spans ingérées pour toutes les heures du mois actuel.                                                    |
-| Spans indexées            | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.                                             |
-| Analyzed Logs (Security) | Affiche la somme de tous les octets de logs analysés ingérés pour toutes les heures du mois actuel.                                       |
-| Serverless Functions     | Affiche le nombre moyen de fonctions qui sont exécutées au moins une fois par heure au cours du mois actuel.              |
-| Serverless Invocations   | Affiche la somme de tous les appels pour toutes les heures du mois actuel.                                                       |
-| Tâches Fargate            | Affiche la somme de toutes les tâches Fargate pour toutes les heures du mois actuel.                                                     |
-| Network Hosts            | Affiche le 99e centile de tous les hosts réseau distincts pour toutes les heures du mois actuel.                                |
-| Network Flows            | Affiche la somme de tous les flux réseau indexés pour toutes les heures du mois actuel.                                             |
-| Network Devices          | Affiche le 99e centile de tous les périphériques réseau distincts pour toutes les heures du mois actuel.                              |
-| Synthetic API Tests      | Affiche la somme de tous les tests API Synthetic pour toutes les heures du mois actuel.                                               |
-| Synthetic Browser Tests  | Affiche la somme de tous les tests Browser Synthetic pour toutes les heures du mois actuel.                                           |
-| RUM Sessions             | Affiche la somme de toutes les sessions RUM distinctes pour toutes les heures du mois actuel.                                             |
-| Incident Management      | Affiche le nombre d'utilisateurs actifs uniques qui ont interagi lors du mois sélectionné avec le cycle de vie et les chronologies d'un incident.     |
-| IoT Devices              | Affiche le 99e centile de tous les périphériques ioT distincts pour toutes les heures du mois actuel.                                  |
+| Infra. Hosts             | Affiche le 99e percentile de tous les hosts d'infrastructure distincts sur l'ensemble des heures du mois en cours.                         |
+| Containers               | Affiche le nombre maximal de Containers distincts relevé sur l'ensemble des heures du mois en cours.                                    |
+| Hosts APM                | Affiche le 99e percentile de tous les hosts APM distincts sur l'ensemble des heures du mois en cours.                                    |
+| Hosts profilés           | Affiche le 99e percentile de tous les hosts profilés distincts sur l'ensemble des heures du mois en cours.                               |
+| Containers profilés      | Affiche la moyenne de tous les Containers profilés distincts sur toutes les heures du mois en cours.                                  |
+| Custom Metrics           | Affiche le nombre moyen de [Custom Metrics][4] distinctes sur toutes les heures du mois en cours.                               |
+| Custom Metrics ingérées  | Affiche le nombre moyen de Custom Metrics INGÉRÉES distinctes sur toutes les heures du mois en cours.                           |
+| Logs ingérés            | Affiche la somme de tous les octets de logs ingérés sur toutes les heures du mois en cours.                                                |
+| Logs indexés             | Affiche la somme de tous les événements de logs indexés sur toutes les heures du mois en cours.                                                |
+| Logs analysés             | Affiche la somme de tous les octets de logs analysés par Sensitive Data Scanner sur toutes les heures du mois en cours.                       |
+| Spans ingérés           | Affiche la somme de tous les spans ingérés sur toutes les heures du mois en cours.                                                    |
+| Spans indexés            | Affiche la somme de tous les spans indexés sur toutes les heures du mois en cours.                                             |
+| Logs analysés (Security) | Affiche la somme de tous les octets de logs analysés ingérés sur toutes les heures du mois en cours.                                       |
+| Fonctions Serverless     | Affiche la moyenne du nombre de fonctions exécutées 1 fois ou plus chaque heure au cours du mois actuel.              |
+| Invocations Serverless   | Affiche la somme de toutes les invocations sur toutes les heures du mois en cours.                                                       |
+| Tâches Fargate            | Affiche la somme de toutes les tâches Fargate sur toutes les heures du mois en cours.                                                     |
+| Network Hosts            | Affiche le 99e percentile de tous les hosts réseau distincts sur toutes les heures du mois en cours.                                |
+| Flux réseau            | Affiche la somme de tous les flux réseau indexés sur toutes les heures du mois en cours.                                             |
+| Appareils réseau          | Affiche le 99e percentile de tous les appareils réseau distincts sur toutes les heures du mois en cours.                              |
+| Tests synthétiques d'API      | Affiche la somme de tous les tests synthétiques d'API sur toutes les heures du mois en cours.                                               |
+| Tests synthétiques de navigateur  | Affiche la somme de tous les tests synthétiques de navigateur sur toutes les heures du mois en cours.                                           |
+| Sessions RUM             | Affiche la somme de toutes les sessions RUM distinctes sur toutes les heures du mois en cours.                                             |
+| Incident Management      | Affiche le nombre d'utilisateurs actifs uniques à ce jour au cours du mois sélectionné ayant interagi avec le cycle de vie et les chronologies des incidents.     |
+| Appareils IoT              | Affiche le 99e percentile de tous les appareils IoT distincts sur toutes les heures du mois en cours.                                  |
 
 
-## Tendances dʼutilisation
+## Usage Trends {#usage-trends}
 
-La section [Tendances d'utilisation][5] propose des graphiques permettant de visualiser lʼutilisation globale des produits faite par toutes les organisations liées à un compte. Les rapports d'utilisation peuvent être téléchargés via le bouton **Download as CSV**. Ces rapports comprennent une répartition horaire de l'utilisation par produit pour chaque organisation. 
+La section [Usage Trends][5] contient des graphiques d'utilisation des produits affichant l'utilisation cumulée pour toutes les organisations d'un compte. Les rapports d'utilisation peuvent être téléchargés via le bouton {{< ui >}}Download as CSV{{< /ui >}}. Pour chaque organisation, ces rapports incluent une ventilation horaire de l'utilisation par produit. 
 
-{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Page sur les tendances dʼutilisation dans lʼapplication Datadog avec lʼoption « Download as CSV » mise en évidence" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Page des graphiques Usage Trends dans l'application Datadog avec l'option Download as CSV mise en surbrillance" style="width:100%; align:left" >}}
 
-Lorsquʼun produit comporte des sous-types, chaque catégorie est identifiable sur le graphique. 
+Pour les produits avec des sous-types, chaque catégorie est distinguée sur le graphique de ce produit. 
 
-{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Le rapport dʼutilisation. Lʼonglet de lʼinfrastructure est sélectionné et plusieurs graphiques relatifs aux sous-types dʼutilisation de lʼinfrastructure sont affichés, comme les hosts, les hosts de lʼAgent et les conteneurs" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Résumé de l'utilisation avec l'onglet Infrastructure sélectionné et plusieurs graphiques pour les sous-types d'utilisation de l'infrastructure tels que les hosts d'infrastructure, les hosts Agent et les Containers" style="width:100%; align:left" >}}
 
-Lʼonglet de chaque produit propose des graphiques plus détaillés sur les sous-types de produits. Par exemple, une répartition par type de host est disponible dans lʼonglet de lʼinfrastructure.
+Des graphiques plus détaillés par sous-type de produit sont disponibles dans l'onglet de chaque produit. Par exemple, une répartition par type de host est disponible dans l'onglet Infrastructure.
 
-{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Section relative aux tendances dʼutilisation de lʼonglet de lʼinfrastructure. Le graphique Infra Hosts contient les hosts de lʼAgent et les hosts AWS, et le graphique Indexed Logs affiche les logs quotidiens indexés actuels (Daily Indexed Live Logs) et les logs indexés cumulés actuels (Cumulative Indexed Live Logs)" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Section des tendances d'utilisation de l'onglet Infrastructure avec le graphique Infra Hosts contenant les hosts Agent et les hosts AWS, et le graphique Indexed Logs contenant les logs live indexés quotidiens et les logs live indexés cumulés" style="width:100%; align:left" >}}
+ 
+L'utilisation cumulée au fil du temps est disponible pour les produits basés sur la somme.
 
-L'utilisation cumulée dans le temps est disponible pour les produits se basant sur des sommes.
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Graphiques pour les spans ingérés et les spans indexés, chacun traçant les données pour les sommes quotidiennes et cumulées de leurs spans respectifs" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Les graphiques correspondant aux spans ingérées et aux spans indexées. Ils représentent les données correspondant aux sommes quotidiennes et cumulées de leurs spans respectives" style="width:100%; align:left" >}}
+La sélection de la période contient des options pour afficher les graphiques d'utilisation à des intervalles quotidiens, hebdomadaires, mensuels ou annuels.
 
-Des options sont disponibles pour la sélection horaire, permettant de visualiser les graphiques sur lʼutilisation à des intervalles quotidiens, hebdomadaires, mensuels ou annuels.
+{{< img src="account_management/billing/TimeGranularity.png" alt="Intervalles de temps sur les graphiques d'utilisation" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/TimeGranularity.png" alt="Intervalles des graphiques sur lʼutilisation" style="width:100%; align:left" >}}
+## Pastilles d'utilisation facturable à la demande et lignes d'utilisation engagée {#billable-on-demand-pills-and-committed-lines}
 
-## Capsules à la demande et lignes engagées facturables
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre responsable de compte ou <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
+Les pastilles violettes à la demande mettent en évidence la part de l'utilisation facturable qui correspond à une utilisation à la demande. Les pastilles bleues d'engagement et d'allocation mettent en évidence la part de votre utilisation couverte par des engagements et des <a href="https://www.datadoghq.com/pricing/allotments/">allocations</a> provenant de produits parents. La ligne `Committed` en pointillés indique les engagements par produit, sans aucune allocation (comme pour Custom Metrics ou Containers).
 
-Les capsules à la demande violettes mettent en évidence la partie de l'utilisation facturable correspondant à l'utilisation à la demande. Les capsules bleues engagées et allouées mettent en évidence la partie de votre utilisation couverte par les engagements et les <a href="https://www.datadoghq.com/pricing/allotments/">allocations</a> des produits parents. La ligne en pointillés `Committed` indique les engagements par produit, sans aucune allocation (comme pour les métriques custom ou les conteneurs).
+Pour afficher les pastilles d'engagement et d'allocation sur une carte, assurez-vous que le bouton {{< ui >}}See included usage{{< /ui >}} est activé :
+1. Sur la carte d'utilisation totale où vous souhaitez voir les données d'utilisation engagée et allouée, cliquez sur l'icône en forme d'œil ({{< ui >}}See included usage{{< /ui >}}).
+1. L'icône se transforme en un œil barré. Les pastilles d'engagement et d'allocation s'affichent sur la carte.
 
-Pour afficher les capsules engagées et allouées sur une carte, assurez-vous que le bouton **See included usage** est activé :
-1. Sur la carte d'utilisation totale où vous souhaitez voir les données d'utilisation engagée et allouée, cliquez sur l'icône en forme d'œil (**See included usage**).
-1. L'icône se transforme en œil barré. Les capsules engagées et allouées s'affichent sur la carte.
-
-{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Capsules à la demande facturables et lignes d'utilisation engagée sur les graphiques de tendances." style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Pastilles d'utilisation facturable à la demande et lignes d'utilisation engagée sur les graphiques de tendances." style="width:100%; align:left" >}}
 
 
-## Top Custom Metrics
+## Principales Custom Metrics {#top-custom-metrics}
 
-Dans l'onglet Custom Metrics, le tableau Top Custom Metrics contient deux vues illustrant votre utilisation pour le mois en cours et votre utilisation quotidienne la plus récente (comme l'utilisation à la date de la dernière mise à jour).
+Dans l'onglet Custom Metrics, le tableau Top Custom Metrics propose deux vues : l'utilisation depuis le début du mois et celle du jour le plus récent, par exemple à la date de la dernière mise à jour.
 
-La vue Top 5000 comporte les informations suivantes à propos des 5 000 principales métriques custom :
+La vue « Top 5000 » fournit les informations suivantes sur vos 5000 principales Custom Metrics :
 * Nom de la métrique
-* Nombre moyen de métriques custom par heure
-* Nom maximum de métriques custom par heure
-* Part de la métrique dans l'utilisation globale des métriques custom
-* Possibilité de rechercher une métrique parmi vos 5 000 principales métriques custom
-* Ces données peuvent être téléchargées sous forme de fichier CSV.
+* Nombre moyen de Custom Metrics par heure
+* Nombre maximal de Custom Metrics par heure
+* Pourcentage de contribution de la métrique à l'utilisation globale de Custom Metrics
+* Recherchez une métrique parmi vos 5000 principales Custom Metrics
+* Ces données peuvent être téléchargées en tant que fichier CSV.
 
-La vue All comporte les informations suivantes à propos de toutes vos métriques custom :
+La vue « All » fournit les informations suivantes sur toutes vos Custom Metrics :
 * Nom de la métrique
-* Nombre moyen de métriques custom par heure
-* Nom maximum de métriques custom par heure
-* Possibilité de rechercher une métrique parmi toutes vos métriques custom
-* Ces données peuvent être téléchargées sous forme de fichier CSV, avec une limite de 300 000 métriques custom. Pour dépasser cette limite, téléchargez vos données à l'aide de notre [endpoint d'API][6].
+* Nombre moyen de Custom Metrics par heure
+* Nombre maximal de Custom Metrics par heure
+* Recherchez une métrique parmi toutes vos Custom Metrics
+* Ces données peuvent être téléchargées sous forme de fichier CSV, dans la limite de 300,000 Custom Metrics. Vous pouvez télécharger plus de 300,000 Custom Metrics en utilisant notre [API endpoint][6].
 
 
-Pour en savoir plus sur une métrique, passez votre curseur sur sa ligne et cliquez sur l'icône de jauge qui s'affiche sur la droite pour accéder à la page [Metrics Summary][7].
+Pour plus de détails sur vos métriques, accédez au [Metrics Catalog][7] en survolant la ligne de la métrique qui vous intéresse et en cliquant sur l'icône de compteur qui s'affiche sur le côté droit.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Vue d'ensemble du tableau Top Custom Metrics" >}}
 
-## Logs Usage By Index
+## Utilisation des logs par index {#logs-usage-by-index}
 
-Dans l'onglet Log Management, ce tableau affiche votre utilisation horaire, quotidienne, mensuelle et annuelle des logs indexés par nom d'index et période de rétention. Il indique également la répartition entre les logs actuels et les [logs réintégrés][8]. Voici les informations qui sont présentées :
+Dans l'onglet Log Management, ce tableau affiche votre utilisation des logs indexés par heure, jour, mois et année, par nom d'index et période de rétention. Il montre également la répartition entre les logs en direct et les [logs réhydratés][8]. Les informations suivantes sont fournies :
 
-* Le nom de l'index
+* Nom de l'index
 * Période de rétention en jours
 * Nombre de logs indexés
-* Part de l'index dans l'utilisation globale des logs indexés pendant la période sélectionnée
+* Pourcentage de contribution de l'index à l'utilisation globale des logs indexés pour la période sélectionnée
 
-Ces données peuvent être téléchargées sous forme de fichier CSV.
+Ces données peuvent être téléchargées en tant que fichier CSV.
 
 {{< img src="account_management/billing/usage-details-v3-03.png" alt="Utilisation des logs par index" >}}
 
-## Notifications d'utilisation pour la première fois
+## Notifications de première utilisation {#first-time-usage-notifications}
 
-<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre responsable de compte ou le <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-La fonctionnalité de notifications d'utilisation pour la première fois envoie des emails lorsqu'une utilisation facturable apparaît pour la première fois pour un nouveau produit non inclus dans votre contrat actuel. Les emails sont envoyés environ 48 heures après la première utilisation au cours d'un mois donné.
+La fonctionnalité de notifications de première utilisation envoie des notifications par e-mail lorsqu'une première utilisation facturable est constatée pour un nouveau produit non inclus dans votre contrat actuel. Les e-mails sont envoyés environ 48 heures après que l'utilisation a eu lieu pour la première fois au cours d'un mois donné.
 
-Après l'activation de la fonctionnalité, un nouvel onglet **Usage Notifications** est ajouté à la page **Plan and Usage** de l'organisation parente. Cet onglet affiche la liste de tous les produits couverts par la fonctionnalité. Si vous décochez une case, cela entraîne l'arrêt des notifications pour ce produit pour tous les utilisateurs du compte. Si une première utilisation en dehors de votre contrat actif le plus récent est détectée, les utilisateurs ne reçoivent pas de notification pour les produits dont la case est décochée.
+Après avoir activé la fonctionnalité, un nouvel onglet {{< ui >}}Usage Notifications{{< /ui >}} est ajouté à la page {{< ui >}}Plan and Usage{{< /ui >}} de l'organisation parente. Sur cet onglet, vous trouverez une liste de tous les produits couverts par la fonctionnalité. Décocher une case arrête les notifications pour ce produit pour tous les utilisateurs du compte. Si une première utilisation en dehors de votre contrat actif le plus récent est détectée, les utilisateurs ne reçoivent pas de notification pour les produits décochés.
 
-{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="Page de notifications d'utilisation pour la première fois avec une liste de produits comprenant des éléments cochés et décochés" style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="Page des notifications de première utilisation avec une liste de produits incluant des éléments cochés et décochés" style="width:100%; align:left" >}}
 
-Tout utilisateur disposant des autorisations _Usage Notifications Read_ ou _Write_ reçoit des emails. Pour la plupart des organisations, cela concerne tous les administrateurs.
+Tout utilisateur disposant des autorisations _Usage Notifications Read_ ou _Write_ reçoit des e-mails. Pour la plupart des organisations, cela signifie tous les administrateurs.
 
-Si votre compte Datadog est multi-organisation, les utilisateurs de l'organisation parente disposant des autorisations reçoivent des emails de notification d'utilisation pour les organisations enfants. Ces emails indiquent quelle organisation enfant a généré l'utilisation et pour quel produit. Les utilisateurs de l'organisation enfant disposant de cette autorisation reçoivent des emails uniquement pour leur organisation.
+Si votre compte Datadog comporte plusieurs organisations, les utilisateurs de l'organisation parente disposant des autorisations nécessaires reçoivent des notifications par e-mail concernant l'utilisation dans les organisations enfants. Ces e-mails indiquent quelle organisation enfant a généré l'utilisation, ainsi que le produit concerné. Les utilisateurs d'une organisation enfant disposant de cette autorisation reçoivent uniquement les e-mails concernant leur organisation.
 
-{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="Email de notification d'utilisation pour la première fois avec détails sur un exemple d'utilisation initiale" style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="E-mail de notification de première utilisation contenant les détails d'un exemple de première utilisation" style="width:100%; align:left" >}}
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
-Pour toute question technique, contactez [l'assistance Datadog][9].
+Pour toute question technique, contactez le [support Datadog][9].
 
-Pour toute question concernant la facturation, contactez votre [chargé de compte][10].
+Pour toute question relative à la facturation, contactez votre [Customer Success][10] Manager.
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
@@ -172,3 +175,4 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [8]: https://docs.datadoghq.com/fr/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /fr/help/
 [10]: mailto:success@datadoghq.com
+[11]: /fr/account_management/plan_and_usage/bill_overview/

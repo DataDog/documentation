@@ -3,16 +3,16 @@ description: 서버 측 Feature Flags에 대한 플래그 평가 메트릭을 �
   구성합니다.
 further_reading:
 - link: /feature_flags/server/
-  tag: 설명서
+  tag: 문서
   text: 서버 측 Feature Flags
 - link: /feature_flags/concepts/flag_graphs/
-  tag: 설명서
+  tag: 문서
   text: Feature Flag 그래프
 - link: /metrics/
-  tag: 설명서
-  text: 메트릭
+  tag: 문서
+  text: Metrics
 - link: /dashboards/
-  tag: 설명서
+  tag: 문서
   text: Dashboards
 title: 서버 측 플래그 평가 메트릭 설정
 ---
@@ -22,7 +22,7 @@ title: 서버 측 플래그 평가 메트릭 설정
 
 <div class="alert alert-warning"> <code>feature_flag.evaluations</code> 메트릭은 실험적 기능이며 향후 릴리스에서 변경되거나 제거될 수 있습니다.</div>
 
-<div class="alert alert-info"> <code>feature_flag.evaluations</code> 메트릭은 실험 노출 이벤트 및 이벤트 플랫폼 프록시(EVP) 플래그 평가 이벤트와는 별개입니다. 노출 및 EVP 이벤트 송신은 포트 8126의 표준 트레이서 URL을 사용합니다. 이 메트릭은 포트 4317 또는 4318의 OTLP 엔드포인트를 사용합니다.</div>
+<div class="alert alert-info"> <code>feature_flag.evaluations</code> 메트릭은 실험 노출 이벤트 및 Event Platform Proxy(EVP) 플래그 평가 이벤트와는 별개입니다. 노출 및 EVP 이벤트 송신은 포트 8126의 표준 트레이서 URL을 사용합니다. 이 메트릭은 포트 4317 또는 4318의 OTLP 엔드포인트를 사용합니다.</div>
 
 ## 전제 조건 {#prerequisites}
 
@@ -118,7 +118,7 @@ dependencies {
 
 Java 트레이서에서 공급자는 OpenTelemetry SDK가 클래스 경로에 있으면 OTLP 메트릭 익스포터를 자동으로 시작합니다. 종속성이 누락되면 메트릭이 내보내지지 않고 트레이서가 `OpenTelemetry SDK is not on the classpath`를 기록합니다.
 
-<div class="alert alert-info">Spring Boot 애플리케이션에서 Spring Boot의 OpenTelemetry 자동 구성은 <code>OpenTelemetrySdk</code> Bean도 생성합니다. 해결된 OpenTelemetry SDK 버전이 클래스 경로의 OpenTelemetry API 버전과 일치하지 않으면 시작 시 <code>BeanCreationException</code> for the <code>openTelemetry</code> Bean 및 <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>오류가 발생하면서 실패합니다. 위와 같이 <code>opentelemetry-bom</code> 을 가져오면 API와 SDK가 동일한 버전으로 유지되고 오류가 해결됩니다.</div>
+<div class="alert alert-info">Spring Boot 애플리케이션에서 Spring Boot의 OpenTelemetry 자동 구성은 <code>OpenTelemetrySdk</code> Bean도 생성합니다. 해결된 OpenTelemetry SDK 버전이 클래스 경로의 OpenTelemetry API 버전과 일치하지 않으면 시작 시 <code>BeanCreationException</code> 오류가 다음 Bean에 대해 발생하고( <code>openTelemetry</code> Bean), <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>오류도 발생하면서 실패합니다. 위와 같이 <code>opentelemetry-bom</code> 을 가져오면 API와 SDK가 동일한 버전으로 유지되고 오류가 해결됩니다.</div>
 
 ### Ruby: OpenTelemetry 메트릭 gem 추가 {#ruby-add-the-opentelemetry-metrics-gems}
 
@@ -196,8 +196,8 @@ services:
 
 기본적으로 `feature_flag.evaluations`는 1시간 분량의 데이터만 보존합니다. 더 긴 기록을 보존하려면 다음을 수행하세요.
 
-1. [Metrics Summary][4]로 이동하여 `feature_flag.evaluations`를 검색합니다.
-2. 메트릭을 선택하고 **과거 메트릭**을 활성화합니다.
+1. [Metrics Catalog][4]로 이동하여 `feature_flag.evaluations`을 검색합니다.
+2. 메트릭을 선택하고 **Historical Metrics**를 활성화합니다.
 
 이 설정은 선택 사항이며 OTLP 메트릭에 대해 자동으로 활성화되지 않습니다.
 
@@ -226,7 +226,7 @@ sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant
 [1]: /ko/feature_flags/server/
 [2]: /ko/opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /ko/dashboards/
 [6]: /ko/feature_flags/server/java/#installation
 [7]: /ko/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

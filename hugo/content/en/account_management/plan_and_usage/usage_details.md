@@ -124,7 +124,7 @@ The "All" view provides the following information about all your custom metrics:
 * This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][6].
 
 
-For more details on your metrics, navigate to the [Metrics Catalog][7] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
+For more details on a metric, hover over its row and click the meter icon on the right side to open the metric on the Metrics Catalog page. For more information, see the [Metrics Catalog documentation][7].
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Overview of Top Custom Metrics table" >}}
 
@@ -170,7 +170,7 @@ For billing questions, contact your [Customer Success][10] Manager.
 [4]: /metrics/custom_metrics/
 [5]: https://app.datadoghq.com/billing/usage
 [6]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[7]: https://docs.datadoghq.com/metrics/summary/#overview
+[7]: /metrics/catalog/#overview
 [8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /help/
 [10]: mailto:success@datadoghq.com

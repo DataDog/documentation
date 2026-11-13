@@ -17,6 +17,9 @@ further_reading:
     - link: '/account_management/rbac/permissions'
       tag: 'Documentation'
       text: 'Discover the list of permissions available'
+    - link: '/account_management/rbac/mcp_access/'
+      tag: 'Documentation'
+      text: 'Access Control for MCP'
     - link: '/account_management/saml/'
       tag: 'Documentation'
       text: 'Enable single sign on with SAML'
@@ -37,6 +40,8 @@ Datadog offers a flexible access management system that allows you to customize 
 Users looking for basic functionality have access to OOTB [roles](#role-based-access-control) with [permissions][1]. For more flexibility, create your own [custom roles](#custom-roles) to combine permissions into new roles. Permissions attached to a custom role apply to all resources of a particular resource type.
 
 Organizations and users that need maximum flexibility can control access to individual dashboards, notebooks, and other resources with [granular access control][2].
+
+To control access through the Datadog MCP Server, see [Access Control for MCP][12].
 
 ## Role based access control
 
@@ -211,3 +216,4 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /api/latest/roles/#create-role
 [11]: /notebooks
+[12]: /account_management/rbac/mcp_access/

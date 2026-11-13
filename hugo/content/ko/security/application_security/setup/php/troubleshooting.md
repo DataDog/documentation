@@ -1,14 +1,14 @@
 ---
 further_reading:
 - link: /security/application_security/how-it-works/
-  tag: 문서
+  tag: 설명서
   text: App and API Protection의 작동 방식
 - link: /security/default_rules/?category=cat-application-security
-  tag: 문서
+  tag: 설명서
   text: OOTB App and API Protection 규칙
 - link: /security/application_security/troubleshooting
-  tag: 문서
-  text: App and API Protection 문제 해결하기
+  tag: 설명서
+  text: App and API Protection 문제 해결
 title: PHP App and API Protection 문제 해결
 ---
 ## 개요 {#overview}
@@ -27,7 +27,7 @@ AAP 트레이스는 초당 100개의 트레이스로 제한됩니다. 제한을 
 
 메트릭 `datadog.apm.appsec_host`를 사용하여 AAP가 실행 중인지 확인할 수 있습니다.
 
-1. Datadog에서 **Metrics > Summary**로 이동합니다.
+1. Datadog에서 **Metrics Catalog**로 이동합니다.
 2. 메트릭 `datadog.apm.appsec_host`를 검색합니다. 메트릭이 존재하지 않으면 AAP를 실행 중인 서비스가 없는 것입니다. 메트릭이 존재하면 서비스가 메트릭 태그 `host` 및 `service`로 보고됩니다.
 3. 메트릭을 선택하고, **Tags** 섹션에서 `service`를 검색하여 어떤 서비스가 AAP를 실행 중인지 확인합니다.
 
@@ -144,7 +144,7 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 
 ### 트레이서 버전 업데이트 여부 확인 {#confirm-tracer-versions-are-updated}
 
-App and API Protection 설정 문서를 참조하여 올바른 트레이서 버전을 사용하고 있는지 확인합니다. 라이브러리 정보가 포함된 텔레메트리 데이터 전송을 시작하려면 다음 최소 버전이 필요합니다.
+App and API Protection 설정 설명서를 참조하여 올바른 트레이서 버전을 사용하고 있는지 검증합니다. 라이브러리 정보가 포함된 텔레메트리 데이터 전송을 시작하려면 다음 최소 버전이 필요합니다.
 
 ### 텔레메트리 데이터 전송 여부 확인 {#ensure-the-communication-of-telemetry-data}
 

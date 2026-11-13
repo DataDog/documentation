@@ -22,15 +22,16 @@ title: Introducción a las herramientas de Software Delivery MCP
 ---
 ## Descripción general {#overview}
 
-El [Datadog MCP Server][1] permite que los agentes de IA accedan a sus datos de Software Delivery a través del [Model Context Protocol (MCP)][2]. El conjunto de herramientas `software-delivery` proporciona herramientas para interactuar con [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [métricas DORA][9] y [Deployment Gates][10] directamente desde clientes impulsados por IA como Cursor, Claude Code o OpenAI Codex.
+El [Datadog MCP Server][1] permite que los agentes de IA accedan a sus datos de Software Delivery a través del [Model Context Protocol (MCP)][2]. El conjunto de herramientas `software-delivery` proporciona herramientas para interactuar con [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA metrics][9] y [Deployment Gates][10]. Utilice las herramientas directamente desde clientes con IA como Cursor, Claude Code o OpenAI Codex.
 
 ## Casos de uso {#use-cases}
 
-Las herramientas de Software Delivery MCP desbloquean flujos de trabajo asistidos por IA para:
+Las herramientas de Software Delivery MCP proporcionan flujos de trabajo asistidos por IA para:
 
 - **Depuración de fallas en pipelines**: Pida a su agente de IA que encuentre fallas recientes en pipelines, analice registros de errores y sugiera correcciones.
 - **Identificación de pruebas inestables**: Consulte las pruebas inestables en su repositorio y obtenga recomendaciones priorizadas sobre cuáles corregir primero.
 - **Análisis del rendimiento de CI**: Obtenga estadísticas agregadas sobre duraciones de pipelines, tasas de fallas y tendencias a lo largo del tiempo.
+- **Optimización de CI/CD**: Combine la inspección del repositorio con datos de CI y pruebas para priorizar mejoras, validar cambios y medir su impacto.
 - **Triaje de fallas en pruebas**: Entienda qué pruebas están fallando, su propiedad y sus patrones históricos.
 - **Revisión de Code Coverage**: Obtenga resúmenes de Code Coverage para ramas o commits, incluyendo cobertura de parches y desgloses por servicio o propietario del código.
 - **Medición de métricas DORA**: Consulte la frecuencia de despliegue, el tiempo de entrega de cambios, la tasa de fallas en cambios y el tiempo de recuperación por servicio o equipo.
@@ -69,7 +70,10 @@ El conjunto de herramientas `software-delivery` incluye las siguientes herramien
 : Obtenga métricas resumidas de Code Coverage agregadas para un commit de repositorio, incluyendo la cobertura total, la cobertura de parches y los desgloses por servicio/propietario del código.
 
 `get_datadog_test_optimization_settings`
-: Recupere qué funciones de Test Optimization están habilitadas para un servicio, incluyendo el Test Impact Analysis (ITR), la Detección Temprana de Inestabilidad (EFD), los Reintentos Automáticos de Pruebas (ATR), la Reproducción de Pruebas Fallidas, la recopilación de Code Coverage y los Comentarios de PR.
+: Recupere las funciones de Test Optimization habilitadas para un servicio. Las funciones incluyen Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, recopilación de Code Coverage y PR Comments.
+
+`update_datadog_test_optimization_settings`
+: Actualice la configuración de Test Optimization para un repositorio, servicio y entorno existentes. Habilite, deshabilite o restaure la configuración heredada para Test Impact Analysis, Early Flake Detection, Auto Test Retries, Failed Test Replay y Code Coverage. Esta operación de escritura requiere permisos de `TestOptimizationRead` y `TestOptimizationSettingsWrite`, además de la aprobación explícita del usuario. Lea la configuración actual antes de actualizarla. Habilitar Test Impact Analysis o Early Flake Detection también puede inicializar exclusiones de la rama predeterminada en todo el repositorio para ambas funciones.
 
 `get_datadog_flaky_tests_management_policies`
 : Recupere las políticas de gestión de pruebas inestables configuradas para un repositorio, incluyendo ventanas de cuarentena automática, reglas de rama, umbrales de tasa de fallos, políticas de desactivación y configuraciones de reintento.
@@ -77,7 +81,7 @@ El conjunto de herramientas `software-delivery` incluye las siguientes herramien
 `search_dora_deployments`
 : Busque eventos de implementación DORA con filtros, u obtenga los detalles completos de una implementación específica por ID. Para tendencias agregadas (frecuencia de implementación, tiempo de entrega de cambios, tasa de fallos), utilice `aggregate_dora_deployments` en su lugar.
 
-`aggregate_dora_deployments`Devuelve métricas DORA (frecuencia de implementación, tiempo de entrega de cambios, tasa de fallos en cambios, tiempo de recuperación) para un servicio, equipo o repositorio, como valores escalares o series temporales.
+`aggregate_dora_deployments`
 : Agregue métricas DORA (frecuencia de implementación, tiempo de entrega de cambios, tasa de fallos en cambios y tiempo de recuperación) como valores escalares o series temporales. Para un resumen completo de DORA, llame a esta herramienta cuatro veces en paralelo, una por cada métrica.
 
 `retry_datadog_ci_job`
@@ -104,15 +108,17 @@ Las herramientas de Deployment Gates son de solo lectura y requieren el permiso 
 
 Después de conectarse, pruebe con prompts como:
 
-- Muéstreme todas las canalizaciones para mi commit `58b1488`.
-- ¿Qué está causando que el trabajo `integration-test` falle en mi rama?
+- Muéstreme todas las pipelines del commit `58b1488`.
+- ¿Qué está causando que el trabajo `integration-test` falle en esta rama?
 - Encuentre pruebas inestables activas para el servicio de checkout ordenadas por tasa de fallos.
 - ¿Cuántas canalizaciones fallidas ha habido en las últimas 2 semanas?
-- Muéstreme el percentil 95 de la duración de la canalización agrupado por nombre de canalización.
+- Muéstreme el percentil 95 de la duración de las pipelines, agrupado por nombre de pipeline.
 - ¿Cuál es la cobertura de código en la rama `main` para `github.com/my-org/my-repo`?
-- Muéstreme las métricas de Code Coverage para el commit `abc123abc123abc123abc123abc123abc123abcd`.
+- Muéstreme las métricas de cobertura para el commit `abc123abc123abc123abc123abc123abc123abcd`.
 - ¿Cuál es la frecuencia de despliegue y la tasa de fallos en los cambios para el servicio `checkout` en los últimos 30 días?
 - ¿Qué funciones de Test Optimization están habilitadas para `auth-service`?
+- Evalúe el CI/CD de este repositorio y recomiende mejoras utilizando datos de Datadog.
+- Muestre el cambio de configuración propuesto para habilitar Auto Test Retries para el servicio `checkout`.
 - Ponga en cuarentena todas las pruebas inestables activas en el repositorio `checkout-service`.
 - ¿Por qué falló el Deployment Gate para `checkout` en `prod` en el último despliegue?
 - ¿Qué reglas de Deployment Gate para el servicio `checkout` en `prod` están en modo de prueba (dry run)?
@@ -130,11 +136,11 @@ Para obtener instrucciones de configuración completas, incluida la configuraci�
 
 ## Agent skills {#agent-skills}
 
-Las Agent skills son conjuntos de instrucciones predefinidos para agentes de codificación de IA que automatizan los flujos de trabajo comunes de Software Delivery. El conjunto de habilidades `dd-software-delivery` está disponible en el repositorio [Datadog agent-skills][6]. Proporciona dos habilidades para clasificar pruebas inestables y desbloquear pipelines de PR fallidos utilizando sus datos en vivo de CI y Test Optimization.
+Las habilidades de agente son conjuntos de instrucciones preconstruidos para agentes de codificación de IA que guían los flujos de trabajo comunes de Software Delivery utilizando datos en vivo de CI y Test Optimization. Ayudan a evaluar CI/CD, investigar pruebas inestables y desbloquear las pipelines de PR que fallan.
 
-Después de conectar el `software-delivery` conjunto de herramientas MCP, su asistente de IA carga automáticamente las habilidades cuando su mensaje coincide con su propósito. Por ejemplo, ingresar "TestCheckoutServiceIntegration sigue fallando en CI — investígalo" carga `/triage-flaky-test` sin necesidad de instalación.
+Después de conectar el `software-delivery` conjunto de herramientas MCP, su asistente de IA carga automáticamente las habilidades cuando su mensaje coincide con su propósito. Por ejemplo, ingresar "TestCheckoutServiceIntegration sigue fallando en CI: investigue la causa" carga la habilidad de triaje de pruebas inestables sin necesidad de instalación local.
 
-Para invocar las habilidades explícitamente con un comando de barra diagonal, instálelas localmente:
+Para invocar `/triage-flaky-test` y `/unblock-pr` explícitamente con comandos de barra, instale el conjunto de habilidades `dd-software-delivery` desde el [repositorio de habilidades de agente][6]:
 
 ### Instalar {#install}
 
@@ -147,7 +153,7 @@ npx skills add datadog-labs/agent-skills \
 
 Reinicie Claude Code después de instalar para que aparezcan los comandos de barra diagonal.
 
-Cada habilidad utiliza automáticamente el Datadog MCP Server si está conectado, y recurre a la CLI de [pup][7] en caso contrario. Para usar la alternativa de pup, instale y autentique pup:
+Estas habilidades instaladas localmente usan el servidor Datadog MCP si está conectado y, de lo contrario, recurren a la CLI de [pup][7]. Instale y autentique pup para usar la alternativa de la CLI:
 
 ```shell
 brew install datadog-labs/pack/pup
@@ -156,10 +162,23 @@ pup auth login
 
 ### Habilidades disponibles {#available-skills}
 
-| Habilidad | Invocar con | Lo que hace |
+| Habilidad | Comenzar con | Qué hace |
 |-------|-------------|-------------|
+| Optimizar CI/CD | "Evalúe el CI/CD de este repositorio" | Combine la inspección del repositorio con datos de CI y pruebas para priorizar cambios, validarlos y medir su impacto |
 | Clasificar prueba inestable | `/triage-flaky-test` | Obtenga el historial, el patrón de falla y la categoría de IA para una prueba inestable específica, luego recomiende solucionar, poner en cuarentena o escalar |
 | Desbloquear PR | `/unblock-pr` | Atribuya cada falla de CI en una PR como inestable, de infraestructura o regresión, muestre la cobertura de código y las violaciones de calidad o seguridad, y proponga una acción dirigida |
+
+### Optimizar CI/CD {#optimize-cicd}
+
+La habilidad `optimize-cicd` está disponible a través del conjunto de herramientas MCP `software-delivery`. Combina la inspección del repositorio con datos de Datadog para evaluar CI/CD, priorizar mejoras y guiar los cambios seleccionados a través de la validación y la medición. Úsela para repositorios que ya utilizan Software Delivery, incluidos los repositorios con configuración incompleta.
+
+La habilidad propone cambios y pasos de validación, luego aplica los cambios que usted autorice. También puede manejar una etapa, como verificar una integración o medir un cambio existente.
+
+```text
+Assess this repository's CI/CD and prioritize improvements using Datadog data.
+Check whether Test Impact Analysis is configured and working for this repository.
+Compare CI duration and reliability before and after the changes on this branch.
+```
 
 ### Clasificar prueba inestable {#triage-flaky-test}
 
@@ -172,11 +191,11 @@ Si la habilidad recomienda poner en cuarentena, presenta la acción propuesta y 
 /triage-flaky-test TestCheckoutServiceIntegration github.com/my-org/my-service
 ```
 
-### Desbloquear PR {#unblock-pr}
+### Desbloquear una solicitud de cambios {#unblock-pr}
 
 `/unblock-pr` investiga un pipeline de CI de PR fallido. Para cada trabajo fallido, verifica si la falla ya estaba presente en la rama predeterminada o en otras ramas. La habilidad clasifica la falla como **inestable**, **infraestructura** o **regresión**. En paralelo, obtiene la cobertura de código de la rama y cualquier violación de calidad de código o seguridad de los insights de PR. Produce un resumen de triaje con clasificación por trabajo, evidencia, una acción recomendada y una sección de Salud de PR que resume la cobertura y las violaciones.
 
-Para fallas inestables, la habilidad se encadena a `triage-flaky-test` para una investigación más profunda. Para fallas de infraestructura transitorias en GitHub Actions o GitLab, reintenta los trabajos fallidos usando `retry_datadog_ci_job` (MCP) o `gh run rerun` (respaldo de pup, solo para GitHub Actions); para otros proveedores de CI, proporciona un enlace a la interfaz de usuario del proveedor. Para regresiones, le solicita que investigue sus cambios de código.
+Para fallas inestables, la habilidad se encadena a `triage-flaky-test` para una investigación más profunda. Para fallas transitorias de infraestructura en GitHub Actions o GitLab, reintenta los trabajos fallidos usando `retry_datadog_ci_job` a través de MCP. La alternativa de pup usa `gh run rerun` para GitHub Actions. Para otros proveedores de CI, la habilidad enlaza a la interfaz de usuario del proveedor. Para regresiones, le solicita que investigue sus cambios de código.
 
 **Nota**: Los datos de violaciones de calidad de código y seguridad en la sección de Salud de PR requieren el conjunto de herramientas MCP y no están disponibles en el modo pup.
 

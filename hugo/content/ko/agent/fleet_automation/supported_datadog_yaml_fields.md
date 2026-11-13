@@ -8,9 +8,8 @@ further_reading:
   tag: 설명서
   text: Agent 구성
 - link: /api/latest/fleet-automation/
-  tag: 설명서
+  tag: 문서
   text: Fleet Automation API
-site_support_id: fleet-automation-standard-features
 title: 지원되는 datadog.yaml 구성 필드
 ---
 Fleet Automation은 [Agent를 구성][1]할 때 `datadog.yaml` 필드의 하위 집합을 지원합니다. 제공하는 모든 변경 사항은 스키마에 따라 유효성이 검사되며, 여기에 나열되지 않은 필드는 스키마 유효성 검사 오류와 함께 거부됩니다.

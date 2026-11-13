@@ -56,7 +56,7 @@ Utilice esta opción si desea usar un token de servicio {{< ui >}}Stakeholder/Re
 2. Copie la URL del webhook de Datadog.
 3. En dbt Cloud, vaya a {{< ui >}}Account Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} > {{< ui >}}Create New Webhook{{< /ui >}}.
 4. Pegue la URL del webhook de Datadog en el campo de URL del webhook.
-5. Habilite los eventos {{< ui >}}Job Run Started{{< /ui >}} y {{< ui >}}Job Run Completed{{< /ui >}}. Para contextualizar la ingesta a trabajos específicos, seleccione esos trabajos en la configuración del webhook de dbt Cloud.
+5. Habilite los eventos {{< ui >}}Run started{{< /ui >}}, {{< ui >}}Run completed{{< /ui >}} y {{< ui >}}Run errored{{< /ui >}}. Para contextualizar la ingesta a trabajos específicos, seleccione esos trabajos en la configuración del webhook de dbt Cloud.
 6. Guarde el webhook en dbt Cloud.
 7. Copie el secreto HMAC de dbt Cloud, péguelo en el campo {{< ui >}}HMAC secret from dbt Cloud{{< /ui >}} en Datadog y haga clic en {{< ui >}}Save{{< /ui >}}.
 

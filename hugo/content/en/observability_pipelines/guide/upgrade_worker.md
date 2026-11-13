@@ -14,6 +14,21 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.25.2
+
+To upgrade to Worker version 2.25.2:
+
+- Docker: Run the `docker pull` command for the [2.25.2 image][67].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.2`.
+
+Worker version 2.25.2 gives you access to the following:
+
+#### Fixes
+
+- Fixed a regression introduced in Worker 2.25.1 that could prevent Workers on commercial Datadog sites outside US1 from loading their pipelines after startup, causing repeated `RC client wasn't initialized, will retry` errors.
+
 ## Worker version 2.25.1
 
 To upgrade to Worker version 2.25.1:
@@ -54,6 +69,10 @@ Worker version 2.25.0 gives you access to the following:
     - Components that use the built-in root store no longer trust certificate chains through the distrusted emSign intermediates.
     - TLS connections to servers whose certificate chains end at a removed root fail validation.
 - Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
+
+#### New features
+
+- The [Azure Data Explorer destination][68] is now available.
 
 #### Enhancements
 
@@ -1038,3 +1057,5 @@ Worker version 2.7.0 gives you access to the following:
 [64]: /observability_pipelines/destinations/prometheus/
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
 [66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
+[67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
+[68]: /observability_pipelines/destinations/azure_data_explorer/

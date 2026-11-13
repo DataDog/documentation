@@ -1,124 +1,124 @@
 ---
+description: メトリクス概要ページを使用して、メトリクスソースの探索、Datadog 製品からのメトリクスの生成、および高度なプラットフォーム機能の有効化を行います。
 further_reading:
 - link: https://www.datadoghq.com/blog/metrics-without-limits
   tag: ブログ
-  text: Metrics without LimitsTM でカスタムメトリクスのボリュームをダイナミックにコントロール
+  text: Metrics without Limits™ でカスタムメトリクスのボリュームをダイナミックにコントロール
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: インタラクティブなセッションに参加して、メトリクスの可能性を最大限に引き出しましょう
+  text: インタラクティブなセッションに参加して、メトリクスの可能性を最大限に引き出す
 - link: /metrics/units
   tag: ドキュメント
-  text: メトリクス単位
-title: Metrics Overview ページ
+  text: メトリクスの単位
+title: メトリクス概要ページ
 ---
+## 概要 {#overview}
 
-## 概要
+メトリクス概要ページは、あらゆる経験レベルのユーザーに対して、メトリクス環境のより深い理解を提供します。Datadog メトリクスの価値を最大限に高める方法についてのガイダンスを提供します。
 
-Metrics Overview ページでは、ユーザーの経験レベルに関係なく、メトリクスの状況をより深く理解することができます。それにより、Datadog メトリクスの価値を最大化する方法についての指針が得られます。
+メトリクス概要ページでは、以下の方法を学びます。
+- メトリクスソースを探索する
+- Datadog 製品から追加のメトリクスを生成する
+- パーセンタイル、Metrics without Limits™、履歴メトリクス取り込みなどの高度なプラットフォーム機能を有効にする
 
-Metrics Overview ページでは、以下のことを学ぶことができます。
-- メトリクスのソースを探る方法
-- Datadog 製品から追加のメトリクスを生成する方法
-- パーセンタイル、Metrics without Limits™、過去のメトリクス取り込みなどの高度なプラットフォーム機能を有効化する方法
+## メトリクスが Datadog 内を流れる仕組み {#how-your-metrics-flow-through-datadog}
 
-## メトリクスが Datadog を通過する仕組み
+{{< img src="metrics/overview/how_metrics_flow.png" alt="メトリクス概要ページの「メトリクスが Datadog 内を流れる仕組み」セクション" >}}
 
-{{< img src="metrics/overview/how_metrics_flow.png" alt="Metrics Overview ページの「メトリクスが Datadog を通過する仕組み」セクション" >}}
+このセクションには、すべてのメトリクスソース、メトリクスデータに適用される追加の処理と構成、および標準メトリクスとカスタムメトリクスのボリュームの内訳が表示されます。
 
-このセクションでは、すべてのメトリクスソース、メトリクスデータに適用される追加の処理と構成、および標準メトリクスとカスタムメトリクスの量の内訳が示されます。
+**注**: 概要ページはメトリクスのコスト管理専用ではありません。コストを最適化する方法の詳細については、[Custom Metrics ガバナンスのベストプラクティス][25]を参照してください。
 
-**注**: Overview ページは、メトリクスのコスト管理専用ではありません。コストを最適化する方法の詳細については、[カスタムメトリクス管理のベストプラクティス][25] を参照してください。
+### メトリクスソース {#metric-sources}
 
-### メトリクスソース
-
-**Metric Sources** 列には、Datadog に報告を行うメトリクスソースの概要が表示されます。いずれかのソースをクリックすると、そのソースを対象とした [Summary ページ][2]が開きます。Datadog メトリクスは、以下のソースが起源となっている可能性があります。
+{{< ui >}}Metric Sources{{< /ui >}} 列には、Datadog にメトリクスを報告しているソースの概要が表示されます。いずれかのソースをクリックすると、そのソースにスコープされた [Metrics Catalog][2] が開きます。Datadog メトリクスは、以下のソースから生成されます。
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
-[Datadog Agent][3] は、それがインストールされているホストからメトリクスを収集し、Datadog に転送します。これらのメトリクスの起源としては、以下のようなものが挙げられます。
+[Datadog Agent][3] は、インストールされているホストからメトリクスを収集し、Datadog に転送します。これらのメトリクスは、以下のソースから生成される可能性があります。
 
-   - Agent に付属する公式の Datadog インテグレーションのいずれか。利用可能な Agent ベースのインテグレーションの一覧については、[integrations-core リポジトリ][4]を参照してください。
-   - [DogStatsD][6] は、Datadog Agent に付属するメトリクス集計サービスです。DogStatsD は [StatsD][7] プロトコルを実装すると共に、Datadog 固有の拡張機能をいくつか提供します。
-   - [カスタムチェック][8]は、カスタムアプリケーションや独自のシステムからメトリクスを収集するために使用されます。チェックのロジックは、Agent の構成ファイルで自分で定義します。詳細については、[カスタム Agent チェックの作成][9]を参照してください。
-   - Agent にインストールされている [Marketplace インテグレーション][10]。[Datadog Marketplace][11] は、テクノロジーパートナーが Datadog ユーザー向けに有償製品を出品できるデジタルマーケットプレイスです。
+   - Agent にバンドルされている公式 Datadog インテグレーションのいずれか。利用可能な Agent ベースのインテグレーションの全リストについては、[integrations-core リポジトリ][4]を参照してください。
+   - [DogStatsD][6]、Datadog Agent にバンドルされているメトリクス集計サービス。DogStatsD は、Datadog 固有のいくつかの拡張機能とともに [StatsD][7] プロトコルを実装します。
+   - カスタムアプリケーションや独自のシステムからメトリクスを収集するために使用される[カスタムチェック][8]。チェックのロジックは、Agent の構成ファイル内で、ご自身で定義します。詳細については、[カスタム Agent チェックの作成][9]を参照してください。
+   - Agent にインストールされる [Marketplace インテグレーション][10]。[Datadog Marketplace][11] は、テクノロジーパートナーが Datadog ユーザーに向けて有償の製品を掲載できるデジタルマーケットプレイスです。
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="クラウドインテグレーション" level="h4" %}}
-認証ベースのインテグレーションとしても知られ、セットアップは Datadog 内で行います。メトリクスを取得するための認証情報を提供すると、Datadog がユーザーに代わって API 呼び出しを行い、メトリクスを収集します。一般的な例としては、クラウドプロバイダーのインテグレーション、Slack、PagerDuty などが挙げられます。詳細については、開発者向けドキュメントの [API ベースのインテグレーション][12]を参照してください。
-{{% /collapse-content %}}
-
-{{% collapse-content title="Datadog API" level="h4" %}}
-[Metrics API][13] に直接メトリクスを送信することができます。
+認証ベースのインテグレーションとも呼ばれるこれらは、Datadog 内で設定されます。メトリクスを取得するための認証情報を提供すると、Datadog がお客様に代わって API 呼び出しを行い、メトリクスを収集します。一般的な例として、クラウドプロバイダーのインテグレーション、Slack、PagerDuty などがあります。詳細については、開発者向けドキュメントの [API ベースのインテグレーション][12]を参照してください。
 {{% /collapse-content %}} 
 
-Datadog には全部で {{< translate key="integration_count" >}} を超えるインテグレーションがあります。インテグレーションの管理の詳細については、[インテグレーションの管理][5]を参照してください。
+{{% collapse-content title="Datadog API" level="h4" %}}
+メトリクスを [Metrics API][13] に直接送信することもできます。
+{{% /collapse-content %}} 
 
-### 構成可能な処理
+Datadog には合計で {{< translate key="integration_count" >}} を超えるインテグレーションが用意されています。インテグレーションの管理方法の詳細については、[インテグレーション管理][5]を参照してください。
 
-**Configurable Processing** 列には、メトリクスの価値を高めるために使用できるさまざまな高度な設定オプションが一覧表示されます。任意のオプションをクリックすると、詳細情報と関連する設定画面へのリンクが表示されます。
+### 構成可能な処理 {#configurable-processing}
 
-{{% collapse-content title="Metrics without LimitsTM でカスタムメトリクスのコストを最適化する" level="h4" %}}
-[Metrics without LimitsTM][19] は、組織にとって最も価値のあるメトリクスタグのみをインデックス化することで、カスタムメトリクスのコスト管理に役立ちます。Metrics without LimitsTM の使用は、Overview ページのトップセクションに **Selected Metrics** として反映されます。カスタムメトリクスのコスト管理の詳細については、[カスタムメトリクス管理のベストプラクティス][22] を参照してください。
+{{< ui >}}Configurable Processing{{< /ui >}} 列には、メトリクスの価値を高めるために使用できる、さまざまな高度な構成オプションが一覧表示されます。詳細情報および関連する構成画面へのリンクを表示するには、いずれかのオプションをクリックします。
+
+{{% collapse-content title="Metrics without Limits™ でカスタムメトリクスのコストを最適化します" level="h4" %}}
+[Metrics without Limits™][19] は、組織にとって最も価値のあるメトリクスタグのみをインデックス化することにより、カスタムメトリクスのコスト管理を支援します。Metrics without Limits™ の利用状況は、概要ページのトップセクションに {{< ui >}}Selected Metrics{{< /ui >}} として反映されます。カスタムメトリクスのコスト管理の詳細については、[Custom Metrics ガバナンスのベストプラクティス][22]を参照してください。
 {{% /collapse-content %}} 
 
 {{% collapse-content title="ディストリビューションメトリクスでパーセンタイルを有効にする" level="h4" %}}
-パーセンタイルを有効にした [ディストリビューションメトリクス][20] では、すべてのホストからサーバーサイドで計算されたグローバルで正確なパーセンタイルが提供されるため、分散インフラストラクチャー全体の統計分布を測定できます。
+パーセンタイルを有効にした[ディストリビューションメトリクス][20]は、すべてのホストからサーバー側で計算されたグローバルに正確なパーセンタイルを提供し、分散インフラストラクチャー全体での統計的分布の測定を可能にします。
 {{% /collapse-content %}} 
 
 {{% collapse-content title="他の Datadog 製品からメトリクスを生成する" level="h4" %}}
-製品によっては、標準的なメトリクスを組み込んで、すぐにインサイトを表示できるものもあります (例: APM)。
+一部の製品には、すぐに使えるインサイトを表示するための標準メトリクスが組み込まれています (例: APM)。
 
-##### ログ
+##### ログ {#logs}
 
-[取り込まれたログからカスタムメトリクスを生成][14] することで、Datadog によって取り込まれたすべてのログデータを要約できます。これにより、たとえログが長期的な検索用にインデックス化されていなくても、自社の環境にとって重要なログデータを可視化し、アラートを出すことができます。
+Datadog に取り込まれたすべてのログからのデータを集計するには、[取り込まれたログからカスタムメトリクスを生成][14]します。これにより、長期検索用にインデックス化されていないログであっても、環境にとって重要なログデータを可視化し、アラートを送信できます。
 
-##### APM
+##### APM {#apm}
 
-[取り込まれたスパンからカスタムメトリクスを生成][15]することで、ビジネスコンテキストにとって重要なあらゆるパラメーターを対象に、異常とトレンドを可視化することができます。
+ビジネスコンテキストにとって重要なあらゆるパラメーターにわたる異常や傾向を可視化するには、[取り込まれたスパンからカスタムメトリクスを生成][15]します。
 
-##### Real User Monitoring (RUM)
+##### Real User Monitoring (RUM) {#real-user-monitoring-rum}
 
-[RUM イベントからカスタムメトリクスを生成][16]することで、RUM イベントからのデータを要約し、組織にとって最もインパクトのあるユーザー行動を可視化して、アラートを出すことができます。
+[RUM イベントからカスタムメトリクスを生成][16]して RUM イベントのデータを集計し、組織にとって最もインパクトのあるユーザーの行動を可視化してアラートを送信します。
 
-##### プロセス
+##### プロセス {#processes}
 
-[カスタムプロセスベースのメトリクスを生成する][17]ことで、プロセスのリソース消費量や、ビジネスニーズにとって重要なその他のプロセス関連の挙動を監視することができます。
+ビジネスニーズにとって重要となる可能性のあるプロセスのリソース消費やその他のプロセス関連の動作を監視するには、[プロセスベースのカスタムメトリクスを生成][17]します。
 
-##### イベント
+##### イベント {#events}
 
-[カスタムイベントベースのメトリクスを生成][18]することで、モニターアラートや、Datadog によって取り込まれたその他のイベントベースのデータを可視化することができます。
-{{% /collapse-content %}}
+モニターアラートや Datadog に取り込まれたその他のイベントベースのデータを可視化するには、[イベントベースのカスタムメトリクスを生成][18]します。
+{{% /collapse-content %}} 
 
-{{% collapse-content title="過去のメトリクス取り込み" level="h4" %}}
-[過去メトリクスの取り込み][21]では、タイムスタンプが送信時刻より 1 時間以上前のメトリクス値を取り込むことができます。
-{{% /collapse-content %}}
+{{% collapse-content title="過去のメトリクスを取り込む" level="h4" %}}
+[過去のメトリクスの取り込み][21]を使用すると、送信時点から 1 時間より前のタイムスタンプを持つメトリクス値を取り込むことができます。
+{{% /collapse-content %}} 
 
-### Available Metrics
+### 利用可能なメトリクス {#available-metrics}
 
-**Available Metrics** 列では、過去 1 か月間の総メトリクス量が標準メトリクスとカスタムメトリクスに分けて表示されます。カスタムメトリクスのボリューム管理に興味がある場合は、[カスタムメトリクス管理のベストプラクティスページ][25] および[メトリクスのボリューム管理ページ][26]を参照してください。
+{{< ui >}}Available Metrics{{< /ui >}} 列には、過去 1 か月間の標準メトリクスとカスタムメトリクスの合計メトリクスボリュームの内訳が表示されます。カスタムメトリクスのボリューム管理に関心がある場合は、詳細について [Custom Metrics ガバナンスのベストプラクティスページ][25]および [Metrics Catalog ページ][26]を参照してください。
 
-## Your metrics by source
+## ソース別のメトリクス {#your-metrics-by-source}
 
-このセクションには、メトリクスソースとそれぞれのボリュームの概要を示すツリーマップが表示されます。
+このセクションには、メトリクスソースとそれぞれのボリュームの概要を示すツリーマップが含まれています。
 
-{{< img src="metrics/overview/metrics_by_source.png" alt="Metrics Overview ページの  your metrics by source  セクション" >}}
+{{< img src="metrics/overview/metrics_by_source.png" alt="メトリクス概要ページの「ソース別のメトリクス」セクション" >}}
 
-## 任意のソースからメトリクスを生成する
+## 任意のソースからメトリクスを生成 {#generate-metrics-from-any-source}
 
-以下のオプションのいずれかをクリックすると、対応する製品の Generate Metrics ページに移動し、その製品からカスタムメトリクスを作成できます。
+以下のオプションのいずれかをクリックすると、対応する製品の {{< ui >}}Generate Metrics{{< /ui >}} ページに移動し、その製品からカスタムメトリクスを作成できます。
    - [取り込まれたログ][14]
    - [取り込まれたスパン][15]
    - [RUM イベント][16]
    - [プロセス][17]
    - [イベント][18]
 
-## Metrics available for querying
+## クエリ可能なメトリクス {#metrics-available-for-querying}
 
-このセクションの検索バーを使用して、メトリクスの最新データと設定オプションを表示することができます。すべてのタグを検索したり、クリックして [Metrics Explorer][23] または [Summary][24] ページでメトリクスをさらに調査したりすることができます。
+このセクションの検索バーを使用して、任意のメトリクスの最新データと構成オプションを表示します。すべてのタグを検索したり、クリックして [Metrics Explorer][23] または [Summary][24] ページでメトリクスをさらに調査したりできます。
 
-{{< img src="metrics/overview/available_metrics.png" alt="Metrics Overview ページの Metrics available for querying セクション" >}}
+{{< img src="metrics/overview/available_metrics.png" alt="メトリクス概要ページの「クエリ可能なメトリクス」セクション" >}}
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -127,13 +127,13 @@ Datadog には全部で {{< translate key="integration_count" >}} を超える�
 [3]: /ja/agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /ja/agent/guide/integration-management/
-[6]: /ja/developers/dogstatsd/
+[6]: /ja/extend/dogstatsd/
 [7]: https://github.com/statsd/statsd
-[8]: /ja/developers/custom_checks/
-[9]: /ja/developers/custom_checks/write_agent_check/
+[8]: /ja/extend/custom_checks/
+[9]: /ja/extend/custom_checks/write_agent_check/
 [10]: /ja/integrations/#cat-marketplace
 [11]: https://app.datadoghq.com/marketplace
-[12]: /ja/developers/integrations/?tab=integrations#api-based-integrations
+[12]: /ja/extend/integrations/?tab=integrations#api-based-integrations
 [13]: /ja/api/latest/metrics/#submit-metrics
 [14]: /ja/logs/log_configuration/logs_to_metrics/
 [15]: /ja/tracing/trace_pipeline/generate_metrics/
@@ -145,6 +145,6 @@ Datadog には全部で {{< translate key="integration_count" >}} を超える�
 [21]: /ja/metrics/custom_metrics/historical_metrics/
 [22]: /ja/metrics/guide/custom_metrics_governance
 [23]: https://app.datadoghq.com/metric/explorer
-[24]: https://app.datadoghq.com/metric/summary
+[24]: https://app.datadoghq.com/metric/catalog
 [25]: /ja/metrics/guide/custom_metrics_governance/
 [26]: /ja/metrics/volume/

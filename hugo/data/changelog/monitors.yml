@@ -30,3 +30,32 @@ entries:
       - ValidateExistingMonitor
       - ValidateMonitor
     title: Add metric formula and function variable type for monitors
+  - change_type: modified
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41645
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add the LLM Observability data source to monitor formula queries
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41487
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add aastra job status and job duration fields to data-jobs monitor 
+      queries

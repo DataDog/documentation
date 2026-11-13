@@ -1,11 +1,11 @@
 ---
-title: OTLP Ingestion by the Datadog Agent
+title: Set Up the Agent's OTLP Endpoint
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
   - /opentelemetry/otlp_ingest_in_the_agent/
   - /opentelemetry/interoperability/otlp_ingest_in_the_agent/
-description: 'Ingest OTLP trace data through the Datadog Agent'
+description: "Send OTLP data from your OpenTelemetry-instrumented applications to the Datadog Agent's OTLP endpoint."
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
@@ -19,15 +19,15 @@ further_reading:
 ---
 
 
-OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
+The Agent's OTLP endpoint is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to the Datadog Agent. It's part of the core Agent, so you don't run a separate Collector. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
 
-OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
+The Agent's OTLP endpoint allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 
 ## Initial setup
 
-To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the OTLP Ingest in the Agent is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Agent `go.mod` file.
+To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the Agent's OTLP endpoint is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Agent `go.mod` file.
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
 
@@ -35,7 +35,7 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 
 For hostname recommendations for OTLP ingestion by the Datadog Agent, see [Hostname and Tagging][11].
 
-## Enabling OTLP Ingestion on the Datadog Agent
+## Enable the Agent's OTLP endpoint {#enabling-otlp-ingestion-on-the-datadog-agent}
 
 {{< tabs >}}
 {{% tab "Host" %}}
