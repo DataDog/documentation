@@ -34,7 +34,7 @@ further_reading:
 
 ## Overview
 
-Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.154.0 and use an OTLP-based telemetry pipeline with the following key components:
+Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The inline configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.161.0 and use an OTLP-based telemetry pipeline with the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Catalog and Service Page.
@@ -256,10 +256,10 @@ See the [full configuration files][500] for an optional config to gather additio
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-Run the Collector:
+Run the Collector. Replace `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
 
 ```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
   otelcol-contrib --config collector.yaml
 ```
 
@@ -464,7 +464,7 @@ docker run \
     -e OTEL_RESOURCE_ATTRIBUTES \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
-    otel/opentelemetry-collector-contrib:0.154.0 \
+    otel/opentelemetry-collector-contrib:0.161.0 \
     --config /etc/otelcol-contrib/config.yaml
 ```
 

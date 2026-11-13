@@ -35,14 +35,12 @@ const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
 const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
 
 // Block-level, so multi-paragraph spec descriptions keep their breaks. The
-// DEPRECATED label goes inside the first paragraph.
+// DEPRECATED label gets its own paragraph, above the description.
 const deprecatedLabelHtml = `<strong class="${cl("schema-table__deprecated-label")}">DEPRECATED</strong>`;
 const descriptionHtml = renderMarkdown(field.description ?? "");
-const descriptionWithLabelHtml = !field.deprecated
-  ? descriptionHtml
-  : descriptionHtml.startsWith("<p>")
-    ? descriptionHtml.replace("<p>", `<p>${deprecatedLabelHtml} `)
-    : `<p>${deprecatedLabelHtml}</p>${descriptionHtml}`;
+const descriptionWithLabelHtml = field.deprecated
+  ? `<p>${deprecatedLabelHtml}</p>${descriptionHtml}`
+  : descriptionHtml;
 
 // `oneOf`/`anyOf` are carried as bare semantic tags on the field so other
 // consumers can branch on them; the type column shows them bracketed.
@@ -108,6 +106,11 @@ const optionFields: SchemaField[] =
       {
         field.required && (
           <span class={cl("schema-table__required")}> [required]</span>
+        )
+      }
+      {
+        field.deprecated && (
+          <span class={cl("schema-table__deprecated")}> [deprecated]</span>
         )
       }
     </span>

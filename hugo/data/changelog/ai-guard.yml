@@ -1,0 +1,19 @@
+entries:
+  - change_type: added
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41009
+    operations:
+      - EvaluateAIGuardRequest
+    title: Document AI Guard evaluation API
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41530
+    operations:
+      - EvaluateAIGuardRequest
+    title: Document extra_tags in the AI Guard evaluate response
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - EvaluateAIGuardRequest
+    title: Add AI Gateway route permissions and safe editing

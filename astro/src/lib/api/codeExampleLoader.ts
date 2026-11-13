@@ -165,7 +165,7 @@ const LANGUAGES: ReadonlyArray<
     ext: ".rbbeta",
     syntax: "ruby",
     exampleFile: "example.rb",
-    runCommand: 'rb "example.rb"',
+    runCommand: 'ruby "example.rb"',
     canUseBearerToken: true,
   },
   {
@@ -183,7 +183,7 @@ const LANGUAGES: ReadonlyArray<
     ext: ".ts",
     syntax: "typescript",
     exampleFile: "example.ts",
-    runCommand: 'tsc "example.ts"',
+    runCommand: 'npx tsx "example.ts"',
     canUseBearerToken: true,
   },
   {
@@ -201,7 +201,7 @@ const LANGUAGES: ReadonlyArray<
     ext: ".rb",
     syntax: "ruby",
     exampleFile: "example.rb",
-    runCommand: 'rb "example.rb"',
+    runCommand: 'ruby "example.rb"',
     canUseBearerToken: false,
   },
 ];

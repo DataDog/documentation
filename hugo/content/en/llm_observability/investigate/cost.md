@@ -95,9 +95,9 @@ In Agent Observability, select {{< ui >}}Cost{{< /ui >}} from the left navigatio
 
 The Cost Overview includes:
 - {{< ui >}}Spend breakdown{{< /ui >}}: A Sankey diagram of your {{< ui >}}Total Estimated Spend{{< /ui >}}, compared with the previous period. Select {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}}, or {{< ui >}}Custom Tags{{< /ui >}} to analyze which applications, providers, or [custom tags](#custom-tags-on-cost-and-tokens-metrics) account for your spend. Each entry shows the amount spent, its share of the total spend, and the change from the previous period.
-- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] that identify specific ways to reduce spend, such as prompts that don't use the provider's prompt cache. Each insight lists the affected application and estimated savings.
+- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] that identify specific ways to reduce spend, such as prompts that don't use the provider's prompt cache. Each insight lists the affected application and estimated savings. [Frontier model sizing][9] highlights premium-model spend to prioritize trials with lower-cost models.
 - {{< ui >}}Cost Trend{{< /ui >}}: A timeseries of spend across one or all applications. Group it by application, service, model name, model provider, or custom tags, and add filters to narrow the results.
-- {{< ui >}}Wasted Spend{{< /ui >}}: Spend on failed calls, low-quality responses, and issues found by [Insights][8], broken down by application.
+- {{< ui >}}Wasted Spend{{< /ui >}}: Spend on failed calls, low-quality responses, and issues found by [Insights][8], broken down by application. For waste identified by Insights, open the finding to review the root cause, affected traces, and recommended fix. See [how Insights measures wasted spend][10].
 - {{< ui >}}Cache Efficiency{{< /ui >}}: Net savings from prompt caching, along with cache hit ratio, cache reuse ratio, and non-cached input cost. For accurate cache metrics, provide the complete [cache token breakdown](#how-token-counts-are-calculated).
 
 To view costs for a single application, click the application in the Cost Overview Sankey diagram. Alternatively, select it from {{< ui >}}Applications{{< /ui >}} and open the {{< ui >}}Cost{{< /ui >}} tab. The application's _Cost view_ features:
@@ -179,3 +179,5 @@ How to fix:
 [5]: /llm_observability/investigate/metrics/#llm-cost-metrics
 [7]: /llm_observability/instrument/sdk/#adding-custom-tags-to-cost-and-tokens-metrics
 [8]: /llm_observability/investigate/insights/
+[9]: /llm_observability/investigate/insights/#frontier-model-sizing
+[10]: /llm_observability/investigate/insights/#wasted-spend

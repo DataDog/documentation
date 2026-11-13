@@ -19,7 +19,7 @@ Utilice el destino de logs BYOC (Bring Your Own Cloud) de Observability Pipeline
 
 ## Requisitos previos {#prerequisites}
 
-Antes de configurar el destino, necesita implementar un clúster de BYOC Logs. Aprenda a instalarlo en la [sección de instalación de BYOC Logs][3].
+Se requiere un clúster de BYOC Logs en ejecución para recibir registros. Para una implementación con Operator, cree primero el pipeline y su destino, luego implemente el clúster y el Worker administrado con el ID del pipeline. Para un Worker administrado por separado, implemente el clúster y obtenga su punto de conexión de ingesta antes de instalar el Worker. Consulte las [guías de instalación de BYOC Logs][3].
 
 ## Configuración {#setup}
 
@@ -29,7 +29,7 @@ Configure el destino de BYOC Logs cuando [configure un pipeline][4]. Puede confi
 
 #### Habilitar TLS {#enable-tls}
 
-<div class="alert alert-danger">Para la administración de secretos: solo ingrese los identificadores de la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese los identificadores para la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
 
 {{% observability_pipelines/tls_settings %}}
 - (Opcional) Ingrese el nombre del servidor para la verificación del certificado TLS.
@@ -46,14 +46,16 @@ Después de seleccionar el destino de BYOC Logs en la interfaz de usuario del pi
 
 ## Valores predeterminados de Secret {#secret-defaults}
 
+Para un Worker administrado por un `DatadogBYOCCluster`, el Operator proporciona el punto de conexión del indexador de BYOC Logs, el sitio de Datadog y la clave de API compartida. Configure el destino del pipeline antes de la implementación, luego proporcione el ID del pipeline en `spec.components.pipelines[].pipelineID`. La siguiente configuración manual del punto de conexión se aplica a los Workers independientes. Consulte [Instalar BYOC Logs con Datadog Operator][10].
+
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Gestión de secretos" %}}
 
 - Identificador de URL del punto de conexión de BYOC Logs:
-	- Hace referencia al punto de conexión de ingesta al que Observability Pipelines envía los logs.
-	- En su gestor de secretos:
+	- Hace referencia al punto de conexión de ingesta al que Observability Pipelines envía los registros.
+	- En su administrador de secretos:
 		- Defina la URL del clúster, como `http://byoc-logs.acme.internal:7280`. **Nota**: La URL debe incluir el puerto.
 		- El Worker añade `/api/v2/logs` y `/api/v1/validate` a la URL del punto de conexión, por lo que estos puntos de conexión deben estar permitidos si utiliza reglas de reenvío o de firewall.
 	- El identificador predeterminado es `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
@@ -67,11 +69,11 @@ Después de seleccionar el destino de BYOC Logs en la interfaz de usuario del pi
 {{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="La página de instalación que muestra el campo de variable de entorno de BYOC Logs" style="width:75%;" >}}
 
 - URL del punto de conexión de BYOC Logs
-	- Observability Pipelines envía logs al punto de conexión de ingesta de BYOC Logs. Defina la URL del clúster, como `http://byoc-logs.acme.internal:7280`. **Nota**: La URL debe incluir el puerto.
-	- El Worker añade `/api/v2/logs` y `/api/v1/validate` a la URL del punto de conexión, por lo que estos puntos de conexión deben estar permitidos si utiliza reglas de reenvío o de firewall.
-  - Almacenado como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+	- Observability Pipelines envía los registros al punto de conexión de ingesta de BYOC Logs. Defina la URL del clúster, como `http://byoc-logs.acme.internal:7280`. **Nota**: La URL debe incluir el puerto.
+	- El Worker añade `/api/v2/logs` y `/api/v1/validate` a la URL del punto de conexión, por lo que estos puntos de conexión deben estar permitidos si utiliza reglas de reenvío o firewall.
+  - Se almacena como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 - Frase de contraseña TLS de BYOC Logs (cuando TLS está habilitado)
-  - Almacenado como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`.
+  - Se almacena como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -99,3 +101,4 @@ Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte
 [7]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [9]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /es/byoc-logs/install/datadog_operator/

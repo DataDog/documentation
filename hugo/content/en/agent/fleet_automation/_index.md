@@ -25,13 +25,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).<br><br>
-Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents, and Upgrading SDKs are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
@@ -39,6 +32,12 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 {{< img src="/agent/fleet_automation/fleet-automation-main.png" alt="The Fleet Automation page showing a list of Agents with their versions, statuses, and enabled products." style="width:100%;" >}}
 
 ## Key capabilities
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">
+SDK upgrades and remote flare collection are not supported on US1-FED or US2-FED.
+</div>
+{{< /site-region >}}
 
 With Fleet Automation, you can:
 - **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
@@ -55,13 +54,17 @@ With Fleet Automation, you can:
 
 An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration and set `remote_updates` to `true`][8]. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
 
-## Fleet Automation API
+<a id="fleet-automation-api"></a>
+
+## Manage Fleet Automation programmatically
 
 Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][1]. 
 
 <div class="alert alert-info">
 The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 </div>
+
+You can also create and manage Agent upgrade schedules with the Datadog Terraform provider. Define target hosts, Agent versions, and maintenance windows in Terraform configuration files. For prerequisites and an example, see [Schedule Agent upgrades with Terraform][13].
 
 ## Control access to Fleet Automation
 
@@ -92,3 +95,4 @@ For information on setting up roles and permissions, see [Access Control][2].
 [10]: /agent/fleet_automation/configure_logs/
 [11]: /agent/fleet_automation/upgrade_sdks/
 [12]: https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/
+[13]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades-with-terraform

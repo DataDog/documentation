@@ -42,7 +42,7 @@ Si ce n'est pas déjà fait, installez l'[intégration Datadog-Azure][5] pour co
    Datadog recommande de fixer les versions des packages et de mettre régulièrement à jour vers les dernières versions de `@datadog/serverless-compat` et `dd-trace` pour vous assurer d'avoir accès aux améliorations et aux corrections de bugs.
 
 2. **Démarrez la couche de compatibilité serverless de Datadog et initialisez le SDK Node.js Datadog**.
-   
+
    Utilisez l'option `--require` pour charger et initialiser la couche de compatibilité Serverless et le SDK Node.js Datadog en une seule étape. Les options Node dans Azure Functions peuvent être configurées avec la variable d'environnement `languageWorkers__node__arguments`.
 
    ```
@@ -206,6 +206,76 @@ Si ce n'est pas déjà fait, installez l'[intégration Datadog-Azure][5] pour co
    | `DD_SERVICE` | Comment vous souhaitez marquer votre service pour le [Unified Service Tagging][7].  |
    | `DD_VERSION` | Comment vous souhaitez marquer votre version pour le [Unified Service Tagging][7]. |
 
+## Durable Functions {#durable-functions}
+
+Pour activer l'instrumentation de Durable Functions, ajoutez les paramètres suivants à votre fichier `host.json` :
+
+<!-- vale off -->
+{{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
+{{< programming-lang lang="nodejs" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+```json
+{
+  "telemetryMode": "OpenTelemetry",
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+<!-- vale on -->
+
 ## Quelle est la prochaine étape ? {#whats-next}
 
 - Vous pouvez consulter vos traces Azure Functions dans [{{< ui >}}Trace Explorer{{< /ui >}}][3]. Recherchez le nom de service que vous avez défini dans la variable d'environnement `DD_SERVICE` pour voir vos traces.
@@ -235,7 +305,7 @@ Vous pouvez collecter des [journaux de débogage][6] pour le dépannage. Pour co
 
   **Valeurs** : `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off`
 
-## Pour aller plus loin {#further-reading}
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

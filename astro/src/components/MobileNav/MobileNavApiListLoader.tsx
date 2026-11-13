@@ -16,7 +16,7 @@ import { useEffect } from "preact/hooks";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
@@ -51,37 +51,35 @@ export default function MobileNavApiListLoader({
   externalContext,
 }: Props) {
   useEffect(() => {
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) {
-      return;
-    }
-    const listRoot = loaded.list;
-    markSelfAsHydrated({ current: listRoot });
+    return withExternalContext(externalContext, (loaded) => {
+      const listRoot = loaded.list;
+      markSelfAsHydrated({ current: listRoot });
 
-    const desktopQuery = window.matchMedia(desktopMediaQuery());
-    const prefetchIfMobile = () => {
-      if (shouldPrefetch(desktopQuery)) {
-        loadMobileNavData(dataUrl).catch(() => {
-          // An expand retries and shows the fallback if it fails again.
-        });
-      }
-    };
-    prefetchIfMobile();
-    desktopQuery.addEventListener("change", prefetchIfMobile);
+      const desktopQuery = window.matchMedia(desktopMediaQuery());
+      const prefetchIfMobile = () => {
+        if (shouldPrefetch(desktopQuery)) {
+          loadMobileNavData(dataUrl).catch(() => {
+            // An expand retries and shows the fallback if it fails again.
+          });
+        }
+      };
+      prefetchIfMobile();
+      desktopQuery.addEventListener("change", prefetchIfMobile);
 
-    const handleClick = (event: MouseEvent) => {
-      const lazyList = findLazyListBeingExpanded(event, listRoot);
-      if (lazyList) {
-        fillLazyList(lazyList, dataUrl, labels);
-      }
-    };
-    // Capture, so `details.open` still reads the state before this click
-    // toggles it (and the list is filled before the section opens).
-    listRoot.addEventListener("click", handleClick, true);
-    return () => {
-      desktopQuery.removeEventListener("change", prefetchIfMobile);
-      listRoot.removeEventListener("click", handleClick, true);
-    };
+      const handleClick = (event: MouseEvent) => {
+        const lazyList = findLazyListBeingExpanded(event, listRoot);
+        if (lazyList) {
+          fillLazyList(lazyList, dataUrl, labels);
+        }
+      };
+      // Capture, so `details.open` still reads the state before this click
+      // toggles it (and the list is filled before the section opens).
+      listRoot.addEventListener("click", handleClick, true);
+      return () => {
+        desktopQuery.removeEventListener("change", prefetchIfMobile);
+        listRoot.removeEventListener("click", handleClick, true);
+      };
+    });
   }, []);
 
   return null;

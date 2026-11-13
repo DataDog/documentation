@@ -7,6 +7,12 @@ aliases:
     - /llm_observability/setup/auto_instrumentation
     - /llm_observability/sdk/auto_instrumentation
     - /llm_observability/instrumentation/auto_instrumentation/
+    - /llm_observability/instrument/agentic/python/
+    - /llm_observability/instrument/agentic/nodejs/
+    - /llm_observability/instrument/agentic/java/
+    - /llm_observability/instrumentation/agentic/python/
+    - /llm_observability/instrumentation/agentic/nodejs/
+    - /llm_observability/instrumentation/agentic/java/
 further_reading:
     - link: '/llm_observability/instrument/sdk/'
       tag: 'Documentation'
@@ -26,7 +32,125 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 <div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrument/sdk">Agent Observability SDK reference</a> for how to add manual instrumentation.</div>
 
 
-### Supported frameworks and libraries
+## Set up automatic instrumentation
+
+Configure the [instrumentation environment variables][20] before initializing the SDK. Then follow the setup for your language.
+
+{{< agent-only >}}
+Apply the guidelines from the [instrumentation overview](/llm_observability/instrument.md) throughout setup. Inspect the installed SDK version and reuse it if it supports the required instrumentation. If an update is required, explain why and ask before changing the dependency. Do not delay instrumentation for an update required only by optional Prompt Management. Use the project's existing package manager, as identified by its lockfiles.
+{{< /agent-only >}}
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+1. Install `ddtrace` with the application's package manager if it is not installed:
+
+   ```bash
+   pip install ddtrace
+   # Or, for Poetry:
+   poetry add ddtrace
+   # Or, for uv:
+   uv add ddtrace
+   ```
+
+2. Load the application's configuration, then import `ddtrace.auto` before other application imports. For an application that uses `python-dotenv`:
+
+   ```python
+   from dotenv import load_dotenv
+
+   load_dotenv()
+
+   import ddtrace.auto
+
+   # Import and run the application after SDK initialization.
+   ```
+
+If configuration is available before process startup, you can use the [SDK command-line setup][1] instead. Do not combine application-level configuration loading with `ddtrace-run`.
+
+{{< agent-only >}}
+Use the existing configuration-loading mechanism; the example does not require adding `python-dotenv`. Keep `ddtrace.auto` as the first import after any environment or configuration-loading imports. Do not add extraneous comments to application code.
+{{< /agent-only >}}
+
+[1]: /llm_observability/instrument/sdk/?tab=python#command-line-setup
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The Datadog Node.js SDK requires Node.js 22 or later for `dd-trace` 6.x, or Node.js 18 or later for `dd-trace` 5.x. See [Node.js compatibility requirements][3]. For Node.js versions earlier than 20.6, follow the [SDK command-line setup][2] instead of the loader setup below. For Next.js applications, follow the [Next.js instrumentation guide][1] instead of the steps below.
+
+1. Install `dd-trace` with the application's package manager if it is not installed:
+
+   ```bash
+   npm install dd-trace
+   # Or, for pnpm:
+   pnpm add dd-trace
+   # Or, for Yarn:
+   yarn add dd-trace
+   ```
+
+   For Node.js 18 or 20, install `dd-trace@5` instead.
+
+2. Configure loader hooks before the Node.js process starts. The hooks instrument supported frameworks that use ESM and TypeScript imports. For example, set `NODE_OPTIONS` in the existing `package.json` startup command:
+
+   ```json
+   {
+     "scripts": {
+       "start": "NODE_OPTIONS=\"--import dd-trace/register.js\" node app.js"
+     }
+   }
+   ```
+
+   You can also set the option in an existing `Dockerfile` or startup script. Preserve any other required `NODE_OPTIONS` values.
+
+3. Load configuration, then import `dd-trace/init` before other application imports. For an application that uses `dotenv`:
+
+   ```typescript
+   import 'dotenv/config';
+   import 'dd-trace/init';
+
+   // Import and run the application after SDK initialization.
+   ```
+
+For initialization entirely at process startup, see the [SDK command-line setup][2]. Use one initialization method.
+
+{{< agent-only >}}
+Do not apply these instructions to other JavaScript runtimes. For Next.js, follow the [Next.js guide](/llm_observability/guide/nextjs_guide.md) instead.
+
+When using the loader-hook and entrypoint-import method above, set `NODE_OPTIONS="--import dd-trace/register.js"` before the Node.js process starts. Setting it after load time does not work. Use existing startup infrastructure. Load the application's configuration before `dd-trace/init` and keep that import before other application imports. Do not introduce a configuration loader solely to match the example or add extraneous comments.
+{{< /agent-only >}}
+
+[1]: /llm_observability/guide/nextjs_guide/
+[2]: /llm_observability/instrument/sdk/?tab=nodejs#command-line-setup
+[3]: /tracing/trace_collection/compatibility/nodejs/
+{{% /tab %}}
+{{% tab "Java" %}}
+
+1. Download the `dd-java-agent` JAR from the [Datadog Java agent releases][1].
+2. Attach the agent before the application starts by passing a JVM argument:
+
+   ```bash
+   java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
+   ```
+
+   For an existing startup script or `Dockerfile`, you can set `JAVA_TOOL_OPTIONS` instead. For example, in a shell:
+
+   ```bash
+   export JAVA_TOOL_OPTIONS="-javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+   Preserve any other required JVM options.
+
+The agent instruments supported LLM providers and frameworks at startup without additional code changes.
+
+[1]: https://github.com/DataDog/dd-trace-java/releases
+{{% /tab %}}
+{{< /tabs >}}
+
+After setup, [instrument prompts][21] and run the application to view traces.
+
+[20]: /llm_observability/instrument/#configure-environment-variables
+[21]: /llm_observability/instrument/#instrument-prompts
+
+## Supported frameworks and libraries
 {{< tabs >}}
 {{% tab "Python" %}}
 | Framework                                       | Supported Versions | Tracer Version |
@@ -57,9 +181,12 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
+| [Claude Agent SDK](#claude-agent-sdk)      | >= 0.2.113         | >= 5.112.0 (v5), >= 6.1.0 (v6)             |
 | [LangChain](#langchain)                    | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [LangGraph](#langgraph)                    | >= 1.1.2           | >= 5.91.0 (CJS), >= 5.91.0 (ESM)           |
 | [MCP](#mcp)                                | >= 1.27.1          | >= 5.99.0 (CJS), >=5.99.0 (ESM)             |
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
+| [OpenAI Agents](#openai-agents)            | >= 0.7.0           | >= 5.118.0 (v5), >= 6.7.0 (v6)             |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 | [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
@@ -172,10 +299,14 @@ The Amazon Bedrock integration instruments the following methods:
 - [Chat messages][3]:
   - `InvokeModel`
   - `InvokeModelWithResponseStream`
+- [Conversations][4] (requires `dd-trace>=5.106.0`):
+  - `Converse`
+  - `ConverseStream`
 
 [1]: /integrations/amazon-bedrock
 [2]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -272,6 +403,21 @@ The Claude Agent SDK integration instruments the following methods:
 [1]: https://github.com/anthropics/claude-agent-sdk-python
 [2]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#basic-usage
 [3]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#with-claudesdkclient-continuous-conversation
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The Claude Agent SDK integration automatically traces agent queries made through the [Claude Agent SDK for TypeScript][1].
+
+**Package name:** `@anthropic-ai/claude-agent-sdk`\
+**Integration name:** `claude-agent-sdk`
+
+### Traced methods
+
+The integration instruments `query()` and records agent runs, agent steps, LLM calls, tool calls, and subagent activity.
+
+The SDK is an ES module. Follow the [ESM setup instructions](#esm-support) to enable automatic instrumentation.
+
+[1]: https://code.claude.com/docs/en/agent-sdk/typescript
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -442,7 +588,7 @@ The LangChain integration instruments the following methods:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, and OpenAI embeddings calls.
+The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, embedding, tool, and vector store calls.
 
 **Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][7]\
 **Integration name:** `langchain`
@@ -461,6 +607,11 @@ The LangChain integration instruments the following methods:
 - [Embeddings][6]
   - `embeddings.embedQuery()`
   - `embeddings.embedDocuments()`
+- Tools (requires `dd-trace>=5.59.0`):
+  - `tool.invoke()`
+- Vector stores (requires `dd-trace>=5.59.0`):
+  - `vectorStore.similaritySearch()`
+  - `vectorStore.similaritySearchWithScore()`
 
 [1]: /integrations/langchain/
 [2]: https://js.langchain.com/docs/introduction/
@@ -491,6 +642,24 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 [1]: https://langchain-ai.github.io/langgraph/concepts/sdk/
 [2]: https://blog.langchain.dev/langgraph/#compile
 [3]: https://blog.langchain.dev/langgraph/#nodes
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The LangGraph integration automatically traces graph execution through the [LangGraph JavaScript SDK][1].
+
+**Package name:** `@langchain/langgraph`\
+**Integration name:** `langgraph`
+
+### Traced methods
+
+The integration instruments `Pregel.stream()`, which also captures compiled graph calls:
+
+- `graph.invoke()`
+- `graph.stream()`
+
+The integration creates a workflow span for the graph. The [LangChain integration](#langchain) records child workflow spans for graph nodes.
+
+[1]: https://docs.langchain.com/oss/javascript/langgraph/overview
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -652,7 +821,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, and embeddings endpoints to OpenAI and [Azure OpenAI][3].
+The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, embeddings, and Responses endpoints to OpenAI and [Azure OpenAI][3].
 
 **Package name:** `openai`\
 **Integration name:** `openai`
@@ -670,6 +839,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][7] (as of `dd-trace@5.42.0`)
 - [Responses][8]
   - `openai.responses.create()` (as of `dd-trace@5.76.0`)
+
+The integration also traces `openai.decisions.create()` calls. Decisions tracing requires `openai>=7.30.0`, as well as either `dd-trace>=5.133.0` on v5, or `>=6.22.0` on v6.
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -750,6 +921,27 @@ The following operations are supported:
 [8]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
 [9]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
 [10]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The OpenAI Agents integration adds a Datadog trace processor to the [OpenAI Agents SDK for JavaScript][1]. It converts the SDK's built-in traces and spans into Agent Observability traces.
+
+**Package name:** `@openai/agents`\
+**Integration name:** `openai-agents`
+
+The integration supports the following operations, including streamed agent runs:
+
+- Traces (workflows)
+- Agent runs
+- LLM generations and responses
+- Guardrails
+- Handoffs
+- Function tools
+- Custom spans
+
+Keep the SDK's [built-in tracing][1] enabled so the Datadog trace processor receives these operations.
+
+[1]: https://openai.github.io/openai-agents-js/guides/tracing/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

@@ -14,6 +14,16 @@ further_reading:
   tag: Blog
   text: 'Seguimiento de canalización de datos 101: seguimiento del estado y el rendimiento
     en toda la pila de datos'
+- link: https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/
+  tag: Blog
+  text: Haga un seguimiento de la calidad de los datos del almacén de datos más allá
+    del estado del pipeline
+- link: https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/
+  tag: Centro de arquitectura
+  text: Hacer un seguimiento de Data Mesh financiero en AWS usando Datadog
+- link: https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/
+  tag: Centro de arquitectura
+  text: Seguimiento de lagos de datos de seguros en AWS mediante Datadog
 title: Descripción general de Data Observability
 ---
 ## Descripción general {#overview}

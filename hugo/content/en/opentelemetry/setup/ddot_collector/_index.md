@@ -53,11 +53,15 @@ You can run the Datadog Agent alongside the Collector for features that need the
     <h3>Install the DDOT Collector on Kubernetes</h3>
     Deploy and configure the Collector yourself, with the OpenTelemetry Operator or the Collector Helm chart.
     {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/migrate/upstream_to_ddot_collector/" >}}
+    <h3>Migrate from the upstream Collector</h3>
+    Already run the upstream OpenTelemetry Collector? Switch it to the DDOT Collector by changing its image.
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Included components
 
-The DDOT Collector includes the OpenTelemetry Collector components listed in this section. **[Placeholder: Can you add components to the DDOT Collector image, and how?]** For the Agent's Collector, see the [custom components guide][2].
+The DDOT Collector includes the OpenTelemetry Collector components listed in this section. To add components to the Agent's Collector, see the [custom components guide][2].
 
 ### Support levels
 

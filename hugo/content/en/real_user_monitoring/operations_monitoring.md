@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
   tag: "Blog"
   text: "Monitor the performance of critical steps in user journeys with RUM operations"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 ---
 
 ## Overview

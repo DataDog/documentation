@@ -100,16 +100,16 @@ The {{< ui >}}Remediation{{< /ui >}} tab lists every automation in your organiza
 - Rename an automation
 - Delete an automation
 
-## Execution history
+## Run history {#execution-history}
 
-Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past and upcoming executions. Each execution record includes:
+Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past and upcoming runs. Each run record includes:
 
-- Execution time and status (success, failure, or pending approval)
+- Run timestamp and status (success, failure, or pending approval)
 - The resources acted on
 - Estimated savings realized by the run
-- A link to the underlying Workflow Automation execution
+- A link to the underlying Workflow Automation run
 
-Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find executions by status, recommendation type, or date range.
+Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find runs by status, recommendation type, or date range.
 
 ## Version history
 

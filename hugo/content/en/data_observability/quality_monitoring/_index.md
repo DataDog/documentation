@@ -41,10 +41,12 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Connect to these data lake catalogs:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+{{< whatsnext desc="Connect to these data lake sources:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}

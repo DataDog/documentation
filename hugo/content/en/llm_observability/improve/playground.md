@@ -31,6 +31,9 @@ Supported providers:
 - Azure OpenAI
 - Amazon Bedrock
 - Vertex AI
+- Baseten
+- Fireworks AI
+- Together AI
 - Custom Provider
 
 ## Test a prompt with arbitrary input
