@@ -565,6 +565,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><strong>Path:</strong> <code>@container_image.base_image</code><br>Base image this container image is built on. A base image is itself a container image and may have its own <code>base_image</code>. Absent when no base image is identified.</td>
     </tr>
     <tr>
+      <td><code>built_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@container_image.built_at</code><br>Timestamp in milliseconds (UTC) when the container image was built. Absent when the build time is unknown.</td>
+    </tr>
+    <tr>
       <td><code>git_repository_url</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL of the Git repository for the code used to build the container image. Available only when Source Code Integration is configured.</td>
