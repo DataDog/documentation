@@ -132,7 +132,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 [13]: /tracing/metrics/runtime_metrics/
 [14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
-[16]: https://app.datadoghq.com/metric/summary
+[16]: https://app.datadoghq.com/metric/catalog
 [17]: https://app.datadoghq.com/monitors/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters

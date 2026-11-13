@@ -4,85 +4,90 @@ aliases:
 - /es/incident_response/incident_management/incident_settings/information
 title: Información
 ---
+## Descripción general {#overview}
 
-## Información general
+Desde la página [Incident Settings Information][1], puede personalizar los estados y los niveles de gravedad de sus incidentes y habilitar capacidades principales de incidentes, como incidentes privados, incidentes de prueba y anulaciones de marcas de tiempo.
 
-Desde la página de [Información de configuración de incidentes][1], puedes personalizar los estados y la gravedad de tus incidentes y activar las funciones principales para incidente, como incidentes privados, incidentes de test y anulaciones de fecha y hora.
+## Niveles de gravedad {#severity-levels}
 
-## Niveles de gravedad
+ {{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_severity_levels.png" alt="Niveles de gravedad personalizables en la configuración de incidentes" style="width:100%;" >}}
 
- {{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_severity_levels.png" alt="Niveles de gravedad personalizables en la configuración del incidente" style="width:100%;" >}}
+Utilice la configuración de niveles de gravedad para:
 
-Utiliza la configuración del nivel de gravedad para:
+1. Definir su nivel de gravedad más crítico como `SEV-0` o `SEV-1` (el valor predeterminado es `SEV-1`)
+2. Personalizar las subetiquetas de sus niveles de gravedad (**Valores predeterminados:** Critical, High, Moderate, Low, Minor)
+3. Personalizar las descripciones de sus niveles de gravedad
+4. Agregar o eliminar niveles de gravedad desde la parte inferior de su lista, con un mínimo de uno y un máximo de diez
+5. Habilitar el nivel de gravedad "Unknown"
 
-1. Define tu gravedad más crítica como `SEV-0` o `SEV-1` (por defecto `SEV-1`)
-2. Personalizar las subetiquetas de las gravedades (**Por defecto:** Crítica, Alta, Moderada, Baja, Menor)
-3. Personaliza las descripciones de tus gravedades
-4. Añade o elimina gravedades desde el final de tu lista, con un mínimo de una y un máximo de diez
-5. Activar la gravedad "Desconocido"
+**Nota**: Si intenta eliminar un nivel de gravedad al que se hace referencia en una [regla de notificación][2], se le solicitará que confirme su decisión. Si decide continuar, se deshabilitan las reglas de notificación afectadas porque dejan de ser válidas. Eliminar un nivel de gravedad o cambiar el nivel de gravedad inicial no actualiza automáticamente ninguna consulta de [Incident Management Analytics][3].
 
-**Nota**: Si intentas eliminar una gravedad a la que se hace referencia en una [regla de notificación][2], se te pedirá que confirmes tu decisión. Si decides continuar, se desactivarán las reglas de notificación afectadas, ya que dejarán de ser válidas. La eliminación de una gravedad o el cambio de la gravedad inicial no actualiza automáticamente ninguna consulta de [Incident Management Analytics][3].
+## Niveles de estado {#status-levels}
 
-## Niveles de estado
+{{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_status_levels.png" alt="Niveles de estado personalizables en la configuración de incidentes" style="width:100%;" >}}
 
-{{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_status_levels.png" alt="Niveles de estado personalizables en la configuración del incidente" style="width:100%;" >}}
-
-Utiliza la configuración de nivel de estado para:
+Utilice la configuración de niveles de estado para:
 
 1. Personalizar las descripciones de los estados
-2. Activar el estado opcional `Completed` 
+2. Habilitar el estado opcional `Completed`
 
-**Nota**: La eliminación del estado `Completed` no actualiza automáticamente los incidentes en el estado `Completed` y no actualiza automáticamente ninguna consulta de [Incident Management Analytics][3] que haga referencia explícita al mismo. Cualquier regla de notificación que haga referencia al estado `Completed` se desactiva.
+**Nota**: Eliminar el estado `Completed` no actualiza automáticamente los incidentes en el estado `Completed` y no actualiza automáticamente ninguna consulta de [Incident Management Analytics][3] que haga referencia explícita a él. Cualquier regla de notificación que haga referencia al estado `Completed` se deshabilita.
 
-## Texto auxiliar
+## Texto de ayuda {#helper-text}
 
-{{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_helper_text.png" alt="Configuración del texto auxiliar de Declarar incidente" style="width:100%;">}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/settings_info_helper_text.png" alt="Configuración del texto de ayuda de Declare Incident" style="width:100%;">}}
 
-El texto auxiliar aparece junto al [Modal de creación de incidentes][4] y ayuda a tus respondedores a entender cómo deben definir el incidente.
+El texto de ayuda aparece junto al [Incident Creation Modal][4] y ayuda a sus respondedores a entender cómo deben definir el incidente.
 
-Puedes utilizar markdown en el texto auxiliar para añadir listas con sangría, texto formateado e hipervínculos a otros recursos.
+Puede usar markdown en el texto de ayuda para agregar listas con sangría, texto con formato e hipervínculos a otros recursos.
 
-## Incidentes privados (visibilidad del incidente)
+## Incidentes privados (visibilidad del incidente) {#private-incidents-incident-visibility}
 
-_Por defecto: desactivado_
+_Predeterminado: deshabilitado_
 
-La **visibilidad** de un incidente determina qué usuarios de tu organización de Datadog pueden verlo. Si la visibilidad del incidente es **organización**, cualquier usuario con permiso **Lectura de incidentes** puede verlo. Si la visibilidad del incidente es **privada**, solo podrán verla los respondedores del incidente o los usuarios con el permiso **Acceso global a incidentes privados**.
+La **visibilidad** de un incidente determina qué usuarios de su organización de Datadog pueden verlo. Si la visibilidad de un incidente es **organization**, cualquier usuario con el permiso **Incidents Read** puede verlo. Si la visibilidad del incidente es **private**, solo los respondedores del incidente o los usuarios con el permiso **Private Incidents Global Access** pueden verlo.
 
-En la [página de incidentes de Datadog][5], puedes buscar incidentes privados utilizando la faceta **Visibilidad** de la izquierda. También puedes añadir condiciones en torno a la visibilidad del incidente al definir [reglas de notificación][2] del incidente.
+En la [página Incidents de Datadog][5], puede buscar incidentes privados usando la faceta **Visibility** a la izquierda. También puede agregar condiciones sobre la visibilidad de los incidentes al definir [reglas de notificación][2] de incidentes.
 
-### Incidentes privados en Slack
+### Separar los incidentes de seguridad de los incidentes operativos {#separate-security-incidents-from-operational-incidents}
 
-Al declarar incidentes privados, Datadog crea canales privados de Slack en lugar de canales públicos.
+Para manejar los incidentes de seguridad por separado de los incidentes operativos, cree un tipo de incidente dedicado para ellos. Cada tipo de incidente tiene su propia configuración y automatizaciones de incidentes, por lo que puede ejecutar un flujo de trabajo que se aplique solo a los incidentes de seguridad.
 
-Si conviertes un incidente en privado, Datadog archiva el canal de incidentes existente, crea un nuevo canal privado y añade a él todos los respondedores existentes.
+Los tipos de incidentes no tienen sus propios controles de acceso. Para restringir quién puede ver los incidentes confidenciales, declárelos como incidentes privados.
 
-Para convertir un incidente en privado en Slack, utiliza `/datadog incident private`.
+### Incidentes privados en Slack {#private-incidents-in-slack}
 
-## Eliminación del incidente
+Cuando declara incidentes privados, Datadog crea canales privados de Slack en lugar de canales públicos.
 
-_Por defecto: desactivado_
+Si convierte un incidente en privado, Datadog archiva el canal del incidente existente, crea un nuevo canal privado y agrega a ese canal a todos los respondedores existentes.
 
-Cuando la eliminación del incidente está habilitada para un tipo de incidente, cualquier usuario con el permiso **Escritura de incidentes** puede eliminar cualquier incidente del tipo de incidente.
+Para convertir un incidente en privado en Slack, use `/datadog incident private`.
 
-Una vez eliminado un incidente, ya no influye en los análisis del incidente y ningún usuario puede acceder a él. Los incidentes eliminados no se pueden recuperar.
+## Eliminación de incidentes {#incident-deletion}
 
-## Anular las marcas de tiempo de estado
+_Predeterminado: deshabilitado_
 
-_Por defecto: desactivado_
+Cuando la eliminación de incidentes está habilitada para un tipo de incidente, cualquier usuario con el permiso **Incidents Write** puede eliminar cualquier incidente de ese tipo.
 
-Cuando se habilitan las anulaciones de fecha y hora en un tipo de incidente, cualquier usuario con el permiso **Escritura de incidente** puede definir anulaciones de fecha y hora en cualquier incidente de ese tipo de incidente.
+Después de eliminar un incidente, este ya no influye en los análisis de incidentes y ningún usuario puede acceder a él. Los incidentes eliminados no se pueden recuperar.
 
-Cuando está activada, puedes definir anulaciones para las marcas de tiempo `declared`, `detected` y `resolved` en un incidente. Para obtener más información, consulta [Incident Analytics][3].
+## Anular marcas de tiempo de estado {#override-status-timestamps}
 
-## Incidentes de test
+_Predeterminado: deshabilitado_
 
-_Por defecto: desactivado_
+Cuando las anulaciones de marcas de tiempo están habilitadas para un tipo de incidente, cualquier usuario con el permiso **Incidents Write** puede definir anulaciones de marcas de tiempo en cualquier incidente de ese tipo.
 
-Cuando los incidentes de test están habilitados en un tipo de incidente, cualquier usuario con el permiso **Escritura de incidentes** puede declarar incidentes de test del tipo de incidente.
+Cuando está habilitado, puede definir anulaciones para las marcas de tiempo `declared`, `detected` y `resolved` en un incidente. Para obtener más información, consulte [Incident Analytics][3].
 
-Los incidentes de test se distinguen visualmente por un banner morado. Por defecto, los incidentes de test no aparecen en la búsqueda del incidente, no ejecutan automatizaciones, no ejecutan reglas de notificación ni afectan a los análisis. El declarante puede optar por estas funciones durante la declaración.
+## Incidentes de prueba {#test-incidents}
 
-Para más información, consulta [Uso de incidentes de test][6].
+_Predeterminado: deshabilitado_
+
+Cuando los incidentes de prueba están habilitados para un tipo de incidente, cualquier usuario con el permiso **Incidents Write** puede declarar incidentes de prueba de ese tipo.
+
+Los incidentes de prueba se distinguen visualmente por un banner morado. De forma predeterminada, los incidentes de prueba no aparecen en la búsqueda de incidentes, no ejecutan automatizaciones, no ejecutan reglas de notificación ni afectan los análisis. El declarante puede optar por estas funciones durante la declaración.
+
+Para obtener más información, consulte [Uso de incidentes de prueba][6].
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
 [2]: /es/incident_response/incident_management/setup_and_configuration/notification_rules

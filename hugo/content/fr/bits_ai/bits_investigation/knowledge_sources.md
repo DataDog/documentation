@@ -29,6 +29,8 @@ Comme ces liens sont définis par l'utilisateur, vous avez le contrôle sur ce q
 
 Pour maximiser la valeur de cette intégration, documentez en détail les services, les dépendances et les systèmes impliqués, et fournissez des instructions claires et étape par étape pour résoudre le problème. Des runbooks bien structurés et spécifiques permettent à Bits de mener des investigations plus précises et efficaces.
 
+Bits suit les liens contenus dans le message du monitor auxquels il a accès, tels que les Notebooks et les [pages Confluence][3].
+
 {{< img src="bits_ai/optimization_example.png" alt="Exemple de monitor avec des étapes d'optimisation appliquées" style="width:100%;" >}}
 
 ## Bits.md {#bitsmd}
@@ -36,6 +38,9 @@ Pour maximiser la valeur de cette intégration, documentez en détail les servic
 Vous pouvez guider de manière proactive la façon dont Bits examine votre environnement en créant un fichier `bits.md` dans [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` est un fichier Markdown qui fournit un contexte structuré sur votre environnement à Bits. Il sert de guide léger pour améliorer la précision de l'investigation, la construction des requêtes et l'alignement de la terminologie. Ajoutez des connaissances spécifiques à l'équipe telles que les conventions de marquage, les modèles architecturaux, les termes du glossaire et les meilleures pratiques d'investigation.
+
+- **Le cas échéant** : dans les paramètres `bits.md`, utilisez les options {{< ui >}}Investigations{{< /ui >}} et {{< ui >}}Chat{{< /ui >}} pour choisir les produits Bits qui utilisent le fichier.
+- **Liens** : Bits peut suivre les liens dans `bits.md` auxquels il a accès.
 
 ### Exemple bits.md {#sample-bitsmd}
 
@@ -125,3 +130,4 @@ Pour gérer les mémoires, notamment pour les consulter et les supprimer, accéd
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: /fr/bits_ai/bits_investigation/configure/#confluence

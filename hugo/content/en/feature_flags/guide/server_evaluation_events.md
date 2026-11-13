@@ -19,7 +19,7 @@ Datadog Feature Flags server SDKs can send aggregated flag evaluation events to 
 
 Use these SDK versions or later for the evaluation-event privacy behavior described in this guide. For Node.js, use the listed version or later within the same major release line:
 
-<!-- Release readiness: Publish after .NET tracer 3.57.0 and PHP 1.27.0 are released. Confirm the .NET provider package containing the evaluation-event hook and replace the provider requirement below with its released version. -->
+<!-- Release readiness: .NET tracer 3.57.0 and PHP 1.27.0 are released. Before publishing, confirm the released .NET provider package containing the evaluation-event hook and replace the provider requirement below with its released version. -->
 
 | SDK | Minimum version | Event delivery |
 |---|---|---|
@@ -63,7 +63,7 @@ To include original targeting keys and evaluation context in EVP flag evaluation
 | `false`, absent, or not a Boolean `true` | Unsalted SHA-256 digest with a `sha256_` prefix. | Omitted. |
 | `true` | Events can include the original targeting key. | Events can include a bounded snapshot of evaluation attributes. |
 
-The SDK uses the `observe_full_evaluation_data` value captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. To keep SDK memory use bounded, the SDK can omit targeting keys and context when aggregation limits are reached while retaining aggregate counts, even when full data collection is enabled.
+The SDK uses the `observe_full_evaluation_data` value captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. When aggregation limits are reached, the SDK can omit targeting keys and context to limit memory use. It retains aggregate counts, even when full data collection is enabled.
 
 Hashing pseudonymizes targeting keys. Identical keys produce identical hashes, allowing you to correlate evaluations for the same subject.
 

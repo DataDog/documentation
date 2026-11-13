@@ -19,7 +19,7 @@ further_reading:
 
 Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate feature flags into your application and start collecting feature flag data:
 
-Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
 {{< card-grid card_width="200px">}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
@@ -36,6 +36,10 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
 
+## Opt out individual users or devices
+
+Flag evaluation opt-out and experimentation opt-out control different behaviors for a subject, such as a user or device. See [Flag Evaluation and Experimentation Opt-Out][3] for the shared concepts and SDK support considerations.
+
 ## Telemetry options by platform
 
 The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
@@ -48,14 +52,14 @@ The web options below apply to `DatadogProvider`, the recommended browser provid
 
 Default: `true`. Set to `false` to disable.
 
-- **Web** (`@datadog/openfeature-browser`): `enableExposureLogging`
+- **Web** (`@datadog/openfeature-browser`): `trackExposures` (version 2.3.0 and later). Earlier versions use `enableExposureLogging`, which is deprecated.
 - **Android** (`dd-sdk-android-flags`): `trackExposures`
 - **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackExposures`
 - **iOS** (`DatadogFlags`): `trackExposures`
 - **React Native**: `trackExposures`
 - **Unity**: `trackExposures`
 
-### Send aggregated evaluation telemetry
+### Send aggregated flag evaluation telemetry
 
 Default: `true`. Set to `false` to disable.
 
@@ -84,7 +88,7 @@ Datadog supports these testing approaches:
 - **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including the CDN-delivered flag assignments.
 - **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
 
-This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change—only the provider registered during test setup.
 
 A typical test follows this pattern:
 
@@ -133,3 +137,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 
 [1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [2]: /feature_flags/concepts/flag_key_obfuscation/
+[3]: /feature_flags/concepts/opt_out/

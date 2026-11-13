@@ -3,15 +3,13 @@ description: 'Private Action Runner를 사용하여 Private Link Connectivity로
   작업 영역에 대한 Data Observability: Jobs Monitoring을 설정합니다.'
 further_reading:
 - link: /data_observability/jobs_monitoring/databricks
-  tag: 문서
+  tag: 설명서
   text: 'Databricks용 Data Observability: Jobs Monitoring'
 - link: /actions/private_actions
-  tag: 문서
+  tag: 설명서
   text: Private Action Runner
 title: Private Link Connectivity
 ---
-<div class="alert alert-info">Private Link Connectivity를 통한 Databricks 모니터링은 미리 보기로 제공되고 있습니다.</div>
-
 [Private Link Connectivity][1]를 사용하여 배포된 Databricks 작업 영역은 공용 인터넷으로부터 격리되어 있으므로 Datadog이 Databricks API에 직접 액세스할 수 없습니다. 이러한 작업 영역을 모니터링하려면 환경에 [Private Action Runner][2](PAR)를 배포하세요. 러너는 Datadog에 요청을 폴링하고, Databricks API에 대해 로컬로 실행하며, 기존 [Datadog VPC 엔드포인트][3]를 통해 결과를 다시 보냅니다.
 
 ## 아키텍처 {#architecture}
@@ -40,7 +38,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
      - **Azure**: [Private Link 서비스 설정][6](US3에서만 사용 가능). 이를 위해서는 Datadog Azure 계정의 승인이 필요합니다. 지침에 명시된 대로 Datadog 지원팀에 문의하세요.
      - **GCP**: [Private Service Connect 엔드포인트 설정][7](US5 및 EU1에서 사용 가능)
 1. Datadog 서비스 계정을 만듭니다.
-   1. [서비스 계정][8] 페이지로 이동합니다.
+   1. [Service Accounts][8] 페이지로 이동합니다.
    1. **New Service Account**를 클릭합니다.
    1. 서비스 계정의 이름과 이메일 주소를 입력합니다.
    1. **Assign Roles**에서 **Datadog Standard Role**을 선택합니다. 또는 `Connections Resolve` 권한이 있는 사용자 지정 역할을 선택합니다.
@@ -66,7 +64,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Secrets** 탭을 클릭한 다음 **Generate secret**을 클릭합니다.
    1. 시크릿의 수명을 일 단위로 설정합니다(최대 730일).
    1. **Generate**를 클릭합니다.
-   1. 다음 방법 중**하나**를 사용하여 Databricks 자격 증명을 러너에서 사용할 수 있도록 설정합니다.
+   1. 다음 방법 중 **하나**를 사용하여 Databricks 자격 증명을 러너에서 사용할 수 있도록 설정합니다.
       - **클라우드 시크릿 스토리지**(AWS Secrets Manager, AWS Parameter Store, Azure Key Vault 또는 Google Cloud Secret Manager): 자격 증명을 JSON Blob으로 저장합니다.
         ```json
         {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>"}
@@ -77,10 +75,10 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. 서비스 주체에 **Workspace Admin** 권한을 부여합니다. 이렇게 하면 Datadog이 초기화 스크립트 설치 및 업데이트를 자동으로 관리할 수 있습니다. 또는 작업, 클러스터 및 쿼리 모니터링을 위해 더 [세분화된 권한][11]을 할당합니다.
       1. **Identity and access** 탭을 클릭합니다.
       1. **Groups** 옆의 **Manage**를 클릭합니다.
-      1. **관리자** 그룹을 선택합니다.
+      1. **admins** 그룹을 선택합니다.
       1. **Add members**를 클릭하고 위에서 추가한 서비스 주체를 선택합니다.
       1. **Add**를 클릭합니다.
-   1. Databricks 비용 데이터에 액세스하거나 Serverless 작업을 모니터링하려면 SQL 웨어하우스에서 서비스 주체에 `CAN USE` 권한을 부여하고 Unity Catalog의 [시스템 표][20]에 대한 읽기 액세스 권한을 부여합니다. 자세한 내용은 [권한][11]를 참조하세요.
+   1. Databricks 비용 데이터에 액세스하거나 Serverless 작업을 모니터링하려면 SQL 웨어하우스에서 서비스 주체에 `CAN USE` 권한을 부여하고 Unity Catalog의 [시스템 표][20]에 대한 읽기 액세스 권한을 부여합니다. 자세한 내용은 [권한][11]을 참조하세요.
    1. Serverless 작업을 모니터링하거나 SQL 웨어하우스 및 쿼리 모니터링을 사용하려면, 서비스 주체를 `databricks_pii_access` 계정 수준 그룹에 추가합니다. Databricks는 이 그룹 외부의 주체에 대해 SQL 쿼리 텍스트를 마스킹합니다. 자세한 내용은 [쿼리 텍스트 액세스][21]를 참조하세요.
 
 [9]: https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals?language=Workspace%C2%A0admin%C2%A0settings#-add-service-principals-to-your-account
@@ -97,13 +95,13 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. [Microsoft Entra 관리 센터][23]에 최소 Cloud Application Administrator 권한으로 로그인합니다.
    1. **Entra ID > App registrations**로 이동한 다음 **New registration**을 클릭합니다.
    1. 이름을 입력하고 **Register**를 클릭합니다.
-   1. 애플리케이션의 **Overview** 페이지에서 **Application(클라이언트) ID** 및 **Directory(테넌트) ID**를 기록해 둡니다.
+   1. 애플리케이션의 **Overview** 페이지에서 **Application (client) ID** 및 **Directory (tenant) ID**를 기록해 둡니다.
 1. 애플리케이션에 대한 클라이언트 시크릿을 생성합니다([Microsoft Entra 설명서][22]).
    1. 애플리케이션 페이지에서 **Certificates & secrets**를 클릭합니다.
    1. **Client secrets** 탭을 클릭한 다음 **New client secret**을 클릭합니다.
    1. 설명과 수명 기간을 입력한 다음 **Add**를 클릭합니다.
    1. 생성된 시크릿 값을 복사합니다. 이 값은 한 번만 표시됩니다.
-   1. 다음 방법 중**하나**를 사용하여 Databricks 자격 증명을 러너에서 사용할 수 있도록 설정합니다.
+   1. 다음 방법 중 **하나**를 사용하여 Databricks 자격 증명을 러너에서 사용할 수 있도록 설정합니다.
       - **클라우드 시크릿 스토리지**(AWS Secrets Manager, AWS Parameter Store 또는 Azure Key Vault): 자격 증명을 JSON Blob으로 저장합니다.
         ```json
         {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>", "tenant_id": "<TENANT_ID>"}
@@ -116,16 +114,16 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Identity and access** 탭을 클릭합니다.
    1. **Service principals** 옆의 **Manage**를 클릭합니다.
    1. **Add service principal**을 클릭한 다음 **Add new**를 클릭합니다.
-   1. **Microsoft Entra ID managed**를 선택한 다음, 위에서 기록해 둔 **Application(클라이언트) ID**를 붙여넣습니다.
+   1. **Microsoft Entra ID managed**를 선택한 다음, 위에서 기록해 둔 **Application (client) ID**를 붙여넣습니다.
    1. 이름을 입력하고 **Add**를 클릭합니다.
 1. 서비스 주체에 대한 작업 영역 액세스 및 권한을 프로비저닝합니다. 자세한 내용은 [권한][11]을 참조하세요.
    1. 서비스 주체에 **Workspace Admin** 권한을 부여합니다. 이렇게 하면 Datadog이 초기화 스크립트 설치 및 업데이트를 자동으로 관리할 수 있습니다. 또는 작업, 클러스터 및 쿼리 모니터링을 위해 더 [세분화된 권한][11]을 할당합니다.
       1. **Identity and access** 탭을 클릭합니다.
       1. **Groups** 옆의 **Manage**를 클릭합니다.
-      1. **관리자** 그룹을 선택합니다.
+      1. **admins** 그룹을 선택합니다.
       1. **Add members**를 클릭하고 위에서 추가한 서비스 주체를 선택합니다.
       1. **Add**를 클릭합니다.
-   1. Databricks 비용 데이터에 액세스하거나 Serverless 작업을 모니터링하려면 SQL 웨어하우스에서 서비스 주체에 `CAN USE` 권한을 부여하고 Unity Catalog의 [시스템 표][20]에 대한 읽기 액세스 권한을 부여합니다. 자세한 내용은 [권한][11]를 참조하세요.
+   1. Databricks 비용 데이터에 액세스하거나 Serverless 작업을 모니터링하려면 SQL 웨어하우스에서 서비스 주체에 `CAN USE` 권한을 부여하고 Unity Catalog의 [시스템 표][20]에 대한 읽기 액세스 권한을 부여합니다. 자세한 내용은 [권한][11]을 참조하세요.
    1. Serverless 작업을 모니터링하거나 SQL 웨어하우스 및 쿼리 모니터링을 사용하려면, 서비스 주체를 `databricks_pii_access` 계정 수준 그룹에 추가합니다. Databricks는 이 그룹 외부의 주체에 대해 SQL 쿼리 텍스트를 마스킹합니다. 자세한 내용은 [쿼리 텍스트 액세스][21]를 참조하세요.
 
 [11]: /ko/data_observability/jobs_monitoring/databricks/#permissions
@@ -154,7 +152,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. Private Action Runner가 하단에 "successfully installed."로 표시되어야 합니다.
 1. 기존 `values.yaml`을 업데이트합니다([Helm 차트 값][4] 참조).
    1. `image.repository`를 `gcr.io/datadoghq/dd-data-observability-par`로 설정합니다.
-   1. `image.tag`를 `1.21.0-3`으로 설정합니다.
+   1. `image.tag`를 `1.22.1-0`으로 설정합니다.
 1. 다음 방법 중 하나를 사용하여 Private Action Runner에서 자격 증명을 구성합니다.
     - 러너에서 직접 `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 설정합니다. Microsoft Entra ID 관리형 서비스 주체를 사용하는 경우 `DATABRICKS_AZURE_TENANT_ID`도 설정합니다. 통합 타일의 "Secret Path"는 비워 두세요.
     - 클라우드 시크릿 스토리지를 사용합니다. [2단계](#step-2-databrick-prerequisites)에서 생성된 시크릿을 읽을 수 있는 권한이 있는 ID가 포드에 할당되었는지 확인하고([Azure Workload Identity][5], [AWS IAM Role][6] 또는 [GKE Workload Identity][7]), `DATABRICKS_SECRET_PATH` 환경 변수를 통해 또는 통합 타일의 'Secret Path' 필드에 제공하여 시크릿 경로를 지정하세요.
@@ -177,7 +175,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Script** 옵션을 선택한 다음 **Next**를 클릭합니다.
    1. **Docker**의 지침을 따릅니다.
 
-      **중요**: `gcr.io/datadoghq/private-action-runner:v1.21.0-large`를 `gcr.io/datadoghq/dd-data-observability-par:1.21.0-3`으로 바꿉니다.
+      **중요**: `gcr.io/datadoghq/private-action-runner:v1.22.1-large`를 `gcr.io/datadoghq/dd-data-observability-par:1.22.1-0`으로 바꿉니다.
 
    1. Private Action Runner가 하단에 "successfully installed."로 표시되어야 합니다.
 1. 다음 방법 중 하나를 사용하여 Private Action Runner에서 자격 증명을 구성합니다.
@@ -219,7 +217,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. [Databricks 통합][13] 타일로 이동합니다.
    1. **Credentials**에서 **Private Action Runner**를 선택합니다.
       1. **Connection**에서 이전 단계에서 생성한 연결을 선택합니다.
-      1. **서비스 계정** 아래에서 [1단계](#step-1-datadog-prerequisites)에서 생성한 서비스 계정을 선택합니다.
+      1. **Service Account** 아래에서 [1단계](#step-1-datadog-prerequisites)에서 생성한 서비스 계정을 선택합니다.
       1. **Secret Path** 아래에 [2단계](#step-2-databricks-prerequisites)의 시크릿 경로를 입력합니다. `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 사용하여 자격 증명을 설정했거나 러너에서 `DATABRICKS_SECRET_PATH` 환경 변수를 사용하여 경로를 설정한 경우 이 필드를 비워 두세요.
    1. [Datadog-Databricks 통합 구성][14]에 설명된 대로 나머지 통합 설정을 완료합니다.
       1. **Workspace Name**, **Workspace URL** 및 **System Tables SQL Warehouse ID**를 입력합니다.
@@ -229,7 +227,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Save Databricks Workspace**를 클릭합니다.
    1. 저장 시 오류가 없는지 확인합니다.
 
-## 유효성 검사 {#validation}
+## 검증 {#validation}
 
 설정을 완료하면 [Data Observability: Jobs Monitoring][15]에 작업 및 클러스터 정보가 곧 표시됩니다.
 

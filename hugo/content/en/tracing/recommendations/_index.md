@@ -97,10 +97,6 @@ APM Recommendations help you improve your applications' performance and reliabil
 
 {{< img src="/tracing/recommendations/apm_recommendations-3.png" alt="APM Recommendations page with summary cards for reliability and performance issues and a list of recommendations to review" style="width:100%;" >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/apm-ai-recommendations/" header="Join the AI Recommendations Preview!" >}}
-AI-driven recommendation types are now available, expanding the set of [optimization opportunities](?recommendation_prerequisite=APM+%2B+AI+Recs+%28Preview%29#supported-recommendations) Datadog can detect.
-{{< /callout >}}
-
 ## Prerequisites
 
 Certain recommendations rely on specific Datadog products. Use the {{< ui >}}Recommendation Prerequisite{{< /ui >}} dropdown to filter recommendations by the Datadog products in your setup.

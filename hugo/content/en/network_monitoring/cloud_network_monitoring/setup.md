@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 - SUSE 15+
 - Amazon AMI 2016.03+
 - Amazon Linux 2
-- CentOS/RHEL 7.6+
+- CentOS/Red Hat Enterprise Linux (RHEL) 7.6+
 
 **Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
@@ -152,7 +152,7 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
+On CentOS/RHEL 7, the Datadog Agent RPM package bundles and loads an [SELinux policy][3] to grant these permissions to the system-probe binary. On RHEL 8 and later, the default SELinux policy runs the Agent and system-probe in the `unconfined_service_t` domain, so the bundled policy is not necessary.
 
 If you need to use Cloud Network Monitoring on other systems with SELinux enabled, do the following:
 
@@ -184,6 +184,22 @@ If you need to use Cloud Network Monitoring on other systems with SELinux enable
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
+
+#### SELinux cleanup after in-place upgrades from RHEL 7
+
+An in-place upgrade updates the operating system from RHEL 7 to RHEL 8 or later without a new installation (for example, with Leapp). After this upgrade, the `system_probe_t` file contexts from RHEL 7 can stay on the Agent binaries. These contexts stop systemd from running the Agent and system-probe in the `unconfined_service_t` domain. When SELinux is in enforcing mode, it denies actions that the Agent and system-probe need.
+
+To fix the denials, remove the `system_probe_t` file contexts and the policy module, restore the default labels, and restart the Agent:
+
+```shell
+sudo semanage fcontext -d -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
+sudo semanage fcontext -d -t system_probe_t /opt/datadog-agent/bin/agent/agent
+sudo restorecon -v /opt/datadog-agent/embedded/bin/system-probe /opt/datadog-agent/bin/agent/agent
+sudo semodule -r system_probe_policy
+sudo systemctl restart datadog-agent
+```
+
+After the restart, systemd runs the Agent and system-probe in the `unconfined_service_t` domain.
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation

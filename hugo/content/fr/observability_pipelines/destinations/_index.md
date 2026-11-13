@@ -2,8 +2,6 @@
 aliases:
 - /fr/observability_pipelines/destinations/datadog_apm/
 - /fr/observability_pipelines/destinations/opentelemetry/traces/
-- /fr/observability_pipelines/destinations/opentelemetry/metrics/
-- /fr/observability_pipelines/destinations/prometheus/
 description: Découvrez les destinations disponibles pour l'Observability Pipelines
   Worker.
 disable_toc: false
@@ -85,12 +83,16 @@ Voici les destinations disponibles :
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [Client HTTP/S][3]
+- [OpenTelemetry][5]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /fr/observability_pipelines/destinations/datadog_metrics/
 [2]: /fr/observability_pipelines/destinations/elasticsearch/
 [3]: /fr/observability_pipelines/destinations/http_client/
 [4]: /fr/observability_pipelines/destinations/splunk_hec/metrics
+[5]: /fr/observability_pipelines/destinations/opentelemetry/metrics
+[6]: /fr/observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}

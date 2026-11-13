@@ -32,3 +32,74 @@ entries:
       - ListCustomCostsFiles
       - UploadCustomCostsFile
     title: Add ai_provider to Custom Costs files
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41284
+    operations:
+      - GetCommitmentsCommitmentList
+    title: Fix GetCommitments CommitmentList response schema
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41334
+    operations:
+      - GetBudget
+    title: Fix GetBudget error response schema to JSONAPI errors
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41553
+    operations:
+      - CreateCostAWSCURConfig
+      - CreateCostAzureUCConfigs
+      - CreateCostGCPUsageCostConfig
+      - CreateCustomAllocationRule
+      - GetCostAWSCURConfig
+      - GetCostAzureUCConfig
+      - GetCostGCPUsageCostConfig
+      - GetCustomAllocationRule
+      - ListCostAWSCURConfigs
+      - ListCostAzureUCConfigs
+      - ListCostGCPUsageCostConfigs
+      - ListCustomAllocationRules
+      - UpdateCostAWSCURConfig
+      - UpdateCostAzureUCConfigs
+      - UpdateCostGCPUsageCostConfig
+      - UpdateCustomAllocationRule
+      - UpdateTagPipelinesRuleset
+      - ValidateQuery
+    title: Document cost onboarding fields and fix timestamp and query schemas
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateUnitCost
+      - DeleteUnitCost
+      - GetBudget
+      - GetCommitmentsCommitmentList
+      - GetCommitmentsCoverageScalar
+      - GetCommitmentsCoverageTimeseries
+      - GetCommitmentsOnDemandHotspotsScalar
+      - GetCommitmentsSavingsScalar
+      - GetCommitmentsSavingsTimeseries
+      - GetCommitmentsUtilizationScalar
+      - GetCommitmentsUtilizationTimeseries
+      - GetCostTagKey
+      - GetUnitCost
+      - ListCostCloudAccountsV2
+      - ListCostTagKeys
+      - ListCostTags
+      - ListUnitCosts
+      - SearchCostRecommendations
+      - UpdateUnitCost
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41543
+    operations:
+      - UpdateCustomCostsFile
+    title: Add Update Custom Costs file endpoint
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41543
+    operations:
+      - UploadCustomCostsFile
+    title: Add Update Custom Costs file endpoint

@@ -22,15 +22,16 @@ title: Prise en main des outils MCP de Software Delivery
 ---
 ## Présentation {#overview}
 
-Le [Datadog MCP Server][1] permet aux agents IA d'accéder à vos données de Software Delivery via le [Model Context Protocol (MCP)][2]. Le jeu d'outils `software-delivery` fournit des outils pour interagir avec [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA Metrics][9] et [Deployment Gates][10] directement depuis des clients basés sur l'IA comme Cursor, Claude Code ou OpenAI Codex.
+Le [Datadog MCP Server][1] permet aux agents IA d'accéder à vos données de Software Delivery via le [Model Context Protocol (MCP)][2]. L'ensemble d'outils `software-delivery` fournit des outils pour interagir avec [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA metrics][9] et [Deployment Gates][10]. Utilisez les outils directement depuis des clients basés sur l'IA comme Cursor, Claude Code ou OpenAI Codex.
 
 ## Cas d'utilisation {#use-cases}
 
-Les outils MCP de Software Delivery débloquent des workflows assistés par l'IA pour :
+Les outils MCP de Software Delivery fournissent des flux de travail assistés par IA pour :
 
 - **Déboguer les échecs de pipeline**: Demandez à votre agent IA de trouver les échecs de pipeline récents, d'analyser les logs d'erreurs et de suggérer des correctifs.
 - **Identifier les tests instables**: Recherchez les tests instables dans votre dépôt et obtenez des recommandations hiérarchisées sur ceux à corriger en priorité.
 - **Analyser les performances de CI**: Obtenez des statistiques agrégées sur les durées de pipeline, les taux d'échec et les tendances au fil du temps.
+- **Optimiser la CI/CD**: Combinez l'inspection du dépôt avec les données de CI et de test pour hiérarchiser les améliorations, valider les changements et mesurer leur impact.
 - **Trier les échecs de tests**: Comprenez quels tests échouent, qui en est responsable et quels sont les modèles historiques.
 - **Examiner la couverture de code**: Obtenez des résumés de couverture pour des branches ou des commits, y compris la couverture des correctifs et les répartitions par service ou propriétaire de code.
 - **Mesurer les métriques DORA**: Interrogez la fréquence de déploiement, le délai de modification, le taux d'échec des modifications et le temps de récupération par service ou par équipe.
@@ -69,7 +70,10 @@ Le jeu d'outils `software-delivery` comprend les suivants :
 : Récupérez les métriques récapitulatives agrégées de couverture de code pour un commit de dépôt, y compris la couverture totale, la couverture des correctifs et les répartitions par service/propriétaire de code.
 
 `get_datadog_test_optimization_settings`
-: Récupérez les fonctionnalités Test Optimization activées pour un service, y compris Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, la collecte Code Coverage et les commentaires de PR.
+: Récupérez les fonctionnalités de Test Optimization activées pour un service. Les fonctionnalités incluent Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, la collecte de données Code Coverage et PR Comments.
+
+`update_datadog_test_optimization_settings`
+: Mettez à jour les paramètres de Test Optimization pour un dépôt, un service et un environnement existants. Activez, désactivez ou restaurez les paramètres hérités pour Test Impact Analysis, Early Flake Detection, Auto Test Retries, Failed Test Replay et Code Coverage. Cette opération d'écriture nécessite à la fois les autorisations `TestOptimizationRead` et `TestOptimizationSettingsWrite` ainsi qu'une approbation explicite de l'utilisateur. Lisez les paramètres actuels avant de les mettre à jour. L'activation de Test Impact Analysis ou d'Early Flake Detection peut également initialiser, à l'échelle du dépôt, des exclusions relatives à la branche par défaut pour les deux fonctionnalités.
 
 `get_datadog_flaky_tests_management_policies`
 : Récupérez les politiques de gestion des tests instables configurées pour un dépôt, y compris les fenêtres de mise en quarantaine automatique, les règles de branche, les seuils de taux d'échec, les politiques de désactivation et les paramètres de nouvelle tentative.
@@ -104,15 +108,17 @@ Les outils Deployment Gates sont en lecture seule et nécessitent l'autorisation
 
 Une fois connecté, essayez des requêtes telles que :
 
-- Affichez-moi tous les pipelines pour mon commit `58b1488`.
-- Qu'est-ce qui cause l'échec du job `integration-test` sur ma branche ?
+- Montrez tous les pipelines pour le commit `58b1488`.
+- Quelle est la cause de l'échec du job `integration-test` sur cette branche ?
 - Trouvez les tests instables actifs pour le service checkout triés par taux d'échec.
 - Combien de pipelines ont échoué au cours des 2 dernières semaines ?
-- Affichez-moi le 95e percentile de la durée pour chaque suite de tests afin d'identifier les plus lentes.
+- Montrez le 95e percentile de la durée des pipelines, regroupé par nom de pipeline.
 - Quelle est la couverture de code sur la branche `main` pour `github.com/my-org/my-repo` ?
-- Affichez-moi les métriques de couverture pour le commit `abc123abc123abc123abc123abc123abc123abcd`.
+- Montrez les métriques de couverture pour le commit `abc123abc123abc123abc123abc123abc123abcd`.
 - Quelle est la fréquence de déploiement et le taux d'échec des changements pour le service `checkout` sur les 30 derniers jours ?
 - Quelles fonctionnalités d'optimisation des tests sont activées pour `auth-service` ?
+- Évaluez la CI/CD de ce dépôt et recommandez des améliorations à l'aide des données Datadog.
+- Montrez la modification de paramètres proposée pour activer Auto Test Retries pour le service `checkout`.
 - Mettez en quarantaine tous les tests instables actifs dans le dépôt `checkout-service`.
 - Pourquoi le Deployment Gate pour `checkout` dans `prod` a-t-il échoué lors du dernier déploiement ?
 - Quelles règles de Deployment Gate pour le service `checkout` dans `prod` sont en mode dry run ?
@@ -130,11 +136,11 @@ Pour obtenir des instructions de configuration complètes, y compris la configur
 
 ## Compétences de l'Agent{#agent-skills}
 
-Les compétences d'Agent sont des ensembles d'instructions prédéfinis pour les agents de codage IA qui automatisent les workflows courants de Software Delivery. L'ensemble de compétences `dd-software-delivery` est disponible dans le dépôt [Datadog agent-skills][6]. Il fournit deux skills pour le triage des tests instables et le déblocage des pipelines PR en échec en utilisant vos données live de CI et Test Optimization.
+Les compétences d'agent sont des ensembles d'instructions prédéfinis pour les agents de codage IA qui guident les flux de travail courants de Software Delivery à l'aide de données de CI et de Test Optimization en temps réel. Elles aident à évaluer la CI/CD, à enquêter sur les tests instables et à débloquer les pipelines de PR en échec.
 
-Après avoir connecté l'ensemble d'outils MCP `software-delivery`, votre assistant IA charge automatiquement les skills dès que votre prompt correspond à leur objectif. Par exemple, saisir « TestCheckoutServiceIntegration continue d'échouer en CI — investiguez-le » charge `/triage-flaky-test` sans aucune installation requise.
+Après avoir connecté l'ensemble d'outils MCP `software-delivery`, votre assistant IA charge automatiquement les skills dès que votre prompt correspond à leur objectif. Par exemple, saisir « TestCheckoutServiceIntegration keeps failing in CI—investigate it » charge la compétence de triage des tests instables sans aucune installation locale.
 
-Pour invoquer explicitement les skills via une commande slash, installez-les localement :
+Pour appeler `/triage-flaky-test` et `/unblock-pr` explicitement avec des commandes slash, installez l'ensemble de compétences `dd-software-delivery` depuis le [dépôt agent-skills][6] :
 
 ### Installation{#install}
 
@@ -147,7 +153,7 @@ npx skills add datadog-labs/agent-skills \
 
 Redémarrez Claude Code après l'installation pour que les commandes slash apparaissent.
 
-Chaque skill utilise automatiquement le Datadog MCP Server s'il est connecté, et se rabat sur l'interface CLI [pup][7] sinon. Pour utiliser le fallback pup, installez et authentifiez pup :
+Ces compétences installées localement utilisent le serveur MCP Datadog s'il est connecté, et utilisent sinon la CLI [pup][7] comme solution de repli. Installez pup et authentifiez-vous pour utiliser la CLI comme solution de repli :
 
 ```shell
 brew install datadog-labs/pack/pup
@@ -156,10 +162,23 @@ pup auth login
 
 ### Compétences disponibles{#available-skills}
 
-| Compétence| Invoquer avec| Ce qu'elle fait|
+| Compétence | Démarrer avec | Ce qu'elle fait |
 |-------|-------------|-------------|
+| Optimiser la CI/CD | « Évaluez la CI/CD de ce dépôt » | Combine l'inspection du dépôt avec les données de CI et de test pour hiérarchiser les changements, les valider et mesurer leur impact |
 | Trier un test instable | `/triage-flaky-test` | Obtenez l'historique, le modèle d'échec et la catégorie IA pour un test instable spécifique, puis recommandez une correction, une mise en quarantaine ou une escalade |
 | Débloquer une PR | `/unblock-pr` | Attribuez chaque échec de CI sur une PR comme instable, infrastructure ou régression, faites apparaître la couverture de code et les violations de qualité ou de sécurité, et proposez une action ciblée |
+
+### Optimiser la CI/CD {#optimize-cicd}
+
+La compétence `optimize-cicd` est disponible via l'ensemble d'outils MCP `software-delivery`. Elle combine l'inspection du dépôt avec les données Datadog pour évaluer la CI/CD, hiérarchiser les améliorations et accompagner la validation et la mesure de l'impact des changements retenus. Utilisez-la pour les dépôts qui utilisent déjà Software Delivery, y compris les dépôts avec une configuration incomplète.
+
+La compétence propose des modifications et des étapes de validation, puis applique les modifications que vous autorisez. Elle peut également gérer une seule étape, comme la vérification d'une intégration ou la mesure d'une modification existante.
+
+```text
+Assess this repository's CI/CD and prioritize improvements using Datadog data.
+Check whether Test Impact Analysis is configured and working for this repository.
+Compare CI duration and reliability before and after the changes on this branch.
+```
 
 ### Trier un test instable {#triage-flaky-test}
 
@@ -172,11 +191,11 @@ Si le skill recommande la mise en quarantaine, il présente l'action proposée e
 /triage-flaky-test TestCheckoutServiceIntegration github.com/my-org/my-service
 ```
 
-### Débloquer une PR {#unblock-pr}
+### Débloquer une pull request {#unblock-pr}
 
 `/unblock-pr` analyse un pipeline CI de PR en échec. Pour chaque job en échec, il vérifie si l'échec était déjà présent sur la branche par défaut ou sur d'autres branches. Le skill classe l'échec comme **instable**, **infrastructure** ou **régression**. En parallèle, il récupère la couverture de code de la branche ainsi que toute violation de la qualité du code ou de la sécurité à partir des insights de la PR. Il produit un résumé de triage avec une classification par job, des preuves, une action recommandée et une section Santé de la PR résumant la couverture et les violations.
 
-Pour les échecs instables, le skill s'enchaîne avec `triage-flaky-test` pour une analyse plus approfondie. Pour les échecs d'infrastructure transitoires sur GitHub Actions ou GitLab, il relance les jobs échoués en utilisant `retry_datadog_ci_job` (MCP) ou `gh run rerun` (fallback pup, GitHub Actions uniquement) ; pour les autres fournisseurs CI, il fournit un lien vers l'interface utilisateur du fournisseur. Pour les régressions, il vous invite à examiner vos modifications de code.
+Pour les échecs instables, le skill s'enchaîne avec `triage-flaky-test` pour une analyse plus approfondie. En cas de défaillances d'infrastructure transitoires sur GitHub Actions ou GitLab, elle relance les jobs ayant échoué en utilisant `retry_datadog_ci_job` via MCP. Le mécanisme de repli pup utilise `gh run rerun` pour GitHub Actions. Pour les autres fournisseurs de CI, la compétence renvoie vers l'UI du fournisseur. Pour les régressions, il vous invite à examiner vos modifications de code.
 
 **Note** : Les données sur la qualité du code et les violations de sécurité dans la section Santé de la PR nécessitent l'ensemble d'outils MCP et ne sont pas disponibles en mode pup.
 

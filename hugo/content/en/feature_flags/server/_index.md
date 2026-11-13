@@ -86,12 +86,12 @@ Source-specific requirements are:
 
 On a [supported SDK version](#configuration-delivery), configure the application process:
 
-{{< code-block lang="bash" >}}
+```bash
 # Required for direct configuration delivery
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 No Feature Flags enablement or source setting is required. See the [language setup instructions](#choose-a-language) for dependency versions and initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 

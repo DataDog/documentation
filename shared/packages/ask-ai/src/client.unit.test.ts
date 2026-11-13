@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { streamDocsAiChat } from "./client";
+import { DocsAiRequestError, streamDocsAiChat } from "./client";
 
 const CREDENTIALS = {
   apiUrl: "https://dd.datad0g.com/api/unstable/docs-ai",
@@ -153,6 +153,51 @@ describe("streamDocsAiChat", () => {
     await expect(
       streamDocsAiChat({ credentials: CREDENTIALS, query: "hi" }),
     ).rejects.toThrow("503");
+  });
+
+  it("rejects with the HTTP status, so callers can tell a rejected request", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 400, body: null }),
+    );
+
+    const request = streamDocsAiChat({ credentials: CREDENTIALS, query: "q" });
+
+    await expect(request).rejects.toBeInstanceOf(DocsAiRequestError);
+    await expect(request).rejects.toMatchObject({ status: 400 });
+  });
+
+  it("forwards thinking payloads, server errors, and answer tokens", async () => {
+    mockStream([
+      'data: {"type": "thinking", "content": "Reviewing relevant pages", "retrieved_pages": [{"title": "A"',
+      ', "distinct_base_url": "/a/"}]}\n\n',
+      'data: {"type": "markdown_fragment", "content": "Hel"}\n\ndata: {"type": "markdown_fragment", "content": "lo"}\n\n',
+      'data: {"type": "error", "code": "temporarily_unavailable", "retryable": true, "discard_partial": true}\n\n',
+      "data: [DONE]\n\n",
+    ]);
+    const onThinking = vi.fn();
+    const onServerError = vi.fn();
+    const onToken = vi.fn();
+
+    const answer = await streamDocsAiChat({
+      credentials: CREDENTIALS,
+      query: "q",
+      onThinking,
+      onServerError,
+      onToken,
+    });
+
+    expect(answer).toBe("Hello");
+    expect(onThinking).toHaveBeenCalledWith(
+      "Reviewing relevant pages",
+      expect.objectContaining({
+        retrieved_pages: [{ title: "A", distinct_base_url: "/a/" }],
+      }),
+    );
+    expect(onToken).toHaveBeenLastCalledWith("lo", "Hello");
+    expect(onServerError).toHaveBeenCalledWith(
+      expect.objectContaining({ retryable: true, discard_partial: true }),
+    );
   });
 
   it("sends the query, key, and optional attributes the API expects", async () => {

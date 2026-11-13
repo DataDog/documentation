@@ -404,6 +404,10 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 
 The `Provider` instance is shared globally. Client names are for organizational purposes only and don't create separate provider instances. All clients use the same underlying Datadog provider and flag configurations.
 
+## Record exposures in your own data store
+
+Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-java-agent` and `dd-openfeature` 1.68.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][20].
+
 ## Best practices
 
 ### Initialize early
@@ -672,3 +676,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [18]: /feature_flags/concepts/configuration_sources/#agent-availability
 [19]: /feature_flags/guide/server_evaluation_events/
+[20]: /feature_flags/guide/record_exposures_in_your_own_data_store/

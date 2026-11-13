@@ -36,8 +36,8 @@
         <div class="chevron chevron-up d-none"></div>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {{ range sort .Site.Params.allowedRegions ".weight" "asc" }}
-          <a class="dropdown-item" data-value="{{ .value }}">{{ .name }}</a>
+        {{ range sort site.Data.regions.regions ".weight" "asc" }}
+          <a class="dropdown-item" data-value="{{ .key }}">{{ .label }}</a>
         {{ end }}
       </div>
     </div>

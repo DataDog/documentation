@@ -20,6 +20,7 @@ cascade:
     {{< nextlink href="/feature_flags/guide/migrate_from_launchdarkly" >}}Migrate Your Feature Flags from LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Migrate Your Feature Flags from Statsig{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/headless_cms" >}}Integrate Feature Flags with a Headless CMS{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/record_exposures_in_your_own_data_store" >}}Record Feature Flag Exposures in Your Own Data Store{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Estimate and Manage Feature Flags Costs{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/proxy_sdk_traffic" >}}Proxy Feature Flag SDK Traffic{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/proxy_server_setup" >}}Set Up a Proxy Server for Feature Flag SDK Traffic{{< /nextlink >}}

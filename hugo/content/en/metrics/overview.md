@@ -32,7 +32,7 @@ This section shows all of your metric sources, the additional processing and con
 
 ### Metric Sources
 
-The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][2] scoped to that source. Your Datadog metrics can originate from the following sources:
+The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Metrics Catalog][2] scoped to that source. Your Datadog metrics can originate from the following sources:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][3] collects metrics from the hosts where it's installed and forwards them to Datadog. These metrics could originate from:
@@ -96,7 +96,7 @@ Some products incorporate standard metrics to surface insights out of the box (f
 
 ### Available Metrics
 
-The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Volume Management page][26] for more detailed insights.
+The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Catalog page][26] for more detailed insights.
 
 ## Your metrics by source
 
@@ -146,6 +146,6 @@ Use the search bar in this section to view the latest data and configuration opt
 [21]: /metrics/custom_metrics/historical_metrics/
 [22]: /metrics/guide/custom_metrics_governance
 [23]: https://app.datadoghq.com/metric/explorer
-[24]: https://app.datadoghq.com/metric/summary
+[24]: https://app.datadoghq.com/metric/catalog
 [25]: /metrics/guide/custom_metrics_governance/
 [26]: /metrics/volume/
