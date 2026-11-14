@@ -274735,9 +274735,12 @@ paths:
 
         **`user_handle`**
 
-        - **Value:** The handle of a user, for example `jane@example.com`, or `"*"` for the default quota applied to
-          users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the
-          [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+        - **Value:** One of the following:
+          - A user's handle, for example `jane@example.com`. User handles are returned in the
+            `data[].attributes.handle` field by the
+            [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+          - `"*"`, the default quota applied to users without a specific quota.
+          - `"*agents*"`, the quota shared by all autonomous agents.
         - **Validation:** A specific handle must identify an existing user in the caller's organization when
           `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's
           organization or in at least one targeted descendant organization. The quota is then applied only to the
@@ -274751,6 +274754,12 @@ paths:
         - **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so
           `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's
           organization only.
+
+        **`team_id`** (private preview)
+
+        - **Value:** The ID of a team. Team IDs are returned in the `data[].id` field by the
+          [Teams API](https://docs.datadoghq.com/api/latest/teams/get-all-teams/).
+        - **Availability:** Quotas on `team_id` are in private preview. Contact your Datadog account team to request access.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
