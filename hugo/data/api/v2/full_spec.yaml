@@ -12946,6 +12946,13 @@ components:
     Allocation:
       description: Targeting rule (allocation) details for a feature flag environment.
       properties:
+        bandit_id:
+          description: >-
+            The bandit that serves through this targeting rule allocation. Absent when no bandit uses it. Until the bandit ends, only the bandit's own operations can change or delete the allocation; its position among the flag's targeting rules can still change.
+          example: "4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f"
+          format: uuid
+          readOnly: true
+          type: string
         created_at:
           description: The timestamp when the targeting rule allocation was created.
           example: "2024-01-01T12:00:00Z"
@@ -49998,6 +50005,1117 @@ components:
       type: string
       x-enum-varnames:
         - ANALYSIS_PLANS
+    ExperimentsBanditArmDataStatus:
+      description: "Where the arm's reward variance came from, or why it's unavailable."
+      enum:
+        - usable
+        - insufficient_data
+        - zero_variance
+        - pooled_within_variance
+        - pooled_total_variance
+      example: usable
+      type: string
+      x-enum-varnames:
+        - USABLE
+        - INSUFFICIENT_DATA
+        - ZERO_VARIANCE
+        - POOLED_WITHIN_VARIANCE
+        - POOLED_TOTAL_VARIANCE
+    ExperimentsBanditBayesianPriorV2:
+      description: "The prior the bandit's estimates start from."
+      properties:
+        arm_standard_deviation:
+          description: "Prior standard deviation of each arm's mean around the shared mean."
+          example: 100
+          format: double
+          type: number
+        grand_mean:
+          description: "Prior mean of the shared mean of the arms, in the metric's units."
+          example: 0
+          format: double
+          type: number
+        grand_mean_standard_deviation:
+          description: "Prior standard deviation of the shared mean of the arms."
+          example: 10000
+          format: double
+          type: number
+      required:
+        - grand_mean
+        - grand_mean_standard_deviation
+        - arm_standard_deviation
+      type: object
+    ExperimentsBanditConfidenceIntervalV2:
+      description: "A central interval around point_estimate at confidence_level."
+      properties:
+        lower:
+          description: "Lower bound of the interval."
+          example: 39.9
+          format: double
+          type: number
+        upper:
+          description: "Upper bound of the interval."
+          example: 42.5
+          format: double
+          type: number
+      required:
+        - lower
+        - upper
+      type: object
+    ExperimentsBanditDailyTrafficV2:
+      description: "An arm's observations and new subjects on one UTC day."
+      properties:
+        cumulative_new_subjects:
+          description: >-
+            The arm's new subjects from the bandit's start through this day, including days before the requested range.
+          example: 3600
+          format: int64
+          type: integer
+        cumulative_observations:
+          description: >-
+            The arm's observations from the bandit's start through this day, including days before the requested range.
+          example: 4260
+          format: int64
+          type: integer
+        date:
+          description: "A UTC date as YYYY-MM-DD."
+          example: "2026-10-29"
+          format: date
+          type: string
+        feature_flag_variant_id:
+          description: "The arm's variant ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        new_subjects:
+          description: "Subjects whose first valid observation is on this day and arm."
+          example: 300
+          format: int64
+          type: integer
+        observations:
+          description: "The arm's valid observations on this day."
+          example: 410
+          format: int64
+          type: integer
+        variant_key:
+          description: "The arm's variant key."
+          example: blue
+          nullable: true
+          type: string
+      required:
+        - date
+        - variant_key
+        - feature_flag_variant_id
+        - observations
+        - cumulative_observations
+        - new_subjects
+        - cumulative_new_subjects
+      type: object
+    ExperimentsBanditDesiredChange:
+      description: >-
+        The direction the bandit optimizes the metric in. It's fixed when the bandit starts. Null before the first saved refresh.
+      enum:
+        - METRIC_INCREASES
+        - METRIC_DECREASES
+      example: METRIC_INCREASES
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - METRIC_INCREASES
+        - METRIC_DECREASES
+    ExperimentsBanditFlagConfigurationV2:
+      description: >-
+        The flag rule the bandit serves through. Absent until a draft is put on a flag, and when the caller lacks feature flag and environment read permissions (`meta.warnings` then says so).
+      properties:
+        allocation_key:
+          description: "The key of the bandit's rule on the flag. Exposures log it."
+          example: checkout-button-color-bandit
+          type: string
+        environment_id:
+          description: "The environment the bandit serves in."
+          example: 660e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        feature_flag_id:
+          description: "The flag the bandit serves through."
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        targeting_rules:
+          description: "Who the bandit serves. Empty serves everyone in the environment."
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsTargetingRule"
+          type: array
+      required:
+        - feature_flag_id
+        - environment_id
+        - allocation_key
+        - targeting_rules
+      type: object
+    ExperimentsBanditNullableConfidenceIntervalV2:
+      description: "A central interval around point_estimate at confidence_level. Null when the estimate is unavailable."
+      nullable: true
+      properties:
+        lower:
+          description: "Lower bound of the interval."
+          example: 39.9
+          format: double
+          type: number
+        upper:
+          description: "Upper bound of the interval."
+          example: 42.5
+          format: double
+          type: number
+      required:
+        - lower
+        - upper
+      type: object
+    ExperimentsBanditObservationCountsV2:
+      description: >-
+        How many observations the latest saved refresh saw, whatever the range. Null when its counts can't be read.
+      nullable: true
+      properties:
+        invalid:
+          description: "Observations the refresh couldn't use."
+          example: 40
+          format: int64
+          type: integer
+        total:
+          description: "Every observation. The sum of the other three."
+          example: 14210
+          format: int64
+          type: integer
+        valid_immature:
+          description: "Valid observations whose aggregation window is still open."
+          example: 420
+          format: int64
+          type: integer
+        valid_mature:
+          description: "Valid observations whose aggregation window has closed. The estimates use these."
+          example: 13750
+          format: int64
+          type: integer
+      required:
+        - total
+        - valid_mature
+        - valid_immature
+        - invalid
+      type: object
+    ExperimentsBanditOptimalVariantUnavailableReason:
+      description: "Why no optimal variant is reported. Absent when one is, or when the cause isn't known."
+      enum:
+        - NO_RESULTS_YET
+        - WARMUP
+        - NOT_ENOUGH_DATA
+        - NO_DIFFERENCE
+        - STATS_UNAVAILABLE
+      example: NOT_ENOUGH_DATA
+      type: string
+      x-enum-varnames:
+        - NO_RESULTS_YET
+        - WARMUP
+        - NOT_ENOUGH_DATA
+        - NO_DIFFERENCE
+        - STATS_UNAVAILABLE
+    ExperimentsBanditPointEstimateV2:
+      description: "An arm's point estimate from one saved refresh."
+      properties:
+        confidence_interval:
+          $ref: "#/components/schemas/ExperimentsBanditConfidenceIntervalV2"
+        data_as_of:
+          description: "The latest warehouse data the refresh read."
+          example: "2026-10-30T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        feature_flag_variant_id:
+          description: "The arm's variant ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        point_estimate:
+          description: "The arm's estimated mean of the metric, in the metric's units."
+          example: 41.2
+          format: double
+          type: number
+        refresh_id:
+          description: "The refresh the estimate comes from."
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        results_last_updated:
+          description: "When the refresh saved its results."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          type: string
+        variant_key:
+          description: "The arm's variant key."
+          example: blue
+          nullable: true
+          type: string
+      required:
+        - refresh_id
+        - results_last_updated
+        - data_as_of
+        - variant_key
+        - feature_flag_variant_id
+        - point_estimate
+        - confidence_interval
+      type: object
+    ExperimentsBanditPolicyKind:
+      description: >-
+        WARMUP serves the arms equally. ADAPTIVE is a split from a refresh. FALLBACK serves one variant after the bandit ends.
+      enum:
+        - WARMUP
+        - ADAPTIVE
+        - FALLBACK
+      example: ADAPTIVE
+      type: string
+      x-enum-varnames:
+        - WARMUP
+        - ADAPTIVE
+        - FALLBACK
+    ExperimentsBanditPolicyReason:
+      description: "Why the policy was applied."
+      enum:
+        - ACTIVATION
+        - REFRESH
+        - ARM_CHANGE
+        - SCHEDULED_END
+        - STOP
+      example: REFRESH
+      type: string
+      x-enum-varnames:
+        - ACTIVATION
+        - REFRESH
+        - ARM_CHANGE
+        - SCHEDULED_END
+        - STOP
+    ExperimentsBanditPolicyV2:
+      description: "The policy the bandit serves. Null until the bandit starts."
+      nullable: true
+      properties:
+        applied_at:
+          description: "When the policy started being served."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          type: string
+        config_version:
+          description: "The configuration version the policy was made for."
+          example: 2
+          format: int64
+          type: integer
+        id:
+          description: "The policy ID. Each exposure logs it as `bandit.policy_id`."
+          example: dd0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        kind:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyKind"
+        reason:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyReason"
+        variants:
+          description: "Each variant's share of traffic. The probabilities add up to 1."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditPolicyVariantV2"
+          type: array
+      required:
+        - id
+        - applied_at
+        - config_version
+        - kind
+        - reason
+        - variants
+      type: object
+    ExperimentsBanditPolicyVariantV2:
+      description: "A variant's share of traffic under a policy."
+      properties:
+        feature_flag_variant_id:
+          description: "The variant's ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        probability:
+          description: "The share of traffic the variant gets, from 0 to 1."
+          example: 0.3
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        variant_key:
+          description: "The variant's key. Null when it can't be resolved."
+          example: blue
+          nullable: true
+          type: string
+      required:
+        - variant_key
+        - feature_flag_variant_id
+        - probability
+      type: object
+    ExperimentsBanditPosteriorUnavailableReason:
+      description: "Why the arm's estimate and interval are unavailable. Absent when they are available."
+      enum:
+        - no_data
+        - insufficient_data
+        - zero_variance
+      example: no_data
+      type: string
+      x-enum-varnames:
+        - NO_DATA
+        - INSUFFICIENT_DATA
+        - ZERO_VARIANCE
+    ExperimentsBanditRefreshStatus:
+      description: "The status of the refresh."
+      enum:
+        - PENDING
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - CANCELLED
+      example: SUCCEEDED
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - CANCELLED
+    ExperimentsBanditRefreshV2:
+      description: "The most recently started refresh. Null until one starts."
+      nullable: true
+      properties:
+        created_at:
+          description: "When the refresh was requested."
+          example: "2026-10-30T00:00:00Z"
+          format: date-time
+          type: string
+        ended_at:
+          description: "When the refresh finished. Null while it runs."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          description: "The refresh ID."
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        started_at:
+          description: "When the refresh started running. Null while it is pending."
+          example: "2026-10-30T00:02:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ExperimentsBanditRefreshStatus"
+      required:
+        - id
+        - status
+        - created_at
+        - started_at
+        - ended_at
+      type: object
+    ExperimentsBanditResultsState:
+      description: >-
+        WAITING_FOR_FIRST_REFRESH until a refresh saves results. STATS_UNAVAILABLE when the latest saved refresh has no complete probabilities of being optimal. ENDED once the bandit is stopped or completed; its last estimates stay. Otherwise WARMUP or OPTIMIZING says which policy the bandit serves. A paused bandit keeps its state.
+      enum:
+        - WAITING_FOR_FIRST_REFRESH
+        - WARMUP
+        - OPTIMIZING
+        - STATS_UNAVAILABLE
+        - ENDED
+      example: OPTIMIZING
+      type: string
+      x-enum-varnames:
+        - WAITING_FOR_FIRST_REFRESH
+        - WARMUP
+        - OPTIMIZING
+        - STATS_UNAVAILABLE
+        - ENDED
+    ExperimentsBanditResultsV2DTO:
+      description: "Response containing a bandit's results."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsBanditResultsV2DTOData"
+      required:
+        - data
+      type: object
+    ExperimentsBanditResultsV2DTOData:
+      description: "JSON:API resource containing a bandit's results."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditResultsV2DTODataAttributes"
+        id:
+          description: "The bandit ID."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditResultsV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditResultsV2DTODataAttributes:
+      description: "What the bandit's refreshes have learned."
+      properties:
+        confidence_level:
+          description: "The probability mass of each confidence interval."
+          example: 0.95
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        config_version:
+          description: >-
+            The configuration version the latest saved refresh used. It can be older than the bandit's, because changes such as a new end date don't invalidate results.
+          example: 2
+          format: int64
+          nullable: true
+          type: integer
+        data_as_of:
+          description: "The latest warehouse data the latest saved refresh read."
+          example: "2026-10-30T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        desired_change:
+          $ref: "#/components/schemas/ExperimentsBanditDesiredChange"
+        next_refresh_at:
+          description: >-
+            An estimate of when the next scheduled refresh starts. Null when the bandit isn't running or the time can't be estimated. Only daily and hourly schedules get an estimate.
+          example: "2026-10-31T02:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        optimal_variant_key:
+          description: >-
+            The key of the arm most likely to be best, when one arm leads and the bandit is outside warmup. Null otherwise.
+          example: green
+          nullable: true
+          type: string
+        optimal_variant_unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsBanditOptimalVariantUnavailableReason"
+        point_estimates:
+          description: >-
+            Each arm's point estimate from up to the latest 400 saved refreshes in the requested range, oldest first.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditPointEstimateV2"
+          type: array
+        refresh_id:
+          description: "The latest refresh that saved results. The estimates come from it."
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        results_last_updated:
+          description: "When the latest saved refresh saved its results."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        state:
+          $ref: "#/components/schemas/ExperimentsBanditResultsState"
+        statistics_status:
+          $ref: "#/components/schemas/ExperimentsBanditStatisticsStatus"
+        variants:
+          description: "One row per arm, in arm order."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditVariantResultV2"
+          type: array
+      required:
+        - state
+        - refresh_id
+        - config_version
+        - desired_change
+        - results_last_updated
+        - data_as_of
+        - next_refresh_at
+        - confidence_level
+        - optimal_variant_key
+        - variants
+        - point_estimates
+      type: object
+    ExperimentsBanditResultsV2DTODataType:
+      default: bandit-results
+      description: Bandit results resource type.
+      enum:
+        - bandit-results
+      example: bandit-results
+      type: string
+      x-enum-varnames:
+        - BANDIT_RESULTS
+    ExperimentsBanditScheduledEndFailureV2:
+      description: >-
+        Why the scheduled end couldn't run. It isn't retried until the end or fallback changes. Absent when there's no failure.
+      properties:
+        failed_at:
+          description: "When the scheduled end failed."
+          example: "2026-12-01T00:00:05Z"
+          format: date-time
+          type: string
+        reason:
+          description: "Why the scheduled end failed."
+          example: The fallback variant is no longer on the flag.
+          type: string
+      required:
+        - failed_at
+        - reason
+      type: object
+    ExperimentsBanditStatisticsStatus:
+      description: "Whether the latest saved refresh calculated its statistics. Absent for older refreshes."
+      enum:
+        - calculated
+        - failed
+      example: calculated
+      type: string
+      x-enum-varnames:
+        - CALCULATED
+        - FAILED
+    ExperimentsBanditStatus:
+      description: >-
+        The bandit's status. STOPPED means the bandit was stopped and serves the variant chosen then. COMPLETED means it reached its scheduled end and serves its fallback.
+      enum:
+        - DRAFT
+        - SCHEDULED
+        - RUNNING
+        - PAUSED
+        - STOPPED
+        - COMPLETED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+        - DRAFT
+        - SCHEDULED
+        - RUNNING
+        - PAUSED
+        - STOPPED
+        - COMPLETED
+    ExperimentsBanditTrafficSummaryV2DTO:
+      description: "Response containing a bandit's traffic summary."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsBanditTrafficSummaryV2DTOData"
+      required:
+        - data
+      type: object
+    ExperimentsBanditTrafficSummaryV2DTOData:
+      description: "JSON:API resource containing a bandit's traffic summary."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditTrafficSummaryV2DTODataAttributes"
+        id:
+          description: "The bandit ID."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditTrafficSummaryV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditTrafficSummaryV2DTODataAttributes:
+      description: "What the bandit has observed, as of its latest saved refresh."
+      properties:
+        daily:
+          description: >-
+            Valid observations per arm on the UTC day of their anchor time, for each day from the bandit's start to the data cutoff that overlaps the requested range. Days without any have zero counts. Empty before the first saved refresh.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditDailyTrafficV2"
+          type: array
+        data_as_of:
+          description: "The latest warehouse data the latest saved refresh read."
+          example: "2026-10-30T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        observation_counts:
+          $ref: "#/components/schemas/ExperimentsBanditObservationCountsV2"
+        refresh_id:
+          description: "The latest refresh that saved results. The counts come from it."
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        total_subjects:
+          description: "Distinct subjects with a valid observation, whatever the range."
+          example: 11900
+          format: int64
+          type: integer
+        variants:
+          description: "One row per arm, whatever the range."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditTrafficVariantV2"
+          type: array
+      required:
+        - refresh_id
+        - data_as_of
+        - observation_counts
+        - total_subjects
+        - variants
+        - daily
+      type: object
+    ExperimentsBanditTrafficSummaryV2DTODataType:
+      default: bandit-traffic-summary
+      description: Bandit traffic summary resource type.
+      enum:
+        - bandit-traffic-summary
+      example: bandit-traffic-summary
+      type: string
+      x-enum-varnames:
+        - BANDIT_TRAFFIC_SUMMARY
+    ExperimentsBanditTrafficVariantV2:
+      description: "An arm's observations and subjects in total."
+      properties:
+        feature_flag_variant_id:
+          description: "The arm's variant ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        observations:
+          description: "The arm's valid observations, mature or not."
+          example: 4260
+          format: int64
+          type: integer
+        subjects:
+          description: >-
+            Subjects whose first valid observation is on this arm. A subject counts once, on the arm its reward goes to.
+          example: 3600
+          format: int64
+          type: integer
+        variant_key:
+          description: "The arm's variant key."
+          example: blue
+          nullable: true
+          type: string
+      required:
+        - variant_key
+        - feature_flag_variant_id
+        - observations
+        - subjects
+      type: object
+    ExperimentsBanditV2DTO:
+      description: "Response containing a bandit."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTOData"
+        meta:
+          $ref: "#/components/schemas/ExperimentsBanditV2ReadMetaDTO"
+      required:
+        - data
+      type: object
+    ExperimentsBanditV2DTOData:
+      description: "JSON:API resource containing a bandit."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTODataAttributes"
+        id:
+          description: "The bandit ID."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditV2DTODataAttributes:
+      description: "A bandit's setup, the policy it serves, and its latest refresh."
+      properties:
+        active_policy:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyV2"
+        aggregation_window_seconds:
+          description: "How long after an exposure its reward is counted, in seconds."
+          example: 3600
+          format: int64
+          type: integer
+        bayesian_prior:
+          $ref: "#/components/schemas/ExperimentsBanditBayesianPriorV2"
+        config_version:
+          description: "The version of the bandit's configuration. Each saved change adds one."
+          example: 2
+          format: int64
+          type: integer
+        created_at:
+          description: "When the bandit was created."
+          example: "2026-10-22T12:00:00Z"
+          format: date-time
+          type: string
+        datadog_flag_configuration:
+          $ref: "#/components/schemas/ExperimentsBanditFlagConfigurationV2"
+        description:
+          description: "The bandit's description."
+          example: Find the button color that maximizes checkout revenue.
+          type: string
+        ended_at:
+          description: "When the bandit was stopped or reached its scheduled end. Null while it hasn't ended."
+          example: "2026-12-01T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        exposure_sql_model_id:
+          description: "The exposure SQL model the bandit reads its exposures from. Null until set on a draft."
+          example: aa0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        latest_refresh:
+          $ref: "#/components/schemas/ExperimentsBanditRefreshV2"
+        lookback_seconds:
+          description: "How far back each refresh reads observations, in seconds."
+          example: 2592000
+          format: int64
+          type: integer
+        metric_id:
+          description: "The metric the bandit optimizes. Null until set on a draft."
+          example: 990e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        name:
+          description: "The bandit's name."
+          example: Checkout button color
+          type: string
+        optimal_variant_key:
+          description: >-
+            The key of the arm most likely to be best, when one arm leads and the bandit is outside warmup. Null otherwise. Matches Get bandit results.
+          example: green
+          nullable: true
+          type: string
+        optimal_variant_unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsBanditOptimalVariantUnavailableReason"
+        refresh_schedule_id:
+          description: "The schedule the bandit refreshes on."
+          example: cc0e8400-e29b-41d4-a716-446655440000
+          nullable: true
+          type: string
+        scheduled_end_at:
+          description: "When the bandit ends and serves its fallback. Null when it has no scheduled end."
+          example: "2026-12-01T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        scheduled_end_failure:
+          $ref: "#/components/schemas/ExperimentsBanditScheduledEndFailureV2"
+        started_at:
+          description: "When the bandit started. Null until it starts."
+          example: "2026-10-23T09:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ExperimentsBanditStatus"
+        subject_type_id:
+          description: "The subject type the bandit randomizes and measures by. Null until set on a draft."
+          example: 880e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        tags:
+          description: "The bandit's tags, without team tags."
+          example:
+            - checkout
+          items:
+            description: "A tag on the bandit."
+            type: string
+          type: array
+        teams:
+          description: "Handles of the teams that own the bandit."
+          example:
+            - growth
+          items:
+            description: "A team handle."
+            type: string
+          type: array
+        updated_at:
+          description: "When the bandit was last changed."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          type: string
+        variants:
+          description: >-
+            The flag variants the bandit uses: its arms in arm order, then its fallback when the fallback isn't an arm.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditVariantV2"
+          type: array
+        warmup_seconds:
+          description: >-
+            How long after starting the bandit serves its arms equally, in seconds. Null when it has no warmup.
+          example: 86400
+          format: int64
+          nullable: true
+          type: integer
+      required:
+        - name
+        - description
+        - status
+        - subject_type_id
+        - metric_id
+        - exposure_sql_model_id
+        - variants
+        - bayesian_prior
+        - lookback_seconds
+        - aggregation_window_seconds
+        - warmup_seconds
+        - refresh_schedule_id
+        - scheduled_end_at
+        - config_version
+        - active_policy
+        - latest_refresh
+        - optimal_variant_key
+        - tags
+        - teams
+        - started_at
+        - ended_at
+        - created_at
+        - updated_at
+      type: object
+    ExperimentsBanditV2DTODataType:
+      default: bandits
+      description: Bandit resource type.
+      enum:
+        - bandits
+      example: bandits
+      type: string
+      x-enum-varnames:
+        - BANDITS
+    ExperimentsBanditV2ListDTOArray:
+      description: "Response containing a page of bandit summaries."
+      properties:
+        data:
+          description: "Bandits on this page."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditV2ListDTOData"
+          type: array
+        links:
+          $ref: "#/components/schemas/ExperimentsOffsetLinks"
+        meta:
+          $ref: "#/components/schemas/ExperimentsOffsetMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    ExperimentsBanditV2ListDTOData:
+      description: "JSON:API resource containing a bandit summary."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditV2ListDTODataAttributes"
+        id:
+          description: "The bandit ID."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditV2ListDTODataAttributes:
+      description: "Summary of a bandit. Use Get bandit for its setup, active policy, and latest refresh."
+      properties:
+        created_at:
+          description: "When the bandit was created."
+          example: "2026-10-22T12:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: "The bandit's description."
+          example: Find the button color that maximizes checkout revenue.
+          type: string
+        ended_at:
+          description: "When the bandit was stopped or reached its scheduled end. Null while it hasn't ended."
+          example: "2026-12-01T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        metric_id:
+          description: "The metric the bandit optimizes. Null until set on a draft."
+          example: 990e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        name:
+          description: "The bandit's name."
+          example: Checkout button color
+          type: string
+        optimal_variant_key:
+          description: >-
+            The key of the arm most likely to be best, when one arm leads and the bandit is outside warmup. Null otherwise.
+          example: green
+          nullable: true
+          type: string
+        optimal_variant_unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsBanditOptimalVariantUnavailableReason"
+        started_at:
+          description: "When the bandit started. Null until it starts."
+          example: "2026-10-23T09:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ExperimentsBanditStatus"
+        subject_type_id:
+          description: "The subject type the bandit randomizes and measures by. Null until set on a draft."
+          example: 880e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        tags:
+          description: "The bandit's tags, without team tags."
+          example:
+            - checkout
+          items:
+            description: "A tag on the bandit."
+            type: string
+          type: array
+        teams:
+          description: "Handles of the teams that own the bandit."
+          example:
+            - growth
+          items:
+            description: "A team handle."
+            type: string
+          type: array
+        updated_at:
+          description: "When the bandit was last changed."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          type: string
+      required:
+        - name
+        - description
+        - status
+        - subject_type_id
+        - metric_id
+        - optimal_variant_key
+        - tags
+        - teams
+        - started_at
+        - ended_at
+        - created_at
+        - updated_at
+      type: object
+    ExperimentsBanditV2ReadMetaDTO:
+      description: "Information about the bandit response."
+      properties:
+        warnings:
+          description: "Things the caller should know about the response. Absent when there are none."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditV2WarningDTO"
+          type: array
+      type: object
+    ExperimentsBanditV2WarningCode:
+      description: >-
+        Code that identifies the warning. `datadog_flag_configuration_omitted` means the caller lacks feature flag or environment read permissions, so the response leaves out `datadog_flag_configuration`.
+      enum:
+        - datadog_flag_configuration_omitted
+      example: datadog_flag_configuration_omitted
+      type: string
+      x-enum-varnames:
+        - DATADOG_FLAG_CONFIGURATION_OMITTED
+    ExperimentsBanditV2WarningDTO:
+      description: "A warning about the response that isn't an error."
+      properties:
+        code:
+          $ref: "#/components/schemas/ExperimentsBanditV2WarningCode"
+        detail:
+          description: "Explanation of the warning."
+          example: >-
+            The Datadog flag configuration is not included because feature flag and environment read permissions are required to view it. The bandit still has its flag configuration.
+          type: string
+      required:
+        - code
+        - detail
+      type: object
+    ExperimentsBanditVariantResultV2:
+      description: "An arm's estimates from the latest saved refresh."
+      properties:
+        confidence_interval:
+          $ref: "#/components/schemas/ExperimentsBanditNullableConfidenceIntervalV2"
+        data_status:
+          $ref: "#/components/schemas/ExperimentsBanditArmDataStatus"
+        feature_flag_variant_id:
+          description: "The arm's variant ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        mature_observations:
+          description: "The arm's valid observations whose aggregation window has closed. The estimate uses these."
+          example: 4120
+          format: int64
+          type: integer
+        point_estimate:
+          description: "The arm's estimated mean of the metric, in the metric's units. It isn't a lift."
+          example: 41.2
+          format: double
+          nullable: true
+          type: number
+        posterior_unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsBanditPosteriorUnavailableReason"
+        probability_of_being_optimal:
+          description: "The probability that this arm is the best."
+          example: 0.08
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+        variant_key:
+          description: "The arm's variant key."
+          example: blue
+          nullable: true
+          type: string
+      required:
+        - variant_key
+        - feature_flag_variant_id
+        - mature_observations
+        - probability_of_being_optimal
+        - point_estimate
+        - confidence_interval
+      type: object
+    ExperimentsBanditVariantV2:
+      description: "A flag variant the bandit uses."
+      properties:
+        feature_flag_variant_id:
+          description: "The variant's ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        is_active:
+          description: "Whether the variant is one of the arms the bandit chooses between."
+          example: true
+          type: boolean
+        is_fallback:
+          description: >-
+            Whether the variant is served when the bandit reaches its scheduled end. At most one variant is the fallback.
+          example: true
+          type: boolean
+        key:
+          description: >-
+            The variant's key. An arm keeps the key it had when it was added, because exposures are matched on it. Null only for a fallback deleted from the flag.
+          example: blue
+          nullable: true
+          type: string
+        name:
+          description: "The variant's name on the flag. Null when it is no longer on the flag."
+          example: Blue
+          nullable: true
+          type: string
+      required:
+        - feature_flag_variant_id
+        - key
+        - name
+        - is_active
+        - is_fallback
+      type: object
     ExperimentsCancelExperimentV2Request:
       description: "Request to cancel an experiment and record a reason."
       example:
@@ -185085,6 +186203,558 @@ paths:
         operator: AND
         permissions:
           - product_analytics_experiments_write
+  /api/v2/experiments/bandits:
+    get:
+      description: >-
+        List the organization's bandits, newest first by default. Each item is a summary; use Get bandit for its setup, active policy, and latest refresh. Bandits must be enabled for the organization.
+      operationId: ListBandits
+      parameters:
+        - description: Number of results to skip for pagination. Defaults to 0 when omitted.
+          in: query
+          name: page[offset]
+          schema:
+            description: "Number of results to skip for pagination. Defaults to 0 when omitted."
+            format: int64
+            type: integer
+        - description: >-
+            Maximum number of results to return. Defaults to 25 when omitted, and is capped at 50 (larger values are clamped to 50). The response includes meta.page (with total) and pagination links.
+          in: query
+          name: page[limit]
+          schema:
+            description: |-
+              Maximum number of results to return. Defaults to 25 when omitted, and is capped at 50 (larger values are
+              clamped to 50). The response includes meta.page (with total) and pagination links.
+            format: int64
+            type: integer
+        - description: "Find bandits whose names contain the search text, regardless of case."
+          in: query
+          name: search
+          schema:
+            description: "Find bandits whose names contain the search text, regardless of case."
+            type: string
+        - description: >-
+            Sort fields: name, created_at, or updated_at. Use a comma-separated list in priority order, for example name,-created_at. Prefix each field with `-` for descending. Defaults to created_at descending.
+          in: query
+          name: sort
+          schema:
+            description: |-
+              Sort fields: name, created_at, or updated_at. Use a comma-separated list in priority order, for example
+              name,-created_at. Prefix each field with `-` for descending. Defaults to created_at descending.
+            type: string
+        - description: |-
+            Filter by bandit status. Accepted values are DRAFT, SCHEDULED, RUNNING, PAUSED, STOPPED, and COMPLETED.
+            Repeat this parameter to select several statuses, for example `status=RUNNING&status=PAUSED`.
+          in: query
+          name: status
+          schema:
+            description: |-
+              Filter by bandit status. Accepted values are DRAFT, SCHEDULED, RUNNING, PAUSED, STOPPED, and COMPLETED.
+              Repeat this parameter to select several statuses, for example `status=RUNNING&status=PAUSED`.
+            items:
+              description: "Bandit status to include in the results."
+              type: string
+            type: array
+        - description: |-
+            Filter by subject type UUID. Repeat this parameter to supply several IDs. A bandit matches if it uses any
+            listed subject type.
+          in: query
+          name: subject_type_id
+          schema:
+            description: |-
+              Filter by subject type UUID. Repeat this parameter to supply several IDs. A bandit matches if it uses
+              any listed subject type.
+            items:
+              description: "UUID of a subject type to match."
+              format: uuid
+              type: string
+            type: array
+        - description: |-
+            Filter by tag name. Repeat this parameter to supply several tags. A bandit matches if it has at least one
+            listed tag. Use `team:<handle>` to filter by team. When both tags and teams are given, a bandit must match
+            one of each.
+          in: query
+          name: tags
+          schema:
+            description: |-
+              Filter by tag name. Repeat this parameter to supply several tags. A bandit matches if it has at least
+              one listed tag. Use `team:<handle>` to filter by team. When both tags and teams are given, a bandit must
+              match one of each.
+            items:
+              description: "Tag name, or `team:<handle>`, to match against bandit tags."
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-10-22T12:00:00Z"
+                          description: Find the button color that maximizes checkout revenue.
+                          ended_at:
+                          metric_id: 990e8400-e29b-41d4-a716-446655440000
+                          name: Checkout button color
+                          optimal_variant_key: green
+                          started_at: "2026-10-23T09:00:00Z"
+                          status: RUNNING
+                          subject_type_id: 880e8400-e29b-41d4-a716-446655440000
+                          tags:
+                            - checkout
+                          teams:
+                            - growth
+                          updated_at: "2026-10-30T02:15:00Z"
+                        id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                        type: bandits
+                    links:
+                      first: https://api.datadoghq.com/api/v2/experiments/bandits?page%5Blimit%5D=25&page%5Boffset%5D=0
+                      last: https://api.datadoghq.com/api/v2/experiments/bandits?page%5Blimit%5D=25&page%5Boffset%5D=0
+                      self: https://api.datadoghq.com/api/v2/experiments/bandits?page%5Blimit%5D=25&page%5Boffset%5D=0
+                    meta:
+                      page:
+                        first_offset: 0
+                        last_offset: 0
+                        limit: 25
+                        next_offset:
+                        offset: 0
+                        prev_offset:
+                        total: 1
+                        type: offset_limit
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditV2ListDTOArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Invalid query parameter: an unknown status or sort field, a subject_type_id that isn't a UUID, a search over 1024 characters, or a malformed page parameter.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, or the caller lacks the product_analytics_experiments_read permission.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: List bandits
+      tags:
+        - Experiments
+      x-menu-order: 56
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}:
+    get:
+      description: >-
+        Get a bandit: its setup, the policy it serves, its latest refresh, and the arm most likely to be best. When the caller lacks feature flag and environment read permissions, the response omits `datadog_flag_configuration` and `meta.warnings` includes `datadog_flag_configuration_omitted`. Bandits must be enabled for the organization.
+      operationId: GetBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        active_policy:
+                          applied_at: "2026-10-30T02:15:00Z"
+                          config_version: 2
+                          id: dd0e8400-e29b-41d4-a716-446655440000
+                          kind: ADAPTIVE
+                          reason: REFRESH
+                          variants:
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                              probability: 0.3
+                              variant_key: blue
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                              probability: 0.7
+                              variant_key: green
+                        aggregation_window_seconds: 3600
+                        bayesian_prior:
+                          arm_standard_deviation: 100
+                          grand_mean: 0
+                          grand_mean_standard_deviation: 10000
+                        config_version: 2
+                        created_at: "2026-10-22T12:00:00Z"
+                        datadog_flag_configuration:
+                          allocation_key: checkout-button-color-bandit
+                          environment_id: 660e8400-e29b-41d4-a716-446655440000
+                          feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                          targeting_rules: []
+                        description: Find the button color that maximizes checkout revenue.
+                        ended_at:
+                        exposure_sql_model_id: aa0e8400-e29b-41d4-a716-446655440000
+                        latest_refresh:
+                          created_at: "2026-10-30T00:00:00Z"
+                          ended_at: "2026-10-30T02:15:00Z"
+                          id: bb0e8400-e29b-41d4-a716-446655440000
+                          started_at: "2026-10-30T00:02:00Z"
+                          status: SUCCEEDED
+                        lookback_seconds: 2592000
+                        metric_id: 990e8400-e29b-41d4-a716-446655440000
+                        name: Checkout button color
+                        optimal_variant_key: green
+                        refresh_schedule_id: cc0e8400-e29b-41d4-a716-446655440000
+                        scheduled_end_at: "2026-12-01T00:00:00Z"
+                        started_at: "2026-10-23T09:00:00Z"
+                        status: RUNNING
+                        subject_type_id: 880e8400-e29b-41d4-a716-446655440000
+                        tags:
+                          - checkout
+                        teams:
+                          - growth
+                        updated_at: "2026-10-30T02:15:00Z"
+                        variants:
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            is_active: true
+                            is_fallback: true
+                            key: blue
+                            name: Blue
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            is_active: true
+                            is_fallback: false
+                            key: green
+                            name: Green
+                        warmup_seconds: 86400
+                      id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      type: bandits
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditV2DTO"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, or the caller lacks the product_analytics_experiments_read permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: Get bandit
+      tags:
+        - Experiments
+      x-menu-order: 57
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/results:
+    get:
+      description: >-
+        Get what a bandit's refreshes have learned: each arm's estimate and probability of being best from the latest saved refresh, and each arm's point estimate over time. `start` and `end` narrow only `point_estimates`; the latest estimates ignore them. Observation counts are on Get bandit traffic summary. Bandits must be enabled for the organization.
+      operationId: GetBanditResults
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+        - description: Return only point estimates from refreshes saved at or after this RFC3339 timestamp. Inclusive.
+          in: query
+          name: start
+          schema:
+            description: "Return only point estimates from refreshes saved at or after this RFC3339 timestamp. Inclusive."
+            format: date-time
+            type: string
+        - description: Return only point estimates from refreshes saved before this RFC3339 timestamp. Exclusive.
+          in: query
+          name: end
+          schema:
+            description: "Return only point estimates from refreshes saved before this RFC3339 timestamp. Exclusive."
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        confidence_level: 0.95
+                        config_version: 2
+                        data_as_of: "2026-10-30T00:00:00Z"
+                        desired_change: METRIC_INCREASES
+                        next_refresh_at: "2026-10-31T02:00:00Z"
+                        optimal_variant_key: green
+                        point_estimates:
+                          - confidence_interval:
+                              lower: 39.9
+                              upper: 42.5
+                            data_as_of: "2026-10-30T00:00:00Z"
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            point_estimate: 41.2
+                            refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                            results_last_updated: "2026-10-30T02:15:00Z"
+                            variant_key: blue
+                          - confidence_interval:
+                              lower: 42.1
+                              upper: 43.9
+                            data_as_of: "2026-10-30T00:00:00Z"
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            point_estimate: 43.0
+                            refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                            results_last_updated: "2026-10-30T02:15:00Z"
+                            variant_key: green
+                        refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                        results_last_updated: "2026-10-30T02:15:00Z"
+                        state: OPTIMIZING
+                        statistics_status: calculated
+                        variants:
+                          - confidence_interval:
+                              lower: 39.9
+                              upper: 42.5
+                            data_status: usable
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            mature_observations: 4120
+                            point_estimate: 41.2
+                            probability_of_being_optimal: 0.08
+                            variant_key: blue
+                          - confidence_interval:
+                              lower: 42.1
+                              upper: 43.9
+                            data_status: usable
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            mature_observations: 9630
+                            point_estimate: 43.0
+                            probability_of_being_optimal: 0.92
+                            variant_key: green
+                      id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      type: bandit-results
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditResultsV2DTO"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Malformed bandit ID (not a valid UUID), or start or end isn't an RFC3339 timestamp, or start isn't before end.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, or the caller lacks the product_analytics_experiments_read permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: Get bandit results
+      tags:
+        - Experiments
+      x-menu-order: 58
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/traffic-summary:
+    get:
+      description: >-
+        Get what a bandit has observed, as of its latest saved refresh: observation counts, subjects, and each arm's valid observations and subjects in total and per UTC day. An observation is a subject's reward on the arm it was exposed to, counted on the UTC day of its anchor time. `start` and `end` narrow only `daily`; the totals ignore them. Bandits must be enabled for the organization.
+      operationId: GetBanditTrafficSummary
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+        - description: >-
+            Return only the UTC days that overlap the range starting at this RFC3339 timestamp. Inclusive.
+          in: query
+          name: start
+          schema:
+            description: "Return only the UTC days that overlap the range starting at this RFC3339 timestamp. Inclusive."
+            format: date-time
+            type: string
+        - description: >-
+            Return only the UTC days that overlap the range ending at this RFC3339 timestamp. Exclusive.
+          in: query
+          name: end
+          schema:
+            description: "Return only the UTC days that overlap the range ending at this RFC3339 timestamp. Exclusive."
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        daily:
+                          - cumulative_new_subjects: 3600
+                            cumulative_observations: 4260
+                            date: "2026-10-29"
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            new_subjects: 300
+                            observations: 410
+                            variant_key: blue
+                          - cumulative_new_subjects: 8300
+                            cumulative_observations: 9910
+                            date: "2026-10-29"
+                            feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            new_subjects: 880
+                            observations: 1210
+                            variant_key: green
+                        data_as_of: "2026-10-30T00:00:00Z"
+                        observation_counts:
+                          invalid: 40
+                          total: 14210
+                          valid_immature: 420
+                          valid_mature: 13750
+                        refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                        total_subjects: 11900
+                        variants:
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            observations: 4260
+                            subjects: 3600
+                            variant_key: blue
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            observations: 9910
+                            subjects: 8300
+                            variant_key: green
+                      id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      type: bandit-traffic-summary
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditTrafficSummaryV2DTO"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Malformed bandit ID (not a valid UUID), or start or end isn't an RFC3339 timestamp, or start isn't before end.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, or the caller lacks the product_analytics_experiments_read permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: Get bandit traffic summary
+      tags:
+        - Experiments
+      x-menu-order: 59
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/experiments/exposure-sql-models:
     get:
       description: >-

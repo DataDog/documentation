@@ -15852,6 +15852,58 @@ menu:
           - ListExposureSQLModels
         unstable: []
         order: 20
+    - name: Get bandit traffic summary
+      url: /api/latest/experiments/get-bandit-traffic-summary/
+      identifier: experiments-get-bandit-traffic-summary
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditTrafficSummary
+        unstable:
+          - v2
+        order: 59
+    - name: Get bandit results
+      url: /api/latest/experiments/get-bandit-results/
+      identifier: experiments-get-bandit-results
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditResults
+        unstable:
+          - v2
+        order: 58
+    - name: Get bandit
+      url: /api/latest/experiments/get-bandit/
+      identifier: experiments-get-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBandit
+        unstable:
+          - v2
+        order: 57
+    - name: List bandits
+      url: /api/latest/experiments/list-bandits/
+      identifier: experiments-list-bandits
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBandits
+        unstable:
+          - v2
+        order: 56
     - name: Create experiment
       url: /api/latest/experiments/create-experiment/
       identifier: experiments-create-experiment

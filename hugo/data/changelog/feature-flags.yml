@@ -54,3 +54,10 @@ entries:
       - ListFeatureFlags
       - UpdateSavedFilterAttributes
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - UpdateAllocationsForFeatureFlagInEnvironment
+    title: Add the bandit reads to the Experiments API
