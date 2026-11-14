@@ -958,4 +958,4 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [68]: /opentelemetry/compatibility/
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
 [72]: /opentelemetry/migrate/upstream_to_ddot_collector/
-[73]: /opentelemetry/getting_started/kubernetes/
+[73]: /opentelemetry/getting_started/kubernetes/?tab=ddot

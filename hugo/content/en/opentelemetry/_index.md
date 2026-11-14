@@ -106,7 +106,7 @@ Use the [OpenTelemetry SDK][8] and the [upstream OpenTelemetry Collector][9], an
 | If you | Use |
 |---|---|
 | Can't run a Collector, such as on serverless functions or managed platforms | [Direct OTLP ingest][10]: Your applications send OTLP straight to Datadog. |
-| Already run the Datadog Agent | [The Datadog Agent][11]: The Agent receives OTLP at the Agent's OTLP endpoint, or runs the [Agent's Collector][16], the OpenTelemetry Collector that ships inside the Datadog Agent. |
+| Already run the Datadog Agent | [The Datadog Agent][11]: The Agent receives OTLP at the Agent's OTLP endpoint, or runs the [Agent's Collector][16], an OpenTelemetry Collector that runs alongside the Agent. |
 | Run a Collector that uses the Datadog Exporter | [Datadog Exporter][12]: Keep your existing configuration. |
 
 To compare every setup, see [Send OpenTelemetry Data to Datadog][13]. To check which Datadog features each setup supports, see [Feature Compatibility][14].

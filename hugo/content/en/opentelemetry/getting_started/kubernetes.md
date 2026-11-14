@@ -19,7 +19,7 @@ Monitor your Kubernetes applications and infrastructure in Datadog with OpenTele
 
 Use DDOT or upstream OpenTelemetry components. The installation steps are the same; select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
 
-For other environments and installation options, see [Send OpenTelemetry Data to Datadog][17].
+This quickstart runs on Kubernetes, and so does the DDOT Collector. On other platforms, use an upstream OpenTelemetry Collector or the Datadog Agent. See [Send OpenTelemetry Data to Datadog][17].
 
 ## Prerequisites
 
@@ -27,8 +27,6 @@ For other environments and installation options, see [Send OpenTelemetry Data to
 - [Helm][4] v4 or later, and `git`.
 - A [Datadog API key][5].
 - An application that runs in the cluster as a Deployment, written in Java, Python, Node.js, or .NET.
-
-This quickstart and the DDOT Collector require Kubernetes. On other platforms, [send OpenTelemetry data to Datadog][17] with the Agent's Collector or an upstream OpenTelemetry Collector.
 
 ## 1. Download the installer
 
