@@ -19,6 +19,7 @@ private: true
 {{< nextlink href="/opentelemetry/migrate/collector_0_95_0" >}}Migrate to OpenTelemetry Collector Version 0.95.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/migrate_operation_names" >}}Migrate to New Operation Name Mappings{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Agent's Collector{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/upstream_to_ddot_collector" >}}Migrate to the DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Read more on the blog
