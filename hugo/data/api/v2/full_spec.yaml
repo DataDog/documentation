@@ -930,6 +930,26 @@ components:
       required: true
       schema:
         type: string
+    GetIssueImpactFromParameter:
+      description: Start of the time window, in milliseconds since the Unix epoch. Must be before `filter[to]`.
+      example: 1794152269473
+      in: query
+      name: filter[from]
+      required: true
+      schema:
+        format: int64
+        type: integer
+    GetIssueImpactToParameter:
+      description: |-
+        End of the time window, in milliseconds since the Unix epoch. Use the issue's `last_seen` to end the window at
+        its latest error.
+      example: 1794238669473
+      in: query
+      name: filter[to]
+      required: true
+      schema:
+        format: int64
+        type: integer
     GetIssueIncludeQueryParameter:
       description: |-
         Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
@@ -75621,6 +75641,327 @@ components:
       type: string
       x-enum-varnames:
         - CASE
+    IssueImpact:
+      description: The impact of an issue over the requested time window.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueImpactAttributes"
+        id:
+          description: Identifier of the issue.
+          example: "c1726a66-1f64-11ee-b338-da7ad0900002"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueImpactType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueImpactAccount:
+      description: An account whose users are affected by the issue.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: Account ID, from the `account.id` attribute.
+          example: "acc-7"
+          type: string
+        name:
+          description: Account name, if available.
+          example: "Acme"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactAccounts:
+      description: Accounts whose users are affected by the issue.
+      properties:
+        distinct_count:
+          description: Number of distinct accounts affected by the issue in the time window.
+          example: 18
+          format: int64
+          type: integer
+        top:
+          description: Up to five accounts with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactAccount"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactAttributes:
+      description: |-
+        The issue's errors in the time window, and the users, sessions, accounts, views, and endpoints they affect.
+      properties:
+        accounts:
+          $ref: "#/components/schemas/IssueImpactAccounts"
+        endpoints:
+          $ref: "#/components/schemas/IssueImpactEndpoints"
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        sessions:
+          $ref: "#/components/schemas/IssueImpactSessions"
+        users:
+          $ref: "#/components/schemas/IssueImpactUsers"
+        views:
+          $ref: "#/components/schemas/IssueImpactViews"
+      required:
+        - error_counts
+        - users
+        - sessions
+        - accounts
+        - views
+        - endpoints
+      type: object
+    IssueImpactEndpoint:
+      description: An endpoint whose traces have the issue's errors.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        resource_name:
+          description: Resource name of the trace's root span.
+          example: "POST /orders"
+          type: string
+        service:
+          description: Service of the trace's root span.
+          example: "checkout-api"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - service
+        - resource_name
+        - error_counts
+        - significant
+      type: object
+    IssueImpactEndpoints:
+      description: Endpoints whose traces have the issue's errors, identified by each trace's root span.
+      properties:
+        distinct_count:
+          description: Number of distinct endpoints affected by the issue in the time window.
+          example: 2
+          format: int64
+          type: integer
+        top:
+          description: Up to five endpoints with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactEndpoint"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactErrorCounts:
+      description: |-
+        Number of errors reported by each source. Several sources can report the same error, such as an APM span and
+        a log, so the counts overlap: don't add them together.
+      properties:
+        apm:
+          description: Number of errors reported by APM.
+          example: 700
+          format: int64
+          type: integer
+        llmobs:
+          description: Number of errors reported by Agent Observability.
+          example: 0
+          format: int64
+          type: integer
+        logs:
+          description: Number of errors reported by Log Management.
+          example: 700
+          format: int64
+          type: integer
+        rum:
+          description: Number of errors reported by RUM.
+          example: 440
+          format: int64
+          type: integer
+      required:
+        - apm
+        - logs
+        - rum
+        - llmobs
+      type: object
+    IssueImpactResponse:
+      description: Response containing the impact of an error tracking issue.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueImpact"
+      required:
+        - data
+      type: object
+    IssueImpactSession:
+      description: A RUM session where the issue occurred.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: Session identifier.
+          example: "8f1c3a52-6b1e-4a5e-9d0e-2c3b4a5d6e7f"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: false
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactSessions:
+      description: RUM sessions where the issue occurred.
+      properties:
+        distinct_count:
+          description: Number of distinct sessions where the issue occurred in the time window.
+          example: 540
+          format: int64
+          type: integer
+        top:
+          description: Up to five sessions with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactSession"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_impact"]
+      example: "error_tracking_issue_impact"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_IMPACT
+    IssueImpactUser:
+      description: A user affected by the issue.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: User ID, from the `usr.id` attribute.
+          example: "u-42"
+          type: string
+        name:
+          description: User name or email, if available.
+          example: "jane@example.com"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactUsers:
+      description: Users affected by the issue.
+      properties:
+        distinct_count:
+          description: Number of distinct users affected by the issue in the time window.
+          example: 312
+          format: int64
+          type: integer
+        top:
+          description: Up to five users with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactUser"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactView:
+      description: A RUM view where the issue occurred.
+      properties:
+        affected:
+          $ref: "#/components/schemas/IssueImpactViewCounts"
+        baseline:
+          $ref: "#/components/schemas/IssueImpactViewCounts"
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        name:
+          description: View name.
+          example: "/checkout"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - name
+        - error_counts
+        - significant
+        - affected
+      type: object
+    IssueImpactViewCounts:
+      description: |-
+        Distinct users, accounts, sessions, and view instances on a view. `affected` counts only those with the issue's
+        errors. `baseline` counts all users, accounts, sessions, and view instances on the view in the time window. It
+        is absent when RUM has no data for the view.
+      properties:
+        accounts:
+          description: Number of distinct accounts.
+          example: 12
+          format: int64
+          type: integer
+        sessions:
+          description: Number of distinct sessions.
+          example: 210
+          format: int64
+          type: integer
+        users:
+          description: Number of distinct users.
+          example: 150
+          format: int64
+          type: integer
+        views:
+          description: Number of distinct view instances.
+          example: 480
+          format: int64
+          type: integer
+      required:
+        - users
+        - accounts
+        - sessions
+        - views
+      type: object
+    IssueImpactViews:
+      description: RUM views where the issue occurred.
+      properties:
+        distinct_count:
+          description: Number of distinct view names where the issue occurred in the time window.
+          example: 4
+          format: int64
+          type: integer
+        top:
+          description: Up to five views with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactView"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
     IssueIncluded:
       description: An array of related resources, returned when the `include` query parameter is used.
       oneOf:
@@ -184039,6 +184380,81 @@ paths:
       tags:
         - Error Tracking
       x-menu-order: 4
+  /api/v2/error-tracking/issues/{issue_id}/impact:
+    get:
+      description: |-
+        Get an issue's impact over a time window: its error counts by source, and the users, sessions, accounts,
+        RUM views, and endpoints it affects most.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's
+        data.
+      operationId: GetIssueImpact
+      parameters:
+        - $ref: "#/components/parameters/IssueIDPathParameter"
+        - $ref: "#/components/parameters/GetIssueImpactFromParameter"
+        - $ref: "#/components/parameters/GetIssueImpactToParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        accounts:
+                          distinct_count: 0
+                          top: []
+                        endpoints:
+                          distinct_count: 1
+                          top:
+                            - error_counts:
+                                apm: 700
+                                llmobs: 0
+                                logs: 700
+                                rum: 0
+                              resource_name: POST /orders
+                              service: checkout-api
+                              significant: true
+                        error_counts:
+                          apm: 700
+                          llmobs: 0
+                          logs: 700
+                          rum: 0
+                        sessions:
+                          distinct_count: 0
+                          top: []
+                        users:
+                          distinct_count: 0
+                          top: []
+                        views:
+                          distinct_count: 0
+                          top: []
+                      id: c1726a66-1f64-11ee-b338-da7ad0900002
+                      type: error_tracking_issue_impact
+              schema:
+                $ref: "#/components/schemas/IssueImpactResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - error_tracking_read
+      summary: Get the impact of an error tracking issue
+      tags:
+        - Error Tracking
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
   /api/v2/error-tracking/issues/{issue_id}/state:
     put:
       description: Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.

@@ -2006,6 +2006,10 @@
     "request_description": "Update issue assignee request payload.",
     "request_schema_description": "Update issue assignee request payload."
   },
+  "GetIssueImpact": {
+    "description": "Get an issue's impact over a time window: its error counts by source, and the users, sessions, accounts,\nRUM views, and endpoints it affects most.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's\ndata.",
+    "summary": "Get the impact of an error tracking issue"
+  },
   "UpdateIssueState": {
     "description": "Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.",
     "summary": "Update the state of an issue",
