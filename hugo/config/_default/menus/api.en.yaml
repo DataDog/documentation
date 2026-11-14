@@ -15095,6 +15095,19 @@ menu:
           - UpdateIssueState
         unstable: []
         order: 3
+    - name: Snooze an issue
+      url: /api/latest/error-tracking/snooze-an-issue/
+      identifier: error-tracking-snooze-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SnoozeIssue
+        unstable:
+          - v2
+        order: 6
     - name: Update the assignee of an issue
       url: /api/latest/error-tracking/update-the-assignee-of-an-issue/
       identifier: error-tracking-update-the-assignee-of-an-issue
