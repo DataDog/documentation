@@ -1,6 +1,6 @@
 ---
 title: Embed Apps
-description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, and the Catalog side panel.
+description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, the Catalog side panel, APM service pages, and LLM Observability annotation queues.
 further_reading:
 - link: "/actions/datadog_apps/"
   tag: "Documentation"
@@ -106,9 +106,10 @@ Import `useDatadogAppInput` and the input schema for the relevant product surfac
 ```typescript
 import { useDatadogAppInput } from '@datadog/apps-frontend/inputs/react';
 import {
+  datadogAnnotationInteraction,
   datadogDashboard,
-  datadogIdp,
   datadogNotebook,
+  datadogServicePage,
   datadogServicePanel,
   datadogTheme,
 } from '@datadog/apps-frontend/inputs/schema';
@@ -247,30 +248,6 @@ When the status is `ready`, `fields` provides:
 Use this context to keep the app synchronized with the time range and filters applied to the surrounding notebook.
 
 {{% /tab %}}
-{{% tab "IDP homepage" %}}
-
-Use `datadogIdp` to read and change the app's position on the Internal Developer Portal homepage.
-
-```typescript
-const idp = useDatadogAppInput(datadogIdp);
-```
-
-When the status is `ready`, `fields` provides:
-
-```typescript
-{
-  position: number;
-  move: (inputs: { delta: number }) => number;
-}
-```
-
-Use `position` to read the app's current position on the homepage. Call `move()` to move the app by a number of positions; it resolves to the app's new position.
-
-```typescript
-const newPosition = await idp.fields.move({ delta: 1 });
-```
-
-{{% /tab %}}
 {{% tab "Catalog side panel" %}}
 
 Use `datadogServicePanel` to identify the service displayed in the Catalog side panel.
@@ -289,6 +266,111 @@ When the status is `ready`, `fields` provides:
 ```
 
 Use `service` to scope the app's content to the selected service. Call `close()` when an app action should close the side panel.
+
+{{% /tab %}}
+{{% tab "APM service page" %}}
+
+Use `datadogServicePage` to read the service and filters shown on an APM service page.
+
+```typescript
+const servicePage = useDatadogAppInput(datadogServicePage);
+```
+
+When the status is `ready`, `fields` provides:
+
+```typescript
+{
+  scopeFilter: {
+    service: string;
+    // null when the page shows every environment.
+    env: string | null;
+    // null when the page shows every version.
+    version: string | null;
+    // Empty when the page shows every operation.
+    operationName: string;
+    // For example, 'server' or 'consumer'. null when the page doesn't filter by span kind.
+    spanKind: string | null;
+    primaryTags: {
+      field: string;
+      value: string | null;
+    }[];
+    // Unix timestamps in milliseconds.
+    timeFrame: {
+      start: number;
+      end: number;
+    };
+  };
+}
+```
+
+Use `scopeFilter` to scope the app's queries to the service, environment, and time range the user is viewing. The values update when the user changes the page's filters or time range.
+
+{{% /tab %}}
+{{% tab "LLM Observability annotation queue" %}}
+
+Use `datadogAnnotationInteraction` to read the trace under review in an [annotation queue][1] and the span the reviewer selected. The input is read-only.
+
+```typescript
+const input = useDatadogAppInput(datadogAnnotationInteraction);
+```
+
+When the status is `ready`, `fields` provides:
+
+```typescript
+{
+  annotationInteraction:
+    | { status: 'loading'; traceId: string; spanId: string }
+    | { status: 'unavailable'; traceId: string; spanId: string }
+    | { status: 'ready'; traceId: string; spanId: string; trace: Trace };
+}
+```
+
+`annotationInteraction` has its own `status`, separate from the input state. A `ready` input state means the app is connected to an annotation queue; the trace itself can still be loading:
+
+- `loading`: The trace or the selected span's content is still loading.
+- `unavailable`: The trace or the selected span's content can't be loaded, for example because it is outside the retention period. Render a fallback that identifies the interaction with `traceId` and `spanId`.
+- `ready`: `trace` contains the interaction's spans.
+
+`trace` has the following shape:
+
+```typescript
+{
+  root_id: string;
+  // When true, spans other than the selected span can contain truncated content.
+  is_preview?: boolean;
+  // Keyed by span ID.
+  spans: Record<string, {
+    trace_id: string;
+    span_id: string;
+    parent_id?: string | null;
+    children_ids?: string[] | null;
+    name?: string | null;
+    service?: string | null;
+    resource?: string | null;
+    status?: string | null;
+    error?: number | null;
+    // Timestamps and durations are in seconds.
+    start: number;
+    end?: number | null;
+    duration?: number | null;
+    meta?: {
+      span?: { kind?: string | null } | null;
+      input?: unknown;
+      output?: unknown;
+      metadata?: unknown;
+      model_name?: string | null;
+      model_provider?: string | null;
+    } | null;
+    metrics?: Record<string, number | string | boolean> | null;
+  }>;
+}
+```
+
+Use `spanId` to find the selected span in `trace.spans`. The full trace is always provided; `spanId` does not limit it. The selected span's content is complete even when `is_preview` is `true`. The values update when the reviewer selects another span or moves to another interaction.
+
+The fields above are typed for convenience. Spans, `meta`, and `trace` also keep any additional instrumented fields, so the app can read data that the type does not list.
+
+[1]: /llm_observability/investigate/annotation_queues/#annotation-views
 
 {{% /tab %}}
 {{< /tabs >}}
