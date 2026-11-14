@@ -23055,6 +23055,30 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
+    - name: Get Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-scanning-group/
+      identifier: sensitive-data-scanner-get-scanning-group
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScanningGroup
+        unstable: []
+        order: 11
+    - name: List Scanning Groups of a target
+      url: /api/latest/sensitive-data-scanner/list-scanning-groups-of-a-target/
+      identifier: sensitive-data-scanner-list-scanning-groups-of-a-target
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTargetScanningGroups
+        unstable: []
+        order: 10
     - name: List standard patterns
       url: /api/latest/sensitive-data-scanner/list-standard-patterns/
       identifier: sensitive-data-scanner-list-standard-patterns

@@ -21,3 +21,10 @@ entries:
       - UpdateScanningGroup
       - UpdateScanningRule
     title: Document empty meta in Sensitive Data Scanner responses
+  - change_type: added
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41726
+    operations:
+      - GetScanningGroup
+      - ListTargetScanningGroups
+    title: Add Sensitive Data Scanner group endpoints for LLM Observability
