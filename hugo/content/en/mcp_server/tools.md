@@ -3490,7 +3490,7 @@ Tools for interacting with Datadog [Synthetic tests][47].
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
-Searches Datadog Synthetic HTTP API tests.
+Finds Datadog Synthetic tests and retrieves their configurations and run results.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
 - There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
@@ -3499,20 +3499,65 @@ Searches Datadog Synthetic HTTP API tests.
 ### `edit_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
-Edits Datadog Synthetic HTTP API tests.
+Edits HTTP and multistep API tests, including assertions, locations, and tags. Multistep editing supports HTTP step creation and updates, step deletion and reordering, and changes to extracted values and configuration variables.
 
 - Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
 - Pause the test `aaa-bbb-ccc` and set the locations to only European locations.
-- Add my team tag to the test `aaa-bbb-ccc`.
+- Add an HTTP step to test `aaa-bbb-ccc`, then move it before the checkout step.
 
 ### `synthetics_test_wizard`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
-Preview and create Datadog Synthetics HTTP API Tests.
+Previews and creates single HTTP and multistep API tests with HTTP steps. Supports response-variable extraction and assertions using JSONPath, XPath, JSON Schema, and JavaScript. Preview executes the configuration without saving a test. Validate the preview before creating the test. Creation does not trigger a run; use `run_synthetics_tests` to run the saved test.
 
-- Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
-- Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+- Preview a two-step API test that lists products, extracts a product ID, and retrieves that product.
+- Preview a test that validates the catalog response against a JSON Schema.
+
+### `run_synthetics_tests`
+*Toolset: **synthetics***\
+*Permissions Required: `Synthetics Read` and `Synthetics Write`*\
+Triggers on-demand runs for existing Synthetic tests and returns result IDs. Supports location, header, body, variable, and start URL overrides, depending on the test type. Use `get_synthetics_tests` to retrieve the results. Runs are billable and can trigger configured alerts.
+
+- Run the existing Synthetic test `aaa-bbb-ccc`.
+- Run tests `aaa-bbb-ccc` and `ddd-eee-fff`, then show their results.
+- Run the HTTP test `aaa-bbb-ccc` with an `X-Environment: staging` header.
+
+### `list_synthetics_locations`
+*Toolset: **synthetics***\
+*Permissions Required: `Synthetics Private Location Read`*\
+Lists the managed and private locations available for Synthetic tests in this organization. Returns location IDs and names.
+
+- List the managed locations available for Synthetic tests.
+- Which private locations are available for Synthetic tests?
+- Find the location ID for Frankfurt.
+
+### `get_global_variables`
+*Toolset: **synthetics***\
+*Permissions Required: `Synthetics Global Variable Read`*\
+Lists and filters global variables used by Synthetic tests, or retrieves one by ID. Non-secure values are included; secure values are never returned.
+
+- List global variables tagged `env:staging`.
+- Find the global variable named `BASE_URL`.
+- Show the details of global variable `<VARIABLE_ID>`.
+
+### `create_global_variables`
+*Toolset: **synthetics***\
+*Permissions Required: `Synthetics Global Variable Write`*\
+Creates a global variable for Synthetic tests with a name and value. Supports optional descriptions and tags. Secure values are hidden after creation and are never returned.
+
+- Create a global variable named `BASE_URL` with the value `https://api.example.com`.
+- Create a secure global variable named `TENANT_ID` with the value `example-tenant`.
+- Create a global variable named `API_VERSION` with the value `v1` and tag `env:staging`.
+
+### `edit_global_variables`
+*Toolset: **synthetics***\
+*Permissions Required: `Synthetics Global Variable Write`*\
+Updates a global variable's name, description, tags, or value by ID. Omitted fields are preserved. Providing tags replaces the existing tag list. Secure values are never returned.
+
+- Rename global variable `<VARIABLE_ID>` to `BASE_URL`.
+- Set the description of global variable `<VARIABLE_ID>` to `Base URL for staging API tests`.
+- Replace the tags of global variable `<VARIABLE_ID>` with `env:staging` and `team:checkout`.
 
 ## Watchdog
 
