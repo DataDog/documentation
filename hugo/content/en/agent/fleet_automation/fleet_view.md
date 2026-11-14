@@ -139,9 +139,6 @@ Compared to the default view, the Kubernetes view has the following limitations:
 [3]: /agent/configuration/agent-configuration-files/
 [4]: https://app.datadoghq.com/fleet?view_by=clusters
 [5]: /containers/datadog_operator
-[6]: /agent/guide/setup_remote_config
-[7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
-[9]: /agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes
 [10]: /agent/fleet_automation/otel_collectors/
 [11]: /agent/fleet_automation/otel_collectors/#visualize-otel-pipelines
