@@ -50,7 +50,7 @@ To skip unaffected tests, enable [Test Impact Analysis][1] for the service.
 
 ## Install ddtest
 
-Install the latest `ddtest` into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job: {% #1-add-test-planning %}
+Install `ddtest` v1.17.0 or later into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job: {% #1-add-test-planning %}
 
 ```bash
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
@@ -144,6 +144,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
+      has_tests: ${{ steps.plan.outputs.has_tests }}
     steps:
       - uses: actions/checkout@v4
       # Insert your runtime, dependencies, and ddtest install.
@@ -167,6 +168,7 @@ jobs:
 
   dd_test:
     needs: dd_plan
+    if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -208,6 +210,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
+      has_tests: ${{ steps.plan.outputs.has_tests }}
     steps:
       - uses: actions/checkout@v4
       # Insert your runtime, dependencies, and ddtest install.
@@ -229,6 +232,7 @@ jobs:
 
   dd_test:
     needs: dd_plan
+    if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -254,7 +258,7 @@ jobs:
 
 {% /if %}
 
-`ddtest plan` writes the matrix to `$GITHUB_OUTPUT`, so GitHub creates only the planned number of test jobs. Each job downloads the same plan and runs its zero-based node index.
+`ddtest plan` writes `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The `if` condition on `dd_test` skips the test jobs when the plan has no tests to run. Each job downloads the same plan and runs its zero-based node index.
 
 {% collapse-content title="Subdirectories and multiple suites" level="h4" id="suite-paths" %}
 
@@ -324,14 +328,9 @@ jobs:
           paths:
             - .testoptimization
             - bin/ddtest
-      - run:
-          name: Pass the planned node count
-          command: |
-            count=$(cat .testoptimization/runner/parallel-runners.txt)
-            printf '{"ddtest_parallelism": %s}\n' "$count" > ddtest-parameters.json
       - continuation/continue:
           configuration_path: .circleci/test-parallelization.yml
-          parameters: ddtest-parameters.json
+          parameters: .testoptimization/circleci/parameters.json
 
 workflows:
   setup:
@@ -375,14 +374,9 @@ jobs:
           paths:
             - .testoptimization
             - bin/ddtest
-      - run:
-          name: Pass the planned node count
-          command: |
-            count=$(cat .testoptimization/runner/parallel-runners.txt)
-            printf '{"ddtest_parallelism": %s}\n' "$count" > ddtest-parameters.json
       - continuation/continue:
           configuration_path: .circleci/test-parallelization.yml
-          parameters: ddtest-parameters.json
+          parameters: .testoptimization/circleci/parameters.json
 
 workflows:
   setup:
@@ -400,16 +394,19 @@ In the continuation configuration:
 version: 2.1
 
 parameters:
-  ddtest_parallelism:
+  parallelism:
     type: integer
     default: 1
+  has_tests:
+    type: boolean
+    default: false
 
 orbs:
   test-optimization-circleci-orb: datadog/test-optimization-circleci-orb@1
 
 jobs:
   dd_test:
-    parallelism: << pipeline.parameters.ddtest_parallelism >>
+    parallelism: << pipeline.parameters.parallelism >>
     docker:
       - image: cimg/base:stable # Use the same test image as the planning job.
     environment:
@@ -438,6 +435,7 @@ jobs:
 
 workflows:
   tests:
+    when: << pipeline.parameters.has_tests >>
     jobs:
       - dd_test # Keep the required contexts, filters, and dependencies.
 ```
@@ -449,13 +447,16 @@ workflows:
 version: 2.1
 
 parameters:
-  ddtest_parallelism:
+  parallelism:
     type: integer
     default: 1
+  has_tests:
+    type: boolean
+    default: false
 
 jobs:
   dd_test:
-    parallelism: << pipeline.parameters.ddtest_parallelism >>
+    parallelism: << pipeline.parameters.parallelism >>
     docker:
       - image: cimg/base:stable # Use the same test image as the planning job.
     environment:
@@ -484,6 +485,7 @@ jobs:
 
 workflows:
   tests:
+    when: << pipeline.parameters.has_tests >>
     jobs:
       - dd_test # Keep the required contexts, filters, and dependencies.
 ```
