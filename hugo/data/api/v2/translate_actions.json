@@ -5525,10 +5525,6 @@
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
   },
-  "ListAiGatewayRateLimitInstancesSummaries": {
-    "description": "Aggregate the counters of every template rate limit in the organization in one call, with one summary per template in the order the rate limit list returns them. Each summary is the one the single-template counter summary endpoint returns without split_dim, including scope_restricted and truncated. Rate limits with one shared allowance are left out. Summaries are cached for up to 15 seconds.",
-    "summary": "List AI Gateway rate limit counter summaries"
-  },
   "GetAiGatewayRateLimitUsage": {
     "description": "Get live usage for the organization's rate limits. Returns requests and tokens counted in the rolling one-minute window and requests limited in the last 15 minutes for each enabled rate limit, plus `untracked` (traffic no enforced rate limit covers) and `total` (all gateway traffic).",
     "summary": "Get AI Gateway rate limit usage"
@@ -5548,11 +5544,11 @@
     "request_schema_description": "Request to update an AI Gateway rate limit."
   },
   "ListAiGatewayRateLimitInstances": {
-    "description": "List the hot counters of a template rate limit, one per matched user, Team, or value, with their live usage. Only counters at 80% or more of a limit, or that limited or would have limited a request, in the last hour are listed. A counter appears within a few minutes of becoming hot. Usage is read for at most 200 counters per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
+    "description": "List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
     "summary": "List AI Gateway rate limit counters"
   },
   "GetAiGatewayRateLimitInstancesSummary": {
-    "description": "Aggregate a template rate limit's hot counters (those near or at a limit, or limiting, in the last hour), including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
+    "description": "Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
     "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
