@@ -328,6 +328,18 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
+### Real execution plans are missing with the warning "The datadog_query_plans XE session doesn't exist or isn't running"
+
+Real execution plan collection (`collect_xe.query_plans`) reads the `datadog_query_plans` Extended Events session, which you create and start. The Agent never creates or starts it. When the session is missing or stopped, the Agent logs this warning and reports a `query_plans_xe_session_missing` health event. The `query-plans-xe-session` result of the Agent's `diagnose` command also reports a warning.
+
+Create the session with the script for your deployment, or start it:
+
+```SQL
+ALTER EVENT SESSION datadog_query_plans ON SERVER STATE = START;
+```
+
+For the scripts, and the other warnings about this session, see [Collecting Real Execution Plans on SQL Server][15].
+
 ## Known limitations
 
 ### SQL Server 2012
@@ -378,3 +390,4 @@ Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: /database_monitoring/guide/sql_real_execution_plans/#troubleshooting
