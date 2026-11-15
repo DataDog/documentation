@@ -21,7 +21,7 @@ further_reading:
 The web app performance dashboard offers a bird's-eye view of RUM web applications. It shows:
 
 - **Core web vitals**: 
-  For all views, additional browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
+  For all views, additional browser KPIs are highlighted: Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
 - **XHR and Fetch requests and resources**:
   For all views, identify bottlenecks when your application loads.
 - **Long tasks** : Events that block the browser's main thread for more than 50ms.

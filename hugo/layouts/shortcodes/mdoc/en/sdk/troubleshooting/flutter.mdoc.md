@@ -77,7 +77,7 @@ This causes the SDK to output additional information about what it's doing and w
 
 ## Not seeing errors
 
-If you do not see any errors in RUM, it's likely no view has been started. Make sure you have started a view with `DatadogSdk.instance.rum?.startView` or, if you are using `DatadogRouteObserver` make sure your current Route has a name.
+If you do not see any errors in RUM, it's likely no view has been started. Make sure you have started a view with `DatadogSdk.instance.rum?.startView` or, if you are using `DatadogNavigationObserver` make sure your current Route has a name.
 
 ## Issues with automatic resource tracking and distributed tracing
 

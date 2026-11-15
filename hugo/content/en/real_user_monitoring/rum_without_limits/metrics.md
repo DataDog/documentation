@@ -49,10 +49,10 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.session.time_spent` | Session duration | Default, Percentiles breakdown | Mobile & Browser |
 | `rum.measure.view` | Count of views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.cpu_ticks_per_second` | CPU ticks per second | Default, View Name | Mobile only |
-| `rum.measure.view.crash_free` | Crash-free session rate | Default, View Name | Mobile only |
+| `rum.measure.view.crash_free` | Count of crash-free views | Default, View Name | Mobile only |
 | `rum.measure.view.cumulative_layout_shift` | Cumulative Layout Shift | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.loading_time` | Time until the page is ready and no network request or DOM mutation is currently occurring. | Default, Percentiles breakdown, View Name | Mobile & Browser |
-| `rum.measure.view.error_free` | Count of error free sessions | Default, View Name | Mobile & Browser |
+| `rum.measure.view.error_free` | Count of error-free views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.first_contentful_paint` | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.frozen_frame` | Count of frozen frames | Default, View Name | Mobile only |
 | `rum.measure.view.frozen_frame_free` | Count of views without frozen frames | Default | Mobile only |

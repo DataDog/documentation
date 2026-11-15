@@ -43,7 +43,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, make sure that you [add RUM versions to your application][4]. This dashboard shows:
 
 - {{< ui >}}Core web vitals{{< /ui >}}:
-  For all views, three browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
+  For all views, three browser KPIs are highlighted: Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
 - {{< ui >}}Errors{{< /ui >}}: 
   See a count of errors, percentage of views with errors, and explore ongoing issues.
 - {{< ui >}}Browser performance telemetry{{< /ui >}}:

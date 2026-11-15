@@ -53,7 +53,7 @@ As you expand your search filters, the graph above the search bar updates.
    * **3 facets**: 10 top values per facet (at most 1000 groups)
    * **4 facets**: 5 top values per facet (at most 625 groups)
 
-6. Add multiple queries and apply formulas and functions (optional):
+5. Add multiple queries and apply formulas and functions (optional):
 
     * **Multiple queries**: Click {{< ui >}}Add Query{{< /ui >}} to analyze multiple different sets of RUM data in relation to each other.
     * **Formulas and functions**: After adding your desired queries, click the {{< ui >}}Add Function{{< /ui >}} icon to add a mathematical computation. The example below calculates the error rate on a cart page using the formula `(a/b)*100`.
@@ -83,7 +83,7 @@ For example, this monitor triggers if and only if there are no RUM events for al
 
   {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id-1.png" alt="The monitor configuration page with the search query left blank, set to the count of all RUM events and grouped by @application.id over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 
-This monitor triggers if there are no logs for the application `Shop.ist`:
+This monitor triggers if there are no RUM events for the application `Shop.ist`:
 
   {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist-1.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 

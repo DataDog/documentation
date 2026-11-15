@@ -98,7 +98,7 @@ Datadog resolves geolocation attributes (`geo.country`, `geo.city`, and others) 
 
 ### User and account attributes
 
-Events from the main process and the renderer processes include the user (`usr.id`, `usr.name`, `usr.email`) and account (`acc.id`, `acc.name`) information you set. See [User and account information][8].
+Events from the main process and the renderer processes include the user (`usr.id`, `usr.name`, `usr.email`) and account (`account.id`, `account.name`) information you set. See [User and account information][8].
 
 ### Global context
 

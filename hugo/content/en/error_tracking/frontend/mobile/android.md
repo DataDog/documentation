@@ -30,7 +30,7 @@ Android [Error Tracking][1] gives you comprehensive visibility into your mobile 
 - Access aggregated Android crash dashboards and attributes.
 - View deobfuscated Android crash reports with trend analysis.
 
-The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
+The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 

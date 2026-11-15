@@ -23,16 +23,10 @@ The RUM Browser SDK collects resources and assets for every RUM view (page load)
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
 ## Early data collection
-The `trackEarlyRequests` SDK init parameter allows you to capture:
-
-* Unhandled rejections and uncaught exception errors when the SDK is first evaluated.
-* XHR and Fetch requests regardless of SDK loading status.
-
-
-To enable early data collection, set `trackEarlyRequests` to `true` in your Browser SDK initialization script. This feature requires Browser SDK v6.21.0+.
+Starting with Browser SDK v7, XHR and Fetch requests and resources that occurred before the SDK initialized are collected automatically. Some of those early resources may be missing properties such as the status code.
 
 <div class="alert alert-danger">
-  If you are using <code>beforeSend</code> with <code>trackEarlyRequests</code> enabled, properties associated with the request can be undefined. 
+  If you use <code>beforeSend</code>, properties associated with early requests can be undefined.
 </div>
 
   For example:
@@ -47,6 +41,8 @@ window.DD_RUM.init({
     }
 })
 ```
+
+On Browser SDK v6.21.0 to v6.x, set the `trackEarlyRequests` init parameter to `true` to enable early data collection. The parameter was removed in v7. See the [Browser SDK upgrade guide][14].
 
 ## Link RUM Resources to APM traces
 
@@ -248,3 +244,4 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
 [12]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#betatrackwebsockets
 [13]: /real_user_monitoring/application_monitoring/browser/data_collected/#websocket-attributes
+[14]: /real_user_monitoring/guide/browser-sdk-upgrade/#early-requests-always-collected
