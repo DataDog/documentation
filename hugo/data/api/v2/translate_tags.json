@@ -265,7 +265,7 @@
   },
   "feature-flags": {
     "name": "Feature Flags",
-    "description": "Manage feature flags and environments."
+    "description": "Manage feature flags, environments, and approval suggestions."
   },
   "fleet-automation": {
     "name": "Fleet Automation",
