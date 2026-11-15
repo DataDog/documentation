@@ -67,6 +67,7 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 - For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
 - For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
+- For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
 ### When each core web vital is collected

@@ -245,7 +245,7 @@ In the full side panel, you can see a timeseries graph about the total number of
 
 Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
 
-Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
+Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
 
 In the banner card view, you can see:
 
