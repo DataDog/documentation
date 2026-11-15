@@ -1444,6 +1444,54 @@
     "request_description": "",
     "request_schema_description": "JSON:API request body for filtering cost recommendations."
   },
+  "ListCostRecommendationCustomRules": {
+    "description": "List the custom recommendation rules of the organization. A custom rule overrides recommender settings for the resources its tag filters match.",
+    "summary": "List cost recommendation custom rules"
+  },
+  "CreateCostRecommendationCustomRule": {
+    "description": "Create a custom recommendation rule. The rule overrides the settings it lists for the resources its tag filters match; every other setting keeps the recommender default. Only the settings in the request are stored.",
+    "summary": "Create a cost recommendation custom rule",
+    "request_description": "",
+    "request_schema_description": "Request to create a custom recommendation rule."
+  },
+  "DeleteCostRecommendationCustomRule": {
+    "description": "Delete a custom recommendation rule.",
+    "summary": "Delete a cost recommendation custom rule"
+  },
+  "GetCostRecommendationCustomRule": {
+    "description": "Get a custom recommendation rule.",
+    "summary": "Get a cost recommendation custom rule"
+  },
+  "UpdateCostRecommendationCustomRule": {
+    "description": "Update a custom recommendation rule. Attributes left out keep their value; `filters` and `settings` replace the stored list and map when sent. The recommender of a rule cannot change.",
+    "summary": "Update a cost recommendation custom rule",
+    "request_description": "",
+    "request_schema_description": "Request to update a custom recommendation rule."
+  },
+  "ListCostRecommendationNotificationRules": {
+    "description": "List the recommendation notification rules of the organization. A notification rule sends a digest of the cost recommendations that match its query to Slack or Microsoft Teams on a schedule.",
+    "summary": "List cost recommendation notification rules"
+  },
+  "CreateCostRecommendationNotificationRule": {
+    "description": "Create a rule that sends a digest of the cost recommendations matching `scope_query` to Slack or Microsoft Teams on a schedule.",
+    "summary": "Create a cost recommendation notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create a recommendation notification rule."
+  },
+  "DeleteCostRecommendationNotificationRule": {
+    "description": "Delete a recommendation notification rule.",
+    "summary": "Delete a cost recommendation notification rule"
+  },
+  "GetCostRecommendationNotificationRule": {
+    "description": "Get a recommendation notification rule.",
+    "summary": "Get a cost recommendation notification rule"
+  },
+  "UpdateCostRecommendationNotificationRule": {
+    "description": "Update a recommendation notification rule. Attributes left out keep their value.",
+    "summary": "Update a cost recommendation notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to update a recommendation notification rule."
+  },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
