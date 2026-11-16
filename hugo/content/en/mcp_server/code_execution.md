@@ -46,7 +46,7 @@ Generated code is JavaScript based on the public [Datadog API Client for TypeScr
 
 ## What the sandbox can access
 
-Code executed by the code execution tools runs against Datadog APIs using your user identity. An agent can only read data that you have permission to access. Other access limitations include:
+Code executed by the code execution tools runs against Datadog APIs using your user identity. An agent can only read or change data that you have permission to access. Other access limitations include:
 
 - The sandbox is isolated. Scripts can't access your local machine, file system, arbitrary network destinations, or raw Datadog credentials.
 - `execute_code` only exposes read-only Datadog API calls. An agent can't use it to perform write actions, such as creating a monitor.
@@ -56,7 +56,7 @@ Code executed by the code execution tools runs against Datadog APIs using your u
 
 ## Enable code execution
 
-Code execution tools are included in the default `core` toolset, so they are available without extra configuration. To enable them alongside other toolsets that don't include `core`, add `code-exec` to the `toolsets` query parameter when you connect your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
+Code execution tools are included in the default `core` toolset, so they are available without extra configuration. If you set the `toolsets` query parameter and don't include `core`, add `code-exec` to the list when you connect your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), this URL enables only the code execution tools:
@@ -72,7 +72,7 @@ For example, based on your selected [Datadog site][6] ({{< region-param key="dd_
 
 To remove code execution tools from a session, list them in the [`omit_tools`][9] query parameter, for example `omit_tools=execute_code,execute_code_write,search_datadog_sdk`.
 
-Omitting a product-specific tool, such as `search_datadog_logs`, doesn't stop `execute_code` from calling the same Datadog API. If you need to keep certain data away from AI agents, omit the code execution tools as well, and restrict access to the data itself with [role permissions][4] and, for logs, [restriction queries][10]. Tool lists change over time, so review your `omit_tools` list when tools are added to a toolset you use.
+Omitting a product-specific tool, such as `search_datadog_logs` or `create_datadog_monitor`, doesn't stop `execute_code` or `execute_code_write` from calling the same Datadog API. If you need to keep certain data or actions away from AI agents, omit the code execution tools as well, and restrict access to the data itself with [role permissions][4] and, for logs, [restriction queries][10]. Tool lists change over time, so review your `omit_tools` list when tools are added to a toolset you use.
 
 ## Further reading
 
