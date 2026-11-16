@@ -254,7 +254,7 @@ service:
 
 **Deploy**:
 
-The example below uses the Kubernetes NetworkPolicy values file. If your cluster uses Cilium, replace `network-policy-values.yaml` with `cilium-network-policy-values.yaml` before running it.
+The following example uses the Kubernetes NetworkPolicy values file. If your cluster uses Cilium, replace `network-policy-values.yaml` with `cilium-network-policy-values.yaml` before running it.
 
 ```shell
 helm upgrade --install <RELEASE_NAME> open-telemetry/opentelemetry-collector \
