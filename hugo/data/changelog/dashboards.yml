@@ -54,3 +54,11 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Deprecate `service` in data-streams Topology Map widgets
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41714
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add dashboard archived_at timestamp to schema
