@@ -111,15 +111,11 @@ Span Input: {{span_input}}
 
 ### Choose a judge model
 
-The judge model sets the quality and cost of each evaluation. Its provider sets which output types you can use in [Define the evaluation output](#define-the-evaluation-output). Before you publish, run the evaluator on sample spans with [Test and preview](#test-and-preview) to check that the model follows your rubric and output schema.
+The judge model sets the quality and cost of each evaluation. Its provider sets which output types you can use in [Define the evaluation output](#define-the-evaluation-output).
 
-#### Use open-weight models
+You can run the judge on models from OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, and Together AI. You can also use any endpoint compatible with the OpenAI API, such as an AI gateway or a self-hosted model, through a Custom Provider. To run the judge on an open-weight or fine-tuned model, use Baseten, Fireworks AI, or Together AI.
 
-To use an open-weight model, such as DeepSeek, Qwen, GLM, or Llama, or a model you fine-tuned, connect a neocloud provider account. Baseten, Fireworks AI, and Together AI are supported. Then select the account, and select or type the model ID in the {{< ui >}}Model{{< /ui >}} dropdown menu.
-
-These models support Structured Output and Keyword Search Output. Structured Output support varies by model. If the model's responses do not match your output schema, use Keyword Search Output.
-
-For supported models, setup steps, and use cases, see [Neocloud Providers][21].
+For the models and output types each provider supports, and tips for choosing a judge model, see [LLM Providers][21]. Before you publish, run the evaluator on sample spans with [Test and preview](#test-and-preview).
 
 ### Define the evaluation output
 
@@ -636,4 +632,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 [19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
 [20]: /llm_observability/investigate/evaluations/code_evaluations
-[21]: /llm_observability/investigate/evaluations/neocloud_providers
+[21]: /llm_observability/investigate/evaluations/llm_providers

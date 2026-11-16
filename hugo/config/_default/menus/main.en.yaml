@@ -5953,10 +5953,10 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 40501
-    - name: Neocloud Providers
-      url: llm_observability/investigate/evaluations/neocloud_providers
+    - name: LLM Providers
+      url: llm_observability/investigate/evaluations/llm_providers
       parent: llm_obs_evaluations
-      identifier: llm_obs_neocloud_providers
+      identifier: llm_obs_llm_providers
       weight: 40502
     - name: Code Evaluators
       url: llm_observability/investigate/evaluations/code_evaluations

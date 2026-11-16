@@ -22,9 +22,9 @@ Agent Observability offers several ways to support evaluations. Evaluators can b
 
 [Custom LLM-as-a-judge evaluators][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluators to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
 
-### Neocloud providers
+### LLM providers
 
-Use [neocloud providers][16] (Baseten, Fireworks AI, and Together AI) to run custom LLM-as-a-judge evaluators on open-weight or fine-tuned models.
+Custom LLM-as-a-judge evaluators run on a model from an LLM provider account you connect. See [LLM Providers][16] for the supported providers and how to choose one.
 
 ### Code evaluators
 
@@ -92,4 +92,4 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 [13]: /llm_observability/investigate/evaluations/end_user_feedback
 [14]: /llm_observability/data_governance/access_control/
 [15]: /llm_observability/investigate/evaluations/code_evaluations
-[16]: /llm_observability/investigate/evaluations/neocloud_providers
+[16]: /llm_observability/investigate/evaluations/llm_providers
