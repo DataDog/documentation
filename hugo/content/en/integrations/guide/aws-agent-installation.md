@@ -225,7 +225,7 @@ To tune what the extension collects, set the standard Datadog environment variab
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
-- **AWS integration setup**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], next to log and resource collection. Then choose how to install:
+- **AWS integration setup**: When you [set up the AWS integration][5], turn on **Grant Datadog permission to manage installations** on the [AWS integration page][7], next to log and resource collection. Then choose how to install:
   - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs for EC2 and Lambda, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
   - **Install on all resources**: Select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear. For Lambda, this covers functions with at least 256 MB of memory. See [Functions with low memory](#functions-with-low-memory).
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
@@ -283,10 +283,10 @@ To remove all instrumentation from an AWS account:
 
 1. Open the [AWS Install Agents page][8] and select the account.
 1. Select **Lambda Functions** and click **Remove all**. Repeat for **EC2 Instances**.
-1. Review the summary of changes, then apply them.
+1. Review the summary and click **Uninstall Agent**.
 1. Wait for Datadog to report that the resources are uninstrumented. Only then delete the CloudFormation stack or remove the AWS integration, if you still want to.
 
-If the stack is already deleted, Datadog can't clean up. Click **Remove all** and apply on the AWS Install Agents page anyway, so that Datadog does not instrument the resources again if the stack is recreated. Then remove the instrumentation yourself:
+If the stack is already deleted, Datadog can't clean up. On the AWS Install Agents page, click **Remove all** and **Uninstall Agent** anyway, so that Datadog does not instrument the resources again if the stack is recreated. Then remove the instrumentation yourself:
 
 - **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, remove `DD_SITE`, `DD_ORG_UUID`, and `DD_LAMBDA_HANDLER`, and restore `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to the values they had before, or remove them if the function didn't set them. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
 - **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources listed in [Created as needed, for EC2 instances][21]. Leave `AmazonSSMManagedInstanceCore` attached to an instance's existing role unless you know Datadog added it, because Systems Manager needs it to reach the instance.
