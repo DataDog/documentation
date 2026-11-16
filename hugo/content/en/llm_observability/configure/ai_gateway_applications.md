@@ -38,6 +38,7 @@ For the Claude Code CLI, set the Gateway URL and bearer token in the terminal wh
 
 ```shell
 unset ANTHROPIC_API_KEY
+unset CLAUDE_CODE_USE_BEDROCK CLAUDE_CODE_USE_VERTEX CLAUDE_CODE_USE_FOUNDRY CLAUDE_CODE_USE_ANTHROPIC_AWS
 export ANTHROPIC_BASE_URL="https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai"
 export ANTHROPIC_AUTH_TOKEN="$DD_AI_GATEWAY_TOKEN"
 export ANTHROPIC_MODEL="$DD_AI_GATEWAY_MODEL"
@@ -52,7 +53,7 @@ claude
 
 This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved Gateway model or routing rule. See [Claude Code model configuration][19].
 
-The example unsets `ANTHROPIC_API_KEY` in this terminal to avoid conflicting credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][16]. Keep tokens out of shared project settings.
+The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with Gateway credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][16]. Keep tokens out of shared project settings.
 
 <!-- vale Datadog.headings = NO -->
 ## Configure Codex
@@ -199,6 +200,7 @@ Team selection affects matching [budgets][4], [rate limits][5], and [data captur
 | Incorrect request path | Use `/ai` for Claude Code and the Anthropic SDK, and `/ai/v1` for Codex and the OpenAI SDK. Do not append the request path to the base URL. |
 | Codex returns `websocket_not_supported` | Set `supports_websockets = false` on the selected provider. |
 | Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the Gateway model identifier. Restart Codex after changing the catalog. |
+| Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart with the Gateway environment variables. |
 | Client does not use the configured Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
 See [Gateway troubleshooting][7] for Gateway error codes.
