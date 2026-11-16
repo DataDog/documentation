@@ -367,7 +367,7 @@ To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< u
 
 #### Set the default behavior
 
-The default behavior controls whether the workload targeting in your Agent configuration (`targets` and `enabledNamespaces`) still applies when you use instrumentation rules in Datadog. Some exceptions apply regardless of the default behavior. See the [Exceptions to instrumentation rules](#exceptions-to-instrumentation-rules) section.
+The default behavior controls whether the workload targeting in your Agent configuration (`targets` and `enabledNamespaces`) still applies when you use instrumentation rules in Datadog. Regardless of the default behavior, some pods are excluded from instrumentation, and other targeting methods can take precedence over instrumentation rules. See the [Exceptions to instrumentation rules](#exceptions-to-instrumentation-rules) and [Configuration precedence](#configuration-precedence) sections.
 
 <div class="alert alert-warning">If SSI is enabled cluster-wide without <code>targets</code>, check the default behavior before you create rules. With <strong>No default</strong> (the initial setting), creating any instrumentation rule in Datadog, including a single block rule, turns off cluster-wide instrumentation. After that, pods that match no rule are not instrumented. To keep instrumenting all other pods, set the default behavior to <strong>Allow everything else</strong>.</div>
 
