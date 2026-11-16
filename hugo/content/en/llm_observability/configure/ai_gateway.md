@@ -109,6 +109,8 @@ Set the `model` field in the request body to one of the following:
 
 For native Gemini, OpenAI Decisions, and System One requests, see [Use native Gemini and decision APIs][19].
 
+[19]: /llm_observability/configure/ai_gateway_inference_apis/
+
 ## Manage providers
 
 AI Gateway supports these model families on each provider. It also supports custom OpenAI-compatible endpoints.
@@ -445,4 +447,3 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
-[19]: /llm_observability/configure/ai_gateway_inference_apis/
