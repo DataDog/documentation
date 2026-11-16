@@ -18,7 +18,7 @@ further_reading:
 
 The [External Provider Status page][1] provides real-time visibility into the operational status of third-party services such as payment gateways, cloud platforms, and APIs. Use this page to identify performance issues early, reduce mean time to detection (MTTD), and minimize the impact of provider disruptions.
 
-{{< img src="internal_developer_portal/external_provider_status/external_provider_status_page.png" alt="External Provider Status page with a tile for each provider showing its status, performance graph, and calling services." >}}
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_overview.png" alt="External Provider Status page with a tile for each provider showing its status, performance graph, and calling services." >}}
 
 ## Key capabilities
 External Provider Status detects provider degradations from live traffic instead of waiting for providers to update their status pages. Incidents that providers report on their own status pages appear alongside these detections.
@@ -93,7 +93,7 @@ To receive notifications for external provider degradations:
 5. Under {{< ui >}}Name notification rule{{< /ui >}}, enter a name for the rule.
 6. Click {{< ui >}}Create{{< /ui >}}.
 
-{{< img src="internal_developer_portal/external_provider_status/external_provider_status_notifications.png" alt="Create New Notification Rule modal with Set scope, Choose Recipients, and Name notification rule steps." >}}
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_notification_rule.png" alt="Create New Notification Rule modal with Set scope, Choose Recipients, and Name notification rule steps." >}}
 
 Notification rules apply only to degradations that Datadog detects. Rules do not notify on provider-reported incidents or on custom providers, and you cannot filter by degradation type.
 
