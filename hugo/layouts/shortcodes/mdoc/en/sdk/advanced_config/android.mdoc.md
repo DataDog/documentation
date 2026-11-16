@@ -765,7 +765,7 @@ When implementing the `EventMapper<T>` interface, only some attributes are modif
 |               | `view.url`           | URL of the view.                                 |
 |               | `view.name`          | Name of the view.                                |
 
-**Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped. View events and crashes cannot be dropped: a null return for them keeps the original event.
+**Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
 
 ## Retrieve the RUM session ID
 

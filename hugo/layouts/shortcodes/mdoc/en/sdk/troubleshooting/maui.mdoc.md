@@ -64,7 +64,7 @@ A wrong application ID silently drops events server-side. Double-check the value
 
 For native iOS crashes, the `.dSYM` bundle must be uploaded to Datadog. See [Get symbolicated stack traces][6] for the full pipeline.
 
-For managed C# stack traces, filenames and line numbers are resolved server-side from the Portable PDB files uploaded with `datadog-ci`. Without them, frames show method names only. See [How C# symbolication works][7] for details.
+For managed C# stack traces, filenames and line numbers are resolved server-side from the Portable PDB files uploaded with `datadog-ci`. Without them, frames show method names only. See [How C# symbolication works][12] and [Managed C# stack traces][7] for details.
 
 ## C# errors and native crashes appear twice
 
@@ -97,8 +97,9 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 [4]: /real_user_monitoring/application_monitoring/maui/setup/#set-tracking-consent-gdpr-compliance
 [5]: https://app.datadoghq.com/rum/application/create
 [6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-symbolicated-stack-traces
-[7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#how-c-symbolication-works
+[7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#managed-c-stack-traces
 [8]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events
 [9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#known-limitation-gesture-driven-navigation
 [10]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#add-view-attributes
 [11]: /real_user_monitoring/application_monitoring/maui/error_tracking/#troubleshooting
+[12]: /real_user_monitoring/application_monitoring/maui/error_tracking/#how-c-symbolication-works

@@ -49,7 +49,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.session.time_spent` | Session duration | Default, Percentiles breakdown | Mobile & Browser |
 | `rum.measure.view` | Count of views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.cpu_ticks_per_second` | CPU ticks per second | Default, View Name | Mobile only |
-| `rum.measure.view.crash_free` | Crash-free view rate | Default, View Name | Mobile only |
+| `rum.measure.view.crash_free` | Count of crash-free views | Default, View Name | Mobile only |
 | `rum.measure.view.cumulative_layout_shift` | Cumulative Layout Shift | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.loading_time` | Time until the page is ready and no network request or DOM mutation is currently occurring. | Default, Percentiles breakdown, View Name | Mobile & Browser |
 | `rum.measure.view.error_free` | Count of error-free views | Default, View Name | Mobile & Browser |
