@@ -47,7 +47,7 @@ To start a packet capture on a connection:
     - Clear the checkbox for any host you don't want to include.
 1. Click {{< ui >}}Start Packet Capture{{< /ui >}} to start the capture.
 
-Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take a couple of minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel while it runs. See the [View packet capture results](#view-packet-capture-results) section for more information on reviewing the results.
+Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take up to 2 minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel while it runs. See the [View packet capture results](#view-packet-capture-results) section for more information on reviewing the results.
 
 ### Host selection
 
