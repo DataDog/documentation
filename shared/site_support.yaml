@@ -1,24 +1,4 @@
 site_support_ids:
-  remediate_with_ai:
-    regions: [gov, gov2]
-  cloudcraft_apm_overlay:
-    regions: [gov, gov2]
-  code_locations:
-    regions: [gov, gov2]
-  ownership_of_views:
-    regions: [gov, gov2]
-  ai_credit_limits:
-    regions: [gov, gov2]
-  amazon-security-lake:
-    regions: [gov, gov2]
-  resource_catalog_policies:
-    regions: [gov, gov2]
-  runtime_prioritization_engine:
-    regions: [gov, gov2]
-  ai_agents_console:
-    regions: [gov, gov2]
-  byoc-logs:
-    regions: [gov, gov2]
   adaptive_sampling:
     regions: [gov, gov2]
   advanced_analysis:
@@ -36,6 +16,12 @@ site_support_ids:
   agentless_scanning:
     regions: [gov, gov2]
     description: "docs page"
+  ai_agents_console:
+    regions: [gov, gov2]
+  ai_credit_limits:
+    regions: [gov, gov2]
+  ai_credits:
+    regions: [gov, gov2]
   ai_impact:
     regions: [gov, gov2]
   alibaba-cloud:
@@ -43,6 +29,8 @@ site_support_ids:
   amazon-compute-optimizer:
     regions: [gov, gov2]
   amazon-event-bridge:
+    regions: [gov, gov2]
+  amazon-security-lake:
     regions: [gov, gov2]
   apm_processing_pipelines:
     regions: [gov, gov2]
@@ -55,8 +43,6 @@ site_support_ids:
     description: "docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov"
   autocomplete_search:
     regions: [gov, gov2]
-  bitbucket-source-code:
-    regions: [gov, gov2]
   azure-automated-log-forwarding:
     regions: [gov, gov2]
   azure-devops-source-code:
@@ -64,6 +50,10 @@ site_support_ids:
   azure-private-link:
     regions: [us, us5, eu, gov, gov2, ap1, ap2, uk1]
   backstage:
+    regions: [gov, gov2]
+  bitbucket-source-code:
+    regions: [gov, gov2]
+  bits_agent_builder:
     regions: [gov, gov2]
   bits_ai:
     regions: [gov, gov2]
@@ -73,21 +63,31 @@ site_support_ids:
     regions: [gov, gov2]
   bits_investigation:
     regions: [gov, gov2]
-  dashboard_anomaly_detection:
+  bits_release:
     regions: [gov, gov2]
   bits_remediation:
+    regions: [gov, gov2]
+  byoc-logs:
     regions: [gov, gov2]
   byoti:
     regions: [gov, gov2]
   case_management:
     regions: [gov2]
+  change_tracking:
+    regions: [gov, gov2]
   ci_visibility:
+    regions: [gov, gov2]
+  cicd_optimization:
+    regions: [gov, gov2]
+  cloudcraft_apm_overlay:
     regions: [gov, gov2]
   cloudcraft_monitors_overlay:
     regions: [gov, gov2]
   cloudprem:
     regions: [gov, gov2]
   code_coverage:
+    regions: [gov, gov2]
+  code_locations:
     regions: [gov, gov2]
   code_security:
     regions: [gov, gov2]
@@ -97,8 +97,9 @@ site_support_ids:
     regions: [gov, gov2]
   confluent_cloud_integration:
     regions: [gov, gov2]
-  containers_autoscaling:
+  containers_autoscaling_cluster:
     regions: [gov, gov2]
+    description: "docs (content/en/containers/autoscaling/cluster.md) — workload autoscaling is GA on gov/gov2, cluster autoscaling is still LA and not available there"
   containers_kubernetes_appsec:
     regions: [gov, gov2]
   continuous_delivery:
@@ -108,13 +109,13 @@ site_support_ids:
   correlation:
     regions: [gov, gov2]
     description: "Event management correlation"
-  coterm:
+  cpp_log_collection:
     regions: [gov, gov2]
   cross_app_access:
     regions: [gov, gov2]
   csm_jira:
     regions: [us, us3, us5, eu, ap1, ap2, uk1]
-  cpp_log_collection:
+  dashboard_anomaly_detection:
     regions: [gov, gov2]
   data_jobs:
     regions: [gov, gov2]
@@ -124,6 +125,8 @@ site_support_ids:
     regions: [gov, gov2]
   datadog_disaster_recovery:
     regions: [gov, gov2]
+  dd.llm_observability.dataset:
+    regions: [gov, gov2]
   delivery_performance:
     regions: [gov, gov2]
   deployment_gates:
@@ -132,6 +135,8 @@ site_support_ids:
     regions: [gov, gov2]
   dora_metrics:
     regions: [gov, gov2]
+  durable_functions:
+    regions: [gov, gov2]
   dynamic_instrumentation:
     regions: [gov, gov2]
   dynamic_quotas:
@@ -139,6 +144,8 @@ site_support_ids:
   email_delivery:
     regions: [us3, us5, eu, ap1, ap2, gov, gov2, uk1]
     description: "US1 only"
+  end_user_device_monitoring:
+    regions: [gov, gov2]
   events_from_sns_emails:
     regions: [gov, gov2]
   exception_replay:
@@ -180,11 +187,11 @@ site_support_ids:
     regions: [gov, gov2]
   iac_security:
     regions: [gov, gov2]
+  idp:
+    regions: [gov, gov2]
   incident_ai:
     regions: [gov, gov2]
   inferred_entity_remapping_rules:
-    regions: [gov, gov2]
-  idp:
     regions: [gov, gov2]
   ioc_explorer:
     regions: [gov, gov2]
@@ -193,6 +200,8 @@ site_support_ids:
   jira-service-management-ops:
     regions: [gov, gov2]
   jira_error_tracking:
+    regions: [gov, gov2]
+  journey_monitoring:
     regions: [gov, gov2]
   launchdarkly:
     regions: [gov, gov2]
@@ -204,8 +213,6 @@ site_support_ids:
     regions: [gov, gov2]
   llm_observability:
     regions: [gov, gov2]
-  dd.llm_observability.dataset:
-    regions: [gov, gov2]
   mcp_server:
     regions: [gov, gov2]
   mobile_app_testing:
@@ -214,33 +221,37 @@ site_support_ids:
     regions: [gov, gov2]
   network_config_management:
     regions: [gov, gov2]
-  observability_pipelines:
-    regions: [gov, gov2]
   on-call:
     regions: [gov2]
     url_paths:
       - /api/latest/on-call
       - /api/latest/on-call/**
+  opentelemetry_collector_otlp_export:
+    regions: [gov, gov2]
   oracle-fusion:
     regions: [gov, gov2]
   oracle_fusion_integration_setup:
     regions: [gov, gov2]
   ovhcloud:
     regions: [gov, gov2]
+  ownership_of_views:
+    regions: [gov, gov2]
   pr_gates:
     regions: [gov, gov2]
   product_analytics:
     regions: [gov, gov2]
+  query_translation:
+    regions: [gov, gov2]
   recorded-future:
     regions: [gov, gov2]
-  remote_config:
+  remediate_with_ai:
     regions: [gov, gov2]
   remote_config_for_fa:
     regions: [gov, gov2]
     description: "For the Guides page"
-  remote_configuration:
-    regions: [gov, gov2]
   resource_based_sampling:
+    regions: [gov, gov2]
+  resource_catalog_policies:
     regions: [gov, gov2]
   roku_error_tracking:
     regions: [gov, gov2]
@@ -248,11 +259,13 @@ site_support_ids:
     regions: [gov, gov2]
   rum_cpp:
     regions: [gov, gov2]
+  rum_remote_configuration:
+    regions: [gov, gov2]
   rum_roku:
     regions: [gov, gov2]
-  rum_server_auto_instrumentation:
-    regions: [gov, gov2]
   rum_server_apache:
+    regions: [gov, gov2]
+  rum_server_auto_instrumentation:
     regions: [gov, gov2]
   rum_server_ibm:
     regions: [gov, gov2]
@@ -261,6 +274,8 @@ site_support_ids:
   rum_server_nginx:
     regions: [gov, gov2]
   rum_server_windows_iis:
+    regions: [gov, gov2]
+  runtime_prioritization_engine:
     regions: [gov, gov2]
   safety_center:
     regions: [gov, gov2]
@@ -276,13 +291,21 @@ site_support_ids:
     regions: [gov, gov2]
   storage_management:
     regions: [gov, gov2]
+  stripe_projects:
+    regions: [us3, us5, eu, gov, gov2, ap1, ap2, uk1]
   supported_deployment_types:
     regions: [gov, gov2]
   synthetics_email_validation:
     regions: [gov, gov2]
   synthetics_safari:
     regions: [gov, gov2]
+  tag_enrichment:
+    regions: [gov, gov2]
   test_optimization:
+    regions: [gov, gov2]
+  tracing_remote_configuration:
+    regions: [gov, gov2]
+  tracking_plans:
     regions: [gov, gov2]
   universal_service_monitoring:
     regions: [gov, gov2]
@@ -290,15 +313,7 @@ site_support_ids:
     regions: [us3, us5, eu, ap1, ap2, gov, gov2, uk1]
   wiz:
     regions: [gov, gov2]
-  workflows:
+  work_management_ai_site_support:
     regions: [gov, gov2]
   workload_security_active_protection:
     regions: [gov, gov2]
-  work_management_ai_site_support:
-    regions: [gov, gov2]
-  ai_credits:
-    regions: [gov, gov2]
-  opentelemetry_collector_otlp_export:
-    regions: [gov, gov2]
-  stripe_projects:
-    regions: [us3, us5, eu, gov, gov2, ap1, ap2, uk1]
