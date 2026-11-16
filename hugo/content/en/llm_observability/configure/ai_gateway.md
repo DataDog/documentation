@@ -208,6 +208,8 @@ The budget list shows active budgets, tracked spend, budgets at risk, and **Untr
 
 For shared and per-value allowances, active-period adjustments, and verification steps, see [Set and Enforce AI Gateway Budgets][24].
 
+[24]: /llm_observability/configure/ai_gateway_budgets/
+
 ## Set rate limits
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
@@ -445,5 +447,3 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
-
-[24]: /llm_observability/configure/ai_gateway_budgets/
