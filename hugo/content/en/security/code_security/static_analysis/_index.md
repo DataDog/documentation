@@ -106,7 +106,7 @@ To customize which Static Code Analysis rules are configured in your repositorie
 
 ## Prioritize findings with runtime context
 
-Static Code Analysis findings show the services that run the affected code and the runtime risks those services carry, such as **Service in Production** and **Service Exposed to Attacks**. Use the **Runtime Context** and **Risks** facets to focus on findings in live, exposed services. See [Runtime Context for Static Findings](/security/code_security/runtime_context/).
+Static Code Analysis findings show the services that run the affected code and the runtime risks those services carry, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}. Use the {{< ui >}}Runtime Context{{< /ui >}} and {{< ui >}}Risks{{< /ui >}} facets to focus on findings in live, exposed services. For more information, see [Runtime Context for Static Findings][18].
 
 ## Link findings to Datadog services and teams
 To link findings to Datadog services and teams, see the [Setup documentation][13].
@@ -188,3 +188,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /integrations/azure-devops-source-code/
 [17]: /security/code_security/static_analysis/ai_enhanced_sast/
+[18]: /security/code_security/runtime_context/
