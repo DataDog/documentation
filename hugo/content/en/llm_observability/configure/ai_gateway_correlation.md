@@ -119,7 +119,7 @@ A routing rule can produce several provider attempts through retries or fallback
 
 [1]: /llm_observability/configure/ai_gateway/#get-started
 [2]: /llm_observability/configure/ai_gateway/#configure-data-capture
-[3]: /llm_observability/instrumentation/
+[3]: /llm_observability/instrument/
 [4]: /getting_started/site/
 [5]: /llm_observability/configure/ai_gateway/#error-codes
 [6]: https://app.datadoghq.com/llm/gateway
