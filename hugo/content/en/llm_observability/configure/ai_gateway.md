@@ -297,7 +297,7 @@ To investigate a request:
 
 For available metrics and tags, see [AI Gateway metrics][16].
 
-To connect Gateway requests to applications, teams, sessions, and parent traces, see [Correlate AI Gateway requests][21].
+To connect Gateway requests to applications, teams, sessions, and parent traces, see [Correlate AI Gateway Requests with Applications and Traces][21].
 
 [21]: /llm_observability/configure/ai_gateway_correlation/
 
