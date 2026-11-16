@@ -6053,6 +6053,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_ai_gateway
       weight: 604
+    - name: Native Gemini and Decision APIs
+      url: llm_observability/configure/ai_gateway_inference_apis
+      parent: llm_obs_ai_gateway
+      identifier: llm_obs_ai_gateway_inference_apis
+      weight: 60408
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
