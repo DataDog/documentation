@@ -1,6 +1,6 @@
 ---
-title: Secure LLM Traffic with AI Gateway
-description: Attach AI Guard policies to AI Gateway to monitor supported prompts and responses, block unsafe content, and detect sensitive data.
+title: Evaluate LLM Traffic with AI Guard in AI Gateway
+description: Attach AI Guard policies to AI Gateway to evaluate supported prompts and responses, block unsafe content, and detect sensitive data.
 further_reading:
   - link: "/llm_observability/configure/ai_gateway/"
     tag: "Documentation"
@@ -10,9 +10,19 @@ further_reading:
     text: "Configure AI Guard policies"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Attach an [AI Guard policy][1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the Gateway attachment defines which traffic it evaluates and how Gateway handles the result.
+
+For Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
 
 Start with an attachment on a test routing rule before applying a policy across the organization.
 
@@ -42,7 +52,7 @@ A route-specific attachment replaces the organization default for that route. Th
    3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][1].
    4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
 4. Under {{< ui >}}AI Gateway Action{{< /ui >}}, explicitly select {{< ui >}}Monitor only{{< /ui >}} or {{< ui >}}Block unsafe{{< /ui >}}. The form defaults to {{< ui >}}Block unsafe{{< /ui >}}.
-5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target, policy, and action, then [verify the attachment](#verify-the-attachment) with test traffic.
+5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target, policy, and action, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
 
 To update an attachment, open it, change its settings, and click {{< ui >}}Save changes{{< /ui >}}. Allow configuration changes to propagate before checking fresh requests.
 
@@ -53,11 +63,11 @@ To update an attachment, open it, change its settings, and click {{< ui >}}Save 
 | **Monitor only** | Evaluates supported prompt content asynchronously. Policy denials and sensitive-data findings do not block the model request. Responses are not evaluated. |
 | **Block unsafe** | Evaluates supported prompt content before calling the model. Policy denials block the request. Also evaluates successful, buffered Chat Completions output before returning it. |
 
-For a new UI attachment, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
+For an attachment created in the AI Gateway UI, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
 
 Existing attachments can have different saved sensitive-data or evaluator-error settings. Editing an attachment without changing its action preserves those settings. Changing its action applies the behavior described above.
 
-In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See [Troubleshooting](#troubleshooting).
+In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See the [Troubleshooting](#troubleshooting) section.
 
 ## Evaluation coverage
 
@@ -74,9 +84,9 @@ A successful model response alone does not prove that AI Guard evaluated the req
 
 ### Sensitive data scanning
 
-Configure [Sensitive Data Scanning][5] in the AI Guard policy. With a new UI attachment, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
+Configure [sensitive data scanning][5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
 
-This Gateway integration does not redact content. An allowed request is not a redacted request. The broader AI Guard SDK and API capabilities do not establish Gateway coverage.
+This Gateway integration does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][9] supports direct SDK calls and the HTTP API. Gateway does not apply those redactions to the content it forwards.
 
 ### Data capture and evaluation
 
@@ -122,6 +132,10 @@ Match the route, caller, and timestamp when reviewing evaluation evidence. For s
 
 For Gateway AI Guard refusals, OpenAI-compatible requests return HTTP `422`; native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/ai_guard/policies/
 [2]: /llm_observability/configure/ai_gateway/#prerequisites
 [3]: /security/ai_guard/setup/#permissions
@@ -130,3 +144,4 @@ For Gateway AI Guard refusals, OpenAI-compatible requests return HTTP `422`; nat
 [6]: /llm_observability/configure/ai_gateway/#configure-data-capture
 [7]: /security/ai_guard/policies/#custom-rules
 [8]: https://app.datadoghq.com/llm/gateway
+[9]: /security/ai_guard/sensitive_data_redaction/
