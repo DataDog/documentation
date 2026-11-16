@@ -54,7 +54,7 @@ A provider connects an integration account to the models that callers can use th
 
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
-To configure Claude Code, Codex, or a Python SDK, see [Connect applications to AI Gateway][17].
+To configure Claude Code, Codex, or a Python SDK, see [Connect Applications to AI Gateway][17].
 
 [17]: /llm_observability/configure/ai_gateway_applications/
 

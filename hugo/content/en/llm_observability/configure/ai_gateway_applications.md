@@ -1,11 +1,15 @@
 ---
-title: Connect applications to AI Gateway
+title: Connect Applications to AI Gateway
 description: Connect Claude Code, Codex, and Python SDKs to Datadog AI Gateway, attribute requests to applications and teams, and verify traffic.
 further_reading:
   - link: "/llm_observability/configure/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
 
 Connect a coding agent or SDK to AI Gateway with a Datadog credential and an approved model identifier. These examples connect organization-funded applications using provider credentials configured by your administrator.
 
@@ -78,7 +82,7 @@ http_headers = { "x-dd-tag-ml_app" = "codex" }
 
 Start `codex` from the terminal where `DD_AI_GATEWAY_TOKEN` is available. The `env_key` setting sends that token as `Authorization: Bearer`. AI Gateway supports Responses over HTTP and server-sent events (SSE), so keep `supports_websockets = false`.
 
-Gateway model IDs and routing aliases can be unfamiliar to Codex. Configure a matching Codex model catalog to supply model instructions, context limits, and tool capabilities; otherwise, Codex can use generic settings. If your administrator supplies a local catalog, add its absolute path before the first TOML table:
+Gateway model IDs and `router/<RULE_SLUG>` identifiers might not match Codex's model catalog. For an identifier Codex does not recognize, supply a matching catalog entry with model instructions, context limits, and tool capabilities. This avoids generic model settings. If your administrator supplies a local catalog, add its absolute path before the first TOML table:
 
 ```toml
 model_catalog_json = "<ABSOLUTE_PATH_TO_CODEX_MODEL_CATALOG>"
@@ -150,7 +154,7 @@ Install the SDK:
 python -m pip install anthropic
 ```
 
-Set `auth_token` to send your Datadog token as a bearer token. Use `/ai` as the base URL because the SDK appends `/v1/messages`:
+Set `auth_token` to send your Datadog token as a bearer token. Use `/ai` as the base URL because the SDK appends `/v1/messages`. Save the following as `anthropic_example.py`:
 
 ```python
 import os
@@ -173,13 +177,13 @@ for block in message.content:
         print(block.text)
 ```
 
-Only inference operations supported by AI Gateway and the selected model are available. See the [Anthropic Python SDK documentation][21] for client options.
+Run `python anthropic_example.py` from the terminal where you set the token and model. Only inference operations supported by AI Gateway and the selected model are available. See the [Anthropic Python SDK documentation][21] for client options.
 
 ## Select a team
 
 To attribute requests to a team you belong to, add `x-ai-gateway-team: <TEAM_SLUG>` to the client's request headers:
 
-- **Claude Code:** Add a second line to `ANTHROPIC_CUSTOM_HEADERS`, keeping the existing application header.
+- **Claude Code:** Set both headers on separate lines: `export ANTHROPIC_CUSTOM_HEADERS=$'x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>'`.
 - **Codex:** Add `"x-ai-gateway-team" = "<TEAM_SLUG>"` to the provider's `http_headers` map.
 - **SDK:** Add `"x-ai-gateway-team": "<TEAM_SLUG>"` to `default_headers`.
 
@@ -187,16 +191,17 @@ Team selection affects matching [budgets][4], [rate limits][5], and [data captur
 
 ## Verify your application
 
-1. In Claude Code or Codex, send `Reply with exactly: Gateway connected.` The SDK example sends the same prompt.
+1. In Claude Code or Codex, send `Reply with exactly: Gateway connected.` The SDK examples send the same prompt. Look for `Gateway connected.` in a successful response.
 2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] and select the time range containing the request.
-3. Open the matching trace in Agent Observability. The examples set the application to `claude-code`, `codex`, or `my-application`. Confirm the caller, served model, and provider. For a routing rule, inspect the destination that served the request.
+3. Follow the {{< ui >}}Traces{{< /ui >}} link to open the request in Agent Observability. The examples set the application to `claude-code`, `codex`, or `my-application`.
+4. Confirm the caller, served model, and provider. For a routing rule, confirm the destination that served the request.
 
 ## Troubleshoot client connections
 
 | Symptom | What to check |
 |---|---|
 | `401` or `403` | Check the Datadog site, token, `ai_gateway_usage` permission, and model access. For Claude Code, use `ANTHROPIC_AUTH_TOKEN` so the Datadog token is sent as a bearer token. |
-| Unknown model or no eligible target | Use the full Gateway model identifier or routing-rule alias. Check the target's request format and the caller's access. For Claude Code, check model alias variables as well as the main model. |
+| Unknown model or no eligible target | Use the full `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` identifier. Check the target's request format and the caller's access. For Claude Code, check model alias variables as well as the main model. |
 | Incorrect request path | Use `/ai` for Claude Code and the Anthropic SDK, and `/ai/v1` for Codex and the OpenAI SDK. Do not append the request path to the base URL. |
 | Codex returns `websocket_not_supported` | Set `supports_websockets = false` on the selected provider. |
 | Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the Gateway model identifier. Restart Codex after changing the catalog. |
@@ -204,6 +209,10 @@ Team selection affects matching [budgets][4], [rate limits][5], and [data captur
 | Client does not use the configured Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
 See [Gateway troubleshooting][7] for Gateway error codes.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/configure/ai_gateway/#get-started
 [2]: /llm_observability/configure/ai_gateway/#authenticate-requests
