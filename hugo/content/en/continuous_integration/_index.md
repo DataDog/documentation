@@ -124,7 +124,7 @@ You can also use the `datadog-ci` CLI to trace commands in your pipelines and ad
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Logs Analysis" >}}Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">More info</a>.{{< /ci-details >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Critical path" >}}Identification of CI jobs that are on the critical path of the pipeline. <a href="https://docs.datadoghq.com/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/">More info</a>{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Automatic job retries" >}}Datadog retries failed jobs classified as transient by its AI error model. <a href="https://docs.datadoghq.com/continuous_integration/pipelines/automatic_retries/">More info</a>.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} |  |  |  |
+| {{< ci-details title="Automatic job retries" >}}Datadog retries failed jobs classified as transient by its AI error model. <a href="https://docs.datadoghq.com/continuous_integration/pipelines/automatic_retries/">More info</a>.{{< /ci-details >}} |  | {{< X >}} |  |  |  | {{< X >}} | {{< X >}} |  |  |  |
 
 ### Duration breakdown
 

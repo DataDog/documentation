@@ -10,6 +10,9 @@ further_reading:
   - link: "/continuous_integration/pipelines/gitlab/"
     tag: "Documentation"
     text: "Set up CI Visibility for GitLab"
+  - link: "/continuous_integration/pipelines/azure/"
+    tag: "Documentation"
+    text: "Set up CI Visibility for Azure Pipelines"
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
     text: "Troubleshooting CI Visibility"
@@ -21,7 +24,7 @@ Automatic job retries save developer time by re-running failures that are likely
 
 Automatic retries reduce the number of pipelines that developers re-run by hand, shorten feedback loops, and keep pipeline success metrics focused on non-transient failures.
 
-<div class="alert alert-info">Automatic job retries are available for <a href="/continuous_integration/pipelines/github/">GitHub Actions</a> and <a href="/continuous_integration/pipelines/gitlab/">GitLab</a>.</div>
+<div class="alert alert-info">Automatic job retries are available for <a href="/continuous_integration/pipelines/github/">GitHub Actions</a>, <a href="/continuous_integration/pipelines/gitlab/">GitLab</a>, and <a href="/continuous_integration/pipelines/azure/">Azure Pipelines</a>.</div>
 
 ## How automatic job retries work
 
@@ -35,10 +38,11 @@ When a job in your CI pipeline fails:
 ## Prerequisites
 
 To use automatic job retries:
-- CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
+- CI Visibility must be enabled for your [GitHub Actions][1], [GitLab][2], or [Azure Pipelines][9] integration.
 - For GitHub Actions, the [Datadog GitHub App][8] must have the **Actions: Write** permission.
+- For Azure Pipelines, your Azure DevOps organization must be connected through the [Azure DevOps Source Code integration][10]. The integration's service principal must have the **Queue builds** permission for the project's pipelines. Without this permission, Azure DevOps rejects the retry. To grant it, see [Set pipeline permissions][12] in the Azure DevOps documentation.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
-- Logs Analysis must be configured for the repositories where you'd like to use automatic retries (see [Logs Analysis for GitHub Actions][4] or [Logs Analysis for GitLab][5]).
+- Logs Analysis must be configured for the repositories where you'd like to use automatic retries (see [Logs Analysis for GitHub Actions][4], [Logs Analysis for GitLab][5], or [Logs Analysis for Azure Pipelines][11]).
 - To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
 
 ## Enable automatic job retries
@@ -79,6 +83,20 @@ As soon as a job fails in GitLab, Datadog re-runs that specific job (if it is cl
 Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
 
 {{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+### Azure Pipelines automatic job retries
+
+On Azure Pipelines, Datadog retries stages instead of individual jobs:
+
+- **Datadog retries the stage that contains the failed jobs.** Azure Pipelines re-runs only the failed jobs in that stage. Jobs that passed are not re-run.
+- **Every failed job in the stage must be retriable.** If any failed job in the stage is classified as non-retriable, Datadog does not retry the stage.
+- **Retries happen after the pipeline run finishes.** Datadog waits for the run to reach a final state before it retries a stage.
+- **Datadog retries each stage at most once.** If the retried jobs fail again, Datadog does not retry the stage a second time.
+
+After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see automatic retries, use CI Visibility in Datadog.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## When is a failed job not retried?
@@ -87,6 +105,7 @@ A failed job is not retried when:
 
 - The AI classifier categorizes the failure as non-retriable (for example, compilation errors or asserted test failures).
 - The job has already been retried manually or by provider-native retry rules.
+- On Azure Pipelines, the stage has already been retried, or another failed job in the same stage is classified as non-retriable.
 
 **Note:** On GitHub Actions, non-retriable failed jobs may still be re-run if another job in the same workflow is classified as retriable. Datadog issues a single "rerun failed jobs" GitHub API call, which re-runs every failed job in the workflow—including non-retriable ones.
 
@@ -102,3 +121,7 @@ A failed job is not retried when:
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /continuous_integration/pipelines/github/#configure-a-github-app
+[9]: /continuous_integration/pipelines/azure/
+[10]: /integrations/azure-devops-source-code/
+[11]: /continuous_integration/pipelines/azure/#logs-analysis
+[12]: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions?view=azure-devops#set-pipeline-permissions-in-azure-pipelines
