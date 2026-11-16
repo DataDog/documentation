@@ -23,6 +23,9 @@ The L1/L7 Map is in Preview. If you are interested in this feature, complete the
 
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
 
+<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DOWN, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
+
+
 ## Overview
 
 The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination.
