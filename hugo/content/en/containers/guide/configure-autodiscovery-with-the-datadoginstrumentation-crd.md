@@ -142,8 +142,8 @@ You can target the following Kubernetes resources:
 | Job | `batch/v1/jobs` | 7.82.0 | |
 | Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |
 | Rollout | `argoproj.io/v1alpha1/rollouts` | 7.83.0 | Requires [Argo Rollouts][7]. |
-| Workflow | `argoproj.io/v1alpha1/workflows` | 7.86.0 | Requires [Argo Workflows][9]. See [Target Argo workflows](#target-argo-workflows). |
-| CronWorkflow | `argoproj.io/v1alpha1/cronworkflows` | 7.86.0 | Requires [Argo Workflows][9]. See [Target Argo workflows](#target-argo-workflows). |
+| Workflow | `argoproj.io/v1alpha1/workflows` | 7.86.0 | Requires [Argo Workflows](https://argo-workflows.readthedocs.io/en/latest/). |
+| CronWorkflow | `argoproj.io/v1alpha1/cronworkflows` | 7.86.0 | Requires [Argo Workflows](https://argo-workflows.readthedocs.io/en/latest/). |
 
 This example configures a [Redis integration][4] for a `StatefulSet` named `redis`, mirroring this [annotation-based example][2].
 
@@ -200,48 +200,6 @@ Each entry in `checks` accepts the following fields:
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
-
-### Target Argo workflows
-
-With Agent and Cluster Agent v7.86+, use `Workflow` and `CronWorkflow` targets to configure checks and logs for [Argo Workflows][9]. These targets do not support `spec.config.apm`.
-
-For scheduled runs, target the `CronWorkflow` by name. For example, the following resource collects logs from the `main` container in pods created by the `hello-world` CronWorkflow:
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: hello-world-instrumentation
-  namespace: argo
-spec:
-  targetRef:
-    apiVersion: argoproj.io/v1alpha1
-    kind: CronWorkflow
-    name: hello-world
-  config:
-    logs:
-      - containerName: main
-        source: hello-world
-        service: hello-world
-```
-
-Set `metadata.namespace` to the target's namespace and `containerName` to the container name in the workflow's pods.
-
-For a standalone Workflow, set `targetRef.kind` to `Workflow` and `targetRef.name` to its full name, including any generated suffix:
-
-```yaml
-spec:
-  targetRef:
-    apiVersion: argoproj.io/v1alpha1
-    kind: Workflow
-    name: hello-world-tj6fe
-```
-
-The Agent identifies scheduled runs by Workflow names ending in `-<UNIX_TIMESTAMP>`, where the suffix contains at least 10 digits. For example, pods owned by `hello-world-1697040000` match the `CronWorkflow` target `hello-world`.
-
-- Target scheduled runs with the parent `CronWorkflow` name, rather than the generated `Workflow` name.
-- Manually submitted runs, such as `argo submit --from cronwf/hello-world`, backfills, and cron runs from Argo Workflows versions earlier than v2.12 use random suffixes. Target these runs as individual `Workflow` resources using their full names.
-- Avoid naming standalone Workflows with a suffix of 10 or more digits after a hyphen. The Agent treats these names as CronWorkflow runs.
 
 ### Target services
 
@@ -332,4 +290,3 @@ Auto-discovery IDs:
 [6]: /containers/cluster_agent/endpointschecks/
 [7]: https://argoproj.github.io/rollouts/
 [8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation
-[9]: https://argo-workflows.readthedocs.io/en/latest/
