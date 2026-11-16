@@ -120,7 +120,7 @@ The Full-Host Profiler is supported in two ways:
 
 In both cases, the Full-Host Profiler runs in its own profiling-focused container rather than inside the DDOT Collector. Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the profiler separate avoids granting that access to a larger general-purpose Collector distribution, and reduces the amount of code running with host-level privileges.
 
-This follows the upstream OpenTelemetry approach: the eBPF profiler is packaged as a dedicated distribution rather than being included directly in `otelcol-contrib`.
+Running the profiler separately follows the upstream OpenTelemetry approach: the eBPF profiler is packaged as a dedicated distribution rather than being included directly in `otelcol-contrib`.
 
 For instructions for each option, see [Deploying the Full-Host Profiler][2].
 
