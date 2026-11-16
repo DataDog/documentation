@@ -14,21 +14,20 @@ further_reading:
   - link: "/network_monitoring/devices/topology/"
     tag: "Documentation"
     text: "Device Topology Map"
+site_support_id: network_l1_l7_map
 ---
 
 {{< callout url="TODO_PREVIEW_FORM_URL" btn_hidden="false" header="Join the Preview!">}}
-The L1/L7 Map is in Preview. Use this form to request access.
+The L1/L7 Map is in Preview. If you are interested in this feature, complete the form to request access.
 {{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">The L1/L7 Map is not available for the {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
 
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
 
 ## Overview
 
-Troubleshooting an incident often means pivoting between several Datadog products, each with its own query syntax and field names, and finding the same resource in more than one of them. The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination.
+The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination.
+
+Without the map, troubleshooting an incident often means pivoting between several Datadog products. Each product has its own query syntax and field names, and the same resource can appear in more than one of them.
 
 The map helps you narrow an investigation to a specific resource or connection. From there, open the resource or connection in its product, such as APM, Kubernetes, Cloud Network Monitoring (CNM), or Network Path, to examine the underlying data.
 
@@ -107,7 +106,12 @@ The color of a resource or connection shows its status:
 
 Resources are ranked by status, so the resources with the most severe status appear at the top of each group.
 
-In the Preview, map status is based on network signals, such as round-trip time (RTT), TCP retransmits, TCP failures, and throughput from CNM, and reachability, end-to-end latency, and packet loss from Network Path. The map shows only the signals that are available for each resource or connection.
+In the Preview, map status is based on network signals:
+
+- **From CNM**: Round-trip time (RTT), TCP retransmits, TCP failures, and throughput.
+- **From Network Path**: Reachability, end-to-end latency, and packet loss.
+
+The map shows only the signals that are available for each resource or connection.
 
 Map status is not a complete assessment of a resource's health. To investigate application errors, pod state, or host utilization, open the resource in its own product. A red resource is a starting point for an investigation, not proof that it caused the issue. Hover over the resource to see which signal is degraded.
 
@@ -124,7 +128,7 @@ Map status is not a complete assessment of a resource's health. To investigate a
 
 <!-- TODO: Add screenshot of the L1/L7 landing page with the search dropdown open. -->
 
-The map centers on the selected resource, which is highlighted. Resources that send traffic to it appear on the left, under **Upstream**. Resources that receive traffic from it appear on the right, under **Downstream**. Upstream and downstream resources can be services, containers, hosts, or external endpoints, such as an IP address or domain.
+The map centers on the selected resource, called the _explored resource_, which is highlighted. Resources that send traffic to it appear on the left, under **Upstream**. Resources that receive traffic from it appear on the right, under **Downstream**. Upstream and downstream resources can be services, containers, hosts, or external endpoints, such as an IP address or domain.
 
 When you explore a service, the composition stack shows the containers, pods, and hosts that the service runs on. When you explore a container, pod, or host, the stack also shows the services that run on it.
 
@@ -157,7 +161,7 @@ From the summary, you can:
 
 <!-- TODO: Add screenshot of the connection hover summary. -->
 
-### Side pane
+### Resource details in the side pane
 
 The side pane on the right shows details for the explored or filtered resource:
 
@@ -172,11 +176,15 @@ The side pane on the right shows details for the explored or filtered resource:
 
 Use source/destination pair mode to see the path between two resources and find where along it a signal is degraded.
 
-1. Open source/destination pair mode in one of the following ways:
-    - On the L1/L7 page, select **Source/destination pair**, then search for and select a **Source** and a **Destination**.
-    - While you explore a single resource, click **Add destination** and select a destination.
-    - Hover over a connection on the map and click **Explore connection**.
-1. Check the source and destination at the top of the page.
+You can open source/destination pair mode in the following ways:
+
+- On the L1/L7 page, select **Source/destination pair**, then search for and select a **Source** and a **Destination**.
+- While you explore a single resource, click **Add destination** and select a destination.
+- Hover over a connection on the map and click **Explore connection**.
+
+To investigate the connection:
+
+1. Open source/destination pair mode, and check the source and destination at the top of the page.
 1. Review the composition stack for each resource and the connections between them.
 1. Hover over the CNM connections and the network path hops to find where a signal is degraded.
 1. Click a connection or hop to see its details in the side pane. If a hop is a network device monitored by NDM, use the device details to continue the investigation.
@@ -187,7 +195,7 @@ Use source/destination pair mode to see the path between two resources and find 
 The map shows the composition stack for the source on the left and for the destination on the right. Between them, the map shows:
 
 - **Network connections**: Traffic observed by CNM between resources in the two stacks, such as container to container. Click a connection, or a **+N more** item, to see a list of the individual connections in the side pane.
-- **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. Hops in the same autonomous system (AS) are grouped, for example `AS64512 (3 hops)`. Click a group to see its hops and their status, such as **OK** or **UNREACHABLE**, in the side pane.
+- **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. Hops in the same autonomous system (AS) are grouped. For example, a group labeled **AS64512** can contain three hops. Click a group to see its hops and their status, such as **OK** or **UNREACHABLE**, in the side pane.
 
 Hover over a segment of the network path to see its **Reachability**, **End-to-end latency**, and **Packet loss**. From the summary, click **Explore connection** to filter the map to that segment, or click **View connection in Network Path** to open it in Network Path.
 
@@ -211,7 +219,7 @@ Check that your organization has access to the Preview. If you still cannot acce
 
 ### The map is empty
 
-The map is empty when CNM has no traffic data for the selected resource or pair during the selected time frame. This can happen because CNM is not set up for the resource, or because the resource had no traffic. The map does not distinguish between these cases.
+The map is empty when CNM has no traffic data for the selected resource or pair during the selected time frame. An empty map can mean that CNM is not set up for the resource, or that the resource had no traffic. The map does not distinguish between these cases.
 
 1. If CNM is not set up for the workloads, [set up Cloud Network Monitoring][8].
 1. If CNM is set up, open the resource or pair in CNM and find a time frame with traffic. Select the same time frame on the map.
