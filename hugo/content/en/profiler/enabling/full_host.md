@@ -136,7 +136,7 @@ Datadog is a major contributor to the OpenTelemetry profiling ecosystem, includi
 
 The Datadog Full-Host Profiler distribution packages upstream OpenTelemetry profiling components with Datadog integration and tested defaults, including:
 
-- native debug symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, and Rust can be symbolized without a separate CI symbol-upload setup
+- symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, Go and Rust can be symbolized without a separate CI symbol-upload setup
 - curated defaults and components for Datadog export and container tagging
 - a version tested at scale on thousands of hosts for overhead and stability
 
