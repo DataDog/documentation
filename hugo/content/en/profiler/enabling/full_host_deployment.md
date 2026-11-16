@@ -386,7 +386,7 @@ securityContext:
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
 
-[1]: https://opentelemetry.io/docs/kubernetes/operator/
+[1]: https://opentelemetry.io/docs/platforms/kubernetes/operator/
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/collector.yaml
 [3]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/rbac.yaml
 [4]: /getting_started/site/
