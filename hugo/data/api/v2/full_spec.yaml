@@ -246635,6 +246635,12 @@ paths:
     get:
       description: |-
         Get the list of users assigned seats for a product code.
+
+        This endpoint requires the `user_access_read` (User Access Read) permission
+        in addition to at least one of `billing_read`, `incident_read`, or `on_call_read`.
+        Scoped application keys, personal access tokens, and service access tokens
+        must include the `user_access_read` scope. Credentials without this scope
+        receive a `403 Forbidden` response.
       operationId: GetSeatsUsers
       parameters:
         - description: The product code for which to retrieve seat users.
@@ -246675,6 +246681,8 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "422":
           content:
             application/json:
@@ -246683,6 +246691,11 @@ paths:
           description: Unprocessable Entity
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_read
       summary: Get users with seats
       tags:
         - Seats
