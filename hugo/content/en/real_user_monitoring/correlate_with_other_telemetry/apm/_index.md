@@ -719,7 +719,7 @@ These HTTP headers are not CORS-safelisted, so you need to [configure Access-Con
 
 Ingested traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, [create APM retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
-If using RUM Without Limits, you can also use [cross-product retention filters][21] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][23] at no additional cost.
+If using RUM without Limits&trade;, you can also use [cross-product retention filters][21] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][23] at no additional cost.
 
 ## Effect on APM quotas
 

@@ -20,7 +20,7 @@ There are two different ways of sampling, which control the data you send to Dat
 
 - **Server-side (tail-based) sampling**: Makes the sampling decision after data has been collected and sent to Datadog. It allows you to filter and retain specific sessions based on their characteristics (like errors or user attributes) using retention filters.
 
-  **Note**: Server-side sampling is only possible with the [retention filters][12] provided by [RUM without Limits][2]. If you need to use this but are on the legacy, client-side-only model, reach out to your account team.
+  **Note**: Server-side sampling is only possible with the [retention filters][12] provided by [RUM without Limits&trade;][2]. If you need to use this but are on the legacy, client-side-only model, reach out to your account team.
 
 This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs. Learn more about how [sessions are defined][1] in RUM.
 

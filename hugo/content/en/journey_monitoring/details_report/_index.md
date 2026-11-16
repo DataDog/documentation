@@ -79,7 +79,7 @@ The users table lists the top users who converted or dropped off during the jour
 
 ## Real User Monitoring
 
-<div class="alert alert-info">The data in this section is available only with an active trial or paid subscription to RUM without Limits&trade;.</div>
+<div class="alert alert-info">The data in this section is available only with an active trial or paid subscription to RUM without Limits.</div>
 
 {{< img src="journey_monitoring/journey-monitoring-details-report-real-user-monitoring.png" alt="The Journey Monitoring details report section showing a specific journey's RUM operations and a timeseries of frontend issues." style="width:100%;" >}}
 
