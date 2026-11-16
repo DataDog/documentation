@@ -22,7 +22,7 @@ The Full-Host Profiler collects CPU profiles across all processes on a host, reg
 
 The Full-Host Profiler is valuable for:
 
-- Profiling any kind of software components that don't use Datadog SDKs.
+- Profiling software that doesn't use Datadog SDKs, such as open source components and third-party binaries.
 - Analyzing performance across multi-language processes and runtimes.
 
 ## Supported environments
