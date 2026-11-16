@@ -125,4 +125,4 @@ If you need help identifying which of your filters, monitors, or dashboards are 
 [1]: /api/latest/aws-integration/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: /help/
-[4]: /getting_started/tagging/
+[4]: /getting_started/tagging/#define-tags
