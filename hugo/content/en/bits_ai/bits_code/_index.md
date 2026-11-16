@@ -99,7 +99,7 @@ Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with
 
 ### Multi-repository sessions
 
-A single Bits Code session can read code from multiple repositories. This helps Bits Code investigate issues that span several codebases. Bits Code adds repositories to the session as the task requires, and you can name specific repositories in your prompt. Bits Code can read only repositories that are accessible through your [source code integration][6].
+A single Bits Code session can read code from multiple repositories to investigate issues across codebases. Bits Code adds repositories to the session as the task requires, and you can name specific repositories in your prompt. Bits Code can read only repositories that are accessible through your [source code integration][6].
 
 ### Automations
 
