@@ -37,6 +37,7 @@ Use the base URL for your [Datadog site][12]. The paths differ because each clie
 For the Claude Code CLI, set the Gateway URL and bearer token in the terminal where you start the client:
 
 ```shell
+unset ANTHROPIC_API_KEY
 export ANTHROPIC_BASE_URL="https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai"
 export ANTHROPIC_AUTH_TOKEN="$DD_AI_GATEWAY_TOKEN"
 export ANTHROPIC_MODEL="$DD_AI_GATEWAY_MODEL"
@@ -51,7 +52,7 @@ claude
 
 This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved Gateway model or routing rule. See [Claude Code model configuration][19].
 
-Run `/status` in Claude Code and confirm the base URL and credential source. A saved or managed client configuration can affect these settings. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][16]. Keep tokens out of shared project settings.
+The example unsets `ANTHROPIC_API_KEY` in this terminal to avoid conflicting credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][16]. Keep tokens out of shared project settings.
 
 <!-- vale Datadog.headings = NO -->
 ## Configure Codex
