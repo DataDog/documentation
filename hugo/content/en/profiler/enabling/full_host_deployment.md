@@ -404,7 +404,7 @@ The provided profile limits what the Full-Host Profiler container can run. It al
 
 {{< /tabs >}}
 
-## Configuration for bundled deployments
+## Configuration for Datadog Agent deployments
 
 The bundled Full-Host Profiler (Datadog Helm chart and Datadog Operator paths) runs as a sidecar in the Datadog Agent DaemonSet. It infers most configuration from the Datadog Agent configuration.
 
