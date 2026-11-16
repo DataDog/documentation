@@ -25,7 +25,7 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 | --- | --- |
 | [Java][2] | `dd-java-agent` and `dd-openfeature` 1.68.0 |
 | [Go][3] | `dd-trace-go` 2.12.0 |
-| [Node.js][9] | `dd-trace` 6.24.0, or 5.135.0 in the 5.x line |
+| [Node.js][9] | `dd-trace` 6.24.0 (6.x) or 5.135.0 (5.x) |
 | [Ruby][10] | `datadog` 2.49.0, with `openfeature-sdk` 0.5.1 |
 | [Browser][4] (JavaScript, React, Angular) | `@datadog/openfeature-browser` 2.3.0 |
 

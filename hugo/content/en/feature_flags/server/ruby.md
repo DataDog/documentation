@@ -275,7 +275,7 @@ end
 
 ## Record exposures in your own data store
 
-Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `datadog` 2.49.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][12].
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][12] for minimum SDK requirements and other details.
 
 ## Testing
 

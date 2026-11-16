@@ -298,7 +298,7 @@ console.log(details.flagMetadata); // Additional information about the evaluatio
 
 ## Record exposures in your own data store
 
-Use `ExposureHook` from `dd-trace/openfeature/exposure-hook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-trace` 6.24.0 or later, or 5.135.0 or later in the 5.x line. See [Record Feature Flag Exposures in Your Own Data Store][13].
+Use `ExposureHook` from `dd-trace/openfeature/exposure-hook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][13] for minimum SDK requirements and other details.
 
 ## Advanced configuration
 
