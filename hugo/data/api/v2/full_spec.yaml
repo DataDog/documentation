@@ -32282,7 +32282,7 @@ components:
         options:
           $ref: "#/components/schemas/DeploymentRulesOptions"
         type:
-          description: The type of the deployment rule (faulty_deployment_detection or monitor).
+          description: The type of the deployment rule (`faulty_deployment_detection`, `monitor`, or `bits_deployment_analysis`).
           example: "faulty_deployment_detection"
           type: string
       required:
@@ -43367,10 +43367,10 @@ components:
       x-enum-varnames: [DEPLOYMENT_GATE_RULE_EVALUATION]
     DeploymentGateRuleEvaluationType:
       description: Type of deployment gate rule.
-      enum: [monitor, faulty_deployment_detection]
+      enum: [monitor, faulty_deployment_detection, bits_deployment_analysis]
       example: faulty_deployment_detection
       type: string
-      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION]
+      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION, BITS_DEPLOYMENT_ANALYSIS]
     DeploymentGateRuleEvaluationsResponse:
       description: Paginated deployment gate rule evaluations.
       properties:
@@ -43438,6 +43438,43 @@ components:
         data:
           $ref: "#/components/schemas/ListDeploymentRuleResponseData"
       type: object
+    DeploymentGatesBitsDeploymentAnalysisRule:
+      description: A Bits Deployment Analysis rule to evaluate as part of a deployment gate evaluation.
+      properties:
+        dry_run:
+          description: Rule-level dry run. When enabled, Datadog evaluates the rule normally, but the rule always returns `pass`. The real result appears in the Datadog UI.
+          example: false
+          type: boolean
+        name:
+          description: Human-readable name for this rule.
+          example: "bits deployment analysis"
+          type: string
+        options:
+          $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRuleOptions"
+        type:
+          $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRuleType"
+      required:
+        - type
+        - name
+      type: object
+    DeploymentGatesBitsDeploymentAnalysisRuleOptions:
+      description: Options for a `bits_deployment_analysis` rule.
+      properties:
+        duration:
+          description: Evaluation window in seconds. Maximum 7200 (2 hours).
+          example: 900
+          format: int64
+          maximum: 7200
+          type: integer
+      type: object
+    DeploymentGatesBitsDeploymentAnalysisRuleType:
+      description: The type identifier for a Bits Deployment Analysis rule.
+      enum:
+        - bits_deployment_analysis
+      example: bits_deployment_analysis
+      type: string
+      x-enum-varnames:
+        - BITS_DEPLOYMENT_ANALYSIS
     DeploymentGatesEvaluationConfiguration:
       description: |-
         Inline rule definitions for a deployment gate evaluation. When provided, rules are evaluated
@@ -43647,6 +43684,7 @@ components:
       oneOf:
         - $ref: "#/components/schemas/DeploymentGatesMonitorRule"
         - $ref: "#/components/schemas/DeploymentGatesFDDRule"
+        - $ref: "#/components/schemas/DeploymentGatesBitsDeploymentAnalysisRule"
     DeploymentGatesFDDRule:
       description: A faulty deployment detection rule to evaluate as part of a deployment gate evaluation.
       properties:
@@ -44043,11 +44081,13 @@ components:
       enum:
         - faulty_deployment_detection
         - monitor
+        - bits_deployment_analysis
       example: faulty_deployment_detection
       type: string
       x-enum-varnames:
         - FAULTY_DEPLOYMENT_DETECTION
         - MONITOR
+        - BITS_DEPLOYMENT_ANALYSIS
     DeploymentRuleResponseDataAttributesUpdatedBy:
       description: Information about the user who updated the deployment rule.
       properties:
@@ -44067,7 +44107,9 @@ components:
         - id
       type: object
     DeploymentRulesOptions:
-      description: Options for deployment rule response representing either faulty deployment detection or monitor options.
+      description: |-
+        Options for deployment rule response representing either faulty deployment detection or monitor options.
+        Bits Deployment Analysis rules use the faulty deployment detection options shape and accept only `duration`.
       oneOf:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"

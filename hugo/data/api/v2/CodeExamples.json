@@ -755,14 +755,12 @@
       "description": "Send a failure event returns \"OK\" response"
     }
   ],
-  "CreateDeploymentGate": [
+  "CreateDeploymentRule": [
     {
       "group": "deployment_gates",
-      "suffix": "",
-      "description": "Create deployment gate returns \"OK\" response"
-    }
-  ],
-  "CreateDeploymentRule": [
+      "suffix": "_2546866693",
+      "description": "Create bits deployment analysis deployment rule returns \"OK\" response"
+    },
     {
       "group": "deployment_gates",
       "suffix": "",
@@ -779,11 +777,23 @@
       "description": "Create monitor deployment rule with query returns \"OK\" response"
     }
   ],
+  "CreateDeploymentGate": [
+    {
+      "group": "deployment_gates",
+      "suffix": "",
+      "description": "Create deployment gate returns \"OK\" response"
+    }
+  ],
   "TriggerDeploymentGatesEvaluation": [
     {
       "group": "deployment_gates",
       "suffix": "_691804290",
       "description": "Trigger a deployment gates evaluation returns \"Accepted\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_17574267",
+      "description": "Trigger a deployment gates evaluation with an inline bits deployment analysis rule returns \"Accepted\" response"
     }
   ],
   "UpdateDeploymentGate": [

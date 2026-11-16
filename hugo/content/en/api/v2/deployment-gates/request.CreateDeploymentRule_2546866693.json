@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "name": "Bits deployment analysis rule",
+      "options": {
+        "duration": 900
+      },
+      "type": "bits_deployment_analysis"
+    },
+    "type": "deployment_rule"
+  }
+}
