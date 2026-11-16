@@ -4129,6 +4129,11 @@ menu:
       parent: cnm_analytics
       identifier: cnm_analytics_tags_reference
       weight: 10401
+    - name: Packet Capture
+      url: network_monitoring/cloud_network_monitoring/packet_capture/
+      parent: cnm_analytics
+      identifier: cnm_analytics_packet_capture
+      weight: 10402
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
