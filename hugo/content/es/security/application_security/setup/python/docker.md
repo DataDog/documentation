@@ -1,5 +1,5 @@
 ---
-code_lang: Docker
+code_lang: docker
 code_lang_weight: 10
 further_reading:
 - link: /security/application_security/how-it-works/
@@ -7,41 +7,41 @@ further_reading:
   text: Cómo funciona App and API Protection
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentación
-  text: Reglas de protección de aplicaciones y API predefinidas
+  text: Reglas de protección de aplicaciones y API listas para usar
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solucionar problemas con la protección de aplicaciones y API
-title: Configurar App and API Protection para Python en Docker
+  text: Solución de problemas de protección de aplicaciones y API
+title: Configure App and API Protection para Python en Docker
 type: multi-code-lang
 ---
 {{% app_and_api_protection_python_setup_options platform="docker" %}}
 
 {{% app_and_api_protection_python_overview %}}
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-- Docker instalado en tu host
-- Aplicación Python en contenedor con Docker
-- Tu clave de API Datadog 
-- Biblioteca de rastreo Python de Datadog (consulta [requisitos de la versión][1])
+- Docker instalado en su servidor
+- Aplicación de Python en un contenedor de Docker
+- Su clave de Datadog API
+- SDK de Python de Datadog (consulte los [requisitos de versión][1])
 
-## 1. Instalación del Datadog Agent
+## 1. Instale el Datadog Agent {#1-installing-the-datadog-agent}
 
-Instala el Datadog Agent siguiendo las [instrucciones de instalación de Docker](/agent/?tab=cloud_and_container).
+Instale el Datadog Agent siguiendo las [instrucciones de configuración para Docker](/agent/?tab=cloud_and_container).
 
-## 2. Activación de la monitorización de App and API Protection
+## 2. Habilite la supervisión de App and API Protection {#2-enabling-app-and-api-protection-monitoring}
 
 {{% app_and_api_protection_python_navigation_menu %}}
 {{% appsec-remote-config-activation %}}
 
-### Activación manual de la monitorización de App and API Protection
+### Habilite manualmente la supervisión de App and API Protection {#manually-enabling-app-and-api-protection-monitoring}
 
-{{% collapse-content title="Rastreo APM activado" level="h4" %}}
+{{% collapse-content title="APM Tracing habilitado" level="h4" %}}
 
-Añade las siguientes variables de entorno a tu archivo Docker:
+Agregue las siguientes variables de entorno a su Dockerfile:
 
 ```dockerfile
-# Install the Datadog Python tracing library
+# Install the Datadog Python SDK
 RUN pip install ddtrace
 
 # Set environment variables
@@ -55,13 +55,13 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Rastreo APM desactivado" level="h4" %}}
-Para deshabilitar el rastreo APM mientras se mantiene App and API Protection activado, debes configurar la variable de rastreo de APM como false.
+{{% collapse-content title="APM Tracing deshabilitado" level="h4" %}}
+Para deshabilitar el rastreo de APM mientras mantiene habilitada App and API Protection, debe establecer la variable de rastreo de APM en false.
 
-Añade las siguientes variables de entorno a tu archivo Docker:
+Agregue las siguientes variables de entorno a su Dockerfile:
 
 ```dockerfile
-# Install the Datadog Python tracing library
+# Install the Datadog Python SDK
 RUN pip install ddtrace
 
 # Set environment variables
@@ -76,12 +76,12 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 {{% /collapse-content %}}
 
-## 3. Ejecutar tu aplicación
-Crea tu imagen y luego ejecuta tu contenedor.
+## 3. Ejecute su aplicación {#3-run-your-application}
+Construya su imagen y luego ejecute su contenedor.
 
-Cuando ejecutes tu contenedor, asegúrate de hacer lo siguiente:
-1. Conecta el contenedor a la misma red Docker que el Datadog Agent.
-2. Configura las variables de entorno necesarias.
+Al ejecutar su contenedor, asegúrese de hacer lo siguiente:
+1. Conecte el contenedor a la misma red de Docker que el Datadog Agent.
+2. Establezca las variables de entorno requeridas.
 
 ```bash
 docker run -d \
@@ -89,15 +89,15 @@ docker run -d \
   your-python-app-image
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Si tienes problemas al configurar App and API Protection para tu aplicación Python, consulta la [guía de resolución de problemas de App and API Protection en Python][2].
+Si encuentra problemas al configurar App and API Protection para su aplicación de Python, consulte la [guía de solución de problemas de App and API Protection para Python][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/application_security/setup/python/compatibility
+[1]: /es/security/application_security/setup/compatibility/python
 [2]: /es/security/application_security/setup/python/troubleshooting

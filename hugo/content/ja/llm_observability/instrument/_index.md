@@ -1,72 +1,80 @@
 ---
 aliases:
 - /ja/llm_observability/instrumentation/
-description: Python、Node.js、Java 向けの SDK ベースおよび API ベースの方法を含む、Agent Observability
+description: Python、Node.js、Java 向けの SDK ベースおよび API ベースのアプローチを含む、Agent Observability
   のインスツルメンテーションオプションの概要。
 further_reading:
 - link: /llm_observability/auto_instrumentation
   tag: 自動インスツルメンテーション
-  text: 自動インスツルメンテーションをすぐに利用する
+  text: 自動インスツルメンテーションですばやく始める
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: ブログ
-  text: Datadog LLM Observability は、OpenTelemetry GenAI セマンティック規約をネイティブにサポートしています。
+  text: Datadog LLM Observability は OpenTelemetry GenAI セマンティック規約をネイティブにサポート
 - link: https://learn.datadoghq.com/courses/llm-obs-getting-started
   tag: ラーニングセンター
-  text: Agent Observability の概要
+  text: Agent Observability を使い始める
 title: Agent Observability のインスツルメンテーション
 ---
-Agent Observability を初めて使用する場合は、ご使用のプログラミング言語とセットアップに基づいて複数のインスツルメンテーション方法の中から選択し、LLM アプリケーションまたはエージェントをインスツルメントします。Datadog は、最小限のコード変更で LLM アプリケーションやエージェントから詳細なトレース、メトリクス、評価をキャプチャするための、包括的なインスツルメンテーションオプションを提供します。
+Agent Observability を開始するには、プログラミング言語とセットアップに応じていくつかの方法から選択し、LLM アプリケーションまたはエージェントをインスツルメントします。Datadog は、最小限のコード変更で LLM アプリケーションやエージェントから詳細なトレース、メトリクス、評価を収集できる、包括的なインスツルメンテーションオプションを提供します。
+
+{{< skill-callout
+    title="コーディングエージェントを使用した Agent Observability のセットアップ"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md のスキルを使用して、私のプロジェクトで Datadog Agent Observability をインスツルメントします。
+{{< /skill-callout >}}
 
 ## インスツルメンテーションオプション {#instrumentation-options}
-Python、Node.js、または Java SDK を使用するか、Agent Observability API を使用してアプリケーションをインスツルメントできます。
+Python、Node.js、または Java SDK を使用するか、Agent Observability API を使用して、アプリケーションをインスツルメントできます。
 
 ### SDK ベースのインスツルメンテーション (推奨) {#sdk-based-instrumentation-recommended}
-Datadog のネイティブ SDK は、最も包括的な Agent Observability 機能を提供します。
+Datadog は、最も包括的な Agent Observability 機能を提供するネイティブ SDK を提供しています。
 | 言語 | 利用可能な SDK | 自動インスツルメンテーション | カスタムインスツルメンテーション |
 | -------- | ------------- | -------------------- | ---------------------- |
-| Python | Python 3.7 以上 | {{< X >}} | {{< X >}} |
-| Node.js | Node.js 16 以上 | {{< X >}} | {{< X >}} |
-| Java | Java 8 以上 | {{< X >}} | {{< X >}} |
+| Python | Python 3.7+ | {{< X >}} | {{< X >}} |
+| Node.js | Node.js 16+ | {{< X >}} | {{< X >}} |
+| Java | Java 8+ | {{< X >}} | {{< X >}} |
 
 
-SDK を使用して LLM アプリケーションをインスツルメントするには:
-1. Agent Observability SDK をインストールします。
-2. アプリケーションの起動コマンドで[必要な環境変数][6]を指定するか、プログラムの[コード内][7]で指定して、SDK を設定します。Datadog API キー、Datadog サイト、および ML (機械学習) アプリ名が設定されていることを確認してください。
+SDK を使用して LLM アプリケーションをインスツルメントするには、以下の手順を実行します。
+1. Agent Observability SDK をインストールします
+2. アプリケーションの起動コマンドで[必要な環境変数][6]を指定するか、プログラムから[コード内][7]で SDK を設定します。Datadog API キー、Datadog サイト、および機械学習 (ML) アプリ名が設定されていることを確認してください。
 
 #### 自動インスツルメンテーション {#auto-instrumentation}
-自動インスツルメンテーションは、コード変更なしで、Python、Node.js、および Java アプリケーションの LLM 呼び出しをキャプチャします。そのため、一般的なフレームワークやプロバイダーに関するトレースと可観測性をすぐに利用できるようになります。詳細およびサポートされている全フレームワークとプロバイダーを確認するには、[自動インスツルメンテーションのドキュメント][1]を参照してください。
+自動インスツルメンテーションは、コードを変更することなく、Python、Node.js、および Java アプリケーションの LLM 呼び出しをキャプチャします。これにより、一般的なフレームワークやプロバイダーに対するすぐに使えるトレースとオブザーバビリティを取得できます。詳細およびサポートされているフレームワークとプロバイダーの全リストについては、[自動インスツルメンテーションのドキュメント][1]を参照してください。
 
-自動インスツルメンテーションでは、以下の項目が自動的にキャプチャされます。
+自動インスツルメンテーションは、以下を自動的にキャプチャします。
 - 入力プロンプトと出力補完
 - トークンの使用量とコスト
-- レイテンシーおよびエラー情報
-- モデルパラメータ (temperature、max_tokens など)
+- レイテンシーとエラー情報
+- モデルパラメーター (temperature、max_tokens など)
 - フレームワーク固有のメタデータ
 
-<div class="alert alert-info">サポートされているフレームワークを使用する場合、LLM 呼び出しに対して手動でスパンを作成する必要はありません。SDK によって自動的に、豊富なメタデータを含む適切なスパンが作成されます。</div>
+<div class="alert alert-info">サポートされているフレームワークを使用する場合、LLM 呼び出しに対して手動でスパンを作成する必要はありません。SDK は、豊富なメタデータを含む適切なスパンを自動的に作成します。</div>
 
 #### カスタムインスツルメンテーション {#custom-instrumentation}
-サポートされるすべての SDK では、自動インスツルメンテーションに加え、LLM アプリケーションのカスタムインスツルメンテーションのための高度な機能を提供しています。たとえば、次のようなものがあります。
-- 関数デコレーターまたはコンテキストマネージャーを使用した手動でのスパン作成
-- マルチステップ LLM アプリケーション向けの複雑なワークフロートレース
-- 自律型 LLM エージェント向けのエージェント監視
+サポートされているすべての SDK は、自動インスツルメンテーションに加えて、LLM アプリケーションのカスタムインスツルメンテーション向けの高度な機能を提供します。以下の機能が含まれます。
+- 関数デコレータまたはコンテキストマネージャを使用した手動スパン作成
+- 複数ステップの LLM アプリケーションにおける複雑なワークフローのトレース
+- 自律型 LLM エージェントの監視
 - カスタム評価および品質測定
-- ユーザー操作のセッション追跡
+- ユーザーインタラクションのセッショントラッキング
 
-詳細については、[SDK リファレンスドキュメント][2]を参照してください。
+詳細については、[SDK リファレンスのドキュメント][2]を参照してください。
 
 ### HTTP API インスツルメンテーション {#http-api-instrumentation}
-SDK でサポートされていない言語やカスタムインテグレーションを使用している場合は、Datadog の HTTP API を使用してアプリケーションをインスツルメントすることができます。
+SDK でサポートされていない言語を使用している場合や、カスタムインテグレーションを使用している場合は、Datadog の HTTP API を使用してアプリケーションをインスツルメントできます。
 
-API では、以下を行うことができます。
-- HTTP エンドポイントを介して直接スパンを送信する
-- スパンに関連付けられているカスタム評価を送信する
+API を使用すると、次のことが可能になります。
+- HTTP API エンドポイント経由でスパンを直接送信する
+- スパンに関連付けられたカスタム評価を送信する
 - 複雑なアプリケーションの完全なトレース階層を含める
-- 入力、出力、メタデータ、メトリクスを使用してスパンに注釈を付ける
+- 入力、出力、メタデータ、メトリクスでスパンに注釈を付ける
 
 API エンドポイント:
-- [Spans API][4]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
-- [Evaluations API(API 評価)][5]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
+- [スパン API][4]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
+- [評価 API][5]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 
 詳細については、[HTTP API ドキュメント][3]を参照してください。
 

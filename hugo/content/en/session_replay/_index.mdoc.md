@@ -50,13 +50,19 @@ further_reading:
 
 Session Replay expands your user experience monitoring by allowing you to capture and visually replay your users' web browsing or mobile app experiences. Session Replay is available in both [RUM][1] and [Product Analytics][2], helping you identify and reproduce errors, understand user journeys, and gain insights into your application's usage patterns and design pitfalls.
 
-<!-- Browser -->
-{% if equals($platform, "browser") %}
+<!-- Browser or Electron -->
+{% if includes($platform, ["browser", "electron"]) %}
 ## Browser Session Replay
 
 Browser Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users, and analyze it in combination with RUM performance data.
 
 The RUM Browser SDK is [open source][3] and uses the open source [rrweb][4] project.
+
+<!-- Browser or Electron > Electron -->
+{% if equals($platform, "electron") %}
+In Electron applications, the RUM Browser SDK in each renderer process records in Session Replay. Session Replay sampling and privacy options are set in the main process `init` call, and values set in the renderer are ignored. For details, see [Electron initialization parameters][14].
+{% /if %}
+<!-- end Browser or Electron > Electron -->
 
 ### How the Session Replay recorder works
 
@@ -70,7 +76,7 @@ To reduce Session Replay's network impact and keep the recorder's overhead on yo
 
 Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 {% /if %}
-<!-- end Browser -->
+<!-- end Browser or Electron -->
 
 <!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
 {% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
@@ -252,3 +258,4 @@ Learn more about [Dev Tools][11].
 [11]: /session_replay/dev_tools
 [12]: /session_replay/heatmaps
 [13]: /account_management/guide/secure-configuration/#synthetic-monitoring-and-rum
+[14]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#initialization-parameters

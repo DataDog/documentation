@@ -153,7 +153,7 @@ You can see all of the rules defined by the organization.
 [9]: /monitors/
 [10]: /security/code_security/secret_scanning/
 [11]: /tests/flaky_tests/
-[12]: /source_code/features/#pr-comments
+[12]: /source_code/pr-comments/
 [13]: /integrations/gitlab-source-code/
 [14]: /integrations/bitbucket-source-code/
 [15]: /pr_gates/setup/

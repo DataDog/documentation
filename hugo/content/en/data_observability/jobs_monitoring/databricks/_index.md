@@ -55,6 +55,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 1. If you created a **Databricks managed** service principal, click on its name. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
    1. Set {{< ui >}}Lifetime (days){{< /ui >}} to the maximum value allowed (730).
+   1. Set {{< ui >}}Scope{{< /ui >}} to `all-apis`.
 
    1. Click {{< ui >}}Generate{{< /ui >}}.
 

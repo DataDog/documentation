@@ -64,8 +64,8 @@ A continuación se presenta una lista de opciones de arranque, sus variables de 
 
 `proxy`
 : **Variables de entorno de canalización**: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
-: Establezca servidores proxy para el Observability Pipelines Worker. La configuración de proxy para el Observability Pipelines Worker funciona de la misma manera que para el [Datadog Agent][4].
-: **Prioridad**: Los ajustes se aplican a todo el proceso del Observability Pipelines Worker. Los valores de proxy HTTP y HTTPS se resuelven en este orden:
+: Establezca servidores proxy para el Observability Pipelines Worker. La configuración de proxy para el Worker funciona de la misma manera que para el [Datadog Agent][4].
+: **Prioridad**: Los ajustes se aplican a todo el proceso del Worker. Los valores de proxy HTTP y HTTPS se resuelven en este orden:
 <br>&nbsp;&nbsp;&nbsp;1. `DD_PROXY_HTTP(S)`
 <br>&nbsp;&nbsp;&nbsp;2. `HTTP(S)_PROXY`
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
@@ -105,9 +105,9 @@ Utilice la variable de entorno `VECTOR_HOSTNAME` para asignar un nombre de host 
 
 ## Habilite el punto de conexión de verificación de estado y los sondeos de actividad y preparación {#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes}
 
-Configure la verificación de estado de su balanceador de carga con el punto de conexión `/health` para verificar que el Worker esté en funcionamiento.
+Configure la verificación de estado de su balanceador de carga con el punto de conexión `/health` para verificar que el Worker esté en funcionamiento. Consulte [Configuraciones del balanceador de carga][13] para obtener más recomendaciones sobre cómo configurar un balanceador de carga frente al Worker.
 
-Para Kubernetes, los sondeos de actividad y preparación ya están habilitados en el [helm chart][9] y en el archivo [values.yaml][10].
+Para Kubernetes, los sondeos de actividad y preparación están habilitados de forma predeterminada en el [gráfico de Helm][9] y en el archivo [values.yaml][10]. Estos sondeos verifican un socket TCP en el puerto de la API del Worker en lugar del `/health` punto de conexión.
 
 Para otras instalaciones, como las basadas en VM, debe establecer `DD_OP_API_ENABLED` en `true` y establecer `DD_OP_API_ADDRESS` en `0.0.0.0:8686` para exponer el punto de conexión `/health`. Un ejemplo de configuración:
 
@@ -133,3 +133,4 @@ api:
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
 [11]: /es/remote_configuration/#security-considerations
 [12]: /es/observability_pipelines/configuration/secrets_management/
+[13]: /es/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#load-balancer-configurations

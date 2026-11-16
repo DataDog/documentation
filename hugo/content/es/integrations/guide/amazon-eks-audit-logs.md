@@ -1,72 +1,73 @@
 ---
-title: Recopilación de logs para los logs de auditoría de Amazon EKS
+description: Habilite la recopilación de registros de auditoría de Amazon EKS para
+  hacer un seguimiento de las acciones del clúster con Datadog Cloud SIEM.
+title: Recopilación de registros para los registros de auditoría de Amazon EKS
 ---
+## Descripción general {#overview}
 
-## Información general
+Los registros de auditoría de Amazon EKS brindan a los administradores de clústeres información sobre las acciones dentro de un clúster de EKS. Una vez que habilite la recopilación de registros para sus registros de auditoría de Amazon EKS, puede configurar y utilizar [Datadog Cloud SIEM][1] para hacer un seguimiento de las acciones injustificadas o las amenazas inmediatas a medida que ocurren dentro de su clúster de EKS.
 
-Los logs de auditoría de Amazon EKS ofrecen a los administradores de clúster información sobre las acciones dentro de un clúster de EKS. Una vez que habilites la recopilación de logs para tus logs de auditoría de Amazon EKS, puedes configurar y utilizar [Datadog Cloud SIEM][1] para monitorizar acciones injustificadas o amenazas inmediatas a medida que se producen dentro de tu clúster de EKS.
+## Configuración {#setup}
 
-## Configuración
+### Registros de auditoría de Amazon EKS {#amazon-eks-audit-logs}
 
-### Logs de auditoría de Amazon EKS
+#### Nuevo clúster {#new-cluster}
 
-#### Nuevo clúster
+1. Si no tiene un clúster de Amazon EKS, cree uno siguiendo la documentación de [Creación de un clúster de Amazon EKS][2].
+1. Durante la configuración, en la página Configure logging, habilite **Audit logs**.
 
-1. Si no dispones de un clúster de Amazon EKS, crea uno siguiendo la documentación [Creación de un clúster de Amazon EKS][2].
-1. Durante la configuración, en la página de configuración de registro, activa **Audit Logs** (Logs de auditoría).
+#### Clúster existente {#existing-cluster}
 
-#### Clúster existente
+1. Si ya tiene un clúster de Amazon EKS configurado, navegue a su clúster en la [consola de Amazon EKS][2].
+1. Haga clic en su clúster de EKS.
+1. Haga clic en la pestaña **Logging**.
+1. Haga clic en el botón **Manage logging**.
+1. Cambie la opción **Audit** a **Enabled** y haga clic en el botón **Save changes**.
 
-1. Si ya tienes un clúster de Amazon EKS configurado, navega hasta tu clúster en la [consola de Amazon EKS][2].
-1. Haz clic en tu clúster de EKS.
-1. Haz clic en la pestaña **Logging** (Registro).
-1. Haz clic en el botón **Manage logging** (Gestionar registro).
-1. Cambia la opción **Audit** (Auditoría) a **Enabled** (Activado) y haz clic en el botón **Save changes** (Guardar cambios).
+### Integración de Datadog con AWS {#datadog-aws-integration}
 
-### Integración de Datadog y AWS
+A continuación, configure la integración con AWS. Siga la documentación de [configuración de la integración con AWS][3].
 
-A continuación, configura la integración de AWS. Sigue la documentación de [configuración de la integración de AWS][3].
+### Datadog Forwarder {#datadog-forwarder}
 
-### Datadog Forwarder
+Una vez que la configuración de su integración con AWS esté completa, instale y configure el Datadog Forwarder. Siga la documentación de [instalación de Datadog Forwarder][4].
 
-Una vez completada la configuración de la integración de AWS, instala y configura el Datadog Forwarder. Sigue la documentación de [instalación de Datadog Forwarder][4].
+**Nota**: El ARN de Lambda es necesario para el paso [Configurar activadores][5]. Su ARN de Lambda está disponible en [Lambda > Functions > `Your_Function_Name`][6] en la consola de AWS. El Function ARN aparece en Function overview.
 
-**Nota**: El ARN de Lambda es necesario para el paso [Activadores de configuración][5]. Tu ARN de Lambda está disponible navegando a [Lambda > Funciones > `Your_Function_Name`][6] en la consola de AWS. El ARN de función aparece en la información general de la función.
+## Log Explorer {#log-explorer}
 
-## Log Explorer
+Una vez completada la configuración de los registros de auditoría de Amazon EKS, la integración de Datadog con AWS y Datadog Forwarder, sus registros de auditoría de EKS estarán disponibles en [Datadog Log Explorer][7].
 
-Una vez finalizada la configuración de los logs de auditoría de Amazon EKS, la integración de Datadog AWS y Datadog Forwarder, tus logs de auditoría de EKS estará disponible en el [Datadog Log Explorer][7].
+**Nota**: Los registros pueden tardar unos segundos en comenzar a transmitirse a Log Explorer.
 
-**Nota**: Los logs pueden tardar unos segundos en comenzar a transmitir en Log Explorer.
+Para visualizar solo los registros de auditoría de EKS en Log Explorer, realice la consulta `source:kubernetes.audit` en la búsqueda de Log Explorer o, en **Source** en el panel de facetas, seleccione la faceta `kubernetes.audit` para filtrar por registros de auditoría de EKS.
 
-Para ver solo logs de auditoría de EKS en el Log Explorer, consulta `source:kubernetes.audit` en la búsqueda del Log Explorer o en **Source** (fuente) en el panel de facetas, y selecciona la faceta `kubernetes.audit` para filtrar por logs de auditoría de EKS.
+## Cloud SIEM {#cloud-siem}
 
-## Cloud SIEM
+Puede usar Datadog Cloud SIEM para detectar posibles configuraciones incorrectas o ataques dirigidos a sus clústeres de EKS.
 
-Puedes utilizar Datadog Cloud SIEM para detectar posibles errores de configuración o ataques dirigidos a tus clústeres de EKS.
+Para comenzar a hacer un seguimiento de sus registros de auditoría de Amazon EKS con Cloud SIEM, configure Cloud SIEM y cree una [regla de detección de registros][8] personalizada que genere una [Security Signal][9] en [Security Signals Explorer][10] cada vez que se detecte una configuración incorrecta o una amenaza.
 
-Para iniciar la monitorización de tus logs de auditoría de Amazon EKS con Cloud SIEM, configura Cloud SIEM y crea una [regla de detección de logs][8] personalizada que genere una [señal de seguridad][9] en el [Security Signals Explorer][10] cada vez que se detecte una configuración incorrecta o una amenaza.
+### Configuración {#setup-1}
 
-### Configuración
+Configure y ajuste Cloud SIEM. Consulte las [instrucciones de configuración y ajuste de Cloud SIEM][1] en la aplicación.
 
-Configura Cloud SIEM. Consulta las [instrucciones de configuración de Cloud SIEM][1] de la aplicación.
+Una vez que Cloud SIEM esté configurado y ajustado, puede crear una nueva regla de Cloud SIEM desde cero o exportar una consulta de Log Explorer a una nueva regla.
 
-Una vez instalado y configurado Cloud SIEM, puedes crear una nueva regla de Cloud SIEM desde cero o exportar una consulta en el Log Explorer a una nueva regla.
+### Revise Security Monitoring Rules {#review-security-monitoring-rules}
 
-### Revisar las reglas de Security Monitoring
+Consulte las [reglas de detección de Cloud SIEM][11] predefinidas que detectan amenazas en su entorno. Para obtener más información sobre cómo buscar, editar y clonar estas reglas, consulte [creación y gestión de reglas de detección][12].
 
-Consulta las [reglas de detección de Cloud SIEM][11] predefinidas que detectan amenazas en tu entorno. Para obtener más información sobre la búsqueda, edición y clonación de estas reglas, consulta [creación y gestión de reglas de detección][12].
+### Crear una nueva regla de Cloud SIEM {#create-a-new-cloud-siem-rule}
 
-### Crear una nueva regla de Cloud SIEM
+Para crear una regla, navegue a la página de [Configuración y ajuste de reglas][13] en la aplicación. Para completar su configuración, consulte la [documentación de reglas de detección de registros][14].
 
-Para crear una regla, ve a la página dentro de la aplicación [Configuración de reglas][13]. Para completar la configuración, consulta la [documentación sobre reglas de detección de logs][14].
+### Exportar una consulta a una regla en Log Explorer {#export-a-query-to-a-rule-in-log-explorer}
 
-### Exportar una consulta a una regla en el Log Explorer
-
-1. En el Log Explorer, crea una consulta en la barra de búsqueda. Por ejemplo, filtra por `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
-1. Haz clic en el botón **Export** (Exportar) y selecciona **Export to detection rule** (Exportar a la regla de detección).
-1. Esta función exporta tu consulta y la define en el segundo paso de la configuración de reglas de detección de logs. Selecciona un método de detección. En este caso, selecciona **New value** (Nuevo valor). Selecciona el atributo `@usr.name` en el menú desplegable Detect new value (Detectar nuevo valor). Esto te alertará por primera vez cuando un usuario se ejecute en un pod. Después de la primera alerta, Datadog no volverá a alertar sobre el mismo usuario. Alternativamente, para detectar cuando estos eventos superan un umbral definido por el usuario, utiliza la **regla de umbral** para el método de detección.
-1. Sigue la [documentación de reglas de detección de logs][14] para aprender a completar el resto de tu regla de configuración.
+1. En Log Explorer, cree una consulta en la barra de búsqueda. Por ejemplo, filtre por `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
+1. Haga clic en el botón **Export** y seleccione **Export to detection rule**.
+1. Esta función exporta su consulta y la define en el segundo paso de la configuración de la regla de detección de registros. Seleccione un método de detección. En este caso, seleccione **New Value**. Seleccione el atributo `@usr.name` en el menú desplegable Detect new value. Esto le alerta por primera vez cuando un usuario usa exec para acceder a un pod. Después de la primera alerta, Datadog no volverá a alertar sobre el mismo usuario. Como alternativa, para detectar cuándo estos eventos superan un umbral definido por el usuario, utilice **threshold rule** como método de detección.
+1. Siga la [documentación de reglas de detección de registros][14] para aprender a completar el resto de la configuración de su regla.
 
 [1]: /es/security/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
@@ -81,4 +82,4 @@ Para crear una regla, ve a la página dentro de la aplicación [Configuración d
 [11]: /es/security/default_rules/#cat-cloud-siem
 [12]: /es/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/#create-a-rule

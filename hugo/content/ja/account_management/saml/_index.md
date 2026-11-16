@@ -9,7 +9,7 @@ description: Datadog の SAML 認証を、Active Directory、Auth0、Google、Ok
 further_reading:
 - link: /account_management/multi_organization/
   tag: ドキュメント
-  text: 複数のアカウントを持つチームとオーガニゼーションの構成
+  text: 複数のアカウントを持つチームと組織の構成
 title: SAML を使用したシングルサインオン
 ---
 {{< site-region region="gov,gov2" >}}
@@ -22,7 +22,7 @@ Datadog アカウントに [SAML (Security Assertion Markup Language)][1] を構
 
 **注**:
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 - Datadog アカウントで SAML が有効化されていない場合は、[サポートチーム][2] に有効化を依頼してください。
 {{% /site-region %}}
 - このドキュメントは、SAML アイデンティティプロバイダー (IdP ) をすでに持っていることを前提としています。SAML IdP を持っていない場合は、[Active Directory][3]、[Auth0][4]、[Google][5]、[LastPass][6]、[Microsoft Entra ID][3]、[Okta][7]、[SafeNet][8] など、Datadog とインテグレーションしている IdP はいくつかあります。
@@ -72,7 +72,7 @@ IdP 始動、またはアイデンティティプロバイダー始動とは、�
   2. **sn**: オプション。ユーザーの姓に設定されます。
   3. **givenName**: オプション。ユーザーの名に設定されます。
 
-<div class="alert alert-info">Microsoft Entra ID IdP の場合、アサーション内で `sn` の代わりに属性 `surname` を使用してください。</div>
+<div class="alert alert-info">Microsoft Entra ID IdPでは、属性 <code>surname</code> を <code>sn</code> の代わりにアサーション内で使用してください。</div>
 
 Datadog は、属性が URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` または基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を使用することを想定しています。各属性に使用される名前は、IdP が使用する NameFormat に依存します。
 
@@ -94,17 +94,17 @@ AttributeStatement に **eduPersonPrincipalName** が存在する場合、この
 
 ## その他の機能 {#additional-features}
 
-アイデンティティプロバイダーのレスポンスの属性を Datadog のロールやチームにマッピングするには、[SAML グループマッピング][5]を参照してください。
+アイデンティティプロバイダーのレスポンスの属性を Datadog のロールやチームにマッピングするには、[SAML グループマッピング][5] を参照してください。
 
-[SAML Configuration ダイアログ][4]で、以下の機能を有効にできます。
+[SAML Configuration ダイアログ][4] で、以下の機能を有効にできます。
 
-**注:** SAML コンフィギュレーションダイアログを表示するには、管理者アクセス許可が必要です。
+**注:** SAML 構成ダイアログを表示するには、管理者アクセス許可が必要です。
 
 ### ジャストインタイム (JIT) プロビジョニング{#just-in-time-jit-provisioning}
 
 JIT プロビジョニングを使用すると、初めてログインしようとしたときに Datadog 内にユーザーアカウントが作成されます。したがって、管理者がユーザーアカウントを 1 つずつ手動で作成する必要がなくなります。この場合、招待メールは送信されません。
 
-組織によっては、すべてのユーザーを Datadog に招待したくない場合もあります。アカウントの SAML の動作を変更したい場合は、[Datadog サポート][2]にお問い合わせください。特定のユーザーを Datadog にアクセスさせたくない場合、IdP がアサーションを Datadog に送信しないように構成するかどうかは、組織次第です。
+組織によっては、すべてのユーザーを Datadog に招待したくない場合もあります。アカウントの SAML の動作を変更したい場合は、[Datadog サポート][2] にお問い合わせください。特定のユーザーを Datadog にアクセスさせたくない場合、IdP がアサーションを Datadog に送信しないように構成するかどうかは、組織次第です。
 
 管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。デフォルトのロールは {{< ui >}}Standard{{< /ui >}} ですが、新しい JIT ユーザーを {{< ui >}}Read-Only{{< /ui >}} や {{< ui >}}Administrators{{< /ui >}}、またはカスタムロールとして追加することもできます。
 
@@ -124,11 +124,11 @@ IdP 始動のログイン機能を有効にして構成を保存した後、ア�
 
 ### SAML 限定 {#saml-strict}
 
-{{< ui >}}Login Methods{{< /ui >}} UI で他のログインメソッドタイプを無効にすることで、組織を SAML 限定にすることができます。このオプションが設定されている場合、すべてのユーザーはデフォルトで SAML でログインする必要があります。既存のユーザー名とパスワードまたは Google OAuth ログインは機能しません。これにより、Datadog にアクセスできるすべてのユーザーが、Datadog アカウントにアクセスするために、会社のアイデンティティプロバイダーまたはディレクトリサービスで有効な資格情報を持っている必要があります。組織管理者は、ユーザーごとの[オーバーライド][6]を設定して、特定のユーザーが SAML 限定から免除されるようにすることができます。
+{{< ui >}}Login Methods{{< /ui >}} UI で他のログインメソッドタイプを無効にすることで、組織を SAML 限定にすることができます。このオプションが設定されている場合、すべてのユーザーはデフォルトで SAML でログインする必要があります。既存のユーザー名とパスワードまたは Google OAuth ログインは機能しません。これにより、Datadog にアクセスできるすべてのユーザーが、Datadog アカウントにアクセスするために、会社のアイデンティティプロバイダーまたはディレクトリサービスで有効な資格情報を持っている必要があります。組織管理者は、ユーザーごとの [オーバーライド][6] を設定して、特定のユーザーが SAML 限定から免除されるようにすることができます。
 
 ### Datadog SP メタデータの自己更新 {#self-updating-datadog-sp-metadata}
 
-特定の ID プロバイダー (Microsoft の ADFS など) は、Datadog から最新の SAML サービスプロバイダーメタデータをプルするように構成できます。Datadog で SAML を構成した後、SAML コンフィギュレーションページから組織のメタデータ URL を取得し、それを ID プロバイダーで使用して、変更が公開されるたびに最新のサービスプロバイダーメタデータを取得できます。
+特定の ID プロバイダー (Microsoft の ADFS など) は、Datadog から最新の SAML サービスプロバイダーメタデータをプルするように構成できます。Datadog で SAML を構成した後、SAML 構成ページから組織のメタデータ URL を取得し、それを ID プロバイダーで使用して、変更が公開されるたびに最新のサービスプロバイダーメタデータを取得できます。
 
 {{< img src="account_management/saml/saml_metadata_url.png" alt="SAML メタデータ URL" style="width:50%;" >}}
 

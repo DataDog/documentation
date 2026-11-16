@@ -1,5 +1,5 @@
 /**
- * Resolves the on-disk location of `github.com/DataDog/websites-modules` for the
+ * Resolves the on-disk location of `github.com/ddoghq/websites-modules` for the
  * `@websites-modules` Vite alias.
  *
  * Five modules import through that alias (menu/footer/i18n data), and it used to
@@ -39,7 +39,7 @@ function pinnedVersion(hugoGoModPath: string): string | undefined {
     return undefined;
   }
   const match = readFileSync(hugoGoModPath, "utf8").match(
-    /github\.com\/DataDog\/websites-modules\s+(v\S+)/,
+    /github\.com\/ddoghq\/websites-modules\s+(v\S+)/,
   );
   return match?.[1];
 }
@@ -79,7 +79,9 @@ function candidateHugoModuleCacheDirs(hugoGoModPath: string): string[] {
     "pkg",
     "mod",
     "github.com",
-    escapeModulePathSegment("DataDog"),
+    // `ddoghq` is already lowercase, so the escape is a no-op today — kept so
+    // the path stays correct if the owner segment ever gains capitals again.
+    escapeModulePathSegment("ddoghq"),
   );
   if (!existsSync(modRoot)) {
     return [];

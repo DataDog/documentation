@@ -38,11 +38,11 @@ Tag Pipelines는 모든 공급자의 Cloud Cost 메트릭에 적용됩니다. �
 
 규칙 세트를 생성하려면 [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1]로 이동하세요.
 
-<div class="alert alert-danger"> 최대 100개의 규칙을 생성할 수 있습니다. API 기반 Reference Table은 지원되지 않습니다. </div>
+<div class="alert alert-info"> 최대 100개의 규칙을 생성할 수 있습니다. </div>
 
-개별 규칙을 생성하기 전에 {{< ui >}}+ New Ruleset{{< /ui >}}을 클릭하여 규칙 세트(규칙을 포함하는 폴더)를 만드세요.
+개별 규칙을 생성하기 전에 {{< ui >}}\+ New Ruleset{{< /ui >}}을 클릭하여 규칙 세트(규칙을 포함하는 폴더)를 만드십시오.
 
-각 규칙 세트 내에서 {{< ui >}}+ Add New Rule{{< /ui >}}을 클릭하고 {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} 또는 {{< ui >}}Map multiple tags{{< /ui >}} 중 규칙 유형을 선택하세요. 이 규칙들은 위에서 아래로 정해진 순서에 따라 순차적으로 실행됩니다.
+각 규칙 세트 내에서 {{< ui >}}\+ Add New Rule{{< /ui >}}을 클릭하고 {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} 또는 {{< ui >}}Map multiple tags{{< /ui >}} 중 규칙 유형을 선택하십시오. 이 규칙들은 위에서 아래로 정해진 순서에 따라 순차적으로 실행됩니다.
 
 {{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="Tag Pipelines 페이지에서 팀, 계정, 서비스, 부서, 사업부 등 다양한 범주를 표시하는 태그 규칙 목록" style="width:60%;" >}}
 
@@ -99,6 +99,17 @@ Cloud Cost 데이터에 기존 태그가 있는지 여부에 따라 새 태그(�
   - {{< ui >}}Append the column{{< /ui >}} - 원래 값을 제거하지 않고 기존 열에 새 값을 추가합니다.
   - {{< ui >}}Replace the column{{< /ui >}} - 기존 열 값을 새 값으로 교체합니다. <div class="alert alert-warning">열을 교체하면 기존 데이터를 덮어쓸 수 있습니다. 이 옵션은 주의해서 사용하세요. </div>
 - {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}} - Reference Table의 기본 키 값과 비용 데이터에서 태그 키가 기본 키와 일치하는 태그 값을 대소문자를 구분하지 않고 일치시킵니다. 예를 들어, UI의 기본 키 값 쌍이 `foo:Bar`이고 비용 데이터의 태그가 `foo:bar`인 경우 두 값을 일치시킬 수 있습니다.
+
+#### API 기반 참조 표 {#api-based-reference-tables}
+
+API 기반 참조 표를 Tag Pipelines에서 사용할 수도 있습니다. 일부 이전 표는 규칙에서 사용하기 전에 Cloud Cost Management와 동기화하기 위한 데이터 업데이트가 필요할 수 있습니다.
+
+##### 동기화 오류 문제 해결 {#troubleshooting-synchronization-errors}
+
+규칙을 저장할 때 참조 표가 Cloud Cost Management와 동기화되지 않았다는 오류가 발생하면, 다음을 수행하십시오:
+
+1. **전파 대기:** 최근에 표를 생성하거나 업데이트했다면 변경 사항이 전파될 때까지 몇 분 정도 기다린 후 규칙을 다시 저장하십시오.
+2. **동기화 트리거:** 오류가 지속되면 표의 데이터 파일을 다시 업로드하거나 행을 업데이트하여 Cloud Cost Management와의 동기화를 트리거하십시오.
 
 ## 예약된 태그 {#reserved-tags}
 

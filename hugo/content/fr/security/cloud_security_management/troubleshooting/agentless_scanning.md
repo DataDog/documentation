@@ -22,6 +22,12 @@ Si aucun résultat n'apparaît après deux heures :
 - Confirmez que [Remote Configuration][3] est activé sur la clé d'API que vous avez utilisée pour configurer l'analyse Agentless. Les scanners reçoivent leurs instructions de scan via Remote Configuration.
 - Vérifiez que l'intégration cloud est correctement configurée. Sur la page [{{< ui >}}Cloud Security Setup{{< /ui >}}][4], vérifiez que votre compte cloud apparaît avec l'analyse Agentless activée.
 
+## Activez Remote Configuration sur la clé d'API {#enable-remote-configuration-on-the-api-key}
+
+Pour authentifier et autoriser l'Agent à recevoir une configuration, activez Remote Configuration sur la clé d'API concernée. Seuls les utilisateurs disposant de l'autorisation RBAC [`api_keys_write`][9] peuvent activer Remote Configuration sur la clé d'API.
+
+**Remarque :** Si vous disposez de l'autorisation RBAC [`api_keys_write`][9], mais pas des autorisations Remote Configuration au niveau [Organization][10], vous ne pouvez pas activer Remote Configuration sur une clé d'API nouvelle ou existante. Vous avez uniquement l'autorisation de désactiver Remote Configuration sur une clé d'API existante. Pour afficher et gérer les clés d'API de votre organisation, consultez [API Keys][11] dans Datadog.
+
 ## GCP : Échec de la création du bucket d'état (storage.buckets.create 403) {#gcp-failed-to-create-state-bucket-storagebucketscreate-403}
 
 Si la configuration de GCP Cloud Shell échoue à **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** avec une erreur telle que :
@@ -82,3 +88,6 @@ L'analyse Agentless n'est pas disponible dans GovCloud et n'est pas conforme FIP
 [6]: /fr/security/cloud_security_management/vulnerabilities
 [7]: /fr/security/cloud_security_management/setup/agentless_scanning/deployment_methods
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
+[9]: /fr/account_management/rbac/permissions#api-and-application-keys
+[10]: https://app.datadoghq.com/organization-settings/remote-config
+[11]: https://app.datadoghq.com/organization-settings/api-keys
