@@ -70,6 +70,10 @@ Worker version 2.25.0 gives you access to the following:
     - TLS connections to servers whose certificate chains end at a removed root fail validation.
 - Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
 
+#### New features
+
+- The [Azure Data Explorer destination][68] is now available.
+
 #### Enhancements
 
 - The Grok Parser processor's logs now include:
@@ -1054,3 +1058,4 @@ Worker version 2.7.0 gives you access to the following:
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
 [66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
 [67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
+[68]: /observability_pipelines/destinations/azure_data_explorer/

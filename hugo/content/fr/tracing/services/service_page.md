@@ -281,14 +281,6 @@ Visualisez le coût associé à l'infrastructure de votre service utilisée dans
 
 ### Activité frontend {#frontend-activity}
 
-{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Rejoignez la Preview !">}}
-Rejoignez la Journey monitoring Preview pour commencer à utiliser la section Activité frontend !
-{{< /callout >}}
-
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Rejoignez la Preview !">}}
-Rejoignez la Operations monitoring Preview pour commencer à utiliser la section Activité frontend !
-{{< /callout >}}
-
 L'onglet Activité frontend connecte votre service backend aux parcours, opérations et vues [Real User Monitoring (RUM)][24] qui en dépendent. Utilisez-le pour comprendre comment les performances de votre service affectent l'expérience utilisateur finale et les résultats commerciaux, comme quels parcours utilisateur ralentissent ou échouent à convertir lorsque le service se dégrade.
 
 {{< img src="/tracing/services/service_page/front-end-activity.png" alt="Le panneau latéral d'activité frontend affichant les détails du service, du parcours, de l'opération, de l'utilisation et les replays de session associés" style="width:90%;">}}

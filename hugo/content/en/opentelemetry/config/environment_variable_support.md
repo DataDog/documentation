@@ -116,8 +116,8 @@ Trace exporter to be used<br>
 **Notes**: The SDK resolves overlapping settings using Datadog (`DD_*`) configuration first.
     - `service.name` (maps to `DD_SERVICE`): The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_SERVICE` <br>
-        2. Value of `service` key in `DD_TAGS` <br>
-        3. Value of `OTEL_SERVICE_NAME` <br>
+        2. Value of `OTEL_SERVICE_NAME` <br>
+        3. Value of `service` key in `DD_TAGS` <br>
         4. Value of `service.name` key in `OTEL_RESOURCE_ATTRIBUTES`
     - `deployment.environment.name` (maps to `DD_ENV`): The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_ENV` <br>

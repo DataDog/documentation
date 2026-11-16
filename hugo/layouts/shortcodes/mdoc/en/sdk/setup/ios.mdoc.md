@@ -686,7 +686,7 @@ See [Supported versions][9] for a list of operating system versions and platform
 [13]: https://app.datadoghq.com/rum/application/
 [14]: /error_tracking/
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
-[16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[16]: /agentic_onboarding/?tab=realusermonitoring
 [17]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources
 [18]: /real_user_monitoring/application_monitoring/ios/supported_versions/
 

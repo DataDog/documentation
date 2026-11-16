@@ -98,6 +98,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_209524718",
+      "description": "Create a heatgrid widget with bin labels and formatted row labels"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1322784076",
       "description": "Create a heatgrid widget with custom discrete thresholds"
     },
@@ -906,8 +911,18 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1267012748",
+      "description": "Create a Data Jobs duration monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_2589528326",
       "description": "Create a Data Jobs monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1302731819",
+      "description": "Create a Data Jobs monitor with the aastra query dialect returns \"OK\" response"
     },
     {
       "group": "monitors",

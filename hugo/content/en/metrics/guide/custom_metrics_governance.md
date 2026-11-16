@@ -11,7 +11,7 @@ further_reading:
 - link: "/metrics/metrics-without-limits/"
   tag: "Documentation"
   text: "Metrics without Limits™"
-- link: "/metrics/volume/"
+- link: "/metrics/catalog/"
   tag: "Documentation"
   text: "Metrics Catalog"
 - link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
@@ -85,28 +85,26 @@ Individual teams might have limited insights into the costs of the metrics and t
 #### Find the source of your largest custom metrics
 <div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
-{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navigate to the Metrics Catalog from the Plan & Usage page through the Top Custom Metrics table" style="width:90%;" >}}
-
 To identify which team or service is responsible for your top custom metric names:
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
 1. Click the {{< ui >}}Custom Metrics{{< /ui >}} tab to view your organization's billable usage, usage trends, and top custom metrics.
-1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This takes you to the *Metrics Catalog* page with the opened metric details side panel. 
+1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This opens the metric's details side panel on the Metrics Catalog page.
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
 #### View your team's custom metrics
 
 All teams should have visibility into which metrics are driving their bill spikes in real-time and feel confident that their cost optimization efforts do not impact another team's visibility.
 
-To see all actively reporting metric names submitted by your team, go to the [Metrics Catalog page][6], type in the tag key value pair (for example, `team:dev` or `service:demo`) in the {{< ui >}}Filter by Tag Value{{< /ui >}} field.
+To see all actively reporting metric names submitted by your team, go to the [Metrics Catalog page][6] and enter a tag `key:value` pair (for example, `team:dev` or `service:demo`) in the {{< ui >}}Tag{{< /ui >}} search field.
 
 #### Identify any team's metrics that have the biggest impact on your bill
 
-All users in your organization can see OOTB realtime estimated custom metrics usage on the [Metrics Catalog page][6]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™, to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
+All users in your organization can see out-of-the-box, real-time estimated custom metrics usage in the usage graphs on the [Metrics Catalog page][6]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™ to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
 
-With the Metrics Catalog, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
+On the Metrics Catalog page, sort the metrics table by volume to identify your organization's largest metrics as well as the metric names spiking in volume (likely causes of any unexpected overage).
 
-{{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Metrics Catalog page" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/metrics_catalog_page_2026-11-12.png" alt="The Metrics Catalog page with the metrics table sorted by Est. Indexed Metrics, and the Est. Indexed Metrics and Change in Volume columns highlighted." style="width:90%;" >}}
 
 For more information, see the [Metrics Catalog][8] documentation.
 
@@ -122,7 +120,7 @@ Datadog's [Metrics without Limits™][4] is a first in industry cost management 
 
 Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics Catalog and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="An example of using Metrics without Limits™ to reduce volume by limiting the tag allowlist in a tag configuration." style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations based on actively queried tags and tags used on assets (powered by our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
@@ -164,19 +162,15 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 1. On the [Metrics Catalog page][6], find the {{< ui >}}Query Activity{{< /ui >}} facet on the left side. Select the time frame of interest (30, 60, or 90 days).
 2. Find the {{< ui >}}Related Assets{{< /ui >}} facet on the left side, and select {{< ui >}}Not used in any asset{{< /ui >}}.
-3. Find the {{< ui >}}Configuration{{< /ui >}} facet on the left side, and select {{< ui >}}All Tags{{< /ui >}}. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
+3. Find the {{< ui >}}Tag Configuration{{< /ui >}} facet on the left side, and select {{< ui >}}All Tags{{< /ui >}}. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
 
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
-5. (Optional) To export this list, click {{< ui >}}Export as CSV{{< /ui >}} above the metric table.
+5. (Optional) To export this list, click the download icon ({{< ui >}}Download as CSV{{< /ui >}}) next to {{< ui >}}Columns{{< /ui >}} above the metrics table.
+6. After you identify the metrics that your developers don't need, reduce their custom metrics volume and associated costs by creating a [Tag Indexing Rule][18] scoped to their metric names or namespaces. Configure the rule to unindex tags that aren't queried or used in assets across these metrics. Unindexed tags are no longer queryable, but Datadog still ingests them.
 
-   After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics with Metrics without Limits™. 
+Tag Indexing Rules and Metrics without Limits™ tag configurations both control which tags are indexed. Rules apply across many metrics, while Metrics without Limits™ configurations apply to one metric at a time and take precedence over rules.
 
-6. Create a [Tag Indexing Rule][18] for these metrics. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}\+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
-7. Scope the rule to the metric namespace prefix of the metrics you'd like to configure.
-8. Select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets, such as dashboards, notebooks, monitors, and SLOs).
-9. Save the rule.
-
-Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
+Across thousands of customers, Datadog's query insights show that unindexing tags on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%.
 
 ### Understand the relative utility of your metrics
 
@@ -199,7 +193,7 @@ In this section, learn about how to:
 - Alert when a particular metric's cardinality exceeds a user-defined threshold or anomalously spikes
 After you have an understanding of your account's metric usage and the teams responsible for those costs, build monitors to alert you when your custom metrics usage exceeds a certain threshold. Get alerts on spikes in custom metric usage, so you can prevent unintentional bill spikes.
 
-Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. You can use these metrics in your dashboard visualizations and monitor alerts. 
+Datadog offers OOTB metrics that measures [estimated custom metrics usage][19]. You can use these metrics in your dashboard visualizations and monitor alerts. 
 
 | Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
@@ -213,7 +207,7 @@ Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. 
 You can also see a breakdown of your realtime estimated custom metrics usage by metric name with either the dashboard timeseries widget, or a metric monitor. Use the `datadog.estimated_usage.metrics.custom.by_metric` metric to build a monitor so you can always have up-to-date visibility into each of your metric names' volumes. 
 
 ### Additional monitoring use cases
-After you've received an alert, use the Metrics Catalog page to inspect any spiking metrics' tag keys and use Metrics without Limits™ to immediately drop any anomalous tag keys that are causing your metric to spike. This will ensure you can immediately resolve any unintentional billing spikes. 
+After you receive an alert, use the Metrics Catalog page to inspect the tag keys of any spiking metric. Then use Metrics without Limits™ to unindex the anomalous tag keys that are causing the spike. This helps you resolve unintentional billing spikes.
 {{< whatsnext desc="Additional use cases to build monitors for with the estimated usage metrics:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
@@ -223,9 +217,9 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 
 ## Summary of best practices
 
-1. Start by identifying your largest metric names (your Top Custom Metrics table or the Metrics Catalog page), begin using Metrics without Limits™ to optimize these top metrics to the most cost-effective volume. 
+1. Start by identifying your largest metric names in your Top Custom Metrics table or on the Metrics Catalog page. Then use Metrics without Limits™ to optimize these top metrics to the most cost-effective volume.
 2. Use the Metrics Catalog page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
-3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
+3. For immediate cost savings, identify your unqueried custom metrics and use a [Tag Indexing Rule][18] to unindex tags that aren't queried or used in assets.
 4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
 
 ## Further reading
@@ -238,13 +232,14 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 [4]: /metrics/metrics-without-limits/
 [5]: https://app.datadoghq.com/billing/usage-attribution?view=table
 [6]: https://app.datadoghq.com/metric/catalog
-[8]: /metrics/volume/
+[8]: /metrics/catalog/
 [9]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#metrics
 [10]: /glossary/#cardinality
 [11]: /account_management/audit_trail/
 [12]: https://app.datadoghq.com/event/explorer
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
-[15]: /metrics/summary/#metrics-related-assets
-[16]: /metrics/summary/#facet-panel
+[15]: /metrics/catalog/#metrics-related-assets
+[16]: /metrics/catalog/#facet-panel
 [17]: https://tour.datadoghq.com/psl/swa0y11
 [18]: /metrics/guide/tag-indexing-rules/
+[19]: /account_management/billing/usage_metrics/
