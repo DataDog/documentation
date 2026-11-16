@@ -22,6 +22,14 @@ To append extra properties to the user information you already set, use the `add
 Datadog.addUserExtraInfo(mapOf("plan" to "premium"))
 ```
 
+## Clear user information
+
+To clear the user information (for example, when the user signs out), use the `clearUserInfo` API (requires Kotlin Multiplatform SDK v1.3.0 or later):
+
+```kotlin
+Datadog.clearUserInfo()
+```
+
 ## Set account information
 
 If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:

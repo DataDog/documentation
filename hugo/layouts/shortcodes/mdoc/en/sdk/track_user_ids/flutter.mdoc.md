@@ -31,6 +31,14 @@ DatadogSdk.instance.addUserExtraInfo({
 });
 ```
 
+## Clear user information
+
+To clear the user information (for example, when the user signs out), use the `clearUserInfo` API (requires Flutter SDK v2.12.0 or later):
+
+```dart
+DatadogSdk.instance.clearUserInfo();
+```
+
 ## Set account information
 
 If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
