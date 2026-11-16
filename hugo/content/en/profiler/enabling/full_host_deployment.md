@@ -1,6 +1,5 @@
 ---
 title: Deploying the Full-Host Profiler
-private: true
 further_reading:
     - link: 'profiler/enabling/full_host'
       tag: 'Documentation'
