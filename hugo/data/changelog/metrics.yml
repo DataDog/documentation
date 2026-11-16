@@ -202,3 +202,10 @@ entries:
       - GetMetricMetadata
       - UpdateMetricMetadata
     title: Allow null fields in the GetMetricMetadata response
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41717
+    operations:
+      - CreateTagConfiguration
+      - UpdateTagConfiguration
+    title: Document oversized metric tag configuration errors
