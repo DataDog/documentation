@@ -299,6 +299,8 @@ For available metrics and tags, see [AI Gateway metrics][16].
 
 ## Configure data capture
 
+To evaluate traffic with AI Guard policies, see [Secure LLM Traffic with AI Gateway][17].
+
 AI Gateway records supported inference requests in Agent Observability. Requests rejected before processing, such as authentication failures or malformed request bodies, might not appear there. The data capture mode controls whether a span includes prompt and response content.
 
 | Mode | What is recorded |
@@ -443,3 +445,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+
+[17]: /llm_observability/configure/ai_gateway_security/
