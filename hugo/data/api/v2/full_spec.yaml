@@ -127564,6 +127564,41 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringBatchMigrationPublishError:
+      description: The reason why the resource could not be published.
+      properties:
+        code:
+          description: The error code returned on rule creation.
+          example: InvalidArgument
+          type: string
+        details:
+          description: The rule validation errors returned on rule creation.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishErrorDetail"
+          type: array
+        message:
+          description: The error message.
+          example: Invalid rule configuration
+          type: string
+      required:
+        - message
+      type: object
+    SecurityMonitoringBatchMigrationPublishErrorDetail:
+      description: A rule validation error.
+      properties:
+        code:
+          description: The error code.
+          example: AlreadyExists
+          type: string
+        message:
+          description: The error message.
+          example: Rule name must be unique
+          type: string
+        target:
+          description: The rule field the error applies to.
+          example: name
+          type: string
+      type: object
     SecurityMonitoringBatchMigrationPublishRequest:
       description: Request to publish the resources of a batch migration.
       properties:
@@ -127607,9 +127642,7 @@ components:
       description: Attributes of the publication outcome of a batch migration resource.
       properties:
         error:
-          description: The reason why the resource could not be published.
-          example: failed to create rule
-          type: string
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishError"
         ruleId:
           description: The ID of the created Cloud SIEM detection rule.
           example: abc-def-ghi
@@ -253582,6 +253615,17 @@ paths:
                           status: published
                         id: c968cf83-56c2-4d54-a993-6c86dfb83527
                         type: batchMigrationPublishedResource
+                      - attributes:
+                          error:
+                            code: InvalidArgument
+                            details:
+                              - code: AlreadyExists
+                                message: Rule name must be unique
+                                target: name
+                            message: Invalid rule configuration
+                          status: failed
+                        id: 0b9d3f3e-2a4c-4e8b-9f1a-6d2c7e5b8a41
+                        type: batchMigrationPublishedResource
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResponse"
           description: OK
@@ -280633,9 +280677,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule. **Note:** RUM supports only surfacing rules,
-      not blocking rules.
-
+      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
