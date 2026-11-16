@@ -154,7 +154,7 @@ After deploying the Full-Host Profiler, see [Getting Started with Profiler][9] t
 [3]: https://app.datadoghq.com/profiling
 [4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [5]: https://opentelemetry.io/blog/2026/profiles-alpha/
-[6]: https://youtu.be/TKp2snmgvtQ?si=lhQ-n7lREvPCqF6Y
+[6]: https://www.youtube.com/watch?v=TKp2snmgvtQ
 [7]: https://github.com/open-telemetry/opentelemetry-specification/pull/4719
 [8]: https://github.com/open-telemetry/opentelemetry-specification/pull/4947
 [9]: /getting_started/profiler/
