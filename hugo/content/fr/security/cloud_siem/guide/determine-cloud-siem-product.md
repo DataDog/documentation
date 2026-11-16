@@ -109,7 +109,6 @@ Le tableau suivant liste les fonctionnalités Cloud SIEM disponibles dans chaque
 | [Carte MITRE ATT&CK][6] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Filtres de sécurité][7] | | {{< X >}} | {{< X >}} |
 | [Filtres d'index de logs][8] | {{< X >}} | | |
-| [Vue compacte de la carte MITRE ATT&CK][6] | {{< X >}} | {{< X >}} | |
 | [Règles planifiées][9] | {{< X >}} | {{< X >}} | |
 | [Détections de séquences][10] | {{< X >}} | {{< X >}} | |
 | [Jobs historiques][11] | {{< X >}} | {{< X >}} | |

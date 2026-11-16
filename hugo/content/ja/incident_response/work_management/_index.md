@@ -11,7 +11,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-risk-management
   tag: ブログ
-  text: Datadog Case Management でリスクを一元管理し、修正する方法
+  text: Datadog Case Management でリスクを一元管理して修正する方法
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: ブログ
   text: Datadog Forms を使用して、エンジニアリング組織全体でフィードバックを行動に変える
@@ -40,9 +40,11 @@ Datadog Work Management は、Datadog およびサードパーティのインテ
 
 調査中は、Datadog 全体から得られるグラフ、ログ、その他のテレメトリデータをワークアイテムに追加し、アクティビティタイムラインでチームメンバーと共同作業を行うことができます。Work Management は、Jira、ServiceNow、PagerDuty、Slack、Microsoft Teams などのツールとも統合されているため、組織のプロセスに合わせて Work Management ソリューションを調整できます。
 
+{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Claude との Work Management integration の Preview に参加してください">}} Claude が管理する agent に作業項目を割り当ててください。アクセスをリクエストするには、フォームに記入してください。{{< /callout >}}
+
 ## はじめに {#getting-started}
 {{< whatsnext desc="Work Management の詳細:">}}
-    {{< nextlink href="/incident_response/work_management/create_work_item" >}}ワークアイテムの作成{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/create_work_item" >}}ワークアイテムを作成する{{< /nextlink >}}
     {{< nextlink href="/incident_response/work_management/projects" >}}プロジェクト{{< /nextlink >}}
     {{< nextlink href="/incident_response/work_management/view_and_manage" >}}ワークアイテムの表示と管理{{< /nextlink >}}
     {{< nextlink href="/incident_response/work_management/settings" >}}プロジェクト内のメンバーシップとステータス遷移の管理{{< /nextlink >}}

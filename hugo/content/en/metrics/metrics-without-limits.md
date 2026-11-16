@@ -20,7 +20,7 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ lets you configure tags on all metric types in-app by selecting an allowlist of tags to remain queryable throughout Datadog; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Catalog][1] page.
+Metrics without Limits™ lets you configure tags on all metric types in-app by selecting an allowlist of tags to remain queryable throughout Datadog; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. You can configure both on the [Metrics Catalog page][1].
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
@@ -54,7 +54,7 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
-**Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the {{< ui >}}Edit{{< /ui >}} button for a metric in the Metrics Catalog.
+**Note:** To manage tags on a metric, the metric must have a declared type. The type is typically declared when the metric is submitted, but you can also set it manually with the {{< ui >}}Edit{{< /ui >}} button for the metric on the Metrics Catalog page.
 
 #### Use the API
 
@@ -62,11 +62,13 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 
 ### Configure multiple metrics at a time
 
-To configure tags on many metrics at once, use [Tag Indexing Rules][16]. A tag rule applies an allowlist or blocklist of tags to every metric that matches a metric name or prefix, including metrics submitted after you create the rule.
+To configure tags on multiple metrics, such as all metrics in a namespace, use [Tag Indexing Rules][16]. Tag Indexing Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+
+To manage Tag Indexing Rules programmatically, use the [Tag Indexing Rules API][17].
 
 ## Metrics without Limits™ billing
 
-Configuring your tags gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Catalog page. 
+Configuring your tags gives you control over which custom metrics can be queried, which reduces your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Catalog page.
 
 - {{< ui >}}Ingested Custom Metrics{{< /ui >}}: The original volume of custom metrics based on all ingested tags.
 - {{< ui >}}Indexed Custom Metrics{{< /ui >}}: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations).
@@ -88,19 +90,19 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 
 ## Getting started with Metrics without Limits™
 
-1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Catalog page or by using the [API][2].
-   To configure tags on many metrics at once, create a [Tag Indexing Rule][16] scoped to a metric name prefix.
+1. Identify your top 20 metrics on your [Plan & Usage page][9], then configure them from the Metrics Catalog page or by using the [API][2].
+   To configure tags on multiple metrics, use [Tag Indexing Rules][16].
 
 **Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
-2. Configure your unqueried metrics with empty tag configurations.
+2. Unindex tags on your unqueried metrics.
 
-   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
+   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can minimize the costs of these unqueried metrics by unindexing their tags. Unindexed tags are no longer queryable, but Datadog still ingests them. To unindex tags across many unqueried metrics, create a [Tag Indexing Rule][16] scoped to their metric names or namespaces. To configure a single metric, give it an empty allowlist of tags.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
    - Prior to saving your configuration, the tag configuration cardinality estimator returns the estimated resulting number of indexed custom metrics which should be lower than your ingested custom metrics volumes.
-   - After saving your configuration, the Metrics Catalog details sidepanel should show that your indexed custom metrics are lower than your ingested custom metrics volume.
+   - After saving your configuration, the metric's details side panel on the Metrics Catalog page should show that your indexed custom metrics are lower than your ingested custom metrics volume.
    - 24 hours after you've saved your configuration, you can also view the impact on your Plan & Usage page's {{< ui >}}Top Custom Metrics{{< /ui >}} table. There should be reduction in the volume of custom metrics between the {{< ui >}}Month-to-Date{{< /ui >}} tab and the {{< ui >}}Most Recent Day{{< /ui >}} tab of this table.
 
 ## Best practices
@@ -130,3 +132,4 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 [12]: https://app.datadoghq.com/event/stream
 [15]: /account_management/billing/metric_name_pricing/
 [16]: /metrics/guide/tag-indexing-rules/
+[17]: /api/latest/metrics/#create-a-tag-indexing-rule
