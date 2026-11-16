@@ -77,8 +77,7 @@ BYOC APM maps these core OpenTelemetry span attributes:
 
 In a Datadog organization that uses BYOC APM:
 
-- All traces are stored in BYOC. You can't use SaaS APM and BYOC APM in the same organization.
-- All traces are stored in one traces database cluster.
+- All traces are stored in BYOC, in one traces database cluster. You can't use SaaS APM and BYOC APM in the same organization.
 - Logs can be stored in Datadog or in [BYOC Logs][1].
 
 ## Requirements
@@ -104,13 +103,12 @@ The following table lists the capabilities that BYOC APM supports and doesn't su
 | Ingestion | OTLP trace ingestion and span storage in your cloud account | Datadog Agent ingestion, pipeline customization |
 | Search and analytics | Historical span queries | Trace queries, Live Search, some aggregations, the scatter plot, calculated fields, cluster selection in [Trace Explorer][11] |
 | Metrics | RED metrics: request rate, errors, and latency | Sorting by error rate, percentiles, the distribution widget, [custom metrics generated from spans][12] |
-| Services | [Service pages][5], [resource pages][6], [Catalog][7] entries | The service dependency graph, service remapping configuration |
+| Services | [Service pages][5], [resource pages][6], [Catalog][7] entries | The service dependency graph, service remapping configuration, [Error Tracking][15] |
 | Monitors | [Monitors on trace metrics][8] | Some monitor types |
 | Logs | [Logs and traces correlation][13], using the trace ID on each log | |
 | AI agents | [Datadog MCP Server][14] tools that search spans, get a trace, and summarize a trace | |
 | Span data | | Span links, span events, enrichments |
 | Data management | | Retention filters, Sensitive Data Scanner |
-| Error tracking | | [Error Tracking][15] |
 
 Datadog hides some unsupported features in the UI.
 
