@@ -8,8 +8,6 @@ aliases:
 
 Agentless Scanning is supported on AWS, Azure, and GCP. Datadog-hosted scanning supports AWS only. For more information, see [Choose where scanners run][19].
 
-<!-- TODO(DOCS-16346): Confirm with SME that Datadog-hosted AWS coverage matches the AWS column below (including Lambda, Fargate, ECR, AMI, and S3). -->
-
 The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
 
 | Component                                       | AWS                                                                                                                           | Azure                                                                                                                                                                             | GCP                                                                                                                                                                                                                       |

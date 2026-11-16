@@ -46,9 +46,11 @@ Datadog-hosted scanning supports AWS accounts only.
 | Scanner updates | You update the scanner | Datadog updates the scanner automatically |
 | Cloud provider infrastructure cost | Compute and networking costs appear on your cloud provider bill | None |
 | Scanning engine and findings | Same in both modes | Same in both modes |
+| Scan frequency | Every 12 hours | Every 12 hours |
+| AWS resource coverage | Same in both modes | Same in both modes |
+| Sensitive Data Scanner for Amazon S3 | Supported | Supported |
+| On-demand scanning | Supported for AWS | Not supported |
 | Datadog billing | Same in both modes | Same in both modes |
-
-<!-- TODO(DOCS-16346): Confirm with SME whether scan frequency (12 hours), resource coverage, and Sensitive Data Scanner support are identical for Datadog-hosted; if so, add rows. -->
 
 ### When to use Self-hosted Agentless Scanning
 
@@ -178,11 +180,16 @@ There is no scanner infrastructure cost on your cloud provider bill and no addit
 
 You can enable [Sensitive Data Scanner][8] for Amazon S3 buckets during setup. Sensitive Data Scanner catalogs and classifies sensitive data in your cloud storage.
 
-With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in its scanning environment, in the same way as disk contents. Because buckets often hold more sensitive data than disks, review your data handling requirements before you enable Sensitive Data Scanner. Sensitive Data Scanner is optional: you can turn it off and still use Datadog-hosted scanning for vulnerabilities.
+With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in its scanning environment, in the same way as disk contents. Datadog does **not** retain your object contents. Datadog stores only the location where it found sensitive data, not the matched data itself. For each match, Datadog records the bucket, object path, matching rule, and position in the object. Because buckets often hold more sensitive data than disks, review your data handling requirements before you enable Sensitive Data Scanner.
 
-<!-- TODO(DOCS-16346): Confirm with SME that Datadog doesn't retain S3 object contents after a scan, and where to turn off Sensitive Data Scanner after setup. -->
+Sensitive Data Scanner is optional. You can turn it off and still use Datadog-hosted scanning for vulnerabilities. To turn it off after setup:
 
-<!-- TODO(DOCS-16346): Confirm with SME whether the On-Demand Scanning API works with Datadog-hosted scanning; if so, add an on-demand scanning section here. -->
+- **CloudFormation**: Turn off Sensitive Data Scanner in Datadog. For instructions, see [Set up Sensitive Data Scanner][20].
+- **Terraform**: Set the `sensitive_data_scanning_enabled` variable to `false`, then apply the configuration.
+
+### On-demand scanning {#datadog-hosted-on-demand-scanning}
+
+The [On-Demand Scanning API][14] is not available for Datadog-hosted scanning. Datadog scans your resources automatically every 12 hours.
 
 ## Further reading
 
@@ -206,3 +213,4 @@ With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in i
 [17]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#move-an-account-from-self-hosted-to-datadog-hosted-scanning?agentless_scanner_hosting=datadog_hosted
 [18]: /security/cloud_security_management/setup/agentless_scanning/enable?agentless_scanner_hosting=self_hosted
 [19]: /security/cloud_security_management/setup/agentless_scanning/enable?agentless_scanner_hosting=datadog_hosted
+[20]: /security/sensitive_data_scanner/setup/
