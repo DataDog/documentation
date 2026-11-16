@@ -286,7 +286,10 @@ To remove all instrumentation from an AWS account:
 1. Review the summary of changes, then apply them.
 1. Wait for Datadog to report that the resources are uninstrumented. Only then delete the CloudFormation stack or remove the AWS integration, if you still want to.
 
-If the stack is already deleted, Datadog can't clean up. Restore your Lambda functions from your infrastructure-as-code or by hand, and [uninstall the Agent][20] from your EC2 instances. If you remove the Datadog layers by hand, also restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python) and remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET). A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation.
+If the stack is already deleted, Datadog can't clean up, so remove the instrumentation yourself:
+
+- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, remove the Datadog layers, restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), and remove the Datadog environment variables or restore the values they had before. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
+- **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources Datadog created for EC2 instances, such as API key secrets, IAM roles and inline policies, and the Systems Manager document. For the list, see [Created as needed, for EC2 instances][21].
 
 ## Troubleshooting
 
@@ -344,3 +347,4 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
 [19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [20]: https://docs.datadoghq.com/agent/guide/how-do-i-uninstall-the-agent/
+[21]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances
