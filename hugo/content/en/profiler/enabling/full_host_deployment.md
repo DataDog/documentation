@@ -481,7 +481,7 @@ Leave self-profiling disabled unless Datadog Support asks you to enable it.
 
 ## After deployment
 
-Profiles appear on the [Datadog Profiler][5] page within a few minutes after deployment. If profiles don't appear, see [Troubleshooting][6].
+Profiles appear on the [Datadog Profiler][5] page within a few minutes after deployment. If profiles don't appear, see [Full-Host Profiler Troubleshooting][6].
 
 ## Further reading
 
