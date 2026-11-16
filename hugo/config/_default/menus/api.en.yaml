@@ -7913,6 +7913,19 @@ menu:
         unstable:
           - v2
         order: 45
+    - name: List AI Gateway rate limit counter summaries
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counter-summaries/
+      identifier: ai-gateway-list-ai-gateway-rate-limit-counter-summaries
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimitInstancesSummaries
+        unstable:
+          - v2
+        order: 55
     - name: Create an AI Gateway rate limit
       url: /api/latest/ai-gateway/create-an-ai-gateway-rate-limit/
       identifier: ai-gateway-create-an-ai-gateway-rate-limit
@@ -15082,6 +15095,19 @@ menu:
           - UpdateIssueState
         unstable: []
         order: 3
+    - name: Get the impact of an error tracking issue
+      url: /api/latest/error-tracking/get-the-impact-of-an-error-tracking-issue/
+      identifier: error-tracking-get-the-impact-of-an-error-tracking-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIssueImpact
+        unstable:
+          - v2
+        order: 6
     - name: Update the assignee of an issue
       url: /api/latest/error-tracking/update-the-assignee-of-an-issue/
       identifier: error-tracking-update-the-assignee-of-an-issue

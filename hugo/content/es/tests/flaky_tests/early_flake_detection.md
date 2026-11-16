@@ -2,67 +2,64 @@
 aliases:
 - /es/tests/early_flake_detection
 - /es/tests/flaky_test_management/early_flake_detection
-description: Detecta los defectos antes de que afecten a tu rama predeterminada mediante
-  la Detección temprana de defectos.
+description: Detecte la inestabilidad antes de que afecte a su rama predeterminada
+  mediante Early Flake Detection.
 further_reading:
 - link: /tests
   tag: Documentación
-  text: Más información sobre Test Optimization (optimización de tests)
+  text: Aprenda sobre Test Optimization
 - link: /tests/flaky_test_management
   tag: Documentación
-  text: Más información sobre gestión de tests defectuosos
+  text: Obtenga información sobre Flaky Test Management
 - link: /pr_gates
   tag: Documentación
-  text: Más información sobre PR Gates
-title: Detección temprana de defectos
+  text: Aprenda sobre PR Gates.
+title: Detección temprana de inestabilidad
 ---
+## Descripción general {#overview}
 
-## Información general
+Early Flake Detection es la solución de inestabilidad de pruebas de Datadog que mejora la calidad del código al identificar [pruebas inestables][1] al principio del ciclo de desarrollo. Para obtener más información sobre las pruebas inestables, consulte [Flaky Test Management][2].
 
-La detección temprana de defectos es la solución para tests defectuosos de Datadog que mejora la calidad del código gracias a la identificación de [tests defectuosos][1] al principio del ciclo de desarrollo. Para obtener más información sobre los tests defectuosos, consulta [Gestión de tests defectuosos][2].
+Al ejecutar las pruebas recién añadidas varias veces, Datadog puede detectar la inestabilidad antes de que estas pruebas se fusionen en la rama predeterminada. Un estudio muestra que hasta el [75 % de las pruebas inestables][3] pueden identificarse con este enfoque.
 
-Al ejecutar varias veces los tests recién añadidos, Datadog puede detectar defectos antes de que estos tests se incorporen a la rama predeterminada. Un estudio muestra que este método permite identificar hasta el [75 % de los tests defectuosos][3].
+Pruebas conocidas
+: El backend de Datadog almacena pruebas únicas para un servicio de pruebas determinado. Antes de que se ejecute una sesión de pruebas, la biblioteca de Datadog obtiene la lista de estas pruebas conocidas.
 
-Tests conocidos
-: el backend de Datadog almacena tests únicos para un servicio de tests determinado. Antes de que se ejecute una sesión de tests, la biblioteca de Datadog recupera la lista de estos tests conocidos.
+Detección de nuevas pruebas
+: Si una prueba no se encuentra en la lista de pruebas conocidas, se considera **nueva** y se reintenta automáticamente hasta diez veces.
 
-Detección de tests nuevos
-: si un test no se encuentra en lista de tests conocidos, se considera **nuevo** y se reintenta automáticamente hasta diez veces.
+Identificación de inestabilidad
+: Ejecutar una prueba varias veces ayuda a descubrir problemas como condiciones de carrera, que pueden hacer que la prueba pase y falle de forma intermitente. Si alguno de los intentos de prueba falla, la prueba se etiqueta automáticamente como inestable.
 
-Identificación de defectos
-: ejecutar un test varias veces ayuda a descubrir problemas como las condiciones de secuencia, que pueden hacer que el test resulte exitoso y falle de forma intermitente. Si alguno de los intentos del test falla, el test se etiqueta automáticamente como defectuoso.
+Ejecutar una prueba varias veces aumenta la probabilidad de exponer condiciones aleatorias que causan inestabilidad. Early Flake Detection ayuda a garantizar que solo se integren pruebas estables y confiables en la rama predeterminada:
 
-Ejecutar un test varias veces aumenta la probabilidad de exponer condiciones aleatorias que causan defectos. La detección temprana de defectos ayuda a garantizar que solo se integren en la rama predeterminada los tests estables y fiables:
+{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="Cómo funciona Early Flake Detection en sus commits" style="width:100%">}}
 
-{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="Cómo funciona la detección temprana de defectos en tus confirmaciones" style="width:100%">}}
+Puede optar por bloquear la fusión de la rama de funcionalidad con un [PR Gate][4]. Para obtener más información, consulte la [documentación de PR Gates][5].
 
-Puedes elegir bloquear la fusión de la rama de funciones con una [PR Gate][4]. Para obtener más información, consulta la [documentación de PR Gates][5].
+## Configuración {#setup}
 
-## Configurar
+Antes de implementar Early Flake Detection, debe configurar [Test Optimization][6] para su entorno de desarrollo. Si está reportando datos a través del Datadog Agent, utilice la versión 6.40 o 7.40 y posteriores.
 
-Antes de implementar la Detección temprana de defectos, debes configurar [Test Optimización (optimización de tests)][6] para tu entorno de desarrollo. Si estás reportando datos a través del Datadog Agent, utiliza v6.40 o 7.40 y posteriores.
+### Configuración {#configuration}
 
-### Configuración
+Después de configurar su biblioteca de Datadog para Test Optimization, configure Early Flake Detection en [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7]. Puede aplicar la configuración a nivel de organización, repositorio o servicio de pruebas.
 
-Una vez que hayas configurado tu biblioteca de Datadog para Test Optimization (optimización de tests), puedes configurar la detección temprana de defectos desde la page (página) de parámetros de [Test Optimization (optimización de tests)][7].
+{{< img src="continuous_integration/early_flake_detection_test_settings-1.png" alt="Interruptor de Early Flake Detection en CI/CD Settings." style="width:100%" >}}
 
-{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Detección temprana de defectos en Parámetros del servicio de tests." style="width:100%" >}}
+1. Abra [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][7].
+1. Elija dónde aplicar la configuración:
+   - Seleccione la pestaña {{< ui >}}Organization{{< /ui >}} para actualizar el valor predeterminado de la organización.
+   - Seleccione la pestaña {{< ui >}}Repository-specific{{< /ui >}} para anular el valor predeterminado de un solo repositorio o para aplicar una anulación a uno de sus servicios de pruebas.
+1. En {{< ui >}}Prevention{{< /ui >}}, active el {{< ui >}}Early Flake Detection{{< /ui >}}.
 
-1. Ve a [**Software Delivery** (Envío de software) > **Test Optimization** (Optimización de tests) > **Settings** (Parámetros)][7].
-1. Haz clic en **Configure** (Configurar) en la columna **Early Flake Detection** (Detección temprana de defectos) para elegir un servicio de tests.
-1. Haz clic en el conmutador para activar la Detección Temprana de Defectos.
-
-## Compatibilidad
+## Compatibilidad {#compatibility}
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
-Se necesitan las siguientes versiones del framework de tests y de dd-trace:
+`dd-trace-js>=5.23.0`
 
-`dd-trace-js`:
-* `>=5.23.0` para la versión 5.x.
-* `>=4.47.0` para la versión 4.x.
-
-La compatibilidad del framework de test es la misma que la [Compatibilidad de Test Optimization (optimización de tests)][1], con la excepción de `playwright`, que solo es compatible a partir de `>=1.38.0`.
+La compatibilidad del marco de pruebas es la misma que [Test Optimization Compatibility][1], con la excepción de `playwright`, que solo es compatible a partir de `>=1.38.0`.
 
 [1]: /es/tests/setup/javascript/?tab=cloudciprovideragentless#compatibility
 {{% /tab %}}
@@ -71,7 +68,7 @@ La compatibilidad del framework de test es la misma que la [Compatibilidad de Te
 
 `dd-trace-java>=1.34.0`
 
-La compatibilidad del framework de test es la misma que la [Compatibilidad de Ttest Optimización (optimización de tests)][2], con la excepción de `Scala Weaver`.
+La compatibilidad del marco de pruebas es la misma que [Test Optimization Compatibility][2], con la excepción de `Scala Weaver`.
 
 [2]: /es/tests/setup/java/#compatibility
 {{% /tab %}}
@@ -96,7 +93,7 @@ La compatibilidad del framework de test es la misma que la [Compatibilidad de Tt
 
 {{% tab "Go" %}}
 
-`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 {{% /tab %}}
 
@@ -108,30 +105,49 @@ La compatibilidad del framework de test es la misma que la [Compatibilidad de Tt
 
 {{< /tabs >}}
 
+<div class="alert alert-warning">
+Los servicios de pruebas con más de 100 000 pruebas conocidas requieren una versión de la biblioteca de Datadog que admita la paginación en el punto de conexión de pruebas conocidas. Las versiones mínimas anteriores cubren el lanzamiento inicial de EFD; la compatibilidad con la paginación llegó más tarde. Sin ella, la biblioteca no puede obtener la línea base de pruebas conocidas y Early Flake Detection no se ejecuta en esa sesión.
+</div>
 
-## Explorar los resultados en el Test Optimization Explorer
+Las siguientes versiones de la biblioteca de Datadog añaden compatibilidad con la paginación en el punto de conexión de pruebas conocidas:
 
-Puedes utilizar las siguientes facetas para consultar las sesiones que ejecutan la Detección temprana de defectos y los nuevos tests en el [Test Optimization Explorer][8].
+| Biblioteca                | Versión mínima |
+| ---------------------- | --------------- |
+| `dd-trace-js`          | 5.94.0          |
+| `dd-trace-java`        | 1.60.0          |
+| `dd-trace-dotnet`      | 3.42.0          |
+| `ddtrace` (Python)     | 4.6.0           |
+| `datadog-ci` (Ruby)    | 1.27.0          |
+| `ddtest` (Go)          | 1.14.0          |
+| `dd-sdk-swift-testing` | 2.6.7           |
 
-* **Sesión de tests**: las sesiones de tests que ejecutan Detección temprana de defectos tienen la etiqueta (tag) `@test.early_flake.enabled` establecida en `true`.
-* **Tests nuevos**: los tests nuevos tienen la etiqueta `@test.is_new` establecida en `true`, y los reintentos para estos tests tienen la etiqueta `@test.is_retry` establecida en`true`.
+## Explorar resultados en el Test Optimization Explorer {#explore-results-in-the-test-optimization-explorer}
 
-## Solucionar problemas
+Puede usar las siguientes facetas para consultar las sesiones que ejecutan Early Flake Detection y las pruebas nuevas en [Test Optimization Explorer][8].
 
-Si sospechas que hay problemas con la Detección temprana de defectos, ve a la página [Configuración de Test optimization][7], busca tu repositorio y haz clic en **Configure** (Configurar). Desactiva la Detección temprana de defectos haciendo clic en el conmutador.
+* **Test Session**: Las sesiones de prueba que ejecutan Early Flake Detection tienen la etiqueta `@test.early_flake.enabled` establecida en `true`.
+* **New Tests**: Las pruebas nuevas tienen la etiqueta `@test.is_new` establecida en `true`, y los reintentos de esta prueba tienen la etiqueta `@test.is_retry` establecida en `true`.
 
-### No se reintenta un test nuevo
+## Solución de problemas {#troubleshooting}
 
-Esto puede deberse a un par de motivos:
+Si sospecha que hay problemas con Early Flake Detection, abra [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7], busque su repositorio o servicio de pruebas y desactive Early Flake Detection.
 
-* Este test ya se ha realizado anteriormente.
-* Este test demora más de cinco minutos. Existe un mecanismo para no ejecutar Detección temprana de defectos en tests que son demasiado lentos, ya que hacerlo puede provocar retrasos significativos en los pipelines de CI.
+### No se está reintentando una prueba nueva {#a-new-test-is-not-being-retried}
 
-### Se ha reintentado un test que no es nuevo
+Esto puede deberse a dos motivos:
 
-Si la biblioteca de Datadog no puede obtener la lista completa de tests conocidos, es posible que la biblioteca de Datadog reintente tests que no son nuevos. Existe un mecanismo para evitar que este error ralentice el pipeline de CI, pero si ocurre, ponte en contacto con [Datadog Support][9].
+* Esta prueba se ha ejecutado anteriormente.
+* Esta prueba tarda más de cinco minutos. Existe un mecanismo para no ejecutar Early Flake Detection en pruebas que son demasiado lentas, ya que reintentar estas pruebas podría causar retrasos significativos en los Pipelines de CI.
 
-## Referencias adicionales
+Por último, si su servicio de pruebas tiene más de 100 000 pruebas conocidas y su versión de la biblioteca de Datadog no admite la paginación en el punto de conexión de pruebas conocidas, la biblioteca no puede obtener la línea base de pruebas conocidas y no se identifica ninguna prueba como nueva. Para evitar esto, actualice a la versión más reciente del rastreador.
+
+### Se reintentó una prueba que no es nueva {#a-test-was-retried-that-is-not-new}
+
+Si una prueba no ha estado activa durante más de 14 días, podría volver a identificarse como nueva.
+
+Si la biblioteca de Datadog no puede obtener la lista completa de pruebas conocidas, es posible que la biblioteca de Datadog reintente pruebas que no son nuevas. Existe un mecanismo para evitar que este error ralentice el pipeline de CI, pero, si sucede, comuníquese con [Soporte de Datadog][9].
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -141,6 +157,6 @@ Si la biblioteca de Datadog no puede obtener la lista completa de tests conocido
 [4]: /es/pr_gates/
 [5]: /es/pr_gates/setup
 [6]: /es/tests
-[7]: https://app.datadoghq.com/ci/settings/test-optimization
+[7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /es/tests/explorer/
 [9]: /es/help/
