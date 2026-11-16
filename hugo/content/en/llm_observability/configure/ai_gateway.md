@@ -25,7 +25,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Give callers a stable model identifier with [routing rules](#route-requests-with-routing-rules) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](#control-model-access)
 - Track and cap spend with [budgets](#set-budgets)
-- Cap requests and tokens per minute with [rate limits](#set-rate-limits)
+- Cap requests, tokens, and spend over rolling windows with [rate limits](#set-rate-limits)
 - Investigate requests with spans in Agent Observability
 
 ## Prerequisites
@@ -212,7 +212,7 @@ The budget list shows active budgets, tracked spend, budgets at risk, and **Untr
 Rate limits are in Preview. To enable them for your organization, contact your Customer Success Manager.
 {{< /callout >}}
 
-A rate limit caps how many requests, input tokens, or output tokens matching AI Gateway traffic can use per minute. Use rate limits to keep a runaway agent or script from using up your provider quota, to share provider capacity between teams, or to cap traffic to an expensive model. [Budgets](#set-budgets) cap spend over a day, week, or month; rate limits cap traffic within a minute.
+A rate limit caps matching AI Gateway requests, input tokens, output tokens, or spend over a rolling window. Use rate limits to keep a runaway agent or script from using up your provider quota, to share provider capacity between teams, or to cap traffic to an expensive model. [Budgets](#set-budgets) cap spend over a day, week, or month; rate limits cap traffic over rolling windows from one minute to 24 hours.
 
 ### Create a rate limit
 
@@ -230,10 +230,10 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 
 ### How rate limits are counted
 
-- Each limit applies to a rolling 60-second window, not to calendar minutes.
-- All matching traffic shares one limit. For example, a team rate limit of 600 requests per minute allows 600 requests per minute for the whole team, not for each member.
+- Per-minute limits apply to a rolling 60-second window. Longer windows are also available. See [Set and Enforce AI Gateway Rate Limits][17].
+- A shared rule pools matching traffic into one allowance. For example, a shared team rule of 600 requests per minute gives the whole team 600 requests. Per-value rules give each matching value its own allowance.
 - A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has available capacity.
-- Tokens count when a response completes, so requests already in progress can take token usage over a limit.
+- Tokens and cost count when a response completes, so requests already in progress can take usage over a limit.
 - A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM_SLUG>`. Use the slug of a team the caller belongs to. Without the header, it applies to requests from users who directly belong to the team.
 - If a request falls back to another destination, it counts once against each rate limit.
 - Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
@@ -250,17 +250,17 @@ When a rate limit in Enforce mode rejects a request, AI Gateway returns HTTP `42
 | `Retry-After` | Seconds until the request fits within the rate limit. |
 | `X-Ai-Gateway-Error-Code` | `gateway_rate_limit`. A provider `429` does not include this header. |
 | `X-Ai-Gateway-Ratelimit-Id` | The ID of the rate limit that rejected the request. |
-| `X-Ai-Gateway-Ratelimit-Limit-<METRIC>` | The per-minute limit that was exceeded. |
+| `X-Ai-Gateway-Ratelimit-Limit-<METRIC>` | The allowance that was exceeded. |
 | `X-Ai-Gateway-Ratelimit-Remaining-<METRIC>` | `0`. |
 | `X-Ai-Gateway-Ratelimit-Reset-<METRIC>` | Time until the request fits, for example `12s`. |
 
-`<METRIC>` is `Requests`, `Input-Tokens`, or `Output-Tokens`, depending on which limit was exceeded. For example, a request that exceeds a requests-per-minute limit returns `X-Ai-Gateway-Ratelimit-Limit-Requests`.
+`<METRIC>` is `Requests`, `Input-Tokens`, `Output-Tokens`, or `Cost`, depending on which limit was exceeded. For example, a request that exceeds a requests-per-minute limit returns `X-Ai-Gateway-Ratelimit-Limit-Requests`.
 
 Clients that retry on `429` should wait for the `Retry-After` duration before they retry.
 
 ### Monitor rate limit usage
 
-The rate limit list shows, for each rate limit, current usage against each limit in the rolling 60-second window, its status, and the number of requests it limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
+The rate limit list shows, for each rate limit, usage against its configured windows, its status, and the number of requests it limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
 
 | Status | Meaning |
 |---|---|
@@ -270,6 +270,8 @@ The rate limit list shows, for each rate limit, current usage against each limit
 | Would limit | An Alert mode rate limit is full. Requests continue. |
 
 The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
+
+For longer windows, spend limits, independent allowances, and API verification steps, see [Set and Enforce AI Gateway Rate Limits][17].
 
 ## Observe gateway activity {#observe-ai-gateway-activity}
 
@@ -443,3 +445,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+
+[17]: /llm_observability/configure/ai_gateway_rate_limits/
