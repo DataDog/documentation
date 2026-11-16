@@ -433,7 +433,7 @@ For each pod, Datadog evaluates instrumentation rules in the following order and
 
 If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
-Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For the full order, see the [Configuration precedence](#configuration-precedence) section.
+<div class="alert alert-info">Pod SDK annotations and <code>DatadogInstrumentation</code> resources take precedence over instrumentation rules, regardless of the default behavior. For the full order, see the <a href="#configuration-precedence">Configuration precedence</a> section.</div>
 
 #### Exceptions to instrumentation rules
 
