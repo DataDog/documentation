@@ -162,7 +162,7 @@ After you apply the updated custom resource, the Operator rolls out a new Agent 
 
 Current Operator versions don't install or configure the Full-Host Profiler seccomp profile automatically. A future Operator version is expected to configure seccomp by default.
 
-Use this only if you already manage node-local seccomp profiles or want to add the extra hardening manually. The profile is available at `/etc/dd-host-profiler/seccomp.json` inside the Full-Host Profiler image and must be copied to `/var/lib/kubelet/seccomp/host-profiler.json` on every node.
+Enable seccomp only if you already manage node-local seccomp profiles or want to add the extra hardening manually. The profile is available at `/etc/dd-host-profiler/seccomp.json` inside the Full-Host Profiler image and must be copied to `/var/lib/kubelet/seccomp/host-profiler.json` on every node.
 
 Then add `seccompProfile` to the same `host-profiler` container override in your `DatadogAgent` custom resource:
 
