@@ -25,7 +25,6 @@ The L1/L7 Map is in Preview. Complete the form to request access.
 
 <!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DOWN, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
 
-
 ## Overview
 
 The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination. One search covers services, containers, pods, and hosts, so you can investigate across products without using each product's query syntax.
@@ -49,15 +48,13 @@ The L1/L7 Map has no Agent version requirement of its own. It builds the map fro
 | [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
 | [Network Device Monitoring][6] (NDM) | No | Device details for a network path hop that is a monitored network device. |
 
+Before you use the map, open CNM and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in Network Path.
+
 <!-- TODO: Confirm the Preview enrollment process and whether any RBAC permissions are required to view the map. -->
 
-## Set up the L1/L7 Map
+## Explore the L1/L7 Map
 
-1. [Set up Cloud Network Monitoring][8] on the workloads you want to investigate.
-1. In CNM, check that traffic appears for a resource or source/destination pair that you want to investigate.
-1. Optionally, set up the other products in the [Prerequisites](#prerequisites) section to add context to the map. If you set up Network Path, check that the path between your source and destination appears in Network Path.
-1. Navigate to [**Network Monitoring > L1/L7**][7].
-1. Select a resource and a time frame in which CNM observed traffic. Check that the resource's composition stack and connections appear on the map.
+To open the map, navigate to [**Network Monitoring > L1/L7**][7].
 
 <!-- TODO: Confirm final navigation path and URL.
 
@@ -74,8 +71,6 @@ You can also open the map from other Datadog products. When you open the map fro
 | Containers | The **Network** tab of a container's side panel. |
 | Infrastructure List | The **Network** tab of a host's side panel. |
 -->
-
-## Explore the L1/L7 Map
 
 ### Investigation modes
 
@@ -207,6 +202,13 @@ The side pane shows the status of the source and the destination, the network si
 
 <!-- TODO: Add screenshot of the network path segment hover summary. -->
 
+## Limitations
+
+- You cannot start an investigation from a network device. Network devices appear only as hops on a network path.
+- The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][13].
+- The map shows only what Datadog observed during the selected time frame. A missing connection or hop does not mean that an outage occurred or that no dependency exists.
+- The map does not compare forward and reverse paths, compare paths over time, detect route changes, or correlate deployments with network changes.
+
 ## Troubleshooting
 
 ### The map is not available
@@ -263,3 +265,4 @@ Compare the same resource or pair over the same time frame, and check which sign
 [10]: /network_monitoring/network_path/setup/
 [11]: /network_monitoring/devices/setup/
 [12]: /help/
+[13]: /network_monitoring/devices/topology/
