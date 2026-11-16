@@ -35810,6 +35810,8 @@ components:
           description: Name of the Custom Costs file.
           example: "my_file.json"
           type: string
+        preview_unavailable_reason:
+          $ref: "#/components/schemas/CustomCostsFilePreviewUnavailableReason"
         provider_names:
           description: Providers contained in the Custom Costs file.
           items:
@@ -35841,6 +35843,15 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFilePreviewUnavailableReason:
+      description: >-
+        Reason the content of the Custom Costs file is not returned. Only set when `content` is omitted.
+      enum:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      example: CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      type: string
+      x-enum-varnames:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
     CustomCostsFileUpdateAttributes:
       description: Attributes of a Custom Costs file that can be updated.
       properties:
@@ -35915,11 +35926,12 @@ components:
       description: Metadata of the user that has uploaded the Custom Costs file.
       properties:
         email:
-          description: The name of the Custom Costs file.
+          description: >-
+            Handle of the user. This is usually the user's email address, but can be another identifier (for example, a UUID for a service account).
           example: "email.test@datadohq.com"
           type: string
         icon:
-          description: The name of the Custom Costs file.
+          description: Icon of the user.
           example: "icon.png"
           type: string
         name:
@@ -175805,13 +175817,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175884,13 +175896,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175920,13 +175932,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175981,13 +175993,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
