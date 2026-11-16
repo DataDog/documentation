@@ -442,7 +442,7 @@ The following pods are not instrumented, even if they match an allow rule:
 - Pods in namespaces listed in `disabledNamespaces`
 - Pods labeled `admission.datadoghq.com/enabled: "false"`
 
-Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For example, with {{< ui >}}Block everything else{{< /ui >}}, a pod with SDK annotations, or a workload whose `DatadogInstrumentation` resource enables APM, is still instrumented. For the full order, see the [Configuration precedence](?tab=datadoginstrumentationcrdv785#configuration-precedence) section.
+Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For example, with {{< ui >}}Block everything else{{< /ui >}}, a pod with SDK annotations, or a workload whose `DatadogInstrumentation` resource enables APM, is still instrumented. For the full order, see the [Configuration precedence](#configuration-precedence) section.
 
 #### Supported Kubernetes attributes
 
@@ -724,17 +724,9 @@ ddTraceConfigs:
 
 The referenced label must exist on the application pods. For more SDK options, see [Library configuration][7].
 
-##### Configuration precedence
+##### Precedence over other targeting methods
 
-For pods eligible for admission, the Cluster Agent selects APM configuration in this order, from highest to lowest precedence:
-
-1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
-1. The workload's `DatadogInstrumentation` APM configuration.
-1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled.
-1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`. These settings are ignored if the [default behavior](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior) for instrumentation rules is {{< ui >}}Block everything else{{< /ui >}} or {{< ui >}}Allow everything else{{< /ui >}}.
-1. Cluster-wide instrumentation, when enabled without `apm.instrumentation.targets` and without instrumentation rules in Datadog.
-
-A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with DDI, remove conflicting annotations from the pod spec.
+A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with DDI, remove conflicting annotations from the pod spec. For the full order, see the [Configuration precedence](#configuration-precedence) section.
 
 [7]: /tracing/trace_collection/library_config/
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
@@ -909,6 +901,16 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Configuration precedence
+
+For pods eligible for admission, the Cluster Agent selects APM configuration in this order, from highest to lowest precedence:
+
+1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
+1. The workload's `DatadogInstrumentation` APM configuration.
+1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled.
+1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`. These settings are ignored if the [default behavior](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior) for instrumentation rules is {{< ui >}}Block everything else{{< /ui >}} or {{< ui >}}Allow everything else{{< /ui >}}.
+1. Cluster-wide instrumentation, when enabled without `apm.instrumentation.targets` and without instrumentation rules in Datadog.
 
 ### Change the default image registry
 
