@@ -102,8 +102,6 @@ For more information, see [Bits AI Settings][4].
 
 [1]: /account_management/billing/ai_credits/
 [2]: /bits_ai/bits_chat/
-[3]: /bits_ai/bits_code/automations/
 [4]: /bits_ai/bits_settings/
 [8]: /bits_ai/bits_autonomous_operations/
 [10]: /actions/agents/
-[11]: /actions/workflows/
