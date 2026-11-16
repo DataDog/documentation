@@ -15,7 +15,7 @@ Supply Chain Firewall is in preview. Preview access is required to use the SCFW 
 
 Supply Chain Firewall (SCFW) prevents malicious open source packages from entering your development environments at the point of installation, before they reach repositories or CI/CD pipelines.
 
-SCFW wraps supported package manager commands (`npm`, `pip`, and `poetry`). When you run an installation command through SCFW, it evaluates the package against Datadog Security Research's [threat intelligence feed][1] of known-malicious and compromised open source packages as well as [custom allow and block policies](#organization-policies) you configure for your organization.
+SCFW wraps supported package manager commands (`npm`, `pip`, and `poetry`). SCFW evaluates each package in an installation command against the Datadog Security Research [threat intelligence feed][1] of known-malicious and compromised open source packages. SCFW also evaluates each package against [custom allow and block policies](#organization-policies) you configure for your organization.
 
 <!-- TODO: Confirm that this is the full list of Datadog checks on each package:
 - Datadog threat intelligence feed (malicious packages)
@@ -138,13 +138,13 @@ scfw doctor
 
 ## Organization policies
 
-Organization policies adapt SCFW decisions to your security requirements, such as blocking a package version your team doesn't trust or allowing a package your team has vetted. Editing the organization policy is optional, and an admin typically sets the policy once for the whole organization.
+Organization policies adapt SCFW to your security requirements. For example, a policy can block a package version your team doesn't trust, or allow a package your team has vetted.
 
-Each Datadog organization has one organization policy, defined in the same organization as the SCFW API and application keys.
+Each Datadog organization has one organization policy, defined in the same organization as the SCFW API and application keys. Editing the organization policy is optional, and an admin typically sets the policy once for the whole organization.
 
 <!-- TODO: Confirm that the SCFW GitHub Action uses the organization policy from the same organization as its API and application keys. -->
 
-The organization policy adds to the checks Datadog runs on each package. When the organization policy and a Datadog check disagree about a package, the organization policy takes precedence. For example, if a Datadog check flags a package as malicious, and the organization policy has an allow rule for the package, SCFW allows the installation.
+The organization policy adds to the checks Datadog runs on each package. When the organization policy and a Datadog check disagree about a package, the organization policy takes precedence. For example, a Datadog check might flag a package as malicious while the organization policy has an allow rule for the package. In that case, SCFW allows the installation.
 
 <!-- TODO: Confirm which rule wins when a package matches both an allow rule and a block rule in the same organization policy. -->
 
@@ -159,7 +159,7 @@ Edit the organization policy to block or allow specific package versions, and to
 
 <!-- TODO: Confirm which Datadog permission is required to edit the organization policy. No permission mentions SCFW or Supply Chain Firewall. -->
 
-1. In the Datadog organization where you created the SCFW API and application keys, open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Supply Chain Firewall Settings{{< /ui >}}.
+1. In the organization with your SCFW API and application keys, open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Supply Chain Firewall Settings{{< /ui >}}.
 1. In the {{< ui >}}Policy Configuration{{< /ui >}} editor, edit the policy YAML. For details about available fields, see the [Policy schema](#policy-schema) section.
 
    To discard your edits and restore the default policy, click {{< ui >}}Reset to Default{{< /ui >}}.
@@ -198,7 +198,7 @@ Each rule in `policies.block` or `policies.allow` accepts these fields:
 
 An example policy shows how behaviors and rules fit together in one organization policy. Start from the example instead of an empty editor, and replace the placeholder package names with your own.
 
-This example policy warns about packages published in the last 48 hours, blocks every version of one npm package, and allows one range of versions of a PyPI package:
+This example policy warns about packages published in the last 48 hours. The example also blocks every version of one npm package and allows a range of versions of one PyPI package:
 
 ```yaml
 schema-version: 1
@@ -242,7 +242,7 @@ The `SCFW_ON_WARNING` environment variable (`allow` or `block`) has the same eff
 
 ## Investigate installation outcomes
 
-When SCFW blocks a package your team needs, or allows a package you expected SCFW to block, the SCFW Explorer shows which Datadog checks and organization policy rules decided the outcome.
+SCFW might block a package your team needs, or allow a package you expected SCFW to block. The SCFW Explorer shows which Datadog checks and organization policy rules decided each outcome.
 
 The SCFW Explorer includes every installation command inspected by an SCFW CLI configured with Datadog credentials.
 
