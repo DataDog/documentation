@@ -22,7 +22,7 @@
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-4. _(Optional)_ Set the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `traceSampleRate` parameter in the Datadog Ktor Plugin configuration to keep a defined percentage of the backend traces. If not set, the Datadog Ktor Plugin sends 20% of the traces coming from application requests to Datadog. This default is lower than the Android and iOS SDK defaults.
 
      To keep 100% of backend traces:
     ```kotlin
