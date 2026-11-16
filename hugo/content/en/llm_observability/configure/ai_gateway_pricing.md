@@ -3,6 +3,10 @@ title: Configure AI Gateway Model Pricing
 description: Review automatic model prices, set custom token rates, and verify the cost used by AI Gateway budgets and reporting.
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
+
 ## Overview
 
 AI Gateway uses model prices to estimate request cost, report spend, and enforce spending controls. Review the applied price before relying on a budget or spend rate limit, especially for manually added models and custom provider endpoints.
@@ -18,7 +22,7 @@ AI Gateway uses model prices to estimate request cost, report spend, and enforce
 
 1. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][3].
 2. Find the model and its provider account. The same model can have a different price on another provider account.
-3. Review its pricing status. Open {{< ui >}}Set Pricing{{< /ui >}} for a model without a price or {{< ui >}}Override{{< /ui >}} to review an existing override.
+3. Review its pricing status. Click {{< ui >}}Set Pricing{{< /ui >}} for a model without a price. For a model with an automatic price or existing override, click {{< ui >}}Override{{< /ui >}}.
 4. In {{< ui >}}Model pricing{{< /ui >}}, review the {{< ui >}}Applied price{{< /ui >}} and the available rate tables. Check input, output, cache-read, and cache-write rates, and any context-size or service-tier conditions.
 
 An automatic price can vary with the request's context size, mode, or service tier. A rate table's condition explains when that price applies. Check those conditions before comparing the displayed rates with a provider bill.
@@ -29,7 +33,7 @@ A missing price is different from a zero price. An explicit zero rate means that
 
 Use a custom price when your contract differs from the automatic price or the model has no automatic price.
 
-1. In the model's pricing dialog, enter the token rates that apply to your provider agreement.
+1. In the [Model Catalog][3], find the model and provider account. Click {{< ui >}}Set Pricing{{< /ui >}} if it has no price, or {{< ui >}}Override{{< /ui >}} otherwise. Enter the token rates that apply to your provider agreement.
 2. Review all token categories, including cached input. Use zero only when that category has no charge.
 3. Click {{< ui >}}Save{{< /ui >}}, then reopen the pricing dialog to confirm the applied price.
 
@@ -39,15 +43,15 @@ Custom rates are used as entered. The provider's cost multiplier does not also a
 
 ### Set a custom price with the API
 
-Use the [AI Gateway API][4] to read or change pricing for a model on a specific provider account. `<PROVIDER_ID>` is the provider account's API ID, not its request slug. `<MODEL_ID>` is the canonical model ID within that provider. URL-encode it as a path component if it contains `/` or other reserved characters.
+Use the [AI Gateway API][4] to read or change pricing for a model on a specific provider account. `<PROVIDER_ID>` is the provider account's API ID, not its request slug. Get it from the matching provider's `data[].id` in the `GET /api/v2/providers` response. `<MODEL_ID>` is the canonical model ID within that provider. URL-encode it as a path component if it contains `/` or other reserved characters.
 
-The following example uses illustrative rates, not recommended prices. Replace the identifiers and credentials before running it. The site selector updates the API host.
+Replace the identifiers, credentials, and rate placeholders before running this example. Enter each rate as a number in USD per million tokens. The site selector updates the API host:
 
 ```shell
 curl -X PUT "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/providers/<PROVIDER_ID>/models/<MODEL_ID>/pricing" \
   -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
   -d '{
     "data": {
       "type": "model-pricing",
@@ -56,10 +60,10 @@ curl -X PUT "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/p
           "version": 1,
           "source": {"type": "custom"},
           "rates": {
-            "non_cached_input_cost_per_mtok": 1.0,
-            "cache_write_cost_per_mtok": 1.25,
-            "cache_read_cost_per_mtok": 0.1,
-            "output_cost_per_mtok": 4.0
+            "non_cached_input_cost_per_mtok": <INPUT_RATE>,
+            "cache_write_cost_per_mtok": <CACHE_WRITE_RATE>,
+            "cache_read_cost_per_mtok": <CACHE_READ_RATE>,
+            "output_cost_per_mtok": <OUTPUT_RATE>
           }
         }
       }
@@ -75,8 +79,8 @@ To return to the available automatic price, open the model's pricing dialog and 
 
 ```shell
 curl -X DELETE "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/providers/<PROVIDER_ID>/models/<MODEL_ID>/pricing" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
 After removal, inspect the applied price again. Removing an override does not guarantee that an automatic price exists. If none is available, the model becomes unpriced.
@@ -87,8 +91,8 @@ Read the effective pricing state for a model with:
 
 ```shell
 curl "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/providers/<PROVIDER_ID>/models/<MODEL_ID>/pricing" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
 Review these response fields:
@@ -108,9 +112,9 @@ A stale automatic price can be a last-known price rather than a newly validated 
 ## Verify cost accounting
 
 1. Record the model's applied rates and multiplier.
-2. Send a small request through AI Gateway using that provider and model. Use a distinct application tag to find it again.
-3. Open the request's Gateway span in [Agent Observability][5]. Compare the recorded token usage and estimated cost with the rates for the request's mode and context size.
-4. If a budget covers the request, confirm its spend increases in the expected counter after the response completes.
+2. Send a small request through AI Gateway using that provider and model. Add a custom tag header, such as `x-dd-tag-pricing_check: <VALUE>`, to find the request again.
+3. Open the request's Gateway span in Agent Observability. See [Verify the request][5] on the AI Gateway page. Compare the recorded token usage and estimated cost with the rates for the request's mode and context size.
+4. If a budget covers the request, confirm its tracked spend increases after the response completes. For a per-value budget, inspect the instance matching the request's user, team, or tag values.
 5. If you changed or removed an override, repeat with a new request and confirm the new effective price is used.
 
 Gateway cost is an estimate based on recorded usage and the configured price. Provider bills can include contract terms, credits, subscription allowances, or charges outside the token rates. Use the provider's billing records to reconcile the final charge.
@@ -123,7 +127,7 @@ Gateway cost is an estimate based on recorded usage and the configured price. Pr
 | A manually added model has no price | Configure the actual token rates for that model, if the provider bills per token. |
 | Cost differs after applying a custom price | Check all four rate categories. Custom prices bypass the provider multiplier. |
 | Pricing disappears after removing an override | Check whether the provider and canonical model have an automatic price. Restore valid custom rates if needed. |
-| A spend rate limit rejects an unpriced model | Supply a usable price before relying on enforced spend limits. |
+| HTTP `400` with `rate_limit_pricing_unavailable` | Set a usable price for a model billed per token, choose a priced model, or switch the spend rate limit to Alert mode. |
 
 [1]: /llm_observability/configure/ai_gateway/#add-a-provider
 [2]: /account_management/api-app-keys/
