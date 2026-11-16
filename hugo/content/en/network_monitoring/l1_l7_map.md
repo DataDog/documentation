@@ -18,7 +18,7 @@ site_support_id: network_l1_l7_map
 ---
 
 {{< callout url="TODO_PREVIEW_FORM_URL" btn_hidden="false" header="Join the Preview!">}}
-The L1/L7 Map is in Preview. If you are interested in this feature, complete the form to request access.
+The L1/L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
@@ -112,8 +112,8 @@ Resources are ranked by status, so the resources with the most severe status app
 
 Map status is based on the following network signals:
 
-- **From CNM**: Round-trip time (RTT), TCP retransmits, TCP failures, and throughput.
-- **From Network Path**: Reachability, end-to-end latency, and packet loss.
+- **From CNM**: Round-trip time (RTT), TCP retransmits, TCP failures, and throughput
+- **From Network Path**: Reachability, end-to-end latency, and packet loss
 
 The map shows only the signals that are available for each resource or connection.
 
