@@ -155,8 +155,8 @@ You can also open the map from other Datadog products. When you open the map fro
 
 On the L1/L7 page, select an investigation mode:
 
-- **Single resource**: Start with one service, container, pod, or host. The map shows what the resource runs on, what runs on it, and the resources it communicates with. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
-- **Source/destination pair**: Select a source and a destination. The map shows the resources that each one runs on, the traffic observed between them, and the hop-by-hop network path, if available. Search for and select a **Source** and a **Destination**. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
+- **Single resource**: Start with one service, container, pod, or host. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
+- **Source/destination pair**: Select a source and a destination. Search for and select a **Source** and a **Destination**. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
 
 {{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 landing page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
 
