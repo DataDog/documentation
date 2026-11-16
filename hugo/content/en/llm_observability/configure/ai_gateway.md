@@ -107,6 +107,8 @@ Set the `model` field in the request body to one of the following:
 - `<PROVIDER_SLUG>/<MODEL_ID>` to call a model on a specific provider.
 - `router/<RULE_SLUG>` to let a [routing rule](#route-requests-with-routing-rules) choose the destination.
 
+For native Gemini, OpenAI Decisions, and System One requests, see [Use native Gemini and decision APIs][19].
+
 ## Manage providers
 
 AI Gateway supports these model families on each provider. It also supports custom OpenAI-compatible endpoints.
@@ -443,3 +445,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+[19]: /llm_observability/configure/ai_gateway_inference_apis/
