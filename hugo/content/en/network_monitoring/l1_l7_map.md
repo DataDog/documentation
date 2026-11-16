@@ -48,7 +48,7 @@ The L1/L7 Map has no Agent version requirement of its own. It builds the map fro
 | [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
 | [Network Device Monitoring][6] | No | Device details for a network path hop that is a monitored network device. |
 
-Before you use the map, open CNM and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in Network Path.
+Before you use the map, open [CNM][14] and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in [Network Path][15].
 
 <!-- TODO: Confirm the Preview enrollment process and whether any RBAC permissions are required to view the map. -->
 
@@ -112,7 +112,7 @@ Map status is based on the following network signals:
 
 The map shows only the signals that are available for each resource or connection. Hover over a resource or connection to see which signal set its status.
 
-Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in APM, the Kubernetes Explorer, or the Infrastructure List.
+Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
 <!-- TODO: Confirm color meanings and the signals that determine status. -->
 
@@ -240,8 +240,8 @@ When you select an item on the map, the details pane shows that item instead:
 1. Set the time frame to when the issue started.
 1. Hover over the CNM connections between the two stacks to check their retransmits, TCP failures, and RTT.
 1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss.
-1. If a hop is a network device monitored by NDM, use the device details to continue the investigation.
-1. To examine the underlying data, click **View connections** to open the connections in CNM, or click **View connection in Network Path**.
+1. If a hop is a network device monitored by [NDM][6], use the device details to continue the investigation.
+1. To examine the underlying data, click **View connections** to open the connections in CNM, or click **View connection in Network Path** to open the path in the [Network Path path view][19].
 
 ## Limitations
 
@@ -261,16 +261,18 @@ Check that your organization has access to the Preview. If you still cannot acce
 The map is empty when CNM has no traffic data for the selected resource or pair during the selected time frame. An empty map can mean that CNM is not set up for the resource, or that the resource had no traffic. The map does not distinguish between these cases.
 
 1. If CNM is not set up for the workloads, [set up Cloud Network Monitoring][8].
-1. If CNM is set up, open the resource or pair in CNM and find a time frame with traffic. Select the same time frame on the map.
+1. If CNM is set up, open the resource or pair in [CNM][14] and find a time frame with traffic. Select the same time frame on the map.
 1. If CNM shows traffic but the map is still empty, contact [Datadog Support][12]. Include the resource names and the time frame.
 
 Network Path data on its own does not populate the map.
 
 ### A service, container, or pod is missing
 
-Check that the workload is monitored and that it appears in the corresponding product, such as APM, Containers, or the Kubernetes Explorer. If the service layer is missing, start the investigation from the host, pod, or container. Workloads that do not run in containers or on Kubernetes do not have container or pod layers.
+Check that the workload is monitored and that it appears in the corresponding product, such as [APM][2], the [Containers Explorer][18], or the [Kubernetes Explorer][16]. If the service layer is missing, start the investigation from the host, pod, or container. Workloads that do not run in containers or on Kubernetes do not have container or pod layers.
 
 If your environment uses CNM sidecar attribution, an app container whose traffic all goes through its sidecar container does not appear on the map. Its traffic appears on the sidecar container instead, and exploring the app container shows an empty map. Investigate the sidecar container or the pod instead.
+
+<!-- TODO: Link "CNM sidecar attribution" to its setup doc, if one exists. Ask the CNM team. -->
 
 ### A host appears as an IP address
 
@@ -278,7 +280,7 @@ The Datadog Agent is not installed on the host. [Install the Agent][9] on the ho
 
 ### A connection has no hop-by-hop path
 
-Check that [Network Path is set up][10] for the source and destination, and that it has results for the selected time frame. Open the pair in Network Path to confirm. Traffic in CNM does not mean that a Network Path test or a complete route exists for the same pair.
+Check that [Network Path is set up][10] for the source and destination, and that it has results for the selected time frame. Open the pair in [Network Path][15] to confirm. Traffic in CNM does not mean that a Network Path test or a complete route exists for the same pair.
 
 ### A hop appears as an IP address instead of a device
 
@@ -286,7 +288,7 @@ Check whether the device is monitored by [Network Device Monitoring][11]. If it 
 
 ### A status or metric is different in another product
 
-Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in APM or Infrastructure Monitoring. A missing value does not mean that the resource is healthy.
+Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or [Infrastructure Monitoring][20]. A missing value does not mean that the resource is healthy.
 
 <!-- TODO: Confirm empty-state behavior and in-app CTA copy with eng before Preview. -->
 
@@ -307,3 +309,10 @@ Compare the same resource or pair over the same time frame, and check which sign
 [11]: /network_monitoring/devices/setup/
 [12]: /help/
 [13]: /network_monitoring/devices/topology/
+[14]: https://app.datadoghq.com/network
+[15]: https://app.datadoghq.com/network/path
+[16]: /containers/monitoring/kubernetes_explorer/
+[17]: /infrastructure/list/
+[18]: /containers/monitoring/containers_explorer/
+[19]: /network_monitoring/network_path/path_view/
+[20]: /infrastructure/
