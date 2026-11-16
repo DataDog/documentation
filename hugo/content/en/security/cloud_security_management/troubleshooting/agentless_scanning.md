@@ -84,7 +84,7 @@ Agentless Scanning is not available in GovCloud and is not FIPS compliant. This 
 
 ## Scans run in a different region than your resources
 
-With Datadog-hosted scanning, Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For the scanning region for each Datadog site, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
+With Datadog-hosted scanning, Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For details, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
 
 ## Further reading
 
@@ -94,9 +94,9 @@ With Datadog-hosted scanning, Datadog scans your resources in the region of your
 [2]: https://app.datadoghq.com/security/csm/vm
 [3]: /remote_configuration
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#enterprise-networking-considerations
+[5]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods?agentless_scanner_hosting=self_hosted#enterprise-networking-considerations
 [6]: /security/cloud_security_management/vulnerabilities
-[7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods?agentless_scanner_hosting=self_hosted
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
 [9]: /account_management/rbac/permissions#api-and-application-keys
 [10]: https://app.datadoghq.com/organization-settings/remote-config

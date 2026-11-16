@@ -170,24 +170,9 @@ Datadog reads your disk contents in its scanning environment to analyze them. Da
 
 ### Data residency {#datadog-hosted-data-residency}
 
-Scans run in the region of the Datadog site that your organization uses, not in the region where your resources are located.
+Scans run in the region of the Datadog site that your organization uses, not in the region where your resources are located. For example, if your organization uses the EU1 site, Datadog scans your resources in the EU, regardless of which AWS region your resources are in.
 
-| Datadog site | Scanning region |
-|---|---|
-| US1 | AWS `us-east-1` |
-| US3 | Azure `westus2` |
-| US5 | Google Cloud `us-central1` |
-| EU1 | Google Cloud `europe-west3` (Frankfurt) |
-| AP1 | AWS `ap-northeast-1` |
-| AP2 | AWS `ap-southeast-2` |
-| UK1 | AWS `eu-west-2` |
-
-For example:
-
-- If your organization uses the EU1 site, Datadog processes your data in Frankfurt, inside the EU, regardless of which AWS region your resources are in.
-- If your organization uses the US1 site and your resources are in an EU region, Datadog reads those blocks in `us-east-1`. This is a cross-border data transfer. Review your privacy requirements before you enable scanning for these accounts.
-
-The cloud provider that processes your data can differ from the cloud provider that hosts your resources. For example, if your organization uses the EU1 site, Datadog reads the disk contents of your AWS resources on Google Cloud infrastructure in Frankfurt. If your policies restrict processing to a specific cloud provider, use self-hosted scanning.
+If your resources are in a different region than your Datadog site, scanning can involve a cross-border data transfer. Review your privacy requirements before you enable scanning for these accounts. If your data must be processed in your own cloud account or region, use self-hosted scanning.
 
 ### Cost {#datadog-hosted-cost}
 
@@ -197,7 +182,9 @@ There is no scanner infrastructure cost on your cloud provider bill and no addit
 
 You can enable [Sensitive Data Scanner][8] for Amazon S3 buckets during setup. Sensitive Data Scanner catalogs and classifies sensitive data in your cloud storage.
 
-<!-- TODO(DOCS-16346): Confirm with SME how Datadog-hosted scanning handles S3 object contents (where they are read, and that nothing is retained). -->
+With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in its scanning environment, in the same way as disk contents. Because buckets often hold more sensitive data than disks, review your data handling requirements before you enable Sensitive Data Scanner. Sensitive Data Scanner is optional: you can turn it off and still use Datadog-hosted scanning for vulnerabilities.
+
+<!-- TODO(DOCS-16346): Confirm with SME that Datadog doesn't retain S3 object contents after a scan, and where to turn off Sensitive Data Scanner after setup. -->
 
 <!-- TODO(DOCS-16346): Confirm with SME whether the On-Demand Scanning API works with Datadog-hosted scanning; if so, add an on-demand scanning section here. -->
 
@@ -216,10 +203,10 @@ You can enable [Sensitive Data Scanner][8] for Amazon S3 buckets during setup. S
 [9]: /security/cloud_security_management
 [10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
-[13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods?agentless_scanner_hosting=self_hosted
 [14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
-[16]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[16]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods?agentless_scanner_hosting=self_hosted
 [17]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#move-an-account-from-self-hosted-to-datadog-hosted-scanning?agentless_scanner_hosting=datadog_hosted
 [18]: /security/cloud_security_management/setup/agentless_scanning/enable?agentless_scanner_hosting=self_hosted
 [19]: /security/cloud_security_management/setup/agentless_scanning/enable?agentless_scanner_hosting=datadog_hosted
