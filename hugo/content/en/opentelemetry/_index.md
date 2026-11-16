@@ -89,14 +89,16 @@ For more information, read [Feature Compatibility][9].
 
 ## Instrument your applications
 
-Choose one SDK approach for each application process:
+Datadog supports two families of OpenTelemetry SDKs. Both implement OpenTelemetry APIs and support OTLP; availability varies by language and signal.
 
-- **[Upstream OpenTelemetry SDKs][11]**: Use the OpenTelemetry API, SDK, and instrumentation maintained by the OpenTelemetry project.
-- **[Datadog OpenTelemetry SDKs][12]**: Use a Datadog SDK with the OpenTelemetry API, or export traces from supported Datadog SDKs in OTLP format.
+Choose one OpenTelemetry SDK approach for each application process:
 
-Telemetry routing is a separate choice from SDK installation. Review what is already attached to each process before changing the SDK or export route, and avoid duplicate instrumentation.
+- **[Upstream OpenTelemetry SDKs][11]** are maintained by the OpenTelemetry project. Choose them when you want the upstream SDK release life cycle, instrumentation ecosystem, and standard OpenTelemetry Operator auto-instrumentation.
+- **[Datadog OpenTelemetry SDKs][12]** are maintained by Datadog. Choose them when you want Datadog-managed deployment with Single Step Instrumentation or additional Datadog-specific capabilities, such as Continuous Profiler, Data Streams Monitoring, and App and API Protection.
 
-For more information, see [Instrument Your Applications][8].
+If your application is already instrumented, keep its existing SDK unless you need a different deployment model or feature set. Telemetry routing is a separate choice from SDK installation.
+
+For more information, see [Instrument Your Applications][8] and [Feature Compatibility][9].
 
 ## Send OpenTelemetry data to Datadog
 

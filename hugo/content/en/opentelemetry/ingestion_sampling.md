@@ -172,7 +172,7 @@ For more information, see [Unified Service Tagging][18].
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
-[17]: /opentelemetry/reference/trace_ids/#128-bit-trace-ids
+[17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
 [18]: /getting_started/tagging/unified_service_tagging/#opentelemetry
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector

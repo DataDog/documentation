@@ -23,7 +23,7 @@ Datadog supports two approaches for application instrumentation with OpenTelemet
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_otel_sdks/" >}}
     <h3>Using Datadog OpenTelemetry SDKs</h3>
-    Use a Datadog SDK with the OpenTelemetry API, or configure supported Datadog SDKs to export traces in OTLP format. These two interoperability features can be enabled independently.
+    Use OpenTelemetry SDKs maintained by Datadog. They implement OpenTelemetry APIs and support OTLP, with availability varying by language and signal. Choose this approach for Datadog-managed deployment with Single Step Instrumentation or additional Datadog-specific capabilities.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

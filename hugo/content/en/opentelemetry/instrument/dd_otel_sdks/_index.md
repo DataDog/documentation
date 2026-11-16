@@ -1,6 +1,6 @@
 ---
 title: Using Datadog OpenTelemetry SDKs
-description: Use Datadog SDKs with the OpenTelemetry API, or export traces from supported Datadog SDKs in OTLP format.
+description: Use OpenTelemetry SDKs maintained by Datadog, with support for OpenTelemetry APIs, OTLP, and additional Datadog-specific capabilities.
 aliases:
     - /opentelemetry/instrument/dd_sdks/
 further_reading:
@@ -17,7 +17,9 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-In this guide, **Datadog OpenTelemetry SDKs** refers to Datadog SDKs used with one or both of the following interoperability features:
+Datadog OpenTelemetry SDKs are OpenTelemetry SDKs maintained by Datadog. They implement OpenTelemetry APIs and support OTLP, with availability varying by language and signal. They also provide access to additional Datadog-specific capabilities, such as Continuous Profiler, Data Streams Monitoring, and App and API Protection.
+
+This guide covers two capabilities that you can configure independently:
 
 - **OpenTelemetry API support** lets your application use vendor-neutral OpenTelemetry API calls while a Datadog SDK provides the implementation.
 - **OTLP trace export** lets a supported Datadog SDK send traces in OTLP format to an OTLP-compatible receiver. This feature is in Preview.
