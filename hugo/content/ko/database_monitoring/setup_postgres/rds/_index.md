@@ -10,6 +10,9 @@ further_reading:
 - link: /database_monitoring/guide/parameterized_queries/
   tag: 설명서
   text: SQL 쿼리 파라미터 값 캡처
+- link: https://www.datadoghq.com/architecture/dbm-quick-install-aws-rds-postgres/
+  tag: 아키텍처 센터
+  text: AWS RDS용 Datadog DBM 빠른 설치
 title: Amazon RDS 관리형 Postgres에서 Database Monitoring 설정
 ---
 Database Monitoring은 쿼리 메트릭, 쿼리 샘플, 계획 설명, 데이터베이스 상태, 대체 작동 및 이벤트를 노출하여 Postgres 데이터베이스에 대한 심층적인 가시성을 제공합니다.
@@ -29,7 +32,7 @@ Agent는 읽기 전용 사용자로 로그인하여 데이터베이스에서 직
 ## 시작 전 참고 사항{#before-you-begin}
 
 지원되는 PostgreSQL 버전
-: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 지원되는 Agent 버전
 : 7.36.1 이상
@@ -209,6 +212,38 @@ LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
+
+### 열 통계 함수 생성{#create-the-column-statistics-function}
+
+**모든 데이터베이스**에 다음 함수를 생성하여 Agent가 `pg_stats`에서 열 수준 표 통계를 수집할 수 있도록 합니다:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+함수가 존재하면 Postgres 인스턴스 설정에서 수집을 활성화합니다:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+조정 옵션은 [고급 구성][15]을 참조하십시오.
 
 ### 비밀번호 안전하게 저장 {#securely-store-your-password}
 {{% dbm-secret %}}
@@ -647,6 +682,7 @@ DBM의 데이터베이스 텔레메트리와 함께 CPU와 같은 AWS의 인프�
 [12]: https://app.datadoghq.com/databases
 [13]: /ko/integrations/amazon_rds
 [14]: /ko/database_monitoring/troubleshooting/?tab=postgres
+[15]: /ko/database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
 [15]: https://www.postgresql.org/docs/current/sql-explain.html
 [16]: https://www.postgresql.org/docs/current/auto-explain.html
 [17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups.html

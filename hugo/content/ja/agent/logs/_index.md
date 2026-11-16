@@ -2,22 +2,22 @@
 description: Datadog Agent を使用してログを Datadog に送信します
 further_reading:
 - link: agent/logs/agent_tags/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Agent タグは自動的にログに追加されます
 - link: agent/logs/advanced_log_collection/#filter-logs
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Datadog に送信されるログの絞り込み
 - link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-  tag: よくあるご質問
+  tag: ドキュメント
   text: ログの機密データのスクラビング
 - link: agent/logs/advanced_log_collection/#multi-line-aggregation
-  tag: よくあるご質問
+  tag: ドキュメント
   text: 複数行のログの集約
 - link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
-  tag: よくあるご質問
+  tag: ドキュメント
   text: ワイルドカードを使用したディレクトリの追跡
 - link: agent/logs/advanced_log_collection/#global-processing-rules
-  tag: よくあるご質問
+  tag: ドキュメント
   text: グローバルな処理ルール
 title: ホスト Agent ログの収集
 ---
@@ -38,7 +38,7 @@ logs_config:
     force_use_http: true
 {{< /code-block >}}
 
-使用可能なすべての構成オプションの詳細については、[サンプル config_template.yaml ファイル][6] を参照してください。
+利用可能なすべての設定オプションについては、お使いのオペレーティングシステムの[Agent設定ファイルの例][6]を参照してください。
 
 <div class="alert alert-info">Agent v6.19/v7.19 以降、使用されるデフォルトのトランスポートは HTTPS トランスポートです。詳細については、<a href="/agent/logs/log_transport/">Agent トランスポート</a>.</div>を参照してください。
 
@@ -61,6 +61,8 @@ Datadog Agent v6 は、収集したログをファイル、ネットワーク (T
 5. [Agent の status サブコマンド][9] を実行し、Checks セクションに `<CUSTOM_LOG_SOURCE>` があることを確認します。
 
 権限エラーがある場合は、[ログファイルを追跡する権限の問題][10] を参照してトラブルシューティングを行ってください。
+
+各ホスト上のファイルを編集することなく、複数のAgentにカスタムログ収集設定を一括でデプロイするには、Fleet Automationを使用した[カスタムログの設定][15]を参照してください。
 
 以下に、カスタムログ収集設定の例を示します。
 
@@ -256,7 +258,7 @@ file および journald テーラータイプの両方で、`end` または `beg
 [3]: /ja/containers/kubernetes/log/
 [4]: /ja/containers/docker/log/
 [5]: /ja/agent/configuration/agent-configuration-files/
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[6]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 [7]: /ja/agent/logs/log_transport/
 [8]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [9]: /ja/agent/configuration/agent-commands/#agent-status-and-information
@@ -265,3 +267,4 @@ file および journald テーラータイプの両方で、`end` または `beg
 [12]: /ja/getting_started/tagging/unified_service_tagging
 [13]: /ja/metrics/custom_metrics/#overview
 [14]: /ja/getting_started/tagging/
+[15]: /ja/agent/fleet_automation/configure_logs/

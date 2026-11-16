@@ -6,6 +6,9 @@ further_reading:
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
+- link: https://www.datadoghq.com/blog/service-remapping/
+  tag: ブログ
+  text: サービスリマッピングを使用してサービスデータを包括的に接続する
 title: 推測サービス
 ---
 ## 概要 {#overview}
@@ -14,9 +17,9 @@ Datadog は、インスツルメンテーションが実行されたサービス
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="サービス詳細画面の依存関係マップ" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 
-データベース、キュー、サードパーティ API などのエンティティタイプでエントリを絞り込んで、[Catalog][1] 内の推測サービスを調べます。各[サービス詳細画面][2]は、調査しているサービスの種類に合わせてカスタマイズされています。たとえば、データベースのサービス詳細画面には、データベース固有のインサイトが表示され、[Database Monitoring][3] を使用している場合は、データベースの監視データも含まれます。
+データベース、キュー、サードパーティ API などのエンティティタイプでエントリを絞り込んで、[Catalog][1] 内の推測サービスを調べます。各 [サービス詳細画面][2] は、調査しているサービスの種類に合わせてカスタマイズされています。たとえば、データベースのサービス詳細画面には、データベース固有のインサイトが表示され、[Database Monitoring][3] を使用している場合は、データベースの監視データも含まれます。
 
 ## 推測サービスの設定 {#set-up-inferred-services}
 {{< tabs >}}
@@ -47,7 +50,7 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-Helm を使用している場合は、これらの環境変数を `values.yaml` [ファイル][3]に追加します。
+Helm を使用している場合は、これらの環境変数を `values.yaml` [ファイル][3] に追加します。
 
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.59.1
@@ -76,7 +79,7 @@ DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.q
 
 {{< /code-block >}}
 
-Helm を使用している場合は、これらの環境変数を `values.yaml` [ファイル][3]に追加します。
+Helm を使用している場合は、これらの環境変数を `values.yaml` [ファイル][3] に追加します。
 
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.54.1
@@ -110,7 +113,7 @@ exporters:
 
 {{< /code-block >}}
 
-**例**: [collector.yaml][2]
+**例**: [collector.yaml][2]。
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
@@ -119,7 +122,7 @@ exporters:
 
 ## 推測エンティティの命名 {#naming-inferred-entities}
 
-Datadog では、推測されるサービス依存関係の名前とタイプを決定するために、標準のスパン属性を使用し、`peer.*` 属性にマッピングします。たとえば、推測された外部 API は、デフォルトの命名規則である `net.peer.name` を使用します (例: `api.stripe.com`、`api.twilio.com`、`us6.api.mailchimp.com`)。推測されたデータベースでは、デフォルトの命名規則である `db.instance` が使用されます。[名前変更ルール][5]を作成することで、推測されたエンティティの名前を変更できます。
+Datadog では、推測されるサービス依存関係の名前とタイプを決定するために、標準のスパン属性を使用し、`peer.*` 属性にマッピングします。たとえば、推測された外部 API は、デフォルトの命名規則である `net.peer.name` を使用します (例: `api.stripe.com`、`api.twilio.com`、`us6.api.mailchimp.com`)。推測されたデータベースでは、デフォルトの命名規則である `db.instance` が使用されます。[名前変更ルール][5] を作成することで、推測されたエンティティの名前を変更できます。
 
 ### ピアタグ {#peer-tags}
 
@@ -155,7 +158,7 @@ Datadog では、推測されるサービス依存関係の名前とタイプを
 
 `peer.db.name` のような優先順位が最も高いタグがインスツルメンテーションでキャプチャされない場合、Datadog は 2 番目に優先度の高いタグ (`peer.hostname` など) を使用します。以降も同様です。
 
-**注**: Datadogは、推測されたデータベースとキューに `peer.service` を設定しません。`peer.service` は最も優先度の高いピア属性です。設定されている場合、他のすべての属性よりも優先されます。
+**注**: Datadog は、推測されたデータベースとキューに `peer.service` を設定しません。`peer.service` は最も優先度の高いピア属性です。設定されている場合、他のすべての属性よりも優先されます。
 
 ## グローバルなデフォルトサービス名への移行 {#migrate-to-global-default-service-naming}
 
@@ -165,7 +168,7 @@ Datadog では、推測されるサービス依存関係の名前とタイプを
 
 <div class="alert alert-danger">このオプションを有効にすると、古いサービス名を参照する既存の APM メトリクス、カスタムスパンメトリクス、トレース分析、保持フィルター、機密データスキャン、モニター、ダッシュボード、ノートブックに影響する可能性があります。グローバルなデフォルトサービスタグ (<code>service:&lt;DD_SERVICE&gt;</code>) を使用するようにこれらのアセットを更新してください。</div>
 
-サービスオーバーライドを削除して、推測サービスに移行する方法については、[サービスオーバーライドガイド][4]を参照してください。
+サービスオーバーライドを削除して、推測サービスに移行する方法については、[サービスオーバーライドガイド][4] を参照してください。
 
 [1]: /ja/internal_developer_portal/catalog/
 [2]: /ja/tracing/services/service_page
@@ -175,7 +178,7 @@ Datadog では、推測されるサービス依存関係の名前とタイプを
 
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">お客様のデータセンターでは、デフォルトで推測サービス機能を利用できません。アクセスをリクエストするには、この<a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">フォーム</a>に記入してください。</div>
+<div class="alert alert-info">ご利用のデータセンターでは、デフォルトで推測サービス機能を利用できません。アクセスをリクエストするには、この<a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">フォーム</a>に記入してください。</div>
 
 {{< /site-region >}}
 

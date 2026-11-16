@@ -15,103 +15,135 @@ aliases:
 - /es/pr_gates/search/
 - /es/pr_gates/guide/
 - /es/pr_gates/guide/understanding_rule_scopes/
-description: Aprende a utilizar PR Gates para que tu equipo pueda controlar qué código
+description: Aprenda a usar PR Gates para permitir que su equipo controle qué código
   llega a producción.
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
-  tag: Notas de versiones
-  text: Consulta las últimas versiones de Software Delivery (Es necesario iniciar
-    sesión en la aplicación)
+- link: /tests/guides/setup_new_flaky_pr_gate/
+  tag: Documentación
+  text: Configure un [New Flaky Test PR Gate]
+- link: https://www.datadoghq.com/blog/azure-devops-source-code-integration/
+  tag: Blog
+  text: Identifique y solucione problemas de código más rápido con la integración
+    de Azure DevOps Source Code de Datadog
+- link: https://www.datadoghq.com/blog/github-actions-iac-security/
+  tag: Blog
+  text: 'Detectar errores de configuración de CI/CD antes que los bots: Asegurar GitHub
+    Actions con Datadog IaC Security'
 - link: https://www.datadoghq.com/blog/datadog-quality-gates/
   tag: Blog
-  text: Mejorar la fiabilidad del código con las Puertas de calidad de Datadog
+  text: Mejore la confiabilidad del código con Datadog Quality Gates
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: Blog
-  text: Uso de monitores de Datadog como puertas de calidad para despliegues de GitHub
+  text: Use los monitores de Datadog como Quality Gates para implementaciones de GitHub
     Actions
 - link: https://www.datadoghq.com/blog/datadog-flaky-tests/
   tag: Blog
-  text: 'Pruebas defectuosas: sus costes ocultos y cómo tratar comportamientos defectuosos'
+  text: 'Pruebas inestables: sus costos ocultos y cómo abordar el comportamiento inestable'
 - link: https://www.datadoghq.com/blog/datadog-iac-security/
   tag: Blog
-  text: Evita que los errores de configuración de la nube lleguen a la producción
-    con Datadog IaC Security
+  text: Evite que las configuraciones erróneas de la nube lleguen a producción con
+    Datadog IaC Security
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: Notas de la versión
+  text: ¡Consulte las últimas versiones de Software Delivery! (Se requiere inicio
+    de sesión en la aplicación).
 is_beta: false
 title: PR Gates
 ---
+## Descripción general {#overview}
 
-## Información general
+PR Gates le permite controlar la seguridad y la calidad del software configurando reglas para bloquear la fusión de solicitudes de extracción con código deficiente. Evitar que se fusionen solicitudes de extracción con código deficiente puede garantizar que el código que finalmente se implementa en producción cumpla con altos estándares organizacionales, reduciendo incidentes y minimizando comportamientos no deseados.
 
-Las PR Gates te permiten controlar la seguridad y la calidad del software configurando reglas para bloquear la fusión de solicitudes pull con código de calidad inferior. Impedir la fusión de solicitudes pull con código de calidad inferior puede garantizar que el código que finalmente se despliega en producción se adhiere a los altos estándares de la organización, reduciendo los incidentes y minimizando los comportamientos no deseados.
+{{< img src="pr_gates/setup/sca_4.png" alt="Una regla de SCA que activa un error si se detecta alguna vulnerabilidad de biblioteca con gravedad crítica o alta en el repositorio." style="width:100%" >}}
 
-{{< img src="pr_gates/setup/sca_3.png" alt="Una regla SCA que activa un error si cualquier vulnerabilidad de la biblioteca con gravedad crítica o alta se detecta en el repositorio." style="width:100%" >}}
+PR Gates, similar a [Datadog Monitors][9], consume datos y hallazgos generados por productos compatibles de Datadog y aplica condiciones a estos hallazgos para determinar si una PR cumple con sus estándares organizacionales. Para evitar un impacto innecesario en la velocidad de sus desarrolladores, PR Gates solo bloquea las infracciones introducidas por los cambios de código de la PR en cuestión, no los hallazgos que ya existían en su repositorio antes de que se crearan la PR y su rama. Por ejemplo, si configura PR Gates para bloquear vulnerabilidades de código de gravedad crítica, PR Gates fallará y bloqueará la PR solo si un desarrollador introduce una nueva vulnerabilidad de código crítica como parte de esa PR.
 
-Utiliza PR Gates para:
+Puede configurar reglas de PR Gates para las siguientes categorías. Tenga en cuenta que el producto compatible debe estar ejecutándose en sus repositorios deseados antes de que PR Gates pueda comenzar a tomar medidas sobre las PR relevantes: 
 
-* Crear reglas que bloqueen las solicitudes pull utilizando los datos de Datadog, garantizando que solo se fusione el código que cumpla tus normas.
-* Proporciona a tu organización la capacidad de evitar que los cambios de código que no cumplan las normas lleguen a producción.
-* Mejora continuamente la seguridad y la calidad del código con una aplicación precisa y normas personalizables.
-
-Puedes configurar reglas de PR Gates para las siguientes categorías: 
-
-| Tipo de fuente     | Tipos de condiciones |
+| Tipo de fuente     | Tipos de condición |
 | --- | ----------- |
-| [**Static Code Analysis**][1] | - Vulnerabilidades del código<br/>: violaciones de la calidad del código |
-| [**Software Composition Analysis**][2] | - Vulnerabilidades de la biblioteca<br/>: violaciones de la licencia de la biblioteca |
-| [**Code Coverage**][3] | - Cobertura total del código<br/>: cobertura del código parcheado |
-| [**Infrastructure as Code Scanning**][4] | - Vulnerabilidades en IaC |
+| [**Análisis de código estático (SAST)**][1] | - Vulnerabilidades de código<br/> - Infracciones de calidad de código |
+| [**Software Composition Analysis**][2] | - Vulnerabilidades de biblioteca<br/> - Infracciones de licencia de biblioteca |
+| [**Code Coverage**][3] | - Overall Code Coverage<br/> - Patch Code Coverage|
+| [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities|
+| [**Secret Scanning**][10] | - Secretos filtrados |
+| [**Nuevas pruebas inestables**][11] | - Nuevas pruebas inestables |
 
-Tras crear las reglas de PR Gates, Datadog creará automáticamente checks en tus solicitudes pull mediante la [integración con GitHub][5] o la [integración con el código fuente de Azure DevOps][6]. Establece esos checks según sea necesario en GitHub o Azure DevOps cuando estés listo para aplicarlos.
+Después de crear reglas de PR Gates, Datadog crea automáticamente comprobaciones en sus solicitudes de extracción utilizando las integraciones de [GitHub][5], [GitLab Source Code][13], [Azure DevOps Source Code][6] o [Bitbucket Cloud Source Code][14]. Para aplicar PR Gates, establezca esas comprobaciones como obligatorias en GitHub, Azure DevOps o Bitbucket Cloud cuando esté listo para aplicarlas. En GitLab, establezca la cuenta de servicio de Datadog como aprobador obligatorio en las solicitudes de fusión. Consulte [Configurar reglas de PR Gate][15].
+
+PR Gates también habilita reacciones con emojis (similar a [Comentarios de PR][12]). Datadog publica una reacción 👀 en la descripción de la PR cuando un producto de Datadog que tiene PR Gates todavía está esperando que lleguen los resultados. Después de que hayan llegado todos los resultados:
+  * Si todos los resultados son positivos, la reacción cambia a 👍.
+  * Si hay al menos un hallazgo, la reacción 👀 se elimina porque el comentario de resumen incluye detalles sobre los hallazgos en su lugar.
 
 <div class="alert alert-warning">
-  Las PR Gates no se admiten en las solicitudes pull en repositorios públicos, o en solicitudes pull que tengan como destino una rama en un repositorio diferente de la rama fuente (es decir, repositorios bifurcados que intentan fusionarse en el repositorio principal).
+  PR Gates no es compatible con solicitudes de extracción dirigidas a una rama de destino en un repositorio diferente al de la rama fuente (es decir, repositorios bifurcados que intentan fusionarse en el repositorio principal). PR Gates no se puede establecer como obligatorio en repositorios de GitHub que utilizan una cola de fusión.
 </div>
 
-## Tipos de reglas
+## Tipos de regla {#rule-types}
 
 PR Gates ofrece los siguientes tipos de reglas:
 
 {{< tabs >}}
-{{% tab "Static Code Analysis (SAST)" %}}
+{{% tab "Análisis estático de código (SAST)" %}}
 
-Puedes crear reglas para bloquear la fusión de código cuando una solicitud pull introduce al menos una vulnerabilidad o violación de la calidad del código de una determinada gravedad.
+Puede crear reglas para bloquear la fusión de cambios de código cuando las líneas modificadas de una solicitud de extracción introducen al menos una nueva vulnerabilidad de código o una violación de calidad de código de cierta gravedad.
 
-{{< img src="pr_gates/setup/static_analysis_3.png" alt="Una regla de PR Gate que falla cuando una o más violaciones de calidad de código nuevo con gravedad de error están incluidas en el repositorio" style="width:80%" >}}
+{{< img src="pr_gates/setup/static_analysis_4.png" alt="Una regla de PR Gate que falla cuando el repositorio contiene una o más violaciones nuevas de calidad de código de nivel de gravedad de error" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis (SCA)" %}}
 
-Puedes crear reglas para bloquear la fusión de código cuando una solicitud pull introduce al menos una vulnerabilidad de biblioteca de cierta gravedad o al menos una biblioteca con una licencia prohibida.
+Puede crear reglas para bloquear la fusión de cambios de código cuando las líneas modificadas de una solicitud de extracción introducen al menos una nueva vulnerabilidad de biblioteca de cierta gravedad o al menos una nueva biblioteca con una licencia prohibida.
 
-{{< img src="pr_gates/setup/sca_3.png" alt="Una regla de PR Gate que falla cuando una o más vulnerabilidades de biblioteca de gravedad crítica o alta están incluidas en el repositorio" style="width:80%" >}}
+{{< img src="pr_gates/setup/sca_4.png" alt="Una regla de PR Gate que falla cuando el repositorio contiene una o más vulnerabilidades de biblioteca de gravedad crítica o alta" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Code Coverage" %}}
-Puedes crear reglas para bloquear la fusión de código cuando una solicitud pull hace que la cobertura de código general del repositorio caiga por debajo de un determinado porcentaje o si la cobertura de parches está por debajo de un determinado umbral.
+Puede crear reglas para bloquear la fusión de cambios de código cuando las líneas modificadas de una solicitud de extracción provocan que el Code Coverage global del repositorio caiga por debajo de un cierto porcentaje o si el Code Coverage de parches de esas líneas está por debajo de un cierto umbral.
 
-{{< img src="pr_gates/setup/code_coverage.png" alt="Una regla de PR Gate que falla cuando una o más vulnerabilidades de biblioteca con gravedad crítica o alta están incluidas en el repositorio" style="width:80%" >}}
+{{< img src="pr_gates/setup/code_coverage_2.png" alt="Una regla de PR Gate que falla cuando el repositorio contiene una o más vulnerabilidades de biblioteca de gravedad crítica o alta" style="width:80%" >}}
 
 {{% /tab %}}
 
-{{% tab "Escaneo de Infraestructura como Código" %}}
-Puede crear reglas para bloquear la fusión de código cuando una solicitud de extracción introduce al menos una vulnerabilidad de infraestructura como código (IaC) de cierta gravedad.
+{{% tab "Escaneo de Infrastructure as Code" %}}
+Puede crear reglas para bloquear la fusión de cambios de código cuando las líneas modificadas de una solicitud de extracción introducen al menos una nueva vulnerabilidad de Infrastructure as Code (IaC) de cierta gravedad.
 
-{{< img src="pr_gates/setup/iac.png" alt="Una regla de PR Gate que falla cuando una o más vulnerabilidades de biblioteca con gravedad crítica o alta están incluidas en el repositorio" style="width:80%" >}}
+{{< img src="pr_gates/setup/iac_2.png" alt="Una regla de PR Gate que falla cuando el repositorio contiene una o más vulnerabilidades de biblioteca de gravedad crítica o alta" style="width:80%" >}}
 
+{{% /tab %}}
+
+{{% tab "Secret Scanning" %}}
+Puede crear reglas para bloquear la fusión de cambios de código cuando las líneas modificadas de una solicitud de extracción introducen al menos un nuevo secreto filtrado de cierta gravedad.
+
+{{< img src="pr_gates/setup/secret_scanning.png" alt="Una regla de PR Gate que falla cuando se detectan uno o más secretos filtrados de gravedad crítica o alta en el repositorio." style="width:80%" >}}
+
+{{% /tab %}}
+
+{{% tab "New Flaky Tests" %}}
+Puede crear reglas para bloquear la fusión de cambios de código cuando una solicitud de extracción introduce al menos una nueva prueba inestable.
+
+{{< img src="pr_gates/setup/flaky_tests.png" alt="Una regla de PR Gate que falla cuando una solicitud de extracción introduce al menos una nueva prueba inestable" style="width:80%" >}}
+
+Utilice este PR Gate junto con [Early Flake Detection][1] para detectar nuevas pruebas inestables.
+
+Lea [cómo configurar un New Flaky Test PR Gate][2].
+
+[1]: /es/tests/flaky_tests/early_flake_detection
+[2]: /es/tests/guides/setup_new_flaky_pr_gate/
 {{% /tab %}}
 {{< /tabs >}}
 
-Para crear una regla de PR Gate, consulta la [documentación de configuración][7]. 
+Para crear una regla de PR Gate, consulte la [documentación de configuración][7]. 
 
-## Gestionar reglas
+## Administrar reglas {#manage-rules}
 
-Puedes gestionar y actualizar las reglas de PR Gates en la página [**PR Gates Rules**][8] (Reglas de PR Gates). Mejora tus prácticas de seguridad y calidad en función de los requisitos y tolerancias de riesgo en tu proyecto.
+Puede administrar y actualizar las reglas de PR Gates en la página [{{< ui >}}PR Gates Rules{{< /ui >}}][8]. Mejore sus prácticas de seguridad y calidad según los requisitos de su proyecto y sus tolerancias al riesgo. 
 
-Puedes ver todas las reglas definidas por la organización.
+Puede ver todas las reglas definidas por la organización.
 
-{{< img src="pr_gates/rules_list_3.png" alt="Lista de las reglas de PR Gate en Datadog" style="width:100%" >}}
+{{< img src="pr_gates/rules_list_3.png" alt="Lista de reglas de PR Gate en Datadog" style="width:100%" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -123,3 +155,10 @@ Puedes ver todas las reglas definidas por la organización.
 [6]: /es/integrations/azure_devops_source_code/
 [7]: /es/pr_gates/setup/
 [8]: https://app.datadoghq.com/ci/pr-gates
+[9]: /es/monitors/
+[10]: /es/security/code_security/secret_scanning/
+[11]: /es/tests/flaky_tests/
+[12]: /es/source_code/features/#pr-comments
+[13]: /es/integrations/gitlab-source-code/
+[14]: /es/integrations/bitbucket-source-code/
+[15]: /es/pr_gates/setup/

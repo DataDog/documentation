@@ -15,12 +15,6 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 {{% aap/aap_and_api_protection_dotnet_setup_options platform="linux" %}}
 {{% aap/aap_and_api_protection_dotnet_overview %}}
 
@@ -87,8 +81,8 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz &
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-  If you are having issues installing the SDK check the [Tracer Installation guide][5]
-  *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
+  If you are having issues installing the SDK check the <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux">Tracer Installation guide</a>
+  <em>Note on version:</em> replace <em>&lt;TRACER_VERSION&gt;</em> with the latest three component version of the library (ej: 3.21.0)
 </div>
 
 
@@ -139,4 +133,3 @@ If you encounter issues while setting up App and API Protection for your .NET ap
 [2]: /agent/?tab=Linux
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /security/application_security/setup/dotnet/troubleshooting
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux

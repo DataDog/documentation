@@ -22,7 +22,7 @@ further_reading:
 Use Observability Pipelines' Datadog Agent source to receive logs or metrics from the Datadog Agent.
 
 **Notes**:
-- If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
+- If you are using the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 - The Datadog Agent sends logs and metrics tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for these events, use `ddsource` and `ddtags` instead.
 
 ## Prerequisites
@@ -31,11 +31,11 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics fro
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values. See <a href="/observability_pipelines/configuration/secrets_management/">Secrets Management</a> for setup instructions.</div>
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
-After you select the Datadog Agent source in the pipeline UI, enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#secret-defaults) is used.
+After you select the Datadog Agent source in the pipeline UI, enter the identifier for your Datadog Agent address. This identifier references the bind address the Worker listens on for incoming Agent connections, such as `<OPW_HOST>:8282`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 

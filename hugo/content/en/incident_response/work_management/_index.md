@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-service-management/"
   tag: "Blog"
   text: "Ensure high service availability with Datadog Service Management"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
 algolia:
   tags: ['inbox', 'work management', 'case management']
 ---
@@ -34,6 +37,8 @@ algolia:
 Datadog Work Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a work item, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the work item.
 
 While investigating, populate the work item with graphs, logs, and other telemetry data from across Datadog and collaborate with your team members in the activity timeline. Work Management also integrates with tools like Jira, ServiceNow, PagerDuty, Slack, and Microsoft Teams—allowing you to fit Work Management solutions to your organization's processes.
+
+{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Join the Preview for the Work Management integration with Claude">}} Assign work items to Claude managed agents. Fill out the form to request access.{{< /callout >}}
 
 ## Getting started
 {{< whatsnext desc="Learn more about Work Management:">}}

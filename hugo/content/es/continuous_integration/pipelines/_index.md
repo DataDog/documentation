@@ -9,169 +9,98 @@ cascade:
     tags:
     - ci pipeline
     - ci pipelines
-    - funciones compatibles
+    - supported features
+disable_sidebar: true
 further_reading:
 - link: /monitors/types/ci/
   tag: Documentación
-  text: Creación de monitores de CI Pipeline
+  text: Creación de seguimiento de Pipelines de CI
 - link: /account_management/billing/ci_visibility
   tag: Documentación
-  text: Más información sobre la facturación de CI Visibility
+  text: Aprendiendo sobre la facturación de CI Visibility
 - link: /continuous_integration/troubleshooting/
-  tag: Documentation
-  text: Solucionar problemas de CI Visibility
+  tag: Documentación
+  text: Solución de problemas de CI Visibility
 title: CI Pipeline Visibility en Datadog
 ---
+## Descripción general {#overview}
 
-## Información general
+[CI Visibility][1] proporciona una vista centrada en Pipelines sobre el estado de su CI al mostrar métricas y resultados importantes de sus Pipelines. Le ayuda a solucionar fallas en los Pipelines, abordar cuellos de botella en el rendimiento y realizar un seguimiento del rendimiento y la confiabilidad de la CI a lo largo del tiempo.
 
-[Pipeline Visibility][1] ofrece una visión del estado de tu CI mostrando importantes métricas y resultados de tus pipelines. Te ayuda a solucionar problemas de fallos de pipelines, abordar cuellos de botella de rendimiento y realizar un seguimiento del rendimiento y la fiabilidad de CI a lo largo del tiempo.
+## Configuración {#setup}
 
-## Configurar
+Seleccione su proveedor de CI para configurar CI Visibility en Datadog:
 
-{{< whatsnext desc="Selecciona tu proveedor de CI para configurar Pipeline Visibility en Datadog:" >}}
-    {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/github" >}}Acciones GitHub{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/gitlab" >}}GitLab{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom" >}}Otros proveedores de CI{{< /nextlink >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="AWS CodePipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="extensión de Azure DevOps" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="Buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="orbe de CircleCI" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="Codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="GitHub Actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="GitLab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="Jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="TeamCity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="otros proveedores de CI" >}}
+{{< /card-grid >}}
+
+{{< whatsnext desc="Para opciones de personalización, consulte las siguientes secciones:" >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Comandos personalizados{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Etiquetas (tags) y medidas personalizadas{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Etiquetas y medidas personalizadas{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Terminología
+## Funciones compatibles {#supported-features}
 
-Aunque el concepto de pipeline CI puede variar en función de tu proveedor, ve cómo se corresponden estos conceptos con la definición de pipeline CI en Datadog Pipeline Visibility:
+### Pipeline Visibility y ejecución {#pipeline-visibility-and-execution}
 
-{{< tabs >}}
-{{% tab "Acciones GitHub" %}}
-
-| Datadog  | GitHub Actions |
-|----------|----------------|
-| Tuberías | Flujo de trabajo       |
-| Trabajo      | Trabajo            |
-| Paso     | Paso           |
-
-{{% /tab %}}
-{{% tab "GitLab" %}}
-
-| Datadog                    | GitLab   |
-|----------------------------|----------|
-| Tuberías                   | Tuberías |
-| Etapa                      | Etapa    |
-| Trabajo                        | Trabajo      |
-| _No disponible en Datadog_ | Script   |
-
-{{% /tab %}}
-{{% tab "Jenkins" %}}
-
-| Datadog  | Jenkins  |
-|----------|----------|
-| Tuberías | Tuberías |
-| Etapa    | Etapa    |
-| Trabajo      | Paso     |
-
-{{% /tab %}}
-{{% tab "CircleCI" %}}
-
-| Datadog                    | CircleCI  |
-|----------------------------|-----------|
-| Tuberías                   | Flujo de trabajo  |
-| Trabajo                        | Trabajo       |
-| _No disponible en Datadog_ | Paso      |
-
-{{% /tab %}}
-{{% tab "Buildkite" %}}
-
-| Datadog                    | Buildkite                       |
-|----------------------------|---------------------------------|
-| Tuberías                   | Compilación (ejecución de un pipeline) |
-| Trabajo                        | Trabajo (ejecución de un paso)       |
-
-{{% /tab %}}
-{{% tab "TeamCity" %}}
-
-| Datadog                    | TeamCity    |
-|----------------------------|-------------|
-| Tuberías                   | Crear la cadena |
-| Trabajo                        | Compilación       |
-| _No disponible en Datadog_ | Paso        |
-
-{{% /tab %}}
-{{% tab "Pipelines de Azure" %}}
-
-| Datadog                    | Pipelines Azure |
-|----------------------------|-----------------|
-| Tuberías                   | Tuberías        |
-| Etapa                      | Etapa           |
-| Trabajo                        | Trabajo             |
-| _No disponible en Datadog_ | Paso            |
-
-{{% /tab %}}
-{{% tab "AWS CodePipeline" %}}
-
-| Datadog  | AWS CodePipeline |
-|----------|------------------|
-| Tuberías | Tuberías         |
-| Etapa    | Etapa            |
-| Trabajo      | Acción           |
-
-{{% /tab %}}
-
-{{% tab "Otros proveedores de IC" %}}
-
-| Datadog  | Otros proveedores de CI |
-|----------|--------------------|
-| Tuberías | Tuberías           |
-| Etapa    | Etapa              |
-| Trabajo      | Trabajo                |
-| Paso     | Paso               |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Si tu proveedor de CI no es compatible, puedes intentar configurar Pipeline Visibility a través del [endpoint de la API pública][2].
-
-### Funciones compatibles
-
-|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Pipelines Azure | Codefresh | TeamCity | AWS CodePipeline | Otros proveedores de CI |
+| <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Otros proveedores de CI |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| {{< ci-details title="Visualización de trazas de pipelines" >}}Visualización de ejecuciones de pipelines con el rastreo asociado.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Análisis de fallos de trabajos" >}}Análisis y categorización de fallos de trabajos utilizando modelos LLM basados en logs relevantes. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">Más información</a>.{{< /ci-details >}} | | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
-| {{< ci-details title="Pipelines en ejecución" >}}Identificación de las ejecuciones de pipelines que se están ejecutando con el rastreo asociado.{{< /ci-details >}} | {{< X >}} | {{< X >}} | | | {{< X >}} | | | | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Análisis de rutas críticas" >}}Identificación de trabajos CI que están en la ruta crítica del pipeline. <a href="https://docs.datadoghq.com/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/">Más información</a>{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Reintentos parciales" >}}Identificación de reintentos parciales (por ejemplo, cuando sólo se han reintentado un subconjunto de trabajos).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
-| {{< ci-details title="Tramos (spans) de pasos" >}}Los tramos a nivel del paso están disponibles para una visibilidad más granular.{{< /ci-details >}} | {{< X >}} (_Pero se presentan como tramos de trabajos_) |  |  |  | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |
-| {{< ci-details title="Pasos manuales" >}}Identificar cuándo hay un trabajo con una fase de aprobación manual en el pipeline general.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
-| {{< ci-details title="Tiempo de espera de aprobaciones">}}Tiempo durante el cual un pipeline o trabajo ha estado esperando una aprobación manual.{{< /ci-details >}} |  | {{< X >}} |  |  |  {{< X >}}  | {{< X >}}  |   |  | {{< X >}} |  |
-| {{< ci-details title="Tiempo de cola" >}}Tiempo durante el cual un pipeline o trabajo ha estado en la cola antes de la ejecución.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  {{< X >}} |
-| {{< ci-details title="Tiempo de ejecución" >}}Tiempo durante el cual un pipeline ha estado ejecutando trabajos activamente.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Correlación de logs" >}}Recuperación de logs de pipelines o trabajos desde el proveedor de CI. Los logs se muestran en la pestaña <strong>Logs</strong> en la vista Ejecución del pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |
-| {{< ci-details title="Correlación de métricas de infraestructura" >}}Correlación de la información de nivel de host del Datadog Agent, pipelines CI o ejecutores de trabajos con los datos de ejecución de pipelines CI.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  |  |  |  |
-| {{< ci-details title="Tramos personalizados para comandos rastreados utilizando datadog-ci" >}}Compatibilidad con el envío de eventos de nivel de comando a CI Visibility para su incorporación en la visualización de gráficos de llama de canalización. A continuación, podrás consultar y analizar <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_commands/">estos eventos</a>. {{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |
-| {{< ci-details title="Etiquetas personalizadas predefinidas" >}}Compatibilidad con la configuración de etiquetas de pipelines estáticas en el proveedor CI, que no cambian entre ejecuciones.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |  |  |  |
-| {{< ci-details title="Etiquetas y medidas personalizadas en el tiempo de ejecución" >}}compatibilidad con el agregado de <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/">texto y etiquetas numéricas definidos por el usuario</a> a pipelines y trabajos en CI Visibility.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  {{< X >}} |
-| {{< ci-details title="Parámetros" >}}Compatibilidad con el agregado de parámetros personalizados de pipelines que configuran los usuarios (por ejemplo, <code>DYNAMICS_IS_CHILD:true</code>). A continuación, podrás buscar utilizando estos parámetros en el <a href="https://docs.datadoghq.com/continuous_integration/explorer/?pestaña=pipelineexecutions">Explorador de CI Visibility</a> para encontrar todos los eventos con un parámetro específico.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="Almacenamiento de registros" >}}Almacenamiento de registros de Pipeline o de trabajo del proveedor de CI. Los registros se muestran en la pestaña <strong>Registros</strong> en la vista de ejecución de Pipelines.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| {{< ci-details title="Correlación de infraestructura" >}}Correlación de información a nivel de servidor para el Datadog Agent, Pipelines de CI o ejecutores de trabajos con datos de ejecución de Pipelines de CI.{{< /ci-details >}} |  |  | {{< X >}} |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| {{< ci-details title="Pipelines en ejecución" >}}Identificación de ejecuciones de Pipelines que se están ejecutando con rastreo asociado.{{< /ci-details >}} | {{< X >}} | | | | | {{< X >}} | {{< X >}} | {{< X >}} | | {{< X >}} |
+| {{< ci-details title="Trabajos en ejecución" >}}Identificación de ejecuciones de trabajos que se están ejecutando con rastreo asociado.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} |  |  | {{< X >}} |
+| {{< ci-details title="Reintentos parciales" >}}Identificación de reintentos parciales (por ejemplo, cuando solo se volvió a intentar un subconjunto de trabajos).{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="Granularidad de pasos" >}}Los spans a nivel de paso están disponibles para una visibilidad más granular.{{< /ci-details >}} |  |  |  |  | {{< X >}} | {{< X >}} |  | {{< X >}} <br /> (_Presentado como spans de trabajo_) |  |  {{< X >}} |
+| {{< ci-details title="Pasos manuales" >}}Identificación de cuándo hay un trabajo con una fase de aprobación manual en el pipeline general.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  {{< X >}} |
 
-## Uso de datos de pipelines CI
+### Análisis y acciones automáticas {#automatic-analysis-and-actions}
 
-Al crear un [dashboard][8] o un [notebook][9], puedes utilizar datos de pipelines CI en tu consulta de búsqueda, que actualiza las opciones del widget de visualización. Para obtener más información, consulte la documentación de [dashboards][10] y [notebooks][11].
+| <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Otros proveedores de CI |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| {{< ci-details title="Análisis de registros" >}}Utiliza modelos LLM en los registros relevantes para analizar la causa raíz de los trabajos de CI fallidos. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">Más información</a>.{{< /ci-details >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | |  |  |
+| {{< ci-details title="Ruta crítica" >}}Identificación de los trabajos de CI que se encuentran en la ruta crítica del pipeline. <a href="https://docs.datadoghq.com/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/">Más información</a>{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="Reintentos automáticos de trabajos" >}}Datadog reintenta los trabajos fallidos clasificados como transitorios por su modelo de error de IA. <a href="https://docs.datadoghq.com/continuous_integration/pipelines/automatic_retries/">Más información</a>.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} |  |  |  |
 
-## Alerta sobre datos del pipeline
+### Desglose de duración {#duration-breakdown}
 
-Puedes exportar tu consulta de búsqueda a un [monitor de CI Pipeline][12] en la [página **Ejecuciones**][6] o en la [página **Ejecuciones de tests**][13], haciendo clic en el botón **Export** (Exportar).
+| <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Otros proveedores de CI |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| {{< ci-details title="Tiempo de ejecución" >}}Tiempo durante el cual un pipeline ha estado ejecutando trabajos.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="Tiempo de cola" >}}Tiempo durante el cual un pipeline o trabajo estuvo en la cola antes de la ejecución.{{< /ci-details >}} |  |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="Tiempo de espera de aprobación">}}Tiempo durante el cual un pipeline o trabajo ha estado esperando una aprobación manual.{{< /ci-details >}} | {{< X >}} | {{< X >}}  |  |  |   |  {{< X >}}  | {{< X >}} |  |  |  |
 
-## Referencias adicionales
+### Personalización y extensibilidad {#customization-and-extensibility}
+
+| <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Otros proveedores de CI |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| {{< ci-details title="Comandos personalizados" >}}Soporte para usar datadog-ci para enviar eventos a nivel de comando a CI Visibility para ser incorporados en la visualización en cascada del pipeline. Luego puede consultar y analizar <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_commands/">estos eventos</a>. {{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| {{< ci-details title="Etiquetas estáticas" >}}Soporte para configurar etiquetas estáticas de pipeline en el proveedor de CI que no cambian entre ejecuciones.{{< /ci-details >}} |  |  |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| {{< ci-details title="Etiquetas de tiempo de ejecución" >}}Soporte para agregar <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/">etiquetas de texto y numéricas definidas por el usuario</a> a pipelines y trabajos en CI Visibility.{{< /ci-details >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  {{< X >}} |
+| {{< ci-details title="Parámetros" >}}Soporte para agregar parámetros de pipeline personalizados que los usuarios establecen (por ejemplo, <code>DYNAMICS_IS_CHILD:true</code>). Luego puede buscar usando estos parámetros en el <a href="https://docs.datadoghq.com/continuous_integration/explorer/?tab=pipelineexecutions">Explorador de CI Visibility</a> para encontrar todos los eventos con un parámetro específico.{{< /ci-details >}} |  |  |  |  | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  {{< X >}} |
+
+## Usar datos de pipelines de CI {#use-ci-pipelines-data}
+
+Al crear un [panel][8] o un [notebook][9], puede usar datos de pipelines de CI en su consulta de búsqueda, lo que actualiza las opciones del widget de visualización. Para obtener más información, consulte los [Dashboards][10] y la [Notebooks documentation][11].
+
+## Alertar sobre datos de pipeline {#alert-on-pipeline-data}
+
+Puede exportar su consulta de búsqueda a un [seguimiento de pipeline de CI][12] en la [{{< ui >}}Executions{{< /ui >}} página][6] o en la [{{< ui >}}Test Runs{{< /ui >}} página][13] haciendo clic en el botón {{< ui >}}Export{{< /ui >}}.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /es/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [6]: https://app.datadoghq.com/ci/pipeline-executions
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list

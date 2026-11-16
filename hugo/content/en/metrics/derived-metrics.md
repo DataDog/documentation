@@ -7,10 +7,6 @@ further_reading:
   text: "Auto-smooth noisy metrics to reveal trends"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScUkDpqIQNN1G4llFA7JN2qeevIp4wqfyDaa4A7lRCEa9FopQ/viewform?usp=header" >}}
-The Derived Metrics feature is in Preview.
-{{< /callout >}} 
-
 ## Overview
 
 Derived Metrics allow you to save any metrics query as a new metric, so you can simplify and optimize how you work with metrics in Datadog. Instead of repeatedly building complex queries across dashboards, monitors, SLOs, and notebooks, you can create a derived metric once and reuse it across all your assets. Use derived metrics to:
@@ -24,7 +20,7 @@ Derived Metrics allow you to save any metrics query as a new metric, so you can 
 
 ## Create a derived metric
 
-To create a derived metric, navigate to [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] and click {{< ui >}}+ New Metric{{< /ui >}}.
+To create a derived metric, navigate to [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] and click {{< ui >}}\+ New Metric{{< /ui >}}.
 
 {{< img src="metrics/derived_metrics/generate_metrics_tab.png" alt="The generate metrics tab in Datadog" style="width:90%;" >}}
 
@@ -50,6 +46,47 @@ To update a derived metric, hover over the metric and click the {{< ui >}}Edit{{
 
 To delete a derived metric, hover over the derived metric and click the {{< ui >}}Delete{{< /ui >}} icon that appears to the right. 
 
+## Manage derived metrics with Terraform
+
+Use the [`datadog_derived_metric` resource][4] to create, update, and delete derived metric definitions with Terraform.
+
+Before you begin, [configure the Datadog Terraform provider][5]. Your application key needs **Metrics Read** (`metrics_read`) and **Manage Tags for Metrics** (`metric_tags_write`) permissions. See [API and application keys][6] for details.
+
+For example, add this resource to your Terraform configuration to combine two CPU metrics:
+
+```hcl
+resource "datadog_derived_metric" "cpu_total" {
+  name = "custom.cpu.total"
+  definition = {
+    formula = "a + b"
+    queries = [
+      {
+        name        = "a"
+        data_source = "metrics"
+        query       = "avg:system.cpu.user{*}"
+      },
+      {
+        name        = "b"
+        data_source = "metrics"
+        query       = "avg:system.cpu.system{*}"
+      },
+    ]
+  }
+}
+```
+
+Run `terraform plan` to review the changes, then run `terraform apply` to create the derived metric.
+
+Changes to `definition.formula` or `definition.queries` update the existing definition. Changing `name` replaces the derived metric.
+
+To manage an existing derived metric, add its resource configuration and import it by name:
+
+```shell
+terraform import datadog_derived_metric.cpu_total "custom.cpu.total"
+```
+
+After importing, run `terraform plan` and `terraform apply` to adopt the configured name and definition. The first apply updates the existing metric. Later changes to `name` replace it.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -58,3 +95,6 @@ To delete a derived metric, hover over the derived metric and click the {{< ui >
 [1]: https://app.datadoghq.com/metric/generate-metrics
 [2]: /metrics/custom_metrics/#naming-custom-metrics
 [3]: /metrics/#querying-metrics
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/derived_metric
+[5]: /integrations/terraform/#configuration
+[6]: /account_management/api-app-keys/

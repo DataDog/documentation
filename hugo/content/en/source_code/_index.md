@@ -3,9 +3,11 @@ title: Source Code Integration
 description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed Git information into artifacts in your CI pipeline, and use source code management integrations to generate inline code snippets across Datadog."
 aliases:
   - /integrations/guide/source-code-integration/
+further_reading:
+- link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
+  tag: "Blog"
+  text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 ---
-
-## Overview
 
 Datadog's Source Code Integration allows you to connect your Git repositories to Datadog to enable various source code-related features across the Datadog platform. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
 
@@ -18,5 +20,10 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
     {{< nextlink href="source_code/service-mapping" >}}Service mapping
   and telemetry tagging{{< /nextlink >}}
     {{< nextlink href="source_code/resource-mapping" >}}Kubernetes resource mapping{{< /nextlink >}}
-    {{< nextlink href="source_code/features" >}}Features of source code integration{{< /nextlink >}}
+    {{< nextlink href="source_code/snippets-and-links" >}}Code snippets and context links{{< /nextlink >}}
+    {{< nextlink href="source_code/pr-comments" >}}PR comments{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

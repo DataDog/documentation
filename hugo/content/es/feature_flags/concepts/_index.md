@@ -10,6 +10,7 @@ Aprenda cómo funcionan Datadog Feature Flags y cómo configurar Feature Flags, 
     {{< nextlink href="/feature_flags/concepts/evaluation_context" >}}Contexto de evaluación{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_rules" >}}Reglas y filtros de segmentación{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_attributes" >}}Atributos de segmentación{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/evaluation_tester" >}}Tester de evaluación{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/scheduled_rollouts" >}}Lanzamientos programados{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/saved_filters" >}}Filtros guardados{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/traffic_splitting" >}}División de tráfico y aleatorización{{< /nextlink >}}

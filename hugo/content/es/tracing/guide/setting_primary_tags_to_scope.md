@@ -1,61 +1,61 @@
 ---
 aliases:
 - /es/tracing/advanced/setting_primary_tags_to_scope/
-description: Aprende a establecer etiquetas primarias para delimitar y filtrar los
-  datos de APM en diferentes entornos, servicios y versiones para una mejor organización.
+description: Aprenda a configurar etiquetas principales para definir el contexto y
+  filtrar datos de APM en diferentes entornos, servicios y versiones para una mejor
+  organización.
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: Documentación
-  text: Conectar tus logs y trazas (traces)
+  text: Conecte sus registros y trazas juntos
 - link: /tracing/manual_instrumentation/
   tag: Documentación
-  text: Instrumenta manualmente tu aplicación para crear trazas.
+  text: Instrumente manualmente su aplicación para crear trazas.
 - link: /tracing/opentracing/
   tag: Documentación
-  text: Implementa Opentracing en todas tus aplicaciones.
+  text: Implemente Opentracing en sus aplicaciones.
 - link: /tracing/glossary/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
-title: Configurar etiquetas (tags) primarias como contexto
+  text: Explore sus servicios, recursos y trazas
+title: Configurar etiquetas principales para definir el contexto
 ---
+## Definición {#definition}
 
-## Definición
+Existen varias dimensiones disponibles para definir el contexto de una aplicación completa de Datadog APM. Estos incluyen estadísticas agregadas (como solicitudes/segundo, latencia, tasa de error, puntuación Apdex) y [traces][1] visibles. Estas dimensiones se configuran mediante etiquetas principales que le permiten obtener una vista aún más detallada del comportamiento de su aplicación. Los casos de uso para las etiquetas principales incluyen entorno, zona de disponibilidad, centro de datos, etc.
 
-Hay varias dimensiones disponibles para limitar una aplicación completa de Datadog APM. Estas incluyen estadísticas agregadas (como solicitudes/segundo, latencia, tasa de error, puntuación de Apdex) y [trazas][1] visibles. Estas dimensiones se configuran a través de etiquetas (tags) primarias que te permiten obtener una visión aún más detallada del comportamiento de tu aplicación. Los casos de uso para etiquetas primarias incluyen entorno, zona de disponibilidad, centro de datos, etc.
+Las etiquetas principales deben seguir un conjunto de reglas diferente al de las [etiquetas de Datadog][2] convencionales.
 
-Las etiquetas deben seguir una serie de reglas diferentes a las de [etiquetas de Datadog][2].
+## Configuración {#setup}
 
-## Configuración
+### Entorno {#environment}
 
-### Entorno
+La etiqueta principal predeterminada y obligatoria es el entorno del cual se recopilan sus trazas. Su clave de etiqueta es `env`, y su valor predeterminado para datos sin etiquetas es `env:none`.
 
-La etiqueta (tag) primaria predeterminada y obligatoria es el entorno del que se recopilan tus trazas. Su clave de etiqueta es `env`, y su valor por defecto para datos no etiquetados es `env:none`.
+#### Entorno del tracer {#tracer-environment}
 
-#### Entorno del rastreador
+Datadog recomienda que el SDK configure `env`. También permite una mayor flexibilidad porque la definición de `env` reside dentro del tiempo de ejecución real del servicio.
 
-Datadog recomienda que el rastreador defina `env`. También permite una mayor flexibilidad porque la definición de `env` se encuentra dentro del tiempo de ejecución real del servicio.
+Si `DD_ENV` está expuesto al proceso de su servicio, el SDK lo usará automáticamente. Consulte [Unified Service Tagging][3] para obtener información sobre cómo configurar `DD_ENV` y otras variables de entorno de servicio estándar.
 
-Si `DD_ENV` está expuesto al proceso de tu servicio, el rastreador lo utilizará automáticamente. Consulta [etiquetado de servicios unificado][3] para aprender a configurar `DD_ENV` y otras variables de entorno de servicio estándar.
+También puede configurar manualmente `env` como una etiqueta global para el SDK en el código. Consulte [asignación de etiquetas en APM][4] para obtener más información.
 
-También puedes establecer manualmente `env` como una etiqueta (tag) global para el rastreador en código. Consulta [asignar etiquetas en APM][4] para más información.
+#### Entorno del Agent {#agent-environment}
 
-#### Entorno de Agent
-
-La etiqueta (tag) `env` se puede establecer en tu configuración del Agent.
-**No configures diferentes etiquetas `env` en el rastreador y el Agent. Esto puede causar etiquetado duplicado en [métricas de rastreo][5].**
+La etiqueta `env` se puede configurar en la configuración de su Agent.
+**No configure etiquetas `env` diferentes en el Tracer y el Agent. Esto puede causar una duplicación de etiquetas en las [métricas de traza][5].**
 
 Opciones:
 
-1. Configuración del Agent de nivel superior:
+1. Configuración del Agente de nivel superior:
 
     ```yaml
     env: <ENVIRONMENT>
     ...
     ```
 
-    **Entornos contenedorizados**: el Agent también admite la configuración del `env` de nivel superior a través de la variable de entorno `DD_ENV`.
+    **Containerized environments**: The Agent also supports configuration of the top-level `env` through the environment variable `DD_ENV`.
 
-2. Etiqueta (tag) de host del Agent:
+2. Etiqueta de host del Agente:
 
     ```yaml
     tags:
@@ -63,41 +63,49 @@ Opciones:
         ...
     ```
 
-    **Contenedor entornos**: El Agent también admite Configuración de nivel superior `tags` a través de la variable entorno `DD_TAGS` .
+    **Containerized environments**: The Agent also supports configuration of top-level `tags` through the environment variable `DD_TAGS`.
 
-#### Datos por entorno
+#### Datos por entorno {#data-by-environment}
 
-Los entornos aparecen en la parte superior de las páginas de APM. Utiliza el menú desplegable `env` para limitar los datos que aparecen en la página actual.
+Los entornos aparecen en la parte superior de las páginas de APM. Use el menú desplegable `env` para limitar los datos mostrados en la página actual.
 
-## Añadir etiquetas (tags) primarias adicionales en Datadog
+## Agregue etiquetas principales adicionales en Datadog {#add-additional-primary-tags-in-datadog}
 
-Si necesitas añadir tus métricas de rastreo en dimensiones adicionales, Datadog recomienda configurar una etiquetas (tags) primarias adicionales, además de la etiqueta primaria predeterminada y obligatoria `env:<ENVIRONMENT>`. Una vez configurada, hay disponible un segundo menú desplegable en la pestaña **Rendimiento del Catálogo de servicios**.
+Si necesita agregar sus métricas de traza a través de dimensiones adicionales, Datadog recomienda configurar etiquetas principales adicionales además de la etiqueta principal obligatoria `env:<ENVIRONMENT>`. Una vez configurado, un segundo menú desplegable estará disponible en la pestaña {{< ui >}}Catalog Performance{{< /ui >}}. 
 
-Ve a la página [Configuración de APM][6] para definir, cambiar o eliminar tus etiquetas (tags) primarias.
+Vaya a la página de [APM Settings][6] para definir, cambiar o eliminar sus etiquetas principales.
 
 **Nota**:
 
 * Solo los administradores de la organización tienen acceso a esta página.
 * Los cambios pueden tardar hasta dos horas en reflejarse en la interfaz de usuario.
-* El rastreador siempre añade etiquetas (tags) `resource`, `name` y `service` a los tramos (spans). Datadog recomienda no añadirlas nunca como etiquetas a nivel de host para evitar confusiones.
-* Las etiquetas (tags) primarias adicionales admiten hasta 100 valores únicos por etiqueta. Para ver más detalles, consulta las [directrices sobre volúmenes de datos de APM][9].
-* Las etiquetas primarias adicionales pueden ser etiquetas de host o de contenedor. Las etiquetas de tramo añadidas por el rastreador no pueden utilizarse como etiquetas primarias.
+* El SDK siempre añade las etiquetas `resource`, `name` y `service` a los tramos. Datadog recomienda no añadirlas nunca como etiquetas a nivel de host para evitar confusiones.
+* Las etiquetas principales adicionales admiten hasta 100 valores únicos por etiqueta. Consulte las [APM data volume guidelines][9] para obtener más detalles.
+* Las etiquetas principales adicionales pueden ser etiquetas de host o de contenedor. Las etiquetas a nivel de tramo añadidas por el SDK no pueden utilizarse como etiquetas principales.
 
-Si cambias una etiqueta (tag) primaria previamente configurada, ten en cuenta lo siguiente:
+Si cambia una etiqueta principal establecida anteriormente, tenga en cuenta lo siguiente:
 
-* Ya no se puede acceder a los datos históricos de APM agregados por la etiqueta (tag) establecida anteriormente.
-* Los monitores de APM asignados a la etiqueta (tag) anterior muestran el estado _No Data_ (Sin datos).
+* Los datos históricos de APM agregados por la etiqueta establecida anteriormente ya no son accesibles.
+* Cualquier Monitor de APM con alcance a la etiqueta anterior mostrará un estado de {{< ui >}}No Data{{< /ui >}}.
 
-## Etiquetas (tags) primarias adicionales basadas en contenedores
+## Etiquetas principales adicionales basadas en contenedores {#container-based-additional-primary-tags}
 
-Puedes indexar tus métricas de rastreo en función de las etiquetas (tags) derivadas de contenedores de Docker y metadatos de pods de Kubernetes en plataformas Linux. Las etiquetas primarias basadas en contenedores están disponibles en el Datadog Agent versión 7.35.0 y posteriores.
+Puede indexar sus métricas de traza basándose en las etiquetas derivadas de los contenedores Docker y los metadatos de pods de Kubernetes en plataformas basadas en Linux.
 
-Para habilitar etiquetas (tags) primarias basadas en contenedores, instala el Agent versión 7.35.0 o posterior, actualiza la configuración de las estadísticas CID como se describe a continuación y reinicia el Agent. El procedimiento de activación depende del método de instalación del Agent:
+Las etiquetas principales basadas en contenedores están habilitadas de forma predeterminada en las versiones 7.65.0 y posteriores del Datadog Agent. Vaya a la página de [APM Settings][6] y seleccione la etiqueta principal adicional que desea utilizar. Los cambios en esta configuración pueden tardar hasta dos horas en surtir efecto.
+
+Puede filtrar sus servicios en el [Catalog][7] por la etiqueta que envían sus servicios en contenedores. Las métricas de traza utilizadas por los Dashboards y Monitors también pueden agregarse mediante la etiqueta principal de contenedor.
+
+**Nota**: Los valores de las etiquetas principales no deben contener letras mayúsculas ni caracteres especiales (además de guiones bajos, guiones, dos puntos, puntos y barras). Si lo hacen, es posible que algunas funciones no funcionen correctamente.
+
+### Deshabilitar etiquetas principales basadas en contenedores {#disable-container-based-primary-tags}
+
+Para desactivar las etiquetas principales basadas en contenedores, configure la función `disable_cid_stats` APM y reinicie el Agent. Si `DD_APM_FEATURES` ya está configurado, agregue `disable_cid_stats` a su lista separada por comas. El procedimiento depende de cómo instaló el Agent:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Con la Datadog Helm chart versión 2.26.2 o posterior, añade lo siguiente a tu archivo de valores:
+Agregue lo siguiente a su archivo de valores:
 
 ```yaml
 #...
@@ -105,27 +113,27 @@ datadog:
   #...
   env:
     - name: DD_APM_FEATURES
-      value: 'enable_cid_stats'
+      value: 'disable_cid_stats'
 ```
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (without Helm)" %}}
+{{% tab "Kubernetes (sin Helm)" %}}
 
-Utiliza la siguiente variable de entorno en el DaemonSet del Agent. Si estás ejecutando un contenedor por proceso de Agent, añade la siguiente variable de entorno a todos los contenedores. De lo contrario, añádela al contenedor del Agent.
+Use la siguiente variable de entorno en el DaemonSet del Agent. Si está ejecutando un contenedor por proceso del Agent, agregue la siguiente variable de entorno a todos los contenedores. De lo contrario, agréguela al contenedor del Agent.
 
 ```yaml
 # (...)
   env:
     # (...)
     - name: DD_APM_FEATURES
-      value: 'enable_cid_stats'
+      value: 'disable_cid_stats'
 ```
 
 {{% /tab %}}
 {{% tab "Docker Compose" %}}
 
-Añade lo siguiente a tu archivo [Docker-compose.yml][1]:
+Agregue lo siguiente a su archivo [docker-compose.yml][1]:
 
 ```yaml
 services:
@@ -133,7 +141,7 @@ services:
   datadog:
     #...
     environment:
-     - DD_APM_FEATURES: 'enable_cid_stats'
+     - DD_APM_FEATURES=disable_cid_stats
 ```
 
 
@@ -141,33 +149,27 @@ services:
 {{% /tab %}}
 {{% tab "Variables de entorno" %}}
 
-Si configuras el Agent con variables de entorno, como es común con instalaciones de Docker y ECS, pasa la siguiente variable de entorno al Agent de traza después de actualizar la imagen de Docker.
+Si configura el Agent con variables de entorno, como es común en las instalaciones de Docker y ECS, pase la siguiente variable de entorno al trace Agent.
 
 ```
-DD_APM_FEATURES=enable_cid_stats
+DD_APM_FEATURES=disable_cid_stats
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Reinicia el Agent. Ve a la página de [configuración de APM][6] y selecciona la etiqueta (tag) primaria adicional que quieres utilizar. Los cambios en esta configuración pueden tardar hasta dos horas en surtir efecto.
+### Etiquetas personalizadas como tags {#custom-labels-as-tags}
 
-Ahora puedes filtrar tus servicios en el [Catálogo de servicios][7] por la etiqueta (tag) enviada por tus servicios en contenedores. Las métricas de rastreo utilizadas por dashboards y monitores también pueden ser agregadas por la etiqueta primaria del contenedor.
+Si aún no lo ha hecho, también puede configurar el Agent para enviar etiquetas de contenedor o pod como etiquetas personalizadas para sus trazas con [Asignación de Etiquetas][8].
 
-**Nota**: Los valores de las etiquetas (tags) primarias no deben contener mayúsculas ni caracteres especiales (aparte de guiones bajos, signo menos, dos puntos, puntos y barras). Si lo hacen, es posible que algunas características no funcionen correctamente.
+## Ver datos por etiqueta principal {#view-data-by-primary-tag}
 
-### Etiquetas (labels) personalizadas como etiquetas (tags)
+Las etiquetas principales aparecen en la parte superior de las páginas de APM. Utilice estos selectores para filtrar los datos mostrados en la página actual. Para ver todos los datos independientemente de una etiqueta principal, elija `<TAG_NAME>:*` en el menú desplegable.
 
-Si aún no lo has hecho, también puedes configurar el Agent para enviar etiquetas (labels) de contenedor o pod como etiquetas (tags) personalizadas para tus trazas con [Asignación de etiquetas (tags)][8].
-
-## Ver datos por etiqueta (tag) primaria
-
-Las etiquetas (tags) principales aparecen en la parte superior de las páginas de APM. Utiliza estos selectores para filtrar los datos mostrados en la página actual. Para ver todos los datos independientemente de una etiqueta primaria, selecciona `<TAG_NAME>:*` en el menú desplegable.
-
-{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="El menú desplegable que muestra opciones para seleccionar un contexto con la segunda etiqueta (tag) primaria" style="width:90%;">}}
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="El menú desplegable que muestra las opciones para seleccionar un contexto con la segunda etiqueta principal" style="width:90%;">}}
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -176,7 +178,7 @@ Las etiquetas (tags) principales aparecen en la parte superior de las páginas d
 [3]: /es/getting_started/tagging/unified_service_tagging
 [4]: /es/getting_started/tagging/assigning_tags/#traces
 [5]: /es/tracing/metrics/metrics_namespace/
-[6]: https://app.datadoghq.com/apm/settings
+[6]: https://app.datadoghq.com/apm/settings/default-settings
 [7]: https://app.datadoghq.com/services
 [8]: /es/getting_started/tagging/assigning_tags
 [9]: /es/tracing/troubleshooting/#data-volume-guidelines

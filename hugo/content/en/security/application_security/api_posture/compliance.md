@@ -10,12 +10,6 @@ further_reading:
   text: "OWASP API Security Top 10 2023"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 API Posture Compliance lets you continuously evaluate your API security posture against industry-standard frameworks. It maps Datadog's built-in API security detection rules to compliance framework controls and provides a real-time posture score showing which controls are passing or failing across your services.
@@ -51,7 +45,7 @@ The OWASP API Security Top 10 identifies the most critical security risks for AP
 
 ## View your compliance posture
 
-Navigate to [**Security > App & API Protection > Compliance**][4] to open the Compliance Frameworks page. You can:
+Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App & API Protection{{< /ui >}} > {{< ui >}}Compliance{{< /ui >}}][4] to open the Compliance Frameworks page. You can:
 - Select a framework (for example, OWASP API Security Top 10) to see per-control pass/fail status.
 - Click a failing control to view the list of API security findings that caused it to fail.
 - Open a finding's side panel to see the affected endpoint, severity, and recommended remediation steps.

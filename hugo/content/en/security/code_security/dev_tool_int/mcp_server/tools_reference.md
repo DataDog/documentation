@@ -11,9 +11,45 @@ further_reading:
   text: "Troubleshooting the Code Security MCP Server"
 ---
 
-The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
+The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Scan tools wrap one or more Datadog security binaries and accept file paths or directories to scan. `datadog_library_vulnerability_scan` queries Datadog by package URL and does not scan a local tree.
 
-<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning. To query findings already stored in Datadog, see <a href="/security/code_security/dev_tool_int/mcp_server/#query-findings-already-in-datadog">Query findings already in Datadog</a>.</div>
+
+## `datadog_code_security_scan`
+
+Run SAST, secrets detection, SCA, and IaC scanning in parallel.
+
+`min_sast_severity` applies only to the SAST portion of the scan. It defaults to `LOW`. In-source suppressed findings are excluded. When some scanners are not installed, the tool returns results from the scanners that succeeded and an error for each scanner that failed.
+
+### Parameters
+
+| Parameter            | Type            | Required | Description                                                                                          |
+| -------------------- | --------------- | :------: | ---------------------------------------------------------------------------------------------------- |
+| `file_paths`         | `array[string]` |   Yes    | File paths or directories to scan                                                                    |
+| `working_dir`        | `string`        |    No    | Base directory for resolving relative paths (defaults to the current directory)                      |
+| `min_sast_severity`  | `string`        |    No    | Minimum SAST severity to return: `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`. Default: `LOW`. SAST only. |
+
+### Required binaries
+
+`datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-security-cli`, `datadog-iac-scanner`
+
+## `datadog_sast_scan`
+
+Run Static Application Security Testing (SAST) to detect security vulnerabilities in first-party code.
+
+`min_sast_severity` defaults to `LOW`. In-source suppressed findings are excluded.
+
+### Parameters
+
+| Parameter            | Type            | Required | Description                                                                                          |
+| -------------------- | --------------- | :------: | ---------------------------------------------------------------------------------------------------- |
+| `file_paths`         | `array[string]` |   Yes    | File paths or directories to scan                                                                    |
+| `working_dir`        | `string`        |    No    | Base directory for resolving relative paths                                                          |
+| `min_sast_severity`  | `string`        |    No    | Minimum SAST severity to return: `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`. Default: `LOW`.             |
+
+### Required binary
+
+`datadog-static-analyzer`
 
 ## `datadog_secrets_scan`
 
@@ -108,10 +144,105 @@ JSON containing a summary (total components, breakdown by language/package manag
 | Ruby       | Bundler                                   |
 | Rust       | Cargo                                     |
 
-<div class="alert alert-info">If the repository uses a package manager not listed above, or if the tool returns 0 components, the AI assistant can perform manual SBOM generation by reading lock files (<code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, <code>pom.xml</code>, <code>Gemfile.lock</code>, <code>Cargo.lock</code>, <code>composer.lock</code>, etc.) and extracting dependencies directly.</div>
+<div class="alert alert-info">If the repository uses a package manager not listed above, or if the tool returns zero components, the AI assistant can generate an SBOM by reading lock files (<code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, <code>pom.xml</code>, <code>Gemfile.lock</code>, <code>Cargo.lock</code>, <code>composer.lock</code>, and similar files) and extracting dependencies directly.</div>
 
-## Further Reading
+## `datadog_library_vulnerability_scan`
+
+Look up known vulnerabilities for specific libraries by package URL (PURL). This tool calls the Datadog API and does not scan a local codebase. Use [`datadog_sca_scan`](#datadog_sca_scan) when you want to scan a project tree.
+
+Requires `DD_API_KEY` and `DD_APP_KEY`.
+
+### Parameters
+
+| Parameter     | Type            | Required | Description                                                                 |
+| ------------- | --------------- | :------: | --------------------------------------------------------------------------- |
+| `libraries`   | `array[object]` |   Yes    | Libraries to scan. Each object uses the fields in the table below.         |
+| `working_dir` | `string`        |    No    | Working directory for Git context detection (defaults to the current directory) |
+
+Each entry in `libraries`:
+
+| Field             | Type      | Required | Description                                                      |
+| ----------------- | --------- | :------: | ---------------------------------------------------------------- |
+| `purl`            | `string`  |   Yes    | Package URL, for example `pkg:maven/com.cronutils/cron-utils@9.1.2` |
+| `is_direct`       | `boolean` |    No    | Whether this is a direct dependency                              |
+| `is_dev`          | `boolean` |    No    | Whether this is a development-only dependency                    |
+| `package_manager` | `string`  |    No    | Package manager, for example `MAVEN`, `NPM`, or `GOLANG`         |
+
+### Output
+
+Vulnerabilities with CVE ID, GHSA ID, severity, CVSS score, affected library, remediation, fix versions, and exploit availability.
+
+## `datadog_ephemeral_sast_scan`
+
+Run one local, unpublished SAST rule against a repository. The caller supplies the rule JavaScript and the tree-sitter query. The tool does not require `DD_API_KEY` or `DD_APP_KEY`.
+
+The scan runs only the supplied rule but still follows the repository's [Static Code Analysis configuration][4]: `ignore-paths`, `only-paths`, `max-file-size-kb`, and `use-gitignore`.
+
+### Parameters
+
+| Parameter           | Type            | Required | Description                                                                                      |
+| ------------------- | --------------- | :------: | ------------------------------------------------------------------------------------------------ |
+| `rule_code`         | `string`        |   Yes    | Rule JavaScript source, not base64-encoded                                                       |
+| `tree_sitter_query` | `string`        |   Yes    | Tree-sitter query source, not base64-encoded                                                     |
+| `language`          | `string`        |   Yes    | Language of the rule, for example `TYPESCRIPT`, `JAVASCRIPT`, `PYTHON`, `GO`, or `JAVA`          |
+| `directory`         | `string`        |    No    | Repository directory to scan (defaults to the current directory)                                 |
+| `rule_name`         | `string`        |    No    | Rule name inside the temporary ruleset                                                           |
+| `paths`             | `array[string]` |    No    | Files or subdirectories inside `directory` to scan. Omit to scan the whole directory.            |
+
+### Output
+
+Violations reported by the rule, grouped by file. If the rule throws an exception, fails to compile, or times out on any file, the tool returns an error that lists those files instead.
+
+### Required binary
+
+`datadog-static-analyzer` version 0.9.10 or later. If you have an earlier version, see [Scanner upgrade required][2].
+
+## `datadog_promote_sast_rule`
+
+Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if either example's finding count differs from its `annotation_count` or if the rule fails. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
+
+Scans use the saved rule only after the repository configuration lists its ruleset (`security-variants` by default). Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. If both files exist, `code-security.datadog.yaml` takes precedence over the legacy file. See [Static Code Analysis configuration][4].
+
+Requires `DD_API_KEY` and `DD_APP_KEY`.
+
+### Parameters
+
+| Parameter           | Type            | Required | Description                                                                                                   |
+| ------------------- | --------------- | :------: | ------------------------------------------------------------------------------------------------------------- |
+| `user_confirmed`    | `boolean`       |   Yes    | Must be `true`. Set it only after the user approves the rule.                                                 |
+| `rule_code`         | `string`        |   Yes    | Rule JavaScript source, not base64-encoded                                                                    |
+| `tree_sitter_query` | `string`        |   Yes    | Tree-sitter query source, not base64-encoded                                                                  |
+| `language`          | `string`        |   Yes    | Language of the rule, for example `TYPESCRIPT`                                                                |
+| `rule_name`         | `string`        |   Yes    | Lowercase rule name, 5-32 characters                                                                          |
+| `ruleset_name`      | `string`        |    No    | Lowercase ruleset name, 5-32 characters. Default: `security-variants`.                                        |
+| `overwrite`         | `boolean`       |    No    | Replace a rule that already exists. Default: `false`.                                                         |
+| `short_description` | `string`        |    No    | One-line summary, at most 60 characters                                                                       |
+| `description`       | `string`        |    No    | Description stored on the rule                                                                                |
+| `tests`             | `array[object]` |   Yes    | Exactly two examples: the fixed code and the code before the fix. Each object uses the fields in the table below. |
+
+Rule and ruleset names can contain lowercase letters, digits, and single hyphens. They cannot start or end with a hyphen.
+
+Each entry in `tests`:
+
+| Field              | Type      | Required | Description                                                                      |
+| ------------------ | --------- | :------: | -------------------------------------------------------------------------------- |
+| `filename`         | `string`  |   Yes    | Filename without directories. Its extension must match the rule's `language`, for example `.ts` for `TYPESCRIPT`. |
+| `code`             | `string`  |   Yes    | Example source, not base64-encoded                                               |
+| `annotation_count` | `integer` |   Yes    | Number of findings the rule must report on this example: `0` for the fixed code, and a positive number (usually `1`) for the code before the fix |
+
+### Output
+
+The ruleset name, rule name, and revision ID of the saved rule.
+
+### Required binary
+
+`datadog-static-analyzer` version 0.9.10 or later, to run the rule on the examples before saving.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/dev_tool_int/mcp_server/
+[2]: /security/code_security/dev_tool_int/mcp_server/troubleshooting/#scanner-upgrade-required
+[3]: /security/code_security/static_analysis/custom_rules/
+[4]: /security/code_security/static_analysis/configuration/

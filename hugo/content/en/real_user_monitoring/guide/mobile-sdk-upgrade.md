@@ -537,7 +537,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[2]: /session_replay/mobile/
+[2]: /session_replay/?platform=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -548,7 +548,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[3]: /session_replay/mobile/
+[3]: /session_replay/?platform=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

@@ -44,14 +44,14 @@ sbom:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   # See Runtime Package Prioritization section below.
   enrichment:
     usage:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization) section for requirements.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -85,7 +85,7 @@ The `languages` analyzer covers the following package ecosystems:
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Prioritization (Preview)
+## Runtime Package Prioritization
 
 Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
 
@@ -112,7 +112,7 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   enrichment:
     usage:
       enabled: true

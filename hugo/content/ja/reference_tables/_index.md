@@ -5,6 +5,9 @@ aliases:
 - /ja/integrations/guide/reference-tables
 description: CSV ファイルをアップロードするか、クラウドストレージを接続して、カスタムメタデータを Datadog データと組み合わせることで、ログ、セキュリティデータ、および分析を強化します。
 further_reading:
+- link: /reference_tables/guide/create-update-delete-reference-table-with-api/
+  tag: ガイド
+  text: API を使用したリファレンステーブルの作成、更新、削除
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ルックアッププロセッサを使用して、リファレンステーブルからログをリッチ化する
@@ -23,6 +26,9 @@ further_reading:
 - link: /metrics/reference_table_joins_with_metrics/
   tag: ドキュメント
   text: メトリクスを使用したリファレンステーブルの結合について学ぶ
+- link: https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/
+  tag: ブログ
+  text: リファレンステーブルと Observability Pipelines を使用して、動的に更新されるコンテキストをログに追加する
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
   tag: ブログ
   text: リファレンステーブルを使用してログにさらにコンテキストを追加する
@@ -59,7 +65,7 @@ Datadog は、インテグレーションや手動 CSV アップロードを含�
 {{< tabs >}}
 {{% tab "手動アップロード" %}}
 
-**New Reference Table +** をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
+[{{< ui >}}New Reference Table +{{< /ui >}}] (新規リファレンステーブル +) をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
 
 {{< img src="reference_tables/schema_setup.png" alt="Define the Schema セクションで、org_id を主キーとするテーブルと、org id、org name、parent org、account owner、および csm のデータを持つ列を表示しています " style="width:100%;">}}
 
@@ -68,7 +74,7 @@ Datadog は、インテグレーションや手動 CSV アップロードを含�
 {{% /tab %}}
 {{% tab "クラウドストレージ" %}}
 
-{{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
+{{% collapse-content title="Amazon S3" level="h3" id="amazon-s3" %}}
 
 リファレンステーブルは、Amazon S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。初期リファレンステーブルを一度構成しておけば、S3 API を使用した API での更新も可能です。**注**: CSV ファイルの内容に変更がない場合は、リファレンステーブルは置き換えられません。
 
@@ -99,7 +105,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 ```
 #### テーブルを定義する {#define-the-table}
 
-**New Reference Table +** をクリックしてから、名前を追加し、Amazon S3 を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
+[{{< ui >}}New Reference Table +{{< /ui >}}] をクリックしてから、名前を追加し、[{{< ui >}}Amazon S3{{< /ui >}}] を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
 
 {{< img src="reference_tables/s3_table.png" alt="Amazon S3 タイルを選択し、AWS Account、Bucket、Path のデータを記入した upload your data セクション" style="width:100%;">}}
 
@@ -109,13 +115,13 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h4" id="azure-storage" %}}
+{{% collapse-content title="Azure Storage" level="h3" id="azure-storage" %}}
 
 1. まだの場合は、リファレンステーブルをインポートするストレージアカウントを保持するサブスクリプション内で、[Azure インテグレーション][1]をセットアップしてください。これには、[Datadog がインテグレーションできるアプリ登録の作成][2]を伴います。
 2. Azure Portal で、リファレンステーブルファイルを保存するストレージアカウントを選択します。
-3. ストレージアカウント内で、**Access Control (IAM)** に移動し、**Add** > **Add Role Assignment** を選択します。
-4. **Storage Blob Data Reader** ロールを入力し、選択します。[Storage Blob Data Reader ロール][3]は、Datadog がストレージコンテナや Blob を読み込んで一覧表示できるようにするものです。
-5. **Members** タブで、**+ Select members** をクリックします。ステップ 1 で作成したアプリ登録を選択します。
+3. ストレージアカウント内で、[{{< ui >}}Access Control (IAM){{< /ui >}}] に移動し、[{{< ui >}}Add{{< /ui >}}] (追加) > [{{< ui >}}Add Role Assignment{{< /ui >}}] (ロールの割り当ての追加) を選択します。
+4. {{< ui >}}Storage Blob Data Reader{{< /ui >}} ロールを入力して選択します。[{{< ui >}}Storage Blob Data Reader{{< /ui >}} ロール][3]は、Datadog がストレージコンテナや Blob を読み込んで一覧表示できるようにするものです。
+5. [{{< ui >}}Members{{< /ui >}}] (メンバー) タブで、[{{< ui >}}+ Select members{{< /ui >}}] (+ メンバーを選択) をクリックします。ステップ 1 で作成したアプリ登録を選択します。
 
    {{< img src="reference_tables/add_members.png" alt="Azure Portal の Members セクションで、メンバーが選択され、Name、Object ID、Type にデータが入力された状態" style="width:85%;">}}
 
@@ -133,7 +139,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 [4]: /ja/integrations/azure/
 
 {{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h4" id="google-cloud-storage" %}}
+{{% collapse-content title="Google Cloud Storage" level="h3" id="google-cloud-storage" %}}
 
 ### Google Cloud Storage {#google-cloud-storage}
 
@@ -143,13 +149,13 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 1. Datadog で Google Cloud インテグレーションをセットアップしていない場合、またはレガシー Google プロジェクト ID ファイル (レガシープロジェクトであることは GCP インテグレーションタイルに表示されています) を使用している場合は、[Google Cloud Platform インテグレーション][1]のセットアップ手順に従ってください。これには、[Google Cloud サービスアカウント][2]を作成する必要があります。
 
-1. Google Cloud コンソールから、**Cloud Storage** ページに移動します。
+1. Google Cloud コンソールから、[{{< ui >}}Cloud Storage{{< /ui >}}] ページに移動します。
 
 1. アクセス権を与えたいバケットを見つけてクリックします。
 
-1. **Permissions** タブをクリックします。"View By Principals" の下にある **Grant Access** ボタンをクリックします。
+1. [{{< ui >}}Permissions{{< /ui >}}] (権限) タブをクリックします。[View By Principals] (プリンシパル別に表示) の下にある [{{< ui >}}Grant Access{{< /ui >}}] (アクセスを許可) ボタンをクリックします。
 
-1. 表示されるウィンドウで、"New principals" フィールドの下に、ステップ 1 で作成して GCP タイルに追加したサービスアカウントのメールアドレスを入力します。"Assign roles" の下で、**Storage Object Viewer** ロールを選択します。**Save** をクリックします。
+1. 表示されるウィンドウで、[New principals] (新しいプリンシパル) フィールドの下に、ステップ 1 で作成して GCP タイルに追加したサービスアカウントのメールアドレスを入力します。[Assign roles] (ロールを割り当てる) の下で、[{{< ui >}}Storage Object Viewer{{< /ui >}}] (Storage オブジェクト閲覧者) ロールを選択します。[{{< ui >}}Save{{< /ui >}}] (保存) をクリックします。
 
 {{< img src="reference_tables/grant_access.png" alt="アクセスを許可する構成を示す Google Cloud コンソール" style="width:100%;" >}}
 
@@ -163,7 +169,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 [2]: /ja/integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h4" id="terraform" %}}
+{{% collapse-content title="Terraform" level="h3" id="terraform" %}}
 
 [`datadog_reference_table`][9] リソースを使用して、Infrastructure as Code としてリファレンステーブルを管理します。テーブルスキーマ、プライマリキー、およびクラウドストレージアクセスの詳細でリソースを構成します。
 
@@ -178,14 +184,17 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 [Datadog API][8] を使用して、プログラムでリファレンステーブルを作成します。
 
-[Create Reference Table エンドポイント][10]を使用して、クラウドストレージまたはローカルファイルからリファレンステーブルを作成します。
+[Create リファレンステーブル エンドポイント][10]を使用して、クラウドストレージまたはローカルファイルからリファレンステーブルを作成します。
 - クラウドストレージソース (S3、Azure、GCS) の場合、クラウドストレージ内の CSV ファイルを指す `access_details` を `file_metadata` で指定します。
-- ローカルファイルの場合、`POST /api/latest/reference-tables/uploads` を呼び出してアップロード ID を取得し、CSV データをアップロードします。その後、`upload_id` を `file_metadata` で指定して Create Reference Table エンドポイントを呼び出します。
+- ローカルファイルの場合、`POST /api/latest/reference-tables/uploads` を呼び出してアップロード ID を取得し、CSV データをアップロードします。その後、`upload_id` を `file_metadata` で指定して Create リファレンステーブル エンドポイントを呼び出します。
 
 **注**: API はクラウドストレージのアップロードと同じファイルサイズ制限をサポートしています。詳細については、[リファレンステーブルの制限](#reference-table-limits)を参照してください。
 
+ローカル CSV ファイルをバックエンドとするリファレンステーブルを API で管理する詳細な手順については、[API を使用したリファレンステーブルの作成、更新、削除][11]を参照してください。
+
 [8]: /ja/api/latest/reference-tables/
 [10]: /ja/api/latest/reference-tables/#create-reference-table
+[11]: /ja/reference_tables/guide/create-update-delete-reference-table-with-api/
 
 {{% /tab %}}
 {{% tab "インテグレーション" %}}
@@ -212,7 +221,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 ## リファレンステーブルを変更する {#modify-a-reference-table}
 
-既存のリファレンステーブルを新しいデータで変更するには、テーブルを選択し、右上の **Update Config** をクリックします。
+既存のリファレンステーブルを新しいデータで変更するには、テーブルを選択し、右上の [{{< ui >}}Update Config{{< /ui >}}] (構成を更新) をクリックします。
 選択した CSV がテーブルにアップサートされます。つまり、次のようになります。
 
 * 同じ主キーを持つ既存の行はすべて更新される
@@ -223,20 +232,20 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 ## リファレンステーブルをエクスポートする {#export-a-reference-table}
 
-リファレンステーブルをエクスポートするには、テーブルを選択し、**Query in DDSQL Editor** をクリックします。そこから、[DDSQL エディター][7]を使用して CSV、Dashboard などにエクスポートできます。
+リファレンステーブルをエクスポートするには、テーブルを選択し、[{{< ui >}}Query in DDSQL Editor{{< /ui >}}] (DDSQL エディターでクエリ) をクリックします。そこから、[DDSQL エディター][7]を使用して CSV、Dashboard などにエクスポートできます。
 
 {{< img src="reference_tables/query_ddsql.png" alt="Table Preview の結果の上に Query in DDSQL Editor というラベルの青いボタンが表示されます" style="width:100%;" >}}
 
 ## リファレンステーブルを削除する {#delete-a-reference-table}
 
-リファレンステーブルを削除するには、テーブルを選択し、右上の歯車アイコンをクリックし、**Delete Table** をクリックします。
+リファレンステーブルを削除するには、テーブルを選択し、右上の歯車アイコンをクリックし、[{{< ui >}}Delete Table{{< /ui >}}] (テーブルを削除) をクリックします。
 テーブルと関連するすべての行が削除されます。
 
 リファレンステーブルを使用しているルックアップ プロセッサーがある場合、ログエンリッチメントが停止します。エンリッチメントが停止するまで、最大で 10 分かかる場合があります。
 
 ## リファレンステーブルアクティビティの監視 {#monitor-reference-table-activity}
 
-[監査証跡][2]または[変更イベント][3]でリファレンステーブルのアクティビティを監視することができます。特定のリファレンステーブルの監査証跡と変更イベントを表示するには、そのテーブルを選択し、**Update Config** の隣にある設定アイコンをクリックします。監査証跡を表示するには、組織の管理権限が必要です。
+[監査証跡][2]または[変更イベント][3]でリファレンステーブルのアクティビティを監視することができます。特定のリファレンステーブルの監査証跡と変更イベントを表示するには、そのテーブルを選択し、[{{< ui >}}Update Config{{< /ui >}}] の隣にある設定アイコンをクリックします。監査証跡を表示するには、組織の管理権限が必要です。
 
 ### 監査証跡 {#audit-trail}
 
@@ -254,11 +263,12 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 インポート中に発生したエラーについてアラートを受けるには、リファレンステーブルの変更イベントに[イベントモニター][4]を使用します。リファレンステーブルの変更イベントは `reference_tables` ソースから送信されます。
 
-**Monitors** タブからモニターを作成するか、**New Reference Table +** の横にある設定アイコンをクリックすると、あらかじめ入力されたモニターを生成することができます。
+[{{< ui >}}Monitors{{< /ui >}}] (モニター) タブからモニターを作成することも、[{{< ui >}}New Reference Table +{{< /ui >}}] (新しいリファレンステーブル +) の横にある設定アイコンをクリックして、あらかじめ入力されたモニターを生成することもできます。
 
 ## リファレンステーブルの制限 {#reference-table-limits}
-- リファレンステーブルには最大 50 列まで含めることができます
-- UI 経由でアップロードできるリファレンステーブルファイルのサイズは最大 4 MB です
+- リファレンステーブルには最大 200 列まで含めることができます
+- 1 行のサイズが 500KiB を超えることはできません
+- UI 経由でアップロードできるリファレンステーブルファイルのサイズは最大 200 MB です
 - クラウドバケットファイルからアップロードできるリファレンステーブルファイルのサイズは最大 200 MB です
 - インテグレーションを介してアップロードできるリファレンステーブルファイルのサイズは最大 200 MB です
 - 1 つの組織につき、リファレンステーブルを最大 100 個まで作成できます
@@ -287,12 +297,12 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 1. テーブルをクリックして詳細ページを開きます。
 2. 右上隅の歯車アイコンをクリックします。
-3. メニューから **Permissions** を選択します。
-4. [**Restrict Access**] をクリックします。
+3. メニューから [{{< ui >}}Permissions{{< /ui >}}] (権限) を選択します。
+4. [{{< ui >}}Restrict Access{{< /ui >}}] (アクセスの制限) をクリックします。
 5. ドロップダウンを使用して、チーム、ロール、またはユーザーを 1 つ以上選択します。
-6. **Add** をクリックします。
-7. **Editor** または **Viewer** を選択します。
-8. **Save** をクリックして変更を適用します。
+6. [{{< ui >}}Add{{< /ui >}}] (追加) をクリックします。
+7. [{{< ui >}}Editor{{< /ui >}}] または [{{< ui >}}Viewer{{< /ui >}}] を選択します。
+8. [{{< ui >}}Save{{< /ui >}}] (保存) をクリックして変更を適用します。
 
 ## 参考資料 {#further-reading}
 

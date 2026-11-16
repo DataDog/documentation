@@ -18,7 +18,7 @@ further_reading:
   text: 애플리케이션 메트릭 및 로그 자동 수집
 - link: /agent/guide/autodiscovery-management/
   tag: 설명서
-  text: 데이터 수집을 컨테이너의 하위 집합으로만 제한
+  text: 데이터 수집을 컨테이너의 하위 세트로만 제한
 - link: /agent/kubernetes/tag/
   tag: 설명서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
@@ -28,7 +28,7 @@ title: 수집된 Kubernetes 데이터
 
 **참고**: Windows 컨테이너의 경우 [Windows 배포에서 제한적으로 제공되는 메트릭][7]을 참조하세요.
 
-## Metrics {#metrics}
+## 메트릭 {#metrics}
 
 ### Kubernetes {#kubernetes}
 
@@ -39,6 +39,8 @@ title: 수집된 Kubernetes 데이터
 ### Kubelet {#kubelet}
 
 자세한 내용은 [Kubelet][1] 통합 설명서를 참조하세요.
+
+**참고**: Kubernetes v1.37 이상에서 Agent는 `kubernetes.cpu.load.10s.avg` 메트릭을 수집하지 않습니다. 이 버전의 kubelet에 내장된 cAdvisor는 기본 `container_cpu_load_average_10s` 메트릭을 내보내지 않습니다.
 
 {{< get-metrics-from-git "kubelet" >}}
 

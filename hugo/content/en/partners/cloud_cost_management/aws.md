@@ -177,7 +177,7 @@ CURs use **hourly granularity**, so AWS CUR delivery timing and Datadog processi
 [3]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
 [4]: /cloud_cost_management/setup/aws/?tab=manual#prerequisite-generate-a-cost-and-usage-report
 [5]: /getting_started/integrations/aws/#setup
-[6]: https://datadog-cloudformation-template.s3.amazonaws.com/aws_cloud_cost/v0.0.1/main.yaml
+[6]: https://datadog-cloudformation-template.s3.amazonaws.com/aws_cloud_cost/v0.0.5/main.yaml
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html
 [8]: https://app.datadoghq.com/cost/setup
 [9]: https://app.datadoghq.com/cost/explorer

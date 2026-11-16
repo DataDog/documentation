@@ -2,82 +2,80 @@
 algolia:
   tags:
   - scim
-  - proveedor de identidad
+  - identity provider
   - IdP
   - Azure AD
   - Entra ID
 aliases:
 - /es/account_management/scim/azure/
-description: Configura el aprovisionamiento automatizado de usuarios desde Microsoft
-  Entra ID a Datadog utilizando la configuración de SCIM paso a paso y la asignación
-  de atributos.
-title: Configurar SCIM con Microsoft Entra ID
+description: Configure el aprovisionamiento automatizado de usuarios desde Microsoft
+  Entra ID a Datadog mediante SCIM con configuración paso a paso y asignación de atributos.
+title: Configure SCIM con Microsoft Entra ID
 ---
-
 <div class="alert alert-info">
-SCIM está disponible con los planes Infrastructure Pro e Infrastructure Enterprise.
+SCIM está disponible con los planes Infrastructure Pro, Infrastructure Enterprise y Startup.
 </div>
 
 <div class="alert alert-danger">
-  Debido a la detención por parte de Microsoft de las actualizaciones de aplicaciones de terceros en Entra a raíz de un problema de seguridad sucedido a finales de 2024, el aprovisionamiento de equipos a través de SCIM no está disponible. Para crear Teams en Datadog, utiliza una de las alternativas admitidas: 
-  <a href="https://docs.datadoghq.com/account_management/saml/mapping/" target="_blank">asignación de ASAML</a>, 
+  Debido a una congelación de Microsoft en las actualizaciones de aplicaciones de terceros en Entra tras un incidente de seguridad a finales de 2024, el aprovisionamiento de Teams mediante SCIM no está disponible. Para crear Teams en Datadog, utilice una de las alternativas compatibles: 
+  <a href="https://docs.datadoghq.com/account_management/saml/mapping/" target="_blank">Asignación SAML</a>, 
   <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team" target="_blank">Terraform</a>, 
   <a href="https://docs.datadoghq.com/api/latest/teams/" target="_blank">la API pública</a>, o 
-  <a href="https://docs.datadoghq.com/api/latest/scim/" target="_blank">llamadas directas al servidor de SCIM</a>. SCIM también puede usarse para aprovisionar usuarios.
+  <a href="https://docs.datadoghq.com/api/latest/scim/" target="_blank">llamadas directas al servidor SCIM</a>. SCIM todavía se puede utilizar para aprovisionar usuarios.
 </div>
 
-Consulta las siguientes instrucciones para sincronizar tus usuarios de Datadog con Microsoft Entra ID mediante SCIM.
+Consulte las siguientes instrucciones para sincronizar sus usuarios de Datadog con Microsoft Entra ID usando SCIM.
 
-Para conocer las capacidades y limitaciones de esta función, consulta [SCIM][1].
+Para conocer las capacidades y limitaciones de esta función, consulte [SCIM][1].
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-SCIM en Datadog es una función avanzada disponible con los planes Infrastructure Pro e Infrastructure Enterprise.
+SCIM en Datadog es una función avanzada disponible con los planes Infraestructura Pro, Infraestructura Enterprise y Startup.
 
-Esta documentación presupone que tu organización gestiona las identidades de los usuarios utilizando un proveedor de identidad (IdP).
+Esta documentación asume que su organización gestiona las identidades de los usuarios mediante un proveedor de identidad.
 
-Datadog recomienda utilizar la clave de aplicación de una cuenta de servicio al configurar SCIM, para evitar cualquier interrupción en el acceso. Para obtener más información, consulta el [uso de cuentas de servicio con SCIM][2].
+Datadog recomienda encarecidamente que utilice una clave de aplicación de cuenta de servicio al configurar SCIM para evitar cualquier interrupción en el acceso. Para obtener más detalles, consulte [uso de una cuenta de servicio con SCIM][2].
 
-Al utilizar SAML y SCIM conjuntamente, Datadog recomienda encarecidamente deshabilitar el suministro justo-a-tiempo (JIT) de SAML, para evitar discrepancias en el acceso. Gestiona el suministro de usuarios únicamente a través del SCIM.
+Al usar SAML y SCIM juntos, Datadog recomienda encarecidamente deshabilitar el aprovisionamiento just-in-time (JIT) de SAML para evitar discrepancias en el acceso. Gestione el aprovisionamiento de usuarios solo a través de SCIM.
 
-## Añadir Datadog a la galería de aplicaciones de Microsoft Entra ID
+## Agregue Datadog a la galería de aplicaciones de Microsoft Entra ID {#add-datadog-to-the-microsoft-entra-id-application-gallery}
 
-1. Inicia sesión en el [centro de administración de Microsoft Entra][6] como mínimo como [Cloud Application Administrator][7]
-1. Ve a **Identity** -> **Applications** -> **Enterprise Applications** (Identidad -> Aplicaciones -> Aplicaciones empresariales)
-1. Haz clic en **New Application** (Nueva aplicación)
-1. Escribe "Datadog" en la casilla de búsqueda.
-1. Selecciona la aplicación Datadog en la galería.
-1. Si lo deseas, introduce un nombre en la casilla **Name** (Nombre).
-1. Haz clic en **Create** (Crear).
+1. Inicie sesión en el [centro de administración de Microsoft Entra][6] al menos como [Administrador de aplicaciones en la nube][7]
+1. Vaya a {{< ui >}}Identity{{< /ui >}} -> {{< ui >}}Applications{{< /ui >}} -> {{< ui >}}Enterprise Applications{{< /ui >}}
+1. Haga clic en {{< ui >}}New Application{{< /ui >}}
+1. Escriba "Datadog" en el cuadro de búsqueda
+1. Seleccione la aplicación Datadog de la galería
+1. Opcionalmente, ingrese un nombre en el cuadro de texto {{< ui >}}Name{{< /ui >}}
+1. Haga clic en {{< ui >}}Create{{< /ui >}}
 
-**Nota:** Si ya tienes Datadog configurado con Microsoft Entra ID para SSO, ve a **Enterprise Applications** (Aplicaciones empresariales) y selecciona tu aplicación de Datadog existente.
+**Nota:** Si ya tiene Datadog configurado con Microsoft Entra ID para SSO, vaya a {{< ui >}}Enterprise Applications{{< /ui >}} y seleccione su aplicación de Datadog existente.
 
-## Configurar el suministro automático de usuarios
+## Configure el aprovisionamiento automático de usuarios {#configure-automatic-user-provisioning}
 
-1. En la pantalla de gestión de aplicaciones, selecciona **Provisioning** (Suministrar) en el panel izquierdo
-2. En el menú **Provisioning Mode** (Modo de suministro), selecciona **Automatic** (Automático).
-3. Abre **Admin Credentials** (Credenciales de administrador).
-4. Completa la sección **Admin Credentials** (Credenciales de administrador) de la siguiente manera:
-    - **URL del inquilino**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim?aadOptscim062020`
-        - **Nota:** Utiliza el subdominio apropiado para tu sitio. Para encontrar tu URL, consulta [sitios de Datadog][3].
-        - **Nota:** La parte `?aadOptscim062020` de la URL del arrendatario es específicamente para Entra ID. Se trata de un indicador que le indica a Entra que corrija su comportamiento de SCIM tal como se describe en esta [documentación de Microsoft Entra][8]. Si no utilizas Entra ID, no debes incluir este sufijo en la URL.
-    - **Token secreto**: utiliza una clave de aplicación válida de Datadog. Puedes crear una clave de aplicación en [la página de configuración de tu organización][4]. Para mantener un acceso continuo a tus datos, utiliza una clave de aplicación de [cuenta de servicio][5].
+1. En la pantalla de administración de aplicaciones, seleccione {{< ui >}}Provisioning{{< /ui >}} en el panel izquierdo
+2. En el menú {{< ui >}}Provisioning Mode{{< /ui >}}, seleccione {{< ui >}}Automatic{{< /ui >}}
+3. Abra {{< ui >}}Admin Credentials{{< /ui >}}
+4. Complete la sección {{< ui >}}Admin Credentials{{< /ui >}} de la siguiente manera:
+    - {{< ui >}}Tenant URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim?aadOptscim062020`
+        - **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][3].
+        - **Note:** The `?aadOptscim062020` la parte de la URL del inquilino es específicamente para Entra ID. Este es un indicador que le dice a Entra que corrija su comportamiento SCIM como se describe en esta [documentación de Microsoft Entra][8]. Si no está utilizando Entra ID, no debe incluir este sufijo en la URL.
+    - {{< ui >}}Secret Token{{< /ui >}}: Utilice una clave de aplicación de Datadog válida. Puede crear una clave de aplicación en [la página de configuración de su organización][4]. Para mantener el acceso continuo a sus datos, utilice una clave de aplicación de [cuenta de servicio][5].
 
-{{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Pantalla de configuración de las Credenciales de administrador de Azure AD">}}
+{{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Pantalla de configuración de credenciales de administrador de Azure AD">}}
 
-5. Haz clic en **Test Connection** (Probar conexión) y espera a que aparezca el mensaje que confirma que las credenciales están autorizadas para habilitar el suministro.
-6. Haz clic en **Save** (Guardar). Aparecerá la sección de asignaciones. Consulta la siguiente sección para configurar asignaciones.
+5. Haga clic en {{< ui >}}Test Connection{{< /ui >}} y espere el mensaje que confirma que las credenciales están autorizadas para habilitar el aprovisionamiento.
+6. Haga clic en {{< ui >}}Save{{< /ui >}}. Aparece la sección de asignación. Consulte la siguiente sección para configurar la asignación.
 
-## Asignación de atributos
+## Asignación de atributos {#attribute-mapping}
 
-### Atributos de usuario
+### Atributos de usuario {#user-attributes}
 
-1. Expande la sección **Mappings** (Asignaciones).
-2. Haz clic en **Provision Azure Active Directory Users** (Aprovisionar usuarios de Azure Active Directory). Aparecerá la página de Asignación de atributos.
-3. Establece **Enabled** (Habilitado) en **Yes** (Sí).
-4. Haz clic en el icono **Save** (Guardar).
-5. En **Target Object actions** (Acciones del objeto de destino), asegúrate de que las acciones Create, Update y Delete (Crear, Actualizar y Eliminar) están seleccionadas.
-6. Revisa los atributos de usuario que se sincronizan desde Microsoft Entra ID a Datadog en la sección de asignación de atributos. Establece las siguientes asignaciones:
+1. Expanda la sección {{< ui >}}Mappings{{< /ui >}}
+2. Haga clic en {{< ui >}}Provision Azure Active Directory Users{{< /ui >}}. Aparece la página de Asignación de atributos.
+3. Establezca {{< ui >}}Enabled{{< /ui >}} en {{< ui >}}Yes{{< /ui >}}
+4. Haga clic en el icono {{< ui >}}Save{{< /ui >}}
+5. En {{< ui >}}Target Object actions{{< /ui >}}, asegúrese de que las acciones Crear, Actualizar y Eliminar estén seleccionadas
+6. Revise los atributos de usuario que se sincronizan desde Microsoft Entra ID a Datadog en la sección de asignación de atributos. Establezca las siguientes asignaciones:
 | Atributo de Microsoft Entra ID     | Atributo de Datadog              |
 |----------------------------------|--------------------------------|
 | `userPrincipalName`              | `userName`                     |
@@ -85,20 +83,29 @@ Al utilizar SAML y SCIM conjuntamente, Datadog recomienda encarecidamente deshab
 | `jobTitle`                       | `title`                        |
 | `mail`                           | `emails[type eq "work"].value` |
 | `displayName`                    | `name.formatted`               |
+| `AppRoleAssignmentsComplex([appRoleAssignments])` | `roles`               |
 
-   {{< img src="/account_management/scim/ad-users-2.png" alt="Configuración de asignación de atributos, aprovisionamiento de los usuarios de Azure Active Directory">}}
+   {{< img src="/account_management/scim/ad-users-2.png" alt="Configuración de asignación de atributos, aprovisionar usuarios de Azure Active Directory">}}
 
-7. Después de configurar las asignaciones, haz clic en **Save** (Guardar).
+7. Después de establecer sus asignaciones, haga clic en {{< ui >}}Save{{< /ui >}}.
 
-### Atributos de grupo
+Para aprovisionar el rol de Datadog de un usuario (integrado o personalizado), primero defina un rol de aplicación en el registro de la aplicación de Microsoft Entra. Cree un rol de aplicación para cada rol de Datadog que desee aprovisionar. Asigne los usuarios o grupos relevantes a esos roles de aplicación. Establezca el **Nombre para mostrar** de cada rol de aplicación en el nombre del rol de Datadog y su **Valor** en el UUID del rol de Datadog correspondiente. No utilice el nombre del rol de Datadog ni el valor de reclamación de rol SAML como **Valor** del rol de aplicación. Puede encontrar el UUID de un rol en la URL del rol en su página de [Configuración de la organización][11]. Para obtener instrucciones de configuración, consulte la [documentación de roles de aplicación de Microsoft][12]. Después de definir los roles de aplicación, asigne el atributo `roles` como se muestra arriba. Utilice la expresión `AppRoleAssignmentsComplex([appRoleAssignments])` para el atributo de Microsoft Entra ID. Si `roles` no está disponible en el menú desplegable de atributos de destino, agréguelo como un atributo de cadena **multivaluado**. Para obtener instrucciones de configuración, consulte la [documentación de asignación de atributos de Microsoft][10].
 
-No se admite la asignación de grupos.
+Los roles siguen la convención de atributos multivaluados SCIM definida en [RFC 7643][9]. Si una solicitud SCIM envía múltiples roles, Datadog aprovisiona solo los roles que coinciden con un rol en su organización. Si ninguno coincide y la organización tiene un rol predeterminado, el usuario vuelve a ese rol. Si la organización no tiene un rol predeterminado, Datadog omite la actualización del rol y conserva los roles existentes del usuario. Los roles que no coinciden se registran en Audit Trail. Para obtener más detalles, consulte [SCIM][1].
+
+### Atributos de grupo {#group-attributes}
+
+La asignación de grupos no es compatible.
 
 [1]: /es/account_management/scim/
 [2]: /es/account_management/scim/#using-a-service-account-with-scim
-[3]: /es/getting_started/site
+[3]: /es/api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /es/account_management/org_settings/service_accounts
 [6]: https://entra.microsoft.com/
 [7]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator
 [8]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior
+[9]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
+[10]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes#provisioning-a-role-to-a-scim-app
+[11]: https://app.datadoghq.com/organization-settings/roles
+[12]: https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps

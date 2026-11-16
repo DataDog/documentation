@@ -14,6 +14,10 @@ further_reading:
 
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 The following variables and parameters are available in workflows:
 - [Context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
 - [Input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.
@@ -27,7 +31,7 @@ Creating useful workflows sometimes necessitates passing data from one step to a
 - **Workflow variables** give you information about the current workflow:
     - `WorkflowName`: The name of the workflow.
     - `WorkflowId`: The ID of the workflow.
-    - `InstanceId`: The ID of the execution instance of the workflow.
+    - `InstanceId`: The ID of the workflow run.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
 - **Source object variables** are passed into the workflow by the triggering event.
@@ -52,7 +56,7 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 
 ### Source object variables
 
-Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
+Source object variables are properties of the triggering event that are resolved at runtime. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
 
 All the variables of the Source object are visible in the {{< ui >}}Context Variables{{< /ui >}} tab.
 
@@ -66,7 +70,7 @@ Input parameters are immutable key-value pairs that you can use to pass data int
 
 To add an input parameter:
 1. Click on the workflow canvas.
-1. Click the {{< ui >}}+{{< /ui >}} icon next to {{< ui >}}Input Parameters{{< /ui >}}.
+1. Click the {{< ui >}}\+{{< /ui >}} icon next to {{< ui >}}Input Parameters{{< /ui >}}.
 1. Add a parameter name, data type, and description for the parameter. The display name is generated automatically from the parameter name. Check the {{< ui >}}Use custom display name{{< /ui >}} box to customize it. The display name is a human readable name for the parameter, while the parameter name is used to reference the parameter in your workflow steps.
 1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
 
@@ -86,7 +90,7 @@ Output parameters allow you to access the result of a workflow. This is useful w
 
 To add an output parameter:
 1. Click on the workflow canvas.
-1. Click the {{< ui >}}+{{< /ui >}} icon next to {{< ui >}}Output Parameters{{< /ui >}}.
+1. Click the {{< ui >}}\+{{< /ui >}} icon next to {{< ui >}}Output Parameters{{< /ui >}}.
 1. Add a parameter name, value, and data type for the parameter.
 1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
 
@@ -106,7 +110,7 @@ To set a mutable workflow variable, use the [Set variable][1] action. You can us
 ### Set a custom variable
 
 To set a custom variable:
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
 1. Search for and select the {{< ui >}}Set variable{{< /ui >}} step.
 1. Click the {{< ui >}}Set variable{{< /ui >}} step and enter a {{< ui >}}Step name{{< /ui >}}.
 1. Enter a {{< ui >}}variable name{{< /ui >}}. Variable names must start with a letter and can contain only alphanumeric characters and underscores.

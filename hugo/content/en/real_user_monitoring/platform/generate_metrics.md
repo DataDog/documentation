@@ -33,7 +33,7 @@ RUM-based custom metrics are a cost-efficient option to summarize the data from 
 
 ## Create a RUM-based custom metric
 
-To create a custom metric from RUM event data, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Generate Metrics{{< /ui >}}][4] and click {{< ui >}}+ New Metric{{< /ui >}}.
+To create a custom metric from RUM event data, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Generate Metrics{{< /ui >}}][4] and click {{< ui >}}\+ New Metric{{< /ui >}}.
 
 {{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 

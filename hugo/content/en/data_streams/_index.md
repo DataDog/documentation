@@ -14,6 +14,9 @@ further_reading:
     - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Catalog'
+    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
+      tag: "Learning Center"
+      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
@@ -29,9 +32,18 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-observability/"
       tag: "Blog"
       text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
-    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
-      tag: "Learning Center"
-      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
+    - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+      tag: "Blog"
+      text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
+    - link: "https://www.datadoghq.com/blog/kafka-console/"
+      tag: "Blog"
+      text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
+    - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+      tag: 'Architecture Center'
+      text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+    - link: 'https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/'
+      tag: 'Architecture Center'
+      text: 'Observability in Event-Driven Architectures'
 cascade:
     algolia:
         rank: 70
@@ -48,16 +60,16 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
-|   | Java | Python | .NET | Node.js | Go | Ruby |
-| - | ---- | ------ | ---- | ------- | -- | ---- |
-| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
-| Azure Service Bus | | | {{< X >}} | | | |
-| Google Pub/Sub | {{< X >}} | {{< X >}} | | {{< X >}} | | |
-| IBM MQ | {{< X >}} | | {{< X >}} | | | |
-| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+|   | Java | Python | .NET | Node.js | Go | Ruby | PHP |
+| - | ---- | ------ | ---- | ------- | -- | ---- | --- |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | |
+| Azure Service Bus | | | {{< X >}} | | | | |
+| Google Pub/Sub | {{< X >}} | {{< X >}} | | {{< X >}} | | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | | {{< X >}} |
 
 Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
@@ -75,6 +87,7 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
   {{< image-card href="/data_streams/nodejs/" src="integrations_logos/node.png" alt="Node" >}}
   {{< image-card href="/data_streams/go" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/data_streams/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/data_streams/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
 
@@ -146,6 +159,14 @@ Datadog automatically links the infrastructure powering your services and relate
 
 Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors—including throughput, status, and topic dependencies.
 
+## Troubleshooting
+
+### End-to-end latency metric doesn't look accurate
+
+Latency calculations for a pathway require single-threaded message processing. If messages in your pipeline use multiple threads, add manual instrumentation. Manual instrumentation is available for [Go][12] and [Java][13] applications. For other languages, see the [manual instrumentation guide][14]. For .NET manual instrumentation, contact [Support][15].
+
+In the Pathways tab, the message **latency values may be approximate for these pathways** appears for pathways that need manual instrumentation for accurate latency values.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -161,3 +182,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
 [11]: /opentelemetry/compatibility
+[12]: /data_streams/go#manual-instrumentation
+[13]: /data_streams/java#manual-instrumentation
+[14]: /data_streams/manual_instrumentation/
+[15]: /help/

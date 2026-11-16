@@ -1,0 +1,3 @@
+---
+title: Catálogo de productos
+---

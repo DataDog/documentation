@@ -1,6 +1,10 @@
 ---
 title: IaC Custom Rule Reference
 description: Reference the Rego contract, parsed inputs, shared libraries, finding fields, and testing practices for custom IaC rules.
+further_reading:
+- link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
+  tag: "Blog"
+  text: "Enforce custom rules in Datadog IaC Security scanning"
 ---
 
 This reference for IaC custom rules describes the rule contract, parsed inputs, and platform-specific patterns.
@@ -290,6 +294,10 @@ The editor checks more than Rego syntax. Before evaluating a sample, Datadog ver
 - Does not call restricted built-ins such as `http.send` or `opa.runtime`.
 
 Fix all reported errors before interpreting an evaluation with no findings. Validation errors mean the policy didn't run successfully.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /security/code_security/iac_security/custom_rules/

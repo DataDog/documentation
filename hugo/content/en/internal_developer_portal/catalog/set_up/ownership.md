@@ -53,7 +53,7 @@ If you manage entities as code (for example, through repository-backed service d
 - **Choose a primary owner:** Designate one accountable Team; add secondary owners only when necessary.
 - **Keep handles consistent:** Use lowercase, hyphenated handles for consistency and searchability (for example, `payments-platform`, not `Payments Platform`).
 - **Sync from your IDP:** If possible, provision Teams from SAML or SCIM to keep membership current.
-- **Use team filters:** Encourage engineers to enable [**My Teams**][4] to focus views on owned entities.
+- **Use team filters:** Encourage engineers to select their teams in the [team filter][4] to focus views on owned entities.
 - **Use team hierarchies**: Create [subteams][5] to reflect your organization's structure and enable hierarchical filtering. 
 
 

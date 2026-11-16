@@ -25,9 +25,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築する
-title: アクセス制御
+- link: /account_management/delete_data/
+  tag: ドキュメント
+  text: Datadogからデータを削除してください
+title: Access Control
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Datadog は、Datadog リソースへのアクセスを制御するレベルをカスタマイズできる柔軟なアクセス管理システムを提供しています。
 

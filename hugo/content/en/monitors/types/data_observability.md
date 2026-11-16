@@ -174,6 +174,8 @@ The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value ret
 
 If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the {{< ui >}}Group by{{< /ui >}} field (for example, `column_a, column_b`). Each group is evaluated independently.
 
+<div class="alert alert-warning">Datadog stores the <code>dd_value</code> result and the value of each grouped column. Avoid grouping by columns that contain sensitive data. For details, see <a href="/data_observability/quality_monitoring/#data-sent-to-datadog">Data sent to Datadog</a>.</div>
+
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
 {{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
@@ -205,17 +207,31 @@ You can add a {{< ui >}}Group by{{< /ui >}} clause to split a single monitor int
 
 The default limit is 500 groups per monitor. To increase this limit, [contact Support][9].
 
+### Missing data
+
+In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
+
 ### Model configuration
 
-For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {{< ui >}}Model configuration{{< /ui >}} to refine how the model behaves:
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+{{< /callout >}}
+
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
 
 | Setting | Description |
 |---|---|
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
-| {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
-| {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
+| {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
 
-In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
+Use the following guidelines to tune a monitor:
+
+- To get more or fewer alerts across the whole series, adjust {{< ui >}}Sensitivity{{< /ui >}}. Bounds scale with how much the metric normally varies.
+- To avoid alerts on deviations smaller than a fixed amount, such as fewer than 1,000 rows from the predicted value, set a minimum bound size.
+- To correct how the model handled specific points, such as a missed alert or a false alert, annotate the bounds. See the [Annotate bounds](#annotate-bounds) section.
 
 ### Monitor schedule
 

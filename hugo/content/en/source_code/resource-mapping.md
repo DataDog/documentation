@@ -3,8 +3,6 @@ title: Kubernetes Resource Mapping for Source Code Integration
 description: "Learn how to connect Kubernetes cluster resources to the source code that was used to deploy them using annotations."
 ---
 
-## Overview
-
 Datadog's source code and resource mapping allow you to connect cluster resources to the source code
 that was used to deploy them, using Kubernetes annotations.
 
@@ -12,19 +10,20 @@ that was used to deploy them, using Kubernetes annotations.
 
 `origin.datadoghq.com/location` contains different content depending on how the resources were deployed.
 
+Add the appropriate annotation below under `metadata.annotations`.
+
 {{< tabs >}}
 {{% tab "Raw Kubernetes YAML" %}}
 If you deployed resources using `kubectl`, use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
 	"repo": {
 		"url": "<repo URL>",
 		"targetRevision": "<SHA for commit being deployed>",
 		"path": "<file path of the resource>"
 	}
-}
+}'
 ```
 
 {{% /tab %}}
@@ -40,16 +39,15 @@ Use the installation command `helm install <release> <chart/path>`.
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "repoURL": "<repo where the chart and values.yaml files are stored>",
     "targetRevision": "<commit SHA of repoURL>",
     "valuesPath": ["location of values.yaml files relative to <repoURL>"],
     "chartPath": "<chart/path> relative to <repoURL>"
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}
@@ -61,16 +59,15 @@ Use the installation command `helm install <release> <chart/path/arch-x.y.z.tgz>
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "repoURL": "<repo where the chart and values.yaml files are stored>",
     "targetRevision": "<commit SHA of repoURL>",
     "valuesPath": ["location of values.yaml files relative to <repoURL>"],
     "chartPath": "<chart/path/arch-x.y.z.tgz relative to repoURL>"
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}
@@ -82,9 +79,8 @@ Use the installation command `helm install <release> <unpacked/path/dir>`.
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "chartURL": "<URL of the chart>",
     "repoURL": "<repo where the values.yaml files are stored>",
@@ -92,7 +88,7 @@ origin.datadoghq.com/location:
     "valuesPath": ["location of values.yaml files relative to <repoURL>"],
     "chartPath": "<unpacked/path/dir relative to repoURL>"
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}
@@ -102,16 +98,15 @@ Use the installation command `helm install mynginx https://example.com/charts/ng
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "chartURL": "<URL in the format https://example.com/charts/nginx-1.2.3.tgz>",
     "repoURL": "<repo where the values.yaml files are stored>",
     "targetRevision": "<commit SHA of repoURL>",
     "valuesPath": ["location of values.yaml files relative to <repoURL>"]
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}
@@ -121,16 +116,15 @@ Use the installation command `helm install --repo https://example.com/charts/ my
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "chartURL": "<URL in the format https://example.com/charts/nginx>",
     "repoURL": "<repo where the values.yaml files are stored>",
     "targetRevision": "<commit SHA of repoURL>",
     "valuesPath": ["location of values.yaml files relative to <repoURL>"]
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}
@@ -140,16 +134,15 @@ Use the installation command `helm install mynginx --version 1.2.3 oci://example
 
 Use the following annotation format:
 
-```json
-origin.datadoghq.com/location:
-{
+```yaml
+origin.datadoghq.com/location: '{
   "helm": {
     "chartURL": "<URL in the format oci://example.com/charts/nginx>",
     "repoURL": "<repo where the values.yaml files are stored>",
     "targetRevision": "<commit SHA of repoURL>",
     "valuesPath": ["location of `values.yaml` files relative to <repoURL>"]
   }
-}
+}'
 ```
 
 {{% /collapse-content %}}

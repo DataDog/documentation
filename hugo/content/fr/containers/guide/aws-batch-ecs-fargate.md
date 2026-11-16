@@ -2,53 +2,55 @@
 aliases:
 - /fr/integrations/faq/aws-batch-ecs-fargate
 - /fr/agent/guide/aws-batch-ecs-fargate-datadog-agent
-description: Déployer l'Agent Datadog aux côtés des tâches AWS Batch s'exécutant sur
-  ECS Fargate pour une surveillance complète
+description: Déployez le Datadog Agent avec les jobs AWS Batch s'exécutant sur ECS
+  Fargate pour une surveillance complète.
 further_reading:
 - link: integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate
   tag: Documentation
   text: Amazon ECS sur AWS Fargate avec AWS Batch
-title: AWS Batch avec ECS Fargate et l'Agent Datadog
+- link: https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/
+  tag: Architecture Center
+  text: Utilisation de Datadog avec ECS Fargate
+title: AWS Batch avec ECS Fargate et le Datadog Agent
 ---
+Vous pouvez exécuter le Datadog Agent avec vos conteneurs de job AWS Batch en ajoutant le conteneur à votre définition de job.
 
-Vous pouvez exécuter l'Agent Datadog aux côtés de vos conteneurs de tâches AWS Batch en ajoutant le conteneur à votre définition de tâche.
-
-## Prérequis
+## Prérequis {#prerequisites}
 
 * Environnement de calcul AWS Batch
-* File d'attente de tâches AWS Batch associée à un environnement de calcul
+* File d'attente de jobs AWS Batch associée à un environnement de calcul
 
-## Créer la définition de tâche
+## Créez la définition de job {#create-the-job-definition}
 
 {{< tabs >}}
 {{% tab "Interface Web AWS" %}}
 
-1. Connectez-vous à votre [console Web AWS][1] et accédez à la section AWS Batch.
-2. Cliquez sur **Job Definitions** dans le menu de gauche, puis cliquez sur le bouton **Create** ou choisissez une définition de tâche AWS Batch existante.
-3. Pour les nouvelles définitions de tâche :
-    1. Sélectionnez **Fargate** comme type d'orchestration.
-    2. Désélectionnez l'option **Use legacy containerProperties structure**.
-    3. Saisissez un **Job Definition Name**, tel que `my-app-and-datadog`.
-    4. Sélectionnez un rôle IAM d'exécution. Consultez la section [Créer ou modifier votre stratégie IAM](#creer-ou-modifier-votre-strategie-iam) ci-dessous pour connaître les exigences d'autorisation.
-    5. Activez **Assign public IP** pour autoriser l'accès réseau sortant, puis cliquez sur le bouton **Next**.
-    6. Configurez le conteneur de l'Agent Datadog.
-        1. Pour le champ **Container name**, saisissez `datadog-agent`.
-        2. Pour **Image**, saisissez `public.ecr.aws/datadog/agent:latest`.
-        3. Configurez les exigences de ressources **CPU** et **Memory** en fonction de vos besoins.
-        4. Pour **Env Variables**, ajoutez la **Key** `DD_API_KEY` et saisissez votre [clé d'API Datadog][2] comme valeur.
-        5. Ajoutez une autre variable d'environnement avec la **clé** `ECS_FARGATE` et la valeur `true`. Cliquez sur **Add** pour ajouter le conteneur.
-        6. Ajoutez une autre variable d'environnement en utilisant la **clé** `DD_SITE` et la valeur {{< region-param key="dd_site" code="true" >}}. Le site `datadoghq.com` est utilisé par défaut si vous ne le définissez pas.
-    7. Ajoutez vos autres conteneurs d'application à la définition de tâche.
-    8. AWS Batch prend en charge [Fluent Bit et Firelens][3]. Pour activer la collecte de logs pour vos conteneurs d'application avec Datadog :
-       1. Créez un conteneur de routeur de log distinct dans la définition de tâche.
+1. Connectez-vous à votre [Console Web AWS][1] et accédez à la section AWS Batch.
+2. Cliquez sur {{< ui >}}Job Definitions{{< /ui >}} dans le menu de gauche, puis cliquez sur le bouton {{< ui >}}Create{{< /ui >}} ou choisissez une définition de job AWS Batch existante.
+3. Pour les nouvelles définitions de job :
+    1. Sélectionnez {{< ui >}}Fargate{{< /ui >}} comme type d'orchestration.
+    2. Désélectionnez l'option {{< ui >}}Use legacy containerProperties structure{{< /ui >}}. 
+    3. Saisissez un {{< ui >}}Job Definition Name{{< /ui >}}, tel que `my-app-and-datadog`.
+    4. Sélectionnez un rôle IAM d'exécution. Consultez les exigences en matière d'autorisations dans la section [Créer ou modifier votre politique IAM](#create-or-modify-your-iam-policy) ci-dessous.
+    5. Activez {{< ui >}}Assign public IP{{< /ui >}} pour autoriser l'accès réseau sortant, puis cliquez sur le bouton {{< ui >}}Next{{< /ui >}}.
+    6. Configurez le conteneur du Datadog Agent.
+        1. Pour {{< ui >}}Container name{{< /ui >}} saisissez `datadog-agent`.
+        2. Pour {{< ui >}}Image{{< /ui >}} saisissez `public.ecr.aws/datadog/agent:latest`.
+        3. Configurez les besoins en ressources pour {{< ui >}}CPU{{< /ui >}} et {{< ui >}}Memory{{< /ui >}} en fonction de vos besoins.
+        4. Pour {{< ui >}}Env Variables{{< /ui >}}, ajoutez {{< ui >}}Key{{< /ui >}} `DD_API_KEY` et saisissez votre [clé d'API Datadog][2] comme valeur.
+        5. Ajoutez une autre variable d'environnement en utilisant {{< ui >}}Key{{< /ui >}} `ECS_FARGATE` et la valeur `true`. Cliquez sur {{< ui >}}Add{{< /ui >}} pour ajouter le conteneur.
+        6. Ajoutez une autre variable d'environnement en utilisant {{< ui >}}Key{{< /ui >}} `DD_SITE` et la valeur {{< region-param key="dd_site" code="true" >}}. La valeur par défaut est `datadoghq.com` si vous ne la définissez pas.
+    7. Ajoutez vos autres conteneurs d'application à la définition de job.
+    8. AWS Batch prend en charge [Fluent Bit et Firelens][3]. Pour activer la collecte de logs pour vos conteneurs d'application avec Datadog :
+       1. Créez un conteneur de routage de logs distinct dans la définition de job.
        2. Configurez l'image `amazon/aws-for-fluent-bit:stable"` pour le conteneur.
-       3. Dans la section Firelens Configuration :
-          - Configurez le **Type** sur `fluentbit`.
-          - Configurez les **Options** pour inclure `enable-ecs-log-metadata` défini sur `true` pour **Name** et **Value** respectivement
-       4. Pour vos conteneurs d'application, dans la section Log Configuration :
-          - Configurez le **Log Driver** sur `awsfirelens`
-          - Configurez les **Options** pour inclure les **Name** et **Value** suivants de manière similaire à l'étape 2 de la section [ECS Fargate Fluent Bit et Firelens][4]
-    10. Cliquez sur **Create job definition** pour créer la définition de tâche.
+       3. Dans la section Firelens Configuration :
+          - Configurez {{< ui >}}Type{{< /ui >}} sur `fluentbit`.
+          - Configurez {{< ui >}}Options{{< /ui >}} pour inclure `enable-ecs-log-metadata` défini sur `true` pour {{< ui >}}Name{{< /ui >}} et {{< ui >}}Value{{< /ui >}} respectivement
+       4. Pour vos conteneurs d'application, dans la section Log Configuration :
+          - Configurez {{< ui >}}Log Driver{{< /ui >}} sur `awsfirelens`
+          - Configurez {{< ui >}}Options{{< /ui >}} pour inclure les {{< ui >}}Name{{< /ui >}} et {{< ui >}}Value{{< /ui >}} suivants, comme à l'étape 2 de la [section ECS Fargate Fluent Bit et Firelens][4]
+    10. Cliquez sur {{< ui >}}Create job definition{{< /ui >}} pour créer la définition de job.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -58,15 +60,15 @@ Vous pouvez exécuter l'Agent Datadog aux côtés de vos conteneurs de tâches A
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
 
-1. Téléchargez [datadog-agent-aws-batch-ecs-fargate.json][1].
+1. Téléchargez [datadog-agent-aws-batch-ecs-fargate.json][1]. 
 
-   **Remarque** : si vous utilisez Internet Explorer, cela peut être téléchargé sous forme de fichier gzip, qui contient le fichier JSON mentionné ci-dessous.
-2. Mettez à jour le JSON avec un `JOB_DEFINITION_NAME`, votre [clé d'API Datadog][2] et le `DD_SITE` approprié ({{< region-param key="dd_site" code="true" >}}).
+   **Remarque** : Si vous utilisez Internet Explorer, ce fichier peut être téléchargé en tant que fichier gzip, qui contient le fichier JSON mentionné ci-dessous.
+2. Mettez à jour le JSON avec un `JOB_DEFINITION_NAME`, votre [clé d'API Datadog][2] et le `DD_SITE` approprié ("{{< region-param key="dd_site" code="true" >}}).
 
-   **Remarque** : la variable d'environnement `ECS_FARGATE` est déjà définie sur `"true"`.
-3. Ajoutez vos autres conteneurs d'application à la définition de tâche.
-4. AWS Batch prend en charge [Fluent Bit et Firelens][3]. Pour activer la collecte de logs pour vos conteneurs d'application avec Datadog :
-   - Dans le fichier JSON, ajoutez un conteneur `log_router` supplémentaire avec ce qui suit dans la section `containers` :
+   **Remarque** : La variable d'environnement `ECS_FARGATE` est déjà définie sur `"true"`.
+3. Ajoutez vos autres conteneurs d'application à la définition de job.
+4. AWS Batch prend en charge [Fluent Bit et Firelens][3]. Pour activer la collecte de logs pour vos conteneurs d'application avec Datadog :
+   - Dans le fichier JSON, ajoutez un conteneur `log_router` supplémentaire avec ce qui suit dans la section `containers` :
      ```json
       {
           "name": "log_router",
@@ -90,32 +92,32 @@ Vous pouvez exécuter l'Agent Datadog aux côtés de vos conteneurs de tâches A
           ]
       }
      ```
-   - Dans vos conteneurs d'application, ajoutez les options `logConfiguration` pertinentes de manière similaire à l'étape 2 de la section [ECS Fargate Fluent Bit et Firelens][4]
-5. Exécutez la commande suivante pour enregistrer la définition de tâche :
+   - Dans vos conteneurs d'application, ajoutez les options `logConfiguration` pertinentes de manière similaire à l'étape 2 de la [section ECS Fargate Fluent Bit et Firelens][4]
+5. Exécutez la commande suivante pour enregistrer la définition de job :
 
    ```bash
    aws batch register-job-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-aws-batch-ecs-fargate.json
    ```
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-aws-batch-ecs-fargate.json
+[1]: https://docs.datadoghq.com/fr/resources/json/datadog-agent-aws-batch-ecs-fargate.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
 [4]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 {{% /tab %}}
 {{< /tabs >}}
 
-## Soumettre la tâche AWS Batch
+## Soumettez le job AWS Batch {#submit-the-aws-batch-job}
 
 {{< tabs >}}
 {{% tab "Interface Web AWS" %}}
 
-1. Connectez-vous à votre [console Web AWS][1] et accédez à la section AWS Batch. Si nécessaire, créez un [environnement de calcul][2] et/ou une [file d'attente de tâches][3] associée à un environnement de calcul.
-2. Dans l'onglet **Jobs**, cliquez sur le bouton **Submit new job**.
-3. Saisissez un **Job name**.
-4. Pour **Job Definition**, sélectionnez la tâche créée dans les étapes précédentes.
-5. Choisissez la file d'attente de tâches sur laquelle exécuter l'Agent Datadog.
-6. Les **Container overrides** sont facultatifs selon votre préférence.
-7. Cliquez sur le bouton **Next**, puis cliquez sur le bouton **Create job**.
+1. Connectez-vous à votre [Console Web AWS][1] et accédez à la section AWS Batch. Si nécessaire, créez un [environnement de calcul][2] et/ou une [file d'attente de jobs][3] associée à un environnement de calcul.
+2. Sur l'onglet {{< ui >}}Jobs{{< /ui >}}, cliquez sur le bouton {{< ui >}}Submit new job{{< /ui >}}.
+3. Saisissez un {{< ui >}}Job name{{< /ui >}}.
+4. Pour {{< ui >}}Job Definition{{< /ui >}}, sélectionnez le job créé lors des étapes précédentes.
+5. Choisissez la file d'attente de jobs sur laquelle exécuter le Datadog Agent.
+6. {{< ui >}}Container overrides{{< /ui >}} sont facultatifs selon vos préférences.
+7. Cliquez sur le bouton {{< ui >}}Next{{< /ui >}}, puis cliquez sur le bouton {{< ui >}}Create job{{< /ui >}}.
 
 [1]: https://aws.amazon.com/console
 [2]: https://docs.aws.amazon.com/batch/latest/userguide/create-compute-environment.html
@@ -124,7 +126,7 @@ Vous pouvez exécuter l'Agent Datadog aux côtés de vos conteneurs de tâches A
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
 
-1. Exécutez la commande suivante pour soumettre une tâche pour votre définition de tâche :
+1. Exécutez la commande suivante pour soumettre un job pour votre définition de job :
 
 ```bash
 aws batch submit-job --job-name <JOB_NAME> \
@@ -135,6 +137,6 @@ aws batch submit-job --job-name <JOB_NAME> \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

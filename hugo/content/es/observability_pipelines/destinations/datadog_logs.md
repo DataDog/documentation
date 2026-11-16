@@ -26,7 +26,7 @@ Después de seleccionar el destino Datadog Logs en la interfaz de usuario de la 
 
 #### Envíe registros a múltiples organizaciones de Datadog {#route-logs-to-multiple-datadog-organizations}
 
-Puede enviar registros a múltiples organizaciones de Datadog. Una vez configurado el envío, puede [ver métricas para el componente o para organizaciones específicas](#view-metrics-for-the-component-or-specific-organizations) a las que está enviando registros.
+Puede enviar registros a múltiples organizaciones de Datadog. Una vez configurado el envío, puede [visualizar métricas para el componente o para organizaciones específicas](#view-metrics-for-the-component-or-specific-organizations) a las que está enviando registros.
 
 **Nota**: Puede enviar registros a hasta 100 organizaciones de Datadog.
 
@@ -38,7 +38,7 @@ Haga clic en {{< ui >}}Route to Multiple Organizations{{< /ui >}} para configura
 - Si ya ha agregado organizaciones, puede:
   - Haga clic en una organización en la tabla para editarla o eliminarla.
   - Utilice la barra de búsqueda para encontrar una organización específica por nombre, consulta de filtro o sitio de Datadog, y luego seleccione la organización para editarla o eliminarla.
-  - [Ver métricas](#view-metrics-for-the-component-or-specific-organizations) de una organización.
+  - [Visualizar métricas](#view-metrics-for-the-component-or-specific-organizations) de una organización.
   - Haga clic en {{< ui >}}Add organization{{< /ui >}} para enviar a otra organización de Datadog.
 
 **Nota**: Si no configura el envío a múltiples organizaciones de Datadog, los registros se envían a la organización de Datadog predeterminada. Esta es la organización vinculada a la clave de API cuando instala el Worker.
@@ -59,7 +59,7 @@ Haga clic en {{< ui >}}Route to Multiple Organizations{{< /ui >}} para configura
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Valores predeterminados de secretos {#secret-defaults}
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{< tabs >}}
 {{% tab "Gestión de secretos" %}}
@@ -77,13 +77,13 @@ No hay identificadores de secreto para este destino.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Ver métricas para el componente o para organizaciones específicas {#view-metrics-for-the-component-or-specific-organizations}
+## Visualizar métricas para el componente o para organizaciones específicas {#view-metrics-for-the-component-or-specific-organizations}
 
-Puede ver las métricas a [nivel de componente](#component-level-metrics) o a [nivel de organización](#organization-level-metrics).
+Puede visualizar las métricas a [nivel de componente](#component-level-metrics) o a [nivel de organización](#organization-level-metrics).
 
 ### Métricas a nivel de componente {#component-level-metrics}
 
-Para ver las métricas del destino general de Datadog Logs:
+Para visualizar las métricas del destino general de Datadog Logs:
 
 1. Navegue a [Observability Pipelines][1].
 1. Seleccione su canalización.
@@ -93,7 +93,7 @@ Para ver las métricas del destino general de Datadog Logs:
 
 ### Métricas a nivel de organización {#organization-level-metrics}
 
-Para ver las métricas de una organización de Datadog específica:
+Para visualizar las métricas de una organización de Datadog específica:
 
 1. Navegue a [Observability Pipelines][1].
 1. Seleccione su canalización.
@@ -104,7 +104,7 @@ Para ver las métricas de una organización de Datadog específica:
 
 Alternativamente, haga clic en {{< ui >}}Review Configured Organizations{{< /ui >}} en el destino Datadog Logs. Luego, haga clic en el icono de gráfico en la columna {{< ui >}}Metrics{{< /ui >}} para la organización.
 
-## Métricas de estado {#health-metrics}
+## Métricas de salud {#health-metrics}
 
 Para [métricas de componentes][7] y [métricas de búfer de destino][8] emitidas por todos los destinos, consulte la documentación de [Métricas de uso de Pipelines][9].
 
@@ -192,9 +192,9 @@ Debido a que el atributo reservado `status` ya existe, el destino lo renombra a 
 
 ### Procesamiento por lotes de eventos {#event-batching}
 
-Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Destinations event batching][2] para obtener más información.
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Agrupamiento de eventos de destino][2] para obtener más información.
 
-| Eventos máximos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 

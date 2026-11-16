@@ -3,6 +3,9 @@ title: AWS Integration Multi-Account setup for AWS Organizations
 
 description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
+- link: "https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/"
+  tag: "Architecture Center"
+  text: "A Guide to Integrating 100+ AWS Accounts with Datadog"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
   tag: "Guide"
   text: "Troubleshooting the AWS integration" 
@@ -100,6 +103,8 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 
 ## Uninstall AWS Integration
 
+If you installed [Datadog instrumentation][11] on resources in these accounts, remove it first. Datadog removes instrumentation with the integration IAM role. After the StackInstances are deleted, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration that Datadog added stay in place. For each account, remove the instrumentation from Fleet Automation as described in [Remove the integration][12], then return here to delete the StackInstances and StackSet.
+
 To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet. 
 
 ## Further Reading
@@ -116,3 +121,5 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [9]: https://docs.datadoghq.com/integrations/guide/amazon_cloudformation/
 [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
+[11]: /integrations/guide/aws-agent-installation/
+[12]: /getting_started/integrations/aws/#remove-the-integration

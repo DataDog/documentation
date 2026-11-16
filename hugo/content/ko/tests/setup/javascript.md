@@ -33,21 +33,23 @@ type: multi-code-lang
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent)는 `dd-trace>=6.1.0`부터 지원됩니다. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent)는 `dd-trace>=6.1.0`부터 지원됩니다. [브라우저 모드](https://vitest.dev/guide/browser/)는 `dd-trace>=6.8.0`부터 지원됩니다. |
+| WebdriverIO | >= 9.0.0 | Mocha 및 Jasmine 프레임워크 어댑터에서 `dd-trace>=6.10.0`부터 지원됩니다. |
 
 `dd-trace` v6에는 Node.js 22 이상이 필요합니다.
 
 {{% /tab %}}
 {{% tab "dd-trace v5" %}}
 
-| 테스트 프레임워크 | 버전 | 참고 사항 |
+| 테스트 프레임워크 | 버전 | </md_ta참고 사항 |
 |---|---|---|
 | Jest | >= 24.8.0 | 테스트 환경으로 `jsdom`(`jest-environment-jsdom` 패키지 내) 및 `node`(`jest-environment-node` 패키지 내)만 지원됩니다. `jest-electron-runner`의 `@jest-runner/electron/environment`와 같은 사용자 지정 환경은 지원되지 않습니다.<br><br>[`testRunner`](https://jestjs.io/docs/configuration#testrunner-string)로 [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus)만 지원됩니다.<br><br>[`test.concurrent`](https://jestjs.io/docs/api#testconcurrentname-fn-timeout) 는 `dd-trace>=5.112.0`부터 지원됩니다. |
 | Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.6.0 | `dd-trace>=5.18.0`부터 지원됩니다. [`test.concurrent`](https://vitest.dev/api/#test-concurrent)는 `dd-trace>=5.112.0`부터 지원됩니다. |
+| Vitest | >= 1.6.0 | `dd-trace>=5.18.0`부터 지원됩니다. [`test.concurrent`](https://vitest.dev/api/#test-concurrent)는 `dd-trace>=5.112.0`부터 지원됩니다. [브라우저 모드](https://vitest.dev/guide/browser/)는 `dd-trace>=5.119.0`부터 지원됩니다. |
+| WebdriverIO | >= 9.0.0 | Mocha 및 Jasmine 프레임워크 어댑터에서 `dd-trace>=5.121.0`부터 지원됩니다.|
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -449,6 +451,7 @@ v5 릴리스 라인에서는 [`dd-trace` v5.112.0 이상][8]을 사용하고, v6
 </div>
 
 Vitest 계측을 위해 `dd-trace` 메이저 버전에서 지원하는 Node.js 버전을 사용하세요.
+
 - `dd-trace` v5에는 Node.js 18.19 이상 또는 Node.js 20.6 이상이 필요합니다.
 - `dd-trace` v6에는 Node.js 22 이상이 필요합니다.
 
@@ -497,6 +500,70 @@ test('sum function can sum', () => {
   testSpan.setTag('memory_allocations', 16)
 
   expect(1 + 2).toBe(3)
+})
+```
+
+사용자 지정 측정값에 대한 자세한 내용은 [사용자 지정 측정값 추가 가이드][2]를 참조하세요.
+
+[1]: /ko/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /ko/tests/guides/add_custom_measures/?tab=javascripttypescript
+{{% /tab %}}
+
+{{% tab "WebdriverIO" %}}
+WebdriverIO 계측을 위해 `dd-trace` 메이저 버전에서 지원하는 Node.js 버전을 사용하세요.
+
+- `dd-trace` v5에는 Node.js 18.19 이상 또는 Node.js 20.6 이상이 필요합니다.
+- `dd-trace` v6에는 Node.js 22 이상이 필요합니다.
+
+`NODE_OPTIONS` 환경 변수를 `--import dd-trace/register.js -r dd-trace/ci/init`으로 설정합니다. 평소와 같이 테스트를 실행하고, 필요시 `DD_TEST_SESSION_NAME`을 사용하여 테스트 세션의 이름을 지정합니다.
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
+```
+
+**참고**: `NODE_OPTIONS`에 값을 설정하는 경우 이 값이 `--import dd-trace/register.js -r dd-trace/ci/init`을 덮어쓰지 않는지 확인하세요. 이 작업은 `${NODE_OPTIONS:-}` 절을 사용하여 수행할 수 있습니다.
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:e2e": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+  }
+}
+{{< /code-block >}}
+
+### 테스트에 사용자 지정 태그 또는 측정값 추가 {#adding-custom-tags-or-measures-to-tests-1}
+
+현재 활성 스팬을 사용하여 테스트에 사용자 지정 태그를 추가할 수 있습니다.
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('team_owner', 'my_team')
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+이러한 태그에 대한 필터 또는 `group by` 필드를 생성하려면 먼저 패싯을 생성해야 합니다. 태그 추가에 대한 자세한 내용은 Node.js 사용자 지정 계측 설명서의 [태그 추가][1] 섹션을 참조하세요.
+
+현재 활성 스팬을 사용하여 테스트에 사용자 지정 측정값을 추가할 수도 있습니다.
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('memory_allocations', 16)
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
 })
 ```
 
@@ -625,14 +692,14 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ## 수동 테스트 API {#manual-testing-api}
 
 <div class="alert alert-danger">
-  <strong>참고</strong>: 수동 테스트 API는 <code>dd-trace</code> 버전 <code>5.23.0</code> 및 <code>4.47.0</code>부터 사용할 수 있습니다.
+  <strong>참고</strong>: 수동 테스트 API는 <code>dd-trace</code> 버전 <code>5.23.0</code> 및 <code>4.47.0</code>.
 </div>
 
-Jest, Mocha, Cypress, Playwright, Cucumber 또는 Vitest를 사용하는 경우 **수동 테스트 API를 사용하지 마세요**. Test Optimization이 자동으로 이를 계측하고 테스트 결과를 Datadog으로 전송하기 때문입니다. 수동 테스트 API는 이미 지원되는 테스트 프레임워크와는 **호환되지 않습니다**.
+Jest, Mocha, Cypress, Playwright, Cucumber, Vitest, WebdriverIO를 사용하는 경우 **수동 테스팅 API를 사용하지 마세요**. Test Optimization는 해당 프레임워크를 자동으로 계측하고 테스트 결과를 Datadog으로 전송합니다. 수동 테스팅 API는 지원되는 테스팅 프레임워크와는 **호환되지 않습니다**.
 
-지원되지 않는 테스트 프레임워크를 사용하거나 다른 테스트 메커니즘이 있는 경우에만 수동 테스트 API를 사용하세요.
+지원되지 않는 테스팅 프레임워크를 사용하거나 다른 테스팅 메커니즘이 있는 경우에만 수동 테스팅 API를 사용하세요.
 
-수동 테스트 API는 Node.js의 `node:diagnostics_channel` 모듈을 활용하며 게시할 수 있는 채널을 기반으로 합니다.
+수동 테스팅 API는 Node.js의 `node:diagnostics_channel` 모듈을 활용하며 게시할 수 있는 채널을 기반으로 합니다.
 
 ```javascript
 const { channel } = require('node:diagnostics_channel')
@@ -727,7 +794,7 @@ const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
 
 ### 테스트 실행 {#run-the-tests}
 
-테스트 시작 및 종료 채널이 코드에 있으면 다음 환경 변수를 포함하여 평소와 같이 테스트 프레임워크를 실행합니다.
+테스트 시작 및 종료 채널이 코드에 있으면 다음 환경 변수를 포함하여 평소와 같이 테스팅 프레임워크를 실행합니다.
 
 ```shell
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my-test-framework
@@ -756,7 +823,7 @@ Cypress [테스트 격리][13]가 활성화되어 있어야(기본값)
 
 격리가 비활성화되면 트레이서가 경고 `Test isolation is
 disabled, retries will not be enabled`를 기록하고, 어떤 테스트 실행에도
-`@test.test_management.is_attempt_to_fix` 태그가 지정되지 않습니다. 트레이서가 전역
+`@test.test_management.is_attempt_to_fix`. 트레이서가 전역
 `testIsolation` 값을 읽기 때문에 스위트별 `describe` 재정의로 인해 재시도가 다시 활성화되지 않습니다.
 
 ### Jest의 `--forceExit` {#jests-forceexit}
@@ -764,9 +831,6 @@ Jest의 [--forceExit][15] 옵션은 데이터 손실을 유발할 수 있습니�
 
 ### Mocha의 `--exit` {#mochas-exit}
 Mocha의 [--exit][16] 옵션은 데이터 손실을 유발할 수 있습니다. Datadog은 테스트가 완료된 직후 데이터를 전송하려고 시도하지만 프로세스를 갑자기 종료하면 일부 요청이 실패할 수 있습니다. `--exit` 사용 시 주의하세요.
-
-### Vitest의 브라우저 모드 {#vitests-browser-mode}
-Vitest의 [브라우저 모드][17]는 지원되지 않습니다.
 
 ### Vitest의 테스트 기간 오버헤드 {#vitests-test-duration-overhead}
 
@@ -785,11 +849,11 @@ Vitest의 [브라우저 모드][17]는 지원되지 않습니다.
 
 ## 모범 사례 {#best-practices}
 
-테스트 프레임워크와 Test Optimization을 최대한 활용하려면 다음 모범 사례를 따르세요.
+테스팅 프레임워크와 Test Optimization을 최대한 활용하려면 다음 모범 사례를 따르세요.
 
 ### 파라미터화된 테스트 {#parameterized-tests}
 
-가능하다면 테스트 프레임워크가 파라미터화된 테스트를 위해 제공하는 도구를 활용하세요. 예를 들어, `jest`의 경우 다음과 같습니다.
+가능하다면 테스팅 프레임워크가 파라미터화된 테스트를 위해 제공하는 도구를 활용하세요. 예를 들어, `jest`의 경우 다음과 같습니다.
 
 다음을 피하세요.
 {{< code-block lang="javascript" >}}
@@ -821,7 +885,7 @@ forEach([
 });
 {{< /code-block >}}
 
-이 접근 방식을 사용하면 테스트 프레임워크와 Test Optimization이 모두 테스트를 구분할 수 있습니다.
+이 접근 방식을 사용하면 테스팅 프레임워크와 Test Optimization이 모두 테스트를 구분할 수 있습니다.
 
 ### 테스트 세션 이름 `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
 
@@ -858,7 +922,6 @@ forEach([
 [13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
-[17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle

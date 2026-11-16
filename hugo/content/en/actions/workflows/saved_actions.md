@@ -21,6 +21,10 @@ further_reading:
 
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 Use the _Saved Actions_ feature to store and reuse an action and its parameters. You can insert a saved action into your workflow as a new step, or use one to populate an existing step's parameters.
 
 ## Save an action
@@ -36,7 +40,7 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 ## Use a saved action in your workflow
 
 To add a saved action as a new step in your workflow:
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon from the workflow canvas and select {{< ui >}}Saved Actions{{< /ui >}}.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon from the workflow canvas and select {{< ui >}}Saved Actions{{< /ui >}}.
 1. Use the search bar or browse through the list to find the Saved Action you're looking for.
 1. Select the Saved Action to add it as a configured step on your workflow canvas.
 

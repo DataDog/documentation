@@ -105,9 +105,9 @@ Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and h
 
 ## Enable the health check endpoint and the liveness and readiness probes
 
-Configure your load balancer's health check with the `/health` endpoint to check that the Worker is up and running.
+Configure your load balancer's health check with the `/health` endpoint to check that the Worker is up and running. See [Load balancer configurations][13] for more recommendations on setting up a load balancer in front of the Worker.
 
-For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file.
+For Kubernetes, the liveness and readiness probes are enabled in the [helm chart][9] and [values.yaml][10] file by default. These probes check a TCP socket on the Worker API port instead of the `/health` endpoint.
 
 For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` to `true` and set `DD_OP_API_ADDRESS` to `0.0.0.0:8686` to expose the `/health` endpoint. An example configuration:
 
@@ -133,3 +133,4 @@ api:
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
 [11]: /remote_configuration/#security-considerations
 [12]: /observability_pipelines/configuration/secrets_management/
+[13]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#load-balancer-configurations

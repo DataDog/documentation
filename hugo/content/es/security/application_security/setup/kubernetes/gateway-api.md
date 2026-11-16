@@ -9,48 +9,53 @@ further_reading:
   text: Código fuente de la integración de Gateway API
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentación
-  text: Reglas predefinidas de App and API Protection
+  text: Reglas de protección de aplicaciones y API listas para usar
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solución de problemas de App and API Protection
-title: Activación de AAP para Gateway API en Kubernetes
+  text: Solución de problemas de protección de aplicaciones y API
+title: Habilitación de AAP para Gateway API en Kubernetes
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection se encuentra en versión preliminar en el sitio de Datadog Government US1-FED.
+</div>
+{{< /site-region >}}
 
 <div class="alert alert-danger">
-  AAP para Gateway API es experimental. Sigue las instrucciones a continuación para probarla.
+  AAP para Gateway API es experimental. Siga las instrucciones a continuación para probarlo.
 </div>
 
-## Información general
+## Descripción general {#overview}
 
-**Datadog AppSec Gateway API Request Mirror** mejora la seguridad de las aplicaciones al aprovechar la funcionalidad **RequestMirror** de las Gateway APIs de Kubernetes para duplicar el tráfico a un endpoint de Datadog App &API Protection. Esto permite la detección y el análisis en tiempo real de posibles ataques a nivel de aplicación, la detección de endpoints de API, etc., todo ello sin afectar al flujo de solicitudes principal.
+El **Request Mirror de Datadog AppSec Gateway API** mejora la seguridad de las aplicaciones al aprovechar la funcionalidad **RequestMirror** en las API de Gateway de Kubernetes para duplicar el tráfico a un punto de conexión de Datadog App & API Protection. Esto permite la detección y el análisis en tiempo real de posibles ataques a nivel de aplicación, el descubrimiento de puntos de conexión de API y más, todo sin afectar el flujo de solicitudes principal.
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-- Un clúster de Kubernetes con [CRDs de Gateway API instalados][9].
+- Un clúster de Kubernetes con [Gateway API CRDs instalados][9].
 - Un [controlador compatible con el filtro RequestMirror de Gateway API][10].
-- [Go][11] 1.23+ instalado en tu máquina local.
+- [Go][11] 1.23+ instalado en su máquina local.
 
-## Habilitación de la detección de amenazas
+## Habilitación de la detección de amenazas {#enabling-threat-detection}
 
-### Instalación
+### Instalación {#installation}
 
-1. **Despliega el Datadog Agent** en tu clúster de Kubernetes siguiendo la [guía de instalación de Kubernetes][12].
+1. **Implemente el Datadog Agent** en su clúster de Kubernetes siguiendo la [guía de instalación de Kubernetes][12].
 
-2. **Configura el Datadog Agent** para [admitir cargas útiles de AppSec entrantes][13] usando APM como transporte.
+2. **Configure el Datadog Agent** para [admitir cargas útiles de AppSec entrantes][13] utilizando APM como transporte.
 
-3. **Despliega AppSec Gateway API Request Mirror** en el espacio de nombres de tu elección (por ejemplo, `datadog`) junto con su servicio:
+3. **Implemente el AppSec Gateway API Request Mirror** en el espacio de nombres de su elección (por ejemplo, `datadog`) junto con su servicio:
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/DataDog/dd-trace-go/refs/heads/main/contrib/k8s.io/gateway-api/cmd/request-mirror/deployment.yml
    ```
 
-4. **Verifica el despliegue**:
+4. **Verifique la implementación**:
 
    ```bash
    kubectl get pods -l app=request-mirror
    ```
 
-5. **Parchea tus recursos de Gateway** para permitir el acceso al espacio de nombres con el despliegue:
+5. **Aplique parches a sus recursos de Gateway** para permitir el acceso al espacio de nombres con la implementación:
 
    ```bash
    git clone https://github.com/DataDog/dd-trace-go.git
@@ -58,43 +63,43 @@ title: Activación de AAP para Gateway API en Kubernetes
    go run ./contrib/k8s.io/gateway-api/cmd/patch-gateways
    ```
 
-   Utiliza el indicador `-help` para ver las opciones para personalizar el comportamiento de parcheo.
+   Utilice la marca `-help` para ver las opciones de personalización del comportamiento de aplicación de parches.
 
-6. **Parchea tus recursos HTTPRoute** para redirigir el tráfico al servicio:
+6. **Aplique parches a sus recursos HTTPRoute** para redirigir el tráfico al servicio:
 
    ```bash
    go run ./contrib/k8s.io/gateway-api/cmd/patch-httproutes
    ```
 
-   Este comando añade un filtro [RequestMirror][14] a todos los recursos de `HTTPRoute` en todos los espacios de nombres. Utiliza el indicador `-help` para las opciones de configuración.
+   Este comando agrega un filtro [RequestMirror][14] a todos los `HTTPRoute` recursos en todos los espacios de nombres. Utilice la marca `-help` para las opciones de configuración.
 
-   **Nota**: La ejecución regular de este comando garantiza que cualquier recurso `HTTPRoute` recién creado incluya automáticamente el filtro `RequestMirror`. Considera añadir el parche resultante a tu pipeline de Continuous Integration Continuous Delivery donde se modifican los recursos `HTTPRoute`.
+   **Nota**: Ejecutar este comando regularmente asegura que cualquier recurso `HTTPRoute` recién creado incluya automáticamente el filtro `RequestMirror`. Considere agregar el parche resultante a su pipeline de CI/CD donde `HTTPRoute` se modifiquen los recursos.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Vídeo que muestra el explorador de señales y detalles y el explorador de vulnerabilidades y detalles." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video que muestra Signals explorer y detalles, y Vulnerabilities explorer y detalles." video="true" >}}
 
-## Configuración
+## Configuración {#configuration}
 
-### Variables de entorno
+### Variables de entorno {#environment-variables}
 
-El despliegue de Gateway API Request Mirror puede configurarse con las siguientes variables de entorno:
+La implementación de AppSec Gateway API Request Mirror se puede configurar mediante las siguientes variables de entorno:
 
-| Variable de entorno                 | Valor por defecto | Descripción                                                                                                                |
+| Variable de entorno                 | Valor predeterminado | Descripción                                                                                                                |
 |--------------------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------|
-| `DD_REQUEST_MIRROR_LISTEN_ADDR`      | `:8080`       | Dirección y puerto donde el servicio de réplica de solicitudes escucha las solicitudes de réplica entrantes.                                   |
-| `DD_REQUEST_MIRROR_HEALTHCHECK_ADDR` | `:8081`       | Dirección y puerto donde se sirve el endpoint de check de estado                                                                 |
+| `DD_REQUEST_MIRROR_LISTEN_ADDR`      | `:8080`       | Dirección y puerto donde el servicio de duplicación de solicitudes escucha las solicitudes duplicadas entrantes                                   |
+| `DD_REQUEST_MIRROR_HEALTHCHECK_ADDR` | `:8081`       | Dirección y puerto donde se sirve el punto de conexión de verificación de estado                                                                 |
 
-Configura el Datadog Agent para recibir trazas (traces) de la integración utilizando las siguientes variables de entorno:
+Configure el Datadog Agent para recibir trazas de la integración mediante las siguientes variables de entorno:
 
-| Variable de entorno                   | Valor por defecto | Descripción                                                           |
+| Variable de entorno                   | Valor predeterminado | Descripción                                                           |
 |----------------------------------------|---------------|-----------------------------------------------------------------------|
-| `DD_AGENT_HOST`                        | `localhost`   | Nombre del host donde se ejecuta el Datadog Agent                           |
+| `DD_AGENT_HOST`                        | `localhost`   | Nombre de host donde se ejecuta su Datadog Agent                          |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Puerto del Datadog Agent para la recopilación de trazas                        |
 
-### Ejemplo de despliegue
+### Ejemplo de implementación {#deployment-example}
 
-El despliegue por defecto crea un servicio que escucha en el puerto 8080 para las solicitudes de réplica y expone un endpoint de check de estado en el puerto 8081:
+La implementación predeterminada crea un servicio que escucha en el puerto 8080 para las solicitudes duplicadas y expone un punto de conexión de verificación de estado en el puerto 8081:
 
 ```yaml
 apiVersion: apps/v1
@@ -146,28 +151,28 @@ spec:
       targetPort: 8080
 ```
 
-## Integración del rastreador de Datadog Go y Gateway API
+## Integración de Datadog Go Tracer y Gateway API {#datadog-go-tracer-and-gateway-api-integration}
 
 <div class="alert alert-info">
-  La integración de AAP Gateway API se basa en el rastreador de Datadog Go. Sigue el mismo proceso de publicación que el rastreador, y sus imágenes de Docker están etiquetadas con la versión del rastreador correspondiente.
+  La integración de AAP Gateway API se basa en el Datadog Go Tracer. Sigue el mismo proceso de lanzamiento que el rastreador, y sus imágenes de Docker están etiquetadas con la versión correspondiente del rastreador.
 </div>
 
-La integración de Gateway API utiliza el [rastreador de Datadog Go][6] y hereda todas las variables de entorno del rastreador. Puedes encontrar más información en [Configuración de la biblioteca de rastreo de Go][7] y [Configuración de la biblioteca de AAP][8].
+La integración de Gateway API utiliza el [Datadog Go Tracer][6] y hereda todas las variables de entorno del rastreador. Puede encontrar más información en [Configuración del Go SDK][7] y [AAP Library Configuration][8].
 
-## Activación del rastreo de APM 
+## Habilitación del rastreo de APM {#enabling-apm-tracing}
 
-Por defecto, las trazas de réplica de solicitud no habilitarán el producto APM de Datadog. Si deseas utilizar Application & API Protection sin la funcionalidad de rastreo de APM, este es el comportamiento predeterminado. 
+De forma predeterminada, las trazas de reflejo de solicitudes no habilitarán el producto APM de Datadog. Si desea utilizar App and API Protection sin la funcionalidad de rastreo de APM, este es el comportamiento predeterminado. 
 
-Para habilitar el rastreo de APM, establece la variable de entorno `DD_APM_TRACING_ENABLED=true` en el despliegue de la réplica de solicitud.
+Para habilitar el rastreo de APM, establezca la variable de entorno `DD_APM_TRACING_ENABLED=true` en la implementación de reflejos de solicitudes.
 
-Si deseas desactivar explícitamente el rastreo de APM mientras utilizas App and API Protection:
+Si desea deshabilitar explícitamente el rastreo de APM mientras utiliza App and API Protection:
 
-1. Configura tu despliegue con la variable de entorno `DD_APM_TRACING_ENABLED=false` además de la variable de entorno `DD_APPSEC_ENABLED=true`.
-2. Esta configuración reduce la cantidad de datos de APM enviados a Datadog al mínimo requerido por los productos App and API Protection.
+1. Configure su implementación con la variable de entorno `DD_APM_TRACING_ENABLED=false` además de la variable de entorno `DD_APPSEC_ENABLED=true`.
+2. Esta configuración reducirá la cantidad de datos de APM enviados a Datadog al mínimo requerido por los productos App and API Protection.
 
-Para más detalles, consulta [App and API Protection independiente][15].
+Para obtener más detalles, consulte [Standalone App and API Protection][15].
 
-## Limitaciones
+## Limitaciones {#limitations}
 
 La integración de Gateway API tiene las siguientes limitaciones:
 
@@ -175,9 +180,9 @@ La integración de Gateway API tiene las siguientes limitaciones:
 - No se puede aplicar el bloqueo de solicitudes
 - Solo se admite json para analizar los cuerpos de las solicitudes HTTP.
 
-Para un análisis más detallado y otras funciones de AAP, considera la posibilidad de probar otras integraciones de AAP.
+Para un análisis más detallado y otras funciones de AAP, considere probar otras integraciones de AAP.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

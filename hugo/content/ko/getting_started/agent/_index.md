@@ -6,13 +6,13 @@ further_reading:
   text: Datadog Agent
 - link: https://dtdg.co/fe
   tag: 기반 활성화
-  text: 대화형 세션에 참여하여 인프라스트럭처 모니터링 강화
+  text: 대화형 세션에 참여하여 Infrastructure Monitoring 강화하기
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: 클라우드 인스턴스에 Datadog Agent를 설치해야 하는 이유
 - link: https://www.datadoghq.com/blog/lambda-managed-instances
   tag: 블로그
-  text: Datadog으로 AWS Lambda 관리형 인스턴스 모니터링
+  text: Datadog으로 AWS Lambda 관리형 인스턴스 모니터링하기
 title: Agent 시작하기
 ---
 ## 개요 {#overview}
@@ -45,8 +45,7 @@ Agent의 메인 구성 파일은 `datadog.yaml`입니다. 필수 파라미터는
 - [Datadog API 키][16]로, Agent의 데이터를 조직과 연결하는 데 사용됩니다. 
 - [Datadog 사이트][41]({{< region-param key="dd_site" code="true" >}}).
 
-사용 가능한 모든 구성 옵션은 [샘플 `config_template.yaml` 파일][23]을 참조하세요. Agent 구성 파일을 조정하여 다른 Datadog 기능을 유용하게 활용할 수 있습니다.
-
+사용 가능한 모든 구성 옵션은 운영 체제별 [Agent 구성 파일 예시][23]를 참조하세요. Agent 구성 파일을 조정하여 다른 Datadog 기능을 유용하게 활용할 수 있습니다.
 
 ## 설치 {#installation}
 
@@ -57,7 +56,7 @@ Agent의 메인 구성 파일은 `datadog.yaml`입니다. 필수 파라미터는
 
 ### 설정 {#setup}
 
-Datadog 인앱 워크플로인 [Fleet Automation][39]을 사용하여 단일 호스트에서 또는 대규모로 Datadog Agent를 설치, 업그레이드 및 구성하고 문제를 해결합니다. 
+Datadog 인앱 워크플로인 [Fleet Automation][39]을 사용하여 단일 호스트에서 또는 대규모로 Datadog Agent를 설치, 업그레이드 및 구성하고 문제를 해결하세요. 
 
 특정 플랫폼에 대한 추가적인 Agent 구성은 [Agent 설명서][40]를 참조하세요.
 
@@ -113,7 +112,7 @@ Datadog에서 이러한 검사를 사용하여 모니터와 대시보드를 통�
 
 ## 고급 구성 및 기능 {#advanced-configurations-and-features}
 
-{{% collapse-content title="호스트 및 컨테이너용 Agent의 차이점" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="호스트 및 컨테이너용 Agent의 차이점" level="h3" expanded=false id="agent-hosts-vs-containers" %}}
 
 Agent를 호스트에 설치하는 것과 컨테이너화된 환경에 설치하는 것 사이에는 다음과 같은 중요한 차이점이 있습니다. 
 
@@ -126,7 +125,7 @@ Agent를 호스트에 설치하는 것과 컨테이너화된 환경에 설치하
     `DD_SITE`    # Datadog site
     ```
 
-- **통합 감지**: 
+- **통합 탐지**: 
     - **호스트**: Agent 구성 파일을 통해 [통합][9]을 식별합니다.
     - **컨테이너**: Datadog의 Autodiscovery 기능을 사용해 통합이 자동으로 식별됩니다. 자세한 내용은 [기본 Agent Autodiscovery][11]를 참조하세요.
 
@@ -134,11 +133,11 @@ Agent를 호스트에 설치하는 것과 컨테이너화된 환경에 설치하
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Agent 구성 파일을 통해 태그 설정" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent 구성 파일을 통해 태그 설정" level="h3" expanded=false id="setting-tags-agent-config-file" %}}
 
 태그는 메트릭 및 이벤트에 추가적인 메타데이터 레이어를 추가합니다. 태그를 사용하면 Datadog 시각화에서 데이터의 범위를 지정하고 데이터를 비교할 수 있습니다. 여러 호스트에서 Datadog으로 데이터를 보내는 경우, 이 데이터에 태그를 지정하면 가장 시각화하고 싶은 데이터로 범위를 좁힐 수 있습니다.
 
-예를 들어 여러 팀에서 수집한 데이터가 있고, 알파팀의 메트릭을 보는 데만 관심이 있는 경우 그러한 호스트를 `team:alpha` 또는 `team:bravo` 태그로 태그를 지정하면 `team:alpha`로 태그가 지정된 메트릭으로만 필터링해 범위를 좁힐 수 있습니다. 데이터에 태그를 지정하는 것에 관한 자세한 내용은 [태그 시작하기][24]를 참조하세요.
+예를 들어, 여러 팀에서 수집한 데이터가 있고, 알파팀의 메트릭을 보는 데만 관심이 있는 경우 그러한 호스트를 `team:alpha` 또는 `team:bravo` 태그로 태그를 지정하면 `team:alpha`로 태그가 지정된 메트릭으로만 필터링해 범위를 좁힐 수 있습니다. 데이터에 태그를 지정하는 것에 관한 자세한 내용은 [태그 시작하기][24]를 참조하세요.
 
 1. Agent의 [메인 구성 파일][25]을 찾습니다. Ubuntu의 경우, 파일 위치는 `/etc/datadog-agent/datadog.yaml`입니다.
 
@@ -177,38 +176,38 @@ Agent를 호스트에 설치하는 것과 컨테이너화된 환경에 설치하
       - test:agent_walkthrough
    ```
 
-4. Agent의 [재시작 명령][26]을 실행하여 Agent를 재시작합니다. Ubuntu 재시작 명령:
+4. Agent의 [재시작 명령][26]을 실행하여 Agent를 재시작합니다. Ubuntu 재시작 명령은 다음과 같습니다.
 
    ```shell
    sudo service datadog-agent restart
    ```
 
-5. 몇 분 뒤 다시 [Metrics Summary 페이지][22]로 이동하여 메트릭 `datadog.agent.started`를 클릭합니다. 기본 `host` 및 `version` 태그 외에 `team` 태그 및 사용자가 추가한 개인 태그도 표시됩니다. 페이지 상단에서 `Tag` 필드를 기준으로 메트릭을 필터링할 수도 있습니다.
+5. 몇 분 뒤 다시 [{{< ui >}}Metrics Summary{{< /ui >}} 페이지][22]로 이동한 후, 메트릭 `datadog.agent.started`를 클릭합니다. 기본 `host` 및 `version` 태그 외에 `team` 태그 및 사용자가 추가한 개인 태그도 표시됩니다. 페이지 상단에서 {{< ui >}}Tag{{< /ui >}} 필드를 기준으로 메트릭을 필터링할 수도 있습니다.
 
-6. [Events Explorer 페이지][20]로 이동하여 최신 Agent 이벤트와 함께 표시된 사용자 지정 태그를 찾습니다.
+6. [{{< ui >}}Events Explorer{{< /ui >}} 페이지][20]로 이동한 후, 최신 Agent 이벤트에 표시된 사용자 지정 태그를 찾습니다.
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Datadog UI에서 메트릭 찾기" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Datadog UI에서 메트릭 찾기" level="h3" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
 
-Agent가 올바로 실행 중인지 확인하려면 Datadog UI에서 기본 메트릭을 검사하면 됩니다. [Metrics Summary 페이지][22]로 이동하여 메트릭 `datadog.agent.started` 또는 메트릭 `datadog.agent.running`을 검색합니다. 이러한 메트릭이 바로 표시되지 않는 경우, Agent가 Datadog에 데이터를 보내는 데 몇 분 걸릴 수 있습니다.
+Datadog UI에서 기본 메트릭을 검사해 Agent가 올바로 실행 중인지 확인할 수 있습니다. [{{< ui >}}Metrics Summary{{< /ui >}} 페이지][22]로 이동한 후, 메트릭 `datadog.agent.started` 또는 메트릭 `datadog.agent.running`을 검색하세요. 이러한 메트릭이 바로 표시되지 않는 경우, Agent가 Datadog에 데이터를 보내는 데 몇 분 걸릴 수 있습니다.
 
-두 메트릭 중 아무 것이나 클릭하면 Metric 패널이 열립니다. 이 패널에는 이러한 메트릭의 수집 위치에 대한 추가 메타데이터와 연결된 태그가 표시됩니다. 호스트에서 구성된 태그가 없는 경우, Datadog이 해당 메트릭에 할당하는 기본 태그만 표시됩니다(예를 들어 `version` 및 `host`). 태그를 추가하는 방법을 자세히 알아보려면 Agent 구성 파일을 통해 태그를 설정하는 방법을 다룬 위의 섹션을 참조하세요.
+두 메트릭 중 아무 것이나 클릭하면 Metric 패널이 열립니다. 이 패널에는 이러한 메트릭의 수집 위치에 대한 추가 메타데이터와 연결된 태그가 표시됩니다. 호스트에서 구성된 태그가 없는 경우, Datadog이 해당 메트릭에 할당하는 기본 태그만 표시됩니다(예를 들어, `version` 및 `host`). 태그를 추가하는 방법을 자세히 알아보려면 Agent 구성 파일을 통해 태그를 설정하는 방법을 다룬 위의 섹션을 참조하세요.
 
 `ntp.offset` 또는 `system.cpu.idle`과 같은 다른 기본 메트릭을 둘러보세요.
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Agent 오버헤드" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent 오버헤드" level="h3" expanded=false id="agent-overhead" %}}
 
 Agent가 차지하는 공간과 리소스의 양은 구성 및 해당 Agent가 보내는 데이터가 무엇인지에 좌우됩니다. 처음에는 평균 CPU 사용량 약 0.08%, 디스크 공간 약 880MB~1.3GB가 예상됩니다.
 
 이러한 벤치마크 수치에 대해 자세히 알아보려면 [Agent 오버헤드][2]를 참조하세요.
 {{% /collapse-content %}}
 
-{{% collapse-content title="추가 구성 옵션" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="추가 구성 옵션" level="h3" expanded=false id="additional-configuration-options" %}}
 
-Agent 구성 파일을 통해 [로그][27], [트레이스][28] 및 [프로세스][29] 데이터 수집을 활성화할 수 있습니다. 이러한 기능은 기본적으로 활성화되지 않습니다. 예를 들어 구성 파일에서 `logs_enabled` 파라미터는 false로 설정됩니다.
+Agent 구성 파일을 통해 [로그][27], [트레이스][28] 및 [프로세스][29] 데이터 수집을 활성화할 수 있습니다. 이러한 기능은 기본적으로 활성화되지 않습니다. 예를 들어, 구성 파일에서 `logs_enabled` 파라미터는 false로 설정됩니다.
 
 ```yaml
 ##################################
@@ -238,7 +237,7 @@ Agent 구성 파일을 통해 [로그][27], [트레이스][28] 및 [프로세스
 
 ## 문제 해결 {#troubleshooting}
 
-Agent 문제 해결과 관련해 도움이 필요하신 경우:
+Agent 문제 해결과 관련해 도움이 필요하신 경우 다음을 참고하세요.
 
 - [Agent 문제 해결][36] 참조
 - [Agent 로그 파일][37] 보기
@@ -252,7 +251,7 @@ Agent 문제 해결과 관련해 도움이 필요하신 경우:
 
 ## 다음 단계 {#next-steps}
 
-{{< whatsnext desc="Agent가 설치된 이후:">}}
+{{< whatsnext desc="Agent를 설치한 후 다음 내용을 살펴보세요.">}}
 {{< nextlink href="/getting_started/integrations" >}}Integrations에 대해 알아보기{{< /nextlink >}}
 {{< nextlink href="/getting_started/application" >}}Datadog UI에 대해 알아보기{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}Agent를 통해 로그를 수집하는 방법 알아보기{{< /nextlink >}}
@@ -281,7 +280,7 @@ Agent 문제 해결과 관련해 도움이 필요하신 경우:
 [20]: https://app.datadoghq.com/event/explorer
 [21]: /ko/extend/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
-[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[23]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 [24]: /ko/getting_started/tagging/
 [25]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [26]: /ko/agent/configuration/agent-commands/#restart-the-agent

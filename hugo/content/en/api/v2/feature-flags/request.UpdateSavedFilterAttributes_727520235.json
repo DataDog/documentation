@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "saved-filters",
+    "attributes": {
+      "targeting_rules": [
+        {
+          "conditions": [
+            {
+              "operator": "ONE_OF",
+              "attribute": "user_id",
+              "value": [
+                "test-user-3"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

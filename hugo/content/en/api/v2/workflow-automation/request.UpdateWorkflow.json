@@ -4,6 +4,10 @@
       "description": "A sample workflow.",
       "name": "Example Workflow",
       "published": true,
+      "runAs": {
+        "type": "owner"
+      },
+      "sensitivePrivileges": false,
       "spec": {
         "connectionEnvs": [
           {

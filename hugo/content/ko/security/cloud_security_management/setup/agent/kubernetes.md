@@ -24,7 +24,7 @@ type: multi-code-lang
 
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml` 파일의 `spec` 섹션에 다음을 추가합니다.
+1. `datadog-agent.yaml` 파일의 `spec` 섹션에 다음을 추가하세요.
 
     ```yaml
     # datadog-agent.yaml file
@@ -56,14 +56,14 @@ type: multi-code-lang
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # Enables runtime package prioritization (Agent 7.79+)
           # See Runtime Package Prioritization section below.
           enrichment:
             usage:
               enabled: true
     ```
 
-2. 변경 사항을 적용하고 Agent를 재시작합니다.
+2. 변경 사항을 적용하고 Agent를 재시작하세요.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
@@ -71,7 +71,7 @@ type: multi-code-lang
 
 {{% tab "Helm" %}}
 
-1. `datadog-values.yaml` 파일의 `datadog` 섹션에 다음을 추가합니다.
+1. `datadog-values.yaml` 파일의 `datadog` 섹션에 다음을 추가하세요.
 
     ```yaml
     # datadog-values.yaml file
@@ -97,14 +97,14 @@ type: multi-code-lang
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # Enables runtime package prioritization (Agent 7.79+)
         # See Runtime Package Prioritization section below.
         enrichment:
           usage:
             enabled: true
     ```
 
-2. Agent를 재시작합니다.
+2. Agent를 재시작하세요.
 
 {{% /tab %}}
 
@@ -165,9 +165,9 @@ type: multi-code-lang
 
 {{< /tabs >}}
 
-**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. 요구 사항은 [ 런타임 패키지 우선순위 ](#runtime-package-prioritization-preview) 섹션을 참조하세요.
+**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. 요구 사항은 [ 런타임 패키지 우선순위](#runtime-package-prioritization) 섹션을 참조하세요.
 
-**참고**: `languages` 분석기는 Datadog Agent **7.70 이상**이 필요합니다. 활성화되면 OS 패키지 외에도 아래 패키지 관리자가 관리하는 애플리케이션 라이브러리의 취약점도 탐지합니다. `analyzers` 필드가 생략되면 Datadog은 컨테이너 이미지의 OS 패키지만 스캔합니다.
+**참고**: `languages` 분석기는 Datadog Agent **7.70 이상**이 필요합니다. 활성화되면 OS 패키지 외에도 아래 패키지 관리자가 관리하는 애플리케이션 라이브러리의 취약성도 탐지합니다. `analyzers` 필드가 생략되면 Datadog은 컨테이너 이미지의 OS 패키지만 스캔합니다.
 
 ### 지원되는 애플리케이션 라이브러리 패키지 관리자 {#supported-application-library-package-managers}
 
@@ -189,25 +189,26 @@ type: multi-code-lang
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## 런타임 패키지 우선순위(미리 보기) {#runtime-package-prioritization-preview}
+## 런타임 패키지 우선순위 지정{#runtime-package-prioritization}
 
-런타임 패키지 우선순위 지정은 컨테이너 이미지 내에서 어떤 패키지가 런타임에 사용되는지 식별하여, 설치되었지만 실행되지 않는 패키지보다 실제로 실행되는 코드의 취약점을 우선적으로 처리할 수 있도록 합니다.
+런타임 패키지 우선순위 지정은 컨테이너 이미지 내에서 어떤 패키지가 런타임에 사용되는지 식별하여, 설치되었지만 실행되지 않는 패키지보다 실제로 실행되는 코드의 취약성을 우선적으로 처리할 수 있도록 합니다.
 
-활성화되면 Agent는 eBPF를 사용하여 워크로드의 파일 액세스를 관찰하고, 이러한 신호를 해당 이미지의 취약점 결과에 추가합니다.
+활성화되면 Agent는 eBPF를 사용하여 워크로드의 파일 액세스를 관찰하고, 이러한 신호를 해당 이미지의 취약성 결과에 추가합니다.
 
 |  신호 |  제공 정보 |
 |--------|-------------------|
-|  패키지 실행 중 |  실행 중인 프로세스가 패키지 파일에 액세스하는 것이 관찰되었습니다. |
-| 루트 프로세스에 의해 액세스됨 | 패키지가 루트(UID 0)로 실행 중인 프로세스에 의해 액세스되었습니다. |
-| SUID 바이너리 존재 | 패키지에 SUID 비트가 설정된 바이너리가 포함되어 있어 권한 상승이 가능할 수 있습니다. |
+| Package is running |  실행 중인 프로세스가 패키지 파일에 액세스하는 것이 관찰되었습니다. |
+| Accessed by root process | 패키지가 루트(UID 0)로 실행 중인 프로세스에 의해 액세스되었습니다. |
+| SUID binary present | 패키지에 SUID 비트가 설정된 바이너리가 포함되어 있어 권한 상승이 가능할 수 있습니다. |
 
-*"패키지 실행 중"*은 [Runtime Prioritization Engine][9]의 **Reachability** 차원에 데이터를 제공합니다. 이 신호를 직접 쿼리하려면 [런타임 신호별 결과 필터링][10]을 참조하세요.
+*Package is running*은 [Runtime Prioritization Engine][9]의 **Reachability** 차원에 데이터를 제공합니다. 이 신호를 직접 쿼리하려면 [런타임 신호별 결과 필터링][10]을 참조하세요.
 
 **요구 사항**:
 - Datadog Agent **7.79.0 이상**. Kubernetes의 경우, 가장 완벽한 신호 적용 범위를 확보하려면 **7.81.0 이상**을 사용하세요.
 - Linux 전용(eBPF 종속성). 지원되는 배포판 및 커널 버전은 [Workload Protection 설정][11]을 참조하세요.
+- Bottlerocket 노드에서 `system-probe`에 대한 `spc_t` SELinux 유형입니다. Bottlerocket의 SELinux 정책은 권한이 없는 컨테이너가 자체 포드의 파일에만 접근하도록 제한합니다. 이 유형이 없으면 Agent 자체 이미지만 런타임 신호를 수신합니다. 아래 탭에서 설정 방법을 보여줍니다.
 
-런타임 신호는 컨테이너 이미지 취약점 탐지 결과에서 운영 체제 패키지 관리자(`apt`, `yum` 또는 `apk`)를 통해 설치된 패키지에 적용됩니다.
+런타임 신호는 컨테이너 이미지 취약성 탐지 결과에서 운영 체제 패키지 관리자(`apt`, `yum` 또는 `apk`)를 통해 설치된 패키지에 적용됩니다.
 
 {{< tabs >}}
 
@@ -222,10 +223,25 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      # Enables runtime package prioritization (Agent 7.79+)
       enrichment:
         usage:
           enabled: true
+```
+
+노드에서 Bottlerocket을 실행하는 경우 노드 Agent 포드의 SELinux 유형도 설정하세요. 이 재정의는 포드의 보안 컨텍스트를 대체하므로 `runAsUser: 0` 설정을 유지하세요.
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 변경 사항을 적용하고 Agent를 재시작하세요.
@@ -241,10 +257,24 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    # Enables runtime package prioritization (Agent 7.79+)
     enrichment:
       usage:
         enabled: true
+```
+
+노드에서 Bottlerocket을 실행하는 경우 `datadog-values.yaml` 파일에 다음도 추가하세요.
+
+```yaml
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Agent를 재시작하세요
@@ -268,13 +298,25 @@ hostPID: true
   value: "true"
 ```
 
+노드에서 Bottlerocket을 실행하는 경우 `system-probe` 컨테이너의 보안 컨텍스트에 `seLinuxOptions`도 추가하세요.
+
+```yaml
+# system-probe container
+securityContext:
+  seLinuxOptions:
+    user: system_u
+    role: system_r
+    type: spc_t
+    level: s0
+```
+
 Agent를 재시작하세요
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-설정을 확인하려면 [런타임 신호][10]별로 취약점 결과를 필터링하세요.
+설정을 확인하려면 [런타임 신호][10]별로 취약성 결과를 필터링하세요.
 
 [1]: /ko/security/cloud_security_management/misconfigurations/
 [2]: /ko/security/threats

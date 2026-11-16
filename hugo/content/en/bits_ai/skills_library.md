@@ -1,0 +1,175 @@
+---
+title: Skills Library
+description: Create reusable skills that provide Bits AI and external AI agents with organization-specific domain knowledge and instructions.
+further_reading:
+    - link: '/bits_ai/bits_chat/'
+      tag: 'Documentation'
+      text: 'Bits Chat'
+    - link: '/actions/agents/'
+      tag: 'Documentation'
+      text: 'Bits Agent Builder'
+    - link: '/mcp_server/'
+      tag: 'Documentation'
+      text: 'Datadog MCP Server'
+---
+
+## Overview
+
+Use the Skills Library to define reusable domain knowledge and instructions for AI agents. Skills give agents task-specific context without requiring you to repeat the same information in each prompt.
+
+For example, create a skill that describes an organization's incident response process, service ownership conventions, or requirements for summarizing an investigation.
+
+Skills work with [Bits Chat][1], [Bits Agent Builder][2], the Datadog app for Slack, and external agents such as Claude Code, Codex, and Cursor that connect through the [Datadog MCP Server][3].
+
+## Create a skill
+
+Create a skill directly in the Skills Library, or ask Bits Chat to create one for you.
+
+### Create a skill in the Skills Library
+
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+2. Create a skill or import an existing `SKILL.md` file.
+3. Enter a name and a skill ID. The skill ID is the slash command that invokes the skill. For example, a skill with the ID `my-skill` is invoked with `/my-skill`. You can't change the skill ID after you create the skill.
+4. Add the domain knowledge and instructions that the agent should follow.
+5. Select the skill's visibility:
+    - **Private**: Keep the skill private.
+    - **Shared**: Share the skill with everyone in your Datadog organization.
+6. Save the skill.
+
+Use focused instructions and give the skill a descriptive name. A clear name makes the skill easier to discover and invoke with a slash command.
+
+### Create a skill with Bits Chat
+
+Ask Bits Chat to create a skill:
+
+```text
+Create a new Skills Library skill
+```
+
+To create a skill from the context in an existing Bits Chat conversation, enter:
+
+```text
+Turn this conversation into a skill
+```
+
+You can also create a skill from an existing Slack thread. In the thread, enter:
+
+```text
+@Datadog turn this conversation into a skill
+```
+
+## Edit a skill
+
+You can edit shared skills and private skills that you created. Editing requires the MCP Write permission. For details, see the [Permissions](#permissions) section.
+
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+2. Select the skill, then open its details page.
+3. Update the skill's name, description, tags, or instructions.
+4. Click {{< ui >}}Save Changes{{< /ui >}}.
+
+The creator of a skill can also change its visibility between **Private** and **Shared** on the details page.
+
+A skill's ID can't be changed after the skill is created, so that references to the skill and its slash command keep working. To use a different ID, [clone the skill](#clone-a-skill) or create a new one.
+
+Bits Chat can update private skills that you created. To edit a shared skill, use the Skills Library.
+
+## Clone a skill
+
+Clone a skill to create a private copy of it. For example, clone a skill to give it a different skill ID, or to customize a shared skill without changing the original.
+
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+2. Select the skill, then open its details page.
+3. Click the gear icon, then select {{< ui >}}Clone{{< /ui >}}.
+4. Enter a name and skill ID for the copy. By default, the copy uses the original name with `(copy)` appended and the original skill ID with `-copy` appended.
+5. Click {{< ui >}}Clone{{< /ui >}}.
+
+The copy opens as a private skill that you created. To share it with your organization, change its visibility to **Shared**.
+
+## Permissions
+
+To use the Skills Library, your role needs the following permissions:
+
+| Action | Required permissions |
+|--------|----------------------|
+| View skills | **MCP Read** |
+| Create, edit, clone, or delete skills | **MCP Read** and **MCP Write** |
+
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both permissions by default. For custom roles, [update the role][5] to add the permissions.
+
+A skill's visibility also controls who can access it:
+
+- **Private** skills are visible only to their creator. Only the creator can edit or delete them.
+- **Shared** skills are visible to everyone in the organization. Any user with the required permissions can edit or delete them.
+- Only a skill's creator can change its visibility.
+
+## Use a skill in Bits Chat
+
+To make a skill available to Bits Chat:
+
+1. Open **Settings** in Bits Chat.
+2. Select **Skills**.
+3. Enable the skill.
+
+After you enable a skill, Bits Chat uses it automatically when the skill is relevant to a request.
+
+Invoke a skill explicitly by entering its slash command in the conversation:
+
+```text
+/my-skill
+```
+
+You can include additional context in the same message or continue the conversation after invoking the skill.
+
+## Use a skill in Bits Agent Builder
+
+In the agent configuration, select each skill that the agent needs. The agent automatically loads selected skills.
+
+To invoke a skill explicitly during a conversation, enter its slash command:
+
+```text
+/my-skill
+```
+
+For more information about creating and testing agents, see [Bits Agent Builder][2].
+
+## Use a skill in Slack
+
+After you connect the Datadog app for Slack, mention `@Datadog` and add the skill's slash command:
+
+```text
+@Datadog /my-skill
+```
+
+Add any task-specific details after the command.
+
+## Use skills with an external agent
+
+External AI agents that connect to the Datadog MCP Server can discover and load skills from the Skills Library.
+
+The Datadog MCP Server provides the following tools:
+
+- `list_datadog_skills()`: Lists the skills available to the agent.
+- `load_datadog_skill()`: Loads a selected skill into the agent's context.
+
+A typical external-agent workflow is:
+
+1. Connect the agent to the Datadog MCP Server.
+2. Discover available skills with `list_datadog_skills()` or MCP Resources.
+3. Load the skill needed for the task with `load_datadog_skill()`.
+4. Ask the agent to complete the task using the loaded instructions and knowledge.
+
+For connection instructions, see the [Datadog MCP Server][3] documentation.
+
+## Availability
+
+The Skills Library is available in Bits Chat, Bits Agent Builder, Slack, and external agents that connect through the Datadog MCP Server.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /bits_ai/bits_chat/
+[2]: /actions/agents/
+[3]: /mcp_server/
+[4]: https://app.datadoghq.com/actions/skills
+[5]: /account_management/rbac/?tab=datadogapplication#update-a-role

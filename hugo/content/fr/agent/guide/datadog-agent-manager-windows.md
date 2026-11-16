@@ -1,26 +1,28 @@
 ---
+description: Utilisez l'interface graphique du Datadog Agent Manager basée sur le
+  navigateur pour configurer et gérer l'Agent Windows avec les navigateurs et l'authentification
+  pris en charge.
 further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: Documentation
   text: Utilisation de base de l'Agent pour l'Agent Windows
 title: Datadog Agent Manager pour Windows
 ---
+## Présentation {#overview}
 
-## Présentation
+L'interface graphique du Datadog Agent Manager est basée sur le navigateur. Le port sur lequel l'interface graphique s'exécute peut être configuré dans votre fichier `datadog.yaml`. Définir le port sur `-1` désactive l'interface graphique. Par défaut, elle est activée sur le port 5002 pour Windows et Mac et est désactivée sur Linux.
 
-L'interface graphique de Datadog Agent Manager repose sur l'utilisation d'un navigateur. Vous pouvez configurer le port sur lequel elle s'exécute dans votre fichier `datadog.yaml`. L'interface graphique est désactivée lorsque le port est défini sur `-1`. Par défaut, elle est activée sur le port 5002, pour Windows et Mac, et désactivée sur Linux.
+### Prérequis {#requirements}
 
-### Exigences
+1. Les cookies doivent être activés dans votre navigateur. L'interface graphique génère et enregistre un jeton dans votre navigateur qui est utilisé pour authentifier toutes les communications avec le serveur de l'interface graphique.
 
-1. Les cookies doivent être activés dans votre navigateur. L'interface graphique génère et enregistre un token dans votre navigateur, qui est utilisé pour authentifier toutes les communications effectuées avec le serveur de l'interface graphique.
+2. L'interface graphique n'est lancée que si l'utilisateur qui la lance dispose des autorisations utilisateur appropriées. Si vous êtes en mesure d'ouvrir `datadog.yaml`, vous êtes en mesure d'utiliser l'interface graphique.
 
-2. L'interface graphique se lance uniquement si l'utilisateur dispose des autorisations nécessaires. Si vous parvenez à ouvrir `datadog.yaml`, vous pouvez utiliser l'interface graphique.
+3. Pour des raisons de sécurité, l'interface graphique ne peut être accessible qu'à partir de l'interface réseau locale (localhost/127.0.0.1), vous devez donc être sur le même host que celui sur lequel l'Agent s'exécute pour l'utiliser. En d'autres termes, vous ne pouvez pas exécuter l'Agent sur une VM ou un conteneur et y accéder depuis la machine du host.
 
-3. Pour des raisons de sécurité, l'interface graphique est uniquement accessible à partir de l'interface réseau locale (localhost/127.0.0.1). Vous devez donc utiliser le même host que celui exécuté par l'Agent. Ainsi, vous ne pouvez pas exécuter l'Agent sur une machine virtuelle ou un conteneur et y accéder à partir de la machine du host.
+#### Navigateurs pris en charge {#supported-browsers}
 
-#### Navigateurs pris en charge
-
-| Browser       | Version prise en charge (ou ultérieure) | Publier des commentaires                 |
+| Navigateur       | Version prise en charge (ou ultérieure) | Commentaire                 |
 |---------------|------------------------------|-------------------------|
 | IE            | 11                           |                         |
 | Edge          | 12                           |  Edge pré-Chromium |
@@ -28,49 +30,50 @@ L'interface graphique de Datadog Agent Manager repose sur l'utilisation d'un nav
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| iOS           | 12                           |  Safari mobile          |
+| iOS           | 12                           |  Mobile Safari          |
 
-### Démarrer Datadog Agent Manager
+### Démarrez le Datadog Agent Manager {#start-the-datadog-agent-manager}
 
 Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Manager pour gérer graphiquement l'Agent.
 
 À partir du menu Démarrer de Windows :
 
-* Cliquez sur le dossier Datadog.
-* Faites un clic droit sur Datadog Agent Manager.
-* Choisissez `Exécuter en tant qu'administrateur`.
+* Cliquez sur le dossier {{< ui >}}Datadog{{< /ui >}}.
+* Faites un clic droit sur {{< ui >}}Datadog Agent Manager{{< /ui >}}.
+* Choisissez {{< ui >}}Run as Administrator{{< /ui >}}.
 
 Depuis une invite PowerShell avec élévation de privilèges :
+
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```
 
-Datadog Agent Manager se lance dans votre navigateur Web par défaut. L'adresse Web est `http://127.0.0.1:5002`.
+Le Datadog Agent Manager se lance dans votre navigateur web par défaut. L'adresse web est `http://127.0.0.1:5002`.
 
-## Options
+## Options {#options}
 
 Les sections suivantes décrivent les options de la barre de navigation de gauche.
 
-### Status
+### État {#status}
 
-#### General
+#### Général {#general}
 
-La page de statut General s'affiche par défaut lors du lancement de Datadog Agent Manager. Elle contient les sections suivantes :
+La page d'état général s'affiche par défaut lors du lancement du Datadog Agent Manager. Elle contient les sections suivantes :
 
 | Section     | Description                                                                     |
 |-------------|---------------------------------------------------------------------------------|
-| Agent Info  | Informations sur l'Agent, notamment sa version, le niveau de log et les chemins de fichiers. |
-| System Info | Informations sur l'heure système, le décalage NTP et les versions Go et Python.       |
-| Host Info   | Informations sur le host, notamment le système d'exploitation, la plateforme, les processus et la disponibilité.     |
-| Hostnames   | Hostnames et tags de host trouvés par l'Agent.                        |
-| JMX Status  | Liste des checks JMX et de leur statut.                                         |
-| Forwarder   | Informations sur le Forwarder de l'Agent, y compris le statut de votre clé d'API.      |
-| Endpoints   | Endpoints utilisés par l'Agent.                                                  |
-| Logs Agent  | Informations sur l'Agent de logs (lorsque celui-ci est activé).                                     |
-| Aggregator  | Informations sur l'agrégateur de données de l'Agent.                                     |
-| DogStatsD   | Statistiques sur les données envoyées via DogStatsD.                                         |
+| {{< ui >}}Agent Info{{< /ui >}}  | Fournit des informations sur l'Agent, notamment la version, le niveau de log et les chemins d'accès aux fichiers. |
+| {{< ui >}}System Info{{< /ui >}} | Inclut des informations sur l'heure système, le décalage NTP, ainsi que les versions de Go et de Python.       |
+| {{< ui >}}Host Info{{< /ui >}}   | Fournit des informations sur le host, notamment le système d'exploitation, la plateforme, les processus et la durée de fonctionnement.     |
+| {{< ui >}}Hostnames{{< /ui >}}   | Affiche les noms de host et les tags de host détectés par l'Agent.                        |
+| {{< ui >}}JMX Status{{< /ui >}}  | Une liste des checks JMX avec leur état.                                         |
+| {{< ui >}}Forwarder{{< /ui >}}   | Informations sur le forwarder de l'Agent, y compris l'état de votre clé d'API.      |
+| {{< ui >}}Endpoints{{< /ui >}}   | Endpoints utilisés par l'Agent.                                                  |
+| {{< ui >}}Logs Agent{{< /ui >}}  | Informations sur l'Agent de logs (si activé).                                     |
+| {{< ui >}}Aggregator{{< /ui >}}  | Informations sur l'agrégateur de données de l'Agent.                                     |
+| {{< ui >}}DogStatsD{{< /ui >}}   | Statistiques sur les données envoyées avec DogStatsD.                                         |
 
-#### Collector
+#### Collecteur {#collector}
 
 La page de statut Collector affiche des détails sur les checks de l'Agent en cours d'exécution, par exemple :
 
@@ -84,9 +87,9 @@ cpu
    Average Execution Time: 4ms
 ```
 
-### Log
+### Log {#log}
 
-La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les logs peuvent être triés du plus récent au plus ancien et vice-versa.
+La page des logs affiche les logs de l'Agent envoyés vers `agent.log`. Les logs peuvent être triés du plus récent au plus ancien ou inversement.
 
 ```text
 2019-07-10 17:46:04 EDT | INFO | (runner.go:246 in work) | Running check cpu
@@ -110,38 +113,38 @@ La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les lo
 2019-07-10 17:48:02 EDT | INFO | (transaction.go:114 in Process) | Successfully posted payload to "https://6-2-1-app.agent.datadoghq.com/api/v1/check_run?api_key=*************************12345"
 ```
 
-### Paramètres
+### Paramètres {#settings}
 
-La page Settings affiche le contenu du fichier de configuration principal de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
+La page des paramètres affiche le contenu du fichier de configuration principal de l'Agent `datadog.yaml`. Vous pouvez modifier ce fichier directement depuis le Datadog Agent Manager. Après avoir effectué une modification, cliquez sur {{< ui >}}Save{{< /ui >}} dans le coin supérieur droit, puis [redémarrez l'Agent](#restart-agent).
 
-Consultez le [fichier d'exemple config_template.yaml][2] pour découvrir toutes les options de configuration disponibles.
+Pour obtenir une liste complète des options disponibles, consultez le [fichier `datadog.yaml` exemple pour Windows][6].
 
-### Checks
+### Checks {#checks}
 
-#### Manage checks
+#### Gérer les checks {#manage-checks}
 
-La page Manage checks affiche le contenu des fichiers de configuration de check activés. Vous pouvez modifier directement ces fichiers depuis Datadog Agent Manager. Après avoir effectué une modification, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
+La page de gestion des checks affiche le contenu des fichiers de configuration des checks activés. Vous pouvez modifier ces fichiers directement depuis le Datadog Agent Manager. Après avoir effectué une modification, cliquez sur {{< ui >}}Save{{< /ui >}} dans le coin supérieur droit, puis [redémarrez l'Agent](#restart-agent).
 
-Pour ajouter un check, sélectionnez **Add a Check** dans le menu déroulant. La liste de tous les checks pouvant être installés s'affiche alors. Consultez la page d'[intégration][3] du check de votre choix pour obtenir des détails sur sa configuration.
+Pour ajouter un check, sélectionnez {{< ui >}}Add a Check{{< /ui >}} dans le menu déroulant. Cela affiche une liste des checks disponibles à installer. Consultez la page d'[intégration][3] du check spécifique pour obtenir des détails sur la configuration.
 
-#### Sommaire des checks
+#### Résumé des checks {#checks-summary}
 
 Le sommaire des checks contient la liste des checks en cours d'exécution, le nombre d'instances pour chaque check, ainsi que le statut du check.
 
-### Flare
+### Flare {#flare}
 
-Si vous rencontrez des difficultés avec l'Agent, la page Flare facilite le dépannage avec l'équipe d'[assistance Datadog][4]. Entrez votre numéro de ticket (facultatif) et votre adresse e-mail, puis cliquez sur **Submit**. Une copie des logs et des fichiers de configuration de votre Agent est alors envoyée à l'assistance Datadog. Pour en savoir plus sur la fonctionnalité Flare de l'Agent, consultez la [documentation dédiée][5].
+Si vous rencontrez des problèmes avec l'Agent, la page flare vous aide à effectuer le dépannage avec l'équipe du [support Datadog][4]. Saisissez votre numéro de ticket (facultatif) et votre adresse e-mail, puis cliquez sur {{< ui >}}Submit{{< /ui >}}. Ceci transmet une copie des logs et des fichiers de configuration de votre Agent au support Datadog. Plus d'informations sur les flares sont disponibles dans la documentation [Agent Flare][5].
 
-### Redémarrer l'Agent
+### Redémarrer l'Agent {#restart-agent}
 
-Cliquez sur **Restart Agent** dans la barre de navigation de gauche pour redémarrer immédiatement l'Agent. Aucune page ni aucun message de confirmation ne s'affiche. Après avoir redémarré l'Agent, la page de [statut General](#general) s'affiche.
+Cliquer sur {{< ui >}}Restart Agent{{< /ui >}} dans la barre de navigation de gauche redémarre l'Agent immédiatement. Il n'y a ni page ni invite de confirmation. Après le redémarrage de l'Agent, vous êtes redirigé vers la page [d'état général](#general)
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/basic_agent_usage/windows/#installation
-[2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [3]: /fr/integrations/
 [4]: /fr/help/
 [5]: /fr/agent/troubleshooting/send_a_flare/
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example

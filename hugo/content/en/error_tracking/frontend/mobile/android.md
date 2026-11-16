@@ -64,7 +64,7 @@ dependencies {
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}+ New Application{{< /ui >}}][7].
+1. Navigate to [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}\+ New Application{{< /ui >}}][7].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. Click {{< ui >}}Create Application{{< /ui >}}.
 

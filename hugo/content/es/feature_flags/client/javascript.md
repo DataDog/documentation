@@ -14,6 +14,9 @@ further_reading:
 - link: /feature_flags/browser_developer_extension/
   tag: Documentación
   text: Extensión para desarrolladores de navegador
+- link: /feature_flags/guide/proxy_sdk_traffic/
+  tag: Guía
+  text: Tráfico del SDK de Feature Flag Proxy
 title: Feature Flags de JavaScript
 ---
 ## Descripción general {#overview}

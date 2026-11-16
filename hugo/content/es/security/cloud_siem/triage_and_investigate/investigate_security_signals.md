@@ -5,214 +5,252 @@ disable_toc: false
 further_reading:
 - link: /cloud_siem/detection_rules/
   tag: Documentación
-  text: Más información sobre la lógica condicional de las reglas de detección
+  text: Obtenga información sobre la lógica condicional de las reglas de detección
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: Blog
-  text: Monitorizar 1Password con Cloud SIEM de Datadog
-title: Investigar las señales de seguridad
+  text: Haga un seguimiento de 1Password con Datadog Cloud SIEM
+- link: https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026
+  tag: Blog
+  text: 'Novedades en Cloud SIEM: investigaciones impulsadas por IA, inteligencia
+    de amenazas mejorada y operaciones de seguridad escalables'
+- link: /bits_ai/bits_security_analyst/
+  tag: Documentación
+  text: Bits Security Analyst
+title: Investigue las señales de seguridad
 ---
+## Descripción general {#overview}
 
-## Información general
+Se crea una señal de seguridad de Cloud SIEM cuando Datadog detecta una amenaza mientras analiza registros frente a reglas de detección. Visualice, busque, filtre y correlacione señales de seguridad en el Explorador de señales sin necesidad de aprender un lenguaje de consulta dedicado. También puede asignarse señales de seguridad a usted mismo o a otro usuario en la plataforma de Datadog. Además del Explorador de señales, puede configurar [Reglas de notificación][1] para enviar señales a personas o equipos específicos para mantenerlos informados sobre los problemas.
 
-Se crea una señal de seguridad de Cloud SIEM cuando Datadog detecta una amenaza al analizar logs con respecto a las reglas de detección. Visualiza, busca, filtra y correlaciona señales de seguridad en el Signals Explorer sin necesidad de aprender un lenguaje de consulta específico. También puedes asignarte señales de seguridad a ti mismo o a otro usuario en la plataforma Datadog. Además del Signals Explorer, puedes configurar las [Reglas de notificación][1] para enviar señales a personas o equipos específicos para mantenerlos informados de los problemas.
+Debe tener el permiso `Security Signals Write` para modificar una señal de seguridad, como cambiar el estado y visualizar el historial de acciones de la señal en [Audit Trail][2]. Consulte [Access Control basado en roles][3] para obtener más información sobre los roles predeterminados de Datadog y los permisos de control de acceso basado en roles granulares disponibles para Datadog Security en Cloud Security.
 
-Debes tener el permiso `Security Signals Write` para modificar una señal de seguridad, como cambiar el estado y ver el historial de acciones de la señal en [Audit Trail][2]. Consulta [Control de acceso basado en roles][3] para obtener más información sobre los roles predeterminados de Datadog y los permisos detallados de control de acceso basados en roles disponibles para la seguridad de Datadog en la seguridad en la nube.
+Si desea utilizar un agente de IA autónomo que investigue las señales de seguridad de Cloud SIEM, consulte [Bits Security Analyst][14].
 
-## Explorador de señales
+## Explorador de señales {#signals-explorer}
 
-En el Explorer de señales, utiliza el panel de facetas o la barra de búsqueda para agrupar y filtrar tus señales. Por ejemplo, puedes ver las señales por [su gravedad](#view-signals-by-severity), [reglas de detección](#view-signals-by-detection-rules) y [MITRE ATT&CK](#view-signals-by-mitre-attck). Una vez que hayas filtrado las señales según tu caso de uso, crea una [vista guardada][4] para poder recargar la consulta más adelante.
+En el Explorador de señales, utilice el panel de facetas o la barra de búsqueda para agrupar y filtrar sus señales. Por ejemplo, puede visualizar las señales por [su gravedad](#view-signals-by-severity), [reglas de detección](#view-signals-by-detection-rules) y [MITRE ATT&CK](#view-signals-by-mitre-attck). Después de filtrar sus señales según su caso de uso, cree una [vista guardada][4] para que pueda volver a cargar su consulta más tarde.
 
-### Ver señales por gravedad
+### Visualizar señales por gravedad {#view-signals-by-severity}
 
-Para ver todas las señales con gravedades específicas, por ejemplo `HIGH` y `CRITICAL`, que están en el estado de clasificación `open` o `under review`, realiza una de las siguientes acciones:
+Para visualizar todas las señales con gravedades específicas, por ejemplo `HIGH` y `CRITICAL`, que se encuentren en el estado de triaje `open` o `under review`, realice una de las siguientes acciones:
 
-- En la sección **Severity** (Gravedad) del panel de facetas, selecciona **Crítico**, **Alto** y **Medio**. En la sección **Signal State** (Estado de la señal), asegúrate de que sólo estén seleccionados **open** (abierto) y **under_review** (en revisión).
-- En la barra de búsqueda, introduce `status:(high OR critical OR medium) @workflow.triage.state:(open OR under_review)`.
+- En la sección {{< ui >}}Severity{{< /ui >}} del panel de facetas, seleccione {{< ui >}}Critical{{< /ui >}}, {{< ui >}}High{{< /ui >}} y {{< ui >}}Medium{{< /ui >}}. En la sección {{< ui >}}Signal State{{< /ui >}}, asegúrese de que solo estén seleccionados {{< ui >}}open{{< /ui >}} y {{< ui >}}under_reviewed{{< /ui >}}.
+- En la barra de búsqueda, ingrese `status:(high OR critical OR medium) @workflow.triage.state:(open OR under_review)`.
 
-Para añadir la columna **Signal State** (Estado de la señal), selecciona el botón **Options** (Opciones) en la esquina superior derecha encima de la tabla y añade la faceta: `@workflow.triage.state`. Esto muestra el estado de la señal y te permite ordenar por estado con el encabezado.
+Para agregar la columna {{< ui >}}Signal State{{< /ui >}}, seleccione el botón {{< ui >}}Options{{< /ui >}} en la esquina superior derecha sobre la tabla y agregue la faceta: `@workflow.triage.state`. Esto muestra el estado de la señal y le permite ordenar por estado a través del encabezado.
 
-Utiliza diferentes visualizaciones para investigar la actividad de las amenazas en tu entorno. Por ejemplo, en el campo **Visualize by** (Visualizar por), puedes agrupar las señales por:
+Utilice diferentes visualizaciones para investigar la actividad de amenazas en su entorno. Por ejemplo, en el campo {{< ui >}}Visualize by{{< /ui >}}, puede agrupar las señales por:
 
-- **Lista de reglas** para ver las tendencias de volumen y alertas en las diferentes reglas de detección.
-- **Series temporales** para ver las tendencias de las señales a lo largo del tiempo.
-- **Lista de principales** para ver las señales con mayor a menor número de ocurrencias.
-- **Tabla** para ver las señales por la clave de etiqueta especificada (por ejemplo, `source`, `technique`, etc.).
-- **Gráfico circular** para ver el volumen relativo de cada una de las reglas de detección.
+- {{< ui >}}Rules List{{< /ui >}} para ver el volumen y las tendencias de alertas en las diferentes reglas de detección.
+- {{< ui >}}Timeseries{{< /ui >}} para visualizar las tendencias de las señales a lo largo del tiempo.
+- {{< ui >}}Top List{{< /ui >}} para visualizar las señales con el mayor al menor número de ocurrencias.
+- {{< ui >}}Table{{< /ui >}} para visualizar las señales por la clave de etiqueta especificada (por ejemplo, `source`, `technique`, etcétera).
+- {{< ui >}}Pie Chart{{< /ui >}} para visualizar el volumen relativo de cada una de las reglas de detección.
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="El Explorer de señales que muestra las señales clasificadas por las reglas de detección" style="width:100%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="El Explorador de señales que muestra las señales categorizadas por reglas de detección" style="width:100%;" >}}
 
-### Ver señales por reglas de detección
+### Visualizar señales por reglas de detección {#view-signals-by-detection-rules}
 
-Para ver tus señales basadas en reglas de detección, haz clic en **Rules List** (Lista de reglas) en el campo **Visualize as** (Visualizar como) en la barra de búsqueda. Haz clic en una regla para ver las señales relacionadas con esa regla. Haz clic en una señal para ver los detalles de la señal.
+Para visualizar sus señales basadas en reglas de detección, haga clic en {{< ui >}}Rules List{{< /ui >}} en el campo {{< ui >}}Visualize as{{< /ui >}} debajo de la barra de búsqueda. Haga clic en una regla para visualizar las señales relacionadas con esa regla. Haga clic en una señal para visualizar los detalles de la señal.
 
-### Ver señales de MITRE ATT&CK
+### Visualizar señales por MITRE ATT&CK {#view-signals-by-mitre-attck}
 
-Para ver tus señales por Táctica y Técnica de MITRE ATT&CK:
-1. Selecciona **Table** (Tabla) en el campo **Visualize as** (Visualizar como) de la barra de búsqueda y agrupa por **Tactic** (Táctica).
-1. Haz clic en el icono del signo más situado junto al primer grupo `by` para añadir un segundo grupo `by` y selecciona **Technique** (Técnica) para él.
-1. En la tabla, haz clic en una de las tácticas o técnicas para ver las opciones para investigar más a fondo y filtrar las señales. Por ejemplo, puedes ver las señales relacionadas con la táctica y la técnica y buscar o excluir tácticas y técnicas específicas.
+Para visualizar sus señales por táctica y técnica de MITRE ATT&CK:
+1. Seleccione {{< ui >}}Table{{< /ui >}} en el campo {{< ui >}}Visualize as{{< /ui >}} debajo de la barra de búsqueda y agrupe por {{< ui >}}Tactic{{< /ui >}}.
+1. Haga clic en el icono de más junto al primer grupo `by` para añadir un segundo grupo `by` y seleccione {{< ui >}}Technique{{< /ui >}} para él.
+1. En la tabla, haga clic en una de las tácticas o técnicas para visualizar opciones para investigar más a fondo y filtrar las señales. Por ejemplo, puede visualizar señales relacionadas con la táctica y la técnica, y buscar o excluir tácticas y técnicas específicas.
 
-{{< img src="security/security_monitoring/investigate_security_signals/tactics_techniques.png" alt="La tabla del Explorer de señales en la que se muestra una lista de tácticas y técnicas" style="width:100%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/tactics_techniques.png" alt="La tabla del Explorador de señales que muestra una lista de tácticas y técnicas" style="width:100%;" >}}
 
-### Clasificación de una sola señal
+### Realizar el triaje de una sola señal {#triage-a-single-signal}
 
-1. En Datadog, ve a **Segurity** (Seguridad) > **Cloud SIEM** > [**Signals**][5] (Señales).
-1. Haz clic en una señal de seguridad de la tabla.
-1. En la sección **What Happened** (Qué ha pasado), consulta los logs que coinciden con la consulta. Pasa el mouse sobre la consulta para ver los detalles de esta.
-    - También puedes consultar información específica como el nombre de usuario o la IP de red. En **Rule Details** (Detalles de la regla), haz clic en el icono del embudo para crear una regla de supresión o añadir la información a una supresión existente. Consulta [Crear regla de supresión][11] para obtener más detalles.
-1. En la sección **Next Steps** (Siguientes pasos):
-   1. En **Triage** (Triaje), haz clic en el menú desplegable para cambiar el estado de triaje de la señal. El estado predeterminado es `OPEN`.
-      - `Open`: Datadog Security activó una detección basada en una regla y la señal resultante aún no se ha resuelto.
-      - `Under Review`: Durante una investigación activa, cambia el estado de clasificación a `Under Review`. Desde el estado `Under Review`, puedes mover el estado a `Archived` o `Open` según sea necesario.
-      - `Archived`: Cuando se haya resuelto la detección que causó la señal, actualiza el estado a `Archived`. Cuando se archiva una señal, puedes dar un motivo y una descripción para futuras referencias. Si un problema archivado reaparece, o si es necesario investigar más a fondo, el estado puede volver a cambiarse a `Open`. Todas las señales se bloquean 30 días después de su creación.</ul>
-   1. Haz clic en **Assign Signal** (Asignar señal) para asignarte una señal a ti mismo o a otro usuario de Datadog.
-   1. En **Take Action** (Tomar medida), puedes crear un case (incidencia), declarar un incident (incidente), editar supresiones o ejecutar workflows (UI) / procesos (generic). La creación de un case (incidencia) establece automáticamente el estado de triaje en `Under Review`. Para obtener más información sobre la asociación de cases (incidencias) con señales, consulta [Case Management](#case-management).
+1. En Datadog, vaya a {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > [{{< ui >}}Signals{{< /ui >}}][5].
+1. Haga clic en una señal de seguridad de la tabla.
+1. En la sección {{< ui >}}What Happened{{< /ui >}}, visualice los registros que coincidieron con la consulta. Pase el cursor sobre la consulta para visualizar los detalles de la misma.
+    - También puede visualizar información específica como el nombre de usuario o la IP de red. En {{< ui >}}Rule Details{{< /ui >}}, haga clic en el icono de embudo para crear una regla de supresión o añadir la información a una supresión existente. Consulte [Crear regla de supresión][11] para obtener más detalles.
+1. En la sección {{< ui >}}Next Steps{{< /ui >}}:
+   1. En {{< ui >}}Triage{{< /ui >}}, haga clic en el menú desplegable para cambiar el estado de clasificación de la señal. El estado predeterminado es `OPEN`.
+      - `Open`: Datadog Security activó una detección basada en una regla, y la señal resultante aún no se ha resuelto.
+      - `Under Review`: Durante una investigación activa, cambie el estado de triaje a `Under Review`. Desde el estado `Under Review`, puede mover el estado a `Archived` o `Open` según sea necesario.
+      - `Archived`: Cuando la detección que causó la señal se haya resuelto, actualice el estado a `Archived`. Cuando una señal se archiva, puede proporcionar un motivo y una descripción para referencia futura. Si una incidencia archivada vuelve a aparecer, o si es necesaria una investigación adicional, el estado puede cambiarse de nuevo a `Open`. Todas las señales se bloquean 30 días después de haber sido creadas.</ul>
+   1. Haga clic en {{< ui >}}Assign Signal{{< /ui >}} para asignarse una señal a usted mismo o a otro usuario de Datadog.
+   1. En {{< ui >}}Take Action{{< /ui >}}, puede crear una incidencia, declarar un incidente, editar supresiones o ejecutar flujos de trabajo. Crear una incidencia establece automáticamente el estado de triaje en `Under Review`. Para obtener más información sobre cómo asociar incidencias con señales, consulte [Case Management](#case-management).
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="El panel lateral de señales de un acceso de usuario comprometido de AWS IAM que muestra dos direcciones IP y sus ubicaciones" style="width:90%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="El panel lateral de señales de una clave de acceso de usuario de AWS IAM comprometida que muestra dos direcciones IP y sus ubicaciones" style="width:90%;" >}}
 
-### Clasificación de múltiples señales
+### Realizar el triaje de múltiples señales {#triage-multiple-signals}
 
-Utiliza acciones masivas para clasificar varias señales. Para utilizar acciones masivas, primero busca y filtra tus señales en el Explorer de señales, a continuación:
+Utilice acciones masivas para realizar el triaje de múltiples señales. Para utilizar acciones masivas, primero busque y filtre sus señales en el Explorador de señales y, luego:
 
-1. Haz clic en la casilla situada a la izquierda de las señales sobre las que deseas realizar una acción masiva. Para seleccionar todas las señales en la lista del Explorer de señales, selecciona la casilla situada junto al encabezado de la columna **Status** (Estado).
-1. Haz clic en el menú desplegable **Bulk Actions** (Acciones masivas) situado encima de la tabla de señales y selecciona la acción que deseas realizar.
+1. Haga clic en la casilla de verificación a la izquierda de las señales sobre las que desea realizar una acción masiva. Para seleccionar todas las señales en la lista del Explorador de señales, seleccione la casilla de verificación junto al encabezado de la columna {{< ui >}}Status{{< /ui >}}.
+1. Haga clic en el menú desplegable {{< ui >}}Bulk Actions{{< /ui >}} sobre la tabla de señales y seleccione la acción que desea realizar.
 
-**Nota**: El Explorer de señales deja de actualizarse dinámicamente al realizar una acción masiva.
+**Nota**: El Explorador de señales deja de actualizarse dinámicamente al realizar una acción masiva.
 
-{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="El Explorer de señales en el que se muestra la opción de acción en masa" style="width:55%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="El Explorador de señales mostrando la opción de acción masiva" style="width:55%;" >}}
 
-### Ejecuta la Workflow Automation (automatización de procesos)
+### Ejecutar Workflow Automation {#run-workflow-automation}
 
-Utiliza la Workflow Automation (automatización de procesos) para llevar a cabo acciones para ayudar a investigar y corregir una señal. Estas acciones pueden incluir las siguientes:
-- Bloquea una dirección IP de tu entorno.
-- Desactiva una cuenta de usuario.
-- Busca una dirección IP en un proveedor externo de inteligencia sobre amenazas.
-- Envía mensajes de Slack a tus compañeros para que te ayuden en tu investigación.
+Utilice Workflow Automation para llevar a cabo acciones que le ayuden a investigar y remediar una señal. Estas acciones pueden incluir:
+- Bloquear una dirección IP de su entorno.
+- Deshabilitar una cuenta de usuario.
+- Buscar una dirección IP con un proveedor de inteligencia de amenazas externo.
+- Enviar mensajes de Slack a sus colegas para obtener ayuda con su investigación.
 
-Haga clic en la pestaña **Workflows** (Workflows (UI) / procesos (generic)) del panel lateral de la señal para ver qué workflows (UI) / procesos (generic) se activaron para la señal y los workflows (UI) / procesos (generic) sugeridos para ejecutarlos. Si deseas ejecutar un workflow (UI) / proceso (generic) sugerido, haz clic en **Run Workflow** (Ejecutar workflow (UI) / proceso (generic). Consulta [Cómo se seleccionan los workflows (UI) / procesos (generic) sugeridos](#how-suggested-workflows-are-selected) para obtener más información. Si el workflow (UI) / proceso (generic) requiere variables de entrada adicionales, aparecerá un cuadro de diálogo que le pedirá que introduzca los valores necesarios antes de continuar.
+Haga clic en la pestaña {{< ui >}}Workflows{{< /ui >}} en el panel lateral de la señal para ver qué flujos de trabajo se activaron para la señal y los flujos de trabajo sugeridos para ejecutar. Si desea ejecutar un flujo de trabajo sugerido, haga clic en {{< ui >}}Run Workflow{{< /ui >}}. Consulte [Cómo se seleccionan los flujos de trabajo sugeridos](#how-suggested-workflows-are-selected) para obtener más información. Si el flujo de trabajo requiere variables de entrada adicionales, aparecerá un cuadro de diálogo que le solicitará ingresar los valores necesarios antes de continuar.
 
-Si no ves en la lista el workflow (UI) / proceso (generic) que deseas ejecutar, haz clic en **Search and Run Workflow** (Buscar y ejecutar el workflow (UI) / proceso (generic). En el navegador de workflow (UI) / proceso (generic), busca y selecciona un workflow (UI) / proceso (generic) para ejecutarlo.
+Si no ve el flujo de trabajo que desea ejecutar en la lista, haga clic en {{< ui >}}Search and Run Workflow{{< /ui >}}. En el explorador de flujos de trabajo, busque y seleccione un flujo de trabajo para ejecutar.
 
-También puedes seleccionar **Run Workflows** (Ejecutar workflows (UI) / procesos (generic)) en la sección **Next Steps** (Siguientes steps (UI) / pasos (generic)) para buscar y ejecutar un workflow (UI) / proceso (generic).
+Alternativamente, también puede seleccionar {{< ui >}}Run Workflows{{< /ui >}} en la sección {{< ui >}}Next Steps{{< /ui >}} para buscar y ejecutar un flujo de trabajo.
 
-Para activar un flujo de trabajo automáticamente para cualquier señal de seguridad, consulta [Activar un flujo de trabajo desde una señal de seguridad][8] y [Automatizar flujos de trabajo de seguridad con automatización de flujos de trabajo][9] para obtener más información.
+Para activar un flujo de trabajo automáticamente para cualquier señal de seguridad, consulte [Activar un flujo de trabajo desde una señal de seguridad][8] y [Automatizar flujos de trabajo de seguridad con Workflow Automation][9] para obtener más información.
 
-#### Cómo se seleccionan los workflows (UI) / procesos (generic) sugeridos
+#### Cómo se seleccionan los flujos de trabajo sugeridos {#how-suggested-workflows-are-selected}
 
-Para agilizar la respuesta al incident (incidente) y reducir la fricción durante el triaje, Cloud SIEM sugiere workflows (UI) / procesos (generic) que son relevantes para la señal. Los workflows (UI) / procesos (generic) sugeridos se seleccionan en función de cuáles tienen la mayor similitud de la tag (etiqueta) con la señal. Cloud SIEM utiliza la siguiente información para sugerir workflows (UI) / procesos (generic) para una señal:
+Para agilizar la respuesta a incidentes y reducir la fricción durante el triaje, Cloud SIEM sugiere flujos de trabajo que son relevantes para la señal. Los flujos de trabajo sugeridos se seleccionan en función de cuáles tienen la mayor similitud de etiqueta con la señal. Cloud SIEM utiliza la siguiente información para sugerir flujos de trabajo para una señal:
 
-- **Tags (etiquetas) añadidas automáticamente desde blueprints (esquemas), que son flujos preconfigurados**<br>
-Los workflows (UI) / procesos (generic) son un conjunto de acciones relevantes para la plataforma, como CloudTrail de AWS. Los workflows (UI) / procesos (generic) creados a partir de un blueprint (esquema) tienen automáticamente tags (etiquetas) aplicadas en función de la source (fuente). Por ejemplo, una acción de workflow (UI) / proceso (generic) como "Apagar máquina virtual en AWS" tiene la tag (etiqueta)  `source` CloudTrail de AWS.
-- **Tags (etiquetas) que has añadido manualmente**<br>
-Puedes personalizar qué workflows (UI) / procesos se priorizan añadiendo manualmente tags (etiquetas) a los workflows (UI) / procesos (generic) derivados de blueprint (esquema) y a los personalizados. Para garantizar una correspondencia contextual correcta, estas tags (etiquetas) deben coincidir con las que se encuentran en la señal, los logs que generaron la alerta o la propia regla de detección.
+- **Etiquetas agregadas automáticamente desde Blueprints, que son flujos preconfigurados**<br>
+Los flujos de trabajo son un conjunto de acciones que son relevantes para la plataforma, como AWS CloudTrail. Los flujos de trabajo creados a partir de un Blueprint tienen etiquetas aplicadas automáticamente según la fuente. Por ejemplo, una acción de flujo de trabajo como "Apagar máquina virtual en AWS" tiene la etiqueta `source` AWS CloudTrail.
+- **Etiquetas que agregó manualmente**<br>
+Puede personalizar qué flujos de trabajo se priorizan agregando etiquetas manualmente tanto a los flujos de trabajo derivados de Blueprints como a los personalizados. Para garantizar una coincidencia contextual correcta, estas etiquetas deben coincidir con las que se encuentran en la señal, los registros que generaron la alerta o la propia regla de detección.
 - **Estrategia de etiquetado**<br>
-Para garantizar que aparezca un workflow (UI) / proceso (generic) para una señal determinada, el workflow (UI) / proceso (generic) debe incluir tags (etiquetas) similares a las de la señal. Una tag (etiqueta) de señal común es la source (fuente) o servicio de la señal. Por ejemplo, las señales de los recursos de AWS suelen etiquetarse con `source:cloudtrail`. Al etiquetar un workflow (UI) / proceso (generic) con `source:cloudtrail`, el workflow (UI) / proceso (generic) se asocia con señales relacionadas con la actividad de AWS.<br>
-Si deseas que se sugiera un workflow (UI) / proceso (generic) para una regla de detección específica, etiqueta el workflow (UI) / proceso (generic) con el ID de esa regla de detección (por ejemplo, `ruleId:abc-123-xyz`).
+Para garantizar que un flujo de trabajo aparezca para una señal determinada, el flujo de trabajo debe incluir etiquetas similares a las de la señal. Una etiqueta de señal común es la fuente o el servicio de la señal. Por ejemplo, las señales de los recursos de AWS suelen estar etiquetadas con `source:cloudtrail`. Al etiquetar un flujo de trabajo con `source:cloudtrail`, el flujo de trabajo se asocia con señales relacionadas con la actividad de AWS.<br>
+Si desea que se sugiera un flujo de trabajo para una regla de detección específica, etiquete el flujo de trabajo con ese ID de regla de detección (por ejemplo, `ruleId:abc-123-xyz`).
 
 Cuando se crea una señal:
 
-- **Las señales y los workflows (UI) / procesos (generic) se emparejan mediante tags (etiquetas)**<br>
-Cuando se crea una señal de seguridad, Cloud SIEM realiza un check de las tags (etiquetas) de la señal y las compara con las definidas en los workflows (UI) / procesos (generic) existentes.
-- **Se hacen sugerencias pertinentes.<br>
-En el panel lateral, aparece una sección de **Suggested Workflows** (Workflows (UI) / procesos (generic) sugeridos). Muestra los tres principales workflows (UI) / procesos (generic) según las tags (etiquetas) que más se aproximan a las tags (etiquetas) de la señal. Esto garantiza que las acciones sugeridas se adapten al contexto y sean pertinentes desde el punto de vista operativo.
+- **Las señales y los flujos de trabajo se relacionan mediante etiquetas**<br>
+Cuando se crea una señal de seguridad, Cloud SIEM verifica las etiquetas de la señal y las compara con las etiquetas definidas en sus flujos de trabajo existentes.
+- **Se realizan sugerencias relevantes**<br>
+Aparece una sección {{< ui >}}Suggested Workflows{{< /ui >}} en el panel lateral. Muestra los tres mejores flujos de trabajo basados en las etiquetas que coinciden más estrechamente con las etiquetas de la señal. Esto garantiza que las acciones sugeridas sean conscientes del contexto y operativamente relevantes.
 
-## Investigar
+## Investigar {#investigate}
 
-Una señal contiene información importante para determinar si la amenaza detectada es maliciosa. Además, puedes añadir una señal a un case (incidencia) en [Case Management](#case-management) para una investigación más profunda.
+Una señal contiene información importante para determinar si la amenaza detectada es maliciosa. Además, puede agregar una señal a una incidencia en [Case Management](#case-management) para una investigación más profunda.
 
-### Logs
+### Registros {#logs}
 
-Haz clic en la pestaña **Logs** para ver los logs relacionados con la señal. Haz clic en **View All Related Logs** (Ver todos los logs relacionados) para ver los logs relacionados en el Explorer de logs.
+Haga clic en la pestaña {{< ui >}}Logs{{< /ui >}} para visualizar los registros relacionados con la señal. Haga clic en {{< ui >}}View All Related Logs{{< /ui >}} para visualizar los registros relacionados en Log Explorer.
 
-### Entidades
+### Entidades {#entities}
 
-Investigar entidades:
+Para investigar entidades:
 
-1. Haz clic en la pestaña **Entities** (Entidades) para ver las entidades relacionadas con la señal, como usuarios o direcciones IP.
-1. Haz clic en la flecha hacia abajo junto a **View Related Logs** (Ver logs relacionados) y:
-    - Selecciona **Ver dashboard de IP** para ver más información sobre la dirección IP en el dashboard de investigación de IP.
-    - Selecciona **Ver señales relacionadas** para abrir el Signals Explorer y ver las demás señales asociadas a la dirección IP.
-1. Para las entidades del entorno de la nube, como un rol asumido o un usuario IAM, mira el gráfico de actividad para ver qué otras acciones realizó el usuario. Haz clic en **Ver en Investigator** para ir a Investigator y ver más detalles.
+1. Haga clic en la pestaña {{< ui >}}Entities{{< /ui >}} para ver las entidades relacionadas con la señal, como usuarios o direcciones IP.
+1. Haga clic en la flecha hacia abajo junto a {{< ui >}}View Related Logs{{< /ui >}} y:
+    - Seleccione {{< ui >}}View IP Dashboard{{< /ui >}} para ver más información sobre la dirección IP en el IP Investigation dashboard.
+    - Seleccione {{< ui >}}View Related Signals{{< /ui >}} para abrir Signals Explorer y ver las otras señales asociadas con la dirección IP.
+1. Para entidades de entorno en la nube, como un rol asumido o un usuario de IAM, visualizar el gráfico de actividad para ver qué otras acciones realizó el usuario. Haga clic en {{< ui >}}View in Investigator{{< /ui >}} para ir al Investigator y ver más detalles.
 
-### Señales relacionadas
+### Señales relacionadas {#related-signals}
 
-Haz clic en la pestaña **Señales relacionadas** para ver las señales relacionadas y la información, como campos y atributos, que comparten las señales. Haz clic en **Ver toda la actividad relacionada** para ver las señales en el Signals Explorer.
+Haga clic en la pestaña {{< ui >}}Related Signals{{< /ui >}} para ver las señales relacionadas y la información, como campos y atributos, que comparten las señales. Haga clic en {{< ui >}}View All Related Activity{{< /ui >}} para ver las señales en Signals Explorer.
 
-### Supresiones
+### Supresiones {#suppressions}
 
-Para ver la regla de detección en las reglas de supresión que generó la señal, realiza una de las siguientes acciones:
+Para visualizar las reglas de supresión de la regla de detección que generó la señal, realice una de las siguientes acciones:
 
-- En la sección **Qué ha pasado**, pasa el mouse sobre el icono del embudo y, a continuación, haz clic en **Añadir supresión**.
-- En la sección **Siguientes pasos**, haz clic en **Editar supresiones** para ver la sección de supresión de esa regla en el editor de reglas de detección.
-- Haz clic en la pestaña **Supresiones** para ver una lista de supresiones, si las hay. Haz clic en **Editar supresiones** para ir al editor de reglas de detección y ver la sección de supresión de esa regla.
+- En la sección {{< ui >}}What Happened{{< /ui >}}, pase el cursor sobre el icono de embudo y luego haga clic en {{< ui >}}Add Suppression{{< /ui >}}.
+- En la sección {{< ui >}}Next Steps{{< /ui >}}, haga clic en {{< ui >}}Edit Suppressions{{< /ui >}} para ver la sección de supresión de esa regla en el editor de reglas de detección.
+- Haga clic en la pestaña {{< ui >}}Suppressions{{< /ui >}} para ver una lista de supresiones, si las hay. Haga clic en {{< ui >}}Edit Suppressions{{< /ui >}} para ir al editor de reglas de detección y ver la sección de supresión de esa regla.
 
-## Colabora
+## Colaborar {#collaborate}
 
-### Case Management
+### Case Management {#case-management}
 
-A veces se necesita más información que la disponible en una sola señal para investigarla. Utiliza [Gestión de casos][6] para recopilar varias señales, crear calendarios, debatir con colegas y mantener un notebook del análisis y los hallazgos.
+A veces necesita más información de la que está disponible en una sola señal para investigar la señal. Utilice [Case Management][6] para recopilar múltiples señales, crear cronologías, discutir con colegas y mantener un notebook del análisis y los hallazgos.
 
-#### Crear y gestionar cases (incidencias) desde el Explorer de señales
+#### Crear y gestionar incidencias desde Signals Explorer {#create-and-manage-cases-from-the-signals-explorer}
 
-En el [Explorer de señales][5], cuando se utiliza la visualización **List** (Lista), la columna **Cases** (Cases (incidencias)) contiene información sobre los cases (incidencias) asociados a las señales. Puedes utilizar esa columna para gestionar esos cases (incidencias):
-- Para gestionar los cases (incidencias) de una única señal, utiliza la columna **Cases** (Cases (Incidencias)):
-  - Si la señal tiene cases (incidencias) asociados, puedes pasar el cursor por encima del identificador de case (incidencia) para ver información sobre ellos, abrirlos en una nueva ventana o desvincularlos de la señal.
-  - Si la señal no tiene ningún case (incidencia) asociado, haz clic en el icono **Create Case** (Crear case (incidencia)) para crear un case (incidencia) o seleccionar un case (incidencia) existente para asociarlo a la señal. Se abre la ventana Crear case (incidencia).
-    - Para crear un case (incidencia), en la ventana **Create Case** (Crear case (incidencia)), introduce el **Project (proyecto)**, **Title** (Título), **Description** (Descripción) y **Assignee** (Cesionario) y, a continuación, haz clic en **Create Case** (Crear case (incidencia)).
-    - Para seleccionar un case (incidencia) existente, en la ventana **Create Case** (Crear case (incidencia)), haz clic en la pestaña **Add to Existing Case** (Añadir a un case (incidencia) existente). Selecciona un case (incidencia) y haz clic en **Attach to an Existing Case** (Añadir a un case (incidencia) existente).
-- Para gestionar cases (incidencias) de señales múltiples:
-  1. Selecciona las señales que desees vincular a un case (incidencia).
-  1. En la lista **Bulk Actions** (Acciones masivas) que aparece, haz clic en **Create a Case** (Crear un case (incidencia)) o **Add to Existing Case** (Añadir a un case (incidencia) existente). Se abre la ventana Crear case (incidencia).
-     - Para crear un case (incidencia), en la ventana **Create Case** (Crear un case (incidencia)), introduce el **Project (proyecto)**, **Title** (Título), **Description** (Descripción) y **Assignee** (Cesionario) y, a continuación, haz clic en **Create Case** (Crear un case (incidencia)).
-     - Para seleccionar un case (incidencia) existente, en la ventana **Create Case** (Crear un case (incidencia)), haz clic en la pestaña **Add to Existing Case** (Añadir a un case (incidencia) existente). Selecciona un case (incidencia) y haz clic en **Add to an Existing Case** (Añadir a un case (incidencia) existente).
+En el [Signals Explorer][5], cuando utiliza la visualización {{< ui >}}List{{< /ui >}}, la columna {{< ui >}}Cases{{< /ui >}} contiene información sobre las incidencias asociadas con las señales. Puede utilizar esa columna para gestionar esas incidencias:
+- Para gestionar incidencias de una sola señal, utilice la columna {{< ui >}}Cases{{< /ui >}}:
+  - Si la señal tiene incidencias asociadas, puede pasar el cursor sobre el ID de la incidencia para visualizar información sobre ellas, abrirlas en una ventana nueva o desvincularlas de la señal.
+  - Si la señal no tiene incidencias asociadas, haga clic en el icono {{< ui >}}Create Case{{< /ui >}} para crear una incidencia o seleccionar una incidencia existente para asociarla con la señal. Se abre la ventana Crear incidencia.
+    - Para crear una incidencia, en la ventana {{< ui >}}Create Case{{< /ui >}}, ingrese el {{< ui >}}Project{{< /ui >}}, {{< ui >}}Title{{< /ui >}}, {{< ui >}}Description{{< /ui >}} y {{< ui >}}Assignee{{< /ui >}}, luego haga clic en {{< ui >}}Create Case{{< /ui >}}.
+    - Para seleccionar una incidencia existente, en la ventana {{< ui >}}Create Case{{< /ui >}}, haga clic en la pestaña {{< ui >}}Add to Existing Case{{< /ui >}}. Seleccione una incidencia y haga clic en {{< ui >}}Attach to an Existing Case{{< /ui >}}.
+- Para administrar incidencias para múltiples señales:
+  1. Seleccione las señales que desea vincular a una incidencia.
+  1. En la lista {{< ui >}}Bulk Actions{{< /ui >}} que aparece, haga clic en {{< ui >}}Create a Case{{< /ui >}} o {{< ui >}}Add to Existing Case{{< /ui >}}. Se abre la ventana Crear incidencia.
+     - Para crear una incidencia, en la ventana {{< ui >}}Create Case{{< /ui >}}, ingrese el {{< ui >}}Project{{< /ui >}}, {{< ui >}}Title{{< /ui >}}, {{< ui >}}Description{{< /ui >}} y {{< ui >}}Assignee{{< /ui >}}, luego haga clic en {{< ui >}}Create Case{{< /ui >}}.
+     - Para seleccionar una incidencia existente, en la ventana {{< ui >}}Create Case{{< /ui >}}, haga clic en la pestaña {{< ui >}}Add to Existing Case{{< /ui >}}. Seleccione una incidencia y haga clic en {{< ui >}}Attach to an Existing Case{{< /ui >}}.
 
-Al crear un case (incidencia), el estado de triaje se configura automáticamente en `Under Review`.
+Cuando un usuario crea una incidencia, los siguientes cambios automáticos ocurren de forma predeterminada:
+- El estado de triaje se establece automáticamente en `Under Review`.
+- El responsable se establece como ese usuario.
 
-**Nota**: Si se determina que un case (incidencia) es crítico tras una investigación adicional, haz clic en **Declare Incident** (Declarar un incident (incidente)) en el case (incidencia) para escalarlo a un incident (incidente).
+Para cambiar estos valores predeterminados, consulte [Administrar el comportamiento predeterminado para señales y incidencias de seguridad](#manage-default-behavior-for-signals-and-security-cases).
 
-#### Gestión de cases (incidencias) relacionados con la seguridad
+**Nota**: Si se determina que una incidencia es crítica después de una investigación adicional, haga clic en {{< ui >}}Declare Incident{{< /ui >}} en la incidencia para escalarla a un incidente.
 
-En la page (página) [Cases][12] (incidencias), puedes ver los cases (incidencias) específicos de tus projects (proyectos) de seguridad. Puedess filtrar los cases (incidencias) para ver solo los que te han sido asignados o creados por ti o los cases (incidencias) que tienen un estado específico o están en un project (proyecto) específico. También puedes marcar los projects (proyectos) con estrellas para facilitar la navegación.
+#### Administrar incidencias relacionadas con la seguridad {#manage-security-related-cases}
 
-En la sección **Security Signals** (Señales de seguridad) de un case (incidencia), puedes ver las señales asociadas a él y hacer clic en **Add Signals** (Añadir señales) para buscar filtros que asociar al case (incidencia).
+La página [Cases][12] le permite visualizar incidencias específicamente para sus proyectos de seguridad. Puede filtrar las incidencias para ver solo las que le han sido asignadas o que usted creó, o incidencias que tienen un estado específico o están en un proyecto específico. También puede marcar proyectos como favoritos para que sea más fácil navegar hacia ellos.
 
-### Declarar una incidencia
+En la sección {{< ui >}}Security Signals{{< /ui >}} de una incidencia, puede visualizar las señales asociadas con ella y hacer clic en {{< ui >}}Add Signals{{< /ui >}} para buscar filtros que asociar con la incidencia.
 
-Ya sea a partir de una sola señal o tras la investigación de un caso, cierta actividad maliciosa exige una respuesta. Puedes declarar incidencias en Datadog para reunir a desarrolladores, operaciones y equipos de seguridad para abordar un evento de seguridad crítico. [Gestión de incidencias][7] proporciona un framework y un flujo de trabajo para que los equipos de ayuda identifiquen y mitiguen eficazmente las incidencias.
+#### Administre el comportamiento predeterminado para señales e incidencias de seguridad {#manage-default-behavior-for-signals-and-security-cases}
 
-Para declarar una incidencia en el panel de señales:
+En la página de configuración de [Security cases][13] de Cloud SIEM, puede administrar el comportamiento predeterminado para señales e incidencias de seguridad, para que pueda ahorrar tiempo cuando conecte señales e incidencias de seguridad entre sí, de forma manual o automática. La configuración que elija entra en vigor inmediatamente para todas las señales e incidencias de seguridad en adelante; no tienen ningún efecto retroactivo.
 
-1. Haz clic en **Declarar una incidencia** en la sección **Siguientes pasos**.
-1. Completa la plantilla de incidencias.
+- **Configuración del proyecto de incidencia**
 
-Si deseas añadir la señal a una incidencia, haz clic en la flecha hacia abajo situada junto a **Declarar una incidencia** y selecciona la incidencia a la que deseas añadir la señal. Haz clic en **Confirmar**.
+  Seleccione su proyecto de incidencia de seguridad de Cloud SIEM predeterminado y otros proyectos de seguridad para seleccionar:
+  - **Proyecto de incidencia de seguridad SIEM predeterminado**: Seleccione el proyecto que aparecerá de forma predeterminada cuando conecte incidencias de seguridad a un proyecto. Este proyecto también aparece como el proyecto predeterminado en la página de [Cases][12] de Cloud SIEM.
+  - **Alcance del proyecto de incidencia de seguridad**: Seleccione hasta 20 proyectos de incidencias de seguridad entre los cuales puede elegir para conectar incidencias de seguridad.
 
-### Información sobre amenazas
+- **Valores predeterminados de creación de incidencias**
 
-Datadog Cloud SIEM ofrece información integrada sobre amenazas proporcionada por nuestros socios de información sobre amenazas. Estas fuentes se actualizan constantemente para incluir datos sobre actividades sospechosas conocidas (por ejemplo, direcciones IP que se sabe que utilizan actores maliciosos), de modo que puedas identificar rápidamente qué amenazas potenciales debes abordar.
+  Cuando cree una incidencia a partir de una o más señales, puede elegir usar valores de la señal para la incidencia, dejar los valores vacíos o asignarles valores estáticos, dependiendo del campo de la incidencia.
+  <div class="alert alert-tip">Haga clic en <strong>Mostrar esquema de correlación de señal a incidencia</strong> para ver cómo Datadog asigna el estado de la señal al estado de la incidencia, y la gravedad de la señal a la prioridad de la incidencia.</div>
 
-Datadog enriquece automáticamente todos los logs ingeridos en busca de indicadores de peligro (IOC) procedentes de sus fuentes de información sobre amenazas. Si un log contiene una coincidencia con un IOC conocido, se añade un atributo `threat_intel` al evento de log para proporcionar información adicional basada en la información disponible.
+- **Configuración de adjunto de señal**
 
-La consulta para ver todas las coincidencias de información sobre amenazas en el Security Signals Explorer es `@threat_intel.indicators_matched:*`. Los siguientes son atributos adicionales para buscar información sobre amenazas:
+  Cuando adjunte señales a una incidencia, seleccione los valores predeterminados que se asignarán a esas señales.
+  <div class="alert alert-tip">Haga clic en <strong>Mostrar mapeo de motivo de archivo de incidencia a señal</strong> para ver cómo Datadog asigna el motivo para resolver la incidencia al motivo para archivar la señal.</div>
+
+  - **Al adjuntarse a una incidencia**:
+    - **Estado de la señal** y **Asignado de la señal**: Cuando adjunte señales a una incidencia, elija mantener el estado y el asignado de la señal, o asignarles valores específicos.
+    - **Permitir anulación**: Active este interruptor para permitir la anulación de valores existentes en esos campos. Si este interruptor está desactivado, el estado y el asignado seleccionados se aplican solo cuando esos campos están vacíos.
+  - **Al actualizar una incidencia**:
+    - **Estado de la señal**: Elija asignar un estado a la señal que corresponda con la incidencia, o dejarlo tal como está.
+
+### Declarar un incidente {#declare-an-incident}
+
+Ya sea que se base en una sola señal o después de una investigación de una incidencia, cierta actividad malintencionada exige una respuesta. Puede declarar incidentes en Datadog para reunir a los equipos de desarrollo, operaciones y Security para abordar un evento de Security crítico. [Incident Management][7] proporciona un marco y un flujo de trabajo para ayudar a los equipos a identificar y mitigar incidentes de manera efectiva.
+
+Para declarar un incidente en el panel de señales:
+
+1. Haga clic en {{< ui >}}Declare Incident{{< /ui >}} en la sección {{< ui >}}Next Steps{{< /ui >}}.
+1. Complete la plantilla de incidente.
+
+Si desea agregar la señal a un incidente, haga clic en la flecha hacia abajo junto a {{< ui >}}Declare Incident{{< /ui >}} y seleccione el incidente al que desea agregar la señal. Haga clic en {{< ui >}}Confirm{{< /ui >}}.
+
+### Inteligencia de amenazas {#threat-intelligence}
+
+Datadog Cloud SIEM ofrece inteligencia de amenazas integrada proporcionada por nuestros socios de inteligencia de amenazas. Estos feeds se actualizan constantemente para incluir datos sobre actividades sospechosas conocidas (por ejemplo, direcciones IP que se sabe que son utilizadas por actores malintencionados), de modo que pueda identificar rápidamente qué amenazas potenciales abordar.
+
+Datadog enriquece automáticamente todos los registros ingeridos en busca de indicadores de compromiso (IOC) a partir de sus feeds de inteligencia de amenazas. Si un registro contiene una coincidencia con un IOC conocido, se añade un atributo `threat_intel` al evento de registro para proporcionar información adicional basada en la inteligencia disponible.
+
+La consulta para ver todas las coincidencias de inteligencia de amenazas en el Explorador de señales Security es `@threat_intel.indicators_matched:*`. Los siguientes son atributos adicionales para consultar la inteligencia de amenazas:
 
 - Para `@threat_intel.results.category`: attack, corp_vpn, cryptomining, malware, residential_proxy, tor, scanner
 - Para `@threat_intel.results.intention`: malicious, suspicious, benign, unknown
 
-{{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="El Signals Explorer que muestra un gráfico de barras de señales clasificadas por categorías de información sobre amenazas de proxy residencial, corp_vpn, cryptomining y malware" style="width:80%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="El Explorador de señales que muestra un gráfico de barras de señales desglosadas por las categorías de inteligencia de amenazas: residential_proxy, corp_vpn, cryptomining y malware" style="width:80%;" >}}
 
-Consulta la documentación de [Información de amenazas][10] para obtener más detalles sobre las fuentes de información de amenazas.
+Consulte la documentación de [Threat Intelligence][10] para obtener más información sobre los feeds de inteligencia de amenazas.
 
-### Busca por atributos de IP de red
+### Buscar por atributos de IP de red {#search-by-network-ip-attributes}
 
-Cuando se detecta una actividad sospechosa en tus logs, determina si el actor sospechoso ha interactuado con tus sistemas buscando su IP de red. Utiliza la siguiente consulta para buscar atributos de IP en el explorador de logs: `@network.ip.list:<IP address>`. La consulta busca IP en cualquier lugar en los logs, incluidas las etiquetas (tags), atributos, error y campos de mensajes.
+Cuando se detecte una actividad sospechosa en sus registros, determine si el actor sospechoso ha interactuado con sus sistemas buscando su IP de red. Utilice la siguiente consulta para buscar por atributos de IP en el Explorador de registros: `@network.ip.list:<IP address>`. La consulta busca IPs en cualquier parte de los registros, incluyendo las etiquetas, los atributos, el error y los campos de mensaje.
 
-También puedes lanzar esta consulta directamente desde el panel de señales:
-1. Haz clic en la dirección IP en la sección **IPS**.
-2. Selecciona **View Logs with @network.client.ip:<ip_address>** (Ver logs con @network.client.ip:).
+También puede iniciar esta consulta directamente desde el panel de señales:
+1. Haga clic en la dirección IP en la sección {{< ui >}}IPS{{< /ui >}}.
+2. Seleccione {{< ui >}}View Logs with @network.client.ip:<ip_address>{{< /ui >}}.
 
-{{< img src="security/security_monitoring/investigate_security_signals/search_logs_by_ip.png" alt="El panel de señales que muestra las opciones de amenazas para la dirección IP seleccionada" style="width:90%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/search_logs_by_ip.png" alt="El panel de señales que muestra las opciones de amenaza para la dirección IP seleccionada" style="width:90%;" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -221,10 +259,12 @@ También puedes lanzar esta consulta directamente desde el panel de señales:
 [3]: /es/account_management/rbac/
 [4]: /es/logs/explorer/saved_views/
 [5]: https://app.datadoghq.com/security/siem/signals
-[6]: /es/incident_response/case_management/
+[6]: /es/incident_response/work_management/
 [7]: /es/incident_response/incident_management/
-[8]: /es/service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[8]: /es/actions/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /es/security/cloud_security_management/workflows/
 [10]: /es/security/threat_intelligence
 [11]: /es/security/suppressions/#create-a-suppression-rule
 [12]: https://app.datadoghq.com/security/siem/cases
+[13]: https://app.datadoghq.com/security/configuration/siem/case-management
+[14]: /es/bits_ai/bits_security_analyst/

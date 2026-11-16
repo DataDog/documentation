@@ -1,85 +1,94 @@
 ---
-description: Descubre las prácticas recomendadas para ponerte en contacto con el servicio
-  de asistencia de Datadog a través del chat o de los tickets para realizar preguntas
-  técnicas o en caso de problemas urgentes.
+description: Conozca las mejores prácticas para contactar al soporte de Datadog a
+  través de chat o tickets para preguntas técnicas y problemas urgentes.
 further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas del Agent
-- link: /account_management/guide/access-your-support-ticket
+  text: Agent Troubleshooting
+- link: /account_management/guide/manage-your-support-tickets
   tag: Documentación
-  text: Acceder a tu ticket de asistencia
-title: Empezando con el servicio de asistencia de Datadog
+  text: Administre sus tickets de soporte
+title: Introducción al soporte de Datadog
 ---
+## Descripción general {#overview}
 
-## Información general
+Datadog ofrece dos canales principales para los clientes que buscan soporte:
+   - [Abrir un ticket de soporte][1].
+   - Chatear en vivo con los ingenieros de soporte técnico de Datadog a través de un chat de texto.
 
-Datadog ofrece dos canales principales para los clientes que necesitan asistencia técnica:
-   - [Abrir un ticket de asistencia][1].
-   - Chatear en directo con los ingenieros del servicio de asistencia técnica de Datadog a través de un chat de texto.
+Aunque ambas opciones se centran en proporcionar soluciones rápidas y eficaces, una plataforma puede ser más adecuada dependiendo del momento, la naturaleza y la urgencia de la solicitud.
 
-Aunque ambas opciones se centran en ofrecer soluciones rápidas y eficaces, una plataforma puede ser más adecuada en función del momento, la naturaleza y la urgencia de la solicitud.
+Esta guía proporciona las mejores prácticas para comunicarse con el equipo de soporte y pautas para determinar el canal de soporte adecuado para usted.
 
-Esta guía proporciona las prácticas recomendadas para ponerse en contacto con el equipo de asistencia técnica y pautas para determinar el canal de asistencia más adecuado.
+## Requisitos previos {#prerequisites}
 
-## Requisitos previos
+Para resolver el problema de la manera más eficiente, esté preparado para proporcionar la información y los recursos pertinentes que se enumeran a continuación:
 
-Para que la resolución de tu problema sea lo más eficaz posible, prepárate para facilitar cualquiera de los datos y recursos pertinentes que se indican a continuación:
+   - Nombre de la organización (si tiene acceso a [más de una][2])
+   - [Datadog Site][3]
+   - Enlaces a cualquier página que demuestre el problema en su cuenta de Datadog
+   - Capturas de pantalla o grabaciones de pantalla del comportamiento en cuestión
+   - Pasos que se pueden seguir para replicar el problema
+   - Si el problema está relacionado con el funcionamiento del Datadog Agent, un [Agent flare][4]
+   - Enlaces a cualquier página de documentación utilizada
 
-   - Nombre de la organización (si tienes acceso a [más de una][2])
-   - [Sitio de Datadog][3]
-   - Enlaces a páginas para mostrar el problema en tu cuenta de Datadog 
-   - Capturas o grabaciones de pantalla del comportamiento en cuestión
-   - Medidas que pueden adoptarse para reproducir el problema
-   - Si el problema está relacionado con el funcionamiento del Datadog Agent, un [flare del Agent][4]
-   - Enlaces a las páginas de documentación utilizadas
+Para ayudarnos a resolver su solicitud lo más rápido posible, limite cada caso de soporte a un solo problema o pregunta. Los ingenieros de soporte trabajan en un caso a la vez, y combinar varias preguntas no relacionadas en un solo caso puede ralentizar la resolución. Si tiene varios problemas, abra un caso de soporte independiente para cada uno.
+Ejemplo: si necesita ayuda para solucionar un error de integración de AWS y también desea comprender cómo configurar el umbral de un monitor, abra dos casos independientes.
 
-## ¿Chat o ticket de asistencia?
+## ¿Chat o ticket de soporte? {#chat-or-support-ticket}
 
-Utiliza la siguiente tabla para determinar si necesitas [abrir un ticket de asistencia][1] o [contactarte por chat](#reaching-out-on-chat).
+Utilice la tabla a continuación para determinar si debe abrir un [ticket de soporte][1] o [comunicarse por chat](#reaching-out-on-chat).
 
-| Ticket de asistencia                  | Chat        |
+| Ticket de soporte                  | Chat        |
 | ------------------------------- | ----------- |
-| Cuestiones urgentes                   | Asistencia para la configuración de un producto
-| Solicitudes de llamada/compartir pantalla       | Preguntas sobre configuración
-| Incidentes y averías           | Aclaración de la documentación
-| Asistencia compleja para la resolución de problemas en múltiples archivos de configuración, logs o consultas | Problemas menores relacionados con un archivo de configuración específico, log o consulta
+| Problemas urgentes                   | Soporte de configuración de producto
+| Solicitudes de llamadas o de uso compartido de pantalla       | Preguntas de configuración
+| Incidentes e interrupciones           | Aclaración de documentación
+| Resolución de problemas complejos de soporte que abarcan varios archivos de configuración, registros o consultas | Problemas menores relacionados con un archivo de configuración, registro o consulta específico
 
-Si no sabes cuál es la mejor opción, no dudes en utilizar cualquiera de los canales para ponerte en contacto con el servicio de asistencia de Datadog. Cada vez que se cierra un chat, se crea automáticamente un ticket de asistencia para que se siga investigando el incidente aunque no se resuelva en el chat.
+<div class="alert alert-info">También puede utilizar el asistente de IA para encontrar respuestas a sus preguntas. Para acceder al asistente de IA, haga clic en el botón {{< ui >}}Support{{< /ui >}} en la esquina inferior izquierda del menú de navegación.</div>
 
-## Consultas por chat
+Si no está seguro de qué opción es la mejor, no dude en utilizar cualquiera de los canales para comunicarse con el soporte de Datadog. Se crea automáticamente un ticket de soporte cada vez que se cierra un chat, por lo que el problema puede seguir siendo investigado incluso si no se resuelve en el chat.
 
-<div class="alert alert-danger">El chat está disponible cualquier día laborable entre las 10:00 y las 19:00, hora del Este (ET). El chat no está disponible para las cuentas habilitadas para HIPAA.</a></div>
+## Comunicarse por chat {#reaching-out-on-chat}
 
-Para empezar, haz clic en **Support** (Asistencia) en la esquina inferior izquierda del menú de navegación.
+<div class="alert alert-danger">El chat está disponible cualquier día hábil entre las 10:00 y las 19:00, hora del Este (ET). El chat no está disponible para cuentas habilitadas para HIPAA.</a></div>
 
-{{< img src="getting_started/support/support_chat_nav.png" alt="Botón **Support** (Asistencia) en la esquina inferior izquierda del menú de navegación" style="width:40%" >}}
+Para comenzar, haga clic en {{< ui >}}Support{{< /ui >}} en la esquina inferior izquierda del menú de navegación.
 
-Cuando se abra un nuevo chat, se te preguntará si tu duda es **técnica** o **comercial**.
-   - Si tienes preguntas técnicas, se te dirigirá al primer ingeniero de asistencia técnica disponible. Esto es ideal para cualquier pregunta que tengas sobre el uso o la configuración de Datadog.
-   - Si tienes preguntas comerciales, se te dirigirá al primer representante del equipo de ventas de Datadog disponible, quien podrá responder a tus preguntas sobre facturación y gestión de cuentas.
+{{< img src="getting_started/support/support_chat_nav.png" alt="El botón Support en la parte inferior del menú de navegación izquierdo de la aplicación" style="width:40%" >}}
 
-**Nota**: En caso de problemas urgentes, es mejor ponerte en contacto a través de un ticket de asistencia e indicar por qué tu solicitud es urgente. Esto ayuda a garantizar que el equipo de asistencia pueda redirigir tu caso a un experto adecuado de inmediato.
+El asistente de IA aparece en su pantalla. Puede hacerle preguntas al asistente de IA o seleccionar {{< ui >}}Live Chat with Human{{< /ui >}}.
 
-### Recomendaciones para cuestiones técnicas
+Cuando se abre un nuevo chat, se le pregunta si tiene una pregunta **técnica** o de **ventas**.
+   - Para preguntas técnicas, se le dirigirá al primer ingeniero de soporte técnico disponible. Esto es ideal para cualquier pregunta que tenga sobre el uso o la configuración de Datadog.
+   - Para preguntas de ventas, se le dirigirá al primer miembro disponible del equipo de ventas de Datadog, quien puede responder preguntas sobre facturación y gestión de cuentas.
 
-Comprueba que cumples la mayor cantidad posible de [requisitos previos](#prerequisites) que correspondan. El agente de Datadog con quien hables por el chat hará todo lo posible para recopilar información sobre tu problema y resolverlo. No todos los problemas pueden solucionarse en una sola sesión. Si se requiere una investigación más detallada, el equipo de asistencia técnica de Datadog se encargará de recopilar la información necesaria para seguir analizando el caso una vez finalizado el chat.
+**Nota**: Para problemas urgentes, es mejor comunicarse a través de un ticket de soporte e indicar por qué su solicitud es urgente. Esto ayuda a garantizar que los responsables del equipo de soporte puedan dirigir su caso de inmediato a un experto adecuado.
 
-### Seguimiento
+### Mejores prácticas para preguntas técnicas {#best-practices-for-technical-questions}
 
-Cuando se cierra el chat, se crea automáticamente un ticket de asistencia. Si el problema se resolvió en el chat, se puede cerrar el ticket.
+Asegúrese de tener tantos [requisitos previos](#prerequisites) relevantes disponibles como sea posible. El miembro del equipo de Datadog con el que se conecta en el chat hace todo lo posible para recopilar información sobre el problema y resolverlo. No todos los problemas se pueden resolver en una sesión de chat. Si se requiere una investigación más detallada, el soporte de Datadog se enfoca en recopilar la información necesaria para realizar la investigación una vez que finalice el chat.
 
-Si se requiere investigar el caso, el ticket que contiene todos los detalles y el contexto proporcionado durante la conversación de chat se dirigirá a los expertos más indicados. Usa el ticket para seguir comunicándote con el equipo de asistencia técnica de Datadog.
+### Seguimiento {#following-up}
 
-## Idiomas de asistencia
+Cuando el chat se cierra, se crea automáticamente un ticket de soporte. Si el problema se resolvió en el chat, el ticket puede cerrarse.
 
-La asistencia en japonés está disponible de lunes a viernes de 9.00 a 17.00, hora estándar de Japón (JST), excepto los días festivos locales y del 29 de diciembre al 3 de enero. La asistencia por chat en japonés está disponible de 10.00 a 16.00, hora estándar de Japón, en días laborables.
+Si se requiere una investigación adicional, el ticket se dirige a los expertos en las áreas correspondientes, con una transferencia completa de los detalles y el contexto proporcionados durante el chat. Utilice el ticket para futuras comunicaciones con el equipo de Soporte de Datadog.
 
-La asistencia en coreano está disponible de lunes a viernes de 9.00 a 17.00, hora de Corea, excepto los días festivos locales. La asistencia por chat en coreano no está disponible.
+## Soporte en otros idiomas {#language-support}
 
-Cuando no dispongas de asistencia en tu idioma preferido, podrás seguir trabajando con el servicio de asistencia de Datadog en inglés.
+El soporte en japonés está disponible de lunes a viernes de 09:00 a 17:00 hora estándar de Japón (JST), excepto los días festivos locales y del 29 de diciembre al 3 de enero. El soporte por chat en japonés está disponible de 10:00 a 16:00 JST en días hábiles.
 
-## Referencias adicionales
+El soporte en coreano está disponible de lunes a viernes de 09:00 a 17:00 hora estándar de Corea (KST), excepto los días festivos locales. El soporte por chat en coreano está disponible de 10:00 a 11:30 y de 13:00 a 16:00 KST en días hábiles.
+
+Cuando el soporte en su idioma preferido no esté disponible, puede continuar trabajando con el Soporte de Datadog en inglés.
+
+## Política de retención de tickets {#ticket-retention-policy}
+
+Nuestra política de retención cambió el 2026-06-12: los tickets cerrados, incluidos sus archivos adjuntos, ahora se eliminan 15 meses después de su última actualización. Comuníquese con nosotros si tiene alguna pregunta.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

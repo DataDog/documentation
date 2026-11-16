@@ -27,13 +27,14 @@ Endpoints de Integrations disponibles:
 - [PagerDuty Integration][6]
 - [Slack Integration][5]
 - [Webhooks Integration][7]
+- [Oracle Cloud Integration][43]
 
 **Platform endpoints**
 
 Use estos endpoints para publicar y obtener datos hacia y desde otras partes de la plataforma Datadog: 
 
 - Los endpoints de [métricas][8] le permiten publicar datos de [métricas][9] para que puedan graficarse en los dashboards de Datadog y consultar métricas de cualquier período de tiempo.
-- Los endpoints de [eventos][10] le permiten publicar y obtener eventos hacia y desde el [Datadog event explorer][11].
+- Los endpoints de [eventos][10] le permiten publicar y obtener eventos hacia y desde el [Explorador de eventos de Datadog][11].
 - Use los endpoints de [Synthetic Monitoring][12] para crear, iniciar, detener y ver los resultados de [prueba Synthetic][13].
 - Use la [Tracing Agent API][14] para enviar trazas a su Datadog Agent, que luego las reenvía a Datadog.
 - Use la [Agent Observability Export API][36] para acceder a sus datos de Agent Observability para ejecutar evaluaciones externas y exportar spans para almacenamiento sin conexión.
@@ -50,7 +51,7 @@ Una vez que esté enviando datos a Datadog, puede usar la API para crear visuali
 - Cree [Monitors][21]
 - [Service Checks][22] - publique estados de verificación para su uso con monitores
 - Cree y administre [Logs][23], [Logs Indexes][24] y [Logs Pipelines][25]
-- Obtenga información de [Host] para su organización
+- Obtenga información de [Host][17] para su organización
 - Cree y administre [Service Level Objectives][26]
 - Genere señales de [Security Monitoring][27]
 
@@ -103,10 +104,11 @@ También puede usar Datadog API para administrar su cuenta mediante programació
 [33]: /es/api/v1/key-management/
 [34]: /es/api/v1/usage-metering/
 [35]: /es/api/v1/ip-ranges/
-[36]: /es/llm_observability/evaluations/export_api
+[36]: /es/llm_observability/investigate/export_api
 [37]: /es/api/latest/cloudflare-integration/
 [38]: /es/api/latest/fastly-integration/
 [39]: /es/api/latest/jira-integration/
 [40]: /es/api/latest/microsoft-teams-integration/
 [41]: /es/api/latest/okta-integration/
 [42]: /es/api/latest/opsgenie-integration/
+[43]: /es/api/latest/oci-integration/

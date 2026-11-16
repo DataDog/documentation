@@ -12,101 +12,105 @@ aliases:
 - /es/developers/metrics_type/
 - /es/developers/metrics/metrics_type/
 - /es/developers/metrics/types/
+description: Conozca los tipos de envío de métricas de Datadog (recuento, tasa, gauge,
+  histograma, distribución) y cómo se asignan a los tipos dentro de la aplicación.
 further_reading:
 - link: extend/dogstatsd
   tag: Documentación
-  text: Aprende más sobre DogStatsD
+  text: Obtenga más información sobre DogStatsD
 - link: /metrics/units
   tag: Documentación
-  text: Unidades de Métricas
+  text: Unidades de métricas
 - link: extend/libraries
   tag: Documentación
-  text: Bibliotecas cliente de API y DogStatsD, creadas oficialmente y por la comunidad
-title: Tipos de Métricas
+  text: Bibliotecas de cliente para API y DogStatsD oficiales y creadas por la comunidad
+title: Tipos de métricas
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Cada métrica enviada a Datadog debe tener un tipo. El tipo de una métrica afecta cómo se muestran los valores de la métrica al consultarlos, así como las posibilidades de graficación asociadas dentro de Datadog utilizando [modificadores][1] y [funciones][2]. El tipo de una métrica se muestra en el panel lateral de detalles para la métrica dada en la [Metrics Summary page][3].
+Cada métrica enviada a Datadog debe tener un tipo. El tipo de una métrica afecta cómo se muestran los valores de la métrica al realizar consultas, así como las posibilidades de graficado asociadas dentro de Datadog mediante el uso de [modificadores][1] y [funciones][2] adicionales. El tipo de una métrica se muestra en el panel lateral de detalles de la métrica dada en la [página de Metrics Summary][3].
 
-**Nota**: Cambiar el tipo de métrica en este panel lateral de detalles puede cambiar el comportamiento de la métrica en todas las visualizaciones y monitores existentes, lo que potencialmente puede hacer que los datos históricos sean incomprensibles.
+**Nota**: Cambiar el tipo de métrica en este panel lateral de detalles puede cambiar el comportamiento de la métrica en todas las visualizaciones y monitores existentes, lo que podría hacer que los datos históricos carezcan de sentido.
 
-Los siguientes tipos de envío de métricas son aceptados:
+Se aceptan los siguientes tipos de envío de métricas:
 
-- [COUNT](?tab=count#metric-types)
+- [RECUENTO](?tab=count#metric-types)
 - [TASA](?tab=rate#metric-types)
 - [GAUGE](?tab=gauge#metric-types)
-- [CONJUNTO][4]
+- [SET][4]
 - [HISTOGRAMA](?tab=histogram#metric-types)
 - [DISTRIBUCIÓN](?tab=distribution#metric-types)
 
-Estos diferentes tipos de envío de métricas se asignan a cuatro tipos de métricas en la aplicación que se encuentran dentro de la aplicación web de Datadog:
+Estos diferentes tipos de envío de métricas se asignan a cinco tipos de métricas dentro de la aplicación que se encuentran en la aplicación web de Datadog:
 
-- CUENTA
+- RECUENTO
 - TASA
 - GAUGE
 - DISTRIBUCIÓN
+- HISTOGRAMA (Explícito, Exponencial)
 
-**Nota**: Si envías una métrica a Datadog sin un tipo, el tipo de métrica aparece como `Not Assigned` dentro de Datadog. El tipo de métrica `Not Assigned` no puede ser cambiado a otro tipo en la aplicación hasta que se envíe un tipo de métrica inicial.
+**Nota**: Si envía una métrica a Datadog sin un tipo, el tipo de métrica aparece como {{< ui >}}Not Assigned{{< /ui >}} dentro de Datadog. El tipo de métrica {{< ui >}}Not Assigned{{< /ui >}} no puede cambiarse a otro tipo en la aplicación hasta que se envíe un tipo de métrica inicial.
 
-## Envío vs. tipo en la aplicación {#submission-vs-in-app-type}
+## Envío frente al tipo en la aplicación {#submission-vs-in-app-type}
 
-Las métricas se envían a Datadog de tres maneras principales:
+Las métricas se envían a Datadog de cuatro formas principales:
 
-- [Verificación del agente][5]
+- [Agent check][5]
 - [DogStatsD][6]
-- [API HTTP de Datadog][7]
+- [Datadog's HTTP API][7]
+- [OTLP Metrics API][20]
 
-La mayoría de los datos que Datadog recibe son enviados por el Agente, ya sea a través de una verificación del Agente o DogStatsD. Para estos métodos de envío, el tipo de una métrica determina cómo se agregan múltiples valores recolectados en un Agente en [a flush time interval][8]. El Agente combina estos valores en un único valor métrico representativo para ese intervalo. Este valor combinado se almacena con una única marca de tiempo en Datadog.
+La mayor parte de los datos que recibe Datadog se envían a través del Agent, ya sea mediante una comprobación del Agent o DogStatsD. Para estos métodos de envío, el tipo de métrica determina cómo se agregan los múltiples valores recopilados en un Agent en [un intervalo de tiempo de vaciado][8]. El Agent combina estos valores en un único valor de métricas representativo para ese intervalo. Este valor combinado se almacena con una única marca de tiempo en Datadog.
 
-Los datos enviados directamente a la API de Datadog no son agregados por Datadog, con la excepción de las métricas de distribución. Los valores crudos enviados a Datadog se almacenan tal como están.
+Los datos enviados directamente a la Datadog API no son agregados por Datadog, con la excepción de las métricas de distribución. Los valores sin procesar enviados a Datadog se almacenan tal cual.
 
-Lee la sección [Tipos de envío y tipos en la aplicación de Datadog](#submission-types-and-datadog-in-app-types) para aprender cómo se mapean los diferentes tipos de envío de métricas a sus tipos correspondientes en la aplicación.
+Lea la sección [Tipos de envío y tipos de métricas en la aplicación de Datadog](#submission-types-and-datadog-in-app-types) para obtener información sobre cómo se asignan los diferentes tipos de envío de métricas a sus tipos correspondientes en la aplicación.
 
 ## Tipos de métricas {#metric-types}
 
 ### Definición {#definition}
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{% tab "RECUENTO" %}}
 
-El tipo de envío de métrica COUNT representa el número total de ocurrencias de eventos en un intervalo de tiempo. Un COUNT se puede utilizar para rastrear el número total de conexiones realizadas a una base de datos o el número total de solicitudes a un punto de conexión. Este número de eventos puede acumularse o disminuir con el tiempo; no es monotónicamente creciente.
+El tipo de envío de métrica COUNT representa el número total de ocurrencias de eventos en un intervalo de tiempo. Un COUNT se puede utilizar para realizar un seguimiento del número total de conexiones realizadas a una base de datos o del número total de solicitudes a un punto de conexión. Este número de eventos puede acumularse o disminuir con el tiempo; no aumenta de forma monótona.
 
-**Nota**: Un COUNT es diferente del tipo de métrica RATE, que representa el número de ocurrencias de eventos normalizadas por segundo según el intervalo de tiempo definido.
+**Nota**: Un COUNT es diferente del tipo de métrica RATE, que representa el número de ocurrencias de eventos normalizado por segundo dado el intervalo de tiempo definido.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-El tipo de envío de métrica RATE representa el número total de ocurrencias de eventos por segundo en un intervalo de tiempo. Un RATE se puede utilizar para rastrear con qué frecuencia ocurre algo, como la frecuencia de conexiones realizadas a una base de datos o el flujo de solicitudes realizadas a un punto de conexión.
+El tipo de envío de métrica RATE representa el número total de ocurrencias de eventos por segundo en un intervalo de tiempo. Un RATE se puede utilizar para realizar un seguimiento de la frecuencia con la que sucede algo, como la frecuencia de las conexiones realizadas a una base de datos o el flujo de solicitudes realizadas a un punto de conexión.
 
 **Nota**: Un RATE es diferente del tipo de envío de métrica COUNT, que representa el número total de ocurrencias de eventos en el intervalo de tiempo dado.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-El tipo de envío de métrica GAUGE representa una instantánea de eventos en un intervalo de tiempo. Este valor de instantánea representativa es el último valor enviado al Agente durante un intervalo de tiempo. Un GAUGE se puede utilizar para medir algo que reporta continuamente, como el espacio en disco disponible o la memoria utilizada.
+El tipo de envío de métrica GAUGE representa una instantánea de eventos en un intervalo de tiempo. Este valor de instantánea representativo es el último valor enviado al Agent durante un intervalo de tiempo. Un GAUGE se puede utilizar para tomar una medida de algo que se informa continuamente, como el espacio en disco disponible o la memoria utilizada.
 
 {{% /tab %}}
-{{% tab "HISTOGRAMA" %}}
+{{% tab "HISTOGRAM" %}}
 
-El tipo de envío de métrica HISTOGRAMA representa la distribución estadística de un conjunto de valores calculados del lado del Agente en un intervalo de tiempo. El tipo de métrica HISTOGRAMA de Datadog es una extensión del tipo de métrica de tiempo StatsD. El Agente agrega los valores que se envían en un intervalo de tiempo definido y produce diferentes métricas que representan el conjunto de valores.
+El tipo de envío de métrica HISTOGRAM representa la distribución estadística de un conjunto de valores calculados en el lado del Agent en un intervalo de tiempo. El tipo de métrica HISTOGRAM de Datadog es una extensión del tipo de métrica de temporización StatsD. El Agent agrega los valores que se envían en un intervalo de tiempo definido y produce diferentes métricas que representan el conjunto de valores.
 
-Si envías `X` valores para una métrica HISTOGRAMA `<METRIC_NAME>` en un intervalo de tiempo dado, las siguientes métricas son producidas por el Agente por defecto:
+Si envía `X` valores para una métrica HISTOGRAM `<METRIC_NAME>` en un intervalo de tiempo determinado, el Agent produce las siguientes métricas de forma predeterminada:
 
 `<METRIC_NAME>.avg`
 : Representa el promedio de esos `X` valores en el intervalo de tiempo.<br>
-**Datadog In-App Type**: GAUGE
+**Tipo en la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.count`
-: Representa el número de valores enviados durante el intervalo, `X`. El Agente envía este número como un RATE para que se muestre en la aplicación el valor de `X/interval`. <br>
-**Datadog In-App Type**: RATE
+: Representa la cantidad de valores enviados durante el intervalo, `X`. El Agent envía este número como RATE, por lo que mostraría en la aplicación el valor de `X/interval`. <br>
+**Tipo en la aplicación de Datadog**: RATE
 
 `<METRIC_NAME>.median`
 : Representa la mediana de esos `X` valores en el intervalo de tiempo.<br>
-**Tipo In-App de Datadog**: GAUGE
+**Tipo en la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.95percentile` 
 : Representa el percentil 95 de esos `X` valores en el intervalo de tiempo.<br>
-**Tipo In-App de Datadog**: GAUGE
+**Tipo en la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.max`
 : Representa el valor máximo de esos `X` valores enviados durante el intervalo de tiempo.<br>
@@ -114,30 +118,29 @@ Si envías `X` valores para una métrica HISTOGRAMA `<METRIC_NAME>` en un interv
 
 **Notas**:
 
-- Configura qué agregaciones deseas enviar a Datadog con el parámetro `histogram_aggregates` en tu [`datadog.yaml` archivo de configuración][1]. Por defecto, solo se envían a Datadog las agregaciones `max`, `median`, `avg` y `count`. `sum` y `min` también están disponibles.
-- Configura qué agregación de percentil deseas enviar a Datadog con el parámetro `histogram_percentiles` en tu [`datadog.yaml` archivo de configuración][2]. Por defecto, solo se envía a Datadog el `95percentile`.
+- Configure qué agregaciones desea enviar a Datadog con el parámetro `histogram_aggregates` en su [archivo de configuración `datadog.yaml`][1]. De forma predeterminada, solo se envían a Datadog las agregaciones `max`, `median`, `avg` y `count`. `sum` y `min` también están disponibles.
+- Configure qué agregación de percentil desea enviar a Datadog con el parámetro `histogram_percentiles` en su [archivo de configuración `datadog.yaml`][1]. De forma predeterminada, solo se envía `95percentile` a Datadog.
 
 
-[1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
-[2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
-{{% tab "DISTRIBUCIÓN" %}}
+{{% tab "DISTRIBUTION" %}}
 
-El tipo de envío de métrica de DISTRIBUCIÓN representa la distribución estadística global de un conjunto de valores calculados a través de toda su infraestructura distribuida en un intervalo de tiempo. Una DISTRIBUTION puede ser utilizada para instrumentar objetos lógicos, como servicios, independientemente de los servidores subyacentes.
+El tipo de envío de métricas DISTRIBUTION representa la distribución estadística global de un conjunto de valores calculados en toda su infraestructura distribuida en un intervalo de tiempo. Una DISTRIBUTION se puede utilizar para instrumentar objetos lógicos, como servicios, independientemente de los hosts subyacentes.
 
-A diferencia del tipo de métrica HISTOGRAM, que agrega en el Agente durante un intervalo de tiempo dado, una métrica de DISTRIBUTION envía todos los datos en bruto durante un intervalo de tiempo a Datadog. Las agregaciones ocurren del lado del servidor. Debido a que la estructura de datos subyacente representa datos en bruto, no agregados, las distribuciones proporcionan dos características principales:
+A diferencia del tipo de métrica HISTOGRAM, que se agrega en el Agent durante un intervalo de tiempo determinado, una métrica DISTRIBUTION envía todos los datos sin procesar durante un intervalo de tiempo a Datadog. Las agregaciones ocurren en el lado del servidor. Debido a que la estructura de datos subyacente representa datos sin procesar y no agregados, las distribuciones ofrecen dos características principales:
 
-- Cálculo de agregaciones percentiles
-- Personalización de etiquetado
+- Cálculo de agregaciones de percentiles
+- Personalización de etiquetas
 
-Si envía `X` valores para una métrica de DISTRIBUCIÓN `<METRIC_NAME>` en un intervalo de tiempo dado, las siguientes agregaciones están disponibles para consulta por defecto:
+Si envía `X` valores para una métrica DISTRIBUTION `<METRIC_NAME>` en un intervalo de tiempo determinado, las siguientes agregaciones están disponibles para consulta de forma predeterminada:
 
 `avg:<METRIC_NAME>`
 : Representa el promedio de esos `X` valores en el intervalo de tiempo.<br>
 **Tipo en la aplicación de Datadog**: GAUGE
 
 `count:<METRIC_NAME>`
-: Representa el número de puntos enviados en el intervalo de tiempo, `X`. El Agente luego lo envía como un COUNT.<br>
+: Representa la cantidad de puntos enviados en el intervalo de tiempo, `X`. El Agent luego lo envía como un COUNT.<br>
 **Tipo en la aplicación de Datadog**: COUNT
 
 `max:<METRIC_NAME>`
@@ -145,14 +148,14 @@ Si envía `X` valores para una métrica de DISTRIBUCIÓN `<METRIC_NAME>` en un i
 **Tipo en la aplicación de Datadog**: GAUGE
 
 `min:<METRIC_NAME>`
-: Representa el valor mínimo de aquellos `X` enviados en el intervalo de tiempo.<br>
+: Representa el valor mínimo de esos `X` enviados en el intervalo de tiempo.<br>
 **Tipo en la aplicación de Datadog**: GAUGE
 
 `sum:<METRIC_NAME>`
 : Representa la suma de todos los valores `X` enviados en el intervalo de tiempo.<br>
 **Tipo en la aplicación de Datadog**: COUNT
 
-**Nota**: Mientras que las diferentes agregaciones de los valores de métricas de distribución están _representadas_ como GAUGE o COUNT en la aplicación, la métrica en sí mantiene el tipo `DISTRIBUTION`.
+**Nota**: Si bien las diferentes agregaciones de valores de métricas de distribución se _representan_ como gauges o counts en la aplicación, la métrica en sí conserva el tipo `DISTRIBUTION`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -160,32 +163,32 @@ Si envía `X` valores para una métrica de DISTRIBUCIÓN `<METRIC_NAME>` en un i
 ### Ejemplo {#example}
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{% tab "RECUENTO" %}}
 
-Supongamos que estás enviando una métrica de COUNT, `notifications.sent`, desde un único servidor que ejecuta el Datadog Agent. Este host emite los siguientes valores en un intervalo de tiempo de flush: `[1,1,1,2,2,2,3,3]`.
+Suponga que está enviando una métrica COUNT, `notifications.sent`, desde un solo servidor que ejecuta el Datadog Agent. Este servidor emite los siguientes valores en un intervalo de tiempo de vaciado: `[1,1,1,2,2,2,3,3]`.
 
-El Agente suma todos los valores recibidos en un intervalo de tiempo. Luego, envía el número total, en este caso `15`, como el valor de la métrica CUENTA.
+El Agent suma todos los valores recibidos en un intervalo de tiempo. Luego, envía el número total, en este caso `15`, como el valor de la métrica COUNT.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Supongamos que estás enviando una métrica TASA, `queue_messages.rate`, desde un único host que ejecuta el Datadog Agent. Este host emite los siguientes valores en un intervalo de tiempo de flush: `[1,1,1,2,2,2,3,3]`.
+Suponga que está enviando una métrica RATE, `queue_messages.rate`, desde un solo servidor que ejecuta el Datadog Agent. Este servidor emite los siguientes valores en un intervalo de tiempo de vaciado: `[1,1,1,2,2,2,3,3]`.
 
-El Agente suma todos los valores recibidos en un intervalo de tiempo. Luego, envía el número total dividido por el número total de segundos en este intervalo de tiempo. En este caso, si el intervalo de flush es de 10 segundos, el valor enviado sería `1.5` como el valor de la métrica TASA.
+El Agent suma todos los valores recibidos en un intervalo de tiempo. Luego, envía el número total dividido por el número total de segundos en este intervalo de tiempo. En este caso, si el intervalo de vaciado es de 10 segundos, el valor enviado sería `1.5` como el valor de la métrica RATE.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Supongamos que estás enviando una métrica GAUGE, `temperature`, desde un único host que ejecuta el Datadog Agent. Este host emite los siguientes valores en un intervalo de tiempo de flush: `[71,71,71,71,71,71,71.5]`.
+Suponga que está enviando una métrica GAUGE, `temperature`, desde un solo servidor que ejecuta el Datadog Agent. Este servidor emite los siguientes valores en un intervalo de tiempo de vaciado: `[71,71,71,71,71,71,71.5]`.
 
-El Agente envía el último número reportado, en este caso `71.5`, como el valor de la métrica GAUGE.
+El Agent envía el último número reportado, en este caso `71.5`, como el valor de la métrica GAUGE.
 
 {{% /tab %}}
-{{% tab "HISTOGRAMA" %}}
+{{% tab "HISTOGRAM" %}}
 
-Por ejemplo, supongamos que estás enviando una métrica HISTOGRAM, `request.response_time.histogram`, desde un servidor web que reporta los valores `[1,1,1,2,2,2,3,3]` en un intervalo de tiempo de flush de 10 segundos. Por defecto, el Agente envía las siguientes métricas a Datadog que representan la distribución estadística de estos valores en este intervalo de tiempo:
+Por ejemplo, suponga que está enviando una métrica HISTOGRAM, `request.response_time.histogram`, desde un servidor web que reporta los valores `[1,1,1,2,2,2,3,3]` en un intervalo de tiempo de vaciado de 10 segundos. De forma predeterminada, el Agent envía las siguientes métricas a Datadog, las cuales representan la distribución estadística de estos valores en este intervalo de tiempo:
 
-| Nombre de la Métrica                                    | Valor  | Tipo de In-App de Datadog |
+| Nombre de la métrica                                    | Valor  | Tipo en la aplicación de Datadog |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `0.8`  | RATE                |
@@ -194,25 +197,25 @@ Por ejemplo, supongamos que estás enviando una métrica HISTOGRAM, `request.res
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
 
 {{% /tab %}}
-{{% tab "DISTRIBUCIÓN" %}}
+{{% tab "DISTRIBUTION" %}}
 
-Supongamos que estás enviando una métrica DISTRIBUCIÓN, `request.response_time.distribution`, desde dos servidores web: `webserver:web_1` y `webserver:web_2`. Supongamos que en un intervalo de tiempo de flush dado, `webserver:web_1` informa la métrica con los valores `[1,1,1,2,2,2,3,3]`, y `webserver:web_2` informa la misma métrica con los valores `[1,1,2]`. Durante este intervalo de tiempo, las siguientes cinco agregaciones representarán la distribución estadística global de todos los valores recopilados de ambos servidores web:
+Suponga que está enviando una métrica de DISTRIBUCIÓN, `request.response_time.distribution`, desde dos servidores web: `webserver:web_1` y `webserver:web_2`. Suponga que en un intervalo de tiempo de vaciado determinado, `webserver:web_1` informa la métrica con los valores `[1,1,1,2,2,2,3,3]`, y `webserver:web_2` informa la misma métrica con los valores `[1,1,2]`. Durante este intervalo de tiempo, las siguientes cinco agregaciones representarán la distribución estadística global de todos los valores recopilados de ambos servidores web:
 
-| Nombre de la métrica                                | Valor  | Tipo In-App de Datadog |
+| Nombre de la métrica                                | Valor  | Tipo en la aplicación de Datadog |
 | ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
-| `count:request.response_time.distribution` | `11`   | COUNT               |
+| `count:request.response_time.distribution` | `11`   | RECUENTO               |
 | `max:request.response_time.distribution`   | `3`    | GAUGE               |
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
-| `sum:request.response_time.distribution`   | `19`   | COUNT               |
+| `sum:request.response_time.distribution`   | `19`   | RECUENTO               |
 
-#### Cálculo de agregaciones percentiles {#calculation-of-percentile-aggregations}
+#### Cálculo de agregaciones de percentiles {#calculation-of-percentile-aggregations}
 
-Al igual que otros tipos de métricas, como GAUGE o HISTOGRAMA, el tipo de métrica de DISTRIBUCIÓN tiene las siguientes agregaciones disponibles: `count`, `min`, `max`, `sum` y `avg`. Las métricas de distribución se etiquetan inicialmente de la misma manera que otras métricas (con etiquetas personalizadas establecidas en el código).
+Al igual que otros tipos de métricas, como GAUGE o HISTOGRAM, el tipo de métrica DISTRIBUTION tiene disponibles las siguientes agregaciones: `count`, `min`, `max`, `sum` y `avg`. Las métricas de distribución se etiquetan inicialmente de la misma manera que otras métricas (con etiquetas personalizadas configuradas en el código).
 
-Agregaciones percentiles adicionales (`p50`, `p75`, `p90`, `p95`, `p99`) se pueden agregar a las métricas de distribución desde el [panel lateral de detalles][2] de la métrica. Si agregas agregaciones percentiles a tu métrica DISTRIBUCIÓN en la aplicación, las siguientes cinco agregaciones adicionales están disponibles para consulta:
+Se pueden agregar agregaciones de percentiles adicionales (`p50`, `p75`, `p90`, `p95`, `p99`) a las métricas de distribución desde el [panel lateral de detalles][2] de la métrica. Si agregara agregaciones de percentiles a su métrica de distribución en la aplicación, las siguientes cinco agregaciones adicionales estarían disponibles para consulta:
 
-| Nombre de Métrica                              | Valor | Tipo In-app de Datadog |
+| Nombre de la métrica                              | Valor | Tipo en la aplicación de Datadog |
 | ---------------------------------------- | ----- | ------------------- |
 | `p50:request.response_time.distribution` | `2`   | GAUGE               |
 | `p75:request.response_time.distribution` | `2`   | GAUGE               |
@@ -220,15 +223,15 @@ Agregaciones percentiles adicionales (`p50`, `p75`, `p90`, `p95`, `p99`) se pued
 | `p95:request.response_time.distribution` | `3`   | GAUGE               |
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
-Es decir, para una métrica de distribución con agregaciones percentiles añadidas durante un intervalo de tiempo dado, las siguientes 10 agregaciones están disponibles: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95` y `p99`.
+Es decir, para una métrica de distribución con agregaciones de percentiles añadidas durante un intervalo de tiempo determinado, están disponibles las siguientes 10 agregaciones: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95` y `p99`.
 
-**Nota**: Mientras que las diferentes agregaciones de los valores de la métrica de distribución están _representadas_ como gauges o cuentas en la aplicación, la métrica en sí mantiene el tipo `DISTRIBUTION`.
+**Nota**: Si bien las diferentes agregaciones de valores de métricas de distribución se _representan_ como gauges o counts en la aplicación, la métrica en sí conserva el tipo `DISTRIBUTION`.
 
 #### Personalización de etiquetas {#customization-of-tagging}
 
-Esta funcionalidad te permite controlar las etiquetas para métricas donde la granularidad a nivel de host no es necesaria. Aprende más sobre [Métricas sin Límites™][1].
+Esta funcionalidad le permite controlar el etiquetado de métricas donde no es necesaria la granularidad a nivel de servidor. Obtenga más información sobre [Metrics without Limits™][1].
 
-**Nota**: La exclusión de etiquetas no es compatible en la personalización de etiquetas basada en la lista permitida. No se aceptan etiquetas que comiencen con `!`.
+**Nota**: La exclusión de etiquetas no es compatible con la personalización de etiquetas basada en listas de permitidos. No se aceptan etiquetas que comiencen con `!`.
 
 [1]: /es/metrics/metrics-without-limits/
 [2]: /es/metrics/summary/#metric-details-sidepanel
@@ -238,20 +241,20 @@ Esta funcionalidad te permite controlar las etiquetas para métricas donde la gr
 ### Envío {#submission}
 
 {{< tabs >}}
-{{% tab "CUENTA" %}}
+{{% tab "RECUENTO" %}}
 
-Envía tus métricas de tipo CUENTA desde una de las siguientes fuentes:
+Envíe sus métricas de tipo COUNT desde una de las siguientes fuentes:
 
-| Fuente de Envío | Método de Envío (python)           | Tipo de Envío | Tipo In-App de Datadog |
+| Fuente de envío | Método de envío (python)           | Tipo de envío | Tipo en la aplicación de Datadog |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Verificación de agente][1]  | `self.count(...)`                    | CUENTA           | CUENTA               |
-| [Verificación de agente][2]  | `self.monotonic_count(...)`          | CUENTA           | CUENTA               |
-| [API][3]          | `api.Metric.send(type="count", ...)` | CUENTA           | CUENTA               |
-| [DogStatsD][4]    | `dog.count(...)`                     | CUENTA           | TASA                |
-| [DogStatsD][4]    | `dog.increment(...)`                 | CUENTA           | TASA                |
-| [DogStatsD][4]    | `dog.decrement(...)`                 | CUENTA           | TASA                |
+| [Verificación del agente][1]  | `self.count(...)`                    | COUNT           | COUNT               |
+| [Verificación del agente][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [API][3]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
+| [DogStatsD][4]    | `dog.count(...)`                     | COUNT           | RATE                |
+| [DogStatsD][4]    | `dog.increment(...)`                 | COUNT           | RATE                |
+| [DogStatsD][4]    | `dog.decrement(...)`                 | COUNT           | RATE                |
 
-**Nota**: Al enviar un tipo de métrica de CUENTA a través de DogStatsD, la métrica aparece como una TASA en la aplicación para asegurar una comparación relevante entre diferentes Agentes. En consecuencia, los conteos de StatsD pueden aparecer con un valor decimal dentro de Datadog (ya que están normalizados sobre un intervalo de tiempo para reportar unidades por segundo).
+**Nota**: Al enviar un tipo de métrica de COUNT a través de DogStatsD, la métrica aparece como una RATE en la aplicación para garantizar una comparación relevante entre diferentes agentes. En consecuencia, los COUNT de StatsD pueden aparecer con un valor decimal dentro de Datadog (ya que se normalizan durante un intervalo de tiempo para informar unidades por segundo).
 
 
 [1]: /es/metrics/custom_metrics/agent_metrics_submission/?tab=count#count
@@ -259,16 +262,16 @@ Envía tus métricas de tipo CUENTA desde una de las siguientes fuentes:
 [3]: /es/api/latest/metrics/#submit-metrics
 [4]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#count
 {{% /tab %}}
-{{% tab "TASA" %}}
+{{% tab "RATE" %}}
 
-Envía tus métricas de tipo TASA desde una de las siguientes fuentes:
+Envíe sus métricas de tipo RATE desde una de las siguientes fuentes:
 
-| Fuente de envío | Método de envío (python)          | Tipo de envío | Tipo en la aplicación de Datadog |
+| Fuente | Método de envío (python)          | Tipo de envío | Tipo en la aplicación Datadog |
 | ----------------- | ----------------------------------- | --------------- | ------------------- |
-| [Verificación de agente][1]  | `self.rate(...)`                    | TASA            | GAUGE               |
-| [API][2]          | `api.Metric.send(type="rate", ...)` | TASA            | TASA                |
+| [Verificación del Agent][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
+| [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Nota**: Para obtener métricas de TASA a través de DogStatsD, envía ya sea una métrica CUENTA [16] o HISTOGRAMA [18]. Los valores de la métrica CUENTA y los valores de `<HISTOGRAM>.count` son deltas normalizados en el tiempo del valor de la métrica durante el período de vaciado de StatsD.
+**Nota**: Para obtener métricas de RATE a través de DogStatsD, envíe una métrica de [COUNT][16] o [HISTOGRAM][18]. Los valores de las métricas COUNT y `<HISTOGRAM>.count` son deltas normalizados por tiempo del valor de la métrica durante el período de vaciado de StatsD.
 
 
 [1]: /es/metrics/custom_metrics/agent_metrics_submission/?tab=rate
@@ -276,11 +279,11 @@ Envía tus métricas de tipo TASA desde una de las siguientes fuentes:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Envía tus métricas de tipo GAUGE desde una de las siguientes fuentes:
+Envíe sus métricas de tipo GAUGE desde una de las siguientes fuentes:
 
-| Fuente de envío | Método de envío (Python)           | Tipo de envío | Tipo en la aplicación de Datadog |
+| Fuente | Método de envío (Python)           | Tipo de envío | Tipo en la aplicación Datadog |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Verificación de agente][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Verificación del Agent][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 | [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
@@ -289,63 +292,63 @@ Envía tus métricas de tipo GAUGE desde una de las siguientes fuentes:
 [2]: /es/api/latest/metrics/#submit-metrics
 [3]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#gauge
 {{% /tab %}}
-{{% tab "HISTOGRAMA" %}}
+{{% tab "HISTOGRAM" %}}
 
-Envía tus métricas de tipo HISTOGRAMA desde una de las siguientes fuentes:
+Envíe sus métricas de tipo HISTOGRAM desde una de las siguientes fuentes:
 
-| Fuente de envío | Método de envío (Python) | Tipo de envío | Tipo In-App de Datadog |
+| Fuente | Método de envío (Python) | Tipo de envío | Tipos de Datadog en la aplicación |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [Verificación de agente][1]  | `self.histogram(...)`      | HISTOGRAMA       | GAUGE, RATE          |
-| [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAMA       | GAUGE, RATE          |
+| [Agent check][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
+| [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
 
-Enviar una métrica TIMER al Agente de Datadog es equivalente a enviar una métrica HISTOGRAMA dentro de DogStatsD (no debe confundirse con los temporizadores en el StatsD estándar). [DogStatsD `TIMER`][3] representa solo datos de duración. Por ejemplo, la cantidad de tiempo que tarda una sección de código en ejecutarse o cuánto tiempo toma renderizar completamente una página.
+El envío de una métrica TIMER al Datadog Agent es equivalente al envío de un tipo de métrica HISTOGRAM dentro de DogStatsD (no confundir con los timers en el StatsD estándar). [DogStatsD `TIMER`][3] representa solo datos de duración. Por ejemplo, la cantidad de tiempo que tarda en ejecutarse una sección de código o cuánto tiempo tarda en renderizarse completamente una página.
 
 
 [1]: /es/metrics/custom_metrics/agent_metrics_submission/?tab=histogram
 [2]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [3]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#timer
 {{% /tab %}}
-{{% tab "DISTRIBUCIÓN" %}}
+{{% tab "DISTRIBUTION" %}}
 
-Envía tus métricas de tipo DISTRIBUCIÓN desde la siguiente fuente:
+Envíe sus métricas de tipo DISTRIBUTION desde la siguiente fuente:
 
-| Fuente de envío | Método de envío (Python) | Tipo de envío | Tipo In-App de Datadog |
+| Fuente | Método de envío (Python) | Tipo de envío | Tipos de Datadog en la aplicación |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUCIÓN    | GAUGE, COUNT         |
-| [API][2]          | `api_instance.submit_distribution_points(...)` | DISTRIBUCIÓN           | GAUGE, COUNT               |
+| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
+| [API][2]          | `api_instance.submit_distribution_points(...)` | DISTRIBUTION           | GAUGE, COUNT               |
 
-**Nota**: Mientras que las diferentes agregaciones de los valores de métrica de distribución se _representan_ como gauges o COUNT en la aplicación, la métrica en sí retiene el tipo `DISTRIBUTION`.
+**Nota**: Si bien las diferentes agregaciones de valores de métricas de distribución se _representan_ como gauges o counts en la aplicación, la métrica en sí conserva el tipo `DISTRIBUTION`.
 
 [1]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
 [2]: /es/api/latest/metrics/#submit-distribution-points
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tipos de envío y tipos en la aplicación de Datadog {#submission-types-and-datadog-in-app-types}
+## Tipos de envío y tipos de Datadog en la aplicación {#submission-types-and-datadog-in-app-types}
 
-A continuación se presenta un resumen de todas las fuentes y métodos de envío de métricas disponibles. Esta tabla muestra la correspondencia entre el tipo de envío métrico correspondiente y los tipos en la aplicación:
+A continuación se presenta un resumen de todas las fuentes y métodos de envío de métricas disponibles. Esta tabla muestra la correspondencia entre el tipo de envío de métricas correspondiente y los tipos en la aplicación:
 
-| Fuente de Envío | Método de Envío (Python)           | Tipo de Envío | Tipos en la Aplicación de Datadog |
+| Fuente de envío | Método de envío (Python)           | Tipo de envío | Tipos de Datadog en la aplicación |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
 | [Agent check][9]  | `self.count(...)`                    | COUNT           | COUNT                |
 | [Agent check][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
 | [Agent check][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
 | [Agent check][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
 | [Agent check][13] | `self.rate(...)`                     | RATE            | GAUGE                |
-| [API][7]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
+| [API][7]          | `api.Metric.send(type="count", ...)` | CONTADOR           | CONTADOR                |
 | [API][7]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][7]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
 | [DogStatsD][14]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
-| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUCIÓN    | DISTRIBUCIÓN         |
+| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUTION    | DISTRIBUTION         |
 | [DogStatsD][16]   | `dog.count(...)`                     | COUNT           | RATE                 |
 | [DogStatsD][16]   | `dog.increment(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][16]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
 | [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
 
-**Nota**: Mientras que las diferentes agregaciones de los valores métricos de distribución se _representan_ como gauges o COUNT en la aplicación, la métrica en sí mantiene el tipo `DISTRIBUTION`. Consulte la sección de [Definiciones][19] de esta página para más información.
+**Nota**: Si bien las diferentes agregaciones de valores de métricas de distribución se _representan_ como gauges o counts en la aplicación, la métrica en sí conserva el tipo `DISTRIBUTION`. Consulte la sección [Definiciones][19] de esta página para obtener más información.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -368,3 +371,4 @@ A continuación se presenta un resumen de todas las fuentes y métodos de envío
 [17]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#set
 [18]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [19]: /es/metrics/types/?tab=distribution#definition
+[20]: /es/opentelemetry/setup/otlp_ingest/metrics/

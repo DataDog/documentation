@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/runtime-prioritization-engine/"
   tag: "Blog"
   text: "Prioritize security findings with the Datadog Runtime Prioritization Engine"
+- link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
+  tag: "Blog"
+  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
 ---
 
 ## Overview

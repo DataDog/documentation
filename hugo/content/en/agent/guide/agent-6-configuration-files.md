@@ -14,7 +14,6 @@ The location of the `conf.d` directory differs depending on the operating system
 
 | Platform                             | Command                              |
 |:-------------------------------------|:-------------------------------------|
-| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
 | Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
@@ -25,7 +24,6 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 | Platform                             | Command                        |
 |:-------------------------------------|:-------------------------------|
-| AIX                                  | `/etc/datadog-agent/conf.d/`   |
 | Linux                                | `/etc/datadog-agent/conf.d/`   |
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |

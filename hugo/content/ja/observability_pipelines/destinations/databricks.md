@@ -1,30 +1,31 @@
 ---
+description: Databricks (Zerobus) 送信先を使用して、Databricks Unity Catalog テーブルにログを送信する方法を学びましょう。
 disable_toc: false
 products:
 - icon: logs
   name: ログ
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-title: Databricks (Zerobus) 宛先
+title: Databricks (Zerobus) 送信先
 ---
 {{< product-availability >}}
 
 {{< callout url="#"
- btn_hidden="true" header="プレビューに参加しましょう">}}
-Databricks (Zerobus) 宛先はプレビュー中です。アクセスをリクエストするには、アカウントマネージャーに連絡してください。
+ btn_hidden="true" header="プレビュー版を利用しましょう">}}
+Databricks (Zerobus) 送信先はプレビュー版です。アクセスをリクエストするには、アカウントマネージャーにお問い合わせください。
 {{< /callout >}}
 
 ## 概要 {#overview}
 
-Observability Pipelines の Databricks (Zerobus) 宛先を使用して、ログを Databricks Unity Catalog テーブルに送信します。送信先はログを [Zerobus Ingest API][1] にストリーミングし、OAuth サービス プリンシパルを使用して Databricks に認証します。
+Observability Pipelines の Databricks (Zerobus) 送信先を使用して、Databricks Unity Catalog テーブルにログを送信します。この送信先は、[Zerobus Ingest API][1] にログをストリーミングし、OAuth サービスプリンシパルを使用して Databricks に対して認証を行います。
 
-## 前提条件 {#prerequisites}
+## 前提条件{#prerequisites}
 
-Databricks (Zerobus) 宛先を構成する前に、次のことを行う必要があります。
+Databricks (Zerobus) 送信先を構成する前に、以下を実施する必要があります。
 
-- [Observability Pipelines Worker がログを書き込む Unity Catalog スキーマとテーブル](#set-up-a-schema-and-table)のセットアップ。
-- [Worker が Databricks に認証するために使用するサービス プリンシパル](#set-up-a-service-principal)のセットアップ。このサービス プリンシパルには、テーブルの読み取りおよび書き込みの権限が必要です。
+Observability Pipelines Worker がログを書き込む - [Unity Catalog スキーマとテーブルを設定](#set-up-a-schema-and-table)します。
+Worker が Databricks への認証に使用する- [サービスプリンシパルを設定](#set-up-a-service-principal)します。サービスプリンシパルには、テーブルへの読み取りおよび書き込み権限が必要です。
 
-### スキーマとテーブルのセットアップ{#set-up-a-schema-and-table}
+### スキーマとテーブルを設定する {#set-up-a-schema-and-table}
 
 このセクションの SQL 例では、次のプレースホルダーを使用します。
 
@@ -34,13 +35,13 @@ Databricks (Zerobus) 宛先を構成する前に、次のことを行う必要�
 | `<CATALOG_NAME>`          | Unity Catalog 名。                   | `main`                     |
 | `<SCHEMA_NAME>`           | スキーマ名。                          | `obs_pipelines`            |
 | `<TABLE_NAME>`            | テーブル名。                           | `apache_common_logs`       |
-| `<YOUR_MANAGED_LOCATION>` | (オプション) 管理された場所の URI。      | `s3://your-bucket/managed` |
+| `<YOUR_MANAGED_LOCATION>` | (オプション) 管理対象ロケーションの URI。      | `s3://your-bucket/managed` |
 
-**注意**: `GRANT` コマンドは Databricks ワークスペース管理者によって実行される必要があります。
+**注**: `GRANT` コマンドは、Databricks ワークスペース管理者が実行する必要があります。
 
-Databricks ワークスペース内で以下を行います。
+Databricks ワークスペースで、
 
-1. Databricks ワークスペース管理者でない場合は、管理者に次のコマンドを実行して、スキーマを作成する権限をユーザーに付与してもらってください。
+1. Databricks ワークスペース管理者でない場合は、管理者に次のコマンドを実行してもらい、ユーザーにスキーマを作成する権限を付与してください。
     ```sql
     GRANT CREATE SCHEMA ON CATALOG <CATALOG_NAME> TO <USER>;
     ```
@@ -52,12 +53,12 @@ Databricks ワークスペース内で以下を行います。
     ```
     - **Note**: `MANAGED LOCATION` is optional. See Databricks' [Create Schemas][2] documentation for more information.
 
-1. 管理者ユーザーでない場合は、管理者に次のコマンドを実行して、スキーマでテーブルを作成する権限をユーザーに付与してもらってください。
+1. 管理者ユーザーでない場合は、管理者に次のコマンドを実行してもらい、ユーザーにスキーマ上でテーブルを作成する権限を付与してください。
     ```sql
     GRANT CREATE TABLE ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <USER>;
     ```
 
-1. Observability Pipelines がログデータを書き込むテーブルを作成するために、次のコマンドを実行します。
+1. 次のコマンドを実行して、Observability Pipelines がログデータを書き込むテーブルを作成します。
     ```sql
     CREATE TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> (
       host STRING,
@@ -69,46 +70,53 @@ Databricks ワークスペース内で以下を行います。
     ```
     - See Databricks' [Create a Unity Catalog Managed Table][3] documentation for more information.
 
-完全修飾テーブル名は `catalog.schema.table` で、例えば `main.obs_pipelines.apache_common_logs` です。これは、Observability Pipelines Databricksの宛先をセットアップする際に**テーブル名**に入力する値です。
+完全修飾テーブル名は `catalog.schema.table` です (例: `main.obs_pipelines.apache_common_logs`)。これは、Observability Pipelines Databricks 送信先を設定する際に {{< ui >}}Table Name{{< /ui >}} に入力する値です。
 
-### サービスプリンシパルのセットアップ{#set-up-a-service-principal}
+### サービスプリンシパルを設定{#set-up-a-service-principal}
 
-Databricks の [Zerobus Ingest API][1] は OAuth 認証を使用します。サービスプリンシパルを作成すると、OAuth クライアントシークレットが生成され、OAuth クライアント ID はサービスプリンシパルの UUID になります。
+Databricks [Zerobus Ingest API][1] は OAuth 認証を使用します。サービスプリンシパルを作成すると、OAuth クライアントシークレットが生成され、OAuth クライアント ID がサービスプリンシパルの UUID になります。
 
-サービスプリンシパルを作成するには、以下を行います。
+サービスプリンシパルを作成するには、
 
-1. Databricks ワークスペースで、[**User Settings**] (ユーザー設定) > [**Identity and access**] (アイデンティティとアクセス) > [**Service principals**] (サービスプリンシパル) に移動します。
-1. [**Add service principal**] (サービスプリンシパルを追加) をクリックします。
-1. サービスプリンシパルが作成された後、そのための OAuth シークレットを生成します。
-    - サービスプリンシパルの**アプリケーション ID** (クライアント ID) と OAuth クライアントシークレットをメモしておいてください。Observability Pipelines Databricks の宛先を構成する際に、両方が必要です。
-1. Databricks でこの SQL を実行して、サービスプリンシパルにカタログ、スキーマ、およびテーブルへのアクセスを付与します。`<SERVICE_PRINCIPAL_UUID>` を前のステップでメモしたサービスプリンシパルのアプリケーション ID で置き換えます。
+1. Databricks ワークスペースで、**User Settings** &gt; **Identity and access** &gt; **Service principals** に移動します。
+1. **Add service principal** をクリックします。
+1. サービスプリンシパルが作成されたら、その OAuth シークレットを生成します。
+    - サービスプリンシパルの **アプリケーション ID** (クライアント ID) と OAuth クライアントシークレットを控えておきます。Observability Pipelines Databricks 送信先を設定する際には、その両方が必要です。
+1. Databricks でこの SQL を実行し、サービスプリンシパルにカタログ、スキーマ、およびテーブルへのアクセス権を付与します。`<SERVICE_PRINCIPAL_UUID>` を、前のステップで取得したサービスプリンシパルのアプリケーション ID に置き換えてください。
     ```sql
     GRANT USE CATALOG ON CATALOG <CATALOG_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     GRANT USE SCHEMA ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     GRANT SELECT, MODIFY ON TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     ```
 
-詳細については、Databricks の[アカウントにサービスプリンシパルを追加する][4]および[オブジェクトに対する権限を付与する][5]のドキュメントを参照してください。
+詳細については、Databricks の[アカウントへのサービスプリンシパルの追加][4]および[オブジェクトに対する権限の付与][5]のドキュメントを参照してください。
 
-## セットアップ{#setup}
+## セットアップ {#setup}
 
-[パイプラインをセットアップする][6]ときに、Databricks (Zerobus) 宛先を構成します。パイプラインのセットアップは、[UI][7] で、[API][8] を使用して、または [Terraform][9] で行えます。このセクションの手順は UI で構成されます。
+<div class="alert alert-danger">シークレット管理の場合: OAuth クライアントシークレットの識別子のみを入力してください。実際の値は<b>入力しないで</b>ください。</div>
 
-**注意**: テーブルスキーマに存在しないログフィールドはドロップされます。例えば、ログにフィールド `id`、`name`、`host` があるのに、テーブルスキーマに `name` と `host` の列しか含まれていない場合、`id` フィールドはドロップされ、テーブルには書き込まれません。
+[パイプラインをセットアップ][6]する際に、Databricks (Zerobus) 送信先を設定します。パイプラインは、[UI][7]、[API][8]、または [Terraform][9] を使用して設定できます。このセクションの手順は UI で設定します。
 
-パイプライン UI で Databricks (Zerobus) 宛先を選択した後:
+**注**: テーブルスキーマに存在しないログフィールドは破棄されます。たとえば、ログに `id`、`name`、`host` というフィールドがあり、テーブルスキーマに `name` と `host` という列しか含まれていない場合、`id` フィールドは破棄され、テーブルには書き込まれません。
 
-<div class="alert alert-warning">Databricks (Zerobus) は、文字列形式のタイムスタンプを Databricks の <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> タイプ</a>に変換しません。テーブルがタイムスタンプ列を使用している場合、詳細は<a href="#convert-string-timestamps-to-timestamp-format">文字列タイムスタンプをタイムスタンプ形式に変換する</a>を参照してください。</div>
+パイプライン UI で Databricks (Zerobus) 送信先を選択した後、
 
-<div class="alert alert-danger">シークレット管理について: OAuth クライアントシークレットの識別子のみを入力してください。実際の値は入力<b>しないでください</b>。</div>
+<div class="alert alert-warning">
+
+<ul>
+<li>Databricks (Zerobus) は、文字列形式のタイムスタンプを Databricks の <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> 型</a>に変換しません。テーブルでタイムスタンプ列を使用している場合は、<a href="#convert-string-timestamps-to-timestamp-format">文字列タイムスタンプをタイムスタンプ形式に変換する</a>を参照して詳細を確認してください。
+
+<li> ログフィールドの値は、テーブルスキーマ内の対応する列のデータ型と一致している必要があります。詳細については、<a href="#data-type-of-log-field-values">ログフィールド値のデータ型</a>を参照してください。
+</ul>
+</div>
+
+1. Databricks ワークスペースの{{< ui >}}Ingestion Endpoint{{< /ui >}}を入力します (例: `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`)。Worker はこのエンドポイントにログを送信します。
+1. {{< ui >}}Table Name{{< /ui >}} を`catalog.schema.table`の形式で入力します (例: `main.obs_pipelines.apache_common_logs`)。
+1. Databricks ワークスペースの{{< ui >}}Unity Catalog Endpoint{{< /ui >}}を入力します (例: `https://<workspace>.cloud.databricks.com`)。Worker はこのエンドポイントを使用してテーブルのスキーマを読み取ります。
+1. {{< ui >}}Auth - Client ID{{< /ui >}} フィールドに、`abcdefgh-1234-5678-abcd-ef0123456789` などのサービスプリンシパルのアプリケーション ID を入力します。
+1. {{< ui >}}Auth - Client Secret{{< /ui >}} フィールドに、OAuth クライアントシークレットの識別子を入力します。空白のままにすると、[デフォルト](#secret-defaults)が使用されます。
 
 {{% observability_pipelines/secrets_env_var_note %}}
-
-1. Databricks ワークスペースの**取り込みエンドポイント**を入力します。`https://<workspace_id>.zerobus.<region>.cloud.databricks.com` などです。ワーカーはこのエンドポイントにログを送信します。
-1. **テーブル名** を `catalog.schema.table` の形式で入力します。`main.obs_pipelines.apache_common_logs` などです。
-1. Databricksワークスペース用の **Unity Catalog エンドポイント**を入力します。`https://<workspace>.cloud.databricks.com` などです。ワーカーはこのエンドポイントを使用してテーブルのスキーマを読み取ります。
-1.  **認証 - クライアントID** フィールドに、サービスプリンシパルのアプリケーションIDを入力します。`abcdefgh-1234-5678-abcd-ef0123456789` などです。
-1. **Auth - Client Secret** フィールドに、OAuth クライアントシークレットの識別子を入力します。空白のままにすると、[デフォルト](#secret-defaults)が使用されます。
 
 ### オプション設定 {#optional-settings}
 
@@ -116,26 +124,36 @@ Databricks の [Zerobus Ingest API][1] は OAuth 認証を使用します。サ�
 
 {{% observability_pipelines/destination_buffer %}}
 
-### 文字列タイムスタンプをタイムスタンプ形式に変換する{#convert-string-timestamps-to-timestamp-format}
+## 文字列のタイムスタンプをタイムスタンプ形式に変換する {#convert-string-timestamps-to-timestamp-format}
 
-ログに文字列形式のタイムスタンプがあり、Databricks テーブルに[`TIMESTAMP` タイプ][11]として宣言されたタイムスタンプ列がある場合、ログを Databricks (Zerobus) 宛先に送信する前に、文字列をタイムスタンプ形式に変換する必要があります。Databricks (Zerobus) は、タイムスタンプ形式しかその `TIMESTAMP` 型に変換できません。
+ログのタイムスタンプが文字列形式で、Databricks テーブルに [`TIMESTAMP` 型][11]として宣言されたタイムスタンプ列がある場合は、ログを Databricks (Zerobus) 送信先に送信する前に、文字列をタイムスタンプ形式に変換する必要があります。Databricks (Zerobus) は、タイムスタンプ形式をその `TIMESTAMP` 型にのみ変換できます。
 
-文字列のタイムスタンプを変換しないと、ワーカーは次のようなエラーをスローします。
+文字列のタイムスタンプを変換しない場合、Worker は次のようなエラーをスローします。
 
 ```
 Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
 ```
 
-文字列形式のタイムスタンプをタイムスタンプ形式に変換するには:
+文字列形式のタイムスタンプをタイムスタンプ形式に変換するには、次の手順を実行します。
 
 1. パイプラインに[カスタムプロセッサ][12]を追加します。
-1. 次のカスタムスクリプトを持つ関数を追加します。
+1. 次のカスタムスクリプトを含む関数を追加します。
     ```
     .timestamp = parse_timestamp!(.timestamp, format: "%+")
     ```
     See [parse_timestamp][13] for more information.
 
-## シークレットのデフォルト{#secret-defaults}
+## ログフィールド値のデータ型 {#data-type-of-log-field-values}
+
+ログフィールドの値は、テーブルスキーマ内の対応する列のデータ型と一致している必要があります。たとえば、テーブルスキーマで `message` が `STRING` と定義されているにもかかわらず、受信したログの `message` フィールドが `{"message": {"some": "string"}}` のようなオブジェクトである場合、Worker はイベントをエンコードできず、バッチ全体を破棄して次のようなエラーをスローします。
+
+```
+error=Some(EncodingError { message: "Failed to encode batch: SerializingError(Arrow JSON decoding error: Json error: whilst decoding field 'message': expected string got {...})" }) request_id=1142 error_type="request_failed" stage="sending"
+```
+
+このエラーを防ぐには、[カスタムプロセッサ][17]を使用して、ログフィールドをテーブルスキーマで想定されているデータ型に変換してください。
+
+## シークレットのデフォルト値 {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -143,7 +161,7 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 {{% tab "シークレット管理" %}}
 
 - Databricks OAuth クライアントシークレット識別子:
-    - Observability Pipelines Worker が Databricks に認証するために使用するサービスプリンシパルの OAuth クライアントシークレットを参照します。
+    - Observability Pipelines Worker が Databricks への認証に使用するサービスプリンシパルの OAuth クライアントシークレットを参照します。
     - デフォルトの識別子は `DESTINATION_DATABRICKS_ZEROBUS_OAUTH_CLIENT_SECRET` です。
 
 {{% /tab %}}
@@ -155,13 +173,17 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 {{% /tab %}}
 {{< /tabs >}}
 
-## 宛先の動作方法{#how-the-destination-works}
+## Health メトリクス {#health-metrics}
 
-### イベントのバッチ処理{#event-batching}
+すべての送信先から出力される[コンポーネントメトリクス][14]および[送信先バッファメトリクス][15]については、[Pipelines 使用状況メトリクス][16]ドキュメントを参照してください。Databricks 送信先メトリクスでフィルタリングまたはグループ化するには、タグ `component_type:databricks_zerobus` を使用します。
 
-これらのパラメータのいずれかが満たされると、イベントのバッチがフラッシュされます。詳細については[イベントのバッチ処理][10]を参照してください。
+## 送信先の仕組み {#how-the-destination-works}
 
-| 最大イベント数 | 最大サイズ (MB) | タイムアウト (秒)   |
+### イベントのバッチ処理 {#event-batching}
+
+イベントのバッチは、これらのパラメータのいずれかを満たしたときにフラッシュされます。詳細については、[送信先のイベントバッチ処理][10]を参照してください。
+
+| 最大イベント数| 最大サイズ (MB) | タイムアウト (秒)   |
 |----------------|-------------------|---------------------|
 | なし           | 10                | 1                   |
 
@@ -178,3 +200,7 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 [11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
 [12]: /ja/observability_pipelines/processors/custom_processor#setup
 [13]: /ja/observability_pipelines/processors/custom_processor/#parse_timestamp
+[14]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[15]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[16]: /ja/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[17]: /ja/observability_pipelines/processors/custom_processor/

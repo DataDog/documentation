@@ -28,15 +28,39 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  **Note**: See [Enable liveness and readiness probe][15] for instructions on how to expose the `/health` endpoint. After the endpoint is exposed, configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
 
-### Use `top` to find the component ID
+### Find the component ID
 
-You need the source's or processor's component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
+You need the source's, processor's, or destination's component ID to [`tap`](#use-tap-to-see-your-data) into it or to view [component metrics][30] with the `component_id` tag.
+
+{{< tabs >}}
+{{% tab "Command line" %}}
+
+Use the `top` command to find the component ID:
 
 ```
 observability-pipelines-worker top
 ```
 
-See [Worker Commands][13] for a list of commands and options.
+See [Worker CLI Commands][1] for a list of commands and options.
+
+[1]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
+
+{{% /tab %}}
+{{% tab "UI" %}}
+
+To copy the component ID in the UI:
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. Open the component's side panel:
+    - For a source or destination, click the component.
+    - For a processor, hover over the component and click the graph icon.
+1. Click the copy icon next to the component's name at the top of the side panel.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Use `tap` to see your data
 
@@ -96,6 +120,12 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+### Multi-attach error when using persistence on Kubernetes
+
+If you enabled [disk buffering][24] for destinations and see a Worker pod stuck in `Pending` with a volume multi-attach error after Kubernetes reschedules it to a new node, this is expected. The error occurs because the persistent volume from the previous node hasn't finished detaching. The pod recovers on its own.
+
+Datadog recommends keeping the Worker StatefulSet's default `podManagementPolicy: Parallel` setting even when you see this error. Switching to `OrderedReady` reduces how often the error appears but it blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown. This slows your pipeline's response to a burst of events.
+
 ### Certificate verify failed
 
 If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
@@ -144,6 +174,20 @@ The curl command you use is based on the port you are using, as well as the path
 ### Too many files error
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
+
+### Source send interrupted mid-flight
+
+If you see `Source send interrupted mid-flight; pipeline may be overloaded or shutting down` error logs, an issue interrupted the send operation before the Worker sent all events in the batch downstream. The Worker drops any remaining events in that batch and increments the `component_discarded_events_total` metric. Possible causes for the interruption can include backpressure, Worker shutdown, or Worker restarts.
+
+To investigate whether the interruption was due to a Worker restart or shutdown, try correlating the timestamp of the error with Worker lifecycle logs, such as `Vector has stopped`, `Shutting down...`, or with pod or container restart events around the same time.
+
+To investigate whether the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
+
+1. Destination buffer utilization
+    - A buffer near its maximum capacity is a sign of backpressure. Consider [choosing a disk buffer][26] or increasing the buffer size to help absorb traffic spikes and mitigate backpressure. See [buffer metrics][25] to monitor buffer utilization.
+2. Worker CPU utilization
+    - Sustained high CPU usage on Workers during traffic spikes indicates the pipeline doesn't have enough compute capacity. See [Best practices for scaling Observability Pipelines][27] for guidance on sizing and autoscaling Workers.
+    - The Sensitive Data Scanner processor is CPU-intensive and can also cause high CPU usage. See [Best practices to optimize performance][28] for more information.
 
 ## General pipeline issues
 
@@ -202,7 +246,7 @@ If your log timestamps are in string format and your Databricks table has a time
 [10]: /observability_pipelines/configuration/install_the_worker/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
-[13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
+[13]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes
 [16]: /observability_pipelines/sources/#tls-certificates
@@ -213,3 +257,10 @@ If your log timestamps are in string format and your Databricks table has a time
 [21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
 [22]: /observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format
 [23]: /observability_pipelines/processors/generate_metrics/#convert-string-timestamp-to-timestamp-format
+[24]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
+[25]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#buffer-metrics
+[26]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#choosing-buffer-types
+[27]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+[28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
+[29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
+[30]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=sources#component-metrics

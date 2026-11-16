@@ -36,11 +36,17 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
 
 #### Créez et configurez le principal de service dans Databricks {#create-and-configure-the-service-principal-in-databricks}
 
+1. Si vous souhaitez utiliser un principal de service **géré par Microsoft Entra ID** au lieu d'un principal **géré par Databricks**, enregistrez d'abord une application dans Microsoft Entra ID ([documentation Microsoft Entra][22]) :
+   1. Connectez-vous au [centre d'administration Microsoft Entra][23] en tant qu'administrateur d'applications cloud au minimum. Si votre organisation possède plusieurs locataires, basculez vers le bon en utilisant **Répertoires + abonnements**.
+   1. Accédez à **Entra ID > Inscriptions d'applications**, puis cliquez sur **Nouvelle inscription**.
+   1. Saisissez un nom, sélectionnez **Comptes dans cet annuaire organisationnel uniquement (locataire unique)**, puis cliquez sur **S'inscrire** :
+   1. Sur la page **Vue d'ensemble** de l'application, notez l'**ID d'application (client)** et l'**ID de répertoire (locataire)**.
+   1. Cliquez sur **Certificats et secrets > Secrets client > Nouveau secret client**. Saisissez une description, définissez l'expiration sur le maximum autorisé (730 jours) et cliquez sur **Ajouter**. Copiez la valeur du secret généré. Elle ne s'affiche qu'une seule fois.
 1. En tant qu'**administrateur de l'espace de travail Databricks**, accédez à {{< ui >}}Settings{{< /ui >}} en cliquant sur votre profil dans le coin supérieur droit de l'espace de travail.
 1. Sous l'onglet {{< ui >}}Identity and access{{< /ui >}}, cliquez sur {{< ui >}}Manage{{< /ui >}} à côté de {{< ui >}}Service principals{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Add service principal{{< /ui >}}, puis cliquez sur {{< ui >}}Add new{{< /ui >}}.
 
-   <div class="alert alert-warning">Pour Azure Databricks, sélectionnez le type de gestion « Databricks managed ». Datadog ne prend PAS en charge les principaux de service « Microsoft Entra ID managed ».</div>
+   <div class="alert alert-warning">Pour Azure Databricks, sélectionnez le type de gestion « Databricks managed ». Si vous avez enregistré une application Microsoft Entra ID ci-dessus, sélectionnez plutôt « Microsoft Entra ID managed » et collez l'<strong>ID d'application (client)</strong> que vous avez noté.</div>
 1. Saisissez un nom et activez les droits d'accès à l'espace de travail suivants pour le principal de service :
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
@@ -49,7 +55,7 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
    <div class="alert alert-info">Si vous ne pouvez pas accorder le droit d'accès <strong>Admin access</strong>, provisionnez un accès granulaire à la place, comme décrit dans la section <a href="#permissions">Permissions</a> sous Configuration avancée.</div>
 1. Cliquez sur **Add**.
 
-1. Cliquez sur le nom de votre nouveau principal de service. Sous l'onglet {{< ui >}}Secrets{{< /ui >}}, cliquez sur {{< ui >}}Generate secret{{< /ui >}}.
+1. Si vous avez créé un principal de service **géré par Databricks**, cliquez sur son nom. Sous l'onglet {{< ui >}}Secrets{{< /ui >}}, cliquez sur {{< ui >}}Generate secret{{< /ui >}}.
    1. Définissez {{< ui >}}Lifetime (days){{< /ui >}} sur la valeur maximale autorisée (730).
 
    1. Cliquez sur {{< ui >}}Generate{{< /ui >}}.
@@ -57,6 +63,8 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
    1. Notez votre ID client et votre secret client.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="Dans Databricks, une fenêtre modale affichant l'ID client et le secret associés à un nouveau secret OAuth s'affiche." style="width:70%;" >}}
+
+   Si vous avez créé un principal de service **Microsoft Entra ID managed**, utilisez l'ID client et le secret que vous avez générés dans Microsoft Entra ID.
 
 1. Sur l'onglet {{< ui >}}Permissions{{< /ui >}}, cliquez sur {{< ui >}}Grant access{{< /ui >}}. Recherchez le nouveau principal de service, accordez-lui l'autorisation {{< ui >}}Manage{{< /ui >}}, et cliquez sur {{< ui >}}Save{{< /ui >}}.
 
@@ -66,7 +74,8 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
 1. Sous l'onglet {{< ui >}}Configure{{< /ui >}}, cliquez sur {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Saisissez un nom d'espace de travail, l'URL de votre espace de travail Databricks, ainsi que l'ID client et le secret que vous avez générés.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="Dans la tuile d'intégration Datadog-Databricks, un espace de travail Databricks s'affiche. Cet espace de travail possède un nom, une URL, un ID client et un secret client." style="width:100%;" >}}
-1. Indiquez l'ID d'un [Databricks SQL Warehouse][19] que Datadog doit interroger. Cela vous donne une visibilité sur vos coûts Databricks dans Jobs Monitoring ou [Cloud Cost Management][18] et alimente [Quality Monitoring][21].
+1. Si vous avez créé un principal de service **Microsoft Entra ID managed**, cochez la case **Use Microsoft Entra ID managed service principal** et saisissez l'**ID de répertoire (locataire)** que vous avez noté précédemment.
+1. Indiquez l'ID d'un [Databricks SQL Warehouse][19] que Datadog doit interroger. Datadog utilise cet entrepôt pour lire les [tables système][20] d'Unity Catalog. Ces tables alimentent la visibilité des coûts Databricks dans Jobs Monitoring et [Cloud Cost Management][18], la surveillance des jobs serverless, la surveillance des entrepôts et requêtes SQL, ainsi que [Quality Monitoring][21].
    1. Dans Databricks, accédez à {{< ui >}}SQL Warehouses{{< /ui >}} et sélectionnez l'entrepôt que Datadog doit utiliser. Il doit s'agir d'un entrepôt Pro ou Serverless. Les entrepôts classiques ne sont pas pris en charge. Pour réduire les coûts, utilisez un entrepôt 2XS dédié, avec l'arrêt automatique configuré sur 5 à 10 minutes.
    1. Copiez l'ID depuis la page de présentation de l'entrepôt (il s'agit également du dernier segment de l'URL de l'entrepôt) et saisissez-le dans la tuile d'intégration.
    1. Sous l'onglet {{< ui >}}Permissions{{< /ui >}} de l'entrepôt (en haut à droite), accordez `CAN USE` au principal de service.
@@ -79,6 +88,7 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
       ```
 
       <div class="alert alert-info">L'utilisateur qui exécute ces commandes doit disposer du <code>MANAGE</code> privilège sur <code>CATALOG system</code>.</div>
+   1. Ajoutez le principal de service au groupe `databricks_pii_access` au niveau du compte. La surveillance des jobs Serverless ainsi que la surveillance des entrepôts SQL et des requêtes nécessitent cette appartenance, car Databricks masque le texte des requêtes SQL pour les principaux en dehors du groupe. Consultez [Accès au texte de la requête](#query-text-access) pour connaître toutes les exigences.
 1. Dans la section **Sélectionnez les produits pour configurer l'intégration**, assurez-vous que Data Observability: Jobs Monitoring est {{< ui >}}Enabled{{< /ui >}}.
 1. Dans la section {{< ui >}}Datadog Agent Setup{{< /ui >}}, choisissez soit
     - [Géré par Datadog (recommandé)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent) : Datadog installe et gère l'Agent avec un script d'initialisation global dans l'espace de travail.
@@ -88,6 +98,8 @@ Suivez ces étapes pour activer Data Observability : Jobs Monitoring pour Databr
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
 [21]: /fr/data_observability/quality_monitoring/data_warehouses/databricks/
+[22]: https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal
+[23]: https://entra.microsoft.com
 
 {{% /tab %}}
 
@@ -119,7 +131,7 @@ Consultez [Private Link Connectivity (Preview)][15] pour obtenir les instruction
 1. Sous l'onglet {{< ui >}}Configure{{< /ui >}}, cliquez sur {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Saisissez un nom d'espace de travail, l'URL de votre espace de travail Databricks et le jeton Databricks que vous avez généré.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="Dans la tuile d'intégration Datadog-Databricks, un espace de travail Databricks s'affiche. Cet espace de travail possède un nom, une URL et un jeton d'API." style="width:100%;" >}}
-1. Indiquez l'ID d'un [Databricks SQL Warehouse][19] que Datadog doit interroger. Cela vous donne une visibilité sur vos coûts Databricks dans Jobs Monitoring ou [Cloud Cost Management][18] et alimente [Quality Monitoring][21].
+1. Indiquez l'ID d'un [Databricks SQL Warehouse][19] que Datadog doit interroger. Datadog utilise cet entrepôt pour lire les [tables système][20] d'Unity Catalog. Ces tables alimentent la visibilité des coûts Databricks dans Jobs Monitoring et [Cloud Cost Management][18], la surveillance des jobs serverless, la surveillance des entrepôts et requêtes SQL, ainsi que [Quality Monitoring][21].
    1. Dans Databricks, accédez à {{< ui >}}SQL Warehouses{{< /ui >}} et sélectionnez l'entrepôt que Datadog doit utiliser. Il doit s'agir d'un entrepôt Pro ou Serverless. Les entrepôts classiques ne sont pas pris en charge. Pour réduire les coûts, utilisez un entrepôt 2XS dédié, avec l'arrêt automatique configuré sur 5 à 10 minutes.
    1. Copiez l'ID depuis la page de présentation de l'entrepôt (il s'agit également du dernier segment de l'URL de l'entrepôt) et saisissez-le dans la tuile d'intégration.
    1. Dans l'onglet {{< ui >}}Permissions{{< /ui >}} de l'entrepôt (en haut à droite), accordez `CAN USE` au principal du jeton.
@@ -132,7 +144,8 @@ Consultez [Private Link Connectivity (Preview)][15] pour obtenir les instruction
       ```
 
       <div class="alert alert-info">L'utilisateur qui exécute ces commandes doit disposer du <code>MANAGE</code> privilège sur <code>CATALOG system</code>.</div>
-1. Dans la section **Select products to set up integration**, assurez-vous que le produit Data Observability: Jobs Monitoring est **Activé**.
+   1. Ajoutez le principal du jeton au groupe `databricks_pii_access` au niveau du compte. La surveillance des jobs Serverless ainsi que la surveillance des entrepôts SQL et des requêtes nécessitent cette appartenance, car Databricks masque le texte des requêtes SQL pour les principaux en dehors du groupe. Consultez [Accès au texte de la requête](#query-text-access) pour connaître toutes les exigences.
+1. Dans la section **Select products to set up integration**, assurez-vous que le produit Data Observability: Jobs Monitoring est à l'état **Enabled**.
 1. Dans la section {{< ui >}}Datadog Agent Setup{{< /ui >}}, choisissez soit
     - [Géré par Datadog (recommandé)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent) : Datadog installe et gère l'Agent avec un script d'initialisation global dans l'espace de travail.
     - [Manuellement](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) : Suivez les [instructions ci-dessous](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) pour installer et gérer le script d'initialisation afin d'installer l'Agent globalement ou sur des clusters Databricks spécifiques.
@@ -169,7 +182,7 @@ Datadog peut installer et gérer un script d'initialisation global dans l'espace
 
 #### Lors de l'intégration d'un espace de travail avec Datadog {#when-integrating-a-workspace-with-datadog}
 
-1. Dans la section **Select products to set up integration**, assurez-vous que le produit Data Observability: Jobs Monitoring est **Activé**.
+1. Dans la section **Select products to set up integration**, assurez-vous que le produit Data Observability: Jobs Monitoring est à l'état **Enabled**.
 1. Dans la section {{< ui >}}Datadog Agent Setup{{< /ui >}}, sélectionnez le bouton bascule {{< ui >}}Managed by Datadog{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Select API Key{{< /ui >}} pour sélectionner une clé d'API Datadog existante ou pour en créer une nouvelle.
 1. (Facultatif) Désactivez {{< ui >}}Enable Log Collection{{< /ui >}} si vous ne souhaitez pas collecter les logs du driver et des workers pour les corréler avec les jobs.
@@ -180,7 +193,7 @@ Datadog peut installer et gérer un script d'initialisation global dans l'espace
 
 1. Sur l'onglet **Configure**, cliquez sur l'espace de travail dans la liste des espaces de travail.
 1. Cliquez sur l'onglet {{< ui >}}Configured Products{{< /ui >}}
-1. Assurez-vous que le produit Data Observability: Jobs Monitoring est **Activé**.
+1. Assurez-vous que le produit Data Observability: Jobs Monitoring est à l'état **Enabled**.
 1. Dans la section {{< ui >}}Datadog Agent Setup{{< /ui >}}, sélectionnez le bouton bascule {{< ui >}}Managed by Datadog{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Select API Key{{< /ui >}} pour sélectionner une clé d'API Datadog existante ou pour en créer une nouvelle.
 1. (Facultatif) Désactivez {{< ui >}}Enable Log Collection{{< /ui >}} si vous ne souhaitez pas collecter les logs du driver et des workers pour les corréler avec les jobs.
@@ -437,7 +450,7 @@ Si vous ne voyez aucune donnée dans Jobs Monitoring après avoir installé le p
 1. **Confirmez l'exécution du script d'initialisation** : Dans Databricks, cliquez sur le cluster et accédez à l'onglet {{< ui >}}Event log{{< /ui >}}. Si `INIT_SCRIPTS_STARTED` n'est pas présent, le script d'initialisation n'a pas été pris en compte par ce cluster. Revenez aux [étapes d'installation](#install-the-datadog-agent) pour vous assurer que le script d'initialisation a bien été ajouté au cluster.
 1. **Confirmez la réussite du script d'initialisation** : Recherchez l'action `INIT_SCRIPTS_FINISHED` dans le log des événements et cliquez dessus pour inspecter le JSON, qui indique si le script d'initialisation s'est terminé par une erreur.
 1. **Recherchez les causes des échecs du script d'initialisation** : Si `INIT_SCRIPTS_FINISHED` indique un échec, activez la [diffusion des logs de cluster][29] pour envoyer les logs du script d'initialisation vers la destination de votre choix. L'envoi des logs vers un volume Unity Catalog est recommandé.
-   {{< img src="data_jobs/databricks/compute_logging_config.png" alt="La page de configuration du cluster Databricks affichant l'onglet Journalisation avec des options pour configurer une destination de livraison des logs." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/compute_logging_config.png" alt="La page de configuration du cluster Databricks affichant l'onglet Logging avec des options pour configurer une destination de livraison des logs." style="width:100%;" >}}
    Après avoir redémarré le cluster avec la livraison des logs activée, accédez à la destination des logs. Les logs stdout et stderr se trouvent sous le chemin suivant :
    ```
    <cluster-log-path>/<cluster-id>/init_scripts/<cluster-id>_<script-hash>/
@@ -495,16 +508,42 @@ De plus, pour que Datadog puisse accéder à vos données de coût Databricks da
    ```
    L'utilisateur qui accorde ces droits doit disposer du privilège `MANAGE` sur `CATALOG system`.
 
+#### Accès au texte de la requête {#query-text-access}
+
+Databricks masque le texte des requêtes SQL pour tout principal qui n'est pas administrateur de compte ou membre du groupe `databricks_pii_access` au niveau du compte. Pour un principal masqué, le texte de la requête est renvoyé sous la forme `<Redacted>` dans :
+
+- La colonne `statement_text` de la table système [`system.query.history`][30]
+- L'[API Query History][31]
+- L'[API List Queries][32]
+- Les événements du log d'audit qui capturent le texte de l'instruction SQL
+
+Ajoutez le principal de service à `databricks_pii_access` pour utiliser les fonctionnalités suivantes, qui lisent le texte des requêtes :
+
+- **Surveillance des jobs Serverless** : surveillance des jobs qui s'exécutent avec un [calcul serverless][34], où aucun Datadog Agent ne s'exécute sur le cluster.
+- **Surveillance des entrepôts SQL et des requêtes** : Visibilité sur les requêtes exécutées sur vos entrepôts SQL et recommandations d'optimisation générées par Datadog.
+
+Les données de coûts Databricks, la surveillance des jobs sur les clusters polyvalents et les clusters de jobs, ainsi que les métriques de [Quality Monitoring][35] au niveau de la table ne dépendent pas du texte de la requête et ne sont pas affectées.
+
+L'appartenance au groupe est requise en plus des [octrois de table système](#cost-data-permissions). Un principal qui fait partie du groupe mais qui ne dispose pas de `SELECT` sur `CATALOG system` ne peut toujours pas lire l'historique des requêtes.
+
+Pour créer le groupe et ajouter le principal de service :
+
+1. Le groupe `databricks_pii_access` n'existe pas par défaut dans un compte Databricks, et les administrateurs d'espace de travail n'en sont pas membres automatiquement. Créez-le avec le nom exact `databricks_pii_access`, qui est sensible à la casse.
+   - Si vous ne gérez pas les groupes avec SCIM ou un fournisseur d'identité externe, accédez à {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}.
+   - Si vous gérez les groupes avec SCIM ou un fournisseur d'identité externe, créez plutôt le groupe à cet endroit.
+1. Ajoutez le principal de service ou le principal de jeton utilisé par l'intégration Datadog-Databricks au groupe.
+
+Pour plus de détails, consultez la documentation Databricks sur la [gestion des groupes au niveau du compte][33].
 
 ### Taguer les étendues au moment de l'exécution {#tag-spans-at-runtime}
 
 {{% djm-runtime-tagging %}}
 
-### Configurer les balises de cluster {#configure-cluster-tags}
+### Configurer les tags de cluster {#configure-cluster-tags}
 
-Les balises de cluster personnalisées Databricks sont automatiquement capturées et disponibles dans Data Observability : Jobs Monitoring et la plateforme Datadog. La seule exception concerne les balises provenant des groupes de ressources Azure, qui ne sont pas automatiquement capturées.
+Les tags de cluster personnalisés Databricks sont automatiquement capturés et disponibles dans Data Observability : Jobs Monitoring et la plateforme Datadog. La seule exception concerne les tags provenant des groupes de ressources Azure, qui ne sont pas automatiquement capturés.
 
-Pour ajouter des balises manuellement, définissez la variable d'environnement `DD_TAGS` dans les variables d'environnement Spark de votre cluster. Cela a le même effet que les balises de cluster personnalisées Databricks, mais nécessite une configuration manuelle. Utilisez des paires clé:valeur séparées par des virgules ou des espaces en suivant les [conventions de tags Datadog][28] :
+Pour ajouter des tags manuellement, définissez la variable d'environnement `DD_TAGS` dans les variables d'environnement Spark de votre cluster. Cela a le même effet que les tags de cluster personnalisés Databricks, mais nécessite une configuration manuelle. Utilisez des paires clé:valeur séparées par des virgules ou des espaces en suivant les [conventions de tags Datadog][28] :
 
 ```text
 DD_TAGS=env:staging,team:data_engineering
@@ -544,7 +583,7 @@ DD_TAGS=env:staging,team:data_engineering
    {{< /highlight >}}
 
 ### Configurer Data Observability: Jobs Monitoring avec les restrictions réseau Databricks {#set-up-data-observability-jobs-monitoring-with-databricks-networking-restrictions}
-Avec les [restrictions réseau Databricks][12], Datadog peut ne pas avoir accès à vos API Databricks, ce qui est nécessaire pour collecter les traces des exécutions de jobs Databricks ainsi que les balises et autres métadonnées.
+Avec les [restrictions réseau Databricks][12], Datadog peut ne pas avoir accès à vos API Databricks, ce qui est nécessaire pour collecter les traces des exécutions de jobs Databricks ainsi que les tags et autres métadonnées.
 
 Si vous contrôlez l'accès à l'API Databricks avec des [listes d'accès IP][13], autorisez les adresses spécifiques de Datadog {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} permet à Datadog de se connecter aux API Databricks dans votre espace de travail. Consultez la documentation de Databricks pour configurer les listes d'accès IP pour les [espaces de travail individuels][16] afin de donner à Datadog l'accès à l'API.
 
@@ -578,3 +617,9 @@ Pour surveiller les espaces de travail qui utilisent la connectivité [Databrick
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /fr/getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+[30]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[31]: https://docs.databricks.com/api/workspace/queryhistory/list
+[32]: https://docs.databricks.com/api/workspace/queries/list
+[33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[34]: https://docs.databricks.com/aws/en/compute/serverless/
+[35]: /fr/data_observability/quality_monitoring/data_warehouses/databricks/

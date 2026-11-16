@@ -1,79 +1,80 @@
 ---
 aliases:
 - /ja/agent/guide/operator-eks-addon
+description: Datadog Operator を EKS アドオンとして使用して、Amazon EKS に Datadog Agent をインストールして構成します。
 further_reading:
 - link: agent/kubernetes/log
   tag: ドキュメント
   text: Datadog と Kubernetes
-title: Datadog Operator アドオンによる Amazon EKS への Datadog Agent のインストール
+title: Datadog Operator アドオンを使用して Amazon EKS へ Datadog Agent をインストールする
 ---
-
-<div class="alert alert-info">v0.1.9 以降、Datadog Operator アドオンは Fargate インスタンス上にスケジュールされた Pod への Agent サイドカー自動挿入をサポートしています。詳細は<a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">こちらのガイド</a>を参照してください。
+<div class="alert alert-info">v0.1.9 以降、Datadog Operator アドオンは、Fargate インスタンスでのスケジュールされた Pod への自動 Agent サイドカー インジェクションをサポートしています。詳細については、<a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">こちらのガイド</a>を参照してください。
 </div>
 
 
-Amazon EKS クラスターに Datadog Agent をインストールするには、[Datadog Operator](/containers/datadog_operator) を [Amazon EKS アドオン](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)として導入し、`DatadogAgent` マニフェストを適用します。 
+Amazon EKS クラスターに Datadog Agent をインストールするには、[Datadog Operator](/containers/datadog_operator) を
+[Amazon EKS アドオン](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) としてインストールし、`DatadogAgent` マニフェストを適用します。
 
-Operator アドオンでインストールした Agent は、EC2 上で動作している Pod からのみデータを収集します。AWS Fargate 上で動作する Pod については [Amazon EKS on AWS Fargate のドキュメント][10]を参照してください。
+Operator アドオンを使用してインストールされた Agent は、EC2 インスタンスで実行されている Pod からのみデータを収集します。AWS Fargate で実行されている Pod については、[Amazon EKS on AWS Fargate のドキュメント][10] に従ってください。
 
-通常の [Helm インストール][4]と比較して、アドオンとしてインストールする場合には次のような違いがあります。
-* Operator のインストール時、イメージは EKS リポジトリからのみ取得されます。ユーザーが変更することはできません。 
-* 上書き可能な Operator Helm Chart の値は、[スキーマ ファイル][3] に定義された項目に制限されます。 
+通常の [Helm インストール][4] と比較して、アドオンとしてインストールする場合には次のような違いがあります。
+* Operator のインストール時、イメージは EKS リポジトリからのみ取得されます。ユーザーがこれを変更することはできません。
+* 上書き可能な Operator Helm Chart の値は、[スキーマ ファイル][3] に定義された項目に制限されます。
 
 これらの制限は、Operator を EKS アドオン ポリシーに準拠させ、EKS がインストールの安全性を確保し、アドオン環境で未サポートの機能を無効化するために必要です。
 
-## 前提条件
+## 前提条件{#prerequisites}
 
-* [Datadog Operator][1] 製品のサブスクリプション 
+* [Datadog Operator][1] 製品のサブスクリプション
 * kubectl がインストールされていること
-* コマンドラインでアドオンを設定する場合は、[AWS CLI](https://aws.amazon.com/cli/) がインストールされていること 
+* コマンドラインインターフェイスでアドオンを設定する場合は、[AWS CLI](https://aws.amazon.com/cli/) がインストールされていること
 
-## Operator のインストール
+## Operator のインストール {#installing-operator}
 
 {{< tabs >}}
-{{% tab "Console" %}}
+{{% tab "コンソール" %}}
 
-* AWS コンソールで対象の EKS クラスターに移動します。 
-* **Add-ons** タブで **Get more add-ons** を選択します。 
-* **Datadog Operator** を検索して選択し、画面の指示に従ってインストールを完了します。 
+* AWS コンソールで対象の EKS クラスターに移動します。
+*  [Add-ons] (アドオン) タブで [*Get more add-ons*] (他のアドオンを取得) を選択します。
+* *Datadog Operator* を検索して選択します。その後、画面の指示に従ってインストールを完了します。
 
 {{% /tab %}}
 {{% tab "CLI" %}}
 
-Operator アドオンをインストールするには、次のコマンドを実行します:
+Operator アドオンをインストールするには、次のコマンドを実行します。
   ```bash
   aws eks create-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 
-インストールは非同期で行われます。状態を確認するには、次のコマンドを実行します:
+アドオンのインストールは非同期で行われます。インストール状況をチェックするには、次のコマンドを実行します。
   ```bash
   aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 {{% /tab %}}
 {{< /tabs >}}
 
-インストールが成功したかどうかは、AWS Management Console、`eksctl`、または AWS CLI を使用して `datadog-operator` Pod が稼働していることを確認してください。
+インストールが成功したかどうかを確認するには、AWS Management Console、`eksctl`、または AWS CLI を使用して `datadog-operator` Pod が稼働していることを確認します。
 
-## Agent の設定
+## Agent の構成 {#configuring-the-agent}
 
 Operator アドオンをインストールしたら、Datadog Agent のセットアップを行います。
 
-`DatadogAgent` カスタム リソースを使用して Agent を設定します。
+`DatadogAgent` カスタム リソースを使用して Datadog Agent を設定する手順に従います。
 
 1. デフォルトで `datadog-agent` となる Operator のインストール ネームスペースに切り替えます。
    ```bash
    kubectl config set-context --current --namespace=datadog-agent
    ```
-2. [Datadog API キーとアプリケーションキー][5]を含む Kubernetes Secret を作成します。
+2. [Datadog API キーとアプリケーションキー][5] を含む Kubernetes Secret を作成します。
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
    ```
-   `<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を [Datadog API とアプリケーションキー][5]に置き換えます。
+   `<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を、お使いの [Datadog API キーとアプリケーションキー][5] に置き換えます。
 
 
-3. `DatadogAgent` デプロイ設定の内容で `datadog-agent.yaml` を作成します。Datadog Operator はデフォルトで公開レジストリから Agent および Cluster Agent イメージを取得します。
+3. `DatadogAgent` デプロイメント構成の仕様を使用して `datadog-agent.yaml` ファイルを作成します。Datadog Operator はデフォルトの Agent および Cluster Agent イメージ設定を使用し、パブリック レジストリからそれらを取得します。
 
-   プライベート EKS レジストリからイメージを取得したい場合は、`global.registry` を追加します。以下の構成では、メトリクス、ログ、および APM を有効にします。
+   プライベート EKS レジストリからイメージを取得する場合は、`global.registry` を追加できます。以下の構成では、メトリクス、ログ、APM が有効になります。
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
    kind: DatadogAgent
@@ -97,11 +98,11 @@ Operator アドオンをインストールしたら、Datadog Agent のセット
        logCollection:
          enabled: true
    ```
-   この例では、Datadog Operator EKS アドオンと同じ AWS Marketplace ホストの ECR リポジトリから Agent イメージを取得します。別のレジストリを使用する場合は 'global.registry' の値を変更してください。
+   この Agent インスタンス構成は、AWS Marketplace でホストされている ECR リポジトリから Datadog Agent イメージを取得します。このリポジトリには、Datadog Operator Amazon EKS アドオンのイメージも含まれています。代替手段が必要な場合は、上記のマニフェストの 'global.registry' エントリを編集してください。
 
-   すべての設定オプションについては [Operator の設定仕様][6]を参照してください。
+   すべての構成オプションについては、[Operator 構成仕様][6] を参照してください。
 
-   **注**: ノードで IMDS v1 へのアクセスがブロックされている場合、Agent はクラスター名を解決できず、[Orchestrator Explorer][6] など一部機能が動作しません。そのため、`DatadogAgent` マニフェストに `spec.global.ClusterName` を追加することを推奨します。IMDS v2 を使用してメタデータを取得する設定方法は[こちらのコメント][8]を参照してください。
+   **注:** ノードで IMDS v1 へのアクセスがブロックされている場合、Agent はクラスター名を解決できず、特定の機能 ([Orchestrator Explorer][6] など) が動作しません。そのため、Datadog では `DatadogAgent` マニフェストに `spec.global.ClusterName` を追加することを推奨しています。IMDS v2 を使用してメタデータを要求するように Agent を構成する方法については、[Agent 構成ファイルの例][8] の `ec2_prefer_imdsv2` パラメーターを参照してください。
 
 4. Datadog Agent をデプロイします。
    ```bash
@@ -109,9 +110,9 @@ Operator アドオンをインストールしたら、Datadog Agent のセット
    ```
 
 
-## Operator のアンインストール
+## Operator のアンインストール {#uninstall-the-operator}
 
-Agent と Operator をアンインストールするには、まず `DatadogAgent` カスタム リソースを削除します:
+Agent と Operator をアンインストールするには、まず `DatadogAgent` カスタム リソースを削除します。
 
   ```bash
   kubectl delete datadogagents.datadoghq.com datadog
@@ -120,16 +121,16 @@ Agent と Operator をアンインストールするには、まず `DatadogAgen
 すべての Agent リソースが削除されたことを確認したうえで、アドオンのアンインストールを実行します。
 
 {{< tabs >}}
-{{% tab "Console" %}}
+{{% tab "コンソール" %}}
 
 * AWS コンソールで対象の EKS クラスターに移動します。
-* Add-ons タブで Datadog Operator アドオンを選択します。
-* **Remove** をクリックし、確認ダイアログで確定します。
+* [Add-ons] (アドオン) タブに移動し、*Datadog Operator* アドオンを選択します。
+* [**Remove**] (削除) をクリックし、確認ダイアログで確定します。
 
 {{% /tab %}}
 {{% tab "CLI" %}}
 
-アドオンを削除するには、次のコマンドを実行します:
+アドオンを削除するには、次のコマンドを実行します。
   ```bash
   aws eks delete-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
@@ -137,7 +138,7 @@ Agent と Operator をアンインストールするには、まず `DatadogAgen
 {{% /tab %}}
 {{< /tabs >}}
 
- **注**: `DatadogAgent` カスタムリソースを削除する前に Operator アドオンをアンインストールした場合、Agent はクラスター上で動作し続けます。Operator が存在しないため `DatadogAgent` をファイナライズできず、ネームスペースの削除に失敗します。回避策については Github の [issue][9] を参照してください。
+ **注:** `DatadogAgent` カスタムリソースを削除する前に Operator アドオンをアンインストールすると、Agent は引き続きクラスターで実行されます。`DatadogAgent` は、実行中の Operator がないと完了できないため、ネームスペースの削除は失敗します。回避策については、この Github [issue][9] を参照してください。
 
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -149,6 +150,6 @@ Agent と Operator をアンインストールするには、まず `DatadogAgen
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/ja/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
-[8]: https://github.com/DataDog/datadog-agent/blob/4896a45f586f74de1da2e985f98988f0181afc36/pkg/config/config_template.yaml#L407-L416
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 [9]: https://github.com/DataDog/datadog-operator/issues/654
 [10]: /ja/integrations/eks_fargate/#setup

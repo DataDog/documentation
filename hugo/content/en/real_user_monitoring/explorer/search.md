@@ -59,7 +59,7 @@ To create a facet, find and click on an attribute in the [event side panel][7]. 
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" alt="Create a facet" style="width:40%;">}}
 
-You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking {{< ui >}}+ Add{{< /ui >}} from the left side panel, then entering or selecting a path to the facet.
+You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking {{< ui >}}\+ Add{{< /ui >}} from the left side panel, then entering or selecting a path to the facet.
 
 {{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
 

@@ -111,7 +111,7 @@ Before you add a workflow to a monitor, [add a monitor trigger to the workflow][
 After you add the monitor trigger, [add an existing workflow to your monitor][10] or create a new workflow. To create a new workflow from the monitors page:
 
 1. Click {{< ui >}}Add Workflow{{< /ui >}}.
-1. Click the {{< ui >}}+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
+1. Click the {{< ui >}}\+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][11].
@@ -125,7 +125,7 @@ When an incident is created from a monitor, the incident's [field values][13] ar
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
 
-<div class="alert alert-danger">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
+<div class="alert alert-danger">Distribution metrics with percentile aggregators (such as <code>p50</code>, <code>p75</code>, <code>p95</code>, or <code>p99</code>) do not generate a snapshot graph in notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 

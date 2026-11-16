@@ -16,12 +16,6 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-danger">
   AAP for Gateway API is experimental. Please follow the instructions below to try it out.
 </div>
@@ -162,7 +156,7 @@ The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all env
 
 ## Enabling APM tracing
 
-By default, the request mirror traces won't enable Datadog's APM product. If you want to use Application & API Protection without APM tracing functionality, this is the default behavior. 
+By default, the request mirror traces won't enable Datadog's APM product. If you want to use App and API Protection without APM tracing functionality, this is the default behavior. 
 
 To enable APM tracing, set the environment variable `DD_APM_TRACING_ENABLED=true` in the request mirror deployment.
 

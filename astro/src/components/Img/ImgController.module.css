@@ -1,0 +1,9 @@
+.img__figure {
+  margin: 0 0 1rem;
+}
+
+.img__image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--hugo-img-border-gray);
+}

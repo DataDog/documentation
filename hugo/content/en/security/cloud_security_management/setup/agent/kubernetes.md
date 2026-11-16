@@ -57,7 +57,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # Enables runtime package prioritization (Agent 7.79+)
           # See Runtime Package Prioritization section below.
           enrichment:
             usage:
@@ -98,7 +98,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # Enables runtime package prioritization (Agent 7.79+)
         # See Runtime Package Prioritization section below.
         enrichment:
           usage:
@@ -166,7 +166,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization) section for requirements.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -190,7 +190,7 @@ The `languages` analyzer covers the following package ecosystems:
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Prioritization (Preview)
+## Runtime Package Prioritization
 
 Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
 
@@ -207,6 +207,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
+- On Bottlerocket nodes, the `spc_t` SELinux type for `system-probe`. Bottlerocket's SELinux policy limits an unprivileged container to the files of its own pod. Without this type, only the Agent's own image receives runtime signals. The tabs below show how to set it.
 
 Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
@@ -223,10 +224,25 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      # Enables runtime package prioritization (Agent 7.79+)
       enrichment:
         usage:
           enabled: true
+```
+
+If your nodes run Bottlerocket, also set the SELinux type of the node Agent pod. This override replaces the security context of the pod, so keep `runAsUser: 0`:
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Apply the changes and restart the Agent.
@@ -242,10 +258,24 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    # Enables runtime package prioritization (Agent 7.79+)
     enrichment:
       usage:
         enabled: true
+```
+
+If your nodes run Bottlerocket, also add the following to your `datadog-values.yaml` file:
+
+```yaml
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Restart the Agent.
@@ -267,6 +297,18 @@ hostPID: true
   value: "true"
 - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
   value: "true"
+```
+
+If your nodes run Bottlerocket, also add `seLinuxOptions` to the security context of the `system-probe` container:
+
+```yaml
+# system-probe container
+securityContext:
+  seLinuxOptions:
+    user: system_u
+    role: system_r
+    type: spc_t
+    level: s0
 ```
 
 Restart the Agent.

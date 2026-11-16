@@ -33,7 +33,7 @@ title: ネットワークトラフィック
 トラフィックは常に Agent から Datadog に対して開始されます。Datadog から Agent に対してセッションが開始されることはありません。
 </div>
 
-すべての Agent トラフィックは SSL で送信されます。送信先は Datadog サービスとサイトにより異なります。使用している [Datadog サイト][11]の送信先を確認するには、右側の {{< ui >}}DATADOG SITE{{< /ui >}} セレクタをクリックしてください。
+すべての Agent トラフィックは SSL で送信されます。送信先は Datadog サービスとサイトにより異なります。使用している [Datadog サイト][11] の送信先を確認するには、右側の {{< ui >}}DATADOG SITE{{< /ui >}} セレクタをクリックしてください。
 
 ## インストール {#installation}
 
@@ -89,21 +89,25 @@ Agent v7.75 以降では、Network Path が HTTPS 経由で外部サービスに
 
 [Synthetic Monitoring プライベートロケーション][8]
 : Synthetics Worker v1.5.0 以降: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} は、設定する必要がある唯一のエンドポイントです。<br>
-Synthetics Worker < v0.1.6 の API テスト結果: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Synthetics Worker > v0.1.6 の API テスト結果: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Synthetics Worker > v0.2.0 のブラウザテスト結果: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Synthetics Worker < v0.1.5 の API テスト結果: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
-
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /ja/remote_configuration
+[End User Device Monitoring][103]
+: `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`eudm-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [102]: /ja/database_monitoring/
+[103]: /ja/infrastructure/end_user_device_monitoring/
 
 {{% /site-region %}}
 
@@ -130,7 +134,7 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 ### 静的 IP アドレス {#static-ip-addresses}
 
-これらのドメインはすべて、**CNAME** レコードであり、一連の静的 IP アドレスを指しています。これらのアドレスは `https://ip-ranges.` で見つけることができます{{< region-param key="dd_site" code="true" >}}で設定します。
+これらのドメインはすべて、**CNAME** レコードであり、一連の静的 IP アドレスを指しています。これらのアドレスは `https://ip-ranges.` で見つけることができます{{< region-param key="dd_site" code="true" >}}。
 
 この情報は、次のスキーマに従って JSON として構造化されます。
 
@@ -166,7 +170,7 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 ### インクルージョン {#inclusion}
 
-すべての `ip-ranges` をインクルージョンリストに追加してください。特定の時点ではサブセットだけがアクティブですが、定期的なネットワーク操作や保守のために、セット全体の中では時間が経つとバリエーションがでてきます。
+すべての `ip-ranges` をインクルージョンリストに追加してください。特定の時点ではサブセットのみがアクティブですが、定期的なネットワーク操作や保守のために、セット全体の中では時間が経つとバリエーションがでてきます。
 
 ## ポートを開く {#open-ports}
 
@@ -186,8 +190,9 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent<br>APM<br>コンテナ<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring                                                      | 443                                            | TCP              | ほとんどの Agent のデータはポート 443 を使用します。                                                                                                                                                              |
 | [カスタム Agent オートスケーリング][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
-| ログ収集                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (非推奨) TCP | TCP 経由のログ記録。<br>**注**: TCP ログ収集は**サポートされていません**。Datadog は、TCP の使用で**配信や信頼性を保証していません**。ログデータは予告なく失われる可能性があります。信頼性のある取り込みにするために、HTTP インテークエンドポイント、公式の Datadog Agent、または代わりにフォワーダーインテグレーションを使用してください。他の接続タイプについては、[ログエンドポイント][21]を参照してください。|
+| ログ収集                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (非推奨) TCP | TCP 経由のログ記録。<br>**注**: TCP ログ収集は**サポートされていません**。Datadog は、TCP の使用で**配信や信頼性を保証していません**。ログデータは予告なく失われる可能性があります。信頼性のある取り込みにするために、HTTP インテークエンドポイント、公式の Datadog Agent、または代わりにフォワーダーインテグレーションを使用してください。他の接続タイプについては、[ログエンドポイント][21] を参照してください。|
 | NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP).[デフォルトの NTP ターゲット][20] を参照してください。<br>NTP のトラブルシューティングに関する情報は、[NTP の問題][19] を参照してください。                                                               |
+| 接続テスト                                                                                                                                                        | 8042                                           | TCP              | Remote Configuration の接続テスト。<br>**注**: これはプロトコル開発用で、顧客データを含まないテレメトリエンドポイントであり、[Remote Configuration][101] が有効な場合にのみ使用されます。
 
 [19]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /ja/integrations/ntp/#overview
@@ -196,7 +201,7 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" %}}
 
 | 製品/機能                                                                                                                                                    | ポート | プロトコル | 説明                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -214,11 +219,11 @@ Agent のサービスがホスト内のローカルで相互に通信する場�
 
 | 製品/機能        | ポート | プロトコル | 説明                                                                                                                    |
 | ---------------------------- | ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [Agent ブラウザGUI][16]      | 5002 | TCP      |                                                                                                                                |
+| [Agent ブラウザ GUI][16]      | 5002 | TCP      |                                                                                                                                |
 | APM レシーバー                 | 8126 | TCP      | トレーシングとプロファイラーを含みます。                                                                                            |
 | [DogStatsD][18]              | 8125 | UDP      | DogStatsD 用のポート、ただし `dogstatsd_non_local_traffic` が true に設定されている場合は除く。このポートは IPv4 ローカルホストで利用可能です: `127.0.0.1`。|
-| go_expvar サーバー (APM)       | 5012 | TCP      | 詳細については、[go_expar インテグレーションのドキュメント][15] を参照してください。                                                       |
-|  go_expvar インテグレーションサーバー | 5000 | TCP      | 詳細については、[go_expar インテグレーションのドキュメント][15] を参照してください。                                                       |
+| go_expvar サーバー (APM)       | 5012 | TCP      | 詳細については、[go_expvar インテグレーションのドキュメント][15] を参照してください。                                                       |
+|  go_expvar インテグレーションサーバー | 5000 | TCP      | 詳細については、[go_expvar インテグレーションのドキュメント][15] を参照してください。                                                       |
 | IPC API                      | 5001 | TCP      | プロセス間通信 (IPC) に使用されるポート。                                                                              |
 | Process Agent のデバッグ          | 6062 | TCP      | Process Agent のデバッグエンドポイント。                                                                                        |
 | Process Agent ランタイム        | 6162 | TCP      | Process Agent のランタイム構成。                                                                         |
@@ -277,7 +282,7 @@ APM レシーバーと DogStatsD のポートは、`datadog.yaml` 構成ファ�
 
 ## プロキシの使用 {#using-proxies}
 
-プロキシの設定に関する詳細な構成ガイドについては、[Agent プロキシ構成][9]を参照してください。
+プロキシの設定に関する詳細な構成ガイドについては、[Agent プロキシ構成][9] を参照してください。
 
 ## データバッファリング {#data-buffering}
 
@@ -341,3 +346,4 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 [31]: /ja/data_security/logs/#hipaa-enabled-customers
 [32]: /ja/logs/log_collection/#logging-endpoints
 [33]: /ja/network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /ja/remote_configuration

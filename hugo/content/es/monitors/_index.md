@@ -17,82 +17,85 @@ cascade:
     - alerting
     - monitoring
 description: Cree monitores, configure notificaciones y automatizaciones, y administre
-  sus monitores utilizando la plataforma de Alerting
+  sus monitores mediante la plataforma de Alerting
 further_reading:
 - link: /api/v1/monitors/
   tag: Documentación
-  text: API de Monitores de Datadog
+  text: API de monitores de Datadog
+- link: https://learn.datadoghq.com/courses/apm-monitors-and-alerting
+  tag: Centro de aprendizaje
+  text: APM Monitors y Alerting
 - link: https://dtdg.co/fe
-  tag: Habilitación en Fundamentos
-  text: Únase a una sesión interactiva sobre cómo crear monitores efectivos
+  tag: Foundation Enablement
+  text: Únase a una sesión interactiva sobre la creación de monitores eficaces
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
-  tag: Blog
-  text: 'Monitoreo 101: Alertando sobre lo que importa'
+  tag: blog
+  text: 'Monitoreo 101: Alerting sobre lo que importa'
 - link: https://www.datadoghq.com/blog/monitor-notification-rules/
-  tag: Blog
-  text: Dirija sus alertas de monitores con las reglas de notificación de monitores
-    de Datadog
+  tag: blog
+  text: Dirija sus alertas de seguimiento con las reglas de notificación de seguimiento
+    de Datadog.
 - link: https://www.datadoghq.com/blog/ecs-default-monitors/
-  tag: Blog
-  text: Detecte y remedie problemas de ECS más rápido con monitores predeterminados
+  tag: blog
+  text: Detecte y solucione problemas de ECS más rápido con monitores predeterminados
     y el Explorador de ECS
 - link: https://www.datadoghq.com/blog/zendesk-cost-optimization
-  tag: Blog
-  text: 'Optimizando Datadog a gran escala: Observabilidad rentable en Zendesk'
+  tag: blog
+  text: 'Optimización de Datadog a escala: observabilidad rentable en Zendesk'
 - link: https://www.datadoghq.com/blog/human-name-detection
-  tag: Blog
-  text: Detecte nombres humanos en registros con ML en el Escáner de Datos Sensibles
+  tag: blog
+  text: Detecte nombres de personas en registros con ML en Sensitive Data Scanner
+- link: https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/
+  tag: blog
+  text: Cómo auditar y limpiar monitores de manera eficaz
 - link: https://app.datadoghq.com/release-notes?category=Alerting
   tag: Notas de la versión
-  text: ¡Consulte los últimos lanzamientos de Alerting de Datadog! (Se requiere inicio
-    de sesión en la aplicación).
-- link: https://learn.datadoghq.com/courses/apm-monitors-and-alerting
-  tag: Centro de Aprendizaje
-  text: Monitores APM y Alerting
-title: Monitores
+  text: ¡Eche un vistazo a las últimas versiones de Alerting de Datadog! (Se requiere
+    inicio de sesión en la aplicación).
+title: Monitors
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Los Monitores de Datadog proporcionan visibilidad vital en su infraestructura, permitiendo la detección proactiva y la respuesta en tiempo real a problemas de rendimiento y caídas. Al configurar monitores para rastrear métricas clave y umbrales, las organizaciones pueden recibir alertas inmediatas y abordar problemas antes de que afecten a los clientes o causen tiempo de inactividad del sistema.
+Datadog Monitors proporcionan una visibilidad vital de su infraestructura, permitiendo la detección proactiva y la respuesta en tiempo real a problemas de rendimiento e interrupciones. Al configurar Datadog Monitors para realizar un seguimiento de métricas y umbrales clave, las organizaciones pueden recibir alertas inmediatas y solucionar problemas antes de que afecten a los clientes o provoquen tiempos de inactividad del sistema.
 
-Monitorea cambios críticos al verificar métricas, disponibilidad de integración y puntos de conexión de red a través de la plataforma de Alerting. Con los Monitores de Datadog puedes:
+Supervise cambios críticos mediante la verificación de métricas, la disponibilidad de integraciones y los puntos finales de red a través de la plataforma de Alerting. Con Datadog Monitors, usted puede:
 - Simplificar los procesos de monitoreo y respuesta
 - Mejorar la eficiencia operativa
 - Optimizar el rendimiento
 
-## Comenzar {#get-started}
+## Comience {#get-started}
 
-La forma más rápida de comenzar con los Monitores de Datadog es con [plantillas de Monitores][1]. Estas son una colección de monitores dentro de Datadog que están preconfigurados por Datadog y socios de integración.
+La forma más rápida de comenzar con Datadog Monitors es con [Monitor templates][1]. Se trata de una colección de Datadog Monitors dentro de Datadog que están preconfigurados por Datadog y sus socios de integración.
 
-También puedes construir tus propios monitores desde cero en entornos de laboratorio en el Centro de Aprendizaje, o en tu aplicación siguiendo la guía de Introducción a los Monitores.
+También puede crear sus propios Datadog Monitors desde cero en entornos de laboratorio en el Centro de aprendizaje, o en su aplicación siguiendo la guía Getting Started with Monitors.
 
-{{< whatsnext desc="Utiliza los siguientes recursos para crear un monitor:" >}}
-    {{< nextlink href="/getting_started/monitors/" >}}Introducción a los Monitores: Guía sobre cómo construir un monitor basado en métricas{{< /nextlink >}}
-    {{< nextlink href="/monitors/types/" >}}Crea un monitor a partir de Tipos de Monitores{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}Centro de Aprendizaje: Construye un monitor en un entorno de laboratorio sandbox{{< /nextlink >}}
+{{< whatsnext desc="Utilice los siguientes recursos para crear un Monitor:" >}}
+    {{< nextlink href="/getting_started/monitors/" >}}Getting Started with Monitors: Guía sobre cómo crear un Monitor basado en métricas{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}Cree un Monitor desde Monitor Types{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}Centro de aprendizaje: Cree un Monitor en un entorno de laboratorio sandbox{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Analiza datos agregados {#analyze-aggregate-data}
+## Analice datos agregados {#analyze-aggregate-data}
 
-Los datos deben ser bien entendidos, granulares, etiquetados por contexto y de larga duración. Utiliza diferentes tipos de datos para alertas y diagnósticos, según el nivel de urgencia. Instrumenta todas las aplicaciones y recopila la mayor cantidad de datos relevantes posible para mediciones completas y observabilidad de sistemas complejos.
+Los datos deben estar bien comprendidos, ser granulares, estar etiquetados por contexto y ser duraderos. Utilice diferentes tipos de datos para alertas y diagnósticos, según el nivel de urgencia. Instrumente todas las aplicaciones y recopile la mayor cantidad de datos relevantes posible para obtener mediciones integrales y observabilidad de sistemas complejos.
 
-Mide la salud de tus aplicaciones y el estado de tu infraestructura con Datadog. Utiliza datos de toda la plataforma de Datadog para crear alertas sobre problemas potenciales.
+Mida el estado de sus aplicaciones y el estado de su infraestructura con Datadog. Utilice datos de toda la plataforma Datadog para crear alertas sobre posibles problemas.
 
 ## Alerta sobre lo que importa {#alert-on-what-matters}
 
-Configura [Monitor Notifications][2] para mantener a tu equipo informado sobre problemas y proporcionar orientación para la solución de problemas. Dirige las notificaciones a las personas correctas, aprovecha las variables de plantilla para incluir detalles y adjunta capturas de pantalla al enviar las alertas por correo electrónico o Slack.
+Configure [Monitor Notifications][2] para mantener a su equipo informado sobre los problemas y proporcionar orientación para la resolución de problemas. Dirija las notificaciones a las personas correctas, aproveche las variables de plantilla para incluir detalles y adjunte instantáneas al enviar las alertas por correo electrónico o Slack.
 
-Reduce la fatiga de alertas para que los equipos puedan concentrarse en resolver alertas cuando es necesario. Crea [downtimes][3] para silenciar alertas durante el mantenimiento de la aplicación.
+Reduzca la fatiga por alertas para que los equipos puedan concentrarse en resolver las alertas cuando sea importante. Cree [downtimes][3] para silenciar las alertas durante el mantenimiento de la aplicación.
 
 ## ¿Qué sigue? {#whats-next}
 
-Los monitores y alertas son herramientas esenciales para garantizar la confiabilidad, el rendimiento y la disponibilidad de los sistemas y aplicaciones de TI. Ayudan a mantener la eficiencia operativa, mejorar la experiencia del usuario y mitigar riesgos potenciales al permitir la detección y respuesta rápida a problemas antes de que se agraven. Aprende más sobre las características de los monitores: 
-1. [Schedule downtimes to mute monitors.][4]
-1. [Organize and manage monitors.][5]
-1. [Investigate alerts through the status page.][6]
-1. [Resolve misconfigured monitors on the Monitor Quality page.][7]
+Los monitores y las alertas son herramientas esenciales para garantizar la confiabilidad, el rendimiento y la disponibilidad de los sistemas y aplicaciones de TI. Ayudan a mantener la eficiencia operativa, mejorar la experiencia del usuario y mitigar los riesgos potenciales al permitir la detección y respuesta rápidas a los problemas antes de que se intensifiquen. Obtenga más información sobre las funciones de Monitor: 
+1. [Programe downtimes para silenciar Monitors.][4]
+1. [Organice y administre Monitors.][5]
+1. [Investigue las alertas a través de la página de estado.][6]
+1. [Resuelva los Monitors mal configurados en la Monitor Quality page.][7]
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -5,8 +5,6 @@ disable_toc: false
 aliases:
   - /observability_pipelines/destinations/datadog_apm/
   - /observability_pipelines/destinations/opentelemetry/traces/
-  - /observability_pipelines/destinations/opentelemetry/metrics/
-  - /observability_pipelines/destinations/prometheus/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -17,7 +15,9 @@ further_reading:
 
 Use the Observability Pipelines Worker to send your processed logs and metrics to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
-Select a destination in the left navigation menu to see more information about it.
+**Notes**:
+- You can add a total of 20 destinations for a pipeline.
+- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients, you must use secret identifiers for the HTTP client URIs. You cannot use the default `DESTINATION_HTTP_CLIENT_URI` to store the two different HTTP client URIs.
 
 ## Destinations
 
@@ -29,6 +29,7 @@ These are the available destinations:
 - [Amazon OpenSearch][1]
 - [Amazon S3][22]
 - [Amazon Security Lake][3]
+- [Azure Data Explorer][25]
 - [Azure Storage][4]
 - [ClickHouse][24]
 - [CrowdStrike Next-Gen SIEM][6]
@@ -75,6 +76,7 @@ These are the available destinations:
 [22]: /observability_pipelines/destinations/amazon_s3/
 [23]: /observability_pipelines/destinations/databricks/
 [24]: /observability_pipelines/destinations/clickhouse/
+[25]: /observability_pipelines/destinations/azure_data_explorer/
 
 {{% /tab %}}
 
@@ -84,6 +86,7 @@ These are the available destinations:
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
 - [OpenTelemetry][5]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
@@ -91,6 +94,7 @@ These are the available destinations:
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
 [5]: /observability_pipelines/destinations/opentelemetry/metrics
+[6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -103,15 +107,16 @@ When the Observability Pipelines Worker cannot resolve the field with the templa
 
 The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
-| Destination       | Fields that support template syntax | Behavior when the field cannot be resolved                                                                                 |
-|-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Destination       | Fields that support template syntax                        | Behavior when the field cannot be resolved                                                                                 |
+|-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
+| Azure Data Explorer | Table<br><br>Mapping Reference | The Worker drops the logs.<br><br>The Worker sends the logs without a mapping reference. Azure Data Explorer ingests the logs as is. |
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
-| Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
+| Google SecOps     | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Opensearch        | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
 
@@ -178,3 +183,4 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+[4]: /observability_pipelines/configuration/secrets_management/

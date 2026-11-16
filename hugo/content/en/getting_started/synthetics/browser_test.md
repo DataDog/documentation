@@ -44,14 +44,14 @@ You may create a test using one of the following options:
 - **Create a test from a template**:
 
     1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
-    2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
     3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
 
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 - **Build a test from scratch**:
 
-    1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+    1. Click the {{< ui >}}\+{{< /ui >}} template to start a new Browser Test from scratch.
     1. Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     2. Select {{< ui >}}Advanced Options{{< /ui >}} to set custom request options, certificates, authentication credentials, and more. 
     3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
@@ -145,6 +145,10 @@ To troubleshoot a [failed test][10], review the failures on the **Activity** tab
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the {{< ui >}}Traces{{< /ui >}} tab.
 
+### Launch a Bits Investigation
+
+To identify the root cause of a failing Synthetic browser test, launch a [Bits Investigation][15]. Bits Investigation analyzes test results, traces, logs, and metrics to surface a root cause and flag if the failure is a regression or a misconfiguration.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -164,3 +168,4 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [12]: /synthetics/browser_tests/test_results#resources
 [13]: /synthetics/browser_tests/test_results#test-performance
 [14]: /synthetics/apm/
+[15]: /bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page

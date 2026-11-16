@@ -1,79 +1,78 @@
 ---
+description: Aprenda a extraer registros de una fuente HTTP/S ascendente utilizando
+  Observability Pipelines Worker.
 disable_toc: false
 products:
 - icon: logs
-  name: Logs
+  name: Registros
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-title: Fuente de clientes HTTP
+title: Fuente HTTP/S Client
 ---
-
 {{< product-availability >}}
 
-Utiliza la fuente de clientes HTTP/S de Observability Pipelines para extraer logs del servidor HTTP/S ascendente. Selecciona y configura esta fuente cuando [configures un pipeline][1].
+## Descripción general {#overview}
 
-## Requisitos previos
+Utilice la fuente HTTP/S Client de Observability Pipelines para extraer registros del servidor HTTP/S ascendente.
+
+## Requisitos previos {#prerequisites}
 
 {{% observability_pipelines/prerequisites/http_client %}}
 
-## Configurar la fuente en la interfaz de usuario del pipeline
+## Configuración {#setup}
 
-Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguiente información corresponde a la configuración de la fuente en la interfaz de usuario del pipeline.
+<div class="alert alert-danger">Para la gestión de secretos: Ingrese solo los identificadores para la URL de punto de conexión del cliente HTTP/S y, si corresponde, los secretos de su estrategia de autorización y la contraseña de clave TLS. <b>No</b> ingrese los valores reales.</div>
 
-Para configurar tu fuente de cliente HTTP/S:
+Configure esta fuente cuando [configure una canalización][1]. Puede configurar una canalización en la [interfaz de usuario][3], utilizando la [API][4] o con [Terraform][5]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
+Después de seleccionar la fuente HTTP/S Client en la interfaz de usuario de la canalización:
 
-<div class="alert alert-danger">Introduce únicamente los identificadores para la URL del endpoint del cliente HTTP y, si procede, los secretos de tu estrategia de autorización. <b>No</b> introduzcas los valores reales.</div>
+1. Ingrese el identificador para su URL de punto de conexión del cliente HTTP/S. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1. Seleccione su estrategia de autorización. Si seleccionó:
+   - {{< ui >}}Basic{{< /ui >}}:
+      - Ingrese el identificador para su nombre de usuario de cliente HTTP/S. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+      - Ingrese el identificador para su contraseña de cliente HTTP/S. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+   - {{< ui >}}Bearer{{< /ui >}}: Ingrese el identificador para su token de portador. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1. Seleccione el decodificador que desea utilizar en los mensajes HTTP. Los registros extraídos de la fuente HTTP deben estar en este formato.
 
-1. Introduce el identificador para tu URL de endpoint de cliente HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-1. Selecciona tu estrategia de autorización. Si has seleccionado:
-   - **Básico**:
-      - Introduce el identificador para tu nombre de usuario de cliente HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-      - Introduce el identificador para tu contraseña de cliente HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-   - **Portador**: introduce el identificador para tu token de portador. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-1. Selecciona el decodificador que deseas utilizar en los mensajes HTTP. Los logs extraídos de la fuente HTTP debe estar en este formato.
+{{% observability_pipelines/secrets_env_var_note %}}
 
-### Ajustes opcionales
+### Configuración opcional {#optional-settings}
 
-#### Activar TLS
+#### Habilitar TLS {#enable-tls}
 
-Alterna al interruptor para **Enable TLS** (Activar TLS). Si activas TLS, se requieren los siguientes archivos de certificados y claves.<br>**Nota**: Todas las rutas a los archivos son relativas al directorio de datos de configuración, que es `/var/lib/observability-pipelines-worker/config/` por defecto. Consulta [Configuraciones avanzadas del worker][2] para obtener más información. El archivo debe ser propiedad del usuario `observability-pipelines-worker group` y `observability-pipelines-worker` o al menos legible por el grupo o usuario.
-   - Introduce el identificador para tu contraseña de clave de cliente HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-         - **Nota**: Introduce únicamente el identificador de la contraseña de clave. No introduzcas la contraseña de clave real.
-   - `Server Certificate Path`: la ruta al archivo del certificado que ha sido firmado por tu archivo raíz de autoridad de certificación (CA) en formato DER o PEM (X.509).
-   - `CA Certificate Path`: la ruta al archivo de certificado que es tu archivo raíz de autoridad de certificación (CA) en formato DER o PEM (X.509).
-   - `Private Key Path`: la ruta al archivo de clave privada `.key` que pertenece a la ruta de tu certificado de servidor en formato DER o PEM (PKCS#8).
+{{% observability_pipelines/tls_settings %}}
 
-#### Ajustes de extracción
+#### Configuración de raspado {#scrape-settings}
 
-- Introduce el intervalo entre extracciones.
-   - Tu servidor HTTP debe ser capaz de gestionar solicitudes GET en este intervalo.
-   - Dado que las solicitudes se ejecutan simultáneamente, si una extracción tarda más que el intervalo dado, se inicia una nueva extracción, lo que puede consumir recursos adicionales. Establece el tiempo de espera en un valor inferior al intervalo de extracción para evitar que esto ocurra.
-- Introduce el tiempo de espera para cada solicitud de extracción.
+- Ingrese el intervalo entre raspados.
+   - Su servidor HTTP debe ser capaz de manejar solicitudes GET en este intervalo.
+   - Dado que las solicitudes se ejecutan simultáneamente, si un raspado tarda más que el intervalo dado, se inicia un nuevo raspado, lo que puede consumir recursos adicionales. Establezca el tiempo de espera en un valor inferior al intervalo de raspado para evitar que esto suceda.
+- Ingrese el tiempo de espera para cada solicitud de raspado.
 
-## Establecer secretos
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
-{{% tab "Secrets Management" %}}
+{{% tab "Gestión de secretos" %}}
 
-- Identificador de URL del endpoint del cliente HTTP:
-    - Hace referencia al endpoint desde el que el worker de Observability Pipelines recopila los eventos de log.
-    - El identificador por defecto es `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
-- Identificador de frase de contraseña TLS de cliente HTTP (cuando TLS está activado):
-    - El identificador por defecto es `SOURCE_HTTP_CLIENT_KEY_PASS`.
-- Si utilizas la autenticación básica:
-    - Identificador del nombre de usuario del cliente HTTP:
-        - El identificador por defecto es `SOURCE_HTTP_CLIENT_USERNAME`.
-    - Identificador de contraseña del cliente HTTP:
-        - El identificador por defecto es `SOURCE_HTTP_CLIENT_PASSWORD`.
-- Si utilizas la autenticación del portador:
-    - Identificador de token de portador de cliente HTTP:
-        - El identificador por defecto es `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
+- Identificador de URL de punto de conexión del cliente HTTP/S:
+	- Hace referencia al punto de conexión desde el cual Observability Pipelines Worker recopila eventos de registro.
+	- El identificador predeterminado es `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+- Identificador de frase de contraseña TLS del cliente HTTP/S (cuando TLS está habilitado):
+	- El identificador predeterminado es `SOURCE_HTTP_CLIENT_KEY_PASS`.
+- Si utiliza autenticación básica:
+	- Identificador de nombre de usuario del cliente HTTP/S:
+		- El identificador predeterminado es `SOURCE_HTTP_CLIENT_USERNAME`.
+	- Identificador de contraseña del cliente HTTP/S:
+		- El identificador predeterminado es `SOURCE_HTTP_CLIENT_PASSWORD`.
+- Si utiliza autenticación de portador:
+	- Identificador de token de portador del cliente HTTP/S:
+		- El identificador predeterminado es `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
 
 {{% /tab %}}
 
-{{% tab "Environment Variables" %}}
+{{% tab "Variables de entorno" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
 
@@ -81,4 +80,6 @@ Alterna al interruptor para **Enable TLS** (Activar TLS). Si activas TLS, se req
 {{< /tabs >}}
 
 [1]: /es/observability_pipelines/configuration/set_up_pipelines/
-[2]: /es/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /es/api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

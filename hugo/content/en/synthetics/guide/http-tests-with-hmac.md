@@ -47,6 +47,8 @@ Click {{< ui >}}Variable From Script{{< /ui >}} to generate the HMAC signature f
 
 {{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="A local variable generated with JavaScript" style="width:80%;" >}}
 
+This script runs before Datadog sends the HTTP request. To validate JSON response data after the request completes, use [JavaScript assertions][7] and `dd.response.body`.
+
 * To import variables into your script, use `dd.variable.get("<variable_name>")`.
 * To define a variable, use either `dd.variable.set("<variable_name>", <value>)` or `dd.variable.setObfuscated("<variable_name>", <value>)`.
 
@@ -107,3 +109,4 @@ Configure the rest of your HTTP test, and click {{< ui >}}Create{{< /ui >}} to s
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://jsr.io/@std
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto
+[7]: /synthetics/api_tests/http_tests/#define-assertions

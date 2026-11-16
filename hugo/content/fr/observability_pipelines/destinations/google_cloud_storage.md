@@ -14,15 +14,15 @@ title: Destination Google Cloud Storage
 
 <div class="alert alert-info">Pour les versions 2.7 et ultérieures de Worker, la destination Google Cloud prend en charge <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">l'accès uniforme au niveau du bucket</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommande</a> d'utiliser l'accès uniforme au niveau du bucket. <br>Pour les versions de Worker antérieures à 2.7, seules les <a href = "https://cloud.google.com/storage/docs/access-control/lists">listes de contrôle d'accès (ACL)</a> sont prises en charge.</div>
 
-Utilisez la destination Google Cloud Storage pour envoyer vos logs vers un bucket Google Cloud Storage. Si vous souhaitez envoyer des logs vers Google Cloud Storage pour l'[archivage][1] et la [réhydratation][2], vous devez [configurer Log Archives](#configure-log-archives). Si vous ne souhaitez pas réhydrater les logs dans Datadog, passez à [Configurer la destination pour votre pipeline](#set-up-the-destinations).
+Utilisez la destination Google Cloud Storage pour envoyer vos logs vers un bucket Google Cloud Storage. Si vous souhaitez envoyer des logs vers Google Cloud Storage pour l'[archivage][1] et la [réhydratation][2], vous devez [configurer Log Archives](#configure-log-archives). Si vous ne souhaitez pas réhydrater les logs dans Datadog, passez à [Configurez la destination de votre pipeline](#set-up-the-destinations).
 
-L'Observability Pipelines Worker utilise les méthodes d'authentification Google standard. Consultez [Authentication methods at Google][6] pour plus d'informations sur le choix de la méthode d'authentification adaptée à votre cas d'utilisation.
+L'Observability Pipelines Worker utilise les méthodes d'authentification Google standard. Consultez [Méthodes d'authentification sur Google][6] pour plus d'informations sur le choix de la méthode d'authentification adaptée à votre cas d'utilisation.
 
 ## Configurer Log Archives{#configure-log-archives}
 
-Cette étape n'est requise que si vous souhaitez envoyer des logs vers Google Cloud Storage pour l'[archivage][1] et la [réhydratation][2], et que vous n'avez pas encore configuré de Datadog Log Archives pour Observability Pipelines. Si vous avez déjà configuré Datadog Log Archives ou si vous ne souhaitez pas réhydrater vos logs dans Datadog, passez à [Configurer la destination pour votre pipeline](#set-up-the-destinations).
+Cette étape n'est requise que si vous souhaitez envoyer des logs vers Google Cloud Storage pour l'[archivage][1] et la [réhydratation][2], et que vous n'avez pas encore configuré de Datadog Log Archives pour Observability Pipelines. Si vous avez déjà configuré Datadog Log Archives ou si vous ne souhaitez pas réhydrater vos logs dans Datadog, passez à [Configurez la destination de votre pipeline](#set-up-the-destinations).
 
-Si vous avez déjà configuré Datadog Log Archives pour Observability Pipelines, passez à [Configurer la destination pour votre pipeline](#set-up-the-destination-for-your-pipeline).
+Si vous avez déjà configuré Datadog Log Archives pour Observability Pipelines, passez à [Configurez la destination de votre pipeline](#set-up-the-destination-for-your-pipeline).
 
 Vous devez avoir installé l'[intégration Google Cloud Platform][3] de Datadog pour configurer Datadog Log Archives.
 
@@ -60,7 +60,7 @@ Consultez la documentation Log Archives [1] pour plus d'informations.
 
 ## Configurez la destination de votre pipeline {#set-up-the-destinations}
 
-Configurez la destination Google Cloud Storage lorsque vous [configurez un pipeline][4]. Vous pouvez configurer un pipeline dans l'[UI][10], en utilisant l'[API][11] ou avec [Terraform][12]. Les étapes de cette section sont configurées dans l'UI.
+Configurez la destination Google Cloud Storage lorsque vous [configurez un pipeline][4]. Vous pouvez configurer un pipeline dans l'[UI][10], en utilisant l'[API][11] ou avec [Terraform][12]. Les étapes de cette section sont configurées dans l'interface utilisateur.
 
 Après avoir sélectionné la destination Google Cloud Storage dans le pipeline UI :
 
@@ -85,6 +85,12 @@ Saisissez un préfixe que vous souhaitez appliquer à tous les objets clés.
 
 1. Cliquez sur {{< ui >}}Add Header{{< /ui >}} pour ajouter des métadonnées.
 1. Saisissez des valeurs pour le nom et la valeur de l'en-tête.
+
+#### Compression {#compression}
+
+1. Dans le menu déroulant {{< ui >}}Compression - Algorithm{{< /ui >}}, sélectionnez l'algorithme de compression pour vos logs archivés ({{< ui >}}gzip{{< /ui >}} ou {{< ui >}}zstd{{< /ui >}}).
+    - **Remarque** : Si aucun algorithme de compression n'est spécifié, gzip avec un niveau de compression de `6` est utilisé.
+1. Dans le champ {{< ui >}}Compression - Level {{< /ui >}}, vous devez saisir un niveau de compression. Datadog recommande `6` pour gzip et `3` pour zstd.
 
 #### Mise en tampon {#buffering}
 
@@ -116,7 +122,7 @@ Pour les [métriques de composant][13] et les [métriques de tampon de destinati
 
 ### Regroupement d'événements {#event-batching}
 
-Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Destinations event batching][5] pour plus d'informations.
+Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Regroupement d'événements par destination][5] pour plus d'informations.
 
 | Nombre maximal d'événements | Taille maximale (Mo) | Délai d'expiration (secondes)   |
 |----------------|-------------------|---------------------|

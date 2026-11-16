@@ -16,7 +16,7 @@ further_reading:
 
 As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is automatically enabled.
 
-The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
+The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. The extension works with the recommended OTLP HTTP exporter setup and with the Datadog Exporter.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
@@ -41,45 +41,19 @@ extensions:
     api:
       key: ${env:DD_API_KEY}
       site: {{< region-param key="dd_site" >}}
-    # hostname: "my-collector-host"  # Optional: must match Datadog Exporter hostname if set
+    # hostname: "my-collector-host"  # Optional: must match the hostname in exported telemetry
 
 service:
   extensions: [datadog]
 ```
 
-### 2. Configure the Datadog Exporter
+### 2. Configure an active telemetry pipeline
 
-This feature requires the Datadog Exporter to be configured and enabled in an active pipeline (`traces` or `metrics`). The extension uses the exporter's telemetry to associate the Collector's configuration with a specific host in Datadog.
+Configure at least one active telemetry pipeline and export its data to Datadog. For the recommended configuration, use the [OTLP HTTP exporter setup][9].
 
-```yaml
-exporters:
-  datadog/exporter:
-    api:
-      key: ${env:DD_API_KEY}
-      site: {{< region-param key="dd_site" >}}
-    # hostname: "my-collector-host"  # Optional: must match Datadog Extension hostname if set
-    sending_queue:
-      batch:
-        flush_timeout: 10s
-```
+The extension uses Collector and host metadata to associate the reported configuration with the corresponding host in Datadog.
 
-### 3. Enable the extension in your service configuration
-
-Add the Datadog Extension to your service extensions:
-
-```yaml
-service:
-  extensions: [datadog]
-  pipelines:
-    traces:
-      receivers: [otlp]
-      exporters: [datadog/exporter]
-    metrics:
-      receivers: [otlp]
-      exporters: [datadog/exporter]
-```
-
-### 4. (Optional) Add custom resource attributes
+### 3. (Optional) Add custom resource attributes
 
 The Datadog Extension automatically collects resource attributes from the Collector's internal telemetry and includes them in the metadata payload it sends to Datadog. To attach custom attributes such as deployment environment, team, or Kubernetes cluster name, set them under `service.telemetry.resource`:
 
@@ -94,7 +68,7 @@ service:
 
 The Collector automatically attaches `service.name`, `service.version`, and `service.instance.id` (a randomly generated UUID) to its internal telemetry. You don't need to set these manually.
 
-### 5. (Optional) Configure gateway topology (preview)
+### 4. (Optional) Configure gateway topology (preview)
 
 When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
 
@@ -109,7 +83,7 @@ To enable this view, configure each Collector in the pipeline:
 - Set `k8s.cluster.name` under `service.telemetry.resource` on every Collector in the pipeline. This is **required**: together with `gateway_service` and `gateway_destination`, it forms the join key that Fleet Automation uses to reconstruct the pipeline graph.
 - Enable Collector internal metrics so the extension can attribute logs, metrics, or traces volume data to each edge in the graph with the **Show traffic** toggle. See [OpenTelemetry Collector Health Metrics][10].
 
-The example below covers the common two-layer case: a node-local DaemonSet forwards to a gateway Deployment, which sends to Datadog.
+The example below covers the common two-layer case: a node-local DaemonSet forwards to a gateway Deployment, which sends to Datadog with the Datadog Exporter.
 
 Each Collector exposes its own health metrics on a Prometheus pull endpoint via `service.telemetry.metrics`, scrapes that endpoint with a `prometheus/internal` receiver, and routes the result through the same metrics pipeline as application telemetry. This is what populates each node and edge in the topology view.
 
@@ -271,7 +245,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `hostname` | Custom hostname for the Collector. | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint. | `localhost:9875` |
 | `http.path` | HTTP server path for metadata. | `/metadata` |
-| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#5-optional-configure-gateway-topology-preview). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
+| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#4-optional-configure-gateway-topology-preview). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
 | `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
 | `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
 | `gateway_destination` | Set on any Collector that forwards telemetry to a downstream gateway. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
@@ -280,10 +254,12 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `tls.insecure_skip_verify` | Skip TLS certificate verification. | `false` |
 
 <div class="alert alert-danger">
-<strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it <strong>must</strong> match the <code>hostname</code> value in the Datadog Exporter configuration. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans. It only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname attributes</a> than the hostname reported by the extension, the telemetry will not be correlated to the correct host, and you may see duplicate hosts in Datadog.
+<strong>Hostname matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the host name in exported telemetry. The extension does not infer a hostname from application telemetry in your pipelines; it obtains its hostname from system or cloud-provider APIs or from manual configuration. If you use the Datadog Exporter, its <code>hostname</code> value must also match. Otherwise, Datadog might not correlate telemetry to the correct host, and duplicate hosts can appear.
 </div>
 
-### Complete configuration example
+### Complete configuration example with the Datadog Exporter
+
+The following example uses the Datadog Exporter. The extension itself does not require it; for the recommended pipeline, use the OTLP HTTP exporter configuration from [Set Up the OpenTelemetry Collector][9].
 
 ```yaml
 extensions:
@@ -365,7 +341,7 @@ This endpoint provides:
 
 ### Configuration not appearing in Datadog
 
-1. **Check hostname matching**: Ensure hostnames match between the Datadog Extension and Datadog Exporter.
+1. **Check hostname matching**: Confirm that the Datadog Extension hostname matches the host name in exported telemetry. If you use the Datadog Exporter, confirm that its hostname also matches.
 2. **Verify API key**: Confirm the API key is valid and has appropriate permissions.
 3. **Check Collector logs**: Look for extension initialization and data submission logs.
 4. **Confirm extension is enabled**: Verify the extension is listed in the service configuration.
@@ -380,7 +356,6 @@ This endpoint provides:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://app.datadoghq.com/infrastructure/catalog
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.129.0
@@ -388,4 +363,5 @@ This endpoint provides:
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
 [7]: https://app.datadoghq.com/fleet
 [8]: /opentelemetry/setup/ddot_collector/
+[9]: /opentelemetry/setup/collector_exporter/
 [10]: /opentelemetry/integrations/collector_health_metrics/

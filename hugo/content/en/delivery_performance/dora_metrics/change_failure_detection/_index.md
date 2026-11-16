@@ -16,12 +16,12 @@ further_reading:
 
 ## Overview
 
-Datadog Change Failure Detection automatically identifies deployments that remediate previously failed deployments. By connecting deployment data with failure events, it provides a complete view of delivery performance, helping teams balance release velocity with operational stability.
+Datadog Change Failure Detection automatically identifies deployments that remediate previously failed deployments. By linking change failures to remediation deployments, it provides a complete view of delivery performance, helping teams balance release velocity with operational stability.
 
 A **change failure** is a deployment that causes issues in production and requires remediation. Change failures are used to calculate the following metrics:
 
 - [Change Failure Rate][2]
-: The percentage of deployments causing a failure in production, calculated as the following:
+: The percentage of deployments causing issues in production, calculated as the following:
 
  $$\text"Change Failure Rate" = \text"Number of change failures" / \text"Number of total deployments"$$
 
@@ -191,5 +191,5 @@ To update a deployment's status from the Datadog UI:
 [1]: https://app.datadoghq.com/ci/settings/dora
 [2]: /delivery_performance/dora_metrics/calculation/#change-failure-rate
 [3]: /delivery_performance/dora_metrics/calculation/#failed-deployment-recovery-time
-[4]: /api/latest/dora-metrics/#patch-a-deployment-event
+[4]: /api/latest/delivery-performance/#mark-a-deployment-as-failed-by-id
 [5]: https://app.datadoghq.com/ci/dora?detail=deployments

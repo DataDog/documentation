@@ -21,6 +21,9 @@ further_reading:
 - link: /api/v1/monitors/
   tag: 설명서
   text: Datadog 모니터 API
+- link: https://learn.datadoghq.com/courses/apm-monitors-and-alerting
+  tag: 학습 센터
+  text: APM Monitors and Alerting
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 효과적인 모니터 생성에 대한 대화형 세션에 참여하세요
@@ -39,12 +42,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/human-name-detection
   tag: 블로그
   text: Sensitive Data Scanner에서 ML을 사용하여 로그의 인명 감지
+- link: https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/
+  tag: 블로그
+  text: monitor 를 효과적으로 점검하고 정리하는 방법
 - link: https://app.datadoghq.com/release-notes?category=Alerting
   tag: 릴리스 노트
   text: 최신 Datadog Alerting 릴리스를 확인하세요! (앱 로그인 필요).
-- link: https://learn.datadoghq.com/courses/apm-monitors-and-alerting
-  tag: 학습 센터
-  text: APM Monitors and Alerting
 title: 모니터
 ---
 ## 개요 {#overview}

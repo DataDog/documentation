@@ -8,6 +8,7 @@
 {{- $contentEncoding := "" -}}
 {{- $exampleDefinition := .exampleDefinition -}}
 {{- $exampleId := .exampleId -}}
+{{- $authData := .authData -}}
 
 {{/* Determine contentencoding */}}
 {{- with $parameters.headerParams -}}
@@ -33,8 +34,6 @@
 {{- end }}
 <br/>
 {{- end -}}
-{{- if ne $contentEncoding "deflate" -}}
-
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
@@ -72,6 +71,9 @@
     {{- end -}}
 {{- end -}}
 
+{{- if $authData.useBearerToken -}}
+<span class="c1"># Use a Personal Access Token or Service Access Token</span><br/><span class="kn">export</span> <span class="n">DD_BEARER_TOKEN</span><span class="o">=</span><span class="s1">"&lt;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN&gt;"</span><br/><br/>
+{{- end -}}
 <span class="c1"># Curl command</span><br/>
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
@@ -80,10 +82,10 @@
 <span class="n">EOF</span>
 <span class="n">) | gzip | </span>
 {{- else if eq $contentEncoding "deflate" -}}
-<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
-<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="o">printf '%s' "$(cat <<{{ if isset $exampleDefinition "x-variables" }}EOF{{ else }}'EOF'{{ end }}</span>
+<span class="s1">{{ .exampleValue | default $body | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
-<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8 | </span>
+<span class="o">)" |</span> <span class="n">python3 -c 'import sys, zlib; sys.stdout.buffer.write(zlib.compress(sys.stdin.buffer.read()))' | </span>
 {{- end -}}
 {{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
@@ -103,17 +105,17 @@
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- with $endpoint.action.security -}}
+{{- if not $authData.useBearerToken -}}
+{{- with $authData.requirement -}}
     {{- $i := 0 -}}
-    {{- range . -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $securitySchemes $key) }}
-            {{- if eq $authSchema.in "query" -}}
-                <span class="kn">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="kn">{{ $authSchema.name }}</span><span class="kn">=</span><span class="kn">${ {{- index $authSchema "x-env-name" -}} }</span>
-                {{- $i = add $count 1 -}}
-            {{- end -}}
+    {{- range $key, $val := . -}}
+        {{ $authSchema := (index $securitySchemes $key) }}
+        {{- if eq $authSchema.in "query" -}}
+            <span class="kn">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="kn">{{ $authSchema.name }}</span><span class="kn">=</span><span class="kn">${ {{- index $authSchema "x-env-name" -}} }</span>
+            {{- $i = add $i 1 -}}
         {{- end -}}
     {{- end -}}
+{{- end -}}
 {{- end -}}
 <span class="kn">"</span>
 {{- /* Accept header based on "responses" */ -}}
@@ -142,26 +144,7 @@
 {{- end -}}
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $endpoint.action "security" -}}
-    {{- /* Find authentication per operationId */ -}}
-    {{- range $endpoint.action.security -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $securitySchemes $key) }}
-            {{- if eq $authSchema.in "header" -}}
-                {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
-            {{- else if eq $authSchema.scheme "bearer" -}}
-                {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"Authorization: Bearer <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- else -}}
-    {{- /* Use global authentication */ -}}
-    {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
-{{- end -}}
+{{- partial "api/curl-auth.html" (dict "authData" $authData "securitySchemes" $securitySchemes) -}}
 {{- /* Render binary data (usually compressed) */ -}}
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
@@ -187,6 +170,3 @@
 <span class="n">EOF</span>
 {{- end -}}
 <br/>
-{{- else -}}
-<span class="c1">See one of the other client libraries for an example of sending deflate-compressed data.</span><br/><br/>
-{{- end -}}

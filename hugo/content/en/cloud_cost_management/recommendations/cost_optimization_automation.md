@@ -32,7 +32,7 @@ Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}}
 
 Automations are different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
-Automations are also different from [Notifications][8], which send a recurring Slack summary of matching recommendations but don't take any action.
+Automations are also different from [Notifications][8], which send a recurring Slack or Microsoft Teams summary of matching recommendations but don't take any action.
 
 **Note**: Automations use Datadog Workflows and incur additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 
@@ -100,16 +100,16 @@ The {{< ui >}}Remediation{{< /ui >}} tab lists every automation in your organiza
 - Rename an automation
 - Delete an automation
 
-## Execution history
+## Run history {#execution-history}
 
-Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past and upcoming executions. Each execution record includes:
+Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past and upcoming runs. Each run record includes:
 
-- Execution time and status (success, failure, or pending approval)
+- Run timestamp and status (success, failure, or pending approval)
 - The resources acted on
 - Estimated savings realized by the run
-- A link to the underlying Workflow Automation execution
+- A link to the underlying Workflow Automation run
 
-Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find executions by status, recommendation type, or date range.
+Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find runs by status, recommendation type, or date range.
 
 ## Version history
 

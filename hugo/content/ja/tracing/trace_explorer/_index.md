@@ -7,7 +7,7 @@ description: Trace Explorer
 further_reading:
 - link: tracing/trace_explorer/search
   tag: ドキュメント
-  text: スパンを検索する
+  text: スパンを検索
 - link: https://learn.datadoghq.com/courses/getting-started-apm
   tag: ラーニングセンター
   text: APM メトリクスとトレースの概要
@@ -18,13 +18,13 @@ title: Trace Explorer
 ---
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
 
-## 概要 {#overview}
+## 概要{#overview}
 
-[Trace Explorer][1] を使用すると、任意のスパンの任意のタグを使用して、取り込まれたスパンやインデックス化されたスパンのすべてを検索できます。クエリによって見つかるスパンは、Live Search を使用するか (過去 15 分間に取り込まれたすべてのスパン、ローリング)、インデックス化されたスパンを検索するか (カスタムフィルターにより 15 日間保持されるスパン) によって変わります。
+[Trace Explorer][1] を使用すると、任意のスパンの任意のタグを使用して、取り込まれたまたはインデックス化されたすべてのスパンを検索できます。クエリで発見されるスパンは、Live (過去 15 分間に取り込まれたすべてのスパン、ローリング) またはインデックス化されたスパン (カスタムフィルターにより 15 日間保持されたスパン) のどちらを検索するかによって変化します。
 
 インスツルメントされたアプリケーションは、構成された [Ingestion Control][2] に基づいて Datadog にトレースを送信します。取り込まれたトレースは、15 分間のローリングウィンドウの Live トレースとして利用できます。
 
-Trace Explorer には、Live モードのときは常に **Live Search - All ingested data** (Live Search - 取り込まれたすべてのデータ) というインジケーターが表示されます。
+Trace Explorer には、Live モードのときは常に {{< ui >}}Live Search - All ingested data{{< /ui >}} インジケーターが表示されます。
 
 {{< img src="tracing/trace_explorer/live_search.png" alt="Live Search インジケーター" style="width:75%;" >}}
 
@@ -32,16 +32,16 @@ Trace Explorer には、Live モードのときは常に **Live Search - All ing
 - インデックス化するスパンを決定するために作成できる[カスタム保持フィルター][3]。カスタム保持フィルターでインデックス化すると、トレースは **15 日間**保持されます。
 - 多様なトレースを保持するデフォルトの[インテリジェント保持フィルター][4]。インテリジェント保持フィルターでインデックス化すると、トレースは **30 日間**保持されます。
 
-Trace Explorer には、[インデックス化されたスパン][5]の検索時は常に **Search - Only Indexed Data** (検索 - インデックス化されたデータのみ) というインジケーターが表示されます。
+Trace Explorer には、[インデックス化されたスパン][5]を検索時は常に {{< ui >}}Search - Only Indexed Data{{< /ui >}} インジケーターが表示されます。
 
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data インジケーター" style="width:75%;" >}}
 
-Live Search は、[Traces] (トレース) ページのデフォルトビューです。Live Search から Indexed Data Search に切り替えるには、右上のタイムセレクターを使用します。
+Live Search は、トレースページのデフォルトの表示です。Live Search から Indexed Data Search に切り替えるには、右上のタイムセレクターを使用します。
 
-### Trace Patterns {#trace-patterns}
+### トレースパターン {#trace-patterns}
 
-{{< callout url="https://www.datadoghq.com/product-preview/apm-trace-patterns/" btn_hidden="false" header="プレビューに参加しましょう!" >}}
-Trace Patterns はプレビュー中です。このフォームからリクエストを送信してください。
+{{< callout url="https://www.datadoghq.com/product-preview/apm-trace-patterns/" btn_hidden="false" header="プレビューに参加しましょう" >}}
+Trace Patterns はプレビュー中です。今すぐこのフォームからリクエストを送信してください。
 {{< /callout >}}
 
 Trace Patterns は、構造や属性が似ているスパンを反復パターンにグループ化して、数千のトレースを、個別に読まずに一括して動作を分析できるようにします。クエリで返されるスパンが、トレースごとにスキャンするには多すぎる場合に使用できます (今週の新しいエラー形状や、デプロイ後に変化したレイテンシーパターンを見つける場合など)。
@@ -65,25 +65,25 @@ Trace Patterns は、構造や属性が似ているスパンを反復パター�
 
 {{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Live Search" >}}
 
-Live Search を使用すると、Datadog Agent によって送信されたスパンが、保持フィルターによってインデックス化される前に、即座に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり (ローリングウィンドウ)、サンプリングなしで表示されます。
+Live Search を使用すると、Datadog Agent によって送信されたスパンが、保持フィルターによってインデックス化される前に、即座に Datadog に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり (ローリングウィンドウ)、サンプリングなしで表示されます。
 
 {{< tabs >}}
 {{% tab "リストビュー" %}}
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search リストビュー" video="true" >}}
 
-**リストビュー**では、以下のことが可能です。
+{{< ui >}}List view{{< /ui >}} を使用すると、以下が可能です。
 
 - すべてのタグの `version_id` でフィルタリングすることで、新しいデプロイがスムーズに行われたかを監視。
 - 取り込まれたトレースの 100% を検索して、問題のある子スパンに関連付けられた特定の `org_id` または `customer_id` を見つけ、機能停止に関する情報をリアルタイムで確認。
 - `process_id` を入力して新しいプロセス ID が子スパンのタグとして自動入力されるかどうかを確認し、プロセスが適切に開始されたことをチェック。
 - 子リソースの持続時間でフィルタリングし、エンドポイントでの負荷テストやパフォーマンスへの影響を監視。
 - トレースパネルビューから直接、スパンやタグに対する検索クエリをワンクリックで実行。
-- スパンタグの列の追加、削除、並べ替えによりビューをカスタマイズ。
+- スパンタグから列を追加、削除、並べ替えてビューをカスタマイズ。
 
-1 秒間に受け取ったスパンの数がトレーステーブルの上部に表示されます。1 秒間に数千のスパンのストリームを受け取るような場合は、人間の目では確認できないため、スループットが高いスパンストリームは確認しやすいように一部のスパンを表示します。利用可能なすべてのスパンを検索クエリで検索できます。Live Search クエリバーのフィルター機能を使用してスパンストリームを絞り込んだり、画面右上の [**Pause/Play**] (一時停止/再開) ボタンを使用してストリームを一時停止または再開したりできます。
+1 秒間に受け取ったスパンの数がトレーステーブルの上部に表示されます。1 秒間に数千のスパンのストリームを受け取るような場合は、人間の目では確認できないため、スループットが高いスパンストリームは確認しやすいように一部のスパンを表示します。利用可能なすべてのスパンを検索クエリで検索できます。Live Search クエリバーのフィルター機能を使用してスパンストリームを絞り込んだり、画面右上の {{< ui >}}Pause/Play{{< /ui >}} ボタンを使用してストリームを一時停止または再開したりできます。
 
-{{< img src="tracing/live_search/play-pause-button.png" alt="ライブストリームを一時停止/再開" style="width:75%;" >}}
+{{< img src="tracing/live_search/play-pause-button.png" alt="Live Stream を一時停止/再開" style="width:75%;" >}}
 
 **注**: スパンを選択すると、ストリームが一時停止し、そのスパンの詳細がトレースサイドパネルに表示されます。
 
@@ -92,9 +92,9 @@ Live Search を使用すると、Datadog Agent によって送信されたスパ
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search 時系列ビュー" video="true" >}}
 
-スパンをリストではなく時系列で可視化するには**時系列ビュー**を使用します。Live Search の時系列ビューは、次のような特定の条件に対応するリクエストやエラーをグラフ化するのに便利です。
+{{< ui >}}Timeseries view{{< /ui >}} を使用して、スパンをリストではなく時系列で可視化します。Live Search の時系列ビューは、次のような特定の条件に対応するリクエストやエラーをグラフ化するのに便利です。
 
-- カートの金額が少なくとも `$100` の `ShoppingCart##checkout` サービスやエンドポイントのエラー。これらの条件に一致するトレースを個別に表示できます。
+- カートの金額が少なくとも `$100` の `ShoppingCart##checkout` サービスやエンドポイントのエラー、という条件に一致するトレースを個別に表示できます。
 
 - アプリケーションの重要なアップデートのカナリアデプロイをリアルタイムで監視。
 
@@ -113,7 +113,7 @@ Live Search を使用すると、Datadog Agent によって送信されたスパ
 
 検索バーに有効なクエリを入力すると、検索条件に一致するトレースが**すべてのスパン**にわたって表示されます。Live Search ビューの検索構文は他のトレースビューのものと同じですが、クエリはインデックス化されたトレースだけでなく、**任意のスパン**と**任意のタグ**で収集されたすべてのトレースと照合されます。
 
-トレーステーブルの上のボックスで選択を変更することにより、[サービスエントリスパン][10]、[ルートスパン][11]、またはすべてのスパンをクエリすることが可能です。トラフィックの多いアプリケーションでこの機能を使用すると、表示されるスパンの数を減らして、サービスのエントリポイントのスパンのみを表示したり、トレースのエントリポイントのみを表示したりできます。このボックスを選択すると、リストに表示されるスパンのみがフィルターされます。スパンをクリックしてトレースの詳細を表示すると、他のスパンもフレームグラフに表示されます。
+トレーステーブルの上のボックスで選択を変更することにより、[サービスエントリスパン][10]、[ルートスパン][11]、またはすべてのスパンをクエリすることが可能です。トラフィックの多いアプリケーションでこの機能を使用すると、表示されるスパンの数を減らして、サービスのエントリポイントのスパンのみを表示したり、トレースのエントリポイントのみを表示したりできます。このボックスを選択すると、リストに表示されるスパンのみがフィルタリングされます。スパンをクリックしてトレースの詳細を表示すると、他のスパンもフレームグラフに表示されます。
 
 ファセットとして定義されていない属性でも絞り込むことができます。たとえば、`cart.value` 属性で絞り込むには、以下の 2 つの方法があります。
 
@@ -134,6 +134,8 @@ Trace Explorer は、自動化された Watchdog の外れ値検出とタグ分�
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="統合インサイトによる異常の分析" video="true" >}}
 
+<div class="alert alert-tip">トレースリストを<strong>時間</strong>で並べ替えるとき、<strong>Bits AI で調査する</strong>をクリックして、自動化されたレイテンシー調査を開始します。Bits AI は、表示されたトレース全体にわたるボトルネックとタグの乖離を分析します。詳細については、<a href="/bits_ai/bits_chat/">Bits Chat</a> を参照してください。</div>
+
 ## 15 日間保持のインデックス化されたスパンの検索 {#indexed-spans-search-with-15-day-retention}
 
 {{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="インデックス検索" >}}
@@ -145,7 +147,7 @@ Trace Explorer は、自動化された Watchdog の外れ値検出とタグ分�
 {{< tabs >}}
 {{% tab "リストビュー" %}}
 
-カスタム保持フィルター*と*インテリジェント保持フィルターでインデックス化されたすべてのスパンは、リストビューで検索可能です。ただし、どの保持フィルターにもインデックス化されていないスパンにのみ表示されるタグでフィルタリングすると、[Live Search](#live-search-for-15-minutes) の場合と異なり、検索結果は何も返されません。
+カスタム保持フィルター*と*インテリジェント保持フィルターでインデックス化されたすべてのスパンは、リストビューで検索可能です。ただし、どの保持フィルターにもインデックス化されていないスパンにのみ表示されるタグでフィルタリングした場合、[Live Search](#live-search-for-15-minutes) を使用した場合と異なり、検索結果は何も返されません。
 
 {{% /tab %}}
 {{% tab "時系列ビュー" %}}

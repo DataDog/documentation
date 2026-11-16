@@ -21,7 +21,7 @@ Events Saved Views make it easier for you and your teammates to switch between d
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the user who created the view. To create a saved view:
 1. Customize the Events query to scope down to the events you are troubleshooting. For more information, see the [Event Analytics][2] and [Search Syntax][3] documentation.
-1. Click {{< ui >}}+ Save{{< /ui >}}.
+1. Click {{< ui >}}\+ Save{{< /ui >}}.
 1. Enter a name and click {{< ui >}}Save{{< /ui >}} to create a saved view.
 
 To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Events Explorer{{< /ui >}}. From the saved view entry in the Views panel, you can:
@@ -36,7 +36,7 @@ To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of {
 
 To access your default view, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Events Explorer{{< /ui >}}. Your existing Events Explorer view is your default saved view. This configuration is only accessible and viewable to you. Updating this configuration does not have any impact on your organization.
 
-Temporarily override your default saved view by adding facets to your search query and clicking {{< ui >}}Update your default view{{< /ui >}}. To create a new saved view, Click the {{< ui >}}+ Create a New Saved View{{< /ui >}} button.
+Temporarily override your default saved view by adding facets to your search query and clicking {{< ui >}}Update your default view{{< /ui >}}. To create a new saved view, Click the {{< ui >}}\+ Create a New Saved View{{< /ui >}} button.
 
 In the default view entry in the {{< ui >}}Views{{< /ui >}} panel, you can:
 * {{< ui >}}Reload{{< /ui >}} your default view by clicking on the entry.

@@ -37,6 +37,7 @@ See the respective documentation for your cloud provider:
   {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
   {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
   {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/oracle/" src="integrations_logos/oracle-cloud-infrastructure_avatar.svg" alt="oracle cloud" >}}
 {{< /card-grid >}}
 
 ## Search and manage tags

@@ -95,9 +95,19 @@ Monitors with custom schedules, on the other hand, evaluate on a daily, weekly, 
 The timeline below illustrates the behavior of a monitor running on a custom schedule. Unlike the default scheduled monitor, the custom scheduled monitor sends an alert during its evaluation time based on the monitor state.
 {{< img src="monitors/guide/custom_schedules/alerting_behavior_custom.png" alt="Visual diagram showing a when a monitor sends an alert based on monitor state for the custom schedule with a daily evaluation frequency" style="width:100%;" >}}
 
+## Group retention
+
+By default, [groups are retained][3] for 24 or 48 hours after a group stops reporting, then removed from the monitor. Monitors with custom schedules retain groups much longer, and their retention scales with the evaluation frequency you configure:
+| Evaluation Frequency | Group Retention |
+|-----------------------|------------------|
+| Daily                 | 30 days          |
+| Weekly                | 90 days          |
+| Monthly               | 180 days         |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://icalendar.org/rrule-tool.html
 [2]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[3]: https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#group-retention-time

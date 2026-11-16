@@ -1,70 +1,75 @@
 ---
+description: Coordine iniciativas de ingeniería con límite de tiempo agrupando reglas
+  de Scorecard bajo un objetivo compartido y realizando un seguimiento de la adopción
+  en todas las entidades y equipos.
 further_reading:
 - link: /internal_developer_portal/scorecards/
   tag: Documentación
   text: Documentación de Scorecards
+- link: https://www.datadoghq.com/blog/idp-campaigns/
+  tag: Blog
+  text: Coordine iniciativas de ingeniería a gran escala con las Campañas de IDP
+site_support_id: idp
 title: Campañas
 ---
+{{< img src="/tracing/software_catalog/campaign-manage.png" alt="Lista de campañas en Internal Developer Portal" style="width:90%;" >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Únete a la vista previa de Campañas" >}}
-{{< /callout >}}
+## Descripción general {#overview}
 
-{{< img src="/tracing/software_catalog/campaign-manage.png" alt="Lista de campañas en el portal de desarrollo interno" style="width:90%;" >}}
+Las campañas le permiten coordinar iniciativas de ingeniería a corto plazo agrupando reglas de [Scorecard][1] bajo un objetivo compartido y realizando un seguimiento de la adopción en todas las entidades y equipos. 
 
-## Información general
+Mientras que los Scorecards definen las mejores prácticas a largo plazo, las campañas le ayudan a concentrar los esfuerzos en iniciativas con límite de tiempo, como migraciones en tiempo de ejecución, correcciones de seguridad u optimización de costos. Puede establecer una fecha límite, seleccionar reglas para realizar un seguimiento y hacer un seguimiento de la finalización en todos los equipos.
 
-Las campañas te permiten coordinar iniciativas de ingeniería a corto plazo agrupando reglas de [scorecard][1] bajo un objetivo compartido y realizando un seguimiento de la adopción entre entidades y equipos.
+Utilice la [**pestaña Campaigns** en la página de Scorecards][2] para: 
+- Visualizar campañas activas y pasadas
+- Realice un seguimiento del progreso por regla, equipo o estado
+- Dar seguimiento a los equipos directamente desde la interfaz 
 
-Mientras que los Scorecards definen las mejores prácticas a largo plazo, las campañas te ayudan a centrar tus esfuerzos en iniciativas con plazos concretos, como migraciones en tiempo de ejecución, correcciones de seguridad u optimización de costes. Puedes fijar una fecha límite, seleccionar reglas de seguimiento y monitorizar la finalización entre equipos.
+Si su servicio es parte de una campaña, las reglas y fechas límite relacionadas aparecen en la pestaña **Scorecards** de la entidad en el Service Catalog, y en la página de la entidad en la sección **Scorecards**. Esta visibilidad permite a los equipos actuar sobre los objetivos de la campaña sin depender de recordatorios manuales o documentación externa.
 
-Utiliza la [pestaña **Campañas** de la página Scorecards][2] para: 
-- Ver campañas activas y pasadas
-- Seguir el progreso por norma, equipo o estado
-- Seguir directamente a los equipos desde la interfaz 
+## Creación de una campaña {#creating-a-campaign}
 
-Si tu servicio forma parte de una campaña, las normas y plazos relacionados aparecen en la pestaña **Scorecards** de la entidad en Software Catalog, y en la página de la entidad en la sección **Scorecards**. Esta visibilidad permite a los equipos actuar sobre los objetivos de la campaña sin depender de recordatorios manuales o documentación externa.
+Cree y administre campañas desde la pestaña [**Campaigns** en Scorecards][2]. 
 
-## Crear una campaña
+**Nota:** La creación de una campaña requiere los permisos de Service Catalog Write y Work Management Write. 
 
-Crea y gestiona campañas desde la pestaña [**Campaings** (Campañas) de Scorecards][2]. 
+{{< img src="/tracing/software_catalog/campaign-creation.png" alt="Página de creación de campañas con campos completados" style="width:90%;" >}}
 
-{{< img src="/tracing/software_catalog/campaign-creation.png" alt="Página de creación de campañas con los campos rellenados" style="width:90%;" >}}
+### 1. Defina los metadatos de la campaña {#1-define-campaign-metadata}
 
-### 1. Definir los metadatos de la campaña
+Proporcione la siguiente información:
+- **Nombre**: Un título breve y descriptivo (por ejemplo, "Migrar a GitHub Actions")
+- **Clave**: Un identificador único para la campaña (generado automáticamente de forma predeterminada)
+- **Descripción**: Un breve resumen del objetivo de la campaña
+- **Propietario**: El equipo responsable de impulsar la campaña
+- **Fecha de inicio y finalización**: El cronograma de la campaña (la fecha de finalización es opcional)
+- **Contexto**: Entidades a las que se aplica la campaña (por ejemplo, `kind:service AND tier:1`)
 
-Brinda la siguiente información:
-- **Nombre**: un título corto y descriptivo (por ejemplo, "Migrar a las acciones de GitHub").
-- **Clave**: un identificador único para la campaña (autogenerado por defecto).
-- **Descripción**: un breve resumen del objetivo de la campaña
-- **Propietario**: el equipo responsable de impulsar la campaña
-- **Fecha de inicio y de finalización**: el calendario de la campaña (la fecha de finalización es opcional)
-- **Ámbito**: entidades a las que se aplica la campaña (por ejemplo, `kind:service AND tier:1`)
+### 2. Seleccione las reglas de Scorecard {#2-select-scorecard-rules}
 
-### 2. Seleccionar reglas de Scorecard
+Agregue una o más [reglas de Scorecard existentes][3] que se alineen con el objetivo de su campaña.
 
-Añade una o varias [reglas existentes en scorecard][3] que se ajusten al objetivo de tu campaña.
+### 3. Defina la guía {#3-define-guidance}
 
-### 3. Definir la orientación
-
-Para cada regla, incluye opcionalmente: 
+Para cada regla, incluya opcionalmente: 
 - Documentación vinculada
-- Flujos de trabajo a través de [Workflow Automation][4] para corregir automáticamente las reglas que fallan
-- Pasos que debe seguir los equipos para cumplir la normativa
+- Flujos de trabajo a través de [Workflow Automation][4] para corregir automáticamente las reglas que no se cumplen
+- Pasos que los equipos deben seguir para cumplir con la normativa
 
-## Seguimiento del progreso de la campaña
+## Seguimiento del progreso de la campaña {#tracking-campaign-progress}
 
-Después de crear una campaña, utiliza la página de la campaña para monitorizar la adopción y el seguimiento según sea necesario.
+Después de crear una campaña, utilice la página de la campaña para hacer un seguimiento de la adopción y dar seguimiento según sea necesario.
 
-{{< img src="/tracing/software_catalog/campaign-details.png" alt="Página de la campaña que resalta los detalles de campaña, el progreso y los próximos pasos" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/campaign-details.png" alt="Página de la campaña que destaca los detalles, el progreso y los próximos pasos de la campaña" style="width:90%;" >}}
 
-Desde la página de la campaña, puedes:
-- Ver la finalización global y el progreso por equipo o regla
-- Filtro para encontrar entidades, equipos, o reglas que siguen fallando
-- Comparación de los índices de adopción entre equipos
-- Ver las tendencias de progreso a lo largo del tiempo
-- Envía actualizaciones o crea tiques de seguimiento directamente desde la página
+Desde la página de la campaña, usted puede: 
+- Visualice la finalización y el progreso general por equipo o regla
+- Filtrar para encontrar entidades, equipos o reglas que aún no cumplen con los requisitos
+- Comparar las tasas de adopción entre equipos
+- Visualice tendencias de progreso a lo largo del tiempo
+- Envíe actualizaciones o cree tickets de seguimiento directamente desde la página
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

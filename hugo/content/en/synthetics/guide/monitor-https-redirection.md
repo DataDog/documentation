@@ -24,7 +24,7 @@ To monitor the redirection of your HTTP traffic into HTTPS:
     - Define an assertion on the `location` header by clicking the `location` header in the response preview. For example, under {{< ui >}}Headers{{< /ui >}}, the `location` header for `http://datadoghq.com` is `https://datadoghq.com`.
     
     {{< img src="synthetics/guide/monitor-https-redirections/location-header-https.png" alt="Location header in the response preview" style="width:100%;" >}}
-    - Alternatively, define an assertion on the response body by clicking {{< ui >}}+ New Assertion{{< /ui >}}. Select {{< ui >}}body{{< /ui >}} {{< ui >}}contains{{< /ui >}} and paste `"https:"===window.location.protocol` in the text field. 
+    - Alternatively, define an assertion on the response body by clicking {{< ui >}}\+ New Assertion{{< /ui >}}. Select {{< ui >}}body{{< /ui >}} {{< ui >}}contains{{< /ui >}} and paste `"https:"===window.location.protocol` in the text field. 
     {{< img src="synthetics/guide/monitor-https-redirections/https-assertion.png" alt="Define your assertion" style="width:100%;" >}}
 
 Complete the rest of the test creation workflow and save your HTTP test. 

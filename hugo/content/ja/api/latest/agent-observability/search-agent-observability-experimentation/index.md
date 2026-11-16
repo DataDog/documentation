@@ -1,3 +1,3 @@
 ---
-title: Agent Observability の実験を検索
+title: Agent Observability Experimentation の検索
 ---

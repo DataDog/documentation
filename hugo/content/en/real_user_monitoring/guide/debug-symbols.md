@@ -21,13 +21,13 @@ You can ignore this warning. The stack trace is already readable.
 
 ### No debug symbols uploaded for this version
 
-Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your application. This page is filtered by {{< ui >}}type{{< /ui >}} (JavaScript, Android, iOS, React Native, Flutter). Use the filter to find the debug symbols you are looking for.
+Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your application. This page is filtered by {{< ui >}}type{{< /ui >}} (JavaScript, WebAssembly, Android, iOS, React Native, Flutter). Use the filter to find the debug symbols you are looking for.
 
 If there are no debug symbols for your application, [upload them][2].
 
 <div class="alert alert-danger">
-Ensure that the size of each debug symbol does not exceed the limit of **500 MB**, otherwise the upload is rejected.
-For iOS dSYMs, individual files up to **2 GB** are supported. 
+Ensure that the size of each debug symbol does not exceed the limit of <strong>500 MB</strong>, otherwise the upload is rejected.
+For iOS dSYMs, individual files up to <strong>2 GB</strong> are supported. 
 </div>
 
 ### Debug symbol tags do not match
@@ -37,12 +37,13 @@ Datadog relies on different tags to match debug symbols with stack traces. These
 | Application type | Tag combination used for matching |
 | ---- | ---- |
 | JavaScript | `service`, `version`, `path`|
+| WebAssembly | `build_id` |
 | Android | v1.13.0+: `build_id`<br/> Older versions: `service`, `version`, `variant`|
 | iOS | `uuid` |
 | React Native | `service`, `version`, `bundle_name`, `platform`; if multiple source maps match on these fields, the one with the highest `build_number` is selected |
 | Flutter | `service`, `version`, `variant`, `architecture` |
 
-The [RUM Debug Symbols page][1] displays the values of these tags. If you find a mismatch, [upload the debug symbols][2] again with a corrected set of tags.
+The [RUM Debug Symbols page][1] displays the values of these tags. If you find a mismatch, upload the debug symbols again with a corrected set of tags.
 
 
 

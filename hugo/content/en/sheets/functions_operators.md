@@ -339,4 +339,4 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 `TYPE(value)`
 : Returns the data type of a value as a number (1 = number, 2 = text, 4 = logical, 16 = error). <br>**Example**: `TYPE(123) => 1` <br>**Available in**: Sheet
 
-[1]: /sheets/#sheet-preview
+[1]: /sheets/#sheet

@@ -2,10 +2,16 @@
 further_reading:
 - link: /security/code_security/iac_security/setup
   tag: 설명서
-  text: IaC 보안 설정
+  text: IaC Security 설정
 - link: /security/code_security/iac_security/configuration
   tag: 설명서
-  text: IaC 보안 구성
+  text: IaC Security 구성
+- link: /security/code_security/iac_security/custom_rules/
+  tag: 설명서
+  text: IaC 사용자 지정 규칙
+- link: https://www.datadoghq.com/blog/github-actions-iac-security/
+  tag: 블로그
+  text: '봇보다 먼저 CI/CD 구성 오류 찾아내기: Datadog IaC Security로 GitHub Actions 보안 강화'
 title: IaC 보안 규칙
 type: iac_security
 ---
@@ -17,7 +23,10 @@ type: iac_security
 
 <div class="alert alert-info">Helm 의 의존성 해결이 올바르게 작동하려면, 각 차트 디렉토리에는 해당 차트가 의존하는 차트가 포함되어야 합니다. 자세한 내용은 Helm 문서의 <a href="https://helm.sh/docs/topics/charts/#the-chart-file-structure">차트 파일 구조</a>를 참조하세요.</div>
 
+조직에 특화된 요구 사항을 적용하려면 [IaC 사용자 지정 규칙][2]을 참조하십시오.
+
 [1]: /ko/security/code_security/iac_security/
+[2]: /ko/security/code_security/iac_security/custom_rules/
 
 ## 추가 자료 {#further-reading}
 

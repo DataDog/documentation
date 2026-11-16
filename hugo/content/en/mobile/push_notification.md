@@ -12,7 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Workflow Automation Documentation"
 ---
-{{< site-region region="gov,gov2" >}}
+{{< site-region region="gov2" >}}
 <div class="alert alert-danger">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notifications), so you can stay informed in real time from the Datadog mobile app.
@@ -80,7 +80,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 For more information, see the [guide on setting up your mobile device for On-Call][4].
 
 ### Critical push notifications
-{{< site-region region="gov,gov2" >}}
+{{< site-region region="gov2" >}}
 <div class="alert alert-danger">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 <div class="alert alert-info">
@@ -147,7 +147,7 @@ For high-urgency notifications, Datadog strongly recommends customizing your sys
 Receive status updates on your active incidents by setting up [Notification Rules for incidents on the Web][2]. 
 
 1. In Incidents, navigate to {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Notification Rules{{< /ui >}}][1].
-2. Click the {{< ui >}}+ New Rule{{< /ui >}} button on the top right.
+2. Click the {{< ui >}}\+ New Rule{{< /ui >}} button on the top right.
 3. Enter your desired condition fields for {{< ui >}}When an incident is...{{< /ui >}} and {{< ui >}}And meets the following conditions...{{< /ui >}}. By default, these filters are empty, and a notification rule triggers for any incident.
 4. Under {{< ui >}}Notify...{{< /ui >}} select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes {{< ui >}}(Mobile Push Notification){{< /ui >}}. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 5. {{< ui >}}With Template:{{< /ui >}} Select the desired message template you want the notification rule to use.
@@ -157,13 +157,13 @@ Receive status updates on your active incidents by setting up [Notification Rule
 By default if you have push notifications enabled and are assigned as a commander to an incident, you automatically receive push notification for the incident.
 
 ## Workflow automation notifications
-{{< site-region region="gov,gov2" >}}
+{{< site-region region="gov2" >}}
 <div class="alert alert-danger">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Create [workflow automations][3] that send mobile push notifications.
 
-1. On the workflow canvas, click the {{< ui >}}+{{< /ui >}} icon.
+1. On the workflow canvas, click the {{< ui >}}\+{{< /ui >}} icon.
 2. Search for {{< ui >}}Send mobile push notification{{< /ui >}}.
 3. Under {{< ui >}}To{{< /ui >}} select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 4. Enter the message {{< ui >}}Body{{< /ui >}}.

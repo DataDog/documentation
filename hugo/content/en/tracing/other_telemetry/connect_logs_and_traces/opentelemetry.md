@@ -166,24 +166,30 @@ The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
    handler = LoggingHandler(logger_provider=log_provider)
    logging.getLogger().addHandler(handler)
    ```
-2. **Configure the Collector to Receive OTLP Logs**: In your Collector's `config.yaml`, enable the `otlp` receiver and add it to your `logs` pipeline:
+2. **Configure the Collector to receive and export OTLP logs**: In the Collector's `config.yaml`, enable the `otlp` receiver and add it to the `logs` pipeline. Use the OTLP HTTP exporter configuration from [Set Up the OpenTelemetry Collector][7]:
    ```yaml
    receivers:
      otlp:
        protocols:
          grpc:
          http:
-   
+
+   processors:
+     resource_detection:
+       detectors: [env, system]
+
    exporters:
-     datadog:
-       # ... your datadog exporter config
-   
+     otlp_http:
+       endpoint: https://otlp.${env:DD_SITE}
+       headers:
+         dd-api-key: ${env:DD_API_KEY}
+
    service:
      pipelines:
        logs:
          receivers: [otlp]
-         processors: [batch]
-         exporters: [datadog]
+         processors: [resource_detection]
+         exporters: [otlp_http]
    ```
    
 #### Scrape logs from files
@@ -359,3 +365,4 @@ Click {{< ui >}}View Trace in APM{{< /ui >}} to pivot directly to the full APM t
 [4]: https://app.datadoghq.com/logs
 [5]: /logs/log_configuration/processors
 [6]: https://opentelemetry.io/docs/specs/otel/compatibility/logging_trace_context/
+[7]: /opentelemetry/setup/collector_exporter/

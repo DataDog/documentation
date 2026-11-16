@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-09-29'
+    link: https://github.com/DataDog/documentation/pull/40282
+    operations:
+      - CreateCaseType
+      - DeleteCaseType
+      - GetAllCaseTypes
+      - UpdateCaseType
+    title: Rename Case Management API documentation to Work Management

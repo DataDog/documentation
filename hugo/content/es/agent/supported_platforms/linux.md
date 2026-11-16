@@ -26,66 +26,66 @@ aliases:
 further_reading:
 - link: /logs/
   tag: Documentación
-  text: Reúne tus registros
+  text: Recopile sus registros
 - link: /infrastructure/process/
   tag: Documentación
-  text: Reúne tus procesos
+  text: Recopile sus procesos
 - link: /tracing/
   tag: Documentación
-  text: Reúne tus trazas
+  text: Recopile sus trazas
 - link: /agent/architecture/#agent-architecture
   tag: Documentación
-  text: Descubre más sobre la arquitectura del Agente
+  text: Obtenga más información sobre la arquitectura del Agent
 - link: /agent/configuration/network#configure-ports
   tag: Documentación
-  text: Configura los puertos de entrada
+  text: Configurar puertos de entrada
 platform: Linux
 title: Linux
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Esta página describe las características básicas del Agente de Datadog para entornos Linux. Consulta la documentación de [Plataformas Soportadas][5] para obtener la lista completa de distribuciones y versiones de Linux soportadas.
+Esta página describe las características básicas del Datadog Agent para entornos Linux. Consulte la documentación de [Plataformas compatibles][5] para obtener la lista completa de distribuciones y versiones de Linux compatibles.
 
-## Instalar el Agente {#install-the-agent}
-Para instalar el Agente en Linux, sigue las [instrucciones en la aplicación en Fleet Automation][6] y ejecuta el script generado en tus servidores.
+## Instale el Agent {#install-the-agent}
+Para instalar el Agent en Linux, siga las instrucciones en Fleet Automation y ejecute el script generado en sus hosts.
 
-{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Pasos de instalación en la aplicación para el Agente de Datadog en un servidor Linux." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Pasos de instalación in-app para el Datadog Agent en un host Linux." style="width:90%;">}}
 
 
-## Configurar el Agente {#configure-the-agent}
-El archivo de configuración del Agente de Datadog se encuentra en `/etc/datadog-agent/datadog.yaml`. Este archivo YAML contiene los detalles de conexión a nivel de servidor utilizados para enviar datos a Datadog, incluyendo:
-- `api_key`: La [clave de API de Datadog][7] de tu organización
-- `site`: Región objetivo de Datadog (por ejemplo `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
-- `proxy`: Puntos de conexión de proxy HTTP/HTTPS para tráfico saliente (ver [Configuración del Proxy del Agente de Datadog][8])
+## Configure el Agent {#configure-the-agent}
+El archivo de configuración del Datadog Agent se encuentra en `/etc/datadog-agent/datadog.yaml`. Este archivo YAML contiene los detalles de conexión a nivel de host que se utilizan para enviar datos a Datadog, incluyendo:
+- `api_key`: La [clave de API de Datadog][7] de su organización
+- `site`: Región de Datadog de destino (por ejemplo, `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
+- `proxy`: Endpoints de proxy HTTP/HTTPS para tráfico saliente (consulte [Configuración de proxy del Datadog Agent][8])
 - Etiquetas predeterminadas, nivel de registro y configuraciones de Datadog
 
-Un archivo de referencia completamente comentado, ubicado en `/etc/datadog-agent/datadog.yaml.example`, enumera todas las opciones disponibles para comparación o para copiar y pegar. Alternativamente, consulta el archivo de muestra `config_template.yaml` para todas las opciones de configuración disponibles.
+Un archivo de referencia totalmente comentado, ubicado en `/etc/datadog-agent/datadog.yaml.example`, enumera todas las opciones disponibles para comparación o para copiar y pegar. Alternativamente, consulte el archivo de configuración de ejemplo del Agent para Linux en GitHub.
 
 ### Archivos de integración {#integration-files}
-Los archivos de configuración para integraciones se encuentran en `/etc/datadog-agent/conf.d/`. Cada integración tiene su propio subdirectorio, `<INTEGRATION>.d/`, que contiene:
+Los archivos de configuración para las integraciones se encuentran en `/etc/datadog-agent/conf.d/`. Cada integración tiene su propio subdirectorio, `<INTEGRATION>.d/`, que contiene:
 - `conf.yaml`: La configuración activa que controla cómo la integración recopila métricas y registros
-- `conf.yaml.example`: Un ejemplo que ilustra las claves y los valores predeterminados soportados
+- `conf.yaml.example`: Una muestra que ilustra las claves admitidas y los valores predeterminados
 
 
 ## Comandos {#commands}
 
 | Descripción   | Comando               |
 |---------------|-----------------------|
-| Iniciar el Agente como un servicio           | `sudo systemctl start datadog-agent`                   |
-| Detener el Agente que se ejecuta como un servicio    | `sudo systemctl stop datadog-agent`                    |
-| Reiniciar el Agente que se ejecuta como un servicio | `sudo systemctl restart datadog-agent`                 |
-| Estado del servicio del Agente            | `sudo systemctl status datadog-agent`                  |
-| Página de estado del Agente en ejecución       | `sudo datadog-agent status`                            |
-| Enviar flare                         | `sudo datadog-agent flare`                             |
-| Mostrar uso del comando              | `sudo datadog-agent --help`                            |
-| Ejecutar una verificación                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
+| Iniciar el Agent como servicio           | `sudo systemctl start datadog-agent`                   |
+| Detener el Agent que se ejecuta como servicio    | `sudo systemctl stop datadog-agent`                    |
+| Reiniciar el Agent que se ejecuta como servicio | `sudo systemctl restart datadog-agent`                 |
+| Estado del servicio del Agent            | `sudo systemctl status datadog-agent`                  |
+| Página de estado del Agent en ejecución       | `sudo datadog-agent status`                            |
+| Enviar flare | `sudo datadog-agent flare`                             |
+| Monitor el uso del comando | `sudo datadog-agent --help`                            |
+| Ejecute una verificación | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-**Nota**: Para sistemas basados en upstart, como `CentOS/RHEL 6` o `SUSE 11`, intercambie `systemctl <action>` con `<action>`. Por ejemplo, al iniciar un Agente como un servicio en un sistema `SUSE 11`, use `sudo start datadog-agent`.
+**Nota**: Para sistemas basados en upstart, como `CentOS/RHEL 6` o `SUSE 11`, intercambie `systemctl <action>` con `<action>`. Por ejemplo, al iniciar un Agent como servicio en un sistema `SUSE 11`, use `sudo start datadog-agent`.
 
 
-## Desinstalar el Agente {#uninstall-the-agent}
+## Desinstale el Agent {#uninstall-the-agent}
 
-Para desinstalar el Agente, ejecute el comando para el entorno de Linux correspondiente:
+Para desinstalar el Agent, ejecute el comando para el entorno de Linux correspondiente:
 
 
 ### Para CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux y Red Hat {#for-centos-rocky-almalinux-amazon-linux-oracle-linux-and-red-hat}
@@ -108,14 +108,14 @@ sudo zypper remove datadog-agent
 
 <div class="alert alert-info">
 
-**Los comandos anteriores eliminan el Agente, pero no eliminan**:
+**Los comandos anteriores eliminan el Agent, pero no eliminan**:
 * El archivo de configuración `datadog.yaml`
 * Archivos creados por el usuario en la carpeta de configuración `/etc/datadog-agent`
 * Archivos creados por el usuario en la carpeta `/opt/datadog-agent`
 * El usuario `dd-agent`
 * Archivos de registro de Datadog
 
-**Para eliminar estos elementos, ejecute este comando después de eliminar el Agente:**
+**Para eliminar estos elementos, ejecute este comando después de eliminar el Agent:**
 
 ```shell
 sudo userdel dd-agent \
@@ -124,7 +124,7 @@ sudo userdel dd-agent \
 && sudo rm -rf /var/log/datadog/
 ```
 
-Para desinstalar los artefactos restantes del Agente para `Debian` y `Ubuntu`, ejecute:
+Para desinstalar los artefactos restantes del Agent para `Debian` y `Ubuntu` ejecute:
 
 ```shell
 sudo apt-get remove --purge datadog-agent -y
@@ -133,22 +133,22 @@ sudo apt-get remove --purge datadog-agent -y
 </div>
 
 
-### Desinstalar Instrumentación APM de Un Solo Paso {#uninstall-single-step-apm-instrumentation}
-Si instaló el Agente con Instrumentación APM de Un Solo Paso y desea desinstalarlo, necesita [ejecutar comandos adicionales][9] para eliminar la Instrumentación APM. Siga los pasos para su [entorno específico][10].
+### Desinstalar la instrumentación de APM de un solo paso {#uninstall-single-step-apm-instrumentation}
+Si instaló el Agent con la instrumentación de APM de un solo paso y desea desinstalarlo, debe [ejecutar comandos adicionales][9] para eliminar la instrumentación de APM. Siga los pasos para su [entorno específico][10].
 
 
-## Solución de Problemas {#troubleshooting}
+## Solución de problemas {#troubleshooting}
 
-Para pasos detallados, consulte [Solución de Problemas del Agente][2].
+Para conocer los pasos detallados, consulte [Solución de problemas del Agent][2].
 
-## Trabajando con el agente embebido {#working-with-the-embedded-agent}
+## Trabajar con el Agent integrado {#working-with-the-embedded-agent}
 
-El Agente contiene un entorno de Python embebido en `/opt/datadog-agent/embedded/`. Los binarios comunes como `python` y `pip` están contenidos dentro de `/opt/datadog-agent/embedded/bin/`.
+El Agent contiene un entorno de Python integrado en `/opt/datadog-agent/embedded/`. Los binarios comunes como `python` y `pip` se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
 
-Consulte las instrucciones sobre cómo [agregar paquetes al agente embebido][3] para más información.
+Consulte las instrucciones sobre cómo [agregar paquetes al Agent integrado][3] para obtener más información.
 
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -162,3 +162,4 @@ Consulte las instrucciones sobre cómo [agregar paquetes al agente embebido][3] 
 [8]: https://docs.datadoghq.com/es/agent/configuration/proxy/
 [9]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [10]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

@@ -2,96 +2,110 @@
 aliases:
 - /fr/opentelemetry/agent/
 further_reading:
+- link: https://learn.datadoghq.com/courses/using-ddot
+  tag: Centre d'apprentissage
+  text: Distribution Datadog du collecteur OpenTelemetry
+- link: https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/
+  tag: Blog
+  text: Instrumentez et surveillez les flux d'intégration Boomi avec OpenTelemetry
+    et Datadog
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog LLM Observability prend en charge nativement les conventions sémantiques
-    OpenTelemetry GenAI
+  text: Datadog LLM Observability prend nativement en charge les conventions sémantiques
+    GenAI d'OpenTelemetry.
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
   text: Centralisez et gérez votre pipeline OpenTelemetry avec la passerelle DDOT
 - link: https://www.datadoghq.com/blog/datadog-distribution-otel-collector/
   tag: Blog
-  text: Unifiez OpenTelemetry et Datadog avec le Collecteur DDOT
-- link: https://learn.datadoghq.com/courses/using-ddot
-  tag: Centre d'apprentissage
-  text: Utilisation de la distribution Datadog du Collecteur OpenTelemetry
-title: Distribution Datadog du Collecteur OpenTelemetry
+  text: Unifiez OpenTelemetry et Datadog avec le collecteur DDOT
+- link: https://www.datadoghq.com/architecture/monitoring-kubernetes-with-datadog-distribution/
+  tag: Architecture Center
+  text: Surveillance de Kubernetes avec la distribution Datadog du collecteur OpenTelemetry
+    (DDOT)
+title: Distribution Datadog du collecteur OpenTelemetry
 ---
-{{< callout btn_hidden="true" >}}
-Le Collecteur DDOT pour Kubernetes est <strong>Généralement Disponible</strong>. Vous pouvez commencer en suivant les <a href="#get-started">instructions ci-dessous</a>.
-<br><br>
-Le déploiement du Collecteur DDOT sur des hôtes bare-metal et des machines virtuelles basées sur Linux est <strong>en Aperçu</strong>. Pour commencer, suivez la <a href="/opentelemetry/setup/ddot_collector/install/linux">documentation Linux</a>.
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
+La configuration à distance pour le collecteur DDOT est <strong>en version préliminaire</strong>. Utilisez ce formulaire pour demander l'accès.
 {{< /callout >}}
 
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La distribution Datadog du Collecteur OpenTelemetry (DDOT) est une solution open source qui combine la flexibilité d'OpenTelemetry (OTel) avec les capacités d'observabilité complètes de Datadog. Cette solution intégrée comprend :
+La distribution Datadog du collecteur OpenTelemetry (DDOT) est une solution open source qui combine la flexibilité d'OpenTelemetry (OTel) avec les capacités d'observabilité complètes de Datadog. Cette solution intégrée comprend :
 
-- Un ensemble sélectionné de [composants OpenTelemetry](#included-components) optimisés pour la performance et la fiabilité avec Datadog, avec la possibilité d'ajouter des composants supplémentaires de votre choix
-- Des capacités complètes de collecte et de traitement des données de l'Agent Datadog pour une intégration transparente et un suivi robuste, y compris le support de l'[Automatisation de Flotte Datadog][9] pour le Collecteur DDOT (voir [Avantages clés](#key-benefits))
+- Un ensemble sélectionné de [composants OpenTelemetry](#included-components) optimisés pour les performances et la fiabilité avec Datadog, avec la possibilité d'ajouter des composants supplémentaires de votre choix
+- Fonctionnalités complètes de collecte et de traitement des données de Datadog Agent pour une intégration transparente et une surveillance robuste, incluant la prise en charge de [Datadog Fleet Automation][9] pour le collecteur DDOT (voir [Avantages clés](#key-benefits))
 - [Composants Datadog personnalisés](#custom-datadog-components) conçus pour offrir la meilleure expérience d'intégration
 
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Aperçu de l'architecture pour le Collecteur DDOT, qui est intégré dans l'Agent Datadog." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Présentation de l'architecture du collecteur DDOT, qui est intégré au Datadog Agent." style="width:100%;" >}}
 
 ## Avantages clés {#key-benefits}
 
-Le Collecteur DDOT offre :
+Le collecteur DDOT offre :
 
-### Une observabilité complète {#comprehensive-observability}
+### Observabilité complète {#comprehensive-observability}
 
-- Accès {{< translate key="integration_count" >}} Intégrations Datadog, [Surveillance des conteneurs en direct][3], [Surveillance du réseau cloud][7], et [Surveillance des services universels][5] (avec eBPF) et plus encore
-- Exploitez les intégrations apportées par la communauté OpenTelemetry pour collecter la télémétrie au format natif du protocole OpenTelemetry (OTLP)
-- Contrôlez vos données OTLP avec les capacités de traitement et de routage du Collecteur
+- Accès {{< translate key="integration_count" >}} Intégrations Datadog, [Live Container Monitoring][3], [Cloud Network Monitoring][7] et [Universal Service Monitoring][5] (avec eBPF) et plus encore
+- Tirez parti des intégrations fournies par la communauté OpenTelemetry pour collecter la télémétrie au format natif OpenTelemetry Protocol (OTLP)
+- Contrôlez vos données OTLP grâce aux capacités de traitement et de routage du collecteur
 
-### Gestion de flotte simplifiée {#simplified-fleet-management}
+### Gestion de parc simplifiée {#simplified-fleet-management}
 
-- Gérez à distance des flottes de Collecteurs DDOT avec [Automatisation de flotte Datadog][9]
+- Gérez à distance des parcs de collecteurs DDOT avec [Datadog Fleet Automation][9]
 - Obtenez une visibilité sur l'ensemble de votre configuration, de vos dépendances et de votre environnement d'exécution
-- Accélérez votre intégration grâce à l'enrichissement de balisage prêt à l'emploi pour les données OTLP, activant automatiquement [unified service tagging][1]
+- Intégrez-vous plus rapidement grâce à l'enrichissement des tags prêt à l'emploi pour les données OTLP, activant automatiquement le [unified service tagging][1]
 
 ### Fiabilité et ressources d'entreprise {#enterprise-reliability-and-resources}
 
-- Bénéficiez des pratiques de sécurité robustes de Datadog, y compris des analyses et des scans de vulnérabilité réguliers
-- Accédez à l'équipe de support mondial de Datadog pour obtenir de l'aide lors de l'intégration et du dépannage
+- Bénéficiez des pratiques de sécurité robustes de Datadog, notamment des analyses et des scans de vulnérabilité réguliers
+- Accédez à l'équipe de support mondiale de Datadog pour obtenir de l'aide concernant l'intégration et le dépannage
 
 ## Composants inclus {#included-components}
 
 <div class="alert alert-info">
-  <strong>Besoin de composants OpenTelemetry supplémentaires&nbsp;?</strong> Si vous avez besoin de composants au-delà de ceux inclus dans le package par défaut, suivez <a href="/opentelemetry/setup/ddot_collector/custom_components">Utiliser des composants OpenTelemetry personnalisés</a> pour étendre les capacités de l'Agent Datadog. Pour une liste des composants inclus par défaut, consultez la section suivante <a href="#opentelemetry-collector-components">Les composants du Collecteur OpenTelemetry</a>.
+  <strong>Besoin de composants OpenTelemetry supplémentaires?</strong> Si vous avez besoin de composants autres que ceux inclus dans le package par défaut, suivez <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> pour étendre les capacités de Datadog Agent. Pour obtenir une liste des composants inclus par défaut, consultez la section suivante <a href="#opentelemetry-collector-components">Composants du collecteur OpenTelemetry</a>.
 </div>
 
-### Versions du Collecteur OpenTelemetry {#opentelemetry-collector-versions}
+### Versions du collecteur OpenTelemetry {#opentelemetry-collector-versions}
 
-Le tableau suivant montre quelles versions du Collecteur OpenTelemetry sont incluses dans chaque version DDOT :
+Le tableau suivant indique les versions du collecteur OpenTelemetry incluses dans chaque version de DDOT :
 
 | Version DDOT | Version bêta | Version stable |
-|---|---|---|
-| 7.78.0 | v0.147.0 | v1.53.0 |
-| 7.77.0 | v0.145.0 | v1.51.1-0.20260205185216-81bc641f26c0 |
-| 7.76.0 | v0.144.0 | v1.50.0 |
-| 7.75.0 | v0.142.0 | v1.48.0 |
-| 7.74.0 | v0.140.0 | v1.46.0 |
-| 7.73.0 | v0.138.0 | v1.44.0 |
-| 7.72.0 | v0.136.0 | v1.42.0 |
-| 7.71.0 | v0.133.0 | v1.39.0 |
-| 7.70.0 | v0.131.0 | v1.37.0 |
-| 7.69.0 | v0.129.0 | v1.35.0 |
+|--------------|--------------|----------------|
+| 7.82.x       | v0.155.0     | v1.61.0        |
+| 7.81.x       | v0.154.0     | v1.60.0        |
+| 7.80.x       | v0.152.0     | v1.58.0        |
+| 7.79.x       | v0.150.0     | v1.56.0        |
+| 7.78.x       | v0.147.0     | v1.53.0        |
+| 7.77.x       | v0.145.0     | v1.51.0        |
+| 7.76.x       | v0.144.0     | v1.50.0        |
+| 7.75.x       | v0.142.0     | v1.48.0        |
+| 7.74.x       | v0.140.0     | v1.46.0        |
+| 7.73.x       | v0.138.0     | v1.44.0        |
+| 7.72.x       | v0.136.0     | v1.42.0        |
+| 7.71.x       | v0.133.0     | v1.39.0        |
+| 7.70.x       | v0.131.0     | v1.37.0        |
+| 7.69.x       | v0.129.0     | v1.35.0        |
 
 ### Niveaux de support {#support-levels}
 
-Pour des détails sur Datadog, la communauté et le support des composants personnalisés, voir [Niveaux de support][57] sur la page de compatibilité.
+Pour plus de détails sur le support de Datadog, de la communauté et des composants personnalisés, consultez les [Niveaux de support][57] sur la page Compatibilité.
 
-### Composants du Collecteur OpenTelemetry {#opentelemetry-collector-components}
+### Composants du collecteur OpenTelemetry {#opentelemetry-collector-components}
 
-Par défaut, le Collecteur DDOT est livré avec les composants suivants du Collecteur. Vous pouvez également voir la liste au format [YAML][11].
+Par défaut, le collecteur DDOT est fourni avec les composants du collecteur suivants. Vous pouvez également consulter la liste au [format YAML][11].
 
 {{% collapse-content title="Récepteurs" level="p" %}}
 
+- [dockerstatsreceiver][58] (disponible depuis la version 7.56.0)
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [jaegerreceiver][19]
+- [k8sobjectsreceiver][59] (disponible depuis la version 7.56.0)
+- [kubeletstatsreceiver][60] (disponible depuis la version 7.56.0)
 - [otlpreceiver][20]
+- [podmanreceiver][61] (disponible depuis la version 7.56.0)
 - [prometheusreceiver][21]
 - [receivercreator][22]
 - [zipkinreceiver][23]
@@ -111,7 +125,7 @@ Par défaut, le Collecteur DDOT est livré avec les composants suivants du Colle
 - [probabilisticsamplerprocessor][32]
 - [resourcedetectionprocessor][33]
 - [resourceprocessor][34]
-- routingprocessor (deprecated and removed in v7.71.0; use the [routingconnector][56] instead)
+- routingprocessor (obsolète et supprimé dans la version 7.71.0; utilisez plutôt le [routingconnector][56])
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
@@ -139,57 +153,59 @@ Par défaut, le Collecteur DDOT est livré avec les composants suivants du Colle
 
 {{% collapse-content title="Extensions" level="p" %}}
 
+- [datadogextension][62] (disponible depuis la version 7.72.0)
 - [healthcheckextension][46]
-- [observer][47]
+- [observateur][47]
 - [pprofextension][48]
+- [storage/filestorage][63] (disponible depuis la version 7.56.0)
 - [zpagesextension][49]
 
 {{% /collapse-content %}}
 
-### Composants personnalisés Datadog {#custom-datadog-components}
+### Composants Datadog personnalisés {#custom-datadog-components}
 
 En plus des composants OpenTelemetry standard, Datadog fournit et maintient les composants personnalisés suivants :
 
 {{% collapse-content title="Composants Datadog" level="p" %}}
 
-- [Infrastructure Attribute Processor][50] : Un composant OpenTelemetry qui attribue automatiquement [Kubernetes tags][53] à la télémétrie OTLP (métriques, traces et logs) émise par un pod ou un conteneur individuel au sein d'un pod. Ce composant permet [unified service tagging][54] et la corrélation de la télémétrie pour la surveillance des environnements Kubernetes.
+- [Processeur d'attributs d'infrastructure][50] : un composant processeur OpenTelemetry qui attribue automatiquement des [tags Kubernetes][53] à la télémétrie OTLP (métriques, traces et logs) émise par un pod ou un conteneur individuel au sein d'un pod. Ce composant permet le [unified service tagging][54] et la corrélation de télémétrie pour la surveillance des environnements Kubernetes.
 
-- [Converter][51] : Un composant convertisseur OpenTelemetry qui améliore les configurations fournies par l'utilisateur. Il offre une API pour retourner à la fois les configurations originales et améliorées, vérifiant automatiquement les erreurs de configuration connues pour réduire les erreurs. Cela garantit une intégration transparente des configurations existantes du Collecteur OpenTelemetry avec l'Agent.
+- [Converter][51] : Un composant convertisseur OpenTelemetry qui améliore les configurations fournies par l'utilisateur. Il offre une API pour renvoyer à la fois les configurations originales et améliorées, en vérifiant automatiquement les erreurs de configuration connues pour réduire les erreurs. Cela garantit une intégration transparente des configurations existantes du collecteur OpenTelemetry avec l'Agent.
 
-- [DD Flare Extension][52] : Un composant d'extension OpenTelemetry pour générer l'Agent Flare, qui contient des informations de diagnostic provenant à la fois du Collecteur DDOT et de l'Agent à des fins de dépannage.
+- [DD Flare Extension][52] : Un composant d'extension OpenTelemetry pour générer DD Agent Flare, qui contient des informations de diagnostic provenant à la fois du collecteur DDOT et de l'Agent à des fins de dépannage.
 
 {{% /collapse-content %}}
 
-## Commencer {#get-started}
+## Démarrez {#get-started}
 
-Que vous soyez nouveau sur Datadog ou déjà familier avec OpenTelemetry, les guides suivants vous aideront à commencer en fonction de votre situation spécifique.
+Que vous soyez nouveau sur Datadog ou déjà familier avec OpenTelemetry, les guides suivants vous aident à démarrer en fonction de votre situation spécifique.
 
 ### Démarrage rapide avec le package Agent par défaut {#quick-start-with-the-default-agent-package}
 
-Le package Agent par défaut de Datadog comprend le Collecteur DDOT avec un [ensemble sélectionné de composants OpenTelemetry inclus](#included-components), conçu pour répondre à la plupart des besoins dès le départ. Ce guide est adapté si vous êtes :
+Le package Datadog Agent par défaut inclut un DDOT Collector avec un [ensemble sélectionné de composants OpenTelemetry inclus](#included-components) conçus pour répondre à la plupart des besoins dès la prise en main. Ce guide est adapté si :
 
-- Mise en place de la surveillance depuis le début sans avoir besoin de composants OpenTelemetry en dehors des [composants inclus](#included-components)
-- Utilisation de l'Agent Datadog et souhaitant tester la fonctionnalité OpenTelemetry avec les composants inclus
-- Transition de l'OpenTelemetry Collector vers l'Agent Datadog sans nécessiter de composants au-delà de ceux inclus par défaut
-- (Optionnel) Si vous avez besoin de composants OpenTelemetry au-delà de ceux fournis dans le package par défaut, suivez [Utiliser des composants OpenTelemetry personnalisés][2] pour étendre les capacités de l'Agent Datadog.
+- Vous configurez la surveillance à partir de zéro sans avoir besoin de composants OpenTelemetry en dehors des [composants inclus](#included-components)
+- Vous utilisez Datadog Agent et souhaitez tester la fonctionnalité OpenTelemetry avec les composants inclus
+- Vous effectuez une transition du collecteur OpenTelemetry vers Datadog Agent sans avoir besoin de composants au-delà de ceux inclus par défaut
+- (Facultatif) Si vous avez besoin de composants OpenTelemetry au-delà de ce qui est fourni dans le package par défaut, suivez [Utiliser des composants OpenTelemetry personnalisés][2] pour étendre les capacités de Datadog Agent.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/install/kubernetes" >}}Démarrage rapide avec le package Agent par défaut{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Migrer de l'OpenTelemetry Collector vers le Datadog Agent {#migrate-from-opentelemetry-collector-to-datadog-agent}
+### Migrez du collecteur OpenTelemetry vers Datadog Agent {#migrate-from-opentelemetry-collector-to-datadog-agent}
 
-Ce guide vous aide à migrer d'une configuration existante d'OpenTelemetry Collector vers le Datadog Agent, y compris dans les scénarios où l'ajout de composants OpenTelemetry est nécessaire. Ce guide est adapté si vous êtes :
+Ce guide vous aide à migrer d'une configuration de collecteur OpenTelemetry existante vers Datadog Agent, y compris dans les scénarios où vous avez besoin de composants OpenTelemetry supplémentaires. Ce guide est adapté si :
 
-- Transition de l'OpenTelemetry Collector tout en préservant votre configuration existante
+- Transition du collecteur OpenTelemetry tout en préservant votre configuration existante
 - Migration de vos configurations OpenTelemetry existantes pour maintenir la continuité
-- (Optionnel) Si vous avez besoin de composants OpenTelemetry au-delà de ceux fournis dans le package par défaut, suivez [Utiliser des composants OpenTelemetry personnalisés][2] pour étendre les capacités du Datadog Agent
+- (Facultatif) Si vous avez besoin de composants OpenTelemetry au-delà de ce qui est fourni dans le package par défaut, suivez [Utiliser des composants OpenTelemetry personnalisés][2] pour étendre les capacités de Datadog Agent
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/guide/migrate/ddot_collector" >}}Migrer de l'OpenTelemetry Collector vers le Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/migrate/ddot_collector" >}}Migrez du collecteur OpenTelemetry vers Datadog Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -242,3 +258,9 @@ Ce guide vous aide à migrer d'une configuration existante d'OpenTelemetry Colle
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
 [57]: /fr/opentelemetry/compatibility/#support-levels
+[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/README.md
+[59]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sobjectsreceiver/README.md
+[60]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kubeletstatsreceiver/README.md
+[61]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/podmanreceiver/README.md
+[62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
+[63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md
