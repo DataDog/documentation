@@ -123,13 +123,11 @@ Map status is based on the following network signals:
 | End-to-end latency | Network Path | The latency between the source and the destination. |
 | Packet loss | Network Path | The percentage of packets that do not reach the destination. |
 
-The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status.
+The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal. A resource or connection with no issue detected is not necessarily healthy.
 
 <!-- TODO: Confirm the signals that determine status (including whether throughput affects status), and the Network Path signal definitions. -->
 
 Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
-
-A missing value does not mean that the resource is healthy.
 
 ## Navigate the L1/L7 Map
 
