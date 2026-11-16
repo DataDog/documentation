@@ -203,7 +203,7 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 ## What Datadog changes on a Lambda function
 
-<div class="alert alert-warning">Lambda instrumentation writes to your functions. Datadog updates the configuration of every function the rule covers: it adds layers, sets environment variables, and, depending on the runtime, changes the handler or sets an execution wrapper. The Datadog extension and tracing layer run inside your function, so they add memory use, CPU time, and cold start duration to every invocation. Datadog does not change a function's memory size or timeout, so a function that has little headroom can run out of memory or time out after it is instrumented.</div>
+<div class="alert alert-warning">Lambda instrumentation writes to your functions. Datadog updates the configuration of every function the rule covers: it adds layers, sets environment variables, and, depending on the runtime, changes the handler or sets an execution wrapper. The Datadog extension and tracing layer run inside your function, so they add memory use and CPU time to every invocation, and add to cold start duration. Datadog does not change a function's memory size or timeout, so a function that has little headroom can run out of memory or time out after it is instrumented.</div>
 
 ### Functions with low memory
 
