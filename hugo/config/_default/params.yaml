@@ -255,6 +255,7 @@ unsupported_sites:
   bits_investigation: [gov,gov2]
   bits_release: [gov, gov2]
   bits_remediation: [gov,gov2]
+  byoc-apm: [gov,gov2]
   byoc-logs: [gov,gov2]
   byoti: [gov,gov2]
   case_management: [gov2]
