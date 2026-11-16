@@ -83,7 +83,7 @@ If profiles appear for some workloads but not for a specific process:
 - Make sure the workload runs on a node where the Full-Host Profiler DaemonSet is scheduled.
 - Make sure the process runs long enough to be sampled and exported. Short-lived processes might not appear immediately.
 - Set `OTEL_SERVICE_NAME` or `DD_SERVICE` on the workload so profiles appear under the expected service. If neither environment variable is set, the Full-Host Profiler infers the service name from the binary name, such as `java` or `python` for interpreted workloads.
-- Set `DD_ENV` and `DD_VERSION` for richer filtering in the Datadog Profiler UI. Support for equivalent metadata from `OTEL_RESOURCE_ATTRIBUTES` is in progress.
+- Set `DD_ENV` and `DD_VERSION` for richer filtering in the Datadog Profiler UI.
 
 ## Function names are missing or hard to read
 
