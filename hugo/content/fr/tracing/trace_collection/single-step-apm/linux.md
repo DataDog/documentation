@@ -66,26 +66,19 @@ Copiez ensuite la commande générée et exécutez-la.
 
 ### Installation d'un Datadog Agent existant {#existing-agent-installation}
 
-Si vous avez déjà installé le Datadog Agent, réexécutez la commande d'installation du Datadog Agent depuis [Installation d'un nouveau Datadog Agent](#new-agent-installation) sur le host. La commande met à jour le Datadog Agent existant et active SSI.
+Si vous avez déjà installé un Datadog Agent, activez SSI à distance depuis Datadog. Vous n'avez pas besoin d'exécuter des commandes sur chaque hôte.
 
-Sinon, utilisez Fleet Automation pour activer SSI depuis Datadog :
+1. Dans Datadog, accédez à [**APM > Instrument a Service**][21].
 
-1. Dans Datadog, accédez à [**Fleet Automation > Configuration**][21].
-1. Cliquez sur {{< ui >}}Configure Agents{{< /ui >}}.
-1. Appliquez des filtres pour sélectionner les agents que vous souhaitez configurer, puis cliquez sur **Suivant**.
+1. Sous {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, sélectionnez {{< ui >}}Deploy on existing hosts{{< /ui >}} pour instrumenter vos services à distance via l'Agent Datadog.
 
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="L'écran de filtrage des agents dans Fleet Automation, avec des options pour définir le périmètre par environnement, système d'exploitation et nom de host" style="width:100%;" >}}
+1. Sous {{< ui >}}Which hosts should we instrument?{{< /ui >}}, utilisez les filtres de portée ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) pour affiner la sélection des hôtes. Sélectionnez ensuite, dans l'onglet {{< ui >}}Eligible for deployment{{< /ui >}}, les Agents sur lesquels vous souhaitez instrumenter vos services. Les hôtes qui ne peuvent pas être instrumentés apparaissent dans l'onglet {{< ui >}}Excluded from deployment{{< /ui >}}.
 
-1. Cliquez sur la tuile {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}, puis cliquez sur {{< ui >}}Next{{< /ui >}}.
+1. Dans {{< ui >}}Configure SDKs installation{{< /ui >}}, cliquez sur {{< ui >}}Yes{{< /ui >}} pour que Datadog installe automatiquement les SDK de tracing. Pour fixer des versions précises des SDK plutôt que leur dernière version, développez {{< ui >}}Customize library versions{{< /ui >}}.
 
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="L'écran de sélection de produit dans Fleet Automation, affichant la tuile Application Performance Monitoring (APM)" style="width:80%;" >}}
+1. Dans {{< ui >}}Configure rollout strategy{{< /ui >}}, choisissez le pourcentage d'Agents sur lesquels effectuer le déploiement à la fois. Datadog affiche les étapes correspondantes et une estimation de la durée. Les déploiements se mettent automatiquement en pause si trois Agents consécutifs échouent ou si les échecs atteignent 10 % du total. Vous pouvez relancer le déploiement plus tard.
 
-1. Dans l'écran {{< ui >}}Configure SDKs Installation{{< /ui >}}, cliquez sur {{< ui >}}Yes{{< /ui >}} pour installer automatiquement les SDK. Sélectionnez {{< ui >}}Use latest version{{< /ui >}}, ou décochez pour spécifier des versions individuelles du SDK.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="L'écran de configuration de l'installation des SDK dans Fleet Automation, avec des options pour activer l'installation automatique des SDK et sélectionner les versions" style="width:60%;" >}}
-
-1. Cliquez sur **Next**.
-1. Vérifiez votre configuration et cliquez sur {{< ui >}}Deploy Configuration{{< /ui >}}.
+1. Dans {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, cochez {{< ui >}}Configuration Summary{{< /ui >}} (basculez entre {{< ui >}}Summary{{< /ui >}} et {{< ui >}}YAML{{< /ui >}}), puis cliquez sur {{< ui >}}Apply Instrumentation{{< /ui >}}.
 
 ## Vérifiez l'installation {#verify-the-installation}
 
@@ -191,7 +184,7 @@ Examinez les exemples suivants illustrant comment appliquer des règles d'instru
 
 {{< collapse-content title="Exemple 1 : Instrumenter tous les processus sauf certains spécifiques" level="h5" >}}
 
-Instrumenter tous les processus par défaut. Ajoutez des règles de blocage pour exclure les services qui ajouteraient du bruit sans valeur ajoutée, tels que les tâches cron d'analyse et les processeurs de lots Java.
+Instrumenter tous les processus par défaut. Ajoutez des règles de blocage pour exclure les services qui ajouteraient du bruit sans valeur ajoutée, tels que les jobs cron d'analyse et les processeurs de lots Java.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Deux règles d'instrumentation de blocage ciblant les conditions Répertoire de travail et Fichier de point d'entrée, avec une autorisation d'instrumentation par défaut" style="width:100%;" >}}
 
@@ -238,6 +231,6 @@ Si vous rencontrez des problèmes lors de l'activation d'APM avec SSI, consultez
 [18]: /fr/tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /fr/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: https://app.datadoghq.com/fleet/agent-management
+[21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services

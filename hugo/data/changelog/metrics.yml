@@ -165,3 +165,33 @@ entries:
       - EstimateMetricsOutputSeries
       - ListTagConfigurationByName
     title: Document estimate error responses and tag configuration 404 messages
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateHistoricalMetricsConfiguration
+      - CreateTagIndexingRule
+      - CreateTagIndexingRuleExemption
+      - DeleteHistoricalMetricsConfiguration
+      - DeleteTagIndexingRule
+      - DeleteTagIndexingRuleExemption
+      - GetHistoricalMetricsConfiguration
+      - GetMetricTagCardinalityDetails
+      - GetTagIndexingRule
+      - GetTagIndexingRuleExemption
+      - ListTagIndexingRuleExemptions
+      - ListTagIndexingRules
+      - ListTagIndexingRulesForMetric
+      - ReorderTagIndexingRules
+      - UpdateTagIndexingRule
+      - UpdateTagIndexingRuleExemption
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41668
+    operations:
+      - CreateTagConfiguration
+      - ListTagConfigurationByName
+      - ListTagConfigurations
+      - UpdateTagConfiguration
+    title: Accept native histogram types in metric tag configurations
