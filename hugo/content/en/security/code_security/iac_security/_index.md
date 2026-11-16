@@ -39,6 +39,10 @@ IaC Security integrates with your repositories to continuously scan for misconfi
 
 ## Key capabilities
 
+### Prioritize misconfigurations with runtime context
+
+IaC Security findings show the services related to the affected file and the runtime risks those services carry, such as **Service in Production** and **Service Exposed to Attacks**. A related service means the IaC file lives in that service's repository or deployment files; it does not confirm that the misconfiguration is live in that service. Use the **Runtime Context** and **Risks** facets to focus on findings tied to live, exposed services. See [Runtime Context for Static Findings](/security/code_security/runtime_context/).
+
 ### Review and fix violations in pull requests
 
 When a pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [Pull Request Comments][5].

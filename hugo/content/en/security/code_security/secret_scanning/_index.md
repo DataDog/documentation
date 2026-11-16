@@ -37,6 +37,10 @@ Diff-aware scanning, which is available for [Static Code Analysis][18], is not s
 
 ## Key capabilities
 
+### Prioritize secrets with runtime context
+
+Secret Scanning findings show the services that run the affected file and the runtime risks those services carry: **Service in Production**, **Privileged Access**, and **Publicly Accessible**. Use the **Runtime Context** and **Risks** facets to focus on secrets in live, exposed services. See [Runtime Context for Static Findings](/security/code_security/runtime_context/).
+
 ### Detect secrets in Git history
 
 Deleting a secret from a file does not remove it from the repository. The secret remains in earlier commits, where anyone with access to the repository can recover it.

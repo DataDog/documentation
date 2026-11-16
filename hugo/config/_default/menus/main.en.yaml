@@ -8550,11 +8550,16 @@ menu:
       url: /security/code_security/iac_security/custom_rules/guide/
       parent: code_security_iac_security
       weight: 100006
+    - name: Runtime Context
+      identifier: sec_code_sec_runtime_context
+      url: /security/code_security/runtime_context/
+      parent: code_security
+      weight: 6
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/pull_request_comments/
@@ -8599,12 +8604,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 7
+      weight: 8
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 8
+      weight: 9
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
