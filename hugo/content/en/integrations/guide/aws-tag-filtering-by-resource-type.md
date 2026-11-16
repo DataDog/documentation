@@ -20,7 +20,7 @@ Datadog is changing how AWS metric tag filters are stored and evaluated. Previou
 
 For most organizations, this change requires no action, and existing filters are preserved through the migration. A few cases change how specific metrics are scoped. For details, see the [Metric behavior changes](#metric-behavior-changes) section.
 
-As part of this change, the v1 AWS integration tag filtering API is deprecated. See the [Migrate off the v1 filtering API](#migrate-off-the-v1-filtering-api-and-the-tag_filters-field) section.
+As part of this change, the v1 AWS integration tag filtering API and the v2 `tag_filters` field are deprecated. For details, see the [Migrate off the v1 filtering API and the `tag_filters` field](#migrate-off-the-v1-filtering-api-and-the-tag_filters-field) section.
 
 ## Timeline
 
@@ -44,7 +44,7 @@ Most affected organizations see no change in collected metrics. To determine whe
 
 ## Metric behavior changes
 
-After resource-type scoping takes effect for your organization, your existing filters continue to apply, except in the following cases, where a metric can no longer be scoped the same way.
+After resource-type scoping takes effect for your organization, your existing filters continue to apply. The following cases are exceptions, because the affected metrics can no longer be scoped the same way.
 
 ### Step Functions account-level and service-integration metrics
 
@@ -89,7 +89,9 @@ Amazon DocumentDB and Amazon Neptune metrics resolve to the `rds` resource type,
 
 ## Filter term normalization
 
-When a legacy comma-separated filter moves to the new expression format, the commas become `AND` operators and each tag term is normalized to Datadog's standard tag format. Terms are lowercased, and characters that aren't allowed in tags, such as spaces, are converted to underscores. For example, the legacy filter `datadog:monitored,env:prod team` becomes `datadog:monitored AND env:prod_team`, where the space in `prod team` is converted to an underscore. The filter continues to match the same metrics; only its stored text changes. No action is required. For the full set of tag formatting rules, see [Getting Started with Tags][4].
+When a legacy comma-separated filter moves to the new expression format, the commas become `AND` operators and each tag term is normalized to Datadog's standard tag format. Terms are lowercased, and characters that aren't allowed in tags, such as spaces, are converted to underscores.
+
+For example, the legacy filter `datadog:monitored,env:prod team` becomes `datadog:monitored AND env:prod_team`. The filter continues to match the same metrics; only its stored text changes. For the full set of tag formatting rules, see [Getting Started with Tags][4].
 
 ## Migrate off the v1 filtering API and the `tag_filters` field
 
@@ -104,7 +106,7 @@ Alongside the v1 API, the `tag_filters` field in the v2 AWS metrics configuratio
 
 ### If you use Terraform
 
-If you manage AWS tag filters with the Datadog Terraform provider, no action is required for the API migration. Datadog Terraform provider version 4.30.0 and later supports resource-type tag filters through the `resource_type_tag_filters` block on the `datadog_integration_aws_account` resource. The `tag_filters` block is deprecated in favor of `resource_type_tag_filters`, and the two are mutually exclusive on an account. On earlier provider versions, your existing `tag_filters` configuration is left untouched and continues to apply until the v1 sunset on March 17, 2027, after which `tag_filters` no longer controls which metrics are filtered.
+If you manage AWS tag filters with the Datadog Terraform provider, no immediate action is required for the API migration. Datadog Terraform provider version 4.30.0 and later supports resource-type tag filters through the `resource_type_tag_filters` block on the `datadog_integration_aws_account` resource. The `tag_filters` block is deprecated in favor of `resource_type_tag_filters`, and the two are mutually exclusive on an account. On earlier provider versions, your existing `tag_filters` configuration is left untouched and continues to apply until the v1 sunset on March 17, 2027, after which `tag_filters` no longer controls which metrics are filtered.
 
 <div class="alert alert-warning">After resource-type scoping takes effect for your organization, your Terraform <code>tag_filters</code> configuration continues to control filtering until you make a manual change to the resource-type tag filters through the Datadog UI or v2 API. After that point, your Terraform <code>tag_filters</code> configuration no longer controls which metrics are filtered. To keep managing filters in Terraform, move your configuration to <code>resource_type_tag_filters</code>.</div>
 
@@ -113,6 +115,7 @@ If you manage AWS tag filters with the Datadog Terraform provider, no action is 
 1. Review your AWS metric tag filters on Step Functions, Amazon RDS, and AWS Lambda against the cases in the [Metric behavior changes](#metric-behavior-changes) section.
 2. Confirm that the metrics listed in the [Metric behavior changes](#metric-behavior-changes) section are collected or filtered the way you expect, and update any dashboards or monitors that rely on them.
 3. If you call the v1 filtering endpoint from scripts, CI jobs, or other tooling, move those calls to the [v2 AWS Integration API][1], or manage the filters in the [AWS integration configuration][2] instead.
+4. If you manage filters with Terraform, upgrade to provider version `4.30.0` or later and move your `tag_filters` configuration to `resource_type_tag_filters`.
 
 ## Need help?
 
