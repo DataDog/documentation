@@ -263,6 +263,7 @@ unsupported_sites:
   ci_visibility: [gov,gov2]
   cicd_optimization: [gov,gov2]
   cloudcraft_apm_overlay: [gov,gov2]
+  cloudcraft_logs_overlay: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]
   code_coverage: [gov,gov2]

@@ -14,13 +14,14 @@ further_reading:
 - link: "/logs/"
   tag: "Documentation"
   text: "Log Management"
+site_support_id: cloudcraft_logs_overlay
 ---
 
 ## Overview
 
 The Logs overlay shows logs from your cloud resources in the context of your Cloudcraft diagram. Use it to view the logs from a resource without leaving the architecture view.
 
-To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram. The overlay adds a pin to each supported resource that has logs. The pin shows the status of the resource's logs.
+To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram. The overlay adds a pin to each supported resource that has logs. If a resource has logs with more than one status, the pin shows the most severe status.
 
 ### Supported resource types
 
@@ -55,7 +56,10 @@ Enable Log Management in your Datadog organization. To start collecting logs, se
 
 ## Investigate logs
 
-To filter logs in the overlay, use the search bar. It uses the standard [log search syntax][2].
+The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. To investigate logs:
+
+1. In the search bar, enter a query to filter the logs. The search bar uses the standard [log search syntax][2].
+1. In the list of results, click a log to open the log side panel and see the details of that log.
 
 ## Further reading
 
