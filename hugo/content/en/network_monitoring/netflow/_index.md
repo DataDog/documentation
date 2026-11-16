@@ -94,7 +94,7 @@ Datadog enriches the IP addresses in your NetFlow data from the following source
 
 You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
+From the [{{< ui >}}IP Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
 To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For the full order, see [Application name assignment](#application-name-assignment).
 
@@ -128,7 +128,7 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
+In Network Devices settings, select {{< ui >}}Port Enrichment{{< /ui >}} under {{< ui >}}NetFlow{{< /ui >}}, then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
 
@@ -224,7 +224,7 @@ Datadog assigns each flow a single `application_name` attribute. The value comes
 6. [Default port enrichment](#default-port-enrichment) (Datadog port-to-protocol mapping)
 7. `unknown`, if no other source matches
 
-To view this priority order in Datadog, open the [{{< ui >}}Enrichment{{< /ui >}} settings page][10] and expand {{< ui >}}How application names are assigned{{< /ui >}}.
+To view this priority order in Datadog, open the [{{< ui >}}IP Enrichment{{< /ui >}} settings page][10] and expand {{< ui >}}How application names are assigned{{< /ui >}}.
 
 ## IP details
 
