@@ -241,7 +241,7 @@ If your cluster doesn't enforce NetworkPolicy resources, these values don't rest
 
 Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][10] to enable one.
 
-**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][11] and [usage details][12].
+**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. Each host emits these metrics, which might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][11] and [usage details][12].
 
 To send them, set the Collector metrics level to `normal` in your Collector configuration:
 
