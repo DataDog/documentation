@@ -123,7 +123,7 @@ See [Create an Application Load Balancer][20] for more information about Interne
 
 ### Amazon EC2 instance
 
-An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in either of the following cases:
+An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in any of the following cases:
 
 * **"Public subnet"-determined access** if all of the following are true:
 
@@ -147,9 +147,9 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in 
 ***OR***
 
 - **Reachability-path-determined access** if the Security Graph identifies a network reachability path connecting the instance to the internet through one of the following routes:
-  - Behind [AWS Global Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html).
-  - Behind [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) through a VPC Link to an internal load balancer.
-  - Behind [Amazon CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html), where the load balancer is restricted to CloudFront's IP list.
+  - Behind [AWS Global Accelerator][64].
+  - Behind [Amazon API Gateway][65] through a VPC Link to an internal load balancer.
+  - Behind [Amazon CloudFront][66], where the load balancer is restricted to CloudFront's IP list.
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
@@ -432,4 +432,6 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
 [62]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp
 [63]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview
-
+[64]: https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html
+[65]: https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
+[66]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html
