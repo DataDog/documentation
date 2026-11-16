@@ -224,7 +224,7 @@ The example values read `DD_API_KEY` from a Kubernetes Secret named `datadog-sec
    - Adapt the `DD_API_KEY` secret reference if you don't use the example `datadog-secret` Kubernetes Secret.
    - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][4].
    - Review the remaining pod settings, including resource requests and limits. For all supported values, see the [OpenTelemetry Collector Helm chart values][5].
-   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
+   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** (optional) later in this tab.
 2. In [`collector-config-values.yaml`][6]:
    - Review the OpenTelemetry Collector pipelines and Datadog export configuration.
    - Adapt it like any other [OpenTelemetry Collector configuration][7].
