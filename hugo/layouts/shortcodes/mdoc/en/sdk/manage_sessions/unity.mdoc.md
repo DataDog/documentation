@@ -4,4 +4,8 @@ The session sample rate controls the percentage of RUM sessions sent to Datadog.
 
 You can adjust the session sample rate, but Datadog recommends using [retention filters][1] to control retained volume.
 
+## Retrieve the session ID
+
+Retrieving the RUM session ID at runtime isn't available for the Unity SDK.
+
 [1]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
