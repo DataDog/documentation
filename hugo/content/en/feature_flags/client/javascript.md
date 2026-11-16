@@ -237,9 +237,11 @@ The web provider also supports these optional settings:
 | Option | Default | Use |
 | --- | --- | --- |
 | `trackExposures` | `true` | Send exposure events to the exposures intake. Available in version 2.3.0 and later. Replaces the deprecated `enableExposureLogging` option. To record exposures in your own data store, see [Record Feature Flag Exposures in Your Own Data Store][7]. |
-| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated flag evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
-| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `enableEvaluationTelemetryOptOutParameter` | `false` | In version `2.2.0` or later, honor the Boolean `dd_evaluation_telemetry_opt_out` context attribute. See [Flag evaluation opt-out](#flag-evaluation-opt-out). |
+| `experimentationOptOutMode` | `ExperimentationOptOutMode.Disabled` | In version `2.2.0` or later, select how to honor the `dd_experimentation_opt_out_at` context timestamp. See [Experimentation opt-out](#experimentation-opt-out). |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for flag evaluation telemetry. |
 | `initialFlagsConfiguration` | unset | Supply context-matching precomputed data as a fallback if fetching fails. See [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data). |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
@@ -399,6 +401,108 @@ The SDK sends the selection as `selected_flag_tags` and `selected_flag_key_patte
 
 Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `trackExposures: false`. This requires `@datadog/openfeature-browser` 2.3.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][7].
 
+## Control flag evaluation telemetry and experiment participation
+
+In `@datadog/openfeature-browser` version `2.2.0` or later, use separate controls to manage flag evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Flag Evaluation and Experimentation Opt-Out][9].
+
+### Flag evaluation opt-out
+
+Set `enableEvaluationTelemetryOptOutParameter` to `true` when you create the provider. Then set `dd_evaluation_telemetry_opt_out` to Boolean `true` in the subject's evaluation context:
+
+```javascript
+import { DatadogProvider } from '@datadog/openfeature-browser';
+import { OpenFeature } from '@openfeature/web-sdk';
+
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+  enableEvaluationTelemetryOptOutParameter: true,
+});
+
+await OpenFeature.setProviderAndWait(provider, {
+  targetingKey: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+});
+```
+
+Setting the attribute to `true` suppresses new flag evaluation events, aggregated evaluation counts, and automatic RUM flag annotations for the subject. Only Boolean `true` activates suppression. A missing attribute, `false`, or another type, such as the string `'true'`, does not activate suppression.
+
+The control does not change flag results or experiment participation. It does not suppress experiment exposures, customer hooks, or unrelated application telemetry. It does not remove queued events or existing RUM annotations.
+
+The attribute remains in assignment requests and exposure attributes. Targeting rules can use it, which can change assignments. Changing it follows the normal context refresh process and can produce another exposure under the existing deduplication rules.
+
+To resume flag evaluation telemetry, preserve the other context attributes and set the value to `false`:
+
+```javascript
+await OpenFeature.setContext({
+  ...OpenFeature.getContext(),
+  dd_evaluation_telemetry_opt_out: false,
+});
+```
+
+Flag evaluation opt-out is not a general consent system. Assignment requests and exposures can still contain subject data.
+
+### Experimentation opt-out
+
+Set `experimentationOptOutMode` when you create the provider. Your application records and stores the subject's preference timestamp in `dd_experimentation_opt_out_at`.
+
+| Mode | Behavior when a valid timestamp is present |
+| --- | --- |
+| `ExperimentationOptOutMode.Disabled` | Ignore the attribute. This is the default. |
+| `ExperimentationOptOutMode.Immediate` | Exclude the subject from all allocations that log experiment exposures, including holdouts. |
+| `ExperimentationOptOutMode.FutureExperimentsOnly` | Allow exposure-logging allocations activated strictly before the timestamp. Skip allocations activated at or after it, or without activation metadata. Holdouts use the same policy. |
+
+An allocation defines how targeting rules assign flag variants. Exclusion applies to control variants and 100% experiment allocations as well as other experiment variants. Evaluation continues through ordinary feature allocations in their existing order. If none match, the SDK returns the application default. Skipped allocations do not log exposures.
+
+```javascript
+import { DatadogProvider, ExperimentationOptOutMode } from '@datadog/openfeature-browser';
+import { OpenFeature } from '@openfeature/web-sdk';
+
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+  experimentationOptOutMode: ExperimentationOptOutMode.Immediate,
+});
+
+await OpenFeature.setProviderAndWait(provider, {
+  targetingKey: 'user-123',
+  // Use the subject's stored preference timestamp.
+  dd_experimentation_opt_out_at: '2026-10-19T12:00:00Z',
+});
+```
+
+Use `ExperimentationOptOutMode.FutureExperimentsOnly` to exclude experiments based on their activation time. This mode checks allocation activation time, not the subject's enrollment history. An older allocation can still assign the subject for the first time.
+
+Supply a valid timestamp in the format `YYYY-MM-DDTHH:mm:ss[.fraction]`, followed by `Z` or a numeric offset such as `-04:00`. For example, `2026-10-19T12:00:00Z` and `2026-10-19T08:00:00-04:00` represent the same instant. Comparisons retain nanosecond precision; fractional digits beyond nanoseconds are truncated. Empty strings, Boolean values, `null`, invalid dates, and timestamps without a timezone are invalid.
+
+With an enabled mode, an invalid timestamp prevents assignment requests. Flag evaluations return the application default with `INVALID_CONTEXT`.
+
+Both enabled modes apply immediately. A future timestamp does not schedule a preference change. In `Immediate` mode, any valid timestamp excludes the subject immediately. In `FutureExperimentsOnly` mode, a future cutoff still permits experiments activated before that cutoff.
+
+To update the preference, call `OpenFeature.setContext()` with the stored timestamp and the subject's other attributes. Keep `targetingKey` unchanged. To permit experimentation again, remove the attribute:
+
+```javascript
+const context = { ...OpenFeature.getContext() };
+delete context.dd_experimentation_opt_out_at;
+await OpenFeature.setContext(context);
+```
+
+With either enabled mode, context changes withhold previous assignments until matching assignments arrive. This also applies to subjects without an opt-out timestamp. Evaluations return the application default with `PROVIDER_NOT_READY` while waiting, including after a failed refresh. The provider rejects responses that do not confirm the requested opt-out policy.
+
+Experimentation opt-out does not suppress flag evaluation telemetry. Enable flag evaluation opt-out separately if both controls are needed. Immediate withdrawal can change a subject's experience during an experiment; account for this when interpreting experiment results.
+
+### Opt-out with application-managed configuration
+
+`DatadogCoreProvider` accepts both controls and applies experimentation exclusion locally to rules-based configuration. Datadog evaluation and RUM tracking hooks honor its flag evaluation telemetry policy; exposure hooks remain enabled.
+
+For precomputed configuration, pass the same `experimentationOptOutMode` to `fetchPrecomputedConfiguration` and the provider. Pass the same context, including opt-out attributes, to the fetch function and OpenFeature. Your application must fetch replacement assignments when the context changes. Precomputed experimentation opt-out requires backend support for the selected mode.
+
+See [Browser Rules-Based Evaluation][4] for configuration and tracking-hook setup.
+
 ## Advanced: application-managed configuration
 
 Use `DatadogCoreProvider` from `@datadog/openfeature-browser/rules-based` in SDK 2.0.0 and later only when your application needs to own configuration delivery or evaluate rules locally across context changes. Your application supplies and refreshes configuration with `setConfiguration()` and explicitly registers and manages any tracking hooks.
@@ -465,3 +569,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
 [7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 [8]: /feature_flags/guide/proxy_sdk_traffic/
+
+[9]: /feature_flags/concepts/opt_out/

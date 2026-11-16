@@ -35,7 +35,7 @@ No se aplica ninguna versión mínima del SDK de Datadog a la [API HTTP de Agent
 
 ## Instrumentación automática {#automatic-instrumentation}
 
-Las [integraciones de LLM][3] de Datadog completan partes de medios para las siguientes bibliotecas, sin necesidad de cambios de código por su parte.
+Habilite la [instrumentación automática][3] para capturar medios de las siguientes bibliotecas.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -44,12 +44,14 @@ Las [integraciones de LLM][3] de Datadog completan partes de medios para las sig
 | ----------- | -------------- | ------------------- |
 | Finalizaciones de chat de OpenAI | Contenido de entrada `input_audio` y audio de salida, incluida la transcripción de audio del modelo | >= 4.12.0 |.
 | API de Realtime de OpenAI | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | >= 4.13.0 |.
+| Amazon Nova 2 Sonic (`aws-sdk-bedrock-runtime`) | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | >= 4.17.0 |
+| ElevenLabs Agents (WebSocket) | Audio de entrada y salida de la conversación, transcripciones y llamadas a herramientas del cliente | >= 4.17.0 |
 | LiteLLM | Audio de entrada y salida, a través del formato de finalizaciones de chat de OpenAI | >= 4.12.0 |.
 | Finalizaciones de chat de OpenAI y API de respuestas | Imágenes codificadas en base64 en línea | >= 4.15.0 |.
 | Agentes de OpenAI | Imágenes codificadas en base64 en línea | >= 4.15.0 |.
 | Anthropic | Imágenes codificadas en base64 en línea | >= 4.15.0 |.
 
-Cada turno de una conversación de la API de Realtime de OpenAI genera su propio tramo de LLM. El audio sin procesar `pcm16` y G.711 se convierte a WAV para que se reproduzca en el navegador. Para desactivar la instrumentación de la API de Realtime, configure `DD_OPENAI_REALTIME_ENABLED=false`.
+Nova 2 Sonic y ElevenLabs requieren `ddtrace` 4.17 o posterior. Nova 2 Sonic también requiere Python 3.12+ y `aws-sdk-bedrock-runtime` 0.11.0+; ElevenLabs requiere `elevenlabs` 2.70.0+.
 
 El audio en las finalizaciones de chat transmitidas (`stream=True`) no se captura.
 
@@ -60,11 +62,16 @@ El audio en las finalizaciones de chat transmitidas (`stream=True`) no se captur
 | ----------- | -------------- | ------------------- |
 | Finalizaciones de chat de OpenAI | Contenido de entrada `input_audio` y audio de salida, incluida la transcripción de audio del modelo | v6: >= 6.7.0; v5: >= 5.118.0 |
 | Agentes de OpenAI | Audio de entrada y salida, a través del formato de finalizaciones de chat de OpenAI | v6: >= 6.7.0; v5: >= 5.118.0 |
+| OpenAI Realtime API | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | v6: >= 6.17.0; v5: >= 5.128.0 |
+| Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | v6: >= 6.22.0; v5: >= 5.133.0 |
+| ElevenLabs Agents (WebSocket) | Audio de entrada y salida de la conversación, transcripciones y llamadas a herramientas del cliente | Próximamente |
 
 El audio en las finalizaciones de chat transmitidas no se captura.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Conversación de voz en Agent Observability con una línea de tiempo de reproducción de audio, segmentos de habla del usuario y del Agent, indicadores de latencia de respuesta y transcripciones de turnos." caption="Reproducción de conversaciones de voz y transcripciones de turnos capturadas con instrumentación automática." style="width:100%;" >}}
 
 Integrations no obtienen imágenes referenciadas por una URL remota o un ID de archivo. Solo capturan las imágenes que la aplicación envía en línea como datos base64. Cuando una integración no puede capturar medios, registra un marcador de texto como `[image]` o `[audio]` en el mensaje.
 
@@ -250,7 +257,7 @@ El audio aparece como un reproductor, con el texto del mensaje mostrado junto a 
 
 Las imágenes se renderizan cuando el tipo MIME es uno de `image/png`, `image/jpeg`, `image/webp` o `image/gif`, y el tipo MIME declarado coincide con los bytes codificados. Las imágenes SVG no se renderizan. La visualización de traza no realiza solicitudes salientes, por lo que una imagen referenciada por una URL remota se muestra como texto en lugar de ser recuperada.
 
-El audio se reproduce a través del reproductor de audio nativo del navegador. Los contenedores admitidos incluyen `audio/wav`, `audio/mpeg`, `audio/ogg` y `audio/webm`. Los formatos sin procesar como `pcm16`, `g711_ulaw` y `g711_alaw` no se reproducen. Convierta el audio sin procesar a WAV antes de adjuntarlo. La integración de la API de Python OpenAI Realtime realiza esta conversión por usted.
+El audio se reproduce a través del reproductor de audio nativo del navegador. Los contenedores admitidos incluyen `audio/wav`, `audio/mpeg`, `audio/ogg` y `audio/webm`. Los formatos sin procesar como `pcm16`, `g711_ulaw` y `g711_alaw` no se reproducen. Convierta el audio sin procesar a WAV antes de adjuntarlo. Las integraciones automáticas de OpenAI Realtime API, Nova 2 Sonic y ElevenLabs convierten el audio sin procesar compatible a WAV.
 
 ## Límites y comportamiento {#limits-and-behavior}
 
