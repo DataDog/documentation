@@ -52,7 +52,7 @@ A remote configuration applies to all users and sessions initialized with its ID
 
 ## Permissions
 
-Remote configuration uses the same permissions as RUM applications. To enable, edit, or publish a configuration, you need the `RUM Apps Write` permission. For more information, see [Real User Monitoring permissions][1].
+Remote configuration uses the same permissions as RUM applications. To enable, edit, or publish a configuration, you need the `RUM Apps Write` permission. For more information, see [Real User Monitoring permissions][1]. If an application's access is restricted, only users with edit access to that application can enable, edit, or publish its remote configuration. See [Configure Permissions][4].
 
 ## Setup
 
@@ -255,3 +255,4 @@ Continue to [Additional Plugins and Integrations](/real_user_monitoring/setup/ad
 [1]: /account_management/rbac/permissions/#real-user-monitoring
 [2]: /remote_configuration/
 [3]: /account_management/audit_trail/
+[4]: /real_user_monitoring/administer_and_extend_rum/configure_permissions/

@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-By default, all users with the {{< ui >}}RUM Apps Write{{< /ui >}} permission can change an application's RUM configuration. Use granular access controls to limit which roles, teams, or users can edit a specific application. For organization-wide RUM permissions, see [RUM permissions][2].
+By default, all users with the {{< ui >}}RUM Apps Write{{< /ui >}} permission can change an application's RUM configuration. Use granular access controls to limit which roles, teams, or users can edit a specific application. Restrictions also apply to the application's [remote configuration][3]. For organization-wide RUM permissions, see [RUM permissions][2].
 
 ## Restrict access to an application
 
@@ -48,3 +48,4 @@ Continue to [Correlate RUM with Other Telemetry](/real_user_monitoring/administe
 
 [1]: /account_management/rbac/
 [2]: /account_management/rbac/permissions/#real-user-monitoring
+[3]: /real_user_monitoring/remote_configuration/
