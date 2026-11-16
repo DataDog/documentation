@@ -23,7 +23,7 @@ The RUM Browser SDK collects resources and assets for every RUM view (page load)
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
 ## Early data collection
-Starting with Browser SDK v7, XHR and Fetch requests and resources that occurred before the SDK initialized are collected automatically. Some of those early resources may be missing properties such as the status code.
+Starting with Browser SDK v7, the SDK automatically collects XHR and Fetch requests and resources that occur before it initializes. Some early resources can be missing properties, such as the status code.
 
 <div class="alert alert-danger">
   If you use <code>beforeSend</code>, properties associated with early requests can be undefined.
