@@ -109,7 +109,7 @@ See [Deploying the Full-Host Profiler][2] for the settings that apply to each de
 
 ## Relationship to OpenTelemetry
 
-The Full-Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF based profiling. It uses the [OpenTelemetry eBPF Profiler][1] and exports profile telemetry to Datadog through OTLP HTTP.
+The Full-Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF based profiling. It uses the [OpenTelemetry eBPF Profiler][1] and exports profile data to Datadog through OTLP HTTP.
 
 ### Deployment with DDOT or as a standalone Collector
 
