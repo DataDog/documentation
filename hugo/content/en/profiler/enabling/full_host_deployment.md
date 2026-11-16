@@ -423,7 +423,17 @@ If your Agent is configured to send profiles to multiple Datadog endpoints, the 
 
 ### Optional overrides
 
-Most bundled deployments don't need these settings. Use them to expose Full-Host Profiler health data, collect diagnostics, or follow instructions from Datadog Support. Set these in the Datadog Agent configuration for either the Datadog Helm chart or the Datadog Operator.
+Most bundled deployments don't need these settings. Use them to expose Full-Host Profiler health data, collect diagnostics, or follow instructions from Datadog Support. Set these in the Datadog Agent configuration for either the Datadog Helm chart or the Datadog Operator. For example, to enable health metrics:
+
+**Datadog Helm chart** (`values.yaml`):
+
+```yaml
+agents:
+  containers:
+    hostProfiler:
+      env:
+        - name: DD_HOSTPROFILER_HEALTH_METRICS_ENABLED
+          value: "true"
 
 #### Health metrics
 
