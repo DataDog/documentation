@@ -226,7 +226,7 @@ To tune what the extension collects, set the standard Datadog environment variab
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
 - **AWS integration setup**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], next to log and resource collection. Then choose how to install:
-  - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
+  - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs for EC2 and Lambda, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
   - **Install on all resources**: Select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear. For Lambda, this covers functions with at least 256 MB of memory. See [Functions with low memory](#functions-with-low-memory).
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
 
@@ -288,8 +288,8 @@ To remove all instrumentation from an AWS account:
 
 If the stack is already deleted, Datadog can't clean up, so remove the instrumentation yourself:
 
-- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, remove the Datadog layers, restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), and remove the Datadog environment variables or restore the values they had before. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
-- **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources Datadog created for EC2 instances: the API key secrets, the IAM roles and instance profiles, the `datadog-ec2-instrumenter-secrets` inline policy, and the Systems Manager document. On instances that already had an IAM role, also detach `AmazonSSMManagedInstanceCore` from the role if Datadog attached it. For the list, see [Created as needed, for EC2 instances][21].
+- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, and remove the Datadog environment variables or restore the values they had before. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
+- **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources Datadog created for EC2 instances: the API key secrets, the IAM roles and instance profiles, the `datadog-ec2-instrumenter-secrets` inline policy, the Systems Manager document, and the EventBridge rules in your other regions. On instances that already had an IAM role, Datadog may also have attached `AmazonSSMManagedInstanceCore` to it. Leave that policy attached if you're not sure, because Systems Manager needs it to reach the instance. For the list, see [Created as needed, for EC2 instances][21].
 
 ## Troubleshooting
 
@@ -318,6 +318,10 @@ AWS limits a function to five layers, and Datadog adds two layers, or one for OS
 ### A Lambda function uses a non-Datadog execution wrapper
 
 Java and .NET instrumentation sets `AWS_LAMBDA_EXEC_WRAPPER`. When a function already sets that variable to something other than the Datadog wrapper, Datadog skips the function rather than overwrite your wrapper. To instrument the function through the AWS integration, remove the custom wrapper from the function. If the function needs its own wrapper, instrument it yourself instead; see [Instrumenting AWS Lambda][18].
+
+### A Lambda function with less than 256 MB of memory is not instrumented
+
+New Lambda rules exclude these functions by default, so they appear as excluded rather than ineligible. To cover them, clear **Exclude low-memory functions** on the rule. See [Functions with low memory](#functions-with-low-memory) before you do.
 
 ### A Lambda function appears as ineligible
 
