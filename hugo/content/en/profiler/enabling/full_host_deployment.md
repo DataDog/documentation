@@ -155,7 +155,7 @@ The preview image is available in Datadog's production container registries. If 
 
 Apply the updated `DatadogAgent` custom resource through your usual workflow.
 
-The Full-Host Profiler infers most configuration from the Datadog Agent configuration. For optional overrides, see [Configuration for bundled deployments](#configuration-for-bundled-deployments).
+The Full-Host Profiler infers most configuration from the Datadog Agent configuration. For optional overrides, see the [Configuration for bundled deployments](#configuration-for-datadog-agent-deployments) section.
 
 After you apply the updated custom resource, the Operator rolls out a new Agent DaemonSet revision with the Full-Host Profiler sidecar. Wait for that rollout to complete before verifying profiles.
 
