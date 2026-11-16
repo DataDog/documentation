@@ -328,7 +328,7 @@ The example manifests read `DD_API_KEY` from a Kubernetes Secret named `datadog-
    - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][5].
    - Review the resource requests and limits under `spec.resources`.
    - Review the OpenTelemetry Collector configuration under `spec.config`. Adapt it like any other [OpenTelemetry Collector configuration][6].
-   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
+   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** (optional) later in this tab.
 3. Choose a network policy manifest:
    - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy.yaml`][7] by default.
    - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy.yaml`][8] instead.
