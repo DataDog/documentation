@@ -943,7 +943,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://opentelemetry.io/docs/platforms/kubernetes/helm/collector/
 [5]: https://kubernetes.io/docs/tasks/tools/#kubectl
-[12]: /opentelemetry/instrument/otel_sdks/
+[12]: /opentelemetry/instrument/upstream_otel_sdks/
 [14]: /getting_started/tagging/unified_service_tagging
 [52]: /getting_started/site/
 [54]: https://helm.sh
@@ -954,7 +954,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
-[66]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+[66]: /opentelemetry/instrument/dd_otel_sdks/otlp_trace_export/
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline

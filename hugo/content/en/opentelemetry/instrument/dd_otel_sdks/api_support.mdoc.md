@@ -2,6 +2,7 @@
 title: OpenTelemetry API Support
 description: "Use the OpenTelemetry API with Datadog SDKs to send traces, metrics, and logs to Datadog while maintaining vendor-neutral instrumentation."
 aliases:
+  - /opentelemetry/instrument/dd_sdks/api_support/
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
   - /opentelemetry/instrument/api_support/

@@ -335,7 +335,7 @@ View metrics from the Agent's Collector to monitor the Collector health.
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[7]: /opentelemetry/instrument/api_support
+[7]: /opentelemetry/instrument/dd_otel_sdks/api_support/
 [8]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [10]: /opentelemetry/correlate/

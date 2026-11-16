@@ -89,11 +89,12 @@ For more information, read [Feature Compatibility][9].
 
 ## Instrument your applications
 
-There are several ways to instrument your applications with OpenTelemetry and Datadog. Each approach provides different features and levels of vendor neutrality.
+Choose one SDK approach for each application process:
 
-- **Full OpenTelemetry**: Use the OpenTelemetry SDK and API for a vendor-neutral setup.
-- **OpenTelemetry API**: Use the OpenTelemetry API with Datadog's SDK implementation.
-- **OpenTelemetry instrumentation libraries**: Extend Datadog's observability to additional frameworks and technologies.
+- **[Upstream OpenTelemetry SDKs][11]**: Use the OpenTelemetry API, SDK, and instrumentation maintained by the OpenTelemetry project.
+- **[Datadog OpenTelemetry SDKs][12]**: Use a Datadog SDK with the OpenTelemetry API, or export traces from supported Datadog SDKs in OTLP format.
+
+Telemetry routing is a separate choice from SDK installation. Review what is already attached to each process before changing the SDK or export route, and avoid duplicate instrumentation.
 
 For more information, see [Instrument Your Applications][8].
 
@@ -150,3 +151,5 @@ For all available methods, see [Send OpenTelemetry Data to Datadog][7].
 [8]: /opentelemetry/instrument/
 [9]: /opentelemetry/compatibility/
 [10]: /opentelemetry/setup/otlp_ingest/
+[11]: /opentelemetry/instrument/upstream_otel_sdks/
+[12]: /opentelemetry/instrument/dd_otel_sdks/

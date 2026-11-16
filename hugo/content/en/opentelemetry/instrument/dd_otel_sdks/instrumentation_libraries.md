@@ -1,6 +1,7 @@
 ---
 title: Using OpenTelemetry Instrumentation Libraries with Datadog SDKs
 aliases:
+  - /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
   - /opentelemetry/interoperability/instrumentation_libraries
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

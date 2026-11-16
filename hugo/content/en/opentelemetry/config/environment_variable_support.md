@@ -309,6 +309,6 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [11]: https://opentelemetry.io/docs/specs/semconv/resource/#semantic-attributes-with-dedicated-environment-variable
 [12]: /tracing/trace_collection/library_config/_index
 [13]: https://opentelemetry.io/docs/specs/otel/protocol/exporter/
-[14]: /opentelemetry/instrument/api_support/
+[14]: /opentelemetry/instrument/dd_otel_sdks/api_support/
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
 [16]: /opentelemetry/guide/otlp_delta_temporality/
