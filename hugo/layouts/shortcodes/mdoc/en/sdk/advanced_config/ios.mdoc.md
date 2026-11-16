@@ -116,7 +116,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`.
 
 `trackSlowFrames`
-: Determines whether the SDK tracks slow frames for views.
+: Determines whether the SDK tracks slow frames for views. By default, this is set to `true`.
 
 `trackWatchdogTerminations`
 : Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
@@ -128,7 +128,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`][5] customized for your app.
 
 `urlSessionTracking`
-: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking][6]. The `trackResourceHeaders` parameter configures which HTTP headers are captured for resources.
+: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking][6]. The `trackResourceHeaders` parameter configures which HTTP headers are captured for resources. It's set to `.disabled` by default. Use `.defaults` to capture a default set of headers.
 
 `viewEventMapper`
 : The data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or Drop RUM Events][3].
