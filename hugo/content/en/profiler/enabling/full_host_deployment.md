@@ -125,7 +125,6 @@ spec:
       containers:
         host-profiler:
           # Required for current Datadog Operator versions.
-          # Future Operator versions are expected to configure the Full-Host
           # Profiler security context automatically.
           securityContext:
             allowPrivilegeEscalation: false
