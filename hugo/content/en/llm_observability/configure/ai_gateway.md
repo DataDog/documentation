@@ -176,6 +176,8 @@ Adding a resource to another access policy does not remove access granted by the
 
 For request fields, policy precedence, and verification examples, see [Control reasoning effort and fast mode][20].
 
+[20]: /llm_observability/configure/ai_gateway_reasoning/
+
 Access to a routing rule follows that rule's targets, so a change to the targets changes what its runners can reach. A routing rule that routes to another routing rule needs its own access. A request to `<PROVIDER_SLUG>/<MODEL_ID>` and a request to `router/<RULE_SLUG>` can be allowed or denied separately. Test both with the user or service account that sends them.
 
 ### Recommended setup
@@ -445,4 +447,3 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
-[20]: /llm_observability/configure/ai_gateway_reasoning/
