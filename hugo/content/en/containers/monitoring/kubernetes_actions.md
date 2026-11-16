@@ -8,10 +8,11 @@ further_reading:
 - link: "/account_management/teams/"
   tag: "Documentation"
   text: "Datadog Teams"
+site_support_id: kubernetes_actions
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Kubernetes Actions is in Preview. To request access, contact your Datadog account team.
+{{< callout url="https://www.datadoghq.com/product-preview/kubernetes-actions/" btn_hidden="false" header="Join the Preview!" >}}
+Kubernetes Actions is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 Kubernetes Actions lets you run actions on your Kubernetes resources from [Kubernetes Explorer][1]. Use these actions to fix an issue from the same page where you find it, without switching to `kubectl`.
@@ -21,7 +22,7 @@ You can run the following actions:
 - Delete a pod
 - Restart a deployment
 - Roll back a deployment
-- View a resource (pods, deployments, Argo Rollouts, and namespaces)
+- View the full manifest of a ConfigMap
 
 The Datadog Cluster Agent in your cluster runs each action. Datadog sends the action to the Cluster Agent's [Private Action Runner][2] as a signed task. [Remote Configuration][3] stays available as a second delivery channel.
 
@@ -34,7 +35,7 @@ The Datadog Cluster Agent in your cluster runs each action. Datadog sends the ac
 - The Datadog Agent running on your nodes. The Agent reports your pods to Datadog. Without it, actions on pods fail because Datadog can't find the pod.
 - [Kubernetes Explorer][4] enabled. Datadog uses it to find each resource and its `team` tag. Kubernetes Explorer is enabled by default in the Helm chart and the Operator.
 - A Datadog [API key][5]. Use the API key that your Agent uses. You don't need an application key.
-- Kubernetes Actions enabled for your Datadog organization. If the Kubernetes Actions permissions don't appear in the role editor, contact your Datadog account team.
+- Kubernetes Actions enabled for your Datadog organization. To request access, [sign up for the Preview][11].
 
 ### Cluster Agent versions
 
@@ -48,9 +49,16 @@ The Datadog Cluster Agent in your cluster runs each action. Datadog sends the ac
 
 Kubernetes Actions uses the following permissions:
 
-- **Kubernetes Actions Read**: View actions and their history.
-- **Kubernetes Actions Write**: Run actions.
+- **Kubernetes Actions Read**: View actions and their history. All users who run actions need this permission.
+- **Kubernetes Actions Write**: Run actions on resources that belong to one of the user's teams.
 - **Kubernetes Actions Admin**: Run actions on any resource, whatever its team. Grant this permission only to users who need it.
+
+To run an action, a user needs Kubernetes Actions Read and one of the following:
+
+- Kubernetes Actions Admin
+- Kubernetes Actions Write, and membership in the team that owns the resource. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section.
+
+If a user doesn't have the required permissions, the action is unavailable in Kubernetes Explorer. Hover over the action to see the permissions that it requires.
 
 The Datadog managed roles don't include Kubernetes Actions Write. To give users this permission, create a [custom role][6]:
 
@@ -70,7 +78,7 @@ To assign a resource to a team, add a `team` label set to the team **handle** (f
 | --- | --- |
 | Delete a pod | The pod. Add the label to the pod template of the deployment so that every pod gets it. |
 | Restart or roll back a deployment | The deployment. |
-| View a resource | The resource. |
+| View the full manifest of a ConfigMap | The ConfigMap. |
 
 For example, the following manifest lets members of the `my-team` team restart and roll back the `my-app` deployment and delete its pods:
 
@@ -314,6 +322,44 @@ You can stop sending actions through Remote Configuration. This option requires 
 - **Helm**: Set `datadog.kubernetesActions.communication.remoteConfiguration.enabled: false`.
 - **Operator**: Set `spec.features.kubernetesActions.communication.remoteConfiguration.enabled: false`.
 
+### Grant permission to view ConfigMap manifests
+
+To let users view the full manifest of a ConfigMap, the Cluster Agent needs to read ConfigMaps. This permission gives the Cluster Agent read access to all ConfigMaps in the cluster. Do this step only if your users need to see ConfigMap keys and values.
+
+1. Find the name of the Cluster Agent service account, as described in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section.
+
+1. Create a file named `datadog-kubernetes-actions-configmaps.yaml` with the following content. Replace `<SERVICE_ACCOUNT>` and `<NAMESPACE>` with your values.
+
+   ```yaml
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRole
+   metadata:
+     name: datadog-kubernetes-actions-configmaps
+   rules:
+     - apiGroups: [""]
+       resources: ["configmaps"]
+       verbs: ["get"]
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRoleBinding
+   metadata:
+     name: datadog-kubernetes-actions-configmaps
+   roleRef:
+     apiGroup: rbac.authorization.k8s.io
+     kind: ClusterRole
+     name: datadog-kubernetes-actions-configmaps
+   subjects:
+     - kind: ServiceAccount
+       name: <SERVICE_ACCOUNT>
+       namespace: <NAMESPACE>
+   ```
+
+1. Apply the file:
+
+   ```bash
+   kubectl apply -f datadog-kubernetes-actions-configmaps.yaml
+   ```
+
 ## Verify the setup
 
 1. Check that the Cluster Agent restarted with version 7.84.0 or later and is running:
@@ -351,12 +397,26 @@ You can stop sending actions through Remote Configuration. This option requires 
 
 Kubernetes Actions doesn't run actions on protected system namespaces, such as `kube-system`.
 
+### View the full manifest of a ConfigMap
+
+To limit the risk of storing sensitive data in Datadog, the Agent collects ConfigMap metadata only. The Agent removes the `data`, `binaryData`, and `managedFields` fields in your cluster, before it sends the ConfigMap to Datadog. To see the keys and values of a ConfigMap, request the full manifest from the Cluster Agent.
+
+Viewing the full manifest is a Kubernetes action. It uses the same permissions and team checks as the other actions.
+
+To view the full manifest of a ConfigMap:
+
+1. In [Kubernetes Explorer][1], click a ConfigMap to open its side panel.
+1. Click the {{< ui >}}YAML{{< /ui >}} tab.
+1. Click {{< ui >}}View Full Manifest{{< /ui >}}.
+
+If {{< ui >}}View Full Manifest{{< /ui >}} is unavailable, hover over it to see the permissions that you need.
+
 ## Troubleshooting
 
 | Issue | Cause | Solution |
 | --- | --- | --- |
-| Users can't run actions, or don't see the actions. | The user doesn't have the required permission. | Assign a role with the permissions. See the [Create a role with the Kubernetes Actions permissions](#create-a-role-with-the-kubernetes-actions-permissions) section. |
-| The Kubernetes Actions permissions don't appear in the role editor. | Kubernetes Actions isn't enabled for your organization. | Contact your Datadog account team. |
+| An action is unavailable in Kubernetes Explorer. | The user doesn't have the required permissions, or isn't a member of the team that owns the resource. | Hover over the action to see the permissions that it requires. See the [Create a role with the Kubernetes Actions permissions](#create-a-role-with-the-kubernetes-actions-permissions) section. |
+| The Kubernetes Actions permissions don't appear in the role editor. | Kubernetes Actions isn't enabled for your organization. | [Sign up for the Preview][11]. |
 | An action fails with `permission denied: failed to retrieve resource team tag: no pod found matching query` or `no deployment found`. | Datadog hasn't received the resource. The Datadog Agent isn't running on that node, or the resource is new. | Check that the Datadog Agent runs on each node. Wait a few minutes, and run the action again. |
 | An action fails with `permission denied: resource has no team tags`. | The resource has no `team` label. | Add a `team` label, and wait a few minutes. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section. |
 | An action fails with `permission denied: user is not a member of team(s)`. | The user isn't a member of the team on the resource. | Add the user to the team in the organization where they run the action, or correct the `team` label on the resource. |
@@ -365,7 +425,7 @@ Kubernetes Actions doesn't run actions on protected system namespaces, such as `
 | The Cluster Agent logs don't mention Kubernetes Actions. | The Cluster Agent is earlier than 7.84.0. | Upgrade the Cluster Agent. |
 | Actions stay in the **Pending** status. | The Cluster Agent isn't enrolled. | Do steps 1 and 2 in the [Verify the setup](#verify-the-setup) section. |
 | A rollback fails with `forbidden`. | The Cluster Agent can't read ReplicaSets. | Upgrade the Helm chart or the Operator, or follow the steps in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section. |
-| Viewing a resource fails with `forbidden` from Kubernetes. | The Cluster Agent can't read that resource type. | Bind a ClusterRole with the `get` verb on that resource type to the Cluster Agent service account. |
+| Viewing the full manifest of a ConfigMap fails with `forbidden`. | The Cluster Agent can't read ConfigMaps. | Follow the steps in the [Grant permission to view ConfigMap manifests](#grant-permission-to-view-configmap-manifests) section. |
 | Datadog rejects an action in a namespace such as `kube-system`. | Kubernetes Actions doesn't run actions on protected system namespaces. | No action is necessary. |
 
 ## Further reading
@@ -382,3 +442,4 @@ Kubernetes Actions doesn't run actions on protected system namespaces, such as `
 [8]: /account_management/users/
 [9]: /account_management/teams/
 [10]: https://app.datadoghq.com/actions/private-action-runners
+[11]: https://www.datadoghq.com/product-preview/kubernetes-actions/
