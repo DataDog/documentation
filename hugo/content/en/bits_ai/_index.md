@@ -37,9 +37,9 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
 
 In Datadog, Bits AI is the central place to work with Bits. From Bits AI, you can:
 
-- Chat with Bits
-- Review the work Bits does autonomously across your environment
-- Create custom automations
+- Chat with Bits to search and act across Datadog in natural language
+- Review and manage the work Bits does autonomously across your environment
+- Build custom automations that run agents on a schedule or in response to a trigger
 - Manage Bits AI settings and usage for your organization
 
 Learn about Bits AI pricing in [AI Credits][1].
@@ -54,7 +54,7 @@ For more information, see [Bits Chat][2].
 
 ## Autonomous Ops
 
-Autonomous Ops lets you assign Bits as the first on-call responder for your systems. When an issue occurs, Bits triages it and decides whether to handle the issue or hand it off to someone on your team.
+Bits Autonomous Operations (Autonomous Ops) lets you assign Bits as the first on-call responder for your systems. You define one or more scopes for Bits to watch. When an issue occurs in a scope, Bits triages it. Then, Bits decides whether to handle the issue or hand it off to someone on your team.
 
 For each issue, Bits:
 
@@ -67,9 +67,11 @@ For more information, see [Bits Autonomous Operations][8].
 
 ## Custom automations
 
-Custom automations are agents built with [Bits Agent Builder][10] that do a specific task. For each custom automation, you define the trigger or schedule, the agent instructions, and the tools that the agent can use.
+Custom automations are agents built with [Bits Agent Builder][10] that do a specific task.
 
 You can build a custom automation for almost any task in Datadog that requires an agent step. For example, a custom automation can send your team's Slack channel a daily summary of error rates for a service. Or, a custom automation can review the logs for each new security signal, decide if the signal is a false positive, then notify the team if the signal needs follow-up.
+
+To create and manage custom automations, go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Custom Automations{{< /ui >}}. From there, you can create automations, turn them on or off, review each automation run, and manage the agents that your automations use.
 
 <div class="alert alert-info">For a preconfigured agent that handles ongoing operational work, use <a href="#autonomous-ops">Autonomous Ops</a> instead of a custom automation.</div>
 
