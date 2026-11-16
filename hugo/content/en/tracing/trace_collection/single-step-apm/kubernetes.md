@@ -426,6 +426,13 @@ After the rules are deployed, restart the affected workloads for the changes to 
 
 #### How instrumentation rules are evaluated
 
+For each pod, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
+
+1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules that use the {{< ui >}}All clusters{{< /ui >}} targeting option. These rules apply to every eligible cluster, including clusters in cluster groups.
+
+If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+
 The following pods are not instrumented, even if they match an allow rule:
 
 - Pods in the `kube-system` namespace
@@ -434,13 +441,6 @@ The following pods are not instrumented, even if they match an allow rule:
 - Pods labeled `admission.datadoghq.com/enabled: "false"`
 
 Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For example, with {{< ui >}}Block everything else{{< /ui >}}, a pod with SDK annotations, or a workload whose `DatadogInstrumentation` resource enables APM, is still instrumented. For the full order, see the [Configuration precedence](?tab=datadoginstrumentationcrdv785#configuration-precedence) section.
-
-For the remaining pods, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
-
-1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
-1. Rules that use the {{< ui >}}All clusters{{< /ui >}} targeting option. These rules apply to every eligible cluster, including clusters in cluster groups.
-
-If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Supported Kubernetes attributes
 
