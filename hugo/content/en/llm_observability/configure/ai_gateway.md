@@ -250,6 +250,7 @@ When a rate limit in Enforce mode rejects a request, AI Gateway returns HTTP `42
 | `Retry-After` | Seconds until the request fits within the rate limit. |
 | `X-Ai-Gateway-Error-Code` | `gateway_rate_limit`. A provider `429` does not include this header. |
 | `X-Ai-Gateway-Ratelimit-Id` | The ID of the rate limit that rejected the request. |
+| `X-Ai-Gateway-Ratelimit-Window` | The longer rolling window that was exceeded, when applicable, such as `1h`. |
 | `X-Ai-Gateway-Ratelimit-Limit-<METRIC>` | The allowance that was exceeded. |
 | `X-Ai-Gateway-Ratelimit-Remaining-<METRIC>` | `0`. |
 | `X-Ai-Gateway-Ratelimit-Reset-<METRIC>` | Time until the request fits, for example `12s`. |
@@ -260,7 +261,7 @@ Clients that retry on `429` should wait for the `Retry-After` duration before th
 
 ### Monitor rate limit usage
 
-The rate limit list shows, for each rate limit, usage against its configured windows, its status, and the number of requests it limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
+The rate limit list shows rolling-minute usage and status for each rule. It also shows requests limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
 
 | Status | Meaning |
 |---|---|
@@ -272,6 +273,8 @@ The rate limit list shows, for each rate limit, usage against its configured win
 The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
 
 For longer windows, spend limits, independent allowances, and API verification steps, see [Set and Enforce AI Gateway Rate Limits][25].
+
+[25]: /llm_observability/configure/ai_gateway_rate_limits/
 
 ## Observe gateway activity {#observe-ai-gateway-activity}
 
@@ -445,5 +448,3 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
-
-[25]: /llm_observability/configure/ai_gateway_rate_limits/

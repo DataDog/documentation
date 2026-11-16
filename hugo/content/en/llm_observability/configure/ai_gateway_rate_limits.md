@@ -84,7 +84,7 @@ Send `x-dd-tag-project: <PROJECT_NAME>` on inference requests. To pool all proje
 
 Every matching rule applies. A request succeeds only when every matching enforced rule has capacity, including any shared ceiling above a per-value allowance.
 
-Tokens and cost are accounted for after responses complete. Requests in progress can therefore take usage above an allowance. A spend limit requires a usable model price; enforced spend limits reject requests to unpriced targets.
+Tokens and cost are accounted for after responses complete. Requests in progress can therefore take usage above an allowance. A spend limit requires a usable model price; enforced spend limits reject requests to unpriced targets with `rate_limit_pricing_unavailable`.
 
 ## Inspect usage and instances
 
@@ -111,6 +111,8 @@ Interpret the response metadata before treating an empty result as inactivity:
 - `usage_known: false` means usage was not read, rather than confirmed as zero.
 - `scope_restricted: true` means your permissions restrict the visible scope and instance details.
 - `truncated: true` means the summary does not cover every matching instance.
+
+The numeric request, token, and cost fields in usage and instance responses describe the rolling one-minute window. Do not interpret them as the usage for a longer window. For a longer-window rejection, inspect `X-Ai-Gateway-Ratelimit-Window` and `Retry-After`.
 
 See the [API reference][6] for query parameters and response fields.
 
