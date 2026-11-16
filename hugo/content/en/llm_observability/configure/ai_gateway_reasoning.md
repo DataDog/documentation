@@ -1,11 +1,15 @@
 ---
-title: Control reasoning effort and fast mode in AI Gateway
+title: Control Reasoning Effort and Fast Mode in AI Gateway
 description: Set maximum reasoning levels and fast-mode permissions in Datadog AI Gateway access policies, and verify allowed and refused requests.
 further_reading:
   - link: "/llm_observability/configure/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
 
 Use access policies to control which callers can request higher reasoning effort or premium fast mode. Model access, reasoning limits, and fast-mode permission are separate checks: access to a model does not grant every option that model offers.
 
@@ -19,12 +23,17 @@ Use access policies to control which callers can request higher reasoning effort
 ## Configure the policy
 
 1. Open [AI Gateway > Policies > Access policies][2].
-2. Create or edit a policy, select the models or routing rules, and grant the intended users, teams, or service accounts **Runner** or **Editor** access.
-3. Set the maximum reasoning level.
-4. Enable **Allow fast mode** only for callers who need the provider's premium execution tier.
-5. Save the policy and test with a credential belonging to the intended caller.
+2. Create or edit a policy.
+3. Select the models or routing rules the policy covers.
+4. Grant the intended users, teams, or service accounts {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access.
+5. To set a ceiling, select {{< ui >}}Limit maximum reasoning level{{< /ui >}} and choose a value under {{< ui >}}Maximum reasoning level{{< /ui >}}. The available values are Off (`none`), Minimal, Low, Medium, High, X-High (`xhigh`), and Max.
+6. Clear {{< ui >}}Allow fast mode{{< /ui >}} if callers must not request a provider's premium execution tier.
+7. Save the policy.
+8. Test with a credential belonging to the intended caller.
 
-For organization-wide settings, configure the same options under **Policies > Org defaults**. Review the [access policy rules][3] before changing which models everyone can call.
+New access policies have no reasoning ceiling and allow fast mode. Selecting {{< ui >}}Limit maximum reasoning level{{< /ui >}} initially sets the ceiling to {{< ui >}}Medium{{< /ui >}}; clearing it removes the ceiling. Existing policies retain their saved values.
+
+For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [access policy rules][3] before changing which models everyone can call.
 
 ## Set a reasoning ceiling
 
@@ -34,7 +43,7 @@ AI Gateway compares recognized levels in this order:
 none < minimal < low < medium < high < xhigh < max
 ```
 
-A maximum of `medium` allows a request for `low` or `medium` and refuses a request for `high`. AI Gateway does not lower an excessive direct request to the configured maximum.
+A maximum of `medium` allows `none`, `minimal`, `low`, or `medium`, and refuses `high`, `xhigh`, or `max`. AI Gateway does not lower an excessive direct request to the configured maximum.
 
 Not every model or API supports every level in this ordering. Use a value supported by the selected model, and send it in the field for your request format:
 
@@ -43,10 +52,24 @@ Not every model or API supports every level in this ordering. Use a value suppor
 | OpenAI Responses | `reasoning.effort` |
 | OpenAI Chat Completions | `reasoning_effort` |
 | Anthropic Messages | `output_config.effort` |
+| Native Gemini `generateContent` | `generationConfig.thinkingConfig.thinkingLevel` or `generationConfig.thinkingConfig.thinkingBudget` |
 
-For Anthropic Messages, AI Gateway evaluates omitted effort as `high`. Set the effort explicitly when testing a lower ceiling.
+For Anthropic Messages, AI Gateway evaluates omitted effort as `high` unless conversation history overrides it. A ceiling below `high` therefore refuses Messages requests that omit effort and have no overriding value. Set the effort explicitly to use a lower ceiling.
 
-For OpenAI requests, an omitted effort does not establish a provider-independent ceiling on default behavior. Send an explicit value to verify a specific level.
+For OpenAI requests and native Gemini requests without thinking controls, omitted effort passes the reasoning check, including a ceiling of `none`. The provider applies its own default; AI Gateway does not infer or rewrite that default. Send an explicit value to constrain and verify the actual effort.
+
+For native Gemini, AI Gateway maps `thinkingBudget` to these levels:
+
+| Thinking budget | Reasoning level |
+|---|---|
+| `0` | `none` |
+| Negative (dynamic thinking) | `max` |
+| `1` to `1024` | `low` |
+| `1025` to `8192` | `medium` |
+| `8193` to `24576` | `high` |
+| Above `24576` | `max` |
+
+When both `thinkingLevel` and `thinkingBudget` are present, the more demanding level applies. Unrecognized levels are refused.
 
 For example, use a model that supports `medium` with this Responses request. Load the Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`:
 
@@ -63,7 +86,7 @@ curl -i -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >
 
 See the [OpenAI reasoning guide][4] and [Anthropic effort guide][5] for model-specific request options.
 
-A conversation can override request-level effort. For Responses, the last `configuration_update` input item with `reasoning.effort` takes precedence. For Messages, the last system-role message with `output_config.effort` takes precedence. Review client-supplied history when a test uses a different effective effort than expected.
+A conversation can override request-level effort. For Responses, the last `configuration_update` input item with `reasoning.effort` takes precedence. For Messages, the last system-role message with `output_config.effort` takes precedence. AI Gateway checks the overriding value against the ceiling. Review client-supplied history when a test uses a different effective effort than expected.
 
 ## Control fast mode
 
@@ -71,22 +94,25 @@ AI Gateway recognizes these premium-mode request fields:
 
 | Request format | Fast-mode request |
 |---|---|
-| OpenAI-style requests | `"service_tier": "fast"` or `"service_tier": "priority"` |
+| OpenAI Responses and Chat Completions | `"service_tier": "fast"` or `"service_tier": "priority"` |
 | Anthropic Messages | `"speed": "fast"` |
 
 The selected provider and model must support the value you send. Provider pricing and availability apply. A provider might use a different product name for its premium tier.
 
-When the applicable policy disables **Allow fast mode**, a fast-mode request is refused even if its reasoning effort is within the policy's ceiling. Enabling fast mode does not remove the reasoning ceiling.
+Native Gemini `generateContent` requests do not have a fast-mode field evaluated by this check. Gemini `rawPredict` requests carrying Anthropic Messages use the Anthropic effort and speed fields.
+
+Disabling {{< ui >}}Allow fast mode{{< /ui >}} refuses fast-mode requests, even within the reasoning ceiling. Enabling fast mode does not remove the reasoning ceiling.
 
 ## Understand overlapping policies
 
-AI Gateway evaluates named policies that cover the requested resource and that the caller is authorized to use. When at least one such named policy applies, those policies decide the request's options; a more permissive organization default does not override a refusal.
+AI Gateway evaluates access policies that cover the requested resource and that the caller is authorized to use. When at least one such access policy applies, those policies decide the request's options. A more permissive default policy does not override a refusal.
 
-Among applicable named policies:
+Among applicable access policies:
 
 - A policy must allow both the requested reasoning level and fast mode, if requested, to qualify.
 - A qualifying policy with an explicit reasoning ceiling can allow the request.
-- A policy without a reasoning ceiling cannot bypass an explicit ceiling that another applicable named policy rejects.
+- If no applicable access policy sets a ceiling, a qualifying policy without a ceiling allows recognized levels through `max`.
+- A policy without a reasoning ceiling cannot bypass an explicit ceiling that another applicable access policy rejects.
 
 For example, if one applicable policy caps effort at `medium` and another explicitly caps it at `high`, a non-fast `high` request can qualify through the second policy. Replacing that second ceiling with an unset ceiling does not bypass the first policy's explicit restriction.
 
@@ -94,26 +120,43 @@ Keep policy membership and limits consistent when several policies cover the sam
 
 ## Check routing rule overrides
 
-A routing rule can configure a preferred reasoning level for a destination. This is distinct from an access policy's maximum:
+A routing rule can configure a preferred reasoning level for a destination. A routing preference is distinct from an access policy's maximum:
 
 - The routing preference can replace the caller's reasoning settings for that destination.
 - The effective request still passes the applicable access-policy checks.
-- If the preference cannot be applied, Gateway can retain the caller's settings. A preference refused specifically because it exceeds a reasoning ceiling can also fall back to the caller's settings.
+- If the model or request cannot use the preference, AI Gateway retains the caller's settings. If the preference exceeds a reasoning ceiling, AI Gateway restores the caller's settings and checks all policy conditions again. The original request must still be allowed.
 - Each fallback destination is evaluated separately.
 
-Inspect `X-Ai-Gateway-Reasoning-Override` in the surfaced response. An `applied` value means the preference was applied; `not_applied` means the caller's settings were retained. When present, `X-Ai-Gateway-Reasoning-Override-Reason` explains why the preference was not applied.
+Inspect `X-Ai-Gateway-Reasoning-Override` in the response AI Gateway returns to the caller after any fallbacks. An `applied` value means the preference was applied; `not_applied` means the caller's settings were retained. When present, `X-Ai-Gateway-Reasoning-Override-Reason` explains why the preference was not applied. Reasons include:
+
+| Reason | Meaning |
+|---|---|
+| `catalog_unsupported` | The model catalog does not support the requested preference. |
+| `translator_unavailable` | Translation is unavailable for the requested preference. |
+| `request_incompatible` | The request cannot use the preference. |
+| `policy_denied` | The preference exceeds an applicable reasoning ceiling. |
+| `forced_tool_choice` | Forced tool choice conflicts with the preferred reasoning configuration. |
+| `sampling_parameters` | Sampling parameters conflict with the preferred reasoning configuration. |
+| `manual_thinking_translation` | Translation cannot preserve the manual thinking configuration with this preference. |
+
+These headers describe the returned response, not every attempted destination.
 
 ## Verify the policy
 
-Use a test caller whose applicable policies you have reviewed:
+Use the Responses example above and a test caller whose applicable policies you have reviewed:
 
 1. With a `medium` ceiling, send a direct request for `medium` to a model that supports it. Confirm success.
-2. Change only the requested effort to a supported level above `medium`. Confirm an access refusal.
-3. Send a supported premium fast-mode request with **Allow fast mode** disabled. Confirm refusal.
-4. Enable fast mode for the test caller, repeat the request, and confirm success if the provider accepts it.
-5. Follow the requests from [AI Gateway Overview][6] into Agent Observability. Check the destination and error details. For routing preferences, inspect the response headers too.
+2. Change only the requested effort to a supported level above `medium`. Confirm HTTP `403`, `X-Ai-Gateway-Error-Code: no_permitted_target`, and `error.reason: reasoning_level_not_allowed` in the JSON response.
+3. Send a supported premium fast-mode request with {{< ui >}}Allow fast mode{{< /ui >}} disabled and an otherwise permitted request. Confirm HTTP `403`, `X-Ai-Gateway-Error-Code: no_permitted_target`, and `error.reason: fast_mode_not_allowed`.
+4. Enable {{< ui >}}Allow fast mode{{< /ui >}} on the policy that applies to the test caller.
+5. Repeat the request and confirm success if the provider accepts it.
+6. Follow the requests from [AI Gateway Overview][6] into Agent Observability. Check the destination and error details. For routing preferences, inspect the response headers too.
 
-If a request unexpectedly succeeds, review every applicable named policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [Gateway error codes][7] to distinguish policy refusals from provider errors.
+If a request unexpectedly succeeds, review every applicable access policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [Gateway error codes][7] to distinguish policy refusals from provider errors.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/configure/ai_gateway/#get-started
 [2]: https://app.datadoghq.com/llm/gateway/access

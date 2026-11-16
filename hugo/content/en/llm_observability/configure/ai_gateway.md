@@ -174,7 +174,7 @@ Adding a resource to another access policy does not remove access granted by the
    - **Editor**: Can call the policy's models and routing rules and manage who else has access.
 4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level. A provider may use a different name for fast mode.
 
-For request fields, policy precedence, and verification examples, see [Control reasoning effort and fast mode][20].
+For request fields, policy precedence, and verification examples, see [Control Reasoning Effort and Fast Mode in AI Gateway][20].
 
 [20]: /llm_observability/configure/ai_gateway_reasoning/
 
