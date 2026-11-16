@@ -1,39 +1,40 @@
 ---
+description: Envoyez des métriques d'application de Micrometer vers Datadog en utilisant
+  OpenTelemetry, Prometheus ou OpenMetrics.
 further_reading:
-- link: https://micrometer.io/docs/registry/otlp
-  tag: Micrometer
+- link: https://docs.micrometer.io/micrometer/reference/implementations/otlp.html
+  tag: Site externe
   text: Micrometer OTLP
-- link: https://micrometer.io/docs/registry/prometheus
-  tag: Micrometer
+- link: https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html
+  tag: Site externe
   text: Micrometer Prometheus
-title: Envoyer des métriques avec Micrometer
+title: Envoyez des métriques avec Micrometer
 ---
+## Présentation {#overview}
 
-## Présentation
+[Micrometer][1] est une interface neutre vis-à-vis des fournisseurs qui permet d'accéder aux métriques avec la possibilité de les analyser à travers leurs dimensions. Souvent utilisée avec une application Java Spring Boot comme couche d'abstraction pour soumettre des métriques.
 
-[Micrometer][1] est une interface indépendante de tout fournisseur qui offre un accès à des métriques et permet de les analyser dans leur contexte. Elle est souvent utilisée avec une application Spring Boot Java en tant que couche d'abstraction pour envoyer des métriques.
+Micrometer offre plusieurs façons de s'intégrer à Datadog. Ce guide présente les options recommandées par Datadog à utiliser avec l'Agent pour envoyer des métriques à Datadog.
 
-Micrometer propose plusieurs modes d'intégration avec Datadog. Ce guide décrit les options conseillées par Datadog pour l'utiliser avec l'Agent afin d'envoyer des métriques à Datadog.
+## OpenTelemetry {#opentelemetry}
 
-## OpenTelemetry
+L'ingestion du protocole OpenTelemetry (OTLP) par le Datadog Agent vous permet de tirer parti des fonctionnalités d'observabilité du Datadog Agent.
 
-L'ingestion avec le protocole OpenTelemetry (OTLP) par l'Agent Datadog vous permet d'exploiter la fonctionnalité d'observabilité dans l'Agent Datadog.
-
-{{< whatsnext desc="Consultez la configuration détaillée dans la documentation suivante :" >}}
-    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Ingestion OTLP par l'Agent Datadog{{< /nextlink >}}
+{{< whatsnext desc="Consultez la configuration décrite dans la documentation suivante :" >}}
+    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Configurez l'endpoint OTLP de l'Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Prometheus et OpenMetrics
+## Prometheus et OpenMetrics {#prometheus-and-openmetrics}
 
-Utilisez les intégrations Prometheus ou OpenMetrics pour envoyer les métriques de votre application à Datadog. 
+Utilisez les Integrations Prometheus ou OpenMetrics pour envoyer vos métriques d'application à Datadog. 
 
-{{< whatsnext desc="Consultez la configuration détaillée dans la documentation suivante :" >}}
-    {{< nextlink href="/integrations/guide/prometheus-host-collection/#presentation" >}}Collecte de métriques Prometheus et OpenMetrics à partir d'un host{{< /nextlink >}}
-    {{< nextlink href="/containers/kubernetes/prometheus/?tab=kubernetesadv2" >}}Collecte de métriques Prometheus et OpenMetrics avec Kubernetes{{< /nextlink >}}
-    {{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Collecte de métriques Prometheus et OpenMetrics avec Docker{{< /nextlink >}}
+{{< whatsnext desc="Consultez la configuration décrite dans la documentation suivante :" >}}
+    {{< nextlink href="/integrations/guide/prometheus-host-collection/#overview" >}}Collecte de métriques Prometheus et OpenMetrics à partir d'un host{{< /nextlink >}}
+    {{< nextlink href="/containers/kubernetes/prometheus/?tab=kubernetesadv2" >}}Collecte de métriques Prometheus et OpenMetrics pour Kubernetes{{< /nextlink >}}
+    {{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Collecte de métriques Prometheus et OpenMetrics pour Docker{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,30 +1,29 @@
 ---
 code_lang: java
 code_lang_weight: 0
-title: Requisitos de compatibilidad Java
-type: lenguaje de código múltiple
+title: Requisitos de compatibilidad de Java
+type: multi-code-lang
 ---
+## Funcionalidades de Application Security {#application-security-capabilities}
 
-## Funciones de seguridad de las aplicaciones
+Las siguientes funcionalidades de seguridad de aplicaciones son compatibles con la biblioteca de Java para la versión del tracer especificada:
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Java para la versión de rastreador especificada:
-
-| Función de seguridad de las aplicaciones  | Versión mínima de rastreador Java  |
+| Funcionalidad de seguridad de aplicaciones  | Versión mínima del tracer de Java |
 | -------------------------------- | ----------------------------|
-| Detección de amenazas | 1.8.0  |
-| Seguridad de la API | 1.31.0 |
-| Protección frente a amenazas| 1.9.0 |
-| Personalizar la respuesta a las solicitudes bloqueadas | 1.11.0 |
-| Análisis de la composición del software (SCA) | 1.1.4 |
-| Seguridad del código  | 1.15.0|
-| Rastreo automático de los eventos de actividad de los usuarios | 1.20.0 |
+| Threat Detection | 1.8.0  |
+| API Security | 1.31.0 |
+| Threat Protection| 1.9.0 |
+| Personalice la respuesta a las solicitudes bloqueadas | 1.11.0 |
+| Software Composition Analysis (SCA) | 1.1.4 |
+| Code Security  | 1.15.0|
+| Rastreo automático de eventos de actividad del usuario | 1.20.0 |
 
-La versión mínima de rastreador para contar con todas las funciones de seguridad de las aplicaciones compatibles para Java es v1.31.0.
+La versión mínima del tracer para obtener todas las funcionalidades de seguridad de aplicaciones admitidas para Java es 1.31.0.
 
-**Nota**: La protección frente a amenazas requiere habilitar la [configuración remota][2], que se incluye en la versión mínima de rastreador indicada.
+**Nota**: Threat Protection requiere habilitar [Remote Configuration][2], que se incluye en la versión mínima del tracer indicada.
 
-### Tipos de despliegue compatibles
-| Tipo              | Compatibilidad con la detección de amenazas | Software Composition Analysis |
+### Tipos de implementación admitidos {#supported-deployment-types}
+| Tipo              | Compatibilidad con Threat Detection | Software Composition Analysis |
 |-------------------|--------------------------|-------------------------------|
 | Docker            | {{< X >}}                | {{< X >}}                     |
 | Kubernetes        | {{< X >}}                | {{< X >}}                     |
@@ -33,104 +32,108 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 | AWS Lambda        | {{< X >}}                |                               |
 | Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**Nota**: Azure App Service es compatible **sólo con aplicaciones web**. La seguridad de las aplicaciones no es compatible con funciones Azure.
+**Nota**: Azure App Service es compatible **únicamente con aplicaciones web**. Application Security no es compatible con Azure Functions.
 
-## Compatibilidad con lenguajes y marcos
+## Compatibilidad de lenguaje y framework {#language-and-framework-compatibility}
 
-### Versiones compatibles de Java
-El rastreador Java es compatible con la instrumentación automática para los tiempos de ejecución Oracle JDK y OpenJDK de máquinas virtuales Java.
+### Versiones de Java compatibles {#supported-java-versions}
+Java Tracer admite la instrumentación automática para los siguientes entornos de ejecución JVM de Oracle JDK y OpenJDK.
 
-| Versiones de máquinas virtuales Java | Sistemas operativos                                                               | Nivel de compatibilidad                       | Versión del rastreador |
+| Versiones de JVM | Sistemas operativos                                                               | Nivel de soporte                       | Versión del trazador |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8 a 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Compatible                | Último         |
+| 8 a 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Admitido                | Más reciente         |
 
 
 Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
-Las versiones 22 y posteriores son compatibles como en Vista previa.
+Las versiones 22 y superiores son compatibles en versión preliminar.
 
-### Compatibilidad con web frameworks
+**Compatibilidad con Kotlin**: Kotlin es compatible a través del trazador de Java. Debido a que Kotlin se compila en bytecode de JVM, se ejecuta en los mismos runtimes de JVM enumerados anteriormente, sin necesidad de configuración adicional más allá de la configuración estándar de Java.
 
-- Detalles de una solicitud HTTP originada por un atacante
-- Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
-- Rastreo distribuido para visualizar flujos (flows) de ataques en tus aplicaciones
+### Compatibilidad con marcos web {#web-framework-compatibility}
 
-##### Notas sobre la función de seguridad de las aplicaciones
-- **El Análisis de la composición del software** es compatible con todos los marcos.
-- Si la **Seguridad del código** no es compatible con tu marco, aún así detectará las siguientes vulnerabilidades: Cifrado débil, Hashing débil, Cookie insegura, Cookie sin marca HttpOnly y Cookie sin marca SameSite.
+**Las integraciones de frameworks web proporcionan:**
+
+- Detalles de la solicitud HTTP de la fuente del atacante
+- Etiquetas para la solicitud HTTP (código de estado, método, etc.)
+- Distributed Tracing para ver los flujos de ataque a través de sus aplicaciones
+
+##### Notas sobre las funcionalidades de Application Security {#application-security-capability-notes}
+- **Software Composition Analysis** es compatible con todos los frameworks
+- Si **Code Security** no es compatible con su framework, aún detectará vulnerabilidades de Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag y Cookie without SameSite Flag.
 
 
 
-| Marco                  | Versiones   | ¿Es compatible la detección de amenazas? | ¿Es compatible la protección frente a amenazas? |¿Seguridad del código? |
+| Framework                  | Versiones   | ¿Compatible con Threat Detection? | ¿Compatible con Threat Protection? |¿Code Security? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Grizzly                 | 2.0 o posterior       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Java Servlet | 2.3 o posterior, 3.0 o posterior |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Java Servlet | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Jetty                   | 7.0-9.x, 10.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Spring Web (MVC)        | 4.0 o posterior       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Spring WebFlux          | 5.0 o posterior       |            |            |  {{< X >}} |
-| Tomcat                  | 5.5 o posterior       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Spring WebFlux          | 5.0+       |            |            |  {{< X >}} |
+| Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Vert.x                  | 3.4+, 4+   |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
-**Nota**: Muchos servidores de aplicaciones son compatibles con Servlet y están cubiertos automáticamente por esa instrumentación, como por ejemplo Websphere, Weblogic y JBoss. Además, los marcos como Spring Boot (versión 3) funcionan de forma inherente, ya que suelen utilizar un servidor de aplicaciones integrado compatible, como Tomcat, Jetty o Netty.
+**Nota**: Muchos servidores de aplicaciones son compatibles con Servlet y están cubiertos automáticamente por esa instrumentación, como Websphere, Weblogic y JBoss. Además, marcos de trabajo como Spring Boot (versión 3) funcionan de forma inherente porque generalmente utilizan un servidor de aplicaciones integrado compatible, como Tomcat, Jetty o Netty.
 
-<div class="alert alert-info">Si no encuentras el marco que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si no encuentra su framework preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-### Compatibilidad de marcos de red
+### Compatibilidad del marco de trabajo de red {#networking-framework-compatibility}
 
-`dd-java-agent` incluye compatibilidad para el rastreo automático de los siguientes marcos de red.
+`dd-java-agent` incluye soporte para rastrear automáticamente los siguientes marcos de trabajo de red.
 
-**El rastreo de redes proporciona:**
+**El rastreo de red proporciona:**
 
-- Rastreo distribuido en tus aplicaciones
+- Trazado distribuido a través de sus aplicaciones
 - Bloqueo basado en solicitudes
 
-##### Notas sobre la función de seguridad de las aplicaciones
-- **El Análisis de la composición del software** es compatible con todos los marcos.
-- Si la **Seguridad del código** no es compatible con tu marco, aún así detectará las siguientes vulnerabilidades: Cifrado débil, Hashing débil, Cookie insegura, Cookie sin marca HttpOnly y Cookie sin marca SameSite.
+##### Notas sobre las funcionalidades de Application Security {#application-security-capability-notes-1}
+- **Software Composition Analysis** es compatible con todos los marcos de trabajo
+- Si **Code Security** no es compatible con su framework, aún detectará vulnerabilidades de Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag y Cookie without SameSite Flag.
 
 
-| Marco                | Versiones    | ¿Es compatible la detección de amenazas? | ¿Es compatible la protección frente a amenazas? | ¿Seguridad del código? |
+| Framework                | Versiones    | ¿Compatible con Threat Detection? | ¿Compatible con Threat Protection? | ¿Code Security? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Cliente HTTP Apache       | 4.0 o posterior        |  {{< X >}} |  |  |
-| gRPC                     | 1.5 o posterior        |  {{< X >}} |  |  |
-| HttpURLConnection        | todos         |  {{< X >}} |  |  |
-| Clientes de Jax RS           | 2.0 o posterior        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
-| Servidor Jersey            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Servidor HTTP Netty        |  3.8 o posterior           |  {{< X >}} |    |  |
+| Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
+| gRPC                     | 1.5+        |  {{< X >}} |  |  |
+| HttpURLConnection        | todos       |  {{< X >}} |  |  |
+| Jax RS Clients           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
+| Jersey Server            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Netty HTTP Server        |  3.8+           |  {{< X >}} |    |  |
 | RESTEasy                 |  3.0.x          |  {{< X >}} |    |  |
-| Spring SessionAwareMessageListener     | 3.1 o posterior            |  {{< X >}} |  |  |
+| Spring SessionAwareMessageListener     | 3.1+            |  {{< X >}} |  |  |
 
-<div class="alert alert-info">Si no encuentras el marco que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si no encuentra su framework preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-### Compatibilidad con almacenes de datos
+### Compatibilidad con almacenes de datos {#data-store-compatibility}
 
-`dd-java-agent` incluye compatibilidad para el rastreo automático de los siguientes marcos/controladores de bases de datos.
+`dd-java-agent` incluye soporte para el rastreo automático de los siguientes marcos de trabajo/controladores de base de datos.
 
-**El rastreo de almacenes de datos proporciona:**
+**El rastreo de Datastore proporciona:**
 
-- Temporización de la solicitud a la respuesta
-- Información de consulta (por ejemplo, una cadena de consulta desinfectada)
-- Captura de errores y stacktraces
+- Tiempo transcurrido entre la solicitud y la respuesta
+- Información de consulta (por ejemplo, una cadena de consulta saneada)
+- Captura de errores y seguimientos de pila
 
-##### Notas sobre la función de seguridad de las aplicaciones
-- **El Análisis de la composición del software** es compatible con todos los marcos.
-- La **Protección frente a amenazas** también funciona en la capa de solicitud HTTP (entrada), por lo que funciona para todas las bases de datos por defecto, incluso aquellas que no aparecen en la siguiente tabla.
-- Si tu marco no aparece como compatible más abajo, la **Seguridad del código** no detectará vulnerabilidades de inyección SQL, pero sí detectará el resto de los tipos de vulnerabilidades presentadas [aquí][3].
+##### Notas sobre las funcionalidades de Application Security {#application-security-capability-notes-2}
+- **Software Composition Analysis** es compatible con todos los frameworks
+- **Threat Protection** también funciona en la capa de solicitud HTTP (entrada), por lo que funciona para todas las bases de datos de forma predeterminada, incluso aquellas que no aparecen en la tabla a continuación.
+- Si su framework no figura entre los compatibles a continuación, **Code Security** no detectará vulnerabilidades de inyección SQL, pero seguirá detectando los demás tipos de vulnerabilidades enumerados [aquí][3].
 
-| Base de datos                | Versiones | ¿Es compatible la detección de amenazas? |  ¿Seguridad del código? |
+| Base de datos                | Versiones | ¿Compatible con Threat Detection? |  ¿Code Security? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
-| Aerospike               | 4.0 o posterior     |  {{< X >}} |   |
-| Couchbase               | 2.0 o posterior     |  {{< X >}} |   |
+| Aerospike               | 4.0+     |  {{< X >}} |   |
+| Couchbase               | 2.0+     |  {{< X >}} |   |
 | JDBC                    | N/A      |  {{< X >}} |   {{< X >}} |
-| MongoDB                 | 3.0-4.0 o posterior |  {{< X >}} |   |
+| MongoDB                 | 3.0-4.0+ |  {{< X >}} |   |
 
-`dd-java-agent` también es compatible con controladores JDBC comunes para la detección de amenazas, tales como:
+`dd-java-agent` también es compatible con controladores JDBC comunes para Threat Detection, tales como:
 
-- Derby Apache
+- Apache Derby
 - Firebird SQL
-- Motor de base de datos H2
+- H2 Database Engine
 - HSQLDB
 - IBM DB2
 - MariaDB
@@ -140,18 +143,18 @@ Las versiones 22 y posteriores son compatibles como en Vista previa.
 - Postgres SQL
 - ScalikeJDBC
 
-<div class="alert alert-info">Si no encuentras el marco que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si no encuentra su framework preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-### Compatibilidad con marcos de autenticación de usuarios
+### Compatibilidad con marcos de autenticación de usuario {#user-authentication-frameworks-compatibility}
 
-**Las integraciones con marcos de autenticación de usuarios proporcionan:**
+**Las integraciones con marcos de autenticación de usuario proporcionan:**
 
-- Eventos de inicio de sesión de usuarios, incluidos los ID de usuarios
-- Monitorización de la detección de la apropiación de cuentas para eventos de inicio de sesión de usuarios
+- Eventos de inicio de sesión de usuario, incluidos los ID de usuario
+- Monitoreo de eventos de inicio de sesión de usuarios para la detección de Account Takeover
 
-| Marco         | Versión mínima de marco |
+| Marco         | Versión mínima del marco |
 |-------------------|---------------------------|
-| Spring Security   | 5.5 o posterior                      |
+| Spring Security   | 5.5+                      |
 
 
 [1]: /es/tracing/trace_collection/compatibility/java/

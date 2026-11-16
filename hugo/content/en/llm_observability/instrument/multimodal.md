@@ -65,8 +65,11 @@ Audio in streamed chat completions (`stream=True`) is not captured.
 | OpenAI chat completions | Input `input_audio` content and output audio, including the model's audio transcript | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Agents | Input and output audio, through the OpenAI chat completions format | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Realtime API | Per-turn input and output audio, transcripts, token usage, and tool calls | v6: >= 6.17.0; v5: >= 5.128.0 |
+| OpenAI Agents Realtime SDK | Per-turn input and output audio, transcripts, token usage, and tool calls for WebSocket and SIP sideband connections | Coming Soon |
 | Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Per-turn input and output audio, transcripts, token usage, and tool calls | v6: >= 6.22.0; v5: >= 5.133.0 |
 | ElevenLabs Agents (WebSocket) | Conversation input and output audio, transcripts, and client tool calls | Coming Soon |
+
+OpenAI Agents Realtime SDK instrumentation requires `@openai/agents-realtime` 0.20.0 or later. To disable tracer-issued audio retrievals for SIP sidebands, set `DD_OPENAI_REALTIME_SIDEBAND_AUDIO_RETRIEVAL_ENABLED=false`.
 
 Audio in streamed chat completions is not captured.
 

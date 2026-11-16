@@ -13,7 +13,7 @@ further_reading:
   text: Obtenga más información sobre lo que ofrece el seguimiento de GPU
 title: Haga un seguimiento de las cargas de trabajo de inferencia con GPU Monitoring
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
 La optimización de cargas de trabajo de inferencia con Continuous Tracing with GPU Monitoring se encuentra en vista previa de acceso anticipado. Complete el formulario para solicitar acceso.
 {{< /callout >}}
 
@@ -26,11 +26,15 @@ Con la página Inference, obtiene:
 - **Latencia y rendimiento en las implementaciones de modelos**: Compare el tiempo hasta el primer token (TTFT), la latencia entre tokens (ITL) y los tokens de salida por segundo en sus implementaciones de modelos, y filtre por entorno, implementación o espacio de nombres de Kubernetes.
 - **Estado de la implementación de un vistazo**: Revise el promedio de solicitudes simultáneas, la tasa de errores, el estado de salud, los seguimientos y el uso de caché de clave-valor (KV) de GPU de cada implementación de modelo para identificar qué implementaciones necesitan atención.
 
-{{< img src="gpu_monitoring/inference-page2.png" alt="Página Inference de GPU Monitoring que muestra métricas clave para una implementación de modelo determinada, como el tiempo hasta el primer token y los tokens de salida." style="width:100%;" >}}
+{{< img src="gpu_monitoring/inference-page3.png" alt="Página Inference de GPU Monitoring que muestra métricas clave para una implementación de modelo determinada, como el tiempo hasta el primer token y los tokens de salida." style="width:100%;" >}}
 
 ## Configuración {#setup}
 
-El seguimiento de inferencia admite [vLLM][1] como motor de inferencia en las siguientes implementaciones: independiente, con NVIDIA Dynamo como enrutador de inferencia o en Ray. No se admiten otros motores de inferencia ni enrutadores. Para solicitar soporte para ellos, comuníquese con su representante de Datadog.
+El monitoreo de inferencia es compatible con los siguientes motores de inferencia y despliegues:
+- [vLLM][1]: independiente, con NVIDIA Dynamo como enrutador de inferencia, o en Ray.
+- [SGLang][3]: independiente.
+
+No se admiten otros motores de inferencia ni enrutadores. Para solicitar soporte para ellos, comuníquese con su representante de Datadog.
 
 Seleccione la pestaña que coincida con su implementación:
 
@@ -43,7 +47,7 @@ La configuración utiliza la integración de vLLM, que recopila métricas del mo
 
 Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con los siguientes criterios:
 - Tiene [GPU Monitoring habilitado][1].
-- Está ejecutando la imagen del Agent de inferencia (`7.85.0-rc.5`).
+- Está ejecutando la versión 7.85.0 o posterior del Datadog Agent.
 - Sus cargas de trabajo de inferencia se ejecutan en Kubernetes.
 - Usted está sirviendo modelos con vLLM.
 
@@ -51,11 +55,11 @@ Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con
 
 Si aún no lo ha hecho, [configure GPU Monitoring][1] en sus hosts de GPU. Los siguientes pasos requieren que GPU Monitoring esté habilitado.
 
-### 1. Use la imagen del Agent de inferencia {#1-use-the-inference-agent-image}
+### 1. Actualice el Datadog Agent {#1-update-the-datadog-agent}
 
-La imagen del Agent de inferencia incluye la verificación de vLLM, por lo que no necesita instalar la integración de vLLM por separado.
+Datadog Agent 7.85.0 y versiones posteriores incluyen la verificación de vLLM, por lo que no necesita instalar la integración de vLLM por separado.
 
-Combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
+Si está ejecutando una versión anterior, combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
 
 ```yaml
 spec:
@@ -65,10 +69,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-Para usar una imagen de Agent completa o habilitada para JMX, establezca `tag` en `7.85.0-rc.5-jmx` o `7.85.0-rc.5-full`.
+Para usar una imagen de Agent habilitada para JMX o completa, establezca `tag` en `7.85.0-jmx` o `7.85.0-full`.
 
 Aplique el recurso y espere a que se despliegue el DaemonSet del Agent:
 
@@ -145,14 +149,12 @@ Para graficar percentiles en ciertas métricas de vLLM, debe optar por la [funci
 
 | Métrica |
 |--------|
-| `vllm.time_to_first_token.seconds` |
-| `vllm.time_per_output_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
 ### 6. Habilite el rastreo de GPU (opcional) {#6-enable-gpu-tracing-optional}
 
-Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4] y etiquete sus cargas de trabajo de vLLM. Continuous Tracing requiere CUDA y la versión 13 o posterior de CUDA Profiling Tools Interface (CUPTI).
+Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /es/gpu_monitoring/setup
 [2]: /es/containers/kubernetes/integrations/?tab=annotations
@@ -168,7 +170,7 @@ La configuración utiliza dos integraciones. La integración de Dynamo recopila 
 
 Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con los siguientes criterios:
 - Tiene [GPU Monitoring habilitado][1].
-- Está ejecutando la imagen del Agent de inferencia (`7.85.0-rc.5`).
+- Está ejecutando la versión 7.85.0 o posterior del Datadog Agent.
 - Sus cargas de trabajo de inferencia se ejecutan en Kubernetes.
 - Está sirviendo modelos con trabajadores de vLLM en un despliegue de NVIDIA Dynamo.
 
@@ -176,11 +178,11 @@ Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con
 
 Si aún no lo ha hecho, [configure GPU Monitoring][1] en sus hosts de GPU. Los siguientes pasos requieren que GPU Monitoring esté habilitado.
 
-### 1. Use la imagen del Agent de inferencia {#1-use-the-inference-agent-image-1}
+### 1. Actualice el Datadog Agent {#1-update-the-datadog-agent-1}
 
-La imagen del Agent de inferencia incluye las verificaciones de Dynamo y vLLM, por lo que no necesita instalar ninguna de las integraciones por separado.
+Datadog Agent 7.85.0 y versiones posteriores incluyen las verificaciones de Dynamo y vLLM, por lo que no necesita instalar ninguna de las integraciones por separado.
 
-Combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
+Si está ejecutando una versión anterior, combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
 
 ```yaml
 spec:
@@ -190,10 +192,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-Para usar una imagen de Agent completa o habilitada para JMX, establezca `tag` en `7.85.0-rc.5-jmx` o `7.85.0-rc.5-full`.
+Para usar una imagen de Agent habilitada para JMX o completa, establezca `tag` en `7.85.0-jmx` o `7.85.0-full`.
 
 Aplique el recurso y espere a que se despliegue el DaemonSet del Agent:
 
@@ -327,7 +329,7 @@ Para graficar percentiles en ciertas métricas de vLLM y Dynamo, debe optar por 
 
 ### 6. Habilite el rastreo de GPU (opcional) {#6-enable-gpu-tracing-optional-1}
 
-Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4] y etiquete sus cargas de trabajo de worker de vLLM. Continuous Tracing requiere CUDA y la versión 13 o posterior de CUDA Profiling Tools Interface (CUPTI).
+Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /es/gpu_monitoring/setup
 [2]: /es/containers/kubernetes/integrations/?tab=annotations
@@ -342,15 +344,16 @@ La configuración utiliza dos integraciones. La [integración de Ray][5] recopil
 ### Requisitos previos {#prerequisites-2}
 
 Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con los siguientes criterios:
-- Tiene [GPU Monitoring habilitado][1] con la imagen del Agent de inferencia (`7.85.0-rc.5`).
+- Tiene [GPU Monitoring habilitado][1].
+- Está ejecutando la versión 7.85.0 o posterior del Datadog Agent.
 - Sus cargas de trabajo de inferencia se ejecutan en Kubernetes, con clústeres de Ray administrados por KubeRay.
 - Está sirviendo modelos con vLLM dentro de Ray, por ejemplo con Ray Serve.
 
-### 1. Utilice la imagen del Agent de inferencia {#1-use-the-inference-agent-image-2}
+### 1. Actualice el Datadog Agent {#1-update-the-datadog-agent-2}
 
-La imagen del Agent de inferencia incluye tanto las verificaciones de Ray como las de vLLM, por lo que no necesita instalar ninguna integración por separado.
+Datadog Agent 7.85.0 y versiones posteriores incluyen tanto las verificaciones de Ray como las de vLLM, por lo que no necesita instalar ninguna integración por separado.
 
-Combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
+Si está ejecutando una versión anterior, combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
 
 ```yaml
 spec:
@@ -360,10 +363,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-Para usar una imagen de Agent completa o habilitada para JMX, establezca `tag` en `7.85.0-rc.5-jmx` o `7.85.0-rc.5-full`.
+Para usar una imagen de Agent habilitada para JMX o completa, establezca `tag` en `7.85.0-jmx` o `7.85.0-full`.
 
 Aplique el recurso y espere a que se despliegue el DaemonSet del Agent:
 
@@ -471,13 +474,12 @@ Para graficar percentiles en ciertas métricas de vLLM, debe optar por la [funci
 
 | Métrica |
 |--------|
-| `vllm.time_to_first_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
 ### 6. Habilite el seguimiento de GPU (opcional) {#6-enable-gpu-tracing-optional-2}
 
-Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4] y etiquete sus cargas de trabajo de trabajadores de Ray. Continuous Tracing requiere CUDA y la versión 13 o posterior de CUDA Profiling Tools Interface (CUPTI).
+Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /es/gpu_monitoring/setup
 [2]: /es/containers/kubernetes/integrations/?tab=annotations
@@ -485,6 +487,143 @@ Para correlacionar las solicitudes de inferencia con la actividad de la GPU, con
 [4]: /es/gpu_monitoring/tracing
 [5]: /es/integrations/ray/
 [6]: /es/integrations/vllm/
+
+{{% /tab %}}
+{{% tab "SGLang" %}}
+
+La configuración utiliza la [integración de SGLang][5], que recopila métricas del motor.
+
+### Requisitos previos {#prerequisites-3}
+
+Para comenzar a monitorear sus cargas de trabajo de inferencia, debe cumplir con los siguientes criterios:
+- Tiene [GPU Monitoring habilitado][1].
+- Está ejecutando la versión 7.85.0 o posterior del Datadog Agent.
+- Sus cargas de trabajo de inferencia se ejecutan en Kubernetes.
+- Está sirviendo modelos con SGLang independiente.
+
+### 0. Habilite GPU Monitoring {#0-enable-gpu-monitoring-2}
+
+Si aún no lo ha hecho, [configure GPU Monitoring][1] en sus hosts de GPU. La verificación de SGLang solo se ejecuta cuando GPU Monitoring está habilitado.
+
+### 1. Actualice el Datadog Agent {#1-update-the-datadog-agent-3}
+
+Datadog Agent 7.85.0 y versiones posteriores incluyen la verificación de SGLang, por lo que no necesita instalar la integración de SGLang por separado.
+
+Si está ejecutando una versión anterior, combine la siguiente configuración en el recurso `DatadogAgent` existente. Mantenga sus credenciales, sitio y otras funciones existentes sin cambios:
+
+```yaml
+spec:
+  features:
+    gpu:
+      enabled: true
+  override:
+    nodeAgent:
+      image:
+        tag: 7.85.0
+```
+
+Para usar una imagen de Agent habilitada para JMX o completa, establezca `tag` en `7.85.0-jmx` o `7.85.0-full`.
+
+Aplique el recurso y espere a que se despliegue el DaemonSet del Agent:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+kubectl get pods -n <DATADOG_NAMESPACE> -w
+```
+
+### 2. Habilite las métricas de SGLang y confirme el puerto {#2-enable-sglang-metrics-and-confirm-the-port}
+
+SGLang no expone métricas de forma predeterminada. Agregue `--enable-metrics` al comando del servidor de SGLang en cada plantilla de pod de SGLang:
+
+```shell
+python3 -m sglang.launch_server --model-path <MODEL> --enable-metrics
+```
+
+La integración de SGLang recopila métricas del siguiente punto de conexión:
+
+| Destino | Punto de conexión | Integración | Métricas |
+|--------|----------|-------------|---------|
+| Servidor SGLang | `:30000/metrics` | SGLang | `sglang.*` |
+
+SGLang sirve métricas en el mismo puerto que su servidor HTTP, que es `30000` de forma predeterminada. Si inicia SGLang con un `--port` diferente, sustitúyalo en la anotación del paso 3.
+
+Si ejecuta workers de prefill y decode desagregados, cada worker de prefill y decode sirve su propio punto de conexión de métricas. Configure la integración en cada plantilla de pod de worker. La integración recopila métricas de transferencia de KV y de cola de desagregación como `sglang.disaggregation.*`.
+
+### 3. Configure la integración {#3-configure-the-integration-1}
+
+Agregue la siguiente [anotación de Autodiscovery][2] a cada plantilla de pod de SGLang. En la clave de anotación, reemplace `<SGLANG_CONTAINER_NAME>` con el valor del campo `name` del contenedor en `spec.template.spec.containers[]`, no con el nombre de la imagen:
+
+```yaml
+metadata:
+  labels:
+    tags.datadoghq.com/service: "<SERVICE_NAME>"
+  annotations:
+    ad.datadoghq.com/<SGLANG_CONTAINER_NAME>.checks: |-
+      {
+        "sglang": {
+          "init_config": {},
+          "instances": [{
+            "openmetrics_endpoint": "http://%%host%%:30000/metrics"
+          }]
+        }
+      }
+```
+
+Reemplace `<SERVICE_NAME>` con un nombre para su despliegue de modelo, como `inference-sglang-glm5.3`. La página Inference agrupa las métricas por `service`. Para despliegues desagregados, utilice el mismo `<SERVICE_NAME>` en los workers de prefill y decode de un despliegue de modelo.
+
+La integración de SGLang envía los buckets de histograma como distribuciones de forma predeterminada, por lo que no necesita configurar `histogram_buckets_as_distributions` o `collect_counters_with_distributions`.
+
+Aplique los recursos de carga de trabajo actualizados y vuelva a crear los pods para que Autodiscovery detecte las nuevas anotaciones.
+
+### 4. Verifique la configuración {#4-verify-setup-3}
+
+Utilice dos terminales para confirmar que el punto de conexión de SGLang responde y que el Agent ejecuta la verificación. Ejecute el reenvío de puertos en el espacio de nombres de Kubernetes de su carga de trabajo, o agregue `-n <WORKLOAD_NAMESPACE>` si difiere de su espacio de nombres actual.
+
+**Terminal 1**: Reenvíe el punto de conexión de métricas de SGLang y déjelo ejecutándose.
+
+```shell
+kubectl port-forward pod/<SGLANG_POD> 18080:30000
+```
+
+**Terminal 2**: Verifique el punto de conexión y la verificación del Agent.
+
+```shell
+# Show SGLang metrics from the endpoint
+curl -fsS http://localhost:18080/metrics | grep '^sglang:'
+
+# Look for "sglang" under Checks
+kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
+```
+
+Cuando termine, presione **Ctrl+C** en la terminal 1 para detener el reenvío.
+
+Después de completar la configuración, Datadog recopila `sglang.*` métricas de sus pods de SGLang.
+
+Si no aparecen métricas, envíe tráfico de inferencia a su despliegue. SGLang emite algunas métricas solo después de atender la primera solicitud.
+
+### 5. Habilite los percentiles en sus métricas {#5-enable-percentiles-on-your-metrics-3}
+
+Para graficar percentiles en ciertas métricas de SGLang, debe optar por la [funcionalidad de consulta avanzada][3] en las siguientes métricas de distribución:
+
+| Métrica |
+|--------|
+| `sglang.time_to_first_token.seconds` |
+| `sglang.inter_token_latency.seconds` |
+| `sglang.request.prompt_tokens` |
+| `sglang.request.generation_tokens` |
+| `sglang.e2e_request_latency.seconds` |
+| `sglang.request.stage_latency.seconds` |
+| `sglang.queue_time.seconds` |
+
+### 6. Habilite el seguimiento de GPU (opcional) {#6-enable-gpu-tracing-optional-3}
+
+Para correlacionar las solicitudes de inferencia con la actividad de la GPU, configure [Continuous Tracing with GPU Monitoring][4].
+
+[1]: /es/gpu_monitoring/setup
+[2]: /es/containers/kubernetes/integrations/?tab=annotations
+[3]: /es/metrics/distributions/#enabling-advanced-query-functionality
+[4]: /es/gpu_monitoring/tracing
+[5]: /es/integrations/sglang/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -532,3 +671,4 @@ Haga clic en {{< ui >}}Column Settings{{< /ui >}} para elegir qué columnas most
 
 [1]: /es/integrations/vllm/
 [2]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=inference-monitoring
+[3]: /es/integrations/sglang/

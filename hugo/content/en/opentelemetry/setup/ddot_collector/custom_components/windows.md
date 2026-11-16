@@ -6,19 +6,19 @@ code_lang_weight: 3
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/windows"
   tag: "Documentation"
-  text: "Install the DDOT Collector on Windows"
+  text: "Set Up the Agent's Collector on Windows"
 ---
 
-This guide explains how to build a DDOT Collector OCI package with additional OpenTelemetry components not included in the default DDOT Collector, for use on Windows bare-metal hosts. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
+This guide explains how to build an OCI package of the Agent's Collector with OpenTelemetry components that it doesn't include by default, for Windows bare-metal hosts. To see the components it includes, see [Included components][1].
 
 ## Prerequisites
 
 To complete this guide, you need the following:
 
 - [Docker][2] (running on Linux or macOS—the cross-compilation runs inside the build container)
-- GitHub and access to the [Datadog Agent][3] source code that contains DDOT Collector.
+- GitHub and access to the [Datadog Agent][3] source code that contains the Agent's Collector.
 - A private OCI-compatible container registry to host your custom package.
-- The OpenTelemetry components you plan to include must be compatible with the DDOT Collector version.
+- The OpenTelemetry components you plan to include must be compatible with the Agent's Collector version.
 
 **Recommended**:
 
@@ -49,13 +49,13 @@ The Dockerfile:
 
 - Uses Ubuntu 24.04 as the build environment (controlled by the `UBUNTU_VERSION` build argument).
 - Installs Go and necessary dependencies.
-- Downloads and unpacks the DDOT Collector source code.
-- Cross-compiles the DDOT Collector (also known as OTel Agent) for Windows.
+- Downloads and unpacks the Agent's Collector source code.
+- Cross-compiles the Agent's Collector (the `otel-agent` binary) for Windows.
 - Builds the [`build-ddot-byoc`][6] tool, which replaces the `otel-agent.exe` binary inside the source OCI package (`AGENT_OCI`) and pushes the result to `OUTPUT_OCI`.
 
 ## Create an OpenTelemetry Collector Builder manifest
 
-Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, which defines the components to be included in your custom DDOT Collector.
+Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, which defines the components to be included in your custom Collector.
 
 1. Download the Datadog default manifest:
    ```shell
@@ -101,7 +101,7 @@ replaces:
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 
-## Build and push the DDOT Collector (Agent) package
+## Build and push the Agent's Collector package {#build-and-push-the-ddot-collector-agent-package}
 
 The build process cross-compiles the `otel-agent.exe` binary and replaces it inside the Datadog Agent OCI package, then pushes the result directly to your registry using the `build-ddot-byoc` tool. This process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
@@ -153,9 +153,9 @@ docker build . \
 
 The tool cross-compiles the Windows binary, replaces the `otel-agent.exe` binary inside the OCI package, and pushes the result directly to `OUTPUT_OCI`. No separate `docker push` step is needed.
 
-## Install the DDOT Collector (Agent) package
+## Install the Agent's Collector package {#install-the-ddot-collector-agent-package}
 
-After the build completes, verify the custom `otel-agent.exe` binary includes your additional components by installing the custom DDOT Collector package. Run all commands from an **elevated PowerShell session**.
+After the build completes, verify the custom `otel-agent.exe` binary includes your additional components by installing the custom Collector package. Run all commands from an **elevated PowerShell session**.
 
 1. Prepare the host:
    - If the Datadog Agent is **not** installed, install the Datadog Agent first:
@@ -165,12 +165,12 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
        Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
      }
      ```
-   - If the DDOT Collector is **already** installed, remove the existing package before proceeding:
+   - If the Agent's Collector is **already** installed, remove the existing package before proceeding:
      ```powershell
      & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel remove
      ```
 
-2. Install the custom DDOT Collector package:
+2. Install the custom Collector package:
    ```powershell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel install --registry <YOUR-REGISTRY>
    ```
@@ -242,11 +242,11 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
    ```
 
-5. If the DDOT Collector (Agent) starts, then the build process was successful.
+5. If the Agent's Collector starts, then the build process was successful.
 
 ## Troubleshooting
 
-This section discusses some common issues you might encounter while building your custom DDOT Collector, along with their solutions:
+This section discusses some common issues you might encounter while building your custom Collector, along with their solutions:
 
 ### Compatibility issues with `awscontainerinsightreceiver`
 

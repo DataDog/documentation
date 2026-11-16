@@ -1,47 +1,49 @@
 ---
 aliases:
 - /ko/logs/processing
-description: 로그 설정 페이지에서 로그를 처리, 보완, 제어 및 관리합니다.
+description: 로그 구성 페이지에서 로그를 처리, 보완, 제어 및 관리합니다.
 further_reading:
+- link: https://learn.datadoghq.com/courses/debugging-log-pipelines
+  tag: 학습 센터
+  text: 로그 파이프라인 디버깅
 - link: /data_security/pci_compliance/
   tag: 설명서
-  text: PCI 준수 Datadog 조직 설정하기
+  text: PCI DSS Compliance
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: 블로그
-  text: 제한없는 로그 수집*에 대해 자세히 알아보세요.
+  text: Logging without Limits*에 대해 알아보기
 - link: https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/
   tag: 블로그
   text: Datadog 로그 파이프라인 스캐너로 로그 프로세싱 조사하기
 - link: /logs/guide/
-  tag: 지침
+  tag: 가이드
   text: Datadog을 활용한 로그 수집 추가 지침
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
   tag: 아키텍처 센터
-  text: Datadog를 통한 로그 관리 인덱싱 전략에 대한 가이드
-title: 로그 설정
+  text: Datadog을 사용한 Log Management 인덱싱 전략 가이드
+title: 로그 구성
 ---
+## 개요 {#overview}
 
-## 개요
+Datadog Logging without Limits*는 로그 수집과 인덱싱을 분리합니다. [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1]의 로그 구성 페이지에서 인덱싱 및 보존할 로그를 선택하거나 아카이브하고, 최상위 수준의 설정 및 제어를 관리하세요.
 
-제한 없는 Datadog 로깅*은 로그 수집과 인덱싱을 분리합니다. [**로그 > 파이프라인**][1]의 로그 설정 페이지에서 최상위 수준에서 색인을 생성하고 보존하거나 보관하고 설정 및 제어를 관리할 로그를 선택합니다.
+Datadog MCP Server에 연결된 AI Agent를 통해서도 로그 파이프라인, 인덱스 및 아카이브를 관리할 수 있습니다. `logs-configuration` 도구 세트를 활성화하여 이러한 리소스를 조회, 생성, 업데이트, 삭제 및 재정렬하세요. Agent를 연결하려면 [Datadog MCP Server 설정][13]을 참조하세요. 사용 가능한 도구 및 예시 프롬프트는 [로그 구성 도구][14]를 참조하세요.
 
-**참고**: PCI 준수 Datadog 조직을 설정하는 방법에 대한 자세한 내용을 확인하려면 [PCI DSS 준수][2]를 참조하세요.
-
-## 설정 옵션
+## 구성 옵션 {#configuration-options}
 
 - [파이프라인][3]과 [프로세서][4]로 로그 처리 방식을 관리합니다.
 - [속성 및 앨리어싱][5]을 설정하여 로그 환경을 통일합니다.
 - 비용 효율적인 방식으로 [수집한 로그를 사용해 메트릭을 생성][6]하여 수집한 전체 스트림에서 로그 데이터를 요약합니다.
 - [로그 인덱스][7]를 활용하여 로그 관리 예산을 세심하게 관리하세요.
-- 수집한 로그를 자체 클라우드 호스팅 스토리지 버킷으로 전달하여 향후 트러블슈팅 또는 규정 준수 감사용으로 [아카이브][8]로써 보관합니다.
-- [아카이브 리하이드레이트][9]로 오래되었거나 인덱싱에서 제외한 로그 이벤트를 분석 또는 조사합니다.
+- 수집한 로그를 자체 클라우드 호스팅 스토리지 버킷으로 전달하여 향후 문제 해결 또는 규정 준수 감사를 위한 [아카이브][8]로 보관합니다.
+- Archive Search를 사용하여 [아카이브를 검색][12]하고 스토리지에서 직접 실시간으로 로그를 쿼리합니다. 전체 플랫폼 기능에 액세스하거나 로그를 더 오래 보존해야 하는 경우 **Search & Rehydration** 모드를 사용하세요.
 - 제한 쿼리로 [로그 데이터 액세스][10]를 제한합니다.
 
-## 로그 탐색기
+## Log Explorer {#log-explorer}
 
-설정을 완료한 후 [로그 탐색기][11]에 로그 조사 및 트러블슈팅을 시작합니다.
+설정을 완료한 후 [Log Explorer][11]에서 로그 조사 및 문제 해결을 시작하세요.
 
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -56,6 +58,8 @@ title: 로그 설정
 [6]: /ko/logs/log_configuration/logs_to_metrics/
 [7]: /ko/logs/log_configuration/indexes
 [8]: /ko/logs/log_configuration/archives/
-[9]: /ko/logs/log_configuration/rehydrating
 [10]: /ko/logs/guide/logs-rbac/
 [11]: /ko/logs/explorer/
+[12]: /ko/logs/explorer/archive_search/
+[13]: /ko/mcp_server/setup/
+[14]: /ko/mcp_server/tools/#logs-configuration

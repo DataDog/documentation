@@ -5,6 +5,14 @@ aliases:
 - /continuous_integration/tests/setup/
 ---
 
+{{< skill-callout
+    title="Set up Test Optimization with an agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided Test Optimization setup."
+    action_name="copy_dd_orchestrator_test_optimization_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, set up Datadog Test Optimization for this project
+{{< /skill-callout >}}
+
 For information about configuration options for [Test Optimization][1], choose your language:
 
 {{< card-grid card_width="75px" >}}
@@ -31,7 +39,7 @@ To have a supported Test Optimization library upload code coverage reports autom
 
 You can restrict Test Optimization data at the repository level to the appropriate teams and roles in Datadog. This helps prevent sensitive information, such as test names or source paths, from crossing team boundaries.
 
-To use Data Access Control, go to [Organization Settings > Data Access Control][7] and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
+To use Data Access Control, go to [Organization Settings > Access Control][7] and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
 
 [1]: /continuous_integration/tests
 [2]: /tests/setup/bazel/
@@ -39,4 +47,4 @@ To use Data Access Control, go to [Organization Settings > Data Access Control][
 [4]: /tests/network/
 [5]: /tests/containers/
 [6]: /code_coverage/setup/#upload-reports-automatically-with-test-optimization
-[7]: https://app.datadoghq.com/organization-settings/data-access-controls
+[7]: https://app.datadoghq.com/organization-settings/access-controls

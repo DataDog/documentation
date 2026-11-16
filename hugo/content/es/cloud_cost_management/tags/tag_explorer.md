@@ -37,6 +37,7 @@ Consulte la documentación respectiva de su proveedor de nube:
   {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
   {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
   {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/oracle/" src="integrations_logos/oracle-cloud-infrastructure_avatar.svg" alt="Oracle Cloud" >}}
 {{< /card-grid >}}
 
 ## Buscar y gestionar etiquetas {#search-and-manage-tags}
