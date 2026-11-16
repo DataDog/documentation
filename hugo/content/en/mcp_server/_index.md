@@ -91,7 +91,7 @@ Most MCP Server tools, such as `search_datadog_logs`, query Datadog backends dir
 
 ### Restrict which data the Datadog MCP Server can access
 
-The MCP Server forwards the authenticated user's own credentials to Datadog APIs. Your existing access controls apply exactly as they do for direct API or UI access. The MCP Server cannot grant a user access beyond what that user already has. It cannot reach resources that are not visible to that user in the Datadog UI.
+The MCP Server forwards the caller's own credentials to Datadog APIs: the signed-in user's, or a service account's when the connection uses a Service Access Token. Your existing access controls apply exactly as they do for direct API or UI access. The MCP Server cannot grant access beyond what that user or service account already has. It cannot reach resources that are not visible to that user or service account in the Datadog UI.
 
 Because your AI client controls what it sends to its model provider, limiting what a provider can receive means limiting what the MCP Server returns. To scope the data an MCP Server user can retrieve, use:
 
