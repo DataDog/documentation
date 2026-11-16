@@ -66,9 +66,9 @@ In **Block unsafe**, other failures can also prevent requests from completing. T
 | OpenAI Chat Completions | Supported plain-text conversation content for buffered and streaming requests. | Successful buffered output in **Block unsafe**. |
 | OpenAI Responses | Supported explicit plain-text input and instructions for buffered and streaming requests. | Not evaluated. |
 | Anthropic Messages | Supported text input for buffered and streaming requests. | Not evaluated. |
-| Native Gemini | Not supported by the Gateway AI Guard integration. | Not evaluated. |
+| Native Gemini | Prompt evaluation support is coming soon. | Not evaluated. |
 
-Streamed output is not evaluated. Tool definitions, tool calls, and tool results are outside the Gateway AI Guard evaluation path. A request containing only tool content can skip evaluation because it has no supported text. Unsupported media, such as images or audio, can cause a refusal in **Block unsafe**.
+Streamed output is not evaluated. Tool definitions, tool calls, and tool results are outside the Gateway AI Guard evaluation path. Support is coming soon. A request containing only tool content can skip evaluation because it has no supported text. Unsupported media, such as images or audio, can cause a refusal in **Block unsafe**.
 
 A successful model response alone does not prove that AI Guard evaluated the request. Check the matching Gateway span for a completed evaluation.
 
