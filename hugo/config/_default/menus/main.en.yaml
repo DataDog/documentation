@@ -3325,11 +3325,16 @@ menu:
       parent: actions_connections
       identifier: private_actions_creds
       weight: 105
+    - name: Execution Policies
+      url: actions/execution_policies/
+      parent: action_catalog
+      identifier: actions_execution_policies
+      weight: 2
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
       identifier: private_actions
-      weight: 2
+      weight: 3
     - name: Getting Started
       url: actions/private_actions/getting_started/
       parent: private_actions
@@ -3355,21 +3360,16 @@ menu:
       parent: private_actions
       identifier: private_actions_authorize_private_actions
       weight: 205
-    - name: Execution Policies
-      url: actions/private_actions/execution_policies/
-      parent: private_actions
-      identifier: private_actions_execution_policies
-      weight: 206
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
       identifier: private_actions_run_script
-      weight: 207
+      weight: 206
     - name: Reference
       url: actions/private_actions/reference/
       parent: private_actions
       identifier: private_actions_reference
-      weight: 208
+      weight: 207
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
