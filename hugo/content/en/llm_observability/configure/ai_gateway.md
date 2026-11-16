@@ -206,7 +206,7 @@ Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for eac
 
 The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. By default, a budget counts matching spend after you create it. Use {{< ui >}}Track existing usage for current period{{< /ui >}} when available to include earlier matching usage in the budget's current-period spend. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
-For shared and per-value allowances, active-period adjustments, and verification steps, see [Set and Enforce AI Gateway Budgets][17].
+For shared and per-value allowances, active-period adjustments, and verification steps, see [Set and Enforce AI Gateway Budgets][24].
 
 ## Set rate limits
 
@@ -446,4 +446,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
 
-[17]: /llm_observability/configure/ai_gateway_budgets/
+[24]: /llm_observability/configure/ai_gateway_budgets/
