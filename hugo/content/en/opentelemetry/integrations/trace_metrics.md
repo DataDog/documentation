@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="APM metrics from OpenTelemetry" style="width:100%;" >}}
 
-Trace metrics are RED (Rate, Error, Duration) metrics that power the Catalog, Service Page, and Resource Page in Datadog APM, along with any dashboards and monitors that query `trace.*` metrics.
+Datadog APM uses trace metrics, which measure request rate, errors, and duration (RED), to power the Catalog, Service Page, Resource Page, and anything built on `trace.*` metrics.
 
 This page covers setups that send OTLP data to Datadog, such as the [recommended Collector setup][1]. If you use the [DDOT Collector][4] or the [Datadog Exporter and Connector][6], the Datadog Connector computes trace metrics. For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
 
@@ -29,10 +29,10 @@ You can compute trace metrics from three sources. Datadog recommends the `span_m
 | Source | Sampling behavior | Billing |
 |---|---|---|
 | [`span_metrics` connector](#use-the-span_metrics-connector) (recommended) | Computes metrics from every span the Collector receives. Place the connector before any sampling processor. | Included in APM. |
-| [HTTP metrics from the SDK](#use-http-metrics-from-the-sdk) | Not affected by span sampling, because the SDK aggregates every request before export. | Trace metrics are included in APM. Raw HTTP metrics that you keep are billed as [custom metrics][7]. |
+| [HTTP metrics from the SDK](#use-http-metrics-from-the-sdk) | Not affected by span sampling, because the SDK aggregates every request before export. | The attributes used for trace metrics are included in APM. The raw HTTP metrics are billed as [custom metrics][7] unless you drop them. |
 | [Spans sent to the Datadog intake](#compute-trace-metrics-in-the-datadog-intake) | Computes metrics only from the spans the intake receives. To cover all traffic, send unsampled spans. | Included in APM. |
 
-Use one source for each service. If you enable HTTP metrics alongside the `span_metrics` connector, Datadog computes trace metrics from both sources.
+Do not use HTTP metrics alongside the `span_metrics` connector, because Datadog then computes trace metrics from both sources.
 
 ## Use the span_metrics connector
 
@@ -50,7 +50,9 @@ Datadog can compute trace metrics from the [HTTP metrics][9] that OpenTelemetry 
 - HTTP metrics have no equivalent for RPC, database, or messaging spans.
 - Only `http.server.request.duration` and `http.client.request.duration` are stable in the OpenTelemetry specification.
 
-Two fields in the [`dd-otel-metric-config` header][10] control how Datadog handles HTTP metrics. Both default to `false`.
+To use this source, set `trace_metrics.instrumentation_metrics_calc` to `true` in the [`dd-otel-metric-config` header][10]. Set `raw_instrumentation_metrics_drop` to keep or drop the raw HTTP metrics.
+
+The following table shows the result of each combination. Both fields default to `false`.
 
 | `trace_metrics.instrumentation_metrics_calc` | `raw_instrumentation_metrics_drop` | Result |
 |---|---|---|
