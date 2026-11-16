@@ -103,7 +103,7 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 
 ## Uninstall AWS Integration
 
-If you installed [Datadog instrumentation][11] on resources in these accounts, remove it first. Datadog removes instrumentation with the integration IAM role. After the StackInstances are deleted, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration it added stay in place. For each account, remove the instrumentation from Fleet Automation as described in [Remove the integration][12], then return here to delete the StackInstances and StackSet.
+If you installed [Datadog instrumentation][11] on resources in these accounts, remove it first. Datadog removes instrumentation with the integration IAM role. After the StackInstances are deleted, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration that Datadog added stay in place. For each account, remove the instrumentation from Fleet Automation as described in [Remove the integration][12], then return here to delete the StackInstances and StackSet.
 
 To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet. 
 

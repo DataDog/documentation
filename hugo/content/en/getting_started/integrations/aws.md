@@ -273,10 +273,10 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 
 ## Remove the integration
 
-If you installed [Datadog instrumentation][64] through the AWS integration, remove it before you delete the CloudFormation stack or remove the AWS account from Datadog. Datadog removes instrumentation with the integration IAM role. After the stack or the account is gone, Datadog can't reach your resources. The Agent, Lambda layers, and function configuration it added then stay in place.
+If you installed [Datadog instrumentation][64] through the AWS integration, remove it before you delete the CloudFormation stack or remove the AWS account from Datadog. Datadog removes instrumentation with the integration IAM role. After the stack or the account is gone, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration that Datadog added stay in place.
 
 1. Open the [AWS Install Agents page][65] in Fleet Automation and select the AWS account.
-1. For each workload you instrumented, {{< ui >}}EC2 Instances{{< /ui >}} and {{< ui >}}Lambda Functions{{< /ui >}}, click {{< ui >}}Remove all{{< /ui >}}.
+1. For each instrumented workload type ({{< ui >}}EC2 Instances{{< /ui >}} and {{< ui >}}Lambda Functions{{< /ui >}}), click {{< ui >}}Remove all{{< /ui >}}.
 1. Review the summary and click {{< ui >}}Uninstall Agent{{< /ui >}}.
 1. After the removal completes, delete the CloudFormation stack or remove the account.
 
