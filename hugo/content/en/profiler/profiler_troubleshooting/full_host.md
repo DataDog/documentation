@@ -10,6 +10,8 @@ further_reading:
       text: 'Deploying the Full-Host Profiler'
 ---
 
+Use this page to diagnose common Full-Host Profiler issues, such as pods that don't start, profiles that don't appear in Datadog, and function names that are missing. The steps cover both the Datadog Agent and OpenTelemetry deployment paths.
+
 ## Find the Full-Host Profiler logs
 
 Confirm that pods with the Full-Host Profiler are running on the expected nodes:
