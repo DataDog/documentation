@@ -230,7 +230,7 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 
 ### How rate limits are counted
 
-- Per-minute limits apply to a rolling 60-second window. Longer windows are also available. See [Set and Enforce AI Gateway Rate Limits][17].
+- Per-minute limits apply to a rolling 60-second window. Longer windows are also available. See [Set and Enforce AI Gateway Rate Limits][25].
 - A shared rule pools matching traffic into one allowance. For example, a shared team rule of 600 requests per minute gives the whole team 600 requests. Per-value rules give each matching value its own allowance.
 - A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has available capacity.
 - Tokens and cost count when a response completes, so requests already in progress can take usage over a limit.
@@ -271,7 +271,7 @@ The rate limit list shows, for each rate limit, usage against its configured win
 
 The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
 
-For longer windows, spend limits, independent allowances, and API verification steps, see [Set and Enforce AI Gateway Rate Limits][17].
+For longer windows, spend limits, independent allowances, and API verification steps, see [Set and Enforce AI Gateway Rate Limits][25].
 
 ## Observe gateway activity {#observe-ai-gateway-activity}
 
@@ -446,4 +446,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
 
-[17]: /llm_observability/configure/ai_gateway_rate_limits/
+[25]: /llm_observability/configure/ai_gateway_rate_limits/
