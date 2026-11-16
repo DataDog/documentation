@@ -123,8 +123,8 @@ spec:
     nodeAgent:
       containers:
         host-profiler:
-          # Required for current Datadog Operator versions.
-          # Profiler security context automatically.
+          # Required because the Datadog Operator doesn't configure the
+          # Full-Host Profiler security context automatically.
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -432,6 +432,21 @@ agents:
       env:
         - name: DD_HOSTPROFILER_HEALTH_METRICS_ENABLED
           value: "true"
+```
+
+**Datadog Operator** (`DatadogAgent` custom resource):
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      containers:
+        host-profiler:
+          env:
+            - name: DD_HOSTPROFILER_HEALTH_METRICS_ENABLED
+              value: "true"
+```
+
 #### Health metrics
 
 | Name                                  | Values | Default          | Description |
