@@ -5,6 +5,9 @@ further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Client-Side SDKs"
+- link: "/change_tracking/change_types/feature_flags/"
+  tag: "Documentation"
+  text: "Track Feature Flag Changes"
 ---
 
 A **kill switch** is a Boolean feature flag where the default state is **on** (`true`). The feature runs normally until you enact the kill switch by adding a targeting rule that serves `false`.
@@ -90,6 +93,7 @@ When you need to disable the feature — for example, during a regression or to 
 - Mark the flag as **Permanent**. Kill switches are intended to be long-lived, and marking them permanent prevents them from being flagged as [stale][2].
 - Test the kill switch in staging before relying on it in production.
 - Use evaluation tracking to confirm the flag state during an incident.
+- Use [Change Tracking][3] to identify which flag change preceded a regression before you enact a kill switch.
 
 ## Further reading
 
@@ -97,3 +101,4 @@ When you need to disable the feature — for example, during a regression or to 
 
 [1]: https://app.datadoghq.com/feature-flags/create
 [2]: /feature_flags/concepts/stale_flags/
+[3]: /change_tracking/change_types/feature_flags/

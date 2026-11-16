@@ -1,58 +1,58 @@
 ---
 algolia:
   tags:
-  - suivi des erreurs
-description: Découvrez comment retrouver et gérer les erreurs recueillies depuis vos
-  applications Web et mobiles.
+  - error tracking
+description: Apprenez à rechercher et à gérer les erreurs collectées depuis vos applications
+  web et mobiles.
 further_reading:
 - link: https://www.datadoghq.com/blog/error-tracking/
-  tag: GitHub
-  text: Analyser les problèmes affectant vos applications avec la solution Error Tracking
-    de Datadog
+  tag: Blog
+  text: Analyser les problèmes affectant vos applications avec Datadog Error Tracking
 - link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog
-  tag: GitHub
-  text: Débugger efficacement les plantages sous iOS avec la solution RUM de Datadog
+  tag: Blog
+  text: Déboguez efficacement les plantages iOS avec Datadog RUM
 - link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
-  tag: GitHub
+  tag: Blog
   text: Comment l'équipe Technical Solutions de Datadog utilise les solutions RUM,
     Session Replay et Error Tracking pour résoudre les problèmes rencontrés par les
     clients
 - link: https://www.datadoghq.com/blog/error-tracking-logs/
   tag: Blog
-  text: Suivre et trier les erreurs dans vos logs avec la solution Error Tracking
-    de Datadog
+  text: Suivez et triez les erreurs dans vos logs avec Datadog Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: En savoir plus sur l'Error Tracking Explorer
 - link: /monitors/types/error_tracking/
   tag: Documentation
   text: Créer un monitor Error Tracking
-title: Error Tracking pour les applications Web et mobiles
+title: Error Tracking pour les applications web et mobiles
 ---
+## Présentation {#overview}
 
-## Présentation
-
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Les détails d'un problème dans l'Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-Les problèmes liés à la solution RUM comprennent les stack trace, les sessions utilisateur et les métadonnées, y compris l'emplacement de l'utilisateur, la version et les attributs personnalisés inclus dans vos rapports de crash.
+Les Issues issues des erreurs RUM incluent la stack trace, les chronologies des sessions utilisateur et les métadonnées, notamment la localisation de l'utilisateur, la version et tout attribut personnalisé inclus dans vos rapports de plantage.
 
-Découvrez les principales fonctionnalités dʼError Tracking dans la documentation relative à lʼ[Error Tracking Explorer][3]. Pour consulter l'Error Tracking Explorer pour la solution RUM, accédez à [**Digital Experience** > **Error Tracking**][1].
+Faites le tour des fonctionnalités clés d'Error Tracking dans la documentation de l'[Error Tracking Explorer][3]. Pour afficher l'Error Tracking Explorer pour RUM, accédez à [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][1].
 
-## Configuration
+## Configuration {#setup}
 
-{{< whatsnext desc="Pour bien débuter avec Datadog Error Tracking pour la solution RUM, consultez la documentation à ce sujet :" >}}
+{{< whatsnext desc="Pour commencer avec Datadog Error Tracking pour RUM, consultez la documentation correspondante :" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/application_monitoring/electron/error_tracking" >}}Electron{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/maui" >}}.NET MAUI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

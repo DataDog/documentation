@@ -44,3 +44,22 @@ entries:
       - ExportFeatureFlagHistory
       - ListFeatureFlagHistory
     title: Add Feature Flags change history list and CSV export endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ExportFeatureFlagHistory
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - UpdateSavedFilterAttributes
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41461
+    operations:
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlagsEnvironments
+      - UpdateFeatureFlagsEnvironment
+    title: Document environment privacy settings and update behavior

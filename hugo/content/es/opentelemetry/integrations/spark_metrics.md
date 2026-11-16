@@ -2,34 +2,42 @@
 further_reading:
 - link: /opentelemetry/setup/collector_exporter/
   tag: Documentación
-  text: Configuración de OpenTelemetry Collector
+  text: Configuración del OpenTelemetry Collector
 title: Métricas de Apache Spark
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="/opentelemetry/collector_exporter/spark_metrics.png" alt="Métricas de Apache Spark de OpenTelemetry en un panel de Spark" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/spark_metrics.png" alt="Métricas de OpenTelemetry Apache Spark en un dashboard de Spark" style="width:100%;" >}}
+El [receptor de Apache Spark][1] recopila métricas de Apache Spark que se muestran en el panel [Spark Overview][4].
 
-El [receptor de Apache Spark][1] permite recopilar métricas de Apache Spark y acceder al dashboard de [Información general de Spark][4]. Configura el receptor según las especificaciones de la última versión del `apachesparkreceiver`.
+Para obtener más información, consulte la documentación del proyecto OpenTelemetry para el [receptor de Apache Spark][1].
 
-Para más información, consulta la documentación del proyecto de OpenTelemetry para el [receptor de Apache Spark][1].
+## Configuración {#setup}
 
-## Configuración
+Este ejemplo utiliza identificadores de componentes de OpenTelemetry Collector Contrib v0.154.0. Para otras versiones o distribuciones, utilice los identificadores que admita su distribución. Las versiones anteriores denominan a este receptor `apachespark`.
 
-Para recopilar métricas de Apache Spark con OpenTelemetry para su uso con Datadog:
+El receptor de Apache Spark lee la API REST que una aplicación Spark en ejecución ofrece a través del puerto de su interfaz web.
 
-1. Configura el [receptor de Apache Spark][1] en tu configuración de OpenTelemetry Collector.
-2. Asegúrate de que el OpenTelemetry Collector está [configurado para exportar a Datadog][3].
+Agregue las siguientes líneas a la configuración del Collector y establezca `endpoint` en la dirección de la interfaz web de su aplicación Spark:
 
-Consulta la [documentación del receptor de Apache Spark][1] para obtener información detallada sobre las opciones y requisitos de configuración.
+```yaml
+receivers:
+  apache_spark:
+    endpoint: http://localhost:4040
+```
 
-## Datos recopilados
+Agregue `apache_spark` a la lista `receivers` del pipeline de métricas en su configuración. Mantenga los procesadores que ya están en ese pipeline. La ingesta de métricas OTLP de Datadog solo acepta métricas delta, y este receptor produce sumas acumulativas, por lo que el pipeline necesita `cumulativetodelta`. La [configuración recomendada del Collector][3] lo incluye.
+
+Para ver todas las opciones de configuración, consulte la [documentación del receptor de Apache Spark][1].
+
+## Datos recopilados {#data-collected}
 
 {{< mapping-table resource="apachespark.csv">}}
 
-Consulta [Asignación de métricas de OpenTelemetry][2] para obtener más información.
+Para ver la asignación completa entre los nombres de métricas de OpenTelemetry y Datadog, consulte [Asignación de métricas de OpenTelemetry][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -2,46 +2,46 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/browser-tests/
   tag: Blog
-  text: Monitorizar la experiencia de usuario con los tests de navegador de Datadog
+  text: Monitoreo de la experiencia del usuario con Datadog Browser Tests
 - link: synthetics/browser_tests
   tag: Documentación
-  text: Información sobre los tests de navegador Synthetic
-title: Controlar ventanas emergentes en tests de navegador
+  text: Obtenga más información sobre las pruebas Synthetic de navegador
+title: Maneje ventanas emergentes en pruebas de navegador
 ---
-## Información general
+## Descripción general {#overview}
 
-En esta guía se describe cómo administrar ventanas emergentes como modales o ventanas de aplicaciones en un [test de navegador][5] de Sintético.
+Esta guía describe cómo administrar ventanas emergentes como modales o ventanas de aplicación en una [prueba de navegador][5] sintética.
 
-## Modales
+## Modales {#modals}
 
-### JavaScript
+### JavaScript {#javascript}
 
-Los tests de navegador de Synthetics gestionan los [modales JavaScript][1] automáticamente:
+Las pruebas de navegador sintéticas manejan automáticamente los [modales de JavaScript][1]:
 
- - `alert` los modales se descartan inmediatamente para OK. 
- - `prompt` los modales se llenan con `Lorem Ipsum` para los tests en Google Chrome o Microsoft Edge.
- - `confirm` se aceptan los modales que piden confirmación.
+ - `alert` los modales se cierran inmediatamente con OK. 
+ - `prompt` los modales se completan con `Lorem Ipsum` para pruebas en Google Chrome o Microsoft Edge.
+ - `confirm` los modales que solicitan confirmación son aceptados.
 
-### Autenticación básica
+### Autenticación básica {#basic-authentication}
 
-Para las ventanas emergentes de autenticación básica, especifica las credenciales asociadas en las [**Opciones avanzadas**][2] de tu configuración de test de navegador.
+Para las ventanas emergentes de autenticación básica, especifique las credenciales correspondientes en [{{< ui >}}Advanced Options{{< /ui >}}][2] de la configuración de su prueba de navegador.
 
 {{< img src="synthetics/guide/popup/http_authentication.png" alt="Ventana emergente de autenticación básica" style="width:90%" >}}
 
-## Ventanas emergentes de aplicación
+## Ventanas emergentes de aplicación {#application-pop-ups}
 
-### Ventanas emergentes ancladas
+### Ventanas emergentes ancladas {#anchored-pop-ups}
 
-Si aparecen ventanas emergentes en algún punto de tu recorrido, puedes grabar un paso para cerrarla y contemplar la posibilidad de que este paso no funcione usando la [opción correspondiente][3]. De este modo, el test sabrá cómo comportarse si aparecen ventanas emergentes. Si no aparecen, el paso no funcionará, pero el resto del test se desarrollará correctamente.
+Si aparece una ventana emergente en un punto específico de su recorrido, grabe un paso para cerrarla. En las opciones avanzadas del paso, seleccione {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Luego, desmarque {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (seleccionado de forma predeterminada). Si la ventana emergente no aparece, el paso falla sin hacer fallar toda la prueba. Para obtener más información, consulte la sección [Paso opcional][3].
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Permitir que el paso no controle la ventana emergente" style="width:60%" >}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Opciones avanzadas del paso con \"Continue to next step\" seleccionado y \"Mark test as failed\" desmarcado." style="width:60%" >}}
 
-### Ventanas emergentes móviles
+### Ventanas emergentes móviles {#moving-pop-ups}
 
-Si el momento en que aparecen estas ventanas emergentes en una sesión no es predecible, check con el tercero que provee la ventana emergente para ver si puede crear una regla que impida que la ventana emergente aparezca durante la ejecución de tu test de navegador. Puede, por ejemplo, proveerte una cookie que puedes introducir en la [sección **Opciones avanzadas**][2] de tu test.
+Si el momento en el que aparecen estas ventanas emergentes en una sesión no es predecible, consulte con el tercero que proporciona la ventana emergente para ver si puede crear una regla que impida que aparezca durante la ejecución de su prueba de navegador. Por ejemplo, pueden proporcionarle una cookie que puede ingresar en la [sección {{< ui >}}Advanced Options{{< /ui >}}][2] de su prueba.
 
-Otra alternativa es aplicar uno de estos métodos para que la ventana emergente se cierre y el test siga su camino:
-  * Crear una [aserción JavaScript][4] al principio del test de navegador para tratar de cerrar la ventana emergente con regularidad:
+Alternativamente, utilice uno de estos métodos para asegurarse de que su ventana emergente se cierre y su prueba pueda continuar su recorrido:
+  * Cree una [aserción de JavaScript][4] al principio de su prueba de navegador para intentar cerrar regularmente la ventana emergente:
 
     ```javascript
     if (document.querySelector("<ELEMENT>")) {
@@ -59,14 +59,14 @@ Otra alternativa es aplicar uno de estos métodos para que la ventana emergente 
     }
     ```
 
-  * Añadir pasos para cerrar la ventana emergente entre todos los demás pasos del test de navegador y seleccionar la [opción **Allow this step to fail**][3] (Este paso puede no funcionar) en cada uno de ellos.
+  * Grabe los pasos para cerrar la ventana emergente y agréguelos entre todos los demás pasos de su prueba de navegador. Para cada paso, seleccione {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Luego, desmarque {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (seleccionado de forma predeterminada).
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://javascript.info/alert-prompt-confirm
 [2]: /es/synthetics/browser_tests/#test-configuration
 [3]: /es/synthetics/browser_tests/advanced_options/#optional-step
-[4]: /es/synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[4]: /es/synthetics/browser_tests/test_steps#test-your-ui-with-custom-javascript
 [5]: /es/synthetics/browser_tests

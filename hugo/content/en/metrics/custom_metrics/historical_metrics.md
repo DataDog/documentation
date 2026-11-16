@@ -52,8 +52,8 @@ To enable the ingestion of historical metrics for a specific metric:
 
 You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Catalog page][1] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
-1. Select {{< ui >}}Enable historical metrics{{< /ui >}}.
+1. Navigate to the [Metrics Catalog page][1] and click the {{< ui >}}Actions{{< /ui >}} dropdown.
+1. Select {{< ui >}}Manage Historical Metrics{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the {{< ui >}}Historical metrics{{< /ui >}} toggle.
 
