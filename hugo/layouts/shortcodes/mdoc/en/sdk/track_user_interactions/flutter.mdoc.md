@@ -48,9 +48,9 @@ Container(
 
 ## Manually track actions and send custom events
 
-You can also track specific user actions such as taps, clicks, and scrolls using `DdRum.addAction`.
+You can also track specific user actions such as taps, clicks, and scrolls using `DatadogSdk.instance.rum?.addAction`.
 
-To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DdRum.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DdRum.startAction()` or `DdRum.stopAction()`.
+To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DatadogSdk.instance.rum?.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DatadogSdk.instance.rum?.startAction()` or `DatadogSdk.instance.rum?.stopAction()`.
 
 For example:
 
@@ -63,7 +63,7 @@ void _downloadResourceTapped(String resourceName) {
 }
 ```
 
-When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
+When using `DatadogSdk.instance.rum?.startAction` and `DatadogSdk.instance.rum?.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
 
 For the attributes collected for actions, see [Data Collected][3].
 

@@ -82,7 +82,7 @@ For more information about initializing GrowthBook's SDK, see [GrowthBook's Reac
 const gb = new GrowthBook({
   ...,
   onFeatureUsage: (featureKey, result) => {
-    datadogRum.addFeatureFlagEvaluation(featureKey, result.value);
+    DdRum.addFeatureFlagEvaluation(featureKey, result.value);
   },
 });
 
@@ -101,7 +101,7 @@ Learn more about SDK initialization in the [Kameleoon React Native SDK documenta
 const { onEvent } = useInitialize();
 
 onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
-  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+  DdRum.addFeatureFlagEvaluation(featureKey, variation.key);
 });
 ```
 

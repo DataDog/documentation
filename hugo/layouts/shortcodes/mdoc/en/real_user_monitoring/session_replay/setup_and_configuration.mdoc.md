@@ -644,7 +644,7 @@ SessionReplay.enable({
 <!-- end React Native -->
 
 <!-- Flutter -->
-{% if equals($platform, "android") %}
+{% if equals($platform, "flutter") %}
 ```dart
 final configuration = DatadogConfiguration(
   // ...

@@ -112,10 +112,10 @@ if (DatadogSdk.instance.isFirstPartyHost(host)) {
 
 In addition to tracking resources automatically, you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][7]:
 
-- `DdRum.startResource`
-- `DdRum.stopResource`
-- `DdRum.stopResourceWithError`
-- `DdRum.stopResourceWithErrorInfo`
+- `DatadogSdk.instance.rum?.startResource`
+- `DatadogSdk.instance.rum?.stopResource`
+- `DatadogSdk.instance.rum?.stopResourceWithError`
+- `DatadogSdk.instance.rum?.stopResourceWithErrorInfo`
 
 To attach custom attributes to an individual resource, pass an attributes map to `startResource` or `stopResource`. The attributes are optional positional arguments. For `stopResource`, pass the resource size, or `null` if it is unknown, before the attributes map.
 
