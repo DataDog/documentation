@@ -54,6 +54,8 @@ A provider connects an integration account to the models that callers can use th
 
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
+To configure Claude Code, Codex, or a Python SDK, see [Connect applications to AI Gateway][17].
+
 ### Authenticate requests
 
 AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
@@ -443,3 +445,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+[17]: /llm_observability/configure/ai_gateway_applications/
