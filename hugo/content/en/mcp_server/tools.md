@@ -859,7 +859,7 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 
 ### `execute_code_write`
 *Toolsets: **core**, **code-exec***\
-*Permissions Required: Any product-specific role permissions needed for the Datadog resources the executed code reads or changes. MCP write access must be enabled for your organization.*\
+*Permissions Required: Any product-specific role permissions needed for the Datadog resources the executed code reads or changes. [MCP write access][103] must be enabled for your organization.*\
 Executes AI agent-authored JavaScript that can read, create, update, or delete Datadog resources. Use `execute_code` for scripts that only read data. Writes are not transactional: if a script fails partway, completed writes remain.
 
 - Mute every monitor tagged `team:payments` for the next two hours and list the monitors you changed.
@@ -868,7 +868,7 @@ Executes AI agent-authored JavaScript that can read, create, update, or delete D
 ### `search_datadog_sdk`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
-Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+Looks up the SDK functions, types, and API methods available for writing `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
