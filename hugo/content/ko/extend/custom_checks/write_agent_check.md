@@ -6,7 +6,7 @@ aliases:
 - /ko/developers/custom_checks/write_agent_check/
 further_reading:
 - link: /extend/
-  tag: 설명서
+  tag: 문서
   text: Datadog 확장
 title: 사용자 지정 Agent 검사 작성
 ---
@@ -32,13 +32,13 @@ init_config:
 instances:
   [{}]
 {{< /code-block >}}
-4. `checks.d` 디렉터리에 Check 파일을 생성합니다. 파일 이름은 `custom_checkvalue.py`로 지정합니다.
+4. `checks.d` 디렉터리에 검사 파일을 생성합니다. 파일 이름은 `custom_checkvalue.py`로 지정합니다.
    
    <div class="alert alert-info">
      <strong>검사 이름 지정:</strong>
      <ul>
        <li>기존 Datadog Agent 통합의 이름과 충돌하는 것을 방지하기 위해 <code>custom_</code> 로 검사 이름에 접두사를 추가하는 것이 좋습니다. 예를 들어 사용자 지정 Postfix 검사가 있는 경우 검사 파일 이름을 <code>custom_postfix.py</code> 및 <code>custom_postfix.yaml</code> 로 지정하고, <code>postfix.py</code> 및 <code>postfix.yaml</code>은 사용하지 않는 것이 좋습니다.</li>
-       <li>구성 파일 이름과 검사 파일 이름은 일치해야 합니다. 검사 이름이 <code>custom_checkvalue.py</code>라면 구성 파일 이름은 <i>반드시</i> <code>custom_checkvalue.yaml</code>로 지정해야 합니다.</li>
+       <li>구성 파일 이름과 검사 파일 이름은 일치해야 합니다. 검사 이름이 <code>custom_checkvalue.py</code>라면 구성 파일 이름은 <i>반드시</i> <code>custom_checkvalue.yaml</code>은 사용하지 않는 것이 좋습니다.</li>
      </ul>
    </div>
 5. 파일을 편집하여 다음 내용을 포함합니다.
@@ -48,7 +48,7 @@ class HelloCheck(AgentCheck):
   def check(self, instance):
     self.gauge('hello.world', 1)
 {{< /code-block >}}
-6. [Agent를 재시작][3]한 후 [Metric Summary][4]에 `hello.world`라는 새 메트릭이 표시될 때까지 기다립니다.
+6. [Agent를 재시작][3]한 후 [Metrics Catalog][4]에 `hello.world`라는 새 메트릭이 표시될 때까지 기다립니다.
 
 사용자 지정 검사가 제대로 작동하지 않는 경우 파일 권한을 확인하세요. 검사 파일은 Agent 사용자에게 읽기 및 실행 권한이 있어야 합니다. 추가 문제 해결 단계는 [Agent Check 문제 해결][7]을 참조하세요.
 
@@ -56,7 +56,7 @@ class HelloCheck(AgentCheck):
 
 검사의 수집 간격을 변경하려면 `custom_checkvalue.yaml` 파일에서 `min_collection_interval` 설정을 사용하여 초 단위 값을 지정합니다. 기본값은 15초입니다. `min_collection_interval`은 인스턴스 수준에서 추가해야 합니다. 사용자 지정 검사가 여러 인스턴스를 모니터링하도록 구성된 경우 인스턴스별로 간격을 개별 설정해야 합니다.
 
-`min_collection_interval`을 `30`으로 설정하더라도 메트릭이 정확히 30초마다 수집되는 것은 보장되지 않습니다. Agent 수집기는 30초마다 검사를 실행하려고 시도하지만, 동일한 Agent에서 활성화된 통합 및 검사 수에 따라 다른 통합 및 검사 뒤에서 대기열에 들어갈 수 있습니다. `check` 메서드가 완료되는 데 30초 이상 걸리는 경우 Agent는 검사가 아직 실행 중임을 감지하고 다음 간격까지 실행을 건너뜁니다.
+`min_collection_interval`을 `30`으로 설정하더라도 메트릭이 정확히 30초마다 수집되는 것은 보장되지 않습니다. Agent 수집기는 30초마다 검사를 실행하려고 시도하지만, 동일한 Agent에서 활성화된 통합 및 검사 수에 따라 다른 통합 및 검사 뒤에서 대기열에 들어갈 수 있습니다. `check` 메서드가 완료되는 데 30초를 초과하여 걸리는 경우 Agent는 검사가 아직 실행 중임을 감지하고 다음 간격까지 실행을 건너뜁니다.
 
 #### 수집 간격 설정 {#set-a-collection-interval}
 
@@ -158,7 +158,7 @@ instances:
   - ipaddress: 1.2.3.4
 {{< /code-block >}}
 
-1. [Agent를 재시작][3]합니다. 1분 이내에 [Metric Summary][4]에 `coreapp.update.value`라는 새 메트릭이 표시됩니다. 이 메트릭은 로드 밸런서의 메트릭을 전송합니다.
+1. [Agent를 재시작][3]합니다. 1분 이내에 [Metrics Catalog][4]에 `coreapp.update.value`라는 새 메트릭이 표시됩니다. 이 메트릭은 로드 밸런서의 메트릭을 전송합니다.
 1. 이 메트릭용 [대시보드 생성][6]을 수행합니다.
 
 ## Agent 버전 호환성 {#agent-versioning}
@@ -188,7 +188,7 @@ class HelloCheck(AgentCheck):
 [1]: http://app.datadoghq.com/account/settings/agent/latest
 [2]: /ko/agent/configuration/agent-configuration-files/#check-configuration-files
 [3]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /ko/dashboards/
 [7]: /ko/agent/troubleshooting/agent_check_status/

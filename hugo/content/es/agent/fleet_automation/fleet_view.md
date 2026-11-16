@@ -13,13 +13,6 @@ further_reading:
   text: Instale el Datadog Agent en Kubernetes
 title: Fleet View
 ---
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-Fleet View está en versión preliminar en los sitios de Datadog Government (US1-FED y US2-FED).<br><br>
-La funcionalidad adicional de Fleet Automation, como configurar Agents, actualizar Agents y actualizar SDKs, no es compatible con el sitio de Datadog seleccionado ({{< region-param key=dd_site_name >}}).
-</div>
-{{< /site-region >}}
-
 Utilice [Fleet View][1] para obtener información sobre las brechas de observabilidad en sus servidores, Agents u OTel Collectors desactualizados, y Agents con problemas de integración.
 
 Para cada Datadog Agent, puede ver:

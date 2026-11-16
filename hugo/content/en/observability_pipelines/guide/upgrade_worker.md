@@ -18,7 +18,7 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 
 To upgrade to Worker version 2.26.0:
 
-- Docker: Run the `docker pull` command for the [2.26.0 image][68].
+- Docker: Run the `docker pull` command for the [2.26.0 image][69].
 - Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.26.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.0`.
@@ -28,8 +28,6 @@ To upgrade to Worker version 2.26.0:
 <div class="alert alert-warning"><strong>Breaking change:</strong> This change affects histograms received without a sum, including those from OpenTelemetry and Prometheus sources. The sources preserve a missing sum. The Prometheus destination omits the corresponding <code>_sum</code> series; update Prometheus queries that calculate averages to tolerate a missing sum. The Datadog Metrics destination uses bucket-derived sum and average estimates when no sum is reported. Histogram quantile queries are unaffected.</div>
 
 <div class="alert alert-warning"><strong>Upgrade action:</strong> This change affects Custom Processor programs that call <code>to_unix_timestamp</code> with <code>unit: "nanoseconds"</code>. Before upgrading, replace bare nanosecond calls with <code>to_unix_timestamp!(ts, unit: "nanoseconds")</code>. An out-of-range conversion aborts processing and drops that event. Alternatively, deploy <code>to_unix_timestamp(ts, unit: "nanoseconds") ?? 0</code> with Worker 2.26.0 to supply a fallback. The fallback form does not compile on the previous Worker version. Other units are unaffected.</div>
-
-<div class="alert alert-warning"><strong>Breaking change for Integration Pipelines Preview users:</strong> Update dashboards and monitors before upgrading:<br><br><code>pipelines.integration_pipelines_ingested_events_total</code> becomes <code>pipelines.sawmill_ingested_events_total</code>, and <code>pipelines.integration_pipelines_ingested_event_bytes_total</code> becomes <code>pipelines.sawmill_ingested_event_bytes_total</code>.<br><br>The <code>integration_id</code> tag becomes <code>sawmill_pipeline_id</code>. Named pipelines also have a <code>sawmill_pipeline_name</code> tag. The telemetry <code>component_type</code> becomes <code>sawmill</code>; the pipeline configuration type remains <code>integration_pipelines</code>.<br><br><code>pipelines.integration_pipelines_modified_events_total</code> and <code>pipelines.integration_pipelines_modified_event_bytes_total</code> are removed. Use the <code>is_transformed:true</code> tag on the ingested metrics to count transformed events and bytes. For each integration pipeline's total, sum both <code>is_transformed</code> values. Use that total as the denominator of its transformed percentage. These metrics count processing by each selected integration pipeline, not unique logs entering the processor. Byte counts measure events before normalization.</div>
 
 Worker version 2.26.0 gives you access to the following:
 
@@ -75,12 +73,6 @@ Worker version 2.26.0 gives you access to the following:
     - Shuts down promptly while connecting, retrying, or waiting on an acknowledgement-enabled stream.
     - Honors configured TLS verification, server name, application protocol, and proxy settings.
 - The WebSocket source now rejects a handshake response that specifies an unrequested subprotocol.
-- For Integration Pipelines Preview users, the Integration Pipelines processor now:
-    - Processes date, service, and status remapping consistently with Datadog Log Management.
-    - Resolves each filter key to its designated root field or tag, not both, consistently with Datadog Log Management. String truncation limits count UTF-16 code units.
-    - Keeps source-set timestamps at the top level so date remappers can replace them. A top-level `timestamp` parsed earlier, for example with `parse_timestamp`, is treated as source-set and can be overwritten by date remappers. String and numeric payload dates are unaffected.
-    - Selects built-in pipelines from all `source:` tags, including events with multiple source tags.
-    - Uses top-level `ddsource`, `ddtags`, and `ddsourcecategory` values when present. Copies inside a JSON `message` remain available as attributes.
 - Search queries now:
     - Ignore full-text prefixes, terms, and phrases that contain no words.
     - Match phrases consistently when another phrase has already matched the same field.
@@ -153,6 +145,10 @@ Worker version 2.25.0 gives you access to the following:
     - Components that use the built-in root store no longer trust certificate chains through the distrusted emSign intermediates.
     - TLS connections to servers whose certificate chains end at a removed root fail validation.
 - Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
+
+#### New features
+
+- The [Azure Data Explorer destination][68] is now available.
 
 #### Enhancements
 
@@ -1138,4 +1134,5 @@ Worker version 2.7.0 gives you access to the following:
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
 [66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
 [67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
-[68]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
+[68]: /observability_pipelines/destinations/azure_data_explorer/
+[69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0

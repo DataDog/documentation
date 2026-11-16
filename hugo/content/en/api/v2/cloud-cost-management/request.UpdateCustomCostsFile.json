@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "ai_provider": true
+    },
+    "id": "string",
+    "type": "cost_metadata"
+  }
+}

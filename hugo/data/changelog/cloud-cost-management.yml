@@ -91,3 +91,15 @@ entries:
       - SearchCostRecommendations
       - UpdateUnitCost
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41543
+    operations:
+      - UpdateCustomCostsFile
+    title: Add Update Custom Costs file endpoint
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41543
+    operations:
+      - UploadCustomCostsFile
+    title: Add Update Custom Costs file endpoint
