@@ -24,7 +24,7 @@ further_reading:
 Datadog provides the below out-of-the-box metrics for a comprehensive overview of your application's health over time. To help ensure accuracy, these metrics are computed prior to retaining or discarding any sessions. This means that even if you keep 0.01% of your sessions, these metrics are computed based on 100% of the ingested sessions. These metrics are powering the [performance summary][1] to give you an accurate overview of the performance of your apps.
 
 **Notes**:
-- All queries for the below metrics include user and agent sessions (`@session.type:(user OR agent)`), except the `rum.measure.lighthouse.*` metrics, which come from browser Synthetic test audits rather than real-user sessions. See [Lighthouse audits][5]. Use the session type dimension to separate them.
+- All queries for the below metrics include `@session.type:user`, except the `rum.measure.lighthouse.*` metrics, which come from browser Synthetic test audits rather than real-user sessions. See [Lighthouse audits][5].
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
 ## Dimensions
