@@ -93,7 +93,7 @@ datadog:
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
 
-[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[1]: /containers/kubernetes/installation
 [2]: /containers/guide/changing_container_registry/
 [3]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
 
