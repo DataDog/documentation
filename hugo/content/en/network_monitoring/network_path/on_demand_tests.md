@@ -90,7 +90,7 @@ After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Pr
 
 ### Execution policy
 
-[Create an Execution Policy][8] that allows `com.datadoghq.remoteaction.networks.runNetworkPath` for the Agents on the source hosts. Give access to the users and teams that run on-demand tests. This requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
+[Create an Execution Policy][8] that allows the `Run Network Path` action and sets *Targets* for the Agents on the source hosts. Give access to the users and teams that run on-demand tests. This requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
 
 {{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with the Allow effect, the Remote Action integration with Run network path selected, and a target that matches the Agent with the tag hostname:auth-dotnet" style="width:60%;" >}}
 
@@ -116,7 +116,7 @@ To use the Datadog MCP Server, users also need the MCP permissions described in 
 
    {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted next to Analyze With Bits AI and Compare" style="width:100%;" >}}
 
-3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, a notification also appears. Click the test run to open its network path.
+3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, slick the test run to open its network path.
 
 ### From Bits Chat
 
