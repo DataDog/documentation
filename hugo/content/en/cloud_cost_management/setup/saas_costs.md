@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
   tag: "Blog"
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
+- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
+  tag: "Blog"
+  text: "Manage Cursor costs with Datadog Cloud Cost Management"
 ---
 
 ## Overview
@@ -36,6 +39,7 @@ SaaS and AI Costs allow you to send cost data **directly from your providers** b
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=chatgptenterprise#configure-your-saas-accounts" src="integrations_logos/chatgpt-enterprise-lockup.svg" alt="ChatGPT Enterprise" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts" src="integrations_logos/temporal_small.svg" alt="temporal cloud" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
@@ -176,6 +180,48 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
 
 **Note**: To track costs for both Anthropic Enterprise and platform accounts, repeat the setup steps to add a separate account entry for each API key type. Use the [Admin API key](https://docs.anthropic.com/en/api/administration-api) for standard platform usage, and the Enterprise Analytics API key for Anthropic Enterprise usage.
+
+{{% /tab %}}
+
+{{% tab "ChatGPT Enterprise" %}}
+
+<div class="alert alert-info">ChatGPT Enterprise cost monitoring is in Preview. Datadog does not charge for this integration during Preview. Credit-priced usage is shown as estimated USD costs, which can differ from final OpenAI bills.</div>
+
+### 1. Create a Costs-only admin API key
+
+Use a ChatGPT Enterprise workspace with access to OpenAI's Costs API. A workspace owner or admin must create the key.
+
+1. Open the ChatGPT Admin Console and select the ChatGPT Enterprise workspace.
+2. Navigate to {{< ui >}}Credentials{{< /ui >}} > {{< ui >}}Admin keys{{< /ui >}} > {{< ui >}}Create new admin key{{< /ui >}}.
+3. If you are a workspace owner, select {{< ui >}}Custom permissions{{< /ui >}}. Set {{< ui >}}Costs{{< /ui >}} to {{< ui >}}Read{{< /ui >}} and leave the other permission categories set to {{< ui >}}None{{< /ui >}}.
+4. Create the key and copy its secret to a secure location.
+
+Create this key in the ChatGPT Admin Console, not the OpenAI API Platform admin-key console. For details, see the [ChatGPT Enterprise integration setup][101].
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, open the [ChatGPT Enterprise integration tile][102].
+2. Select {{< ui >}}Install{{< /ui >}}, open {{< ui >}}Configure{{< /ui >}}, and select {{< ui >}}Add Account{{< /ui >}}.
+3. Enter an {{< ui >}}Account name{{< /ui >}}, the {{< ui >}}ChatGPT Enterprise Admin API Key{{< /ui >}}, and the {{< ui >}}OpenAI Organization ID{{< /ui >}}.
+4. Enable Cloud Cost Management data collection for the account and save the configuration.
+
+The organization ID must be the `org-...` ID used by the Costs API for the workspace's Enterprise usage. Do not enter a ChatGPT workspace UUID or a Datadog organization ID. If you do not know the organization ID, contact your workspace owner or OpenAI support.
+
+When you enable Cloud Cost Management, Datadog collects up to 30 days of available historical costs. Subsequent collection runs hourly. Recent usage can appear later because of OpenAI reporting delays and Datadog processing.
+
+After cost data is collected, open [Cloud Cost Management Providers][103] to check the account. Then select {{< ui >}}ChatGPT Enterprise{{< /ui >}} on the [AI cost summary page][104]. OpenAI API Platform costs use the separate OpenAI integration.
+
+### Cost reporting
+
+ChatGPT Enterprise reports usage across ChatGPT Chat, ChatGPT Work, and Codex. For credit-priced usage, Cloud Cost Management includes OpenAI's estimated USD amount in cost totals, rather than the number of credits consumed. For usage billed directly in USD, it includes the reported USD amount. These usage costs may differ from final invoice amounts.
+
+Model and user breakdowns depend on the fields OpenAI provides. For the available dimensions, see [Data collected][105].
+
+[101]: /integrations/chatgpt-enterprise/#setup
+[102]: https://app.datadoghq.com/integrations/chatgpt-enterprise
+[103]: https://app.datadoghq.com/cost/settings/providers
+[104]: /cloud_cost_management/ai_costs/
+[105]: #data-collected
 
 {{% /tab %}}
 
@@ -604,6 +650,20 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
 | `token_type` | The category of tokens consumed.|
 | `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+
+{{% /tab %}}
+
+{{% tab "ChatGPT Enterprise" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `model` | The model identifier reported by OpenAI. |
+| `product` | The product that generated the usage, such as `ChatGPT`, `codex`, or `Work`. |
+| `user_email` | The email address of the user who generated the usage, when provided by OpenAI. |
+| `billing_mode` | The billing denomination: `credits` for credit-priced usage or `usd` for direct USD usage. |
+| `service_tier` | The service tier reported for the usage. |
+
+Available tags depend on the source record. Credit-priced usage contributes an estimated USD cost rather than a credit quantity to Cloud Cost Management cost totals.
 
 {{% /tab %}}
 

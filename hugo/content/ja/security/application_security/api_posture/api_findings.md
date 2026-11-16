@@ -2,12 +2,6 @@
 description: 定義、ゲートウェイ、およびライブトラフィック全体で検出された APIリスクをトリアージします。
 title: API 検出結果
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection は、Datadog Government サイト US1-FED でプレビュー版として提供されています。
-</div>
-{{< /site-region >}}
-
 [API 検出結果][1]エクスプローラーは、定義、ゲートウェイ、およびライブトラフィック全体で検出された API リスクの一元的なトリアージビューを提供します。デフォルトのルールは、一般的な脆弱性や誤構成を検出します。特定のユースケースに合わせて[カスタムルール][2]を追加することもできます。
 
 **API 検出結果**の列:

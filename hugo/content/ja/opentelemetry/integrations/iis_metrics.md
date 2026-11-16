@@ -5,35 +5,42 @@ further_reading:
   text: OpenTelemetry Collector のセットアップ
 title: IIS メトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/iis_metrics.png" alt="IIS ダッシュボードでの OpenTelemetry IIS メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/iis_metrics.png" alt="IIS ダッシュボードの OpenTelemetry IIS メトリクス" style="width:100%;" >}}
+[IIS receiver][1] は、[IIS Overview][4] ダッシュボードに表示される IIS (Internet Information Services) メトリクスを収集します。
 
-[IIS レシーバー][1]は、IIS (Internet Information Services) メトリクスの収集と [IIS Overview][4] ダッシュボードへのアクセスを可能にします。`iisreceiver` の最新バージョンの仕様に従ってレシーバーを構成してください。
+詳細については、[IIS receiver][1] に関する OpenTelemetry プロジェクトのドキュメントを参照してください。
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [IIS レシーバー][1]を参照してください。
+## セットアップ {#setup}
 
-## セットアップ
+この例では、OpenTelemetry Collector Contrib v0.154.0 のコンポーネント識別子を使用しています。他のバージョンやディストリビューションの場合は、そのディストリビューションがサポートする識別子を使用します。
 
-Datadog で使用するために OpenTelemetry で IIS メトリクスを収集するには:
+IIS receiver は Windows パフォーマンスカウンターを読み取るため、Windows 上でのみ実行されます。Collector を IIS ホスト上で実行します。
 
-1. OpenTelemetry Collector の構成で [IIS レシーバー][1]を構成します。
-2. OpenTelemetry Collector が [Datadog にエクスポートするように構成されている][5]ことを確認します。
+このレシーバーに必須の設定はありません。Collector の構成に以下の行を追加します。
 
-詳細な構成オプションと要件については、[IIS レシーバーのドキュメント][1]を参照してください。
+```yaml
+receivers:
+  iis:
+```
 
-## 収集されたデータ
+構成のメトリクスパイプラインの `receivers` リストに `iis` を追加します。すでにそのパイプラインにあるプロセッサーはそのまま維持します。Datadog OTLP メトリクスインテークはデルタメトリクスのみを受け付けますが、このレシーバーは累積合計を生成するため、パイプラインには `cumulativetodelta` が必要です。[推奨される Collector セットアップ][5]にはそれが含まれています。
+
+すべての構成オプションについては、[IIS receiver のドキュメント][1]を参照してください。
+
+## 収集データ {#data-collected}
 
 {{< mapping-table resource="iis.csv">}}
 
-詳細は [OpenTelemetry メトリクスマッピング][2]を参照してください。
+OpenTelemetry と Datadog のメトリクス名の完全なマッピングについては、[OpenTelemetry メトリクスマッピング][2]を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/iisreceiver
 [2]: /ja/opentelemetry/guide/metrics_mapping/
-[4]: https://app.datadoghq.com/screen/integration/243/iis---overview
+[4]: https://app.datadoghq.com/dash/integration/243/iis---overview
 [5]: /ja/opentelemetry/setup/collector_exporter/

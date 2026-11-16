@@ -10,6 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/"
   tag: "Architecture Center"
   text: "Observability Pipelines for Kubernetes deployment"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines Sensitive Data Scanner Optimization"
 ---
 
 <div class="alert alert-info">

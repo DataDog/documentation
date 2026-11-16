@@ -2,7 +2,7 @@
 aliases:
 - /ko/feature_flags/setup/android/
 description: OpenFeature 표준 API를 사용하여 Android 및 Android TV 애플리케이션용 Datadog Feature
-  Flags를 설정합니다.
+  Flags를 설정하세요.
 further_reading:
 - link: /feature_flags/client/
   tag: 설명서
@@ -43,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -67,7 +71,7 @@ val isEnabled = client.getBooleanValue("my-feature", false)
 
 ## 설치 {#installation}
 
-애플리케이션 모듈의 `build.gradle` 파일에 Gradle 종속성으로 Datadog Feature Flags SDK 및 OpenFeature Provider를 추가합니다:
+애플리케이션 모듈의 `build.gradle` 파일에 Gradle 종속성으로 Datadog Feature Flags SDK 및 OpenFeature Provider를 추가하세요.
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
@@ -97,11 +101,10 @@ Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
 ## 플래그 활성화{#enable-flags}
 
-Datadog을 초기화한 후 `Flags`를 활성화하여 현재 Datadog Android SDK 인스턴스에 연결하고 공급자 생성 및 Feature Flag 평가를 준비합니다.
+Datadog을 초기화한 후 `Flags`를 활성화하여 현재 Datadog Android SDK 인스턴스에 연결하고 공급자 생성 및 Feature Flag 평가를 준비하세요.
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
@@ -109,7 +112,7 @@ Flags.enable()
 
 ## 공급자 생성 및 구성 {#create-and-configure-the-provider}
 
-`FlagsClient`를 생성한 다음 `asOpenFeatureProvider()` 확장 프로그램을 사용하여 OpenFeature 공급자로 변환합니다. 이 작업은 앱 시작 중에 한 번 수행하면 됩니다.
+`FlagsClient`를 생성한 다음 `asOpenFeatureProvider()` 확장 프로그램을 사용하여 OpenFeature 공급자로 변환하세요. 이 작업은 앱 시작 중에 한 번 수행하면 됩니다.
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.FlagsClient
@@ -129,7 +132,7 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 ## 평가 컨텍스트 설정 {#set-the-evaluation-context}
 
-`ImmutableContext`를 사용하여 플래그 평가가 적용되는 사람 및 대상을 정의합니다. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 사용자 또는 세션 정보가 포함됩니다. 이러한 정보는 적절한 타겟팅을 보장하기 위해 플래그 평가 전에 설정합니다.
+`ImmutableContext`를 사용하여 플래그 평가가 적용되는 사람 및 대상을 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 사용자 또는 세션 정보가 포함됩니다. 이러한 정보는 적절한 타겟팅을 보장하기 위해 플래그 평가 전에 설정합니다.
 
 <div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같은 단일한 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
@@ -148,7 +151,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">OpenFeature 속성은 다음과 같은 <code>Value</code> 기본값만 사용해야 합니다. <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, 또는 <code>Value.Boolean()</code>. 타겟팅 키는 세션 간에 일관된 플래그 평가를 보장할 수 있도록 동일한 사용자에 대해 일관되어야 합니다. 익명 사용자의 경우, 예를 들어 <code>SharedPreferences</code>에 저장된 영구 UUID를 사용합니다.</div>
+<div class="alert alert-info">OpenFeature 속성은 다음과 같은 <code>Value</code> 기본값만 사용해야 합니다. <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, 또는 <code>Value.Boolean()</code>. 타겟팅 키는 세션 간에 일관된 플래그 평가를 보장할 수 있도록 동일한 사용자에 대해 일관되어야 합니다. 익명 사용자의 경우, 예를 들어, <code>SharedPreferences</code>에 저장된 영구 UUID를 사용합니다.</div>
 
 ## 플래그 평가 {#evaluate-flags}
 
@@ -156,7 +159,7 @@ OpenFeatureAPI.setEvaluationContext(
 
 각 플래그는 _키_(고유 문자열)로 식별되며 예상되는 유형의 값을 반환하는 유형화된 메서드로 평가할 수 있습니다. 각 Feature Flag가 존재하지 않거나 평가할 수 없는 경우, SDK는 제공된 기본값을 반환합니다.
 
-먼저 OpenFeature 클라이언트를 가져져옵니다.
+먼저 OpenFeature 클라이언트를 가져져오세요.
 
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.OpenFeatureAPI
@@ -250,13 +253,13 @@ print(details.reason)     // Reason for this value (for example: "TARGETING_MATC
 print(details.errorCode)  // Error code, if any
 {{< /code-block >}}
 
-다른 유형에 대해서도 유사한 세부 정보 메서드가 존재합니다. `getBooleanDetails()`, `getIntegerDetails()`, `getDoubleDetails()` 및 `getObjectDetails()`.
+다음과 같은 다른 유형에 대해서도 유사한 세부 정보 메서드가 존재합니다. `getBooleanDetails()`, `getIntegerDetails()`, `getDoubleDetails()` 및 `getObjectDetails()`.
 
 Feature Flag 세부 정보는 평가 동작을 디버깅하고 사용자가 특정 값을 받은 이유를 이해하는 데 도움이 됩니다.
 
 ## 공급자 이벤트 관찰{#observe-provider-events}
 
-<div class="alert alert-info">공급자 이벤트 관찰은 <code>dd-sdk-android-flags-openfeature</code> 3.6.0 이상에서 사용할 수 있습니다. 또한 <code>dd-sdk-android-flags</code>에 동일한 버전을 사용합니다.</div>
+<div class="alert alert-info">공급자 이벤트 관찰은 <code>dd-sdk-android-flags-openfeature</code> 3.6.0 이상에서 사용할 수 있습니다. 또한 <code>dd-sdk-android-flags</code>에 저장된 영구 UUID를 사용합니다.</div>
 
 `OpenFeatureAPI.observe()`를 사용하여 공급자 상태 변경에 대응하세요. Datadog OpenFeature 공급자는 기본 `FlagsClient` 상태에 따라 `ProviderReady`, `ProviderStale` 및 `ProviderError`를 전송합니다.
 
@@ -299,21 +302,29 @@ val stateJob = lifecycleScope.launch {
 
 ### 전역 구성 {#global-configuration}
 
-`Flags.enable()` API는 아래 나열된 옵션을 포함하는 선택적 구성을 허용합니다. 이러한 설정은 모든 공급자에 전역적으로 적용됩니다:
+`Flags.enable()` API는 아래 나열된 옵션을 포함하는 선택적 구성을 허용합니다. 이러한 설정은 모든 공급자에 전역적으로 적용됩니다.
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
 
+`initializationTimeout(timeoutMs)`
+: 첫 번째 평가 컨텍스트가 준비될 때까지 기다리는 최대 시간(밀리초)입니다. 시간 초과는 캐시된 데이터 로드, 할당 가져오기, 응답 읽기 및 디코딩, 할당 저장, 준비 상태 게시 과정에 적용됩니다. HTTP 클라이언트의 시간 초과에는 영향을 주지 않습니다. 할당 작업은 시간 초과 후에도 계속되며, 완료되면 클라이언트를 `Ready`로 이동시킬 수 있습니다.
+
+시간 초과는 첫 번째 `setEvaluationContext` 호출에만 적용됩니다. 해당 호출은 작업이 실패하거나 시작되지 않더라도 시간 초과 시간이 소진됩니다. 이후 호출에는 초기화 타이머가 없습니다. 기본값은 `5_000`밀리초입니다. 시간 초과를 비활성화하려면 0 또는 음수 값으로 설정하세요. 일치하는 캐시된 할당을 사용할 수 있는 경우, 시간 초과 시 클라이언트는 `Stale` 상태가 됩니다. 그렇지 않으면 `Error` 상태가 됩니다.
+
+<div class="alert alert-info"><code>initializationTimeout</code> 를 사용하는 직접 클라이언트 상태 관찰은 <code>dd-sdk-android-flags</code> 3.14.0 이상에서 사용할 수 있습니다.</div>
+
 `trackExposures()`
 : `true`(기본값)인 경우 SDK는 플래그가 평가될 때 자동으로 _노출 이벤트_를 기록합니다. 이러한 이벤트에는 어떤 플래그에 액세스했는지, 어떤 변형이 제공되었는지, 그리고 어떤 컨텍스트에서 제공되었는지에 대한 메타데이터가 포함되어 있습니다. 이벤트는 Datadog으로 전송되므로 나중에 기능 채택을 분석할 수 있습니다. 텔레메트리 없이 로컬 평가만 필요한 경우 : `trackExposures(false)`를 사용하여 비활성화할 수 있습니다.
 
 `rumIntegrationEnabled()`
-: `true`(기본값)인 경우 플래그 평가가 RUM에서 추적되므로 사용자 세션과 상관관계를 분석할 수 있습니다. 이를 통해 _“변형 B에서 사용자가 더 많은 오류를 경험하나요?”_와 같은 분석이 가능합니다. 앱에서 RUM을 사용하지 않는다면 이 플래그는 아무런 영향을 미치지 않으며 기본값으로 두어도 안전합니다. RUM 통합을 비활성화하려면 `rumIntegrationEnabled(false)`를 사용합니다.
+: `true`(기본값)인 경우 플래그 평가가 RUM에서 추적되므로 사용자 세션과 상관관계를 분석할 수 있습니다. 이를 통해 _“변형 B에서 사용자가 더 많은 오류를 경험하나요?”_와 같은 분석이 가능합니다. 앱에서 RUM을 사용하지 않는다면 이 플래그는 아무런 영향을 미치지 않으며 기본값으로 두어도 안전합니다. RUM 통합을 비활성화하려면 `rumIntegrationEnabled(false)`를 사용하세요.
 
 `gracefulModeEnabled()`
 `Flags.enable()`을 호출하기 전에 클라이언트를 생성하거나, 동일한 이름으로 중복 클라이언트를 생성하거나, 아직 생성되지 않은 클라이언트를 검색하는 경우 등 SDK가 API의 잘못된 사용을 처리하는 방법을 제어합니다.
@@ -407,7 +418,7 @@ flagsClient.setEvaluationContext(
 
 <div class="alert alert-info">다음 <code>flagsClient.state</code> 를 사용하는 직접 클라이언트 상태 관찰은 <code>dd-sdk-android-flags</code> 3.4.0 이상에서 사용 가능합니다.</div>
 
-`flagsClient.state`를 사용하여 현재 직접 클라이언트 상태를 검사하거나 상태 변경에 대한 리스너를 등록합니다.
+`flagsClient.state`를 사용하여 현재 직접 클라이언트 상태를 검사하거나 상태 변경에 대한 리스너를 등록하세요.
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.FlagsStateListener

@@ -2,19 +2,21 @@
 title: Getting Started with Private Actions
 description: Deploy a private action runner in the Datadog Agent with the Datadog Operator, then run your first action using Datadog's default Execution Policies.
 further_reading:
-- link: "actions/private_actions"
+- link: "/actions/private_actions"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "actions/private_actions/reference"
+- link: "/actions/private_actions/reference"
   tag: "Documentation"
   text: "Private Action Runner Reference"
 ---
 
 ## Overview
 
-Follow this guide to deploy a private action runner inside the Datadog Agent with the Datadog Operator, then run a read-only action that Datadog authorizes for you automatically.
+Datadog recommends deploying the private action runner in the Datadog Agent so you can manage runners across a fleet and authorize them with Execution Policies.
 
-This is the recommended path to get started. It uses the following configuration:
+<div class="alert alert-danger">On US1-FED and US2-FED sites, the <a href="/actions/private_actions/set_up_standalone">standalone runner</a> is the supported private action runner and <a href="/actions/connections/">Connections</a> are the supported authorization model.</div>
+
+For Datadog sites other than US1-FED and US2-FED, follow this guide to deploy a private action runner inside the Datadog Agent with the Datadog Operator, then run a read-only action that Datadog authorizes for you automatically:
 
 - **Run the runner in the Datadog Agent**, rather than as a standalone host process.
 - **Install with the Datadog Operator** on Kubernetes.

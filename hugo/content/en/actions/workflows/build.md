@@ -22,6 +22,10 @@ further_reading:
   text: "Variables and Parameters"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
 - Toggle {{< ui >}}My workflows{{< /ui >}} if you want to see only workflows that you created.
@@ -39,7 +43,7 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. Click {{< ui >}}Save{{< /ui >}} to apply your changes.
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the {{< ui >}}Configure{{< /ui >}} tab.
 1. When you are finished modifying the workflow, Click {{< ui >}}Run{{< /ui >}} to test your workflow.
-1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 ## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
@@ -80,7 +84,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
 1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}\+{{< /ui >}}) to add another step, or save the workflow if you're done.
-1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
@@ -104,7 +108,7 @@ See the test and debug page for information on [how to test a step][11].
 
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click {{< ui >}}Publish{{< /ui >}} from the workflow's page.
 
-Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 ### Updating a published workflow
 
@@ -132,18 +136,26 @@ You can configure your workflow to send you a notification on success or failure
 - PagerDuty
 - Email
 
+Notifications are configured from the workflow editor, in either of the following places:
+- Click the workflow name at the top of the editor to open the workflow title popover, then scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
+- Click the {{< ui >}}cog icon{{< /ui >}} in the top-right corner of the editor and select {{< ui >}}Edit permissions{{< /ui >}}. The {{< ui >}}Notifications{{< /ui >}} section is at the bottom of the modal.
+
+Changes made from the workflow title popover are saved immediately. Changes made from the {{< ui >}}Edit permissions{{< /ui >}} modal are applied when you click {{< ui >}}Save{{< /ui >}}.
+
 To add a notification:
-1. In the workflow configuration panel, scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
+1. Open the {{< ui >}}Notifications{{< /ui >}} section using one of the methods described above.
 1. To add a notification if the workflow succeeds:
-   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}On success{{< /ui >}}, or click {{< ui >}}Add success notification{{< /ui >}} if no success notifications are configured yet.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to add the notification.
 1. To add a notification if the workflow fails:
-   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}On failure{{< /ui >}}, or click {{< ui >}}Add failure notification{{< /ui >}} if no failure notifications are configured yet.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to add the notification.
+
+To edit or remove an existing notification, click it in the {{< ui >}}Notifications{{< /ui >}} section and update its fields, or use its delete icon to remove it.
 
 ## Error handling
 

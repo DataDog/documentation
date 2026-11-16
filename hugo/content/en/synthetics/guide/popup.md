@@ -33,9 +33,9 @@ For basic authentication pop-ups, specify the associated credentials in your bro
 
 ### Anchored pop-ups
 
-If a pop-up appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a pop-up appears. If the pop-up does not show up, the step fails without causing the whole test to fail. 
+If a pop-up appears at a specific point of your journey, record a step to close it. In the step's advanced options, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default). If the pop-up does not appear, the step fails without failing the whole test. For more information, see the [Optional step][3] section.
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle pop-up" style="width:60%" >}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Step advanced options with continue to next step selected and mark test as failed cleared." style="width:60%" >}}
 
 ### Moving pop-ups
 
@@ -60,7 +60,7 @@ Alternatively, use one of these methods to ensure your pop-up is closed and your
     }
     ```
 
-  * Record steps to close the pop-up, add them between all your other browser test steps, and select the [{{< ui >}}Allow this step to fail{{< /ui >}} option][3] for each of them.
+  * Record steps to close the pop-up and add them between all your other browser test steps. For each step, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default).
 
 ## Further Reading
 

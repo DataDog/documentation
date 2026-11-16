@@ -16,7 +16,9 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback. 
+
+You can work with Bits Code in Datadog or in a [Slack code channel][40].
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
@@ -36,6 +38,8 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 - Enter a freeform prompt at [{{< ui >}}Sessions{{< /ui >}}][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 - Set up a Bits Code [automation][28]
+- Invoke the {{< ui >}}Create code session{{< /ui >}} action from the [Action Catalog][42], for example, in a workflow in [Workflow Automation][43] or an app in [App Builder][44]
+- In Slack, ask [Bits Chat][16] (with `@Datadog`) to make a code change, which hands off the task to Bits Code and creates a [code channel][40]
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
@@ -55,10 +59,11 @@ Bits Code supports the following source code providers:
 - **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
 - **GitLab**: GitLab.com and GitLab Self-Managed.
 - **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
+- **Bitbucket**: Bitbucket.org with a [Premium plan][41].
 
 The following plans are not supported:
 - **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
-- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
+- **Bitbucket**: Data Center and Server on-premises deployments are not supported by Bits Code or Datadog [Source Code Integration][37].
 
 ## Supported Datadog products
 
@@ -105,6 +110,10 @@ Bits Code can use custom skills defined in your repository. It discovers skills 
 Bits Code automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You can also prompt Bits Code to use a certain skill directly.
 
 Bits Code also [ingests custom instructions][33] defined in your repository and Bits Code settings.
+
+### Code channels in Slack
+
+When you ask [Bits Chat][16] in Slack to make a code change, Bits Code creates a dedicated [code channel][40] for that task. In the code channel, you and your team can steer the agent, view a diff of proposed changes, and open a pull or merge request.
 
 ### Pull or merge request collaboration
 
@@ -160,3 +169,8 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [37]: /source_code/source-code-management#source-code-management-providers
 [38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
 [39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
+[40]: /bits_ai/bits_code/slack_code_channels/
+[41]: https://bitbucket.org/product/premium
+[42]: /actions/actions_catalog/
+[43]: /actions/workflows/
+[44]: /actions/app_builder/

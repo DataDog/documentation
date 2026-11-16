@@ -13,17 +13,21 @@ aliases:
 - /ko/tracing/llm_observability/trace_an_llm_application
 - /ko/llm_observability/setup
 - /ko/llm_observability/instrumentation/sdk/
-description: Python, Node.js 및 Java용 Agent Observability SDK에 대한 참조 문서로, 자동 및 수동 계측을
-  다룹니다.
+description: Python, Node.js, Java 및 Go(실험적)용 Agent Observability SDK에 대한 참조 문서로,
+  자동 및 수동 계측을 다룹니다.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: 블로그
-  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
+  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하기
 title: Agent Observability SDK 참조
 ---
 ## 개요 {#overview}
 
 Agent Observability SDK는 자동 계측과 수동 계측 API를 모두 제공하여 LLM 애플리케이션에 대한 관측 가능성과 인사이트를 제공합니다.
+
+SDK는 Python, Node.js, Java 및 Go(실험적)용으로 제공됩니다. 기능 지원 범위는 언어마다 다릅니다. 해당 언어에 대한 탭이 표시되지 않는 섹션은 해당 SDK에서 지원하지 않습니다.
+
+Go SDK는 **실험적**입니다. `dd-trace-go`에는 LLM 프로바이더 통합이 없으므로 수동 계측만 제공합니다.
 
 ## 설정 {#setup}
 
@@ -54,6 +58,15 @@ Agent Observability SDK는 자동 계측과 수동 계측 API를 모두 제공�
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+<div class="alert alert-warning">Go SDK는 실험적입니다. 이 API는 향후 릴리스에서 변경될 수 있습니다.</div>
+
+- 최신 `dd-trace-go/v2` 모듈이 설치되어 있어야 합니다. Agent Observability SDK는 `dd-trace-go` v2.3.0 이상에서 지원됩니다(전체 기능 세트를 사용하려면 v2.10.0 이상 권장).
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2
+   ```
+   **참고**: `dd-trace-go` v2.8.0 이상에서는 Go 1.25 이상이 필요합니다. v2.3.0부터 v2.7.0까지의 버전은 Go 1.24 이상이 필요합니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% collapse-content title="명령줄 설정" level="h4" expanded=false id="command-line-setup" %}}
@@ -69,11 +82,11 @@ DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-####  명령줄 설정용 환경 변수 {#environment-variables-for-command-line-setup}
+#### 명령줄 설정용 환경 변수 {#environment-variables-for-command-line-setup}
 
 `DD_SITE`
 : 필수 - _string_
-<br />LLM 데이터를 제출할 목적지 Datadog 사이트입니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
+<br />LLM 데이터를 제출할 목적지 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
 : 필수 - _integer 또는 string_
@@ -98,7 +111,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_MCP_CAPTURE_INTENT`
 : 선택 사항 - _integer 또는 string_ - **기본값**: `false`
-<br />`1` 또는 `true`로 설정된 경우 호출 모델이 해당 도구를 호출한 이유를 설명하도록 요청하는 모든 MCP 서버 도구에 인수를 추가합니다. 의도는 도구 스팬에 기록됩니다.
+<br />`1` 또는 `true`로 설정하면 모든 MCP 서버 도구에 호출 모델이 해당 도구를 호출한 이유를 설명하도록 요청하는 인수를 추가합니다. 의도는 도구 스팬에 기록됩니다.
 
 [1]: /ko/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -118,7 +131,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_SITE`
 : 필수 - _string_
-<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
+<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
 : 필수 - _integer 또는 string_
@@ -159,7 +172,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_SITE` 또는 `dd.site`
 : 필수 - _string_
-<br />LLM 데이터를 제출할 목적지 Datadog 사이트입니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
+<br />LLM 데이터를 제출할 목적지 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED` 또는 `dd.llmobs.enabled`
 : 필수 - _integer 또는 string_
@@ -174,9 +187,51 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 : 선택 사항 - _integer 또는 string_ - **기본값**: `false`
 <br />Datadog Agent를 사용하지 않는 경우에만 필요하며, 이 경우 `1` 또는 `true`로 설정해야 합니다.
 
+`DD_LLMOBS_SAMPLE_RATE` 또는 `dd.llmobs.sample.rate`
+: 선택 사항 - _float_ - **기본값**: `1.0`
+<br />Agent Observability가 보존하는 트레이스의 비율입니다. `dd-trace-java` 1.66.0 이상이 필요합니다. [트레이스 샘플링](#trace-sampling)을 참조하세요.
+
 `DD_API_KEY` 또는 `dd.api.key`
 : 선택 사항 - _string_
 <br />Datadog API 키입니다. Datadog Agent를 사용하지 않는 경우에만 필요합니다.
+
+[1]: /ko/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
+{{% /tab %}}
+{{% tab "Go(실험적)" %}}
+Go SDK에는 `ddtrace-run`과 동일한 명령줄 래퍼가 없습니다. 트레이서가 애플리케이션 코드에서 시작되기 때문입니다. 다음 파라미터를 환경 변수로 설정한 다음 `tracer.Start()`를 호출합니다. [코드 내 설정](#in-code-setup)을 참조하세요.
+
+{{< code-block lang="shell">}}
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+#### 명령줄 설정용 환경 변수 {#environment-variables-for-command-line-setup-2}
+
+`DD_SITE`
+: 필수 - _string_
+<br />LLM 데이터를 제출할 목적지 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}.
+
+`DD_LLMOBS_ENABLED`
+: 필수 - _integer 또는 string_
+<br />Agent Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다. `tracer.WithLLMObsEnabled(true)`와 동일합니다.
+
+`DD_LLMOBS_ML_APP`
+: 선택 사항 - _string_
+<br />모든 트레이스와 스팬이 그룹화되는 LLM 애플리케이션, 서비스 또는 프로젝트의 이름입니다. 이를 통해 서로 다른 애플리케이션 또는 실험을 구분할 수 있습니다. 허용 문자 및 기타 제약 사항은 [애플리케이션 명명 지침](#application-naming-guidelines)을 참조하세요. 특정 루트 스팬에 대해 이 값을 재정의하려면 [여러 애플리케이션 추적](#tracing-multiple-applications)을 참조하세요. 지정하지 않으면 [`DD_SERVICE`][1] 값이 기본값으로 사용됩니다. `tracer.WithLLMObsMLApp()`과 동일합니다.
+
+`DD_LLMOBS_AGENTLESS_ENABLED`
+: 선택 사항 - _integer 또는 string_ - **기본값**: `false`
+<br />Datadog Agent를 사용하지 않는 경우에만 필요하며, 이 경우 `1` 또는 `true`로 설정해야 합니다. `tracer.WithLLMObsAgentlessEnabled()`와 동일합니다.
+
+`DD_LLMOBS_PROJECT_NAME`
+: 선택 사항 - _string_
+<br />[데이터세트 및 실험](/llm_observability/improve/experiments/)이 그룹화되는 프로젝트의 이름입니다. `tracer.WithLLMObsProjectName()`과 동일합니다.
+
+`DD_API_KEY`
+: 선택 사항 - _string_
+<br />Datadog API 키입니다. Datadog Agent를 사용하지 않는 경우에만 필요합니다.
+
+**참고**: Go SDK는 `DD_LLMOBS_SAMPLE_RATE`를 지원하지 않습니다. [트레이스 샘플링](#trace-sampling)을 참조하세요.
 
 [1]: /ko/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -184,7 +239,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="인코드 설정" level="h4" expanded=false id="in-code-setup" %}}
+{{% collapse-content title="코드 내 설정" level="h4" expanded=false id="in-code-setup" %}}
 
 [명령줄 설정](#command-line-setup) 대신 프로그래밍 방식으로도 Agent Observability를 활성화할 수 있습니다.
 
@@ -194,7 +249,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 `LLMObs.enable()` 함수를 사용하여 Agent Observability를 활성화합니다.
 
 <div class="alert alert-info">
-이 설정 메서드는 <code>ddtrace-run</code> 명령과 함께 사용하지 마세요.
+이 설정 방식은 <code>ddtrace-run</code> 명령에 사용하지 마세요.
 </div>
 
 {{< code-block lang="python" >}}
@@ -223,7 +278,7 @@ LLMObs.enable(
 
 `site`
 : 선택 사항 - _string_
-<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다. 지정하지 않으면 `DD_SITE` 값이 기본값으로 사용됩니다.
+<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}입니다. 지정하지 않으면 `DD_SITE` 값이 기본값으로 사용됩니다.
 
 `api_key`
 : 선택 사항 - _string_
@@ -243,7 +298,7 @@ LLMObs.enable(
 
 `capture_intent`
 : 선택 사항 - _boolean_ - **기본값**: `false`
-<br />`True`로 설정된 경우 호출 모델이 해당 도구를 호출한 이유를 설명하도록 요청하는 모든 MCP 서버 도구에 인수를 추가합니다. 의도는 도구 스팬에 기록됩니다. 지정하지 않으면 `DD_MCP_CAPTURE_INTENT` 값이 기본값으로 사용됩니다.
+<br />`True`로 설정하면 모든 MCP 서버 도구에 호출 모델이 해당 도구를 호출한 이유를 설명하도록 요청하는 인수를 추가합니다. 의도는 도구 스팬에 기록됩니다. 지정하지 않으면 `DD_MCP_CAPTURE_INTENT` 값이 기본값으로 사용됩니다.
 
 [1]: /ko/llm_observability/instrument/auto_instrumentation/
 {{% /tab %}}
@@ -251,7 +306,7 @@ LLMObs.enable(
 {{% tab "Node.js" %}}
 
 <div class="alert alert-info">
-이 설정 메서드는 <code>dd-trace/initialize.mjs</code> 명령과 함께 사용하지 마세요.
+이 설정 방식은 <code>dd-trace/initialize.mjs</code> 명령에 사용하지 마세요.
 </div>
 
 `init()` 함수를 사용하여 Agent Observability를 활성화합니다.
@@ -287,7 +342,7 @@ const llmobs = tracer.llmobs;
 
 `site`
 : 선택 사항 - _string_
-<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다. 지정하지 않으면 `DD_SITE` 값이 기본값으로 사용됩니다.
+<br />LLM 데이터를 제출할 Datadog 사이트입니다. 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}입니다. 지정하지 않으면 `DD_SITE` 값이 기본값으로 사용됩니다.
 
 `env`
 : 선택 사항 - _string_
@@ -306,27 +361,75 @@ const llmobs = tracer.llmobs;
 <br />Datadog API 키입니다. Datadog Agent를 사용하지 않는 경우에만 필요합니다.
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+Agent Observability 옵션을 `tracer.Start()`에 전달하여 Agent Observability를 활성화합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"log"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+		tracer.WithLLMObsAgentlessEnabled(true),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
+
+##### 옵션 {#options}
+
+`tracer.WithLLMObsEnabled`
+: 선택 사항 - _bool_
+<br />Agent Observability로 데이터 전송을 활성화하는 토글입니다. 지정하지 않으면 `DD_LLMOBS_ENABLED` 값이 기본값으로 사용됩니다.
+
+`tracer.WithLLMObsMLApp`
+: 선택 사항 - _string_
+<br />모든 트레이스와 스팬이 그룹화되는 LLM 애플리케이션, 서비스 또는 프로젝트의 이름입니다. 이를 통해 서로 다른 애플리케이션 또는 실험을 구분할 수 있습니다. 허용 문자 및 기타 제약 사항은 [애플리케이션 명명 지침](#application-naming-guidelines)을 참조하세요. 주어진 트레이스에 대해 이 값을 재정의하려면 [여러 애플리케이션 추적하기](#tracing-multiple-applications)를 참조하세요. 지정하지 않으면 `DD_LLMOBS_ML_APP` 값이 기본값으로 사용됩니다.
+
+`tracer.WithLLMObsAgentlessEnabled`
+: 선택 사항 - _bool_ - **기본값**: `false`
+<br />Datadog Agent를 사용하지 않는 경우에만 필요하며, 이 경우 `true`로 설정해야 합니다. 지정하지 않으면 `DD_LLMOBS_AGENTLESS_ENABLED` 값이 기본값으로 사용됩니다.
+
+`tracer.WithLLMObsProjectName`
+: 선택 사항 - _string_
+<br />[데이터세트 및 실험](/llm_observability/improve/experiments/)이 그룹화되는 프로젝트의 이름입니다. 지정하지 않으면 `DD_LLMOBS_PROJECT_NAME` 값이 기본값으로 사용됩니다.
+
+`DD_SITE`, `DD_API_KEY`, `DD_ENV` 및 `DD_SERVICE`를 환경 변수로 설정합니다. `DD_API_KEY`는 Datadog Agent를 사용하지 않는 경우에만 필요합니다.
+
+**참고**: Agent 모드에서 [데이터세트 및 실험](/llm_observability/improve/experiments/)을 사용하는 경우 Datadog Agent v7.72.0 이상이 필요합니다. 이전 Agent 버전은 데이터세트 및 실험 엔드포인트를 올바르게 프록시하지 않습니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
 
-AWS Lambda의 경우, [AWS Lambda에서 LLM 애플리케이션을 추적하기][17]를 참조하십시오.
+AWS Lambda의 경우 [AWS Lambda에서 LLM 애플리케이션 추적][17]을 참조하세요.
 
 
 SDK를 설치하고 애플리케이션을 실행하면 자동 계측을 통해 Agent Observability에 일부 데이터가 표시되는 것을 확인할 수 있습니다. 아직 지원되지 않는 라이브러리에서 생성된 사용자 지정 프레임워크나 작업을 수집하려면 수동 계측을 사용할 수 있습니다.
 
 ## 트레이스 샘플링 {#trace-sampling}
 
-<div class="alert alert-info">트레이스 샘플링은 Python SDK(<code>ddtrace</code> 4.12.0 이상) 및 Node.js SDK(<code>dd-trace</code> 5.110.0 이상)에서 사용할 수 있습니다. Java SDK는 트레이스 샘플링을 지원하지 않습니다.</div>
+<div class="alert alert-info">트레이스 샘플링은 Python SDK(<code>ddtrace</code> 4.12.0 이상), Node.js SDK(<code>dd-trace</code> 5.110.0 이상), Java SDK(<code>dd-trace-java</code> 1.66.0 이상)에서 사용할 수 있습니다. Go SDK에서는 지원되지 않습니다.</div>
 
 트레이스 샘플링은 Agent Observability가 보존하는 트레이스의 비율을 설정합니다. Agent Observability 청구는 전송하는 스팬의 볼륨을 기준으로 하므로, 샘플링 비율을 설정하는 것은 Agent Observability 비용을 제어하는 한 가지 방법입니다. SDK는 루트 스팬에 대해 샘플링 결정을 내리고, [분산 트레이싱](#distributed-tracing)을 통해 다운스트림 서비스에서 생성된 스팬을 포함하여 해당 루트 스팬의 모든 하위 스팬에 이를 적용합니다.
 
-샘플링은 [Agent Observability 메트릭](/llm_observability/investigate/metrics/)(여기에는 [토큰 및 비용 메트릭](/llm_observability/investigate/cost/)과 기타 운영 메트릭이 포함됨)에 영향을 주지 않습니다. 샘플링되지 않은 스팬은 Datadog이 트레이스를 수집한 후 드롭되므로, 해당 메트릭은 지정된 샘플 비율과 관계없이 애플리케이션의 계측된 트래픽 100%를 기준으로 유지됩니다. 추적 샘플링은 수집 후에 적용되는 [자동화 규칙](/llm_observability/configure/automation_rules/) 및 [APM 추적 샘플링](/tracing/trace_pipeline/ingestion_mechanisms/)과 같은 인앱 제어와도 독립적입니다.
+샘플링은 [토큰 및 비용 메트릭](/llm_observability/investigate/cost/)과 기타 운영 메트릭을 포함한 [Agent Observability 메트릭](/llm_observability/investigate/metrics/)에 영향을 주지 않습니다. 샘플링되지 않은 스팬은 Datadog이 트레이스를 수집한 후 드롭되므로, 해당 메트릭은 지정된 샘플 비율과 관계없이 애플리케이션의 계측된 트래픽 100%를 기준으로 유지됩니다. 트레이스 샘플링은 수집 후에 적용되는 [자동화 규칙](/llm_observability/configure/automation_rules/) 및 [APM 트레이스 샘플링](/tracing/trace_pipeline/ingestion_mechanisms/)과 같은 인앱 제어와 별개로 작동합니다.
 
 다음 두 가지 메커니즘 중 하나를 통해 샘플 비율을 구성할 수 있습니다.
 
-- **환경 변수**(`DD_LLMOBS_SAMPLE_RATE`): [명령줄 설정](#command-line-setup) 및 [인코드 설정](#in-code-setup) 모두에 적용됩니다.
-- **인코드 파라미터**(Python의 경우 `sample_rate`, Node.js의 경우 `sampleRate`): [인코드 설정](#in-code-setup)으로 SDK를 활성화할 때 Python에서는 `LLMObs.enable()`에 전달되며, Node.js에서는 `llmobs` 아래에서 전달됩니다. 설정된 경우 `DD_LLMOBS_SAMPLE_RATE`보다 우선합니다.
+- **환경 변수**(`DD_LLMOBS_SAMPLE_RATE`): [명령줄 설정](#command-line-setup) 및 [코드 내 설정](#in-code-setup) 모두에 적용됩니다. Java에서는 `dd.llmobs.sample.rate` 시스템 속성이 동일한 값을 설정합니다.
+- **인코드 파라미터**(Python의 경우 `sample_rate`, Node.js의 경우 `sampleRate`): [코드 내 설정](#in-code-setup)으로 SDK를 활성화할 때 Python에서는 `LLMObs.enable()`에 전달되며, Node.js에서는 `llmobs` 아래에서 전달됩니다. 설정된 경우 `DD_LLMOBS_SAMPLE_RATE`보다 우선합니다. Java 및 Go SDK에는 이에 대응하는 코드 내 설정이 없습니다.
 
 샘플 비율은 `0.0`(트레이스 보존 안 함)에서 `1.0`(모든 트레이스 보존) 사이의 부동 소수점 값입니다. 기본값은 `1.0`입니다. 범위를 벗어난 값은 무시됩니다.
 
@@ -368,6 +471,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+다음과 같이 환경 변수로 샘플 비율을 설정하세요.
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+또는 동일한 `dd.llmobs.sample.rate` 시스템 속성을 설정합니다.
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -440,7 +562,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }
 
 다음 예시는 마지막 인수가 콜백인 두 번째 조건을 보여줍니다.
 
-#### 예시{#example}
+#### 예시 {#example}
 
 {{< code-block lang="javascript" >}}
 const express = require('express')
@@ -487,7 +609,7 @@ app.use(myAgentMiddleware)
 
 ### 스팬 종료하기 {#finishing-a-span}
 
-트레이스를 Datadog 앱에서 제출하고 표시하려면 스팬을 종료해야 합니다.
+트레이스가 제출되어 Datadog 앱에 표시되려면 스팬을 종료해야 합니다.
 
 스팬을 종료하려면 스팬 객체 인스턴스에서 `finish()`를 호출하세요. 가능한 경우, 예외가 발생하더라도 스팬이 제출되도록 `try/finally` 블록으로 래핑하는 것이 좋습니다.
 
@@ -505,13 +627,101 @@ app.use(myAgentMiddleware)
 
 [1]: /ko/llm_observability/quickstart/terms/#span-kinds
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+### 스팬 시작하기 {#starting-a-span-1}
+
+각 스팬 종류는 `llmobs` 패키지에 고유한 생성자가 있습니다. 지원되는 스팬 종류의 목록은 [스팬 종류 설명서][1]를 참조하세요.
+
+모든 생성자는 `context.Context`를 인수로 받고, 시작된 스팬과 함께 해당 스팬을 포함하는 새 `context.Context`를 반환합니다. 반환된 컨텍스트를 다음 호출에 전달하여 스팬을 자동으로 중첩합니다. [스팬 중첩](#nesting-spans)을 참조하세요.
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+| 스팬 종류 | 생성자 | 주석 메서드 |
+|---|---|---|
+| `llm` | `llmobs.StartLLMSpan` | `AnnotateLLMIO` |
+| `workflow` | `llmobs.StartWorkflowSpan` | `AnnotateTextIO` |
+| `agent` | `llmobs.StartAgentSpan` | `AnnotateTextIO` |
+| `tool` | `llmobs.StartToolSpan` | `AnnotateTextIO` |
+| `task` | `llmobs.StartTaskSpan` | `AnnotateTextIO` |
+| `embedding` | `llmobs.StartEmbeddingSpan` | `AnnotateEmbeddingIO` |
+| `retrieval` | `llmobs.StartRetrievalSpan` | `AnnotateRetrievalIO` |
+
+모든 생성자는 다음 `llmobs.StartSpanOption` 값을 허용합니다.
+
+{{% collapse-content title="스팬 시작 옵션" level="h4" expanded=false id="go-start-span-options" %}}
+
+`llmobs.WithMLApp`
+: 선택 사항 - _string_
+<br />해당 작업이 속한 ML 애플리케이션의 이름입니다. 트레이서 시작 시 제공된 ML 앱을 재정의합니다. [여러 애플리케이션 트레이싱](#tracing-multiple-applications)을 참조하세요.
+
+`llmobs.WithSessionID`
+: 선택 사항 - _string_
+<br />기본 사용자 세션의 ID입니다. [사용자 세션 추적](#tracking-user-sessions)을 참조하세요.
+
+`llmobs.WithModelName`
+: 선택 사항 - _string_ - **기본값**: `"custom"`
+<br />호출된 모델의 이름입니다. `llm` 및 `embedding` 이외의 스팬 종류에서는 무시됩니다.
+
+`llmobs.WithModelProvider`
+: 선택 사항 - _string_ - **기본값**: `"custom"`
+<br />모델 제공자의 이름입니다. `llm` 및 `embedding` 이외의 스팬 종류에서는 무시됩니다.
+<br />**참고**: 예상 비용을 미국 달러로 표시하려면 모델 공급자를 [지원되는 공급자](#use-case-using-a-common-model-provider)로 설정합니다.
+
+`llmobs.WithStartTime`
+: 선택 사항 - `time.Time`
+<br />스팬에 대한 명시적 시작 시간입니다. 기본값은 현재 시간입니다.
+
+`llmobs.WithIntegration`
+: 선택 사항 - _string_
+<br />스팬을 생성한 통합의 이름입니다.
+
+{{% /collapse-content %}}
+
+### 스팬 종료하기 {#finishing-a-span-1}
+
+트레이스를 Datadog에 제출하고 표시하려면 스팬을 종료해야 합니다. `defer`를 사용하여 함수가 조기에 반환되거나 패닉이 발생하더라도 스팬이 종료되도록 하세요.
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+`Finish`는 다음 `llmobs.FinishSpanOption` 값을 허용합니다.
+
+`llmobs.WithError`
+: 선택 사항 - _오류_
+<br />스팬을 오류로 표시하고 오류 메시지, 유형 및 스택 트레이스를 기록합니다. [오류에 주석 달기](#annotating-errors)를 참조하세요.
+
+`llmobs.WithFinishTime`
+: 선택 사항 - `time.Time`
+<br />스팬에 대한 명시적 종료 시간입니다. 기본값은 현재 시간입니다.
+
+### 활성 스팬 검색 {#retrieving-the-active-span}
+
+`llmobs.SpanFromContext`는 활성 Agent Observability 스팬을 `*llmobs.AnySpan`으로 반환합니다. `As*` 메서드를 사용하여 해당 스팬을 구체적인 스팬 종류로 변환한 다음, 해당 종류의 주석 메서드에 액세스합니다.
+
+{{< code-block lang="go" >}}
+if span, ok := llmobs.SpanFromContext(ctx); ok {
+	if llmSpan, ok := span.AsLLM(); ok {
+		llmSpan.AnnotateLLMIO(nil, []llmobs.LLMMessage{{Role: "assistant", Content: "..."}})
+	}
+}
+{{< /code-block >}}
+
+**참고**: Go SDK에는 데코레이터나 함수 래퍼 API가 없으므로 함수 인수, 반환값 또는 이름을 자동으로 캡처하지 않습니다. 입력값과 출력값에 명시적으로 주석을 답니다. [스팬 강화하기](#enriching-spans)를 참조하세요.
+
+[1]: /ko/llm_observability/quickstart/terms/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### LLM 호출 {#llm-calls}
 
 <div class="alert alert-info"><a href="/llm_observability/instrument/auto_instrumentation/">Datadog의 LLM 통합</a>에서 지원하는 LLM 제공업체 또는 프레임워크를 사용하는 경우, 이러한 작업을 추적하기 위해 LLM 스팬을 수동으로 시작할 필요가 없습니다.</div>
 
-<div class="alert alert-info">LLM 스팬을 수동으로 계측하는 경우에는 토큰 수(예: <code>input_tokens</code>, <code>output_tokens</code>및 <code>total_tokens</code>)를 직접 기록해야 하며, 이를 위해 스팬에 주석을 달아야 합니다. 자세한 내용은 <a href="#enriching-spans">스팬 강화하기</a>를 참조하세요.</div>
+<div class="alert alert-info">LLM 스팬을 수동으로 계측하는 경우에는 토큰 수(예: <code>input_tokens</code>, <code>output_tokens</code>속성 및 <code>total_tokens</code>)를 직접 기록해야 하며, 이를 위해 스팬에 주석을 달아야 합니다. 자세한 내용은 <a href="#enriching-spans">스팬 강화하기</a>를 참조하세요.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -659,6 +869,63 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartLLMSpan`을 사용하여 LLM 호출을 트레이스한 다음, `AnnotateLLMIO`를 사용하여 프롬프트와 생성 응답을 기록합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func invokeModel(ctx context.Context, userInput string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	completion := callProvider(userInput) // user application logic to invoke LLM
+
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{
+			{Role: "system", Content: "You are a helpful assistant"},
+			{Role: "user", Content: userInput},
+		},
+		[]llmobs.LLMMessage{
+			{Role: "assistant", Content: completion},
+		},
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+	)
+	return completion
+}
+{{< /code-block >}}
+
+#### 도구 호출 및 도구 결과 {#tool-calls-and-tool-results}
+
+`llmobs.LLMMessage`는 모델이 요청한 도구 호출과 모델에 반환된 결과를 포함할 수도 있습니다.
+
+{{< code-block lang="go" >}}
+args, _ := json.Marshal(map[string]any{"city": "Paris"})
+
+span.AnnotateLLMIO(
+	[]llmobs.LLMMessage{{Role: "user", Content: "What is the weather in Paris?"}},
+	[]llmobs.LLMMessage{{
+		Role: "assistant",
+		ToolCalls: []llmobs.ToolCall{
+			{Name: "get_weather", Arguments: args, ToolID: "call_1", Type: "function"},
+		},
+	}},
+)
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -768,6 +1035,29 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartWorkflowSpan`을 사용하여 워크플로 스팬을 트레이스한 다음, `AnnotateTextIO`를 사용하여 입력과 출력을 기록합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func executeWorkflow(ctx context.Context, question string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+	defer span.Finish()
+
+	answer := workflowFn(ctx, question) // user application logic
+
+	span.AnnotateTextIO(question, answer)
+	return answer
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -860,6 +1150,29 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartAgentSpan`을 사용하여 에이전트 스팬을 트레이스한 다음, `AnnotateTextIO`를 사용하여 입력과 출력을 기록합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func runAgent(ctx context.Context, task string) string {
+	span, ctx := llmobs.StartAgentSpan(ctx, "research-agent")
+	defer span.Finish()
+
+	result := agentLoop(ctx, task) // user application logic
+
+	span.AnnotateTextIO(task, result)
+	return result
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 도구 호출 {#tool-calls}
@@ -951,6 +1264,29 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 {{% /collapse-content %}}
 
+{{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartToolSpan`을 사용하여 도구 스팬을 트레이스한 다음, `AnnotateTextIO`를 사용하여 입력과 출력을 기록합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func getWeather(ctx context.Context, city string) string {
+	span, ctx := llmobs.StartToolSpan(ctx, "get_weather")
+	defer span.Finish()
+
+	result := weatherAPI(ctx, city) // user application logic
+
+	span.AnnotateTextIO(city, result)
+	return result
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1045,6 +1381,29 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartTaskSpan`을 사용하여 작업 스팬을 트레이스한 다음, `AnnotateTextIO`를 사용하여 입력과 출력을 기록합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func parseInput(ctx context.Context, raw string) string {
+	span, ctx := llmobs.StartTaskSpan(ctx, "parse-input")
+	defer span.Finish()
+
+	parsed := parse(ctx, raw) // user application logic
+
+	span.AnnotateTextIO(raw, parsed)
+	return parsed
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 임베딩 {#embeddings}
@@ -1131,6 +1490,56 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{< /code-block >}}
 
 
+{{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartEmbeddingSpan`을 사용하여 임베딩 스팬을 트레이스합니다. `AnnotateEmbeddingIO`는 `llmobs.EmbeddedDocument`의 슬라이스를 입력으로, 문자열을 출력으로 사용합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func embedQuery(ctx context.Context, query string) []float64 {
+	span, _ := llmobs.StartEmbeddingSpan(ctx, "embed-query",
+		llmobs.WithModelName("text-embedding-3-small"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	vector := embed(query) // user application logic
+
+	span.AnnotateEmbeddingIO(
+		[]llmobs.EmbeddedDocument{{Text: query}},
+		"[0.023, -0.918, ...]",
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens: 8,
+		}),
+	)
+	return vector
+}
+{{< /code-block >}}
+
+`llmobs.EmbeddedDocument`에는 다음 필드가 있습니다.
+
+`Text`
+: 필수 - _string_
+<br />문서의 텍스트 콘텐츠입니다.
+
+`Name`
+: 선택 사항 - _string_
+<br />문서의 이름 또는 제목입니다.
+
+`ID`
+: 선택 사항 - _string_
+<br />문서의 고유 식별자입니다.
+
+`Score`
+: 선택 사항 - _float64_
+<br />문서의 관련성 점수로, 일반적으로 `0.0`에서 `1.0` 사이입니다.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1221,6 +1630,52 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`llmobs.StartRetrievalSpan`을 사용하여 검색 스팬을 트레이스합니다. `AnnotateRetrievalIO`는 문자열을 입력으로, `llmobs.RetrievedDocument`의 슬라이스를 출력으로 사용합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func searchDocs(ctx context.Context, query string) []Doc {
+	span, _ := llmobs.StartRetrievalSpan(ctx, "search-docs")
+	defer span.Finish()
+
+	docs := vectorSearch(query) // user application logic
+
+	span.AnnotateRetrievalIO(
+		query,
+		[]llmobs.RetrievedDocument{
+			{Text: "Paris is the capital of France.", Name: "geography.md", ID: "doc-1", Score: 0.91},
+		},
+	)
+	return docs
+}
+{{< /code-block >}}
+
+`llmobs.RetrievedDocument`에는 다음 필드가 있습니다.
+
+`Text`
+: 필수 - _string_
+<br />문서의 텍스트 콘텐츠입니다.
+
+`Name`
+: 선택 사항 - _string_
+<br />문서의 이름 또는 제목입니다.
+
+`ID`
+: 선택 사항 - _string_
+<br />문서의 고유 식별자입니다.
+
+`Score`
+: 선택 사항 - _float64_
+<br />문서의 관련성 점수로, 일반적으로 `0.0`에서 `1.0` 사이입니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 스팬 중첩하기 {#nesting-spans}
@@ -1284,13 +1739,42 @@ public class MyJavaClass {
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+스팬 생성자는 시작된 스팬을 포함하는 새로운 `context.Context`를 반환합니다. 해당 컨텍스트를 다음 생성자에 전달하여 새 스팬을 현재 스팬의 하위 스팬으로 만듭니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func handleRequest(ctx context.Context) {
+	workflowSpan, ctx := llmobs.StartWorkflowSpan(ctx, "workflow-1")
+	defer workflowSpan.Finish()
+
+	// child of workflow-1, because it receives the workflow's context
+	llmSpan, ctx := llmobs.StartLLMSpan(ctx, "llm-1", llmobs.WithModelName("gpt-5.1"))
+	defer llmSpan.Finish()
+
+	// APM spans can be mixed into the same trace
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "post-process")
+	defer apmSpan.Finish()
+}
+{{< /code-block >}}
+
+**참고**: 부모-자식 관계 정보는 컨텍스트를 통해 전달됩니다. 부모 스팬이 없는 컨텍스트로 시작된 스팬은 새로운 트레이스의 루트가 됩니다. 고루틴(goroutine)을 시작할 때는 부모 생성자가 반환한 컨텍스트를 전달하여 스팬이 올바른 부모에 연결되도록 합니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 
 ## 스팬 강화하기 {#enriching-spans}
 
 <div class="alert alert-info">
-여기에서 <code>metrics</code> 여기서 파라미터는 개별 스팬에 부여된 숫자 값을 의미하며, <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 메트릭</a>을 의미하지 않습니다. 인지되는 특정 키(예: <code>input_tokens</code>, <code>output_tokens</code>및 <code>total_tokens</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.tokens</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.
+이 <code>metrics</code> 파라미터는 개별 스팬의 속성으로 연결되는 숫자 값을 의미하며, <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 메트릭</a>을 의미하는 것은 아닙니다. 인지되는 특정 키(예: <code>input_tokens</code>, <code>output_tokens</code>속성 및 <code>total_tokens</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.tokens</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.
 </div>
 
 {{< tabs >}}
@@ -1307,11 +1791,11 @@ SDK는 입력, 출력 및 메타데이터로 스팬을 강화하기 위해 `LLMO
 
 `input_data`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 딕셔너리 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`) 중 하나. 여기서 `"tool_calls"`는 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`이며, `"tool_results"`는 함수 호출 시 사용할 도구 결과 딕셔너리의 선택적 목록으로 필수 키는 `"result"`, 선택적 키는 `"name"`, `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`는 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로 각각 필수 `"mime_type"`과 `"content"`(인라인으로 전달되는 base64 인코딩 미디어) 또는 `"attachment_key"` 중 정확히 하나를 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화가 가능한 유형(LLM 이외의 스팬) 또는 : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ... 형식의 딕셔너리 목록입니다. 여기서 `"tool_calls"`는 필수 키 `"name"`, `"arguments"`와 선택적 키 `"tool_id"`, `"type"`을 포함하는 도구 호출 딕셔너리의 선택적 목록이며, `"tool_results"`는 함수 호출 시나리오에서 필수 키 `"result"`와 선택적 키 `"name"`, `"tool_id"`, `"type"`을 포함하는 도구 결과 딕셔너리의 선택적 목록입니다. `"audio_parts"` 및 `"image_parts"`은 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로, 각각 필수 `"mime_type"`와 `"content"`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "..."}`)를 사용해야 합니다.
 
 `output_data`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 딕셔너리 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`) 중 하나. 여기서 `"tool_calls"`는 함수 호출 시 사용할 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`는 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로 각각 필수 `"mime_type"`과 `"content"`(인라인으로 전달되는 base64 인코딩 미디어) 또는 `"attachment_key"` 중 정확히 하나를 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "...", "name": "...", "score": float, "id": "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`) 중 하나. 여기서 `"tool_calls"`는 함수 호출 시 사용할 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`은 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로, 각각 필수 `"mime_type"`와 `"content"`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "...", "name": "...", "score": float, "id": "..."}`)를 사용해야 합니다.
 
 `tool_definitions`
 : 선택 사항 - _딕셔너리 목록_
@@ -1435,11 +1919,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-`audio_parts` 또는 `image_parts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다.
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER의 입력 메시지는 'Hey, how are you?'라는 전사본이 포함된 인라인 오디오 플레이어를 보여주고, ASSISTANT의 출력 메시지는 'Click to play audio' 제어 기능과 'Hey! I'm doing great, thanks for asking. How about you?'라는 전사본을 표시합니다." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER 입력 메시지는 'What is in this image?'라는 프롬프트와 함께 검은 강아지 사진이 인라인으로 포함되어 있으며, ASSISTANT 출력 메시지는 이를 나무 표면 위의 검은 래브라도 리트리버 강아지로 설명합니다." style="width:100%;" >}}
+`audio_parts` 또는 `image_parts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다. 렌더링된 예시, 지원되는 형식, 크기 제한, 해당 필드를 자동으로 채우는 통합에 대한 자세한 내용은 [멀티모달 지원](/llm_observability/instrument/multimodal/)을 참조하세요.
 
 {{% /tab %}}
 
@@ -1461,11 +1941,11 @@ SDK는 입력, 출력 및 메타데이터로 스팬에 주석을 달기 위해 `
 
 `inputData`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 객체 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`는 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로 각각 필수 `mimeType`과 `content`(인라인으로 전달되는 base64 인코딩 미디어), `attachmentKey` 중 정확히 하나를 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화가 가능한 유형(LLM 이외의 스팬) 또는 : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` 형식의 딕셔너리 목록(LLM 스팬)입니다. `audioParts` 및 `imageParts`은 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로, 각각 필수 `mimeType`와 `content`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "..."}`)를 사용해야 합니다.
 
 `outputData`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 객체 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 객체 목록(형식: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`는 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로 각각 필수 `mimeType`과 `content`(인라인으로 전달되는 base64 인코딩 미디어), `attachmentKey` 중 정확히 하나를 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "...", name: "...", score: number, id: "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 객체 목록(형식: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`은 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로, 각각 필수 `mimeType`와 `content`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "...", name: "...", score: number, id: "..."}`)를 사용해야 합니다.
 
 `metadata`
 : 선택 사항 - _객체_
@@ -1576,13 +2056,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-`audioParts` 또는 `imageParts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다.
+`audioParts` 또는 `imageParts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다. 렌더링된 예시, 지원되는 형식, 크기 제한, 해당 필드를 자동으로 채우는 통합에 대한 자세한 내용은 [멀티모달 지원](/llm_observability/instrument/multimodal/)을 참조하세요.
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER의 입력 메시지는 'Hey, how are you?'라는 전사본이 포함된 인라인 오디오 플레이어를 보여주고, ASSISTANT의 출력 메시지는 'Click to play audio' 제어 기능과 'Hey! I'm doing great, thanks for asking. How about you?'라는 전사본을 표시합니다." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER 입력 메시지는 'What is in this image?'라는 프롬프트와 함께 검은 강아지 사진이 인라인으로 포함되어 있으며, ASSISTANT 출력 메시지는 이를 나무 표면 위의 검은 래브라도 리트리버 강아지로 설명합니다." style="width:100%;" >}}
-
-OpenAI 오디오 채팅 완료의 경우, `audioParts`도 [Datadog의 LLM 통합](/llm_observability/instrument/auto_instrumentation/)을 통해 자동으로 캡처되므로 수동 주석이 필요하지 않습니다. `audioParts`와 달리 `imageParts`는 현재 자동으로 캡처되지 않으므로 수동으로 주석을 달아야 합니다. 향후 릴리스에서 자동 캡처가 지원될 예정입니다.
+OpenAI 오디오 채팅 완료의 경우, `audioParts`도 [Datadog의 LLM 통합](/llm_observability/instrument/auto_instrumentation/)을 통해 자동으로 캡처되므로 수동 주석이 필요하지 않습니다. Node.js SDK는 `imageParts`를 자동으로 캡처하지 않습니다. 위와 같이 주석을 추가합니다.
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1823,6 +2299,145 @@ public class MyJavaClass {
 
 [1]: /ko/getting_started/tagging/
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+각 스팬 종류는 입력 및 출력에 주석을 달기 위한 유형별 메서드를 제공하며, 모든 스팬은 다음 `llmobs.AnnotateOption` 값을 허용하는 범용 `Annotate` 메서드를 제공합니다.
+
+### 입력 및 출력에 주석 달기 {#annotating-inputs-and-outputs-1}
+
+스팬 종류와 일치하는 주석 메서드를 사용합니다.
+
+`llm` 스팬에는 - `AnnotateLLMIO(input, output []llmobs.LLMMessage, opts ...)`
+`embedding` 스팬에는 - `AnnotateEmbeddingIO(input []llmobs.EmbeddedDocument, output string, opts ...)`
+`retrieval` 스팬에는 - `AnnotateRetrievalIO(input string, output []llmobs.RetrievedDocument, opts ...)`
+`workflow`, `agent`, `tool` 및 `task` 스팬에는 - `AnnotateTextIO(input, output string, opts ...)`
+
+`llmobs.LLMMessage`에는 다음 필드가 있습니다.
+
+`Role`
+: 필수 - _string_
+<br />메시지 작성자의 역할(예: `system`, `user` 또는 `assistant`)입니다.
+
+`Content`
+: 필수 - _string_
+<br />메시지의 텍스트 콘텐츠입니다.
+
+`ToolCalls`
+: 선택 사항 - _[]llmobs.ToolCall_
+<br />이 메시지에서 수행된 도구 호출입니다.
+
+`ToolResults`
+: 선택 사항 - _[]llmobs.ToolResult_
+<br />이 메시지 내 도구 호출의 결과입니다.
+
+### 메트릭 추가 {#adding-metrics-1}
+
+`llmobs.WithAnnotatedMetrics`와 `map[string]float64`를 함께 사용합니다. `llmobs` 패키지는 인식된 키에 대한 상수를 내보냅니다.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+	llmobs.MetricKeyInputTokens:            50,
+	llmobs.MetricKeyOutputTokens:           120,
+	llmobs.MetricKeyTotalTokens:            170,
+	llmobs.MetricKeyCacheReadInputTokens:   22,
+	llmobs.MetricKeyCacheWriteInputTokens:  15,
+	llmobs.MetricKeyReasoningOutputTokens:  30,
+	llmobs.MetricKeyTimeToFirstToken:       0.25,
+	llmobs.MetricKeyBillableCharacterCount: 900,
+}))
+{{< /code-block >}}
+
+| 상수 | 키 |
+|---|---|
+| `llmobs.MetricKeyInputTokens` | `input_tokens` |
+| `llmobs.MetricKeyOutputTokens` | `output_tokens` |
+| `llmobs.MetricKeyTotalTokens` | `total_tokens` |
+| `llmobs.MetricKeyCacheReadInputTokens` | `cache_read_input_tokens` |
+| `llmobs.MetricKeyCacheWriteInputTokens` | `cache_write_input_tokens` |
+| `llmobs.MetricKeyReasoningOutputTokens` | `reasoning_output_tokens` |
+| `llmobs.MetricKeyBillableCharacterCount` | `billable_character_count` |
+| `llmobs.MetricKeyTimeToFirstToken` | `time_to_first_token` |
+
+이 목록에 없는 키는 [수동 비용 추적](#use-case-using-a-custom-model)에 사용되는 `input_cost` 및 `output_cost` 키를 포함하여 사용자 지정 메트릭으로 허용됩니다.
+
+### 태그 추가 {#adding-tags-1}
+
+`llmobs.WithAnnotatedTags`와 `map[string]string`을 함께 사용합니다.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+	"team":        "nlp",
+	"host":        "host_name",
+	"feature":     "chatbot",
+	"user_handle": "poodle@dog.com",
+}))
+{{< /code-block >}}
+
+### 오류에 주석 달기 {#annotating-errors-1}
+
+스팬을 오류로 표시하려면 `llmobs.WithError`를 `Finish`에 전달합니다. SDK는 오류 메시지, 유형 및 스택 트레이스를 기록합니다.
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (string, error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+
+	completion, err := invokeProvider(ctx)
+	if err != nil {
+		span.Finish(llmobs.WithError(err))
+		return "", err
+	}
+
+	span.Finish()
+	return completion, nil
+}
+{{< /code-block >}}
+
+단일 `defer`를 유지하려면 명명된 반환 값으로 오류를 캡처합니다.
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (completion string, err error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+	defer func() { span.Finish(llmobs.WithError(err)) }()
+
+	completion, err = invokeProvider(ctx)
+	return completion, err
+}
+{{< /code-block >}}
+
+**참고**: `llmobs.WithError(nil)`는 아무 작업도 수행하지 않으므로 위의 지연된 호출은 성공적인 스팬을 오류로 표시하지 않습니다.
+
+### 메타데이터에 주석 달기 {#annotating-metadata-1}
+
+`llmobs.WithAnnotatedMetadata`와 `map[string]any`를 사용하여 파라미터 및 기타 컨텍스트 데이터를 기록합니다.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetadata(map[string]any{
+	"temperature": 0.7,
+	"max_tokens":  200,
+}))
+{{< /code-block >}}
+
+### 기타 주석 옵션 {#other-annotation-options}
+
+`llmobs.WithAnnotatedSessionID`
+: 선택 사항 - _string_
+<br />기본 사용자 세션의 ID입니다. [사용자 세션 추적](#tracking-user-sessions)을 참조하세요.
+
+`llmobs.WithAnnotatedPrompt`
+: 선택 사항 - _llmobs.Prompt_
+<br />구조화된 프롬프트 메타데이터 `dd-trace-go` v2.8.0 이상이 필요합니다. [프롬프트 추적](#prompt-tracking)을 참조하세요.
+
+`llmobs.WithAnnotatedToolDefinitions`
+: 선택 사항 - _[]llmobs.ToolDefinition_
+<br />이 호출을 위해 모델에 제공된 도구 정의입니다. `dd-trace-go` v2.8.0 이상이 필요합니다.
+
+`llmobs.WithAnnotatedCostTagKeys`
+: 선택 사항 - _[]string_
+<br />비용 및 토큰 메트릭으로 전파할 스팬 태그 키입니다. `dd-trace-go` v2.10.0 이상이 필요합니다. [비용 및 토큰 메트릭에 사용자 지정 태그 추가하기](#adding-custom-tags-to-cost-and-tokens-metrics)를 참조하세요.
+
+`llmobs.WithAnnotatedIntent`
+: 선택 사항 - _string_
+<br />도구 호출 이유에 대한 설명으로, `tool`스팬에 기록됩니다. `dd-trace-go` v2.8.0 이상이 필요합니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 자동 계측된 스팬에 주석 달기 {#annotating-auto-instrumented-spans}
@@ -1892,7 +2507,7 @@ SDK의 `llmobs.annotationContext()`는 콜백 함수 범위 내에서 시작된 
 
 `llmobs.annotationContext()` 메서드는 첫 번째 인수로 다음 옵션을 허용합니다.
 
-{{% collapse-content title="옵션" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : 선택 사항 - _str_
@@ -1960,7 +2575,7 @@ LLM 호출 전에 프롬프트 메타데이터를 첨부하려면 `LLMObs.annota
 - `template` (str): 자리표시자가 포함된 템플릿 문자열입니다(예: `"Translate {{text}} to {{lang}}"`).
 - `chat_template` (List[Message]): 다중 메시지 템플릿 형식입니다. `{ "role": "<role>", "content": "<template string with placeholders>" }` 객체 목록을 제공합니다.
 - `tags` (Dict[str, str]): 프롬프트 실행에 첨부할 태그입니다.
-- `rag_context_variables` (List[str]): 실제/컨텍스트 콘텐츠를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
+- `rag_context_variables` (List[str]): 정답 데이터 또는 컨텍스트 콘텐츠를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
 - `rag_query_variables` (List[str]): 사용자 쿼리를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
 
 {{% /collapse-content %}}
@@ -2005,7 +2620,7 @@ LLM 호출 전에 프롬프트 메타데이터를 첨부하려면 `llmobs.annota
 
 #### 인수 {#arguments-9}
 
-{{% collapse-content title="옵션" level="h5" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="Options" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : 필수 - object
@@ -2022,7 +2637,7 @@ LLM 호출 전에 프롬프트 메타데이터를 첨부하려면 `llmobs.annota
 - `variables` (Record<string, string>): 템플릿 자리표시자를 채우는 데 사용되는 변수입니다.
 - `template` (string | List[Message]): 자리표시자를 포함하는 템플릿 문자열 또는 메시지 목록입니다(예: `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` 형식의 객체 목록입니다.
 - `tags` (Record<string, string>): 프롬프트 실행에 첨부할 태그입니다.
-- `contextVariables` (string[]): 실제/컨텍스트 콘텐츠를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
+- `contextVariables` (string[]): 정답 데이터 또는 컨텍스트 콘텐츠를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
 - `queryVariables` (string[]): 사용자 쿼리를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
 
 {{% /collapse-content %}}
@@ -2054,6 +2669,62 @@ function answerQuestion(text) {
 
 {{% /tab %}}
 
+{{% tab "Go(실험적)" %}}
+`llmobs.WithAnnotatedPrompt`를 사용하여 프롬프트 메타데이터를 LLM 스팬에 첨부합니다. `dd-trace-go` v2.8.0 이상이 필요합니다. 스팬 주석에 대한 자세한 내용은 [스팬 강화하기](#enriching-spans)를 참조하세요.
+
+{{% collapse-content title="프롬프트 구조" level="h5" expanded=false id="go-prompt-structure" %}}
+
+`llmobs.Prompt`에는 다음 필드가 있습니다.
+
+- `ID`(_string_): 이 프롬프트의 논리적 식별자입니다. ML 앱마다 고유해야 합니다.
+- `Version` (_string_): 프롬프트의 버전 태그입니다(예: `"1.0.0"`). [버전 추적](#version-tracking)을 참조하세요.
+- `Label` (_string_): 프롬프트의 배포 레이블입니다(예: `"production"` 또는 `"staging"`).
+- `Template` (_string_): 자리표시자가 포함된 템플릿 문자열입니다(예: `"Translate {{text}} to {{lang}}"`. Mutually exclusive with `ChatTemplate`; if both are set, `Template`은 생략됩니다.
+- `ChatTemplate`(_[]llmobs.LLMMessage_): 다중 메시지 템플릿 형식입니다. `Template`과 상호 배타적입니다.
+- `Variables` (_map[string]string_): 템플릿 자리표시자를 채우는 데 사용되는 변수입니다.
+- `Tags` (_map[string]string_): 프롬프트 실행에 첨부할 태그입니다.
+- `RAGContextVariables`(_[]string_): 정답 데이터 또는 컨텍스트 콘텐츠를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
+- `RAGQueryVariables`(_[]string_): 사용자 쿼리를 포함하는 변수 키입니다. [환각 탐지](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)에 사용됩니다.
+
+{{% /collapse-content %}}
+
+#### 예시: 채팅 템플릿 프롬프트 {#example-chat-template-prompt}
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func answerQuestion(ctx context.Context, text string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "answer-question",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedPrompt(llmobs.Prompt{
+		ID:      "translation-template",
+		Version: "1.0.0",
+		ChatTemplate: []llmobs.LLMMessage{
+			{Role: "user", Content: "Translate to {{lang}}: {{text}}"},
+		},
+		Variables: map[string]string{"lang": "fr", "text": text},
+		Tags:      map[string]string{"team": "nlp"},
+	}))
+
+	completion := callProvider(text) // user application logic
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{{Role: "user", Content: "Translate to fr: " + text}},
+		[]llmobs.LLMMessage{{Role: "assistant", Content: completion}},
+	)
+	return completion
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### 참고 {#notes}
@@ -2088,7 +2759,7 @@ DD_MCP_CAPTURE_INTENT=1 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-또는 `capture_intent`의 `LLMObs.enable()` 파라미터를 사용하여 프로그래밍 방식으로 활성화하세요.
+또는 `LLMObs.enable()`의 `capture_intent` 파라미터를 사용하여 프로그래밍 방식으로 활성화하세요.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -2106,7 +2777,7 @@ LLM/임베딩 스팬에 토큰 메트릭(자동 비용 추적용) 또는 비용 
 
 자동 계측을 사용하는 경우, 토큰 및 비용 메트릭은 스팬에 자동으로 표시됩니다. 수동으로 계측하는 경우, 아래 지침을 따릅니다.
 
-<div class="alert alert-info">이 문맥에서 "토큰 메트릭" 및 "비용 메트릭"은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 Agent Observability 메트릭</a>과는 별개입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>및 <code>output_cost</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
+<div class="alert alert-info">이 문맥에서 '토큰 메트릭' 및 '비용 메트릭'은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 Agent Observability 메트릭</a>과는 별개의 개념입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>속성 및 <code>output_cost</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
 
 ### 사용 사례: 일반 모델 제공업체 사용하기 {#use-case-using-a-common-model-provider}
 Datadog은 OpenAI, Azure OpenAI, Anthropic, Google Gemini 등 일반 모델 제공업체를 지원합니다. 이러한 제공업체를 사용할 때는 LLM 요청에 모델 이름, 모델 제공업체 및 토큰 사용량에만 주석을 달면 됩니다. Datadog은 제공업체 가격을 기반으로 예상 비용을 자동 계산합니다.
@@ -2185,6 +2856,38 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		llmobs.MetricKeyInputTokens:           50,
+		llmobs.MetricKeyOutputTokens:          120,
+		llmobs.MetricKeyTotalTokens:           170,
+		llmobs.MetricKeyCacheReadInputTokens:  22, // optional
+		llmobs.MetricKeyCacheWriteInputTokens: 15, // optional
+	}))
+	return resp
+}
+{{< /code-block >}}
+
+**참고**: `dd-trace-go`에는 LLM 공급자 통합이 없으므로 토큰 수가 자동으로 수집되지 않습니다. 모든 `llm` 및 `embedding` 스팬에 토큰 수를 기록하세요. 그렇지 않으면 Datadog에서 비용을 추정할 수 없습니다.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 사용 사례: 사용자 지정 모델 사용하기 {#use-case-using-a-custom-model}
@@ -2262,6 +2965,33 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("my-custom-model"),
+		llmobs.WithModelProvider("my-company"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		"input_cost":  0.0021,
+		"output_cost": 0.0048,
+	}))
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 비용 및 토큰 메트릭에 사용자 지정 태그 추가하기 {#adding-custom-tags-to-cost-and-tokens-metrics}
@@ -2304,6 +3034,44 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+`dd-trace-go` v2.10.0 이상이 필요합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+		llmobs.WithAnnotatedTags(map[string]string{
+			"team":          "nlp",
+			"customer_tier": "enterprise",
+			"host":          "host_name",
+		}),
+		llmobs.WithAnnotatedCostTagKeys([]string{"team", "customer_tier"}),
+	)
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 이 방식을 통해 주석 컨텍스트를 거쳐 태그를 전파하여 컨텍스트 내에서 시작된 모든 자동 계측 스팬에 적용할 수도 있습니다.
@@ -2339,13 +3107,16 @@ llmobs.annotationContext({
 
 Agent Observability SDK는 평가를 Datadog에 내보내고 제출할 수 있는 메서드를 제공합니다.
 
-<div class="alert alert-info">풍부한 결과 메타데이터를 갖춘 재사용 가능한 클래스 기반 평가기(<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>)를 풍부한 결과 메타데이터와 함께 사용하려면 <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>를 참조하십시오.</div>
+<div class="alert alert-info">풍부한 결과 메타데이터를 갖춘 재사용 가능한 클래스 기반 평가자(<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>)를 구축하려면, <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">평가 개발자 가이드</a>를 참조하세요.</div>
 
 평가는 단일 스팬에 연결해야 합니다. 대상 스팬은 다음 두 가지 방법 중 하나로 식별할 수 있습니다.
 - _태그 기반 연결_ - 고유 키-값 태그 쌍을 단일 스팬에 설정하여 평가를 연결합니다. 태그 키-값 쌍이 여러 스팬과 일치하거나 일치하는 스팬이 없는 경우 평가 연결에 실패합니다.
 - _직접 스팬 참조_ - 스팬의 고유 트레이스 ID와 스팬 ID 조합을 사용하여 평가를 연결합니다.
 
 ### 스팬 내보내기 {#exporting-a-span}
+
+<div class="alert alert-info">Go SDK에는 스팬 내보내기 메서드가 없습니다. 대신 스팬을 <code>llmobs.SubmitEvaluationFromSpan</code> 에 직접 전달합니다. <a href="#submitting-evaluations">평가 제출하기</a>를 참조하세요.</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 `LLMObs.export_span()`을 사용하여 스팬에서 스팬 컨텍스트를 추출할 수 있습니다. 이 메서드는 평가를 해당 스팬과 연결할 때 유용합니다.
@@ -2402,7 +3173,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% tab "Python" %}}
 `LLMObs.submit_evaluation()`을 사용하여 주어진 스팬과 연결된 사용자 지정 평가를 제출할 수 있습니다.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> 는 더 이상 사용되지 않으며 ddtrace의 다음 주요 버전(4.0)에서 제거될 예정입니다. 마이그레이션하려면 <code>LLMObs.submit_evaluation_for</code> 호출의 이름을 <code>LLMObs.submit_evaluation</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> 는 더 이상 사용되지 않으며 ddtrace의 다음 주요 버전(4.0)에서 제거될 예정입니다. 마이그레이션하려면 <code>LLMObs.submit_evaluation_for</code> 호출의 이름을 <code>LLMObs.submit_evaluation</code>로 변경하세요.</div>
 
 **참고**: 사용자 지정 평가는 사용자가 구현하고 호스팅하는 평가자입니다. Datadog이 내장 평가기를 사용해 자동으로 계산하는 기본 제공 평가와는 다릅니다. 애플리케이션용 기본 제공 평가를 구성하려면 Datadog의 [**Agent Observability** > **Settings** > **Evaluations**][1] 페이지를 사용하세요.
 
@@ -2625,6 +3396,76 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 [1]: /ko/getting_started/tagging/
+{{% /tab %}}
+{{% tab "Go(실험적)" %}}
+Go SDK는 평가를 제출하기 위한 두 가지 함수를 제공합니다. 둘 다 전달하는 값의 Go 유형에서 평가 유형을 추론합니다. : `bool`은 `boolean` 평가가 되고, `string`은 `categorical`이 되며, 모든 숫자 유형은 `score`가 됩니다.
+
+**참고**: Go SDK는 `json` 평가를 지원하지 않습니다.
+
+### 스팬 직접 참조 {#direct-span-reference}
+
+`llmobs.SubmitEvaluationFromSpan`은 스팬 자체를 인수로 받으므로 별도의 내보내기 단계가 필요하지 않습니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func evaluate(ctx context.Context) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("claude-opus-4-6"),
+		llmobs.WithModelProvider("anthropic"),
+	)
+	defer span.Finish()
+
+	// ... user application logic
+
+	llmobs.SubmitEvaluationFromSpan("correctness", "correct", span) // categorical
+	llmobs.SubmitEvaluationFromSpan("relevance_score", 0.95, span)  // score
+	llmobs.SubmitEvaluationFromSpan("is_safe", true, span)          // boolean
+}
+{{< /code-block >}}
+
+### 태그 기반 조인 {#tag-based-joining}
+
+`llmobs.SubmitEvaluationFromTag`는 일치하는 태그 키-값 쌍을 포함하는 스팬에 평가를 조인합니다. 쌍이 여러 스팬과 일치하거나 일치하는 스팬이 없는 경우 평가 연결에 실패합니다.
+
+{{< code-block lang="go" >}}
+joinTag := llmobs.JoinTag{Key: "session_id", Value: sessionID}
+
+llmobs.SubmitEvaluationFromTag("user_feedback", "positive", joinTag)
+llmobs.SubmitEvaluationFromTag("user_rating", 4.2, joinTag)
+llmobs.SubmitEvaluationFromTag("thumbs_up", true, joinTag)
+{{< /code-block >}}
+
+### 옵션 {#options-1}
+
+두 함수 모두 다음 `llmobs.EvaluationOption` 값을 허용합니다.
+
+`llmobs.WithEvaluationTags`
+: 선택 사항 - _[]string_
+<br />평가에 첨부할 `key:value` 문자열 형식의 태그 목록입니다.
+
+`llmobs.WithEvaluationMLApp`
+: 선택 사항 - _string_
+<br />ML 애플리케이션의 이름입니다. 기본값은 SDK에 구성된 ML 앱입니다.
+
+`llmobs.WithEvaluationTimestamp`
+: 선택 사항 - `time.Time`
+<br />평가가 생성된 시간입니다. 기본값은 현재 시간입니다.
+
+{{< code-block lang="go" >}}
+llmobs.SubmitEvaluationFromSpan("is_safe", true, span,
+	llmobs.WithEvaluationTags([]string{"evaluator:custom", "env:prod"}),
+	llmobs.WithEvaluationMLApp("<YOUR_ML_APP_NAME>"),
+)
+{{< /code-block >}}
+
+**참고**: 이 함수들은 오류를 반환하지 않습니다. 실패는 트레이서의 디버그 로그를 통해 보고됩니다. 실패 내역을 확인하려면 `DD_TRACE_DEBUG=1`을 설정합니다.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -3155,6 +3996,47 @@ public class MyJavaClass {
 }
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+새로운 트레이스 또는 새로운 프로세스의 스팬을 위한 루트 스팬을 시작할 때, 기본 사용자 세션의 문자열 ID와 함께 `llmobs.WithSessionID`를 전달합니다. 필요시 `user_handle`, `user_name`, `user_id` 태그를 추가합니다.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func processChat(ctx context.Context, sessionID, message string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "incoming-chat",
+		llmobs.WithSessionID(sessionID),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+		"user_handle": "poodle@dog.com",
+		"user_id":     "1234",
+		"user_name":   "poodle",
+	}))
+
+	response := answerChat(ctx, message) // user application logic
+	span.AnnotateTextIO(message, response)
+	return response
+}
+{{< /code-block >}}
+
+`llmobs.WithAnnotatedSessionID`를 사용하여 기존 스팬에 세션 ID를 설정할 수도 있습니다.
+
+### 세션 추적 태그 {#session-tracking-tags-1}
+
+| 태그 | 설명 |
+|---|---|
+| `session_id` | 단일 사용자 세션을 나타내는 ID입니다(예: 채팅 세션). |
+| `user_handle` | 채팅 세션 사용자의 핸들입니다. |
+| `user_name` | 채팅 세션 사용자의 이름입니다. |
+| `user_id` | 채팅 세션 사용자의 ID입니다. |
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 분산 추적 {#distributed-tracing}
@@ -3235,6 +4117,64 @@ tracer.use('http', false) // disable the http integration
 
 [1]: /ko/tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
+{{% tab "Go(실험적)" %}}
+Agent Observability 스팬 컨텍스트는 표준 APM 분산 트레이싱 헤더를 통해 전파되므로 별도의 주입 또는 추출 API가 없습니다. `tracer.Inject` 및 `tracer.Extract`를 사용하여 APM 컨텍스트를 전파하거나, 계측된 [HTTP 통합][1]을 사용합니다. 그러면 다운스트림 서비스의 Agent Observability 스팬이 업스트림 부모 스팬에 자동으로 연결됩니다.
+
+### 예시 {#example-35}
+
+{{< code-block lang="go" filename="client.go" >}}
+package main
+
+import (
+	"context"
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func clientSendRequest(ctx context.Context, req *http.Request) error {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "client-send-request")
+	defer span.Finish()
+
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "http.request")
+	defer apmSpan.Finish()
+
+	// inject the trace context into the outgoing request headers
+	return tracer.Inject(apmSpan.Context(), tracer.HTTPHeadersCarrier(req.Header))
+}
+{{< /code-block >}}
+
+{{< code-block lang="go" filename="server.go" >}}
+package main
+
+import (
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func serverHandler(w http.ResponseWriter, r *http.Request) {
+	var opts []tracer.StartSpanOption
+	if sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header)); err == nil {
+		opts = append(opts, tracer.ChildOf(sctx))
+	}
+	// if extraction fails, the span starts a new trace
+
+	apmSpan, ctx := tracer.StartSpanFromContext(r.Context(), "http.handler", opts...)
+	defer apmSpan.Finish()
+
+	// this span joins the distributed trace and the upstream parent span
+	span, _ := llmobs.StartTaskSpan(ctx, "process-request")
+	defer span.Finish()
+}
+{{< /code-block >}}
+
+**참고**: 다운스트림 서비스에서 Agent Observability 스팬을 시작하기 전에 업스트림 컨텍스트를 추출합니다. 사전에 시작된 스팬은 분산 트레이스에 캡처되지 않습니다.
+
+[1]: /ko/tracing/trace_collection/compatibility/go/
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -3246,7 +4186,7 @@ tracer.use('http', false) // disable the http integration
 
 각 스팬 종류마다 `ddtrace.llmobs.LLMObs` 클래스는 주어진 코드 블록에서 수반되는 작업을 자동으로 추적할 수 있는 해당 인라인 메서드를 제공합니다. 이 메서드는 함수 데코레이터와 동일한 인수 서명을 가지며, `name` 인수가 제공되지 않은 경우 스팬 종류(`llm`, `workflow` 등)로 기본값이 설정됩니다. 이 메서드는 컨텍스트 관리자로 사용할 수 있으며, 코드 블록 실행이 완료되면 스팬이 자동으로 종료됩니다.
 
-#### 예시 {#example-35}
+#### 예시 {#example-36}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3265,7 +4205,7 @@ def process_message():
 2.  스팬 객체를 다른 함수의 인수로 전달합니다.
 3.  `span.finish()` 메서드를 사용하여 스팬을 수동으로 중지합니다. **참고**: 스팬은 수동으로 종료해야 하며, 그렇지 않으면 제출되지 않습니다.
 
-#### 예시 {#example-36}
+#### 예시 {#example-37}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3356,7 +4296,7 @@ function processMessage () {
 
 Node.js Agent Observability SDK는 TypeScript 애플리케이션을 위한 함수 데코레이터 역할을 하는 `llmobs.decorate` 함수를 제공합니다. 이 함수의 추적 동작은 `llmobs.wrap`과 동일합니다.
 
-#### 예시 {#example-37}
+#### 예시 {#example-38}
 
 {{< code-block lang="javascript" >}}
 // index.ts
@@ -3399,6 +4339,40 @@ function processMessage () {
 processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go(실험적)" %}}
+### 여러 애플리케이션 추적하기 {#tracing-multiple-applications-2}
+
+SDK는 동일한 서비스의 여러 LLM 애플리케이션 추적을 지원합니다.
+
+환경 변수 `DD_LLMOBS_ML_APP`를 LLM 애플리케이션의 이름으로 구성할 수 있으며, 기본적으로 모든 생성된 스팬이 이 이름으로 그룹화됩니다.
+
+이 구성을 재정의하고 특정 루트 스팬에 다른 LLM 애플리케이션 이름을 사용하려면, 새로운 트레이스 또는 새로운 프로세스의 스팬을 위한 루트 스팬을 시작할 때 `llmobs.WithMLApp`을 전달합니다.
+
+{{< code-block lang="go">}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "process-message",
+	llmobs.WithMLApp("<NON_DEFAULT_ML_APP_NAME>"),
+)
+defer span.Finish()
+{{< /code-block >}}
+
+### 서버리스 환경에서 강제 플러시 {#force-flushing-in-serverless-environments-2}
+
+트레이서는 백그라운드에서 스팬을 플러시합니다. 프로세스가 종료되기 전에 `tracer.Stop()`을 호출하여 버퍼링된 스팬이 제출되도록 합니다. 수명이 짧은 프로세스 및 서버리스 핸들러에서는 이를 보장하기 위해 `main`에서 `defer tracer.Stop()`을 사용합니다.
+
+{{< code-block lang="go">}}
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 

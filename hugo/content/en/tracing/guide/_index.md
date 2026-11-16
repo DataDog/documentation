@@ -82,6 +82,7 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/extend/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/serverless_enable_azure_app_insights/" >}}Azure App Insights Integration{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Understand Datadog Trace Retention Policy{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Understand the Difference Between the Agent Host and the Tracer Host{{< /nextlink >}}

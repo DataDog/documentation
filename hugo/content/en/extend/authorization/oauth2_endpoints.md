@@ -71,7 +71,7 @@ Your application does not need to make this authorization request. This step is 
 
 ## Exchange authorization code for access token
 
-### `POST /oauth2/v1/token`
+### `POST /api/v2/oauth2/token`
 
 #### Overview
 
@@ -101,7 +101,7 @@ curl -X POST \
     -d "grant_type=authorization_code&client_id=$CLIENT_ID
     client_secret=$CLIENT_SECRET&redirect_uri=$REDIRECT_URI
     code_verifier=$CODE_VERIFIER&code=$CODE" \
-    "https://api.datadoghq.com/oauth2/v1/token"
+    "https://api.datadoghq.com/api/v2/oauth2/token"
 ```
 
 #### Success Response

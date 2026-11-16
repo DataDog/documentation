@@ -64,6 +64,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 | [IoT][17]                          | `source:iot`                  | CloudWatch     | Partial <sup>3</sup> |
 | [Lambda][18]                       | `source:lambda`               | CloudWatch     | Yes                  |
 | Lambda@Edge                        | `source:lambda`               | CloudWatch     | Yes                  |
+| Lambda MicroVMs                    | `source:lambda`               | CloudWatch     | Yes                  |
 | [MWAA][19]                         | `source:mwaa`                 | CloudWatch     | Yes                  |
 | [Network Firewall][20]             | `source:network-firewall`     | CloudWatch, S3 | Yes                  |
 | [OpenSearch][21]                   | `source:opensearch`           | CloudWatch     | No                   |
@@ -144,6 +145,7 @@ To see which services support automatic collection, and the storage locations th
     "glue:GetJob",
     "glue:ListJobs",
     "iot:GetV2LoggingOptions",
+    "lambda:GetMicrovmImageVersion",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
@@ -206,6 +208,7 @@ To see which services support automatic collection, and the storage locations th
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
+    | `lambda:GetMicrovmImageVersion`                             | Get information about a Lambda MicroVM image version.                        |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
     | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |

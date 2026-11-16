@@ -26,7 +26,7 @@ Set up CI Visibility for Jenkins to collect data across various stages of your p
 |---|---|----------------------------------------------------------------------------------------------------------|
 | [Manual steps][20] | Manual steps | View manually triggered pipelines.                                                                       |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing.                                |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job logs collection][10].                                   |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs. Requires [Logs Storage][10].                                   |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for Jenkins workers.                                 |
 | [Custom spans][26] | Custom spans | Configure custom spans for your pipelines.                                                               |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][12] to all generated pipeline, stages, and job spans.                                  |
@@ -158,7 +158,7 @@ unclassified:
     ciInstanceName: 'jenkins'
     # (Optional) Configure the name of the host that you use to access Datadog UI
     datadogAppHostname: 'app.datadoghq.com'
-    # (Optional) Enable logs collection
+    # (Optional) Enable Logs Storage
     collectBuildLogs: true
 ```
 
@@ -194,7 +194,7 @@ unclassified:
     ciInstanceName: 'jenkins'
     # (Optional) Configure the name of the host that you use to access Datadog UI
     datadogAppHostname: '{{< region-param key=dd_full_site >}}'
-    # (Optional) Enable logs collection
+    # (Optional) Enable Logs Storage
     collectBuildLogs: true
 ```
 
@@ -227,7 +227,7 @@ datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, ag
 
 datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
 datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
@@ -258,7 +258,7 @@ datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
 datadog.datadogAppHostname = '{{< region-param key=dd_full_site >}}' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
 datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
@@ -291,7 +291,7 @@ DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 # (Optional) Configure Log Collection port as configured in your Datadog Agent
 DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
 
-# (Optional) Enable logs collection
+# (Optional) Enable Logs Storage
 DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
 # (Optional) Configure the name of the host that you use to access Datadog UI
@@ -320,7 +320,7 @@ DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 # (Optional) Configure your CI Instance name
 DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-# (Optional) Enable logs collection
+# (Optional) Enable Logs Storage
 DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
 # (Optional) Configure the name of the host that you use to access Datadog UI
@@ -329,12 +329,12 @@ DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME={{< region-param key=dd_full_site >}
 
 2. Restart your Jenkins instance.
 
-## Collect job logs
+## Logs Storage
 
-Job logs collection can be enabled optionally when configuring the Jenkins plugin (see previous section).
+Logs Storage can be enabled optionally when configuring the Jenkins plugin (see `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` in the previous section).
 Both Agentless and Agent-based options are supported.
 
-Logs are billed separately from CI Visibility.
+Logs Storage is billed separately from CI Visibility.
 
 Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
@@ -810,7 +810,7 @@ try restarting the Jenkins instance.
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
-[10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
+[10]: /continuous_integration/pipelines/jenkins/?tab=linux#logs-storage
 [11]: /continuous_integration/pipelines/jenkins/?tab=agentlessusinganapikey#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/

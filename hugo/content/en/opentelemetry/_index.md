@@ -13,6 +13,9 @@ further_reading:
 - link: "/opentelemetry/setup/"
   tag: "Documentation"
   text: "Send Data to Datadog"
+- link: "/opentelemetry/setup/otlp_ingest_in_the_agent/"
+  tag: "Documentation"
+  text: "OTLP ingestion by the Datadog Agent"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
@@ -25,9 +28,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
   tag: "Blog"
   text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
-  tag: "Blog"
-  text: "OTLP ingestion in the Agent"
 - link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
   tag: "Blog"
   text: "Learn more about AWS's managed Lambda Layer for OpenTelemetry"
@@ -103,9 +103,9 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 <div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
-### Option 1: Use the Datadog Agent with DDOT Collector (Recommended)
+### Option 1: Use the Datadog Agent and the Agent's Collector
 
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview of the Agent's Collector, an OpenTelemetry Collector deployed with the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Users looking to gain both OTel vendor neutrality and Datadog ecosystem innovations, such as:
 
@@ -118,7 +118,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 - {{< translate key="integration_count" >}}+ Datadog integrations
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/" >}}Learn more about using the Datadog Agent with DDOT Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/agent/" >}}Learn more about using the Datadog Agent with OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Option 2: Use the OpenTelemetry Collector
@@ -129,6 +129,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 - Standard OpenTelemetry pipeline that exports to Datadog over OTLP
 - Flexible configuration options like tail-based sampling and data transformations
+- A choice of Collector: the upstream OpenTelemetry Collector, or the [DDOT Collector](/opentelemetry/setup/ddot_collector/), which Datadog builds and supports
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}

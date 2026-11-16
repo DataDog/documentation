@@ -1,91 +1,90 @@
 ---
-description: Configura Azure Private Link para enviar telemetría a Datadog de forma
-  segura sin utilizar la Internet pública, incluida la configuración del endpoint
-  y la configuración de DNS.
-title: Conectarse a Datadog a través de Azure Private Link
+description: Configure Azure Private Link para enviar telemetría a Datadog de forma
+  segura sin utilizar la red pública de internet, incluyendo la configuración del
+  punto de conexión y la configuración de DNS.
+title: Conéctese a Datadog a través de Azure Private Link
 ---
+[Azure Private Link][1] le permite enviar telemetría a Datadog sin utilizar la red pública de internet.
 
-[Azure Private Link][1] te permite enviar telemetría a Datadog sin utilizar la Internet pública.
+Datadog expone algunos de sus servicios de ingesta de datos como [servicios de Azure Private Link][2].
 
-Datadog expone parte de sus servicios de consumo de datos como [servicios de Azure Private Link][2].
+Puede configurar Azure Private Link para exponer una dirección IP privada para cada servicio de ingesta de Datadog; esta dirección IP enruta el tráfico al backend de Datadog. Luego, puede configurar una [Zona DNS privada][3] de Azure para anular los nombres DNS correspondientes a los productos para cada punto de conexión que se consume.
 
-Puedes configurar Azure Private Link para exponer una dirección IP privada por cada servicio de consumo de Datadog. Esta dirección IP enruta el tráfico al backend de Datadog. A continuación, puedes configurar una [zona DNS privada][3] de Azure para anular los nombres DNS correspondientes a los productos de cada endpoint consumido.
+## Configuración {#setup}
 
-## Instalación
+### Conecte un punto de conexión {#connect-an-endpoint}
 
-### Conexión de un endpoint
+1. En el portal de Azure, vaya a {{< ui >}}Private Link{{< /ui >}}.
+2. En el menú de navegación izquierdo, seleccione {{< ui >}}Private endpoints{{< /ui >}}.
+3. Seleccione {{< ui >}}Create{{< /ui >}}.
+4. En la página {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Basics{{< /ui >}}, configure lo siguiente:
+   - En {{< ui >}}Project details{{< /ui >}}, seleccione la {{< ui >}}Subscription{{< /ui >}} y la {{< ui >}}Resource group{{< /ui >}} desde las cuales los recursos de producción deben acceder a Private Link.
+   - En {{< ui >}}Instance details{{< /ui >}}, ingrese un {{< ui >}}Name{{< /ui >}} (por ejemplo, `datadog-api-private-link`) y seleccione su {{< ui >}}Region{{< /ui >}}.
 
-1. En el portal de Azure, ve a **Private Link** (Enlace privado).
-2. En el menú de navegación de la izquierda, selecciona **Private endpoints** (Endpoints privados).
-3. Selecciona **Create** (Crear).
-4. En la página **Create a private endpoint** > **Basics** (Crear un endpoint privado > Aspectos básicos), configura:
-   - En **Project details** (Detalles del proyecto), selecciona la **Subscription** (Suscripción) y el **Resource group** (Grupo de recursos) desde los que los recursos de producción deben acceder a Private Link.
-   - En **Instance details** (Detalles de la instancia), introduce un **Name** (Nombre) (por ejemplo, `datadog-api-private-link`) y selecciona tu **Region** (Región).
+   Seleccione {{< ui >}}Next: Resource{{< /ui >}} para continuar.
+5. En la página {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Resource{{< /ui >}}, configure lo siguiente:
+   - Para {{< ui >}}Connection method{{< /ui >}}, seleccione {{< ui >}}Connect to an Azure resource by resource ID or alias{{< /ui >}}.
+   - Para {{< ui >}}Resource ID or alias{{< /ui >}}, ingrese el nombre del servicio de Private Link que corresponde al servicio de ingesta de Datadog que desea utilizar. Puede encontrar este nombre de servicio en la [tabla de servicios publicados](#published-services).
+   - Opcionalmente, para {{< ui >}}Request message{{< /ui >}}, puede ingresar su dirección de correo electrónico (asociada con una cuenta de Datadog). Esto ayuda a Datadog a identificar su solicitud y comunicarse con usted si es necesario.
 
-   Selecciona **Next: Resource** (Siguiente: Recurso) para continuar.
-5. En la página **Create a private endpoint** > **Resource** (Crear un endpoint privado > Recurso), configura lo siguiente:
-   - En **Connection method** (Método de conexión), selecciona **Connect to an Azure resource by resource ID or alias** (Conectarse a un recurso Azure por ID de recurso o alias).
-   - En **Resource ID or alias** (ID de recurso o alias), introduce el nombre del servicio de Private Link que corresponda al servicio de consumo de Datadog que quieres utilizar. Puedes encontrar este nombre de servicio en la [tabla de servicios publicados](#published-services).
-   - Opcionalmente, en **Request message** (Mensaje de solicitud), puedes introducir tu dirección de correo electrónico (asociada a una cuenta de Datadog). Esto ayuda a Datadog a identificar tu solicitud y a ponerse en contacto contigo, si es necesario.
+   Seleccione {{< ui >}}Next: Virtual Network{{< /ui >}} para continuar.
+6. En la página {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Virtual Network{{< /ui >}}, configure lo siguiente:
+   - En {{< ui >}}Networking{{< /ui >}}, seleccione {{< ui >}}Virtual network{{< /ui >}} y {{< ui >}}Subnet{{< /ui >}} donde debe residir el punto de conexión. Por lo general, esto se encuentra en la misma red que los recursos de cómputo que necesitan acceder al punto de conexión privado.
+   - En {{< ui >}}Private DNS integration{{< /ui >}}, seleccione {{< ui >}}No{{< /ui >}}.
 
-   Selecciona **Next: Virtual Network** (Siguiente: Red virtual) para continuar.
-6. En la página **Create a private endpoint** > **Virtual Network** (Crear un endpoint privado > Red virtual), configura lo siguiente:
-   - En **Networking** (Redes), selecciona la **Virtual network** (Red virtual) y la **Subnet** (Subred) donde debe estar alojado el endpoint. Normalmente, se encuentra en la misma red que los recursos informáticos que necesitan acceder al endpoint privado.
-   - En **Private DNS integration** (Integración de DNS privado), selecciona **No**.
+   Seleccione {{< ui >}}Next: Tags{{< /ui >}} para continuar.
+7. En la página {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}, puede configurar etiquetas opcionalmente. Seleccione {{< ui >}}Next{{< /ui >}}.
+8. En la página {{< ui >}}Review + create{{< /ui >}}, revise sus ajustes de configuración. Luego, seleccione {{< ui >}}Create{{< /ui >}}.
+9. Una vez creado su punto de conexión privado, búsquelo en la lista. Tome nota del {{< ui >}}Private IP{{< /ui >}} de este punto de conexión, ya que se utiliza en la siguiente sección. El campo Estado de conexión debe ser Pendiente.
+10. A continuación, la aprobación de Datadog es necesaria y manual. Comuníquese con el soporte técnico de Datadog y solicite la aprobación de su punto de conexión privado; incluya el nombre de su punto de conexión.
+11. Después de que el soporte técnico de Datadog confirme que el punto de conexión se ha creado, confirme que funciona correctamente. En el portal de Azure, navegue a {{< ui >}}Home{{< /ui >}} > {{< ui >}}Private Endpoints{{< /ui >}}. Haga clic en el nombre del punto de conexión y confirme que el Estado de conexión muestra {{< ui >}}Approved{{< /ui >}}. 
+12. Navegue a {{< ui >}}Monitoring{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}. Confirme que las métricas `Bytes In` y `Bytes Out` no sean cero. Estas métricas también deben ser capturadas por la integración de Datadog Azure como `azure.network_privateendpoints.pe_bytes_[in/out]`.
 
-   Selecciona **Next: Tags** (Siguiente: Etiquetas (tags)) para continuar.
-7. En la página **Create a private endpoint** > **Tags** (Crear un endpoint privado > Etiquetas), puedes configurar opcionalmente etiquetas. Selecciona **Next** (Siguiente).
-8. En la página **Review + create** (Revisar + crear), revisa tus configuraciones. A continuación, selecciona **Create** (Crear).
-9. Una vez creado su endpoint privado, búscalo en la lista. Toma nota de la **Private IP** (IP privada) de este endpoint, ya que se utiliza en la siguiente sección. El campo Estado de connection (conexión) debe ser Pendiente.
-10. A continuación, es necesaria la aprobación manual de Datadog. Ponte en contacto con el servicio de asistencia de Datadog y solicita la aprobación de tu endpoint de enlace privado, incluye el nombre de tu endpoint.
-11. Después de que Datadog Support haya confirmado que se ha creado el endpoint, confirma que funciona correctamente. En el portal Azure, ve a **Home > Private Endpoints** (Página principal > Endpoint privado). Haz clic en el nombre del endpoint y confirma que el estado de connection (conexión) muestra **Approved** (Aprobado). 
-12. Ve a **Monitoring > Metrics** (Monitorización > Métricas). Confirma que las métricas `Bytes In` y `Bytes Out` son distintas de cero. Estas métricas también deben ser capturadas por Datadog Azure Integration como `azure.network_privateendpoints.pe_bytes_[in/out]`.
+### Cree una zona DNS privada {#create-a-private-dns-zone}
+1. En el portal de Azure, vaya a {{< ui >}}Private DNS zones{{< /ui >}}.
+2. Seleccione {{< ui >}}Create{{< /ui >}}.
+3. En la página {{< ui >}}Create Private DNS zone{{< /ui >}} > {{< ui >}}Basics{{< /ui >}}, configure lo siguiente:
+   - En {{< ui >}}Project details{{< /ui >}}, seleccione la {{< ui >}}Subscription{{< /ui >}} y {{< ui >}}Resource group{{< /ui >}} desde las cuales los recursos de producción deben acceder al punto de conexión privado.
+   - En {{< ui >}}Instance details{{< /ui >}}, para {{< ui >}}Name{{< /ui >}}, ingrese el _nombre DNS privado_ que corresponde al servicio de ingesta de Datadog que desea utilizar. Puede encontrar este nombre de servicio en la [tabla de servicios publicados](#published-services).
 
-### Creación de una zona DNS privada
-1. En el portal Azure, ve a **Private DNS zones** (Zonas DNS privadas).
-2. Selecciona **Create** (Crear).
-3. En la página **Create Private DNS zone** > **Basics** (Crear zona DNS privada > Aspectos básicos), configura:
-   - En **Project details** (Detalles del proyecto), selecciona la **Subscription** (Suscripción) y el **Resource group** (Grupo de recursos) desde los que los recursos de producción deben acceder al endpoint privado.
-   - En **Instance details** (Detalles de la instancia), en **Name** (Nombre), introduce el nombre de DNS privado que corresponde al servicio de consumo de Datadog que quieres utilizar. Puedes encontrar este nombre de servicio en la [tabla de servicios publicados](#published-services).
+   Seleccione {{< ui >}}Review create{{< /ui >}}.
+4. Revise sus ajustes de configuración. Luego, seleccione {{< ui >}}Create{{< /ui >}}.
+5. Una vez creada la zona DNS privada, selecciónela de la lista.
+6. En el panel que se abre, seleccione {{< ui >}}\+ Record set{{< /ui >}}.
+7. En el panel {{< ui >}}Add record set{{< /ui >}}, configure lo siguiente:
+   - Para {{< ui >}}Name{{< /ui >}}, ingrese `@`.
+   - Para {{< ui >}}Type{{< /ui >}}, seleccione {{< ui >}}A - Address record{{< /ui >}}.
+   - Para {{< ui >}}IP address{{< /ui >}}, ingrese la dirección IP que anotó al final de la sección anterior.
 
-   Selecciona **Review + create** (Revisar + crear).
-4. Revisa tus configuraciones. A continuación, selecciona **Create** (Crear).
-5. Una vez creada la zona DNS privada, selecciónala en lista.
-6. En el panel que se abre, selecciona **+ Record set** (+ Conjunto de registros).
-7. En el panel **Add record set** (Añadir conjunto de registros), configura lo siguiente:
-   - En **Name** (Nombre), introduce `*`.
-   - En **Type** (Tipo), selecciona **A - Address record** (A - Registro de direcciones).
-   - En **IP address** (Dirección IP), introduce la dirección IP que anotaste al final de la sección anterior.
+   Seleccione {{< ui >}}OK{{< /ui >}} para finalizar.
+### Pasos adicionales requeridos para métricas y trazas {#additional-required-steps-for-metrics-and-traces}
+Dos servicios de ingesta de Datadog son subdominios del `agent.`{{< region-param key="dd_site" code="true" >}} dominio. Debido a esto, la zona DNS privada es ligeramente diferente de otras ingestas.
 
-   Selecciona **OK** (Aceptar) para finalizar.
-### Pasos adicionales necesarios para métricas y trazas (traces)
-Dos servicios de ingesta de Datadog son subdominios del dominio del `agent.`{{< region-param key="dd_site" code="true" >}}. Debido a esto, la zona DNS privada es ligeramente diferente de otras ingestas.
+Cree una zona DNS privada para `agent.`{{< region-param key="dd_site" code="true" >}}, como se describe en la sección anterior. Luego, agregue los tres registros a continuación.
 
-Crea una zona DNS privada para el `agent.`{{< region-param key="dd_site" code="true" >}}, como se indica en la sección anterior. A continuación, añade los tres registros siguientes.
-
-| Nombre DNS | Tipo de registro de recursos | Dirección IPv4 |
+| Nombre de DNS | Tipo de registro de recurso | Dirección IPv4 |
 | -------- |----------------------| ------------ |
-| `(apex)` | A                    | Dirección IP de tu endpoint de métricas  |
-| `*`      | A                    | Dirección IP de tu endpoint de métricas  |
-| `trace`  | A                    | Dirección IP de tu endpoint de trazas |
+| `(apex)` | A                    | Dirección IP para su punto de conexión de métricas |
+| `*`      | A                    | Dirección IP para su punto de conexión de métricas |
+| `trace`  | A                    | Dirección IP para su punto de conexión de trazas |
 
-**Nota**: Esta zona requiere un registro comodín (`*`) que apunte a la dirección IP de tu endpoint de métricas. Esto se debe a que los Datadog Agents envían telemetría utilizando un endpoint versionado con el formato (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+**Nota**: Esta zona requiere un registro comodín (`*`) que apunte a la dirección IP de su punto de conexión de métricas. Esto se debe a que los agentes de Datadog envían telemetría utilizando un punto de conexión con versión en la forma (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 
-## Servicios publicados
+## Servicios publicados {#published-services}
 
-| Servicio de consumo de Datadog | Nombre de servicio de Private LInk | Nombre de DNS privado |
+| Servicio de ingesta de Datadog | Nombre del servicio de Private Link | Nombre de DNS privado |
 | --- | --- | --- |
-| Logs (Agent) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `agent-http-intake.logs.us3.datadoghq.com` |
-| Logs (OTel Collector con el Exportador Datadog) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
-| Logs (Consumo HTTP del usuario) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
+| Registros (Agent) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `agent-http-intake.logs.us3.datadoghq.com` |
+| Registros (OTel Collector con Datadog Exporter) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
+| Registros (HTTP Intake de usuario) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
 | API | `api-pl-1.0962d6fc-b0c4-40f5-9f38-4e9b59ea1ba5.westus2.azure.privatelinkservice` | `api.us3.datadoghq.com` |
 | Métricas | `metrics-agent-pl-1.77764c37-633a-4c24-ac9b-0069ce5cd344.westus2.azure.privatelinkservice` | `agent.us3.datadoghq.com` |
-| Contenedores  | `orchestrator-pl-1.8ca24d19-b403-4c46-8400-14fde6b50565.westus2.azure.privatelinkservice` | `orchestrator.us3.datadoghq.com` |
+| Containers  | `orchestrator-pl-1.8ca24d19-b403-4c46-8400-14fde6b50565.westus2.azure.privatelinkservice` | `orchestrator.us3.datadoghq.com` |
 | Process | `process-pl-1.972de3e9-3b00-4215-8200-e1bfed7f05bd.westus2.azure.privatelinkservice` | `process.us3.datadoghq.com` |
-| Generación de perfiles | `profile-pl-1.3302682b-5bc9-4c76-a80a-0f2659e1ffe7.westus2.azure.privatelinkservice` | `intake.profile.us3.datadoghq.com` |
+| Profiling | `profile-pl-1.3302682b-5bc9-4c76-a80a-0f2659e1ffe7.westus2.azure.privatelinkservice` | `intake.profile.us3.datadoghq.com` |
 | Trazas | `trace-edge-pl-1.d668729c-d53a-419c-b208-9d09a21b0d54.westus2.azure.privatelinkservice` | `agent.us3.datadoghq.com` |
-| Configuración remota | `fleet-pl-1.37765ebe-d056-432f-8d43-fa91393eaa07.westus2.azure.privatelinkservice` | `config.us3.datadoghq.com` |
+| Remote Configuration | `fleet-pl-1.37765ebe-d056-432f-8d43-fa91393eaa07.westus2.azure.privatelinkservice` | `config.us3.datadoghq.com` |
 | Database Monitoring | `dbm-metrics-pl-1.e391d059-0e8f-4bd3-9f21-708e97a708a9.westus2.azure.privatelinkservice` | `dbm-metrics-intake.us3.datadoghq.com` |
 
 [1]: https://azure.microsoft.com/en-us/products/private-link

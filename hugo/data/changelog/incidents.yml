@@ -1,0 +1,41 @@
+entries:
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41031
+    operations:
+      - CreateIncident
+      - GetIncident
+      - ImportIncident
+      - ListIncidentResponders
+      - ListIncidents
+      - SearchIncidents
+      - UpdateIncident
+    title: Add users and role assignments includes to ListIncidentResponders
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateGlobalIncidentHandle
+      - CreateIncidentPostmortemAttachment
+      - CreateIncidentPostmortemTemplate
+      - CreateIncidentUserDefinedField
+      - CreateIncidentUserDefinedRole
+      - DeleteGlobalIncidentHandle
+      - DeleteIncidentPostmortemTemplate
+      - DeleteIncidentUserDefinedField
+      - DeleteIncidentUserDefinedRole
+      - GetGlobalIncidentSettings
+      - GetIncidentPostmortemTemplate
+      - GetIncidentUserDefinedField
+      - GetIncidentUserDefinedRole
+      - LinkPageToIncident
+      - ListGlobalIncidentHandles
+      - ListIncidentPostmortemTemplates
+      - ListIncidentUserDefinedFields
+      - ListIncidentUserDefinedRoles
+      - UpdateGlobalIncidentHandle
+      - UpdateGlobalIncidentSettings
+      - UpdateIncidentPostmortemTemplate
+      - UpdateIncidentUserDefinedField
+      - UpdateIncidentUserDefinedRole
+    title: Add AI Gateway route permissions and safe editing

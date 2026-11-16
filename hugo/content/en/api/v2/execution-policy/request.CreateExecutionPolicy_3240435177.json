@@ -1,0 +1,34 @@
+{
+  "data": {
+    "type": "execution_policy",
+    "attributes": {
+      "name": "Cassette Execution Policy exampleexecutionpolicy",
+      "effect": "allow",
+      "action_pattern": {
+        "integration": "INTEGRATION_SLACK",
+        "action_fqns": [
+          "com.datadoghq.slack.*"
+        ]
+      },
+      "scope": {
+        "slack": {
+          "rules": [
+            {
+              "channel_name_selectors": [
+                "incident-*"
+              ]
+            }
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Incident workspace",
+          "agent_tags": [
+            "slack_workspace_id:T01234567"
+          ]
+        }
+      ]
+    }
+  }
+}

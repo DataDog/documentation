@@ -13,21 +13,21 @@ title: Métriques SNMP
 ---
 ## Installation {#installation}
 
-La surveillance des dispositifs réseau repose sur l'intégration SNMP incluse dans le package [Datadog Agent][1] et prend en charge les trois versions de SNMP : `SNMPv1`, `SNMPv2` et `SNMPv3`. Lors de la découverte, le port SNMP (par défaut 161) est interrogé. Un dispositif est considéré comme découvert s'il y a une réponse et un profil correspondant.
+Network Device Monitoring repose sur l'intégration SNMP incluse dans le package [Datadog Agent][1] et prend en charge les trois versions de SNMP : `SNMPv1`, `SNMPv2` et `SNMPv3`. Lors de la découverte, le port SNMP (161 par défaut) est interrogé. Un périphérique est considéré comme découvert s'il y a une réponse et un profil correspondant.
 
-## Pré-requis {#pre-requisites}
+## Prérequis {#pre-requisites}
 
 Agent v7.32+
 
-## Comment cela fonctionne {#how-it-works}
+## Fonctionnement {#how-it-works}
 
-Le diagramme suivant illustre les ports et protocoles par défaut entre le Datadog Agent et le dispositif surveillé. Pour les métriques SNMP, le Datadog Agent interroge les dispositifs avec l'Autodécouverte ou en fonction de la configuration manuelle de l'adresse IP du dispositif. Le Datadog Agent, configuré avec NDM et déployé sur site ou dans le cloud, consolide toutes les données collectées sur les dispositifs et le réseau de votre infrastructure et les envoie à Datadog via HTTPS sur le port `443`. Cela fournit une observabilité unifiée et complète des métriques, des journaux, des traces, des moniteurs et des tableaux de bord.
+Le diagramme suivant illustre les ports et protocoles par défaut entre le Datadog Agent et le périphérique surveillé. Pour les métriques SNMP, le Datadog Agent interroge les périphériques avec l'Autodiscovery, ou en fonction d'une configuration manuelle de l'adresse IP du périphérique. Le Datadog Agent, configuré avec NDM et déployé sur site ou dans le cloud, consolide toutes les données collectées sur les appareils et le réseau depuis votre réseau et les envoie à Datadog via HTTPS sur le port `443`. Cela permet une observabilité unifiée et complète des métriques, des logs, des traces, des monitors et des dashboards.
 
-{{< img src="/network_device_monitoring/snmp/snmp_device_polling.png" alt="Diagramme NDM montrant le flux pour l'interrogation des dispositifs SNMP." style="width:90%;" >}}
+{{< img src="/network_device_monitoring/snmp/snmp_device_polling.png" alt="Diagramme NDM montrant le flux pour l'interrogation des périphériques SNMP." style="width:90%;" >}}
 
-## Prochaines étapes {#next-steps}
+## Étapes suivantes {#next-steps}
 
-Suivez les instructions ci-dessous pour configurer Datadog afin de collecter des métriques SNMP à partir de vos dispositifs réseau.
+Suivez les instructions ci-dessous pour configurer Datadog afin de collecter les métriques SNMP de vos périphériques réseau.
 
 ## Configuration {#configuration}
 
@@ -35,24 +35,24 @@ La fonction Network Device Monitoring de Datadog permet de recueillir des métri
 
 Choisissez la stratégie de collecte à utiliser en fonction du nombre de périphériques présents sur votre réseau et du degré de dynamisme de celui-ci (c'est-à-dire la fréquence à laquelle des périphériques sont ajoutés ou retirés) :
 
-[Surveillance des dispositifs individuels](#monitoring-individual-devices)
-: Pour les petits réseaux, principalement statiques.
+[Surveillance de périphériques individuels](#monitoring-individual-devices)
+: Pour les réseaux de petite taille et principalement statiques.
 
-[Autodécouverte](#autodiscovery)
-: Pour les réseaux plus grands ou dynamiques.
+[Autodiscovery](#autodiscovery)
+: Pour les réseaux plus vastes ou dynamiques.
 
-Quelle que soit la stratégie de collecte utilisée, tirez parti des [profils de périphériques mappés avec un sysObjectID](#profils-de-peripheriques-mappes-avec-un-sysobjectid) de Datadog pour recueillir automatiquement les métriques pertinentes à partir de vos périphériques.
+Quelle que soit la stratégie de collecte utilisée, tirez parti des [profils de périphériques mappés avec un sysObjectID][2] de Datadog pour recueillir automatiquement les métriques pertinentes à partir de vos périphériques.
 
-### Surveillance des dispositifs individuels {#monitoring-individual-devices}
+### Surveillance de périphériques individuels {#monitoring-individual-devices}
 
 Pour surveiller des périphériques individuels :
 
-- Incluez l'adresse IP et les métadonnées supplémentaires des dispositifs (sous forme d'étiquettes) dans le fichier `snmp.d/conf.yaml` dans le dossier `conf.d/` à la racine de votre [répertoire de configuration de l'Agent][3]. Consultez le [exemple snmp.d/conf.yaml][4] pour toutes les options de configuration disponibles.
+- Incluez l'adresse IP et toutes les métadonnées supplémentaires des périphériques (sous forme de tags) dans le fichier `snmp.d/conf.yaml` situé dans le dossier `conf.d/` à la racine de votre [répertoire de configuration de l'Agent][3]. Consultez l'[exemple snmp.d/conf.yaml][4] pour connaître toutes les options de configuration disponibles.
 
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
 
-- Pour SNMPv2, configurez une instance en spécifiant l'adresse IP et la _chaîne de communauté_ du dispositif :
+- Pour SNMPv2, configurez une instance en spécifiant l'adresse IP et la _chaîne de communauté_ du périphérique :
 
     ```yaml
     init_config:
@@ -69,7 +69,7 @@ Pour surveiller des périphériques individuels :
 {{% /tab %}}
 {{% tab "SNMPv3" %}}
 
-- Pour SNMPv3, configurez une instance en spécifiant l'adresse IP et les identifiants SNMPv3 du dispositif (selon le cas), par exemple : `user`, `authProtocol`, `authKey`, `privProtocol` et `privKey` :
+- Pour SNMPv3, configurez une instance en spécifiant l'adresse IP et les identifiants SNMPv3 du périphérique (le cas échéant), par exemple : `user`, `authProtocol`, `authKey`, `privProtocol` et `privKey` :
 
     ```yaml
     init_config:
@@ -93,26 +93,26 @@ Pour surveiller des périphériques individuels :
 
 - [Redémarrez l'Agent][5].
 
-Après la configuration, le Datadog Agent collecte des métriques pertinentes en associant vos dispositifs à l'un des [profils d'appareils pris en charge par Datadog][6].
+Après la configuration, l'Agent collecte les métriques pertinentes en faisant correspondre vos périphériques à l'un des [profils d'appareils pris en charge par Datadog][6].
 
 Pour élargir votre configuration :
 
-* Ajoutez plus d'instances pour collecter des métriques à partir de plus de dispositifs sur votre réseau.
-* Utilisez [l'Autodécouverte](#autodiscovery) si vous devez collecter des métriques à partir de nombreux dispositifs sur un réseau dynamique.
+* Ajoutez d'autres instances pour collecter des métriques à partir d'un plus grand nombre de périphériques sur votre réseau.
+* Utilisez [Autodiscovery](#autodiscovery) si vous devez collecter des métriques à partir d'un grand nombre de périphériques sur un réseau dynamique.
 
-### Autodécouverte {#autodiscovery}
+### Autodiscovery {#autodiscovery}
 
-Une alternative à la spécification de dispositifs individuels est d'utiliser l'Autodécouverte pour découvrir automatiquement tous les dispositifs sur votre réseau.
+Une alternative à la spécification de périphériques individuels consiste à utiliser Autodiscovery pour découvrir automatiquement tous les périphériques de votre réseau.
 
-L'Autodécouverte interroge chaque IP du sous-réseau configuré et vérifie la réponse du dispositif. Ensuite, le Datadog Agent recherche le `sysObjectID` du dispositif découvert et le mappe à l'un des [profils d'appareils pris en charge par Datadog][6]. Les profils contiennent des listes de métriques prédéfinies à collecter pour divers types de dispositifs.
+Autodiscovery interroge chaque adresse IP sur le sous-réseau configuré et vérifie si le périphérique répond. Ensuite, le Datadog Agent recherche le `sysObjectID` du périphérique découvert et le fait correspondre à l'un des [profils d'appareils pris en charge par Datadog][6]. Les profils contiennent des listes de métriques prédéfinies à collecter pour différents types de périphériques.
 
 Pour utiliser Autodiscovery avec la fonction Network Device Monitoring :
 
-1. Installez ou mettez à niveau l'Agent Datadog vers v7.27+. Pour des instructions spécifiques à la plateforme, consultez la documentation de l'[Agent Datadog][7].
+1. Installez ou mettez à niveau le Datadog Agent vers la version 7.27+. Pour obtenir des instructions spécifiques à votre plateforme, consultez la documentation du [Datadog Agent][7].
 
 2. Modifiez le fichier de configuration de l'Agent [`datadog.yaml`][8] pour inclure tous les sous-réseaux que Datadog doit analyser. L'exemple de configuration suivant indique les paramètres obligatoires, les valeurs par défaut et des exemples pour Autodiscovery.
 
-3. En option, activez la [dé-duplication][11] des dispositifs lors de l'Autodécouverte de l'Agent. Cette fonctionnalité est désactivée par défaut et nécessite la version de l'Agent `7.67+`.
+3. Vous pouvez éventuellement activer la déduplication des périphériques lors de l'Autodiscovery de l'Agent. Cette fonctionnalité est désactivée par défaut et nécessite l'Agent version 7.67+. Pour plus de détails, consultez le paramètre `use_deduplication` dans l'[exemple de fichier de configuration de l'Agent][11].
 
    ```yaml
    network_devices:
@@ -188,15 +188,15 @@ network_devices:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : L'Agent Datadog configure automatiquement la vérification SNMP avec chacune des adresses IP découvertes. Un dispositif découvert est une adresse IP qui répond avec succès lorsqu'elle est interrogée via SNMP.
+**Remarque** : le Datadog Agent configure automatiquement la vérification SNMP avec chacune des adresses IP découvertes. Un périphérique découvert est une adresse IP qui répond correctement lorsqu'elle est interrogée via SNMP.
 
-**Remarque** : Assurez-vous d'utiliser l'Agent 7.54 ou une version ultérieure pour cette syntaxe. Pour les versions précédentes, consultez le [config_template.yaml précédent][9].
+**Remarque** : Assurez-vous d'utiliser l'Agent 7.54+ pour cette syntaxe. Pour les versions précédentes, consultez le [config_template.yaml précédent][9].
 
 ### Remplacer la vitesse de l'interface {#override-interface-speed}
 
-Par défaut, la vérification SNMP rapporte la vitesse de l'interface telle que détectée par le dispositif. Si la vitesse du port physique diffère de la bande passante réelle du circuit, par exemple, un port physique de 1 Gbps provisionné pour un circuit de 50 Mbps, vous pouvez remplacer la vitesse entrante et sortante pour des interfaces spécifiques en utilisant `interface_configs`.
+Par défaut, la vérification SNMP signale la vitesse de l'interface telle qu'elle est détectée depuis le périphérique. Si la vitesse du port physique diffère de la bande passante réelle du circuit, par exemple un port physique de 1 Gbit/s provisionné pour un circuit de 50 Mbit/s, vous pouvez remplacer la vitesse entrante et sortante pour des interfaces spécifiques en utilisant `interface_configs`.
 
-Ajoutez `interface_configs` à la configuration de votre instance dans `snmp.d/conf.yaml` :
+Ajoutez `interface_configs` à la configuration de votre instance dans `snmp.d/conf.yaml` :
 
 ```yaml
 instances:
@@ -209,13 +209,13 @@ instances:
         out_speed: 50000000    # outbound speed in bytes per second (50 Mbps)
 ```
 
-Pour toutes les options disponibles `interface_configs`, consultez le [exemple snmp.d/conf.yaml][4].
+Pour toutes les options `interface_configs` disponibles, consultez le [sample snmp.d/conf.yaml][4].
 
 ## Validation {#validation}
 
-[Exécutez la sous-commande d'état de l'Agent][10] et recherchez `snmp` dans la section Vérifications.
+[Exécutez la sous-commande de statut de l'Agent][10] et recherchez `snmp` dans la section Checks.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -230,4 +230,4 @@ Pour toutes les options disponibles `interface_configs`, consultez le [exemple s
 [8]: /fr/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
 [10]: /fr/agent/configuration/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L4036
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

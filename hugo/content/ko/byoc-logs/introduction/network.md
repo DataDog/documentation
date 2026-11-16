@@ -42,8 +42,10 @@ Datadog은 다음과 같은 이유로 이 설정을 권장합니다.
 
 BYOC Logs를 구성하여 공용 인그레스를 배포함으로써 Datadog이 반대 방향으로 연결을 설정하도록 할 수도 있습니다.
 
-공용 인그레스를 사용하면 Datadog의 컨트롤 플레인 및 쿼리 서비스가 공용 인터넷을 통해 BYOC Logs 클러스터를 관리하고 쿼리할 수 있습니다. 이는 mTLS 인증을 사용하여 BYOC Logs gRPC API에 대한 보안 액세스를 제공합니다. BYOC Logs 인그레스에 대한 자세한 내용은 [구성 페이지](/byoc-logs/configure/ingress/)에서 확인할 수 있습니다.
+Public ingress를 사용하면 Datadog이 공용 인터넷을 통해 BYOC Logs 클러스터를 관리하고 쿼리할 수 있습니다. 이는 mTLS 인증을 사용하여 BYOC Logs gRPC API에 대한 보안 액세스를 제공합니다. BYOC Logs ingress에 대한 자세한 내용은 [구성 페이지][1]에서 확인할 수 있습니다.
 
 ## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ko/byoc-logs/configure/ingress/

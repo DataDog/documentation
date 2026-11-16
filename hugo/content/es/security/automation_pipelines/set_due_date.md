@@ -2,58 +2,82 @@
 further_reading:
 - link: /security/automation_pipelines
   tag: Documentación
-  text: Automation Pipelines
-title: Configurar normas de fecha de caducidad
+  text: Pipelines de automatización
+products:
+- icon: cloud-security-management
+  name: Cloud Security
+  url: /security/cloud_security_management/
+- icon: security-code-security
+  name: Code Security
+  url: /security/code_security/
+- icon: app-sec
+  name: App and API Protection
+  url: /security/application_security/
+- icon: security-workload-security
+  name: Workload Protection
+  url: /security/workload_protection/
+title: Establecer reglas de fecha de vencimiento
 ---
+{{< product-availability >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Automation Pipelines está en Vista Previa. Para inscribirte en la vista previa de las reglas de fecha de caducidad, haz clic en <strong>Solicitar acceso</strong>.
-{{< /callout >}} 
+Configure reglas de fecha de vencimiento para garantizar que los hallazgos se aborden dentro de los plazos de SLO especificados. Al establecer estas fechas de vencimiento, puede automatizar la responsabilidad, cumplir con los requisitos de cumplimiento y priorizar la pronta corrección de los problemas de seguridad, evitando así una posible explotación.
 
-Configura reglas de fecha de caducidad para garantizar que las vulnerabilidades se solucionen dentro de los plazos de SLO especificados. Al establecer estas fechas de caducidad, puedes automatizar la rendición de cuentas, cumplir los requisitos de conformidad y priorizar la pronta corrección de los problemas de seguridad, evitando así posibles vulnerabilidades.
+## Cree una regla de fecha de vencimiento {#create-a-due-date-rule}
 
-## Crea una regla de fecha de caducidad
+1. En Datadog, vaya a **Security** > **Settings** > [Findings Automation][2]. Haga clic en **Agregar una nueva regla**, luego seleccione **Establecer fecha de vencimiento**. Se abre la página Create a New Rule.
+1. En **Nombre de la regla**, ingrese un nombre descriptivo para la regla; por ejemplo, "Advertencias de anomalía en Cloud infraestructura".
+1. Agregue los criterios de su regla en los siguientes campos:
+    - **Cualquiera de estos tipos**: Los tipos de hallazgos que la regla debe verificar. Los tipos disponibles incluyen:
+      - Vulnerabilidad de código en tiempo de ejecución
+      - Vulnerabilidad de código estático
+      - Vulnerabilidad de biblioteca
+      - Secreto
+      - Infraestructura como código
+      - Vulnerabilidad de imagen de contenedor
+      - Vulnerabilidad de servidor
+      - Configuración incorrecta
+      - Ruta de ataque
+      - Riesgo de identidad
+      - Seguridad de API
+      - Actividad de carga de trabajo
+    - **Cualquiera de estas etiquetas o atributos**: Las etiquetas o atributos del recurso que deben coincidir para que se aplique la regla.
+1. Establezca una fecha de vencimiento para cada nivel de gravedad que la necesite.
+1. Si la regla incluye un tipo de hallazgo basado en CVE (biblioteca, imagen de contenedor o vulnerabilidad de servidor), en **Calcular fechas de vencimiento desde**, seleccione la fecha base para el reloj del SLA:
+   - **Fecha de primera detección**: Inicia el reloj del SLA cuando Datadog detecta el hallazgo por primera vez.
+   - **Fecha de disponibilidad del parche**: Inicia el reloj del SLA cuando se publica un parche para la vulnerabilidad. Útil cuando no desea que los equipos incumplan el SLA en avisos que aún no pueden corregir.
 
-1. En la página [Automation Pipelines][2], haz clic en **Añadir una nueva regla** y selecciona **Fijar fecha de caducidad**.
-1. Introduce un nombre descriptivo para la regla, por ejemplo, **Avisos de anomalías en la infraestructura de la nube**.
-1. Utiliza las siguientes casillas para configurar los criterios de la regla:
-    - **Cualquiera de estos tipos**: Los tipos de hallazgos para los que la norma debe check. Los tipos disponibles incluyen los siguientes:
-      - **Vulnerabilidad del código de aplicación**
-      - **Vulnerabilidad de las bibliotecas de aplicaciones**
-      - **Vulnerabilidad de las imágenes del contenedor**
-      - **Configuración errónea**
-      - **Ruta de Ataque**
-      - **Riesgo de identidad**
-      - **Averiguación de seguridad de la API**
-    - **Cualquiera de estas etiquetas (tags) o atributos**: Las etiquetas (tags) o los atributos del recurso que deben coincidir para que se aplique la regla.
-1. Establezca una fecha de caducidad para cada nivel de gravedad que requiera una, que entra en vigencia a partir del descubrimiento de una vulnerabilidad de gravedad correspondiente.
-1. Haz clic en **Guardar**. La regla se aplica inmediatamente a los nuevos hallazgos y comienza a check hallazgos existentes dentro en la siguiente hora.
+   Para todos los demás tipos de hallazgos, siempre se utiliza la fecha de la primera detección.
+1. Haga clic en **Guardar**. La regla se aplica a los nuevos hallazgos de inmediato y comienza a verificar los hallazgos existentes dentro de la próxima hora.
 
-## Dónde aparecen las fechas de caducidad
+También puede crear reglas de fecha de vencimiento con la [API][3] o el recurso de Terraform [`datadog_security_findings_due_date_rule`][4].
 
-Cuando un hallazgo tiene una fecha de caducidad, puedes verla en estas ubicaciones:
+## Dónde aparecen las fechas de vencimiento {#where-due-dates-appear}
 
-- Facetas de explorador
+Cuando un hallazgo tiene una fecha de vencimiento, puede verla en estas ubicaciones:
+
+- Facetas del explorador
 - Panel lateral de hallazgos
-- Notificaciones
+- Notifications
 - Descripciones de tickets de Jira
-- Informar métricas (como un booleano "atrasado") para identificar los equipos o repositorios con las vulnerabilidades más atrasadas.
+- Métricas de informes (como un booleano de "vencido") para identificar equipos o repositorios con la mayor cantidad de vulnerabilidades vencidas
 
-## Orden de coincidencia de las reglas
+## Pedido de coincidencia de reglas {#rule-matching-order}
 
-Cuando Datadog identifica una vulnerabilidad, la evalúa comparándola con tu secuencia de reglas de fecha de caducidad. Empezando por la primera regla, si hay una coincidencia, Datadog establece una fecha de caducidad para la vulnerabilidad durante el tiempo especificado y detiene la evaluación. Si no se produce ninguna coincidencia, Datadog pasa a la siguiente regla. Este proceso continúa hasta que se encuentre una coincidencia o todas las reglas se check sin una coincidencia.
+Cuando Datadog identifica un hallazgo, lo evalúa con respecto a su secuencia de reglas de fecha de vencimiento. Comenzando con la primera regla, si hay una coincidencia, Datadog establece una fecha de vencimiento en el hallazgo para la duración especificada y deja de evaluar más. Si no ocurre ninguna coincidencia, Datadog pasa a la siguiente regla. Este proceso continúa hasta que se encuentra una coincidencia o se revisan todas las reglas sin encontrar ninguna.
 
-## Eliminar fechas de caducidad
+## Eliminación de fechas de vencimiento {#removing-due-dates}
 
-Cuando se gestionan vulnerabilidades, las fechas de caducidad pueden eliminarse en varias condiciones, como por ejemplo, las siguientes:
+Al administrar hallazgos, las fechas de vencimiento pueden eliminarse bajo diversas condiciones, tales como:
 
-- La regla de detección que activó la vulnerabilidad pasa con éxito.
-- La vulnerabilidad se silencia, ya sea manual o automáticamente a través de una regla de silenciamiento.
-- La regla de fecha de caducidad asociada a la vulnerabilidad se desactiva o se elimina.
-- La regla de fecha de caducidad asociada se modifica para que sus criterios ya no coincidan con la vulnerabilidad.
+- La regla de detección que activó el hallazgo se cumple satisfactoriamente.
+- El hallazgo se silencia, ya sea de forma manual o automática mediante una regla de silencio.
+- La regla de fecha de vencimiento asociada con el hallazgo se deshabilita o se elimina.
+- La regla de fecha de vencimiento asociada se modifica, de modo que sus criterios ya no coincidan con el hallazgo.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=set_due_date
+[3]: /es/api/latest/security-monitoring/create-a-due-date-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_due_date_rule

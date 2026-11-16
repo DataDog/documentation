@@ -3,45 +3,50 @@ aliases:
 - /es/real_user_monitoring/error_tracking/browser_errors
 - /es/error_tracking/standalone_frontend/browser
 further_reading:
+- link: https://learn.datadoghq.com/courses/tracking-errors-rum-javascript
+  tag: Centro de aprendizaje
+  text: Seguimiento de errores con RUM para aplicaciones web JavaScript
 - link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: Código fuente
   text: Código fuente de datadog-ci
 - link: /real_user_monitoring/guide/upload-javascript-source-maps
   tag: Documentación
-  text: Cargar mapas fuente de JavaScript
+  text: Cargue los mapas del código fuente de JavaScript
+- link: /real_user_monitoring/guide/upload-webassembly-symbols
+  tag: Documentación
+  text: Cargue los símbolos de WebAssembly
 - link: /error_tracking/explorer
   tag: Documentación
-  text: Más información sobre el Explorador de seguimiento de errores
-title: Seguimiento de errores del navegador
+  text: Aprenda sobre Error Tracking Explorer
+title: Browser Error Tracking
 ---
+## Descripción general {#overview}
 
-## Información general
+[Error Tracking][1] procesa los errores recopilados del navegador mediante el Browser SDK. Siempre que se recopila un error de [source][2], [custom][3], [report][4] o [console][4] que contiene una traza de pila, Error Tracking lo procesa y lo agrupa bajo un problema, o grupo de errores similares que se pueden encontrar en el [Error Tracking Explorer][16].
 
-[Error Tracking][1] procesa los errores recopilados del navegador por el SDK del navegador. Cada vez que se recopila un error de [origen][2], [personalizado][3], de [informe][4] o de [consola][4] que contiene una traza de stack tecnológico, Error Tracking lo procesa y agrupa como un problema o grupo de errores similares que se encuentran en el [Error Tracking Explorer][16].
+## Requisitos previos {#prerequisites}
 
-## Requisitos previos
+Descargue la versión más reciente del [Browser SDK][5].
 
-Descarga la última versión del [SDK del navegador][5].
+## Configuración {#setup}
 
-## Configuración
+Para comenzar a enviar datos de Error Tracking desde su aplicación de navegador a Datadog, siga las [instrucciones de configuración en la aplicación][6] o siga los pasos a continuación.
 
-Para empezar a enviar datos de Error Tracking desde tu aplicación de navegador a Datadog, sigue las [instrucciones de configuración de la aplicación][6] o sigue los pasos que se indican a continuación.
+### Paso 1: cree la aplicación {#step-1-create-the-application}
 
-### Paso 1 - Crear la aplicación
+1. En Datadog, navegue a la página [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][6] y seleccione el tipo de aplicación JavaScript (JS).
+2. Ingrese un nombre para su aplicación y luego haga clic en {{< ui >}}Create Application{{< /ui >}}. Esto genera un `clientToken` y un `applicationId` para su aplicación.
 
-1. En Datadog, ve a la página [**Errors > Settings > Browser and Mobile > Add an Application** (Errores > Configuración > Navegador y móvil > Añadir una aplicación)][6] y selecciona el tipo de aplicación JavaScript (JS).
-2. Introduce un nombre para tu aplicación y haga clic en **Create Application** (Crear aplicación). Se genera un `clientToken` y un `applicationId` para tu aplicación.
+### Paso 2: elija el método de instalación correcto {#step-2-choose-the-right-installation-method}
 
-### Paso 2 - Elegir el método de instalación adecuado
-
-Elige el tipo de instalación para el SDK del navegador.
+Elija el tipo de instalación para el Browser SDK.
 
 {{< tabs >}}
 {{% tab "npm" %}}
 
-La instalación a través del (Node Package Manager) se recomienda para aplicaciones web modernas. El SDK del navegador viene en un paquete con el resto del código JavaScript de tu frontend. No tiene ningún impacto en el rendimiento de la carga de las páginas. Sin embargo, el SDK puede pasar por alto errores, recursos y acciones del usuario desencadenadas antes de que se inicialice el SDK. Datadog recomienda utilizar una versión que coincida con el SDK de logs del navegador.
+Se recomienda la instalación a través de npm (Node Package Manager) para aplicaciones web modernas. El Browser SDK se empaqueta con el resto de su código JavaScript de frontend. No tiene impacto en el rendimiento de carga de la página. Sin embargo, es posible que el SDK pierda errores, recursos y acciones de usuario activados antes de que se inicialice el SDK. Datadog recomienda usar una versión que coincida con el Browser Logs SDK.
 
-Añade [`@datadog/browser-rum`][1] a tu archivo `package.json`, e inícialo con:
+Agregue [`@datadog/browser-rum`][1] a su archivo `package.json`, luego inicialícelo con:
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -60,24 +65,24 @@ datadogRum.init({
 
 ```
 
-El parámetro `trackUserInteractions` activa la recopilación automática de los clics del usuario en tu aplicación. **Los datos confidenciales y privados** contenidos en tus páginas pueden incluirse para identificar los elementos con los que se interactúa.
+El parámetro `trackUserInteractions` permite la recopilación automática de clics de usuario en su aplicación. **Los datos confidenciales y privados** contenidos en sus páginas pueden incluirse para identificar los elementos con los que se interactuó.
 
 [1]: https://www.npmjs.com/package/@datadog/browser-rum
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-La instalación a través de la CDN asíncrona se recomienda para aplicaciones web con objetivos de rendimiento. El SDK del navegador se carga desde la CDN de Datadog de forma asíncrona, lo que garantiza que la descarga del SDK no afecte al rendimiento de la carga de las páginas. Sin embargo, el SDK puede pasar por alto errores, recursos y acciones del usuario desencadenadas antes de que se inicialice el SDK.
+Se recomienda la instalación a través de CDN asincrónico para aplicaciones web con objetivos de rendimiento. El Browser SDK se carga desde la CDN de Datadog de forma asincrónica, lo que garantiza que la descarga del SDK no afecte el rendimiento de carga de la página. Sin embargo, es posible que el SDK pierda errores, recursos y acciones de usuario activados antes de que se inicialice el SDK.
 
-Añade el fragmento de código generado a la etiqueta (tag) de cabecera de cada página HTML que quieras monitorizar en tu aplicación. Para el [sitio][1] **{{<region-param key="dd_site_name">}}**:
+Agregue el fragmento de código generado a la etiqueta head de cada página HTML que desee hacer un seguimiento en su aplicación. Para el **{{<region-param key="dd_site_name">}}** [sitio][1]:
 
 ```javascript
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
@@ -91,21 +96,22 @@ Añade el fragmento de código generado a la etiqueta (tag) de cabecera de cada 
 </script>
 ```
 
-El parámetro `trackUserInteractions` activa la recopilación automática de los clics del usuario en tu aplicación. **Los datos confidenciales y privados** contenidos en tus páginas pueden incluirse para identificar los elementos con los que se interactúa.
+El parámetro `trackUserInteractions` permite la recopilación automática de clics de usuario en su aplicación. **Los datos confidenciales y privados** contenidos en sus páginas pueden incluirse para identificar los elementos con los que se interactuó.
 
 [1]: /es/getting_started/site/
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Se recomienda la instalación a través de la CDN síncrona para recopilartodos los eventos. El SDK del navegador se carga desde la CDN de Datadog de forma sincrónica, lo que garantiza que el SDK se cargue primero y recopile todos los errores, recursos y acciones del usuario. Este método puede afectar al rendimiento de la carga de las páginas.
+Se recomienda la instalación a través de CDN sincrónico para recopilar todos los eventos. El Browser SDK se carga desde la CDN de Datadog de forma sincrónica, lo que garantiza que el SDK se cargue primero y recopile todos los errores, recursos y acciones del usuario. Este método puede afectar el rendimiento de carga de la página.
 
-Añade el fragmento de código generado a la etiqueta de cabebcera (delante de cualquier otra etiqueta de script) de cada página HTML que quieras monitorizar en tu aplicación. Al incluir la etiqueta de script en un nivel más alto y mantenerla sincronizada, Datadog RUM puede recopilar todos los datos y errores de rendimiento. Para el [sitio][1] **{{<region-param key="dd_site_name">}}**:
+Agregue el fragmento de código generado a la etiqueta head (antes de cualquier otra etiqueta script) de cada página HTML que desee hacer un seguimiento en su aplicación. Colocar la etiqueta script más arriba y cargarla de forma sincrónica garantiza que Datadog RUM pueda recopilar todos los datos de rendimiento y errores. Para el **{{<region-param key="dd_site_name">}}** [sitio][1]:
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 <script>
     window.DD_RUM && window.DD_RUM.init({
@@ -119,18 +125,18 @@ Añade el fragmento de código generado a la etiqueta de cabebcera (delante de c
 </script>
 ```
 
-El parámetro `trackUserInteractions` activa la recopilación automática de los clics del usuario en tu aplicación. **Los datos confidenciales y privados** contenidos en tus páginas pueden incluirse para identificar los elementos con los que se interactúa.
+El parámetro `trackUserInteractions` permite la recopilación automática de clics de usuario en su aplicación. **Los datos confidenciales y privados** contenidos en sus páginas pueden incluirse para identificar los elementos con los que se interactuó.
 
 [1]: /es/getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### TypeScript (opcional)
+#### TypeScript (opcional) {#typescript-optional}
 
-Si estás inicializando el SDK en un proyecto TypeScript, utiliza el siguiente fragmento de código. Los tipos son compatibles con versiones >= 3.8.2 de TypeScript.
+Si está inicializando el SDK en un proyecto de TypeScript, utilice el fragmento de código a continuación. Los tipos son compatibles con TypeScript >= 3.8.2.
 
-<div class="alert alert-info">Para versiones anteriores de TypeScript, importa fuentes JavaScript y utiliza variables globales para evitar problemas de compilación.</div>
+<div class="alert alert-info">Para versiones anteriores de TypeScript, importe fuentes de JavaScript y utilice variables globales para evitar problemas de compilación.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -145,64 +151,66 @@ window.DD_RUM.init({
 })
 ```
 
-### Paso 3 - Configurar el entorno y los parámetros
+### Paso 3: Configure el entorno y la configuración {#step-3-configure-environment-and-settings}
 
-1. En el campo Environment (Entorno), define el entorno (`env`) para que tu aplicación utilice el [etiquetado unificado de servicios][18].
-2. En el campo Service (Servicio), define el servicio (`service`) para que tu aplicación utilice el [etiquetado unificado de servicios][18].
-3. Define el nivel de privacidad para el ingreso de usuario. Para obtener más información, consulta [Opciones de privacidad del navegador de Session Replay][10].
-4. Define un número de versión (`version`) para tu aplicación desplegada en el fragmento de inicialización. Para obtener más información, consulta [Etiquetado](#tagging-for-error-tracking).
-5. Configura parámetros adicionales según sea necesario. Consulta la sección [Referencia de configuración](#configuration-reference) a continuación para conocer todas las opciones disponibles.
+1. En el campo Entorno, defina el entorno (`env`) que utilizará su aplicación para el [unified service tagging][18].
+2. En el campo Servicio, defina el servicio (`service`) que utilizará su aplicación para el [unified service tagging][18].
+3. Establezca el nivel de privacidad para la entrada del usuario. Consulte [Session Replay Browser Privacy Options][10] para obtener más detalles.
+4. Establezca un número de versión (`version`) para su aplicación implementada en el fragmento de inicialización. Para obtener más información, consulte [Tagging](#tagging-for-error-tracking).
+5. Configure parámetros adicionales según sea necesario. Consulte la sección [Referencia de configuración](#configuration-reference) a continuación para ver todas las opciones disponibles.
 
-### Paso 4 - Desplegar la aplicación
+### Paso 4: Implemente su aplicación {#step-4-deploy-your-application}
 
-Despliega los cambios en tu aplicación. Una vez desplegada la aplicación, Datadog recopila eventos de los navegadores de usuarios.
+Implemente los cambios en su aplicación. Una vez que su implementación esté activa, Datadog recopila eventos de los navegadores de sus usuarios.
 
-### Paso 5 - Cargar mapas de fuentes (opcional pero recomendado)
+### Paso 5 - Cargue mapas del código fuente y símbolos de WebAssembly (opcional pero recomendado) {#step-5-upload-source-maps-and-webassembly-symbols-optional-but-recommended}
 
-Carga tus mapas de fuentes JavaScript para acceder a trazas de stack tecnológico sin minificar. Consulta la [guía para la carga de mapas de fuentes][17].
+Cargue sus mapas del código fuente de JavaScript para acceder a trazas de pila sin minificar. Consulte la [guía de carga de mapas del código fuente][17].
 
-### Paso 6 - Visualizar tus datos
+Si su aplicación de navegador utiliza WebAssembly, [configure el Browser SDK WASM plugin][20] y [cargue los símbolos de depuración del módulo][21].
 
-Ahora que has completado la configuración básica de Error Tracking para el navegador, tu aplicación recopila errores del navegador, y puedes empezar a monitorizar y depurar problemas en tiempo real.
+### Paso 6: Visualice sus datos {#step-6-visualize-your-data}
 
-Visualiza los [datos recopilados][7] en [dashboards][8] o crea una consulta de búsqueda en Error Tracking.
+Ahora que ha completado la configuración básica para el Error Tracking del navegador, su aplicación está recopilando errores del navegador y puede comenzar a monitorear y depurar problemas en tiempo real.
 
-Hasta que Datadog empiece a recibir datos, tu aplicación aparecerá como `pending` en la página **Aplicaciones**.
+Visualice los [datos recopilados][7] en [tableros][8] o cree una consulta de búsqueda en el Error Tracking.
 
-### Paso 7 - Vincular los errores con tu código fuente (opcional)
+Hasta que Datadog comience a recibir datos, su aplicación aparecerá como `pending` en la página {{< ui >}}Applications{{< /ui >}}.
 
-Además de enviar mapas de fuentes, la [Datadog CLI][11] reporta información Git como el hash de confirmación, la URL del repositorio y una lista de rutas de archivos rastreados en el repositorio de código.
+### Paso 7 - Vincular errores con su código fuente (opcional) {#step-7-link-errors-with-your-source-code-optional}
 
-Error Tracking puede utilizar esta información para correlacionar errores con tu [código fuente][15], lo que te permite pasar desde cualquier marco de traza de stack tecnológico a la línea de código relacionada en [GitHub][12], [GitLab][13] y [Bitbucket][14].
+Además de enviar mapas del código fuente, el [Datadog CLI][11] informa información de Git como el hash de confirmación, la URL del repositorio y una lista de rutas de archivos rastreados en el repositorio de código.
 
-<div class="alert alert-info">La vinculación de marcos de stack tecnológico al código fuente es compatible con la <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> versión <code>0.12.0</code> y posteriores.</div>
+Error Tracking puede usar esta información para correlacionar errores con su [source code][15], lo que le permite pasar de cualquier marco de traza de pila a la línea de código relacionada en [GitHub][12], [GitLab][13] y [Bitbucket][14].
 
-Para obtener más información, consulta la página [integración del código fuente de Datadog][15].
+<div class="alert alert-info">La vinculación desde marcos de traza de pila al código fuente es compatible en la versión <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> <code>0.12.0</code> y versiones posteriores.</div>
 
-## Etiquetado para Error Tracking
+Para obtener más información, consulte la [Datadog Source Code Integration][15].
 
-Estas etiquetas (configuradas en el paso 3 más arriba) alimentan la funcionalidad Error Tracking:
+## Tagging for Error Tracking {#tagging-for-error-tracking}
 
-- Problemas de filtrado y facetado en `service` y `env`
-- Correlación cruzada con RUM, logs y APM para el mismo `service`/`env`
-- Correspondencia de los mapas de fuentes cargados a través del mismo `service` y la misma `version` configurados durante la carga
+Estas etiquetas (configuradas en el paso 3 anterior) potencian la funcionalidad de Error Tracking:
+
+- Filtrado y desglose de problemas por `service` y `env`
+- Correlación entre productos con RUM, Logs y APM para el mismo `service`/`env`
+- Coincidencia de mapas del código fuente cargados a través del mismo `service` y `version` que configure durante la carga
 
 Un servicio es un repositorio de código independiente y desplegable que se asigna a un conjunto de páginas:
 
-- Si tu aplicación de navegador se ha creado como un monolito, tu aplicación Datadog tendrá un nombre de servicio para la aplicación.
-- Si tu aplicación de navegador se construyó como repositorios separados para varias páginas, edita los nombres de servicio por defecto en todo el ciclo de vida de tu aplicación.
+- Si su aplicación de navegador se construyó como un monolito, su aplicación de Datadog tiene un nombre de servicio para la aplicación.
+- Si su aplicación de navegador se construyó como repositorios separados para múltiples páginas, edite los nombres de servicio predeterminados a lo largo del ciclo de vida de su aplicación.
 
-Más información sobre [etiquetado][19] en Datadog.
+Obtenga más información sobre [tagging][19] en Datadog.
 
-## Referencia de configuración
+## Referencia de configuración {#configuration-reference}
 
-Consulta la [referencia de la API del SDK del navegador][9] para ver la lista completa de opciones de configuración disponibles.
+Consulte la [Browser SDK API Reference][9] para obtener la lista completa de opciones de configuración disponibles.
 
-## Siguientes pasos
+## Próximos pasos {#next-steps}
 
-Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionadas, excepciones gestionadas, rechazos de promesas gestionadas y otros errores que el SDK del navegador no rastrea automáticamente. Más información sobre [Recopilación de errores del navegador][3].
+Puede hacer un seguimiento de excepciones no controladas, rechazos de promesas no controlados, excepciones controladas, rechazos de promesas controlados y otros errores que el Browser SDK no rastrea automáticamente. Obtenga más información sobre [Collecting Browser Errors][3].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -215,7 +223,7 @@ Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionad
 [7]: /es/real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /es/real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[10]: /es/session_replay/browser/privacy_options#mask-action-names
+[10]: /es/session_replay/privacy_options?platform=browser#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com
@@ -225,3 +233,5 @@ Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionad
 [17]: /es/real_user_monitoring/guide/upload-javascript-source-maps
 [18]: /es/getting_started/tagging/unified_service_tagging/
 [19]: /es/getting_started/tagging/
+[20]: /es/real_user_monitoring/application_monitoring/browser/collecting_browser_errors/#configure-webassembly-error-tracking
+[21]: /es/real_user_monitoring/guide/upload-webassembly-symbols/#upload-your-symbols

@@ -25,22 +25,22 @@ Surveillez la santé opérationnelle de votre application LLM avec des métrique
 - **Consommation de jetons** : Suivez les jetons d'invite, les jetons mis en cache, les jetons de complétion et l'utilisation totale pour optimiser les coûts.
 - **Analyses de l'utilisation des modèles** : Surveillez quels modèles sont appelés, leur fréquence et leurs caractéristiques de performance.
 
-Le [dashboard des perspectives opérationnelles d'Agent Observability][6] prêt à l'emploi fournit des vues consolidées des métriques au niveau des traces et des spans, des taux d'erreur, des répartitions de latence, des tendances de consommation de jetons et des moniteurs déclenchés.
+Le [dashboard des perspectives opérationnelles d'Agent Observability][6] prêt à l'emploi fournit des vues consolidées des métriques au niveau des traces et des spans, des taux d'erreur, des répartitions de latence, des tendances de consommation de jetons et des monitors déclenchés.
 
 ### Débogage et dépannage en production {#production-debugging-and-troubleshooting}
 
-Déboguez des flux de travail LLM complexes avec une visibilité détaillée sur l'exécution :
+Déboguez des workflows LLM complexes avec une visibilité détaillée sur l'exécution :
 
 {{< img src="llm_observability/index/llm_trace_light.png" alt="Vue détaillée d'une trace dans Agent Observability, présentant un graphique en flamme qui représente visuellement chaque appel de service. 'OpenAI.createResponse' est sélectionné, et une vue détaillée du span est affichée — incluant les messages d'entrée et les messages de sortie." style="width:100%">}}
 
 - **Analyse de trace de bout en bout** : Visualisez les flux de requêtes complets, de l'entrée utilisateur aux appels de modèle, aux appels d'outils et à la génération de réponses.
 - **Débogage au niveau du span** : Examinez les opérations individuelles au sein des chaînes, y compris les étapes de prétraitement, les appels de modèle et la logique de post-traitement.
-- **Identifier la cause profonde des erreurs** : Identifiez les points de défaillance dans les chaînes multi-étapes, les flux de travail ou les opérations d'agent avec un contexte d'erreur détaillé et des informations de minutage.
+- **Identifier la cause profonde des erreurs** : Identifiez les points de défaillance dans les chaînes multi-étapes, les workflows ou les opérations d'agent avec un contexte d'erreur détaillé et des informations de minutage.
 - **Identification des goulots d'étranglement de performance** : Trouvez les opérations lentes et optimisez en fonction de la répartition de la latence à travers les composants du workflow.
 
 ### Évaluations de la qualité et de la sécurité {#quality-and-safety-evaluations}
 
-{{< img src="llm_observability/index/llm_example_eval_light.png" alt="Vue détaillée d'un span dans Agent Observability, onglet Evaluations. Affiche une évaluation d’hallucination avec « Contradiction confirmée », la sortie signalée, la citation du contexte et une explication de la raison pour laquelle cela a été signalé." style="width:100%">}}
+{{< img src="llm_observability/index/llm_example_eval_light.png" alt="Vue détaillée d'un span dans Agent Observability, onglet Evaluations. Affiche une évaluation d'hallucination avec « Contradiction confirmée », la sortie signalée, la citation du contexte et une explication de la raison pour laquelle cela a été signalé." style="width:100%">}}
 
 Assurez-vous que vos agents ou applications LLM respectent les normes de qualité grâce aux évaluations en ligne. Pour des informations complètes sur les évaluations hébergées et gérées par Datadog, l'ingestion d'évaluations personnalisées et les capacités de surveillance de la sécurité, consultez la [documentation sur les évaluations][5].
 
@@ -57,11 +57,11 @@ Apprenez à utiliser l'interface de requête d'Agent Observability pour recherch
 Cela vous permet d'identifier rapidement les problèmes, de surveiller les performances et d'obtenir des informations sur le comportement de votre application LLM en production.
 
 
-### Corréler l'APM et l'Agent Observability {#correlate-apm-and-agent-observability}
+### Corréler APM et l'Agent Observability {#correlate-apm-and-agent-observability}
 
 {{< img src="llm_observability/index/llm_apm_example_light.png" alt="Une trace dans Datadog APM. L'onglet Overview affiche une section intitulée LLM Observability, avec un lien pour voir le span dans Agent Observability, ainsi que le texte d'entrée et de sortie." style="width:100%">}}
 
-Pour les applications instrumentées avec Datadog APM, vous pouvez [corréler l'APM et l'Agent Observability][2] via le SDK. La corrélation de l'APM avec l'Agent Observability offre une visibilité complète de bout en bout et une analyse approfondie, des problèmes d'application aux causes profondes spécifiques aux LLM.
+Pour les applications instrumentées avec Datadog APM, vous pouvez [corréler APM et l'Agent Observability][2] via le SDK. La corrélation d'APM avec Agent Observability offre une visibilité complète de bout en bout et une analyse approfondie, des problèmes d'application aux causes profondes spécifiques aux LLM.
 
 ### Patterns {#patterns}
 
@@ -71,11 +71,15 @@ Pour les applications instrumentées avec Datadog APM, vous pouvez [corréler l'
 
 ### Surveillez vos systèmes agentiques {#monitor-your-agentic-sytems}
 
-Apprenez à surveiller les applications LLM agentiques, qui utilisent plusieurs outils ou chaînes de raisonnement, avec [Agent Monitoring][4] de Datadog. Cette fonctionnalité vous aide à suivre les actions des agents, l'utilisation des outils et les étapes de raisonnement, offrant une visibilité sur les flux de travail LLM complexes et vous permettant de dépanner et d'optimiser efficacement les systèmes agentiques. Consultez la [documentation d'Agent Monitoring][4] pour plus de détails.
+Apprenez à surveiller les applications LLM agentiques, qui utilisent plusieurs outils ou chaînes de raisonnement, avec [Agent Monitoring][4] de Datadog. Cette fonctionnalité vous aide à suivre les actions des agents, l'utilisation des outils et les étapes de raisonnement, offrant une visibilité sur les workflows LLM complexes et vous permettant de dépanner et d'optimiser efficacement les systèmes agentiques. Consultez la [documentation d'Agent Monitoring][4] pour plus de détails.
 
 ### Prompt Management {#prompt-management}
 
 [Prompt Management][7] fournit un registre centralisé pour les prompts utilisés par vos applications LLM. Créez et versionnez des prompts dans Datadog, via le SDK Python ou via l'API, puis récupérez-les au moment de l'exécution avec le SDK. Cela dissocie l'itération des prompts du cycle de déploiement de votre application. Consultez la [documentation de Prompt Management][7] pour plus de détails.
+
+### Prompt Experimentation {#prompt-experimentation}
+
+[Prompt Experimentation][8] compare les versions de prompts gérées avec des tests A/B et déploie progressivement les versions avec Guarded Rollouts, qui se mettent en pause lorsque Datadog détecte une régression.
 
 ## Pour aller plus loin {#further-reading}
 
@@ -88,3 +92,4 @@ Apprenez à surveiller les applications LLM agentiques, qui utilisent plusieurs 
 [5]: /fr/llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /fr/llm_observability/configure/prompt_management
+[8]: /fr/llm_observability/configure/prompt_experimentation

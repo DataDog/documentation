@@ -40,7 +40,7 @@ Test Optimization integrates with GitHub to show summaries of test results direc
 
 With this information, developers get instant feedback about their tests results, and they can debug any failed or flaky tests without leaving the pull request view.
 
-<div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
+<div class="alert alert-info">This integration is only available for test services hosted on <code>github.com</code>.</div>
 
 ## Enable test summaries
 

@@ -1,0 +1,170 @@
+---
+/**
+ * Docs-default footer. Port of the `{{- else -}}` branch of websites-modules
+ * `layouts/partials/footer.html` (v1.4.322). Skips the corp-only variants
+ * (event, nycactivities, aws-microsite, footer_slim) and the trailing modals.
+ *
+ * Layout, top to bottom: the docs callout, the link nav, a logo + mobile-app
+ * row, then the legal / language / social bottom row.
+ */
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import FooterBlurb from "./FooterBlurb.astro";
+import FooterNav from "./FooterNav.astro";
+import LanguageSelector from "./LanguageSelector.tsx";
+import SocialIcon from "./SocialIcon.astro";
+import SvgIcon from "../SvgIcon/SvgIcon.astro";
+import { getFooterData } from "@lib/componentUtils/footerMenus.ts";
+import { IMAGES_URL } from "@config/images";
+import { useTranslations } from "@lib/i18n/i18n";
+import { getLanguageNames, getNativeLabel } from "@lib/i18n/languageNames";
+import {
+  LOCALES,
+  localizedHref,
+  resolveLocale,
+  stripLocalePrefix,
+  type Locale,
+} from "@lib/i18n/locale";
+
+const cl = classListFactory(styles);
+
+const year = new Date().getFullYear();
+
+// Language selector — Astro's i18n routing handles the actual locale switch,
+// so each link is a real localized URL. The footer renders all supported
+// locales; the toolbar instance reuses the same Preact component.
+const { rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
+// The footer menus and the localized hrefs are keyed by
+// the locales this site actually builds.
+const currentLang: Locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(currentLang);
+const footer = getFooterData(currentLang);
+
+// Localized *language names* for the selector — distinct from `translate`,
+// which resolves i18n keys.
+const languageName = getLanguageNames(currentLang);
+const currentLangOption = {
+  code: currentLang,
+  primary: getNativeLabel(currentLang),
+  secondary: languageName(currentLang),
+  href: localizedHref(currentLang, footerLocaleless),
+};
+const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
+  code,
+  primary: getNativeLabel(code),
+  secondary: languageName(code),
+  href: localizedHref(code, footerLocaleless),
+}));
+
+// Pre-resolve globe and caret SVGs for the language selector island.
+const svgIcons = import.meta.glob<string>(
+  "../../assets/images/svg-icons/*.svg",
+  { query: "?raw", import: "default", eager: true },
+);
+function inlineSvg(name: string, color: string, size: string): string {
+  const raw = svgIcons[`../../assets/images/svg-icons/${name}`];
+  if (!raw) return "";
+  return raw
+    .replaceAll("default-size", size)
+    .replaceAll("default-fill", color)
+    .replaceAll("default-opacity", "1.0");
+}
+const worldIconHtml = inlineSvg("world.svg", "#ffffff", "16px");
+const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
+
+const logoSrc = `${IMAGES_URL}/img/dd_logos/png_logos/horizontal/dd_logo_h_white.png`;
+---
+
+<footer class={cl("footer")}>
+  <div class={cl("footer__container")}>
+    <FooterBlurb />
+  </div>
+
+  <div class={cl("footer__content")}>
+    <FooterNav product={footer.product} linkSections={footer.linkSections} />
+
+    <div class={cl("footer__container")}>
+      <div class={cl("footer__app-row")}>
+        <a
+          href={localizedHref(currentLang, "/")}
+          class={cl("footer__logo-link")}
+        >
+          <img class={cl("footer__logo")} src={logoSrc} alt="Datadog logo" />
+        </a>
+
+        <div class={cl("footer__app-cell")}>
+          <p class={cl("footer__download-app")}>
+            {translate("download_mobile_app")}
+          </p>
+          <div class={cl("footer__app-links")}>
+            <a
+              href="https://apps.apple.com/app/datadog/id1391380318"
+              aria-label="Apple Store Link"
+            >
+              <SvgIcon src="apple.svg" color="#ffffff" />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.datadog.app"
+              aria-label="Google Play Store Link"
+            >
+              <SvgIcon src="google-play.svg" color="#ffffff" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class={cl("footer__container")}>
+    <div class={cl("footer__border-top")} aria-hidden="true"></div>
+
+    <div class={cl("footer__bottom-row")}>
+      <div class={cl("footer__legal-cell")}>
+        <span class={cl("footer__copyright")}>&copy; Datadog {year}</span>
+        {
+          footer.sub.map((it, i) => (
+            <span class={cl("footer__legal-item")}>
+              <a
+                href={it.href}
+                class={cl("footer__menu-link")}
+                target={it.target}
+              >
+                {it.label}
+              </a>
+              {i !== footer.sub.length - 1 && <span>&nbsp;|&nbsp;</span>}
+            </span>
+          ))
+        }
+      </div>
+
+      <div class={cl("footer__lang-cell")}>
+        <LanguageSelector
+          client:visible={{ rootMargin: "500px" }}
+          currentLang={currentLangOption}
+          alternates={alternates}
+          worldIconHtml={worldIconHtml}
+          caretIconHtml={caretIconHtml}
+        />
+      </div>
+
+      <div class={cl("footer__social-cell")}>
+        {
+          footer.social.map((it, i) => (
+            <span
+              class={`${cl("footer__social-item")} ${i !== footer.social.length - 1 ? cl("footer__social-item--spaced") : ""}`}
+            >
+              <a
+                class={cl("footer__social-link")}
+                href={it.href}
+                aria-label={`${it.label} link`}
+                target={it.target}
+              >
+                <SocialIcon name={it.pre} />
+              </a>
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

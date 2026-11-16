@@ -1,0 +1,111 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ApiScopesTable from "@components/ApiScopesTable/ApiScopesTable.astro";
+import type { ScopeGroup } from "@lib/api/scopesBuilder";
+
+const title = "ApiScopesTable";
+
+// Fixed groups rather than the spec's, so the screenshot doesn't change when
+// the spec does. Covers several rows (row lines), several endpoints in one
+// cell, an empty description, and a group with no anchors.
+const groups: ScopeGroup[] = [
+  {
+    heading: "Downtimes, Monitors",
+    anchors: ["downtimes", "monitors"],
+    scopes: [
+      {
+        name: "monitors_downtime",
+        description:
+          "Set downtimes to suppress alerts from any monitor in an organization.",
+        endpoints: [
+          {
+            summary: "Schedule a downtime",
+            href: "/api/latest/downtimes/#schedule-a-downtime",
+          },
+          {
+            summary: "Cancel a downtime",
+            href: "/api/latest/downtimes/#cancel-a-downtime",
+          },
+        ],
+      },
+      {
+        name: "monitors_read",
+        description: "View monitors.",
+        endpoints: [
+          {
+            summary: "Get all monitors",
+            href: "/api/latest/monitors/#get-all-monitors",
+          },
+          {
+            summary: "Get a monitor's details",
+            href: "/api/latest/monitors/#get-a-monitors-details",
+          },
+          {
+            summary: "Search monitors",
+            href: "/api/latest/monitors/#search-monitors",
+          },
+        ],
+      },
+      {
+        name: "monitors_write",
+        description: "",
+        endpoints: [
+          {
+            summary: "Create a monitor",
+            href: "/api/latest/monitors/#create-a-monitor",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    heading: "Monitors, Synthetics",
+    anchors: [],
+    scopes: [
+      {
+        name: "synthetics_read",
+        description: "List and view configured Synthetic tests.",
+        endpoints: [
+          {
+            summary: "Get a test configuration",
+            href: "/api/latest/synthetics/#get-a-test-configuration",
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiScopesTable</h1>
+
+      <ApiScopesTable groups={groups} />
+
+      <p>
+        The authorization scopes tables on <code>/api/latest/scopes/</code>, one
+        per group of overlapping tags. On that page the groups are built from
+        the spec; this page passes fixed groups through the test-only
+        <code>groups</code> prop.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+</style>

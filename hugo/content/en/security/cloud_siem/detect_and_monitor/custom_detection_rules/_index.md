@@ -48,35 +48,13 @@ further_reading:
 
 ## Overview
 
-Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. See [Create Rule][1] for instructions on how to create a custom rule.
-
-{{< img src="security/security_monitoring/detection_rules/custom_detection_rules_ui.png" alt="The create a rule page showing the detection types and methods you can create" style="width:100%;" >}}
-
-## Rule types
-
-You can create the following types of custom detection rules:
-
-- Real-time rule: Continuously monitors and analyzes incoming logs.
-- Scheduled rule: Runs at pre-scheduled intervals to analyze log data.
-- Historical job: Backtest detections by running detections against historical logs.
-
-## Detection methods
-
-The following detection methods are available when you create a custom detection rule or historical job:
-
-- Threshold: Detects when events exceed a user-defined threshold.
-- New value: Detects when an attributes changes to a brand new value.
-- Anomaly: Detects when a behavior deviates from its historical baseline.
-- [Content anomaly][6]: Detects when an event's content is an anomaly compared to the historical baseline
-- [Impossible travel][7]: Detects if impossible speed is detected in user activity logs.
-- Third party: Maps third-party security logs to signals, setting the severity based on log attributes.
-- Signal correlation: Combines multiple signals together to generate a new signal so you can alert on more complex use cases and reduce alert fatigue.
+Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. For information on the types of rules you can create, and instructions on how to do so, see [Create a Custom Rule][1].
 
 ## Filter logs based on Reference Tables
 
 <div class="alert alert-warning">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
-Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. When you define a query for a rule, you can add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][10] guide.
+Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. When you define a query for a rule, you can add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][2] guide.
 
 In the following example, a Reference Table containing product information is used to filter and enrich logs:
 
@@ -91,11 +69,4 @@ Use unit testing to test your rules against sample logs and make sure the detect
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/
-[2]: https://app.datadoghq.com/security/siem/rules
-[3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold/
-[4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/
-[5]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly/
-[6]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly/
-[7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
-[8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
-[10]: /integrations/guide/reference-tables/
+[2]: /integrations/guide/reference-tables/

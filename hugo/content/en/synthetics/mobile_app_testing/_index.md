@@ -18,6 +18,9 @@ further_reading:
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"
+- link: "/synthetics/guide/mobile-test-auth-tokens/"
+  tag: "Guide"
+  text: "Inject and Auto-Refresh Auth Tokens in Mobile Application Tests"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -55,8 +58,8 @@ You may create a test using one of the following options:
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
   2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Mobile Application Test.<br /><br>
-       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
+  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your mobile application test.<br /><br>
+       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of mobile application test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
@@ -68,13 +71,13 @@ You may create a test using one of the following options:
   1. Set [retry conditions](#test-retries) for your test.
   1. Set the [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and {{< ui >}}alert conditions{{< /ui >}} for your test monitor. 
   1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
-  1. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Mobile Application Test.
+  1. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your mobile application test.
 
 ### Snippets
 
-When configuring a new Mobile Application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
+When configuring a new mobile application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
 
-* {{< ui >}}Device Size{{< /ui >}}: Automatically perform your Mobile Application tests on a specifically sized screen across devices:
+* {{< ui >}}Device Size{{< /ui >}}: Automatically perform your mobile application tests on a specifically sized screen across devices:
 
   - {{< ui >}}Multi-screen size{{< /ui >}}
   - {{< ui >}}Tablet{{< /ui >}}
@@ -82,7 +85,7 @@ When configuring a new Mobile Application test, use snippets to automatically po
   - {{< ui >}}Standard Screen (iOS only){{< /ui >}}
   - {{< ui >}}Small Screen (iOS only){{< /ui >}}
 
-* {{< ui >}}OS Version{{< /ui >}}: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+* {{< ui >}}OS Version{{< /ui >}}: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your mobile application.
 
 * {{< ui >}}Device Manufacturer (Android only){{< /ui >}}: Automatically test your Android apps across multiple device manufacturers.
 
@@ -110,6 +113,8 @@ You can configure advanced options when creating a mobile test to dynamically ad
 #### Application arguments:
 
 You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
+
+For example, [inject an auto-refreshing auth token][17] to skip your app's login flow.
 
 **Examples:**
 
@@ -302,3 +307,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices
+[17]: /synthetics/guide/mobile-test-auth-tokens/

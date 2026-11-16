@@ -21,7 +21,7 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 **Notes**: 
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
-- If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
+- If you don't have SAML enabled on your Datadog account, reach out to [support][10] to enable it.
 {{% /site-region %}}
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
@@ -70,7 +70,7 @@ Attributes may be included in a SAML Assertion. Datadog looks for three attribut
   2. **sn**: This is optional, and should be set to the user's surname.
   3. **givenName**: This is optional, and should be set to the user's first, or given name.
 
-<div class="alert alert-info">For the Microsoft Entra ID IdP, use the attribute `surname` instead of `sn` in the assertion.</div>
+<div class="alert alert-info">For the Microsoft Entra ID IdP, use the attribute <code>surname</code> instead of <code>sn</code> in the assertion.</div>
 
 Datadog expects that Attributes use the URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or the Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 
@@ -102,7 +102,7 @@ The following features can be enabled through the [SAML Configuration dialog][4]
 
 With JIT provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time. The invitation email is not sent in this case.
 
-Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][10]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Administrators can set the default role for new JIT users. The default role is {{< ui >}}Standard{{< /ui >}}, but you can choose to add new JIT users as {{< ui >}}Read-Only{{< /ui >}}, {{< ui >}}Administrators{{< /ui >}}, or any custom role.
 
@@ -143,3 +143,4 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [7]: https://developer.okta.com/docs/concepts/saml/
 [8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
 [9]: /account_management/users/default_roles/
+[10]: /help/

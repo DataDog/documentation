@@ -2,13 +2,13 @@
 title: Enrollment and Ownership
 description: How a private action runner enrolls with Datadog, how enrollment sets the runner's ownership, and how ownership determines which authorization model the runner uses.
 further_reading:
-- link: "actions/private_actions/set_up_agent_based"
+- link: "/actions/private_actions/set_up_agent_based"
   tag: "Documentation"
   text: "Set up a private action runner"
-- link: "actions/private_actions/authorize_private_actions"
+- link: "/actions/private_actions/authorize_private_actions"
   tag: "Documentation"
   text: "Authorize private actions"
-- link: "actions/private_actions/execution_policies"
+- link: "/actions/private_actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
 ---
@@ -122,7 +122,11 @@ Datadog signs every task it dispatches, and the runner verifies the signature be
 
 ## Rotating private runner credentials
 
-To rotate the credentials of a private runner without redeploying, run `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity` on a host or node Agent, or `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` for the Cluster Agent.
+To rotate the credentials of a private runner without redeploying, run the command for your environment:
+
+- **Linux host:** `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity`
+- **Container (including a node Agent):** `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity`
+- **Cluster Agent:** `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity`
 
 ## Further reading
 

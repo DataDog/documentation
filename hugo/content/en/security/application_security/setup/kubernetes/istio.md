@@ -18,10 +18,6 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Istio is in Preview" >}}
-To try the preview of App and API Protection for Istio, use the following setup instructions.
-{{< /callout >}}
-
 You can enable App and API Protection within an Istio service mesh to inspect and protect traffic at the edge of your infrastructure. This works at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
@@ -67,15 +63,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Add annotations to your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
+This option requires Datadog Operator version 1.31.0 or later.
+
+Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 Apply with:

@@ -1,6 +1,6 @@
 ---
 title: Build Plugins
-description: "Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, action name deobfuscation, and other RUM tasks at build time."
+description: "Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, privacy allowlist generation, and other RUM tasks at build time."
 algolia:
   tags: ['build plugins', 'webpack', 'vite', 'esbuild', 'rollup', 'rspack', 'bundler']
 further_reading:
@@ -145,7 +145,9 @@ datadogWebpackPlugin({
     site: 'datadoghq.com',
   },
   logLevel: 'warn',
-  // Source map uploads (see Source Maps plugin page)
+  // Source map uploads by debug ID (see Source Maps plugin page)
+  sourcemaps: { /* ... */ },
+  // Source map uploads by service and version (see Source Maps plugin page)
   errorTracking: {
     sourcemaps: { /* ... */ },
   },
@@ -157,11 +159,13 @@ datadogWebpackPlugin({
 })
 ```
 
+`sourcemaps` and `errorTracking.sourcemaps` are mutually exclusive: set one, based on the matching method you choose. See [Source Maps][2] for details.
+
 ## Available plugins
 
 {{< whatsnext desc="Configure individual build plugins:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build, enabling deobfuscated stack traces.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Action Name Deobfuscation</u>: Restore readable action names in minified builds.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u>: Generate an allowlist of safe strings at build time to keep action names and session replay text useful while masking sensitive data.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in Error Tracking stack traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -170,3 +174,4 @@ datadogWebpackPlugin({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/

@@ -10,6 +10,7 @@ import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName 
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
+import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -177,6 +178,17 @@ function loadPage(newUrl) {
 
                 // update mainContent-wrapper classes
                 mainContentWrapper.className = `${newmainContentWrapper.classList}`;
+
+                // left-nav.html renders scoped to the page's section, so it must be resynced on
+                // every pjax nav or the old section's items would linger. innerHTML swap (not node
+                // replacement) preserves the click listener bound to this container in datadog-docs.js.
+                const currentLeftNav = document.querySelector('.sidenav-nav-js-load');
+                const newLeftNav = newDocument.querySelector('.sidenav-nav-js-load');
+
+                if (currentLeftNav && newLeftNav) {
+                    currentLeftNav.innerHTML = newLeftNav.innerHTML;
+                    getPathElement();
+                }
             } else {
                 window.location.href = newUrl;
             }

@@ -117,7 +117,7 @@ Datadog が実行中のコンテナイメージで CVE を検出すると、脆�
 ソースリンクを設定するには、CI/CD コンテナイメージスキャンガイドの[脆弱性に Dockerfile をリンクする][22]を参照してください。
 
 ## 自動化と Jira との連携 {#automation-and-jira-integration}
-[{{< ui >}}security notification rules{{< /ui >}} (セキュリティ通知ルール)][17]や[オートメーションパイプライン (プレビュー)][20] を設定して、Cloud Security Vulnerabilities を日々のワークフローに組み込みましょう。
+[{{< ui >}}security notification rules{{< /ui >}}][17] や [automation pipelines][20] を設定して、Cloud Security Vulnerabilities を日々のワークフローの一部にしてください。
 - 自分のスコープにおける悪用可能な脆弱性が検出された場合にアラートを受け取る
 - 自動的に Jira チケットを作成する
 - 脆弱性を修正するための SLA を構成する
@@ -150,11 +150,10 @@ Datadog が実行中のコンテナイメージで CVE を検出すると、脆�
 [12]: /ja/security/cloud_security_management/setup/agent
 [13]: /ja/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /ja/security/cloud_security_management/troubleshooting/vulnerabilities/
-[16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
-[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[20]: /ja/security/automation_pipelines/
 [21]: /ja/security/cloud_security_management/setup/ci_cd
 [22]: /ja/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score

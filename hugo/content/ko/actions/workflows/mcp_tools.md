@@ -2,19 +2,23 @@
 description: Datadog MCP Server의 워크플로 도구 세트를 사용하여 AI 에이전트로 워크플로를 구축, 관리, 실행 및 디버깅하세요.
 further_reading:
 - link: mcp_server/setup
-  tag: 설명서
+  tag: 문서
   text: Datadog MCP Server 설정
 - link: mcp_server
-  tag: 설명서
+  tag: 문서
   text: Datadog MCP Server 개요
 - link: mcp_server/tools
-  tag: 설명서
+  tag: 문서
   text: Datadog MCP Server 도구
 - link: actions/workflows/
-  tag: 설명서
+  tag: 문서
   text: Workflow Automation
 title: Workflow Automation MCP 도구
 ---
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation은 선택하신 Datadog 사이트에서 미리 보기로 제공됩니다 ({{< region-param key=dd_site_name >}})에서는 Agentless Scanning을 사용할 수 없습니다.</div>
+{{< /site-region >}}
+
 ## 개요 {#overview}
 
 [Datadog MCP Server][1]를 사용하면 AI 에이전트가 [Model Context Protocol(MCP)][2]을 통해 워크플로를 구축하고 관리할 수 있습니다.
@@ -35,7 +39,7 @@ title: Workflow Automation MCP 도구
 
 ## 빠른 시작 {#quickstart}
 
-<div class="alert alert-info"> <code>workflows</code> 도구 세트는 외부 MCP 클라이언트에 대해 기본적으로 활성화되지 않습니다.</div>
+<div class="alert alert-info">해당 <code>workflows</code> 도구 세트는 외부 MCP 클라이언트에 대해 기본적으로 활성화되지 않습니다.</div>
 
 1. [Datadog MCP Server 설정][1]을 진행합니다.
 1. AI 클라이언트를 Datadog MCP Server에 연결할 때 `workflows`를 `toolsets` 파라미터에 추가합니다. 예를 들어, Datadog US1 사이트의 경우 다음과 같습니다.

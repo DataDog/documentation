@@ -18,45 +18,36 @@ cascade:
     rank: 70
 description: 성능 향상을 위해 코드 계측
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=APM
-  tag: 릴리스 노트
-  text: 최신 Datadog APM 릴리스를 확인하세요! (앱 로그인 필요)
+- link: https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/
+  tag: 아키텍처 센터
+  text: 이벤트 기반 아키텍처에서의 관측 가능성
 - link: https://learn.datadoghq.com/courses/getting-started-apm
   tag: 학습 센터
   text: APM Metrics 및 트레이스 시작하기
-- link: https://www.datadoghq.com/blog/monitor-rust-otel/
-  tag: 블로그
-  text: OpenTelemetry로 Rust 애플리케이션을 모니터링하는 방법
+- link: https://dtdg.co/fe
+  tag: 기반 활성화
+  text: 대화형 세션에 참여해 APM 이해도 높이기
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: 블로그
   text: 애플리케이션 성능의 과거 추세를 추적하기 위해 스팬 기반 메트릭을 생성하세요.
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: 블로그
   text: APM 보안 뷰를 통해 위험, 취약점 및 공격에 대한 가시성 확보
-- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
-  tag: 블로그
-  text: Datadog를 통해 Azure App Service에서 Linux 웹 앱 모니터링
-- link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
-  tag: 블로그
-  text: Datadog API 카탈로그로 API 성능, 보안 및 소유권 관리하기
-- link: https://www.datadoghq.com/blog/software-catalog/
-  tag: 블로그
-  text: Software Catalog로 개발자 경험 및 협업 개선
-- link: https://www.datadoghq.com/blog/datadog-csi-driver/
-  tag: 블로그
-  text: Datadog의 CSI 드라이버로 보안 Kubernetes 환경에 고성능 관측 가능성 실현
-- link: https://dtdg.co/fe
-  tag: 기반 활성화
-  text: 대화형 세션에 참여해 애플리케이션 성능 모니터링(APM)에 대한 이해도를 높이세요.
-- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
-  tag: 블로그
-  text: Datadog의 GitLab 소스 코드 통합으로 더 빠른 문제 해결
 - link: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing
   tag: 블로그
   text: Datadog로 Cloud Run에서 Google Pub/Sub 워크로드 트레이스
 - link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
   tag: 블로그
   text: 왕복 쿼리 지연 시간 분석
+- link: https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/
+  tag: 블로그
+  text: OpenTelemetry와 Datadog을 사용하여 Boomi 통합 흐름을 계측 및 모니터링하십시오.
+- link: https://www.datadoghq.com/blog/dbm-supabase/
+  tag: 블로그
+  text: Datadog Database Monitoring으로 Supabase 쿼리 성능 모니터링 및 최적화
+- link: https://app.datadoghq.com/release-notes?category=APM
+  tag: 릴리스 노트
+  text: 최신 Datadog APM 릴리스를 확인하세요! (앱 로그인 필요)
 title: APM
 ---
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}

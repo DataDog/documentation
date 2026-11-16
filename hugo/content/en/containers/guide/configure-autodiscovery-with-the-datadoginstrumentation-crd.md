@@ -14,6 +14,9 @@ further_reading:
 - link: "/containers/cluster_agent/"
   tag: "Documentation"
   text: "Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+  tag: "Blog"
+  text: "Manage Kubernetes observability with DatadogInstrumentation"
 ---
 
 ## Overview
@@ -28,6 +31,8 @@ Use the `DatadogInstrumentation` CR when you want to:
 - Update or remove Autodiscovery configuration without restarting your application pods.
 
 When you create or update a `DatadogInstrumentation` resource, the [Datadog Cluster Agent][3] validates the target, reports resource status, and applies the Autodiscovery configuration to the targeted workload.
+
+To configure APM Single Step Instrumentation through `spec.config.apm`, see [Single Step APM Instrumentation on Kubernetes][8]. The Operator setup for APM requires Agent and Cluster Agent v7.85+ and Datadog Operator v1.31+. APM settings apply when pods are created, so existing workloads must be restarted to apply changes. The setup and supported targets below describe checks and logs.
 
 ## Requirements
 
@@ -282,3 +287,4 @@ Auto-discovery IDs:
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
 [7]: https://argoproj.github.io/rollouts/
+[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation

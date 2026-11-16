@@ -17,6 +17,8 @@ title: Processeur de tags
 
 Pour les logs provenant du Datadog Agent, utilisez ce processeur pour exclure ou inclure des tags spécifiques dans le tableau de tags Datadog (`ddtags`). Les tags exclus ou non inclus sont supprimés et peuvent réduire votre volume de logs sortants.
 
+**Note** : ce processeur conserve ou supprime uniquement les tags qui existent déjà dans le tableau `ddtags`. Il n'ajoute pas de nouveaux tags ou de nouveaux attributs à un log. Pour ajouter un nouvel attribut à un log, utilisez le processeur [Edit Fields][3].
+
 ## Configuration {#setup}
 
 Pour configurer le processeur :
@@ -29,3 +31,4 @@ Pour configurer le processeur :
 
 [1]: /fr/getting_started/tagging/#define-tags
 [2]: /fr/observability_pipelines/search_syntax/logs/
+[3]: /fr/observability_pipelines/processors/edit_fields/

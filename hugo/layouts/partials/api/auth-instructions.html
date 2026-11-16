@@ -1,0 +1,22 @@
+{{- $action := .action -}}
+{{- $authData := .authData -}}
+{{- $securitySchemes := .securitySchemes -}}
+{{- if $authData.useBearerToken -}}
+  &nbsp;<span class="n">DD_BEARER_TOKEN</span><span class="o">=</span><span class="s1">"&lt;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN&gt;"</span>
+{{- else -}}
+  {{- range $key, $val := $authData.requirement -}}
+    {{- $authSchema := index $securitySchemes $key -}}
+    {{- if eq $authSchema.in "header" -}}
+      {{- $envName := index $authSchema "x-env-name" -}}
+      {{- $placeholder := $envName -}}
+      {{- if not (isset $action "security") -}}
+        {{- if eq $envName "DD_API_KEY" -}}
+          {{- $placeholder = "API-KEY" -}}
+        {{- else if eq $envName "DD_APP_KEY" -}}
+          {{- $placeholder = "APP-KEY" -}}
+        {{- end -}}
+      {{- end -}}
+      &nbsp;<span class="n">{{- $envName -}}</span><span class="o">=</span><span class="s1">"&lt;{{- $placeholder -}}&gt;"</span>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

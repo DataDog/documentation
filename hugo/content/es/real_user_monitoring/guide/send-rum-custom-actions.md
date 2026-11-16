@@ -5,26 +5,29 @@ algolia:
 aliases:
 - /es/real_user_monitoring/guide/send-custom-user-actions/
 beta: true
-description: Aprende a enviar acciones personalizadas para ampliar tu recopilación
-  de interacciones de usuarios.
+description: Aprenda a enviar acciones personalizadas para ampliar su colección de
+  interacciones de usuario.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
-  text: Visualización de tus datos RUM en el Explorador RUM
+  text: Visualice sus datos de RUM en el Explorador de RUM
+- link: https://learn.datadoghq.com/courses/custom-data-rum-javascript
+  tag: Centro de aprendizaje
+  text: Recopile datos personalizados con RUM para aplicaciones web de JavaScript
 private: true
-title: Enviar acciones RUM personalizadas
+title: Enviar acciones personalizadas de RUM
 ---
-## Información general
+## Descripción general {#overview}
 
-Real User Monitoring [recopila acciones automáticamente][1] en tu aplicación web. Puedes recopilar eventos y tiempos adicionales, como rellenado de formularios y transacciones comerciales.
+Real User Monitoring [recopila automáticamente acciones][1] en su aplicación web. Puede recopilar eventos y tiempos adicionales, como finalizaciones de formularios y transacciones comerciales.
 
-Las acciones RUM personalizadas te permiten monitorizar eventos interesantes con todo su contexto relevante adjunto. Por ejemplo, el SDK del Navegador Datadog puede recopilar la información de pago de un usuario (como la cantidad de artículos en el carro de compras, la lista de artículos y su precio) cuando hace clic en el botón de pago en un sitio web de comercio electrónico.
+Las acciones de RUM personalizadas le permiten hacer un seguimiento de eventos interesantes con todo el contexto relevante adjunto. Por ejemplo, el SDK de navegador de Datadog puede recopilar la información de pago de un usuario (como la cantidad de artículos en el carrito, la lista de artículos y el valor total de los artículos del carrito) cuando hace clic en el botón de pago en un sitio web de comercio electrónico.
 
-## Instrumentar tu código
+## Instrumente su código {#instrument-your-code}
 
-Crea una acción RUM utilizando la API `addAction`. Dale un nombre a tu acción y adjunta atributos de contexto en forma de objeto de JavaScript.
+Cree una acción de RUM utilizando la `addAction` API. Asigne un nombre a su acción y adjunte atributos de contexto en forma de objeto de JavaScript.
 
-El siguiente ejemplo crea una acción `checkout` con información del carro de compras del usuario cuando éste hace clic en el botón de pago.
+El siguiente ejemplo crea una `checkout` acción con detalles sobre el carrito del usuario cuando este hace clic en el botón de pago.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -43,7 +46,7 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-Asegúrate de envolver la llamada a la API con la devolución de llamada `onReady`:
+Asegúrese de envolver la llamada a la API con la devolución de llamada `onReady`:
 
 ```javascript
 function onCheckoutButtonClick(cart) {
@@ -59,7 +62,7 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Asegúrate de comprobar `window.DD_RUM` antes de la llamada a la API:
+Asegúrese de verificar `window.DD_RUM` antes de la llamada a la API:
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
@@ -75,34 +78,34 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{< /tabs >}}
 
-Todo el contexto RUM, como la información de visualización de la página actual, los datos geoIP y la información del navegador, se adjunta automáticamente junto con atributos adicionales proporcionados con la [API de contexto global][2].
+Todo el contexto de RUM, como la información de la vista de página actual, los datos de geoIP y la información del navegador, se adjunta automáticamente junto con los atributos adicionales proporcionados con la [API de contexto global][2].
 
-## Creación de facetas y medidas sobre atributos
+## Cree facetas y medidas en atributos {#create-facets-and-measures-on-attributes}
 
-Después de desplegar el código que crea tus acciones personalizadas, éstas aparecen en la pestaña **Acciones** del [Explorador RUM][3].
+Después de implementar el código que crea sus acciones personalizadas, estas aparecen en la pestaña {{< ui >}}Actions{{< /ui >}} del [Explorador de RUM][3].
 
-Para filtrar tus acciones personalizadas, utiliza el atributo `Action Target Name`: `@action.target.name:<ACTION_NAME>`.
+Para filtrar por sus acciones personalizadas, utilice el atributo `Action Target Name`: `@action.target.name:<ACTION_NAME>`.
 
-El ejemplo a continuación utiliza el siguiente filtro: `@action.target.name:checkout`.
+El siguiente ejemplo utiliza el siguiente filtro: `@action.target.name:checkout`.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Crear una faceta para acciones RUM personalizadas" video=true style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action-3.mp4" alt="Cree una faceta para acciones de RUM personalizadas" video=true style="width:100%;">}}
 
-Al hacer clic en una acción, aparece un panel lateral con metadatos. Puedes encontrar los atributos de tu acción en la sección **Atributos personalizados** y crear facetas o medidas para estos atributos haciendo clic en ellos.
+Después de hacer clic en una acción, aparece un panel lateral con metadatos. Puede encontrar los atributos de su acción en la sección {{< ui >}}Custom Attributes{{< /ui >}} y crear facetas o medidas para estos atributos haciendo clic en ellos.
 
-Utiliza facetas para valores distintivos (ID) y medidas para valores cuantitativos, como tiempos y latencia. Por ejemplo, crea una faceta para los artículos del carro de compras y una medida para el valor del carro de compras.
+Utilice facetas para valores distintivos (IDs) y medidas para valores cuantitativos como tiempos y latencia. Por ejemplo, cree una faceta para los artículos del carrito y una medida para el valor del carrito.
 
-## Uso de atributos en el Explorador RUM
+## Utilice atributos en el Explorador de RUM {#use-attributes-in-the-rum-explorer}
 
-Puedes utilizar atributos de acción junto con facetas y medidas en [Explorador RUM][3] para crear monitors, consultas avanzadas y widgets de dashboards.
+Puede utilizar atributos de acción junto con facetas y medidas en el [Explorador de RUM][3] para crear dashboard widgets, monitors y consultas avanzadas.
 
-El siguiente ejemplo muestra el valor medio de los carros de compras por país en los dos últimos días. Haz clic en el botón **Exportar** para exportar la consulta de búsqueda a un monitor o widget de dashboard.
+El siguiente ejemplo muestra el valor promedio del carrito por país en los últimos dos días. Haga clic en el botón {{< ui >}}Export{{< /ui >}} para exportar la consulta de búsqueda a un dashboard widget o monitor.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Uso de acciones RUM en el Explorador RUM" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics-2.png" alt="Utilice acciones de RUM en el Explorador de RUM" style="width:100%;">}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
-[2]: /es/real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[1]: /es/real_user_monitoring/application_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /es/real_user_monitoring/explorer

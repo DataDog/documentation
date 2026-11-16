@@ -51,6 +51,10 @@ When enabled, users logging in with SAML to your Datadog account are permanently
 Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][7].
 
+### Mobile and Third-Party Access
+
+The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
+
 ## Access
 
 ### API keys
@@ -81,6 +85,13 @@ If your application does not have an existing Datadog integration, and you don't
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
 
+### MCP Server
+
+Manage how AI agents and tools access your organization's Datadog data through the [Datadog MCP Server][18]:
+
+- Enable or disable [organization-wide access][19] to the MCP Server and its tools, and separately, write access for tools that create or modify resources.
+- Configure [redirect URLs][20] for OAuth authentication with the MCP Server.
+
 ## Security
 
 ### Safety Center
@@ -94,10 +105,6 @@ The {{< ui >}}Public Sharing{{< /ui >}} tab includes org-wide settings for shari
 To apply sharing settings across all your orgs, reach out to [Datadog Support][16].
 
 **Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
-
-### Mobile and Third-Party Access
-
-The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
 
 ## Compliance
 
@@ -174,3 +181,6 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [15]: /account_management/org_settings/mobile_third_party_access
 [16]: /help/
 [17]: /account_management/org_settings/smtp_configuration
+[18]: /mcp_server/
+[19]: /mcp_server/setup/#required-permissions
+[20]: /mcp_server/setup/#adding-oauth-clients

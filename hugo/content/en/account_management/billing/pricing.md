@@ -91,7 +91,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
     * Update an incident's state, severity, or other fields
     * Comment on the incident's timeline
     * Send incident notifications
-    * Add responders or assign responder types
+    * Add responders or assign responder roles
     * Create, modify, or assign incident follow-ups
     * Generate a postmortem
   * You do _not_ become an active user when you:
@@ -101,10 +101,18 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 ## CI Visibility
 
-* Datadog tracks the number of unique committers who send test and pipeline data to the CI Visibility service.
+* Datadog tracks the number of unique committers who send pipeline data to the CI Visibility service.
 * A **committer** means an active git committer, identified by their git author email address. A committer is counted towards billing if they commit at least three times in a given month.
   * In the event that a pipeline is not associated with a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
-* For Pipeline Visibility, every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**. For Testing Visibility, every individual test run counts as a **test span**.
+* Every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**.
+
+## Test Optimization
+
+* Datadog tracks the number of unique committers who send test data to Test Optimization.
+* A **committer** means an active Git committer, identified by their Git author email address. A committer is counted toward billing if they commit at least three times in a given month.
+* Every individual test run counts as a **test span**. Test spans that Test Optimization features generate, such as retries added by Auto Test Retries, are not billed. Tests skipped by Test Impact Analysis are also not billed.
+
+For more information, see [CI/CD Optimization Billing][13].
 
 ## Troubleshooting
 
@@ -124,3 +132,4 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [10]: /real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /account_management/billing/metric_name_pricing/
+[13]: /account_management/billing/ci_visibility/#counting-test-spans

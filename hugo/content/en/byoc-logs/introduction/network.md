@@ -12,6 +12,8 @@ This document provides an overview of how BYOC (Bring Your Own Cloud) Logs and D
 
 ## Reverse connection (default)
 
+[Operator-managed BYOC deployments][2] use this connection method. They do not require a public Ingress for Datadog queries or index management.
+
 By default, BYOC Logs **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
 
 Datadog recommends this setup because:
@@ -43,8 +45,11 @@ Only **searcher** pods establish the reverse connection. Indexers, the control p
 
 It is also possible to configure BYOC Logs to deploy a public ingress so Datadog can establish the connection in the other direction.
 
-The public ingress enables Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page](/byoc-logs/configure/ingress/).
+The public ingress enables Datadog to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /byoc-logs/configure/ingress/
+[2]: /byoc-logs/install/datadog_operator/

@@ -15,6 +15,9 @@ further_reading:
 - link: logs/explorer/saved_views/
   tag: ドキュメント
   text: ログエクスプローラーの自動構成
+- link: https://learn.datadoghq.com/courses/log-explorer
+  tag: ラーニングセンター
+  text: ログエクスプローラーの概要
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: ブログ
   text: ログエクスプローラーの URL をクリップボードに追加する
@@ -24,12 +27,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
   tag: ブログ
   text: AI を活用したログパースで調査を加速
-- link: https://learn.datadoghq.com/courses/log-explorer
-  tag: ラーニングセンター
-  text: ログエクスプローラーの概要
 title: ログエクスプローラー
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 [**ログエクスプローラー**][1]は、ログのトラブルシューティングと調査のホームベースです。ゼロから開始する場合でも、[保存ビュー][2]から開始する場合でも、モニター通知やダッシュボードウィジェットなどの他のコンテキストからここに到達する場合でも、ログエクスプローラーではログを検索、フィルター、グループ化、視覚化、エクスポートすることができます。
 
@@ -61,7 +61,7 @@ title: ログエクスプローラー
 
 ログのクエリや視覚化したデータをエクスポートする方法については、[ログのエクスポート][8]を参照してください。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

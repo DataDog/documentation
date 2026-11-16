@@ -20,14 +20,14 @@ further_reading:
 - link: "/logs/guide/log-collection-troubleshooting-guide/"
   tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
-site_support_id: fleet-automation-standard-features
 ---
 
 Use [Fleet Automation][2] to manage [custom log collection][4] settings on your Agents remotely at scale. Instead of editing `conf.d` configuration files host by host, scope a change by host information or tag and deploy it to all matching Agents at once. Before deploying, review the configuration diff for each Agent in scope.
 
 ## Prerequisites
 
-- [Remote Configuration][1] enabled for your organization
+- [Remote Configuration][1] enabled for your organization and the Agent's API key
+- [Remote updates][10] enabled on each target VM Agent (`remote_updates: true`)
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][5].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
 - Log collection enabled on the target Agents (`logs_enabled: true` in `datadog.yaml`). Fleet Automation deploys the configuration file either way, but the Agent does not start collecting logs until log collection is enabled. See [Host Agent Log Collection][8].
@@ -86,3 +86,4 @@ If the deployment succeeded but no logs arrive, see the [Log Collection Troubles
 [7]: /logs/guide/log-collection-troubleshooting-guide/
 [8]: /agent/logs/
 [9]: https://app.datadoghq.com/fleet
+[10]: /agent/guide/setup_remote_config/#enable-remote-agent-management

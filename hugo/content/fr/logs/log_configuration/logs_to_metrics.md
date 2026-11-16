@@ -27,7 +27,7 @@ La fonctionnalité [Logging without Limits][1]* de Datadog vous permet de décid
 
 Avec des métriques basées sur des logs, vous pouvez générer une métrique count représentant le nombre de logs qui correspondent à une requête, ou une [métrique de distribution][3] représentant une valeur numérique contenue dans des logs, comme la durée des requêtes.
 
-**Note de facturation :** Les métriques créées à partir de logs ingérés sont facturées en tant que [Custom Metrics][4].
+**Note de facturation :** Les métriques créées à partir de logs ingérés sont facturées en tant que [métriques personnalisées][4].
 
 ## Générer une métrique basée sur les logs {#generate-a-log-based-metric}
 
@@ -37,7 +37,7 @@ Pour générer une nouvelle métrique basée sur les logs :
 
 1. Accédez à la page [Generate Metrics][5].
 1. Sélectionnez l'onglet {{< ui >}}Generate Metrics{{< /ui >}}.
-1. Cliquez sur {{< ui >}}+New Metric{{< /ui >}}.
+1. Cliquez {{< ui >}}\+ New Metric{{< /ui >}}.
 
 Vous pouvez également créer des métriques à partir d'une recherche Analytics en sélectionnant l'option {{< ui >}}Generate new metric{{< /ui >}} dans le menu {{< ui >}}Export{{< /ui >}}.
 

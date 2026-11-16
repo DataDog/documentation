@@ -1,82 +1,84 @@
 ---
+description: Obtenga información sobre las plantillas de registros, métricas y trazas
+  listas para usar disponibles para crear e implementar canalizaciones en la interfaz
+  de usuario de Observability Pipelines.
 disable_toc: false
 further_reading:
 - link: observability_pipelines/set_up_pipelines#set-up-a-pipeline
   tag: Documentación
-  text: Configurar pipelines
+  text: Configure Pipelines
+- link: https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines
+  tag: Centro de aprendizaje
+  text: Primeros pasos con Observability Pipelines
 title: Explorar plantillas
 ---
+## Descripción general {#overview}
 
-## Información general
+Cuando crea una canalización en la interfaz de usuario de Observability Pipelines, seleccione una de las plantillas listas para usar para crear e implementar canalizaciones según su caso de uso.
 
-Cuando crees un pipeline en la interfaz de usuario de Observability Pipelines, selecciona una de las plantillas preconfiguradas para crear y desplegar pipelines en función de tu caso de uso.
+{{< img src="observability_pipelines/eight_templates.png" alt="La interfaz de usuario de Observability Pipelines mostrando las ocho plantillas" style="width:100%;" >}}
 
-{{< img src="observability_pipelines/eight_templates.png" alt="La interfaz de usuarios de Observability Pipelines que muestra las ocho plantillas" style="width:100%;" >}}
+## Plantillas {#templates}
 
-## Plantillas
-
-Las plantillas se han creado para los siguientes casos de uso:
+Las plantillas están creadas para los siguientes casos de uso:
 
 {{< tabs >}}
-{{% tab "Logs" %}}
+{{% tab "Registros" %}}
 
-### Archivar logs
+### Archivar registros {#archive-logs}
 
-Utiliza la plantilla Archivar logs para almacenar logs en una solución de almacenamiento en la nube (Amazon S3, Google Cloud Storage o Azure Storage). Los logs archivados se almacenan en un formato rehidratable en Datadog, de modo que puedan rehidratarse en Datadog cuando sea necesario. Esto es útil cuando:
+Utilice la plantilla Archivar registros para almacenar registros en una solución de almacenamiento en la nube (Amazon S3, Google Cloud Storage o Azure Storage). Los registros archivados se almacenan en un formato que Datadog puede rehidratar para que puedan rehidratarse en Datadog según sea necesario. Esto es útil cuando:
 
-- Tienes un gran volumen de logs ruidosos, pero puede que necesites indexarlos en Datadog Log Management ad hoc para una investigación.
-- Estás migrando a Datadog Log Management y quieres contar con un historial de los logs luego de la migración.
-- Tienes una política de conservación para cumplir con los requisitos de cumplimiento, pero no necesariamente necesitas indexar esos logs.
+- Tiene un gran volumen de registros ruidosos, pero es posible que necesite indexarlos en Datadog Log Management de forma ad hoc para una investigación.
+- Está migrando a Datadog Log Management y desea tener registros históricos después de completar la migración.
+- Tiene una política de retención para cumplir con los requisitos de cumplimiento, pero no necesariamente necesita indexar esos registros.
 
-### Logs de doble envío
+### Envío doble de registros {#dual-ship-logs}
 
-A medida que tu organización crece, también cambian tus necesidades de observabilidad de diferentes casos de uso, como la seguridad, el archivado y la gestión de logs. Esto podría llevar a que necesites probar diferentes soluciones de archivado, SIEM y de gestión de logs. Sin embargo, la gestión de pipelines de logs con diferentes soluciones puede ser complicada. Utiliza la plantilla Logs de doble envío para enviar tus logs a diferentes destinos, de modo que puedas evaluar diferentes herramientas y procesos con mínimas interrupciones en tu entorno de producción.
+A medida que su organización crece, sus necesidades de observabilidad para diferentes casos de uso, como seguridad, archivo y gestión de registros, también cambian. Esto podría significar tener que probar diferentes soluciones de archivo, SIEM y gestión de registros. Sin embargo, gestionar canalizaciones de registros para diferentes soluciones puede ser complicado. Utilice la plantilla Envío doble de registros para enviar sus registros a diferentes destinos, de modo que pueda evaluar diferentes herramientas y flujos de trabajo con una interrupción mínima en su entorno de producción.
 
-### Generar métricas basadas en logs
+### Generar métricas basadas en registros {#generate-log-based-metrics}
 
-Algunas fuentes de logs, como los cortafuegos y los dispositivos de red, generan un gran volumen de eventos de logs que contienen datos de logs que no es necesario almacenar. A menudo, sólo quieres ver un resumen de los logs y compararlos con los datos históricos. Las métricas basadas en logs también son una forma rentable de resumir datos de logs de todo tu flujo (stream) de ingestión. Utiliza la plantilla Generar métricas para generar un recuento de métricas de logs que coincidan con una consulta o una métrica de distribución de un valor numérico contenido en los logs, como la duración de una solicitud.
+Algunas fuentes de registros, como firewalls y dispositivos de red, generan un gran volumen de eventos de registro que contienen datos de registro que no necesitan almacenarse. A menudo, solo necesita un resumen de los registros y una comparación con los datos históricos. Las métricas basadas en registros también son una forma rentable de resumir los datos de registro de todo el flujo de ingesta. Utilice la plantilla Generar métricas para generar métricas de conteo, gauge o distribución a partir de registros que coincidan con una consulta.
 
-Estos son los tipos de métrica disponibles:
-  | Tipo de métrica | Descripción | Ejemplo |
-  | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-  | COUNT | Representa el número total de eventos ocurridos en un intervalo de tiempo. Este valor puede ponerse a cero, pero no puede reducirse.                | Puedes contar el número de logs con `status:error`.                                         |
-  | GAUGE | Representa una instantánea de eventos en un intervalo de tiempo.                                                                                           | Puedes medir la última utilización de CPU por host para todos los logs en el entorno de producción. |
-  | DISTRIBUTION | Representa la distribución estadística global de un conjunto de valores calculados en toda tu infraestructura distribuida en un intervalo de tiempo. | Puedes medir el tiempo medio que tarda en realizarse una llamada a la API.                           |
+Estos son los tipos de métricas disponibles:
+  | Tipo de métrica  | Descripción                                                                                                                                         | Ejemplo                                                                                       |
+  | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+  | COUNT        | El número total de ocurrencias de eventos en un intervalo de tiempo. Se puede restablecer a cero, pero no se puede disminuir.                                          | Desea contar el número de registros con `status:error`.                                     |
+  | GAUGE        | Una instantánea de un valor en el momento en que se informa.                                                                                                   | Desea realizar un seguimiento de la última utilización de CPU por servidor.                                        |
+  | DISTRIBUTION | Valores sin procesar enviados a Datadog para que las agregaciones de percentiles (como p95, p99) se calculen en el servidor, globalmente en todos los servidores que informan la métrica. | Desea el p95 global de `response_time_seconds` en todos los servidores que sirven un punto de conexión de API. |
 
 
-### Enriquecimiento de logs
+### Enriquecimiento de registros {#log-enrichment}
 
-Los diferentes servicios, sistemas y aplicaciones de tu organización generan logs, que contienen capas de información y en diferentes formatos. Para gestionar estos logs, puede que necesites estandarizar su formato y añadir información para facilitar su búsqueda y análisis. Por ejemplo, cada fuente de log tiene su propio formato. Esto puede dificultar la búsqueda y el análisis durante las investigaciones si no se han reformateado y normalizado. También podrías tener información adicional, como ID de clientes o direcciones IP, que desees añadir a tus logs.
+Los diferentes servicios, sistemas y aplicaciones de su organización generan registros que contienen capas de información y en diferentes formatos. Para administrar estos registros, es posible que deba estandarizar su formato y agregar información para facilitar su búsqueda y análisis. Por ejemplo, cada fuente de registros tiene su propio formato único. Esto puede dificultar la búsqueda y el análisis durante las investigaciones si no se han reformateado y estandarizado. También podría tener información adicional, como ID de cliente o direcciones IP, que desee agregar a sus registros.
 
-### Control del volumen de logs
+### Control de volumen de registros {#log-volume-control}
 
-Los logs sin procesar son ruidosos, y sólo algunos son útiles para una mayor búsqueda y análisis durante las investigaciones. Utiliza la plantilla Control del volumen de logs para determinar qué logs debes enviar a tu solución indexada, como una solución SIEM o de gestión de logs. Esto te ayudará a aumentar el valor de tus logs indexados y también a mantenerte dentro de tu presupuesto previsto.
+Los registros sin procesar son ruidosos y solo algunos registros son útiles para búsquedas y análisis posteriores durante las investigaciones. Utilice la plantilla Control de volumen de registros para determinar qué registros enviar a su solución indexada, como un SIEM o una solución de gestión de registros. Esto le ayuda a aumentar el valor de sus registros indexados y también a mantenerse dentro de su presupuesto planificado.
 
-### Ocultar datos confidenciales
+### Redacción de datos confidenciales {#sensitive-data-redaction}
 
-Los datos confidenciales, como números de tarjetas de crédito, números de ruta bancaria y claves de API, pueden revelarse involuntariamente en tus logs, lo que puede exponer a tu organización a riesgos financieros y de privacidad.
+Los datos confidenciales, como números de tarjetas de crédito, números de ruta bancaria y claves de API, pueden revelarse involuntariamente en sus registros, lo que puede exponer a su organización a riesgos financieros y de privacidad.
 
-Utiliza la plantilla Ocultar datos confidenciales para detectar y ocultar información confidencial in situ. El procesador de análisis de datos confidenciales de Observability Pipelines proporciona 70 reglas de análisis listas predefinidas, pero también puedes crear tus propias reglas de análisis personalizadas utilizando expresiones regulares. Las reglas OOTB reconocen patrones estándar como números de tarjetas de crédito, direcciones de correo electrónico, direcciones IP, claves API, claves SSH y tokens de acceso.
+Utilice la plantilla Redacción de datos confidenciales para detectar y redactar información confidencial en las instalaciones. El procesador de escáner de datos confidenciales de Observability Pipelines proporciona 70 reglas de escaneo listas para usar, pero también puede crear sus propias reglas de escaneo personalizadas mediante expresiones regulares. Las reglas listas para usar reconocen patrones estándar como números de tarjetas de crédito, direcciones de correo electrónico, direcciones IP, claves de API y SSH, y tokens de acceso.
 
-### Logs divididos
+### Dividir registros {#split-logs}
 
-Cuando tengas logs de diferentes servicios y aplicaciones, puede que necesites enviarlos a diferentes servicios posteriores para su consulta, análisis y alertas. Por ejemplo, es posible que quieras enviar logs de seguridad a una solución SIEM y logs de DevOps a Datadog. Utiliza la plantilla Dividir logs para preprocesar tus logs por separado para cada destino antes de enviarlos a los procesos posteriores.
+Cuando tenga registros de diferentes servicios y aplicaciones, es posible que necesite enviarlos a diferentes servicios descendentes para realizar consultas, análisis y alertas. Por ejemplo, es posible que desee enviar registros de seguridad a una solución SIEM y registros de DevOps a Datadog. Utilice la plantilla Dividir registros para preprocesar sus registros por separado para cada destino antes de enviarlos a los servicios descendentes.
 
 {{% /tab %}}
-{{% tab "Metrics" %}}
+{{% tab "Métricas" %}}
 
-### Metric Tag Governance
+### Gobernanza de etiquetas de métricas {#metric-tag-governance}
 
-<div class="alert alert-info">
-Metric Tag Governance está en vista previa. Rellena el <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">formulario</a> para solicitar acceso.</div>
+Las métricas capturan señales sobre su entorno y ofrecen información sobre el estado de su sistema, los flujos de trabajo empresariales y las actividades de seguridad. Estas métricas se envían desde sus diversas aplicaciones, dispositivos de red y nodos, pero el valor de las métricas individuales puede variar significativamente.
 
-Las métricas captan señales sobre el entorno y ofrecen información sobre el estado del sistema, los flujos de trabajo empresariales y las actividades de seguridad. Estas métricas se envían desde las distintas aplicaciones, dispositivos de red y nodos, pero el valor de cada una de ellas puede variar significativamente.
-
-Para ayudarte a gestionar la calidad y el volumen de tus métricas, utiliza la plantilla de Metric Tag Governance para procesarlas en Observability Pipelines antes de enviarlas a sus destinos. Puedes utilizar procesadores para conservar solo las métricas que necesitas, estandarizar el etiquetado de métricas y eliminar las etiquetas no deseadas para evitar una cardinalidad elevada.
+Para ayudarle a gestionar la calidad y el volumen de sus métricas, utilice la plantilla Gobernanza de etiquetas de métricas para procesarlas en Observability Pipelines antes de enviarlas a sus destinos. Puede utilizar procesadores para conservar solo las métricas que necesita, estandarizar el etiquetado de métricas y eliminar etiquetas no deseadas para evitar una alta cardinalidad.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

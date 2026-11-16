@@ -18,6 +18,10 @@ further_reading:
   text: "Trigger workflows"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 ## Test a monitor trigger
 
 You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
@@ -52,7 +56,7 @@ Clicking on a failed step gives you the inputs, outputs, and execution context f
 
 {{< img src="actions/workflows/test_and_debug/failed-step4.png" alt="A workflow with a failed step." >}}
 
-The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
+The initial run history for a workflow provides a panel with the list of previous workflow runs and whether each run succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow run in the list to inspect it. You can return to the initial run history at any time by clicking anywhere on the workflow canvas.
 
 
 ## Fix a failed step with AI

@@ -17,6 +17,9 @@ further_reading:
   text: Connexions
 title: Politiques d'exécution
 ---
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Les politiques d'exécution ne sont pas prises en charge pour votre <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Présentation {#overview}
 
 Les politiques d'exécution vous permettent de contrôler qui, où et quelles actions votre équipe peut exécuter. Chaque politique d'exécution est une règle unique d'autorisation ou de refus pour un ensemble d'actions, ainsi que pour les Datadog Agents auxquels elle s'applique. Vous sélectionnez ces Datadog Agents à l'aide de tags d'Agent. Les politiques d'exécution vous offrent deux avantages principaux lorsque vous autorisez des actions privées :

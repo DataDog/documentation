@@ -23,6 +23,10 @@ const setRumDeviceId = () => {
     window.DD_RUM.setUserProperty('device_id', deviceId);
 };
 
+const intakeProxy = IA_SUBDOMAIN
+    ? ({ path, parameters }) => `https://${IA_SUBDOMAIN}.datadoghq.com${path}?${parameters}`
+    : undefined;
+
 if (window.DD_RUM) {
     if (env === 'preview' || env === 'live') {
         window.DD_RUM.init({
@@ -32,17 +36,20 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackUserInteractions: true,
-            enableExperimentalFeatures: ['zero_lcp_telemetry', "feature_flags"],
+            enableExperimentalFeatures: ['zero_lcp_telemetry', 'feature_flags'],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
             trackResources: true,
             trackLongTasks: true,
             defaultPrivacyLevel: 'mask-user-input',
             allowedTracingUrls: [window.location.origin],
-            internalAnalyticsSubdomain: IA_SUBDOMAIN
+            traceContextInjection: 'all',
+            proxy: intakeProxy
         });
 
         window.DD_RUM.startSessionReplayRecording();
+
+        window.DD_RUM.setGlobalContextProperty('stack', 'hugo');
 
         if (branch) {
             window.DD_RUM.setGlobalContextProperty('branch', branch);
@@ -59,16 +66,18 @@ if (window.DD_LOGS) {
     window.DD_LOGS.init({
         clientToken: Config.ddClientToken,
         forwardErrorsToLogs: true,
+        forwardConsoleLogs: ['error'],
         env,
         service: 'docs',
         version: CI_COMMIT_SHORT_SHA,
-        internalAnalyticsSubdomain: IA_SUBDOMAIN
+        proxy: intakeProxy
     });
 
     // global context
     window.DD_LOGS.setGlobalContextProperty('host', window.location.host);
     window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer);
     window.DD_LOGS.setGlobalContextProperty('lang', lang);
+    window.DD_LOGS.setGlobalContextProperty('stack', 'hugo');
 
     if (branch) {
         window.DD_LOGS.setGlobalContextProperty('branch', branch);
@@ -95,6 +104,23 @@ const handleCdocsCustomRumAction = () => {
     }
 };
 
+const handleHomepageEnablementBannerViewSessions = () => {
+    /**
+     * Tracks the view sessions button in Datadog RUM.
+     */
+    const enablementBanner = document.querySelector('.home-enablement-banner');
+    if (enablementBanner) {
+        const viewSessionsButton = enablementBanner.querySelector('a[data-dd-action-name="homepage-enablement-banner-view-sessions"]');
+        if (viewSessionsButton) {
+            viewSessionsButton.addEventListener('click', () => {
+                window.DD_RUM.addAction('enablement_sessions_banner_cta_clicked', {
+                    button_text: viewSessionsButton.textContent,
+                });
+            });
+        }
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
@@ -107,4 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
     }
+    handleHomepageEnablementBannerViewSessions();
 });

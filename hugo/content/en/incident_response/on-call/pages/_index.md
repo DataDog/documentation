@@ -51,7 +51,7 @@ When a monitor is configured to [send renotifications][8] to an On-Call Team, th
 
 - **Page is resolved**: The monitor renotifies and creates a new Page, which is routed through the Team's escalation policy.
 - **Page is acknowledged**: The monitor renotifies, and the Page is re-triggered, resuming the escalation policy at the step that was in progress when the Page was acknowledged. 
-- **Page is triggered**: If all steps in the escalation policy have already run but no one has acknowledged the Page, the monitor renotifies and the Page is re-triggered, restarting the escalation policy from the beginning.
+- **Page is triggered**: If all steps in the escalation policy have already run, a monitor renotification re-triggers the Page and restarts the last step of the escalation policy. If the escalation policy has not yet run every step, the renotification has no effect.
 
 ### Trigger Pages through email
 
@@ -94,6 +94,14 @@ Pages sent manually through Datadog are always `high` urgency.
 Pages sent from Slack are always `high` urgency.
 
 To receive Page notifications in Slack, see [Routing Rules][4].
+
+#### Through Microsoft Teams
+
+1. Install the [Datadog Microsoft Teams app][9].
+1. In any channel or chat, enter `@Datadog page`.
+1. Select a Team to send a Page to.
+
+Pages sent from Microsoft Teams are always `high` urgency.
 
 ## Respond to a Page
 
@@ -202,3 +210,4 @@ To add a comment, open the Page and enter your text in the **Timeline** section.
 [6]: /incident_response/incident_management/
 [7]: https://app.datadoghq.com/on-call/pages
 [8]: /monitors/notify/#renotify
+[9]: /integrations/microsoft-teams/

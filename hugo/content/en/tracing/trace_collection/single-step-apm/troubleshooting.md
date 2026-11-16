@@ -396,6 +396,30 @@ To troubleshoot Admission Controller issues:
 
    Look for `admission_webhooks_library_injection_attempts` to see injection attempts by language.
 
+#### DatadogInstrumentation configuration is not applied
+
+If you use a `DatadogInstrumentation` resource to enable SSI:
+
+1. Confirm that the Agent and Cluster Agent are v7.85+ and the CRD includes `spec.config.apm`. Datadog Operator v1.31+ includes the APM schema:
+
+   ```shell
+   kubectl explain datadoginstrumentation.spec.config.apm
+   ```
+
+1. Inspect the resource conditions:
+
+   ```shell
+   kubectl describe datadoginstrumentation <RESOURCE_NAME> -n <WORKLOAD_NAMESPACE>
+   ```
+
+   Confirm `APMReady=True` with reason `Configured`. An `UnsupportedLanguage` or `InvalidTracerConfig` reason indicates that the configuration must be corrected. SDK language identifiers must be supported, and `ddTraceConfigs` names must start with `DD_`.
+
+1. Confirm the resource and workload are in the same namespace, and `targetRef` matches a supported workload's API version, kind, and name.
+1. Confirm the DDI controller and Admission Controller are enabled. For pods without an admission opt-in label, set `features.admissionController.mutateUnlabelled: true` in the `DatadogAgent` resource. Check namespace exclusions and the pod's `admission.datadoghq.com/enabled` label.
+1. Check for pod SDK-selection annotations that take precedence over DDI. After applying the configuration, replace the workload's pods. `APMReady=True` confirms the configuration was accepted; it does not confirm that running pods were instrumented.
+
+For setup steps and precedence rules, see [Enable APM with DatadogInstrumentation][14].
+
 #### Failed mutations
 
 The Cluster Agent logs warnings and errors for injection failures, typically from `admission/server.go`. For example, a warning might appear if `JAVA_TOOL_OPTIONS` is set using `valueFrom`.
@@ -514,3 +538,4 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [11]: /tracing/guide/injectors/
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /tracing/troubleshooting/tracer_debug_logs/
+[14]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation

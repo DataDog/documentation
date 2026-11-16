@@ -145,7 +145,7 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+This script runs before Datadog sends the HTTP request. To read or assert on the response body, use [Define assertions > JavaScript](#define-assertions) instead.
 
    {{% /tab %}}
 
@@ -194,11 +194,12 @@ Use JavaScript assertions when standard response assertions don't meet your vali
 
 When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
+JavaScript assertions run after Datadog receives the HTTP response. To set variables before the request is sent, such as headers or signatures, use {{< ui >}}Variable From Script{{< /ui >}} under [Advanced Options > Javascript](#advanced-options).
+
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
 <div class="alert alert-info">
   <ul>
-    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
     <li>If a failed JavaScript assertion's error message might include sensitive data, under {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Privacy{{< /ui >}}, enable {{< ui >}}Do not save response body{{< /ui >}}. This truncates the assertion error message.</li>
   </ul>
 </div>

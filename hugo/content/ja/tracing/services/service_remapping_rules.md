@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-remapping/
   tag: ブログ
   text: サービスリマッピングを使用してサービスデータを包括的に接続する
-site_support_id: service_remapping_rules
 title: サービスリマッピングルール
 ---
 ## 概要 {#overview}

@@ -1,29 +1,26 @@
 ---
 further_reading:
-- link: /opentelemetry/collector_exporter/
-  tag: 설명서
-  text: 오픈 텔레메트리 설정 컬렉터(Collector)
+- link: /opentelemetry/setup/collector_exporter/
+  tag: 문서
+  text: OpenTelemetry Collector 설정
 title: Kafka 메트릭
 ---
+## 개요 {#overview}
 
-<div class="alert alert-danger">
-OTel Kafka 메트릭 리매핑은 공개 알파 버전입니다. 컬렉터(Collector) 0.93.0 이상 버전에서 사용할 수 있습니다. 이와 관련된 피드백이 있으면 계정 팀에 연락하여 의견을 제시해 주세요.
-</div>
+{{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="Kafka Dashboard의 OpenTelemetry Kafka 메트릭" style="width:100%;" >}}
 
+[Kafka metrics receiver][1]와 [JMX Scraper][2]는 기본 제공 [Kafka Dashboard][3]인 **Kafka, Zookeeper, and Kafka Consumer Overview**용 Kafka 메트릭을 수집합니다.
 
-## 개요
+이 둘은 서로 다른 데이터를 수집하며 대부분의 설정에서 둘 다 실행합니다. Kafka metrics receiver는 Kafka admin API를 통해 클러스터 상태를 읽습니다. JMX Scraper는 브로커, 프로듀서 및 컨슈머가 노출하는 JMX 빈을 읽습니다.
 
-{{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OOTB Kafka 대시보드의 OpenTelemetry Kafka <txprotected>메트릭" style="width:100%;" >}}
+## Kafka 메트릭 수신기 {#kafka-metrics-receiver}
 
-Kafka카 메트릭 수신기][1], [JMX 수신기][2]/ [JMX 메트릭 수집기][3]를 통해 Kafka 메트릭를 수집하고 즉시 사용 가능한 [Kafka 대시보드][7], "Kafka, Zookeeper 및 Kafka 소비자 개요"에 액세스할 수 있습니다. 
-
-JMX 리시버][2]와 [JMX 메트릭 개더][3]를 대체품으로 고려해야 한다는 점에 유의하세요. 이들은 동일한 메트릭 세트를 수집합니다([JMX 수신기][2]는 [JMX 메트릭 수집기][3]를 실행).
-
-
-## Kafka 메트릭 수신기
+`KAFKA_BROKER_ADDRESS` 값을 `host:port` 형식의 브로커 주소로 설정하세요. 둘 이상의 브로커를 나열하려면 주소를 쉼표로 구분하세요.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
+
+Collector 구성에 receiver를 추가하세요.
 
 ```yaml
 receivers:
@@ -36,18 +33,30 @@ receivers:
       - consumers
 ```
 
+메트릭 파이프라인의 `receivers` 목록에 `kafkametrics`을 추가하세요. Collector는 파이프라인에서 사용하는 receiver만 시작합니다. 예를 들어 권장 Host 구성에서는 다음과 같습니다:
+
+```yaml
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp, host_metrics, kafkametrics]
+      processors: [resource_detection, cumulativetodelta]
+      exporters: [otlp_http]
+```
+
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-Kafka 메트릭 수신기는 단일 복제본이 있는 `deployment` 모드의 컬렉터(Collector) 에서 사용해야 합니다. 이렇게 하면 동일한 메트릭이 여러 번 수집되지 않습니다. 그런 다음 배포 모드의 컬렉터는 Datadog 내보내기를 활용하여 메트릭을 Datadog로 직접 내보내거나 OTLP 내보내기를 활용하여 메트릭을 다른 컬렉터 인스턴스로 전달할 수 있습니다. 
+중복 메트릭을 방지하려면 단일 복제본 Collector 배포에서 Kafka metrics receiver를 실행하세요. Collector는 OTLP HTTP를 통해 Datadog으로 메트릭을 직접 내보내거나 다른 Collector로 전달할 수 있습니다.
 
-`values.yaml` 에 다음 줄을 추가합니다:
+`values.yaml`에서 배포 모드를 설정하세요.
+
 ```yaml
 mode: deployment
 ```
 
-컬렉터(Collector) 설정 에 다음을 추가합니다:
+Collector 구성에 receiver를 추가하세요.
 
 ```yaml
 receivers:
@@ -60,187 +69,157 @@ receivers:
       - consumers
 ```
 
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## JMX 수신기
-
-{{< tabs >}}
-{{% tab "Host" %}}
-
-JMX 수신기는 다음 요구 사항을 포함합니다.
-- JRE는 컬렉터(Collector)가 실행되는 호스팅에서 사용할 수 있습니다.
-- JMX 메트릭 Gatherer JAR은 컬렉터(Collector)를 실행하는 호스트에서 사용할 수 있으며, [opentelemetry-java-contrib releases page][1]에서 최신 릴리스인 JMX 메트릭 Gatherer JAR을 다운로드할 수 있습니다.
-
-컬렉터(Collector) 설정 에 다음을 추가합니다:
+동일한 구성의 메트릭 pipeline에 `kafkametrics`을 추가하세요. Collector는 파이프라인에서 사용하는 receiver만 시작합니다. Datadog으로 직접 내보내려면 [권장 설정][101]에 표시된 대로 `otlp_http` 익스포터를 구성하세요.
 
 ```yaml
-receivers:
-  jmx:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_BROKER_JMX_ADDRESS}
-    target_system: kafka,jvm
-  jmx/consumer:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_CONSUMER_JMX_ADDRESS}
-    target_system: kafka-consumer
-  jmx/producer:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_PRODUCER_JMX_ADDRESS}
-    target_system: kafka-producer
+service:
+  pipelines:
+    metrics:
+      receivers: [kafkametrics]
+      exporters: [otlp_http]
 ```
 
-[1]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
-
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-JMX 수신기는 단일 복제본이 있는 `deployment` 모드의 컬렉터에서 사용해야 합니다. 이렇게 하면 동일한 메트릭 이 여러 번 수집되지 않습니다. 그런 다음 배포 모드의 컬렉터는 Datadog 내보내기를 활용하여 메트릭을 Datadog 로 직접 내보내거나 OTLP 내보내기를 활용하여 메트릭을 다른 컬렉터(Collector) 인스턴스로 전달할 수 있습니다. 
-
-JMX 수신기는 다음 요구 사항을 포함합니다.
-- JRE는 컬렉터가 실행되는 호스트에서 사용할 수 있습니다.
-- JMX 메트릭 Gatherer JAR은 컬렉터를 실행하는 호스트에서 사용할 수 있으며, 최신 버전의 JMX 메트릭 Gatherer JAR은 [여기][1]에서 다운로드할 수 있습니다.
-
-OTel 컬렉터 기본 이미지는 위의 요구 사항을 충족하지 않으므로 커스텀 이미지를 빌드해야 합니다. 컬렉터 바이너리, JRE 및 JMX 메트릭 수집기 항아리가 포함된 예제 이미지는 아래 도커 파일을 참조하세요.
-
-Dockerfile:
-```Dockerfile
-FROM alpine:latest as prep
-
-# OpenTelemetry 컬렉터 바이너리
-ARG OTEL_VERSION=0.92.0
-ARG TARGETARCH=linux_amd64
-ADD "https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v${OTEL_VERSION}/otelcol-contrib_${OTEL_VERSION}_${TARGETARCH}.tar.gz" /otelcontribcol
-RUN tar -zxvf /otelcontribcol
-
-# JMX 메트릭 Gatherer Jar
-ARG JMX_GATHERER_JAR_VERSION=1.27.0
-ADD https://github.com/open-telemetry/opentelemetry-java-contrib/releases/download/v${JMX_GATHERER_JAR_VERSION}/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
-# nonroot user id (https://groups.google.com/g/distroless-users/c/-DpzCr7xRDY/m/eQqJmJroCgAJ)
-ARG USER_UID=65532
-RUN chown ${USER_UID} /opt/opentelemetry-jmx-metrics.jar
-
-
-FROM gcr.io/distroless/java17-debian11:nonroot
-
-COPY --from=prep /opt/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
-COPY --from=prep /otelcol-contrib /otelcol-contrib
-
-EXPOSE 4317 55680 55679
-ENTRYPOINT ["/otelcol-contrib"]
-CMD ["--config", "/etc/otelcol-contrib/config.yaml"]
-```
-
-`values.yaml` 에 다음 줄을 추가합니다:
-```yaml
-mode: deployment
-```
-
-컬렉터(Collector) 설정 에 다음을 추가합니다:
-
-```yaml
-receivers:
-  jmx:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_BROKER_JMX_ADDRESS}
-    target_system: kafka,jvm
-  jmx/consumer:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_CONSUMER_JMX_ADDRESS}
-    target_system: kafka-consumer
-  jmx/producer:
-    jar_path: /path/to/opentelemetry-jmx-metrics.jar
-    endpoint: ${env:KAFKA_PRODUCER_JMX_ADDRESS}
-    target_system: kafka-producer
-```
-
-[1]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
-
+[101]: /ko/opentelemetry/setup/collector_exporter/#otlp-http-exporter
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
+## JMX Scraper {#jmx-scraper}
 
-## JMX 메트릭 수집기
+JMX Scraper는 독립형 Java 애플리케이션으로 실행되며 Collector의 OTLP receiver로 메트릭을 보냅니다.
+
+[권장 Collector 설정][4]은 포트 4317에서 gRPC를 통해 OTLP를 수신하며 메트릭 파이프라인에 OTLP receiver를 포함하므로 receiver 구성을 변경할 필요가 없습니다.
+
+JMX Scraper는 누적 시간성의 카운터를 보냅니다. 권장 메트릭 파이프라인에서 `cumulativetodelta` processor를 유지하세요. 이 processor는 카운터를 [Datadog OTLP 메트릭 수집][8]에 필요한 델타 시간성으로 변환합니다.
+
+### Kafka 브로커 구성 {#configure-kafka-brokers}
+
+1. 평가에 적합한 보안되지 않은 JMX 엔드포인트를 시작하려면 각 Kafka 브로커에 다음 JVM 옵션을 추가하세요.
+
+   ```shell
+   -Dcom.sun.management.jmxremote=true
+   -Dcom.sun.management.jmxremote.port=9999
+   -Dcom.sun.management.jmxremote.rmi.port=9999
+   -Dcom.sun.management.jmxremote.local.only=false
+   -Dcom.sun.management.jmxremote.authenticate=false
+   -Dcom.sun.management.jmxremote.ssl=false
+   -Djava.rmi.server.hostname=<BROKER_HOSTNAME_OR_IP>
+   ```
+
+   <div class="alert alert-warning">이 옵션들은 JMX 인증 및 TLS를 비활성화합니다. 이 구성은 평가 목적으로만 사용하세요. 프로덕션 환경의 경우 인증 및 TLS를 활성화하고 자격 증명 및 신뢰 저장소 설정으로 스크레이퍼를 구성하세요.</div>
+
+   `jmxremote.authenticate`와 `jmxremote.ssl`의 기본값은 `true`이므로, 이 평가 구성을 위해 두 속성을 모두 명시적으로 설정하세요. 비밀번호 파일이 없으면 인증으로 인해 브로커가 `Password file not found` 오류와 함께 실패합니다. `jmxremote.rmi.port` 값과 `jmxremote.port` 값이 일치하면 RMI 레지스트리가 TLS로 보호되지 않고 포트를 공유할 수 없기 때문에 SSL로 인해 `Port already in use` 오류가 발생합니다.
+
+   프로덕션 환경에서 인증 및 TLS를 활성화하려면 `com.sun.management.jmxremote.registry.ssl=true` 설정을 추가하여 레지스트리와 커넥터가 포트를 공유할 수 있도록 하세요. `otel.jmx.username`, `otel.jmx.password`, `otel.jmx.remote.registry.ssl`, `javax.net.ssl.trustStore` 및 `javax.net.ssl.trustStorePassword` 속성을 사용하여 스크레이퍼를 구성하세요.
+
+2. `java.rmi.server.hostname` 값을 스크레이퍼가 연결에 사용하는 호스트 이름 또는 IP 주소로 설정하세요. 브로커는 이 값을 RMI 스텁에 포함하며, 스크레이퍼는 이에 대한 두 번째 연결을 엽니다.
+
+   - 스크레이퍼가 브로커와 동일한 호스트 또는 포드에서 실행되는 경우에만 루프백 주소를 사용하세요. Confluent Platform을 포함한 여러 Kafka 배포판 및 컨테이너 이미지는 기본적으로 루프백을 사용합니다.
+   - `0.0.0.0` 주소를 사용하지 마세요. 이는 바인드 주소이므로 스크레이퍼가 연결할 수 없습니다.
+   - Kubernetes에서는 브로커 포드 IP 또는 DNS 이름을 사용하세요.
+
+   Kafka 컨테이너 이미지에서 `KAFKA_JMX_HOSTNAME` 설정은 `java.rmi.server.hostname` 값을 설정합니다. 동일한 주소로 설정하세요.
+
+   연결할 수 없는 주소를 설정해도 초기 연결은 성공할 수 있지만, 이후 스크랩 작업은 `Failed to retrieve RMIServer stub` 또는 `Connection refused to host: <UNREACHABLE_ADDRESS>` 오류로 실패합니다.
+
+3. `jmxremote.rmi.port`에 `jmxremote.port`과 동일한 포트를 설정하세요. 고정된 RMI 포트가 없으면 두 번째 연결은 방화벽이나 포트 매핑에 의해 차단될 수 있는 임의의 포트를 사용합니다.
+
+프로듀서와 컨슈머를 스크랩하려면 해당 애플리케이션에 동일한 JVM 옵션을 추가하세요.
+
+### JMX Scraper 실행 {#run-the-jmx-scraper}
+
+기존 대시보드와 모니터가 예상하는 JVM 메트릭 이름을 유지하려면 `otel.jmx.target.source`의 값을 `legacy`로 설정하세요. 그렇지 않으면 스크레이퍼는 기본적으로 `auto` 값을 사용하며 모든 JVM 메트릭 이름이 변경됩니다.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
 
-JMX 메트릭 수집기는 uber jar로 실행하고 명령줄에서 속성을 사용하여 설정하도록 되어 있습니다. 
+JMX Scraper를 실행하는 호스트에 JRE를 설치하세요. Debian 또는 Ubuntu에서는 다음을 실행하세요.
 
-컬렉터(Collector)를 실행하는 호스트에서 JRE를 사용할 수 있는지 확인하세요. 그렇지 않은 경우 다운로드하세요.
-```
+```shell
 apt-get update && \
 apt-get -y install default-jre-headless
 ```
 
-이 작업을 완료한 후에는 최신 버전의 JMX 메트릭 Gatherer JAR[여기][1]을 다운로드하고 실행합니다:
+[OpenTelemetry Java Contrib 릴리스][201]에서 JMX Scraper JAR을 다운로드하세요. 각 주소 변수를 `host:port` 형식으로 설정하세요.
+
+각 스크레이퍼 프로세스는 단일 JMX 엔드포인트를 스크랩합니다. 각 브로커, 프로듀서, 컨슈머에 대해 해당 JVM 주소를 사용하여 프로세스를 하나씩 실행하세요.
+
+```shell
+# Kafka broker
+java \
+  -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://${KAFKA_BROKER_JMX_ADDRESS}/jmxrmi \
+  -Dotel.jmx.target.system=kafka,jvm \
+  -Dotel.jmx.target.source=legacy \
+  -Dotel.metrics.exporter=otlp \
+  -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
+  -jar /path/to/opentelemetry-jmx-scraper.jar
+
+# Kafka producer
+java \
+  -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://${KAFKA_PRODUCER_JMX_ADDRESS}/jmxrmi \
+  -Dotel.jmx.target.system=kafka-producer \
+  -Dotel.jmx.target.source=legacy \
+  -Dotel.metrics.exporter=otlp \
+  -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
+  -jar /path/to/opentelemetry-jmx-scraper.jar
+
+# Kafka consumer
+java \
+  -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://${KAFKA_CONSUMER_JMX_ADDRESS}/jmxrmi \
+  -Dotel.jmx.target.system=kafka-consumer \
+  -Dotel.jmx.target.source=legacy \
+  -Dotel.metrics.exporter=otlp \
+  -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
+  -jar /path/to/opentelemetry-jmx-scraper.jar
 ```
-// Kafka 브로커
-java -jar -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://{KAFKA_BROKER_JMX_ADDRESS}/jmxrmi \ -Dotel.jmx.target.system=kafka,jvm \
--Dotel.metrics.exporter=otlp \
--Dotel.exporter.otlp.endpoint=http://localhost:4317 \
--jar /path/to/opentelemetry-jmx-metrics.jar
 
-// Kafka 생산자
-java -jar -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://{KAFKA_PRODUCER_JMX_ADDRESS}/jmxrmi \ -Dotel.jmx.target.system=kafka-producer \
--Dotel.metrics.exporter=otlp \
--Dotel.exporter.otlp.endpoint=http://localhost:4317 \
--jar /path/to/opentelemetry-jmx-metrics.jar
-
-// Kafka 소비자
-java -jar -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://{KAFKA_CONSUMER_JMX_ADDRESS}/jmxrmi \ -Dotel.jmx.target.system=kafka-consumer \
--Dotel.metrics.exporter=otlp \
--Dotel.exporter.otlp.endpoint=http://localhost:4317 \
--jar /path/to/opentelemetry-jmx-metrics.jar
-```
-
-[1]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
+[201]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-JMX 메트릭 수집기는 uber jar로 실행하고 명령줄에서 속성을 사용하여 설정하도록 되어 있습니다. 
+다음 Dockerfile을 사용하여 JRE와 JMX Scraper JAR이 포함된 이미지를 빌드하세요.
 
-쿠버네티스(Kubernetes)에 배포하려면 JRE와 JMX 메트릭 Gatherer Jar가 포함된 이미지를 빌드해야 합니다. JRE와 JMX 메트릭 Gatherer Jar가 포함된 이미지 예시는 아래 도커 파일을 참조하세요.
-
-Dockerfile:
 ```Dockerfile
-FROM alpine:latest as prep
+FROM alpine:latest AS prep
 
-# JMX 메트릭 Gatherer Jar
-ARG JMX_GATHERER_JAR_VERSION=1.27.0
-ADD https://github.com/open-telemetry/opentelemetry-java-contrib/releases/download/v${JMX_GATHERER_JAR_VERSION}/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
-# nonroot user id (https://groups.google.com/g/distroless-users/c/-DpzCr7xRDY/m/eQqJmJroCgAJ)
+# JMX Scraper JAR
+ARG JMX_SCRAPER_JAR_VERSION=1.60.0
+ADD https://github.com/open-telemetry/opentelemetry-java-contrib/releases/download/v${JMX_SCRAPER_JAR_VERSION}/opentelemetry-jmx-scraper.jar /opt/opentelemetry-jmx-scraper.jar
 ARG USER_UID=65532
-RUN chown ${USER_UID} /opt/opentelemetry-jmx-metrics.jar
+RUN chown ${USER_UID} /opt/opentelemetry-jmx-scraper.jar
 
 FROM gcr.io/distroless/java17-debian11:nonroot
 
-COPY --from=prep /opt/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
+COPY --from=prep /opt/opentelemetry-jmx-scraper.jar /opt/opentelemetry-jmx-scraper.jar
 
-EXPOSE 4317 55680 55679
 ENTRYPOINT ["java"]
-CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:1099/jmxrmi", \
+CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:9999/jmxrmi", \
 "-Dotel.jmx.target.system=kafka,jvm", \
+"-Dotel.jmx.target.source=legacy", \
 "-Dotel.metrics.exporter=otlp", \
 "-Dotel.exporter.otlp.endpoint=http://otelcol:4317", \
 "-jar", \
-"/opt/opentelemetry-jmx-metrics.jar"]
+"/opt/opentelemetry-jmx-scraper.jar"]
 ```
+
+`kafka:9999`을 브로커의 JMX 주소로, `otelcol:4317`를 Collector의 OTLP gRPC 엔드포인트로 바꾸세요.
+
+프로듀서나 컨슈머를 스크랩하려면 `otel.jmx.target.system`을 `kafka-producer` 또는 `kafka-consumer`로 설정하고 `otel.jmx.service.url`이 해당 JVM의 JMX 엔드포인트를 가리키도록 하세요.
+
+JMX 엔드포인트당 단일 인스턴스를 실행하세요. 동일한 엔드포인트를 스크랩하는 여러 복제본은 중복된 메트릭을 생성합니다.
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## 로그 수집
+## 로그 수집 {#log-collection}
 
-[OpenTelemetry 컬렉터 로그 수집][4]을 참조하여 로그를 수집하는 방법에 대한 지침을 확인하세요,
+OpenTelemetry Collector로 로그를 수집하려면 [로그 수집][5]을 참조하세요.
 
-즉시 사용 가능한 Kafka 대시보드에 표시하려면 Kafka 로그에 `source:kafka` 태그를 지정해야 합니다. 이렇게 하려면 속성 프로세서를 사용하세요.
+기본 제공 Kafka Dashboard에 Kafka 로그를 포함하려면 속성 프로세서를 사용하여 `source:kafka` 태그를 추가하세요.
 
 ```yaml
 processors:
@@ -251,30 +230,35 @@ processors:
         action: insert
 ```
 
-이 속성이 Kafka 로그에만 추가되도록 하려면 속성 프로세서의 [포함/제외 필터링][8]을 사용하세요.
+이 속성을 Kafka 로그에만 추가하려면 속성 프로세서에서 [포함/제외 필터링][6]을 사용하세요.
 
-## 수집한 데이터
+## 수집되는 데이터 {#data-collected}
 
-수집된 카프카 메트릭에 대한 정보는 [OpenTelemetry 메트릭 매핑][9]을 참조하세요.
+### Kafka 메트릭 수신기 {#kafka-metrics-receiver-1}
 
+{{< mapping-table resource="kafkametrics.csv">}}
 
+### JMX Scraper {#jmx-scraper-1}
 
-## 전체 예제 설정
+#### Kafka 브로커 {#kafka-broker}
 
-Datadog 내보내기를 사용한 전체 작업 예제 설정은 [`kafka.yaml`][5]를 참조하세요.
+{{< mapping-table resource="kafka.csv">}}
 
-## 로깅 출력 예시
+#### Kafka 프로듀서 {#kafka-producer}
+
+{{< mapping-table resource="kafka-producer.csv">}}
+
+#### Kafka 컨슈머 {#kafka-consumer}
+
+{{< mapping-table resource="kafka-consumer.csv">}}
+
+**참고**: Datadog은 메트릭 이름의 하이픈(`-`)을 밑줄(`_`)로 바꿉니다. 예를 들어, `kafka.producer.request-rate`가 `kafka.producer.request_rate`로 변환됩니다.
+
+OpenTelemetry와 Datadog 메트릭 이름 간의 전체 매핑은 [OpenTelemetry Metrics Mapping][7]을 참조하세요.
+
+## 로깅 출력 예시 {#example-logging-output}
 
 ```
-Resource SchemaURL: https://opentelemetry.io/schemas/1.20.0
-Resource attributes:
-     -> service.name: Str(unknown_service:java)
-     -> telemetry.sdk.language: Str(java)
-     -> telemetry.sdk.name: Str(opentelemetry)
-     -> telemetry.sdk.version: Str(1.27.0)
-ScopeMetrics #0
-ScopeMetrics SchemaURL: 
-InstrumentationScope io.opentelemetry.contrib.jmxmetrics 1.27.0-alpha
 Metric #0
 Descriptor:
      -> Name: kafka.message.count
@@ -289,17 +273,11 @@ Timestamp: 2024-01-22 15:51:24.218 +0000 UTC
 Value: 25
 ```
 
-## 앱 예시
-
-이 문서에서 설명하는 설정을 보여주는 다음 [예제 애플리케이션][6]을 참조하세요. 이 예제 애플리케이션은 생산자, 소비자, 브로커, 주키퍼(zookeeper) 인스턴스로 구성되어 있습니다. 이 예시에서는 Kafka 메트릭 수신기, JMX 수신기 및/또는 JMX 메트릭 수집기를 사용하는 것을 보여줍니다.
-
-
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
-[3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
-[4]: /ko/opentelemetry/collector_exporter/log_collection
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
-[6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
-[7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[9]: /ko/opentelemetry/guide/metrics_mapping/#kafka-metrics
+[2]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
+[3]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
+[4]: /ko/opentelemetry/setup/collector_exporter/
+[5]: /ko/opentelemetry/config/log_collection
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
+[7]: /ko/opentelemetry/mapping/metrics_mapping/
+[8]: /ko/opentelemetry/setup/otlp_ingest/metrics/#ensure-only-delta-metrics-are-sent

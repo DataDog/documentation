@@ -38,7 +38,7 @@ Cloud Security Vulnerabilities를 사용하면 한 곳에서 클라우드 보안
 ## 주요 기능 {#key-capabilities}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">선택한 사이트({{< region-param key="dd_site_name" >}})에서는 청구 가능한 호스트를 CSV로 다운로드할 수 없습니다.</div>
+<div class="alert alert-danger">선택한 사이트({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Agentless 또는 통합 Datadog Agent를 사용한 배포
@@ -117,7 +117,7 @@ Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집�
 소스 연결을 설정하는 방법은 CI/CD 컨테이너 이미지 스캔 가이드의 [Dockerfile을 취약점에 연결][22]을 참조하세요.
 
 ## 자동화 및 Jira 통합 {#automation-and-jira-integration}
-[{{< ui >}}security notification rules{{< /ui >}}][17]와 [자동화 파이프라인(미리 보기)][20]을 설정하여 Cloud Security Vulnerabilities를 일상적인 워크플로의 일부로 만드세요.
+[{{< ui >}}security notification rules{{< /ui >}}][17]와 [자동화 파이프라인][20]을 설정하여 Cloud Security Vulnerabilities를 일상적인 워크플로의 일부로 만드십시오:
 - 범위 내에서 악용 가능한 취약점이 탐지되면 알림을 수신
 - Jira 티켓을 자동으로 생성
 - 취약점을 해결하기 위한 SLA를 구성
@@ -150,11 +150,10 @@ Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집�
 [12]: /ko/security/cloud_security_management/setup/agent
 [13]: /ko/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /ko/security/cloud_security_management/troubleshooting/vulnerabilities/
-[16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
-[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[20]: /ko/security/automation_pipelines/
 [21]: /ko/security/cloud_security_management/setup/ci_cd
 [22]: /ko/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score

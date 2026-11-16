@@ -1,105 +1,109 @@
 ---
-description: Pasos para configurar la integración Datadog AWS para una organización
-  AWS
+description: Pasos para configurar la integración de AWS de Datadog para una organización
+  de AWS
 further_reading:
+- link: https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/
+  tag: Centro de arquitectura
+  text: Una guía para integrar más de 100 cuentas de AWS con Datadog
 - link: https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/
   tag: Guía
-  text: Solucionar problemas de integración de AWS
+  text: Solución de problemas de la integración de AWS
 - link: https://www.datadoghq.com/blog/aws-monitoring/
   tag: Blog
-  text: Métricas clave para la monitorización de AWS
+  text: Métricas clave para hacer un seguimiento de AWS
 - link: https://www.datadoghq.com/blog/cloud-security-posture-management/
   tag: Blog
   text: Presentación de Datadog Cloud Security Posture Management
 - link: https://www.datadoghq.com/blog/datadog-workload-security/
   tag: Blog
-  text: Asegura tu infraestructura en tiempo real con Datadog Cloud Workload Security
+  text: Proteja su infraestructura en tiempo real con Datadog Cloud Workload Security
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: Blog
-  text: Presentación de Datadog Security Monitoring
-title: Configuración multicuenta de la integración AWS para organizaciones AWS
+  text: Anuncio de Datadog Security Monitoring
+title: Configuración de la integración de AWS para varias cuentas para AWS Organizations
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta guía proporciona una descripción general del proceso para configurar la [integración de AWS][8] con varias cuentas dentro de una organización de AWS.
 
-En esta guía se proporciona información general del proceso para configurar la [integración AWS][8] con múltiples cuentas dentro de una organización AWS.
+La plantilla de CloudFormation StackSet proporcionada por Datadog automatiza la creación del rol de IAM requerido y las políticas asociadas en cada cuenta de AWS bajo una organización o unidad organizativa (OU), y configura las cuentas dentro de Datadog, eliminando la necesidad de una configuración manual. Una vez configurada, la integración comienza automáticamente a recopilar métricas y eventos de AWS para que pueda comenzar a hacer un seguimiento de su infraestructura.
 
-La plantilla del CloudFormation StackSet proporcionada por Datadog automatiza la creación del rol IAM requerido y las políticas asociadas en cada cuenta AWS bajo una organización o unidad organizativa (OU) y configura las cuentas en Datadog, eliminando la necesidad de configuración manual. Una vez configurada, la integración comienza automáticamente a recopilar métricas y eventos de AWS para que comiences a monitorizar tu infraestructura.
+El StackSet de CloudFormation de Datadog realiza los siguientes pasos:
 
-El Datadog CloudFormation StackSet realiza los siguientes pasos:
+1. Implementa el stack de AWS CloudFormation de Datadog en cada cuenta bajo una organización o unidad organizativa (OU) de AWS.
+2. Crea automáticamente el rol y las políticas de IAM necesarios en las cuentas de destino.
+3. Inicia automáticamente la ingesta de métricas y eventos de AWS CloudWatch desde los recursos de AWS en las cuentas.
+4. Deshabilita opcionalmente la recopilación de métricas para la infraestructura de AWS. Esto es útil para casos de uso específicos de Cloud Cost Management (CCM) o Cloud Security Misconfigurations.
+5. Configura opcionalmente Cloud Security Misconfigurations para monitorear las configuraciones erróneas de recursos en sus cuentas de AWS.
 
-1. Despliega el stack tecnológico CloudFormation de Datadog AWS en todas las cuentas de una organización o unidad organizativa de AWS.
-2. Crea automáticamente el rol y las políticas IAM necesarios en las cuentas de destino.
-3. Inicia automáticamente la ingestión de métricas y eventos de AWS CloudWatch desde los recursos AWS de las cuentas.
-4. Desactiva opcionalmente la recopilación de métricas de la infraestructura AWS. Esto es útil para casos de uso específicos de Cloud Cost Management (CCM) o Cloud Security Management Misconfigurations (CSM Misconfigurations).
-5. También puedes configurar CSM Misconfigurations para monitorizar errores de configuración de recursos en tus cuentas de AWS.
-
-**Nota**: El StackSet no configura el reenvío de logs en las cuentas de AWS. Para configurar logs, sigue los pasos de la guía [Recopilación de logs][2].
-
-
-## Requisitos previos
-
-1. **Acceso a la cuenta de gestión**: Tu usuario de AWS debe poder acceder a la cuenta de gestión de AWS.
-2. **Un administrador de cuenta ha habilitado el acceso de confianza con organizaciones AWS**: Consulta [Habilitar el acceso de confianza con organizaciones AWS][3] para habilitar el acceso de confianza entre StackSets y organizaciones, con el fin de crear y desplegar stacks tecnológicos utilizando permisos gestionados por servicios.
-
-## Configuración
-
-Para empezar, ve a la [página de configuración de la integración AWS][1] en Datadog y haz clic en **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet** (Añadir cuenta(s) de AWS -> Añadir múltiples cuentas de AWS -> CloudFormation StackSet).
-
-Haz clic en **Launch CloudFormation StackSet** (Lanzar CloudFormation StackSet). Esto abre la consola AWS y carga una CloudFormation StackSet nueva. Mantén la opción predeterminada de `Service-managed permissions` en AWS. 
-
-Sigue los pasos que se indican a continuación en la consola AWS para crear y desplegar tu StackSet:
-
-1. **Elegir una plantilla**
-Copia la URL de la plantilla de la página de configuración de la integración Datadog AWS para utilizarla en el parámetro `Specify Template` del StackSet.
+**Nota**: El StackSet no configura el reenvío de registros en las cuentas de AWS. Para configurar los registros, siga los pasos en la guía de [Recopilación de registros][2].
 
 
-2. **Especificar los detalles del StackSet**
-    - Selecciona tu clave de API Datadog en la página de configuración de la integración Datadog AWS y utilízala en el parámetro `DatadogApiKey` del StackSet.
-    - Selecciona tu clave de API Datadog en la página de configuración de la integración Datadog AWS y utilízala en el parámetro `DatadogAppKey` del StackSet.
+## Requisitos previos {#prerequisites}
 
-    - *Opcionalmente:*  
-        a. Activa [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) para analizar tus entornos, hosts, y contenedores de nube en busca de errores de configuración y riesgos de seguridad.
-        b. Desactiva la recopilación de métricas si no quieres monitorizar tu infraestructura AWS. Esto es recomendado sólo para casos de uso específicos de [Cloud Cost Management][6] (CCM) o [CSM Misconfigurations][5].
+1. **Acceso a la cuenta de administración**: Su usuario de AWS necesita poder acceder a la cuenta de administración de AWS.
+2. **Un administrador de cuentas ha habilitado el acceso de confianza con AWS Organizations**: Consulte [Habilitar el acceso de confianza con AWS Organizations][3] para habilitar el acceso de confianza entre StackSets y Organizations, para crear e implementar stacks utilizando permisos administrados por el servicio.
 
-3. **Configurar opciones de StackSet**
-Mantén la opción **Configuración de la ejecución** como `Inactive` para que el StackSet realice una operación por vez.
+**Nota**: La configuración de varias cuentas de AWS Organizations no admite la implementación sobre integraciones de cuentas de AWS configuradas individualmente existentes. Si un StackSet apunta a una cuenta que ya está integrada individualmente con Datadog, la integración de cuenta existente se elimina.
 
-4. **Configurar opciones de despliegue**
-    - Puedes configurar tu `Deployment targets` para desplegar la integración Datadog en una organización o en una o más unidades organizativas.
+## Configuración {#setup}
 
+Para comenzar, vaya a la [página de configuración de integración de AWS][1] en Datadog y haga clic en **Agregar cuenta(s) de AWS** -> **Agregar varias cuentas de AWS** -> **CloudFormation StackSet**.
 
-    - Mantén `Automatic deployment` activado para desplegar automáticamente la integración Datadog AWS en las nuevas cuentas que se añadan a la organización o unidad organizativa.
+Haga clic en **Iniciar CloudFormation StackSet**. Esto abre la consola de AWS y carga un nuevo StackSet de CloudFormation. Mantenga la opción predeterminada de `Service-managed permissions` en AWS.  
+  
+Siga los pasos a continuación en la consola de AWS para crear e implementar su StackSet:
 
-    - En **Especificar regiones**, selecciona una única región en la que quieras desplegar la integración en cada cuenta de AWS.   
-      **NOTA**: El StackSet crea recursos IAM globales que no son específicos de una región. Si se seleccionan varias regiones en este paso, el despliegue fallará. 
-
-    - Define la configuración predeterminada en **Opciones de despliegue** para que sea secuencial, de modo que las operaciones de los StackSets se desplieguen en una región por vez.
-
-5. **Revisar**
-    Ve a la página **Revisión** y haz clic en **Submit** (Enviar). Esto inicia el proceso de creación del Datadog StackSet. Esto puede tardar varios minutos dependiendo del número de cuentas que deban integrarse. Asegúrate de que el StackSet crea correctamente todos los recursos antes de continuar.
-
-    Una vez creados los stacks tecnológicos vuelve a la página de configuración de la integración AWS en Datadog y haz clic en **Done** (Listo). Podrías tardar unos minutos en ver métricas y eventos informar de tus cuentas de AWS recién integradas.
-
-6. *(Opcional)* **Integrar la cuenta de gestión de AWS**
-
-   La cuenta de gestión de AWS no se despliega automáticamente después de esta configuración del StackSet, debido a las restricciones de AWS en los [permisos gestionados por servicios][10].
-   Sigue los pasos indicados en [Datadog-Amazon Cloudformation][9] para integrar la cuenta de gestión de AWS.
+1. **Elija una plantilla**  
+Copie la URL de la plantilla de la página de configuración de integración de AWS de Datadog para usarla en el parámetro `Specify Template` en el StackSet.
 
 
-## Habilitar las integraciones de servicios concretos de AWS
+2. **Especifique los detalles del StackSet**
+    - Seleccione su clave de Datadog API en la página de configuración de integración de AWS de Datadog y utilícela en el parámetro `DatadogApiKey` en el StackSet.
+    - Seleccione su clave de APP de Datadog en la página de configuración de integración de AWS de Datadog y utilícela en el parámetro `DatadogAppKey` en el StackSet.
 
-Consulta la [página Integraciones][4] para obtener una lista completa de las sub-integraciones disponibles que pueden habilitarse en cada cuenta de AWS monitorizada. Cualquier sub-integración que envíe datos a Datadog se instala automáticamente cuando se reciben datos de la integración.
+    - *Opcional:*  
+        1. Habilite [Cloud Security Misconfigurations][5] para escanear su entorno de nube, hosts y contenedores en busca de configuraciones erróneas y riesgos de seguridad.  
+        1. Deshabilite la recopilación de métricas si no desea hacer un seguimiento de su infraestructura de AWS. Esto se recomienda solo para casos de uso específicos de [Cloud Cost Management][6] (CCM) o [Cloud Security Misconfigurations][5].
 
-## Enviar logs
+3. **Configure las opciones de StackSet**  
+Mantenga la opción **Execution configuration** como `Inactive` para que el StackSet realice una operación a la vez.
 
-El StackSet no configura el reenvío de logs en las cuentas de AWS. Para configurar los logs, sigue los pasos de la guía [Recopilación de logs][2].
+4. **Establezca las opciones de implementación**
+    - Puede configurar su `Deployment targets` para implementar la integración de Datadog en toda una Organización o en una o más Unidades Organizativas.
 
-## Desinstalar la integración AWS
 
-Para desinstalar la integración AWS de todas las cuentas y regiones de AWS de una organización, elimina primero todas las StackInstances y después el StackSet. Sigue los pasos descritos en [Eliminar un StackSet][7] para eliminar las StackInstances y el StackSet creados. 
+    - Mantenga `Automatic deployment` habilitado para implementar automáticamente la integración de AWS de Datadog en las nuevas cuentas que se agreguen a la Organización o a la OU.
 
-## Referencias adicionales
+    - En **Specify regions**, seleccione una única región en la que desee implementar la integración en cada cuenta de AWS.   
+      **NOTA**: El StackSet crea recursos IAM globales que no son específicos de una región. Si se seleccionan varias regiones en este paso, la implementación fallará. 
+
+    - Establezca la configuración predeterminada en **Deployment options** como secuencial, para que las operaciones de StackSets se implementen en una región a la vez.
+
+5. **Revisar**  
+    Vaya a la página **Revisar** y haga clic en **Enviar**. Esto inicia el proceso de creación para el StackSet de Datadog. Esto podría tomar varios minutos dependiendo de cuántas cuentas necesiten ser integradas. Asegúrese de que el StackSet cree correctamente todos los recursos antes de continuar.
+
+    Después de que se creen los stacks, regrese a la página de configuración de integración de AWS en Datadog y haga clic en **Done**. Puede tomar unos minutos ver las métricas y los eventos reportados desde sus cuentas de AWS recién integradas.
+
+6. *(Opcional)* **Integrar la cuenta de administración de AWS**
+
+   La cuenta de administración de AWS no se implementa automáticamente después de esta configuración de StackSet, debido a las restricciones de AWS sobre [Service-managed permissions][10].
+   Siga los pasos en [Datadog-Amazon Cloudformation][9] para integrar la cuenta de administración de AWS.
+
+
+## Habilitar integraciones para servicios individuales de AWS {#enable-integrations-for-individual-aws-services}
+
+Consulte la [página de integraciones][4] para obtener una lista completa de las subintegraciones disponibles que se pueden habilitar en cada cuenta de AWS monitoreada. Cualquier subintegración que envíe datos a Datadog se instala automáticamente cuando se reciben datos de la integración.
+
+## Enviar registros {#send-logs}
+
+El StackSet no configura el reenvío de registros en las cuentas de AWS. Para configurar los registros, siga los pasos en la guía de [Recopilación de registros][2].
+
+## Desinstalar la integración de AWS {#uninstall-aws-integration}
+
+Para desinstalar la integración de AWS de todas las cuentas y regiones de AWS en una organización, primero elimine todas las StackInstances y luego el StackSet. Siga los pasos descritos en [Eliminar un StackSet][7] para eliminar las StackInstances y el StackSet creados. 
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

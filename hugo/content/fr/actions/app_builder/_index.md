@@ -5,23 +5,29 @@ aliases:
 - /fr/developers/faq/ui_extensions
 - /fr/service_management/app_builder/
 description: Plateforme low-code pour créer des outils internes avec une interface
-  de glisser-déposer, une prise en charge de JavaScript et une intégration avec des
-  services externes.
+  glisser-déposer, la prise en charge de JavaScript et l'intégration avec des services
+  externes.
 disable_toc: false
 further_reading:
+- link: /actions/datadog_apps/
+  tag: Documentation
+  text: Apps Datadog
+- link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
+  tag: Blog
+  text: 'Datadog Cloud SIEM : stimuler l''innovation dans les opérations de sécurité'
 - link: /actions/actions_catalog/
   tag: Documentation
   text: Action Catalog
 - link: https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/
   tag: Blog
-  text: Créer des outils de surveillance et de remédiation personnalisés avec la solution App Builder
-    Datadog
+  text: Créer des outils de surveillance et de remédiation personnalisés avec la solution
+    Datadog App Builder
 - link: https://www.datadoghq.com/blog/app-builder-remediation/
   tag: Blog
-  text: Corriger les applications créées avec Datadog App Builder
+  text: Corrigez les applications créées avec Datadog App Builder
 - link: https://www.datadoghq.com/blog/ai-assistant-workflows-apps/
   tag: Blog
-  text: Créer des workflows et des applications Datadog en quelques minutes avec notre
+  text: Créez des workflows et des applications Datadog en quelques minutes avec notre
     assistant IA
 - link: https://www.datadoghq.com/blog/pm-app-automation/
   tag: Blog
@@ -29,70 +35,75 @@ further_reading:
     répétitives avec Datadog Workflow Automation, Datastore et App Builder
 - link: https://learn.datadoghq.com/courses/getting-started-app-builder/
   tag: Centre d'apprentissage
-  text: Débuter avec App Builder
+  text: Prise en main d'App Builder
+- link: https://www.datadoghq.com/blog/generate-apps-with-ai/
+  tag: Blog
+  text: Créez des applications personnalisées en quelques secondes avec l'IA conversationnelle
+    dans App Builder
+- link: https://learn.datadoghq.com/courses/app-builder-integration
+  tag: Centre d'apprentissage
+  text: Créez des applications en libre-service avec App Builder pour les intégrations
+    tierces.
 title: App Builder
 ---
+## Présentation {#overview}
 
-Datadog App Builder est une plateforme de création d'applications low-code. Elle simplifie le développement de vos outils internes grâce à une interface de glisser-déposer conviviale et à une prise en charge intégrée de JavaScript. App Builder s'intègre à des services populaires comme AWS et GitHub, ce qui vous permet d'exploiter des données et de vous connecter de manière transparente à des API externes et à des banques de données. En s'intégrant aux capacités existantes de Datadog, App Builder fournit un contexte centralisé qui vous permet de prendre des mesures préventives ou de répondre à des incidents en cours, le tout depuis la même vue que celle que vous utilisez pour le dépannage.
+Datadog App Builder est une plateforme de création d'applications low-code. Elle rationalise le développement de vos outils internes grâce à une interface glisser-déposer conviviale et une prise en charge intégrée de JavaScript. App Builder s'intègre avec des services populaires tels qu'AWS et GitHub, vous permettant d'exploiter des données et de vous connecter de manière transparente à des API et des magasins de données externes. En s'intégrant aux capacités existantes de Datadog, App Builder fournit un contexte centralisé qui vous permet de prendre des mesures préventives ou de répondre à des incidents en cours, le tout depuis la même vue que celle que vous utilisez pour le dépannage.
 
-{{< img src="/actions/app_builder/app-builder-app.png" alt="Une application dans App Builder" style="width:100%;" >}} 
+Pour des applications plus complexes nécessitant un workflow de développement local, un contrôle de version ou une collaboration entre plusieurs ingénieurs, consultez [Datadog Apps][10] pour créer des applications sous forme de code.
 
-## Configurer les actions d'App Builder
+{{< img src="/actions/app_builder/app-builder-app.png" alt="Une application dans App Builder" caption="Une application dans App Builder" style="width:100%;" >}}
 
-Datadog App Builder fournit un [Action Catalog][1] de centaines d'actions pour de multiples intégrations. L'Action Catalog et les identifiants de connexion pour chaque intégration sont partagés avec [Datadog Workflow Automation][2]. S'il n'existe pas d'intégration qui accomplit votre tâche, vous pouvez utiliser des actions génériques telles que les requêtes HTTP et les fonctions JavaScript pour effectuer toute tâche dont votre application a besoin.
+### Exemples de cas d'utilisation {#example-use-cases}
+Vous trouverez ci-dessous quelques exemples des possibilités offertes par les applications App Builder :
+- Identifiez les causes les plus probables d'une régression à partir d'une description textuelle d'un incident et des 150 commits les plus récents d'un dépôt.
+- Surveillez le statut de votre service PagerDuty pour obtenir un contexte complet tout en travaillant sur des incidents.
+- Permettez aux utilisateurs de gérer leurs instances EC2 directement depuis un dashboard.
+- Permettez aux utilisateurs d'explorer et de visualiser le contenu d'un bucket S3.
+- Utilisez une intégration PagerDuty pour voir qui est d'astreinte pour chaque équipe au sein d'une organisation.
+- Résumez la progression de chaque PR dans un dépôt donné.
 
-{{< img src="/actions/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder fournit un Action Catalog de centaines d'actions pour de multiples intégrations." style="width:100%;" >}} 
+## Comment App Builder fonctionne avec les actions {#how-app-builder-works-with-actions}
 
-## Commencer avec les blueprints
+Datadog App Builder fournit un [Action Catalog][1] composé de centaines d'actions à travers de multiples intégrations. L'Action Catalog et les identifiants de connexion pour chaque intégration sont partagés avec [Datadog Workflow Automation][2]. S'il n'existe pas d'intégration permettant d'accomplir votre tâche, vous pouvez utiliser des actions génériques telles que les requêtes HTTP et les fonctions JavaScript pour effectuer toute tâche requise par votre application.
 
-Datadog vous fournit des flux préconfigurés sous la forme de [blueprints][3] prêts à l'emploi pour vous aider à [démarrer][5].
+## Agissez directement depuis les dashboards {#take-action-directly-from-dashboards}
 
-Vous trouverez ci-dessous quelques exemples des possibilités offertes par les applications App Builder :
-- Identifier les causes les plus probables d'une régression sur la base d'une description textuelle d'un incident et des 150 derniers commits d'un référentiel
-- Surveiller le statut de votre service PagerDuty pour bénéficier de tout le contexte nécessaire à la résolution d'incidents
-- Autoriser des utilisateurs à gérer leurs instances EC2 directement à partir d'un dashboard
-- Autoriser des utilisateurs à explorer et visualiser le contenu d'un compartiment S3
-- Utiliser une intégration PagerDuty pour identifier les membres en service de chaque équipe d'une organisation
-- Consulter un résumé de la progression de chaque PR au sein d'un référentiel donné
+Vous pouvez utiliser vos applications depuis la page Applications ou [y accéder directement depuis vos dashboards][6]. Les applications Datadog fonctionnent comme des intégrations natives de dashboard, vous permettant de personnaliser et d'agir sur vos données directement depuis votre dashboard.
 
-{{< img src="/actions/app_builder/app-builder-blueprints-2.png" alt="Blueprints d'apps" style="width:100%;" >}}
+{{< img src="/actions/app_builder/app-builder-embedded-dashboard-2.png" alt="Une application ECS Task Balancer intégrée dans un dashboard, avec un curseur cliquant sur le bouton Scale Service" caption="Une application ECS Task Balancer intégrée dans un dashboard, avec un curseur cliquant sur un bouton de celle-ci" style="width:100%;" >}}
 
-## Effectuer une action directement depuis les dashboards 
+### Applications créées par Datadog {#apps-created-by-datadog}
 
-Vous pouvez utiliser vos applications depuis la page Apps ou [y accéder directement depuis vos dashboards][6]. Les applications Datadog fonctionnent comme des intégrations de dashboard natives, ce qui vous permet de personnaliser et d'effectuer des actions sur vos données directement dans le contexte de votre dashboard.
+Les applications créées par Datadog sont des applications intégrées aux dashboards d'intégration. Elles fonctionnent sans avoir à les créer ; il vous suffit de choisir une connexion.
 
-{{< img src="/actions/app_builder/app-builder-embedded-dashboard.png" alt="Une application intégrée dans un dashboard" style="width:100%;" >}} 
+Par exemple, le [dashboard d'intégration EC2][7] propose une application de gestion d'instances EC2. Lorsque vous chargez le dashboard, l'application est alimentée avec des données de démonstration :
 
-### Applications créées par Datadog
+{{< img src="/actions/app_builder/ootb-app-ec2-demo-data.png" alt="Une application EC2 créée par Datadog" caption="Une application EC2 créée par Datadog" style="width:100%;" >}}
 
-Les applications créées par Datadog sont des applications intégrées dans les dashboards d'intégration. Elles fonctionnent sans avoir à les créer ; il vous suffit de choisir une connexion.
+Pour utiliser l'application avec vos données, cliquez sur {{< ui >}}\+ Connect Data{{< /ui >}}, puis créez une nouvelle connexion ou sélectionnez-en une existante. Une fois votre sélection enregistrée, l'application affiche les données de votre connexion.
 
-Par exemple, le [dashboard d'intégration EC2][7] propose une application de gestion d'instances EC2. Lorsque vous chargez le dashboard, l'application est remplie avec des données de démonstration :
+Vous pouvez modifier la connexion sélectionnée en cliquant sur {{< ui >}}Change Connection{{< /ui >}} dans l'application.
 
-{{< img src="/actions/app_builder/ootb-app-ec2-demo-data.png" alt="Application EC2 créée par Datadog, remplie avec des données de démonstration" style="width:100%;" >}}
+## Dashboard App Builder Overview {#app-builder-overview-dashboard}
 
-Pour utiliser l'application avec vos données, cliquez sur **+ Connect Data**, puis créez une nouvelle connexion ou sélectionnez une connexion existante. Une fois votre sélection enregistrée, l'application affiche les données de votre connexion. 
+Le dashboard App Builder Overview offre une vue d'ensemble de vos applications Datadog. Pour trouver le dashboard, accédez à votre [Dashboard List][8] et recherchez `App Builder Overview`.
 
-Vous pouvez modifier la connexion sélectionnée en cliquant sur **Change Connection** dans l'application.
+{{< img src="actions/app_builder/app-builder-overview-dashboard-2.png" alt="Le dashboard App Builder Overview" caption="Le dashboard App Builder Overview"style="width:100%;" >}}
 
-## Dashboard App Builder Overview
-
-Le dashboard App Builder Overview fournit une vue d'ensemble de haut niveau de vos applications Datadog. Pour trouver le dashboard, accédez à votre [liste de dashboards][8] et recherchez `App Builder Overview`.
-
-{{< img src="actions/app_builder/app-builder-overview-dashboard.png" alt="Le dashboard App Builder Overview" style="width:100%;" >}}
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Avez-vous des questions ou des commentaires ? Rejoignez le canal **#app-builder** sur le [slack de la communauté Datadog][4].
+<br>Avez-vous des questions ou des commentaires ? Rejoignez le canal **#app-builder** sur le [Slack de la communauté Datadog][4].
 
 [1]: https://app.datadoghq.com/actions/action-catalog/
-[2]: /fr/service_management/workflows/
+[2]: /fr/actions/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
-[4]: https://datadoghq.slack.com/
-[5]: /fr/service_management/app_builder/build/#build-an-app-from-a-blueprint
-[6]: /fr/service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
+[4]: https://chat.datadoghq.com/
+[5]: /fr/actions/app_builder/build/#build-an-app-from-a-blueprint
+[6]: /fr/actions/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list
+[10]: /fr/actions/datadog_apps/

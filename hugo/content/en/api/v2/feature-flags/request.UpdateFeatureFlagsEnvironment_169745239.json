@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "environments",
+    "attributes": {
+      "name": "Updated Privacy Example-Feature-Flag",
+      "queries": [
+        "updated-privacy-example-feature-flag"
+      ],
+      "observe_full_evaluation_data": true
+    }
+  }
+}

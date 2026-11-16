@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/bits_ai/bits_ai_sre/configure/
-title: インテグレーションと設定の構成
+title: Integrationsと設定
 ---
 Bits Investigation の機能を拡張するためインテグレーションをセットアップします。
 - [サードパーティの監視可能性および SCM プラットフォームと統合](#integrate-with-third-party-observability-and-scm-platforms)し、外部テレメトリとコードコンテキストで調査を強化します。

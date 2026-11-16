@@ -77,6 +77,10 @@ Datadog APM でインスツルメンテーションされたアプリケーシ�
 
 [Prompt Management][7] は、LLM アプリケーションで使用されるプロンプトの一元化されたレジストリを提供します。Datadog、Python SDK、または API を通じてプロンプトを作成およびバージョン管理し、実行時に SDK を使用して取得できます。これにより、プロンプトの反復作業をアプリケーションのデプロイサイクルから切り離すことができます。詳細については、[Prompt Management のドキュメント][7] を参照してください。
 
+### Prompt Experimentation {#prompt-experimentation}
+
+[Prompt Experimentation][8] では、管理対象のプロンプトバージョンを A/B テストで比較し、Datadog がリグレッションを検出すると一時停止する Guarded Rollouts を使用して、バージョンを段階的にデプロイできます。
+
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +92,4 @@ Datadog APM でインスツルメンテーションされたアプリケーシ�
 [5]: /ja/llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /ja/llm_observability/configure/prompt_management
+[8]: /ja/llm_observability/configure/prompt_experimentation

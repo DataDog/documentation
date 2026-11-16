@@ -83,7 +83,7 @@ Utilisez la [page de gestion des Service Level Objectives][2] de Datadog pour cr
 1. Sur la [page de gestion des SLO][2], sélectionnez {{< ui >}}New SLO +{{< /ui >}}.
 2. Sélectionnez le type de SLO. Vous pouvez créer un SLO avec l'un des types suivants : [Basé sur une métrique][3], [Basé sur un monitor][4] ou [Tranches temporelles][5].
 3. Définissez une cible et une fenêtre temporelle glissante (7, 30 ou 90 derniers jours) pour le SLO. Datadog vous recommande de rendre la cible plus stricte que vos SLA stipulés. Cette fenêtre temporelle est affichée sur les listes de SLO. Par défaut, la fenêtre temporelle la plus courte est sélectionnée.
-4. Enfin, donnez un titre au SLO, décrivez-le plus en détail ou ajoutez des liens dans la description, ajoutez des étiquettes et enregistrez-le.
+4. Enfin, donnez un titre au SLO, décrivez-le plus en détail ou ajoutez des liens dans la description, ajoutez des tags et enregistrez-le.
 
 Une fois le SLO configuré, sélectionnez-le dans la [vue de liste Service Level Objectives][2] pour ouvrir le panneau latéral des détails. Le panneau latéral affiche le pourcentage de statut global et le budget d'erreur restant pour chacune des cibles du SLO, ainsi que des barres de statut (SLO basés sur des monitors) ou des graphiques à barres (SLO basés sur des métriques) de l'historique du SLI. Si vous avez créé un SLO groupé basé sur un monitor en utilisant un [monitor multi-alertes][6] ou un SLO groupé basé sur une métrique en utilisant la clause [`sum by`][7], le pourcentage de statut et le budget d'erreur restant pour chaque groupe individuel sont affichés en plus du pourcentage de statut global et du budget d'erreur restant.
 
@@ -105,17 +105,13 @@ Définir une cible de 100 % signifie avoir un budget d'erreur de 0 %, puisque 
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
-## Modifier un SLO {#edit-an-slo}
-
-Pour modifier un SLO, passez le curseur sur la rangée du SLO dans la liste et cliquez sur l'icône en forme de crayon qui s'affiche à droite de la rangée. Vous pouvez également cliquer sur la rangée pour ouvrir le volet latéral détaillé et sélectionner le bouton de modification à partir de l'icône en forme d'engrenage en haut à droite du volet.
-
 ## Autorisations {#permissions}
 
 ### Accès basé sur les rôles {#role-based-access}
 
 Tous les utilisateurs peuvent consulter les SLO et les [corrections de statut des SLO](#slo-status-corrections), quel que soit leur [rôle][10] associé. Seuls les utilisateurs rattachés à des rôles disposant de l'autorisation `slos_write` peuvent créer, modifier et supprimer des SLO.
 
-Pour créer, modifier et supprimer des corrections de statut, les utilisateurs doivent disposer des autorisations `slos_corrections`. Un utilisateur disposant de cette autorisation peut effectuer des corrections de statut, même s'il n'a pas l'autorisation de modifier ces SLO. Pour obtenir la liste complète des autorisations, consultez la [documentation RBAC][11].
+Pour créer, modifier et supprimer des corrections de statut, les utilisateurs doivent disposer de l'autorisation `slos_corrections`. Un utilisateur disposant de cette autorisation peut effectuer des corrections de statut, même s'il ne possède pas l'autorisation `slos_write`. Pour créer une correction pour un seul SLO doté de [contrôles d'accès granulaires](#granular-access-controls), un utilisateur doit également disposer d'un accès en modification à ce SLO. Les [corrections basées sur des tags](#tag-based-corrections) ne vérifient pas les contrôles d'accès granulaires ; elles s'appliquent donc à tous les SLO correspondant à la requête, y compris les SLO restreints. Pour obtenir la liste complète des autorisations, consultez la [documentation RBAC][11].
 
 ### Contrôles d'accès granulaires {#granular-access-controls}
 
@@ -137,6 +133,10 @@ Pour conserver votre accès en modification au SLO, le système exige que vous i
 
 **Remarque** : Les utilisateurs peuvent créer des SLO sur n'importe quel monitor même s'ils n'ont pas les autorisations d'écriture sur ce monitor. De même, les utilisateurs peuvent créer des alertes SLO même s'ils n'ont pas les autorisations d'écriture sur les SLO. Pour plus d'informations sur les autorisations RBAC pour les monitors, consultez la [documentation RBAC][12] ou le [guide sur la configuration du RBAC pour les monitors][13].
 
+## Modification d'un SLO {#editing-an-slo}
+
+Pour modifier un SLO, passez le curseur sur la rangée du SLO dans la liste et cliquez sur l'icône en forme de crayon qui s'affiche à droite de la rangée. Vous pouvez également cliquer sur la rangée pour ouvrir le volet latéral détaillé et sélectionner le bouton de modification à partir de l'icône en forme d'engrenage en haut à droite du volet.
+
 ## Recherche de SLO {#searching-slos}
 
 La [page de gestion des Service Level Objectives][2] vous permet d'effectuer une recherche avancée sur tous les SLO afin de trouver, consulter, modifier, cloner ou supprimer des SLO à partir des résultats de recherche.
@@ -150,6 +150,18 @@ La recherche avancée vous permet d'interroger les SLO en combinant différents 
 * `tags` - centre de données, environnement, service, équipe, etc.
 
 Pour effectuer une recherche, utilisez les cases à cocher des facettes sur la gauche et la barre de recherche en haut. Lorsque vous cochez les cases, la barre de recherche se met à jour avec la requête équivalente. De même, lorsque vous modifiez la requête de la barre de recherche (ou que vous en rédigez une à partir de zéro), les cases à cocher se mettent à jour pour refléter le changement. Les résultats de la requête se mettent à jour en temps réel à mesure que vous modifiez la requête ; il n'y a pas de bouton « Rechercher » sur lequel cliquer.
+
+## Récupération de SLO supprimés {#recovering-deleted-slos}
+
+<div class="alert alert-warning">Les SLO générés automatiquement pour les <a href="/synthetics/test_suites/#service-level-objectives">collections de tests Synthetic</a> ne peuvent pas être restaurés.</div>
+
+Les SLO supprimés sont conservés pendant 30 jours avant d'être définitivement supprimés. Pour restaurer un SLO récemment supprimé :
+
+1. Sur la [page de gestion des SLO][2], cliquez sur l'icône d'engrenage **Settings** dans le coin supérieur droit.
+1. Sélectionnez le ou les SLO que vous souhaitez restaurer.
+1. Cliquez sur {{< ui >}}Restore{{< /ui >}}.
+
+**Remarque** : Les corrections de statut des SLO supprimés ne peuvent pas être restaurées. Ce processus de récupération s'applique uniquement aux SLO supprimés.
 
 ## Visualisation des SLO {#viewing-slos}
 
@@ -272,10 +284,6 @@ Avec les [monitors d'événement][28], vous pouvez configurer des notifications 
 
 ## Widgets SLO {#slo-widgets}
 
-{{< learning-center-callout header="Essayez de créer des Business-Critical Insights à l'aide de dashboards et de SLO dans le Learning Center" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Apprenez gratuitement sur une capacité de calcul cloud réelle et un compte d'essai Datadog. Inscrivez-vous dès aujourd'hui pour en savoir plus sur la création de dashboards pour suivre les SLO.
-{{< /learning-center-callout >}}
-
 Une fois votre SLO créé, vous pouvez visualiser les données grâce aux dashboards et widgets.
   - Utilisez le widget SLO pour visualiser le statut d'un seul SLO
   - Utilisez le widget Liste SLO pour visualiser un ensemble de SLO
@@ -291,16 +299,20 @@ Les corrections de statut vous permettent d'exclure des périodes spécifiques d
 - Veiller à ce que les problèmes temporaires causés par les déploiements n'affectent pas négativement vos SLO
 
 Lorsque vous appliquez une correction, la période spécifiée n'est plus incluse dans les calculs du SLO.
-- Pour les SLO basés sur des monitors, la fenêtre temporelle de correction n'est pas comptabilisée.
 - Pour les SLO basés sur des métriques, tous les événements bons et mauvais dans la fenêtre de correction ne sont pas comptabilisés.
-- Pour les SLO de type Time Slice, la fenêtre temporelle de correction est traitée comme du temps de disponibilité.
+- Pour les SLO basés sur des tranches horaires, la fenêtre temporelle de correction est traitée comme du temps de disponibilité.
+- Pour les SLO basés sur des monitors, la fenêtre temporelle de correction n'est pas comptabilisée.
 
-Vous avez la possibilité de créer des corrections ponctuelles pour des ajustements ad hoc, ou des corrections récurrentes pour des ajustements prévisibles qui se produisent à un rythme régulier. Les corrections ponctuelles nécessitent une heure de début et de fin, tandis que les corrections récurrentes nécessitent une heure de début, une durée et un intervalle. Les corrections récurrentes sont basées sur la [spécification RRULE de la RFC 5545 iCalendar][24]. Les règles prises en charge sont `FREQ`, `INTERVAL`, `COUNT` et `UNTIL`. La spécification d'une date de fin pour les corrections récurrentes est facultative si vous avez besoin que la correction se répète indéfiniment.
+Chaque correction s'applique soit à un seul SLO, soit à tous les SLO correspondant à une requête par tag :
+- **By SLO name** : La correction s'applique à un seul SLO.
+- **By tags** : La correction s'applique à chaque SLO dont les tags correspondent à une requête, telle que `env:prod service:checkout`. Cela inclut les SLO que vous créez ou taguez après avoir créé la correction. Pour plus d'informations, consultez [Corrections basées sur des tags](#tag-based-corrections).
+
+Vous avez la possibilité de créer des corrections ponctuelles pour des ajustements ad hoc, ou des corrections récurrentes pour des ajustements prévisibles qui se produisent à un rythme régulier. Les corrections ponctuelles nécessitent une heure de début et de fin, tandis que les corrections récurrentes nécessitent une heure de début, une durée et un intervalle. Les corrections récurrentes sont basées sur la [spécification RRULE de la RFC 5545 iCalendar][24]. Les règles prises en charge sont `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` et `BYDAY`. La spécification d'une date de fin pour les corrections récurrentes est facultative si vous avez besoin que la correction se répète indéfiniment.
 
 Pour l'un ou l'autre type de correction, vous devez sélectionner une catégorie de correction qui indique pourquoi la correction est effectuée. Les catégories disponibles sont {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}} et {{< ui >}}Other{{< /ui >}}. Vous pouvez éventuellement inclure une description pour fournir un contexte supplémentaire si nécessaire.
 
 Chaque SLO a une limite maximale de corrections pouvant être configurées pour garantir les performances des requêtes. Ces limites ne s'appliquent qu'aux 90 derniers jours par SLO, donc les corrections pour des périodes antérieures aux 90 derniers jours ne sont pas comptabilisées dans votre limite. Cela signifie que :
-- Si l'heure de fin d'une correction ponctuelle est antérieure aux 90 derniers jours, elle est comptabilisée dans votre limite.
+- Si l'heure de fin d'une correction ponctuelle remonte à plus de 90 jours, elle n'est pas comptabilisée dans votre limite.
 - Si l'heure de fin de la dernière répétition d'une correction récurrente est antérieure aux 90 derniers jours, elle n'est pas comptabilisée dans votre limite.
 
 Voici les limites de correction sur 90 jours applicables par SLO :
@@ -311,24 +323,71 @@ Voici les limites de correction sur 90 jours applicables par SLO :
 | Récurrence quotidienne   | 2             |
 | Récurrence hebdomadaire  | 3             |
 | Récurrence mensuelle | 5             |
+| Récurrence annuelle  | 20            |
 
-Vous pouvez configurer les corrections d'état via l'interface utilisateur en sélectionnant {{< ui >}}Correct status{{< /ui >}} dans le panneau latéral de votre SLO, l'[API de corrections d'état SLO][25] ou une [ressource Terraform][26].
+Ces limites s'appliquent uniquement aux corrections créées par nom de SLO. Elles ne s'appliquent pas aux [corrections basées sur des tags](#tag-based-corrections).
+
+Vous pouvez configurer les corrections de statut dans l'interface utilisateur, avec l'[API de corrections de statut SLO][25] ou avec une [ressource Terraform][26].
+
+Pour créer une correction basée sur des tags avec l'API ou Terraform, définissez l'attribut `slo_query` au lieu de `slo_id`.
+
+#### Corrections basées sur des tags {#tag-based-corrections}
+
+Une correction basée sur des tags utilise une requête pour sélectionner des SLO par leurs tags, afin que vous puissiez appliquer une seule correction à de nombreux SLO. Par exemple, utilisez une correction basée sur des tags pour couvrir les périodes en dehors des heures de bureau pour tous les SLO d'une équipe ou tous les SLO d'un environnement.
+
+Les corrections basées sur des tags sont évaluées lorsque le statut du SLO est calculé, de sorte que la correction s'applique à tous les SLO qui correspondent à la requête à ce moment-là. Si vous créez un nouveau SLO ou ajoutez des tags à un SLO existant qui correspondent à la requête, la correction s'applique également à ce SLO.
+
+Les requêtes utilisent la [syntaxe de recherche d'événements][29], et chaque terme est comparé aux tags des SLO. Vous pouvez combiner des termes avec `AND`, `OR` et `NOT` (ou `-`), grouper des termes avec des parenthèses et utiliser `*` comme caractère générique. Les termes séparés par un espace sont combinés avec `AND`.
+
+| Requête                          | SLO correspondants                                            |
+| ------------------------------ | ------------------------------------------------------- |
+| `env:prod`                     | Avec le tag `env:prod`                                       |
+| `team:payments -env:staging`   | Avec le tag `team:payments` et sans le tag `env:staging`     |
+| `team:(payments OR checkout)`  | Avec le tag `team:payments` ou le tag `team:checkout`               |
+| `service:web-*`                | Avec un tag `service` dont la valeur commence par `web-`     |
+
+Une requête ne peut pas être vide ou composée uniquement de `*`.
+
+#### Gérer les corrections dans votre organisation {#manage-corrections-across-your-organization}
+
+L’[onglet {{< ui >}}Corrections{{< /ui >}}][31] de la [page de gestion des SLO][2] répertorie toutes les corrections de statut dans votre organisation, y compris les corrections pour un seul SLO et les corrections basées sur des tags. Depuis cette page, vous pouvez créer, modifier et supprimer des corrections. Utilisez la barre de recherche et les facettes sur la gauche pour filtrer les corrections par {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}} et {{< ui >}}SLO Tags{{< /ui >}}. 
+
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="L’onglet Corrections de la page de gestion des SLO présente les corrections avec leur portée, leur durée, leur planification et leur auteur, ainsi que des facettes de filtrage sur la gauche." style="width:80%;">}}
+
+#### Créer des corrections à partir des périodes d'indisponibilité des moniteurs {#create-corrections-from-monitor-downtimes}
+
+Pour créer une correction à partir d'une période d'indisponibilité, vous avez besoin de l'autorisation `slos_corrections`.
+
+Lorsque vous planifiez une nouvelle [période d'indisponibilité de moniteur][30] par tags de moniteur, Datadog recherche les SLO qui possèdent les mêmes tags. Si des SLO correspondent, l'éditeur de période d'indisponibilité affiche une carte avec le nombre de SLO correspondants. Pour créer une correction pour la même fenêtre temporelle :
+
+1. Sur la carte, cliquez sur {{< ui >}}Preview SLO Correction{{< /ui >}}. Le formulaire de correction s’ouvre avec {{< ui >}}By Tags{{< /ui >}} sélectionné, les tags de moniteur de la période d’indisponibilité comme requête, et les champs de planification et de message préremplis à partir de cette période d’indisponibilité.
+2. Examinez la requête et les SLO qui y correspondent, sélectionnez un {{< ui >}}Category{{< /ui >}} et cliquez sur {{< ui >}}Apply{{< /ui >}}.
+3. Enregistrez la période d'indisponibilité. Datadog crée la correction de SLO.
+
+**Remarque** : La carte n'apparaît pas lorsque vous modifiez une période d'indisponibilité existante.
+
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="La page Schedule Downtime, avec un périmètre défini par des tags de moniteur. Une carte en surbrillance en bas à droite affiche « We found 5 SLOs with this scope » et contient un lien Preview SLO Correction." style="width:80%;">}}
 
 #### Accès dans l'interface utilisateur {#access-in-the-ui}
 
-Pour effectuer des corrections de statut SLO dans l'interface, procédez comme suit :
+Pour créer une correction de statut dans l'interface utilisateur :
 
-1. Créez un nouveau SLO ou cliquez sur un SLO existant.
-2. Accédez à la vue du panneau latéral des détails d'un SLO.
-3. Sous l'icône en forme d'engrenage, sélectionnez {{< ui >}}Correct status{{< /ui >}} pour ouvrir la fenêtre modale de création de correction.
-4. Sélectionnez une {{< ui >}}Correction Category{{< /ui >}}.
-5. Choisissez entre {{< ui >}}One-Time{{< /ui >}} et {{< ui >}}Recurring{{< /ui >}} dans le {{< ui >}}Select the Time Correction Window{{< /ui >}}, et spécifiez la période que vous souhaitez corriger.
-6. Ajoutez éventuellement {{< ui >}}Notes{{< /ui >}}.
-7. Cliquez sur {{< ui >}}Apply Correction{{< /ui >}}.
+1. Ouvrez le formulaire de correction de l'une des manières suivantes :
+   - Sur l'onglet [{{< ui >}}Corrections{{< /ui >}}][31] de la [page de gestion des SLO][2], cliquez sur {{< ui >}}New Correction{{< /ui >}}.
+   - Dans le panneau latéral des détails d'un SLO, sous l'icône d'engrenage, sélectionnez {{< ui >}}Correct status{{< /ui >}}. Le formulaire s'ouvre avec ce SLO sélectionné.
+2. Sous {{< ui >}}Select SLOs and category{{< /ui >}}, choisissez la portée de la correction :
+   - {{< ui >}}By Tags{{< /ui >}} : Saisissez une requête de tag. Le formulaire affiche les SLO qui correspondent à la requête.
+   - {{< ui >}}By SLO Name{{< /ui >}} : Recherchez et sélectionnez un seul SLO.
+3. Sélectionnez un {{< ui >}}Category{{< /ui >}}.
+4. Sous {{< ui >}}Select time window{{< /ui >}}, choisissez {{< ui >}}One-Time{{< /ui >}} ou {{< ui >}}Recurring{{< /ui >}} et spécifiez la période à corriger. Pour les corrections récurrentes, utilisez l'onglet {{< ui >}}Basic{{< /ui >}} pour définir un calendrier ou l'onglet {{< ui >}}Advanced{{< /ui >}} pour saisir une règle RRULE.
+5. Vous pouvez également ajouter des notes sous {{< ui >}}Add any notes{{< /ui >}}.
+6. Cliquez sur {{< ui >}}Apply{{< /ui >}}.
 
-{{< img src="service_level_objectives/slo-corrections-ui.png" alt="Interface utilisateur de correction des SLO" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="Le formulaire New SLO Correction, avec les options By Tags et One-Time sélectionnées, affichant les champs pour une requête de tag, une catégorie, une fenêtre temporelle et des notes." style="width:80%;">}}
 
-Pour afficher, modifier et supprimer les corrections d'état existantes, cliquez sur l'onglet {{< ui >}}Corrections{{< /ui >}} en haut du panneau latéral détaillé d'un SLO.
+**Remarque** : Une fois que vous avez créé une correction, vous ne pouvez plus modifier sa portée ni passer d'une correction ponctuelle à une correction récurrente, ou inversement.
+
+Pour afficher, modifier et supprimer des corrections de statut existantes, utilisez l'onglet {{< ui >}}Corrections{{< /ui >}} sur la [page de gestion des SLO][2] ou l'onglet {{< ui >}}Corrections{{< /ui >}} dans le panneau latéral des détails d'un SLO. L'onglet du panneau latéral inclut les corrections basées sur des tags qui s'appliquent au SLO.
 
 #### Visualisation des corrections d'état {#visualizing-status-corrections}
 
@@ -374,3 +433,6 @@ La vue Calendrier des SLO est disponible sur la [page de gestion des SLO][2]. Da
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /fr/events/explorer/
 [28]: /fr/monitors/types/event/
+[29]: /fr/events/explorer/searching/
+[30]: /fr/monitors/downtimes/
+[31]: https://app.datadoghq.com/slo/corrections

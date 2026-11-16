@@ -1,3 +1,3 @@
 ---
-title: Listez les événements pour une expérience Agent Observability.
+title: Listez les événements d’une expérience Agent Observability
 ---
