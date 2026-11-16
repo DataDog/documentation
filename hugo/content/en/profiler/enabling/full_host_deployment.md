@@ -151,7 +151,7 @@ spec:
               memory: "1Gi"
 ```
 
-The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix in the image override with your preferred registry prefix. See [Changing your container registry][2].
+The preview image is available in Datadog's container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix in the image override with your preferred registry prefix. See [Changing your container registry][2].
 
 Apply the updated `DatadogAgent` custom resource through your usual workflow.
 
