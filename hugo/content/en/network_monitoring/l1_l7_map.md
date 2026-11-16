@@ -62,19 +62,9 @@ Before you use the map, open [CNM][14] and check that traffic appears for the re
 
 ## How the L1/L7 Map works
 
-### Investigation modes
-
-{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 landing page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
-
-The L1/L7 Map has two investigation modes:
-
-Single resource
-: Start with one service, container, pod, or host. You cannot start from a network device. The map shows what the resource runs on, what runs on it, and the resources it communicates with. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
-
-Source/destination pair
-: Select a source and a destination. The map shows the resources that each one runs on, the traffic observed between them, and the hop-by-hop network path, if available. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
-
 ### Map layout
+
+The map has two investigation modes, single resource and source/destination pair, and its layout depends on the mode. To choose a mode, see the [Open the map](#open-the-map) section.
 
 The map shows two types of relationships between resources:
 
@@ -109,7 +99,7 @@ In source/destination pair mode, the map shows the source's composition stack on
 - **Network connections**: Traffic observed by CNM between resources in the two stacks, such as container to container.
 - **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_. <!-- TODO: Confirm this definition of a network path segment. -->
 
-### Map status
+### Map status and network signals
 
 The color of a resource or connection shows its status:
 
@@ -139,7 +129,7 @@ The map shows only the signals that are available for each resource or connectio
 
 Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
-The map also shows only what Datadog observed during the selected time frame. A missing connection, hop, or value does not mean that an outage occurred, that no dependency exists, or that the resource is healthy.
+A missing value does not mean that the resource is healthy.
 
 ## Navigate the L1/L7 Map
 
@@ -163,10 +153,12 @@ You can also open the map from other Datadog products. When you open the map fro
 | Infrastructure List | The **Network** tab of a host's side panel. |
 -->
 
-On the L1/L7 page, select a mode:
+On the L1/L7 page, select an investigation mode:
 
-- **Single resource**: In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list.
-- **Source/destination pair**: Search for and select a **Source** and a **Destination**.
+{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 landing page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
+
+- **Single resource**: Start with one service, container, pod, or host. The map shows what the resource runs on, what runs on it, and the resources it communicates with. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
+- **Source/destination pair**: Select a source and a destination. The map shows the resources that each one runs on, the traffic observed between them, and the hop-by-hop network path, if available. Search for and select a **Source** and a **Destination**. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
 
 {{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 landing page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
 
@@ -200,7 +192,7 @@ The summary for a resource shows its type, status, and available metrics. From t
 
 #### Connection summaries
 
-The summary for a connection shows its **Retransmits**, **TCP failures**, **Sent / received** throughput, and **RTT**. For what each signal measures, see the [Map status](#map-status) section.
+The summary for a connection shows its **Retransmits**, **TCP failures**, **Sent / received** throughput, and **RTT**. For what each signal measures, see the [Map status and network signals](#map-status-and-network-signals) section.
 
 From the summary, click **Explore connection** to open the connection in source/destination pair mode, or click **View connection in CNM**.
 
@@ -237,7 +229,7 @@ In source/destination pair mode, the details pane shows the following for the co
 
 - The status of the source and the destination, such as **UP** or **DOWN**.
 - **View connections**, which opens the connections in CNM. Use the dropdown next to the link to open the connections in another product.
-- The network signals for the connection. For definitions, see the [Map status](#map-status) section.
+- The network signals for the connection. For definitions, see the [Map status and network signals](#map-status-and-network-signals) section.
 - A graph of network metrics, such as RTT, over the selected time frame.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
@@ -287,6 +279,7 @@ Use this workflow when two resources cannot communicate, or communicate slowly, 
 - The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][13].
 - The map does not compare forward and reverse paths, compare paths over time, or detect route changes. To compare a path before and after an incident, use the [visual comparison][21] in Network Path.
 - The map does not correlate deployments with network changes.
+- The map shows only what Datadog observed during the selected time frame. A missing connection or hop does not mean that an outage occurred or that no dependency exists.
 
 ## Troubleshooting
 
@@ -324,7 +317,7 @@ Check whether the device is monitored by [Network Device Monitoring][11]. If it 
 
 ### A status or metric is different in another product
 
-Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or the [Infrastructure List][17]. For more information, see the [Map status](#map-status) section.
+Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or the [Infrastructure List][17]. For more information, see the [Map status and network signals](#map-status-and-network-signals) section.
 
 <!-- TODO: Confirm empty-state behavior and in-app CTA copy with eng before Preview. -->
 
