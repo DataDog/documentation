@@ -11,6 +11,7 @@ import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
 import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/no-cycle
+import { isDifferentPage } from '../helpers/history';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -50,8 +51,11 @@ function loadPage(newUrl) {
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function () {
             // cancel httprequest if hash is changed to prevent page replacing
-            window.addEventListener('hashchange', function () {
-                httpRequest.abort();
+            // Back or Forward to a different page that has a hash also fires hashchange, so only cancel on same-page changes
+            window.addEventListener('hashchange', function (event) {
+                if (!isDifferentPage(new URL(event.oldURL).pathname, event.newURL)) {
+                    httpRequest.abort();
+                }
             });
 
             if (httpRequest.readyState !== XMLHttpRequest.DONE) {
