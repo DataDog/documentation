@@ -128097,7 +128097,7 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
       type: object
     SecurityMonitoringCriticalAssetSeverity:
-      description: Severity associated with this critical asset. Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
+      description: Severity associated with this dynamic severity rule (previously called critical assets). Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
       enum:
         - info
         - low
@@ -253333,7 +253333,7 @@ paths:
           - security_monitoring_cws_agent_rules_read
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
-      description: Get the list of all critical assets.
+      description: Get the list of all dynamic severity rules (previously called critical assets).
       operationId: ListSecurityMonitoringCriticalAssets
       responses:
         "200":
@@ -253367,8 +253367,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 52
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     post:
-      description: Create a new critical asset.
+      description: Create a new dynamic severity rule (previously called critical assets).
       operationId: CreateSecurityMonitoringCriticalAsset
       requestBody:
         content:
@@ -253427,9 +253431,13 @@ paths:
         - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 53
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
     get:
-      description: Get the list of critical assets that affect a specific existing rule by the rule's ID.
+      description: Get the list of dynamic severity rules (previously called critical assets) that affect a specific existing rule by the rule's ID.
       operationId: GetCriticalAssetsAffectingRule
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringRuleID"
@@ -253467,9 +253475,13 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
   /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
     delete:
-      description: Delete a specific critical asset.
+      description: Delete a specific dynamic severity rule (previously called critical assets).
       operationId: DeleteSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253491,8 +253503,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
     get:
-      description: Get the details of a specific critical asset.
+      description: Get the details of a specific dynamic severity rule (previously called critical assets).
       operationId: GetSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253530,8 +253546,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 54
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     patch:
-      description: Update a specific critical asset.
+      description: Update a specific dynamic severity rule (previously called critical assets).
       operationId: UpdateSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -253594,6 +253614,10 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/integration_config:
     get:
       description: |-
