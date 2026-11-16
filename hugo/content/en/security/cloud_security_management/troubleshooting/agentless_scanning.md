@@ -80,8 +80,6 @@ See [Deploying Agentless Scanning][7] for detailed guidance on recommended deplo
 
 Agentless Scanning is not available in GovCloud and is not FIPS compliant. This applies to both self-hosted and Datadog-hosted scanning.
 
-<!-- TODO(DOCS-16346): Confirm with SME that the GovCloud/FIPS limitation applies to Datadog-hosted scanning. -->
-
 ## Scans run in a different region than your resources
 
 With Datadog-hosted scanning, Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For details, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.

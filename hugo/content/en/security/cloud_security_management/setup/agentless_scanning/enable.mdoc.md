@@ -52,7 +52,7 @@ Setup takes approximately 30 minutes per cloud account:
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
 {% alert %}
-Datadog-hosted scanning is in Preview and supports AWS accounts only. To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
+Datadog-hosted scanning is in Preview and supports AWS accounts only. To request access, [join the Preview](https://www.datadoghq.com/product-preview/agentless-saas-mode/). To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
 {% /alert %}
 
 With Datadog Hosted (SaaS) Agentless Scanning, Datadog runs the scanners in its own infrastructure. You attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan, and Datadog does the rest. You don't deploy, update, or pay for any scanner infrastructure in your account.

@@ -37,7 +37,7 @@ Scanners only send the collected list of packages and host metadata (hostnames, 
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
 {% alert %}
-Datadog-hosted scanning is in Preview and supports AWS accounts only. To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
+Datadog-hosted scanning is in Preview and supports AWS accounts only. To request access, [join the Preview](https://www.datadoghq.com/product-preview/agentless-saas-mode/). To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
 {% /alert %}
 
 Datadog runs and scales the scanners in its own infrastructure. You don't choose a scanner account, decide how many scanners to deploy, or plan which regions to deploy them in. Instead, you enable Datadog-hosted scanning in each AWS account you want to scan by attaching the Agentless Scanning IAM policy to the Datadog integration role in that account.

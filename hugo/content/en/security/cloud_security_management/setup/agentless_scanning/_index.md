@@ -33,11 +33,9 @@ Both modes use the same scanning engine and produce the same findings. The diffe
 
 ## Choose where scanners run
 
-{{< callout url="" btn_hidden="true" header="Datadog Hosted (SaaS) Agentless Scanning is in Preview" respect-site-support="false" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/agentless-saas-mode/" header="Datadog Hosted (SaaS) Agentless Scanning is in Preview" respect-site-support="false" >}}
 Datadog-hosted scanning supports AWS accounts only.
 {{< /callout >}}
-
-<!-- TODO(DOCS-16346): Confirm how customers request preview access and update the callout (url, btn_hidden). -->
 
 | | Self-hosted | Datadog Hosted (SaaS) |
 |---|---|---|
@@ -123,8 +121,6 @@ The scanner does **not** send:
 ### Cloud service provider cost {#cloud-service-provider-cost}
 
 Agentless Scanning runs inside your cloud account, so the compute and networking costs appear on your cloud provider bill. While vendors that scan in their own infrastructure bundle compute costs into their SaaS fees, keeping data in your environment means that you see the infrastructure cost directly.
-
-<!-- TODO(DOCS-16346): Confirm with PM whether to publish the self-hosted cost estimate from the brief (~$60/month per region plus ~$0.10 per host per month in data transfer). -->
 
 To reduce costs:
 - Deploy a scanner in each region where you have more than 150 hosts. A regional scanner avoids cross-region data transfer, which is more cost-effective than scanning those hosts from a remote region.
