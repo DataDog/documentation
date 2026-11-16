@@ -68,7 +68,7 @@ These metrics are available for browser and mobile applications, except where no
 | `rum.measure.session.inactive` | Count of inactive sessions. | Default |
 | `rum.measure.session.crash_free` | Count of crash-free sessions. **Mobile only.** | Default |
 | `rum.measure.session.has_replay` | Count of sessions where the SDK reported recording Session Replay data. To count sessions whose replay can be watched, use `rum.measure.session.is_replay_available`. | Default |
-| `rum.measure.session.is_replay_available` | Count of sessions where a replay is available to watch. Only sessions whose full snapshot Datadog received and retained are counted. | Default |
+| `rum.measure.session.is_replay_available` | Count of sessions where Datadog received and retained Session Replay data, so a replay is available to watch. | Default |
 | `rum.measure.usage.quota_blocked_sessions` | Count of sessions blocked after a [retention quota][3] is reached. | Default |
 
 ### View metrics
