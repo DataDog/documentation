@@ -313,9 +313,7 @@ To stop blocking calls to a specific tool without changing code, use the policy 
 
 ## Add custom tags to evaluations
 
-Custom tags let you search AI Guard evaluations in Datadog by your own fields, such as a tenant or an application flow. The SDK sets each custom tag on the AI Guard span of the evaluation. Custom tags are separate from the `tags` field of the evaluation, which lists the attack categories that AI Guard detected.
-
-Use custom tags only for your own fields. Don't use span control keys such as `service.name`, `manual.keep`, or `manual.drop` as custom tags: instead of adding a tag, they change the span's service or whether Datadog keeps the trace.
+Custom tags let you search AI Guard evaluations in Datadog by your own fields, such as a tenant or an application flow. The SDK sets each custom tag on the AI Guard span of the evaluation.
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
@@ -353,7 +351,6 @@ The SDK drops the following entries without raising an error:
 
 - Keys equal to `ai_guard` or starting with `ai_guard.`, which are reserved for AI Guard, so custom tags can't overwrite AI Guard-owned span tags.
 - Values that aren't a string, a finite number, or a boolean.
-- A `service.name` value that isn't a string. A string `service.name` value isn't dropped: it changes the service of the AI Guard span.
 - Empty keys, keys longer than 200 characters, and string values longer than 25,000 characters.
 {% /if %}
 
@@ -415,7 +412,7 @@ Middlewares are part of the security decision, not only observers of it:
 - **Skipping is an allow decision.** When `should_evaluate` returns `False`, AI Guard doesn't create a span or call the AI Guard service, and the request proceeds unevaluated. The evaluate method returns an `ALLOW` action with the reason `skipped by middleware` and the original messages. The remaining middlewares aren't checked, and `post_evaluate` isn't called. Skip only requests that you trust.
 - **Hook exceptions are contained.** If a hook raises an exception, the SDK logs it at debug level and ignores it, so a middleware never breaks the agent's model call. If `should_evaluate` raises, the evaluation runs.
 - **Don't modify the context.** Treat `context.result` and `context.request.messages` as read-only. Modifying `context.result` changes the evaluation returned to direct SDK callers, but doesn't change AI Guard's blocking decision.
-- **Don't set reserved tags.** Tags that a middleware sets on `context.ai_guard_span` aren't filtered. Never set keys equal to `ai_guard` or starting with `ai_guard.`, which would misreport the evaluation in Datadog, or span control keys such as `service.name`, `manual.keep`, or `manual.drop`.
+- **Don't set reserved tags.** Tags that a middleware sets on `context.ai_guard_span` aren't filtered. Never set keys equal to `ai_guard` or starting with `ai_guard.`, which would misreport the evaluation in Datadog.
 
 ### Middleware context
 
