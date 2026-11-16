@@ -15,7 +15,7 @@ title: フリートビュー
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
 Fleet View は、Datadog Government サイト (US1-FED および US2-FED) でプレビュー版として提供されています。<br><br>
-追加の Fleet Automation 機能 (例: Agent の設定、Agent のアップグレード、SDK のアップグレードなど) は、選択した Datadog サイトではサポートされていません ({{< region-param key=dd_site_name >}})。
+追加の Fleet Automation 機能 (例: Agent の設定、Agent のアップグレード、SDK のアップグレードなど) は、選択した Datadog サイトではサポートされていません ({{< region-param key=dd_site_name >}}) では、エンドポイントの監視可能性はサポートされていません。
 </div>
 {{< /site-region >}}
 
@@ -47,6 +47,8 @@ Fleet View は、Datadog Government サイト (US1-FED および US2-FED) でプ
 Datadog Agent または OTel Collector を選択すると、その構成、接続されているインテグレーション、監査イベント、およびリモートフレアを送信するためのサポートタブを表示できます。
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="構成、接続されているインテグレーション、および監査イベントを表示する Agent 詳細パネル。" style="width:100%;" >}}
+
+Agent の **Remote Configuration** ステータスは、Datadog から構成を受信できるかどうかを示します。**Remote Agent Management** ステータスは、リモート管理が有効かどうかを示します。リモート管理が **NOT ENABLED** である場合でも、Agent が [Fleet View] (フリートビュー) に表示され、Remote Configuration に接続されることがあります。VM でアップグレードや構成変更を有効にするには、[Remote Agent Management を有効にする][8] を参照してください。
 
 ## 検索とフィルター {#search-and-filter}
 
@@ -120,7 +122,7 @@ Kubernetes view のほとんどの機能は、バージョン要件なしで利�
 |---|---|
 | 表示 `DatadogAgent` 構成 | Datadog Operator v1.24 以降 |
 | Helm Chart の値を表示 | Datadog Helm Chart v3.157.0 以降 |
-| 構成を編集 | [Remote Configuration][6] が有効で、Datadog Operator v1.27 以降 |
+| 構成を編集 (プレビュー版) | [Remote Configuration][6] が有効で、Datadog Operator v1.27 以降 |
 | クラスター名を設定せずに構成を編集 | Datadog Operator v1.30.0 以降 |
 | Cluster Agent 上でインテグレーションを表示 | Agent v7.72.0 以降 |
 | Cluster Agent 上でインテグレーションのステータスを表示 | Agent v7.79.0 以降 |
@@ -158,7 +160,7 @@ helm upgrade --install datadog-operator datadog/datadog-operator \
 
 {{< ui >}}Configuration{{< /ui >}}タブでは、構成を表示します。
 
-- **Datadog Operator v1.24以降**: `DatadogAgent`カスタムリソース構成を表示します。Datadog Operator v1.27以降では、このタブから構成を編集することもできます。
+- **Datadog Operator v1.24以降**: `DatadogAgent`カスタムリソース構成を表示します。Datadog Operator v1.27以降では、このタブから構成を編集することもできます。編集機能はプレビュー版です。手順については、[Kubernetes で Agent を構成する][9]を参照してください。
 - **Datadog Helm Chart v3.157.0 以降**: Helm Chart の値を表示します (`values.yaml`)。
 
 ### 制限事項 {#limitations}
@@ -169,7 +171,7 @@ helm upgrade --install datadog-operator datadog/datadog-operator \
 - 実行中の OTel Collector を確認できますが、Kubernetes ビューでその構成を表示することはできません。
 - Fleet Automation API へのアクセスは利用できません。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -180,3 +182,5 @@ helm upgrade --install datadog-operator datadog/datadog-operator \
 [5]: /ja/containers/datadog_operator
 [6]: /ja/agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /ja/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /ja/agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes

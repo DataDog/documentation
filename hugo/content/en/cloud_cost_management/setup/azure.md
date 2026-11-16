@@ -290,23 +290,15 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `billingaccountid` | The ID of the billing account associated with the line item. |
 | `billingaccountname` | The name of the billing account associated with the line item. |
 | `billingcurrency` | The currency associated with the billing account. |
-| `billingperiod` | The billing period of the charge. |
-| `billingperiodenddate` | The end date of the billing period. |
-| `billingperiodstartdate` | The start date of the billing period. |
+| `billingperiod` | The billing period of the charge. This tag is available only if your export includes the `billingperiod` column. |
 | `billingprofileid` | The unique identifier of the Enterprise Agreement enrollment. |
 | `billingprofilename` | The name of the Enterprise Agreement enrollment. |
 | `chargetype` | The type of charge covering the line item: `Usage`, `Purchase`, or `Refund`. |
 | `consumedservice` | The name of the service the line item is associated with. |
 | `costcenter` | The cost center defined for the subscription for tracking costs. |
-| `costinbillingcurrency` | The cost in the billing currency before credits or taxes. |
-| `costinpricingcurrency` | The cost in the pricing currency before credits or taxes. |
 | `currency` | The currency associated with the billing account. |
-| `date` | The usage or purchase date of the charge. |
-| `effectiveprice` | The blended unit price for the period. Blended prices average out any fluctuations in the unit price, like graduated tiering, which lowers the price as quantity increases. |
-| `exchangeratedate` | The date the exchange rate was established. |
-| `exchangeratepricingtobilling` | The exchange rate used to convert the cost in the pricing currency to the billing currency. |
 | `frequency` | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
-| `InvoiceId` | The unique document ID listed on the invoice PDF. |
+| `invoiceid` | The unique document ID listed on the invoice PDF. |
 | `invoicesectionid` | The ID of the MCA invoice section. |
 | `invoicesectionname` | The name of the Enterprise Agreement (EA) department. |
 | `isazurecrediteligible` | `true` if the charge is eligible to be paid for using Azure credits. |
@@ -319,10 +311,10 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `offerid` | The name of the offer purchased. |
 | `partnumber` | The ID used to get specific meter pricing. |
 | `planname` | The marketplace plan name if purchased through marketplace. |
-| `PreviousInvoiceId` | Reference to an original invoice if this line item is a refund. |
-| `PricingCurrency` | The currency used when rating based on negotiated prices. |
+| `previousinvoiceid` | Reference to an original invoice if this line item is a refund. |
+| `pricingcurrency` | The currency used when rating based on negotiated prices. |
 | `pricingmodel` | The type of usage (such as `Reservation`). |
-| `ProductId` | The identifier for a specific Azure product. |
+| `productid` | The identifier for a specific Azure product. |
 | `productname` | The name of the Azure product at a granular level, such as VM or disk type and region. |
 | `productorderid` | The ID for the product order. Use `productname` to see top level product information without `N/A`. |
 | `productordername` | The name of the product order. Use `productname` to see top level product information without `N/A`. |
@@ -336,8 +328,6 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `resourcename` | The name of the resource. Not all charges come from deployed resources. |
 | `resourcetype` | The type of the Azure resource. |
 | `servicefamily` | The service family that the service belongs to (such as `Compute`). The tag `consumedservice` has deeper insights on infrastructure types. |
-| `ServicePeriodEndDate` | The termination date of the Azure service period. |
-| `ServicePeriodStartDate` | The start date the Azure service period. |
 | `subscriptionid` | The ID of the Azure subscription. |
 | `subscriptionname` | The name of the Azure subscription. |
 | `term` | Describes the duration or term of the Savings Plan in months (such as `12`). |

@@ -71,7 +71,6 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 | Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
 | Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
 | Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
-| Layer versions | Datadog selects and updates them | You set them, and they stay fixed until you change them |
 | How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
 | Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
 | Removing instrumentation | Remove from Datadog | Delete the CloudFormation stack in that region |
@@ -80,7 +79,7 @@ Both products deploy a CloudFormation stack in your account. The stack for remot
 
 Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place, or when you want to narrow the function list by region, runtime, and memory size.
 
-Use remote instrumentation when you want to match on the tags in `DD_TAGS`, or when you want to set the layer versions applied to your functions and keep them fixed. Both products can match on AWS resource tags.
+Use remote instrumentation when you want to match on the tags in `DD_TAGS`. Both products can match on AWS resource tags.
 
 ## Prerequisites
 
@@ -202,7 +201,7 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 ## What Datadog changes on a Lambda function
 
-Datadog preserves your existing layers and environment variables. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
+Datadog preserves your existing layers and environment variables. The exceptions are `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED`, which Datadog sets to match the rule's APM and Logs settings. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
 
 **No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so no Datadog credential is stored in your account for Lambda instrumentation. Datadog sets up this authentication for you, so there is nothing to configure.
 
@@ -230,6 +229,7 @@ To install from the AWS Install Agents page:
 1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
 1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
+1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and remain until you edit the rule.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
@@ -254,7 +254,7 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, Datadog updates layer versions automatically.
+The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, edit the rule to change layer versions or to turn APM and Logs on or off.
 
 ## Remove Datadog instrumentation
 

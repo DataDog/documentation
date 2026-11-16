@@ -1,14 +1,13 @@
 ---
 aliases:
 - /es/sensitive_data_scanner/guide
+description: Guías paso a paso para Sensitive Data Scanner, incluyendo cómo investigar
+  hallazgos de datos sensibles y crear Alerts para datos sensibles.
 disable_toc: false
-title: Guías del Sensitive Data Scanner
+title: Guías de Sensitive Data Scanner
 ---
-
 {{< whatsnext desc="Guías:" >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_issues" >}}Investigar problemas con los datos confidenciales{{< /nextlink >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules" >}}Prácticas recomendadas para la creación de reglas personalizadas{{< /nextlink >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs" >}}Redactar todos los correos electrónicos excepto aquellos de un dominio específico de tus logs{{< /nextlink >}}
-  {{< nextlink href="security/sensitive_data_scanner/guide/redact_uuids_in_logs" >}}Redactar los ID únicos universales (UUIDs) en tus logs{{< /nextlink >}}
-
+   {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}Investigue los hallazgos de Sensitive Data Scanner{{< /nextlink >}}
+   {{< nextlink href="security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data" >}}Crear Alerts para datos sensibles{{< /nextlink >}}
+   {{< nextlink href="security/sensitive_data_scanner/guide/monitor-sds-usage" >}}Hacer un seguimiento del uso de Sensitive Data Scanner{{< /nextlink >}}
 {{< /whatsnext >}}

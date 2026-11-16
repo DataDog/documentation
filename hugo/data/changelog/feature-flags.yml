@@ -29,3 +29,37 @@ entries:
     operations:
       - UpdateFeatureFlag
     title: Document tags field on update feature flag endpoint
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41165
+    operations:
+      - CreateFeatureFlag
+      - CreateVariantForFeatureFlag
+      - UpdateVariantForFeatureFlag
+    title: Fix Feature Flags variant request and response schemas
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41164
+    operations:
+      - ExportFeatureFlagHistory
+      - ListFeatureFlagHistory
+    title: Add Feature Flags change history list and CSV export endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ExportFeatureFlagHistory
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - UpdateSavedFilterAttributes
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41461
+    operations:
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlagsEnvironments
+      - UpdateFeatureFlagsEnvironment
+    title: Document environment privacy settings and update behavior

@@ -118,6 +118,7 @@ The table lists the applied sampling rates by resource of the service.
 {{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
+- The `Ingested traces` column counts the traces that start at the service and resource. Resources that only appear on child spans, such as internal methods, show `0` ingested traces. The bytes from their spans still appear in the `Ingested bytes` column.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
   - `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies.
   - `Local Configured` if a [sampling rule][8] was set locally in the SDK.

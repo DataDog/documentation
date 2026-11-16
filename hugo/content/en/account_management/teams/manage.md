@@ -98,12 +98,6 @@ A team can be connected to more than one source, though the source type determin
 
 ## Team hierarchies
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">
-This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
-</div>
-{{< /site-region >}}
-
 Build a Teams map to visualize team hierarchies, nesting teams within each other (subteams) to mirror your company's actual structure. The result is a more complete ownership model than a flat, disconnected list of teams. A team's related teams, parent teams, sister teams, and subteams appear on its team page, in the **Hierarchy** section of the **Info** tab. To explore the full map of all teams in your organization, see the [Teams map][7] in the Datadog Internal Developer Portal.
 
 {{< img src="/account_management/teams/github/manage/teams-map.png" alt="Teams map showing a hierarchy of parent and child teams, with a selected team's details panel displaying its members and subteams" style="width:100%;" >}}

@@ -29,11 +29,12 @@ Create a skill directly in the Skills Library, or ask Bits Chat to create one fo
 
 1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
 2. Create a skill or import an existing `SKILL.md` file.
-3. Add the domain knowledge and instructions that the agent should follow.
-4. Select the skill's visibility:
+3. Enter a name and a skill ID. The skill ID is the slash command that invokes the skill. For example, a skill with the ID `my-skill` is invoked with `/my-skill`. You can't change the skill ID after you create the skill.
+4. Add the domain knowledge and instructions that the agent should follow.
+5. Select the skill's visibility:
     - **Private**: Keep the skill private.
-    - **Public**: Share the skill with the Datadog organization.
-5. Save the skill.
+    - **Shared**: Share the skill with everyone in your Datadog organization.
+6. Save the skill.
 
 Use focused instructions and give the skill a descriptive name. A clear name makes the skill easier to discover and invoke with a slash command.
 
@@ -56,6 +57,50 @@ You can also create a skill from an existing Slack thread. In the thread, enter:
 ```text
 @Datadog turn this conversation into a skill
 ```
+
+## Edit a skill
+
+You can edit shared skills and private skills that you created. Editing requires the MCP Write permission. For details, see the [Permissions](#permissions) section.
+
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+2. Select the skill, then open its details page.
+3. Update the skill's name, description, tags, or instructions.
+4. Click {{< ui >}}Save Changes{{< /ui >}}.
+
+The creator of a skill can also change its visibility between **Private** and **Shared** on the details page.
+
+A skill's ID can't be changed after the skill is created, so that references to the skill and its slash command keep working. To use a different ID, [clone the skill](#clone-a-skill) or create a new one.
+
+Bits Chat can update private skills that you created. To edit a shared skill, use the Skills Library.
+
+## Clone a skill
+
+Clone a skill to create a private copy of it. For example, clone a skill to give it a different skill ID, or to customize a shared skill without changing the original.
+
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+2. Select the skill, then open its details page.
+3. Click the gear icon, then select {{< ui >}}Clone{{< /ui >}}.
+4. Enter a name and skill ID for the copy. By default, the copy uses the original name with `(copy)` appended and the original skill ID with `-copy` appended.
+5. Click {{< ui >}}Clone{{< /ui >}}.
+
+The copy opens as a private skill that you created. To share it with your organization, change its visibility to **Shared**.
+
+## Permissions
+
+To use the Skills Library, your role needs the following permissions:
+
+| Action | Required permissions |
+|--------|----------------------|
+| View skills | **MCP Read** |
+| Create, edit, clone, or delete skills | **MCP Read** and **MCP Write** |
+
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both permissions by default. For custom roles, [update the role][5] to add the permissions.
+
+A skill's visibility also controls who can access it:
+
+- **Private** skills are visible only to their creator. Only the creator can edit or delete them.
+- **Shared** skills are visible to everyone in the organization. Any user with the required permissions can edit or delete them.
+- Only a skill's creator can change its visibility.
 
 ## Use a skill in Bits Chat
 
@@ -127,3 +172,4 @@ The Skills Library is available in Bits Chat, Bits Agent Builder, Slack, and ext
 [2]: /actions/agents/
 [3]: /mcp_server/
 [4]: https://app.datadoghq.com/actions/skills
+[5]: /account_management/rbac/?tab=datadogapplication#update-a-role

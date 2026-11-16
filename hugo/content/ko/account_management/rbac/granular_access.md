@@ -44,6 +44,7 @@ title: 세분화된 액세스 제어
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
@@ -79,3 +80,4 @@ title: 세분화된 액세스 제어
 [25]: /ko/getting_started/feature_flags/
 [26]: /ko/security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
 [27]: /ko/experiments/
+[28]: /ko/incident_response/status_pages/#granular-access-control

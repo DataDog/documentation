@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.25.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.26.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,120 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.26.0
+
+To upgrade to Worker version 2.26.0:
+
+- Docker: Run the `docker pull` command for the [2.26.0 image][69].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects Generate Metrics processors with indexed group-by fields. Tag keys now use the last field name followed by trailing array indices: <code>items[0]</code> produces <code>items_0</code>, <code>items[-1]</code> produces <code>items_-1</code>, and <code>http.items[2].status[4]</code> produces <code>status_4</code>. Update dashboards, monitors, alerts, notebooks, and other queries to use the corrected keys. Historical datapoints remain available under the old keys.</div>
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects histograms received without a sum, including those from OpenTelemetry and Prometheus sources. The sources preserve a missing sum. The Prometheus destination omits the corresponding <code>_sum</code> series; update Prometheus queries that calculate averages to tolerate a missing sum. The Datadog Metrics destination uses bucket-derived sum and average estimates when no sum is reported. Histogram quantile queries are unaffected.</div>
+
+<div class="alert alert-warning"><strong>Upgrade action:</strong> This change affects Custom Processor programs that call <code>to_unix_timestamp</code> with <code>unit: "nanoseconds"</code>. Before upgrading, replace bare nanosecond calls with <code>to_unix_timestamp!(ts, unit: "nanoseconds")</code>. An out-of-range conversion aborts processing and drops that event. Alternatively, deploy <code>to_unix_timestamp(ts, unit: "nanoseconds") ?? 0</code> with Worker 2.26.0 to supply a fallback. The fallback form does not compile on the previous Worker version. Other units are unaffected.</div>
+
+Worker version 2.26.0 gives you access to the following:
+
+#### Security
+
+- The Databricks (Zerobus) destination now verifies server certificates and hostnames for OAuth and Unity Catalog schema requests.
+
+#### New features
+
+- The Custom Processor now includes a `range` function that creates an array of integers from an inclusive start to an exclusive end, with an optional step.
+- The Datadog Agent source now accepts the v3 series metrics intake format used by Datadog Agent 7.81.0 and newer.
+
+#### Enhancements
+
+- The Custom Processor now:
+    - Supports changing metric types between counter and gauge in metrics pipelines by assigning to `.type`, while preserving the value and kind.
+    - Accepts `critical` as well as `crit` in its `to_syslog_severity` function.
+    - Has improved performance and lower memory allocation when assigning objects and arrays.
+- The Datadog Metrics destination now uses the v3 metrics intake API.
+- The Worker now:
+    - Aggregates grouped discarded-event counts over 10-minute windows and supports up to 30,000 distinct `group` values per Worker. Excess values lose only the `group` tag; counts are preserved.
+    - Collects `pipelines.host.*` metrics every 5 seconds.
+    - Preserves first-scrape counter values and histogram observations in its internal telemetry.
+    - Reports `pipelines.component_cpu_usage_ns_total` for every processor, including aggregation after Generate Metrics processors.
+    - Reports disk-buffer lifecycle events in its logs and the `pipelines.topology_disk_buffer_lifecycle_events_total` counter. The `event` tag is `removed`, `replacement_unreferenced`, or `unreferenced`.
+- HTTP-based destinations now accept UTF-8 characters in non-template endpoint paths and queries. Hostnames must remain ASCII. HTTP Client and OpenTelemetry destination URI templates still require ASCII.
+- Sources using character-delimited or newline-delimited framing now report oversized dropped frames as errors. They increment `pipelines.component_errors_total` with `error_code:decoder_frame_too_long`.
+
+#### Fixes
+
+- The Worker now:
+    - Initializes pipeline configuration on commercial Datadog sites outside US1.
+    - Times out configuration requests after 30 seconds, including reading the response, and retries on the next poll. Connection establishment times out after 10 seconds.
+    - Sends configured proxy credentials for HTTP requests to AWS endpoints through an HTTP forward proxy. HTTPS proxy connections are unchanged.
+    - Sends a full destination batch immediately when an event fills the next batch by itself. This applies to Databricks (Zerobus), Elasticsearch, and New Relic destinations.
+- The Custom Processor now:
+    - Supports its hashing and encryption functions, including `sha1`, `sha2`, `sha3`, `md5`, `hmac`, `xxhash`, `seahash`, `crc`, `encrypt`, `decrypt`, `encrypt_ip`, and `decrypt_ip`.
+    - Handles consecutive comment lines inside a block when later comments contain non-ASCII characters or quotes.
+- The Generate Metrics processor now forwards distribution metrics that arrive more than 10 seconds late when metric aggregation is enabled, which is the default. Late counters remain dropped.
+- The Datadog Metrics destination now uses exact histogram sums when available and valid. For histograms without sums, it retains bucket-derived estimates for sums and averages.
+- The Google Pub/Sub source now:
+    - Uses the system certificate authorities consistently with other components.
+    - Shuts down promptly while connecting, retrying, or waiting on an acknowledgement-enabled stream.
+    - Honors configured TLS verification, server name, application protocol, and proxy settings.
+- The WebSocket source now rejects a handshake response that specifies an unrequested subprotocol.
+- Search queries now:
+    - Ignore full-text prefixes, terms, and phrases that contain no words.
+    - Match phrases consistently when another phrase has already matched the same field.
+    - Match phrases when a failed partial match overlaps the actual match.
+    - Handle range queries with mixed brackets, including an inclusive upper bound where specified.
+
+#### Removed metrics
+
+- The following Worker health metrics are removed. Update dashboards and monitors to use their replacements, with the `pipelines.` prefix when querying Worker telemetry:
+    - `buffer_max_byte_size` → `buffer_max_size_bytes`
+    - `buffer_max_event_size` → `buffer_max_size_events`
+    - `source_buffer_max_byte_size` → `source_buffer_max_size_bytes`
+    - `source_buffer_max_event_size` → `source_buffer_max_size_events`
+    - `transform_buffer_max_byte_size` → `transform_buffer_max_size_bytes`
+    - `transform_buffer_max_event_size` → `transform_buffer_max_size_events`
+    - `internal_metrics_cardinality_total` → `internal_metrics_cardinality`. The replacement is a gauge of the current metric count.
+
+## Worker version 2.25.2
+
+To upgrade to Worker version 2.25.2:
+
+- Docker: Run the `docker pull` command for the [2.25.2 image][67].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.2`.
+
+Worker version 2.25.2 gives you access to the following:
+
+#### Fixes
+
+- Fixed a regression introduced in Worker 2.25.1 that could prevent Workers on commercial Datadog sites outside US1 from loading their pipelines after startup, causing repeated `RC client wasn't initialized, will retry` errors.
+
+## Worker version 2.25.1
+
+To upgrade to Worker version 2.25.1:
+
+- Docker: Run the `docker pull` command for the [2.25.1 image][66].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.1`.
+
+Worker version 2.25.1 gives you access to the following:
+
+#### Security
+
+- The Microsoft Sentinel destination now verifies server certificates and hostnames for Azure OAuth token requests and log ingestion requests.
+
+#### Fixes
+
+- The Microsoft Sentinel destination now:
+    - Splits batches into multiple requests as needed, so each request stays under the Azure 1 MB request size limit.
+    - Refreshes its Azure OAuth token 60 seconds before the token expires. If a refresh fails, it logs an error and retries every 2 seconds until a refresh succeeds, then returns to that schedule.
+    - Times out Azure OAuth token requests after 30 seconds and retries them like any other failed refresh.
+- The `rc_version` tag on pipeline component metrics and the `op_component.rc_version` field in component logs now report the latest configuration version that each component runs, including components that a pipeline update didn't change.
 
 ## Worker version 2.25.0
 
@@ -32,25 +146,29 @@ Worker version 2.25.0 gives you access to the following:
     - TLS connections to servers whose certificate chains end at a removed root fail validation.
 - Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
 
+#### New features
+
+- The [Azure Data Explorer destination][68] is now available.
+
 #### Enhancements
 
-- The Grok Parser processor's warning logs for events that fail to parse, and its rule compilation error logs, now include:
-    - A `rule` field that identifies the rule, when available. For source-based rules and library rules, this field is the rule's source.
-    - A `rule_kind` field, set to `custom` or `library`.
+- The Grok Parser processor's logs now include:
+    - A `rule` field that identifies the rule's source.
+    - A `rule_kind` field that indicates the rule's type as `custom` or `library`.
 
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
 - The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
-- The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group. The variable applies to every Reduce processor on the Worker and accepts values from 1 to 300 seconds. The default is 10 seconds. A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
-- The Sample processor now limits the memory it uses to track sampling groups to 128 MiB. When it reaches the limit, the processor evicts the least recently used groups. This limit prevents unbounded memory growth when group-by values have high cardinality or are large.
+- The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group.
+- The Sample processor now limits memory for tracking sampling groups to 128 MiB. When it reaches the limit, it evicts the least-recently used groups.
 - The Worker has improved log ingestion performance.
 
 #### Fixes
 
-- The Worker now reports the underlying error when a source or destination fails while running. Examples include failing to bind a listening socket (such as `Address already in use`), broker subscribe and consume errors, checkpoint file errors, and destination errors. Previously, the Worker only logged `the task completed with an error`. When a component panics, the Worker's logs now also include the panic message.
-- The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull. Previously, the source logged an error and waited before reconnecting.
+- When a source or destination fails, the Worker now logs the underlying error, such as `Address already in use`, instead of only `the task completed with an error`. If a component panics, the logs also include the panic message.
+- The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull.
 - The Google Pub/Sub source now trusts every certificate in the configured CA file, not only the last one.
 - The OpenTelemetry source now responds to gRPC requests for unsupported services with the gRPC status `UNIMPLEMENTED` instead of HTTP 404. These requests no longer log an error or increment the `component_errors_total` metric.
-- The Worker no longer silently drops its own internal logs under high load. Internal logs that the Worker drops are now counted in the `component_discarded_events_total` metric with the `intentional:false` tag.
+- The Worker now tracks internal logs dropped under high load in `component_discarded_events_total` with `intentional:false`. This affects only internal components (`component_id:_*`), not pipeline data.
 
 ## Worker version 2.24.1
 
@@ -132,7 +250,7 @@ Worker version 2.23.2 gives you access to the following:
 
 #### Enhancements
 
-- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
+- The Datadog Logs destination now truncates log events larger than 900 KB. Previously, log events larger than the batch size limit were dropped instead of truncated.
 
 #### Fixes
 
@@ -1014,3 +1132,7 @@ Worker version 2.7.0 gives you access to the following:
 [63]: /observability_pipelines/sources/prometheus/
 [64]: /observability_pipelines/destinations/prometheus/
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
+[66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
+[67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
+[68]: /observability_pipelines/destinations/azure_data_explorer/
+[69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0

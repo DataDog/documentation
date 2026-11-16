@@ -11,7 +11,7 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0, 8.0
+: 4.4, 5.0, 6.0, 7.0, 8.0, 9.0
 
 Supported MongoDB editions
 : Community, Enterprise
@@ -188,7 +188,7 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 ## Query Metrics
 
-Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
+Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Read query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
 
 ### MongoDB 8.0.20 or later
 
@@ -238,6 +238,16 @@ db.adminCommand({setParameter: 1, internalQueryStatsRateLimit: -1})
 
 For more information about the server parameters that control query stats collection, see the [MongoDB Query Stats documentation][4].
 
+### Write query statistics on MongoDB 9.0
+
+MongoDB 9.0 samples 1% of write operations by default. To collect statistics for all write commands, set `internalQueryStatsWriteCmdSampleRate` to `1.0` on each `mongod` or `mongos` process. This setting is independent of the read query sampling settings.
+
+To enable write query statistics at runtime until the next restart, run:
+
+{{< code-block lang="javascript" >}}
+db.adminCommand({setParameter: 1, internalQueryStatsWriteCmdSampleRate: 1.0})
+{{< /code-block >}}
+
 ## Data Collected
 
 ### Standard Metrics
@@ -247,7 +257,7 @@ Refer to the [MongoDB integration documentation][2] for a comprehensive list of 
 ### Query Metrics
 
 <div class="alert alert-info">
-  This requires Datadog Agent v7.78 or later and MongoDB 8.0+ for self hosted.
+  Query metrics require Datadog Agent 7.78 or later and MongoDB 8.0 or later. MongoDB 9.0 requires Agent 7.85.0 or later.
 </div>
 
 Query metrics provide insights into the performance of your MongoDB operations. For more information, see [Query Metrics][3].

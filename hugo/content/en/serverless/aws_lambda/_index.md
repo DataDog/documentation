@@ -6,7 +6,7 @@ further_reading:
   - link: '/serverless/configuration/'
     tag: 'Documentation'
     text: 'Configure Serverless monitoring'
-  - link: "/integrations/amazon_lambda/"
+  - link: "/integrations/amazon-lambda/"
     tag: "Documentation"
     text: "AWS Lambda integration"
   - link: "/serverless/guide/disable_serverless"
@@ -51,6 +51,20 @@ further_reading:
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
 
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
+
+## Lambda compute types
+
+Datadog support differs by AWS Lambda compute type:
+
+| Lambda type | What it runs | Datadog support |
+|---|---|---|
+| Lambda Event Functions | Code that runs in response to events or API calls. This is the original Lambda function type. | Serverless Monitoring: metrics, traces, and logs, plus the capabilities on this page. Check each capability's page for runtime support. |
+| Lambda Web Functions | Web applications and API backends that serve HTTP requests directly. | CloudWatch metrics, an out-of-the-box dashboard, and recommended monitors through the [AWS Lambda integration][2]. |
+| Lambda MicroVMs | Isolated compute environments for each user or job, with a lifespan of up to 8 hours. | CloudWatch logs through the [Datadog Forwarder][3], including automatic log subscription. |
+
+[Lambda Managed Instances][4] and [Lambda Durable Functions][5] are ways to run Event Functions, and Datadog supports both. For supported runtimes, see each page.
+
+In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions. Your existing instrumentation and infrastructure code keep working without changes. For more information, see [What is AWS Lambda?][6] in the AWS documentation.
 
 ## How it works
 
@@ -113,3 +127,8 @@ Easily correlate serverless code, configuration, and deployment changes with met
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/installation
+[2]: /integrations/amazon-lambda/
+[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
+[4]: /serverless/aws_lambda/managed_instances/
+[5]: /serverless/aws_lambda/durable_functions/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
