@@ -6053,6 +6053,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_ai_gateway
       weight: 604
+    - name: Budgets
+      url: llm_observability/configure/ai_gateway_budgets
+      parent: llm_obs_ai_gateway
+      identifier: llm_obs_ai_gateway_budgets
+      weight: 60405
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
