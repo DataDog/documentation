@@ -54,7 +54,7 @@ The L1/L7 Map has no Agent version requirement of its own. It builds the map fro
 | [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
 | [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
 | [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
-| [Network Device Monitoring][6] | No | Device details for a network path hop that is a monitored network device. |
+| [Network Device Monitoring][6] | No | The status of a network path hop that is a monitored network device. |
 
 Before you use the map, open [CNM][14] and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in [Network Path][15].
 
@@ -71,7 +71,7 @@ The map shows two types of relationships between resources:
 
 The map shows composition as a vertical stack, in this order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Containers are split into **App containers** and **Sidecar containers**. A sidecar container is a helper container that runs alongside an app container, such as an Envoy proxy. Layers that do not apply to a resource are skipped.
 
-To keep the map readable, each group shows a limited number of resources and connections and collapses the rest into a **+N more** item.
+To keep the map readable, each resource group and each connection line shows a limited number of items. The rest collapse into a **+N more** item.
 
 #### Single resource layout
 
@@ -97,7 +97,7 @@ In source/destination pair mode, the map shows the source's composition stack on
 
 ### Map status and network signals
 
-The outline color of a resource, and the color of a connection line, shows its status:
+The outline color of a resource and the color of a connection line show their status:
 
 - **Red**: Critical
 - **Orange**: Degraded
@@ -120,9 +120,11 @@ Map status is based on the following network signals:
 | End-to-end latency | Network Path | The latency between the source and the destination. |
 | Packet loss | Network Path | The percentage of packets that do not reach the destination. |
 
+<!-- TODO: Ask the PM how a resource's status is determined (from its connections' signals, its own metrics, or both), and whether throughput, packet drops, CPU, or memory affect status. -->
+
 The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal.
 
-Map status is not a complete assessment of a resource's health. A resource with a healthy map status can still have issues that network signals do not capture, and a red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
+Map status is not a complete assessment of a resource's health. A resource with a healthy map status can still have issues that network signals do not capture, and a red or orange resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
 ## Navigate the L1/L7 Map
 
@@ -146,14 +148,14 @@ You can also open the map from other Datadog products. When you open the map fro
 | Infrastructure List | The **Network** tab of a host's side panel. |
 -->
 
-{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 landing page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
 
 On the L1/L7 page, select an investigation mode:
 
 - **Single resource**: Start with one service, container, pod, or host. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
 - **Source/destination pair**: Search for and select a **Source** and a **Destination**. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
 
-{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 landing page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
 
 ### Change what the map shows
 
@@ -180,9 +182,9 @@ The summary for a resource shows its type, status, and available metrics. From t
 
 {{< img src="network_performance_monitoring/l1_l7_map/resource-hover-summary.png" alt="A hover summary for a container, showing its status, CPU, memory, and packet drops, with Filter and Explore buttons" >}}
 
-#### Connection summaries
+#### Network connection summaries
 
-The summary for a connection shows its **Retransmits**, **TCP failures**, **Sent / received** throughput, and **RTT**. For what each signal measures, see the [Map status and network signals](#map-status-and-network-signals) section.
+The summary for a network connection shows its **Retransmits**, **TCP failures**, **Sent / received** throughput, and **RTT**. For what each signal measures, see the [Map status and network signals](#map-status-and-network-signals) section.
 
 From the summary, click **Explore connection** to open the connection in source/destination pair mode, or click **View connection in CNM**.
 
@@ -198,7 +200,7 @@ The summary for a hop that is a network device shows the device's status.
 
 ### Use the details pane
 
-The details pane, to the right of the map, shows information about the explored resource, the filtered resource, or the connection between a source and a destination. The content of the pane depends on the investigation mode and on what you click.
+The details pane, to the right of the map, shows information about the explored resource, the filtered resource, the connection between a source and a destination, or an item that you click on the map. The content of the pane depends on the investigation mode and on what you click.
 
 #### Details pane in single resource mode
 
@@ -230,7 +232,7 @@ In source/destination pair mode, the details pane shows the following for the co
 When you click an item on the map, the details pane shows details for that item:
 
 - **The +N more item in a resource group**: A list of the collapsed resources.
-- **A connection, or the +N more label on a connection**: A searchable list of the individual network connections that the line represents.
+- **A connection, or the +N more item on a connection**: A searchable list of the individual network connections that the line represents.
 - **An AS group on a network path**: The hops in the group and their status, such as **OK** or **UNREACHABLE**.
 - **A network path segment**: The map filters to the segment, and the details pane shows its reachability, end-to-end latency, and packet loss, with a link to open the segment in Network Path.
 
@@ -255,7 +257,7 @@ Use this workflow when a resource, such as a service, is slow or failing, and yo
 
 Use this workflow when two resources cannot communicate, or communicate slowly, and you want to find the point on the path where a network signal degrades.
 
-1. Open source/destination pair mode for the two resources. You can select them on the L1/L7 page, click **Add destination** from the source resource, or click **Explore connection** on the connection between them. For details, see the [Open the map](#open-the-map) section.
+1. Open source/destination pair mode for the two resources. You can select them on the L1/L7 page, click **Add destination** while the source is the explored resource, or click **Explore connection** on the connection between them. For details, see the [Change what the map shows](#change-what-the-map-shows) section.
 1. Set the time frame to when the issue started.
 1. Hover over the network connections between the two stacks to check their retransmits, TCP failures, and RTT.
 1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss. To investigate a degraded segment on its own, hover over it and click **Explore connection**.
@@ -286,7 +288,7 @@ The map is empty when CNM has no traffic data for the selected resource or pair 
 
 ### A service, container, or pod is missing
 
-Check that the workload appears in the corresponding product, such as [APM][2], the [Containers Explorer][18], or the [Kubernetes Explorer][16]. If the service layer is missing, start the investigation from the host, pod, or container. Workloads that do not run in containers or on Kubernetes do not have container or pod layers.
+Check that the workload appears in the corresponding product, such as [APM][2], the [Containers Explorer][18], or the [Kubernetes Explorer][16]. If the service layer is missing, start the investigation from the host, pod, or container. Workloads that do not run in containers do not have a container layer, and workloads that do not run on Kubernetes do not have a pod layer.
 
 If your environment uses CNM sidecar attribution, an app container whose traffic goes entirely through its sidecar container does not appear on the map. Its traffic appears on the sidecar container instead, and exploring the app container shows an empty map. Investigate the sidecar container or the pod.
 
@@ -302,7 +304,7 @@ Check that [Network Path is set up][10] for the source and destination, and that
 
 ### A hop appears as an IP address instead of a device
 
-Check whether the device is monitored by Network Device Monitoring. If it is not, the hop appears as an IP address or external endpoint, with the AS or location information that is available. To see device details for the hop, [set up NDM][11] for the device.
+Check whether the device is monitored by Network Device Monitoring. If it is not, the hop appears as an IP address or external endpoint, with the AS or location information that is available. To see the device's status on the hop, [set up NDM][11] for the device.
 
 ### A status or metric is different in another product
 
