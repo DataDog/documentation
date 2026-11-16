@@ -54,6 +54,8 @@ A provider connects an integration account to the models that callers can use th
 
 For effective prices, custom rates, and pricing prerequisites for spending controls, see [Configure AI Gateway Model Pricing][26].
 
+[26]: /llm_observability/configure/ai_gateway_pricing/
+
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
 ### Authenticate requests
@@ -445,5 +447,3 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
-
-[26]: /llm_observability/configure/ai_gateway_pricing/
