@@ -91,6 +91,8 @@ Send the same `x-session-id` value for requests in a conversation or agent run. 
 x-session-id: gateway-verification-session
 ```
 
+Send one `x-session-id` value. Use valid UTF-8 without control characters and keep it within 256 bytes. Invalid values can prevent session association.
+
 A session groups related activity. It does not establish a trace parent, grant access, or by itself pin a routing rule to one destination. Routing affinity and destination pinning are separate routing controls.
 
 ## Follow a known request
