@@ -241,7 +241,7 @@ When you select an item on the map, the details pane shows that item instead:
 1. Hover over the CNM connections between the two stacks to check their retransmits, TCP failures, and RTT.
 1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss.
 1. If a hop is a network device monitored by [NDM][6], use the device details to continue the investigation.
-1. To examine the underlying data, click **View connections** to open the connections in CNM, or click **View connection in Network Path** to open the path in the [Network Path path view][19].
+1. To examine the underlying data, click **View connections** to open the connections in CNM, or click **View connection in Network Path** to open the connection's [path view][19] in Network Path.
 
 ## Limitations
 
