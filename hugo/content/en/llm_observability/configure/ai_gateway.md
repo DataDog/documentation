@@ -250,12 +250,12 @@ When a rate limit in Enforce mode rejects a request, AI Gateway returns HTTP `42
 | `Retry-After` | Seconds until the request fits within the rate limit. |
 | `X-Ai-Gateway-Error-Code` | `gateway_rate_limit`. A provider `429` does not include this header. |
 | `X-Ai-Gateway-Ratelimit-Id` | The ID of the rate limit that rejected the request. |
-| `X-Ai-Gateway-Ratelimit-Window` | The longer rolling window that was exceeded, when applicable, such as `1h`. |
+| `X-Ai-Gateway-Ratelimit-Window` | The longer rolling window that was exceeded, such as `1h`. Absent when a per-minute limit rejected the request. |
 | `X-Ai-Gateway-Ratelimit-Limit-<METRIC>` | The allowance that was exceeded. |
 | `X-Ai-Gateway-Ratelimit-Remaining-<METRIC>` | `0`. |
 | `X-Ai-Gateway-Ratelimit-Reset-<METRIC>` | Time until the request fits, for example `12s`. |
 
-`<METRIC>` is `Requests`, `Input-Tokens`, `Output-Tokens`, or `Cost`, depending on which limit was exceeded. For example, a request that exceeds a requests-per-minute limit returns `X-Ai-Gateway-Ratelimit-Limit-Requests`.
+`<METRIC>` is `Requests`, `Input-Tokens`, `Output-Tokens`, or `Cost`, depending on which limit was exceeded. `Cost` header values are in microcents ($1 = 100,000,000 microcents). For example, a request that exceeds a requests-per-minute limit returns `X-Ai-Gateway-Ratelimit-Limit-Requests`.
 
 Clients that retry on `429` should wait for the `Retry-After` duration before they retry.
 
@@ -376,7 +376,10 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `503`. Datadog team membership could not be verified. Retry the request.
 
 `gateway_rate_limit`
-: HTTP `429`. A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`.
+: HTTP `429`. A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. For longer-window rejections, `X-Ai-Gateway-Ratelimit-Window` identifies the window. A provider `429` has no `X-Ai-Gateway-Error-Code`.
+
+`rate_limit_pricing_unavailable`
+: HTTP `400`. A matching spend rate limit in Enforce mode applies, but AI Gateway has no price for the target model. OpenAI, Anthropic, and Gemini return HTTP `400`; Gemini uses the canonical status `FAILED_PRECONDITION`. Set a usable price for a model billed per token in the [{{< ui >}}Model Catalog{{< /ui >}}][11]. You can also choose a priced model or switch the rate limit to Alert mode.
 
 `budget_exceeded`
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
