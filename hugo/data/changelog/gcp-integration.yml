@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41752
+    operations:
+      - CreateGCPSTSAccount
+      - ListGCPSTSAccounts
+      - UpdateGCPSTSAccount
+    title: Add project_filter_configs to v2 GCP API
