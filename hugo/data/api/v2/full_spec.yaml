@@ -78613,6 +78613,13 @@ components:
     LLMObsAnnotationItem:
       description: A single annotation on an interaction.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -78658,6 +78665,13 @@ components:
     LLMObsAnnotationItemResponse:
       description: A single annotation on an interaction, as returned by the API.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -85543,6 +85557,18 @@ components:
         A single annotation to create or update. The annotation is matched by
         `interaction_id` and the requesting user's identity.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is an opaque string with no required format. Use a stable, recognizable value for the same
+            producer across annotations.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+            Omit this field or set it to `null` to preserve existing attribution. Set it to an empty string to clear
+            attribution.
+          example: "Alex Contractor"
+          nullable: true
+          type: string
         interaction_id:
           description: ID of the interaction to annotate.
           example: "00000000-0000-0000-0000-000000000001"
@@ -210421,6 +210447,8 @@ paths:
       description: |-
         Create or update annotations on interactions in a queue. Each annotation is matched
         by `interaction_id` and the requesting user's identity.
+        Use the optional `annotator` field to name an external person or automated system that produced the labels
+        without changing the authenticated creator, modifier, permissions, or per-user matching behavior.
         Results and errors in the response are linked to request items by `interaction_id`.
         Errors for individual items are returned in the `errors` field without blocking the rest of the batch.
         Requests where every item is denied by queue access rules return `403`.
@@ -210436,7 +210464,8 @@ paths:
                   data:
                     attributes:
                       annotations:
-                        - interaction_id: 00000000-0000-0000-0000-000000000001
+                        - annotator: "Alex Contractor"
+                          interaction_id: 00000000-0000-0000-0000-000000000001
                           label_values:
                             - label_schema_id: abc-123
                               value: good
@@ -210457,7 +210486,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -210474,7 +210504,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -246655,6 +246686,12 @@ paths:
     get:
       description: |-
         Get the list of users assigned seats for a product code.
+
+        This endpoint requires the `user_access_read` (User Access Read) permission
+        in addition to at least one of `billing_read`, `incident_read`, or `on_call_read`.
+        Scoped application keys, personal access tokens, and service access tokens
+        must include the `user_access_read` scope. Credentials without this scope
+        receive a `403 Forbidden` response.
       operationId: GetSeatsUsers
       parameters:
         - description: The product code for which to retrieve seat users.
@@ -246695,6 +246732,8 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "422":
           content:
             application/json:
@@ -246703,6 +246742,11 @@ paths:
           description: Unprocessable Entity
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_read
       summary: Get users with seats
       tags:
         - Seats
