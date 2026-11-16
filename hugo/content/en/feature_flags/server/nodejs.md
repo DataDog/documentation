@@ -296,6 +296,10 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+## Record exposures in your own data store
+
+Use `ExposureHook` from `dd-trace/openfeature/exposure-hook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-trace` 6.24.0 or later, or 5.135.0 or later in the 5.x line. See [Record Feature Flag Exposures in Your Own Data Store][13].
+
 ## Advanced configuration
 
 Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
@@ -386,3 +390,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [12]: /feature_flags/concepts/configuration_sources/#agent-availability
+[13]: /feature_flags/guide/record_exposures_in_your_own_data_store/
