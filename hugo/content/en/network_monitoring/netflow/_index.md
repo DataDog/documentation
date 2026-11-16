@@ -84,23 +84,25 @@ The Datadog Agent automatically aggregates the data received into NetFlow to lim
 
 Your NetFlow data is processed by the Datadog backend and enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. To disambiguate possible collisions between reused private IPs, you can configure a different `namespace` for each Agent configuration file (with the setting `network_devices.namespace`).
 
-If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog attempts to locate the device that the exporter IP belongs to, and enriches your NetFlow data with it is as long as the match is unique.
+If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog attempts to locate the device that the exporter IP belongs to, and enriches your NetFlow data with it as long as the match is unique.
 
 ### IP enrichment
 
+Datadog enriches the IP addresses in your NetFlow data from the following sources.
+
 #### Custom IP enrichment
 
-You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
 From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
-To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For more information, see [Application name assignment](#application-name-assignment).
+To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For the full order, see [Application name assignment](#application-name-assignment).
 
 #### Reverse DNS private IP enrichment
 
 Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
-By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable, see the [Configuration](#configuration) section.
+By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable it, see the [Configuration](#configuration) section.
 
 Search for DNS in the {{< ui >}}\+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
 
@@ -116,13 +118,15 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 ### Port enrichment
 
+Datadog resolves ports to application names from the following sources.
+
 #### Default port enrichment
 
-Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443).
+Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well-known port mappings (such as Postgres on 5432 and HTTPS on 443).
 
 #### Custom port enrichment
 
-You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
 From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
@@ -132,7 +136,7 @@ From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}\+ A
 
 **Note**: Deep packet inspection requires Agent version <!-- TODO: confirm minimum Agent version with PM -->7.XX or later.
 
-Deep packet inspection (DPI) identifies the application on a flow by inspecting traffic on the exporter, not by guessing from the port number. Datadog does not inspect packet payloads. Instead, the Agent reads the application that the device already classified, using Cisco NBAR2 or Palo Alto Networks App-ID, from the NetFlow or IPFIX records.
+Deep packet inspection (DPI) identifies the application on a flow by inspecting traffic on the exporter, instead of inferring it from the port number. Datadog does not inspect packet payloads. Instead, the Agent reads the application that the device already classified (using Cisco NBAR2 or Palo Alto Networks App-ID) from the NetFlow or IPFIX records.
 
 DPI does not require you to map IP addresses or ports to applications manually. To use DPI, configure both your network device and the Datadog Agent.
 
@@ -157,7 +161,7 @@ After saving your changes, [restart the Agent][4].
 
 #### Cisco NBAR2
 
-Cisco Network-Based Application Recognition (NBAR2) is supported on NetFlow v9 and IPFIX records. To export NBAR2 application data from a Cisco device:
+Cisco Network-Based Application Recognition (NBAR2) is supported for NetFlow v9 and IPFIX. To export NBAR2 application data from a Cisco device:
 
 1. Enable NBAR2 protocol discovery on each interface that you want to classify:
 
@@ -184,21 +188,33 @@ Cisco Network-Based Application Recognition (NBAR2) is supported on NetFlow v9 a
    exit
    ```
 
-4. (Optional) Add `option application-attributes` to your flow exporter. When the exporter sends application attributes, Datadog also enriches flows with the application category, subcategory, group, traffic class, business relevance, set, family, and P2P, tunnel, and encrypted technology.
+   The timeout value is in seconds.
+
+4. (Optional) To add more application detail to your flows, add the application attributes option to your flow exporter:
+
+   ```text
+   configure terminal
+   flow exporter <EXPORTER_NAME>
+    option application-attributes
+   exit
+   ```
+
+   Datadog then enriches flows with the application category, subcategory, group, traffic class, business relevance, set, family, and whether the application uses P2P, tunneling, or encryption.
 
 **Notes**:
+
 - Application IDs are specific to each exporter, because they depend on the device's NBAR protocol pack and engine version. The Agent keeps a separate application table for each exporter.
 - The Agent keeps each application table entry for one hour after the exporter last sends it. Set the `option application-table` timeout to less than one hour. Otherwise, flows from that exporter might not have an application name until the exporter resends the table.
 
 #### Palo Alto Networks App-ID
 
-Palo Alto Networks App-ID is supported on NetFlow v9 records. Palo Alto Networks firewalls send the application name on each flow record, so no application table is required.
+Palo Alto Networks App-ID is supported for NetFlow v9. Palo Alto Networks firewalls send the application name on each flow record, so no application table is required.
 
-To export App-ID data, enable **PAN-OS Field Types** in the NetFlow server profile of the firewall. For more information, see the Palo Alto Networks [NetFlow monitoring documentation][12].
+To export App-ID data, enable {{< ui >}}PAN-OS Field Types{{< /ui >}} in the NetFlow server profile of the firewall. For more information, see the Palo Alto Networks [NetFlow monitoring documentation][12].
 
 ### Application name assignment
 
-Datadog combines the application names from all enrichment sources into a single `application_name` attribute for each flow. Each flow gets its application name from the first source in this list that has a match:
+Datadog assigns each flow a single `application_name` attribute. The value comes from the first source in this list that has a match:
 
 1. [Custom IP enrichment](#custom-ip-enrichment) mappings for private IP addresses
 2. [Custom port enrichment](#custom-port-enrichment) mappings
@@ -208,7 +224,7 @@ Datadog combines the application names from all enrichment sources into a single
 6. [Default port enrichment](#default-port-enrichment) (Datadog port-to-protocol mapping)
 7. `unknown`, if no other source matches
 
-To view these priorities in Datadog, open the [{{< ui >}}Enrichment{{< /ui >}} settings page][10] and expand {{< ui >}}How application names are assigned{{< /ui >}}.
+To view this priority order in Datadog, open the [{{< ui >}}Enrichment{{< /ui >}} settings page][10] and expand {{< ui >}}How application names are assigned{{< /ui >}}.
 
 ## IP details
 
@@ -218,13 +234,13 @@ In the **Conversations** view, you can view the Public IP address of the Destina
 
 ## Applications
 
-The {{< ui >}}Applications{{< /ui >}} section of the NetFlow page shows which applications use the most traffic on your network. Use it to identify the applications that drive bandwidth usage, performance issues, or congestion.
+The {{< ui >}}Applications{{< /ui >}} section of the [NetFlow page][5] shows which applications use the most traffic on your network. Use it to identify the applications that drive bandwidth usage, performance issues, or congestion.
 
 <!-- TODO: add screenshot of the Applications view -->
 
-Each flow is assigned one application name, which Datadog selects from several enrichment sources: your custom IP and port mappings, deep packet inspection (DPI) data from your devices, reverse DNS hostnames, GeoIP data, and default port mappings. Datadog then groups flows by application name to build the Applications view. For the order in which Datadog checks these sources, see [Application name assignment](#application-name-assignment).
+Each flow is assigned one application name, which Datadog selects from several enrichment sources: your custom IP and port mappings, DPI data from your devices, reverse DNS hostnames, GeoIP data, and default port mappings. Datadog then groups flows by application name to build the Applications view. For the order in which Datadog checks these sources, see [Application name assignment](#application-name-assignment).
 
-To reduce the number of flows labeled `unknown` or identified only by IP address, set up [deep packet inspection](#deep-packet-inspection) on supported Cisco and Palo Alto Networks devices, or add [custom IP](#custom-ip-enrichment) and [port](#custom-port-enrichment) enrichments.
+To reduce the number of flows labeled `unknown` or identified only by IP address, set up [deep packet inspection](#deep-packet-inspection) on supported Cisco and Palo Alto Networks devices, or add [custom IP](#custom-ip-enrichment) and [custom port](#custom-port-enrichment) enrichments.
 
 ## Flow diagram
 
