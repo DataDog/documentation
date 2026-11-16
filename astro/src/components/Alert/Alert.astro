@@ -1,0 +1,27 @@
+---
+import styles from "./Alert.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { useTranslations } from "@lib/i18n/i18n";
+
+interface Props {
+  level?: "info" | "danger" | "warning" | "tip";
+}
+
+const { level = "info" } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
+
+const labels: Record<NonNullable<Props["level"]>, string> = {
+  info: translate("alert_note"),
+  danger: translate("alert_caution"),
+  warning: translate("alert_warning"),
+  tip: translate("alert_tip"),
+};
+
+const label = labels[level];
+const cl = classListFactory(styles);
+---
+
+<div class={cl("alert", `alert--${level}`)}>
+  <strong class={cl("alert__label")}>{label}</strong>
+  <slot />
+</div>

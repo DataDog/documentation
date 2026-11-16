@@ -1,0 +1,18 @@
+entries:
+  - change_type: added
+    date: '2026-11-04'
+    link: https://github.com/DataDog/documentation/pull/40795
+    operations:
+      - CreateTemporalCloudOpenMetricsIntegrationAccount
+      - DeleteTemporalCloudOpenMetricsIntegrationAccount
+      - GetTemporalCloudOpenMetricsIntegrationAccount
+      - ListTemporalCloudOpenMetricsIntegrationAccounts
+      - UpdateTemporalCloudOpenMetricsIntegrationAccount
+    title: Add Integration Accounts v2 API for Temporal Cloud OpenMetrics
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateTemporalCloudOpenMetricsIntegrationAccount
+      - UpdateTemporalCloudOpenMetricsIntegrationAccount
+    title: Add AI Gateway route permissions and safe editing

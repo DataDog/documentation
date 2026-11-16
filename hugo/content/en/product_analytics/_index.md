@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: Learning Center
+  text: Define User Behavior with Labeled Actions in Product Analytics
 - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
   tag: "Blog"
   text: "The product signal latency gap slowing your growth"
@@ -52,6 +55,14 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 Product Analytics collects client-side user activity data through the Datadog SDK. You can also send server-side events through the API to supplement your client-side data.
 
 To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your application and [enable Product Analytics](#enable-product-analytics) in Datadog. You can also [send server-side events through the API](#track-server-side-events-api).
+
+{{< skill-callout
+    title="Set up Product Analytics with an agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided Product Analytics setup."
+    action_name="copy_dd_orchestrator_product_analytics_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, set up Datadog Product Analytics in my project.
+{{< /skill-callout >}}
 
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
 
@@ -186,7 +197,7 @@ Use the following features to inform your product change decisions, such as chan
 [14]: /real_user_monitoring/application_monitoring/browser
 [15]: /real_user_monitoring/application_monitoring/ios
 [16]: /real_user_monitoring/application_monitoring/android
-[17]: /product_analytics/agentic_onboarding
+[17]: /agentic_onboarding/
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
 [21]: /api/latest/product-analytics/#send-server-side-events

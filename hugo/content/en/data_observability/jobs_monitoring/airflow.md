@@ -388,13 +388,15 @@ In Airflow 2.x, manually marking a DAG run or task as failed does not update its
 Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
 
 **Airflow 2.11 or later, including Airflow 3**
-: **Recommended provider version**: `2.18.0`
+: **Recommended provider version**: `2.20.3`
 : **Required dependency minimums**:
 : - `apache-airflow-providers-common-sql>=1.32.0`
 : - `apache-airflow-providers-common-compat>=1.15.0`
 : - `openlineage-integration-common>=1.47.0`
 : - `openlineage-python>=1.47.0`
-: **Notes**: This is the newest provider release. Provider `2.9.0` and later requires Airflow 2.11 or later.
+: - `openlineage-integration-common>=1.52.0`
+: - `openlineage-python>=1.52.0`
+: **Notes**: This is the newest provider release. Provider `2.20.3` requires Python 3.11 or later. Provider `2.9.0` and later requires Airflow 2.11 or later.
 
 **Airflow 2.10.x**
 : **Recommended provider version**: `2.8.0`
@@ -630,6 +632,52 @@ with DAG(
 ```
 
 With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ lineage_root_*() }}` calls in your task templates resolve to values that match the built-in macros shipped with provider 2.3.0+, so downstream Spark or dbt jobs can link to the Airflow root parent in Datadog.
+
+### Exclude specific DAGs from Jobs Monitoring
+
+The method depends on your `apache-airflow-providers-openlineage` version.
+
+{{< tabs >}}
+{{% tab "Provider 2.19.0 or later" %}}
+<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later, which requires Airflow 2.11 or later.</div>
+
+To stop specific DAGs from sending OpenLineage events to Datadog, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
+
+```ini
+[openlineage]
+emission_policy = [{"scope": {"dag_id": "<YOUR_DAG_ID>"}, "controls": {"emit": false}}]
+```
+
+Replace `<YOUR_DAG_ID>` with the ID of the DAG you want to exclude.
+
+To exclude multiple DAGs that share a naming pattern, set `match_mode` to `regex`:
+
+```ini
+[openlineage]
+emission_policy = [{"scope": {"dag_id": "^staging_.*"}, "match_mode": "regex", "controls": {"emit": false}}]
+```
+
+Set `emission_policy` the same way you set the other OpenLineage provider options for your platform, such as an Airflow configuration override or the `AIRFLOW__OPENLINEAGE__EMISSION_POLICY` environment variable. Restart your Airflow schedulers and workers to apply the change.
+
+For additional scopes and controls, see the [OpenLineage emission policy documentation](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html).
+{{% /tab %}}
+
+{{% tab "Earlier provider versions" %}}
+<div class="alert alert-info">Use this method if your <code>apache-airflow-providers-openlineage</code> version is earlier than 2.19.0, which does not support <code>emission_policy</code>. This method requires <code>openlineage-python</code> 1.23.0 or later.</div>
+
+Set the `OPENLINEAGE__FILTERS` environment variable on both your Airflow schedulers and workers to **exclude all matching DAG names**:
+
+```
+OPENLINEAGE__FILTERS=[{"type":"regex","regex":"^<YOUR_DAG_ID>(\\.|$)"}]
+```
+
+OpenLineage job names are `<dag_id>` for DAG run events and `<dag_id>.<task_id>` for task run events, so this pattern excludes the DAG and all of its tasks. To exclude multiple DAGs, use an alternation such as `^(dag_one|dag_two)(\\.|$)`.
+
+`OPENLINEAGE__FILTERS` is an OpenLineage client option, not an Airflow provider option. Setting `AIRFLOW__OPENLINEAGE__FILTERS` has no effect.
+
+Restart your Airflow schedulers and workers to apply the change. For more filter options, see the [OpenLineage client configuration documentation](https://openlineage.io/docs/client/python/configuration/).
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## Further Reading

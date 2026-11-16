@@ -6,18 +6,18 @@ disable_sidebar: true
 
 ### Postgres versions supported
 
-| Version      | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  |
-| ------------ | ----------- | ---------- | ------------- | ---------------- | -------------- | --------- | --------- |
-| Postgres 9.6 | {{< X >}}   | {{< X >}}  | {{< X >}}     |                  |                | {{< X >}} |           |
-| Postgres 10  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 11  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 12  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 13  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 14  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 15  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 16  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 17  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      |           | {{< X >}} |
-| Postgres 18  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} |           |
+| Version      | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  | Databricks Lakebase |
+| ------------ | ----------- | ---------- | ------------- | ---------------- | -------------- | --------- | --------- | ------------------- |
+| Postgres 9.6 | {{< X >}}   | {{< X >}}  | {{< X >}}     |                  |                | {{< X >}} |           |                     |
+| Postgres 10  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |                     |
+| Postgres 11  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |                     |
+| Postgres 12  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |                     |
+| Postgres 13  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |                     |
+| Postgres 14  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |                     |
+| Postgres 15  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |                     |
+| Postgres 16  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |                     |
+| Postgres 17  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      |           | {{< X >}} |                     |
+| Postgres 18  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} |           | {{< X >}}           |
 
 ### Setup instructions by hosting type
 
@@ -31,5 +31,7 @@ To learn how to set up Database Monitoring on a Postgres database, select your h
   {{< image-card href="/database_monitoring/setup_postgres/alloydb" src="integrations_logos/google_cloud_alloydb.png" alt="Google Cloud SQL" image_width="100">}}
   {{< image-card href="/database_monitoring/setup_postgres/azure" src="integrations_logos/azure_db_for_postgresql.png" alt="PostgreSQL" >}}
   {{< image-card href="/database_monitoring/setup_postgres/heroku" src="integrations_logos/heroku.png" alt="PostgreSQL" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/supabase" src="integrations_logos/supabase.png" alt="Supabase" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/supabase/cloud" src="integrations_logos/supabase.png" alt="Supabase Cloud" title="Supabase Cloud" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/supabase/agent" src="integrations_logos/supabase.png" alt="Supabase Self-Hosted" title="Supabase Self-Hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/lakebase" src="integrations_logos/databricks.png" alt="Databricks Lakebase" title="Databricks Lakebase" >}}
 {{< /card-grid >}}

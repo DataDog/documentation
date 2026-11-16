@@ -19,51 +19,51 @@ further_reading:
   text: Serverless 애플리케이션에서 Custom Metrics 제출
 title: Python Serverless 애플리케이션 계측
 ---
-<div class="alert alert-info">Datadog Lambda Extension의 버전 67+는 콜드 스타트 시간을 대폭 단축하도록 최적화되었습니다. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">더 읽기</a>.</div>
+<div class="alert alert-info">Datadog Lambda Extension의 버전 67+는 콜드 스타트 시간을 크게 줄이도록 최적화되었습니다. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">자세히 읽기</a>.</div>
 
 ## 설정 {#setup}
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-Datadog 내에서 직접 Python AWS Lambda 애플리케이션을 계측할 수 있습니다. [Serverless > AWS Lambda][2] 페이지로 이동하여 [**함수 계측**][3]을 선택하세요.
+Datadog 내에서 직접 Python AWS Lambda 애플리케이션을 계측할 수 있습니다. [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] 페이지로 이동하여 [{{< ui >}}Settings{{< /ui >}}][3]를 선택합니다. {{< ui >}}Remote Instrumentation{{< /ui >}} 섹션에서 {{< ui >}}AWS Lambda{{< /ui >}} 탭을 선택합니다.
 
-자세한 내용은 [AWS Lambda의 원격 계측][1]을 참조하세요.
+자세한 내용은 [AWS Lambda에 대한 원격 계측][1]을 참조하세요.
 
 [1]: /ko/serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새 배포가 필요 없이 계측할 수 있게 해줍니다. 이것이 Datadog의 서버리스 모니터링을 시작하는 가장 빠른 방법입니다.
+Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새로운 배포 없이 계측을 가능하게 합니다. Datadog의 Serverless Monitoring을 시작하는 가장 빠른 방법입니다.
 
-1. Datadog CLI 클라이언트 설치
+1. Datadog CLI 클라이언트를 설치합니다.
 
     ```sh
     npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
-2. Datadog 서버리스 모니터링을 처음 사용하는 경우, Datadog CLI를 대화형 모드로 실행하여 첫 설치를 안내받으면 빨리 시작할 수 있고, 나머지 단계는 무시하면 됩니다. Datadog을 프로덕션 애플리케이션용으로 영구적으로 설치하려면, 이 단계를 건너뛰고 나머지 단계를 따라 정상 배포 _이후_에 Datadog CLI 명령을 CI/CD 파이프라인에서 실행하세요.
+2. Datadog Serverless Monitoring을 처음 사용하는 경우, Datadog CLI를 대화형 모드로 실행하여 첫 설치를 안내받으면 빨리 시작할 수 있고, 나머지 단계는 무시하면 됩니다. 프로덕션 애플리케이션에 Datadog을 영구적으로 설치하려면 이 단계를 건너뛰고 나머지 단계를 따라 일반 _배포 후_ CI/CD 파이프라인에서 Datadog CLI 명령을 실행합니다.
 
     ```sh
     datadog-ci lambda instrument -i
     ```
 
-3. AWS 자격 증명 구성
+3. AWS 자격증명을 구성합니다.
 
-    Datadog CLI에는 AWS Lambda 서비스에 대한 액세스 권한이 필요하고, [자격 증명을 확인][1]하기 위해 AWS JavaScript SDK에 의존합니다. AWS 자격 증명이 AWS CLI를 호출할 때 사용하는 것과 같은 방법으로 구성되었어야 합니다.
+    Datadog CLI는 AWS Lambda 서비스에 대한 접근이 필요하며, [자격증명을 해결하기 위해][1] AWS JavaScript SDK에 의존합니다. AWS 자격증명이 AWS CLI를 호출할 때 사용하는 것과 동일한 방법으로 구성되어 있는지 확인하세요.
 
-4. Datadog 사이트 구성
+4. Datadog 사이트를 구성합니다.
 
     ```sh
     export DATADOG_SITE="<DATADOG_SITE>"
     ```
 
-    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 사이트가 선택되었는지 확인).
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 SITE가 선택되어 있는지 확인하세요).
 
-5. Datadog API 키 구성
+5. Datadog API 키를 구성합니다.
 
-    Datadog에서는 보안 및 간편한 교체를 위해 Datadog API 키를 AWS Secrets Manager에 저장할 것을 권장합니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. Lambda 함수에 필수 `secretsmanager:GetSecretValue` IAM 권한이 있어야 합니다.
+    Datadog에서는 보안 및 간편한 교체를 위해 Datadog API 키를 AWS Secrets Manager에 저장할 것을 권장합니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). Lambda 함수에 필요한 `secretsmanager:GetSecretValue` IAM 권한이 있는지 확인하세요.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -79,7 +79,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새 배포가 필�
 
     **참고**: Lambda 함수를 먼저 dev 또는 스테이징 환경에서 계측하세요. 계측 결과가 만족스럽지 않으면 동일한 인수로 `uninstrument`를 실행하여 변경 사항을 되돌립니다.
 
-    Lambda 함수를 계측하려면 다음 명령을 실행합니다.
+    Lambda 함수를 계측하려면 다음의 명령어를 실행하세요.
 
     ```sh
     datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
@@ -97,7 +97,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새 배포가 필�
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/cli
 {{% /tab %}}
-{{% tab "Serverless 프레임워크" %}}
+{{% tab "Serverless Framework" %}}
 
 [Datadog Serverless Plugin][1]이 함수가 [Datadog Lambda Extension][2]을 통해 메트릭, 트레이스 및 로그를 Datadog으로 전송하도록 자동으로 구성합니다.
 
@@ -109,7 +109,7 @@ Datadog Serverless Plugin을 설치하고 구성하려면 다음 단계를 따�
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-2. `serverless.yml` 업데이트:
+2. `serverless.yml`을 업데이트합니다.
 
     ```yaml
     custom:
@@ -118,9 +118,9 @@ Datadog Serverless Plugin을 설치하고 구성하려면 다음 단계를 따�
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
     ```
 
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 사이트가 선택되었는지 확인).
-    - `<DATADOG_API_KEY_SECRET_ARN>`을 [Datadog API 키][3]가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `apiKey`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
+    플레이스홀더 채우기:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 SITE가 선택되어 있는지 확인하세요).
+    - `<DATADOG_API_KEY_SECRET_ARN>`을 [Datadog API 키][3]가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `apiKey`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
 
     For more information and additional settings, see the [plugin documentation][1].
 
@@ -162,8 +162,8 @@ Datadog Serverless Plugin을 설치하고 구성하려면 다음 단계를 따�
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 사이트가 선택되었는지 확인).
-    - `<DATADOG_API_KEY_SECRET_ARN>`을 [Datadog API 키][4]가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `apiKey`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 SITE가 선택되어 있는지 확인하세요).
+    - `<DATADOG_API_KEY_SECRET_ARN>`을 [Datadog API 키][4]가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `apiKey`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
 
     More information and additional parameters can be found in the [macro documentation][1].
 
@@ -209,8 +209,8 @@ Datadog Serverless Plugin을 설치하고 구성하려면 다음 단계를 따�
 
 4. Dockerfile에서 Datadog 사이트, API 키 및 추적 구성
 
-    - 환경 변수 `DD_SITE`를 다음으로 설정: {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 사이트가 선택되었는지 확인).
-    - 환경 변수 `DD_API_KEY_SECRET_ARN`을 [Datadog API 키][3]가 안전하게 저장된 AWS 시크릿의 ARN으로 설정합니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
+    - 환경 변수 `DD_SITE`를 다음으로 설정: {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 SITE가 선택되어 있는지 확인하세요).
+    - 환경 변수 `DD_API_KEY_SECRET_ARN`을 [Datadog API 키][3]가 안전하게 저장된 AWS 시크릿의 ARN으로 설정합니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
     - 환경 변수 `DD_TRACE_ENABLED`를 `true`로 설정합니다.
 
 
@@ -248,15 +248,15 @@ module "lambda-datadog" {
 
 1. `aws_lambda_function` 리소스를 `lambda-datadog` Terraform 모듈로 바꿉니다. 그런 다음, 모듈의 `source` 및 `version`을 지정합니다.
 
-2. `aws_lambda_function` 인수 설정:
+2. `aws_lambda_function` 인수를 설정합니다.
 
    `aws_lambda_function` 리소스에서 사용할 수 있는 모든 인수를 이 Terraform 모듈에서 사용할 수 있습니다. `aws_lambda_function` 리소스에서 블록으로 정의된 인수는 각자의 중첩된 인수를 사용하여 변수로 재정의됩니다.
 
    예를 들어 `aws_lambda_function`에서는, `environment`가 `variables` 인수를 포함한 블록으로 정의됩니다. `lambda-datadog` Terraform 모듈에서는 `environment_variables`의 값이 `aws_lambda_function`의 `environment.variables` 인수로 전달됩니다. 이 모듈의 변수 전체 목록은 [입력][3]을 참조하세요.
 
-3. 환경 변수 자리표시자 채우기:
+3. 환경 변수 자리 표시자를 다음과 같이 채웁니다.
 
-   - `<DATADOG_API_KEY_SECRET_ARN>`을 Datadog API 키가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 환경 변수 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
+   - `<DATADOG_API_KEY_SECRET_ARN>`을 Datadog API 키가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 환경 변수 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
    - `<ENVIRONMENT>`를 Lambda 함수의 환경, 예를 들어 `prod` 또는 `staging`으로 바꿉니다.
    - `<SERVICE_NAME>`을 Lambda 함수의 서비스 이름으로 바꿉니다.
    - `<DATADOG_SITE>`를 {{< region-param key="dd_site" code="true" >}}으로 바꿉니다. (이 페이지에서 올바른 [Datadog 사이트][4]가 선택되었는지 확인).
@@ -300,14 +300,14 @@ SST v3를 사용하여 Datadog을 구성하려면 다음 단계를 따릅니다.
 
      - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python-versions" >}}.
 
-  2. 환경 변수 자리표시자 채우기:
-     - `<DATADOG_API_KEY_SECRET_ARN>`을 Datadog API 키가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 (JSON 블롭이 아니라) 일반 텍스트 문자열로 저장해야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 환경 변수 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
+  2. 환경 변수 자리 표시자를 다음과 같이 채웁니다.
+     - `<DATADOG_API_KEY_SECRET_ARN>`을 Datadog API 키가 안전하게 저장된 AWS 시크릿의 ARN으로 바꿉니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 환경 변수 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
      - `<ENVIRONMENT>`를 Lambda 함수의 환경, 예를 들어 `prod` 또는 `staging`으로 바꿉니다.
      - `<SERVICE_NAME>`을 Lambda 함수의 서비스 이름으로 바꿉니다.
      - `<DATADOG_SITE>`를 {{< region-param key="dd_site" code="true" >}}으로 바꿉니다. (이 페이지에서 올바른 [Datadog 사이트][1]가 선택되었는지 확인).
-     - `<VERSION>`을 Lambda 함수의 버전 번호로 교체
+     - `<VERSION>`을 Lambda 함수의 버전 번호로 교체합니다.
 
-  3. [함수 코드에 Datadog 래퍼 적용][2]
+  3. [함수 코드에 Datadog 래퍼를 적용합니다][2].
 
 [1]: /ko/getting_started/site/
 [2]: https://docs.datadoghq.com/ko/serverless/guide/handler_wrapper
@@ -382,7 +382,7 @@ SST v3를 사용하여 Datadog을 구성하려면 다음 단계를 따릅니다.
 
 4. Datadog 사이트, API 키, 트레이싱 구성
 
-    - 환경 변수 `DD_SITE`를 다음으로 설정: {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 사이트가 선택되었는지 확인).
+    - 환경 변수 `DD_SITE`를 다음으로 설정: {{< region-param key="dd_site" code="true" >}} (오른쪽에서 올바른 SITE가 선택되어 있는지 확인하세요).
     - 환경 변수 `DD_API_KEY_SECRET_ARN`을 [Datadog API 키][7]가 안전하게 저장된 AWS 시크릿의 ARN으로 설정합니다. 키는 json 블롭 안에 있지 않고, 일반 텍스트 문자열로 저장되어야 합니다. `secretsmanager:GetSecretValue` 권한이 필요합니다. 빠른 테스트를 위해 대신 `DD_API_KEY`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
     - 환경 변수 `DD_TRACE_ENABLED`를 `true`로 설정합니다.
 
@@ -425,16 +425,22 @@ SST v3를 사용하여 Datadog을 구성하려면 다음 단계를 따릅니다.
 
 {{% svl-lambda-vpc %}}
 
+## Durable Function {#durable-function}
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+
+{{% svl-lambda-durable-function %}}
+
 ## 다음 단계는? {#whats-next}
 
-- `DD_TAGS` 환경 변수를 사용하여 텔레메트리에 사용자 지정 태그 추가
-- [페이로드 수집][12]이 함수의 JSON 요청 및 응답 페이로드를 캡처하도록 구성
-- Datadog Lambda Extension을 사용 중인 경우, Datadog Forwarder의 Lambda 로그 끄기
-- 더 많은 기능은 [AWS Lambda용 Serverless Monitoring 구성][3] 참조
+- 환경 변수 `DD_TAGS`를 사용하여 텔레메트리에 사용자 지정 태그를 추가하세요.
+- [페이로드 수집][12]을 구성하여 함수의 JSON 요청 및 응답 페이로드를 캡처하세요.
+- Datadog Lambda Extension을 사용하는 경우, Datadog Forwarder의 Lambda 로그를 해제하세요.
+- [AWS Lambda에 대한 Serverless Monitoring 구성][3]을 참조하여 추가 기능을 확인하세요.
 
-### 사용자 지정 비즈니스 로직 모니터링 {#monitor-custom-business-logic}
+### 사용자 지정 비즈니스 로직을 모니터링하세요 {#monitor-custom-business-logic}
 
-사용자 지정 비즈니스 로직을 모니터링하려면 아래의 샘플 코드를 사용하여 사용자 지정 메트릭 또는 스팬을 제출하세요. 더 많은 옵션은 [서버리스 애플리케이션의 사용자 지정 메트릭 제출][4] 및 APM 가이드의 [사용자 지정 계측][5]을 참조하세요.
+사용자 지정 비즈니스 로직을 모니터링하려면 아래 샘플 코드를 사용하여 사용자 지정 메트릭 또는 스팬을 제출하세요. 추가 옵션에 대해서는 [서버리스 애플리케이션을 위한 사용자 지정 메트릭 제출][4] 및 [사용자 지정 계측][5]에 대한 APM 가이드를 참조하세요.
 
 ```python
 import time

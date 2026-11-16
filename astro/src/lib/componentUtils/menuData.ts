@@ -1,0 +1,479 @@
+/**
+ * Builds the header view model from the Hugo menu YAML at build time.
+ *
+ * Consumers (Header.astro, Footer.astro) get fully translated, URL-resolved,
+ * structured data via `getHeaderData()` / `getFooterProductLinks()` — no
+ * `find`/`filter` over raw menu arrays in component templates.
+ *
+ * Both entry points take the page's locale, since this module has no render
+ * context to read `Astro.currentLocale` from. They bind it once and thread the
+ * resulting `translate` through the builders below.
+ */
+import { parse as parseYaml } from "yaml";
+import { z } from "zod";
+import menusRaw from "@websites-modules/data/menu_data/menus.yaml?raw";
+import categoriesRaw from "@websites-modules/data/menu_data/product_categories.yaml?raw";
+import productsRaw from "@websites-modules/data/menu_data/products.yaml?raw";
+import { useTranslations, type Translate } from "@lib/i18n/i18n";
+import type { Locale } from "@lib/i18n/locale";
+import { CORP_ORIGIN } from "@config/origins";
+
+// ---------------------------------------------------------------------------
+// Raw schemas (internal)
+// ---------------------------------------------------------------------------
+
+const ParamsSchema = z
+  .object({ disabled: z.array(z.string()).optional() })
+  .optional();
+
+const MenuChildSchema = z.object({
+  identifier: z.string().optional(),
+  lang_key: z.string(),
+  url: z.string().optional(),
+  icon: z.string().optional(),
+  get children() {
+    return z.array(MenuChildSchema).optional();
+  },
+  params: ParamsSchema,
+});
+
+type MenuChild = z.infer<typeof MenuChildSchema>;
+
+const MenuItemSchema = z.object({
+  identifier: z.string(),
+  lang_key: z.string(),
+  url: z.string().optional(),
+  icon: z.string().optional(),
+  children: z.array(MenuChildSchema).optional(),
+  params: ParamsSchema,
+});
+
+type MenuItem = z.infer<typeof MenuItemSchema>;
+
+/**
+ * A product's appearance in the category tree. Upstream changed these from bare
+ * identifier strings to objects in websites-modules v1.4.319.
+ *
+ * `secondary` products stay in the header mega menu but are omitted from the
+ * footer's product column — see `layouts/partials/footer.html` upstream.
+ */
+const ProductRefSchema = z.object({
+  identifier: z.string(),
+  secondary: z.boolean().optional(),
+});
+
+type ProductRef = z.infer<typeof ProductRefSchema>;
+
+const ProductSectionSchema = z.object({
+  lang_key: z.string(),
+  products: z.array(ProductRefSchema),
+});
+
+/**
+ * `lang_key` is absent on "continuation" subcategories (identifier `…-cont`),
+ * which carry the overflow of the previous column. Upstream renders those with
+ * no heading and a spacer in its place, so the product lists stay aligned
+ * across columns — see `layouts/partials/nav/main-nav.html`.
+ */
+const ProductSubcategorySchema = z.object({
+  identifier: z.string(),
+  lang_key: z.string().optional(),
+  products: z.array(ProductRefSchema).optional(),
+  sections: z.array(ProductSectionSchema).optional(),
+});
+
+/**
+ * Column-flow hints the footer's product grid reads. Upstream uses them to
+ * reorder categories in the 3-column tablet band and to force a column break
+ * after a category — see `footer_layout` in `product_categories.yaml`.
+ */
+const FooterLayoutSchema = z.object({
+  tablet_order: z.number().optional(),
+  tablet_break_after: z.boolean().optional(),
+  desktop_break_after: z.boolean().optional(),
+});
+
+const ProductCategorySchema = z.object({
+  identifier: z.string(),
+  lang_key: z.string(),
+  description_key: z.string().optional(),
+  gradient: z.tuple([z.string(), z.string()]).optional(),
+  cta_url: z.string().optional(),
+  cta_hover_gradient: z.tuple([z.string(), z.string(), z.string()]).optional(),
+  icon: z.string(),
+  mobile: z.boolean().optional(),
+  mobile_products: z.array(z.string()).optional(),
+  footer_layout: FooterLayoutSchema.optional(),
+  children: z.array(ProductSubcategorySchema).optional(),
+});
+
+const ProductSchema = z.object({
+  identifier: z.string(),
+  lang_key: z.string(),
+  icon: z.string().optional(),
+  url: z.string(),
+});
+
+const MenusFileSchema = z.object({
+  main_left: z.array(MenuItemSchema),
+  main_right: z.array(MenuItemSchema),
+});
+
+const menus = MenusFileSchema.parse(parseYaml(menusRaw));
+const productCategories = z
+  .array(ProductCategorySchema)
+  .parse(parseYaml(categoriesRaw));
+const products = z.array(ProductSchema).parse(parseYaml(productsRaw));
+const productById = new Map(products.map((p) => [p.identifier, p]));
+
+// ---------------------------------------------------------------------------
+// Public view-model types
+// ---------------------------------------------------------------------------
+
+export type SimpleLink = { label: string; href: string };
+export type IdentifiedLink = SimpleLink & { identifier: string };
+
+export type MegaSection = {
+  /**
+   * Absent on a continuation column, which renders a spacer instead of a
+   * heading to keep the product lists aligned.
+   */
+  label?: string;
+  products: { identifier: string; label: string; url: string }[];
+};
+
+export type MegaSubcategory = {
+  identifier: string;
+  label?: string;
+  /** True for the "related_products" variant that renders with a left border. */
+  related: boolean;
+  sections: MegaSection[];
+};
+
+export type MegaCategory = {
+  identifier: string;
+  label: string;
+  descriptionLabel: string;
+  gradient: [string, string];
+  /** Makes the banner a link (Hugo's `cta_url`). */
+  ctaHref?: string;
+  /** 3-stop banner gradient on hover; falls back to `gradient`. */
+  ctaHoverGradient?: [string, string, string];
+  iconHtml: string;
+  subcategories: MegaSubcategory[];
+};
+
+/** One labelled run of product links inside a footer category. */
+export type FooterProductGroup = {
+  /** Absent on a continuation group, whose products fold into the one before. */
+  label?: string;
+  products: SimpleLink[];
+};
+
+export type FooterProductCategory = {
+  identifier: string;
+  label: string;
+  iconHtml: string;
+  groups: FooterProductGroup[];
+  layout: {
+    tabletOrder?: number;
+    tabletBreakAfter: boolean;
+    desktopBreakAfter: boolean;
+  };
+};
+
+export type SolutionsColumn = {
+  label: string;
+  items: { label: string; url: string }[];
+};
+
+export type HeaderData = {
+  product: {
+    label: string;
+    href: string;
+    pricingHref: string;
+    megaCategories: MegaCategory[];
+    carrotSvg: string;
+  } | null;
+  solutions: {
+    label: string;
+    href: string;
+    columns: SolutionsColumn[];
+  } | null;
+  leftLinks: IdentifiedLink[];
+  about: (SimpleLink & { children: SimpleLink[] }) | null;
+  blog: (SimpleLink & { children: SimpleLink[] }) | null;
+  login: SimpleLink | null;
+  getStarted: SimpleLink | null;
+};
+
+// ---------------------------------------------------------------------------
+// Internal helpers
+// ---------------------------------------------------------------------------
+
+const categoryIconMap: Record<string, string> = import.meta.glob<string>(
+  "../../assets/images/websites-modules/*.svg",
+  { query: "?raw", import: "default", eager: true },
+);
+
+export function iconHtml(name: string): string {
+  const key = `../../assets/images/websites-modules/${name}.svg`;
+  return categoryIconMap[key] ?? "";
+}
+
+function isDisabledForDocs(item: {
+  params?: { disabled?: string[] };
+}): boolean {
+  return Boolean(item.params?.disabled?.includes("documentation"));
+}
+
+/**
+ * Relative menu URLs belong to the corporate site, not the docs site. Mirrors
+ * Hugo's `layouts/partials/menulink.html`, which also adds `ja/` on Japanese
+ * pages (the only locale the corporate site serves).
+ */
+function resolveUrl(url: string | undefined, lang: Locale): string {
+  if (!url) {
+    return "#";
+  }
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  if (url.startsWith("#")) {
+    return url;
+  }
+  const langPrefix = lang === "ja" ? "ja/" : "";
+  return `${CORP_ORIGIN}/${langPrefix}${url.replace(/^\/+/, "")}`;
+}
+
+function findItem(list: MenuItem[], identifier: string): MenuItem | undefined {
+  return list.find((m) => m.identifier === identifier);
+}
+
+function asLink(
+  item: MenuItem | MenuChild | undefined,
+  translate: Translate,
+  lang: Locale,
+): SimpleLink | null {
+  if (!item) {
+    return null;
+  }
+  return { label: translate(item.lang_key), href: resolveUrl(item.url, lang) };
+}
+
+function childLinks(
+  item: MenuItem | undefined,
+  translate: Translate,
+  lang: Locale,
+): SimpleLink[] {
+  return (item?.children ?? []).map((c) => ({
+    label: translate(c.lang_key),
+    href: resolveUrl(c.url, lang),
+  }));
+}
+
+function resolveProductList(
+  refs: ProductRef[],
+  translate: Translate,
+  lang: Locale,
+): { identifier: string; label: string; url: string }[] {
+  const out: { identifier: string; label: string; url: string }[] = [];
+  for (const ref of refs) {
+    const p = productById.get(ref.identifier);
+    if (p) {
+      out.push({
+        identifier: p.identifier,
+        label: translate(p.lang_key),
+        url: resolveUrl(p.url, lang),
+      });
+    }
+  }
+  return out;
+}
+
+function buildMegaCategories(
+  translate: Translate,
+  lang: Locale,
+): MegaCategory[] {
+  return productCategories
+    .filter((c) => !c.mobile)
+    .map((cat) => {
+      const subcategories: MegaSubcategory[] = (cat.children ?? []).map(
+        (sub) => {
+          const sections: MegaSection[] = sub.sections
+            ? sub.sections.map((section) => ({
+                label: translate(section.lang_key),
+                products: resolveProductList(section.products, translate, lang),
+              }))
+            : sub.products
+              ? [
+                  {
+                    // A continuation column has no `lang_key`; leaving the
+                    // label undefined makes the renderer emit a spacer.
+                    label: sub.lang_key ? translate(sub.lang_key) : undefined,
+                    products: resolveProductList(sub.products, translate, lang),
+                  },
+                ]
+              : [];
+
+          return {
+            identifier: sub.identifier,
+            label: sub.lang_key ? translate(sub.lang_key) : undefined,
+            related: sub.identifier.includes("related"),
+            sections,
+          };
+        },
+      );
+
+      return {
+        identifier: cat.identifier,
+        label: translate(cat.lang_key),
+        descriptionLabel: translate(cat.description_key ?? ""),
+        gradient: cat.gradient ?? ["#000000", "#333333"],
+        ctaHref: cat.cta_url ? resolveUrl(cat.cta_url, lang) : undefined,
+        ctaHoverGradient: cat.cta_hover_gradient,
+        iconHtml: iconHtml(cat.icon),
+        subcategories,
+      };
+    });
+}
+
+function buildSolutionsColumns(
+  item: MenuItem | undefined,
+  translate: Translate,
+  lang: Locale,
+): SolutionsColumn[] {
+  return (item?.children ?? []).map((col) => ({
+    label: translate(col.lang_key),
+    items: (col.children ?? []).map((child) => ({
+      label: translate(child.lang_key),
+      url: resolveUrl(child.url, lang),
+    })),
+  }));
+}
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+
+export function getHeaderData(lang: Locale): HeaderData {
+  const translate = useTranslations(lang);
+  const left = menus.main_left;
+  const right = menus.main_right;
+
+  const productItem = findItem(left, "product");
+  const solutionsItem = findItem(left, "solutions");
+  const aboutItem = findItem(right, "about");
+  const blogItem = findItem(right, "blog");
+  const loginItem = findItem(right, "login");
+  const getStartedItem = findItem(right, "get_started");
+
+  return {
+    product: productItem
+      ? {
+          label: translate(productItem.lang_key),
+          href: resolveUrl(productItem.url, lang),
+          // Hugo hardcodes `pricing/` for this link (main-nav.html).
+          pricingHref: resolveUrl("pricing/", lang),
+          megaCategories: buildMegaCategories(translate, lang),
+          carrotSvg: iconHtml("right-carrot-normal-2"),
+        }
+      : null,
+    solutions: solutionsItem
+      ? {
+          label: translate(solutionsItem.lang_key),
+          href: resolveUrl(solutionsItem.url, lang),
+          columns: buildSolutionsColumns(solutionsItem, translate, lang),
+        }
+      : null,
+    leftLinks: left
+      .filter(
+        (m) =>
+          m.identifier !== "product" &&
+          m.identifier !== "solutions" &&
+          m.identifier !== "search" &&
+          !isDisabledForDocs(m),
+      )
+      .map((m) => ({
+        identifier: m.identifier,
+        label: translate(m.lang_key),
+        href: resolveUrl(m.url, lang),
+      })),
+    about: aboutItem
+      ? {
+          ...asLink(aboutItem, translate, lang)!,
+          children: childLinks(aboutItem, translate, lang),
+        }
+      : null,
+    blog: blogItem
+      ? {
+          ...asLink(blogItem, translate, lang)!,
+          children: childLinks(blogItem, translate, lang),
+        }
+      : null,
+    login:
+      loginItem && !isDisabledForDocs(loginItem)
+        ? asLink(loginItem, translate, lang)
+        : null,
+    getStarted: asLink(getStartedItem, translate, lang),
+  };
+}
+
+/**
+ * The footer's product column, as the nested category tree it renders:
+ * category → subcategory group → product links. Mirrors the flattening in
+ * websites-modules `layouts/partials/footer.html`:
+ *
+ * - only categories that declare `children` appear (the bare, child-less
+ *   entries in `product_categories.yaml` are mobile-nav rows);
+ * - a subcategory that splits into `sections` contributes one group per section;
+ * - a group with no `lang_key` is a continuation of the one before it. The main
+ *   nav uses those to spill a subcategory into a second column; the footer
+ *   wants a single list, so their products fold into the preceding group;
+ * - `secondary` products stay in the mega menu and are omitted here.
+ */
+export function getFooterProductCategories(
+  lang: Locale,
+): FooterProductCategory[] {
+  const translate = useTranslations(lang);
+  return productCategories
+    .filter((cat) => (cat.children ?? []).length > 0)
+    .map((cat) => ({
+      identifier: cat.identifier,
+      label: translate(cat.lang_key),
+      iconHtml: iconHtml(cat.icon),
+      groups: buildFooterGroups(cat.children ?? [], translate, lang),
+      layout: {
+        tabletOrder: cat.footer_layout?.tablet_order,
+        tabletBreakAfter: Boolean(cat.footer_layout?.tablet_break_after),
+        desktopBreakAfter: Boolean(cat.footer_layout?.desktop_break_after),
+      },
+    }));
+}
+
+function buildFooterGroups(
+  subcategories: z.infer<typeof ProductSubcategorySchema>[],
+  translate: Translate,
+  lang: Locale,
+): FooterProductGroup[] {
+  const groups: FooterProductGroup[] = [];
+  for (const sub of subcategories) {
+    for (const section of sub.sections ?? [sub]) {
+      const products = resolveProductList(
+        (section.products ?? []).filter((ref) => !ref.secondary),
+        translate,
+        lang,
+      ).map(({ label, url }) => ({ label, href: url }));
+      const previous = groups[groups.length - 1];
+      if (!section.lang_key && previous) {
+        previous.products.push(...products);
+      } else {
+        groups.push({
+          label: section.lang_key ? translate(section.lang_key) : undefined,
+          products,
+        });
+      }
+    }
+  }
+  return groups;
+}

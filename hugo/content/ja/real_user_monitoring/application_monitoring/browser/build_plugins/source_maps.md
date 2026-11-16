@@ -40,8 +40,7 @@ title: ソースマップ
 
 デバッグ ID またはサービスとバージョンのいずれかのソースマップアップロード照合方法を選択してください。これらのアップロード方法は相互に排他的です。
 
-{{< tabs >}}
-{{% tab "デバッグ ID (推奨)" %}}
+### Debug ID (推奨) {#debug-id-recommended}
 
 デバッグ ID は、バンドル URL、サービス、またはバージョンに依存することなく、各 JavaScript バンドルとそのソースマップを関連付けます。新しい構成にはこの方法を使用してください。
 
@@ -59,7 +58,11 @@ title: ソースマップ
 
 `debugId` と `upload` を `true` に設定して、ビルド中にデバッグ ID を挿入し、ソースマップをアップロードします。
 
+{{< tabs >}}
+{{% tab "Webpack" %}}
+
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -79,7 +82,102 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{% tab "サービスとバージョン" %}}
+{{% tab "Vite" %}}
+
+```javascript
+// vite.config.js
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    datadogVitePlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "esbuild" %}}
+
+```javascript
+// esbuild.config.js
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+  plugins: [
+    datadogEsbuildPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "ロールアップ" %}}
+
+```javascript
+// rollup.config.js
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+  plugins: [
+    datadogRollupPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{% tab "Rspack" %}}
+
+```javascript
+// rspack.config.js
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogRspackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### サービスとバージョン{#service-and-version}
 
 サービスとバージョンの照合を使用してソースマップをアップロードするには、`errorTracking.sourcemaps` オブジェクトを構成します。
 
@@ -93,6 +191,7 @@ module.exports = {
 | `maxConcurrency` | 数値 | No | `20` | 同時にアップロードできるソースマップの最大数。|
 
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -114,12 +213,9 @@ module.exports = {
 };
 ```
 
+<div class="alert alert-info">この例ではwebpackを使用します。構成オブジェクトは、サポートされているすべてのバンドラーで同一です。異なるのはインポートとプラグインの関数名のみです。バンドラーのインストール手順については、<a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">ビルドプラグイン</a>を参照してください。</div>
+
 Error Tracking のスタックトレースにインラインソースコードも表示するには、サービスとバージョンのソースマップのアップロードを [ソースコードコンテキスト][5] プラグインと組み合わせて使用してください。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-<div class="alert alert-info">これらの例では webpack を使用しています。構成オブジェクトは、サポートされているすべてのバンドラーで同一です。異なるのはインポートとプラグインの関数名のみです。バンドラーのインストール手順については、<a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">ビルドプラグイン</a>を参照してください。</div>
 
 ## 参考資料 {#further-reading}
 

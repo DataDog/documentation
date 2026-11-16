@@ -1,0 +1,30 @@
+---
+/**
+ * The bare `/api/` root, in every locale.
+ *
+ * Renders the `/api/latest/` landing page in place rather than redirecting to
+ * it. A redirect stub is an extra page load that opts out of view transitions,
+ * which breaks the cross-document transition from Hugo's nav. `BaseLayout`
+ * then moves the address bar to `/api/latest/` (see `rewrittenAddressPath`),
+ * and the canonical link already points there.
+ */
+import type { GetStaticPaths } from "astro";
+import { DEFAULT_LOCALE, LOCALES, parseLangParam } from "@lib/i18n/locale";
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = () =>
+  LOCALES.map((lang) => ({
+    params: { lang: lang === DEFAULT_LOCALE ? undefined : lang },
+  }));
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+// Unprefixed: routes are matched without the deploy branch prefix.
+return Astro.rewrite(
+  lang === DEFAULT_LOCALE ? "/api/latest/" : `/${lang}/api/latest/`,
+);
+---

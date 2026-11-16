@@ -1,0 +1,71 @@
+---
+import Tabs from "@components/Tabs/Tabs.astro";
+import TabPanel from "@components/Tab/TabPanel.astro";
+import ApiSchemaTable from "@components/ApiSchemaTable/ApiSchemaTable.astro";
+import RequestExamples from "./RequestExamples.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+
+interface Example {
+  name: string;
+  value: string;
+  language?: string;
+}
+
+interface Props {
+  schema: SchemaField[];
+  examples: Example[];
+  /** Defaults to titling the examples when there is more than one. */
+  showExampleTitles?: boolean;
+}
+
+const {
+  schema,
+  examples,
+  showExampleTitles = examples.length > 1,
+} = Astro.props;
+
+const hasSchema = schema.length > 0;
+const hasExamples = examples.length > 0;
+
+const groupId = generateElementId("request-body-tabs");
+const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
+---
+
+{
+  hasSchema && !hasExamples && (
+    <ApiSchemaTable fields={schema} nameColumnLabel="field" />
+  )
+}
+
+{
+  !hasSchema && hasExamples && (
+    <RequestExamples
+      examples={examples}
+      showTitles={showExampleTitles}
+      accordionName={`${groupId}-examples`}
+    />
+  )
+}
+
+{
+  hasSchema && hasExamples && (
+    <Tabs
+      id={groupId}
+      variant="pills"
+      labels={["Model", "Example"]}
+      panelIds={panelIds}
+    >
+      <TabPanel id={panelIds[0]} isActive>
+        <ApiSchemaTable fields={schema} nameColumnLabel="field" />
+      </TabPanel>
+      <TabPanel id={panelIds[1]}>
+        <RequestExamples
+          examples={examples}
+          showTitles={showExampleTitles}
+          accordionName={`${groupId}-examples`}
+        />
+      </TabPanel>
+    </Tabs>
+  )
+}

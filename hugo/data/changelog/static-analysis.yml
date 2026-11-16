@@ -1,0 +1,47 @@
+entries:
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41026
+    operations:
+      - CreateCustomRule
+      - CreateCustomRuleset
+      - GetCustomRule
+      - GetCustomRuleset
+      - ListCustomRulesets
+      - UpdateCustomRuleset
+    title: Fix static analysis analyze request and custom rule response spec 
+      drift
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateAiCustomRule
+      - CreateAiCustomRuleRevision
+      - CreateAiCustomRuleset
+      - CreateAiMemoryViolationResult
+      - CreateCustomRule
+      - CreateCustomRuleRevision
+      - CreateCustomRuleset
+      - CreateSCAScan
+      - DeleteAiCustomRule
+      - DeleteAiCustomRuleset
+      - DeleteAiMemoryViolationResult
+      - DeleteCustomRule
+      - DeleteCustomRuleset
+      - GetAiCustomRule
+      - GetAiCustomRuleRevision
+      - GetAiCustomRuleset
+      - GetCustomRule
+      - GetCustomRuleRevision
+      - GetCustomRuleset
+      - GetSCAScan
+      - ListAiCustomRuleRevisions
+      - ListAiCustomRulesets
+      - ListAiMemoryViolationResults
+      - ListAiPrompts
+      - ListCustomRuleRevisions
+      - ListCustomRulesets
+      - RevertCustomRuleRevision
+      - UpdateAiCustomRuleset
+      - UpdateCustomRuleset
+    title: Add AI Gateway route permissions and safe editing

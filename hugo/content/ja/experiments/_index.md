@@ -25,6 +25,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
   tag: ブログ
   text: Datadog Experiments プラグインを使用して、ChatGPT で実験を分析する
+- link: https://www.datadoghq.com/blog/how-we-built-datadog-experiments/
+  tag: ブログ
+  text: Datadog Experiments の構築方法
 title: 実験
 ---
 ## 概要 {#overview}

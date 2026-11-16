@@ -39,7 +39,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< programming-lang lang="python" >}}
 - **Minimum version**: v4.8.0
-- **Supported protocols**: `http/json`
+- **Supported protocols**: `http/protobuf` (v4.14.0+, default), `http/json` (default before v4.14.0)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -59,7 +59,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language. Python, Node.js, and .NET default to `http/json`, while Java and Go default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
+**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language. Node.js and .NET default to `http/json`, and Python defaults to `http/json` before v4.14.0. Java, Go, and Python v4.14.0+ default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
 
 ## Enable OTLP trace export
 
@@ -72,7 +72,19 @@ DD_TRACE_OTEL_ENABLED=true
 
 By default, traces are sent to `http://localhost:4318/v1/traces`.
 
-To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
+To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
+
+## Sampling and trace metrics
+
+DDOT SDKs (Datadog SDKs in OpenTelemetry mode) apply sampling before OTLP export and record the sampling probability in spans' `tracestate`. Use the versions below and a [compatible receiver][8] to extrapolate trace metrics from that probability.
+
+| Datadog SDK | Minimum version for sampling probability in OTLP spans |
+| --- | --- |
+| Java | [1.67.0][9] |
+| Python | [4.15.0][10] |
+| Node.js | [6.20.0][11] or [5.131.0][12] |
+| Go | [2.11.0][13] |
+| .NET | [3.55.0][14] |
 
 ## Verify
 
@@ -96,3 +108,10 @@ For details on which Datadog features each setup supports, see the [feature comp
 [5]: /tracing/trace_explorer/
 [6]: /opentelemetry/setup/
 [7]: /opentelemetry/compatibility/#feature-compatibility
+[8]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
+[9]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.67.0
+[10]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.15.0
+[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.20.0
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.131.0
+[13]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.11.0
+[14]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.55.0

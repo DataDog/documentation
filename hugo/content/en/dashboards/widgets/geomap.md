@@ -74,13 +74,19 @@ The Geomap widget visualizes geographic data with shaded regions or points. It c
 
 Metric queries don't include geographic coordinates. To plot metrics on a {{< ui >}}Points{{< /ui >}} layer, join your metric query with a [reference table][10] that supplies latitude and longitude coordinates. The reference table can also provide metadata, such as location names, to display on the map.
 
-1. Add a Geomap widget to a dashboard and select the {{< ui >}}Points{{< /ui >}} layer.
-1. Choose {{< ui >}}Metrics{{< /ui >}} as the data source and write your metric query.
-1. Join your query with a reference table using a shared key, such as `store_id`. The reference table supplies the latitude and longitude for each point, along with any metadata you want to display. For more information, see [Reference Table Joins with Metrics][11].
+Before you start, set up the following:
+- A metric tagged with a value that identifies each location, such as `store_id`.
+- A reference table with a column whose values match that tag, plus a latitude column and a longitude column for each location. Column names don't need to follow a specific format because you map them in the widget editor.
 
-You can also:
-- Color points based on their metric values, and define color thresholds to highlight status, such as green, yellow, and red.
-- Customize the tooltip to display additional fields from the reference table.
+To plot metrics with a reference table:
+
+1. Add a Geomap widget to a dashboard and select the {{< ui >}}Points{{< /ui >}} layer.
+1. In the source selector, choose {{< ui >}}Metrics{{< /ui >}} and write your metric query.
+1. Specify the type of join and the reference table that you want to join with your metrics. The Geomap widget offers two join types: {{< ui >}}All locations{{< /ui >}} (left join) and {{< ui >}}Locations with data only{{< /ui >}} (inner join).
+1. Define the join condition with the metric tag, such as `store_id`, and the matching reference table column. For more information about joins, see [Reference Table Joins with Metrics][11].
+1. For {{< ui >}}latitude{{< /ui >}} and {{< ui >}}longitude{{< /ui >}}, select the reference table columns that contain each location's coordinates.
+1. (Optional) Add conditional formatting rules to color points based on their metric values. For example, define thresholds that turn points green, yellow, or red to highlight status.
+1. (Optional) Under {{< ui >}}Tooltip Fields{{< /ui >}}, select additional reference table columns, such as a store name, to display in the point tooltip.
 
 ### Options
 
@@ -90,7 +96,7 @@ You can also:
 
 #### Visual formatting rules
 
-Customize the region layer color of your Geomap widget with conditional rules.
+Customize the color of regions or points in your Geomap widget with conditional rules.
 
 ## API
 

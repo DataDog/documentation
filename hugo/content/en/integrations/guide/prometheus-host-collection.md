@@ -113,7 +113,7 @@ To get started with collecting metrics exposed by Prometheus, follow these steps
 
 4. [Restart the Agent][12].
 
-5. Go into your [Metric summary page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
+5. Go into your [Metrics Catalog page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
 
     {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Prometheus metric collected">}}
 
@@ -139,6 +139,6 @@ Official integrations have their own dedicated directories. There's a default in
 [10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://prometheus.io/docs/prometheus/latest/getting_started/
 [12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[13]: https://app.datadoghq.com/metric/summary
+[13]: https://app.datadoghq.com/metric/catalog
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: /metrics/distributions/

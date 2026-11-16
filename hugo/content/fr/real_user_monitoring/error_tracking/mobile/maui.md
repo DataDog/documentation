@@ -46,11 +46,9 @@ Pour activer les rapports de plantage natifs, définissez `NativeCrashReportEnab
 })
 ```
 
-{% alert level="info" %}
-Lorsque `NativeCrashReportEnabled = true`, une exception C# non gérée qui fait planter l'application est signalée **deux fois** : une fois en tant qu'erreur C# capturée par `AppDomain.UnhandledException`, et une fois en tant que plantage natif iOS ou Android capturé par le rapporteur de plantage de la plateforme. Les deux événements partagent la même session et la même vue RUM, vous pouvez donc les corréler dans l'Explorer.
-
-Si vous souhaitez n'en conserver qu'une seule version, utilisez [`ErrorEventMapper`][5] pour supprimer celle qui ne correspond pas à votre workflow (par exemple, filtrez par le contenu `Source` ou `Stacktrace`).
-{% /alert %}
+<div class="alert alert-info">
+Quand : <code>NativeCrashReportEnabled = true</code>, une exception C# non gérée qui fait planter l'application est signalée <strong>deux fois</strong>. L'un des rapports est une erreur C# capturée par <code>AppDomain.UnhandledException</code>. L'autre est un plantage natif iOS ou Android enregistré par le système de signalement des plantages de la plateforme. Les deux événements partagent la même session et la même vue RUM, ce qui vous permet de les mettre en corrélation dans Explorer.<br><br>Pour ne conserver qu'un seul des deux, utilisez <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> pour supprimer la copie qui ne correspond pas à votre workflow. Par exemple, filtrez par <code>Source</code> ou <code>Stacktrace</code> contenu.
+</div>
 
 ## Configuration {#setup}
 
@@ -166,7 +164,7 @@ Dans une application MAUI, les fichiers `.so` natifs proviennent généralement 
 Pour vérifier votre configuration de Crash Reporting et d'Error Tracking, déclenchez un crash et confirmez que l'erreur apparaît dans Datadog :
 
 1. Exécutez votre application sur un appareil réel ou un émulateur (les dSYM ne sont générés que pour les builds d'appareil sur iOS).
-2. Exécutez du code qui génère une exception non gérée. Exemple :
+2. Exécutez du code qui génère une exception non gérée. Par exemple :
 
    ```csharp
    void OnButtonClicked(object sender, EventArgs e)
@@ -203,4 +201,3 @@ Le traitement des symboles peut prendre jusqu'à 5 minutes. Vérifiez [{{< ui >}
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /fr/real_user_monitoring/application_monitoring/maui/setup
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /fr/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events

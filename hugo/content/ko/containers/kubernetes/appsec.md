@@ -5,25 +5,25 @@ aliases:
 description: Kubernetes 인그레스 프록시 및 게이트웨이에 대해 App and API Protection 자동 활성화
 further_reading:
 - link: /containers/kubernetes/apm/
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션 트레이스 수집
 - link: /containers/kubernetes/log/
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션 로그 수집
 - link: /security/application_security/setup/kubernetes/envoy-gateway
-  tag: 설명서
+  tag: 문서
   text: Envoy Gateway용 App and API Protection
 - link: /security/application_security/setup/kubernetes/istio
-  tag: 설명서
+  tag: 문서
   text: Istio용 App and API Protection
 - link: /security/application_security/setup/nginx/ingress-controller
-  tag: 설명서
+  tag: 문서
   text: ingress-nginx용 App and API Protection
 - link: /security/default_rules/?category=cat-application-security
-  tag: 설명서
+  tag: 문서
   text: OOTB App and API Protection 규칙
 - link: /security/application_security/troubleshooting
-  tag: 설명서
+  tag: 문서
   text: App and API Protection 문제 해결
 site_support_id: containers_kubernetes_appsec
 title: Kubernetes용 App and API Protection
@@ -32,12 +32,12 @@ title: Kubernetes용 App and API Protection
 
 ## 개요 {#overview}
 
-Kubernetes용 App and API Protection은 Kubernetes 클러스터에서 지원되는 인그레스 프록시 및 게이트웨이를 자동으로 구성하여 Application Security 모니터링을 활성화합니다. 이를 통해 수동 프록시 구성이 필요하지 않으며, 개별 서비스를 수정하거나 애플리케이션 전체에 트레이서를 배포하지 않고도 API 전반에 걸친 보안 커버리지를 제공합니다.
+Kubernetes용 App and API Protection은 Kubernetes 클러스터에서 지원되는 인그레스 프록시 및 게이트웨이를 자동으로 구성하여 Application Security 모니터링을 활성화합니다. 이를 통해 수동 프록시 구성이 필요하지 않으며, 개별 서비스를 수정하거나 애플리케이션 전체에 트레이서를 배포하지 않고도 API 전반에 걸친 보안 적용 범위를 제공합니다.
 
 ### 자동 구성을 수행하는 주체 {#what-performs-the-automatic-configuration}
 
 Kubernetes용 App and API Protection은 다음을 수행하는 Kubernetes 컨트롤러(Datadog Cluster Agent에서 실행)를 사용합니다.
-클러스터에서 지원되는 프록시를 - **자동으로 감지**합니다.
+클러스터에서 지원되는 프록시를 - **자동으로 탐지**합니다.
 - **프록시를 구성**하여 외부 Application Security 프로세서를 통해 트래픽을 라우팅합니다.
 인그레스 계층을 통과하는 모든 트래픽에 대해 - **위협 탐지를 활성화**합니다.
 Helm을 사용한 중앙 집중식 구성을 통해 - **운영을 간소화**합니다.
@@ -82,7 +82,7 @@ Kubernetes용 App and API Protection은 두 가지 배포 모드를 지원합니
 
 ## 사이드카 모드 설정 {#set-up-sidecar-mode}
 
-사이드카 모드에서 보안 프로세서는 각 게이트웨이 포드에 직접 주입된 컨테이너로 실행됩니다. Cluster Agent가 주입을 자동으로 처리하므로 별도의 프로세서 배포나 서비스가 필요하지 않습니다.
+사이드카 모드에서 보안 프로세서는 각 게이트웨이 포드에 직접 주입된 컨테이너로 실행됩니다. Cluster Agent가 인젝션을 자동으로 처리하므로 별도의 프로세서 배포나 서비스가 필요하지 않습니다.
 
 ### 사이드카 모드 사용 시기 {#when-to-use-sidecar-mode}
 
@@ -94,7 +94,7 @@ Kubernetes용 App and API Protection은 두 가지 배포 모드를 지원합니
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-`values.yaml`에 다음 내용을 추가합니다. 주입기가 프로세서 배포를 자동으로 처리하므로 `processor.service.*` 값이 필요하지 않습니다.
+`values.yaml`에 다음 내용을 추가합니다. 인젝터가 프로세서 배포를 자동으로 처리하므로 `processor.service.*` 값이 필요하지 않습니다.
 
 ```yaml
 datadog:
@@ -113,17 +113,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-이 옵션을 사용하려면 Datadog Operator 버전 1.27.1 이상이 필요합니다.
+이 옵션을 사용하려면 Datadog Operator 버전 1.31.0 이상이 필요합니다.
 
-`DatadogAgent` 리소스에 주석을 추가합니다. 사이드카 모드가 기본값이므로 주입기를 활성화하는 것만으로 충분합니다.
+`DatadogAgent` 리소스의 `spec.features.appsec.injector` 섹션에서 인젝터를 구성합니다. 사이드카 모드가 기본값이므로 인젝터를 활성화하는 것만으로 충분합니다.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 구성을 적용합니다.
@@ -137,58 +140,58 @@ kubectl apply -f datadog-agent.yaml
 
 ### 사이드카 구성 참조 {#sidecar-configuration-reference}
 
-모든 사이드카 파라미터는 `datadog.appsec.injector.sidecar` 아래에 중첩된 Helm 값으로 사용하거나 `DatadogAgent` 주석(Datadog Operator 버전 1.27.1 이상)으로 사용할 수 있습니다.
+모든 사이드카 파라미터는 `datadog.appsec.injector.sidecar` 아래에 중첩된 Helm 값으로 사용하거나 `spec.features.appsec.injector.sidecar` 아래의 `DatadogAgent` 필드로 사용할 수 있습니다(Datadog Operator 버전 1.31.0 이상).
 
 `sidecar.image`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.image`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.image`
 : **유형**: 문자열
 : **기본값**: `ghcr.io/datadog/dd-trace-go/service-extensions-callout`
 : **설명**: 사이드카 컨테이너 이미지
 
 `sidecar.imageTag`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.image_tag`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.imageTag`
 : **유형**: 문자열
 : **기본값**: `v2.6.0`
 : **설명**: 사이드카 컨테이너 이미지 태그
 
 `sidecar.port`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.port`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.port`
 : **유형**: 정수
 : **기본값**: `8080`
 : **설명**: 사이드카 프로세서용 gRPC 수신 포트
 
 `sidecar.healthPort`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.health_port`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.healthPort`
 : **유형**: 정수
 : **기본값**: `8081`
 : **설명**: 사이드카 프로세서용 상태 검사 포트
 
 `sidecar.bodyParsingSizeLimit`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.body_parsing_size_limit`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.bodyParsingSizeLimit`
 : **유형**: 정수
 : **기본값**: `0`
 : **설명**: 처리할 최대 요청 본문 크기(바이트). `0`은 본문 처리를 비활성화합니다. 본문 구문 분석을 완전히 비활성화하려면 `-1`을 사용하세요.
 
 `sidecar.resources.requests.cpu`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.resources.requests.cpu`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.resources.requests.cpu`
 : **유형**: 문자열
 : **기본값**: `10m`
 : **설명**: 사이드카 컨테이너에 대한 CPU 요청
 
 `sidecar.resources.requests.memory`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.resources.requests.memory`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.resources.requests.memory`
 : **유형**: 문자열
 : **기본값**: `128Mi`
 : **설명**: 사이드카 컨테이너에 대한 메모리 요청
 
 `sidecar.resources.limits.cpu`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.resources.limits.cpu`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.resources.limits.cpu`
 : **유형**: 문자열
 : **기본값**: `""`
 : **설명**: 사이드카 컨테이너에 대한 CPU 제한(선택 사항)
 
 `sidecar.resources.limits.memory`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.sidecar.resources.limits.memory`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.sidecar.resources.limits.memory`
 : **유형**: 문자열
 : **기본값**: `""`
 : **설명**: 사이드카 컨테이너에 대한 메모리 제한(선택 사항)
@@ -200,8 +203,8 @@ kubectl apply -f datadog-agent.yaml
 ### 아키텍처 {#architecture}
 
 -  **보안 프로세서 배포**: 관련 서비스가 포함된 Kubernetes 배포로 중앙 집중식 Application Security 프로세서를 배포합니다.
--  **자동 프록시 감지**: 컨트롤러는 Kubernetes 인포머를 사용하여 클러스터에서 지원되는 프록시 리소스를 감시합니다.
--  **자동 구성**: 프록시가 감지되면 컨트롤러는 보안 프로세서 서비스로 트래픽을 라우팅하는 데 필요한 프록시 구성을 생성합니다.
+-  **자동 프록시 탐지**: 컨트롤러는 Kubernetes 인포머를 사용하여 클러스터에서 지원되는 프록시 리소스를 감시합니다.
+-  **자동 구성**: 프록시가 탐지되면 컨트롤러는 보안 프로세서 서비스로 트래픽을 라우팅하는 데 필요한 프록시 구성을 생성합니다.
 -  **트래픽 처리**: 게이트웨이는 보안 분석을 위해 Kubernetes 서비스를 통해 보안 프로세서로 트래픽을 라우팅합니다.
 
 ### 이점 {#benefits}
@@ -292,20 +295,25 @@ Helm 또는 Datadog Operator를 사용하여 Datadog Cluster Agent가 보안 프
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-이 옵션을 사용하려면 Datadog Operator 버전 1.27.1 이상이 필요합니다.
+이 옵션을 사용하려면 Datadog Operator 버전 1.31.0 이상이 필요합니다.
 
-`DatadogAgent` 리소스에 주석을 추가합니다. 서비스 이름 주석은 필수이며 보안 프로세서 서비스와 일치해야 합니다.
+`DatadogAgent` 리소스의 `spec.features.appsec.injector` 섹션에서 인젝터를 구성합니다. 프로세서 서비스 이름은 필수이며 보안 프로세서 서비스와 일치해야 합니다.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.mode: "external"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
-    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        mode: external
+        processor:
+          service:
+            name: datadog-aap-extproc-service  # Required: must match your security processor service name
+            namespace: datadog
 ```
 
 구성을 적용합니다.
@@ -342,7 +350,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 
 ### 3단계: 설치 확인 {#step-3-verify-the-installation}
 
-Cluster Agent가 프록시를 감지했는지 확인하세요.
+Cluster Agent가 프록시를 탐지했는지 확인하세요.
 
 ```bash
 kubectl logs -n datadog deployment/datadog-cluster-agent | grep appsec
@@ -364,52 +372,54 @@ Datadog Cluster Agent는 클러스터에서 수행되어 성공 또는 실패한
 
 ## 구성 참조 {#configuration-reference}
 
+**참고**: `agent.datadoghq.com/appsec.*` 주석은 Datadog Operator 버전 1.31.0에서 더 이상 지원되지 않으므로 버전 1.32.0에서 제거됩니다. 대신 `spec.features.appsec.injector`를 통해 인젝터를 구성하세요. 두 소스는 상호 배타적임: `spec.features.appsec.injector`가 설정되면 CRD에서 설정하지 않은 필드까지 포함해 주석이 완전히 무시되므로 전체 구성을 단일 단계로 마이그레이션하세요.
+
 ### 자동 구성 옵션 {#automatic-configuration-options}
 
 `enabled`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.enabled`
-: **유형**: 부울
+: **Datadog Operator 필드**: `spec.features.appsec.injector.enabled`
+: **유형**: 불리언
 : **기본값**: `false`
 : **설명**: 통합 활성화 또는 비활성화
 
 `mode`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.mode`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.mode`
 : **유형**: 문자열
 : **기본값**: `""`, 비어 있는 경우 기본값은 sidecar입니다.
-: **설명**: 주입 모드: `"sidecar"` 또는 `"external"`
+: **설명**: 인젝션 모드: `"sidecar"` 또는 `"external"`
 
 `autoDetect`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.autoDetect`
-: **유형**: 부울
+: **Datadog Operator 필드**: `spec.features.appsec.injector.autoDetect`
+: **유형**: 불리언
 : **기본값**: `true`
-: **설명**: 지원되는 프록시 자동 감지 및 구성
+: **설명**: 지원되는 프록시 자동 탐지 및 구성
 
 `proxies`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.proxies`
-: **유형**: JSON 배열
+: **Datadog Operator 필드**: `spec.features.appsec.injector.proxies`
+: **유형**: 문자열 배열
 : **기본값**: `[]`
 : **설명**: 구성할 프록시 유형의 수동 목록. 유효한 값은 [설정 페이지][10]를 참조하세요.
 
 `processor.service.name`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.processor.service.name`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.processor.service.name`
 : **유형**: 문자열
 : **기본값**: 없음
 : **설명**: **필수 항목.** 보안 프로세서 Kubernetes 서비스의 이름
 
 `processor.service.namespace`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.processor.service.namespace`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.processor.service.namespace`
 : **유형**: 문자열
 : **기본값**: Cluster Agent가 실행 중인 네임스페이스로 기본 설정됩니다.
 : **설명**: 보안 프로세서 서비스가 배포된 네임스페이스
 
 `processor.address`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.processor.address`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.processor.address`
 : **유형**: 문자열
 : **기본값**: `{service.name}.{service.namespace}.svc`
 : **설명**: 전체 서비스 주소 재정의
 
 `processor.port`
-: **Datadog Operator 주석**: `agent.datadoghq.com/appsec.injector.processor.port`
+: **Datadog Operator 필드**: `spec.features.appsec.injector.processor.port`
 : **유형**: 정수
 : **기본값**: `443`
 : **설명**: 보안 프로세서 서비스의 포트
@@ -457,13 +467,13 @@ spec:
 
 모든 오류는 Kubernetes 이벤트로 기록됩니다. 계측하려는 게이트웨이 또는 GatewayClass에서 이벤트를 확인하세요.
 
-### 자동 구성이 프록시를 감지하지 못함 {#automatic-configuration-not-detecting-proxies}
+### 자동 구성이 프록시를 탐지하지 못함 {#automatic-configuration-not-detecting-proxies}
 
 **증상**: 프록시 구성 리소스가 생성되지 않습니다.
 
 **해결 방법**:
 - `autoDetect`가 `true`로 설정되어 있는지, 또는 프록시가 수동으로 지정되었는지 확인하세요.
-- Cluster Agent 로그에서 프록시 감지 메시지를 확인하세요.
+- Cluster Agent 로그에서 프록시 탐지 메시지를 확인하세요.
 - 프록시가 설치되어 있으며 예상되는 Kubernetes 리소스(Gateway, GatewayClass)가 존재하는지 확인하세요.
 - `proxies` 파라미터를 사용하여 프록시 유형을 수동으로 지정해 보세요.
 

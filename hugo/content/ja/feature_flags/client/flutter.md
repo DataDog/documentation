@@ -72,7 +72,7 @@ Flutter アプリがすでに `datadog_flutter_plugin` を初期化している�
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Flutter Feature Flags は、選択された <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
@@ -94,7 +94,7 @@ final configuration = DatadogConfiguration(
   );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
-{{< /code-block >}}
+```
 
 初期化後、プラグインからフラグクライアントを取得し、現在のサブジェクトの評価コンテキストで初期化します。
 
@@ -130,7 +130,7 @@ try {
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart および Flutter Feature Flags は、選択された <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
@@ -146,7 +146,7 @@ await datadogFlags.enable(
     ),
   ),
 );
-{{< /code-block >}}
+```
 
 `applicationId`、`service`、および `version` はオプションです。これらが存在する場合、SDK はそれらを Feature Flags テレメトリコンテキストに含めます。
 
@@ -337,7 +337,7 @@ DatadogFlagsConfiguration(
 
   Flutter 統合セットアップの場合は、これらのオプションを `DatadogFlagsPluginConfiguration` を介して渡します。
 
-  {{< code-block lang="dart" >}}
+  ```dart
   final configuration = DatadogConfiguration(
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENV_NAME>',
@@ -355,14 +355,14 @@ DatadogFlagsConfiguration(
         rumIntegrationEnabled: true,
       ),
     );
-  {{< /code-block >}}
+  ```
 
 `rumIntegrationEnabled`
-: `true` (デフォルト) の場合、バリアントを返す正常な評価は、Feature Flag 評価としてアクティブな RUM ビューに追加されます。アプリで RUM を使用していない場合、このオプションは無効です。
+: When `true` (default), successful evaluations that return a variant are added to the active RUM view as feature flag evaluations. If your app does not use RUM, this option has no effect.
 
-## 最後に確認された割り当てストレージ {#last-known-assignment-storage}
+## Last-known assignment storage 
 
-SDK は `initialize()` が正常に行われた後、割り当てをメモリ内に保持します。SDK インスタンスで最後に確認された割り当てを復元するには、`DatadogFlagsStore` を提供します。
+The SDK keeps assignments in memory after `initialize()` succeeds. To restore last-known assignments across SDK instances, provide a `DatadogFlagsStore`:
 
 {{< code-block lang="dart" >}}
 class MyFlagsStore implements DatadogFlagsStore {
@@ -384,29 +384,29 @@ class MyFlagsStore implements DatadogFlagsStore {
 }
 {{< /code-block >}}
 
-保存された割り当ては、その評価コンテキストがアクティブなコンテキストと一致する場合にのみ使用されます。ライブでの取得に成功すると常に、クライアントが最新の割り当て状態に移行され、その状態がストアに書き込まれます。
+Stored assignments are used only when their evaluation context matches the active context. A live successful fetch always moves the client to the newest assignment state and writes that state back to the store.
 
-Dart パッケージが、ディスクの場所を選択することや、Flutter 固有のディスクストアを提供することはありません。Flutter アプリは、選択したアプリストレージメカニズムを使用して `DatadogFlagsStore` を実装できます。
+The Dart package does not choose a disk location or ship a Flutter-specific disk store. Flutter apps can implement `DatadogFlagsStore` with their preferred app storage mechanism.
 
-## シャットダウン {#shutdown}
+## Shutdown 
 
-クライアントが不要になったら、`shutdown()` を呼び出します。これにより、クライアントのメモリ内割り当てを消去する前に、保留中のエクスポージャーとフラグ評価のアップロードがクリーンアップされます。
+Call `shutdown()` when a client is no longer needed. This drains pending exposure and flag evaluation uploads before clearing the client's in-memory assignments.
 
 {{< code-block lang="dart" >}}
 await flagsClient.shutdown();
 {{< /code-block >}}
 
-アプリケーションが Flags SDK を破棄している場合は、`DatadogFlags.instance.disable()` を呼び出します。
+Call `DatadogFlags.instance.disable()` when the application is tearing down the flags SDK:
 
 {{< code-block lang="dart" >}}
 await DatadogFlags.instance.disable();
 {{< /code-block >}}
 
-## 完全な例 {#complete-example}
+## Complete example 
 
-次の例では、SDK を有効にし、評価コンテキストを使用してクライアントを初期化し、ブールフラグを評価します。
+The following example enables the SDK, initializes a client with an evaluation context, and evaluates a Boolean flag:
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags/datadog_flags.dart';
 
 Future<void> initializeFlags() async {
@@ -450,11 +450,11 @@ Future<void> initializeFlags() async {
     showNewCheckoutFlow();
   }
 }
-{{< /code-block >}}
+```
 
-## テスト {#testing}
+## Testing 
 
-実際の `DatadogFlagsClient` を使用して専用の Datadog テスト環境に対してテストを行うか、小さなインターフェイスの背後にアプリケーションコードを分離して、ユニットテストで偽の実装を代わりに使用することができます。このセクションでは、テストを自己完結型かつオフラインで実施できる、偽の実装を使用するアプローチを紹介します。
+You can test against a dedicated Datadog test environment with the real `DatadogFlagsClient`, or isolate application code behind a small interface and substitute a fake implementation in unit tests. This section shows the fake approach, which keeps tests self-contained and offline.
 
 {{< code-block lang="dart" >}}
 abstract interface class CheckoutFlags {
@@ -483,9 +483,9 @@ final class TestCheckoutFlags implements CheckoutFlags {
 }
 {{< /code-block >}}
 
-次に、`TestCheckoutFlags` をユニットテストに注入し、`DatadogCheckoutFlags` を本番環境に注入します。
+Then inject `TestCheckoutFlags` into unit tests and `DatadogCheckoutFlags` in production.
 
-## 参考資料 {#further-reading}
+## Further reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 

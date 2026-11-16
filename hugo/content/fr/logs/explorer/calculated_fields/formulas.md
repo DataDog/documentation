@@ -37,7 +37,7 @@ Les opérateurs disponibles par ordre de préséance :
 | `+`, `-` | Addition, soustraction |
 | `<`, `<=`, `>`, `>=` | Inférieur à, inférieur ou égal à, supérieur à, supérieur ou égal à |
 | `==`, `!=` | Correspond, ne correspond pas |
-| `&&`, `AND` | ET logique |
+| `&&`, `AND` | AND logique |
 | `\|\|`, `OR` | OU logique |
 
 ## Fonctions {#functions}
@@ -319,7 +319,9 @@ Vérifie si un attribut ou une expression est nul.
 
 ### Regex {#regex}
 
-Les fonctions Regex correspondent ou transforment une valeur à l'aide d'une expression régulière (regex). Les motifs prennent en charge les mêmes constructions regex que [regex extraction][1], telles que les littéraux, les classes de caractères et les quantificateurs. L'échappement diffère : un motif d'extraction est un champ brut, tandis qu'un motif ici est un argument de chaîne entre guillemets doubles. Contrairement à l'extraction, les groupes de capture ici n'ont pas besoin de nom : `regexp_replace` peut référencer un groupe sans nom par sa position avec `$1` jusqu'à `$9`. Les mêmes conseils sur le [pattern performance][2] s'appliquent.
+Les fonctions Regex correspondent ou transforment une valeur à l'aide d'une expression régulière (regex). Les motifs prennent en charge les mêmes constructions regex que [regex extraction][1], telles que les littéraux, les classes de caractères et les quantificateurs. Les mêmes conseils sur le [pattern performance][2] s'appliquent. Contrairement à l'extraction, les groupes de capture dans les modèles de formule n'ont pas besoin de nom.
+
+<div class="alert alert-tip">Les arguments de formule sont des chaînes littérales entre guillemets doubles, donc une barre oblique inverse littérale doit être écrite sous la forme de deux barres obliques inverses. Par exemple, pour faire correspondre la classe abrégée de chiffres, écrivez <code>"\\d"</code> dans le modèle. La même règle s'applique à la chaîne de remplacement : pour insérer un signe dollar littéral plutôt qu'une référence de groupe, écrivez <code>"\\$"</code>.</div>
 
 <h4>regexp_like(valeur <i>str</i>, motif <i>str</i>)</h4>
 
@@ -336,7 +338,7 @@ Renvoie `true` si le motif correspond n'importe où dans la valeur, et `false` s
 
 <h4>regexp_replace(entrée <i>str</i>, motif <i>str</i>, remplacement <i>str</i>, [début <i>int</i>, N <i>int</i>])</h4>
 
-Renvoie `input` avec le texte correspondant remplacé. Utilisez `$1` à `$9` dans `replacement` pour insérer la correspondance d'un groupe de capture, ou `${name}` pour un groupe nommé. Les arguments de formule sont des chaînes littérales entre guillemets doubles, vous devez donc échapper les barres obliques inverses. Par exemple, écrivez `"\\d"` plutôt que `"\d"` pour les classes abrégées dans `pattern`. Pour insérer un `$` littéral dans `replacement`, échappez sa signification spéciale avec `\$`, puis échappez cette barre oblique inverse pour la chaîne littérale : `"\\$"`.
+Renvoie `input` avec le texte correspondant remplacé. Utilisez `$1` à `$9` dans `replacement` pour insérer la correspondance d'un groupe de capture, ou `${name}` pour un groupe nommé.
 
 | Argument | Signification |
 |---|---|

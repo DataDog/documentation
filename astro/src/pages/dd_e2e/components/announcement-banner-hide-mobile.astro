@@ -1,0 +1,51 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { BannerParams } from "@lib/componentUtils/bannerData";
+
+const title = "Announcement Banner: hide on mobile";
+
+// Same demo banner as `announcement-banner.astro`, with `hide_on_mobile` set.
+// Below 768px the banner is hidden and the header and body offsets fall back
+// to their no-banner values.
+const demoBanner: BannerParams = {
+  desktop_message:
+    "<span>Datadog is coming to a city near you. <strong>See the schedule.</strong></span>",
+  mobile_message: "<span>Datadog events near you</span>",
+  background_color: "#632ca6",
+  external_link: "https://example.com/events",
+  hide_on_mobile: true,
+};
+---
+
+<BaseLayout title={title} announcementBanner={demoBanner}>
+  <div class="docs-page">
+    <nav>
+      <a href="/dd_e2e/components/announcement-banner"
+        >&larr; AnnouncementBanner</a>
+    </nav>
+    <div class="prose">
+      <h1>AnnouncementBanner: hide on mobile</h1>
+
+      <p>
+        This page's banner sets <code>hide_on_mobile: true</code>. Resize below
+        768px: the banner disappears and the header moves to the top of the
+        viewport with no leftover gap. At 768px and wider it renders as usual.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+</style>

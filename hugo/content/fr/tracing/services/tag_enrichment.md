@@ -4,7 +4,7 @@ description: Enrichissez automatiquement la télémétrie avec des tags d'équip
 further_reading:
 - link: /tracing/services/service_remapping_rules
   tag: Documentation
-  text: Règles Service Remapping
+  text: Règles de remappage de service
 - link: /internal_developer_portal/catalog/
   tag: Documentation
   text: Catalog
@@ -16,11 +16,11 @@ L'enrichissement de tags est en préversion. Pour demander l'accès, remplissez 
 
 ## Présentation {#overview}
 
-Utilisez des règles d'enrichissement de tags pour ajouter des tags à vos logs, spans APM et métriques de trace sans modification de code ni redéploiement. Vous pouvez utiliser des valeurs provenant des métadonnées de service que vous avez déjà définies dans le Catalogue, la valeur d'un autre tag ou une valeur fixe.
+Utilisez des règles d'enrichissement de tags pour ajouter des tags à votre télémétrie sans modification du code ni redéploiement. Vous pouvez utiliser des valeurs provenant des métadonnées de service que vous avez déjà définies dans le Catalogue, la valeur d'un autre tag ou une valeur fixe.
 
 ## Prérequis {#prerequisites}
 
-Vous devez disposer du rôle Datadog Admin pour créer des règles d'enrichissement de tags. Consultez [Contrôle d'accès basé sur les rôles][2] pour plus de détails.
+Vous devez disposer du rôle Datadog Admin pour créer des règles d'enrichissement de tags. Consultez [Contrôle d'accès basé sur les rôles][2] pour plus de détails.
 
 ## Créer une règle d'enrichissement de tags {#create-a-tag-enrichment-rule}
 
@@ -45,8 +45,7 @@ Les règles personnalisées vous permettent de cibler un ensemble spécifique de
    - Sélectionnez le tag `team`, le tag `system`, le tag `custom`, ou plusieurs.
    - Pour chaque tag, sélectionnez si la valeur du tag provient des métadonnées d'entité, de la valeur d'un tag différent ou d'une valeur fixe.
    - Choisissez si la valeur est appliquée uniquement lorsqu'elle n'existe pas déjà, ou si elle est ajoutée à la liste actuelle de valeurs pour ce tag.
-1. Par défaut, les tags sont ajoutés uniquement lorsqu'une valeur est absente pour un élément de télémétrie donné.
-1. Optionnellement, saisissez un nom descriptif pour la règle.
+1. Sélectionnez les types de télémétrie à enrichir.
 1. Examinez et enregistrez votre règle. Une fois la règle enregistrée, l'enrichissement peut prendre jusqu'à une heure pour être entièrement appliqué à la télémétrie entrante.
 
 ### Ajouter une règle d'enrichissement de tag depuis une page de service {#add-a-tag-enrichment-rule-from-a-service-page}
@@ -61,7 +60,7 @@ Cliquez sur {{< ui >}}Add Tags{{< /ui >}} pour ouvrir la fenêtre modale de règ
 
 ## Comportement d'enrichissement de tags {#tag-enrichment-behavior}
 
-- **Télémétrie impactée** : L'enrichissement de tags s'applique uniquement aux logs, aux spans APM et aux métriques de trace. Comme [Data Observability: Jobs Monitoring][3] envoie la télémétrie des tâches sous forme de spans APM, cette télémétrie est également enrichie, mais les métriques de Jobs Monitoring ne le sont pas. L'enrichissement de tags n'est pas pris en charge pour d'autres types de télémétrie, notamment les métriques personnalisées et d'infrastructure, Database Monitoring, le profilage, Kubernetes, Universal Service Monitoring et les événements.
+- **Impacted telemetry** : l'enrichissement des tags s'applique à toute la télémétrie, à l'exception de DSM, Events et Orchestration.
 - **Historical data** : Les règles d'enrichissement de tags s'appliquent uniquement à la télémétrie ingérée pendant qu'une règle est active. Les données passées ne sont pas mises à jour rétroactivement. La suppression ou la modification d'une règle empêche son application à la nouvelle télémétrie, mais ne met pas à jour les données précédemment ingérées.
 - **Mises à jour des métadonnées** : la mise à jour ou l'ajout de métadonnées d'entité aux services alors que les règles d'enrichissement sont activées, y compris les règles par défaut, met automatiquement à jour ces tags.
 - **Rule processing order** : Les règles d'enrichissement de tags sont appliquées dans l'ordre dans lequel elles ont été créées. Les règles situées en haut de la liste prévalent sur celles situées en dessous.

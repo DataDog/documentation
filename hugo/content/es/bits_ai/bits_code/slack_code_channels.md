@@ -26,7 +26,7 @@ Obtenga más información sobre los canales de código en la [documentación de 
 
 ## Crear un canal de código {#create-a-code-channel}
 
-Después de [configurar Bits Code][4], cree un canal de código mencionando a `@Datadog` en Slack y describiendo un cambio de código que le gustaría realizar. Si Bits Chat determina que la solicitud requiere cambios de código, transfiere la tarea a Bits Code, que crea un canal de código. Bits publica un enlace al nuevo canal de código en la ubicación donde se solicitó originalmente.
+Después de [configurar Bits Code y habilitar los canales de código][4], cree un canal de código mencionando a `@Datadog` en Slack y describiendo un cambio de código que le gustaría realizar. Si Bits Chat determina que la solicitud requiere cambios de código, transfiere la tarea a Bits Code, que crea un canal de código. Bits publica un enlace al nuevo canal de código en la ubicación donde se solicitó originalmente.
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel_creation.png" alt="Un mensaje de Slack mencionando a @Datadog, seguido de una tarjeta que muestra el canal de código resultante que se creó" style="width:100%;" >}}
 
@@ -48,17 +48,28 @@ Mientras Bits Code trabaja, el canal de código muestra:
 
 - Una opción para visualizar los cambios propuestos en el código.
 - Widgets de gráficos de Datadog, cuando sean relevantes para la tarea
-- Un botón {{< ui >}}Create PR{{< /ui >}} para abrir una solicitud de extracción o de fusión a partir de los cambios, cuando esté listo
+- Un botón {{< ui >}}Create PR{{< /ui >}} para abrir una solicitud de extracción a partir de los cambios
 
 Después de que Bits Code haya generado un diff de código, puede comentar en líneas específicas directamente en el canal de código.
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/commenting_on_code.png" alt="Se redacta una pregunta para líneas de código específicas" style="width:100%;" >}}
 
-Bits Code no abre automáticamente una solicitud de extracción o de fusión desde un canal de código; haga clic en {{< ui >}}Create PR{{< /ui >}} cuando esté listo. El usuario que hace clic en {{< ui >}}Create PR{{< /ui >}} es el autor de la solicitud de extracción o de fusión resultante.
-
 El trabajo en cada canal de código también se refleja en una [sesión de Bits Code][2] en Datadog. Para verlo, en la esquina inferior derecha del canal de código, haga clic en {{< ui >}}</> Code session{{< /ui >}}.
 
 Obtenga más información sobre cómo trabajar en un canal de código en la [documentación de Slack][6].
+
+### Cómo funciona el envío automático en los canales de código {#how-auto-push-works-in-code-channels}
+
+Cuando la [configuración de envío automático][7] está establecida en {{< ui >}}Always allow auto-push{{< /ui >}}, Bits Code puede enviar cambios de forma agéntica; es decir, sin que un humano haga clic en un botón. Al enviar de forma agéntica, Bits utiliza la identidad de código fuente del creador del canal de código para ser el autor de las confirmaciones y de la solicitud de extracción.
+
+Bits Code solo puede enviar código de forma agéntica desde un canal de código cuando el creador del canal y cada usuario que haya enviado un mensaje en el canal tienen una cuenta de control de código fuente vinculada a Datadog con:
+
+- Acceso de escritura a cada repositorio con una solicitud de extracción en el canal, y a cualquier repositorio que reciba cambios
+- Acceso de lectura a todos los demás repositorios adjuntos al canal
+
+(Estos permisos no se verifican para los usuarios que se han unido al canal pero no han enviado un mensaje.)
+
+Si algún usuario que haya enviado un mensaje en el canal de código carece de los permisos de repositorio requeridos, o Bits no puede verificarlos, Bits no envía los cambios de forma agéntica. En este escenario, un usuario con los permisos requeridos aún puede hacer clic en {{< ui >}}Create PR{{< /ui >}} o {{< ui >}}Update PR{{< /ui >}}. Estos botones verifican únicamente los permisos de ese usuario en los repositorios adjuntos al canal de código. El usuario que hace clic en {{< ui >}}Create PR{{< /ui >}} es el autor de la solicitud de extracción o de fusión resultante.
 
 ## Limitaciones {#limitations}
 
@@ -74,3 +85,4 @@ Las [limitaciones generales de Bits Code][5] también se aplican a los canales d
 [4]: /es/bits_ai/bits_code/setup/
 [5]: /es/bits_ai/bits_code/#limitations
 [6]: https://slack.com/help/articles/54310833022355-Build-with-AI-as-a-team-using-Slack-Code
+[7]: /es/bits_ai/bits_code/setup/#enable-auto-push

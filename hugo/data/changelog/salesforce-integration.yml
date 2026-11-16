@@ -1,0 +1,12 @@
+entries:
+  - change_type: modified
+    date: '2026-10-07'
+    link: https://github.com/DataDog/documentation/pull/40498
+    operations:
+      - CreateIncidentTemplate
+      - DeleteIncidentTemplate
+      - DeleteSalesforceOrganization
+      - GetIncidentTemplates
+      - GetSalesforceOrganizations
+      - UpdateIncidentTemplate
+    title: Deprecate Salesforce Incidents API endpoints

@@ -7,7 +7,7 @@ description: RUM을 설정하여 Feature Flag 데이터를 캡처하고 Datadog�
 disable_toc: false
 further_reading:
 - link: /real_user_monitoring/explorer/
-  tag: 문서
+  tag: 설명서
   text: RUM Explorer에 대해 자세히 알아보기
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: 블로그
@@ -73,7 +73,7 @@ React Native 애플리케이션의 Feature Flag 데이터 수집을 활성화하
 
 <div class="alert alert-danger">
 
-**참고**: Feature Flag Tracking에서는 `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\` 특수 문자를 지원하지 않습니다. Datadog은 Feature Flag 이름에서 이러한 문자를 사용하지 않기를 권장합니다. 이 문자를 꼭 사용해야 하는 경우, Datadog에 데이터를 전송하기 전에 해당 문자를 바꾸세요. 예:
+**참고**: Feature Flag Tracking에서는 `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\` 및 공백(스페이스)를 지원하지 않습니다. Datadog은 Feature Flag 이름에서 이러한 문자를 사용하지 않기를 권장합니다. 이 문자를 꼭 사용해야 하는 경우, Datadog에 데이터를 전송하기 전에 해당 문자를 바꾸세요. 예:
 
   ```javascript
   datadogRum.addFeatureFlagEvaluation(key.replaceAll(':', '_'), value);

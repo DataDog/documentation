@@ -40,7 +40,7 @@ AI 네이티브 SAST가 활성화되면 리포지토리에서 감지된 지원 �
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
 
-AI 네이티브 SAST 규칙 ID는 `datadog/<rule-name>` 형식을 사용합니다(예: `datadog/typescript-promptinjection`). `rule-configs` 또는 `no-dd-sa` 주석에서 특정 AI 네이티브 SAST 규칙을 지정하려면, `datadog/` 접두사가 포함된 전체 규칙 ID를 사용하십시오.
+AI 네이티브 SAST 규칙 ID는 `datadog/<rule-name>` 형식(예: `datadog/typescript-promptinjection`)을 사용합니다. `rule-configs` 또는 `no-dd-sa` 주석에서 특정 AI 네이티브 SAST 규칙을 대상으로 지정하려면 `datadog/` 접두사를 포함한 전체 규칙 ID를 사용하세요.
 
 `use-default-rulesets` 설정은 기존 SAST 및 AI 네이티브 SAST 규칙 세트 모두에 적용됩니다. `use-default-rulesets: false`를 설정하는 경우, 실행하려는 모든 기존 및 AI 네이티브 SAST 규칙 세트를 포함하세요. 예를 들어, 다음 구성은 Ruby Security 및 AI 네이티브 SAST 규칙 세트를 실행합니다.
 
@@ -67,7 +67,7 @@ sast:
 
 다음 구성 형식은 모든 구성 위치(조직 수준, 리포지토리 수준 및 리포지토리 수준(파일))에 적용됩니다.
 
-구성 파일은 지원되는 `schema-version`(`v1.0`, `v1.1`, `v1.2`, `v1.3` 또는 `v1.4`)로 시작해야 하며, 그 뒤에 분석 구성이 포함된 `sast` 키가 와야 합니다. 모든 새 구성에는 `v1.4`를 사용하세요. 구성은 구조는 아래와 같습니다.
+구성 파일은 `schema-version` 키로 시작해야 하며, 그 뒤에 분석 구성이 포함된 `sast` 키가 와야 합니다. 구성의 구조는 아래와 같습니다.
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
@@ -125,37 +125,37 @@ sast:
     max-file-size-kb: 200
 {{< /code-block >}}
 
-`sast` 키는 다음 필드를 지원합니다.
+`sast` 키는 `schema-version: v1.0`에서 도입되었으며 다음 필드를 지원합니다.
 
-| **속성** | **유형** | **설명** | **기본값** |
-| --- | --- | --- | --- |
-| `use-default-rulesets` | 부울 | Datadog 기본 규칙 세트를 활성화할지 여부입니다. | `true` |
-| `use-rulesets` | 배열 | 활성화할 규칙 세트 이름의 목록입니다. | 없음 |
-| `ignore-rulesets` | 배열 | 비활성화할 규칙 세트 이름의 목록입니다. `use-rulesets` 및 `use-default-rulesets`보다 우선합니다. | 없음 |
-| `ruleset-configs` | 객체 | 규칙 세트 이름에서 해당 구성으로의 맵입니다. | 없음 |
-| `global-config` | 객체 | 리포지토리에 대한 전역 설정입니다. | 없음 |
+| **속성** | **유형** | **설명** | **기본값** | **최소 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `use-default-rulesets` | 불리언 | Datadog 기본 규칙 세트를 활성화할지 여부입니다. | `true` | `v1.0` |
+| `use-rulesets` | 배열 | 활성화할 규칙 세트 이름의 목록입니다. | 없음 | `v1.0` |
+| `ignore-rulesets` | 배열 | 비활성화할 규칙 세트 이름의 목록입니다. `use-rulesets` 및 `use-default-rulesets`보다 우선합니다. | 없음 | `v1.0` |
+| `ruleset-configs` | 객체 | 규칙 세트 이름에서 해당 구성으로의 맵입니다. | 없음 | `v1.0` |
+| `global-config` | 객체 | 리포지토리에 대한 전역 설정입니다. | 없음 | `v1.0` |
 
 ## 규칙 세트 구성 {#ruleset-configuration}
 
 `ruleset-configs` 맵의 각 항목은 특정 규칙 세트를 구성합니다. 규칙 세트의 구성이 적용되기 위해 `use-rulesets` 목록에 있을 필요는 없습니다. 구성은 `use-default-rulesets`를 포함하여 규칙 세트가 활성화될 때마다 적용됩니다.
 
-| **속성** | **유형** | **설명** | **기본값** |
-| --- | --- | --- | --- |
-| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 이 패턴과 일치하는 파일만 이 규칙 세트에서 처리됩니다. | 없음 |
-| `ignore-paths` | 배열 | 이 규칙 세트의 분석에서 제외할 파일 경로 또는 glob 패턴입니다. | 없음 |
-| `rule-configs` | 객체 | 규칙 이름에서 해당 구성으로의 맵입니다. | 없음 |
+| **속성** | **유형** | **설명** | **기본값** | **최소 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 이 패턴과 일치하는 파일만 이 규칙 세트에서 처리됩니다. | 없음 | `v1.0` |
+| `ignore-paths` | 배열 | 이 규칙 세트의 분석에서 제외할 파일 경로 또는 glob 패턴입니다. | 없음 | `v1.0` |
+| `rule-configs` | 객체 | 규칙 이름에서 해당 구성으로의 맵입니다. | 없음 | `v1.0` |
 
 ## 규칙 구성 {#rule-configuration}
 
 규칙 세트의 `rule-configs` 맵에 있는 각 항목은 특정 규칙을 구성합니다.
 
-| **속성** | **유형** | **설명** | **기본값** |
-| --- | --- | --- | --- |
-| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 이 규칙은 이러한 패턴과 일치하는 파일에만 적용됩니다. | 없음 |
-| `ignore-paths` | 배열 | 제외할 파일 경로 또는 glob 패턴입니다. 이 규칙은 이러한 패턴과 일치하는 파일에는 적용되지 않습니다. | 없음 |
-| `arguments` | 객체 | 규칙에 대한 파라미터 및 값입니다. 값은 스칼라일 수도 있고 경로별로 정의할 수도 있습니다. | 없음 |
-| `severity` | 문자열 또는 객체 | 규칙 심각도입니다. 유효한 값은 `ERROR`, `WARNING`, `NOTICE`, `NONE`입니다. 단일 값일 수도 있고 경로별로 정의할 수도 있습니다. | 없음 |
-| `category` | 문자열 | 규칙 카테고리입니다. 유효한 값은 `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`입니다. | 없음 |
+| **속성** | **유형** | **설명** | **기본값** | **최소 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 이 규칙은 이러한 패턴과 일치하는 파일에만 적용됩니다. | 없음 | `v1.0` |
+| `ignore-paths` | 배열 | 제외할 파일 경로 또는 glob 패턴입니다. 이 규칙은 이러한 패턴과 일치하는 파일에는 적용되지 않습니다. | 없음 | `v1.0` |
+| `arguments` | 객체 | 규칙에 대한 파라미터 및 값입니다. 값은 스칼라일 수도 있고 경로별로 정의할 수도 있습니다. | 없음 | `v1.0` |
+| `severity` | 문자열 또는 객체 | 규칙 심각도입니다. 유효한 값은 `ERROR`, `WARNING`, `NOTICE`, `NONE`입니다. 단일 값일 수도 있고 경로별로 정의할 수도 있습니다. | 없음 | `v1.0` |
+| `category` | 문자열 | 규칙 카테고리입니다. 유효한 값은 `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`입니다. | 없음 | `v1.0` |
 
 ## 인수 및 심각도 구성 {#argument-and-severity-configuration}
 
@@ -192,13 +192,13 @@ sast:
 
 `global-config` 객체는 리포지토리 전체의 설정을 제어합니다.
 
-| **속성** | **유형** | **설명** | **기본값** |
-| --- | --- | --- | --- |
-| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 일치하는 파일만 분석됩니다. | 없음 |
-| `ignore-paths` | 배열 | 제외할 파일 경로 또는 glob 패턴입니다. 일치하는 파일은 분석되지 않습니다. | 없음 |
-| `use-gitignore` | 부울 | `ignore-paths`에 `.gitignore` 파일의 항목을 포함할지 여부입니다. | `true` |
-| `ignore-generated-files` | 부울 | `ignore-paths`에 일반적인 생성 파일 패턴을 포함할지 여부입니다. | `true` |
-| `max-file-size-kb` | 숫자 | 분석할 최대 파일 크기(kB)입니다. 이보다 더 큰 파일은 무시됩니다. | `200` |
+| **속성** | **유형** | **설명** | **기본값** | **최소 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | 배열 | 파일 경로 또는 glob 패턴입니다. 일치하는 파일만 분석됩니다. | 없음 | `v1.0` |
+| `ignore-paths` | 배열 | 제외할 파일 경로 또는 glob 패턴입니다. 일치하는 파일은 분석되지 않습니다. | 없음 | `v1.0` |
+| `use-gitignore` | 불리언 | `ignore-paths`에 `.gitignore` 파일의 항목을 포함할지 여부입니다. | `true` | `v1.0` |
+| `ignore-generated-files` | 불리언 | `ignore-paths`에 일반적인 생성 파일 패턴을 포함할지 여부입니다. | `true` | `v1.0` |
+| `max-file-size-kb` | 숫자 | 분석할 최대 파일 크기(kB)입니다. 이보다 더 큰 파일은 무시됩니다. | `200` | `v1.0` |
 
 구성 예시:
 

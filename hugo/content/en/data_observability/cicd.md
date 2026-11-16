@@ -43,7 +43,7 @@ Drift Detection compares the data produced by your models before and after your 
 
 ### 1. Connect your source control provider and dbt project
 
-1. Connect your [source-control provider][2]. CI/CD checks support GitHub and GitLab.
+1. Connect your [source-control provider][2]. CI/CD checks support GitHub, GitLab, Bitbucket Cloud, and Azure DevOps.
 2. Connect the [supported data source account][3] where your dbt models run.
 3. Connect your [dbt Cloud][4] or [dbt Core][5] project to Datadog. You can also connect your dbt project while configuring CI/CD checks.
 
@@ -102,6 +102,78 @@ For **dbt Core**, drift detection also requires the pull request number to be at
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CI Job URL` | The locator for the dbt Cloud CI job that's triggered by pull requests and materializes dbt models for CI. Datadog receives this job's run events through the dbt Cloud integration. These typically look like `https://cloud.getdbt.com/...`. |
 
+**Bitbucket Cloud and Azure DevOps**
+
+If your Azure DevOps repository uses dbt Cloud's native Azure DevOps integration (Enterprise plans), CI jobs start automatically. Skip this section.
+
+Otherwise, start the CI job from your pipeline with the [dbt Cloud Administrative API][9]. First, replace these placeholders in the example for your CI provider:
+
+| Placeholder | Value |
+| ----------- | ----- |
+| `<DBT_CLOUD_HOST>` | Your dbt Cloud hostname, for example `cloud.getdbt.com`. |
+| `<ACCOUNT_ID>` | Your account ID from the dbt Cloud CI job URL. |
+| `<CI_JOB_ID>` | Your CI job ID from the same URL. |
+
+{{< tabs >}}
+{{% tab "Bitbucket Pipelines" %}}
+
+1. Create a dbt Cloud API token that can run jobs.
+2. In Bitbucket, save the token as a secured repository variable named `DBT_API_KEY`.
+3. Add the following step to `bitbucket-pipelines.yml`. If your file already contains `pipelines`, add this step under `pipelines > pull-requests > '**'`.
+
+```yaml
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Trigger dbt Cloud CI job
+          script:
+            - |
+              curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+                -H "Authorization: Token $DBT_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{\"cause\": \"Bitbucket PR #$BITBUCKET_PR_ID\",
+                     \"git_sha\": \"$BITBUCKET_COMMIT\",
+                     \"non_native_pull_request_id\": $BITBUCKET_PR_ID,
+                     \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$BITBUCKET_PR_ID\"}"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+For a repository in Azure Repos:
+
+1. Create a dbt Cloud API token that can run jobs.
+2. Save the token as a secret Azure Pipelines variable named `DBT_API_KEY`.
+3. Add a [build validation branch policy][10] on the target branch to run your pipeline for pull requests.
+4. Add this Bash step to your pipeline's `steps` section. The `env` block passes the secret and pull request values to the script, and the `condition` skips the step on builds that aren't for a pull request.
+
+```yaml
+steps:
+  - bash: |
+      curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+        -H "Authorization: Token $DBT_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{\"cause\": \"Azure DevOps PR #$PR_NUMBER\",
+             \"git_sha\": \"$HEAD_SHA\",
+             \"non_native_pull_request_id\": $PR_NUMBER,
+             \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$PR_NUMBER\"}"
+    displayName: Trigger dbt Cloud CI job
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    env:
+      DBT_API_KEY: $(DBT_API_KEY)
+      PR_NUMBER: $(System.PullRequest.PullRequestId)
+      HEAD_SHA: $(System.PullRequest.SourceCommitId)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notes**:
+- Include both `non_native_pull_request_id` and `git_sha`, and set `git_sha` to the pull request's head commit. Datadog uses both to match the run to the pull request.
+- `schema_override` keeps CI tables out of your production schemas. Including the job ID keeps two CI jobs from writing to the same schema.
+- dbt Cloud doesn't drop these schemas for API-triggered runs. Clean them up on a schedule.
+
 ##### dbt Core
 
 | Setting            | Description                                                                                                                                                                                                                                        |
@@ -109,11 +181,30 @@ For **dbt Core**, drift detection also requires the pull request number to be at
 | `CI Job Name`      | The name of the job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog.                                                                                                                   |
 | `CI Job Namespace` | The OPENLINEAGE_NAMESPACE variable specified when sending OpenLineage events from the job specified above. See [Set the environment variables][7]. If you don't set this variable when sending OpenLineage events, you don't need to specify it here. |
 
+**Bitbucket Cloud and Azure DevOps**
+
+First, complete the setup in [Set the environment variables][7]. Then, in the step that runs `dbt-ol`, set these two variables to the values for your CI provider:
+
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER`
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__VERSION`
+
+| CI provider | `PULL_REQUEST_NUMBER` | `VERSION` |
+| ----------- | --------------------- | --------- |
+| Bitbucket Pipelines | `$BITBUCKET_PR_ID` | `$BITBUCKET_COMMIT` |
+| Azure Pipelines with Azure Repos | `$(System.PullRequest.PullRequestId)` | `$(System.PullRequest.SourceCommitId)` |
+| Azure Pipelines with a GitHub repository | `$(System.PullRequest.PullRequestNumber)` | `$(System.PullRequest.SourceCommitId)` |
+
+Set `VERSION` explicitly. On these providers, pull request builds check out a merge commit, so the commit detected from git is not the pull request's head commit, and the run doesn't match the pull request.
+
+For Azure Repos, add a [build validation branch policy][10] on the target branch so the pipeline runs with pull request context.
+
 #### Running your dbt Core CI job in a container
 
-If your dbt Core CI job runs inside a container that the CI runner launches (for example, a GitHub Actions workflow that runs the job with `docker run`), the container does not inherit the git context from the CI runner. As a result, the repository URL, commit SHA, and pull request number are not detected automatically, and the `sourceCodeLocation` facet is sent without them. Datadog uses these values to match the run to the pull request you opened or updated, so without them no drift results appear on the pull request.
+If your CI runner launches dbt Core with `docker run`, pass the repository URL, pull request head commit SHA, and pull request number into the container. The container does not inherit the runner's git context automatically.
 
-The following example uses GitHub Actions; on other CI providers, the environment variable names differ, but the approach is the same. On the CI runner, read the values and pass them into the container explicitly:
+Datadog needs all three values in the `sourceCodeLocation` facet to match the run to the pull request and display drift results.
+
+For **GitHub Actions**, read the values on the runner and pass them into the container:
 
 ```shell
 # On the CI runner, before launching the container:
@@ -137,6 +228,40 @@ on:
     types: [opened, synchronize, reopened]
 ```
 
+For other CI providers, replace the values assigned to `PR_NUMBER`, `HEAD_SHA`, and `REPO_URL` in the example above. Run the job as a pull request pipeline (a GitLab merge request pipeline, a Bitbucket `pull-requests` pipeline, or an Azure Pipelines build started by a build validation policy). Otherwise, these values are empty.
+
+{{< tabs >}}
+{{% tab "GitLab CI" %}}
+
+```shell
+PR_NUMBER="$CI_MERGE_REQUEST_IID"
+# In merged results pipelines, use $CI_MERGE_REQUEST_SOURCE_BRANCH_SHA instead.
+HEAD_SHA="$CI_COMMIT_SHA"
+REPO_URL="$CI_PROJECT_URL"
+```
+
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
+
+```shell
+PR_NUMBER="$BITBUCKET_PR_ID"
+HEAD_SHA="$BITBUCKET_COMMIT"
+REPO_URL="https://bitbucket.org/$BITBUCKET_REPO_FULL_NAME"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+```shell
+# For a GitHub repository, use $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER instead.
+PR_NUMBER="$SYSTEM_PULLREQUEST_PULLREQUESTID"
+HEAD_SHA="$SYSTEM_PULLREQUEST_SOURCECOMMITID"
+REPO_URL="$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -149,3 +274,5 @@ on:
 [6]: /data_observability/jobs_monitoring/openlineage/
 [7]: /data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables
 [8]: /data_observability/quality_monitoring/data_warehouses/snowflake/
+[9]: https://docs.getdbt.com/docs/deploy/ci-jobs#trigger-a-ci-job-with-the-api-
+[10]: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#build-validation

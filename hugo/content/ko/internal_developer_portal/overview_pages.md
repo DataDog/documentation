@@ -5,22 +5,22 @@ description: Internal Developer Portal 개요 페이지는 개발자에게 작�
   보기를 제공하고, 엔지니어링 관리자에게는 안정성 및 Scorecard 성능을 전반적으로 파악할 수 있는 보기를 제공합니다.
 further_reading:
 - link: actions/app_builder
-  tag: 문서
+  tag: 설명서
   text: App Builder
 - link: monitors/
-  tag: 문서
+  tag: 설명서
   text: Datadog Monitors
 - link: /incident_response/incident_management/
-  tag: 문서
+  tag: 설명서
   text: Incident Management
 - link: /service_level_objectives/
-  tag: 문서
+  tag: 설명서
   text: Service Level Objectives
 - link: error_tracking
-  tag: 문서
+  tag: 설명서
   text: Error Tracking
 - link: watchdog
-  tag: 문서
+  tag: 설명서
   text: Watchdog
 site_support_id: idp
 title: 개요 페이지
@@ -101,7 +101,7 @@ Datadog [Monitors][6], [Incident Management][3] 및 [SLOs][7]의 실시간 신�
 보기를 사용자 지정하려면 오른쪽 상단에 있는 **Clone as dashboard**를 클릭하세요. 이렇게 하면 **My Workspace** 페이지의 콘텐츠가 미리 채워진 대시보드가 생성됩니다.
 
 복제한 대시보드에서 수행할 수 있는 사용자 지정 예시는 다음과 같습니다.
-- Datadog의 [Action Catalog][11]를 사용하여 [Embedded Apps][2]를 만들고 추가 타사 데이터(예: PagerDuty 온콜 정보) 표시
+- Datadog의 [Action Catalog][11]를 사용하여 [embedded App Builder apps][2]를 생성하고, 추가 타사 데이터(예: PagerDuty 온콜 정보)를 표시하십시오.
 - [위젯][12]의 크기를 조정하고 재배치하며 추가/제거하여 보기의 전체 레이아웃과 디자인 업데이트
 - [Note][13] 위젯을 사용하여 조직과 관련된 정보를 담은 공지 및 업데이트 섹션 추가
 

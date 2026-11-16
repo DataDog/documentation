@@ -51,7 +51,7 @@ When a monitor is configured to [send renotifications][8] to an On-Call Team, th
 
 - **Page is resolved**: The monitor renotifies and creates a new Page, which is routed through the Team's escalation policy.
 - **Page is acknowledged**: The monitor renotifies, and the Page is re-triggered, resuming the escalation policy at the step that was in progress when the Page was acknowledged. 
-- **Page is triggered**: If all steps in the escalation policy have already run but no one has acknowledged the Page, the monitor renotifies and the Page is re-triggered, restarting the escalation policy from the beginning.
+- **Page is triggered**: If all steps in the escalation policy have already run, a monitor renotification re-triggers the Page and restarts the last step of the escalation policy. If the escalation policy has not yet run every step, the renotification has no effect.
 
 ### Trigger Pages through email
 

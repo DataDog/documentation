@@ -21,8 +21,8 @@ Antes de configurar AI Guard, asegúrese de tener todo lo que necesita:
   | Permiso                                    | Tipo  | Descripción                                                                                                                                                                                                     |
   |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Escritura | Necesario para llamar a la API de evaluación de AI Guard y para crear una clave de aplicación con el contexto `ai_guard_evaluate` .                                                                                                 |
-  | **AI Guard View** (`ai_guard_view`)           | Lectura  | Necesario para visualizar la interfaz de usuario de AI Guard, incluyendo señales, spans y configuraciones de solo lectura (políticas de bloqueo de servicios, sensibilidad de evaluación, políticas de herramientas, lista de permitidos de herramientas). También es necesario para reportar falsos positivos. |
-  | **AI Guard Write** (`ai_guard_write`)         | Escritura | Necesario para modificar la configuración de AI Guard, incluyendo políticas de bloqueo, escaneo de datos sensibles, políticas de herramientas, bloqueo de herramientas, lista de permitidos de herramientas y umbrales de sensibilidad de evaluación.                           |
+  | **AI guard View** (`ai_guard_view`)           | Read  | Necesario para visualizar la interfaz de usuario de AI guard, incluyendo señales, spans y configuraciones de solo lectura (políticas de bloqueo de servicios, reglas personalizadas, sensibilidad de evaluación, políticas de herramientas, lista de permitidos de herramientas). También es necesario para reportar falsos positivos. |
+  | **AI guard Write** (`ai_guard_write`)         | Write | Necesario para modificar la configuración de AI guard, incluyendo políticas de bloqueo, reglas personalizadas, escaneo de datos sensibles, políticas de herramientas, bloqueo de herramientas, lista de permitidos de herramientas y umbrales de sensibilidad de evaluación.                           |
   | **User Access Manage** (`user_access_manage`) | Escritura | Necesario para crear un conjunto de datos restringido que [limita el acceso a los spans de AI Guard](#limit-access) con Access Control.                                                                                         |
 
 ### Límites de uso {#usage-limits}
@@ -84,6 +84,7 @@ AI Guard proporciona ajustes para controlar cómo se aplican las evaluaciones, q
 
 En la página {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6], puede configurar políticas que determinan qué acciones debe tomar AI Guard cuando detecta contenido inseguro. Para cada política, usted determina:
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Solo hacer un seguimiento o bloquear solicitudes inseguras
+- [{{< ui >}}Custom rules{{< /ui >}}](#custom-rules): Palabras clave y expresiones regulares que AI guard siempre marca como inseguras
 - [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning): Si AI Guard debe escanear y redactar datos confidenciales
 - [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Información adicional sobre el servicio que AI Guard utiliza durante la evaluación para reducir los falsos positivos
 
@@ -98,6 +99,18 @@ Puede configurar el bloqueo en diferentes niveles de granularidad, con configura
 - **Por entorno**: Anule el valor predeterminado de la organización para un entorno específico.
 - **Por servicio**: Anule el valor predeterminado de la organización para un servicio específico.
 - **Por servicio y entorno**: Anule todo lo anterior para un servicio específico en un entorno específico (por ejemplo, habilite el bloqueo en producción pero no en staging).
+
+#### Reglas personalizadas {#custom-rules}
+
+Las reglas personalizadas marcan como inseguros los mensajes que coinciden con una palabra clave o una expresión regular. A diferencia de la [sensibilidad de evaluación](#evaluation-sensitivity) y el [contexto de evaluación](#evaluation-context), las reglas personalizadas son deterministas: un mensaje que coincide con una regla siempre es marcado. Las reglas personalizadas requieren una coincidencia exacta, por lo que no detectan variaciones del contenido que desea bloquear.
+
+AI guard comprueba las reglas personalizadas contra el último mensaje en cada llamada de evaluación, incluyendo los prompts del usuario, las respuestas del asistente, los argumentos de llamadas a herramientas y los resultados de llamadas a herramientas. Cuando un mensaje coincide con una regla, AI guard devuelve `DENY` con la categoría de ataque `regexp-blocked`, y `reason` nombra la regla que coincidió. Si AI guard bloquea la solicitud depende de la [política de bloqueo](#blocking-policy).
+
+Cuando cree o edite una política, añada reglas en {{< ui >}}Custom Rules{{< /ui >}}:
+- {{< ui >}}Keywords{{< /ui >}}: Palabras o frases a marcar. La coincidencia ignora mayúsculas y minúsculas y solo coincide con palabras completas. Por ejemplo, `confidential` coincide con `Confidential` pero no con `confidentiality`. Todas las palabras clave combinadas están limitadas a 1,000 caracteres.
+- {{< ui >}}Regular expressions{{< /ui >}}: Haga clic en {{< ui >}}Add an Expression{{< /ui >}}, luego introduzca un nombre y un patrón. Cada patrón está limitado a 1,000 caracteres y utiliza la [sintaxis de expresiones regulares de Sensitive Data Scanner][21]. El nombre es opcional, pero Datadog lo recomienda: AI guard lo muestra cuando una regla coincide.
+
+Al igual que con la [política de bloqueo](#blocking-policy), las reglas personalizadas siguen la misma precedencia, teniendo prioridad las configuraciones más específicas. Una política hereda las reglas personalizadas de su política principal. Para reemplazarlas, active el interruptor {{< ui >}}Overridden{{< /ui >}}. Las reglas heredadas permanecen en el formulario, por lo que puede conservarlas, editarlas o eliminarlas. La política no combina sus reglas con las de la política principal.
 
 #### Escaneo de datos confidenciales {#sensitive-data-scanning}
 
@@ -207,3 +220,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /es/security/ai_guard/setup/sensitive_data_redaction/
+[21]: /es/security/sensitive_data_scanner/scanning_rules/custom_rules/

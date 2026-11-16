@@ -1,71 +1,65 @@
 ---
+description: Utilice el Datadog Agent para recibir datos OTLP de sus aplicaciones,
+  o ejecute un OpenTelemetry Collector junto al Agent.
 further_reading:
-- link: opentelemetry/agent/
-  tag: Documentación
-  text: Datadog Agent con el DDOT Collector
-- link: /opentelemetry/setup/ddot_collector/install/
-  tag: Documentación
-  text: Instalar el Datadog Agent con DDOT OpenTelemetry Collector
-- link: /opentelemetry/setup/ddot_collector/custom_components
-  tag: Documentación
-  text: Uso de componentes personalizados de OpenTelemetry con el Datadog Agent
-- link: /opentelemetry/guide/migrate/ddot_collector
-  tag: Documentación
-  text: Migrar al Datadog Agent con DDOT OpenTelemetry Collector
 - link: /opentelemetry/setup/otlp_ingest_in_the_agent
   tag: Documentación
-  text: Ingesta de OTLP en el Agent
-title: Datadog Agent
+  text: Configure el punto de conexión OTLP del Agent
+- link: /opentelemetry/setup/ddot_collector/install/
+  tag: Documentación
+  text: Configure el Collector del Agent
+- link: /opentelemetry/setup/ddot_collector/custom_components
+  tag: Documentación
+  text: Utilice componentes personalizados de OpenTelemetry con el Collector del Agent
+- link: /opentelemetry/migrate/ddot_collector
+  tag: Documentación
+  text: Migre al Collector del Agent
+title: Envíe datos de OpenTelemetry a través del Datadog Agent
 ---
+## Descripción general {#overview}
 
-## Información general
+Si ejecuta el Datadog Agent, puede enviar sus datos de OpenTelemetry a través de él. El Agent añade funciones de Datadog que lo requieren, tales como [{{< translate key="integration_count" >}}+ Integrations de Datadog][1], [Live Container Monitoring][3], [Cloud Network Monitoring][7] y [Universal Service Monitoring][5].
 
-El envío de datos a Datadog a través del Datadog Agent es una excelente opción para los usuarios de Datadog o los equipos que necesiten funciones basadas en el Agent.
+El Agent maneja los datos de OpenTelemetry de dos maneras:
 
-**Principales ventajas:**
-- Accede a [{{< translate key="integration_count" >}}+ integraciones de Datadog][1], [Live Container Monitoring][3], [Cloud Network Monitoring][7], [Universal Service Monitoring][5] (con eBPF) y más
-- Aprovecha las integraciones basadas en la contribución de la comunidad de OpenTelemetry para recopilar telemetría en formato nativo OTLP
-- Benefíciate de las sólidas prácticas de seguridad de Datadog, que incluyen exploraciones y análisis periódicos de vulnerabilidades
-- Accede al equipo de soporte global de Datadog para obtener ayuda con la incorporación y la solución de problemas
+- **[Punto de conexión OTLP del Agent](#otlp-ingest-in-the-agent)**: el Agent recibe datos OTLP de sus aplicaciones.
+- **[Collector del Agent](#agents-collector)**: Un OpenTelemetry Collector se ejecuta junto al Agent como un proceso independiente, por lo que puede configurar sus propios pipelines.
 
-El Datadog Agent ofrece dos formas de ingesta de datos de OpenTelemetry:
+Para enviar datos de OpenTelemetry sin el Agent, consulte [Envíe datos de OpenTelemetry a Datadog][9].
 
-- **[Datadog distribution of OpenTelemetry (DDOT) Collector](#datadog-distribution-of-opentelemetry-ddot-collector)**: utiliza el DDOT Collector incrustado en el Datadog Agent.
-- **[Ingesta OTLP en el Agent](#otlp-ingest-in-the-agent)**: envía datos de telemetría al Datadog Agent utilizando el OpenTelemetry Protocol (OTLP).
+## Punto de conexión OTLP del Agent {#otlp-ingest-in-the-agent}
 
-## Datadog Distribution of OpenTelemetry (DDOT) Collector
+Sus aplicaciones, instrumentadas con SDK de OpenTelemetry, envían telemetría al Datadog Agent a través de OTLP.
 
-El DDOT Collector combina el Datadog Agent con un OpenTelemetry Collector integrado. Esta opción es la más adecuada para los usuarios de Kubernetes que deseen aprovechar al máximo las capacidades del Collector, como el procesamiento de los datos avanzados y la exportación de datos OTLP a múltiples destinos.
+{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Su aplicación, instrumentada con un SDK de OpenTelemetry, envía OTLP al Datadog Agent, el cual lo envía a Datadog." style="width:100%;" >}}
 
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Información general de la arquitectura del DDOT Collector, incrustada en el Datadog Agent." style="width:100%;" >}}
-
-**Utiliza el DDOT Collector si**:
-
-- Deseas tener un control total sobre los pipelines de OpenTelemetry, incluidos los procesadores y exportadores
-- Planeas reenviar datos OTLP a múltiples backends más allá de Datadog
-- Ejecutas en un entorno de Kubernetes de Linux
+**Ideal para**: equipos que desean enviar OTLP a Datadog con poca configuración y sin pipelines que administrar.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/agent/" >}}Más información sobre el DDOT Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Configure el punto de conexión OTLP del Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Ingesta de OTLP en el Agent
+## Collector del Agent {#agents-collector}
 
-La ingesta de OTLP en el Agent es una forma de enviar datos de telemetría directamente desde aplicaciones instrumentadas con SDKs de OpenTelemetry al Agent.
+El Collector del Agent es el OpenTelemetry Collector que se ejecuta junto al Datadog Agent como un proceso independiente. Configúrelo con la configuración estándar del OpenTelemetry Collector.
 
-{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Datos de OpenTelemetry que fluyen por el Datadog Agent" style="width:100%;" >}}
+Para el DDOT Collector que se ejecuta sin el Agent, consulte [DDOT Collector][10].
 
-**Utiliza la ingesta de OTLP en el Agent si**:
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
+La Remote Configuration para el Collector del Agent está <strong>en versión preliminar</strong>. Utilice este formulario para solicitar acceso.
+{{< /callout >}}
 
-- Planeas enviar todos los datos de telemetría OTLP directamente a Datadog sin necesidad de personalizar el procesamiento o múltiples destinos
-- Prefieres un enfoque con un mínimo de configuración que no requiere la gestión de pipelines de OpenTelemetry
-- Ejecutas en plataformas distintas de Kubernetes de Linux, como Windows, bare-metal EC2, entornos de VM, u [otras plataformas compatibles][8].
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Descripción general de la arquitectura del Collector del Agent, un OpenTelemetry Collector implementado con el Datadog Agent." style="width:100%;" >}}
+
+**Ideal para**: equipos que desean controlar sus pipelines de OpenTelemetry o enviar OTLP a otros destinos además de Datadog.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Más información sobre la ingesta de OTLP en el Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Configure el Collector del Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Utilice componentes personalizados de OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migre al Collector del Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -73,4 +67,5 @@ La ingesta de OTLP en el Agent es una forma de enviar datos de telemetría direc
 [3]: /es/containers/
 [5]: /es/universal_service_monitoring/
 [7]: /es/network_monitoring/cloud_network_monitoring/
-[8]: /es/agent/basic_agent_usage/?tab=Linux#supported-platforms
+[9]: /es/opentelemetry/setup/
+[10]: /es/opentelemetry/setup/ddot_collector/

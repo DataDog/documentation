@@ -1,16 +1,17 @@
 ---
 aliases:
 - /ko/llm_observability/monitoring/prompt_management/
-description: Prompt Management를 사용하여 Python 애플리케이션에서 관리형 프롬프트를 생성, 버전 관리 및 검색합니다.
+description: Prompt Management를 사용하여 Python, Go 및 JavaScript 애플리케이션에서 관리형 프롬프트를 생성,
+  버전 관리 및 검색합니다.
 further_reading:
 - link: /llm_observability/instrument/prompt_tracking
-  tag: 문서
+  tag: 설명서
   text: 프롬프트 추적
 - link: /llm_observability/improve/playground
-  tag: 문서
+  tag: 설명서
   text: Playground
 - link: /llm_observability/instrument/sdk/?tab=python
-  tag: 문서
+  tag: 설명서
   text: Agent Observability SDK
 title: Prompt Management
 ---
@@ -29,7 +30,7 @@ Prompt Management는 [프롬프트 추적][1]과 함께 작동합니다. Agent O
 - Python 3.9 이상.
 - ddtrace>=4.13.0
 - [Datadog 사이트][2] 및 [Datadog API 키][3]. Datadog Agent를 통해 트레이스가 전송되는 경우에도 프롬프트 검색을 위해 API 키가 필요합니다.
-- 환경별로 프롬프트를 확인하기 위한 `llm_observability_read`, `feature_flag_config_read` 및 `feature_flag_environment_config_read` 권한이 있는 [Datadog Application Key][4]. Datadog에서 기존 애플리케이션 키를 선택하는 경우, 해당 키에 이러한 권한이 있는지 확인하세요.
+- 환경별로 프롬프트를 확인하기 위한 `llm_observability_read`, `feature_flag_config_read` 및 `feature_flag_environment_config_read` 권한이 있는 [Datadog 애플리케이션 키][4]. Datadog에서 기존 애플리케이션 키를 선택하는 경우, 해당 키에 이러한 권한이 있는지 확인하세요.
 - API 또는 Python SDK를 통해 프롬프트를 관리하려면 애플리케이션 키에 `llm_observability_write` 및 `feature_flag_config_write` 권한도 필요합니다.
 
 ## SDK 설치 {#install-the-sdk}
@@ -123,7 +124,7 @@ response = client.chat.completions.create(
 
 검색에 실패하고 폴백 프롬프트가 제공되지 않으면 `get_prompt()`가 `ValueError`를 발생시킵니다. 폴백 프롬프트가 인증을 대신하지는 않습니다. `DD_API_KEY`는 항상 필요하며, `DD_ENV`가 설정된 경우 `DD_APP_KEY`도 필요합니다.
 
-관리형 프롬프트는 템플릿 내에서 다른 관리형 프롬프트를 참조할 수 없습니다. 프롬프트를 구성하려면 애플리케이션 코드에서 결합하거나 최종 공급자 대상 프롬프트를 단일 프롬프트로 관리하세요.
+프롬프트 구성을 사용하지 않는 경우, 애플리케이션 코드에서 프롬프트를 결합하거나 제공업체에 전달할 최종 프롬프트를 하나의 프롬프트로 관리합니다. 관리형 프롬프트를 다른 프롬프트에 포함하는 방법은 [구성을 사용하여 프롬프트 재사용](#reuse-prompts-with-composition)을 참조하세요. 프롬프트 구성은 미리 보기로 제공되고 있습니다.
 
 ### 버전 선택 {#select-a-version}
 
@@ -220,8 +221,9 @@ Agent Observability에서 이미 추적 중인 프롬프트를 관리형 프롬�
 
 1. 하나 이상의 메시지를 추가하고 각각에 {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}} 또는 {{< ui >}}Assistant{{< /ui >}} 역할을 할당하세요.
 2. `{{variable_name}}` 구문을 메시지에 사용하여 동적 콘텐츠를 추가하세요.
-3. 필요시: {{< ui >}}Run{{< /ui >}}을 클릭하여 샘플 값으로 프롬프트를 테스트하세요.
-4. {{< ui >}}Save Prompt{{< /ui >}}를 클릭하여 저장 대화 상자를 여세요.
+3. (선택 사항) 메시지 플레이스홀더 미리 보기 기능을 사용할 수 있는 경우 {{< ui >}}Add Message Placeholder{{< /ui >}}를 클릭합니다. [런타임에 메시지 삽입](#insert-messages-at-runtime) 섹션을 참조하세요.
+4. (선택 사항) {{< ui >}}Run{{< /ui >}}을 클릭하여 샘플 값으로 프롬프트를 테스트합니다.
+5. {{< ui >}}Save Prompt{{< /ui >}}를 클릭하여 저장 대화 상자를 엽니다.
 
 사용자 쿼리와 컨텍스트가 변수로 삽입되도록 프롬프트를 구성하세요.
 
@@ -239,7 +241,7 @@ Agent Observability에서 이미 추적 중인 프롬프트를 관리형 프롬�
 
 ### 프롬프트 업데이트, 나열 및 삭제 {#update-list-and-delete-prompts}
 
-#### UI에서 {#in-the-ui}
+#### UI에서 설정 {#in-the-ui}
 
 {{< ui >}}Prompts{{< /ui >}} 페이지에서 프롬프트를 열어 다음을 수행합니다.
 
@@ -286,9 +288,148 @@ created_version = LLMObs.create_prompt_version(
 
 Prompt Management API를 사용하여 프롬프트 및 프롬프트 버전을 생성, 검색, 업데이트 및 삭제합니다. 엔드포인트 스키마, 요청 미디어 유형 및 예시는 [Agent Observability API 참조][8]를 참조하세요.
 
-## 프롬프트 구성 버전 관리 {#version-prompt-configuration}
+## 런타임에 메시지 삽입 {#insert-messages-at-runtime}
 
-<div class="alert alert-info"><strong>미리 보기:</strong> 버전 관리된 프롬프트 구성은 미리 보기로 제공되고 있습니다. 액세스를 요청하려면 <a href="https://www.datadoghq.com/support/">Datadog 지원팀</a> 또는 고객 성공 관리자에게 문의하세요.</div>
+<div class="alert alert-info"><strong>미리 보기:</strong> 메시지 플레이스홀더는 미리 보기로 제공되고 있습니다. 액세스를 요청하려면 <a href="https://www.datadoghq.com/support/">Datadog 지원팀</a> 또는 고객 성공 관리자에게 문의하세요.</div>
+
+메시지 플레이스홀더는 런타임에 저장된 프롬프트에 대화 기록이나 도구 상호 작용을 삽입합니다. `{{question}}`과 같은 텍스트 변수는메시지 내의 텍스트를 대체합니다. 메시지 플레이스홀더는 전체 메시지 목록을 삽입합니다.
+
+프롬프트 버전은 런타임에 전달하는 메시지가 아니라 플레이스홀더의 이름과 위치를 저장합니다. 프롬프트 내에서 대화 기록의 위치를 변경하려면 새 프롬프트 버전을 게시합니다. 애플리케이션 코드를 변경할 필요는 없습니다.
+
+**미리 보기 SDK 액세스:** 사용하는 프로그래밍 언어에 적합한 SDK 버전을 확인하려면 [Datadog 지원팀](https://www.datadoghq.com/support/)이나 고객 성공 관리자에게 문의하세요.
+
+### 플레이스홀더 정의{#define-the-placeholder}
+
+프롬프트 편집기에서 {{< ui >}}Add Message Placeholder{{< /ui >}}를 클릭하고 `history`와 같은 이름을 입력합니다. 위아래 화살표 버튼을 사용하여 플레이스홀더를 메시지 사이의 원하는 위치로 이동합니다. 프롬프트에 있는 텍스트 변수와 겹치지 않는 이름을 사용합니다. 저장하기 전에 편집기에 호환되는 SDK의 요구 사항이 표시됩니다.
+
+{{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="시스템 지침과 질문 변수가 포함된 사용자 메시지 사이에 대화 기록 메시지 플레이스홀더가 표시된 프롬프트 편집기" >}}
+
+Python SDK로 동일한 프롬프트를 만들려면 대화 기록을 삽입할 위치에 `"type": "placeholder"`가 포함된 항목을 추가합니다.
+
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.create_prompt(
+    "support-assistant",
+    [
+        {"role": "system", "content": "You are a concise assistant for {{plan}} customers."},
+        {"type": "placeholder", "name": "history"},
+        {"role": "user", "content": "{{question}}"},
+    ],
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+플레이스홀더 이름인 `history`는 애플리케이션이 런타임에 메시지를 전달하는 데 사용하는 키입니다. 메시지 역할이 아닙니다. 설정 요구 사항 및 환경 ID에 대한 자세한 내용은 [Python SDK 사용](#use-the-python-sdk) 섹션을 참조하세요.
+
+### 런타임 값 제공 {#supply-runtime-values}
+
+프롬프트를 검색한 다음 텍스트 변수와 함께 대화 기록 목록을 전달합니다. SDK는 플레이스홀더 위치에 대화 기록 메시지를 순서대로 삽입합니다.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+prompt = LLMObs.get_prompt("support-assistant")
+
+variables = {
+    "plan": "enterprise",
+    "question": "Can I export the report?",
+    "history": [
+        {"role": "user", "content": "Where are reports located?"},
+        {"role": "assistant", "content": "Under Analytics."},
+    ],
+}
+messages = prompt.format(**variables)
+```
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "support-assistant")
+if err != nil {
+	return err
+}
+
+variables := map[string]any{
+	"plan":     "enterprise",
+	"question": "Can I export the report?",
+	"history": []map[string]any{
+		{"role": "user", "content": "Where are reports located?"},
+		{"role": "assistant", "content": "Under Analytics."},
+	},
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+	return err
+}
+messages := rendered.Messages
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+```javascript
+const prompt = await tracer.llmobs.getPrompt('support-assistant')
+
+const variables = {
+  plan: 'enterprise',
+  question: 'Can I export the report?',
+  history: [
+    { role: 'user', content: 'Where are reports located?' },
+    { role: 'assistant', content: 'Under Analytics.' }
+  ]
+}
+const messages = prompt.format(variables)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+결과에는 플레이스홀더 항목이 포함되지 않은 네 개의 메시지가 있습니다.
+
+```json
+[
+  {"role": "system", "content": "You are a concise assistant for enterprise customers."},
+  {"role": "user", "content": "Where are reports located?"},
+  {"role": "assistant", "content": "Under Analytics."},
+  {"role": "user", "content": "Can I export the report?"}
+]
+```
+
+형식이 지정된 메시지를 모델 제공업체에 전달합니다. 삽입된 메시지에 `{{variable}}` 구문이 포함되어 있으면 SDK는 이를 리터럴 텍스트로 유지합니다.
+
+다른 관리형 프롬프트와 동일한 [프롬프트 추적](#track-prompt-usage) 워크플로우를 사용합니다. 프롬프트 메타데이터는 런타임 값이 아닌 플레이스홀더 정의를 유지하며, 확장된 메시지에는 기존 입력 캡처 및 개인정보 보호 설정이 적용됩니다.
+
+### 도구 상호 작용 포함 {#include-tool-interactions}
+
+플레이스홀더는 도구 호출 및 도구 응답을 삽입할 수도 있습니다. 모델 제공업체의 메시지 형식을 사용합니다. 예를 들어, OpenAI Chat Completions 형식에서는 각 도구 응답의 `tool_call_id`를 해당 도구 호출의 `id`로 설정합니다.
+
+```python
+variables["history"] = [
+    {
+        "role": "assistant",
+        "tool_calls": [{
+            "id": "call_1",
+            "type": "function",
+            "function": {"name": "get_plan", "arguments": "{}"},
+        }],
+    },
+    {"role": "tool", "tool_call_id": "call_1", "content": "enterprise"},
+]
+messages = prompt.format(**variables)
+```
+
+SDK는 이러한 메시지를 변경하지 않고 삽입합니다. 애플리케이션이 도구를 실행하고 응답을 제공합니다.
+
+### 메시지 플레이스홀더의 요구 사항 및 제한 사항 {#message-placeholder-requirements-and-limits}
+
+- 모든 플레이스홀더에 목록을 전달합니다. 빈 목록(`[]`)은 메시지를 삽입하지 않습니다.
+- 삽입된 메시지에는 텍스트, 어시스턴트 도구 호출 또는 도구 응답이 포함될 수 있습니다. SDK는 도구를 실행하거나 공급자별 필드의 유효성을 검사하지 않습니다.
+- 프롬프트에서 동일한 플레이스홀더 이름을 두 번 이상 사용하면 각 위치에 동일한 목록이 삽입됩니다. 서로 다른 플레이스홀더 이름에는 서로 다른 목록을 전달할 수 있습니다.
+- 중첩된 플레이스홀더와 이미지 또는 오디오와 같은 멀티모달 콘텐츠는 지원되지 않습니다.
+
+## 프롬프트 구성 버전 관리 {#version-prompt-configuration}
 
 설정을 프롬프트와 함께 저장하여 둘 다 하나의 버전으로 업데이트하고 롤백할 수 있습니다. 구성은 다음 항목에 사용합니다.
 
@@ -332,7 +473,7 @@ Prompt Management API를 사용하여 프롬프트 및 프롬프트 버전을 �
 
 애플리케이션 환경에 배포된 프롬프트를 가져온 다음 해당 구성을 모델 클라이언트에 전달합니다.
 
-**미리 보기 SDK 액세스:** 사용 중인 언어에 사용할 SDK 버전에 대해서는 Datadog 지원팀이나 고객 성공 관리자에게 문의하세요.
+**미리 보기 SDK 액세스:** 사용하는 프로그래밍 언어에 적합한 SDK 버전을 확인하려면 Datadog 지원팀이나 고객 성공 관리자에게 문의하세요.
 
 이 예시들은 위에 표시된 구성과 함께 `summarizer`이라는 이름의 프롬프트를 사용합니다.
 
@@ -394,6 +535,90 @@ if !ok {
 
 **API 작성:** [Prompt Management API][8]를 사용하여 프롬프트와 버전을 생성할 수도 있습니다. `config`를 생략하면 새 프롬프트에 대한 빈 구성이 생성되거나 새 버전에 대한 최신 구성이 상속됩니다. 지우려면 `{}`을 전송하세요.
 
+## 프롬프트 구성을 통한 프롬프트 재사용 {#reuse-prompts-with-composition}
+
+<div class="alert alert-info"><strong>미리 보기:</strong> 프롬프트 구성은 미리 보기로 제공되고 있습니다. 액세스를 요청하려면 <a href="https://www.datadoghq.com/support/">Datadog 지원팀</a> 또는 고객 성공 관리자에게 문의하세요.</div>
+
+프롬프트 구성을 사용하면 한 프롬프트에 다른 프롬프트를 포함할 수 있으므로 공유 지침을 복사하지 않고도 재사용할 수 있습니다. 예를 들어, 지원 어시스턴트와 청구 어시스턴트는 동일한 응답 정책을 포함할 수 있습니다. 다음 두 가지 방법으로 다른 프롬프트를 포함할 수 있습니다.
+
+- **채팅 메시지**: 채팅 프롬프트의 일부 또는 전체 메시지를 포함합니다.
+- **텍스트**: 메시지 내에 텍스트 프롬프트의 내용을 삽입합니다.
+
+각 포함 항목은 특정 버전 하나를 참조합니다. 포함된 프롬프트의 새 버전을 게시해도 이미 해당 프롬프트를 포함하고 있는 프롬프트는 변경되지 않습니다.
+
+### 채팅 메시지 포함 {#include-chat-messages}
+
+#### UI에서 설정 {#in-the-ui-1}
+
+다음 예시에서는 지원 어시스턴트 프롬프트에 공통 응답 정책을 추가합니다.
+
+1. ID가 `response-policy`이고 {{< ui >}}System{{< /ui >}} 메시지 하나가 포함된 프롬프트를 저장합니다. `Answer concisely. If you do not know the answer, say so.`
+2. {{< ui >}}Prompts{{< /ui >}} 페이지에서 {{< ui >}}New Prompt{{< /ui >}}를 클릭합니다. 프롬프트 편집기에서 {{< ui >}}Include Prompt{{< /ui >}}를 클릭하고 `response-policy` 버전 1을 선택한 다음 {{< ui >}}Add prompt{{< /ui >}}를 클릭합니다.
+3. 포함된 프롬프트 뒤에 {{< ui >}}User{{< /ui >}} 메시지(`{{question}}`포함)를 추가합니다`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}프롬프트 ID로 `support-assistant-composed`를 입력한 다음 {{< ui >}}Create prompt{{< /ui >}}를 클릭합니다.
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="응답 정책 버전 1이 시스템 메시지로 포함되고 그 뒤에 질문 변수가 포함된 사용자 메시지가 표시된 플레이그라운드" style="width:100%;" >}}
+
+이제 프롬프트에 다음 내용이 포함됩니다.
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+애플리케이션이 평소와 같이 [프롬프트를 검색하고 형식을 지정합니다](#retrieve-format-and-use-a-prompt). 검색된 프롬프트에 포함된 메시지가 이미 들어 있으므로 `response-policy`를 별도로 검색할 필요가 없습니다.
+
+기본적으로 포함 항목은 참조하는 프롬프트의 모든 메시지를 순서대로 추가합니다. 일부 메시지만 포함하거나, 순서를 변경하거나, 특정 메시지를 반복하려면 프롬프트 편집기에서 {{< ui >}}Included Prompt{{< /ui >}}를 클릭하고 {{< ui >}}Customize messages{{< /ui >}}를 선택합니다. 포함 항목을 사용자 지정해도 원본 프롬프트는 변경되지 않습니다.
+
+#### API를 통한 설정 {#with-the-api}
+
+`template.messages`에서 `include` 객체를 사용하여 채팅 프롬프트의 특정 버전을 참조합니다. 이 예시에서는 버전 1이 있는 채팅 프롬프트 `response-policy`를 가정합니다. 이 프롬프트를 포함하는 새 프롬프트를 생성하려면 다음 JSON 본문을 `POST /api/v2/llm-obs/v1/prompts`에 전송합니다.
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+인증 및 메시지 선택 옵션에 대한 자세한 내용은 [Agent Observability 프롬프트 만들기][11]를 참조하세요.
+
+### 메시지에 텍스트 포함 {#include-text-in-a-message}
+
+전체 메시지 대신 문구를 재사용하려면 {{< ui >}}Include Prompt{{< /ui >}}를 클릭하여 텍스트 프롬프트와 버전을 선택한 다음 {{< ui >}}Insert text{{< /ui >}}를 클릭합니다. 참조가 마지막 편집 가능한 메시지 끝에 추가됩니다. 원하는 위치로 이동합니다.
+
+예를 들어 `response-style` 버전 1에 `Answer concisely.`가 포함되어 있는 경우 다음과 같이 작성합니다.
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+참조가 해석된 템플릿은 다음과 같습니다.
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+참조는 공백이나 줄 바꿈이 추가되지 않고 포함된 텍스트 그대로 해석됩니다. 항상 버전을 지정합니다. 버전을 지정하지 않으면 `{{>response-style}}`은 다른 프롬프트를 포함하지 않고 리터럴 텍스트로 유지됩니다. 미리 보기 기능에 대한 액세스 권한 없이 프롬프트를 생성하면 인라인 참조는 리터럴 텍스트로 유지됩니다. 이전에 저장한 조합된 프롬프트 버전은 계속 사용할 수 있습니다.
+
+API 요청에서는 텍스트 `template` 또는 채팅 메시지의 `content`에 동일한 구문을 사용합니다.
+
+### 포함 항목 검토 및 업데이트 {#review-and-update-includes}
+
+저장된 버전에서 {{< ui >}}Prompt Template{{< /ui >}}에는 직접 작성한 참조가 표시됩니다. {{< ui >}}Resolved Prompt{{< /ui >}}에는 런타임 변수에 값이 입력되기 전의 확장된 메시지가 표시됩니다.
+
+공유 정책이 변경되면 해당 {{< ui >}}Used By{{< /ui >}} 탭을 사용하여 정책을 참조하는 프롬프트를 찾습니다. 해당 정책을 참조하는 프롬프트를 열고 포함 항목을 새 원본 버전으로 교체한 다음 업데이트된 프롬프트를 테스트, 저장 및 배포합니다. 기존 버전은 소스가 나중에 삭제되더라도 원래 콘텐츠를 유지합니다.
+
 ## 고급 사용 {#advanced-usage}
 
 ### 하나의 환경에서 여러 버전 제공 {#serve-multiple-versions-from-one-environment}
@@ -442,3 +667,4 @@ prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstab
 [8]: /ko/api/latest/agent-observability/
 [9]: /ko/api/latest/feature-flags/list-environments/
 [10]: /ko/llm_observability/configure/prompt_experimentation/
+[11]: /ko/api/latest/agent-observability/create-an-agent-observability-prompt/

@@ -10,7 +10,7 @@ further_reading:
     text: "Metrics Explorer"
   - link: "/metrics/summary/"
     tag: "Documentation"
-    text: "Metrics Summary"
+    text: "Metrics Catalog"
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"

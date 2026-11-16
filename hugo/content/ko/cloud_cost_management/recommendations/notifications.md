@@ -11,7 +11,7 @@ further_reading:
 - link: /cloud_cost_management/recommendations/cost_optimization_automation/
   tag: 설명서
   text: 비용 최적화 자동화
-title: Notifications
+title: 알림
 ---
 ## 개요 {#overview}
 
@@ -33,6 +33,10 @@ title: Notifications
 1. {{< ui >}}Define scope{{< /ui >}} 섹션에서 {{< ui >}}Team{{< /ui >}}, {{< ui >}}Recommendation Type{{< /ui >}}, {{< ui >}}Env{{< /ui >}} 필터를 사용하여 일치하는 리소스로 알림을 제한합니다. 필터를 추가하려면 {{< ui >}}\+ Filter{{< /ui >}}를 클릭하세요. 모든 리소스를 포함하려면 필터를 비워 두세요.
 1. {{< ui >}}Set schedule{{< /ui >}} 섹션에서 알림 빈도, 실행 요일, 실행 시간 및 시간대를 선택합니다.
 1. {{< ui >}}Destination{{< /ui >}} 섹션에서 {{< ui >}}Slack{{< /ui >}} 또는 {{< ui >}}Microsoft Teams{{< /ui >}}를 선택한 다음, 작업 공간과 채널(Slack) 또는 테넌트, 팀, 채널(Microsoft Teams)을 선택합니다.
+1. (선택 사항) {{< ui >}}Customize message{{< /ui >}} 섹션에서 포함할 세부 정보를 선택합니다.
+   - 알림 세부 정보: {{< ui >}}Notification name{{< /ui >}}, {{< ui >}}Total est. savings{{< /ui >}}, {{< ui >}}Custom text{{< /ui >}} 사용자 지정 텍스트는 최대 500자까지 지원하며 동적 필드 `{{total_savings}}`, `{{rec_count}}`, and `{{digest_date}}`를 사용할 수 있습니다.
+   - 권장 세부 정보: {{< ui >}}Why{{< /ui >}}, {{< ui >}}Risk{{< /ui >}}, {{< ui >}}Effort{{< /ui >}} 권장 유형 및 예상 절감액은 항상 포함됩니다.
+   - 태그: {{< ui >}}Include tags{{< /ui >}}에서 `env` 또는 `service`과 같은 태그 키를 최대 10개까지 선택하거나 입력합니다. 각 권장 사항에는 키가 일치하는 태그만 표시됩니다. 모든 태그를 포함하려면 필드를 비워 두세요.
 1. 알림 규칙의 이름을 입력합니다.
 1. (필요시) 알림 메시지에 특정 Slack 사용자를 언급합니다.
 1. (필요시) {{< ui >}}Notification enabled{{< /ui >}} 토글을 꺼서 규칙을 활성화하지 않고 생성합니다.
@@ -43,7 +47,7 @@ title: Notifications
 {{< ui >}}Notification{{< /ui >}} 탭에는 조직의 모든 알림 규칙이 나열됩니다. 이 페이지에서 다음을 수행할 수 있습니다.
 
 - 규칙을 삭제하지 않고 켜기 또는 끄기
-- 규칙의 범위, 일정, 목적지 또는 이름 편집
+- 규칙의 범위, 일정, 대상, 이름, 메시지 사용자 지정 편집
 - 규칙 삭제
 
 ## 추가 자료 {#further-reading}

@@ -56,6 +56,8 @@ Default rules appear alongside your own rules on the [Findings Automation][2] pa
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
+You can also create inbox rules with the [API][4] or the [`datadog_security_findings_inbox_rule`][5] Terraform resource.
+
 ## Rule matching order
 
 When Datadog identifies a finding, it evaluates the finding against your sequence of inbox rules. Starting with the first rule, if there's a match, Datadog adds the finding to the Security Inbox and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
@@ -66,3 +68,5 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
 [3]: /security/security_inbox/
+[4]: /api/latest/security-monitoring/create-an-inbox-rule/
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_inbox_rule

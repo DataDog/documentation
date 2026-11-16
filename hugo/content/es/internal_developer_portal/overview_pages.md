@@ -81,7 +81,7 @@ Los siguientes widgets se incluyen de forma predeterminada en la página de desc
 
 Muestra señales en vivo de Datadog [Monitors][6], [Incident Management][3] y [SLOs][7]. Los widgets permanecen vacíos hasta que se habilitan estos productos.
 
-#### GitHub pull requests {#github-pull-requests}
+#### Solicitudes de extracción de GitHub {#github-pull-requests}
 
 Enumera las solicitudes de extracción abiertas que ha creado y aquellas que tiene asignadas para revisar, según la organización y el nombre de usuario de GitHub que proporcionó.
 
@@ -103,7 +103,7 @@ Captura alertas de [Datadog Watchdog][5].
 Si necesita personalizar su vista, haga clic en **Clone as dashboard** en la parte superior derecha. Esto crea un dashboard precargado con contenido de la página **My Workspace**.
 
 Aquí hay algunos ejemplos de personalizaciones que puede realizar con el dashboard clonado:
-- Cree [Embedded Apps][2] usando el [Action Catalog][11] de Datadog para mostrar datos adicionales de terceros (por ejemplo, mostrar información de guardia de PagerDuty).
+- Cree [embedded App Builder apps][2] usando el [Action Catalog][11] de Datadog para mostrar datos adicionales de terceros (por ejemplo, mostrar información sobre guardias de PagerDuty).
 - Actualice el diseño y la disposición general de su vista cambiando el tamaño, reorganizando y añadiendo/eliminando [widgets][12].
 - Utilice un widget de [Note][13] para añadir una sección de anuncios y actualizaciones con información relevante para su organización.
 

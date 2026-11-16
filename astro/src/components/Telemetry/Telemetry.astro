@@ -1,0 +1,111 @@
+---
+// Datadog RUM and Browser Logs initialization. Rendered once by BaseLayout, so
+// every route gets it.
+//
+// A bundled `<script>` rather than `is:inline`, since it needs npm imports.
+// Astro emits it as a deferred module, so telemetry never blocks first paint —
+// at the cost of missing errors thrown before it executes. Page-load
+// performance data is unaffected, since RUM backfills from the browser's
+// Performance Timeline.
+//
+// Bundled scripts do not re-execute on view-transition soft navigation, so the
+// init-once shape below needs no guard. RUM tracks pushState navigations as new
+// views itself.
+---
+
+<script>
+  import { datadogRum } from "@datadog/browser-rum";
+  import { datadogLogs } from "@datadog/browser-logs";
+  import { getTelemetryConfig } from "@config/telemetry";
+  import { resolveSiteEnv } from "@lib/site/siteEnv";
+  import {
+    buildGlobalContext,
+    buildLogsInitOptions,
+    buildRumInitOptions,
+  } from "@lib/telemetry/initOptions";
+  import { ensureRumDeviceId } from "@lib/telemetry/deviceId";
+
+  // Read through `import.meta.env.PUBLIC_*`, not `vite.define`: a define is
+  // replaced at build time only, so it reaches the browser as an undefined
+  // identifier under `astro dev` and throws on every page load. The `PUBLIC_`
+  // prefix is statically replaced in both dev and build. `astro.config.mjs`
+  // republishes the CI variables under that prefix and documents each one.
+  //
+  // `resolveSiteEnv` and not a bare `process.env` read: this runs in the
+  // browser, where `process` does not exist.
+  const env = resolveSiteEnv(import.meta.env.PUBLIC_CI_ENV);
+  const credentials = getTelemetryConfig(env);
+  const version = import.meta.env.PUBLIC_CI_COMMIT_SHORT_SHA;
+  const internalAnalyticsSubdomain = import.meta.env.PUBLIC_IA_SUBDOMAIN;
+
+  // `stack: 'astro'` always, and `branch` on preview builds. Applied to both
+  // SDKs so RUM and Logs are filterable the same way — though the two nest it
+  // differently in queries: `@context.stack` in RUM, `@stack` in Logs.
+  const globalContext = buildGlobalContext({
+    branch: import.meta.env.PUBLIC_CI_COMMIT_REF_NAME,
+  });
+
+  // The planned shared Ask AI package reads these globals rather than importing
+  // the SDKs itself. The npm packages also assign them on import, so these two
+  // lines are belt-and-braces — stated explicitly so the contract does not rest
+  // on another package's import side effect.
+  window.DD_RUM = datadogRum;
+  window.DD_LOGS = datadogLogs;
+
+  // RUM initializes on preview and live only. The applicationId check is a
+  // second, independent gate — development credentials carry no application ID,
+  // so RUM cannot start there even if the env check changed.
+  if ((env === "preview" || env === "live") && credentials.applicationId) {
+    datadogRum.init(
+      buildRumInitOptions({
+        credentials: {
+          ...credentials,
+          applicationId: credentials.applicationId,
+        },
+        env,
+        version,
+        internalAnalyticsSubdomain,
+        origin: window.location.origin,
+      }),
+    );
+
+    datadogRum.startSessionReplayRecording();
+
+    for (const [property, value] of Object.entries(globalContext)) {
+      datadogRum.setGlobalContextProperty(property, value);
+    }
+
+    // Live only. The cookie is scoped to datadoghq.com and shared with the rest
+    // of the domain, so the helper reads before it generates.
+    if (env === "live") {
+      datadogRum.setUserProperty(
+        "device_id",
+        ensureRumDeviceId(document, window.location.hostname),
+      );
+    }
+  }
+
+  // Logs initializes in every environment, including development, where the
+  // handler below routes output to the console instead of the HTTP intake.
+  datadogLogs.init(
+    buildLogsInitOptions({
+      credentials,
+      env,
+      version,
+      internalAnalyticsSubdomain,
+    }),
+  );
+
+  datadogLogs.setGlobalContextProperty("host", window.location.host);
+  datadogLogs.setGlobalContextProperty("referrer", document.referrer);
+  datadogLogs.setGlobalContextProperty(
+    "lang",
+    document.documentElement.lang || "en",
+  );
+
+  for (const [property, value] of Object.entries(globalContext)) {
+    datadogLogs.setGlobalContextProperty(property, value);
+  }
+
+  datadogLogs.logger.setHandler(credentials.loggingHandler);
+</script>

@@ -75,6 +75,8 @@ A scanning group determines what data to scan. It consists of a query filter, a 
 
 For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
+**Note**: By default, Sensitive Data Scanner supports up to 20 scanning groups per organization for telemetry data (Logs, APM, RUM, and Events). If you reach this limit, consider consolidating scanning groups that use similar query filters and rules. To request a higher limit, contact [Datadog Support][18].
+
 To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
@@ -93,7 +95,7 @@ A scanning rule determines what sensitive information to match within the data d
 
 Whenever possible, use Datadog's out-of-the-box library rules. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords](#add-custom-keywords).
 
-For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource. To keep your configuration stable when Datadog renames a library rule, [reference library rules by ID][17] instead of by name.
 
 
 **Note**: Sensitive Data Scanner supports up to 750 scanning rules per organization for telemetry data (Logs, APM, RUM, and Events). This limit applies across all scanning groups.
@@ -126,7 +128,7 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click {{< ui >}}Update{{< /ui >}}.
@@ -159,7 +161,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
@@ -167,6 +169,36 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 {{% /collapse-content %}}
+
+#### How Sensitive Data Scanner keyword matching works
+
+Keyword matching follows these rules for both library rules and custom rules:
+
+- **Case-insensitive matching**: The keyword `secret` matches `secret`, `Secret`, and `SECRET`.
+- **Interchangeable separators (spaces, underscores, hyphens, periods, slashes)**: The keyword `secret access key` matches `secret access key`, `secret_access_key`, `secret-access-key`, `secret.access.key`, and `secret/access/key`. The keyword also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
+- **Camel case in attribute names**: For structured events, keywords are also matched against attribute names in the event path. The same separators (spaces, `_`, `-`, `.`, and `/`) count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number`, `card-type`, and `creditCardNumber` match. The following event matches a rule whose pattern is `secret` and whose keyword is `card`, because `creditCardNumber` is split into `credit`, `card`, and `number`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "secret"
+      }
+    }
+  }
+  ```
+
+- **Camel case in surrounding text**: When keywords are matched against the characters before a matched value, including the value of an attribute in a structured event, camel case words are not split. For example, the following event does not match a rule whose pattern is `secret` and whose keyword is `bank`, because `anotherBank` in the value is not split into `another` and `bank`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "anotherBank secret"
+      }
+    }
+  }
+  ```
 
 **Notes**:
 
@@ -262,6 +294,9 @@ The excluded namespaces are:
 - `meta.issue`
 - `x-datadog-trace-id`
 - `x-datadog-parent-id`
+- `span_links.span_id`
+- `span_links.trace_id`
+- `span_links.trace_id_high`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
@@ -294,15 +329,40 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are not redacted, masked, or hashed.
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
+- Suppressions apply to the matched value in every attribute the rule scans. To ignore a value in one attribute only, see [How excluded attributes affect matches in other attributes](#how-excluded-attributes-affect-matches-in-other-attributes).
 
 #### Scan or exclude specific attributes
 
 To make matches more precise, you can also do one of the following:
 
-- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
+- Scan the entire event but exclude certain attributes so that match actions are not applied to them. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
 **Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+
+##### How excluded attributes affect matches in other attributes
+
+Sensitive Data Scanner still checks excluded attributes for matches, but it doesn't apply match actions to them. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match doesn't appear on the Findings page or in other reporting.
+
+For example, suppose you exclude the `support_contact` attribute because it always contains your company's shared support address. With the Standard Email Address Scanner library rule, Sensitive Data Scanner processes the following event like this:
+
+```json
+{
+  "service": "billing-api",
+  "support_contact": "support@example.org",
+  "reply_to": "support@example.org",
+  "customer_email": "jane.doe@example.net"
+}
+```
+
+- No match action is applied to `support_contact`, because it's excluded.
+- Sensitive Data Scanner drops the match in `reply_to`, because its value matches the value in the excluded `support_contact` attribute.
+- Sensitive Data Scanner keeps the match in `customer_email` and applies the rule's match action.
+
+To control this behavior, choose the option that fits your goal:
+
+- **To ignore specific known-safe values**: Use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@example.org` to ignore addresses from that domain. Sensitive Data Scanner still scans the attribute for other sensitive values and ignores the suppressed values in every attribute.
+- **To leave an attribute untouched but still match its values in other attributes**: Select {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in unlisted attributes don't affect matches in the listed attributes.
 
 ### Edit scanning rules
 
@@ -390,3 +450,5 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags
+[17]: /security/sensitive_data_scanner/scanning_rules/library_rules/#reference-library-rules-by-id
+[18]: /help/

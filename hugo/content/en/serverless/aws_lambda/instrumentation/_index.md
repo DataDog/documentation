@@ -45,16 +45,16 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Pup CLI" %}}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.
@@ -62,7 +62,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {{% /tab %}}
 {{% tab "MCP server" %}}
 
-Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Lambda functions with AI assistance. After you connect, try a prompt like:
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Lambda functions with AI assistance. After you connect, try a prompt like:
 
 ```
 Help me monitor my AWS Lambda functions with Datadog.

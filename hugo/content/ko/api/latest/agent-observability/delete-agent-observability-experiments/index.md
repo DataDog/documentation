@@ -1,3 +1,3 @@
 ---
-title: Agent Observability 실험을 삭제하십시오.
+title: Agent Observability 실험 삭제
 ---

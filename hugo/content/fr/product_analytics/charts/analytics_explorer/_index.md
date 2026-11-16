@@ -67,12 +67,12 @@ Toutes les options ne s'appliquent pas à tous les types de graphiques. L'interv
 
 6. Les segments hachurés indiquent les intervalles qui sont encore en cours. 
 
-## En savoir plus {#learn-more}
+## Étapes suivantes {#next-steps}
 {{< whatsnext desc="Apprenez à rechercher, à regrouper et à visualiser des événements analytiques, et à exporter ou à examiner des événements individuels." >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Syntaxe de recherche{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}}Events{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualiser des événements{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Enterprise Groups{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Group{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}Exportation{{< /nextlink >}}
 {{< /whatsnext >}}
 

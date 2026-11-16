@@ -95,11 +95,17 @@ Java と .NET の `full` モードの場合:
 | 言語 | 最小トレーサーバージョン | ライブラリ/フレームワーク | モード |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) 1.11.0 以上 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
 
 Java の `full` モードの場合:
 - このインスツルメンテーションは `V$SESSION.ACTION` を上書きします。
 - 前提条件: Java トレーサー 1.45 以降
+
+Java で `dynamic_service` モードを使用する場合、SQL ステートメントのテキストを変更せずにサービス情報を伝播できます。SQL Plan Management ベースラインなど、正確な SQL テキストと一致する機能に依存している場合は、このオプションを使用してください。
+- `DD_DBM_PROPAGATION_MODE=dynamic_service` と `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true` を設定します。
+- インスツルメンテーションは、SQL コメントを挿入する代わりに、サービスハッシュを `V$SESSION.ACTION` に書き込みます。これにより、既存の `V$SESSION.ACTION` 値が上書きされます。
+- `V$SESSION.ACTION`はコネクションごとに 1 回設定され、サービスハッシュが変更された場合にのみ更新されます。
+- 前提条件: Java トレーサー 1.67.0 以降
 
 {{% /tab %}}
 
@@ -242,6 +248,13 @@ public class Application {
     }
 }
 ```
+
+**SQL コメントを使用しない Oracle (トレーサーバージョン 1.67.0 以降)**:
+SQL ステートメントのテキストを変更せずに Oracle にサービス情報を伝播するには、以下の **両方** を設定します。
+- `DD_DBM_PROPAGATION_MODE=dynamic_service` (またはシステムプロパティ `dd.dbm.propagation.mode=dynamic_service`)
+- `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true` (またはシステムプロパティ `dd.dbm.propagation.oracle.action-only.enabled=true`)
+
+この設定により、トレーサーは SQL コメントを挿入する代わりに、サービスハッシュを `V$SESSION.ACTION` に書き込みます。これにはプリペアドステートメントも含まれます。他のデータベースへのコネクションでは、引き続き SQL コメントが受信されます。
 
 **トレーサーバージョン 1.44 以上**:
 Postgres でのプリペアドステートメントのトレースを有効にするには、以下の**いずれか**の方法を使用してください。
@@ -513,7 +526,7 @@ Database Monitoring で [クエリサンプル][37] を表示する際、関連�
 ### APM サービスの下流データベースホストを可視化する {#visualize-the-downstream-database-hosts-of-apm-services}
 
 特定のサービスの APM ページでは、Database Monitoring によって識別された、そのサービスの直接的なダウンストリームデータベース依存関係を表示し、ノイジーネイバーによって負荷が偏っている可能性のあるホストを判別できます。サービスのデータベース依存関係を表示するには、次のようにします。
-1. [Software Catalog][26] でサービスを選択して詳細パネルを開きます。
+1. [Catalog][26] でサービスを選択して詳細パネルを開きます。
 1. パネルで [{{< ui >}}Service Page{{< /ui >}}] (サービスページ) を選択します。
 1. [Service] (サービス) ページで、[{{< ui >}}Databases{{< /ui >}}] (データベース) セクションを選択します。
 1. [Databases] セクション内で [{{< ui >}}Databases{{< /ui >}}] タブを選択します。

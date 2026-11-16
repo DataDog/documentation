@@ -286,7 +286,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Delete Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_description: RDS instance with no client connections and no replica lag.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -417,8 +417,32 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
+      recommendation_type: Delete Empty Azure App Service Plan
+      recommendation_description: Identifies dedicated Azure App Service Plans that have hosted no apps for at least two weeks, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Delete Idle Azure Functions Premium Plan
+      recommendation_description: Identifies Azure Functions Premium plans with no function executions or HTTP requests, and recommends deleting the plan and its function apps.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: App Service Plan
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Downsize App Service Plan
+      recommendation_description: Identifies App Service Plans whose peak CPU and memory would stay low on the next smaller size, and recommends moving them to it to cut on-demand plan charges.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Upgrade Azure App Service Plan
+      recommendation_description: Identifies App Service Plans on Standard or Premium v2 sizes where a Premium v3 size with at least the same vCPU and memory costs less, and recommends upgrading them.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
@@ -446,6 +470,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Azure
+      resource_type: Microsoft Fabric Capacity
+      recommendation_type: Pause Idle Microsoft Fabric Capacity
+      recommendation_description: Identifies active Microsoft Fabric capacities whose billed compute mostly goes unused, and recommends pausing them when no workload needs them.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
       resource_type: Foundry Account
       recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies Azure Foundry accounts already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
@@ -461,6 +491,12 @@ multifiltersearch:
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
       recommendation_description: Load Balancer with 0 bytes transferred.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no billed data volume, ingested data, or user queries that still incur retention charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -486,17 +522,47 @@ multifiltersearch:
       recommendation_type: Downsize Managed Disk Throughput
       recommendation_description: Managed disk using less than the configured threshold of provisioned throughput.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk
+      recommendation_type: Migrate Managed Disk from Premium SSD to Premium SSD v2
+      recommendation_description: Identifies attached Premium SSD data disks that would cost less as Premium SSD v2 provisioned for their measured peak IOPS and throughput, and recommends converting them.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk
+      recommendation_type: Migrate Managed Disk from Premium SSD to Standard SSD
+      recommendation_description: Identifies attached Premium SSD disks whose measured peak IOPS and throughput fit within Standard SSD limits, and recommends migrating them to Standard SSD.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Delete Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: MySQL Database
+      recommendation_type: Downsize Database for MySQL Compute
+      recommendation_description: Identifies Azure Database for MySQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Database for PostgreSQL
       recommendation_type: Delete Database for PostgreSQL
       recommendation_description: Azure Database for PostgreSQL server with no connections, which can be terminated.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Database for PostgreSQL
+      recommendation_type: Downsize Database for PostgreSQL Compute
+      recommendation_description: Identifies Azure Database for PostgreSQL flexible servers whose peak CPU, memory, connections, and IOPS would stay low on fewer vCores, and recommends scaling compute down.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -522,6 +588,30 @@ multifiltersearch:
       recommendation_type: Downsize SQL Server Database Storage
       recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Downsize SQL Server Database vCores
+      recommendation_description: Identifies provisioned vCore SQL Server Databases whose peak CPU, workers, log write and data IO would stay low on fewer vCores, and recommends downsizing them to cut on-demand compute and SQL license charges.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Enable Auto-Pause on Serverless SQL Server Database
+      recommendation_description: Identifies serverless SQL Server Databases with auto-pause disabled that sat idle for long stretches, and recommends enabling auto-pause so compute stops billing while they are idle.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Elastic Pool
+      recommendation_type: Downsize Azure SQL Elastic Pool
+      recommendation_description: Identifies Azure SQL elastic pools whose peak utilization would stay low on a smaller size, and recommends downsizing them, at most two sizes at a time, to cut on-demand eDTU or vCore charges.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Downsize SQL Managed Instance
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay low on a smaller vCore size, and recommends downsizing them, at most two sizes at a time, to cut on-demand compute and SQL license charges.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Storage Account
@@ -530,15 +620,27 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Synapse Dedicated SQL Pool
+      recommendation_type: Delete Idle Synapse Dedicated SQL Pool
+      recommendation_description: Identifies online Synapse dedicated SQL pools with no logins and low DWU usage, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Delete Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Delete Stopped (Allocated) Azure VM Instance
+      recommendation_description: Identifies Azure VMs stopped without being deallocated, which Azure still bills for compute, and recommends deleting or deallocating them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type.
+      recommendation_description: VM instance that can be downsized to a smaller instance type. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU and, when available, memory metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: Azure
@@ -605,6 +707,12 @@ multifiltersearch:
       resource_type: Databricks Cluster
       recommendation_type: Downsize Databricks Job
       recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: BigQuery Dataset
+      recommendation_type: Delete Idle BigQuery Dataset
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
@@ -678,6 +786,12 @@ multifiltersearch:
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: GCP
+      resource_type: Vertex AI Project
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Google Cloud projects already using Vertex AI prompt caching below the target hit rate and estimates the input cost savings from reaching the target.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Kubernetes Cluster
@@ -713,6 +827,24 @@ multifiltersearch:
       resource_type: Kubernetes Deployment
       recommendation_type: Downsize Deployment
       recommendation_description: Containers are using only a fraction of their requested CPU or memory.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Configure
       cloud_provider: OpenAI

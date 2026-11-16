@@ -35,7 +35,7 @@ The right configuration depends on how you send telemetry to Datadog. Find each 
 
 ### OTLP ingestion by the Datadog Agent
 
-Deploy the Datadog Agent on every host that generates OTLP telemetry. Datadog doesn't support sending telemetry from one host to an Agent on another host. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
+Deploy the Datadog Agent on every host that generates OTLP telemetry. Datadog doesn't support sending telemetry from one host to an Agent on another host. For setup instructions, see [Set Up the Agent's OTLP Endpoint][11].
 
 If incoming telemetry has no valid [hostname attributes][8], Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, set it to the Agent hostname to avoid duplicate hosts. To override hostname resolution, set the `datadog.host.name` resource attribute to the Agent hostname.
 
@@ -49,7 +49,7 @@ The rest of the configuration depends on whether the DDOT Collector runs on a ho
 
 This applies to the DDOT Collector as a [Kubernetes DaemonSet][9] and on [Linux][14] and [Windows][15] hosts.
 
-Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent hostname. A single node then appears as two hosts. To use the Agent hostname instead, enable `allow_hostname_override`:
+Because the Agent's Collector runs as a separate process from the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent hostname. A single node then appears as two hosts. To use the Agent hostname instead, enable `allow_hostname_override`:
 
 ```yaml
 processors:
@@ -121,9 +121,11 @@ If your Collector forwards to a gateway, also follow the [gateway recommendation
 
 ## Diagnose hostname issues
 
-Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems. It does not affect billing.
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. The metric doesn't affect billing.
 
-A trace has at most one `issue_type`. Use the following table to find the cause and the fix:
+<div class="alert alert-info">The <code>issue_type</code> values come from heuristics, so a correct configuration can produce them. Use this metric to investigate a hostname problem you've already seen, such as one node appearing as two hosts, traces that don't link to their host, or missing host tags.</div>
+
+A trace has at most one `issue_type`. Use the following table to find the likely cause and the fix:
 
 | `issue_type` | What it indicates | Recommended action |
 |---|---|---|

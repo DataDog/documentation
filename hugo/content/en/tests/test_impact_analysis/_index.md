@@ -4,18 +4,18 @@ aliases:
 - /continuous_integration/intelligent_test_runner/
 - /intelligent_test_runner
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: "Release Notes"
-    text: "Check out the latest Software Delivery releases! (App login required)"
+  - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+    tag: "Learning Center"
+    text: "Getting Started with Test Optimization"
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
     text: "Streamline CI testing with Datadog Intelligent Test Runner"
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
-  - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
-    tag: "Learning Center"
-    text: "Getting Started with Test Optimization"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+    tag: "Release Notes"
+    text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 <div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
@@ -29,6 +29,8 @@ Test Impact Analysis automatically selects and runs only the relevant tests for 
 Test Impact Analysis works by analyzing your test suite to identify the code each test covers. It then cross-references that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration. Find out more details about [How It Works][1].
 
 By minimizing the number of tests run per commit, Test Impact Analysis reduces the frequency of [flaky tests][2] disrupting your pipelines. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Test Impact Analysis for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
+
+Tests skipped by Test Impact Analysis are not billed as test spans. For details, see [CI/CD Optimization Billing][13].
 
 ### Out-of-the-box configuration limitations
 
@@ -135,7 +137,7 @@ Backfilling is best effort. For large test suites, the coverage of some tests sk
 
 ### Java, .NET, and Go
 
-With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-java`, `dd-trace-dotnet`, and `ddtest instrument`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
 
 ### JavaScript
 
@@ -177,3 +179,4 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [10]: /code_coverage/
 [11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
 [12]: /tests/test_impact_analysis/troubleshooting/
+[13]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features

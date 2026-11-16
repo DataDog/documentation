@@ -139,7 +139,7 @@ In the following chart, "no change" indicates that Organization Groups do not in
 | SLOs across services | Full | Cannot span organizations | No change |
 | User management | One integration | Separate [SCIM][11] per organization | Centralized from group |
 | RBAC and custom roles | One configuration | Must duplicate per organization | Centralized from group |
-| SSO / SAML | One config ([multi-SAML][8] supports multiple IdPs) | Separate SAML per organization | Centralized from group |
+| SSO / SAML | One config ([multi-SAML][8] supports multiple IdPs) | Separate SAML per organization | No change |
 | Billing and usage | Usage attribution per organization | Datadog aggregates usage across all child organizations and bills it at the parent organization level | No change |
 | Feature rollout | Immediate | Must enable per organization | Centralized from group |
 
