@@ -126,7 +126,7 @@ Use `similarity` to compare an output to an expected answer, or to find which of
 
 If the arguments are invalid, or if the similarity request fails, `similarity` throws an error. You can catch the error with `try`/`catch`. If you don't catch it, the evaluation reports an error.
 
-In practice, scores rarely fall below 0.3. Unrelated texts usually score between 0.4 and 0.65, texts with the same meaning usually score above 0.8, and near-identical texts score above 0.95. Texts that share most of their wording also score above 0.8 even when one detail changes the meaning, such as a number, a negation, or an opposite verdict, so `similarity` measures closeness in topic and wording, not whether a response is correct. Comparing texts in different languages is unreliable: a translation usually scores only slightly higher than unrelated text. Choose thresholds by testing on your own data.
+Unrelated texts usually score between 0.4 and 0.65, and texts with the same meaning usually score above 0.8. `similarity` works best for comparing natural-language text in the same language, such as a response and a reference answer. It's less reliable for detecting subtle changes in meaning, such as a different number or a negation, and for comparing structured data or code. Choose thresholds by testing on your own data.
 
 ### Example: Similarity to reference answers (span scope)
 
