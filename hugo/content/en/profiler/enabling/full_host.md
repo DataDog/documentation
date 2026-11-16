@@ -75,7 +75,7 @@ If neither variable is set, the profiler infers the service name from the binary
 
 If multiple services share the same interpreter and don't set a service name, their profiles are grouped under the same inferred name. Datadog can't distinguish between them unless you provide a unique service name.
 
-Set `DD_ENV` and `DD_VERSION` on your workloads for richer filtering in the [Datadog Profiler][3] UI. Support for equivalent metadata from `OTEL_RESOURCE_ATTRIBUTES` is in progress.
+Set `DD_ENV` and `DD_VERSION` on your workloads for richer filtering in the [Datadog Profiler][3] UI.
 
 ## Debug symbols
 
