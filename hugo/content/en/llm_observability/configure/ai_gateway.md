@@ -100,7 +100,7 @@ Append one of the following paths to the base URL. The operations available depe
 | OpenAI Chat Completions | `POST /chat/completions` |
 | Anthropic Messages | `POST /messages` |
 
-For cross-API model calls and compatibility limits, see [Use API translation with AI Gateway][18].
+For cross-API model calls and compatibility limits, see [Use API Translation with AI Gateway][18].
 
 [18]: /llm_observability/configure/ai_gateway_translation/
 

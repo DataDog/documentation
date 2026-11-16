@@ -1,11 +1,15 @@
 ---
-title: Use API translation with AI Gateway
+title: Use API Translation with AI Gateway
 description: Call models through a different inference API with Datadog AI Gateway, review compatibility limits, and handle translation warnings and streaming errors.
 further_reading:
   - link: "/llm_observability/configure/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
 
 API translation lets an application keep its inference API while calling a model that supports another API. For example, a Responses client can call a model that accepts Anthropic Messages, and a Messages client can call a model that accepts Responses.
 
@@ -27,9 +31,9 @@ AI Gateway translates the request and returns the response in the client's API, 
 
 Translation is selected by API support, rather than provider name. A Gemini model exposed through an OpenAI-compatible Chat Completions endpoint can accept a Chat Completions request directly. Messages and Google `generateContent` do not translate directly to each other.
 
-If a target supports the client's API, Gateway uses that API directly. For a Messages request to a target supporting both Responses and Chat Completions, Gateway prefers Responses to preserve supported reasoning continuation. Other translation targets are considered in their configured operation order.
+If a target supports the client's API, Gateway uses that API directly. For a Messages request to a target supporting both Responses and Chat Completions, Gateway prefers Responses to preserve supported reasoning continuation. Other translation targets are considered in the order of the model catalog's supported-operation list. Review the model's operations in its [provider configuration][1]. This is separate from a routing rule's fallback order.
 
-A [routing rule][3] can select another destination if an operation or request setting cannot be translated. Each attempt starts with the original client request. If no destination accepts it, Gateway returns an unsupported-operation error with the relevant field explanation.
+A [routing rule][3] can select another destination if an operation or request setting cannot be translated. Each attempt starts with the original client request. If no destination accepts the operation or settings, Gateway returns HTTP `400` with the `unsupported_operation` error code and an explanation of the relevant field.
 
 ## Send a translated request
 
@@ -48,7 +52,7 @@ curl -i "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
   }'
 ```
 
-The response uses the Responses format. To request SSE, add `"stream": true` to the body and use `curl -N -i`. Inspect `X-Ai-Gateway-Translation-Warnings` in the response headers as well as the body.
+The response uses the Responses format. To request SSE, add `"stream": true` to the body and use `curl -N -i`. Inspect the response body and check the `X-Ai-Gateway-Translation-Warnings` response header for translation warnings.
 
 Provider credentials remain configured on the Gateway provider. The application sends its Datadog token to Gateway.
 
@@ -65,9 +69,9 @@ Common supported features include user and assistant text, system instructions, 
 | Provider-specific settings | Settings such as Google safety configuration, cached content, or top-k can fail when the destination has no supported mapping. An unsupported mapping does not imply that the destination model lacks the capability. |
 | Hosted tools | Support depends on the API pair. Hosted web search translates between Responses and Messages with supported search settings. Other server-side tools, compaction, and cross-API token-counting endpoints are unsupported. |
 | Hosted search on Chat or Google targets | A declared search tool is omitted with `web_search_omitted`; a tool choice that requires hosted search fails translation. Check warnings before relying on search. |
-| Response metadata | Nonempty Responses `metadata` and end-user identifiers are rejected for Google `generateContent`. Client correlation context in `client_metadata` is separate and is omitted from translated Google and Chat requests. |
+| Response metadata | Google `generateContent` translation rejects nonempty Responses `metadata`, the `user` field, and the `safety_identifier` field. Client correlation context in `client_metadata` is separate and is omitted from translated Google and Chat requests. |
 
-Disabled or empty settings such as `background: false`, `include: []`, and `truncation: "disabled"` are accepted without a relaxation header. They do not enable the corresponding service. Meaningful unsupported settings return a field-specific error.
+Disabled or empty settings such as `background: false`, `include: []`, and `truncation: "disabled"` are accepted without the `X-Ai-Gateway-Allow-Lossy-Translation` request header or a translation warning. They do not enable the corresponding service. Meaningful unsupported settings return a field-specific error.
 
 ### Tools and conversation history
 
@@ -75,7 +79,7 @@ The application executes client-side tools and returns each result using the mat
 
 Responses freeform custom tools, including Codex `apply_patch`, can target Messages, Chat Completions, or Google `generateContent`. Gateway represents each custom tool as a function with a string argument, then restores the custom-tool call for the Responses client. Tool namespaces and call/result associations are preserved.
 
-Lark or regular-expression tool grammars become tool instructions without grammar enforcement. Gateway reports `custom_tool_grammar_relaxed`. On Messages targets, developer updates become system instructions, which changes their original position and role priority and produces `developer_messages_normalized`. Leading-only developer instructions do not produce that warning.
+Lark or regular-expression tool grammars become tool instructions without grammar enforcement. Gateway reports `custom_tool_grammar_relaxed`. On Messages targets, developer-role messages that appear after user or assistant messages become system instructions. This changes their position and role priority and produces `developer_messages_normalized`. Developer instructions that appear only before the first user or assistant message do not produce that warning.
 
 Preserve supported assistant history, tool calls, and tool results between turns. Messages requests ending in an assistant prefill are rejected for translation. Do not assume that every client feature works because a text-only request succeeds.
 
@@ -86,7 +90,7 @@ Reasoning history is specific to its originating model and target. Preserve opaq
 - **Responses to Messages:** Send `"include": ["reasoning.encrypted_content"]` to receive replayable reasoning data. Include the returned reasoning items in the next request's history. Without the include, reasoning history is omitted on replay and reported as `reasoning_history_omitted`.
 - **Messages to Responses:** Preserve the returned thinking blocks and signatures when sending subsequent turns.
 - **Responses to Google:** Preserve the returned continuation item and the associated output items unchanged, then append the tool results or next user turn.
-- **Ordinary Chat Completions targets:** Hidden model reasoning is not returned as replayable reasoning history. Requested Responses summaries or encrypted-reasoning output are omitted with warnings; unsupported reasoning history fails translation. Google-capable Chat targets can preserve Google continuation state.
+- **Ordinary Chat Completions targets:** Hidden model reasoning is not returned as replayable reasoning history. Requested Responses summaries or encrypted-reasoning output are omitted with warnings; unsupported reasoning history fails translation. Gemini models exposed through an OpenAI-compatible Chat Completions endpoint can preserve Google continuation state.
 
 Keep the target stable for turns that depend on reasoning continuation. A routing change to another provider or model can invalidate existing continuation data and cause a request to fail. Test a complete tool loop with the target and routing configuration your application uses.
 
@@ -108,7 +112,7 @@ Inspect the `X-Ai-Gateway-Translation-Warnings` response header for buffered and
 |---|---|
 | `parallel_tool_calls_relaxed` | The request opted into allowing multiple function calls on a Google target. |
 | `custom_tool_grammar_relaxed` | A custom tool's grammar is included as instructions without grammar enforcement. |
-| `developer_messages_normalized` | Developer updates became Messages system instructions. |
+| `developer_messages_normalized` | Developer-role messages after user or assistant messages became Messages system instructions. |
 | `max_output_tokens_defaulted` | A Responses request omitted its output-token limit, so Gateway supplied a Messages limit from model metadata or a default. Set the limit explicitly to control it. |
 | `cache_control_omitted` | Anthropic prompt-cache breakpoints could not be represented in Responses. Provider automatic caching is separate. |
 | `prompt_cache_key_omitted` | The destination does not receive the source API's prompt-cache key. |
@@ -122,7 +126,7 @@ A successful request without a warning does not establish complete API equivalen
 
 A request with `parallel_tool_calls: false` and callable tools cannot translate to Google `generateContent` with the single-call guarantee intact. By default, Gateway rejects that translation if no native destination accepts it. A request without tools, or with `tool_choice: "none"`, does not need relaxation.
 
-If your application can handle multiple calls in one turn, add:
+If your application can handle multiple calls in one turn, add the following request header:
 
 ```text
 X-Ai-Gateway-Allow-Lossy-Translation: parallel_tool_calls
@@ -147,19 +151,29 @@ Read the stream through its terminal event. An HTTP `200` can precede a failure 
 | Anthropic Messages | An `event: error` event. |
 | OpenAI Chat Completions | A `data: {"error": ...}` chunk without a success `[DONE]` marker. `error.code` is an integer HTTP status; `error.metadata.reason` contains the string error code. |
 | OpenAI Responses | A `response.failed` event. |
-| Google `generateContent` | A protocol-native error frame. |
+| Google `generateContent` | An SSE data chunk with a top-level `error` object. Inspect its numeric `code`, canonical `status`, and `message` fields. |
+
+For example, a Google streaming error can contain:
+
+```text
+data: {"error":{"code":503,"status":"UNAVAILABLE","message":"The upstream service is unavailable."}}
+```
 
 For a translated upstream HTTP error, Gateway preserves the status and relevant headers, such as `Retry-After`, and renders the error in the client's API. Native streams retain the provider's error behavior.
 
 ## Verify translation for your application
 
-1. Start with a text request using the target's translated API and an explicit output-token limit.
+1. Start with a text request in your client's API, sent to the target model, with an explicit output-token limit.
 2. Check the response format and translation-warning headers.
 3. Test the features your application uses: a streamed answer, a complete tool call/result loop, structured output, and reasoning continuation where applicable.
 4. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][5], then follow the trace to Agent Observability. Confirm the served provider and model. Billing uses the provider's reported usage.
 5. If you use fallbacks, exercise each destination with the same request settings and history. A successful request against one destination does not prove the others are compatible.
 
 See [Gateway troubleshooting][6] for authentication, model access, and operation errors.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/configure/ai_gateway/#add-a-provider
 [2]: /llm_observability/configure/ai_gateway/#authenticate-requests
