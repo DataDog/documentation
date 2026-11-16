@@ -63,7 +63,7 @@ The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the
 
 The Datadog Helm chart configures the required capabilities and seccomp profile automatically.
 
-The Full-Host Profiler infers most configuration from the Datadog Agent configuration. For optional overrides, see the [Configuration for bundled deployments](#configuration-for-datadog-agent-deployments) section.
+The Full-Host Profiler infers most configuration from the Datadog Agent configuration. For optional overrides, see [Configuration for Datadog Agent deployments](#configuration-for-datadog-agent-deployments).
 
 After you apply the updated values, Helm rolls out a new Agent DaemonSet revision with the Full-Host Profiler sidecar. Wait for that rollout to complete before verifying profiles.
 
