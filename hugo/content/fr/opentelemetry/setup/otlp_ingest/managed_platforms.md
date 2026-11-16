@@ -71,6 +71,7 @@ Tous les endpoints suivent le modèle `https://{subdomain}.integrations.otlp.{{<
 | LiveCloudKit | `livekit` | — |
 | Modal | `modal` | [Modal OpenTelemetry][14] |
 | MuleSoft | `mulesoft` | [MuleSoft Telemetry Exporter][15] |
+| Neon | `neon` | — |
 | Netlify | `netlify` | — |
 | OpenTofu | `opentofu` | — |
 | Retool | `retool` | [Retool performance monitoring][16] |
