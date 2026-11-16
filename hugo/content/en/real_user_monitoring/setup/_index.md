@@ -116,7 +116,7 @@ When [Remote Configuration][4] is enabled, the Browser and mobile SDKs fetch the
 | AP2  | `https://sdk-configuration.browser-intake-ap2-datadoghq.com` |
 | UK1  | `https://sdk-configuration.browser-intake-uk1-datadoghq.com` |
 
-If you use a [proxy][2] or have a [Content Security Policy (CSP)][3], allow these `sdk-configuration.` domains as well. On iOS and Android, the SDK proxy configuration also applies to Remote Configuration requests.
+If you use a [proxy][2] or have a [Content Security Policy (CSP)][3], allow these `sdk-configuration.` domains as well. On iOS and Android, the SDK proxy configuration also applies to Remote Configuration requests. On Browser, the `proxy` initialization parameter does not apply to Remote Configuration requests, so the browser must be able to reach the `sdk-configuration.` domain directly.
 
 ### Additional endpoints for Browser Profiling
 

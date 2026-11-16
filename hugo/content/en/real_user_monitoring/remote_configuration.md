@@ -35,7 +35,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.1+
 
-<div class="alert alert-danger">If your network or proxy uses an allowlist, add the <code>sdk-configuration.</code> host for your Datadog site, listed in <a href="/real_user_monitoring/setup/#additional-endpoints-for-remote-configuration">Additional endpoints for Remote Configuration</a>, in addition to the RUM intake host. For Browser applications, also add this host to your Content Security Policy.
+<div class="alert alert-danger">If your network or proxy uses an allowlist, add the <code>sdk-configuration.</code> host for your Datadog site, listed in <a href="/real_user_monitoring/setup/#additional-endpoints-for-remote-configuration">Additional endpoints for Remote Configuration</a>, in addition to the RUM intake host. For Browser applications, also add this host to your Content Security Policy. The Browser SDK's `proxy` initialization parameter does not apply to Remote Configuration requests, while the iOS and Android proxy configuration does.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
 
 ## How it works

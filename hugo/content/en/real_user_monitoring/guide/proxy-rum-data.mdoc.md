@@ -25,6 +25,8 @@ Upgrade to Browser SDK `4.34.0` or later to avoid security vulnerabilities in yo
 
 The RUM Browser SDK can be configured to send requests through a proxy. When you set the SDK's `proxy` [initialization parameter][1] to a URL such as `https://www.example-proxy.com/any-endpoint`, all RUM data is sent to that URL using the POST method. The RUM data still needs to be forwarded to Datadog from the proxy.
 
+**Note**: The `proxy` parameter does not apply to [Remote Configuration][4] requests. The Browser SDK fetches its remote configuration directly from the `sdk-configuration.` domain for your Datadog site. If your network uses an allowlist, allow the [Remote Configuration endpoint][5] for your site.
+
 ## Prerequisite proxy setup
 
 To successfully forward a request to Datadog, your proxy must
@@ -234,3 +236,5 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 [1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 [3]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/
+[4]: /real_user_monitoring/remote_configuration/
+[5]: /real_user_monitoring/setup/#additional-endpoints-for-remote-configuration
