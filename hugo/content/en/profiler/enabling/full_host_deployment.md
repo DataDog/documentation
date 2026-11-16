@@ -78,7 +78,7 @@ agents:
           type: <SELINUX_TYPE>
 ```
 
-This type applies to the Full-Host Profiler and its seccomp setup init container. The replacement must provide the host and process access the Full-Host Profiler requires.
+The SELinux type applies to the Full-Host Profiler and its seccomp setup init container. The replacement must provide the host and process access the Full-Host Profiler requires.
 
 **AppArmor (optional)**: AppArmor provides extra hardening on Linux distributions and Kubernetes clusters where it's available. The Full-Host Profiler doesn't require AppArmor to run.
 
