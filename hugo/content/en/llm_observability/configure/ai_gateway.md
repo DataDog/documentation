@@ -52,6 +52,8 @@ A provider connects an integration account to the models that callers can use th
 6. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the provider's models. See [Control model access](#control-model-access).
 7. Review and create the provider.
 
+For effective prices, custom rates, and pricing prerequisites for spending controls, see [Configure AI Gateway Model Pricing][26].
+
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
 ### Authenticate requests
@@ -377,7 +379,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
 
 `budget_pricing_unavailable`
-: HTTP `402`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
+: HTTP `400`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
 
 `model_not_found`
 : HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working.
@@ -443,3 +445,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+
+[26]: /llm_observability/configure/ai_gateway_pricing/
