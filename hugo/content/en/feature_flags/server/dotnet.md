@@ -406,6 +406,14 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [9]: /feature_flags/concepts/configuration_sources/
 [10]: /feature_flags/concepts/configuration_sources/#agent-availability
 
+## Record exposures in your own data store
+
+Use `ExposureHook` to record experiment exposures in your own logs, data warehouse, or analytics pipeline.
+The hook uses the provider's exposure decision and deduplication cache.
+See [Record Feature Flag Exposures in Your Own Data Store][90] for setup, release requirements, and examples.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[90]: /feature_flags/guide/record_exposures_in_your_own_data_store/

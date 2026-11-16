@@ -26,6 +26,10 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 | [Java][2] | `dd-java-agent` and `dd-openfeature` 1.68.0 |
 | [Go][3] | `dd-trace-go` 2.12.0 |
 | [Browser][4] (JavaScript, React, Angular) | `@datadog/openfeature-browser` 2.3.0 |
+| [Python][9] | A `ddtrace` release that includes `ExposureHook`; not available in 4.17.0 |
+| [.NET][10] | Tracer 3.58.0 or later and a provider release that includes `ExposureHook`; not available in provider 2.3.2 |
+
+<div class="alert alert-info">The Python and .NET examples require provider APIs that are pending release. Use these examples with a build that includes <code>ExposureHook</code>. Earlier packages do not provide this API.</div>
 
 ## How the SDK identifies exposures
 
@@ -131,6 +135,94 @@ OpenFeature.addHooks(
 The browser SDK keeps its exposure cache across page loads. When a page reload gives a subject the same result, the evaluation is a cache hit.
 
 {{% /tab %}}
+{{% tab "Python" %}}
+
+Register the hook with the public `ddtrace.openfeature` API after you configure the [Python provider][9].
+Use the `should_send` property to select new exposures.
+
+{{< code-block lang="python" >}}
+from datetime import datetime, timezone
+from queue import Full, Queue
+
+from ddtrace.openfeature import ExposureHook
+from openfeature import api
+
+exposures = Queue(maxsize=10_000)
+
+
+def record_exposure(evaluation):
+    if not evaluation.should_send:
+        return
+    record = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "subject": evaluation.targeting_key,
+        "flag": evaluation.flag_key,
+        "allocation": evaluation.allocation_key,
+        "variant": evaluation.variant,
+        "features": dict(evaluation.features),
+    }
+    try:
+        exposures.put_nowait(record)
+    except Full:
+        # Track dropped records outside the evaluation callback.
+        pass
+
+
+api.add_hooks([ExposureHook(record_exposure)])
+# A background worker drains the queue and writes to your data store.
+{{< /code-block >}}
+
+The callback receives `is_exposure`, `is_cache_hit`, and `should_send` as Boolean properties.
+`details` contains the evaluation result. `evaluation_context` contains the subject's evaluation context.
+`features` is a read-only map of split features for the hook.
+Copy the values that your background worker needs before the callback returns.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Register the hook with OpenFeature after you configure the [.NET provider][10].
+Install a provider package that includes `ExposureHook` and use tracer 3.58.0 or later.
+Provider 2.3.2 does not contain this API.
+
+{{< code-block lang="csharp" >}}
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using Datadog.FeatureFlags.OpenFeature;
+
+var exposures = new BlockingCollection<Dictionary<string, object>>(10_000);
+
+OpenFeature.Api.Instance.AddHooks(new ExposureHook(evaluation =>
+{
+    if (!evaluation.ShouldSend)
+    {
+        return;
+    }
+
+    exposures.TryAdd(new Dictionary<string, object>
+    {
+        ["timestamp"] = DateTimeOffset.UtcNow,
+        ["subject"] = evaluation.TargetingKey,
+        ["flag"] = evaluation.FlagKey,
+        ["allocation"] = evaluation.AllocationKey,
+        ["variant"] = evaluation.Variant,
+        ["features"] = evaluation.Features.ToDictionary(pair => pair.Key, pair => pair.Value),
+    });
+}));
+// A background worker drains the queue and writes to your data store.
+{{< /code-block >}}
+
+`TryAdd` returns `false` when the queue is full. Track dropped records outside the callback.
+The callback receives `IsExposure`, `IsCacheHit`, and `ShouldSend` as Boolean properties.
+`Context` contains the evaluation context. `Features` contains the split features for the hook.
+
+An older tracer cannot provide the exposure decision. With that tracer, `ShouldSend` remains `false`.
+After tracer shutdown, `ShouldSend` and `IsCacheHit` are also `false`.
+Evaluate flags through an OpenFeature client so the provider's hooks run.
+Direct asynchronous calls to the provider's `Resolve...ValueAsync` methods do not run those hooks.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### What the callback receives
@@ -143,7 +235,8 @@ The browser SDK keeps its exposure cache across page loads. When a page reload g
 | Split features | `getFeatures()` | `Features()` | The split features attached to the selected split, such as the [holdout fields](#holdout-fields). Empty when the split has none. |
 | Evaluation | Java: `getDetails()` and `getContext()`<br>Browser: `details`, `context`, `flagKey`, `variant`, `allocation`, `targetingKey` | `Details`, `Context`, `AllocationKey()` | The flag key, variant, flag metadata, and evaluation context, including the targeting key. |
 
-If you use `isExposure()` instead of `shouldSend()`, deduplicate the records yourself.
+If you select all exposures instead of using the should-send decision, deduplicate the records yourself.
+Python uses `is_exposure` and `should_send`. .NET uses `IsExposure` and `ShouldSend`.
 
 ## Split features
 
@@ -190,6 +283,8 @@ Set this environment variable on your application. The SDK reads it when it crea
 DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false
 {{< /code-block >}}
 
+The same environment variable applies to Python and .NET. Their customer callbacks and exposure cache remain enabled.
+
 This setting stops only the exposures sent to Datadog. It does not stop the aggregated flag evaluation events. To stop those events too, set:
 
 {{< code-block lang="bash" >}}
@@ -228,3 +323,6 @@ const provider = new DatadogProvider({
 [6]: /experiments/concepts/exposure_sql/
 [7]: /experiments/holdouts/#analyze-holdouts-with-your-own-exposure-data
 [8]: /feature_flags/browser_developer_extension/
+
+[9]: /feature_flags/server/python/
+[10]: /feature_flags/server/dotnet/
