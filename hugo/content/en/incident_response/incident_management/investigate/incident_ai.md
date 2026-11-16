@@ -39,106 +39,22 @@ When an incident is changed to resolved, Incident AI posts a final summary. This
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
-## Meeting summaries
+## Meeting summaries and transcripts {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Incident AI can automatically summarize incident meetings in Zoom, Google Meet, and Microsoft Teams. During a meeting, it periodically posts live summaries to the incident timeline and the incident chat channel. When the meeting ends, it posts a final post-meeting summary.
+<!-- TODO (author): State the availability status of live meeting transcripts (for example, Preview). -->
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data. This does not delete transcripts saved in Datadog notebooks.</div>
+Incident AI can summarize incident meetings in Zoom, Google Meet, and Microsoft Teams, and save live transcripts of those meetings in Datadog notebooks:
 
-Your organization must have AI features enabled before the Datadog Transcriber can join meetings. To turn on meeting summaries, enable **Generate AI meeting summaries** in the integration settings for your meeting platform:
+- **Meeting summaries**: During a meeting, Incident AI periodically posts live summaries to the incident timeline and the incident chat channel. When the meeting ends, it posts a final summary.
+- **Live meeting transcripts**: A Datadog notebook captures the conversation with speaker names and timestamps in your time zone. The notebook updates during the meeting and remains available afterward.
 
-- [Zoom][4]
-- [Google Meet][5]
-- [Microsoft Teams][6]
+A Datadog subprocessor records and transcribes meeting audio, and deletes the data it holds after seven days. Transcripts saved in Datadog notebooks are not deleted.
 
-By default, Incident AI does not summarize meetings for private incidents. You can add conditions in the integration settings to prevent summarization for other incidents as well.
-
-### How meeting summaries work
-
-When a meeting attached to an incident starts, a Datadog Transcriber attempts to join the meeting. This may take 10 to 30 seconds. If the meeting has a lobby or waiting room, a participant must admit the Datadog Transcriber before transcription can begin. After the Datadog Transcriber joins, it periodically posts live summaries to the following locations during the meeting:
-
-- The **incident timeline**, under a **Meeting Summary** entry.
-- The **incident chat channel**, both in the meeting card thread and as a message to the channel.
-
-When the meeting ends, it posts a final post-meeting summary to the same locations.
-
-### Reviewing a summary
-
-After a summary is posted, you can approve it, edit its text, or reject it. You can take these actions from the incident timeline in Datadog, or from the incident chat channel if the summary was broadcast there.
-
-To review a summary from the incident timeline:
-
-1. Open the incident in Datadog and find the **Meeting Summary** entry on the timeline.
-2. Click the checkmark icon to approve the summary, the pencil icon to edit its text, or the reject icon to remove it from the timeline.
-
-When a user approves or edits a summary, Datadog records who did so. After a summary is edited, it can't be approved; the edited version takes precedence. Rejecting a summary removes it from the incident timeline for everyone and hides its content in connected chat channels. Datadog asks for confirmation before rejecting, because that action can't be undone.
-
-If the summary was broadcast to the incident chat channel, use the **Approve**, **Edit**, or **Reject summary** buttons on the message.
-
-### Re-inviting the transcriber
-
-If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
-
-1. Open the incident in Datadog.
-2. In the incident header, open the menu for the linked meeting.
-3. Click **Add Transcriber** (the robot icon) beside the meeting.
-4. If required, admit the Datadog Transcriber from the meeting lobby or waiting room so transcription can begin.
-
-The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
-
-A re-invite prompt can also appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. This can happen after a timeout while waiting for admission or participants, after everyone leaves the meeting, or when someone removes the transcriber. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt.
-
-Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
-
-## Live meeting transcripts
-
-Live meeting transcripts save the conversation from an incident's Zoom, Google Meet, or Microsoft Teams meeting in a Datadog notebook. Transcripts capture the conversation with speaker names and timestamps in your time zone. AI summaries condense the discussion into key points. The notebook updates during the meeting and remains available afterward.
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-### Enable transcripts
-
-Your organization must have access to live meeting transcripts and AI features. Using an account with permission to edit incident settings:
-
-1. Go to [**Incident Settings > Integrations**][9] and select the incident type and meeting platform. For Microsoft Teams, select the connected tenant.
-2. Enable meeting creation and **Generate AI meeting summaries**.
-3. Review the conditions that prevent summarization. These also determine whether the transcriber can record the meeting. By default, private incidents are excluded.
-4. Enable **Generate meeting transcripts** and save your settings.
-
-If the transcript setting is unavailable, contact [Datadog Support][10]. For provider-specific prerequisites, see the [Zoom][4], [Google Meet][5], or [Microsoft Teams][6] setup guide.
-
-Setting changes apply to new recordings, without changing recordings in progress or creating notebooks for past recordings. Turning off transcript generation leaves meeting summaries enabled.
-
-### View transcripts
-
-Start a linked incident meeting and admit the Datadog Transcriber if required. After recording starts, open the notebook from any of these locations:
-
-- The **Meeting Transcript** timeline entry.
-- The linked meeting's **View Transcript** action.
-- The transcript link in the incident Slack channel's meeting-card thread.
-
-The notebook includes an incident card, a link to join the meeting, and a section for each recording session. When recording ends, Datadog finalizes the transcript and the timeline entry changes from **LIVE** to **ENDED**. Only speech captured while the transcriber is recording is included.
-
-[Re-inviting the transcriber](#re-inviting-the-transcriber) adds a session to the same notebook and reuses the meeting's timeline entry, preserving earlier sessions.
-
-### Access and retention
-
-Datadog manages notebook access using the incident's visibility and responder list:
-
-| Incident visibility | While any recording is active | After all recordings end |
-| --- | --- | --- |
-| Organization-visible | Organization members receive Viewer access. | Organization members receive Editor access. |
-| Private | Incident responders receive Viewer access. | Incident responders receive Editor access. |
-
-Responder and visibility changes update notebook access, and re-inviting the transcriber returns the notebook to Viewer access until recording ends. These updates can take time to appear.
-
-The subprocessor's seven-day retention period does not delete transcripts saved in Datadog notebooks. Deleting the incident deletes its associated transcript notebooks. Deleting a notebook during recording stops updates to that notebook without removing the transcriber; Datadog does not recreate the notebook for that recording.
+To set up meeting summaries and transcripts, see the integration page for your meeting platform: [Zoom][4], [Google Meet][5], or [Microsoft Teams][6]. To review summaries, view transcripts, and re-invite the transcriber during an incident, see [Use Meeting Summaries and Transcripts][7].
 
 ## Related incident detection
 
@@ -200,7 +116,5 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][8
 [4]: /incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
 [5]: /incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
 [6]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
-[7]: /account_management/billing/incident_response/#allocate-seats
+[7]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
 [8]: /bits_ai/bits_investigation
-[9]: https://app.datadoghq.com/incidents/settings?section=integrations
-[10]: /help/
