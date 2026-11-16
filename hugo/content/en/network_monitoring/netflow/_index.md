@@ -90,7 +90,7 @@ If the NetFlow exporter IP is one of the device IPs, but not the one configured 
 
 #### Custom IP enrichment
 
-You can add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
@@ -100,7 +100,7 @@ To set the application name for flows to or from a private IP address, add an `a
 
 Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
-By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable, see the [Configuration](#configuration) section of this page.
+By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable, see the [Configuration](#configuration) section.
 
 Search for DNS in the {{< ui >}}\+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
 
@@ -116,25 +116,25 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 ### Port enrichment
 
+#### Default port enrichment
+
+Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443).
+
 #### Custom port enrichment
 
-You can add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
 
-#### Default port enrichment
-
-Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443).
-
 ### Deep packet inspection
+
+**Note**: Deep packet inspection requires Agent version <!-- TODO: confirm minimum Agent version with PM -->7.XX or later.
 
 Deep packet inspection (DPI) identifies the application on a flow by inspecting traffic on the exporter, not by guessing from the port number. Datadog does not inspect packet payloads. Instead, the Agent reads the application that the device already classified, using Cisco NBAR2 or Palo Alto Networks App-ID, from the NetFlow or IPFIX records.
 
 DPI does not require you to map IP addresses or ports to applications manually. To use DPI, configure both your network device and the Datadog Agent.
-
-**Note**: DPI requires Agent version <!-- TODO: confirm minimum Agent version with PM -->7.XX or later.
 
 #### Configure the Agent
 
