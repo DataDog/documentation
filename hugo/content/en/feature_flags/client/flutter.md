@@ -486,8 +486,17 @@ final class TestCheckoutFlags implements CheckoutFlags {
 
 Then inject `TestCheckoutFlags` into unit tests and `DatadogCheckoutFlags` in production.
 
+## Record exposures in your own data store
+
+The OpenFeature provider supports `ExposureHook` for recording exposures in your own data store.
+This API requires a provider release that includes `ExposureHook`.
+The published `datadog_flags` 1.1.1 and `datadog_flags_flutter` 1.1.0 packages do not contain this API.
+See [Record Feature Flag Exposures in Your Own Data Store][90] for examples and release requirements.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/#client-tokens
+
+[90]: /feature_flags/guide/record_exposures_in_your_own_data_store/
