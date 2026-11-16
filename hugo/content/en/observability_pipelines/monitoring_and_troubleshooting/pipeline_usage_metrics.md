@@ -255,7 +255,7 @@ Data dropped intentionally or unintentionally
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
-: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later for Linux and macOS.
+: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later.
 : **How it is measured**: A processor can run on several threads at the same time. Each time the processor runs on a thread, the Worker measures the CPU time that thread spends on the work and adds it to the metric.
 : **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
 : **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
