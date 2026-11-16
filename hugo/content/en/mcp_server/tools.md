@@ -849,7 +849,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
@@ -857,8 +857,16 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
+### `execute_code_write`
+*Toolsets: **core**, **code-exec***\
+*Permissions Required: Any product-specific role permissions needed for the Datadog resources the executed code reads or changes. MCP write access must be enabled for your organization.*\
+Executes AI agent-authored JavaScript that can read, create, update, or delete Datadog resources. Use `execute_code` for scripts that only read data. Writes are not transactional: if a script fails partway, completed writes remain.
+
+- Mute every monitor tagged `team:payments` for the next two hours and list the monitors you changed.
+- Add the tag `owner:checkout` to all monitors whose name starts with `[checkout]`.
+
 ### `search_datadog_sdk`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
