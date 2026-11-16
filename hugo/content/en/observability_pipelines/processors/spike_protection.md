@@ -96,7 +96,7 @@ Each log group has one of the following statuses:
 
 You can take the following actions on a spiking group:
 
-- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the log group immediately. Use this action for false positives, such as when the volume increase is expected. The action stays off until the spike expires 12 hours after it was triggered, even if the group's volume stays above the baseline.
+- {{< ui >}}Dismiss{{< /ui >}}: Stop applying the spike action to the log group immediately. Use this action for false positives, such as when the volume increase is expected. The spike action stays off until the spike expires 12 hours after it was triggered, even if the group's volume stays above the baseline.
 - {{< ui >}}Delete{{< /ui >}}: Remove the spike event. The processor evaluates the log group against its baseline again, and the group can spike again as soon as its volume is above the threshold.
 
 ## Monitor spikes and log group usage
