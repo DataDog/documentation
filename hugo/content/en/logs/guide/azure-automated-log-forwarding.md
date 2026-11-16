@@ -208,7 +208,7 @@ The script first discovers any instances running in each subscription, then prom
 [1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
-[5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
+[5]: https://learn.microsoft.com/azure/cloud-shell/overview
 [8]: https://learn.microsoft.com/azure/container-apps/jobs
 [9]: https://learn.microsoft.com/azure/storage/common/storage-account-overview
 [10]: https://learn.microsoft.com/azure/azure-monitor/roles-permissions-security#monitoring-contributor
