@@ -319,6 +319,8 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 |---|---|---|
 | `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
 | `webhooks-http-intake.logs.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
+| `metrics.agent.datadoghq.com` | `beige.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0df08d4bc4daa83d4` |
+| `process.datadoghq.com` | `bisque.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-092ee1696115128a7` |
 | `*.integrations.otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
 | `opamp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
 | `otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
@@ -350,27 +352,29 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 | `sentry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
 | `snmp-traps-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
 | `softinv-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `http-intake.logs.datadoghq.com` | `gold.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0771479c6e0a3e78c` |
+| `lambda-http-intake.logs.datadoghq.com` | `gold.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0771479c6e0a3e78c` |
+| `obpipeline-intake.datadoghq.com` | `gold.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0771479c6e0a3e78c` |
 | `iam-rum-intake.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
 | `rum-http-intake.logs.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
 | `rum.browser-intake-datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
 | `data-obs-intake.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
 | `trace.agent.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
+| `orchestrator.datadoghq.com` | `linen.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0fdf3a096bf56cc3c` |
 | `network-devices.datadoghq.com` | `olive.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-05e3bfec4501e714d` |
 | `*.datadoghq.com` | `orange.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b67fd56f90bd3c41` |
 | `*.api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `*.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `intake.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `quota.browser-intake-datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `sourcemap-intake.datadoghq.com` | `plum.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-064ac68ae9d8cd604` |
+| `config.datadoghq.com` | `violet.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07e4b660e69dd78e3` |
+| `dbm-metrics-intake.datadoghq.com` | `white.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0453781fcd06eb283` |
+| `dbquery-intake.datadoghq.com` | `white.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0453781fcd06eb283` |
 | `agent-http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
-| `http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
-| `metrics.agent.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
-| `orchestrator.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
-| `process.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
 | `intake.profile.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
-| `dbm-metrics-intake.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501` |
-| `config.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d` |
 
 {{% /site-region %}}
 

@@ -36,7 +36,10 @@ Kubernetes を使用している場合は、以下の追加要件を満たす必
 - [**Datadog Operator**][5]: バージョン 1.18、_または_ [**Datadog Helm チャート**][6]: バージョン 3.137.3
 - **Kubernetes**: 1.22 (PodResources API が有効)
 
-Google Kubernetes Engine を使用している場合、カーネルと権限システムの制限により、Container-Optimized OS ノードはサポート_されません_。
+Container-Optimized OS (COS) ノードで Google Kubernetes Engine (GKE) を使用している場合は、以下の追加要件を満たす必要があります。
+
+- [**Datadog Operator**][5]: バージョン 1.29、_または_ [**Datadog Helm チャート**][6]: バージョン 3.231.4
+- このページの GKE の例に示されているように、GKE COS [プロバイダー][14]が設定されています。この設定により、GKE が COS ノードにインストールする NVIDIA ドライバーライブラリが Agent コンテナにマウントされます。
 
 ## GPU モニタリングの設定 {#setting-up-gpu-monitoring}
 
@@ -60,11 +63,19 @@ GPU モニタリングメトリクスの収集を有効にした後、より高�
    `gpu.enabled: true`
    : GPU モニタリングを有効にします。
 
+   `gpu.privilegedMode: true`
+   : _GKE で必須です_。`system-probe` で GPU モニタリングモジュールを有効にします。`gpu.patchCgroupPermissions` で必須です。
+
    `gpu.patchCgroupPermissions: true`
    : _GKE のみ_。Agent が GPU デバイスにアクセスできるようにする `system-probe` 内のコードパスを有効にします。
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS および Oracle Cloud では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS、Oracle Cloud、および GKE 管理の GPU ドライバーを使用する GKE では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+
+   GKE ノードで Container-Optimized OS を使用する場合は、`DatadogAgent` メタデータに以下の[プロバイダー][3]アノテーションも追加してください。
+
+   `agent.datadoghq.com/cluster-provider: gke-cos`
+   : NVIDIA ドライバーライブラリを COS ホストから Agent コンテナにマウントします。
 
    GKE で実行する場合の `datadog-agent.yaml` の例:
 
@@ -73,18 +84,22 @@ GPU モニタリングメトリクスの収集を有効にした後、より高�
    kind: DatadogAgent
    metadata:
      name: datadog
+     annotations:
+       agent.datadoghq.com/cluster-provider: gke-cos # Only for GKE with Container-Optimized OS nodes
    spec:
      features:
        gpu:
          enabled: true
+         privilegedMode: true # Required for GKE
          patchCgroupPermissions: true # Only for GKE
-         requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
+         requiredRuntimeClassName: "" # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
    ```
 
 3. 変更を適用し、Datadog Agent を再起動します。
 
 [1]: /ja/containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases
+[3]: /ja/containers/datadog_operator/providers/#on-a-datadogagent
 
 {{% /tab %}}
 
@@ -96,11 +111,17 @@ GPU モニタリングメトリクスの収集を有効にした後、より高�
    `gpuMonitoring.enabled: true`
    : GPU モニタリングを有効にします。
 
+   `gpuMonitoring.privilegedMode: true`
+   : _GKE で必須です_。`system-probe` で GPU モニタリングモジュールを有効にします。`gpuMonitoring.configureCgroupPerms` で必須です。
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _GKE のみ_。Agent が GPU デバイスにアクセスできるようにする `system-probe` 内のコードパスを有効にします。
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS および Oracle Cloud では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS、Oracle Cloud、および GKE 管理の GPU ドライバーを使用する GKE では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+
+   `providers.gke.cos: true`
+   : _Container-Optimized OS ノードを使用する GKE のみ_。NVIDIA ドライバーライブラリを COS ホストから Agent コンテナにマウントします。
 
    GKE で実行する場合の `datadog-values.yaml` の例:
 
@@ -108,8 +129,13 @@ GPU モニタリングメトリクスの収集を有効にした後、より高�
    datadog:
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
    ```
 
 3. Helm チャートをアップグレードし、Datadog Agent を再起動します。
@@ -121,7 +147,7 @@ GPU モニタリングメトリクスの収集を有効にした後、より高�
 
 {{% tab "Docker" %}}
 
-Docker で GPU モニタリングを有効化するには、コンテナ Agent の起動時に、次の構成を使用します。
+Docker で GPU モニタリングを有効化するには、コンテナ Agent の起動時に次の構成を使用します。
 
 ```shell
 docker run \
@@ -135,7 +161,7 @@ docker run \
 registry.datadoghq.com/agent:latest
 ```
 
-`<DATADOG_API_KEY>` をユーザーの [Datadog API キー][1]に置き換えます。
+`<DATADOG_API_KEY>` を [Datadog API キー][1]に置き換えます。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
@@ -207,7 +233,7 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
 
 混合 Kubernetes クラスターでは、GPU デバイスを持つノードと持たないノードが混在します。GPU ノードのランタイムクラス用と非 GPU ノード用の 2 種類の DaemonSet が必要です。この分割は、Kubernetes 用 NVIDIA デバイスプラグインのランタイムクラス要件によるものです。
 
-推奨方法は、Datadog Operator バージョン 1.20 以降です。このバージョンでは、セットアップを容易にする機能が提供されます。互換性のために、Helm インストールおよび古い Datadog Operator バージョン向けの手順も提供されています。
+推奨方法は、Datadog Operator バージョン 1.20 以上です。このバージョンでは、セットアップを容易にする機能が提供されます。互換性のために、Helm インストールおよび古い Datadog Operator バージョン向けの手順も提供されています。
 
 {{< tabs >}}
 {{% tab "Datadog Operator (1.20 以上)" %}}
@@ -231,15 +257,17 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
    datadogAgentInternal:
      enabled: true
 
-    datadogCRDs:
-      crds:
-        datadogAgentProfiles: true
-        datadogAgentInternal: true
+   datadogCRDs:
+     crds:
+       datadogAgentProfiles: true
+       datadogAgentInternal: true
    ```
 
    その後、`helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml` を使用して Datadog Operator を再デプロイします。
 
 2. `DatadogAgent` リソースに `agent.datadoghq.com/update-metadata` アノテーションを追加することで、`DatadogAgent` リソースを変更します。
+
+   クラスター内のすべてのノードで GKE Container-Optimized OS を使用している場合は、`agent.datadoghq.com/cluster-provider: gke-cos` [プロバイダー][5]アノテーションも追加してください。一部のノードでのみ Container-Optimized OS を使用している場合は、代わりに[それらのノードをターゲットとする Datadog Agent Profile][6] にアノテーションを設定してください。
 
    `datadog-agent.yaml` ファイルへの追加は、次のようになります。
 
@@ -250,6 +278,7 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
+       agent.datadoghq.com/cluster-provider: gke-cos # Only when every node in the cluster uses Container-Optimized OS
    ```
 
 3. `DatadogAgent` リソースに変更を適用します。これらの変更は、GPU ノードで実行されているかどうかに関係なく、すべての Datadog Agent に安全に適用できます。
@@ -274,6 +303,7 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
        features:
          gpu:
            enabled: true
+           privilegedMode: true # Required for GKE
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -283,6 +313,8 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
 [4]: https://github.com/DataDog/datadog-agent/releases
+[5]: /ja/containers/datadog_operator/providers/#on-a-datadogagent
+[6]: /ja/containers/datadog_operator/providers/#on-a-datadogagentprofile
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 または 1.19)" %}}
@@ -334,7 +366,7 @@ GPU モニタリングには、**両方**の `datadog.yaml` および `system-pr
 
 3. GPU ノードをターゲットとし、それらのノードで GPU モニタリングを有効にする [Datadog Agent Profile][2] を作成します。
 
-   次の例では、`profileNodeAffinity` セレクターはラベル [`nvidia.com/gpu.present=true`][3] を持つノードをターゲットにしています。これは、このラベルが NVIDIA GPU Operator を使用しているノードに一般的に存在するためです。必要に応じて別のラベルを使用することもできます。
+   次の例では、`profileNodeAffinity` セレクターはラベル [`nvidia.com/gpu.present=true`][3] を持つノードをターゲットにしています。これは、このラベルが NVIDIA GPU Operator が導入されたノードによく付与されているためです。必要に応じて別のラベルを使用することもできます。
 
    ```yaml
    apiVersion: datadoghq.com/v1alpha1
@@ -411,11 +443,17 @@ Helm を使用して混在クラスターで GPU モニタリングをセット�
    `gpuMonitoring.enabled: true`
    : GPU モニタリングを有効にします。
 
+   `gpuMonitoring.privilegedMode: true`
+   : _GKE で必須です_。`system-probe` で GPU モニタリングモジュールを有効にします。`gpuMonitoring.configureCgroupPerms` で必須です。
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _GKE のみ_。Agent が GPU デバイスにアクセスできるようにする `system-probe` 内のコードパスを有効にします。
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS および Oracle Cloud では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+   : _オプション_。GPU デバイスへのアクセスが必要な Pod のコンテナランタイム (例: `nvidia`、`nvidia-cdi`、`nvidia-legacy`) を指定します。NVIDIA GPU Operator によって定義されたデフォルトのランタイムであるため、デフォルト値は `nvidia` です。EKS、Oracle Cloud、および GKE 管理の GPU ドライバーを使用する GKE では、デフォルトのランタイムクラスですでに GPU デバイスへのアクセスが許可されているため、この値を空白の文字列に設定する必要があります。
+
+   `providers.gke.cos: true`
+   : _Container-Optimized OS ノードを使用する GKE のみ_。NVIDIA ドライバーライブラリを COS ホストから Agent コンテナにマウントします。
 
    `datadog-gpu-values.yaml` の例:
 
@@ -425,8 +463,13 @@ Helm を使用して混在クラスターで GPU モニタリングをセット�
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
 
    agents:
      affinity:
@@ -484,3 +527,4 @@ Helm を使用して混在クラスターで GPU モニタリングをセット�
 [11]: /ja/getting_started/integrations/azure/?tab=createanappregistration
 [12]: /ja/getting_started/integrations/oci/
 [13]: /ja/infrastructure/process?tab=linuxwindows#installation
+[14]: /ja/containers/datadog_operator/providers/

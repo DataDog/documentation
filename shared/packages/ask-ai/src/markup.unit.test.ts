@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   buildEmptyState,
-  buildLoadingIndicator,
   buildMessage,
   buildMessageActionsRow,
   buildSuggestionButton,
+  buildTurnError,
   buildWidgetElements,
 } from "./markup";
 import { STRINGS } from "./strings";
@@ -221,14 +221,36 @@ describe("buildMessageActionsRow", () => {
   });
 });
 
-describe("buildLoadingIndicator", () => {
-  it("shows a spinner and the opening status text", () => {
-    const { wrapper, statusElement } = buildLoadingIndicator("Searching…");
+describe("buildTurnError", () => {
+  it("offers a retry when one can help", () => {
+    const { box, retry } = buildTurnError("Failed.", true);
 
-    expect(wrapper.classList.contains("conv-search-loading-state")).toBe(true);
-    expect(
-      wrapper.querySelector(".conv-search-loading-spinner"),
-    ).not.toBeNull();
-    expect(statusElement.textContent).toBe("Searching…");
+    expect(box.getAttribute("role")).toBe("alert");
+    expect(box.querySelector("p")?.textContent).toBe("Failed.");
+    expect(retry?.textContent).toBe(STRINGS.tryAgain);
+  });
+
+  it("leaves the retry out when it cannot help", () => {
+    const { box, retry } = buildTurnError("Rejected.", false);
+
+    expect(retry).toBeNull();
+    expect(box.querySelector(".conv-search-retry")).toBeNull();
+  });
+
+  it("sets the message as text, not markup", () => {
+    const { box } = buildTurnError(XSS, true);
+
+    expect(box.querySelector("script")).toBeNull();
+    expect(box.querySelector("p")?.textContent).toBe(XSS);
+  });
+});
+
+describe("send button", () => {
+  it("carries both the send and the stop icon", () => {
+    const { sidebar } = buildWidgetElements();
+    const send = sidebar.querySelector(".conv-search-send");
+
+    expect(send?.querySelector(".conv-search-send-icon")).not.toBeNull();
+    expect(send?.querySelector(".conv-search-stop-icon")).not.toBeNull();
   });
 });

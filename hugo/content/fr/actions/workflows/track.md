@@ -30,7 +30,7 @@ Cette page explique comment suivre différents types d'activité et de coûts de
 
 ## Dashboard prêt à l'emploi {#out-of-the-box-dashboard}
 
-Le dashboard Workflows Overview fournit une vue d'ensemble de haut niveau de vos workflows et exécutions Datadog. Pour trouver le dashboard, accédez à votre [liste Dashboard][2] et recherchez {{< ui >}}Workflows Overview{{< /ui >}}.
+Le tableau de bord Workflows Overview fournit une vue d’ensemble de vos workflows Datadog et de leurs exécutions. Pour trouver le dashboard, accédez à votre [liste Dashboard][2] et recherchez {{< ui >}}Workflows Overview{{< /ui >}}.
 
 {{< img src="actions/workflows/workflows-dashboard.png" alt="Le dashboard Workflows Overview" style="width:80%;" >}}
 
@@ -65,7 +65,7 @@ La liste des métriques disponibles est la suivante :
 | `datadog.workflows.steps.executions.started`   | Nombre d'étapes d'instance de workflow ayant démarré.   |
 | `datadog.workflows.steps.executions.completed` | Nombre d'étapes d'instance de workflow terminées. |
 
-Pour créer un monitor qui suit si les exécutions quotidiennes de workflow dépassent un certain seuil, effectuez les étapes suivantes :
+Pour créer un monitor qui vérifie si les exécutions quotidiennes de workflow dépassent un certain seuil, effectuez les étapes suivantes :
 
 1. Accédez à [New Monitor][4] et sélectionnez le type de monitor {{< ui >}}Metric{{< /ui >}}.
 1. Sous {{< ui >}}Define the metric{{< /ui >}}, pour {{< ui >}}a{{< /ui >}}, renseignez `datadog.workflows.executions.started`.
@@ -82,7 +82,7 @@ Pour créer un monitor qui suit si les exécutions quotidiennes de workflow dép
 Workflow has executed {{warn_threshold}} times in the last day; manual action might be needed to avoid alerting.
 {{/is_warning}}
 {{#is_alert}}
-Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
+Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic runs for the day.
 {{/is_alert}}
 {{< /code-block >}}
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
@@ -106,8 +106,8 @@ L'attribution de l'utilisation est une fonctionnalité avancée incluse dans le 
 Pour suivre la facturation de vos exécutions de workflow, effectuez les étapes suivantes :
 
 1. Accédez à la page [Usage Attribution][6].
-1. Sous {{< ui >}}Products{{< /ui >}} à gauche, recherchez {{< ui >}}Workflow Executions{{< /ui >}}.
-1. Survolez {{< ui >}}Workflow Executions{{< /ui >}} et cliquez sur {{< ui >}}Only{{< /ui >}} pour afficher l'attribution de l'utilisation uniquement pour les workflows.
+1. Sous {{< ui >}}Products{{< /ui >}} à gauche, recherchez {{< ui >}}Workflow Runs{{< /ui >}}.
+1. Survolez {{< ui >}}Workflow Runs{{< /ui >}} et cliquez sur {{< ui >}}Only{{< /ui >}} pour afficher l’attribution de l’utilisation uniquement pour les workflows.
 
 
 ## Pour aller plus loin {#further-reading}

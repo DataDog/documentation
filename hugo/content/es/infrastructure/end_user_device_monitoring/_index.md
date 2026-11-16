@@ -69,6 +69,10 @@ Con el trazado de rutas de red, usted puede:
 [6]: /es/agent/fleet_automation/
 [7]: /es/logs/
 
+## Configure End User Device Monitoring {#set-up-end-user-device-monitoring}
+
+Después de recibir la confirmación de acceso a Preview, siga las instrucciones de [Configure End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) para conocer las plataformas compatibles y las instrucciones de instalación específicas para cada dispositivo.
+
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

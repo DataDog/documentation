@@ -8,7 +8,6 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentation
   text: API Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Configurer les Agents
 ---
 Utilisez [Fleet Automation][3] pour déployer et gérer la configuration du Datadog Agent à grande échelle. Appliquez des modifications de configuration via des workflows guidés dans l'interface utilisateur ou avec des fichiers YAML personnalisés. Vous pouvez également appliquer des mises à jour de configuration [via l'API Fleet Automation](#configure-agents-with-the-api). Pour les paramètres de l'Agent que vous pouvez gérer avec Fleet Automation, consultez [Supported datadog.yaml Configuration Fields][11].

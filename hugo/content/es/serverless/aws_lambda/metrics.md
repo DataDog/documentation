@@ -4,21 +4,25 @@ aliases:
 - /es/serverless/enhanced_lambda_metrics
 - /es/serverless/real-time-enhanced-metrics
 - /es/serverless/real_time_enhanced_metrics
+further_reading:
+- link: https://learn.datadoghq.com/courses/visibility-aws-lambda
+  tag: Centro de aprendizaje
+  text: Configurar AWS Lambda para Serverless Monitoring con Datadog
 title: Métricas de AWS Lambda
 ---
-Esta página discute las métricas para hacer seguimiento de aplicaciones sin servidor en AWS Lambda. Hay 3 maneras de obtener métricas de AWS Lambda:
+Esta página trata sobre las métricas para monitorear aplicaciones sin servidor en AWS Lambda. Hay 3 formas de obtener métricas de AWS Lambda:
 
-- Puedes obtener métricas de Lambda de Cloudwatch desde la [integración de Datadog AWS][5]
-- Puedes obtener [métricas mejoradas](#enhanced-lambda-metrics) al [instalar Serverless Monitoring para AWS Lambda][1] a través de la Lambda Extension de Datadog.
-- Puedes [enviar métricas personalizadas](#submit-custom-metrics) a Datadog desde tus funciones de Lambda.
+- Puede obtener métricas de CloudWatch Lambda desde la [integración de AWS con Datadog][5]
+- Puede obtener [métricas mejoradas](#enhanced-lambda-metrics) [instalando Serverless Monitoring para AWS Lambda][1] a través de Datadog Lambda Extension.
+- Puede [enviar Custom Metrics](#submit-custom-metrics) a Datadog desde sus funciones de Lambda.
 
-{{< img src="serverless/serverless_custom_metrics.png" alt="Recolección de Métricas Mejoradas de AWS Lambda" >}}
+{{< img src="serverless/serverless_custom_metrics.png" alt="Recopilación de métricas mejoradas de AWS Lambda" >}}
 
-### Recolecta métricas de recursos que no son Lambda {#collect-metrics-from-non-lambda-resources}
+### Recopilar métricas de recursos que no son Lambda {#collect-metrics-from-non-lambda-resources}
 
-Datadog también puede ayudarte a recolectar métricas para recursos administrados por AWS—como [API Gateway][2], [AppSync][3] y [SQS][4]—para ayudarte a hacer seguimiento de toda tu aplicación sin servidor. Estas métricas están enriquecidas con las etiquetas de recursos correspondientes de AWS.
+Datadog también puede ayudarle a recopilar métricas para recursos administrados de AWS, como [API Gateway][2], [AppSync][3] y [SQS][4], para ayudarle a monitorear toda su aplicación sin servidor. Estas métricas se enriquecen con las etiquetas de recursos de AWS correspondientes.
 
-Para recolectar estas métricas, configura la [integración de Datadog AWS][5].
+Para recopilar estas métricas, configure la [integración de AWS con Datadog][5].
 
 [1]: /es/serverless/aws_lambda/installation
 [2]: /es/integrations/amazon_api_gateway/#data-collected
@@ -26,17 +30,17 @@ Para recolectar estas métricas, configura la [integración de Datadog AWS][5].
 [4]: /es/integrations/amazon_sqs/#data-collected
 [5]: /es/integrations/amazon_web_services/
 
-## Métricas mejoradas de Lambda {#enhanced-lambda-metrics}
+## Métricas de Lambda mejoradas {#enhanced-lambda-metrics}
 
-{{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Tablero Predeterminado de Métricas Mejoradas de Lambda" width="80%">}}
+{{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Lambda Enhanced Metrics Default Dashboard" width="80%">}}
 
-Datadog genera métricas mejoradas de Lambda desde su Lambda runtime de forma nativa, con baja latencia, granularidad de varios segundos y metadatos detallados para inicios en frío y etiquetas personalizadas.
+Datadog genera métricas de Lambda mejoradas desde su entorno de ejecución de Lambda de forma inmediata con baja latencia, granularidad de varios segundos y metadatos detallados para arranques en frío y etiquetas personalizadas.
 
-Las métricas mejoradas de Lambda son además de las métricas predeterminadas de [Lambda][6] habilitadas con la integración de AWS Lambda. Las métricas mejoradas se distinguen por estar en el espacio de nombres `aws.lambda.enhanced.*`. Puedes ver estas métricas en el [tablero predeterminado de métricas mejoradas de Lambda][7].
+Las métricas de Lambda mejoradas se suman a las [métricas de Lambda][6] predeterminadas habilitadas con la integración de AWS Lambda. Las métricas mejoradas se distinguen por estar en el espacio de nombres `aws.lambda.enhanced.*`. Puede ver estas métricas en el [panel predeterminado de métricas mejoradas de Lambda][7].
 
-Las siguientes métricas Lambda mejoradas en tiempo real están disponibles y están etiquetadas con las correspondientes etiquetas `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` y `runtime`.
+Las siguientes métricas mejoradas de Lambda en tiempo real están disponibles y están etiquetadas con las etiquetas correspondientes `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` y `runtime`.
 
-Estas métricas son [distribuciones][8]:  y puedes consultarlas utilizando las agregaciones `count`, `min`, `max`, `sum` y `avg`. Las métricas mejoradas se habilitan automáticamente con [Serverless Monitoring][1], pero se pueden desactivar configurando la variable de entorno `DD_ENHANCED_METRICS` a `false` en su función Lambda.
+Estas métricas son [distribuciones][8]:  que puede consultar utilizando las agregaciones `count`, `min`, `max`, `sum` y `avg`. Las métricas mejoradas se habilitan automáticamente con [Serverless Monitoring][1], pero se pueden deshabilitar configurando la variable de entorno `DD_ENHANCED_METRICS` en `false` en su función Lambda.
 
 `aws.lambda.enhanced.invocations`
 : Mide la cantidad de veces que se invoca una función en respuesta a un evento o a una invocación de una llamada a la API.
@@ -45,22 +49,22 @@ Estas métricas son [distribuciones][8]:  y puedes consultarlas utilizando las a
 : Mide la cantidad de invocaciones que fallaron debido a errores en la función.
 
 `aws.lambda.enhanced.max_memory_used`
-: Mide la cantidad máxima de memoria (mb) utilizada por la función.
+: Mide la cantidad máxima de memoria (MB) utilizada por la función.
 
 `aws.lambda.enhanced.duration`
 : Mide los segundos transcurridos desde que el código de la función comienza a ejecutarse como resultado de una invocación hasta que deja de ejecutarse.
 
 `aws.lambda.enhanced.billed_duration`
-: Mide la cantidad de tiempo facturado que la función estuvo en ejecución (incrementos de 100 ms).
+: Mide la cantidad de tiempo facturado durante el cual se ejecutó la función (incrementos de 100 ms).
 
 `aws.lambda.enhanced.init_duration`
-: Mide el tiempo de inicialización (segundos) de una función durante un inicio en frío.
+: Mide el tiempo de inicialización (segundos) de una función durante un arranque en frío.
 
 `aws.lambda.enhanced.runtime_duration`
-: Mide los milisegundos transcurridos desde que el código de la función comienza a ejecutarse hasta que devuelve la respuesta al cliente, excluyendo la duración posterior a la ejecución añadida por las ejecuciones de Lambda Extension.
+: Mide los milisegundos transcurridos desde que el código de la función comienza a ejecutarse hasta que devuelve la respuesta al cliente, excluyendo la duración posterior al tiempo de ejecución añadida por las ejecuciones de las extensiones de Lambda.
 
 `aws.lambda.enhanced.post_runtime_duration`
-: Mide los milisegundos transcurridos desde que el código de la función devuelve la respuesta al cliente hasta que la función deja de ejecutarse, representando la duración añadida por las ejecuciones de Lambda Extension.
+: Mide los milisegundos transcurridos desde que el código de la función devuelve la respuesta al cliente hasta que la función deja de ejecutarse, lo que representa la duración añadida por las ejecuciones de las extensiones de Lambda.
 
 `aws.lambda.enhanced.response_latency`
 : Mide el tiempo transcurrido en milisegundos desde que se recibe la solicitud de invocación hasta que se envía el primer byte de respuesta al cliente.
@@ -69,26 +73,26 @@ Estas métricas son [distribuciones][8]:  y puedes consultarlas utilizando las a
 : Mide el tiempo transcurrido en milisegundos desde que se envía el primer byte de respuesta hasta que se envía el último byte de respuesta al cliente.
 
 `aws.lambda.enhanced.produced_bytes`
-: Mide el número de bytes devueltos por una función.
+: Mide la cantidad de bytes devueltos por una función.
 
 `aws.lambda.enhanced.estimated_cost`
 : Mide el costo total estimado de la invocación de la función (dólares estadounidenses).
 
 `aws.lambda.enhanced.timeouts`
-: Mide el número de veces que una función agota el tiempo de ejecución.
+: Mide la cantidad de veces que una función agota el tiempo de espera.
 
 `aws.lambda.enhanced.out_of_memory`
-: Mide el número de veces que una función se queda sin memoria.
-: Debido a que hay muchas variaciones de errores de falta de memoria, algunos casos pueden no ser manejados adecuadamente a pesar de los mejores esfuerzos. Si encuentra tal incidencia, cree una incidencia en el [repositorio de GitHub de la Lambda Extension de Datadog][18].
+: Mide la cantidad de veces que una función se queda sin memoria.
+: Debido a que existen muchas variaciones de errores de falta de memoria, es posible que algunos casos no se manejen bien a pesar de los mejores esfuerzos. Si encuentra un caso así, cree un problema en el [repositorio de GitHub de Datadog Lambda Extension][18].
 
 `aws.lambda.enhanced.cpu_total_utilization`
-: Mide la utilización total de CPU de la función como un número de núcleos.
+: Mide la utilización total de CPU de la función como número de núcleos.
 
 `aws.lambda.enhanced.cpu_total_utilization_pct`
-: Mide la utilización total de CPU de la función como un porcentaje.
+: Mide la utilización total de CPU de la función como porcentaje.
 
 `aws.lambda.enhanced.cpu_max_utilization`
-: Mide la utilización de la CPU en el núcleo más utilizado.
+: Mide la utilización de CPU en el núcleo más utilizado.
 
 `aws.lambda.enhanced.cpu_min_utilization`
 : Mide la utilización de la CPU en el núcleo menos utilizado.
@@ -103,7 +107,7 @@ Estas métricas son [distribuciones][8]:  y puedes consultarlas utilizando las a
 : Mide la cantidad total de tiempo que la CPU pasó ejecutándose.
 
 `aws.lambda.enhanced.num_cores`
-: Mide el número de núcleos disponibles.
+: Mide la cantidad de núcleos disponibles.
 
 `aws.lambda.enhanced.rx_bytes`
 : Mide los bytes recibidos por la función.
@@ -137,22 +141,22 @@ Estas métricas son [distribuciones][8]:  y puedes consultarlas utilizando las a
 [8]: /es/metrics/distributions/
 [18]: https://github.com/DataDog/datadog-lambda-extension
 
-## Envíe métricas personalizadas {#submit-custom-metrics}
+## Envíe Custom Metrics {#submit-custom-metrics}
 
-### Cree métricas personalizadas a partir de registros o trazas {#create-custom-metrics-from-logs-or-traces}
-Si sus funciones Lambda ya están enviando datos de trazas o registros a Datadog, y los datos que desea consultar están capturados en un registro o traza existente, puede generar métricas personalizadas a partir de registros y trazas sin volver a desplegar ni hacer cambios en el código de su aplicación.
+### Cree Custom Metrics a partir de registros o trazas {#create-custom-metrics-from-logs-or-traces}
+Si sus funciones Lambda ya están enviando datos de trazas o registros a Datadog, y los datos que desea consultar están capturados en un registro o traza existente, puede generar Custom Metrics a partir de registros y trazas sin necesidad de volver a implementar o realizar cambios en el código de su aplicación.
 
-Con métricas basadas en registros, puede registrar un conteo de registros que coincidan con una consulta o resumir un valor numérico contenido en un registro, como la duración de una solicitud. Las métricas basadas en registros son una forma rentable de resumir datos de registros de toda la corriente de ingestión. Aprenda más sobre [la creación de métricas basadas en registros][9].
+Con las métricas basadas en registros, puede registrar un conteo de registros que coincidan con una consulta o resumir un valor numérico contenido en un registro, como la duración de una solicitud. Las métricas basadas en registros son una forma rentable de resumir los datos de registro de todo el flujo de ingesta. Obtenga más información sobre [la creación de métricas basadas en registros][9].
 
-También puede generar métricas a partir de todos los tramos ingeridos, independientemente de si están indexados por un filtro de retención. Aprenda más sobre [crear métricas basadas en tramos][10].
+También puede generar métricas a partir de todos los tramos ingeridos, independientemente de si están indexados por un filtro de retención. Obtenga más información sobre [la creación de métricas basadas en tramos][10].
 
-### Envíe métricas personalizadas directamente desde una función Lambda {#submit-custom-metrics-directly-from-a-lambda-function}
+### Envíe Custom Metrics directamente desde una función Lambda {#submit-custom-metrics-directly-from-a-lambda-function}
 
-Todas las métricas personalizadas se envían como [distribuciones](#understanding-distribution-metrics).
+Todas las Custom Metrics se envían como [distribuciones](#understanding-distribution-metrics).
 
-**Nota**: Las métricas de distribución deben enviarse con un nuevo nombre, no reutilice el nombre de una métrica enviada anteriormente.
+**Nota**: Las métricas de distribución deben enviarse con un nombre nuevo; no reutilice el nombre de una métrica enviada anteriormente.
 
-1. [Instale Serverless Monitoring para AWS Lambda][1] y asegúrese de haber instalado la Lambda Extension de Datadog.
+1. [Instale Serverless Monitoring para AWS Lambda][1] y asegúrese de haber instalado Datadog Lambda Extension.
 
 2. Elija su entorno de ejecución:
 
@@ -210,7 +214,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Instale la última versión de [`java-dogstatsd-client`][1].
+Instale la versión más reciente de [`java-dogstatsd-client`][1].
 
 ```java
 package com.datadog.lambda.sample.java;
@@ -262,7 +266,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Instale la última versión de [`dogstatsd-csharp-client`][1].
+Instale la versión más reciente de [`dogstatsd-csharp-client`][1].
 
 ```csharp
 using System.IO;
@@ -300,19 +304,19 @@ namespace Example
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-1. [Instale][1] el cliente DogStatsD para su entorno de ejecución
-2. Siga el [código de ejemplo][2] para enviar sus métricas personalizadas.
+1. [Instale][1] el cliente de DogStatsD para su entorno de ejecución
+2. Siga el [código de ejemplo][2] para enviar sus Custom Metrics.
 
 [1]: /es/extend/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
 [2]: /es/extend/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Envíe métricas históricas {#submit-historical-metrics}
+### Enviar métricas históricas {#submit-historical-metrics}
 
-Utilice la Lambda Extension de Datadog para enviar métricas históricas. Estas métricas pueden tener marcas de tiempo de hasta una hora en el pasado.
+Utilice Datadog Lambda Extension para enviar métricas históricas. Estas métricas pueden tener marcas de tiempo de hasta una hora en el pasado.
 
-Comience por [instalar Serverless Monitoring para AWS Lambda][1]. Asegúrese de haber instalado la última Lambda Extension de Datadog.
+Comience por [instalar Serverless Monitoring para AWS Lambda][1]. Asegúrese de haber instalado la versión más reciente de Datadog Lambda Extension.
 
 Luego, elija su entorno de ejecución:
 
@@ -442,7 +446,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-Escriba una función reutilizable que registre sus métricas personalizadas en el siguiente formato:
+Escriba una función reutilizable que registre sus Custom Metrics en el siguiente formato:
 
 ```json
 {
@@ -467,17 +471,23 @@ Por ejemplo:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Entendiendo las métricas de distribución {#understanding-distribution-metrics}
+### Cómo entender las métricas de distribución {#understanding-distribution-metrics}
 
-Cuando Datadog recibe múltiples puntos de métricas de conteo o de gauge que comparten la misma marca de tiempo y conjunto de etiquetas, solo el más reciente cuenta. Esto funciona para aplicaciones basadas en host porque los puntos métricos son agregados por el agente de Datadog y etiquetados con una etiqueta única `host`.
+Cuando Datadog recibe varios puntos de métricas de conteo o de tipo gauge que comparten la misma marca de tiempo y el mismo conjunto de etiquetas, solo se tiene en cuenta el más reciente. Esto funciona para aplicaciones basadas en servidores porque el Agent de Datadog agrega los puntos de métricas y les asigna una etiqueta `host` única.
 
-Una función Lambda puede lanzar muchos entornos de ejecución concurrentes cuando aumenta el tráfico. La función puede enviar puntos métricos de conteo o de gauge que se sobrescriben entre sí y provocan resultados con conteo inferior. Para evitar este problema, las métricas personalizadas generadas por funciones Lambda se envían como [distribuciones][11] porque los puntos métricos de distribución se agregan en el backend de Datadog, y cada punto métrico cuenta.
+Una función Lambda puede iniciar muchos entornos de ejecución simultáneos cuando aumenta el tráfico. La función puede enviar puntos de métricas de conteo o de tipo gauge que se sobrescriben entre sí y hacen que los resultados reflejen un conteo inferior al real. Para evitar este problema, las Custom Metrics generadas por funciones Lambda se envían como [distribuciones][11] porque los puntos de métricas de distribución se agregan en el backend de Datadog y cada punto de métrica cuenta.
 
-Las distribuciones proporcionan agregaciones de `avg`, `sum`, `max`, `min`, `count` por defecto. En la página Metrics Summary, puede habilitar agregaciones percentiles (p50, p75, p90, p95, p99) y también [manage tags][12]. Para monitorear una distribución para un tipo de métrica gauge, utilice `avg` para ambas [agregaciones de tiempo y desglose espacial][13]. Para monitorear una distribución para un tipo de métrica count, utilice `sum` para ambas [agregaciones de tiempo y desglose espacial][13]. Consulte la guía [Query to the Graph][14] para entender cómo funcionan las agregaciones de tiempo y desglose espacial.
+Las distribuciones proporcionan agregaciones de `avg`, `sum`, `max`, `min`, `count` de forma predeterminada. En la página {{< ui >}}Metrics Catalog{{< /ui >}}, puede habilitar agregaciones de percentiles (p50, p75, p90, p95, p99) y también [administrar etiquetas][12]. Para monitorear una distribución de una métrica de tipo gauge, use `avg` para las [agregaciones de tiempo y espacio][13]. Para monitorear una distribución de una métrica de tipo conteo, use `sum` para las [agregaciones de tiempo y espacio][13]. Consulte la guía [Query to the Graph][14] para saber cómo funcionan las agregaciones de tiempo y espacio.
 
-### Entendiendo el uso, volumen y precios de sus métricas en Datadog {#understanding-your-metrics-usage-volume-and-pricing-in-datadog}
+### Comprender el uso, el volumen y los precios de sus métricas en Datadog {#understanding-your-metrics-usage-volume-and-pricing-in-datadog}
 
-Datadog proporciona información granular sobre las métricas personalizadas que está ingiriendo, la cardinalidad de las etiquetas y las herramientas de gestión para sus métricas personalizadas dentro de la [Metrics Summary page][15] de la aplicación Datadog. Puede ver todas las métricas personalizadas Serverless bajo la etiqueta 'Serverless' en el [facet panel][16] de Distribution Metric Origin. También puede controlar los volúmenes y costos de métricas personalizadas con [Metrics without Limits™][17].
+Datadog proporciona información detallada sobre las Custom Metrics que está ingiriendo, la cardinalidad de las etiquetas y herramientas para administrar sus Custom Metrics en la [página {{< ui >}}Metrics Catalog{{< /ui >}}][15] de la aplicación de Datadog. Puede ver todas las Custom Metrics sin servidor bajo la etiqueta {{< ui >}}Serverless{{< /ui >}} en {{< ui >}}Distribution Metric Origin{{< /ui >}} [{{< ui >}}facet panel{{< /ui >}}][16]. También puede controlar los volúmenes y costos de las Custom Metrics con [Metrics without Limits™][17].
+
+También puede excluir etiquetas autoinyectadas específicas (como `function_arn`) de sus Custom Metrics. Consulte [Excluir etiquetas autoinyectadas de las Custom Metrics][19].
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [9]: /es/logs/logs_to_metrics/
 [10]: /es/tracing/trace_pipeline/generate_metrics/
@@ -485,6 +495,7 @@ Datadog proporciona información granular sobre las métricas personalizadas que
 [12]: /es/metrics/distributions/#customize-tagging
 [13]: /es/metrics/#time-and-space-aggregation
 [14]: /es/dashboards/guide/query-to-the-graph/
-[15]: https://app.datadoghq.com/metric/summary
+[15]: https://app.datadoghq.com/metric/catalog
 [16]: /es/metrics/summary/#facet-panel
 [17]: /es/metrics/summary/#metrics-without-limits
+[19]: /es/serverless/aws_lambda/configuration/#exclude-auto-injected-tags-from-custom-metrics

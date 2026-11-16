@@ -49,6 +49,14 @@ jobs:
               return;
             }
 
+            // Phrase translation PRs are approved by PRApprover, not the documentation team
+            if (pr.user.login === 'dd-guacbot-683343[bot]' && pr.head.ref.startsWith('guacbot/phrase-translations-')) {
+              console.log('Phrase translation PR. Documentation team approval not required.');
+              core.setOutput('approval_status', true);
+              core.setOutput('team_requested', false);
+              return;
+            }
+
             // Define the documentation team slug (also check for webops-platform)
             const DOCUMENTATION_TEAM = 'documentation';
             const WEBOPSTEAM = 'webops-platform';

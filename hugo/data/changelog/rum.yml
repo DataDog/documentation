@@ -56,3 +56,16 @@ entries:
       - ListSourcemaps
       - RestoreSourcemaps
     title: Document sourcemaps symbol_type and debug_id lookup
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - DeleteRUMApplication
+      - DeleteSourcemaps
+      - GetRUMApplication
+      - GetServiceRepositoryInfo
+      - GetSourcemaps
+      - ListSourcemaps
+      - RestoreSourcemaps
+      - UpdateRUMApplication
+    title: Add AI Gateway route permissions and safe editing

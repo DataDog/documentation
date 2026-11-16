@@ -16,7 +16,7 @@ further_reading:
   text: "Agent architecture"
 ---
 {{< callout url="#" header="false" btn_hidden="true" >}}
-Agent Data Plane is in Preview and disabled by default. You can enable it using the instructions on this page.
+Agent Data Plane is in Preview. It is disabled by default except for the deployments listed in <a href="#default-enablement">Default enablement</a>. You can enable it using the instructions on this page.
 {{< /callout >}}
 
 ## Overview
@@ -30,6 +30,32 @@ ADP ships with the Datadog Agent and requires no separate installation. Your Dog
 ## Prerequisites
 
 ADP requires Agent version 7.84.2 or later.
+
+## Default enablement
+
+ADP is enabled by default for Linux Agents deployed by the Datadog Operator when the Operator is installed with the [`datadog-operator` Helm chart][6] and the chart's `site` value is set to one of the following sites:
+
+- `ap1.datadoghq.com`
+- `ap2.datadoghq.com`
+
+The default applies only when `spec.features.dataPlane.enabled` is not set in your `DatadogAgent` resource and the Agent is version 7.84.2 or later. An explicit `spec.features.dataPlane.enabled` setting always takes precedence.
+
+To control the default for all `DatadogAgent` resources managed by the Operator, set `defaultDataPlaneEnabled.linux` in the `datadog-operator` chart's `values.yaml`:
+
+{{< code-block lang="yaml" >}}
+defaultDataPlaneEnabled:
+  linux: "false" # "auto" (default), "true", or "false"
+{{< /code-block >}}
+
+- `"auto"`: Enables ADP only for the sites listed above.
+- `"true"`: Enables ADP for all sites.
+- `"false"`: Disables ADP for all sites.
+
+### Changelog
+
+| Date       | Change | Version |
+|------------|--------|---------|
+| 2026-11-09 | ADP enabled by default for Linux Agents managed by the Datadog Operator on the AP1 and AP2 sites. | `datadog-operator` Helm chart [2.32.0][7] |
 
 ## Enable the Agent Data Plane
 
@@ -226,7 +252,7 @@ agents:
 
 ## Disable the Agent Data Plane
 
-Disabling ADP returns DogStatsD processing to the main Agent.
+Disabling ADP returns DogStatsD processing to the main Agent. If ADP is [enabled by default][8] for your deployment, use these settings to opt out.
 
 If you are disabling ADP because of an issue, [send a flare][1] to Datadog Support first. The flare includes ADP diagnostic data only while ADP is running.
 
@@ -291,3 +317,6 @@ DD_DATA_PLANE_ENABLED=false
 [3]: /agent/configuration/agent-log-files/
 [4]: https://github.com/DataDog/saluki/blob/main/docs/agent-data-plane/configuration/configuration.md
 [5]: /integrations/go_expvar/
+[6]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+[7]: https://github.com/DataDog/helm-charts/releases/tag/datadog-operator-2.32.0
+[8]: #default-enablement
