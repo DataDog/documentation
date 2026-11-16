@@ -82,6 +82,8 @@ With network path tracing, you can:
 
 ## Set up End User Device Monitoring
 
+Feature availability on macOS varies by processor architecture. Some features require Apple silicon (ARM64) and are unavailable on Intel-based Macs.
+
 Follow [Set up End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) for supported platforms and device-specific installation instructions.
 
 ## Further reading

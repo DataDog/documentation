@@ -15,6 +15,8 @@ There are two ways to deploy the Datadog Agent on macOS devices for End User Dev
 - **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
 - **MDM deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
 
+Feature availability on macOS varies by processor architecture. Some features require Apple silicon (ARM64) and are unavailable on Intel-based Macs.
+
 Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
 <div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>

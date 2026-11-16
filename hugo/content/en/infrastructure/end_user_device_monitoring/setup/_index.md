@@ -14,6 +14,8 @@ Set up the Datadog Agent on employee desktops and laptops to collect [End User D
 - Windows 10 and later
 - macOS 11 and later
 
+Feature availability on macOS varies by processor architecture. Some features require Apple silicon (ARM64) and are unavailable on Intel-based Macs.
+
 ## Permissions
 
 The following permissions control access to End User Device Monitoring:
