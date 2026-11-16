@@ -10,6 +10,10 @@ further_reading:
     text: "Control model access"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
+
 ## Overview
 
 An AI Gateway provider connects a Datadog integration account to a set of models. Applications call those models with Datadog credentials instead of receiving the upstream provider's credentials.
@@ -20,7 +24,7 @@ Create separate providers when workloads need different upstream accounts, regio
 
 - [AI Gateway access][1] for the Datadog organization.
 - The `ai_gateway_config_read` and `ai_gateway_config_write` permissions to configure providers and models.
-- A configured integration account for the provider. Creating or updating integration credentials also requires the relevant integration-management permissions.
+- A configured integration account for the provider. To create or update API-key accounts, request **Integrations Manage** (`manage_integrations`). Cloud integration setup has separate [AWS, Azure, and GCP configuration permissions][9].
 - Upstream credentials that can **invoke models**, not only read usage or metrics. Complete any required model-access approvals in the upstream account.
 - A [personal access token or service access token][2] for verification. Both its principal and credential scope must allow `ai_gateway_usage`.
 
@@ -35,12 +39,12 @@ The account selector offers the providers available to the organization. Provide
 | Azure OpenAI | Azure OpenAI integration account configured with the resource name, API key, deployment ID, and API version. |
 | Amazon Bedrock | AWS integration account enabled for Bedrock. Select the **Region** used for inference. |
 | Vertex AI | Google Cloud integration account with Vertex AI access. Select the **Project** and **Location** used for inference. |
-| Azure AI Foundry | Azure integration app registration and a **Foundry resource ID**. See [Azure AI Foundry](#azure-ai-foundry). |
+| Azure AI Foundry | Azure integration app registration and a **Foundry resource ID**. See the [Azure AI Foundry](#azure-ai-foundry) section. |
 | Baseten | Baseten integration account with an API key permitted to call Baseten Model APIs. A metrics-only key is insufficient. |
 | Fireworks AI | Fireworks AI integration account and API key. |
 | Together AI | Together AI integration account and API key. |
-| TypeSafe | TypeSafe integration account and API key for System One decision models. |
-| Custom Provider | Integration account containing an HTTPS API base URL, API key, and any required custom headers. See [Custom endpoints](#custom-endpoints). |
+| TypeSafe | TypeSafe integration account and API key for System One models, which answer typed questions about supplied state instead of generating conversation text. |
+| Custom Provider | Integration account containing an HTTPS API base URL, API key, and any required custom headers. See the [Custom endpoints](#custom-endpoints) section. |
 
 ### Add an integration account
 
@@ -57,7 +61,7 @@ Integration credentials remain separate from the Datadog credential the applicat
 ## Create a provider
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][5] and click {{< ui >}}New Provider{{< /ui >}}.
-2. In {{< ui >}}Details{{< /ui >}}, select the provider's integration account and complete its connection settings from the table above.
+2. In {{< ui >}}Details{{< /ui >}}, select the provider's integration account and complete its connection settings. See the [Choose a provider account](#choose-a-provider-account) section.
 3. Enter a display name and a unique slug, such as `production-openai`. The slug becomes part of every direct model request. The connected account and slug cannot be changed after creation.
 4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. Gateway automatically enables discovered models. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
 5. Review the cost multiplier and the prices in the [Model Catalog][6]. A custom model price takes precedence over the provider multiplier. Confirm pricing before relying on spend reporting or budgets.
@@ -90,10 +94,12 @@ The form generates Azure CLI role-assignment commands for the selected account a
 
 ### Custom endpoints
 
-Use **Custom Provider** for a compatible endpoint that is not represented by a built-in provider account. The following setup uses API-key authentication.
+Use **Custom Provider** for endpoints that accept OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, or System One requests. These are the operations available in the Gateway form.
+
+Custom endpoints use bearer API-key authentication. Selecting a provider label in the integration account does not enable provider-specific authentication or native Gemini or Bedrock APIs.
 
 1. In the account selector, select {{< ui >}}+ Add new account{{< /ui >}} > {{< ui >}}Custom Provider{{< /ui >}}.
-2. Enter a {{< ui >}}Name{{< /ui >}} and select the {{< ui >}}Provider{{< /ui >}} format used by the endpoint.
+2. Enter a {{< ui >}}Name{{< /ui >}} and select a {{< ui >}}Provider{{< /ui >}} label. The account editor offers OpenAI, Anthropic, Gemini, Azure OpenAI, `AWS Bedrock`, and Custom. Select the actual request formats separately in step 6.
 3. Set {{< ui >}}Base URL{{< /ui >}} to the HTTPS API base URL, including the required base path, for example `https://llm.example.com/v1`.
 4. Enter the upstream {{< ui >}}API Key{{< /ui >}}. If the {{< ui >}}Authentication{{< /ui >}} selector is displayed, select {{< ui >}}API key{{< /ui >}} for this setup.
 5. Add any {{< ui >}}Custom Headers{{< /ui >}} required by the endpoint, then click {{< ui >}}Save{{< /ui >}}.
@@ -127,7 +133,7 @@ Gateway sends `deployment-name` as the upstream model identifier. Use the comple
 3. Enter {{< ui >}}Provider model ID{{< /ui >}} if it differs from the Model ID. For Vertex AI, the field is {{< ui >}}Provider resource path{{< /ui >}} and requires a full resource path, such as:
 
    ```text
-   projects/<PROJECT_ID>/locations/<LOCATION>/publishers/google/models/<MODEL_ID>
+   projects/<PROJECT_ID>/locations/<LOCATION>/publishers/google/models/<PUBLISHER_MODEL_ID>
    ```
 
 4. Select the supported operations that the upstream model accepts, then save the provider.
@@ -158,7 +164,7 @@ A manual entry does not grant upstream model access or Gateway caller access. Co
 
 Open a provider from the list to review its connection, models, generated requests, and traffic. Click {{< ui >}}Edit provider{{< /ui >}} to change its display name or model settings. Manage caller access through access policies.
 
-To move to a different integration account or slug, create another provider, verify it, then update dependent applications and routing rules. Before deleting a provider, review the dependency impact shown in the confirmation. A routing rule using the provider as its decision model requires another decision model before deletion.
+To move to a different integration account or slug, create another provider, verify it, then update dependent applications and routing rules. Before deleting a provider, review the dependency impact shown in the confirmation. A decision model chooses the destination for a smart routing rule. If a rule uses this provider as its decision model, select another decision model before deleting the provider.
 
 ### Diagnose connection problems
 
@@ -168,10 +174,14 @@ To move to a different integration account or slug, create another provider, ver
 | Model discovery fails. | Open the provider's status details. Review the upstream status and suggested fix, then use {{< ui >}}Open integration{{< /ui >}} to update credentials when available. |
 | Discovery works, but inference fails. | Check upstream invocation permissions, model approvals, deployment configuration, region, and project. For Foundry, confirm both Azure roles. |
 | The wrong model is requested. | Compare the Gateway Model ID with the upstream Provider model ID or Vertex resource path. |
-| Gateway refuses the caller. | Check `ai_gateway_usage`, credential scope, and the access policy for the requested model or route. |
+| Gateway returns HTTP `401` or `403`. | Check `ai_gateway_usage`, credential scope, and the access policy for the requested model or route. |
 | A request format fails. | Check the model's supported operations and the upstream endpoint's capabilities. |
 
 Provider status updates after model synchronization or Gateway requests. Review the timestamp and error details, and verify a real request after fixing the connection.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/configure/ai_gateway/#prerequisites
 [2]: /llm_observability/configure/ai_gateway/#authenticate-requests
@@ -181,3 +191,4 @@ Provider status updates after model synchronization or Gateway requests. Review 
 [6]: https://app.datadoghq.com/llm/gateway/model-catalog
 [7]: /llm_observability/configure/ai_gateway/#control-model-access
 [8]: /getting_started/site/
+[9]: /account_management/rbac/permissions/#integrations
