@@ -100,6 +100,8 @@ Append one of the following paths to the base URL. The operations available depe
 | OpenAI Chat Completions | `POST /chat/completions` |
 | Anthropic Messages | `POST /messages` |
 
+For cross-API model calls and compatibility limits, see [Use API translation with AI Gateway][18].
+
 ### Select a model
 
 Set the `model` field in the request body to one of the following:
@@ -443,3 +445,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
 [16]: /llm_observability/investigate/metrics/#gateway-metrics
+[18]: /llm_observability/configure/ai_gateway_translation/
