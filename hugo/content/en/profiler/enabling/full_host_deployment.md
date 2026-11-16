@@ -180,7 +180,7 @@ spec:
 
 **AppArmor (optional)**: AppArmor provides extra hardening on Linux distributions and Kubernetes clusters where it's available. The Full-Host Profiler doesn't require AppArmor to run.
 
-Use this only if your nodes support AppArmor and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
+Enable AppArmor only if your nodes support it and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
 
 To enable the provided profile, load [`apparmor-profile`][3] on each node, then add `appArmorProfileName` to the `host-profiler` container override in your `DatadogAgent` custom resource:
 
