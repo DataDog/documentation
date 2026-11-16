@@ -107,6 +107,8 @@ When you configure a private action step in a workflow, you can target an Agent 
 
 This creates a virtual connection for the step, identified by the target Agent only; it carries no credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
 
+If an action requires authentication, select a credential connection in addition to the target. For configuration instructions, see [Handling private action credentials][6].
+
 ## Supported integrations
 
 Execution Policies authorize actions for the following integrations:
@@ -114,6 +116,8 @@ Execution Policies authorize actions for the following integrations:
 - **Kubernetes** (`com.datadoghq.kubernetes.*`)
 - **Remote Action** (`com.datadoghq.remoteaction.*`), which includes the rshell bundle (the `runCommand` action) and network path actions.
 - **Script** (`com.datadoghq.script.*`).
+- **HTTP** (`com.datadoghq.http.*`).
+- **MongoDB** (`com.datadoghq.mongodb.*`).
 
 The [Private Action Runner Reference][5] shows which actions each runner type supports. If your integration isn't authorizable through Execution Policies, use [Connections][1] instead.
 
@@ -152,3 +156,4 @@ Execution Policies do not store credentials. They answer *where* actions can run
 [3]: /account_management/rbac/
 [4]: https://app.datadoghq.com/actions/execution-policies
 [5]: /actions/private_actions/reference/
+[6]: /actions/connections/private_action_credentials/
