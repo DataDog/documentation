@@ -5564,16 +5564,21 @@ menu:
       parent: dbm
       identifier: dbm_pr_reviews
       weight: 8
+    - name: Role Observability
+      url: database_monitoring/database_monitoring_role_observability/
+      parent: dbm
+      identifier: dbm_role_observability
+      weight: 9
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 10
+      weight: 11
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
