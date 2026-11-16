@@ -13107,6 +13107,136 @@ menu:
           - ListCostTagDescriptions
         unstable: []
         order: 42
+    - name: Update a cost recommendation notification rule
+      url: /api/latest/cloud-cost-management/update-a-cost-recommendation-notification-rule/
+      identifier: cloud-cost-management-update-a-cost-recommendation-notification-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostRecommendationNotificationRule
+        unstable:
+          - v2
+        order: 87
+    - name: Get a cost recommendation notification rule
+      url: /api/latest/cloud-cost-management/get-a-cost-recommendation-notification-rule/
+      identifier: cloud-cost-management-get-a-cost-recommendation-notification-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostRecommendationNotificationRule
+        unstable:
+          - v2
+        order: 86
+    - name: Delete a cost recommendation notification rule
+      url: /api/latest/cloud-cost-management/delete-a-cost-recommendation-notification-rule/
+      identifier: cloud-cost-management-delete-a-cost-recommendation-notification-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCostRecommendationNotificationRule
+        unstable:
+          - v2
+        order: 88
+    - name: Create a cost recommendation notification rule
+      url: /api/latest/cloud-cost-management/create-a-cost-recommendation-notification-rule/
+      identifier: cloud-cost-management-create-a-cost-recommendation-notification-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCostRecommendationNotificationRule
+        unstable:
+          - v2
+        order: 85
+    - name: List cost recommendation notification rules
+      url: /api/latest/cloud-cost-management/list-cost-recommendation-notification-rules/
+      identifier: cloud-cost-management-list-cost-recommendation-notification-rules
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostRecommendationNotificationRules
+        unstable:
+          - v2
+        order: 84
+    - name: Update a cost recommendation custom rule
+      url: /api/latest/cloud-cost-management/update-a-cost-recommendation-custom-rule/
+      identifier: cloud-cost-management-update-a-cost-recommendation-custom-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostRecommendationCustomRule
+        unstable:
+          - v2
+        order: 82
+    - name: Get a cost recommendation custom rule
+      url: /api/latest/cloud-cost-management/get-a-cost-recommendation-custom-rule/
+      identifier: cloud-cost-management-get-a-cost-recommendation-custom-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostRecommendationCustomRule
+        unstable:
+          - v2
+        order: 81
+    - name: Delete a cost recommendation custom rule
+      url: /api/latest/cloud-cost-management/delete-a-cost-recommendation-custom-rule/
+      identifier: cloud-cost-management-delete-a-cost-recommendation-custom-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCostRecommendationCustomRule
+        unstable:
+          - v2
+        order: 83
+    - name: Create a cost recommendation custom rule
+      url: /api/latest/cloud-cost-management/create-a-cost-recommendation-custom-rule/
+      identifier: cloud-cost-management-create-a-cost-recommendation-custom-rule
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCostRecommendationCustomRule
+        unstable:
+          - v2
+        order: 80
+    - name: List cost recommendation custom rules
+      url: /api/latest/cloud-cost-management/list-cost-recommendation-custom-rules/
+      identifier: cloud-cost-management-list-cost-recommendation-custom-rules
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostRecommendationCustomRules
+        unstable:
+          - v2
+        order: 79
     - name: Search cost recommendations
       url: /api/latest/cloud-cost-management/search-cost-recommendations/
       identifier: cloud-cost-management-search-cost-recommendations

@@ -741,6 +741,22 @@ components:
       required: true
       schema:
         type: string
+    CostRecommendationCustomRuleID:
+      description: The ID of the custom rule.
+      example: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+      in: path
+      name: custom_rule_id
+      required: true
+      schema:
+        type: string
+    CostRecommendationNotificationRuleID:
+      description: The ID of the notification rule.
+      example: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+      in: path
+      name: notification_rule_id
+      required: true
+      schema:
+        type: string
     CustomDestinationId:
       description: The ID of the custom destination.
       in: path
@@ -30357,6 +30373,273 @@ components:
       required:
         - data
       type: object
+    CostRecommendationCustomRuleAttributes:
+      description: Attributes of a custom recommendation rule.
+      properties:
+        cloud_provider:
+          description: The cloud provider of the recommender, such as `aws`, `azure`, or `gcp`.
+          example: aws
+          type: string
+        created_at:
+          description: When the rule was created.
+          example: "2026-10-31T12:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the rule.
+          example: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+          type: string
+        enabled:
+          description: Whether the rule is applied when recommendations are generated.
+          example: true
+          type: boolean
+        filters:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleFilters"
+        modified_at:
+          description: When the rule was last modified.
+          example: "2026-10-31T12:00:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: The UUID of the user who last modified the rule.
+          example: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+          type: string
+        name:
+          description: The name of the rule.
+          example: Staging instances
+          type: string
+        notes:
+          description: Free-form notes, such as the reason for the customization.
+          example: Staging instances can run with less headroom.
+          type: string
+        priority:
+          description: The order in which the rules of a recommender are evaluated, lowest first. It is assigned when the rule is created.
+          example: 0
+          format: int64
+          type: integer
+        recommender_id:
+          description: The recommender the rule customizes.
+          example: aws_ec2_instance_unused
+          type: string
+        settings:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleSettings"
+      required:
+        - cloud_provider
+        - created_at
+        - created_by
+        - enabled
+        - filters
+        - modified_at
+        - modified_by
+        - name
+        - notes
+        - priority
+        - recommender_id
+        - settings
+      type: object
+    CostRecommendationCustomRuleCreateAttributes:
+      description: Attributes of a new custom recommendation rule.
+      properties:
+        enabled:
+          description: Whether the rule is applied when recommendations are generated. Defaults to `true`.
+          example: true
+          type: boolean
+        filters:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleFilters"
+        name:
+          description: The name of the rule.
+          example: Staging instances
+          minLength: 1
+          type: string
+        notes:
+          description: Free-form notes, such as the reason for the customization.
+          example: Staging instances can run with less headroom.
+          type: string
+        recommender_id:
+          description: The recommender to customize. It must be a recommender that supports custom rules.
+          example: aws_ec2_instance_unused
+          type: string
+        settings:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleSettings"
+      required:
+        - name
+        - recommender_id
+      type: object
+    CostRecommendationCustomRuleCreateData:
+      description: A new custom recommendation rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleCreateAttributes"
+        type:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleType"
+      required:
+        - attributes
+        - type
+      type: object
+    CostRecommendationCustomRuleCreateRequest:
+      description: Request to create a custom recommendation rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleCreateData"
+      required:
+        - data
+      type: object
+    CostRecommendationCustomRuleData:
+      description: A custom recommendation rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleAttributes"
+        id:
+          description: The ID of the custom rule.
+          example: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+          type: string
+        type:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CostRecommendationCustomRuleFilter:
+      description: A tag filter. A rule applies to a resource only when every filter of the rule matches.
+      properties:
+        filter_type:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleFilterType"
+        tag:
+          description: The tag key the filter compares.
+          example: env
+          type: string
+        values:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleFilterValues"
+      required:
+        - tag
+        - filter_type
+      type: object
+    CostRecommendationCustomRuleFilterType:
+      description: |-
+        How the filter compares the tag. `is`, `is_not`, `contains`, `does_not_contain`, `like` (glob), and `not_like`
+        compare the tag values with `values`. `all` matches resources that have the tag and `untagged` matches resources
+        that do not, so both ignore `values`.
+      enum:
+        - is
+        - is_not
+        - contains
+        - does_not_contain
+        - like
+        - not_like
+        - all
+        - untagged
+      example: is
+      type: string
+      x-enum-varnames:
+        - IS
+        - IS_NOT
+        - CONTAINS
+        - DOES_NOT_CONTAIN
+        - LIKE
+        - NOT_LIKE
+        - ALL
+        - UNTAGGED
+    CostRecommendationCustomRuleFilterValues:
+      description: Tag values the filter compares. Required unless `filter_type` is `all` or `untagged`.
+      example:
+        - staging
+      items:
+        description: A tag value.
+        type: string
+      type: array
+    CostRecommendationCustomRuleFilters:
+      description: Tag filters that select the resources the rule applies to. An empty list selects every resource.
+      items:
+        $ref: "#/components/schemas/CostRecommendationCustomRuleFilter"
+      type: array
+    CostRecommendationCustomRuleResponse:
+      description: A custom recommendation rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleData"
+      required:
+        - data
+      type: object
+    CostRecommendationCustomRuleSettings:
+      additionalProperties:
+        description: The value of the setting.
+        format: double
+        type: number
+      description: |-
+        Setting overrides, keyed by setting name. Settings left out keep the recommender default. The accepted
+        settings and their ranges depend on the recommender.
+      example:
+        lookback_days: 14
+        max_cpu_user_limit: 0.05
+      type: object
+    CostRecommendationCustomRuleType:
+      default: custom_rules
+      description: Custom recommendation rule resource type.
+      enum:
+        - custom_rules
+      example: custom_rules
+      type: string
+      x-enum-varnames:
+        - CUSTOM_RULES
+    CostRecommendationCustomRuleUpdateAttributes:
+      description: |-
+        Attributes to change. Attributes left out keep their value. `filters` and `settings` replace the stored list
+        and map when sent.
+      properties:
+        enabled:
+          description: Whether the rule is applied when recommendations are generated.
+          example: false
+          type: boolean
+        filters:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleFilters"
+        name:
+          description: The name of the rule.
+          example: Staging and development instances
+          minLength: 1
+          type: string
+        notes:
+          description: Free-form notes, such as the reason for the customization.
+          example: Staging instances can run with less headroom.
+          type: string
+        settings:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleSettings"
+      type: object
+    CostRecommendationCustomRuleUpdateData:
+      description: Changes to a custom recommendation rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleUpdateAttributes"
+        id:
+          description: The ID of the custom rule. It must match the ID in the path.
+          example: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+          type: string
+        type:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CostRecommendationCustomRuleUpdateRequest:
+      description: Request to update a custom recommendation rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationCustomRuleUpdateData"
+      required:
+        - data
+      type: object
+    CostRecommendationCustomRulesResponse:
+      description: The custom recommendation rules of the organization.
+      properties:
+        data:
+          description: The custom rules, ordered by recommender and then by priority.
+          items:
+            $ref: "#/components/schemas/CostRecommendationCustomRuleData"
+          type: array
+      required:
+        - data
+      type: object
     CostRecommendationData:
       description: A single cost recommendation entry in JSON:API form.
       properties:
@@ -30414,6 +30697,491 @@ components:
       type: string
       x-enum-varnames:
         - RECOMMENDATION
+    CostRecommendationNotificationRuleAttributes:
+      description: Attributes of a recommendation notification rule.
+      properties:
+        channel_id:
+          description: The Slack channel ID. Empty for `teams` rules.
+          example: C0456ABCD
+          type: string
+        created_at:
+          description: When the rule was created.
+          example: "2026-10-31T12:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the rule.
+          example: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+          type: string
+        destination_type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleDestinationType"
+        enabled:
+          description: Whether the digest is sent.
+          example: true
+          type: boolean
+        frequency:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleFrequency"
+        interval_execution_date:
+          description: The first date (`YYYY-MM-DD`) of an `every_30` or `every_90` schedule.
+          example: "2026-11-02"
+          nullable: true
+          type: string
+        interval_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of an `every_30` or `every_90` schedule.
+          example: "09:30"
+          nullable: true
+          type: string
+        mention_targets:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMentionTargets"
+        message_customization:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomization"
+        modified_at:
+          description: When the rule was last modified.
+          example: "2026-10-31T12:00:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: The UUID of the user who last modified the rule.
+          example: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+          type: string
+        name:
+          description: The name of the rule, unique within the organization.
+          example: Production recommendations
+          type: string
+        org_id:
+          description: The ID of the organization that owns the rule.
+          example: 2
+          format: int64
+          type: integer
+        scope_query:
+          description: The recommendation search query that selects what the digest includes. Empty selects every recommendation.
+          example: "service:api AND env:prod"
+          type: string
+        teams_channel_id:
+          description: The Microsoft Teams channel ID. Empty for `slack` rules.
+          example: ""
+          type: string
+        teams_channel_name:
+          description: The Microsoft Teams channel name. Empty for `slack` rules.
+          example: ""
+          type: string
+        teams_team_id:
+          description: The Microsoft Teams team ID. Empty for `slack` rules.
+          example: ""
+          type: string
+        teams_team_name:
+          description: The Microsoft Teams team name. Empty for `slack` rules.
+          example: ""
+          type: string
+        teams_tenant_id:
+          description: The Microsoft Teams tenant ID. Empty for `slack` rules.
+          example: ""
+          type: string
+        teams_tenant_name:
+          description: The Microsoft Teams tenant name. Empty for `slack` rules.
+          example: ""
+          type: string
+        timezone:
+          description: The IANA time zone of the schedule.
+          example: America/New_York
+          type: string
+        weekly_execution_day:
+          description: The day of the week of a `weekly` or `biweekly` schedule, such as `monday`.
+          example: monday
+          nullable: true
+          type: string
+        weekly_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of a `weekly` or `biweekly` schedule.
+          example: "09:30"
+          nullable: true
+          type: string
+        workspace_id:
+          description: The Slack workspace ID. Empty for `teams` rules.
+          example: T0123ABCD
+          type: string
+      required:
+        - channel_id
+        - created_at
+        - created_by
+        - destination_type
+        - enabled
+        - frequency
+        - interval_execution_date
+        - interval_execution_time
+        - mention_targets
+        - message_customization
+        - modified_at
+        - modified_by
+        - name
+        - org_id
+        - scope_query
+        - teams_channel_id
+        - teams_channel_name
+        - teams_team_id
+        - teams_team_name
+        - teams_tenant_id
+        - teams_tenant_name
+        - timezone
+        - weekly_execution_day
+        - weekly_execution_time
+        - workspace_id
+      type: object
+    CostRecommendationNotificationRuleCreateAttributes:
+      description: |-
+        Attributes of a new recommendation notification rule. Schedule attributes depend on `frequency` and target
+        attributes depend on `destination_type`.
+      properties:
+        channel_id:
+          description: The Slack channel ID, starting with `C` or `G`. Required for `slack` rules.
+          example: C0456ABCD
+          type: string
+        destination_type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleDestinationType"
+        enabled:
+          description: Whether the digest is sent. Defaults to `true`.
+          example: true
+          type: boolean
+        frequency:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleFrequency"
+        interval_execution_date:
+          description: The first date (`YYYY-MM-DD`) of an `every_30` or `every_90` schedule.
+          example: "2026-11-02"
+          type: string
+        interval_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of an `every_30` or `every_90` schedule.
+          example: "09:30"
+          type: string
+        mention_targets:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMentionTargets"
+        message_customization:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomization"
+        name:
+          description: The name of the rule, unique within the organization.
+          example: Production recommendations
+          type: string
+        scope_query:
+          description: The recommendation search query that selects what the digest includes. Empty selects every recommendation.
+          example: "service:api AND env:prod"
+          type: string
+        teams_channel_id:
+          description: The Microsoft Teams channel ID. Required for `teams` rules.
+          type: string
+        teams_channel_name:
+          description: The Microsoft Teams channel name. Required for `teams` rules.
+          type: string
+        teams_team_id:
+          description: The Microsoft Teams team ID. Required for `teams` rules.
+          type: string
+        teams_team_name:
+          description: The Microsoft Teams team name. Required for `teams` rules.
+          type: string
+        teams_tenant_id:
+          description: The Microsoft Teams tenant ID. Required for `teams` rules.
+          type: string
+        teams_tenant_name:
+          description: The Microsoft Teams tenant name. Required for `teams` rules.
+          type: string
+        timezone:
+          description: The IANA time zone of the schedule.
+          example: America/New_York
+          type: string
+        weekly_execution_day:
+          description: The day of the week of a `weekly` or `biweekly` schedule, such as `monday`.
+          example: monday
+          type: string
+        weekly_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of a `weekly` or `biweekly` schedule.
+          example: "09:30"
+          type: string
+        workspace_id:
+          description: The Slack workspace ID, starting with `T`. Required for `slack` rules.
+          example: T0123ABCD
+          type: string
+      required:
+        - frequency
+        - name
+        - timezone
+      type: object
+    CostRecommendationNotificationRuleCreateData:
+      description: A new recommendation notification rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleCreateAttributes"
+        type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleType"
+      required:
+        - attributes
+        - type
+      type: object
+    CostRecommendationNotificationRuleCreateRequest:
+      description: Request to create a recommendation notification rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleCreateData"
+      required:
+        - data
+      type: object
+    CostRecommendationNotificationRuleData:
+      description: A recommendation notification rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleAttributes"
+        id:
+          description: The ID of the notification rule.
+          example: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+          type: string
+        type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CostRecommendationNotificationRuleDestinationType:
+      description: |-
+        Where the digest is sent. `slack` requires `workspace_id` and `channel_id`; `teams` requires the
+        `teams_*` attributes. Defaults to `slack`.
+      enum:
+        - slack
+        - teams
+      example: slack
+      type: string
+      x-enum-varnames:
+        - SLACK
+        - TEAMS
+    CostRecommendationNotificationRuleFrequency:
+      description: |-
+        How often the digest is sent. `weekly` and `biweekly` use `weekly_execution_day` and `weekly_execution_time`;
+        `every_30` and `every_90` (days) use `interval_execution_date` and `interval_execution_time`.
+      enum:
+        - weekly
+        - biweekly
+        - every_30
+        - every_90
+      example: weekly
+      type: string
+      x-enum-varnames:
+        - WEEKLY
+        - BIWEEKLY
+        - EVERY_30
+        - EVERY_90
+    CostRecommendationNotificationRuleIncludeTags:
+      description: Tag keys whose values are shown on each recommendation in the digest.
+      example:
+        - team
+      items:
+        description: A tag key.
+        type: string
+      type: array
+    CostRecommendationNotificationRuleMentionTargets:
+      description: Slack member IDs to mention in the digest. Only valid for `slack` rules.
+      example:
+        - U01ABCDE
+      items:
+        description: A Slack member ID.
+        type: string
+      type: array
+    CostRecommendationNotificationRuleMessageAction:
+      description: Where a message action appears.
+      properties:
+        bulk:
+          description: Whether the action appears once for the whole digest.
+          example: true
+          type: boolean
+        per_rec:
+          description: Whether the action appears on each recommendation.
+          example: true
+          type: boolean
+      type: object
+    CostRecommendationNotificationRuleMessageActions:
+      description: Links the digest shows. `view_in_ccm` is the link to review the recommendations in Cloud Cost Management.
+      properties:
+        view_in_ccm:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageAction"
+      type: object
+    CostRecommendationNotificationRuleMessageCustomization:
+      description: |-
+        Which sections the digest shows. Sent as a whole: sections left out of a request use their defaults, which
+        show everything.
+      properties:
+        actions:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageActions"
+        header:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomizationHeader"
+        include_tags:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleIncludeTags"
+        mode:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomizationMode"
+        per_rec:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomizationPerRec"
+      type: object
+    CostRecommendationNotificationRuleMessageCustomizationHeader:
+      description: What the digest header shows.
+      properties:
+        custom_text:
+          description: |-
+            Text shown in the header, up to 500 characters. It can use the `{{ total_savings }}`, `{{ rec_count }}`,
+            and `{{ digest_date }}` variables.
+          example: "{{ rec_count }} recommendations to review this week."
+          maxLength: 500
+          type: string
+        notification_name:
+          description: Whether the header shows the rule name.
+          example: true
+          type: boolean
+        total_savings:
+          description: Whether the header shows the total potential savings.
+          example: true
+          type: boolean
+      type: object
+    CostRecommendationNotificationRuleMessageCustomizationMode:
+      description: How the message is customized.
+      enum:
+        - structured
+      example: structured
+      type: string
+      x-enum-varnames:
+        - STRUCTURED
+    CostRecommendationNotificationRuleMessageCustomizationPerRec:
+      description: What each recommendation in the digest shows.
+      properties:
+        effort:
+          description: Whether each recommendation shows its effort.
+          example: true
+          type: boolean
+        risk:
+          description: Whether each recommendation shows its risk.
+          example: true
+          type: boolean
+        why:
+          description: Whether each recommendation shows why it was made.
+          example: true
+          type: boolean
+      type: object
+    CostRecommendationNotificationRuleResponse:
+      description: A recommendation notification rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleData"
+      required:
+        - data
+      type: object
+    CostRecommendationNotificationRuleType:
+      default: notification_rules
+      description: Recommendation notification rule resource type.
+      enum:
+        - notification_rules
+      example: notification_rules
+      type: string
+      x-enum-varnames:
+        - NOTIFICATION_RULES
+    CostRecommendationNotificationRuleUpdateAttributes:
+      description: |-
+        Attributes to change. Attributes left out keep their value; `mention_targets` and `message_customization`
+        replace the stored value when sent.
+      properties:
+        channel_id:
+          description: The Slack channel ID, starting with `C` or `G`.
+          example: C0456ABCD
+          type: string
+        destination_type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleDestinationType"
+        enabled:
+          description: Whether the digest is sent.
+          example: false
+          type: boolean
+        frequency:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleFrequency"
+        interval_execution_date:
+          description: The first date (`YYYY-MM-DD`) of an `every_30` or `every_90` schedule.
+          example: "2026-11-02"
+          type: string
+        interval_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of an `every_30` or `every_90` schedule.
+          example: "09:30"
+          type: string
+        mention_targets:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMentionTargets"
+        message_customization:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleMessageCustomization"
+        name:
+          description: The name of the rule, unique within the organization.
+          example: Production recommendations
+          type: string
+        scope_query:
+          description: The recommendation search query that selects what the digest includes. Empty selects every recommendation.
+          example: "service:api AND env:prod"
+          type: string
+        teams_channel_id:
+          description: The Microsoft Teams channel ID.
+          type: string
+        teams_channel_name:
+          description: The Microsoft Teams channel name.
+          type: string
+        teams_team_id:
+          description: The Microsoft Teams team ID.
+          type: string
+        teams_team_name:
+          description: The Microsoft Teams team name.
+          type: string
+        teams_tenant_id:
+          description: The Microsoft Teams tenant ID.
+          type: string
+        teams_tenant_name:
+          description: The Microsoft Teams tenant name.
+          type: string
+        timezone:
+          description: The IANA time zone of the schedule.
+          example: America/New_York
+          type: string
+        weekly_execution_day:
+          description: The day of the week of a `weekly` or `biweekly` schedule, such as `monday`.
+          example: monday
+          type: string
+        weekly_execution_time:
+          description: The time of day (`HH:MM`, in `timezone`) of a `weekly` or `biweekly` schedule.
+          example: "09:30"
+          type: string
+        workspace_id:
+          description: The Slack workspace ID, starting with `T`.
+          example: T0123ABCD
+          type: string
+      type: object
+    CostRecommendationNotificationRuleUpdateData:
+      description: Changes to a recommendation notification rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleUpdateAttributes"
+        id:
+          description: The ID of the notification rule. It must match the ID in the path.
+          example: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+          type: string
+        type:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CostRecommendationNotificationRuleUpdateRequest:
+      description: Request to update a recommendation notification rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/CostRecommendationNotificationRuleUpdateData"
+      required:
+        - data
+      type: object
+    CostRecommendationNotificationRulesResponse:
+      description: The recommendation notification rules of the organization.
+      properties:
+        data:
+          description: The notification rules.
+          items:
+            $ref: "#/components/schemas/CostRecommendationNotificationRuleData"
+          type: array
+      required:
+        - data
+      type: object
     CostTag:
       description: A Cloud Cost Management tag.
       properties:
@@ -176330,6 +177098,800 @@ paths:
         operator: OR
         permissions:
           - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cost/recommendations/custom_rules:
+    get:
+      description: List the custom recommendation rules of the organization. A custom rule overrides recommender settings for the resources its tag filters match.
+      operationId: ListCostRecommendationCustomRules
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          cloud_provider: aws
+                          created_at: "2026-10-31T12:00:00Z"
+                          created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                          enabled: true
+                          filters:
+                            - filter_type: is
+                              tag: env
+                              values:
+                                - staging
+                          modified_at: "2026-10-31T12:00:00Z"
+                          modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                          name: Staging instances
+                          notes: Staging instances can run with less headroom.
+                          priority: 0
+                          recommender_id: aws_ec2_instance_unused
+                          settings:
+                            lookback_days: 14
+                            max_cpu_user_limit: 0.05
+                        id: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+                        type: custom_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationCustomRulesResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: List cost recommendation custom rules
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 79
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a custom recommendation rule. The rule overrides the settings it lists for the resources its tag filters match; every other setting keeps the recommender default. Only the settings in the request are stored.
+      operationId: CreateCostRecommendationCustomRule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      filters:
+                        - filter_type: is
+                          tag: env
+                          values:
+                            - staging
+                      name: Staging instances
+                      notes: Staging instances can run with less headroom.
+                      recommender_id: aws_ec2_instance_unused
+                      settings:
+                        lookback_days: 14
+                        max_cpu_user_limit: 0.05
+                    type: custom_rules
+            schema:
+              $ref: "#/components/schemas/CostRecommendationCustomRuleCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cloud_provider: aws
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        enabled: true
+                        filters:
+                          - filter_type: is
+                            tag: env
+                            values:
+                              - staging
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Staging instances
+                        notes: Staging instances can run with less headroom.
+                        priority: 0
+                        recommender_id: aws_ec2_instance_unused
+                        settings:
+                          lookback_days: 14
+                          max_cpu_user_limit: 0.05
+                      id: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+                      type: custom_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationCustomRuleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Create a cost recommendation custom rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 80
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cost/recommendations/custom_rules/{custom_rule_id}:
+    delete:
+      description: Delete a custom recommendation rule.
+      operationId: DeleteCostRecommendationCustomRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationCustomRuleID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Delete a cost recommendation custom rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 83
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a custom recommendation rule.
+      operationId: GetCostRecommendationCustomRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationCustomRuleID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cloud_provider: aws
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        enabled: true
+                        filters:
+                          - filter_type: is
+                            tag: env
+                            values:
+                              - staging
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Staging instances
+                        notes: Staging instances can run with less headroom.
+                        priority: 0
+                        recommender_id: aws_ec2_instance_unused
+                        settings:
+                          lookback_days: 14
+                          max_cpu_user_limit: 0.05
+                      id: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+                      type: custom_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationCustomRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get a cost recommendation custom rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 81
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a custom recommendation rule. Attributes left out keep their value; `filters` and `settings` replace the stored list and map when sent. The recommender of a rule cannot change.
+      operationId: UpdateCostRecommendationCustomRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationCustomRuleID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: false
+                      name: Staging and development instances
+                    id: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+                    type: custom_rules
+            schema:
+              $ref: "#/components/schemas/CostRecommendationCustomRuleUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cloud_provider: aws
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        enabled: true
+                        filters:
+                          - filter_type: is
+                            tag: env
+                            values:
+                              - staging
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Staging instances
+                        notes: Staging instances can run with less headroom.
+                        priority: 0
+                        recommender_id: aws_ec2_instance_unused
+                        settings:
+                          lookback_days: 14
+                          max_cpu_user_limit: 0.05
+                      id: 8a1b6f3e-2c4d-4e5f-9a7b-1c2d3e4f5a6b
+                      type: custom_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationCustomRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update a cost recommendation custom rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 82
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cost/recommendations/notification_rules:
+    get:
+      description: List the recommendation notification rules of the organization. A notification rule sends a digest of the cost recommendations that match its query to Slack or Microsoft Teams on a schedule.
+      operationId: ListCostRecommendationNotificationRules
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          channel_id: C0456ABCD
+                          created_at: "2026-10-31T12:00:00Z"
+                          created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                          destination_type: slack
+                          enabled: true
+                          frequency: weekly
+                          interval_execution_date:
+                          interval_execution_time:
+                          mention_targets: []
+                          message_customization:
+                            actions:
+                              view_in_ccm:
+                                bulk: true
+                                per_rec: true
+                            header:
+                              notification_name: true
+                              total_savings: true
+                            mode: structured
+                            per_rec:
+                              effort: true
+                              risk: true
+                              why: true
+                          modified_at: "2026-10-31T12:00:00Z"
+                          modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                          name: Production recommendations
+                          org_id: 2
+                          scope_query: "service:api AND env:prod"
+                          teams_channel_id: ""
+                          teams_channel_name: ""
+                          teams_team_id: ""
+                          teams_team_name: ""
+                          teams_tenant_id: ""
+                          teams_tenant_name: ""
+                          timezone: America/New_York
+                          weekly_execution_day: monday
+                          weekly_execution_time: "09:30"
+                          workspace_id: T0123ABCD
+                        id: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+                        type: notification_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationNotificationRulesResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: List cost recommendation notification rules
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 84
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a rule that sends a digest of the cost recommendations matching `scope_query` to Slack or Microsoft Teams on a schedule.
+      operationId: CreateCostRecommendationNotificationRule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      channel_id: C0456ABCD
+                      destination_type: slack
+                      enabled: true
+                      frequency: weekly
+                      name: Production recommendations
+                      scope_query: "service:api AND env:prod"
+                      timezone: America/New_York
+                      weekly_execution_day: monday
+                      weekly_execution_time: "09:30"
+                      workspace_id: T0123ABCD
+                    type: notification_rules
+            schema:
+              $ref: "#/components/schemas/CostRecommendationNotificationRuleCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        channel_id: C0456ABCD
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        destination_type: slack
+                        enabled: true
+                        frequency: weekly
+                        interval_execution_date:
+                        interval_execution_time:
+                        mention_targets: []
+                        message_customization:
+                          actions:
+                            view_in_ccm:
+                              bulk: true
+                              per_rec: true
+                          header:
+                            notification_name: true
+                            total_savings: true
+                          mode: structured
+                          per_rec:
+                            effort: true
+                            risk: true
+                            why: true
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Production recommendations
+                        org_id: 2
+                        scope_query: "service:api AND env:prod"
+                        teams_channel_id: ""
+                        teams_channel_name: ""
+                        teams_team_id: ""
+                        teams_team_name: ""
+                        teams_tenant_id: ""
+                        teams_tenant_name: ""
+                        timezone: America/New_York
+                        weekly_execution_day: monday
+                        weekly_execution_time: "09:30"
+                        workspace_id: T0123ABCD
+                      id: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+                      type: notification_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationNotificationRuleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Create a cost recommendation notification rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 85
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cost/recommendations/notification_rules/{notification_rule_id}:
+    delete:
+      description: Delete a recommendation notification rule.
+      operationId: DeleteCostRecommendationNotificationRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationNotificationRuleID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Delete a cost recommendation notification rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 88
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a recommendation notification rule.
+      operationId: GetCostRecommendationNotificationRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationNotificationRuleID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        channel_id: C0456ABCD
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        destination_type: slack
+                        enabled: true
+                        frequency: weekly
+                        interval_execution_date:
+                        interval_execution_time:
+                        mention_targets: []
+                        message_customization:
+                          actions:
+                            view_in_ccm:
+                              bulk: true
+                              per_rec: true
+                          header:
+                            notification_name: true
+                            total_savings: true
+                          mode: structured
+                          per_rec:
+                            effort: true
+                            risk: true
+                            why: true
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Production recommendations
+                        org_id: 2
+                        scope_query: "service:api AND env:prod"
+                        teams_channel_id: ""
+                        teams_channel_name: ""
+                        teams_team_id: ""
+                        teams_team_name: ""
+                        teams_tenant_id: ""
+                        teams_tenant_name: ""
+                        timezone: America/New_York
+                        weekly_execution_day: monday
+                        weekly_execution_time: "09:30"
+                        workspace_id: T0123ABCD
+                      id: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+                      type: notification_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationNotificationRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get a cost recommendation notification rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 86
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a recommendation notification rule. Attributes left out keep their value.
+      operationId: UpdateCostRecommendationNotificationRule
+      parameters:
+        - $ref: "#/components/parameters/CostRecommendationNotificationRuleID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: false
+                    id: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+                    type: notification_rules
+            schema:
+              $ref: "#/components/schemas/CostRecommendationNotificationRuleUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        channel_id: C0456ABCD
+                        created_at: "2026-10-31T12:00:00Z"
+                        created_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        destination_type: slack
+                        enabled: true
+                        frequency: weekly
+                        interval_execution_date:
+                        interval_execution_time:
+                        mention_targets: []
+                        message_customization:
+                          actions:
+                            view_in_ccm:
+                              bulk: true
+                              per_rec: true
+                          header:
+                            notification_name: true
+                            total_savings: true
+                          mode: structured
+                          per_rec:
+                            effort: true
+                            risk: true
+                            why: true
+                        modified_at: "2026-10-31T12:00:00Z"
+                        modified_by: 9c1b5d2e-7f3a-4c8b-a6d4-2e1f0b9c8a7d
+                        name: Production recommendations
+                        org_id: 2
+                        scope_query: "service:api AND env:prod"
+                        teams_channel_id: ""
+                        teams_channel_name: ""
+                        teams_team_id: ""
+                        teams_team_name: ""
+                        teams_tenant_id: ""
+                        teams_tenant_name: ""
+                        timezone: America/New_York
+                        weekly_execution_day: monday
+                        weekly_execution_time: "09:30"
+                        workspace_id: T0123ABCD
+                      id: 2c59b248-6a91-4f95-972a-dc236cae9cbb
+                      type: notification_rules
+              schema:
+                $ref: "#/components/schemas/CostRecommendationNotificationRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update a cost recommendation notification rule
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 87
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

@@ -103,3 +103,19 @@ entries:
     operations:
       - UploadCustomCostsFile
     title: Add Update Custom Costs file endpoint
+  - change_type: added
+    date: '2026-11-15'
+    link: https://github.com/DataDog/documentation/pull/41761
+    operations:
+      - CreateCostRecommendationCustomRule
+      - CreateCostRecommendationNotificationRule
+      - DeleteCostRecommendationCustomRule
+      - DeleteCostRecommendationNotificationRule
+      - GetCostRecommendationCustomRule
+      - GetCostRecommendationNotificationRule
+      - ListCostRecommendationCustomRules
+      - ListCostRecommendationNotificationRules
+      - UpdateCostRecommendationCustomRule
+      - UpdateCostRecommendationNotificationRule
+    title: Add Cloud Cost Management recommendation custom rule and notification
+      rule endpoints
