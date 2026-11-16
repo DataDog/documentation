@@ -28,9 +28,7 @@ The L1/L7 Map is in Preview. If you are interested in this feature, complete the
 
 ## Overview
 
-The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination.
-
-Without the map, troubleshooting an incident often means pivoting between several Datadog products. Each product has its own query syntax and field names, and the same resource can appear in more than one of them.
+The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to see what a resource runs on, inspect its upstream and downstream connections, and investigate network performance between a source and a destination. One search covers services, containers, pods, and hosts, so you can investigate across products without using each product's query syntax.
 
 The map helps you narrow an investigation to a specific resource or connection. From there, open the resource or connection in its product, such as APM, Kubernetes, Cloud Network Monitoring (CNM), or Network Path, to examine the underlying data.
 
@@ -38,38 +36,28 @@ The layers, relationships, and metrics on the map depend on the data that Datado
 
 <!-- TODO: Add overview screenshot from the demo org (single resource view with full composition stack). -->
 
-### Investigation modes
-
-The L1/L7 Map supports two investigation modes:
-
-Single resource
-: Start with one service, container, pod, or host. The map shows what the resource runs on, what runs on it, and its upstream and downstream connections.
-
-Source/destination pair
-: Select a source and a destination. The map shows the resources that each one runs on, the traffic observed between them, and the hop-by-hop network path, if available.
-
 ## Prerequisites
 
-The L1/L7 Map has no Agent version requirement of its own. It builds the map from data that other Datadog products collect, so follow the Agent and platform requirements for each product.
+The L1/L7 Map has no Agent version requirement of its own. It builds the map from data that the following Datadog products collect. Follow the Agent and platform requirements for each product that you use.
 
-- Your organization must have access to the Preview.
-- [Cloud Network Monitoring][1] must be set up on the workloads you want to investigate. CNM data is required to draw the map. Network Path data on its own does not populate the map. Before you use the map, open CNM and check that it shows traffic for the resources you want to investigate.
-
-The following products are optional. Each one adds context to the map:
-
-| Product | What it adds to the map |
-|---|---|
-| [APM][2] | The service layer. Without APM, start your investigation from a host, pod, or container. |
-| [Container Monitoring][3] | The container layer. Workloads that do not run in containers do not have this layer. |
-| [Kubernetes][4] | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
-| [Network Path][5] | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
-| [Network Device Monitoring][6] (NDM) | Device details for a network path hop that is a monitored network device. |
+| Product | Required | What it adds to the map |
+|---|---|---|
+| [Cloud Network Monitoring][1] | Yes | The connections between resources and the composition stack for each resource. The map cannot be drawn without CNM data, including when Network Path data is available. |
+| [APM][2] | No | The service layer. Without APM, start your investigation from a host, pod, or container. |
+| [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
+| [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
+| [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
+| [Network Device Monitoring][6] (NDM) | No | Device details for a network path hop that is a monitored network device. |
 
 <!-- TODO: Confirm the Preview enrollment process and whether any RBAC permissions are required to view the map. -->
 
-## Open the map
+## Set up the L1/L7 Map
 
-Navigate to [**Network Monitoring > L1/L7**][7].
+1. [Set up Cloud Network Monitoring][8] on the workloads you want to investigate.
+1. In CNM, check that traffic appears for a resource or source/destination pair that you want to investigate.
+1. Optionally, set up the other products in the [Prerequisites](#prerequisites) section to add context to the map. If you set up Network Path, check that the path between your source and destination appears in Network Path.
+1. Navigate to [**Network Monitoring > L1/L7**][7].
+1. Select a resource and a time frame in which CNM observed traffic. Check that the resource's composition stack and connections appear on the map.
 
 <!-- TODO: Confirm final navigation path and URL.
 
@@ -87,15 +75,28 @@ You can also open the map from other Datadog products. When you open the map fro
 | Infrastructure List | The **Network** tab of a host's side panel. |
 -->
 
-## Read the map
+## Explore the L1/L7 Map
 
-The map shows two kinds of relationships:
+### Investigation modes
 
-Composition
-: What runs on what. For example, a service runs on containers, which run in pods, which run on hosts. The map shows composition as a vertical stack in a fixed order, from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Containers are split into **App containers** and **Sidecar containers**, such as an Envoy proxy. Layers that do not apply to a resource are skipped. A composition relationship is not a measured network connection.
+The L1/L7 Map has two investigation modes:
 
-Connections
-: Observed communication and network path measurements. CNM provides the traffic between resources, and Network Path provides the tested route between them. In single resource mode, CNM and Network Path data for the same connection can be combined into one line. Hover over the line to see which signals it includes.
+Single resource
+: Start with one service, container, pod, or host. The map shows what the resource runs on, what runs on it, and its upstream and downstream connections. See [Investigate a single resource](#investigate-a-single-resource).
+
+Source/destination pair
+: Select a source and a destination. The map shows the resources that each one runs on, the traffic observed between them, and the hop-by-hop network path, if available. See [Investigate a connection between two resources](#investigate-a-connection-between-two-resources).
+
+### Composition and connections
+
+The map shows two types of relationships between resources:
+
+- **Composition**: Where a resource runs. For example, a service runs on containers, the containers run in pods, and the pods run on hosts. Composition is not network traffic.
+- **Connections**: Network communication between resources. CNM provides the observed traffic, and Network Path provides the tested route.
+
+The map shows composition as a vertical stack, in this order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Containers are split into **App containers** and **Sidecar containers**, such as an Envoy proxy. Layers that do not apply to a resource are skipped.
+
+Connections appear as lines between resources. In single resource mode, when CNM and Network Path both have data for the same connection, the map combines the data into one line. Hover over a line to see which signals it includes.
 
 To keep the map readable, each group shows a limited number of resources and connections and collapses the rest into a **+N more** item. Click **+N more** to see the rest. Use the zoom controls to zoom in on a section of the map, or to fit the map to the screen.
 
@@ -103,13 +104,13 @@ To keep the map readable, each group shows a limited number of resources and con
 
 The color of a resource or connection shows its status:
 
-- **Red**: Critical or down.
-- **Orange**: Warning.
-- **Gray**: No issue detected.
+- **Red**: Critical or down
+- **Orange**: Warning
+- **Gray**: No issue detected
 
 Resources are ranked by status, so the resources with the most severe status appear at the top of each group.
 
-In the Preview, map status is based on network signals:
+Map status is based on the following network signals:
 
 - **From CNM**: Round-trip time (RTT), TCP retransmits, TCP failures, and throughput.
 - **From Network Path**: Reachability, end-to-end latency, and packet loss.
@@ -118,7 +119,7 @@ The map shows only the signals that are available for each resource or connectio
 
 Map status is not a complete assessment of a resource's health. To investigate application errors, pod state, or host utilization, open the resource in its own product. A red resource is a starting point for an investigation, not proof that it caused the issue. Hover over the resource to see which signal is degraded.
 
-<!-- TODO: Confirm color meanings and the signals that determine status for the Preview. -->
+<!-- TODO: Confirm color meanings and the signals that determine status. -->
 
 ## Investigate a single resource
 
@@ -206,19 +207,11 @@ The side pane shows the status of the source and the destination, the network si
 
 <!-- TODO: Add screenshot of the network path segment hover summary. -->
 
-## Preview limitations
-
-- CNM data is required. The map cannot be drawn from Infrastructure Monitoring data or Network Path data alone.
-- The map shows only what Datadog observed during the selected time frame. A missing connection or hop does not mean that an outage occurred or that no dependency exists.
-- Network devices appear only as hops on a network path. You cannot start an investigation from a network device.
-- The map does not compare forward and reverse paths, compare paths over time, detect route changes, or correlate deployments with network changes.
-- The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][12].
-
 ## Troubleshooting
 
 ### The map is not available
 
-Check that your organization has access to the Preview. If you still cannot access the map, contact [Datadog Support][13].
+Check that your organization has access to the Preview. If you still cannot access the map, contact [Datadog Support][12].
 
 ### The map is empty
 
@@ -226,7 +219,7 @@ The map is empty when CNM has no traffic data for the selected resource or pair 
 
 1. If CNM is not set up for the workloads, [set up Cloud Network Monitoring][8].
 1. If CNM is set up, open the resource or pair in CNM and find a time frame with traffic. Select the same time frame on the map.
-1. If CNM shows traffic but the map is still empty, contact [Datadog Support][13]. Include the resource names and the time frame.
+1. If CNM shows traffic but the map is still empty, contact [Datadog Support][12]. Include the resource names and the time frame.
 
 Network Path data on its own does not populate the map.
 
@@ -269,5 +262,4 @@ Compare the same resource or pair over the same time frame, and check which sign
 [9]: /agent/
 [10]: /network_monitoring/network_path/setup/
 [11]: /network_monitoring/devices/setup/
-[12]: /network_monitoring/devices/topology/
-[13]: /help/
+[12]: /help/
