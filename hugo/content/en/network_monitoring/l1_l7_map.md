@@ -21,6 +21,8 @@ site_support_id: network_l1_l7_map
 The L1/L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
 
+<!-- TODO: All images on this page are placeholders cropped from the staging prototype. Replace them with final demo-org screenshots. -->
+
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
 
 <!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DOWN, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
@@ -31,7 +33,7 @@ The L1/L7 Map brings application, infrastructure, and network context into one m
 
 The map combines data from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM). After you narrow an investigation to a specific resource or connection, open it in its own product to examine the underlying data.
 
-<!-- TODO: Add overview screenshot from the demo org (single resource view with full composition stack). -->
+{{< img src="network_performance_monitoring/l1_l7_map/map-overview.png" alt="The L1/L7 Map in single resource mode, showing a service with its upstream and downstream resources, its composition stack, and the details pane" >}}
 
 ## Prerequisites
 
@@ -54,6 +56,8 @@ Before you use the map, open CNM and check that traffic appears for the resource
 
 ### Investigation modes
 
+{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 landing page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
+
 The L1/L7 Map has two investigation modes:
 
 Single resource
@@ -69,6 +73,8 @@ The map shows two types of relationships between resources:
 - **Composition**: Where a resource runs. For example, a service runs on containers, the containers run in pods, and the pods run on hosts. Composition is not network traffic.
 - **Connections**: Network communication between resources. CNM provides the observed traffic, and Network Path provides the tested route.
 
+{{< img src="network_performance_monitoring/l1_l7_map/single-resource-map.png" alt="An explored container in the center of the map, with the services that run on it above, upstream resources on the left, and downstream resources on the right" >}}
+
 The map shows composition as a vertical stack, in this order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Containers are split into **App containers** and **Sidecar containers**, such as an Envoy proxy. Layers that do not apply to a resource are skipped.
 
 In single resource mode, the map centers on the selected resource, called the _explored resource_, and highlights it. The explored resource's composition stack appears in the center of the map:
@@ -80,14 +86,12 @@ In single resource mode, the map centers on the selected resource, called the _e
 
 When you explore a service, the stack shows the containers, pods, and hosts that the service runs on. When you explore a container, pod, or host, the stack also shows the services that run on it.
 
-<!-- TODO: Add screenshot of the single resource view (upstream, composition stack, downstream). -->
+{{< img src="network_performance_monitoring/l1_l7_map/source-destination-map.png" alt="Source/destination pair mode, showing the composition stacks of two containers side by side with the network connection between them" >}}
 
 In source/destination pair mode, the map shows the source's composition stack on the left and the destination's on the right. Between them, the map shows:
 
 - **Network connections**: Traffic observed by CNM between resources in the two stacks, such as container to container.
 - **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. Hops in the same autonomous system (AS) are grouped. For example, a group labeled **AS64512** can contain three hops.
-
-<!-- TODO: Add screenshot of the source/destination pair view. -->
 
 To keep the map readable, each group shows a limited number of resources and connections and collapses the rest into a **+N more** item.
 
@@ -108,7 +112,7 @@ Map status is based on the following network signals:
 
 The map shows only the signals that are available for each resource or connection. Hover over a resource or connection to see which signal set its status.
 
-Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in its own product.
+Map status is not a complete assessment of a resource's health. A red resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in APM, the Kubernetes Explorer, or the Infrastructure List.
 
 <!-- TODO: Confirm color meanings and the signals that determine status. -->
 
@@ -139,12 +143,12 @@ On the L1/L7 page, select a mode:
 - **Single resource**: In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list.
 - **Source/destination pair**: Search for and select a **Source** and a **Destination**.
 
-<!-- TODO: Add screenshot of the L1/L7 landing page with the search dropdown open. -->
+{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 landing page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
 
 After the map loads, you can change what it shows:
 
-- To add a destination to the explored resource, click **Add destination** and select a destination. The map switches to source/destination pair mode.
-- To remove the source or destination, click the **X** next to it.
+- To add a destination to the explored resource, click **Add destination**, next to the search field at the top of the map, and select a destination. The map switches to source/destination pair mode.
+- To remove the source or destination, click the **X** at the end of its search field.
 - To explore a different resource or connection, use **Explore** or **Explore connection**. For details, see the [Inspect resources and connections](#inspect-resources-and-connections) section.
 - To change the time frame, use the time picker.
 - To zoom in on a section of the map, or to fit the map to the screen, use the zoom controls.
@@ -152,14 +156,22 @@ After the map loads, you can change what it shows:
 
 ### Inspect resources and connections
 
-Hover over any item on the map to see a summary of it. From the summary, you can filter the map, explore the item, or open it in its product.
+Hover over any item on the map to see a summary of it. The actions available from the summary depend on the type of item.
 
-**Resources**: The summary shows the resource's type, status, and available metrics.
+#### Resource summaries
+
+The summary for a resource shows its type, status, and available metrics. From the summary, you can:
 
 - Click **Filter** to filter the map to the resources related to that resource. To clear the filter, click the **X** next to **Filtered to** at the top of the map.
 - Click **Explore** to make that resource the explored resource. The map redraws around it.
 
-**Connections**: The summary shows the connection's network signals, such as:
+<!-- TODO: Confirm whether clicking a resource also offers "use as source" and "use as destination" options, as described in the product brief. -->
+
+{{< img src="network_performance_monitoring/l1_l7_map/resource-hover-summary.png" alt="A hover summary for a container, showing its status, CPU, memory, and packet drops, with Filter and Explore buttons" >}}
+
+#### Connection summaries
+
+The summary for a connection shows its network signals, such as:
 
 - **Retransmits**: The percentage of TCP packets that were retransmitted.
 - **TCP failures**: The number of failed TCP connections.
@@ -168,24 +180,48 @@ Hover over any item on the map to see a summary of it. From the summary, you can
 
 From the summary, click **Explore connection** to open the connection in source/destination pair mode, or click **View connection in CNM** to open it in Cloud Network Monitoring. To see a list of the individual connections that a line represents, click the line or its **+N more** item.
 
-**Network path segments**: The summary shows the segment's **Reachability**, **End-to-end latency**, and **Packet loss**. Click **Explore connection** to filter the map to that segment, or click **View connection in Network Path** to open it in Network Path. To see the hops in an AS group and their status, such as **OK** or **UNREACHABLE**, click the group.
+{{< img src="network_performance_monitoring/l1_l7_map/connection-hover-summary.png" alt="A hover summary for a connection between two containers, showing retransmits, TCP failures, throughput, and RTT" >}}
 
-<!-- TODO: Confirm whether clicking a resource also offers "use as source" and "use as destination" options, as described in the product brief. -->
+#### Network path segment summaries
 
-<!-- TODO: Add screenshots of the resource, connection, and network path segment hover summaries. -->
+The summary for a network path segment shows its **Reachability**, **End-to-end latency**, and **Packet loss**. Click **Explore connection** to filter the map to that segment, or click **View connection in Network Path** to open it in Network Path. To see the hops in an AS group and their status, such as **OK** or **UNREACHABLE**, click the group.
+
+{{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
 
 ### Resource and connection details
 
-The side pane to the right of the map shows details for the explored or filtered resource:
+The details pane, to the right of the map, shows details for the explored resource, the filtered resource, or the connection between a source and a destination. The content of the pane depends on the investigation mode.
+
+#### Resource details
+
+In single resource mode, the details pane shows the following for the explored or filtered resource:
 
 - The resource's status, such as **CRITICAL** or **DOWN**.
-- **View details**, which opens the resource's side panel. This is the same side panel that the resource has in other Datadog products, such as the container side panel or the host side panel.
+- **View details**, which opens the resource's side panel over the map, with more data about the resource, such as its logs and traces.
 - A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a container. Use the dropdown next to the link to see other destinations.
 - Infrastructure context, such as the availability zone, VPC, data center, and security groups.
 - The available metrics for the resource, and a graph of network metrics, such as RTT, over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
 
-In source/destination pair mode, the side pane shows the status of the source and the destination, the network signals for the connection between them, a graph of network metrics over time, and the related resources on both sides. Click **View connections** to open the connections in CNM.
+{{< img src="network_performance_monitoring/l1_l7_map/filtered-resource-side-pane.png" alt="The details pane for a filtered container, showing its status, links to view details and open it in Kubernetes, infrastructure context, metrics, and an RTT graph" >}}
+
+#### Connection details
+
+In source/destination pair mode, the details pane shows the following for the connection between the source and the destination:
+
+- The status of the source and the destination, such as **UP** or **DOWN**.
+- **View connections**, which opens the connections in CNM. Use the dropdown next to the link to see other destinations.
+- The network signals for the connection: retransmits, TCP failures, sent and received throughput, and RTT.
+- A graph of network metrics, such as RTT, over the selected time frame.
+- **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
+
+When you select an item on the map, the details pane shows that item instead:
+
+- **A connection or a +N more item**: A searchable list of the individual network connections.
+- **An AS group**: The hops in the group and their status, such as **OK** or **UNREACHABLE**.
+- **A filtered network path segment**: The segment's reachability, end-to-end latency, and packet loss, and a link to open it in Network Path.
+
+{{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in source/destination pair mode, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
 
 ## Investigate an issue with the L1/L7 Map
 
@@ -196,7 +232,7 @@ In source/destination pair mode, the side pane shows the status of the source an
 1. Review the upstream and downstream resources and the composition stack. Hover over any red or orange resource or connection to see which signal is degraded.
 1. To check whether the issue comes from the infrastructure that the resource runs on, click **Explore** on a degraded container, pod, or host. The map redraws around it and shows which other services run on it and which resources it communicates with.
 1. To check whether the issue is in a connection, click **Explore connection** on a degraded connection.
-1. When you find a likely cause, click **View details**, or open the resource in its product, to continue the investigation.
+1. When you find a likely cause, continue the investigation from the details pane. Click **View details** to open the resource's side panel, or click the link to open the resource in its product, such as **View in APM**.
 
 ### Find where a connection degrades
 
