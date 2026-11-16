@@ -51,7 +51,7 @@ The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the
              memory: "1Gi"
    ```
 
-   The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix with your preferred registry prefix. See [Changing your container registry][2].
+   The preview image is available in Datadog's container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix with your preferred registry prefix. See [Changing your container registry][2].
 
 2. Upgrade your existing Datadog Agent Helm release with the updated values. Adapt this command to your Helm or GitOps workflow, and include any existing values files you already use for the release:
 
