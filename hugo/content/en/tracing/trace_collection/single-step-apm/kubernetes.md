@@ -433,6 +433,8 @@ For each pod, Datadog evaluates instrumentation rules in the following order and
 
 If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
+Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For the full order, see the [Configuration precedence](#configuration-precedence) section.
+
 #### Exceptions to instrumentation rules
 
 The following pods are not instrumented, even if they match an allow rule:
@@ -441,8 +443,6 @@ The following pods are not instrumented, even if they match an allow rule:
 - Pods in the namespace where the Datadog Agent is installed
 - Pods in namespaces listed in `disabledNamespaces`
 - Pods labeled `admission.datadoghq.com/enabled: "false"`
-
-Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For example, with {{< ui >}}Block everything else{{< /ui >}}, a pod with SDK annotations, or a workload whose `DatadogInstrumentation` resource enables APM, is still instrumented. For the full order, see the [Configuration precedence](#configuration-precedence) section.
 
 #### Supported Kubernetes attributes
 
