@@ -57,7 +57,7 @@ Learn more about the [compatibility requirements][6].
     1. Select the {{< ui >}}Account{{< /ui >}} dropdown menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
         - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location. The {{< ui >}}Location{{< /ui >}} dropdown includes single-region, multi-region, and global options. For details on each option, see [Google's Vertex AI locations documentation][18].
-    1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model.
+    1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model. For a Baseten, Fireworks AI, or Together AI account, you can also type a model ID, such as the ID of a fine-tuned model. See [Choose a judge model](#choose-a-judge-model).
 1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by selecting the button to the right of the sampling rate.
 1. In the {{< ui >}}Template{{< /ui >}} section, use the dropdown menu:
    - {{< ui >}}Create from scratch{{< /ui >}}: Use your own custom prompt (defined in the next step).
@@ -108,6 +108,18 @@ Span Input: {{span_input}}
    3. Select {{< ui >}}\+{{< /ui >}} to add the JSON to your user prompt.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="The menu contents of the JSON view in the custom evaluator configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
+
+### Choose a judge model
+
+The judge model sets the quality and cost of each evaluation. Its provider sets which output types you can use in [Define the evaluation output](#define-the-evaluation-output). Before you publish, run the evaluator on sample spans with [Test and preview](#test-and-preview) to check that the model follows your rubric and output schema.
+
+#### Use open-weight models
+
+To use an open-weight model, such as DeepSeek, Qwen, GLM, or Llama, or a model you fine-tuned, connect a neocloud provider account. Baseten, Fireworks AI, and Together AI are supported. Then select the account, and select or type the model ID in the {{< ui >}}Model{{< /ui >}} dropdown menu.
+
+These models support Structured Output and Keyword Search Output. Structured Output support varies by model. If the model's responses do not match your output schema, use Keyword Search Output.
+
+For supported models, setup steps, and use cases, see [Neocloud Providers][21].
 
 ### Define the evaluation output
 
@@ -624,3 +636,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 [19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
 [20]: /llm_observability/investigate/evaluations/code_evaluations
+[21]: /llm_observability/investigate/evaluations/neocloud_providers
