@@ -36,7 +36,7 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    <div class="alert alert-info">A session is considered complete after 30 minutes of inactivity (no new spans for that session, measured from the most recent span), at which point the evaluation runs. Spans that arrive more than 30 minutes after the previous span are not included in the evaluation.</div>
 
-1. Add a {{< ui >}}Query{{< /ui >}} and {{< ui >}}Sampling Rate{{< /ui >}} to control which sessions are evaluated.
+1. Add a {{< ui >}}Query{{< /ui >}} and {{< ui >}}Sampling Rate{{< /ui >}} to control which sessions are evaluated. The query is matched against the root span of the session's first trace, which is the root span with the earliest start time.
 1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter the static instructions to the LLM judge—for example, the criteria the judge should use and the output it should produce. The System Prompt does not resolve `{{ ... }}` placeholders.
 1. In the {{< ui >}}User{{< /ui >}} message, write the prompt that injects session data using `{{traces...}}` paths. The autocomplete dropdown adapts to session scope and lists fields available on the selected sample session. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope—reference span data through the `traces` array instead. Common patterns:
 

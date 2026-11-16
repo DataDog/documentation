@@ -58,7 +58,7 @@ Two paths use the same [Datadog account][1]:
 - **Pup CLI**: Run `pup setup` from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
-[1]: /agentic_onboarding/setup
+[1]: /agentic_onboarding/
 
 {% tabs %}
 {% tab label="Pup CLI" %}
@@ -80,7 +80,7 @@ Use the Datadog MCP Server's [`serverless_onboarding`][2] tool. After you connec
 Help me monitor my Azure Container Apps services with Datadog
 ```
 
-[2]: /agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server
+[2]: /agentic_onboarding/?tab=serverlessmonitoring#mcp-server
 {% /tab %}
 {% /tabs %}
 

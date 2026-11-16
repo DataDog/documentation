@@ -11,9 +11,12 @@ further_reading:
 - link: /security/cloud_siem/triage_and_investigate/ioc_explorer/
   tag: documentation
   text: IOC Explorer
-- link: "/security/cloud_siem/guide/ingest-stix-threat-intelligence/"
+- link: "/security/cloud_siem/ingest_and_enrich/stix_threat_intelligence/"
   tag: "Documentation"
   text: "Ingest STIX Threat Intelligence"
+- link: "/security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence/"
+  tag: "Documentation"
+  text: "Ingest TAXII Threat Intelligence"
 - link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
   tag: "Blog"
   text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
@@ -28,7 +31,7 @@ Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This art
 
 Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
-<div class="alert alert-info">You can also push indicators programmatically as STIX 2.1 bundles instead of uploading CSVs. See <a href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/">Ingest STIX Threat Intelligence</a>.</div>
+<div class="alert alert-info">You can also push indicators programmatically as STIX 2.1 bundles instead of uploading CSVs. See <a href="/security/cloud_siem/ingest_and_enrich/stix_threat_intelligence/">Ingest STIX Threat Intelligence</a>. To have Datadog poll a TAXII 2.1 server for you instead, see <a href="/security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence/">Ingest TAXII Threat Intelligence</a>.</div>
 
 ### How bring your own threat intelligence works
 
@@ -37,11 +40,12 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
 1. For each log, Datadog extracts the relevant attributes:
     - **IPs**: IPv4 and IPv6 addresses found anywhere in the log.
     - **Domains and hostnames**: The values in the following attributes (when present):
-      - `DNS_QUESTION_NAME`
-      - `DNS_ANSWER_NAME`
-      - `HTTP_URL`
-      - `HTTP_URL_DETAILS_DOMAIN`
-      - `HOSTNAME`
+      - `dns.question.name`
+      - `dns.answer.name`
+      - `http.url`
+      - `http.url_details.domain`
+      - `http.url_details.host`
+      - `hostname`
     - **File hashes**: SHA1, SHA256, and ssdeep hashes found in file- and process-related log attributes.
     - **AWS account IDs**: Values from AWS-related log attributes (for example, `userIdentity.accountId`).
     - **Container image names**: Values from container runtime logs.

@@ -8,65 +8,64 @@ code_lang_weight: 0
 further_reading:
 - link: /continuous_integration/tests
   tag: Documentación
-  text: Exploración de los resultados de tests y del rendimiento
+  text: Explorar resultados de pruebas y rendimiento
 - link: /continuous_integration/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de CI Visibility
+  text: Solución de problemas de CI Visibility
 title: Test Impact Analysis para Go
-type: lenguaje de código múltiple
+type: multi-code-lang
 ---
+## Compatibilidad {#compatibility}
 
-## Compatibilidad
+Test Impact Analysis requiere `ddtest >= 1.14.0`.
 
-Test Impact Analysis sólo es compatible con `orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`.
+## Configuración {#setup}
 
-## Configuración
+### Test Optimization {#test-optimization}
 
-### Optimización de tests
-
-Antes de configurar Test Impact Analysis, configura la [Test Optimization para Go][1]. Si informas de los datos a través del Agent, utiliza v6.40 y posteriores o v7.40 y posteriores.
+Antes de configurar Test Impact Analysis, configure [Test Optimization for Go][1]. Si envía datos mediante el Agent, use la versión v6.40 o posterior, o la versión v7.40 o posterior.
 
 {{% ci-itr-activation-instructions %}}
 
-## Ejecutar tests con Test Impact Analysis activado
+## Ejecute pruebas con Test Impact Analysis habilitado {#run-tests-with-test-impact-analysis-enabled}
 
-Después de completar la configuración, ejecuta tus tests utilizando `go test` con las siguientes opciones de cobertura de código:
+Después de completar la configuración, ejecute sus pruebas usando `ddtest instrument go test` con las siguientes opciones de cobertura de código:
 
 ```bash
-orchestrion go test ./... -cover -covermode=count -coverpkg ./...
+ddtest instrument go test -cover -covermode=count -coverpkg=./... ./...
 ```
 
-1. `-cover`: la función de Test Impact Analysis utiliza el procesador de cobertura de código integrado de Go, por lo que es necesario activar la recopilación de cobertura de código en el comando `go test`.
+1. `-cover`: La función Test Impact Analysis utiliza el procesador de cobertura de código integrado de Go, por lo que debe habilitar la recopilación de cobertura de código en el comando `go test`.
 
-2. `-covermode`: debe ser `count` o `atomic`. Dado que `set` no es compatible, al establecer este valor se desactiva Test Impact Analysis.
+2. `-covermode`: debe ser `count` o `atomic`. Debido a que `set` no es compatible, establecer este valor deshabilita Test Impact Analysis.
 
-3. `-coverpkg`: el análisis de cobertura de código para cada test debe configurarse para que se aplique en todas las dependencias de paquete y no sólo para el paquete que se está probando. De esta manera, si una dependencia cambia, se puede realizar un seguimiento del test afectado por este cambio. Si ejecutas el comando del test desde la raíz del proyecto (donde se encuentra el archivo go.mod), puedes utilizar el comodín `./...`. En caso contrario, deberás enumerar manualmente todas las dependencias de paquete separadas por comas (`pattern1, pattern2, pattern3, ...`). Para ello, puedes utilizar el comando `go list ./...` para obtener todos los nombres de paquete.
+3. `-coverpkg`: el análisis de cobertura de código para cada prueba debe configurarse para aplicarse en todas las dependencias del paquete y no solo para el paquete que se está probando. De esta manera, si una dependencia cambia, puede rastrear la prueba afectada por este cambio. Si ejecuta el comando de prueba desde la raíz del proyecto (donde se encuentra el archivo go.mod), puede usar el comodín `./...`. Si no, debe listar manualmente todas las dependencias del paquete separadas por comas (`pattern1, pattern2, pattern3, ...`). Para ello, podría usar el comando `go list ./...` para obtener todos los nombres de los paquetes.
 
-<div class="alert alert-danger">Tener un valor -coverpkg incorrecto afecta a la capacidad de Test Impact Analysis para realizar un seguimiento correcto de la cobertura de los tests.</div>
+<div class="alert alert-danger">Un valor incorrecto de -coverpkg afecta la capacidad de Test Impact Analysis para rastrear correctamente la cobertura de las pruebas.</div>
 
-## Desactivar la omisión de tests específicos
+## Deshabilitar la omisión para pruebas específicas {#disable-skipping-for-specific-tests}
 
-Puedes anular el comportamiento de Test Impact Analysis y evitar que se omitan tests específicos. Estos tests se denominan tests no omitibles.
+Puede anular el comportamiento de Test Impact Analysis y evitar que se omitan pruebas específicas. Estas pruebas se denominan pruebas no omitibles.
 
-### ¿Por qué no se pueden omitir los tests?
+### ¿Por qué marcar pruebas como no omitibles? {#why-make-tests-unskippable}
 
-Test Impact Analysis utiliza datos de cobertura de código para determinar si deben omitirse tests o no. En algunos casos, estos datos pueden no ser suficientes para tomar esta determinación.
+Test Impact Analysis utiliza datos de cobertura de código para determinar si las pruebas deben omitirse o no. En algunos casos, estos datos pueden no ser suficientes para determinarlo.
 
-Algunos ejemplos son:
+Algunos ejemplos incluyen:
 
-- Tests que leen datos de archivos de texto.
-- Tests que interactúan con APIs ajenas al código que se está testeando (como las APIs REST remotas).
-- Designar los tests como no omitibles garantiza que Test Impact Analysis los ejecute independientemente de los datos de cobertura.
+- Pruebas que leen datos de archivos de texto.
+- Pruebas que interactúan con APIs fuera del código que se está probando (como APIs REST remotas).
+- Designar pruebas como no omitibles garantiza que Test Impact Analysis las ejecute independientemente de los datos de cobertura.
 
-### Marcar tests como no omitibles
+### Marcar pruebas como no omitibles {#marking-tests-as-unskippable}
 
-#### Caso de test individual
+#### Caso de prueba individual {#individual-test-case}
 
-Añadr el comentario `//dd:test.unskippable` a tu caso de test para marcarlo como no omitible.
+Agregue el comentario `//dd:test.unskippable` a su caso de prueba para marcarlo como no omitible.
 
 ```go
 import (
-    "testing"
+	"testing"
 )
 
 //dd:test.unskippable
@@ -76,15 +75,15 @@ func TestMyCustomTest(t *testing.T) {
 
 ```
 
-#### Conjunto de tests
+#### Conjunto de pruebas {#test-suite}
 
-Añade el comentario `//dd:suite.unskippable` al principio del archivo para marcarlo como no omitible.
+Agregue el comentario `//dd:suite.unskippable` al principio del archivo para marcarlo como no omitible.
 
-Si un conjunto está marcado como no omitible, ninguno de los casos de test de ese conjunto puede ser omitido por Test Impact Analysis.
+Si un conjunto de pruebas está marcado como no omitible, Test Impact Analysis no puede omitir ninguno de sus casos de prueba.
 
 ```csharp
 import (
-    "testing"
+	"testing"
 )
 
 //dd:suite.unskippable
@@ -98,7 +97,7 @@ func TestMyCustomTest2(t *testing.T) {
 }
 ```
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

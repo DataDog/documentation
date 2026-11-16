@@ -5,7 +5,7 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamDocsAiChat } from './docsai-client';
+import { sendDocsAiFeedback, streamDocsAiChat } from './docsai-client';
 import { pickQuestions } from './suggested-questions';
 import { ActivityTimeline } from './activity';
 
@@ -814,6 +814,7 @@ class ConversationalSearch {
 
         let partial = '';
         let serverError = null;
+        let feedbackToken = null;
         let lastRenderTime = 0;
 
         let answer;
@@ -838,6 +839,9 @@ class ConversationalSearch {
                 },
                 onServerError: (event) => {
                     serverError = event;
+                },
+                onFeedbackToken: (token) => {
+                    feedbackToken = token;
                 },
                 onToken: (_token, fullMessage) => {
                     partial = fullMessage;
@@ -895,7 +899,7 @@ class ConversationalSearch {
         activity.dispatch({ type: 'done' });
         contentDiv.hidden = false;
         this.chatHistory.push({ role: 'assistant', content: answer });
-        this.finalizeResponse(contentDiv, query, answer, startTime, activity.summary());
+        this.finalizeResponse(contentDiv, query, answer, startTime, activity.summary(), { feedbackToken });
     }
 
     handleStoppedTurn(turn, query, partial, startTime) {
@@ -950,6 +954,16 @@ class ConversationalSearch {
         this.scrollToBottom();
     }
 
+    // Failures are logged, then rethrown so the buttons can show them and let the reader retry.
+    feedbackSender(token) {
+        const conversationId = this.conversationId;
+        return (feedback) => sendDocsAiFeedback({ config: docsAiConfig, token, conversationId, ...feedback })
+            .catch((error) => {
+                this.logErr('Docs AI Feedback Error', error);
+                throw error;
+            });
+    }
+
     // An unanswered question is not sent back as history, so a retry or follow-up starts clean.
     dropUnansweredQuery(query) {
         const last = this.chatHistory[this.chatHistory.length - 1];
@@ -958,13 +972,16 @@ class ConversationalSearch {
 
     // --- Shared finalization -----------------------------------------------------
 
-    finalizeResponse(container, query, answer, startTime, activitySummary = {}, { log = true } = {}) {
+    finalizeResponse(container, query, answer, startTime, activitySummary = {}, { log = true, feedbackToken = null } = {}) {
         container.innerHTML = renderMessageWithSources(answer, {
             attachTooltips,
             buildSourceCards
         });
         injectCodeCopyButtons(container, this.ctx);
-        addMessageActions(container.parentElement, query, answer, this.ctx);
+        addMessageActions(container.parentElement, query, answer, {
+            ...this.ctx,
+            sendFeedback: feedbackToken ? this.feedbackSender(feedbackToken) : null
+        });
         this.scrollToBottom();
         if (log) this.logResponse({ query, answer, startTime, activitySummary });
     }

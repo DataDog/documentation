@@ -33,12 +33,12 @@ For agentless configuration delivery, install the Datadog .NET tracer version **
 
 Set these environment variables in the application process before startup:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_API_KEY=<YOUR_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 Use a Datadog [API key][5] and the site that hosts your organization, such as `datadoghq.com`. No Feature Flags enablement or source setting is required for a new setup. Initialize the Datadog OpenFeature provider in your application to start polling; installing or initializing the tracer alone does not start CDN polling. Evaluations use locally cached configuration and do not make network requests.
 

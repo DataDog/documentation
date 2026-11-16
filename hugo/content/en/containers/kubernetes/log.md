@@ -4,9 +4,6 @@ description: Configure log collection from containerized applications running on
 aliases:
   - /agent/kubernetes/log
 further_reading:
-- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
-  tag: Blog
-  text: Monitor logs from Amazon EKS on Fargate with Datadog
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
@@ -25,6 +22,12 @@ further_reading:
 - link: "/containers/troubleshooting/log-collection"
   tag: "Documentation"
   text: "Container Log Collection Troubleshooting"
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitor logs from Amazon EKS on Fargate with Datadog
+- link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+  tag: "Blog"
+  text: "Manage Kubernetes observability with DatadogInstrumentation"
 - link: "https://www.datadoghq.com/architecture/monitoring-container-apps-logs/"
   tag: "Architecture Center"
   text: "Monitoring Container Apps - Logs"

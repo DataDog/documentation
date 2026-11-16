@@ -17,3 +17,9 @@ entries:
       - UpdateIssueAssignee
       - UpdateIssueState
     title: Add samples to the Get error tracking issue endpoint
+  - change_type: added
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41723
+    operations:
+      - GetIssueImpact
+    title: Document the GetIssueImpact preview endpoint for Error Tracking

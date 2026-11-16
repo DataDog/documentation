@@ -1,3 +1,3 @@
 ---
-title: Rum Retention Filters
+title: RUM Retention Filters
 ---

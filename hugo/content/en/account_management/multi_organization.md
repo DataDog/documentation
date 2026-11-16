@@ -30,6 +30,8 @@ It is possible to manage multiple child-organizations from one parent-organizati
 
 The multi-organization account feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
 
+To decide whether to use one organization or several, see [Organization Topology][15].
+
 ## Capabilities
 
 Users can be added to the parent-organization and multiple child-organizations. Users switch between organizations from the [user account settings menu][2]. 
@@ -50,10 +52,13 @@ Account settings, such as allow-listed IP addresses, are not inherited by child-
     - Enter one or more email addresses.
     - Invited users are assigned the [Datadog Admin role][5]. You can invite more users in
 Organization Settings after creating your organization.
+    - Users are added to one organization at a time. To give a user access to several child-organizations, invite them to each child-organization separately.
     - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
 4. Click {{< ui >}}Create{{< /ui >}}.
 
 The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][6].
+
+A child-organization is created on the same [Datadog site][16] as its parent-organization. To bring organizations on other Datadog sites under the same billing account, [contact your sales representative][6].
 
 ### Content
 
@@ -174,3 +179,5 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [12]: /account_management/plan_and_usage/usage_details/
 [13]: /account_management/billing/usage_attribution/
 [14]: https://app.datadoghq.com/billing/usage-attribution
+[15]: /account_management/organization_topology/
+[16]: /getting_started/site/

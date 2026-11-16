@@ -1,10 +1,10 @@
 ---
 further_reading:
 - link: /serverless/guide/disable_serverless
-  tag: 문서
+  tag: 설명서
   text: Serverless Monitoring 비활성화
 - link: /opentelemetry/setup/otlp_ingest/serverless/?tab=azure#azure-functions
-  tag: 문서
+  tag: 설명서
   text: OTLP를 사용하여 Azure Functions 트레이스를 Datadog으로 전송
 - link: http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/
   tag: 블로그
@@ -32,7 +32,7 @@ title: Azure Functions용 Serverless Monitoring 설치
 
 {{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
 {{< programming-lang lang="nodejs" >}}
-1. **종속성 설치**. 다음 명령을 실행합니다.
+1. **종속성을 설치합니다**. 다음 명령을 실행합니다.
    ```shell
    npm install @datadog/serverless-compat
    npm install dd-trace
@@ -40,8 +40,8 @@ title: Azure Functions용 Serverless Monitoring 설치
 
    Datadog은 기능 향상 및 버그 수정을 위해 패키지 버전을 고정하고 `@datadog/serverless-compat` 및 `dd-trace`의 최신 버전으로 정기적으로 업그레이드할 것을 권장합니다.
 
-2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Node.js SDK를 초기화하세요**.
-   
+2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Node.js SDK를 초기화합니다**.
+
    `--require` 옵션을 사용하여 한 단계로 Serverless Compatibility Layer와 Datadog Node.js SDK를 로드하고 초기화하세요. Azure Functions의 Node 옵션은 환경 변수 `languageWorkers__node__arguments`를 사용하여 구성할 수 있습니다.
 
    ```
@@ -55,7 +55,7 @@ title: Azure Functions용 Serverless Monitoring 설치
 [1]:/ko/tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
-1. **종속성 설치**. 다음 명령을 실행합니다.
+1. **종속성을 설치합니다**. 다음 명령을 실행합니다.
    ```shell
    pip install datadog-serverless-compat
    pip install ddtrace
@@ -63,7 +63,7 @@ title: Azure Functions용 Serverless Monitoring 설치
 
    Datadog은 기능 향상 및 버그 수정을 위해 `datadog-serverless-compat` 및 `ddtrace`의 최신 버전을 사용할 것을 권장합니다.
 
-2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Python SDK를 초기화하세요**. 메인 애플리케이션 진입점 파일에 다음 줄을 추가합니다.
+2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Python SDK를 초기화합니다**. 메인 애플리케이션 진입점 파일에 다음 줄을 추가합니다.
 
    ```python
    from datadog_serverless_compat import start
@@ -79,7 +79,7 @@ title: Azure Functions용 Serverless Monitoring 설치
 [1]:/ko/tracing/trace_collection/library_config/python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-1. **종속성 설치**. Datadog JAR을 다운로드하고 함수와 함께 배포하세요.
+1. **종속성을 설치합니다**. Datadog JAR을 다운로드하고 함수와 함께 배포하세요.
    ```bash
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
@@ -88,7 +88,7 @@ title: Azure Functions용 Serverless Monitoring 설치
 
    Datadog은 기능 향상 및 버그 수정을 위해 `dd-serverless-compat-java-agent` 및 `dd-java-agent`의 최신 버전으로 정기적으로 업그레이드할 것을 권장합니다.
 
-2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Java SDK를 초기화하세요**. 다음 `-javaagent` 인수를 JVM 옵션에 추가합니다.
+2. **Datadog Serverless Compatibility Layer를 시작하고 Datadog Java SDK를 초기화합니다**. 다음 `-javaagent` 인수를 JVM 옵션에 추가합니다.
 
    ```bash
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
@@ -105,14 +105,14 @@ title: Azure Functions용 Serverless Monitoring 설치
 [3]: /ko/tracing/trace_collection/library_config/java
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-1. **종속성 설치**. 다음 명령을 실행합니다.
+1. **종속성을 설치합니다**. 다음 명령을 실행합니다.
    ```shell
    dotnet package add Datadog.AzureFunctions
    ```
 
    Datadog은 기능 향상 및 버그 수정을 위해 `Datadog.AzureFunctions`의 최신 버전으로 정기적으로 업그레이드할 것을 권장합니다.
 
-2. **Datadog Serverless Compatibility Layer를 시작하세요**.
+2. **Datadog Serverless Compatibility Layer를 시작합니다**.
 
    Azure Function 앱이 Isolated Worker 모델을 사용하는 경우, 메인 애플리케이션 진입점 파일에 다음 줄을 추가합니다.
    ```csharp
@@ -185,9 +185,9 @@ title: Azure Functions용 Serverless Monitoring 설치
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-5. **함수 배포**.
+5. **함수를 배포합니다**.
 
-6. **Datadog 수집을 구성하세요**. 함수의 애플리케이션 설정에 다음 환경 변수를 추가합니다.
+6. **Datadog 수집을 구성합니다**. 함수의 애플리케이션 설정에 다음 환경 변수를 추가합니다.
 
    | 이름 | 값 |
    | ---- | ----- |
@@ -205,7 +205,77 @@ title: Azure Functions용 Serverless Monitoring 설치
    | `DD_SERVICE` | [Unified Service Tagging][7]을 위해 서비스에 태그를 지정하는 방법.  |
    | `DD_VERSION` | [Unified Service Tagging][7]을 위해 버전에 태그를 지정하는 방법. |
 
-## 다음 단계는? {#whats-next}
+## Durable Functions {#durable-functions}
+
+Durable Functions 계측을 활성화하려면 `host.json` 파일에 다음 설정을 추가합니다.
+
+<!-- vale off -->
+{{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
+{{< programming-lang lang="nodejs" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+```json
+{
+  "telemetryMode": "OpenTelemetry",
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+<!-- vale on -->
+
+## 다음 단계 {#whats-next}
 
 - [{{< ui >}}Trace Explorer{{< /ui >}}][3]에서 Azure Functions 트레이스를 볼 수 있습니다. 트레이스를 보려면 `DD_SERVICE` 환경 변수에 설정한 서비스 이름을 검색하세요.
 - [Datadog Azure 통합][5]에서 수집한 텔레메트리로 보강된 트레이스를 보려면 [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure Functions{{< /ui >}}][4] 페이지를 사용할 수 있습니다.

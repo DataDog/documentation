@@ -45,6 +45,11 @@ After you complete the initial SDK setup, use the advanced configuration options
 {% partial file="sdk/advanced_config/cpp.mdoc.md" /%}
 {% /if %}
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/advanced_config/electron.mdoc.md" /%}
+{% /if %}
+
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
 {% partial file="sdk/advanced_config/maui.mdoc.md" /%}

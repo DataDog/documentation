@@ -5,31 +5,39 @@ further_reading:
   text: OpenTelemetry Collector のセットアップ
 title: NGINX メトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/nginx_metrics.png" alt="NGINX ダッシュボードでの OpenTelemetry NGINX メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/nginx_metrics.png" alt="NGINX ダッシュボードの OpenTelemetry NGINX メトリクス" style="width:100%;" >}}
+[NGINX receiver][1] は、[NGINX Overview][4] ダッシュボードに表示される NGINX メトリクスを収集します。
 
-[NGINX レシーバー][1]は、NGINX メトリクスの収集と [NGINX Overview][4] ダッシュボードへのアクセスを可能にします。`nginxreceiver` の最新バージョンの仕様に従ってレシーバーを構成してください。
+詳細については、[NGINX receiver][1] に関する OpenTelemetry プロジェクトのドキュメントを参照してください。
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [NGINX レシーバー][1]を参照してください。
+## セットアップ {#setup}
 
-## セットアップ
+この例では、OpenTelemetry Collector Contrib v0.154.0 のコンポーネント識別子を使用しています。他のバージョンやディストリビューションの場合は、そのディストリビューションがサポートする識別子を使用します。
 
-Datadog で使用するために OpenTelemetry で NGINX メトリクスを収集するには:
+NGINX receiver は、[`ngx_http_stub_status_module`][6] モジュールからステータスページを読み取ります。開始する前に、モジュールを有効にしてステータスページを公開します。ステータスページへのアクセス元を、たとえば localhost に制限します。
 
-1. OpenTelemetry Collector の構成で [NGINX レシーバー][1]を構成します。
-2. OpenTelemetry Collector が [Datadog にエクスポートするように構成されている][5]ことを確認します。
+Collector 構成に以下の行を追加し、`endpoint` をステータスページのアドレスに設定します。
 
-詳細な構成オプションと要件については、[NGINX レシーバーのドキュメント][1]を参照してください。
+```yaml
+receivers:
+  nginx:
+    endpoint: http://localhost:80/status
+```
 
-## 収集されたデータ
+構成のメトリクスパイプラインの `receivers` リストに `nginx` を追加します。すでにそのパイプラインにあるプロセッサーはそのまま維持します。Datadog OTLP メトリクスインテークはデルタメトリクスのみを受け付けますが、このレシーバーは累積合計を生成するため、パイプラインには `cumulativetodelta` が必要です。[推奨される Collector セットアップ][5]にはそれが含まれています。
+
+すべての構成オプションについては、[NGINX receiver のドキュメント][1]を参照してください。
+
+## 収集データ {#data-collected}
 
 {{< mapping-table resource="nginx.csv">}}
 
-詳細は [OpenTelemetry メトリクスマッピング][2]を参照してください。
+OpenTelemetry と Datadog のメトリクス名の完全なマッピングについては、[OpenTelemetry メトリクスマッピング][2]を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -37,3 +45,4 @@ Datadog で使用するために OpenTelemetry で NGINX メトリクスを収�
 [2]: /ja/opentelemetry/guide/metrics_mapping/
 [4]: https://app.datadoghq.com/dash/integration/21/nginx---overview
 [5]: /ja/opentelemetry/setup/collector_exporter/
+[6]: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
