@@ -27,9 +27,10 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 | [Go][3] | `dd-trace-go` 2.12.0 |
 | [Browser][4] (JavaScript, React, Angular) | `@datadog/openfeature-browser` 2.3.0 |
 | [Python][9] | A `ddtrace` release that includes `ExposureHook`; not available in 4.17.0 |
+| [Dart and Flutter][11] | A `datadog_flags` release that includes `ExposureHook`; not available in `datadog_flags` 1.1.1 or `datadog_flags_flutter` 1.1.0 |
 | [.NET][10] | Tracer 3.58.0 or later and a provider release that includes `ExposureHook`; not available in provider 2.3.2 |
 
-<div class="alert alert-info">The Python and .NET examples require provider APIs that are pending release. Use these examples with a build that includes <code>ExposureHook</code>. Earlier packages do not provide this API.</div>
+<div class="alert alert-info">The Python, .NET, and Dart/Flutter examples require provider APIs that are pending release. Use these examples with a build that includes <code>ExposureHook</code>. Earlier packages do not provide this API.</div>
 
 ## How the SDK identifies exposures
 
@@ -135,6 +136,50 @@ OpenFeature.addHooks(
 The browser SDK keeps its exposure cache across page loads. When a page reload gives a subject the same result, the evaluation is a cache hit.
 
 {{% /tab %}}
+{{% tab "Dart and Flutter" %}}
+
+Register the hook with the OpenFeature API after you configure `DatadogOpenFeatureProvider`.
+Use a `datadog_flags` release that includes the OpenFeature provider and `ExposureHook`.
+The published `datadog_flags` 1.1.1 and `datadog_flags_flutter` 1.1.0 packages do not contain this API.
+
+{{< code-block lang="dart" >}}
+import 'dart:collection';
+import 'package:datadog_flags/datadog_flags.dart';
+import 'package:openfeature_dart_client_sdk/openfeature_dart_client_sdk.dart';
+
+final exposures = Queue<Map<String, Object?>>();
+const maxPendingExposures = 10000;
+
+void registerExposureHook() {
+  OpenFeatureAPI.instance.addHooks([
+  ExposureHook((evaluation) {
+    if (!evaluation.shouldSend || exposures.length >= maxPendingExposures) {
+      return;
+    }
+    exposures.add({
+      'timestamp': DateTime.now().toUtc().toIso8601String(),
+      'subject': evaluation.targetingKey,
+      'flag': evaluation.flagKey,
+      'allocation': evaluation.allocationKey,
+      'variant': evaluation.variant,
+      'features': Map<String, Object>.from(evaluation.features),
+    });
+  }),
+  ]);
+}
+// Call registerExposureHook() after provider setup.
+// Drain the queue outside the callback and write to your data store.
+{{< /code-block >}}
+
+`isExposure`, `isCacheHit`, and `shouldSend` are Boolean properties.
+`evaluationContext` contains the evaluation context. `features` contains split features for the hook.
+The callback runs synchronously on the evaluating isolate. Do not perform I/O in the callback.
+This example drops records when the queue is full. Track dropped records outside the callback.
+
+The exposure cache is in memory. After an application restart, the first evaluation of an assignment produces a new exposure.
+Provider wrappers must preserve both the Datadog provider's hooks and its metadata.
+
+{{% /tab %}}
 {{% tab "Python" %}}
 
 Register the hook with the public `ddtrace.openfeature` API after you configure the [Python provider][9].
@@ -223,6 +268,13 @@ Evaluate flags through an OpenFeature client so the provider's hooks run.
 Direct asynchronous calls to the provider's `Resolve...ValueAsync` methods do not run those hooks.
 
 {{% /tab %}}
+{{% tab "Dart and Flutter" %}}
+
+Set `trackExposures: false` on `DatadogFlagsConfiguration`.
+The customer callback and deduplication cache remain enabled.
+Use `trackEvaluations: false` to disable the separate evaluation telemetry path.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### What the callback receives
@@ -237,6 +289,7 @@ Direct asynchronous calls to the provider's `Resolve...ValueAsync` methods do no
 
 If you select all exposures instead of using the should-send decision, deduplicate the records yourself.
 Python uses `is_exposure` and `should_send`. .NET uses `IsExposure` and `ShouldSend`.
+Dart and Flutter use the properties `isExposure` and `shouldSend`.
 
 ## Split features
 
@@ -326,3 +379,4 @@ const provider = new DatadogProvider({
 
 [9]: /feature_flags/server/python/
 [10]: /feature_flags/server/dotnet/
+[11]: /feature_flags/client/flutter/
