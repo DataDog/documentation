@@ -47,7 +47,7 @@ Some tools return content that users or monitored systems can set, such as tags,
 
 ## Core tools
 
-The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+The default toolset for logs, metrics, traces, profiling, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 
 ### `search_datadog_events`
 *Toolset: **core***\
@@ -108,6 +108,15 @@ Fetches a complete trace from Datadog APM using a trace ID.
 - Retrieve trace details including database queries for ID xyz789.
 
 **Note**: Large traces with thousands of spans may be truncated (and indicated as such) without a way to retrieve all spans.
+
+### `get_profiling_overview`
+*Toolsets: **core**, **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a compact flame graph overview with the top stack traces for profiles matching a tag query and time range. Use it to start a profiling investigation and identify CPU, allocation, or wall time hotspots. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
+
+- Show the top CPU stack traces for `service:checkout-api env:prod` over the last hour.
+- Summarize allocation hotspots for `service:payments` over the last 30 minutes.
+- Show wall time hotspots for `service:checkout-api` over the last hour.
 
 ### `search_datadog_dashboards`
 *Toolset: **core***\
