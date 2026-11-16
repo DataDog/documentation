@@ -107,7 +107,7 @@ Set the `model` field in the request body to one of the following:
 - `<PROVIDER_SLUG>/<MODEL_ID>` to call a model on a specific provider.
 - `router/<RULE_SLUG>` to let a [routing rule](#route-requests-with-routing-rules) choose the destination.
 
-For native Gemini, OpenAI Decisions, and System One requests, see [Use native Gemini and decision APIs][19].
+For native Gemini, OpenAI Decisions, and System One requests, see [Use Native Gemini and Decision APIs with AI Gateway][19].
 
 [19]: /llm_observability/configure/ai_gateway_inference_apis/
 
