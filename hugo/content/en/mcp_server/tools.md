@@ -2473,6 +2473,15 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 ## Profiling
 Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
 
+### `get_profiling_overview`
+*Toolsets: **core**, **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a compact flame graph overview with the top stack traces for profiles matching a tag query and time range. Use it to start a profiling investigation and identify CPU, allocation, or wall time hotspots. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
+
+- Show the top CPU stack traces for `service:checkout-api env:prod` over the last hour.
+- Summarize allocation hotspots for `service:payments` over the last 30 minutes.
+- Show wall time hotspots for `service:checkout-api` over the last hour.
+
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
 *Permissions Required: `Continuous Profiler Read`*\
