@@ -140,7 +140,6 @@ The Datadog Full-Host Profiler distribution packages upstream OpenTelemetry prof
 - curated defaults and components for Datadog export and container tagging
 - a version tested at scale on thousands of hosts for overhead and stability
 
-The long-term goal is to make these benefits available with upstream OpenTelemetry distributions directly. The preview distribution provides them out of the box today.
 
 ## What's next?
 
