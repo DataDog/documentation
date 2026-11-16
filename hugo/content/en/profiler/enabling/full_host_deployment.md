@@ -433,7 +433,6 @@ agents:
       env:
         - name: DD_HOSTPROFILER_HEALTH_METRICS_ENABLED
           value: "true"
-
 #### Health metrics
 
 | Name                                  | Values | Default          | Description |
