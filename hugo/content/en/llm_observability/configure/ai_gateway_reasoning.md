@@ -63,6 +63,8 @@ curl -i -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >
 
 See the [OpenAI reasoning guide][4] and [Anthropic effort guide][5] for model-specific request options.
 
+A conversation can override request-level effort. For Responses, the last `configuration_update` input item with `reasoning.effort` takes precedence. For Messages, the last system-role message with `output_config.effort` takes precedence. Review client-supplied history when a test uses a different effective effort than expected.
+
 ## Control fast mode
 
 AI Gateway recognizes these premium-mode request fields:
