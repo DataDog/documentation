@@ -15,9 +15,22 @@ There are two ways to deploy the Datadog Agent on macOS devices for End User Dev
 - **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
 - **MDM deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
 
-Feature availability on macOS varies by processor architecture. Some features require Apple silicon (ARM64) and are unavailable on Intel-based Macs.
-
 Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
+
+## Feature availability
+
+Use Datadog Agent 7.84 or later for the following features:
+
+| Feature | Apple silicon (ARM64) | Intel (x86-64) |
+| --- | --- | --- |
+| Shutdown-cause reporting (`System shutdown fault` events) | Supported | Not supported |
+| Thermal metrics (CPU, GPU, SSD, and battery temperatures, and thermal pressure level) | Supported | Supported |
+
+Shutdown-cause reporting identifies power faults, processor crash signals, watchdog timeouts, hardware faults, and thermal faults that caused the previous shutdown.
+
+Available thermal metrics depend on the hardware model and the sensors it exposes. The Agent omits metrics for unavailable sensors.
+
+## Installation
 
 <div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
