@@ -15,6 +15,13 @@ import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
+// pathname of the page in #mainContent, so the popstate handler can tell when Back or Forward changes pages
+let loadedPath = window.location.pathname;
+
+function getLoadedPath() {
+    return loadedPath;
+}
+
 function loadPage(newUrl) {
     // scroll to top of page on new page load
     // but only if there is no hash in the URL
@@ -28,6 +35,7 @@ function loadPage(newUrl) {
     }
 
     const pathName = new URL(newUrl).pathname;
+    loadedPath = pathName;
     const commitRef = document.documentElement.dataset.commitRef
     const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
 
@@ -302,6 +310,6 @@ function loadPage(newUrl) {
     }
 }
 
-export {loadPage};
+export {loadPage, getLoadedPath};
 
 
