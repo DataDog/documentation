@@ -9263,29 +9263,39 @@ components:
       properties:
         description:
           description: Metric description.
+          example: Number of requests received.
+          nullable: true
           type: string
         integration:
           description: Name of the integration that sent the metric if applicable.
+          nullable: true
           readOnly: true
           type: string
         per_unit:
           description: Per unit of the metric such as `second` in `bytes per second`.
           example: second
+          nullable: true
           type: string
         short_name:
           description: A more human-readable and abbreviated version of the metric name.
+          example: requests
+          nullable: true
           type: string
         statsd_interval:
           description: StatsD flush interval of the metric in seconds if applicable.
+          example: 10
           format: int64
+          nullable: true
           type: integer
         type:
           description: Metric type such as `gauge` or `rate`.
           example: count
+          nullable: true
           type: string
         unit:
           description: Primary unit of the metric such as `byte` or `operation`.
           example: byte
+          nullable: true
           type: string
       type: object
     MetricSearchResponse:
