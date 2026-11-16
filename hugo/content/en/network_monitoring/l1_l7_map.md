@@ -28,7 +28,7 @@ The L1/L7 Map is in Preview. Complete the form to request access.
 
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
 
-<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DEGRADED, DOWN, UP, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
+<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DEGRADED, HEALTHY, DOWN, UP, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
 
 ## Overview
 
@@ -39,7 +39,7 @@ The map combines data from Cloud Network Monitoring (CNM), APM, Container Monito
 The L1/L7 Map is different from other network maps in Datadog:
 
 - The [CNM Network Map][20] shows traffic between groups of resources across your environment. Use the L1/L7 Map to investigate one resource or one connection across the application, infrastructure, and network layers.
-- The [Device Topology Map][13] shows the physical connections between network devices. The L1/L7 Map shows network devices only as hops on a network path.
+- The [Device Topology Map][13] shows the physical connections between network devices. The L1/L7 Map shows network devices as hops on a network path.
 
 {{< img src="network_performance_monitoring/l1_l7_map/map-overview.png" alt="The L1/L7 Map in single resource mode, showing a service with its upstream and downstream resources, its composition stack, and the details pane" >}}
 
@@ -93,7 +93,7 @@ Upstream and downstream resources are the same type as the explored resource, su
 In source/destination pair mode, the map shows the source's composition stack on the left and the destination's on the right. Between them, the map shows:
 
 - **Network connections**: Traffic that CNM observes between resources in the two stacks, such as container to container.
-- **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_. <!-- TODO: Confirm this definition of a network path segment. -->
+- **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_.
 
 ### Map status and network signals
 
@@ -190,9 +190,9 @@ From the summary, click **Explore connection** to open the connection in source/
 
 #### Network path segment summaries
 
-The summary for a network path segment shows its **Reachability**, **End-to-end latency**, and **Packet loss**. From the summary, click **Explore connection** to filter the map to that segment, or click **View connection in Network Path**.
+The summary for a network path segment shows its **Reachability**, **End-to-end latency**, and **Packet loss**. From the summary, click **Explore connection** to investigate the segment in source/destination pair mode, with its two hops as the source and the destination. You can also click **View connection in Network Path**.
 
-<!-- TODO: Confirm the behavior of Explore connection on a network path segment. On a connection it opens source/destination pair mode; here it appears to filter the map. If the behavior differs, confirm the label. -->
+The summary for a hop that is a network device shows the device's status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
 
@@ -232,9 +232,9 @@ When you click an item on the map, the details pane shows details for that item:
 - **The +N more item in a resource group**: A list of the collapsed resources.
 - **A connection, or the +N more label on a connection**: A searchable list of the individual network connections that the line represents.
 - **An AS group on a network path**: The hops in the group and their status, such as **OK** or **UNREACHABLE**.
-- **A network path segment, after you filter to it**: The segment's reachability, end-to-end latency, and packet loss, with a link to open the segment in Network Path.
+- **A network path segment**: The map filters to the segment, and the details pane shows its reachability, end-to-end latency, and packet loss, with a link to open the segment in Network Path.
 
-<!-- TODO: Confirm where NDM device details appear when you click a hop that is a monitored network device, and add it to this list. -->
+<!-- TODO: In the prototype, clicking a device hop does nothing, and its hover summary shows Filter and Explore as disabled. Ask the PM what clicking a device hop does at Preview (details pane, device side panel, or a link to NDM), and add it to this list. -->
 
 ## Investigate an issue with the L1/L7 Map
 
@@ -258,15 +258,13 @@ Use this workflow when two resources cannot communicate, or communicate slowly, 
 1. Open source/destination pair mode for the two resources. You can select them on the L1/L7 page, click **Add destination** from the source resource, or click **Explore connection** on the connection between them. For details, see the [Open the map](#open-the-map) section.
 1. Set the time frame to when the issue started.
 1. Hover over the network connections between the two stacks to check their retransmits, TCP failures, and RTT.
-1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss.
-1. If a hop is a network device monitored by [NDM][6], click the hop to see its device details and continue the investigation.
-
-    <!-- TODO: Confirm where NDM device details appear for a hop (details pane or device side panel) and the label of any link to NDM. -->
+1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss. To investigate a degraded segment on its own, hover over it and click **Explore connection**.
+1. If a hop is a network device monitored by [NDM][6], hover over the hop to see the device's status.
 1. To examine the underlying data, click **View connections** in the details pane to open the connections in CNM. To open the path in Network Path, hover over a network path segment and click **View connection in Network Path**, which opens the connection's [path view][19].
 
 ## Limitations
 
-- You cannot start an investigation from a network device. Network devices appear only as hops on a network path.
+- You cannot search for a network device to start an investigation. Network devices appear as hops on a network path. To investigate the connection between two hops, use **Explore connection** on the network path segment between them.
 - The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][13].
 - The map does not compare forward and reverse paths, compare paths over time, or detect route changes. To compare a path before and after an incident, use the [visual comparison][21] in Network Path.
 - The map does not correlate deployments with network changes. To see deployments and infrastructure changes for a service, use [Change Tracking][22].
