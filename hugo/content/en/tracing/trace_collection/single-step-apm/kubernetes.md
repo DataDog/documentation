@@ -367,13 +367,15 @@ To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< u
 
 #### Set the default behavior
 
-The default behavior controls whether the workload targeting in your Agent configuration still applies when you use instrumentation rules in Datadog.
+The default behavior controls whether the workload targeting in your Agent configuration (`targets` and `enabledNamespaces`) still applies when you use instrumentation rules in Datadog. Some exceptions apply regardless of the default behavior. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
+
+<div class="alert alert-warning">If SSI is enabled cluster-wide without <code>targets</code>, check the default behavior before you create rules. With <strong>No default</strong> (the initial setting), creating any instrumentation rule in Datadog, including a single block rule, turns off cluster-wide instrumentation. After that, pods that match no rule are not instrumented. To keep instrumenting all other pods, set the default behavior to <strong>Allow everything else</strong>.</div>
 
 1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
 1. Select one of the following options:
    - {{< ui >}}No default{{< /ui >}} (initial setting): Workload targeting in your Agent configuration still applies, but a rule defined in Datadog can override it. Pods that match neither a rule nor your Agent configuration are not instrumented.
-   - {{< ui >}}Block everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Only pods that match an allow rule are instrumented.
-   - {{< ui >}}Allow everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Every pod is instrumented except those that match a block rule.
+   - {{< ui >}}Block everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Pods that do not match an allow rule are not instrumented.
+   - {{< ui >}}Allow everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Pods that do not match a block rule are instrumented.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="tracing/trace_collection/k8s-default-behavior.png" alt="The Kubernetes Default Behavior options: No default, Block everything else, and Allow everything else" style="width:50%;" >}}
@@ -424,7 +426,16 @@ After the rules are deployed, restart the affected workloads for the changes to 
 
 #### How instrumentation rules are evaluated
 
-For each pod, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
+The following pods are not instrumented, even if they match an allow rule:
+
+- Pods in the `kube-system` namespace
+- Pods in the namespace where the Datadog Agent is installed
+- Pods in namespaces listed in `disabledNamespaces`
+- Pods labeled `admission.datadoghq.com/enabled: "false"`
+
+Pod SDK annotations and `DatadogInstrumentation` resources take precedence over instrumentation rules, regardless of the default behavior. For example, with {{< ui >}}Block everything else{{< /ui >}}, a pod with SDK annotations, or a workload whose `DatadogInstrumentation` resource enables APM, is still instrumented. For the full order, see the [Configuration precedence](?tab=datadoginstrumentationcrdv785#configuration-precedence) section.
+
+For the remaining pods, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
 
 1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
 1. Rules that use the {{< ui >}}All clusters{{< /ui >}} targeting option. These rules apply to every eligible cluster, including clusters in cluster groups.
@@ -718,10 +729,10 @@ For pods eligible for admission, the Cluster Agent selects APM configuration in 
 1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
 1. The workload's `DatadogInstrumentation` APM configuration.
 1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled.
-1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`.
-1. Cluster-wide instrumentation, when enabled without targeting rules.
+1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`. These settings are ignored if the [default behavior](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior) for instrumentation rules is {{< ui >}}Block everything else{{< /ui >}} or {{< ui >}}Allow everything else{{< /ui >}}.
+1. Cluster-wide instrumentation, when enabled without `apm.instrumentation.targets` and without instrumentation rules in Datadog.
 
-A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with  DDI, remove conflicting annotations from the pod spec.
+A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with DDI, remove conflicting annotations from the pod spec.
 
 [7]: /tracing/trace_collection/library_config/
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
