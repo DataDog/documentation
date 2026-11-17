@@ -634,7 +634,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Storage Account
       recommendation_type: Transition old Hot-tier data to Cool
-      recommendation_description: A storage account prefix has Hot-tier block blob data that hasn't been written to in at least 90 days, or read in that time where last-access tracking is on. A lifecycle management rule can move it to the Cool tier.
+      recommendation_description: Identifies storage account prefixes with Hot-tier block blob data that hasn't been modified in at least 90 days, and recommends moving it to the Cool tier. If last access time tracking is enabled on the account, data read in the last 90 days is excluded.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
