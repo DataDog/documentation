@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Bits CLI brings Bits Chat to your terminal. Ask Bits a question in natural language, and Bits answers using your Datadog data and the files in your current project. Bits can also edit files and run shell commands on your machine, and it asks for your approval before each action.
+Bits CLI allows you to interact with Bits Chat from your terminal. Ask Bits a question in natural language, and Bits answers using your Datadog data and the files in your current project. Bits can also edit files and run shell commands on your machine, and it asks for your approval before each action.
 
 The source code, releases, and issue tracker for Bits CLI are in the [bits-cli GitHub repository][1].
 
@@ -29,14 +29,18 @@ Use Bits CLI to:
 - Query logs, metrics, and traces without leaving the terminal.
 - Ask Bits to propose and apply a fix, approving each change before Bits makes it.
 
-Bits CLI doesn't require [Source Code Integration][2]. It works in the local directory you start it from.
+### When to use Bits CLI
 
-### Compare Bits CLI with other tools
+Bits CLI is Datadog's own agent. The Datadog tools are built in, and Bits CLI works with your local files and commands. Other Datadog command-line options work differently:
 
-Bits CLI is Datadog's own agent. The Datadog tools are built in, and Bits CLI works with your local files and commands. Its conversations are Bits Chat conversations that you can continue in Datadog. Other Datadog command-line options work differently:
-
-- **[Datadog MCP Server][3]**: Gives another vendor's agent, such as Claude Code or Codex, access to Datadog tools. That agent's model does the work.
+- **[Datadog MCP Server][3]**: Gives another vendor's agent, such as Claude Code or Codex, access to Datadog tools. Use the MCP Server when you want to keep working in an agent that you already use.
 - **[Pup][4]**: A command-line client for Datadog APIs. Pup doesn't include Bits.
+
+Use Bits CLI when you want capabilities that are specific to Bits, such as:
+
+- Adding Datadog-specific context to your prompts, such as mentioning a service, monitor, incident, or dashboard with `@` to add it to your question
+- Interacting with Bits Chat from both your terminal and Datadog, with the option to alternate between the two in the same conversation
+- Signing in with your Datadog account, without needing to create API keys or configure a connection for another agent
 
 ## Requirements
 
@@ -76,11 +80,13 @@ bits
 
 Type a question and press <kbd>Enter</kbd>. To add Datadog context, type `@` and search for a service, monitor, incident, or dashboard. To attach an image, drop it onto the prompt.
 
-To continue a conversation you started in Datadog, use `/resume`, or open the conversation by ID:
+To continue a conversation you started in Datadog, use `/resume`. Or, open the conversation by ID:
 
 ```shell
 bits --conversation <CONVERSATION_ID>
 ```
+
+## Bits CLI commands
 
 Use the following commands in a Bits CLI session:
 
