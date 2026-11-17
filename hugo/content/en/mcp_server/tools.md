@@ -859,8 +859,8 @@ Executes read-only JavaScript authored by an AI agent in a Datadog-managed sandb
 
 ### `execute_code_write`
 *Toolsets: **core**, **code-exec***\
-*Permissions Required: `mcp_write` and product-specific permissions for resources the script reads or modifies (for example, `Dashboards Write` to create a dashboard).*\
-Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to read, create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
+*Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Dashboards Write` to create a dashboard).*\
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
 
 The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][104] before retrying a script.
 
@@ -871,12 +871,12 @@ The AI client's normal approval behavior applies; the MCP Server does not add a 
 ### `search_datadog_sdk`
 *Toolset: **code-exec***\
 *Permissions Required: None*\
-Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. For write operations, use the `execute_code_write` target. Call this before writing a script to confirm which methods exist and their signatures.
+Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
 - What does the `dd.time` namespace provide?
-- Look up the operation and request and response types for creating a dashboard with the `execute_code_write` target.
+- Look up the operation and request and response types for creating a dashboard.
 
 ## Dashboards
 

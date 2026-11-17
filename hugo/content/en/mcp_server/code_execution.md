@@ -43,8 +43,8 @@ The `code-exec` toolset provides:
 | Tool | Description |
 | --- | --- |
 | [`execute_code`][1] | Runs read-only JavaScript in the sandbox for investigations and analysis, and returns a structured result. |
-| [`execute_code_write`][7] | Runs JavaScript in the sandbox that can read, create, update, or delete supported Datadog resources, and returns a structured result. |
-| [`search_datadog_sdk`][2] | Looks up SDK operations, request types, and response types. For write operations, the agent uses the `execute_code_write` target. |
+| [`execute_code_write`][7] | Runs JavaScript in the sandbox to create, update, or delete supported Datadog resources, and returns a structured result. |
+| [`search_datadog_sdk`][2] | Looks up SDK operations, request types, and response types. |
 
 See the linked entries in the MCP Server Tools reference for permissions and example prompts.
 
@@ -55,7 +55,7 @@ Generated code is JavaScript based on the public [Datadog API Client for TypeScr
 Code executed by the `code-exec` toolset runs against Datadog APIs using your user identity. Every API call is authorized independently with your existing [role permissions][4]. Code execution can't grant access beyond those permissions.
 
 - `execute_code` exposes read-only Datadog API calls for investigations and analysis.
-- `execute_code_write` can read, create, update, or delete supported resources: dashboards, monitors, SLOs, notebooks, log configurations, incidents, cases, workflows, Synthetic tests, security rules, Catalog entities, teams, and feature flags.
+- `execute_code_write` can create, update, or delete supported resources: dashboards, monitors, SLOs, notebooks, log configurations, incidents, cases, workflows, Synthetic tests, security rules, Catalog entities, teams, and feature flags.
 - Credential management, user and role management, and other sensitive administrative APIs remain unavailable, even if you can access them elsewhere in Datadog.
 - The sandbox is isolated. Scripts can't access your local machine, file system, arbitrary network destinations, or raw Datadog credentials.
 - Raw API responses stay inside the sandbox while the script processes them. The only data sent back to the agent is the value the code returns. Review what a script returns if the underlying data is sensitive, such as customer data stored in logs.
