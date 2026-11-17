@@ -6,7 +6,7 @@ core_product:
 ---
 Trace metrics are automatically collected and kept with a 15-month retention policy similar to any other [Datadog metric][1]. They can be used to identify and alert on hits, errors, or latency. Statistics and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
-Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` on the [**Metrics Summary** page][2].
+Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` on the [**Metrics Catalog** page][2].
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="trace metrics" >}}
 
@@ -18,7 +18,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 
 [1]: /extend/guide/data-collection-resolution/
-[2]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/metric/catalog
 [3]: https://app.datadoghq.com/monitors
 [4]: /tracing/services/service_page/
 [5]: /tracing/services/resource_page/

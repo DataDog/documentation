@@ -43,7 +43,7 @@ Chaque événement inclut :
 - Les anciennes et nouvelles valeurs, y compris les règles de ciblage et les variantes
 - Un lien vers le Feature Flag dans Datadog
 
-Pour associer une modification de Datadog Feature Flag à un service, [instrumentez votre code d'évaluation des Feature Flags][4] à l'aide de la bibliothèque de traçage Datadog. Datadog utilise les traces APM obtenues pour détecter automatiquement quels services évaluent le flag. Consultez [Détecter automatiquement les services affectés](#automatically-detect-affected-services) pour plus de détails.
+Pour associer une modification de Datadog Feature Flag à un service, [instrumentez votre code d'évaluation des Feature Flags][4] à l'aide du SDK Datadog. Datadog utilise les traces APM obtenues pour détecter automatiquement quels services évaluent le flag. Consultez [Détecter automatiquement les services affectés](#automatically-detect-affected-services) pour plus de détails.
 
 ### Flags LaunchDarkly {#launchdarkly-flags}
 
@@ -130,18 +130,19 @@ Exemple de requête :
 
 ## Détecter automatiquement les services affectés {#automatically-detect-affected-services}
 
-Outre le suivi des modifications de configuration des Feature Flags via l'intégration LaunchDarkly ou l'Events API, Datadog peut détecter automatiquement les services qui évaluent un flag à l'aide des traces APM ou des métriques. Cela offre une visibilité en temps réel sur l'utilisation des flags dans votre système, en particulier lorsqu'un même flag est évalué par plusieurs services.
+Outre le suivi des modifications de configuration des Feature Flags, Datadog peut détecter automatiquement les services qui évaluent un flag à l'aide des traces APM ou des métriques. Cela offre une visibilité en temps réel sur l'utilisation des flags dans votre système, en particulier lorsqu'un même flag est évalué par plusieurs services.
 
 ### Enrichissement basé sur les traces {#trace-based-enrichment}
-L'enrichissement basé sur les traces utilise les traces APM pour associer automatiquement les modifications de Feature Flags aux services Datadog concernés. La section suivante détaille comment l'implémenter dans votre base de code.
+
+L'enrichissement basé sur les traces utilise les traces APM pour associer automatiquement les modifications de Feature Flags aux services Datadog concernés.
 
 #### Configuration {#setup}
 
-Pour détecter automatiquement les services qui utilisent un Feature Flag, instrumentez votre code d'évaluation des Feature Flags avec le SDK Datadog. Cela permet à Datadog de détecter automatiquement tous les services qui évaluent un flag donné, même s'ils n'avaient pas été associés à un tag à l'origine.
+Pour détecter automatiquement les services qui utilisent un Feature Flag, instrumentez votre code d'évaluation des Feature Flags avec le SDK Datadog. Datadog détecte ensuite tous les services qui évaluent un flag spécifique, même s'ils n'étaient pas tagués à l'origine.
 
 1. [Instrumentez votre code d'évaluation des Feature Flags][4] à l'aide du SDK Datadog.
 1. Créez un span personnalisé avec le nom d'opération `experiments.IsEnabled` pour suivre les évaluations des Feature Flags.
-3. Ajoutez le tag `experiment_id:<flag-id>` au span, où `<flag-id>` correspond à l'ID du Feature Flag.
+1. Taguez le span avec `experiment_id:<flag-id>`, où `<flag-id>` correspond à l'ID du Feature Flag.
 
 Par exemple :
 
@@ -156,7 +157,7 @@ with tracer.trace("experiments.IsEnabled") as span:
 
 ### Enrichissement basé sur les métriques {#metrics-based-enrichment}
 
-L'enrichissement basé sur les métriques utilise les métriques Datadog pour ajouter le contexte du service aux modifications de vos Feature Flags. La section suivante explique comment l'implémenter dans votre base de code.
+L'enrichissement basé sur les métriques utilise les métriques Datadog pour ajouter le contexte du service aux modifications de vos Feature Flags.
 
 #### Configuration {#setup-1}
 
@@ -181,6 +182,8 @@ statsd.gauge(
 ## Corrigez les modifications de Feature Flags avec Workflow Automation {#remediate-feature-flag-changes-with-workflow-automation}
 
 Lorsque vous constatez qu'une modification de Feature Flag a causé un problème, vous pouvez immédiatement changer son état sans quitter Datadog. Cette fonctionnalité utilise [Workflow Automation][2] pour activer ou désactiver les flags LaunchDarkly directement depuis les timelines Change Tracking.
+
+Pour les Datadog Feature Flags, utilisez un [kill switch][9] pour désactiver une fonctionnalité sans redéployer, ou [créez un workflow qui désactive un flag lorsqu'un monitor envoie une alerte][10].
 
 <div class="alert alert-info">Cette fonctionnalité nécessite Workflow Automation. Consultez <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">la tarification de Workflow Automation</a>.</div>
 
@@ -210,10 +213,11 @@ Pour activer ou désactiver des Feature Flags depuis Datadog :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/launchdarkly/#setup
-[2]: https://app.datadoghq.com/actions/connections
+[2]: /fr/actions/workflows/
 [3]: /fr/api/latest/events/
 [4]: /fr/tracing/trace_collection/
-[5]: https://app.datadoghq.com/apm/settings
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
 [8]: /fr/feature_flags/
+[9]: /fr/feature_flags/use_cases/kill_switches/
+[10]: /fr/feature_flags/concepts/workflow_automation/#example-disable-a-flag-when-a-monitor-alerts

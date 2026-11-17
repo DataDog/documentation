@@ -268,6 +268,7 @@ Use the following attributes to represent the container object in your filtering
 | `container.pod.name`        | The name of the pod running the container.                              |
 | `container.pod.namespace`   | The Kubernetes namespace of the pod.                                    |
 | `container.pod.annotations` | The annotations applied to the pod (key-value map).                     |
+| `container.pod.labels`      | The labels applied to the pod (key-value map). Requires **Agent v7.85+**. |
 
 ### Configuration structure
 
@@ -429,6 +430,12 @@ To exclude the container with a specific pod annotation:
 
 ```yaml
 container.pod.annotations["monitoring"] == "false"
+```
+
+To exclude the container with a specific pod label:
+
+```yaml
+container.pod.labels["app"] == "redis"
 ```
 
 To exclude the container in namespaces without the substring `-dev`:

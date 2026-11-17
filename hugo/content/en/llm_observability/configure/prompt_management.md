@@ -2,6 +2,9 @@
 title: Prompt Management
 aliases:
 - /llm_observability/monitoring/prompt_management/
+- /llm_observability/instrument/prompt_management/
+- /llm_observability/instrument/agentic/prompt_management/
+- /llm_observability/instrumentation/agentic/prompt_management/
 description: Create, version, and retrieve managed prompts in your applications with Prompt Management.
 
 further_reading:
@@ -11,12 +14,18 @@ further_reading:
   - link: "/llm_observability/improve/playground"
     tag: "Documentation"
     text: "Playground"
+  - link: "/llm_observability/improve/online_experiments/prompt_experimentation/"
+    tag: "Documentation"
+    text: "Prompt Experimentation"
   - link: "/llm_observability/instrument/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
   - link: "/llm_observability/data_governance/access_control/"
     tag: "Documentation"
     text: "Data Access Control in Agent Observability"
+  - link: "https://www.datadoghq.com/blog/agent-observability-prompt-management/"
+    tag: "Blog"
+    text: "Manage and deploy LLM prompts with Datadog"
 
 ---
 
@@ -31,6 +40,18 @@ After creating prompt versions, use [Prompt Experimentation][10] to compare them
 Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. See [Track prompt usage](#track-prompt-usage) for setup.
 
 ## Prerequisites
+
+{{< agent-only >}}
+For application integration, complete [instrumentation](/llm_observability/instrument.md) and any requested context sharing before adding optional Prompt Management. If the user supplied a prompt ID, environment, and variable names, use them without asking for confirmation or whether to enable Prompt Management again.
+
+Inspect the application's language, package manager, configuration and secret-management workflow, startup command, existing instrumentation, LLM provider, prompt construction, and provider call site. If the application's language is not covered here, check its SDK documentation for runtime retrieval support. If unsupported, use [Prompt Tracking](/llm_observability/instrument/prompt_tracking.md); do not implement a direct HTTP client or rewrite the application in another language.
+
+Preserve the provider, model, business behavior, package manager, and startup workflow. If multiple prompt or provider call sites are plausible, ask which one to modify and wait for an answer.
+
+Follow repository ownership boundaries. If a library owns prompt construction but an unavailable host application owns configuration, secrets, instrumentation, or startup, implement only the library-owned changes. Do not invent host configuration or initialize tracing inside the library. Report the remaining host-side work, and ask for the host application only when a required change belongs there.
+
+Treat supplied API and application keys as secrets. Configure them through the existing non-committed configuration or secret-management workflow without asking the user to enter them again. Do not repeat them in code, tracked files, logs, or the final response. Never put their values in command arguments or search patterns. Verify that secrets are untracked using file paths, `git status`, and `git diff`, without searching for literal values. Do not print or reread a local credential-bearing copy of a task supplied in the conversation.
+{{< /agent-only >}}
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -89,6 +110,10 @@ To create, update, or delete prompts through the API or SDK, provide an API key 
 
 Install or upgrade the SDK in your application's environment to a [supported version](#prerequisites):
 
+{{< agent-only >}}
+Inspect the installed SDK and reuse a compatible version. Use the existing package manager and dependency-management conventions so installation works from a clean environment. Explain required installation or updates, and ask before updating an existing dependency. An update required only for optional Prompt Management must not delay instrumentation or context sharing. For Node.js, preserve the module system and async control flow.
+{{< /agent-only >}}
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -121,7 +146,7 @@ For installation and application setup, see the [Node.js SDK guide][19].
 Paste the following prompt into your coding agent:
 
 ```text
-Follow the instructions at https://docs.datadoghq.com/llm_observability/instrument/agentic.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
+Follow the instructions at https://docs.datadoghq.com/llm_observability/configure/prompt_management.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
 
 Prompt variables: <PROMPT_VARIABLES>
 
@@ -147,6 +172,14 @@ Treat these values as secrets and handle them according to the linked guide. Do 
 After the integration is complete, run your application and trigger the modified LLM flow. Return to the prompt page to view usage; new prompt calls may take a minute to appear.
 
 ### Configure prompt retrieval
+
+{{< agent-only >}}
+Treat ambient environment-variable usage, such as `os.getenv()` or `process.env`, as a configuration convention even without an environment file. Extend it without asking. If no applicable convention exists, ask which approach to use and wait for an answer.
+
+Preserve `DD_SERVICE` and `DD_LLMOBS_ML_APP` when configured. If neither is configured, set `DD_SERVICE` from the application, service, or project name. For Python, do not combine application-level configuration loading with `ddtrace-run`; load configuration before `ddtrace.auto` instead. For Next.js, follow the [Next.js guide](/llm_observability/guide/nextjs_guide.md).
+
+For an existing managed prompt, do not ask for credentials if none were supplied. Complete code and configuration references where possible, then report that live resolution and tracking could not be verified. Use a separate runtime key when one is required. Do not reuse the promotion key at runtime unless the user explicitly selected it and it has the required read permissions.
+{{< /agent-only >}}
 
 Configure prompt retrieval through your application's existing workflow, such as its environment file, Docker Compose or Kubernetes configuration, deployment platform, or secrets manager. Set the configuration before initializing the SDK.
 
@@ -202,6 +235,10 @@ Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow d
 {{< /tabs >}}
 
 ### Retrieve, format, and use a prompt
+
+{{< agent-only >}}
+Keep retrieval at the existing prompt-construction boundary; do not move or duplicate it in the provider call site. For a promoted prompt, use the values confirmed during promotion. Ask for missing metadata instead of guessing. If a variable has no meaningful value at that boundary, ask how to map it and wait for an answer.
+{{< /agent-only >}}
 
 Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if the managed prompt cannot be retrieved.
 
@@ -288,7 +325,7 @@ Combine prompts in application code or manage the final prompt sent to your mode
 
 By default, the SDK selects the prompt version as follows:
 
-- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or A/B test assignment
+- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or [A/B test][10] assignment
 - **Without `DD_ENV`**: The latest prompt version
 
 To select an exact numeric version, set the `version` option. This option takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see the [Prerequisites](#prerequisites) section.
@@ -318,6 +355,10 @@ const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting'
 {{< /tabs >}}
 
 ### Track prompt usage
+
+{{< agent-only >}}
+Inspect the data flow from `prompt.format()` to every provider call for copies, rebuilding, concatenation, mutation, or conversion. Appending conversation messages also changes the formatted value. Apply the language-specific tracking instructions below to each provider call, including later turns in a conversation. Preserve existing annotations without duplicating them.
+{{< /agent-only >}}
 
 The following examples show how to track a managed system prompt when combining it with a user's question for an OpenAI Responses call. Pass the same variables to the formatting and tracking methods.
 
@@ -434,6 +475,24 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 - **Delete a prompt**: Select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
 
 ### Manage prompts programmatically
+
+{{< agent-only >}}
+Promote local prompts only after the user opts in. When local fragments form one provider-facing message list, promote that final list as one prompt. Do not introduce nested managed-prompt references. If the user requests independent management of a fragment, preserve the existing composition and track the fragment explicitly.
+
+Propose a descriptive prompt ID and wait for confirmation. If the deployment environment is missing, ask for it at the same time. Ask for suitable setup credentials if none were supplied.
+
+Resolve the environment ID with the [List environments API](/api/latest/feature-flags/list-environments/): call `GET /api/v2/feature-flags/environments?dd_env=<URL_ENCODED_DD_ENV>`. The filter matches `DD_ENV` exactly against each environment's `attributes.queries`.
+
+- If one environment matches, use its `data[].id` without asking the user to look it up or confirm it.
+- If multiple environments match, ask which one to use. Do not guess.
+- If none match, explain the missing mapping and ask whether to create an environment. Do not change `DD_ENV` or create an environment without approval.
+- If approved, ask for the display name and production status. Use the [Create an environment API](/api/latest/feature-flags/create-an-environment/) with `queries` containing the exact `DD_ENV`. Attempt creation with the supplied key. If permission is denied, ask for `feature_flag_environment_config_write` or a suitable key, then retry. Leave feature-flag approval disabled unless requested. Use the returned `data.id`.
+- If the user declines, do not deploy to another environment; explain that a matching environment is required.
+
+Check for an exact prompt-ID match with `LLMObs.list_prompts()` or `tracer.llmobs.prompts.listPrompts()`. If the ID belongs to a managed prompt, ask whether to integrate it or choose another ID. A tracked prompt that is not yet managed can use its existing ID. If creation reports a conflict, list prompts again and integrate only if the confirmed ID belongs to the intended prompt. Do not silently overwrite an existing managed prompt.
+
+If the installed SDK cannot deploy during creation, report the limitation; do not use private methods or the Prompt Management HTTP API as a workaround. Keep the returned `id` field as the prompt UUID for the final response. Remove the one-time setup key when no longer needed.
+{{< /agent-only >}}
 
 Use the SDK to create prompts, publish versions, and manage deployments. Perform these operations during setup. Do not run them during application startup or request handling.
 
@@ -913,6 +972,20 @@ Pass the attributes used by your targeting rule, as shown in the previous code e
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
+To measure which version performs better, or to roll out a version gradually with automatic regression checks, see [Prompt Experimentation][10].
+
+{{< agent-only >}}
+## Verify the integration
+
+Use the application's existing workflow for local checks that do not make external requests. Do not query Datadog or use SDK span-reading methods to verify prompt tracking.
+
+If verification requires running the application, making a provider request, incurring cost, emitting telemetry, or another external side effect, request approval for the exact command through the coding environment or ask the user and wait. A tool execution approval counts as confirmation. Do not finish merely by providing the command. If approved, exercise the modified provider call using the normal application workflow. If declined, give the exact command or action needed.
+
+Report whether the application ran and any authentication, authorization, retrieval, or tracking failures. Do not claim Datadog-side tracking was verified unless the user confirms it. Ask the user to trigger the modified flow if needed, return to the prompt page, and allow a short delay for usage to appear.
+
+After promotion, include `https://<APPLICATION_HOST>/llm/prompts/<PROMPT_UUID>` using the returned UUID. For an existing prompt, include the link when its UUID and host are known. Derive the host from `DD_SITE`: `app.datadoghq.com` for `datadoghq.com`, `app.datadoghq.eu` for `datadoghq.eu`, `app.ddog-gov.com` for `ddog-gov.com`, and `DD_SITE` itself for other supported sites. If the host is uncertain, identify the prompt by its prompt ID and ask the user to open it from Prompt Management; do not guess a URL.
+{{< /agent-only >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -926,7 +999,7 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-[10]: /llm_observability/configure/prompt_experimentation/
+[10]: /llm_observability/improve/online_experiments/prompt_experimentation/
 [11]: /remote_configuration/
 [20]: /llm_observability/data_governance/access_control/#managed-prompts
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/

@@ -1,4 +1,4 @@
 ---
-title: Rum Replay Playlists
+title: RUM Replay Playlists
 headless: true
 ---

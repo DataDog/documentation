@@ -8,40 +8,39 @@ code_lang_weight: 0
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentación
-  text: Reenvío de variables de entorno para tests en contenedores
+  text: Reenvío de variables de entorno para pruebas en Containers
 - link: /continuous_integration/tests
   tag: Documentación
-  text: Exploración de los resultados de tests y del rendimiento
+  text: Explorar resultados de pruebas y rendimiento
 - link: /tests/test_impact_analysis/dotnet
   tag: Documentación
-  text: Acelerar tus tests con Test Impact Analysis
+  text: Acelere sus trabajos de prueba con Test Impact Analysis
 - link: /tests/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de Test Optimization
-title: Tests de .NET
+  text: Solución de problemas de Test Optimization
+title: Pruebas de .NET
 type: multi-code-lang
 ---
+## Compatibilidad {#compatibility}
 
-## Compatibilidad
+Para obtener una lista de los tiempos de ejecución y plataformas compatibles, consulte [Compatibilidad con .NET Framework][18] y [Compatibilidad con .NET/.NET Core][19].
 
-Para obtener una lista de los tiempos de ejecución y las plataformas compatibles, consulta [Compatibilidad con .NET Framework][18] y [Compatibilidad con .NET/.NET Core][19].
+Marcos de prueba compatibles:
 
-Frameworks para tests compatibles:
-
-| Framework para tests | Versión |
+| Framework de prueba | Versión |
 |---|---|
 | xUnit | >= 2.2 |
 | NUnit | >= 3.0 |
 | MsTestV2 | >= 14 |
 | [BenchmarkDotNet][1] | >= 0.13.2 |
 
-## Configuración del método de notificación
+## Configuración del método de reporte {#configuring-reporting-method}
 
-Para informar de los resultados de tests a Datadog, debes configurar la biblioteca .NET de Datadog:
+Para reportar los resultados de las pruebas a Datadog, necesita configurar la biblioteca de .NET de Datadog:
 
 {{< tabs >}}
 
-{{% tab "Proveedor de CI con compatibilidad para la instrumentación automática" %}}
+{{% tab "Proveedor de CI con soporte para instrumentación automática" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
@@ -49,38 +48,38 @@ Para informar de los resultados de tests a Datadog, debes configurar la bibliote
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "Proveedor de CI on-premises" %}}
+{{% tab "Proveedor de CI local" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Instalación de la CLI del rastreador .NET
+## Instalación de la CLI del trazador de .NET {#installing-the-net-tracer-cli}
 
-Instala o actualiza el comando `dd-trace` de una de las siguientes maneras:
+Instale o actualice el comando `dd-trace` usando una de las siguientes formas:
 
-- Con el SDK de .NET ejecutando el comando:
+- Usando el SDK de .NET al ejecutar el comando:
    ```
    dotnet tool update -g dd-trace
    ```
-- Descargando la versión adecuada:
+- Al descargar la versión apropiada:
     * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][2]
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][3]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][4]
 
-- O descargándolo [de la página de la versión de GitHub][5].
+- O descargando [desde la página de versiones de GitHub][5].
 
-## Instrumentación de tests
+## Instrumentación de pruebas {#instrumenting-tests}
 
-<div class="alert alert-warning">Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
+<div class="alert alert-warning">Para BenchmarkDotNet siga <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
 
-Para instrumentar tu conjunto de tests, antepone a tu comando de test `dd-trace ci run`, proporcionando el nombre de servicio o biblioteca en proceso de test como el parámetro `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env`. Por ejemplo:
+Para instrumentar su conjunto de pruebas, anteponga `dd-trace ci run` a su comando de prueba. Puede usar `--dd-service` para establecer el servicio o la biblioteca bajo prueba y `--dd-env` para establecer el entorno donde se ejecutan las pruebas. Por ejemplo:
 
 {{< tabs >}}
 
 {{% tab "dotnet test" %}}
 
-Con <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
+Al usar <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
@@ -90,7 +89,7 @@ dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
 
 {{% tab "VSTest.Console" %}}
 
-Con <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
+Al usar <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}.dll
@@ -100,13 +99,13 @@ dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}
 
 {{< /tabs >}}
 
-Todos los tests se instrumentan automáticamente.
+Todas las pruebas se instrumentan automáticamente.
 
-### Compatibilidad con el paquete nuget de Microsoft.CodeCoverage
+### Compatibilidad con el paquete nuget Microsoft.CodeCoverage {#compatibility-with-microsoftcodecoverage-nuget-package}
 
-Desde la versión `17.2.0` de `Microsoft.CodeCoverage`, Microsoft introdujo la [instrumentación dinámica con la `.NET CLR Profiling API`][16] habilitada por defecto solo en Windows. La instrumentación automática de Datadog se basa en la `.NET CLR Profiling API`. Esta API solo permite un suscriptor (por ejemplo, `dd-trace`). El uso de la instrumentación dinámica de CodeCoverage rompe la instrumentación de test automática.
+Desde `Microsoft.CodeCoverage` versión `17.2.0`, Microsoft introdujo la [instrumentación dinámica usando `.NET CLR Profiling API`][16] habilitada de forma predeterminada solo en Windows. La instrumentación automática de Datadog depende de `.NET CLR Profiling API`. Esta API permite solo un suscriptor (por ejemplo, `dd-trace`). El uso de la instrumentación dinámica de CodeCoverage interrumpe la instrumentación automática de pruebas.
 
-La solución es cambiar de instrumentación dinámica a [instrumentación estática][17]. Modifica tu archivo `.runsettings` con los siguientes mandos de configuración:
+La solución es cambiar de la instrumentación dinámica a la [instrumentación estática][17]. Modifique su archivo `.runsettings` con las siguientes opciones de configuración:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -131,46 +130,46 @@ La solución es cambiar de instrumentación dinámica a [instrumentación estát
 </RunSettings>
 ```
 
-## Ajustes de configuración
+## Configuración de ajustes {#configuration-settings}
 
-Puedes cambiar la configuración predeterminada de la CLI utilizando argumentos de línea de comandos o variables de entorno. Para obtener una lista completa de los ajustes de configuración, ejecuta:
+Puede cambiar la configuración predeterminada de la CLI mediante argumentos de línea de comandos o variables de entorno. Para obtener una lista completa de los ajustes de configuración, ejecute:
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --help
 {{< /code-block >}}
 
-En la siguiente lista, se muestran los valores por defecto de los ajustes de configuración clave:
+La siguiente lista muestra los valores predeterminados para los ajustes de configuración clave:
 
-`--dd-service`
-: nombre del servicio o biblioteca en proceso de test.<br/>
-**Variable de entorno **: `DD_SERVICE`<br/>
-**Por defecto**: el nombre del repositorio<br/>
+`--dd-service` (opcional)
+: Nombre del servicio o biblioteca bajo prueba.<br/>
+**Variable de entorno**: `DD_SERVICE`<br/>
+**Predeterminado**: El nombre del repositorio<br/>
 **Ejemplo**: `my-dotnet-app`
 
-`--dd-env`
-: nombre del entorno donde se están ejecutando los tests.<br/>
-**Variable de entorno **: `DD_ENV`<br/>
-**Por defecto**: `none`<br/>
+`--dd-env` (opcional)
+: Nombre del entorno donde se ejecutan las pruebas.<br/>
+**Variable de entorno**: `DD_ENV`<br/>
+**Predeterminado**: `none`<br/>
 **Ejemplos**: `local`, `ci`
 
-`--agent-url`
-: URL del Datadog Agent para la recopilación de trazas con el formato `http://hostname:port`.<br/>
+`--agent-url` (Solo cuando se usa el Datadog Agent)
+: URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
 **Variable de entorno**: `DD_TRACE_AGENT_URL`<br/>
-**Por defecto**: `http://localhost:8126`
+**Predeterminado**: `http://localhost:8126`
 
-`test_session.name` (solo disponible como variable de entorno)
-: Identifica un grupo de tests, como `integration-tests`, `unit-tests` o `smoke-tests`.<br/>
+`test_session.name` (Solo disponible como variable de entorno)
+: Identifica un grupo de pruebas, como `unit-tests`, `integration-tests` o `smoke-tests`.<br/>
 **Variable de entorno**: `DD_TEST_SESSION_NAME`<br/>
-**Por defecto**: (nombre del trabajo CI (genérico) + comando de test)<br/>
+**Predeterminado**: El nombre del trabajo de CI y el comando de prueba, o el comando de prueba si el nombre del trabajo de CI no está disponible.<br/>
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
 
-Para más información sobre etiquetas reservadas `service` y `env`, consulta [etiquetado de servicios unificado][6]. También se pueden utilizar todas las demás opciones de [configuración del rastreador de Datadog][7].
+Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulte [Unified Service Tagging][6]. También se pueden usar todas las demás opciones de [configuración del trazador de Datadog][7].
 
-### Añadir etiquetas (tags) personalizadas a los tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests}
 
-Para añadir etiquetas personalizadas a los tests, configura la [instrumentación personalizada](#custom-instrumentation) primero.
+Para agregar etiquetas personalizadas a las pruebas, primero configure [instrumentación personalizada](#custom-instrumentation).
 
-Puedes añadir etiquetas personalizadas a tus tests con el tramo activo en ese momento:
+Puede agregar etiquetas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```csharp
 // inside your test
@@ -182,13 +181,13 @@ if (scope != null) {
 // ...
 ```
 
-Para crear filtros o campos `group by` para estas etiquetas, primero debes crear facetas. Para obtener más información sobre la adición de etiquetas, consulta la sección [Adición de etiquetas][8] de la documentación de instrumentación personalizada de .NET.
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Adding Tags][8] de la documentación de instrumentación personalizada de .NET.
 
-### Añadir medidas personalizadas a los tests
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests}
 
-Para añadir medidas personalizadas a los tests, configura la [instrumentación personalizada](#custom-instrumentation) primero.
+Para agregar medidas personalizadas a las pruebas, primero configure [instrumentación personalizada](#custom-instrumentation).
 
-Al igual que con las etiquetas, puedes añadir medidas personalizadas a tus tests utilizando el tramo activo en ese momento:
+Al igual que con las etiquetas, puede agregar medidas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```csharp
 // inside your test
@@ -200,35 +199,35 @@ if (scope != null) {
 // ...
 ```
 
-Para crear filtros o visualizaciones para estas etiquetas, primero debes crear facetas. Para obtener más información sobre la adición de etiquetas, consulta la sección [Adición de etiquetas][8] de la documentación de instrumentación personalizada de .NET.
+Para crear filtros o visualizaciones para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Adding Tags][8] de la documentación de instrumentación personalizada de .NET.
 
-Más información sobre las medidas personalizadas en la [guía para añadir medidas personalizadas][9].
+Lea más sobre las medidas personalizadas en la [Guía para agregar medidas personalizadas][9].
 
-### Informar sobre la cobertura del código
+### Reportando Code Coverage {#reporting-code-coverage}
 
-Cuando la cobertura del código está disponible, el rastreador de Datadog (v2.31.0 o posterior) informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando Code Coverage está disponible, el trazador de Datadog (v2.31.0 o posterior) lo informa bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Si utilizas [Coverlet][10] para calcular la cobertura del código, indica la ruta del archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en los formatos OpenCover o Cobertura. Alternativamente, puedes activar el cálculo de cobertura del código integrado del rastreador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
+Si está utilizando [Coverlet][10] para calcular su cobertura de código, indique la ruta al archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en formato OpenCover o Cobertura. Alternativamente, puede habilitar el cálculo de Code Coverage integrado del trazador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
 
-**Nota**: Cuando se utiliza Test Impact Analysis, la cobertura de código integrada en el rastreador está activada por defecto.
+**Nota**: Al usar Test Impact Analysis, el Code Coverage integrado del SDK se habilita de forma predeterminada.
 
-Puedes ver la evolución de la cobertura de los tests en la pestaña **Coverage** (Cobertura) de una sesión de tests.
+Puede ver la evolución de Code Coverage en la pestaña {{< ui >}}Coverage{{< /ui >}} de una sesión de prueba.
 
-Para más información sobre las opciones de exclusión, consulta [Cobertura del código][11].
+Para obtener más información sobre las opciones de exclusión, consulte [Code Coverage][11].
 
-### Instrumentación de los tests de BenchmarkDotNet
+### Instrumentación de pruebas de BenchmarkDotNet {#instrumenting-benchmarkdotnet-tests}
 
-Para instrumentar tus tests de referencia, debes hacer lo siguiente:
+Para instrumentar sus pruebas de referencia, necesita:
 
-1. Añade el [paquete NuGet `Datadog.Trace.BenchmarkDotNet`][12] a tu proyecto (por ejemplo, con `dotnet add package Datadog.Trace.BenchmarkDotNet`).
-2. Configura tu proyecto para utilizar el exportador `Datadog.Trace.BenchmarkDotNet` con el atributo `DatadogDiagnoser` o el método de extensión `WithDatadog()`. Por ejemplo:
+1. Agregar el [`Datadog.Trace.BenchmarkDotNet` paquete NuGet][12] a su proyecto (por ejemplo, usando `dotnet add package Datadog.Trace.BenchmarkDotNet`).
+2. Configure su proyecto para usar el exportador `Datadog.Trace.BenchmarkDotNet` usando el atributo `DatadogDiagnoser` o el método de extensión `WithDatadog()`. Por ejemplo:
 
 {{< tabs >}}
 
-{{% tab "Using the [DatadogDiagnoser] Attribute" %}}
+{{% tab "Uso del atributo [DatadogDiagnoser]" %}}
 {{< code-block lang="csharp" >}}
-con BenchmarkDotNet.Attributes;
-con Datadog.Trace.BenchmarkDotNet;
+using BenchmarkDotNet.Attributes;
+using Datadog.Trace.BenchmarkDotNet;
 
 [DatadogDiagnoser]
 [MemoryDiagnoser]
@@ -243,11 +242,11 @@ public class OperationBenchmark
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Using the Configuration" %}}
+{{% tab "Uso de la configuración" %}}
 {{< code-block lang="csharp" >}}
-con BenchmarkDotNet.Configs;
-con BenchmarkDotNet.Running;
-con Datadog.Trace.BenchmarkDotNet;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Running;
+using Datadog.Trace.BenchmarkDotNet;
 
 var config = DefaultConfig.Instance
               .WithDatadog();
@@ -258,72 +257,72 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 {{< /tabs >}}
 
-3. [Configuración del método de notificación][13].
-4. Ejecuta el proyecto de referencia como lo haces normalmente, todos los tests de referencia se instrumentarán automáticamente.
+3. [Configure el método de informe][13].
+4. Ejecute el proyecto de referencia como lo hace normalmente; todas las pruebas de referencia se instrumentarán automáticamente.
 
 {{% ci-git-metadata %}}
 
-## Instrumentación personalizada
+## Instrumentación personalizada {#custom-instrumentation}
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> La configuración de su instrumentación personalizada depende de la versión de <code>dd-trace</code>. Para usar la instrumentación personalizada, debes mantener las versiones del paquete para <code>dd-trace</code> y los paquetes NuGet <code>Datadog.Trace</code> sincronizados.
+  <strong>Nota:</strong> La configuración de su instrumentación personalizada depende de la <code>dd-trace</code> versión. Para usar la instrumentación personalizada, debe mantener las versiones de los paquetes de <code>dd-trace</code> y <code>Datadog.Trace</code> NuGet sincronizadas.
 </div>
 
-Para utilizar la instrumentación personalizada en tu aplicación .NET:
+Para usar la instrumentación personalizada en su aplicación .NET:
 
-1. Ejecuta `dd-trace --version` para obtener la versión de la herramienta.
-2. Añade el [paquete de NuGet][14] `Datadog.Trace` con la misma versión a tu aplicación.
-3. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
+1. Ejecute `dd-trace --version` para obtener la versión de la herramienta.
+2. Agregue el `Datadog.Trace` [paquete NuGet][14] con la misma versión a su aplicación.
+3. En el código de su aplicación, acceda al rastreador global a través de la propiedad `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
-Para más información sobre cómo añadir tramos y etiquetas para la instrumentación personalizada, consulta la [documentación de instrumentación personalizada de .NET][15].
+Para obtener más información sobre cómo agregar tramos y etiquetas para instrumentación personalizada, consulte la [documentación de instrumentación personalizada de .NET][15].
 
-## API para tests manuales
+## API de prueba manual {#manual-testing-api}
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> Para usar la API de test manual, debes agregar el paquete NuGet <code>Datadog.Trace</code> en el proyecto .NET de destino.
+  <strong>Nota:</strong> Para usar la API de pruebas manuales, debe agregar el <code>Datadog.Trace</code> paquete NuGet en el proyecto de .NET de destino.
 </div>
 
-Si utilizas XUnit, NUnit o MSTest con tus proyectos .NET, Test Optimization los instrumenta automáticamente y envía los resultados de los tests a Datadog. Si utilizas un framework no compatible o si tienes un mecanismo de test diferente, puedes utilizar la API para informar de los resultados de los tests a Datadog.
+Si utiliza XUnit, NUnit o MSTest con sus proyectos .NET, Test Optimization los instrumenta automáticamente y envía los resultados de las pruebas a Datadog. Si utiliza un marco de pruebas no compatible o si tiene un mecanismo de prueba diferente, puede utilizar la API para informar los resultados de las pruebas a Datadog.
 
-La API se basa en tres conceptos: módulo de test, conjuntos de tests y tests.
+La API se basa en tres conceptos: módulo de prueba, conjuntos de pruebas y pruebas.
 
-### Módulo de test
+### Módulo de prueba {#test-module}
 
-Un módulo de test representa el ensamblado de .NET que incluye los tests.
+Un módulo de prueba representa el ensamblado de .NET que incluye las pruebas.
 
-Para iniciar un módulo de test, llama a `TestModule.Create()` y pasa el nombre del módulo o el nombre del ensamblado de .NET donde se encuentran los tests.
+Para iniciar un módulo de prueba, llame a `TestModule.Create()` y pase el nombre del módulo o el nombre del ensamblado de .NET donde se encuentran las pruebas.
 
-Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
+Cuando todas sus pruebas hayan finalizado, llame a `module.Close()` o `module.CloseAsync()`, lo cual fuerza a la biblioteca a enviar todos los resultados de prueba restantes al backend.
 
-### Conjuntos de tests
+### Conjuntos de pruebas {#test-suites}
 
-Un conjunto de tests comprende un grupo de tests. Pueden tener métodos comunes de inicialización y desmontaje y compartir algunas variables. En .NET, suelen implementarse como una clase de test o fixture que contiene varios métodos de test. Un conjunto de tests puede tener opcionalmente información adicional como atributos o información de error.
+Un conjunto de pruebas comprende un conjunto de pruebas. Pueden tener métodos comunes de inicialización y finalización y compartir algunas variables. En .NET, generalmente se implementan como una clase de prueba o accesorio que contiene múltiples métodos de prueba. Un conjunto de pruebas puede tener opcionalmente información adicional como atributos o información de error.
 
-Crea conjuntos de tests en el módulo de test llamando a `module.GetOrCreateSuite()` y pasando el nombre del conjunto de tests.
+Cree conjuntos de pruebas en el módulo de prueba llamando a `module.GetOrCreateSuite()` y pasando el nombre del conjunto de pruebas.
 
-Llama a `suite.Close()` cuando todos los tests relacionados en el conjunto hayan finalizado su ejecución.
+Llame a `suite.Close()` cuando todas las pruebas relacionadas en el conjunto hayan finalizado su ejecución.
 
-### Tests
+### Pruebas {#tests}
 
-Cada test se ejecuta dentro de un conjunto y debe terminar en uno de estos tres estados: `TestStatus.Pass`, `TestStatus.Fail` o `TestStatus.Skip`.
+Cada prueba se ejecuta dentro de un conjunto de pruebas y debe terminar en uno de estos tres estados: `TestStatus.Pass`, `TestStatus.Fail` o `TestStatus.Skip`.
 
-Un test puede tener opcionalmente información adicional como:
+Una prueba puede tener opcionalmente información adicional como:
 
 - Parámetros
 - Atributos
-- Información sobre errores
-- Rasgos de test
+- Información de error
+- Características de la prueba
 - Datos de referencia
 
-Crea tests en un conjunto llamando a `suite.CreateTest()` y pasando el nombre del test. Cuando un test finaliza, llama a `test.Close()` con uno de los estados predefinidos.
+Cree pruebas en un conjunto de pruebas llamando a `suite.CreateTest()` y pasando el nombre de la prueba. Cuando una prueba finalice, llame a `test.Close()` con uno de los estados predefinidos.
 
-### Ejemplo de código
+### Ejemplo de código {#code-example}
 
-El siguiente código representa un uso sencillo de la API:
+El siguiente código representa un uso simple de la API:
 
 {{< code-block lang="csharp" >}}
-con System.Reflection;
-con Datadog.Trace.Ci;
+using System.Reflection;
+using Datadog.Trace.Ci;
 
 var module = TestModule.Create(Assembly.GetExecutingAssembly().GetName().Name ?? "(dyn_module)");
 module.SetTag("ModuleTag", "Value");
@@ -362,13 +361,13 @@ suite.Close();
 await module.CloseAsync();
 {{< /code-block >}}
 
-Llama siempre a `module.Close()` o `module.CloseAsync()` al final para que todos los datos del test se envíen a Datadog.
+Llame siempre a `module.Close()` o `module.CloseAsync()` al final para que todos los datos de prueba se envíen a Datadog.
 
-## Prácticas recomendadas
+## Mejores prácticas {#best-practices}
 
-### Nombre de la sesión de test `DD_TEST_SESSION_NAME`
+### Nombre de la sesión de prueba `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
 
-Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y del grupo de tests relacionado. Algunos ejemplos de valores para esta etiqueta serían:
+Use `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de prueba y el grupo de pruebas relacionado. Ejemplos de valores para esta etiqueta serían:
 
 - `unit-tests`
 - `integration-tests`
@@ -377,22 +376,19 @@ Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y de
 - `ui-tests`
 - `backend-tests`
 
-Si no se especifica `DD_TEST_SESSION_NAME`, el valor por defecto utilizado es una combinación de:
+Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado es el nombre del trabajo de CI y el comando de prueba. Si el nombre del trabajo de CI no está disponible, se utiliza el comando de prueba.
 
-- Nombre del trabajo CI
-- Comando utilizado para ejecutar los tests (como `yarn test`)
+El nombre de la sesión de prueba debe ser único dentro de un repositorio para ayudarle a distinguir diferentes grupos de pruebas.
 
-El nombre de la sesión de test debe ser único dentro de un repositorio para ayudar a distinguir diferentes grupos de tests.
+#### Cuándo usar `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name}
 
-#### Cuándo utilizar `DD_TEST_SESSION_NAME`
-
-Hay un conjunto de parámetros que Datadog comprueba para establecer la correspondencia entre las sesiones de test. El comando de test utilizado para ejecutar los tests es uno de ellos. Si el comando de test contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
+Existe un conjunto de parámetros que Datadog verifica para establecer la correspondencia entre las sesiones de prueba. El comando de prueba utilizado para ejecutar las pruebas es uno de ellos. Si el comando de prueba contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
 
 - `dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varían entre diferentes ejecuciones.
+Datadog recomienda usar `DD_TEST_SESSION_NAME` si sus comandos de prueba varían entre ejecuciones.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

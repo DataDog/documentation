@@ -1,22 +1,22 @@
 ---
 aliases:
 - /ko/logs/processing/pipelines/
-description: Datadog pipelines 및 프로세서를 사용하여 로그 구문 분석, 보강 및 관리
+description: Datadog 파이프라인 및 프로세서를 사용하여 로그 구문 분석, 보강 및 관리
 further_reading:
 - link: https://learn.datadoghq.com/courses/log-pipelines
   tag: 학습 센터
   text: 로그 파이프라인 구축 및 관리
 - link: /logs/log_configuration/processors
-  tag: 설명서
+  tag: 문서
   text: 사용 가능한 프로세서 전체 목록 참조
 - link: /logs/logging_without_limits/
-  tag: 설명서
+  tag: 문서
   text: Logging without Limits*
 - link: /logs/explorer/
-  tag: 설명서
+  tag: 문서
   text: 로그 탐색 방법 알아보기
 - link: /logs/troubleshooting/
-  tag: 설명서
+  tag: 문서
   text: 로그 문제 해결
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: 학습 센터
@@ -39,7 +39,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: 블로그
   text: Datadog을 사용해 이메일 전송 시스템에 대한 종합적이고 세분화된 가시성을 파악하는 방법
-title: 파이프라인
+title: Pipelines
 ---
 ## 개요 {#overview}
 
@@ -61,8 +61,8 @@ Datadog은 JSON 형식의 로그를 자동으로 [구문 분석][1]합니다. �
 
 관리자는 각 파이프라인에 대하여 다음과 같은 편집 범위를 선택할 수 있습니다.
 
-- **편집자**: 지정된 사용자, 팀 또는 역할만 파이프라인 구성 및 프로세서를 편집할 수 있습니다.
-- **프로세서 편집자**: 프로세서만(중첩된 파이프라인 포함) 지정된 사용자, 팀 또는 역할이 편집할 수 있습니다. 파이프라인 속성(예: 필터 쿼리 또는 전역 파이프라인 목록에서의 순서)은 아무도 수정할 수 없습니다.
+- **Editor**: 지정된 사용자, 팀 또는 역할만 파이프라인 구성 및 프로세서를 편집할 수 있습니다.
+- **Processor Editor**: 프로세서만(중첩된 파이프라인 포함) 지정된 사용자, 팀 또는 역할이 편집할 수 있습니다. 파이프라인 속성(예: 필터 쿼리 또는 전역 파이프라인 목록에서의 순서)은 아무도 수정할 수 없습니다.
 
 <div class="alert alert-warning">사용자에게 파이프라인의 제한 목록에 대한 액세스 권한을 부여해도 자동으로 <code>logs_write_pipelines</code> 또는 <code>logs_write_processors</code> 권한이 부여되지는 않습니다. 그러한 권한은 관리자가 별도로 부여해야 합니다.</div>
 
@@ -74,7 +74,7 @@ JSON 로그의 전처리는 로그가 파이프라인 처리에 진입하기 전
 
 JSON 로그 전처리에는 기본 구성이 함께 제공되어 표준 로그 포워더에 사용할 수 있습니다. 이 구성을 편집하여 사용자 지정 또는 특정 로그 전달 접근 방식을 조정하려면:
 
-1. Datadog 에서 [Pipelines][8]으로 이동하여 [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9]를 선택합니다.
+1. Datadog에서 [Pipelines][8]으로 이동하여 [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9]를 선택합니다.
 
     **참고:** JSON 로그를 전처리하는 것만이 로그 속성 중 하나를 로그의 `host`로 정의하는 유일한 방법입니다.
 
@@ -305,14 +305,14 @@ Datadog에서는 통합 파이프라인을 사용하려면 해당하는 로그 `
 
 로그별로 변경 전후 상태를 비교합니다. 비교해 볼 변경 사항을 선택하세요.
 
-- **변경 사항**: 현재 배포된 파이프라인 버전과 변경 사항이 적용된 버전을 비교합니다.
-- **전체 파이프라인**: 파이프라인에 진입하는 로그를 전체 파이프라인이 실행된 후의 로그와 비교합니다.
+- **Your changes**: 현재 배포된 파이프라인 버전과 변경 사항이 적용된 버전을 비교합니다.
+- **Entire pipeline**: 파이프라인에 진입하는 로그를 전체 파이프라인이 실행된 후의 로그와 비교합니다.
 
 로그 목록의 범위를 좁히려면 쿼리 필터를 사용하거나 영향도를 기준으로 필터링하세요.
 
-- **모든 로그**: 라이브 테일의 모든 로그입니다.
-- **영향을 받은 로그**: 이번 세션에서 편집을 통해 변경된 로그만 해당합니다.
-- **영향을 받지 않은 로그**: 편집으로 인해 변경되지 않은 로그만 해당합니다.
+- **All logs**: Live Tail의 모든 로그입니다.
+- **Impacted logs**: 이번 세션에서 편집을 통해 변경된 로그만 해당합니다.
+- **Not impacted logs**: 편집으로 인해 변경되지 않은 로그만 해당합니다.
 
 ## 파이프라인 관리 {#manage-your-pipelines}
 
@@ -331,6 +331,71 @@ Datadog에서는 통합 파이프라인을 사용하려면 해당하는 로그 `
 각 파이프라인에 대하여 예상 사용량 메트릭이 표시됩니다. 여기에는 각 파이프라인이 수집하고 수정하는 로그의 양과 수가 표시됩니다. 모든 파이프라인에는 즉시 사용 가능한 [로그 예상 사용량 대시보드][13]로 이동하는 링크가 포함됩니다. 이 대시보드는 파이프라인의 사용량 메트릭에 대한 상세한 차트를 제공합니다.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="파이프라인의 사용량 메트릭을 신속하게 조회하는 방법" style="width:50%;">}}
+
+<!-- vale Datadog.headings = NO -->
+## 자동 처리 {#auto-processing}
+<!-- vale Datadog.headings = YES -->
+
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서는 Agentless Scanning을 사용할 수 없습니다.</div>
+{{< /site-region >}}
+
+Auto-Processing은 사용자 지정 애플리케이션 로그를 구문 분석하고 타임스탬프, 상태, 트레이스 ID 및 스팬 ID를 포함한 핵심 속성을 추출합니다. 이를 통해 파이프라인을 수동으로 구성하지 않아도 로그를 검색, 필터링 및 상호 연결할 수 있습니다.
+
+Auto-Processing은 통합 또는 사용자 지정 파이프라인의 필터와 일치하지 않는 로그만 처리합니다. 로그가 파이프라인의 필터와 일치하면 해당 파이프라인이 로그를 수정하지 않더라도 Auto-Processing은 로그를 처리하지 않습니다. 기존 파이프라인 구성은 변경되지 않습니다.
+
+<div class="alert alert-warning">파이프라인의 필터가 모든 로그와 일치하는 경우(예: <code>*</code>), Auto-Processing은 조직 내의 어떤 로그도 처리하지 않습니다. Auto-Processing을 사용하려면 해당 파이프라인의 필터를 처리해야 하는 로그로 좁히세요.</div>
+
+### 항목 생성 방법 {#how-entries-are-created}
+
+Datadog은 지원되는 로그를 Auto-Processing 항목으로 그룹화합니다. 각 항목은 하나의 소스 및 서비스 쌍을 포함합니다. 예를 들어, `source:storefront` 및 `service:catalog-api`가 포함된 로그는 하나의 항목을 구성합니다. 새로운 로그 패턴이 나타나면 Datadog은 이전에 지원되던 패턴의 구문 분석 방식을 변경하지 않고 해당 패턴을 지원하도록 항목을 업데이트합니다. 이미 추출된 속성은 이름을 유지하므로 해당 속성을 사용하는 패싯, 대시보드 및 모니터는 계속 작동합니다.
+
+Datadog은 새로운 소스 및 서비스 쌍에 대한 첫 번째 로그를 수신한 후 약 15분 뒤에 해당 쌍에 대한 항목을 생성합니다. 해당 쌍은 지난 24시간 동안 최소 1,000개의 인덱싱된 로그를 보유해야 합니다. [제외 필터][15]에 의해 제외된 로그는 이 임계값에 포함되지 않습니다. 로그량이 임계값 미만인 경우 Datadog은 약 12시간 후에 다시 확인합니다. 로그량이 여전히 임계값 미만이면 Datadog은 해당 쌍에 대한 새로운 로그 패턴이 나타날 때까지 항목을 생성하지 않습니다.
+
+조직마다 Auto-Processing 항목은 최대 100개까지 만들 수 있습니다. Auto-Processing을 켤 때 조직에서 이미 로그를 전송 중인 경우, Datadog은 최대 100개의 소스 및 서비스 쌍에 대한 항목을 생성합니다. Datadog은 가장 많은 로그를 처리할 쌍을 선택합니다. 그 후 Datadog은 조직에 100개의 항목이 생길 때까지 로그가 도착하는 대로 새 쌍에 대한 항목을 생성합니다.
+
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="Processing 페이지의 Auto-Processing 탭으로, 소스 및 서비스별 항목과 각 항목의 구문 분석된 속성 수, 사용량, 활성화 토글이 표시됩니다." style="width:100%;" >}}
+
+### Auto-Processing 켜기 또는 끄기 {#turn-auto-processing-on-or-off}
+
+2026-11-04 이후에 생성된 조직의 경우 Auto-Processing이 기본적으로 켜져 있으며 새 항목이 자동으로 활성화됩니다. 2026-11-04 이전에 생성된 조직의 경우 Auto-Processing이 기본적으로 꺼져 있습니다.
+
+[{{< ui >}}Processing{{< /ui >}} 페이지][8]에서 {{< ui >}}Auto-Processing{{< /ui >}} 탭을 선택하고 기능 토글을 사용하여 조직의 Auto-Processing을 켜거나 끄세요.
+
+### 새 항목을 활성화하는 방법 선택 {#choose-how-new-entries-are-enabled}
+
+{{< ui >}}Auto-Processing{{< /ui >}} 탭에서 새 항목을 자동으로 활성화할지 여부를 선택하세요.
+
+- **Automatically enable new entries**: 새 항목이 생성 시 활성화되며 일치하는 수신 로그 처리를 시작합니다.
+- **Review new entries before enabling**: 새 항목이 생성 시 비활성화됩니다. [변환을 검토](#review-transformations)한 다음 사용할 항목을 활성화하세요.
+
+### 변환 검토 {#review-transformations}
+
+1. {{< ui >}}Auto-Processing{{< /ui >}} 탭에서 검토할 소스 및 서비스 쌍을 찾으세요.
+2. {{< ui >}}View Transformations{{< /ui >}}를 클릭하세요.
+3. 로그 패턴을 클릭하세요.
+4. 예제 로그를 검사하여 원본 속성과 처리된 속성을 비교하세요.
+
+### 항목 활성화 또는 비활성화 {#enable-or-disable-an-entry}
+
+{{< ui >}}Auto-Processing{{< /ui >}} 탭에서 항목의 토글을 사용하여 해당 소스 및 서비스 쌍에 대한 처리를 활성화하거나 비활성화하세요. 항목을 비활성화하면 향후 로그에만 적용됩니다. 이미 처리된 로그는 변경되지 않습니다.
+
+### 수동 파이프라인으로 전환 {#switch-to-a-manual-pipeline}
+
+구문 분석 또는 속성 이름을 사용자 지정하려면 {{< ui >}}View Transformations{{< /ui >}} 페이지에서 {{< ui >}}Switch to manual pipeline{{< /ui >}}을 클릭합니다. Datadog은 동일한 필터와 프로세서로 사용자 지정 파이프라인을 생성하고 해당 소스 및 서비스 쌍에 대한 Auto-Processing 항목을 제거합니다.
+
+전환 후:
+
+- 파이프라인이 Pipelines 목록에 나타나며 동일한 방식으로 로그를 구문 분석합니다. 속성 이름은 그대로 유지되므로 기존 패싯, 대시보드 및 모니터가 계속 작동합니다.
+- 새 로그 패턴이 나타나도 Datadog은 더 이상 파이프라인을 업데이트하지 않습니다. 그 이후부터는 사용자가 해당 구성을 관리합니다.
+- 파이프라인의 필터가 이 로그들과 일치하므로 Auto-Processing이 더 이상 해당 로그를 처리하지 않습니다.
+
+Auto-Processing으로 돌아가려면 수동으로 관리하는 파이프라인을 삭제하세요. 그런 다음 Datadog은 해당 로그가 [항목 생성 요구 사항](#how-entries-are-created)을 충족하면 해당 소스 및 서비스 쌍에 대한 새 항목을 생성합니다. 새 항목은 처음부터 새로 생성되며 이전 항목이나 편집 내용을 복원하지 않습니다.
+
+### 제한 사항 {#limitations}
+
+- 조직마다 자동 처리 항목은 최대 100개까지 만들 수 있습니다. Datadog은 이 제한을 초과하는 소스 및 서비스 쌍의 로그는 처리하지 않습니다. 자세한 내용은 [항목 생성 방법](#how-entries-are-created)을 참조하세요.
+- Auto-Processing이 이미 적용된 소스 및 서비스 쌍의 경우에도 일부 로그 패턴은 구문 분석되지 않은 상태로 남을 수 있습니다.
 
 ## 추가 자료 {#further-reading}
 
@@ -353,3 +418,4 @@ Datadog에서는 통합 파이프라인을 사용하려면 해당하는 로그 `
 [12]: /ko/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [14]: /ko/api/latest/restriction-policies/
+[15]: /ko/logs/log_configuration/indexes/#exclusion-filters

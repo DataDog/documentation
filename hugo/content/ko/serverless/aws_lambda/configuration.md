@@ -7,13 +7,13 @@ aliases:
 - /ko/serverless/configuration
 further_reading:
 - link: /serverless/installation/
-  tag: 설명서
+  tag: 문서
   text: AWS Lambda용 Serverless Monitoring 설치
 - link: /serverless/troubleshooting/
-  tag: 설명서
+  tag: 문서
   text: AWS Lambda용 Serverless Monitoring 문제 해결
 - link: /integrations/github
-  tag: 설명서
+  tag: 문서
   text: Datadog GitHub 통합
 - link: https://learn.datadoghq.com/courses/visibility-aws-lambda
   tag: 학습 센터
@@ -32,6 +32,7 @@ title: AWS Lambda용 Serverless Monitoring 구성
 - [로그 및 트레이스 연결](#connect-logs-and-traces)
 - [오류를 소스 코드와 연결](#link-errors-to-your-source-code)
 - [사용자 지정 메트릭 제출][27]
+- [자동 주입된 태그를 사용자 지정 메트릭에서 제외](#exclude-auto-injected-tags-from-custom-metrics)
 - [프로파일링 데이터 수집](#collect-profiling-data)
 - [텔레메트리를 PrivateLink 또는 프록시를 통해 전송](#send-telemetry-over-privatelink-or-proxy)
 - [여러 Datadog 조직에 텔레메트리 전송](#send-telemetry-to-multiple-datadog-organizations)
@@ -47,6 +48,7 @@ title: AWS Lambda용 Serverless Monitoring 구성
 - [DynamoDB PutItem에 대한 자동 연결 구성](#configure-auto-linking-for-dynamodb-putitem)
 - [AWS 서비스를 적절하게 시각화 및 모델링](#visualize-and-model-aws-services-by-resource-name)
 - [로그를 Observability Pipelines로 전송](#send-logs-to-observability-pipelines)
+- [Workload Identity Federation으로 인증](#authenticate-with-workload-identity-federation)
 - [API 키 시크릿을 정기적으로 다시 로드](#reload-api-key-secret-periodically)
 - [문제 해결](#troubleshoot)
 - [추가 자료](#further-reading)
@@ -58,7 +60,7 @@ title: AWS Lambda용 Serverless Monitoring 구성
 
 시작하려면, 먼저 함수에 [트레이싱이 활성화][43]되어 있어야 합니다.
 
-위협 모니터링을 활성화하려면 배포에 다음 환경 변수 추가:
+위협 모니터링을 활성화하려면 배포에 다음 환경 변수를 추가하세요.
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
@@ -71,7 +73,7 @@ App and API Protection 위협 탐지가 실제로 작동하는 모습을 확인�
    ```sh
    curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
-애플리케이션을 활성화하고 공격 패턴을 전송한 뒤 몇 분이 지나면 **위협 정보가 [Application Signals Explorer][41]**에 표시됩니다.
+애플리케이션을 활성화하고 공격 패턴을 전송한 뒤 몇 분이 지나면 **위협 정보가 [{{< ui >}}Application Signals Explorer{{< /ui >}}][41]에 표시됩니다**.
 
 ## 태그를 사용하여 텔레메트리 연결 {#connect-telemetry-using-tags}
 
@@ -80,7 +82,7 @@ App and API Protection 위협 탐지가 실제로 작동하는 모습을 확인�
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-[Datadog CLI][1] 최신 버전을 사용 중이어야 하고, 적절한 추가 인수를 사용해 `datadog-ci lambda instrument` 명령을 실행해야 합니다. 예:
+[Datadog CLI][1] 최신 버전을 사용 중이어야 하고, 적절한 추가 인수를 사용해 `datadog-ci lambda instrument` 명령을 실행해야 합니다. 예를 들면 다음과 같습니다.
 
 ```sh
 datadog-ci lambda instrument \
@@ -95,7 +97,7 @@ datadog-ci lambda instrument \
 {{% /tab %}}
 {{% tab "Serverless 프레임워크" %}}
 
-[Datadog 서버리스 플러그인][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예:
+[Datadog 서버리스 플러그인][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예를 들면 다음과 같습니다.
 
 ```yaml
 custom:
@@ -113,7 +115,7 @@ custom:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-[Datadog 서버리스 매크로][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예:
+[Datadog 서버리스 매크로][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예를 들면 다음과 같습니다.
 
 ```yaml
 Transform:
@@ -131,7 +133,7 @@ Transform:
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-[Datadog serverless cdk 컨스트럭트][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예:
+[Datadog serverless cdk 컨스트럭트][1] 최신 버전을 사용 중이어야 하고, `env`, `service`, `version` 및 `tags` 파라미터를 사용하여 태그를 적용해야 합니다. 예를 들면 다음과 같습니다.
 
 ```typescript
 const datadog = new DatadogLambda(this, "Datadog", {
@@ -148,7 +150,7 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 {{% /tab %}}
 {{% tab "기타" %}}
 
-[Datadog Lambda Extension][1]을 사용하여 Lambda 함수로부터 텔레메트리를 수집하는 경우, Lambda 함수에서 다음과 같은 환경 변수를 설정합니다. 예:
+[Datadog Lambda Extension][1]을 사용하여 Lambda 함수로부터 텔레메트리를 수집하는 경우, Lambda 함수에서 다음과 같은 환경 변수를 설정합니다. 예를 들면 다음과 같습니다.
 - DD_ENV: dev
 - DD_SERVICE: web
 - DD_VERSION: v1.2.3
@@ -178,7 +180,7 @@ Datadog은 [AWS Lambda 함수의 JSON 요청 및 응답 페이로드를 수집�
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-[Datadog CLI][1] 최신 버전을 사용 중이어야 하고, 추가 `--capture-lambda-payload` 인수를 사용해 `datadog-ci lambda instrument` 명령을 실행해야 합니다. 예:
+[Datadog CLI][1] 최신 버전을 사용 중이어야 하고, 추가 `--capture-lambda-payload` 인수를 사용해 `datadog-ci lambda instrument` 명령을 실행해야 합니다. 예를 들면 다음과 같습니다.
 
 ```sh
 datadog-ci lambda instrument \
@@ -190,7 +192,7 @@ datadog-ci lambda instrument \
 {{% /tab %}}
 {{% tab "Serverless 프레임워크" %}}
 
-[Datadog 서버리스 플러그인][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload`를 `true`로 설정해야 합니다. 예:
+[Datadog 서버리스 플러그인][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload`를 `true`로 설정해야 합니다. 예를 들면 다음과 같습니다.
 
 ```yaml
 custom:
@@ -203,7 +205,7 @@ custom:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-[Datadog 서버리스 매크로][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload` 파라미터를 `true`로 설정해야 합니다. 예:
+[Datadog 서버리스 매크로][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload` 파라미터를 `true`로 설정해야 합니다. 예를 들면 다음과 같습니다.
 
 ```yaml
 Transform:
@@ -218,7 +220,7 @@ Transform:
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-[Datadog 서버리스 cdk 컨스트럭트][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload` 파라미터를 `true`로 설정해야 합니다. 예:
+[Datadog 서버리스 cdk 컨스트럭트][1] 최신 버전을 사용 중이어야 하고, `captureLambdaPayload` 파라미터를 `true`로 설정해야 합니다. 예를 들면 다음과 같습니다.
 
 ```typescript
 const datadog = new DatadogLambda(this, "Datadog", {
@@ -507,7 +509,7 @@ Lambda 함수에서 환경 변수 `DD_TRACE_ENABLED`를 `false`로 설정합니�
     1. `dd-trace`를 사용하여 Datadog 트레이스 ID를 획득해 이를 로그에 추가합니다.
     2. 기본 Lambda 로그 파이프라인(읽기 전용임)을 복제합니다.
     3. 복제한 파이프라인을 활성화하고 기본 파이프라인을 비활성화합니다.
-    4. 복제한 파이프라인의 [Grok 파서][25] 규칙을 업데이트하여 Datadog 트레이스 ID를 `dd.trace_id` 속성으로 구문 분석하게 합니다. 예를 들어 `[INFO] dd.trace_id=4887065908816661012 My log message`와 같은 모양의 로그의 경우 규칙 `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*`을 사용합니다.
+    4. 복제한 파이프라인의 [{{< ui >}}Grok parser{{< /ui >}}][25] 규칙을 업데이트하여 Datadog 트레이스 ID를 `dd.trace_id` 속성으로 구문 분석하게 합니다. 예를 들어 `[INFO] dd.trace_id=4887065908816661012 My log message`와 같은 모양의 로그의 경우 규칙 `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*`을 사용합니다.
 
 ## 오류를 소스 코드와 연결 {#link-errors-to-your-source-code}
 
@@ -517,11 +519,26 @@ Lambda 함수에서 환경 변수 `DD_TRACE_ENABLED`를 `false`로 설정합니�
 
 [101]: /ko/integrations/guide/source-code-integration/?tab=go#serverless
 
+## 자동 주입된 태그를 사용자 지정 메트릭에서 제외 {#exclude-auto-injected-tags-from-custom-metrics}
+
+Datadog Lambda 확장 프로그램은 `function_arn`, `region`, `account_id`와 같은 자동 주입 태그를 사용하여 DogStatsD를 통해 제출하는 [사용자 지정 메트릭][27]을 강화합니다.
+
+사용자 지정 메트릭에서 특정 자동 주입 태그를 삭제하려면 `DD_LAMBDA_CUSTOMER_METRICS_EXCLUDE_TAGS` 환경 변수를 쉼표로 구분된 태그 키 목록으로 설정하세요. 예를 들어 `function_arn` 및 `region` 태그를 둘 다 제외하려면 다음과 같이 입력합니다.
+
+```yaml
+DD_LAMBDA_CUSTOMER_METRICS_EXCLUDE_TAGS: function_arn,region
+```
+
+**참고**:
+   - 이 설정은 사용자 지정(DogStatsD) 메트릭에만 적용됩니다. [향상된 Lambda 메트릭][7] 또는 트레이스에 대한 태그는 변경하지 않습니다.
+   - 기본적으로 제외되는 태그는 없습니다.
+   - 이 기능은 Datadog Lambda Extension 버전 98+에서 사용할 수 있습니다.
+
 ## 프로파일링 데이터 수집 {#collect-profiling-data}
 
-Datadog의 [Continuous Profiler][42]는 Python 트레이서 버전 4.62.0 및 레이어 버전 62 이하에서 미리 보기로 이용할 수 있습니다. 이 옵션 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하여 활성화합니다.
+Datadog의 [Continuous Profiler][42]는 Python 트레이서 버전 4.62.0 및 레이어 버전 62 이하에서 미리 보기로 이용할 수 있습니다. 이 선택적 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`으로 설정하여 활성화됩니다.
 
-Continuous Profiler는 정기적으로 CPU 및 실행 중인 모든 Python 코드의 힙 스냅샷을 생성하는 스레드를 스포닝하는 방식으로 작동합니다. 여기에는 프로파일러 자체도 포함할 수 있습니다. 프로파일러가 자신을 무시하도록 하려면 `DD_PROFILING_IGNORE_PROFILER`를 `true`로 설정하세요.
+Continuous Profiler는 정기적으로 CPU 및 실행 중인 모든 Python 코드의 힙 스냅샷을 생성하는 스레드를 스포닝하는 방식으로 작동합니다. 여기에는 프로파일러 자체도 포함될 수 있습니다. Continuous Profiler가 자신을 무시하도록 하려면 `DD_PROFILING_IGNORE_PROFILER`를 `true`로 설정하세요.
 
 ## 텔레메트리를 PrivateLink 또는 프록시를 통해 전송 {#send-telemetry-over-privatelink-or-proxy}
 
@@ -626,7 +643,7 @@ Datadog은 발신되는 AWS SDK 요청에 자동으로 트레이스 컨텍스트
 
 ## X-Ray 및 Datadog 트레이스 병합 {#merge-x-ray-and-datadog-traces}
 
-AWS X-Ray는 특정 AWS 관리형 서비스(예: AppSync 및 Step Functions)를 통한 트레이싱을 지원하며, 이것은 Datadog APM에서는 기본적으로 지원되지 않습니다. [Datadog X-Ray 통합][34]을 활성화하고 X-Ray 트레이스를 Datadog 네이티브 트레이스와 병합할 수 있습니다. [추가 세부 정보][35]를 참조하세요.
+Datadog APM이 아직 계측하지 않는 AWS 관리형 서비스(예: AppSync)의 경우 [Datadog X-Ray 통합][34]을 활성화하고 X-Ray 트레이스를 Datadog 네이티브 트레이스와 병합할 수 있습니다. [추가 세부 정보][35]를 참조하세요.
 
 ## AWS Lambda 코드 서명 활성화 {#enable-aws-lambda-code-signing}
 
@@ -666,7 +683,7 @@ Datadog은 [Forwarder Lambda 함수][4] 또는 [Lambda 확장][2]을 사용하�
 
 1. `serverless-plugin-datadog`를 최신 버전으로 업그레이드하세요. 이렇게 하면 기본적으로 Datadog Lambda Extension이 설치됩니다(단, `addExtension`을 `false`로 설정한 경우는 예외).
 2. 필수 파라미터 `site` 및 `apiKeySecretArn`을 설정합니다.
-3. 이전에 `env`, `service`, `version` 매개변수를 Lambda 리소스 태그로 설정한 경우 해당 파라미터를 설정합니다. 확장을 사용하는 경우, 플러그인이 대신 Datadog 예약된 환경 변수를 통해 자동으로 설정합니다(예: `DD_ENV`).
+3. 이전에 `env`, `service`, `version` 파라미터를 Lambda 리소스 태그로 설정한 경우 해당 파라미터를 설정합니다. 확장을 사용하는 경우, 플러그인이 대신 Datadog 예약된 환경 변수를 통해 자동으로 설정합니다(예: `DD_ENV`).
 4. `forwarderArn` 파라미터를 제거합니다. 단, Forwarder가 Lambda 외 리소스로부터 계속 로그를 수집하게 하고 싶고 `subscribeToApiGatewayLogs`, `subscribeToHttpApiLogs` 또는 `subscribeToWebsocketLogs`가 `true`로 설정된 경우는 예외입니다.
 5. Datadog AWS 통합을 Forwarder가 자동으로 Lambda 그룹을 구독하도록 구성한 경우, 해당 리전의 _모든_ Lambda 함수를 마이그레이션한 다음 구독을 비활성화하세요.
 
@@ -730,7 +747,7 @@ OpenTelemetry API를 사용하여 AWS Lambda를 계측하려면 환경 변수 `D
 
 ## DynamoDB PutItem에 대한 자동 연결 구성 {#configure-auto-linking-for-dynamodb-putitem}
 _Python 및 Node.js 런타임에 대하여 사용 가능_.
-비동기 요청의 세그먼트가 트레이스 컨텍스트를 전파할 수 없으면, Datadog의 [스팬 자동 연결][55] 기능이 자동으로 연결된 스팬을 감지합니다. 
+비동기 요청의 세그먼트가 트레이스 컨텍스트를 전파할 수 없으면, Datadog의 [스팬 자동 연결][55] 기능이 자동으로 연결된 스팬을 탐지합니다.
 [DynamoDB Change Streams][56]의 `PutItem` 작업에 대하여 스팬 자동 연결을 활성화하려면 기본 키 이름을 테이블에 대하여 구성합니다.
 
 {{< tabs >}}
@@ -772,7 +789,7 @@ export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
 
 ## 리소스 이름 기준으로 AWS 서비스 시각화 및 모델링 {#visualize-and-model-aws-services-by-resource-name}
 
-[Node.js][50], [Python][51] 및 [Java][52] Lambda 레이어의 다음 버전은 AWS 관리형 서비스를 올바로 이름 지정, 모델링, 시각화하도록 변경 사항을 릴리스했습니다. 
+[Node.js][50], [Python][51] 및 [Java][52] Lambda 레이어의 다음 버전은 AWS 관리형 서비스를 올바로 이름 지정, 모델링, 시각화하도록 변경 사항을 릴리스했습니다.
 
 서비스 이름이 AWS 서비스만이 아니라 실제 AWS 리소스 이름을 반영합니다.
 * `aws.lambda` → `[function_name]`
@@ -793,9 +810,20 @@ export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
 
 자세한 내용은 [Datadog Lambda Extension Forwarder 로그를 Observability Pipelines로 전송][58]을 참조하세요.
 
+## Workload Identity Federation을 사용하여 인증 {#authenticate-with-workload-identity-federation}
+
+정적 Datadog API key를 제공하는 대신 [Workload Identity Federation][59]을 사용하여 Datadog Lambda Extension을 인증할 수 있습니다. Datadog Lambda Extension은 함수의 AWS 실행 역할 자격 증명을 사용하여 Datadog이 자동으로 교체하는 관리형 Datadog API key를 요청하므로, 사용자가 직접 키를 저장하거나 교체할 필요가 없습니다.
+
+Workload Identity Federation을 사용하려면 다음 단계를 따르세요.
+
+1. Datadog에서 함수의 실행 역할 ARN을 승인하는 AWS 수집 매핑을 구성합니다. 설정 단계는 [Datadog Agent용 Workload Identity Federation 설정][59]을 참조하세요.
+2. 함수에 대한 `DD_ORG_UUID` 환경 변수를 Datadog 조직 UUID로 설정합니다. 이 환경 변수를 찾으려면 [{{< region-param key="dd_api" >}}/api/v2/current_user][60] 엔드포인트를 호출합니다. `DD_ORG_UUID`가 설정되면 확장 프로그램이 Workload Identity Federation을 사용하여 인증하며, 이는 다른 API 키 환경 변수보다 우선합니다.
+
+이 기능은 Datadog Lambda Extension 버전 96+에서 사용할 수 있습니다.
+
 ## API 키 시크릿을 정기적으로 다시 로드 {#reload-api-key-secret-periodically}
 
-`DD_API_KEY_SECRET_ARN`을 사용하여 Datadog API 키를 지정하는 경우, `DD_API_KEY_SECRET_RELOAD_INTERVAL`을 설정하여 시크릿을 정기적으로 다시 로드할 수도 있습니다. 예를 들어 `DD_API_KEY_SECRET_RELOAD_INTERVAL`을 `43200`으로 설정하면 데이터를 전송하는 데 API 키가 필요할 때, 마지막 로드 이후 43,200초 넘게 지났을 때 시크릿이 다시 로드됩니다.
+`DD_API_KEY_SECRET_ARN`을 사용하여 Datadog API key를 지정하는 경우, `DD_API_KEY_SECRET_RELOAD_INTERVAL`을 설정하여 시크릿을 정기적으로 다시 로드할 수도 있습니다. 예를 들어 `DD_API_KEY_SECRET_RELOAD_INTERVAL`을 `43200`으로 설정하면 데이터를 전송하는 데 API 키가 필요할 때, 마지막 로드 이후 43,200초 넘게 지났을 때 시크릿이 다시 로드됩니다.
 
 사용 사례 예시: 보안상의 이유로, API 키는 매일(86,400초) 교체되며 시크릿이 새 키로 업데이트되며, 기존 API 키는 유예 기간으로 하루 더 유효한 상태로 유지됩니다. 이 상황에서는 `DD_API_KEY_SECRET_RELOAD_INTERVAL`을 `43200`으로 설정하여 기존 키의 유예 기간 동안 API 키가 다시 로드되도록 할 수 있습니다.
 
@@ -868,3 +896,5 @@ export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /ko/tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
 [58]: /ko/observability_pipelines/sources/lambda_extension/
+[59]: /ko/account_management/workload_identity_federation/#set-up-workload-identity-federation-for-the-datadog-agent
+[60]: https://app.datadoghq.com/api/v2/current_user

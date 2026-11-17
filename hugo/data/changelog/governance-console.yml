@@ -7,3 +7,30 @@ entries:
       - ListGovernanceControls
       - UpdateGovernanceControl
     title: Allow null default_value in governance control parameter definitions
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41583
+    operations:
+      - GetGovernanceDetection
+      - ListGovernanceControlDetections
+      - UpdateGovernanceDetection
+    title: Remove deprecated control_id from 
+      GovernanceControlDetectionAttributes
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - GetGovernanceConfig
+      - GetGovernanceControl
+      - GetGovernanceControlNotificationSettings
+      - GetGovernanceDetection
+      - GetGovernanceNotificationSettings
+      - ListGovernanceControlDetections
+      - ListGovernanceControls
+      - ListGovernanceInsights
+      - MitigateGovernanceDetections
+      - UpdateGovernanceControl
+      - UpdateGovernanceControlNotificationSettings
+      - UpdateGovernanceDetection
+      - UpdateGovernanceNotificationSettings
+    title: Add AI Gateway route permissions and safe editing
