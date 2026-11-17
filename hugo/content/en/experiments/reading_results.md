@@ -98,7 +98,7 @@ For Bayesian analysis, the tab includes:
 
 - **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
 - **Min. Expected Regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is. Datadog shows it as a percentage of the control value.
-- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI quantifies how much the minimum expected regret would decrease if the experiment kept running at its recent traffic. It helps you decide whether there is value in collecting more data. If EVSI is small compared with the minimum expected regret, more data is unlikely to change your decision. The column heading's tooltip shows the period and traffic that Datadog assumes.
+- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI quantifies how much the minimum expected regret would decrease if the experiment kept running at its recent traffic. It helps you decide whether there is value in collecting more data. If EVSI is small compared with the minimum expected regret, collecting more data is expected to add little value. The column heading's tooltip shows the period and traffic that Datadog assumes.
 
 A dash (—) means that a statistic isn't available. For EVSI, hover over the dash to see why.
 
