@@ -722,12 +722,12 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Using Upstream OpenTelemetry SDKs
+    - name: Using Upstream OTel SDKs
       url: /opentelemetry/instrument/upstream_otel_sdks/
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: Using Datadog OpenTelemetry SDKs
+    - name: Using DDOT SDKs
       url: /opentelemetry/instrument/ddot_sdks/
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation

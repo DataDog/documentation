@@ -18,7 +18,7 @@ Choose an SDK and a Collector or Datadog Agent to process and forward telemetry.
 | Setup Type                                           | API                     | SDK         | Collector/Agent                               |
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**OTel SDK + DDOT Collector**][47] (Preview)        | OTel API                | OTel SDK    | DDOT Collector (the Datadog Agent is optional) |
-| [**DDOT SDK + OpenTelemetry Collector**][49] | OTel API              | DDOT SDK    | OpenTelemetry Collector (the Datadog Agent is optional) |
+| [**DDOT SDK + OpenTelemetry Collector**][49] (Preview) | OTel API              | DDOT SDK    | OpenTelemetry Collector (the Datadog Agent is optional) |
 | [**Datadog SDK + Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
 | [**OTel SDK + Agent's Collector**][29]               | OTel API                | OTel SDK    | Agent's Collector (runs alongside the Datadog Agent) |
 | [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
@@ -74,7 +74,7 @@ DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector
 | Code Security | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
 | Continuous Profiler | Not supported | Not supported |
 
-Availability varies by language and SDK version. See [Using Datadog OpenTelemetry SDKs][49] for setup details.
+Availability varies by language and SDK version. See [Using DDOT SDKs][49] for setup details.
 
 
 ## API support

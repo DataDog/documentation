@@ -6,7 +6,7 @@ aliases:
     - /opentelemetry/instrument/dd_otel_sdks/otlp_trace_export/
 further_reading:
     - link: '/opentelemetry/instrument/ddot_sdks/'
-      text: 'Using Datadog OpenTelemetry SDKs'
+      text: 'Using DDOT SDKs'
       tag: 'Documentation'
     - link: '/opentelemetry/setup/ddot_collector/'
       text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT Collector)'
@@ -15,6 +15,10 @@ further_reading:
       text: 'Datadog APM'
       tag: 'Documentation'
 ---
+
+{{< callout url="#" btn_hidden="true" header="Preview">}}
+OTLP trace export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
+{{< /callout >}}
 
 Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receiver, including a [DDOT Collector][2] or any OpenTelemetry Collector.
 

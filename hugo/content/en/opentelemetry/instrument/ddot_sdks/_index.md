@@ -1,5 +1,5 @@
 ---
-title: Using Datadog OpenTelemetry SDKs
+title: Using DDOT SDKs
 description: Use DDOT SDKs, Datadog's version of OpenTelemetry SDKs, with support for OpenTelemetry APIs, OTLP, and additional Datadog-specific capabilities.
 aliases:
     - /opentelemetry/instrument/dd_sdks/
@@ -18,9 +18,11 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-DDOT SDKs are Datadog's version of the OpenTelemetry APM SDKs. They emit traces, metrics, and logs that follow OpenTelemetry Semantic Conventions over OTLP. They use standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities. DDOT SDKs are available for Java, .NET, Node.js, Python, and Go.
+DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They emit traces, metrics, and logs that follow OpenTelemetry Semantic Conventions over OTLP. They use standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities. DDOT SDKs are available for Java, .NET, Node.js, Python, and Go.
 
-DDOT SDKs add Live Debugger, Dynamic Instrumentation, SQL query-level Database Monitoring, and Data Streams Monitoring. They also support App and API Protection, Feature Flag Management, and Code Security. Some capabilities require the Datadog Agent for Remote Configuration or data delivery. Review [feature compatibility][8] for details.
+DDOT SDKs add capabilities such as Live Debugger, Dynamic Instrumentation, SQL query-level Database Monitoring, and Data Streams Monitoring. They also support App and API Protection, Feature Flag Management, and Code Security. Some capabilities require the Datadog Agent for Remote Configuration or data delivery. Review [feature compatibility][8] for details.
+
+You can replace a DDOT SDK with its upstream equivalent and keep OpenTelemetry API instrumentation and standard OpenTelemetry configuration. Change the SDK package or auto-instrumentation image, or, for Go, the build-time instrumentation. OpenTelemetry telemetry remains available; Datadog-specific capabilities are no longer available. Code that uses Datadog-specific APIs or initializes the SDK directly may need changes.
 
 ## Adapt an existing deployment
 

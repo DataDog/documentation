@@ -1,5 +1,5 @@
 ---
-title: Using Upstream OpenTelemetry SDKs
+title: Using Upstream OTel SDKs
 description: Deploy upstream OpenTelemetry SDKs with the OpenTelemetry Operator, application builds, or deployment automation, and send telemetry to Datadog.
 aliases:
     - /opentelemetry/instrument/otel_sdks/

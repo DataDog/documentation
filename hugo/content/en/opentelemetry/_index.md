@@ -83,18 +83,20 @@ There are two key decisions to make when using OpenTelemetry with Datadog:
 - [How to instrument your applications](#instrument-your-applications)
 - [How to send your data to Datadog](#send-opentelemetry-data-to-datadog)
 
-SDK and deployment choices determine which capabilities are available. Datadog supports upstream OpenTelemetry SDKs and maintains Datadog OpenTelemetry SDKs (DDOT SDKs). DDOT SDKs implement OpenTelemetry APIs and Semantic Conventions. They use OTLP and standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities.
+SDK and deployment choices determine which Datadog capabilities are available. Datadog supports upstream OpenTelemetry SDKs. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities.
 
 For more information, read [Feature Compatibility][9].
 
 ## Instrument your applications
 
-Choose one OpenTelemetry SDK approach for each application process:
+Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs and DDOT SDKs. Both use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling.
 
 - **[Upstream OpenTelemetry SDKs][11]** are maintained by the OpenTelemetry project. Choose this approach for the upstream release life cycle and community-maintained instrumentation.
-- **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are OpenTelemetry SDKs maintained by Datadog. Choose this approach for Datadog-maintained instrumentation and Datadog-specific capabilities such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
+- **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are Datadog's version of OpenTelemetry SDKs and are in Preview. Choose this approach for additional Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
 
-If your application is already instrumented, keep its existing SDK unless you need a different deployment model or feature set. The Collector choice is separate from SDK installation: DDOT SDKs export OTLP to an OpenTelemetry Collector.
+You can switch between upstream and DDOT SDKs while keeping OpenTelemetry API instrumentation, standard configuration, and telemetry. Switching back removes the Datadog-specific capabilities.
+
+Run one SDK per application process to avoid duplicate instrumentation. SDK installation and telemetry routing are separate: both upstream and DDOT SDKs export OTLP to an OpenTelemetry Collector or another OTLP-compatible backend.
 
 For more information, see [Instrument Your Applications][8] and [Feature Compatibility][9].
 
