@@ -44,7 +44,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ### Connect the storage bucket to Datadog Log Archives
 
-If you [enable Archive Search](#archive-search) on the destination, skip this section.
+If you enable Archive Search on the destination and deploy the pipeline from the Observability Pipelines UI, skip this section. If your prefix uses [template prefixes](#using-template-syntax-for-dynamic-partitioning), complete the manual setup below for each resolved path value you want to search.
 
 1. Navigate to Datadog [Log Forwarding][19].
 1. Click **New archive**.
