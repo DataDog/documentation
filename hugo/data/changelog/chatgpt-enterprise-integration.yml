@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-11-11'
+    link: https://github.com/DataDog/documentation/pull/41632
+    operations:
+      - CreateChatGPTEnterpriseIntegrationAccount
+      - DeleteChatGPTEnterpriseIntegrationAccount
+      - GetChatGPTEnterpriseIntegrationAccount
+      - ListChatGPTEnterpriseIntegrationAccounts
+      - UpdateChatGPTEnterpriseIntegrationAccount
+    title: Add Integration Accounts v2 API for ChatGPT Enterprise
