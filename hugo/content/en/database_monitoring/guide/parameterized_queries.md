@@ -106,6 +106,8 @@ Some drivers use server-side prepared statements, for example Connector/J with `
 
 MySQL truncates the query text that the Agent reads to the length set by the [`performance_schema_max_sql_text_length`][4] system variable (default: `1024` bytes). The Agent still collects truncated query text, so parameter values that appear after the limit are not captured. To capture longer queries, increase this variable. See [Query samples are truncated][5].
 
+On Azure Database for MySQL Flexible Server, the Agent cannot collect query activity, so query text with parameter values from query activity is not available. See [Query activity is missing][6].
+
 ### Why prepared statement parameter values are limited
 
 Datadog uses activity sampling to capture currently running SQL queries. However, for prepared statements, the Database Management System replaces parameter values with placeholders at execution time. As a result, activity sampling cannot observe the actual values.
@@ -119,3 +121,4 @@ Support for PostgreSQL and MySQL prepared statement parameter value capture is n
 [3]: /account_management/rbac/
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-system-variables.html#sysvar_performance_schema_max_sql_text_length
 [5]: /database_monitoring/setup_mysql/troubleshooting/#query-samples-are-truncated
+[6]: /database_monitoring/setup_mysql/troubleshooting/#query-activity-is-missing
