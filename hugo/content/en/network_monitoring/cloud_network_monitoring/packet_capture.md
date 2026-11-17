@@ -1,6 +1,6 @@
 ---
 title: On-Demand Packet Capture
-description: Run header-only packet captures on the hosts in a Cloud Network Monitoring connection, then review a Bits summary or download the raw `.pcap` files.
+description: Run header-only packet captures on the hosts in a Cloud Network Monitoring connection, then review a Bits summary or download the raw .pcap files.
 further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/network_analytics/'
       tag: 'Documentation'
@@ -10,7 +10,7 @@ further_reading:
       text: 'Cloud Network Monitoring setup'
 ---
 
-{{< callout url="false" btn_hidden="true" header="Join the Preview!">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 On-Demand Packet Capture is in Preview. Contact your account manager for access.
 {{< /callout >}}
 
@@ -22,7 +22,7 @@ Cloud Network Monitoring (CNM) shows when a connection is degraded through metri
 
 Packet capture has the following limitations:
 
-- Each capture runs for a fixed duration of 30 seconds. You can't configure the duration or set Berkeley Packet Filter (BPF) filters.
+- Each capture runs for a fixed duration of 30 seconds. You can't configure the duration or set Berkeley Packet Filter filters.
 - Each capture request can include up to 25 hosts from the selected connection.
 - Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture data is truncated.
 - Only Linux hosts are supported.
@@ -31,13 +31,14 @@ Packet capture has the following limitations:
 
 To start a packet capture on a connection:
 
-1. Navigate to [Network Analytics][3].
-1. Filter, group by, and sort connections to find relevant network connections.
-    - For example, group by `client_service` and `server_service` and sort by latency or round-trip time (RTT) to see the service-to-service connections with the highest latency.
+1. Navigate to [Network Analytics][1].
+1. Filter, group, and sort connections to find the connection you want to investigate.
+
+    For example, group by `client_service` and `server_service` and sort by latency or round-trip time (RTT) to see the service-to-service connections with the highest latency.
 1. Open the packet capture configuration panel using one of these options:
     - Click the kebab menu on the network connection row and select {{< ui >}}Packet Capture{{< /ui >}}.
     - Click the network connection to open its side panel, then click {{< ui >}}Configure Packet Capture{{< /ui >}}.
-1. Review the selected hosts. The panel lists up to 25 hosts from the connection, and all of them are selected by default. See [Host selection](#host-selection) for how hosts are chosen.
+1. Review the selected hosts. Up to 25 hosts are listed and selected by default. See the [Host selection](#host-selection) section for how Datadog chooses them.
     - Sort by hostname, role, resets, failures, or retransmits.
     - Clear the checkbox for any host you don't want to include.
 1. Click {{< ui >}}Start Packet Capture{{< /ui >}} to start the capture.
@@ -61,40 +62,39 @@ Hosts are labeled by their role in the connection: client, server, or both, depe
 
 To view packet captures:
 
-1. Navigate to [Network Analytics][3].
+1. Navigate to [Network Analytics][1].
 1. Click the {{< ui >}}Packet Capture{{< /ui >}} tab to see a list of packet capture requests.
 1. Click a request to open the side panel for details of the capture.
-1. Click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel to download the `.zip` file.
+1. (Optional) To download the raw packets, click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel. The download is a `.zip` file.
 
 ### Packet capture request status
 
 Packet capture requests have one of the following states:
 
-| Status     | Description                                                                         |
-|------------|-------------------------------------------------------------------------------------|
-| Queued     | The capture request is waiting to run.                                              |
-| Running    | The Agents are capturing packets.                                                   |
-| Processing | The capture is complete and the results are being processed.                        |
-| Complete   | The capture completed successfully on all selected hosts.                           |
-| Partial    | One or more selected hosts failed to capture packets.                   |
-| Failed     | All selected hosts failed to capture packets.                                                        |
-| Canceled  | A user manually stopped the packet capture request. |
+| Status     | Description                                                                                     |
+|------------|-------------------------------------------------------------------------------------------------|
+| Queued     | The capture request is waiting to run.                                                          |
+| Running    | The Agents are capturing packets.                                                               |
+| Processing | The capture is complete and the results are being processed.                                    |
+| Complete   | The capture completed successfully on all selected hosts.                                       |
+| Partial    | One or more selected hosts failed to capture packets.                                           |
+| Failed     | All selected hosts failed to capture packets.                                                   |
+| Canceled   | A user manually stopped the packet capture request.                                             |
 | Expired    | The results are past their retention period. See the [Data retention](#data-retention) section. |
 
-Reasons for failed captures could include:
+A capture can fail for the following reasons:
 
-- The host is spun down after it is observed in CNM
-- There are strict permissions set on the host that doesn't allow packet capture
-- The host exceeds the 100 MB data capture limit and the data is truncated.
+- The host shut down after CNM observed it.
+- Permissions on the host don't allow packet capture.
 
-### Results
+### Packet capture result details
 
 The results for each capture include:
 
 - **Metadata**: The connection's client and server tags, the number of hosts, the completion time, and other capture details.
 - **Bits summary**: A plain-language analysis of the capture. See the [Bits summary](#bits-summary) section.
 - **Per-host breakdown**: The findings for each host in the capture.
-- **PCAP files**: A `.zip` file of the `.pcap` files from all hosts in the capture. Use it to analyze the raw packets in a third-party tool such as Wireshark, or to share them with other users.
+- **`.pcap` files**: A `.zip` file of the `.pcap` files from all hosts in the capture. Use the files to analyze raw packets in a third-party tool such as Wireshark, or share them with other users.
 
 ### Bits summary
 
@@ -108,14 +108,14 @@ Based on packet header data, the summary can identify:
 - Zero-window conditions
 - Out-of-order delivery
 - RTT and latency
-- Signs of asymmetric routing and MTU issues
+- Signs of asymmetric routing and maximum transmission unit (MTU) issues
 - Traffic volume
 
 ## Security and data handling
 
 ### Header-only capture
 
-Packet capture records only packet header metadata, such as IP addresses, ports, TCP flags, sequence and acknowledgment numbers, window size, and TTL. The Agent uses a dynamic snap length to read each packet only up to the end of its headers. Payload data is not captured and is not included in the `.pcap` files or the summary.
+Packet capture records only packet header metadata, such as IP addresses, ports, TCP flags, sequence and acknowledgment numbers, window size, and time to live (TTL). The Agent uses a dynamic snap length to read each packet only up to the end of its headers. Payload data is not captured and is not included in the `.pcap` files or the summary.
 
 ### Auditing and visibility
 
@@ -123,6 +123,8 @@ Packet capture records only packet header metadata, such as IP addresses, ports,
 - Packet captures are visible to everyone in the organization, which helps with handoffs during an incident.
 
 ### Data retention
+
+Datadog retains packet capture data for the following periods:
 
 | Data                                 | Retention |
 |--------------------------------------|-----------|
@@ -133,5 +135,4 @@ Packet capture records only packet header metadata, such as IP addresses, ports,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/cloud_network_monitoring/setup/
-[3]: https://app.datadoghq.com/network
+[1]: https://app.datadoghq.com/network
