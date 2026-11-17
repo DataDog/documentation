@@ -106,12 +106,12 @@ DDOT sends histogram points with a count of 0, for example for intervals in whic
 
 ### Metric names
 
-With the default settings, metric names don't change. If you turned off the `exporter.datadogexporter.DisableAllMetricRemapping` feature gate, DDOT stops adding the `otel.` prefix to some metrics, such as `system.*` metrics, and stops copying runtime metrics under Datadog names.
+With the default settings, metric names don't change. If you turned off the `exporter.datadogexporter.DisableAllMetricRemapping` feature gate, metric names change. DDOT stops adding the `otel.` prefix to some metrics, such as `system.*` metrics, and stops copying runtime metrics under Datadog names.
 
 ## Limitations
 
 - Native histograms are available only in DDOT, not in OTLP ingestion in the Datadog Agent or the Datadog Exporter in the upstream OpenTelemetry Collector.
-- DDOT drops histogram data points that don't follow the OpenTelemetry specification, for example points with bucket boundaries that don't increase. It also drops points that have more than 2,147,483,647 values in a single bucket.
+- DDOT drops histogram datapoints that don't follow the OpenTelemetry specification, for example points with bucket boundaries that don't increase. It also drops points that have more than 2,147,483,647 values in a single bucket.
 - If some DDOT instances send converted histograms and others send native histograms under the same metric name, percentiles for that metric can be inaccurate.
 
 ## Further reading
