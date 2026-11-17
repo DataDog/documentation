@@ -69,7 +69,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
 
 `budget_pricing_unavailable`
-: HTTP `402`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
+: HTTP `400`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
 
 `model_not_found`
 : HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target. Check for an unknown model, provider slug, or routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. Clients that already handle OpenAI's `model_not_found` code keep working.
