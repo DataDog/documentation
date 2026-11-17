@@ -162,7 +162,7 @@ The default allowlist includes the following domains. This list will evolve over
 | Category | Domains |
 |---|---|
 | Clojure/JVM | `repo.clojars.org` |
-| Datadog documentation | `docs.datadoghq.com` |
+| Datadog documentation | `docs.datadoghq.com`, `docs.dd-static.net` |
 | Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
 | JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com`, `repo.yarnpkg.com` |
