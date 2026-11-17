@@ -94,6 +94,43 @@ resource = Resource.create({"dd_llmobs_enabled": True})
 trace.set_tracer_provider(TracerProvider(resource=resource))
 ```
 
+#### Using the OpenTelemetry Collector
+
+If you send traces through an OpenTelemetry Collector with the Datadog exporter, set the attribute in the Collector with a `resource` processor. The Datadog exporter copies resource attributes into every span it sends, so the attribute applies to all spans in the pipeline. If a span sets `dd_llmobs_enabled` itself, the span value takes precedence.
+
+Add the processor to the `traces` pipeline that uses the `datadog` exporter:
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  resource:
+    attributes:
+      - key: dd_llmobs_enabled
+        value: "true"
+        action: upsert
+  batch:
+
+exporters:
+  datadog:
+    api:
+      site: <DATADOG_SITE>
+      key: ${env:DD_API_KEY}
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [datadog]
+```
+
+Replace `<DATADOG_SITE>` with your Datadog site ({{< region-param key="dd_site" code="true" >}}).
+
 ### 2. Configure the exporter {#configuration}
 
 Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
