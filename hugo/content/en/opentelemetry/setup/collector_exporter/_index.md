@@ -950,7 +950,7 @@ The `dd-otel-metric-config` header is a JSON payload sent with metrics requests 
 | `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
 | `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
 | `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP instrumentation metrics to power APM trace metrics. |
-| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular metrics intake. If `trace_metrics.instrumentation_metrics_calc` is also `true`, Datadog routes the metrics for APM trace metrics before dropping them. |
+| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular metrics intake after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
 
 Example with instrumentation metrics enabled:
 

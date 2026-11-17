@@ -20,7 +20,7 @@ further_reading:
 
 Datadog APM uses trace metrics, which measure request rate, errors, and duration (RED), to power the Catalog, Service Page, Resource Page, and anything built on `trace.*` metrics.
 
-This page covers setups that send OTLP data to Datadog, such as the [recommended Collector setup][1]. If you use the [DDOT Collector][4] or the [Datadog Exporter and Connector][6], the Datadog Connector computes trace metrics. For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
+This page covers setups that send OTLP data to Datadog, such as the [upstream OpenTelemetry Collector][1]. If you use the [DDOT Collector][4] or the [Datadog Exporter and Connector][6], the Datadog Connector computes trace metrics. For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
 
 ## Choose a source
 
@@ -58,7 +58,7 @@ The following table shows the result of each combination. Both fields default to
 |---|---|---|
 | `true` | `true` | HTTP metrics power trace metrics at reduced cardinality. Datadog drops the raw HTTP metrics, so they are not billed as custom metrics. |
 | `true` | `false` | HTTP metrics power trace metrics. Datadog also keeps the raw HTTP metrics at full cardinality as custom metrics, which you can use in your own dashboards and monitors. |
-| `false` | `true` | Datadog drops the HTTP metrics. Use this with the `span_metrics` connector to avoid custom metric costs for HTTP metrics. |
+| `false` | `true` | No effect, because `raw_instrumentation_metrics_drop` applies only when `trace_metrics.instrumentation_metrics_calc` is `true`. Datadog keeps the raw HTTP metrics at full cardinality as custom metrics. To drop them without powering trace metrics, filter them in the Collector or turn them off in the SDK. |
 | `false` | `false` | Datadog keeps the raw HTTP metrics at full cardinality as custom metrics. |
 
 ## Compute trace metrics in the Datadog intake
