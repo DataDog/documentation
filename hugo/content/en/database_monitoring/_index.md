@@ -41,6 +41,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-database-research/"
   tag: "Blog"
   text: "How microservice architectures have shaped the usage of database technologies"
+- link: "https://www.datadoghq.com/blog/highlights-from-oracle-ai-world-2026/"
+  tag: "Blog"
+  text: "Highlights from Oracle AI World 2026"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

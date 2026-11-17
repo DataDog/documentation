@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 ## Overview

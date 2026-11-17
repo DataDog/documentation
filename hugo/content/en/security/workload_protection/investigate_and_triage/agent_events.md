@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
+  - link: "https://www.datadoghq.com/blog/check-ec2-workloads-imdsv2-readiness/"
+    tag: "Blog"
+    text: "How to check if your EC2 workloads are ready for IMDSv2"
 ---
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.

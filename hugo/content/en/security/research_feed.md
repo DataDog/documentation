@@ -1,6 +1,10 @@
 ---
 title: Security Research Feed
 description: "Understand the Datadog Security Research Feed and the criteria for emerging vulnerabilities and threats, and assess exposure to them in your environment, including with Bits Chat."
+further_reading:
+- link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+  tag: "Blog"
+  text: "Detect and respond to PHP2Shell with Datadog"
 ---
 
 The Datadog Security Research Feed provides continuously updated security-related content to help organizations stay ahead of emerging threats and vulnerabilities. Managed by Datadog's Security Research and Detection Engineering teams, the feed delivers timely insights into critical security developments, including:
@@ -69,3 +73,7 @@ You must have the **Bits Chat Access** permission to complete this task.
 
 [1]: /bits_ai/bits_chat/
 [2]: /account_management/billing/ai_credits/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

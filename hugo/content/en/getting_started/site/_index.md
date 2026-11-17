@@ -2,12 +2,15 @@
 title: Getting Started with Datadog Sites
 description: Learn about different Datadog sites for your region and security requirements, including government-compliant options.
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/dashboards-slos'
-  tag: 'Learning Center'
-  text: 'Create Business-Critical Insights Using Dashboards and SLOs'
 - link: '/agent/configuration/dual-shipping/'
   tag: 'Guide'
   text: 'Dual Shipping'
+- link: 'https://learn.datadoghq.com/courses/dashboards-slos'
+  tag: 'Learning Center'
+  text: 'Create Business-Critical Insights Using Dashboards and SLOs'
+- link: "https://www.datadoghq.com/blog/monitor-oci-government-cloud-datadog/"
+  tag: "Blog"
+  text: "Monitor OCI workloads in US government clouds with Datadog"
 algolia:
   tags: ['site','datadog site']
 ---

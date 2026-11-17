@@ -26,6 +26,9 @@ further_reading:
 - link: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
   tag: Documentation
   text: Open Cybersecurity Schema Framework (OCSF)
+- link: "https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/"
+  tag: "Blog"
+  text: "Investigate the person behind the risk with Cloud SIEM"
 ---
 
 ## Overview

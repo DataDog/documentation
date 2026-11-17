@@ -2,9 +2,6 @@
 title: Advanced Search
 disable_toc: false
 further_reading:
-- link: "https://learn.datadoghq.com/courses/enhance-log-querying"
-  tag: "Learning Center"
-  text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
 - link: 'logs/explorer/analytics'
   tag: 'Documentation'
   text: 'Perform Log Analytics'
@@ -17,6 +14,12 @@ further_reading:
 - link: "/monitors/types/log/"
   tag: "Documentation"
   text: "Create Log Monitors"
+- link: "https://learn.datadoghq.com/courses/enhance-log-querying"
+  tag: "Learning Center"
+  text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
+- link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
+  tag: "Blog"
+  text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 ---
 
 ## Overview

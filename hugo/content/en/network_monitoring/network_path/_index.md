@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-path/"
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/end-user-device-monitoring/"
+  tag: "Blog"
+  text: "Monitor and troubleshoot employee devices with Datadog End User Device Monitoring"
 ---
 
 ## Overview

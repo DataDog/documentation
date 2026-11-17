@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-detected-endpoint-issues/"
   tag: "Blog"
   text: "Detect and resolve endpoint issues across your fleet with Datadog"
+- link: "https://www.datadoghq.com/blog/end-user-device-monitoring/"
+  tag: "Blog"
+  text: "Monitor and troubleshoot employee devices with Datadog End User Device Monitoring"
 ---
 
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}

@@ -15,6 +15,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
     tag: "Blog"
     text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+  - link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+    tag: "Blog"
+    text: "Detect and respond to PHP2Shell with Datadog"
 ---
 
 ## Overview

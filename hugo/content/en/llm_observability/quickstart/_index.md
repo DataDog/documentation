@@ -16,12 +16,15 @@ further_reading:
     - link: '/llm_observability/instrument/otel_instrumentation'
       tag: 'Documentation'
       text: 'Instrument with OpenTelemetry'
-    - link: '/llm_observability/investigate/evaluations'
-      tag: 'Evaluations'
-      text: 'Configure Evaluators on your application'
     - link: '/llm_observability/lapdog'
       tag: 'Documentation'
       text: 'Local development tool for Agent Observability'
+    - link: "https://www.datadoghq.com/blog/prompt-cache-investigation-ccm-agent-observability/"
+      tag: "Blog"
+      text: "How we investigated prompt cache misses with Datadog"
+    - link: '/llm_observability/investigate/evaluations'
+      tag: 'Evaluations'
+      text: 'Configure Evaluators on your application'
 ---
 
 This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.

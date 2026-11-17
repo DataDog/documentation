@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+- link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+  tag: "Blog"
+  text: "Manage Kubernetes observability with DatadogInstrumentation"
 algolia:
   tags: ['unified service tags','unified','unified service','service tags']
 ---
