@@ -2053,7 +2053,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `ai-gateway-route`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
+        Identifier, formatted as `type:id`. Supported types: `ai-gateway-provider`, `ai-gateway-route`, `ai-gateway-capture-override`, `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`, `network-path-config`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -8891,7 +8891,7 @@ components:
       description: Organization default mode, scoped overrides, and current configuration revision.
       properties:
         configuration_revision:
-          description: Opaque revision of the organization default and all overrides. Writes require the revision returned by a current read or preview.
+          description: Opaque revision of the organization default and all overrides, including hidden overrides. Writes require the revision returned by a current read or preview.
           example: "capture-revision-1"
           type: string
         default_metadata_capture:
@@ -8901,7 +8901,7 @@ components:
         default_mode:
           $ref: "#/components/schemas/AiGatewayCaptureConfigurationResponseDataAttributesDefaultMode"
         overrides:
-          description: Scoped overrides currently configured for the organization.
+          description: Overrides the caller can View. Hidden overrides still apply to traffic; an empty list does not prove that no overrides exist.
           items:
             $ref: "#/components/schemas/AiGatewayCaptureOverride"
           type: array
@@ -8958,7 +8958,7 @@ components:
       description: Settings and configuration revision for creating the override.
       properties:
         configuration_revision:
-          description: Opaque revision of the organization default and all overrides. Writes require the revision returned by a current read or preview.
+          description: Opaque revision of the organization default and all overrides, including hidden overrides. Writes require the revision returned by a current read or preview.
           example: "capture-revision-1"
           type: string
         confirm_full_capture:
@@ -9052,7 +9052,7 @@ components:
       description: Revisions and confirmation used to delete the override.
       properties:
         configuration_revision:
-          description: Opaque revision of the organization default and all overrides. Writes require the revision returned by a current read or preview.
+          description: Opaque revision of the organization default and all overrides, including hidden overrides. Writes require the revision returned by a current read or preview.
           example: "capture-revision-1"
           type: string
         confirm_full_capture:
@@ -9326,7 +9326,7 @@ components:
       description: Replacement settings and revisions for updating the override.
       properties:
         configuration_revision:
-          description: Opaque revision of the organization default and all overrides. Writes require the revision returned by a current read or preview.
+          description: Opaque revision of the organization default and all overrides, including hidden overrides. Writes require the revision returned by a current read or preview.
           example: "capture-revision-1"
           type: string
         confirm_full_capture:
@@ -24974,7 +24974,7 @@ components:
         - attributes
       type: object
     CaseViewAttributes:
-      description: Attributes of a work item view, including the filter query and optional notification rule.
+      description: Attributes of a work item view, including the filter query.
       properties:
         created_at:
           description: Timestamp when the view was created.
@@ -24992,7 +24992,8 @@ components:
           example: Open bugs
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
+          deprecated: true
+          description: Deprecated. Identifier of a legacy notification rule linked to this view, if any.
           type: string
         query:
           description: "The search query that determines which work items appear in this view. Uses the same syntax as the Work Management search bar (for example, `status:open priority:P1`)."
@@ -25022,7 +25023,8 @@ components:
           example: Open bugs
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
+          deprecated: true
+          description: Deprecated. This field is ignored. Use `POST /api/v2/cases/projects/{project_id}/notification_rules` to manage project notifications.
           type: string
         project_id:
           description: The UUID of the project this view belongs to. Views are scoped to a single project.
@@ -25089,7 +25091,8 @@ components:
           description: The name of the view.
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
+          deprecated: true
+          description: Deprecated. This field is ignored. Use `POST /api/v2/cases/projects/{project_id}/notification_rules` to manage project notifications.
           type: string
         query:
           description: The query used to filter work items in this view.
@@ -95988,6 +95991,555 @@ components:
       type: string
       x-enum-varnames:
         - NDK_SYMBOL_FILE
+    NebiusCloudCostCollectionIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Cloud cost data read from a Nebius Object Storage bucket export and used by [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Enabling it requires a bucket holding your cost export and a Nebius access key pair that can read it; a request that enables this dataflow without them is rejected with a `422` response.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowSettingsRequest"
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowResponse:
+      description: >-
+        Cloud cost data read from a Nebius Object Storage bucket export and used by [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Requires a bucket holding your cost export and a Nebius access key pair that can read it; without both this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowSettingsResponse"
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Cloud Cost Management dataflow. Only the fields provided are changed.
+      properties:
+        access_key_id:
+          description: >-
+            ID of the Nebius Object Storage (S3-compatible) access key used to read the cost export bucket. Required when this dataflow is enabled.
+          example: AKID0123456789ABCDEF
+          maxLength: 255
+          type: string
+        access_key_secret:
+          description: >-
+            Secret access key for the access key ID. Required when this dataflow is enabled. Omit it on update to keep the stored one; an empty string is rejected with a `422` response.
+          example: wJalrXUtnFEMIstaticaccesskey
+          type: string
+          writeOnly: true
+        bucket_name:
+          description: >-
+            Name of the Nebius Object Storage bucket holding your cost export. Required when this dataflow is enabled; a request that enables it without the bucket fields and access keys is rejected with a `422` response.
+          example: nebius-cost-exports
+          maxLength: 255
+          type: string
+        bucket_prefix_path:
+          description: >-
+            Prefix path within the bucket that locates the cost export, combining the export name and path prefix.
+          example: cost-export/2026/
+          maxLength: 255
+          type: string
+        bucket_region:
+          description: >-
+            Region of the Nebius Object Storage bucket, such as `eu-north1`. Required when this dataflow is enabled.
+          example: eu-north1
+          maxLength: 255
+          type: string
+      type: object
+    NebiusCloudCostCollectionIntegrationDataflowSettingsResponse:
+      description: Settings of the Cloud Cost Management dataflow.
+      properties:
+        access_key_id:
+          description: ID of the Nebius Object Storage access key used to read the cost export bucket.
+          example: AKID0123456789ABCDEF
+          type: string
+        bucket_name:
+          description: Name of the Nebius Object Storage bucket holding the cost export.
+          example: nebius-cost-exports
+          type: string
+        bucket_prefix_path:
+          description: Prefix path within the bucket that locates the cost export.
+          example: cost-export/2026/
+          type: string
+        bucket_region:
+          description: Region of the Nebius Object Storage bucket, such as `eu-north1`.
+          example: eu-north1
+          type: string
+      type: object
+    NebiusCloudIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Nebius Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthRequest"
+    NebiusCloudIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Nebius Cloud integration account.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthResponse"
+    NebiusCloudIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Nebius Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthUpdate"
+    NebiusCloudIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Nebius Cloud integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          maxLength: 255
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    NebiusCloudIntegrationAccountCreateData:
+      description: Data envelope for creating a Nebius Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    NebiusCloudIntegrationAccountCreateRequest:
+      description: Request payload to create a Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountMetricsConfigRequest:
+      additionalProperties: false
+      description: Configuration for metric collection from this Nebius Cloud account.
+      properties:
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching Kubernetes clusters, for cost savings. Include rules (`key:value`) are combined with OR, exclusion rules (`!key:value`) are then applied with AND, and `?` and `*` are wildcards; for example `cluster:prod-*` collects only matching clusters and `!cluster:dev` excludes a cluster. Defaults to no filters: every cluster is collected. Only cluster-scoped metrics are filtered; billing and object storage metrics are always collected.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      type: object
+    NebiusCloudIntegrationAccountMetricsConfigResponse:
+      description: >-
+        Metric collection settings configured on the Nebius Cloud integration account. Absent or empty when no filters are configured.
+      properties:
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching Kubernetes clusters.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            type: string
+          type: array
+      type: object
+    NebiusCloudIntegrationAccountMetricsConfigUpdate:
+      additionalProperties: false
+      description: Configuration for metric collection. Only the fields provided are changed.
+      properties:
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching Kubernetes clusters. Sending metrics_config replaces the stored object's cluster_filters list; omit it to keep the stored value. Include rules (`key:value`) are combined with OR, exclusion rules (`!key:value`) are then applied with AND, and `?` and `*` are wildcards.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            maxLength: 255
+            type: string
+          type: array
+      type: object
+    NebiusCloudIntegrationAccountResponse:
+      description: Response payload for a single Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountResponseAttributes:
+      description: Attributes of a Nebius Cloud integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    NebiusCloudIntegrationAccountResponseData:
+      description: Data envelope of a Nebius Cloud integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Nebius Cloud integration account.
+          example: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthRequest:
+      additionalProperties: false
+      description: >-
+        Service-account key pair authentication, the only method Nebius Cloud integration accounts support. Create a service account in the Nebius console, add it to the admin group, upload an authorized key pair to it, and issue a static API key with the OBSERVABILITY scope through the Nebius CLI.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        private_key:
+          description: >-
+            The private key of the authorized key pair, in PEM format. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        public_key_id:
+          description: >-
+            ID of the public key half of the authorized key pair, such as `publickey-xxxxxxxx`. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: publickey-yyyyyyyy
+          maxLength: 255
+          type: string
+        service_account_id:
+          description: Non-secret ID of the Nebius service account the account authenticates as.
+          example: serviceaccount-xxxxxxxx
+          maxLength: 255
+          type: string
+        static_api_key:
+          description: >-
+            Nebius static API key with the OBSERVABILITY scope, used to query logs. Required when log, resource, or service-quota collection is enabled; a request that enables one of them without it is rejected with a `422` response.
+          example: eyJhbGciOi...static-api-key
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - service_account_id
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthResponse:
+      description: The service-account key pair authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        public_key_id:
+          description: ID of the public key half of the authorized key pair. Omitted when unset.
+          example: publickey-yyyyyyyy
+          type: string
+        service_account_id:
+          description: ID of the Nebius service account the account authenticates as.
+          example: serviceaccount-xxxxxxxx
+          type: string
+      required:
+        - auth_type
+        - service_account_id
+      type: object
+    NebiusCloudIntegrationAccountServiceAccountAuthType:
+      default: nebius_service_account
+      description: The authentication method type.
+      enum:
+        - nebius_service_account
+      example: nebius_service_account
+      type: string
+      x-enum-varnames:
+        - NEBIUS_SERVICE_ACCOUNT
+    NebiusCloudIntegrationAccountServiceAccountAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Service-account key pair authentication, the only method Nebius Cloud integration accounts support. Only the fields provided are changed; omit `private_key` and `static_api_key` to keep the stored ones.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountServiceAccountAuthType"
+        private_key:
+          description: >-
+            The private key of the authorized key pair, in PEM format. Omit it to keep the stored one; an empty string is rejected with a `422` response.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        public_key_id:
+          description: >-
+            ID of the public key half of the authorized key pair. Omit it to keep the stored public key ID, send `null` or an empty string to remove it, or send a value to replace it. Removing it is rejected with a `422` response while log, resource, or service-quota collection is enabled.
+          example: publickey-yyyyyyyy
+          maxLength: 255
+          nullable: true
+          type: string
+        service_account_id:
+          description: >-
+            Non-secret ID of the Nebius service account the account authenticates as. It cannot be cleared; sending `null` or an empty string is rejected with a `422` response.
+          example: serviceaccount-xxxxxxxx
+          maxLength: 255
+          type: string
+        static_api_key:
+          description: >-
+            Nebius static API key with the OBSERVABILITY scope. Omit it to keep the stored one; an empty string is rejected with a `422` response.
+          example: eyJhbGciOi...static-api-key
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    NebiusCloudIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Nebius Cloud integration account.
+      properties:
+        account_tags:
+          description: >-
+            Tags applied to all metrics, logs, and resources collected from this Nebius Cloud account. Defaults to no tags.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            maxLength: 200
+            type: string
+          type: array
+        metrics_config:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountMetricsConfigRequest"
+        tenant_id:
+          description: >-
+            ID of the Nebius tenant to monitor, the organizational workspace identifier. Found in the Nebius console under Administration > Organization.
+          example: tenant-12345678
+          maxLength: 255
+          type: string
+      required:
+        - tenant_id
+      type: object
+    NebiusCloudIntegrationAccountSettingsResponse:
+      description: Settings configured on the Nebius Cloud integration account.
+      properties:
+        account_tags:
+          description: Tags applied to all data collected from this Nebius Cloud account.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            type: string
+          type: array
+        metrics_config:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountMetricsConfigResponse"
+        tenant_id:
+          description: ID of the Nebius tenant being monitored.
+          example: tenant-12345678
+          type: string
+      required:
+        - tenant_id
+      type: object
+    NebiusCloudIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Nebius Cloud integration account. Only the fields provided are changed.
+      properties:
+        account_tags:
+          description: >-
+            Tags applied to all metrics, logs, and resources collected from this Nebius Cloud account. Sending it replaces the whole list; send an empty array to remove all tags, or omit it to keep the stored list.
+          example:
+            - env:prod
+            - team:ai
+          items:
+            maxLength: 200
+            type: string
+          type: array
+        metrics_config:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountMetricsConfigUpdate"
+        tenant_id:
+          description: >-
+            ID of the Nebius tenant to monitor. An empty value is ignored and the stored tenant ID is kept.
+          example: tenant-12345678
+          maxLength: 255
+          type: string
+      type: object
+    NebiusCloudIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Nebius Cloud integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/NebiusCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Nebius Cloud integration account.
+          example: nebius-prod
+          maxLength: 255
+          type: string
+        settings:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountSettingsUpdate"
+      type: object
+    NebiusCloudIntegrationAccountUpdateData:
+      description: Data envelope for updating a Nebius Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Nebius Cloud integration account to update.
+          example: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    NebiusCloudIntegrationAccountUpdateRequest:
+      description: Request payload to update a Nebius Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationAccountsResponse:
+      description: Response payload for a list of Nebius Cloud integration accounts.
+      properties:
+        data:
+          description: List of Nebius Cloud integration accounts.
+          items:
+            $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    NebiusCloudIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Nebius Cloud, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to stop or start it, and use `settings` to configure what it collects. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow except `nebius-cloud-cost-collection` runs as the service account in `authentication`, using its authorized key pair and the static API key; enabling one of them without those keys is rejected with a `422` response, and one enabled with keys that later expire is stored but collects no data.
+      properties:
+        nebius-cloud-cost-collection:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowRequest"
+        nebius-cloud-logs:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowRequest"
+        nebius-cloud-resources:
+          $ref: "#/components/schemas/NebiusCloudResourcesIntegrationDataflowRequest"
+        nebius-cloud-service-quota-collection:
+          $ref: "#/components/schemas/NebiusCloudServiceQuotaCollectionIntegrationDataflowRequest"
+      type: object
+    NebiusCloudIntegrationDataflowsResponse:
+      description: Data Datadog collects from Nebius Cloud, keyed by dataflow id.
+      properties:
+        nebius-cloud-cost-collection:
+          $ref: "#/components/schemas/NebiusCloudCostCollectionIntegrationDataflowResponse"
+        nebius-cloud-logs:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowResponse"
+        nebius-cloud-resources:
+          $ref: "#/components/schemas/NebiusCloudResourcesIntegrationDataflowResponse"
+        nebius-cloud-service-quota-collection:
+          $ref: "#/components/schemas/NebiusCloudServiceQuotaCollectionIntegrationDataflowResponse"
+      type: object
+    NebiusCloudLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Logs from your Nebius tenant: Kubernetes control plane and audit logs, tenant-level audit events, compute serial console logs, cloud apps and AI inference logs, PostgreSQL logs, and MLflow logs, collected from the services named in `settings.enabled_services`. `enabled_services` is the sole source of truth for what is collected; `enabled` set to `false` stops log collection, while `true` on its own changes nothing. Defaults to no services.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects logs. Defaults to `false`. Set to `false` to stop log collection; sending `true` on its own changes nothing, because `settings.enabled_services` is the sole source of truth.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowSettingsRequest"
+      type: object
+    NebiusCloudLogsIntegrationDataflowResponse:
+      description: >-
+        Logs from your Nebius tenant: Kubernetes control plane and audit logs, tenant-level audit events, compute serial console logs, cloud apps and AI inference logs, PostgreSQL logs, and MLflow logs, collected from the services named in `settings.enabled_services`.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects logs. Absent when no service is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/NebiusCloudLogsIntegrationDataflowSettingsResponse"
+      type: object
+    NebiusCloudLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the logs dataflow. Only the fields provided are changed.
+      properties:
+        enabled_services:
+          description: >-
+            Nebius log integrations to collect. One of `nebius-cloud-compute`, `nebius-cloud-kubernetes`, `nebius-cloud-mlflow`, `nebius-cloud-postgresql`, `nebius-cloud-applications`, or `default` for the streams shared by every service. A non-empty list is the sole source of truth and replaces the stored list: those services are collected and any others stop. An empty list stops log collection entirely. Omit it to keep the stored list.
+          example:
+            - nebius-cloud-compute
+            - nebius-cloud-kubernetes
+            - default
+          items:
+            description: >-
+              A Nebius log integration service name, such as `nebius-cloud-compute`.
+            type: string
+          type: array
+      type: object
+    NebiusCloudLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the logs dataflow.
+      properties:
+        enabled_services:
+          description: >-
+            Nebius log integrations collected, such as `nebius-cloud-compute` and `default`. Absent when no service is enabled.
+          example:
+            - nebius-cloud-compute
+            - nebius-cloud-kubernetes
+            - default
+          items:
+            type: string
+          type: array
+      type: object
+    NebiusCloudResourcesIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Metadata about resources in your Nebius tenant, such as compute instances and Kubernetes clusters.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to enabled when `authentication.public_key_id` is set; set to `false` to stop collection.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudResourcesIntegrationDataflowResponse:
+      description: >-
+        Metadata about resources in your Nebius tenant, such as compute instances and Kubernetes clusters.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Absent when the dataflow has never been configured, in which case collection runs when `authentication.public_key_id` is set.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudServiceQuotaCollectionIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Usage metrics tracked against your Nebius service quotas, such as `nebius_cloud.servicequota.percentage_used` and `nebius_cloud.servicequota.limit`.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    NebiusCloudServiceQuotaCollectionIntegrationDataflowResponse:
+      description: >-
+        Usage metrics tracked against your Nebius service quotas, such as `nebius_cloud.servicequota.percentage_used` and `nebius_cloud.servicequota.limit`.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured.
+          example: true
+          type: boolean
+      type: object
     NodeType:
       additionalProperties: {}
       description: A tree-sitter node type definition for a given language, describing the node's structure, subtypes, and fields.
@@ -115775,7 +116327,9 @@ components:
           type: number
       type: object
     RUMAggregateRequest:
-      description: The object sent with the request to retrieve aggregation buckets of RUM events from your organization.
+      description: |-
+        The object sent with the request to retrieve aggregation buckets of RUM events from your organization.
+        `filter.indexes` is not supported and is ignored.
       properties:
         compute:
           description: The list of metrics or timeseries to compute for the retrieved buckets.
@@ -115802,7 +116356,7 @@ components:
           $ref: "#/components/schemas/RUMAggregationFunction"
         metric:
           description: The metric to sort by (only used for `type=measure`).
-          example: "@duration"
+          example: "@view.loading_time"
           type: string
         order:
           $ref: "#/components/schemas/RUMSortOrder"
@@ -115811,7 +116365,7 @@ components:
       type: object
     RUMAggregateSortType:
       default: "alphabetical"
-      description: The type of sorting algorithm.
+      description: The type of sorting algorithm. `alphabetical` sorts buckets by the facet value. `measure` sorts them by a computed aggregation.
       enum: ["alphabetical", "measure"]
       type: string
       x-enum-varnames: ["ALPHABETICAL", "MEASURE"]
@@ -115825,7 +116379,8 @@ components:
           type: array
       type: object
     RUMAggregationFunction:
-      description: An aggregation function.
+      description: |-
+        An aggregation function. `count` counts events and needs no metric. `cardinality` counts the distinct values of the metric. `sum`, `min`, `max`, `avg`, `median`, and the percentiles (`pc75` to `pc99`) apply to a numeric metric such as `@view.loading_time`.
       enum: ["count", "cardinality", "pc75", "pc90", "pc95", "pc98", "pc99", "sum", "min", "max", "avg", "median"]
       example: "pc90"
       type: string
@@ -115870,9 +116425,11 @@ components:
           example: false
           type: boolean
         apm_rum_flat_sampling_replay_sample_rate:
-          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled.
+          description: Fraction (0 to 1) of APM-correlated RUM sessions with Session Replay when flat sampling is enabled.
           example: 0
           format: double
+          maximum: 1
+          minimum: 0
           type: number
         application_id:
           description: ID of the RUM application.
@@ -115941,7 +116498,8 @@ components:
           description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
           example: 0
           format: int32
-          maximum: 2147483647
+          maximum: 100
+          minimum: 0
           type: integer
         product_scales:
           $ref: "#/components/schemas/RUMProductScales"
@@ -115962,7 +116520,7 @@ components:
             type: string
           type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
+          description: "Type of the RUM application. Possible values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `unreal`."
           example: browser
           type: string
         updated_at:
@@ -115997,8 +116555,21 @@ components:
         - type
       type: object
     RUMApplicationCreateAttributes:
-      description: RUM application creation attributes.
+      description: |-
+        RUM application creation attributes.
+        When `rum_event_processing_state` is omitted, it defaults to `ALL`. When `product_analytics_retention_state` is omitted, Product Analytics is not enabled. Setting it to `MAX` requires the `product_analytics_apps_write` permission.
       properties:
+        apm_rum_flat_sampling_replay_enabled:
+          description: Whether flat sampling of Session Replay for APM-correlated RUM sessions is enabled. Defaults to `true`.
+          example: true
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Fraction (0 to 1) of APM-correlated RUM sessions with Session Replay when flat sampling is enabled. Defaults to `1` (100%).
+          example: 1
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
         create_default_retention_filters:
           default: true
           description: |-
@@ -116007,18 +116578,36 @@ components:
             This setting doesn't affect permanent retention filters (sessions with forced replays, Synthetics sessions and RUM-APM flat sampling).
           example: false
           type: boolean
+        error_tracking_exclusion_filter_enabled:
+          description: Whether Error Tracking exclusion filters are enabled for the application. Defaults to `false`.
+          example: false
+          type: boolean
         name:
-          description: Name of the RUM application.
+          description: Name of the RUM application. Between 1 and 255 characters.
           example: my_new_rum_application
+          maxLength: 255
           type: string
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions. Defaults to `100`.
+          example: 100
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
         product_analytics_retention_state:
-          $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
+          $ref: "#/components/schemas/RUMProductAnalyticsRetentionStateRequest"
         rum_event_processing_state:
           $ref: "#/components/schemas/RUMEventProcessingState"
+        tags:
+          description: List of tags to associate with the RUM application, in `key:value` format.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
-          example: browser
-          type: string
+          $ref: "#/components/schemas/RUMApplicationPlatformType"
       required:
         - name
       type: object
@@ -116068,9 +116657,11 @@ components:
           example: false
           type: boolean
         apm_rum_flat_sampling_replay_sample_rate:
-          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled.
+          description: Fraction (0 to 1) of APM-correlated RUM sessions with Session Replay when flat sampling is enabled.
           example: 0
           format: double
+          maximum: 1
+          minimum: 0
           type: number
         application_id:
           description: ID of the RUM application.
@@ -116135,7 +116726,8 @@ components:
           description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
           example: 0
           format: int32
-          maximum: 2147483647
+          maximum: 100
+          minimum: 0
           type: integer
         product_scales:
           $ref: "#/components/schemas/RUMProductScales"
@@ -116156,7 +116748,7 @@ components:
             type: string
           type: array
         type:
-          description: Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`.
+          description: Type of the RUM application. Possible values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `unreal`.
           example: browser
           type: string
         updated_at:
@@ -116187,6 +116779,52 @@ components:
       type: string
       x-enum-varnames:
         - RUM_APPLICATION
+    RUMApplicationPlatformType:
+      description: Type of the RUM application, that is the platform of the RUM SDK. Defaults to `browser` on create.
+      enum:
+        - browser
+        - ios
+        - android
+        - react-native
+        - flutter
+        - roku
+        - electron
+        - unity
+        - kotlin-multiplatform
+        - react
+        - nextjs
+        - angular
+        - vuejs
+        - nuxt
+        - tanstack
+        - maui
+        - salesforce-lwc
+        - shopify
+        - cpp
+        - unreal
+      example: browser
+      type: string
+      x-enum-varnames:
+        - BROWSER
+        - IOS
+        - ANDROID
+        - REACT_NATIVE
+        - FLUTTER
+        - ROKU
+        - ELECTRON
+        - UNITY
+        - KOTLIN_MULTIPLATFORM
+        - REACT
+        - NEXTJS
+        - ANGULAR
+        - VUEJS
+        - NUXT
+        - TANSTACK
+        - MAUI
+        - SALESFORCE_LWC
+        - SHOPIFY
+        - CPP
+        - UNREAL
     RUMApplicationResponse:
       description: RUM application response.
       properties:
@@ -116218,20 +116856,55 @@ components:
         - type
       type: object
     RUMApplicationUpdateAttributes:
-      description: RUM application update attributes.
+      description: |-
+        RUM application update attributes. Only the attributes you provide are changed. Omitted attributes keep their current value.
+        Changing `product_analytics_retention_state` or `product_analytics_replay_sample_rate` requires the `product_analytics_apps_write` permission.
       properties:
+        apm_rum_flat_sampling_replay_enabled:
+          description: Whether flat sampling of Session Replay for APM-correlated RUM sessions is enabled.
+          example: true
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Fraction (0 to 1) of APM-correlated RUM sessions with Session Replay when flat sampling is enabled.
+          example: 1
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        error_tracking_exclusion_filter_enabled:
+          description: Whether Error Tracking exclusion filters are enabled for the application.
+          example: false
+          type: boolean
         name:
-          description: Name of the RUM application.
+          description: New name of the RUM application. Between 1 and 255 characters.
           example: updated_name_for_my_existing_rum_application
+          maxLength: 255
           type: string
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
+          example: 100
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
         product_analytics_retention_state:
-          $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
+          $ref: "#/components/schemas/RUMProductAnalyticsRetentionStateRequest"
+        remote_config_id:
+          description: ID of the RUM SDK remote configuration to associate with the application.
+          example: abc12345-1234-5678-abcd-ef1234567890
+          type: string
         rum_event_processing_state:
           $ref: "#/components/schemas/RUMEventProcessingState"
+        tags:
+          description: New list of tags for the RUM application, in `key:value` format. Replaces the existing tags.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
-          example: browser
-          type: string
+          $ref: "#/components/schemas/RUMApplicationPlatformType"
       type: object
     RUMApplicationUpdateRequest:
       description: RUM application update request.
@@ -116281,19 +116954,19 @@ components:
           type: object
       type: object
     RUMCompute:
-      description: A compute rule to compute metrics or timeseries.
+      description: A compute rule to compute metrics or timeseries. In the response, the result of each rule is keyed `c0`, `c1`, and so on, in the order of the `compute` list.
       properties:
         aggregation:
           $ref: "#/components/schemas/RUMAggregationFunction"
         interval:
           description: |-
-            The time buckets' size (only used for type=timeseries)
-            Defaults to a resolution of 150 points.
+            The time buckets' size, for example `5m`, `1h`, or `1d` (only used for `type=timeseries`).
+            Defaults to a resolution of 150 points over the queried time range.
           example: "5m"
           type: string
         metric:
-          description: The metric to use.
-          example: "@duration"
+          description: The attribute to aggregate, for example `@view.loading_time`. Required for all aggregations except `count`.
+          example: "@view.loading_time"
           type: string
         type:
           $ref: "#/components/schemas/RUMComputeType"
@@ -116302,7 +116975,7 @@ components:
       type: object
     RUMComputeType:
       default: "total"
-      description: The type of compute.
+      description: The type of compute. `total` returns one value per bucket. `timeseries` returns a list of time points per bucket.
       enum: ["timeseries", "total"]
       type: string
       x-enum-varnames: ["TIMESERIES", "TOTAL"]
@@ -116323,8 +116996,10 @@ components:
       properties:
         attributes:
           additionalProperties: {}
-          description: JSON object of attributes from RUM events.
-          example: {"customAttribute": 123, "duration": 2345}
+          description: |-
+            JSON object of attributes from RUM events. Attributes are nested by path: the facet `@view.name` used in queries is returned as `attributes.view.name`.
+            Common attributes include `type` (the event type: `session`, `view`, `action`, `resource`, `error`, `long_task`, or `vital`), `application.id`, `session.id`, `view.id`, `view.name`, and `usr.id`. Durations such as `view.time_spent`, `view.loading_time`, and `resource.duration` are in nanoseconds.
+          example: {"application": {"id": "abcd1234-0000-0000-abcd-1234abcd5678"}, "type": "view", "view": {"loading_time": 1200000000, "name": "/checkout"}}
           type: object
         service:
           description: |-
@@ -116334,14 +117009,14 @@ components:
           example: "web-app"
           type: string
         tags:
-          description: Array of tags associated with your event.
+          description: Array of tags associated with your event, in `key:value` format.
           example: ["team:A"]
           items:
             description: Tag associated with your event.
             type: string
           type: array
         timestamp:
-          description: Timestamp of your event.
+          description: Timestamp of your event, in ISO 8601 format.
           example: "2019-01-02T09:42:36.320Z"
           format: date-time
           type: string
@@ -116358,7 +117033,7 @@ components:
           $ref: "#/components/schemas/RUMEventProcessingState"
       type: object
     RUMEventProcessingState:
-      description: Configures which RUM events are processed and stored for the application.
+      description: Configures which RUM events are processed and stored for the application. Defaults to `ALL` when creating an application.
       enum:
         - ALL
         - ERROR_FOCUSED_MODE
@@ -116399,8 +117074,8 @@ components:
       description: A group-by rule.
       properties:
         facet:
-          description: The name of the facet to use (required).
-          example: "@view.time_spent"
+          description: The attribute to group by, for example `@view.name` or `@session.type` (required).
+          example: "@view.name"
           type: string
         histogram:
           $ref: "#/components/schemas/RUMGroupByHistogram"
@@ -116448,7 +117123,7 @@ components:
         - max
       type: object
     RUMGroupByMissing:
-      description: The value to use for logs that don't have the facet used to group by.
+      description: The value to use for events that don't have the facet used to group by.
       oneOf:
         - $ref: "#/components/schemas/RUMGroupByMissingString"
         - $ref: "#/components/schemas/RUMGroupByMissingNumber"
@@ -117094,7 +117769,8 @@ components:
           $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
       type: object
     RUMProductAnalyticsRetentionState:
-      description: Controls the retention policy for Product Analytics data derived from RUM events.
+      description: |-
+        Controls the retention policy for Product Analytics data derived from RUM events.
       enum:
         - MAX
         - NONE
@@ -117106,6 +117782,23 @@ components:
       x-enum-varnames:
         - MAX
         - NONE
+    RUMProductAnalyticsRetentionStateRequest:
+      description: |-
+        Retention policy to set for Product Analytics data derived from RUM events. `PREVIEW` is the initial state of a new application and is reported as `NONE` in responses. Setting `MAX` requires the `product_analytics_apps_write` permission.
+      enum:
+        - MAX
+        - NONE
+        - PREVIEW
+      example: MAX
+      type: string
+      x-enum-descriptions:
+        - Store Product Analytics data for the maximum available retention period
+        - Do not store Product Analytics data
+        - Initial state of a new application, reported as `NONE` in responses
+      x-enum-varnames:
+        - MAX
+        - NONE
+        - PREVIEW
     RUMProductScales:
       description: Product Scales configuration for the RUM application.
       properties:
@@ -117119,17 +117812,20 @@ components:
       properties:
         from:
           default: "now-15m"
-          description: The minimum time for the requested events; supports date (in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds are optional), math, and regular timestamps (in milliseconds).
+          description: |-
+            The minimum time for the requested events, inclusive. Accepts date math relative to now (for example `now-15m`, `now-1h`, `now-7d`), an absolute date in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator (seconds and fractional seconds are optional), or a timestamp in milliseconds since the Unix epoch.
           example: "now-15m"
           type: string
         query:
           default: "*"
-          description: The search query following the RUM search syntax.
+          description: |-
+            The search query following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). Filter on attributes with `@attribute:value`, for example `@type:view @application.id:<application_id> @view.name:"/checkout"`, and combine terms with `AND`, `OR`, and `-` (negation). Event types are `session`, `view`, `action`, `resource`, `error`, `long_task`, and `vital`.
           example: "@type:session AND @session.type:user"
           type: string
         to:
           default: "now"
-          description: The maximum time for the requested events; supports date (in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds are optional), math, and regular timestamps (in milliseconds).
+          description: |-
+            The maximum time for the requested events. Accepts the same formats as `from`.
           example: "now"
           type: string
       type: object
@@ -117154,12 +117850,12 @@ components:
       properties:
         cursor:
           description: |-
-            List following results with a cursor provided in the previous query.
+            Cursor to get the next page of results, taken from `meta.page.after` of the previous response. Send it with the same `filter` and `sort` as the request that returned it.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
         limit:
           default: 10
-          description: Maximum number of events in the response.
+          description: Maximum number of events in the response. Between 1 and 1000.
           example: 25
           format: int32
           maximum: 1000
@@ -117170,9 +117866,9 @@ components:
       properties:
         next:
           description: |-
-            Link for the next set of results. Note that the request can also be made using the
-            POST endpoint.
-          example: "https://app.datadoghq.com/api/v2/rum/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
+            Link for the next set of results, only present when there are more results. It always points to the `GET /api/v2/rum/events` endpoint and keeps `filter[query]`, `filter[from]`, `filter[to]`, `sort`, and `page[limit]` of the request. You can also make the request with the
+            POST endpoint, with `page.cursor` set to `meta.page.after`.
+          example: "https://api.datadoghq.com/api/v2/rum/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
       type: object
     RUMResponseMetadata:
@@ -117204,18 +117900,19 @@ components:
       properties:
         after:
           description: |-
-            The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.
+            The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]` (`page.cursor` for the POST endpoint). Absent on the last page.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
       type: object
     RUMResponseStatus:
-      description: The status of the response.
+      description: The status of the response. `timeout` means the query did not complete in time and the results are partial.
       enum: ["done", "timeout"]
       example: "done"
       type: string
       x-enum-varnames: ["DONE", "TIMEOUT"]
     RUMSearchEventsRequest:
-      description: The request for a RUM events list.
+      description: |-
+        The request for a RUM events list. All attributes are optional: without any, the request returns the first 10 events of the last 15 minutes.
       properties:
         filter:
           $ref: "#/components/schemas/RUMQueryFilter"
@@ -117232,6 +117929,9 @@ components:
         - timestamp
         - -timestamp
       type: string
+      x-enum-descriptions:
+        - Oldest events first
+        - Newest events first
       x-enum-varnames:
         - TIMESTAMP_ASCENDING
         - TIMESTAMP_DESCENDING
@@ -129921,6 +130621,41 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringBatchMigrationPublishError:
+      description: The reason why the resource could not be published.
+      properties:
+        code:
+          description: The error code returned on rule creation.
+          example: InvalidArgument
+          type: string
+        details:
+          description: The rule validation errors returned on rule creation.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishErrorDetail"
+          type: array
+        message:
+          description: The error message.
+          example: Invalid rule configuration
+          type: string
+      required:
+        - message
+      type: object
+    SecurityMonitoringBatchMigrationPublishErrorDetail:
+      description: A rule validation error.
+      properties:
+        code:
+          description: The error code.
+          example: AlreadyExists
+          type: string
+        message:
+          description: The error message.
+          example: Rule name must be unique
+          type: string
+        target:
+          description: The rule field the error applies to.
+          example: name
+          type: string
+      type: object
     SecurityMonitoringBatchMigrationPublishRequest:
       description: Request to publish the resources of a batch migration.
       properties:
@@ -129964,9 +130699,7 @@ components:
       description: Attributes of the publication outcome of a batch migration resource.
       properties:
         error:
-          description: The reason why the resource could not be published.
-          example: failed to create rule
-          type: string
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishError"
         ruleId:
           description: The ID of the created Cloud SIEM detection rule.
           example: abc-def-ghi
@@ -170435,7 +171168,7 @@ paths:
       x-displayName: List work item views
       x-menu-order: 59
     post:
-      description: Creates a new saved work item view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.
+      description: Creates a new saved work item view with a name, filter query, and associated project.
       operationId: CreateCaseView
       requestBody:
         content:
@@ -170562,7 +171295,7 @@ paths:
       x-displayName: Get a work item view
       x-menu-order: 61
     put:
-      description: Updates the name, query, or notification rule of an existing work item view.
+      description: Updates the name or query of an existing work item view.
       operationId: UpdateCaseView
       parameters:
         - $ref: "#/components/parameters/ViewIDPathParameter"
@@ -182297,7 +183030,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/data-capture/configuration:
     get:
-      description: Get the organization default mode, scoped capture overrides, and configuration revision.
+      description: Get the organization default mode, scoped capture overrides, and configuration revision. Requires `ai_gateway_config_read`. Only overrides the caller can View are returned. Hidden overrides remain effective and contribute to `configuration_revision`. An override missing from the response is not necessarily deleted.
       operationId: GetAiGatewayDataCaptureConfiguration
       responses:
         "200":
@@ -182345,7 +183078,7 @@ paths:
       x-unstable: "**Note**: This endpoint is in Preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   /api/v2/data-capture/overrides:
     post:
-      description: Create a scoped override with a client-generated UUID and the current `configuration_revision`. If the override can enable full capture for more traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` is stale, the UUID already exists, or the organization has 100 overrides. Missing `configuration_revision` or required full-capture confirmation returns HTTP 400. Retrying an accepted create with the same UUID returns HTTP 409. To undo a create, read the current configuration revision and delete the override using its returned override revision.
+      description: Create a scoped override with a client-generated UUID and the current `configuration_revision`. If the override can enable full capture for more traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` is stale, the UUID already exists, or the organization has 100 overrides. Missing `configuration_revision` or required full-capture confirmation returns HTTP 400. Retrying an accepted create with the same UUID returns HTTP 409. To undo a create, read the current configuration revision and delete the override using its returned override revision. Requires `ai_gateway_config_write`. Restriction policies are saved separately after the returned UUID and revision acknowledge creation. A lost response is an unknown outcome; absence from a filtered configuration response does not prove creation failed.
       operationId: CreateAiGatewayDataCaptureOverride
       requestBody:
         content:
@@ -182398,7 +183131,7 @@ paths:
       x-unstable: "**Note**: This endpoint is in Preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   /api/v2/data-capture/overrides/{id}:
     delete:
-      description: Delete an override using its `revision` and the current `configuration_revision`. If deleting the override can enable full capture for affected traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during deletion. Missing revisions or required full-capture confirmation returns HTTP 400.
+      description: Delete an override using its `revision` and the current `configuration_revision`. If deleting the override can enable full capture for affected traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during deletion. Missing revisions or required full-capture confirmation returns HTTP 400. Requires `ai_gateway_config_write` and View and Edit access to this override. Hidden overrides return HTTP 404; visible overrides without Edit return HTTP 403. Authorization failures return HTTP 503. If permission cleanup fails after the deletion is committed, the response is HTTP 500 with code `deletion_permission_cleanup_failed`, `meta.configuration_deleted=true`, and `meta.permissions_cleanup_failed=true`. Do not retry the deletion.
       operationId: DeleteAiGatewayDataCaptureOverride
       parameters:
         - description: Data capture override ID.
@@ -182444,7 +183177,7 @@ paths:
           - ai_gateway_config_write
       x-unstable: "**Note**: This endpoint is in Preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
     put:
-      description: Replace an override using its `revision` and the current `configuration_revision`. Changes to capture overrides don't affect routing rules. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during replacement. Missing revisions or required full-capture confirmation returns HTTP 400.
+      description: Replace an override using its `revision` and the current `configuration_revision`. Changes to capture overrides don't affect routing rules. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during replacement. Missing revisions or required full-capture confirmation returns HTTP 400. Requires `ai_gateway_config_write` and View and Edit access to this override. Hidden overrides return HTTP 404; visible overrides without Edit return HTTP 403. Authorization failures return HTTP 503. The returned UUID and revision acknowledge the saved configuration even if the caller can no longer list it. Restriction policies are saved separately.
       operationId: UpdateAiGatewayDataCaptureOverride
       parameters:
         - description: Data capture override ID.
@@ -206616,6 +207349,317 @@ paths:
       summary: Update an Elastic Cloud integration account
       tags:
         - Elastic Cloud Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/nebius-cloud/accounts:
+    get:
+      description: List Nebius Cloud integration accounts.
+      operationId: ListNebiusCloudIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: nebius_service_account
+                            public_key_id: publickey-yyyyyyyy
+                            service_account_id: serviceaccount-xxxxxxxx
+                          dataflows:
+                            nebius-cloud-cost-collection:
+                              enabled: true
+                              settings:
+                                access_key_id: AKID0123456789ABCDEF
+                                bucket_name: nebius-cost-exports
+                                bucket_prefix_path: cost-export/2026/
+                                bucket_region: eu-north1
+                            nebius-cloud-logs:
+                              enabled: true
+                              settings:
+                                enabled_services:
+                                  - nebius-cloud-compute
+                                  - nebius-cloud-kubernetes
+                                  - default
+                            nebius-cloud-resources:
+                              enabled: true
+                            nebius-cloud-service-quota-collection:
+                              enabled: true
+                          name: nebius-prod
+                          settings:
+                            account_tags:
+                              - env:prod
+                              - team:ai
+                            tenant_id: tenant-12345678
+                        id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Nebius Cloud integration accounts
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Nebius Cloud integration account.
+      operationId: CreateNebiusCloudIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NebiusCloudIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/nebius-cloud/accounts/{account_id}:
+    delete:
+      description: Delete a Nebius Cloud integration account.
+      operationId: DeleteNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Nebius Cloud integration account.
+      operationId: GetNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Nebius Cloud integration account. Only the fields provided are changed.
+      operationId: UpdateNebiusCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NebiusCloudIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: nebius_service_account
+                          public_key_id: publickey-yyyyyyyy
+                          service_account_id: serviceaccount-xxxxxxxx
+                        dataflows:
+                          nebius-cloud-cost-collection:
+                            enabled: true
+                            settings:
+                              access_key_id: AKID0123456789ABCDEF
+                              bucket_name: nebius-cost-exports
+                              bucket_prefix_path: cost-export/2026/
+                              bucket_region: eu-north1
+                          nebius-cloud-logs:
+                            enabled: true
+                            settings:
+                              enabled_services:
+                                - nebius-cloud-compute
+                                - nebius-cloud-kubernetes
+                                - default
+                          nebius-cloud-resources:
+                            enabled: true
+                          nebius-cloud-service-quota-collection:
+                            enabled: true
+                        name: nebius-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:ai
+                          tenant_id: tenant-12345678
+                      id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/NebiusCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Nebius Cloud integration account
+      tags:
+        - Nebius Cloud Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -241539,6 +242583,7 @@ paths:
         Restriction policies can be applied to the following resources:
         - AI Gateway Providers: `ai-gateway-provider`
         - AI Gateway Routes: `ai-gateway-route`
+        - AI Gateway Capture Overrides: `ai-gateway-capture-override`
         - Dashboards: `dashboard`
         - Integration Services: `integration-service`
         - Integration Webhooks: `integration-webhook`
@@ -241569,17 +242614,19 @@ paths:
         - Network Path Configs: `network-path-config`
 
         AI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.
-        The editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.
-        Reading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires
+        Capture override policies control who can view and edit override configuration. Hidden overrides remain effective for traffic.
+        The editor relation includes View. Providers, routes, and capture overrides have no Run relation; restriction policies don't affect inference.
+        Reading provider, route, or capture override policies requires `ai_gateway_config_read`. Updating or deleting them requires
         `ai_gateway_config_write` and follows standard restriction-policy authorization, including
         administrator recovery and self-lockout checks.
-        Providers and routes without a restriction policy retain the normal unrestricted defaults.
+        Providers, routes, and capture overrides without a restriction policy retain the normal unrestricted defaults.
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
         ----------------------------|--------------------------
         AI Gateway Providers        | `viewer`, `editor`
         AI Gateway Routes           | `viewer`, `editor`
+        AI Gateway Capture Overrides | `viewer`, `editor`
         Dashboards                  | `viewer`, `editor`
         Integration Services        | `viewer`, `editor`
         Integration Webhooks        | `viewer`, `editor`
@@ -242768,7 +243815,11 @@ paths:
   /api/v2/rum/analytics/aggregate:
     post:
       description: |-
-        The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.
+        Aggregate RUM events into buckets of computed metrics and timeseries. Use this endpoint for counts, percentiles, top-N breakdowns, and timeseries. To read individual events, use `SearchRUMEvents` or `ListRUMEvents`.
+
+        `filter` selects the events with the [RUM search syntax][1] and a time range (`from` and `to` accept date math such as `now-15m`, ISO 8601 dates, and timestamps in milliseconds). Each `compute` rule produces one value (`type: total`) or one list of time points (`type: timeseries`) per bucket, keyed `c0`, `c1`, and so on, in the response. Each `group_by` rule splits the events into buckets by a facet, returned in `by`. Use `histogram` on a numeric facet to bucket it by ranges.
+
+        [1]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: AggregateRUMEvents
       requestBody:
         content:
@@ -242799,6 +243850,22 @@ paths:
                   page:
                     cursor: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
                     limit: 25
+              top_views_by_count:
+                summary: Top 10 views by number of view events
+                value:
+                  compute:
+                    - aggregation: count
+                  filter:
+                    from: now-1d
+                    query: "@type:view @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
+                    to: now
+                  group_by:
+                    - facet: "@view.name"
+                      limit: 10
+                      sort:
+                        aggregation: count
+                        order: desc
+                        type: measure
             schema:
               $ref: "#/components/schemas/RUMAggregateRequest"
         required: true
@@ -242839,8 +243906,48 @@ paths:
           - rum_apps_read
   /api/v2/rum/applications:
     get:
-      description: List all the RUM applications in your organization.
+      description: |-
+        List the enabled RUM applications of your organization. Applications deleted with `DeleteRUMApplication` are not returned.
+        The response is not paginated and does not include the `client_token`. Use `GetRUMApplication` to retrieve it.
+        Use the `application_id` of an item as the `id` path parameter of the other application operations, and as `@application.id` in RUM event queries.
       operationId: GetRUMApplications
+      parameters:
+        - description: Only return applications for which RUM event processing is enabled (`true`) or not (`false`).
+          in: query
+          name: filter[rum_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications for which Product Analytics is enabled (`true`) or not (`false`).
+          in: query
+          name: filter[product_analytics_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications that run in error-focused mode (`true`) or not (`false`).
+          in: query
+          name: filter[error_focused_mode_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications that have an SDK remote configuration (`true`) or not (`false`).
+          in: query
+          name: filter[remote_config_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications with this RUM event processing state.
+          in: query
+          name: filter[rum_event_processing_state]
+          required: false
+          schema:
+            $ref: "#/components/schemas/RUMEventProcessingState"
+        - description: Only return applications with this Product Analytics retention state.
+          in: query
+          name: filter[product_analytics_retention_state]
+          required: false
+          schema:
+            $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
       responses:
         "200":
           content:
@@ -242863,6 +243970,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RUMApplicationsResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "429":
@@ -242875,7 +243988,10 @@ paths:
         permissions:
           - rum_apps_read
     post:
-      description: Create a new RUM application in your organization.
+      description: |-
+        Create a RUM application in your organization.
+        The application ID is generated by Datadog and returned in `data.attributes.application_id`. A client token is created with the application and returned in `data.attributes.client_token`. Use both to initialize the RUM SDK.
+        The application is created with the default retention filters unless `create_default_retention_filters` is `false`.
       operationId: CreateRUMApplication
       requestBody:
         content:
@@ -242917,7 +244033,23 @@ paths:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a new RUM application
@@ -243640,18 +244772,36 @@ paths:
           - product_analytics_apps_write
   /api/v2/rum/applications/{id}:
     delete:
-      description: Delete an existing RUM application in your organization.
+      description: |-
+        Delete an existing RUM application in your organization.
+        The application is disabled and its client token is revoked, so the RUM SDK stops sending events for it. The application cannot be re-enabled through the API, and its application ID cannot be reused.
+        Deleting an application with Product Analytics enabled requires the `product_analytics_apps_write` permission.
       operationId: DeleteRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       responses:
         "204":
           description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -243668,14 +244818,19 @@ paths:
         permissions:
           - rum_apps_write
     get:
-      description: Get the RUM application with given ID in your organization.
+      description: |-
+        Get the RUM application with the given ID in your organization.
+        Unlike `GetRUMApplications`, the response includes the `client_token` used to initialize the RUM SDK.
       operationId: GetRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       responses:
         "200":
@@ -243700,6 +244855,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -243716,14 +244883,19 @@ paths:
         permissions:
           - rum_apps_read
     patch:
-      description: Update the RUM application with given ID in your organization.
+      description: |-
+        Update the RUM application with the given ID in your organization.
+        This is a partial update: only the attributes present in the request are changed. `data.id` must match the `id` path parameter.
       operationId: UpdateRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       requestBody:
         content:
@@ -243766,7 +244938,17 @@ paths:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -243777,8 +244959,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Unprocessable Entity.
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity. The `data.id` of the request body does not match the `id` path parameter.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM application
@@ -245099,52 +246281,52 @@ paths:
   /api/v2/rum/events:
     get:
       description: |-
-        List endpoint returns events that match a RUM search query.
-        [Results are paginated][1].
+        Returns the RUM events that match a RUM search query within a time range. Use this endpoint to see your latest RUM events with a simple query. For long filters, use `SearchRUMEvents`. To compute counts, percentiles, or timeseries, use `AggregateRUMEvents`.
 
-        Use this endpoint to see your latest RUM events.
+        The query follows the [RUM search syntax][2]. Without `filter[from]` and `filter[to]`, the endpoint searches the last 15 minutes.
+
+        [Results are paginated][1]: `page[limit]` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after` and `links.next`. Request `links.next`, or send `meta.page.after` as `page[cursor]` with the same other parameters, and repeat until they are absent.
 
         [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+        [2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: ListRUMEvents
       parameters:
-        - description: Search query following RUM syntax.
-          example: "@type:session @application_id:xxxx"
+        - description: Search query following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). Defaults to `*`.
+          example: "@type:session @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
           in: query
           name: filter[query]
           required: false
           schema:
             type: string
-        - description: Minimum timestamp for requested events.
-          example: "2019-01-02T09:42:36.320Z"
+        - description: Minimum time for requested events, inclusive. Accepts date math (for example `now-15m`), an ISO 8601 date, or a timestamp in milliseconds. Defaults to `now-15m`.
+          example: "now-1h"
           in: query
           name: filter[from]
           required: false
           schema:
-            format: date-time
             type: string
-        - description: Maximum timestamp for requested events.
-          example: "2019-01-03T09:42:36.320Z"
+        - description: Maximum time for requested events. Accepts the same formats as `filter[from]`. Defaults to `now`.
+          example: "now"
           in: query
           name: filter[to]
           required: false
           schema:
-            format: date-time
             type: string
-        - description: Order of events in results.
+        - description: Order of events in results, by event timestamp.
           in: query
           name: sort
           required: false
           schema:
             $ref: "#/components/schemas/RUMSort"
         - description: |-
-            List following results with a cursor provided in the previous query.
+            Cursor to get the next page of results, taken from `meta.page.after` or `links.next` of the previous response. Use it with the same other parameters.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           in: query
           name: page[cursor]
           required: false
           schema:
             type: string
-        - description: Maximum number of events in the response.
+        - description: Maximum number of events in the response. Between 1 and 1000.
           example: 25
           in: query
           name: page[limit]
@@ -245191,12 +246373,14 @@ paths:
   /api/v2/rum/events/search:
     post:
       description: |-
-        List endpoint returns RUM events that match a RUM search query.
-        [Results are paginated][1].
+        Returns the RUM events that match a RUM search query within a time range, as a list of individual events. Use this endpoint when the filter is too long for a query string, or to set `options`. To compute counts, percentiles, or timeseries instead of reading events, use `AggregateRUMEvents`.
 
-        Use this endpoint to build complex RUM events filtering and search.
+        The query follows the [RUM search syntax][2]. `filter.from` and `filter.to` accept date math (`now-15m`), ISO 8601 dates, and timestamps in milliseconds.
+
+        [Results are paginated][1]: `page.limit` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after`. Send it as `page.cursor`, with the same `filter` and `sort`, to get the next page, and repeat until `meta.page.after` is absent.
 
         [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+        [2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: SearchRUMEvents
       requestBody:
         content:
@@ -245214,6 +246398,16 @@ paths:
                     cursor: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
                     limit: 25
                   sort: timestamp
+              latest_errors:
+                summary: Newest errors of an application in the last hour
+                value:
+                  filter:
+                    from: now-1h
+                    query: "@type:error @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
+                    to: now
+                  page:
+                    limit: 50
+                  sort: -timestamp
             schema:
               $ref: "#/components/schemas/RUMSearchEventsRequest"
         required: true
@@ -257093,6 +258287,17 @@ paths:
                           ruleId: abc-def-ghi
                           status: published
                         id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationPublishedResource
+                      - attributes:
+                          error:
+                            code: InvalidArgument
+                            details:
+                              - code: AlreadyExists
+                                message: Rule name must be unique
+                                target: name
+                            message: Invalid rule configuration
+                          status: failed
+                        id: 0b9d3f3e-2a4c-4e8b-9f1a-6d2c7e5b8a41
                         type: batchMigrationPublishedResource
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResponse"
@@ -284062,6 +285267,15 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/monitors/create/types/
     name: Monitors
+  - description: |-
+      Manage your Datadog Nebius Cloud integration accounts and account resources
+      directly through the Datadog API. See the
+      [Nebius Cloud integration page](https://docs.datadoghq.com/integrations/nebius_cloud/) for
+      more information.
+    externalDocs:
+      description: Nebius Cloud integration.
+      url: https://docs.datadoghq.com/integrations/nebius_cloud/
+    name: Nebius Cloud Integration
   - description: |-
       The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information.
     name: Network Device Monitoring
