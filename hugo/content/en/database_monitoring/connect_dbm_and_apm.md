@@ -28,6 +28,7 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
 | `service` | Sends the service name, allowing you to understand which services contribute to database load. |
+| `dynamic_service` | Sends a hash that identifies the service instead of the service name. Datadog resolves the calling service from APM spans that carry the same hash. Available for Oracle with Java and .NET. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
 
@@ -97,7 +98,7 @@ For `full` mode with Java and .NET:
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 3.58.0 | [odp.net](https://www.oracle.com/database/technologies/appdev/dotnet/odp.html) | `dynamic_service`|
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 3.58.0 | [Oracle.ManagedDataAccess](https://www.nuget.org/packages/Oracle.ManagedDataAccess)<br>[Oracle.ManagedDataAccess.Core](https://www.nuget.org/packages/Oracle.ManagedDataAccess.Core) | `dynamic_service` |
 
 For `full` mode with Java:
 - The instrumentation overwrites `V$SESSION.ACTION`.
@@ -108,6 +109,12 @@ For `dynamic_service` mode with Java, you can propagate service information with
 - The instrumentation writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments. This overwrites any existing `V$SESSION.ACTION` value.
 - `V$SESSION.ACTION` is set once per connection and is updated only if the service hash changes.
 - Prerequisite: Java tracer 1.67.0 or greater
+
+For `dynamic_service` mode with .NET:
+- Set `DD_DBM_PROPAGATION_MODE=dynamic_service`. No other setting is needed.
+- The instrumentation writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments, so SQL statement text is not changed. This overwrites any existing `V$SESSION.ACTION` value.
+- `V$SESSION.ACTION` is written before every query, so SQL run inside stored procedures (including `CommandType.StoredProcedure` calls) is also attributed to the calling service.
+- Prerequisite: .NET tracer 3.58.0 or greater
 
 {{% /tab %}}
 
@@ -396,7 +403,7 @@ Ensure that you are using a supported client library. For example, `Npgsql`.
 Enable the database monitoring propagation feature by setting the following environment variable:
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
    - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
-   - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
+   - For Oracle: `DD_DBM_PROPAGATION_MODE=dynamic_service` (tracer version 3.58.0 or greater). The tracer writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
