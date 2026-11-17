@@ -62,6 +62,12 @@ Query real-time costs with:
 
 Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly costs help you understand usage patterns before you buy Savings Plans and reservations.
 
+## View real-time costs in dashboards
+
+Each provider has an out-of-the-box {{< ui >}}Real-Time Cost Overview{{< /ui >}} dashboard. These dashboards show real-time cost trends and day-over-day cost changes before finalized billing data is available. Find them on the [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Dashboards{{< /ui >}}][5] page or in the [Dashboard List][6].
+
+The dashboards require no setup. They show data after you meet the [Real-Time Costs requirements][7].
+
 ## Real-time Kubernetes allocation
 
 As with container cost allocation, Datadog breaks down EC2 instance, Azure VM, and Compute Engine instance costs into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service, or env, and **out-of-the-box Kubernetes tags**:
@@ -111,3 +117,6 @@ Use the `estimated_hourly_cost` and `estimated_daily_cost` tags to see the estim
 [2]: /cloud_cost_management/allocation/container_cost_allocation/
 [3]: /cloud_cost_management/cost_changes/monitors/#create-a-real-time-anomaly-monitor
 [4]: #overview
+[5]: https://app.datadoghq.com/cost/analyze/dashboards
+[6]: https://app.datadoghq.com/dashboard/lists?q=type%3Aintegration%20cost%20real
+[7]: #requirements
