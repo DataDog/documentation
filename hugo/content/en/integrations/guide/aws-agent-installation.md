@@ -396,7 +396,7 @@ If instrumentation reports an add-on error, open the cluster's **Add-ons** tab i
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
 [19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[20]: /agent/fleet_automation/fleet_view/
+[20]: https://app.datadoghq.com/fleet?view_by=clusters
 [21]: https://app.datadoghq.com/orchestration/overview/pod
 [22]: https://repost.aws/knowledge-center/eks-managed-add-on
 [23]: /integrations/guide/aws-agent-installation-technical-reference/#remove-datadog-instrumentation
