@@ -101,6 +101,8 @@ Le StackSet ne configure pas le transfert de logs dans les comptes AWS. Pour con
 
 ## Désinstaller l'intégration AWS {#uninstall-aws-integration}
 
+Si vous avez installé [Datadog instrumentation][11] sur des ressources dans ces comptes, supprimez-la d'abord. Datadog supprime l'instrumentation avec le rôle IAM d'intégration. Une fois les StackInstances supprimées, Datadog ne peut plus accéder à vos ressources, et l'Agent, les couches Lambda et la configuration de fonction ajoutés par Datadog restent en place. Pour chaque compte, supprimez l'instrumentation de Fleet Automation comme décrit dans [Supprimer l'intégration][12], puis revenez ici pour supprimer les StackInstances et le StackSet.
+
 Pour désinstaller l'intégration AWS de tous les comptes et régions AWS d'une organisation, supprimez d'abord toutes les StackInstances, puis le StackSet. Suivez les étapes décrites dans [Delete a stack set][7] pour supprimer les StackInstances et le StackSet créés. 
 
 ## Pour aller plus loin {#further-reading}
@@ -117,3 +119,5 @@ Pour désinstaller l'intégration AWS de tous les comptes et régions AWS d'une 
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [9]: https://docs.datadoghq.com/fr/integrations/guide/amazon_cloudformation/
 [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
+[11]: /fr/integrations/guide/aws-agent-installation/
+[12]: /fr/getting_started/integrations/aws/#remove-the-integration

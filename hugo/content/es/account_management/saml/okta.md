@@ -1,132 +1,135 @@
 ---
-description: Configura Okta como proveedor de identidad SAML para Datadog con IdP
-  y SSO iniciado por SP, aprovisionamiento JIT y configuración de asignación de roles.
+description: Configure Okta como proveedor de identidad SAML para Datadog con SSO
+  iniciado por IdP y SP, aprovisionamiento JIT y configuración de asignación de roles.
 further_reading:
 - link: /account_management/saml/
   tag: Documentación
-  text: Configurar SAML para tu cuenta de Datadog
+  text: Configure SAML para su cuenta de Datadog
 - link: /account_management/multi_organization/
   tag: Documentación
-  text: Configurar equipos y organizaciones con varias cuentas
-title: Configuración del poveedor de identidad Okta SAML
+  text: Configuración de Teams y organizaciones con múltiples cuentas
+title: Configuración del proveedor de identidad SAML de Okta
 ---
-
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
-    En el sitio {{< region-param key="dd_site_name" >}}, debes configurar manualmente la aplicación de Datadog en Okta siguiendo las <a href="/account_management/faq/okta/">instrucciones heredadas</a>. Ignora las instrucciones de esta página sobre la aplicación de Datadog preconfigurada en el catálogo de aplicaciones de Okta.
+    En el {{< region-param key="dd_site_name" >}} sitio, debe configurar manualmente la aplicación Datadog en Okta usando las <a href="/account_management/faq/okta/">instrucciones heredadas</a>. Ignore las instrucciones de esta página sobre la aplicación Datadog preconfigurada en el catálogo de aplicaciones de Okta.
 </div>
 {{% /site-region %}}
 
-## Resumen
+## Descripción general {#overview}
 
-Esta página te explica cómo configurar la aplicación de Datadog en Okta. 
+Esta página le indica cómo configurar la aplicación Datadog en Okta. 
 
-Antes de continuar, asegúrate de que estás utilizando la última versión de la aplicación de Datadog:
-1. En Okta, haz clic en **Applications** (Aplicaciones).
-1. Abre la aplicación de Datadog.
-1. 2. Selecciona la pestaña **General**.
-1. 2. Busca el campo **SSO Base URL** (URL base de SSO).
+Antes de continuar, asegúrese de estar utilizando la versión más reciente de la aplicación Datadog:
+1. En Okta, haga clic en {{< ui >}}Applications{{< /ui >}}.
+1. Abra la aplicación Datadog.
+1. Seleccione la pestaña {{< ui >}}General{{< /ui >}}.
+1. Busque un campo etiquetado como {{< ui >}}SSO Base URL{{< /ui >}}.
 
-{{< img src="account_management/saml/okta/sso_base_url.png" alt="Configuracion de la aplicación de Datadog en Okta, que resalta la URL base de SSO" style="width:80%;" >}}
+{{< img src="account_management/saml/okta/sso_base_url.png" alt="Configuración de la aplicación Datadog en Okta, resaltando la URL base de SSO" style="width:80%;" >}}
 
-Si no ves el campo URL base de SSO, configura Okta utilizando las [instrucciones heredadas][1].
+Si no ve el campo SSO Base URL, configure Okta usando las [instrucciones heredadas][1].
 
-## Características admitidas
+## Funciones compatibles {#supported-features}
 
-La integración de Datadog Okta SAML admite lo siguiente:
+La integración de Datadog con Okta SAML admite lo siguiente:
 - SSO iniciado por IdP
 - SSO iniciado por SP
 - Aprovisionamiento JIT
 
-Para las definiciones de los términos anteriores, consulta el [glosario] de Okta[2].
+Para obtener definiciones de los términos anteriores, consulte el [glosario][2] de Okta.
 
-## Configuración
+## Configuración {#setup}
 
-Configura Okta como el proveedor de identidad (IdP) SAML para Datadog con las siguientes instrucciones. El proceso de configuración requiere que alternes entre tus cuentas de Okta y Datadog.
+Configure Okta como el proveedor de identidad (IdP) SAML para Datadog siguiendo las siguientes instrucciones. El proceso de configuración requiere que alterne entre sus cuentas de Okta y Datadog.
 
-### Añadir la integración de Datadog en Okta
+<div class="alert alert-info">La dirección de correo electrónico que Okta envía a Datadog debe coincidir exactamente con el identificador del usuario en Datadog.</div>
 
-1. Inicia sesión en el dashboard de administración de Okta.
-1. En la barra de navegación de la izquierda, haz clic en **Applications** (Aplicaciones).
-1. Haz clic en **Browse App Catalog** (Navegar el catálogo de aplicación).
-1. Utiliza la barra de búsqueda para buscar "Datadog".
-1. Selecciona la aplicación de Datadog para SAML y SCIM.
-1. Haz clic en **Add integration** (Añadir integración). Aparecerá el cuadro de configuración general.
-1. Rellena el campo **SSO Base URL** (URL base de SSO) con tu [URL de Datadog del sitio web][3].
-1. Haz clic en **Done** (Hecho).
+### Agregue la integración de Datadog en Okta {#add-the-datadog-integration-in-okta}
 
-**Nota:** El campo URL base de SSO acepta subdominios personalizados si no utilizas una URL de sitio web de Datadog estándar.
+1. Inicie sesión en su panel de administración de Okta.
+1. En el panel de navegación izquierdo, haga clic en {{< ui >}}Applications{{< /ui >}}.
+1. Haga clic en {{< ui >}}Browse App Catalog{{< /ui >}}.
+1. Utilice la barra de búsqueda para buscar "Datadog".
+1. Seleccione la aplicación Datadog para SAML y SCIM.
+1. Haga clic en {{< ui >}}Add Integration{{< /ui >}}. Aparece el cuadro de diálogo General Settings.
+1. Rellene el campo {{< ui >}}SSO Base URL{{< /ui >}} con su [URL del sitio web de Datadog][3].
+1. Haga clic en {{< ui >}}Done{{< /ui >}}.
 
-A continuación, descarga los detalles de metadatos para cargarlos en Datadog:
-1. Es el cuadro de dialogo de configuración para la aplicación de Datadog en Okta, haz clic en la pestaña **Sign On** (Iniciar sesión).
-1. Desplázate hacia abajo hasta que veas la **Metadata URL** (URL de metadatos).
-1. Haz clic en **Copy** (Copiar).
-1. Abre una nueva pestaña del navegador y pega la URL de metadatos en la barra de direcciones.
-1. Utiliza el navegador para guardar el contenido de la URL de metadatos como un archivo XML.
+**Nota:** El campo SSO Base URL acepta subdominios personalizados si no está utilizando una URL estándar del sitio web de Datadog.
 
-{{< img src="account_management/saml/okta/metadata_url.png" alt="Inicia sesión en la configuración en Okta" style="width:80%;" >}}
+A continuación, descargue los detalles de los metadatos para cargarlos en Datadog:
+1. Mientras esté en el cuadro de diálogo de configuración de la aplicación Datadog en Okta, haga clic en la pestaña {{< ui >}}Sign on{{< /ui >}}.
+1. Desplácese hacia abajo hasta que vea {{< ui >}}Metadata URL{{< /ui >}}.
+1. Haga clic en {{< ui >}}Copy{{< /ui >}}.
+1. Abra una nueva pestaña del navegador y pegue la URL de los metadatos en la barra de direcciones.
+1. Utilice su navegador para guardar el contenido de la URL de los metadatos como un archivo XML.
 
-### Configurar Datadog
+{{< img src="account_management/saml/okta/metadata_url.png" alt="Configuración de inicio de sesión en Okta" style="width:80%;" >}}
 
-#### Cargar detalles de metadatos
+### Configure Datadog {#configure-datadog}
 
-1. Navega hasta [Métodos de inicio de sesión][4] en Configuración de la organización.
-1. En el componente SAML, haz clic en **Configure** (Configurar) o **Update** (Actualizar), dependiendo de si has configurado SAML previamente. Aparecerá la página de configuración de SAML.
-1. Haz clic en **Select file** (Seleccionar archivo) y selecciona el archivo de metadatos que descargaste previamente de Okta.
+#### Cargar detalles de metadatos {#upload-metadata-details}
 
-{{< img src="account_management/saml/okta/choose_file.png" alt="Configuración de SAML en Datadog, que resalta el botón de carga de metadatos" style="width:100%;" >}}
+1. Vaya a [Login Methods][4] en Organization Settings.
+1. En el componente SAML, haga clic en {{< ui >}}Configure{{< /ui >}} o {{< ui >}}Update{{< /ui >}}, dependiendo de si ha configurado SAML anteriormente. Aparece la página de configuración de SAML.
+1. Haga clic en {{< ui >}}Choose File{{< /ui >}} y seleccione el archivo de metadatos que descargó anteriormente de Okta.
 
-#### Activar inicio de sesión iniciado por IdP
+{{< img src="account_management/saml/okta/choose_file.png" alt="Configuración de SAML en Datadog, resaltando el botón de carga de metadatos" style="width:100%;" >}}
 
-Para que la aplicación de Datadog funcione correctamente, debes activar el inicio de sesión iniciado por IdP.
+#### Activar el inicio de sesión iniciado por el IdP {#activate-idp-initiated-login}
 
-<div class="alert alert-info">Después de activar el inicio de sesión iniciado por IdP, los usuarios pueden iniciar sesión en Datadog desde Okta.</div>
+Para que la aplicación Datadog funcione correctamente, debe activar el inicio de sesión iniciado por el IdP.
 
-Para activar el inicio de sesión iniciado por IdP, ejecuta los siguientes pasos:
-1. Ve a la página de [configuración de SAML][5].
-1. En **Additional Features* (Características adicionales), haz clic en la casilla checkpara **Identity Provider (IdP) Initiated Login** (Inicio de sesión iniciado por el proveedor de identidad (IdP)). El componente muestra la **URL del servicio de consumidor para aserción**.
-1. El contenido de la URL del servicio de consumidor de aserciones después de `/saml/assertion` es el ID de tu empresa. Introduce este valor con el prefijo `/id/` en Okta para finalizar tu configuración.
-1. Haz clic en **Save Changes** (Guardar cambios).
+<div class="alert alert-info">Después de activar el inicio de sesión iniciado por el IdP, los usuarios pueden iniciar sesión en Datadog desde Okta</div>
 
-{{< img src="account_management/saml/okta/company_id.png" alt="Configuración de SAML en Datadog, donde se resalta la parte del ID de empresa de la URL del servicio de consumidor para aserción" style="width:100%;" >}}
+Para activar el inicio de sesión iniciado por el IdP, siga estos pasos:
+1. Navegue a la [página de configuración de SAML][5].
+1. En {{< ui >}}Additional Features{{< /ui >}}, haga clic en la casilla de verificación para {{< ui >}}Identity Provider (IdP) Initiated Login{{< /ui >}}. El componente muestra {{< ui >}}Assertion Consumer Service URL{{< /ui >}}.
+1. El contenido de Assertion Consumer Service URL después de `/saml/assertion` es el ID de su empresa. Ingrese este valor con el prefijo `/id/` en Okta para finalizar la configuración.
+1. Haga clic en {{< ui >}}Save Changes{{< /ui >}}.
 
-Vuelve a Okta para ver la siguiente serie de pasos de configuración.
+{{< img src="account_management/saml/okta/company_id.png" alt="Configuración de SAML en Datadog, resaltando la parte del ID de la empresa de la URL del servicio de consumo de aserciones" style="width:100%;" >}}
 
-### Añade el ID de la empresa en Okta
+Regrese a Okta para el siguiente conjunto de pasos de configuración.
 
-1. Regresa al dashboard de administrador de Okta.
-1. Selecciona la pestaña **Iniciar sesión**.
-1. Haz clic en **Edit** (Editar).
-1. Desplázate hasta la sección **Advanced Sign-on Settings** (Configuración avanzada del inicio de sesión).
-1. Pega el ID completo de tu empresa, incluido el prefijo `/id/`, en el campo **ID de la empresa** (`/id/XXXXXX-XXXX-XXX-XXXX-XXXXXXX`).
-1. Haz clic en **Save** (Guardar).
+### Agregue el ID de la empresa en Okta {#add-the-company-id-in-okta}
 
-## Inicio de sesión iniciado por el proveedor de servicios (SP)
+1. Regrese al panel de administración de Okta.
+1. Seleccione la pestaña {{< ui >}}Sign on{{< /ui >}}.
+1. Haga clic en {{< ui >}}Edit{{< /ui >}}.
+1. Desplácese hacia abajo hasta la sección {{< ui >}}Advanced Sign-on Settings{{< /ui >}}.
+1. Pegue su ID de empresa completo, incluido el prefijo `/id/`, en el campo {{< ui >}}Company ID{{< /ui >}} (`/id/XXXXXX-XXXX-XXX-XXXX-XXXXXXX`).
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Para iniciar sesión en Datadog utilizando el inicio de sesión iniciado por el proveedor de servicios (SSO iniciado por SP), necesitas la URL de inicio de sesión único (SSO). Puedes encontrar tu URL de SSO de dos formas: en la página de configuración de SAML o a través del correo electrónico.
+## Inicio de sesión iniciado por el proveedor de servicios (SP) {#service-provider-sp-initiated-login}
 
-### Página de configuración de SAML
-La página [página de configuración de SAML][5] en Datadog muestra la URL de SSO junto al encabezado **Single Sign-on URL** (Inicio de sesión único).
+Para iniciar sesión en Datadog mediante el inicio de sesión iniciado por el proveedor de servicios (SSO iniciado por SP), necesita la URL de inicio de sesión único (SSO). Puede encontrar su URL de SSO de dos maneras: en la página de configuración de SAML o a través de correo electrónico.
 
-### Correo electrónico
-1. Ve a la URL del sitio web Datadog correspondiente a tu organización.
-1. Selecciona **Using Single Sign-On ?** (¿Utilizar el inicio de sesión único?).
-1. Introduce tu dirección de correo electrónico y haz clic en **Next** (Siguiente).
-1. En tu correo electrónico, busca un mensaje que contenga la URL de SSO, que aparece como **Login URL**.
+### Página de configuración de SAML {#saml-configuration-page}
+La [página de configuración de SAML][5] de Datadog muestra la URL de SSO junto al encabezado {{< ui >}}Single Sign-on URL{{< /ui >}}.
 
-Una vez que encuentres tu URL de SSO de cualquiera de los métodos, márcala para futuras referencias.
+### Correo electrónico {#email}
+1. Navegue a la URL del sitio web de Datadog para su organización.
+1. Seleccione {{< ui >}}Using Single Sign-On?{{< /ui >}}.
+1. Ingrese su dirección de correo electrónico y haga clic en {{< ui >}}Next{{< /ui >}}.
+1. Revise su correo electrónico para ver un mensaje que contenga la URL de SSO, que aparece como {{< ui >}}Login URL{{< /ui >}}.
 
-## Asignación de roles SAML
+Después de encontrar su URL de SSO mediante cualquiera de los métodos, guárdela en marcadores para futuras consultas.
 
-Sigue los pasos que se indican a continuación para asignar atributos de Okta a entidades de Datadog. Este paso es opcional.
+## Asignación de roles SAML {#saml-role-mapping}
 
-1. Ve al dashboard de administrador de Okta.
-1. Selecciona la pestaña **Iniciar sesión**.
-1. Haz clic en **Edit** (Editar).
-1. Rellena los **Atributos** con tus [sentencias de atributos de grupo][6].
-1. Configura las [asignaciones][7] elegidas en Datadog.
+Datadog utiliza la asignación de grupos SAML para asignar atributos de Okta a roles y Teams de Datadog. Este paso es opcional.
 
-## Referencias adicionales
+**Nota**: La asignación de roles solo está disponible a través de SAML. SCIM aprovisiona usuarios y Teams desde Okta, pero no asigna roles. Para configurar SCIM, consulte [Configurar SCIM con Okta][8].
+
+1. Navegue al panel de administración de Okta.
+1. Seleccione la pestaña {{< ui >}}Sign on{{< /ui >}}.
+1. Haga clic en {{< ui >}}Edit{{< /ui >}}.
+1. En {{< ui >}}Attributes{{< /ui >}}, agregue una declaración de atributo de grupo llamada `memberOf`, con el formato de nombre {{< ui >}}Unspecified{{< /ui >}} y el valor `.*` para recuperar todos los grupos. Comuníquese con su administrador de IdP si necesita limitar más el contexto.
+1. Configure las [asignaciones][7] que desee en Datadog.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -135,5 +138,5 @@ Sigue los pasos que se indican a continuación para asignar atributos de Okta a 
 [3]: /es/getting_started/site/#access-the-datadog-site
 [4]: https://app.datadoghq.com/organization-settings/login-methods
 [5]: https://app.datadoghq.com/organization-settings/login-methods/saml
-[6]: /es/account_management/faq/okta/#group-attribute-statements-optional
 [7]: /es/account_management/saml/mapping/
+[8]: /es/account_management/scim/okta/
