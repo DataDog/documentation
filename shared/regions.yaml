@@ -728,7 +728,7 @@ regions:
       metrics_endpoint: metrics.agent.ddog-gov.com
       metrics_endpoint_private_link: metrics.agent.ddog-gov.com
       microsoft_teams_app_name: Datadog for Government
-      opamp_endpoint: N/A
+      opamp_endpoint: ""
       org_management_max_session_duration: "12 hours"
       otlp_logs_endpoint: "https://otlp.ddog-gov.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.ddog-gov.com/v1/metrics"
@@ -819,7 +819,7 @@ regions:
       metrics_endpoint: metrics.agent.us2.ddog-gov.com
       metrics_endpoint_private_link: metrics.agent.us2.ddog-gov.com
       microsoft_teams_app_name: Datadog for Government
-      opamp_endpoint: N/A
+      opamp_endpoint: ""
       org_management_max_session_duration: "12 hours"
       otlp_logs_endpoint: "https://otlp.us2.ddog-gov.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.us2.ddog-gov.com/v1/metrics"

@@ -23,8 +23,8 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED). Configuring and upgrading the Agent's Collector are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
+<div class="alert alert-danger">
+Remote flare collection from the Agent's Collector is not supported on US1-FED or US2-FED.
 </div>
 {{< /site-region >}}
 
@@ -34,7 +34,9 @@ Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED). Conf
 - **The DDOT Collector**: The standalone Datadog Distribution of OpenTelemetry (DDOT) Collector.
 - **Upstream Collectors**: Collectors from the OpenTelemetry project, such as the contrib distribution or a custom build.
 
-For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. You can [configure](#configure-the-agents-collector), [send flares from](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) only the Agent's Collector, because these features use [Remote Configuration][2]. The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
+For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. You can [configure](#configure-the-agents-collector), [send flares from](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) only the Agent's Collector, because these features use [Remote Configuration][2].
+
+The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
 
 ## Prerequisites
 
