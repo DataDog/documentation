@@ -1,8 +1,8 @@
 ---
 title: Cloud Cost Skill in Bits Chat
-description: Use the Cloud Cost skill in Bits Chat to investigate, explain, and share cloud cost findings.
+description: Use the Cloud Cost skill in Bits Chat to investigate, explain, and share cloud cost findings, and to find savings opportunities.
 algolia:
-  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits ai assistant", "bits assistant", "mcp"]
+  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "savings analysis", "savings opportunities", "bits ai assistant", "bits assistant", "mcp"]
   rank: 75
 further_reading:
 - link: "/bits_ai/bits_chat/"
@@ -17,6 +17,9 @@ further_reading:
 - link: "/cloud_cost_management/planning/budgets/"
   tag: "Documentation"
   text: "Budgets"
+- link: "/cloud_cost_management/recommendations/"
+  tag: "Documentation"
+  text: "Cloud Cost Recommendations"
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
@@ -24,12 +27,13 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Chat][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and answering general cost questions. For example, you can ask Bits Chat to:
+The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Chat][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, finding savings, and answering general cost questions. For example, you can ask Bits Chat to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
 - Answer ad hoc questions about cloud, SaaS, custom, or Datadog costs
 - Compare actual spend and forecasts against [budgets][5]
+- Find savings opportunities in a team, service, or other scope, each with an owner, estimated savings, and supporting evidence
 - Correlate cost changes with observability metrics, such as CPU, memory, request volume, or storage size
 - Create [Notebooks][15] that capture an investigation for handoff or future reference
 
@@ -49,6 +53,8 @@ To use the Cloud Cost skill in Bits Chat, you must:
 
 When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
+To find savings opportunities, click {{< ui >}}Optimize{{< /ui >}} on the [Cloud Cost Recommendations][17] page. For more information, see [Savings analysis](#savings-analysis).
+
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open Bits Chat and ask a cost question.
 
 Example prompts:
@@ -57,7 +63,7 @@ Example prompts:
 - `Which teams are responsible for the highest S3 storage costs this month?`
 - `Why is the infrastructure budget projected to go over this month?`
 - `Show total cloud cost by provider for the last 30 complete days.`
-- `Find optimization opportunities for idle or over-provisioned cloud infrastructure.`
+- `Find savings opportunities for team:payments.`
 
 ### Cost change investigations
 
@@ -93,6 +99,20 @@ After the initial summary, Bits Chat can:
 - Identify the teams that own the resources contributing to the cost change
 - Update your budget
 - Capture the investigation for your records in a Notebook
+
+### Savings analysis
+
+Ask Bits Chat to find savings in a team, service, or other scope, or click {{< ui >}}Optimize{{< /ui >}} on the [Cloud Cost Recommendations][17] page. Bits Chat investigates the scope's cost and usage data, then summarizes the savings opportunities it finds. The summary typically includes:
+
+- The scope's current yearly cost and total estimated yearly savings
+- A table of savings opportunities, each with an owning team, estimated yearly savings, and **Effort**, **Risk**, and **Confidence** ratings
+- Existing [Work Management][18] work items, Jira issues, and related Cloud Cost Recommendations for the scope
+
+After the initial summary, Bits Chat can:
+
+- Explain the evidence behind any savings opportunity
+- Create a work item or [Notebook][15] with a detailed write-up for each owning team
+- Show the full write-ups in the conversation
 
 ## Use the Datadog MCP Server for cost analysis
 
@@ -152,3 +172,5 @@ For connection instructions, supported clients, and toolset configuration, see [
 [14]: /mcp_server/tools/
 [15]: /notebooks/
 [16]: /mcp_server/tools/#cost_recommendations
+[17]: /cloud_cost_management/recommendations/
+[18]: /incident_response/work_management/
