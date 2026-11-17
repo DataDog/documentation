@@ -2,7 +2,7 @@
 aliases:
 - /es/observability_pipelines/guide/upgrade_worker_2_7/
 description: Conozca las nuevas funciones, mejoras y correcciones para las versiones
-  2.7 a 2.21 de Worker.
+  2.7 a 2.25 de Worker.
 disable_toc: false
 title: Guía de actualización de Worker
 ---
@@ -13,6 +13,229 @@ Datadog recomienda actualizar Observability Pipelines Worker (OPW) con cada vers
 </div>
 
 Esta guía explica cómo actualizar a una versión específica de Worker y las actualizaciones para esa versión.
+
+## Versión 2.25.0 del Worker {#worker-version-2250}
+
+Para actualizar a la versión 2.25.0 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.25.0][62].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.25.0`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.25.0`.
+
+La versión 2.25.0 del Worker le brinda acceso a lo siguiente:
+
+#### Security {#security}
+
+- Se actualizó el almacén de certificados raíz de Mozilla incluido en el Worker. El almacén ya no incluye `emSign ECC Root CA - G3`, que se eliminó tras el [compromiso del certificado intermedio de eMudhra][61], ni otras raíces en las que Mozilla ha dejado de confiar. Como resultado:
+    - Los componentes que utilizan el almacén raíz integrado ya no confían en las cadenas de certificados a través de los intermedios emSign en los que no se confía.
+    - Las conexiones TLS a servidores cuyas cadenas de certificados terminan en una raíz eliminada fallan en la validación.
+- Los mensajes de error que el Worker reporta a Datadog cuando un componente falla ahora se someten a las mismas reglas de ocultamiento de datos confidenciales que los registros del Worker.
+
+#### Mejoras {#enhancements}
+
+- Los registros del procesador Grok Parser ahora incluyen:
+    - Un campo `rule` que identifica la fuente de la regla.
+    - Un campo `rule_kind` que indica el tipo de regla como `custom` o `library`.
+
+  Los registros de error de compilación de reglas ya no incluyen un campo `source` separado. Si filtra por `source`, filtre por `rule` en su lugar.
+- El destino Datadog BYOC Logs ahora presenta un certificado de cliente mTLS rotado en la siguiente solicitud después de detectar la rotación. Anteriormente, el destino seguía utilizando el certificado antiguo hasta que las conexiones existentes alcanzaban su antigüedad máxima, lo que podía tardar hasta una hora. Las conexiones todavía se restablecen al menos una vez por hora.
+- La variable de entorno `DD_OP_REDUCE_WINDOW_SECS` ahora está disponible para establecer cuánto tiempo los procesadores Reduce agregan eventos antes de emitir un grupo.
+- El procesador Sample ahora limita la memoria para el seguimiento de grupos de muestreo a 128 MiB. Cuando alcanza el límite, expulsa los grupos que llevan más tiempo sin utilizarse.
+- El Worker ha mejorado el rendimiento de ingesta de registros.
+
+#### Correcciones {#fixes}
+
+- Cuando una fuente o destino falla, el Worker ahora registra el error subyacente, como `Address already in use`, en lugar de solo `the task completed with an error`. Si un componente falla por un error de pánico, los registros también incluyen el mensaje de pánico.
+- La fuente de Google Pub/Sub ahora se reconecta inmediatamente, sin registrar un error, cuando el servidor restablece una extracción en streaming.
+- La fuente de Google Pub/Sub ahora confía en cada certificado del archivo de CA configurado, no solo en el último.
+- La fuente de OpenTelemetry ahora responde a las solicitudes gRPC para servicios no compatibles con el estado gRPC `UNIMPLEMENTED` en lugar de HTTP 404. Estas solicitudes ya no registran un error ni incrementan la métrica `component_errors_total`.
+- El Worker ahora rastrea los registros internos descartados bajo carga alta en `component_discarded_events_total` con `intentional:false`. Esto afecta solo a los componentes internos (`component_id:_*`), no a los datos del pipeline.
+
+## Versión 2.24.1 del Worker {#worker-version-2241}
+
+Para actualizar a la versión 2.24.1 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.24.1][60].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.24.1`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.24.1`.
+
+La versión 2.24.1 del Worker le brinda acceso a lo siguiente:
+
+#### Security {#security-1}
+
+- Se actualizó `rustls-webpki` a la versión 0.103.16. El Worker ahora rechaza las cadenas de certificados que incluyen cualquiera de las [autoridades de certificación (CA) intermedias de eMudhra cuyas claves privadas fueron reportadas como comprometidas][61]. El Worker rechaza estas cadenas incluso cuando la CA raíz emisora es de confianza.
+
+  Esta protección se aplica solo a los componentes que utilizan rustls. Los siguientes componentes utilizan el almacén de confianza de CA del sistema en su lugar:
+    - Componentes que utilizan OpenSSL
+    - La búsqueda de cuenta de AWS del destino de Amazon Security Lake
+    - La fuente de Google Cloud Pub/Sub
+
+  Para proteger los componentes que utilizan el almacén de confianza de CA del sistema:
+    - **Imagen de contenedor**: No se requiere ninguna acción a menos que monte su propio paquete de CA o configure `SSL_CERT_FILE`. La imagen de contenedor del Worker desconfía de `emSign ECC Root CA - G3`.
+    - **Paquetes APT y RPM**: Desconfíe de `emSign ECC Root CA - G3` hasta que su distribución proporcione un paquete `ca-certificates` actualizado. En distribuciones más antiguas, desconfíe también de `AAA Certificate Services`, que Debian y Ubuntu distribuyen como `Comodo_AAA_Services_root`.
+
+#### Correcciones {#fixes-1}
+
+- Se corrigió un problema en el que las consultas de búsqueda descartaban silenciosamente operandos en grupos `OR` que combinaban valores exactos con otros operandos, como comodines, rangos u otros atributos. Anteriormente, consultas como `@url:(nope OR aa* OR dummy/api/v1/check_run)` podían omitir eventos coincidentes debido al comodín.
+- El Worker ahora trata los metacaracteres de regex (`.`, `+`, `^`, `$`, `(`, `[`, `|`) en los patrones de comodines de las consultas de búsqueda como caracteres literales. Por ejemplo, `@url:dummy\/api.v1*` ya no coincide con `dummy/api/v1/check_run`.
+
+## Versión 2.24.0 del Worker {#worker-version-2240}
+
+Para actualizar a la versión 2.24.0 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.24.0][59].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.24.0`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.24.0`.
+
+La versión 2.24.0 del Worker le brinda acceso a lo siguiente:
+
+#### Security {#security-2}
+
+- El destino Datadog BYOC Logs ya no reenvía a BYOC Logs la clave de API del Worker para la Datadog API.
+
+#### Mejoras {#enhancements-1}
+
+- El procesador Enrichment Table:
+    - Reporta la métrica `enrichment_distinct_lookup_keys_total`, que es una estimación de claves de búsqueda distintas sumadas a través de ventanas de 1 segundo.
+    - Tiene un rendimiento mejorado durante llenados de caché grandes.
+    - Recarga los valores de la tabla cada 30 segundos. Si una recarga falla, el procesador sigue usando la última tabla válida hasta que una recarga tenga éxito.
+    - Almacena en caché localmente hasta 1 millón de filas de Reference Table durante 1 hora, lo que mejora el manejo de tablas grandes.
+    - Agrega una etiqueta `outcome` a su métrica de claves recuperadas para identificar intentos de búsqueda fallidos.
+    - Tiene un tamaño de búfer predeterminado de 20,000 eventos o 100 MiB, y un máximo de 100,000 eventos.
+- La opción de agregación de métricas del procesador Generate Metrics ahora está habilitada de forma predeterminada, por lo que las métricas generadas se agregan a menos que deshabilite la opción.
+- El Worker ahora usa `aws-lc-rs` como proveedor de criptografía para conexiones TLS basadas en rustls. Los conjuntos de cifrado TLS negociados para algunas conexiones, como Databricks Zerobus, podrían diferir de versiones anteriores. Las conexiones TLS basadas en OpenSSL no se ven afectadas.
+- El procesador Custom Processor ofrece un mejor rendimiento, con búsquedas de campos y funciones de cadena más eficientes.
+- El Worker tiene un rendimiento de inicio de configuración mejorado.
+- La métrica `pipelines.quota_fill` ahora tiene una etiqueta `quota_name`. El Worker mantiene la etiqueta heredada `name` para compatibilidad con versiones anteriores.
+
+#### Correcciones {#fixes-2}
+
+- Las reglas de biblioteca del procesador Sensitive Data Scanner ahora utilizan grupos de captura de patrones para preservar el contexto no sensible alrededor del valor capturado. Anteriormente, el Worker ignoraba los grupos de captura. Por ejemplo, la regla de dirección IPv4 ahora oculta `172.16.0.1:80` como `<REDACTION TEXT>:80` en lugar de `<REDACTION TEXT>80`.
+- Los procesadores Grok Parser, Parse JSON y Parse XML ahora registran una advertencia en lugar de un error cuando un campo no se puede analizar. El mensaje de error del procesador Parse JSON también nombra el campo que no se pudo analizar, en lugar de la palabra genérica `source`.
+- Se corrigió un problema donde la recarga de componentes específicos después de actualizaciones de configuración podía causar que se reiniciaran innecesariamente durante actualizaciones de configuración posteriores, restableciendo su estado.
+- La fuente OpenTelemetry ahora preserva los nombres de eventos de registro OTLP nativos.
+- La fuente Prometheus ahora identifica las métricas que terminan en `_total` como contadores.
+- Se corrigió un problema con el filtro `keyvalue` en las funciones `parse_grok` y `parse_groks` de Custom Processor. El filtro ya no falla al procesar valores `NaN` sin comillas, como `ratio=NaN`.
+## Versión 2.23.2 del Worker {#worker-version-2232}
+
+Para actualizar a la versión 2.23.2 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.23.2][58].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.23.2`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.23.2`.
+
+La versión 2.23.2 del Worker le brinda acceso a lo siguiente:
+
+#### Mejoras {#enhancements-2}
+
+- El destino de Datadog Logs ahora trunca los eventos de registro mayores a 900 KB. Anteriormente, los eventos de registro mayores al límite de tamaño de lote se descartaban en lugar de truncarse.
+
+#### Correcciones {#fixes-3}
+
+- Se corrigieron las imágenes de Docker para que el binario del conector genérico de secretos (`sgc`) sea ejecutable por el usuario de servicio `observability-pipelines-worker`.
+
+## Versión 2.23.1 del Worker {#worker-version-2231}
+
+Para actualizar a la versión 2.23.1 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.23.1][57].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.23.1`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.23.1`.
+
+La versión 2.23.1 del Worker le brinda acceso a lo siguiente:
+
+#### Security {#security-3}
+
+- Se actualizó el binario del conector genérico de secretos incluido (`sgc`) a la versión enviada con Datadog Agent 7.84.1, lo que soluciona CVE-2026-56854.
+
+## Versión 2.23.0 del Worker {#worker-version-2230}
+
+Para actualizar a la versión 2.23.0 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.23.0][56].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.23.0`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.23.0`.
+
+<div class="alert alert-warning"><strong>Cambio incompatible:</strong> Este cambio solo afecta a los scripts de Custom Processor que utilizan las <code>contains_all</code>, <code>encode_key_value</code>, <code>encode_logfmt</code>, <code>ip_cidr_contains</code>, <code>join</code>, <code>parse_groks</code>, o <code>tally</code> funciones.<br><br>Estas funciones ahora verifican los tipos de elementos de sus argumentos de matriz cuando se compila el script. Pasar una matriz con el tipo de elemento incorrecto, como <code>join([1, 2, 3])</code>, ahora es un error de compilación en lugar de un error de tiempo de ejecución. Cuando el Worker puede confirmar que los elementos son del tipo correcto, el <code>!</code> sufijo ya no es necesario y activa una advertencia. Por ejemplo, use <code>join(["sources", "transforms", "sinks"], separator: ", ")</code> en lugar de <code>join!(["sources", "transforms", "sinks"], separator: ", ")</code>.</div>
+
+La versión 2.23.0 del Worker le brinda acceso a lo siguiente:
+
+#### Nuevas funciones {#new-features}
+
+- El procesador Enrichment Table ahora admite archivos CSV y Reference Tables en Pipelines de métricas.
+- El Custom Processor ahora admite la instrucción `break` para salir anticipadamente de un bucle `for_each`.
+
+#### Mejoras {#enhancements-3}
+
+- La fuente OpenTelemetry ahora limita las solicitudes simultáneas a 100 y el tiempo de procesamiento de solicitudes a 30 segundos de forma predeterminada. Los límites se aplican tanto a los puntos finales HTTP como a los gRPC. Las solicitudes que no se pueden manejar a tiempo reciben una respuesta reintentable. Utilice las variables de entorno `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` y `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` para anular estos límites.
+- El destino Databricks Zerobus ahora identifica al Worker en su encabezado `User-Agent`.
+- Para Custom Processor:
+    - Se ha mejorado el rendimiento general del procesador.
+    - La función `for_each` ahora itera sobre colecciones directamente, lo que mejora el rendimiento y reduce el uso de memoria.
+    - Las funciones `md5`, `sha1`, `sha2` y `sha3` ahora se ejecutan más rápido.
+
+#### Correcciones {#fixes-4}
+
+- Las rutas de los archivos de configuración, como los certificados TLS, las tablas de enriquecimiento y los archivos de credenciales de GCP, ahora se resuelven con respecto al `data_dir` establecido en `bootstrap.yaml`. Anteriormente, si `data_dir` solo se establecía en `bootstrap.yaml` y no con la variable de entorno `DD_OP_DATA_DIR`, el Worker buscaba estos archivos en el directorio de datos predeterminado y rechazaba archivos válidos como si no existieran.
+- Las fuentes ahora incluyen la `peer_addr` remota en los registros de errores de reconocimiento TCP y en los registros de errores de conexión TLS.
+- La función `uuid_v7` de Custom Processor ahora conserva la marca de tiempo proporcionada con precisión de milisegundos.
+
+## Versión 2.22.0 del Worker {#worker-version-2220}
+
+Para actualizar a la versión 2.22.0 del Worker:
+
+- Docker: Ejecute el comando `docker pull` para la [imagen 2.22.0][55].
+- Kubernetes: Consulte el [chart de Helm][2] y [Actualizar el Worker][37].
+- APT: Ejecute el comando `apt-get install observability-pipelines-worker=2.22.0`.
+- RPM: Ejecute el comando `sudo yum install observability-pipelines-worker-2.22.0`.
+
+<div class="alert alert-warning"><strong>Cambio incompatible:</strong> Este cambio afecta solo a los logs que contienen un <code>attributes</code> objeto de nivel superior y se envían a los destinos de Datadog Archives (Amazon S3, Google Cloud Storage y Azure Blob Storage). El cambio es particularmente relevante para los logs de la fuente OpenTelemetry, que comúnmente incluyen un <code>attributes</code> objeto de nivel superior.<br><br>Los destinos de Datadog Archives almacenan atributos de log no <a href="/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reservados</a> dentro de un <code>attributes</code> objeto. A partir de la versión 2.22.0 del Worker, si un log ya tiene un <code>attributes</code> objeto, los destinos de Datadog Archives reutilizan ese objeto en lugar de anidarlo un nivel más profundo. Si utiliza consultas con la sintaxis <code>@attributes.&lt;field_name&gt;</code> en logs rehidratados desde un archivo de Observability Pipelines, utilice <code>@&lt;field_name&gt;</code> en su lugar.</div>
+
+La versión 2.22.0 del Worker le brinda acceso a lo siguiente:
+
+#### Nuevas funciones {#new-features-1}
+
+- El procesador Aggregate ahora admite la agregación por tiempo de evento, que utiliza marcas de tiempo de métricas en lugar del tiempo de procesamiento. Un periodo de gracia configurable incluye las métricas que llegan tarde en su ventana de tiempo de evento.
+
+#### Mejoras {#enhancements-4}
+
+- El procesador Generate Metrics para pipelines de logs ahora tiene una opción para habilitar la agregación de métricas. Cuando la opción está habilitada, las métricas generadas se agrupan según la marca de tiempo del evento en intervalos de 1 segundo. Esto evita que la ingesta de métricas de Datadog descarte métricas generadas dentro del mismo segundo debido al comportamiento de "último punto gana".
+- Los errores de análisis de configuración para una fuente, procesador o destino ahora incluyen el ID y el tipo del componente, y el campo que causa el error cuando se puede determinar.
+- Los errores de búsqueda en Reference Table causados por una solicitud HTTP fallida, como un tiempo de espera, una falla de DNS o un restablecimiento de conexión, ahora informan la causa subyacente en lugar de un mensaje `error sending request` genérico.
+- El destino Datadog BYOC Logs ahora admite un límite de tamaño de carga útil HTTP configurable con la variable de entorno `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES`.
+- Las siguientes fuentes ahora tienen habilitado TCP keepalive de forma predeterminada con un tiempo de espera de inactividad de 60 segundos, lo que ayuda a detectar conexiones interrumpidas cuando los clientes se desconectan sin enviar paquetes FIN o RST:
+    - Datadog Agent
+    - Fluentd y Fluent Bit
+    - Logstash
+    - OpenTelemetry (HTTP)
+    - Socket (modo TCP)
+    - Splunk HEC
+    - Syslog (modo TCP)
+- El procesador Enrichment Table (CSV o archivo) ya no copia la tabla completa para cada lote de eventos, lo que reduce el uso de memoria y CPU para tablas de enriquecimiento grandes.
+
+#### Correcciones {#fixes-5}
+
+- El destino Syslog ya no apaga el Worker cuando el campo `timestamp` de un registro no es un valor de marca de tiempo, como una cadena JSON. Estos registros ahora usan la hora UTC actual en el encabezado syslog.
+- El decodificador de tramas `chunked_gelf` ahora limita a 128 MiB el total de carga útil almacenada en búfer para los mensajes incompletos. Anteriormente, un remitente no autenticado podía agotar la memoria enviando fragmentos de mensajes que nunca completaba, especialmente con la fuente Socket en modo UDP.
+- La fuente Logstash ahora rechaza las tramas que superan el tamaño máximo configurado en lugar de almacenarlas en búfer indefinidamente. Anteriormente, un remitente podía declarar una trama extremadamente grande y obligar a la fuente a mantener sus bytes en memoria hasta que se agotara la memoria disponible.
+- La fuente Splunk TCP ahora trunca las tramas que exceden el límite `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` en lugar de descartar los eventos. Esto coincide con el comportamiento de `TRUNCATE` de Splunk.
+- Se corrigió un problema en el decodificador de tramas `chunked_gelf` que provocaba que la fuente se apagara cuando llegaba un mensaje de un byte y el registro de nivel de seguimiento estaba habilitado para el decodificador. El decodificador ahora rechaza estos mensajes, como hace con otras cargas útiles malformadas.
+- Se corrigió un problema en el que el reportero de uso del búfer interno sobrevivía al búfer sobre el que informaba, lo que provocaba que el reportero del búfer antiguo siguiera publicando métricas obsoletas bajo el mismo `buffer_id` que su reemplazo. Las métricas de un búfer que se eliminó, en lugar de reemplazarse, ahora también caducan bajo `expire_metrics_secs`, lo que los valores republicados continuamente impedían anteriormente.
+- Se corrigieron los siguientes problemas con los límites del decodificador de tramas `chunked_gelf`:
+    - `pending_messages_limit` se aplicaba a cada fragmento en lugar de solo a los mensajes nuevos. Después de alcanzar el límite, los fragmentos de mensajes que ya estaban pendientes fueron rechazados, por lo que esos mensajes nunca pudieron completarse.
+    - Descartar un mensaje por exceder `max_length` dejaba su tarea de tiempo de espera en ejecución, por lo que `pending_messages_limit` limitaba la cantidad de mensajes pendientes, pero no la cantidad de tareas de tiempo de espera activas.
+- La configuración del punto de conexión FIPS ahora se aplica a los clientes de STS AssumeRole. Cuando `AWS_USE_FIPS_ENDPOINT=true` está configurado, el Worker utiliza puntos de conexión FIPS, como `sts-fips.<region>.amazonaws.com`, tanto para las operaciones de STS como para el cliente del servicio principal.
+- Cuando una carga útil de solicitud comprimida no se puede descomprimir, el modo gRPC de la fuente de OpenTelemetry ahora incluye el error subyacente en lugar del mensaje genérico `reached impossible error during decompressor finalization`.
+
+#### Se eliminaron las métricas {#removed-metrics}
+
+- Se eliminaron las métricas gauge obsoletas `pipelines.buffer_byte_size` y `pipelines.buffer_events`. Use `pipelines.buffer_size_bytes` y `pipelines.buffer_size_events` en su lugar.
 
 ## Versión 2.21.0 de Worker {#worker-version-2210}
 
@@ -25,15 +248,19 @@ Para actualizar a la versión 2.21.0 de Worker:
 
 La versión 2.21.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features}
+#### Nuevas funciones {#new-features-2}
 
+- Para Pipelines de métricas:
+    - La [fuente de Prometheus][63] ya está disponible.
+    - El [destino de Prometheus][64] ya está disponible.
+    - El [destino de OpenTelemetry][65] ya está disponible.
 - Los destinos de Datadog Archives (Amazon S3, Google Cloud Storage y Azure Blob Storage) ahora admiten una opción `compression` configurable (`gzip` o `zstd`).
 - El procesador Remap to OCSF ahora incluye:
     - El mapeo OCSF de AWS Config Rules.
     - La función de mapeo OCSF `concat_strings`, que une las representaciones de cadena de múltiples campos de origen o valores constantes.
 - El destino Splunk HEC ahora admite una opción `endpoint_target` (`event` o `raw`) para determinar a qué punto de conexión de Splunk HEC se envían los eventos.
 
-#### Mejoras {#enhancements}
+#### Mejoras {#enhancements-5}
 
 - La fuente Splunk TCP ahora admite la configuración de TCP keepalive y el límite de conexión.
 - Los registros y las trazas internos del Worker ahora incluyen el nombre de la canalización (`op_worker.pipeline_name:<pipeline_name>`), de acuerdo con la etiqueta ya presente en las métricas.
@@ -49,7 +276,7 @@ La versión 2.21.0 de Worker le brinda acceso a lo siguiente:
     - Mantiene las filas en su caché durante aproximadamente 30 minutos, independientemente de si la búsqueda fue positiva o negativa
     - Divide los eventos que genera en lotes según el tamaño de lote del remitente de la fuente
 
-#### Correcciones {#fixes}
+#### Correcciones {#fixes-6}
 
 - Se corrigió la coincidencia glob que no distingue entre mayúsculas y minúsculas en consultas de búsqueda que contienen texto UTF-8, lo que causaba fallos y resultados incorrectos para entradas que no son ASCII.
 - Se corrigieron las cargas de Azure Blob Storage mayores a 4 MiB al usar una cadena de conexión de clave de cuenta.
@@ -66,7 +293,7 @@ Para actualizar a la versión 2.20.4 del Worker:
 
 La versión 2.20.4 del Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-1}
+#### Correcciones {#fixes-7}
 
 - La fuente Splunk TCP aplicaba anteriormente una longitud máxima de trama fija de 10 000 bytes. El Worker rechazaba eventos más grandes y registraba advertencias. La fuente ya no limita la longitud de la trama de forma predeterminada. Para evitar un consumo de memoria ilimitado, utilice la variable de entorno `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` para establecer una longitud máxima de trama.
 
@@ -84,7 +311,7 @@ Para actualizar a la versión 2.20.3 del Worker:
 
 La versión 2.20.3 del Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-2}
+#### Correcciones {#fixes-8}
 
 - Se corrigió el listener gRPC de la fuente OpenTelemetry para anunciar `h2` sobre ALPN cuando TLS está habilitado. Anteriormente, los clientes gRPC que se conectaban a través de TLS podían fallar al establecer una conexión.
 
@@ -99,12 +326,9 @@ Para actualizar a la versión 2.20.2 del Worker:
 
 La versión 2.20.2 del Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-3}
+#### Correcciones {#fixes-9}
 
 - Se corrigió un problema por el cual los valores no finitos (NaN o Infinity) de gauge, delta de contador, delta-suma de histograma y los histogramas de conteo cero podían serializarse en cargas útiles de métricas OTLP con formato incorrecto. Estos valores ahora se descartan antes de la codificación OTLP.
-
-
-
 
 ## Versión 2.20.0 del Worker {#worker-version-2200}
 
@@ -117,17 +341,17 @@ Para actualizar a la versión 2.20.0 del Worker:
 
 La versión 2.20.0 del Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-1}
+#### Nuevas funciones {#new-features-3}
 
 - Las fuentes OpenTelemetry y Splunk HEC ahora admiten la recarga en caliente de certificados TLS, por lo que las rotaciones de certificados se aplican sin reiniciar el Worker.
 
-#### Mejoras {#enhancements-1}
+#### Mejoras {#enhancements-6}
 
 - Se ha mejorado el rendimiento del procesador Split Array.
 - La fuente HTTP/S Server ahora utiliza una coincidencia que no distingue entre mayúsculas y minúsculas para el campo del nombre del encabezado cuando configura tokens de autenticación.
 - La fuente Splunk HEC ahora acepta una lista opcional de tokens para autenticar eventos.
 
-#### Correcciones {#fixes-4}
+#### Correcciones {#fixes-10}
 
 - El procesador Add Fields ahora incrementa la métrica `component_errors_total` cuando no logra actualizar un evento.
 - Se corrigió el problema de verificación del nombre de host del certificado TLS para destinos con un nombre de servidor configurado, de modo que el nombre del servidor se utilice para la verificación.
@@ -143,7 +367,7 @@ Para actualizar a la versión 2.19.0 de Worker:
 
 La versión 2.19.0 de Worker le brinda acceso a lo siguiente:
 
-#### Mejoras {#enhancements-2}
+#### Mejoras {#enhancements-7}
 
 - Se ha añadido una opción TLS `server_name` a los destinos BYOC Logs, HTTP Client, Socket y Syslog, y a la fuente HTTP Client. Esta anula el SNI y el nombre de host del certificado utilizados para el protocolo de enlace TLS, lo cual es aplicable cuando la dirección a la que se establece la conexión no coincide con el nombre común o el nombre alternativo del sujeto del certificado.
 - La fuente TCP de Splunk ahora admite la recarga en caliente de certificados TLS, por lo que las rotaciones de certificados se aplican sin reiniciar el Worker.
@@ -151,7 +375,7 @@ La versión 2.19.0 de Worker le brinda acceso a lo siguiente:
 - El Worker ahora admite un límite configurable para el apagado controlado.
 - El destino de Amazon S3 ahora admite el cifrado SSE-KMS utilizando las opciones `server_side_encryption` y `ssekms_key_id`.
 
-#### Correcciones {#fixes-5}
+#### Correcciones {#fixes-11}
 
 - Se corrigió un problema en el procesador Reduce donde un campo de marca de tiempo cuyo nombre requiere comillas en una ruta (por ejemplo, `"created.at"` o `"event-time"`) hacía que su campo complementario `_end` se eliminara silenciosamente del evento reducido. El campo complementario ahora se coloca correctamente junto al campo base.
 - Se corrigió un problema de recarga de configuración. Si una recarga cambiaba el tipo de un componente mientras mantenía el mismo nombre, como reemplazar una fuente llamada `X` con un procesador llamado `X`, cualquier procesador o destino descendente que aún lea desde `X` ahora se vuelve a conectar al nuevo componente.
@@ -172,21 +396,21 @@ Para actualizar a la versión 2.18.0 de Worker:
 
 La versión 2.18.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-2}
+#### Nuevas funciones {#new-features-4}
 
 - El comando `run` ahora admite una opción `--log-format`, también configurable mediante la variable de entorno `DD_OP_LOG_FORMAT`, para seleccionar el formato de los propios registros `stdout` y `stderr` de Worker. El `text` predeterminado conserva la salida existente legible para las personas, y `json` emite registros JSON estructurados que se pueden seguir y procesar directamente sin reglas de parseo adicionales.
 - El procesador Tag Cardinality Limit ahora admite una opción `tracking_mode`. `exact_fingerprint` rastrea los valores de las etiquetas exactamente usando huellas digitales de 64 bits, lo que utiliza menos memoria que el método anterior de almacenar valores sin procesar, y `probabilistic` usa un filtro de Bloom para un uso de memoria aún menor a cambio de un falso positivo ocasional. El modo probabilístico acepta un campo `false_positive_rate`, que tiene como valor predeterminado `0.001` (0.1%).
 - La fuente WebSocket está disponible para ingerir registros desde un punto de conexión de WebSocket, con soporte para estrategias de autenticación `none`, `basic`, `bearer` y `custom`, así como TLS.
 - Un nuevo procesador `generate_metrics` enruta las métricas a cualquier destino de métricas compatible. Datadog recomienda usarlo en lugar del procesador `generate_datadog_metrics` existente, aunque el uso de este último no se ve afectado.
 
-#### Mejoras {#enhancements-3}
+#### Mejoras {#enhancements-8}
 
 - Se ha añadido soporte mTLS al destino BYOC Logs.
 - La opción `measure_cpu_usage` ahora está habilitada, por lo que `pipelines.component_cpu_usage_ns_total` siempre se emite para los siguientes procesadores de registros: Custom Processor, Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array y Throttle; y los siguientes procesadores de métricas: Aggregate y Tag Cardinality Limit.
 - Los errores de configuración de la canalización ahora incluyen el ID del componente que causó la falla. Esto facilita la identificación de qué fuente, procesador o destino necesita corrección. Para los procesadores compuestos por múltiples bloques, como el Custom Processor, Generate Metrics y OCSF Mapper, el error también identifica qué bloque individual falló, incluyendo su posición y, cuando el bloque tiene uno, su nombre.
 - Las métricas de la canalización ahora están etiquetadas con el nombre de la canalización usando `pipeline_name:<NORMALIZED_PIPELINE_NAME>`.
 
-#### Correcciones {#fixes-6}
+#### Correcciones {#fixes-12}
 
 - Se corrigió un problema que ocurría cuando una canalización de solo registros (usando sintaxis de búsqueda heredada) ejecutaba una consulta de búsqueda que el nuevo analizador no podía manejar. El analizador ahora emite una advertencia y no ejecuta la consulta no válida.
 - Se corrigió un problema que afectaba a las consultas que comienzan con un carácter escapado (solo para canalizaciones que ejecutan la nueva sintaxis de búsqueda).
@@ -210,18 +434,18 @@ Para actualizar a la versión 2.17.0 de Worker:
 
 La versión 2.17.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-3}
+#### Nuevas funciones {#new-features-5}
 
 - Para Custom Processor:
     - Los literales de cadena VRL ahora admiten `\u{HEX}` secuencias de escape Unicode. Cualquier valor escalar Unicode válido puede expresarse, como `"hello\u{1F30E}world"`. Las secuencias no válidas, como llaves vacías, dígitos que no son hexadecimales, puntos de código suplentes o valores superiores a U+10FFFF, se informan como errores en tiempo de compilación.
     - La función `parse_regex` ahora acepta patrones de regex dinámicos (variables y expresiones en tiempo de ejecución), de manera consistente con `parse_regex_all`. Cuando el patrón es un literal, la información del tipo de retorno permanece precisa según los grupos de captura con nombre.
 
-#### Mejoras {#enhancements-4}
+#### Mejoras {#enhancements-9}
 
 - Se ha mejorado el rendimiento del procesador Generate Metrics para reducir la sobrecarga de CPU al usar etiquetas de `group_by`.
 - Para el procesador personalizado, se ha mejorado el rendimiento de `parse_regex_all` mediante la reutilización de la regex compilada en todas las invocaciones.
 
-#### Correcciones {#fixes-7}
+#### Correcciones {#fixes-13}
 
 - Las métricas HTTP emitidas por la sincronización en segundo plano del procesador Quota ahora tienen las etiquetas de componente correctas (`component_kind:transform`, `component_type:quota`, `component_id:quota_global_state`).
 - El procesador Enrichment Table que utiliza Reference Tables ahora omite el envío de lotes de eventos vacíos, lo que evita errores fatales con los búferes de disco.
@@ -247,7 +471,7 @@ Para actualizar a la versión 2.16.1 del Worker:
 
 La versión 2.16.1 del Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-8}
+#### Correcciones {#fixes-14}
 
 - El Worker ya no falla al obtener configuraciones en centros de datos que no son US1.
 
@@ -264,7 +488,7 @@ Para actualizar a la versión 2.16.0 del Worker:
 
 La versión 2.16.0 del Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-4}
+#### Nuevas funciones {#new-features-6}
 
 - Destino [Databricks Zerobus][47]: envíe datos de registro a tablas de Databricks Unity Catalog utilizando el servicio de ingesta Zerobus. El destino de Databricks admite autenticación OAuth 2.0, obtención automática de esquemas de Unity Catalog y codificación por lotes de protobuf.
 - La fuente Splunk HEC ahora admite el enriquecimiento de eventos de registro entrantes utilizando el decodificador VRL.
@@ -273,7 +497,7 @@ La versión 2.16.0 del Worker le brinda acceso a lo siguiente:
     - La función `encode_proto` ahora acepta un argumento `allow_lossy_string_coercion`.
     - La codificación Protobuf ahora fuerza tipos escalares compatibles al tipo de campo de destino: se aceptan enteros y cadenas para campos `bool`, y se aceptan enteros para campos `float` o `double`.
 
-#### Mejoras {#enhancements-5}
+#### Mejoras {#enhancements-10}
 
 - Se ha añadido soporte para mTLS a las siguientes fuentes: Fluent, Logstash, OpenTelemetry (registros y métricas), Splunk HEC, Splunk TCP, HTTP/S Server, Socket y Syslog.
 - Los eventos de Live Capture ahora incluyen el UUID del Worker que envió el evento.
@@ -283,7 +507,7 @@ La versión 2.16.0 del Worker le brinda acceso a lo siguiente:
     - `source_send_latency_seconds`: El tiempo que le toma a la fuente enviar un fragmento de eventos al siguiente componente.
     - `source_send_batch_latency_seconds`: El tiempo que le toma a la fuente enviar un lote, el cual puede contener múltiples fragmentos de eventos, al siguiente componente.
 
-#### Correcciones {#fixes-9}
+#### Correcciones {#fixes-15}
 
 - Se corrigió una condición de carrera en el procesador Reference Tables para evitar la pérdida de eventos almacenados en búfer durante el apagado de un Worker.
 - Live Capture se actualizó para mejorar el manejo del tráfico en ráfagas y las métricas del procesador Generate Metrics.
@@ -306,16 +530,16 @@ Para actualizar a la versión 2.15.1 del Worker:
 
 La versión 2.15.1 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-5}
+#### Nuevas funciones {#new-features-7}
 
 - El Custom Processor ahora admite las funciones `to_entries` y `from_entries` para convertir entre objetos y arreglos de pares clave-valor (estilo jq).
 
-#### Mejoras {#enhancements-6}
+#### Mejoras {#enhancements-11}
 
 - El destino Datadog Metrics ahora utiliza compresión zstd para los puntos de conexión de la Datadog API v2 y de sketches, lo que reduce el uso de CPU, memoria y ancho de banda.
 - La función `flatten` del Custom Processor ahora acepta un argumento opcional `except` para excluir claves específicas del aplanamiento.
 
-#### Correcciones {#fixes-10}
+#### Correcciones {#fixes-16}
 
 - Se corrigió una regresión de rendimiento en el seguimiento de métricas de búfer.
 - Se ha corregido la fuente del Datadog Agent para preservar la etiqueta `device` de los recursos de Datadog API v2.
@@ -333,7 +557,7 @@ Para actualizar a la versión 2.15.0 del Worker:
 
 La versión 2.15.0 del Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-6}
+#### Nuevas funciones {#new-features-8}
 
 - Se han añadido nuevas asignaciones OCSF para los siguientes tipos de registro:
     - AWS GuardDuty para todos los tipos de hallazgos (por ejemplo, EKS Audit, EC2, Lambda, IAM, DNS) en una única asignación llamada `AWS GuardDuty`.
@@ -354,7 +578,7 @@ La versión 2.15.0 del Worker le brinda acceso a lo siguiente:
         - Sintaxis simplificada de Observability Pipelines: `field: "message"`
         - Sintaxis VRL para el Custom Processor: `field: ".message"`
 
-#### Mejoras {#enhancements-7}
+#### Mejoras {#enhancements-12}
 
 - La fuente de Amazon S3 ahora acepta datos comprimidos.
 - El destino de Elasticsearch se ha actualizado con nuevas opciones: `auto_routing`, `compression`, `id_key`, `pipeline`, `request_retry_partial`, `sync_fields` y `tls`.
@@ -364,7 +588,7 @@ La versión 2.15.0 del Worker le brinda acceso a lo siguiente:
 - El Custom Processor ahora tiene una función `encode_csv` que codifica una matriz de valores en una cadena con formato CSV. Esta es la inversa de la función `parse_csv` y admite un delimitador opcional de un solo byte (el valor predeterminado es `,`).
 - Los nombres de campo ahora admiten `.`, como `foo."bar.baz"`.
 
-#### Correcciones {#fixes-11}
+#### Correcciones {#fixes-17}
 
 - Se mejoró la precisión del seguimiento de la métrica de utilización del búfer.
 - Para el Custom Processor, se corrigieron los tipos de parámetros incorrectos para `floor`, `md5`, `parse_key_value`, `precision` y `seahash`.
@@ -382,7 +606,7 @@ Para actualizar a la versión 2.14.1 del Worker:
 
 La versión 2.14.1 del Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-12}
+#### Correcciones {#fixes-18}
 
 - Se corrigió la forma en que se maneja una ruta vacía en un campo de procesador. Por ejemplo, cómo el procesador Parse JSON maneja el `Field to parse JSON on` con el valor `.`.
 
@@ -399,13 +623,13 @@ Para actualizar a la versión 2.14.0 del Worker:
 
 La versión 2.14.0 del Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-7}
+#### Nuevas funciones {#new-features-9}
 
 - Se han agregado asignaciones OCSF para eventos de Palo Alto Networks Threat.
 - La fuente Database se ha actualizado con cambios relacionados con el tiempo de espera.
 - Se agregaron las métricas internas de `component_latency_seconds` histograma y `component_latency_mean_seconds` gauge. Las métricas se basan en el tiempo que un evento pasa en un solo procesador, incluido el búfer del procesador.
 
-#### Mejoras {#enhancements-8}
+#### Mejoras {#enhancements-13}
 
 - El reporte de errores de Enrichment Table ahora utiliza métricas de Reference Tables para reducir la cantidad de registros similares.
 - El destino Splunk HEC ahora admite la extracción de campos de índice de los eventos.
@@ -417,7 +641,7 @@ La versión 2.14.0 del Worker le brinda acceso a lo siguiente:
 - El destino Datadog Logs se ha actualizado para usar compresión `zstd` de forma predeterminada en lugar de no usar compresión.
 - La variable de entorno para la dirección de la fuente Datadog Agent ahora es configurable.
 
-#### Correcciones {#fixes-13}
+#### Correcciones {#fixes-19}
 
 - Se corrigió un error con el estado de error persistente cuando Remote Configuration se sondea correctamente.
 - Se corrigieron las métricas de utilización del búfer para registrar correctamente el nivel de utilización real.
@@ -440,7 +664,7 @@ Para actualizar a la versión 2.13.2 de Worker:
 
 La versión 2.13.2 de Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-14}
+#### Correcciones {#fixes-20}
 
 - Se corrigieron las consultas `exists` y `missing` para que coincidan con los objetos.
 
@@ -457,7 +681,7 @@ Para actualizar a la versión 2.13.1 de Worker:
 
 La versión 2.13.1 de Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-15}
+#### Correcciones {#fixes-21}
 
 - Todos los procesadores se actualizaron para gestionar sin fallas las consultas de filtro con una sintaxis incorrecta.
 
@@ -474,14 +698,14 @@ Para actualizar a la versión 2.13.0 de Worker:
 
 La versión 2.13.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-8}
+#### Nuevas funciones {#new-features-10}
 
 - [Custom Processor][24] para métricas: utilice VRL para transformar eventos de métricas.
 - [Secrets Management][31]: Observability Pipelines puede recuperar secretos mediante Datadog Secrets Management.
 - [Live Capture][25] está disponible para pipelines de métricas.
 - El procesador [Enrichment Tables][28] puede utilizar conjuntos de datos de Reference Tables.
 
-#### Mejoras {#enhancements-9}
+#### Mejoras {#enhancements-14}
 
 - Los [búferes de disco][18] se han actualizado para descartar registros cuando el búfer está lleno.
 - El procesador Dedupe se ha actualizado con un tamaño de caché configurable.
@@ -498,7 +722,7 @@ La versión 2.13.0 de Worker le brinda acceso a lo siguiente:
     - `transform_buffer_utilization_level`
 - La implementación de TLS se ha actualizado para almacenar credenciales en formato PEM compatible con FIPS.
 
-#### Correcciones {#fixes-16}
+#### Correcciones {#fixes-22}
 
 - Se ha actualizado Live Capture y se han corregido errores.
 - Se ha corregido el error de Search Syntax al manejar segmentos con guiones.
@@ -520,19 +744,19 @@ Para actualizar a la versión 2.12.0 de Worker:
 
 La versión 2.12.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-9}
+#### Nuevas funciones {#new-features-11}
 
 - [Destino HTTP][29] para pipelines de métricas: enruta las métricas a un punto de conexión de un cliente HTTP.
 - [MySQL Source][30]: Envía registros de una base de datos MySQL a Observability Pipelines.
 
-#### Mejoras {#enhancements-10}
+#### Mejoras {#enhancements-15}
 
 - La fuente y el destino HTTP Client se han actualizado para que pueda establecer una estrategia de autorización personalizada.
 - El procesador de filtro de métricas se actualizó para filtrar métricas en `kind` y `value`.
 - Los grupos de procesadores que enrutan y procesan solo eventos específicos se han actualizado para reducir la sobrecarga de procesamiento.
 - La fuente del Datadog Agent se ha actualizado para admitir tiempos de espera, lo que incrementa las métricas `component_timed_out_events_total` y `component_timed_out_requests_total`.
 
-#### Correcciones {#fixes-17}
+#### Correcciones {#fixes-23}
 
 - El destino de Amazon S3 se ha actualizado para garantizar que el campo `message` sea siempre una cadena, codificándolo en JSON si es necesario.
 - Se ha corregido un error del Worker para garantizar que los registros del Worker se informen correctamente.
@@ -555,7 +779,7 @@ Para actualizar a la versión 2.11.0 del Worker:
 
 La versión 2.11.0 le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-10}
+#### Nuevas funciones {#new-features-12}
 
 - Se han agregado más de 100 reglas listas para usar para el procesador Sensitive Data Scanner. Estas reglas ocultan información de identificación personal (PII) e información de claves de acceso.
 - La [Search Syntax][3] actualizada que le permite:
@@ -576,7 +800,7 @@ Para actualizar a la versión 2.10.0 de Worker:
 
 La versión 2.10.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-11}
+#### Nuevas funciones {#new-features-13}
 
 - [Destino de Kafka][5]: envíe registros desde Observability Pipelines a sus tópicos de Kafka.
 - Funciones nuevas y actualizadas de [Custom Processor][6]:
@@ -596,13 +820,13 @@ La versión 2.10.0 de Worker le brinda acceso a lo siguiente:
         - [Procesador de etiquetas][36]: Incluya o excluya etiquetas específicas en sus métricas.
         - [Destino de métricas de Datadog][34]: Envíe sus métricas procesadas a Datadog.
 
-#### Mejoras {#enhancements-11}
+#### Mejoras {#enhancements-16}
 
 - Se ha mejorado el rendimiento de Custom Processor.
 - Los Workers se han actualizado para usar su propia copia de la clave de Datadog para la autenticación, ignorando cualquier clave enviada por el Datadog Agent para evitar el uso de claves obsoletas.
 - Se ha mejorado la notificación de errores al validar el esquema JSON en funciones personalizadas que utilizan la función `validate_json_schema`.
 
-#### Correcciones {#fixes-18}
+#### Correcciones {#fixes-24}
 
 - Se ha corregido la lógica de filtrado a nivel de grupo para excluir los registros correctos.
 
@@ -619,7 +843,7 @@ Para actualizar a la versión 2.9.1 de Worker:
 
 La versión 2.9.1 de Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-19}
+#### Correcciones {#fixes-25}
 
 - El destino de Microsoft Sentinel se ha limitado a tamaños de lote de 1 MB al leer registros mediante Azure Logs Ingestion API. El tamaño límite se determinó según la [documentación de Azure][8].
 
@@ -636,14 +860,14 @@ Para actualizar a la versión 2.9.0 de Worker:
 
 La versión 2.9.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-12}
+#### Nuevas funciones {#new-features-14}
 
 - [Fuente de OpenTelemetry Collector][10]: Recopile registros de su OpenTelemetry Collector en Observability Pipelines.
 - [Destino de Datadog BYOC Logs][11]: Envíe registros al destino de Datadog BYOC Logs.
 - [Destino de Google Pub/Sub][12]: Envíe registros desde Observability Pipelines al sistema de mensajería de Google Pub/Sub.
 - La función personalizada `haversine` para calcular la distancia de haversine y el rumbo.
 
-#### Mejoras {#enhancements-12}
+#### Mejoras {#enhancements-17}
 
 - Los registros internos de Observability Pipelines Worker se han actualizado para ocultar parcialmente la clave de Datadog API (solo los primeros 28 caracteres), para ayudar a investigar problemas relacionados con la clave de API.
 - Se ha mejorado el tiempo de entrega de Remote Configuration.
@@ -662,7 +886,7 @@ Para actualizar a la versión 2.8.1 de Worker:
 
 La versión 2.8.1 de Worker le brinda acceso a lo siguiente:
 
-#### Correcciones {#fixes-20}
+#### Correcciones {#fixes-26}
 
 - Se ha corregido la estrategia de autorización de la fuente HTTP Client.
 
@@ -679,16 +903,16 @@ Para actualizar a la versión 2.8.0 de Worker:
 
 La versión 2.8.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-13}
+#### Nuevas funciones {#new-features-15}
 
 - Todas las fuentes y destinos se han actualizado para admitir variables de entorno personalizadas.
 
-#### Mejoras {#enhancements-13}
+#### Mejoras {#enhancements-18}
 
 - La [estrategia de indexación][21] del destino Elasticsearch se ha actualizado para incluir flujos de datos.
 - El destino HTTP Client admite sintaxis de plantilla.
 
-#### Correcciones {#fixes-21}
+#### Correcciones {#fixes-27}
 
 - Se ha corregido la habilitación de TLS de la fuente HTTP Server.
 - Se han corregido las métricas de estado de Worker.
@@ -707,20 +931,20 @@ Para actualizar a la versión 2.7.0 de Worker:
 
 La versión 2.7.0 de Worker le brinda acceso a lo siguiente:
 
-#### Nuevas funciones {#new-features-14}
+#### Nuevas funciones {#new-features-16}
 
 - [El destino HTTP Client][16]: Envíe registros a un cliente HTTP, como una plataforma de registro o un SIEM.
 - [Processor Groups][17]: Organice sus procesadores en grupos lógicos para ayudarle a administrarlos.
 - Los destinos disponen de opciones de almacenamiento en búfer en [disco y memoria][18].
 
-#### Mejoras {#enhancements-14}
+#### Mejoras {#enhancements-19}
 
 - La función personalizada `decode_lz4` se ha actualizado para admitir la descompresión de datos de trama `lz4`.
 - Los campos de prefijo de los destinos de archivo de Azure Blob Storage y Google Cloud Storage admiten sintaxis de plantilla.
 - El destino de Splunk HEC tiene una variable de entorno personalizada.
 - El procesador de muestra tiene un [parámetro `group_by`][20] opcional.
 
-#### Correcciones {#fixes-22}
+#### Correcciones {#fixes-28}
 
 - La compresión predeterminada del destino Datadog Logs se ha actualizado a `zstd`, lo que coincide con la compresión predeterminada de Datadog Agent.
 - Se han corregido los destinos de Amazon S3, Google Cloud Storage y Azure Blob Storage para resolver correctamente las marcas de tiempo de los registros.
@@ -779,3 +1003,14 @@ La versión 2.7.0 de Worker le brinda acceso a lo siguiente:
 [52]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.3
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
+[55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
+[56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
+[57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
+[58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
+[59]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
+[60]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
+[61]: https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe
+[62]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.0
+[63]: /es/observability_pipelines/sources/prometheus/
+[64]: /es/observability_pipelines/destinations/prometheus/
+[65]: /es/observability_pipelines/destinations/opentelemetry/metrics/
