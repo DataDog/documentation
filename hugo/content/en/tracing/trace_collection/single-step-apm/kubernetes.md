@@ -422,7 +422,7 @@ To create an instrumentation rule:
 1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
-After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][102] page shows the rollout status of the current rules.
+Datadog deploys rules to eligible clusters through Remote Configuration within 50 seconds. After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][102] page shows the rollout status of the current rules.
 
 #### How instrumentation rules are evaluated
 
