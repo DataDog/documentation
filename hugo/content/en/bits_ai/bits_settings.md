@@ -14,7 +14,7 @@ further_reading:
 
 Use Bits AI Settings to control what Bits knows about your organization, how Bits connects to your tools, and how your team uses Bits.
 
-To open Bits AI Settings, go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. To find a specific setting, use the search bar.
+To open Bits AI Settings, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][16]. To find a specific setting, use the search bar.
 
 To see your own AI Credits usage for the current billing period, check {{< ui >}}My Bits Usage{{< /ui >}} in the settings menu.
 
@@ -24,7 +24,7 @@ Knowledge settings give Bits context about your organization, so that Bits can u
 
 ### Bits.md
 
-Bits.md is a Markdown file that gives Bits structured context about your environment. Use it to add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices. This context helps Bits construct more accurate queries and use the same terms that your team uses.
+Bits.md is a Markdown file that gives Bits structured context about your environment. Use it to add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices. You can also tell Bits when to use the external MCP servers that you connect in [Integrations](#integrations). This context helps Bits construct more accurate queries and use the same terms that your team uses.
 
 You can set Bits.md at two levels:
 
@@ -73,11 +73,11 @@ For more information, see [Review action history][15].
 
 Use the credit usage settings to track and govern AI Credits usage for your organization. AI Credits are shared across Bits Chat, Bits Investigation, Bits Code, Bits Agent Builder, and Bits Database Optimization.
 
-From the credit usage settings, you can:
+From the [credit usage settings][17], you can:
 
 - **View usage**: See a breakdown of [AI Credits][6] usage for the current billing period by user, team, and autonomous agents, and by Bits product. Usage that doesn't come from a person counts toward {{< ui >}}Autonomous Agents{{< /ui >}}. For example, automatically triggered investigations count toward autonomous agents.
 - **Set limits**: Set monthly AI Credit limits for your organization, for roles, for individual users, and for service accounts. Setting limits requires the `billing_edit` permission. For more information, see [AI Credit Limits][12].
-- **Enrich billing data**: Use {{< ui >}}Billing enrichment{{< /ui >}} to add tags to your AI Credits usage data. For example, add a team or cost center tag. For more information, see [Billing enrichment][13].
+- **Enrich billing data**: Use [{{< ui >}}Billing enrichment{{< /ui >}}][18] to add tags to your AI Credits usage data. For example, add a team or cost center tag. For more information, see [Billing enrichment][13].
 
 To get notified before users reach a limit, create a metric monitor on the AI Credits usage metrics. For more information, see [Monitor usage][14].
 
@@ -102,3 +102,6 @@ Use the Advanced settings to set rate limits for Bits Investigation. For more in
 [13]: /account_management/billing/ai_credits/#billing-enrichment
 [14]: /account_management/billing/ai_credits/#monitor-usage
 [15]: /bits_ai/bits_remediation/#review-action-history
+[16]: https://app.datadoghq.com/bits/settings
+[17]: https://app.datadoghq.com/bits/settings/usage
+[18]: https://app.datadoghq.com/bits/settings/usage?tab=enrichment
