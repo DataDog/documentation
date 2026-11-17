@@ -1,6 +1,6 @@
 ---
 title: Workload Identity Federation
-description: Authenticate the Datadog Terraform provider, the Datadog Agent, and GitHub Actions workflows with Workload Identity Federation, using AWS or GitHub credentials instead of static API and application keys.
+description: Authenticate to the Datadog API, the Datadog Agent, and GitHub Actions workflows with Workload Identity Federation, using AWS or GitHub credentials instead of static API and application keys.
 aliases:
     - /account_management/cloud_authentication/
     - /account_management/cloud_provider_authentication/
@@ -23,14 +23,14 @@ further_reading:
 
 ## Overview
 
-Workload Identity Federation lets you authenticate the Datadog Terraform provider, the Datadog Agent, and GitHub Actions workflows using AWS or GitHub credentials instead of static API and application keys.
+Workload Identity Federation lets you authenticate to the Datadog API, the Datadog Agent, and GitHub Actions workflows using AWS or GitHub credentials instead of static API and application keys.
 
-This page covers setup for two identity providers: AWS (for the Terraform provider and the Agent) and GitHub (for GitHub Actions).
+This page covers setup for two identity providers: AWS (for Datadog API calls and the Agent) and GitHub (for GitHub Actions).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <p>Workload Identity Federation is available for the following:</p>
 <ul>
-<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+<li><b>Datadog API</b>: Authenticate API calls using AWS credentials mapped to a Datadog user or service account. The Datadog Terraform provider and the Go API client support this flow. Available for all customers.</li>
 <li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
 <li><b>GitHub Actions</b>: Authenticate a workflow by exchanging its GitHub OIDC token for a short-lived Datadog credential. In Preview.</li>
 </ul>
@@ -44,9 +44,9 @@ This page covers setup for two identity providers: AWS (for the Terraform provid
 
 The authentication process uses the [AWS Security Token Service (STS)][1] to verify your identity.
 
-### Terraform provider authentication flow
+### API authentication flow
 
-1. **Proof generation:** The Datadog Terraform provider creates a signed AWS STS `GetCallerIdentity` request using your current AWS credentials
+1. **Proof generation:** The client (for example, the Datadog Terraform provider) creates a signed AWS STS `GetCallerIdentity` request using your current AWS credentials
 2. **Proof validation:** Datadog validates the proof by calling AWS STS, which returns your AWS ARN, user ID, and account ID
 3. **Identity mapping:** Your AWS identity is mapped to a Datadog service account or user account based on your organization's configuration
 4. **Token issue:** If validation succeeds, Datadog issues a temporary JWT token for API access
@@ -71,7 +71,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 {{< /site-region >}}
 
 **Requirements**:
-- Datadog Terraform provider version 3.70 or later.
+- Datadog Terraform provider version 3.70 or later, or the Datadog Go API client (`datadog-api-client-go`) version 2.44.0 or later.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_read` and `workload_identity_federation_write` permissions.
 
