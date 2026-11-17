@@ -23,7 +23,7 @@ Send OpenTelemetry traces, metrics, and logs to Datadog through a Collector, thr
 
 Your SDK and your Collector are separate choices. A DDOT SDK or an upstream OpenTelemetry SDK can send OTLP to the DDOT Collector or to an upstream OpenTelemetry Collector.
 
-{{< img src="/opentelemetry/setup/otel-path-mix.png" alt="Your application uses a DDOT SDK or an upstream OpenTelemetry SDK. Either one sends OTLP to a DDOT Collector or an upstream OpenTelemetry Collector, which sends your telemetry to Datadog. The Datadog Agent, recommended for features such as Live Debugger and Dynamic Instrumentation, runs alongside the Collector." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-path-mix.png" alt="Your application uses a DDOT SDK or an upstream OpenTelemetry SDK. Either one sends OTLP to a DDOT Collector or an upstream OpenTelemetry Collector, which sends your telemetry to Datadog. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/getting_started/kubernetes/" >}}Get started on Kubernetes with the quickstart{{< /nextlink >}}
@@ -42,9 +42,9 @@ To check which Datadog features each option supports, see [Feature Compatibility
 
 ## DDOT Collector
 
-{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. The Datadog Agent, recommended for features such as Live Debugger and Dynamic Instrumentation, runs alongside it." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
-Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with OpenTelemetry tooling, such as the OpenTelemetry Operator or Helm charts. It receives, processes, and sends your telemetry to Datadog. Datadog recommends [running the Datadog Agent alongside it][3] for features such as Live Debugger and Dynamic Instrumentation. Core traces, metrics, and logs don't need the Agent.
+Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with OpenTelemetry tooling, such as the OpenTelemetry Operator or Helm charts. It receives, processes, and sends your telemetry to Datadog. Datadog recommends [running the Datadog Agent alongside it][3].
 
 **Best for**: Teams on Kubernetes that want Datadog to build and support their Collector.
 

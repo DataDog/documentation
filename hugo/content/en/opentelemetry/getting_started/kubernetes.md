@@ -55,7 +55,7 @@ export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 ```
 
-The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends the Agent for features such as Live Debugger and Dynamic Instrumentation. Core traces, metrics, and logs don't need it. For which features need the Agent, see [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Agent, also set `DD_AGENT_ENABLED=false`.
+The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends running the Agent alongside DDOT. Some Datadog features need the Agent. See [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Agent, also set `DD_AGENT_ENABLED=false`.
 
 {{% /tab %}}
 {{% tab "Upstream" %}}

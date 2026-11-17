@@ -71,7 +71,7 @@ Every setup has two parts: an SDK in your application, and a route that sends yo
 
 Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog builds and supports. Each one takes the place of an upstream component, so you can adopt them one at a time. DDOT components send standard OTLP, so you can also send your data to other OTLP-compatible backends.
 
-{{< img src="/opentelemetry/setup/otel-path-ddot.png" alt="DDOT setup. In your application, the DDOT SDK sends OTLP to the DDOT Collector in your infrastructure, which sends your telemetry to Datadog. The Datadog Agent, recommended for features such as Live Debugger and Dynamic Instrumentation, runs alongside the Collector." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-path-ddot.png" alt="DDOT setup. In your application, the DDOT SDK sends OTLP to the DDOT Collector in your infrastructure, which sends your telemetry to Datadog. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
 | Component | What it does |
 |---|---|
@@ -79,7 +79,7 @@ Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog b
 | [DDOT Collector][5] (Preview) | Receives your telemetry, processes it, and sends it to Datadog. It's an OpenTelemetry Collector that Datadog builds. |
 | [Full-Host Profiler][6] (Preview) | Profiles every process on a host. |
 
-Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. Datadog recommends [running the Datadog Agent alongside them][7] for features such as Live Debugger and Dynamic Instrumentation. Core traces, metrics, and logs don't need the Agent.
+Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. Datadog recommends [running the Datadog Agent alongside them][7]. Some Datadog features need the Agent. See [Feature Compatibility][14].
 
 **Best for**: Teams that want Datadog to build and support their OpenTelemetry components.
 
@@ -92,7 +92,7 @@ Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTele
 
 Use the [upstream OpenTelemetry SDK][8] and the [upstream OpenTelemetry Collector][9], and send OTLP to the Datadog OTLP intake. Every component comes from the OpenTelemetry project.
 
-{{< img src="/opentelemetry/setup/otel-path-upstream.png" alt="Upstream OpenTelemetry setup. In your application, the upstream OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector in your infrastructure. Both come from the OpenTelemetry project. The Collector sends OTLP over HTTP to the Datadog OTLP intake." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-path-upstream.png" alt="Upstream OpenTelemetry setup. In your application, the upstream OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector in your infrastructure, which sends OTLP over HTTP to Datadog." style="width:100%;" >}}
 
 **Best for**: Teams that already run an upstream OpenTelemetry Collector, or that use only OpenTelemetry project components.
 

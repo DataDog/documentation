@@ -33,14 +33,14 @@ The DDOT Collector is in Preview.
 
 The Datadog OpenTelemetry (DDOT) Collector is Datadog's version of the OpenTelemetry Collector. It's open source, and Datadog builds and maintains it. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration.
 
-{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. The Datadog Agent, recommended for features such as Live Debugger and Dynamic Instrumentation, runs alongside it." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
 - **Use OpenTelemetry tooling**: Deploy the Collector on Kubernetes with the OpenTelemetry Operator or Helm charts.
 - **Configure your pipelines**: Receive telemetry from [DDOT SDKs][67], upstream OpenTelemetry SDKs, and other sources. Process it, and route it to Datadog and to other destinations.
 - **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
 - **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
 
-Datadog recommends running the Datadog Agent alongside the Collector for features such as Live Debugger and Dynamic Instrumentation. Core traces, metrics, and logs don't need the Agent. For the OpenTelemetry Collector that runs alongside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
+Datadog recommends running the Datadog Agent alongside the Collector. Some Datadog features need the Agent. See [Feature Compatibility][77]. For the OpenTelemetry Collector that runs alongside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
 
@@ -253,3 +253,4 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 [74]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8seventsreceiver/README.md
 [75]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkareceiver/README.md
 [76]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/deltatorateprocessor/README.md
+[77]: /opentelemetry/compatibility/#feature-compatibility
