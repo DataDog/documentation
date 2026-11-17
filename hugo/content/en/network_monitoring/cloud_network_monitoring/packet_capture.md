@@ -24,13 +24,8 @@ Packet capture has the following limitations:
 
 - Each capture runs for a fixed duration of 30 seconds. You can't configure the duration or set Berkeley Packet Filter (BPF) filters.
 - Each capture request can include up to 25 hosts from the selected connection.
-- Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture for that host is marked as **Partial** and the data truncated. See the [Packet capture request status](#packet-capture-request-status) section for more information.
+- Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture data is truncated.
 - Only Linux hosts are supported.
-
-## Prerequisites
-
-- [Cloud Network Monitoring][1] is set up on the hosts you want to capture packets on.
-- The hosts run Linux and have the Datadog Agent installed.
 
 ## Start a packet capture
 
@@ -75,21 +70,21 @@ To view packet captures:
 
 Packet capture requests have one of the following states:
 
-| Status     | Description                                                                                     |
-|------------|-------------------------------------------------------------------------------------------------|
-| Queued     | The capture request is waiting to run.                                                          |
-| Running    | The Agents are capturing packets.                                                               |
-| Processing | The capture is complete and the results are being processed.                                    |
-| Complete   | The capture completed successfully on all selected hosts.                                       |
-| Partial    | One or more selected hosts failed to capture packets.                                           |
-| Failed     | All selected hosts failed to capture packets.                                                   |
-| Cancelled  | A user manually stopped the packet capture request.                                             |
+| Status     | Description                                                                         |
+|------------|-------------------------------------------------------------------------------------|
+| Queued     | The capture request is waiting to run.                                              |
+| Running    | The Agents are capturing packets.                                                   |
+| Processing | The capture is complete and the results are being processed.                        |
+| Complete   | The capture completed successfully on all selected hosts.                           |
+| Partial    | One or more selected hosts failed to capture packets.                   |
+| Failed     | All selected hosts failed to capture packets.                                                        |
+| Canceled  | A user manually stopped the packet capture request. |
 | Expired    | The results are past their retention period. See the [Data retention](#data-retention) section. |
 
 Reasons for failed captures could include:
 
-- The host is spun down after it is observed in CNM.
-- There are strict permissions set on the host that doesn't allow packet capture.
+- The host is spun down after it is observed in CNM
+- There are strict permissions set on the host that doesn't allow packet capture
 - The host exceeds the 100 MB data capture limit and the data is truncated.
 
 ### Results
