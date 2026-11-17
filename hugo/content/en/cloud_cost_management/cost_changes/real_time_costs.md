@@ -66,7 +66,7 @@ Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly c
 
 Each provider has an out-of-the-box {{< ui >}}Real-Time Cost Overview{{< /ui >}} dashboard. These dashboards show real-time cost trends and day-over-day cost changes before finalized billing data is available. Find them on the [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Dashboards{{< /ui >}}][5] page or in the [Dashboard List][6].
 
-The dashboards require no setup. They show data after you meet the [Real-Time Costs requirements][7].
+The dashboards show data after you meet the [Real-Time Costs requirements][7]. No additional setup is needed.
 
 ## Real-time Kubernetes allocation
 
