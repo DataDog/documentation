@@ -235,11 +235,13 @@ Datadog uses the normal-mixture boundary with estimated sampling variances and, 
 
 The sequential p-value is obtained by inverting the sequential boundary: finding the significance level at which the interval reaches zero. It is not the fixed-sample normal-tail p-value calculated from $z\_{\text\"obs\"}$.
 
+The sequential p-value remains valid when you check results repeatedly. Under the same approximations, if the treatment has no effect, the probability that the p-value ever drops to $α$ or below is at most $α$. Early in an experiment, the boundary is wide and the p-value is often 1. A p-value of 1 means there isn't enough evidence yet, not that there is evidence of no effect.
+
 ### Sequential hybrid analysis
 
 The hybrid method uses sequential inference while the experiment is running or has ended early, and fixed-sample inference when it reaches its planned end. It divides the significance budget between these two branches.
 
-For an overall significance level $α$, each branch uses $α/2$. For example, an overall 95% level uses a 97.5% interval within the selected branch. The reported branch p-value is multiplied by two and capped at one.
+For an overall significance level $α$, each branch uses $α/2$. For example, an overall 95% level uses a 97.5% interval within the selected branch. The reported branch p-value is multiplied by two and capped at one. This adjustment gives the hybrid p-value the same guarantee as the sequential p-value. If the treatment has no effect, the probability that it ever drops to $α$ or below is at most $α$.
 
 In the example, the sequential branch uses $b(t,0.025)≈3.30$ before the planned end. It gives **[0.005, 0.035]** for absolute lift and **[4.0%, 36.0%]** for relative lift. At the planned end, the fixed-sample branch uses $z\_{0.9875}≈2.24$. It gives **[0.010, 0.030]** for absolute lift and **[9.1%, 30.9%]** for relative lift.
 
