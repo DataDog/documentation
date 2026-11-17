@@ -60,7 +60,7 @@ Keep the following in mind:
 | Method | Best for |
 |--------|----------|
 | [Datadog pull requests](#add-labels-with-datadog-pull-requests) | GitHub repositories. Datadog finds your Dockerfiles and opens pull requests that add the labels. No CI/CD changes required. |
-| [Build-time labels or annotations](#add-labels-at-build-time) | Any Git provider. Set the labels in your Dockerfile or build command, including the commit revision. |
+| [Build-time labels](#add-labels-at-build-time) | Any Git provider. Set the labels in your Dockerfile or build command, including the commit revision. |
 
 You can combine both methods. For example, merge Datadog pull requests to add the source labels, then add `org.opencontainers.image.revision` in your CI build.
 
