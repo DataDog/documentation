@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). To query these logs with [Archive Search][18], [enable Archive Search](#archive-search) on the destination. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
+Use the Azure Storage destination to send logs to an Azure Storage bucket. For [archiving][1] and [rehydration][2], see the [configure Log Archives](#configure-log-archives) section. To query archived logs with [Archive Search][18], see the [Archive Search](#archive-search) section. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
 ## Configure Log Archives
 
