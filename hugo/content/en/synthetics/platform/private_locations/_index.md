@@ -553,12 +553,6 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
    {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
-   Apply firewall rules needed by this program to Windows Firewall
-   : Allow the installer to apply firewall rules on install and remove them on uninstall.
-
-   Apply rules to block reserved IPs in Windows Firewall
-   : Configure blocking rules for Chrome, Firefox, and Edge (if they are installed) and add rules to block reserved IP address ranges outbound in Windows Firewall.
-
    Enable File Logging
    : Allow the Synthetics Private Location Worker to log files in the installation directory.
 
@@ -603,8 +597,6 @@ Additional parameters can be added:
 
 | Optional Parameter | Definition | Value | Default Value | Type |
 |---|---|---|---|---|
-| APPLYFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
-| APPLYFIREWALLDEFAULTBLOCKRULES | Blocks reserved IP addresses for each browser you have installed (Chrome, Edge, and Firefox). Blocking loopback connections is not possible in Windows Firewall. | 0 | N/A | 0: Disabled<br>1: Enabled |
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |

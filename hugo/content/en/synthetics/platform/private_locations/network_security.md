@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. Configuration files generated for new private locations set `enableDefaultBlockedIpRanges` to `true`, which blocks reserved and private IP ranges. The worker default is `false`. Private locations with older configuration files, and workers started without this option, do not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
+A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. Reserved and private IP ranges are blocked by default (`enableDefaultBlockedIpRanges` is `true`). A private location that sets it to `false`, for example in an older configuration file, does not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
 
 To reduce this risk:
 
@@ -27,7 +27,7 @@ The worker supports five options to control which addresses and hostnames tests 
 
 | Option | Type | Default | Effect |
 |--------|------|---------|--------|
-| [`enableDefaultBlockedIpRanges`][1] | Boolean | `false` (`true` in configuration files generated for new private locations) | Blocks reserved and private IP ranges (see [Default blocked ranges](#default-blocked-ranges)). |
+| [`enableDefaultBlockedIpRanges`][1] | Boolean | `true` | Blocks reserved and private IP ranges (see [Default blocked ranges](#default-blocked-ranges)). |
 | [`blockedIPRanges`][1] | Array of strings, per IP family | none | Blocks additional IP addresses or CIDR ranges. |
 | [`allowedIPRanges`][1] | Array of strings, per IP family | none | Allows IP addresses or CIDR ranges that a block list otherwise blocks. |
 | [`blockedDomainNames`][1] | Array of strings | none | Blocks hostnames. Accepts wildcards such as `*.example.com`. |
