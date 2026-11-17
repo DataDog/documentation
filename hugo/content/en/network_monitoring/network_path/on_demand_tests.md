@@ -18,16 +18,18 @@ further_reading:
 
 ## Overview
 
-On-demand tests allow you to run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update, or to investigate a connectivity issue as it happens.
+On-demand tests allow you to run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update. You can also use them to investigate a connectivity issue as it happens.
 
 You can run an on-demand test from the Network Path UI or from Bits Chat. On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
 
-## Prerequisites
-
-- An API key for the Agent with the **Private Action Runner** capability. See [Enrollment and ownership][5].
-- The Datadog Agent on the source host must meet the [Private Action Runner requirements][6].
-
 ## Setup
+
+### Step 1: Check the Agent and API key
+
+1. The Datadog Agent on the source host meets the [Private Action Runner requirements][6].
+2. The Agent uses an API key with the **Private Action Runner** capability. See [Enrollment and ownership][5].
+
+### Step 2: Configure the Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -52,7 +54,11 @@ You can run an on-demand test from the Network Path UI or from Bits Chat. On-dem
 
    See [Change the allowlist][1] for details.
 
-3. Restart the Agent to apply the configuration changes.
+3. Restart the Agent to apply the configuration changes:
+
+   ```shell
+   sudo systemctl restart datadog-agent
+   ```
 
 [1]: /actions/private_actions/set_up_agent_based/?tab=linux#change-the-allowlist
 
@@ -79,7 +85,11 @@ You can run an on-demand test from the Network Path UI or from Bits Chat. On-dem
 
    See [Change the allowlist][1] for details.
 
-3. Restart the Agent to apply the configuration changes.
+3. Restart the Agent to apply the configuration changes. In an elevated PowerShell prompt, run:
+
+   ```powershell
+   Restart-Service -Force datadogagent
+   ```
 
 [1]: /actions/private_actions/set_up_agent_based/?tab=windows#change-the-allowlist
 
@@ -88,13 +98,13 @@ You can run an on-demand test from the Network Path UI or from Bits Chat. On-dem
 
 After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][7] and confirm that the runner for the source host is listed.
 
-### Execution policy
+### Step 3: Create an execution policy
 
-[Create an Execution Policy][8] that allows the `Run Network Path` action and sets *Targets* for the Agents on the source hosts. Give access to the users and teams that run on-demand tests. This requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
+[Create an Execution Policy][8] that allows the `Run Network Path` action and sets **Targets** for the Agents on the source hosts. Give access to the users and teams that run on-demand tests. This requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
 
 {{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with the Allow effect, the Remote Action integration with Run network path selected, and a target that matches the Agent with the tag hostname:auth-dotnet" style="width:60%;" >}}
 
-### Permissions
+## Permissions
 
 On-demand tests use the following permissions. To grant permissions, see [Datadog Role Permissions][10].
 
@@ -116,7 +126,7 @@ To use the Datadog MCP Server, users also need the MCP permissions described in 
 
    {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted next to Analyze With Bits AI and Compare" style="width:100%;" >}}
 
-3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, slick the test run to open its network path.
+3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click the test run to open its network path.
 
 ### From Bits Chat
 
