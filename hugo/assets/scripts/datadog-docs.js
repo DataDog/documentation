@@ -8,7 +8,8 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import initCardGrid from './components/card-grid';
 import { initCopyPageButton } from './components/copy-page-button';
-import { loadPage } from './components/async-loading';
+import { loadPage, getLoadedPath } from './components/async-loading';
+import { isDifferentPage } from './helpers/history';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
 import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
@@ -482,4 +483,10 @@ window.addEventListener('popstate', function (event) {
     setMobileNav();
     closeNav();
     getPathElement();
+
+    // Pages loaded in place need their content reloaded on Back and Forward.
+    // Skip hash-only and query-only changes so anchor scrolling and filters keep working.
+    if (isDifferentPage(getLoadedPath(), window.location.href)) {
+        loadPage(window.location.href);
+    }
 });
