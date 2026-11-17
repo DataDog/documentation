@@ -25,13 +25,23 @@ The following sections describe holdouts with Datadog Feature Flags.
 | Global | Automatically includes eligible experiments with the same subject type. They must start during the inclusion period and after the holdout is created. |
 | Selective | Includes experiments that you choose and add before they start. |
 
-Global holdouts with the same subject type use separate time periods, from inclusion start to analysis end. An experiment can belong to only one active selective holdout.
+Global holdouts with the same subject type use separate time periods, from inclusion start to analysis end. An experiment can belong to multiple selective holdouts.
 
-Global and selective holdouts can run at the same time. For example, a global holdout can measure all eligible changes, while a selective holdout measures changes for a product initiative or checkout.
+Global and selective holdouts can run at the same time. Each holdout has its own randomized comparison.
 
-Each holdout has its own randomized comparison.
+### Hierarchical holdouts
 
-An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. Each result measures the combined effect of the changes covered by that holdout.
+A global holdout measures the combined impact of all eligible released changes across the organization. Its coverage follows the subject type and inclusion dates described in [Holdout types](#holdout-types). Covered experiments must meet the [requirements for Datadog Feature Flags](#requirements-for-datadog-feature-flags).
+
+A selective holdout measures the combined impact of released changes from experiments you choose. A holdout's **scope** is the set of experiments it covers. Attach multiple selective holdouts to the same experiment to measure impact at different levels of a hierarchy.
+
+For example, an organization can measure impact at three levels:
+
+- **Organization:** A global holdout covers eligible experiments across the organization.
+- **Department:** A selective holdout covers experiments from one department.
+- **Team:** Another selective holdout covers experiments from a team within that department.
+
+Select the experiments for each department or team holdout. An eligible experiment from that team can belong to all three holdouts.
 
 ## Holdout phases
 
@@ -65,11 +75,38 @@ The **traffic allocation** is the total share of subjects set aside for both gro
 
 For example, a 10% holdout assigns about 5% of eligible subjects to each group. The remaining 90% follows the experiment's normal rules. Holdout subjects are excluded from the individual experiment's comparison.
 
-A subject keeps the same group across included experiments. Each experiment's targeting and traffic rules still apply.
+Within each holdout, a subject keeps the same group across covered experiments. Each experiment's targeting and traffic rules still apply.
 
 Selecting a winner alone does not change the experience. The rollout must complete first. If control wins, both groups keep control.
 
-## Requirements for Datadog Feature Flags
+### Holdout evaluation order
+
+For each covered experiment, Datadog evaluates holdouts in this order:
+
+1. The eligible global holdout, if present.
+1. Selective holdouts in their saved order.
+1. The experiment allocation for subjects not selected into a holdout.
+
+<div class="alert alert-warning"><strong>Warning:</strong> Order holdouts from the top of the hierarchy down, from the broadest scope to the narrowest: <strong>Organization (global) → Department (selective) → Team (selective) → Experiment</strong>. Use this order on every experiment the holdouts share. A narrower holdout placed first can capture subjects before the broader holdout. This can prevent the broader holdout from applying to those subjects on shared experiments.</div>
+
+Datadog applies the saved evaluation order. It does not enforce a hierarchy between selective holdouts.
+
+Selection into either holdout group stops later holdout checks and the experiment allocation for that evaluation. This applies to both the control group and the shipped-changes group. It does not exclude the subject from unrelated experiments.
+
+Each holdout percentage applies to the eligible traffic that reaches that step. For example, an experiment belongs to a 1% global holdout and two 1% selective holdouts. The expected shares of the original eligible traffic are:
+
+| Step | Expected share of original eligible traffic |
+| --- | ---: |
+| Global holdout | 1% |
+| First selective holdout | 0.99% |
+| Second selective holdout | 0.9801% |
+| Remaining traffic | 97.0299% |
+
+Actual counts vary with random assignment. Each holdout share includes both holdout groups. The experiment's traffic exposure and variant split apply to the remaining traffic.
+
+<a id="requirements-for-datadog-feature-flags"></a>
+
+## Requirements for managed holdouts
 
 For holdouts that use Datadog Feature Flags, included experiments must:
 
@@ -93,6 +130,17 @@ Create the holdout before starting the experiments:
 1. Click {{< ui >}}Create Holdout{{< /ui >}}, review the settings, and click {{< ui >}}Confirm and Create Holdout{{< /ui >}}.
 1. For each draft experiment covered by a selective holdout, choose {{< ui >}}Add Selective Holdout{{< /ui >}} during [experiment setup][4] and select the holdout. Global holdouts add eligible experiments automatically when they start.
 
+### Set selective holdout order
+
+Before starting the experiment:
+
+1. Open the draft experiment's setup page and locate {{< ui >}}Holdout{{< /ui >}} in the {{< ui >}}Randomization{{< /ui >}} section.
+1. Use {{< ui >}}Add Selective Holdout{{< /ui >}} to select the holdouts for the experiment.
+1. Drag the selective holdouts to set their [evaluation order](#holdout-evaluation-order). Changes save automatically. If a save fails, resolve the error and retry before starting the experiment.
+1. Review the order and the share of remaining traffic for each holdout.
+
+An eligible global holdout stays first. You cannot remove or reorder it from experiment setup. Add or remove selective holdouts and set their order while the experiment is a draft. Holdout changes are locked after the experiment starts and while an approval locks the configuration. Controls are also unavailable while a holdout update is pending.
+
 ### Run the experiments
 
 1. Check whether the experiment belongs to a holdout before [starting it][4]. Start experiments for a global holdout during its inclusion period.
@@ -100,7 +148,7 @@ Create the holdout before starting the experiments:
 1. Complete the winner's rollout.
 1. Keep the flags and exposure logging active through the analysis end. The control group must keep receiving the original experiences.
 
-Selective coverage can be changed before inclusion ends and before the experiment's decision is recorded. The holdout continues serving both groups through the analysis period.
+The holdout continues serving both groups through the analysis period.
 
 ## Exposure criteria
 
@@ -138,6 +186,14 @@ Use the primary analysis to assess the combined changes during the analysis phas
 The scorecard compares the shipped-changes group with the control group. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
 Primary results become available after the analysis phase starts and an analysis run processes metric data from that phase.
+
+### Compare results across scopes
+
+Each comparison uses subjects who reach that holdout after earlier holdout checks. On shared experiments, both groups of an earlier holdout are excluded from the later holdout's comparison.
+
+Both groups follow the same assignment rules for changes outside the measured scope. Those changes can interact with the scoped changes. The result measures the scoped changes in that surrounding product experience, including those interactions.
+
+Do not add narrower holdout results to calculate the global result. Nested scopes include some of the same changes, and the comparisons can use different populations and analysis periods. Even separate scopes can interact. Use the global holdout's own result to assess the combined impact of the changes it covers across the organization.
 
 ## Analyze holdouts with your own exposure data
 
