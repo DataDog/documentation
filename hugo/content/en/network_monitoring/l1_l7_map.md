@@ -28,7 +28,7 @@ The L1/L7 Map is in Preview. Complete the form to request access.
 
 <!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
 
-<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, App containers, Sidecar containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DEGRADED, HEALTHY, DOWN, UP, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
+<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DEGRADED, HEALTHY, DOWN, UP, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
 
 ## Overview
 
@@ -69,7 +69,7 @@ The map shows two types of relationships between resources:
 - **Composition**: Where a resource runs. For example, a service runs on containers, the containers run in pods, and the pods run on hosts. Composition is not network traffic.
 - **Connections**: Network communication between resources. CNM provides the observed traffic, and Network Path provides the tested route.
 
-The map shows composition as a vertical stack, in this order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Containers are split into **App containers** and **Sidecar containers**. A sidecar container is a helper container that runs alongside an app container, such as an Envoy proxy. Layers that do not apply to a resource are skipped.
+The map shows composition as a vertical stack, in this order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. Layers that do not apply to a resource are skipped.
 
 To keep the map readable, each resource group and each connection line shows a limited number of items. The rest collapse into a **+N more** item.
 
@@ -93,7 +93,7 @@ Upstream and downstream resources are the same type as the explored resource, su
 In source/destination pair mode, the map shows the source's composition stack on the left and the destination's on the right. Between them, the map shows:
 
 - **Network connections**: Traffic that CNM observes between resources in the two stacks, such as container to container.
-- **Network path**: The hop-by-hop path between the source host and the destination host, from Network Path. The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_.
+- **Network path**: The hop-by-hop path from Network Path between a source host and a destination host. When Network Path tests more than one pair of hosts, the map shows the least healthy path. The other paths collapse into a **+N more** item. The path that the map shows does not necessarily pass through the least healthy hosts in the two stacks. The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_.
 
 ### Map status and network signals
 
@@ -122,7 +122,7 @@ Map status is based on the following network signals:
 
 <!-- TODO: Ask the PM how a resource's status is determined (from its connections' signals, its own metrics, or both), and whether throughput, packet drops, CPU, or memory affect status. -->
 
-The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal.
+The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal. Network Path signals affect status only for TCP tests. Paths from UDP and ICMP tests have an unknown status.
 
 Map status is not a complete assessment of a resource's health. A resource with a healthy map status can still have issues that network signals do not capture, and a red or orange resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
@@ -292,7 +292,7 @@ Check that the workload appears in the corresponding product, such as [APM][2], 
 
 If your environment uses CNM sidecar attribution, an app container whose traffic goes entirely through its sidecar container does not appear on the map. Its traffic appears on the sidecar container instead, and exploring the app container shows an empty map. Investigate the sidecar container or the pod.
 
-<!-- TODO: Link "CNM sidecar attribution" to its setup doc, if one exists. Ask the CNM team. -->
+<!-- TODO: Sidecar support is out of scope for M1 (Slack, 2026-11-16), and Angelina plans to update her draft. If her update drops this paragraph, remove it. If it stays, link "CNM sidecar attribution" to its setup doc, if one exists. -->
 
 ### A host appears as an IP address
 
