@@ -615,6 +615,12 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: Storage Account
+      recommendation_type: Delete Previous Blob Versions
+      recommendation_description: Identifies storage accounts whose previous blob versions hold a large share of their storage, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Storage Account
       recommendation_type: Delete Storage Account
       recommendation_description: Storage Account with no transactions and negligible used capacity over the last 14 days.
       recommendation_prerequisites: ""
