@@ -85,7 +85,7 @@ Nodes that are idle or running no pods keep their Kubernetes tags, such as `kube
 
 ## Tags
 
-Tags for real-time costs differ from tags on other Cloud Cost Management metrics in several ways, including:
+Tags for real-time costs differ from tags on other Cloud Cost Management metrics in the following ways:
 - All tag values are lowercase, normalized like Metrics data.
 - Tag Pipelines and Custom Allocation Rules are not applied.
 - Some billing-specific tags (from the AWS Cost and Usage Report, Azure cost exports, or Google Cloud billing exports) and FOCUS tags might not exist on real-time cost metrics. Real-time costs come primarily from usage data that the Datadog Agent collects, not from billing data.
