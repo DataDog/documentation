@@ -7,8 +7,6 @@ Si vous rencontrez des problèmes avec Workload Protection, utilisez les directi
 
 ## Flare de Security Agent {#security-agent-flare}
 
-<div class="alert alert-warning">Depuis l'Agent <code>7.77</code>, le <code>security-agent</code> Le composant runtime de Workload Protection est obsolète et n'est plus requis. Le composant autonome <code>security-agent flare</code> la commande ne fonctionne pas lorsque le processus de Security Agent n'est pas en cours d'exécution. Utilisez la commande du core Agent <code>flare</code> à la place.</div>
-
 Semblable au [Agent flare][3], vous pouvez envoyer les informations de dépannage nécessaires à l'équipe de Datadog support avec une seule commande flare.
 
 Le flare demande une confirmation avant le téléchargement, vous pouvez donc examiner le contenu avant que Security Agent ne l'envoie.

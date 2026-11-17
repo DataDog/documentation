@@ -5,3 +5,18 @@ entries:
     operations:
       - Validate
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41808
+    operations:
+      - CreateAPIKey
+      - CreateApplicationKey
+      - DeleteAPIKey
+      - DeleteApplicationKey
+      - GetAPIKey
+      - GetApplicationKey
+      - ListAPIKeys
+      - ListApplicationKeys
+      - UpdateAPIKey
+      - UpdateApplicationKey
+    title: Deprecate v1 key management endpoints
