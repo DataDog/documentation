@@ -88,3 +88,22 @@ entries:
       - UpdateAiGatewayDataCaptureOverride
     title: Add AI Gateway capture override permissions and hidden preview 
       metadata
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41768
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayProvider
+      - CreateAiGatewayRoutingRule
+      - GetAiGatewayBudgetInstancesSummary
+      - GetAiGatewayModelPricing
+      - GetAiGatewayProvider
+      - ListAiGatewayBudgets
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayProviders
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+    title: Document AI Gateway budget, provider, and model catalog fields

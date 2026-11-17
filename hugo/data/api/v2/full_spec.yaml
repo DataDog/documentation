@@ -8401,6 +8401,11 @@ components:
           description: Whether instances were withheld because their provider or model is hidden. Summary counts and totals exclude those instances.
           example: false
           type: boolean
+        total_capacity_microcents:
+          description: Sum of the capacity of every matching instance in the window, including per-instance overrides.
+          example: 300000000
+          format: int64
+          type: integer
         total_spend_microcents:
           description: Spend summed across all instances, in microcents.
           example: 75000000
@@ -8453,6 +8458,18 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET_INSTANCES_SUMMARY
+    AiGatewayBudgetLimitMode:
+      description: |-
+        How the budget limit applies. `shared` is one limit for all matching traffic. `per_instance` is one
+        limit for each counter of a template budget that splits by value.
+      enum:
+        - shared
+        - per_instance
+      example: shared
+      type: string
+      x-enum-varnames:
+        - SHARED
+        - PER_INSTANCE
     AiGatewayBudgetListAttributes:
       description: Budget configuration including spend and capacity for the active accounting window.
       properties:
@@ -8496,6 +8513,8 @@ components:
           description: Human-readable resource name.
           example: Coding agents
           type: string
+        reporting_summary:
+          $ref: "#/components/schemas/AiGatewayBudgetReportingSummary"
         scope_restricted:
           description: Whether provider or model scope metadata was withheld. Omit unchanged scope fields on an unrelated update to preserve their saved values.
           example: false
@@ -8660,6 +8679,38 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET_PERIODS
+    AiGatewayBudgetReportingSummary:
+      description: Health across all counters in the active accounting window. Includes hidden counters; contains no scope values or identities.
+      properties:
+        exceeded_capacity_count:
+          description: Number of counters at or above capacity.
+          example: 0
+          format: int64
+          type: integer
+        instance_count:
+          description: Number of counters in the active window. Counters are created on first use.
+          example: 1
+          format: int64
+          type: integer
+        limit_mode:
+          $ref: "#/components/schemas/AiGatewayBudgetLimitMode"
+        over_warning_threshold_count:
+          description: Number of counters at or above the warning threshold.
+          example: 0
+          format: int64
+          type: integer
+        total_capacity_microcents:
+          description: Combined capacity of the counters in the active window, in microcents. A shared budget reports its configured limit before its first counter exists.
+          example: 100000000
+          format: int64
+          type: integer
+      required:
+        - limit_mode
+        - total_capacity_microcents
+        - instance_count
+        - over_warning_threshold_count
+        - exceeded_capacity_count
+      type: object
     AiGatewayBudgetResource:
       description: AI Gateway budget resource.
       properties:
@@ -9585,6 +9636,187 @@ components:
         - INPUT_SIZE_BY_ROLE
         - AVAILABLE_TOOLS
         - GENERATION_SETTINGS
+    AiGatewayModelAutomaticPricing:
+      description: The published models.dev price. Present only when it is the effective price.
+      properties:
+        last_validated_at:
+          description: Time the price was last revalidated against the source.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        mapping:
+          $ref: "#/components/schemas/AiGatewayModelAutomaticPricingMapping"
+        mode_triggers:
+          description: "Request fields that select each priced mode, such as `speed: fast` for `anthropic` models. Omitted when the model has a single mode."
+          items:
+            $ref: "#/components/schemas/AiGatewayModelAutomaticPricingModeTrigger"
+          type: array
+        observed_at:
+          description: Time the price was observed in the source.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        rates:
+          description: Published rates.
+          items:
+            $ref: "#/components/schemas/AiGatewayModelAutomaticPricingRate"
+          type: array
+        source:
+          $ref: "#/components/schemas/AiGatewayModelAutomaticPricingSource"
+        stale:
+          description: True when the price has not been revalidated recently and is being retained as last-known-good.
+          example: false
+          type: boolean
+      required:
+        - rates
+        - source
+        - observed_at
+        - last_validated_at
+        - stale
+      type: object
+    AiGatewayModelAutomaticPricingFieldMatch:
+      description: A request field name and the value that selects a mode.
+      properties:
+        name:
+          description: Field or header name.
+          example: speed
+          type: string
+        value:
+          description: Value that selects the mode.
+          example: fast
+          type: string
+      required:
+        - name
+        - value
+      type: object
+    AiGatewayModelAutomaticPricingMapping:
+      description: The reviewed endpoint mapping used to identify a custom provider. Omitted when the provider and model identity matched exactly.
+      properties:
+        id:
+          description: Mapping identifier.
+          example: mapping-a
+          type: string
+        revision:
+          description: Mapping revision.
+          example: mapping-revision
+          type: string
+        scope:
+          description: Mapping scope, such as `provider`.
+          example: provider
+          type: string
+        version:
+          description: Mapping version.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - version
+        - scope
+        - revision
+      type: object
+    AiGatewayModelAutomaticPricingModeTrigger:
+      description: Request fields that select a priced mode.
+      properties:
+        body:
+          description: Request body fields that must match.
+          items:
+            $ref: "#/components/schemas/AiGatewayModelAutomaticPricingFieldMatch"
+          type: array
+        headers:
+          description: Request headers that must match.
+          items:
+            $ref: "#/components/schemas/AiGatewayModelAutomaticPricingFieldMatch"
+          type: array
+        mode:
+          description: Priced mode selected by the fields.
+          example: fast
+          type: string
+      required:
+        - mode
+      type: object
+    AiGatewayModelAutomaticPricingRate:
+      description: One published price. Prices can differ by operation, mode, service tier, and input length.
+      properties:
+        amount:
+          description: Exact decimal amount per unit, zero or greater, represented as a string to preserve precision. Supports fixed decimal and exponent notation.
+          example: "2.5"
+          pattern: '^\d+(\.\d+)?([eE][+-]?\d+)?$'
+          type: string
+        component:
+          description: Token category priced, such as `input`, `output`, `cache_read`, or `cache_write`.
+          example: input
+          type: string
+        context_max_tokens:
+          description: Largest input length covered by this price. Omitted when there is no upper bound.
+          example: 272000
+          format: int64
+          minimum: 1
+          type: integer
+        context_min_tokens:
+          description: Input length above which this price applies. Omitted for the base tier.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        currency:
+          description: Currency of the price. The only supported value is USD.
+          example: USD
+          type: string
+        mode:
+          description: |-
+            Source mode name. `standard` is the base mode. Other values, such as `fast`, are source-defined and
+            selected by `mode_triggers`.
+          example: standard
+          type: string
+        operation:
+          description: Operation the price applies to. Omitted when it applies to every operation.
+          type: string
+        service_tier:
+          description: Provider service tier explicitly associated with this mode by the source. Omitted when unknown.
+          example: priority
+          type: string
+        unit:
+          description: Unit of the quoted amount. The only supported value is million_tokens.
+          example: million_tokens
+          type: string
+      required:
+        - component
+        - currency
+        - unit
+        - amount
+        - mode
+      type: object
+    AiGatewayModelAutomaticPricingSource:
+      description: The pricing source entry the price was read from.
+      properties:
+        match_method:
+          description: How the gateway matched the model to the source entry, such as `wire_id`.
+          example: wire_id
+          type: string
+        model_id:
+          description: Model identifier in the source.
+          example: gpt-5.2-codex
+          type: string
+        name:
+          description: Pricing source name.
+          example: models.dev
+          type: string
+        provider_id:
+          description: Provider identifier in the source.
+          example: openai
+          type: string
+        revision:
+          description: Source revision the price was read from.
+          example: source-revision
+          type: string
+      required:
+        - name
+        - provider_id
+        - model_id
+        - revision
+        - match_method
+      type: object
     AiGatewayModelCapabilities:
       description: Model features reported by the enrichment source. Omitted properties are unknown.
       properties:
@@ -9629,6 +9861,9 @@ components:
           description: Model identifier sent to the provider.
           example: gpt-5.2-codex-20260801
           type: string
+        pricing:
+          $ref: "#/components/schemas/AiGatewayModelPricingAttributes"
+          description: Pricing status of the model. Returned by list operations; omitted elsewhere.
         provider_id:
           description: Provider identifier.
           example: 42
@@ -9648,6 +9883,9 @@ components:
           example: "2026-08-24T12:00:00Z"
           format: date-time
           type: string
+        zdr:
+          $ref: "#/components/schemas/AiGatewayModelZdr"
+          description: Zero data retention coverage of the model. Returned by list operations; omitted elsewhere.
       required:
         - provider_id
         - model_id_canonical
@@ -10344,11 +10582,42 @@ components:
     AiGatewayModelPricingAttributes:
       description: Attributes of a model pricing resource.
       properties:
+        authoritative:
+          description: True when models.dev pricing is authoritative for this organization and provider.
+          example: true
+          type: boolean
+        automatic_pricing:
+          $ref: "#/components/schemas/AiGatewayModelAutomaticPricing"
+        blocks_budgeted_requests:
+          description: True when a `BLOCK` budget covering this model rejects its requests before they reach the provider.
+          example: false
+          type: boolean
+        cost_multiplier:
+          description: Effective provider multiplier applied to every reported rate.
+          example: 1.0
+          format: double
+          type: number
+        duration_priced:
+          description: |-
+            True when the provider bills this model per minute of audio instead of per token, as with transcription
+            models. The gateway prices only per token, so it can't charge for these models, and a per-token
+            override can't express their rate.
+          example: false
+          type: boolean
         effective_source:
           $ref: "#/components/schemas/AiGatewayModelPricingEffectiveSource"
         pricing_config:
           $ref: "#/components/schemas/AiGatewayModelPricingConfig"
           description: Pricing configuration for the model.
+        status:
+          $ref: "#/components/schemas/AiGatewayModelPricingStatus"
+        unpriced_description:
+          description: Human-readable sentence for `unpriced_reason`. Omitted when the model is priced or the code has no description yet.
+          type: string
+        unpriced_reason:
+          description: Stable code explaining why the model has no price, such as `automatic_price_absent`. Omitted when the model is priced.
+          example: automatic_price_absent
+          type: string
       type: object
     AiGatewayModelPricingCatalogRequestConfig:
       additionalProperties: false
@@ -10444,11 +10713,15 @@ components:
       enum:
         - catalog_auto
         - model_override
+        - models_dev
+        - unpriced
         - unknown
       type: string
       x-enum-varnames:
         - CATALOG_AUTO
         - MODEL_OVERRIDE
+        - MODELS_DEV
+        - UNPRICED
         - UNKNOWN
     AiGatewayModelPricingRates:
       additionalProperties: false
@@ -10594,6 +10867,16 @@ components:
       x-enum-varnames:
         - CATALOG
         - CUSTOM
+    AiGatewayModelPricingStatus:
+      description: Whether the gateway has a price for the model.
+      enum:
+        - priced
+        - unpriced
+      example: priced
+      type: string
+      x-enum-varnames:
+        - PRICED
+        - UNPRICED
     AiGatewayModelPricingType:
       description: Model pricing resource type.
       enum:
@@ -10753,6 +11036,44 @@ components:
       required:
         - data
       type: object
+    AiGatewayModelZdr:
+      description: |-
+        The Datadog side of a model's zero data retention eligibility. The customer side is the provider's
+        `zdr_eligible` setting.
+      properties:
+        coverage:
+          $ref: "#/components/schemas/AiGatewayModelZdrCoverage"
+        covered_operations:
+          description: Operations covered by zero data retention.
+          example:
+            - OPENAI_RESPONSES
+          items:
+            type: string
+          type: array
+        uncovered_operations:
+          description: Operations not covered by zero data retention.
+          example: []
+          items:
+            type: string
+          type: array
+      required:
+        - coverage
+      type: object
+    AiGatewayModelZdrCoverage:
+      description: |-
+        Datadog's coverage of the model's operations under zero data retention. A model is eligible when
+        coverage is `full` and its provider's `zdr_eligible` is `true`. `partial` means only the
+        `covered_operations` can be served: requests on other operations are not dispatched to it.
+      enum:
+        - full
+        - partial
+        - none
+      example: full
+      type: string
+      x-enum-varnames:
+        - FULL
+        - PARTIAL
+        - NONE
     AiGatewayModelsBulkCreateAttributes:
       description: Attributes used to create several model catalog entries.
       properties:
@@ -11062,6 +11383,8 @@ components:
           example: "2026-08-24T12:00:00Z"
           format: date-time
           type: string
+        credential_source:
+          $ref: "#/components/schemas/AiGatewayProviderCredentialSource"
         integration_account_id:
           description: Provider integration account identifier.
           example: account-123
@@ -11078,11 +11401,17 @@ components:
           description: Immutable routing identifier.
           example: prod-us
           type: string
+        status:
+          $ref: "#/components/schemas/AiGatewayProviderStatus"
         updated_at:
           description: Time when the resource was last updated.
           example: "2026-08-24T12:00:00Z"
           format: date-time
           type: string
+        zdr_eligible:
+          description: Whether this provider connection is covered by a zero data retention agreement.
+          example: false
+          type: boolean
       required:
         - name
         - slug
@@ -11104,6 +11433,8 @@ components:
           maximum: 1000000
           minimum: 0
           type: number
+        credential_source:
+          $ref: "#/components/schemas/AiGatewayProviderCreateCredentialSource"
         initial_bindings:
           description: Reserved for initial View/Edit permissions. Supplying this attribute, including an empty array or null, returns HTTP 503 before discovery or persistence. Omit it for normal creation.
           items:
@@ -11137,10 +11468,34 @@ components:
           minLength: 1
           pattern: "^[A-Za-z0-9_-]+$"
           type: string
+        zdr_eligible:
+          description: |-
+            Whether this provider connection is covered by a zero data retention agreement. Defaults to `false`.
+            For Bedrock, zero data retention is granted per region, so configure one provider per region and set
+            this only on the covered ones.
+          example: false
+          type: boolean
       required:
         - name
         - slug
       type: object
+    AiGatewayProviderCreateCredentialSource:
+      default: integration_account
+      description: |-
+        Whose credential the gateway sends to the provider. Defaults to `integration_account`, which sends
+        the integration account's credential. `subscription` forwards each caller's own subscription sign-in
+        (`ChatGPT` for `openai`, `claude.ai` for `anthropic`) and needs no integration account; it is available
+        only to organizations with subscription providers enabled. A subscription provider's models are
+        optional: callers can use any model their subscription includes, and a model you add sets its
+        pricing. Immutable.
+      enum:
+        - integration_account
+        - subscription
+      example: integration_account
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_ACCOUNT
+        - SUBSCRIPTION
     AiGatewayProviderCreateData:
       description: Data used to create an AI Gateway provider.
       properties:
@@ -11160,6 +11515,19 @@ components:
       required:
         - data
       type: object
+    AiGatewayProviderCredentialSource:
+      description: |-
+        Whose credential the gateway sends to the provider. `integration_account` sends the integration
+        account's credential. `subscription` forwards each caller's own subscription sign-in (`ChatGPT` for
+        `openai`, `claude.ai` for `anthropic`) and needs no integration account.
+      enum:
+        - integration_account
+        - subscription
+      example: integration_account
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_ACCOUNT
+        - SUBSCRIPTION
     AiGatewayProviderInitialBinding:
       description: Reserved initial provider access binding. Initial provider sharing is unavailable.
       properties:
@@ -11253,6 +11621,9 @@ components:
           description: Model identifier sent to the provider.
           example: gpt-5.2-codex-20260801
           type: string
+        pricing:
+          $ref: "#/components/schemas/AiGatewayModelPricingAttributes"
+          description: Pricing status of the model. Returned by list operations; omitted elsewhere.
         provider_id:
           description: Provider identifier.
           example: 42
@@ -11272,6 +11643,9 @@ components:
           example: "2026-08-24T12:00:00Z"
           format: date-time
           type: string
+        zdr:
+          $ref: "#/components/schemas/AiGatewayModelZdr"
+          description: Zero data retention coverage of the model. Returned by list operations; omitted elsewhere.
       required:
         - id
         - provider_id
@@ -11335,6 +11709,62 @@ components:
       required:
         - data
       type: object
+    AiGatewayProviderStatus:
+      description: |-
+        Read-only. Whether the provider is working, based on the model sync and live calls. Omitted for
+        providers that are never checked, which include providers without an integration account, and
+        Azure OpenAI and Gemini providers until live traffic records a status.
+      properties:
+        checked_at:
+          description: Time of the last observation.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        endpoint:
+          description: Address of the models endpoint that the gateway called, for custom providers.
+          type: string
+        fix:
+          description: Display text saying how to fix the provider. Clients render it as-is.
+          type: string
+        http_status:
+          description: HTTP status code that the provider returned.
+          example: 401
+          format: int64
+          type: integer
+        label:
+          description: Display text for the reason. Clients render it as-is.
+          type: string
+        last_ok_at:
+          description: Time of the last observation in which the provider worked.
+          example: "2026-08-24T12:00:00Z"
+          format: date-time
+          type: string
+        message:
+          description: The provider's own error message, with credentials removed. Never set for custom providers.
+          type: string
+        reason:
+          description: Why the provider is invalid, as a stable code such as `credentials_rejected`. Set only when `state` is `invalid`.
+          example: credentials_rejected
+          type: string
+        state:
+          $ref: "#/components/schemas/AiGatewayProviderStatusState"
+      required:
+        - state
+      type: object
+    AiGatewayProviderStatusState:
+      description: |-
+        Whether the provider is working. `checking` means no observation has been recorded yet, not that a
+        check is running.
+      enum:
+        - ok
+        - invalid
+        - checking
+      example: ok
+      type: string
+      x-enum-varnames:
+        - OK
+        - INVALID
+        - CHECKING
     AiGatewayProviderType:
       description: AI Gateway provider resource type.
       enum:
@@ -11360,6 +11790,10 @@ components:
           maxLength: 256
           minLength: 1
           type: string
+        zdr_eligible:
+          description: Whether this provider connection is covered by a zero data retention agreement. Omit to leave unchanged.
+          example: false
+          type: boolean
       type: object
     AiGatewayProviderUpdateData:
       description: Data used to update an AI Gateway provider.
@@ -12265,6 +12699,14 @@ components:
     AiGatewayRoutingRuleCreateAttributes:
       description: Attributes used to create an AI Gateway routing rule.
       properties:
+        initial_bindings:
+          description: |-
+            Reserved for initial View and Edit permissions. Supplying this attribute returns HTTP 400 and doesn't
+            create the route. Create the route, then set its permissions through the restriction policy API.
+          items:
+            $ref: "#/components/schemas/AiGatewayProviderInitialBinding"
+            description: Reserved initial routing rule access binding.
+          type: array
         slug:
           description: Organization-unique resource slug.
           example: coding
@@ -167745,6 +168187,12 @@ paths:
                           enforcement: BLOCK
                           monitor_id: 12345678
                           name: Coding agents
+                          reporting_summary:
+                            exceeded_capacity_count: 0
+                            instance_count: 1
+                            limit_mode: shared
+                            over_warning_threshold_count: 0
+                            total_capacity_microcents: 100000000
                           tags: {}
                           updated_at: "2026-08-24T12:00:00Z"
                           warning_threshold: 0.9
