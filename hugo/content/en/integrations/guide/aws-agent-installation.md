@@ -185,6 +185,7 @@ Datadog uses the following permissions for EKS instrumentation:
 | `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource`, `secretsmanager:DeleteSecret` | Create the cluster-specific API key and Service Access Token secrets, reuse existing ones that Datadog created, and delete Datadog-owned copies during uninstall |
 | `secretsmanager:PutSecretValue`, `secretsmanager:UpdateSecretVersionStage` | Store and activate a replacement Service Access Token in its secret |
 | `iam:GetRole`, `iam:CreateRole`, `iam:PutRolePolicy`, `iam:PassRole`, `iam:TagRole`, `iam:DeleteRolePolicy`, `iam:DeleteRole` | Create the credential synchronization role, scope it to the cluster's API key and Service Access Token secrets, pass it to EKS Pod Identity, and remove the role during uninstall |
+| `iam:SimulatePrincipalPolicy` | Confirm that the AWS integration role has the required EKS instrumentation permissions before installation |
 
 Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API key and Service Access Token secrets for the selected cluster. `iam:CreateRole` is restricted to role names matching `dd-eks-ascp-sync-*` in your account, and `iam:PassRole` is restricted to EKS Pod Identity (`pods.eks.amazonaws.com`).
 

@@ -44,7 +44,7 @@ When you select EKS, the stack also creates:
 
 | Resource | Name | Purpose |
 |---|---|---|
-| AWS Marketplace subscription Lambda function and IAM role | auto-named | Accepts the one-time, account-level agreement for the Datadog Operator EKS add-on |
+| AWS Marketplace subscription Lambda function and IAM execution role | auto-named | Accepts the one-time, account-level agreement for the Datadog Operator EKS add-on |
 | IAM permissions boundary | `datadog-instrumenter-eks-ascp-boundary` under `/datadog/instrumenter-boundaries/` | Limits the permissions available to the per-cluster credential synchronization role |
 
 ### Created as needed, for EC2 instances
@@ -159,7 +159,7 @@ On EKS, Datadog excludes:
 - Clusters with EKS Fargate profiles
 - Clusters with an existing `datadog_operator` add-on that Datadog did not install
 
-Datadog retries clusters that are still being created or updated. For supported node configurations and other cluster requirements, see [Prerequisites][2] on the installation guide.
+If a selected cluster is in the `CREATING`, `PENDING`, or `UPDATING` state, Datadog postpones instrumentation and schedules another attempt for a later reconciliation. For supported node configurations and other cluster requirements, see [Prerequisites][2] on the installation guide.
 
 ## Security, auditing, and change control
 
@@ -193,7 +193,7 @@ The API key and cluster-specific Service Access Token are stored in separate AWS
 
 The credential synchronization service account assumes a dedicated IAM role through EKS Pod Identity. Its inline policy can read only the two secrets for that cluster. The AWS Secrets Store CSI Driver Provider synchronizes their values into `datadog-agent/datadog-managed-secret`. The Operator consumes the Service Access Token through its application-key setting.
 
-Datadog reuses the retained token secret when its ownership matches the cluster. If the token has been revoked, Datadog creates a replacement and updates the secret. Uninstalling revokes the token but preserves both AWS secrets.
+Datadog reuses an existing token secret when its ownership metadata matches the cluster. If the token has been revoked, Datadog creates a replacement and updates the secret. During uninstall, Datadog revokes the token and deletes both Datadog-owned AWS secrets after validating their ownership metadata. If the AWS integration role cannot delete a secret, or if its ownership metadata does not match the cluster, Datadog preserves the secret.
 
 ### Who can change instrumentation
 
