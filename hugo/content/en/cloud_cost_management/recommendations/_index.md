@@ -610,7 +610,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: SQL Managed Instance
       recommendation_type: Delete Idle SQL Managed Instance
-      recommendation_description: Identifies running SQL Managed Instances with near-zero CPU and low IO over the lookback, and recommends deleting them.
+      recommendation_description: Identifies running SQL Managed Instances with near-zero CPU and low I/O over the lookback, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
