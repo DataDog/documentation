@@ -3,117 +3,120 @@ algolia:
   tags:
   - cross org
   - cross-org
-  - entre organizaciones
-description: Comparte datos y realiza consultas entre distintas organizaciones en
+  - cross organization
+description: Comparta datos y realice consultas entre diferentes organizaciones en
   la misma cuenta.
 title: Visibilidad entre organizaciones
 ---
+## Descripción general {#overview}
 
-## Información general
+Algunas empresas dependen de múltiples [organizaciones][1] de Datadog para separar los datos por motivos de cumplimiento u otras razones.
 
-Algunas empresas recurren a varias [organizaciones][1] de Datadog para separar los datos por motivos de cumplimiento u otros.
+La visibilidad entre organizaciones permite a los clientes compartir datos entre diferentes organizaciones en la misma cuenta y mostrar información de múltiples organizaciones en un solo lugar.
 
-La visibilidad entre organizaciones permite a los clientes compartir datos entre diferentes organizaciones en la misma cuenta y mostrar información de varias organizaciones en un solo lugar.
+Este documento explica:
+- Qué [permite](#capabilities) la visibilidad entre organizaciones
+- Cómo [compartir](#create-a-connection) datos entre sus organizaciones
+- Cómo crear un [widget de Dashboard y Notebook](#create-a-widget-with-cross-organization-data) o una [consulta de API](#in-the-api-1) con datos de sus otras organizaciones
 
-En este documento, se explica lo siguiente: 
-- Qué [permite] la visibilidad entre organizaciones (#capabilities) 
-- Cómo [compartir](#create-a-connection) datos en todas tus organizaciones
-- Cómo crear un [widget de Dashboard and notebook](#create-a-widget-with-cross-organization-data) con datos de tus otras organizaciones
+## Capacidades {#capabilities}
 
-## Funcionalidades
+### Conexión entre organizaciones {#organization-connection}
 
-### Conexión de la organización
+Una organización _fuente_ expone datos a una organización _de destino_ a través de una _conexión entre organizaciones_. Una organización fuente puede tener múltiples destinos, y una organización de destino puede tener múltiples fuentes.
 
-Una organización _fuente_ expone datos a una organización _destino_ a través de una _conexión de organización_. Una organización source (fuente) puede tener varios destinos y una organización de destino puede tener varias fuentes.
+Las siguientes limitaciones se aplican a las conexiones entre organizaciones:
+- Las organizaciones fuente y de destino deben estar en la misma [cuenta][1]
+- Las organizaciones fuente y de destino deben estar en el mismo [sitio][11].
+- Las organizaciones Pro pueden compartir con un máximo de 5 organizaciones más. Las organizaciones Enterprise no tienen límite. Las organizaciones en otros planes, como los planes Free, Trial y Startup, no pueden compartir con otras organizaciones.
 
-Las siguientes limitaciones se aplican a las conexiones de la organización:
-- Las organizaciones source (fuente) y de destino deben estar en la misma [cuenta][1]
-- Las organizaciones source (fuente) y de destino deben estar en el mismo [sitio][11].
-- Las organizaciones no empresariales pueden compartir con un máximo de otras 5 organizaciones.
+**Nota**: Una vez establecida la conexión, la organización de destino puede consultar los datos de la organización fuente de la misma manera que puede consultar sus propios datos. Esto significa que los datos de la organización fuente, incluidos los datos confidenciales, pueden ser consultados y mostrados según lo permitan el control de acceso y otras configuraciones de la _organización de destino_. Esto puede incluir, por ejemplo, la capacidad de la organización de destino para crear [Dashboards públicos][10] utilizando los datos de la organización fuente, incluso si la propia configuración de la organización fuente no permite la creación de Dashboards públicos.
 
-**Nota**: Una vez establecida la connection (conexión), la organización de destino puede consultar los datos de la organización source (fuente) de la misma manera que puede consultar sus propios datos. Esto significa que los datos de la organización source (fuente), incluidos los datos confidenciales, pueden consultarse y mostrarse según lo permita el control de acceso y otros ajustes de la _organización de destino_. Esto puede incluir, por ejemplo, la capacidad de la organización de destino para crear [Dashboards públicos][10] utilizando los datos de la organización source (fuente), incluso si los propios ajustes de la organización source (fuente) no permiten la creación de Dashboards públicos.
+Después de configurar una conexión entre organizaciones, los datos expuestos siguen almacenados en la organización fuente y no se mueven al destino. En su lugar, la organización de destino consulta los datos de la organización fuente. Las conexiones no duplican los datos y no generan cargos adicionales. La organización de destino puede consultar los datos de la fuente de cualquier período admitido por esos datos, incluso si es anterior a la fecha de creación de la conexión. Si elimina la conexión, el destino ya no podrá acceder a ningún dato de la fuente y es posible que las consultas o los Dashboards creados a partir de los datos de la organización fuente ya no funcionen.
 
-Después de configurar una connection (conexión) de la organización, los datos expuestos siguen almacenados en la organización source (fuente) y no se trasladan al destino. En su lugar, la organización de destino consulta los datos desde source (fuente). Las conexiones no duplican los datos y no incurren en gastos adicionales. La organización de destino puede consultar los datos de source (fuente) a partir de cualquier intervalo de tiempo admitido por los datos de source (fuente), incluso antes de la fecha de creación de la connection (conexión). Si eliminas la connection (conexión), el destino ya no podrá acceder a ningún dato de source (fuente) y es posible que las consultas o los Dashboards creados a partir de los datos de la organización source (fuente) dejen de funcionar.
+### Contexto {#scope}
 
-### Contexto
-
-La visibilidad entre organizaciones admite la siguiente telemetría en [widgets de Dashboard y notebook][2]:
-* Métricas (todos los tipos admitidos, incluidas [métricas personalizadas][3], [métricas de traces (trazas)][4] y [métricas generadas a partir de logs][5])
+La visibilidad entre organizaciones admite la siguiente telemetría en [widgets de Dashboard y Notebook][2]:
+* Métricas (todos los tipos admitidos, incluidas [Custom Metrics][3], [métricas de traza][4] y [métricas generadas a partir de registros][5])
 * Logs
 * Pipelines de CI Visibility
-* Tests de Test Optimization (optimización de tests)
+* Pruebas de Test Optimization
+* Audit Trail
 
-## Configurar conexiones
+## Configurar conexiones {#configure-connections}
 
-### Lista de conexiones
+### Listar conexiones {#list-connections}
 
-Para examinar las conexiones, ve a la [página de visibilidad entre organizaciones][6] en Parámetros de organización. La tabla enumera todas tus conexiones entre organizaciones.
+Para explorar las conexiones, navegue a la [página de visibilidad entre organizaciones][6] en Organization Settings. La tabla enumera todas sus conexiones entre organizaciones.
 
-### Crear una connection (conexión)
+### Crear una conexión {#create-a-connection}
 
-La creación de una conexión entre organizaciones permite consultar métricas desde la organización de origen en la organización de destino.
+Crear una conexión entre organizaciones le permite consultar métricas de la organización fuente en la organización de destino.
 
-1. Asegúrate de haber iniciado sesión en la organización _fuente_ que contiene los datos que deseas exponer.
-1. En la [página de visibilidad entre organizaciones][6], haz clic en **New Connection** (Nueva conexión). Aparece el cuadro de diálogo **New Connection** (Nueva conexión).
-1. En el menú desplegable, selecciona la organización _de destino_ en la que deseas ver los datos.
-1. Haz clic en **Connect** (Conectar).
+<div class="alert alert-info">Datadog recomienda usar una <a href="/account_management/org_settings/service_accounts/">cuenta de servicio</a> para crear y administrar conexiones entre organizaciones. Las conexiones están vinculadas a la cuenta de su creador: si la cuenta del creador se desactiva, la conexión se elimina, lo que puede interrumpir el flujo de datos. Las cuentas de servicio no están vinculadas a usuarios individuales y evitan este riesgo operativo. Las claves de aplicación de la cuenta de servicio también se pueden usar con <a href="/account_management/org_settings/cross_org_visibility_api/">Cross-Org Connections API</a> para crear y administrar conexiones mediante programación.</div>
 
-### Actualizar una conexión
+1. Asegúrese de haber iniciado sesión en la organización _fuente_ que contiene los datos que desea exponer.
+1. En la [página de visibilidad entre organizaciones][6], haga clic en {{< ui >}}New Connection{{< /ui >}}. Aparece el cuadro de diálogo {{< ui >}}New Connection{{< /ui >}}.
+1. En el menú desplegable, seleccione la organización de _destino_ donde desea ver los datos.
+1. Haga clic en {{< ui >}}Connect{{< /ui >}}.
 
-La actualización de una connection (conexión) existente entre organizaciones te permite cambiar los tipos de datos que se comparten desde la organización source (fuente) en la organización de destino.
+### Actualizar una conexión {#update-a-connection}
 
-1. Asegúrate de haber iniciado sesión en la organización _source (fuente)_ de la connection (conexión) existente.
-1. Pasa el ratón sobre la connection (conexión) que desees actualizar. Aparecerá un icono de lápiz (**Edit**) (Editar) a la derecha.
-1. Haz clic en el icono del lápiz (**Edit**) (Editar) sobre la connection (conexión) que desees actualizar. Aparecerá el cuadro de diálogo **Edit Connection** (Editar connection (conexión).
-1. Selecciona las casillas de verificación de los tipos de datos que desees incluir.
-1. Haz clic en **Save** (Guardar).
+Actualizar una conexión entre organizaciones existente le permite cambiar los tipos de datos de la organización fuente que se comparten con la organización de destino.
 
-### Eliminar una connection (conexión)
+1. Asegúrese de haber iniciado sesión en la organización _fuente_ de la conexión existente.
+1. Pase el cursor sobre la conexión que desea actualizar. Aparece un icono de lápiz ({{< ui >}}Edit{{< /ui >}}) a la derecha.
+1. Haga clic en el icono de lápiz ({{< ui >}}Edit{{< /ui >}}) en la conexión que desea actualizar. Aparece el cuadro de diálogo {{< ui >}}Edit Connection{{< /ui >}}.
+1. Seleccione las casillas de verificación de los tipos de datos que desea incluir.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Al eliminar una conexión, se desactiva la consulta entre organizaciones desde la organización de destino de las métricas de la organización de origen.
+### Eliminar una conexión {#delete-a-connection}
 
-1. Ve a la [página de visibilidad entre organizaciones][6] en Parámetros de organización.
-1. Sitúa el cursor sobre la connection (conexión) que deseas eliminar. Aparecerá un icono de la papelera (**Eliminar**) a la derecha.
-1. Haz clic en el icono de la papelera (**Eliminar**) sobre la connection (conexión) que deseas suprimir. Aparecerá el mensaje **Are you sure?** (¿Estás seguro?).
-1. Haz clic en **Delete** (Borrar).
+Eliminar una conexión impide que la organización de destino consulte las métricas de la organización fuente mediante consultas entre organizaciones.
 
-### En la API
+1. Navegue a la [página de visibilidad entre organizaciones][6] en Organization Settings.
+1. Pase el cursor sobre la conexión que desea eliminar. Aparece un icono de papelera ({{< ui >}}Delete{{< /ui >}}) a la derecha.
+1. Haga clic en el icono de papelera ({{< ui >}}Delete{{< /ui >}}) en la conexión que desea eliminar. Aparece el aviso {{< ui >}}Are you sure?{{< /ui >}}.
+1. Haga clic en {{< ui >}}Delete{{< /ui >}}.
 
-Para Configurar conexiones mediante la API, consulta la [API de conexiones entre organizaciones][7].
+### En la API {#in-the-api}
 
-## Crear una widget con datos entre organizaciones
+Para configurar conexiones mediante la API, consulte la [API de conexiones entre organizaciones][7].
 
-Los [widgets de dashboard y notebook][2] entre organizaciones están disponibles para las organizaciones de Datadog que existen como organización _de destino_ para al menos una [conexión](#configure-connections).
+## Crear un widget con datos entre organizaciones {#create-a-widget-with-cross-organization-data}
 
-Cada consulta en un widget puede mostrar datos de una sola organización. Puedes combinar consultas en una fórmula de consulta entre organizaciones.
+Los [widgets de Dashboard y Notebook][2] entre organizaciones están disponibles para las organizaciones de Datadog que existen como organización _destino_ para al menos una [conexión](#configure-connections).
 
-### En la interfaz de usuario
+Cada consulta en un widget puede mostrar datos de una sola organización. Puede combinar consultas en una consulta de fórmula entre organizaciones.
 
-Los widgets de dashboard y notebook te permiten crear consultas entre organizaciones cuando se cumplen las siguientes condiciones:
+### En la UI {#in-the-ui}
 
-- Tienes habilitada la visibilidad entre organizaciones en tu organización
-- Existe al menos una connection (conexión) en la que la organización actual es el destino
+Los widgets de Dashboard y Notebook le permiten crear consultas entre organizaciones cuando se cumplen las siguientes condiciones:
 
-Si se cumplen las condiciones anteriores, aparecerá un selector desplegable de organización entre los menús desplegables de tipo de datos y nombre de métrica. Utiliza el selector desplegable de organización para elegir una organización source (fuente) para tu consulta.
+- Tiene habilitada la visibilidad entre organizaciones en su organización
+- Existe al menos una conexión donde la organización actual es el destino
 
-En la siguiente captura de pantalla, se muestra un ejemplo de consulta de fórmula entre organizaciones. El widget representa gráficamente el número de eventos incorporados por servicio. Para obtener el número total de eventos, la fórmula de consulta entre organizaciones suma los datos de la organización A (en la consulta **a**) y la organización B (en la consulta **b**).
+Si se cumplen las condiciones anteriores, aparece un selector desplegable de organización entre los menús desplegables para el tipo de datos y el nombre de la métrica. Utilice el selector desplegable de organización para elegir una organización fuente para su consulta.
 
-{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query-1.png" alt="Captura de pantalla que muestra la configuración de un widget de dashboard con una consulta entre organizaciones" >}}
+La siguiente captura de pantalla muestra un ejemplo de una consulta de fórmula entre organizaciones. El widget grafica el número de eventos ingeridos por servicio. Para obtener el número total de eventos, la consulta de fórmula entre organizaciones suma los datos de la organización A (en la consulta **a**) y la organización B (en la consulta **b**).
 
-### En la API
+{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query-1.png" alt="Captura de pantalla que muestra la configuración de un widget de Dashboard con una consulta entre organizaciones" >}}
+
+### En la API {#in-the-api-1}
 
 <div class="alert alert-info">
-El <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">proveedor Terraform de Datadog </a> no admite la creación de conexiones entre organizaciones. Sin embargo, puedes gestionar un dashboard que contenga widgets con consultas entre organizaciones a través de Terraform exportando el dashboard a JSON.
+El <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> no admite la creación de conexiones entre organizaciones. Sin embargo, puede administrar un dashboard que contenga widgets con consultas entre organizaciones a través de Terraform exportando el dashboard a JSON.
 </div>
 
-Puedes definir consultas entre organizaciones en el siguiente endpoint:
-- [Series temporales][8]
+Puede incluir datos entre organizaciones en el JSON de los widgets de Dashboard y Notebook con el campo `cross_org_uuids`. El mismo campo está disponible en los endpoints de consulta de fórmula de Metrics API:
+- [Consultar datos de series temporales en múltiples productos][8]
+- [Consultar datos escalares en múltiples productos][15]
 
-Cuando definas un widget en la API de dashboard, utiliza el parámetro `cross_org_uuids` en la carga de definición del widget de JSON, con el fin de identificar la organización de origen en una consulta entre organizaciones.
+Cuando defina un widget en Dashboard API o envíe una solicitud de consulta de fórmula de Metrics API, utilice el parámetro `cross_org_uuids` en cada objeto de consulta. El parámetro identifica la organización fuente en una consulta entre organizaciones.
 
-El parámetro `cross_org_uuids` es opcional. Si omites `cross_org_uuids`, la consulta se ejecuta en la misma organización en la que definiste el widget.
+El parámetro `cross_org_uuids` es opcional. Si omite `cross_org_uuids`, la consulta se ejecuta en la misma organización en la que definió el widget.
 
-### Ejemplo de definición de widget de JSON
+### Ejemplo de definición de widget JSON {#example-json-widget-definition}
 
 {{< highlight json "hl_lines=21 27" >}}
 {
@@ -151,41 +154,41 @@ El parámetro `cross_org_uuids` es opcional. Si omites `cross_org_uuids`, la con
 }
 {{< /highlight >}}
 
-Observa el parámetro `cross_org_uuids` en la carga de la definición del widget de JSON.
-- Este parámetro es opcional. Si se omite, la consulta se ejecuta en la organización en la que se ha definido el widget.
-- Utiliza el identificador de organización, que puedes recuperar del [endpoint Organizaciones][9], para identificar la organización en la que se ejecuta la consulta.
-- Aunque este parámetro acepta una matriz, esta debe contener un solo elemento. Si se añaden varios elementos a la matriz `cross_org_uuids`, se produce un error 400.
+Observe el parámetro `cross_org_uuids` en la carga útil de la definición del widget JSON.
+- Este parámetro es opcional. Si se omite, la consulta se ejecuta en la organización en la que está definido el widget.
+- Utilice el identificador de la organización, que puede recuperar desde el [punto de conexión Organizations][9], para identificar la organización en la que se ejecuta la consulta.
+- Aunque este parámetro acepta una matriz, la matriz debe contener solo un elemento. Agregar múltiples elementos a la matriz `cross_org_uuids` resulta en un error 400.
 
-## Permisos
-En forma predeterminada, solo los usuarios asociados a roles con el permiso _Lectura de connection (conexión) de organizaciones_ pueden ver la lista de conexiones entre organizaciones. Los usuarios asociados a roles con el permiso _Escritura de connection (conexión) de organizaciones_ pueden crear y eliminar conexiones entre organizaciones. 
+## Permisos {#permissions}
+De forma predeterminada, solo los usuarios asignados a roles con el permiso _Org Connection Read_ pueden ver la lista de conexiones entre organizaciones. Los usuarios asignados a roles con el permiso _Org Connection Write_ pueden crear y eliminar conexiones entre organizaciones.
 
-### Controles de acceso detallados
-Utiliza [controles de acceso granular][12] para limitar los equipos, roles o usuarios que pueden editar o consultar una connection (conexión) entre organizaciones. Estos controles de acceso rigen:
-- Desde la organización source (fuente): quién puede editar la connection (conexión).
-- Desde la organización de destino: quién puede ver los datos compartidos y quién puede editar la connection (conexión).
+### Controles de acceso granulares {#granular-access-controls}
+Utilice [controles de acceso granulares][12] para limitar los Teams, roles o usuarios que pueden editar o consultar una conexión entre organizaciones. Estos controles de acceso rigen:
+- Desde la organización fuente: quién puede editar la conexión.
+- Desde la organización de destino: quién puede ver los datos compartidos y quién puede editar la conexión.
 
-Las conexiones desde la organización source (fuente) heredan los permisos de acceso a los datos del creador de la connection (conexión). Si el creador tiene restringido el acceso a los datos mediante [Control de acceso a datos][13] o [Consultas de restricción de logs][14], estos datos no son accesibles desde la organización de destino. 
+Las conexiones desde la organización fuente heredan los permisos de acceso a datos del creador de la conexión. Si al creador se le restringe la visualización de cualquier dato mediante [Data Access Control][13] o [Log Restriction Queries][14], estos datos no serán accesibles desde la organización de destino. Si la cuenta del creador se desactiva, la conexión se elimina. Esto interrumpe el flujo de datos pero no crea un riesgo de seguridad: eliminar una conexión no elimina las restricciones de acceso.
 
-**Nota:** Las conexiones creadas desde organizaciones habilitadas por la HIPAA pueden permitir el intercambio de información sanitaria protegida (PHI) con las organizaciones de destino. Los clientes son responsables de cualquier dato confidencial transferido, incluida la PHI.
+**Nota:** Las conexiones creadas desde organizaciones habilitadas para HIPAA pueden permitir el intercambio de información de salud protegida (PHI) con organizaciones de destino. Los clientes son responsables de cualquier dato sensible transferido, incluida la PHI.
 
-1. Ve a la [página de visibilidad entre organizaciones][6] en Parámetros de organización.
-1. Pasa el ratón sobre la connection (conexión) entre organizaciones en la que deseas establecer permisos granulares. Los iconos **Permissions** (Permisos) y **Delete** (Borrar) aparecen a la derecha.
-1. Haz clic en el icono del candado (**Permissions**) (Permisos).
-1. Selecciona **Restrict Access** (Restringir el acceso).
-1. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
-1. Utiliza el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar la connection (conexión) entre organizaciones.
-1. Haz clic en **Add** (Añadir).
-1. El cuadro de diálogo se actualiza para indicar que el rol que has seleccionado tiene el permiso **Editor** (Edición).
-1. Haz clic en **Save** (Guardar).
+1. Vaya a la [página de visibilidad entre organizaciones][6] en Organization Settings.
+1. Coloque el cursor sobre la conexión entre organizaciones en la que desea establecer permisos granulares. Los iconos {{< ui >}}Permissions{{< /ui >}} y {{< ui >}}Delete{{< /ui >}} aparecen a la derecha.
+1. Haga clic en el icono de candado ({{< ui >}}Permissions{{< /ui >}}).
+1. Seleccione {{< ui >}}Restrict Access{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que los miembros de su organización tienen acceso {{< ui >}}Viewer{{< /ui >}} de forma predeterminada.
+1. Use el menú desplegable para seleccionar uno o más Teams, roles o usuarios que puedan editar la conexión entre organizaciones.
+1. Haga clic en {{< ui >}}Add{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-**Nota**: Para mantener tu acceso de edición a la connection (conexión) entre organizaciones, el sistema requiere que incluyas al menos un rol o equipo del que seas miembro antes de guardar.
+**Nota**: Para mantener su acceso de edición a la conexión entre organizaciones, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro antes de guardar.
 
-Para restaurar el acceso general a una connection (conexión) entre organizaciones con acceso restringido, sigue los pasos que se indican a continuación:
+Para restaurar el acceso general a una conexión entre organizaciones con acceso restringido, siga los pasos a continuación:
 
-1. En la page (página) de visibilidad entre organizaciones, pasa el ratón sobre la connection (conexión) entre organizaciones a la que deseas restaurar el acceso general. Los iconos **Permissions** (Permisos) y **Delete** (Borrar) aparecen a la derecha.
-1. Haz clic en el icono del candado (**Permissions**) (Permisos).
-1. Haz clic en **Restore Full Access** (Restablecer acceso completo).
-1. Haz clic en **Save** (Guardar).
+1. En la página de visibilidad entre organizaciones, coloque el cursor sobre la conexión entre organizaciones a la que desea restaurar el acceso general. Los iconos {{< ui >}}Permissions{{< /ui >}} y {{< ui >}}Delete{{< /ui >}} aparecen a la derecha.
+1. Haga clic en el icono de candado ({{< ui >}}Permissions{{< /ui >}}).
+1. Haga clic en {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
 [1]: /es/account_management/multi_organization/
 [2]: /es/dashboards/widgets
@@ -201,3 +204,4 @@ Para restaurar el acceso general a una connection (conexión) entre organizacion
 [12]: /es/account_management/rbac/granular_access
 [13]: /es/account_management/rbac/data_access/
 [14]: /es/logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[15]: /es/api/latest/metrics/#query-scalar-data-across-multiple-products

@@ -57,6 +57,8 @@ Datadog BYOC (Bring Your Own Cloud) Logs apporte les principales fonctionnalité
 - Bits Investigation (Preview)
 - MCP Server (Preview)
 
+<div class="alert alert-info">Bits Investigation et MCP Server sont en préversion. Les requêtes que ces fonctionnalités exécutent sur les données BYOC Logs peuvent avoir des performances réduites.</div>
+
 ## Fonctionnalités non prises en charge {#unsupported-features}
 
 BYOC Logs ne prend pas en charge les fonctionnalités suivantes :
