@@ -5759,11 +5759,16 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Monitors
+      url: monitors/types/data_observability/
+      identifier: quality_monitoring_monitors
+      parent: quality_monitoring
+      weight: 350000
     - name: Guides
       url: data_observability/quality_monitoring/guides
       identifier: quality_monitoring_guides
       parent: quality_monitoring
-      weight: 300000
+      weight: 400000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
@@ -5841,6 +5846,11 @@ menu:
       identifier: openlineage_integrations
       parent: data_jobs
       weight: 700000
+    - name: Monitors
+      url: monitors/types/data_observability/
+      identifier: data_jobs_monitors
+      parent: data_jobs
+      weight: 800000
     - name: Datadog Agent for OpenLineage Proxy
       url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
       identifier: openlineage_datadog_agent_for_openlineage
