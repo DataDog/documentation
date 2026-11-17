@@ -1,28 +1,51 @@
 ---
-title: Correlate AI Gateway Requests with Applications and Traces
-description: Attribute Datadog AI Gateway traffic to applications, callers, teams, sessions, and parent traces, then verify requests in Agent Observability.
+title: Observe AI Gateway Activity
+description: Review AI Gateway requests, tokens, spend, errors, and latency, then inspect requests in Agent Observability.
 further_reading:
-  - link: "/llm_observability/configure/ai_gateway/"
+  - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
-  - link: "/llm_observability/investigate/metrics/"
-    tag: "Documentation"
-    text: "Agent Observability metrics"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
+The [{{< ui >}}Overview{{< /ui >}}][3] page shows, for the selected time range:
+
+- Requests, successful requests, errors, and error rate
+- Tokens and average tokens per request
+- Spend, average cost per request, and cost per million tokens
+- Latency over time and by model
+- Providers with errors
+- Provider prompt-cache metrics: {{< ui >}}Cache hit ratio{{< /ui >}} is cache-read input tokens divided by total input tokens. {{< ui >}}Cache reuse ratio{{< /ui >}} is cache reads per cache write.
+
+<!-- vale Datadog.words_case_insensitive = YES -->
+
+Charts break down requests and cost by model or provider.
+
+To investigate a request:
+
+1. Select a time range that contains the request.
+2. Use the model or provider breakdown to find the affected traffic.
+3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
+4. For a failed request, review its error type and trace, and the provider's error rate, before changing a routing rule or provider.
+
+For available metrics and tags, see [AI Gateway metrics][16].
+
+## Attribute and correlate requests
+
 Attribute Gateway traffic to the application that sent it, add dimensions for cost and policy analysis, and connect requests to existing agent traces. Application tags, caller identity, team selection, sessions, and trace parents serve different purposes.
 
-## Before you begin
+### Before you begin
 
-- Complete [AI Gateway setup][1] and confirm that your caller can send a request.
-- Review [data capture][2]. Attribution and operational metrics remain useful when prompt and response content is not recorded.
-- If you want a Gateway span nested under an existing agent span, instrument the caller with [Agent Observability][3] and propagate its context.
+- Complete [AI Gateway setup][correlation-1] and confirm that your caller can send a request.
+- Review [data capture][correlation-2]. Attribution and operational metrics remain useful when prompt and response content is not recorded.
+- If you want a Gateway span nested under an existing agent span, instrument the caller with [Agent Observability][correlation-3] and propagate its context.
 
-## Choose attribution headers
+### Choose attribution headers
 
 | Header | Purpose |
 |---|---|
@@ -36,7 +59,7 @@ The authenticated Datadog credential determines caller identity. Setting a tag d
 
 Use non-sensitive, stable values for tags and sessions. Avoid prompts, email addresses, credentials, and other sensitive data in these headers.
 
-## Attribute requests to an application
+### Attribute requests to an application
 
 Set `x-dd-tag-ml_app` on requests from the same application. Without an explicit application name or propagated application context, Gateway traces appear under `datadog-ai-gateway`.
 
@@ -54,13 +77,13 @@ curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/
   }'
 ```
 
-Use the Gateway hostname for your [Datadog site][4] and a model or routing rule the caller can use.
+Use the Gateway hostname for your [Datadog site][correlation-4] and a model or routing rule the caller can use.
 
 Do not use `x-dd-tag-model` or `x-dd-tag-provider` to describe a requested destination. Gateway reserves these dimensions and records the actual served model and provider.
 
 Custom keys must start with a lowercase letter, followed by lowercase letters, digits, underscores, periods, slashes, or hyphens (`^[a-z][a-z0-9_./-]*$`). For header keys, avoid slashes because HTTP header names do not allow them. No separate tag-key length limit is defined; HTTP header size limits still apply. Keys in the reserved `_dd.*` namespace are ignored.
 
-## Select a team
+### Select a team
 
 Add the following header with the slug of a team the caller belongs to:
 
@@ -70,11 +93,11 @@ x-ai-gateway-team: <TEAM_SLUG>
 
 The selection affects matching team budgets, rate limits, and data capture. Personal and organization-wide policies can still apply.
 
-Without this header, a request can match budgets and rate limits for every team the caller directly belongs to. Its full cost counts against each matching team budget. A team data capture override requires explicit selection with the header. Check the [team selection errors][5] if the slug is invalid or the caller is not a member.
+Without this header, a request can match budgets and rate limits for every team the caller directly belongs to. Its full cost counts against each matching team budget. A team data capture override requires explicit selection with the header. Check the [team selection errors][correlation-5] if the slug is invalid or the caller is not a member.
 
-## Propagate trace context
+### Propagate trace context
 
-Configure the caller's Datadog instrumentation to inject the active context into the outbound Gateway request. For setup steps, see [Distributed tracing][8]. Preserve all headers the propagator produces through proxies and HTTP clients.
+Configure the caller's Datadog instrumentation to inject the active context into the outbound Gateway request. For setup steps, see [Distributed tracing][correlation-8]. Preserve all headers the propagator produces through proxies and HTTP clients.
 
 Gateway accepts Datadog trace propagation and W3C Trace Context. To nest a Gateway span under an Agent Observability span, the propagated context must include both the Agent Observability trace ID and parent span ID. An application name or an APM trace ID alone does not establish an Agent Observability parent.
 
@@ -89,7 +112,7 @@ Use IDs from an existing span in the same Datadog organization. Do not generate 
 
 An explicit `x-dd-tag-ml_app` overrides an application name carried in propagated context. Use a consistent application name when you want to view the caller and Gateway spans together.
 
-## Associate a session
+### Associate a session
 
 Send the same `x-session-id` value for requests in a conversation or agent run. Use a distinct value for independent sessions:
 
@@ -101,12 +124,12 @@ Send one `x-session-id` value. Use valid UTF-8 without control characters and ke
 
 A session groups related activity. It does not establish a trace parent, grant access, or by itself pin a routing rule to one destination. Routing affinity and destination pinning are separate routing controls.
 
-## Follow a known request
+### Follow a known request
 
 Use the overview to review request volume, token usage, cost, errors, and latency. To locate a specific request:
 
 1. Send a harmless request with an application name and a custom tag value reserved for the verification.
-2. Open [AI Gateway Overview][6].
+2. Open [AI Gateway Overview][correlation-6].
 3. Select the time range containing your request.
 4. Follow the {{< ui >}}Traces{{< /ui >}} link into Agent Observability.
 5. Filter for your application and custom tag.
@@ -115,9 +138,9 @@ Use the overview to review request volume, token usage, cost, errors, and latenc
 8. If you supplied a session, confirm its session association.
 9. Check that recorded content matches the effective data capture setting. A metadata-only request should still have operational information without prompt and response text.
 
-A routing rule can produce several provider attempts through retries or fallbacks. Inspect the attempt that served the response when comparing the requested alias with the actual provider and model. For aggregate definitions, see [AI Gateway metrics][7].
+A routing rule can produce several provider attempts through retries or fallbacks. Inspect the attempt that served the response when comparing the requested alias with the actual provider and model. For aggregate definitions, see [AI Gateway metrics][correlation-7].
 
-## Troubleshoot attribution
+### Troubleshoot attribution
 
 | Symptom | Check |
 |---|---|
@@ -132,11 +155,14 @@ A routing rule can produce several provider attempts through retries or fallback
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/ai_gateway/#get-started
-[2]: /llm_observability/configure/ai_gateway/#configure-data-capture
-[3]: /llm_observability/instrument/
-[4]: /getting_started/site/
-[5]: /llm_observability/configure/ai_gateway/#error-codes
-[6]: https://app.datadoghq.com/llm/gateway
-[7]: /llm_observability/investigate/metrics/#gateway-metrics
-[8]: /llm_observability/instrument/sdk/#distributed-tracing
+[3]: https://app.datadoghq.com/llm/gateway
+[16]: /llm_observability/investigate/metrics/#gateway-metrics
+
+[correlation-1]: /ai_gateway/getting_started/
+[correlation-2]: /ai_gateway/security/#configure-data-capture
+[correlation-3]: /llm_observability/instrument/
+[correlation-4]: /getting_started/site/
+[correlation-5]: /ai_gateway/troubleshooting/#error-codes
+[correlation-6]: https://app.datadoghq.com/llm/gateway
+[correlation-7]: /llm_observability/investigate/metrics/#gateway-metrics
+[correlation-8]: /llm_observability/instrument/sdk/#distributed-tracing
