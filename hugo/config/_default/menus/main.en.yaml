@@ -6048,16 +6048,6 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
-    - name: AI Gateway
-      url: llm_observability/configure/ai_gateway
-      parent: llm_obs_configure
-      identifier: llm_obs_ai_gateway
-      weight: 604
-    - name: Model Pricing
-      url: llm_observability/configure/ai_gateway_pricing
-      parent: llm_obs_ai_gateway
-      identifier: llm_obs_ai_gateway_pricing
-      weight: 60407
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -6135,6 +6125,62 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: AI Gateway
+      url: ai_gateway/
+      pre: llm-observability
+      identifier: ai_gateway
+      parent: ai_observability_heading
+      weight: 40000
+    - name: Get Started
+      url: ai_gateway/getting_started/
+      parent: ai_gateway
+      identifier: ai_gateway_getting_started
+      weight: 1
+    - name: Connect Providers
+      url: ai_gateway/providers/
+      parent: ai_gateway
+      identifier: ai_gateway_providers
+      weight: 2
+    - name: Connect Applications
+      url: ai_gateway/applications/
+      parent: ai_gateway
+      identifier: ai_gateway_applications
+      weight: 3
+    - name: Send Requests
+      url: ai_gateway/requests/
+      parent: ai_gateway
+      identifier: ai_gateway_requests
+      weight: 4
+    - name: Route Requests
+      url: ai_gateway/routing/
+      parent: ai_gateway
+      identifier: ai_gateway_routing
+      weight: 5
+    - name: Control Model Access
+      url: ai_gateway/access_control/
+      parent: ai_gateway
+      identifier: ai_gateway_access_control
+      weight: 6
+    - name: Control Spend and Usage
+      url: ai_gateway/spend_controls/
+      parent: ai_gateway
+      identifier: ai_gateway_spend_controls
+      weight: 7
+    - name: Security and Data Capture
+      url: ai_gateway/security/
+      parent: ai_gateway
+      identifier: ai_gateway_security
+      weight: 8
+    - name: Observe Gateway Activity
+      url: ai_gateway/observability/
+      parent: ai_gateway
+      identifier: ai_gateway_observability
+      weight: 9
+    - name: Troubleshooting
+      url: ai_gateway/troubleshooting/
+      parent: ai_gateway
+      identifier: ai_gateway_troubleshooting
+      weight: 10
     - name: CI/CD Optimization
       url: cicd/
       pre: ci

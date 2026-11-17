@@ -3,6 +3,11 @@ aliases:
 - /fr/cloudprem/introduction/features/
 description: Découvrez quelles fonctionnalités de Datadog Log Explorer sont prises
   en charge dans BYOC Logs
+further_reading:
+- link: https://www.datadoghq.com/blog/byoc-cross-cluster-queries/
+  tag: Blog
+  text: Unifiez les données sur Datadog BYOC avec des requêtes inter-clusters pour
+    les équipes et les agents IA
 title: Fonctionnalités prises en charge
 ---
 ## Présentation {#overview}
@@ -69,5 +74,9 @@ BYOC Logs ne prend pas en charge les fonctionnalités suivantes :
 - Fonctionnalités de requête avancées :
   - Champs calculés
   - Extraction Grok (parsing au moment de la requête)
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/api/latest/logs-restriction-queries/

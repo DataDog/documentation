@@ -234,6 +234,7 @@ unsupported_sites:
   ai_agents_console: [gov,gov2]
   ai_credit_limits: [gov,gov2]
   ai_credits: [gov,gov2]
+  ai_gateway: [gov,gov2]
   ai_impact: [gov,gov2]
   alibaba-cloud: [gov,gov2]
   amazon-compute-optimizer: [gov,gov2]

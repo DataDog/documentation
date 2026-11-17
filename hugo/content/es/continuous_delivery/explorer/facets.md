@@ -1,108 +1,107 @@
 ---
-description: Conoce las facetas para filtrar y agrupar tus ejecuciones de despliegue.
+description: Aprenda sobre las facetas para filtrar y agrupar sus ejecuciones de implementación.
 further_reading:
 - link: continuous_delivery/explorer/
   tag: Documentación
-  text: Aprende a consultar y visualizar los despliegues
-title: Facetas de ejecución del despliegue
+  text: Aprenda a consultar y visualizar implementaciones
+title: Facetas de ejecución de implementación
 ---
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la vista previa" >}}
-CD Visibility está en Vista previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility está en visión preliminar. El acceso está limitado a las organizaciones ya inscritas.
 {{< /callout >}}
 
-## Información general
+## Descripción general {#overview}
 
-Las facetas son etiquetas y atributos definidos por el usuario a partir de tus pipelines. Son útiles para el análisis de datos tanto [cualitativo](#qualitative-facets) como [cuantitativo](#quantitative-measures). Las facetas te permiten manipular tus despliegues en las consultas de búsqueda que aparecen en [dashboards][2] y en [notebools][3].
+Las facetas son etiquetas y atributos definidos por el usuario de sus pipelines. Son útiles tanto para el análisis de datos [cualitativos](#qualitative-facets) como [cuantitativos](#quantitative-measures). Las facetas le permiten manipular sus implementaciones en las consultas de búsqueda que aparecen en [dashboards][2] y en [notebooks][3].
 
-[Crear facetas](#creating-facets) no es **necesario** para [buscar ejecuciones de despliegue][5]. Las capacidades de autocompletar utilizan las facetas existentes, pero también se aplica cualquier entrada que coincida con las ejecuciones de despliegue entrantes.
+[Crear facetas](#creating-facets) **no es necesario** para [buscar ejecuciones de implementación][5]. Las capacidades de autocompletado usan facetas existentes, pero también se aplica cualquier entrada que coincida con las ejecuciones de implementación entrantes.
 
-La [página de Ejecuciones de despliegue][4] incluye facetas predefinidas como `Environment`, `Deployment Status` y `Deployment Provider`. Puedes utilizar facetas en el CD Visibility Explorer para:
+La [página Deployment Executions][4] incluye facetas predeterminadas como `Environment`, `Deployment Status` y `Deployment Provider`. Puede usar facetas en el Explorador de CD Visibility para:
 
-- [Buscar y filtrar ejecuciones de despliegue][5].
-- Realizar análisis de despliegue o de entorno.
-- Comienza a solucionar los problemas una vez finalizado el despliegue.
+- [Buscar y filtrar ejecuciones de implementación][5].
+- Realice análisis de implementación o de entorno.
+- Comience la resolución de problemas después de que sus implementaciones se completen.
 
-Navega a [**Software Delivery** > **CD Visibility** > **Executions**][4] (Entrega de software > CD Visibility > Ejecuciones) para acceder a la lista de facetas a la izquierda de la lista de ejecuciones de despliegue.
+Navegue a [**Software Delivery** > **CD Visibility** > **Executions**][4] para acceder a la lista de facetas a la izquierda de la lista de ejecuciones de implementación.
 
-{{< img src="/continuous_delivery/explorer/facets.png" text="Lista de facetas en la página de Ejecuciones de despliegue en el CD Visibility Explorer" style="width:100%" >}}
+{{< img src="/continuous_delivery/explorer/facets.png" text="Facets list on the Deployment Executions page of the CD Visibility Explorer" style="width:100%" >}}
 
-### Facetas cualitativas
+### Facetas cualitativas {#qualitative-facets}
 
-Utiliza facetas cualitativas cuando tengas que hacer lo siguiente:
+Utilice facetas cualitativas cuando necesite:
 
-- **Obtener información relativa** de los valores.
-- **Contar valores únicos**.
-- Con frecuencia **filtra** tus ejecuciones de despliegue en función de determinados valores. Por ejemplo, utiliza la faceta de la etiqueta de entorno para limitar la solución de problemas a los entornos de desarrollo, preparación o producción.<br>
+- **Obtenga información relativa** para los valores.
+- **Cuente valores únicos**.
+- Frecuentemente **filtre** sus ejecuciones de implementación según valores particulares. Por ejemplo, use la faceta de la etiqueta de entorno para limitar la resolución de problemas al contexto de los entornos de desarrollo, preproducción o producción.<br>
 
-**Nota:** Aunque las facetas no son necesarias para filtrar las etiquetas, la definición de facetas para las etiquetas que se utilizan durante las investigaciones puede reducir el tiempo de resolución.
+**Nota:** Aunque las facetas no son necesarias para filtrar por etiquetas, definir facetas para las etiquetas que usa durante las investigaciones puede reducir su tiempo de resolución.
 
-### Medidas cuantitativas
+### Medidas cuantitativas {#quantitative-measures}
 
-Utiliza medidas cuantitativas cuando necesites:
+Utilice medidas cuantitativas cuando necesite:
 
-- **Agrega** valores de múltiples ejecuciones de despliegue.
-- **Filtra por rangos** tus ejecuciones de despliegue.
-- **Ordena** tus ejecuciones de despliegue en función de ese valor.
+- **Agregue** valores de múltiples ejecuciones de implementación.
+- **Filtre por rango** sus ejecuciones de implementación.
+- **Ordene** sus ejecuciones de implementación según ese valor.
 
-#### Tipos
+#### Tipos {#types}
 
-Las medidas tienen un valor entero largo o doble para capacidades equivalentes.
+Las medidas tienen un valor de entero largo o doble para capacidades equivalentes.
 
-#### Unidades
+#### Unidades {#units}
 
-Las medidas admiten unidades (**tiempo** en segundos o **tamaño** en bytes) para manejar órdenes de magnitud en tiempo de consulta y tiempo de visualización. La unidad es una propiedad de la propia medida, no del campo.
+Las medidas admiten unidades (**tiempo** en segundos o **tamaño** en bytes) para el manejo de órdenes de magnitud al momento de la consulta y de la visualización. La unidad es una propiedad de la medida en sí, no del campo.
 
-Por ejemplo, considera una medida `duration` en nanosegundos. Supongamos que los despliegues de `env:staging` tienen `duration:10000000`, lo que significa `10 milliseconds`. Supongamos que los despliegues de `env:qa` tienen `duration:5000000`, que significa `5 milliseconds`. Utiliza `duration:>2ms` para consultar de forma coherente las etiquetas de ejecución de despliegue de ambos entornos a la vez. Para obtener más información sobre las consultas de búsqueda, consulta [Sintaxis de búsqueda][6].
+Por ejemplo, considere una `duration` medida en nanosegundos. Suponga que las implementaciones de `env:staging` tienen `duration:10000000`, lo que significa `10 milliseconds`. Suponga que las implementaciones de `env:qa` tienen `duration:5000000`, lo que significa `5 milliseconds`. Use `duration:>2ms` para consultar de manera consistente las etiquetas de ejecución de implementación de ambos entornos a la vez. Para obtener más información sobre las consultas de búsqueda, consulte [Sintaxis de búsqueda][6].
 
-## Panel de facetas
+## Panel de facetas {#facet-panel}
 
-La barra de búsqueda ofrece el conjunto más completo de interacciones para filtrar y agrupar los datos. Sin embargo, en muchos casos, el panel de facetas es una forma más sencilla de navegar por tus datos. Abre una faceta para ver un resumen de su contenido en el contexto de la consulta actual.
+La barra de búsqueda proporciona el conjunto de interacciones más completo para filtrar y agrupar sus datos. Sin embargo, para muchos casos, el panel de facetas es una forma sencilla de navegar por sus datos. Abra una faceta para ver un resumen de su contenido para el contexto de la consulta actual.
 
-La barra de búsqueda y la URL reflejan automáticamente las opciones seleccionadas del panel de facetas.
+La barra de búsqueda y la URL reflejan automáticamente sus selecciones del panel de facetas.
 
-- Las **Facetas (cualitativas)** vienen con una lista principal de valores únicos y un recuento de ejecuciones de despliegue que coinciden con cada uno de ellos.
-- Las **medidas (cuantitativas)** incluyen un regulador que indica los valores mínimo y máximo. Utiliza este regulador o indica valores numéricos para seleccionar diferentes límites del contexto de la consulta de búsqueda.
+- **Las facetas (cualitativas)** vienen con una lista principal de valores únicos y un conteo de ejecuciones de implementación que coinciden con cada uno de ellos.
+- **Las medidas (cuantitativas)** vienen con un control deslizante que indica los valores mínimos y máximos. Utilice el control deslizante, o ingrese valores numéricos, para definir el contexto de la consulta de búsqueda en diferentes rangos.
 
-### Agrupar facetas
+### Agrupación de facetas{#grouping-facets}
 
-Las facetas se agrupan en temas significativos en la lista de facetas. Asignar o reasignar un grupo a una faceta solo afecta a la lista de facetas, y no tiene ningún impacto en la búsqueda o los análisis.
+Las facetas se agrupan en temas significativos en la lista de facetas. Asignar o reasignar un grupo para una faceta afecta solo a la lista de facetas y no tiene impacto en la búsqueda o el análisis.
 
-### Filtrar facetas
+### Filtrado de facetas{#filtering-facets}
 
-Utiliza el cuadro de facetas de búsqueda del panel de facetas para examinar toda la lista de facetas y navegar hasta la faceta con la que deseas interactuar. *Buscar facetas* utiliza el nombre de la faceta y el nombre del campo para delimitar los resultados.
+Utilice el cuadro de búsqueda de facetas en el panel de facetas para definir el contexto de toda la lista de facetas y navegar hasta la faceta con la que necesita interactuar. *Search facets* utiliza el nombre de visualización de la faceta y el nombre del campo para definir el contexto de los resultados.
 
-## Crear facetas
+## Creación de facetas{#creating-facets}
 
-No es necesario crear una faceta en un atributo o etiqueta de ejecución de despliegue para buscar ejecuciones de despliegue. Las facetas son útiles si deseas añadir una descripción significativa a un atributo de ejecución de despliegue específico, o si deseas que los valores del atributo aparezcan en la lista de facetas.
+No es necesario crear una faceta para un atributo o una etiqueta de ejecución de implementación a fin de buscar ejecuciones de implementación. Las facetas son útiles si desea agregar una descripción significativa a un atributo específico de ejecución de implementación, o si desea que los valores del atributo aparezcan en la lista de Facets.
 
-### Creación de facetas desde el panel lateral de Detalles de despliegue
+### Creación de facetas desde el panel lateral Deployment Details {#creating-facets-from-the-deployment-details-side-panel}
 
-Crea una faceta desde el panel lateral de Detalles de despliegue para que la mayoría de los detalles de la faceta estén rellenados previamente.
+Cree una faceta desde el panel lateral Deployment Details para que la mayoría de los detalles de la faceta se completen automáticamente.
 
-{{< img src="continuous_delivery/explorer/create_facet.png" alt="Crea una faceta desde el panel lateral de Detalles de despliegue" style="width:100%;">}}
+{{< img src="continuous_delivery/explorer/create_facet.png" alt="Cree una faceta desde el panel lateral Deployment Details" style="width:100%;">}}
 
-1. Navega hasta una ejecución de despliegue de interés en la [página de Ejecuciones de despliegue][4] que contenga el campo sobre el que crear una faceta.
-2. Abre el panel lateral de Detalles de despliegue seleccionando la ejecución del despliegue de la lista.
-3. Haz clic en el campo deseado y crea una faceta a partir de ahí:
+1. Navegue hasta una ejecución de implementación de interés en la [página Deployment Executions][4] que contenga el campo para el que desea crear una faceta.
+2. Abra el panel lateral Deployment Details seleccionando la ejecución de implementación de la lista.
+3. Haga clic en el campo deseado y cree una faceta desde allí:
 
-   - Si el campo contiene un valor numérico, puedes crear una faceta o una medida.
-   - Si el campo contiene un valor de cadena, solo está disponible la creación de facetas.
+   - Si el campo tiene un valor numérico, puede crear una faceta o una medida.
+   - Si el campo tiene un valor de cadena, solo está disponible la creación de facetas.
 
-### Crear facetas a partir de la lista de facetas
+### Creación de facetas desde la lista de facetas {#creating-facets-from-the-facet-list}
 
-Si no es posible encontrar una ejecución de despliegue que contenga el campo deseado, crea una faceta directamente desde el panel de facetas haciendo clic en **+ Add** (+ Añadir).
+Si no es posible encontrar una ejecución de implementación que tenga el campo deseado, cree una faceta directamente desde el panel de facetas haciendo clic en **+ Add**.
 
-{{< img src="continuous_delivery/explorer/add_facet.png" alt="Añade una faceta desde el panel lateral de facetas" style="width:30%;">}}
+{{< img src="continuous_delivery/explorer/add_facet.png" alt="Agregue una faceta desde el panel lateral de facetas" style="width:30%;">}}
 
-Define el nombre del campo subyacente (clave) de esta faceta:
+Defina el nombre del campo subyacente (clave) para esta faceta:
 
-- Utiliza el nombre de la clave de etiqueta para las etiquetas de entorno.
-- Utiliza la ruta de atributos para los atributos de ejecución de despliegue, con el prefijo `@`.
+- Use el nombre de la clave de etiqueta para las etiquetas de entorno.
+- Use la ruta del atributo para los atributos de ejecución de implementación, con el prefijo `@`.
 
-La función de autocompletar basada en el contenido de las ejecuciones de despliegue de las vistas actuales te ayuda a definir el nombre de campo adecuado. Pero puedes utilizar prácticamente cualquier valor aquí, específicamente en caso que aún no tienes ejecuciones de despliegue coincidentes recibidas por Datadog.
+El autocompletado basado en el contenido de las ejecuciones de implementación de las vistas actuales le ayuda a definir el nombre de campo adecuado. Pero puede usar prácticamente cualquier valor aquí, incluso si Datadog aún no ha recibido ejecuciones de implementación que coincidan.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
