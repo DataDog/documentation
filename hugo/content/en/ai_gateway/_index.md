@@ -65,7 +65,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Give callers a stable model identifier with [routing rules](/ai_gateway/routing/) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](/ai_gateway/access_control/)
 - Track and cap spend with [budgets](/ai_gateway/spend_controls/#set-budgets)
-- Cap requests and tokens per minute with [rate limits](/ai_gateway/spend_controls/#set-rate-limits)
+- Cap requests, tokens, and spend over rolling windows with [rate limits](/ai_gateway/spend_controls/#set-rate-limits)
 - Investigate requests with spans in Agent Observability
 
 ## Get started
