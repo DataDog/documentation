@@ -43,7 +43,7 @@ Real-Time Costs is available for Cloud Cost Management Enterprise customers.
 
 - Cloud Cost Management is enabled for the AWS account, Azure subscription, or Google Cloud project.
 - The Datadog Agent is installed on each EC2 instance, Azure VM, or Compute Engine instance.
-- (Optional) To see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup guide in [Container Cost Allocation][2].
+- (Optional) For real-time Kubernetes costs, Datadog Container Monitoring is enabled for your clusters. See [Container Cost Allocation][2] for setup.
 
 ## How to query real-time costs
 
