@@ -138,7 +138,9 @@ Saving the form creates real-time anomaly monitors tagged `ccm_realtime_anomaly_
 - If you don't group alerts, Datadog creates one monitor.
 - If you group alerts by tags, Datadog creates one monitor for each tag. For example, grouping by two tags creates two monitors, each grouped by one of the tags, not one monitor grouped by both.
 
-Turning off notifications and saving deletes these monitors. For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
+To stop real-time anomaly notifications, turn off {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}} or {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}, and click {{< ui >}}Save configuration{{< /ui >}}. Datadog deletes the monitors that the form created for that cost type. Monitors that you created separately aren't affected.
+
+For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
 
 ## Troubleshooting
 
