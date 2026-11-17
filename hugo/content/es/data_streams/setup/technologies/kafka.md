@@ -1,24 +1,27 @@
 ---
+further_reading:
+- link: https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm
+  tag: Centro de aprendizaje
+  text: Hacer un seguimiento de una canalización de Kafka con Data Streams Monitoring
 title: Data Streams Monitoring para Kafka
 ---
+### Requisitos previos {#prerequisites}
 
-### Requisitos previos
-
--   [Datadog Agent v7.34.0 o más reciente][1]
+-   [Datadog Agent v7.34.0 o superior][1]
 
 <table>
   <thead>
     <tr>
-      <th>Lenguaje</th>
+      <th>Idioma</th>
       <th>Biblioteca</th>
-      <th>Versión de rastreador mínima</th>
-      <th>Versión de rastreador recomendada</th>
+      <th>Versión mínima del rastreador</th>
+      <th>Versión recomendada del rastreador</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
-      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7*)</td>
+      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (La generación de lag no es compatible con v3.7*)</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
@@ -76,49 +79,59 @@ title: Data Streams Monitoring para Kafka
       <td>{{< dsm-tracer-version lang="ruby" lib="karafka" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="ruby" lib="karafka" type="recommended" >}}</td>
     </tr>
+    <tr>
+      <td><a href="/data_streams/php">PHP</a></td>
+      <td><a href="https://github.com/arnaud-lb/php-rdkafka">php-rdkafka</a></td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-rdkafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-rdkafka" type="recommended" >}}</td>
+    </tr>
   </tbody>
 </table>
 
-*Spring Boot v3.3.x y Spring Kafka v3.2.x utilizan Kafka Clients v3.7.x, que no admite la generación de retrasos. Para solucionarlo, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">actualiza la versión de Kafka Clients</a> a v3.8.0 o posterior.</span>
+*Spring Boot 3.3.x y spring-kafka 3.2.x utilizan kafka-clients 3.7.x, el cual no admite la generación de lag. Para resolver esto, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">actualice su versión de kafka-clients</a> a 3.8.0 o una más reciente.</span>
 
-<div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> es parcialmente compatible con Java y esto puede llevar a que se omitan mediciones de latencia.</div>
+<div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> cuenta con soporte parcial para Java y puede provocar que se pierdan mediciones de latencia.</div>
 
-### Despliegues de Kafka compatibles
+### Implementaciones de Kafka compatibles {#supported-kafka-deployments}
 
-Instrumentar tus consumidores y productores con Data Streams Monitoring te permite ver tu topología y realizar un seguimiento de tus pipelines con [métricas listas para usar][7], independientemente de cómo se despliega Kafka. Además, los siguientes despliegues de Kafka tienen más compatibilidad de integración, proporcionando más información sobre la salud de tu clúster de Kafka:
+Instrumentar sus consumidores y productores con Data Streams Monitoring le permite visualizar su topología y realizar un seguimiento de sus Pipelines con [métricas listas para usar][7] independientemente de cómo esté implementado Kafka. Además, las siguientes implementaciones de Kafka cuentan con soporte de integración adicional, lo que proporciona más información sobre el estado de su clúster de Kafka:
 
 | Modelo              | Integración                                 |
 | ------------------ | ------------------------------------------- |
-| Autoalojado        | [Intermediario Kafka][8] y [Consumidor Kafka][13]    |
+| Autohospedado        | [Kafka Broker][8] y [Kafka Consumer][13]    |
 | Confluent Platform | [Confluent Platform][11]                    |
-| Nube Confluent    | [Confluent Cloud][12]                       |
+| Confluent Cloud    | [Confluent Cloud][12]                       |
 | Amazon MSK         | [Amazon MSK][10] o [Amazon MSK (Agent)][9] |
 | Red Panda          | Aún no integrado                          |
 
-### Configuración de Data Streams Monitoring
+### Configuración de Data Streams Monitoring {#setting-up-data-streams-monitoring}
 
-Consulta las instrucciones de configuración para [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET][6] o [Ruby][14].
+Consulte las instrucciones de configuración para [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET][6], [Ruby][14] o [PHP][17].
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
-### Conectores de monitorización
+### Monitoreo de conectores {#monitoring-connectors}
 
-#### Conectores de Confluent Cloud
+#### Conectores de Confluent Cloud {#confluent-cloud-connectors}
 {{% data_streams/dsm-confluent-connectors %}}
 
-#### Conectores de Kafka autoalojados
+#### Conectores de Kafka autohospedados {#self-hosted-kafka-connectors}
 
-Requisitos: [`dd-trace (traza)-java` v1.44.0 o posterior][15]
+_Requisitos_: [`dd-trace-java` v1.44.0+][15]
 
-<div class="alert alert-info">Esta función está en vista previa.</div>
+<div class="alert alert-info">Esta función está en Preview.</div>
 
-Data Streams Monitoring puede recopilar información de tus conectores de Kafka autoalojados. En Datadog, estos conectores se muestran como servicios conectados a temas de Kafka. Datadog recopila el rendimiento hacia y desde todos los temas de Kafka. Datadog no recopila estados de conectores o sumideros y fuentes de conectores de Kafka autoalojados.
+Data Streams Monitoring puede recopilar información de sus conectores de Kafka autohospedados. En Datadog, estos conectores se muestran como servicios conectados a topics de Kafka. Datadog recopila datos de throughput hacia y desde todos los topics de Kafka. Datadog no recopila el estado de los conectores ni los sinks y sources de los conectores de Kafka autohospedados.
 
-##### Instalación
+##### Configuración {#setup}
 
-1. Asegúrate de que el Datadog Agent se está ejecutando en tus workers de Kafka Connect.
-2. Asegúrate de que [`dd-trace (traza)-java`][16] está instalado en tus workers de Kafka Connect.
-3. Modifica tus opciones de Java para incluir `dd-trace-java` en los nodos de tus workers de Kafka Connect. Por ejemplo, en Strimzi, modifica `STRIMZI_JAVA_OPTS` para añadir `-javaagent:/path/to/dd-java-agent.jar`.
+1. Asegúrese de que el Datadog Agent se esté ejecutando en sus workers de Kafka Connect.
+2. Asegúrese de que [`dd-trace-java`][16] esté instalado en sus workers de Kafka Connect.
+3. Modifique sus opciones de Java para incluir `dd-trace-java` en sus nodos worker de Kafka Connect. Por ejemplo, en Strimzi, modifique `STRIMZI_JAVA_OPTS` para agregar `-javaagent:/path/to/dd-java-agent.jar`.
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/agent
 [2]: /es/data_streams/setup/language/java
@@ -136,3 +149,4 @@ Data Streams Monitoring puede recopilar información de tus conectores de Kafka 
 [14]: /es/data_streams/setup/language/ruby
 [15]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.44.0
 [16]: https://github.com/DataDog/dd-trace-java
+[17]: /es/data_streams/setup/language/php
