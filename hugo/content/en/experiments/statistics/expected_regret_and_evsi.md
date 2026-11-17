@@ -36,11 +36,12 @@ A positive $Θ$ means the treatment increased the metric. The regret and EVSI ca
 
 After an experiment, you choose between two decisions: ship the treatment or keep the control. **Regret** is the lift you give up by making a decision, compared with the decision you would make if you knew the true effect:
 
-- If you ship the treatment and the true effect is negative, your regret is $-Θ$.
-- If you keep the control and the true effect is positive, your regret is $Θ$.
-- Otherwise, you made the better decision and your regret is zero.
+| Decision | True effect is positive ($Θ>0$) | True effect is negative ($Θ<0$) |
+|---|---|---|
+| **Ship the treatment** | 0 | $-Θ$ |
+| **Keep the control** | $Θ$ | 0 |
 
-You don't know the true effect, so Datadog averages each decision's regret over the posterior:
+A regret of zero means you made the better decision. You don't know the true effect, so Datadog averages each row over the posterior:
 
 $$R\_T=E[\max(-Θ,0)∣\text\"data\"]$$
 
