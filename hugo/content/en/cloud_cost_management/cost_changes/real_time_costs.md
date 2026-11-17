@@ -39,7 +39,7 @@ Real-time costs cover compute only. The following charges are excluded:
 
 ## Requirements
 
-Real-Time Costs is available for Cloud Cost Management Enterprise customers.
+Real-Time Costs is available for Cloud Cost Management Enterprise customers. Before you start, confirm that:
 
 - Cloud Cost Management is enabled for the AWS account, Azure subscription, or Google Cloud project.
 - The Datadog Agent is installed on each EC2 instance, Azure VM, or Compute Engine instance.
