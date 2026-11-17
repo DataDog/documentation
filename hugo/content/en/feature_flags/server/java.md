@@ -229,7 +229,7 @@ The `targetingKey` (for example, `user-123`) is the primary identifier used for 
 
 ## Control flag evaluation telemetry and experiment participation
 
-Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimentation opt-out targets the unreleased version `1.69.0`, planned for the next minor release. The combined example requires that release. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][20] for shared behavior.
+Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimentation opt-out requires `dd-openfeature` version `1.69.0` or later. The combined example requires `1.69.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][20] for shared behavior.
 
 Set these variables before constructing the provider:
 

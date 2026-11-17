@@ -40,10 +40,10 @@ Use Android Flags and OpenFeature artifacts from the same release. Precomputed e
 | SDK | Flag evaluation telemetry opt-out | Experimentation opt-out |
 | --- | --- | --- |
 | [Go][6] (`dd-trace-go/v2`) | `2.12.0` | `2.12.0` |
-| [Java][7] (`dd-openfeature`) | `1.68.0` | `1.69.0` (planned; unreleased) |
-| [Ruby][8] (`datadog`) | `2.47.0` | `2.49.0` (planned; unreleased) |
+| [Java][7] (`dd-openfeature`) | `1.68.0` | `1.69.0` |
+| [Ruby][8] (`datadog`) | `2.47.0` | `2.49.0` |
 
-All three server SDKs support immediate and future-experiments-only modes in the listed versions. Planned entries describe upcoming support. Use a published release containing the control before enabling it.
+All three server SDKs support immediate and future-experiments-only modes in the listed versions.
 
 The SDK APIs use the term *experimentation opt-out* for randomization opt-out. Configuration can also mark percentage rollouts and completed experiments that still randomize as eligible for exclusion. The control does not force a control variant.
 

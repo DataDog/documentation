@@ -1174,13 +1174,13 @@
     "summary": "Delete a Storage Management configuration"
   },
   "GetCodeCoverageBranchSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a branch",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a branch."
   },
   "GetCodeCoverageCommitSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
@@ -1192,7 +1192,7 @@
     "request_schema_description": "Request object for getting per-file code coverage data."
   },
   "GetCodeCoveragePRSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service,\ncode owner, and flag.",
     "summary": "Get code coverage summary for a pull request",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a pull request."
@@ -1987,7 +1987,7 @@
     "request_schema_description": "Request for editing a downtime."
   },
   "SearchIssues": {
-    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
+    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.\nReturns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.",
     "summary": "Search error tracking issues",
     "request_description": "Search issues request payload.",
     "request_schema_description": "Search issues request payload."
@@ -2005,6 +2005,16 @@
     "summary": "Update the assignee of an issue",
     "request_description": "Update issue assignee request payload.",
     "request_schema_description": "Update issue assignee request payload."
+  },
+  "GetIssueImpact": {
+    "description": "Get an issue's impact over a time window: its error counts by source, and the users, sessions, accounts,\nRUM views, and endpoints it affects most.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's\ndata.",
+    "summary": "Get the impact of an error tracking issue"
+  },
+  "SnoozeIssue": {
+    "description": "Snooze an issue by `issue_id`: move it to `IGNORED` until a condition is met, then back to `OPEN`.\nThe condition can be a number of occurrences, a number of distinct values of an attribute such as `@usr.id`,\nan elapsed time, or any or all of several conditions.\nSnoozing an issue that is already snoozed replaces its snooze. Updating the state of the issue with\n`UpdateIssueState` cancels the snooze.\nThe response includes the watch that reopens the issue.",
+    "summary": "Snooze an issue",
+    "request_description": "Snooze issue request payload.",
+    "request_schema_description": "Snooze issue request payload."
   },
   "UpdateIssueState": {
     "description": "Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.",
@@ -2311,7 +2321,7 @@
     "request_schema_description": "Request to create a new feature flag."
   },
   "ListFeatureFlagsEnvironments": {
-    "description": "Returns a list of environments for the organization.\nSupports filtering by name, key, and DD_ENV.",
+    "description": "Returns a list of environments for the organization.\nUse `dd_env` to filter by an exact DD_ENV value in an environment's `queries` list.",
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
@@ -2329,7 +2339,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an existing environment's metadata such as\n name and description.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
@@ -2607,7 +2617,7 @@
     "request_schema_description": "Payload for creating a new tag rule."
   },
   "DeleteTagRule": {
-    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently. Deleting a `blocking` rule additionally requires the\n`telemetry_rules_activate` permission.",
     "summary": "Delete a tag rule"
   },
   "GetTagRule": {
@@ -2615,7 +2625,7 @@
     "summary": "Get a tag rule"
   },
   "UpdateTagRule": {
-    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.\nPromoting a rule from `surfacing` to `blocking` additionally requires the\n`telemetry_rules_activate` permission, and your organization must have access to\nblocking rules. You can't promote RUM rules to `blocking`.",
     "summary": "Update a tag rule",
     "request_description": "",
     "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
@@ -3896,7 +3906,7 @@
     "summary": "Get an annotated queue interaction"
   },
   "UpsertLLMObsAnnotations": {
-    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
+    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nUse the optional `annotator` field to name an external person or automated system that produced the labels\nwithout changing the authenticated creator, modifier, permissions, or per-user matching behavior.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
     "summary": "Create or update annotations",
     "request_description": "Payload for creating or updating annotations.",
     "request_schema_description": "Request to create or update annotations on interactions in an annotation queue."
@@ -5520,10 +5530,14 @@
     "summary": "List AI Gateway rate limits"
   },
   "CreateAiGatewayRateLimit": {
-    "description": "Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.",
+    "description": "Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.",
     "summary": "Create an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
+  },
+  "ListAiGatewayRateLimitInstancesSummaries": {
+    "description": "Aggregate the counters of every template rate limit in the organization in one call. The response has one summary per template, in the same order as the rate limit list. Each summary matches the response of the single-template counter summary endpoint without split_dim, including scope_restricted and truncated. Rate limits with one shared allowance aren't included. Summaries are cached for up to 15 seconds.",
+    "summary": "List AI Gateway rate limit counter summaries"
   },
   "GetAiGatewayRateLimitUsage": {
     "description": "Get live usage for the organization's rate limits. Returns requests and tokens counted in the rolling one-minute window and requests limited in the last 15 minutes for each enabled rate limit, plus `untracked` (traffic no enforced rate limit covers) and `total` (all gateway traffic).",
@@ -5538,10 +5552,18 @@
     "summary": "Get an AI Gateway rate limit"
   },
   "UpdateAiGatewayRateLimit": {
-    "description": "Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
+    "description": "Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
     "summary": "Update an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway rate limit."
+  },
+  "ListAiGatewayRateLimitInstances": {
+    "description": "List the hot counters of a template rate limit, one per matched user, Team, or value, with their live usage. The list includes only counters that, in the last hour, reached 80% or more of a limit or limited or would have limited a request. A counter appears within a few minutes of becoming hot. Usage is read for at most 200 counters per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.",
+    "summary": "List AI Gateway rate limit counters"
+  },
+  "GetAiGatewayRateLimitInstancesSummary": {
+    "description": "Aggregate a template rate limit's hot counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Hot counters are those that reached 80% or more of a limit, or that limited or would have limited a request, in the last hour. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.",
+    "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
     "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
@@ -6436,7 +6458,7 @@
     "request_schema_description": "The request body for unassigning seats from users for a product code."
   },
   "GetSeatsUsers": {
-    "description": "Get the list of users assigned seats for a product code.",
+    "description": "Get the list of users assigned seats for a product code.\n\nThis endpoint requires the `user_access_read` (User Access Read) permission\nin addition to at least one of `billing_read`, `incident_read`, or `on_call_read`.\nScoped application keys, personal access tokens, and service access tokens\nmust include the `user_access_read` scope. Credentials without this scope\nreceive a `403 Forbidden` response.",
     "summary": "Get users with seats"
   },
   "AssignSeatsUser": {
@@ -6890,29 +6912,29 @@
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
-    "description": "Get the list of all critical assets.",
+    "description": "Get the list of all dynamic severity rules (previously called critical assets).",
     "summary": "Get all critical assets"
   },
   "CreateSecurityMonitoringCriticalAsset": {
-    "description": "Create a new critical asset.",
+    "description": "Create a new dynamic severity rule (previously called critical assets).",
     "summary": "Create a critical asset",
     "request_description": "The definition of the new critical asset.",
     "request_schema_description": "Request object that includes the critical asset that you would like to create."
   },
   "GetCriticalAssetsAffectingRule": {
-    "description": "Get the list of critical assets that affect a specific existing rule by the rule's ID.",
+    "description": "Get the list of dynamic severity rules (previously called critical assets) that affect a specific existing rule by the rule's ID.",
     "summary": "Get critical assets affecting a specific rule"
   },
   "DeleteSecurityMonitoringCriticalAsset": {
-    "description": "Delete a specific critical asset.",
+    "description": "Delete a specific dynamic severity rule (previously called critical assets).",
     "summary": "Delete a critical asset"
   },
   "GetSecurityMonitoringCriticalAsset": {
-    "description": "Get the details of a specific critical asset.",
+    "description": "Get the details of a specific dynamic severity rule (previously called critical assets).",
     "summary": "Get a critical asset"
   },
   "UpdateSecurityMonitoringCriticalAsset": {
-    "description": "Update a specific critical asset.",
+    "description": "Update a specific dynamic severity rule (previously called critical assets).",
     "summary": "Update a critical asset",
     "request_description": "New definition of the critical asset. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the critical asset."
@@ -8383,7 +8405,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nSet `create_only=true` to atomically create exactly one quota in the caller's organization and reject an\nexisting quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.\nRepeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`\neven if the first request succeeded; reconcile the outcome before retrying or importing the quota.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nSet `create_only=true` to atomically create exactly one quota in the caller's organization and reject an\nexisting quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.\nRepeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`\neven if the first request succeeded; reconcile the outcome before retrying or importing the quota.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** One of the following:\n  - A user's handle, such as `jane@example.com`. User handles are returned in the\n    `data[].attributes.handle` field by the\n    [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n  - `\"*\"`, the default quota applied to users without a specific quota.\n  - `\"*agents*\"`, the quota shared by all autonomous agents.\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.\n\n**`team_id`** (private preview)\n\n- **Value:** The ID of a team. Team IDs are returned in the `data[].id` field by the\n  [Teams API](https://docs.datadoghq.com/api/latest/teams/get-all-teams/).\n- **Availability:** Quotas on `team_id` are in private preview. Contact your Datadog account team to request access.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."

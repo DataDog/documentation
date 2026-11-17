@@ -2147,16 +2147,11 @@ menu:
       url: metrics/units/
       parent: metrics_explorer
       weight: 601
-    - name: Summary
-      identifier: metrics_summary
-      url: metrics/summary/
+    - name: Catalog
+      identifier: metrics_catalog
+      url: metrics/catalog/
       parent: metrics_top_level
       weight: 7
-    - name: Volume
-      identifier: metrics_volume
-      url: metrics/volume/
-      parent: metrics_top_level
-      weight: 8
     - name: Advanced Filtering
       url: metrics/advanced-filtering/
       parent: metrics_top_level
@@ -5569,16 +5564,21 @@ menu:
       parent: dbm
       identifier: dbm_pr_reviews
       weight: 8
+    - name: Role Observability
+      url: database_monitoring/database_monitoring_role_observability/
+      parent: dbm
+      identifier: dbm_role_observability
+      weight: 9
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 10
+      weight: 11
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -6114,6 +6114,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_tracing
       weight: 7
+    - name: MCP Tools
+      url: gpu_monitoring/mcp_tools/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_mcp_tools
+      weight: 8
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6336,6 +6341,11 @@ menu:
       parent: cicd_flaky_management
       identifier: cicd_flaky_management_working_with
       weight: 501
+    - name: Code Annotations
+      url: tests/flaky_management/code_annotations/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_code_annotations
+      weight: 502
     - name: Features
       url: cicd/features/
       parent: cicd
@@ -8077,6 +8087,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
       weight: 608
+    - name: Rename a Cluster
+      url: /byoc-logs/operate/rename_cluster
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_rename_cluster
+      weight: 609
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -10918,6 +10933,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_request_access
       weight: 404
+    - name: MCP Access
+      url: account_management/rbac/mcp_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_mcp_access
+      weight: 405
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
@@ -11138,6 +11158,16 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
+    - name: Finalized Usage Metrics
+      identifier: account_management_billing_finalized_usage_metrics
+      url: account_management/billing/usage_metrics/finalized_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150401
+    - name: Estimated Usage Metrics
+      identifier: account_management_billing_estimated_usage_metrics
+      url: account_management/billing/usage_metrics/estimated_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150402
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/

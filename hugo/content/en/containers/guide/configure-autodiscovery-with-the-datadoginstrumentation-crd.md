@@ -142,6 +142,8 @@ You can target the following Kubernetes resources:
 | Job | `batch/v1/jobs` | 7.82.0 | |
 | Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |
 | Rollout | `argoproj.io/v1alpha1/rollouts` | 7.83.0 | Requires [Argo Rollouts][7]. |
+| Workflow | `argoproj.io/v1alpha1/workflows` | 7.86.0 | Requires [Argo Workflows](https://argo-workflows.readthedocs.io/en/latest/). |
+| CronWorkflow | `argoproj.io/v1alpha1/cronworkflows` | 7.86.0 | Requires [Argo Workflows](https://argo-workflows.readthedocs.io/en/latest/). |
 
 This example configures a [Redis integration][4] for a `StatefulSet` named `redis`, mirroring this [annotation-based example][2].
 

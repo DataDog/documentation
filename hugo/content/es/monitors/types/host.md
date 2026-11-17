@@ -2,87 +2,86 @@
 aliases:
 - /es/monitors/monitor_types/host
 - /es/monitors/create/types/host/
-description: Comprueba si uno o más hosts están informando a Datadog
+description: Verifique si uno o más servidores están reportando a Datadog
 further_reading:
 - link: /infrastructure/
   tag: Documentación
-  text: Monitorización de infraestructura
+  text: Infrastructure Monitoring
 - link: /monitors/notify/
   tag: Documentación
-  text: Configurar las notificaciones de tu monitor
+  text: Configure las notificaciones de seguimiento
 - link: /monitors/downtimes/
   tag: Documentación
-  text: Programar una caída del sistema para silenciar un monitor
+  text: Programe un tiempo de inactividad para silenciar un seguimiento
 - link: /monitors/status/
   tag: Documentación
-  text: Consultar el estado de tu monitor
-title: Monitor de host
+  text: Consulte el estado de su seguimiento
+title: Host Monitor
 ---
+## Descripción general {#overview}
 
-## Información general
+El monitoreo de infraestructura proporciona visibilidad de todo su entorno de TI, incluidos servidores alojados en la nube y locales, a través de muchas integraciones. Utilice el monitor de servidor para mantenerse informado sobre qué servidores están enviando datos y cuáles no, para garantizar una visibilidad continua.
 
-La monitorización de infraestructura proporciona visibilidad de todo tu entorno de TI, incluidos los servidores alojados en la nube y on-premise, a través de muchas integraciones. Utiliza el monitor de host para mantenerte informado sobre qué hosts están o no enviando datos para garantizar una visibilidad continua.
+Cada Datadog Agent reporta una verificación de servicio llamada `datadog.agent.up` con el estado `OK`. Puede monitorear esta verificación en uno o más servidores utilizando un monitor de servidor.
 
-Cada Datadog Agent informa de un check de servicio llamado `datadog.agent.up` con el estado `OK`. Puedez monitorizar este check a través de uno o más hosts utilizando un monitor de host.
+<div class="alert alert-info">Los servidores que ejecutan el Datadog UNIX Agent heredado en AIX no reportan la <code>datadog.agent.up</code> verificación de servicio. Puede utilizar la métrica <code>datadog.agent.running</code> para monitorear el tiempo de actividad de un UNIX Agent. La métrica emite un valor de <code>1</code> si el Agent está reportando a Datadog. El Agent 7 en AIX reporta la <code>datadog.agent.up</code> verificación de servicio como los Agents en otras plataformas.</div>
 
-<div class="alert alert-danger">Los AIX Agents no informan del check de servicio <code>datadog.agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un AIX Agent. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
+## Creación de un seguimiento {#monitor-creation}
 
-## Creación de un monitor
+Para crear un [monitor de servidor][1] en Datadog, utilice la navegación principal: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Host{{< /ui >}}.
 
-Para crear un [monitor de host][1] en Datadog, utiliza la navegación principal: *Monitors --> New Monitor --> Host* (Monitores > Nuevo monitor > Host).
+### Elija servidores por nombre o etiqueta {#pick-hosts-by-name-or-tag}
 
-### Elige hosts por nombre o etiqueta
+Seleccione los servidores que desea monitorear por nombre o etiqueta, o elija {{< ui >}}All Monitored Hosts{{< /ui >}}. Si necesita excluir ciertos servidores, utilice el segundo campo para listar nombres o etiquetas.
 
-Selecciona los hosts para monitorizar eligiendo los nombres de host, etiquetas, o elige `All Monitored Hosts`. Si necesitas excluir determinados hosts, utiliza el segundo campo para hacer una lista de nombres o etiquetas.
+- El campo de inclusión utiliza lógica `AND`. Todos los nombres y etiquetas listados deben estar presentes en un servidor para que se incluya.
+- El campo de exclusión utiliza lógica `OR`. Se excluye cualquier servidor que tenga uno de los nombres o etiquetas listados.
 
-- El campo include (incluir) utiliza la lógica `AND`. Todos los nombres y etiquetas de la lista deben estar presentes en un host para que se incluya.
-- El campo exclude (excluir) utiliza la lógica `OR`. Se excluye cualquier host con un nombre o etiqueta de la lista.
+#### Ejemplos {#examples}
 
-#### Ejemplos
-
-| Monitor                                                | Include               | Exclude     |
+| Monitorear                                                | Incluir               | Excluir     |
 |--------------------------------------------------------|-----------------------|-------------|
-| Incluye todos los hosts con la etiqueta `env:prod`              | `env:prod`            | leave empty |
-| Incluye todos los hosts excepto los hosts con la etiqueta `env:test` | `All Monitored Hosts` | `env:test`  |
+| Incluir todos los servidores con la etiqueta `env:prod`              | `env:prod`            | dejar vacío |
+| Incluir todos los servidores excepto los que tengan la etiqueta `env:test` | `All Monitored Hosts` | `env:test`  |
 
-### Definir condiciones de alerta
+### Establecer condiciones de alerta {#set-alert-conditions}
 
-En esta sección, elige entre una **Alerta de check** o una **Alerta de clúster**:
+En esta sección, elija entre un {{< ui >}}Check Alert{{< /ui >}} o {{< ui >}}Cluster Alert{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-Una alerta de check rastrea si un host deja de informar durante un tiempo determinado. Demasiado tiempo tras una ejecución de check puede ser señal de problemas con el envío de datos desde el host.
+Una alerta de verificación rastrea si un servidor deja de reportar durante un tiempo determinado. Que haya pasado demasiado tiempo desde la ejecución de una verificación puede ser señal de problemas con el envío de datos desde el servidor.
 
-Introduce el número de minutos para comprobar los datos faltantes. El valor por defecto es de 2 minutos.
+Ingrese la cantidad de minutos para verificar si faltan datos. El valor predeterminado es 2 minutos.
 
-Si `datadog.agent.up` deja de informar de un estado `OK` durante más de los minutos especificados, se activa una alerta.
+Si `datadog.agent.up` deja de informar un estado `OK` durante más de los minutos especificados, se activa una alerta.
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-Una alerta de clúster rastrea si un determinado porcentaje de hosts han dejado de informar durante un periodo determinado.
+Una alerta de clúster rastrea si cierto porcentaje de servidores ha dejado de informar durante una cantidad de tiempo determinada.
 
 Para configurar una alerta de clúster:
 
-1. Decide si agrupas o no tus hosts según una etiqueta. `Ungrouped` calcula el porcentaje de estado en todos los hosts incluidos. `Grouped` calcula el porcentaje de estado por grupo.
-2. Selecciona el porcentaje para los umbrales de alerta y de advertencia. Solo se requiere un parámetro (alerta o advertencia).
-3. Introduce el número de minutos para comprobar los datos faltantes. El valor por defecto es de 2 minutos.
+1. Decida si desea agrupar o no sus servidores de acuerdo con una etiqueta. {{< ui >}}Ungrouped{{< /ui >}} calcula el porcentaje de estado entre todos los servidores incluidos. {{< ui >}}Grouped{{< /ui >}} calcula el porcentaje de estado por grupo.
+2. Seleccione el porcentaje para los umbrales de alerta y advertencia. Solo se requiere una configuración (alerta o advertencia).
+3. Ingrese la cantidad de minutos para verificar si faltan datos. El valor predeterminado es 2 minutos.
 
-Si `datadog.agent.up` deja de informar de un estado `OK` durante más de los minutos especificados y se alcanza el umbral porcentual, se activa una alerta.
+Si `datadog.agent.up` deja de informar un estado `OK` durante más de los minutos especificados y se alcanza el umbral de porcentaje, se activa una alerta.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Condiciones de alerta avanzadas
+### Condiciones de alerta avanzadas {#advanced-alert-conditions}
 
-Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (resolución automática, retraso de nuevo grupo, etc.), consulta la página [Configuración de monitor][2].
+Para obtener instrucciones detalladas sobre las opciones de alerta avanzadas (resolución automática, retraso de nuevo grupo, etc.), consulte la página de [Monitor Configuration][2].
 
-### Notificaciones
+### Notifications {#notifications}
 
-Para obtener instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulta la página [Notificaciones][3].
+Para obtener instrucciones detalladas sobre la sección {{< ui >}}Configure notifications and automations{{< /ui >}}, consulte la página de [Notifications][3].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

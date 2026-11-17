@@ -123,7 +123,7 @@ See [Create an Application Load Balancer][20] for more information about Interne
 
 ### Amazon EC2 instance
 
-An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in either of the following cases:
+An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in any of the following cases:
 
 * **"Public subnet"-determined access** if all of the following are true:
 
@@ -143,6 +143,13 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in 
   | The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
   | The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
   | The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer's security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
+
+***OR***
+
+- **Reachability-path-determined access** if the Security Graph identifies a network reachability path connecting the instance to the internet through one of the following routes:
+  - Behind [AWS Global Accelerator][64].
+  - Behind [Amazon API Gateway][65] through a VPC Link to an internal load balancer.
+  - Behind [Amazon CloudFront][66], where the load balancer is restricted to CloudFront's IP list.
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
@@ -425,4 +432,6 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
 [62]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp
 [63]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview
-
+[64]: https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html
+[65]: https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
+[66]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html

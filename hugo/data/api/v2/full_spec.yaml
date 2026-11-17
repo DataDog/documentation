@@ -325,6 +325,47 @@ components:
       schema:
         format: uuid
         type: string
+    AiGatewayRateLimitInstanceLimit:
+      description: Maximum number of rate limit counters to return.
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 50
+        format: int64
+        maximum: 500
+        minimum: 1
+        type: integer
+    AiGatewayRateLimitInstanceOffset:
+      description: Number of rate limit counters to skip.
+      in: query
+      name: offset
+      required: false
+      schema:
+        default: 0
+        format: int64
+        minimum: 0
+        type: integer
+    AiGatewayRateLimitInstanceSort:
+      description: Sort order for rate limit counters.
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: "#/components/schemas/AiGatewayRateLimitInstanceSort"
+    AiGatewayRateLimitInstanceSplitDim:
+      description: Keep only counters whose split dimension equals a value, written as `<dim>=<value>`, such as `split_dim=user_id=<uuid>&split_dim=model=gpt-4o`. Dimensions use the `split_dims` names `user_id`, `team_id`, `model`, `provider`, and `tag:<key>`. Repeat the parameter to filter on several dimensions; a counter must match all of them. Each dimension may appear once and must be a per-value dimension of the rate limit.
+      example:
+        - user_id=11111111-1111-1111-1111-111111111111
+      explode: true
+      in: query
+      name: split_dim
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
     AiGatewayRoutingRuleForceDelete:
       description: Delete referencing tiers and recursively delete parent rules left without tiers.
       in: query
@@ -889,6 +930,26 @@ components:
       required: true
       schema:
         type: string
+    GetIssueImpactFromParameter:
+      description: Start of the time window, in milliseconds since the Unix epoch. Must be before `filter[to]`.
+      example: 1794152269473
+      in: query
+      name: filter[from]
+      required: true
+      schema:
+        format: int64
+        type: integer
+    GetIssueImpactToParameter:
+      description: |-
+        End of the time window, in milliseconds since the Unix epoch. Use the issue's `last_seen` to end the window at
+        its latest error.
+      example: 1794238669473
+      in: query
+      name: filter[to]
+      required: true
+      schema:
+        format: int64
+        type: integer
     GetIssueIncludeQueryParameter:
       description: |-
         Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
@@ -10785,7 +10846,7 @@ components:
         - MAX
     AiGatewayNullableRoutingRuleTierOrdering:
       description: >-
-        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination.
+        How a tier orders its targets. Omission preserves the saved same-position tier on update; null resets to configured. New tiers default to configured. The weighted_affinity ordering distributes first-choice assignments by relative target weights and accepts only model targets with an explicit provider, without repeated provider and model pairs in the same tier. The `classified` ordering is allowed only in the first tier and requires a classifier, destination rubrics, and one default destination. Its targets are model targets that each name one provider, not "*". Besides the default, it needs 1 to 9 destinations, each with a different rubric. Classified routing is in Preview: saving a classified tier returns 403 Forbidden unless the feature is enabled for the organization.
       enum:
         - configured
         - weighted_affinity
@@ -11315,6 +11376,13 @@ components:
     AiGatewayRateLimitAttributes:
       description: Attributes of an AI Gateway rate limit.
       properties:
+        cost_microcents_per_minute:
+          description: Maximum priced spend per rolling minute, in microcents of 1e-8 USD each, shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit cost.
+          example: 100000000
+          format: int64
+          minimum: 1
+          nullable: true
+          type: integer
         created_at:
           description: Creation timestamp.
           example: "2026-09-01T00:00:00Z"
@@ -11329,13 +11397,17 @@ components:
           example: true
           type: boolean
         input_tokens_per_minute:
-          description: Maximum input tokens per rolling minute shared by all matching traffic. Null when this rule does not limit input tokens.
+          description: Maximum input tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit input tokens.
           example: 500000
           format: int64
           maximum: 100000000000
           minimum: 1
           nullable: true
           type: integer
+        is_template:
+          description: Whether the selector gives each matching value its own allowance, that is, whether it has at least one per_value entry. Returned even when scope_restricted hides the selector.
+          example: false
+          type: boolean
         mode:
           $ref: "#/components/schemas/AiGatewayRateLimitMode"
         monitor_id:
@@ -11349,7 +11421,7 @@ components:
           example: Default rate limit
           type: string
         output_tokens_per_minute:
-          description: Maximum output tokens per rolling minute shared by all matching traffic. Null when this rule does not limit output tokens.
+          description: Maximum output tokens per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit output tokens.
           example: 200000
           format: int64
           maximum: 100000000000
@@ -11357,7 +11429,7 @@ components:
           nullable: true
           type: integer
         requests_per_minute:
-          description: Maximum requests per rolling minute shared by all matching traffic. Null when this rule does not limit requests.
+          description: Maximum requests per rolling minute shared by all matching traffic, or per counter for a template rate limit. Null when this rule does not limit requests.
           example: 1000
           format: int64
           maximum: 10000000
@@ -11373,6 +11445,8 @@ components:
           description: Whether provider or model scope metadata was withheld. Omit unchanged scope fields on an unrelated update to preserve their saved values.
           example: false
           type: boolean
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -11386,6 +11460,13 @@ components:
           format: uuid
           nullable: true
           type: string
+        template_split_dims:
+          description: Dimensions of the selector's per_value entries, such as user_id or tag:env, each matching value of which gets its own allowance. Empty unless is_template is true. Returned even when scope_restricted hides the selector.
+          example: []
+          items:
+            description: A selector dimension, such as user_id, team_id, model, provider, or tag:<key>.
+            type: string
+          type: array
         updated_at:
           description: Last modification timestamp.
           example: "2026-09-15T14:30:00Z"
@@ -11401,10 +11482,18 @@ components:
           format: uuid
           nullable: true
           type: string
+        window_limits:
+          description: Limits over rolling windows longer than a minute. Each limit counts the rule's matching traffic, or each counter of a template rate limit, over its window. Per-minute limits are in the `*_per_minute` fields. This list is empty when the rule has no window limits.
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitWindowLimit"
+          maxItems: 4
+          type: array
       required:
         - scope_restricted
         - name
         - tags
+        - is_template
+        - template_split_dims
         - mode
         - enabled
         - revision
@@ -11416,6 +11505,13 @@ components:
     AiGatewayRateLimitCreateAttributes:
       description: Attributes used to create an AI Gateway rate limit.
       properties:
+        cost_microcents_per_minute:
+          description: Maximum priced spend per rolling minute, in microcents of 1e-8 USD each. In `ENFORCE` mode, the gateway rejects requests to models with no pricing because their cost can't be counted.
+          example: 100000000
+          format: int64
+          minimum: 1
+          nullable: true
+          type: integer
         input_tokens_per_minute:
           description: Maximum input tokens per rolling minute.
           format: int64
@@ -11437,13 +11533,15 @@ components:
           nullable: true
           type: integer
         requests_per_minute:
-          description: Maximum requests per rolling minute. At least one of `requests_per_minute`, `input_tokens_per_minute`, and `output_tokens_per_minute` is required.
+          description: Maximum requests per rolling minute. At least one of `requests_per_minute`, `input_tokens_per_minute`, `output_tokens_per_minute`, `cost_microcents_per_minute`, or a non-empty `window_limits` is required.
           example: 600
           format: int64
           maximum: 10000000
           minimum: 1
           nullable: true
           type: integer
+        selector:
+          $ref: "#/components/schemas/AiGatewayRateLimitSelector"
         tags:
           additionalProperties:
             type: string
@@ -11459,6 +11557,12 @@ components:
           example: 00000000-0000-4000-8000-000000000001
           format: uuid
           type: string
+        window_limits:
+          description: Limits over rolling windows longer than a minute, such as $20 of spend per 24 hours. This field is available only to organizations with the feature enabled. Other organizations receive a 400 Bad Request response for a non-empty list. Each limit counts the rule's matching traffic, or each counter of a template rate limit, over its window. Set per-minute limits in the `*_per_minute` fields. A rule can have at most four limits in total, including any per-minute limits that are set. Each metric and window pair can appear only once, and for the same metric, a longer window must have a larger amount. In `ENFORCE` mode, the gateway rejects a request that exceeds any limit with HTTP 429 and a `Retry-After` header. If the list includes a `cost` limit, the gateway also rejects requests to models with no pricing because their cost can't be counted.
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitWindowLimit"
+          maxItems: 4
+          type: array
       required:
         - name
       type: object
@@ -11481,6 +11585,258 @@ components:
       required:
         - data
       type: object
+    AiGatewayRateLimitInstanceAttributes:
+      description: One counter of a template rate limit and its live usage.
+      properties:
+        cost_microcents:
+          description: Priced spend, in microcents, counted in the rolling one-minute window. The value is 0 when the rate limit doesn't limit cost.
+          example: 25000000
+          format: int64
+          type: integer
+        cost_microcents_per_minute:
+          description: The rate limit's per-counter spend limit, in microcents. Null when the rate limit doesn't limit cost.
+          example: 100000000
+          format: int64
+          nullable: true
+          type: integer
+        first_seen:
+          description: When the gateway first recorded a request for this counter.
+          example: "2026-10-28T10:00:00Z"
+          format: date-time
+          type: string
+        input_tokens:
+          description: Input tokens counted in the rolling one-minute window.
+          example: 15000
+          format: int64
+          type: integer
+        input_tokens_per_minute:
+          description: The rate limit's per-counter input token limit. Null when it doesn't limit input tokens.
+          example: 100000
+          format: int64
+          nullable: true
+          type: integer
+        instance_key:
+          description: Opaque canonical key identifying the counter.
+          example: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        last_seen:
+          description: When the gateway last recorded this counter as hot, meaning it was at 80% or more of a limit, or it limited or would have limited a request. This value can lag live traffic by a few minutes.
+          example: "2026-10-28T10:05:00Z"
+          format: date-time
+          type: string
+        limited_requests:
+          description: Requests this counter rejected in the last 15 minutes (ENFORCE).
+          example: 0
+          format: int64
+          type: integer
+        output_tokens:
+          description: Output tokens counted in the rolling one-minute window.
+          example: 4000
+          format: int64
+          type: integer
+        output_tokens_per_minute:
+          description: The rate limit's per-counter output token limit. Null when it doesn't limit output tokens.
+          example: 20000
+          format: int64
+          nullable: true
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        requests:
+          description: Requests counted in the rolling one-minute window.
+          example: 42
+          format: int64
+          type: integer
+        requests_per_minute:
+          description: The rate limit's per-counter request limit. Null when it doesn't limit requests.
+          example: 60
+          format: int64
+          nullable: true
+          type: integer
+        split_dims:
+          additionalProperties:
+            type: string
+          description: The counter's value for each per-value dimension. user_id and team_id values are raw UUIDs.
+          example:
+            user_id: 11111111-1111-1111-1111-111111111111
+          type: object
+        usage_known:
+          description: False when this counter's usage wasn't read because the request already read the most counters it may. Its usage then reads as zero.
+          example: true
+          type: boolean
+        utilization:
+          description: The fullest of the rate limit's limits in the rolling window, as a fraction. 1 or more means the counter is at its limit.
+          example: 0.7
+          format: double
+          type: number
+        would_limit_requests:
+          description: Requests this counter would have rejected in the last 15 minutes (ALERT).
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_key
+        - split_dims
+        - first_seen
+        - last_seen
+        - requests
+        - input_tokens
+        - output_tokens
+        - limited_requests
+        - would_limit_requests
+        - utilization
+        - usage_known
+      type: object
+    AiGatewayRateLimitInstanceListResponse:
+      description: Response containing counters of a template rate limit.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitInstanceResource"
+            description: One counter of a template rate limit.
+          type: array
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstanceResource:
+      description: One counter of a template rate limit.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceAttributes"
+        id:
+          description: Counter ID, the rate limit UUID and instance key joined by `|`.
+          example: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstanceType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstanceSort:
+      default: utilization_desc
+      description: Sort order for rate limit counters.
+      enum:
+        - utilization_desc
+        - last_seen_desc
+        - key_asc
+      example: utilization_desc
+      type: string
+      x-enum-varnames:
+        - UTILIZATION_DESC
+        - LAST_SEEN_DESC
+        - KEY_ASC
+    AiGatewayRateLimitInstanceType:
+      description: AI Gateway rate limit counter resource type.
+      enum:
+        - rate-limit-instances
+      example: rate-limit-instances
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES
+    AiGatewayRateLimitInstancesSummaryAttributes:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        instance_count:
+          description: Number of counters that were at 80% or more of a limit, or that limited or would have limited a request, in the last hour. Other counters aren't recorded.
+          example: 14
+          format: int64
+          type: integer
+        limited_requests:
+          description: Requests the counters rejected in the last 15 minutes (ENFORCE), totaled over the counters whose usage was read.
+          example: 25
+          format: int64
+          type: integer
+        limiting_count:
+          description: Counters that limited, or would have limited, a request in the last 15 minutes.
+          example: 2
+          format: int64
+          type: integer
+        max_utilization:
+          description: Utilization of the fullest counter.
+          example: 1.2
+          format: double
+          type: number
+        near_limit_count:
+          description: Counters at 80% or more of a limit in the rolling window.
+          example: 3
+          format: int64
+          type: integer
+        rate_limit_id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        scope_restricted:
+          description: True when the caller can't see the template's selector because it lists a provider or model the caller can't access. The counters are then hidden, and every count is zero.
+          example: false
+          type: boolean
+        truncated:
+          description: True when some recently active counters' usage wasn't read, so the counts may be low.
+          example: false
+          type: boolean
+        would_limit_requests:
+          description: Requests the counters would have rejected in the last 15 minutes (ALERT), totaled over the counters whose usage was read.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - rate_limit_id
+        - instance_count
+        - near_limit_count
+        - limiting_count
+        - max_utilization
+        - truncated
+      type: object
+    AiGatewayRateLimitInstancesSummaryListResponse:
+      description: Response containing the counter summary of every template rate limit in the organization.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResource"
+            description: The aggregate of one template rate limit's counters.
+          type: array
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstancesSummaryResource:
+      description: Aggregate of a template rate limit's counters.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryAttributes"
+        id:
+          description: Rate limit UUID.
+          example: 33333333-3333-3333-3333-333333333333
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    AiGatewayRateLimitInstancesSummaryResponse:
+      description: Response containing the aggregate of a template rate limit's counters.
+      properties:
+        data:
+          $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResource"
+      required:
+        - data
+      type: object
+    AiGatewayRateLimitInstancesSummaryType:
+      description: AI Gateway rate limit counter summary resource type.
+      enum:
+        - rate-limit-instances-summary
+      example: rate-limit-instances-summary
+      type: string
+      x-enum-varnames:
+        - RATE_LIMIT_INSTANCES_SUMMARY
     AiGatewayRateLimitListResponse:
       description: Response containing AI Gateway rate limits.
       properties:
@@ -11527,6 +11883,36 @@ components:
       required:
         - data
       type: object
+    AiGatewayRateLimitSelector:
+      description: Dimension rules for a template rate limit, which gives each matched user, Team, or value its own allowance with the rule's limits. Can't be combined with user_id, team_id, or tags, and can't be changed after creation. Omit for a rule with one shared allowance.
+      items:
+        $ref: "#/components/schemas/AiGatewayRateLimitSelectorEntry"
+      nullable: true
+      type: array
+    AiGatewayRateLimitSelectorEntry:
+      description: One dimension rule in a template rate limit selector.
+      properties:
+        dim:
+          description: "Dimension to match: user_id, team_id, model, provider, or tag:<key>. Reserved metadata tag keys are rejected."
+          example: user_id
+          type: string
+        per_value:
+          default: false
+          description: Give each matched value its own allowance when true. Otherwise, matched values share the allowance within the other separated dimensions.
+          example: true
+          type: boolean
+        values:
+          description: Allowed dimension values. Omit to match any value; with per_value true, a request must still carry the dimension to match. An explicit list must contain at least one value. Listed team_id values must be existing Teams without open membership.
+          example:
+            - 11111111-1111-1111-1111-111111111111
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - dim
+        - per_value
+      type: object
     AiGatewayRateLimitType:
       description: AI Gateway rate limit resource type.
       enum:
@@ -11538,11 +11924,17 @@ components:
     AiGatewayRateLimitUpdateAttributes:
       description: Attributes used to update an AI Gateway rate limit. Only sent fields are changed.
       properties:
+        cost_microcents_per_minute:
+          description: Spend limit in microcents per rolling minute. Set to 0 to remove the cost limit. Null is ignored. At least one limit, per-minute or in `window_limits`, must remain.
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
         enabled:
           description: Whether this rate limit is active.
           type: boolean
         input_tokens_per_minute:
-          description: Set to 0 to remove the request limit. Null is ignored. At least one limit must remain.
+          description: Set to 0 to remove the input token limit. Null is ignored. At least one limit, per-minute or in `window_limits`, must remain.
           format: int64
           maximum: 100000000000
           minimum: 0
@@ -11554,14 +11946,14 @@ components:
           description: Rate limit name.
           type: string
         output_tokens_per_minute:
-          description: Set to 0 to remove the request limit. Null is ignored. At least one limit must remain.
+          description: Set to 0 to remove the output token limit. Null is ignored. At least one limit, per-minute or in `window_limits`, must remain.
           format: int64
           maximum: 100000000000
           minimum: 0
           nullable: true
           type: integer
         requests_per_minute:
-          description: Set to 0 to remove the request limit. Null is ignored. At least one limit must remain.
+          description: Set to 0 to remove the request limit. Null is ignored. At least one limit, per-minute or in `window_limits`, must remain.
           format: int64
           maximum: 10000000
           minimum: 0
@@ -11581,6 +11973,13 @@ components:
           description: Replaces the user scope. An empty string clears it. Null is ignored.
           nullable: true
           type: string
+        window_limits:
+          description: Replaces all limits over rolling windows longer than a minute. If `window_limits` is null or omitted, the existing limits are unchanged. An empty array removes them all. This field is available only to organizations with the feature enabled. Other organizations receive a 400 Bad Request response for a non-empty list. The same rules as on create apply. A rule can have at most four limits in total, including any per-minute limits that are set. Each metric and window pair can appear only once, and for the same metric, a longer window must have a larger amount. In `ENFORCE` mode, if the list includes a `cost` limit, the gateway rejects requests to models with no pricing because their cost can't be counted.
+          items:
+            $ref: "#/components/schemas/AiGatewayRateLimitWindowLimit"
+          maxItems: 4
+          nullable: true
+          type: array
       type: object
     AiGatewayRateLimitUpdateData:
       description: Data used to update an AI Gateway rate limit.
@@ -11610,6 +12009,11 @@ components:
     AiGatewayRateLimitUsageAttributes:
       description: Live consumption of one AI Gateway rate limit.
       properties:
+        cost_microcents:
+          description: Priced spend, in microcents, counted in the rolling one-minute window. Only rules with a cost limit count spend, so the value is 0 for other rules and for the untracked and total entries.
+          example: 25000000
+          format: int64
+          type: integer
         input_tokens:
           description: Input tokens counted in the rolling one-minute window.
           example: 45000
@@ -11677,6 +12081,60 @@ components:
       type: string
       x-enum-varnames:
         - RATE_LIMIT_USAGE
+    AiGatewayRateLimitWindowLimit:
+      description: A limit on one metric over a rolling window longer than a minute.
+      properties:
+        amount:
+          description: Maximum amount of the metric over the window. For `cost`, the amount is priced spend in microcents of 1e-8 USD each, as in `cost_microcents_per_minute`. For the same metric, a longer window must have a larger amount.
+          example: 2000000000
+          format: int64
+          minimum: 1
+          type: integer
+        metric:
+          $ref: "#/components/schemas/AiGatewayRateLimitWindowLimitMetric"
+        window:
+          $ref: "#/components/schemas/AiGatewayRateLimitWindowLimitWindow"
+      required:
+        - metric
+        - window
+        - amount
+      type: object
+    AiGatewayRateLimitWindowLimitMetric:
+      description: The metric that a window limit counts. `cost` counts priced spend in microcents.
+      enum:
+        - requests
+        - input_tokens
+        - output_tokens
+        - cost
+      example: cost
+      type: string
+      x-enum-varnames:
+        - REQUESTS
+        - INPUT_TOKENS
+        - OUTPUT_TOKENS
+        - COST
+    AiGatewayRateLimitWindowLimitWindow:
+      description: The rolling window that a limit applies to. For per-minute limits, use the `*_per_minute` fields instead.
+      enum:
+        - 5m
+        - 15m
+        - 30m
+        - 1h
+        - 3h
+        - 6h
+        - 12h
+        - 24h
+      example: 24h
+      type: string
+      x-enum-varnames:
+        - FIVE_MINUTES
+        - FIFTEEN_MINUTES
+        - THIRTY_MINUTES
+        - ONE_HOUR
+        - THREE_HOURS
+        - SIX_HOURS
+        - TWELVE_HOURS
+        - TWENTY_FOUR_HOURS
     AiGatewayRestrictedDetailsMeta:
       description: Visibility information for identifying instance details.
       properties:
@@ -11734,7 +12192,8 @@ components:
           example: gpt-6-luna
           type: string
         provider:
-          description: Decision-model provider slug. Omit together with model to preserve the saved selection.
+          description: >-
+            Decision-model provider slug. It must name a provider of type `openai`, `baseten`, or `typesafe`, the provider types that serve a decision model. Omit together with model to preserve the saved selection.
           example: openai
           type: string
       type: object
@@ -11986,13 +12445,14 @@ components:
           minimum: 1
           type: integer
         provider:
-          description: Provider slug. weighted_affinity requires an explicit provider and does not allow "*".
+          description: Provider slug. weighted_affinity and classified tiers require an explicit provider and do not allow "*".
           example: prod-us
           type: string
         reasoning_level:
           $ref: "#/components/schemas/AiGatewayRoutingReasoningLevel"
         rubric:
-          description: Destination rubric in a classified tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
+          description: >-
+            Destination rubric in a classified tier: when the decision model picks this destination. Up to 300 characters after leading and trailing spaces are trimmed, and different for each destination in the tier. Omission preserves a saved value; null clears it. Must be absent on the default destination.
           example: Short factual questions.
           maxLength: 300
           nullable: true
@@ -12605,12 +13065,14 @@ components:
             $ref: "#/components/schemas/GuardrailMetric"
           type: array
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
+          description: >-
+            The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule.
           example: "prod-rollout"
           type: string
         name:
@@ -12668,7 +13130,8 @@ components:
         attributes:
           $ref: "#/components/schemas/Allocation"
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -12803,7 +13266,8 @@ components:
           nullable: true
           type: string
         allocation_id:
-          description: "The unique identifier (UUID) of the targeting rule allocation this progressive rollout belongs to. This is not the allocation key that SDKs report in evaluation results and exposure events."
+          description: >-
+            The unique identifier (UUID) of the targeting rule allocation this progressive rollout belongs to. This is not the allocation key that SDKs report in evaluation results and exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -28027,7 +28491,8 @@ components:
         saved filter with `saved_filter_id`. The two shapes are mutually exclusive.
       properties:
         attribute:
-          description: The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
+          description: >-
+            The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
           example: "user_tier"
           type: string
         operator:
@@ -28041,7 +28506,8 @@ components:
           format: uuid
           type: string
         value:
-          description: Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
+          description: >-
+            Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
           example: ["premium", "enterprise"]
           items:
             description: Target value for the selected operator.
@@ -30615,6 +31081,15 @@ components:
           example: 12
           format: int64
           type: integer
+        flags:
+          additionalProperties:
+            $ref: "#/components/schemas/CoverageSummaryFlagStats"
+          description: |-
+            Coverage statistics broken down by flag. Each entry contains only coverage percentages.
+            Branch summaries include the flags of the latest covered commit, including coverage carried forward
+            to that commit. Pull request summaries include flags across all commits of the pull request.
+          nullable: true
+          type: object
         patch_coverage:
           description: Overall patch coverage percentage.
           example: 70.1
@@ -30671,6 +31146,22 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/CoverageSummaryType"
+      type: object
+    CoverageSummaryFlagStats:
+      description: Coverage statistics for a specific flag.
+      properties:
+        patch_coverage:
+          description: Patch coverage percentage for the flag.
+          example: 70.0
+          format: double
+          nullable: true
+          type: number
+        total_coverage:
+          description: Total coverage percentage for the flag.
+          example: 75.0
+          format: double
+          nullable: true
+          type: number
       type: object
     CoverageSummaryResponse:
       description: Response object containing code coverage summary.
@@ -31905,14 +32396,22 @@ components:
           example: false
           type: boolean
         name:
-          description: The name of the environment.
+          description: >-
+            The name of the environment. Required on every request and unique within the organization. Must contain 1 to 200 ASCII characters, start with a letter or digit, and contain only letters, digits, spaces, underscores, hyphens, and periods.
           example: "env-search-term"
           type: string
+        observe_full_evaluation_data:
+          description: >-
+            Controls whether feature flag evaluation events may include original targeting identifiers and full evaluation context. When true, SDKs may include this data. When false, SDKs hash targeting identifiers and omit evaluation context. If omitted, defaults to false.
+          example: true
+          type: boolean
         queries:
-          description: List of queries to define the environment scope.
+          description: >-
+            Required list of at least one exact DD_ENV value associated with this environment. Values cannot be used by another environment in the same organization. Wildcards and search expressions are not supported.
           example: ["staging", "test"]
           items:
-            description: A query string used to match the environment scope.
+            description: >-
+              An exact DD_ENV value containing 1 to 200 ASCII characters. Must start with a letter and contain only letters, digits, underscores, hyphens, colons, periods, and slashes.
             type: string
           minItems: 1
           type: array
@@ -33244,7 +33743,7 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             components:
               - name: API
                 position: 0
@@ -33263,10 +33762,10 @@ components:
                 position: 2
                 type: component
             domain_prefix: status-page-us1
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -33291,7 +33790,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         components:
           description: The components displayed on the status page.
@@ -33321,14 +33820,14 @@ components:
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -33342,7 +33841,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -35311,6 +35810,8 @@ components:
           description: Name of the Custom Costs file.
           example: "my_file.json"
           type: string
+        preview_unavailable_reason:
+          $ref: "#/components/schemas/CustomCostsFilePreviewUnavailableReason"
         provider_names:
           description: Providers contained in the Custom Costs file.
           items:
@@ -35342,6 +35843,15 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFilePreviewUnavailableReason:
+      description: >-
+        Reason the content of the Custom Costs file is not returned. Only set when `content` is omitted.
+      enum:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      example: CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      type: string
+      x-enum-varnames:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
     CustomCostsFileUpdateAttributes:
       description: Attributes of a Custom Costs file that can be updated.
       properties:
@@ -35416,11 +35926,12 @@ components:
       description: Metadata of the user that has uploaded the Custom Costs file.
       properties:
         email:
-          description: The name of the Custom Costs file.
+          description: >-
+            Handle of the user. This is usually the user's email address, but can be another identifier (for example, a UUID for a service account).
           example: "email.test@datadohq.com"
           type: string
         icon:
-          description: The name of the Custom Costs file.
+          description: Icon of the user.
           example: "icon.png"
           type: string
         name:
@@ -58140,7 +58651,8 @@ components:
           nullable: true
           type: object
         default_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -58176,7 +58688,8 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -58203,7 +58716,8 @@ components:
       description: Environment-specific settings for a feature flag in list responses.
       properties:
         default_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -58239,7 +58753,8 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
+          description: >-
+            A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints.
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -58395,7 +58910,8 @@ components:
           $ref: "#/components/schemas/FeatureFlagStalenessDetails"
         staleness_status:
           deprecated: true
-          description: Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
+          description: >-
+            Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
           example: "ACTIVE"
           type: string
         staleness_status_override:
@@ -58552,7 +59068,8 @@ components:
         - ENABLED
         - DISABLED
     FeatureFlagsPaginationLinks:
-      description: Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
+      description: >-
+        Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
       properties:
         first:
           description: Link to the first page.
@@ -75228,6 +75745,327 @@ components:
       type: string
       x-enum-varnames:
         - CASE
+    IssueImpact:
+      description: The impact of an issue over the requested time window.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueImpactAttributes"
+        id:
+          description: Identifier of the issue.
+          example: "c1726a66-1f64-11ee-b338-da7ad0900002"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueImpactType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueImpactAccount:
+      description: An account whose users are affected by the issue.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: Account ID, from the `account.id` attribute.
+          example: "acc-7"
+          type: string
+        name:
+          description: Account name, if available.
+          example: "Acme"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactAccounts:
+      description: Accounts whose users are affected by the issue.
+      properties:
+        distinct_count:
+          description: Number of distinct accounts affected by the issue in the time window.
+          example: 18
+          format: int64
+          type: integer
+        top:
+          description: Up to five accounts with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactAccount"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactAttributes:
+      description: |-
+        The issue's errors in the time window, and the users, sessions, accounts, views, and endpoints they affect.
+      properties:
+        accounts:
+          $ref: "#/components/schemas/IssueImpactAccounts"
+        endpoints:
+          $ref: "#/components/schemas/IssueImpactEndpoints"
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        sessions:
+          $ref: "#/components/schemas/IssueImpactSessions"
+        users:
+          $ref: "#/components/schemas/IssueImpactUsers"
+        views:
+          $ref: "#/components/schemas/IssueImpactViews"
+      required:
+        - error_counts
+        - users
+        - sessions
+        - accounts
+        - views
+        - endpoints
+      type: object
+    IssueImpactEndpoint:
+      description: An endpoint whose traces have the issue's errors.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        resource_name:
+          description: Resource name of the trace's root span.
+          example: "POST /orders"
+          type: string
+        service:
+          description: Service of the trace's root span.
+          example: "checkout-api"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - service
+        - resource_name
+        - error_counts
+        - significant
+      type: object
+    IssueImpactEndpoints:
+      description: Endpoints whose traces have the issue's errors, identified by each trace's root span.
+      properties:
+        distinct_count:
+          description: Number of distinct endpoints affected by the issue in the time window.
+          example: 2
+          format: int64
+          type: integer
+        top:
+          description: Up to five endpoints with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactEndpoint"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactErrorCounts:
+      description: |-
+        Number of errors reported by each source. Several sources can report the same error, such as an APM span and
+        a log, so the counts overlap: don't add them together.
+      properties:
+        apm:
+          description: Number of errors reported by APM.
+          example: 700
+          format: int64
+          type: integer
+        llmobs:
+          description: Number of errors reported by Agent Observability.
+          example: 0
+          format: int64
+          type: integer
+        logs:
+          description: Number of errors reported by Log Management.
+          example: 700
+          format: int64
+          type: integer
+        rum:
+          description: Number of errors reported by RUM.
+          example: 440
+          format: int64
+          type: integer
+      required:
+        - apm
+        - logs
+        - rum
+        - llmobs
+      type: object
+    IssueImpactResponse:
+      description: Response containing the impact of an error tracking issue.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueImpact"
+      required:
+        - data
+      type: object
+    IssueImpactSession:
+      description: A RUM session where the issue occurred.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: Session identifier.
+          example: "8f1c3a52-6b1e-4a5e-9d0e-2c3b4a5d6e7f"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: false
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactSessions:
+      description: RUM sessions where the issue occurred.
+      properties:
+        distinct_count:
+          description: Number of distinct sessions where the issue occurred in the time window.
+          example: 540
+          format: int64
+          type: integer
+        top:
+          description: Up to five sessions with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactSession"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_impact"]
+      example: "error_tracking_issue_impact"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_IMPACT
+    IssueImpactUser:
+      description: A user affected by the issue.
+      properties:
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        id:
+          description: User ID, from the `usr.id` attribute.
+          example: "u-42"
+          type: string
+        name:
+          description: User name or email, if available.
+          example: "jane@example.com"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - id
+        - error_counts
+        - significant
+      type: object
+    IssueImpactUsers:
+      description: Users affected by the issue.
+      properties:
+        distinct_count:
+          description: Number of distinct users affected by the issue in the time window.
+          example: 312
+          format: int64
+          type: integer
+        top:
+          description: Up to five users with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactUser"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
+    IssueImpactView:
+      description: A RUM view where the issue occurred.
+      properties:
+        affected:
+          $ref: "#/components/schemas/IssueImpactViewCounts"
+        baseline:
+          $ref: "#/components/schemas/IssueImpactViewCounts"
+        error_counts:
+          $ref: "#/components/schemas/IssueImpactErrorCounts"
+        name:
+          description: View name.
+          example: "/checkout"
+          type: string
+        significant:
+          description: |-
+            Whether the entry stands out as a likely driver of the issue, because it accounts for most of the issue's
+            errors or for far more errors than the other listed entries.
+          example: true
+          type: boolean
+      required:
+        - name
+        - error_counts
+        - significant
+        - affected
+      type: object
+    IssueImpactViewCounts:
+      description: |-
+        Distinct users, accounts, sessions, and view instances on a view. `affected` counts only those with the issue's
+        errors. `baseline` counts all users, accounts, sessions, and view instances on the view in the time window. It
+        is absent when RUM has no data for the view.
+      properties:
+        accounts:
+          description: Number of distinct accounts.
+          example: 12
+          format: int64
+          type: integer
+        sessions:
+          description: Number of distinct sessions.
+          example: 210
+          format: int64
+          type: integer
+        users:
+          description: Number of distinct users.
+          example: 150
+          format: int64
+          type: integer
+        views:
+          description: Number of distinct view instances.
+          example: 480
+          format: int64
+          type: integer
+      required:
+        - users
+        - accounts
+        - sessions
+        - views
+      type: object
+    IssueImpactViews:
+      description: RUM views where the issue occurred.
+      properties:
+        distinct_count:
+          description: Number of distinct view names where the issue occurred in the time window.
+          example: 4
+          format: int64
+          type: integer
+        top:
+          description: Up to five views with the most errors, most affected first.
+          items:
+            $ref: "#/components/schemas/IssueImpactView"
+          type: array
+      required:
+        - distinct_count
+        - top
+      type: object
     IssueIncluded:
       description: An array of related resources, returned when the `include` query parameter is used.
       oneOf:
@@ -75759,6 +76597,45 @@ components:
       required:
         - data
       type: object
+    IssueSnoozeRequest:
+      description: Snooze issue request payload.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueSnoozeRequestData"
+      required:
+        - data
+      type: object
+    IssueSnoozeRequestData:
+      description: Snooze issue request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueSnoozeRequestDataAttributes"
+        id:
+          description: Issue identifier.
+          example: "c1726a66-1f64-11ee-b338-da7ad0900002"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSnoozeRequestDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueSnoozeRequestDataAttributes:
+      description: Object describing an issue snooze request.
+      properties:
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+      required:
+        - condition
+      type: object
+    IssueSnoozeRequestDataType:
+      description: Type of the object.
+      enum: ["error_tracking_issue"]
+      example: "error_tracking_issue"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE
     IssueState:
       description: State of the issue
       enum:
@@ -76023,18 +76900,29 @@ components:
         `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
       properties:
         duration:
-          description: Time that must elapse before the condition is met, as a Go duration string.
+          description: |-
+            Time that must elapse from when the watch started, as a Go duration string, such as `24h`, or `168h` for a
+            week.
           example: "168h0m0s"
           type: string
         kind:
           $ref: "#/components/schemas/IssueWatchConditionKind"
         operands:
           description: Nested conditions combined by `ANY` or `ALL`.
+          example:
+            - duration: 168h
+              kind: ELAPSED_TIME
+            - kind: OCCURRENCES
+              threshold: 100
           items:
             $ref: "#/components/schemas/IssueWatchCondition"
           type: array
         projection:
-          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          description: |-
+            Attributes whose distinct values `CARDINALITY` counts, in search syntax: `@` for attributes, such as
+            `@usr.id` or `@account.id`, and no prefix for tags and reserved fields, such as `org_id` or `service`.
+            Only use attributes that the issue's errors carry: a condition on an attribute they don't carry is never
+            met.
           example: ["@usr.id"]
           items:
             description: Attribute path.
@@ -76042,7 +76930,9 @@ components:
             type: string
           type: array
         threshold:
-          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          description: |-
+            Number of new occurrences, or of distinct values for `CARDINALITY`, that meets the condition, counted from
+            when the watch started.
           example: 100
           format: int64
           type: integer
@@ -76179,12 +77069,14 @@ components:
         - to
       type: object
     IssuesSearchRequestDataAttributesOrderBy:
-      description: The attribute to sort the search results by.
+      description: |-
+        The attribute to sort the search results by, in descending order. Defaults to `TOTAL_COUNT`.
       enum:
         - TOTAL_COUNT
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
       example: "IMPACTED_SESSIONS"
       type: string
       x-enum-varnames:
@@ -76192,9 +77084,12 @@ components:
         - FIRST_SEEN
         - IMPACTED_SESSIONS
         - PRIORITY
+        - IMPACTED_ACCOUNTS
     IssuesSearchRequestDataAttributesPersona:
-      description: Persona for the search. Either track(s) or persona(s) must be specified.
-      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND"]
+      description: |-
+        Persona for the search. Either `track` or `persona` must be specified.
+        Ignored if `track` is specified.
+      enum: ["ALL", "BROWSER", "MOBILE", "BACKEND", "AGENT"]
       example: "BACKEND"
       type: string
       x-enum-varnames:
@@ -76202,15 +77097,19 @@ components:
         - BROWSER
         - MOBILE
         - BACKEND
+        - AGENT
     IssuesSearchRequestDataAttributesTrack:
-      description: Track of the events to query. Either track(s) or persona(s) must be specified.
-      enum: ["trace", "logs", "rum"]
+      description: |-
+        Track of the events to query. Either `track` or `persona` must be specified.
+        If both are specified, `persona` is ignored.
+      enum: ["trace", "logs", "rum", "llmobs"]
       example: "trace"
       type: string
       x-enum-varnames:
         - TRACE
         - LOGS
         - RUM
+        - LLMOBS
     IssuesSearchRequestDataType:
       description: Type of the object.
       enum: ["search_request"]
@@ -76256,7 +77155,7 @@ components:
         impacted_sessions:
           description: |-
             Count of sessions impacted by the issue over the queried time window.
-            Returned for RUM, LLM Observability, browser, and mobile searches,
+            Returned for RUM and LLM Observability tracks, for browser, mobile, and agent personas,
             or when `issue.impacted_sessions` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 12
@@ -76265,7 +77164,7 @@ components:
         impacted_users:
           description: |-
             Count of users impacted by the issue over the queried time window.
-            Returned for RUM, browser, and mobile searches,
+            Returned for the RUM track, for browser and mobile personas,
             or when `issue.impacted_users` is requested in the `include` query parameter.
             Omitted when zero unless requested in the `include` query parameter.
           example: 4
@@ -77714,6 +78613,13 @@ components:
     LLMObsAnnotationItem:
       description: A single annotation on an interaction.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -77759,6 +78665,13 @@ components:
     LLMObsAnnotationItemResponse:
       description: A single annotation on an interaction, as returned by the API.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -82363,6 +83276,15 @@ components:
           example: openai
           nullable: true
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -82402,6 +83324,7 @@ components:
         - evp_query
         - sampling_ratio
         - num_records
+        - min_cluster_size
         - hierarchy_depth
         - scope
         - created_at
@@ -82439,6 +83362,15 @@ components:
           example: openai
           nullable: true
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -82479,6 +83411,7 @@ components:
         - evp_query
         - sampling_ratio
         - num_records
+        - min_cluster_size
         - hierarchy_depth
         - scope
         - created_at
@@ -82591,6 +83524,15 @@ components:
           description: Integration provider for a bring-your-own-model configuration.
           example: openai
           type: string
+        min_cluster_size:
+          description: |-
+            Minimum topic size, the smallest number of interactions a topic must contain. Topics with fewer
+            interactions are moved to Outliers. Must be at least 2 and less than `num_records`. Required when creating a configuration.
+          example: 15
+          format: int32
+          maximum: 2147483647
+          minimum: 2
+          type: integer
         model_name:
           description: Model name for a bring-your-own-model configuration.
           example: gpt-4o
@@ -84615,6 +85557,18 @@ components:
         A single annotation to create or update. The annotation is matched by
         `interaction_id` and the requesting user's identity.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is an opaque string with no required format. Use a stable, recognizable value for the same
+            producer across annotations.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+            Omit this field or set it to `null` to preserve existing attribution. Set it to an empty string to clear
+            attribution.
+          example: "Alex Contractor"
+          nullable: true
+          type: string
         interaction_id:
           description: ID of the interaction to annotate.
           example: "00000000-0000-0000-0000-000000000001"
@@ -106813,15 +107767,18 @@ components:
           $ref: "#/components/schemas/Version"
       type: object
     PatchSavedFilterAttributes:
-      description: Fields to update. At least one of `name`, `description`, or `targeting_rules` must have a non-null value. Omitted or null fields are preserved. The creation type cannot be changed.
+      description: >-
+        Fields to update. At least one of `name`, `description`, or `targeting_rules` must have a non-null value. Omitted or null fields are preserved. The creation type cannot be changed.
       properties:
         description:
-          description: The new description. Send an empty string to clear the description. If omitted or null, the existing description is preserved.
+          description: >-
+            The new description. Send an empty string to clear the description. If omitted or null, the existing description is preserved.
           example: Updated early access users.
           nullable: true
           type: string
         last_updated_at:
-          description: The `updated_at` value returned by a previous read, as an RFC 3339 timestamp. If it differs from the stored update time, truncated to seconds, the request returns a 409 response. For metadata-only updates, this check does not prevent all concurrent writes. This field alone does not constitute an update.
+          description: >-
+            The `updated_at` value returned by a previous read, as an RFC 3339 timestamp. If it differs from the stored update time, truncated to seconds, the request returns a 409 response. For metadata-only updates, this check does not prevent all concurrent writes. This field alone does not constitute an update.
           example: "2026-01-02T12:00:00Z"
           format: date-time
           nullable: true
@@ -106833,7 +107790,8 @@ components:
           nullable: true
           type: string
         targeting_rules:
-          description: The complete replacement targeting rules, combined with OR. Conditions within each rule are combined with AND. Replaces all existing rules. Values are not appended. Must contain at least one rule. Saved filters cannot reference other saved filters.
+          description: >-
+            The complete replacement targeting rules, combined with OR. Conditions within each rule are combined with AND. Replaces all existing rules. Values are not appended. Must contain at least one rule. Saved filters cannot reference other saved filters.
           items:
             $ref: "#/components/schemas/SavedFilterTargetingRuleRequest"
           minItems: 1
@@ -106841,7 +107799,8 @@ components:
           type: array
       type: object
     PatchSavedFilterConflictResponse:
-      description: A stale update, duplicate name, or other conflict, or a resource listing consumer flags requiring approval.
+      description: >-
+        A stale update, duplicate name, or other conflict, or a resource listing consumer flags requiring approval.
       oneOf:
         - $ref: "#/components/schemas/SavedFilterJSONAPIErrorResponse"
         - $ref: "#/components/schemas/SavedFilterApprovalConflictResponse"
@@ -106857,7 +107816,8 @@ components:
         - attributes
       type: object
     PatchSavedFilterForbiddenResponse:
-      description: An authentication or permission error, or a resource listing consumer flags that the caller cannot edit.
+      description: >-
+        An authentication or permission error, or a resource listing consumer flags that the caller cannot edit.
       oneOf:
         - $ref: "#/components/schemas/SavedFilterAPIErrorResponse"
         - $ref: "#/components/schemas/SavedFilterJSONAPIErrorResponse"
@@ -106875,12 +107835,12 @@ components:
       example:
         data:
           attributes:
-            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             domain_prefix: status-page-us1-east
-            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+            favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             name: Status Page US1 East
-            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+            slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -106912,7 +107872,7 @@ components:
       properties:
         company_logo:
           description: The base64-encoded image data displayed on the status page.
-          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         domain_prefix:
           description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
@@ -106920,14 +107880,14 @@ components:
           type: string
         email_header_image:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
-          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         email_notifications_enabled:
           description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
           type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
-          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         ms_teams_subscriptions_enabled:
           description: Whether Microsoft Teams subscriptions are enabled for the status page.
@@ -106941,7 +107901,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The base64-encoded image data used as the Slack app icon.
-          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -122294,7 +123254,8 @@ components:
           example: Early access users
           type: string
         targeting_rules:
-          description: Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
+          description: >-
+            Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
           items:
             $ref: "#/components/schemas/SavedFilterTargetingRule"
           type: array
@@ -122387,7 +123348,8 @@ components:
         operator:
           $ref: "#/components/schemas/SavedFilterConditionOperator"
         value:
-          description: Values used by the condition operator. Values must satisfy the selected operator and the organization targeting limits.
+          description: >-
+            Values used by the condition operator. Values must satisfy the selected operator and the organization targeting limits.
           example:
             - test-user-1
             - test-user-2
@@ -122401,7 +123363,8 @@ components:
         - value
       type: object
     SavedFilterCreationType:
-      description: How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
+      description: >-
+        How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
       enum:
         - RULES
         - LIST
@@ -127666,7 +128629,7 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
       type: object
     SecurityMonitoringCriticalAssetSeverity:
-      description: Severity associated with this critical asset. Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
+      description: Severity associated with this dynamic severity rule (previously called critical assets). Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
       enum:
         - info
         - low
@@ -129966,6 +130929,7 @@ components:
         - application_security
         - api_security
         - workload_activity
+        - workload_hardening
       type: string
       x-enum-varnames:
         - LOG_DETECTION
@@ -129975,6 +130939,7 @@ components:
         - APPLICATION_SECURITY
         - API_SECURITY
         - WORKLOAD_ACTIVITY
+        - WORKLOAD_HARDENING
     SecurityMonitoringRuleTypeTest:
       description: The rule type.
       enum:
@@ -145235,10 +146200,13 @@ components:
         - modified_by
       type: object
     TagRuleCreateAttributes:
-      description: Attributes that can be supplied when creating a tag rule.
+      description: |-
+        Attributes that can be supplied when creating a tag rule. If `tag_value_patterns`
+        contains `*`, set `required` and `negated` to different values. If both are `false`,
+        the rule has no effect. If both are `true`, no value can satisfy the rule.
       properties:
         enabled:
-          description: Whether the rule is currently enforced. Defaults to `true` for newly created rules.
+          description: The API ignores this value on creation and always enables new rules. To disable a rule, use the "Update a tag rule" endpoint.
           example: true
           type: boolean
         name:
@@ -145257,26 +146225,35 @@ components:
           $ref: "#/components/schemas/TagRuleCreateType"
         scope:
           description: |-
-            The scope the rule applies within. Typically an environment, team, or
-            organization-level identifier used to limit where the rule is enforced.
-          example: "env"
+            The scope the rule applies within. For logs and spans, use a search query, such
+            as `env:prod`, or `*` to match all telemetry. For metrics, use a metric selector
+            with an optional tag filter, such as `system.cpu.*{env:prod}`. A metric wildcard
+            is allowed only once, at the end of the metric selector.
+          example: "env:prod"
           type: string
         source:
           $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: The tag key that the rule governs (for example, `service`).
+          description: |-
+            The tag key that the rule governs (for example, `service`). Allowed characters
+            are ASCII letters, digits, underscores, hyphens, periods, and slashes. The keys
+            `host` and `device` are not supported in any letter case.
           example: "service"
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: |-
-            One or more patterns that valid values for the tag key must match. At least one
-            pattern is required.
+            Between 1 and 30 non-empty patterns that valid values for the tag key must match.
+            Allowed characters are ASCII letters, digits, underscores, colons, hyphens,
+            periods, commas, slashes, and asterisks.
           example:
             - "api"
             - "web"
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
           minItems: 1
           type: array
       required:
@@ -145359,13 +146336,15 @@ components:
           $ref: "#/components/schemas/TagRuleScoreRelationship"
       type: object
     TagRuleResourceType:
-      description: JSON:API resource type for a tag rule.
+      description: JSON:API resource type for a tag rule. Requests accept `tag_rule` or `tag_policy`; responses use `tag_policy`.
       enum:
         - tag_rule
-      example: "tag_rule"
+        - tag_policy
+      example: "tag_policy"
       type: string
       x-enum-varnames:
         - TAG_RULE
+        - TAG_POLICY
     TagRuleResponse:
       description: A single tag rule.
       properties:
@@ -145446,13 +146425,15 @@ components:
         - id
       type: object
     TagRuleScoreResourceType:
-      description: JSON:API resource type for a tag rule compliance score.
+      description: JSON:API resource type for a tag rule compliance score. Responses use `tag_policy_score`.
       enum:
         - tag_rule_score
-      example: "tag_rule_score"
+        - tag_policy_score
+      example: "tag_policy_score"
       type: string
       x-enum-varnames:
         - TAG_RULE_SCORE
+        - TAG_POLICY_SCORE
     TagRuleScoreResponse:
       description: A tag rule compliance score.
       properties:
@@ -145481,6 +146462,7 @@ components:
       description: |-
         How the rule is enforced. `blocking` rejects telemetry that violates the rule.
         `surfacing` only highlights non-compliant telemetry without blocking it.
+        RUM supports only `surfacing` rules.
       enum:
         - blocking
         - surfacing
@@ -145492,7 +146474,9 @@ components:
     TagRuleUpdateAttributes:
       description: |-
         Mutable attributes of a tag rule. Each field is optional; omitting a field leaves its
-        current value unchanged. The `source` of a rule cannot be changed.
+        current value unchanged. The `source` of a rule cannot be changed. Tag keys, patterns,
+        and metrics scopes have the same constraints as on creation. If the effective
+        `tag_value_patterns` contains `*`, set `required` and `negated` to different values.
       properties:
         enabled:
           description: Whether the rule is currently enforced.
@@ -145513,12 +146497,16 @@ components:
           type: string
         tag_key:
           description: The tag key that the rule governs.
+          pattern: '^[A-Za-z0-9_.\/-]+$'
           type: string
         tag_value_patterns:
           description: One or more patterns that valid values for the tag key must match.
           items:
             description: A pattern that valid tag values must match.
+            pattern: '^[A-Za-z0-9_:.,\/*-]+$'
             type: string
+          maxItems: 30
+          minItems: 1
           type: array
       type: object
     TagRuleUpdateData:
@@ -152542,23 +153530,33 @@ components:
       description: Attributes for updating an environment.
       properties:
         is_production:
-          description: Indicates whether this is a production environment.
+          description: >-
+            Indicates whether this is a production environment. If omitted, resets to false. Include the existing value to preserve it.
           example: false
           type: boolean
         name:
-          description: The name of the environment.
+          description: >-
+            The name of the environment. Required on every request and unique within the organization. Must contain 1 to 200 ASCII characters, start with a letter or digit, and contain only letters, digits, spaces, underscores, hyphens, and periods.
           example: "Environment XYZ789"
           type: string
+        observe_full_evaluation_data:
+          description: >-
+            Controls whether feature flag evaluation events may include original targeting identifiers and full evaluation context. When true, SDKs may include this data. When false, SDKs hash targeting identifiers and omit evaluation context. If omitted, the existing value is preserved.
+          example: true
+          type: boolean
         queries:
-          description: List of queries to define the environment scope.
+          description: >-
+            Required list of at least one exact DD_ENV value associated with this environment. Values cannot be used by another environment in the same organization. Wildcards and search expressions are not supported.
           example: ["staging", "test"]
           items:
-            description: A query string used to match the environment scope.
+            description: >-
+              An exact DD_ENV value containing 1 to 200 ASCII characters. Must start with a letter and contain only letters, digits, underscores, hyphens, colons, periods, and slashes.
             type: string
           minItems: 1
           type: array
         require_feature_flag_approval:
-          description: Indicates whether feature flag changes require approval in this environment.
+          description: >-
+            Indicates whether feature flag changes require approval in this environment. If omitted, resets to false. Include the existing value to preserve it.
           example: true
           type: boolean
       type: object
@@ -153599,12 +154597,14 @@ components:
             $ref: "#/components/schemas/GuardrailMetricRequest"
           type: array
         id:
-          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
+          description: >-
+            The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events.
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
+          description: >-
+            The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule.
           example: "prod-rollout"
           type: string
         name:
@@ -165121,7 +166121,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 48
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -165180,7 +166180,7 @@ paths:
       summary: List AI Gateway budget instance dimension values
       tags:
         - AI Gateway
-      x-menu-order: 47
+      x-menu-order: 49
       x-permission:
         operator: OR
         permissions:
@@ -165237,7 +166237,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 46
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
@@ -171608,8 +172608,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific branch in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoverageBranchSummary
       requestBody:
         content:
@@ -171674,8 +172674,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific commit in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
 
         The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).
       operationId: GetCodeCoverageCommitSummary
@@ -171814,8 +172814,8 @@ paths:
     post:
       description: |-
         Retrieve aggregated code coverage statistics for a specific pull request in a repository.
-        This endpoint provides overall coverage metrics as well as breakdowns by service
-        and code owner.
+        This endpoint provides overall coverage metrics as well as breakdowns by service,
+        code owner, and flag.
       operationId: GetCodeCoveragePRSummary
       requestBody:
         content:
@@ -174843,13 +175843,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -174922,13 +175922,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -174958,13 +175958,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175019,13 +176019,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -179012,7 +180012,7 @@ paths:
       summary: Get the AI Gateway data capture configuration
       tags:
         - AI Gateway
-      x-menu-order: 49
+      x-menu-order: 51
       x-permission:
         operator: OR
         permissions:
@@ -179065,7 +180065,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 50
+      x-menu-order: 52
       x-permission:
         operator: OR
         permissions:
@@ -179112,7 +180112,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 51
+      x-menu-order: 53
       x-permission:
         operator: OR
         permissions:
@@ -179175,7 +180175,7 @@ paths:
       tags:
         - AI Gateway
       x-codegen-request-body-name: body
-      x-menu-order: 52
+      x-menu-order: 54
       x-permission:
         operator: OR
         permissions:
@@ -183389,7 +184389,9 @@ paths:
           - monitors_downtime
   /api/v2/error-tracking/issues/search:
     post:
-      description: Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.
+      description: |-
+        Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per issue state.
+        Returns 400 if neither `track` nor `persona` is specified, or if a `team_ids` value does not match an existing team.
       operationId: SearchIssues
       parameters:
         - $ref: "#/components/parameters/SearchIssuesIncludeQueryParameter"
@@ -183581,6 +184583,188 @@ paths:
       tags:
         - Error Tracking
       x-menu-order: 4
+  /api/v2/error-tracking/issues/{issue_id}/impact:
+    get:
+      description: |-
+        Get an issue's impact over a time window: its error counts by source, and the users, sessions, accounts,
+        RUM views, and endpoints it affects most.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's
+        data.
+      operationId: GetIssueImpact
+      parameters:
+        - $ref: "#/components/parameters/IssueIDPathParameter"
+        - $ref: "#/components/parameters/GetIssueImpactFromParameter"
+        - $ref: "#/components/parameters/GetIssueImpactToParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        accounts:
+                          distinct_count: 0
+                          top: []
+                        endpoints:
+                          distinct_count: 1
+                          top:
+                            - error_counts:
+                                apm: 700
+                                llmobs: 0
+                                logs: 700
+                                rum: 0
+                              resource_name: POST /orders
+                              service: checkout-api
+                              significant: true
+                        error_counts:
+                          apm: 700
+                          llmobs: 0
+                          logs: 700
+                          rum: 0
+                        sessions:
+                          distinct_count: 0
+                          top: []
+                        users:
+                          distinct_count: 0
+                          top: []
+                        views:
+                          distinct_count: 0
+                          top: []
+                      id: c1726a66-1f64-11ee-b338-da7ad0900002
+                      type: error_tracking_issue_impact
+              schema:
+                $ref: "#/components/schemas/IssueImpactResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - error_tracking_read
+      summary: Get the impact of an error tracking issue
+      tags:
+        - Error Tracking
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+  /api/v2/error-tracking/issues/{issue_id}/snooze:
+    post:
+      description: |-
+        Snooze an issue by `issue_id`: move it to `IGNORED` until a condition is met, then back to `OPEN`.
+        The condition can be a number of occurrences, a number of distinct values of an attribute such as `@usr.id`,
+        an elapsed time, or any or all of several conditions.
+        Snoozing an issue that is already snoozed replaces its snooze. Updating the state of the issue with
+        `UpdateIssueState` cancels the snooze.
+        The response includes the watch that reopens the issue.
+      operationId: SnoozeIssue
+      parameters:
+        - $ref: "#/components/parameters/IssueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      condition:
+                        kind: ANY
+                        operands:
+                          - duration: 168h
+                            kind: ELAPSED_TIME
+                          - kind: OCCURRENCES
+                            threshold: 100
+                    id: c1726a66-1f64-11ee-b338-da7ad0900002
+                    type: error_tracking_issue
+            schema:
+              $ref: "#/components/schemas/IssueSnoozeRequest"
+        description: Snooze issue request payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        error_message: "object of type 'NoneType' has no len()"
+                        error_type: builtins.TypeError
+                        service: test-service
+                        state: IGNORED
+                      id: c1726a66-1f64-11ee-b338-da7ad0900002
+                      relationships:
+                        watches:
+                          data:
+                            - id: e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d
+                              type: error_tracking_issue_watch
+                      type: issue
+                    included:
+                      - attributes:
+                          action:
+                            from: IGNORED
+                            kind: CHANGE_ISSUE_STATE
+                            to: OPEN
+                          condition:
+                            kind: ANY
+                            operands:
+                              - duration: 168h0m0s
+                                kind: ELAPSED_TIME
+                              - kind: OCCURRENCES
+                                threshold: 100
+                          started_at: "2025-01-01T00:00:00Z"
+                          status: ACTIVE
+                        id: e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d
+                        type: error_tracking_issue_watch
+              schema:
+                $ref: "#/components/schemas/IssueResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - error_tracking_read
+            - error_tracking_write
+      summary: Snooze an issue
+      tags:
+        - Error Tracking
+      x-menu-order: 7
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
   /api/v2/error-tracking/issues/{issue_id}/state:
     put:
       description: Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.
@@ -189793,13 +190977,15 @@ paths:
           name: key
           schema:
             type: string
-        - description: Filter by archived status. If `true`, return only archived flags. If `false`, return only flags that are not archived. If omitted, return both.
+        - description: >-
+            Filter by archived status. If `true`, return only archived flags. If `false`, return only flags that are not archived. If omitted, return both.
           example: false
           in: query
           name: is_archived
           schema:
             type: boolean
-        - description: Deprecated alias for `page[limit]`. Use `page[limit]` for new requests. Used only when `page[limit]` is absent. When both parameters are omitted, the server defaults to `25`. Values that exceed `50` are set to `50`; non-positive or empty values use the server default.
+        - description: >-
+            Deprecated alias for `page[limit]`. Use `page[limit]` for new requests. Used only when `page[limit]` is absent. When both parameters are omitted, the server defaults to `25`. Values that exceed `50` are set to `50`; non-positive or empty values use the server default.
           example: 10
           in: query
           name: limit
@@ -189809,7 +190995,8 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Deprecated alias for `page[offset]`. Used only when `page[offset]` is absent. Defaults to `0`. Negative or empty values are set to `0`.
+        - description: >-
+            Deprecated alias for `page[offset]`. Used only when `page[offset]` is absent. Defaults to `0`. Negative or empty values are set to `0`.
           example: 0
           in: query
           name: offset
@@ -189818,7 +191005,8 @@ paths:
             format: int64
             minimum: 0
             type: integer
-        - description: Filter by exact tag values using repeated parameters, such as `tags=env:prod&tags=purpose:sitemap`. A flag must have all ordinary tags. Values of the form `team:<handle>` match any selected team and are combined with `teams` into one set. The result must match all ordinary tags, any selected team, and all other filters. Empty values are ignored.
+        - description: >-
+            Filter by exact tag values using repeated parameters, such as `tags=env:prod&tags=purpose:sitemap`. A flag must have all ordinary tags. Values of the form `team:<handle>` match any selected team and are combined with `teams` into one set. The result must match all ordinary tags, any selected team, and all other filters. Empty values are ignored.
           example:
             - env:prod
             - purpose:sitemap
@@ -189830,7 +191018,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by team handles without the `team:` prefix. Use repeated parameters to filter by multiple team handles, such as `teams=checkout&teams=payments`. A flag must belong to at least one selected team. Team handles from `teams` and `team:<handle>` values from tags are treated as a single set and combined with ordinary tags and other filters using AND logic. Duplicate handles do not duplicate results. Unknown handles do not match any flags. Empty handles, surrounding white space, or using the `team:` prefix return a bad request error. Response tags are unchanged.
+        - description: >-
+            Filter by team handles without the `team:` prefix. Use repeated parameters to filter by multiple team handles, such as `teams=checkout&teams=payments`. A flag must belong to at least one selected team. Team handles from `teams` and `team:<handle>` values from tags are treated as a single set and combined with ordinary tags and other filters using AND logic. Duplicate handles do not duplicate results. Unknown handles do not match any flags. Empty handles, surrounding white space, or using the `team:` prefix return a bad request error. Response tags are unchanged.
           example:
             - checkout
             - payments
@@ -189842,7 +191031,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by status across production environments. Use repeated parameters to match any selected status. `ENABLED` matches at least one enabled production environment without a variant override. `OVERRIDDEN` matches at least one enabled production environment with a variant override. `DISABLED` matches flags whose associated production environments are all disabled. A flag can match both `ENABLED` and `OVERRIDDEN` in different environments. Flags without associated production environments do not match. This does not filter by a specific environment. Unknown values do not match any status.
+        - description: >-
+            Filter by status across production environments. Use repeated parameters to match any selected status. `ENABLED` matches at least one enabled production environment without a variant override. `OVERRIDDEN` matches at least one enabled production environment with a variant override. `DISABLED` matches flags whose associated production environments are all disabled. A flag can match both `ENABLED` and `OVERRIDDEN` in different environments. Flags without associated production environments do not match. This does not filter by a specific environment. Unknown values do not match any status.
           example:
             - ENABLED
             - OVERRIDDEN
@@ -189854,19 +191044,22 @@ paths:
               $ref: "#/components/schemas/FeatureFlagProductionStatus"
             type: array
           style: form
-        - description: Filter by SDK availability. `CLIENT` returns flags with channel `CLIENT` or `ALL`. `SERVER` returns flags with channel `SERVER` or `ALL`. `ALL`, an empty value, or omission applies no channel restriction; it does not select only flags whose channel is `ALL`. Values are case-insensitive and surrounding white space is ignored. Invalid values return a bad request error.
+        - description: >-
+            Filter by SDK availability. `CLIENT` returns flags with channel `CLIENT` or `ALL`. `SERVER` returns flags with channel `SERVER` or `ALL`. `ALL`, an empty value, or omission applies no channel restriction; it does not select only flags whose channel is `ALL`. Values are case-insensitive and surrounding white space is ignored. Invalid values return a bad request error.
           example: CLIENT
           in: query
           name: distribution_channel
           schema:
             $ref: "#/components/schemas/FeatureFlagDistributionChannel"
-        - description: Case-insensitive substring search on flag names, keys, and tag names. Combined with all other filters. An empty value applies no search restriction.
+        - description: >-
+            Case-insensitive substring search on flag names, keys, and tag names. Combined with all other filters. An empty value applies no search restriction.
           example: checkout
           in: query
           name: search
           schema:
             type: string
-        - description: Filter by variant value types using repeated parameters. A flag must match at least one selected type. Empty values are ignored. Invalid types return a bad request error.
+        - description: >-
+            Filter by variant value types using repeated parameters. A flag must match at least one selected type. Empty values are ignored. Invalid types return a bad request error.
           example:
             - BOOLEAN
             - STRING
@@ -189878,7 +191071,8 @@ paths:
               $ref: "#/components/schemas/ValueType"
             type: array
           style: form
-        - description: Filter by creator UUIDs using repeated parameters. A flag must match at least one creator. Empty values are ignored. Invalid UUIDs return a bad request error.
+        - description: >-
+            Filter by creator UUIDs using repeated parameters. A flag must match at least one creator. Empty values are ignored. Invalid UUIDs return a bad request error.
           example:
             - 550e8400-e29b-41d4-a716-446655440010
           explode: true
@@ -189890,7 +191084,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by feature flag UUIDs using repeated parameters. A flag must match at least one ID and all other filters. Duplicate IDs return each flag once. Unknown IDs and IDs from other organizations do not match any flags. Empty or invalid UUIDs return a bad request error. Pagination still applies.
+        - description: >-
+            Filter by feature flag UUIDs using repeated parameters. A flag must match at least one ID and all other filters. Duplicate IDs return each flag once. Unknown IDs and IDs from other organizations do not match any flags. Empty or invalid UUIDs return a bad request error. Pagination still applies.
           example:
             - 550e8400-e29b-41d4-a716-446655440000
           explode: true
@@ -189902,26 +191097,30 @@ paths:
               type: string
             type: array
           style: form
-        - description: "Filter by the computed staleness status: `ACTIVE`, `STALE`, or `PERMANENT`. Values are case-insensitive and surrounding white space is ignored. An empty value or omission applies no restriction. Invalid values return a bad request error. Read the computed result from `staleness_details.staleness_status`, not the legacy `staleness_status` response field."
+        - description: >-
+            Filter by the computed staleness status: `ACTIVE`, `STALE`, or `PERMANENT`. Values are case-insensitive and surrounding white space is ignored. An empty value or omission applies no restriction. Invalid values return a bad request error. Read the computed result from `staleness_details.staleness_status`, not the legacy `staleness_status` response field.
           example: STALE
           in: query
           name: staleness_status
           schema:
             $ref: "#/components/schemas/FeatureFlagStalenessStatus"
-        - description: Filter to flags that reference this saved filter in their targeting conditions. An empty value or omission applies no restriction. An invalid UUID returns a bad request error.
+        - description: >-
+            Filter to flags that reference this saved filter in their targeting conditions. An empty value or omission applies no restriction. An invalid UUID returns a bad request error.
           example: 550e8400-e29b-41d4-a716-446655440020
           in: query
           name: saved_filter_id
           schema:
             format: uuid
             type: string
-        - description: Sort by `name`, `updated_at`, `created_at`, or `evaluations`. Use a comma-separated list for multiple sort fields and prefix a field with `-` for descending order. The default is `updated_at` descending. When favorites are enabled, the authenticated user's favorite flags take precedence over the selected ordering. Unknown fields return a bad request error.
+        - description: >-
+            Sort by `name`, `updated_at`, `created_at`, or `evaluations`. Use a comma-separated list for multiple sort fields and prefix a field with `-` for descending order. The default is `updated_at` descending. When favorites are enabled, the authenticated user's favorite flags take precedence over the selected ordering. Unknown fields return a bad request error.
           example: -updated_at
           in: query
           name: sort
           schema:
             type: string
-        - description: Maximum number of flags to return. Defaults to `25` and is capped at `50`. Values that exceed `50` are set to `50`. Non-positive or empty values use the default. A non-integer value returns a bad request error. Takes precedence over `limit` when both are present. Pagination applies even when no pagination parameters are supplied.
+        - description: >-
+            Maximum number of flags to return. Defaults to `25` and is capped at `50`. Values that exceed `50` are set to `50`. Non-positive or empty values use the default. A non-integer value returns a bad request error. Takes precedence over `limit` when both are present. Pagination applies even when no pagination parameters are supplied.
           example: 25
           in: query
           name: page[limit]
@@ -189931,7 +191130,8 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: Number of matching flags to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a bad request error. Takes precedence over `offset` when both are present.
+        - description: >-
+            Number of matching flags to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a bad request error. Takes precedence over `offset` when both are present.
           example: 0
           in: query
           name: page[offset]
@@ -190095,28 +191295,28 @@ paths:
     get:
       description: |-
         Returns a list of environments for the organization.
-        Supports filtering by name, key, and DD_ENV.
+        Use `dd_env` to filter by an exact DD_ENV value in an environment's `queries` list.
       operationId: ListFeatureFlagsEnvironments
       parameters:
-        - description: Filter environments by name (partial matching).
+        - description: This parameter is currently ignored. Use dd_env to filter environments.
           example: "env-search-term"
           in: query
           name: name
           schema:
             type: string
-        - description: Filter environments by key (partial matching).
+        - description: This parameter is currently ignored. Use dd_env to filter environments.
           example: "env-partial"
           in: query
           name: key
           schema:
             type: string
-        - description: Filter environments by queries that contain the provided DD_ENV value.
+        - description: Filter environments whose queries list contains an exact match for the provided DD_ENV value.
           example: "staging"
           in: query
           name: dd_env
           schema:
             type: string
-        - description: Maximum number of results to return.
+        - description: This parameter is currently ignored. All matching environments are returned.
           example: 10
           in: query
           name: limit
@@ -190126,7 +191326,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Number of results to skip.
+        - description: This parameter is currently ignored. All matching environments are returned.
           example: 0
           in: query
           name: offset
@@ -190180,6 +191380,7 @@ paths:
                   data:
                     attributes:
                       name: staging-environment
+                      observe_full_evaluation_data: true
                       queries:
                         - staging
                         - canary
@@ -190196,14 +191397,13 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
                         is_production: false
-                        key: staging-environment
                         name: staging-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - staging
+                          - canary
                         require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
                       id: 00000000-0000-0000-0000-000000000017
                       type: environments
               schema:
@@ -190294,14 +191494,12 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
                         is_production: false
-                        key: staging-environment
                         name: staging-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - staging
                         require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
                       id: 00000000-0000-0000-0000-000000000018
                       type: environments
               schema:
@@ -190335,9 +191533,18 @@ paths:
         permissions:
           - feature_flag_environment_config_read
     put:
-      description: |-
-        Updates an existing environment's metadata such as
-         name and description.
+      description: >-
+        Updates an environment's name, DD_ENV values, and settings.
+
+
+        Every request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.
+
+        To preserve the current name and DD_ENV values, get the environment first and include those values in the request.
+
+
+        Omitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.
+
+        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.
       operationId: UpdateFeatureFlagsEnvironment
       parameters:
         - $ref: "#/components/parameters/environment_id"
@@ -190349,10 +191556,13 @@ paths:
                 value:
                   data:
                     attributes:
+                      is_production: true
                       name: production-environment
+                      observe_full_evaluation_data: true
                       queries:
                         - production
                         - prod-us
+                      require_feature_flag_approval: true
                     type: environments
             schema:
               $ref: "#/components/schemas/UpdateEnvironmentRequest"
@@ -190366,14 +191576,13 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
-                        is_production: false
-                        key: production-environment
+                        is_production: true
                         name: production-environment
+                        observe_full_evaluation_data: true
                         queries:
                           - production
-                        require_feature_flag_approval: false
-                        updated_at: "2024-01-01T00:00:00+00:00"
+                          - prod-us
+                        require_feature_flag_approval: true
                       id: 00000000-0000-0000-0000-000000000019
                       type: environments
               schema:
@@ -190850,11 +192059,15 @@ paths:
           - feature_flag_config_read
   /api/v2/feature-flags/saved-filters/{saved_filter_id}:
     get:
-      description: |-
+      description: >-
         Returns a saved filter by ID, including its full targeting rules, conditions, and values.
+
         Supports both saved lists and saved rules. Targeting rules are combined with OR,
+
         and conditions within each rule are combined with AND.
+
         Returns the stored filter definition rather than evaluating it against users or organizations.
+
         Archived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.
       operationId: GetSavedFilter
       parameters:
@@ -191775,8 +192988,9 @@ paths:
           - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}/variants/{variant_id}:
     delete:
-      description: |-
+      description: >-
         Deletes a variant from a feature flag.
+
 
         When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
       operationId: DeleteVariantFromFeatureFlag
@@ -191826,8 +193040,9 @@ paths:
         permissions:
           - feature_flag_config_write
     put:
-      description: |-
+      description: >-
         Updates the name and value of an existing variant on a feature flag.
+
 
         When backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.
       operationId: UpdateVariantForFeatureFlag
@@ -194778,7 +195993,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleSource"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -194824,8 +196039,8 @@ paths:
                           score:
                             data:
                               id: "123-v1-1779315066097-1779401466097"
-                              type: "tag_rule_score"
-                        type: "tag_rule"
+                              type: "tag_policy_score"
+                        type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -194833,7 +196048,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRulesListResponse"
           description: OK
@@ -194928,7 +196143,7 @@ paths:
                           - "web"
                         version: 1
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: Created
@@ -194978,7 +196193,8 @@ paths:
       description: |-
         Delete a tag rule. By default the rule is soft-deleted so it can be recovered later
         and so that historical score data remains queryable. Pass `hard_delete=true` to remove
-        the rule permanently.
+        the rule permanently. Deleting a `blocking` rule additionally requires the
+        `telemetry_rules_activate` permission.
       operationId: DeleteTagRule
       parameters:
         - description: The unique identifier of the tag rule to delete.
@@ -195060,7 +196276,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/TagRuleInclude"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195106,8 +196322,8 @@ paths:
                         score:
                           data:
                             id: "123-v1-1779315066097-1779401466097"
-                            type: "tag_rule_score"
-                      type: "tag_rule"
+                            type: "tag_policy_score"
+                      type: "tag_policy"
                     included:
                       - attributes:
                           score: 80
@@ -195115,7 +196331,7 @@ paths:
                           ts_start: 1779315066097
                           version: 1
                         id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_rule_score"
+                        type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195166,6 +196382,9 @@ paths:
         Update one or more attributes of an existing tag rule. Only the fields supplied in the
         request body are modified; omitted fields retain their current values. The rule's
         `source` cannot be changed after creation.
+        Promoting a rule from `surfacing` to `blocking` additionally requires the
+        `telemetry_rules_activate` permission, and your organization must have access to
+        blocking rules. You can't promote RUM rules to `blocking`.
       operationId: UpdateTagRule
       parameters:
         - description: The unique identifier of the tag rule to update.
@@ -195216,7 +196435,7 @@ paths:
                           - "web"
                         version: 2
                       id: "123"
-                      type: "tag_rule"
+                      type: "tag_policy"
               schema:
                 $ref: "#/components/schemas/TagRuleResponse"
           description: OK
@@ -195277,7 +196496,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to approximately 4 hours before the current time for metrics, or 24 hours before the current time for other sources. The API clamps earlier values to this default, regardless of `ts_end`.
           example: 1779315066097
           in: query
           name: ts_start
@@ -195307,7 +196526,7 @@ paths:
                         ts_start: 1779315066097
                         version: 1
                       id: "123-v1-1779315066097-1779401466097"
-                      type: "tag_rule_score"
+                      type: "tag_policy_score"
               schema:
                 $ref: "#/components/schemas/TagRuleScoreResponse"
           description: OK
@@ -209228,6 +210447,8 @@ paths:
       description: |-
         Create or update annotations on interactions in a queue. Each annotation is matched
         by `interaction_id` and the requesting user's identity.
+        Use the optional `annotator` field to name an external person or automated system that produced the labels
+        without changing the authenticated creator, modifier, permissions, or per-user matching behavior.
         Results and errors in the response are linked to request items by `interaction_id`.
         Errors for individual items are returned in the `errors` field without blocking the rest of the batch.
         Requests where every item is denied by queue access rules return `403`.
@@ -209243,7 +210464,8 @@ paths:
                   data:
                     attributes:
                       annotations:
-                        - interaction_id: 00000000-0000-0000-0000-000000000001
+                        - annotator: "Alex Contractor"
+                          interaction_id: 00000000-0000-0000-0000-000000000001
                           label_values:
                             - label_schema_id: abc-123
                               value: good
@@ -209264,7 +210486,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -209281,7 +210504,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -212253,6 +213477,7 @@ paths:
                             evp_query: "@ml_app:support-bot"
                             hierarchy_depth: 2
                             id: a7c8d9e0-1234-5678-9abc-def012345678
+                            min_cluster_size: 15
                             name: Support chatbot topics
                             num_records: 1000
                             sampling_ratio: 0.1
@@ -212313,6 +213538,7 @@ paths:
                     attributes:
                       evp_query: "@ml_app:support-bot"
                       hierarchy_depth: 2
+                      min_cluster_size: 15
                       name: Support chatbot topics
                       num_records: 1000
                       sampling_ratio: 0.1
@@ -212333,6 +213559,7 @@ paths:
                         created_at: "2024-01-15T10:30:00Z"
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
+                        min_cluster_size: 15
                         name: Support chatbot topics
                         num_records: 1000
                         sampling_ratio: 0.1
@@ -212402,6 +213629,7 @@ paths:
                         created_at: "2024-01-15T10:30:00Z"
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
+                        min_cluster_size: 15
                         name: Support chatbot topics
                         num_records: 1000
                         sampling_ratio: 0.1
@@ -219605,7 +220833,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          description: |-
+            Bad Request
+
+            If the tag configuration is too large to be stored, the error message is
+            `Tag configuration is too large to be stored. The limit applies to the total encoded size of the tags list, not to a fixed number of tags. Retrying the same request will fail. Remove tags that are not needed for querying, or use shorter tag keys, then resubmit.`
         "403":
           content:
             application/json:
@@ -219684,7 +220916,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          description: |-
+            Bad Request
+
+            If the tag configuration is too large to be stored, the error message is
+            `Tag configuration is too large to be stored. The limit applies to the total encoded size of the tags list, not to a fixed number of tags. Retrying the same request will fail. Remove tags that are not needed for querying, or use shorter tag keys, then resubmit.`
         "403":
           content:
             application/json:
@@ -233161,6 +234397,7 @@ paths:
                           created_by: user@example.com
                           enabled: true
                           input_tokens_per_minute: 500000
+                          is_template: false
                           mode: ALERT
                           name: Default rate limit
                           output_tokens_per_minute: 200000
@@ -233168,6 +234405,7 @@ paths:
                           revision: 1
                           tags:
                             provider: openai
+                          template_split_dims: []
                           updated_at: "2026-09-15T14:30:00Z"
                           updated_by: user@example.com
                         id: 33333333-3333-3333-3333-333333333333
@@ -233194,7 +234432,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.
+      description: Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.
       operationId: CreateAiGatewayRateLimit
       requestBody:
         content:
@@ -233215,6 +234453,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233222,6 +234461,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-01T00:00:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233249,6 +234489,63 @@ paths:
         operator: OR
         permissions:
           - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/instances/summary:
+    get:
+      description: Aggregate the counters of every template rate limit in the organization in one call. The response has one summary per template, in the same order as the rate limit list. Each summary matches the response of the single-template counter summary endpoint without split_dim, including scope_restricted and truncated. Rate limits with one shared allowance aren't included. Summaries are cached for up to 15 seconds.
+      operationId: ListAiGatewayRateLimitInstancesSummaries
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          instance_count: 14
+                          limited_requests: 25
+                          limiting_count: 2
+                          max_utilization: 1.2
+                          near_limit_count: 3
+                          rate_limit_id: 33333333-3333-3333-3333-333333333333
+                          scope_restricted: false
+                          truncated: false
+                          would_limit_requests: 0
+                        id: 33333333-3333-3333-3333-333333333333
+                        type: rate-limit-instances-summary
+                      - attributes:
+                          instance_count: 0
+                          limited_requests: 0
+                          limiting_count: 0
+                          max_utilization: 0
+                          near_limit_count: 0
+                          rate_limit_id: 44444444-4444-4444-4444-444444444444
+                          scope_restricted: true
+                          truncated: false
+                          would_limit_requests: 0
+                        id: 44444444-4444-4444-4444-444444444444
+                        type: rate-limit-instances-summary
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryListResponse"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: List AI Gateway rate limit counter summaries
+      tags:
+        - AI Gateway
+      x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -233356,6 +234653,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233363,6 +234661,7 @@ paths:
                         revision: 1
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233391,7 +234690,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
-      description: Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
+      description: Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.
       operationId: UpdateAiGatewayRateLimit
       parameters:
         - $ref: "#/components/parameters/AiGatewayRateLimitID"
@@ -233414,6 +234713,7 @@ paths:
                         created_by: user@example.com
                         enabled: true
                         input_tokens_per_minute: 500000
+                        is_template: false
                         mode: ALERT
                         name: Default rate limit
                         output_tokens_per_minute: 200000
@@ -233421,6 +234721,7 @@ paths:
                         revision: 2
                         tags:
                           provider: openai
+                        template_split_dims: []
                         updated_at: "2026-09-15T14:30:00Z"
                         updated_by: user@example.com
                       id: 33333333-3333-3333-3333-333333333333
@@ -233450,6 +234751,120 @@ paths:
         operator: OR
         permissions:
           - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances:
+    get:
+      description: List the hot counters of a template rate limit, one per matched user, Team, or value, with their live usage. The list includes only counters that, in the last hour, reached 80% or more of a limit or limited or would have limited a request. A counter appears within a few minutes of becoming hot. Usage is read for at most 200 counters per request; past that, rows carry usage_known false. Counters for a provider or model the caller can't see are left out, and when the caller can't see the template's selector, the list is empty. A rate limit with one shared allowance, including one whose selector has no per_value entry, returns an empty list. Returns 503 when counter usage can't be read.
+      operationId: ListAiGatewayRateLimitInstances
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSort"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceLimit"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceOffset"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          first_seen: "2026-10-28T10:00:00Z"
+                          input_tokens: 15000
+                          input_tokens_per_minute:
+                          instance_key: "v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                          last_seen: "2026-10-28T10:05:00Z"
+                          limited_requests: 0
+                          output_tokens: 4000
+                          output_tokens_per_minute:
+                          rate_limit_id: 33333333-3333-3333-3333-333333333333
+                          requests: 42
+                          requests_per_minute: 60
+                          split_dims:
+                            user_id: 11111111-1111-1111-1111-111111111111
+                          usage_known: true
+                          utilization: 0.7
+                          would_limit_requests: 0
+                        id: "33333333-3333-3333-3333-333333333333|v1|7:user_id=36:11111111-1111-1111-1111-111111111111"
+                        type: rate-limit-instances
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstanceListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: List AI Gateway rate limit counters
+      tags:
+        - AI Gateway
+      x-menu-order: 46
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rate-limits/{id}/instances/summary:
+    get:
+      description: Aggregate a template rate limit's hot counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Hot counters are those that reached 80% or more of a limit, or that limited or would have limited a request, in the last hour. Use split_dim to aggregate only counters that match every given dimension value. When the caller can't see the template's selector, every count is zero and scope_restricted is true. Summaries are cached for up to 15 seconds. Returns 503 when counter usage can't be read.
+      operationId: GetAiGatewayRateLimitInstancesSummary
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayRateLimitID"
+        - $ref: "#/components/parameters/AiGatewayRateLimitInstanceSplitDim"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        instance_count: 14
+                        limited_requests: 25
+                        limiting_count: 2
+                        max_utilization: 1.2
+                        near_limit_count: 3
+                        rate_limit_id: 33333333-3333-3333-3333-333333333333
+                        scope_restricted: false
+                        truncated: false
+                        would_limit_requests: 0
+                      id: 33333333-3333-3333-3333-333333333333
+                      type: rate-limit-instances-summary
+              schema:
+                $ref: "#/components/schemas/AiGatewayRateLimitInstancesSummaryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get an AI Gateway rate limit counter summary
+      tags:
+        - AI Gateway
+      x-menu-order: 47
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -245271,6 +246686,12 @@ paths:
     get:
       description: |-
         Get the list of users assigned seats for a product code.
+
+        This endpoint requires the `user_access_read` (User Access Read) permission
+        in addition to at least one of `billing_read`, `incident_read`, or `on_call_read`.
+        Scoped application keys, personal access tokens, and service access tokens
+        must include the `user_access_read` scope. Credentials without this scope
+        receive a `403 Forbidden` response.
       operationId: GetSeatsUsers
       parameters:
         - description: The product code for which to retrieve seat users.
@@ -245311,6 +246732,8 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "422":
           content:
             application/json:
@@ -245319,6 +246742,11 @@ paths:
           description: Unprocessable Entity
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_read
       summary: Get users with seats
       tags:
         - Seats
@@ -252688,7 +254116,7 @@ paths:
           - security_monitoring_cws_agent_rules_read
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
-      description: Get the list of all critical assets.
+      description: Get the list of all dynamic severity rules (previously called critical assets).
       operationId: ListSecurityMonitoringCriticalAssets
       responses:
         "200":
@@ -252722,8 +254150,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 52
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     post:
-      description: Create a new critical asset.
+      description: Create a new dynamic severity rule (previously called critical assets).
       operationId: CreateSecurityMonitoringCriticalAsset
       requestBody:
         content:
@@ -252782,9 +254214,13 @@ paths:
         - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 53
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
     get:
-      description: Get the list of critical assets that affect a specific existing rule by the rule's ID.
+      description: Get the list of dynamic severity rules (previously called critical assets) that affect a specific existing rule by the rule's ID.
       operationId: GetCriticalAssetsAffectingRule
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringRuleID"
@@ -252822,9 +254258,13 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
   /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
     delete:
-      description: Delete a specific critical asset.
+      description: Delete a specific dynamic severity rule (previously called critical assets).
       operationId: DeleteSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -252846,8 +254286,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
     get:
-      description: Get the details of a specific critical asset.
+      description: Get the details of a specific dynamic severity rule (previously called critical assets).
       operationId: GetSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -252885,8 +254329,12 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 54
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_read
     patch:
-      description: Update a specific critical asset.
+      description: Update a specific dynamic severity rule (previously called critical assets).
       operationId: UpdateSecurityMonitoringCriticalAsset
       parameters:
         - $ref: "#/components/parameters/SecurityMonitoringCriticalAssetID"
@@ -252949,6 +254397,10 @@ paths:
       tags:
         - Security Monitoring
       x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_critical_assets_write
   /api/v2/security_monitoring/configuration/integration_config:
     get:
       description: |-
@@ -264865,7 +266317,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       components:
                         - name: API
                           position: 0
@@ -264884,10 +266336,10 @@ paths:
                           position: 2
                           type: component
                       domain_prefix: status-page-us1
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -265202,12 +266654,12 @@ paths:
                 value:
                   data:
                     attributes:
-                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+                      company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       domain_prefix: status-page-us1-east
-                      email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      email_header_image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
+                      favicon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       name: Status Page US1 East
-                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
+                      slack_app_icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
@@ -274090,9 +275542,12 @@ paths:
 
         **`user_handle`**
 
-        - **Value:** The handle of a user, for example `jane@example.com`, or `"*"` for the default quota applied to
-          users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the
-          [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+        - **Value:** One of the following:
+          - A user's handle, such as `jane@example.com`. User handles are returned in the
+            `data[].attributes.handle` field by the
+            [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+          - `"*"`, the default quota applied to users without a specific quota.
+          - `"*agents*"`, the quota shared by all autonomous agents.
         - **Validation:** A specific handle must identify an existing user in the caller's organization when
           `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's
           organization or in at least one targeted descendant organization. The quota is then applied only to the
@@ -274106,6 +275561,12 @@ paths:
         - **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so
           `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's
           organization only.
+
+        **`team_id`** (private preview)
+
+        - **Value:** The ID of a team. Team IDs are returned in the `data[].id` field by the
+          [Teams API](https://docs.datadoghq.com/api/latest/teams/get-all-teams/).
+        - **Availability:** Quotas on `team_id` are in private preview. Contact your Datadog account team to request access.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -279245,7 +280706,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule.
+      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams

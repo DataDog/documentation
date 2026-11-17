@@ -82,3 +82,9 @@ entries:
       - UpdateQuota
       - UpdateTemporaryGrantRequest
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41667
+    operations:
+      - GetUsageBillableSummary
+    title: Expose Error Tracking usage in the billable summary
