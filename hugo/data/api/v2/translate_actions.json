@@ -5353,6 +5353,12 @@
     "request_description": "",
     "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
   },
+  "QueryProductAnalyticsJourneyDropOff": {
+    "description": "Analyze the drop-off at a given step of the journey. The journey must have at least two\nsteps, and only the `@session.id` join key is supported. Set `target` to the node to\nanalyze. It can't be the first step. When `target` is omitted, the last step is used.\nReturns the number of sessions that reached the step before the target but not the target,\ntogether with the issues and frustration signals most associated with the drop-off.",
+    "summary": "Analyze journey drop-off",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey drop-off analysis."
+  },
   "QueryProductAnalyticsJourneyFunnel": {
     "description": "Compute a funnel over an ordered sequence of Product Analytics events.\nReturns the per-step conversion counts, conversion rates, and elapsed times,\noptionally segmented by group-by facets.",
     "summary": "Compute journey funnel analysis",
@@ -5406,6 +5412,18 @@
     "summary": "Compute a Sankey diagram",
     "request_description": "The Sankey diagram query.",
     "request_schema_description": "Request body for a Sankey diagram query."
+  },
+  "QueryProductAnalyticsFunnelSuggestions": {
+    "description": "Get the features that Product Analytics detected in your applications, grouped by\napplication and feature area. Each feature comes with a suggested journey that users\nfollow to use it, which you can use as funnel steps.",
+    "summary": "Get feature suggestions",
+    "request_description": "",
+    "request_schema_description": "Request to get suggested features and their journeys."
+  },
+  "QueryProductAnalyticsFunnelStepSuggestions": {
+    "description": "Get the steps that users most often take after the existing steps of a funnel.\nSuggestions come from the same precomputed journeys as feature suggestions.\nReturns an empty list when no journey starts with the given steps.",
+    "summary": "Get funnel step suggestions",
+    "request_description": "",
+    "request_schema_description": "Request to get suggested next steps for a funnel."
   },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",

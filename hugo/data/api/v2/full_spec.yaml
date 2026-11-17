@@ -111065,6 +111065,33 @@ components:
       required:
         - aggregation
       type: object
+    ProductAnalyticsCoreUserJourney:
+      description: A sequence of events that users follow to use a feature.
+      properties:
+        expression:
+          description: Order of the steps, as step IDs joined by `->`.
+          example: node_0->node_1
+          type: string
+        score:
+          description: Relevance score of the journey. Higher is more relevant.
+          example: 50
+          format: int64
+          type: integer
+        steps:
+          additionalProperties:
+            description: Event query of the step.
+            type: string
+          description: Map of step ID to the event query of the step.
+          example:
+            node_0: "@type:view @view.name:/checkout"
+            node_1: "@type:action @action.name:pay"
+          type: object
+        support:
+          description: Number of sessions that followed the journey.
+          example: 120
+          format: int64
+          type: integer
+      type: object
     ProductAnalyticsElapsedTime:
       description: Elapsed time statistics (min/max/avg in milliseconds).
       properties:
@@ -111271,6 +111298,241 @@ components:
       type: string
       x-enum-varnames:
         - FORMULA_RETENTION_REQUEST
+    ProductAnalyticsFunnelStepSuggestionsRequest:
+      description: Request to get suggested next steps for a funnel.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsRequestAttributes:
+      description: Attributes of a step suggestions request.
+      properties:
+        application_id:
+          description: Only use journeys from this RUM application.
+          example: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+          type: string
+        expression:
+          description: Order of the funnel steps, as step IDs joined by `->`.
+          example: node_01->node_02
+          type: string
+        steps:
+          additionalProperties:
+            description: Event query of the step.
+            type: string
+          description: |-
+            Map of step ID to the event query of the step. Steps are matched in the string sort
+            order of their IDs, so use zero-padded IDs such as `node_01` and `node_02`. Without padding,
+            `node_10` sorts before `node_2`.
+          example:
+            node_01: "@type:view @view.name:/checkout"
+            node_02: "@type:action @action.name:pay"
+          minProperties: 1
+          type: object
+      required:
+        - expression
+        - steps
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsRequestData:
+      description: Data of a step suggestions request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsRequestType:
+      default: funnel_suggestions_steps_request
+      description: Type of a step suggestions request.
+      enum:
+        - funnel_suggestions_steps_request
+      example: funnel_suggestions_steps_request
+      type: string
+      x-enum-varnames:
+        - FUNNEL_SUGGESTIONS_STEPS_REQUEST
+    ProductAnalyticsFunnelStepSuggestionsResponse:
+      description: Suggested next steps for a funnel.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsResponseAttributes:
+      description: Attributes of a step suggestions response.
+      properties:
+        steps:
+          description: Event queries of the suggested next steps, most relevant first.
+          example:
+            - "@type:action @action.name:pay"
+          items:
+            description: Event query of a suggested step.
+            type: string
+          type: array
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsResponseData:
+      description: Data of a step suggestions response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsResponseAttributes"
+        id:
+          description: ID of the response.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsFunnelStepSuggestionsResponseType:
+      default: funnel_suggestions_steps_response
+      description: Type of a step suggestions response.
+      enum:
+        - funnel_suggestions_steps_response
+      example: funnel_suggestions_steps_response
+      type: string
+      x-enum-varnames:
+        - FUNNEL_SUGGESTIONS_STEPS_RESPONSE
+    ProductAnalyticsFunnelSuggestionsApplication:
+      description: Suggested features of one application.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+          type: string
+        domains:
+          description: Feature areas of the application.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsDomain"
+          type: array
+      type: object
+    ProductAnalyticsFunnelSuggestionsDomain:
+      description: A feature area of an application, such as checkout or settings.
+      properties:
+        features:
+          description: Features in this area.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsFeature"
+          type: array
+        name:
+          description: Name of the feature area.
+          example: Checkout
+          type: string
+      type: object
+    ProductAnalyticsFunnelSuggestionsFeature:
+      description: A feature detected in the application, with the journeys users take to use it.
+      properties:
+        core_user_journeys:
+          description: The suggested journey that users follow to use the feature. Contains one journey.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsCoreUserJourney"
+          type: array
+        description:
+          description: Description of the feature.
+          example: Users enter a promo code and pay for their order.
+          type: string
+        id:
+          description: ID of the feature.
+          example: "12"
+          type: string
+        name:
+          description: Name of the feature.
+          example: Pay for an order
+          type: string
+        score:
+          description: Relevance score of the feature. Higher is more relevant.
+          example: 111
+          format: int64
+          type: integer
+        support:
+          description: Number of sessions that used the feature.
+          example: 222
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsFunnelSuggestionsRequest:
+      description: Request to get suggested features and their journeys.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFunnelSuggestionsRequestAttributes:
+      description: Attributes of a feature suggestions request.
+      properties:
+        application_id:
+          description: Only return suggestions for this RUM application.
+          example: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+          type: string
+      type: object
+    ProductAnalyticsFunnelSuggestionsRequestData:
+      description: Data of a feature suggestions request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsRequestType"
+      required:
+        - type
+      type: object
+    ProductAnalyticsFunnelSuggestionsRequestType:
+      default: funnel_suggestions_request
+      description: Type of a feature suggestions request.
+      enum:
+        - funnel_suggestions_request
+      example: funnel_suggestions_request
+      type: string
+      x-enum-varnames:
+        - FUNNEL_SUGGESTIONS_REQUEST
+    ProductAnalyticsFunnelSuggestionsResponse:
+      description: Suggested features and their journeys.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFunnelSuggestionsResponseAttributes:
+      description: Attributes of a feature suggestions response.
+      properties:
+        applications:
+          description: Suggested features, grouped by application and feature area.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsApplication"
+          type: array
+      type: object
+    ProductAnalyticsFunnelSuggestionsResponseData:
+      description: Data of a feature suggestions response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsResponseAttributes"
+        id:
+          description: ID of the response.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsFunnelSuggestionsResponseType:
+      default: funnel_suggestions_response
+      description: Type of a feature suggestions response.
+      enum:
+        - funnel_suggestions_response
+      example: funnel_suggestions_response
+      type: string
+      x-enum-varnames:
+        - FUNNEL_SUGGESTIONS_RESPONSE
     ProductAnalyticsGraphQueryCompute:
       description: Defines the metric computed over the journey.
       properties:
@@ -111506,6 +111768,155 @@ components:
       x-enum-varnames:
         - CONVERSION
         - DROP_OFF
+    ProductAnalyticsJourneyDropOffIssue:
+      description: An issue contributing to drop-off at the target step.
+      properties:
+        error_count:
+          description: Number of errors attributed to this issue.
+          example: 120
+          format: int64
+          type: integer
+        issue_id:
+          description: Identifier of the issue.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        session_count:
+          description: Number of sessions affected by this issue.
+          example: 84
+          format: int64
+          type: integer
+      required:
+        - issue_id
+        - error_count
+        - session_count
+      type: object
+    ProductAnalyticsJourneyDropOffQuery:
+      description: Query definition for a journey drop-off analysis request.
+      properties:
+        sampling:
+          $ref: "#/components/schemas/ProductAnalyticsSampling"
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearch"
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyNodeTarget"
+        top_issue_count:
+          default: 5
+          description: Maximum number of issues to return.
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      required:
+        - search
+      type: object
+    ProductAnalyticsJourneyDropOffRequest:
+      description: Request body for a journey drop-off analysis.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyDropOffRequestAttributes:
+      description: Attributes of a journey drop-off analysis request.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsJourneyDropOffRequestData:
+      description: The definition of a journey drop-off analysis request body.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyDropOffRequestType:
+      description: The resource type identifier for a journey drop-off analysis request.
+      enum:
+        - journey_drop_off_analysis_request
+      example: journey_drop_off_analysis_request
+      type: string
+      x-enum-varnames:
+        - JOURNEY_DROP_OFF_ANALYSIS_REQUEST
+    ProductAnalyticsJourneyDropOffResponse:
+      description: Response for a journey drop-off analysis.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyDropOffResponseAttributes:
+      description: Attributes of a journey drop-off analysis response.
+      properties:
+        drop_off_count:
+          description: Number of sessions that reached the step before the target but not the target step.
+          example: 696
+          format: int64
+          type: integer
+        issues:
+          description: The issues most associated with the drop-off.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffIssue"
+          type: array
+        sessions_with_errors:
+          description: Number of dropped-off sessions that contained an error.
+          example: 84
+          format: int64
+          type: integer
+        sessions_with_frustration_signals:
+          description: Number of dropped-off sessions that contained a frustration signal.
+          example: 31
+          format: int64
+          type: integer
+      required:
+        - drop_off_count
+        - sessions_with_errors
+        - sessions_with_frustration_signals
+        - issues
+      type: object
+    ProductAnalyticsJourneyDropOffResponseData:
+      description: The journey drop-off analysis results.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffResponseAttributes"
+        id:
+          description: Identifier of this result.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyDropOffResponseType:
+      description: The resource type identifier for a journey drop-off analysis response.
+      enum:
+        - journey_drop_off_analysis_response
+      example: journey_drop_off_analysis_response
+      type: string
+      x-enum-varnames:
+        - JOURNEY_DROP_OFF_ANALYSIS_RESPONSE
     ProductAnalyticsJourneyEntity:
       description: The kind of entity returned by a journey list query.
       enum:
@@ -112923,6 +113334,14 @@ components:
       oneOf:
         - $ref: "#/components/schemas/ProductAnalyticsRetentionCalendarTimeInterval"
         - $ref: "#/components/schemas/ProductAnalyticsRetentionFixedTimeInterval"
+    ProductAnalyticsSampling:
+      description: Sampling configuration for a query.
+      properties:
+        enabled:
+          default: false
+          description: Whether session sampling is enabled. Sampling lowers both query cost and statistical precision.
+          type: boolean
+      type: object
     ProductAnalyticsSankeyAggregatedNode:
       description: One of the nodes rolled up into an aggregated node, retained so the roll-up can be broken down.
       properties:
@@ -233743,6 +234162,84 @@ paths:
         operator: OR
         permissions:
           - rum_apps_read
+  /api/v2/product-analytics/journey/drop_off_analysis:
+    post:
+      description: |-
+        Analyze the drop-off at a given step of the journey. The journey must have at least two
+        steps, and only the `@session.id` join key is supported. Set `target` to the node to
+        analyze. It can't be the first step. When `target` is omitted, the last step is used.
+        Returns the number of sessions that reached the step before the target but not the target,
+        together with the issues and frustration signals most associated with the drop-off.
+      operationId: QueryProductAnalyticsJourneyDropOff
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        search:
+                          expression: A -> B
+                          node_objects:
+                            A:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Login"
+                            B:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:action @action.target.name:Submit"
+                        target:
+                          type: node
+                          value: B
+                        top_issue_count: 5
+                      to: 1756857600000
+                    type: journey_drop_off_analysis_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        drop_off_count: 696
+                        issues:
+                          - error_count: 120
+                            issue_id: 00000000-0000-0000-0000-000000000001
+                            session_count: 84
+                        sessions_with_errors: 84
+                        sessions_with_frustration_signals: 31
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: journey_drop_off_analysis_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsJourneyDropOffResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Analyze journey drop-off
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/journey/funnel:
     post:
       description: |-
@@ -234406,6 +234903,132 @@ paths:
         - Product Analytics
       x-codegen-request-body-name: body
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/suggestions/features:
+    post:
+      description: |-
+        Get the features that Product Analytics detected in your applications, grouped by
+        application and feature area. Each feature comes with a suggested journey that users
+        follow to use it, which you can use as funnel steps.
+      operationId: QueryProductAnalyticsFunnelSuggestions
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      application_id: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+                    type: funnel_suggestions_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        applications:
+                          - application_id: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+                            domains:
+                              - features:
+                                  - core_user_journeys:
+                                      - expression: node_0->node_1
+                                        score: 50
+                                        steps:
+                                          node_0: "@type:view @view.name:/checkout"
+                                          node_1: "@type:action @action.name:pay"
+                                        support: 120
+                                    description: Users enter a promo code and pay for their order.
+                                    id: "12"
+                                    name: Pay for an order
+                                    score: 111
+                                    support: 222
+                                name: Checkout
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: funnel_suggestions_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsFunnelSuggestionsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get feature suggestions
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/suggestions/features/steps:
+    post:
+      description: |-
+        Get the steps that users most often take after the existing steps of a funnel.
+        Suggestions come from the same precomputed journeys as feature suggestions.
+        Returns an empty list when no journey starts with the given steps.
+      operationId: QueryProductAnalyticsFunnelStepSuggestions
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      application_id: 40d8ca4b-2ac0-481f-b16e-f110699ecff6
+                      expression: node_01
+                      steps:
+                        node_01: "@type:view @view.name:/checkout"
+                    type: funnel_suggestions_steps_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        steps:
+                          - "@type:action @action.name:pay"
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: funnel_suggestions_steps_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsFunnelStepSuggestionsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get funnel step suggestions
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
