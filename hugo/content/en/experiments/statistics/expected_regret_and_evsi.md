@@ -22,7 +22,7 @@ Bayesian analysis reports two statistics that help you decide whether to stop an
 - **Minimum expected regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is.
 - **Expected value of sample information (EVSI)**: How much the minimum expected regret is likely to drop if the experiment keeps running at its recent traffic. Datadog bases EVSI on one more week of data, as described in the [How Datadog projects the extra data](#how-datadog-projects-the-extra-data) section.
 
-Both statistics appear in the [Statistical details view][1] of the experiment results page. They are available only for experiments that use [Bayesian analysis][2].
+Both statistics appear in the [Statistical details tab][1] of the experiment results page. They are available only for experiments that use [Bayesian analysis][2].
 
 This page is a reference for readers who want to understand or reproduce these calculations. It uses the notation and the Bayesian posterior defined in [Lift and Interval Calculations][3].
 
@@ -132,7 +132,7 @@ Minimum expected regret and EVSI are on the same scale, so you can compare them 
 
 Running an experiment longer also has costs, such as delaying the rollout of a better variant or keeping users on a worse one. To compare EVSI with these costs, convert both into the same units, such as revenue.
 
-Both statistics depend on the prior. A tighter prior shrinks the posterior toward zero and can reduce how much extra data changes the posterior.
+Both statistics depend on the prior. A tighter prior shrinks the posterior toward the prior mean (zero by default) and can reduce how much extra data changes the posterior.
 
 ## Example
 
