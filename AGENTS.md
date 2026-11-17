@@ -175,6 +175,15 @@ The full Vale linter rules are at https://github.com/DataDog/datadog-vale. Key s
 
 Avoid temporal words: currently, now, will, won't
 
+## Jira cards for editorial review
+
+When a PR is opened against this repo and its author is not on the Docs team, a Docs team member assesses the size of the PR's changeset. If it is relatively large, the Docs team:
+1. Creates a Jira card on the DOCS board with Type: Editorial Review
+2. Adds the "editorial review" label to the PR
+3. Comments on the PR with the Jira identifier (e.g., "DOCS-16158")
+
+If you are not on the Docs team and you open a large PR against this repo, you can optionally open your own editorial review Jira card (instead of waiting for the Docs team to do it). If you do this, follow all of steps 1-3 above.
+
 ## Hugo-Specific Details
 
 ### Shortcodes
