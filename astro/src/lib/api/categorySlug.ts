@@ -1,11 +1,11 @@
 /**
  * Turns OpenAPI tag names and operation summaries into URL slugs.
  *
- * This module has no imports on purpose. `scripts/checkSiteSupportDrift.ts`
- * runs under plain Node, which can't resolve the Vite aliases and `?raw`
- * imports the rest of `src/lib/api` uses, so it needs a slug rule it can load
- * directly. Keeping the one rule here means the script and the site can't
- * disagree about a category's slug.
+ * This module has no imports on purpose. Scripts such as
+ * `scripts/lib/apiCodeExamples/pathResolution.ts` run under plain Node, which
+ * can't resolve the Vite aliases and `?raw` imports the rest of `src/lib/api`
+ * uses, so they need a slug rule they can load directly. Keeping the one rule
+ * here means the scripts and the site can't disagree about a category's slug.
  */
 
 /**
