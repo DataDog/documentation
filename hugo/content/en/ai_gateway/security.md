@@ -1,39 +1,40 @@
 ---
-title: Evaluate LLM Traffic with AI Guard in AI Gateway
-description: Attach AI Guard policies to AI Gateway to evaluate supported prompts and responses, block unsafe content, and detect sensitive data.
+title: Security and Data Capture in AI Gateway
+description: Apply AI Guard policies to AI Gateway traffic and control recorded prompt and response content with data capture defaults and overrides.
 further_reading:
-  - link: "/llm_observability/configure/ai_gateway/"
+  - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
-  - link: "/security/ai_guard/policies/"
-    tag: "Documentation"
-    text: "Configure AI Guard policies"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
 
+Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
+
+<!-- vale Datadog.headings = NO -->
+## Apply AI Guard policies
+<!-- vale Datadog.headings = YES -->
+
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-## Overview
-
-Attach an [AI Guard policy][1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the Gateway attachment defines which traffic it evaluates and how Gateway handles the result.
+Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the Gateway attachment defines which traffic it evaluates and how Gateway handles the result.
 
 For Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
 
 Start with an attachment on a test routing rule before applying a policy across the organization.
 
-## Prerequisites
+### Prerequisites
 
-- Complete the [AI Gateway prerequisites][2] and configure an accessible model or routing rule.
+- Complete the [AI Gateway prerequisites][ai_guard-2] and configure an accessible model or routing rule.
 - To manage attachments, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions.
-- To select a policy, have **AI Guard View** (`ai_guard_view`). To create or edit a policy, also have **AI Guard Write** (`ai_guard_write`). See [AI Guard permissions][3].
+- To select a policy, have **AI Guard View** (`ai_guard_view`). To create or edit a policy, also have **AI Guard Write** (`ai_guard_write`). See [AI Guard permissions][ai_guard-3].
 - The **same credential used to call AI Gateway** must allow both **AI Gateway Usage** (`ai_gateway_usage`) and **AI Guard Evaluate** (`ai_guard_evaluate`). Both the calling user or service account and the credential scope must permit these actions. An administrator's permissions do not grant evaluation access to an application's credential.
 
-## Choose the attachment scope
+### Choose the attachment scope
 
 | Target | Traffic evaluated |
 |---|---|
@@ -42,21 +43,21 @@ Start with an attachment on a test routing rule before applying a policy across 
 
 A route-specific attachment replaces the organization default for that route. The policies do not accumulate. The routing rule originally requested by the caller determines the attachment. This selection also applies to nested routing rules and fallback destinations.
 
-## Attach a policy
+### Attach a policy
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}}][4] and click {{< ui >}}Attach AI Guard policy{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}}][ai_guard-4] and click {{< ui >}}Attach AI Guard policy{{< /ui >}}.
 2. Under {{< ui >}}Target{{< /ui >}}, select {{< ui >}}Everything{{< /ui >}}, or select {{< ui >}}Route{{< /ui >}} and choose a routing rule.
 3. Select an {{< ui >}}Existing policy{{< /ui >}}. To create a policy:
    1. Enter a {{< ui >}}New policy name{{< /ui >}}. Gateway policy names use the `datadog-ai-gateway.` prefix.
    2. Click {{< ui >}}Create in AI Guard{{< /ui >}} to open the policy editor.
-   3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][1].
+   3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][ai_guard-1].
    4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
 4. Under {{< ui >}}AI Gateway Action{{< /ui >}}, explicitly select {{< ui >}}Monitor only{{< /ui >}} or {{< ui >}}Block unsafe{{< /ui >}}. The form defaults to {{< ui >}}Block unsafe{{< /ui >}}.
 5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target, policy, and action, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
 
 To update an attachment, open it, change its settings, and click {{< ui >}}Save changes{{< /ui >}}. Allow configuration changes to propagate before checking fresh requests.
 
-## Choose an action
+### Choose an action
 
 | Action | Behavior |
 |---|---|
@@ -69,7 +70,7 @@ Existing attachments can have different saved sensitive-data or evaluator-error 
 
 In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See the [Troubleshooting](#troubleshooting) section.
 
-## Evaluation coverage
+### Evaluation coverage
 
 | Request API | Prompt evaluation | Response evaluation |
 |---|---|---|
@@ -82,21 +83,21 @@ Streamed output is not evaluated. Tool definitions, tool calls, and tool results
 
 A successful model response alone does not prove that AI Guard evaluated the request. Check the matching Gateway span for a completed evaluation.
 
-### Sensitive data scanning
+#### Sensitive data scanning
 
-Configure [sensitive data scanning][5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
+Configure [sensitive data scanning][ai_guard-5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
 
-This Gateway integration does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][9] supports direct SDK calls and the HTTP API. Gateway does not apply those redactions to the content it forwards.
+This Gateway integration does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. Gateway does not apply those redactions to the content it forwards.
 
-### Data capture and evaluation
+#### Data capture and evaluation
 
-[Gateway data capture][6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
+[Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
 
-## Verify the attachment
+### Verify the attachment
 
 Use synthetic content and an isolated routing rule. Avoid changing an organization-wide attachment to test enforcement.
 
-1. Create a dedicated AI Guard policy. Add a [custom rule][7] that denies a harmless test keyword such as `gatewayguardtest` in the last evaluated message.
+1. Create a dedicated AI Guard policy. Add a [custom rule][ai_guard-7] that denies a harmless test keyword such as `gatewayguardtest` in the last evaluated message.
 2. Attach the policy to the test route with **Monitor only** explicitly selected.
 3. Send a buffered Chat Completions request to the test route using the application's credential:
 
@@ -111,7 +112,7 @@ Use synthetic content and an isolated routing rule. Avoid changing an organizati
      }'
    ```
 
-4. Confirm the request succeeds. In [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][8], follow the request into Agent Observability and check that prompt evaluation completed with an `ALLOW` decision.
+4. Confirm the request succeeds. In [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][ai_guard-8], follow the request into Agent Observability and check that prompt evaluation completed with an `ALLOW` decision.
 5. Change the last message to `Reply briefly to gatewayguardtest.` and repeat the request. Confirm that the model request continues and prompt evaluation completes with `DENY`. A skipped or failed evaluation does not verify monitoring.
 6. Change the attachment action to **Block unsafe**, save, and repeat the keyword request. For this Chat Completions request, expect HTTP `422` and `guardrail_violation` in both the `X-Ai-Gateway-Error-Code` header and the response's `error.code`. Confirm a completed prompt denial in the matching span.
 7. Repeat the harmless request and confirm it still succeeds. This distinguishes selective enforcement from a credential, model-access, or evaluator failure.
@@ -119,7 +120,7 @@ Use synthetic content and an isolated routing rule. Avoid changing an organizati
 
 Match the route, caller, and timestamp when reviewing evaluation evidence. For streaming, Responses, and Anthropic traffic, verify prompt coverage separately; this procedure does not prove output evaluation for those request types.
 
-## Troubleshooting
+### Troubleshooting
 
 | Symptom | Check |
 |---|---|
@@ -132,16 +133,39 @@ Match the route, caller, and timestamp when reviewing evaluation evidence. For s
 
 For Gateway AI Guard refusals, OpenAI-compatible requests return HTTP `422`; native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
 
+## Configure data capture
+
+AI Gateway records supported inference requests in Agent Observability. Requests rejected before processing, such as authentication failures or malformed request bodies, might not appear there. The data capture mode controls whether a span includes prompt and response content.
+
+| Mode | What is recorded |
+|---|---|
+| Metadata only | Request and response metadata, without prompt and response content. |
+| Full capture | Request and response metadata, and prompt and response content. |
+
+Set the organization default in {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}. To apply a different mode to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}.
+
+An override can match a user, team, model, provider, or custom tag. Every filter in an override must match. Custom tags match the exact `x-dd-tag-<KEY>` header value. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
+
+If several overrides match, **Metadata only** takes precedence over **Full capture**. If no override matches, the organization default applies.
+
+A team capture override requires the `x-ai-gateway-team: <TEAM_SLUG>` header to select that team. Unlike team budgets and rate limits, a team capture override does not match a request based on team membership alone.
+
+Before you send sensitive prompts or responses, check the mode that applies to the request:
+
+1. Review the organization default and any matching capture overrides.
+2. Send a harmless test request with the same caller, team selection, custom tags, and model or routing rule as the workload.
+3. Open the request's Gateway span and review the recorded fields.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/ai_guard/policies/
-[2]: /llm_observability/configure/ai_gateway/#prerequisites
-[3]: /security/ai_guard/setup/#permissions
-[4]: https://app.datadoghq.com/llm/gateway/guardrails
-[5]: /security/ai_guard/policies/#sensitive-data-scanning
-[6]: /llm_observability/configure/ai_gateway/#configure-data-capture
-[7]: /security/ai_guard/policies/#custom-rules
-[8]: https://app.datadoghq.com/llm/gateway
-[9]: /security/ai_guard/sensitive_data_redaction/
+[ai_guard-1]: /security/ai_guard/policies/
+[ai_guard-2]: /ai_gateway/getting_started/#prerequisites
+[ai_guard-3]: /security/ai_guard/setup/#permissions
+[ai_guard-4]: https://app.datadoghq.com/llm/gateway/guardrails
+[ai_guard-5]: /security/ai_guard/policies/#sensitive-data-scanning
+[ai_guard-6]: /ai_gateway/security/#configure-data-capture
+[ai_guard-7]: /security/ai_guard/policies/#custom-rules
+[ai_guard-8]: https://app.datadoghq.com/llm/gateway
+[ai_guard-9]: /security/ai_guard/sensitive_data_redaction/

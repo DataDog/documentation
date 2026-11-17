@@ -20,7 +20,6 @@ further_reading:
 - link: /logs/guide/log-collection-troubleshooting-guide/
   tag: Documentation
   text: Guide de dépannage pour la collecte de logs
-site_support_id: fleet-automation-standard-features
 title: Configurer des logs personnalisés
 ---
 Utilisez [Fleet Automation][2] pour gérer les paramètres de [collecte de logs personnalisés][4] sur vos Agents à distance et à grande échelle. Au lieu de modifier les fichiers de configuration `conf.d` host par host, ciblez une modification en fonction des informations sur les hosts ou des tags, puis déployez-la sur tous les Agents correspondants en une seule fois. Avant le déploiement, examinez le diff de configuration pour chaque Agent concerné.

@@ -42,7 +42,7 @@ Avant de configurer le Ruby Feature Flags SDK, assurez-vous de disposer des él�
 
 ## Installation et initialisation de {#installing-and-initializing}
 
-Le Feature Flagging est fourni par Application Performance Monitoring (APM). Pour intégrer APM à votre application avec la prise en charge du Feature Flagging, installez les gems requis et configurez [Remote Configuration] avec la prise en charge d'OpenFeature.
+Le Feature Flagging est fourni par Application Performance Monitoring (APM). Pour intégrer APM à votre application avec la prise en charge des Feature Flags, installez les gems requis et configurez [Remote Configuration] avec la prise en charge d'OpenFeature.
 
 ```shell
 gem install datadog openfeature-sdk
@@ -286,13 +286,60 @@ end
 
 Pour modifier l'état du Feature Flag pendant un test, appelez `add_flag(flag_key:, value:)` sur l'instance du fournisseur. Le même modèle s'applique à Minitest — remplacez le hook `around` par les méthodes `setup`/`teardown`.
 
+## Utilisez le SDK Java sur JRuby {#use-the-java-sdk-on-jruby}
+
+Le SDK Ruby ne prend pas en charge Feature Flags sur JRuby. Sur JRuby, le SDK Ruby écrit un avertissement dans le log et n'active pas Feature Flags. Utilisez plutôt le [SDK Java][6]. JRuby appelle le SDK Java via son intégration Java.
+
+Utilisez les versions indiquées dans les [exigences de compatibilité du SDK Java][7].
+
+1. Obtenez le fichier JAR `dd-openfeature`, le fichier JAR du SDK Java OpenFeature et leurs dépendances. Par exemple, utilisez Maven pour les copier dans un répertoire.
+2. Chargez les fichiers JAR dans votre application avec `require`.
+3. Définissez les variables d'environnement pour votre source de configuration. Consultez [Sources de configuration du SDK serveur][8].
+4. Démarrez JRuby avec `dd-java-agent`. Utilisez l'option `-J` pour transmettre l'option `-javaagent` à la JVM.
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+Les fichiers JAR seuls n'activent pas la distribution des indicateurs de fonctionnalité. Le fournisseur Datadog utilise des classes de `dd-java-agent`. Si la JVM ne charge pas `dd-java-agent`, le fournisseur ne s'initialise pas. Les évaluations des indicateurs de fonctionnalité renvoient alors les valeurs par défaut.
+
+Pour les événements du fournisseur, la gestion des erreurs et les méthodes d'évaluation, consultez la page [SDK Java][6]. JRuby utilise les mêmes classes et méthodes.
+
 ## Dépannage {#troubleshooting}
 
 ### Feature flags renvoient toujours des valeurs par défaut {#feature-flags-always-return-default-values}
 
 Si les Feature flags renvoient systématiquement des valeurs par défaut de manière inattendue, vérifiez les points suivants :
 
+- Si l'application s'exécute sur JRuby, utilisez le SDK Java. Consultez [Utilisez le SDK Java sur JRuby][9].
 - Vérifiez que [Remote Configuration] est activé dans la configuration de votre Datadog Agent
+- Vérifiez que le Datadog Agent était disponible au démarrage de l'application. Si les problèmes persistent après que l'Agent est devenu disponible, redémarrez l'application. Consultez [Disponibilité de l'Agent][10].
 - Assurez-vous que le service et l'environnement sont configurés (soit via les variables d'environnement `DD_SERVICE` et `DD_ENV`, soit via `config.service` et `config.env` en Ruby)
 - Vérifiez que `config.remote.enabled = true` et `config.open_feature.enabled = true` sont définis dans la configuration Datadog de votre application Ruby
 - Vérifiez que la version de la gem `datadog` inclut la prise en charge d'OpenFeature (2.24.0 ou ultérieure)
@@ -325,3 +372,8 @@ Recherchez les messages concernant :
 [3]: https://openfeature.dev/
 [4]: /fr/account_management/api-app-keys/#api-keys
 [5]: /fr/feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /fr/feature_flags/server/java/
+[7]: /fr/feature_flags/server/java/#compatibility-requirements
+[8]: /fr/feature_flags/concepts/configuration_sources/
+[9]: #use-the-java-sdk-on-jruby
+[10]: /fr/feature_flags/concepts/configuration_sources/#agent-availability

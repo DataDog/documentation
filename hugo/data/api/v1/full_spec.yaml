@@ -9900,29 +9900,52 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsMonitorOptions:
+      description: Monitor configuration options for data jobs queries.
+      properties:
+        alert_on_every_failure:
+          description: |-
+            Alert separately for each failed run instead of on the count of trailing failures.
+            Only supported for `failed_runs` monitors with the `aastra` query dialect. It requires
+            a `> 0` threshold with no warning threshold, an evaluation window of at most two days,
+            and renotification disabled.
+          example: true
+          type: boolean
+      type: object
     MonitorFormulaAndFunctionDataJobsQueryDefinition:
       description: A formula and functions data jobs query.
       properties:
         job_type:
           description: |-
             The type of job being monitored. Valid values include:
-            `databricks.job`, `spark.application`, `airflow.dag`,
-            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            `databricks.job`, `spark.application`, `airflow.dag`, `dbt.job`, `glue.job`, `adf.pipeline`.
+            The `aastra` dialect also accepts `airflow.job`, `dbt.model`, and `dbt.test`.
             Custom job types are supported with the `custom.ol.` prefix.
           example: "databricks.job"
           type: string
         jobs_query:
-          description: Filter expression used to select the jobs to monitor.
+          description: |-
+            Filter expression used to select the jobs to monitor. Its syntax depends on `query_dialect`:
+            a metric tag filter such as `job_name:smoke*` for `metric`, or an Aastra entity search
+            such as ``search for databricks_job where `@team:data-eng` `` for `aastra`.
           example: "job_name:smoke*"
           type: string
+        monitor_options:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsMonitorOptions"
         name:
           description: Name of the query for use in formulas. Must be `run_query`.
           example: "run_query"
           type: string
         query_dialect:
           description: |-
-            Query dialect for data jobs queries. Currently only `metric` is supported.
+            Query dialect for data jobs queries. Valid values are `metric` and `aastra`.
           example: "metric"
+          type: string
+        run_filter:
+          description: |-
+            Optional filter on individual runs, using metrics filter syntax.
+            Only supported with the `aastra` query dialect.
+          example: "env:prod"
           type: string
       required:
         - name
@@ -9938,6 +9961,18 @@ components:
       type: string
       x-enum-varnames:
         - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityDetectionType:
+      description: |-
+        How a `data-jobs alert` job duration monitor detects a breach. Must match the
+        `.detection()` call in the monitor query. Required for job duration monitors.
+      enum:
+        - static
+        - anomaly
+      example: "anomaly"
+      type: string
+      x-enum-varnames:
+        - STATIC
+        - ANOMALY
     MonitorFormulaAndFunctionDataQualityDiffFunction:
       description: |-
         Function applied to the measure before it is compared against the predicted bounds.
@@ -9998,7 +10033,8 @@ components:
         The data quality measure to query. Common values include:
         `bytes`, `cardinality`, `custom`, `freshness`, `max`, `mean`, `min`,
         `nullness`, `percent_negative`, `percent_zero`, `row_count`, `stddev`,
-        `sum`, `uniqueness`. Additional values may be supported.
+        `sum`, `uniqueness`. `data-jobs alert` job duration monitors use `duration`.
+        Additional values may be supported.
       example: "row_count"
       type: string
     MonitorFormulaAndFunctionDataQualityModelBoundsOverride:
@@ -10068,6 +10104,14 @@ components:
     MonitorFormulaAndFunctionDataQualityMonitorOptions:
       description: Monitor configuration options for data quality queries.
       properties:
+        consecutive_runs:
+          description: |-
+            Number of consecutive runs that must breach before the monitor alerts.
+            Only supported by `data-jobs alert` job duration monitors. Defaults to `1`.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
         crontab_override:
           description: Crontab expression to override the default schedule.
           example: "* * * 10"
@@ -10080,6 +10124,8 @@ components:
           description: Custom WHERE clause for the query.
           example: "USER_ID = 123"
           type: string
+        detection_type:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDetectionType"
         group_by_columns:
           description: Columns to group results by.
           example: ["col1", "col2"]
@@ -10126,6 +10172,12 @@ components:
         name:
           description: Name of the query for use in formulas.
           example: "query1"
+          type: string
+        run_filter:
+          description: |-
+            Optional filter on individual runs, using metrics filter syntax.
+            Only supported by `data-jobs alert` job duration monitors.
+          example: "env:prod"
           type: string
         schema_version:
           description: Schema version for the data quality query.
@@ -37981,6 +38033,22 @@ paths:
         - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
         - `#` an integer or decimal number used to set the threshold.
+
+        **Data Jobs Alert Query**
+
+        Job status example: `formula("failed_runs(run_query)").by(group_keys).last(time_window) > #`
+
+        Job duration examples: `formula("job_duration(run_query)").detection(static).by(group_keys) > duration`
+        and `formula("job_duration(run_query)").detection(anomaly).by(group_keys) > 0`
+
+        - `run_query`: The name of the single query variable in `options.variables`. Job status monitors
+          use a data jobs query; job duration monitors use a data quality query with the `duration` measure.
+        - `group_keys`: The tags to group by, such as `entity_id,name,workspace_name`.
+        - `time_window`: Number of minutes (#m), hours (#h), or days (#d), up to `10d`.
+        - `#`: The number of trailing failed runs to alert above, as a non-negative integer.
+        - `duration`: The duration to alert above, such as `2h`, `30m`, or a number of seconds.
+        - `options.thresholds.critical`: Must equal the query threshold, in seconds for job duration.
+          Anomaly job duration monitors omit `options.thresholds`.
       operationId: CreateMonitor
       requestBody:
         content:
