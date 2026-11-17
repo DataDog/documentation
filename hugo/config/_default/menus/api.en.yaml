@@ -6812,18 +6812,6 @@ menu:
           - GetUsageObservabilityPipelines
         unstable: []
         order: 3
-    - name: Get monthly usage by resource
-      url: /api/latest/usage-metering/get-monthly-usage-by-resource/
-      identifier: usage-metering-get-monthly-usage-by-resource
-      parent: usage-metering
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetUsageMonthlyResources
-        unstable: []
-        order: 28
     - name: Get hourly usage for Lambda traced invocations
       url: /api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/
       identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -14127,6 +14115,75 @@ menu:
         operationids:
           - ListContainers
         unstable: []
+        order: 1
+    - name: CoreWeave Integration
+      url: /api/latest/coreweave-integration/
+      identifier: coreweave-integration
+      generated: true
+    - name: Update a CoreWeave integration account
+      url: /api/latest/coreweave-integration/update-a-coreweave-integration-account/
+      identifier: coreweave-integration-update-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a CoreWeave integration account
+      url: /api/latest/coreweave-integration/get-a-coreweave-integration-account/
+      identifier: coreweave-integration-get-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a CoreWeave integration account
+      url: /api/latest/coreweave-integration/delete-a-coreweave-integration-account/
+      identifier: coreweave-integration-delete-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a CoreWeave integration account
+      url: /api/latest/coreweave-integration/create-a-coreweave-integration-account/
+      identifier: coreweave-integration-create-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List CoreWeave integration accounts
+      url: /api/latest/coreweave-integration/list-coreweave-integration-accounts/
+      identifier: coreweave-integration-list-coreweave-integration-accounts
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCoreWeaveCloudIntegrationAccounts
+        unstable:
+          - v2
         order: 1
     - name: Customer Org
       url: /api/latest/customer-org/
