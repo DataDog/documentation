@@ -9,6 +9,9 @@ further_reading:
 - link: "/database_monitoring/setup_sql_server/"
   tag: "Documentation"
   text: "Setting Up SQL Server"
+- link: "/database_monitoring/setup_mysql/"
+  tag: "Documentation"
+  text: "Setting Up MySQL"
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Database Monitoring"
@@ -16,7 +19,7 @@ further_reading:
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
 
-However, exposing query statements with actual parameter values provides enhanced observability and debugging capabilities. Database Monitoring currently supports query capture with parameter values on the PostgreSQL and SQL Server integrations.
+However, exposing query statements with actual parameter values provides enhanced observability and debugging capabilities. Database Monitoring supports query capture with parameter values on the PostgreSQL, SQL Server, and MySQL integrations.
 
 Having access to query parameters enables:
 
@@ -33,7 +36,7 @@ Having access to query parameters enables:
 You must configure Database Monitoring for your database instance before continuing with this guide.
 
 Supported databases
-: PostgreSQL, SQL Server
+: PostgreSQL, SQL Server, MySQL
 
 Supported deployments
 : All deployment types.
@@ -46,6 +49,7 @@ To view query parameter values in the Database Monitoring UI, users need the **D
 To capture SQL query text and execution plans with parameter values, update the appropriate integration `conf.yaml` file based on your database type:
 - For PostgreSQL: edit `postgres.d/conf.yaml`
 - For SQL Server: edit `sqlserver.d/conf.yaml`
+- For MySQL: edit `mysql.d/conf.yaml`
 
 ```yaml
   collect_raw_query_statement:
@@ -85,14 +89,33 @@ Prepared statement support is currently available only for SQL Server. For more 
 | Stored Procedures | {{< X >}} |  Procedures invoked with EXEC. | `EXEC GetUser @id = 123;` | 7.64.0+ |
 | Prepared Statements | {{< X >}} | Support requires [query completions][1] configuration. Parameterized queries executed through prepared statements. Can be created explicitly or through drivers. | `sp_prepare @handle, N'SELECT * FROM users WHERE id = @id'; sp_execute @handle, @id = 123;` | 7.67.0+ |
 
+### MySQL
+
+<!-- TODO: replace 7.XX.0 with the first Agent version that ships collect_raw_query_statement for the mysql check -->
+
+| Query Execution Method | Support | Description | Example | Supported Agent Version |
+|------------|---------|-------------|---------|---------------|
+| Direct Executions | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. Includes queries from drivers that interpolate parameter values on the client side. | `SELECT * FROM users WHERE id = 123` | 7.XX.0+ |
+| Functions | {{< X >}} | Stored functions invoked with SELECT. | `SELECT get_user_name(123);` | 7.XX.0+ |
+| Stored Procedures | {{< X >}} | Procedures invoked with CALL. | `CALL procname(123)` | 7.XX.0+ |
+| Prepared Statements |  | Not supported. See [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited). Parameterized queries executed through server-side prepared statements. Can be created explicitly or through drivers. | `PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?'; EXECUTE stmt USING @id;` | |
+
+Many MySQL drivers interpolate parameter values into the query text on the client side before sending the query to the server. For example, MySQL Connector/J (JDBC) with its default settings, PyMySQL, and mysql2 send queries that include the parameter values. Datadog captures these queries as direct executions, including their parameter values.
+
+Some drivers use server-side prepared statements, for example Connector/J with `useServerPrepStmts=true`. For these queries, MySQL only records the query text with `?` placeholders, so no parameter values are shown. The Agent does not collect query text or explain plans with parameter values for queries that contain no literal values.
+
+MySQL truncates the query text that the Agent reads to the length set by the [`performance_schema_max_sql_text_length`][4] system variable (default: `1024` bytes). The Agent still collects truncated query text, so parameter values that appear after the limit are not captured. To capture longer queries, increase this variable. See [Query samples are truncated][5].
+
 ### Why prepared statement parameter values are limited
 
 Datadog uses activity sampling to capture currently running SQL queries. However, for prepared statements, the Database Management System replaces parameter values with placeholders at execution time. As a result, activity sampling cannot observe the actual values.
 
 To capture prepared statements with parameter values in SQL Server, you must [configure your SQL Server instance and integration to capture query completions][1], which provides the Datadog Agent rich visibility into prepared statement execution.
 
-Support for PostgreSQL prepared statement parameter value capture is not available at this time.
+Support for PostgreSQL and MySQL prepared statement parameter value capture is not available at this time.
 
 [1]: /database_monitoring/guide/sql_extended_events/
 [2]: /account_management/rbac/permissions/
 [3]: /account_management/rbac/
+[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-system-variables.html#sysvar_performance_schema_max_sql_text_length
+[5]: /database_monitoring/setup_mysql/troubleshooting/#query-samples-are-truncated
