@@ -728,7 +728,7 @@ menu:
       parent: otel-instrumentation
       weight: 301
     - name: Using Datadog OpenTelemetry SDKs
-      url: /opentelemetry/instrument/dd_otel_sdks/
+      url: /opentelemetry/instrument/ddot_sdks/
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302

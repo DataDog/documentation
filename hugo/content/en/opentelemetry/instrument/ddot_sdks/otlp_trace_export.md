@@ -3,29 +3,26 @@ title: Export Traces from Datadog SDKs in OTLP Format
 description: Configure a Datadog SDK to export traces in OpenTelemetry Protocol (OTLP) format to a DDOT Collector or any OTLP-compatible receiver.
 aliases:
     - /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+    - /opentelemetry/instrument/dd_otel_sdks/otlp_trace_export/
 further_reading:
-    - link: '/opentelemetry/instrument/dd_otel_sdks/'
+    - link: '/opentelemetry/instrument/ddot_sdks/'
       text: 'Using Datadog OpenTelemetry SDKs'
       tag: 'Documentation'
     - link: '/opentelemetry/setup/ddot_collector/'
-      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
+      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT Collector)'
       tag: 'Documentation'
     - link: '/tracing/'
       text: 'Datadog APM'
       tag: 'Documentation'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Preview">}}
-OTLP trace export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
-{{< /callout >}}
-
-Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receiver, including [DDOT][2] or any OpenTelemetry Collector.
+Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receiver, including a [DDOT Collector][2] or any OpenTelemetry Collector.
 
 ## Prerequisites
 
 OTLP export requires:
 
-- **The Datadog SDK installed and attached to your service.** OTLP export uses your existing Datadog SDK setup. You don't need to configure the Datadog Agent for native trace export, because OTLP export sends traces to a receiver instead.
+- **The Datadog SDK installed and attached to your service.** A Datadog Agent is optional for OTLP trace export. See [feature compatibility][7] for capabilities that require the Datadog Agent.
 - **An OTLP-compatible receiver that forwards data to Datadog**, such as the [DDOT Collector][2] or an [OpenTelemetry Collector][3]. OTLP export sends data to a receiver rather than directly to Datadog, so the receiver must be reachable from your instrumented service. For production workloads, Datadog recommends DDOT for batching, performance, and processing benefits. You aren't required to use DDOT.
 
 ## Language support
@@ -94,8 +91,8 @@ After you enable OTLP export and your service receives traffic, confirm that tra
 
 ## Current limitations
 
-- OTLP trace export is in Preview and supports core APM functionality for automatic and manually created traces. Other Datadog features and capabilities may not be supported, or may require the Datadog Agent even if traces are not sent through it.
-- Traces are exported with Datadog semantics. For example, an HTTP status code is represented as `http.status_code` in Datadog semantics and `http.response.status_code` in OTel semantics.
+- OTLP trace export supports core APM functionality for automatic and manually created traces. Other Datadog features and capabilities may not be supported, or may require the Datadog Agent even if traces are not sent through it.
+- OpenTelemetry semantic conventions require `DD_TRACE_OTEL_SEMANTICS_ENABLED=true` and a supported SDK version. Without this setting, traces use Datadog semantics, such as `http.status_code` instead of `http.response.status_code`.
 
 For details on which Datadog features each setup supports, see the [feature compatibility table][7].
 

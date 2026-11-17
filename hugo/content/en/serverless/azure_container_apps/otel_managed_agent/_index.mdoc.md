@@ -9,7 +9,7 @@ further_reading:
   - link: "/serverless/azure_container_apps/"
     tag: "Documentation"
     text: "Azure Container Apps"
-  - link: "/opentelemetry/instrument/dd_otel_sdks/otlp_trace_export/"
+  - link: "/opentelemetry/instrument/ddot_sdks/otlp_trace_export/"
     tag: "Documentation"
     text: "Export Traces from Datadog SDKs in OTLP Format"
   - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps"
@@ -27,7 +27,7 @@ further_reading:
 
 {% if equals($api_type, "dd_api") %}
 {% alert level="info" %}
-OTLP trace export from Datadog SDKs and the Azure Container Apps managed OpenTelemetry agent are in Preview.
+The Azure Container Apps managed OpenTelemetry agent is in Preview.
 {% /alert %}
 {% /if %}
 {% if equals($api_type, "otel_api") %}
@@ -277,7 +277,7 @@ For limitations of the managed OpenTelemetry agent itself, see the [Azure docume
 [3]: /opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps
 [4]: /account_management/api-app-keys/
 [5]: /getting_started/site/
-[6]: /opentelemetry/instrument/dd_otel_sdks/otlp_trace_export/
+[6]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/opentelemetry-export-datadog
 [8]: https://learn.microsoft.com/en-us/azure/container-apps/environment-variables
 [9]: /tracing/trace_explorer/

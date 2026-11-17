@@ -64,7 +64,7 @@ Before you begin, ensure you have the following:
 
 This guide shows how to configure the Agent's Collector as a gateway using either the Datadog Operator or Helm chart.
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both DDOT SDK + Agent's Collector and upstream OpenTelemetry SDK + Agent's Collector configurations. In this route, the Agent's Collector receives and forwards OTLP metrics and logs.</div>
 
 Choose one of the following installation methods:
 

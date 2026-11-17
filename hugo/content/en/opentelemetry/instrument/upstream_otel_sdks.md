@@ -15,14 +15,14 @@ further_reading:
       tag: 'Documentation'
 ---
 
-Upstream OpenTelemetry SDKs use the OpenTelemetry API, SDK, and instrumentation maintained by the OpenTelemetry project. Choose this approach when you want to manage an OpenTelemetry-native SDK and export telemetry with OTLP.
+Upstream OpenTelemetry SDKs use the API, SDK, and instrumentation maintained by the OpenTelemetry project. They follow the community project's release life cycle and export telemetry with OTLP.
 
 ## Adapt an existing deployment
 
 Before installing an SDK, identify what is already attached to the application process:
 
 - **An upstream OpenTelemetry SDK is already attached:** Adapt the existing configuration. Preserve deliberate providers, processors, exporters, resource attributes, and disabled instrumentations. Changing the route to Datadog does not require replacing a working SDK setup.
-- **A Datadog SDK is attached or injected by SSI:** Do not attach an upstream OpenTelemetry SDK to the same process. First remove the existing SDK. For SSI, [exclude only the affected workloads][1] with a workload-scoped `DatadogInstrumentation` resource when supported, or with scoped instrumentation rules. Recreate the workload's pods after changing SSI configuration.
+- **A Datadog SDK is attached:** Replace the existing SDK when you install the upstream OpenTelemetry SDK. If another tool injects the existing SDK, disable that injection for the application before enabling OpenTelemetry Operator injection. Restart the application pods to apply the change.
 - **No SDK is attached:** Choose one deployment method from the following section.
 
 ## Choose a deployment method
@@ -104,7 +104,6 @@ After you roll out the workload:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/single-step-apm/kubernetes/#remove-instrumentation-for-specific-services
 [2]: https://opentelemetry.io/docs/platforms/kubernetes/operator/
 [3]: https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/
 [4]: https://opentelemetry.io/docs/languages/

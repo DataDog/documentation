@@ -14,28 +14,29 @@ further_reading:
 
 ## Overview
 
-Datadog supports two approaches for application instrumentation with OpenTelemetry. Choose one SDK approach for each process to avoid duplicate instrumentation and spans.
+Datadog supports upstream OpenTelemetry SDKs maintained by the OpenTelemetry project and Datadog OpenTelemetry SDKs (DDOT SDKs) maintained by Datadog. Both use OpenTelemetry APIs, Semantic Conventions, configuration, and OTLP.
+
+Choose one OpenTelemetry SDK approach for each application process to avoid duplicate instrumentation and spans.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/upstream_otel_sdks/" >}}
     <h3>Using Upstream OpenTelemetry SDKs</h3>
-    Use the OpenTelemetry API, SDK, and instrumentation maintained by the OpenTelemetry project. Export telemetry to Datadog with OTLP through a Collector, the Datadog Agent, or a supported direct-ingestion path.
+    Choose this approach for the upstream release life cycle and community-maintained instrumentation. Export telemetry to Datadog with OTLP through a Collector, the Datadog Agent, or a supported direct-ingestion path.
     {{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_otel_sdks/" >}}
+    {{< nextlink href="/opentelemetry/instrument/ddot_sdks/" >}}
     <h3>Using Datadog OpenTelemetry SDKs</h3>
-    Use OpenTelemetry SDKs maintained by Datadog. They implement OpenTelemetry APIs and support OTLP, with availability varying by language and signal. Choose this approach for Datadog-managed deployment with Single Step Instrumentation or additional Datadog-specific capabilities.
+    Choose this approach for Datadog-maintained instrumentation and Datadog-specific capabilities such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. DDOT SDKs use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling. They are available for Java, .NET, Node.js, Python, and Go.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-The approaches differ in deployment methods, configuration, and feature support. Review the [feature compatibility table][1] before choosing or changing an approach.
+The implementations differ in release life cycle, deployment details, and feature support. Review the [feature compatibility table][1] before choosing or changing an SDK.
 
 ## Avoid duplicate instrumentation
 
-Do not attach an upstream OpenTelemetry SDK and a Datadog SDK to the same process unless the language-specific documentation explicitly supports that combination. If Single Step Instrumentation (SSI) already injects a Datadog SDK, keep that SDK and use the Datadog approach. To replace it with an upstream OpenTelemetry SDK, first [exclude the workload from SSI][2] with a workload-scoped method, then recreate its pods.
+Use one SDK per application process to avoid duplicate spans. On Kubernetes, use the OpenTelemetry Operator to deploy and configure the SDK. See the setup guide for your SDK for installation details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/compatibility/#feature-compatibility
-[2]: /tracing/trace_collection/single-step-apm/kubernetes/#remove-instrumentation-for-specific-services
