@@ -79,14 +79,14 @@ EVSI is never negative, and it is never larger than the current minimum expected
 
 Datadog forecasts one more week of data from the experiment's recent traffic:
 
-1. Datadog counts the exposures, across all variants, in the last seven complete days of traffic. The first day of the experiment and the most recent day are excluded because they might be partial days. Call this count $M$.
-1. Datadog assumes that the next seven days have the same number of exposures, $M$.
+1. Datadog counts the first exposures, across all variants, in the last seven complete days of traffic. The first day of the experiment and the most recent day are excluded because they might be partial days. Call this count $M$.
+1. Datadog assumes that the next seven days have the same number of first exposures, $M$.
 
 Datadog treats the data from those new subjects as an independent estimate of the same lift. The standard error of that estimate is the current standard error scaled to the new sample size:
 
 $$s\_f=√{v\_θ}√{N/M}$$
 
-Here $√{v\_θ}$ is the current standard error of the lift estimate and $N$ is the total number of exposures so far. The scaling assumes that standard errors shrink with the square root of the sample size, and that the split between variants stays the same.
+Here $√{v\_θ}$ is the current standard error of the lift estimate and $N$ is the total number of subjects exposed so far. The scaling assumes that standard errors shrink with the square root of the sample size, and that the split between variants stays the same.
 
 The tooltip on the {{< ui >}}EVSI{{< /ui >}} column shows the assumed exposures per day and the total for the next seven days.
 
@@ -117,7 +117,7 @@ EVSI is the current minimum expected regret minus this value.
 Datadog doesn't calculate EVSI, and the {{< ui >}}EVSI{{< /ui >}} column shows a dash, when:
 
 - The experiment doesn't have seven complete days of traffic yet, not counting the first and most recent days.
-- No exposures were recorded in the last seven complete days.
+- No first exposures were recorded in the last seven complete days.
 - Traffic data or the standard error can't be used for a forecast.
 
 Hover over the dash to see the reason for a specific result.
@@ -126,7 +126,7 @@ Hover over the dash to see the reason for a specific result.
 
 Minimum expected regret and EVSI are on the same scale, so you can compare them directly:
 
-- **Minimum expected regret is close to zero**: There is little downside to deciding with the current data. Make the decision with the lower expected regret.
+- **Minimum expected regret is close to zero**: There is little downside to deciding with the current data. Choose the better-looking variant.
 - **EVSI is close to the minimum expected regret**: The extra data that EVSI assumes is likely to resolve most of the remaining uncertainty. Consider running the experiment longer.
 - **EVSI is much smaller than the minimum expected regret**: Uncertainty remains, but the extra data that EVSI assumes is unlikely to resolve much of it. Consider deciding with the current data, or plan for a longer experiment or more traffic.
 
@@ -147,7 +147,7 @@ The expected regrets are:
 
 Shipping the treatment has the lower expected regret, so the minimum expected regret is about **0.625%**.
 
-Suppose the experiment has 20,000 exposures so far, and 10,000 of them occurred in the last seven complete days. The future standard error is $s\_f≈0.0433×√{20000/10000}≈0.0613$, which gives $ω≈0.0154$ and an EVSI of about **0.104%**.
+Suppose the experiment has exposed 20,000 subjects so far, and 10,000 of them were first exposed in the last seven complete days. The future standard error is $s\_f≈0.0433×√{20000/10000}≈0.0613$, which gives $ω≈0.0154$ and an EVSI of about **0.104%**.
 
 Another week of data is expected to reduce the minimum expected regret from about 0.625% to about 0.521%. The extra week recovers about one-sixth of the current regret. Most of the remaining uncertainty is unlikely to resolve in one week at the current traffic.
 
