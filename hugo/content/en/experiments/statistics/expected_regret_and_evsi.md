@@ -19,7 +19,7 @@ further_reading:
 
 Bayesian analysis reports two statistics that help you decide whether to stop an experiment or keep it running:
 
-- **Minimum expected regret**: The lift you expect to give up if you decide based on the current results.
+- **Minimum expected regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is.
 - **Expected value of sample information (EVSI)**: How much that expected loss is likely to drop with another week of data at recent traffic levels.
 
 Both statistics appear in the [Statistical details view][1] of the experiment results page. They are available only for experiments that use [Bayesian analysis][2].

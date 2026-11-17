@@ -97,7 +97,7 @@ For fixed-sample, sequential, and sequential hybrid analysis, the tab includes:
 For Bayesian analysis, the tab includes:
 
 - **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
-- **Min. Expected Regret**: The lift you expect to give up by choosing the leading variant, as a percentage of the control value.
+- **Min. Expected Regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is. Datadog shows it as a percentage of the control value.
 - **EVSI**: The expected value of sample information. EVSI estimates how much the expected regret drops with seven more days of data at recent traffic levels, as a percentage of the control value.
 
 A dash (—) means that a statistic isn't available. For EVSI, hover over the dash to see why.
