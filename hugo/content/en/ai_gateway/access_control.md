@@ -1,8 +1,8 @@
 ---
-title: Control Reasoning Effort and Fast Mode in AI Gateway
-description: Set maximum reasoning levels and fast-mode permissions in Datadog AI Gateway access policies, and verify allowed and refused requests.
+title: Control Model Access in AI Gateway
+description: Use default and access policies to control which models and routing rules callers can use.
 further_reading:
-  - link: "/llm_observability/configure/ai_gateway/"
+  - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
 ---
@@ -11,18 +11,57 @@ further_reading:
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
 
+Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
+
+Access policies control who can call each model and routing rule. A policy lists providers, models, routing rules, or a combination of them, and the users, [Datadog teams][13], and service accounts who can use them.
+
+Selecting a provider includes all its models, including models added later. Selecting individual models or routing rules includes only those resources. A policy with no selections grants no access.
+
+A caller can use models included in the default policy. For other models, they need **Runner** or **Editor** access on a policy that includes them. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+
+AI Gateway denies access if no policy grants it.
+
+## Default policy
+
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It grants everyone in your organization access to the selected resources.
+
+Adding a resource to another access policy does not remove access granted by the default policy.
+
+## Access policies
+
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8] and create a policy.
+2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias and that rule's direct targets.
+3. Choose the users, teams, and service accounts, and their access level:
+   - **No access**: Cannot call the policy's models or routing rules.
+   - **Runner**: Can call the policy's models and routing rules.
+   - **Editor**: Can call the policy's models and routing rules and manage who else has access.
+4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level. A provider may use a different name for fast mode.
+
+Access to a routing rule follows that rule's targets, so a change to the targets changes what its runners can reach. A routing rule that routes to another routing rule needs its own access. A request to `<PROVIDER_SLUG>/<MODEL_ID>` and a request to `router/<RULE_SLUG>` can be allowed or denied separately. Test both with the user or service account that sends them.
+
+## Recommended setup
+
+For tighter control over who can call models:
+
+- Include only resources approved for everyone in the default policy.
+- Create an access policy for each set of approved models.
+- Grant **Runner** only to the users, teams, and service accounts that need it.
+- Review policy membership and routing rule targets regularly.
+
+## Reasoning effort and fast mode
+
 Use access policies to control which callers can request higher reasoning effort or premium fast mode. Model access, reasoning limits, and fast-mode permission are separate checks: access to a model does not grant every option that model offers.
 
-## Before you begin
+### Before you begin
 
-- Complete [AI Gateway setup][1].
+- Complete [AI Gateway setup][reasoning-1].
 - Have `ai_gateway_config_read` and `ai_gateway_config_write` to configure policies.
 - Use a caller credential whose principal and scope allow `ai_gateway_usage`.
 - Choose a model that supports the reasoning level or fast mode you want to test. A Gateway policy grants permission; it does not add a provider capability.
 
-## Configure the policy
+### Configure the policy
 
-1. Open [AI Gateway > Policies > Access policies][2].
+1. Open [AI Gateway > Policies > Access policies][reasoning-2].
 2. Create or edit a policy.
 3. Select the models or routing rules the policy covers.
 4. Grant the intended users, teams, or service accounts {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access.
@@ -33,9 +72,9 @@ Use access policies to control which callers can request higher reasoning effort
 
 New access policies have no reasoning ceiling and allow fast mode. Selecting {{< ui >}}Limit maximum reasoning level{{< /ui >}} initially sets the ceiling to {{< ui >}}Medium{{< /ui >}}; clearing it removes the ceiling. Existing policies retain their saved values.
 
-For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [access policy rules][3] before changing which models everyone can call.
+For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [access policy rules][reasoning-3] before changing which models everyone can call.
 
-## Set a reasoning ceiling
+### Set a reasoning ceiling
 
 AI Gateway compares recognized levels in this order:
 
@@ -84,11 +123,11 @@ curl -i -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >
   }'
 ```
 
-See the [OpenAI reasoning guide][4] and [Anthropic effort guide][5] for model-specific request options.
+See the [OpenAI reasoning guide][reasoning-4] and [Anthropic effort guide][reasoning-5] for model-specific request options.
 
 A conversation can override request-level effort. For Responses, the last `configuration_update` input item with `reasoning.effort` takes precedence. For Messages, the last system-role message with `output_config.effort` takes precedence. AI Gateway checks the overriding value against the ceiling. Review client-supplied history when a test uses a different effective effort than expected.
 
-## Control fast mode
+### Control fast mode
 
 AI Gateway recognizes these premium-mode request fields:
 
@@ -103,7 +142,7 @@ Native Gemini `generateContent` requests do not have a fast-mode field evaluated
 
 Disabling {{< ui >}}Allow fast mode{{< /ui >}} refuses fast-mode requests, even within the reasoning ceiling. Enabling fast mode does not remove the reasoning ceiling.
 
-## Understand overlapping policies
+### Understand overlapping policies
 
 AI Gateway evaluates access policies that cover the requested resource and that the caller is authorized to use. When at least one such access policy applies, those policies decide the request's options. A more permissive default policy does not override a refusal.
 
@@ -118,7 +157,7 @@ For example, if one applicable policy caps effort at `medium` and another explic
 
 Keep policy membership and limits consistent when several policies cover the same models.
 
-## Check routing rule overrides
+### Check routing rule overrides
 
 A routing rule can configure a preferred reasoning level for a destination. A routing preference is distinct from an access policy's maximum:
 
@@ -141,7 +180,7 @@ Inspect `X-Ai-Gateway-Reasoning-Override` in the response AI Gateway returns to 
 
 These headers describe the returned response, not every attempted destination.
 
-## Verify the policy
+### Verify the policy
 
 Use the Responses example above and a test caller whose applicable policies you have reviewed:
 
@@ -150,18 +189,21 @@ Use the Responses example above and a test caller whose applicable policies you 
 3. Send a supported premium fast-mode request with {{< ui >}}Allow fast mode{{< /ui >}} disabled and an otherwise permitted request. Confirm HTTP `403`, `X-Ai-Gateway-Error-Code: no_permitted_target`, and `error.reason: fast_mode_not_allowed`.
 4. Enable {{< ui >}}Allow fast mode{{< /ui >}} on the policy that applies to the test caller.
 5. Repeat the request and confirm success if the provider accepts it.
-6. Follow the requests from [AI Gateway Overview][6] into Agent Observability. Check the destination and error details. For routing preferences, inspect the response headers too.
+6. Follow the requests from [AI Gateway Overview][reasoning-6] into Agent Observability. Check the destination and error details. For routing preferences, inspect the response headers too.
 
-If a request unexpectedly succeeds, review every applicable access policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [Gateway error codes][7] to distinguish policy refusals from provider errors.
+If a request unexpectedly succeeds, review every applicable access policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [Gateway error codes][reasoning-7] to distinguish policy refusals from provider errors.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/ai_gateway/#get-started
-[2]: https://app.datadoghq.com/llm/gateway/access
-[3]: /llm_observability/configure/ai_gateway/#control-model-access
-[4]: https://developers.openai.com/api/docs/guides/reasoning
-[5]: https://platform.claude.com/docs/en/build-with-claude/effort
-[6]: https://app.datadoghq.com/llm/gateway
-[7]: /llm_observability/configure/ai_gateway/#error-codes
+[8]: https://app.datadoghq.com/llm/gateway/access
+[13]: /account_management/teams/manage/
+
+[reasoning-1]: /ai_gateway/getting_started/
+[reasoning-2]: https://app.datadoghq.com/llm/gateway/access
+[reasoning-3]: /ai_gateway/access_control/
+[reasoning-4]: https://developers.openai.com/api/docs/guides/reasoning
+[reasoning-5]: https://platform.claude.com/docs/en/build-with-claude/effort
+[reasoning-6]: https://app.datadoghq.com/llm/gateway
+[reasoning-7]: /ai_gateway/troubleshooting/#error-codes

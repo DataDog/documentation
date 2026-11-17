@@ -637,6 +637,10 @@ Avec `user_defined_macros` défini sur le DAG, le `{{ lineage_*() }}` and `Les a
 
 ### Exclure des DAG spécifiques de Jobs Monitoring {#exclude-specific-dags-from-jobs-monitoring}
 
+La méthode dépend de votre version de `apache-airflow-providers-openlineage`.
+
+{{< tabs >}}
+{{% tab "Version 2.19.0 ou ultérieure du fournisseur" %}}
 <div class="alert alert-info">Le <code>emission_policy</code> la configuration nécessite <code>apache-airflow-providers-openlineage</code> 2.19.0 ou version ultérieure, ce qui nécessite Airflow 2.11 ou version ultérieure.</div>
 
 Pour empêcher des DAG spécifiques d'envoyer des événements OpenLineage à Datadog, ajoutez une règle `emission_policy` pour chaque DAG dans la section `[openlineage]` de votre configuration Airflow :
@@ -657,7 +661,25 @@ emission_policy = [{"scope": {"dag_id": "^staging_.*"}, "match_mode": "regex", "
 
 Définissez `emission_policy` de la même manière que les autres options du provider OpenLineage pour votre plateforme, par exemple au moyen d'une surcharge de la configuration Airflow ou de la variable d'environnement `AIRFLOW__OPENLINEAGE__EMISSION_POLICY`. Redémarrez vos schedulers et workers Airflow pour appliquer la modification.
 
-Pour découvrir d'autres périmètres et contrôles, consultez la [documentation sur la politique d'émission OpenLineage][9].
+Pour découvrir d'autres périmètres et contrôles, consultez la [documentation sur la politique d'émission OpenLineage](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html).
+{{% /tab %}}
+
+{{% tab "Versions antérieures du fournisseur" %}}
+<div class="alert alert-info">Utilisez cette méthode si votre <code>apache-airflow-providers-openlineage</code> version est antérieure à 2.19.0, qui ne prend pas en charge <code>emission_policy</code>. Cette méthode nécessite <code>openlineage-python</code> 1.23.0 ou une version ultérieure.</div>
+
+Définissez la variable d'environnement `OPENLINEAGE__FILTERS` sur les schedulers et les workers Airflow pour **exclure tous les noms de DAG correspondants** :
+
+```
+OPENLINEAGE__FILTERS=[{"type":"regex","regex":"^<YOUR_DAG_ID>(\\.|$)"}]
+```
+
+Les noms de job OpenLineage sont `<dag_id>` pour les événements d'exécution de DAG et `<dag_id>.<task_id>` pour les événements d'exécution de tâche, ce modèle exclut donc le DAG et toutes ses tâches. Pour exclure plusieurs DAG, utilisez une alternance telle que `^(dag_one|dag_two)(\\.|$)`.
+
+`OPENLINEAGE__FILTERS` est une option du client OpenLineage, et non une option du fournisseur Airflow. Le paramétrage de `AIRFLOW__OPENLINEAGE__FILTERS` n'a aucun effet.
+
+Redémarrez vos schedulers et workers Airflow pour appliquer la modification. Pour plus d'options de filtrage, consultez la [documentation sur la configuration du client OpenLineage](https://openlineage.io/docs/client/python/configuration/).
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## Pour aller plus loin {#further-reading}
@@ -672,4 +694,3 @@ Pour découvrir d'autres périmètres et contrôles, consultez la [documentation
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection
-[9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html
