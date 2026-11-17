@@ -26,6 +26,7 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 - Download CSV
 - Pagination
 - Notebooks (Preview)
+- [DDSQL queries in Notebooks][2] (Preview)
 
 ### Dashboards and monitors
 
@@ -71,7 +72,7 @@ BYOC Logs does not support the following features:
 - CIDR query
 - Group by transactions
 - Advanced query capabilities:
-  - Calculated fields
+  - Calculated fields, including inline calculated fields in DDSQL queries
   - Grok extraction (query-time parsing)
 
   ## Further reading
@@ -79,3 +80,4 @@ BYOC Logs does not support the following features:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/logs-restriction-queries/
+[2]: /byoc-logs/guides/query_logs_with_ddsql/
