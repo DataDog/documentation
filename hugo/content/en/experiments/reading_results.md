@@ -84,6 +84,26 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 - **Coverage**: The estimated proportion of your global metric total associated with the experiment's eligible population (excluding the effect of the experiment).
 - **Global lift**: The estimated change to your overall metric totals if the treatment were released to all eligible users. Datadog calculates global lift as the product of coverage and the experiment's local (relative) lift.
 
+### Statistical details
+
+Click the calculator icon ({{< ui >}}Statistical details{{< /ui >}}) above the metric scorecard to view the statistics behind each relative lift estimate. The columns depend on the experiment's [analysis method][2]. When CUPED is on, the statistics use the CUPED-adjusted results. Hover over a column heading for a description of the statistic.
+
+For fixed-sample, sequential, and sequential hybrid analysis, the view displays:
+
+- **Standard Error**: The standard error of the relative lift estimate, in percentage points. A smaller standard error means a more precise estimate.
+- **p-value**: For fixed-sample analysis, the probability of observing a lift at least this large in either direction if the treatment had no effect. For sequential analysis, and for sequential hybrid analysis before the planned end, a p-value that remains valid when you check results repeatedly. A sequential p-value is often 1 early in an experiment, which means there isn't enough evidence yet. For how sequential hybrid analysis adjusts its p-value, see [Sequential hybrid analysis][14]. Values between 0.999 and 1 are shown as `>0.999`.
+- **z-score**: The number of standard errors between the lift estimate and zero. The sign shows whether the metric increased or decreased, not whether the change is desirable.
+
+For Bayesian analysis, the view displays:
+
+- **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
+- **Min. Expected Regret**: The lift you expect to give up if you choose the better-looking variant based on the current results. It is shown as a percentage of the control value. A value close to zero means there is little downside to deciding with the current data.
+- **EVSI**: The expected value of sample information. This is how much the expected regret is likely to drop if the experiment runs for another seven days at its recent traffic. It is shown as a percentage of the control value, and the column heading's tooltip shows the assumed traffic.
+
+A dash (—) means that the statistic isn't available for that result, for example, because the result has a diagnostic warning. For EVSI, hover over the dash to see why it is unavailable.
+
+For the formulas behind these statistics, see [Lift and Interval Calculations][12] and [Expected Regret and EVSI][13].
+
 ## Holdout results
 
 For a [holdout][10], the scorecard compares the shipped-changes group with the control group. Preliminary results give an early read while changes roll out. The primary analysis measures the combined effect during the analysis phase. See [Interpret results][11].
@@ -129,3 +149,6 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [9]: /experiments/diagnostics/
 [10]: /experiments/holdouts/
 [11]: /experiments/holdouts/#interpret-results
+[12]: /experiments/statistics/lift_and_interval_calculations/
+[13]: /experiments/statistics/expected_regret_and_evsi/
+[14]: /experiments/statistics/lift_and_interval_calculations/#sequential-hybrid-analysis
