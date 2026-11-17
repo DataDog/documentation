@@ -13,7 +13,7 @@ further_reading:
   text: "Introduction to OpenTelemetry with Datadog"
 - link: "https://learn.datadoghq.com/courses/using-ddot"
   tag: "Learning Center"
-  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+  text: "Using the DDOT Collector"
 
 ---
 

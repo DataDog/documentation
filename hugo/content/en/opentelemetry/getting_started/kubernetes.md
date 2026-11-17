@@ -198,4 +198,3 @@ The installer applies your file on top of its own values files. For what you can
 [24]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
 [25]: /opentelemetry/#choose-a-setup
 [28]: /opentelemetry/instrument/ddot_sdks/#adapt-an-existing-deployment
-

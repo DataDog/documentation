@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "https://learn.datadoghq.com/courses/using-ddot"
   tag: "Learning Center"
-  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+  text: "Using the DDOT Collector"
 - link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
   tag: "Blog"
   text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
@@ -21,7 +21,7 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 - link: "https://www.datadoghq.com/architecture/monitoring-kubernetes-with-datadog-distribution/"
   tag: "Architecture Center"
-  text: "Monitoring Kubernetes with Datadog Distribution of the OpenTelemetry (DDOT) Collector"
+  text: "Monitoring Kubernetes with the DDOT Collector"
 
 ---
 
@@ -31,7 +31,7 @@ The DDOT Collector is in Preview.
 
 ## Overview
 
-The Datadog OpenTelemetry (DDOT) Collector is an open source distribution of the OpenTelemetry Collector, built and maintained by Datadog. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration.
+The Datadog OpenTelemetry (DDOT) Collector is Datadog's version of the OpenTelemetry Collector. It's open source, and Datadog builds and maintains it. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration.
 
 {{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. The Datadog Agent, recommended for features such as Live Debugger and Dynamic Instrumentation, runs alongside it." style="width:100%;" >}}
 
