@@ -91,7 +91,7 @@ Beyond the group means and lift estimates, additional statistics can help suppor
 For fixed-sample, sequential, and sequential hybrid analysis, the tab includes:
 
 - **Standard Error**: The standard error of the relative lift estimate, in percentage points. A smaller value means a more precise estimate.
-- **p-value**: Smaller values mean stronger evidence of a real effect. For fixed-sample analysis, it's the probability of a lift at least this large in either direction if the treatment had no effect. Sequential and sequential hybrid p-values remain valid when you check results repeatedly. At a 95% confidence level, the chance that one ever drops to 0.05 or below with no true effect is at most 5%. These p-values are often 1 early in an experiment, which means there isn't enough evidence yet.
+- **p-value**: Smaller values mean stronger evidence of a real effect. For the technical interpretation of this value in fixed-sample, sequential, and sequential hybrid analysis, see [Lift and Interval Calculations][14].
 - **z-score**: The number of standard errors between the lift estimate and zero. The sign shows the direction of the change, not whether it is desirable.
 
 For Bayesian analysis, the tab includes:
@@ -149,4 +149,5 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [11]: /experiments/holdouts/#interpret-results
 [12]: /experiments/statistics/lift_and_interval_calculations/
 [13]: /experiments/statistics/expected_regret_and_evsi/
+[14]: /experiments/statistics/lift_and_interval_calculations/#calculate-the-interval
 [15]: /experiments/statistics/cuped/
