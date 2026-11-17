@@ -2453,6 +2453,14 @@ components:
       required: false
       schema:
         type: string
+    SecurityAgentOutreachPolicyDomain:
+      description: The allowed email domain to remove, for example `example.com`. Case-insensitive.
+      example: example.com
+      in: path
+      name: domain
+      required: true
+      schema:
+        type: string
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -127996,6 +128004,248 @@ components:
         - data
         - meta
       type: object
+    SecurityAgentOutreachDomainAddRequest:
+      description: Request to add one allowed email domain.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachDomainAddRequestData:
+      description: The email domain to allow.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachDomainAddRequestDataAttributes:
+      description: The email domain to allow.
+      properties:
+        domain:
+          description: |-
+            The email domain to allow: a fully qualified domain name, like `example.com`. Lowercased
+            before being stored.
+          example: acme.com
+          type: string
+      required:
+        - domain
+      type: object
+    SecurityAgentOutreachDomainAddType:
+      default: outreach_policy_domain_add
+      description: Type of an allowed outreach domain add request.
+      enum:
+        - outreach_policy_domain_add
+      example: outreach_policy_domain_add
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_DOMAIN_ADD
+    SecurityAgentOutreachMode:
+      description: |-
+        The organization's outreach mode. `off` disables user outreach. `manual` only sends outreach an analyst
+        triggers. `automated` auto-sends automated interviews for rules with outreach enabled, to users whose email
+        domain is allowed.
+      enum:
+        - "off"
+        - manual
+        - automated
+      example: automated
+      type: string
+      x-enum-varnames:
+        - "OFF"
+        - MANUAL
+        - AUTOMATED
+    SecurityAgentOutreachModeAttributes:
+      description: Attributes of a mode-only policy update.
+      properties:
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachModeResponse:
+      description: Response with the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeResponseData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachModeResponseData:
+      description: The organization's outreach mode.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateData:
+      description: Data of a mode-only policy update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateRequest:
+      description: Request to set the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicy:
+      description: The organization's outreach policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachPolicyAttributes:
+      description: Attributes of the organization's outreach policy.
+      properties:
+        allowed_domains:
+          description: Email domains user outreach can be sent to, at most 20. `null` when none are allowed.
+          example:
+            - example.com
+          items:
+            type: string
+          nullable: true
+          type: array
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+        rules:
+          description: |-
+            The stored per-rule automation state, including rules that are explicitly disabled. `null` when the
+            organization has no stored rule state.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRule"
+          nullable: true
+          type: array
+        suggested_domains:
+          description: |-
+            Domains the caller could allow next: their own email domain when it is not allowed yet and is not a
+            consumer mailbox provider. Read-only, never stored. `null` when there is no suggestion.
+          example:
+            - acme.com
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachPolicyResponse:
+      description: Response with the organization's outreach policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicy"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicyType:
+      default: outreach_policy
+      description: Type of the outreach policy resource.
+      enum:
+        - outreach_policy
+      example: outreach_policy
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY
+    SecurityAgentOutreachRule:
+      description: The outreach automation state of one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRuleUpdate:
+      description: The outreach automation state to set for one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode. Required.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule. Must be non-empty.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRulesUpdateAttributes:
+      description: Attributes of an outreach policy rules update request.
+      properties:
+        rules:
+          description: The rules to upsert, at least one.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRuleUpdate"
+          type: array
+      required:
+        - rules
+      type: object
+    SecurityAgentOutreachRulesUpdateRequest:
+      description: Request to upsert the outreach automation state of detection rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachRulesUpdateRequestData:
+      description: The rules to upsert.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachRulesUpdateType:
+      default: outreach_policy_rules_update
+      description: Type of an outreach policy rules update request.
+      enum:
+        - outreach_policy_rules_update
+      example: outreach_policy_rules_update
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_RULES_UPDATE
     SecurityAutomationRulesLinks:
       description: Pagination links for the list of automation rules.
       properties:
@@ -261024,6 +261274,383 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy:
+    get:
+      description: |-
+        Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule
+        automation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains
+        that could be allowed next.
+      operationId: GetSecurityAgentOutreachPolicy
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                        suggested_domains:
+                          - acme.com
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get the user outreach policy
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    put:
+      description: |-
+        Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an
+        analyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users
+        whose email domain is allowed).
+      operationId: UpdateSecurityAgentOutreachMode
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      mode: automated
+                    type: outreach_policy
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateRequest"
+        description: The new outreach mode.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        mode: automated
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachModeResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update the outreach mode
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains:
+    post:
+      description: |-
+        Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The
+        domain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.
+        An organization can allow at most 20 domains.
+      operationId: AddSecurityAgentOutreachPolicyDomain
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      domain: acme.com
+                    type: outreach_policy_domain_add
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequest"
+        description: The email domain to allow.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain allowed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - acme.com
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Add an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains/{domain}:
+    delete:
+      description: Remove one allowed email domain, by its name.
+      operationId: RemoveSecurityAgentOutreachPolicyDomain
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentOutreachPolicyDomain"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain removed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Remove an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 8
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/rules:
+    post:
+      description: |-
+        Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;
+        rules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews
+        in `automated` mode.
+      operationId: UpdateSecurityAgentOutreachPolicyRules
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      rules:
+                        - is_enabled: true
+                          rule_id: abc-def-ghi
+                        - is_enabled: false
+                          rule_id: jkl-mno-pqr
+                    type: outreach_policy_rules_update
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequest"
+        description: The rules to upsert.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy after the update
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update outreach policy rules
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 6
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.

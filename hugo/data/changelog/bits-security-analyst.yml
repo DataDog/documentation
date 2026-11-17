@@ -15,3 +15,13 @@ entries:
       - GetSecurityAgentInvestigation
       - ListSecurityAgentInvestigations
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41847
+    operations:
+      - AddSecurityAgentOutreachPolicyDomain
+      - GetSecurityAgentOutreachPolicy
+      - RemoveSecurityAgentOutreachPolicyDomain
+      - UpdateSecurityAgentOutreachMode
+      - UpdateSecurityAgentOutreachPolicyRules
+    title: Add user outreach policy endpoints to the Bits Security Analyst API
