@@ -612,5 +612,5 @@ options:
 - label: Agent’s OTLP endpoint
   id: agent_otlp_endpoint
 
-- label: Direct OTLP intake
-  id: otlp_intake
+- label: Direct OTLP Ingest
+  id: direct_otlp_ingest
