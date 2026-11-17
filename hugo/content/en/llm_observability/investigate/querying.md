@@ -153,7 +153,7 @@ Live mode requires the Python ddtrace SDK (`ddtrace` 4.12.0 or later). Other SDK
 
 Live mode reads spans before Datadog enriches them after ingestion. As a result, live mode does not support these fields:
 
-- Evaluations (`@evaluation.*`, `@evaluations.*`) and [end-user feedback][8] (`@feedback.*`)
+- [Evaluations](#evaluation-queries) (`@evaluation.*`) and [end-user feedback][8] (`@feedback.*`)
 - [Trace-level queries](#trace-level-queries) (`@trace.*` and `@child.*`)
 
 The Trace Explorer hides these facets and columns while live mode is on. To query them, choose a time range longer than 15 minutes.
