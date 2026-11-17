@@ -468,6 +468,12 @@ multifiltersearch:
       recommendation_type: Delete Container Registry
       recommendation_description: A Container Registry that has never received successful pulls.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Cosmos DB Account
+      recommendation_type: Downsize Cosmos DB Throughput
+      recommendation_description: Identifies Cosmos DB accounts whose containers' peak request unit consumption would stay low with less provisioned throughput, and recommends lowering each container's manual throughput to cut on-demand throughput charges.
+      recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Azure
       resource_type: Microsoft Fabric Capacity
