@@ -23,7 +23,7 @@ Use [granular access control][100] to limit who has access to your test based on
 
 Only users with Editor access can delete the test or change who has access to it.
 
-Access levels apply on top of [role permissions][101]. To run a test, a user needs Runner or Editor access to the test and the `synthetics_write` permission.
+Access levels apply on top of [role permissions][101]. To run a test, a user needs Runner or Editor access to the test and the `synthetics_write` permission. This applies to runs from the Datadog UI, the API, and CI pipelines.
 
 [100]: /account_management/rbac/granular_access
 [101]: /account_management/rbac/permissions/#synthetic-monitoring
