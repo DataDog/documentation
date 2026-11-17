@@ -4072,6 +4072,19 @@ menu:
         unstable:
           - v2
         order: 157
+    - name: Get AWS IAM Identity Center account prerequisites
+      url: /api/latest/security-monitoring/get-aws-iam-identity-center-account-prerequisites/
+      identifier: security-monitoring-get-aws-iam-identity-center-account-prerequisites
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSIdentityCenterAWSAccounts
+        unstable:
+          - v2
+        order: 190
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration

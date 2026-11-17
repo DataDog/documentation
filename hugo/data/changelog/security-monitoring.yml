@@ -202,3 +202,20 @@ entries:
       - RestoreSecurityMonitoringRule
       - UpdateSecurityMonitoringRule
     title: Add workload_hardening to security monitoring rule types
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41837
+    operations:
+      - GetAWSIdentityCenterAWSAccounts
+    title: Add AWS IAM Identity Center entity context sync configurations
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41837
+    operations:
+      - ActivateIntegration
+      - CreateSecurityMonitoringIntegrationConfig
+      - DeactivateIntegration
+      - GetSecurityMonitoringIntegrationConfig
+      - ListSecurityMonitoringIntegrationConfigs
+      - UpdateSecurityMonitoringIntegrationConfig
+    title: Add AWS IAM Identity Center entity context sync configurations
