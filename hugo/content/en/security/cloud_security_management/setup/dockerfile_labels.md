@@ -76,9 +76,6 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
   - **Contents**: Read & write
   - **Pull Requests**: Read & write
 - Your GitHub user account is connected to Datadog and has write access to the repositories. Datadog opens pull requests on your behalf.
-- Your Datadog role has the following permissions:
-  - `security_monitoring_findings_write`, to turn on Dockerfile scanning
-  - `appsec_vm_write`, to create pull requests
 
 ### Create pull requests
 
@@ -151,7 +148,7 @@ LABEL com.datadoghq.image.source_path="docker/api/Dockerfile"
 
 ### In the build command
 
-Pass labels with `docker build --label`. To add the commit revision, use `git rev-parse HEAD`:
+Pass labels with `docker build --label`:
 
 ```bash
 docker build \
@@ -162,59 +159,7 @@ docker build \
   -t myapp:latest .
 ```
 
-If you scan images with the Datadog Security CLI, you can also use OCI annotations, which the CLI reads. Labels work with any build. Annotations are kept only when you push to a registry or export an OCI image, not in the local Docker image store. For example:
-
-```bash
-docker buildx build \
-  --file docker/api/Dockerfile \
-  --annotation org.opencontainers.image.source="https://github.com/org/repo" \
-  --annotation org.opencontainers.image.revision="$(git rev-parse HEAD)" \
-  --annotation com.datadoghq.image.source_path="docker/api/Dockerfile" \
-  -t registry.example.com/myapp:latest --push .
-```
-
 The Datadog Security CLI can also add this metadata at scan time with the `--dockerfile` flag. See [Link Dockerfile to vulnerabilities][6].
-
-## Verify labels
-
-- On the [Cloud Security Setup page][5], click {{< ui >}}Select Dockerfiles{{< /ui >}} and check the status. {{< ui >}}Labeled{{< /ui >}} means both labels are present in the final build stage. It doesn't check that the values are correct.
-- Inspect a built image:
-
-  ```bash
-  docker inspect --format '{{ json .Config.Labels }}' myapp:latest
-  ```
-- After the next scan of the image, open a vulnerability on the image in [Cloud Security Vulnerabilities][7]. The side panel shows a preview of the Dockerfile.
-
-## Customize labels
-
-- **Move or edit the labels**: You can move the added lines anywhere in the final build stage, or edit them to match your conventions.
-- **Use build variables**: Set label values from an `ARG`, for example `LABEL org.opencontainers.image.source="$REPO_URL"`. Datadog pull requests don't change labels whose values come from build variables.
-- **Override at build time**: Labels passed with `docker build --label` override labels set in the Dockerfile.
-- **Monorepos**: Give each Dockerfile its own `com.datadoghq.image.source_path` value, relative to the repository root.
-- **Pin to a commit**: Add `org.opencontainers.image.revision` in your CI build, as shown in the [build command example](#in-the-build-command).
-
-## Troubleshooting
-
-### Pull request creation fails
-
-- Reconnect your GitHub user account to Datadog, and confirm that it has write access to the repository.
-- Confirm that the Datadog GitHub App is installed on the repository and has the **Contents** and **Pull Requests** permissions set to Read & write.
-
-### A Dockerfile can't be labeled
-
-Datadog can't open a pull request for a Dockerfile that:
-- Can't be parsed
-- Declares a `# syntax=` frontend other than `docker/dockerfile`
-- Is larger than 512 KiB
-
-Add the labels to these files manually. See [Add labels at build time](#add-labels-at-build-time).
-
-### No Dockerfile link appears for a vulnerability
-
-- Rebuild and redeploy the image after you add the labels.
-- Confirm that the labels are in the final build stage. Use `docker inspect` to check the built image.
-- Confirm that the filename in `com.datadoghq.image.source_path` is a Dockerfile or Containerfile name.
-- Confirm that the repository is hosted on GitHub, GitLab, Bitbucket, or Azure DevOps.
 
 ## Further reading
 
@@ -226,4 +171,3 @@ Add the labels to these files manually. See [Add labels at build time](#add-labe
 [4]: /integrations/github/
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
 [6]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
-[7]: https://app.datadoghq.com/security/csm/vm
