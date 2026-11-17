@@ -1,0 +1,17 @@
+entries:
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41775
+    operations:
+      - CreateProductAnalyticsLaunch
+      - CreateProductAnalyticsMonitor
+      - DeleteProductAnalyticsLaunch
+      - DeleteProductAnalyticsMonitor
+      - GetProductAnalyticsLaunch
+      - GetProductAnalyticsMonitor
+      - ListProductAnalyticsLaunches
+      - ListProductAnalyticsMonitors
+      - RemoveChartFromProductAnalyticsMonitor
+      - UpdateProductAnalyticsLaunch
+      - UpdateProductAnalyticsMonitor
+    title: Add Product Analytics monitors, launches, and segments APIs

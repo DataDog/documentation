@@ -21,3 +21,20 @@ entries:
     operations:
       - DeleteUserProfile
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41775
+    operations:
+      - CreateProductAnalyticsSegment
+      - DeleteProductAnalyticsSegment
+      - GetProductAnalyticsSegment
+      - ListProductAnalyticsSegments
+      - PreviewProductAnalyticsSegment
+      - UpdateProductAnalyticsSegment
+    title: Add Product Analytics monitors, launches, and segments APIs
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41775
+    operations:
+      - DeleteUserProfile
+    title: Add Product Analytics monitors, launches, and segments APIs

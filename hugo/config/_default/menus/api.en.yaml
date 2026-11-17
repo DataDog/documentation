@@ -20852,6 +20852,149 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Unlink a Product Analytics monitor from its chart
+      url: /api/latest/product-analytics/unlink-a-product-analytics-monitor-from-its-chart/
+      identifier: product-analytics-unlink-a-product-analytics-monitor-from-its-chart
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveChartFromProductAnalyticsMonitor
+        unstable:
+          - v2
+        order: 19
+    - name: Update a Product Analytics monitor
+      url: /api/latest/product-analytics/update-a-product-analytics-monitor/
+      identifier: product-analytics-update-a-product-analytics-monitor
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProductAnalyticsMonitor
+        unstable:
+          - v2
+        order: 17
+    - name: Get a Product Analytics monitor
+      url: /api/latest/product-analytics/get-a-product-analytics-monitor/
+      identifier: product-analytics-get-a-product-analytics-monitor
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetProductAnalyticsMonitor
+        unstable:
+          - v2
+        order: 16
+    - name: Delete a Product Analytics monitor
+      url: /api/latest/product-analytics/delete-a-product-analytics-monitor/
+      identifier: product-analytics-delete-a-product-analytics-monitor
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteProductAnalyticsMonitor
+        unstable:
+          - v2
+        order: 18
+    - name: Create a Product Analytics monitor
+      url: /api/latest/product-analytics/create-a-product-analytics-monitor/
+      identifier: product-analytics-create-a-product-analytics-monitor
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateProductAnalyticsMonitor
+        unstable:
+          - v2
+        order: 15
+    - name: List Product Analytics monitors
+      url: /api/latest/product-analytics/list-product-analytics-monitors/
+      identifier: product-analytics-list-product-analytics-monitors
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductAnalyticsMonitors
+        unstable:
+          - v2
+        order: 14
+    - name: Update a Product Analytics launch
+      url: /api/latest/product-analytics/update-a-product-analytics-launch/
+      identifier: product-analytics-update-a-product-analytics-launch
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProductAnalyticsLaunch
+        unstable:
+          - v2
+        order: 23
+    - name: Get a Product Analytics launch
+      url: /api/latest/product-analytics/get-a-product-analytics-launch/
+      identifier: product-analytics-get-a-product-analytics-launch
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetProductAnalyticsLaunch
+        unstable:
+          - v2
+        order: 22
+    - name: Delete a Product Analytics launch
+      url: /api/latest/product-analytics/delete-a-product-analytics-launch/
+      identifier: product-analytics-delete-a-product-analytics-launch
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteProductAnalyticsLaunch
+        unstable:
+          - v2
+        order: 24
+    - name: Create a Product Analytics launch
+      url: /api/latest/product-analytics/create-a-product-analytics-launch/
+      identifier: product-analytics-create-a-product-analytics-launch
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateProductAnalyticsLaunch
+        unstable:
+          - v2
+        order: 21
+    - name: List Product Analytics launches
+      url: /api/latest/product-analytics/list-product-analytics-launches/
+      identifier: product-analytics-list-product-analytics-launches
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductAnalyticsLaunches
+        unstable:
+          - v2
+        order: 20
     - name: Compute journey timeseries analytics
       url: /api/latest/product-analytics/compute-journey-timeseries-analytics/
       identifier: product-analytics-compute-journey-timeseries-analytics
@@ -22144,6 +22287,84 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Preview a segment
+      url: /api/latest/rum-audience-management/preview-a-segment/
+      identifier: rum-audience-management-preview-a-segment
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewProductAnalyticsSegment
+        unstable:
+          - v2
+        order: 17
+    - name: Update a segment
+      url: /api/latest/rum-audience-management/update-a-segment/
+      identifier: rum-audience-management-update-a-segment
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProductAnalyticsSegment
+        unstable:
+          - v2
+        order: 15
+    - name: Get a segment
+      url: /api/latest/rum-audience-management/get-a-segment/
+      identifier: rum-audience-management-get-a-segment
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetProductAnalyticsSegment
+        unstable:
+          - v2
+        order: 14
+    - name: Delete a segment
+      url: /api/latest/rum-audience-management/delete-a-segment/
+      identifier: rum-audience-management-delete-a-segment
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteProductAnalyticsSegment
+        unstable:
+          - v2
+        order: 16
+    - name: Create a segment
+      url: /api/latest/rum-audience-management/create-a-segment/
+      identifier: rum-audience-management-create-a-segment
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateProductAnalyticsSegment
+        unstable:
+          - v2
+        order: 13
+    - name: List segments
+      url: /api/latest/rum-audience-management/list-segments/
+      identifier: rum-audience-management-list-segments
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductAnalyticsSegments
+        unstable:
+          - v2
+        order: 12
     - name: Query accounts
       url: /api/latest/rum-audience-management/query-accounts/
       identifier: rum-audience-management-query-accounts
