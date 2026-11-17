@@ -369,7 +369,7 @@ To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< u
 
 The default behavior controls whether the workload targeting in your Agent configuration (`targets` and `enabledNamespaces`) still applies when you use instrumentation rules in Datadog. Regardless of the default behavior, some pods are excluded from instrumentation, and other targeting methods can take precedence over instrumentation rules. See the [Exceptions to instrumentation rules](#exceptions-to-instrumentation-rules) and [Configuration precedence](#configuration-precedence) sections.
 
-<div class="alert alert-warning">If SSI is enabled cluster-wide without <code>targets</code>, check the default behavior before you create rules. With <strong>No default</strong> (the initial setting), creating any instrumentation rule in Datadog, including a single block rule, turns off cluster-wide instrumentation. After that, pods that match no rule are not instrumented. To keep instrumenting all other pods, set the default behavior to <strong>Allow everything else</strong>.</div>
+<div class="alert alert-warning">If SSI is enabled cluster-wide without <code>targets</code>, set the default behavior to <strong>Allow everything else</strong> before you create rules. Otherwise, your first rule turns off cluster-wide instrumentation, so pods that do not match a rule are no longer instrumented.</div>
 
 1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
 1. Select one of the following options:
@@ -437,7 +437,7 @@ If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Exceptions to instrumentation rules
 
-The following pods are not instrumented, even if they match an allow rule:
+The following pods are not instrumented, regardless of instrumentation rules or the default behavior:
 
 - Pods in the `kube-system` namespace
 - Pods in the namespace where the Datadog Agent is installed
@@ -1032,7 +1032,7 @@ Apply the resource, confirm its status reflects the change, and restart the work
 
 #### Use targeting rules to target specific workloads
 
-With targeting rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With targeting rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. For configuration details, see the [Advanced options](#advanced-options) section.
 
 #### Use the Datadog Admission Controller
 
