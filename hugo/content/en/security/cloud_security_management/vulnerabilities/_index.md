@@ -113,9 +113,10 @@ For non-flattened, single-stage container images built from a public base image,
 
 When Datadog detects a CVE on a running container image, it can link the CVE directly to the Dockerfile and commit that introduced the vulnerable package. This closes the gap between a production alert and the code change that caused it, giving developers the context they need to remediate at the source rather than chasing package versions across registries.
 
-To enable this code-to-cloud mapping, add image source labels to your container images. Datadog uses these labels to preview the Dockerfile in the Container Image Vulnerabilities panel. It also shows the repository, commit, and file path for the vulnerability. To add the labels, merge pull requests that Datadog opens from the Cloud Security Setup page, or set the labels at build time.
+To enable this code-to-cloud mapping, add image source metadata to your container images. Datadog uses this metadata to preview the Dockerfile in the Container Image Vulnerabilities panel. It also shows the repository, commit, and file path for the vulnerability. Add the metadata in one of two ways:
 
-To set up source linking, see [Link Container Images to Dockerfiles][22].
+- **Image source labels**: Merge pull requests that Datadog opens from the Cloud Security Setup page. You can also set the labels in your Dockerfile or at build time. See [Link Container Images to Dockerfiles][22].
+- **OCI image annotations**: Add annotations when you build the image, and scan it with the Datadog Security CLI. See [Link Dockerfile to vulnerabilities][25] in the CI/CD container image scanning guide.
 
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [{{< ui >}}security notification rules{{< /ui >}}][17] and [automation pipelines][20]:
@@ -159,6 +160,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [22]: /security/cloud_security_management/setup/dockerfile_labels/
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
+[25]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 
 ## Further reading
 
