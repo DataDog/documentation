@@ -12,44 +12,47 @@ aliases:
 code_lang: nodejs
 code_lang_weight: 30
 further_reading:
-- link: https://github.com/DataDog/dd-trace-js
-  tag: Código fuente
-  text: Código fuente
 - link: https://datadog.github.io/dd-trace-js
   tag: Documentación
   text: Documentación de la API
 - link: tracing/glossary/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
+  text: Explore sus servicios, recursos y trazas
 - link: tracing/
   tag: Documentación
   text: Uso avanzado
-title: Rastreo de aplicaciones Node.js
+- link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
+  tag: Centro de aprendizaje
+  text: Configure y administre el SDK de APM para sus aplicaciones
+- link: https://github.com/DataDog/dd-trace-js
+  tag: Código fuente
+  text: Código fuente
+title: Seguimiento de aplicaciones Node.js
 type: multi-code-lang
 ---
 ## Requisitos de compatibilidad {#compatibility-requirements}
 
-El último rastreador de Node.js es compatible con las versiones de Node.js `>=18`. Para una lista completa de las versiones de Node.js y el soporte de frameworks de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [Requisitos de compatibilidad][1].
+La versión más reciente del rastreador de Node.js es compatible con las versiones `>=18` de Node.js. Para obtener una lista completa de la compatibilidad de versiones y frameworks de Node.js de Datadog (incluidas las versiones heredadas y de mantenimiento), consulte la página [Requisitos de compatibilidad][1].
 
-## Comenzando {#getting-started}
+## Primeros pasos {#getting-started}
 
-Antes de comenzar, asegúrate de haber [instalado y configurado el agente][13]. Luego, completa los siguientes pasos para agregar el SDK de Datadog a tu aplicación Node.js para instrumentarla.
+Antes de comenzar, asegúrese de haber [instalado y configurado el Agent][13]. Luego, complete los siguientes pasos para agregar el SDK de Datadog a su aplicación Node.js para instrumentarla.
 
-### Instala el SDK de Datadog {#install-the-datadog-sdk}
+### Instale el SDK de Datadog {#install-the-datadog-sdk}
 
-Para instalar el SDK de Datadog usando npm para Node.js 18+, ejecuta:
+Para instalar el SDK de Datadog usando npm para Node.js 18+, ejecute:
 
   ```shell
   npm install dd-trace
   ```
-Para instalar el SDK de Datadog (versión 4.x de `dd-trace`) para la versión de Node.js 16 que ha llegado al final de su vida útil, ejecuta:
+Para instalar el SDK de Datadog (versión 4.x de `dd-trace`) para la versión 16 de Node.js que ha llegado al final de su vida útil, ejecute:
   ```shell
   npm install dd-trace@latest-node16
   ```
-Para más información sobre las etiquetas de distribución de Datadog y el soporte de versiones de tiempo de ejecución de Node.js, consulta la página de [Requisitos de compatibilidad][1].
-Si estás actualizando desde una versión principal anterior de la biblioteca (0.x, 1.x, 2.x, 3.x o 4.x) a otra versión principal, lee la [Guía de migración][5] para evaluar cualquier cambio que rompa la compatibilidad.
+Para obtener más información sobre las etiquetas de distribución de Datadog y la compatibilidad con versiones del entorno de ejecución de Node.js, consulte la página [Requisitos de compatibilidad][1].
+Si está actualizando desde una versión principal anterior de la biblioteca (0.x, 1.x, 2.x, 3.x o 4.x) a otra versión principal, lea la [Guía de migración][5] para evaluar cualquier cambio incompatible.
 
-<div class="alert alert-info">En entornos sin servidor o al usar Instrumentación de un solo paso, la biblioteca ya está preinstalada, por lo que no es necesario agregarla como una dependencia. En su lugar, agréguela como una dependencia de desarrollo para obtener trazas localmente:
+<div class="alert alert-info">En entornos Serverless o cuando utiliza Single-Step Instrumentation, la biblioteca ya está preinstalada, por lo que no necesita agregarla como dependencia. En su lugar, agréguela como una dependencia de desarrollo para obtener el rastreo localmente:
   <div class="highlight code-snippet js-appended-copy-btn">
     <pre tabindex="0" class="chroma">
       <code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm install dd-trace -D <span class="c1"># instead of `npm install dd-trace`</span></span></span></code>
@@ -62,33 +65,33 @@ Si estás actualizando desde una versión principal anterior de la biblioteca (0
 
 ### Instale la API pública de Datadog (opcional) {#install-the-datadog-public-api-optional}
 
-Este paso solo es necesario al realizar instrumentación personalizada en entornos sin servidor o con Instrumentación de un solo paso. Para otros casos de uso de instrumentación personalizada, es opcional. Para información sobre cuándo usar la API pública de Datadog, consulte [Instrumentación personalizada usando la API de Datadog][14].
+Este paso solo es necesario cuando se realiza una instrumentación personalizada en Serverless o con Single-Step Instrumentation. Para otros casos de uso de instrumentación personalizada, es opcional. Para obtener información sobre cuándo utilizar la API pública de Datadog, consulte [Instrumentación personalizada mediante la Datadog API][14].
 
   ```shell
   npm install dd-trace-api
   ```
 
-Luego puede importar `dd-trace-api` en lugar de `dd-trace` en cualquier código que realice instrumentación personalizada.
+Luego puede importar `dd-trace-api` en lugar de `dd-trace` en cualquier código que realice una instrumentación personalizada.
 
-### Importar e inicializar el rastreador {#import-and-initialize-the-tracer}
+### Importe e inicialice el rastreador {#import-and-initialize-the-tracer}
 
-Importe e inicialice el rastreador ya sea en el código o con argumentos de línea de comandos. El SDK de Node.js debe ser importado e inicializado **antes** de cualquier otro módulo.
+Importe e inicialice el rastreador ya sea en el código o con argumentos de línea de comandos. El SDK de Node.js debe importarse e inicializarse **antes** de cualquier otro módulo.
 
-<div class="alert alert-info">Con frameworks como <strong>Next.js</strong> y <strong>Nest.js</strong> debe proporcionar una variable de entorno o agregar una bandera adicional de Node.js. Consulte <a href="/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage">Uso de frameworks complejos</a> para más información.</div>
+<div class="alert alert-info">Con marcos de trabajo como <strong>Next.js</strong> y <strong>Nest.js</strong> debe proporcionar una variable de entorno o agregar una bandera de Node.js adicional. Consulte <a href="/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage">Uso de marcos de trabajo complejos</a> para obtener más información.</div>
 
-Después de completar la configuración, si no está recibiendo trazas completas, incluyendo rutas URL faltantes para solicitudes web, o tramos desconectados o faltantes, **confirme que el SDK ha sido importado e inicializado correctamente**. Es necesario que el SDK se inicialice primero para que el SDK pueda parchear correctamente todas las bibliotecas requeridas para la instrumentación automática.
+Después de completar la configuración, si no recibe trazas completas, incluidas las rutas de URL faltantes para las solicitudes web, o spans desconectados o faltantes, **confirme que el SDK se haya importado e inicializado correctamente**. Es necesario que el SDK se inicialice primero para que pueda aplicar parches correctamente a todas las bibliotecas requeridas para la instrumentación automática.
 
-Al utilizar un transpilador como TypeScript, Webpack, Babel u otros, importa e inicializa el SDK en un archivo externo y luego importa ese archivo completo al construir tu aplicación.
+Cuando utilice un transpilador como TypeScript, Webpack, Babel u otros, importe e inicialice el SDK en un archivo externo y luego importe ese archivo completo al compilar su aplicación.
 
-#### Agrega el SDK con argumentos de línea de comandos {#add-the-sdk-with-command-line-arguments}
+#### Agregue el SDK con argumentos de línea de comandos {#add-the-sdk-with-command-line-arguments}
 
-Utiliza la opción `--require` de Node.js para cargar e inicializar el SDK en un solo paso.
+Utilice la opción `--require` de Node.js para cargar e inicializar el SDK en un solo paso.
 
 ```sh
 node --require dd-trace/init app.js
 ```
 
-El enfoque anterior requiere el uso de variables de entorno para toda la configuración del SDK. Si necesitas usar una configuración programática, inicializa `dd-trace` en un archivo dedicado y requiérelo en su lugar:
+El enfoque anterior requiere el uso de variables de entorno para toda la configuración del SDK. Si necesita utilizar una configuración programática, inicialice `dd-trace` en un archivo dedicado y, en su lugar, cargue ese archivo con require:
 
 ```sh
 node --require ./dd-trace.js app.js
@@ -103,29 +106,29 @@ require('dd-trace').init({
 })
 ```
 
-Para los casos en que no es posible controlar los argumentos de la CLI, puedes usar una variable de entorno en su lugar:
+Para los casos en los que no sea posible controlar los argumentos de la CLI, puede utilizar una variable de entorno en su lugar:
 
-<div class="alert alert-info"><code>DD_TRACE_ENABLED</code> es <code>true</code> por defecto, lo que significa que se realiza cierta instrumentación en el momento de la importación, antes de la inicialización. Para deshabilitar completamente la instrumentación, puedes hacer una de las siguientes acciones:
+<div class="alert alert-info"><code>DD_TRACE_ENABLED</code> es <code>true</code> de forma predeterminada, lo que significa que cierta instrumentación ocurre al momento de la importación, antes de la inicialización. Para deshabilitar completamente la instrumentación, puede hacer una de las siguientes cosas:
   <ul>
-    <li>Importa el módulo condicionalmente</li>
-    <li>Establecer <code>DD_TRACE_ENABLED=false</code> (si, por ejemplo, las importaciones estáticas o de nivel superior de ESM impiden la carga condicional)</li>
+    <li>Importe el módulo de forma condicional</li>
+    <li>Establezca <code>DD_TRACE_ENABLED=false</code> (si, por ejemplo, las importaciones ESM estáticas o de nivel superior impiden la carga condicional)</li>
   <ul>
 </div>
 
-#### Aplicaciones ESM solamente: Importa el cargador {#esm-applications-only-import-the-loader}
+#### Solo aplicaciones ESM: Importe el cargador {#esm-applications-only-import-the-loader}
 
-Las aplicaciones de ECMAScript Modules (ESM) requieren un _argumento adicional_ de línea de comandos. Agrega este argumento sin importar cómo se importe e inicialice el SDK:
+Las aplicaciones de módulos ECMAScript (ESM) requieren un argumento de línea de comandos _adicional_. Agregue este argumento independientemente de cómo se importe e inicialice el SDK de otra manera:
 
 - **Node.js < v20.6:** `--loader dd-trace/loader-hook.mjs`
 - **Node.js >= v20.6:** `--import dd-trace/register.js`
 
-Por ejemplo, en Node.js 22, si inicializas el SDK utilizando la opción uno de arriba, lo iniciarías así:
+Por ejemplo, en Node.js 22, si inicializa el SDK usando la opción uno de arriba, lo iniciaría así:
 
 ```sh
 node --import dd-trace/register.js app.js
 ```
 
-Esto también se puede combinar con el `--require dd-trace/init` argumento de línea de comandos:
+Esto también se puede combinar con el argumento de línea de comandos `--require dd-trace/init`:
 
 ```sh
 node --import dd-trace/register.js --require dd-trace/init app.js
@@ -137,25 +140,25 @@ Existe una forma abreviada para combinar ambos argumentos de línea de comandos 
 node --import dd-trace/initialize.mjs app.js
 ```
 
-### Agrupación {#bundling}
+### Empaquetado {#bundling}
 
-`dd-trace` funciona interceptando las llamadas `require()` que una aplicación de Node.js realiza al cargar módulos. Esto incluye módulos que están integrados en Node.js, como el módulo `fs` para acceder al sistema de archivos, así como módulos instalados desde el registro de NPM, como el módulo de base de datos `pg`.
+`dd-trace` funciona interceptando las llamadas `require()` que realiza una aplicación de Node.js al cargar módulos. Esto incluye módulos integrados en Node.js, como el módulo `fs` para acceder al sistema de archivos, así como módulos instalados desde el registro de NPM, como el módulo de base de datos `pg`.
 
-Los agrupadores rastrean todas las llamadas `require()` que una aplicación realiza a archivos en el disco. Reemplaza las llamadas `require()` con código personalizado y combina todo el JavaScript resultante en un solo archivo "agrupado". Cuando se carga un módulo integrado, como `require('fs')`, esa llamada puede permanecer igual en el archivo agrupado resultante.
+Los empaquetadores rastrean todas las llamadas `require()` que una aplicación realiza en los archivos del disco. Reemplaza las llamadas `require()` con código personalizado y combina todo el JavaScript resultante en un solo archivo "empaquetado". Cuando se carga un módulo integrado, como `require('fs')`, esa llamada puede permanecer igual en el paquete resultante.
 
-Las herramientas APM como `dd-trace` dejan de funcionar en este punto. Pueden continuar interceptando las llamadas para módulos integrados, pero no interceptan llamadas a bibliotecas de terceros. Esto significa que cuando agrupas una aplicación `dd-trace` con un agrupador, es probable que capture información sobre el acceso al disco (a través de `fs`) y solicitudes HTTP salientes (a través de `http`), pero omita llamadas a bibliotecas de terceros. Por ejemplo:
-- Extrayendo información de la ruta de la solicitud entrante para el marco `express`.
+Las herramientas de APM como `dd-trace` dejan de funcionar en este punto. Pueden seguir interceptando las llamadas para los módulos integrados, pero no interceptan las llamadas a bibliotecas de terceros. Esto significa que cuando empaqueta una aplicación `dd-trace` con un empaquetador, es probable que capture información sobre el acceso al disco (a través de `fs`) y las solicitudes HTTP salientes (a través de `http`), pero omita las llamadas a bibliotecas de terceros. Por ejemplo:
+- Extracción de información de ruta de solicitud entrante para el marco `express`.
 - Mostrando qué consulta se ejecuta para el cliente de base de datos `mysql`.
 
-Una solución común es tratar todos los módulos de terceros que el APM necesita instrumentar como "externos" al agrupador. Con esta configuración, los módulos instrumentados permanecen en el disco y continúan cargándose con `require()` mientras que los módulos no instrumentados son agrupados. Sin embargo, esto resulta en una construcción con muchos archivos superfluos y comienza a derrotar el propósito de la agrupación.
+Una solución común es tratar todos los módulos de terceros que el APM necesita instrumentar como "externos" al empaquetador. Con esta configuración, los módulos instrumentados permanecen en el disco y continúan cargándose con `require()` mientras que los módulos no instrumentados se empaquetan. Sin embargo, esto da como resultado una compilación con muchos archivos innecesarios y comienza a ir en contra del propósito del empaquetado.
 
-Datadog recomienda que tengas complementos de agrupador personalizados. Estos complementos pueden instruir al agrupador sobre cómo comportarse, inyectar código intermedio e interceptar las llamadas "traducidas" `require()`. Como resultado, se incluyen más paquetes en el archivo JavaScript agrupado.
+Datadog recomienda que tenga complementos de empaquetador personalizados. Estos complementos pueden indicar al empaquetador cómo comportarse, inyectar código intermedio e interceptar las llamadas `require()` "traducidas". Como resultado, se incluyen más paquetes en el archivo JavaScript empaquetado.
 
-**Nota**: Algunas aplicaciones pueden tener el 100% de los módulos agrupados, sin embargo, los módulos nativos aún deben permanecer externos al paquete agrupado.
+**Nota**: Algunas aplicaciones pueden tener el 100% de los módulos empaquetados; sin embargo, los módulos nativos aún deben permanecer externos al paquete.
 
-#### Agrupando con esbuild {#bundling-with-esbuild}
+#### Empaquetado con esbuild {#bundling-with-esbuild}
 
-Esta biblioteca proporciona soporte experimental para esbuild en forma de un plugin de esbuild, y requiere al menos Node.js v16.17 o v18.7. Para usar el plugin, asegúrate de tener `dd-trace@3+` instalado, y luego requiere el módulo `dd-trace/esbuild` al construir tu paquete.
+Esta biblioteca proporciona soporte para esbuild en forma de un complemento de esbuild y requiere al menos Node.js v16.17 o v18.7. Para usar el complemento, asegúrese de tener instalado `dd-trace@3+` y luego requiera el módulo `dd-trace/esbuild` al crear su paquete.
 
 Aquí hay un ejemplo de cómo se podría usar `dd-trace` con esbuild:
 
@@ -180,7 +183,7 @@ esbuild.build({
     // required if you use Datadog security features
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
-    '@datadog/native-iast-rewriter',
+    '@datadog/wasm-js-rewriter',
   ]
 }).catch((err) => {
   console.error(err)
@@ -188,10 +191,58 @@ esbuild.build({
 })
 ```
 
-#### Agrupando con Next.js {#bundling-with-nextjs}
+#### Empaquetado con Webpack {#bundling-with-webpack}
 
-Si estás usando Next.js u otro marco que dependa de webpack para agrupar tu aplicación, agrega una declaración
-similar a la de webpack dentro de tu archivo de configuración `next.config.js`:
+Esta biblioteca proporciona soporte experimental para Webpack en forma de un complemento de Webpack. Para usar el complemento, asegúrese de tener instalado `dd-trace@5.94.0+` y luego requiera el módulo `dd-trace/webpack` al crear su paquete.
+
+El siguiente ejemplo muestra cómo usar `dd-trace` con Webpack:
+
+```javascript
+const path = require('path')
+const webpack = require('webpack')
+const DatadogWebpackPlugin = require('dd-trace/webpack')
+
+const compiler = webpack({
+  entry: 'main.js',
+  target: 'node',
+  externalsType: 'commonjs',
+  output: {
+    filename: 'out.js',
+    path: __dirname,
+    hashFunction: 'sha256',
+  },
+  externals: [
+    // Node.js built-in not in Webpack's default list for target: 'node'
+    'diagnostics_channel',
+
+    // dead code paths introduced by knex
+    'pg',
+    'mysql2',
+    'better-sqlite3',
+    'sqlite3',
+    'mysql',
+    'oracledb',
+    'pg-query-stream',
+    'tedious',
+    '@yaacovcr/transform',
+
+    // optional native dd-trace modules
+    '@datadog/native-appsec',
+    '@datadog/native-iast-taint-tracking',
+    '@datadog/native-metrics',
+    '@datadog/pprof',
+    '@datadog/libdatadog',
+  ],
+  plugins: [
+    new DatadogWebpackPlugin(),
+  ],
+})
+```
+
+#### Empaquetado con Next.js {#bundling-with-nextjs}
+
+Si está utilizando Next.js para empaquetar su aplicación, agregue una declaración
+similar a la de Webpack dentro de su archivo de configuración `next.config.js`:
 
 ```javascript
 /** @type {import('next').NextConfig} */
@@ -213,7 +264,7 @@ const nextConfig = {
       // required if you use Datadog security features
       '@datadog/native-appsec',
       '@datadog/native-iast-taint-tracking',
-      '@datadog/native-iast-rewriter',
+      '@datadog/wasm-js-rewriter',
     ];
     config.externals.push(...externals);
     return config;
@@ -223,17 +274,17 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-#### Características no soportadas de Datadog {#unsupported-datadog-features}
+#### Funciones de Datadog no compatibles {#unsupported-datadog-features}
 
-Las siguientes características están desactivadas por defecto en el rastreador de Node.js. No soportan agrupamiento y no pueden ser utilizadas si tu aplicación está agrupada.
+Las siguientes funciones están desactivadas de forma predeterminada en el trazador de Node.js. No admiten empaquetado y no se pueden usar si su aplicación está empaquetada.
 
 - APM: Dynamic Instrumentation
 
-#### Observaciones generales sobre agrupamiento {#general-bundling-remarks}
+#### Observaciones generales sobre el empaquetado {#general-bundling-remarks}
 
-**Nota**: Debido al uso de módulos nativos en el SDK, que son código C++ compilado, (generalmente terminando con una extensión de archivo `.node`), necesitas agregar entradas a tu lista `external`. Actualmente, los módulos nativos utilizados en el rastreador de Node.js viven dentro de paquetes con prefijo `@datadog`. Esto también requerirá que envíes un directorio `node_modules/` junto a tu aplicación agrupada. No necesitas enviar todo tu directorio `node_modules/` ya que contendría muchos paquetes superfluos que deberían estar contenidos en tu paquete.
+**Nota**: Debido al uso de módulos nativos en el SDK, que son código C++ compilado (y generalmente tienen una extensión de archivo `.node`), debe agregar entradas a su lista `external`. Actualmente, los módulos nativos utilizados en el trazador de Node.js residen dentro de paquetes con el prefijo `@datadog`. Esto también requerirá que envíe un directorio `node_modules/` junto con su aplicación empaquetada. No necesita enviar todo su directorio `node_modules/`, ya que contendría muchos paquetes superfluos que deberían estar contenidos en su paquete.
 
-Para generar un directorio `node_modules/` más pequeño con solo los módulos nativos requeridos, (y sus dependencias) primero puedes determinar las versiones de los paquetes que necesitas, luego crear un directorio temporal para instalarlos, y copiar el directorio `node_modules/` resultante desde allí. Por ejemplo:
+Para generar un directorio `node_modules/` más pequeño solo con los módulos nativos requeridos (y sus dependencias), primero puede determinar las versiones de los paquetes que necesita, luego crear un directorio temporal en el cual instalarlos y copiar el directorio `node_modules/` resultante de este. Por ejemplo:
 
 ```sh
 cd path/to/project
@@ -249,17 +300,17 @@ npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
-**Nota**: En el caso de Next.js, el `path/to/bundle` suele ser el directorio `.next/standalone` de tu aplicación.
+**Nota**: En el caso de Next.js, el `path/to/bundle` suele ser el directorio `.next/standalone` de su aplicación.
 
-En esta etapa deberías poder desplegar tu paquete, (que es tu código de aplicación y la mayoría de tus dependencias), con el directorio `node_modules/`, que contiene los módulos nativos y sus dependencias.
+En esta etapa debería poder desplegar su paquete (que es el código de su aplicación y la mayoría de sus dependencias) con el directorio `node_modules/`, que contiene los módulos nativos y sus dependencias.
 
 ## Configuración {#configuration}
 
-Si es necesario, configura el SDK para enviar datos de telemetría de rendimiento de la aplicación según lo requieras, incluyendo la configuración de Unified Service Tagging. Lea [Configuración de la Biblioteca][4] para más detalles.
+Si es necesario, configure el SDK para enviar datos de telemetría de rendimiento de la aplicación según lo requiera, incluyendo la configuración de Unified Service Tagging. Lea [Configuración de la biblioteca][4] para obtener detalles.
 
-Lea [tracer settings][3] para una lista de opciones de inicialización.
+Lea [configuración del trazador][3] para obtener una lista de opciones de inicialización.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

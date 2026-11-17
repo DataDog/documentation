@@ -53,6 +53,7 @@ The Worker supports major Linux distributions, such as:
 
 - Amazon Linux
 - CentOS
+- Debian
 - Red Hat Enterprise Linux (RHEL)
 - Ubuntu
 
