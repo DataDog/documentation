@@ -77,6 +77,8 @@ Provider tool charges are charges for built-in tools, such as web search, on LLM
 
 For applicable breakdown tags, unavailable details use `unknown`. An `unknown` value does not mean zero usage. For example, if a provider does not report cache usage, input tokens are tagged `input_type:unknown`. When cache or reasoning usage cannot be assigned to individual modalities, the values keep their known category and use `token_modality:unknown`.
 
+{{< img src="llm_observability/input_token_breakdown.png" alt="Input token tooltip showing text and audio usage split into non-cached and cache-read tokens." caption="Input tokens for an LLM span, broken down by modality and cache category." style="width:100%;" >}}
+
 ### Choose between total and breakdown metrics
 
 Use total metrics for per-span statistics, and breakdown metrics to compare usage across categories.
