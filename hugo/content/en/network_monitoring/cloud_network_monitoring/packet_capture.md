@@ -24,7 +24,7 @@ Packet capture has the following limitations:
 
 - Each capture runs for a fixed duration of 30 seconds. You can't configure the duration or set Berkeley Packet Filter (BPF) filters.
 - Each capture request can include up to 25 hosts from the selected connection.
-- Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture for that host is marked as **Partial**.
+- Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture for that host is marked as **Partial** and the data truncated. See the [Packet capture request status](#packet-capture-request-status) section for more information.
 - Only Linux hosts are supported.
 
 ## Prerequisites
@@ -67,20 +67,30 @@ Hosts are labeled by their role in the connection: client, server, or both, depe
 To view packet captures:
 
 1. Navigate to [Network Analytics][3].
-1. Click the {{< ui >}}Packet Capture{{< /ui >}} tab.
-1. Click your capture to open the side panel.
+1. Click the {{< ui >}}Packet Capture{{< /ui >}} tab to see a list of packet capture requests.
+1. Click a request to open the side panel for details of the capture.
+1. Click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel to download the `.zip` file.
 
-Packet captures have one of the following states:
+### Packet capture request status
 
-| Status     | Description                                                                         |
-|------------|-------------------------------------------------------------------------------------|
-| Queued     | The capture request is waiting to run.                                              |
-| Running    | The Agents are capturing packets.                                                   |
-| Processing | The capture is complete and the results are being processed.                        |
-| Complete   | The capture completed successfully on all selected hosts.                           |
-| Partial    | One or more hosts reached the 100 MB capture limit. See the [Limitations](#limitations) section.                   |
-| Failed     | The capture didn't complete.                                                        |
+Packet capture requests have one of the following states:
+
+| Status     | Description                                                                                     |
+|------------|-------------------------------------------------------------------------------------------------|
+| Queued     | The capture request is waiting to run.                                                          |
+| Running    | The Agents are capturing packets.                                                               |
+| Processing | The capture is complete and the results are being processed.                                    |
+| Complete   | The capture completed successfully on all selected hosts.                                       |
+| Partial    | One or more selected hosts failed to capture packets.                                           |
+| Failed     | All selected hosts failed to capture packets.                                                   |
+| Cancelled  | A user manually stopped the packet capture request.                                             |
 | Expired    | The results are past their retention period. See the [Data retention](#data-retention) section. |
+
+Reasons for failed captures could include:
+
+- The host is spun down after it is observed in CNM.
+- There are strict permissions set on the host that doesn't allow packet capture.
+- The host exceeds the 100 MB data capture limit and the data is truncated.
 
 ### Results
 
@@ -90,11 +100,10 @@ The results for each capture include:
 - **Bits summary**: A plain-language analysis of the capture. See the [Bits summary](#bits-summary) section.
 - **Per-host breakdown**: The findings for each host in the capture.
 - **PCAP files**: A `.zip` file of the `.pcap` files from all hosts in the capture. Use it to analyze the raw packets in a third-party tool such as Wireshark, or to share them with other users.
-    - Click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel to download the `.zip` file.
 
 ### Bits summary
 
-The Bits summary describes the capture results in plain language and labels which findings are directly observed and which are inferred. Each finding includes the host it applies to and supporting evidence.
+The Bits summary describes the capture results and labels which findings are directly observed and which are inferred. Each finding includes the host it applies to and supporting evidence.
 
 Based on packet header data, the summary can identify:
 
@@ -106,8 +115,6 @@ Based on packet header data, the summary can identify:
 - RTT and latency
 - Signs of asymmetric routing and MTU issues
 - Traffic volume
-
-Based on the summary, you might decide to run another packet capture on a specific host or set of hosts.
 
 ## Security and data handling
 
