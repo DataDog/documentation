@@ -2989,18 +2989,6 @@ components:
           schema:
             $ref: "#/components/schemas/HTTPCDRulesNotFoundResponse"
       description: Deployment rule not found.
-    IntegrationAccountBadRequestResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/JSONAPIErrorResponse"
-      description: Bad Request
-    IntegrationAccountNotFoundResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/JSONAPIErrorResponse"
-      description: Not Found
     NDMBadRequestResponse:
       content:
         application/json:
@@ -30294,6 +30282,322 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ConvertJobResultsToSignalsData"
+      type: object
+    CoreWeaveCloudIntegrationAccountAPITokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        API token authentication, the only method CoreWeave integration accounts support. Create the token in the CoreWeave Cloud console under Access Tokens; it starts with `CW-SECRET-`. The user who owns the token must have the Observability Viewer role, because tokens inherit their user's permissions.
+      properties:
+        api_token:
+          description: >-
+            Secret CoreWeave API access token used to authenticate with CoreWeave. Values that do not start with `CW-SECRET-` are rejected with a `422` response.
+          example: CW-SECRET-xxxxxxxxxxxxxxxxxxxx
+          pattern: "^CW-SECRET-.+"
+          type: string
+          writeOnly: true
+        auth_type:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthType"
+      required:
+        - auth_type
+        - api_token
+      type: object
+    CoreWeaveCloudIntegrationAccountAPITokenAuthResponse:
+      description: The API token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthType"
+      required:
+        - auth_type
+      type: object
+    CoreWeaveCloudIntegrationAccountAPITokenAuthType:
+      default: coreweave_api_token
+      description: The authentication method type.
+      enum:
+        - coreweave_api_token
+      example: coreweave_api_token
+      type: string
+      x-enum-varnames:
+        - COREWEAVE_API_TOKEN
+    CoreWeaveCloudIntegrationAccountAPITokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        API token authentication, the only method CoreWeave integration accounts support. Only the fields provided are changed; omit `api_token` to keep the stored one.
+      properties:
+        api_token:
+          description: >-
+            Secret CoreWeave API access token used to authenticate with CoreWeave. It cannot be cleared; sending `null` or an empty string is rejected with a `422` response.
+          example: CW-SECRET-xxxxxxxxxxxxxxxxxxxx
+          pattern: "^CW-SECRET-.+"
+          type: string
+          writeOnly: true
+        auth_type:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthType"
+      required:
+        - auth_type
+      type: object
+    CoreWeaveCloudIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the CoreWeave integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthRequest"
+    CoreWeaveCloudIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the CoreWeave integration account.
+      oneOf:
+        - $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthResponse"
+    CoreWeaveCloudIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the CoreWeave integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAPITokenAuthUpdate"
+    CoreWeaveCloudIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a CoreWeave integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the CoreWeave integration account.
+          example: coreweave-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    CoreWeaveCloudIntegrationAccountCreateData:
+      description: Data envelope for creating a CoreWeave integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    CoreWeaveCloudIntegrationAccountCreateRequest:
+      description: Request payload to create a CoreWeave integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    CoreWeaveCloudIntegrationAccountResponse:
+      description: Response payload for a single CoreWeave integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    CoreWeaveCloudIntegrationAccountResponseAttributes:
+      description: Attributes of a CoreWeave integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the CoreWeave integration account.
+          example: coreweave-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    CoreWeaveCloudIntegrationAccountResponseData:
+      description: Data envelope of a CoreWeave integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the CoreWeave integration account.
+          example: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    CoreWeaveCloudIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the CoreWeave integration account.
+      properties:
+        account_tags:
+          description: >-
+            Tags added to all metrics and logs collected from this CoreWeave account. Defaults to no tags.
+          example:
+            - env:prod
+            - team:gpu
+          items:
+            type: string
+          type: array
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching clusters, for cost savings. Include rules (`key:value`) are combined with OR, exclusion rules (`!key:value`) are then applied with AND, and `?` and `*` are wildcards; for example `cluster:prod-*` collects only matching clusters and `!cluster:dev` excludes a cluster. Defaults to no filters: every cluster is collected. Only cluster-scoped metrics are filtered; billing and object storage metrics are always collected.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            type: string
+          type: array
+      type: object
+    CoreWeaveCloudIntegrationAccountSettingsResponse:
+      description: Settings configured on the CoreWeave integration account.
+      properties:
+        account_tags:
+          description: Tags added to all data collected from this CoreWeave account.
+          example:
+            - env:prod
+            - team:gpu
+          items:
+            type: string
+          type: array
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching clusters. Absent when no filters are configured.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            type: string
+          type: array
+      type: object
+    CoreWeaveCloudIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the CoreWeave integration account. Only the fields provided are changed.
+      properties:
+        account_tags:
+          description: >-
+            Tags added to all metrics and logs collected from this CoreWeave account. Sending it replaces the whole list; send an empty array to remove all tags, or omit it to keep the stored list.
+          example:
+            - env:prod
+            - team:gpu
+          items:
+            type: string
+          type: array
+        cluster_filters:
+          description: >-
+            Tag-filter rules limiting metric collection to matching clusters. Sending it replaces the whole list; send an empty array to remove all filters and collect every cluster, or omit it to keep the stored list. Include rules (`key:value`) are combined with OR, exclusion rules (`!key:value`) are then applied with AND, and `?` and `*` are wildcards.
+          example:
+            - cluster:prod-*
+            - "!cluster:dev"
+          items:
+            type: string
+          type: array
+      type: object
+    CoreWeaveCloudIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a CoreWeave integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the CoreWeave integration account.
+          example: coreweave-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountSettingsUpdate"
+      type: object
+    CoreWeaveCloudIntegrationAccountUpdateData:
+      description: Data envelope for updating a CoreWeave integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the CoreWeave integration account to update.
+          example: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CoreWeaveCloudIntegrationAccountUpdateRequest:
+      description: Request payload to update a CoreWeave integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    CoreWeaveCloudIntegrationAccountsResponse:
+      description: Response payload for a list of CoreWeave integration accounts.
+      properties:
+        data:
+          description: List of CoreWeave integration accounts.
+          items:
+            $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    CoreWeaveCloudIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from CoreWeave, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it. Defaults listed on each dataflow apply when the account is created; on update, omitted dataflow ids keep their current values. Collection runs with the API access token in `authentication`, whose user must have the Observability Viewer role; a dataflow enabled without that role is stored but collects no data.
+      properties:
+        coreweave-cloud-logs:
+          $ref: "#/components/schemas/CoreWeaveCloudLogsIntegrationDataflowRequest"
+        coreweave-cloud-metrics:
+          $ref: "#/components/schemas/CoreWeaveCloudMetricsIntegrationDataflowRequest"
+      type: object
+    CoreWeaveCloudIntegrationDataflowsResponse:
+      description: Data Datadog collects from CoreWeave, keyed by dataflow id.
+      properties:
+        coreweave-cloud-logs:
+          $ref: "#/components/schemas/CoreWeaveCloudLogsIntegrationDataflowResponse"
+        coreweave-cloud-metrics:
+          $ref: "#/components/schemas/CoreWeaveCloudMetricsIntegrationDataflowResponse"
+      type: object
+    CoreWeaveCloudLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Service logs for CoreWeave-managed components in each CoreWeave region: the CKS control plane (such as `kube-apiserver` and `etcd`), CoreWeave add-on services in the `cw-*` and `kube-system` namespaces, SUNK, and node system logs such as `kubelet` and `containerd`. Logs from your own workloads and Kubernetes audit logs are not collected. Logs are sent with `source:coreweave`, with CoreWeave log labels such as `namespace`, `app`, and `systemd_unit` added as tags.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    CoreWeaveCloudLogsIntegrationDataflowResponse:
+      description: >-
+        Service logs for CoreWeave-managed components in each CoreWeave region: the CKS control plane (such as `kube-apiserver` and `etcd`), CoreWeave add-on services in the `cw-*` and `kube-system` namespaces, SUNK, and node system logs such as `kubelet` and `containerd`. Logs from your own workloads and Kubernetes audit logs are not collected. Logs are sent with `source:coreweave`, with CoreWeave log labels such as `namespace`, `app`, and `systemd_unit` added as tags.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured, in which case the documented default applies.
+          example: true
+          type: boolean
+      type: object
+    CoreWeaveCloudMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Metrics from your CoreWeave organization: CoreWeave service metrics collected through its PromQL-compatible Prometheus endpoint, plus the `coreweave.*` namespaces from CoreWeave products such as Kubernetes, Database, Distributed File Storage, Inference, and Object Storage. Compute metrics (`coreweave.bare_metal`, `coreweave.gpu`, `coreweave.nccl`, and `coreweave.node`) are in Preview. Container metrics are not collected; install the Datadog Agent on your clusters for those.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `true`; set to `false` to stop collection.
+          example: true
+          type: boolean
+      type: object
+    CoreWeaveCloudMetricsIntegrationDataflowResponse:
+      description: >-
+        Metrics from your CoreWeave organization: CoreWeave service metrics collected through its PromQL-compatible Prometheus endpoint, plus the `coreweave.*` namespaces from CoreWeave products such as Kubernetes, Database, Distributed File Storage, Inference, and Object Storage. Compute metrics (`coreweave.bare_metal`, `coreweave.gpu`, `coreweave.nccl`, and `coreweave.node`) are in Preview. Container metrics are not collected; install the Datadog Agent on your clusters for those.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Absent when the dataflow has never been configured, in which case the documented default applies.
+          example: true
+          type: boolean
       type: object
     CostAggregationType:
       description: "Controls how costs are aggregated when using `start_date`. The `cumulative` option returns month-to-date running totals."
@@ -94642,91 +94946,6 @@ components:
         meta:
           $ref: "#/components/schemas/MonthlyCostAttributionMeta"
       type: object
-    MonthlyResource:
-      description: A resource's usage for the requested billing dimension and month.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/MonthlyResourceAttributes"
-        id:
-          description: Identifier for the resource usage record. Treat this value as opaque.
-          type: string
-        type:
-          $ref: "#/components/schemas/MonthlyResourceType"
-      type: object
-    MonthlyResourceAttributes:
-      description: Resource usage and organization details for the requested month.
-      properties:
-        data_date:
-          description: Date of the source usage data. May be empty when unavailable.
-          type: string
-        org_name:
-          description: Name of the organization that owns the resource.
-          type: string
-        public_id:
-          description: Public ID of the organization that owns the resource.
-          type: string
-        resource_name:
-          description: Name of the resource, such as a host name, metric name, or log index.
-          type: string
-        tags:
-          additionalProperties:
-            type: string
-          description: Resource tags when available. Empty for resource types without tag data.
-          type: object
-        timestamp:
-          description: Selected billing hour for percentile usage, or the first day of the month for monthly usage. May be empty when unavailable.
-          type: string
-        usage_type:
-          description: Usage type of the resource. Values depend on the billing dimension and are not limited to host types.
-          type: string
-        usage_value:
-          description: Usage attributed to the resource in the units of the requested billing dimension. Values can be fractional.
-          format: double
-          nullable: true
-          type: number
-      type: object
-    MonthlyResourceType:
-      default: monthly_resource
-      description: Type of a monthly resource usage record.
-      enum:
-        - monthly_resource
-      type: string
-      x-enum-varnames:
-        - MONTHLY_RESOURCE
-    MonthlyResourcesMetadata:
-      description: Metadata for monthly resource usage.
-      properties:
-        pagination:
-          $ref: "#/components/schemas/MonthlyResourcesPagination"
-      type: object
-    MonthlyResourcesPagination:
-      description: Pagination information for monthly resource usage.
-      properties:
-        next_record_id:
-          description: Cursor for the next request. Pass as `page[next_record_id]` with the same filters. Null when there are no more results.
-          nullable: true
-          type: string
-      type: object
-    MonthlyResourcesResponse:
-      description: Monthly usage for host and non-host resources.
-      properties:
-        data:
-          description: Resource usage records. Empty when no matching resources are available.
-          items:
-            $ref: "#/components/schemas/MonthlyResource"
-          type: array
-        meta:
-          $ref: "#/components/schemas/MonthlyResourcesMetadata"
-      type: object
-    MonthlyResourcesView:
-      description: Whether to return billable resources or the full monthly resource breakdown.
-      enum:
-        - billable
-        - all
-      type: string
-      x-enum-varnames:
-        - BILLABLE
-        - ALL
     MuteDataType:
       default: mute
       description: Mute resource type.
@@ -204810,11 +205029,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List ChatGPT Enterprise integration accounts
@@ -204868,11 +205087,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -204899,11 +205118,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a ChatGPT Enterprise integration account
@@ -204953,11 +205172,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a ChatGPT Enterprise integration account
@@ -205013,11 +205232,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205033,6 +205252,249 @@ paths:
           - manage_integrations
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/coreweave-cloud/accounts:
+    get:
+      description: List CoreWeave integration accounts.
+      operationId: ListCoreWeaveCloudIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: coreweave_api_token
+                          dataflows:
+                            coreweave-cloud-logs:
+                              enabled: true
+                            coreweave-cloud-metrics:
+                              enabled: true
+                          name: coreweave-prod
+                          settings:
+                            account_tags:
+                              - env:prod
+                              - team:gpu
+                        id: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List CoreWeave integration accounts
+      tags:
+        - CoreWeave Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a CoreWeave integration account.
+      operationId: CreateCoreWeaveCloudIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: coreweave_api_token
+                        dataflows:
+                          coreweave-cloud-logs:
+                            enabled: true
+                          coreweave-cloud-metrics:
+                            enabled: true
+                        name: coreweave-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:gpu
+                      id: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a CoreWeave integration account
+      tags:
+        - CoreWeave Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/coreweave-cloud/accounts/{account_id}:
+    delete:
+      description: Delete a CoreWeave integration account.
+      operationId: DeleteCoreWeaveCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a CoreWeave integration account
+      tags:
+        - CoreWeave Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a CoreWeave integration account.
+      operationId: GetCoreWeaveCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: coreweave_api_token
+                        dataflows:
+                          coreweave-cloud-logs:
+                            enabled: true
+                          coreweave-cloud-metrics:
+                            enabled: true
+                        name: coreweave-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:gpu
+                      id: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a CoreWeave integration account
+      tags:
+        - CoreWeave Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a CoreWeave integration account. Only the fields provided are changed.
+      operationId: UpdateCoreWeaveCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: coreweave_api_token
+                        dataflows:
+                          coreweave-cloud-logs:
+                            enabled: true
+                          coreweave-cloud-metrics:
+                            enabled: true
+                        name: coreweave-prod
+                        settings:
+                          account_tags:
+                            - env:prod
+                            - team:gpu
+                      id: f7a8b9c0-d1e2-4f3a-9b4c-5d6e7f8091a2
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/CoreWeaveCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a CoreWeave integration account
+      tags:
+        - CoreWeave Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/databricks/accounts:
     get:
@@ -205080,11 +205542,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Databricks integration accounts
@@ -205149,11 +205611,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205180,11 +205642,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Databricks integration account
@@ -205245,11 +205707,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Databricks integration account
@@ -205316,11 +205778,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205371,11 +205833,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Elastic Cloud integration accounts
@@ -205428,11 +205890,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205459,11 +205921,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an Elastic Cloud integration account
@@ -205512,11 +205974,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an Elastic Cloud integration account
@@ -205571,11 +206033,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205657,11 +206119,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Snowflake integration accounts
@@ -205745,11 +206207,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205776,11 +206238,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Snowflake integration account
@@ -205860,11 +206322,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Snowflake integration account
@@ -205950,11 +206412,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206002,11 +206464,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Temporal Cloud OpenMetrics accounts
@@ -206056,11 +206518,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206087,11 +206549,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Temporal Cloud OpenMetrics account
@@ -206137,11 +206599,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Temporal Cloud OpenMetrics account
@@ -206193,11 +206655,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206246,11 +206708,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Twilio integration accounts
@@ -206301,11 +206763,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206332,11 +206794,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Twilio integration account
@@ -206383,11 +206845,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Twilio integration account
@@ -206440,11 +206902,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -277649,165 +278111,6 @@ paths:
         operator: OR
         permissions:
           - usage_read
-  /api/v2/usage/monthly_resources:
-    get:
-      description: |-
-        Get resource-level usage for a billing dimension and month, using the same
-        data as the resource breakdown in Plan & Usage. Supports all host and
-        non-host resource types available in that breakdown. Availability depends
-        on the billing dimension and the organization's usage data.
-
-        Results are scoped to the authenticated organization. Set `filter[include_descendants]`
-        to `true` to also return usage from its descendant organizations in all regions.
-
-        Set `filter[view]` to `billable` to return resources that contribute to billable usage.
-        For dimensions billed at the 99th percentile, this view returns resources at the
-        selected billing hour. For sum-based dimensions, it returns monthly resource usage.
-        Set `filter[view]` to `all` to return the full monthly resource breakdown. Requests
-        for unsupported billing dimensions, or dimensions configured with an unsupported
-        billing aggregation method, return a `400 Bad Request` error.
-
-        To get the next page of results, pass the `meta.pagination.next_record_id` value
-        from the previous response as `page[next_record_id]`, and keep all filters unchanged.
-        A null cursor indicates the last page. Paginated responses contain at most
-        `page[limit]` resource records, including queries across descendant organizations.
-
-        Exception: for any billing dimension billed at the 99th percentile,
-        `filter[view]=billable` returns the complete resource breakdown in one response,
-        including requested descendants. Eligibility depends on the organization's
-        billing configuration for the requested dimension and month, not on the product
-        name. For these queries, `page[limit]` and `page[next_record_id]` are ignored, and
-        `meta.pagination.next_record_id` is null. Sum-based usage and `filter[view]=all`
-        remain paginated.
-      operationId: GetUsageMonthlyResources
-      parameters:
-        - description: Billing dimension to retrieve, such as `infra_host`, `indexed_points`, or `logs_indexed_30day`.
-          example: infra_host
-          in: query
-          name: filter[billing_dimension]
-          required: true
-          schema:
-            type: string
-        - description: Month of usage to retrieve in `YYYY-MM` format.
-          example: "2026-04"
-          in: query
-          name: filter[month]
-          required: true
-          schema:
-            pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$"
-            type: string
-        - description: |-
-            Set to `billable` to return resources that contribute to billable usage, or `all`
-            to return the full monthly resource breakdown.
-          example: billable
-          in: query
-          name: filter[view]
-          required: true
-          schema:
-            $ref: "#/components/schemas/MonthlyResourcesView"
-        - description: Include usage for descendant organizations of the authenticated organization.
-          in: query
-          name: filter[include_descendants]
-          required: false
-          schema:
-            default: false
-            type: boolean
-        - description: |-
-            Maximum number of resource records per paginated response. Must be a positive integer.
-            Values above 100,000 are capped at 100,000. Ignored for billable queries using
-            99th-percentile billing, which return the complete result in one response.
-          in: query
-          name: page[limit]
-          required: false
-          schema:
-            default: 100000
-            format: int64
-            maximum: 100000
-            minimum: 1
-            type: integer
-        - description: |-
-            Opaque cursor from `meta.pagination.next_record_id` in the previous response.
-            Omit for the first request. Ignored for billable queries using 99th-percentile
-            billing, which always return the complete result.
-          in: query
-          name: page[next_record_id]
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json;datetime-format=rfc3339:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          data_date: "2026-04-30"
-                          org_name: Example organization
-                          public_id: abc123
-                          resource_name: host-1.prod
-                          tags:
-                            env: prod
-                          timestamp: "2026-04-22 16:00:00+00:00"
-                          usage_type: agent
-                          usage_value: 1
-                        id: abc123_agent_host-1.prod
-                        type: monthly_resource
-                    meta:
-                      pagination:
-                        next_record_id:
-                non_host:
-                  value:
-                    data:
-                      - attributes:
-                          data_date: "2026-04-30"
-                          org_name: Example organization
-                          public_id: abc123
-                          resource_name: app.requests
-                          tags: {}
-                          timestamp: "2026-04-01"
-                          usage_type: post_threshold_indexed
-                          usage_value: 1250.5
-                        id: abc123_post_threshold_indexed_app.requests
-                        type: monthly_resource
-                    meta:
-                      pagination:
-                        next_record_id:
-              schema:
-                $ref: "#/components/schemas/MonthlyResourcesResponse"
-          description: OK
-        "400":
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden - User is not authorized
-        "429":
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Too many requests
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - usage_read
-      summary: Get monthly usage by resource
-      tags:
-        - Usage Metering
-      x-menu-order: 28
-      "x-permission":
-        operator: OR
-        permissions:
-          - usage_read
   /api/v2/usage/observability_pipelines:
     get:
       deprecated: true
@@ -282683,6 +282986,15 @@ tags:
       The Containers API allows you to query container data for your organization.
       See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information.
     name: Containers
+  - description: |-
+      Manage your Datadog CoreWeave integration accounts and account resources
+      directly through the Datadog API. See the
+      [CoreWeave integration page](https://docs.datadoghq.com/integrations/coreweave/) for
+      more information.
+    externalDocs:
+      description: CoreWeave integration.
+      url: https://docs.datadoghq.com/integrations/coreweave/
+    name: CoreWeave Integration
   - description: |-
       Programmatic management of a customer's Datadog organization. Use this API to perform
       self-service organization lifecycle actions such as disabling the authenticated org.
