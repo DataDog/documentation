@@ -12,11 +12,11 @@ further_reading:
   text: "Create a real-time anomaly monitor"
 ---
 
+<div class="alert alert-info">Real-time costs for Azure and Google Cloud are in Preview.</div>
+
 ## Overview
 
 Real-Time Costs estimates your AWS, Azure, and Google Cloud compute costs in near real time, so that you can react to cost changes in minutes or hours instead of days. Datadog generates estimates from real-time usage data that the Datadog Agent collects, and prices that usage with your recent average hourly costs from Cloud Cost Management billing data.
-
-<div class="alert alert-info">Real-time costs for Azure and Google Cloud are in Preview.</div>
 
 Use real-time costs to:
 - Detect anomalies early and alert on them with [real-time anomaly monitors][3]
@@ -79,10 +79,10 @@ Nodes that are idle or running no pods keep their Kubernetes tags, such as `kube
 
 ## Tags
 
-Tags for real-time costs differ from tags on other Cloud Cost Management metrics in the following ways:
+Tags for real-time costs differ from tags on other Cloud Cost Management metrics in several ways, including:
 - All tag values are lowercase, normalized like Metrics data.
 - Tag Pipelines and Custom Allocation Rules are not applied.
-- Some billing-specific tags (from the AWS Cost and Usage Report, Azure cost exports, or Google Cloud billing exports) and FOCUS tags may not exist on real-time cost metrics. Real-time costs come primarily from usage data that the Datadog Agent collects, not from billing data.
+- Some billing-specific tags (from the AWS Cost and Usage Report, Azure cost exports, or Google Cloud billing exports) and FOCUS tags might not exist on real-time cost metrics. Real-time costs come primarily from usage data that the Datadog Agent collects, not from billing data.
 
 ## Accuracy
 
