@@ -25,6 +25,8 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 | --- | --- |
 | [Java][2] | `dd-java-agent` and `dd-openfeature` 1.68.0 |
 | [Go][3] | `dd-trace-go` 2.12.0 |
+| [Node.js][9] | `dd-trace` 6.24.0 (6.x) or 5.135.0 (5.x) |
+| [Ruby][10] | `datadog` 2.49.0, with `openfeature-sdk` 0.5.1 |
 | [Browser][4] (JavaScript, React, Angular) | `@datadog/openfeature-browser` 2.3.0 |
 
 ## How the SDK identifies exposures
@@ -43,7 +45,7 @@ The callback runs on the evaluation thread, inside your request. Do not write to
 {{% tab "Java" %}}
 
 {{< code-block lang="java" >}}
-import datadog.trace.api.openfeature.ExposureHook;
+import com.datadog.openfeature.ExposureHook;
 import dev.openfeature.sdk.OpenFeatureAPI;
 
 BlockingQueue<ExposureRecord> exposures = new LinkedBlockingQueue<>(10_000);
@@ -55,16 +57,16 @@ OpenFeatureAPI.getInstance().addHooks(new ExposureHook(evaluation -> {
     // ExposureRecord is your application's own type.
     exposures.offer(new ExposureRecord(
         Instant.now(),
-        evaluation.getContext().getTargetingKey(),
-        evaluation.getDetails().getFlagKey(),
-        evaluation.getDetails().getFlagMetadata().getString("allocationKey"),
-        evaluation.getDetails().getVariant(),
+        evaluation.getTargetingKey(),
+        evaluation.getFlagKey(),
+        evaluation.getAllocationKey(),
+        evaluation.getVariant(),
         evaluation.getFeatures()));
 }));
 // A background thread takes records from `exposures` and writes them to your data store.
 {{< /code-block >}}
 
-<div class="alert alert-info">In version 1.68.x, read the allocation key from the flag metadata, under the <code>allocationKey</code> key, as in the example.</div>
+<div class="alert alert-info">The example requires version 1.69.0 or later. In version 1.68.x, import <code>datadog.trace.api.openfeature.ExposureHook</code>, read the flag key, variant, and targeting key from <code>getDetails()</code> and <code>getContext()</code>, and read the allocation key with <code>getDetails().getFlagMetadata().getString("allocationKey")</code>.</div>
 
 Evaluate flags through an OpenFeature client. If you call the Datadog provider directly, the SDK records no exposure.
 
@@ -104,6 +106,65 @@ Create the hook once and reuse it. The callback can run concurrently, so make it
 Do not change `e.Details.Value`. For object flags, the value can share data with the provider. Copy it before you change it or process it in the background.
 
 {{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init()
+const { OpenFeature } = require('@openfeature/server-sdk')
+const { ExposureHook } = require('dd-trace/openfeature/exposure-hook')
+
+const exposures = []
+
+OpenFeature.addHooks(
+  new ExposureHook((evaluation) => {
+    if (!evaluation.shouldSend()) return
+    exposures.push({
+      timestamp: new Date().toISOString(),
+      subject: evaluation.targetingKey,
+      flag: evaluation.flagKey,
+      allocation: evaluation.allocation,
+      variant: evaluation.variant,
+      features: evaluation.getFeatures(),
+    })
+  })
+)
+
+await OpenFeature.setProviderAndWait(tracer.openfeature)
+// A background task writes the records in `exposures` to your data store.
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+{{< code-block lang="ruby" >}}
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+exposure_hook = Datadog::OpenFeature::ExposureHook.new do |evaluation|
+  next unless evaluation.should_send?
+
+  # ExposureQueue is your application's own queue.
+  ExposureQueue.push(
+    timestamp: Time.now.utc,
+    subject: evaluation.targeting_key,
+    flag: evaluation.flag_key,
+    allocation: evaluation.allocation_key,
+    variant: evaluation.variant,
+    features: evaluation.features,
+  )
+end
+
+OpenFeature::SDK.configure do |config|
+  config.set_provider(Datadog::OpenFeature::Provider.new)
+  config.hooks << exposure_hook
+end
+# A background thread takes records from ExposureQueue and writes them to your data store.
+{{< /code-block >}}
+
+Register the hook on the OpenFeature API, a client, or a single evaluation. Evaluate flags through an OpenFeature client. A direct call to a `fetch_*_value` method of the provider runs no hooks, so the SDK records no exposure.
+
+{{% /tab %}}
 {{% tab "Browser" %}}
 
 {{< code-block lang="javascript" >}}
@@ -135,13 +196,15 @@ The browser SDK keeps its exposure cache across page loads. When a page reload g
 
 ### What the callback receives
 
-| Member | Java and browser | Go | Description |
-| --- | --- | --- | --- |
-| Is exposure | `isExposure()` | `IsExposure()` | `true` when the evaluation succeeded and selected an allocation that logs exposures. Repeats are included. |
-| Is cache hit | `isCacheHit()` | `IsCacheHit()` | `true` when the subject already received the same allocation, variant, and split for this flag. |
-| Should send | `shouldSend()` | `ShouldSend()` | `true` for a new or changed exposure: an exposure that is not a cache hit. These are the exposures that the SDK sends to Datadog. |
-| Split features | `getFeatures()` | `Features()` | The split features attached to the selected split, such as the [holdout fields](#holdout-fields). Empty when the split has none. |
-| Evaluation | Java: `getDetails()` and `getContext()`<br>Browser: `details`, `context`, `flagKey`, `variant`, `allocation`, `targetingKey` | `Details`, `Context`, `AllocationKey()` | The flag key, variant, flag metadata, and evaluation context, including the targeting key. |
+| Member | Java, Node.js, and browser | Go | Ruby | Description |
+| --- | --- | --- | --- | --- |
+| Is exposure | `isExposure()` | `IsExposure()` | `exposure?` | `true` when the evaluation succeeded and selected an allocation that logs exposures. Repeats are included. |
+| Is cache hit | `isCacheHit()` | `IsCacheHit()` | `cache_hit?` | `true` when the subject already received the same allocation, variant, and split for this flag. |
+| Should send | `shouldSend()` | `ShouldSend()` | `should_send?` | `true` for a new or changed exposure: an exposure that is not a cache hit. These are the exposures that the SDK sends to Datadog. |
+| Split features | `getFeatures()` | `Features()` | `features` | The split features attached to the selected split, such as the [holdout fields](#holdout-fields). Empty when the split has none. |
+| Evaluation | Java: `getFlagKey()`, `getVariant()`, `getAllocationKey()`, `getTargetingKey()`, `getDetails()`, and `getContext()`<br>Node.js and browser: `flagKey`, `variant`, `allocation`, `targetingKey`, `details`, and `context` | `Details`, `Context`, `AllocationKey()` | `flag_key`, `variant`, `allocation_key`, `targeting_key`, `evaluation_details`, and `evaluation_context` | The flag key, variant, allocation key, flag metadata, and evaluation context, including the targeting key. |
+
+In Java, `getFlagKey()`, `getVariant()`, `getAllocationKey()`, and `getTargetingKey()` require version 1.69.0 or later.
 
 If you use `isExposure()` instead of `shouldSend()`, deduplicate the records yourself.
 
@@ -172,7 +235,7 @@ To analyze exposures in Datadog Experiments with an [Exposure SQL Model][6], rec
 | Timestamp | The time of the evaluation. |
 | Subject | The targeting key of the evaluation context. |
 | Flag key | The evaluation details. |
-| Allocation key | Java 1.68.x: the `allocationKey` flag metadata key. Go: `AllocationKey()`. Browser: `allocation`. |
+| Allocation key | Java: `getAllocationKey()`, or the `allocationKey` flag metadata key in 1.68.x. Go: `AllocationKey()`. Node.js and browser: `allocation`. Ruby: `allocation_key`. |
 | Variant | The evaluation details. |
 | `holdout.key`, `holdout.assignment_group`, `holdout.should_include_in_holdout_analysis` | The split features, for flags in a holdout. |
 
@@ -184,11 +247,13 @@ You can stop sending exposures to Datadog and still record them yourself. The ex
 
 ### Server SDKs
 
-Set this environment variable on your application. The SDK reads it when it creates the Datadog provider.
+Set this environment variable on your application before it starts:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false
 {{< /code-block >}}
+
+In Ruby, you can also set `c.feature_flags.exposures_datadog_logging_enabled = false` in a `Datadog.configure` block.
 
 This setting stops only the exposures sent to Datadog. It does not stop the aggregated flag evaluation events. To stop those events too, set:
 
@@ -214,6 +279,9 @@ const provider = new DatadogProvider({
 - **OpenFeature MultiProvider**:
   - Java: Use OpenFeature SDK 1.23.0 or later. With an earlier SDK, a Datadog provider inside a `MultiProvider` sends no exposures to Datadog, and `shouldSend()` is `true` for every exposure.
   - Go and browser: Under a `MultiProvider`, the SDK records no exposures and does not call the `ExposureHook` callback. Flag evaluation is not affected. Register the Datadog provider directly with OpenFeature. In the browser, you can also wrap it in `DatadogDevtools`, the provider wrapper for the [Datadog Browser SDK developer extension][8].
+- **Ruby**:
+  - Under a composed provider, such as `OpenFeature::MetaProvider`, the SDK records no exposures. `ExposureHook` skips the callback and logs one warning. Register the Datadog provider directly with OpenFeature.
+  - With an `openfeature-sdk` release earlier than 0.5.1, flags evaluate and no hooks run. The SDK records no exposures and does not call the `ExposureHook` callback.
 - **Java agent version**: Split features require `dd-java-agent` 1.68.0 or later. With an earlier agent, `getFeatures()` is empty.
 
 ## Further reading
@@ -228,3 +296,5 @@ const provider = new DatadogProvider({
 [6]: /experiments/concepts/exposure_sql/
 [7]: /experiments/holdouts/#analyze-holdouts-with-your-own-exposure-data
 [8]: /feature_flags/browser_developer_extension/
+[9]: /feature_flags/server/nodejs/
+[10]: /feature_flags/server/ruby/

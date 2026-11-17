@@ -2,73 +2,56 @@
 aliases:
 - /es/developers/ide_integrations/vscode/
 - /es/developers/ide_plugins/vscode/
-description: Integra la telemetría y perspectivas de Datadog en tu código fuente en
-  VS Code y otros editores de código.
+- /es/ide_plugins/vscode/logs/
+description: Integre la telemetría y la información útil de Datadog en su código fuente
+  en VS Code y otros editores de código.
 further_reading:
 - link: /continuous_testing/
   tag: Documentación
-  text: Aprende sobre Continuous Testing
+  text: Obtenga información sobre Continuous Testing
 - link: /integrations/guide/source-code-integration/
   tag: Documentación
-  text: Aprende sobre la Integración de Código Fuente
-- link: /bits_ai/mcp_server/
+  text: Obtenga información sobre la integración de código fuente
+- link: /mcp_server/
   tag: Documentación
-  text: Aprende sobre el Servidor del Datadog Model Context Protocol (MCP)
+  text: Obtenga información sobre Datadog MCP Server
 - link: https://www.datadoghq.com/blog/datadog-ide-plugins/
   tag: Blog
-  text: Reduce el cambio de contexto mientras solucionas problemas con los complementos
+  text: Reduzca el cambio de contexto mientras soluciona problemas con los complementos
     de IDE de Datadog
-- link: https://www.datadoghq.com/blog/exception-replay-datadog/
-  tag: Blog
-  text: Simplifica la depuración en producción con Repetición de Excepciones de Datadog
 - link: https://www.datadoghq.com/blog/datadog-cursor-extension/
   tag: Blog
-  text: Depura problemas de producción en vivo con la extensión Cursor de Datadog
+  text: Depure problemas de producción en vivo con la extensión de Datadog para Cursor
 is_beta: true
-title: Extensión de Datadog para VS Code y Cursor
+title: Datadog Extension for VS Code & Cursor
 ---
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
-    La extensión de Datadog para Visual Studio Code no es compatible con tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
+## Descripción general {#overview}
 
-## Resumen {#overview}
-
-La extensión de Datadog para VS Code y Cursor lleva Datadog a tu editor de código para acelerar tu desarrollo.
+La extensión de Datadog para VS Code y Cursor lleva Datadog a su editor de código para acelerar su desarrollo.
 
 {{< img src="/ide_plugins/vscode/datadog-vscode-3.png" alt="Extensión de Datadog para VS Code y Cursor" style="width:100%;" >}}
 
-La extensión incluye estas características:
+La extensión incluye estas funciones:
 
--   [**Servidor del Model Context Protocol (MCP)**](?tab=cursor#installation): Conecta el agente de IA del editor a la telemetría de producción, herramientas y contexto de Datadog.
+- [**Code Security**](#code-security): Detecte y solucione problemas de seguridad antes de realizar una confirmación (commit) y escriba reglas personalizadas.
 
--   [**Registros**](#logs): Mide los volúmenes de registro y busca registros desde tu código.
+- [**Code Insights**](#code-insights): Manténgase informado sobre las vulnerabilidades del código y de las bibliotecas sin salir del código.
 
--   [**Perspectivas de Código**](#code-insights): Mantente informado sobre errores en tiempo de ejecución, vulnerabilidades y pruebas inestables sin salir del código.
+- [**View in IDE**](#view-in-ide): Salte directamente desde las referencias de código en Datadog a sus archivos fuente.
 
--   [**Ver en IDE**](#view-in-ide): Salta directamente desde las referencias de código en Datadog a tus archivos fuente.
+- [**Fix in Chat**](?tab=cursor#fix-in-chat): Corrija errores de código, vulnerabilidades y pruebas inestables con sugerencias y explicaciones basadas en IA.
 
--   [**Code Security**](#code-security): Detecta y corrige problemas de seguridad antes de que realices el commit, y escribe reglas personalizadas.
-
--   [**Repetición de Excepciones**](#exception-replay): Depura tu código de producción.
-
--   [**Depurador en Vivo**](#live-debugger): Agrega puntos de registro no intrusivos a los servicios en ejecución para capturar datos en tiempo de ejecución sin necesidad de redeplegar.
-
--   [**Fix in Chat**](?tab=cursor#fix-in-chat): Corrige errores de código, vulnerabilidades y pruebas inestables con sugerencias y explicaciones impulsadas por IA.
-
-<div class="alert alert-info">A menos que se indique lo contrario, todas las características de la extensión están disponibles tanto para VS Code como para cualquier otro IDE basado en forks de VS Code, como Cursor.</div>
+<div class="alert alert-info">A menos que se indique lo contrario, todas las funciones de la extensión están disponibles tanto para VS Code como para cualquier otro IDE basado en bifurcaciones de VS Code, como Cursor.</div>
 
 ## Requisitos {#requirements}
 
--   **Cuenta de Datadog**: La mayoría de las características requieren una cuenta de Datadog.
+- **Cuenta de Datadog**: La mayoría de las funciones requieren una cuenta de Datadog.
+    - ¿Es nuevo en Datadog? [Obtenga más información][3] sobre las herramientas de monitoreo y seguridad de Datadog y regístrese para una prueba gratuita.
+    - Si su organización utiliza un [subdominio personalizado][18] como `myorg.datadoghq.com`, debe indicarlo mediante la configuración `datadog.connection.oauth.setup.domain` en el IDE.
 
-    -   ¿Nuevo en Datadog? [Aprende más][3] sobre las herramientas de monitoreo y seguridad de Datadog y regístrate para una prueba gratuita.
-    -   Si tu organización utiliza un [subdominio personalizado][18] como `myorg.datadoghq.com`, debes indicarlo utilizando la configuración `datadog.connection.oauth.setup.domain` en el IDE.
-
--   **Git**: La extensión funciona mejor cuando Git está habilitado en el IDE. Asegúrate de que esto esté habilitado verificando la configuración `git.enabled`.
+- **Git**: La extensión funciona mejor cuando Git está habilitado en el IDE. Confirme que la configuración `git.enabled` esté activada.
 
 ## Instalación {#installation}
 
@@ -76,39 +59,34 @@ Los pasos de instalación pueden variar para otros editores basados en VS Code.
 
 {{< tabs >}}
 {{% tab "VS Code" %}}
-Instala la extensión directamente en el IDE o desde la web:
+Instale la extensión directamente en el IDE o desde la web:
 
--   **En VS Code**: Abre la vista de Extensiones (`Shift` + `Cmd/Ctrl` + `X`), busca `datadog` y selecciona la extensión oficial de Datadog.
+- **En VS Code**: Abra la vista Extensions (`Shift` + `Cmd/Ctrl` + `X`), busque `datadog` y seleccione la extensión oficial de Datadog.
 
--   **Desde la web**: Instala desde la página de la extensión en [Visual Studio Marketplace][1].
+- **Desde la web**: Instale desde la página de la extensión en [Visual Studio Marketplace][1].
 
-### Configuración del Servidor MCP{#mcp-server-setup}
+### Configuración del Datadog MCP Server {#datadog-mcp-server-setup}
 
-La extensión incluye acceso al [Servidor del Model Context Protocol (MCP)][3]. Asegúrate de que el Servidor del Model Context Protocol (MCP) esté habilitado para mejorar las capacidades de IA del editor con tu entorno específico de Datadog:
-
-1. Abre el panel de chat, selecciona el modo agente y haz clic en el botón **Configurar Herramientas**.
-   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Botón Configurar Herramientas en VS Code" style="width:60%;" >}}
-
-1. Encuentra el servidor y las herramientas de Datadog en la lista y marca las casillas para habilitarlas (expande o actualiza si es necesario).
+Inicie sesión en Datadog usando la extensión y ejecute el comando `Datadog: Open MCP Configuration Assistant`. Siga las indicaciones para configurar el [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
-[3]: /es/bits_ai/mcp_server/
+[3]: /es/mcp_server/
 
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-Instala la extensión directamente en el IDE o desde la web:
+Instale la extensión directamente en el IDE o desde la web:
 
--   **En Cursor**: Abre la vista de Extensiones (`Shift` + `Cmd/Ctrl` + `X`), busca `datadog` y selecciona la extensión oficial de Datadog.
+- **En Cursor**: abra la vista Extensions (`Shift` + `Cmd/Ctrl` + `X`), busque `datadog` y seleccione la extensión oficial de Datadog.
 
--   **Desde la web**: Descarga el archivo VSIX desde el [Registro de Open VSX][2] e instálalo con `Extensions: Install from VSIX` en la paleta de comandos (`Shift` + `Cmd/Ctrl` + `P`).
+- **Desde la web**: descargue el archivo VSIX desde [Open VSX Registry][2] e instálelo con `Extensions: Install from VSIX` en la paleta de comandos (`Shift` + `Cmd/Ctrl` + `P`).
 
-### Configuración del Servidor del Model Context Protocol (MCP) de Datadog {#datadog-mcp-server-setup}
+### Configuración del Datadog MCP Server {#datadog-mcp-server-setup-1}
 
-Instala el Plugin de Datadog para habilitar el [Servidor del Model Context Protocol (MCP)][3]. Puedes instalar el plugin desde el [Mercado de Cursor][4] o en **Configuración de Cursor** > **Plugins**.
+Instale el Datadog Plugin para habilitar el [Datadog MCP Server][3]. Puede instalar el plugin desde [Cursor Marketplace][4] o en **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /es/bits_ai/mcp_server/setup/?tab=cursor
+[3]: /es/mcp_server/setup/?tab=cursor
 [4]: https://cursor.com/marketplace/datadog
 
 {{% /tab %}}
@@ -116,89 +94,65 @@ Instala el Plugin de Datadog para habilitar el [Servidor del Model Context Proto
 
 ## Características principales {#core-features}
 
-### Registros {#logs}
-
-Usa **Registros** para MIDE el volumen de registros generados por una línea de registro en tu código. La extensión añade anotaciones sobre tu código para resaltar los patrones de registro que coinciden con los registros en Datadog.
-
-{{< img src="/ide_plugins/vscode/logs_navigation.mp4" alt="Vista previa de la navegación de registros" style="width:100%" video=true >}}
-
-Descubre más en la sub-sección de [Registros][20].
-
-### Perspectivas de Código {#code-insights}
-
-**Code insights** te mantienen informado con información generada por Datadog, relevante para tu base de código, incluyendo errores en tiempo de ejecución, vulnerabilidades y pruebas inestables.
-
-{{< img src="/ide_plugins/vscode/code-insights-2.png" alt="La vista de perspectivas de código." style="width:100%;" >}}
-
-Descubre más en la sub-sección de [Perspectivas de Código][21].
-
 ### Code Security {#code-security}
 
-Las características de [**Code Security**][19] analizan tu código localmente contra reglas predefinidas para detectar y corregir problemas de seguridad y vulnerabilidades antes de que realices cambios.
+Las características de [**Code Security**][19] analizan su código localmente frente a reglas predefinidas para detectar y corregir problemas de seguridad y vulnerabilidades antes de confirmar los cambios.
 
-{{< img src="/ide_plugins/vscode/static_analysis.mp4" alt="Vista previa del Análisis Estático" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/static_analysis.mp4" alt="Vista previa de Static Code Analysis" style="width:100%" video=true >}}
 
-Descubre más en la sub-sección de [Code Security][19].
+Obtenga más información en la subsección [Code Security][19].
 
-### Repetición de Excepciones {#exception-replay}
+### Code Insights {#code-insights}
 
-**La Repetición de Excepciones** te permite inspeccionar los marcos de la traza de pila de cualquier insight de Error Tracking y obtener información sobre los valores de las variables del código que se ejecuta en producción.
+**Code Insights** lo mantiene informado sobre las vulnerabilidades de código y bibliotecas relevantes para su base de código.
 
-{{< img src="/ide_plugins/vscode/exception_replay.mp4" alt="Vista previa de la Repetición de Excepciones" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/code-insights-2.png" alt="La vista de Code Insights." style="width:100%;" >}}
 
-Descubre más en la sub-sección de [Repetición de Excepciones][22].
+Obtenga más información en la subsección [Code Insights][21].
 
-### Depurador en Vivo {#live-debugger}
+### View in IDE {#view-in-ide}
 
-El **Depurador en Vivo** te permite agregar puntos de registro—puntos de interrupción no rompientes y de expiración automática— a tus servicios en ejecución para capturar datos en tiempo de ejecución para depuración sin necesidad de volver a desplegar tu código.
+<div class="alert alert-info">Esta función solo está disponible para VS Code y Cursor. Otras bifurcaciones de VS Code no son compatibles.</div>
 
-{{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Resumen de la actividad del Depurador en Vivo de Datadog" style="width:100%" video=true >}}
+La función **View in VS Code** o **View in Cursor** proporciona un enlace desde Datadog directamente a sus archivos de código fuente. Busque el botón junto a las entradas de las trazas de pila que se muestran en la interfaz de usuario (por ejemplo, en [Error Tracking][5]):
 
-Descubre más en la sub-sección de [Live Debugger][23].
+{{< img src="/ide_plugins/vscode/view-in-vscode-2.png" alt="Una traza de pila en Datadog que muestra el botón View in VS Code" style="width:100%;" >}}
 
-## Otras características {#other-features}
+También puede usar esta función para abrir sus archivos de código fuente desde un hallazgo (como un error de Error Tracking):
 
-### Ver en IDE {#view-in-ide}
+{{< img src="/ide_plugins/vscode/view-in-vscode-error.png" alt="Un problema de Error Tracking en Datadog que muestra el botón View in VS Code" style="width:100%;" >}}
 
-<div class="alert alert-info">Esta función solo está disponible para VS Code y Cursor. Otros forks de VS Code no son compatibles.</div>
-
-La característica **Ver en VS Code** o **Ver en Cursor** proporciona un enlace desde Datadog directamente a tus archivos fuente. Busca el botón junto a los marcos en las trazas de pila que se muestran en la interfaz de usuario (por ejemplo, en [Error Tracking][5]):
-
-{{< img src="/ide_plugins/vscode/view-in-vscode-2.png" alt="Una traza de pila en Datadog que muestra el botón Ver en VS Code" style="width:100%;" >}}
-
-También puedes usar esta función para abrir tus archivos fuente desde un insight (como un error de Error Tracking):
-
-{{< img src="/ide_plugins/vscode/view-in-vscode-error.png" alt="Un problema de Error Tracking en Datadog que muestra el botón Ver en VS Code" style="width:100%;" >}}
-
-<div class="alert alert-info">Para usar esta función, primero configura <a href="/integrations/guide/source-code-integration/">la integración del código fuente</a> para tu servicio.</div>
+<div class="alert alert-info">Para usar esta función, primero configure la <a href="/integrations/guide/source-code-integration/">integración de código fuente</a> para su servicio.</div>
 
 ### Fix in Chat {#fix-in-chat}
 
-El botón **Fix in Chat** aparece en varios contextos cuando la extensión identifica errores o problemas. Haz clic en el botón para generar un aviso de chat de IA que resume el problema, incluye detalles y contexto relevantes, y proporciona instrucciones específicas para el agente.
+El botón **Fix in Chat** aparece en varios contextos cuando la extensión identifica errores o problemas. Haga clic en el botón para generar un mensaje de chat de IA que resuma el problema, incluya detalles y contexto relevantes, y proporcione instrucciones específicas para el agente.
 
-{{< img src="/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Usando Fix in Chat para solucionar un error de código en línea" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Uso de Fix in Chat para solucionar un error de código en línea" style="width:100%" video=true >}}
+
+La extensión también maneja el {{< ui >}}Fix with Cursor{{< /ui >}} enlace profundo utilizado en Code Security. Cuando hace clic en {{< ui >}}Fix with Cursor{{< /ui >}} en la interfaz de usuario de Datadog o en un comentario de solicitud de extracción, la extensión abre el espacio de trabajo en Cursor. Luego, cambia al repositorio, la rama y la confirmación relevantes, y carga un mensaje de remediación personalizado para el hallazgo.
 
 ## Datos y telemetría {#data-and-telemetry}
 
-Datadog recopila cierta información sobre tu uso de este IDE, incluyendo cómo interactúas con él, si se producen errores mientras lo usas, qué causó esos errores y los identificadores de usuario, de acuerdo con la [Datadog Privacy Policy][13] y el [VS Code extension EULA de Datadog][12]. Estos datos se utilizan para ayudar a mejorar el rendimiento y las características de la extensión, incluyendo transiciones hacia y desde la extensión y la página de inicio de sesión de Datadog aplicable para acceder a los Servicios.
+Datadog recopila información sobre su uso de este IDE. Esto incluye cómo interactúa con él, si ocurrieron errores, qué causó esos errores e identificadores de usuario. La recopilación sigue la [Política de privacidad de Datadog][13] y el [EULA de la extensión de VS Code][12] de Datadog. Datadog utiliza estos datos para mejorar el rendimiento y las funciones de la extensión. También cubre los movimientos entre la extensión y la página de inicio de sesión de Datadog.
 
-Si no deseas enviar estos datos a [Datadog][3], puedes desactivarlo en cualquier momento en la configuración de la extensión: `Datadog > Telemetry > Setup > Enable Telemetry` y seleccionar `disabled`.
+Si no desea enviar estos datos a [Datadog][3], puede desactivar la recopilación en cualquier momento en la configuración de la extensión: `Datadog > Telemetry > Setup > Enable Telemetry` y seleccione `disabled`.
 
 <div class="alert alert-info">La extensión de Datadog también respeta la configuración de <a href="https://code.visualstudio.com/docs/configure/telemetry#_output-channel-for-telemetry-events">telemetría de VS Code</a>.</div>
 
 ## Ayuda y comentarios {#help-and-feedback}
 
-Para compartir tus comentarios, envía un correo electrónico a [team-ide-integration@datadoghq.com][14] o crea un issue en el [repositorio público][15] de la extensión.
+Para compartir sus comentarios, envíe un correo electrónico a [team-ide-integration@datadoghq.com][14] o cree un problema en el [repositorio público][15] de la extensión.
 
-Revisa la sección de [issues][16] para descubrir problemas conocidos.
+Verifique la sección de [problemas][16] para descubrir los problemas conocidos.
 
-¿Usas [Cursor][17] o algún otro fork de VS Code? Encuentra la extensión en el [Open VSX Registry][2].
+¿Utiliza [Cursor][17] u otra bifurcación de VS Code? Encuentre la extensión en el [Open VSX Registry][2].
 
 ## Licencia {#license}
 
-Lee cuidadosamente el [Acuerdo de Licencia de Usuario Final][12] antes de descargar o usar esta extensión.
+Lea atentamente el [Acuerdo de licencia de usuario final][12] antes de descargar o utilizar esta extensión.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -214,7 +168,4 @@ Lee cuidadosamente el [Acuerdo de Licencia de Usuario Final][12] antes de descar
 [17]: https://www.cursor.com/
 [18]: /es/account_management/multi_organization/#custom-sub-domains
 [19]: /es/ide_plugins/vscode/code_security/
-[20]: /es/ide_plugins/vscode/logs/
 [21]: /es/ide_plugins/vscode/code_insights/
-[22]: /es/ide_plugins/vscode/exception_replay/
-[23]: /es/ide_plugins/vscode/live_debugger/

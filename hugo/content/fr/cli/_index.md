@@ -38,6 +38,14 @@ brew tap datadog-labs/pack
 brew install datadog-labs/pack/pup
 {{< /code-block >}}
 
+### npm {#npm}
+
+{{< code-block lang="bash" >}}
+npm install -g @datadog/pup
+{{< /code-block >}}
+
+Pour exécuter Pup sans l'installer, utilisez `npx @datadog/pup <COMMAND>`.
+
 ### Compilez à partir du code source {#build-from-source}
 
 {{< code-block lang="bash" >}}
@@ -99,6 +107,7 @@ Pup inclut des fonctionnalités supplémentaires pouvant être utilisées dans l
 
 - [**Runbooks**][5] : `pup runbooks` est un moteur d'exécution local pour les procédures opérationnelles définies en YAML, encodant des tâches en plusieurs étapes à l'aide de `pup`, de shell, de HTTP et d'étapes de workflow Datadog.
 - [**Compétences de l'Agent**][6] : Pup intègre des compétences et des agents de domaine dans le binaire, installables sur tout assistant de codage IA avec `pup skills install`.
+- [**Agentic onboarding**][11] : `pup setup` instrumente votre application avec Datadog et peut créer un compte Datadog. Cela nécessite Node.js 22 ou une version ultérieure.
 - [**Serveur ACP**][7] : `pup acp serve` exécute un serveur d'agent IA local qui connecte les outils de codage à Datadog Bits AI via ACP et des protocoles compatibles avec OpenAI.
 
 ## Authentification {#authentication}
@@ -142,3 +151,4 @@ Pup prend en charge les méthodes d'authentification OAuth2 et par clé d'API. O
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
 [9]: /fr/api/latest/
 [10]: https://github.com/DataDog/pup#bearer-token-authentication-wasm--headless
+[11]: /fr/agentic_onboarding/setup/#pup-cli

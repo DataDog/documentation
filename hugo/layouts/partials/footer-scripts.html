@@ -13,7 +13,7 @@ hugo defaults to environment development with hugo server
   <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{- end -}}
 
-{{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $opts := dict "targetPath" "static/main-dd-js.js" "params" (dict "regions" site.Data.regions.regions) "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
 {{ if $isProd }}
   {{ $js = $js | fingerprint "sha512" }}

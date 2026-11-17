@@ -112,7 +112,7 @@ describe("resolveWebsitesModulesPath", () => {
     const cacheDir = join(tmpRoot, "hugo-cache");
     const cachedModule = join(
       cacheDir,
-      "modules/filecache/modules/pkg/mod/github.com/!data!dog",
+      "modules/filecache/modules/pkg/mod/github.com/ddoghq",
       "websites-modules@v1.4.317",
     );
     mkdirSync(cachedModule, { recursive: true });

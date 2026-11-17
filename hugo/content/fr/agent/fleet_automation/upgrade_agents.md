@@ -7,12 +7,17 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentation
   text: API Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Mettre à niveau les agents
 ---
-Fleet Automation vous permet de mettre à niveau à distance les Agents Datadog sur l'ensemble de votre parc sans accès direct aux hosts individuels. Vous pouvez déclencher les mises à niveau immédiatement, les planifier pendant les fenêtres de maintenance ou les automatiser via l'API.
+Fleet Automation vous permet de mettre à niveau à distance les Agents Datadog sur l'ensemble de votre parc sans accès direct aux hosts individuels. Vous pouvez déclencher les mises à niveau immédiatement, les planifier pendant les fenêtres de maintenance ou les automatiser via Terraform ou l'API.
 
 ## Prérequis {#prerequisites}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Sur US1-FED et US2-FED, les mises à niveau à distance nécessitent l'Agent 7.85.0 ou une version ultérieure sur Linux et Windows. Si vous exécutez une version antérieure, utilisez les <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">instructions d'installation de l'Agent</a> pour la mettre à jour avant d'effectuer la mise à niveau via Fleet Automation.
+</div>
+{{< /site-region >}}
 
 - [Remote Configuration][7] activée pour votre organisation et la clé d'API de l'Agent
 - [Remote updates][8] activées sur chaque Agent de VM cible (`remote_updates: true`)
@@ -71,6 +76,38 @@ La mise à niveau à distance des Agents dans les charges de travail conteneuris
 ## Mettre à niveau les Agents avec l'API {#upgrade-agents-with-the-api}
 
 Fleet Automation fournit une API pour déclencher les mises à niveau des Agents par programmation ou selon un planning récurrent. Lancez les mises à niveau pour tout ensemble de hosts avec des requêtes de filtrage, ou créez des plannings qui s'exécutent pendant des fenêtres de maintenance définies avec une version d'Agent spécifiée. Pour plus de détails, consultez l'[API Fleet Automation][3].
+
+## Planifiez les mises à niveau de l'Agent avec Terraform {#schedule-agent-upgrades-with-terraform}
+
+Utilisez le fournisseur Terraform Datadog pour créer et gérer les plannings de mise à niveau de l'Agent sous forme de code. La ressource `datadog_fleet_schedule` définit les hosts cibles, la version de l'Agent et la fenêtre de maintenance récurrente. Fleet Automation effectue les mises à niveau selon le planning.
+
+Avant de commencer :
+
+- Vérifiez que les Agents remplissent les [prérequis de mise à niveau](#prerequisites).
+- [Configurez le fournisseur Terraform Datadog][9] (version 4.22.0 ou ultérieure).
+- Utilisez une clé d'application avec les autorisations `agent_upgrade_write` et `hosts_read`.
+
+L'exemple suivant définit un planning inactif pour les hosts correspondant à `env:staging service:example`. Le planning cible la dernière version de l'Agent (`version_to_latest = 0`). Il spécifie une fenêtre de maintenance de deux heures (`maintenance_window_duration = 120`, en minutes), commençant à 03:00 les mardis et jeudis dans le fuseau horaire `America/New_York`.
+
+```hcl
+resource "datadog_fleet_schedule" "staging" {
+  name              = "Staging Agent upgrades"
+  query             = "env:staging service:example"
+  status            = "inactive"
+  version_to_latest = 0
+
+  rule = {
+    days_of_week                = ["Tue", "Thu"]
+    maintenance_window_duration = 120
+    start_maintenance_window    = "03:00"
+    timezone                    = "America/New_York"
+  }
+}
+```
+
+Remplacez la requête de recherche des hosts et la fenêtre de maintenance par des valeurs adaptées à votre environnement. Exécutez `terraform plan` pour examiner les modifications, puis `terraform apply` pour créer le planning. Lorsque vous êtes prêt à activer les mises à niveau planifiées, définissez `status` sur `active` et appliquez la modification.
+
+Pour connaître toutes les options prises en charge et les instructions d'importation d'un planning existant, consultez la [documentation de la ressource `datadog_fleet_schedule`][10].
 
 ## Processus de mise à niveau {#upgrade-process}
 
@@ -133,3 +170,5 @@ Après la mise à jour, [activez Remote Agent Management][8] pour utiliser Fleet
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /fr/agent/guide/setup_remote_config
 [8]: /fr/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /fr/getting_started/integrations/terraform/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/fleet_schedule

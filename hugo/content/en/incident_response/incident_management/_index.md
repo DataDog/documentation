@@ -112,7 +112,7 @@ For more details on the measures collected and step-by-step graph configurations
 
 Incident Management integrates closely with other Datadog products, including:
 
-- [Datadog Status Pages][26] to create public or private status pages and connect them to incidents.
+- [Datadog Status Pages][26] to create public, internal, or private status pages and connect them to incidents.
 - [Datadog On-Call][27] to escalate pages into incidents and manually or automatically page teams from an incident.
 - [Datadog Notebooks][28] to draft and review [postmortems][34].
 - [Datadog Workflow Automation][29] to build and execute automations.

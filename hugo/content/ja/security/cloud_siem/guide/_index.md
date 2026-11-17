@@ -17,6 +17,5 @@ title: Cloud SIEM 関連の各種ガイド
     {{< nextlink href="/security/cloud_siem/guide/oci-config-guide-for-cloud-siem/" >}}Cloud SIEM の OCI 構成ガイド{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}モニター認証ログによるセキュリティ対策{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes" >}}Cloud SIEM が分析するログをカスタマイズする{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence" >}}STIX 脅威インテリジェンスを取り込む{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/troubleshoot-cribl-stream-cloud-siem" >}}Cloud SIEM で Cribl Stream を使用してトラブルシューティングする{{< /nextlink >}}
 {{< /whatsnext >}}
