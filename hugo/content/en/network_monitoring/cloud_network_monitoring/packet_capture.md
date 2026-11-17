@@ -41,7 +41,7 @@ To start a packet capture on a connection:
 1. Review the selected hosts. Up to 25 hosts are listed and selected by default. See the [Host selection](#host-selection) section for how Datadog chooses them.
     - Sort by hostname, role, resets, failures, or retransmits.
     - Clear the checkbox for any host you don't want to include.
-1. Click {{< ui >}}Start Packet Capture{{< /ui >}} to start the capture.
+1. Click {{< ui >}}Start Packet Capture{{< /ui >}}.
 
 Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take up to 2 minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel while it runs. See the [View packet capture results](#view-packet-capture-results) section for more information on reviewing the results.
 
@@ -54,7 +54,7 @@ A network connection in CNM is an aggregation based on the tags you group by, so
 - Highest retransmits
 - A random sample of the remaining hosts
 
-Datadog selects hosts for each criterion separately. For example, Datadog might select the three hosts with the most resets, the three hosts with the highest failure rates, and the three hosts with the most retransmits. Datadog doesn't select hosts that rank highest across all three criteria combined.
+Datadog selects hosts for each criterion separately. For example, Datadog might select the three hosts with the most resets, the three hosts with the highest failure rates, and the three hosts with the most retransmits. Datadog doesn't rank hosts by a combined score across the three criteria.
 
 Hosts are labeled by their role in the connection: client, server, or both, depending on the tags used to define the connection.
 
