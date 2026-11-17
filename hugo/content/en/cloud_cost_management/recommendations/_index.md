@@ -606,6 +606,12 @@ multifiltersearch:
       recommendation_type: Downsize Azure SQL Elastic Pool
       recommendation_description: Identifies Azure SQL elastic pools whose peak utilization would stay low on a smaller size, and recommends downsizing them, at most two sizes at a time, to cut on-demand eDTU or vCore charges.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Delete Idle SQL Managed Instance
+      recommendation_description: Identifies running SQL Managed Instances with near-zero CPU and low I/O over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Managed Instance
