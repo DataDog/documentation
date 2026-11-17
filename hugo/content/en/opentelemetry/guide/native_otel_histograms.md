@@ -32,6 +32,8 @@ Use native histograms when you need percentiles that match the buckets your appl
   - Your own `cumulativetodelta` processor converts only some metrics, for example with `include` or `exclude` filters.
   - You use the DaemonSet and gateway setup with the Datadog Operator, or with a Datadog Helm chart older than 3.272.0.
 
+  To avoid this, configure your applications to send delta temporality, or add a `cumulativetodelta` processor without filters to the metrics pipelines. In the DaemonSet and gateway setup, add it to the DaemonSet. See [Producing Delta Temporality Metrics][6].
+
 <div class="alert alert-warning">If any metrics destination uses v2 for distributions, DDOT doesn't start and sends no telemetry. Check the requirements before you enable native histograms.</div>
 
 ## Enable native histograms
@@ -123,3 +125,4 @@ With the default settings, metric names don't change. If you turned off the `exp
 [3]: /metrics/distributions/
 [4]: /agent/configuration/metrics-v3-intake/#when-v2-is-used
 [5]: /metrics/distributions/#enabling-advanced-query-functionality
+[6]: /opentelemetry/guide/otlp_delta_temporality/
