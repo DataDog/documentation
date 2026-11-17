@@ -24,30 +24,29 @@ To create a guardrail:
 1. Go to [{{< ui >}}Bits Guardrails{{< /ui >}}][1] and click {{< ui >}}Create Guardrail{{< /ui >}}.
 1. Select the type of infrastructure to target.
 1. Select one or more available actions for the guardrail to target. For example, for a Kubernetes integration, you can select actions such as rolling back deployments and patching or deleting Kubernetes objects.
-1. Add tags that identify the resources the guardrail applies to, such as `service:checkout`. To learn how multiple tags work together, see the [How tags combine in a guardrail][6] section.
+1. Add tags that identify the resources the guardrail applies to, such as `service:checkout`. To learn how multiple tags work together, see the [About targeting resources with tags](#about-targeting-resources-with-tags) section.
+   <div class="alert alert-warning">A guardrail with no tags applies to every resource. Add at least one tag unless you want the guardrail to apply to all resources.</div>
 1. For the selected actions and scope, decide when Bits can take action:
    - {{< ui >}}Ask{{< /ui >}}: Requires user approval before Bits executes actions. Choose at least one team, role, or individual who can approve.
    - {{< ui >}}Deny{{< /ui >}}: Bits can recommend an action but cannot take it.
 1. (Optional) For an {{< ui >}}Ask{{< /ui >}} guardrail, turn on {{< ui >}}Notify when approval is needed{{< /ui >}}, and select the Slack workspace and channel where Bits posts approval requests. This requires the [Slack integration][4]. For a private channel, invite the Datadog app to the channel first. To approve from Slack, each approver must link their Slack account to Datadog.
 1. In the review step, enter a name for the guardrail, then save it.
 
-## How tags combine in a guardrail
+## About targeting resources with tags
 
-The tags you add to a guardrail define its scope. Bits combines them as follows:
+The tags you add to a guardrail define its scope.
 
-- **Values of the same tag**: The guardrail applies to resources that have any of the values.
-- **Different tags**: The guardrail applies only to resources that have all of the tags.
-- **Exact matches**: Tags must exactly match the resource's tags in Datadog. Wildcards aren't supported.
+Tags for guardrails have the following requirements:
 
-| Tags | Resources the guardrail applies to |
-|------|------------------------------------|
-| `env:staging`, `env:prod` | Resources in either `staging` or `prod` |
-| `service:checkout`, `env:prod` | Only `checkout` resources in `prod` |
-| `service:checkout`, `kube_deployment:checkout` | Only resources that have both tags |
+- Tags must exactly match the resource's tags in Datadog. If the tags don't match exactly, then the target resource isn't covered by the guardrail.
+- Wildcards aren't supported.
 
-<div class="alert alert-warning">A guardrail with no tags applies to every resource. Add at least one tag unless you want the guardrail to apply to all resources.</div>
+When you add two or more tags, Bits uses the following logic to target resources:
 
-## When guardrails overlap
+- If the tags have the same key but different values, then the guardrail applies to resources that have _any_ of the values. For example, if you include the tags `env:staging` and `env:prod`, then the guardrail applies to resources in either `staging` or `prod`.
+- If the tags have different keys, then the guardrail applies only to resources that have _all_ the tags. For example, if you include the tags `service:checkout`, `kube_deployment:checkout`, the guardrail applies only to resources that have both tags.
+
+## About overlapping guardrails
 
 If more than one guardrail applies to the same action and resource, the strictest guardrail takes effect. {{< ui >}}Deny{{< /ui >}} takes precedence over {{< ui >}}Ask{{< /ui >}}.
 
@@ -58,4 +57,3 @@ For example, suppose one {{< ui >}}Deny{{< /ui >}} guardrail is scoped to `env:p
 [3]: https://app.datadoghq.com/organization-settings/roles
 [4]: /integrations/slack/
 [5]: /bits_ai/bits_remediation/infrastructure_actions/
-[6]: #how-tags-combine-in-a-guardrail
