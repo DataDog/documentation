@@ -1,11 +1,11 @@
 ---
 title: Workload Identity Federation
-description: Authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, and HCP Terraform runs with Workload Identity Federation, using AWS, GitHub, or HCP Terraform credentials instead of static API and application keys.
+description: Authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, HCP Terraform runs, and workloads with their own OIDC identity provider with Workload Identity Federation, using AWS, GitHub, HCP Terraform, or custom OIDC credentials instead of static API and application keys.
 aliases:
     - /account_management/cloud_authentication/
     - /account_management/cloud_provider_authentication/
 algolia:
-  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'github actions', 'hcp terraform', 'terraform cloud', 'dynamic provider credentials', 'delegated auth']
+  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'github actions', 'hcp terraform', 'terraform cloud', 'dynamic provider credentials', 'custom oidc', 'delegated auth']
 further_reading:
 - link: "/getting_started/integrations/terraform/"
   tag: "Documentation"
@@ -23,9 +23,9 @@ further_reading:
 
 ## Overview
 
-Workload Identity Federation lets you authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, and HCP Terraform runs using AWS, GitHub, or HCP Terraform credentials instead of static API and application keys.
+Workload Identity Federation lets you authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, HCP Terraform runs, and workloads with their own OIDC identity provider using AWS, GitHub, HCP Terraform, or custom OIDC credentials instead of static API and application keys.
 
-This page covers setup for three identity providers: AWS (for Datadog API calls and the Agent), GitHub (for GitHub Actions), and HCP Terraform (for HCP Terraform runs).
+This page covers setup for four identity providers: AWS (for Datadog API calls and the Agent), GitHub (for GitHub Actions), HCP Terraform (for HCP Terraform runs), and custom OIDC providers (for other workloads).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <p>Workload Identity Federation is available for the following:</p>
@@ -34,6 +34,7 @@ This page covers setup for three identity providers: AWS (for Datadog API calls 
 <li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
 <li><b>GitHub Actions</b>: Authenticate a workflow by exchanging its GitHub OIDC token for a short-lived Datadog credential. In Preview.</li>
 <li><b>HCP Terraform</b>: Authenticate the Datadog Terraform provider in HCP Terraform runs using dynamic provider credentials. In Preview.</li>
+<li><b>Custom OIDC providers</b>: Authenticate any workload that has an OIDC token from an identity provider you register. In Preview, by request.</li>
 </ul>
 {{< /site-region >}}
 
@@ -494,6 +495,163 @@ provider "datadog" {
 To test the mapping, start a plan-only run in the workspace. If the run fails to authenticate, check that the run's `sub` claim matches the mapping's sub pattern and run phase, and that the audience variable matches the value from the mapping.
 
 For other options, including untagged tokens and custom token tags, see the provider's [dynamic provider credentials guide][10].
+
+## Set up Workload Identity Federation for a custom OIDC provider
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation for custom OIDC providers is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< callout url="/help/" header="Request access to custom OIDC providers" >}}
+Workload Identity Federation for custom OIDC providers is in Preview and is available on commercial sites only. To request access, contact Datadog Support and include the issuer URL of your OIDC provider.
+{{< /callout >}}
+
+Any workload that can obtain a signed OIDC token from an identity provider you control, such as a CI system, a Kubernetes cluster, or a corporate identity provider, can exchange that token for a short-lived Datadog credential. Use a custom OIDC provider when your workload's identity provider is not AWS, GitHub Actions, or HCP Terraform. Those providers have dedicated setups on this page, and their issuers are rejected as custom OIDC providers.
+
+Two mapping types are available:
+
+- **Identity mapping**: the workload receives a Datadog access token for calling Datadog API endpoints as a Datadog user or service account.
+- **Intake mapping**: the workload receives a Datadog API key for sending telemetry such as logs and metrics.
+
+**Requirements**:
+- Access to custom OIDC providers is enabled for your Datadog organization.
+- Your account has the `workload_identity_federation_write` permission to create providers and mappings.
+- Your identity provider publishes its signing keys over HTTPS, through an OIDC discovery document or a JWKS URL, and signs tokens with an RS, ES, or PS algorithm.
+- The workload's tokens carry your Datadog organization UUID, either in a `dd_org_uuid` claim or as an audience of the form `datadog/<YOUR_ORG_UUID>`. Your organization UUID is shown on the [**Organization Settings** > **Workload Identity Federation**][6] page.
+
+Setting up Workload Identity Federation for a custom OIDC provider involves three parts:
+1. [Registering the OIDC provider in Datadog](#register-the-oidc-provider-in-datadog)
+2. [Creating a custom OIDC mapping](#create-a-custom-oidc-mapping)
+3. [Exchanging the workload's token for a Datadog credential](#exchange-the-workloads-token-for-a-datadog-credential)
+
+### Register the OIDC provider in Datadog
+
+A provider tells Datadog how to validate tokens from your identity provider. The token's `iss` claim must exactly match the provider's issuer URL. Providers cannot be edited. To change a provider, delete it and create a new one. A provider cannot be deleted while a mapping references it.
+
+#### Using the UI
+
+1. Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **OIDC Providers** tab.
+2. Click {{< ui >}}Add Provider{{< /ui >}}.
+3. Enter a **Name** and the **Issuer URL**.
+4. Under **Key discovery**, select **OIDC discovery** to read signing keys from the issuer's discovery document, or **Direct JWKS URL** and enter the **JWKS URL**.
+5. Under **Org routing**, choose whether tokens identify your Datadog organization with a `dd_org_uuid` claim or a `datadog/<YOUR_ORG_UUID>` audience.
+6. Enter one or more **Audiences** that tokens must carry.
+7. Optionally, add **Required claims** that every token from this provider must match.
+8. Click {{< ui >}}Create Provider{{< /ui >}}.
+
+#### Using the API
+
+Create providers with the `/api/v2/wif/oidc/provider` endpoint.
+
+```bash
+# Example: register an OIDC provider that uses OIDC discovery
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/wif/oidc/provider" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "custom_oidc_provider_config",
+    "attributes": {
+      "provider_name": "ci-idp",
+      "issuer_url": "https://idp.example.com",
+      "discovery_type": "oidc_discovery",
+      "audiences": ["datadog/<YOUR_ORG_UUID>"],
+      "org_uuid_source": "aud"
+    }
+  }
+}'
+```
+
+| Attribute | Description |
+|---|---|
+| `provider_name` | Required. A name for the provider, unique in your organization. |
+| `issuer_url` | Required. The HTTPS issuer URL, unique in your organization. Must use a DNS hostname and cannot contain credentials or a query string. |
+| `discovery_type` | Required. `oidc_discovery` or `direct_jwks`. |
+| `jwks_url` | Required when `discovery_type` is `direct_jwks`. |
+| `audiences` | Required. At least one audience that tokens must carry. |
+| `org_uuid_source` | `dd_org_uuid` (default) reads the organization UUID from the `dd_org_uuid` claim. `aud` also accepts a `datadog/<YOUR_ORG_UUID>` audience, which must be listed in `audiences`. |
+| `required_claims` | Claim matchers that every token from this provider must pass, in addition to its mapping's matchers. Uses the same format as [mapping claim matchers](#match-claims-safely-for-custom-oidc). |
+
+<div class="alert alert-warning">If your issuer is shared by many tenants, such as <code>accounts.google.com</code> or <code>gitlab.com</code>, add a <code>required_claims</code> entry with <code>exact</code> mode that pins a claim identifying your tenant. Without it, tokens from other tenants of the same issuer could match your mappings.</div>
+
+### Create a custom OIDC mapping
+
+Custom OIDC mappings match claims from the workload's token and reference a registered provider.
+
+#### Using the UI
+
+1. Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab (for API access) or the **Intake Mappings** tab (for telemetry).
+2. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
+3. Select **Custom OIDC** as the **Identity Provider**, then select the **OIDC Provider** you registered.
+4. Under **Claim Matchers**, add each claim that the workload's token must match. See [Match claims safely](#match-claims-safely-for-custom-oidc).
+5. For an identity mapping, select the Datadog user or service account the workload authenticates as.
+6. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+#### Using the API
+
+Create mappings with the `/api/v2/wif/oidc/persona_mapping` (identity) and `/api/v2/wif/oidc/intake_mapping` (intake) endpoints. Both take the `provider_id` of a registered provider and a `claim_matchers` list. Identity mappings also take the `account_uuid` of the target Datadog user or service account.
+
+**Example**: An API call that maps a CI pipeline's tokens to a Datadog service account.
+
+```bash
+# Example: map tokens for one CI project to a Datadog service account
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/wif/oidc/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "custom_oidc_identity_mapping",
+    "attributes": {
+      "provider_id": "<PROVIDER_ID>",
+      "account_uuid": "<SERVICE_ACCOUNT_UUID>",
+      "claim_matchers": [
+        { "claim": "sub", "mode": "glob", "values": ["project:my-team/deploy:*"] },
+        { "claim": "environment", "mode": "exact", "values": ["production"] }
+      ]
+    }
+  }
+}'
+```
+
+For the full request and response schemas, see the [Cloud Authentication API reference](https://docs.datadoghq.com/api/latest/cloud-authentication/).
+
+### Match claims safely for custom OIDC
+
+Each claim matcher has a `claim` name, a `mode`, and a list of `values`. A token must pass every matcher in a mapping. A matcher passes when the claim equals any one of its values.
+
+- **`exact`** (default): case-sensitive string equality.
+- **`glob`**: matches the whole claim value. `*` matches any run of characters, including `/`. `?` matches one character. There is no escaping.
+
+Every mapping must include at least one `exact` matcher, or a `glob` matcher whose values each have at least three literal characters before the first wildcard. You cannot match on `iss`, `aud`, `exp`, `iat`, `nbf`, `jti`, or `dd_org_uuid`. Datadog validates those claims separately.
+
+<div class="alert alert-warning">Glob patterns can over-match, because <code>*</code> also matches <code>/</code>. A pattern like <code>project:my-team*</code> also matches <code>project:my-team-other/...</code>. Match exact values where you can, and pin the claims that identify your workload most narrowly.</div>
+
+### Exchange the workload's token for a Datadog credential
+
+No Datadog client library or integration exchanges custom OIDC tokens for you. Your workload calls the exchange endpoint directly, sending its OIDC token with the `oidc-` prefix in the `Authorization` header.
+
+**Identity mapping**: request a Datadog access token, then use it as a bearer token.
+
+```bash
+DD_ACCESS_TOKEN=$(curl -fsS -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/delegated-token" \
+  -H "Authorization: Delegated oidc-${OIDC_TOKEN}" \
+  | jq -r '.data.attributes.access_token')
+
+curl -fsS "{{< region-param key=dd_api code="true" >}}/api/v2/current_user" \
+  -H "Authorization: Bearer ${DD_ACCESS_TOKEN}"
+```
+
+The access token is short-lived. The response's `expires` attribute gives its expiration time. Request a new token when it expires.
+
+**Intake mapping**: request a Datadog API key for sending telemetry.
+
+```bash
+DD_API_KEY=$(curl -fsS -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/intake-key" \
+  -H "Authorization: Delegated oidc-${OIDC_TOKEN}" \
+  | jq -r '.data.attributes.api_key')
+```
 
 ## Set up Workload Identity Federation for the Datadog Agent
 
