@@ -377,7 +377,12 @@ Use [granular access control][17] to limit who has access to your test based on 
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
 | No access    |                         |                         |                   |           |                |                |
 | Viewer       | {{< X >}}               |                         | {{< X >}}         |           | {{< X >}}      |                |
+| Runner       | {{< X >}}               |                         | {{< X >}}         | {{< X >}} | {{< X >}}      |                |
 | Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
+
+Only users with Editor access can delete the test or change who has access to it.
+
+Access levels apply on top of [role permissions][15]. To run a test, a user needs Runner or Editor access to the test and the `synthetics_write` permission.
 
 ## Further Reading
 
