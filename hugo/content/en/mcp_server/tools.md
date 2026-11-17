@@ -112,9 +112,9 @@ Fetches a complete trace from Datadog APM using a trace ID.
 ### `get_profiling_overview`
 *Toolsets: **core**, **profiling***\
 *Permissions Required: `Continuous Profiler Read`*\
-Returns a compact flame graph overview with the top stack traces for profiles matching a tag query and time range. Use it to start a profiling investigation and identify CPU, allocation, or wall time hotspots. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
+Returns a profiling overview with flame graph and call graph summaries. Aggregates profiles matching a tag query, time range, and profile type. Includes top stack traces, functions, and call relationships to help identify CPU, allocation, or wall time hotspots. Use it to start a profiling investigation. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
 
-- Show the top CPU stack traces for `service:checkout-api env:prod` over the last hour.
+- Summarize CPU hotspots and function call relationships for `service:checkout-api env:prod` over the last hour.
 - Summarize allocation hotspots for `service:payments` over the last 30 minutes.
 - Show wall time hotspots for `service:checkout-api` over the last hour.
 
@@ -2485,9 +2485,9 @@ Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][
 ### `get_profiling_overview`
 *Toolsets: **core**, **profiling***\
 *Permissions Required: `Continuous Profiler Read`*\
-Returns a compact flame graph overview with the top stack traces for profiles matching a tag query and time range. Use it to start a profiling investigation and identify CPU, allocation, or wall time hotspots. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
+Returns a profiling overview with flame graph and call graph summaries. Aggregates profiles matching a tag query, time range, and profile type. Includes top stack traces, functions, and call relationships to help identify CPU, allocation, or wall time hotspots. Use it to start a profiling investigation. Scope the query to one service for service-specific results; broader queries aggregate matching profiles.
 
-- Show the top CPU stack traces for `service:checkout-api env:prod` over the last hour.
+- Summarize CPU hotspots and function call relationships for `service:checkout-api env:prod` over the last hour.
 - Summarize allocation hotspots for `service:payments` over the last 30 minutes.
 - Show wall time hotspots for `service:checkout-api` over the last hour.
 
