@@ -342,6 +342,7 @@ Utilice [Server SDK Configuration Sources][9] como referencia canónica para la 
 - [Utilice un punto de conexión Agentless personalizado][10] para pruebas avanzadas, desarrollo local o un proxy gestionado por el operador
 - [Utilice Remote Configuration del Agent][13] para conservar la entrega gestionada por el Agent
 - [Migre una configuración de Remote Configuration existente][11] y elimine el ajuste `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` obsoleto
+- [Inicie el Agent antes de iniciar la aplicación][18] cuando utilice Agent Remote Configuration
 
 En el modo Agentless, Java prefiere un relay de telemetría local compatible para la exposición a experimentos y eventos de evaluación de flags agregados. Envía ambos tipos de eventos directamente cuando no hay un relay compatible disponible. La ruta directa utiliza los ajustes `DD_API_KEY` y `DD_SITE` de la aplicación. Para entornos serverless sin Agent, puede utilizar [`serverless-init`][17] como relay de telemetría local.
 
@@ -376,7 +377,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` es un evento opcional de OpenFeature. Consulte la documentación del proveedor de Datadog para verificar si este evento es compatible con su versión.
+Una vez que el proveedor esté listo, emite `PROVIDER_CONFIGURATION_CHANGED` por cada nueva configuración de flag que reciba.
 
 ### Múltiples clientes {#multiple-clients}
 
@@ -642,6 +643,7 @@ Cuando la ruta de configuración seleccionada admite exposiciones, las exposicio
 
 1. Verifique que la Feature Flag esté asociada con un experimento en la interfaz de usuario de Datadog.
 2. Verifique la clave de API de Agent y la conectividad.
+3. Si utiliza Agent Remote Configuration, verifique que el Agent estuviera disponible cuando se inició la aplicación. Si no lo estaba, reinicie la aplicación. Consulte [Disponibilidad del Agent][18].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -663,3 +665,4 @@ Cuando la ruta de configuración seleccionada admite exposiciones, las exposicio
 [15]: /es/serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /es/serverless/google_cloud_run/containers/in_container/java/
 [17]: /es/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /es/feature_flags/concepts/configuration_sources/#agent-availability

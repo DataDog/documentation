@@ -11,9 +11,9 @@ further_reading:
 - link: /metrics/metrics-without-limits/
   tag: Documentación
   text: Metrics without Limits™
-- link: /metrics/volume/
+- link: /metrics/catalog/
   tag: Documentación
-  text: Gestión del volumen de métricas
+  text: Metrics Catalog
 - link: https://www.datadoghq.com/blog/custom-metrics-governance/
   tag: Blog
   text: Prácticas recomendadas para la gobernanza integral de Custom Metrics
@@ -85,30 +85,28 @@ Es posible que los equipos individuales tengan una visibilidad limitada de los c
 #### Encuentre la fuente de sus Custom Metrics de mayor volumen {#find-the-source-of-your-largest-custom-metrics}
 <div class="alert alert-danger">Debe tener el rol <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> para acceder a la página Plan & Usage.</div>
 
-{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Vaya a Metrics Summary desde la página Plan & Usage a través de la tabla Top Custom Metrics" style="width:90%;" >}}
-
 Para identificar qué equipo o servicio es responsable de los nombres de sus principales Custom Metrics:
 
 1. Desde la [página Plan & Usage][2], desplácese hacia abajo hasta la sección *Usage Summary*.
 1. Haga clic en la pestaña {{< ui >}}Custom Metrics{{< /ui >}} para visualizar el uso facturable, las tendencias de uso y las principales Custom Metrics de su organización.
-1. Debajo de la tabla *Top Custom Metrics for <MONTH YEAR>*, haga clic en el ícono {{< ui >}}See in Metrics Summary{{< /ui >}} correspondiente a la principal Custom Metrics. Esto lo lleva a la página *Metrics Summary* con el panel lateral de detalles de la métrica abierto. 
+1. Debajo de la tabla *Top Custom Metrics for <MONTH YEAR>*, haga clic en el ícono para {{< ui >}}See in Metrics Catalog{{< /ui >}} correspondiente a la métrica personalizada principal. Esto abre el panel lateral de detalles de la métrica en la página Metrics Catalog.
 1. En el panel lateral, desplácese hacia abajo hasta la sección *Tags* para visualizar las etiquetas asociadas, como equipos y servicios.
 
 #### Visualice las Custom Metrics de su equipo {#view-your-teams-custom-metrics}
 
 Todos los equipos deben tener visibilidad sobre qué métricas están provocando picos en su facturación en tiempo real y sentirse seguros de que sus esfuerzos de optimización de costos no afectan la visibilidad de otro equipo.
 
-Para ver todos los nombres de métricas que su equipo envía activamente, vaya a la [página Metrics Summary][6] y escriba el par de clave de etiqueta y valor (por ejemplo, `team:dev` o `service:demo`) en el campo {{< ui >}}Filter by Tag Value{{< /ui >}}.
+Para ver todos los nombres de métricas que su equipo envía activamente, vaya a la [página Metrics Catalog][6] y escriba un par de clave y valor de etiqueta `key:value` (por ejemplo, `team:dev` o `service:demo`) en el campo de búsqueda {{< ui >}}Tag{{< /ui >}}.
 
 #### Identifique las métricas de cualquier equipo que tengan el mayor impacto en su factura {#identify-any-teams-metrics-that-have-the-biggest-impact-on-your-bill}
 
-Todos los usuarios de su organización pueden visualizar, de forma predeterminada y en tiempo real, el uso estimado de Custom Metrics en la [página Metrics Volume Management][7]. Las perspectivas inteligentes de Datadog ayudan a identificar en qué métricas enfocar sus esfuerzos de optimización de costos. Utilice Metrics Volume Management con Metrics without Limits™ para controlar el uso de sus Custom Metrics indexadas y reducir costos sin sacrificar la precisión.
+Todos los usuarios de su organización pueden ver el uso estimado de métricas personalizadas en tiempo real, disponible sin configuración adicional, en los gráficos de uso de la [página Metrics Catalog][6]. Las perspectivas inteligentes de Datadog ayudan a identificar en qué métricas enfocar sus esfuerzos de optimización de costos. Utilice Metrics Catalog con Metrics without Limits™ para controlar el uso de sus Custom Metrics indexadas y reducir costos sin sacrificar la precisión.
 
-Con Metrics Volume Management, puede identificar las métricas de mayor volumen de su organización, así como los nombres de las métricas cuyo volumen está aumentando bruscamente (posibles responsables de cualquier exceso inesperado).
+En la página Metrics Catalog, ordene la tabla de métricas por volumen para identificar las métricas de mayor volumen de su organización, así como los nombres de las métricas cuyos volúmenes presentan picos (causas probables de cualquier exceso inesperado).
 
-{{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Página Metrics Volume Management" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/metrics_catalog_page_2026-11-12.png" alt="La página Metrics Catalog con la tabla de métricas ordenada por Est. Indexed Metrics, y las columnas Est. Indexed Metrics y Change in Volume resaltadas." style="width:90%;" >}}
 
-Para obtener más información, consulte la documentación de [Metrics Volume Management][8].
+Para obtener más información, consulte la documentación del [Metrics Catalog][8].
 
 ## Gobernanza de métricas basada en el valor {#value-based-metrics-governance}
 
@@ -122,7 +120,7 @@ En esta sección, aprenda sobre las acciones que puede tomar para maximizar el r
 
 Reduzca el volumen de métricas personalizadas indexadas para cualquier nombre de métrica mediante una configuración de etiquetas que desee conservar para las consultas. Reduce sus costos y preserva la precisión matemática de sus métricas configuradas (todo dentro de la plataforma sin cambios a nivel de código).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Ejemplo de uso de Metrics Volume Management y Metrics without Limits™ para reducir el volumen mediante una configuración de etiquetas que limite la lista de etiquetas permitidas" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Un ejemplo de uso de Metrics without Limits™ para reducir el volumen limitando la lista de permitidos de etiquetas en una configuración de etiquetas." style="width:80%;" >}}
 
 Con Metrics without Limits™, Datadog proporciona automáticamente lo siguiente:
 - Configuraciones de etiquetas recomendadas y actualizadas, basadas en las etiquetas consultadas activamente y en las utilizadas en los recursos (gracias a nuestro análisis inteligente de consultas), para ayudarle a maximizar el retorno de inversión y el valor que obtiene de su gasto en observabilidad.
@@ -163,24 +161,17 @@ Utilice la [faceta Related Assets][16] para obtener visibilidad de las métricas
 
 Identifique la lista completa de métricas no consultadas y no utilizadas de su organización:
 
-1. En la [página de Metrics Summary][6], busque la faceta {{< ui >}}Query Activity{{< /ui >}} en el lado izquierdo. Seleccione el marco de tiempo de interés (30, 60 o 90 días).
+1. En la [página de Metrics Catalog][6], busque la faceta {{< ui >}}Query Activity{{< /ui >}} en el lado izquierdo. Seleccione el marco de tiempo de interés (30, 60 o 90 días).
 2. Busque la faceta {{< ui >}}Related Assets{{< /ui >}} en el lado izquierdo y seleccione {{< ui >}}Not used in any asset{{< /ui >}}.
-3. Busque la faceta {{< ui >}}Configuration{{< /ui >}} en el lado izquierdo y seleccione {{< ui >}}All Tags{{< /ui >}}. La combinación de estas tres facetas le proporciona una lista de todas las métricas que no se consultan ni se utilizan en sus activos, y que aún no tienen una configuración de etiqueta personalizada.
+3. Busque la faceta {{< ui >}}Tag Configuration{{< /ui >}} en el lado izquierdo y seleccione {{< ui >}}All Tags{{< /ui >}}. La combinación de estas tres facetas le proporciona una lista de todas las métricas que no se consultan ni se utilizan en sus activos, y que aún no tienen una configuración de etiqueta personalizada.
 
 4. Revise la tabla resultante de nombres de métricas. ¿Existen patrones o se envían desde un servicio específico? Encuentre las etiquetas asociadas con estas métricas no consultadas.
-5. (Opcional) Para exportar esta lista, haga clic en {{< ui >}}Export as CSV{{< /ui >}} sobre la tabla de métricas.
+5. (Opcional) Para exportar esta lista, haga clic en el ícono de descarga ({{< ui >}}Download as CSV{{< /ui >}}) junto a {{< ui >}}Columns{{< /ui >}} sobre la tabla de métricas.
+6. Después de identificar las métricas que sus desarrolladores no necesitan, reduzca su volumen de métricas personalizadas y los costos asociados creando una [Tag Indexing Rule][18] con alcance a sus nombres de métricas o espacios de nombres. Configure la regla para desindexar las etiquetas que no se consultan ni se utilizan en los activos de estas métricas. Las etiquetas desindexadas ya no se pueden consultar, pero Datadog sigue ingiriéndolas.
 
-   Después de identificar las métricas que sus desarrolladores no necesitan, puede reducir de forma segura los volúmenes de métricas personalizadas y los costos asociados de estas métricas no utilizadas con Metrics without Limits™. 
+Las Tag Indexing Rules y las configuraciones de etiquetas de Metrics without Limits™ controlan qué etiquetas se indexan. Las reglas se aplican a muchas métricas, mientras que las configuraciones de Metrics without Limits™ se aplican a una métrica a la vez y tienen prioridad sobre las reglas.
 
-{{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="El menú desplegable Configure Metrics con la selección Manage tags resaltada" style="width:90%;" >}}
-
-6. En la parte superior de la [página de Metrics Summary][6], haga clic en el menú desplegable {{< ui >}}Configure Metrics{{< /ui >}}.
-7. Seleccione {{< ui >}}Manage tags{{< /ui >}} para abrir la [ventana de configuración de etiquetas de Metrics without Limits™][13] y configurar varias métricas de forma masiva.
-8. Especifique el prefijo del espacio de nombres de las métricas que desea configurar.
-9. Deje {{< ui >}}Include tags{{< /ui >}} seleccionado. Esto incluye todas las etiquetas que se han consultado activamente en sus activos (tableros, notebooks, seguimientos y SLOs), en el Metrics Explorer o a través de la API.
-10. Haga clic en {{< ui >}}Save{{< /ui >}}.
-
-Basándonos en los análisis inteligentes de consultas de Datadog de miles de clientes que usan métricas personalizadas, descubrimos que usar **Metrics without Limits™ en métricas no consultadas puede reducir el uso de métricas personalizadas del cliente promedio hasta en un 70 %**.
+Los datos sobre consultas de miles de clientes de Datadog muestran que desindexar las etiquetas de métricas no consultadas puede reducir el uso de Custom Metrics de un cliente promedio hasta en un 70 %.
 
 ### Comprenda la utilidad relativa de sus métricas {#understand-the-relative-utility-of-your-metrics}
 
@@ -203,7 +194,7 @@ En esta sección, aprenda cómo:
 - Alertar cuando la cardinalidad de una métrica en particular supere un umbral definido por el usuario o aumente de forma anómala
 Una vez que comprenda el uso de métricas de su cuenta y los equipos responsables de esos costos, configure seguimientos para recibir alertas cuando el uso de sus Custom Metrics supere un determinado umbral. Reciba alertas sobre picos en el uso de Custom Metrics para que pueda evitar aumentos inesperados en la facturación.
 
-Datadog ofrece métricas OOTB que miden el [uso estimado de Custom Metrics][15]. Puede utilizar estas métricas en las visualizaciones de sus tableros y en las alertas de seguimiento. 
+Datadog ofrece métricas OOTB que miden el [uso estimado de Custom Metrics][19]. Puede utilizar estas métricas en las visualizaciones de sus tableros y en las alertas de seguimiento. 
 
 | Tipo de uso                    | Métrica                                   | Descripción |
 |-------------------------------|------------------------------------------| ----------- |
@@ -217,7 +208,7 @@ Datadog ofrece métricas OOTB que miden el [uso estimado de Custom Metrics][15].
 También puede ver un desglose del uso estimado de sus Custom Metrics en tiempo real por nombre de métrica, ya sea con el widget de series temporales del tablero o con un seguimiento de métricas. Utilice la métrica `datadog.estimated_usage.metrics.custom.by_metric` para configurar un seguimiento y así tener siempre visibilidad actualizada del volumen de cada una de sus métricas. 
 
 ### Casos de uso adicionales de seguimiento {#additional-monitoring-use-cases}
-Después de recibir una alerta, utilice la página Metrics Volume Management para inspeccionar las claves de etiqueta de cualquier métrica que presente picos y utilice Metrics without Limits™ para descartar inmediatamente cualquier clave de etiqueta anómala que esté provocando el pico en su métrica. Esto garantizará que pueda resolver inmediatamente cualquier pico de facturación involuntario. 
+Después de recibir una alerta, utilice la página Metrics Catalog para inspeccionar las claves de etiqueta de cualquier métrica con picos. Luego, utilice Metrics without Limits™ para desindexar las claves de etiqueta anómalas que están causando el pico. Esto le ayuda a resolver picos imprevistos en la facturación.
 {{< whatsnext desc="Casos de uso adicionales para configurar seguimientos con las métricas de uso estimado:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alertar cuando el volumen cambie más allá de un cierto porcentaje.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alertar sobre cambios anómalos en el uso.{{< /nextlink >}}
@@ -227,9 +218,9 @@ Después de recibir una alerta, utilice la página Metrics Volume Management par
 
 ## Resumen de mejores prácticas {#summary-of-best-practices}
 
-1. Comience por identificar los nombres de las métricas con mayor volumen (en su tabla Top Custom Metrics o en la página Metrics Volume) y utilice Metrics without Limits™ para optimizar el volumen de estas métricas principales de la manera más rentable. 
-2. Utilice la página Metrics Volume Management para atribuir cualquier pico existente en el uso de Custom Metrics a los nombres de las métricas con los mayores picos que lo provocan.
-3. Para obtener ahorros de costos inmediatos, identifique las Custom Metrics que no se consultan y use Metrics without Limits™ para asignarles configuraciones de etiquetas vacías.
+1. Comience identificando los nombres de sus métricas de mayor volumen en su tabla Top Custom Metrics o en la página Metrics Catalog. Luego, utilice Metrics without Limits™ para optimizar estas métricas principales hasta alcanzar el volumen más rentable.
+2. Utilice la página Metrics Catalog para atribuir cualquier pico existente en el uso de Custom Metrics a los nombres de las métricas con los mayores picos que lo provocan.
+3. Para obtener ahorros de costos inmediatos, identifique sus Custom Metrics no consultadas y utilice una [Tag Indexing Rule][18] para desindexar las etiquetas que no se consultan ni se utilizan en activos.
 4. Configure seguimientos para el uso de sus Custom Metrics mediante cualquiera de las métricas OOTB de Datadog que estiman el uso de Custom Metrics.
 
 ## Lecturas adicionales {#further-reading}
@@ -241,15 +232,15 @@ Después de recibir una alerta, utilice la página Metrics Volume Management par
 [3]: /es/account_management/billing/usage_attribution/
 [4]: /es/metrics/metrics-without-limits/
 [5]: https://app.datadoghq.com/billing/usage-attribution?view=table
-[6]: https://app.datadoghq.com/metric/summary
-[7]: https://app.datadoghq.com/metric/volume
-[8]: /es/metrics/volume/
+[6]: https://app.datadoghq.com/metric/catalog
+[8]: /es/metrics/catalog/
 [9]: https://docs.datadoghq.com/es/account_management/rbac/permissions/?tab=ui#metrics
 [10]: /es/glossary/#cardinality
 [11]: /es/account_management/audit_trail/
 [12]: https://app.datadoghq.com/event/explorer
-[13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [14]: https://docs.datadoghq.com/es/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
-[15]: /es/metrics/summary/#metrics-related-assets
-[16]: /es/metrics/summary/#facet-panel
+[15]: /es/metrics/catalog/#metrics-related-assets
+[16]: /es/metrics/catalog/#facet-panel
 [17]: https://tour.datadoghq.com/psl/swa0y11
+[18]: /es/metrics/guide/tag-indexing-rules/
+[19]: /es/account_management/billing/usage_metrics/
