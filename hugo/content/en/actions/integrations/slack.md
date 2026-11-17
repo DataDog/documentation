@@ -20,14 +20,8 @@ further_reading:
   text: "Connections"
 ---
 
-<!-- CONFIRM: Site support. No site checks found in code, but the rollout didn't include the gov sites. If Slack execution policies are unsupported there, add:
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Slack execution policies are not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Slack execution policies are not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Slack actions can't act on private channels on this site.</div>
 {{< /site-region >}}
--->
-
-<!-- CONFIRM: The feature is enabled per organization. Preview or GA at launch? If Preview, add a callout here, for example:
-{{< callout url="" btn_hidden="true" header="Join the Preview!">}}Slack execution policies are in Preview.{{< /callout >}}
--->
 
 ## Overview
 
@@ -136,11 +130,9 @@ To see only Slack policies on the Execution Policies page, select **Slack** in t
 
 ### From the Action Catalog
 
-<!-- CONFIRM: Display name of com.datadoghq.slack.conversations.conversationsHistory, and the exact steps to run an action from the Action Catalog. -->
-
-1. In the [Action Catalog][3], select an eligible Slack action, such as **Get conversation history**.
-2. Select the workspace and enter a private channel that a Slack execution policy allows you to use.
-3. Run the action.
+1. In the [Action Catalog][3], search for and click an eligible Slack action, such as **Conversations history**.
+2. Select the **Workspace**, and enter a private channel name or ID in **Channel**. A Slack execution policy must allow you to use the channel.
+3. Click **Run**. The output appears under **Run results**.
 
 ### In a workflow
 
@@ -161,21 +153,20 @@ If execution policies are off, Slack steps in the workflow can act only on publi
 
 Some Slack actions could reach private channels before Slack execution policies were available. To keep them working, your organization has a default policy named **Datadog Default Slack Policy**. It allows the following actions on all workspaces and all private channels:
 
-- Send simple message
-- Send interactive message
-- Send Block Kit message
-- Open dialog
+- Send message
+- Make a decision
+- Send block kit message
+- Prompt user with modal
 - Set channel topic
 - Archive channel
-- Add Datadog to channel
-- Add reaction
+- Add Datadog App to channel
+- Add reactions
 - Get reactions
 
 Everyone in your organization has **Resolver** access to the default policy, so it applies to all users. These actions work on private channels in workflows, apps, and the Action Catalog, even when execution policies are off for a workflow.
 
 To restrict these actions on private channels, edit the default policy or create a **Deny** policy. Users with the **Execution Groups Write** permission can edit or delete the default policy.
 
-<!-- CONFIRM: Action display names. Taken from FQNs: send_simple_message, send_interactive_message, sendBlockKitMessage, openDialog, setChannelTopic, archiveChannel, addDatadogAgentToChannel, reactions.reactionsAdd, reactions.reactionsGet. -->
 
 ## Security considerations
 
