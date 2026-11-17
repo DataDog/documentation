@@ -200,7 +200,7 @@ For tighter control over who can call models:
 Subscription providers are in Preview. To enable them for your organization, contact your Customer Success Manager.
 {{< /callout >}}
 
-With a subscription provider, users run Claude Code and Codex through AI Gateway on their own Claude or ChatGPT subscriptions, instead of an API key. Each user signs in to the coding agent with their own account, and Anthropic or OpenAI bills the usage to that user's subscription. AI Gateway applies access policies and rate limits, attributes each request to the Datadog user who sent it, and records the request in Agent Observability.
+With a subscription provider, users run Claude Code and Codex through AI Gateway on their own Claude or ChatGPT subscriptions instead of an API key. Each user signs in to the coding agent with their own account, and Anthropic or OpenAI bills the usage to that user's subscription. AI Gateway applies access policies and rate limits, attributes each request to the Datadog user who sent it, and records the request in Agent Observability.
 
 Subscription providers support the following coding agents:
 
@@ -236,7 +236,9 @@ A request for a model outside a user's access returns HTTP `403` with the `no_pe
 
 ### Set up Claude Code
 
-Point Claude Code to AI Gateway, then sign in with your Claude account.
+Point Claude Code to AI Gateway, then sign in with your Claude account:
+
+<div class="alert alert-warning">Before you sign in, unset <code>ANTHROPIC_API_KEY</code> and <code>ANTHROPIC_AUTH_TOKEN</code> in your environment and Claude Code settings, and remove the <code>apiKeyHelper</code> setting. Check all settings sources, including managed settings. These credential sources can override your subscription sign-in. Requests sent with an Anthropic API key are billed per token.</div>
 
 1. Add the following to your Claude Code user settings file, `~/.claude/settings.json`. Do not add it to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4], and `<PROVIDER_SLUG>` with the slug of the Anthropic subscription provider.
 
@@ -255,13 +257,11 @@ Point Claude Code to AI Gateway, then sign in with your Claude account.
 
 2. Start Claude Code, run `/login`, and sign in with your Claude account (not an Anthropic Console account).
 
-<div class="alert alert-warning">To use your Claude subscription, unset <code>ANTHROPIC_API_KEY</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>apiKeyHelper</code> in your environment and Claude Code settings, including managed settings. These credential sources can override your subscription sign-in. Requests sent with an Anthropic API key are billed per token.</div>
-
 To run Claude Code without an interactive sign-in, run `claude setup-token`, then set the `CLAUDE_CODE_OAUTH_TOKEN` environment variable to the token that it prints. Store the token as a secret.
 
 ### Set up Codex
 
-Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT account.
+Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT account:
 
 1. Add the following to your Codex configuration file, `~/.codex/config.toml`. Place `model_provider` before the first table in the file. Replace `<PROVIDER_SLUG>` with the slug of the OpenAI subscription provider.
 
@@ -277,14 +277,14 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
    http_headers = { "x-ai-gateway-provider" = "<PROVIDER_SLUG>" }
    ```
 
-   With `requires_openai_auth = true`, Codex sends your ChatGPT credentials in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes the token before it forwards the request. For more about these headers, see [Authenticate requests](#authenticate-requests).
+   With `requires_openai_auth = true`, Codex sends your ChatGPT credentials in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes the token before it forwards the request. For more about these headers, see the [Authenticate requests](#authenticate-requests) section.
 
 2. Set the `DD_PAT` environment variable to your Datadog [personal access token][4].
 3. Run `codex login` and sign in with your ChatGPT account. To sign in from another device, such as your phone, run `codex login --device-auth`.
 
 ### Verify subscription traffic
 
-1. Send a prompt from Claude Code or Codex. The agent answers as usual.
+1. Send a prompt from Claude Code or Codex.
 2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] and find the request under the subscription provider. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect its span.
 3. Confirm that the usage appears on the usage page of your Claude or ChatGPT plan.
 
@@ -292,13 +292,13 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
 
 - **Billing**: Anthropic or OpenAI bills each request to the subscription of the user who sent it. A subscription provider has no integration account, so AI Gateway never sends your organization's provider credentials with subscription traffic.
 - **Models**: Without models on the provider, the vendor decides which models each user can use, based on their plan. Claude Code and Codex show their built-in model lists, which can include models that a user's access does not allow.
-- **Cost**: Traces record an API-equivalent cost for models with a price. Models you don't add to the provider have no price and are recorded as unpriced. The recorded cost is not your subscription bill.
+- **Cost**: Traces record an API-equivalent cost for models with a price, using any custom price you set. Models you don't add to the provider have no price and are recorded as unpriced. The recorded cost is not your subscription bill.
 - **Budgets**: [Budgets](#set-budgets) don't count or block subscription traffic. If you select {{< ui >}}Track existing usage for current period{{< /ui >}} when you create a budget, its starting spend can include earlier subscription traffic.
 - **Rate limits**: A [rate limit](#set-rate-limits) that matches subscription traffic counts it together with other matching traffic. In Enforce mode, the rate limit rejects subscription requests over the limit.
 - **Routing rules**: A [routing rule](#route-requests-with-routing-rules) cannot include a subscription provider, and a destination for a [model served by any provider](#model-served-by-any-provider) skips subscription providers. Instead, Claude Code and Codex pin the provider with the `x-ai-gateway-provider` header.
-- **Request formats**: A subscription provider serves only its vendor's coding agent API. An Anthropic subscription provider serves Anthropic Messages, including token counting. An OpenAI subscription provider serves OpenAI Responses. A request in another format returns HTTP `400` with the `unsupported_operation` error code. AI Gateway never sends a subscription sign-in to another vendor. Requests to an OpenAI subscription provider go to ChatGPT, not to the OpenAI API.
+- **Request formats**: An Anthropic subscription provider serves only Anthropic Messages, including token counting. An OpenAI subscription provider serves only OpenAI Responses, and sends requests to ChatGPT, not to the OpenAI API. A request in another format returns HTTP `400` with the `unsupported_operation` error code. AI Gateway never sends a subscription sign-in to another vendor.
 - **Credentials**: AI Gateway does not check which vendor credential a client sends to a subscription provider. If a client sends an API key, such as `ANTHROPIC_API_KEY`, the vendor bills that key per token.
-- **Activity**: On the [{{< ui >}}Overview{{< /ui >}}][3] page, subscription traffic appears with all other traffic. Filter by the subscription provider to see it separately. A vendor `401` or `429` response, such as for an expired sign-in or a reached plan limit, counts as a provider error.
+- **Activity**: On the [{{< ui >}}Overview{{< /ui >}}][3] page, subscription traffic appears with all other traffic. Filter by the subscription provider to see it separately. A vendor `401` or `429` response, such as for an expired sign-in or an exceeded plan limit, counts as a provider error.
 
 ### Troubleshoot subscription providers
 
