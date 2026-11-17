@@ -5549,16 +5549,21 @@ menu:
       parent: dbm
       identifier: dbm_pr_reviews
       weight: 8
+    - name: Role Observability
+      url: database_monitoring/database_monitoring_role_observability/
+      parent: dbm
+      identifier: dbm_role_observability
+      weight: 9
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 10
+      weight: 11
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -6321,6 +6326,11 @@ menu:
       parent: cicd_flaky_management
       identifier: cicd_flaky_management_working_with
       weight: 501
+    - name: Code Annotations
+      url: tests/flaky_management/code_annotations/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_code_annotations
+      weight: 502
     - name: Features
       url: cicd/features/
       parent: cicd
@@ -8062,6 +8072,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
       weight: 608
+    - name: Rename a Cluster
+      url: /byoc-logs/operate/rename_cluster
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_rename_cluster
+      weight: 609
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -11128,6 +11143,16 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
+    - name: Finalized Usage Metrics
+      identifier: account_management_billing_finalized_usage_metrics
+      url: account_management/billing/usage_metrics/finalized_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150401
+    - name: Estimated Usage Metrics
+      identifier: account_management_billing_estimated_usage_metrics
+      url: account_management/billing/usage_metrics/estimated_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150402
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/

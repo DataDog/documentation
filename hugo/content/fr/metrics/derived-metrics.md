@@ -46,6 +46,47 @@ Pour mettre à jour une métrique dérivée, survolez la métrique et cliquez su
 
 Pour supprimer une métrique dérivée, survolez la métrique dérivée et cliquez sur l'icône {{< ui >}}Delete{{< /ui >}} qui apparaît à droite. 
 
+## Gérez les métriques dérivées avec Terraform {#manage-derived-metrics-with-terraform}
+
+Utilisez la [`datadog_derived_metric`ressource ][4] pour créer, mettre à jour et supprimer des définitions de métriques dérivées avec Terraform.
+
+Avant de commencer, [configurez le fournisseur Terraform Datadog][5]. Votre clé d'application nécessite les autorisations **Metrics Read** (`metrics_read`) et **Manage Tags for Metrics** (`metric_tags_write`). Consultez [Clés d’API et clés d’application][6] pour plus de détails.
+
+Par exemple, ajoutez cette ressource à votre configuration Terraform pour combiner deux métriques CPU :
+
+```hcl
+resource "datadog_derived_metric" "cpu_total" {
+  name = "custom.cpu.total"
+  definition = {
+    formula = "a + b"
+    queries = [
+      {
+        name        = "a"
+        data_source = "metrics"
+        query       = "avg:system.cpu.user{*}"
+      },
+      {
+        name        = "b"
+        data_source = "metrics"
+        query       = "avg:system.cpu.system{*}"
+      },
+    ]
+  }
+}
+```
+
+Exécutez `terraform plan` pour examiner les modifications, puis exécutez `terraform apply` pour créer la métrique dérivée.
+
+Les modifications apportées à `definition.formula` ou `definition.queries` mettent à jour la définition existante. La modification de `name` remplace la métrique dérivée.
+
+Pour gérer une métrique dérivée existante, ajoutez sa configuration de ressource et importez-la par son nom :
+
+```shell
+terraform import datadog_derived_metric.cpu_total "custom.cpu.total"
+```
+
+Après l'importation, exécutez `terraform plan` et `terraform apply` pour adopter le nom et la définition configurés. La première exécution de la commande apply met à jour la métrique existante. Les modifications ultérieures apportées à `name` la remplacent.
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -54,3 +95,6 @@ Pour supprimer une métrique dérivée, survolez la métrique dérivée et cliqu
 [1]: https://app.datadoghq.com/metric/generate-metrics
 [2]: /fr/metrics/custom_metrics/#naming-custom-metrics
 [3]: /fr/metrics/#querying-metrics
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/derived_metric
+[5]: /fr/integrations/terraform/#configuration
+[6]: /fr/account_management/api-app-keys/

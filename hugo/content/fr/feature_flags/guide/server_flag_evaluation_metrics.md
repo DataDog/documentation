@@ -49,7 +49,7 @@ La livraison de configuration Agentless et cette métrique utilisent des chemins
 
 ## Étape 1 : Configurez un récepteur OTLP {#step-1-configure-an-otlp-receiver}
 
-Les métriques d'évaluation des indicateurs de fonctionnalité sont émises via OpenTelemetry (OTLP). Pour les déploiements basés sur un agent, activez le récepteur OTLP du Datadog Agent, qui est désactivé par défaut. Pour les instructions de configuration, consultez [Ingestion OTLP par le Datadog Agent][2]. Pour les déploiements serverless sans Agent, utilisez le chemin OTLP ou les métriques personnalisées pris en charge par votre configuration de Serverless Monitoring.
+Les métriques d'évaluation des indicateurs de fonctionnalité sont émises via OpenTelemetry (OTLP). Pour les déploiements basés sur un agent, activez le récepteur OTLP du Datadog Agent, qui est désactivé par défaut. Pour les instructions de configuration, consultez [Configurer l’endpoint OTLP de l’Agent][2]. Pour les déploiements serverless sans Agent, utilisez le chemin OTLP ou les métriques personnalisées pris en charge par votre configuration de Serverless Monitoring.
 
 Vous devez uniquement activer le protocole utilisé par votre application (gRPC sur le port 4317 ou HTTP sur le port 4318).
 

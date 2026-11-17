@@ -48,6 +48,8 @@ Les candidats à l'optimisation sont sélectionnés automatiquement à partir de
 
 Les instances incluses dans Continuous Optimizations sont répertoriées sous le bouton bascule. Pour supprimer une instance, cliquez sur le bouton moins (**-**) sur le côté droit de sa ligne, puis cliquez sur **Enregistrer**.
 
+{{< img src="database_monitoring/database_optimization_continuous_optimizations_toggle.png" alt="Le panneau de configuration Bits Database Optimization, affichant le bouton bascule Continuous Optimizations et une liste des instances de base de données incluses avec leurs tags." style="width:100%;">}}
+
 Lorsque les optimisations continues sont activées, Bits Database Optimization sélectionne les requêtes éligibles parmi les instances incluses de manière continue jusqu'à ce que la limite de 50 requêtes distinctes par instance de base de données par mois soit atteinte. Les requêtes sont classées par priorité selon la durée totale d'exécution.
 
 Chaque requête analysée compte pour cette limite, même lorsqu'aucune optimisation n'est trouvée. Une fois qu'une requête a été analysée, elle n'est plus analysée au cours du même mois. La limite est réinitialisée au début de chaque mois (UTC).

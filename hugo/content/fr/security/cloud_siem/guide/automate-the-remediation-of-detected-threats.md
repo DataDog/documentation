@@ -3,43 +3,48 @@ aliases:
 - /fr/security_platform/guide/automate-the-remediation-of-detected-threats/
 - /fr/security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 further_reading:
-- link: /security/explorer/
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentation
   text: Commencer à étudier les signaux dans le Signals Explorer
+- link: https://learn.datadoghq.com/courses/cloud-siem-automated-remediation
+  tag: Centre d'apprentissage
+  text: Automatisez l'enquête et la remédiation des menaces avec des workflows de
+    sécurité
 title: Automatiser la correction des menaces détectées grâce aux webhooks
 ---
+## Présentation {#overview}
 
-## Présentation
-
-La solution [Cloud SIEM][1] vous permet de définir des règles de détection qui déclenchent des workflows de correction automatique. À l'aide de l'[intégration dédiée][2], vous pouvez configurer des webhooks afin de transmettre des charges utiles aux services à automatiser à chaque déclenchement d'une [règle de détection][3]. Chaque charge utile de webhook contient des informations à propos de l'événement à l'origine du déclenchement ainsi qu'un message personnalisé pouvant servir à initier des services en aval. Vous pouvez automatiser des commandes pour tous les services disposant d'une URL de webhook. Les outils d'orchestration de la sécurité et de réponse automatique acceptent les requêtes HTTP entrantes. Vos webhooks initient les workflows que vous avez définis.
+[Cloud SIEM][1] vous permet de définir des Detection Rules qui déclenchent des workflows d'auto-remédiation. Avec l'[intégration de webhook][2] de Datadog, configurez des webhooks pour transmettre des charges utiles aux services que vous souhaitez automatiser chaque fois qu'une [Detection Rule][3] est déclenchée. Chaque charge utile de webhook contient des informations sur l'événement déclencheur et un message personnalisé qui peut être utilisé pour déclencher des services en aval. Automatisez les commandes pour tout service disposant d'une URL de webhook. Les outils d'orchestration et d'automatisation de la réponse aux incidents de sécurité acceptent les requêtes HTTP entrantes, et ces webhooks déclenchent tout workflow que vous avez défini.
 
 Choisissez un scénario de sécurité ci-dessous pour commencer à automatiser la correction.
 
-## Supprimer des groupes de sécurité mal configurés
+{{% sec-hipaa-limits %}}
 
-Il est important de supprimer le plut tôt possible une ressource mal configurée dans un environnement cloud. Dans ce scénario, vous pouvez configurer une [intégration Webhook][2] pour envoyer un [webhook][2] au service de gestion des API de votre fournisseur de cloud.
+## Supprimez les groupes de sécurité mal configurés {#delete-misconfigured-security-groups}
 
-{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="Diagramme illustrant un webhook envoyé à l'API d'un fournisseur de cloud" >}}
+Dans un environnement cloud, il est important de supprimer une ressource mal configurée dès qu'elle est créée. Dans ce scénario, vous pouvez configurer une [intégration de webhook][2] pour envoyer un [webhook][2] au service de gestion d'API de votre fournisseur cloud.
 
-Une fois l'intégration configurée, si un utilisateur AWS crée une ressource avec une mauvaise configuration (par exemple, un groupe de sécurité ou un rôle utilisateur trop permissif) dans votre environnement AWS, la solution Log Management Datadog ingère le log associé, ce qui déclenche une règle de détection basée sur les groupes de sécurité. Ce processus envoie automatiquement la charge utile JSON du webhook à l'URL AWS API Gateway désignée, qui active à son tour une fonction AWS Lambda supprimant automatiquement la ressource dangereuse.
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="Un schéma représentant un webhook envoyé à l'API d'un fournisseur cloud" >}}
 
-## Bannir une adresse IP suspecte
+Une fois cette intégration configurée, si un utilisateur AWS crée une ressource mal configurée (par exemple, un groupe de sécurité ou un rôle utilisateur trop permissif) au sein de votre environnement AWS, Datadog Log Management ingère le log associé, ce qui déclenche une Detection Rule basée sur le groupe de sécurité. Ce processus envoie automatiquement la charge utile JSON du webhook à l'URL Amazon API Gateway désignée, qui active à son tour une fonction AWS Lambda qui supprime automatiquement la ressource incriminée.
 
-Une connexion depuis une adresse IP non reconnue peut provenir d'une personne malveillante manipulant les identifiants d'un utilisateur de confiance, dans le but d'accéder à vos données et d'obtenir un accès persistant à votre environnement.
+## Bloquez une adresse IP suspecte {#ban-a-suspicious-ip-address}
 
-Pour vous défendre contre ce type d'attaque, vous pouvez utiliser la [nouvelle méthode de détection basée sur les valeurs][4]. Cette approche vous permet d'analyser les données historiques de votre compte sur une période donnée et d'envoyer des alertes à propos des valeurs observées pour la première fois dans vos logs cloud.
+Une connexion depuis une adresse IP non reconnue peut indiquer qu'un attaquant utilise les identifiants d'un utilisateur de confiance pour accéder à vos données et maintenir un accès persistant à votre environnement.
+
+Pour lutter contre ce type d'attaque, vous pouvez utiliser la [méthode de détection New Value][4], qui analyse les données historiques de votre compte sur une période choisie et émet une alerte lorsque des valeurs jusqu'alors inédites apparaissent dans vos logs cloud.
 
 Commencez par créer une [nouvelle règle de détection][5] à l'aide de la méthode de détection basée sur la valeur.
 
-Configurez ensuite un [webhook][2] qui envoie une charge utile au service de gestion des accès et des identités (IAM) de votre cloud afin de bannir l'IP inconnue lors du déclenchement de cette règle.
+Ensuite, configurez un [webhook][2] qui envoie une charge utile au service de gestion des identités et des accès (IAM) de votre cloud pour bloquer l'adresse IP inconnue lorsque cette règle est déclenchée.
 
-{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="Nouveau webhook qui bannit une adresse IP inconnue" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="Un nouveau webhook qui bloque une adresse IP inconnue" >}}
 
-Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un signal de sécurité est généré par Datadog :
+Voici un exemple de charge utile d'un webhook pertinent transmise lorsqu'un signal de sécurité est généré par Datadog :
 
 {{< code-block lang="json" filename="webhook-payload.json" >}}
 {
-  "SECURITY_RULE_NAME": "Requête provenant d'une adresse IP inattendue",
+  "SECURITY_RULE_NAME": "Request from unexpected IP address",
   "SECURITY_SIGNAL_ID": "abcd1234",
   "SECURITY_SIGNAL_ATTRIBUTES": {
     "network": {
@@ -53,15 +58,15 @@ Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un si
 }
 {{< /code-block >}}
 
-## Utilisation abusive ou inappropriée d'une application
+## Abus et fraude dans les applications {#application-abuse-and-fraud}
 
-Grâce à la solution Cloud SIEM de Datadog, vous pouvez identifier des tendances d'[abus ou de fraude][6] dans l'ensemble de votre application. Par exemple, vous pouvez définir une [règle de détection][7] qui se déclenche lorsqu'un utilisateur tente à plusieurs reprises d'acheter un article dans votre application avec des coordonnées bancaires non valides. Configurez ensuite un webhook qui envoie une charge utile avec des instructions de correction au service qui désactivera les identifiants de l'utilisateur.
+Avec Datadog Cloud SIEM, vous pouvez détecter des schémas d'[abus ou de fraude][6] dans votre application. Par exemple, configurez une [Detection Rule][7] qui est déclenchée lorsqu'un utilisateur tente à plusieurs reprises d'acheter quelque chose dans votre application avec des informations de carte de crédit invalides. Ensuite, configurez un webhook qui envoie une charge utile avec des instructions de remédiation à un service qui désactivera les identifiants de l'utilisateur.
 
-Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un signal de sécurité est généré par Datadog :
+Voici un exemple de charge utile d'un webhook pertinent transmise lorsqu'un signal de sécurité est généré par Datadog :
 
 {{< code-block lang="json" filename="webhook-payload.json" >}}
 {
-  "SECURITY_RULE_NAME": "Autorisations de carte bancaire frauduleuse",
+  "SECURITY_RULE_NAME": "Fraudulent Credit Card Authorizations",
   "SECURITY_SIGNAL_ID": "efgh5678",
   "SECURITY_SIGNAL_ATTRIBUTES": {
     "usr": {
@@ -82,9 +87,9 @@ Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un si
 }
 {{< /code-block >}}
 
-Datadog génère un signal de sécurité qui détaille l'attaque ainsi que les informations de l'utilisateur suspect, comme son adresse IP et son ID. La charge utile du webhook envoie des instructions de correction à un service afin qu'il désactive les identifiants de l'utilisateur.
+Datadog génère le Security Signal, qui détaille l'activité suspecte ainsi que les informations sur l'utilisateur suspect, telles que son adresse IP et son identifiant utilisateur, et la charge utile du webhook envoie des instructions de remédiation à un service pour désactiver les identifiants de l'utilisateur.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -92,6 +97,6 @@ Datadog génère un signal de sécurité qui détaille l'attaque ainsi que les i
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /fr/security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /fr/security/cloud_siem/log_detection_rules/?tab=threshold#new-term
+[5]: /fr/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/?cloud_siem_detection_rule_detection_method=new_value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /fr/security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /fr/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/#define-your-search-query

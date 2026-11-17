@@ -30,7 +30,7 @@ Esta página explica cómo hacer un seguimiento de diferentes tipos de actividad
 
 ## Dashboard preconfigurado {#out-of-the-box-dashboard}
 
-El Dashboard de Descripción general de flujos de trabajo proporciona una visión general de alto nivel de sus flujos de trabajo y ejecuciones de Datadog. Para encontrar el Dashboard, vaya a su [lista de Dashboards][2] y busque {{< ui >}}Workflows Overview{{< /ui >}}.
+El panel Workflows Overview ofrece una visión general de alto nivel de sus flujos de trabajo de Datadog y sus ejecuciones. Para encontrar el Dashboard, vaya a su [lista de Dashboards][2] y busque {{< ui >}}Workflows Overview{{< /ui >}}.
 
 {{< img src="actions/workflows/workflows-dashboard.png" alt="El Dashboard de Descripción general de flujos de trabajo" style="width:80%;" >}}
 
@@ -65,7 +65,7 @@ La lista de métricas disponibles es:
 | `datadog.workflows.steps.executions.started`   | Número de pasos de instancia de flujo de trabajo que se han iniciado.   |
 | `datadog.workflows.steps.executions.completed` | Número de pasos de instancia de flujo de trabajo que se han completado. |
 
-Para crear un monitor que rastree si las ejecuciones diarias de flujo de trabajo exceden un cierto umbral, realice los siguientes pasos:
+Para crear un monitor que rastree si las ejecuciones diarias de flujos de trabajo exceden un cierto umbral, realice los siguientes pasos:
 
 1. Vaya a [New Monitor][4] y seleccione el tipo de monitor {{< ui >}}Metric{{< /ui >}}
 1. En {{< ui >}}Define the metric{{< /ui >}}, para {{< ui >}}a{{< /ui >}}, complete `datadog.workflows.executions.started`.
@@ -82,7 +82,7 @@ Para crear un monitor que rastree si las ejecuciones diarias de flujo de trabajo
 Workflow has executed {{warn_threshold}} times in the last day; manual action might be needed to avoid alerting.
 {{/is_warning}}
 {{#is_alert}}
-Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
+Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic runs for the day.
 {{/is_alert}}
 {{< /code-block >}}
 1. Haga clic en {{< ui >}}Create{{< /ui >}}.
@@ -106,8 +106,8 @@ Atribución de uso es una función avanzada incluida en el plan Enterprise. Para
 Para realizar un seguimiento de la facturación de sus ejecuciones de flujo de trabajo, realice los siguientes pasos:
 
 1. Navegue a la página [Atribución de uso][6].
-1. Debajo de {{< ui >}}Products{{< /ui >}} a la izquierda, busque {{< ui >}}Workflow Executions{{< /ui >}}.
-1. Pase el cursor sobre {{< ui >}}Workflow Executions{{< /ui >}} y haga clic en {{< ui >}}Only{{< /ui >}} para visualizar la atribución de uso solo para flujos de trabajo.
+1. Debajo de {{< ui >}}Products{{< /ui >}} a la izquierda, busque {{< ui >}}Workflow Runs{{< /ui >}}.
+1. Pase el cursor sobre {{< ui >}}Workflow Runs{{< /ui >}} y haga clic en {{< ui >}}Only{{< /ui >}} para visualizar la atribución de uso solo para flujos de trabajo.
 
 
 ## Lecturas adicionales {#further-reading}
