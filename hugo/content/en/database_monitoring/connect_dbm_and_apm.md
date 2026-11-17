@@ -28,7 +28,7 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
 | `service` | Sends the service name, allowing you to understand which services contribute to database load. |
-| `dynamic_service` | Sends a hash that identifies the service instead of the service name. Datadog resolves the calling service from APM spans that carry the same hash. Available for Oracle with Java and .NET. |
+| `dynamic_service` | Sends a hash that identifies the service instead of the service name, in SQL comments or, for Oracle, in `V$SESSION.ACTION`. Datadog resolves the calling service from APM spans that carry the same hash. See the tables below for supported languages. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
 
@@ -40,13 +40,15 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 | Language | Min tracer version | Library/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [Npgsql](https://www.nuget.org/packages/npgsql) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [Npgsql](https://www.nuget.org/packages/npgsql) | `full`<br>`service`<br>`dynamic_service` |
 | **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 3.17.0 | [postgres](https://node-postgres.com/) | `full`<br>`service` |
 | **PHP** | [dd-trace-php](https://github.com/DataDog/dd-trace-php) >= 0.86.0 | [pdo](https://www.php.net/manual/en/book.pdo.php) | `full`<br>`service` |
 | **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 1.9.0 | [psycopg2](https://www.psycopg.org/docs/index.html)<br>[psycopg](https://www.psycopg.org/psycopg3/) | `full`<br>`service` |
 | **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 2.9.0 | [asyncpg](https://pypi.org/project/asyncpg/) | `full`<br>`service` |
 | **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 1.8.0 | [pg](https://github.com/ged/ruby-pg) | `full`<br>`service` |
+
+**Note**: `dynamic_service` requires Java tracer 1.63.0 or greater, or .NET tracer 3.45.0 or greater. The service hash is added to SQL comments.
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for the .NET driver.
 
@@ -57,12 +59,14 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 | Language | Min tracer version | Library/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [MySql.Data](https://www.nuget.org/packages/MySql.Data)<br>[MySqlConnector](https://www.nuget.org/packages/MySqlConnector) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [MySql.Data](https://www.nuget.org/packages/MySql.Data)<br>[MySqlConnector](https://www.nuget.org/packages/MySqlConnector) | `full`<br>`service`<br>`dynamic_service` |
 | **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 3.17.0 | [mysql](https://github.com/mysqljs/mysql)<br>[mysql2](https://github.com/sidorares/node-mysql2) | `full`<br>`service` |
 | **PHP** | [dd-trace-php](https://github.com/DataDog/dd-trace-php) >= 0.86.0 | [pdo](https://www.php.net/manual/en/book.pdo.php)<br>[MySQLi](https://www.php.net/manual/en/book.mysqli.php) | `full`<br>`service` |
 | **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 2.9.0 | [aiomysql](https://pypi.org/project/aiomysql/)<br>[mysql-connector-python](https://pypi.org/project/mysql-connector-python/)<br>[mysqlclient](https://pypi.org/project/mysqlclient/)<br>[pymysql](https://github.com/PyMySQL/PyMySQL) | `full`<br>`service` |
 | **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 1.8.0 | [mysql2](https://github.com/brianmario/mysql2) | `full`<br>`service` |
+
+**Note**: `dynamic_service` requires Java tracer 1.63.0 or greater, or .NET tracer 3.45.0 or greater. The service hash is added to SQL comments.
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for .NET drivers.
 
@@ -75,8 +79,10 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 | Language | Min tracer version | Library/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [System.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server)<br>[Microsoft.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [System.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server)<br>[Microsoft.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace) | `full`<br>`service`<br>`dynamic_service` |
+
+**Note**: `dynamic_service` requires Java tracer 1.63.0 or greater, or .NET tracer 3.45.0 or greater. The service hash is added to SQL comments.
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for .NET drivers.
 
@@ -104,11 +110,11 @@ For `full` mode with Java:
 - The instrumentation overwrites `V$SESSION.ACTION`.
 - Prerequisite: Java tracer 1.45 or greater
 
-For `dynamic_service` mode with Java, you can propagate service information without changing SQL statement text. Use this option if you rely on features that match exact SQL text, such as SQL Plan Management baselines.
-- Set `DD_DBM_PROPAGATION_MODE=dynamic_service` and `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`.
-- The instrumentation writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments. This overwrites any existing `V$SESSION.ACTION` value.
-- `V$SESSION.ACTION` is set once per connection and is updated only if the service hash changes.
-- Prerequisite: Java tracer 1.67.0 or greater
+For `dynamic_service` mode with Java:
+- By default, the service hash is added to SQL comments. Prerequisite: Java tracer 1.63.0 or greater
+- To propagate service information without changing SQL statement text, also set `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`. Use this option if you rely on features that match exact SQL text, such as SQL Plan Management baselines. Prerequisite: Java tracer 1.67.0 or greater
+  - The instrumentation writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments. This overwrites any existing `V$SESSION.ACTION` value.
+  - `V$SESSION.ACTION` is set once per connection and is updated only if the service hash changes.
 
 For `dynamic_service` mode with .NET:
 - Set `DD_DBM_PROPAGATION_MODE=dynamic_service`. No other setting is needed.
@@ -122,9 +128,11 @@ For `dynamic_service` mode with .NET:
 
 | Language | Min tracer version | Library/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.58.0 | [mongo-java-driver](https://www.mongodb.com/docs/drivers/java/sync/current/) v3.8+ | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.58.0 | [mongo-java-driver](https://www.mongodb.com/docs/drivers/java/sync/current/) v3.8+ | `full`<br>`service`<br>`dynamic_service` |
 | **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 5.80.0 | [mongodb](https://github.com/mongodb/node-mongodb-native) | `full`<br>`service` |
 | **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 3.5.0 | [pymongo](https://pymongo.readthedocs.io/en/stable/) | `full`<br>`service` |
+
+**Note**: `dynamic_service` requires Java tracer 1.63.0 or greater. The service hash is added to command comments.
 
 {{% /tab %}}
 
@@ -404,6 +412,8 @@ Enable the database monitoring propagation feature by setting the following envi
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
    - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
    - For Oracle: `DD_DBM_PROPAGATION_MODE=dynamic_service` (tracer version 3.58.0 or greater). The tracer writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments.
+
+`DD_DBM_PROPAGATION_MODE=dynamic_service` is also supported for Postgres, MySQL, and SQL Server (tracer version 3.45.0 or greater). The tracer adds the service hash to SQL comments.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
