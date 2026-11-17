@@ -68,9 +68,7 @@ When Bits investigates an issue, use the thumbs-up or thumbs-down buttons on the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
 [2]: https://app.datadoghq.com/apm/services
-[3]: https://app.datadoghq.com/monitors/manage?bits_monitors=true
 [4]: /bits_ai/bits_investigation/
 [5]: https://app.datadoghq.com/bits/autonomous-ops/scopes
 [6]: /bits_ai/bits_autonomous_operations/
