@@ -67,7 +67,7 @@ For SQL Server, capturing parameter values from prepared statements requires ena
       enabled: true
 ```
 
-Prepared statement support is currently available only for SQL Server. For more details, see [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited).
+Prepared statement support is available for SQL Server, and for MySQL with limits. For more details, see [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited).
 
 ## Query parameter value capture by DBMS type
 
@@ -98,13 +98,19 @@ Prepared statement support is currently available only for SQL Server. For more 
 | Direct Executions | {{< X >}} | Ad-hoc SQL statements executed directly, including literal values in the query text. Includes queries from drivers that interpolate parameter values on the client side. | `SELECT * FROM users WHERE id = 123` | 7.XX.0+ |
 | Functions | {{< X >}} | Stored functions invoked with SELECT. | `SELECT get_user_name(123);` | 7.XX.0+ |
 | Stored Procedures | {{< X >}} | Procedures invoked with CALL. | `CALL procname(123)` | 7.XX.0+ |
-| Prepared Statements |  | Not supported. See [Why prepared statement parameter values are limited](#why-prepared-statement-parameter-values-are-limited). Parameterized queries executed through server-side prepared statements. Can be created explicitly or through drivers. | `PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?'; EXECUTE stmt USING @id;` | |
+| Prepared Statements (binary protocol) | {{< X >}} | Server-side prepared statements that drivers execute through the binary protocol. Requires MySQL 8.0 or later. Parameter values appear in query samples from query activity only. Explain plans are not collected for these queries. | `SELECT * FROM users WHERE id = ?` executed with the bound value `123` | 7.XX.0+ |
+| Prepared Statements (SQL) |  | Not supported. Prepared statements created and executed with SQL statements. MySQL records the `EXECUTE` statement, which contains no parameter values. | `PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?'; EXECUTE stmt USING @id;` | |
 
 Many MySQL drivers interpolate parameter values into the query text on the client side before sending the query to the server. For example, MySQL Connector/J (JDBC) with its default settings, PyMySQL, and mysql2 send queries that include the parameter values. Datadog captures these queries as direct executions, including their parameter values.
 
-Some drivers use server-side prepared statements, for example Connector/J with `useServerPrepStmts=true`. For these queries, MySQL only records the query text with `?` placeholders, so no parameter values are shown. The Agent does not collect query text or explain plans with parameter values for queries that contain no literal values.
+Some drivers execute queries as server-side prepared statements through the binary protocol, for example Connector/J with `useServerPrepStmts=true`, or `go-sql-driver/mysql`. For these executions, MySQL 8.0 and later record the statement with the bound values in the thread's `PROCESSLIST_INFO`. The Agent reads this text during query activity sampling. The Agent does not collect explain plans for these queries.
 
-MySQL truncates the query text that the Agent reads to the length set by the [`performance_schema_max_sql_text_length`][4] system variable (default: `1024` bytes). The Agent still collects truncated query text, so parameter values that appear after the limit are not captured. To capture longer queries, increase this variable. See [Query samples are truncated][5].
+The Agent does not collect query text or explain plans with parameter values for queries that contain no literal values. For example, the recorded query text may contain only `?` placeholders or user variables.
+
+MySQL truncates the query text that the Agent reads, and the Agent still collects truncated query text. Parameter values that appear after the limit are not captured.
+
+- For server-side prepared statements, `PROCESSLIST_INFO` keeps only the first 1024 bytes of the statement. The [`performance_schema_max_sql_text_length`][4] system variable does not change this limit.
+- For other queries, the limit is set by `performance_schema_max_sql_text_length` (default: `1024` bytes). To capture longer queries, increase this variable. See [Query samples are truncated][5].
 
 On Azure Database for MySQL Flexible Server, the Agent cannot collect query activity, so query text with parameter values from query activity is not available. See [Query activity is missing][6].
 
@@ -114,7 +120,9 @@ Datadog uses activity sampling to capture currently running SQL queries. However
 
 To capture prepared statements with parameter values in SQL Server, you must [configure your SQL Server instance and integration to capture query completions][1], which provides the Datadog Agent rich visibility into prepared statement execution.
 
-Support for PostgreSQL and MySQL prepared statement parameter value capture is not available at this time.
+On MySQL 8.0 and later, the statement of a server-side prepared statement execution includes the bound values, so activity sampling can capture them. Explain plans are not collected for these queries, and prepared statements executed with SQL `EXECUTE` statements are not supported. See [MySQL](#mysql).
+
+Support for PostgreSQL prepared statement parameter value capture is not available at this time.
 
 [1]: /database_monitoring/guide/sql_extended_events/
 [2]: /account_management/rbac/permissions/
