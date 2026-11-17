@@ -11,7 +11,7 @@ further_reading:
   tag: 블로그
   text: Datadog으로 데이터 수명 주기 관찰하기
 - link: /data_jobs
-  tag: 문서
+  tag: 설명서
   text: 'Data Observability: Jobs Monitoring'
 title: 'Apache Airflow용 Data Observability: Jobs Monitoring 활성화'
 ---
@@ -32,7 +32,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
 
 시작하려면 다음 단계를 따르세요.
 
-1. 배포에 사용된 Airflow 버전을 확인합니다. 예를 들어 Airflow 이미지 태그, Helm 값, 배포 매니페스트 또는 Airflow UI에 표시된 버전을 확인합니다.
+1. 배포에 사용된 Airflow 버전을 확인합니다. 예를 들어, Airflow 이미지 태그, Helm 값, 배포 매니페스트 또는 Airflow UI에 보고된 버전을 확인합니다.
 
 2. [OpenLineage 공급자 버전 참조](#openlineage-provider-version-reference) 및 [OpenLineage 공급자 변경 로그](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html)를 사용하여 사용 중인 Airflow 버전을 지원하는 최신 공급자 릴리스를 확인합니다.
 
@@ -58,7 +58,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
    export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * `<DD_API_KEY>`를 유효한 [Datadog API 키][4]로 바꿉니다.
-   * `<DD_SITE>`를 사용 중인 Datadog 사이트로 바꿉니다(예: {{< region-param key="dd_site" code="true" >}})에서 지원되지 않습니다. 
+   * `<DD_SITE>`를 사용 중인 Datadog 사이트로 바꿉니다(예: {{< region-param key="dd_site" code="true" >}}). 
 
    **옵션 2: Composite Transport**
 
@@ -66,7 +66,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
 
    이미 다른 시스템에서 OpenLineage를 사용 중이고 Datadog을 추가 목적지로 지정하려는 경우 이 옵션을 사용하세요. 복합 전송은 구성된 모든 전송 대상으로 이벤트를 보냅니다.
 
-   예를 들어 HTTP 전송을 사용하여 다른 시스템에 이벤트를 전송하는 경우는 다음과 같습니다.
+   예를 들어, HTTP 전송을 사용하여 다른 시스템에 이벤트를 전송하는 경우는 다음과 같습니다.
 
    ```shell
    # Your existing HTTP transport configuration
@@ -84,10 +84,10 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
    export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * `<DD_API_KEY>`를 유효한 [Datadog API 키][4]로 바꿉니다.
-   * `<DD_SITE>`를 사용 중인 Datadog 사이트로 바꿉니다(예: {{< region-param key="dd_site" code="true" >}})에서 지원되지 않습니다.
+   * `<DD_SITE>`를 사용 중인 Datadog 사이트로 바꿉니다(예: {{< region-param key="dd_site" code="true" >}}).
    * `<YOUR_EXISTING_URL>`과 `<YOUR_EXISTING_API_KEY>`를 기존 OpenLineage 전송 구성으로 바꿉니다.
 
-   이 예시에서 OpenLineage 이벤트는 기존 시스템과 Datadog 모두로 전송됩니다. 각 전송에 고유한 이름(위 예시의 `EXISTING` 및 `DATADOG`와 같이)을 지정하여 여러 전송을 구성할 수 있습니다.
+   이 예시에서 OpenLineage 이벤트는 기존 시스템과 Datadog 모두로 전송됩니다. 위 예시의 `EXISTING` 및 `DATADOG`과 같이 각 전송에 고유한 이름을 지정하여 여러 전송을 구성할 수 있습니다.
 
    **옵션 3: Simple Configuration**
 
@@ -110,7 +110,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
       export AIRFLOW__OPENLINEAGE__DISABLED_FOR_OPERATORS=""
       ```
 
-   `openlineage` 공급자에서 지원하는 다른 구성은 공식 문서 [configuration-openlineage][3]에서 확인합니다.
+   `openlineage` 공급자에서 지원하는 다른 구성은 공식 설명서 [configuration-openlineage][3]에서 확인합니다.
 
 5. Airflow 포드 업데이트를 트리거하고 완료될 때까지 기다립니다.
 
@@ -127,7 +127,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
 
    이 파일 경로는 Agent 컨테이너를 기준으로 하는 상대 경로입니다. 로그 파일이 포함된 디렉터리를 애플리케이션 컨테이너와 Agent 컨테이너 모두에 마운트하여 Agent가 해당 파일에 액세스할 수 있도록 합니다. 자세한 내용은 [컨테이너 로컬 로그 파일에서 로그 수집][9]을 참조하세요.
 
-   **참고**: 로그를 수집하려면 Kubernetes 클러스터에 Datadog Agent가 이미 설치되어 있어야 합니다. 아직 설치하지 않았다면 [Kubernetes 설치 문서][8]를 참조하세요.
+   **참고**: 로그를 수집하려면 Kubernetes 클러스터에 Datadog Agent가 이미 설치되어 있어야 합니다. 아직 설치하지 않았다면 [Kubernetes 설치 설명서][8]를 참조하세요.
 
    Kubernetes에서 로그 수집을 설정하는 다른 방법은 [Kubernetes 및 Integrations 구성 섹션][6]을 참조하세요.
 
@@ -143,7 +143,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
 [9]: /ko/containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
 [11]: /ko/data_observability/jobs_monitoring/airflow_log_context/
 
-### 유효성 검사 {#validation}
+### 검증 {#validation}
 
 설정을 완료한 후 Datadog의 [Data Observability: Jobs Monitoring][2] 페이지에서 Airflow 작업 실행 목록을 확인합니다.
 
@@ -151,7 +151,7 @@ Airflow 플랫폼을 선택하고 설정 단계를 따르세요.
 
 OpenLineage 클라이언트 및 하위 모듈에 대해 앞서 설정한 다른 환경 변수와 함께 `OPENLINEAGE_CLIENT_LOGGING`을 `DEBUG`로 설정합니다. 이 설정은 `openlineage` 공급자 구성 중 발생하는 문제를 해결하는 데 유용할 수 있습니다.
 
-OpenLineage 설정을 자동으로 검사하는 방법은 [OpenLineage 유효성 검사 DAG를 사용한 Airflow 설정 문제 해결][10]을 참조하세요.
+OpenLineage 설정을 자동으로 검사하는 방법은 [OpenLineage 검증 DAG를 사용한 Airflow 설정 문제 해결][10]을 참조하세요.
 
 [10]: /ko/data_observability/jobs_monitoring/airflow_troubleshooting_dag/
 
@@ -199,7 +199,7 @@ OpenLineage 설정을 자동으로 검사하는 방법은 [OpenLineage 유효성
       export AIRFLOW__OPENLINEAGE__DISABLED_FOR_OPERATORS=""
       ```
 
-   `openlineage` 공급자에서 지원하는 다른 구성은 공식 문서 [configuration-openlineage][4]에서 확인합니다.
+   `openlineage` 공급자에서 지원하는 다른 구성은 공식 설명서 [configuration-openlineage][4]에서 확인합니다.
 
    Amazon MWAA의 종속성 해결은 MWAA 제약 조건에 따라 제어됩니다. 호환되는 최신 공급자가 MWAA 기본 설정과 충돌하는 경우 [MWAA 업그레이드 가이드][11]에 설명된 사용자 지정 제약 조건 패턴을 따릅니다.
 
@@ -229,7 +229,7 @@ OpenLineage 설정을 자동으로 검사하는 방법은 [OpenLineage 유효성
 
 Amazon MWAA 환경에 구성된 실행 역할에 `requirements.txt` 및 [Amazon MWAA 시작 스크립트][3]에 액세스할 수 있는 적절한 권한이 있는지 확인합니다. 실행 역할을 직접 관리하면서 해당 지원 파일을 처음 추가하는 경우 이 권한이 필요합니다. 필요한 경우 자세한 내용은 공식 가이드 [Amazon MWAA 실행 역할][6]을 참조하세요.
 
-OpenLineage 클라이언트 및 해당 하위 모듈에 대해 [Amazon MWAA 시작 스크립트][3]에서 `OPENLINEAGE_CLIENT_LOGGING` 값을 `DEBUG`로 설정합니다. 이 설정은 `openlineage` 공급자 구성 중 발생하는 문제를 해결하는 데 유용할 수 있습니다.
+OpenLineage 클라이언트 및 해당 하위 모듈에 대해 [Amazon MWAA 시작 스크립트][3]에서 `OPENLINEAGE_CLIENT_LOGGING`을 `DEBUG`로 설정합니다. 이 설정은 `openlineage` 공급자 구성 중 발생하는 문제를 해결하는 데 유용할 수 있습니다.
 
 OpenLineage 설정을 자동으로 검사하는 방법은 [OpenLineage 검증 DAG를 사용한 Airflow 설정 문제 해결][12]을 참조하세요.
 
@@ -348,13 +348,13 @@ Airflow용 Data Observability: Jobs Monitoring은 아직 <a href=https://cloud.g
    * `<DD_API_KEY>`를 유효한 [Datadog API 키][5]로 완전히 바꿉니다.
 
 **선택 사항:** OpenLineage 네임스페이스를 구성하여 Datadog에서 `env` 태그 값을 설정합니다.
-   - 섹션 3에 `openlineage`을 입력합니다.
-   - 키 3에 `namespace`을 입력합니다.
+   - 섹션 3에 `openlineage`를 입력합니다.
+   - 키 3에 `namespace`를 입력합니다.
    - 값 3에 Composer 환경 값을 입력합니다(예: prod, dev, staging 또는 test).
    
-**참고:** [Dataplex][6]가 활성화되어 있으면 네임스페이스가 기본적으로 Composer 환경 이름으로 설정됩니다. 여기에서 OpenLineage 네임스페이스를 수동으로 설정하면 필요에 따라 기본값을 재정의할 수 있습니다.
+**참고:** [Dataplex][6]가 활성화되어 있으면 네임스페이스가 기본적으로 Composer 환경 이름으로 설정됩니다. 여기에서 OpenLineage 네임스페이스를 수동으로 설정하면 필요시 이 기본값을 재정의할 수 있습니다.
 
-Google Cloud Composer에서 `openlineage` 공급자가 지원하는 다른 구성은 공식 [Airflow][4] 및 [Composer][3] 문서에서 확인합니다.
+Google Cloud Composer에서 `openlineage` 공급자가 지원하는 다른 구성은 공식 [Airflow][4] 및 [Composer][3] 설명서에서 확인합니다.
 
 [1]: https://cloud.google.com/composer/docs/composer-versioning-overview
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -396,7 +396,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 : - `openlineage-python>=1.47.0`
 : - `openlineage-integration-common>=1.52.0`
 : - `openlineage-python>=1.52.0`
-: **참고**: 가장 최신 공급자 릴리스입니다. 공급자 `2.20.3`에는 Python 3.11 이상이 필요합니다. 공급자 `2.9.0` 이상은 Airflow 2.11 이상이 필요합니다.
+: **참고**: 가장 최신 공급자 릴리스입니다. 공급자 `2.20.3`에는 Python 3.11 이상이 필요합니다. 공급자 `2.9.0` 이상에는 Airflow 2.11 이상이 필요합니다.
 
 **Airflow 2.10.x**
 : **권장 공급자 버전**: `2.8.0`
@@ -405,7 +405,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 : - `apache-airflow-providers-common-compat>=1.8.0`
 : - `openlineage-integration-common>=1.38.0`
 : - `openlineage-python>=1.38.0`
-: **참고**: Airflow 2.10과 호환되는 최신 공급자 릴리스입니다. 공급자 `2.9.0` 이상은 Airflow 2.11 이상이 필요합니다.
+: **참고**: Airflow 2.10과 호환되는 최신 공급자 릴리스입니다. 공급자 `2.9.0` 이상에는 Airflow 2.11 이상이 필요합니다.
 
 **Airflow 2.9.x**
 : **권장 공급자 버전**: `2.2.0`
@@ -414,7 +414,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 : - `apache-airflow-providers-common-compat>=1.4.0`
 : - `openlineage-integration-common>=1.31.0`
 : - `openlineage-python>=1.31.0`
-: **참고**: Airflow 2.9와 호환되는 최신 공급자 릴리스입니다. 공급자 `2.3.0` 이상부터는 Airflow 2.10 이상이 필요합니다.
+: **참고**: Airflow 2.9와 호환되는 최신 공급자 릴리스입니다. 공급자 `2.3.0` 이상에는 Airflow 2.10 이상이 필요합니다.
 
 **Airflow 2.8.x**
 : **권장 공급자 버전**: `1.14.0`
@@ -423,7 +423,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 : - `apache-airflow-providers-common-compat>=1.2.1`
 : - `openlineage-integration-common>=1.24.2`
 : - `openlineage-python>=1.24.2`
-: **참고**: Airflow 2.8과 호환되는 최신 공급자 릴리스입니다. 공급자 `2.0.0` 이상부터는 Airflow 2.9 이상이 필요합니다.
+: **참고**: Airflow 2.8과 호환되는 최신 공급자 릴리스입니다. 공급자 `2.0.0` 이상에는 Airflow 2.9 이상이 필요합니다.
 
 **Airflow 2.7.x**
 : **권장 공급자 버전**: `1.10.0`
@@ -431,7 +431,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 : - `apache-airflow-providers-common-sql>=1.6.0`
 : - `openlineage-integration-common>=1.16.0`
 : - `openlineage-python>=1.16.0`
-: **참고**: Airflow 2.7과 호환되는 최신 공급자 릴리스입니다. 공급자 `1.11.0` 이상부터는 Airflow 2.8 이상이 필요합니다. Airflow 2.7 및 2.8의 경우, 설정 단계에 표시된 추가 구성 변수를 추가합니다. Amazon MWAA 2.7.2를 사용하는 경우, Datadog 패치가 적용된 휠에 대한 MWAA 업그레이드 가이드를 참조하세요.
+: **참고**: Airflow 2.7과 호환되는 최신 공급자 릴리스입니다. 공급자 `1.11.0` 이상에는 Airflow 2.8 이상이 필요합니다. Airflow 2.7 및 2.8의 경우, 설정 단계에 표시된 추가 구성 변수를 추가합니다. Amazon MWAA 2.7.2를 사용하는 경우, Datadog 패치가 적용된 휠에 대한 MWAA 업그레이드 가이드를 참조하세요.
 
 공급자 릴리스에 따라 최소 지원 Airflow 버전이 변경되거나 필수 종속성 제약 조건이 추가될 수 있으므로 업그레이드하기 전에 [OpenLineage 공급자 변경 로그](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html)를 검토하세요.
 
@@ -439,7 +439,7 @@ Data Observability: Jobs Monitoring은 Apache Airflow OpenLineage 공급자를 �
 
 ### dbt 작업과 Airflow 작업 연결 {#link-your-dbt-jobs-with-airflow-tasks}
 
-<div class="alert alert-info">해당 <code>lineage_root_*</code> 아래에서 사용하는 매크로는 <code>apache-airflow-providers-openlineage</code> 2.3.0 이상이 필요합니다. 이전 공급자 버전(예: Airflow 2.9.2 및 공급자 2.2.0)의 경우, <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">이전 공급자 버전을 위한 OpenLineage 계보 매크로 백포트</a>를 참조하세요.</div>
+<div class="alert alert-info">아래에 사용되는 <code>lineage_root_*</code> 매크로에는 <code>apache-airflow-providers-openlineage</code> 2.3.0 이상이 필요합니다. 이전 공급자 버전(예: Airflow 2.9.2 및 공급자 2.2.0)의 경우, <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">이전 공급자 버전을 위한 OpenLineage 계보 매크로 백포트</a>를 참조하세요.</div>
 
 [OpenLineage dbt 통합][6]을 사용하여 dbt 텔레메트리를 해당 Airflow 작업에 연결하면 Airflow에서 실행 중인 dbt 작업을 모니터링할 수 있습니다.
 
@@ -480,17 +480,17 @@ dbt_run = BashOperator(
 
 ### Spark 작업과 Airflow 작업 연결 {#link-your-spark-jobs-with-airflow-tasks}
 
-<div class="alert alert-info">이 <code>lineage_root_*</code> 매크로를 사용하려면 <code>apache-airflow-providers-openlineage</code> 2.3.0 이상이 필요합니다. 이전 공급자 버전(예: Airflow 2.9.2 및 공급자 2.2.0)의 경우, <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">이전 공급자 버전을 위한 OpenLineage 계보 매크로 백포트</a>를 참조하세요.</div>
+<div class="alert alert-info"> <code>lineage_root_*</code> 매크로에는 <code>apache-airflow-providers-openlineage</code> 2.3.0 이상이 필요합니다. 이전 공급자 버전(예: Airflow 2.9.2 및 공급자 2.2.0)의 경우, <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">이전 공급자 버전을 위한 OpenLineage 계보 매크로 백포트</a>를 참조하세요.</div>
 
 OpenLineage 통합은 Airflow의 상위 작업 정보(네임스페이스, 작업 이름, 실행 ID)를 Spark 애플리케이션 속성에 자동으로 주입할 수 있습니다. 이렇게 하면 Airflow 작업과 Spark 작업 간에 상위-하위 관계가 형성되어 한곳에서 두 시스템의 문제를 해결할 수 있습니다.
 
 **참고**: 이 기능을 사용하려면 `apache-airflow-providers-openlineage` 버전 2.1.0 이상이 필요합니다(Airflow 2.9 이상부터 지원).
 
-1. **연산자 호환성 확인**: Spark 연산자가 지원되는지 확인하려면 [Apache Airflow OpenLineage 문서][8]를 참조하세요. 이 기능은 SparkSubmitOperator 및 LivyOperator와 같은 특정 연산자에서만 작동합니다.
+1. **연산자 호환성 확인**: Spark 연산자가 지원되는지 확인하려면 [Apache Airflow OpenLineage 설명서][8]를 참조하세요. 이 기능은 SparkSubmitOperator 및 LivyOperator와 같은 특정 연산자에서만 작동합니다.
 
 2. Spark 작업이 [Data Observability: Jobs Monitoring][2]을 통해 실제로 모니터링되고 있는지 확인합니다.
 
-3. 다음 구성을 설정하여 상위 작업 정보의 자동 주입을 활성화합니다.
+3. 다음 구성을 설정하여 자동 상위 작업 정보 인젝션을 활성화합니다.
 
 ```shell
 AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
@@ -500,7 +500,7 @@ AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
 
 #### 지원되지 않는 연산자에 상위 작업 정보 수동 주입 {#manually-inject-parent-job-information-for-unsupported-operators}
 
-자동 주입을 지원하지 않는 연산자(예: AWS CLI를 실행하여 Amazon EMR Serverless 작업을 시작하는 `BashOperator`)의 경우, [OpenLineage Airflow 계보 매크로][4]를 사용하여 상위 및 루트 상위 식별자를 Spark 구성 속성으로 전달합니다.
+자동 인젝션을 지원하지 않는 연산자(예: AWS CLI를 실행하여 Amazon EMR Serverless 작업을 시작하는 `BashOperator`)의 경우, [OpenLineage Airflow 계보 매크로][4]를 사용하여 상위 및 루트 상위 식별자를 Spark 구성 속성으로 전달합니다.
 
 ```python
 from datetime import datetime
@@ -631,11 +631,15 @@ with DAG(
     )
 ```
 
-DAG에 `user_defined_macros`를 설정하면 다음 `{{ lineage_*() }}` and `{{ lineage_root_*() }}` 호출이 공급자 2.3.0 이상에 포함된 내장 매크로의 반환값과 일치하는 값으로 해석되므로, 다운스트림 Spark 또는 dbt 작업을 Datadog의 Airflow 루트 상위 작업에 연결할 수 있습니다.
+DAG에 `user_defined_macros`를 설정하면 작업 템플릿에 있는 '{{ lineage_*() }}' 및 '{{ lineage_root_*() }}' 호출이 공급자 2.3.0 이상에 포함된 내장 매크로의 반환값과 일치하는 값으로 해석되므로, 다운스트림 Spark 또는 dbt 작업을 Datadog의 Airflow 루트 상위 작업에 연결할 수 있습니다.
 
 ### Jobs Monitoring에서 특정 DAG 제외 {#exclude-specific-dags-from-jobs-monitoring}
 
-<div class="alert alert-info">이 <code>emission_policy</code> 구성을 사용하려면 <code>apache-airflow-providers-openlineage</code> 2.19.0 이상이 필요하며, 해당 버전을 사용하려면 Airflow 2.11 이상이 필요합니다.</div>
+이 방법은 `apache-airflow-providers-openlineage` 버전에 따라 다릅니다.
+
+{{< tabs >}}
+{{% tab "Provider 2.19.0 이상" %}}
+<div class="alert alert-info"> <code>emission_policy</code> 구성을 사용하려면 <code>apache-airflow-providers-openlineage</code> 2.19.0 이상이 필요하며, 해당 버전을 사용하려면 Airflow 2.11 이상이 필요합니다.</div>
 
 특정 DAG가 Datadog으로 OpenLineage 이벤트를 전송하지 않도록 하려면 Airflow 구성의 `[openlineage]` 섹션에 각 DAG에 대한 `emission_policy` 규칙을 추가합니다.
 
@@ -655,7 +659,25 @@ emission_policy = [{"scope": {"dag_id": "^staging_.*"}, "match_mode": "regex", "
 
 Airflow 구성 재정의 또는 `AIRFLOW__OPENLINEAGE__EMISSION_POLICY` 환경 변수와 같이 플랫폼의 다른 OpenLineage 공급자 옵션을 설정할 때와 동일한 방식으로 `emission_policy`를 설정합니다. 변경 사항을 적용하려면 Airflow 스케줄러와 Worker를 다시 시작합니다.
 
-추가 적용 범위 및 제어 옵션은 [OpenLineage 이벤트 전송 정책 문서][9]를 참조하세요.
+추가 적용 범위 및 제어 옵션은 [OpenLineage 전송 정책 설명서](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html)를 참조하세요.
+{{% /tab %}}
+
+{{% tab "이전 공급자 버전" %}}
+<div class="alert alert-info">사용 중인 <code>apache-airflow-providers-openlineage</code> 버전이 2.19.0 미만이지만 이 버전에서 <code>emission_policy</code>가 지원되지 않는 경우 이 방법을 사용하세요. 이 방법을 사용하려면 <code>openlineage-python</code> 1.23.0 이상이 필요합니다.</div>
+
+Airflow 스메줄러와 Worker 모두에서 **일치하는 모든 DAG 이름을 제외**하도록 `OPENLINEAGE__FILTERS` 환경 변수를 설정하세요.
+
+```
+OPENLINEAGE__FILTERS=[{"type":"regex","regex":"^<YOUR_DAG_ID>(\\.|$)"}]
+```
+
+OpenLineage 작업 이름은 DAG 실행 이벤트의 경우 `<dag_id>`이고 작업 실행 이벤트의 경우 `<dag_id>.<task_id>`이므로, 이 패턴은 DAG와 해당 DAG의 모든 작업을 제외합니다. 여러 DAG를 동시에 제외하려면 `^(dag_one|dag_two)(\\.|$)`와 같은 교대 패턴을 사용하세요.
+
+`OPENLINEAGE__FILTERS` 는 Airflow 공급자 옵션이 아니라 OpenLineage 클라이언트 옵션입니다. `AIRFLOW__OPENLINEAGE__FILTERS`를 설정해도 아무런 영향이 없습니다.
+
+변경 사항을 적용하려면 Airflow 스케줄러와 Worker를 다시 시작합니다. 추가 필터 옵션은 [OpenLineage 클라이언트 구성 설명서](https://openlineage.io/docs/client/python/configuration/)를 참조하세요.
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## 추가 자료 {#further-reading}
@@ -670,4 +692,3 @@ Airflow 구성 재정의 또는 `AIRFLOW__OPENLINEAGE__EMISSION_POLICY` 환경 �
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection
-[9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html

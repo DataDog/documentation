@@ -28,7 +28,7 @@ La integración de ServiceNow con Datadog Incident Management le ofrece los sigu
 Para usar la creación automática de incidentes y la sincronización bidireccional con ServiceNow:
 
 1. Instale la [integración de ServiceNow][1] a través del mosaico de integración de ServiceNow y asegúrese de tener el [mosaico de ServiceNow configurado][2] con su instancia de ServiceNow en Datadog.
-2. Instale la [integración de ITOM/ITSM para Datadog][3] (recomendado) desde la tienda de ServiceNow, o descargue el Update Set más reciente ([Datadog-Snow_Update_Set_v2.8.0.xml][4]) y cárguelo manualmente en su instancia de ServiceNow.
+2. Instale [ITOM/ITSM Integration for Datadog][3] (recomendada) desde la tienda de ServiceNow o descargue el Update Set más reciente ([Datadog-Snow_Update_Set_v2.9.3.xml][4]) y cárguelo manualmente en su instancia de ServiceNow.
 3. Cree una [clave de aplicación de cuenta de servicio][5] en Datadog para una autenticación segura. **Nota**: Datadog recomienda crear una clave de cuenta de servicio en lugar de usar una personal, lo cual conlleva el riesgo de interrumpir la sincronización de ServiceNow si la cuenta del usuario se desactiva o si cambian sus permisos.
 
 ## Configuración {#setup}
@@ -108,7 +108,7 @@ Los siguientes campos se sincronizan entre Datadog Incident Management y Service
 [1]: https://app.datadoghq.com/integrations/servicenow
 [2]: /es/integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [3]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[4]: /es/resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
+[4]: /es/resources/xml/Datadog-Snow_Update_Set_v2.9.3.xml
 [5]: /es/account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [6]: https://app.datadoghq.com/incidents/settings#Integrations
 [7]: /es/integrations/guide/servicenow-itom-itsm-setup/#tranform-maps

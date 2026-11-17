@@ -63,6 +63,8 @@ The cost metrics include a `source` tag to indicate where the value originated:
 
 `ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` are Count metrics that partition cost and token usage by the following tags. Cost includes LLM and embedding spans, plus user-provided tool-span costs. Token usage includes LLM spans only. For embedding token usage, use `ml_obs.span.embedding.input.tokens`.
 
+Automatic OpenAI Realtime token breakdowns require `ddtrace` 4.17.0 or later for Python. For Node.js, use `dd-trace` 6.25.0 or later (v6), or 5.136.0 or later (v5). See [multimodal instrumentation][11] for supported integrations.
+
 Provider tool charges are charges for built-in tools, such as web search, on LLM spans. User-provided tool-span costs are costs you manually supply on tool spans.
 
 | Tag | Values | Description |
@@ -225,3 +227,4 @@ How to fix:
 [8]: /llm_observability/investigate/insights/
 [9]: /llm_observability/investigate/insights/#frontier-model-sizing
 [10]: /llm_observability/investigate/insights/#wasted-spend
+[11]: /llm_observability/instrument/multimodal/#automatic-instrumentation

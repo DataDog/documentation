@@ -41,7 +41,7 @@ Before setting up the Python Feature Flags SDK, ensure you have:
 
 Set the following environment variables:
 
-{{< code-block lang="bash" >}}
+```bash
 # Required: Agentless configuration delivery
 export DD_API_KEY=<YOUR_API_KEY>
 export DD_SITE={{< region-param key="dd_site" code="true" >}}
@@ -52,7 +52,7 @@ export DD_METRICS_OTEL_ENABLED=true
 
 # Recommended: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
-{{< /code-block >}}
+```
 
 No Feature Flags enablement or source setting is required. Register the provider as shown in [Initialize the SDK](#initialize-the-sdk) to begin polling. Installing or initializing `ddtrace` alone does not create Feature Flags CDN traffic.
 

@@ -603,20 +603,13 @@ Additional parameters can be added:
 
 | Optional Parameter | Definition | Value | Default Value | Type |
 |---|---|---|---|---|
-| APPLYDEFAULTFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
+| APPLYFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
 | APPLYFIREWALLDEFAULTBLOCKRULES | Blocks reserved IP addresses for each browser you have installed (Chrome, Edge, and Firefox). Blocking loopback connections is not possible in Windows Firewall. | 0 | N/A | 0: Disabled<br>1: Enabled |
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
-
-To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
-
-Example:
-
-```cmd
-set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
-```
+| ENABLE_FIPS | Enables FIPS 140-2 cryptographic mode. The Windows host must be running in Windows FIPS mode to use this option. Available in private location v1.63.0 or later. | 0 | N/A | 0: Disabled<br>1: Enabled |
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
@@ -659,7 +652,7 @@ default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
 
 {{% tab "Windows standalone" %}}
 
-To install root certificates for private locations on a standalone Windows process with `synthetics-private-location.exe`, use the following steps:
+To install root certificates for private locations on a standalone Windows process with `synthetics-pl-worker.exe`, use the following steps:
 
 1. Open your Windows command prompt or PowerShell.
 
@@ -668,16 +661,12 @@ To install root certificates for private locations on a standalone Windows proce
 Example:
 
 ```text
-set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-pl-worker.exe --config "C:\ProgramData\Datadog-Synthetics\worker-config.json"
 ```
 
-To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+FIPS 140-2 cryptographic mode is not available for the standalone Windows worker. It applies only to the Windows service. Enable FIPS mode during installation with the **Enable FIPS 140-2 cryptographic mode** option or the `ENABLE_FIPS=1` MSI parameter. For the installer parameters, see the [Install your private location][101] section.
 
-```text
-set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
-```
-
-The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+[101]: /synthetics/platform/private_locations/?tab=windowsviacli#install-your-private-location
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -753,7 +742,7 @@ readinessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
   ],
   "timeout": 2,
   "interval": 10,

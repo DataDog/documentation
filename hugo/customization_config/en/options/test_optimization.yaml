@@ -1,0 +1,25 @@
+options:
+  - id: circleci
+    label: CircleCI
+  - id: other_ci_multi_node
+    label: Other - multiple nodes
+  - id: other_ci_single_node
+    label: Other - single node
+  - id: rspec
+    label: RSpec
+  - id: minitest
+    label: Minitest
+  - id: pytest
+    label: pytest
+  - id: jest
+    label: Jest
+  - id: vitest
+    label: Vitest
+  - id: mocha
+    label: Mocha
+  - id: cypress
+    label: Cypress
+  - id: playwright
+    label: Playwright
+  - id: webdriverio
+    label: WebdriverIO

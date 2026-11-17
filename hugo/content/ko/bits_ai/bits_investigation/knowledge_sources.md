@@ -5,11 +5,11 @@ aliases:
 - /ko/bits_ai/bits_ai_sre/knowledge_sources/
 further_reading:
 - link: /bits_ai/bits_investigation/improve_accuracy/
-  tag: 문서
+  tag: 설명서
   text: Bits Investigation 정확도 개선
 title: 지식 소스
 ---
-Bits Investigation은 다음의 지식원을 결합함으로써 시간이 지남에 따라 개선됩니다.
+Bits Investigation은 다음 지식 소스를 결합하여 지속적으로 개선됩니다.
 - [**런북:**](#runbooks) 단계별 문제 해결 지침
 - [**bits.md:**](#bitsmd) 환경 관련 컨텍스트
 - [**피드백 및 메모리:**](#feedback-and-memories) 조사를 통해 얻은 인사이트
@@ -29,13 +29,18 @@ Bits를 새로운 팀원으로 생각하고 온보딩 절차를 진행하세요.
 
 이 통합의 가치를 극대화하려면 관련 서비스, 종속성, 시스템을 상세히 문서화하고 문제 해결에 도움이 되는 명확한 단계별 지침을 제공하세요. 체계적이고 구체적인 런북을 통해 Bits는 보다 정확하고 효과적인 조사를 수행할 수 있습니다.
 
+Bits는 Notebooks 및 [Confluence 페이지][3]와 같이 액세스 권한이 있는 모니터 메시지의 링크를 따라갑니다.
+
 {{< img src="bits_ai/optimization_example.png" alt="최적화 단계가 적용된 예시 모니터" style="width:100%;" >}}
 
 ## Bits.md {#bitsmd}
 
 [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2]에 `bits.md` 파일을 생성하여 Bits가 환경을 조사하는 방식을 사전에 안내할 수 있습니다.
 
-`bits.md`는 사용자 환경에 대한 구조화된 컨텍스트를 Bits에 제공하는 마크다운 파일입니다. 이는 조사 정확도, 쿼리 구성, 용어 정렬을 개선하기 위한 간단한 지침으로 활용됩니다. 태깅 규칙, 아키텍처 패턴, 용어집, 조사 모범 사례 등 팀별 지식을 추가합니다.
+`bits.md` 사용자 환경에 대한 구조화된 컨텍스트를 Bits에 제공하는 마크다운 파일입니다. 이는 조사 정확도, 쿼리 구성, 용어 정렬을 개선하기 위한 간단한 지침으로 활용됩니다. 태깅 규칙, 아키텍처 패턴, 용어집, 조사 모범 사례 등 팀별 지식을 추가합니다.
+
+- **적용 대상**: `bits.md` 설정에서 {{< ui >}}Investigations{{< /ui >}} 및 {{< ui >}}Chat{{< /ui >}} 옵션을 사용하여 이 파일을 사용할 Bits 제품을 선택합니다.
+- **링크**: Bits는 액세스 권한이 있는 `bits.md`의 링크를 따를 수 있습니다.
 
 ### 샘플 bits.md {#sample-bitsmd}
 
@@ -125,3 +130,4 @@ Rule:
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: /ko/bits_ai/bits_investigation/configure/#confluence

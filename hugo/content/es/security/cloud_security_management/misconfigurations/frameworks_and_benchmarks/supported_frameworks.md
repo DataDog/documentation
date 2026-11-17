@@ -14,7 +14,7 @@ further_reading:
   tag: Documentación
   text: Busque y explore misconfiguraciones
 - link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
-  tag: blog
+  tag: Blog
   text: Datadog Security amplía las capacidades de cumplimiento y protección contra
     amenazas para Google Cloud
 title: Marcos de trabajo compatibles
@@ -31,23 +31,24 @@ Cloud Security Misconfigurations incluye más de 1,000 reglas de cumplimiento li
 | [Prácticas recomendadas de seguridad fundamentales de AWS][13]  | v1.0.0                         | `aws-fsbp`                          | Nube                    |
 | [LGPD de Brasil][44]                               | 2018                           | `lgpd`                              | Nube                    |
 | [California CCPA/CPRA][38]                      | Nov. de 2022                       | `ccpa`                              | Nube                    |
-| [CIS AlmaLinux 9][16]                           | v2.0.0                         | `cis-almalinux9`                    | Infraestructura           |
+| [CIS AlmaLinux 9][16]                           | v3.0.0                         | `cis-almalinux9`                    | Infraestructura           |
 | [CIS Amazon Linux 2023][25]                     | v1.0.0                         | `cis-al2023`                        | Infraestructura           |
-| [CIS Amazon Linux 2][25]                        | v3.0.0                         | `cis-amzn2`                         | Infraestructura           |
+| [CIS Amazon Linux 2][25]                        | v4.0.0                         | `cis-amzn2`                         | Infraestructura           |
 | [CIS AWS Foundations Benchmark*][2]             | v5.0.0, v4.0.0, v3.0.0, v1.5.0 | `cis-aws`                           | Nube                    |
 | [CIS Azure Foundations Benchmark][3]            | v4.0.0, v2.0.0                 | `cis-azure`                         | Nube                    |
-| [CIS Docker Benchmark][4]                       | v1.2                           | `cis-docker`                        | Infraestructura           |
+| [CIS Docker Benchmark][4]                       | v1.9.0                         | `cis-docker`                        | Infraestructura           |
 | [CIS GCP Foundations Benchmark][22]             | v3.0.0                         | `cis-gcp`                           | Cloud                    |
 | [CIS GKE][34]                                   | v1.6.0                         | `cis-gke`                           | Cloud                    |
 | [CIS Kubernetes (AKS) Benchmark**][5]           | v1.4.0                         | `cis-aks`                           | Cloud e infraestructura |
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.7.0, v1.4.0                 | `cis-eks`                           | Cloud e infraestructura |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | Infraestructura           |
-| [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | Infraestructura           |
-| [CIS Red Hat Linux 8][24]                       | v3.0.0                         | `cis-rhel8`                         | Infraestructura           |
-| [CIS Red Hat Linux 9][24]                       | v2.0.0                         | `cis-rhel9`                         | Infraestructura           |
-| [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infraestructura           |
-| [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infraestructura           |
-| [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | Infraestructura           |
+| [CIS Red Hat Linux 7][24]                       | v4.0.0                         | `cis-rhel7`                         | Infraestructura           |
+| [CIS Red Hat Linux 8][24]                       | v4.0.0                         | `cis-rhel8`                         | Infraestructura           |
+| [CIS Red Hat Linux 9][24]                       | v3.0.0                         | `cis-rhel9`                         | Infraestructura           |
+| [CIS Red Hat Linux 10][24]                      | v1.0.1                         | `cis-rhel10`                        | Infraestructura           |
+| [CIS Ubuntu 20.04][23]                          | v3.0.0                         | `cis-ubuntu2004`                    | Infraestructura           |
+| [CIS Ubuntu 22.04][23]                          | v3.0.0                         | `cis-ubuntu2204`                    | Infraestructura           |
+| [CIS Ubuntu 24.04][23]                          | v2.0.0                         | `cis-ubuntu2404`                    | Infraestructura           |
 | [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | Cloud                    |
 | [Ley de Resiliencia Operativa Digital (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Controles esenciales de Cloud Security][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
