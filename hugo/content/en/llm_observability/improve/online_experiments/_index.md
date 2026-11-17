@@ -19,6 +19,9 @@ further_reading:
 - link: "/llm_observability/improve/online_experiments/prompt_experimentation"
   tag: "Documentation"
   text: "Prompt Experimentation"
+- link: "https://www.datadoghq.com/blog/online-experiments-agent-observability/"
+  tag: "Blog"
+  text: "Compare AI agent changes with Online Experiments in Agent Observability"
 ---
 
 ## Overview

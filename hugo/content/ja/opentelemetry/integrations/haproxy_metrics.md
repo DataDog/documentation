@@ -5,31 +5,56 @@ further_reading:
   text: OpenTelemetry Collector のセットアップ
 title: HAProxy メトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="HAProxy ダッシュボードでの OpenTelemetry HAProxy メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="HAProxy ダッシュボードの OpenTelemetry HAProxy メトリクス" style="width:100%;" >}}
+[HAProxy receiver][1] は、[HAProxy Overview][4] ダッシュボードに表示される HAProxy メトリクスを収集します。
 
-[HAProxy レシーバー][1]は、HAProxy メトリクスの収集と [HAProxy Overview][4] ダッシュボードへのアクセスを可能にします。`haproxyreceiver` の最新バージョンの仕様に従ってレシーバーを構成してください。
+詳細については、[HAProxy receiver][1] に関する OpenTelemetry プロジェクトのドキュメントを参照してください。
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [HAProxy レシーバー][1]を参照してください。
+## セットアップ {#setup}
 
-## セットアップ
+この例では、OpenTelemetry Collector Contrib v0.154.0 のコンポーネント識別子を使用しています。他のバージョンやディストリビューションの場合は、そのディストリビューションがサポートする識別子を使用します。
 
-Datadog で使用するために OpenTelemetry で HAProxy メトリクスを収集するには:
+Collector の構成に以下の行を追加します。レシーバーにはデフォルトのエンドポイントがないため、`endpoint` を HAProxy 統計ページへの URL または統計ソケットへのパス (`/var/run/haproxy.sock` など) に設定します。統計ページやソケットにはサーバーの詳細が表示されるため、アクセス元をたとえば localhost に制限します。
 
-1. OpenTelemetry Collector の構成で [HAProxy レシーバー][1]を構成します。
-2. OpenTelemetry Collector が [Datadog にエクスポートするように構成されている][5]ことを確認します。
+`metrics` セクションは、レシーバーがデフォルトで収集しないメトリクスを有効にします。HAProxy ダッシュボードはそれらを使用します。
 
-詳細な構成オプションと要件については、[HAProxy レシーバーのドキュメント][1]を参照してください。
+```yaml
+receivers:
+  haproxy:
+    endpoint: http://127.0.0.1:8080/stats
+    metrics:
+      haproxy.connections.total:
+        enabled: true
+      haproxy.sessions.total:
+        enabled: true
+      haproxy.failed_checks:
+        enabled: true
+      haproxy.clients.canceled:
+        enabled: true
+      haproxy.compression.bypass:
+        enabled: true
+      haproxy.compression.count:
+        enabled: true
+      haproxy.compression.input:
+        enabled: true
+      haproxy.compression.output:
+        enabled: true
+```
 
-## 収集されたデータ
+構成のメトリクスパイプラインの `receivers` リストに `haproxy` を追加します。すでにそのパイプラインにあるプロセッサーはそのまま維持します。Datadog OTLP メトリクスインテークはデルタメトリクスのみを受け付けますが、このレシーバーは累積合計を生成するため、パイプラインには `cumulativetodelta` が必要です。[推奨される Collector セットアップ][5]にはそれが含まれています。
+
+すべての構成オプションについては、[HAProxy receiver のドキュメント][1]を参照してください。
+
+## 収集データ {#data-collected}
 
 {{< mapping-table resource="haproxy.csv">}}
 
-詳細は [OpenTelemetry メトリクスマッピング][2]を参照してください。
+OpenTelemetry と Datadog のメトリクス名の完全なマッピングについては、[OpenTelemetry メトリクスマッピング][2]を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

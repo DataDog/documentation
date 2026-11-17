@@ -68,3 +68,32 @@ entries:
       - ListOIDCCloudAuthPersonaMappings
       - ListOIDCCloudAuthProviders
     title: Add preview Custom OIDC provider and persona mapping APIs
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateAWSCloudAuthIntakeMapping
+      - CreateAWSCloudAuthPersonaMapping
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthProvider
+      - DeleteAWSCloudAuthIntakeMapping
+      - DeleteAWSCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthProvider
+      - GetAWSCloudAuthIntakeMapping
+      - GetAWSCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - GetOIDCCloudAuthPersonaMapping
+      - GetOIDCCloudAuthProvider
+      - ListAWSCloudAuthIntakeMappings
+      - ListAWSCloudAuthPersonaMappings
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+      - ListOIDCCloudAuthPersonaMappings
+      - ListOIDCCloudAuthProviders
+    title: Add AI Gateway route permissions and safe editing

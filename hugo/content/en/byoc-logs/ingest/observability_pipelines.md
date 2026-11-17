@@ -28,7 +28,7 @@ For hybrid environments with logs split between on-premises data centers and the
 To configure this setup:
 
 1. [**Create and configure the pipeline**](#create-and-configure-an-observability-pipeline) - Define your pipeline configuration (source, processors, destination) in the Observability Pipelines UI. This creates the pipeline definition that will be used by the Worker.
-2. [**Deploy the Observability Pipelines Worker**](##deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration. The Worker must be running and listening for logs before the Agent can connect to it.
+2. [**Deploy the Observability Pipelines Worker**](#deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration using the Operator or a standalone Helm release. The Worker must be running and listening for logs before the Agent can connect to it.
 3. [**Configure the Datadog Agent**](#configure-the-datadog-agent) - Point the Agent to send logs to the deployed Worker. This step must come last because the Agent needs the Worker's address to be available.
 
 ## Create and configure an Observability Pipeline
@@ -47,6 +47,40 @@ To configure this setup:
 ## Deploy your Observability Pipelines
 
 After creating your pipeline in the UI, deploy the Observability Pipelines Worker. The Worker runs your pipeline configuration and listens for logs from the Datadog Agent.
+
+Choose the deployment method for your environment. The Operator manages Workers inside the BYOC Kubernetes cluster.
+
+### Datadog Operator
+
+For a new AWS deployment, follow [Install BYOC with the Datadog Operator][6]. The Operator does not create the pipeline in Datadog. Create it first and provide its ID in `spec.components.pipelines[].pipelineID`.
+
+Add the following entry to `spec.components.pipelines` in your `DatadogBYOCCluster` manifest. Keep the rest of the cluster configuration and any other pipeline entries:
+
+```yaml
+spec:
+  components:
+    pipelines:
+      - name: agent
+        pipelineID: "<PIPELINE_ID>"
+        replicas: 2
+        ports:
+          - name: datadog-agent
+            port: 8282
+```
+
+Use the exact port name `datadog-agent`. It tells the Operator to set `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS` to `0.0.0.0:8282`. A different name does not configure this source address automatically. For other sources, use a [recognized port name][7] or set the source's `DD_OP_SOURCE_*_ADDRESS` environment variable in `spec.components.pipelines[].env`.
+
+Apply the complete manifest and wait for the workloads:
+
+```shell
+kubectl apply -f byoc-cluster.yaml
+kubectl wait --for=condition=Available \
+  datadogbyoccluster/<CLUSTER_NAME> -n <NAMESPACE_NAME> --timeout=10m
+```
+
+The Operator creates a Worker and Service named `<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>`, where `<PIPELINE_NAME>` is the pipeline entry's `name` (`agent` in this example). It supplies the indexer destination endpoint, Datadog site, and shared API key. Configure the Agent to use `http://<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>.<NAMESPACE_NAME>.svc.cluster.local:8282`. Do not also install a standalone Worker Helm release for this pipeline entry.
+
+### Standalone Worker Helm chart
 
 The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC Logs indexer.
 <br>
@@ -69,7 +103,9 @@ After a minute, verify that logs are flowing through the pipeline and reaching t
 
 After the Observability Pipelines Worker is deployed and running, configure your Datadog Agent to send logs to it. The Agent connects to the Worker using the Worker's service address. For more information, see [Connect the Datadog Agent to the Observability Pipelines Worker][5].
 
-Update your Datadog Agent configuration to send logs to the Observability Pipelines worker:
+Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example in the previous section, use `<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Worker, use its Service address.
+
+Update your Datadog Agent configuration to send logs to the Observability Pipelines Worker:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -88,7 +124,7 @@ spec:
       - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED
         value: "true"
       - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL
-        value: "http://observability-pipelines-worker:8282"
+        value: "http://<WORKER_SERVICE_HOST>:8282"
 
   features:
     logCollection:
@@ -98,7 +134,15 @@ spec:
 
 ## Verification
 
-Check that logs are flowing through the pipeline:
+For an Operator-managed Worker, inspect its resource and logs:
+
+```shell
+kubectl get datadogobservabilitypipelinesworker <CLUSTER_NAME>-pipeline-<PIPELINE_NAME> \
+  -n <NAMESPACE_NAME> -o yaml
+kubectl logs statefulset/<CLUSTER_NAME>-pipeline-<PIPELINE_NAME> -n <NAMESPACE_NAME> --tail=100
+```
+
+For a standalone Worker, use its deployment's labels and namespace. For example:
 
 ```shell
 # Check Observability Pipelines worker status
@@ -111,6 +155,8 @@ kubectl logs -l app=observability-pipelines-worker
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
 ```
 
+Send a log from the configured Agent, select the cluster's BYOC Logs index in Log Explorer, and confirm that the log appears. A ready Worker alone does not verify end-to-end ingestion.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -120,3 +166,5 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 [3]: /observability_pipelines/sources/datadog_agent/
 [4]: /observability_pipelines/destinations/datadog_byoc_logs/
 [5]: /observability_pipelines/sources/datadog_agent/?tab=agenthelmvaluesfile#connect-the-datadog-agent-to-the-observability-pipelines-worker
+[6]: /byoc-logs/install/datadog_operator/
+[7]: /containers/datadog_operator/crd_byoccluster/#pipelines-and-ports

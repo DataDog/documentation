@@ -19,12 +19,6 @@ site_support_ids:
     regions: [gov, gov2]
   byoc-logs:
     regions: [gov, gov2]
-  app_builder_override:
-    regions: [gov2]
-    description: "docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)"
-    url_paths:
-      - /api/latest/app-builder
-      - /api/latest/app-builder/**
   adaptive_sampling:
     regions: [gov, gov2]
   advanced_analysis:
@@ -296,11 +290,6 @@ site_support_ids:
     regions: [us3, us5, eu, ap1, ap2, gov, gov2, uk1]
   wiz:
     regions: [gov, gov2]
-  workflow-automation:
-    regions: [gov, gov2]
-    url_paths:
-      - /api/latest/workflow-automation
-      - /api/latest/workflow-automation/**
   workflows:
     regions: [gov, gov2]
   workload_security_active_protection:

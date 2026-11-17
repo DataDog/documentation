@@ -17,6 +17,7 @@ Avec Kafka Console de Data Streams Monitoring, un check du Datadog Agent se conn
 - **Identifier la cause première** : corrélez les changements de configuration et de schéma avec le retard, le débit et les erreurs, et tracez les problèmes jusqu'au topic, à la version de schéma ou au changement de configuration exact.
 - **Connecter des services aux topics** : voyez quels producteurs et consommateurs interagissent avec chaque topic, avec des propriétaires, des dépôts, des rotations d'astreinte, des traces et des logs d'erreurs liés.
 - **Inspecter les schémas et les messages des topics** : affichez les schémas, comparez les versions et accédez aux messages pour déboguer des charges utiles problématiques ou explorer le topic.
+- **Gérer les topics** : créez et supprimez des topics directement depuis Kafka Console
 - **Alertez et automatisez les réponses** : utilisez les [modèles de monitor recommandés][4] et déclenchez Workflow Automation ou des webhooks lorsqu'une condition Kafka se déclenche.
 
 Pour commencer, consultez [Kafka Console Setup][2].
@@ -57,12 +58,16 @@ Utilisez ces informations pour contacter la bonne équipe lorsqu'un consommateur
 
 La section {{< ui >}}Schema{{< /ui >}} affiche le schéma actuel pour la clé ou la valeur d'un topic, avec l'historique des versions. Utilisez le sélecteur de version pour comparer les schémas entre les versions.
 
-La section {{< ui >}}Messages{{< /ui >}} vous permet de récupérer des messages par partition et offset pour inspecter directement les charges utiles. Ceci est utile pour déboguer des charges utiles problématiques ou vérifier la structure des messages après un changement de schéma. Consultez [Enable message inspection][3] pour connaître les prérequis et autorisations supplémentaires nécessaires pour récupérer les messages.
+La section {{< ui >}}Messages{{< /ui >}} vous permet de récupérer des messages par partition et offset pour inspecter directement les charges utiles. Ceci est utile pour déboguer des charges utiles problématiques ou vérifier la structure des messages après un changement de schéma. Consultez [Enable Kafka actions][3] pour connaître les prérequis et les autorisations supplémentaires nécessaires pour récupérer des messages.
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Vue du schéma et des messages du topic montrant une définition de schéma Protobuf et un tableau des messages récents avec la date, la partition, l'offset et la valeur du message." >}}
 
+### Créer et supprimer des topics {#create-and-delete-topics}
+
+Créez un topic sur un cluster ou supprimez un topic dont vous n'avez plus besoin. Vous pouvez effectuer ces deux opérations au même endroit que celui où vous surveillez l'état de santé, le lag et les propriétaires d'un topic, sans passer par un outil d'administration Kafka distinct. Pour la configuration et les autorisations requises, consultez [Enable Kafka actions][3].
+
 [2]: /fr/data_streams/kafka/setup/
-[3]: /fr/data_streams/kafka/setup/#enable-message-inspection
+[3]: /fr/data_streams/kafka/setup/#enable-kafka-actions
 [4]: /fr/data_streams/kafka/monitors_and_automation/
 
 ## Pour aller plus loin {#further-reading}

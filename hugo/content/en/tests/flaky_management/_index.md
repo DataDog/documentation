@@ -39,6 +39,12 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Control automation with code annotations
+
+Use code annotations to protect individual tests from Datadog quarantine and disabling, or exclude them from automatic retries. Explicit framework retries remain available.
+
+For supported languages, examples, and version requirements, see [Control Test Automation with Code Annotations][23].
+
 ## Configure policies to automate the flaky test lifecycle
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
@@ -130,6 +136,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit. Datadog also checks recent preceding commits, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
+      - Retries after the first execution are not billed as test spans. For details, see [CI/CD Optimization Billing][22].
     - Runs tests even if they are marked as `Disabled`.
     - If all retries pass, marks the fix as {{< ui >}}in progress{{< /ui >}} in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
@@ -306,3 +313,5 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [19]: /tests/explorer/
 [20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [21]: /tests/setup/junit_xml/#adding-code-owners
+[22]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[23]: /tests/flaky_management/code_annotations/

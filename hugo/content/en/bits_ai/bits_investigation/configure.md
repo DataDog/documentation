@@ -83,6 +83,8 @@ There are two RBAC permissions that apply to Bits Investigation:
 | Bits Investigations Read (`bits_investigations_read`)   | Read Bits investigations.              | Datadog Read Only Role |
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role  |
 
+These permissions also control access to Bits Detection. For details, see [Bits Detection permissions][20].
+
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
 
 ### Disable Bits Investigation
@@ -159,3 +161,4 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
 [19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true
+[20]: /bits_ai/bits_detection/#permissions

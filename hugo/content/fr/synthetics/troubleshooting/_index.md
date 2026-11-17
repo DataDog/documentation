@@ -1,221 +1,382 @@
 ---
-description: Résolvez les problèmes courants rencontrés avec la surveillance Synthetic.
+description: Résolvez les problèmes courants de Synthetic Monitoring.
 further_reading:
 - link: /synthetics/
   tag: Documentation
-  text: Gérer vos tests Synthetic
+  text: Gérez vos tests Synthetic
 - link: /synthetics/browser_tests/
   tag: Documentation
-  text: Configurer un test Browser
+  text: Configurez un test de navigateur
 - link: /synthetics/api_tests/
   tag: Documentation
-  text: Configurer un test API
+  text: Configurez un test API
 - link: /synthetics/private_locations/
   tag: Documentation
-  text: Timeboards
-title: Dépannage de la surveillance Synthetic
+  text: Créez un emplacement privé
+title: Dépannage de Synthetic Monitoring
 ---
+## Présentation {#overview}
 
-## Présentation
+Utilisez cette page pour résoudre les problèmes courants liés à la configuration et au paramétrage de Datadog Synthetic Monitoring. Pour obtenir de l'aide supplémentaire, contactez [Datadog Support][1].
 
-Si vous rencontrez un problème durant la configuration de la surveillance Synthetic Datadog, utilisez cette page pour effectuer un premier dépannage. Si votre problème persiste, [contactez l'assistance Datadog][1].
+## Messages d'erreur courants {#common-error-messages}
 
-## Tests API
+Utilisez ce tableau pour trouver les étapes de dépannage pour les erreurs courantes.
 
-### Écarts des durées d'opérations réseau
+| Message d'erreur                                  | Voir la section |
+|------------------------------------------------|-------------|
+| `self-signed certificate in certificate chain` | [Emplacements privés → Certificats](?tab=windows#self-signed-certificate-errors) |
+| `401 Unauthorized`                           | [Tests API et de navigateur → Non autorisé](#api-and-browser-tests) |
+| `Element not found`                            | [Exécution de test → Problèmes de sélection d'élément](#element-detection-warning-in-browser-test-steps) |
+| `Unsupported browser version`                  | [Emplacements privés → Compatibilité du navigateur](?tab=common#requirements-for-browser-tests-running-on-private-location) |
+| `Failed to load resource: ERR_INVALID_ARGUMENT` | [Emplacements privés → Problème Chrome 149](?tab=common#chrome-149-issue-on-private-locations) |
 
-Si vous observez un changement soudain ou une augmentation globale des [métriques de durée][2] de votre test API, cela est vraisemblablement causé par un goulot d'étranglement ou un retard de la requête. Pour en savoir plus, consultez le guide [Fonctionnement des durées de test API et correction des écarts][3].
 
-## Tests Browser
+## Tests API {#api-tests}
 
-### Enregistrement
+### Les durées réseau varient {#network-timings-are-varied}
 
-#### Le site Web ne se charge pas dans l'iframe
+Si vous constatez un pic soudain ou une augmentation globale des [métriques de durée][2] de votre test API, cela indique généralement un goulot d'étranglement ou un retard dans la requête. Pour plus d'informations, consultez [Durées et variations des tests API][3].
 
-Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. Le message `Your website does not support being loaded through an iframe.` est affiché dans l'iframe. Cette erreur peut survenir lorsque certains réglages de votre application empêchent son ouverture dans l'iframe. 
+## Tests de navigateur {#browser-tests}
 
-Ou alors, si vous ne parvenez pas à vous connecter à votre site Web lorsque vous enregistrez du contenu dans l'enregistreur de l'iframe, il se peut qu'une requête de votre application soit bloquée.
+### Enregistrement {#recording}
 
-Essayez d'ouvrir votre site Web dans une fenêtre contextuelle en cliquant sur **Open in Popup** pour enregistrer votre parcours utilisateur.  
+#### Le site web ne se charge pas dans l'iframe {#the-website-is-not-loading-in-the-iframe}
 
-#### Seules certaines applications se chargent dans l'iframe
+Si votre site web n'apparaît pas dans l'iframe de l'enregistreur de tests de navigateur après l'installation de l'[extension Datadog][4], vous pourriez voir le message `Your website does not support being loaded through an iframe`. Cela indique que les paramètres de sécurité de votre application, tels que la politique de sécurité du contenu (CSP) ou des en-têtes de sécurité associés comme `X-Frame-Options`, empêchent le chargement de l'iframe.
 
-Cela signifie que les restrictions de vos applications et environnements diffèrent. Ainsi, certaines applications s'affichent correctement, tandis que d'autres ne sont pas visibles.
+De même, si les tentatives de connexion échouent pendant l'enregistrement dans l'iframe, votre application peut bloquer certaines requêtes en raison de règles CSP ou d'autres configurations de sécurité. Dans certains cas, les échecs de connexion peuvent également être dus à un problème de jeton CSRF lorsque le flux de connexion provient d'une application web chargée dans une iframe, ce qui peut entraîner la perte du jeton CSRF.
 
-#### Le message « We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup » s'affiche en haut de l'iframe
+**Solution** : Cliquez sur {{< ui >}}Open in Popup{{< /ui >}} pour enregistrer votre parcours utilisateur dans une fenêtre séparée au lieu de l'iframe.  
 
-Vous essayez très certainement d'enregistrer des étapes sur une page `http`. Or, seules les pages `https` sont prises en charge dans l'iframe de l'enregistreur. Pour commencer à enregistrer le contenu de votre page, ouvrez-la dans une fenêtre contextuelle ou modifiez son URL en prenant soin d'indiquer une adresse `https`.
+#### Seules certaines applications se chargent dans l'iframe {#only-certain-applications-load-in-the-iframe}
 
-{{< img src="synthetics/http_iframe.png" alt="HTTP dans un iframe" style="width:100%;" >}}
+Différentes applications et environnements ont des configurations CSP et d'autres restrictions de sécurité variables. Certains permettent le chargement dans une iframe, tandis que d'autres le bloquent pour des raisons de sécurité.
 
-#### Le site Web ne s'affiche pas dans l'iframe et aucune étape ne peut être enregistrée, même en cas d'ouverture dans une fenêtre contextuelle
+**Solution** : Cliquez sur {{< ui >}}Open in Popup{{< /ui >}} pour enregistrer votre parcours utilisateur dans une fenêtre séparée au lieu de l'iframe.
 
-Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. En outre, vous ne pouvez enregistrer aucune étape, que vous ayez ouvert votre site Web dans l'iframe ou dans une fenêtre contextuelle :
+#### Une bannière d'avertissement concernant les requêtes HTTP s'affiche dans l'iframe {#http-requests-warning-banner-appears-in-iframe}
 
-{{< img src="synthetics/recording_iframe.mp4" alt="Problèmes lors de l'enregistrement d'étapes du test Browser" video="true" width="100%" >}}
+Cet avertissement s'affiche lors d'une tentative d'enregistrement sur une page `http`. L'iframe de l'enregistreur ne prend en charge que les pages `https`.
 
-Si c'est le cas, assurez-vous que l'[extension Datadog][5] dispose des autorisations de lecture et d'écriture de données pour les sites Web souhaités, en spécifiant votre site Web dans la section `On specific sites` ou en activant l'option `On all sites` :
+**Solution** : Ouvrez votre page dans une fenêtre contextuelle ou modifiez votre URL pour utiliser `https`. 
 
-{{< img src="synthetics/extension.mp4" alt="Autoriser l'extension à lire les données sur tous les sites" video="true" width="100%" >}}
+#### Le site web ne se charge pas et l'enregistrement ne fonctionne pas dans l'iframe ou la fenêtre contextuelle {#website-fails-to-load-and-recording-doesnt-work-in-iframe-or-pop-up}
 
-#### Impossible d'enregistrer des étapes sur une application
+Si votre site web n'apparaît pas dans l'iframe de l'enregistreur de tests de navigateur après l'installation de l'[extension Datadog][4], et que l'enregistrement échoue aussi bien en mode iframe qu'en mode fenêtre contextuelle :
 
-Il est possible que votre navigateur Chrome applique certaines règles qui empêchent l'extension d'effectuer l'enregistrement comme prévu.
+   {{< img src="synthetics/recording_iframe.mp4" alt="Problèmes lors de l'enregistrement des étapes d'un test de navigateur" video="true" width="100%" >}}
 
-Pour vérifier si c'est le cas, accédez à `chrome://policy` et consultez les paramètres relatifs aux extensions, par exemple [`ExtensionSettings`][6].
+   **Solution** : Vérifiez que l'[extension Datadog][5] dispose des autorisations appropriées en spécifiant votre site web dans la section `On specific sites` ou en activant `On all sites` :
 
-#### La page de connexion ne s'affiche pas dans l'enregistreur
+   {{< img src="synthetics/extension.mp4" alt="Autoriser l'extension à lire les données sur tous les sites" video="true" width="100%" >}}
 
-Par défaut, l'iframe ou la fenêtre contextuelle de l'enregistreur utilise votre navigateur. Cela signifie que si vous êtes déjà connecté à votre application, il est possible que l'iframe ou la fenêtre affiche directement la page qui suit l'écran de connexion, vous empêchant alors d'enregistrer vos étapes de connexion sans vous déconnecter au préalable.
+#### L'enregistrement des étapes échoue sur l'application {#recording-steps-fails-on-application}
 
-Pour enregistrer vos étapes de connexion sans vous déconnecter de votre application, utilisez simplement le **mode navigation privée** de l'enregistreur :
+Les politiques du navigateur Chrome peuvent empêcher l'extension d'enregistrer correctement.
 
-{{< img src="synthetics/incognito_mode.mp4" alt="Utiliser le mode navigation privée dans des tests Browser" video="true" width="100%" >}}
+**Solution** : Vérifiez dans `chrome://policy` les paramètres liés à l'extension, tels que [`ExtensionSettings`][6], qui pourraient bloquer l'enregistreur.
 
-L'option **Open pop-up in incognito mode** vous permet de démarrer l'enregistrement de votre test depuis l'URL de départ configurée et dans une session entièrement distincte de la session principale de votre navigateur.
+#### Page de connexion non visible dans l'enregistreur {#login-page-not-visible-in-recorder}
 
-Cette fenêtre contextuelle de navigation privée ignore toutes vos anciennes données de navigation, y compris les cookies et les données locales. Vous êtes ainsi automatiquement déconnecté de votre compte et pouvez enregistrer vos étapes de connexion comme si vous consultiez votre site pour la première fois.
+L'iframe ou la fenêtre contextuelle de l'enregistreur utilise par défaut votre session de navigateur actuelle. Si vous êtes déjà connecté à votre application, la page de connexion peut être ignorée et vous pouvez accéder directement à la vue après connexion, ce qui vous empêche d'enregistrer les étapes d'authentification.
 
-### Résultats des tests
+**Solution** : Utilisez {{< ui >}}incognito mode{{< /ui >}} de l'enregistreur pour enregistrer les étapes de connexion sans vous déconnecter de votre session actuelle :
 
-#### Un test Browser Mobile Small ou Tablet échoue systématiquement
+{{< img src="synthetics/incognito_mode.mp4" alt="Utilisation des tests de navigateur en mode navigation privée" video="true" width="100%" >}}
 
-Si votre site Web a recours à des techniques **réactives**, son DOM peut afficher d'importantes différences en fonction de l'appareil sur lequel le test est exécuté. Il est possible que votre site utilise un DOM spécifique lorsqu'il est exécuté à partir d'un `Laptop Large`, et que son architecture diffère grandement lorsqu'il est exécuté depuis un appareil `Tablet` ou `Mobile Small`.
+{{< ui >}}Incognito mode{{< /ui >}} crée une session isolée qui ignore l'historique de votre navigateur, vos cookies et vos données de connexion. Cela vous permet d'enregistrer les étapes de connexion à partir de zéro, comme si vous visitiez votre site web pour la première fois.
 
-En d'autres termes, il se peut que les étapes que vous avez enregistrées depuis une fenêtre d'affichage `Laptop Large` ne s'appliquent pas à un appareil `Mobile Small` pour le même site Web. Cela entraînerait l'échec de votre test `Mobile Small` :
+### Résultats des tests {#test-results}
 
-{{< img src="synthetics/device_failures.png" alt="Échec d'appareil mobile et tablette" style="width:100%;" >}}
+#### Les tests de navigateur sur mobile et tablette échouent systématiquement {#mobile-and-tablet-browser-tests-consistently-fail}
 
-Pour y remédier, Datadog vous conseille de créer des **tests spécifiques au format `Mobile Small` ou `Tablet`**. Leurs étapes enregistrées correspondent alors à la fenêtre d'affichage du test lors de l'exécution.
+Les sites web **responsive** peuvent avoir des structures DOM très différentes selon les appareils. Le DOM d'un site web sur {{< ui >}}Laptop Large{{< /ui >}} peut différer considérablement des fenêtres d'affichage {{< ui >}}Tablet{{< /ui >}} ou {{< ui >}}Mobile Small{{< /ui >}}.
 
-Afin d'enregistrer ces étapes avec une fenêtre d'affichage `Mobile Small` ou `Tablet`, sélectionnez `Mobile Small` ou `Tablet` dans le menu déroulant de l'enregistreur avant de cliquer sur le bouton **Start Recording**.
+Les étapes enregistrées sur {{< ui >}}Laptop Large{{< /ui >}} peuvent ne pas fonctionner sur des fenêtres d'affichage plus petites, provoquant l'échec des tests sur mobile et tablette :
 
-{{< img src="synthetics/record_device.png" alt="Enregistrer des étapes sur un appareil mobile" style="width:100%;" >}}
+{{< img src="synthetics/device_failures.png" alt="Échec sur appareil mobile ou tablette" style="width:100%;" >}}
 
-En outre, les tests Browser sont exécutés en mode **headless**, ce qui signifie que certaines fonctionnalités ne sont pas prises en charge. Par exemple, les tests Browser ne prennent pas en charge l'action `touch` et ne peuvent pas l'utiliser pour détecter si le site Web doit s'afficher dans sa version mobile ou non.
+**Solution** : Créez des tests spécifiques à l'appareil où les étapes enregistrées correspondent à la fenêtre d'affichage cible.
 
-#### L'avertissement `None or multiple elements detected` s'affiche dans des tests Browser
+Pour enregistrer pour des fenêtres d'affichage mobile ou tablette, sélectionnez {{< ui >}}Mobile Small{{< /ui >}} ou {{< ui >}}Tablet{{< /ui >}} dans le menu déroulant de l'enregistreur avant de cliquer sur {{< ui >}}Start Recording{{< /ui >}}.
 
-L'une des étapes de votre test Browser affiche un avertissement `None or multiple elements detected` :
+{{< img src="synthetics/record_device.png" alt="Enregistrement des étapes sur mobile ou tablette" style="width:100%;" >}}
 
-{{< img src="synthetics/step_warning.png" alt="Avertissement pour l'étape du localisateur d'utilisateur" style="width:100%;" >}}
+**Remarque** : Les tests de navigateur s'exécutent en mode **headless** et ne prennent pas en charge certaines fonctionnalités comme les événements `touch` permettant de détecter une conception adaptée aux mobiles.
 
-Cela signifie que le localisateur d'utilisateur défini pour cette étape cible soit plusieurs éléments, soit aucun d'entre eux. Le test Browser ne sait donc pas avec quel élément interagir.
+#### Avertissement de détection d'élément dans les étapes de test de navigateur {#element-detection-warning-in-browser-test-steps}
 
-Pour résoudre ce problème, accédez à l'éditeur de votre enregistrement et ouvrez les options avancées de l'étape problématique. Accédez à la page en cours de test, puis cliquez sur `Test`. Cela met en surbrillance l'élément localisé ou affiche un message d'erreur. Vous pouvez désormais modifier votre localisateur d'utilisateur de façon à ce qu'il ne renvoie plus qu'un seul élément de votre page :
+Les étapes de test de navigateur peuvent afficher un avertissement `None or multiple elements detected` :
 
-{{< img src="synthetics/fix_user_locator.mp4" alt="Résoudre une erreur concernant le localisateur d'utilisateur" video="true" width="100%" >}}
+{{< img src="synthetics/step_warning.png" alt="Avertissement d'étape de localisateur utilisateur" style="width:100%;" >}}
 
-#### Je rencontre des problèmes avec une propriété pointer CSS
+Cela indique que le localisateur utilisateur cible plusieurs éléments ou aucun, empêchant le test de savoir avec quel élément interagir.
 
-Les navigateurs automatisés ne peuvent pas émuler la fonctionnalité de média `pointer` CSS. Les tests Browser utilisent `pointer: none` pour chaque test et chaque appareil (ordinateur portable, tablette ou mobile).
+**Solution** : Modifiez votre enregistrement, ouvrez les options avancées de l'étape problématique, accédez à la page de test et cliquez sur {{< ui >}}Test{{< /ui >}}. Cela met en surbrillance l'élément localisé ou affiche une erreur. Ajustez votre localisateur utilisateur pour cibler un seul élément unique :
 
-## Tests API et tests Browser
+{{< img src="synthetics/fix_user_locator.mp4" alt="Correction de l'erreur du localisateur utilisateur" video="true" width="100%" >}}
 
-### Erreurs Unauthorized
+#### Limitations de la propriété de pointeur CSS {#css-pointer-property-limitations}
 
-Si l'un de vos tests Synthetic renvoie une erreur 401, c'est probablement qu'il ne parvient pas à s'authentifier auprès de l'endpoint. Lorsque vous configurez votre test Synthetic, assurez-vous d'utiliser la même méthode d'authentification que celle que vous utilisez en dehors de Datadog.
+Les navigateurs automatisés ne peuvent pas émuler la fonctionnalité média CSS `pointer`. Tous les tests de navigateur utilisent `pointer: none` quel que soit le type d'appareil (ordinateur portable, tablette ou mobile).
 
-* Votre endpoint utilise-t-il une **authentification par en-têtes** ?
-  * **Authentification basique** : spécifiez les identifiants requis dans les **options avancées** de votre [test HTTP][7] ou [Browser][8].
-  * **Authentification basée sur un token** : commencez par extraire votre token avec un premier [test HTTP][7], créez une [variable globale][9] en parsant la réponse de ce premier test, et réinjectez cette variable dans un second [test HTTP][7] ou [test Browser][10] nécessitant le token d'authentification.
-  * **Authentification basée sur une session** : ajoutez les en-têtes ou cookies requis dans les **options avancées** de votre [test HTTP][7] ou [Browser][8].
+### Durée de la ressource {#resource-duration}
 
-* L'endpoint utilise-t-il des **paramètres de requête pour l'authentification** ? Par exemple, devez-vous ajouter une clé d'API spécifique dans vos paramètres d'URL ?
+#### La durée de la ressource dépasse la durée de l'étape {#resource-duration-exceeds-step-duration}
 
-* Cet endpoint utilise-t-il une **authentification basée sur l'adresse IP** ? Dans ce cas, vous devrez peut-être autoriser une partie ou l'ensemble des [IP à l'origine des tests Synthetic][11].
+Les ressources avec des temps de chargement longs peuvent s'étendre sur plusieurs étapes de test. Datadog renvoie toutes les ressources initiées au cours d'une étape spécifique, mais accorde environ 20 secondes aux appels réseau critiques pour se terminer avant de passer à l'étape suivante.
 
-### Erreurs Forbidden
+Le worker de tests synthétiques utilise des délais d'attente hiérarchiques pour équilibrer la vitesse et la fiabilité. Par conséquent, [la durée de l'étape][14] ne doit pas être utilisée pour mesurer les performances d'une application web : elle reflète le temps nécessaire à une exécution fiable du test.
 
-Si les tests Synthetic renvoient des erreurs `403 Forbidden`, il est possible que votre serveur Web bloque ou filtre les requêtes qui comprennent l'en-tête `Sec-Datadog`. Cet en-tête est ajouté à chaque requête Synthetic envoyée par Datadog pour identifier la source du trafic et aider l'assistance Datadog à identifier l'exécution de test spécifique.
+## Tests d'API et de navigateur {#api-and-browser-tests}
 
-En outre, vous devrez peut-être également vérifier que vos pare-feu autorisent les [plages d'IP utilisées par la surveillance Synthetic Datadog][11] comme sources de trafic.
+### Erreurs « Unauthorized » {#unauthorized-errors}
 
-### Notifications manquantes
+Une erreur 401 dans les tests de Synthetic Monitoring indique généralement un échec d'authentification. Utilisez la même méthode d'authentification (en dehors de Datadog) que celle que vous utilisez habituellement pour l'endpoint et reproduisez-la dans la configuration de votre test Synthetic.
 
-Par défaut, les tests Synthetic ne procèdent à aucun [renvoi de notifications][12]. Ainsi, si vous ajoutez votre handle de notification, comme une adresse e-mail ou un handle Slack, après un changement d'état (par exemple, un test entrant en alerte ou se rétablissant à partir d'une ancienne alerte), aucune notification n'est envoyée pour ce changement. Une notification est toutefois envoyée pour le changement suivant.
+* Votre endpoint utilise-t-il une **authentification basée sur les en-têtes** ?
+  * **Authentification de base** : spécifiez les identifiants associés dans le {{< ui >}}Advanced options{{< /ui >}} de votre [test HTTP][7] ou [test de navigateur][8].
+  * **Authentification basée sur un jeton** : extrayez votre jeton avec un premier [test HTTP][7], créez une [variable globale][9] en effectuant le parsing de la réponse de ce premier test, et réinjectez cette variable dans un second [test HTTP][7] ou [test de navigateur][10] nécessitant le jeton d'authentification.
+  * **Authentification basée sur une session** : ajoutez les en-têtes ou cookies requis dans le {{< ui >}}Advanced options{{< /ui >}} de votre [test HTTP][7] ou [test de navigateur][8].
+  
+* Votre endpoint utilise-t-il une **authentification par paramètre de requête** (comme l'ajout d'une clé d'API aux paramètres d'URL) ?
 
-## Emplacements privés
+* Votre endpoint utilise-t-il une **authentification basée sur l'adresse IP** ? Si tel est le cas, autorisez les [plages d'adresses IP de Synthetic Monitoring][11] dans votre pare-feu ou vos paramètres de sécurité.
+
+### Erreurs d'accès refusé {#forbidden-errors}
+
+Une erreur `403 Forbidden` provenant d'un test Synthetic Monitoring signifie généralement que votre serveur Web ou votre pare-feu bloque le trafic Synthetic. Autorisez les [plages d'adresses IP de Synthetic Monitoring][11] et identifiez les requêtes Synthetic grâce à leur en-tête `user-agent` : `Datadog/Synthetics` pour les tests d'API, ou une valeur se terminant par `DatadogSynthetics` pour les tests de navigateur. Les tests Synthetic n'envoient plus l'en-tête `Sec-Datadog`, mettez donc à jour toute liste d'autorisation qui s'y fie. Pour d'autres identifiants, consultez [Identifier les bots Synthetic][18].
+
+### Notifications manquantes {#missing-notifications}
+
+Les tests Synthetic ne [renvoient pas de notification][12] par défaut. Si vous ajoutez des destinataires de notification (adresses e-mail ou identifiants Slack) après qu'une transition d'état s'est produite (comme un test passant en alerte ou se rétablissant), aucune notification n'est envoyée pour cette transition. Les notifications ne sont envoyées que pour les transitions ultérieures.
+
+## Tests mobiles {#mobile-tests}
+
+### Impossible de lancer un enregistrement sur appareil {#unable-to-launch-a-device-recording}
+
+Les applications avec des contrôles de sécurité au démarrage (tels que la vérification du débogage USB) peuvent empêcher l'enregistrement. Téléversez une version de votre application sans ces contrôles de sécurité pour un enregistrement de test optimal. 
+
+### Problèmes de fonctionnalité de l'application pendant l'enregistrement et l'exécution {#app-functionality-issues-during-recording-and-execution}
+
+Les fonctionnalités de l'application iOS peuvent ne pas fonctionner correctement pendant l'enregistrement ou l'exécution en raison du processus de re-signature de l'application. Ce processus, nécessaire pour que l'appareil soit considéré comme fiable, peut supprimer des autorisations iOS essentielles (Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, etc.).
+
+**Solution** : utilisez des profils de provisionnement Ad Hoc ou Development lors de la distribution de votre application iOS pour limiter les problèmes liés aux autorisations et améliorer la compatibilité.
+
+## Tests Network Path {#network-path-tests}
+
+### Le Datadog Agent n'est pas répertorié comme option dans Locations & Agents {#datadog-agent-not-listed-as-an-option-in-locations-agents}
+
+Si vous ne voyez pas le Datadog Agent répertorié comme option sélectionnable lors de la création d'un test, vérifiez que vous remplissez tous les prérequis et que vous avez terminé les étapes de configuration. Consultez [Configuration de l'Agent][16] pour plus d'informations.
+
+### Les tests planifiés depuis le Datadog Agent ne s'exécutent pas selon le planning prévu {#scheduled-tests-from-the-datadog-agent-is-not-running-at-the-expected-schedule}
+
+Dans les environnements volumineux ou à fort trafic, les tests planifiés peuvent ne pas s'exécuter aux intervalles prévus si le Datadog Agent ne dispose pas de suffisamment de workers pour gérer les exécutions simultanées. Pour optimiser les performances et maintenir un planning cohérent, [augmentez le nombre de workers][17] pour atteindre ou dépasser le nombre total de tests assignés à l'Agent.
+
+### Résultats manquants des tests exécutés depuis le Datadog Agent {#missing-test-results-executed-from-the-datadog-agent}
+
+Si vous ne voyez pas les résultats de test dans l'interface utilisateur Datadog, le Datadog Agent n'envoie pas les résultats au point de collecte Synthetics (https://http-synthetics.datadoghq.com), qui les traite. Vérifiez que le trafic réseau sortant du Datadog Agent vers ce point de collecte est autorisé.
+
+Si le Datadog Agent s'exécute derrière un proxy, assurez-vous que le forwarder Synthetics est configuré pour envoyer le trafic via le proxy, par exemple :
+
+```
+synthetics: 
+  collector: 
+    enabled: true
+synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
+```
+De plus, assurez-vous que le proxy lui-même est configuré pour autoriser le trafic réseau sortant vers le point de collecte Synthetics.
+
+## Emplacements privés {#private-locations}
 
 {{< tabs >}}
-{{% tab "Common" %}}
+{{% tab "Commun" %}}
 
-### Les résultats de test Browser indiquent parfois des erreurs `Page crashed`
+### La Private Location ne parvient pas à récupérer les tests en raison d'une erreur 403 {#private-location-unable-to-fetch-tests-due-to-403-error}
 
-Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos workers d'emplacement privé disposent de [suffisamment de ressources mémoire][101].
+Une Private Location affiche cette erreur lorsqu'elle tente de récupérer des tests depuis Datadog :
 
-### Les tests s'exécutent parfois lentement
+```
+Queue error - onFetchMessagesLongPolling - Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+    at Function.QueueError.fromHTTPError (dist/build/index.js:259354:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
+```
 
-Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacements privés. Vérifiez que vos workers d'emplacement privé disposent de [suffisamment de ressources du processeur][101].
+**Cause** : le journal indique que la Private Location a réussi à atteindre le point de collecte Synthetics pour récupérer les tests, mais que la requête a échoué avec une réponse 403 de Datadog en raison d'un problème d'authentification. Plus précisément, la signature de la requête a été considérée comme expirée ou pas encore valide. La communication entre la Private Location et Datadog est sécurisée à l'aide de Datadog Signature v1 (basée sur le même processus de signature qu'[AWS Signature v4][105]), qui inclut un horodatage dans chaque requête afin de garantir l'authentification et l'intégrité. Si l'horloge système du serveur hébergeant la Private Location n'est pas synchronisée, l'horodatage peut se trouver en dehors de la fenêtre autorisée et la validation de la signature échoue.
 
-### Mes tests Browser prennent trop de temps à s'exécuter
+**Solution** : assurez-vous que l'horloge du serveur hébergeant la Private Location est correctement synchronisée. Si des services NTP (Network Time Protocol) sont utilisés, vérifiez qu'ils sont correctement configurés et fonctionnent correctement, et corrigez toute mauvaise configuration susceptible d'empêcher l'horloge système de se synchroniser avec ses sources horaires.
 
-Vérifiez que vous ne rencontrez pas de [problèmes de mémoire insuffisante][102] avec vos déploiements d'emplacement privé. Si vous avez déjà essayé de dimensionner vos instances de workers en suivant les [conseils de dimensionnement][103], contactez l'[assistance Datadog][104].
+### Les tests de navigateur affichent des erreurs `Page crashed` {#browser-tests-show-page-crashed-errors}
 
-### Les tests API exécutés à partir d'un emplacement privé génèrent des erreurs `TIMEOUT`
+Les plantages de page indiquent généralement un épuisement des ressources sur les workers de l'emplacement privé. Assurez-vous que vos workers d'emplacement privé disposent de [ressources mémoire suffisantes][101].
 
-Ces erreurs peuvent indiquer que votre emplacement privé ne parvient pas à atteindre l'endpoint sur lequel vos tests API s'exécutent. Assurez-vous que l'emplacement privé est installé sur le même réseau que l'endpoint à tester. Vous pouvez également essayer d'exécuter votre test sur plusieurs endpoints pour vérifier si vous obtenez les mêmes erreurs `TIMEOUT`.
+### L'exécution des tests est plus lente que prévu {#test-execution-is-slower-than-expected}
 
-{{< img src="synthetics/timeout.png" alt="Test API sur un emplacement privé avec une erreur d'expiration" style="width:70%;" >}}
+Une exécution lente des tests indique généralement un épuisement des ressources sur les workers de l'emplacement privé. Assurez-vous que vos workers d'emplacement privé disposent de [ressources CPU suffisantes][103].
+
+### Mes tests de navigateur prennent trop de temps à s'exécuter {#my-browser-tests-are-taking-too-long-to-run}
+
+Vérifiez que vos déploiements d'emplacement privé ne présentent pas de [problèmes de mémoire insuffisante][102]. Si vous avez déjà essayé de mettre à l'échelle vos instances de workers en suivant les [directives de dimensionnement][101], contactez le [support Datadog][104].
+
+### Exigences pour les tests de navigateur s'exécutant sur un emplacement privé {#requirements-for-browser-tests-running-on-private-location}
+
+Les tests de navigateur nécessitent des privilèges élevés pour lancer (au démarrage de l'exécution du test) et arrêter (à la fin de l'exécution du test) le processus du navigateur. Si votre emplacement privé est configuré avec un contexte de sécurité qui restreint les privilèges élevés, l'emplacement privé émet des journaux d'erreur lorsque le test de navigateur est exécuté. Les journaux signalés varient en fonction du navigateur sélectionné pour l'exécution du test. Les tests exécutés sur Chrome/Edge signalent l'erreur suivante :
+
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+**Erreur Firefox :**
+
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+### Configuration requise pour les tests ICMP exécutés sur l'emplacement privé {#requirements-for-icmp-tests-running-on-private-location}
+
+Les tests ICMP utilisent la commande `ping` pour évaluer les routes réseau et la connectivité des hosts. La commande `ping` ouvre des sockets bruts pour envoyer des paquets ICMP et nécessite la capacité `NET_RAW`. Si le contexte de sécurité de votre conteneur supprime cette capacité, les tests ICMP ne fonctionnent pas correctement sur l'emplacement privé.
+
+De plus, `ping` nécessite des privilèges élevés pour créer le socket brut. L'emplacement privé ne peut pas exécuter de tests ICMP si l'emplacement privé est configuré avec un contexte de sécurité qui restreint les privilèges élevés.
+
+### `TIMEOUT` erreurs dans les tests d'API depuis des emplacements privés {#timeout-errors-in-api-tests-from-private-locations}
+
+Les erreurs `TIMEOUT` indiquent généralement que votre emplacement privé ne peut pas atteindre l'endpoint du test. Vérifiez que l'emplacement privé est installé sur le même réseau que votre endpoint cible. Testez différents endpoints pour déterminer si le problème est spécifique à un endpoint ou s'il concerne l'ensemble du réseau.
+
+{{< img src="synthetics/timeout.png" alt="Délai d'attente dépassé pour le test d'API sur l'emplacement privé" style="width:70%;" >}}
+
+### Problème Chrome 149 sur les emplacements privés {#chrome-149-issue-on-private-locations}
+
+La version 149 de Chrome a introduit une validation plus stricte des en-têtes de requête, ce qui peut entraîner l'échec des requêtes de sous-ressources avec `net::ERR_INVALID_ARGUMENT`. Les versions précédentes de Chrome étaient plus permissives.
+
+**Solution** : mettez à niveau votre emplacement privé vers la [version 1.69.1 ou ultérieure][106] pour résoudre ce problème.
 
 [101]: /fr/synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /fr/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /fr/help/
+[105]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[106]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-### Les conteneurs d'emplacement privé font parfois l'objet d'une élimination `OOM`
+### Résolution des problèmes de transfert IPv4 pour les conteneurs d'emplacement privé {#resolving-ipv4-forwarding-issues-for-private-location-containers}
 
-Les éliminations `Out Of Memory` des conteneurs d'emplacement privé sont généralement causées par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources mémoire][101].
+Les emplacements privés nécessitent un accès aux [endpoints d'ingestion de Synthetic Monitoring de Datadog][103] pour extraire les configurations de test et envoyer les résultats de test. Si le transfert IPv4 est désactivé sur un serveur Linux, l'emplacement privé peut perdre l'accès à Internet et, par conséquent, ne plus pouvoir se connecter aux endpoints d'ingestion. Docker tente généralement d'activer le transfert IP au démarrage d'un conteneur, mais si celui-ci reste désactivé, le conteneur ne peut pas accéder à des services externes tels que les endpoints d'ingestion. 
 
-### L'erreur `invalid mount config for type "bind": source path must be a directory` s'affiche lors d'une tentative d'exécution d'un emplacement privé
+Si tel est le cas, l'emplacement privé signale ce qui suit :
 
-Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][102] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+et
+
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+**Solution** : Assurez-vous que `net.ipv4.ip_forward` est activé sur le host. 
+
+### Exigences relatives au système de fichiers racine en lecture seule pour les conteneurs d'emplacement privé {#read-only-root-file-system-requirements-for-private-location-containers}
+
+Les conteneurs d'emplacement privé ont besoin d'un accès en lecture-écriture à des dossiers et fichiers spécifiques pour un fonctionnement correct. Les systèmes de fichiers racine en lecture seule empêchent le démarrage en raison d'opérations critiques nécessitant un accès en écriture.
+
+Au démarrage, les conteneurs attribuent des capacités Linux aux binaires dont les métadonnées ont été supprimées pendant le processus de build pour des raisons de sécurité. Cela restreint l'exécution à l'utilisateur `root` par défaut. Comme les emplacements privés s'exécutent en tant qu'utilisateur `dog`, les conteneurs doivent réappliquer les autorisations pour une exécution correcte. Les systèmes de fichiers en lecture seule empêchent ces mises à jour d'autorisations, provoquant des échecs de démarrage.
+
+### Conteneurs d'emplacement privé arrêtés de force à la suite d'erreurs `OOM` {#private-location-containers-killed-by-oom-errors}
+
+Les conteneurs d'emplacement privé arrêtés de force à la suite d'erreurs `Out Of Memory` indiquent un épuisement des ressources sur les workers. Assurez-vous que vos conteneurs d'emplacement privé disposent de [ressources mémoire suffisantes][101].
+
+### `Invalid mount config` erreur lors de l'exécution d'emplacements privés {#invalid-mount-config-error-when-running-private-locations}
+
+Cette erreur se produit lors de la tentative de montage d'un seul fichier dans des conteneurs basés sur Windows, ce qui n'est pas pris en charge. **Solution** : Assurez-vous que la source du montage de liaison est un répertoire local. Pour plus d'informations, consultez la documentation [Docker sur le montage de volumes][102].
 
 [101]: /fr/synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/fr/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-### Redémarrer le service du worker dʼemplacament privé Synthetics sans redémarrage
+### Redémarrage du service Synthetics Private Location Worker {#restarting-synthetics-private-location-worker-service}
 
-Tout d'abord, assurez-vous que vous avez installé lʼemplacement privé avec une configuration spécifiée au moment de l'installation. Vous pouvez utiliser une interface graphique ou Windows PowerShell pour redémarrer le service.
+Assurez-vous que l'emplacement privé a été installé avec une configuration spécifiée lors de l'installation. Redémarrez le service à l'aide de la GUI ou de PowerShell.
 
-#### Interface graphique
+#### Méthode GUI {#gui-method}
 
-1. Ouvrez le programme d'installation MSI et recherchez **Services** dans le menu **Start**.
-1. Lancez **Services** sur n'importe quel compte utilisateur.
-1. Cliquez sur **Services (Local)** et trouvez le site service appelé `Datadog Synthetics Private Location`.
-1. Cliquez avec le bouton droit de la souris sur le service trouvé à l'étape 2 et choisissez **Restart**.
+1. Recherchez {{< ui >}}Services{{< /ui >}} dans le menu {{< ui >}}Start{{< /ui >}}.
+1. Ouvrez {{< ui >}}Services{{< /ui >}} (fonctionne sur n'importe quel compte utilisateur).
+1. Trouvez `Datadog Synthetics Private Location` dans {{< ui >}}Services (Local){{< /ui >}}.
+1. Faites un clic droit sur le service et sélectionnez {{< ui >}}Restart{{< /ui >}}.
 
-Le worker dʼemplacement privé Synthetics s'exécute désormais dans le compte **Local service**. Pour le confirmer, lancez le gestionnaire des tâches et recherchez le processus `synthetics-pl-worker` dans lʼonglet **Details**.
+Le worker s'exécute sous le compte {{< ui >}}Local Service{{< /ui >}}. Vérifiez-le en recherchant le processus `synthetics-pl-worker` dans l'onglet {{< ui >}}Details{{< /ui >}} de Task Manager.
 
-#### PowerShell
+#### Méthode PowerShell {#powershell-method}
 
-1. Lancez **Windows PowerShell** sur n'importe quel compte Windows qui a lʼautorisation d'exécuter des scripts PowerShell.
-1. Exécutez la commande suivante : `Restart-Service -Name “Datadog Synthetics Private Location”`.
+1. Ouvrez {{< ui >}}Windows PowerShell{{< /ui >}} avec des droits d'exécution de script.
+1. Exécutez : `Restart-Service -Name "Datadog Synthetics Private Location"`
 
-### Maintenir l'activité du Worker d'emplacement privé Synthetic
+### Maintien de la disponibilité de Synthetics Private Location Worker {#maintaining-synthetics-private-location-worker-uptime}
 
-Tout d'abord, assurez-vous que vous êtes connecté à l'ordinateur sur lequel le service Windows Emplacement privé Synthetics est installé et que vous disposez des autorisations nécessaires pour créer des tâches planifiées sur cet ordinateur.
+**Prérequis** : Connectez-vous à la machine avec les autorisations nécessaires pour créer des tâches planifiées.
 
-Si le worker dʼemplacement privé Synthetics tombe en panne, ajoutez une tâche planifiée dans Windows qui exécute un script PowerShell pour redémarrer l'application si elle cesse de fonctionner. Cela permet de s'assurer qu'un emplacement privé est redémarré après une panne. 
+**Récupération après plantage** : Créez une tâche planifiée Windows qui exécute un script PowerShell pour redémarrer le worker s'il cesse de fonctionner. Cela garantit une récupération automatique après les plantages.
 
-Si vous avez fourni un fichier de configuration lors de l'installation de l'application, un service Windows appelé `Datadog Synthetics Private Location` démarre automatiquement après l'installation. Pour le vérifier, assurez-vous que vous pouvez voir le service fonctionner dans l'outil **Services**. Ce service Windows redémarre automatiquement lʼemplacement privé.
+**Démarrage automatique** : Si vous avez fourni un fichier de configuration lors de l'installation, le service Windows `Datadog Synthetics Private Location` démarre automatiquement. Vérifiez que le service est en cours d'exécution dans l'outil {{< ui >}}Services{{< /ui >}} — ce service gère les redémarrages automatiques.
+
+### Erreurs de certificat auto-signé {#self-signed-certificate-errors}
+
+Les emplacements privés Windows peuvent afficher cette erreur immédiatement après le démarrage :
+
+```
+Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
+Error: self-signed certificate in certificate chain
+    at Function.QueueError.fromHTTPError (dist/build/index.js:272629:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:272186:48)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Worker.fetchMessagesLongPolling (dist/build/index.js:26244:24)
+    at Worker.doOneLoop (dist/build/index.js:25810:45)
+```
+
+**Symptômes** :
+- Les messages d'erreur se répètent continuellement dans les journaux.
+- Les chaînes de certificats semblent modifiées lors de la navigation depuis le host Windows (par exemple, les sites Datadog affichent des intermédiaires auto-signés au lieu d'autorités de certification de confiance).
+
+**Cause** : Cette erreur se produit lorsque votre trafic réseau fait l'objet d'une **inspection approfondie des paquets (DPI)** ou d'une inspection TLS. Le DPI intercepte, déchiffre et rechiffre le trafic SSL/TLS. Au cours de ce processus, l'emplacement privé reçoit une chaîne de certificats qui inclut un certificat auto-signé.  
+
+**Solution** :
+
+- Téléversez vos [certificats racine][101] auto-signés personnalisés vers votre emplacement privé.
+- Vérifiez que les journaux de votre emplacement privé Windows ne signalent plus l'erreur.
+
+```
+"Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
+Error: self-signed certificate in certificate chain"
+```
+
+Sans contournement de l'inspection TLS, l'emplacement privé Windows ne peut pas récupérer les messages de test et reste dans un état d'erreur.
+
+[101]: /fr/synthetics/platform/private_locations?tab=windowsservice#root-certificates
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### On me demande un mot de passe pour sudo / On me demande un mot de passe pour l'utilisateur dog
+### Invites de mot de passe pour l'utilisateur sudo ou dog {#password-prompts-for-sudo-or-dog-user}
 
-L'utilisateur de l'emplacement privé (`dog`) a besoin d'un accès `sudo` pour diverses raisons. Souvent, cet utilisateur se voit accorder certaines autorisations pour permettre un accès `sudo` lors du lancement de l'emplacement privé sur votre conteneur. Vérifiez si une politique en place restreint l'accès `sudo` de l'utilisateur `dog` ou empêche le conteneur de se lancer en tant qu'utilisateur `dog` (UID 501).
+L'utilisateur de l'emplacement privé (`dog`) nécessite un accès `sudo` pour un fonctionnement correct. Cet utilisateur reçoit généralement des autorisations lors du lancement du conteneur. Vérifiez qu'aucune politique ne restreint l'accès `sudo` de l'utilisateur `dog` ou n'empêche le conteneur de s'exécuter en tant qu'utilisateur `dog` (UID 501).
 
-En outre, à partir de la version `v1.27` de l'emplacement privé, Datadog tire parti de l'appel système `clone3`. Dans certaines anciennes versions des environnements d'exécution de conteneurs (comme les versions <20.10.10 de Docker), `clone3` n'est pas pris en charge par la politique `seccomp` par défaut. Vérifiez que la politique `seccomp` de votre environnement d'exécution de conteneur inclut `clone3`. Pour ce faire, vous pouvez mettre à jour la version du runtime utilisé, ajouter manuellement `clone3` à votre politique `seccomp`, ou définir le profil seccomp sur `unconfined`. Pour en savoir plus, consultez [la documentation de Docker dédiée à `seccomp`][13].
+De plus, les versions de Private Location `>v1.27` dépendent de l'appel système `clone3`. Les anciens environnements d'exécution de conteneurs (versions Docker <20.10.10) peuvent ne pas prendre en charge `clone3` dans leur politique `seccomp` par défaut. 
 
-## Pour aller plus loin
+**Solution** : Assurez-vous que la politique `seccomp` de votre environnement d'exécution inclut `clone3` en mettant à jour la version de cet environnement, en ajoutant manuellement `clone3` à votre politique ou en utilisant une politique seccomp `unconfined`. Consultez la [documentation `seccomp` de Docker][13] pour plus de détails.
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -230,5 +391,9 @@ En outre, à partir de la version `v1.27` de l'emplacement privé, Datadog tire 
 [9]: /fr/synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /fr/synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /fr/synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /fr/synthetics/api_tests/http_tests/?tab=requestoptions#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
+[14]: /fr/synthetics/guide/step-duration
+[16]: /fr/synthetics/network_path_tests/#agent-configuration
+[17]: /fr/network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers
+[18]: /fr/synthetics/guide/identify_synthetics_bots/
