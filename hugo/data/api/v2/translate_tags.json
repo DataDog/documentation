@@ -437,7 +437,7 @@
   },
   "rum-insights": {
     "name": "RUM Insights",
-    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM &\nSession Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information."
   },
   "rum-managed-archives": {
     "name": "RUM Managed Archives",
