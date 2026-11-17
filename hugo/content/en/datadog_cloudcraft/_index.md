@@ -136,7 +136,7 @@ To get started using Cloudcraft, use the following steps:
 
 **Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags to display it.
 
-{{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/getting_started_5.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
 <div class="alert alert-tip">Provider account names in the dropdowns come from their respective integration tiles:
 <ul>
@@ -151,9 +151,9 @@ To get started using Cloudcraft, use the following steps:
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
 
-Enable the {{< ui >}}Show All Controls{{< /ui >}} toggle to display the available {{< ui >}}Group By{{< /ui >}} options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the {{< ui >}}\+ Tags{{< /ui >}} menu.
+Click {{< ui >}}Full Map Controls{{< /ui >}} at the bottom of the diagram to display the available {{< ui >}}Group by{{< /ui >}} options. Click the eye icon on a grouping, such as VPC or Region, to show or hide it, including the Network ACL (Network Access Control List), Security Group, and Subnet layers. To group by a tag, click {{< ui >}}\+ Tags{{< /ui >}}.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl_2.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl_3.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
 
 #### Group by tags
 
@@ -161,7 +161,7 @@ You can group resources by AWS and Azure tags, such as app, service, team, or co
 
 **Note**: Grouping by tags is supported for AWS tags, Azure tags, GCP labels, OCI tags, and vSphere tags. Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags_2.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags_3.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
 
 ### Saved views 
 
@@ -170,13 +170,13 @@ Saved views allow you to save specific filters on your diagram that are most imp
 To apply a saved view to your diagram:
 
 - Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resources{{< /ui >}} > {{< ui >}}Cloudcraft{{< /ui >}}][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click {{< ui >}}\+Save as new view{{< /ui >}}.
-- Select the desired saved view from the menu at the top of the diagram view. The diagram automatically updates to reflect the chosen view.
+- Click {{< ui >}}Views{{< /ui >}} in the top left of the diagram view and select the desired saved view. The diagram automatically updates to reflect the chosen view.
 
-{{< img src="datadog_cloudcraft/saved_views.png" alt="Screenshot of the saved views" style="width:50%;" >}}
+{{< img src="datadog_cloudcraft/saved_views_2.png" alt="Screenshot of the saved views" style="width:50%;" >}}
 
 ### Explore resources
 
-Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
+Use the zoom feature to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Clicking on a resource opens a mini panel with basic information. In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
 {{< img src="datadog_cloudcraft/cloudcraft_with_security_3.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
@@ -184,13 +184,13 @@ Use the zoom and hover features to pinpoint the most critical resources. As you 
 
 Toggle the projection from 3D (default) to 2D to visualize your resources from a top-down view.
 
-{{< img src="datadog_cloudcraft/cloudcraft_2D_3.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_2D_4.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
 
 ### Filtering and search
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
 
-Click the {{< ui >}}\+ Filter{{< /ui >}} menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the {{< ui >}}More Filters{{< /ui >}} option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
+In {{< ui >}}Full Map Controls{{< /ui >}}, click the {{< ui >}}\+ Filter{{< /ui >}} menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the {{< ui >}}More Filters{{< /ui >}} option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
 ### Search and highlight
 

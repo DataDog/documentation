@@ -33,11 +33,11 @@ This view is ideal for mapping attack surfaces during penetration tests or secur
 
 ## Investigate misconfigurations and identity risks
 
-By default, the security overlay shows Critical, High, and Medium severity misconfigurations or identity risks, which you can filter in the legend.
+By default, the security overlay shows Critical, High, and Medium severity misconfigurations or identity risks, which you can filter in the legend at the bottom right of the diagram. Use the {{< ui >}}Misconfigurations{{< /ui >}}, {{< ui >}}Vulnerabilities{{< /ui >}}, {{< ui >}}Identity Risks{{< /ui >}}, and {{< ui >}}Sensitive Data{{< /ui >}} buttons at the top of the diagram to switch between finding types.
 
-You can click on any resource that has findings to open a side panel with more details, allowing deeper investigation without leaving the diagram. Click {{< ui >}}Investigate{{< /ui >}} to get more context about the finding and learn how to remediate it.
+You can click on any resource that has findings to open a mini panel, then click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with more details, allowing deeper investigation without leaving the diagram. Click {{< ui >}}Investigate{{< /ui >}} to get more context about the finding and learn how to remediate it.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations_3.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied in the collapsible legend in the bottom of the screen, and highlighting the Investigate button" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations_4.png" alt="Security overlay in Cloudcraft with Misconfigurations selected and a resource side panel open, highlighting the Security overlay button and the Investigate button" style="width:100%;" >}}
 
 ## Investigate sensitive data
 
