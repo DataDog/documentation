@@ -101,7 +101,7 @@ Enter a prefix that you want to apply to all key objects.
 
 #### Archive Search
 
-To search these logs with [Archive Search][21], turn on {{< ui >}}Enable for Archive Search{{< /ui >}} and select the service account Datadog uses to [read the bucket][22]. Datadog creates the Log Archive after you deploy the pipeline.
+Toggle on {{< ui >}}Enable for Archive Search{{< /ui >}} to search stored logs with [Archive Search][21]. Then select the service account and project that Datadog uses to [read the bucket][22]. Datadog creates the Log Archive after you deploy the pipeline.
 
 **Note**: {{< ui >}}Enable for Archive Search{{< /ui >}} isn't available for prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
 
