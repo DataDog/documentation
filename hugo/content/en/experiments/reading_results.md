@@ -86,23 +86,21 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 ### Statistical details
 
-Click the calculator icon ({{< ui >}}Statistical details{{< /ui >}}) on the metric scorecard to view the statistics behind each relative lift estimate. The columns depend on the experiment's [analysis method][2]. When [CUPED][15] variance reduction is on, the statistics use the CUPED-adjusted results. Hover over a column heading for a description of the statistic.
+Beyond the group means and lift estimates, additional statistics can help support decision making. The {{< ui >}}Statistical details{{< /ui >}} tab (calculator icon) on the metric scorecard includes statistics for the experiment's [analysis method][2]. When [CUPED][15] is on, the statistics use the CUPED-adjusted results. See [Lift and Interval Calculations][12] and [Expected Regret and EVSI][13] for the full methodology.
 
-For fixed-sample, sequential, and sequential hybrid analysis, the view displays:
+For fixed-sample, sequential, and sequential hybrid analysis, the tab includes:
 
-- **Standard Error**: The standard error of the relative lift estimate, in percentage points. A smaller standard error means a more precise estimate.
-- **p-value**: For fixed-sample analysis, the probability of observing a lift at least this large in either direction if the treatment had no effect. For sequential analysis, and for sequential hybrid analysis before the planned end, a p-value that remains valid when you check results repeatedly. A sequential p-value is often 1 early in an experiment, which means there isn't enough evidence yet. For how sequential hybrid analysis adjusts its p-value, see [Sequential hybrid analysis][14]. Values between 0.999 and 1 are shown as `>0.999`.
-- **z-score**: The number of standard errors between the lift estimate and zero. The sign shows whether the metric increased or decreased, not whether the change is desirable.
+- **Standard Error**: The standard error of the relative lift estimate, in percentage points. A smaller value means a more precise estimate.
+- **p-value**: How unlikely the observed lift would be if the treatment had no effect. Sequential p-values remain valid when you check results repeatedly, so they are often 1 early in an experiment.
+- **z-score**: The number of standard errors between the lift estimate and zero. The sign shows the direction of the change, not whether it is desirable.
 
-For Bayesian analysis, the view displays:
+For Bayesian analysis, the tab includes:
 
 - **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
-- **Min. Expected Regret**: The lift you expect to give up if you choose the better-looking variant with the current results. Datadog shows it as a percentage of the control value. A value close to zero means there is little downside to deciding with the current data.
-- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI estimates how much the expected regret is likely to drop if the experiment runs for another seven days at its recent traffic. The column heading's tooltip shows the assumed traffic.
+- **Min. Expected Regret**: The lift you expect to give up by choosing the leading variant, as a percentage of the control value.
+- **EVSI**: The expected value of sample information. EVSI estimates how much the expected regret drops with seven more days of data at recent traffic levels, as a percentage of the control value.
 
-A dash (—) means that the statistic isn't available for that result, for example, because the result has a diagnostic warning. For EVSI, hover over the dash to see why it is unavailable.
-
-For the formulas behind these statistics, see [Lift and Interval Calculations][12] and [Expected Regret and EVSI][13].
+A dash (—) means that a statistic isn't available. For EVSI, hover over the dash to see why.
 
 ## Holdout results
 
@@ -151,5 +149,4 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [11]: /experiments/holdouts/#interpret-results
 [12]: /experiments/statistics/lift_and_interval_calculations/
 [13]: /experiments/statistics/expected_regret_and_evsi/
-[14]: /experiments/statistics/lift_and_interval_calculations/#sequential-hybrid-analysis
 [15]: /experiments/statistics/cuped/
