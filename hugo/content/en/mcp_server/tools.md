@@ -842,7 +842,7 @@ Gets the configuration and metadata that Datadog records for a single cloud reso
 - Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
 - What tags are set on this resource, and is it owned by a team?
 
-## Code execution
+## Code Execution
 
 Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs. Investigate findings, explore data, or modify supported resources in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
