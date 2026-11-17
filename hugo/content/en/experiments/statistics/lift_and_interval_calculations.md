@@ -307,7 +307,7 @@ The posterior also gives the probability of a positive effect:
 
 $$P(Θ>0∣\text\"data\")=Φ(m\_{\text\"post\"}/√{v\_{\text\"post\"}})$$
 
-A positive effect means the metric increased. Whether that is desirable depends on the metric: an increase in conversion and an increase in latency have different business interpretations. The **Prob. Beats Control** statistic on the experiment results page accounts for this. It reports $P(Θ>0∣\text\"data\")$ for metrics that should increase and $P(Θ<0∣\text\"data\")$ for metrics that should decrease.
+A positive effect means the metric increased. Whether that is desirable depends on the metric: an increase in conversion and an increase in latency have different business interpretations. The **Prob. Beats Control** statistic on the experiment results page accounts for this. The statistic reports $P(Θ>0∣\text\"data\")$ for metrics that should increase and $P(Θ<0∣\text\"data\")$ for metrics that should decrease.
 
 The posterior also gives the minimum expected regret and the expected value of sample information (EVSI). For these calculations, see [Expected Regret and EVSI][10].
 

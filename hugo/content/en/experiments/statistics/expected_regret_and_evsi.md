@@ -80,7 +80,8 @@ Datadog forecasts one more week of data from the experiment's recent traffic:
 
 1. Datadog counts the exposures, across all variants, in the last seven complete days of traffic. The first day of the experiment and the most recent day are excluded because they might be partial days. Call this count $M$.
 1. Datadog assumes that the next seven days have the same number of exposures, $M$.
-1. Datadog treats those new subjects as an independent estimate of the same lift. Its standard error is the current standard error scaled to the new sample size:
+
+Datadog treats the data from those new subjects as an independent estimate of the same lift. The standard error of that estimate is the current standard error scaled to the new sample size:
 
 $$s\_f=√{v\_θ}√{N/M}$$
 
@@ -147,7 +148,7 @@ Shipping the treatment has the lower expected regret, so the minimum expected re
 
 Suppose the experiment has 20,000 exposures so far, and 10,000 of them occurred in the last seven complete days. The future standard error is $s\_f≈0.0433×√{20000/10000}≈0.0613$, which gives $ω≈0.0154$ and an EVSI of about **0.104%**.
 
-Another week of data is expected to reduce the minimum expected regret from about 0.625% to about 0.521%. This recovers about one-sixth of the current regret. Most of the remaining uncertainty is unlikely to resolve in one week at the current traffic.
+Another week of data is expected to reduce the minimum expected regret from about 0.625% to about 0.521%. The extra week recovers about one-sixth of the current regret. Most of the remaining uncertainty is unlikely to resolve in one week at the current traffic.
 
 ## Further reading
 

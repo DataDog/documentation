@@ -86,7 +86,7 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 ### Statistical details
 
-Click the calculator icon ({{< ui >}}Statistical details{{< /ui >}}) above the metric scorecard to view the statistics behind each relative lift estimate. The columns depend on the experiment's [analysis method][2]. When CUPED is on, the statistics use the CUPED-adjusted results. Hover over a column heading for a description of the statistic.
+Click the calculator icon ({{< ui >}}Statistical details{{< /ui >}}) on the metric scorecard to view the statistics behind each relative lift estimate. The columns depend on the experiment's [analysis method][2]. When [CUPED][15] variance reduction is on, the statistics use the CUPED-adjusted results. Hover over a column heading for a description of the statistic.
 
 For fixed-sample, sequential, and sequential hybrid analysis, the view displays:
 
@@ -97,8 +97,8 @@ For fixed-sample, sequential, and sequential hybrid analysis, the view displays:
 For Bayesian analysis, the view displays:
 
 - **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
-- **Min. Expected Regret**: The lift you expect to give up if you choose the better-looking variant based on the current results. It is shown as a percentage of the control value. A value close to zero means there is little downside to deciding with the current data.
-- **EVSI**: The expected value of sample information. This is how much the expected regret is likely to drop if the experiment runs for another seven days at its recent traffic. It is shown as a percentage of the control value, and the column heading's tooltip shows the assumed traffic.
+- **Min. Expected Regret**: The lift you expect to give up if you choose the better-looking variant with the current results. Datadog shows it as a percentage of the control value. A value close to zero means there is little downside to deciding with the current data.
+- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI estimates how much the expected regret is likely to drop if the experiment runs for another seven days at its recent traffic. The column heading's tooltip shows the assumed traffic.
 
 A dash (—) means that the statistic isn't available for that result, for example, because the result has a diagnostic warning. For EVSI, hover over the dash to see why it is unavailable.
 
@@ -152,3 +152,4 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [12]: /experiments/statistics/lift_and_interval_calculations/
 [13]: /experiments/statistics/expected_regret_and_evsi/
 [14]: /experiments/statistics/lift_and_interval_calculations/#sequential-hybrid-analysis
+[15]: /experiments/statistics/cuped/
