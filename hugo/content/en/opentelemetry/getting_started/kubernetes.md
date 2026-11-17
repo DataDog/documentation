@@ -17,7 +17,7 @@ further_reading:
 
 Monitor your Kubernetes applications and infrastructure in Datadog with OpenTelemetry. This quickstart installs a Collector, adds instrumentation to your application, and shows you where to find your services, traces, and logs in Datadog.
 
-Use DDOT or upstream OpenTelemetry components. The installation steps are the same; select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
+Use DDOT components, which Datadog recommends, or upstream OpenTelemetry components. The installation steps are the same; select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
 
 This quickstart runs on Kubernetes, and so does the DDOT Collector. On other platforms, use an upstream OpenTelemetry Collector or the Datadog Agent. See [Send OpenTelemetry Data to Datadog][17].
 
@@ -50,13 +50,12 @@ Set these environment variables in the terminal you use for the rest of this qui
 export DD_API_KEY="<DATADOG_API_KEY>"
 export DD_SITE="<DATADOG_SITE>"
 export DD_INSTALL_FLOW=ddot
-export DD_AGENT_ENABLED=false
 export K8S_CLUSTER_TYPE="<CLUSTER_TYPE>"
 export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 ```
 
-**Optional:** Some Datadog features need the Datadog Agent. For which ones, see [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To install the Agent too, set `DD_AGENT_ENABLED=true`. The installer adds the Datadog Operator and the Agent in the `datadog` namespace.
+The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends the Agent for features such as Live Debugger and Dynamic Instrumentation. Core traces, metrics, and logs don't need it. For which features need the Agent, see [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Agent, also set `DD_AGENT_ENABLED=false`.
 
 {{% /tab %}}
 {{% tab "Upstream" %}}
@@ -102,7 +101,7 @@ Replace the placeholders:
 
 ## 4. Instrument your application
 
-On the DDOT path, if your application's code already sets up an SDK, check [DDOT SDK limitations][28] before you add the annotation.
+On the DDOT path, if your application already includes an SDK, see [Adapt an existing deployment][28] before you add the annotation.
 
 1. Add the language annotation to your Deployment's pod template. Replace `<DEPLOYMENT_NAME>` and `<NAMESPACE>` with your Deployment's name and namespace, and `<LANGUAGE>` with `java`, `python`, `nodejs`, or `dotnet`:
 
@@ -111,7 +110,7 @@ On the DDOT path, if your application's code already sets up an SDK, check [DDOT
    kubectl rollout status deployment/<DEPLOYMENT_NAME> -n <NAMESPACE> --timeout=5m
    ```
 
-   The patch restarts the pods with instrumentation: the DDOT SDK on the DDOT path, or the OpenTelemetry SDK on the Upstream path. The second command waits for the restart to finish. The SDK sends data to the `daemon` Collector, so you don't need to set an endpoint.
+   The patch restarts the pods with instrumentation: the DDOT SDK on the DDOT path, or the upstream OpenTelemetry SDK on the Upstream path. The second command waits for the restart to finish. The SDK sends data to the `daemon` Collector, so you don't need to set an endpoint.
 
 2. Send a few requests to your application so it produces traces.
 
@@ -198,5 +197,5 @@ The installer applies your file on top of its own values files. For what you can
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
 [24]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
 [25]: /opentelemetry/#choose-a-setup
-[28]: /opentelemetry/instrument/dd_sdks/#limitations
+[28]: /opentelemetry/instrument/ddot_sdks/#adapt-an-existing-deployment
 
