@@ -35810,6 +35810,8 @@ components:
           description: Name of the Custom Costs file.
           example: "my_file.json"
           type: string
+        preview_unavailable_reason:
+          $ref: "#/components/schemas/CustomCostsFilePreviewUnavailableReason"
         provider_names:
           description: Providers contained in the Custom Costs file.
           items:
@@ -35841,6 +35843,15 @@ components:
           description: Type of the Custom Costs file metadata.
           type: string
       type: object
+    CustomCostsFilePreviewUnavailableReason:
+      description: >-
+        Reason the content of the Custom Costs file is not returned. Only set when `content` is omitted.
+      enum:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      example: CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
+      type: string
+      x-enum-varnames:
+        - CHARGE_PERIOD_OUTSIDE_RETENTION_WINDOW
     CustomCostsFileUpdateAttributes:
       description: Attributes of a Custom Costs file that can be updated.
       properties:
@@ -35915,11 +35926,12 @@ components:
       description: Metadata of the user that has uploaded the Custom Costs file.
       properties:
         email:
-          description: The name of the Custom Costs file.
+          description: >-
+            Handle of the user. This is usually the user's email address, but can be another identifier (for example, a UUID for a service account).
           example: "email.test@datadohq.com"
           type: string
         icon:
-          description: The name of the Custom Costs file.
+          description: Icon of the user.
           example: "icon.png"
           type: string
         name:
@@ -78601,6 +78613,13 @@ components:
     LLMObsAnnotationItem:
       description: A single annotation on an interaction.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -78646,6 +78665,13 @@ components:
     LLMObsAnnotationItemResponse:
       description: A single annotation on an interaction, as returned by the API.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+          example: "Alex Contractor"
+          type: string
         created_at:
           description: Timestamp when the annotation was created.
           example: "2024-01-15T10:30:00Z"
@@ -85531,6 +85557,18 @@ components:
         A single annotation to create or update. The annotation is matched by
         `interaction_id` and the requesting user's identity.
       properties:
+        annotator:
+          description: |-
+            Caller-supplied name or identifier for the external person or automated system that produced the labels.
+            The value is an opaque string with no required format. Use a stable, recognizable value for the same
+            producer across annotations.
+            The value is stored and returned as provided. It is not a Datadog user ID or login, and it is not
+            resolved against Datadog users.
+            Omit this field or set it to `null` to preserve existing attribution. Set it to an empty string to clear
+            attribution.
+          example: "Alex Contractor"
+          nullable: true
+          type: string
         interaction_id:
           description: ID of the interaction to annotate.
           example: "00000000-0000-0000-0000-000000000001"
@@ -127564,6 +127602,41 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringBatchMigrationPublishError:
+      description: The reason why the resource could not be published.
+      properties:
+        code:
+          description: The error code returned on rule creation.
+          example: InvalidArgument
+          type: string
+        details:
+          description: The rule validation errors returned on rule creation.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishErrorDetail"
+          type: array
+        message:
+          description: The error message.
+          example: Invalid rule configuration
+          type: string
+      required:
+        - message
+      type: object
+    SecurityMonitoringBatchMigrationPublishErrorDetail:
+      description: A rule validation error.
+      properties:
+        code:
+          description: The error code.
+          example: AlreadyExists
+          type: string
+        message:
+          description: The error message.
+          example: Rule name must be unique
+          type: string
+        target:
+          description: The rule field the error applies to.
+          example: name
+          type: string
+      type: object
     SecurityMonitoringBatchMigrationPublishRequest:
       description: Request to publish the resources of a batch migration.
       properties:
@@ -127607,9 +127680,7 @@ components:
       description: Attributes of the publication outcome of a batch migration resource.
       properties:
         error:
-          description: The reason why the resource could not be published.
-          example: failed to create rule
-          type: string
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishError"
         ruleId:
           description: The ID of the created Cloud SIEM detection rule.
           example: abc-def-ghi
@@ -175805,13 +175876,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175884,13 +175955,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175920,13 +175991,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -175981,13 +176052,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -210409,6 +210480,8 @@ paths:
       description: |-
         Create or update annotations on interactions in a queue. Each annotation is matched
         by `interaction_id` and the requesting user's identity.
+        Use the optional `annotator` field to name an external person or automated system that produced the labels
+        without changing the authenticated creator, modifier, permissions, or per-user matching behavior.
         Results and errors in the response are linked to request items by `interaction_id`.
         Errors for individual items are returned in the `errors` field without blocking the rest of the batch.
         Requests where every item is denied by queue access rules return `403`.
@@ -210424,7 +210497,8 @@ paths:
                   data:
                     attributes:
                       annotations:
-                        - interaction_id: 00000000-0000-0000-0000-000000000001
+                        - annotator: "Alex Contractor"
+                          interaction_id: 00000000-0000-0000-0000-000000000001
                           label_values:
                             - label_schema_id: abc-123
                               value: good
@@ -210445,7 +210519,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -210462,7 +210537,8 @@ paths:
                     data:
                       attributes:
                         annotations:
-                          - created_at: "2024-01-15T10:30:00Z"
+                          - annotator: "Alex Contractor"
+                            created_at: "2024-01-15T10:30:00Z"
                             created_by: 00000000-0000-0000-0000-000000000002
                             id: 00000000-0000-0000-0000-000000000000
                             interaction_id: 00000000-0000-0000-0000-000000000001
@@ -220790,7 +220866,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          description: |-
+            Bad Request
+
+            If the tag configuration is too large to be stored, the error message is
+            `Tag configuration is too large to be stored. The limit applies to the total encoded size of the tags list, not to a fixed number of tags. Retrying the same request will fail. Remove tags that are not needed for querying, or use shorter tag keys, then resubmit.`
         "403":
           content:
             application/json:
@@ -220869,7 +220949,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          description: |-
+            Bad Request
+
+            If the tag configuration is too large to be stored, the error message is
+            `Tag configuration is too large to be stored. The limit applies to the total encoded size of the tags list, not to a fixed number of tags. Retrying the same request will fail. Remove tags that are not needed for querying, or use shorter tag keys, then resubmit.`
         "403":
           content:
             application/json:
@@ -246635,6 +246719,12 @@ paths:
     get:
       description: |-
         Get the list of users assigned seats for a product code.
+
+        This endpoint requires the `user_access_read` (User Access Read) permission
+        in addition to at least one of `billing_read`, `incident_read`, or `on_call_read`.
+        Scoped application keys, personal access tokens, and service access tokens
+        must include the `user_access_read` scope. Credentials without this scope
+        receive a `403 Forbidden` response.
       operationId: GetSeatsUsers
       parameters:
         - description: The product code for which to retrieve seat users.
@@ -246675,6 +246765,8 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "422":
           content:
             application/json:
@@ -246683,6 +246775,11 @@ paths:
           description: Unprocessable Entity
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_read
       summary: Get users with seats
       tags:
         - Seats
@@ -253581,6 +253678,17 @@ paths:
                           ruleId: abc-def-ghi
                           status: published
                         id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationPublishedResource
+                      - attributes:
+                          error:
+                            code: InvalidArgument
+                            details:
+                              - code: AlreadyExists
+                                message: Rule name must be unique
+                                target: name
+                            message: Invalid rule configuration
+                          status: failed
+                        id: 0b9d3f3e-2a4c-4e8b-9f1a-6d2c7e5b8a41
                         type: batchMigrationPublishedResource
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResponse"
@@ -275478,9 +275586,12 @@ paths:
 
         **`user_handle`**
 
-        - **Value:** The handle of a user, for example `jane@example.com`, or `"*"` for the default quota applied to
-          users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the
-          [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+        - **Value:** One of the following:
+          - A user's handle, such as `jane@example.com`. User handles are returned in the
+            `data[].attributes.handle` field by the
+            [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+          - `"*"`, the default quota applied to users without a specific quota.
+          - `"*agents*"`, the quota shared by all autonomous agents.
         - **Validation:** A specific handle must identify an existing user in the caller's organization when
           `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's
           organization or in at least one targeted descendant organization. The quota is then applied only to the
@@ -275494,6 +275605,12 @@ paths:
         - **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so
           `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's
           organization only.
+
+        **`team_id`** (private preview)
+
+        - **Value:** The ID of a team. Team IDs are returned in the `data[].id` field by the
+          [Teams API](https://docs.datadoghq.com/api/latest/teams/get-all-teams/).
+        - **Availability:** Quotas on `team_id` are in private preview. Contact your Datadog account team to request access.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -280633,9 +280750,7 @@ tags:
       scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
       `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
       highlighted but not blocked). Each rule reports a compliance `score` derived from how
-      much recent telemetry adheres to the rule. **Note:** RUM supports only surfacing rules,
-      not blocking rules.
-
+      much recent telemetry adheres to the rule. RUM supports only `surfacing` rules.
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams

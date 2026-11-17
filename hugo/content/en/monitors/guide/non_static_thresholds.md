@@ -185,5 +185,5 @@ The last monitor is a Composite monitor, which sends an alert only if the two pr
 [1]: /monitors/types/anomaly/
 [2]: /monitors/types/outlier/
 [3]: /integrations/nginx/?tab=host#data-collected
-[4]: /account_management/billing/usage_metrics/#types-of-usage
+[4]: /account_management/billing/usage_metrics/estimated_usage_metrics/#types-of-usage
 [5]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
