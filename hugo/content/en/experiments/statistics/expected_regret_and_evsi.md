@@ -20,7 +20,7 @@ further_reading:
 Bayesian analysis reports two statistics that help you decide whether to stop an experiment or keep it running:
 
 - **Minimum expected regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is.
-- **Expected value of sample information (EVSI)**: How much the minimum expected regret is likely to drop with another week of data at recent traffic levels.
+- **Expected value of sample information (EVSI)**: How much the minimum expected regret is likely to drop if the experiment keeps running at its recent traffic. Datadog bases EVSI on one more week of data, as described in the [How Datadog projects the extra data](#how-datadog-projects-the-extra-data) section.
 
 Both statistics appear in the [Statistical details view][1] of the experiment results page. They are available only for experiments that use [Bayesian analysis][2].
 
@@ -126,8 +126,8 @@ Hover over the dash to see the reason for a specific result.
 Minimum expected regret and EVSI are on the same scale, so you can compare them directly:
 
 - **Minimum expected regret is close to zero**: There is little downside to deciding with the current data. Make the decision with the lower expected regret.
-- **EVSI is close to the minimum expected regret**: Another week of data is likely to resolve most of the remaining uncertainty. Consider running the experiment longer.
-- **EVSI is much smaller than the minimum expected regret**: Uncertainty remains, but another week at the current traffic is unlikely to resolve much of it. Consider deciding with the current data, or plan for a longer experiment or more traffic.
+- **EVSI is close to the minimum expected regret**: The extra data that EVSI assumes is likely to resolve most of the remaining uncertainty. Consider running the experiment longer.
+- **EVSI is much smaller than the minimum expected regret**: Uncertainty remains, but the extra data that EVSI assumes is unlikely to resolve much of it. Consider deciding with the current data, or plan for a longer experiment or more traffic.
 
 Running an experiment longer also has costs, such as delaying the rollout of a better variant or keeping users on a worse one. To compare EVSI with these costs, convert both into the same units, such as revenue.
 
