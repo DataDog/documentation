@@ -1,30 +1,29 @@
 ---
 further_reading:
 - link: https://trust.datadoghq.com/
-  tag: Centre de confiance Datadog
-  text: Découvrir la posture de sécurité de Datadog et consulter la documentation
+  tag: Datadog Trust Center
+  text: Découvrez la posture de sécurité de Datadog et consultez la documentation
     de sécurité
 title: Conformité PCI DSS
 ---
+## Présentation {#overview}
 
-## Présentation
+La norme de sécurité des données de l'industrie des cartes de paiement (PCI DSS) impose des exigences rigoureuses en matière de surveillance et de sécurité des données pour tous les commerçants, fournisseurs de services et institutions financières. Pour répondre à ces exigences, les organisations séparent souvent les données réglementées par la norme PCI (telles que les données des titulaires de carte) des données non réglementées dans différentes applications à des fins de surveillance et de Compliance.
 
-La norme de sécurité des données (DSS) de l'industrie des cartes de paiement (PCI) impose des exigences strictes en matière de surveillance et de sécurité des données pour tous les commerçants, fournisseurs de services et institutions financières. Pour répondre à ces exigences, les organisations séparent souvent les données réglementées par PCI (telles que les données des titulaires de cartes) des données non réglementées dans différentes applications à des fins de surveillance et de conformité.
+**Les outils et politiques de Datadog sont conformes à la norme PCI v4.0.1**. Pour comprendre le périmètre complet de l'environnement Datadog et la manière dont il se rapporte aux responsabilités du client dans le cadre des contrôles PCI-DSS pertinents, téléchargez la Customer Responsibility Matrix et l'Attestation of Compliance (AoC) depuis le [Datadog Trust Center][1].
 
-**Les outils et politiques de Datadog sont conformes à PCI v4.0**. Pour comprendre la portée complète de l'environnement Datadog et sa relation avec les responsabilités des clients dans le cadre des contrôles PCI-DSS pertinents, téléchargez la matrice des responsabilités des clients et l'attestation de conformité (AoC) depuis le [Centre de confiance Datadog][1].
+L'Attestation of Compliance (AoC) de Datadog reflète les outils et politiques que nous avons mis en place pour maintenir un environnement Connected PCI en tant que fournisseur de services. La plateforme Datadog prend en charge les connexions aux environnements de données de titulaires de carte (CDE) en tant qu'environnement Connected PCI, mais ne sert pas elle-même de CDE pour stocker, traiter ou transmettre des données de titulaires de carte (CHD).
+Il est de votre responsabilité d'empêcher toute donnée CHD d'entrer dans la plateforme Datadog. 
 
-L'attestation de conformité (AoC) de Datadog reflète les outils et politiques en place pour maintenir un environnement PCI connecté en tant que fournisseur de services. La plateforme Datadog prend en charge les connexions aux environnements de données des titulaires de cartes (CDE) en tant qu'environnement PCI connecté, mais ne sert pas elle-même de CDE pour le stockage, le traitement ou la transmission des données des titulaires de cartes (CHD).
-Il vous incombe d'empêcher toute CHD d'entrer dans la plateforme Datadog.
+## Outils recommandés pour la Compliance PCI {#recommended-tools-for-pci-compliance}
 
-## Outils recommandés pour la conformité PCI
+Pour vous aider à maintenir la Compliance PCI, **Datadog recommande vivement** l'utilisation des outils et du processus suivants :
+- [**Sensitive Data Scanner**][2] : découvrez, classifiez et masquez les données de titulaire de carte sensibles
+- [**Audit Trail**][3] : recherchez et analysez des événements d'audit détaillés conservés jusqu'à 90 jours à des fins de conservation et d'archivage à long terme
+- [**File Integrity Monitoring**][4] : surveillez les modifications apportées aux fichiers et répertoires clés
+- [**Cloud Security**][5] : suivez la conformité aux exigences des benchmarks du secteur et d'autres contrôles
 
-Pour vous aider à maintenir la conformité PCI, **Datadog recommande vivement** l'utilisation des outils et processus suivants :
-- [**Sensitive Data Scanner**][2] : découvrir, classifier et masquer les données sensibles des titulaires de cartes
-- [**Audit Trail**][3] : rechercher et analyser des événements d'audit détaillés pendant jusqu'à 90 jours pour une conservation et un archivage à long terme
-- [**File Integrity Monitoring**][4] : surveiller les modifications apportées aux fichiers et répertoires clés
-- [**Cloud Security Management**][5] : suivre la conformité aux exigences des référentiels sectoriels et autres contrôles
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

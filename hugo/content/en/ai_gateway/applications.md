@@ -2,7 +2,7 @@
 title: Connect Applications to AI Gateway
 description: Connect Claude Code, Codex, and Python SDKs to Datadog AI Gateway, attribute requests to applications and teams, and verify traffic.
 further_reading:
-  - link: "/llm_observability/configure/ai_gateway/"
+  - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
 ---
@@ -15,10 +15,21 @@ Connect a coding agent or SDK to AI Gateway with a Datadog credential and an app
 
 Before you begin:
 
-- Complete [Get started][1], or ask your administrator for access to a configured model or routing rule.
-- Have a [personal access token or service access token][2] whose principal and scope allow `ai_gateway_usage`.
-- Review the [data capture setting][6] before sending sensitive content.
+- Complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule.
+- Have a [personal access token or service access token][applications-2] whose principal and scope allow `ai_gateway_usage`.
+- Review the [data capture setting][applications-6] before sending sensitive content.
 - Choose `<PROVIDER_SLUG>/<MODEL_ID>` for a specific provider model, or `router/<RULE_SLUG>` for a routing rule. The target must support the client's request format, either natively or through API translation. Translation supports a subset of each API; available client features depend on the target.
+
+## Authenticate requests
+
+AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
+
+| Credential | Request headers |
+|---|---|
+| [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
+| [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+
+For service workloads, use a service access token. Store credentials in your application's secret manager and keep them out of source control and logs.
 
 The following shell examples use Bash or Zsh. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`, then set the model identifier:
 
@@ -26,7 +37,7 @@ The following shell examples use Bash or Zsh. Load your Datadog token from your 
 export DD_AI_GATEWAY_MODEL="<PROVIDER_SLUG>/<MODEL_ID>"
 ```
 
-Use the base URL for your [Datadog site][12]. The paths differ because each client appends its API path:
+Use the base URL for your [Datadog site][applications-12]. The paths differ because each client appends its API path:
 
 | Client | Base URL | Request path |
 |---|---|---|
@@ -55,9 +66,9 @@ export ANTHROPIC_CUSTOM_HEADERS="x-dd-tag-ml_app: claude-code"
 claude
 ```
 
-This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved Gateway model or routing rule. See [Claude Code model configuration][19].
+This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved Gateway model or routing rule. See [Claude Code model configuration][applications-19].
 
-The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with Gateway credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][16]. Keep tokens out of shared project settings.
+The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with Gateway credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][applications-16]. Keep tokens out of shared project settings.
 
 <!-- vale Datadog.headings = NO -->
 ## Configure Codex
@@ -88,9 +99,9 @@ Gateway model IDs and `router/<RULE_SLUG>` identifiers might not match Codex's m
 model_catalog_json = "<ABSOLUTE_PATH_TO_CODEX_MODEL_CATALOG>"
 ```
 
-The catalog entry's `slug` must match `model`. A Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][20].
+The catalog entry's `slug` must match `model`. A Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][applications-20].
 
-Web search is disabled for the connection test. Enable additional client features after checking compatibility with the selected target. For desktop environment variables and configuration options, see [Codex gateway configuration][17].
+Web search is disabled for the connection test. Enable additional client features after checking compatibility with the selected target. For desktop environment variables and configuration options, see [Codex gateway configuration][applications-17].
 
 <!-- vale Datadog.headings = NO -->
 ## Configure the OpenAI Python SDK
@@ -124,7 +135,7 @@ response = client.responses.create(
 print(response.output_text)
 ```
 
-Run `python gateway_example.py` from the terminal where you set the token and model. See the [OpenAI Python SDK reference][18] for SDK options. Only the inference operations supported by AI Gateway and the selected target are available.
+Run `python gateway_example.py` from the terminal where you set the token and model. See the [OpenAI Python SDK reference][applications-18] for SDK options. Only the inference operations supported by AI Gateway and the selected target are available.
 
 To stream the response over HTTP with server-sent events (SSE), replace the request and print statement with:
 
@@ -177,7 +188,13 @@ for block in message.content:
         print(block.text)
 ```
 
-Run `python anthropic_example.py` from the terminal where you set the token and model. Only inference operations supported by AI Gateway and the selected model are available. See the [Anthropic Python SDK documentation][21] for client options.
+Run `python anthropic_example.py` from the terminal where you set the token and model. Only inference operations supported by AI Gateway and the selected model are available. See the [Anthropic Python SDK documentation][applications-21] for client options.
+
+## Attribute requests to an application
+
+By default, Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
+
+[Verify the request](/ai_gateway/getting_started/#verify-the-request) in Agent Observability. The recorded content depends on the effective [data capture setting](/ai_gateway/security/#configure-data-capture).
 
 ## Select a team
 
@@ -187,12 +204,12 @@ To attribute requests to a team you belong to, add `x-ai-gateway-team: <TEAM_SLU
 - **Codex:** Add `"x-ai-gateway-team" = "<TEAM_SLUG>"` to the provider's `http_headers` map.
 - **SDK:** Add `"x-ai-gateway-team": "<TEAM_SLUG>"` to `default_headers`.
 
-Team selection affects matching [budgets][4], [rate limits][5], and [data capture][6]. It does not grant model access.
+Team selection affects matching [budgets][applications-4], [rate limits][applications-5], and [data capture][applications-6]. It does not grant model access.
 
 ## Verify your application
 
 1. In Claude Code or Codex, send `Reply with exactly: Gateway connected.` The SDK examples send the same prompt. Look for `Gateway connected.` in a successful response.
-2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] and select the time range containing the request.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][applications-3] and select the time range containing the request.
 3. Follow the {{< ui >}}Traces{{< /ui >}} link to open the request in Agent Observability. The examples set the application to `claude-code`, `codex`, or `my-application`.
 4. Confirm the caller, served model, and provider. For a routing rule, confirm the destination that served the request.
 
@@ -208,23 +225,26 @@ Team selection affects matching [budgets][4], [rate limits][5], and [data captur
 | Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart with the Gateway environment variables. |
 | Client does not use the configured Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
-See [Gateway troubleshooting][7] for Gateway error codes.
+See [Gateway troubleshooting][applications-7] for Gateway error codes.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/ai_gateway/#get-started
-[2]: /llm_observability/configure/ai_gateway/#authenticate-requests
-[3]: https://app.datadoghq.com/llm/gateway
-[4]: /llm_observability/configure/ai_gateway/#set-budgets
-[5]: /llm_observability/configure/ai_gateway/#set-rate-limits
-[6]: /llm_observability/configure/ai_gateway/#configure-data-capture
-[7]: /llm_observability/configure/ai_gateway/#troubleshooting
+[4]: /account_management/personal-access-tokens/
+[5]: /account_management/service-access-tokens/
 [12]: /getting_started/site/
-[16]: https://code.claude.com/docs/en/llm-gateway-connect
-[17]: https://learn.chatgpt.com/docs/enterprise/connect-to-a-gateway
-[18]: https://developers.openai.com/api/reference/python
-[19]: https://code.claude.com/docs/en/model-config
-[20]: https://learn.chatgpt.com/docs/enterprise/roll-out-a-gateway
-[21]: https://platform.claude.com/docs/en/cli-sdks-libraries/overview
+[applications-1]: /ai_gateway/getting_started/
+[applications-2]: /ai_gateway/applications/#authenticate-requests
+[applications-3]: https://app.datadoghq.com/llm/gateway
+[applications-4]: /ai_gateway/spend_controls/#set-budgets
+[applications-5]: /ai_gateway/spend_controls/#set-rate-limits
+[applications-6]: /ai_gateway/security/#configure-data-capture
+[applications-7]: /ai_gateway/troubleshooting/
+[applications-12]: /getting_started/site/
+[applications-16]: https://code.claude.com/docs/en/llm-gateway-connect
+[applications-17]: https://learn.chatgpt.com/docs/enterprise/connect-to-a-gateway
+[applications-18]: https://developers.openai.com/api/reference/python
+[applications-19]: https://code.claude.com/docs/en/model-config
+[applications-20]: https://learn.chatgpt.com/docs/enterprise/roll-out-a-gateway
+[applications-21]: https://platform.claude.com/docs/en/cli-sdks-libraries/overview

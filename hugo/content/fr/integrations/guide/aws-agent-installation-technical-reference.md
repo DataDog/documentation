@@ -78,7 +78,7 @@ L'instrumentation Lambda s'exécute entièrement depuis Datadog. Datadog ne dép
 
 1. Datadog lit la configuration et les tags actuels de la fonction, et vérifie qu'elle répond aux [prérequis Lambda][3].
 2. Datadog vérifie si la fonction est déjà instrumentée. Datadog ignore une fonction qui contient des couches Datadog, un gestionnaire Datadog ou des variables d'environnement Datadog que Datadog n'a pas appliqués. Datadog ignore également une fonction gérée par [l'instrumentation à distance][4], et indique laquelle des deux raisons s'applique.
-3. Datadog résout les versions de couches Datadog pour le runtime, l'architecture, la région et la partition AWS de la fonction. Datadog applique les versions de couche qu'il a validées plutôt que la version la plus récente à ce moment-là, afin qu'une installation soit reproductible.
+3.Datadog utilise les versions de couche spécifiées dans la règle d'instrumentation pour identifier les couches correspondantes en fonction du runtime, de l'architecture, de la région et de la partition AWS de la fonction.
 4. Datadog calcule la configuration souhaitée complète et enregistre exactement ce qu'il est sur le point de modifier, avant d'effectuer le moindre changement.
 5. Datadog autorise le rôle d'exécution de la fonction à envoyer des données de télémétrie à votre organisation Datadog. Consultez la section [Comment la télémétrie Lambda est authentifiée](#how-lambda-telemetry-is-authenticated).
 6. Datadog appelle `lambda:UpdateFunctionConfiguration` une fois, en soumettant la liste complète des couches et la carte d'environnement. Datadog marque le changement comme appliqué uniquement après qu'AWS a signalé le succès.
@@ -92,8 +92,11 @@ Une mise à jour Lambda est une opération de type remplacement : la liste des c
 | Ajoute la couche d'extension Datadog (`Datadog-Extension` ou `Datadog-Extension-ARM`) | Tous les runtimes pris en charge |
 | Ajoute la couche de traçage Datadog correspondante | Node.js, Python, Ruby, Java et .NET |
 | Définit `DD_SITE` et `DD_ORG_UUID` | Tous les runtimes pris en charge |
+| Définit `DD_TRACE_ENABLED` et `DD_SERVERLESS_LOGS_ENABLED` sur `true` ou `false` pour correspondre aux commutateurs APM et Logs de la règle d'instrumentation, en écrasant les valeurs existantes | Tous les runtimes pris en charge |
 | Redirige le gestionnaire vers le gestionnaire Datadog et déplace l'original dans `DD_LAMBDA_HANDLER` | Node.js et Python |
 | Définit `AWS_LAMBDA_EXEC_WRAPPER` sur `/opt/datadog_wrapper` | Java et .NET |
+
+La règle d'instrumentation prévaut pour `DD_TRACE_ENABLED` et `DD_SERVERLESS_LOGS_ENABLED` : lorsque l'un ou l'autre est modifié sur une fonction couverte, Datadog le rétablit pour correspondre à la règle. Lors de la désinstallation, Datadog restaure la valeur d'origine de chaque variable, ou la supprime si la fonction ne l'avait pas définie avant l'instrumentation.
 
 Datadog ne modifie pas le code de la fonction, la taille de la mémoire, le délai d'expiration, la configuration VPC, la concurrence ou tout autre paramètre de fonction.
 
@@ -161,11 +164,11 @@ Datadog maintient en continu l'état que vous définissez sur les ressources cou
   - **EC2** : Les événements proviennent de la règle EventBridge de la pile CloudFormation.
   - **Lambda** : La règle `datadog-agent-resource-update-rule-lambda` transmet les événements de création de fonction, de mise à jour de configuration, d'ajout de tag et de suppression de tag.
 - Sur EC2, les instances qui possèdent déjà l'Agent sont revérifiées moins fréquemment, afin d'éviter toute activité inutile.
-- Sur Lambda, Datadog appelle l'API Lambda dans votre compte uniquement pour les fonctions qui nécessitent un changement. Un parc déjà doté des versions de couche actuelles ne génère aucune activité par fonction.
+- Sur Lambda, Datadog appelle l'API Lambda dans votre compte uniquement pour les fonctions qui nécessitent un changement. Un parc dont les fonctions correspondent déjà aux versions de couche et aux paramètres APM et Logs de la règle d'instrumentation ne génère aucune activité par fonction.
 
 ### Comment les fonctions Lambda adoptent les nouvelles versions de couche {#how-lambda-functions-pick-up-new-layer-versions}
 
-Datadog compare les couches d'une fonction couverte aux versions que Datadog déploie, plutôt qu'aux versions appliquées lors de l'instrumentation initiale. Lorsque Datadog publie de nouvelles versions de couche, les fonctions couvertes sont mises à jour vers celles-ci. Vos fonctions évoluent donc avec les versions de couche de Datadog sans aucune intervention de votre part.
+Datadog compare les couches d'une fonction couverte aux versions définies dans la règle d'instrumentation. Lorsqu'une couche sur une fonction couverte est modifiée manuellement, Datadog la rétablit à la version de la règle. Datadog ne met pas à niveau les versions de couche d'une règle pour vous. Une fonction couverte ne récupère une nouvelle version de couche que lorsque vous modifiez la règle. Pour plus d'informations sur l'endroit où définir les versions, consultez [Installer l'instrumentation Datadog][8] dans le guide de configuration.
 
 Une mise à jour de configuration Lambda encore en cours est laissée telle quelle et retentée peu après, afin que Datadog n'entre pas en conflit avec un changement déjà en cours d'application.
 
@@ -218,3 +221,4 @@ Pour supprimer l'instrumentation, retirez les ressources d'une règle, modifiez 
 [5]: https://docs.datadoghq.com/fr/account_management/workload_identity_federation/
 [6]: https://docs.datadoghq.com/fr/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
 [7]: https://docs.datadoghq.com/fr/integrations/guide/aws-agent-installation/#choose-how-your-rule-matches-resources
+[8]: https://docs.datadoghq.com/fr/integrations/guide/aws-agent-installation/#install-datadog-instrumentation

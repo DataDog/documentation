@@ -49,7 +49,7 @@ La entrega de configuración Agentless y esta métrica utilizan rutas independie
 
 ## Paso 1: Configure un receptor OTLP {#step-1-configure-an-otlp-receiver}
 
-Las métricas de evaluación de feature flags se emiten a través de OpenTelemetry (OTLP). Para implementaciones respaldadas por el Datadog Agent, habilite el receptor OTLP del Datadog Agent, que está desactivado de forma predeterminada. Para obtener instrucciones de configuración, consulte [Ingesta de OTLP por el Datadog Agent][2]. Para implementaciones sin servidor sin Agent, utilice la ruta OTLP o de métricas personalizadas admitida por su configuración de Serverless Monitoring.
+Las métricas de evaluación de feature flags se emiten a través de OpenTelemetry (OTLP). Para implementaciones respaldadas por el Datadog Agent, habilite el receptor OTLP del Datadog Agent, que está desactivado de forma predeterminada. Para obtener instrucciones de configuración, consulte [Configurar el punto de conexión OTLP del Agent][2]. Para implementaciones sin servidor sin Agent, utilice la ruta OTLP o de métricas personalizadas admitida por su configuración de Serverless Monitoring.
 
 Solo necesita habilitar el protocolo que utiliza su aplicación (gRPC en el puerto 4317, o HTTP en el puerto 4318).
 
@@ -196,7 +196,7 @@ Después de implementar, confirme que las métricas estén llegando a Datadog:
 
 De forma predeterminada, `feature_flag.evaluations` conserva solo una hora de datos. Para conservar un historial más largo:
 
-1. Vaya a [Metrics Catalog][4] y busque `feature_flag.evaluations`.
+1. Vaya al [Metrics Catalog][4] y busque `feature_flag.evaluations`.
 2. Seleccione la métrica y habilite **Historical Metrics**.
 
 Esta es una configuración de participación voluntaria y no se habilita automáticamente para las métricas OTLP.
