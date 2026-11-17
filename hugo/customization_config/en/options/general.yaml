@@ -597,7 +597,7 @@ options:
 - label: Datadog SDK
   id: datadog_sdk
 
-- label: OpenTelemetry SDK
+- label: Upstream OpenTelemetry SDK
   id: opentelemetry_sdk
 
 - label: DDOT Collector
