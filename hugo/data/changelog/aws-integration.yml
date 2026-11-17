@@ -31,3 +31,10 @@ entries:
     operations:
       - ListAWSAccounts
     title: Add AWS cloud authentication intake mapping endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - PreviewAWSMetricNameFilter
+      - ValidateAWSCCMConfig
+    title: Add AI Gateway route permissions and safe editing

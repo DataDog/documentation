@@ -2,61 +2,71 @@
 algolia:
   tags:
   - scim
-  - proveedor de identidad
+  - identity provider
   - IdP
-description: Automatiza el suministro y la quita de usuarios en Datadog mediante la
-  integración de SCIM con los proveedores de identidades Microsoft Entra ID y Okta.
+description: Automatice el aprovisionamiento y desaprovisionamiento de usuarios en
+  Datadog mediante la integración SCIM con los proveedores de identidad Microsoft
+  Entra ID y Okta.
 further_reading:
 - link: /account_management/scim/azure/
   tag: Documentación
-  text: Configurar el SCIM con Azure Active Directory
+  text: Configurar SCIM con Azure Active Directory
 - link: account_management/scim/okta
   tag: Documentación
-  text: Configurar el SCIM con Okta
-title: Suministro de usuarios con el SCIM
+  text: Configurar SCIM con Okta
+title: Aprovisionamiento de usuarios con SCIM
 ---
-
 <div class="alert alert-info">
-SCIM está disponible con los planes Infrastructure Pro e Infrastructure Enterprise.
+SCIM está disponible con los planes Infrastructure Pro, Infrastructure Enterprise y Startup.
 </div>
 
-## Información general
+## Descripción general {#overview}
 
-El Sistema para la Gestión de Identidades entre Dominios, o [SCIM][9], es un estándar abierto que permite la automatización del aprovisionamiento de usuarios. Con SCIM, puedes aprovisionar y desaprovisionar usuarios automáticamente en tu organización de Datadog de forma sincronizada con el proveedor de identidades (IdP) de tu organización.
+El System for Cross-domain Identity Management, o [SCIM][9], es un estándar abierto que permite la automatización del aprovisionamiento de usuarios. Mediante SCIM, puede aprovisionar y desaprovisionar usuarios automáticamente en su organización de Datadog, sincronizados con el proveedor de identidad (IdP) de su organización.
 
-### Funciones compatibles
+### Funcionalidades admitidas {#supported-capabilities}
 
-- Crear usuarios en Datadog (se requiere verificación de correo electrónico para el primer inicio de sesión, consulta [verificación de correo electrónico][1])
-- Eliminar usuarios en Datadog cuando ya no necesiten acceso
-- Mantener sincronizados los atributos del usuario entre el proveedor de identidad (IdP) y Datadog
+- Crear usuarios en Datadog
+- Eliminar usuarios en Datadog cuando ya no requieran acceso
 - Inicio de sesión único en Datadog (recomendado)
-- Teams gestionados: crea Teams de Datadog a partir de grupos del proveedor de identidades y mantén sincronizada la pertenencia a los Teams de Datadog con la pertenencia a grupos en el proveedor de identidades.
+- Managed Teams: cree Datadog Teams a partir de grupos del proveedor de identidad y mantenga la pertenencia a los Datadog Teams sincronizada con la pertenencia a grupos en el proveedor de identidad.
+- Aprovisionamiento de roles: aprovisione el rol de Datadog de un usuario (integrado o personalizado) a partir de un atributo del proveedor de identidad y manténgalo sincronizado. Cuando el atributo cambia en su proveedor de identidad, el rol de Datadog del usuario se actualiza en tiempo real.
 
-Datadog implementa el protocolo de servidor de SCIM. Datadog admite el uso de SCIM con los proveedores de identidad de Microsoft Entra ID y Okta. Otros proveedores de identidad pueden funcionar, pero no son explícitamente compatibles.
+Datadog implementa el protocolo de servidor SCIM. Datadog admite el uso de SCIM con los proveedores de identidad Microsoft Entra ID y Okta. Es posible que otros proveedores de identidad funcionen, pero no cuentan con soporte explícito.
 
-Para configurar SCIM para los proveedores de identidad compatibles, consulta la documentación de tu IdP:
+Para configurar SCIM para los proveedores de identidad compatibles, consulte la documentación de su IdP:
 - [Microsoft Entra ID][2]
 - [Okta][3]
 
-### Requisitos previos
+### Requisitos previos {#prerequisites}
 
-SCIM en Datadog es una función avanzada incluida en los planes Infrastructure Pro e Infrastructure Enterprise.
+SCIM en Datadog es una función avanzada disponible con los planes Infraestructura Pro, Infraestructura Enterprise y Startup.
 
-Esta documentación presupone que tu organización gestiona las identidades de los usuarios utilizando un proveedor de identidad (IdP).
+Esta documentación asume que su organización gestiona las identidades de los usuarios mediante un proveedor de identidad.
 
-Datadog recomienda encarecidamente utilizar la clave de aplicación de una cuenta de servicio al configurar el SCIM, para evitar cualquier interrupción en el acceso. Para obtener más información, consulta el [uso de cuentas de servicio con el SCIM][4].
+Datadog recomienda encarecidamente que utilice una clave de aplicación de cuenta de servicio al configurar SCIM para evitar cualquier interrupción en el acceso. Para obtener más detalles, consulte [uso de una cuenta de servicio con SCIM][4].
 
-Al utilizar SAML y SCIM conjuntamente, Datadog recomienda encarecidamente deshabilitar el suministro justo-a-tiempo (JIT) de SAML, para evitar discrepancias en el acceso. Gestiona el suministro de usuarios únicamente a través del SCIM.
+Al usar SAML y SCIM juntos, Datadog recomienda encarecidamente deshabilitar el aprovisionamiento just-in-time (JIT) de SAML para evitar discrepancias en el acceso. Gestione el aprovisionamiento de usuarios solo a través de SCIM.
 
-## Uso de una cuenta de servicio con el SCIM
+### Comportamiento del aprovisionamiento de roles {#role-provisioning-behavior}
 
-Para activar el SCIM, debes utilizar una [clave de aplicación][5] para proteger la conexión entre tu proveedor de identidad (IdP) y su cuenta de Datadog. Un usuario específico o una cuenta de servicio controla cada clave de aplicación.
+Cuando una solicitud SCIM incluye uno o más roles, Datadog aprovisiona solo los roles que coinciden con un rol en su organización. Si ninguno de los roles coincide, se asigna al usuario el rol predeterminado de su organización (Standard). Los roles que no coinciden se registran en [Audit Trail][11].
 
-Si utilizas una clave de aplicación vinculada a un usuario para habilitar el SCIM y ese usuario abandona tu organización, su cuenta de Datadog se vacía. La clave de aplicación específica de ese usuario se revoca y puedes romper permanentemente tu integración del SCIM, lo que impide a los usuarios de tu organización acceder a Datadog.
+SCIM es la fuente de verdad para la asignación de roles y tiene prioridad sobre los [mapeos de roles SAML][12]. Los eventos de aprovisionamiento de roles SCIM se registran en Audit Trail y como métricas de StatsD.
 
-Para evitar perder el acceso a tus datos, Datadog te recomienda encarecidamente que crees una [cuenta de servicio][6] exclusiva del SCIM. Dentro de esa cuenta de servicio, crea una clave de aplicación para utilizarla en la integración del SCIM.
+Los roles siguen la convención de atributos multivaluados SCIM definida en [RFC 7643][13]. Tanto Okta como Microsoft Entra ID admiten este mapeo de forma nativa, sin necesidad de scripts personalizados. Para obtener instrucciones de configuración, consulte la documentación de su proveedor de identidad.
 
-## Referencias adicionales
+## Uso de una cuenta de servicio con SCIM {#using-a-service-account-with-scim}
+
+Para habilitar SCIM, debe usar una [clave de aplicación][5] para proteger la conexión entre su proveedor de identidad y su cuenta de Datadog. Cada clave de aplicación está controlada por un usuario o una cuenta de servicio específicos.
+
+Si utiliza una clave de aplicación vinculada a un usuario para habilitar SCIM y ese usuario deja su organización, su cuenta de Datadog se desaprovisiona. Esa clave de aplicación específica del usuario se revoca y usted interrumpe permanentemente su integración SCIM, lo que impide que los usuarios de su organización accedan a Datadog.
+
+Para evitar perder el acceso a sus datos, Datadog recomienda encarecidamente que cree una [cuenta de servicio][6] dedicada a SCIM. Dentro de esa cuenta de servicio, cree una clave de aplicación para usar en la integración SCIM.
+
+La cuenta de servicio requiere como mínimo los permisos `user_access_invite` y `user_access_manage`. Para obtener la lista completa de los permisos requeridos, consulte la [documentación de la API de SCIM][10].
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -69,3 +79,7 @@ Para evitar perder el acceso a tus datos, Datadog te recomienda encarecidamente 
 [7]: https://app.datadoghq.com/organization-settings/users
 [8]: /es/help/
 [9]: https://scim.cloud/
+[10]: /es/api/latest/scim/
+[11]: /es/account_management/audit_trail/
+[12]: /es/account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
+[13]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2

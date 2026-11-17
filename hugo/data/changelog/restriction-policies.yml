@@ -7,3 +7,20 @@ entries:
       - GetRestrictionPolicy
       - UpdateRestrictionPolicy
     title: Document Gateway provider permissions and saved restricted selections
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - DeleteRestrictionPolicy
+      - GetRestrictionPolicy
+      - UpdateRestrictionPolicy
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41802
+    operations:
+      - DeleteRestrictionPolicy
+      - GetRestrictionPolicy
+      - UpdateRestrictionPolicy
+    title: Add AI Gateway capture override permissions and hidden preview 
+      metadata

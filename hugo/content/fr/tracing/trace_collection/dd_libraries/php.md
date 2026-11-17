@@ -32,7 +32,7 @@ further_reading:
 title: Tracer des applications PHP
 type: multi-code-lang
 ---
-##  Exigences de compatibilité {#compatibility-requirements}
+## Exigences de compatibilité {#compatibility-requirements}
 
 La version minimale de PHP requise pour la dernière version de `dd-trace-php` est PHP 7. Si vous utilisez PHP 5, vous pouvez toujours utiliser le traceur PHP jusqu'à la version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 est en fin de vie (EOL) à partir de la version 1.0 de la bibliothèque PHP.
 
@@ -83,12 +83,12 @@ Redémarrez PHP (PHP-FPM ou le SAPI Apache) et visitez un endpoint de votre appl
 Lorsque vous ne spécifiez pas `--enable-appsec`, l'extension AppSec se charge brièvement au démarrage et n'est pas activée par défaut. Elle court-circuite immédiatement, entraînant une surcharge de performance négligeable.
 
 <div class="alert alert-info">
-Il peut s'écouler quelques minutes avant que les traces n'apparaissent dans l'interface utilisateur. Si les traces n'apparaissent toujours pas après quelques minutes, créez une <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page depuis la machine du host et faites défiler jusqu'à `ddtrace`. Les contrôles de diagnostic ayant échoué apparaissent dans cette section pour aider à identifier tout problème.
+Il peut s'écouler quelques minutes avant que les traces n'apparaissent dans l'interface utilisateur. Si les traces n'apparaissent toujours pas après quelques minutes, créez une <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page depuis la machine hôte et faites défiler la page vers le bas jusqu'à la <code>ddtrace</code>. Les contrôles de diagnostic ayant échoué apparaissent dans cette section pour aider à identifier tout problème.
 </div>
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-Si le binaire PHP CLI est construit en tant que NTS (non thread-safe), alors qu'Apache utilise une version ZTS (Zend thread-safe) de PHP, vous devez modifier manuellement le chargement de l'extension pour le binaire ZTS. Exécution <code>/path/to/php-zts --ini</code> pour trouver où le fichier de Datadog <code>.ini</code> est situé, puis ajoutez le <code>-zts</code> suffixe du nom de fichier. Par exemple, à partir de <code>extension=ddtrace-20210902.so</code> par <code>extension=ddtrace-20210902-zts.so</code>.
+Si le binaire PHP CLI est construit en tant que NTS (non thread-safe), alors qu'Apache utilise une version ZTS (Zend thread-safe) de PHP, vous devez modifier manuellement le chargement de l'extension pour le binaire ZTS. Exécuter <code>/path/to/php-zts --ini</code> pour trouver où le fichier de Datadog <code>.ini</code> est situé, puis ajoutez le <code>-zts</code> suffixe du nom de fichier. Par exemple, à partir de <code>extension=ddtrace-20210902.so</code> par <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
 <div class="alert alert-danger">

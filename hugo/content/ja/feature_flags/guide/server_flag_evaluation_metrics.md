@@ -27,10 +27,10 @@ title: サーバーサイドのフラグ評価メトリクスをセットアッ�
 
 フラグ評価メトリクスを設定する前に、以下を確認してください。
 
-- [サーバーサイドの機能フラグ][1] がすでに構成されていること。
+- [サーバーサイドの機能フラグ][1]がすでに構成されていること。
 - Agent ベースのデプロイメントの場合、Datadog Agent 7.32.0 以降が実行されており、OTLP メトリクスを受信できること。
 - 非 Agent サーバーレスデプロイメントの場合、プラットフォームでサポートされているサーバーレステレメトリパスが構成されていること。
-- Java、Node.js、Python のサーバーレス環境については、[フィーチャーフラグテレメトリの送信][7] を参照してください。
+- Java、Node.js、Python のサーバーレス環境については、[フィーチャーフラグテレメトリの送信][7]を参照してください。
 - レガシーアクティベーションパスを使用する Agent 対応の構成の場合、アプリケーションで `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` が設定されていること。
 - サーバーサイドのトレーサーが、フラグ評価メトリクスをサポートする最小バージョンを満たしていること。
 
@@ -48,7 +48,7 @@ Agentless 構成の配信とこのメトリクスは、独立したパスを使�
 
 ## ステップ 1: OTLP レシーバーを構成する {#step-1-configure-an-otlp-receiver}
 
-フラグ評価メトリクスは OpenTelemetry (OTLP) 経由で出力されます。Agent 対応のデプロイメントでは、デフォルトでオフになっている Datadog Agent OTLP レシーバーを有効にします。セットアップ手順については、[Datadog Agent による OTLP の取り込み][2] を参照してください。非 Agent サーバーレスデプロイメントの場合、Serverless Monitoring 設定でサポートされている OTLP またはカスタムメトリクスのパスを使用してください。
+フラグ評価メトリクスは OpenTelemetry (OTLP) 経由で出力されます。Agent 対応のデプロイメントでは、デフォルトでオフになっている Datadog Agent OTLP レシーバーを有効にします。セットアップ手順については、[Datadog Agent による OTLP の取り込み][2]を参照してください。非 Agent サーバーレスデプロイメントの場合、Serverless Monitoring 設定でサポートされている OTLP またはカスタムメトリクスのパスを使用してください。
 
 アプリケーションが使用するプロトコル (ポート 4317 での gRPC、またはポート 4318 での HTTP) のみを有効にする必要があります。
 
@@ -56,16 +56,16 @@ Agentless 構成の配信とこのメトリクスは、独立したパスを使�
 
 ## ステップ 2: アプリケーションを構成する {#step-2-configure-your-application}
 
-Java 以外のサポートされているトレーサーと配信モードの組み合わせについては、標準の [サーバーサイド機能フラグの構成][1] に加えて、次の環境変数を設定してください。Java の場合、`DD_METRICS_OTEL_ENABLED` は効果がありません。代わりに [Java: OpenTelemetry SDK 依存関係の追加](#java-add-the-opentelemetry-sdk-dependencies)セクションを参照してください。
+Java 以外のサポートされているトレーサーと配信モードの組み合わせについては、標準の[サーバーサイド機能フラグの構成][1]に加えて、次の環境変数を設定してください。Java の場合、`DD_METRICS_OTEL_ENABLED` は効果がありません。代わりに [Java: OpenTelemetry SDK 依存関係の追加](#java-add-the-opentelemetry-sdk-dependencies)セクションを参照してください。
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
-### Java: OpenTelemetry SDK の依存関係の {#java-add-the-opentelemetry-sdk-dependencies}
+### Java: OpenTelemetry SDK の依存関係を追加する {#java-add-the-opentelemetry-sdk-dependencies}
 
-Java プロバイダーは OpenTelemetry SDK を介して `feature_flag.evaluations` を記録し、OTLP 経由でエクスポートするため、`opentelemetry-sdk-metrics` 依存関係と `opentelemetry-exporter-otlp` 依存関係がアプリケーションのクラスパスに存在している必要があります。[Java 機能フラグの依存関係][6] とともにそれらを追加してください。OpenTelemetry API と SDK のバージョンが同一であるようにするため、OpenTelemetry BOM をインポートします。
+Java プロバイダーは OpenTelemetry SDK を介して `feature_flag.evaluations` を記録し、OTLP 経由でエクスポートするため、`opentelemetry-sdk-metrics` 依存関係と `opentelemetry-exporter-otlp` 依存関係がアプリケーションのクラスパスに存在している必要があります。[Java 機能フラグの依存関係][6]とともにそれらを追加してください。OpenTelemetry API と SDK のバージョンが同一であるようにするため、OpenTelemetry BOM をインポートします。
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
@@ -119,7 +119,7 @@ Java トレーサーでは、OpenTelemetry SDK がクラスパスに存在する
 
 <div class="alert alert-info">Spring Boot アプリケーションでは、Spring Boot の OpenTelemetry 自動構成によって <code>OpenTelemetrySdk</code> ビーンが作成されます。解決された OpenTelemetry SDK のバージョンがクラスパスの OpenTelemetry API のバージョンと一致しない場合、起動は <code>BeanCreationException</code> ( <code>openTelemetry</code> ビーン) と <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>で失敗します。上記のように <code>opentelemetry-bom</code> をインポートすると、API と SDK の同じバージョンが維持され、エラーが解決されます。</div>
 
-### Ruby: OpenTelemetry メトリクス gem の追加 {#ruby-add-the-opentelemetry-metrics-gems}
+### Ruby: OpenTelemetry メトリクス gem を追加する {#ruby-add-the-opentelemetry-metrics-gems}
 
 Ruby アプリケーションでは、OpenTelemetry メトリクス SDK gem と OTLP メトリクスエクスポーター gem をアプリケーションバンドルに追加します。
 
@@ -186,7 +186,7 @@ services:
 デプロイ後に、メトリクスが Datadog に到達していることを確認します。
 
 1. [Metrics Explorer][3] に移動し、`feature_flag.evaluations` を検索します。
-2. アプリケーションでフラグを評価してから数分以内にメトリクスが表示されない場合は、以下を確認してください。
+2. アプリケーションでフラグを評価してから数分以内にメトリクスが表示されない場合は、以下を確認します。
    - Agent の OTLP レシーバーが有効になっており、正しいポートが公開されている。
    - `OTEL_EXPORTER_OTLP_ENDPOINT` が別のコレクターではなく、Agent を指している。
    - アプリケーションが実行時にサーバー SDK を使用してフラグをアクティブに評価している (コードパスが実行されている)。
@@ -195,20 +195,20 @@ services:
 
 デフォルトでは、`feature_flag.evaluations` は 1 時間分のデータのみを保持します。より長い履歴を保持するには、次のようにします。
 
-1. [Metrics Summary][4] に移動し、`feature_flag.evaluations` を検索します。
-2. メトリクスを選択し、[**Historical Metrics**] (過去のメトリクス) を有効にします。
+1. [メトリクスカタログ][4]に移動し、`feature_flag.evaluations` を検索します。
+2. メトリクスを選択し、**Historical Metrics** を有効にします。
 
 これはオプトイン設定であり、OTLP メトリクスに対して自動的に有効になることはありません。
 
-## ダッシュボードでのフラグ評価のグラフ化 {#graph-flag-evaluations-on-a-dashboard}
+## ダッシュボードでフラグ評価をグラフ化する {#graph-flag-evaluations-on-a-dashboard}
 
-次のクエリを使用して、[ダッシュボード][5] でフラグキーとバリアントごとにフラグ評価をグラフ化します。
+次のクエリを使用して、[ダッシュボード][5]でフラグキーとバリアントごとにフラグ評価をグラフ化します。
 
 {{< code-block lang="text" >}}
 sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant}
 {{< /code-block >}}
 
-メトリクス `feature_flag.evaluations` は、次のタグを持つカウンターです。
+`feature_flag.evaluations` メトリクスは、次のタグを持つカウンターです。
 
 | タグ                                  | 説明                                        |
 | ------------------------------------ | -------------------------------------------------- |
@@ -225,7 +225,7 @@ sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant
 [1]: /ja/feature_flags/server/
 [2]: /ja/opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /ja/dashboards/
 [6]: /ja/feature_flags/server/java/#installation
 [7]: /ja/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

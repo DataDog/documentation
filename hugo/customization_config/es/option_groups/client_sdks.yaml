@@ -1,14 +1,18 @@
 client_sdk_platform_options:
-- default: true
-  id: browser
-- id: android
-- id: ios
-- id: flutter
-- id: react_native
-- id: kotlin_multiplatform
-- id: roku
-- id: unity
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+  - id: flutter
+  - id: react_native
+  - id: kotlin_multiplatform
+  - id: cpp
+  - id: electron
+  - id: roku
+  - id: unity
+  - id: maui
+
 client_sdk_product_options:
-- default: true
-  id: rum
-- id: error_tracking
+  - id: rum
+    default: true
+  - id: error_tracking

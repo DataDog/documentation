@@ -66,7 +66,7 @@ markup:
 
 module:
   imports:
-   - path: github.com/DataDog/websites-modules
+   - path: github.com/ddoghq/websites-modules
      disabled: false
      mounts:
      - source: layouts/partials/nav/main-nav.html

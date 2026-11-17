@@ -119,6 +119,7 @@ La tabla enumera las tasas de muestreo aplicadas por recurso del servicio.
 {{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Tabla de tasas de muestreo por recurso" style="width:100%;">}}
 
 - La columna `Ingested bytes` muestra los bytes ingeridos de los spans del servicio y recurso, mientras que la columna `Downstream bytes` muestra los bytes ingeridos de los spans donde la decisión de muestreo se toma a partir de ese servicio y recurso, incluyendo los bytes de los servicios descendentes en la cadena de llamadas.
+- La `Ingested traces`columna  cuenta las trazas que comienzan en el servicio y el recurso. Los recursos que solo aparecen en spans hijos, como los métodos internos, muestran `0` trazas ingeridas. Los bytes de sus spans aún aparecen en la `Ingested bytes`columna .
 - La columna `Configuration` muestra desde dónde se aplica la tasa de muestreo del recurso: 
   - `Automatic` si se aplica el [mecanismo de muestreo basado en el inicio predeterminado][4] del Agent.
   - `Local Configured` si se estableció una [regla de muestreo de trazas][8] localmente en el SDK.
