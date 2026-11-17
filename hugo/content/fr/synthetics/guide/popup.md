@@ -2,46 +2,46 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/browser-tests/
   tag: Blog
-  text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
+  text: Surveillance de l'expérience utilisateur avec les tests de navigateur Datadog
 - link: synthetics/browser_tests
   tag: Documentation
   text: En savoir plus sur les tests de navigateurs Synthetic
-title: Gestion des fenêtres contextuelles lors des tests Browser
+title: Gérez les fenêtres contextuelles dans les tests de navigateur
 ---
-## Présentation
+## Présentation {#overview}
 
-Ce guide décrit comment gérer les fenêtres contextuelles telles que les fenêtres modales ou d'applications dans un [test de navigateur][5] Synthetic.
+Ce guide décrit comment gérer les fenêtres contextuelles, telles que les modales ou les fenêtres d'application, dans un [test de navigateur][5] Synthetic.
 
-## Fenêtres modales
+## Modales {#modals}
 
-### JavaScript
+### JavaScript {#javascript}
 
-Les tests Browser Synthetic gèrent automatiquement les [fenêtres modales JavaScript][1] :
+Les tests de navigateur Synthetic gèrent automatiquement les [modales JavaScript][1] :
 
- - Les `alert` modales sont immédiatement ignorées pour OK. 
- - Les `prompt` modales sont remplies par `Lorem Ipsum` pour les tests sur Google Chrome ou Microsoft Edge.
- - Les `confirm` modaux qui demandent une confirmation sont acceptés.
+ - `alert` Les modales sont immédiatement fermées en sélectionnant OK. 
+ - `prompt` Les modales sont remplies avec `Lorem Ipsum` pour les tests sur Google Chrome ou Microsoft Edge.
+ - `confirm` Les modales demandant une confirmation sont acceptées.
 
-### Authentification de base
+### Authentification de base {#basic-authentication}
 
-Pour les fenêtres contextuelles d'authentification de base, spécifiez les identifiants requis dans la configuration de votre test Browser, sous [**Advanced Options**][2] :
+Pour les fenêtres contextuelles d'authentification de base, spécifiez les identifiants associés dans la [{{< ui >}}Advanced Options{{< /ui >}}][2] de la configuration de votre test de navigateur.
 
-{{< img src="synthetics/guide/popup/http_authentication.png" alt="Fenêtre contextuelle dʼauthentification de base" style="width:90%" >}}
+{{< img src="synthetics/guide/popup/http_authentication.png" alt="Fenêtre contextuelle d'authentification de base" style="width:90%" >}}
 
-## Fenêtres contextuelles d'applications
+## Fenêtres contextuelles d'application {#application-pop-ups}
 
-### Fenêtres contextuelles ancrées
+### Fenêtres contextuelles ancrées {#anchored-pop-ups}
 
-Si une fenêtre contextuelle apparaît à un moment spécifique de votre parcours, vous pouvez enregistrer une étape pour la fermer et autoriser l'échec de cette étape à l'aide de l'[option correspondante][3]. Votre test saura ainsi comment réagir si jamais une telle fenêtre s'affiche. Dans le cas contraire, l'étape échoue sans que cela entraîne l'échec de l'ensemble du test.
+Si une fenêtre contextuelle apparaît à un moment précis de votre parcours, enregistrez une étape pour la fermer. Dans les options avancées de l'étape, sélectionnez {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Ensuite, décochez {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (sélectionné par défaut). Si la fenêtre contextuelle n'apparaît pas, l'étape échoue sans faire échouer l'ensemble du test. Pour plus d'informations, consultez la section [Étape facultative][3].
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Autoriser l'échec d'une fenêtre pour gérer une fenêtre contextuelle" style="width:60%" >}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Options avancées de l'étape avec « continue to next step » sélectionné et « mark test as failed » décoché." style="width:60%" >}}
 
-### Déplacer les fenêtres contextuelles
+### Fenêtres contextuelles mobiles {#moving-pop-ups}
 
-S'il n'est pas possible de prédire à quel moment ces fenêtres contextuelles apparaissent, adressez-vous au tiers qui fournit la fenêtre contextuelle afin de vérifier s'il est possible de créer une règle empêchant l'affichage de la fenêtre contextuelle pendant l'exécution du test Browser. Il peut par exemple s'agir d'un cookie à ajouter dans la [section **Advanced Options**][2] de votre test.
+Si le moment où ces fenêtres contextuelles apparaissent au cours d'une session n'est pas prévisible, vérifiez auprès du tiers fournissant la fenêtre contextuelle s'il peut créer une règle empêchant son apparition pendant l'exécution de votre test de navigateur. Ce tiers peut, par exemple, vous fournir un cookie que vous pouvez saisir dans la [section {{< ui >}}Advanced Options{{< /ui >}}][2] de votre test.
 
-Sinon, vous pouvez employer l'une des méthodes suivantes afin de garantir la fermeture de la fenêtre contextuelle et le bon fonctionnement de votre test :
-  * Créez une [assertion JavaScript][4] au début de votre test Browser pour essayer régulièrement de fermer la fenêtre :
+Sinon, utilisez l'une de ces méthodes pour vous assurer que votre fenêtre contextuelle est fermée et que votre test peut poursuivre son parcours :
+  * Créez une [assertion JavaScript][4] au début de votre test de navigateur pour essayer régulièrement de fermer la fenêtre contextuelle :
 
     ```javascript
     if (document.querySelector("<ELEMENT>")) {
@@ -59,14 +59,14 @@ Sinon, vous pouvez employer l'une des méthodes suivantes afin de garantir la fe
     }
     ```
 
-  * Enregistrez les étapes de fermeture de la fenêtre contextuelle, ajoutez-les entre toutes les autres étapes de votre test Browser, puis sélectionnez l'[option **Allow this step to fail**][3] pour chacune d'entre elles.
+  * Enregistrez les étapes pour fermer la fenêtre contextuelle et ajoutez-les entre toutes vos autres étapes de test de navigateur. Pour chaque étape, sélectionnez {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Ensuite, décochez {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (sélectionné par défaut).
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://javascript.info/alert-prompt-confirm
 [2]: /fr/synthetics/browser_tests/#test-configuration
 [3]: /fr/synthetics/browser_tests/advanced_options/#optional-step
-[4]: /fr/synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[4]: /fr/synthetics/browser_tests/test_steps#test-your-ui-with-custom-javascript
 [5]: /fr/synthetics/browser_tests

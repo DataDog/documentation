@@ -11,7 +11,7 @@ further_reading:
 - link: /integrations/azure-devops-source-code/
   tag: Documentation
   text: En savoir plus sur l'intégration du code source Azure DevOps
-- link: /integrations/bitbucket/
+- link: /integrations/bitbucket-source-code/
   tag: Documentation
   text: En savoir plus sur l'intégration du code source Bitbucket
 title: Fournisseurs de gestion de code source
@@ -90,10 +90,13 @@ Installez l'intégration du code source Azure DevOps de Datadog en utilisant la 
 Les dépôts des espaces de travail Bitbucket sont pris en charge pour Bitbucket Cloud (SaaS). Bitbucket Server et Bitbucket Data Center (sur site) ne sont <strong>pas</strong> pris en charge.
 </div>
 
+L'[intégration Bitbucket][103] collecte les événements du dépôt.
+
 Installez l'intégration du code source [Bitbucket Cloud][102] de Datadog en utilisant la [tuile d'intégration][101] ou lors de l'intégration d'autres produits Datadog pour vous connecter à vos dépôts Bitbucket Cloud.
 
 [101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
-[102]: /fr/integrations/bitbucket/
+[102]: /fr/integrations/bitbucket-source-code/
+[103]: /fr/integrations/bitbucket/
 
 {{% /tab %}}
 {{% tab "Autres fournisseurs SCM" %}}

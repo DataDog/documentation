@@ -110,3 +110,12 @@ entries:
       - UpsertLLMObsPatternsConfig
     title: Document min_cluster_size on LLM Observability topic discovery 
       configs
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41782
+    operations:
+      - GetLLMObsAnnotatedInteraction
+      - GetLLMObsAnnotatedInteractions
+      - GetLLMObsAnnotatedInteractionsByTraceIDs
+      - UpsertLLMObsAnnotations
+    title: Document external annotation attribution

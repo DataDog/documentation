@@ -99,9 +99,8 @@ matches a hyphenated API URL and the other an underscored docs path.
 
 **Astro does not do this.** It matches only frontmatter IDs and `url_paths`.
 
-Three IDs match an Astro API route by segment — `agentless-scanning`, `on-call`
-and `workflow-automation` — and all three carry explicit `url_paths`, so both
-sites agree. A test fails if any other ID starts colliding with an Astro route,
+Two IDs match an Astro API route by segment — `agentless-scanning` and
+`on-call` — and both carry explicit `url_paths`, so both sites agree. A test fails if any other ID starts colliding with an Astro route,
 which would mean Hugo shows a banner that Astro does not.
 
 Removing Hugo's segment matching means giving explicit `url_paths` to every ID
