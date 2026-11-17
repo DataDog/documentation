@@ -47,6 +47,7 @@
 /*/experiments/guide/connecting_a_data_warehouse.md
 /*/logs/error_tracking/error_grouping.md
 /*/opentelemetry/instrument/dd_sdks/api_support.md
+/*/opentelemetry/compatibility.md
 /*/profiler/enabling/_index.md
 /*/real_user_monitoring/application_monitoring/android/advanced_configuration.md
 /*/real_user_monitoring/application_monitoring/android/data_collected.md
