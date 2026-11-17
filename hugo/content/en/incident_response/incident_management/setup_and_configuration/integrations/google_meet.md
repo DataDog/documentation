@@ -80,13 +80,13 @@ To enable meeting summaries and transcripts for incident Google Meet meetings:
 1. Navigate to [**Settings > Integrations**][2] and select **Google Meet**.
 2. Toggle on **Enable Google Meet creation**.
 3. Toggle on **Generate AI meeting summaries**.
-4. (Optional) To save live meeting transcripts, toggle on **Generate meeting transcripts**, under **Generate AI meeting summaries**.
+4. (Optional) To save live meeting transcripts, toggle on **Generate meeting transcripts**, which appears under **Generate AI meeting summaries**.
 5. (Optional) Add conditions to prevent summarization for specific incidents.
 6. Save your settings.
 
 By default, Incident AI does not summarize or transcribe meetings for private incidents. Conditions that prevent summarization also prevent transcription.
 
-Setting changes apply only to recordings that start after you save. They do not affect recordings in progress or create notebooks for past recordings. Turning off transcript generation leaves meeting summaries enabled.
+Setting changes apply only to recordings that start after you save. They do not affect recordings in progress or create notebooks for past recordings. Turning off **Generate meeting transcripts** leaves meeting summaries enabled. Turning off **Generate AI meeting summaries** also turns off **Generate meeting transcripts**.
 
 #### Transcript notebook access
 
@@ -102,5 +102,5 @@ To review summaries, view transcripts, and re-invite the transcriber during an i
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [4]: /help/
-[5]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#notebook-access
+[5]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#transcript-notebook-access
 [6]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts

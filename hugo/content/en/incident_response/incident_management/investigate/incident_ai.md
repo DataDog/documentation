@@ -45,14 +45,12 @@ When an incident is changed to resolved, Incident AI posts a final summary. This
 <div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<!-- TODO (author): State the availability status of live meeting transcripts (for example, Preview). -->
-
 Incident AI can summarize incident meetings in Zoom, Google Meet, and Microsoft Teams, and save live transcripts of those meetings in Datadog notebooks:
 
 - **Meeting summaries**: During a meeting, Incident AI periodically posts live summaries to the incident timeline and the incident chat channel. When the meeting ends, it posts a final summary.
 - **Live meeting transcripts**: A Datadog notebook captures the conversation with speaker names and timestamps in your time zone. The notebook updates during the meeting and remains available afterward.
 
-A Datadog subprocessor records and transcribes meeting audio, and deletes the data it holds after seven days. Transcripts saved in Datadog notebooks are not deleted.
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data. Live meeting transcripts are not subject to this retention period: they remain in their Datadog notebook for as long as the notebook exists. If you enable live meeting transcripts, meeting content is kept beyond seven days.</div>
 
 To set up meeting summaries and transcripts, see the integration page for your meeting platform: [Zoom][4], [Google Meet][5], or [Microsoft Teams][6]. To review summaries, view transcripts, and re-invite the transcriber during an incident, see [Use Meeting Summaries and Transcripts][7].
 
