@@ -160,9 +160,12 @@ function sortByWeight(regions: string[]): string[] {
 /**
  * Compile one `url_paths` glob to a matcher for normalized paths.
  *
- * HUGO_DUPLICATE: Hugo translates the same globs to regex in
- * `hugo/layouts/partials/site_support_banner/url_path_matchers.html`. Both must
- * pass `shared/tests/site_support_globs.yaml`; change the table, not one side.
+ * HUGO_DUPLICATE: Hugo has its own copy of this logic. It converts the same
+ * globs to regex in `hugo/layouts/partials/site_support_banner/glob_to_regex.html`.
+ *
+ * Both copies are tested against the cases in
+ * `shared/tests/site_support_globs.yaml`. To change what a glob matches,
+ * update those cases first, then change both copies until they pass.
  */
 export function compileUrlPath(pattern: string): (path: string) => boolean {
   return picomatch(pattern);

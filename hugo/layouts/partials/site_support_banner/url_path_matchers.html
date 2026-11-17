@@ -16,8 +16,10 @@
     Astro checks its matcher against the same table, so the two sites can't
     disagree about which pages get a banner.
 
-    HUGO_DUPLICATE: Astro's matcher is compileUrlPath in
-    astro/src/config/siteSupport.ts. Change the shared table, not one side.
+    HUGO_DUPLICATE: Astro has its own copy of this logic, compileUrlPath in
+    astro/src/config/siteSupport.ts. To change what a glob matches, update the
+    cases in shared/tests/site_support_globs.yaml first, then change both
+    copies until they pass.
 
     Caller: layouts/partials/site_support_banner/get_unsupported_regions.html
 */}}
