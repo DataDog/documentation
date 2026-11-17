@@ -97,6 +97,7 @@ For `full` mode with Java and .NET:
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 3.58.0 | [odp.net](https://www.oracle.com/database/technologies/appdev/dotnet/odp.html) | `dynamic_service`|
 
 For `full` mode with Java:
 - The instrumentation overwrites `V$SESSION.ACTION`.
