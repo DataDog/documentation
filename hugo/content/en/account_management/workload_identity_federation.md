@@ -1,11 +1,11 @@
 ---
 title: Workload Identity Federation
-description: Authenticate to the Datadog API, the Datadog Agent, and GitHub Actions workflows with Workload Identity Federation, using AWS or GitHub credentials instead of static API and application keys.
+description: Authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, and HCP Terraform runs with Workload Identity Federation, using AWS, GitHub, or HCP Terraform credentials instead of static API and application keys.
 aliases:
     - /account_management/cloud_authentication/
     - /account_management/cloud_provider_authentication/
 algolia:
-  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'github actions', 'delegated auth']
+  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'github actions', 'hcp terraform', 'terraform cloud', 'dynamic provider credentials', 'delegated auth']
 further_reading:
 - link: "/getting_started/integrations/terraform/"
   tag: "Documentation"
@@ -23,9 +23,9 @@ further_reading:
 
 ## Overview
 
-Workload Identity Federation lets you authenticate to the Datadog API, the Datadog Agent, and GitHub Actions workflows using AWS or GitHub credentials instead of static API and application keys.
+Workload Identity Federation lets you authenticate to the Datadog API, the Datadog Agent, GitHub Actions workflows, and HCP Terraform runs using AWS, GitHub, or HCP Terraform credentials instead of static API and application keys.
 
-This page covers setup for two identity providers: AWS (for Datadog API calls and the Agent) and GitHub (for GitHub Actions).
+This page covers setup for three identity providers: AWS (for Datadog API calls and the Agent), GitHub (for GitHub Actions), and HCP Terraform (for HCP Terraform runs).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <p>Workload Identity Federation is available for the following:</p>
@@ -33,6 +33,7 @@ This page covers setup for two identity providers: AWS (for Datadog API calls an
 <li><b>Datadog API</b>: Authenticate API calls using AWS credentials mapped to a Datadog user or service account. The Datadog Terraform provider and the Go API client support this flow. Available for all customers.</li>
 <li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
 <li><b>GitHub Actions</b>: Authenticate a workflow by exchanging its GitHub OIDC token for a short-lived Datadog credential. In Preview.</li>
+<li><b>HCP Terraform</b>: Authenticate the Datadog Terraform provider in HCP Terraform runs using dynamic provider credentials. In Preview.</li>
 </ul>
 {{< /site-region >}}
 
@@ -398,6 +399,102 @@ The Datadog Terraform provider (version 4.11.0 or later) accepts the identity ac
 
 Leave `api_key`, `app_key`, and `cloud_provider_type` unset in the provider block so the provider uses the bearer token. For sites other than US1, also set the provider's `api_url`.
 
+## Set up Workload Identity Federation for HCP Terraform
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation for HCP Terraform is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+<div class="alert alert-warning">Workload Identity Federation for HCP Terraform is in Preview and is available on commercial sites only. It is not available on US1-FED or US2-FED.</div>
+
+An [HCP Terraform][8] (formerly Terraform Cloud) run exchanges its workload identity token for a short-lived Datadog credential, using HCP Terraform [dynamic provider credentials][9]. You do not need to store static API or application keys as workspace variables. The run authenticates as the Datadog user or service account in an identity mapping. HCP Terraform supports identity mappings only, not intake mappings.
+
+HCP Terraform workload identity tokens are accepted from the `app.terraform.io` and `app.eu.terraform.io` issuers. Self-hosted Terraform Enterprise is not supported. Runs triggered from a local Terraform CLI do not receive a workload identity token.
+
+**Requirements**:
+- Datadog Terraform provider version 4.26.0 or later.
+- Your account has the `workload_identity_federation_write` permission to create mappings.
+- If your workspace uses self-hosted HCP Terraform agents, agent version 1.12.0 or later.
+
+Setting up Workload Identity Federation for HCP Terraform involves three parts:
+1. [Creating an HCP Terraform mapping in Datadog](#create-an-hcp-terraform-mapping-in-datadog)
+2. [Setting the audience variable in HCP Terraform](#set-the-audience-variable-in-hcp-terraform)
+3. [Configuring the Datadog Terraform provider](#configure-the-datadog-terraform-provider-for-hcp-terraform)
+
+### Create an HCP Terraform mapping in Datadog
+
+HCP Terraform mappings match the `sub` claim of the run's workload identity token. The claim has the format `organization:<ORG>:project:<PROJECT>:workspace:<WORKSPACE>:run_phase:<PHASE>`, where `<PHASE>` is `plan` or `apply`.
+
+#### Using the UI
+
+1. Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab.
+2. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
+3. Select **HCP Terraform** as the **Identity Provider**.
+4. Choose the HCP Terraform region that matches the hostname in your HCP Terraform organization URL: **Global (app.terraform.io)** or **Europe (app.eu.terraform.io)**.
+5. Enter your **HCP Terraform organization**, and select a **Project**, **Workspace**, and **Run phase**. Choose **All projects**, **All workspaces**, or **Plan and apply** to match any value.
+6. Choose the Datadog identity the run authenticates as: an existing user or service account, or a new service account.
+7. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+After the mapping is created, the dialog shows the audience value to set in HCP Terraform.
+
+#### Using the API
+
+Create mappings with the `/api/v2/wif/terraform/persona_mapping` endpoint. It takes the `issuer_url` of your HCP Terraform region (`https://app.terraform.io` or `https://app.eu.terraform.io`), a `sub_pattern`, and the `account_identifier` of the target Datadog user or service account.
+
+**Example**: An API call that maps `apply` runs from one HCP Terraform workspace to a Datadog service account, `terraform-service-account@myorg.com`.
+
+```bash
+# Example: map an HCP Terraform workspace to a Datadog service account
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/wif/terraform/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "terraform_cloud_auth_config",
+    "attributes": {
+      "issuer_url": "https://app.terraform.io",
+      "sub_pattern": "organization:my-org:project:my-project:workspace:datadog-prod:run_phase:apply",
+      "account_identifier": "terraform-service-account@myorg.com"
+    }
+  }
+}'
+```
+
+The response includes an `audience` attribute with the value `datadog/<YOUR_ORG_UUID>`. Use this value in the next step.
+
+**Sub pattern rules**:
+- Use `*` to match any value for an entire segment, for example `workspace:*`. A `*` inside a segment, such as `workspace:prod-*`, is matched literally.
+- The organization segment cannot be `*`.
+- A pattern that duplicates an existing mapping, or that can match the same token as a mapping bound to a different Datadog identity, is rejected.
+
+For the full request and response schemas, see the [Cloud Authentication API reference](https://docs.datadoghq.com/api/latest/cloud-authentication/).
+
+### Set the audience variable in HCP Terraform
+
+In HCP Terraform, add an environment variable to the workspace, or to a variable set applied to it:
+
+| Key | Value | Category |
+|---|---|---|
+| `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` | `datadog/<YOUR_ORG_UUID>` | Environment variable |
+
+HCP Terraform then injects a workload identity token for that audience into each run as `TFC_WORKLOAD_IDENTITY_TOKEN_DATADOG`. Do not set that variable yourself.
+
+### Configure the Datadog Terraform provider for HCP Terraform
+
+The provider detects the HCP Terraform workload identity token and exchanges it for a Datadog credential. Leave `api_key`, `app_key`, and `cloud_provider_type` unset, and do not set `DD_API_KEY`, `DD_APP_KEY`, or `DD_BEARER_TOKEN` in the workspace, because explicit credentials take precedence over the workload identity token.
+
+```hcl
+provider "datadog" {
+  # Set api_url to your Datadog site. The HCP Terraform region does not select it.
+  api_url = "{{< region-param key=dd_api code="true" >}}/"
+}
+```
+
+To test the mapping, start a plan-only run in the workspace. If the run fails to authenticate, check that the run's `sub` claim matches the mapping's sub pattern and run phase, and that the audience variable matches the value from the mapping.
+
+For other options, including untagged tokens and custom token tags, see the provider's [dynamic provider credentials guide][10].
+
 ## Set up Workload Identity Federation for the Datadog Agent
 
 {{< site-region region="gov,gov2" >}}
@@ -616,3 +713,6 @@ delegated_auth:
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
 [6]: https://app.datadoghq.com/organization-settings/workload-identity-federation
 [7]: https://github.com/DataDog/datadog-workload-identity-federation-github-action
+[8]: https://developer.hashicorp.com/terraform/cloud-docs
+[9]: https://developer.hashicorp.com/terraform/cloud-docs/dynamic-provider-credentials
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/guides/dynamic_provider_credentials
