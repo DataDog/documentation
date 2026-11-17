@@ -1,6 +1,6 @@
 ---
 title: OpAMP Extension
-description: "Use the OpenTelemetry OpAMP extension to view OpenTelemetry Collector configuration and health in Fleet Automation."
+description: "Use the OpenTelemetry OpAMP extension to view upstream OpenTelemetry Collector configuration and health in Fleet Automation."
 further_reading:
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
@@ -20,14 +20,14 @@ further_reading:
 
 ## Overview
 
-The [OpenTelemetry OpAMP extension][1] connects an OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
+The [OpenTelemetry OpAMP extension][1] connects an upstream OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
 
 The OpAMP extension is an alternative to the [Datadog Extension][4], which Datadog recommends. The OpAMP extension doesn't support:
 
 - The [Topology view][5] in Fleet Automation
 - Remote configuration of the Collector
 
-The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the OpenTelemetry Collector, and you can add it to [custom builds][6]. Upstream, the extension's stability level is alpha.
+The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the upstream OpenTelemetry Collector, and you can add it to [custom builds][6]. Upstream, the extension's stability level is alpha.
 
 <div class="alert alert-info">If you use the <a href="/opentelemetry/setup/agent/#agents-collector">Agent's Collector</a> or the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, you don't need the OpAMP extension. Both connect to Fleet Automation without extra configuration.</div>
 

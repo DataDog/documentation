@@ -34,7 +34,7 @@ Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED). Conf
 - **The DDOT Collector**: The standalone Datadog Distribution of OpenTelemetry (DDOT) Collector.
 - **Upstream Collectors**: Collectors from the OpenTelemetry project, such as the contrib distribution or a custom build.
 
-For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. You can [configure](#configure-the-agents-collector), [send flares from](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) only the Agent's Collector, because these features use [Remote Configuration][2]. The DDOT Collector and upstream Collectors appear in Fleet View when the [Datadog Extension][3] or the [OpAMP extension][15] is configured.
+For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. You can [configure](#configure-the-agents-collector), [send flares from](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) only the Agent's Collector, because these features use [Remote Configuration][2]. The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
 
 ## Prerequisites
 
@@ -135,7 +135,6 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 [2]: /agent/guide/setup_remote_config
 [3]: /opentelemetry/integrations/datadog_extension/
 [4]: /opentelemetry/integrations/datadog_extension/#setup
-[5]: /agent/fleet_automation/fleet_view/#prerequisites
 [6]: /agent/fleet_automation/fleet_view/#view-audit-trail-events
 [7]: /agent/fleet_automation/fleet_view/#monitor-agent-and-otel-collector-health
 [8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
