@@ -103,6 +103,8 @@ sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
 sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
 ```
 
+{{< img src="llm_observability/cost_by_token_modality.png" alt="Line chart of estimated LLM cost by token modality, showing audio and text in cents." caption="Estimated LLM cost grouped by token modality, displayed in cents." style="width:100%;" >}}
+
 For a span with a valid total cost or token count, its breakdown values add up to that total. When a total is unavailable for cost or tokens, the breakdown metrics retain the available input or output values. The corresponding total distribution receives no observation.
 
 Do not add breakdown metrics to their matching `.total.*` metrics when calculating totals, because that counts the same usage twice.
