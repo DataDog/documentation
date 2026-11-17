@@ -94630,6 +94630,91 @@ components:
         meta:
           $ref: "#/components/schemas/MonthlyCostAttributionMeta"
       type: object
+    MonthlyResource:
+      description: A resource's usage for the requested billing dimension and month.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MonthlyResourceAttributes"
+        id:
+          description: Identifier for the resource usage record. Treat this value as opaque.
+          type: string
+        type:
+          $ref: "#/components/schemas/MonthlyResourceType"
+      type: object
+    MonthlyResourceAttributes:
+      description: Resource usage and organization details for the requested month.
+      properties:
+        data_date:
+          description: Date of the source usage data. May be empty when unavailable.
+          type: string
+        org_name:
+          description: Name of the organization that owns the resource.
+          type: string
+        public_id:
+          description: Public ID of the organization that owns the resource.
+          type: string
+        resource_name:
+          description: Name of the resource, such as a host name, metric name, or log index.
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags when available. Empty for resource types without tag data.
+          type: object
+        timestamp:
+          description: Selected billing hour for percentile usage, or the first day of the month for monthly usage. May be empty when unavailable.
+          type: string
+        usage_type:
+          description: Usage type of the resource. Values depend on the billing dimension and are not limited to host types.
+          type: string
+        usage_value:
+          description: Usage attributed to the resource in the units of the requested billing dimension. Values can be fractional.
+          format: double
+          nullable: true
+          type: number
+      type: object
+    MonthlyResourceType:
+      default: monthly_resource
+      description: Type of a monthly resource usage record.
+      enum:
+        - monthly_resource
+      type: string
+      x-enum-varnames:
+        - MONTHLY_RESOURCE
+    MonthlyResourcesMetadata:
+      description: Metadata for monthly resource usage.
+      properties:
+        pagination:
+          $ref: "#/components/schemas/MonthlyResourcesPagination"
+      type: object
+    MonthlyResourcesPagination:
+      description: Pagination information for monthly resource usage.
+      properties:
+        next_record_id:
+          description: Cursor for the next request. Pass as `page[next_record_id]` with the same filters. Null when there are no more results.
+          nullable: true
+          type: string
+      type: object
+    MonthlyResourcesResponse:
+      description: Monthly usage for host and non-host resources.
+      properties:
+        data:
+          description: Resource usage records. Empty when no matching resources are available.
+          items:
+            $ref: "#/components/schemas/MonthlyResource"
+          type: array
+        meta:
+          $ref: "#/components/schemas/MonthlyResourcesMetadata"
+      type: object
+    MonthlyResourcesView:
+      description: Whether to return billable resources or the full monthly resource breakdown.
+      enum:
+        - billable
+        - all
+      type: string
+      x-enum-varnames:
+        - BILLABLE
+        - ALL
     MuteDataType:
       default: mute
       description: Mute resource type.
@@ -277548,6 +277633,165 @@ paths:
       tags:
         - Usage Metering
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - usage_read
+  /api/v2/usage/monthly_resources:
+    get:
+      description: |-
+        Get resource-level usage for a billing dimension and month, using the same
+        data as the resource breakdown in Plan & Usage. Supports all host and
+        non-host resource types available in that breakdown. Availability depends
+        on the billing dimension and the organization's usage data.
+
+        Results are scoped to the authenticated organization. Set `filter[include_descendants]`
+        to `true` to also return usage from its descendant organizations in all regions.
+
+        Set `filter[view]` to `billable` to return resources that contribute to billable usage.
+        For dimensions billed at the 99th percentile, this view returns resources at the
+        selected billing hour. For sum-based dimensions, it returns monthly resource usage.
+        Set `filter[view]` to `all` to return the full monthly resource breakdown. Requests
+        for unsupported billing dimensions, or dimensions configured with an unsupported
+        billing aggregation method, return a `400 Bad Request` error.
+
+        To get the next page of results, pass the `meta.pagination.next_record_id` value
+        from the previous response as `page[next_record_id]`, and keep all filters unchanged.
+        A null cursor indicates the last page. Paginated responses contain at most
+        `page[limit]` resource records, including queries across descendant organizations.
+
+        Exception: for any billing dimension billed at the 99th percentile,
+        `filter[view]=billable` returns the complete resource breakdown in one response,
+        including requested descendants. Eligibility depends on the organization's
+        billing configuration for the requested dimension and month, not on the product
+        name. For these queries, `page[limit]` and `page[next_record_id]` are ignored, and
+        `meta.pagination.next_record_id` is null. Sum-based usage and `filter[view]=all`
+        remain paginated.
+      operationId: GetUsageMonthlyResources
+      parameters:
+        - description: Billing dimension to retrieve, such as `infra_host`, `indexed_points`, or `logs_indexed_30day`.
+          example: infra_host
+          in: query
+          name: filter[billing_dimension]
+          required: true
+          schema:
+            type: string
+        - description: Month of usage to retrieve in `YYYY-MM` format.
+          example: "2026-04"
+          in: query
+          name: filter[month]
+          required: true
+          schema:
+            pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$"
+            type: string
+        - description: |-
+            Set to `billable` to return resources that contribute to billable usage, or `all`
+            to return the full monthly resource breakdown.
+          example: billable
+          in: query
+          name: filter[view]
+          required: true
+          schema:
+            $ref: "#/components/schemas/MonthlyResourcesView"
+        - description: Include usage for descendant organizations of the authenticated organization.
+          in: query
+          name: filter[include_descendants]
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: |-
+            Maximum number of resource records per paginated response. Must be a positive integer.
+            Values above 100,000 are capped at 100,000. Ignored for billable queries using
+            99th-percentile billing, which return the complete result in one response.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100000
+            format: int64
+            maximum: 100000
+            minimum: 1
+            type: integer
+        - description: |-
+            Opaque cursor from `meta.pagination.next_record_id` in the previous response.
+            Omit for the first request. Ignored for billable queries using 99th-percentile
+            billing, which always return the complete result.
+          in: query
+          name: page[next_record_id]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          data_date: "2026-04-30"
+                          org_name: Example organization
+                          public_id: abc123
+                          resource_name: host-1.prod
+                          tags:
+                            env: prod
+                          timestamp: "2026-04-22 16:00:00+00:00"
+                          usage_type: agent
+                          usage_value: 1
+                        id: abc123_agent_host-1.prod
+                        type: monthly_resource
+                    meta:
+                      pagination:
+                        next_record_id:
+                non_host:
+                  value:
+                    data:
+                      - attributes:
+                          data_date: "2026-04-30"
+                          org_name: Example organization
+                          public_id: abc123
+                          resource_name: app.requests
+                          tags: {}
+                          timestamp: "2026-04-01"
+                          usage_type: post_threshold_indexed
+                          usage_value: 1250.5
+                        id: abc123_post_threshold_indexed_app.requests
+                        type: monthly_resource
+                    meta:
+                      pagination:
+                        next_record_id:
+              schema:
+                $ref: "#/components/schemas/MonthlyResourcesResponse"
+          description: OK
+        "400":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden - User is not authorized
+        "429":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Too many requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - usage_read
+      summary: Get monthly usage by resource
+      tags:
+        - Usage Metering
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
