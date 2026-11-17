@@ -2989,6 +2989,18 @@ components:
           schema:
             $ref: "#/components/schemas/HTTPCDRulesNotFoundResponse"
       description: Deployment rule not found.
+    IntegrationAccountBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    IntegrationAccountNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
     NDMBadRequestResponse:
       content:
         application/json:
@@ -53378,6 +53390,103 @@ components:
         - column_type
         - column_name
       type: object
+    ExperimentsEVSIContext:
+      description: >-
+        Forecast horizon and traffic counts used to calculate expected value of sample information (EVSI) for result_run_id. Assumes traffic continues at the rate observed during the lookback window. Omitted if the forecast was not recorded or could not be loaded.
+      properties:
+        elapsed_days:
+          description: Exact assignment-window duration in days, including fractional days.
+          example: 14.5
+          format: double
+          nullable: true
+          type: number
+        horizon_days:
+          description: Forecast horizon in days from the original assignment window.
+          example: 7.0
+          format: double
+          type: number
+        horizon_exposures:
+          description: Projected additional exposures over the horizon, assuming constant traffic.
+          example: 10000.0
+          format: double
+          nullable: true
+          type: number
+        lookback_days:
+          description: Selected lookback length in complete days.
+          example: 7
+          format: int64
+          type: integer
+        lookback_exposures:
+          description: Exposures across all variants in the eligible lookback buckets.
+          example: 10000
+          format: int64
+          nullable: true
+          type: integer
+        total_exposures:
+          description: Experiment-wide exposures across the assignment window, including boundary buckets.
+          example: 20000
+          format: int64
+          nullable: true
+          type: integer
+        unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsEVSITrafficUnavailableReason"
+        usable_traffic_days:
+          description: >-
+            Interior UTC daily buckets excluding both boundary days. Includes zero-traffic days and does not certify ingestion completeness.
+          example: 13
+          format: int64
+          nullable: true
+          type: integer
+      required:
+        - elapsed_days
+        - usable_traffic_days
+        - lookback_days
+        - horizon_days
+        - total_exposures
+        - lookback_exposures
+        - horizon_exposures
+        - unavailable_reason
+      type: object
+    ExperimentsEVSITrafficUnavailableReason:
+      description: Recorded traffic forecast unavailability reason. Per-analysis reasons are reported separately.
+      enum:
+        - traffic_unavailable
+        - insufficient_complete_days
+        - no_total_exposures
+        - no_lookback_exposures
+        - invalid_traffic
+      example: traffic_unavailable
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - TRAFFIC_UNAVAILABLE
+        - INSUFFICIENT_COMPLETE_DAYS
+        - NO_TOTAL_EXPOSURES
+        - NO_LOOKBACK_EXPOSURES
+        - INVALID_TRAFFIC
+    ExperimentsEVSIUnavailableReason:
+      description: >-
+        Recorded reason this analysis has no EVSI estimate. Omitted when unrecorded; absence does not establish availability for historical or imported results. Controls and non-Bayesian analyses omit this field.
+      enum:
+        - traffic_unavailable
+        - insufficient_complete_days
+        - no_total_exposures
+        - no_lookback_exposures
+        - invalid_traffic
+        - invalid_standard_error
+        - computation_failed
+        - analysis_unavailable
+      example: computation_failed
+      type: string
+      x-enum-varnames:
+        - TRAFFIC_UNAVAILABLE
+        - INSUFFICIENT_COMPLETE_DAYS
+        - NO_TOTAL_EXPOSURES
+        - NO_LOOKBACK_EXPOSURES
+        - INVALID_TRAFFIC
+        - INVALID_STANDARD_ERROR
+        - COMPUTATION_FAILED
+        - ANALYSIS_UNAVAILABLE
     ExperimentsExperimentDiagnosticsV2DTO:
       description: "Response containing the diagnostic checks for an experiment."
       properties:
@@ -53744,19 +53853,27 @@ components:
           type: string
       type: object
     ExperimentsExperimentResultsV2MetaDTO:
-      description: "Information about when experiment results were updated and whether they are stale."
+      description: "Selected experiment result run, its recorded EVSI forecast, and results freshness."
       example:
         is_stale: true
+        result_run_id: 550e8400-e29b-41d4-a716-446655440004
         results_last_updated: "2026-08-05T09:25:00Z"
         stale_reasons:
           - ANALYSIS_PLAN_CHANGED
       properties:
+        evsi_context:
+          $ref: "#/components/schemas/ExperimentsEVSIContext"
         is_stale:
           description: |-
             Whether the saved results require a refresh or their freshness cannot be confirmed. See stale_reasons for
             details.
           example: true
           type: boolean
+        result_run_id:
+          description: ID of the successful experiment run that produced these results.
+          example: 550e8400-e29b-41d4-a716-446655440004
+          format: uuid
+          type: string
         results_last_updated:
           description: "Time when the experiment results were last updated."
           example: "2026-08-05T09:25:00Z"
@@ -53772,6 +53889,8 @@ components:
             example: ANALYSIS_PLAN_CHANGED
             type: string
           type: array
+      required:
+        - result_run_id
       type: object
     ExperimentsExperimentV2DTO:
       description: "Response containing an experiment and its configuration."
@@ -58864,9 +58983,19 @@ components:
           format: double
           type: number
         evsi:
-          description: "Expected reduction in minimum expected regret from collecting more sample data."
+          description: >-
+            Expected value of sample information: expected reduction in minimum expected regret from additional data over the recorded horizon. Uses the analysis estimand units; relative lift is a fraction, not a percentage. Zero is a valid estimate. Omitted when unavailable or unrecorded.
+          example: 0.0
           format: double
           type: number
+        evsi_future_se:
+          description: >-
+            Standard error of the hypothetical additional-data estimate used for EVSI, in the same estimand units and CUPED setting. May be present when EVSI computation failed. Omitted when unavailable or unrecorded.
+          example: 0.0061306
+          format: double
+          type: number
+        evsi_unavailable_reason:
+          $ref: "#/components/schemas/ExperimentsEVSIUnavailableReason"
         expectation_above_zero:
           description: "Expected effect when the effect is positive."
           format: double
@@ -94946,6 +95075,91 @@ components:
         meta:
           $ref: "#/components/schemas/MonthlyCostAttributionMeta"
       type: object
+    MonthlyResource:
+      description: A resource's usage for the requested billing dimension and month.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MonthlyResourceAttributes"
+        id:
+          description: Identifier for the resource usage record. Treat this value as opaque.
+          type: string
+        type:
+          $ref: "#/components/schemas/MonthlyResourceType"
+      type: object
+    MonthlyResourceAttributes:
+      description: Resource usage and organization details for the requested month.
+      properties:
+        data_date:
+          description: Date of the source usage data. May be empty when unavailable.
+          type: string
+        org_name:
+          description: Name of the organization that owns the resource.
+          type: string
+        public_id:
+          description: Public ID of the organization that owns the resource.
+          type: string
+        resource_name:
+          description: Name of the resource, such as a host name, metric name, or log index.
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags when available. Empty for resource types without tag data.
+          type: object
+        timestamp:
+          description: Selected billing hour for percentile usage, or the first day of the month for monthly usage. May be empty when unavailable.
+          type: string
+        usage_type:
+          description: Usage type of the resource. Values depend on the billing dimension and are not limited to host types.
+          type: string
+        usage_value:
+          description: Usage attributed to the resource in the units of the requested billing dimension. Values can be fractional.
+          format: double
+          nullable: true
+          type: number
+      type: object
+    MonthlyResourceType:
+      default: monthly_resource
+      description: Type of a monthly resource usage record.
+      enum:
+        - monthly_resource
+      type: string
+      x-enum-varnames:
+        - MONTHLY_RESOURCE
+    MonthlyResourcesMetadata:
+      description: Metadata for monthly resource usage.
+      properties:
+        pagination:
+          $ref: "#/components/schemas/MonthlyResourcesPagination"
+      type: object
+    MonthlyResourcesPagination:
+      description: Pagination information for monthly resource usage.
+      properties:
+        next_record_id:
+          description: Cursor for the next request. Pass as `page[next_record_id]` with the same filters. Null when there are no more results.
+          nullable: true
+          type: string
+      type: object
+    MonthlyResourcesResponse:
+      description: Monthly usage for host and non-host resources.
+      properties:
+        data:
+          description: Resource usage records. Empty when no matching resources are available.
+          items:
+            $ref: "#/components/schemas/MonthlyResource"
+          type: array
+        meta:
+          $ref: "#/components/schemas/MonthlyResourcesMetadata"
+      type: object
+    MonthlyResourcesView:
+      description: Whether to return billable resources or the full monthly resource breakdown.
+      enum:
+        - billable
+        - all
+      type: string
+      x-enum-varnames:
+        - BILLABLE
+        - ALL
     MuteDataType:
       default: mute
       description: Mute resource type.
@@ -192861,7 +193075,7 @@ paths:
   /api/v2/experiments/{experiment_id}/results:
     get:
       description: >-
-        Get an experiment's computed results: per-variant statistical analysis for the latest successful run. A historical run cannot be selected. Unavailable analysis statistics, including `p_value` and `confidence_interval`, are omitted. The `numerator`, `denominator`, and `variant_metric_value` fields can be null when their values are unavailable. Do not treat an omitted or null value as zero.
+        Get an experiment's computed results: per-variant statistical analysis for the latest successful run. A historical run cannot be selected. Unavailable analysis statistics, including `p_value` and `confidence_interval`, are omitted. The `numerator`, `denominator`, and `variant_metric_value` fields can be null when their values are unavailable. Do not treat an omitted or null value as zero. The response includes the selected run ID and, when recorded, EVSI forecast context and unavailable reasons for Bayesian analyses.
       operationId: GetExperimentResults
       parameters:
         - description: "The UUID of the experiment."
@@ -192930,6 +193144,188 @@ paths:
                         type: experiment-variant-results
                     meta:
                       is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
+                      results_last_updated: "2026-08-15T12:00:00Z"
+                      stale_reasons: []
+                evsi_available:
+                  description: Selected treatment analysis fields from an illustrative response. Additional variants and analyses are omitted.
+                  summary: Bayesian EVSI with a recorded forecast
+                  value:
+                    data:
+                      - attributes:
+                          assignment_count: 10000
+                          experiment_id: 550e8400-e29b-41d4-a716-446655440000
+                          is_control: false
+                          metrics:
+                            - analyses:
+                                - confidence_interval:
+                                    lower: 0.0015
+                                    upper: 0.0185
+                                  confidence_level: 0.95
+                                  evsi: 0.0
+                                  evsi_future_se: 0.0061306
+                                  is_cuped_adjusted: false
+                                  is_unreliable: false
+                                  lift_type: ABSOLUTE
+                                  method: BAYESIAN
+                                  point_estimate: 0.01
+                                  standard_error: 0.004335
+                                  variant_metric_value: 0.11
+                              assignment_count: 10000
+                              denominator: 10000
+                              desired_change: METRIC_INCREASES
+                              metric_id: 550e8400-e29b-41d4-a716-446655440002
+                              metric_name: Checkout conversion
+                              numerator: 1100
+                          variant_key: treatment
+                          variant_name: Treatment
+                        id: 550e8400-e29b-41d4-a716-446655440000:treatment
+                        type: experiment-variant-results
+                    meta:
+                      evsi_context:
+                        elapsed_days: 14.5
+                        horizon_days: 7.0
+                        horizon_exposures: 10000.0
+                        lookback_days: 7
+                        lookback_exposures: 10000
+                        total_exposures: 20000
+                        unavailable_reason:
+                        usable_traffic_days: 13
+                      is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
+                      results_last_updated: "2026-08-15T12:00:00Z"
+                      stale_reasons: []
+                evsi_computation_failed:
+                  description: Selected treatment analysis fields from an illustrative response. Additional variants and analyses are omitted.
+                  summary: EVSI calculation failed with a known future standard error
+                  value:
+                    data:
+                      - attributes:
+                          assignment_count: 10000
+                          experiment_id: 550e8400-e29b-41d4-a716-446655440000
+                          is_control: false
+                          metrics:
+                            - analyses:
+                                - confidence_interval:
+                                    lower: 0.0015
+                                    upper: 0.0185
+                                  confidence_level: 0.95
+                                  evsi_future_se: 0.0061306
+                                  evsi_unavailable_reason: computation_failed
+                                  is_cuped_adjusted: false
+                                  is_unreliable: false
+                                  lift_type: ABSOLUTE
+                                  method: BAYESIAN
+                                  point_estimate: 0.01
+                                  standard_error: 0.004335
+                                  variant_metric_value: 0.11
+                              assignment_count: 10000
+                              denominator: 10000
+                              desired_change: METRIC_INCREASES
+                              metric_id: 550e8400-e29b-41d4-a716-446655440002
+                              metric_name: Checkout conversion
+                              numerator: 1100
+                          variant_key: treatment
+                          variant_name: Treatment
+                        id: 550e8400-e29b-41d4-a716-446655440000:treatment
+                        type: experiment-variant-results
+                    meta:
+                      evsi_context:
+                        elapsed_days: 14.5
+                        horizon_days: 7.0
+                        horizon_exposures: 10000.0
+                        lookback_days: 7
+                        lookback_exposures: 10000
+                        total_exposures: 20000
+                        unavailable_reason:
+                        usable_traffic_days: 13
+                      is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
+                      results_last_updated: "2026-08-15T12:00:00Z"
+                      stale_reasons: []
+                evsi_legacy:
+                  description: Selected treatment analysis fields from an illustrative response. Additional variants and analyses are omitted.
+                  summary: Legacy Bayesian results with unknown forecast metadata
+                  value:
+                    data:
+                      - attributes:
+                          assignment_count: 10000
+                          experiment_id: 550e8400-e29b-41d4-a716-446655440000
+                          is_control: false
+                          metrics:
+                            - analyses:
+                                - confidence_interval:
+                                    lower: 0.0015
+                                    upper: 0.0185
+                                  confidence_level: 0.95
+                                  evsi: 0.001
+                                  is_cuped_adjusted: false
+                                  is_unreliable: false
+                                  lift_type: ABSOLUTE
+                                  method: BAYESIAN
+                                  point_estimate: 0.01
+                                  standard_error: 0.004335
+                                  variant_metric_value: 0.11
+                              assignment_count: 10000
+                              denominator: 10000
+                              desired_change: METRIC_INCREASES
+                              metric_id: 550e8400-e29b-41d4-a716-446655440002
+                              metric_name: Checkout conversion
+                              numerator: 1100
+                          variant_key: treatment
+                          variant_name: Treatment
+                        id: 550e8400-e29b-41d4-a716-446655440000:treatment
+                        type: experiment-variant-results
+                    meta:
+                      is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
+                      results_last_updated: "2026-08-15T12:00:00Z"
+                      stale_reasons: []
+                evsi_unavailable:
+                  description: Selected treatment analysis fields from an illustrative response. Additional variants and analyses are omitted.
+                  summary: EVSI unavailable because traffic could not be read
+                  value:
+                    data:
+                      - attributes:
+                          assignment_count: 10000
+                          experiment_id: 550e8400-e29b-41d4-a716-446655440000
+                          is_control: false
+                          metrics:
+                            - analyses:
+                                - confidence_interval:
+                                    lower: 0.0015
+                                    upper: 0.0185
+                                  confidence_level: 0.95
+                                  evsi_unavailable_reason: traffic_unavailable
+                                  is_cuped_adjusted: false
+                                  is_unreliable: false
+                                  lift_type: ABSOLUTE
+                                  method: BAYESIAN
+                                  point_estimate: 0.01
+                                  standard_error: 0.004335
+                                  variant_metric_value: 0.11
+                              assignment_count: 10000
+                              denominator: 10000
+                              desired_change: METRIC_INCREASES
+                              metric_id: 550e8400-e29b-41d4-a716-446655440002
+                              metric_name: Checkout conversion
+                              numerator: 1100
+                          variant_key: treatment
+                          variant_name: Treatment
+                        id: 550e8400-e29b-41d4-a716-446655440000:treatment
+                        type: experiment-variant-results
+                    meta:
+                      evsi_context:
+                        elapsed_days:
+                        horizon_days: 7.0
+                        horizon_exposures:
+                        lookback_days: 7
+                        lookback_exposures:
+                        total_exposures:
+                        unavailable_reason: traffic_unavailable
+                        usable_traffic_days:
+                      is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
                       results_last_updated: "2026-08-15T12:00:00Z"
                       stale_reasons: []
                 simple_metric:
@@ -192983,6 +193379,7 @@ paths:
                         type: experiment-variant-results
                     meta:
                       is_stale: false
+                      result_run_id: 550e8400-e29b-41d4-a716-446655440004
                       results_last_updated: "2026-08-15T12:00:00Z"
                       stale_reasons: []
               schema:
@@ -205029,11 +205426,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List ChatGPT Enterprise integration accounts
@@ -205087,11 +205484,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205118,11 +205515,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a ChatGPT Enterprise integration account
@@ -205172,11 +205569,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a ChatGPT Enterprise integration account
@@ -205232,11 +205629,11 @@ paths:
                 $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205542,11 +205939,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Databricks integration accounts
@@ -205611,11 +206008,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205642,11 +206039,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Databricks integration account
@@ -205707,11 +206104,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Databricks integration account
@@ -205778,11 +206175,11 @@ paths:
                 $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205833,11 +206230,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Elastic Cloud integration accounts
@@ -205890,11 +206287,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -205921,11 +206318,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an Elastic Cloud integration account
@@ -205974,11 +206371,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an Elastic Cloud integration account
@@ -206033,11 +206430,11 @@ paths:
                 $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206119,11 +206516,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Snowflake integration accounts
@@ -206207,11 +206604,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206238,11 +206635,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Snowflake integration account
@@ -206322,11 +206719,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Snowflake integration account
@@ -206412,11 +206809,11 @@ paths:
                 $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206464,11 +206861,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Temporal Cloud OpenMetrics accounts
@@ -206518,11 +206915,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206549,11 +206946,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Temporal Cloud OpenMetrics account
@@ -206599,11 +206996,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Temporal Cloud OpenMetrics account
@@ -206655,11 +207052,11 @@ paths:
                 $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206708,11 +207105,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountsResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Twilio integration accounts
@@ -206763,11 +207160,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -206794,11 +207191,11 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Twilio integration account
@@ -206845,11 +207242,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Twilio integration account
@@ -206902,11 +207299,11 @@ paths:
                 $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
         "429":
@@ -278107,6 +278504,165 @@ paths:
       tags:
         - Usage Metering
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - usage_read
+  /api/v2/usage/monthly_resources:
+    get:
+      description: |-
+        Get resource-level usage for a billing dimension and month, using the same
+        data as the resource breakdown in Plan & Usage. Supports all host and
+        non-host resource types available in that breakdown. Availability depends
+        on the billing dimension and the organization's usage data.
+
+        Results are scoped to the authenticated organization. Set `filter[include_descendants]`
+        to `true` to also return usage from its descendant organizations in all regions.
+
+        Set `filter[view]` to `billable` to return resources that contribute to billable usage.
+        For dimensions billed at the 99th percentile, this view returns resources at the
+        selected billing hour. For sum-based dimensions, it returns monthly resource usage.
+        Set `filter[view]` to `all` to return the full monthly resource breakdown. Requests
+        for unsupported billing dimensions, or dimensions configured with an unsupported
+        billing aggregation method, return a `400 Bad Request` error.
+
+        To get the next page of results, pass the `meta.pagination.next_record_id` value
+        from the previous response as `page[next_record_id]`, and keep all filters unchanged.
+        A null cursor indicates the last page. Paginated responses contain at most
+        `page[limit]` resource records, including queries across descendant organizations.
+
+        Exception: for any billing dimension billed at the 99th percentile,
+        `filter[view]=billable` returns the complete resource breakdown in one response,
+        including requested descendants. Eligibility depends on the organization's
+        billing configuration for the requested dimension and month, not on the product
+        name. For these queries, `page[limit]` and `page[next_record_id]` are ignored, and
+        `meta.pagination.next_record_id` is null. Sum-based usage and `filter[view]=all`
+        remain paginated.
+      operationId: GetUsageMonthlyResources
+      parameters:
+        - description: Billing dimension to retrieve, such as `infra_host`, `indexed_points`, or `logs_indexed_30day`.
+          example: infra_host
+          in: query
+          name: filter[billing_dimension]
+          required: true
+          schema:
+            type: string
+        - description: Month of usage to retrieve in `YYYY-MM` format.
+          example: "2026-04"
+          in: query
+          name: filter[month]
+          required: true
+          schema:
+            pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$"
+            type: string
+        - description: |-
+            Set to `billable` to return resources that contribute to billable usage, or `all`
+            to return the full monthly resource breakdown.
+          example: billable
+          in: query
+          name: filter[view]
+          required: true
+          schema:
+            $ref: "#/components/schemas/MonthlyResourcesView"
+        - description: Include usage for descendant organizations of the authenticated organization.
+          in: query
+          name: filter[include_descendants]
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: |-
+            Maximum number of resource records per paginated response. Must be a positive integer.
+            Values above 100,000 are capped at 100,000. Ignored for billable queries using
+            99th-percentile billing, which return the complete result in one response.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100000
+            format: int64
+            maximum: 100000
+            minimum: 1
+            type: integer
+        - description: |-
+            Opaque cursor from `meta.pagination.next_record_id` in the previous response.
+            Omit for the first request. Ignored for billable queries using 99th-percentile
+            billing, which always return the complete result.
+          in: query
+          name: page[next_record_id]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          data_date: "2026-04-30"
+                          org_name: Example organization
+                          public_id: abc123
+                          resource_name: host-1.prod
+                          tags:
+                            env: prod
+                          timestamp: "2026-04-22 16:00:00+00:00"
+                          usage_type: agent
+                          usage_value: 1
+                        id: abc123_agent_host-1.prod
+                        type: monthly_resource
+                    meta:
+                      pagination:
+                        next_record_id:
+                non_host:
+                  value:
+                    data:
+                      - attributes:
+                          data_date: "2026-04-30"
+                          org_name: Example organization
+                          public_id: abc123
+                          resource_name: app.requests
+                          tags: {}
+                          timestamp: "2026-04-01"
+                          usage_type: post_threshold_indexed
+                          usage_value: 1250.5
+                        id: abc123_post_threshold_indexed_app.requests
+                        type: monthly_resource
+                    meta:
+                      pagination:
+                        next_record_id:
+              schema:
+                $ref: "#/components/schemas/MonthlyResourcesResponse"
+          description: OK
+        "400":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden - User is not authorized
+        "429":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Too many requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - usage_read
+      summary: Get monthly usage by resource
+      tags:
+        - Usage Metering
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
