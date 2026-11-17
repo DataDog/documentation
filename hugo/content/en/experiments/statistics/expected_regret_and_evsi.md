@@ -30,7 +30,7 @@ This page is a reference for readers who want to understand or reproduce these c
 
 Let $Θ$ be the random effect, either absolute or relative lift. The posterior for $Θ$ has mean $m\_{\text\"post\"}$ and variance $v\_{\text\"post\"}$, as calculated in [Bayesian analysis][4]. Let $Φ$ and $φ$ denote the standard normal cumulative distribution function and density.
 
-A positive $Θ$ means the treatment increased the metric. The formulas on this page assume that an increase is desirable. If your metric should decrease, swap the roles of shipping the treatment and keeping the control. The regret and EVSI calculations treat increases and decreases symmetrically, so both values are the same whether your metric should increase or decrease.
+A positive $Θ$ means the treatment increased the metric. The formulas on this page assume that an increase is desirable. If your metric should decrease, swap the roles of shipping the treatment and keeping the control. Both values are the same whether your metric should increase or decrease.
 
 ## Minimum expected regret
 
