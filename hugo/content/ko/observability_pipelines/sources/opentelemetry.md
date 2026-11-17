@@ -25,7 +25,7 @@ title: OpenTelemetry 소스
 Observability Pipelines의 OpenTelemetry(OTel) 소스를 사용하여 HTTP 또는 gRPC를 통해 OTel Collector에서 로그 또는 메트릭을 수집하세요.
 
 **참고**:
-- Datadog Distribution of OpenTelemetry (DDOT) Collector를 사용하는 경우, OpenTelemetry 소스를 사용하여 [Observability Pipelines로 데이터를 전송하세요](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- Datadog Agent와 함께 별도의 프로세스로 실행되는 OpenTelemetry Collector인 Agent의 Collector를 사용하는 경우, OpenTelemetry 소스를 사용하여 [Observability Pipelines로 데이터를 전송하세요](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
 - Splunk HEC Distribution of the OpenTelemetry Collector를 사용하는 경우, [Splunk HEC 소스][4]를 사용하여 Observability Pipelines로 로그를 전송하세요.
 
 ### 이 소스를 사용하는 경우 {#when-to-use-this-source}
@@ -53,7 +53,7 @@ Observability Pipelines의 OpenTelemetry(OTel) 소스를 사용하여 HTTP 또�
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
-### 선택 사항 TLS 설정 {#optional-tls-settings}
+### 선택적 TLS 설정 {#optional-tls-settings}
 
 {{% observability_pipelines/tls_settings %}}
 
@@ -164,13 +164,13 @@ Worker는 기본 포트인 4317번 포트에서 gRPC 엔드포인트를 노출�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Datadog Distribution of OpenTelemetry Collector에서 Observability Pipelines로 데이터 전송 {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
+## Agent의 Collector에서 Observability Pipelines로 데이터 전송 {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
 
 {{< tabs >}}
 {{% tab "로그" %}}
 
-Datadog Distribution of the OpenTelemetry(DDOT) Collector에서 로그를 전송하려면 다음 단계를 따르세요.
-1. Helm을 사용하여 DDOT Collector를 배포합니다. 지침은 [Kubernetes DaemonSet으로 DDOT Collector 설치][5]를 참조하세요.
+Agent의 Collector에서 로그를 전송하려면:
+1. Helm을 사용하여 Agent의 Collector를 배포하세요. 지침은 [Kubernetes DaemonSet으로 Agent의 Collector 설정][5]을 참조하세요.
 1. Observability Pipelines에서 [OpenTelemetry 소스](#set-up-the-source-in-the-pipeline-ui)를 사용하여 [파이프라인을 설정합니다][6].
     1. (필요시) Datadog은 로그에 `source` 필드가 없는 경우 `op_otel_ddot:true` 필드를 추가하는 [Edit Fields 프로세서][7]를 파이프라인에 추가할 것을 권장합니다.
     1. Worker를 설치할 때 OpenTelemetry 소스 환경 변수에 대해 다음 단계를 따르세요.
@@ -196,11 +196,11 @@ Datadog Distribution of the OpenTelemetry(DDOT) Collector에서 로그를 전송
         ```
 
 **참고**:
-- DDOT는 Datadog Agent가 아닌 Observability Pipelines로 로그를 전송하므로, 다음 설정은 DDOT에서 Observability Pipelines로 로그를 전송하는 데 적용되지 않습니다.
+- Datadog Agent 자체가 아니라 Agent의 Collector가 Observability Pipelines로 로그를 전송하므로, 다음 설정은 Agent의 Collector에서 Observability Pipelines로 로그를 전송하는 데 적용되지 않습니다.
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
-- DDOT에서 전송된 로그에는 Datadog이 로그를 올바르게 구문 분석하지 못하게 하는 중첩된 객체가 포함될 수 있습니다. 이 문제를 해결하려면 Datadog은 [Custom Processor][8]를 사용하여 중첩된 `resource` 객체를 평면화할 것을 권장합니다.
-- DDOT Collector와 Observability Pipelines Worker가 동일한 호스트에서 실행 중인 경우, 기본 OTLP 수신기 포트(4317/4318)가 충돌할 수 있습니다. 일반적인 Kubernetes 배포에서는 Collector와 Worker가 별도의 포드에서 실행되므로 이 문제는 발생하지 않습니다.
+- Agent의 Collector에서 전송된 로그에는 Datadog이 로그를 올바르게 구문 분석하지 못하게 하는 중첩된 객체가 포함될 수 있습니다. 이 문제를 해결하려면 Datadog은 [Custom Processor][8]를 사용하여 중첩된 `resource` 객체를 평면화할 것을 권장합니다.
+- Agent의 Collector와 Observability Pipelines Worker가 동일한 호스트에서 실행 중인 경우, 기본 OTLP 수신기 포트(4317/4318)가 충돌할 수 있습니다. 일반적인 Kubernetes 배포에서는 Collector와 Worker가 별도의 포드에서 실행되므로 이 문제는 발생하지 않습니다.
 
 [5]: /ko/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /ko/observability_pipelines/configuration/set_up_pipelines/
@@ -212,8 +212,8 @@ Datadog Distribution of the OpenTelemetry(DDOT) Collector에서 로그를 전송
 
 {{% tab "메트릭" %}}
 
-Datadog Distribution of the OpenTelemetry(DDOT) Collector에서 메트릭을 전송하려면 다음 단계를 따르세요.
-1. Helm을 사용하여 DDOT Collector를 배포합니다. 지침은 [Kubernetes DaemonSet으로 DDOT Collector 설치][5]를 참조하세요.
+Agent의 Collector에서 메트릭을 전송하려면:
+1. Helm을 사용하여 Agent의 Collector를 배포하세요. 지침은 [Kubernetes DaemonSet으로 Agent의 Collector 설정][5]을 참조하세요.
 1. Observability Pipelines에서 [OpenTelemetry 소스](#set-up-the-source-in-the-pipeline-ui)를 사용하여 [파이프라인을 설정합니다][6].
     1. (필요시) Datadog은 파이프라인에 `op_otel_ddot:true` 필드를 추가하는 [Edit Fields 프로세서][7]를 추가할 것을 권장합니다.
     1. Worker를 설치할 때 OpenTelemetry 소스 환경 변수에 대해 다음 단계를 따르세요.
@@ -239,11 +239,11 @@ Datadog Distribution of the OpenTelemetry(DDOT) Collector에서 메트릭을 전
         ```
 
 **참고**:
-- DDOT는 Datadog Agent가 아닌 Observability Pipelines로 메트릭을 전송하므로, 다음 설정은 DDOT에서 Observability Pipelines로 메트릭을 전송하는 데 적용되지 않습니다.
+- Datadog Agent 자체가 아니라 Agent의 Collector가 Observability Pipelines로 메트릭을 전송하므로, 다음 설정은 Agent의 Collector에서 Observability Pipelines로 메트릭을 전송하는 데 적용되지 않습니다.
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
-- DDOT에서 전송된 메트릭에는 Datadog이 메트릭을 올바르게 구문 분석하지 못하게 하는 중첩된 객체가 있을 수 있습니다. 이 문제를 해결하려면 Datadog은 [Custom Processor][8]를 사용하여 중첩된 `resource` 객체를 평면화할 것을 권장합니다.
-- DDOT Collector와 Observability Pipelines Worker가 동일한 호스트에서 실행 중인 경우, 기본 OTLP 수신기 포트(4317/4318)가 충돌할 수 있습니다. 일반적인 Kubernetes 배포에서는 Collector와 Worker가 별도의 포드에서 실행되므로 이 문제는 발생하지 않습니다.
+- Agent의 Collector에서 전송된 메트릭에는 Datadog이 메트릭을 올바르게 구문 분석하지 못하게 하는 중첩된 객체가 있을 수 있습니다. 이 문제를 해결하려면 Datadog은 [Custom Processor][8]를 사용하여 중첩된 `resource` 객체를 평면화할 것을 권장합니다.
+- Agent의 Collector와 Observability Pipelines Worker가 동일한 호스트에서 실행 중인 경우, 기본 OTLP 수신기 포트(4317/4318)가 충돌할 수 있습니다. 일반적인 Kubernetes 배포에서는 Collector와 Worker가 별도의 포드에서 실행되므로 이 문제는 발생하지 않습니다.
 
 [5]: /ko/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /ko/observability_pipelines/configuration/set_up_pipelines/

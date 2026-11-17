@@ -6,3 +6,13 @@ entries:
       - CreateElasticCloudIntegrationAccount
       - UpdateElasticCloudIntegrationAccount
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41846
+    operations:
+      - CreateElasticCloudIntegrationAccount
+      - DeleteElasticCloudIntegrationAccount
+      - GetElasticCloudIntegrationAccount
+      - ListElasticCloudIntegrationAccounts
+      - UpdateElasticCloudIntegrationAccount
+    title: Fix 400 and 404 error schemas for Integration Accounts v2 APIs
