@@ -19935,6 +19935,18 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Create On-Call Page comment
+      url: /api/latest/on-call/create-on-call-page-comment/
+      identifier: on-call-create-on-call-page-comment
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageComment
+        unstable: []
+        order: 30
     - name: Get On-Call Page
       url: /api/latest/on-call/get-on-call-page/
       identifier: on-call-get-on-call-page

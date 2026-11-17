@@ -2192,6 +2192,13 @@
       "description": "Update Okta account returns \"OK\" response"
     }
   ],
+  "CreateOnCallPageComment": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call Page comment returns \"No Content\" response"
+    }
+  ],
   "CreateOnCallEscalationPolicy": [
     {
       "group": "on-call",
