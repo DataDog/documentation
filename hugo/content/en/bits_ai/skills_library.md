@@ -27,7 +27,7 @@ Create a skill directly in the Skills Library, or ask Bits Chat to create one fo
 
 ### Create a skill in the Skills Library
 
-1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][4].
 2. Create a skill or import an existing `SKILL.md` file.
 3. Enter a name and a skill ID. The skill ID is the slash command that invokes the skill. For example, a skill with the ID `my-skill` is invoked with `/my-skill`. You can't change the skill ID after you create the skill.
 4. Add the domain knowledge and instructions that the agent should follow.
@@ -62,7 +62,7 @@ You can also create a skill from an existing Slack thread. In the thread, enter:
 
 You can edit shared skills and private skills that you created. Editing requires the MCP Write permission. For details, see the [Permissions](#permissions) section.
 
-1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][4].
 2. Select the skill, then open its details page.
 3. Update the skill's name, description, tags, or instructions.
 4. Click {{< ui >}}Save Changes{{< /ui >}}.
@@ -77,7 +77,7 @@ Bits Chat can update private skills that you created. To edit a shared skill, us
 
 Clone a skill to create a private copy of it. For example, clone a skill to give it a different skill ID, or to customize a shared skill without changing the original.
 
-1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
+1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][4].
 2. Select the skill, then open its details page.
 3. Click the gear icon, then select {{< ui >}}Clone{{< /ui >}}.
 4. Enter a name and skill ID for the copy. By default, the copy uses the original name with `(copy)` appended and the original skill ID with `-copy` appended.
@@ -171,5 +171,5 @@ The Skills Library is available in Bits Chat, Bits Agent Builder, Slack, and ext
 [1]: /bits_ai/bits_chat/
 [2]: /actions/agents/
 [3]: /mcp_server/
-[4]: https://app.datadoghq.com/actions/skills
+[4]: https://app.datadoghq.com/bits/settings/skills
 [5]: /account_management/rbac/?tab=datadogapplication#update-a-role
