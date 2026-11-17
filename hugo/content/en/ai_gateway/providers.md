@@ -2,19 +2,14 @@
 title: Connect Providers to AI Gateway
 description: Connect provider accounts and custom endpoints to AI Gateway, discover or add models, and verify requests with Datadog credentials.
 further_reading:
-  - link: "/llm_observability/configure/ai_gateway/"
+  - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
-  - link: "/llm_observability/configure/ai_gateway/#control-model-access"
-    tag: "Documentation"
-    text: "Control model access"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
-
-## Overview
 
 An AI Gateway provider connects a Datadog integration account to a set of models. Applications call those models with Datadog credentials instead of receiving the upstream provider's credentials.
 
@@ -22,11 +17,11 @@ Create separate providers when workloads need different upstream accounts, regio
 
 ## Prerequisites
 
-- [AI Gateway access][1] for the Datadog organization.
+- [AI Gateway access][providers-1] for the Datadog organization.
 - The `ai_gateway_config_read` and `ai_gateway_config_write` permissions to configure providers and models.
-- A configured integration account for the provider. To create or update API-key accounts, request **Integrations Manage** (`manage_integrations`). Cloud integration setup has separate [AWS, Azure, and GCP configuration permissions][9].
+- A configured integration account for the provider. To create or update API-key accounts, request **Integrations Manage** (`manage_integrations`). Cloud integration setup has separate [AWS, Azure, and GCP configuration permissions][providers-9].
 - Upstream credentials that can **invoke models**, not only read usage or metrics. Complete any required model-access approvals in the upstream account.
-- A [personal access token or service access token][2] for verification. Both its principal and credential scope must allow `ai_gateway_usage`.
+- A [personal access token or service access token][providers-2] for verification. Both its principal and credential scope must allow `ai_gateway_usage`.
 
 ## Choose a provider account
 
@@ -52,20 +47,20 @@ In the provider form's {{< ui >}}Account{{< /ui >}} selector, select an existing
 
 Some accounts use a separate integration page:
 
-- **Vertex AI** opens the [Google Cloud integration][3], where you configure a service account with Vertex AI access.
+- **Vertex AI** opens the [Google Cloud integration][providers-3], where you configure a service account with Vertex AI access.
 - **Baseten** opens the Baseten integration, where you configure a key permitted to call Model APIs.
-- **Azure AI Foundry** offers {{< ui >}}+ Set up the Azure integration{{< /ui >}}. Complete [Azure integration setup][4], return to the form, and select the app registration.
+- **Azure AI Foundry** offers {{< ui >}}+ Set up the Azure integration{{< /ui >}}. Complete [Azure integration setup][providers-4], return to the form, and select the app registration.
 
 Integration credentials remain separate from the Datadog credential the application uses to call Gateway. Rotate upstream credentials in the integration settings.
 
-## Create a provider
+## Add a provider
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][5] and click {{< ui >}}New Provider{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][providers-5] and click {{< ui >}}New Provider{{< /ui >}}.
 2. In {{< ui >}}Details{{< /ui >}}, select the provider's integration account and complete its connection settings. See the [Choose a provider account](#choose-a-provider-account) section.
 3. Enter a display name and a unique slug, such as `production-openai`. The slug becomes part of every direct model request. The connected account and slug cannot be changed after creation.
 4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. Gateway automatically enables discovered models. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
-5. Review the cost multiplier and the prices in the [Model Catalog][6]. A custom model price takes precedence over the provider multiplier. Confirm pricing before relying on spend reporting or budgets.
-6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. See [Control model access][7].
+5. Review the cost multiplier and the prices in the [Model Catalog][providers-6]. A custom model price takes precedence over the provider multiplier. Confirm pricing before relying on spend reporting or budgets.
+6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. See [Control model access][providers-7].
 7. In {{< ui >}}Review{{< /ui >}}, check the account, slug, models, and access assignments, then click {{< ui >}}Create provider{{< /ui >}}.
 8. Open the saved provider and [verify a model request](#verify-the-connection).
 
@@ -144,7 +139,7 @@ A manual entry does not grant upstream model access or Gateway caller access. Co
 ## Verify the connection
 
 1. Open the saved provider. Under {{< ui >}}How to call this provider{{< /ui >}}, select a model and request format to view a generated example.
-2. Run the example with the application's Datadog credential and the Gateway endpoint for the correct [Datadog site][8]. For a model that supports Chat Completions:
+2. Run the example with the application's Datadog credential and the Gateway endpoint for the correct [Datadog site][providers-8]. For a model that supports Chat Completions:
 
    ```shell
    curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/chat/completions" \
@@ -160,11 +155,19 @@ A manual entry does not grant upstream model access or Gateway caller access. Co
 4. Confirm the served destination and token usage. If the request succeeds but spend is missing, check model pricing separately.
 5. Repeat with each operation the application uses. Success with one API does not verify another API, region, or model.
 
-## Manage a provider
+## Manage providers
+
+AI Gateway supports these model families on each provider. It also supports custom OpenAI-compatible endpoints.
+
+| Model family | OpenAI | Anthropic | GCP Vertex AI | Amazon Bedrock | Azure OpenAI |
+|---|:---:|:---:|:---:|:---:|:---:|
+| OpenAI GPT | {{< X >}} | | | {{< X >}} | {{< X >}} |
+| Anthropic Claude | | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Gemini | | | {{< X >}} | | |
 
 Open a provider from the list to review its connection, models, generated requests, and traffic. Click {{< ui >}}Edit provider{{< /ui >}} to change its display name or model settings. Manage caller access through access policies.
 
-To move to a different integration account or slug, create another provider, verify it, then update dependent applications and routing rules. Before deleting a provider, review the dependency impact shown in the confirmation. A decision model chooses the destination for a smart routing rule. If a rule uses this provider as its decision model, select another decision model before deleting the provider.
+The slug, provider type, integration account, and connection configuration cannot be changed after you create the provider. To move to a different integration account or slug, create another provider, verify it, then update dependent applications and routing rules. Before deleting a provider, review the dependency impact shown in the confirmation. A decision model chooses the destination for a smart routing rule. If a rule uses this provider as its decision model, select another decision model before deleting the provider.
 
 ### Diagnose connection problems
 
@@ -183,12 +186,12 @@ Provider status updates after model synchronization or Gateway requests. Review 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/ai_gateway/#prerequisites
-[2]: /llm_observability/configure/ai_gateway/#authenticate-requests
-[3]: /integrations/google_cloud_platform/
-[4]: /integrations/azure/
-[5]: https://app.datadoghq.com/llm/gateway/providers
-[6]: https://app.datadoghq.com/llm/gateway/model-catalog
-[7]: /llm_observability/configure/ai_gateway/#control-model-access
-[8]: /getting_started/site/
-[9]: /account_management/rbac/permissions/#integrations
+[providers-1]: /ai_gateway/getting_started/#prerequisites
+[providers-2]: /ai_gateway/applications/#authenticate-requests
+[providers-3]: /integrations/google_cloud_platform/
+[providers-4]: /integrations/azure/
+[providers-5]: https://app.datadoghq.com/llm/gateway/providers
+[providers-6]: https://app.datadoghq.com/llm/gateway/model-catalog
+[providers-7]: /ai_gateway/access_control/
+[providers-8]: /getting_started/site/
+[providers-9]: /account_management/rbac/permissions/#integrations

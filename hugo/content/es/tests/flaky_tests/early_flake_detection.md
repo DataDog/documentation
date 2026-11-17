@@ -18,12 +18,12 @@ title: Detección temprana de inestabilidad
 ---
 ## Descripción general {#overview}
 
-Early Flake Detection es la solución de inestabilidad de pruebas de Datadog que mejora la calidad del código al identificar [pruebas inestables][1] al principio del ciclo de desarrollo. Para obtener más información sobre las pruebas inestables, consulte [Flaky Test Management][2].
+Early Flake Detection es la solución de Datadog para la inestabilidad de pruebas que mejora la calidad del código al identificar [pruebas inestables][1] al principio del ciclo de desarrollo. Para obtener más información sobre las pruebas inestables, consulte [Flaky Test Management][2].
 
-Al ejecutar las pruebas recién añadidas varias veces, Datadog puede detectar la inestabilidad antes de que estas pruebas se fusionen en la rama predeterminada. Un estudio muestra que hasta el [75 % de las pruebas inestables][3] pueden identificarse con este enfoque.
+Al ejecutar las pruebas recién agregadas varias veces, Datadog puede detectar la inestabilidad antes de que estas pruebas se fusionen en la rama predeterminada. Un estudio muestra que hasta el [75 % de las pruebas inestables][3] pueden identificarse con este enfoque.
 
 Pruebas conocidas
-: El backend de Datadog almacena pruebas únicas para un servicio de pruebas determinado. Antes de que se ejecute una sesión de pruebas, la biblioteca de Datadog obtiene la lista de estas pruebas conocidas.
+: El backend de Datadog almacena pruebas únicas para un servicio de pruebas determinado. Antes de que se ejecute una sesión de prueba, la biblioteca de Datadog obtiene la lista de estas pruebas conocidas.
 
 Detección de nuevas pruebas
 : Si una prueba no se encuentra en la lista de pruebas conocidas, se considera **nueva** y se reintenta automáticamente hasta diez veces.
@@ -31,15 +31,21 @@ Detección de nuevas pruebas
 Identificación de inestabilidad
 : Ejecutar una prueba varias veces ayuda a descubrir problemas como condiciones de carrera, que pueden hacer que la prueba pase y falle de forma intermitente. Si alguno de los intentos de prueba falla, la prueba se etiqueta automáticamente como inestable.
 
-Ejecutar una prueba varias veces aumenta la probabilidad de exponer condiciones aleatorias que causan inestabilidad. Early Flake Detection ayuda a garantizar que solo se integren pruebas estables y confiables en la rama predeterminada:
+Ejecutar una prueba varias veces aumenta la probabilidad de exponer condiciones aleatorias que causan inestabilidad. Early Flake Detection ayuda a garantizar que solo las pruebas estables y confiables se integren en la rama predeterminada:
 
 {{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="Cómo funciona Early Flake Detection en sus commits" style="width:100%">}}
 
 Puede optar por bloquear la fusión de la rama de funcionalidad con un [PR Gate][4]. Para obtener más información, consulte la [documentación de PR Gates][5].
 
+Los reintentos agregados por Early Flake Detection no se facturan como spans de prueba. Para obtener más detalles, consulte [CI/CD Optimization Billing][10].
+
+## Excluya pruebas individuales de los reintentos {#exclude-individual-tests-from-retries}
+
+Utilice una anotación de código para excluir pruebas individuales de Early Flake Detection, Auto Test Retries y los reintentos de Attempt to Fix. Los reintentos explícitos configurados en el marco de pruebas siguen estando disponibles. Consulte [Control Test Automation with Code Annotations][11] para ver ejemplos y requisitos de versión.
+
 ## Configuración {#setup}
 
-Antes de implementar Early Flake Detection, debe configurar [Test Optimization][6] para su entorno de desarrollo. Si está reportando datos a través del Datadog Agent, utilice la versión 6.40 o 7.40 y posteriores.
+Antes de implementar Early Flake Detection, debe configurar [Test Optimization][6] para su entorno de desarrollo. Si está reportando datos a través del Datadog Agent, utilice la versión 6.40 o 7.40, o una posterior.
 
 ### Configuración {#configuration}
 
@@ -106,10 +112,10 @@ La compatibilidad del marco de pruebas es la misma que [Test Optimization Compat
 {{< /tabs >}}
 
 <div class="alert alert-warning">
-Los servicios de pruebas con más de 100 000 pruebas conocidas requieren una versión de la biblioteca de Datadog que admita la paginación en el punto de conexión de pruebas conocidas. Las versiones mínimas anteriores cubren el lanzamiento inicial de EFD; la compatibilidad con la paginación llegó más tarde. Sin ella, la biblioteca no puede obtener la línea base de pruebas conocidas y Early Flake Detection no se ejecuta en esa sesión.
+Los servicios de pruebas con más de 100 000 pruebas conocidas requieren una versión de la biblioteca de Datadog que admita la paginación en el punto de conexión de pruebas conocidas. Las versiones mínimas anteriores cubren el lanzamiento inicial de EFD; la compatibilidad con la paginación llegó más tarde. Sin ella, la biblioteca no puede obtener la línea base de pruebas conocidas y Early Flake Detection no se ejecuta para esa sesión.
 </div>
 
-Las siguientes versiones de la biblioteca de Datadog añaden compatibilidad con la paginación en el punto de conexión de pruebas conocidas:
+Las siguientes versiones de la biblioteca de Datadog añaden compatibilidad con paginación en el punto de conexión de pruebas conocidas:
 
 | Biblioteca                | Versión mínima |
 | ---------------------- | --------------- |
@@ -123,29 +129,29 @@ Las siguientes versiones de la biblioteca de Datadog añaden compatibilidad con 
 
 ## Explorar resultados en el Test Optimization Explorer {#explore-results-in-the-test-optimization-explorer}
 
-Puede usar las siguientes facetas para consultar las sesiones que ejecutan Early Flake Detection y las pruebas nuevas en [Test Optimization Explorer][8].
+Puede usar las siguientes facetas para consultar sesiones que ejecutan Early Flake Detection y pruebas nuevas en el [Test Optimization Explorer][8].
 
 * **Test Session**: Las sesiones de prueba que ejecutan Early Flake Detection tienen la etiqueta `@test.early_flake.enabled` establecida en `true`.
-* **New Tests**: Las pruebas nuevas tienen la etiqueta `@test.is_new` establecida en `true`, y los reintentos de esta prueba tienen la etiqueta `@test.is_retry` establecida en `true`.
+* **New Tests**: Las pruebas nuevas tienen la etiqueta `@test.is_new` establecida en `true`, y los reintentos para esta prueba tienen la etiqueta `@test.is_retry` establecida en `true`.
 
 ## Solución de problemas {#troubleshooting}
 
 Si sospecha que hay problemas con Early Flake Detection, abra [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7], busque su repositorio o servicio de pruebas y desactive Early Flake Detection.
 
-### No se está reintentando una prueba nueva {#a-new-test-is-not-being-retried}
+### Una prueba nueva no se está reintentando {#a-new-test-is-not-being-retried}
 
-Esto puede deberse a dos motivos:
+Esto podría deberse a un par de razones:
 
 * Esta prueba se ha ejecutado anteriormente.
-* Esta prueba tarda más de cinco minutos. Existe un mecanismo para no ejecutar Early Flake Detection en pruebas que son demasiado lentas, ya que reintentar estas pruebas podría causar retrasos significativos en los Pipelines de CI.
+* Esta prueba tarda más de cinco minutos en ejecutarse. Existe un mecanismo para no ejecutar Early Flake Detection en pruebas que son demasiado lentas, ya que reintentar estas pruebas podría causar retrasos significativos en los pipelines de CI.
 
-Por último, si su servicio de pruebas tiene más de 100 000 pruebas conocidas y su versión de la biblioteca de Datadog no admite la paginación en el punto de conexión de pruebas conocidas, la biblioteca no puede obtener la línea base de pruebas conocidas y no se identifica ninguna prueba como nueva. Para evitar esto, actualice a la versión más reciente del rastreador.
+Por último, si su servicio de pruebas tiene más de 100 000 pruebas conocidas y su versión de la biblioteca de Datadog no admite paginación en el punto de conexión de pruebas conocidas, la biblioteca no puede obtener la línea base de pruebas conocidas y no se identifica ninguna prueba como nueva. Para evitar esto, actualice a la versión más reciente del tracer.
 
-### Se reintentó una prueba que no es nueva {#a-test-was-retried-that-is-not-new}
+### Se volvió a intentar una prueba que no es nueva {#a-test-was-retried-that-is-not-new}
 
 Si una prueba no ha estado activa durante más de 14 días, podría volver a identificarse como nueva.
 
-Si la biblioteca de Datadog no puede obtener la lista completa de pruebas conocidas, es posible que la biblioteca de Datadog reintente pruebas que no son nuevas. Existe un mecanismo para evitar que este error ralentice el pipeline de CI, pero, si sucede, comuníquese con [Soporte de Datadog][9].
+Si la biblioteca de Datadog no puede obtener la lista completa de pruebas conocidas, es posible que la biblioteca de Datadog vuelva a intentar pruebas que no son nuevas. Existe un mecanismo para evitar que este error ralentice el pipeline de CI, pero si sucede, comuníquese con [Datadog Support][9].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -160,3 +166,5 @@ Si la biblioteca de Datadog no puede obtener la lista completa de pruebas conoci
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /es/tests/explorer/
 [9]: /es/help/
+[10]: /es/account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[11]: /es/tests/flaky_management/code_annotations/

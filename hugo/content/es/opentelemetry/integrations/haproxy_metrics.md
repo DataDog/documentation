@@ -2,34 +2,59 @@
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación
-  text: Configuración de OpenTelemetry Collector
+  text: Configuración del OpenTelemetry Collector
 title: Métricas de HAProxy
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="Métricas de HAProxy de OpenTelemetry en un dashboard de HAProxy" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="Métricas de OpenTelemetry HAProxy en un dashboard de HAProxy" style="width:100%;" >}}
+El [receptor de HAProxy][1] recopila métricas de HAProxy que alimentan el dashboard [HAProxy Overview][4].
 
-El [receptor de HAProxy][1] permite recopilar métricas de HAProxy y acceder al dashboard de [Información general de HAProxy][4]. Configura el receptor de acuerdo con las especificaciones de la última versión del `haproxyreceiver`.
+Para obtener más información, consulte la documentación del proyecto OpenTelemetry para el [receptor de HAProxy][1].
 
-Para más información, consulta la documentación del proyecto de OpenTelemetry para el [receptor de HAProxy][1].
+## Configuración {#setup}
 
-## Configuración
+Este ejemplo utiliza identificadores de componentes de OpenTelemetry Collector Contrib v0.154.0. Para otras versiones o distribuciones, utilice los identificadores que admita su distribución.
 
-Para recopilar métricas de HAProxy con OpenTelemetry para su uso con Datadog:
+Agregue las siguientes líneas a su configuración de Collector. El receptor no tiene un punto de conexión predeterminado, así que establezca `endpoint` en la URL de su página de estadísticas de HAProxy o en la ruta a su socket de estadísticas, como `/var/run/haproxy.sock`. Limite el acceso a la página o al socket de estadísticas, por ejemplo a localhost, porque muestra detalles sobre sus servidores.
 
-1. Configura el [receptor de HAProxy][1] en tu configuración de OpenTelemetry Collector.
-2. Asegúrate de que OpenTelemetry Collector está [configurado para exportar a Datadog][5].
+La sección `metrics` activa métricas que el receptor no recopila de forma predeterminada. El dashboard de HAProxy las utiliza.
 
-Consulta la [documentación del receptor de HAProxy][1] para conocer las opciones y requisitos detallados de configuración.
+```yaml
+receivers:
+  haproxy:
+    endpoint: http://127.0.0.1:8080/stats
+    metrics:
+      haproxy.connections.total:
+        enabled: true
+      haproxy.sessions.total:
+        enabled: true
+      haproxy.failed_checks:
+        enabled: true
+      haproxy.clients.canceled:
+        enabled: true
+      haproxy.compression.bypass:
+        enabled: true
+      haproxy.compression.count:
+        enabled: true
+      haproxy.compression.input:
+        enabled: true
+      haproxy.compression.output:
+        enabled: true
+```
 
-## Datos recopilados
+Agregue `haproxy` a la lista `receivers` del pipeline de métricas en su configuración. Mantenga los procesadores que ya están en ese pipeline. La ingesta de métricas OTLP de Datadog solo acepta métricas delta, y este receptor produce sumas acumulativas, por lo que el pipeline necesita `cumulativetodelta`. La [configuración de Collector recomendada][5] lo incluye.
+
+Para ver todas las opciones de configuración, consulte la [documentación del receptor de HAProxy][1].
+
+## Datos recopilados {#data-collected}
 
 {{< mapping-table resource="haproxy.csv">}}
 
-Consulta [Asignación de métricas de OpenTelemetry][2] para obtener más información.
+Para ver la asignación completa entre los nombres de métricas de OpenTelemetry y Datadog, consulte [Asignación de métricas de OpenTelemetry][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

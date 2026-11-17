@@ -58,17 +58,48 @@ Le SCA prend en charge deux modes de détection complémentaires :
 
 Lorsque Datadog ingère un nouvel avis, il est comparé à votre dernier inventaire de bibliothèques connu et apparaît dans le Vulnerabilities Explorer même si vous n'avez pas relancé l'analyse du dépôt. Le Repositories Explorer est limité au commit et reflète ce qui était connu au moment de l'exécution de l'analyse ; ainsi, une analyse exécutée avant que Datadog n'ingère l'avis n'affichera pas cet avis nouvellement publié dans le Repositories Explorer pour ce commit. Consultez [Comprendre les vues SCA](#understanding-sca-views) pour plus de détails.
 
-## Base de données des vulnérabilités {#vulnerability-database}
+## Couverture de détection par type de composant {#detection-coverage-by-component-type}
+
+La détection statique et la détection au runtime analysent différentes parties d'une application. Savoir ce que couvre chaque mode de détection vous aide à choisir une configuration et à savoir où chercher lorsqu'une vulnérabilité affecte votre stack.
+
+| Composant | SCA statique | SCA au runtime |
+|---|---|---|
+| Bibliothèques open source | Détectées lorsqu'elles sont listées dans un fichier de verrouillage ou un manifeste pris en charge. | Détectée lorsqu'un service charge la bibliothèque. |
+| Runtimes Go et .NET | Détectés. | Détectés. |
+| Autres runtimes de langage, tels que l'interpréteur PHP et la JVM | Non détectés. | Non détectés. |
+| Packages de système d'exploitation et binaires autonomes | Non détectés. | Non détectés. |
+
+Pour détecter les vulnérabilités dans les packages de système d'exploitation, les images de conteneur et les runtimes de langage installés via un gestionnaire de packages de système d'exploitation, utilisez [Cloud Security Vulnerabilities][35]. Cloud Security Vulnerabilities prend en charge [uniquement les packages officiels des fournisseurs de systèmes d'exploitation][38], il ne détecte donc pas les runtimes de langage compilés à partir de la source.
+
+## Intelligence sur les vulnérabilités {#vulnerability-intelligence}
+
+Les données de vulnérabilité sur lesquelles reposent les résultats SCA déterminent quelles vulnérabilités Datadog détecte, à quelle vitesse les nouvelles vulnérabilités apparaissent et quels résultats traiter en priorité.
+
+### Sources de vulnérabilités {#vulnerability-sources}
+
+L'éventail des sources sur lesquelles repose la base de données de vulnérabilités Datadog détermine quelles vulnérabilités SCA peut détecter et à quelle vitesse les vulnérabilités nouvellement publiées apparaissent dans vos résultats.
 
 Datadog SCA s'appuie sur de multiples sources publiques et privées pour constituer une base de données propriétaire organisée. Ces sources incluent la [National Vulnerability Database (NVD)][21], la [GitHub Advisory Database][22], [osv.dev][23], des avis spécifiques aux écosystèmes tels que la [PyPA's Advisory Database][24] et la [Global Security Database][25], [Datadog GuardDog][26], ainsi que la recherche en sécurité de Datadog.
 
 Datadog utilise ces sources pour identifier les vulnérabilités connues, les paquets malveillants et les menaces émergentes sur la chaîne d'approvisionnement dans les écosystèmes pris en charge. Il y a un délai maximum d'une heure entre la publication d'une nouvelle vulnérabilité et son apparition dans Datadog, les vulnérabilités émergentes apparaissant généralement dans Datadog en quelques minutes. Les paquets malveillants sont signalés dans Datadog sous 6 heures.
 
-## Sources d'exploits publics {#public-exploit-sources}
+### Sources d'exploits publics {#public-exploit-sources}
 
 Datadog identifie si une vulnérabilité possède un exploit public connu en agrégeant des données provenant de multiples sources publiques, notamment CISA (Known Exploited Vulnerabilities Catalog), Exploit-DB, NIST (National Vulnerability Database) et GitHub (références d'exploits publics).
 
 Lorsque Datadog identifie un exploit public pour une vulnérabilité provenant de l'une de ces sources, il marque la découverte pour vous aider à prioriser la remédiation.
+
+### Vulnérabilités émergentes {#emerging-vulnerabilities}
+
+Les vulnérabilités émergentes sont des vulnérabilités de gravité élevée, largement commentées, qui nécessitent une attention immédiate des équipes de sécurité. Datadog Security Research suit les vulnérabilités émergentes et signale les résultats affectés, afin que vous puissiez identifier et hiérarchiser l'exposition sans attendre votre prochain scan.
+
+Datadog Security Research classe une vulnérabilité comme émergente en fonction des [critères de vulnérabilité émergente][36]. Pour chaque vulnérabilité émergente, Datadog :
+
+- Publie un article dans le [Security Research Feed][37] avec une analyse, les correspondances dans votre environnement et des conseils de remédiation.
+- Marque les résultats SCA correspondants comme émergents. Dans Vulnerabilities Explorer, la facette {{< ui >}}Emerging Vulnerability{{< /ui >}} permet de filtrer ces résultats.
+- Affiche une bannière sur l'onglet {{< ui >}}Vulnerabilities{{< /ui >}} lorsque des vulnérabilités émergentes affectent vos dépôts ou services.
+
+Pour vérifier l'exposition à une vulnérabilité émergente, ouvrez l'article sur la vulnérabilité dans le Security Research Feed ou recherchez la CVE dans [CVE Explorer][27].
 
 ## Fonctionnalités clés {#key-capabilities}
 
@@ -337,3 +368,7 @@ Vous pouvez exclure des chemins de l'analyse SCA statique en configurant `ignore
 [32]: /fr/bits_ai/bits_code/automations
 [33]: https://app.datadoghq.com/code
 [34]: https://app.datadoghq.com/code/automations
+[35]: /fr/security/cloud_security_management/vulnerabilities/
+[36]: /fr/security/research_feed/#criteria-for-emerging-vulnerabilities
+[37]: /fr/security/research_feed/
+[38]: /fr/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility/
