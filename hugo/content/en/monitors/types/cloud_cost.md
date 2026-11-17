@@ -1,6 +1,6 @@
 ---
 title: Cloud Cost Monitor
-description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs, including real-time AI cost increases.'
+description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs, including real-time AI and cloud compute cost increases.'
 further_reading:
     - link: 'https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview'
       tag: 'Documentation'

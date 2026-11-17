@@ -116,7 +116,9 @@ This is an example of how to mark a cost anomaly as significant and explain why 
 
 ## Real-time anomaly notifications
 
-Real-time anomaly notifications alert you within 15 minutes of an unexpected increase in estimated AI costs or [real-time cloud compute costs][6]. The {{< ui >}}Anomalies{{< /ui >}} tab uses finalized billing data instead, which is typically available 2-3 days after usage.
+Real-time anomaly notifications alert you within 15 minutes of an unexpected increase in estimated AI costs or [real-time cloud compute costs][6]. Cost anomalies detected from billing data take longer to surface, because billing data is typically available 2-3 days after usage.
+
+Real-time anomaly notifications require estimated cost data: LLM cost data from Agent Observability for AI costs, or [Real-Time Costs][6] for cloud compute costs. For the full requirements, see the [real-time anomaly monitor prerequisites][8].
 
 To set up real-time anomaly notifications:
 
@@ -158,3 +160,4 @@ For more help, contact [Datadog Support][4].
 [5]: /cloud_cost_management/cloud_cost_skill/
 [6]: /cloud_cost_management/cost_changes/real_time_costs/
 [7]: /cloud_cost_management/cost_changes/monitors/#create-a-real-time-anomaly-monitor
+[8]: /cloud_cost_management/cost_changes/monitors/#prerequisites
