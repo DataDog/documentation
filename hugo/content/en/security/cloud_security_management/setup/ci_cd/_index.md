@@ -201,8 +201,6 @@ docker build \
   -t myapp:latest .
 ```
 
-For more details, see the [OCI Image Spec annotations documentation][14].
-
 ### Using the Datadog Security CLI
 
 As an alternative to adding labels or annotations, the Datadog Security CLI can inject the required metadata directly when scanning, using the `--dockerfile` flag:
@@ -253,5 +251,4 @@ For additional help, see the [Cloud Security troubleshooting guide][12] or conta
 [11]: /integrations/azure-devops-source-code/#setup
 [12]: /security/cloud_security_management/troubleshooting/vulnerabilities/
 [13]: /help/
-[14]: https://specs.opencontainers.org/image-spec/annotations/
 [15]: /security/cloud_security_management/setup/dockerfile_labels/
