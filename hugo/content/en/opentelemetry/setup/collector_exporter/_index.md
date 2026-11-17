@@ -944,7 +944,7 @@ Two fields in the [`dd-otel-metric-config` header](#dd-otel-metric-config-header
 |---|---|---|
 | `true` | `true` | HTTP metrics power APM RED metrics at reduced cardinality. Raw HTTP metrics are dropped, so they are not billed as custom metrics. |
 | `true` | `false` | HTTP metrics power APM RED metrics, and Datadog also retains the raw metrics at full cardinality as custom metrics for your own dashboards and monitors. |
-| `false` | `true` | HTTP metrics are dropped. Use this with the `span_metrics` connector to avoid custom metric costs for HTTP metrics. |
+| `false` | `true` | No effect: `raw_instrumentation_metrics_drop` applies only when `instrumentation_metrics_calc` is `true`. Datadog retains all raw HTTP metrics at full cardinality as custom metrics. To drop them without powering RED metrics, filter them in the Collector or disable them in the SDK. |
 | `false` | `false` | Datadog retains all raw HTTP metrics at full cardinality as custom metrics. |
 
 ## Key components
