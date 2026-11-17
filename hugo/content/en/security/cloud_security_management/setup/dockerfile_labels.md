@@ -14,13 +14,7 @@ further_reading:
 - link: "/integrations/github/"
   tag: "Documentation"
   text: "GitHub integration"
-products:
-  - name: Cloud Security Vulnerabilities
-    url: /security/cloud_security_management/vulnerabilities/
-    icon: cloud-security-management
 ---
-
-{{< product-availability >}}
 
 ## Overview
 
