@@ -311,13 +311,15 @@ Pass `allow_raise: false` to make a call return an evaluation and never raise `A
 
 To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. AI Guard still evaluates tool calls set to {% ui %}Pass{% /ui %} and reports the results, but never blocks them. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
 
-## Add custom tags to evaluations
+## Filter evaluations by application context
 
-Custom tags let you search AI Guard evaluations in Datadog by your own fields, such as a tenant or an application flow. The SDK sets each custom tag on the AI Guard span of the evaluation.
+Filtering AI Guard evaluations by application context, such as a tenant or an application flow, shows how AI Guard treats each part of your application. Custom tags on SDK calls add that context to the AI Guard span of each evaluation.
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
-Custom tags require `dd-trace-py` 4.17.0 or later. Pass a dictionary in the `tags` parameter of the evaluate method:
+Custom tags require `dd-trace-py` 4.17.0 or later.
+
+Pass a dictionary in the `tags` parameter of the evaluate method:
 
 ```python
 result = client.evaluate(
@@ -329,14 +331,16 @@ result = client.evaluate(
 )
 ```
 
-The SDK ignores keys that start with `ai_guard.`, which are reserved for AI Guard, so custom tags can't overwrite AI Guard-owned span tags.
-
-The `tags` parameter applies to SDK calls. To add custom tags to evaluations from [automatic integrations][1], set them on the AI Guard span from a [middleware](#filter-and-observe-evaluations-with-middlewares). Tags that a middleware sets on the span aren't filtered, so never set keys equal to `ai_guard` or starting with `ai_guard.` from a middleware.
+{% alert level="info" %}
+The SDK ignores keys with the `ai_guard.` prefix, so custom tags can't overwrite the span tags that AI Guard sets.
+{% /alert %}
 {% /if %}
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-Custom tags require `dd-trace-js` 5.136.0 or later, or 6.25.0 or later. Pass an object in the `tags` option of the evaluate method:
+Custom tags require `dd-trace-js` 5.136.0 or later, or 6.25.0 or later.
+
+Pass an object in the `tags` option of the evaluate method:
 
 ```javascript
 const result = await tracer.aiguard.evaluate([
@@ -347,158 +351,28 @@ const result = await tracer.aiguard.evaluate([
 })
 ```
 
-The SDK drops the following entries without raising an error:
+{% alert level="info" %}
+The SDK drops these entries without raising an error:
 
-- Keys equal to `ai_guard` or starting with `ai_guard.`, which are reserved for AI Guard, so custom tags can't overwrite AI Guard-owned span tags.
-- Values that aren't a string, a finite number, or a boolean.
+- Keys equal to `ai_guard` or with the `ai_guard.` prefix, so custom tags can't overwrite the span tags that AI Guard sets.
+- Values that aren't a string, a finite number, or a Boolean.
 - Empty keys, keys longer than 200 characters, and string values longer than 25,000 characters.
+{% /alert %}
 {% /if %}
 
 <!-- Java and Ruby -->
 {% if includes($prog_lang, ["java", "ruby"]) %}
-Custom tags are available only in the Python and Node.js SDKs.
+The Java and Ruby SDKs don't support custom tags.
 {% /if %}
 
 {% if includes($prog_lang, ["python", "node_js"]) %}
 ### Find evaluations by custom tag
 
-To confirm that a custom tag arrived, and to find the evaluations that carry it:
+Find evaluations by custom tag to investigate AI Guard decisions for one tenant, application flow, or other part of your application.
 
-1. Run an evaluation with a custom tag, such as `tenant` set to `acme`.
-1. In the [Trace Explorer][13], search for `resource_name:ai_guard @tenant:acme`.
-1. Open an AI Guard span from the results and confirm that the custom tag appears in the span's attributes.
-
-You can search for a custom tag without any setup. To group or filter evaluations by a custom tag in the facet panel or in visualizations, first [create a facet][14] for it, or a [measure][15] for numeric values.
-{% /if %}
-
-## Filter and observe evaluations with middlewares
-
-Middlewares let you decide in code which requests AI Guard evaluates, and run your own logic around each evaluation. A middleware applies to every AI Guard evaluation in the process, from SDK calls and [automatic integrations][1] alike, so you can skip specific requests without turning off a whole integration.
-
-<!-- Python -->
-{% if equals($prog_lang, "python") %}
-Middlewares require `dd-trace-py` 4.17.0 or later.
-
-1. Create a subclass of `AIGuardMiddleware` and override one or more of its hooks:
-
-   | Hook | When it runs | Use it to |
-   | --- | --- | --- |
-   | `should_evaluate(context)` | Before the evaluation starts, before AI Guard creates the span. | Skip the evaluation by returning `False`. Any other return value, including `None`, lets the evaluation run. |
-   | `pre_evaluate(context)` | Inside the AI Guard span, right before the request to AI Guard. | Add tags to the AI Guard span, or store values for `post_evaluate`. |
-   | `post_evaluate(context)` | Once, after the evaluation finishes, whether AI Guard allows, denies, or blocks the request, or the request fails. | Log, count, or tag the outcome. |
-
-1. Register an instance of the middleware once, at application startup, with `register_middleware`:
-
-   ```python
-   from ddtrace.aiguard.middleware import AIGuardMiddleware, EvaluationDirection, register_middleware
-
-
-   class InputOnly(AIGuardMiddleware):
-       """Evaluate the messages sent to the model, not the model responses."""
-
-       def should_evaluate(self, context):
-           return context.request.direction is EvaluationDirection.INPUT
-
-
-   register_middleware(InputOnly())
-   ```
-
-Middlewares run in registration order, and they can't be unregistered.
-
-### How middlewares affect evaluations
-
-Middlewares are part of the security decision, not only observers of it:
-
-- **Skipping is an allow decision.** When `should_evaluate` returns `False`, AI Guard doesn't create a span or call the AI Guard service, and the request proceeds unevaluated. The evaluate method returns an `ALLOW` action with the reason `skipped by middleware` and the original messages. The remaining middlewares aren't checked, and `post_evaluate` isn't called. Skip only requests that you trust.
-- **Hook exceptions are contained.** If a hook raises an exception, the SDK logs it at debug level and ignores it, so a middleware never breaks the agent's model call. If `should_evaluate` raises, the evaluation runs.
-- **Don't modify the context.** Treat `context.result` and `context.request.messages` as read-only. Modifying `context.result` changes the evaluation returned to direct SDK callers, but doesn't change AI Guard's blocking decision.
-- **Don't set reserved tags.** Tags that a middleware sets on `context.ai_guard_span` aren't filtered. Never set keys equal to `ai_guard` or starting with `ai_guard.`, which would misreport the evaluation in Datadog.
-
-### Middleware context
-
-Every hook receives the same `AIGuardContext` object for a given evaluation:
-
-| Attribute | Description | Available in |
-| --- | --- | --- |
-| `request.source` | `"sdk"` for an SDK call, `"auto"` for an automatic integration. | All hooks |
-| `request.integration` | The instrumented package, such as `"openai"`, `"anthropic"`, `"langchain"`, or `"strands"`. `"none"` for SDK calls. | All hooks |
-| `request.direction` | `EvaluationDirection.OUTPUT` when the last message comes from the assistant, `EvaluationDirection.INPUT` otherwise. | All hooks |
-| `request.target` | `EvaluationTarget.TOOL` for a tool call or tool result, `EvaluationTarget.PROMPT` otherwise. | All hooks |
-| `request.messages` | The ordered list of messages to evaluate. Don't modify it. | All hooks |
-| `local_root_span` | The local root span of the application trace, such as the HTTP request span, or `None`. | All hooks |
-| `ai_guard_span` | The AI Guard span. `None` in `should_evaluate`, because the span doesn't exist yet. | `pre_evaluate`, `post_evaluate` |
-| `result` | The evaluation that AI Guard returned, including when the request is blocked. `None` if the request failed. | `post_evaluate` |
-| `error` | The exception that the evaluate method is about to raise: `AIGuardAbortError` when the request is blocked, or `AIGuardClientError` when the request failed. `None` otherwise. | `post_evaluate` |
-| `state` | A dictionary for sharing values between the hooks of one evaluation. | All hooks |
-
-### Example: Skip evaluations for an integration or a route
-
-```python
-from ddtrace.aiguard.middleware import AIGuardMiddleware, register_middleware
-
-
-class SkipInternalTraffic(AIGuardMiddleware):
-    def should_evaluate(self, context):
-        # Skip calls made through the LangChain integration.
-        if context.request.integration == "langchain":
-            return False
-        # Skip requests served by an internal route.
-        root = context.local_root_span
-        if root is not None and root.get_tag("http.route") == "/internal/summarize":
-            return False
-        return True
-
-
-register_middleware(SkipInternalTraffic())
-```
-
-### Example: Tag and log evaluations
-
-This middleware copies a tenant tag from the application request span to the AI Guard span, so evaluations from automatic integrations carry the same custom tags as SDK calls. It then logs every evaluation that isn't allowed:
-
-```python
-import logging
-
-from ddtrace.aiguard.middleware import AIGuardMiddleware, register_middleware
-
-log = logging.getLogger(__name__)
-
-
-class TenantTagging(AIGuardMiddleware):
-    def pre_evaluate(self, context):
-        root = context.local_root_span
-        tenant = root.get_tag("tenant") if root is not None else None
-        if tenant:
-            context.ai_guard_span.set_tag("tenant", tenant)
-
-    def post_evaluate(self, context):
-        if context.result is None:
-            log.warning("AI Guard evaluation failed: %s", context.error)
-        elif context.result["action"] != "ALLOW":
-            log.info(
-                "AI Guard %s on %s %s: %s",
-                context.result["action"],
-                context.request.integration,
-                context.request.target.value,
-                context.result["reason"],
-            )
-
-
-register_middleware(TenantTagging())
-```
-
-### Verify middlewares
-
-A skipped evaluation creates no AI Guard span, so the [setup verification][8] doesn't show skipped requests. Check each kind of request separately:
-
-- **Evaluated requests**: Send a request that the middleware doesn't skip. Confirm that its AI Guard span appears, and that any tags the middleware sets are on it. See [Find evaluations by custom tag](#find-evaluations-by-custom-tag).
-- **Skipped SDK calls**: Call the evaluate method with a request that the middleware skips, and confirm that the result has the action `ALLOW` and the reason `skipped by middleware`.
-- **Skipped automatic integration calls**: Automatic integrations don't return the evaluation to your code. To confirm the skips, log or count them in `should_evaluate`, right before it returns `False`.
-{% /if %}
-
-<!-- Node.js, Java, and Ruby -->
-{% if includes($prog_lang, ["node_js", "java", "ruby"]) %}
-Middlewares are available only in the Python SDK.
+1. In {% ui %}APM{% /ui %} > {% ui %}Traces{% /ui %}, search for `resource_name:ai_guard @<TAG_KEY>:<TAG_VALUE>`, such as `resource_name:ai_guard @tenant:acme`.
+1. Open an AI Guard span from the results. The custom tags appear in the span attributes.
+1. (Optional) To filter or group evaluations by a custom tag in the facet panel or in visualizations, [create a facet][13] for the tag. For a numeric tag, create a [measure][14] instead.
 {% /if %}
 
 ## Optional SDK settings
@@ -530,6 +404,5 @@ With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluatio
 [10]: /security/ai_guard/policies/#tools-policies
 [11]: /security/ai_guard/policies/#handle-blocked-requests
 [12]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts
-[13]: /tracing/trace_explorer/
-[14]: /tracing/trace_explorer/query_syntax/#create-a-facet
-[15]: /tracing/trace_explorer/query_syntax/#measures
+[13]: /tracing/trace_explorer/query_syntax/#create-a-facet
+[14]: /tracing/trace_explorer/query_syntax/#measures
