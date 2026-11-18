@@ -35,13 +35,15 @@ DDOT SDKs support OpenTelemetry deployment methods, including Operator injection
 
 ### Kubernetes deployment
 
-The Operator's `Instrumentation` resource selects the SDK images injected into workloads. DDOT SDK images replace the default upstream images for Java, Python, Node.js, and .NET. For Operator installation, custom image configuration, and workload annotations, see [OpenTelemetry Operator automatic instrumentation][9].
+The Operator's `Instrumentation` resource selects the SDK images injected into workloads. DDOT SDK images replace the default upstream images for Java, Python, Node.js, and .NET.
+
+The [DDOT Kubernetes installation guide][14] includes SDK images, an `Instrumentation` resource, and workload annotations. For an existing Operator or Collector deployment, see [Adapt an existing configuration for DDOT][15]. For Operator concepts and configuration options, see [OpenTelemetry Operator automatic instrumentation][9].
 
 Go applications include the SDK and instrumentation at build time. The Operator's `instrumentation.opentelemetry.io/inject-sdk` annotation supplies configuration to the application; it does not install an SDK.
 
 ### Application installation
 
-For installation without the Operator, see the [language-specific SDK setup][5] and configure OpenTelemetry mode as described below.
+For installation without the Operator, follow the [SDK installation instructions for your language][5], then configure OpenTelemetry mode below. Your Collector receives OTLP telemetry; the Datadog Agent is optional except for [capabilities that require it][8].
 
 ## Configure OpenTelemetry mode and export
 
@@ -57,7 +59,9 @@ DD_METRICS_OTEL_ENABLED=true
 DD_LOGS_OTEL_ENABLED=true
 ```
 
-Configure the OTLP endpoints and protocols to match your Collector. Support varies by language, signal, and SDK version. For configuration details, see [OTLP trace export][2], [OpenTelemetry API support][1], and the [environment variable reference][7].
+Configure the OTLP endpoints and protocols to match your Collector. Support varies by language, signal, and SDK version. For configuration details, see [OTLP trace export][2], [OpenTelemetry API support][1], and the [environment variable reference][7]. For HTTP trace conventions and SDK versions, see [OpenTelemetry trace semantics][16].
+
+For an existing Datadog SDK installation, apply these settings to the installed SDK and retain your instrumentation configuration. When replacing an upstream SDK, retain OpenTelemetry API instrumentation and review SDK-specific provider, processor, and exporter configuration. The [existing-configuration guide][15] covers these migration paths.
 
 Live Debugger, Dynamic Instrumentation, and remotely configured head sampling require the Datadog Agent for configuration or data delivery. Traces, metrics, and logs continue to use OTLP through the Collector.
 
@@ -92,7 +96,7 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 
 [1]: /opentelemetry/instrument/ddot_sdks/api_support/
 [2]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
-[5]: /tracing/trace_collection/dd_libraries/
+[5]: /tracing/trace_collection/dd_libraries/#instrument-your-application
 [7]: /opentelemetry/config/environment_variable_support/
 [8]: /opentelemetry/compatibility/#ddot-sdk-setups
 [9]: https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/
@@ -100,3 +104,6 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [11]: /metrics/explorer/
 [12]: /logs/explorer/
 [13]: /opentelemetry/troubleshooting/
+[14]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot#instrument-kubernetes-workloads-with-ddot-sdks
+[15]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
+[16]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/#opentelemetry-trace-semantics

@@ -57,12 +57,12 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< programming-lang lang=".net" >}}
 - **Minimum version**: v3.41.0
-- **Supported protocols**: `http/json` (default), `http/protobuf` (v3.45.0+)
+- **Supported protocols**: `http/protobuf` (v3.45.0+, default from v3.58.0), `http/json` (default before v3.58.0)
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language. Node.js and .NET default to `http/json`, and Python defaults to `http/json` before v4.14.0. Java, Go, and Python v4.14.0+ default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
+**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language and version. Node.js defaults to `http/json`. Python defaults to `http/protobuf` from v4.14.0, and .NET from v3.58.0; earlier versions default to `http/json`. Java and Go default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
 
 ## Enable OTLP trace export
 
@@ -76,6 +76,20 @@ DD_TRACE_OTEL_ENABLED=true
 By default, traces are sent to `http://localhost:4318/v1/traces`.
 
 To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
+
+## OpenTelemetry trace semantics
+
+Set `DD_TRACE_OTEL_SEMANTICS_ENABLED=true` to enable OpenTelemetry trace conventions. For HTTP client and server instrumentation, use the versions below or later:
+
+| SDK | Version |
+|---|---|
+| Java | [1.68.0][15] |
+| Python | [4.17.0][16] |
+| Node.js | [5.110.0][17] |
+| Go | [2.12.0][18] |
+| .NET | [3.58.0][19] |
+
+These versions provide a baseline for HTTP instrumentation. OTLP export versions and protocols are listed in [Language support](#language-support). Semantic convention coverage varies by instrumentation; see the linked SDK release notes for details.
 
 ## Sampling and trace metrics
 
@@ -96,7 +110,7 @@ After you enable OTLP export and your service receives traffic, confirm that tra
 ## Current limitations
 
 - OTLP trace export supports core APM functionality for automatic and manually created traces. Other Datadog features and capabilities may not be supported, or may require the Datadog Agent even if traces are not sent through it.
-- OpenTelemetry semantic conventions require `DD_TRACE_OTEL_SEMANTICS_ENABLED=true` and a supported SDK version. Without this setting, traces use Datadog semantics, such as `http.status_code` instead of `http.response.status_code`.
+- For OpenTelemetry trace conventions, enable [OpenTelemetry trace semantics](#opentelemetry-trace-semantics). Without this setting, traces use Datadog semantics, such as `http.status_code` instead of `http.response.status_code`.
 
 For details on which Datadog features each setup supports, see the [feature compatibility table][7].
 
@@ -118,3 +132,8 @@ For details on which Datadog features each setup supports, see the [feature comp
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.131.0
 [13]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.11.0
 [14]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.55.0
+[15]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.68.0
+[16]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.17.0
+[17]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.110.0
+[18]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.12.0
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.58.0
