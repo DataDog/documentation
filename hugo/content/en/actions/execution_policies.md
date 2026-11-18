@@ -38,7 +38,7 @@ Execution Policies give you two main advantages:
 
 ## Prerequisites
 
-- The **Execution Groups Write** (`ExecutionGroupWrite`) permission, which allows you to create, update, and delete Execution Policies. See the [Permissions](#permissions) section.
+- The **Execution Groups Write** (`ExecutionGroupWrite`) permission. See the [Permissions](#permissions) section.
 - For private actions: a private action runner running in the Datadog Agent, enrolled as ownerless.
 - For Slack actions: the [Slack integration][4] installed for your Slack workspace.
 
@@ -98,7 +98,7 @@ Workspaces
 Channels
 : The private channels the policy applies to, matched by channel name. Enter an exact channel name, such as `incident-response`, or use `*` to match any sequence of characters, such as `incident-*`. Leave **Channels** empty to match all private channels in the selected workspaces.
 
-Only Slack actions that target a channel can be covered by a policy.
+A policy can cover only Slack actions that target a channel.
 
 {{% /collapse-content %}}
 
@@ -125,7 +125,7 @@ When you create an Execution Policy, you become its Editor. To apply the policy 
 5. Set the targets for the integration:
     - **Private actions**: Optionally, set a scope, such as **Target Namespaces** for Kubernetes. Under **Targets**, add one or more tags to select the Agents this policy applies to. See the [Private actions: Agents](#targets-private-actions) section.
     - **Slack actions**: Under **Workspaces**, select one or more Slack workspaces, or **All workspaces**. Under **Channels**, enter channel names or patterns, or leave the field empty. See the [Slack actions: Workspaces and channels](#targets-slack) section.
-6. Under **Access**, click **Edit access** and set who can view, edit, and who the policy applies to. See the [Access](#access) section.
+6. Under **Access**, click **Edit access** and set who can view and edit the policy, and who it applies to. See the [Access](#access) section.
 7. Click **Create**.
 
 To see policies for one integration on the Execution Policies page, select it in the **Integration** facet.
@@ -151,7 +151,7 @@ When you configure a private action step in a workflow, you can target an Agent 
     - **Orch Cluster ID**: Use for a private action runner in a Kubernetes Cluster Agent.
 3. Enter the hostname or orchestration cluster ID of the target Agent.
 
-This creates a virtual connection for the step, identified by the target Agent only. It carries no credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
+Targeting an Agent creates a virtual connection for the step, identified by the target Agent only. The virtual connection carries no credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
 
 ### Target a private Slack channel from a Slack step
 
