@@ -168,7 +168,7 @@ With this partition, the same dynamic by metric allocation rule is applied to ea
 {{< /tabs >}}
 
 ## Managing rules
-Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
+Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured. Rule names must be unique within an organization. If you use the [API][5], creating a rule with a name that already exists or changing a rule's name on update returns a `400 Bad Request` response. Instead of retrying the unchanged request, choose an unused name when creating a rule, or keep the saved name when updating one.
 
 When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact [Datadog support][3] to request a backfill.
 
