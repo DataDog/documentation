@@ -8,7 +8,7 @@
 
 > **ClientSideFilterManifest**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:238](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/pageFilters.ts#L238)
+Defined in: [src/schemas/pageFilters.ts:248](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/pageFilters.ts#L248)
 
 A lighter version of the FilterManifest schema,
 designed to be used client-side.
@@ -23,6 +23,10 @@ designed to be used client-side.
 
 > `optional` **default\_value**: `string`
 
+#### config.hide\_if?
+
+> `optional` **hide\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
 #### config.label
 
 > **label**: `string`
@@ -30,6 +34,10 @@ designed to be used client-side.
 #### config.option\_group\_id
 
 > **option\_group\_id**: `string`
+
+#### config.show\_if?
+
+> `optional` **show\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
 
 #### config.trait\_id
 

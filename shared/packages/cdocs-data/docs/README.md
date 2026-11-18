@@ -20,6 +20,7 @@
 
 ## Variables
 
+- [CDOCS\_NOOP](variables/CDOCS_NOOP.md)
 - [CdocsCoreErrorSchema](variables/CdocsCoreErrorSchema.md)
 - [CustomizationConfigByLangSchema](variables/CustomizationConfigByLangSchema.md)
 - [CustomizationConfigSchema](variables/CustomizationConfigSchema.md)
@@ -34,11 +35,16 @@
 
 ## Functions
 
-- [buildFiltersManifest](functions/buildFiltersManifest.md)
-- [loadCustomizationConfig](functions/loadCustomizationConfig.md)
 - [pruneManifestForClient](functions/pruneManifestForClient.md)
+- [shouldDisplayFilter](functions/shouldDisplayFilter.md)
 
 ## References
+
+### buildFiltersManifest
+
+Re-exports [buildFiltersManifest](buildFiltersManifest/functions/buildFiltersManifest.md)
+
+***
 
 ### CdocsClientStorage
 

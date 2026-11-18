@@ -8,7 +8,7 @@
 
 > **FilterManifest**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:151](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/pageFilters.ts#L151)
+Defined in: [src/schemas/pageFilters.ts:165](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/pageFilters.ts#L165)
 
 The manifest for a single page filter,
 containing all of the configuration data necessary
@@ -27,6 +27,10 @@ and re-resolve the filter.
 
 > `optional` **default\_value**: `string`
 
+#### config.hide\_if?
+
+> `optional` **hide\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
 #### config.label
 
 > **label**: `string`
@@ -35,6 +39,10 @@ and re-resolve the filter.
 
 > **option\_group\_id**: `string`
 
+#### config.show\_if?
+
+> `optional` **show\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
 #### config.trait\_id
 
 > **trait\_id**: `string`
@@ -42,6 +50,10 @@ and re-resolve the filter.
 ### defaultValsByOptionGroupId
 
 > **defaultValsByOptionGroupId**: `Record`\<`string`, `string`\>
+
+### optionLabelsByOptionId
+
+> **optionLabelsByOptionId**: `Record`\<`string`, `string`\>
 
 ### possibleVals
 

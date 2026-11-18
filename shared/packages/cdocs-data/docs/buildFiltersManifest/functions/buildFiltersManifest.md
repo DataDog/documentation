@@ -1,14 +1,14 @@
-[**cdocs-data**](../README.md)
+[**cdocs-data**](../../README.md)
 
 ***
 
-[cdocs-data](../modules.md) / buildFiltersManifest
+[cdocs-data](../../modules.md) / [buildFiltersManifest](../README.md) / buildFiltersManifest
 
 # Function: buildFiltersManifest()
 
-> **buildFiltersManifest**(`p`): [`FiltersManifest`](../ClientSideFiltersManifest/type-aliases/FiltersManifest.md)
+> **buildFiltersManifest**(`p`): `object`
 
-Defined in: [src/api/compilation/buildFiltersManifest.ts:26](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/api/compilation/buildFiltersManifest.ts#L26)
+Defined in: [src/api/compilation/buildFiltersManifest.ts:27](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/api/compilation/buildFiltersManifest.ts#L27)
 
 Combine a page's frontmatter, the global glossary,
 and the global filter config into a single object
@@ -46,7 +46,7 @@ The frontmatter for a page,
 which has been obtained by parsing the page's Markdown
 (or Markdoc, etc.) file.
 
-#### frontmatter.content_filters
+#### frontmatter.content_filters?
 
 `object`[] = `...`
 
@@ -56,8 +56,24 @@ which has been obtained by parsing the page's Markdown
 
 ## Returns
 
-[`FiltersManifest`](../ClientSideFiltersManifest/type-aliases/FiltersManifest.md)
+`object`
 
 A manifest that defines the filters available
 on the page, including all data required to
 render the filter and respond to user interactions.
+
+### defaultValsByTraitId
+
+> **defaultValsByTraitId**: `Record`\<`string`, `string`\>
+
+### errors
+
+> **errors**: `object`[]
+
+### filtersByTraitId
+
+> **filtersByTraitId**: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `hide_if`: `Record`\<`string`, `string`[]\>[]; `label`: `string`; `option_group_id`: `string`; `show_if`: `Record`\<`string`, `string`[]\>[]; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; `optionLabelsByOptionId`: `Record`\<`string`, `string`\>; `possibleVals`: `string`[]; \}\>
+
+### optionGroupsById
+
+> **optionGroupsById**: `Record`\<`string`, `object`[]\> = `OptionGroupGlossarySchema`

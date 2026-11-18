@@ -6,9 +6,9 @@
 
 # Function: resolveFilterOptionsSource()
 
-> **resolveFilterOptionsSource**(`p`): [`FilterConfig`](../../type-aliases/FilterConfig.md)
+> **resolveFilterOptionsSource**(`p`): `object`
 
-Defined in: [src/api/shared/resolveFilters.ts:110](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/api/shared/resolveFilters.ts#L110)
+Defined in: [src/api/shared/resolveFilters.ts:131](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/api/shared/resolveFilters.ts#L131)
 
 Replace any placeholders in the options source of a page filter.
 For example, if the options source is "<COLOR>_<FINISH>_paint_options",
@@ -21,11 +21,15 @@ the resolved options source would be "red_gloss_paint_options".
 
 #### pageFilterConfig
 
-\{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}
+\{ `default_value`: `string`; `hide_if`: `Record`\<`string`, `string`[]\>[]; `label`: `string`; `option_group_id`: `string`; `show_if`: `Record`\<`string`, `string`[]\>[]; `trait_id`: `string`; \}
 
-#### pageFilterConfig.default_value
+#### pageFilterConfig.default_value?
 
 `string` = `...`
+
+#### pageFilterConfig.hide_if?
+
+`Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
 
 #### pageFilterConfig.label
 
@@ -34,6 +38,10 @@ the resolved options source would be "red_gloss_paint_options".
 #### pageFilterConfig.option_group_id
 
 `string` = `...`
+
+#### pageFilterConfig.show_if?
+
+`Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
 
 #### pageFilterConfig.trait_id
 
@@ -45,4 +53,28 @@ the resolved options source would be "red_gloss_paint_options".
 
 ## Returns
 
-[`FilterConfig`](../../type-aliases/FilterConfig.md)
+`object`
+
+### default\_value?
+
+> `optional` **default\_value**: `string`
+
+### hide\_if?
+
+> `optional` **hide\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
+### label
+
+> **label**: `string`
+
+### option\_group\_id
+
+> **option\_group\_id**: `string`
+
+### show\_if?
+
+> `optional` **show\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
+### trait\_id
+
+> **trait\_id**: `string`
