@@ -31,12 +31,6 @@ Each cell has its own content type that indicates the kind of information the ce
 | Meeting Summary    | AI-generated summaries of an incident meeting, posted during and after the meeting. See [Meeting summaries][2].
 | Meeting Transcript | A link to the meeting's live transcript notebook, with its **LIVE** or **ENDED** recording status. See [Live meeting transcripts][5].
 
-### Meeting transcripts
-
-When transcript generation is enabled, recording creates a **Meeting Transcript** entry. Open the entry's notebook link to read the conversation as it progresses. After recording ends, the entry changes to **ENDED**.
-
-Re-inviting the transcriber to the same meeting reuses the timeline entry and notebook. The entry returns to **LIVE**, and the notebook adds a section for the new recording session.
-
 ### Responder notes
 
 Add responder notes directly to the timeline using the text box underneath the section tabs of the Incident Details page. You can also add responder notes [to the timeline from Slack][3]. You can customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. 
