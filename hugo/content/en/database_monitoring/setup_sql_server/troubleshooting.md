@@ -7,12 +7,12 @@ This page details common issues with setting up and using Database Monitoring wi
 
 ## Validate your setup with the Agent diagnose command {#agent-diagnose}
 
-Starting with Agent v7.81.0, the SQL Server integration validates your setup through the Agent [`diagnose` command][15]. For each configured instance, the diagnostics check:
+Starting with Agent v7.81.0, the SQL Server integration validates your setup through the Agent [diagnose command][15]. For each configured instance, the command checks whether:
 
-- The connection to SQL Server
-- That the configured ODBC driver is installed
-- That the SQL Server version is supported
-- The permissions that Database Monitoring requires, including `VIEW SERVER STATE`, `CONNECT ANY DATABASE`, `VIEW ANY DEFINITION`, access to each monitored database, and `SELECT` on `msdb`
+- The Agent can connect to SQL Server
+- The configured ODBC driver is installed
+- The SQL Server version is supported
+- The Agent has the permissions that Database Monitoring requires, including `VIEW SERVER STATE`, `CONNECT ANY DATABASE`, `VIEW ANY DEFINITION`, access to each monitored database, and `SELECT` on `msdb`
 
 Run the `check-datadog` diagnose suite:
 
@@ -35,7 +35,7 @@ sudo datadog-agent diagnose --include check-datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-By default, the command runs the diagnostics inside the running Agent service, as the Agent's service account. This makes it the recommended way to test [Windows Authentication](#login-failed-for-user), because `agent.exe check sqlserver` connects as the logged-in user instead.
+By default, the command runs the diagnostics inside the running Agent service, as the Agent's service account. The `agent.exe check sqlserver` command connects as the logged-in user instead, so the diagnose command is the recommended way to test Windows Authentication. For Windows Authentication setup, see the [Login Failed for user](#login-failed-for-user) section.
 
 **Note**: If the command cannot reach the Agent service, it prints `Error running diagnose in Agent process` and runs the diagnostics as the current user. The `--local` flag also runs them as the current user. In both cases, the results do not reflect the Agent service account's access.
 
@@ -70,7 +70,7 @@ sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
-If the `datadog` user is unable to log in to the SQL Server instance, verify that the user exists. Then verify that it has the permissions listed in the [setup documentation][1]. To test the connection and permissions as the Agent's service account, run the [Agent diagnose command](#agent-diagnose). Windows Authentication is supported when the Agent connects to a SQL Server instance running on the same host as the Agent.
+If the `datadog` user is unable to log in to the SQL Server instance, verify that the user exists. Then verify that it has the permissions listed in the [setup documentation][1]. To test the connection and permissions as the Agent's service account, run the Agent diagnose command described in the [Validate your setup with the Agent diagnose command](#agent-diagnose) section. Windows Authentication is supported when the Agent connects to a SQL Server instance running on the same host as the Agent.
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 
