@@ -1,4 +1,4 @@
-Customization configs for `src/lib/vite/cdocsConfigPlugin.test.ts`:
+Customization configs for `src/lib/cdocs/cdocsConfigPlugin.test.ts`:
 
 - `valid/`: a minimal config that loads and validates.
 - `invalid/`: an option group that references an option the glossary doesn't define.
