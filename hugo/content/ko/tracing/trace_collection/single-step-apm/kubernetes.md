@@ -5,13 +5,13 @@ code_lang: kubernetes
 code_lang_weight: 20
 further_reading:
 - link: /tracing/metrics/runtime_metrics/
-  tag: 설명서
+  tag: 문서
   text: 런타임 메트릭 활성화
 - link: /tracing/guide/init_resource_calc/
-  tag: 설명서
+  tag: 문서
   text: init 컨테이너 리소스 사용량에 관해 알아보기
 - link: /tracing/guide/local_sdk_injection
-  tag: 설명서
+  tag: 문서
   text: 로컬 SDK 인젝션을 사용한 애플리케이션 계측
 - link: https://learn.datadoghq.com/courses/configuring-ssi-k8s
   tag: 학습 센터
@@ -21,7 +21,7 @@ type: multi-code-lang
 ---
 ## 개요 {#overview}
 
-Kubernetes 환경에서는 APM에 Single Step Instrumentation(SSI)을 사용하여 Datadog Agent를 설치하고 Datadog SDK를 사용해 애플리케이션을 한 단계 만에 [계측][3]하세요.
+APM에 Single Step Instrumentation(SSI)을 사용하여 Datadog Agent를 설치하고 Datadog SDK를 사용해 Kubernetes 애플리케이션을 [계측][3]하세요.
 
 {{< skill-callout
     title="에이전트로 APM 설정"
@@ -267,9 +267,9 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 다음 설정 방법 중 한 가지를 사용하세요.
 
-- **[워크로드 대상 지정을 사용하여 구성(권장)](#target-specific-workloads)**:
+- **[Agent 타겟팅 규칙을 사용하여 구성](?tab=targetingrulesv764#target-specific-workloads)**:
 
-  기본적으로 Single Step Instrumentation은 모든 네임스페이스의 모든 서비스를 계측합니다. 워크로드 대상 지정을 사용하여 계측을 특정 네임스페이스, 포드 또는 워크로드로만 제한하고 사용자 지정 구성을 적용하세요.
+  Agent 구성 대상에서 `ddTraceConfigs`을 사용하여 네임스페이스 또는 포드 그룹에 대한 제품을 활성화합니다.
 
 - **[환경 변수 설정][7]**:
 
@@ -286,10 +286,11 @@ SSI는 여러 인젝션 모드를 지원합니다. 인젝션 모드는 인젝터
 
 | 모드 | 설명 | 요구 사항 |
 |------|-------------|--------------|
+| `auto` | **기본값.** Cluster Agent는 사용 중인 클러스터 및 워크로드에 가장 적합한 인젝션 모드를 선택합니다. 선택 로직은 Agent 버전에 따라 변경될 수 있습니다. | Agent 7.76.0+ |
 | `init_container` | init 컨테이너를 사용하여 인젝터 및 APM 라이브러리 파일을 애플리케이션 컨테이너로 복사합니다. | Helm Chart 또는 Datadog Operator로 배포된 Agent |
-| `csi` | **미리 보기로 제공되고 있습니다.** [Datadog CSI 드라이버][37]를 사용하여 인젝터 또는 APM 라이브러리 파일을 마운팅합니다. init 컨테이너 모드보다 포드 시작 시간이 단축됩니다. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ 또는 Datadog Operator 1.25.0+ |
+| `csi` | [Datadog CSI 드라이버][37]를 사용하여 인젝터 및 APM 라이브러리 파일을 마운팅합니다. init 컨테이너 모드보다 포드 시작 시간이 단축됩니다. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ 또는 Datadog Operator 1.25.0+ |
 
-`csi` 모드를 사용하기 전에 Datadog CSI 드라이버를 설치하고 활성화하세요. Helm을 사용하여 배포하는 경우, `datadog-values.yaml`에서 `datadog.csi.enabled: true`도 설정하세요. 설치 단계 및 GKE Autopilot과 같은 환경별 요구 사항은 [CSI 드라이버 설명서][37]를 참조하세요.
+`csi` 모드를 사용하기 전에 Datadog CSI 드라이버를 설치하고 활성화하세요. Helm을 사용하여 배포하는 경우, `datadog-values.yaml`에서 `datadog.csi.enabled: true`도 설정하세요. Datadog Operator를 사용하여 배포하는 경우 `datadog-agent.yaml`에서 `spec.global.csi.enabled: true`를 설정하세요. 설치 단계 및 GKE Autopilot과 같은 환경별 요구 사항은 [CSI 드라이버 설명서][37]를 참조하세요. `auto` 모드에서는 CSI 드라이버가 설치되어 있고 클러스터에서 안전하게 사용할 수 있는 경우에만 Cluster Agent가 이 드라이버를 선택합니다.
 
 #### 전역적으로 인젝션 모드 구성 {#configure-injection-mode-globally}
 
@@ -305,7 +306,7 @@ datadog:
       injectionMode: <mode>
 ```
 
-지원되는 값: `init_container`, `csi`.
+지원되는 값: `auto`(기본값), `init_container`, `csi`.
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -313,13 +314,14 @@ datadog:
 클러스터 전체에 인젝션 모드를 설정하려면 `datadog-agent.yaml`에 `injectionMode`를 추가합니다.
 
 ```yaml
-features:
-  apm:
-    instrumentation:
-      injectionMode: <mode>
+spec:
+  features:
+    apm:
+      instrumentation:
+        injectionMode: <mode>
 ```
 
-지원되는 값: `init_container`, `csi`.
+지원되는 값: `auto`(기본값), `init_container`, `csi`.
 
 Datadog Operator 1.25.0 이전 버전을 사용하는 경우, [포드 어노테이션](#configure-injection-mode-per-pod)을 사용하여 특정 포드의 인젝션 모드를 재정의합니다.
 
@@ -336,15 +338,14 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-지원되는 값: `init_container`, `csi`.
+지원되는 값: `auto`, `init_container`, `csi`.
 
 ### 특정 워크로드 대상 {#target-specific-workloads}
 
 기본적으로 SSI는 클러스터의 모든 네임스페이스에 속한 모든 서비스를 계측합니다. Agent 버전에 따라 다음 구성 방법 중 하나를 사용하여 어느 서비스가 어떻게 계측될지 미세 조정하세요.
 
 {{< tabs >}}
-
-{{% tab "Agent v7.64+(권장)" %}}
+{{% tab "타겟팅 규칙(v7.64+)" %}}
 
 `targets` 레이블을 사용하여 대상 지정 블록을 생성해 어느 워크로드를 계측하고 어느 구성을 적용할지 지정합니다.
 
@@ -356,7 +357,7 @@ metadata:
 | `namespaceSelector` | 계측할 네임스페이스입니다. 다음 중 하나 이상을 사용하여 지정합니다.<br> - `matchNames`: 하나 이상의 네임스페이스 이름 목록. <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`: 네임스페이스 선택기 요구 사항 목록. <br><br> 네임스페이스가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요.|
 | `podSelector`     | 계측할 포드입니다. 다음 중 하나 이상을 사용하여 지정합니다. <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`: 포드 선택기 요구 사항 목록. <br><br> 포드가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요. |
 | `ddTraceVersions` | 각 언어에 사용할 [Datadog APM SDK][9] 버전입니다. |
-| `ddTraceConfigs`  | [Unified Service Tags][8] 설정, 트레이싱 외 [SDK 종속적 제품](#enable-sdk-dependent-products-and-features) 활성화, 기타 [APM 설정][14] 사용자 지정을 지원하는 APK SDK 구성입니다. |
+| `ddTraceConfigs`  | [Unified Service Tags][8] 설정, 트레이싱 외 [SDK 종속적 제품](#enable-sdk-dependent-products-and-features) 활성화, 기타 [APM 설정][14] 사용자 지정을 지원하는 APM SDK 구성입니다. |
 
 구성해야 하는 파일은 Single Step Instrumentation을 활성화한 방식에 따라 다릅니다.
 - SSI를 Datadog Operator로 활성화한 경우, `datadog-agent.yaml`을 편집합니다.
@@ -544,7 +545,88 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
 
 {{% /tab %}}
 
-{{% tab "Agent <=v7.63(레거시)" %}}
+{{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
+
+`DatadogInstrumentation` 커스텀 리소스를 사용하여 SSI를 활성화하고 특정 워크로드 세트에 대한 SDK를 구성합니다.
+
+이 방법을 사용하려면 Datadog Agent와 Cluster Agent **v7.85.0 이상**이 필요하며, 다음 중 하나를 사용하여 `DatadogInstrumentation` CRD를 설치해야 합니다.
+
+- Datadog Operator **v1.31.0 이상**.
+- Datadog Helm 차트 **v3.255.0 이상**.
+
+##### 워크로드를 타겟팅하는 리소스 생성 {#create-a-resource-targeting-your-workload}
+
+`DatadogInstrumentation` 리소스를 생성하고 타겟팅하려는 워크로드와 동일한 네임스페이스에 적용합니다. 이 예시는 `apps` 네임스페이스의 `checkout` 배포를 기본 Java SDK로 계측합니다.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: checkout-apm
+  namespace: apps
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout
+  config:
+    apm:
+      ddTraceVersions:
+        java: "default"
+      ddTraceConfigs:
+        - name: DD_SERVICE
+          value: checkout
+        - name: DD_ENV
+          value: production
+```
+
+워크로드 이름, 네임스페이스, 트레이서 언어 및 서비스 태그를 애플리케이션에 맞는 올바른 값으로 바꿉니다. `targetRef`는 API 버전, 종류 및 이름으로 워크로드를 식별합니다. 한 번에 하나의 `DatadogInstrumentation` 사용자 지정 리소스만 특정 워크로드를 대상으로 지정할 수 있습니다. 해당 워크로드에 대한 리소스가 이미 존재하는 경우 해당 리소스에 `config.apm`을 추가합니다.
+적용 후 대상 워크로드에 속한 새 포드는 리소스에 정의된 추적기 및 구성으로 계측됩니다.
+
+지원되는 대상 종류는 `Deployment`, `StatefulSet`, `DaemonSet`, `Job`, `CronJob` 및 Argo `Rollout`입니다.
+
+##### 구성 설정 {#configuration-settings}
+
+`spec.config.apm` 아래에서 다음 필드를 설정합니다.
+
+| 필드 | 설명 |
+|-------|-------------|
+| `enabled` | [워크로드의 계측을 비활성화](#disable-instrumentation-with-datadoginstrumentation)하려면 `false`로 설정합니다. |
+| `ddTraceVersions` | SDK 언어 식별자를 버전으로 매핑합니다. [SSI 호환성 요구 사항][36]에 따라 `java`, `js`(Node.js), `python`, `dotnet`, `ruby`, `php` 또는 `c`를 지정하세요. 나열된 SDK만 주입됩니다. Agent의 기본 SDK 버전에는 `"default"`를 사용하고 그렇지 않으면 특정 버전을 고정하세요. 생략하면 Agent는 지원되는 기본 SDK 세트를 사용합니다. |
+| `ddTraceConfigs` | SDK 환경 변수 목록입니다. 각 `name`은 `DD_`로 시작해야 합니다. 리터럴 문자열에는 `value`를 사용하고, Kubernetes 환경 변수 참조에는 `valueFrom`을 사용합니다. |
+
+예를 들어, Continuous Profiler를 활성화하고 포드 레이블에서 서비스 이름을 읽으려면 `ddTraceConfigs`에 다음 항목을 추가하세요.
+
+```yaml
+ddTraceConfigs:
+  - name: DD_PROFILING_ENABLED
+    value: "auto"
+  - name: DD_SERVICE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.labels['app.kubernetes.io/name']
+```
+
+참조된 레이블은 애플리케이션 포드에 있어야 합니다. 더 많은 SDK 옵션은 [라이브러리 구성][7]을 참조하세요.
+
+##### 구성 우선 순위{#configuration-precedence}
+
+허용 대상인 포드의 경우 Cluster Agent는 다음 순서로 APM 구성을 선택합니다. 아래 순서는 우선순위가 높은 항목부터 나열되어 있습니다.
+
+1. 포드 주석(예: `admission.datadoghq.com/java-lib.version`)
+1. 워크로드의 `DatadogInstrumentation` APM 구성
+1. Remote Configuration 계측 정책(활성화된 경우)
+1. Agent에서 구성한 `apm.instrumentation.targets` 또는 `enabledNamespaces`
+1. 클러스터 전체 계측(대상 지정 규칙 없이 활성화된 경우).
+
+`spec.config.apm.enabled` 값이 `false`인 경우를 포함하여 일치하는 DDI 구성은 우선순위가 낮은 소스보다 우선합니다. 포드 SDK 주석이 이를 재정의할 수 있습니다. DDI만으로 워크로드를 관리하려면 포드 사양에서 충돌하는 주석을 제거하세요.
+
+[7]: /ko/tracing/trace_collection/library_config/
+[36]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+
+{{% /tab %}}
+
+{{% tab "레거시(<=v7.63)" %}}
 
 #### 네임스페이스의 계측 활성화 또는 비활성화 {#enable-or-disable-instrumentation-for-namespaces}
 
@@ -755,7 +837,8 @@ SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하려면 다�
 2. 구성에 따라 이미지를 태그합니다.
 
    미러링하는 버전이 워크로드에서 구성된 버전과 일치해야 하며, 이는 다음 중 한 가지 방법으로 설정할 수 있습니다.
-   - `ddTraceVersions`를 사용하여 Agent 구성에서 전역적으로 또는
+   - DDI 리소스 내 `spec.config.apm.ddTraceVersions`에서 워크로드당.
+   - `ddTraceVersions`를 사용하는 Agent 구성 대상에서 또는
    - `admission.datadoghq.com/java-lib.version`과 같은 어노테이션을 사용하여 포드당.
 
    명시적으로 구성된 버전이 없으면 기본 버전(`0`)이 사용됩니다.
@@ -808,7 +891,29 @@ clusterAgent:
 
 특정 서비스에서 APM 계측을 제거하고 트레이스 보내기를 중단하려면 다음 중 한 가지 작업을 수행합니다.
 
-#### 특정 워크로드를 대상으로 지정하는 계측 규칙 사용(권장) {#use-instrumentation-rules-to-target-specific-workloads-recommended}
+#### DatadogInstrumentation을 사용하여 계측 비활성화 {#disable-instrumentation-with-datadoginstrumentation}
+
+워크로드의 DDI 리소스에서 `spec.config.apm.enabled`를 `false`로 설정하여 `targetRef` 및 모든 검사 또는 로그 구성을 유지합니다.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: checkout-apm
+  namespace: apps
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout
+  config:
+    apm:
+      enabled: false
+```
+
+리소스를 적용하고 상태에 변경 사항이 반영되었는지 확인한 후 워크로드를 다시 시작합니다. 기존 포드는 교체될 때까지 계측된 상태로 유지됩니다.
+
+#### 특정 워크로드를 대상으로 지정하는 계측 규칙 사용 {#use-instrumentation-rules-to-target-specific-workloads}
 
 계측 규칙을 사용하면(Agent v7.64+에서 사용 가능) 특정 애플리케이션의 추적을 활성화 또는 비활성화할 수 있습니다. [여기에서 구성 세부 정보를 참조하세요](#advanced-options).
 
@@ -834,7 +939,12 @@ clusterAgent:
 
 ### 인프라의 모든 서비스에 대하여 APM 제거 {#remove-apm-for-all-services-on-the-infrastructure}
 
-트레이스 생성을 중단하려면 APM을 제거하고 인프라를 재시작하세요.
+클러스터 전체에서 SSI를 중지하려면 다음 단계를 따르세요.
+
+1. 각 DDI 리소스에서 `spec.config.apm.enabled: false`를 설정하거나 APM 섹션을 제거합니다.
+1. 포드 SDK 선택 주석을 제거하고 모든 Remote Configuration 계측 정책을 비활성화합니다.
+1. 아래와 같이 Agent 구성 계측을 비활성화합니다.
+1. 구성 변경 사항을 적용한 후 애플리케이션 포드를 교체합니다.
 
 구성해야 하는 파일은 Single Step Instrumentation을 Datadog Operator 또는 Helm 중 무엇으로 활성화했는지에 따라 다릅니다.
 
@@ -874,9 +984,9 @@ clusterAgent:
 
 ## 모범 사례 {#best-practices}
 
-SSI를 활성화하고 나면 몇 분 안에 클러스터의 모든 지원되는 프로세스가 자동으로 계측되며 트레이스를 생성하기 시작합니다.
+APM 활성화를 정밀하게 제어하려면 [DatadogInstrumentation(DDI)](#target-specific-workloads)을 사용하여 특정 워크로드를 계측하세요. 소수의 워크로드로 시작하여 트레이스를 확인한 다음 추가 워크로드로 확장합니다.
 
-APM이 어디에서 활성화되는지 제어하고 오버헤드를 줄이려면 다음 모범 사례를 고려하세요.
+Agent 구성 타겟팅 규칙을 사용하는 경우 다음 예시에서는 레이블 및 네임스페이스 선택기를 사용하여 계측을 제어하는 방법을 보여줍니다.
 
 {{% collapse-content title="통제된 APM 롤아웃을 위해 옵트인 레이블 사용" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
@@ -984,7 +1094,7 @@ SSI로 APM 활성화와 관련한 문제가 발생하는 경우, [SSI 문제 해
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /ko/tracing/glossary/#instrumentation
-[4]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
+[4]: /ko/tracing/trace_collection/single-step-apm/kubernetes/#target-specific-workloads
 [5]: /ko/getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
 [7]: /ko/tracing/trace_collection/library_config/
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes

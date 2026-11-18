@@ -6812,6 +6812,18 @@ menu:
           - GetUsageObservabilityPipelines
         unstable: []
         order: 3
+    - name: Get monthly usage by resource
+      url: /api/latest/usage-metering/get-monthly-usage-by-resource/
+      identifier: usage-metering-get-monthly-usage-by-resource
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageMonthlyResources
+        unstable: []
+        order: 28
     - name: Get hourly usage for Lambda traced invocations
       url: /api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/
       identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -19471,6 +19483,75 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Nebius Cloud Integration
+      url: /api/latest/nebius-cloud-integration/
+      identifier: nebius-cloud-integration
+      generated: true
+    - name: Update a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/update-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-update-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/get-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-get-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/delete-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-delete-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/create-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-create-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Nebius Cloud integration accounts
+      url: /api/latest/nebius-cloud-integration/list-nebius-cloud-integration-accounts/
+      identifier: nebius-cloud-integration-list-nebius-cloud-integration-accounts
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNebiusCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
@@ -20125,6 +20206,18 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Create On-Call Page comment
+      url: /api/latest/on-call/create-on-call-page-comment/
+      identifier: on-call-create-on-call-page-comment
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageComment
+        unstable: []
+        order: 30
     - name: Get On-Call Page
       url: /api/latest/on-call/get-on-call-page/
       identifier: on-call-get-on-call-page

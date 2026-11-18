@@ -12,6 +12,7 @@ title: Guías de Feature Flags
     {{< nextlink href="/getting_started/feature_flags" >}}Primeros pasos con Feature Flags{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/server_flag_evaluation_metrics" >}}Configure las métricas de evaluación de marcadores del lado del servidor{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/apm_trace_enrichment" >}}Configure el enriquecimiento de trazas de APM para Feature Flags{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/without_apm_or_infrastructure_monitoring" >}}Configure Feature Flags basadas en el Agent sin APM ni Infrastructure Monitoring{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_flags_with_cli" >}}Migre Flags con la CLI de migración de Flags{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_from_launchdarkly" >}}Migre sus Feature Flags desde LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Migre sus Feature Flags desde Statsig{{< /nextlink >}}

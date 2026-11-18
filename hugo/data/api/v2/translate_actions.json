@@ -162,7 +162,7 @@
     "summary": "List active Agent Health issues"
   },
   "ListAgentHealthIssues": {
-    "description": "List Agent Health issues across your organization. Only open issues are returned.\nReturns `403` if you lack the `hosts_read` permission.\n\nResults use a stable order: severity rank (`high`, `medium`, `low`, then other values),\nthen `first_seen_at` descending with missing timestamps last, then issue ID ascending.\nUse `page[size]` and the zero-based `page[number]` to paginate. Invalid page values\nreturn a `400` JSON:API error response. `meta.page.total_filtered_count` is the number\nof issues matching the filters, and `meta.page.total_count` the number of open issues\nin the organization.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nSet `count_by=issue_type` to include `meta.page`, where `total_count` is the number of\nopen issues matching the filters and `counts_by_issue_type` holds the per-type counts.\n`meta` is omitted when `count_by` is not requested.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
     "summary": "List Agent Health issues"
   },
   "GetAgentHealthIssue": {
@@ -799,7 +799,7 @@
     "summary": "List work item views"
   },
   "CreateCaseView": {
-    "description": "Creates a new saved work item view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
+    "description": "Creates a new saved work item view with a name, filter query, and associated project.",
     "summary": "Create a work item view",
     "request_description": "Work item view payload.",
     "request_schema_description": "Request payload for creating a work item view."
@@ -813,7 +813,7 @@
     "summary": "Get a work item view"
   },
   "UpdateCaseView": {
-    "description": "Updates the name, query, or notification rule of an existing work item view.",
+    "description": "Updates the name or query of an existing work item view.",
     "summary": "Update a work item view",
     "request_description": "Work item view payload.",
     "request_schema_description": "Request payload for updating a work item view."
@@ -2309,7 +2309,7 @@
     "request_schema_description": "Request to update the experiment metric group."
   },
   "GetExperimentResults": {
-    "description": "Get an experiment's computed results: per-variant statistical analysis for the latest successful run. A historical run cannot be selected. Unavailable analysis statistics, including `p_value` and `confidence_interval`, are omitted. The `numerator`, `denominator`, and `variant_metric_value` fields can be null when their values are unavailable. Do not treat an omitted or null value as zero.",
+    "description": "Get an experiment's computed results: per-variant statistical analysis for the latest successful run. A historical run cannot be selected. Unavailable analysis statistics, including `p_value` and `confidence_interval`, are omitted. The `numerator`, `denominator`, and `variant_metric_value` fields can be null when their values are unavailable. Do not treat an omitted or null value as zero. The response includes the selected run ID and, when recorded, EVSI forecast context and unavailable reasons for Bayesian analyses.",
     "summary": "Get experiment results"
   },
   "RefreshExperimentResults": {
@@ -3237,6 +3237,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListNebiusCloudIntegrationAccounts": {
+    "description": "List Nebius Cloud integration accounts.",
+    "summary": "List Nebius Cloud integration accounts"
+  },
+  "CreateNebiusCloudIntegrationAccount": {
+    "description": "Create a Nebius Cloud integration account.",
+    "summary": "Create a Nebius Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Nebius Cloud integration account."
+  },
+  "DeleteNebiusCloudIntegrationAccount": {
+    "description": "Delete a Nebius Cloud integration account.",
+    "summary": "Delete a Nebius Cloud integration account"
+  },
+  "GetNebiusCloudIntegrationAccount": {
+    "description": "Get a Nebius Cloud integration account.",
+    "summary": "Get a Nebius Cloud integration account"
+  },
+  "UpdateNebiusCloudIntegrationAccount": {
+    "description": "Update a Nebius Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update a Nebius Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Nebius Cloud integration account."
   },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
@@ -4652,11 +4676,11 @@
     "summary": "List distinct metric volumes by metric name"
   },
   "ListAiGatewayModelGroups": {
-    "description": "List model groups the user can view. The organization-wide policy has id \"default\" and explicit model, provider, and route selections. Missing or empty selections grant no organization-wide access. Its audience is fixed to the organization; it cannot be renamed or deleted. Named policies retain their access bindings. Requires configuration read permission; named policies also require view access.",
+    "description": "List model groups the user can view. The organization-wide policy has id \"default\" and explicit model, provider, and route selections. Missing or empty selections grant no organization-wide access. Its audience is fixed to the organization; it cannot be renamed or deleted. Named policies retain their access bindings. Requires configuration read permission and policy View, including for the default policy. Hidden policies are omitted from lists and return the same not-found response as missing policies.",
     "summary": "List AI Gateway model groups"
   },
   "CreateAiGatewayModelGroup": {
-    "description": "Create an AI Gateway model group from a name and any combination of model catalog entries and routing rules, with optional fast-mode and reasoning limits and initial access bindings.",
+    "description": "Create an AI Gateway model group from a name and any combination of model catalog entries, providers, and\nrouting rules, with optional fast-mode and reasoning limits. Include initial access bindings when creating a\nrestricted policy. If the bindings cannot be applied, the policy is not created. To update sharing on an\nexisting policy, use the restriction policy API. If a creation request fails without confirming whether the\npolicy was created, check the policy list before retrying to avoid duplicates.",
     "summary": "Create an AI Gateway model group",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway model group."
@@ -4666,11 +4690,11 @@
     "summary": "Delete an AI Gateway model group"
   },
   "GetAiGatewayModelGroup": {
-    "description": "Get a named policy or the explicit organization-wide policy by id \"default\". Requires configuration read permission; named policies also require view access. Provider selections cover current and future models and are returned separately from individual model selections.",
+    "description": "Get a named policy or the explicit organization-wide policy by id \"default\". Requires configuration read permission and policy View, including for the default policy. Hidden policies are omitted from lists and return the same not-found response as missing policies. Provider selections cover current and future models and are returned separately from individual model selections.",
     "summary": "Get an AI Gateway model group"
   },
   "UpdateAiGatewayModelGroup": {
-    "description": "Update a model group. For id \"default\", save membership and request options atomically with expected_revision. Empty selections grant no organization-wide access. Applicable authorized named policies override organization-wide request options; a rejected named-policy request cannot fall back to organization-wide options. The organization-wide audience is fixed and grants resource use only. Requires configuration write permission; named policies also require edit access.",
+    "description": "Update a model group. For id \"default\", save membership and request options atomically with expected_revision. Empty selections grant no organization-wide access. Applicable authorized named policies override organization-wide request options; a rejected named-policy request cannot fall back to organization-wide options. The organization-wide audience is fixed and grants resource use only. Requires configuration write permission and policy View and Edit, including for the default policy. Management visibility does not change the inference audience or Run access.",
     "summary": "Update an AI Gateway model group",
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway model group."
@@ -4970,6 +4994,12 @@
   "AcknowledgeOnCallPage": {
     "description": "Acknowledges an On-Call Page.",
     "summary": "Acknowledge On-Call Page"
+  },
+  "CreateOnCallPageComment": {
+    "description": "Add a comment to the timeline of an On-Call Page.",
+    "summary": "Create On-Call Page comment",
+    "request_description": "",
+    "request_schema_description": "Request to create a comment on an On-Call Page."
   },
   "EscalateOnCallPage": {
     "description": "Escalates an On-Call Page.",
@@ -5988,17 +6018,17 @@
     "summary": "Get an AI Gateway routing rule"
   },
   "AggregateRUMEvents": {
-    "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
+    "description": "Aggregate RUM events into buckets of computed metrics and timeseries. Use this endpoint for counts, percentiles, top-N breakdowns, and timeseries. To read individual events, use `SearchRUMEvents` or `ListRUMEvents`.\n\n`filter` selects the events with the [RUM search syntax][1] and a time range (`from` and `to` accept date math such as `now-15m`, ISO 8601 dates, and timestamps in milliseconds). Each `compute` rule produces one value (`type: total`) or one list of time points (`type: timeseries`) per bucket, keyed `c0`, `c1`, and so on, in the response. Each `group_by` rule splits the events into buckets by a facet, returned in `by`. Use `histogram` on a numeric facet to bucket it by ranges.\n\n[1]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Aggregate RUM events",
     "request_description": "",
-    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization.\n`filter.indexes` is not supported and is ignored."
   },
   "GetRUMApplications": {
-    "description": "List all the RUM applications in your organization.",
+    "description": "List the enabled RUM applications of your organization. Applications deleted with `DeleteRUMApplication` are not returned.\nThe response is not paginated and does not include the `client_token`. Use `GetRUMApplication` to retrieve it.\nUse the `application_id` of an item as the `id` path parameter of the other application operations, and as `@application.id` in RUM event queries.",
     "summary": "List all the RUM applications"
   },
   "CreateRUMApplication": {
-    "description": "Create a new RUM application in your organization.",
+    "description": "Create a RUM application in your organization.\nThe application ID is generated by Datadog and returned in `data.attributes.application_id`. A client token is created with the application and returned in `data.attributes.client_token`. Use both to initialize the RUM SDK.\nThe application is created with the default retention filters unless `create_default_retention_filters` is `false`.",
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
@@ -6072,15 +6102,15 @@
     "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
-    "description": "Delete an existing RUM application in your organization.",
+    "description": "Delete an existing RUM application in your organization.\nThe application is disabled and its client token is revoked, so the RUM SDK stops sending events for it. The application cannot be re-enabled through the API, and its application ID cannot be reused.\nDeleting an application with Product Analytics enabled requires the `product_analytics_apps_write` permission.",
     "summary": "Delete a RUM application"
   },
   "GetRUMApplication": {
-    "description": "Get the RUM application with given ID in your organization.",
+    "description": "Get the RUM application with the given ID in your organization.\nUnlike `GetRUMApplications`, the response includes the `client_token` used to initialize the RUM SDK.",
     "summary": "Get a RUM application"
   },
   "UpdateRUMApplication": {
-    "description": "Update the RUM application with given ID in your organization.",
+    "description": "Update the RUM application with the given ID in your organization.\nThis is a partial update: only the attributes present in the request are changed. `data.id` must match the `id` path parameter.",
     "summary": "Update a RUM application",
     "request_description": "",
     "request_schema_description": "RUM application update request."
@@ -6186,14 +6216,14 @@
     "summary": "List teams ownership rules"
   },
   "ListRUMEvents": {
-    "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range. Use this endpoint to see your latest RUM events with a simple query. For long filters, use `SearchRUMEvents`. To compute counts, percentiles, or timeseries, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. Without `filter[from]` and `filter[to]`, the endpoint searches the last 15 minutes.\n\n[Results are paginated][1]: `page[limit]` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after` and `links.next`. Request `links.next`, or send `meta.page.after` as `page[cursor]` with the same other parameters, and repeat until they are absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Get a list of RUM events"
   },
   "SearchRUMEvents": {
-    "description": "List endpoint returns RUM events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex RUM events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range, as a list of individual events. Use this endpoint when the filter is too long for a query string, or to set `options`. To compute counts, percentiles, or timeseries instead of reading events, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. `filter.from` and `filter.to` accept date math (`now-15m`), ISO 8601 dates, and timestamps in milliseconds.\n\n[Results are paginated][1]: `page.limit` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after`. Send it as `page.cursor`, with the same `filter` and `sort`, to get the next page, and repeat until `meta.page.after` is absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Search RUM events",
     "request_description": "",
-    "request_schema_description": "The request for a RUM events list."
+    "request_schema_description": "The request for a RUM events list. All attributes are optional: without any, the request returns the first 10 events of the last 15 minutes."
   },
   "CreateRUMOperation": {
     "description": "Create a new RUM operation, defining the journey used to detect it from RUM events.",
@@ -8455,6 +8485,10 @@
   "GetUsageLambdaTracedInvocations": {
     "description": "Get hourly usage for Lambda traced invocations.\n**Note:** This endpoint has been deprecated.. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for Lambda traced invocations"
+  },
+  "GetUsageMonthlyResources": {
+    "description": "Get resource-level usage for a billing dimension and month, using the same\ndata as the resource breakdown in Plan & Usage. Supports all host and\nnon-host resource types available in that breakdown. Availability depends\non the billing dimension and the organization's usage data.\n\nResults are scoped to the authenticated organization. Set `filter[include_descendants]`\nto `true` to also return usage from its descendant organizations in all regions.\n\nSet `filter[view]` to `billable` to return resources that contribute to billable usage.\nFor dimensions billed at the 99th percentile, this view returns resources at the\nselected billing hour. For sum-based dimensions, it returns monthly resource usage.\nSet `filter[view]` to `all` to return the full monthly resource breakdown. Requests\nfor unsupported billing dimensions, or dimensions configured with an unsupported\nbilling aggregation method, return a `400 Bad Request` error.\n\nTo get the next page of results, pass the `meta.pagination.next_record_id` value\nfrom the previous response as `page[next_record_id]`, and keep all filters unchanged.\nA null cursor indicates the last page. Paginated responses contain at most\n`page[limit]` resource records, including queries across descendant organizations.\n\nException: for any billing dimension billed at the 99th percentile,\n`filter[view]=billable` returns the complete resource breakdown in one response,\nincluding requested descendants. Eligibility depends on the organization's\nbilling configuration for the requested dimension and month, not on the product\nname. For these queries, `page[limit]` and `page[next_record_id]` are ignored, and\n`meta.pagination.next_record_id` is null. Sum-based usage and `filter[view]=all`\nremain paginated.",
+    "summary": "Get monthly usage by resource"
   },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for observability pipelines.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
