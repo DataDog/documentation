@@ -125,7 +125,7 @@ The example below shows a segment-level breakout by country. Use this view to un
 
 ### Interesting property breakouts
 
-Datadog recommends charts where relative lift appears to differ across segmentation property values, such as device type or country. These properties describe subjects at their first experiment exposure.
+The {{< ui >}}Interesting property breakouts{{< /ui >}} panel recommends charts where relative lift appears to differ across property values. Segmentation properties, such as device type or country, describe subjects at their first experiment exposure.
 
 To open a recommended chart:
 
