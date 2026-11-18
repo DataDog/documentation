@@ -1,6 +1,7 @@
-# When the "Editorial Review" label is added to a PR, send the PR's DOCS ticket keys
-# to a Jira Automation incoming webhook. The Jira rule decides whether to create an
-# Editorial Review ticket (for example, only for tickets with a specific label).
+# When a PR has both the "Editorial Review" and "okr9" labels, send the PR's DOCS
+# ticket keys to a Jira Automation incoming webhook. Runs when either label is added,
+# so the order the labels are applied in doesn't matter. The Jira rule decides whether
+# to create an Editorial Review ticket and skips tickets that already have one.
 name: Editorial review ticket
 on:
   pull_request:
@@ -11,7 +12,10 @@ permissions: {}
 
 jobs:
   notify-jira:
-    if: github.event.label.name == 'Editorial Review'
+    if: >-
+      (github.event.label.name == 'Editorial Review' || github.event.label.name == 'okr9') &&
+      contains(github.event.pull_request.labels.*.name, 'Editorial Review') &&
+      contains(github.event.pull_request.labels.*.name, 'okr9')
     runs-on: ubuntu-latest
     name: Send DOCS ticket keys to Jira Automation
     steps:
