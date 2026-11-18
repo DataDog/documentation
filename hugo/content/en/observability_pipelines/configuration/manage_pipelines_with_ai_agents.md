@@ -37,7 +37,7 @@ How an update is made to an active pipeline depends on the tool used to make the
 - **Bits in the pipeline builder**: Changes stay on the pipeline's Edit page. The pipeline keeps running its deployed configuration until you click {{< ui >}}Next: Deploy changes{{< /ui >}}.
 - **Pup CLI and the API**: There is no review or deploy step. The new configuration is pushed to your Workers and **goes live immediately** on every Worker running the pipeline.
 
-<div class="alert alert-danger">Updating an active pipeline with Pup or the API is <b>unsafe</b>. See <a href="#risks-of-updating-pipelines-with-pup-or-the-api">Risks of updating pipelines with Pup</a> before you let an agent update a pipeline.</div>
+<div class="alert alert-warning">See <a href="#risks-of-updating-pipelines-with-pup-or-the-api">Risks of updating pipelines with Pup or the API</a> before you let an agent update a pipeline.</div>
 
 ## Bits in the pipeline builder
 
@@ -92,7 +92,6 @@ Pup uses the [Observability Pipelines API][3] format. For the arguments and opti
 
 - **Changes go live immediately.** Pup pushes the new configuration to your Workers. There is no draft, review, or deploy step, and no automatic rollback.
 - **Validation is not enough for older Workers.** `pup obs-pipelines validate` checks the configuration against the latest Worker version. A configuration that passes validation can still be incompatible with an older Worker. The pipeline builder UI runs additional checks and warns you when a configuration is not compatible with your Worker version, but Pup and the API do not.
-- **Some errors are only detected on the Worker.** For example, a configuration that references a file or an environment variable that doesn't exist on the Worker host can pass validation but fail when applied on the Worker.
 - **A configuration that fails to load stops the pipeline.** If a Worker can't load the new configuration, it stops running the pipeline instead of falling back to the previous configuration. The pipeline doesn't process data on that Worker until you push a corrected configuration. This ensures that all workers process data using the same configuration.
 - **Pup does not report Worker errors.** `pup obs-pipelines update` succeeds as soon as the API accepts the configuration. It doesn't tell you whether the Workers loaded it.
 
