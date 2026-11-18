@@ -130,7 +130,7 @@ You can add custom enrichments to map ports and protocols to specific applicatio
 
 In Network Devices settings, select {{< ui >}}Port Enrichment{{< /ui >}} under {{< ui >}}NetFlow{{< /ui >}}, then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
-{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
+{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping dialog on the Port Enrichment settings page" width="100%" >}}
 
 ### Deep packet inspection
 
