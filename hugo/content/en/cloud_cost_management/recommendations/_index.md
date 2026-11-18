@@ -323,13 +323,13 @@ multifiltersearch:
       resource_type: S3 Bucket
       recommendation_type: Clean up old versions to reduce storage costs
       recommendation_description: A bucket with versioning enabled has significant storage costs from old object versions.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
       recommendation_type: Delete S3 Bucket
       recommendation_description: An S3 bucket with minimal storage costs and no meaningful object API usage (Get, Put, Copy, Head, or multipart upload activity).
-      recommendation_prerequisites: '[Cloud Cost Management](https://www.datadoghq.com/product/cloud-cost-management) or [Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
@@ -365,13 +365,13 @@ multifiltersearch:
       resource_type: S3 Bucket
       recommendation_type: Transition S3 objects to Infrequent Access by Prefix
       recommendation_description: A bucket prefix's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects in the prefix are accessed.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
       resource_type: S3 Bucket
       recommendation_type: Transition old Standard-class data
       recommendation_description: A bucket prefix has old Standard-class data with no lifecycle transition rule to move it to cheaper storage.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: SageMaker Endpoint
@@ -629,6 +629,12 @@ multifiltersearch:
       resource_type: Storage Account
       recommendation_type: Delete Storage Account
       recommendation_description: Storage Account with no transactions and negligible used capacity over the last 14 days.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Storage Account
+      recommendation_type: Transition old Hot-tier data to Cool
+      recommendation_description: Identifies storage account prefixes with Hot-tier block blob data that hasn't been modified in at least 90 days, and recommends moving that data to the Cool tier.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
