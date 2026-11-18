@@ -73,6 +73,14 @@ To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resour
 
 If you export traces directly to Datadog over OTLP HTTP, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. This enables LLM Observability conversion for every span in the export unless `dd_llmobs_enabled=false` is explicitly set on a span or resource under the standard conversion policy. Use this header only for trace exports to Datadog, not for requests to your model provider.
 
+#### Using Claude Platform
+
+When you configure a Datadog telemetry destination in Claude Platform, Claude automatically sets the `dd-llmobs-enabled` request header to `true`. Datadog converts these traces to Agent Observability traces.
+
+To disable conversion, edit the telemetry destination and set `dd-llmobs-enabled` to `false` under **Request headers**.
+
+{{< img src="llm_observability/instrumentation/claude-platform-telemetry-destination.png" alt="Claude Platform's Edit destination dialog showing the Datadog OTLP endpoint and request headers, including dd-llmobs-enabled." style="width:100%;" >}}
+
 #### Using environment variables
 
 Add the `dd_llmobs_enabled=true` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
@@ -745,6 +753,12 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.prompt_tokens` | `metrics.prompt_tokens` |
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
+| `gen_ai.usage.cache_read.input_tokens` | `metrics.cache_read_input_tokens` |
+| `gen_ai.usage.cache_creation.input_tokens` | `metrics.cache_write_input_tokens` |
+| `gen_ai.usage.reasoning.output_tokens` | `metrics.reasoning_output_tokens` |
+| `gen_ai.usage.non_cached_input_tokens` | `metrics.non_cached_input_tokens` |
+| `gen_ai.usage.cache_read_input_tokens` | `metrics.cache_read_input_tokens` |
+| `gen_ai.usage.cache_write_input_tokens` | `metrics.cache_write_input_tokens` |
 
 #### Cost metrics
 

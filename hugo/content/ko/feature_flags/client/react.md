@@ -46,7 +46,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sd
 
 `DatadogProvider` 인스턴스를 생성하고 OpenFeature에 등록합니다. React 컴포넌트를 렌더링하기 전, 애플리케이션에서 최대한 빨리 이 작업을 수행하세요. 실시간 브라우저 Feature Flags 구성을 위해서는 `applicationId`, `clientToken`, `site` 및 `env`가 필요합니다. 클라이언트 토큰을 생성하려면 [클라이언트 토큰][2]을 참조하세요.
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">브라우저 Feature Flags는 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">브라우저 Feature Flags는 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에 대해 지원되지 않습니다.</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -84,7 +84,7 @@ const evaluationContext = {
 OpenFeature.setProvider(provider, evaluationContext);
 {{< /code-block >}}
 
-<div class="alert alert-info">는 <code>targetingKey</code> 백분율 기반 타겟팅의 무작위화 대상으로 사용됩니다. 플래그가 대상의 백분율(예: 50%)을 타겟팅할 때, <code>targetingKey</code> 는 사용자가 어떤 '버킷'에 속하는지 결정합니다. 사용자의 <code>targetingKey</code> 가 동일한 경우 주어진 플래그에 대해 항상 동일한 변형을 받습니다.</div>
+<div class="alert alert-info"> <code>targetingKey</code> 는 백분율 기반 타겟팅의 무작위화 대상으로 사용됩니다. 플래그가 대상의 백분율(예: 50%)을 타겟팅할 때, <code>targetingKey</code> 는 사용자가 어떤 '버킷'에 속하는지 결정합니다. 동일한 <code>targetingKey</code> 가 지정된 사용자는 주어진 플래그에 대해 항상 동일한 변형을 받습니다.</div>
 
 ## 애플리케이션 래핑 {#wrap-your-application}
 
@@ -305,11 +305,11 @@ React 공급자는 다음과 같은 선택적 설정을 지원하는 Datadog 브
 
 | 옵션 | 기본값 | 사용 |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | 노출 이벤트를 노출 수집기로 전송합니다. |
+| `trackExposures` | `true` | 노출 이벤트를 노출 수집기로 전송합니다. 버전 2.3.0 이상에서 사용할 수 있습니다. 지원이 중단된 `enableExposureLogging` 옵션을 대체합니다. 자체 데이터 저장소에 노출을 기록하려면 [자체 데이터 저장소에 Feature Flag 노출 기록][5]을 참조하세요. |
 | `enableFlagEvaluationTracking` | `true` | 집계된 평가 텔레메트리를 전송합니다. |
 | `enableRumFeatureFlagTracking` | `true` | 브라우저 RUM을 사용할 수 있는 경우 RUM 이벤트에 플래그 평가를 추가합니다. 이 옵션을 활성화하면 RUM 청구 이벤트 수가 증가할 수 있습니다. |
 | `flagEvaluationTrackingInterval` | `10000`ms | 평가 텔레메트리를 위한 플러시 간격입니다. |
-| `initialFlagsConfiguration` | unset | 가져오기에 실패할 경우 대체 수단으로 컨텍스트와 일치하는 사전 계산 데이터를 제공합니다. [초기 사전 계산 대체 데이터][3]를 참조하세요. |
+| `initialFlagsConfiguration` | 설정되지 않음 | 가져오기에 실패할 경우 대체 수단으로 컨텍스트와 일치하는 사전 계산 데이터를 제공합니다. [초기 사전 계산 대체 데이터][3]를 참조하세요. |
 | `flaggingProxy` | 설정되지 않음 | `site` 대신 프록시를 통해 플래그를 가져옵니다. |
 | `customHeaders` | 설정되지 않음 | 플래그 가져오기 요청에 헤더를 추가합니다. |
 | `overwriteRequestHeaders` | `false` | 기본 요청 헤더를 `customHeaders`로 바꿉니다. |
@@ -343,3 +343,4 @@ Web SDK 플래그 형태에는 `variants`, `defaultVariant` 및 `disabled`가 �
 [2]: /ko/account_management/api-app-keys/#client-tokens
 [3]: /ko/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /ko/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /ko/feature_flags/guide/record_exposures_in_your_own_data_store/

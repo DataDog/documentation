@@ -39,6 +39,7 @@ Les coûts SaaS et IA vous permettent d'envoyer des données de coûts **directe
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=chatgptenterprise#configure-your-saas-accounts" src="integrations_logos/chatgpt-enterprise-lockup.svg" alt="ChatGPT Enterprise" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts" src="integrations_logos/temporal_small.svg" alt="temporal cloud" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
@@ -184,6 +185,46 @@ Une fois votre configuration enregistrée, Datadog commence à interroger les en
 
 {{% /tab %}}
 
+{{% tab "ChatGPT Enterprise" %}}
+
+### 1. Créez une clé d'API d'administration limitée à Costs {#1-create-a-costs-only-admin-api-key}
+
+Utilisez un espace de travail ChatGPT Enterprise avec accès à l'API Costs d'OpenAI. Un propriétaire ou un administrateur d'espace de travail doit créer la clé.
+
+1. Ouvrez la ChatGPT Admin Console et sélectionnez l'espace de travail ChatGPT Enterprise.
+2. Accédez à {{< ui >}}Credentials{{< /ui >}} > {{< ui >}}Admin keys{{< /ui >}} > {{< ui >}}Create new admin key{{< /ui >}}.
+3. Si vous êtes propriétaire d'un espace de travail, sélectionnez {{< ui >}}Custom permissions{{< /ui >}}. Définissez {{< ui >}}Costs{{< /ui >}} sur {{< ui >}}Read{{< /ui >}} et laissez les autres catégories d'autorisation sur {{< ui >}}None{{< /ui >}}.
+4. Créez la clé et copiez son secret dans un emplacement sécurisé.
+
+Créez cette clé dans la ChatGPT Admin Console, et non dans la console des clés d'administration d'OpenAI API Platform. Pour plus de détails, consultez la [configuration de l'intégration ChatGPT Enterprise][101].
+
+### 2. Configurez l'intégration Datadog {#2-configure-the-datadog-integration-1}
+
+1. Dans Datadog, ouvrez la [tuile d'intégration ChatGPT Enterprise][102].
+2. Sélectionnez {{< ui >}}Install{{< /ui >}}, ouvrez {{< ui >}}Configure{{< /ui >}} et sélectionnez {{< ui >}}Add Account{{< /ui >}}.
+3. Saisissez un {{< ui >}}Account name{{< /ui >}}, le {{< ui >}}ChatGPT Enterprise Admin API Key{{< /ui >}} et le {{< ui >}}OpenAI Organization ID{{< /ui >}}.
+4. Activez la collecte de données de Cloud Cost Management pour le compte et enregistrez la configuration.
+
+L'ID d'organisation doit être l'ID `org-...` utilisé par l'API Costs pour l'utilisation Enterprise de l'espace de travail. N'entrez pas d'UUID d'espace de travail ChatGPT ou d'ID d'organisation Datadog. Si vous ne connaissez pas l'ID d'organisation, contactez le propriétaire de votre espace de travail ou le support OpenAI.
+
+Lorsque vous activez Cloud Cost Management, Datadog collecte jusqu'à 30 jours de coûts historiques disponibles. La collecte ultérieure s'effectue toutes les heures. L'utilisation récente peut apparaître plus tard en raison des délais de publication des données d'OpenAI et de leur traitement par Datadog.
+
+Une fois les données de coût collectées, ouvrez [Cloud Cost Management Providers][103] pour vérifier le compte. Sélectionnez ensuite {{< ui >}}ChatGPT Enterprise{{< /ui >}} sur la [page de résumé des coûts IA][104]. Les coûts d'OpenAI API Platform sont pris en charge par l'intégration OpenAI distincte.
+
+### Rapports de coûts {#cost-reporting}
+
+ChatGPT Enterprise rend compte de l'utilisation de ChatGPT Chat, ChatGPT Work et Codex. Pour l'utilisation facturée en crédits, Cloud Cost Management inclut le montant estimé en USD d'OpenAI dans les totaux des coûts, plutôt que le nombre de crédits consommés. Pour l'utilisation facturée directement en USD, il inclut le montant en USD déclaré. Ces coûts d'utilisation peuvent différer des montants finaux de la facture.
+
+Les ventilations par modèle et par utilisateur dépendent des champs fournis par OpenAI. Pour les dimensions disponibles, consultez [Données collectées][105].
+
+[101]: /fr/integrations/chatgpt-enterprise/#setup
+[102]: https://app.datadoghq.com/integrations/chatgpt-enterprise
+[103]: https://app.datadoghq.com/cost/settings/providers
+[104]: /fr/cloud_cost_management/ai_costs/
+[105]: #data-collected
+
+{{% /tab %}}
+
 {{% tab "Cursor" %}}
 
 <div class="alert alert-warning">Un forfait Enterprise et un rôle d'administrateur d'équipe sont requis pour générer une clé d'API administrateur Cursor. Les comptes avec un forfait d'équipe standard renvoient des erreurs d'accès refusé.</div>
@@ -195,7 +236,7 @@ Commencez par obtenir une clé d'API administrateur auprès de Cursor. Cette cl�
 1. Dans le dashboard Cursor, accédez à **Settings > Advanced > Admin API Keys**.
 2. Créez une nouvelle clé d'API administrateur et copiez-la dans un emplacement sécurisé.
 
-### 2. Configurez l'intégration Datadog {#2-configure-the-datadog-integration-1}
+### 2. Configurez l'intégration Datadog {#2-configure-the-datadog-integration-2}
 
 1. Dans Datadog, accédez à [**Integrations > Cursor**][101].
 2. Sous l'onglet {{< ui >}}Configure{{< /ui >}}, dans {{< ui >}}Account details{{< /ui >}}, collez la {{< ui >}}Admin API Key{{< /ui >}} provenant de Cursor.
@@ -218,7 +259,7 @@ Une fois votre configuration enregistrée, Datadog commence à interroger les en
 2. Attribuez au compte de service le rôle **Finance Admin** ou **Account Owner**.
 3. Générez une clé d'API pour le compte de service et copiez-la dans un emplacement sécurisé. Temporal Cloud n'affiche la clé qu'une seule fois.
 
-### 2. Configurez l'intégration Datadog {#2-configure-the-datadog-integration-2}
+### 2. Configurez l'intégration Datadog {#2-configure-the-datadog-integration-3}
 
 1. Dans Datadog, accédez à [**Integrations > Temporal Cloud Cost Management**][110].
 2. Cliquez sur {{< ui >}}Install Integration{{< /ui >}}, puis cliquez sur {{< ui >}}Configure{{< /ui >}}.
@@ -609,6 +650,20 @@ Le tableau suivant contient une liste non exhaustive de tags prêts à l'emploi 
 | `service_tier` | Le plan ou le niveau de service Anthropic associé à l'utilisation (par exemple, `standard`, `pro`, `enterprise`). |
 | `token_type` | La catégorie de jetons consommés.|
 | `context_window` | La taille de la fenêtre de contexte pour les jetons (par exemple, `tier_0-200k`). |
+
+{{% /tab %}}
+
+{{% tab "ChatGPT Enterprise" %}}
+
+| Nom du tag | Description du tag |
+|---|---|
+| `model` | L'identifiant de modèle rapporté par OpenAI. |
+| `product` | Le produit ayant généré l'utilisation, tel que ChatGPT Chat, ChatGPT Work ou Codex. |
+| `user_email` | L'adresse e-mail de l'utilisateur ayant généré l'utilisation, lorsqu'elle est fournie par OpenAI. |
+| `billing_mode` | La dénomination de facturation : `credits` pour une utilisation facturée en crédits ou `usd` pour une utilisation directe en USD. |
+| `service_tier` | Le niveau de service signalé pour l'utilisation. |
+
+Les balises disponibles dépendent de l'enregistrement source. L'utilisation facturée en crédits contribue à un coût estimé en USD plutôt qu'à une quantité de crédits dans les totaux de coûts de CCM.
 
 {{% /tab %}}
 

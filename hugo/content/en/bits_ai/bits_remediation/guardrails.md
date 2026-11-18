@@ -32,7 +32,7 @@ To create a guardrail:
 1. In the review step, enter a name for the guardrail, then save it.
 
 [1]: https://app.datadoghq.com/bits-ai/guardrails
-[2]: /actions/private_actions/execution_policies/
+[2]: /actions/execution_policies/
 [3]: https://app.datadoghq.com/organization-settings/roles
 [4]: /integrations/slack/
 [5]: /bits_ai/bits_remediation/infrastructure_actions/

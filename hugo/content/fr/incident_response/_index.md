@@ -17,7 +17,7 @@ title: Incident Response
 {{< whatsnext desc="Explorez les composants d'Incident Response" >}}
     {{< nextlink href="/incident_response/incident_management/" >}}<u>Incident Management</u> - Apprenez à gérer et à résoudre les incidents efficacement.{{< /nextlink >}}
     {{< nextlink href="/incident_response/work_management/" >}}<u>Gestion du travail</u> - Suivez et organisez les éléments de travail liés aux incidents.{{< /nextlink >}}
-    {{< nextlink href="/incident_response/status_pages/" >}}<u>Pages de statut</u> - Communiquez le statut du système en temps réel avec des pages internes ou publiques.{{< /nextlink >}}
+    {{< nextlink href="/incident_response/status_pages/" >}}<u>Status Pages</u> - Communiquez l'état du système en temps réel via des pages publiques, internes ou privées.{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/" >}}<u>Astreinte</u> - Gérez les plannings d'astreinte et les rotations des intervenants.{{< /nextlink >}}
 {{< /whatsnext >}}
 

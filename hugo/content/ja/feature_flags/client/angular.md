@@ -502,16 +502,16 @@ Angular プロバイダーは Datadog ブラウザプロバイダーを使用し
 
 | オプション | デフォルト | 使用 |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | エクスポージャーイベントをエクスポージャーインテークに送信します。|
+| `trackExposures` | `true` | エクスポージャーイベントをエクスポージャーインテークに送信します。バージョン 2.3.0 以降で利用可能です。非推奨の `enableExposureLogging` オプションを置き換えます。独自のデータストアにエクスポージャーを記録するには、[独自のデータストアに Feature Flag のエクスポージャーを記録する][5] を参照してください。|
 | `enableFlagEvaluationTracking` | `true` | 集計された評価テレメトリを送信します。|
 | `enableRumFeatureFlagTracking` | `true` | Browser RUM が利用可能な場合、RUM イベントにフラグ評価を追加します。このオプションを有効にすると、RUM 課金対象のイベント数が増加する可能性があります。|
 | `flagEvaluationTrackingInterval` | `10000` ms | 評価テレメトリのフラッシュ間隔。|
-| `initialFlagsConfiguration` | unset | 取得に失敗した場合のフォールバックとして、コンテキストに一致する事前計算済みデータを提供します。[初期事前計算済みフォールバックデータ][3]を参照してください。|
+| `initialFlagsConfiguration` | 未設定 | 取得に失敗した場合のフォールバックとして、コンテキストに一致する事前計算済みデータを提供します。[初期事前計算済みフォールバックデータ][3] を参照してください。|
 | `flaggingProxy` | 未設定 | プロキシ経由でフラグを取得し、`site` の代わりに使用します。|
 | `customHeaders` | 未設定 | フラグ取得リクエストにヘッダーを追加します。|
 | `overwriteRequestHeaders` | `false` | デフォルトのリクエストヘッダーを `customHeaders` に置き換えます。|
 
-`DatadogProvider` は、Angular アプリケーションに推奨されるブラウザプロバイダーです。アプリケーションが所有する構成の配信や、コンテキストの変更全体にわたるローカルルールの評価については、[ブラウザのルールベース評価][4]を参照してください。この高度な設定では、明示的な構成の更新と追跡ライフサイクルの管理が必要です。
+`DatadogProvider` は、Angular アプリケーションに推奨されるブラウザプロバイダーです。アプリケーションが所有する構成の配信や、コンテキストの変更全体にわたるローカルルールの評価については、[ブラウザのルールベース評価][4] を参照してください。この高度な設定では、明示的な構成の更新と追跡ライフサイクルの管理が必要です。
 
 ## テスト {#testing}
 
@@ -564,3 +564,4 @@ Web SDK のフラグ形状には、`variants`、`defaultVariant`、および `di
 [2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: /ja/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /ja/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /ja/feature_flags/guide/record_exposures_in_your_own_data_store/
