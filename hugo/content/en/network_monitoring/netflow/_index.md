@@ -94,7 +94,7 @@ Datadog supports the following types of IP enrichment.
 
 You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-From the [{{< ui >}}IP Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
+Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}IP Enrichment{{< /ui >}}][10], then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
 To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For the full order, see [Application name assignment](#application-name-assignment).
 
@@ -128,7 +128,7 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-From the [{{< ui >}}Port Enrichment{{< /ui >}} settings page][13], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
+Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}Port Enrichment{{< /ui >}}][13], then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping dialog on the Port Enrichment settings page" width="100%" >}}
 
