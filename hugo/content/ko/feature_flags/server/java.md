@@ -2,10 +2,10 @@
 description: Java 애플리케이션용 Datadog Feature Flags를 설정하세요.
 further_reading:
 - link: /feature_flags/server/
-  tag: 문서
+  tag: 설명서
   text: 서버 측 Feature Flags
 - link: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-  tag: 문서
+  tag: 설명서
   text: Java APM 및 분산 트레이싱
 - link: /feature_flags/guide/server_flag_evaluation_metrics/
   tag: 가이드
@@ -210,7 +210,7 @@ api.setProvider(new Provider());
 
 평가 컨텍스트는 플래그 평가를 위한 대상(사용자, 기기, 세션)을 정의합니다. 이는 타겟팅 규칙에 따라 어떤 플래그 변형이 반환될지 결정합니다.
 
-<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
+<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 원시 값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.EvaluationContext;
@@ -342,6 +342,7 @@ if (details.getErrorCode() != null) {
 - 고급 테스트, 로컬 개발 또는 운영자가 관리하는 프록시에 대해 [사용자 지정 Agentless 엔드포인트를 사용][10]
 - Agent가 관리하는 전달을 유지하기 위해 [Agent Remote Configuration을 사용][13]
 - [기존 Remote Configuration 설정을 마이그레이션][11]하고 더 이상 사용되지 않는 `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` 설정을 제거
+- Agent Remote Configuration을 사용하는 경우 [애플리케이션보다 먼저 Agent를 시작][18]
 
 Agentless 모드에서 Java는 실험 노출 및 집계된 플래그 평가 이벤트를 위해 호환되는 로컬 텔레메트리 릴레이를 선호합니다. 호환되는 릴레이를 사용할 수 없는 경우 두 이벤트 유형을 모두 직접 전송합니다. 직접 경로는 애플리케이션 `DD_API_KEY` 및 `DD_SITE` 설정을 사용합니다. Agent가 없는 Serverless 환경의 경우, [`serverless-init`][17]를 로컬 텔레메트리 릴레이로 사용할 수 있습니다.
 
@@ -376,7 +377,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED`는 선택적인 OpenFeature 이벤트입니다. Datadog 공급자 설명서를 확인하여 해당 버전에서 이 이벤트가 지원되는지 확인하세요.
+공급자가 준비되면 새 플래그 구성을 수신할 때마다 `PROVIDER_CONFIGURATION_CHANGED`를 내보냅니다.
 
 ### 다중 클라이언트 {#multiple-clients}
 
@@ -471,7 +472,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## 테스트 {#testing}
 
-실제 `DatadogProvider`를 사용하여 전용 Datadog 테스트 환경에서 테스트하거나, OpenFeature의 `InMemoryProvider`로 교체하여 테스트 코드에서 직접 플래그 값을 제어할 수 있습니다. 이 섹션에는 테스트를 독립적이고 오프라인 상태로 유지하는 인메모리 방식을 설명합니다. `InMemoryProvider`는 `dev.openfeature:sdk`와 함께 제공되므로(이미 테스트 범위 종속성임) 추가 라이브러리가 필요하지 않습니다. 테스트 구성에 `dev.openfeature:sdk`가 아직 없으면 추가하세요.
+실제 `DatadogProvider`를 사용하여 전용 Datadog 테스트 환경에서 테스트하거나, OpenFeature의 `InMemoryProvider`로 교체하여 테스트 코드에서 직접 플래그 값을 제어할 수 있습니다. 이 섹션에서는 테스트를 독립적이고 오프라인 상태로 유지하는 인메모리 방식을 설명합니다. `InMemoryProvider`는 `dev.openfeature:sdk`와 함께 제공되므로(이미 테스트 범위 종속성임) 추가 라이브러리가 필요하지 않습니다. 테스트 구성에 `dev.openfeature:sdk`가 아직 없으면 추가하세요.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.Client;
@@ -607,7 +608,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 
 `PROVIDER_NOT_READY`가 폴링 및 초기화 간격 이후에도 지속되면 선택한 소스를 다시 확인하세요.
 
-#### 디버그 플래그 평가 {#debug-flag-evaluations}
+#### 플래그 평가 디버깅{#debug-flag-evaluations}
 
 플래그가 예상치 못한 값을 반환하는 경우 `getBooleanValue()` 대신 `getBooleanDetails()`를 사용하세요. `Details` 변형은 공급자의 내부 상태를 노출하는 `FlagEvaluationDetails` 객체를 반환합니다.
 
@@ -642,6 +643,7 @@ logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode
 
 1. Datadog UI에서 플래그가 실험과 연결되어 있는지 확인합니다.
 2. Agent API 키와 연결 상태를 확인합니다.
+3. Agent Remote Configuration을 사용하는 경우 애플리케이션이 시작될 때 Agent를 사용할 수 있었는지 확인합니다. 그렇지 않은 경우 애플리케이션을 다시 시작합니다. [Agent 가용성][18]을 참조하세요.
 
 ## 추가 자료 {#further-reading}
 
@@ -663,3 +665,4 @@ logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode
 [15]: /ko/serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /ko/serverless/google_cloud_run/containers/in_container/java/
 [17]: /ko/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /ko/feature_flags/concepts/configuration_sources/#agent-availability

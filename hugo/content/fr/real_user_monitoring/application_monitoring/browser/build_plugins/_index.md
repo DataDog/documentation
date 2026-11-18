@@ -8,9 +8,9 @@ algolia:
   - rollup
   - rspack
   - bundler
-description: Intégrez les plugins de build Datadog à votre bundler JavaScript pour
-  automatiser le téléchargement des maps source, la désobfuscation des noms d'action
-  et d'autres tâches RUM au moment de la compilation.
+description: Intégrez les plugins de compilation Datadog à votre bundler JavaScript
+  pour automatiser le téléversement des maps source, la génération de listes d’autorisation
+  pour la confidentialité et d’autres tâches RUM au moment de la compilation.
 further_reading:
 - link: https://github.com/DataDog/build-plugins
   tag: Code source
@@ -173,7 +173,7 @@ datadogWebpackPlugin({
 
 {{< whatsnext desc="Configurez les plugins de build individuels:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u> : téléversez automatiquement les source maps vers Datadog pendant votre build, ce qui permet d'obtenir des stack traces désobfusquées.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Désobfuscation du nom de l'action</u> : restaurez des noms d'action lisibles dans les builds minifiés.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u> : Générez une liste d’autorisation de chaînes sans risque au moment de la compilation pour que les noms d’actions et le texte des relectures de session restent utiles tout en masquant les données sensibles.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Contexte du code source</u> : affichez le code source en ligne dans les stack traces d'Error Tracking.{{< /nextlink >}}
 {{< /whatsnext >}}
 

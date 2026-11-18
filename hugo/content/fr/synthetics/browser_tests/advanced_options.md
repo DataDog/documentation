@@ -2,109 +2,135 @@
 aliases:
 - /fr/synthetics/guide/browser-tests-switch-tabs/
 - /fr/synthetics/guide/browser-test-self-maintenance/
-description: Configurer des options avancées pour les étapes des tests Browser
+description: Configurez les options avancées pour les étapes des tests de navigateur
 further_reading:
 - link: https://www.datadoghq.com/blog/browser-tests/
   tag: Blog
-  text: Surveillance de l'expérience utilisateur avec les tests Browser Synthetic
-- link: /synthetics/browser_tests/actions/
+  text: Surveillance de l'expérience utilisateur avec les tests de navigateur Synthetic
+- link: /synthetics/browser_tests/test_steps/
   tag: Documentation
-  text: En savoir plus sur les étapes des tests Browser
-title: Options avancées pour les étapes des tests Browser
+  text: En savoir plus sur les étapes des tests de navigateur
+title: Options avancées pour les étapes de test de navigateur
 ---
+## Présentation {#overview}
 
-## Présentation
+Cette page décrit les options avancées pour les tests de navigateur de Synthetic Monitoring. 
 
-Cette page décrit les options avancées relatives aux tests Browser Synthetic.
+## Localisez un élément {#locate-an-element}
 
+### Algorithme Datadog {#datadog-algorithm}
 
-## Localiser un élément
+L'instabilité est un point sensible dans les tests de bout en bout, car ceux-ci échouent parfois lorsqu'une équipe frontend apporte des changements : un identifiant modifié dans votre test déclenche alors une alerte plutôt qu'un véritable problème de l'application.
 
-### Algorithme Datadog
+Pour éviter les tests instables, Datadog utilise un algorithme qui exploite un ensemble de localisateurs pour cibler des éléments dans les tests de navigateur. Un petit changement dans l'interface utilisateur peut modifier un élément (par exemple, en le déplaçant vers un autre emplacement). Le test de navigateur localise automatiquement l'élément à nouveau en se basant sur des points de référence qui n'ont pas été affectés par le changement. 
 
-L'un des points faibles du testing de bout en bout réside dans la fragilité des tests. En effet, il arrive que la mise en œuvre d'un changement par une équipe frontend entraîne le dysfonctionnement d'un test : l'identifiant utilisé génère ainsi une alerte, alors que votre application ne rencontre aucun problème.
+Lorsque le test s'exécute avec succès, le test de navigateur recalcule (ou « s'auto-répare ») les localisateurs défectueux en leur attribuant des valeurs mises à jour, afin que vos tests ne soient pas interrompus par des modifications mineures de l'interface utilisateur et s'adaptent automatiquement à celle de votre application. 
 
-Pour éviter les tests irréguliers, l'algorithme Datadog exploite un ensemble de localisateurs permettent de cibler des éléments dans les tests Browser. Si un léger changement d'interface entraîne la modification d'un élément (par exemple, si celui-ci est déplacé vers un autre emplacement), le test repère automatiquement l'élément, en se basant sur les points de référence qui n'ont pas été modifiés par le changement d'interface.
+Pour vous assurer que votre test de navigateur ne valide pas un changement inattendu, utilisez des [assertions][5] lors de la création de votre test. Les assertions vous permettent de définir les comportements attendus et inattendus au cours du parcours des étapes du test. 
 
-Lorsque le test Browser se termine sans échouer, il recalcule les localisateurs non fonctionnels en leur attribuant une nouvelle valeur. On parle alors de réparation spontanée. Ainsi, vos tests continuent à fonctionner même après un simple changement d'interface. Ils peuvent donc s'adapter automatiquement aux différentes modifications apportées à l'interface de votre application.
+### Localisateur spécifié par l'utilisateur {#user-specified-locator}
 
-Pour veiller à ce que votre test Browser ne valide pas un changement inattendu, utilisez des [assertions][5] lors de sa création. Elles vous permettent de définir les comportements attendus et inattendus associés au parcours de l'étape d'un test.
+Par défaut, les tests de navigateur utilisent le système de localisation Datadog. Lorsqu'un test recherche un élément spécifique avec lequel interagir (par exemple, un bouton de paiement), au lieu de rechercher un élément à l'aide d'un XPath ou d'un sélecteur CSS spécifique, il utilise plusieurs points de référence pour le localiser (par exemple, XPath, texte, classes et éléments à proximité). 
 
-### Localisateur spécifié par l'utilisateur
+Ces points de référence deviennent un ensemble de localisateurs, dont chacun définit l'élément de manière unique. Vous ne devriez utiliser des sélecteurs personnalisés que dans des cas exceptionnels, car le système de localisation Datadog permet aux tests de s'auto-maintenir.
 
-Par défaut, les tests Browser utilisent le système de localisation de Datadog. Lorsqu'un test recherche un élément spécifique afin d'interagir avec lui (par exemple, un bouton de paiement), plutôt que de chercher un élément avec un XPath ou un sélecteur CSS précis, il se base sur plusieurs points de référence pour trouver l'élément (par exemple, un XPath, du texte, des classes ou d'autres éléments à proximité).
+Les sélecteurs personnalisés sont créés en effectuant une étape souhaitée dans l'enregistreur (telle qu'un **clic**, un **survol** ou une **assertion**) sur n'importe quel élément de votre page. Ceci spécifie le type d'étape qui doit être effectué.
 
-Ces points de référence constituent un ensemble de localisateurs. Chacun d'entre eux définit l'élément de façon unique. Utilisez uniquement des sélecteurs personnalisés en cas de nécessité absolue. En effet, le système de localisation de Datadog permet aux tests de s'adapter automatiquement en cas de changement.
-
-Pour créer un sélecteur personnalisé, effectuez une action pertinente sur un élément de votre page dans la zone d'enregistrement (comme un **clic**, un **survol** ou une **assertion**, etc.). Cette action définit l'étape à suivre.
-
-Pour utiliser un identifiant spécifique (par exemple, pour cliquer sur le `énième` élément d'un menu déroulant, peu importe le contenu de l'élément), procédez comme suit :
+Pour utiliser un identifiant spécifique (par exemple, pour cliquer sur l'élément `nth` dans un menu déroulant, quel que soit le contenu de l'élément) :
 
 1. Enregistrez ou ajoutez manuellement une [étape][1] à votre enregistrement.
-2. Cliquez sur l'étape enregistrée, puis sur **Advanced options**.
-3. Saisissez un sélecteur XPath 1.0, ou une classe ou un ID CSS, dans le champ **User Specified Locator**. Exemple : `div`, `h1` ou `.hero-body` pour un élément HTML.
-4. Après avoir défini l'élément, cliquez sur **Test** pour le mettre en évidence dans l'enregistrement à droite.
+2. Cliquez sur l'étape enregistrée et cliquez sur {{< ui >}}Advanced options{{< /ui >}}.
+3. Saisissez un sélecteur XPath 1.0 ou une classe/un ID CSS sous {{< ui >}}User Specified Locator{{< /ui >}}, par exemple : `div`, `h1` ou `.hero-body`, pour l'élément HTML.
+4. Vous pouvez aussi utiliser la syntaxe Handlebars (`{{`) pour insérer du contenu dynamique. Une liste déroulante pré-remplie de variables s'affiche :
 
-Par défaut, la case **If user specified locator fails, fail test** est cochée. Cela signifie qu'en cas d'échec du localisateur défini, le test échoue.
+{{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="Champ du localisateur défini par l'utilisateur, avec la syntaxe Handlebars et les variables mises en surbrillance" style="width:70%">}}
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Élément mis en évidence du test" video=true >}}
+5. Une fois que vous avez défini un élément, cliquez sur {{< ui >}}Highlight{{< /ui >}} pour mettre l'élément en surbrillance dans l'enregistrement à droite.
 
-Vous pouvez choisir d'appliquer l'algorithme de test Browser standard en décochant cette case.
+Par défaut, la case {{< ui >}}If user specified locator fails, fail test{{< /ui >}} est cochée. Cela signifie que si le localisateur défini échoue, le test est considéré comme un échec.
 
-{{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Option d'échec du test" style="width:70%">}}
+{{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="Test Highlighted Element" video=true >}}
 
-## Délai d'expiration
+Vous pouvez décider de revenir à l'algorithme de test de navigateur standard en décochant la case {{< ui >}}If user specified locator fails, fail test{{< /ui >}}.
 
-Lorsqu'un test Browser ne parvient pas à localiser un élément, il réessaie d'effectuer l'étape pendant 60 secondes.
+{{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Option Fail test" style="width:70%">}}
 
-Vous pouvez choisir d'augmenter ou de réduire cette durée (max : 300 secondes) si vous souhaitez prolonger ou limiter la période de recherche de l'élément cible de l'étape.
+
+## Délai d'attente {#timeout}
+
+Si un test de navigateur ne parvient pas à localiser un élément, il réessaie l'étape pendant 60 secondes.
+
+Vous pouvez décider de diminuer ou d'augmenter ce délai d'attente jusqu'à 300 secondes si vous souhaitez que votre test attende moins ou plus longtemps pour pouvoir trouver l'élément ciblé par l'étape.
 
 {{< img src="synthetics/browser_tests/advanced_options/time_before_fail.png" alt="Délai avant échec" style="width:50%">}}
 
-## Étape facultative
+## Étape facultative {#optional-step}
 
-Dans certaines situations, par exemple lorsqu'une fenêtre contextuelle s'affiche, vous pouvez faire en sorte que certaines étapes soient facultatives. Pour ce faire, cochez la case **Allow this step to fail**. Si l'étape échoue après le délai d'expiration indiqué (par défaut, 60 secondes), le test se poursuit et passe à la prochaine étape.
+Pour rendre une étape facultative, comme une étape qui ferme une fenêtre contextuelle, sélectionnez {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Si l'étape échoue après son délai d'expiration (60 secondes par défaut), le test exécute l'étape suivante.
 
-{{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Allow this step to fail" style="width:25%">}}
+Cette option affiche également {{< ui >}}If this step fails, mark test as failed{{< /ui >}}, qui est sélectionné par défaut. Si elle est sélectionnée, le test échoue toujours après l'exécution des étapes restantes. Pour que le test reste réussi lorsque l'étape facultative échoue, décochez cette option.
 
-## Empêcher les captures d'écran
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Options avancées de l'étape avec « continue to next step » sélectionné et « mark test as failed » décoché." style="width:50%">}}
 
-Vous pouvez éviter d'enregistrer une étape de capture d'écran lors de l'exécution d'un test. Cela peut s'avérer utile pour s'assurer qu'aucune donnée sensible ne figure dans les résultats du test. Utilisez cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour en savoir plus, consultez la section [Sécurité des données liées à la surveillance Synthetic][2].
+## Quitter en cas de succès {#exit-on-success}
 
-{{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="Option d'enregistrement de capture d'écran" style="width:50%">}}
+Configurez cette option pour quitter le test après la réussite d'une étape. Cela évite d'exécuter des étapes inutiles et de marquer le test comme un échec.
 
-**Remarque :** cette fonctionnalité peut également être appliquée à l'ensemble d'un test Browser. Il s'agit d'une [option avancée][3] de la configuration du test.
+{{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="Quitter en cas de succès" style="width:50%">}}
 
-## Sous-tests
+## Toujours exécuter cette étape {#always-run-this-step}
 
-Grâce aux options avancées relatives aux [sous-tests][4], vous pouvez définir l'endroit où le sous-test doit être exécuté, mais également choisir le comportement de votre test Browser en cas d'échec du sous-test.
+Configurez cette option pour exécuter cette étape même si les étapes précédentes ont échoué. Cela peut être utile pour les tâches de nettoyage lorsque vous souhaitez que les étapes suivantes se poursuivent.
 
-{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="Options avancées relatives aux sous-tests dans des tests Browser" style="width:60%">}}
+{{< img src="synthetics/browser_tests/advanced_options/always_run_step.png" alt="Toujours exécuter l'étape même si les étapes précédentes ont échoué" style="width:50%">}}
 
-### Définir la fenêtre d'un sous-test
 
-* **Main** (valeur par défaut) : le sous-test s'exécute dans votre fenêtre principale, à la suite des autres étapes.
-* **New** : le sous-test s'exécute dans une nouvelle fenêtre, qui se ferme à la fin du sous-test. La fenêtre ne peut donc pas être réutilisée.
-* **Specific window** : le sous-test s'exécute dans une fenêtre numérotée, qui peut être réutilisée par d'autres sous-tests.
+## Empêcher la capture d'écran {#prevent-screenshot-capture}
 
-En ouvrant votre sous-test dans la fenêtre principale, celui-ci s'exécute à la suite de votre test principal. Il utilise ainsi l'URL de l'étape précédente. À l'inverse, si vous ouvrez votre sous-test dans une nouvelle fenêtre ou dans une fenêtre spécifique, le test s'exécute sur l'URL de départ du sous-test.
+Vous pouvez empêcher la capture d'écran d'une étape lors de l'exécution du test. Ceci est utile pour garantir qu'aucune donnée sensible n'apparaisse dans vos résultats de test. Utilisez cette option avec précaution car elle peut rendre le dépannage des échecs plus difficile. Pour plus d'informations, consultez [Synthetic Monitoring Data Security][2].
 
-### Définir le comportement en cas d'échec
+{{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="Option de capture d'écran" style="width:50%">}}
 
-Cliquez sur l'option **Continue with test if this step fails** pour que votre test Browser se poursuive en cas d'échec du sous-test ou sur l'option **Consider entire test as failed if this step fails** pour que le test échoue en cas d'échec du sous-test.
+**Remarque :** Cette fonctionnalité est également disponible au niveau global du test en tant qu'[option avancée][3] dans la configuration de votre test de navigateur.
 
-### Remplacer des variables dans des sous-tests
+## Sous-tests {#subtests}
 
-Pour remplacer la valeur d'une variable dans un sous-test d'un test Browser, attribuez un nom à la variable dans le sous-test, puis utilisez le même nom de variable dans le test parent. Le test Browser remplace alors la valeur du sous-test.
+Les options avancées pour les [sous-tests][4] vous permettent de choisir où vous souhaitez exécuter votre sous-test et de définir le comportement de votre test de navigateur si le sous-test échoue.
 
-Pour en savoir plus, consultez la section [Étapes des tests Browser][4].
+{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced_2.png" alt="Options avancées pour les sous-tests dans les tests de navigateur" style="width:60%">}}
 
-## Pour aller plus loin
+### Définir la fenêtre du sous-test {#set-the-subtest-window}
+
+* {{< ui >}}Main (default){{< /ui >}} : Le sous-test est exécuté dans votre fenêtre principale, à la suite des autres étapes.
+* {{< ui >}}New{{< /ui >}} : Le sous-test est exécuté dans une nouvelle fenêtre, qui est fermée à la fin du sous-test. Cela signifie que la fenêtre ne peut pas être réutilisée.
+* {{< ui >}}Specific window{{< /ui >}} : Le sous-test est exécuté dans une fenêtre numérotée, qui peut être réutilisée par d'autres sous-tests.
+
+Ouvrir votre sous-test dans la fenêtre principale signifie que votre sous-test est la continuation de votre test principal car il utilise l'URL de l'étape précédente. Ouvrir votre sous-test dans une nouvelle fenêtre, ou dans une fenêtre spécifique, signifie que le test commence à s'exécuter à partir de l'URL de début du sous-test.
+
+### Définir le comportement en cas d'échec {#set-failure-behavior}
+
+Sélectionnez {{< ui >}}If this step fails, continue to next step{{< /ui >}} pour que le test parent continue si le sous-test échoue. {{< ui >}}If this step fails, mark test as failed{{< /ui >}} est sélectionné par défaut. Lorsqu'il est sélectionné, le test parent échoue après l'exécution de ses étapes restantes. Pour que le test parent soit toujours considéré comme réussi lorsque le sous-test échoue, décochez cette option.
+
+### Définir le comportement en cas de succès {#set-success-behavior}
+
+Cliquez sur {{< ui >}}If this step succeeds, stop this test and mark it as passed{{< /ui >}} pour vous assurer que votre test de navigateur s'arrête immédiatement et est marqué comme réussi.
+
+### Définir le comportement d'exécution {#set-execution-behavior}
+
+Cliquez sur {{< ui >}}Always run this step{{< /ui >}} pour vous assurer que cette étape s'exécute même si les étapes précédentes du test de navigateur ont échoué.
+
+### Remplacer les variables dans les sous-tests {#override-variables-in-subtests}
+
+Pour remplacer la valeur d'une variable dans un sous-test d'un test de navigateur, nommez la variable dans le sous-test et utilisez le même nom de variable dans le test parent ; le test de navigateur remplacera alors la valeur du sous-test.
+
+Pour plus d'informations, consultez [Étapes d'un test de navigateur][4].
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics/browser_tests/actions/
+[1]: /fr/synthetics/browser_tests/test_steps/
 [2]: /fr/data_security/synthetics/
 [3]: /fr/synthetics/browser_tests/?tab=privacy#test-configuration
-[4]: /fr/synthetics/browser_tests/actions/#subtests
-[5]: /fr/synthetics/browser_tests/actions/#assertion
+[4]: /fr/synthetics/browser_tests/test_steps/#subtests
+[5]: /fr/synthetics/browser_tests/test_steps/#assertion

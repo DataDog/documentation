@@ -83,6 +83,10 @@ Pour chaque métrique, l'onglet {{< ui >}}Global lift{{< /ui >}} affiche :
 - **Couverture** : La proportion estimée de votre total métrique global associée à la population éligible de l'expérience (en excluant l'effet de l'expérience).
 - **Lift global** : Le changement estimé de vos totaux globaux de métriques si le traitement était déployé auprès de tous les utilisateurs éligibles. Datadog calcule le lift global comme le produit de la couverture et du lift local (relatif) de l'expérience.
 
+## Résultats du holdout {#holdout-results}
+
+Pour un [holdout][10], la scorecard compare le groupe auquel les modifications ont été déployées au groupe témoin. Les résultats préliminaires donnent une première indication pendant le déploiement des modifications. L'analyse principale mesure l'effet combiné pendant la phase d'analyse. Voir [Interpréter les résultats][11].
+
 ## Explorer les résultats {#exploring-results}
 
 Depuis la scorecard des métriques, survolez le nom d'une métrique pour afficher les options d'exploration. Les options disponibles dépendent de la source de données de votre métrique.
@@ -122,3 +126,5 @@ Pour les métriques basées sur des données [RUM][4] ou [Product Analytics][5],
 [7]: /fr/experiments/global_lift/
 [8]: /fr/experiments/statistics/multiple_testing_correction
 [9]: /fr/experiments/diagnostics/
+[10]: /fr/experiments/holdouts/
+[11]: /fr/experiments/holdouts/#interpret-results

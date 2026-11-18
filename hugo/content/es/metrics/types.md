@@ -28,7 +28,7 @@ title: Tipos de métricas
 ---
 ## Descripción general {#overview}
 
-Cada métrica enviada a Datadog debe tener un tipo. El tipo de una métrica afecta cómo se muestran los valores de la métrica al realizar consultas, así como las posibilidades de graficado asociadas dentro de Datadog mediante el uso de [modificadores][1] y [funciones][2] adicionales. El tipo de una métrica se muestra en el panel lateral de detalles de la métrica dada en la [página de Metrics Summary][3].
+Cada métrica enviada a Datadog debe tener un tipo. El tipo de una métrica afecta cómo se muestran los valores de la métrica al realizar consultas, así como las posibilidades de graficado asociadas dentro de Datadog mediante el uso de [modificadores][1] y [funciones][2] adicionales. El tipo de una métrica se muestra en el panel lateral de detalles de esa métrica en la [página Metrics Catalog][3].
 
 **Nota**: Cambiar el tipo de métrica en este panel lateral de detalles puede cambiar el comportamiento de la métrica en todas las visualizaciones y monitores existentes, lo que podría hacer que los datos históricos carezcan de sentido.
 

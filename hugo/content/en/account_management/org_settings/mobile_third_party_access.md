@@ -10,6 +10,9 @@ further_reading:
 - link: "/account_management/rbac/permissions/"
   tag: "Documentation"
   text: "Datadog Role Permissions"
+- link: "/account_management/rbac/mcp_access/"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 ---
 ## Overview
 
@@ -60,6 +63,8 @@ Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how Datadog ha
 
 For the Datadog Mobile App, required scopes are always allowed and cannot be disabled.
 
+Each AI client that connects to the Datadog MCP Server through OAuth, such as Claude Code, appears as its own application. Removing a scope from an AI client blocks that action through the client, even if the user has permission to perform it elsewhere in Datadog. See [Access Control for MCP][4].
+
 1. On the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page, click an application to open its detail view.
 
 2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
@@ -77,3 +82,4 @@ For the Datadog Mobile App, required scopes are always allowed and cannot be dis
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /account_management/rbac/permissions/#general-permissions
 [3]: /account_management/rbac/?tab=datadogapplication#custom-role
+[4]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client

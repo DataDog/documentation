@@ -17,3 +17,13 @@ entries:
       - ListExecutionPolicies
       - UpdateExecutionPolicy
     title: Status Pages - Private pages API spec
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateExecutionPolicy
+      - DeleteExecutionPolicy
+      - GetExecutionPolicy
+      - ListExecutionPolicies
+      - UpdateExecutionPolicy
+    title: Add AI Gateway route permissions and safe editing

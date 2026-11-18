@@ -8,7 +8,7 @@ code_lang_weight: 60
 title: Kubernetes에서 Cloud Security 설정하기
 type: multi-code-lang
 ---
-다음 지침에 따라 잘못된 구성 및 Vulnerability Management를 활성화하세요.
+다음 지침을 따라 잘못된 구성 및 Vulnerability Management를 활성화하세요.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -24,7 +24,7 @@ type: multi-code-lang
 
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml` 파일의 `spec` 섹션에 다음을 추가합니다.
+1. `datadog-agent.yaml` 파일의 `spec` 섹션에 다음을 추가하세요.
 
     ```yaml
     # datadog-agent.yaml file
@@ -63,7 +63,7 @@ type: multi-code-lang
               enabled: true
     ```
 
-2. 변경 사항을 적용하고 Agent를 재시작합니다.
+2. 변경 사항을 적용하고 Agent를 재시작하세요.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
@@ -71,7 +71,7 @@ type: multi-code-lang
 
 {{% tab "Helm" %}}
 
-1. `datadog-values.yaml` 파일의 `datadog` 섹션에 다음을 추가합니다.
+1. `datadog-values.yaml` 파일의 `datadog` 섹션에 다음을 추가하세요.
 
     ```yaml
     # datadog-values.yaml file
@@ -104,7 +104,7 @@ type: multi-code-lang
             enabled: true
     ```
 
-2. Agent를 재시작합니다.
+2. Agent를 재시작하세요.
 
 {{% /tab %}}
 
@@ -197,15 +197,16 @@ type: multi-code-lang
 
 |  신호 |  제공 정보 |
 |--------|-------------------|
-|  패키지 실행 중 |  실행 중인 프로세스가 패키지 파일에 액세스하는 것이 관찰되었습니다. |
-| 루트 프로세스에 의해 액세스됨 | 패키지가 루트(UID 0)로 실행 중인 프로세스에 의해 액세스되었습니다. |
-| SUID 바이너리 존재 | 패키지에 SUID 비트가 설정된 바이너리가 포함되어 있어 권한 상승이 가능할 수 있습니다. |
+| Package is running |  실행 중인 프로세스가 패키지 파일에 액세스하는 것이 관찰되었습니다. |
+| Accessed by root process | 패키지가 루트(UID 0)로 실행 중인 프로세스에 의해 액세스되었습니다. |
+| SUID binary present | 패키지에 SUID 비트가 설정된 바이너리가 포함되어 있어 권한 상승이 가능할 수 있습니다. |
 
-*"패키지 실행 중"*은 [Runtime Prioritization Engine][9]의 **Reachability** 차원에 데이터를 제공합니다. 이 신호를 직접 쿼리하려면 [런타임 신호별 결과 필터링][10]을 참조하세요.
+*Package is running*은 [Runtime Prioritization Engine][9]의 **Reachability** 차원에 데이터를 제공합니다. 이 신호를 직접 쿼리하려면 [런타임 신호별 결과 필터링][10]을 참조하세요.
 
 **요구 사항**:
 - Datadog Agent **7.79.0 이상**. Kubernetes의 경우, 가장 완벽한 신호 적용 범위를 확보하려면 **7.81.0 이상**을 사용하세요.
 - Linux 전용(eBPF 종속성). 지원되는 배포판 및 커널 버전은 [Workload Protection 설정][11]을 참조하세요.
+- Bottlerocket 노드에서 `system-probe`에 대한 `spc_t` SELinux 유형입니다. Bottlerocket의 SELinux 정책은 권한이 없는 컨테이너가 자체 포드의 파일에만 접근하도록 제한합니다. 이 유형이 없으면 Agent 자체 이미지만 런타임 신호를 수신합니다. 아래 탭에서 설정 방법을 보여줍니다.
 
 런타임 신호는 컨테이너 이미지 취약성 탐지 결과에서 운영 체제 패키지 관리자(`apt`, `yum` 또는 `apk`)를 통해 설치된 패키지에 적용됩니다.
 
@@ -228,6 +229,21 @@ spec:
           enabled: true
 ```
 
+노드에서 Bottlerocket을 실행하는 경우 노드 Agent 포드의 SELinux 유형도 설정하세요. 이 재정의는 포드의 보안 컨텍스트를 대체하므로 `runAsUser: 0` 설정을 유지하세요.
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
+```
+
 변경 사항을 적용하고 Agent를 재시작하세요.
 
 {{% /tab %}}
@@ -245,6 +261,20 @@ datadog:
     enrichment:
       usage:
         enabled: true
+```
+
+노드에서 Bottlerocket을 실행하는 경우 `datadog-values.yaml` 파일에 다음도 추가하세요.
+
+```yaml
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Agent를 재시작하세요
@@ -266,6 +296,18 @@ hostPID: true
   value: "true"
 - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
   value: "true"
+```
+
+노드에서 Bottlerocket을 실행하는 경우 `system-probe` 컨테이너의 보안 컨텍스트에 `seLinuxOptions`도 추가하세요.
+
+```yaml
+# system-probe container
+securityContext:
+  seLinuxOptions:
+    user: system_u
+    role: system_r
+    type: spc_t
+    level: s0
 ```
 
 Agent를 재시작하세요

@@ -18,3 +18,10 @@ entries:
     operations:
       - TriggerDeploymentGatesEvaluation
     title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ListDeploymentGateEvaluations
+      - ListDeploymentRuleEvaluations
+    title: Add AI Gateway route permissions and safe editing

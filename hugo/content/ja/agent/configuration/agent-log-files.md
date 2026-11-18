@@ -1,10 +1,11 @@
 ---
 algolia:
   tags:
-  - Agent のログファイル
+  - agent log files
 aliases:
 - /ja/agent/faq/agent-log-files
 - /ja/agent/guide/agent-log-files
+description: Datadog Agent がログファイルを保存する場所とログローテーション設定の構成方法について理解します。
 further_reading:
 - link: /agent/troubleshooting/
   tag: ドキュメント
@@ -17,28 +18,30 @@ further_reading:
   text: Agent のコマンド
 title: Agent のログファイル
 ---
+Datadog Agent は、デフォルトで 10 MB ごとにログのロールオーバーを実行します。ロールオーバーが発生すると、1 つのバックアップ (`agent.log.1`) が保持されます。以前のバックアップが存在する場合、ロールオーバー中に上書きされます。1 つのログファイルの最大サイズと保持するバックアップファイルの最大数を設定するには、[Agent 構成ファイル][1]で `log_file_max_size`(デフォルト: 10485760 バイト) および `log_file_max_rolls`(デフォルト: 1) を使用します。
 
-Datadog Agent は、デフォルトでログファイルが 10 MB に達するたびにログをローテーションします。ロールオーバーが発生すると、1 つのバックアップ (`agent.log.1`) が保存されます。以前のバックアップが存在する場合、ロールオーバー中に上書きされます。1 つのログファイルの最大サイズと保持するバックアップファイルの最大数を変更するには、[Agent 構成ファイル][1]で `log_file_max_size` (デフォルト: 10 485 760 バイト) と `log_file_max_rolls` (デフォルト: 1) を設定します。
-
-## Agent のログディレクトリ
+## Agent ログディレクトリ {#agent-log-directory}
 
 | プラットフォーム                              | コマンド                       |
 |---------------------------------------|-------------------------------|
+| AIX                                   | `/var/log/datadog/`           |
 | Linux                                 | `/var/log/datadog/`           |
 | macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/logs`      |
-| macOS、6.28.0/7.28.0 以前の Agent | `/var/log/datadog`            |
+| macOS、6.28.0/7.28.0 より前の Agent | `/var/log/datadog`            |
 | Windows                               | `C:\ProgramData\Datadog\logs` |
 
-## Agent のログファイル
+## Agent のログファイル {#agent-log-files}
 
 * `agent.log`
 * `process-agent.log`
 * `trace-agent.log`
 * `system-probe.log`
-* Agent 7.24.0/6.24.0 以上では `jmxfetch.log` を使用します。
-* Agent 7.46.0 以上では `dogstatsd.log` を使用します。
+* `jmxfetch.log` (Agent 7.24.0/6.24.0 以上)
+* `dogstatsd.log` (Agent 7.46.0 以上)
 
-## Agent インストールログファイル
+AIX では、各 Agent サービスは stderr も `/var/log/datadog/` 内の専用ファイル (`agent-stderr.log`、`trace-agent-stderr.log`、`agent-data-plane-stderr.log`) にリダイレクトし、そのファイルに Agent の内部ログをバイパスする起動エラーなどの出力を記録します。
+
+## Agent のインストールログファイル {#agent-installation-log-files}
 
 | プラットフォーム                             | 場所とファイル名        |
 |--------------------------------------|-------------------------------|
@@ -46,7 +49,7 @@ Datadog Agent は、デフォルトでログファイルが 10 MB に達する�
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
