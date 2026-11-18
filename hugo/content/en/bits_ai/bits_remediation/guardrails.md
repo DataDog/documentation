@@ -48,7 +48,7 @@ When you add two or more tags, Bits uses the following logic to target resources
 
 ## About overlapping guardrails
 
-If more than one guardrail covers the same action and resource, the more restrictive guardrail applies. {{< ui >}}Deny{{< /ui >}} takes precedence over {{< ui >}}Ask{{< /ui >}}.
+If more than one guardrail covers the same action and resource, the more restrictive guardrail applies. {{< ui >}}Deny{{< /ui >}} takes precedence over {{< ui >}}Ask{{< /ui >}}. If more than one {{< ui >}}Ask{{< /ui >}} guardrail covers the same action and resource, any approver named on any of those guardrails can approve the action.
 
 For example, suppose one {{< ui >}}Deny{{< /ui >}} guardrail is scoped to `env:prod`, and one {{< ui >}}Ask{{< /ui >}} guardrail is scoped to `service:checkout` and `env:prod`. For `checkout` resources in `prod`, the {{< ui >}}Deny{{< /ui >}} guardrail applies.
 
