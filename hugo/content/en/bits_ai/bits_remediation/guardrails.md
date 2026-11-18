@@ -29,7 +29,11 @@ To create a guardrail:
    - {{< ui >}}Allow{{< /ui >}}: Bits can take the action without approval.
    - {{< ui >}}Ask{{< /ui >}}: Requires user approval before Bits executes actions. Choose at least one team, role, or individual who can approve.
    - {{< ui >}}Deny{{< /ui >}}: Bits can recommend an action but cannot take it.
-1. (Optional) For an {{< ui >}}Ask{{< /ui >}} guardrail, turn on {{< ui >}}Notify when approval is needed{{< /ui >}}, and select the Slack workspace and channel where Bits posts approval requests. This requires the [Slack integration][4]. For a private channel, invite the Datadog app to the channel first. To approve from Slack, each approver must link their Slack account to Datadog.
+1. (Optional) Select the Slack workspace and channel where Bits posts messages. This requires the [Slack integration][4]. For a private channel, invite the Datadog app to the channel first.
+
+   How Bits uses the channel depends on the guardrail type:
+   - For an {{< ui >}}Ask{{< /ui >}} guardrail, turn on {{< ui >}}Notify when approval is needed{{< /ui >}}. Bits posts approval requests to the channel. To approve from Slack, each approver must link their Slack account to Datadog.
+   - For an {{< ui >}}Allow{{< /ui >}} guardrail, Bits posts a notification to the channel when it takes an action without approval.
 1. In the review step, enter a name for the guardrail, then save it.
 
 ## About targeting resources with tags
