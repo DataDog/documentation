@@ -23,6 +23,9 @@ import {
 
 const DEFAULT_LANG = "en";
 
+/** Introduces a variant's filter values in its description. */
+const VARIANT_FILTERS_INTRO = "For customers using the following:";
+
 /** One filter value on a variant, with labels for display. */
 export interface CdocsVariantLabel {
   traitId: string;
@@ -41,12 +44,20 @@ export interface CdocsVariant {
   valsByTraitId: Record<string, string>;
   /** Labels for each value in `valsByTraitId`, in frontmatter order. */
   labels: CdocsVariantLabel[];
+  /**
+   * The page description followed by the variant's filter values, such as
+   * "Set up the agent. For customers using the following: Host: Azure,
+   * Database: Cosmos DB."
+   */
+  description: string;
 }
 
 export interface CdocsPage {
   /** The content collection entry ID, such as "tracing/custom_instrumentation". */
   id: string;
   title: string;
+  /** The frontmatter description, if the page has one. */
+  description?: string;
   /** The page path with no params, such as "/tracing/custom_instrumentation/". */
   bareUrl: string;
   /** Every trait the page accepts as a param, alphabetical. Includes conditional filters. */
@@ -79,6 +90,7 @@ export async function getCdocsPages(): Promise<CdocsPage[]> {
       buildCdocsPage({
         id: entry.id,
         title: entry.data.title,
+        description: entry.data.description,
         contentFilters: entry.data.content_filters!,
         customizationConfig: configByLang[DEFAULT_LANG],
       }),
@@ -89,6 +101,7 @@ export async function getCdocsPages(): Promise<CdocsPage[]> {
 export function buildCdocsPage(p: {
   id: string;
   title: string;
+  description?: string;
   contentFilters: CdocContentFilter[];
   customizationConfig: CustomizationConfig;
 }): CdocsPage {
@@ -99,12 +112,13 @@ export function buildCdocsPage(p: {
   });
 
   const variants = findAllValueCombinations(filtersManifest, p.contentFilters)
-    .map((combination) => buildVariant(bareUrl, combination))
+    .map((combination) => buildVariant(bareUrl, p.description, combination))
     .sort(compareVariants);
 
   return {
     id: p.id,
     title: p.title,
+    ...(p.description !== undefined && { description: p.description }),
     bareUrl,
     traitIds: p.contentFilters.map((filter) => filter.trait_id).sort(),
     variants: variants.map(({ variant }) => variant),
@@ -278,6 +292,7 @@ interface SortableVariant {
 
 function buildVariant(
   bareUrl: string,
+  pageDescription: string | undefined,
   combination: ValueCombination,
 ): SortableVariant {
   const valsByTraitId = shownValues(combination);
@@ -307,9 +322,37 @@ function buildVariant(
       url: buildVariantUrl(bareUrl, valsByTraitId),
       valsByTraitId,
       labels,
+      description: describeVariant(pageDescription, labels),
     },
     optionIndices,
   };
+}
+
+/**
+ * The page description, then each filter value as "Trait: Option". A
+ * description without ending punctuation gets a period, so the two read as
+ * separate sentences.
+ */
+function describeVariant(
+  pageDescription: string | undefined,
+  labels: CdocsVariantLabel[],
+): string {
+  const sentences: string[] = [];
+  const trimmedDescription = pageDescription?.trim();
+  if (trimmedDescription) {
+    sentences.push(
+      /[.!?]$/.test(trimmedDescription)
+        ? trimmedDescription
+        : `${trimmedDescription}.`,
+    );
+  }
+  if (labels.length > 0) {
+    const filterValues = labels
+      .map((label) => `${label.traitLabel}: ${label.optionLabel}`)
+      .join(", ");
+    sentences.push(`${VARIANT_FILTERS_INTRO} ${filterValues}.`);
+  }
+  return sentences.join(" ");
 }
 
 /** The bare URL with each value as a param, alphabetical by trait. */

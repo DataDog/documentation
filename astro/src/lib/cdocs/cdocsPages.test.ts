@@ -40,10 +40,14 @@ const osFilter: CdocContentFilter = {
   option_group_id: "os_options",
 };
 
-function buildPage(contentFilters: CdocContentFilter[]): CdocsPage {
+function buildPage(
+  contentFilters: CdocContentFilter[],
+  description?: string,
+): CdocsPage {
   return buildCdocsPage({
     id: "guides/setup",
     title: "Setup",
+    description,
     contentFilters,
     customizationConfig,
   });
@@ -145,6 +149,68 @@ describe("buildCdocsPage", () => {
         optionLabel: "Cosmos DB",
       },
     ]);
+  });
+});
+
+describe("variant descriptions", () => {
+  const findVariant = (page: CdocsPage, url: string) =>
+    page.variants.find((variant) => variant.url === url);
+
+  it("keeps the page's frontmatter description", () => {
+    const page = buildPage([osFilter], "Set up the agent.");
+
+    expect(page.description).toBe("Set up the agent.");
+  });
+
+  it("adds each shown filter to the page description, in frontmatter order", () => {
+    const page = buildPage([hostFilter, databaseFilter], "Set up the agent.");
+
+    expect(
+      findVariant(page, "/guides/setup/?database=cosmos_db&host=azure")
+        ?.description,
+    ).toBe(
+      "Set up the agent. For customers using the following: Host: Azure, Database: Cosmos DB.",
+    );
+  });
+
+  it("leaves out a filter that's hidden on the variant", () => {
+    const azureOnlyOsFilter: CdocContentFilter = {
+      ...osFilter,
+      show_if: [{ host: ["azure"] }],
+    };
+    const page = buildPage(
+      [hostFilter, azureOnlyOsFilter],
+      "Set up the agent.",
+    );
+
+    expect(findVariant(page, "/guides/setup/?host=aws")?.description).toBe(
+      "Set up the agent. For customers using the following: Host: AWS.",
+    );
+  });
+
+  it("uses a filter's frontmatter label over the trait's label", () => {
+    const page = buildPage([{ ...osFilter, label: "OS" }], "Set up the agent.");
+
+    expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
+      "Set up the agent. For customers using the following: OS: Linux.",
+    );
+  });
+
+  it("ends the page description with a period before adding the filters", () => {
+    const page = buildPage([osFilter], "Set up the agent");
+
+    expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
+      "Set up the agent. For customers using the following: Operating system: Linux.",
+    );
+  });
+
+  it("lists only the filters when the page has no description", () => {
+    const page = buildPage([osFilter]);
+
+    expect(page.description).toBeUndefined();
+    expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
+      "For customers using the following: Operating system: Linux.",
+    );
   });
 });
 
