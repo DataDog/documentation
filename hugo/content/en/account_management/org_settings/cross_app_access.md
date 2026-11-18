@@ -2,7 +2,22 @@
 title: Cross-App Access
 description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Okta, Claude, or another trusted issuer.
 algolia:
-  tags: ["cross-app access", "XAA", "Okta", "Claude", "Anthropic", "OIDC", "AI agent", "MCP", "ID-JAG", "Identity Assertion JWT Authorization Grant", "Enterprise-Managed Authorization", "managed authorization", "SAML"]
+    tags:
+        [
+            'cross-app access',
+            'XAA',
+            'Okta',
+            'Claude',
+            'Anthropic',
+            'OIDC',
+            'AI agent',
+            'MCP',
+            'ID-JAG',
+            'Identity Assertion JWT Authorization Grant',
+            'Enterprise-Managed Authorization',
+            'managed authorization',
+            'SAML'
+        ]
 further_reading:
     - link: '/mcp_server/setup/'
       tag: 'Documentation'
@@ -94,7 +109,6 @@ The remaining prerequisites depend on your issuer.
 - Your organization uses SAML single sign-on to Datadog, and the issuer is your SAML identity provider. Datadog resolves users through the SAML identity in the token, so a custom issuer does not work without it. See [Configure SAML single sign-on][1].
 - Your issuer returns ID-JAGs that meet the token requirements in the **Custom issuer** tab of the [Set up your issuer](#set-up-your-issuer) section.
 
-[1]: /account_management/saml/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -113,13 +127,13 @@ Click {{< ui >}}Enable{{< /ui >}}. This applies to your whole organization. Clic
 
 ### Add trusted issuers
 
-Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Issuer URLs{{< /ui >}} list. Add one entry for each issuer you use. The [Set up your issuer](#set-up-your-issuer) section shows which URL to enter.
+Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Allowed issuer URLs{{< /ui >}} list. Add one entry for each issuer you use. The [Set up your issuer](#set-up-your-issuer) section shows which URL to enter.
 
 Every issuer URL must use `https` and a fully qualified, lowercase domain name, and must not contain an IP address, port, username, query, or fragment. Datadog accepts a token only when its `iss` claim matches the issuer URL exactly.
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][2].
+To stop trusting an issuer, remove it from the {{< ui >}}Allowed issuer URLs{{< /ui >}} list. Datadog will stop accepting new ID-JAGs from the issuer immediately. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][2].
 
 ### Copy your organization UUID
 
@@ -202,7 +216,6 @@ Complete the following steps in the Okta Admin Console as a Super Administrator.
 - Okta limits XAA within Single Sign-On to 250 ID-JAG tokens per user, per resource app, per month. Contact your Okta account team if your usage exceeds this limit.
 - If a user signed in before you enabled Cross-App Access, have them sign out of the agent and sign back in. Sessions established earlier lack the identity token the agent needs.
 
-[1]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
 [2]: https://developer.okta.com/docs/guides/xaa-agent-to-app/main/
 
 {{% /tab %}}
@@ -230,7 +243,7 @@ Complete the following steps in Claude as an admin.
 1. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
 1. In the {{< ui >}}Connect{{< /ui >}} step, under {{< ui >}}Identity source{{< /ui >}}, select {{< ui >}}Claude-issued{{< /ui >}}.
 1. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the value from the [Copy your organization UUID](#copy-your-organization-uuid) section.
-1. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Issuer URLs{{< /ui >}} list in Datadog. See the [Add trusted issuers](#add-trusted-issuers) section.
+1. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Allowed issuer URLs{{< /ui >}} list in Datadog. See the [Add trusted issuers](#add-trusted-issuers) section.
 1. Click {{< ui >}}Run test{{< /ui >}} and confirm that every step passes.
 1. In the {{< ui >}}Roles{{< /ui >}} step, select who receives the Datadog connector. To pilot with one team, select only that team's custom role and leave the built-in roles cleared.
 1. In the {{< ui >}}Scopes{{< /ui >}} step, select the Datadog scopes Claude can request.
@@ -245,8 +258,6 @@ The scopes you select in the {{< ui >}}Scopes{{< /ui >}} step limit what Claude 
 - If a request fails with a user resolution error, confirm the user's email address in Claude matches their Datadog user handle.
 - If a user signed in before you enabled Cross-App Access, have them sign out of Claude and sign back in. Sessions established earlier lack the identity token the agent needs.
 
-[1]: https://support.claude.com/en/articles/15537633-authorize-mcp-connectors-for-your-entire-organization
-[2]: https://claude.ai/admin-settings/connectors
 
 {{% /tab %}}
 
@@ -256,11 +267,11 @@ A custom issuer is an identity provider, other than Okta and Claude, that issues
 
 #### Values you exchange
 
-| Value                     | Direction         | Where you enter it                                                                                                    |
-| ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Datadog organization UUID | Datadog to issuer | The `aud_tenant` claim of the ID-JAG                                                                                  |
-| Agent client ID           | Datadog to issuer | The `client_id` claim of the ID-JAG                                                                                   |
-| Custom issuer URL         | Issuer to Datadog | See the [Add trusted issuers](#add-trusted-issuers) section                                                            |
+| Value                     | Direction         | Where you enter it                                          |
+| ------------------------- | ----------------- | ----------------------------------------------------------- |
+| Datadog organization UUID | Datadog to issuer | The `aud_tenant` claim of the ID-JAG                        |
+| Agent client ID           | Datadog to issuer | The `client_id` claim of the ID-JAG                         |
+| Custom issuer URL         | Issuer to Datadog | See the [Add trusted issuers](#add-trusted-issuers) section |
 
 The custom issuer URL is the `issuer` value from your issuer's `/.well-known/openid-configuration` document, entered character for character, including any path or trailing slash. Datadog rejects hostnames that belong to Datadog, internal-only names such as `.internal` or `.local`, and shared issuers that many unrelated tenants sign with, such as `https://accounts.google.com`.
 
@@ -314,7 +325,6 @@ Payload:
 - If Datadog rejects the token's SAML `issuer`, confirm it matches the identity provider configured in your Datadog organization's SAML settings exactly. One identity provider tenant can host several applications for Datadog, each with its own entity ID.
 - If the user is not found, confirm `nameid` matches the user's Datadog handle exactly.
 
-[2]: https://datatracker.ietf.org/doc/html/rfc8693
 [3]: https://datatracker.ietf.org/doc/html/rfc7523
 
 {{% /tab %}}
@@ -324,7 +334,4 @@ Payload:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/cross-app-access
-[2]: https://app.datadoghq.com/organization-settings/oauth-applications
-[3]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
 [4]: /account_management/audit_trail/
