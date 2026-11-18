@@ -31475,6 +31475,11 @@ components:
         recommendation_type:
           description: The kind of recommendation (for example, `terminate` or `rightsize`).
           type: string
+        recommender_id:
+          description: |-
+            ID of the recommender that produced the recommendation (for example,
+            `aws_ec2_instance_downsize`).
+          type: string
         resource_id:
           description: Cloud provider identifier of the resource.
           type: string
@@ -179068,6 +179073,7 @@ paths:
                             amount: 1.23
                             currency: USD
                           recommendation_type: terminate
+                          recommender_id: aws_ec2_instance_unused
                           resource_id: i-1234567890abcdef0
                           resource_type: aws_ec2_instance
                           tags:
