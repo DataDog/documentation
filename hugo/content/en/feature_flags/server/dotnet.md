@@ -42,7 +42,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
 Register the provider and evaluate the flag:
 
@@ -56,13 +56,13 @@ bool enabled = await client.GetBooleanValueAsync("my-flag", false);
 Console.WriteLine(enabled);
 ```
 
-Provider initialization starts configuration polling and waits up to 30 seconds for the first configuration. If the wait expires, polling continues and evaluations return default values until configuration arrives. No Feature Flags enablement or source setting is required for a new setup. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][11].
+No Feature Flags enablement or source setting is required for a new setup. Provider initialization starts configuration polling and waits up to 30 seconds for the first configuration. If the wait expires, polling continues and evaluations return default values until configuration arrives. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][11].
 
-Agentless mode sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][6].
+With agentless delivery, the SDK sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][6].
 
 ## Use Agent delivery
 
-To retain Agent-managed delivery, configure a Datadog Agent with [Remote Configuration][2] and an API key. Set this application variable before startup:
+To keep Agent delivery, configure a Datadog Agent with [Remote Configuration][2] and an API key. Set this application variable before startup:
 
 ```bash
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -343,7 +343,7 @@ To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` 
 
 ## Troubleshooting
 
-### Agentless configuration not working
+### Agentless delivery not working
 
 - Verify that tracer 3.57.0 or later is loaded and the OpenFeature provider is initialized.
 - Check `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process.

@@ -26,7 +26,7 @@ To attach flag evaluations to Datadog traces, configure the Datadog tracing inte
 
 ## Prerequisites
 
-Use the SDK versions and credentials in the [server getting-started guides][1]. Set `DD_SITE` if the organization uses a site other than `datadoghq.com`.
+Use the SDK versions and credentials in the [server getting-started guides][1]. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
 
 Follow the Datadog [Server-Side Feature Flags][1] installation guide for your language.
 
@@ -120,7 +120,7 @@ For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrumen
 {{% /tab %}}
 {{% tab "Java" %}}
 
-For Java tracing, configure [Java APM][5] and load `dd-java-agent` 1.69.0 or later with `-javaagent`. Set `DD_TRACE_OTEL_ENABLED=true` to use the Java agent's OpenTelemetry API support. Enable [APM trace enrichment][4] to attach flag evaluations to those traces:
+For Java tracing, configure [Java APM](/tracing/trace_collection/dd_libraries/java/) and load `dd-java-agent` 1.69.0 or later with `-javaagent`. Set `DD_TRACE_OTEL_ENABLED=true` to use the Java agent's OpenTelemetry API support. Enable [APM trace enrichment](/feature_flags/guide/apm_trace_enrichment/) to attach flag evaluations to those traces:
 
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
@@ -151,7 +151,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
+**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -361,7 +361,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 {{< /code-block >}}
 
-**Note**: To emit flag evaluation metrics, add the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
+**Note**: To emit flag evaluation metrics, add the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -598,7 +598,7 @@ $isEnabled = $client->getBooleanValue('my-flag', false, $context);
 {{% /tab %}}
 {{< /tabs >}}
 
-In both integration options, feature flags evaluate the same way. Flag configurations use agentless delivery by default. Agent Remote Configuration remains an optional source.
+In both integration options, feature flags evaluate the same way. Flag configurations use agentless delivery by default. Agent delivery remains an optional source.
 
 For complete setup instructions, typed getters, evaluation context requirements, and testing patterns, see your language's [server-side SDK documentation][1].
 
@@ -608,6 +608,4 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
-[3]: /feature_flags/guide/server_flag_evaluation_metrics/
 [4]: /feature_flags/guide/apm_trace_enrichment/
-[5]: /tracing/trace_collection/dd_libraries/java/

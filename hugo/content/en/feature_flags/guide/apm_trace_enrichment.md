@@ -131,7 +131,7 @@ Client client = api.getClient("my-app");
 
 You can also enable span enrichment in code:
 
-Set only the enrichment option below. The deprecated outer `flaggingProvider.enabled` setting also selects Agent Remote Configuration when no source is explicit.
+Set only the enrichment option below. The deprecated outer `flaggingProvider.enabled` setting also selects Agent delivery when no source is explicit.
 
 {{< code-block lang="javascript" filename="app.js" >}}
 import tracer from 'dd-trace';

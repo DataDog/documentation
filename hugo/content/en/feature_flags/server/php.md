@@ -39,7 +39,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 {{< /code-block >}}
 
-Set `DD_ENV` to your [Feature Flags environment][5]. Use a Datadog [API key][3]. For sites other than US1, also set `DD_SITE`. For the site selected on this page, use {{< region-param key="dd_site" code="true" >}}.
+Set `DD_ENV` to your [Feature Flags environment][5]. Use a Datadog [API key][3]. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the site selected on this page, use {{< region-param key="dd_site" code="true" >}}.
 
 PHP requires an explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` setting. Registering a provider or setting `DD_FEATURE_FLAGS_ENABLED=true` alone does not start configuration delivery. If `DD_FEATURE_FLAGS_ENABLED=false` is set, remove it or set it to `true`.
 
@@ -332,7 +332,7 @@ The application API stays the same. Configure service identification as needed f
 
 ### Migrate from Agent delivery
 
-Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` and provide `DD_API_KEY` in the PHP process environment. Keep `DD_ENV` matched to your flag environment. Set `DD_SITE` for sites other than US1, then remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` and restart PHP workers.
+Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` and provide `DD_API_KEY` in the PHP process environment. Keep `DD_ENV` matched to your flag environment. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. Then remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` and restart PHP workers.
 
 Replacing only `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` with `DD_FEATURE_FLAGS_ENABLED=true` stops configuration delivery. PHP also requires an explicit source. To retain Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`.
 
@@ -344,7 +344,7 @@ The SDK polls for flag updates every 30 seconds. The request timeout is 5 second
 
 Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to change the first-evaluation timeout. Its default is `10000` milliseconds. Credentials, endpoint, and environment settings resolve at process startup. Restart PHP workers after changing them.
 
-Agentless delivery requires the PHP library's subprocess sidecar. The default `auto` sidecar mode uses a subprocess when available. Thread mode, including automatic fallback to thread mode, does not support agentless configuration.
+Agentless delivery requires the PHP library's subprocess sidecar. The default `auto` sidecar mode uses a subprocess when available. Thread mode, including automatic fallback to thread mode, does not support agentless delivery.
 
 For additional source settings, see [Configuration sources][10].
 

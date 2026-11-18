@@ -43,7 +43,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
 Register the provider and evaluate the flag:
 
@@ -214,10 +214,10 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 
 - [Configure agentless delivery][10], including polling, request timeout, and endpoint settings
 - [Use a custom agentless endpoint][7] for advanced testing, local development, or an operator-managed proxy
-- [Use Agent Remote Configuration][9] to retain Agent-managed delivery
+- [Use Agent delivery][9] to receive configuration through Remote Configuration
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-In agentless mode, Python sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. [`serverless-init`][11] is an optional relay. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+With agentless delivery, Python sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. [`serverless-init`][11] is an optional relay. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
 
 ## Cleanup
 
@@ -270,14 +270,14 @@ def test_missing_flag_returns_default(client):
 
 ## Troubleshooting
 
-### Agentless configuration not working
+### Agentless delivery not working
 
 Verify the following:
 
 - `ddtrace` is version 4.17.0 or later and `openfeature-sdk` is version 0.10.0 or later.
 - `DD_FEATURE_FLAGS_ENABLED` is unset or set to `true`.
 - `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is unset or set to `agentless`.
-- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is unset. Setting it to `true` selects Agent Remote Configuration during the migration window when no explicit source is set.
+- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is unset. Setting it to `true` selects Agent delivery during the migration window when no explicit source is set.
 - Application code registers `DataDogProvider` with the OpenFeature API.
 - `DD_API_KEY` and `DD_ENV` are configured in the application process.
 - `DD_SITE` matches the organization's site. Its default is `datadoghq.com`.

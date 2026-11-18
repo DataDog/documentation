@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags server SDKs receive flag configuration directly from the Datadog-managed CDN and evaluate flags locally. This agentless setup does not require a Datadog Agent.
+Datadog Feature Flags server SDKs use agentless delivery: they receive flag configuration directly from the Datadog-managed CDN and evaluate flags locally. Agentless delivery does not require a Datadog Agent.
 
 The SDKs implement the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/). Register the Datadog provider with OpenFeature to use its evaluation API.
 
@@ -64,7 +64,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Set `DD_SITE` when the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
 Then initialize the provider and evaluate the flag as shown on the language page. No Feature Flags enablement or source setting is required for new setups, except PHP:
 
@@ -101,7 +101,7 @@ An existing deployment can remain on Agent delivery because of legacy enablement
 
 ## Use Agent delivery
 
-To retain Agent-managed delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][1] enabled and an API key. Set this variable in the application:
+To keep Agent delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][1] enabled and an API key. Set this variable in the application:
 
 ```bash
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config

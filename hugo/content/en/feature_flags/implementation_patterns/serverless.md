@@ -18,14 +18,14 @@ further_reading:
 
 ## Overview
 
-All seven Datadog server SDKs support agentless flag configuration. The SDK loads configuration over HTTPS and evaluates flags locally. A Datadog Agent is not required.
+All Datadog server SDKs support agentless delivery. The SDK loads configuration from the Datadog-managed CDN over HTTPS and evaluates flags locally. A Datadog Agent is not required.
 
 Use the [server SDK getting-started guides][1] for the canonical versions and minimum configuration. This guide covers serverless deployment and event delivery.
 
-## Agentless architecture
+## Set up agentless delivery
 
 1. Install the SDK and provider for the language. Java uses standalone `dd-openfeature`. .NET requires automatic instrumentation. PHP requires the native extension and a subprocess sidecar.
-2. Configure `DD_API_KEY` and `DD_ENV` in the application before startup. Set `DD_SITE` if the site is not `datadoghq.com`.
+2. Configure `DD_API_KEY` and `DD_ENV` in the application before startup. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
 3. For PHP, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` before startup. Other new setups do not require source or enablement settings.
 4. Initialize the provider and wait for initial configuration where supported. PHP waits during its first evaluation.
 
@@ -39,23 +39,23 @@ See [Configuration Sources][2] for endpoint, polling, and timeout settings. See 
 
 Flag configuration, experiment exposures, aggregated evaluation events, and OTLP metrics use separate delivery paths.
 
-| SDK | Experiment exposures | Aggregated flag evaluation events | Event delivery in agentless mode |
+| SDK | Experiment exposures | Aggregated flag evaluation events | Event path with agentless delivery |
 |---|---|---|---|
 | Java | Supported | Supported | Direct HTTPS; a compatible local relay can be used with the Java agent |
-| Node.js | Supported | Not supported in the documented release | Prefer a compatible relay; use direct HTTPS fallback |
+| Node.js | Supported | Not supported | Prefer a compatible relay; use direct HTTPS fallback |
 | Python | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | .NET | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | Ruby | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | Go | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | PHP | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 
-These capabilities apply to the [documented SDK versions][1]. Direct event delivery uses the application's API key and Datadog site. Remote Configuration uses Agent-backed event delivery.
+These capabilities apply to the [documented SDK versions][1]. Direct event delivery uses the application's API key and Datadog site. With Agent delivery, events go through the Agent.
 
-Experiment exposures are generated only for flags associated with an experiment. Aggregated evaluation events and the separate `feature_flag.evaluations` OTLP metric are different signals. Configure the metric through [Server-Side Flag Evaluation Metrics][4]. Agentless configuration does not configure an OTLP exporter.
+Experiment exposures are generated only for flags associated with an experiment. Aggregated evaluation events and the separate `feature_flag.evaluations` OTLP metric are different signals. Configure the metric through [Server-Side Flag Evaluation Metrics][4]. Agentless delivery does not configure an OTLP exporter.
 
 ### Use a local telemetry relay
 
-`serverless-init` is an optional local relay for supported event paths. It is not a Feature Flags configuration source. Keep the source set to `agentless` to receive configuration from the CDN.
+`serverless-init` is an optional local relay for supported event paths. It is not a Feature Flags configuration source. Keep the source set to `agentless` to continue using agentless delivery.
 
 Follow [Serverless Monitoring][5] to configure a supported relay for the platform. Use `serverless-init` 1.9.13 or later for EVP event delivery. Configure its API key and site separately from the application credentials.
 
@@ -67,7 +67,7 @@ Follow [Serverless Monitoring][5] to configure a supported relay for the platfor
 4. If using a local relay, check its connection and forwarding logs.
 5. Verify the OTLP path separately if the application uses `feature_flag.evaluations`.
 
-## Agent-backed Remote Configuration
+## Agent delivery
 
 Use this path when the application should receive configuration from an existing Datadog Agent. `serverless-init` does not replace the Agent for Remote Configuration.
 
@@ -93,7 +93,7 @@ For Java, load `dd-java-agent` 1.69.0 or later with `-javaagent`, alongside `dd-
 - **PHP:** The runtime must support the extension and subprocess sidecar. Pass deployment variables to PHP workers before startup.
 - **Edge runtimes:** Verify that the platform supports the selected SDK and its native dependencies. Browser-only runtimes cannot use the Node.js tracer provider.
 
-Datadog-managed agentless delivery is not available for Datadog for Government. Use a supported configuration source for the selected site.
+Agentless delivery is not available for Datadog for Government. Use a supported configuration source for the selected site.
 
 ## Public API and local evaluation
 

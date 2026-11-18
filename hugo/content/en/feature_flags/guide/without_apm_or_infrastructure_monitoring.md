@@ -1,5 +1,5 @@
 ---
-title: Set Up Agent-Based Feature Flags Without APM Tracing or Infrastructure Monitoring
+title: Set Up Feature Flags with Agent Delivery Without APM Tracing or Infrastructure Monitoring
 description: Use server-side Feature Flags with APM tracing and Infrastructure Monitoring turned off.
 further_reading:
 - link: "/feature_flags/server/"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-For a new deployment, use the [agentless getting-started guides][5]. They do not require a Datadog Agent. This guide covers deployments that retain Agent Remote Configuration.
+For a new deployment, use the [agentless delivery getting-started guides][5]. They do not require a Datadog Agent. This guide covers deployments that keep Agent delivery.
 
 Server-side Feature Flags can be deployed using the Datadog SDK and the Datadog Agent. By default, this setup also sends [APM][1] traces and [Infrastructure Monitoring][2] data. To only evaluate feature flags, turn both off.
 

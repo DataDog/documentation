@@ -46,7 +46,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
 Register the provider and evaluate the flag:
 
@@ -277,11 +277,11 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 
 - [Configure agentless delivery][9], including polling, request timeout, and endpoint settings
 - [Use a custom agentless endpoint][7] for advanced testing, local development, or an operator-managed proxy
-- [Use Agent Remote Configuration][10] to retain Agent-managed delivery
-- [Start the Agent before the application][12] when you use Agent Remote Configuration
+- [Use Agent delivery][10] to receive configuration through Remote Configuration
+- [Start the Agent before the application][12] when you use Agent delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-In agentless mode, Node.js uses a compatible local telemetry relay when available. It sends experiment exposure events directly when no compatible relay is available. For no-Agent serverless environments, you can use [`serverless-init`][11] as the local telemetry relay.
+With agentless delivery, Node.js uses a compatible local telemetry relay when available. It sends experiment exposure events directly when no compatible relay is available. For no-Agent serverless environments, you can use [`serverless-init`][11] as the local telemetry relay.
 
 The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. It requires a supported Agent or serverless telemetry receiver. For more information on available graphing, see [Feature Flag Graphs][5].
 

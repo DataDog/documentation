@@ -41,7 +41,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 export DD_ENV='<YOUR_ENVIRONMENT>'
 ```
 
-Set `DD_SITE` if the organization uses a site other than `datadoghq.com`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
 Register the provider and evaluate the flag:
 
@@ -93,7 +93,7 @@ Use `openfeature.SetProvider(provider)` for background initialization. Evaluatio
 
 ## Use Agent delivery
 
-To retain Agent-managed delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][2] and an API key. Set this application variable before startup:
+To keep Agent delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][2] and an API key. Set this application variable before startup:
 
 ```bash
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -101,7 +101,7 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 
 Register the provider as shown above. If the application uses APM, retain its tracer startup and shutdown. Start the Agent before the application. See [Agent availability][6].
 
-Agentless mode sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][4].
+With agentless delivery, the SDK sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][4].
 
 ## Create a client
 

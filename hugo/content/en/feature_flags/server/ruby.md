@@ -47,7 +47,7 @@ Use Ruby 3.1 or later with `datadog` 2.49.0 or later and `openfeature-sdk` 0.5.1
    export DD_ENV='<YOUR_ENVIRONMENT>'
    ```
 
-   If your organization uses a site other than `datadoghq.com`, also set `DD_SITE`:
+   If your organization uses a site other than `datadoghq.com`, set `DD_SITE`:
 
    ```bash
    export DD_SITE={{< region-param key="dd_site" code="true" >}}
@@ -67,7 +67,7 @@ Use Ruby 3.1 or later with `datadog` 2.49.0 or later and `openfeature-sdk` 0.5.1
 
 No Datadog Agent, APM instrumentation, enablement setting, or source setting is required. Provider registration starts configuration delivery. Installing the gem or constructing the provider alone does not start polling.
 
-For existing Agent-based installations, follow [Migrate an existing setup](#migrate-an-existing-setup) before using these instructions.
+For existing installations that use Agent delivery, follow [Migrate an existing setup](#migrate-an-existing-setup) before using these instructions.
 
 ## Initialize the provider
 
@@ -231,11 +231,11 @@ The SDK polls every 30 seconds and uses a 5-second request timeout by default. A
 
 ### Send exposures and evaluation events
 
-In agentless mode, Ruby prefers a compatible local Event Platform Proxy (EVP) relay for experiment exposures and aggregated flag evaluation events. If a compatible relay is unavailable, it sends both event types directly to Datadog. Direct delivery uses the application's `DD_API_KEY` and `DD_SITE` settings.
+With agentless delivery, Ruby prefers a compatible local Event Platform Proxy (EVP) relay for experiment exposures and aggregated flag evaluation events. If a compatible relay is unavailable, it sends both event types directly to Datadog. Direct delivery uses the application's `DD_API_KEY` and `DD_SITE` settings.
 
 For serverless telemetry options, see [Send feature flag telemetry][12]. Flag evaluation metrics use a separate OpenTelemetry export path.
 
-### Agent configuration delivery
+### Agent delivery
 
 To receive flag configuration through an Agent, select Remote Configuration explicitly:
 
@@ -257,7 +257,7 @@ To migrate to agentless delivery:
 
 1. Upgrade to `datadog` 2.49.0 or later.
 2. Set `DD_API_KEY` in the application process and preserve the flag environment in `DD_ENV`.
-3. Set `DD_SITE` if your organization uses a site other than `datadoghq.com`.
+3. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
 4. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`.
 5. Remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` and any `config.open_feature.enabled` assignment.
 6. Restart the application and verify a known flag after provider initialization.
@@ -275,7 +275,7 @@ gem 'opentelemetry-metrics-sdk', '>= 0.8.0'
 gem 'opentelemetry-exporter-otlp-metrics', '>= 0.4.0'
 ```
 
-Set `DD_METRICS_OTEL_ENABLED=true` and configure the exporter as described in [Set Up Server-Side Flag Evaluation Metrics][5]. Enabling agentless configuration does not configure metrics export.
+Set `DD_METRICS_OTEL_ENABLED=true` and configure the exporter as described in [Set Up Server-Side Flag Evaluation Metrics][5]. Enabling agentless delivery does not configure metrics export.
 
 ## Testing
 
@@ -329,7 +329,7 @@ The Ruby SDK does not support Feature Flags on JRuby. On JRuby, the Ruby SDK wri
 Use `dd-openfeature` 1.69.0 or later and the dependencies listed in [Java SDK compatibility requirements][9]. Standalone agentless delivery does not require `dd-java-agent`.
 
 1. Get the `dd-openfeature` JAR file and its dependencies. For example, use Maven to copy them to a directory.
-2. Set the API key and flag environment before starting JRuby. Set `DD_SITE` for a site other than `datadoghq.com`.
+2. Set the API key and flag environment before starting JRuby. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
 3. Load the JAR files in your application with `require` and register the provider.
 
 ```shell
@@ -360,7 +360,7 @@ context.add('tier', 'premium')
 enabled = client.getBooleanValue('checkout.new', false, context)
 ```
 
-For Agent Remote Configuration, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` and load a compatible `dd-java-agent` with the JVM option `-javaagent`. For example, run `jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb`. See [Java SDK configuration][8] for the Agent requirements.
+For Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` and load a compatible `dd-java-agent` with the JVM option `-javaagent`. For example, run `jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb`. See [Java SDK configuration][8] for the Agent requirements.
 
 For provider events, error handling, and the evaluation methods, see the [Java SDK][8] page. JRuby uses the same classes and methods.
 
@@ -368,10 +368,10 @@ For provider events, error handling, and the evaluation methods, see the [Java S
 
 If the application runs on JRuby, use the Java SDK. See [Use the Java SDK on JRuby][10].
 
-### Agentless configuration not working
+### Agentless delivery not working
 
 - Verify that `datadog` 2.49.0 or later is installed and the application registers the Datadog OpenFeature provider.
-- Check `DD_API_KEY` and `DD_ENV` in the application process. Check `DD_SITE` if your organization uses a site other than `datadoghq.com`.
+- Check `DD_API_KEY` and `DD_ENV` in the application process. If your organization uses a site other than `datadoghq.com`, check `DD_SITE`.
 - Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false`.
 - Leave `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` unset for a new setup, or set it to `agentless`. Remove legacy enablement settings when migrating.
 - Allow outbound HTTPS to `ufc-server.ff-cdn.<DD_SITE>`.

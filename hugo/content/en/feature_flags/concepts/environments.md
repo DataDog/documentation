@@ -95,7 +95,7 @@ export DD_API_KEY='<DATADOG_API_KEY>'
 # export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 {{< /code-block >}}
 
-This applies to all server SDKs. PHP also requires explicit source selection. Set `DD_SITE` outside the default US1 site. See [Server-Side Feature Flags](/feature_flags/server/) for language-specific setup.
+These settings apply to all server SDKs. PHP also requires explicit source selection. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. See [Server-Side Feature Flags](/feature_flags/server/) for language-specific setup.
 
 ## Further reading
 
