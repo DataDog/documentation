@@ -55,6 +55,37 @@ To set up the rename field processor:
 
 {{% observability_pipelines/path_notation_dots %}}
 
+## Troubleshooting
+
+### Renamed field appears as `_RESERVED_<ATTRIBUTE>`
+
+You might rename a field to a [reserved attribute][6], such as `service`, `host`, or `status`, that already exists in the log. In that case, the renamed field does not replace the existing attribute. Instead, the Datadog Logs destination detects the conflict and adds the `_RESERVED_` prefix to the renamed field.
+
+For example, you have this log:
+
+```json
+{
+  "service": "mywrongservice",
+  "team": "app-gateway"
+}
+```
+
+If you rename `team` to `service`, the log has two `service` fields. The destination keeps the original `service` value and changes the conflicting field to `_RESERVED_service`:
+
+```json
+{
+  "service": "mywrongservice",
+  "_RESERVED_service": "app-gateway"
+}
+```
+
+To replace the value of a reserved attribute, remap it instead of renaming another field to it:
+
+1. Add a {{< ui >}}drop field{{< /ui >}} processor that drops the existing reserved attribute (in this example, `service`).
+1. Add a {{< ui >}}rename field{{< /ui >}} processor immediately after it that renames your source field (in this example, `team`) to the reserved attribute.
+
+See [Remap Reserved Attributes][1] for more options, including using the Custom Processor.
+
 ## Health metrics
 
 For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Edit Fields processor metrics, use the tag `component_type:add_fields`, `component_type:remove_fields`, or `component_type:rename_fields`, depending on the configured action.
@@ -64,6 +95,7 @@ For [component metrics][3] and [processor buffer metrics][4] emitted by all proc
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[6]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 ## Further reading
 
