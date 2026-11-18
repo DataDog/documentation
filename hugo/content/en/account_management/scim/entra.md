@@ -29,7 +29,7 @@ SCIM in Datadog is an advanced feature available with the Infrastructure Pro, In
 
 This documentation assumes your organization manages user identities using an identity provider.
 
-If you authenticate with an application key, Datadog strongly recommends that you use a service account application key to avoid any disruption in access. For further details, see [using a service account with SCIM][2].
+If you don't use Workload Identity Federation, use a [service access token][13] (SAT). A SAT belongs to a service account, so access does not depend on an individual user.
 
 When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
@@ -50,7 +50,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 Microsoft Entra ID can authenticate to Datadog in two ways:
 
 - **Workload Identity Federation (recommended)**: Entra ID gets short-lived tokens from Datadog. There is no secret to store or rotate.
-- **Application key**: Entra ID sends a static application key with each request.
+- **Service access token**: Entra ID sends a Datadog service access token (SAT) with each request. Use this method if you can't use Workload Identity Federation.
 
 {{< tabs >}}
 {{% tab "Workload Identity Federation (recommended)" %}}
@@ -114,7 +114,7 @@ For more information, see [Workload Identity Federation][1].
 [1]: /account_management/workload_identity_federation/
 
 {{% /tab %}}
-{{% tab "Application key" %}}
+{{% tab "Service access token" %}}
 
 1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel
 2. In the {{< ui >}}Provisioning Mode{{< /ui >}} menu, select {{< ui >}}Automatic{{< /ui >}}
@@ -123,7 +123,7 @@ For more information, see [Workload Identity Federation][1].
     - {{< ui >}}Tenant URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim?aadOptscim062020`
         - **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][1].
         - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][2]. If you are not using Entra ID, you should not include this suffix on the URL.
-    - {{< ui >}}Secret Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][3]. To maintain continuous access to your data, use a [service account][4] application key.
+    - {{< ui >}}Secret Token{{< /ui >}}: Use a Datadog [service access token][3]. Create it on a [service account][4] and grant at least the `user_access_invite` and `user_access_manage` scopes.
 
 {{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
@@ -132,7 +132,7 @@ For more information, see [Workload Identity Federation][1].
 
 [1]: /api/latest/scim/
 [2]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior
-[3]: https://app.datadoghq.com/organization-settings/application-keys
+[3]: /account_management/service-access-tokens/
 [4]: /account_management/org_settings/service_accounts
 
 {{% /tab %}}
@@ -170,10 +170,10 @@ Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9]
 Group mapping is not supported.
 
 [1]: /account_management/scim/
-[2]: /account_management/scim/#using-a-service-account-with-scim
 [6]: https://entra.microsoft.com/
 [7]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator
 [9]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
 [10]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes#provisioning-a-role-to-a-scim-app
 [11]: https://app.datadoghq.com/organization-settings/roles
 [12]: https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps
+[13]: /account_management/service-access-tokens/
