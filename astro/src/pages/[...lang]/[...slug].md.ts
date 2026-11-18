@@ -22,7 +22,7 @@
 //
 // Plaintext has no JavaScript to add stored preferences to links, so the
 // server adds the request's params instead: a link to a Cdocs page gets the
-// params that page accepts and doesn't already have.
+// params it doesn't already have, where the page offers their values.
 export const prerender = false;
 
 import type { APIRoute } from "astro";
@@ -31,9 +31,9 @@ import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
 import {
   buildFilterOptionLinks,
-  getCdocsTraitsList,
+  getCdocsLinkTargets,
 } from "@lib/cdocs/cdocsPages";
-import { addPreferencesToHref } from "@lib/cdocs/preferenceLinks";
+import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
 import { formatVariantList } from "@lib/cdocs/plaintext/variantList";
 import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
@@ -119,7 +119,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
     );
 
-    const traitsList = await getCdocsTraitsList();
+    const linkTargetsById = await getCdocsLinkTargets();
     const requestParams = Object.fromEntries(url.searchParams);
     // Relative links resolve against the HTML page, where they were authored.
     const pageUrl = new URL(bareUrl, url).href;
@@ -135,12 +135,11 @@ export const GET: APIRoute = async ({ params, url, site }) => {
         // An in-page link stays in the page, so it keeps its plain href.
         if (href.startsWith("#") || href.startsWith("?")) return href;
         return (
-          addPreferencesToHref({
+          addOfferedParamsToHref({
             href,
             pageUrl,
-            traitsList,
-            preferences: requestParams,
-            pathPrefix: "",
+            linkTargetsById,
+            params: requestParams,
           }) ?? href
         );
       },

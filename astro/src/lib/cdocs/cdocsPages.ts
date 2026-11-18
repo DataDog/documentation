@@ -84,6 +84,18 @@ export interface CdocsFilterLinks {
   options: CdocsFilterOptionLink[];
 }
 
+/** What the server needs to add params to a link to a Cdocs page. */
+export interface CdocsLinkTarget {
+  /** Every trait the page accepts as a param, in frontmatter order. */
+  traitIds: string[];
+  /**
+   * Whether a URL with these params shows them all. A value fails if the page
+   * doesn't offer it, another value rules it out, or its filter is hidden.
+   * Traits not given take their defaults, as they would on the page.
+   */
+  showsValues: (valsByTraitId: Record<string, string>) => boolean;
+}
+
 /**
  * The traits list the link-hover script reads to find which URLs are Cdocs
  * pages and which params each one accepts. Pages refer to traits by index, to
@@ -199,6 +211,51 @@ export function buildFilterOptionLinks(p: {
   return filterLinks;
 }
 
+export function buildCdocsLinkTarget(p: {
+  contentFilters: CdocContentFilter[];
+  customizationConfig?: CustomizationConfig;
+}): CdocsLinkTarget {
+  const filtersManifest = buildFiltersManifest({
+    frontmatter: { title: "", content_filters: p.contentFilters },
+    customizationConfig: p.customizationConfig ?? configByLang[DEFAULT_LANG],
+  });
+
+  return {
+    traitIds: p.contentFilters.map((filter) => filter.trait_id),
+    showsValues: (valsByTraitId) => {
+      const shown = shownValues(
+        settleValues(filtersManifest, p.contentFilters, valsByTraitId),
+      );
+      return Object.entries(valsByTraitId).every(
+        ([traitId, value]) => shown[traitId] === value,
+      );
+    },
+  };
+}
+
+let linkTargetsPromise: Promise<Map<string, CdocsLinkTarget>> | null = null;
+
+/**
+ * Every Cdocs page's link target, by page ID. Computed once per server
+ * process, like the traits list.
+ */
+export function getCdocsLinkTargets(): Promise<Map<string, CdocsLinkTarget>> {
+  linkTargetsPromise ??= getCollection(
+    "en",
+    (entry) =>
+      entry.data.content_filters !== undefined && !isHiddenTestPage(entry.id),
+  ).then(
+    (entries) =>
+      new Map(
+        entries.map((entry) => [
+          entry.id,
+          buildCdocsLinkTarget({ contentFilters: entry.data.content_filters! }),
+        ]),
+      ),
+  );
+  return linkTargetsPromise;
+}
+
 export function buildCdocsTraitsList(pages: CdocsPage[]): CdocsTraitsList {
   const traits = [...new Set(pages.flatMap((page) => page.traitIds))].sort();
   const traitIndexById = new Map(
@@ -217,22 +274,15 @@ export function buildCdocsTraitsList(pages: CdocsPage[]): CdocsTraitsList {
   return { traits, pages: pagesById };
 }
 
-let traitsListPromise: Promise<CdocsTraitsList> | null = null;
 let traitsListJsonPromise: Promise<string> | null = null;
 
 /**
- * The traits list. Computed once per server process, since the content
- * collection doesn't change while the server runs.
+ * The traits list, serialized. Computed once per server process, since the
+ * content collection doesn't change while the server runs.
  */
-export function getCdocsTraitsList(): Promise<CdocsTraitsList> {
-  traitsListPromise ??= getCdocsPages().then(buildCdocsTraitsList);
-  return traitsListPromise;
-}
-
-/** The traits list, serialized. */
 export function getCdocsTraitsListJson(): Promise<string> {
-  traitsListJsonPromise ??= getCdocsTraitsList().then((traitsList) =>
-    JSON.stringify(traitsList),
+  traitsListJsonPromise ??= getCdocsPages().then((pages) =>
+    JSON.stringify(buildCdocsTraitsList(pages)),
   );
   return traitsListJsonPromise;
 }

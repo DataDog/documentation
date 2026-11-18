@@ -77,6 +77,20 @@ test.describe("cdocs plaintext (.md)", () => {
     );
   });
 
+  test("links to other Cdocs pages leave out values those pages don't offer", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      "/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=cpp&platform=metrics",
+    );
+    const body = await response.text();
+
+    // The API support page has no C++ option, but it does have Metrics.
+    expect(body).toContain(
+      "[OpenTelemetry API support](/dd_e2e/cdocs/api_support.md?platform=metrics)",
+    );
+  });
+
   test("links to other Cdocs pages stay bare without params", async ({
     request,
   }) => {
