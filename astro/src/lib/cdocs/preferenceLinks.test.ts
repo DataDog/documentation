@@ -1,6 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { addPreferencesToHref } from "./preferenceLinks";
-import type { CdocsTraitsList } from "./cdocsPages";
+import {
+  addOfferedParamsToHref,
+  addPreferencesToHref,
+} from "./preferenceLinks";
+import { buildCdocsLinkTarget } from "./linkTargets";
+import type { CdocsTraitsList } from "./pageLists";
+import type { CdocContentFilter } from "./filters";
+import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const traitsList: CdocsTraitsList = {
   traits: ["api_type", "os", "prog_lang"],
@@ -87,5 +93,100 @@ describe("addPreferencesToHref", () => {
   it("leaves links that aren't web URLs alone", () => {
     expect(addPreferences("mailto:docs@example.com")).toBeNull();
     expect(addPreferences("#install")).toBeNull();
+  });
+});
+
+describe("addOfferedParamsToHref", () => {
+  const hostFilter: CdocContentFilter = {
+    trait_id: "host",
+    option_group_id: "host_options",
+  };
+  const databaseFilter: CdocContentFilter = {
+    trait_id: "database",
+    option_group_id: "<HOST>_database_options",
+  };
+  // Listed before the host filter it depends on.
+  const azureOnlyOsFilter: CdocContentFilter = {
+    trait_id: "os",
+    option_group_id: "os_options",
+    show_if: [{ host: ["azure"] }],
+  };
+
+  const linkTargetsById = new Map([
+    [
+      "guides/database",
+      buildCdocsLinkTarget({
+        contentFilters: [hostFilter, databaseFilter],
+        customizationConfig,
+      }),
+    ],
+    [
+      "guides/os",
+      buildCdocsLinkTarget({
+        contentFilters: [azureOnlyOsFilter, hostFilter],
+        customizationConfig,
+      }),
+    ],
+  ]);
+
+  function addParams(href: string, params: Record<string, string>) {
+    return addOfferedParamsToHref({ href, pageUrl, linkTargetsById, params });
+  }
+
+  it("adds the params whose values the page offers, alphabetically", () => {
+    expect(
+      addParams("/guides/database/", { host: "azure", database: "cosmos_db" }),
+    ).toBe("/guides/database/?database=cosmos_db&host=azure");
+  });
+
+  it("leaves out a value the page doesn't offer", () => {
+    expect(
+      addParams("/guides/database/", { host: "gcp", database: "postgres" }),
+    ).toBe("/guides/database/?database=postgres");
+  });
+
+  it("leaves out a value another value rules out", () => {
+    // Cosmos DB is an Azure option.
+    expect(
+      addParams("/guides/database/", { host: "aws", database: "cosmos_db" }),
+    ).toBe("/guides/database/?host=aws");
+    expect(
+      addParams("/guides/database/?host=aws", { database: "cosmos_db" }),
+    ).toBeNull();
+  });
+
+  it("leaves out a value the default of a missing param rules out", () => {
+    // Without a host, the page shows AWS, which doesn't offer Cosmos DB.
+    expect(
+      addParams("/guides/database/", { database: "cosmos_db" }),
+    ).toBeNull();
+  });
+
+  it("adds a value whose filter is shown by another added value", () => {
+    expect(addParams("/guides/os/", { host: "azure", os: "windows" })).toBe(
+      "/guides/os/?host=azure&os=windows",
+    );
+  });
+
+  it("leaves out a value for a filter that's hidden", () => {
+    expect(addParams("/guides/os/", { host: "aws", os: "windows" })).toBe(
+      "/guides/os/?host=aws",
+    );
+  });
+
+  it("doesn't change params already on the link", () => {
+    expect(
+      addParams("/guides/database/?host=aws", { host: "azure" }),
+    ).toBeNull();
+  });
+
+  it("ignores the link's own params when they don't hold", () => {
+    expect(
+      addParams("/guides/database/?host=gcp", { database: "aurora" }),
+    ).toBe("/guides/database/?database=aurora&host=gcp");
+  });
+
+  it("leaves links to pages that aren't Cdocs pages alone", () => {
+    expect(addParams("/guides/other/", { host: "aws" })).toBeNull();
   });
 });

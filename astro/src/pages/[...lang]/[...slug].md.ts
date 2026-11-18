@@ -17,14 +17,23 @@
 // captured locale is used to 404, not to pick a collection.
 //
 // Filters resolve from the URL only, the same way as the HTML page, so a `.md`
-// URL with the same query as an HTML URL gets the same variant.
+// URL with the same query as an HTML URL gets the same variant. Below the
+// title, a Cdoc lists its other variants, since the plaintext holds only one.
+//
+// Plaintext has no JavaScript to add stored preferences to links, so the
+// server adds the request's params instead: a link to a Cdocs page gets the
+// params it doesn't already have, where the page offers their values.
 export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
+import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
+import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
+import { cdocsFilterBarNodes } from "@components/CdocsFilterBar/plaintext/CdocsFilterBar";
 import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
 import { renderMdocWithTwins } from "@lib/plaintext/twinTransform";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
@@ -103,15 +112,42 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       contentFilters,
       searchParams: url.searchParams,
     });
-    // `renderCdocPlaintext` prepends the title itself, so the note is spliced
-    // in after that H1 rather than ahead of it.
+    const bareUrl = `/${slug}/`;
+    const variantList = buildMarkdocStr(
+      cdocsFilterBarNodes(
+        buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
+      ),
+    ).trim();
+
+    const linkTargetsById = await getCdocsLinkTargets();
+    const requestParams = Object.fromEntries(url.searchParams);
+    // Relative links resolve against the HTML page, where they were authored.
+    const pageUrl = new URL(bareUrl, url).href;
+
+    // `renderCdocPlaintext` prepends the title itself, so the note and the
+    // variant list are spliced in after that H1 rather than ahead of it.
     const rendered = renderCdocPlaintext({
       body,
       variables: valsByTraitId,
       title,
       resolvePartial,
+      rewriteHref: (href) => {
+        // An in-page link stays in the page, so it keeps its plain href.
+        if (href.startsWith("#") || href.startsWith("?")) return href;
+        return (
+          addOfferedParamsToHref({
+            href,
+            pageUrl,
+            linkTargetsById,
+            params: requestParams,
+          }) ?? href
+        );
+      },
     });
-    text = insertAfterTitle(rendered, notePrefix);
+    text = insertAfterTitle(
+      rendered,
+      notePrefix + (variantList ? `${variantList}\n\n` : ""),
+    );
   } else {
     // Non-cdoc: render component plaintext twins and prepend the title as an H1
     // to mirror the HTML page.

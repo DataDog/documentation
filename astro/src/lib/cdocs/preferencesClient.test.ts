@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { startCdocsPreferences } from "./preferencesClient";
 import { readPreferences, writePreferences } from "./preferences";
 import { CDOCS_PAGE_STATE_ID, serializeCdocsPageState } from "./pageState";
-import type { CdocsTraitsList } from "./cdocsPages";
+import type { CdocsTraitsList } from "./pageLists";
 
 const traitsList: CdocsTraitsList = {
   traits: ["api_type", "prog_lang"],

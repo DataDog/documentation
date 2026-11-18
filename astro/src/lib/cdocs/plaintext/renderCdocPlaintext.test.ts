@@ -124,6 +124,24 @@ describe("renderCdocPlaintext", () => {
     expect(out).toContain("[the spec](https://example.com/spec)");
   });
 
+  it("applies the caller's href rewrite before the .md rewrite, in partials too", () => {
+    const body = [
+      "See [the agent guide](/agent/guide/).",
+      "",
+      '{% partial file="@partials/x.mdoc" /%}',
+    ].join("\n");
+    const out = render(
+      body,
+      {},
+      {
+        resolvePartial: () => "See [the install guide](/agent/install/).",
+        rewriteHref: (href) => `${href}?os=windows`,
+      },
+    );
+    expect(out).toContain("[the agent guide](/agent/guide.md?os=windows)");
+    expect(out).toContain("[the install guide](/agent/install.md?os=windows)");
+  });
+
   it("strips HTML comments", () => {
     const body = "Before\n\n<!-- an authoring note -->\n\nAfter";
     const out = render(body, {});

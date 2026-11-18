@@ -13,7 +13,11 @@
  */
 import Markdoc from "@markdoc/markdoc";
 import { buildPlaintextConfig } from "./plaintextConfig";
-import { processNodes, type PartialResolver } from "./filterMarkdocAst";
+import {
+  processNodes,
+  type HrefRewriter,
+  type PartialResolver,
+} from "./filterMarkdocAst";
 import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
 import { SDK_VERSIONS } from "@lib/site/sdkVersions";
 
@@ -28,10 +32,12 @@ export interface RenderCdocPlaintextInput {
   title?: string;
   /** Resolves `{% partial file=... /%}` refs to raw source. */
   resolvePartial?: PartialResolver;
+  /** Rewrites each authored link, such as to add params, before the `.md` rewrite. */
+  rewriteHref?: HrefRewriter;
 }
 
 export function renderCdocPlaintext(input: RenderCdocPlaintextInput): string {
-  const { body, variables, title, resolvePartial } = input;
+  const { body, variables, title, resolvePartial, rewriteHref } = input;
 
   const config = buildPlaintextConfig(variables);
   const ast = parse(body);
@@ -40,6 +46,7 @@ export function renderCdocPlaintext(input: RenderCdocPlaintextInput): string {
     config,
     resolvePartial,
     new Set(),
+    rewriteHref,
   );
 
   // Fences show their raw source unless resolved. Same variables as the HTML

@@ -1,6 +1,4 @@
 import { describe, it, expect } from "vitest";
-import { fileURLToPath } from "node:url";
-import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig";
 import {
   buildCdocsPage,
   buildCdocsTraitsList,
@@ -8,24 +6,14 @@ import {
   getCdocsTraitsListJson,
   getCdocsTraitsListUrl,
   type CdocsPage,
-} from "./cdocsPages";
+} from "./pageLists";
 import {
   CDOCS_TRAITS_INTERMEDIATE_FILE,
   cdocsTraitsListPath,
 } from "./traitsListFile";
 import { GET as getTraitsListRoute } from "../../pages/cdocs-traits-index.json";
 import type { CdocContentFilter } from "./filters";
-
-const configDir = fileURLToPath(
-  new URL(
-    "../../../tests/fixtures/cdocsPages/customization_config",
-    import.meta.url,
-  ),
-);
-const customizationConfig = loadCustomizationConfig({
-  configDir,
-  langs: ["en"],
-}).customizationConfigByLang.en;
+import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const hostFilter: CdocContentFilter = {
   trait_id: "host",
