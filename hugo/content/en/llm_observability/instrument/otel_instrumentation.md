@@ -135,6 +135,8 @@ Replace `<DATADOG_SITE>` with your Datadog site ({{< region-param key="dd_site" 
 
 Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
 
+If you use the OpenTelemetry Collector, point your application's OTLP exporter at the Collector's OTLP receiver instead. The Collector configuration in [Using the OpenTelemetry Collector](#using-the-opentelemetry-collector) sets the Datadog site and API key, so your application doesn't need the following Datadog endpoint or headers.
+
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
 
 Set the following environment variables in your application:
