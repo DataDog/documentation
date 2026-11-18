@@ -634,7 +634,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Storage Account
       recommendation_type: Transition old Hot-tier data to Cool
-      recommendation_description: Identifies storage account prefixes with Hot-tier block blob data that hasn't been modified in at least 90 days, and recommends moving it to the Cool tier.
+      recommendation_description: Identifies storage account prefixes with Hot-tier block blob data that hasn't been modified in at least 90 days, and recommends moving that data to the Cool tier.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
