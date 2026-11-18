@@ -17,12 +17,10 @@ further_reading:
 
 Agent Observability Insights automatically analyzes the traces Agent Observability receives from your application to find recurring cost and reliability problems. Use Insights to prioritize what to fix without reviewing traces one at a time.
 
-Each insight includes:
+Each insight includes a root cause that describes the recurring behavior, and trace and span evidence that supports the finding. Depending on the insight type, an insight can also include:
 
-- A root cause that describes the recurring behavior
-- An impact assessment based on affected calls or sessions, when the insight type includes one
-- Trace and span evidence that supports the finding
-- A recommended fix and a way to validate it, when the insight type includes one
+- An impact assessment, such as recoverable spend or affected calls or sessions
+- A recommended fix, with a way to validate it
 
 <div class="alert alert-info">Insights require no additional configuration. Datadog analyzes traces that your application already sent to Agent Observability.</div>
 
@@ -118,7 +116,7 @@ Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent
 Set up a recurring workflow in your coding agent to review and fix insights. For example:
 
 ```text
-Use Datadog MCP to list Agent Observability insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix, and update the insight status based on the result.
+Use Datadog MCP to list Agent Observability insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix if the insight includes one, and update the insight status based on the result.
 ```
 
 ## Further reading
