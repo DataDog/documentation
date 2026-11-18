@@ -4016,7 +4016,7 @@ import datadog.trace.api.llmobs.LLMObsSpanProcessor;
 LLMObsSpanProcessor filterProcessor = span -> {
   // Skip spans that are marked as internal or contain sensitive data
   if ("true".equals(span.getTag("internal")) || "true".equals(span.getTag("sensitive"))) {
-    return null; // This span will not be emitted
+    return null; // This span is not emitted
   }
 
   // Process and return the span normally
