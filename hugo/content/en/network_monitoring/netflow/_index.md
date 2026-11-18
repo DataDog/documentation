@@ -88,7 +88,7 @@ If the NetFlow exporter IP is one of the device IPs, but not the one configured 
 
 ### IP enrichment
 
-Datadog enriches the IP addresses in your NetFlow data from the following sources.
+Datadog supports the following types of IP enrichment.
 
 #### Custom IP enrichment
 
@@ -102,7 +102,7 @@ To set the application name for flows to or from a private IP address, add an `a
 
 Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
-By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable it, see the [Configuration](#configuration) section.
+Reverse DNS enrichment is disabled by default. To enable it, set `reverse_dns_enrichment_enabled: true` under `network_devices.netflow` in your [`datadog.yaml`][3] file, then [restart the Agent][4]. For the full configuration example, see [Configuration](#configuration).
 
 Search for DNS in the {{< ui >}}\+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
 
@@ -118,7 +118,7 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 ### Port enrichment
 
-Datadog resolves ports to application names from the following sources.
+Datadog supports the following types of port enrichment.
 
 #### Default port enrichment
 
