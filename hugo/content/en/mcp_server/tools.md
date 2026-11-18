@@ -2220,7 +2220,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits AI in the pipeline builder. You can also update or delete pipelines with [Pup][101] (`pup obs-pipelines update` or `pup obs-pipelines delete`) or the [Observability Pipelines API][88], but updates made this way go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][102].
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits in the pipeline builder. You can also update or delete pipelines with [Pup][101] or the [Observability Pipelines API][88], but these updates go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][102].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
