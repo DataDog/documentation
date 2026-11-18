@@ -45,6 +45,8 @@ Use this count to confirm that targeting rules are working as expected and to se
 
 The **Evaluations** graph shows client and server flag evaluations together, grouped by variant and SDK.
 
+{{< img src="feature_flags/flag_graphs/evaluations.png" alt="Unified client and server evaluations graph with Unique and Total views, a Color by control, and a legend grouped by variant and SDK" style="width:100%;" >}}
+
 Select a view for both client and server evaluations:
 
 - **Unique**: Count of distinct targeting keys within each variant, SDK, and time bucket
