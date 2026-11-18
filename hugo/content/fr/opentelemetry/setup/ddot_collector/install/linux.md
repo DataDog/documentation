@@ -5,12 +5,12 @@ further_reading:
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: Documentation
   text: Utiliser des composants OpenTelemetry personnalisés avec le Datadog Agent
-title: Installez le collecteur DDOT sur Linux
+title: Configurez le Collector de l'Agent sur Linux
 type: multi-code-lang
 ---
 ## Présentation {#overview}
 
-Suivez ce guide pour installer le collecteur Datadog Distribution of OpenTelemetry (DDOT) sur des hosts bare-metal fonctionnant sous Linux ainsi que sur des machines virtuelles.
+Configurez le Collector de l'Agent sur des hosts bare-metal et des machines virtuelles sous Linux. Le Collector de l'Agent est l'OpenTelemetry Collector qui s'exécute parallèlement au Datadog Agent en tant que processus distinct.
 
 ## Prérequis {#requirements}
 
@@ -30,19 +30,19 @@ Pour compléter ce guide, vous avez besoin des éléments suivants :
 
 ## Installer le Datadog Agent avec le Collector OpenTelemetry {#install-the-datadog-agent-with-opentelemetry-collector}
 
-<div class="alert alert-info">Cette installation est requise pour les configurations Datadog SDK + DDOT et OpenTelemetry SDK + DDOT. Bien que le SDK Datadog implémente l'API OpenTelemetry, il nécessite toujours le Collector DDOT pour traiter et transférer les métriques et logs OTLP.</div>
+<div class="alert alert-info">Cette installation est requise pour les configurations Datadog SDK + Collector de l'Agent et OpenTelemetry SDK + Collector de l'Agent. Bien que le SDK Datadog implémente l'API OpenTelemetry, il nécessite toujours le Collector de l'Agent pour traiter et transférer les métriques et les journaux OTLP.</div>
 
 ### Installation {#installation}
 
-Pour installer le collecteur DDOT sur un host Linux, utilisez la commande d'installation en une ligne suivante :
+Pour installer le Collector de l'Agent sur un host Linux, utilisez la commande d'installation en une ligne suivante :
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Cette commande installe à la fois le package principal du Datadog Agent et le Collector DDOT qui s'exécute parallèlement.
+Cette commande installe à la fois le package principal du Datadog Agent et le Collector de l'Agent qui s'exécute parallèlement.
 
-**Remarque** : Pour l'Agent v7.78+, si le Datadog Agent est déjà installé sur le host, vous pouvez installer le collecteur DDOT séparément en utilisant la commande suivante :
+**Remarque** : pour l'Agent v7.78+, si le Datadog Agent est déjà installé sur le host, vous pouvez installer le Collector de l'Agent séparément en utilisant la commande suivante :
 
 ```shell
 sudo datadog-agent otel install
@@ -99,8 +99,8 @@ OTel Agent
 
 ## Configurez le Datadog Agent {#configure-the-datadog-agent}
 
-### Activez le DDOT Collector {#enable-the-ddot-collector}
-Le fichier de configuration du Datadog Agent est automatiquement installé à `/etc/datadog-agent/datadog.yaml`. Le script d'installation ajoute les paramètres de configuration suivants à `/etc/datadog-agent/datadog.yaml` pour activer le collecteur DDOT :
+### Activez le Collector de l'Agent {#enable-the-ddot-collector}
+Le fichier de configuration du Datadog Agent est automatiquement installé à `/etc/datadog-agent/datadog.yaml`. Le script d'installation ajoute les paramètres de configuration suivants à `/etc/datadog-agent/datadog.yaml` pour activer le Collector de l'Agent :
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
 otelcollector:
@@ -110,7 +110,7 @@ agent_ipc:
   config_refresh_interval: 60
 {{< /code-block >}}
 
-DDOT lie automatiquement l'OpenTelemetry Collector aux ports 4317 (grpc) et 4318 (http) par défaut.
+Le Collector de l'Agent écoute par défaut sur les ports 4317 (grpc) et 4318 (http).
 
 ### (Facultatif) Activez des fonctionnalités Datadog supplémentaires {#optional-enable-additional-datadog-features}
 
@@ -257,7 +257,7 @@ public String getDate() {
 
 ### Configurez l'application {#configure-the-application}
 
-Votre application doit envoyer des données au DDOT Collector sur le même host. Assurez-vous que la variable d'environnement `OTEL_EXPORTER_OTLP_ENDPOINT` est définie sur votre application.
+Votre application doit envoyer des données au Collector de l'Agent sur le même host. Assurez-vous que la variable d'environnement `OTEL_EXPORTER_OTLP_ENDPOINT` est définie sur votre application.
 
 Si vous utilisez l'application exemple, [`run-otel-local.sh`][13] configure les variables d'environnement requises et exécute l'application :
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -272,7 +272,7 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
 [Unified service tagging][10] relie les données d'observabilité dans Datadog afin que vous puissiez naviguer entre les métriques, les traces et les logs avec des tags cohérents.
 
 
-Dans les environnements bare-metal, `env`, `service` et `version` sont définis via les variables d'environnement des attributs de ressource OpenTelemetry. Le DDOT Collector détecte cette configuration de marquage et l'applique aux données qu'il collecte depuis les applications.
+Dans les environnements bare-metal, `env`, `service` et `version` sont définis via les variables d'environnement des attributs de ressource OpenTelemetry. Le Collector de l'Agent détecte cette configuration de marquage et l'applique aux données qu'il collecte depuis les applications.
 
 Dans l'application exemple, cela est effectué dans `run-otel-local.sh` :
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -289,7 +289,7 @@ Utilisez Datadog pour explorer les données d'observabilité de votre applicatio
 
 ### Automatisation du parc {#fleet-automation}
 
-Explorez vos configurations du Datadog Agent, du DDOT Collector et de l'OpenTelemetry Collector en amont.
+Explorez vos configurations du Datadog Agent, du Collector de l'Agent et de l'OpenTelemetry Collector en amont.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Examinez la configuration de votre Agent et du Collector depuis la page Fleet Automation." style="width:100%;" >}}
 
@@ -319,7 +319,7 @@ Surveillez les métriques d'exécution (JVM) de vos applications.
 
 ### Métriques de santé du Collector {#collector-health-metrics}
 
-Affichez les métriques du DDOT Collector pour surveiller la santé du Collector.
+Affichez les métriques du Collector de l'Agent pour surveiller son état de fonctionnement.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="Affichez les métriques de santé du Collector depuis le dashboard OTel." style="width:100%;" >}}
 

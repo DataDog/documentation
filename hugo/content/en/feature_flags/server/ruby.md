@@ -273,6 +273,10 @@ if maintenance_mode
 end
 ```
 
+## Record exposures in your own data store
+
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][12] for minimum SDK requirements and other details.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `Datadog::OpenFeature::Provider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships with `openfeature-sdk`, so no additional gem is required.
@@ -401,3 +405,4 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
+[12]: /feature_flags/guide/record_exposures_in_your_own_data_store/

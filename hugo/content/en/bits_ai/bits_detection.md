@@ -24,13 +24,34 @@ Bits Detection coverage is part of [Bits Autonomous Operations][6]. To enable it
 
 For more information, see [Create a scope][7].
 
+### Permissions {#permissions}
+
+Bits Detection uses existing Datadog role-based access control (RBAC) permissions. There are no permissions specific to Bits Detection.
+
+| Action                                                                  | Required permissions |
+|:------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------- |
+| View Autonomous Ops scopes and scope details                           | Bits Investigations Read (`bits_investigations_read`) |
+| View critical endpoints                                                 | APM Read (`apm_read`) |
+| View Bits Detection monitors                                            | Monitors Read (`monitors_read`) |
+| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) |
+| Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`) |
+| Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`) |
+
+To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Write and Monitors Write.
+
+For details on assigning permissions to roles, see [Access Control][12].
+
 ## Review Bits activity
 
 To review the scopes where Bits is active, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}} > {{< ui >}}Scopes{{< /ui >}}][5]. Open a scope to review its recent Bits activity and its configuration. For more information, see [View and manage scopes][8].
 
 ## Manage Bits Detection notifications
 
-Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams. To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
+Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams.
+
+Creating or editing a notification rule requires the Monitor Configuration Policy Write permission. For details, see the [Permissions](#permissions) section.
+
+To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
 
 1. In {{< ui >}}Match notifications with specific tags{{< /ui >}}, review the query. Datadog pre-fills the rule with tags for the selected service and Bits Detection-managed monitors. You can filter further.
 1. In {{< ui >}}Choose routing conditions and recipients{{< /ui >}}, select {{< ui >}}Manual Routing{{< /ui >}} or {{< ui >}}Dynamic Routing{{< /ui >}}.
@@ -77,3 +98,4 @@ When Bits investigates an issue, use the thumbs-up or thumbs-down buttons on the
 [9]: /bits_ai/bits_remediation/
 [10]: https://app.datadoghq.com/bits/settings/memories
 [11]: /bits_ai/bits_investigation/knowledge_sources/#feedback-and-memories
+[12]: /account_management/rbac

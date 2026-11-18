@@ -1,20 +1,18 @@
 ---
-description: Agent フレア、セルフテスト、ネットワークプラグインの互換性など、Workload Protection のトラブルシューティングを行います。
+description: Workload Protection (Agent フレア、セルフテスト、ネットワークプラグインの互換性など) のトラブルシューティングを行います。
 title: Workload Protection のトラブルシューティング
 ---
-Workload Protection で問題が発生した場合は、下記のトラブルシューティングガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][1]までお問い合わせください。
+Workload Protection で問題が発生した場合は、以下のトラブルシューティングガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][1]にお問い合わせください。
 
 ## Security Agent フレア {#security-agent-flare}
 
-<div class="alert alert-warning">Agent <code>7.77</code>以降では、Workload Protection の <code>security-agent</code> ランタイムコンポーネントは非推奨となり、不要になりました。スタンドアロンの <code>security-agent flare</code> コマンドは、Security Agent プロセスが実行されていないと機能しません。コアの Agent <code>flare</code> コマンドを代わりに使用してください。</div>
+[Agent フレア][3]と同様に、必要なトラブルシューティング情報を 1 つのフレアコマンドで Datadog のサポートチームに送信できます。
 
-[Agent フレア][3]と同様に、必要なトラブルシューティング情報を Datadog サポートチームに 1 つのフレアコマンドで送信できます。
+フレアはアップロード前に確認を求めるので、Security Agent が送信する前にコンテンツを確認することができます。
 
-フレアはアップロード前に確認を求めるため、Security Agent が送信する前に内容を確認できます。
+以下のコマンドで、`<CASE_ID>` を実際の Datadog サポートケース ID (ある場合) に置き換え、それに紐付けされているメールアドレスを入力します。
 
-下記のコマンドで、`<CASE_ID>` を Datadog サポートケース ID (ある場合) に置き換え、それに関連付けられているメールアドレスを入力してください。
-
-ケース ID がない場合は、Datadog へのログインに使用するメールアドレスを入力してサポートケースを開いてください。
+ケース ID がない場合は、Datadog へのログインに使用するメールアドレスを入力してサポートケースを開きます。
 
 | プラットフォーム     | コマンド                                                                             |
 | --------     | -------                                                                             |
@@ -24,7 +22,7 @@ Workload Protection で問題が発生した場合は、下記のトラブルシ
 
 ## Agent セルフテスト {#agent-self-tests}
 
-Workload Protection がシステムイベントを検出できることを確認するには、次のコマンドを実行して手動でセルフテストをトリガーします。
+Workload Protection がシステムイベントを検出できることを確認するには、次のコマンドを実行してセルフテストを手動でトリガーします。
 
 | プラットフォーム     | コマンド                                                                             |
 | --------     | -------                                                                             |
@@ -32,9 +30,9 @@ Workload Protection がシステムイベントを検出できることを確認
 | Kubernetes   | `kubectl exec -it <POD_NAME> -c system-probe -- system-probe runtime self-test` |
 | ホスト         | `sudo /opt/datadog-agent/embedded/bin/system-probe runtime self-test`             |
 
-セルフテスト手順では、いくつかの一時ファイルとそれらを監視するためのルールが作成され、それらのルールがトリガーされてイベントが正しく伝播されることが確認されます。
+セルフテスト手順では、いくつかの一時ファイルとそれを監視するルールを作成し、そのルールをトリガーして、イベントが正しく伝搬されることを確認します。
 
-ルールが伝播されると、次の応答が表示されます。
+ルールが伝搬されると、次のような応答が表示されます。
 
 ```
 Runtime self test: OK
@@ -44,27 +42,27 @@ Runtime self test: OK
 
 ## カスタム Kubernetes ネットワークプラグインとの互換性 {#compatibility-with-custom-kubernetes-network-plugins}
 
-Workload Protection のネットワークベースの検出は、Linux カーネルのトラフィック制御サブシステムに依存しています。このサブシステムは、複数のベンダーが「clsact」イングレス qdisc 上でフィルターの挿入、置換、または削除を試みると、競合状態を引き起こすことが知られています。Workload Protection が正しく構成されていることを確認するには、次のチェックリストを使用してください。
+Workload Protection のネットワークベースの検出は、Linux カーネルのトラフィック制御サブシステムに依存しています。このサブシステムは、複数のベンダーが "clsact" ingress qdisc でフィルターの挿入、置換、または削除を試みた場合に、競合状態を引き起こすことが知られています。以下のチェックリストを使用して、Workload Protection が正しく構成されているかどうかを確認します。
 
-- ベンダーが eBPF トラフィック制御分類子を使用しているかどうかをチェックしてください。使用していない場合、この段落は無視してかまいません。
-- ネットワークパケットへのアクセスを許可した後に、ベンダーが TC_ACT_OK またはTC_ACT_UNSPEC を返すかどうかをチェックしてください。TC_ACT_UNSPEC が返される場合、この段落は無視してかまいません。
-- ベンダーが eBPF 分類子にどの優先度を割り当てているかをチェックしてください。
-  - 優先度 1 を使用している場合、Workload Protection のネットワーク検出はコンテナ内で機能しません。
-  - 優先度 2 から 10 を使用している場合、`runtime_security_config.network.classifier_priority` をベンダーが選択した優先度よりも厳密に小さい数値に設定してください。
-  - 優先度 11 以上を使用している場合、この段落は無視してかまいません。
+- ベンダーが eBPF トラフィック制御クラシファイアを使用しているかどうかチェックしてください。そうでない場合は、このパラグラフを無視してかまいません。
+- ネットワークパケットへのアクセスを許可した後、ベンダーが TC_ACT_OK または TC_ACT_UNSPEC を返しているかどうかをチェックしてください。TC_ACT_UNSPEC を返す場合は、このパラグラフを無視してかまいません。
+- ベンダーの eBPF クラシファイアがどの優先度に設定されているかをチェックしてください。
+  - 優先度 1 を使用している場合、Workload Protection のネットワーク検出がコンテナ内で機能しません。
+  - 優先度 2~10 を使用している場合は、`runtime_security_config.network.classifier_priority` を、必ずベンダーが選択した優先度より小さい数値に構成してください。
+  - 優先度 11 以上を使用している場合は、このパラブラフを無視してかまいません。
 
-たとえば、Cilium 1.9 以下と Datadog Agent (バージョン 7.36 から 7.39.1、7.39.2を除く) の間には、新しい Pod が起動した際に発生する可能性のある既知の競合状態があります。この競合状態は、Cilium の設定方法によっては、Pod 内の接続喪失につながる可能性があります。
+たとえば、Cilium 1.9 以下と Datadog Agent (バージョン 7.36 から 7.39.1、7.39.2 を除く) との間には、新しい Pod を起動した際に発生する可能性のある既知の競合が存在します。この競合により、Cilium の構成によっては、Pod 内の接続が失われる可能性があります。
 
-最終的に、Datadog Agent やサードパーティベンダーの設定でこの問題の発生を防げない場合は、下記の手順に従って Workload Protection のネットワークベースの検出を無効にしてください。
+最終的に、Datadog Agent やサードパーティベンダーが問題の発生を防ぐように構成できない場合は、以下の手順で Workload Protection のネットワークベースの検出を無効化する必要があります。
 
-- ホストベースのインストールでは、`system-probe.yaml` 設定ファイルに次のパラメータを追加します。
+- ホストベースのインストールでは、`system-probe.yaml` 構成ファイルに以下のパラメーターを追加します。
 
 ```yaml
 runtime_security_config:
   network:
     enabled: false
 ```
-- パブリック Helm Chart を使用してDatadog Agent をデプロイしている場合は、次の値を追加します。
+- パブリック Helm Chart を使用して Datadog Agent をデプロイしている場合は、以下の値を追加します。
 
 ```yaml
 datadog:
@@ -73,21 +71,21 @@ datadog:
       network:
         enabled: false
 ```
-- Datadog Agent コンテナを手動でデプロイしている場合は、次の環境変数を追加します。
+- Datadog Agent コンテナを手動でデプロイしている場合は、以下の環境変数を追加します。
 
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
 
-## Kubernetes リモートセッションまたは Pod アドミッションの中断のトラブルシューティング{#troubleshooting-kubernetes-remote-session-or-pod-admission-disruptions}
+## Kubernetes リモートセッションまたは Pod アドミッションの障害のトラブルシューティング {#troubleshooting-kubernetes-remote-session-or-pod-admission-disruptions}
 
-Workload Protection は、Kubernetes ユーザーのアイデンティティを収集し、インフラストラクチャーへのリモートアクセスとワークロードによって生成されたアクティビティを区別するために必要なコンテキストを Workload Protection イベントに追加します。この統合では、[Kubernetes Mutating Webhook][2] を使用して `kubectl exec` セッションのインスツルメンテーションを行います。このインスツルメンテーションによって Pod のアドミッションや `kubectl exec` セッションの作成が中断される場合は、次の手順に従ってこの機能を無効にしてください。
+Workload Protection は Kubernetes ユーザー ID を収集し、インフラストラクチャーへのリモートアクセスとワークロードによって生成されたアクティビティを区別するために必要なコンテキストを使用して Workload Protection イベントをエンリッチします。このインテグレーションは、`kubectl exec` セッションをインスツルメントするために [Kubernetes Mutating Webhook][2] に依存しています。このインスツルメンテーションが Pod のアドミッションや `kubectl exec` セッションの作成を妨げる場合は、以下の手順でこの機能を無効にしてください。
 
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml` ファイルの `spec` セクションに次の内容を追加します。
+1. `datadog-agent.yaml` ファイルの `spec` セクションに以下を追加します。
 
     ```yaml
     # datadog-agent.yaml file
@@ -109,7 +107,7 @@ Workload Protection は、Kubernetes ユーザーのアイデンティティを�
 
 {{% tab "Helm" %}}
 
-1. `datadog-values.yaml` ファイルの `datadog` セクションに次の内容を追加します。
+1. `datadog-values.yaml` ファイルの `datadog` セクションに以下を追加します。
 
     ```yaml
     # datadog-values.yaml file
@@ -127,7 +125,7 @@ Workload Protection は、Kubernetes ユーザーのアイデンティティを�
 
 {{% tab "DaemonSet" %}}
 
-1. (オプション) `cluster-agent-deployment.yaml` ファイルの `cluster-agent` の `env` セクションに次の設定を追加します。
+1. (任意) `cluster-agent-deployment.yaml` ファイル内の `cluster-agent` の `env` セクションに、以下の設定を追加します。
 
     ```bash
       # Source: datadog/templates/cluster-agent-deployment.yaml
@@ -152,13 +150,13 @@ Workload Protection は、Kubernetes ユーザーのアイデンティティを�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Workload Protection を無効にする{#disable-workload-protection}
+## Workload Protection を無効にする {#disable-workload-protection}
 
-Workload Protection を無効にするには、使用している Agent プラットフォームの手順に従ってください。
+Workload Protection を無効にするには、お使いの Agent プラットフォームの手順に従ってください。
 
-### Helm{#helm}
+### Helm {#helm}
 
-Helm の `values.yaml` で、次のように `securityAgent.runtime` を `enabled: false` に設定します。
+Helm `values.yaml` で、`securityAgent.runtime` を以下のように `enabled: false` に設定します。
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="false" collapsible="true" >}}
 
@@ -173,7 +171,7 @@ securityAgent:
 
 ### Daemonset/Docker {#daemonsetdocker}
 
-Daemonset の System Probe と Security Agent の両方のデプロイメントに次の環境変数の変更を適用します。
+Daemonset の場合は、システムプローブと Security Agent の両方のデプロイメントに以下の環境変数の変更を適用します。
 
 {{< code-block lang="json" filename="daemon.json" disable_copy="false" collapsible="true" >}}
 
@@ -182,7 +180,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
 
 ### ホスト {#host}
 
-`system-probe.yaml` と `security-agent.yaml` を変更してランタイム設定を無効にします。
+ランタイム構成を無効にするには、`system-probe.yaml` と `security-agent.yaml` を変更します。
 
 1. `/etc/datadog-agent/system-probe.yaml` で Workload Protection を無効にします。`runtime_security_config` を `enabled: false` に設定します。
     {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}

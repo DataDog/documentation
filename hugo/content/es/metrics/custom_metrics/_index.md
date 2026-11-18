@@ -11,116 +11,116 @@ aliases:
 - /es/getting_started/custom_metrics
 - /es/developers/metrics/
 - /es/metrics/guide/tag-configuration-cardinality-estimation-tool/
-description: Aprende qué son las Custom Metrics, cómo se identifican por nombre y
+description: Aprenda qué son las Custom Metrics, cómo se identifican por nombre y
   etiquetas, y cómo se facturan en Datadog.
 further_reading:
 - link: /extend/dogstatsd/
   tag: Documentación
-  text: Aprende más sobre DogStatsD
+  text: Obtenga más información sobre DogStatsD
 - link: /extend/community/libraries/
   tag: Documentación
-  text: Bibliotecas cliente de API y DogStatsD creadas oficialmente y por la comunidad
+  text: Bibliotecas de cliente para API y DogStatsD oficiales y creadas por la comunidad
 - link: /account_management/billing/custom_metrics/?tab=countrate
   tag: Documentación
   text: Facturación de Custom Metrics
 - link: /account_management/billing/metric_name_pricing/
   tag: Documentación
-  text: Precios de nombres de métricas para Custom Metrics
+  text: Precios por nombre de métrica para Custom Metrics
 - link: /metrics/guide/custom_metrics_governance/
   tag: Guía
-  text: Mejores prácticas para Custom Metric Governance
+  text: Práctica recomendada para la gobernanza de métricas personalizadas
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: Blog
-  text: Controla dinámicamente el volumen de sus Custom Metrics con Metrics without
-    Limits™
+  text: Controle dinámicamente el volumen de sus métricas personalizadas con Metrics
+    without Limits™
 - link: https://www.datadoghq.com/blog/datadog-executive-dashboards
   tag: Blog
-  text: Diseñe tableros ejecutivos efectivos con Datadog
+  text: Diseñe dashboards ejecutivos efectivos con Datadog
 - link: https://learn.datadoghq.com/courses/metrics-governance
-  tag: Centro de Aprendizaje
-  text: Metrics Governance
+  tag: Centro de aprendizaje
+  text: Gobernanza de métricas
 title: Custom Metrics
 ---
-{{< learning-center-callout header="Únase a una sesión de seminario web de habilitación" hide_image="true" btn_title="Regístrese" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
-  Explore y regístrese para sesiones de Foundation Enablement para Custom Metrics. Aprenda cómo Custom Metrics le ayudan a rastrear los KPIs de su aplicación, como el número de visitantes, el tamaño promedio del carrito de compras, la latencia de las solicitudes o la distribución del rendimiento para un algoritmo personalizado.
+{{< learning-center-callout header="Únase a una sesión de seminario web de habilitación" hide_image="true" btn_title="Registrarse" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  Explore y regístrese en las sesiones de Foundation Enablement para Custom Metrics. Aprenda cómo las Custom Metrics le ayudan a realizar un seguimiento de los KPI de su aplicación, como el número de visitantes, el tamaño promedio de la cesta del cliente, la latencia de las solicitudes o la distribución del rendimiento de un algoritmo personalizado.
 {{< /learning-center-callout >}}
 
-## Descripción General {#overview}
+## Descripción general {#overview}
 
-Las Custom Metrics le ayudan a rastrear los KPIs de su aplicación: número de visitantes, tamaño promedio del carrito de compras, latencia de las solicitudes o distribución del rendimiento para un algoritmo personalizado. Una Custom Metric se identifica por **una combinación única del nombre de la métrica y los valores de las etiquetas (incluyendo la etiqueta del servidor)**. En el ejemplo a continuación, la métrica `request.Latency` tiene cuatro combinaciones únicas de valores de etiquetas a partir de sus dos claves de etiqueta:
+Las Custom Metrics le ayudan a realizar un seguimiento de los KPI de su aplicación: número de visitantes, tamaño promedio de la cesta del cliente, latencia de las solicitudes o distribución del rendimiento de un algoritmo personalizado. Una métrica personalizada se identifica mediante **una combinación única del nombre de una métrica y los valores de las etiquetas (incluida la etiqueta de servidor)**. En el ejemplo siguiente, la métrica `request.Latency` tiene cuatro combinaciones únicas de valores de etiqueta a partir de sus dos claves de etiqueta:
 
 - `endpoint`, que tiene el valor `endpoint:X` o `endpoint:Y`.
 - `status`, que tiene el valor `status:200` o `status:400`.
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Latencia de solicitud" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Latencia de las solicitudes" style="width:80%;">}}
 
-Los siguientes también se consideran Custom Metrics:
-- En general, cualquier métrica enviada a través de [DogStatsD][3] o a través de un [Custom Agent Check][4]
+Las siguientes también se consideran Custom Metrics:
+- En general, cualquier métrica enviada a través de [DogStatsD][3] o mediante una [comprobación personalizada del Agent][4]
 - Métricas enviadas por [integraciones de Marketplace][29]
-- Ciertas [integraciones estándar](#standard-integrations) pueden potencialmente emitir Custom Metrics
+- Ciertas [integraciones estándar](#standard-integrations) pueden emitir Custom Metrics
 - Métricas enviadas desde una integración que no es una de las [más de {{< translate key="integration_count" >}} integraciones de Datadog][1].
 
-**Nota**: Los usuarios con el rol de Datadog Admin o `usage_read` permiso pueden ver el número promedio mensual de Custom Metrics por hora y las 5000 Custom Metrics principales para su cuenta en la [página de detalles de uso][5]. Aprenda más sobre [cómo se cuentan las Custom Metrics][6].
+**Nota**: Los usuarios con el rol de Datadog Admin o el permiso `usage_read` pueden ver el número promedio mensual de Custom Metrics por hora y las 5000 Custom Metrics principales de su cuenta en la [página de detalles de uso][5]. Obtenga más información sobre [cómo se cuentan las Custom Metrics][6].
 
-## Propiedades de Custom Metrics {#custom-metrics-properties}
+## Propiedades de las Custom Metrics {#custom-metrics-properties}
 
-Una Custom Metric de Datadog tiene las siguientes propiedades. Lea la [introducción a las métricas][7] para aprender cómo graficar métricas dentro de Datadog.
+Una métrica personalizada de Datadog tiene las siguientes propiedades. Lea la [introducción a las métricas][7] para aprender a graficar métricas dentro de Datadog.
 
 | Propiedad         | Descripción                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | El [nombre de su métrica](#naming-custom-metrics).                                                                                                                  |
 | `<METRIC_VALUE>` | El valor de su métrica. **Nota**: Los valores de las métricas deben ser de 32 bits. Los valores no deben reflejar fechas ni marcas de tiempo.                                                                                                                                |
-| `<TIMESTAMP>`    | La marca de tiempo asociada con el valor de la métrica. **Nota**: Las marcas de tiempo de las métricas no pueden ser más de diez minutos en el futuro ni más de una hora en el pasado. |
+| `<TIMESTAMP>`    | La marca de tiempo asociada con el valor de la métrica. **Nota**: Las marcas de tiempo de las métricas no pueden estar a más de diez minutos en el futuro ni a más de una hora en el pasado. |
 | `<TAGS>`         | El conjunto de etiquetas asociadas con su métrica.                                                                                                                 |
 | `<METRIC_TYPE>`  | El tipo de su métrica. Lea sobre [tipos de métricas][8].                                                                                             |
 | `<INTERVAL>`     | Si el `<TYPE>` de la métrica es [RATE][9] o [COUNT][10], define el [intervalo][11] correspondiente.                                                       |
 
-### Nombrando Custom Metrics {#naming-custom-metrics}
+### Nomenclatura de Custom Metrics {#naming-custom-metrics}
 
-La siguiente convención de nomenclatura para métricas personalizadas debe ser seguida:
+Se debe seguir la siguiente convención de nomenclatura de Custom Metrics:
 
 * Los nombres de las métricas deben comenzar con una letra.
-* Los nombres de las métricas solo pueden contener caracteres alfanuméricos ASCII, guiones bajos y puntos.
+* Los nombres de las métricas solo deben contener caracteres alfanuméricos ASCII, guiones bajos y puntos.
   * Otros caracteres, incluidos los espacios, se convierten en guiones bajos.
   * Unicode _no_ es compatible.
-* Los nombres de las métricas no deben exceder los 200 caracteres. Se prefieren menos de 100 desde una perspectiva de interfaz de usuario.
+* Los nombres de las métricas no deben exceder los 200 caracteres. Se prefieren nombres de menos de 100 caracteres para facilitar su visualización en la interfaz de usuario.
 
-**Nota**: Los nombres de las métricas son sensibles a mayúsculas y minúsculas en Datadog.
+**Nota**: Los nombres de las métricas distinguen entre mayúsculas y minúsculas en Datadog.
 
-### Unidades de métricas {#metric-units}
+### Unidades de las métricas {#metric-units}
 
-Establezca las unidades de métricas a través de [Resumen de Métricas][12] o establezca unidades de métricas personalizadas con la función de [Anulación de unidad][13] en el editor de gráficos de sus visualizaciones. Para más información, consulte la documentación de [Unidades de Métricas][14].
+Establezca las unidades de las métricas a través del [Metrics Catalog][12] o establezca unidades personalizadas para las métricas con la función [Unit override][13] en el editor de gráficos de sus visualizaciones. Para obtener más información, consulte la documentación de [Metrics Units][14].
 
-## Envío de métricas personalizadas {#submitting-custom-metrics}
+## Envío de Custom Metrics {#submitting-custom-metrics}
 
-{{< whatsnext desc="Hay múltiples formas de enviar métricas a Datadog:">}}
-    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Verificación de agente personalizado{{< /nextlink >}}
-    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}} DogStatsD{{< /nextlink >}}
+{{< whatsnext desc="Existen varias formas de enviar métricas a Datadog:">}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Comprobación personalizada del Agent{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
-    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}API HTTP de Datadog{{< /nextlink >}}
-    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generar métricas basadas en registros{{< /nextlink >}}
-    {{< nextlink href="/tracing/generate_metrics/" >}}Generar métricas basadas en tramos de APM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Generar métricas basadas en eventos de RUM{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generar métricas basadas en procesos en vivo{{< /nextlink >}}
+    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}La API HTTP de Datadog{{< /nextlink >}}
+    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Genere métricas basadas en registros{{< /nextlink >}}
+    {{< nextlink href="/tracing/generate_metrics/" >}}Genere métricas basadas en tramos de APM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Genere métricas basadas en eventos de RUM{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generar métricas basadas en procesos activos{{< /nextlink >}}
 {{< /whatsnext >}}
 
-También puede usar una de las [bibliotecas de cliente API y DogStatsD oficiales y contribuidas por la comunidad de Datadog][15] para enviar sus Custom Metrics
+También puede utilizar una de las [bibliotecas de cliente de API y DogStatsD oficiales de Datadog o aportadas por la comunidad][15] para enviar sus Custom Metrics
 
-**Nota**: No hay límites de tasa fijos impuestos en el envío de Custom Metrics. Si se excede su asignación predeterminada, se le cobrará de acuerdo con [la política de facturación de Datadog para Custom Metrics][6].
+**Nota**: No existen límites de tasa fijos impuestos para el envío de Custom Metrics. Si se excede su asignación predeterminada, se le facturará de acuerdo con la [política de facturación de Datadog para Custom Metrics][6].
 
 ## Integraciones estándar {#standard-integrations}
 
-Las siguientes integraciones estándar pueden emitir Custom Metrics.
+Las siguientes integraciones estándar podrían emitir Custom Metrics.
 
-| Tipo de integraciones                           | Integraciones                                                                       |
+| Tipo de integraciones                           | Integrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
-| Limitado a 350 Custom Metrics por defecto.      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
-| Sin límite por defecto en la colección de Custom Metrics. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[Contadores de rendimiento de Windows][22] /[WMI][23] /[Prometheus][21] |
+| Limitado a 350 Custom Metrics de forma predeterminada.      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
+| No hay límite predeterminado en la recopilación de Custom Metrics. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[Windows performance counters][22] /[WMI][23] /[Prometheus][21] |
 | Se puede configurar para recopilar Custom Metrics.   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27]                        |
 | Custom Metrics enviadas desde integraciones en la nube    | [AWS][28]                                                                          |
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

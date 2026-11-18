@@ -1,48 +1,47 @@
 ---
-description: Découvrez comment CD Visibility détecte les changements de code.
+description: Découvrez comment CD Visibility détecte les modifications de code.
 further_reading:
 - link: /continuous_delivery/deployments/
   tag: Documentation
   text: En savoir plus sur Deployment Visibility
 - link: /continuous_delivery/explorer
   tag: Documentation
-  text: Découvrir comment interroger et visualiser les déploiements
-title: Détection des changements de code
+  text: Découvrez comment interroger et visualiser les déploiements
+title: Détection des modifications de code
 ---
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Rejoignez la version Preview !" >}}
-CD Visibility est en version Preview. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
+{{< callout btn_hidden="true" header="faux" >}}
+CD Visibility est en préversion. L'accès est limité aux organisations déjà inscrites.
 {{< /callout >}}
 
-## Présentation
+## Présentation {#overview}
 
-La détection des changements de code permet à Datadog d'identifier les commits appliqués dans le cadre d'un déploiement. Cette fonctionnalité présente plusieurs avantages :
-- Elle permet de comprendre où des changements spécifiques ont été déployés, par exemple en surveillant le moment où les mises à jour sont appliquées à l'environnement `production`.
-- Elle permet de diagnostiquer les incidents liés à un déploiement en fournissant des données sur les changements précis appliqués, afin que les équipes puissent identifier rapidement les causes fondamentales potentielles et ainsi résoudre plus rapidement les problèmes.
+Code Changes Detection permet à Datadog d'identifier les commits introduits dans le cadre d'un déploiement. Ceci est particulièrement utile pour :
+- Comprendre où des modifications spécifiques ont été déployées, par exemple pour suivre le moment où les mises à jour atteignent l'environnement `production`.
+- Diagnostiquer les incidents liés à un déploiement en offrant une visibilité sur les modifications exactes introduites. Cela aide les équipes à identifier rapidement les causes profondes potentielles et à accélérer le dépannage.
 
-Pour détecter les changements de code déployés, Datadog exécute [`git log`][1] entre le SHA du commit de déploiement actuel et celui du déploiement précédent. Les commits de fusion sont exclus du calcul.
+Pour détecter les modifications de code déployées, Datadog exécute le [`git log`][1] entre le SHA du commit de déploiement actuel et le SHA du commit de déploiement précédent. Les commits de fusion sont exclus du calcul.
 
-Les changements de code déployés sont affichés dans toutes les exécutions de déploiement de la [page Deployment Executions][2]. L'onglet **Code Changes** indique le déploiement précédent pris en compte ainsi que les changements de code détectés entre les deux déploiements.
+Les modifications de code déployées sont visibles dans toute exécution de déploiement sur la [page Deployment Executions][2]. L'onglet {{< ui >}}Code Changes{{< /ui >}} affiche le déploiement précédent pris en compte, ainsi que les modifications de code détectées entre les deux.
 
-{{< img src="continuous_delivery/features/code_changes_tab.png" alt="Onglet Code Changes de la fonctionnalité de détection des changements" style="width:100%;">}}
+{{< img src="continuous_delivery/features/code_changes_tab.png" alt="Onglet Code Changes pour la fonctionnalité Code Changes Detection" style="width:100%;">}}
 
-En outre, la colonne **Deployments** de la page [Recent Code Changes][3] affiche les détails du service et de l'environnement pour tous les déploiements qui incluent un commit spécifique. Cette vue permet de comprendre rapidement si (et où) des changements de code ont été appliqués.
-Survolez la valeur de service pour découvrir si le déploiement a atteint tous les environnements prévus, en fonction des emplacements où le service est généralement déployé.
+De plus, la colonne {{< ui >}}Deployments{{< /ui >}} de la page [Recent Code Changes][3] affiche les détails du service et de l'environnement pour tous les déploiements incluant un commit spécifique. Cette vue permet de comprendre rapidement si vos modifications de code sont déployées et où elles le sont.
+Le survol de la valeur du service révèle si le déploiement a atteint tous les environnements attendus, en fonction de l'endroit où le service est généralement déployé.
 
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Affichage des déploiements sur la page Recent Code Changes" style="width:100%;">}}
 
-Les changements de code ne sont détectés que pour les déploiements qui :
-- possèdent un service (`@deployment.service`) avec des spécifications de chemin de fichier définies dans le Software Catalog (voir les [instructions de configuration](#specifier-des-patterns-de-chemin-de-fichier-de-service) pour en savoir plus) ;
-- possèdent un environnement (`@deployment.env`) ;
-- possèdent une URL de référentiel (`@deployment.git.repository_url`) et un SHA de commit (`@deployment.git.commit.sha`).
+Les modifications de code ne sont détectées que pour les déploiements qui :
+- Possèdent un service (`@deployment.service`) avec des spécifications de chemins de fichiers définies dans Catalog (voir les [instructions de configuration](#specify-service-file-path-patterns) pour plus d'informations).
+- Possèdent un environnement (`@deployment.env`).
+- Possèdent une URL de dépôt (`@deployment.git.repository_url`) et un SHA de commit (`@deployment.git.commit.sha`).
 
-## Configuration
+## Configuration {#setup}
 
-Pour autoriser la détection des changements de code pour vos déploiements, vous devez suivre deux étapes :
-1. [Synchronisez vos métadonnées de référentiel avec Datadog](#synchroniser-vos-metadonnees-de-referentiel-avec-datadog).
-2. [Spécifiez le chemin du fichier de code source pour vos services](#specifier-des-patterns-de-chemin-de-fichier-de-service).
+Pour activer Code Changes Detection sur vos déploiements, deux étapes sont nécessaires :
+1. [Synchronisez les métadonnées de votre dépôt avec Datadog](#synchronize-repository-metadata-to-datadog).
+2. [Spécifiez le chemin d'accès aux fichiers de code source pour vos services](#specify-service-file-path-patterns).
 
-### Synchroniser vos métadonnées de référentiel avec Datadog
+### Synchronisez les métadonnées du dépôt avec Datadog {#synchronize-repository-metadata-to-datadog}
 
 <!--
 The Following tabs were mostly copied from the Source Code Integration docs until we find a way to document this in a shared page
@@ -53,17 +52,17 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{% tab "GitHub" %}}
 
 <div class="alert alert-danger">
-Les workflows GitHub exécutant le <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request">déclencheur <code>pull_request</code></a> ne sont pas pris en charge par l'intégration GitHub.
-Si vous utilisez le déclencheur <code>pull_request</code>, utilisez l'autre méthode.
+Les workflows GitHub exécutés par le <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> déclencheur </a> ne sont pas pris en charge par l'intégration GitHub.
+Si vous utilisez le <code>pull_request</code> déclencheur, utilisez la méthode alternative.
 </div>
 
-Si vous n'avez pas encore installé l'[intégration GitHub][1], installez-la depuis le [carré d'intégration GitHub][2].
+Si l'[intégration GitHub][1] n'est pas déjà installée, installez-la sur la [tuile d'intégration GitHub][2].
 
-Lors de la configuration de l'application GitHub :
-1. Sélectionnez au minimum les autorisations de référentiel **Read** pour **Contents** et **Pull Requests**.
-2. Abonnez-vous au moins aux événements **Push**, **PullRequest** et **PullRequestReview**.
+Lors de la configuration de l'application GitHub :
+1. Sélectionnez au moins {{< ui >}}Read{{< /ui >}} autorisations de dépôt pour {{< ui >}}Contents{{< /ui >}} et {{< ui >}}Pull Requests{{< /ui >}}.
+2. Abonnez-vous au moins aux événements {{< ui >}}Push{{< /ui >}}, {{< ui >}}PullRequest{{< /ui >}} et {{< ui >}}PullRequestReview{{< /ui >}}.
 
-Pour confirmer que la configuration est valide, sélectionnez votre application GitHub dans le [carré d'intégration GitHub][2] et vérifiez que, dans le tableau **Datadog Features**, la fonctionnalité **Pull Request Information** est indiquée comme valide.
+Pour confirmer que la configuration est valide, sélectionnez votre GitHub App dans la [tuile d'intégration GitHub][2] et vérifiez que, dans le tableau {{< ui >}}Datadog Features{{< /ui >}}, la fonctionnalité {{< ui >}}Pull Request Information{{< /ui >}} est marquée comme valide.
 
 [1]: https://docs.datadoghq.com/fr/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
@@ -71,24 +70,27 @@ Pour confirmer que la configuration est valide, sélectionnez votre application 
 
 {{% tab "GitLab" %}}
 
-Suivez le processus [d'intégration dans l'application][1] pour configurer l'intégration du code source GitLab.
+Suivez le [parcours d'intégration dans l'application][1] pour configurer l'intégration GitLab Source Code.
 
-**Remarque** : la portée du token d'accès personnel du compte de service doit être au minimum définie sur `read_api`.
+**Remarque** : Le périmètre du jeton d'accès personnel du compte de service doit être au moins `read_api`.
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 {{% /tab %}}
 
 {{% tab "Autres fournisseurs Git" %}}
 
-Vous pouvez télécharger vos métadonnées de référentiel Git avec la commande [`datadog-ci git-metadata upload`][1]. À l'exécution de cette commande, Datadog reçoit l'URL du référentiel, le SHA de commit de la branche actuelle et la liste des chemins de fichier suivis.
+Vous pouvez télécharger les métadonnées de votre dépôt Git avec la commande [`datadog-ci git-metadata upload`][1].
+Lorsque cette commande est exécutée, Datadog reçoit l'URL du dépôt, le SHA du commit de la branche actuelle et une liste des chemins de fichiers suivis.
 
-Exécutez cette commande dans CI pour chaque nouveau commit. Lorsqu'un déploiement est exécuté pour un SHA de commit spécifique, assurez-vous que la commande `datadog-ci git-metadata upload` est exécutée pour ce commit **avant** que l'événement de déploiement ne soit envoyé.
+Exécutez cette commande en CI pour chaque nouveau commit. Lorsqu'un déploiement est exécuté pour un SHA de commit spécifique, assurez-vous que la commande `datadog-ci git-metadata upload` est exécutée pour ce commit **avant** que l'événement de déploiement ne soit envoyé.
 
 <div class="alert alert-danger">
-Ne spécifiez pas l'option <code>--no-gitsync</code> dans la commande <code>datadog-ci git-metadata upload</code>. Lorsqu'elle est incluse, cette option annule l'envoi des informations de commit à Datadog, ce qui empêche la détection des changements.
+Ne fournissez pas l'option <code>--no-gitsync</code> à la commande <code>datadog-ci git-metadata upload</code> .
+Lorsque cette option est incluse, les informations sur le commit ne sont pas envoyées à Datadog et les modifications ne sont pas détectées.
 </div>
 
-Vous pouvez vérifier que la configuration de la commande est correcte en consultant la sortie de la commande. Voici un exemple de sortie correcte :
+Vous pouvez valider la configuration correcte de la commande en vérifiant la sortie de la commande. Un exemple de sortie correcte est :
+
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:organization/example-repository.git.
 180 tracked file paths will be reported.
@@ -99,17 +101,17 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{< /tabs >}}
 
-### Spécifier des patterns de chemin de fichier de service
+### Spécifiez les modèles de chemins de fichiers du service {#specify-service-file-path-patterns}
 
-Pour pouvoir comprendre les changements de code introduits par un déploiement, vous devez uniquement prendre en compte les commits affectant le service déployé.
+Pour comprendre correctement les modifications de code introduites par un déploiement, seuls les commits affectant le service déployé doivent être pris en compte.
 
-Pour y parvenir dans le [Software Catalog][5], spécifiez, pour les services pertinents, des patterns de chemin de fichier globaux pour le code source dans la [définition du service][4].
+Cela peut être fait dans [Catalog][5] en spécifiant, pour les services concernés, les modèles de chemin de fichier glob du code source dans la [définition de service][4].
 
-Si la définition du service contient une URL GitHub ou GitLab **complète** vers le dossier de l'application, un pattern de chemin unique est automatiquement utilisé. Le type de lien doit être défini sur **repo** et le nom du lien doit correspondre à « Source » ou au nom du service (`shopist` dans les exemples ci-dessous).
+Si la définition de service contient une URL **complète** GitHub ou GitLab vers le dossier de l'application, un modèle de chemin unique est automatiquement utilisé. Le type de lien doit être **repo** et le nom du lien doit être soit « Source », soit le nom du service (`shopist` dans les exemples ci-dessous).
 
-Si votre référentiel contient un seul service et que vous souhaitez que tous les répertoires soient pris en compte pour la détection des changements de code, vous pouvez ignorer cette étape. Si vous déployez plusieurs services à partir d'un référentiel, il est nécessaire de spécifier des patterns de chemin de code source.
+Si votre dépôt contient un seul service et que vous souhaitez que tous les répertoires soient pris en compte pour les modifications de code, vous pouvez ignorer cette étape. Si vous déployez deux services ou plus à partir d'un dépôt, vous devez spécifier les modèles de chemins de fichiers du code source.
 
-**Exemple (schéma v2.2) :**
+**Exemple (version de schéma v2.2) :**
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -137,9 +139,7 @@ links:
 {{% /tab %}}
 {{< /tabs >}}
 
-La détection des changements de code pour les déploiements du service `shopist` ne prend en compte que les commits Git qui incluent des changements dans le chemin `src/apps/shopist/**`. Vous pouvez configurer un contrôle plus granulaire avec `extensions[datadoghq.com/cd-visibility]` ou `extensions[datadoghq.com/dora-metrics]`. Si les deux extensions sont détectées, l'extension `extensions[datadoghq.com/cd-visibility]` est utilisée.
-
-**Exemple (schéma v2.2) :**
+Code Changes Detection pour les déploiements du service `shopist` ne prend en compte que les commits Git qui incluent des modifications dans le chemin `src/apps/shopist/**`. Vous pouvez configurer un contrôle plus granulaire en utilisant `extensions[datadoghq.com/cd-visibility]` ou `extensions[datadoghq.com/dora-metrics]`. Si les deux extensions sont détectées, `extensions[datadoghq.com/cd-visibility]` est utilisé.**Exemple (version de schéma v2.2) :**
 
 ```yaml
 extensions:
@@ -149,14 +149,12 @@ extensions:
       - src/libs/utils/**
 ```
 
-La détection des changements de code pour les déploiements du service `shopist` ne prend en compte que les commits Git qui incluent des changements dans le chemin `src/apps/shopist/**` ou le chemin `src/libs/utils/**`.
+Code Changes Detection pour les déploiements du service `shopist` ne prend en compte que les commits Git qui incluent des modifications dans les chemins `src/apps/shopist/**` ou `src/libs/utils/**`.
 
-Si des patterns de code source pour un service sont définis à la fois dans un lien et dans une extension, seule l'extension est prise en compte lors du filtrage des commits.
+Si les modèles de code source d'un service sont définis à la fois dans un lien et dans une extension, seule l'extension est prise en compte lors du filtrage des commits.
 
-#### Utiliser des patterns de chemins de fichier de service pour suivre les modifications dans l'ensemble du référentiel
-Pour détecter les changements dans l'ensemble du référentiel, utilisez des patterns de chemin de fichier appropriés. Par exemple, `"**"` renvoie tous les fichiers.
-
-**Exemple (schéma v2.2) :**
+#### Utilisez des modèles de chemins de fichiers du service pour suivre les modifications dans l'ensemble du dépôt {#use-service-file-path-patterns-to-track-changes-across-the-entire-repository}
+Pour détecter les modifications dans l'ensemble du dépôt, utilisez des modèles de chemins de fichiers appropriés. Par exemple, `"**"` correspond à tous les fichiers.**Exemple (version de schéma v2.2) :**
 
 ```yaml
 extensions:
@@ -165,17 +163,17 @@ extensions:
       - "**"
 ```
 
-Dans cet exemple, la détection des changements de code pour les déploiements du service `shopist` prend en compte les commits Git qui incluent des changements dans l'ensemble de l'arborescence du référentiel.
+Dans ce cas, Code Changes Detection pour les déploiements du service `shopist` prend en compte les commits Git qui incluent des modifications dans toute l'arborescence du dépôt.
 
-<div class="alert alert-danger">Si un pattern correspond exactement à <code>**</code> ou commence par ces caractères, ajoutez des guillemets autour des astérisques, car le caractère <code>*</code> est réservé aux ancres dans YAML.</div>
+<div class="alert alert-danger">Si un modèle est exactement <code>**</code> ou commence par celui-ci, mettez-le entre guillemets, car <code>*</code> est réservé dans YAML pour les ancres.</div>
 
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
 [3]: https://app.datadoghq.com/ci/commits
-[4]: /fr/tracing/software_catalog/adding_metadata
-[5]: /fr/tracing/software_catalog
+[4]: /fr/internal_developer_portal/catalog/entity_model/
+[5]: /fr/internal_developer_portal/catalog/

@@ -1,28 +1,34 @@
 ---
-description: Fleet Automation으로 Remote Configuration을 구성하여 Agent flare, 원격 업그레이드 및
-  중앙 집중식 구성 관리를 사용할 수 있습니다.
+description: Fleet Automation으로 Remote Configuration을 구성하여 Agent 플레어, 원격 업그레이드 및 중앙
+  집중식 구성 관리를 사용할 수 있습니다.
 disable_toc: false
 further_reading:
 - link: /remote_configuration
-  tag: 문서
+  tag: 설명서
   text: Remote Configuration에 대해 자세히 알아보기
 - link: /agent/fleet_automation
-  tag: 문서
+  tag: 설명서
   text: Fleet Automation
 - link: /infrastructure/list/#agent-configuration
-  tag: 문서
+  tag: 설명서
   text: Agent 구성 보기에 대해 알아보기
 - link: https://www.datadoghq.com/blog/fleet-automation/
   tag: 블로그
   text: Fleet Automation을 사용하여 Datadog Agent를 중앙에서 관리하고 원격으로 운영하기
 title: Fleet Automation을 위한 Remote Configuration
 ---
-이 페이지에서는 [Fleet Automation][11]에서 {{< tooltip glossary="remote_configuration" case="title" >}} 을 구성하고 사용하는 방법을 설명합니다. 다음 Fleet Automation 기능에는 Remote Configuration이 필요합니다.
+이 페이지에서는 [Fleet Automation][11]을 사용하여 {{< tooltip glossary="remote_configuration" case="title" >}} 을 구성하고 사용하는 방법을 설명합니다. 다음 Fleet Automation 기능에는 Remote Configuration이 필요합니다.
 | 기능 | 설명 | 최소 Agent 버전 |
 |---------|-------------|------------------------|
-| **[Agent flares][9]** | Fleet Automation을 사용하여 Datadog 사이트에서 flare 전송 | 7.47+ <br>7.66+ 권장 |
-| **[Agent upgrades][10]** | 원격으로 Agent 업그레이드 | Linux: 7.69.0+ <br>Windows: 7.71.1+ |
-| **[Agent configuration][13]** | 원격으로 Agent 구성 | 7.73+ |
+| **[Agent 플레어][9]** | Fleet Automation을 사용하여 Datadog 사이트에서 플레어 전송 | 7.47+ <br>7.66+ 권장 |
+| **[Agent 업그레이드][10]** | 원격으로 Agent 업그레이드 | Linux: 7.69.0+ <br>Windows: 7.71.1+ |
+| **[Agent 구성][13]** | 원격으로 Agent 구성 | 7.73+ |
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+US1-FED 및 US2-FED에서 Agent를 업그레이드하려면 Linux와 Windows 모두에서 버전 7.85.0 이상이 필요합니다. 원격 플레어 수집은 지원되지 않으므로, <a href="/agent/troubleshooting/send_a_flare/#manual-submission">수동 플레어 제출</a>을 대신 사용하세요.
+</div>
+{{< /site-region >}}
 
 최신 기능을 사용할 수 있도록 Agent를 정기적으로 업그레이드하는 것이 좋습니다.
 
@@ -34,7 +40,13 @@ title: Fleet Automation을 위한 Remote Configuration
 
 ## Remote Configuration 활성화 {#enable-remote-configuration}
 
-대부분의 경우, Remote Configuration은 귀하의 조직에 대해 기본적으로 활성화되어 있습니다. [Remote Configuration][3] 설정 페이지에서 조직에 대해 Remote Configuration이 활성화되어 있는지 확인할 수 있습니다. Remote Configuration을 활성화해야 하는 경우:
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Remote Configuration은 US1-FED 또는 US2-FED 조직의 경우 기본적으로 활성화되어 있지 않습니다. 아래 단계에 따라 <a href="https://app.datadoghq.com/organization-settings/remote-config">Organization Settings > Remote Configuration</a>에서 활성화하세요.
+</div>
+{{< /site-region >}}
+
+대부분의 경우, Remote Configuration은 조직에 대해 기본적으로 활성화되어 있습니다. [Remote Configuration][3] 설정 페이지에서 조직에 대해 Remote Configuration이 활성화되어 있는지 확인할 수 있습니다. Remote Configuration 활성화가 필요한 경우:
 1. 조직에 대해 Remote Configuration을 활성화할 수 있도록 RBAC 권한에 [`org_management`][1]가 포함되어 있는지 확인합니다.
 1. Organization Settings 페이지에서 [Remote Configuration][3]을 활성화합니다. 이렇게 하면 조직 전반의 Datadog 구성 요소가 Datadog으로부터 구성을 수신할 수 있습니다.
 
@@ -43,6 +55,8 @@ title: Fleet Automation을 위한 Remote Configuration
 Linux 또는 Windows VM에서 Agent를 원격으로 업그레이드하거나 구성하려면 Remote Configuration을 활성화하고 각 대상 Agent에서 `remote_updates`를 `true`로 설정합니다. Remote Configuration을 사용하면 Agent가 Datadog으로부터 구성을 수신할 수 있습니다. `remote_updates` 설정은 원격 업그레이드 및 Agent 구성 변경을 활성화합니다.
 
 Agent 버전 7.73.0부터 `remote_updates`는 기본적으로 `true`로 설정됩니다. 이전 지원 버전에서는 명시적으로 `true`로 설정하세요.
+
+US1-FED 또는 US2-FED에 보고하거나 FIPS 모드에서 실행되는 Agent는 명시적인 Remote Configuration 활성화가 필요합니다. 다음 단계를 사용하여 `remote_configuration.enabled`를 `true`로 설정하세요. `remote_updates`만 활성화한다고 해서 Remote Configuration이 활성화되지는 않습니다.
 
 1. 조직 및 [Agent의 API 키](#enable-remote-configuration-on-the-api-key)에 대해 Remote Configuration을 활성화합니다.
 1. Agent의 [구성 파일][16]에서 다음 설정을 활성화합니다. `remote_updates`는 최상위 설정입니다.
@@ -66,8 +80,8 @@ Agent 버전 7.73.0부터 `remote_updates`는 기본적으로 `true`로 설정�
 
   | Agent 상태     | 설명                                      |
   |------------------|--------------------------------------------------|
-  | CONNECTED      | 환경에 배포된 Agent가 Datadog에 연결되어 성공적으로 인증 후 권한을 부여 받을 수 있습니다. 이는 Remote Configuration에 대해 Agent에 기대하는 최적의 상태입니다.                                               |
-  | UNAUTHORIZED          | 환경에 배포된 Agent가 Datadog에 연결할 수는 있지만, Remote Configuration 작업을 위해 Datadog에서 인증 후 권한을 부여 받을 수는 없습니다. 가장 가능성이 높은 원인은 Agent가 사용하는 API 키에 대해 Remote Configuration이 활성화되어 있지 않기 때문입니다. 이 문제를 해결하려면 Agent가 사용하는 API 키에 대해 Remote Configuration 기능을 활성화합니다.                                                 |
+  | CONNECTED      | 환경에 배포된 Agent가 Datadog에 연결되어 성공적으로 인증 후 권한을 부여받을 수 있습니다. 이는 Remote Configuration에 대해 Agent에 기대하는 최적의 상태입니다.                                               |
+  | UNAUTHORIZED          | 환경에 배포된 Agent가 Datadog에 연결할 수는 있지만, Remote Configuration 작업을 위해 Datadog에서 인증 후 권한을 부여받을 수는 없습니다. 가장 가능성이 높은 원인은 Agent가 사용하는 API 키에 대해 Remote Configuration이 활성화되어 있지 않기 때문입니다. 이 문제를 해결하려면 Agent가 사용하는 API 키에 대해 Remote Configuration 기능을 활성화합니다.                                                 |
   | CONNECTION ERROR        |   환경에 배포된 Agent의 `datadog.yaml` 구성 파일에서 `remote_configuration.enabled`가 true로 설정되어 있으나, Remote Configuration 서비스에서 해당 Agent를 찾을 수 없습니다. 가장 가능성이 높은 원인은 Agent가 Remote Configuration [엔드포인트][4]에 도달하지 못하는 것입니다. 이 문제를 해결하려면 환경에서 Remote Configuration 엔드포인트로의 아웃바운드 HTTPS 액세스를 허용하세요. 이 상태는 Agent 버전이 `7.45.0` 이상일 때 표시됩니다.
   | DISABLED       |   환경에 배포된 Agent의 `datadog.yaml` 구성 파일에서 `remote_configuration.enabled`가 false로 설정되어 있습니다. Agent에서 Remote Configuration을 활성화하려면 `remote_configuration.enabled`를 true로 설정하세요. 이 상태는 Agent 버전이 `7.45.0` 이상일 때 표시됩니다. |
   | NOT CONNECTED       | Agent를 Remote Configuration 서비스에서 찾을 수 없으며, Agent의 `datadog.yaml` 구성 파일에서 `remote_configuration.enabled`가 true 또는 false로 설정되어 있을 수 있습니다. 로컬 Agent 구성 또는 프록시 설정을 검사합니다. 이 상태는 Agent 버전이 `7.41.1`보다 높지만 `7.45.0`보다 낮을 때 표시됩니다.            |
@@ -86,7 +100,7 @@ Agent 버전 7.73.0부터 `remote_updates`는 기본적으로 `true`로 설정�
 
 ### Agent 수준 {#at-the-agent-level}
 
-Agent 버전 7.47.0부터는 `remote_configuration.enabled`가 Agent에서 기본적으로 `true`로 설정됩니다. 이 설정으로 인해 Agent가 Datadog 사이트에 구성 업데이트를 요청하게 됩니다.
+Agent 버전 7.47.0부터는 GovCloud에 보고하거나 FIPS 모드에서 실행되는 Agent를 제외하고 Remote Configuration이 기본적으로 활성화됩니다. 해당 Agent의 경우 [원격 Agent 관리 활성화](#enable-remote-agent-management)에 설명된 대로 명시적으로 활성화하세요.
 
 Agent가 Datadog에 구성 요청을 보내지 않도록 하려면 Agent에서 `remote_configuration.enabled`를 `false`로 설정할 수 있습니다.
 
