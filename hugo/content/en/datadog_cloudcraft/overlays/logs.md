@@ -69,7 +69,7 @@ To investigate logs:
 1. (Optional) Turn on {{< ui >}}Group Patterns{{< /ui >}} to group similar logs. For more information, see [Grouping Logs Into Patterns][4].
 1. In the list of results, click a log to see its details in the log side panel.
 
-To open the current query in the Log Explorer, click the <i class="icon-external-link"></i> **(open in new window)** icon at the top right of the list of results.
+To open the current query in the Log Explorer, click the <i class="icon-external-link"></i> **(View in Explorer)** icon at the top right of the list of results.
 
 ## Further reading
 
