@@ -56,3 +56,63 @@ entries:
       - UpdateAiGatewayRoutingRule
       - UpsertAiGatewayPolicy
     title: Make the AI Gateway configuration API public in Preview
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateAiGatewayModelGroup
+      - CreateAiGatewayRoutingRule
+      - DeleteAiGatewayProvider
+      - DeleteAiGatewayRoutingRule
+      - GetAiGatewayModelGroup
+      - GetAiGatewayRoutingRule
+      - ListAiGatewayModelGroups
+      - ListAiGatewayRoutingRules
+      - UpdateAiGatewayModelGroup
+      - UpdateAiGatewayRoutingRule
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41727
+    operations:
+      - CreateAiGatewayRoutingRule
+      - UpdateAiGatewayRoutingRule
+    title: Document classified tier rules for AI Gateway routing rules
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41802
+    operations:
+      - CreateAiGatewayDataCaptureOverride
+      - DeleteAiGatewayDataCaptureOverride
+      - GetAiGatewayDataCaptureConfiguration
+      - UpdateAiGatewayDataCaptureOverride
+    title: Add AI Gateway capture override permissions and hidden preview 
+      metadata
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41768
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayProvider
+      - CreateAiGatewayRoutingRule
+      - GetAiGatewayBudgetInstancesSummary
+      - GetAiGatewayModelPricing
+      - GetAiGatewayProvider
+      - ListAiGatewayBudgets
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayProviders
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+    title: Document AI Gateway budget, provider, and model catalog fields
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41767
+    operations:
+      - CreateAiGatewayModelGroup
+      - GetAiGatewayModelGroup
+      - ListAiGatewayModelGroups
+      - UpdateAiGatewayModelGroup
+    title: Document AI Gateway policy visibility and safe membership updates

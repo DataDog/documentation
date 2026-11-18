@@ -83,7 +83,7 @@ Reinicie PHP (PHP-FPM o el SAPI de Apache) y visite un punto de conexión de su 
 Cuando no especifica `--enable-appsec`, la extensión AppSec se carga brevemente al inicio y no está habilitada de forma predeterminada. Se cortocircuita inmediatamente, lo que causa una sobrecarga de rendimiento insignificante.
 
 <div class="alert alert-info">
-Puede tomar unos minutos antes de que las trazas aparezcan en la interfaz de usuario. Si las trazas aún no aparecen después de unos minutos, cree una incidencia <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info">.<code>phpinfo()</code>Página </a> desde la máquina del servidor y desplácese hacia abajo hasta `ddtrace`. Las verificaciones de diagnóstico fallidas aparecen en esta sección para ayudar a identificar cualquier problema.
+Puede tomar unos minutos antes de que las trazas aparezcan en la interfaz de usuario. Si las trazas aún no aparecen después de unos minutos, cree una incidencia <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info">.<code>phpinfo()</code></a> página desde el equipo servidor y desplácese hacia abajo hasta la <code>ddtrace</code>. Las verificaciones de diagnóstico fallidas aparecen en esta sección para ayudar a identificar cualquier problema.
 </div>
 
 <div class="alert alert-danger">

@@ -268,6 +268,7 @@ Utilice los siguientes atributos para representar el objeto contenedor en sus re
 | `container.pod.name`        | El nombre del pod que ejecuta el contenedor.                              |
 | `container.pod.namespace`   | El espacio de nombres de Kubernetes del pod.                                    |
 | `container.pod.annotations` | Las anotaciones aplicadas al pod (mapa de clave-valor).                     |
+| `container.pod.labels`      | Las etiquetas aplicadas al pod (mapa de clave-valor). Requiere **Agent v7.85+**. |
 
 ### Estructura de configuración {#configuration-structure}
 
@@ -429,6 +430,12 @@ Para excluir el contenedor con una anotación de pod específica:
 
 ```yaml
 container.pod.annotations["monitoring"] == "false"
+```
+
+Para excluir el contenedor con una etiqueta de pod específica:
+
+```yaml
+container.pod.labels["app"] == "redis"
 ```
 
 Para excluir el contenedor en espacios de nombres sin la subcadena `-dev`:

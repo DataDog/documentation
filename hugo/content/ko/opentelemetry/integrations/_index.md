@@ -9,7 +9,7 @@ title: Integrations
 
 ## 개요 {#overview}
 
-OpenTelemetry(OTel) 통합은 OpenTelemetry 표준을 사용하여 다양한 소스에서 관측 가능성 데이터(메트릭, 트레이스 및 로그)를 수집할 수 있게 해주는 구성 요소입니다. 이러한 통합은 OpenTelemetry Collector와 함께 작동하도록 설계되었으며, 이 Collector는 텔레메트리 데이터를 수신, 처리하고 Datadog과 같은 관측 가능성 백엔드로 내보냅니다.
+OpenTelemetry(OTel) 통합은 OpenTelemetry 표준을 사용하여 다양한 소스에서 관측 가능성 데이터(메트릭, 트레이스 및 로그)를 수집할 수 있게 해주는 구성 요소입니다. 이러한 통합은 OpenTelemetry Collector와 함께 작동하도록 설계되었으며, 이 Collector는 텔레메트리 데이터를 수신 및 처리하고 Datadog과 같은 관측 가능성 백엔드로 내보냅니다.
 
 모든 OpenTelemetry 통합의 전체 목록은 [OpenTelemetry 레지스트리][1]를 참조하세요. 이 레지스트리는 OpenTelemetry 생태계의 수신기, 익스포터 및 기타 구성 요소에 대한 정보를 제공합니다.
 
@@ -25,7 +25,7 @@ Datadog은 지원되는 OpenTelemetry 수신기에서 추가 비용 없이 메�
 
 ## Datadog 지원 OpenTelemetry 통합 {#datadog-supported-opentelemetry-integrations}
 
-Datadog은 다음 OpenTelemetry 통합을 지원합니다.
+Datadog은 다음 OpenTelemetry 통합을 지원합니다. 필요한 통합을 찾지 못하셨나요? [요청해 주세요][21].
 
 ### APM(Application Performance Monitoring) {#apm-application-performance-monitoring}
 
@@ -43,7 +43,7 @@ OpenTelemetry Collector의 상태 및 성능을 모니터링합니다.
 
 ### 컨테이너 및 호스트 {#containers-and-hosts}
 
-컨테이너화된 환경 및 호스트 시스템에 대한 인사이트 확보:
+컨테이너화된 환경 및 호스트 시스템에 대한 인사이트를 확보하세요.
 
 - [Docker 메트릭][5] - Docker 컨테이너 성능을 모니터링합니다.
 - [호스트 메트릭][6] - CPU, 디스크, 메모리 사용량과 같은 시스템 메트릭을 추적합니다.
@@ -74,6 +74,10 @@ OpenTelemetry Collector의 상태 및 성능을 모니터링합니다.
 
 - [Apache Spark 메트릭][13] - Apache Spark 성능 메트릭을 추적합니다.
 
+## 통합 요청 또는 의견 공유 {#request-an-integration-or-share-feedback}
+
+새로운 통합을 요청하거나 기존 통합에 대한 의견을 공유하려면 [OpenTelemetry Integrations Product Preview 양식][21]을 작성해 주세요.
+
 ## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,4 @@ OpenTelemetry Collector의 상태 및 성능을 모니터링합니다.
 [18]: /ko/opentelemetry/integrations/kubernetes_metrics/
 [19]: /ko/opentelemetry/integrations/postgres_metrics/
 [20]: /ko/opentelemetry/integrations/sqlserver_metrics/
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/

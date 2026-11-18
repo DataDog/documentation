@@ -8,3 +8,13 @@ entries:
       - RehydrateArchiveSearch
     title: Add List, Cancel and Rehydrate Archive Search endpoints to the public
       API
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CancelArchiveSearch
+      - CreateArchiveSearch
+      - GetArchiveSearch
+      - ListArchiveSearches
+      - RehydrateArchiveSearch
+    title: Add AI Gateway route permissions and safe editing

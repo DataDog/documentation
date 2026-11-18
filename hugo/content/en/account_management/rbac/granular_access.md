@@ -27,7 +27,7 @@ Use the different principals to control access patterns in your organization and
 | [Dynamic Severity][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Fleet Automation][29]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Fleet Automation][30]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -35,6 +35,7 @@ Use the different principals to control access patterns in your organization and
 | [Logs Pipelines][24]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [OCI Integration Configurations][29]             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Observability Pipelines][23]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -84,4 +85,5 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [26]: /security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
 [27]: /experiments/
 [28]: /incident_response/status_pages/#granular-access-control
-[29]: /agent/fleet_automation/access_control
+[29]: /integrations/oracle_cloud_infrastructure/#limit-edit-access
+[30]: /agent/fleet_automation/access_control

@@ -37,7 +37,7 @@ To set up actions for Kubernetes:
 
 1. Update the settings in your Datadog Cluster Agent configuration to enable both a [Private Action Runner][3] and Kubernetes actions:
 
-   - Enroll the runner as ownerless (`api_key_only_enrollment`). The Private Action Runner must be ownerless because guardrails authorize actions through [Execution Policies][5], which apply only to ownerless runners.
+   - Enroll the runner as ownerless (`api_key_only_enrollment`). The Private Action Runner must be ownerless because guardrails authorize actions through [Execution Policies][5], which authorize private actions only on ownerless runners.
    - Enable Kubernetes Actions (`kubernetesActions`), which grants the Cluster Agent permission to delete pods and to scale, restart, patch, and roll back deployments.
    - Add the actions you want Bits to run to the `actions_allowlist`. The allowlist controls which actions the runner can run. Bits can recommend any of the [supported Kubernetes actions](#supported-kubernetes-actions), but can run only the ones in this allowlist.
 
@@ -256,7 +256,7 @@ When an investigation recommends an infrastructure action:
 [2]: /integrations/amazon_web_services/
 [3]: /actions/private_actions/set_up_agent_based/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /actions/private_actions/execution_policies/
+[5]: /actions/execution_policies/
 [6]: https://app.datadoghq.com/actions/private-action-runners
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
 [8]: /bits_ai/bits_remediation/guardrails/#create-a-guardrail
