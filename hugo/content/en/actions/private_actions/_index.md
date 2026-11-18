@@ -68,6 +68,6 @@ To compare the two models and decide which one applies to your runner, see [Auth
 [2]: /actions/private_actions/set_up_standalone/
 [3]: /actions/private_actions/enroll_runner/
 [4]: /actions/private_actions/authorize_private_actions/
-[5]: /actions/private_actions/execution_policies/
+[5]: /actions/execution_policies/
 [6]: /actions/connections/
 [7]: /actions/private_actions/getting_started/

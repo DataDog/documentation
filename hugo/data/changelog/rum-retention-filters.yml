@@ -1,0 +1,15 @@
+entries:
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41952
+    operations:
+      - CreateExclusionFilter
+      - CreateRetentionFilter
+      - GetPermanentRetentionFilter
+      - GetRetentionFilter
+      - ListPermanentRetentionFilters
+      - ListRetentionFilters
+      - UpdatePermanentRetentionFilter
+      - UpdateRetentionFilter
+    title: Document RUM retention filter metadata and undo created filters in 
+      BDD tests

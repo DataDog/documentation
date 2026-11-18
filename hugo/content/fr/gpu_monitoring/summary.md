@@ -20,6 +20,7 @@ La [GPU Monitoring Summary page][0] analyse l'ensemble de votre parc de GPU et m
 
 Cliquez sur les titres de section ci-dessous pour accéder à la section correspondante :
 - [Usage Across Fleet](#usage-across-fleet)
+- [Fleet Health](#fleet-health)
 - [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
@@ -32,11 +33,11 @@ L'efficacité opérationnelle est un facteur clé du coût global. Comprendre l'
 
 Datadog GPU Monitoring offre une observabilité pour les appareils sur site et dans le cloud au sein d'une vue unique et unifiée.
 
-Cette visualisation présente la répartition de l'ensemble de votre parc de GPU, qu'il soit hébergé chez un grand fournisseur cloud (AWS, GCP, Azure, Oracle Cloud), sur site ou chez un fournisseur de GPUaaS comme Coreweave ou Lambda Labs -- et affiche tous vos clusters Kubernetes, hosts et appareils GPU.
+Cette visualisation présente une répartition en temps réel de l'ensemble de votre parc de GPU, qu'il soit hébergé chez un grand fournisseur cloud (AWS, GCP, Azure, Oracle Cloud), sur site ou chez un fournisseur de GPUaaS comme Coreweave ou Lambda Labs -- et affiche tous vos clusters Kubernetes, hosts et appareils GPU.
 
-L'entonnoir met également en évidence les problèmes de performance ou les inefficacités de provisionnement dans les efforts d'utilisation des ressources de vos équipes, tels que les appareils inactifs, les cœurs GPU sous-utilisés ou la pénurie de ressources nécessitant un rééquilibrage.
+L'entonnoir met également en évidence les problèmes de performance ou les inefficacités de provisionnement, tels que les appareils GPU inactifs ou inefficaces, ainsi que leur évolution d'un mois à l'autre.
 
-{{< img src="gpu_monitoring/funnel-5.jpg" alt="Visualisation en entonnoir intitulée « Votre parc GPU en un coup d'œil ». Affiche le nombre total d'appareils, d'appareils actifs et d'appareils utilisés efficacement, ainsi que l'allocation Kubernetes et l'allocation des appareils au fil du temps, avec une prévision sur une semaine." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="Visualisation en entonnoir intitulée « Votre parc GPU en un coup d'œil ». Affiche la taille du parc par clusters, hosts et appareils ; le nombre d'appareils pour chaque phase de l'entonnoir avec les tendances d'un mois à l'autre ; et l'allocation Kubernetes." style="width:90%;" >}}
 
 Les étapes de l'entonnoir sont définies comme suit :
 - {{< ui >}}Total Devices{{< /ui >}} : nombre d'appareils GPU pour lesquels GPU Monitoring est correctement configuré et qui transmettent des métriques
@@ -45,11 +46,32 @@ Les étapes de l'entonnoir sont définies comme suit :
 
 Si vous utilisez Kubernetes et avez activé l'intégration Kubernetes, vous verrez des informations supplémentaires sur Kubernetes Allocation, qui vous permettront de déterminer combien de vos appareils GPU sont {{< ui >}}Allocated{{< /ui >}} aux charges de travail Kubernetes.
 
-### Device allocation over time {#device-allocation-over-time}
+### Prévision de capacité {#capacity-forecasting}
 
 Les charges de travail IA peuvent subir des pics imprévisibles d'utilisation des ressources. Par conséquent, il est important d'aligner les GPU disponibles avec les charges de travail entrantes. Cette section vous aide à identifier si vous surallouez des GPU qui finissent par rester inactifs, ou si vous sous-provisionnez des ressources qui bloquent des jobs critiques.
 
 Par exemple, si vous constatez un pic dans les valeurs prévisionnelles du nombre d'appareils alloués, vos futures charges de travail pourraient nécessiter des appareils GPU supplémentaires.
+
+L'acquisition de matériel peut être un processus long. Utilisez le widget **Device Allocation Over Time** pour comprendre la demande historique sur la période sélectionnée et prévoir les besoins futurs en capacité.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="Widget « Device Allocation Over Time » montrant, pour la semaine écoulée, le nombre total d'appareils ainsi que le nombre d'appareils alloués, actifs et effectifs, avec une prévision en pointillés pour la semaine à venir, au-delà de l'instant présent." style="width:90%;" >}}
+
+Vous pouvez également utiliser {{< ui >}}Group by{{< /ui >}} pour regrouper l'allocation des appareils par tags tels que cluster, fournisseur, appareil GPU, type d'appareil ou fournisseur cloud. Cela permet de ventiler le nombre total d'appareils ainsi que le nombre d'appareils alloués, actifs et effectifs de votre parc selon ce tag.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Widget « Device Allocation Over Time » regroupé par cluster avec la vue « Active » sélectionnée, affichant un graphique à barres empilées des appareils actifs par cluster sur la semaine écoulée et une liste des principaux clusters par nombre d'appareils actifs." style="width:90%;" >}}
+
+## Fleet Health {#fleet-health}
+
+La section Fleet Health vous permet de repérer d'un coup d'œil les problèmes de santé du matériel sur l'ensemble de votre parc. Vous pouvez effectuer un regroupement par cluster, rack, domaine NVLink ou fournisseur pour visualiser la topologie de l'état du matériel sur la période sélectionnée. Par exemple, si vous effectuez un regroupement par rack, chaque tuile représente un rack et chaque carré dans la tuile représente un host dans ce rack. Cliquez sur n'importe quel host pour afficher ses appareils GPU associés.
+
+La visualisation est colorée en fonction de la gravité de l'erreur XID :
+- Rouge : XID critique
+- Orange : XID non critique
+- Vert : Sain
+
+Grâce à ce code couleur, vous pouvez déterminer si les problèmes matériels sont isolés dans un groupe particulier. Survolez un host pour voir le code d'erreur XID exact.
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="Page Fleet Health regroupée par cluster, affichant une vignette par cluster avec un carré pour chaque host, coloré selon l'état de santé du GPU. Chaque vignette indique le nombre de hosts et de GPU qu'elle contient." style="width:90%;" >}}
 
 ## Cost & Utilization {#cost-utilization}
 

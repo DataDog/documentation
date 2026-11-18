@@ -86,3 +86,12 @@ entries:
       - RemoveCaseInsights
       - UnlinkJiraIssue
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41857
+    operations:
+      - CreateCaseView
+      - GetCaseView
+      - ListCaseViews
+      - UpdateCaseView
+    title: Deprecate np_rule_id on work item views

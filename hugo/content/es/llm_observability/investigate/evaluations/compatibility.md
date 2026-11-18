@@ -7,7 +7,7 @@ title: Compatibilidad del evaluador
 ---
 ## Compatibilidad del evaluador {#evaluator-compatibility}
 
-Los proveedores de LLM de terceros compatibles son OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI y Proveedor personalizado.
+Los proveedores de LLM de terceros compatibles son OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI y Custom Provider.
 
 ### Evaluadores gestionados {#managed-evaluators}
 

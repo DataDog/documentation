@@ -1,19 +1,20 @@
 ---
 aliases:
 - /fr/llm_observability/playground/
-description: Utilisez l'Agent Observability Playground pour tester des invites de
-  manière interactive avec n'importe quel fournisseur de modèle connecté et mener
-  des expériences avec des évaluateurs depuis une interface basée sur un navigateur.
+description: Utilisez l'Agent Observability Playground pour tester des prompts de
+  manière interactive avec n'importe quel fournisseur de modèles connecté et mener
+  des expériences hors ligne avec des évaluateurs depuis une interface basée sur un
+  navigateur.
 further_reading:
-- link: /llm_observability/improve/experiments
+- link: /llm_observability/improve/offline_experiments
   tag: Documentation
-  text: Agent Observability Experiments
+  text: Agent Observability Offline Experiments
 - link: /llm_observability/improve/datasets
   tag: Documentation
   text: Jeux de données
-- link: /llm_observability/improve/experiments/analyzing_results
+- link: /llm_observability/guide/analyzing_experiment_results
   tag: Documentation
-  text: 'Analyse des résultats d''expérience :'
+  text: Analyse des résultats des expériences hors ligne
 title: Playground
 ---
 Le [Playground][1] est une interface basée sur un navigateur pour tester et évaluer les invites LLM. Vous pouvez tester une invite avec une entrée arbitraire auprès de n'importe quel fournisseur de modèle connecté, ou charger un jeu de données, joindre des évaluateurs, prévisualiser les résultats et enregistrer la configuration en tant qu'expérience reproductible, le tout sans écrire de code.
@@ -57,7 +58,7 @@ Modifiez les messages, les valeurs des variables ou les paramètres du modèle, 
 
 {{< img src="llm_observability/playground/playground-experiment-preview.png" alt="Agent Observability Playground en mode expérience avec toutes les étapes complétées et l'option Save and Run as experiment activée. Le tableau de prévisualisation de l'expérience affiche les colonnes OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT et EXPECTEDOUTPUT avec des badges PASS et FAIL par ligne et une bannière récapitulative indiquant que 6 enregistrements sur 20 ont réussi." style="width:100%;" >}}
 
-Utilisez le mode Experiments pour tester votre invite sur un jeu de données, noter les résultats avec des évaluateurs et enregistrer la configuration en tant qu'expérience reproductible.
+Utilisez le mode Offline Experiments pour tester votre prompt sur un jeu de données, noter les résultats avec des évaluateurs et enregistrer la configuration en tant qu'expérience reproductible.
 
 ### Configurez votre invite {#configure-your-prompt}
 
@@ -134,7 +135,7 @@ Dans la boîte de dialogue :
 1. Sélectionnez un {{< ui >}}Project{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Save{{< /ui >}}.
 
-L'expérience s'exécute sur tous les enregistrements du jeu de données — et pas seulement sur l'échantillon d'aperçu de 20 enregistrements. Une fois terminé, affichez les résultats dans [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}}][2].
+L'expérience s'exécute sur tous les enregistrements du jeu de données — et pas seulement sur l'échantillon d'aperçu de 20 enregistrements. Une fois terminé, affichez les résultats dans [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Offline Experiments{{< /ui >}}][2].
 
 ## Pour aller plus loin {#further-reading}
 

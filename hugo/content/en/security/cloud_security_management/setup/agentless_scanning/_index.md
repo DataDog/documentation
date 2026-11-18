@@ -22,7 +22,7 @@ further_reading:
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your AWS, Azure, and GCP cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
-<div class="alert alert-info">Agentless Scanning excludes resources that have the Datadog Agent installed.</div>
+<div class="alert alert-info">Agentless Scanning skips hosts where the Datadog Agent runs with both Cloud Security Vulnerabilities and Misconfigurations enabled. For other hosts with the Agent, Agentless Scanning only covers the features the Agent does not. See <a href="/security/cloud_security_management/troubleshooting/agentless_scanning#hosts-with-the-datadog-agent-are-not-scanned">Troubleshooting</a>.</div>
 
 ## How it works
 

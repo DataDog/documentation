@@ -132,7 +132,7 @@ Vous pouvez modifier les dashboards, le format de rapport, la destination ou la 
 1. Depuis la page Agents, cliquez sur l'agent.
 2. Effectuez vos modifications de l'une des manières suivantes :
    - **Demandez à l'agent** : Décrivez la modification dans le chat. Par exemple : `Add the Checkout Funnel dashboard and send reports on Mondays at 9:00 AM.`
-   - **Modifiez les instructions** : Pour changer les dashboards, le format de rapport ou la destination, cliquez sur le panneau {{< ui >}}Instructions{{< /ui >}} et modifiez les instructions au format Markdown. Pour changer la fréquence, développez le panneau {{< ui >}}Automation{{< /ui >}}.
+   - **Modifiez la configuration** : sur la page Agents, ou depuis un tableau de bord auquel vous êtes abonné, survolez l'Agent et cliquez sur {{< ui >}}Edit{{< /ui >}}. Vous pouvez modifier les tableaux de bord auxquels vous êtes abonné, le format du rapport, la cadence ou la destination.
 
 ### Suspendez ou reprenez un agent {#pause-or-resume-an-agent}
 

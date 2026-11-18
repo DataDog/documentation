@@ -14,9 +14,9 @@ title: React Feature Flags
 ---
 ## 概要 {#overview}
 
-このページでは、Datadog Feature Flags SDK を使用して、React アプリケーションに対して計測機能を組み込む方法を説明します。Datadog Feature Flags は、アプリ内の機能の可用性をリモートで制御し、安全に実験を行い、自信を持って新しいエクスペリエンスを提供するための統一された方法を提供します。
+このページでは、Datadog Feature Flags SDK を使用して React アプリケーションをインスツルメントする方法について説明します。Datadog Feature Flags は、アプリ内の機能の可用性をリモートで制御し、安全に実験を行い、自信を持って新しいエクスペリエンスを提供するための統一された方法を提供します。
 
-React 用 Datadog Feature Flags SDK は、Feature Flags 管理のオープン標準である [OpenFeature][1] 上に構築されています。このガイドでは、SDK のインストール方法、Datadog プロバイダーの設定方法、および React コンポーネントでフラグを評価する方法について説明します。
+React 用 Datadog Feature Flags SDK は、Feature Flag 管理のオープン標準である [OpenFeature][1] 上に構築されています。このガイドでは、SDK のインストール方法、Datadog プロバイダーの設定方法、および React コンポーネントでフラグを評価する方法について説明します。
 
 ## インストール {#installation}
 
@@ -44,7 +44,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sd
 
 ## プロバイダーを初期化する {#initialize-the-provider}
 
-`DatadogProvider` インスタンスを作成し、OpenFeature に登録します。これは、React コンポーネントをレンダリングする前の、アプリケーションの可能な限り早い段階で行ってください。ライブ Browser Feature Flags の構成には、`applicationId`、`clientToken`、`site`、および `env` が必要です。クライアントトークンの作成については、[クライアントトークン][2] を参照してください。
+`DatadogProvider` インスタンスを作成し、OpenFeature に登録します。これは、React コンポーネントをレンダリングする前に、アプリケーションで可能な限り早い段階で行ってください。ライブ Browser Feature Flags の構成には、`applicationId`、`clientToken`、`site`、および `env` が必要です。クライアントトークンの作成については、[クライアントトークン][2] を参照してください。
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags は、選択された <a href="/getting_started/site">Datadog サイト</a> ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>{{< /site-region >}}
 
@@ -86,9 +86,9 @@ OpenFeature.setProvider(provider, evaluationContext);
 
 <div class="alert alert-info"> <code>targetingKey</code> は、パーセンテージベースのターゲティングにおけるランダム化の対象として使用されます。フラグが対象のパーセンテージ (例: 50%) をターゲットにする場合、 <code>targetingKey</code> がどの「バケット」に分類されるかを決定します。同じ <code>targetingKey</code> のユーザーは、特定のフラグに対して常に同じバリアントを受け取ります。</div>
 
-## アプリケーションを {#wrap-your-application} でラップします
+## アプリケーションをラップする {#wrap-your-application}
 
-アプリケーションを `OpenFeatureProvider` コンポーネントでラップします。これにより、React コンテキストを通じてすべての子コンポーネントで Feature Flags が利用可能になります。
+`OpenFeatureProvider` コンポーネントを使用して、アプリケーションをラップします。これにより、React コンテキストを通じてすべての子コンポーネントで Feature Flags が利用可能になります。
 
 {{< code-block lang="jsx" >}}
 import { OpenFeatureProvider } from '@openfeature/react-sdk';
@@ -104,11 +104,11 @@ function App() {
 
 ## フラグを評価する {#evaluate-flags}
 
-OpenFeature React SDK は、コンポーネント内で Feature Flags を評価するためのフックを提供します。各フックは、構成した評価コンテキストに基づいて Feature Flags の値を返します。
+OpenFeature React SDK は、コンポーネント内でフラグを評価するためのフックを提供します。各フックは、構成した評価コンテキストに基づいてフラグの値を返します。
 
 ### ブールフラグ {#boolean-flags}
 
-オン/オフや真/偽の条件を表す Feature Flags には、`useBooleanFlagValue(key, defaultValue)` を使用します。
+オン / オフや真 / 偽の条件を表すフラグには、`useBooleanFlagValue(key, defaultValue)` を使用します。
 
 {{< code-block lang="jsx" >}}
 import { useBooleanFlagValue } from '@openfeature/react-sdk';
@@ -126,7 +126,7 @@ function CheckoutButton() {
 
 ### 文字列フラグ {#string-flags}
 
-複数のバリアントや構成文字列を選択する Feature Flags には、`useStringFlagValue(key, defaultValue)` を使用します。
+複数のバリアントや構成文字列を選択するフラグには、`useStringFlagValue(key, defaultValue)` を使用します。
 
 {{< code-block lang="jsx" >}}
 import { useStringFlagValue } from '@openfeature/react-sdk';
@@ -146,7 +146,7 @@ function ThemedComponent() {
 
 ### 数値フラグ {#number-flags}
 
-制限、パーセンテージ、乗数などの数値 Feature Flags には、`useNumberFlagValue(key, defaultValue)` を使用します。
+制限、パーセンテージ、乗数などの数値フラグには、`useNumberFlagValue(key, defaultValue)` を使用します。
 
 {{< code-block lang="jsx" >}}
 import { useNumberFlagValue } from '@openfeature/react-sdk';
@@ -177,7 +177,7 @@ function Banner() {
 
 ### Suspense のサポート {#suspense-support}
 
-組み込みの [suspense](https://react.dev/reference/react/Suspense) サポートにより、プロバイダーの初期化が完了するまで、またはコンテキストが変更されるまで、Feature Flags を使用するコンポーネントが表示されないようにできます。この機能を使用するには、フックオプションに `{ suspend: true }` を渡します。
+組み込みの [suspense](https://react.dev/reference/react/Suspense) のサポートを使用すると、プロバイダーの初期化が完了するまで、またはコンテキストが変更された場合に、Feature Flags を使用するコンポーネントが表示されないようにできます。この機能を使用するには、フックオプションに `{ suspend: true }` を渡します。
 
 例:
 
@@ -211,7 +211,7 @@ function WelcomeMessage() {
 
 ### フラグ評価の詳細 {#flag-evaluation-details}
 
-Feature Flags の値だけでなく、詳細も必要な場合は、詳細フックを使用します。これらは、評価された値とその評価を説明するメタデータの両方を返します。
+Feature Flags の値だけでなく、詳細が必要な場合は、詳細フックを使用します。これらは、評価された値とその評価を説明するメタデータの両方を返します。
 
 * `useBooleanFlagDetails(key, defaultValue)`
 * `useStringFlagDetails(key, defaultValue)`
@@ -301,24 +301,24 @@ await OpenFeature.setContext({
 
 ## ブラウザプロバイダーオプションを構成する {#configure-browser-provider-options}
 
-React プロバイダーは Datadog ブラウザプロバイダーを使用します。これには以下のオプション設定もサポートされています。
+React プロバイダーは Datadog ブラウザプロバイダーを使用しており、これらのオプション設定もサポートしています。
 
 | オプション | デフォルト | 使用 |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | エクスポージャーイベントをエクスポージャーインテークに送信します。|
+| `trackExposures` | `true` | エクスポージャーイベントをエクスポージャーインテークに送信します。バージョン 2.3.0 以降で利用可能です。非推奨の `enableExposureLogging` オプションを置き換えます。独自のデータストアにエクスポージャーを記録するには、[独自のデータストアに Feature Flag のエクスポージャーを記録する][5] を参照してください。|
 | `enableFlagEvaluationTracking` | `true` | 集計された評価テレメトリを送信します。|
 | `enableRumFeatureFlagTracking` | `true` | Browser RUM が利用可能な場合、RUM イベントにフラグ評価を追加します。このオプションを有効にすると、RUM 課金対象のイベント数が増加する可能性があります。|
 | `flagEvaluationTrackingInterval` | `10000` ms | 評価テレメトリのフラッシュ間隔。|
-| `initialFlagsConfiguration` | unset | フェッチに失敗した場合のフォールバックとして、コンテキストに一致する事前計算済みデータを提供します。[Initial precomputed fallback data][3] を参照してください。|
+| `initialFlagsConfiguration` | 未設定 | 取得に失敗した場合のフォールバックとして、コンテキストに一致する事前計算済みデータを提供します。[初期事前計算済みフォールバックデータ][3] を参照してください。|
 | `flaggingProxy` | 未設定 | プロキシ経由でフラグを取得し、`site` の代わりに使用します。|
 | `customHeaders` | 未設定 | フラグ取得リクエストにヘッダーを追加します。|
 | `overwriteRequestHeaders` | `false` | デフォルトのリクエストヘッダーを `customHeaders` に置き換えます。|
 
-`DatadogProvider` は、React アプリケーションで推奨されるブラウザプロバイダーです。アプリケーション所有の構成配信や、コンテキスト変更全体でのローカルルール評価については、[Browser Rules-Based Evaluation][4] を参照してください。この高度なセットアップでは、明示的な構成の更新と追跡ライフサイクル管理が必要です。
+`DatadogProvider` は、React アプリケーションに推奨されるブラウザプロバイダーです。アプリケーションが所有する構成の配信や、コンテキストの変更全体にわたるローカルルールの評価については、[ブラウザのルールベース評価][4] を参照してください。この高度な設定では、明示的な構成の更新と追跡ライフサイクルの管理が必要です。
 
 ## テスト {#testing}
 
-実際の `DatadogProvider` を使用して専用の Datadog テスト環境でテストするか、OpenFeature の `TypedInMemoryProvider` に置き換えて、テストコード内で直接 Feature Flags の値を制御することができます。このセクションでは、テストを外部から隔離し、オフライン環境でも実行可能なインメモリ方式について説明します。`TypedInMemoryProvider` は `@openfeature/web-sdk` からエクスポートされます。これを開発依存関係としてインストールし、テスト対象のコンポーネントをレンダリングする前に登録してください。
+実際の `DatadogProvider` を使用して専用の Datadog テスト環境に対してテストを行うか、OpenFeature の `TypedInMemoryProvider` に置き換えてテストコード内で Feature Flags の値を直接制御することができます。このセクションでは、テストを外部から隔離し、オフライン環境でも実行可能なインメモリ方式について説明します。`TypedInMemoryProvider` は `@openfeature/web-sdk` からエクスポートされます。開発依存関係としてインストールし、テスト対象のコンポーネントをレンダリングする前に登録します。
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
@@ -333,7 +333,7 @@ await OpenFeature.setProviderAndWait(new TypedInMemoryProvider({
 }));
 {{< /code-block >}}
 
-Web SDK のフラグ形状には、`variants`、`defaultVariant`、および `disabled` が必要です。テストでフラグによってゲートされたコンポーネントが即座にレンダリングされる際のサスペンスレースを回避するには、`setProviderAndWait`(`setProvider`ではなく) を使用してください。Reactツリーをマウントするコンポーネントテスト用に、`@openfeature/react-sdk`は子要素をインメモリプロバイダーでラップする`OpenFeatureTestProvider`コンポーネントもエクスポートします。詳細については、[OpenFeature React SDKのドキュメント](https://openfeature.dev/docs/reference/technologies/client/web/react)を参照してください。
+Web SDK のフラグ形状には、`variants`、`defaultVariant`、および `disabled` が必要です。テストでフラグゲートされたコンポーネントが即座にレンダリングされる際のサスペンスレースを回避するには、`setProvider` ではなく `setProviderAndWait` を使用します。React ツリーをマウントするコンポーネントテストの場合、`@openfeature/react-sdk` は子要素をインメモリプロバイダーでラップする `OpenFeatureTestProvider` コンポーネントもエクスポートします。詳細については、[OpenFeature React SDK ドキュメント](https://openfeature.dev/docs/reference/technologies/client/web/react) を参照してください。
 
 ## 参考資料 {#further-reading}
 
@@ -343,3 +343,4 @@ Web SDK のフラグ形状には、`variants`、`defaultVariant`、および `di
 [2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: /ja/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /ja/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /ja/feature_flags/guide/record_exposures_in_your_own_data_store/

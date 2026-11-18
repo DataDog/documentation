@@ -219,6 +219,10 @@ if maintenance_mode
 end
 ```
 
+## Record exposures in your own data store
+
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][13] for minimum SDK requirements and other details.
+
 ## Advanced configuration
 
 `DD_SERVICE` and `DD_VERSION` add service and application version information. They are optional for receiving flag configuration. The environment selects the flag configuration.
@@ -399,3 +403,4 @@ Before the first valid configuration, evaluations return caller-provided default
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
 [12]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[13]: /feature_flags/guide/record_exposures_in_your_own_data_store/

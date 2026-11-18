@@ -43,7 +43,7 @@ Si aún no lo ha hecho, instale la [integración de Datadog-Azure][5] para recop
    Datadog recomienda fijar las versiones de los paquetes y actualizar regularmente a las versiones más recientes tanto de `@datadog/serverless-compat` como de `dd-trace` para asegurarse de tener acceso a mejoras y correcciones de errores.
 
 2. **Inicie la capa de compatibilidad Serverless de Datadog e inicialice el SDK de Node.js de Datadog**.
-   
+
    Utilice la opción `--require` para cargar e inicializar la capa de compatibilidad Serverless y el SDK de Node.js de Datadog en un solo paso. Las opciones de Node en Azure Functions se pueden configurar con la variable de entorno `languageWorkers__node__arguments`.
 
    ```
@@ -206,6 +206,76 @@ Si aún no lo ha hecho, instale la [integración de Datadog-Azure][5] para recop
    | `DD_ENV` | Cómo desea etiquetar su entorno para [Unified Service Tagging][7]. Por ejemplo, `prod`. |
    | `DD_SERVICE` | Cómo desea etiquetar su servicio para [Unified Service Tagging][7].  |
    | `DD_VERSION` | Cómo desea etiquetar su versión para [Unified Service Tagging][7]. |
+
+## Durable Functions {#durable-functions}
+
+Para habilitar la instrumentación de Durable Functions, agregue la siguiente configuración a su archivo `host.json`:
+
+<!-- vale off -->
+{{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
+{{< programming-lang lang="nodejs" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+```json
+{
+  "telemetryMode": "OpenTelemetry",
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+<!-- vale on -->
 
 ## ¿Qué sigue? {#whats-next}
 

@@ -4,12 +4,11 @@ aliases:
 - /es/tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 - /es/tracing/visualization/
 description: Aprenda la terminología esencial de APM, incluyendo servicios, recursos,
-  trazas, tramos, instrumentación y otros conceptos clave para el seguimiento distribuido
-  de trazas.
+  trazas, tramos, instrumentación y otros conceptos clave para el trazado distribuido.
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Aprenda a configurar el seguimiento de trazas de APM en su aplicación
+  text: Aprenda a configurar el trazado de APM con su aplicación
 - link: /internal_developer_portal/catalog/
   tag: Documentación
   text: Descubra y catalogue los servicios que reportan a Datadog
@@ -24,24 +23,24 @@ further_reading:
   text: Aprenda a leer una traza en Datadog
 - link: /monitors/types/apm/
   tag: Documentación
-  text: Obtenga información sobre los monitores de APM
+  text: Aprenda sobre los monitores de APM
 title: Términos y conceptos de APM
 ---
 {{< jqmath-vanilla >}}
 
 ## Descripción general {#overview}
 
-La interfaz de usuario de APM ofrece muchas herramientas para solucionar problemas de rendimiento de las aplicaciones y correlacionarlos en todo el producto, lo que le permite encontrar y resolver problemas en sistemas distribuidos.
+La interfaz de usuario de APM proporciona muchas herramientas para solucionar problemas de rendimiento de la aplicación y correlacionarlos en todo el producto, lo que le permite encontrar y resolver problemas en sistemas distribuidos.
 
 Para obtener definiciones y descripciones adicionales de términos importantes de APM como _tramos_ y _indexado_, consulte el [Glosario principal][22]. 
 
 | Concepto                         | Descripción                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Servicio](#services)            | Los servicios son los componentes básicos de las arquitecturas de microservicios modernas; en términos generales, un servicio agrupa puntos de conexión, consultas o trabajos con el fin de crear su aplicación.                                  |
-| [Recurso](#resources)          | Los recursos representan un dominio particular de la aplicación de un cliente; por lo general, son un punto de conexión web instrumentado, una consulta de base de datos o un trabajo en segundo plano.                                                              |
-| [Monitores][23]                   | Los monitores de métricas de APM funcionan como los monitores de métricas regulares, pero con controles diseñados específicamente para APM. Utilice estos monitores para recibir alertas a nivel de servicio sobre solicitudes recibidas, errores y diversas medidas de latencia. |
-| [Traza](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo que dedica una aplicación a procesar una solicitud y del estado de esta solicitud. Cada traza consta de uno o más tramos.                                                             |
-| [Propagación del contexto de trazas](#trace-context-propagation)| El método para transmitir identificadores de trazas entre servicios, lo que permite a Datadog unir tramos individuales en una traza distribuida completa. |
+| [Servicio](#services)            | Los servicios son los componentes básicos de las arquitecturas de microservicios modernas; en términos generales, un servicio agrupa puntos de conexión, consultas o trabajos con el fin de construir su aplicación.                                  |
+| [Recurso](#resources)          | Los recursos representan un dominio particular de una aplicación del cliente; por lo general, son un punto de conexión web instrumentado, una consulta de base de datos o un trabajo en segundo plano.                                                              |
+| [Monitors][23]                   | Los monitores de métricas de APM funcionan como los monitores de métricas regulares, pero con controles diseñados específicamente para APM. Utilice estos monitores para recibir alertas a nivel de servicio sobre solicitudes, errores y una variedad de medidas de latencia. |
+| [Traza](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo que dedica una aplicación a procesar una solicitud y el estado de esta solicitud. Cada traza consta de uno o más tramos.                                                             |
+| [Propagación del contexto de trazas](#trace-context-propagation)| El método para pasar identificadores de traza entre servicios, lo que permite a Datadog unir tramos individuales en una traza distribuida completa. |
 | [Filtros de retención](#retention-filters) | Los filtros de retención son controles basados en etiquetas configurados dentro de la interfaz de usuario de Datadog que determinan qué tramos indexar en Datadog durante 15 días.                                                                                              |
 | [Controles de ingesta](#ingestion-controls) | Los controles de ingesta se utilizan para enviar hasta el 100 % de las trazas a Datadog para búsqueda y análisis en tiempo real durante 15 minutos.
 | [Instrumentación](#instrumentation) | La instrumentación es el proceso de agregar código a su aplicación para capturar y reportar datos de observabilidad. |
@@ -55,7 +54,7 @@ Después de [instrumentar su aplicación][3], el [Catalog][4] es su página de i
 
 Los servicios son los componentes básicos de las arquitecturas de microservicios modernas; en términos generales, un servicio agrupa puntos de conexión, consultas o trabajos con el fin de escalar instancias. Algunos ejemplos:
 
-* Un grupo de puntos de conexión de URL puede agruparse bajo un servicio de API.
+* Un grupo de puntos de conexión URL puede agruparse bajo un servicio de API.
 * Un grupo de consultas de base de datos que se agrupan dentro de un servicio de base de datos.
 * Un grupo de trabajos periódicos configurados en el servicio crond.
 
@@ -73,7 +72,7 @@ Todos los servicios se pueden encontrar en el [Catalog][4] y representarse visua
 
 ## Recursos {#resources}
 
-Los recursos representan un dominio particular de una aplicación del cliente. Por lo general, podrían ser un punto de conexión web instrumentado, una consulta de base de datos o un trabajo en segundo plano. Para un servicio web, estos recursos pueden ser puntos de conexión web dinámicos que se agrupan por un nombre de tramo estático:  `web.request`. En un servicio de base de datos, estas serían consultas de base de datos con el nombre de tramo `db.query`. Por ejemplo, el servicio `web-store` tiene recursos instrumentados automáticamente (puntos de conexión web) que manejan pagos, actualización de carritos, adición de artículos, etcétera. Un nombre de recurso puede ser el método HTTP y la ruta HTTP, por ejemplo `GET /productpage` o `ShoppingCartController#checkout`. 
+Los recursos representan un dominio particular de una aplicación del cliente. Por lo general, podrían ser un punto de conexión web instrumentado, una consulta de base de datos o un trabajo en segundo plano. Para un servicio web, estos recursos pueden ser puntos de conexión web dinámicos que se agrupan por un nombre de tramo estático: `web.request`. En un servicio de base de datos, estas serían consultas de base de datos con el nombre de tramo `db.query`. Por ejemplo, el servicio `web-store` tiene recursos instrumentados automáticamente (puntos de conexión web) que gestionan procesos de compra, actualizaciones de carritos, adiciones de artículos, etcétera. Un nombre de recurso puede ser el método HTTP y la ruta HTTP, por ejemplo `GET /productpage` o `ShoppingCartController#checkout`. 
 
 Cada recurso tiene su propia [Resource page][7] con [métricas de traza][15] limitadas al punto de conexión específico. Las métricas de traza se pueden usar como cualquier otra métrica de Datadog: se pueden exportar a un dashboard o usar para crear monitores. La Resource page también muestra el widget de resumen de tramo con una vista agregada de [tramos][21] para todas las [trazas](#trace), la distribución de latencia de las solicitudes y las trazas que muestran las solicitudes realizadas a este punto de conexión.
 
@@ -81,13 +80,13 @@ Cada recurso tiene su propia [Resource page][7] con [métricas de traza][15] lim
 
 ## Traza {#trace}
 
-Una traza se utiliza para realizar un seguimiento del tiempo que dedica una aplicación a procesar una solicitud y el estado de esta. Cada traza consta de uno o más tramos. Durante el ciclo de vida de la solicitud, puede ver llamadas distribuidas entre servicios (debido a que un [ID de traza se inyecta/extrae a través de encabezados HTTP][8]), [bibliotecas instrumentadas automáticamente][3] y [instrumentación manual][9] utilizando herramientas de código abierto como [OpenTracing][10] en la vista de gráfico de llama. En la página Trace View, cada traza recopila información que la conecta con otras partes de la plataforma, incluyendo [conectar registros a trazas][11], [agregar etiquetas a tramos][12] y [recopilar métricas de tiempo de ejecución][13].
+Una traza se utiliza para realizar un seguimiento del tiempo que dedica una aplicación a procesar una solicitud y el estado de esta solicitud. Cada traza consta de uno o más tramos. Durante el tiempo de vida de la solicitud, puede ver llamadas distribuidas entre servicios (debido a que un [ID de traza se inyecta y extrae a través de encabezados HTTP][8]), [bibliotecas instrumentadas automáticamente][3] y [instrumentación manual][9] utilizando herramientas de código abierto como [OpenTracing][10] en la vista de gráfico de llama. En la página Trace View, cada traza recopila información que la conecta con otras partes de la plataforma, incluyendo [conectar registros a trazas][11], [agregar etiquetas a tramos][12] y [recopilar métricas de tiempo de ejecución][13].
 
 {{< img src="tracing/visualization/trace_view.png" alt="Trace View" >}}
 
 ## Propagación del contexto de trazas {#trace-context-propagation}
 
-La propagación del contexto de trazas es el método para pasar identificadores de traza entre servicios en un sistema distribuido. Permite a Datadog unir tramos individuales de diferentes servicios en una única traza distribuida. La propagación del contexto de trazas funciona inyectando identificadores, como el ID de traza y el ID de tramo principal, en los encabezados HTTP a medida que la solicitud fluye a través del sistema. El servicio descendente extrae entonces estos identificadores y continúa la traza. Esto permite a Datadog reconstruir la ruta completa de una solicitud a través de múltiples servicios.
+La propagación del contexto de trazas es el método para pasar identificadores de traza entre servicios en un sistema distribuido. Permite a Datadog unir tramos individuales de diferentes servicios en una única traza distribuida. La propagación del contexto de trazas funciona inyectando identificadores, como el ID de traza y el ID de tramo padre, en los encabezados HTTP a medida que la solicitud fluye a través del sistema. El servicio descendente extrae entonces estos identificadores y continúa la traza. Esto permite a Datadog reconstruir la ruta completa de una solicitud a través de múltiples servicios.
 
 Para obtener más información, consulte [propagación del contexto de trazas][27] para el lenguaje de su aplicación.
 
@@ -107,13 +106,13 @@ Puede instrumentar automáticamente su aplicación cuando instala el Datadog Age
 
 Puede utilizar instrumentación personalizada integrando código de rastreo directamente en el código de su aplicación. Esto le permite crear, modificar o eliminar programáticamente trazas para enviarlas a Datadog.
 
-Para obtener más información, lea [Instrumentación de aplicaciones][26].
+Para obtener más información, lea [Application Instrumentation][26].
 
 ## Baggage {#baggage}
 
-Baggage le permite propagar pares clave-valor (también conocidos como elementos de baggage) a través de los límites de los servicios en un sistema distribuido. A diferencia del contexto de traza, que se centra en los identificadores de traza, baggage permite transmitir datos de negocio y otra información contextual junto con las trazas.  
+Baggage le permite propagar pares clave-valor (también conocidos como elementos de baggage) a través de los límites de los servicios en un sistema distribuido. A diferencia del contexto de traza, que se centra en los identificadores de traza, baggage permite la transmisión de datos empresariales y otra información contextual junto con las trazas.  
 
-Para obtener más información, lea los [formatos de propagación][28] compatibles con el lenguaje de su aplicación.
+Para obtener más información, lea los [formatos de propagación][28] admitidos para el lenguaje de su aplicación.
 
 ## Lecturas adicionales {#further-reading}
 
@@ -133,7 +132,7 @@ Para obtener más información, lea los [formatos de propagación][28] compatibl
 [13]: /es/tracing/metrics/runtime_metrics/
 [14]: /es/tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /es/tracing/metrics/metrics_namespace/
-[16]: https://app.datadoghq.com/metric/summary
+[16]: https://app.datadoghq.com/metric/catalog
 [17]: https://app.datadoghq.com/monitors/create
 [18]: /es/tracing/trace_explorer/query_syntax/#facets
 [19]: /es/tracing/trace_pipeline/trace_retention/#retention-filters
