@@ -199,7 +199,9 @@ Key features are covered below, but for full details, see [the generated documen
 - [`buildFiltersManifest()`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
 - [`pruneManifestForClient()`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
 
-`loadCustomizationConfig()` reads the configuration from disk, so call it at build time. `buildFiltersManifest()` and `resolveFilters()` take the configuration as data, so a server can resolve filters from a config generated at build time, without access to the file system. To keep the YAML loader out of a server bundle, import them individually: `import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest"`.
+`loadCustomizationConfig()` reads the configuration from disk, so call it at build time. It isn't exported from the package root, so that importing from `cdocs-data` never bundles the file system or the YAML parser. Import it by subpath: `import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig"`.
+
+`buildFiltersManifest()` and `resolveFilters()` take the configuration as data, so a server can resolve filters from a config generated at build time, without access to the file system.
 
 ### Shared (compilation + browser) functions
 

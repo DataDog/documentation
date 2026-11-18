@@ -51,7 +51,9 @@ export {
 } from './schemas/customizationConfig.js';
 
 // Compilation utilities --------------------------------------------
-export { loadCustomizationConfig } from './api/compilation/loadCustomizationConfig.js';
+// `loadCustomizationConfig` reads YAML from disk, so it's exported only as
+// the `cdocs-data/loadCustomizationConfig` subpath, to keep it out of any
+// bundle that imports from the package root.
 export { buildFiltersManifest } from './api/compilation/buildFiltersManifest.js';
 export { pruneManifestForClient } from './api/compilation/pruneManifestForClient.js';
 

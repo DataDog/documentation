@@ -6,7 +6,9 @@
 import { describe, test, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { Frontmatter, loadCustomizationConfig } from '../../src';
+import * as rootExports from '../../src';
+import { Frontmatter } from '../../src';
+import { loadCustomizationConfig } from '../../src/api/compilation/loadCustomizationConfig';
 import { buildFiltersManifest } from '../../src/api/compilation/buildFiltersManifest';
 import { resolveFilters } from '../../src/api/shared/resolveFilters';
 
@@ -19,6 +21,10 @@ const CUSTOMIZATION_CONFIG_DIR = path.join(
 
 // The subpath exports a server uses to resolve filters
 const SERVER_SUBPATHS = ['./buildFiltersManifest', './resolveFilters'];
+
+// Entries that must not reach the file system: the server subpaths, and the
+// root entry, so that importing from `cdocs-data` never bundles the loader
+const FILESYSTEM_FREE_ENTRIES = ['.', ...SERVER_SUBPATHS];
 
 // Modules that read the file system or parse YAML
 const FILESYSTEM_MODULES = ['fs', 'path', 'js-yaml'];
@@ -71,11 +77,19 @@ describe('Resolving filters from config passed as data', () => {
     }
   });
 
-  test('server subpath exports do not import file system modules', () => {
+  test('exposes the YAML loader only as its own subpath export', () => {
     const packageJson = JSON.parse(
       fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
     );
-    for (const subpath of SERVER_SUBPATHS) {
+    expect(packageJson.exports['./loadCustomizationConfig']).toBeDefined();
+    expect(rootExports).not.toHaveProperty('loadCustomizationConfig');
+  });
+
+  test('the root and server exports do not import file system modules', () => {
+    const packageJson = JSON.parse(
+      fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
+    );
+    for (const subpath of FILESYSTEM_FREE_ENTRIES) {
       const entryPath = path.join(PACKAGE_DIR, packageJson.exports[subpath].import);
       const bareImports = collectBareImports(entryPath);
       const filesystemImports = bareImports.filter(
