@@ -5,6 +5,40 @@ description: Troubleshoot Database Monitoring setup for SQL Server
 
 This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
+## Validate your setup with the Agent diagnose command {#agent-diagnose}
+
+Starting with Agent v7.81.0, the SQL Server integration validates your setup through the Agent [`diagnose` command][15]. For each configured instance, the diagnostics check:
+
+- The connection to SQL Server
+- That the configured ODBC driver is installed
+- That the SQL Server version is supported
+- The permissions that Database Monitoring requires, including `VIEW SERVER STATE`, `CONNECT ANY DATABASE`, `VIEW ANY DEFINITION`, access to each monitored database, and `SELECT` on `msdb`
+
+Run the `check-datadog` diagnose suite:
+
+{{< tabs >}}
+{{% tab "Windows" %}}
+
+From an elevated PowerShell prompt:
+
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" diagnose --include check-datadog
+```
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+```shell
+sudo datadog-agent diagnose --include check-datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+By default, the command runs the diagnostics inside the running Agent service, as the Agent's service account. This makes it the recommended way to test [Windows Authentication](#login-failed-for-user), because `agent.exe check sqlserver` connects as the logged-in user instead.
+
+**Note**: If the command cannot reach the Agent service, it prints `Error running diagnose in Agent process` and runs the diagnostics as the current user. The `--local` flag also runs them as the current user. In both cases, the results do not reflect the Agent service account's access.
+
 ## Diagnosing common connection issues {#common-connection-issues}
 
 ### SQL Server unable to connect 'Login Failed for user' {#login-failed-for-user}
@@ -36,7 +70,7 @@ sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
-If the `datadog` user is unable to log in to the SQL Server instance, verify the user has been created and given the proper permissions according the [setup documentation][1]. Windows Authentication is supported when the Agent connects to a SQL Server instance running on the same host as the Agent.
+If the `datadog` user is unable to log in to the SQL Server instance, verify the user has been created and given the proper permissions according the [setup documentation][1]. To test the connection and permissions as the Agent's service account, run the [Agent diagnose command](#agent-diagnose). Windows Authentication is supported when the Agent connects to a SQL Server instance running on the same host as the Agent.
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 
@@ -378,3 +412,4 @@ Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: /agent/configuration/agent-commands/#other-commands
