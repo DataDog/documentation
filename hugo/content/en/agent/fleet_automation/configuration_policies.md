@@ -23,11 +23,13 @@ A policy adds to the existing local configuration on each Agent. If a policy set
 
 ## Prerequisites
 
-- [Remote Configuration][6] enabled for your organization and the Agent's API key
-- [Remote updates][7] enabled on each target VM Agent (`remote_updates: true`)
+- [Remote Configuration][6] enabled for your organization and for the API key your Agents use. Both are enabled by default.
+- [Remote updates][7] enabled on each target VM Agent (`remote_updates: true`).
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][8].
-- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
-- The `<TODO>` permission
+- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
+- The `Agent Configuration Management` permission.
+
+Configuration policies don't support Agents in Kubernetes.
 
 ## Create a configuration policy
 
