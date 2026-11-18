@@ -98,30 +98,35 @@ You can configure Incident Management to push all incident Microsoft Teams meeti
 
 The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
 
-### Meeting summaries
+### Meeting summaries and transcripts {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings.
+Incident AI can generate summaries of incident Microsoft Teams meetings and optionally save live meeting transcripts in Datadog notebooks.
 
-<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion</a> in Meeting Summaries and Transcripts.</div>
 
-AI features must be enabled for your organization before the Datadog Transcriber can join meetings.
+#### Prerequisites
 
-To enable meeting summaries for incident Microsoft Teams meetings:
+- AI features must be enabled for your organization.
+- You must use an account with permission to edit incident settings.
+- To save live meeting transcripts, your organization must have access to live meeting transcripts. If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][7].
+
+#### Enable meeting summaries and transcripts
+
+To enable meeting summaries and transcripts for incident Microsoft Teams meetings:
 
 1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
 4. Toggle on **Generate AI meeting summaries**.
-5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
-6. Save your settings.
+5. (Optional) To save live meeting transcripts, toggle on **Generate meeting transcripts**, which appears under **Generate AI meeting summaries**.
+6. (Optional) Add conditions to prevent summarization for specific incidents.
+7. Save your settings.
 
-When a Microsoft Teams meeting attached to an incident starts, a Datadog Transcriber attempts to join. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin.
-
-For details on where summaries are posted, reviewing summaries, and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
+To review summaries, view transcripts, manage transcript notebook access, and re-invite the transcriber, see [Meeting Summaries and Transcripts][8].
 
 ## Using the Datadog tab in Microsoft Teams
 
@@ -156,4 +161,5 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
-[7]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+[7]: /help/
+[8]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts

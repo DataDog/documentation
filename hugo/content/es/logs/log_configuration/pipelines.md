@@ -338,58 +338,66 @@ Se muestran métricas de uso estimadas para cada pipeline. Esto muestra el volum
 ## Auto-Processing {#auto-processing}
 <!-- vale Datadog.headings = YES -->
 
-{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="Auto-Processing está en Preview" >}}
-Complete el formulario para solicitar acceso.
-{{< /callout >}}
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">Auto-Processing no está disponible para su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-Auto-Processing analiza los registros de su aplicación personalizada y extrae atributos principales, incluidos la marca de tiempo, el estado, el servicio, el ID de traza y el ID de tramo. Le ayuda a buscar, filtrar y correlacionar registros sin configurar manualmente el parseo.
+Auto-Processing analiza los registros de su aplicación personalizada y extrae atributos principales, incluidos la marca de tiempo, el estado, el ID de traza y el ID de tramo. Le ayuda a buscar, filtrar y correlacionar registros sin configurar manualmente los pipelines.
 
-Auto-Processing solo maneja registros que no coinciden con el filtro de ninguna integración existente o pipeline personalizado. Si un registro coincide con el filtro de un pipeline existente, Auto-Processing no lo procesa, incluso si ese pipeline no modifica el registro. Sus configuraciones de Pipelines existentes permanecen sin cambios.
+Auto-Processing solo maneja registros que no coinciden con el filtro de ninguna integración o pipeline personalizado. Si un registro coincide con el filtro de un pipeline, Auto-Processing no lo procesa, incluso si ese pipeline no modifica el registro. Sus configuraciones de Pipelines existentes permanecen sin cambios.
 
-### Cómo funciona {#how-it-works}
+<div class="alert alert-warning">Si el filtro de un pipeline coincide con todos los registros (por ejemplo, <code>*</code>), Auto-Processing no procesa ningún registro en su organización. Para usar Auto-Processing, limite el filtro de ese pipeline a los registros que necesita procesar.</div>
 
-Datadog agrupa los registros admitidos por fuente y servicio y crea entradas de Auto-Processing para ellos. Datadog actualiza automáticamente las entradas para admitir nuevos patrones de registro sin cambiar la forma en que se parsean los patrones admitidos anteriormente.
+### Cómo se crean las entradas {#how-entries-are-created}
 
-[Revise las transformaciones](#review-transformations) y [controle qué entradas procesan sus registros](#enable-or-disable-an-entry). [Cambie una entrada a un pipeline manual](#switch-to-a-manual-pipeline) para personalizar su configuración.
+Datadog agrupa los registros admitidos en entradas de Auto-Processing. Cada entrada cubre un par de fuente y servicio. Por ejemplo, los registros con `source:storefront` y `service:catalog-api` forman una entrada. A medida que aparecen nuevos patrones de registro, Datadog actualiza las entradas para admitirlos sin cambiar la forma en que se parsean los patrones admitidos anteriormente. Los atributos ya extraídos mantienen sus nombres, por lo que las facetas, los tableros y los monitores que los utilizan siguen funcionando.
 
-<!-- vale Datadog.headings = NO -->
-### Configure Auto-Processing {#configure-auto-processing}
-<!-- vale Datadog.headings = YES -->
+Datadog crea una entrada para un nuevo par de fuente y servicio aproximadamente 15 minutos después de recibir los primeros registros para ese par. El par debe tener al menos 1,000 registros indexados en las últimas 24 horas. Los registros descartados por [filtros de exclusión][15] no cuentan para este umbral. Si el volumen está por debajo del umbral, Datadog vuelve a verificar aproximadamente 12 horas después. Si el volumen sigue estando por debajo del umbral, Datadog no crea una entrada hasta que aparezca un nuevo patrón de registro para ese par.
 
-Vaya a la página [{{< ui >}}Processing{{< /ui >}}][8] y seleccione la pestaña {{< ui >}}Auto-Processing{{< /ui >}}.
+Cada organización puede tener hasta 100 entradas de Auto-Processing. Si su organización ya envía registros cuando activa Auto-Processing, Datadog crea entradas para hasta 100 pares de fuente y servicio. Datadog selecciona los pares que procesarían la mayor cantidad de registros. Después de eso, Datadog crea entradas para nuevos pares a medida que llegan sus registros, hasta que la organización tenga 100 entradas.
 
-#### Active o desactive Auto-Processing {#turn-auto-processing-on-or-off}
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="La pestaña Auto-Processing en la página Processing, que enumera las entradas por fuente y servicio con el número de atributos parseados, el uso y un interruptor de habilitación para cada entrada" style="width:100%;" >}}
 
-Utilice el interruptor de función para activar o desactivar Auto-Processing para su organización.
+### Active o desactive Auto-Processing {#turn-auto-processing-on-or-off}
 
-#### Elija cómo se habilitan las nuevas entradas {#choose-how-new-entries-are-enabled}
+Para las organizaciones creadas el 2026-11-04 o después, Auto-Processing está activado de forma predeterminada y las nuevas entradas se habilitan automáticamente. Para las organizaciones creadas antes del 2026-11-04, Auto-Processing está desactivado de forma predeterminada.
 
-Cuando Auto-Processing esté activado, elija si las nuevas entradas se habilitan automáticamente:
+En la [página {{< ui >}}Processing{{< /ui >}}][8], seleccione la pestaña {{< ui >}}Auto-Processing{{< /ui >}} y utilice el interruptor de función para activar o desactivar Auto-Processing para su organización.
+
+### Elija cómo se habilitan las nuevas entradas {#choose-how-new-entries-are-enabled}
+
+En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, elija si las nuevas entradas se habilitan automáticamente:
 
 - **Habilitar automáticamente nuevas entradas**: Las nuevas entradas se habilitan al crearse y comienzan a procesar los registros entrantes que coincidan.
-- **Revisar nuevas entradas antes de habilitar**: Las nuevas entradas se deshabilitan al crearse. Revise sus transformaciones y luego habilite las que desee utilizar.
+- **Revisar nuevas entradas antes de habilitar**: Las nuevas entradas se deshabilitan al crearse. [Revise sus transformaciones](#review-transformations) y luego habilite las que desee utilizar.
 
 ### Revisar transformaciones {#review-transformations}
 
-1. En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, busque la fuente y el servicio que desea revisar.
-2. Seleccione {{< ui >}}View Transformations{{< /ui >}}.
-3. Seleccione un patrón de registro e inspeccione registros de ejemplo para comparar sus atributos originales y procesados.
+1. En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, busque el par de fuente y servicio que desea revisar.
+2. Haga clic en {{< ui >}}View Transformations{{< /ui >}}.
+3. Haga clic en un patrón de registro.
+4. Inspeccione los registros de ejemplo para comparar sus atributos originales y procesados.
 
 ### Habilitar o deshabilitar una entrada {#enable-or-disable-an-entry}
 
-En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, use el interruptor de una entrada para habilitar o deshabilitar el procesamiento para esa fuente y servicio. Deshabilitar una entrada solo afecta a los registros futuros. Los registros que ya se procesaron no cambian.
+En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, use el interruptor de una entrada para habilitar o deshabilitar el procesamiento para ese par de fuente y servicio. Deshabilitar una entrada solo afecta a los registros futuros. Los registros que ya se procesaron no cambian.
 
 ### Cambiar a un pipeline manual {#switch-to-a-manual-pipeline}
 
-Para personalizar el parseo o los nombres de los atributos, haga clic en {{< ui >}}Switch to manual pipeline{{< /ui >}} en la página {{< ui >}}View Transformations{{< /ui >}}.
+Para personalizar el parseo o los nombres de los atributos, haga clic en {{< ui >}}Switch to manual pipeline{{< /ui >}} en la página {{< ui >}}View Transformations{{< /ui >}}. Datadog crea un pipeline personalizado con el mismo filtro y procesadores, y elimina la entrada de Auto-Processing para ese par de fuente y servicio.
 
-Después de cambiar, usted administra la configuración del pipeline y cualquier actualización futura.
+Después de cambiar:
+
+- El pipeline aparece en su lista de Pipelines y parsea los registros de la misma manera. Los nombres de los atributos permanecen iguales, por lo que las facetas, los tableros y los monitores existentes siguen funcionando.
+- Datadog ya no actualiza el pipeline cuando aparecen nuevos patrones de registro. Usted gestiona su configuración a partir de ese momento.
+- Debido a que el filtro del pipeline coincide con estos registros, Auto-Processing ya no los procesa.
+
+Para volver a Auto-Processing, elimine el pipeline manual. Datadog crea entonces una nueva entrada para ese par de fuente y servicio después de que sus registros cumplan con los [requisitos de creación de entradas](#how-entries-are-created). La nueva entrada se genera desde cero y no restaura su entrada anterior ni sus ediciones.
 
 ### Limitaciones {#limitations}
 
-- Cada organización puede tener hasta 100 entradas de Auto-Processing.
-- Es posible que algunos patrones de registro nuevos permanezcan sin parsear, incluso para una fuente y un servicio que Auto-Processing ya cubre.
-- No puede personalizar el parseo ni cambiar el nombre de los atributos dentro de una entrada de Auto-Processing. Cambie a un pipeline manual para realizar estos cambios.
+- Cada organización puede tener hasta 100 entradas de Auto-Processing. Datadog no procesa registros de pares de fuente y servicio que excedan este límite. Para obtener más detalles, consulte [Cómo se crean las entradas](#how-entries-are-created).
+- Es posible que algunos patrones de registro permanezcan sin parsear, incluso para un par de fuente y servicio que Auto-Processing ya cubre.
 
 ## Lecturas adicionales {#further-reading}
 
@@ -412,3 +420,4 @@ Después de cambiar, usted administra la configuración del pipeline y cualquier
 [12]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [14]: /es/api/latest/restriction-policies/
+[15]: /es/logs/log_configuration/indexes/#exclusion-filters

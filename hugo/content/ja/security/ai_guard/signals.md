@@ -1,17 +1,18 @@
 ---
+description: AI Guard 評価の検知ルールを作成し、生成されたシグナルを調査して、AI Guard のアクティビティについてアラートを送信します。
 further_reading:
 - link: /security/ai_guard/
   tag: ドキュメント
   text: AI Guard
-- link: /security/ai_guard/onboarding/
+- link: /security/ai_guard/setup/
   tag: ドキュメント
-  text: AI Guard を始める
+  text: AI Guard のセットアップ
 - link: /security/detection_rules/
   tag: ドキュメント
   text: 検出ルール
-title: AI Guard セキュリティシグナル
+title: AI Guard シグナルのトリアージと調査
 ---
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard は {{< region-param key="dd_site_name" >}} サイトでは利用できません。</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard は {{< region-param key="dd_site_name" >}} サイトでは利用できません。</div>
 {{< /site-region >}}
 
 AI Guard セキュリティシグナルは、AI Guard がアプリケーション内で検出した脅威や攻撃を可視化します。これらのシグナルは [AAP (Application and API Protection) セキュリティシグナル][1]を基に構成され、Datadog のセキュリティモニタリングワークフローに統合されています。
@@ -55,38 +56,30 @@ AI Guard 検出ルールを作成するには、次のようにします。
          <td>特定の攻撃タイプをターゲットに設定します。</td>
          <td>
            <ul>
-             <li><code>jailbreak</code></li>
-             <li><code>indirect-prompt-injection</code></li>
-             <li><code>destructive-tool-call</code></li>
-             <li><code>denial-of-service-tool-call</code></li>
-             <li><code>security-exploit</code></li>
-             <li><code>authority-override</code></li>
-             <li><code>role-play</code></li>
-             <li><code>instruction-override</code></li>
-             <li><code>obfuscation</code></li>
-             <li><code>system-prompt-extraction</code></li>
-             <li><code>data-exfiltration</code></li>
+             <li><a href="/security/ai_guard/#attack-categories">攻撃カテゴリータグ</a></li>
+             <li><code>tool-blocked</code> および <code>tool-allowed</code>(ツールポリシーによって追加)</li>
+             <li><code>regexp-blocked</code>(カスタムルールによって追加)</li>
            </ul>
          </td>
        </tr>
        <tr>
          <td><code>@ai_guard.blocked</code></td>
-         <td>トレース内のアクションがブロックされたかどうかに基づいてフィルタリングします。</td>
+         <td>トレース内のアクションがブロックされたかどうかに基づいてフィルタリングします</td>
          <td><code>true</code> または <code>false</code></td>
        </tr>
        <tr>
          <td><code>@ai_guard.tool_name</code></td>
-         <td>評価に関わった特定のツール名でフィルタリングします。</td>
+         <td>評価に関わった特定のツール名でフィルタリングします</td>
          <td><code>get_user_profile</code>、<code>user_recent_transactions</code>など</td>
        </tr>
        <tr>
          <td><code>@ai_guard.sds.category</code></td>
-         <td>Sensitive Data Scanner によって検出された機密データカテゴリーでフィルタリングします。</td>
+         <td>Sensitive Data Scanner によって検出された機密データカテゴリーでフィルタリングします</td>
          <td><code>credentials</code>、<code>email_address</code>など</td>
        </tr>
        <tr>
          <td><code>@ai_guard.sds.rule_tag</code></td>
-         <td>特定の機密データルールタグでフィルタリングします。</td>
+         <td>特定の機密データルールタグでフィルタリングします</td>
          <td><code>aws_access_key_id</code>、<code>aws_secret_access_key</code>、<code>claude_api_key</code>、<code>email_address</code>など</td>
        </tr>
      </tbody>
@@ -96,21 +89,21 @@ AI Guard 検出ルールを作成するには、次のようにします。
    1. このルールで AI Guard が生成するセキュリティシグナルの重大度レベルを設定します。
    1. 新しいシグナルの通知を受け取るユーザーと、その頻度を選択します。
    1. 自動 IP ブロックやユーザーブロック、IP フラグ設定など、実施するセキュリティ対応を選択します。
-   1. AI Guard が一定期間内に新しい値を検出した場合に新しいシグナルを作成するのではなく、同じシグナルを更新する、非本番環境のシグナル重大度を下げるなどの、追加設定を構成します。
-1. [{{< ui >}}Describe your Playbook{{< /ui >}}] (プレイブックを説明する) で、通知をカスタマイズし、シグナルと共に送信するタグを定義します。
+   1. 追加設定を構成します。AI Guard が一定期間内に新しい値を検出した場合に (新しいシグナルを作成するのではなく) 同じシグナルを更新する、非本番環境のシグナル重大度を下げる、などです。
+1. [{{< ui >}}Describe your Playbook{{< /ui >}}] (プレイブックを説明する) で通知をカスタマイズし、シグナルと共に送信するタグを定義します。
 1. [{{< ui >}}Save Rule{{< /ui >}}] (ルールを保存) をクリックします。
 
-検出ルール機能全般について確認するには、「[検出ルール][3]」を参照してください。
+検出ルール機能全般について確認するには、[検出ルール][3]を参照してください。
 
 ## シグナルを調べる {#investigate-signals}
 
-AI Guard セキュリティシグナルを表示して調べ、それらを他のセキュリティイベントと関連付けるには、次の 2 か所でシグナルを確認します。
+AI Guard セキュリティシグナルを表示して調べ、それらをほかのセキュリティイベントと関連付けるには、次の 2 か所でシグナルを確認します。
 - [Application and API Protection セキュリティシグナルエクスプローラー][4]
 - [Cloud SIEM セキュリティシグナルエクスプローラー][5]
 
   Cloud SIEM セキュリティシグナルエクスプローラーで、検索バーの横にある [{{< ui >}}Filter{{< /ui >}}] (フィルター) アイコンをクリックし、[{{< ui >}}App & API Protection{{< /ui >}}] チェックボックスを選択して AI Guard シグナルを表示します。
 
-セキュリティシグナルエクスプローラーでは、AI Guard シグナルを他のアプリケーションセキュリティの脅威とともに表示、優先順位付け、調査することができるため、自社のセキュリティ体制をまとめて把握できます。
+セキュリティシグナルエクスプローラーでは、AI Guard シグナルをほかのアプリケーションセキュリティの脅威とともに表示、優先順位付け、調査することができるため、自社のセキュリティ体制をまとめて把握できます。
 
 AI Guard セキュリティシグナルから直接ケースを作成またはリンクしたり、シグナルをクリックして追加のコンテキストを含むサイドパネルを開いたりすることができます。
 
@@ -133,7 +126,25 @@ AI Guard のスパンは、AI Guard が行った評価とその理由に関す�
 
 さらに、[{{< ui >}}Explore in graph view{{< /ui >}}] (グラフビューで参照) をクリックすると、会話内のリクエストをグラフで表示したり、[APM][8] または [Agent Observability][9] でスパンを表示したりすることができます。
 
-## 参考資料 {#further-reading}
+## Datadog Monitors で AI Guard アクティビティについてアラートを送信する {#set-up-datadog-monitors}
+
+特定のしきい値でアラートを送信するためのモニターを作成するには、[Datadog Monitors][10]を使用できます。AI Guard の評価を、APM トレースまたはメトリクスのいずれかで監視できます。どちらのタイプのモニターでも、アラート条件とアラート名を設定し、Notifications を定義する必要があります。Datadog では Slack の使用を推奨しています。
+
+### APM モニター {#apm-monitor}
+
+手順に従って [APMモニター][11]を作成し、そのスコープを {{< ui >}}Trace Analytics{{< /ui >}} に設定します。
+
+- 拒否された評価を監視するには、クエリ `@ai_guard.action:DENY` を使用します。
+- ブロックされたトラフィックを監視するには、クエリ `@ai_guard.blocked:true` を使用します。
+
+### メトリクスモニター {#metric-monitor}
+
+手順に従って[メトリクスモニター][12]を作成します。
+
+- 拒否された評価を監視するには、メトリクス `datadog.ai_guard.evaluations` とタグ `action:deny` を使用します。
+- ブロックされたトラフィックを監視するには、メトリクス `datadog.ai_guard.evaluations` とタグ `blocking_enabled:true` を使用します。
+
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -143,6 +154,9 @@ AI Guard のスパンは、AI Guard が行った評価とその理由に関す�
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://app.datadoghq.com/security/ai-guard/investigate
-[7]: /ja/security/ai_guard/setup/#blocking-policy
+[7]: /ja/security/ai_guard/policies/#blocking-policy
 [8]: /ja/tracing/
 [9]: /ja/llm_observability/
+[10]: /ja/monitors/
+[11]: /ja/monitors/types/apm/?tab=traceanalytics
+[12]: /ja/monitors/types/metric/

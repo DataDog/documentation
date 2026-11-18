@@ -34,10 +34,10 @@ title: Configure el OpenTelemetry Collector
 ---
 ## Descripción general {#overview}
 
-Envíe trazas, métricas y registros a Datadog utilizando el OpenTelemetry Collector. Las configuraciones en esta página se prueban con la distribución OpenTelemetry Collector Contrib v0.154.0 y utilizan una canalización de telemetría basada en OTLP con los siguientes componentes clave:
+Envíe trazas, métricas y registros a Datadog utilizando el OpenTelemetry Collector. Las configuraciones incluidas en esta página se probaron con la distribución OpenTelemetry Collector Contrib v0.161.0 y utilizan un pipeline de telemetría basado en OTLP con los siguientes componentes clave:
 
 - **Exportador HTTP de OTLP**: Envía telemetría a los puntos de conexión de ingesta de OTLP de Datadog.
-- **Conector de métricas de tramo**: Genera métricas RED (tasa, error, duración) a partir de datos de trazas para potenciar funciones de APM como el Service Catalog y la página de servicio.
+- **Conector de métricas de tramos**: Genera métricas RED (tasa, errores y duración) a partir de datos de trazas para habilitar funciones de APM como Catalog y Service Page.
 - **Procesador de detección de recursos**: Detecta atributos de recursos de servidor y nube, que Datadog utiliza para la resolución de nombres de servidor y el etiquetado.
 - **Datadog extension**: Informa la configuración del Collector a Datadog para Fleet Automation. No exporta datos de telemetría.
 
@@ -256,10 +256,10 @@ Consulte los [archivos de configuración completos][500] para obtener una config
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-Ejecute el Collector:
+Ejecute el Collector. Reemplace `<YOUR_DD_SITE>` con su sitio de Datadog: {{< region-param key="dd_site" code="true" >}}.
 
 ```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
   otelcol-contrib --config collector.yaml
 ```
 
@@ -464,7 +464,7 @@ docker run \
     -e OTEL_RESOURCE_ATTRIBUTES \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
-    otel/opentelemetry-collector-contrib:0.154.0 \
+    otel/opentelemetry-collector-contrib:0.161.0 \
     --config /etc/otelcol-contrib/config.yaml
 ```
 
@@ -929,7 +929,7 @@ Después de que su aplicación envíe telemetría al Collector, verifique que lo
 
 ### Conector de métricas de tramo {#span-metrics-connector}
 
-El conector `span_metrics` genera métricas RED a partir de datos de trazas. Estas métricas potencian las funciones de APM, incluyendo el Service Catalog, la Página de Servicio y la Página de recursos. El conector se configura con dimensiones que permiten a Datadog calcular etiquetas de servidor, servicios pares y nombres de operaciones a partir de sus trazas.
+El conector `span_metrics` genera métricas RED a partir de datos de trazas. Estas métricas permiten utilizar funciones de APM como Catalog, Service Page y Resource Page. El conector se configura con dimensiones que permiten a Datadog calcular etiquetas de servidor, servicios pares y nombres de operaciones a partir de sus trazas.
 
 Cada configuración específica del entorno en [Configure y despliegue el OpenTelemetry Collector](#2-configure-and-deploy-the-collector) incluye el bloque de conector `span_metrics` completo. Conserve todas sus dimensiones al adaptar la configuración para que Datadog pueda derivar las etiquetas de servidor, los servicios pares, los nombres de operación y los nombres de recursos necesarios.
 

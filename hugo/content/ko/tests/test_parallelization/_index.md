@@ -1,5 +1,9 @@
 ---
 description: Test Optimization 데이터를 사용하여 CI 노드나 워커에 테스트 파일을 분산함으로써 CI 테스트 시간을 단축하세요.
+further_reading:
+- link: https://www.datadoghq.com/blog/ci-cd-optimization/
+  tag: 블로그
+  text: Datadog CI/CD Optimization으로 더 빠르게 배포하고, 안정성을 개선하며, CI 비용 관리하기
 title: 테스트 병렬화
 ---
 ## 개요 {#overview}
@@ -24,7 +28,7 @@ title: 테스트 병렬화
 | Python   | pytest | `ddtrace` 패키지 `4.11.0` 이상 |
 | JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest | `dd-trace` 패키지 `5.111.0` 이상 (`v5`의 경우) 및 `6.0.0` 이상 (`v6` |의 경우)
 
-JavaScript의 경우, `ddtest`은(는) Cypress 12 이상, Mocha 8 이상, Playwright 1.18 이상, Vitest 1.6 이상이 필요합니다. Cucumber.js 지원은 버전 7부터 13까지 테스트되었습니다. 이러한 프레임워크는 `ddtest` 1.6.0 이상이 필요합니다. 프레임워크 버전은 [`dd-trace` 호환성 요구 사항][4]도 충족해야 합니다.
+JavaScript의 경우, `ddtest`는 Cypress 12 이상, Mocha 8 이상, Playwright 1.18 이상, Vitest 1.6 이상이 필요합니다. Cucumber.js 지원은 버전 7부터 13까지 테스트되었습니다. 이러한 프레임워크는 `ddtest` 1.6.0 이상이 필요합니다. 프레임워크 버전은 [`dd-trace` 호환성 요구 사항][4]도 충족해야 합니다.
 
 ## 작동 방식 {#how-it-works}
 
@@ -44,6 +48,10 @@ JavaScript의 경우, `ddtest`은(는) Cypress 12 이상, Mocha 8 이상, Playwr
 {{< nextlink href="/tests/test_parallelization/best_practices/" >}}테스트 병렬화 모범 사례{{< /nextlink >}}
 {{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}테스트 병렬화 문제 해결{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## 추가 자료 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/tests/test_impact_analysis/
 [2]: /ko/tests/setup/

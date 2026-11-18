@@ -1,0 +1,15 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "GitHub App Updated exampleactionconnection",
+      "integration": {
+        "type": "Github",
+        "credentials": {
+          "type": "GithubApp",
+          "hostname": "github.updated.example.com"
+        }
+      }
+    }
+  }
+}

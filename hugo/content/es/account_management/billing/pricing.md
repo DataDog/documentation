@@ -102,10 +102,18 @@ Puede implementar controles tanto para los volúmenes de tramos indexados como p
 
 ## CI Visibility {#ci-visibility}
 
-* Datadog realiza un seguimiento del número de autores de confirmación (committers) únicos que envían datos de prueba y de canalización al servicio CI Visibility.
+* Datadog realiza un seguimiento del número de committers únicos que envían datos de pipeline al servicio CI Visibility.
 * Un **autor de confirmación** significa un autor de confirmación de git activo, identificado por su dirección de correo electrónico de autor de git. Un autor de confirmación se contabiliza para la facturación si realiza al menos tres confirmaciones en un mes determinado.
   * En caso de que una canalización no esté asociada con un repositorio de git, o los metadatos de git no estén disponibles, el nombre de usuario de la persona que activa la ejecución de la canalización se utiliza como el autor de confirmación facturable.
-* Para Pipeline Visibility, cada pipeline, etapa y trabajo cuenta como un **span de pipeline**. Para Testing Visibility, cada ejecución de prueba individual cuenta como un **span de prueba**.
+* Cada pipeline, etapa de pipeline y trabajo de pipeline cuenta como un **span de pipeline**.
+
+## Test Optimization {#test-optimization}
+
+* Datadog realiza un seguimiento del número de committers únicos que envían datos de prueba a Test Optimization.
+* Un **committer** es un committer activo de Git, identificado por la dirección de correo electrónico del autor en Git. Un committer se contabiliza para la facturación si realiza al menos tres confirmaciones en un mes determinado.
+* Cada ejecución de prueba individual cuenta como un **span de prueba**. Los spans de prueba que generan las funciones de Test Optimization, como los reintentos añadidos por Auto Test Retries, no se facturan. Las pruebas omitidas por Test Impact Analysis tampoco se facturan.
+
+Para obtener más información, consulte [Facturación de CI/CD Optimization][13].
 
 ## Solución de problemas {#troubleshooting}
 
@@ -125,3 +133,4 @@ Comuníquese con [Ventas][8] o con su gerente de [Éxito del cliente][9] para an
 [10]: /es/real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /es/account_management/billing/metric_name_pricing/
+[13]: /es/account_management/billing/ci_visibility/#counting-test-spans

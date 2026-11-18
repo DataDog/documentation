@@ -169,7 +169,7 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
 | Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
-| CSPM Workflow Executions | Cloud Security | Sum | Sum |
+| CSPM Workflow Runs | Cloud Security | Sum | Sum |
 | Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | N/A |
 
 [1]: https://www.datadoghq.com/pricing/list/

@@ -108,7 +108,6 @@ The following table lists the Cloud SIEM features available in each product.
 | [MITRE ATT&CK Map][6] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Security Filters][7] | | {{< X >}} | {{< X >}} |
 | [Log index filters][8] | {{< X >}} | | |
-| [MITRE ATT&CK Map compact view][6] | {{< X >}} | {{< X >}} | |
 | [Scheduled rules][9] | {{< X >}} | {{< X >}} | |
 | [Sequence detections][10] | {{< X >}} | {{< X >}} | |
 | [Historical jobs][11] | {{< X >}} | {{< X >}} | |

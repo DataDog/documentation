@@ -27,7 +27,7 @@ Il existe une série d'étapes qui doivent s'exécuter avec succès pour que les
 
 Vous pouvez utiliser la métrique `datadog.apm.appsec_host` pour vérifier si AAP est en cours d'exécution.
 
-1. Allez dans **Metrics > Summary** dans Datadog.
+1. Accédez à **Metrics Catalog** dans Datadog.
 2. Recherchez la métrique `datadog.apm.appsec_host`. Si la métrique n'existe pas, alors aucun service n'exécute AAP. Si la métrique existe, les services sont signalés avec les tags de métrique `host` et `service`.
 3. Sélectionnez la métrique, et dans la section **Tags**, recherchez `service` pour voir quels services exécutent AAP.
 

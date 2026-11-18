@@ -1,157 +1,166 @@
 ---
 aliases:
 - /ja/account_management/billing/usage_details/
+description: Datadog の全製品にわたる利用状況を、月間累計サマリー、利用傾向、上位のカスタムメトリクス、インデックス別のログ利用量で監視できます。
 title: 使用量の詳細
 ---
+{{< callout url="" btn_hidden="true" header="新機能: Bill Overview" respect-site-support="false" >}}
+新しい Bill Overview のエクスペリエンスが Limited Availability で提供されており、2026 年 3 月よりすべての組織に自動的な順次展開が開始されます。[詳細はこちら](/account_management/plan_and_usage/bill_overview/)。
+{{< /callout >}}
 
-## 概要
+## 概要 {#overview}
 
-管理者は、左下に表示される自分のユーザー名にカーソルを置き、`Plan & Usage`--> `Usage` の順に移動すると[使用量][1]ページにアクセスできます。
+管理者は、左下のユーザー名にカーソルを合わせて [Usage][1] ページにアクセスし、以下に移動します。
+`Plan & Usage`--> `Usage`.
 
-Usage ページには、製品カテゴリー別にグループ化された使用量が表示されます。製品タブを開くと、その製品カテゴリーの使用量を表示できます。"All" のタブを開くとすべての製品の使用量が表示されます。各タブには、以下の情報が含まれます。
+Usage ページには、製品カテゴリー別にグループ化された利用状況が表示されます。製品タブに移動してその製品カテゴリーに特化した利用状況を表示するか、[All] タブに移動して全製品の利用状況を表示します。各タブには、以下の情報が表示されます。
 
-* 当月内サマリー
-* 全体使用量 (最新および履歴)
+* 月間累計サマリー
+* 全体の利用状況 (現在および過去)
 
-一部の製品タブには、追加ツールも含まれています。
+一部の製品タブには、追加のツールも含まれています。
 
-* Custom Metrics タブ: 上位のカスタムメトリクス
-* Log Management タブ: インデックス別ログ使用量
+* Custom Metrics タブ: 上位の Custom Metrics
+* Log Management タブ: インデックス別のログ利用量
 
-## 当月サマリー
+## 月間累計サマリー {#month-to-date-summary}
 
-このセクションには、月内の使用量の概要が表示されます。"All" タブでは、インフラストラクチャーホスト、コンテナ、カスタムメトリクス、APM ホスト、ログなど、当月内に使用したプラットフォームの各項目の使用量を表示します。
+このセクションでは、月間累計の利用状況をまとめます。[All] タブでは、インフラストラクチャーホスト、コンテナ、カスタムメトリクス、APM ホスト、ログなど、その月に利用したプラットフォームの各機能の月間累計利用状況を確認します。
 
-{{< img src="account_management/billing/usage-details-v2-01.png" alt="使用量サマリー - All タブ" >}}
+{{< img src="account_management/billing/usage-details-v2-01.png" alt="利用状況サマリー - All タブ" >}}
 
-製品固有のタブでは、その製品カテゴリーの製品の当月内使用量を表示します。
+製品別のタブでは、その製品カテゴリーに含まれる製品の月間累計利用状況を確認します。
 
-{{< img src="account_management/billing/usage-details-v2-02.png" alt="使用量サマリー - ネットワーク" >}}
+{{< img src="account_management/billing/usage-details-v2-02.png" alt="利用状況サマリー - ネットワーク" >}}
 
-上記の月内の使用量は "All" (すべて) の使用量であり、製品の試用などの請求対象外の使用量が含まれます。ほとんどのアカウントは、"Billable" (請求対象) の使用量を表示することができます。これは、最終的な請求に寄与する使用量のみを表示します。"Billable" ビューは、コミットメントと割り当てを超えるオンデマンドの使用量を示します。
+上記の月間累計利用状況は「All」の利用状況であり、製品トライアルなどの請求対象外の利用状況が含まれます。ほとんどのアカウントでは、最終的な請求額に算入される利用状況のみを示す「Billable」の利用状況を確認できます。「Billable」ビューでは、利用状況がコミットメント、割当量、オンデマンド利用分に分類されます。
 
-{{< img src="account_management/billing/usage-details-v2-07.png" alt="使用量の詳細 - 請求対象" >}}
-API ユーザーの場合、エンドポイントを使用して ["All"][2] (すべて) の使用量と ["Billable"][3] (請求対象) の使用量にアクセスできます。
+{{< img src="account_management/billing/UsageTilesWithAllPills.png" alt="利用状況サマリー - Billable" >}}
+API ユーザーは、エンドポイントを使用して [All][2] の利用状況と [Billable][3] の利用状況にアクセスします。
 
-各製品の月内の使用量は、次のように計算されます。
+各製品の月間累計利用状況は、次のように計算します。
 
 | 製品                   | 説明                                                                                                                |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| インフラ ホスト             | 当月全時間のすべての個別インフラストラクチャーホストの 99 パーセンタイル値を表示します。                         |
-| コンテナ               | 当月全時間のすべての個別コンテナの最高水準値を表示します。                                    |
-| APM ホスト                | 当月全時間のすべての個別 APM ホストの 99 パーセンタイル値を表示します。                                    |
-| Profiled Hosts           | 当月全時間のすべての個別プロファイル済みホストの 99 パーセンタイル値を表示します。                               |
-| Profiled Containers      | 当月全時間のすべての個別プロファイル済みコンテナの平均値を表示します。                                  |
-| カスタムメトリクス           | 当月全時間の個別[カスタムメトリクス][4]の平均数を表示します。                               |
-| Ingested Custom Metrics  | 当月全時間の個別収集済みカスタムメトリクスの平均数を表示します。                           |
-| 収集されたログ            | 当月全時間のすべての収集ログバイト数の合計を表示します。                                                |
-| インデックス化されたログ             | 当月全時間のすべてのインデックス化ログイベント数の合計を表示します。                                                |
-| スキャンしたログ             | Sensitive Data Scanner によってスキャンされたすべてのログバイトの合計を、当月の全時間にわたって表示します。                       |
-| Ingested Span           | 当月全時間のすべての取り込みスパン数の合計を表示します。                                                    |
-| Indexed Span            | 当月全時間のインデックス化されたすべての Indexed Spans の合計を表示します。                                             |
-| Analyzed Logs (Security) | 当月全時間のすべての分析済みログバイト数の合計を表示します。                                       |
-| サーバーレス関数     | 当月各時間に 1 回以上実行された関数の平均数を表示します。              |
-| サーバーレス呼び出し   | 当月全時間のすべての呼び出し数の合計を表示します。                                                       |
-| Fargate タスク            | 当月全時間のすべての Fargate タスク数の合計を表示します。                                                     |
-| Network Hosts            | 当月全時間のすべての個別ネットワークホストの 99 パーセンタイル値を表示します。                                |
-| Network Flows            | 当月全時間のインデックス化されたすべてのネットワークフローの合計を表示します。                                             |
-| Network Devices          | 当月全時間のすべての個別ネットワークデバイスの 99 パーセンタイル値を表示します。                              |
-| Synthetic API テスト      | 当月全時間のすべての Synthetic API テスト数の合計を表示します。                                               |
-| Synthetic ブラウザテスト  | 当月全時間のすべての Synthetic ブラウザテスト数の合計を表示します。                                           |
-| RUM Sessions             | 当月全時間のすべての個別 RUM セッションの合計を表示します。                                             |
-| Incident Management      | インシデントのライフサイクルとタイムラインを操作した、選択した月のこれまでの一意のアクティブユーザーの数を表示します。     |
-| IoT デバイス              | 当月全時間のすべての個別 IoT デバイスの 99 パーセンタイル値を表示します。                                  |
+| インフラストラクチャーホスト             | 当月の全時間にわたる、すべての個別のインフラストラクチャーホストの 99 パーセンタイルを表示します。                        |
+| コンテナ               | 当月の全時間にわたる、すべての個別のコンテナの最大値を表示します。                                   |
+| APM ホスト                | 当月の全時間にわたる、すべての個別の APM ホストの 99 パーセンタイルを表示します。                                   |
+| プロファイル済みホスト           | 当月の全時間にわたる、すべての個別のプロファイル済みホストの 99 パーセンタイルを表示します。                              |
+| プロファイル済みコンテナ      | 当月の全時間にわたる、すべての個別のプロファイル済みコンテナの平均を表示します。                                 |
+| Custom Metrics           | 当月の全時間にわたる、個別の[カスタムメトリクス][4]の平均数を表示します。                              |
+| 取り込まれた Custom Metrics  | 当月の全時間にわたる、個別の取り込まれたカスタムメトリクスの平均数を表示します。                          |
+| 取り込まれたログ            | 当月の全時間にわたる、取り込まれたすべてのログバイトの合計を表示します。                                               |
+| インデックスされたログ             | 当月の全時間にわたる、インデックスされたすべてのログイベントの合計を表示します。                                               |
+| スキャンされたログ             | 当月の全時間にわたる、Sensitive Data Scanner によってスキャンされたすべてのログバイトの合計を表示します。                      |
+| 取り込まれたスパン           | 当月の全時間にわたる、取り込まれたすべてのスパンの合計を表示します。                                                   |
+| インデックスされたスパン            | 当月の全時間にわたる、インデックスされたすべてのインデックス済みスパンの合計を表示します。                                            |
+| 分析済みログ (セキュリティ) | 当月の全時間にわたる、取り込まれたすべての分析済みログバイトの合計を表示します。                                      |
+| Serverless 関数     | 当月の全時間にわたる、1 時間あたり 1 回以上実行された関数の数の平均を表示します。             |
+| Serverless 呼び出し   | 当月の全時間にわたる、すべての呼び出しの合計を表示します。                                                      |
+| Fargate タスク            | 当月の全時間にわたる、すべての Fargate タスクの合計を表示します。                                                    |
+| ネットワークホスト            | 当月の全時間にわたる、すべての個別のネットワークホストの 99 パーセンタイルを表示します。                               |
+| ネットワークフロー            | 当月の全時間にわたる、インデックスされたすべてのネットワークフローの合計を表示します。                                            |
+| ネットワークデバイス          | 当月の全時間にわたる、すべての個別のネットワークデバイスの 99 パーセンタイルを表示します。                             |
+| Synthetic API テスト      | 当月の全時間にわたる、すべての Synthetic API テストの合計を表示します。                                              |
+| Synthetic ブラウザテスト  | 当月の全時間にわたる、すべての Synthetic ブラウザテストの合計を表示します。                                          |
+| RUM セッション             | 当月の全時間にわたる、すべての個別の RUM セッションの合計を表示します。                                            |
+| Incident Management      | 選択した月の現時点までに、インシデントのライフサイクルやタイムラインを操作した個別の有効ユーザー数を表示します。    |
+| IoT デバイス              | 当月の全時間にわたる、すべての個別の IoT デバイスの 99 パーセンタイルを表示します。                                 |
 
 
-## 使用量の傾向
+## 利用状況の傾向 {#usage-trends}
 
-[Usage Trends][5] セクションには、アカウント内の全組織の使用量の合計を表示する製品使用量グラフが含まれています。使用量レポートは、**Download as CSV** ボタンでダウンロードできます。これらのレポートには、各組織の製品別使用量の 1 時間ごとの内訳が含まれています。
+[Usage Trends][5] セクションには、アカウント内のすべての組織の合計使用量を示す製品使用量グラフが含まれています。使用量レポートは、{{< ui >}}Download as CSV{{< /ui >}} ボタンからダウンロードできます。各組織について、これらのレポートには製品ごとの時間単位の使用量の内訳が含まれています。
 
-{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Datadog アプリケーションの使用量傾向グラフのページで、CSV としてダウンロードするオプションが強調表示された状態" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Datadog アプリケーションの Usage Trends グラフページ。Download as CSV オプションが強調表示されています。" style="width:100%; align:left" >}}
 
-サブタイプのある製品については、各カテゴリーがその製品のグラフ上で区別されます。
+サブタイプを持つ製品については、各カテゴリーがその製品のグラフ上で区別されます。
 
-{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="インフラストラクチャータブを選択した使用量サマリーと、インフラストラクチャー使用量のサブタイプ (インフラホスト、Agent ホスト、コンテナなど) の複数のグラフ" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="インフラストラクチャータブを選択した利用状況サマリー。インフラホスト、Agent ホスト、コンテナなど、インフラストラクチャーの利用状況サブタイプを示す複数のグラフ。" style="width:100%; align:left" >}}
 
-より詳細な製品のサブタイプのグラフは、各製品のタブで見ることができます。例えば、Infrastructure タブでは、ホストタイプ別の内訳を見ることができます。
+より詳細な製品サブタイプのグラフは、各製品のタブで確認できます。たとえば、ホストタイプ別の内訳は Infrastructure タブで確認できます。
 
-{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Agent ホストと AWS ホストを含む Infra Hosts グラフ、Daily Indexed Live Logs と Cumulative Indexed Live Logs を含む Indexed Logs グラフが表示された Infrastructure タブの使用量傾向セクション" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Infrastructure タブの Usage Trends セクション。Infra Hosts グラフには Agent ホストと AWS ホストが含まれ、Indexed Logs グラフには Daily Indexed Live Logs と Cumulative Indexed Live Logs が含まれます。" style="width:100%; align:left" >}}
+ 
+合計ベースの製品では、時系列での累積使用量を確認できます。
 
-和算ベースの製品では、経時的な累積使用量を確認することができます。
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Ingested Spans および Indexed Spans のグラフ。それぞれ、各スパンの日次合計と累積合計のデータをプロットします。" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/CumulativeUsageLine.png" alt="取り込みスパンとインデックス化スパンについて、それぞれのスパンの日別・累計のデータをプロットしたグラフ" style="width:100%; align:left" >}}
-
-時間選択では、日、週、月、年単位で使用量グラフを表示するオプションがあります。
+時間選択には、使用量グラフを日次、週次、月次、または年次の間隔で表示するオプションが含まれています。
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="使用量グラフの時間間隔" style="width:100%; align:left" >}}
 
-## Billable on-demand pills and committed lines
+## 課金対象のオンデマンドピルとコミット済みライン {#billable-on-demand-pills-and-committed-lines}
 
-<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
+<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、組織が機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
 
-Billable on-demand pills highlight the portion of billable usage that is on-demand usage. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
+紫色のオンデマンドピルは、課金対象の使用量のうち、オンデマンド使用量である部分をハイライトします。青色の committed および allotted ピルは、コミットメントおよび親製品からの <a href="https://www.datadoghq.com/pricing/allotments/">allotment</a> によってカバーされている使用量の部分をハイライトします。破線の `Committed` ラインは、allotment (Custom Metrics や Containers など) を含まない、製品ごとのコミットメントを示します。
 
-{{< img src="account_management/plan_and_usage/MTD-billable-and-committed-lines.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
+カードに committed および allotted ピルを表示するには、{{< ui >}}See included usage{{< /ui >}} トグルがオンになっていることを確認します。
+1. コミット済みおよび割り当て済みの使用量データを表示する合計使用量カードで、目 ({{< ui >}}See included usage{{< /ui >}}) アイコンをクリックします。
+1. アイコンが斜線の入った目のアイコンに変わります。カードに committed および allotted ピルが表示されます。
+
+{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="トレンドグラフ上の課金対象のオンデマンドピルとコミット済み使用量のライン" style="width:100%; align:left" >}}
 
 
-## 上位カスタムメトリクス
+## 上位のカスタムメトリクス {#top-custom-metrics}
 
-Custom Metrics タブの Top Custom Metrics テーブルには、当月内使用量と最新の日次使用量 (最終更新日の使用量) の 2 つのビューが表示されます。
+Custom Metrics タブの Top Custom Metrics テーブルでは、当月集計の使用量と直近の日次使用量 (最終更新日の使用量など) の 2 つのビューを確認できます。
 
-"Top 5000" ビューには、上位 5000 のカスタムメトリクスに関する次の情報が表示されます。
+[Top 5000] ビューでは、上位 5000 個の Custom Metrics に関する以下の情報を提供します。
 * メトリクス名
-* 1 時間ごと平均カスタムメトリクス数
-* 1 時間ごと最大カスタムメトリクス数
-* カスタムメトリクスの使用数全体に対する各メトリクスの貢献率
-* 上位 5000 のカスタムメトリクス内のメトリクスを検索します
+* 1 時間あたりの平均 Custom Metrics
+* 1 時間あたりの最大 Custom Metrics
+* Custom Metrics の総使用量に対する、このメトリクスの寄与率
+* 上位 5000 個の Custom Metrics からメトリクスを検索する
 * このデータは CSV ファイルとしてダウンロードできます。
 
-"All" ビューには、すべてのカスタムメトリクスに関する次の情報が表示されます。
+[All] ビューでは、すべてのカスタムメトリクスに関する以下の情報を提供します。
 * メトリクス名
-* 1 時間ごと平均カスタムメトリクス数
-* 1 時間ごと最大カスタムメトリクス数
-* すべてのカスタムメトリクス内のメトリクスを検索します
-* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][6]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
+* 1 時間あたりの平均 Custom Metrics
+* 1 時間あたりの最大 Custom Metrics
+* すべてのカスタムメトリクスからメトリクスを検索する
+* このデータは CSV ファイルとしてダウンロードできます (最大 300,000 個のカスタムメトリクス)。[API エンドポイント][6]を使用して、300,000 個を超えるカスタムメトリクスをダウンロードできます。
 
 
-メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][7] に移動します。
+メトリクスの詳細を確認するには、対象のメトリクスの行にマウスオーバーし、右側に表示されるメーターアイコンをクリックして [Metrics Catalog][7] に移動します。
 
-{{< img src="account_management/billing/usage-metrics-05.png" alt="上位カスタムメトリクスの概要テーブル" >}}
+{{< img src="account_management/billing/usage-metrics-05.png" alt="Top Custom Metrics テーブルの概要" >}}
 
-## インデックス別ログ使用量
+## インデックス別のログ使用量 {#logs-usage-by-index}
 
-Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][8]の内訳も示しています。以下の情報が提供されます。
+Log Management タブのこのテーブルでは、インデックス名と保持期間ごとの、時間単位、日単位、月単位、および年単位のインデックス化されたログの使用量が表示されます。また、ライブログと[リハイドレートされたログ][8]の内訳も表示されます。以下の情報を提供します。
 
 * インデックス名
-* 保持期間（日数）
-* インデックス化済みログ数
-* 選択した期間のインデックス化済みログの全体的な使用量に対する各メトリクスの貢献率
+* 保持期間 (日数)
+* インデックス化されたログの件数
+* 選択した期間におけるインデックス化されたログの総使用量に対する、このインデックスの割合
 
 このデータは CSV ファイルとしてダウンロードできます。
 
-{{< img src="account_management/billing/usage-details-v3-03.png" alt="インデックス別ログ使用量" >}}
+{{< img src="account_management/billing/usage-details-v3-03.png" alt="インデックス別のログ使用量" >}}
 
-## First-time usage notifications
+## 初回使用量通知 {#first-time-usage-notifications}
 
-<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、お客様の組織がこの機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
+<div class="alert alert-danger">この機能はベータ版です。アクセスをリクエストし、組織が機能の基準を満たしていることを確認するには、アカウント担当者または<a href="https://docs.datadoghq.com/help/">カスタマーサポート</a>にお問い合わせください。</div>
 
-The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
+初回使用量通知機能は、現在の契約に含まれていない新しい製品で初めて課金対象の使用量が発生した際に、メール通知を送信します。メールは、特定の月内で初めて使用量が発生してから約 48 時間後に送信されます。
 
-After enabling the feature, a new **Usage Notifications** tab is added to the parent organization's **Plan and Usage** page. On this tab, there is a list of all products covered by the functionality. Unchecking a box stops notifications for that product for all users within the account. If any first-time usage outside of your most recent active contract is detected, users do not receive a notification for any unchecked products.
+この機能を有効にすると、親組織の {{< ui >}}Plan and Usage{{< /ui >}} ページに新しい {{< ui >}}Usage Notifications{{< /ui >}} タブが追加されます。このタブには、本機能の対象となるすべての製品のリストが表示されます。チェックボックスをオフにすると、アカウント内のすべてのユーザーに対して、その製品の通知が停止されます。直近の有効な契約外で初回使用量が検出された場合、チェックが外されている製品については、ユーザーに通知が送信されません。
 
-{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="First-time usage notifications page with a product list including checked and unchecked items" style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="初回使用量通知ページ (チェック済みおよび未チェックの項目を含む製品リスト)" style="width:100%; align:left" >}}
 
-Any user with _Usage Notifications Read_ or _Write_ permissions receives emails. For most organizations, this means any admins.
+_Usage Notifications Read_ または _Write_ 権限を持つすべてのユーザーがメールを受信します。ほとんどの組織において、これはすべての管理者を意味します。
 
-If your Datadog account is a multi-organization, parent organization users with permissions receive email notifications of usage in child organizations. These emails indicate which child organization generated the usage, and the product which usage was generated for. Child organization users with this permission receive emails for their organization only.
+Datadog アカウントがマルチ組織である場合、権限を持つ親組織のユーザーは、子組織での使用量に関するメール通知を受信します。これらのメールには、どの子組織でその使用量が発生したか、およびどの製品に対して使用量が発生したかが示されます。この権限を持つ子組織のユーザーは、自身の組織に関するメールのみを受信します。
 
-{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="First-time usage notifications email with details on sample first-time usage" style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="初回使用量通知メール (初回使用量のサンプルの詳細付き)" style="width:100%; align:left" >}}
 
-## トラブルシューティング
+## トラブルシューティング{#troubleshooting}
 
 技術的な質問については、[Datadog のサポートチーム][9]にお問い合わせください。
 
-課金に関するご質問は、[カスタマーサクセス][10]マネージャーにお問い合わせください。
+請求に関するご質問は、[カスタマーサクセス][10]マネージャーにお問い合わせください。
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
@@ -164,3 +173,4 @@ If your Datadog account is a multi-organization, parent organization users with 
 [8]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /ja/help/
 [10]: mailto:success@datadoghq.com
+[11]: /ja/account_management/plan_and_usage/bill_overview/

@@ -56,7 +56,7 @@ Clicking on a failed step gives you the inputs, outputs, and execution context f
 
 {{< img src="actions/workflows/test_and_debug/failed-step4.png" alt="A workflow with a failed step." >}}
 
-The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
+The initial run history for a workflow provides a panel with the list of previous workflow runs and whether each run succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow run in the list to inspect it. You can return to the initial run history at any time by clicking anywhere on the workflow canvas.
 
 
 ## Fix a failed step with AI

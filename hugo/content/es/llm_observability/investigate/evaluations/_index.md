@@ -80,4 +80,4 @@ Agent Observability ofrece una [Export API][9] que puede utilizar para recuperar
 [11]: /es/llm_observability/investigate/annotation_queues
 [12]: /es/security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /es/llm_observability/investigate/evaluations/end_user_feedback
-[14]: /es/llm_observability/improve/access_control/
+[14]: /es/llm_observability/data_governance/access_control/

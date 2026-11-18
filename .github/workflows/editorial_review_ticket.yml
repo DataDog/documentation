@@ -1,0 +1,51 @@
+# When a PR has both the "editorial review" and "okr9" labels, send the PR's DOCS
+# ticket keys to a Jira Automation incoming webhook. Runs when either label is added,
+# so the order the labels are applied in doesn't matter. The Jira rule decides whether
+# to create an Editorial Review ticket and skips tickets that already have one.
+name: Editorial review ticket
+on:
+  pull_request:
+    types:
+      - labeled
+
+permissions: {}
+
+jobs:
+  notify-jira:
+    if: >-
+      (github.event.label.name == 'editorial review' || github.event.label.name == 'okr9') &&
+      contains(github.event.pull_request.labels.*.name, 'editorial review') &&
+      contains(github.event.pull_request.labels.*.name, 'okr9')
+    runs-on: ubuntu-latest
+    name: Send DOCS ticket keys to Jira Automation
+    steps:
+      - name: Send DOCS keys to Jira Automation
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+          BODY: ${{ github.event.pull_request.body }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          WEBHOOK_URL: ${{ secrets.JIRA_ER_WEBHOOK_URL }}
+          WEBHOOK_TOKEN: ${{ secrets.JIRA_ER_WEBHOOK_TOKEN }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ] || [ -z "$WEBHOOK_TOKEN" ]; then
+            echo "Jira webhook secrets are not available. Skipping."
+            exit 0
+          fi
+
+          # Each grep is wrapped in "|| true" because GitHub runs this script with
+          # "set -eo pipefail", and grep exits 1 when it finds no match.
+          keys=$( { printf '%s\n%s\n' "$TITLE" "$BRANCH"; printf '%s\n' "$BODY" | { grep -oiE 'Fixes DOCS-[0-9]+' || true; }; } \
+            | { grep -oiE 'DOCS-[0-9]+' || true; } | tr '[:lower:]' '[:upper:]' | sort -u | jq -R . | jq -sc .)
+
+          if [ "$keys" = "[]" ]; then
+            echo "No DOCS ticket key found in the PR title, branch name, or description."
+            exit 0
+          fi
+
+          echo "Sending $keys to Jira Automation"
+          jq -n --argjson issues "$keys" --arg pr "$PR_URL" '{issues: $issues, pr_url: $pr}' \
+            | curl -fsS -X POST "$WEBHOOK_URL" \
+                -H 'Content-Type: application/json' \
+                -H "X-Automation-Webhook-Token: $WEBHOOK_TOKEN" \
+                --data @-
