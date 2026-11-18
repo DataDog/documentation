@@ -104,9 +104,9 @@ The author of a synced message does not need an Incident Management or Incident 
 <div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Generate AI summaries of incident Microsoft Teams meetings, and optionally save live meeting transcripts in Datadog notebooks.
+Incident AI can generate summaries of incident Microsoft Teams meetings and optionally save live meeting transcripts in Datadog notebooks.
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes the data it holds. Transcripts saved in Datadog notebooks are not deleted.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion for meeting summaries and transcripts</a>.</div>
 
 #### Prerequisites
 
@@ -126,17 +126,7 @@ To enable meeting summaries and transcripts for incident Microsoft Teams meeting
 6. (Optional) Add conditions to prevent summarization for specific incidents.
 7. Save your settings.
 
-When a Microsoft Teams meeting attached to an incident starts, the Datadog Transcriber attempts to join. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin.
-
-By default, Incident AI does not summarize or transcribe meetings for private incidents. Conditions that prevent summarization also prevent transcription.
-
-Setting changes apply only to recordings that start after you save. They do not affect recordings in progress or create notebooks for past recordings. Turning off **Generate meeting transcripts** leaves meeting summaries enabled. Turning off **Generate AI meeting summaries** also turns off **Generate meeting transcripts**.
-
-#### Transcript notebook access
-
-Datadog shares transcript notebooks based on the incident's visibility. For organization-visible incidents, all organization members receive Viewer access during recording and Editor access after recording ends. For private incidents, only incident responders receive access. For details, see [Notebook access][8].
-
-To review summaries, view transcripts, and re-invite the transcriber during an incident, see [Use Meeting Summaries and Transcripts][9].
+To review summaries, view transcripts, manage transcript notebook access, and re-invite the transcriber, see [Meeting Summaries and Transcripts][8].
 
 ## Using the Datadog tab in Microsoft Teams
 
@@ -172,5 +162,4 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
 [7]: /help/
-[8]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#transcript-notebook-access
-[9]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+[8]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts

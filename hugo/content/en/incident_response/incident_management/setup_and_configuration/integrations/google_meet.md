@@ -8,9 +8,9 @@ further_reading:
 - link: "/integrations/google-meet-incident-management/"
   tag: "Documentation"
   text: "Google Meet Incident Management Integration"
-- link: "/incident_response/incident_management/investigate/incident_ai/#meeting-summaries"
+- link: "/incident_response/incident_management/investigate/meeting_summaries_and_transcripts"
   tag: "Documentation"
-  text: "Meeting summaries in Incident AI"
+  text: "Meeting Summaries and Transcripts"
 ---
 
 ## Overview
@@ -63,9 +63,9 @@ For more Slack features, see [Integrate Slack with Datadog Incident Management][
 <div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Generate AI summaries of incident Google Meet meetings, and optionally save live meeting transcripts in Datadog notebooks.
+Incident AI can generate summaries of incident Google Meet meetings and optionally save live meeting transcripts in Datadog notebooks.
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes the data it holds. Transcripts saved in Datadog notebooks are not deleted.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion for meeting summaries and transcripts</a>.</div>
 
 #### Prerequisites
 
@@ -84,15 +84,7 @@ To enable meeting summaries and transcripts for incident Google Meet meetings:
 5. (Optional) Add conditions to prevent summarization for specific incidents.
 6. Save your settings.
 
-By default, Incident AI does not summarize or transcribe meetings for private incidents. Conditions that prevent summarization also prevent transcription.
-
-Setting changes apply only to recordings that start after you save. They do not affect recordings in progress or create notebooks for past recordings. Turning off **Generate meeting transcripts** leaves meeting summaries enabled. Turning off **Generate AI meeting summaries** also turns off **Generate meeting transcripts**.
-
-#### Transcript notebook access
-
-Datadog shares transcript notebooks based on the incident's visibility. For organization-visible incidents, all organization members receive Viewer access during recording and Editor access after recording ends. For private incidents, only incident responders receive access. For details, see [Notebook access][5].
-
-To review summaries, view transcripts, and re-invite the transcriber during an incident, see [Use Meeting Summaries and Transcripts][6].
+To review summaries, view transcripts, manage transcript notebook access, and re-invite the transcriber, see [Meeting Summaries and Transcripts][5].
 
 ## Further reading
 
@@ -102,5 +94,4 @@ To review summaries, view transcripts, and re-invite the transcriber during an i
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [4]: /help/
-[5]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#transcript-notebook-access
-[6]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+[5]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
