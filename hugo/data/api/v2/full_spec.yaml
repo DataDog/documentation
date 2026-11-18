@@ -62589,6 +62589,157 @@ components:
         - PIPELINES_FAILED_DESCENDING
         - PIPELINES_DURATION_LOST_ASCENDING
         - PIPELINES_DURATION_LOST_DESCENDING
+    FleetAccessScope:
+      description: A fleet access scope. Use `fleet-scope:<id>` as the restriction policy resource identifier.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FleetAccessScopeResponseAttributes"
+        id:
+          description: Unique identifier of the scope, also used in the restriction policy resource identifier `fleet-scope:<id>`.
+          example: abc-def-ghi-123
+          type: string
+        type:
+          $ref: "#/components/schemas/FleetAccessScopeResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FleetAccessScopeAttributes:
+      description: Mutable fleet access scope attributes. PUT replaces all mutable attributes; omitted strings become empty and omitted feature flags become false.
+      properties:
+        description:
+          default: ""
+          description: Human-readable description of the access scope. Omission clears the description on update.
+          example: Production hosts
+          type: string
+        features:
+          $ref: "#/components/schemas/FleetAccessScopeFeatures"
+        query:
+          default: ""
+          description: Agent query selecting hosts covered by the scope. An empty query matches all hosts. Omission clears the query on update.
+          example: env:prod
+          type: string
+      type: object
+    FleetAccessScopeFeatures:
+      description: Fleet actions authorized on agents matching the access scope query.
+      properties:
+        configure:
+          default: false
+          description: Whether the scope permits configuration changes.
+          example: false
+          type: boolean
+        install:
+          default: false
+          description: Whether the scope permits Agent installation.
+          example: false
+          type: boolean
+        upgrade:
+          default: false
+          description: Whether the scope permits package upgrades.
+          example: true
+          type: boolean
+      type: object
+    FleetAccessScopeResourceType:
+      default: access_scope
+      description: The JSON:API resource type for a fleet access scope.
+      enum:
+        - access_scope
+      example: access_scope
+      type: string
+      x-enum-varnames:
+        - ACCESS_SCOPE
+    FleetAccessScopeResponse:
+      description: Response containing one fleet access scope.
+      properties:
+        data:
+          $ref: "#/components/schemas/FleetAccessScope"
+      required:
+        - data
+      type: object
+    FleetAccessScopeResponseAttributes:
+      description: Fleet access scope attributes and audit information.
+      properties:
+        created_at:
+          description: RFC3339 timestamp when the scope was created.
+          example: "2026-11-18T12:00:00Z"
+          readOnly: true
+          type: string
+        creator:
+          description: Handle of the user who created the scope.
+          example: user@example.com
+          readOnly: true
+          type: string
+        description:
+          default: ""
+          description: Human-readable description of the access scope. Omission clears the description on update.
+          example: Production hosts
+          type: string
+        features:
+          $ref: "#/components/schemas/FleetAccessScopeFeatures"
+        query:
+          default: ""
+          description: Agent query selecting hosts covered by the scope. An empty query matches all hosts. Omission clears the query on update.
+          example: env:prod
+          type: string
+        updated_at:
+          description: RFC3339 timestamp when the scope was last updated.
+          example: "2026-11-18T12:00:00Z"
+          readOnly: true
+          type: string
+        updater:
+          description: Handle of the user who last updated the scope.
+          example: user@example.com
+          readOnly: true
+          type: string
+      type: object
+    FleetAccessScopeWrite:
+      description: A fleet access scope write payload. The update target is selected by the path ID.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FleetAccessScopeAttributes"
+        type:
+          $ref: "#/components/schemas/FleetAccessScopeResourceType"
+      required:
+        - type
+      type: object
+    FleetAccessScopeWriteRequest:
+      description: Request to create or replace a fleet access scope.
+      properties:
+        data:
+          $ref: "#/components/schemas/FleetAccessScopeWrite"
+      required:
+        - data
+      type: object
+    FleetAccessScopesPage:
+      description: Count of scopes returned by the list operation.
+      properties:
+        total_count:
+          description: Total number of returned scopes. The list is not paginated.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    FleetAccessScopesResponse:
+      description: Response containing all fleet access scopes in the organization.
+      properties:
+        data:
+          description: Access scopes in the organization.
+          items:
+            $ref: "#/components/schemas/FleetAccessScope"
+          type: array
+        meta:
+          $ref: "#/components/schemas/FleetAccessScopesResponseMeta"
+      required:
+        - data
+      type: object
+    FleetAccessScopesResponseMeta:
+      description: Metadata for the list of fleet access scopes.
+      properties:
+        page:
+          $ref: "#/components/schemas/FleetAccessScopesPage"
+      type: object
     FleetAgentAttributesTagsItems:
       description: A key-value pair representing a tag associated with a Datadog Agent.
       properties:
@@ -196995,6 +197146,338 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/fleet/access_scopes:
+    get:
+      description: Retrieve all access scopes in the organization. This endpoint is not paginated. If the organization has no scopes, listing initializes its default scope, including after the final scope has been deleted.
+      operationId: ListFleetAccessScopes
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-11-18T12:00:00Z"
+                          creator: user@example.com
+                          description: Production hosts
+                          features:
+                            configure: false
+                            install: false
+                            upgrade: true
+                          query: env:prod
+                          updated_at: "2026-11-18T12:00:00Z"
+                          updater: user@example.com
+                        id: abc-def-ghi-123
+                        type: access_scope
+                    meta:
+                      page:
+                        total_count: 1
+              schema:
+                $ref: "#/components/schemas/FleetAccessScopesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List all fleet access scopes
+      tags:
+        - Fleet Automation
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        This endpoint is in **Preview** and may introduce breaking changes without notice.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an access scope defining which fleet actions can be performed on matching agents. Manage its principals separately with a restriction policy on `fleet-scope:<id>`.
+      operationId: CreateFleetAccessScope
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Production hosts
+                      features:
+                        configure: false
+                        install: false
+                        upgrade: true
+                      query: env:prod
+                    type: access_scope
+            schema:
+              $ref: "#/components/schemas/FleetAccessScopeWriteRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-11-18T12:00:00Z"
+                        creator: user@example.com
+                        description: Production hosts
+                        features:
+                          configure: false
+                          install: false
+                          upgrade: true
+                        query: env:prod
+                        updated_at: "2026-11-18T12:00:00Z"
+                        updater: user@example.com
+                      id: abc-def-ghi-123
+                      type: access_scope
+              schema:
+                $ref: "#/components/schemas/FleetAccessScopeResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create a fleet access scope
+      tags:
+        - Fleet Automation
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+          - user_access_manage
+      x-unstable: |-
+        This endpoint is in **Preview** and may introduce breaking changes without notice.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/fleet/access_scopes/{access_scope_id}:
+    delete:
+      description: Delete an access scope. The associated restriction policy is deleted on a best-effort basis. Listing scopes after the last scope is deleted initializes the default scope again.
+      operationId: DeleteFleetAccessScope
+      parameters:
+        - description: The unique identifier of the fleet access scope.
+          example: abc-def-ghi-123
+          in: path
+          name: access_scope_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete a fleet access scope
+      tags:
+        - Fleet Automation
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+          - user_access_manage
+      x-unstable: |-
+        This endpoint is in **Preview** and may introduce breaking changes without notice.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve an access scope by its unique identifier.
+      operationId: GetFleetAccessScope
+      parameters:
+        - description: The unique identifier of the fleet access scope.
+          example: abc-def-ghi-123
+          in: path
+          name: access_scope_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-11-18T12:00:00Z"
+                        creator: user@example.com
+                        description: Production hosts
+                        features:
+                          configure: false
+                          install: false
+                          upgrade: true
+                        query: env:prod
+                        updated_at: "2026-11-18T12:00:00Z"
+                        updater: user@example.com
+                      id: abc-def-ghi-123
+                      type: access_scope
+              schema:
+                $ref: "#/components/schemas/FleetAccessScopeResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get a fleet access scope
+      tags:
+        - Fleet Automation
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+          - hosts_read
+      x-unstable: |-
+        This endpoint is in **Preview** and may introduce breaking changes without notice.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: Replace the mutable attributes of an access scope selected by its path ID. Omitted strings become empty; omitted feature flags become false. Existing restriction policy bindings are preserved.
+      operationId: UpdateFleetAccessScope
+      parameters:
+        - description: The unique identifier of the fleet access scope.
+          example: abc-def-ghi-123
+          in: path
+          name: access_scope_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Production hosts
+                      features:
+                        configure: false
+                        install: false
+                        upgrade: true
+                      query: env:prod
+                    type: access_scope
+            schema:
+              $ref: "#/components/schemas/FleetAccessScopeWriteRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-11-18T12:00:00Z"
+                        creator: user@example.com
+                        description: Production hosts
+                        features:
+                          configure: false
+                          install: false
+                          upgrade: true
+                        query: env:prod
+                        updated_at: "2026-11-18T12:00:00Z"
+                        updater: user@example.com
+                      id: abc-def-ghi-123
+                      type: access_scope
+              schema:
+                $ref: "#/components/schemas/FleetAccessScopeResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Replace a fleet access scope
+      tags:
+        - Fleet Automation
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - user_access_manage
+      x-unstable: |-
+        This endpoint is in **Preview** and may introduce breaking changes without notice.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/fleet/agent_versions:
     get:
       description: |-

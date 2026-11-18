@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "access_scope",
+    "attributes": {
+      "description": "Example-Fleet-Automation updated",
+      "query": "env:staging",
+      "features": {
+        "install": false,
+        "upgrade": false,
+        "configure": true
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41951
+    operations:
+      - CreateFleetAccessScope
+      - DeleteFleetAccessScope
+      - GetFleetAccessScope
+      - ListFleetAccessScopes
+      - UpdateFleetAccessScope
+    title: Add Preview Fleet Automation access scopes API

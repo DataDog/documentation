@@ -1128,6 +1128,20 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateFleetAccessScope": [
+    {
+      "group": "fleet_automation",
+      "suffix": "",
+      "description": "Create a fleet access scope returns \"Created\" response"
+    }
+  ],
+  "UpdateFleetAccessScope": [
+    {
+      "group": "fleet_automation",
+      "suffix": "",
+      "description": "Replace a fleet access scope returns \"OK\" response"
+    }
+  ],
   "CreateForm": [
     {
       "group": "forms",

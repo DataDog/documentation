@@ -16668,6 +16668,71 @@ menu:
           - ListFleetAgentVersionsV2
         unstable: []
         order: 1
+    - name: Replace a fleet access scope
+      url: /api/latest/fleet-automation/replace-a-fleet-access-scope/
+      identifier: fleet-automation-replace-a-fleet-access-scope
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFleetAccessScope
+        unstable:
+          - v2
+        order: 20
+    - name: Get a fleet access scope
+      url: /api/latest/fleet-automation/get-a-fleet-access-scope/
+      identifier: fleet-automation-get-a-fleet-access-scope
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAccessScope
+        unstable:
+          - v2
+        order: 19
+    - name: Delete a fleet access scope
+      url: /api/latest/fleet-automation/delete-a-fleet-access-scope/
+      identifier: fleet-automation-delete-a-fleet-access-scope
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFleetAccessScope
+        unstable:
+          - v2
+        order: 21
+    - name: Create a fleet access scope
+      url: /api/latest/fleet-automation/create-a-fleet-access-scope/
+      identifier: fleet-automation-create-a-fleet-access-scope
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetAccessScope
+        unstable:
+          - v2
+        order: 18
+    - name: List all fleet access scopes
+      url: /api/latest/fleet-automation/list-all-fleet-access-scopes/
+      identifier: fleet-automation-list-all-fleet-access-scopes
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAccessScopes
+        unstable:
+          - v2
+        order: 17
     - name: List all fleet tracers
       url: /api/latest/fleet-automation/list-all-fleet-tracers/
       identifier: fleet-automation-list-all-fleet-tracers

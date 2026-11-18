@@ -2448,6 +2448,30 @@
     "request_description": "",
     "request_schema_description": "Request to update an existing variant's name and value."
   },
+  "ListFleetAccessScopes": {
+    "description": "Retrieve all access scopes in the organization. This endpoint is not paginated. If the organization has no scopes, listing initializes its default scope, including after the final scope has been deleted.",
+    "summary": "List all fleet access scopes"
+  },
+  "CreateFleetAccessScope": {
+    "description": "Create an access scope defining which fleet actions can be performed on matching agents. Manage its principals separately with a restriction policy on `fleet-scope:<id>`.",
+    "summary": "Create a fleet access scope",
+    "request_description": "",
+    "request_schema_description": "Request to create or replace a fleet access scope."
+  },
+  "DeleteFleetAccessScope": {
+    "description": "Delete an access scope. The associated restriction policy is deleted on a best-effort basis. Listing scopes after the last scope is deleted initializes the default scope again.",
+    "summary": "Delete a fleet access scope"
+  },
+  "GetFleetAccessScope": {
+    "description": "Retrieve an access scope by its unique identifier.",
+    "summary": "Get a fleet access scope"
+  },
+  "UpdateFleetAccessScope": {
+    "description": "Replace the mutable attributes of an access scope selected by its path ID. Omitted strings become empty; omitted feature flags become false. Existing restriction policy bindings are preserved.",
+    "summary": "Replace a fleet access scope",
+    "request_description": "",
+    "request_schema_description": "Request to create or replace a fleet access scope."
+  },
   "ListFleetAgentVersionsV2": {
     "description": "Retrieve the list of Datadog Agent versions available for deployment.\n\nReturns `200` with an empty `data` array if the Agent package exists in the catalog\nbut has no available versions, and `404` only if the Agent package itself is absent\nfrom the catalog.",
     "summary": "List available Datadog Agent versions"

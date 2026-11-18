@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "access_scope",
+    "attributes": {
+      "description": "Example-Fleet-Automation",
+      "query": "env:prod",
+      "features": {
+        "install": false,
+        "upgrade": true,
+        "configure": false
+      }
+    }
+  }
+}
