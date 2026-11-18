@@ -459,7 +459,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     img {
         padding: 1px;
         margin: auto;
-        // max-width: 180px;
     }
     // The .integration img tag can load SVGs pulled from CDN that declare a viewBox but no width/height.
     // problem: .card-content is a flex item with no set width within a flex container (.integration).
