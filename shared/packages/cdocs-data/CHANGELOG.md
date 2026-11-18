@@ -8,7 +8,7 @@ Remove the generated TypeDoc docs and the `build-docs` script. The README links 
 
 ## 2.1.0
 
-Export `buildFiltersManifest` as a subpath, so a server can resolve filters from config passed as data without bundling the file-system loader.
+Export `buildFiltersManifest` as a subpath, so a server can resolve filters from config passed as data.
 
 ## [2.0.1](https://github.com/DataDog/corp-node-packages/pull/307)
 
