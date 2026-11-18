@@ -366,6 +366,16 @@ menu:
       url: getting_started/learning_center/
       parent: getting_started
       weight: 31
+    - name: Course Catalog
+      identifier: getting_started_learning_center_courses
+      url: getting_started/learning_center/courses/
+      parent: getting_started_learning_center
+      weight: 3101
+    - name: Learning Paths
+      identifier: getting_started_learning_center_learning_paths
+      url: getting_started/learning_center/learning_paths/
+      parent: getting_started_learning_center
+      weight: 3102
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
