@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+Export `buildFiltersManifest` as a subpath, so a server can resolve filters from config passed as data without bundling the file-system loader.
+
 ## [2.0.1](https://github.com/DataDog/corp-node-packages/pull/307)
 
 Update dependencies to address vulnerabilities.
