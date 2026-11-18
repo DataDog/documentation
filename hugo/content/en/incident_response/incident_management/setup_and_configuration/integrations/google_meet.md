@@ -65,7 +65,7 @@ For more Slack features, see [Integrate Slack with Datadog Incident Management][
 
 Incident AI can generate summaries of incident Google Meet meetings and optionally save live meeting transcripts in Datadog notebooks.
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion for meeting summaries and transcripts</a>.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion</a> in Meeting Summaries and Transcripts.</div>
 
 #### Prerequisites
 

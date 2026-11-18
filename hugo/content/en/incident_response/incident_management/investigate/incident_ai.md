@@ -50,7 +50,7 @@ For incident meetings, Incident AI can generate summaries and save live transcri
 - **Meeting summaries**: During a meeting, Incident AI periodically posts live summaries to the incident timeline and the incident chat channel. When the meeting ends, it posts a final summary.
 - **Live meeting transcripts**: A Datadog notebook captures the conversation with speaker names and timestamps in your time zone. The notebook updates during the meeting and remains available afterward.
 
-To set up meeting summaries and transcripts, see your meeting platform's integration page. To review summaries, view transcripts, re-invite the transcriber, and learn how meeting data is retained, see [Meeting Summaries and Transcripts][7].
+To set up meeting summaries and transcripts, see the [Zoom][4], [Google Meet][5], or [Microsoft Teams][6] integration page. To review summaries, view transcripts, re-invite the transcriber, and learn how meeting data is retained, see [Meeting Summaries and Transcripts][7].
 
 ## Related incident detection
 

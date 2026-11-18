@@ -19,7 +19,7 @@ Incident AI supports three meeting platforms: [Zoom][1], [Google Meet][2], and [
 - **Meeting summaries**: AI-generated summaries of the call, posted to the incident timeline and chat channel. Summaries post periodically during the meeting and again when it ends.
 - **Live meeting transcripts**: An unedited transcript of the call, saved in a Datadog notebook that updates during the meeting. The transcript gives responders a record of the conversation, and Incident AI can use it during investigations.
 
-{{< img src="/incident_response/incident_management/investigate/meeting_summaries_transcripts.png" alt="Zoom integration settings for an incident type, with the Generate AI meeting summaries and Generate meeting transcripts toggles turned on" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/meeting_summaries_transcripts.png" alt="Zoom integration settings with the Generate AI meeting summaries and Generate meeting transcripts toggles turned on." caption="Meeting summary and transcript settings for Zoom. Google Meet and Microsoft Teams use the same settings." style="width:100%;" >}}
 
 Live meeting transcripts are an optional addition to meeting summaries. To set up either feature, see your meeting platform's integration page.
 
@@ -34,7 +34,7 @@ After the Datadog Transcriber joins, it posts live summaries periodically to the
 - The **incident timeline**, under a **Meeting Summary** entry.
 - The **incident chat channel**, both in the meeting card thread and as a message to the channel.
 
-When the meeting ends, the Datadog Transcriber posts a final post-meeting summary to the same locations.
+When the meeting ends, the Datadog Transcriber posts a final summary to the same locations.
 
 After a summary is posted, you can approve it, edit its text, or reject it. You can take these actions from the incident timeline in Datadog, or from the incident chat channel if the summary was broadcast there.
 
@@ -59,20 +59,22 @@ After recording starts, open the transcript notebook from any of these locations
 - The linked meeting's **View Transcript** action.
 - The transcript link in the meeting-card thread of the incident Slack channel.
 
-The notebook includes an incident card, a link to join the meeting, and a section for each recording session. The notebook includes only speech captured while the transcriber is recording.
+The notebook includes an incident card, a link to join the meeting, and a section for each recording session. It includes only speech captured while the Datadog Transcriber is recording.
 
-When recording ends, Datadog finalizes the transcript, and the timeline entry changes from **LIVE** to **ENDED**. If you re-invite the transcriber, Datadog adds a session to the same notebook and reuses the meeting's timeline entry. Earlier sessions are preserved.
+When recording ends, Datadog finalizes the transcript, and the timeline entry changes from **LIVE** to **ENDED**. If you re-invite the Datadog Transcriber, Datadog adds a session to the same notebook and reuses the meeting's timeline entry. Earlier sessions are preserved.
 
 ### Transcript notebook access
 
-Datadog manages transcript notebook access using the incident's visibility and responder list. Notebook access follows the incident. For example, if an organization-visible incident becomes private, access is limited to incident responders. A responder who loses access to an incident also loses access to its transcript, which can contain sensitive information.
+Datadog manages transcript notebook access using the incident's visibility and responder list, and access follows the incident. For example, if an organization-visible incident becomes private, access is limited to incident responders. A responder who loses access to an incident also loses access to its transcript, which can contain sensitive information.
+
+The following table shows who has access to the transcript notebook:
 
 | Incident visibility | While any recording is active | After all recordings end |
 | --- | --- | --- |
 | Organization-visible | Organization members receive Viewer access. | Organization members receive Editor access. |
 | Private | Incident responders receive Viewer access. | Incident responders receive Editor access. |
 
-Changes to responders or incident visibility update notebook access. Re-inviting the transcriber returns the notebook to Viewer access until recording ends. Access updates can take time to appear.
+Re-inviting the Datadog Transcriber returns the notebook to Viewer access until recording ends. Access updates can take time to appear.
 
 ## Retention and deletion
 
@@ -81,7 +83,9 @@ Changes to responders or incident visibility update notebook access. Re-inviting
 To remove meeting summaries and transcripts:
 
 - **Meeting summaries**: Reject the summary. For steps, see the [Meeting summaries](#meeting-summaries) section.
-- **Live meeting transcripts**: Deleting the incident deletes its associated transcript notebooks. If you delete a notebook during recording, updates to that notebook stop, and Datadog does not recreate the notebook for that recording. The transcriber stays in the meeting.
+- **Live meeting transcripts**: Delete the transcript notebook, or delete the incident, which also deletes its associated transcript notebooks.
+
+**Note**: If you delete a notebook during recording, updates to that notebook stop and Datadog does not recreate it for that recording. The Datadog Transcriber stays in the meeting.
 
 ## Re-invite the Datadog Transcriber
 
