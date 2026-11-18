@@ -109,6 +109,7 @@ The remaining prerequisites depend on your issuer.
 - Your organization uses SAML single sign-on to Datadog, and the issuer is your SAML identity provider. Datadog resolves users through the SAML identity in the token, so a custom issuer does not work without it. See [Configure SAML single sign-on][1].
 - Your issuer returns ID-JAGs that meet the token requirements in the **Custom issuer** tab of the [Set up your issuer](#set-up-your-issuer) section.
 
+[1]: /account_management/saml/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -216,6 +217,7 @@ Complete the following steps in the Okta Admin Console as a Super Administrator.
 - Okta limits XAA within Single Sign-On to 250 ID-JAG tokens per user, per resource app, per month. Contact your Okta account team if your usage exceeds this limit.
 - If a user signed in before you enabled Cross-App Access, have them sign out of the agent and sign back in. Sessions established earlier lack the identity token the agent needs.
 
+[1]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
 [2]: https://developer.okta.com/docs/guides/xaa-agent-to-app/main/
 
 {{% /tab %}}
@@ -258,6 +260,9 @@ The scopes you select in the {{< ui >}}Scopes{{< /ui >}} step limit what Claude 
 - If a request fails with a user resolution error, confirm the user's email address in Claude matches their Datadog user handle.
 - If a user signed in before you enabled Cross-App Access, have them sign out of Claude and sign back in. Sessions established earlier lack the identity token the agent needs.
 
+
+[1]: https://support.claude.com/en/articles/15537633-authorize-mcp-connectors-for-your-entire-organization
+[2]: https://claude.ai/admin-settings/connectors
 
 {{% /tab %}}
 
@@ -325,6 +330,7 @@ Payload:
 - If Datadog rejects the token's SAML `issuer`, confirm it matches the identity provider configured in your Datadog organization's SAML settings exactly. One identity provider tenant can host several applications for Datadog, each with its own entity ID.
 - If the user is not found, confirm `nameid` matches the user's Datadog handle exactly.
 
+[2]: https://datatracker.ietf.org/doc/html/rfc8693
 [3]: https://datatracker.ietf.org/doc/html/rfc7523
 
 {{% /tab %}}
@@ -334,4 +340,7 @@ Payload:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/organization-settings/cross-app-access
+[2]: https://app.datadoghq.com/organization-settings/oauth-applications
+[3]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
 [4]: /account_management/audit_trail/
