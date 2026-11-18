@@ -244,13 +244,13 @@ For unsupported languages in OpenTelemetry setups, [configure telemetry tagging]
 
 ## Support levels
 
-Datadog supports OpenTelemetry components at three levels. A component's level depends on who maintains it and whether it ships with the DDOT Collector or the Agent's Collector.
+Datadog supports OpenTelemetry components at three levels, based on who maintains a component and whether it comes with the DDOT Collector or the Agent's Collector.
 
-| Level | Components | What Datadog provides |
-|---|---|---|
-| Datadog Supported | Components Datadog owns, such as the [Datadog Exporter][39], [Datadog Connector][39], [Infrastructure Attribute Processor][40], and [Datadog Extension][41], and the DDOT Collector image itself. | Datadog maintains these components and ships security fixes. Bug fixes ship faster, not tied to upstream releases. Datadog Support troubleshoots them under your support agreement. |
-| Community Supported | Upstream OpenTelemetry components [included by default with the DDOT Collector][42] or the Agent's Collector. | Datadog tests these components with each release and ships security fixes in new releases. Datadog Support helps you configure them. Fixes to a component's own behavior are made upstream in the OpenTelemetry project, on a best-effort basis. |
-| Custom | Components that aren't included by default, such as components you add to the DDOT Collector or [the Agent's Collector][43], and [instrumentation of unsupported runtimes][44]. | Datadog provides documentation as a starting point. Datadog Support offers basic troubleshooting only. For deeper help, contact the [OpenTelemetry community][45] or the component's maintainers. |
+| Level | Components | Fixes | Datadog Support |
+|---|---|---|---|
+| Datadog Supported | Components Datadog owns, such as the [Datadog Exporter][39], [Datadog Connector][39], [Infrastructure Attribute Processor][40], and [Datadog Extension][41], and the DDOT Collector image | Datadog maintains these components and fixes bugs and security issues without waiting for an upstream release. | Troubleshoots them under your support agreement. |
+| Community Supported | Upstream OpenTelemetry components [included by default in the DDOT Collector][42] or the Agent's Collector | Datadog tests them in each release and ships security fixes. Fixes to a component's own behavior happen upstream in the OpenTelemetry project, on a best-effort basis. | Helps you configure them. |
+| Custom | Components that aren't included by default, such as ones you add to the DDOT Collector or [the Agent's Collector][43], and [instrumentation of unsupported runtimes][44] | Datadog provides documentation as a starting point. | Basic troubleshooting only. For more help, contact the [OpenTelemetry community][45] or the component's maintainers. |
 
 ## Platform and environment support
 
