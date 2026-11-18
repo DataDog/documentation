@@ -8,7 +8,7 @@
 
 > **FilterConfig**: `object`
 
-Defined in: [src/schemas/frontmatter.ts:62](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/frontmatter.ts#L62)
+Defined in: [src/schemas/frontmatter.ts:73](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/frontmatter.ts#L73)
 
 The configuration of an individual page filter,
 as defined in the front matter of a document
@@ -20,6 +20,10 @@ and filled in with any defaults.
 
 > `optional` **default\_value**: `string`
 
+### hide\_if?
+
+> `optional` **hide\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
+
 ### label
 
 > **label**: `string`
@@ -27,6 +31,10 @@ and filled in with any defaults.
 ### option\_group\_id
 
 > **option\_group\_id**: `string`
+
+### show\_if?
+
+> `optional` **show\_if**: `Record`\<`string`, `string`[]\>[] = `ConditionalDisplaySchema`
 
 ### trait\_id
 

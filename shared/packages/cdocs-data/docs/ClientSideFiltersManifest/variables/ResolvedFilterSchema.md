@@ -6,19 +6,16 @@
 
 # Variable: ResolvedFilterSchema
 
-> `const` **ResolvedFilterSchema**: `ZodObject`\<[`ResolvedFilter`](../type-aliases/ResolvedFilter.md)\>
+> `const` **ResolvedFilterSchema**: `ZodUnion`\<[`ResolvedFilter`](../type-aliases/ResolvedFilter.md)\>
 
-Defined in: [src/schemas/pageFilters.ts:34](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/pageFilters.ts#L34)
+Defined in: [src/schemas/pageFilters.ts:30](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/pageFilters.ts#L30)
 
 A page filter that has been "resolved" into
 its current value and available options.
-The current value can be derived from default values
-or user selections, and the available options
-can sometimes be narrowed by previous user selections
-that this selection depends on.
 
-For example, assume the user must select dbm_host (such as `aws`)
-before they can select a dbm_host_type (such as `ec2`).
-The options for dbm_host_type will be
-"resolved" (narrowed) based on the user's selection of dbm_host,
-since not every possible host type option is valid for all hosts.
+When `isShown` is true, the filter is fully resolved with
+current value, default value, and available options.
+
+When `isShown` is false, the filter is hidden based on
+its show_if / hide_if conditions, and only contains
+the filter's id and label.

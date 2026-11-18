@@ -195,8 +195,8 @@ Key features are covered below, but for full details, see [the generated documen
 
 ### Compilation functions
 
-- [`loadCustomizationConfig()`](./docs/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
-- [`buildFiltersManifest()`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
+- [`loadCustomizationConfig()`](./docs/loadCustomizationConfig/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
+- [`buildFiltersManifest()`](./docs/buildFiltersManifest/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
 - [`pruneManifestForClient()`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
 
 `loadCustomizationConfig()` reads the configuration from disk, so call it at build time. It isn't exported from the package root, so that importing from `cdocs-data` never bundles the file system or the YAML parser. Import it by subpath: `import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig"`.
@@ -211,9 +211,9 @@ Key features are covered below, but for full details, see [the generated documen
 
 ### Browser functions and classes
 
-- [`getTraitValsFromUrl()`](./docs/functions/getTraitValsFromUrl.md), which retrieves trait values from any search params present in a URL.
-- [`writeTraitValsToUrl()`](./docs/functions/writeTraitValsToUrl.md), which writes updated trait values to a URL, ordering them consistently for SEO purposes.
-- [`CdocsClientStorage`](./docs/classes/CdocsClientStorage.md), which manages reading/writing trait values to local storage, pruning older values when appropriate.
+- [`getTraitValsFromUrl()`](./docs/getTraitValsFromUrl/functions/getTraitValsFromUrl.md), which retrieves trait values from any search params present in a URL.
+- [`writeTraitValsToUrl()`](./docs/writeTraitValsToUrl/functions/writeTraitValsToUrl.md), which writes updated trait values to a URL, ordering them consistently for SEO purposes.
+- [`CdocsClientStorage`](./docs/CdocsClientStorage/classes/CdocsClientStorage.md), which manages reading/writing trait values to local storage, pruning older values when appropriate.
 
 To reduce client bundle size, these can each be imported individually: `import { writeTraitValsToUrl } from "cdocs-data/writeTraitValsToUrl"`.
 

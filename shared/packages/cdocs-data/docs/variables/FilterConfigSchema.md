@@ -8,7 +8,7 @@
 
 > `const` **FilterConfigSchema**: `ZodObject`\<[`FilterConfig`](../type-aliases/FilterConfig.md)\>
 
-Defined in: [src/schemas/frontmatter.ts:40](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/frontmatter.ts#L40)
+Defined in: [src/schemas/frontmatter.ts:51](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/frontmatter.ts#L51)
 
 The configuration of an individual page filter,
 as defined in the front matter of a document

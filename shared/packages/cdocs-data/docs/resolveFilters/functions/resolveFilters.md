@@ -6,9 +6,9 @@
 
 # Function: resolveFilters()
 
-> **resolveFilters**(`p`): [`ResolvedFilters`](../../ClientSideFiltersManifest/type-aliases/ResolvedFilters.md)
+> **resolveFilters**(`p`): `Record`
 
-Defined in: [src/api/shared/resolveFilters.ts:47](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/api/shared/resolveFilters.ts#L47)
+Defined in: [src/api/shared/resolveFilters.ts:49](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/api/shared/resolveFilters.ts#L49)
 
 Resolve the page filters object that is used
 to populate the page customization menu.
@@ -31,7 +31,7 @@ resulting from the user's earlier selections, and so on.
 
 #### filtersManifest
 
-\{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `errors`: `object`[]; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; `possibleVals`: `string`[]; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \} \| \{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \}
+\{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `errors`: `object`[]; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `hide_if`: `Record`\<`string`, `string`[]\>[]; `label`: `string`; `option_group_id`: `string`; `show_if`: `Record`\<`string`, `string`[]\>[]; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; `optionLabelsByOptionId`: `Record`\<`string`, `string`\>; `possibleVals`: `string`[]; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \} \| \{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `hide_if`: `Record`\<`string`, `string`[]\>[]; `label`: `string`; `option_group_id`: `string`; `show_if`: `Record`\<`string`, `string`[]\>[]; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \}
 
 The page's filters manifest (either
 the full version or the client-side version).
@@ -45,7 +45,7 @@ keyed by trait ID.
 
 ## Returns
 
-[`ResolvedFilters`](../../ClientSideFiltersManifest/type-aliases/ResolvedFilters.md)
+`Record`
 
 A ResolvedFilters object, keyed by trait ID,
 containing the relevant filter values and options

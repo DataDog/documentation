@@ -8,7 +8,7 @@
 
 > `const` **FrontmatterSchema**: `ZodObject`\<[`Frontmatter`](../type-aliases/Frontmatter.md)\>
 
-Defined in: [src/schemas/frontmatter.ts:110](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/frontmatter.ts#L110)
+Defined in: [src/schemas/frontmatter.ts:154](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/frontmatter.ts#L154)
 
 The front matter of a document required by the integration
 (additional keys are allowed in the front matter YAML,
