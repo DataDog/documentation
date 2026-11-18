@@ -30,11 +30,11 @@ further_reading:
 
 ## Overview 
 
-Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog SDKs automatically collect these metrics for supported environments and send them to the Datadog Agent.
+Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog SDKs automatically collect these metrics for supported environments.
 
 These metrics help you identify bottlenecks, troubleshoot performance issues, and optimize resource utilization. By viewing runtime metrics alongside traces and logs, you gain comprehensive visibility into your application's health and performance.
 
-If you instrument your application with OpenTelemetry instead of Datadog tracing libraries, see [OpenTelemetry Runtime Metrics][10] for setup instructions.
+For runtime metrics collected by upstream OpenTelemetry SDKs, see [OpenTelemetry Runtime Metrics][10] for setup instructions.
 
 ## Compatibility
 
@@ -119,6 +119,8 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{< /tabs >}}
 
 ## Setup instructions
+
+The following instructions export runtime metrics through DogStatsD. For OTLP export, see [Export runtime metrics over OTLP][12].
 
 To set up runtime metrics, you need to configure both the Datadog Agent and your application.
 
@@ -259,6 +261,18 @@ You can only enable runtime metrics with [environment variables](#environment-va
 {{% /tab %}}
 {{< /tabs >}}
 
+## Export runtime metrics over OTLP
+
+Use one of the following Datadog SDKs to export runtime metrics over OTLP:
+
+| SDK | Minimum SDK version | Runtime requirement |
+|-----|---------------------|---------------------|
+| Java | v1.63.0 | Java 8+ |
+| .NET | v3.44.0 | .NET 6+ |
+| Node.js | v5.107.0 | A Node.js version supported by the SDK |
+
+For the environment variables and endpoint settings, see [Export runtime metrics over OTLP][11].
+
 ## Dashboards
 
 After setup is complete, you can view runtime metrics in:
@@ -313,3 +327,5 @@ Each supported language collects a set of runtime metrics that provide insights 
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
 [9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
 [10]: /opentelemetry/integrations/runtime_metrics/
+[11]: /opentelemetry/config/environment_variable_support/#export-runtime-metrics-over-otlp
+[12]: #export-runtime-metrics-over-otlp
