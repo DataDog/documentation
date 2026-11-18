@@ -23,7 +23,7 @@ The Logs overlay shows logs from your cloud resources in the context of your Clo
 
 To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram.
 
-The overlay adds a pin to each supported resource that has logs. If a resource has logs with more than one status, the pin shows the most severe status.
+The overlay adds a pin to each supported resource that has logs. The pin shows the status of the most severe logs for that resource. It also shows the number of logs with that status, and a combined count of logs with all other statuses, for example, **9 Emergency, 14k other**.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay with a log search panel, and log pins and status counts on resources in an AWS diagram." style="width:100%;" >}}
 
@@ -60,7 +60,7 @@ Enable Log Management in your Datadog organization. To start collecting logs, se
 
 ## Investigate logs
 
-The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. On the diagram, resources show the number of logs for each status, for example, **260 Emergency** or **28 Error**.
+The Logs overlay shows a search bar, a list of log results, and the pins on your diagram.
 
 To investigate logs:
 
@@ -69,7 +69,7 @@ To investigate logs:
 1. (Optional) Turn on {{< ui >}}Group Patterns{{< /ui >}} to group similar logs. For more information, see [Grouping Logs Into Patterns][4].
 1. In the list of results, click a log to see its details in the log side panel.
 
-To open the current query in the Log Explorer, click {{< ui >}}View in Explorer{{< /ui >}} at the top right of the list of results.
+To open the current query in the Log Explorer, click the <i class="icon-external-link"></i> **(open in new window)** icon at the top right of the list of results. The icon's tooltip is {{< ui >}}View in Explorer{{< /ui >}}.
 
 ## Further reading
 
