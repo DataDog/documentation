@@ -3,17 +3,18 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { buildLlmsTree } from "../lib/pagesListing/llmsTree";
 import { LlmsIndexSchema } from "../lib/pagesListing/types";
 
-const SIDECAR = "llms-index.json";
+const INTERMEDIATE_FILE = "llms-index.json";
 const INDEX_FILE = "api/llms.txt";
 
 /**
  * Emits the whole llms.txt tree after the build: `dist/client/api/llms.txt`
  * plus one detail file per section (and its `part_N` splits).
  *
- * The `llms-index.json` route emits the resolved page-source structure during the
- * build — that step has to run inside Vite, since the sources reach the API spec
- * through `import.meta.glob`. This integration then reads that sidecar, builds the
- * tree exactly once, writes every file, and deletes the sidecar.
+ * The `llms-index.json` route emits the resolved page-source structure during
+ * the build — that step has to run inside Vite, since the sources reach the API
+ * spec through `import.meta.glob`. This integration then reads that
+ * intermediate file, builds the tree exactly once, writes every file, and
+ * deletes the intermediate file.
  *
  * Building here rather than from routes is what removes the coupling: a route
  * would need `getStaticPaths` to enumerate every section and `part_N` path without
@@ -50,9 +51,9 @@ export function llmsTxt(): AstroIntegration {
           );
         }
 
-        const sidecarUrl = new URL(SIDECAR, clientDir);
+        const intermediateFileUrl = new URL(INTERMEDIATE_FILE, clientDir);
         const llmsIndex = LlmsIndexSchema.parse(
-          JSON.parse(await readFile(sidecarUrl, "utf8")),
+          JSON.parse(await readFile(intermediateFileUrl, "utf8")),
         );
         const { index, detailFiles } = buildLlmsTree(llmsIndex, site);
 
@@ -64,10 +65,10 @@ export function llmsTxt(): AstroIntegration {
         }
         // `force` so a second build:done consumer removing it first, or a
         // partially cleaned dist, cannot fail the build at its very last step.
-        await rm(sidecarUrl, { force: true });
+        await rm(intermediateFileUrl, { force: true });
 
         logger.info(
-          `wrote ${INDEX_FILE} and ${detailFiles.size} section files, and removed ${SIDECAR}`,
+          `wrote ${INDEX_FILE} and ${detailFiles.size} section files, and removed ${INTERMEDIATE_FILE}`,
         );
       },
     },

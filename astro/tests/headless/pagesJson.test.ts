@@ -46,10 +46,10 @@ const routeCtx = (
   }) as unknown as Parameters<typeof categoryGET>[0];
 
 /**
- * Serves the English plaintext for a page's disk-relative path by dispatching to
- * the same route module the build runs, so a sidecar entry that no route can
- * serve — a page listed in `pages.json` that would 404 or be missing on disk —
- * fails here.
+ * Serves the English plaintext for a page's disk-relative path by dispatching
+ * to the same route module the build runs, so an intermediate file entry that
+ * no route can serve — a page listed in `pages.json` that would 404 or be
+ * missing on disk — fails here.
  */
 async function serveMarkdown(file: string): Promise<string> {
   if (file === "api/changelog.md") {
@@ -140,7 +140,7 @@ async function readIndex(): Promise<PageIndexEntry[]> {
   return JSON.parse(await res.text());
 }
 
-describe("GET /pages-index.json (metadata sidecar)", () => {
+describe("GET /pages-index.json (metadata intermediate file)", () => {
   it("returns application/json", async () => {
     const res = (await pageIndexGET(ctx(SITE))) as Response;
     expect(res.headers.get("Content-Type")).toBe(

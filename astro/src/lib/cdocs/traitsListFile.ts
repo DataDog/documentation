@@ -8,10 +8,11 @@
 import { createHash } from "node:crypto";
 
 /**
- * The build-time sidecar the `cdocs-traits-index.json` route emits. The
- * `cdocsTraitsList` integration moves it to its hashed path after the build.
+ * The build-time intermediate file the `cdocs-traits-index.json` route emits.
+ * The `cdocsTraitsList` integration moves it to its hashed path after the
+ * build.
  */
-export const CDOCS_TRAITS_SIDECAR = "cdocs-traits-index.json";
+export const CDOCS_TRAITS_INTERMEDIATE_FILE = "cdocs-traits-index.json";
 
 /**
  * The traits list's path in the client output, named after a hash of its

@@ -1,7 +1,7 @@
 /**
  * Contracts for the plaintext page listing: the `pages.json` and `llms.txt`
- * artifact schemas, their build-time sidecars, and the page-source interfaces
- * both are built from.
+ * artifact schemas, their build-time intermediate files, and the page-source
+ * interfaces both are built from.
  *
  * Alias-free (zod only) so the `astro:build:done` integrations, which run in Node
  * outside Vite's module graph, can import from here.
@@ -54,7 +54,8 @@ export type PagesListing = z.infer<typeof PagesListingSchema>;
  * never asked to render a body, so it cannot drift from what the route serves.
  *
  * A schema rather than a bare interface because it crosses a disk boundary: the
- * `llms-index.json` sidecar is parsed back in the `llmsTxt` integration.
+ * `llms-index.json` intermediate file is parsed back in the `llmsTxt`
+ * integration.
  */
 export const PlaintextPageSchema = z
   .object({
@@ -82,7 +83,7 @@ export const PlaintextSectionSchema = z
   })
   .strict();
 
-/** One source's contribution to the `llms-index.json` sidecar. */
+/** One source's contribution to the `llms-index.json` intermediate file. */
 export const LlmsIndexSourceSchema = z
   .object({
     /** Heading for this source's area in the top-level llms.txt index. */
@@ -93,12 +94,12 @@ export const LlmsIndexSourceSchema = z
   .strict();
 
 /**
- * `llms-index.json` — the structure sidecar for the llms.txt tree.
+ * `llms-index.json` — the structure intermediate file for the llms.txt tree.
  *
  * The resolved output of every page source, in registry order: exactly what
  * `buildLlmsTree` needs and nothing more. Deliberately holds `urlPath`s rather
- * than absolute URLs, so the sidecar is origin-independent and `site` is applied
- * exactly once, by the integration that writes the files.
+ * than absolute URLs, so the intermediate file is origin-independent and `site`
+ * is applied exactly once, by the integration that writes the files.
  */
 export const LlmsIndexSchema = z.array(LlmsIndexSourceSchema);
 
@@ -123,7 +124,7 @@ export interface PlaintextPageSource {
 }
 
 /**
- * One page's entry in the metadata sidecar (`pages-index.json`).
+ * One page's entry in the metadata intermediate file (`pages-index.json`).
  *
  * This is the cheap half of `pages.json`: everything except the content hash.
  * `file` is the disk-relative path of the emitted `.md`, so the

@@ -9,8 +9,11 @@ import {
   getCdocsTraitsListUrl,
   type CdocsPage,
 } from "./cdocsPages";
-import { CDOCS_TRAITS_SIDECAR, cdocsTraitsListPath } from "./traitsListFile";
-import { GET as getTraitsListSidecar } from "../../pages/cdocs-traits-index.json";
+import {
+  CDOCS_TRAITS_INTERMEDIATE_FILE,
+  cdocsTraitsListPath,
+} from "./traitsListFile";
+import { GET as getTraitsListRoute } from "../../pages/cdocs-traits-index.json";
 import type { CdocContentFilter } from "./filters";
 
 const configDir = fileURLToPath(
@@ -202,21 +205,21 @@ describe("the traits list file", () => {
     });
   });
 
-  it("is what the sidecar route serves, byte for byte", async () => {
+  it("is what the intermediate file's route serves, byte for byte", async () => {
     // The server names the file from this JSON, and the build names it from
-    // the sidecar, so the two must match exactly.
-    const response = await getTraitsListSidecar(
-      {} as Parameters<typeof getTraitsListSidecar>[0],
+    // the intermediate file, so the two must match exactly.
+    const response = await getTraitsListRoute(
+      {} as Parameters<typeof getTraitsListRoute>[0],
     );
 
     expect(await response.text()).toBe(await getCdocsTraitsListJson());
   });
 
-  it("is served from the sidecar route in dev, and the hashed file otherwise", async () => {
+  it("is served from the intermediate file's route in dev, and the hashed file otherwise", async () => {
     const json = await getCdocsTraitsListJson();
 
     expect(await getCdocsTraitsListUrl({ isDev: true })).toBe(
-      `/${CDOCS_TRAITS_SIDECAR}`,
+      `/${CDOCS_TRAITS_INTERMEDIATE_FILE}`,
     );
     expect(await getCdocsTraitsListUrl({ isDev: false })).toBe(
       `/${cdocsTraitsListPath(json)}`,
