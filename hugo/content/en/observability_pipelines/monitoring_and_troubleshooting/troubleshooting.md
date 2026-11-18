@@ -130,9 +130,55 @@ Datadog recommends keeping the Worker StatefulSet's default `podManagementPolicy
 
 If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
 
-### Ensure your organization is enabled for RC
+### Remote Configuration loading errors
 
-If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
+The Worker uses [Remote Configuration][17] to load the pipelines you deploy in the Observability Pipelines UI. Most Remote Configuration errors don't stop data from flowing. When an error occurs, the Worker continues to run its last valid pipeline configuration and retries loading the new one.
+
+The Worker checks for configuration changes every five seconds. This means a Worker that can't reach Datadog logs about 12 errors a minute. That rate is expected for a retry loop and doesn't mean the issue is getting worse. To determine whether you need to take action, check which error the Worker is logging and how long the error persists.
+
+**Note**: Use [pipeline metrics][30] and [monitors][31] to detect pipeline issues, and use Worker error and warning logs to investigate the cause. Worker retries can log many errors during a temporary issue, so monitors are a more reliable signal of a real problem.
+
+#### Errors to investigate
+
+This table describes Worker errors and the actions to take:
+
+`Fatal error, worker will now exit.`
+: **Description**: The configuration reload encountered an unrecoverable error.
+: **Data impact**: The Worker stops.
+: **Action**: Alert your on-call team. Check the error details and whether the Worker is restarting.
+
+`Please ensure that the API key you are using is scoped for RC…` or `Please ensure your organisation is enabled for RC…`
+: **Description**: The API key doesn't have the Remote Configuration scope, or Remote Configuration isn't enabled for your organization.
+: **Data impact**: The Worker doesn't load a pipeline.
+: **Action**: Make sure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
+
+`Configuration is invalid.`
+: **Description**: The deployed pipeline failed validation.
+: **Data impact**: The previous pipeline continues to run, and the Worker reports `status:errored`.
+: **Action**: Fix the pipeline in the Observability Pipelines UI. If the issue persists, contact [Datadog support][1].
+
+`Failed to reload remote configuration.`
+: **Description**: The new pipeline was built but failed to start. For example, a port is already in use or a destination setting is invalid. This message often appears with `Old configuration rolled back.`
+: **Data impact**: The previous pipeline continues to run, and the Worker reports `status:errored`.
+: **Action**: Check the `errors` field in the log for details, then fix and redeploy the pipeline. If the issue persists, contact [Datadog support][1].
+
+`RC client wasn't initialized, will retry.`
+: **Description**: The Worker can't reach Remote Configuration on startup. The Worker retries every 30 seconds.
+: **Data impact**: No pipeline runs on that Worker.
+: **Action**: If the error persists for more than five minutes, check your network, proxy, DNS, and `DD_SITE` settings.
+
+`Received config is not valid JSON.`, `Received config version is invalid.`, or `Unexpected config type`
+: **Description**: The Worker received a malformed payload from Remote Configuration.
+: **Data impact**: The configuration change isn't applied.
+: **Action**: Contact [Datadog support][1].
+
+#### Transient errors
+
+Investigate the following errors under certain situations:
+
+`Failed to update remote configuration.` or `Failed to fetch remote configuration target(s).`
+: **Description**: A single request to Remote Configuration failed because of a network issue, timeout, or server error.
+: **When to investigate**: If the error occurs continuously for more than 15 minutes, or on all Workers at the same time, pipeline changes made in the UI aren't applied to the Workers. Check that your firewall and proxy settings allow outbound traffic from the Workers to your [Datadog site][32]. See [Add domains to firewall allowlist][21] for the list of domains to allow.
 
 ### The Worker is not receiving logs from the source
 
@@ -264,3 +310,5 @@ If your log timestamps are in string format and your Databricks table has a time
 [28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
 [29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
 [30]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=sources#component-metrics
+[31]: /observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
+[32]: /getting_started/site/
