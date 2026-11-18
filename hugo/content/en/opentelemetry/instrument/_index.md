@@ -18,6 +18,8 @@ Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs main
 
 DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They use OpenTelemetry APIs, Semantic Conventions, OTLP, standard configuration, and deployment tooling, and add Datadog-specific capabilities.
 
+Each application process should use one SDK implementation to avoid duplicate spans.
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/upstream_otel_sdks/" >}}
     <h3>Using Upstream OTel SDKs</h3>
@@ -30,10 +32,6 @@ DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They u
 {{< /whatsnext >}}
 
 Both use standard OpenTelemetry configuration and deployment methods. You can switch SDK packages, auto-instrumentation images, or build-time instrumentation while keeping OpenTelemetry API instrumentation and standard configuration. Switching back to upstream SDKs retains OpenTelemetry telemetry; Datadog-specific capabilities are no longer available. Review [feature compatibility][1] for capability details and Datadog Agent requirements.
-
-## Avoid duplicate instrumentation
-
-Use one SDK per application process to avoid duplicate spans. On Kubernetes, use the OpenTelemetry Operator to deploy and configure the SDK. See the setup guide for your SDK for installation details.
 
 ## Further reading
 

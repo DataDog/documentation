@@ -59,22 +59,24 @@ This table covers upstream OpenTelemetry SDKs and Datadog SDKs using Datadog sem
 
 ### DDOT SDK setups
 
-DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Datadog Agent is optional for these signals. Live Debugger, Dynamic Instrumentation, and remotely configured head sampling require the Datadog Agent for configuration or data delivery.
+DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Datadog Agent is optional for these signals.
+
+Capabilities and configuration requirements vary by language and SDK version. The table describes whether the SDK needs a Datadog Agent for configuration or data delivery.
 
 | Capability | Without the Datadog Agent | With the Datadog Agent |
 |---|---|---|
-| Core traces, metrics, and logs | {{< X >}} | {{< X >}} |
-| Live Debugger |  | {{< X >}} |
-| Dynamic Instrumentation |  | {{< X >}} |
-| Remotely configured head sampling |  | {{< X >}} |
-| SQL query-level Database Monitoring | {{< X >}} | {{< X >}} |
-| Data Streams Monitoring | {{< X >}} | {{< X >}} |
-| Feature Flag Management | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| App and API Protection | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| Code Security | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| Continuous Profiler | Not supported | Not supported |
+| [Core traces, metrics, and logs][50] | {{< X >}} | {{< X >}} |
+| [Live Debugger][55] |  | {{< X >}} |
+| [Dynamic Instrumentation][56] |  | {{< X >}} |
+| [Remotely configured head sampling][57] |  | {{< X >}} |
+| [SQL query-level DBM correlation][51] | {{< X >}} | {{< X >}} |
+| [Data Streams Monitoring][15] | {{< X >}} | {{< X >}} |
+| [Feature Flag Management][52] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [App and API Protection][11] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [Code Security][53] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [Continuous Profiler][12] | Not supported | Not supported |
 
-Availability varies by language and SDK version. See [Using DDOT SDKs][49] for setup details.
+Datadog-specific capabilities can use product-specific configuration and data destinations in addition to OTLP. See the linked product documentation for setup requirements, including [Database Monitoring collection][54].
 
 
 ## API support
@@ -196,3 +198,10 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [48]: /opentelemetry/setup/ddot_collector/kubernetes/#install-the-core-datadog-agent-alongside-ddot
 [49]: /opentelemetry/instrument/ddot_sdks/
 [50]: /opentelemetry/instrument/
+[51]: /database_monitoring/connect_dbm_and_apm/
+[52]: /feature_flags/
+[53]: /security/code_security/
+[54]: /database_monitoring/#getting-started
+[55]: /tracing/live_debugger/
+[56]: /tracing/trace_collection/dynamic_instrumentation/
+[57]: /tracing/trace_pipeline/ingestion_controls/

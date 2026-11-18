@@ -17,16 +17,15 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-Datadog SDKs support OpenTelemetry instrumentation libraries for frameworks that do not have built-in instrumentation. You can extend Datadog tracing to these frameworks without changing SDKs.
+Datadog SDKs can collect spans from supported OpenTelemetry instrumentation libraries, including for frameworks not covered by their built-in instrumentation.
+
+For DDOT SDK language support and setup, see [Using DDOT SDKs][32].
 
 ## Prerequisites
 
-1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby SDKs.
-
-1. **Choose the export route**: With native Datadog export, run the [Datadog Agent][24]. With [OTLP export][31], configure the Datadog SDK to send spans to an OTLP-compatible receiver instead.
-
-1. **Disable duplicate instrumentation**: When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
-Datadog instrumentation to prevent duplicate spans from appearing in the trace.
+- A Datadog SDK configured for OpenTelemetry API support, as described in the language-specific setup below.
+- A telemetry destination: the [Datadog Agent][24] for Datadog trace export, or an OTLP-compatible receiver for [supported OTLP trace export][31].
+- Only one instrumentation for each operation. Enabling both Datadog and OpenTelemetry instrumentation for the same operation can produce duplicate spans.
 
 ## Configuration
 
@@ -34,11 +33,11 @@ You can configure Datadog SDKs with [supported OpenTelemetry environment variabl
 
 ## Language support
 
-Datadog SDKs implement OpenTelemetry APIs. When you use upstream OpenTelemetry instrumentation libraries, note the following limitations:
-
-Operations specific to the OpenTelemetry SDK are not supported (for example, SpanProcessors or OTLP Trace Exporters).
+Instrumentation library compatibility, including requirements for upstream SDK components such as span processors, varies by language. See the language-specific setup and compatibility requirements below.
 
 Datadog SDKs also support OpenTelemetry Metrics and Logs APIs in some languages. See [OpenTelemetry API support][25] for details. For unsupported languages, use an upstream OpenTelemetry SDK and OTLP ingestion.
+
+The table lists the minimum SDK versions for the OpenTelemetry Traces API. For OTLP export versions and protocols, see [Export Traces from Datadog SDKs in OTLP Format][31].
 
 | Language | Minimum version for Traces API |
 |----------|--------------------------------|
@@ -253,9 +252,9 @@ The Datadog Node.js SDK supports library [instrumentations][17] using the OpenTe
 
 ## Setup
 
-To use OpenTelemetry instrumentations with the Datadog Node.js SDK, perform the following steps:
+To use OpenTelemetry instrumentations with the Datadog Node.js SDK:
 
-1. Follow the Setup instructions in [Node.js Custom Instrumentation using OpenTelemetry API][18].
+1. Enable OpenTelemetry API support as described in [Node.js Custom Instrumentation using OpenTelemetry API][18].
 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-js-contrib` library.
 
 ## Example
@@ -324,7 +323,7 @@ The Datadog PHP SDK supports library [instrumentation][25] using the `stable` Op
 
 To use OpenTelemetry integrations with the Datadog PHP SDK:
 
-1. Follow the instructions in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
+1. Enable OpenTelemetry API support as described in [configuring OpenTelemetry][27] in the Datadog PHP SDK documentation.
 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-php-contrib` library.
 
 ## Example
@@ -464,3 +463,4 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 [24]: /getting_started/tracing/#set-up-datadog-apm
 [25]: /opentelemetry/compatibility/#api-support
 [31]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
+[32]: /opentelemetry/instrument/ddot_sdks/
