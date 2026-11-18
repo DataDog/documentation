@@ -104,7 +104,7 @@ otlp_config:
 
 ## Enabling the new logic (opt-in)
 
-If you are using a version of the Datadog Agent or upstream OpenTelemetry Collector prior to the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable the new logic using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
+If you use a version of the Datadog Agent or upstream OpenTelemetry Collector earlier than the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable the new logic using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
 
 {{< tabs >}}
 {{% tab "Upstream OpenTelemetry Collector" %}}

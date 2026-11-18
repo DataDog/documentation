@@ -65,7 +65,7 @@ For details on Datadog, community, and custom component support, see [Support le
 
 ### OpenTelemetry Collector components
 
-By default, the DDOT Collector includes these components. This list matches DDOT 7.85. The upstream components are also listed in the [DDOT 7.85.3 manifest][11]. The Datadog Exporter and Datadog Connector are Datadog builds that the manifest doesn't list.
+By default, the DDOT Collector includes these components. This list matches DDOT 7.85. The upstream components are also listed in the [DDOT 7.85.3 manifest][11]. The manifest doesn't list the Datadog Exporter and Datadog Connector, which Datadog builds separately.
 
 {{% collapse-content title="Receivers" level="p" %}}
 

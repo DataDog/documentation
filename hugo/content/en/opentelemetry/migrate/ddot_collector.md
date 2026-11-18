@@ -94,7 +94,7 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you need to follow [Add Components to the Agent's Collector][4].
+In this case, follow [Add Components to the Agent's Collector][4].
 
 [4]: /opentelemetry/setup/ddot_collector/custom_components
 {{% /tab %}}
