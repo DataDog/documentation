@@ -54,7 +54,7 @@ For APM deployments, an `env` must be specified. If you have an `env` or `datace
 [3]: /dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
-[6]: https://app.datadoghq.com/metric/summary
+[6]: https://app.datadoghq.com/metric/catalog
 [7]: /metrics/advanced-filtering/
 [8]: /getting_started/tagging/
 [9]: /metrics/#time-aggregation

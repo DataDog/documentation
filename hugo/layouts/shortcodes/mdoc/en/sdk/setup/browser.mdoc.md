@@ -342,7 +342,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
-Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+Use the [Agentic Onboarding][10] page to instrument your browser application using the Pup CLI or the Datadog MCP Server.
 
 {% /collapse-content %}
 
@@ -397,7 +397,7 @@ Your application appears as pending on the Applications page until Datadog start
 [7]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-tracking-consent
 [9]: /integrations/content_security_policy_logs/
-[10]: /agentic_onboarding/setup/
+[10]: /agentic_onboarding/
 [11]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [12]: /real_user_monitoring/platform/dashboards/
 [13]: /private-beta/rum-sdk-auto-injection/

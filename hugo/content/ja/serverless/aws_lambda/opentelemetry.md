@@ -3,36 +3,38 @@ further_reading:
 - link: /opentelemetry/
   tag: ドキュメント
   text: Datadog の OpenTelemetry
+- link: https://www.datadoghq.com/architecture/enhancing-observability-in-aws-lambda-with-otel/
+  tag: Architecture Center
+  text: Datadog と OpenTelemetry を使用した AWS Lambda におけるアプリケーションオブザーバビリティの強化
 title: AWS Lambda と OpenTelemetry
 ---
+[OpenTelemetry][1] は、テレメトリデータの収集とルーティングのための標準化されたプロトコルとツールを IT チームに提供するオープンソースの可観測性フレームワークです。
 
-[OpenTelemetry][1] は、テレメトリーデータの収集とルーティングのための標準化されたプロトコルとツールを IT チームに提供するオープンソースの可観測性フレームワークです。
+このページでは、Datadog Serverless Monitoring for AWS Lambda での OpenTelemetry の使用について説明します。非サーバーレス環境で OpenTelemetry を使用する方法など、詳細については [Datadog における OpenTelemetry][2] を参照してください。
 
-このページでは、Datadog Serverless Monitoring for AWS Lambda での OpenTelemetry の使用について説明します。非サーバーレス環境での OpenTelemetry の使用方法など、詳細については [Datadog における OpenTelemetry][2] を参照してください。
+## OpenTelemetry による AWS Lambda のインスツルメンテーション {#instrument-aws-lambda-with-opentelemetry}
 
-## OpenTelemetry による AWS Lambda のインスツルメンテーション
+AWS の Lambda 関数を OpenTelemetry でインスツルメントし、Datadog にデータを送信する方法は複数あります。
 
-AWS の Lambda 関数を OpenTelemetry でインスツルメンテーションし、Datadog にデータを送信する方法は複数あります。
+- [Datadog SDK における OpenTelemetry API サポート](#opentelemetry-api-support-within-datadog-sdks) (推奨)
+- [任意の OpenTelemetry SDK から Datadog Lambda Extension を通して OpenTelemetry トレースを送信する](#sdk) (プレビュー版)
 
-- [Datadog トレーサーでの OpenTelemetry API サポート](#opentelemetry-api-support-within-datadog-tracer) (推奨)
-- [任意の OpenTelemetry SDK から Datadog Lambda 拡張機能を通して OpenTelemetry トレースを送信する](#sdk) (プレビュー)
+### Datadog SDK 内での OpenTelemetry API サポート {#opentelemetry-api-support-within-datadog-sdks}
 
-### Datadog トレーサー内での OpenTelemetry API サポート
+Datadog Lambda Extension のインストール時に含まれる Datadog SDK は、OpenTelemetry でインスツルメントされたコードで作成されたカスタムスパンとトレースを受け入れ、テレメトリを処理し、Datadog に送信します。
 
-Datadog Lambda 拡張機能のインストール時に含まれる Datadog トレーシングライブラリは、OpenTelemetry でインスツルメンテーションされたコードで作成されたカスタムスパンとトレースを受け入れ、テレメトリーを処理し、Datadog に送信します。
+たとえば、すでに OpenTelemetry API でインツルメントされたコードが主な目的であれば、このアプローチを使用できます。これは、Datadog のネイティブな実装、タグ付け、機能を利用しながら、すべてのサービスのインスツルメンテーションをベンダーニュートラルに維持できることを意味します。
 
-例えば、すでに OpenTelemetry API でインスツルメンテーションされたコードが主な目的であれば、このアプローチを使用することができます。これは、Datadog のネイティブな実装、タグ付け、機能を利用しながら、すべてのサービスのインスツルメンテーションをベンダーニュートラルに維持できることを意味します。
-
-AWS Lambda を OpenTelemetry API でインスツルメンテーションするには、Lambda 関数内で環境変数 `DD_TRACE_OTEL_ENABLED` を `true` に設定し、ランタイム固有の手順については [OpenTelemetry API によるカスタムインスツルメンテーション][3]を参照してください。
+AWS Lambda を OpenTelemetry API でインスツルメントするには、Lambda 関数内で環境変数 `DD_TRACE_OTEL_ENABLED` を `true` に設定し、ランタイム固有の手順については [OpenTelemetry API によるカスタムインスツルメンテーション][3]を参照してください。
 
 
-### 任意の OpenTelemetry SDK から、Datadog Lambda 拡張機能を通して OpenTelemetry トレースを送信する {#sdk}
+### 任意の OpenTelemetry SDK から、Datadog Lambda Extension を通して OpenTelemetry トレースを送信する {#sdk}
 
-このアプローチは、[Datadog Agent の OLTP 取り込み][4]に似ています。例えば Rust や PHP などのランタイムでトレースサポートが利用できない場合に推奨します。
+このアプローチは、[Datadog Agent の OTLP 取り込み][4]に似ています。たとえば Rust や PHP などのランタイムでトレースサポートが利用できない場合に推奨します。
 
 **注**: 拡張機能内の OTLP エンドポイントからカスタムメトリクスを送信することはサポートされていません。
 
-1. Datadog の Lambda 拡張機能にスパンをエクスポートするように OpenTelemetry に指示します。そして、AWS Lambda 用の OpenTelemetry のインスツルメンテーションを追加します。
+1. OpenTelemetry にスパンを Datadog Lambda Extension にエクスポートするよう指示します。その後、AWS Lambda 用の OpenTelemetry のインスツルメンテーションを追加します。
 
    {{< tabs >}}
    {{% tab "Python" %}}
@@ -109,7 +111,7 @@ AWS Lambda を OpenTelemetry API でインスツルメンテーションする�
    {{% /tab %}}
    {{< /tabs >}}
 
-1. 1. `serverless.yml` を修正して、ランタイムでインスツルメンテーションを適用し、Datadog 拡張機能 v53 以降を追加し、環境変数 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` を `localhost:4318` (HTTP 用) または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` を `localhost:4317` (gRPC 用) に設定して、Datadog 拡張機能で OpenTelemetry を有効にします。Datadog トレーシングレイヤーを**追加しない**でください。
+1. `serverless.yml` を編集して、ランタイム時にインスツルメンテーションを適用し、Datadog Lambda Extension v53 以降を追加し、環境変数 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` を `localhost:4318` (HTTP の場合) に、または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` を `localhost:4317` (gRPC の場合) に設定して、Datadog Lambda Extension で OpenTelemetry を有効にしてください。Datadog トレーシングレイヤーは追加**しない**でください。
 
    {{< tabs >}}
    {{% tab "Python" %}}
@@ -119,7 +121,7 @@ AWS Lambda を OpenTelemetry API でインスツルメンテーションする�
    provider:
      name: aws
      region: <YOUR_REGION>
-     runtime: python3.8  # または使用している Python のバージョン
+     runtime: python3.8  # or the Python version you are using
      environment:
        DD_API_KEY: ${env:DD_API_KEY}
        DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
@@ -133,17 +135,17 @@ AWS Lambda を OpenTelemetry API でインスツルメンテーションする�
          INSTRUMENTATION_FLAG: true
    ```
 
-それに従って Python のコードを更新してください。例えば、`handler.py` では以下のようになります。
+   それに従って Python のコードを更新してください。たとえば、`handler.py` では以下のようになります。
 
    ```py
    import os
 
    def handler(event, context):
        if os.environ.get('INSTRUMENTATION_FLAG') == 'true':
-           # インスツルメンテーションロジックをここに記述
+           # Perform instrumentation logic here
            print("Instrumentation is enabled")
-
-       # 通常のハンドラーロジックをここに記述
+       
+       # Your normal handler logic here
        print("Handling the event")
    ```
    {{% /tab %}}
@@ -156,7 +158,7 @@ AWS Lambda を OpenTelemetry API でインスツルメンテーションする�
    provider:
      name: aws
      region: <YOUR_REGION>
-     runtime: nodejs18.x # または使用している Node.js のバージョン
+     runtime: nodejs18.x # or the Node.js version you are using
      environment:
        DD_API_KEY: ${env:DD_API_KEY}
        DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
@@ -174,7 +176,7 @@ AWS Lambda を OpenTelemetry API でインスツルメンテーションする�
 
 1. デプロイします。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

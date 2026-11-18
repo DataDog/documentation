@@ -18,6 +18,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/
   tag: Blog
   text: Unifiez la remédiation et la communication avec Datadog Incident Response
+- link: https://www.datadoghq.com/blog/fedramp-high-incident-response/
+  tag: Blog
+  text: Gérez la réponse aux incidents dans votre environnement FedRAMP High
 title: On-Call
 ---
 Datadog On-Call intègre la surveillance, l'appel et la réponse aux incidents au sein d'une seule plateforme.
@@ -26,19 +29,19 @@ Datadog On-Call intègre la surveillance, l'appel et la réponse aux incidents a
 
 ## Concepts {#concepts}
 
-- **Pages** représentent un événement pour lequel être alerté, tel qu'un monitor, un incident ou un signal de sécurité. Une Page peut avoir un statut de `Triggered`, `Acknowledged`, ou `Resolved`.
-- **Teams** sont des groupes configurés dans Datadog pour gérer des types spécifiques de pages, en fonction de l'expertise et des rôles opérationnels.
-- **Les règles de routage** permettent aux Teams d'ajuster finement leurs réactions à des types spécifiques d'événements entrants. Ces règles peuvent définir le niveau d'urgence d'une page, router les pages vers différentes politiques d'escalade en fonction des métadonnées de l'événement, et configurer [des heures de support][7] pour retarder les notifications d'escalade à des fenêtres temporelles définies.
-- **Escalation policies** déterminent comment les Pages sont escaladées au sein ou entre les Teams.
-- **Schedules** définissent les horaires auxquels des membres spécifiques de l'équipe sont d'astreinte pour répondre aux Pages.
+Les - **Pages** représentent un événement pour lequel être alerté, tel qu'un monitor, un incident ou un signal de sécurité. Une Page peut avoir un statut de `Triggered`, `Acknowledged`, ou `Resolved`.
+Les - **Teams** (équipes) sont des groupes configurés dans Datadog pour gérer des types spécifiques de pages, en fonction de l'expertise et des rôles opérationnels.
+Les - **Routing rules** (règles de routage) permettent aux Teams d'ajuster finement leurs réactions à des types spécifiques d'événements entrants. Ces règles peuvent définir le niveau d'urgence d'une page, router les pages vers différentes politiques d'escalade en fonction des métadonnées de l'événement, et configurer [des heures de support][7] pour retarder les notifications d'escalade à des fenêtres temporelles définies.
+Les - **Escalation policies** (politiques d'escalade) déterminent comment les Pages sont escaladées au sein ou entre les Teams.
+Les - **Schedules** (plannings) définissent les horaires auxquels des membres spécifiques de l'équipe sont d'astreinte pour répondre aux Pages.
 
 ## Fonctionnement {#how-it-works}
 
-**Teams** sont l'unité organisationnelle centrale de Datadog On-Call. Lorsqu'une notification est déclenchée dans Datadog, une **page** est envoyée à l'équipe On-Call désignée.
+Les **Teams** (équipes) sont l'unité organisationnelle centrale de Datadog On-Call. Lorsqu'une notification est déclenchée dans Datadog, une **page** est envoyée à l'équipe On-Call désignée.
 
 {{< img src="incident_response/on-call/notification_page.png" alt="Notification mentionnant une équipe On-Call." style="width:80%;" >}}
 
-Chaque équipe possède **des politiques d'escalade** et **des plannings**. Les politiques d'escalade définissent comment une Page est envoyée à divers plannings, tels que _Checkout Operations - Interrupt Handler_, _Primary_ et _Secondary_ dans la capture d'écran suivante. Chaque équipe peut également configurer des **règles de routage** pour acheminer les Pages vers différentes politiques d'escalade.
+Chaque équipe possède des **politiques d'escalade** et des **plannings**. Les politiques d'escalade définissent comment une Page est envoyée à divers plannings, tels que _Checkout Operations - Interrupt Handler_, _Primary_ et _Secondary_ dans la capture d'écran suivante. Chaque équipe peut également configurer des **règles de routage** pour acheminer les Pages vers différentes politiques d'escalade.
 
 {{< img src="incident_response/on-call/escalation_policy.png" alt="Un exemple de politique d'escalade." style="width:80%;" >}}
 

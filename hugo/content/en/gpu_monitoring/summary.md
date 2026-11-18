@@ -20,6 +20,7 @@ The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highligh
 
 Click on the section titles below to access the corresponding section:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Fleet Health](#fleet-health)
 - [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
@@ -32,11 +33,11 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 Datadog GPU Monitoring provides observability for both on-premises and cloud devices within a single, unified view.
 
-This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
+This visualization provides a real-time breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
-The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
+The funnel also highlights any performance issues or provisioning inefficiencies, such as idle or ineffective GPU devices and how they're trending monthly.
 
-{{< img src="gpu_monitoring/funnel-5.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices, Kubernetes allocation, and device allocation over time with a one-week forecast." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays fleet size by clusters, hosts, and devices; device counts for each funnel stage with month-over-month trends; and Kubernetes allocation." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
@@ -45,11 +46,32 @@ The steps of the funnel are defined as follows:
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-### Device allocation over time
+### Capacity forecasting
 
 AI workloads can experience unpredictable spikes in resource usage. As a result, it's important to align available GPUs with incoming workloads. This section helps you to identify if you're overallocating GPUs that end up sitting idle, or underprovisioning resources that stall critical jobs.
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
+
+Procuring hardware can be a time-consuming process. Use the **Device Allocation Over Time** widget to understand historical demand over your selected time frame and forecast future capacity needs.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="Device Allocation Over Time widget showing total, allocated, active, and effective device counts over the past week, with a dotted one-week forecast extending past the current time." style="width:90%;" >}}
+
+You can also use {{< ui >}}Group by{{< /ui >}} to group device allocation by tags such as cluster, provider, GPU device, device type, or cloud provider. This breaks down your fleet's total, allocated, active, and effective device counts by that tag.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Device Allocation Over Time widget grouped by cluster with the Active view selected, showing a stacked bar chart of active devices per cluster over the past week and a list of top clusters by active device count." style="width:90%;" >}}
+
+## Fleet Health
+
+The Fleet Health section allows you to spot hardware health issues across your entire fleet at a glance. You can group by cluster, rack, NVLink domain, or provider to see a health topology visualization over the selected time frame. For example, if you group by rack, each tile represents a rack, and each square in the tile represents a host in that rack. Click any host to view its related GPU devices.
+
+The visualization is colored by XID error severity:
+- Red: Critical XID
+- Orange: Non-critical XID
+- Green: Healthy
+
+With this color coding, you can spot whether hardware issues are isolated to a particular group. Hover over a host to see the exact XID error code.
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health. Each tile lists its host and GPU counts." style="width:90%;" >}}
 
 ## Cost & Utilization
 

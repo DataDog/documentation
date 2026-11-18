@@ -25,18 +25,18 @@ further_reading:
   text: AWS Lambda용 Serverless Monitoring
 - link: https://docs.datadoghq.com/serverless/aws_lambda/configuration/
   tag: 문서
-  text: AWS Lambda용 Serverless Monitoring 구성하기
+  text: AWS Lambda용 Serverless Monitoring 구성
 - link: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
   tag: 문서
   text: AWS Lambda 계측
 - link: https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/
   tag: 문서
-  text: AWS Lambda 모니터링 문제 해결하기
+  text: AWS Lambda 모니터링 문제 해결
 - link: https://docs.datadoghq.com/account_management/workload_identity_federation/
   tag: 문서
   text: 워크로드 ID 페더레이션
 private: true
-title: AWS 통합을 통해 Datadog 계측 설치하기
+title: AWS 통합을 통해 Datadog 계측 설치
 ---
 ## 개요 {#overview}
 
@@ -72,7 +72,7 @@ Datadog은 사용자가 직접 재배포하지 않고도 Lambda 함수에 계측
 | 함수 선택 | 함수 속성에 대한 쿼리를 작성하거나, 특정 함수를 선택하거나, 모든 적격 함수를 추가합니다. Datadog은 저장하기 전에 일치하는 함수 집합을 표시합니다. | 함수 이름과 태그에 대한 타겟팅 규칙을 논리 연산자와 함께 작성합니다. |
 | 나중에 일치하는 함수 | 규칙을 저장한 후 생성되었거나 태그 변경 후 일치하기 시작했는지 여부와 관계없이 자동으로 계측됩니다. | 타겟팅 규칙과 일치하면 자동으로 계측됩니다. |
 | 레이어 버전 | Datadog이 선택하고 업데이트합니다. | 사용자가 설정하며, 변경하기 전까지 고정된 상태로 유지됩니다. |
-| 계측된 함수가 인증하는 방법 | [Workload Identity Federation][16], 함수에 Datadog API 키 없음 | Remote Configuration이 활성화된 Datadog API 키 |
+| 계측된 함수가 인증하는 방법 | [Workload Identity Federation][16], 함수에 Datadog API key 없음 | Remote Configuration이 활성화된 Datadog API key |
 | Datadog 권한 | Hosts Read 및 Agent Install | Serverless AWS Instrumentation Read 및 Write |
 | 계측 제거 | Datadog에서 제거 | 해당 리전의 CloudFormation 스택 삭제 |
 
@@ -159,7 +159,7 @@ Lambda 계측에는 Secrets Manager, Systems Manager 또는 IAM 쓰기 권한이
 
 ## 작동 방식 {#how-it-works}
 
-계측은 **계측 규칙**을 기반으로 작동합니다. 이는 AWS 계정과 포함할 리소스를 설명하는 쿼리가 결합된 형태입니다. Datadog은 쿼리를 평가하고, 사용자 계정 내의 각 대상 리소스를 계측하며, 계측 상태를 유지합니다.
+**계측 규칙**은 AWS 계정에 대해 저장된 **Scope to** 선택 항목입니다. 이는 나중에 선택 항목과 일치하게 되는 리소스를 포함하여 Datadog이 자동으로 계측할 리소스를 결정합니다. Datadog에서는 선택 항목을 평가하고 사용자 계정 내의 각 대상 리소스를 계측하며 계측된 상태로 유지합니다.
 
 1. 포함할 리소스를 설명하는 쿼리를 작성하거나, 특정 리소스를 선택하거나, 모든 적격 리소스를 추가합니다.
 1. Datadog은 계정에서 규칙을 평가하고 규칙이 적용되는 리소스를 기록합니다.
@@ -202,11 +202,13 @@ Datadog은 시간 경과에 따라 지속적으로 규칙을 다시 평가하므
 
 Datadog은 기존 레이어와 환경 변수를 보존합니다. Node.js 및 Python 함수의 경우, Datadog은 핸들러를 Datadog 핸들러로 리디렉션하고 원래 핸들러를 환경 변수에 유지합니다. Datadog은 변경 사항을 정확하게 기록하므로 제거하면 원래 구성이 복원됩니다. Datadog이 수행하는 특정 레이어, 환경 변수 및 핸들러 변경 사항에 대해서는 기술 참조의 [Datadog이 함수에서 변경하는 사항][17]을 참조하세요.
 
-**Datadog API 키는 함수에 기록되지 않습니다.** 확장 프로그램은 [Workload Identity Federation][16]을 통해 함수 자체의 실행 역할로 인증하므로 Lambda 계측을 위해 계정에 Datadog 자격 증명이 저장되지 않습니다. Datadog이 이 인증을 설정하므로 구성할 항목이 없습니다.
+**Datadog API key는 함수에 기록되지 않습니다.** 확장 프로그램은 [Workload Identity Federation][16]을 통해 함수 자체의 실행 역할로 인증하므로 Lambda 계측을 위해 계정에 Datadog 자격 증명이 저장되지 않습니다. Datadog이 이 인증을 설정하므로 구성할 항목이 없습니다.
 
 확장 프로그램이 수집하는 항목을 조정하려면 함수에서 표준 Datadog 환경 변수를 설정하세요. 전체 목록은 [AWS Lambda용 Serverless Monitoring 구성][14]을 참조하세요. 계측이 수집하는 항목과 활성화되는 Lambda 모니터링 기능에 대해서는 [AWS Lambda용 Serverless Monitoring][13]을 참조하세요.
 
 ## Datadog 계측 설치 {#install-datadog-instrumentation}
+
+<div class="alert alert-info">이 기능은 체험판 고객 및 체험 기간 중에 이 기능을 활성화한 고객만 사용할 수 있습니다. 이는 AWS 통합 설정과 Fleet Automation 모두에 적용됩니다.</div>
 
 계측 대상 리소스를 얼마나 세밀하게 제어할지에 따라 두 가지 진입점에서 계측을 시작할 수 있습니다.
 

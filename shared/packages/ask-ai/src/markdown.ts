@@ -39,18 +39,50 @@ export function parseMarkdown(text: string): string {
   return marked.parse(text, { async: false });
 }
 
-/** Turns `[N]` tokens into numbered chips, leaving code blocks untouched. */
+/** Widest range a citation like `[1-20]` may span before it reads as prose. */
+const MAX_REF_RANGE = 20;
+
+/**
+ * Expands a citation group such as `2, 3`, `1-3`, or `1–3` into its source
+ * numbers. Returns `null` when the group is not a list of citations.
+ */
+export function expandRefGroup(group: string): number[] | null {
+  const numbers: number[] = [];
+  for (const part of group.split(",")) {
+    const match = part.trim().match(/^(\d{1,3})(?:\s*[-\u2013]\s*(\d{1,3}))?$/);
+    if (!match) return null;
+
+    const start = Number.parseInt(match[1] ?? "", 10);
+    const end = match[2] ? Number.parseInt(match[2], 10) : start;
+    if (end < start || end - start > MAX_REF_RANGE) return null;
+
+    for (let n = start; n <= end; n += 1) {
+      if (!numbers.includes(n)) numbers.push(n);
+    }
+  }
+  return numbers;
+}
+
+function refChip(num: number): string {
+  return (
+    '<span class="conv-search-source-ref-wrap">' +
+    `<button type="button" class="conv-search-source-ref-btn" data-source-number="${num}">` +
+    `<span class="conv-search-source-ref-number">${num}</span>` +
+    "</button></span>"
+  );
+}
+
+/**
+ * Turns citations such as `[1]`, `[2, 3]`, and `[1-3]` into numbered chips,
+ * leaving code blocks untouched.
+ */
 export function inlineRefChips(html: string): string {
   return html.replace(
-    /(<pre[\s\S]*?<\/pre>|<code[\s\S]*?<\/code>)|(\[(\d{1,3})\])/gi,
-    (_match, codeBlock: string | undefined, _token, num: string) => {
+    /(<pre[\s\S]*?<\/pre>|<code[\s\S]*?<\/code>)|\[(\d{1,3}(?:\s*[,\-\u2013]\s*\d{1,3})*)\]/gi,
+    (match, codeBlock: string | undefined, group: string | undefined) => {
       if (codeBlock) return codeBlock;
-      return (
-        '<span class="conv-search-source-ref-wrap">' +
-        `<button type="button" class="conv-search-source-ref-btn" data-source-number="${num}">` +
-        `<span class="conv-search-source-ref-number">${num}</span>` +
-        "</button></span>"
-      );
+      const numbers = expandRefGroup(group ?? "");
+      return numbers ? numbers.map(refChip).join("") : match;
     },
   );
 }

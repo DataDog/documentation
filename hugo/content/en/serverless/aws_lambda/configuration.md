@@ -516,9 +516,9 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 [Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories.
 
-For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
+To set up the source code integration, [select your language][101] and follow the **Serverless** instructions.
 
-[101]: /integrations/guide/source-code-integration/?tab=go#serverless
+[101]: /source_code/service-mapping/
 
 ## Exclude auto-injected tags from custom metrics
 

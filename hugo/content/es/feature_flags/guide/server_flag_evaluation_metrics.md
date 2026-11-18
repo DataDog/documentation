@@ -196,7 +196,7 @@ Después de implementar, confirme que las métricas estén llegando a Datadog:
 
 De forma predeterminada, `feature_flag.evaluations` conserva solo una hora de datos. Para conservar un historial más largo:
 
-1. Vaya a [Metrics Summary][4] y busque `feature_flag.evaluations`.
+1. Vaya a [Metrics Catalog][4] y busque `feature_flag.evaluations`.
 2. Seleccione la métrica y habilite **Historical Metrics**.
 
 Esta es una configuración de participación voluntaria y no se habilita automáticamente para las métricas OTLP.
@@ -226,7 +226,7 @@ La métrica `feature_flag.evaluations` es un contador con las siguientes etiquet
 [1]: /es/feature_flags/server/
 [2]: /es/opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /es/dashboards/
 [6]: /es/feature_flags/server/java/#installation
 [7]: /es/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

@@ -1,0 +1,8 @@
+{
+  "data": {
+    "type": "aws_cloud_auth_intake_mapping",
+    "attributes": {
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogAgent-de20b7e944abfac3/*"
+    }
+  }
+}

@@ -10,8 +10,6 @@ further_reading:
       text: 'Set up Datadog Agent for OpenLineage Proxy'
 ---
 
-<div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
-
 ## Overview
 
 Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. With custom jobs, you can:

@@ -1,0 +1,27 @@
+{
+  "name": "Example-Monitor",
+  "type": "query alert",
+  "query": "formula(\"query1 / query2\").rollup(\"avg\").last(\"5m\") > threshold",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "options": {
+    "thresholds": {
+      "critical_query": "formula(\"query1 / query2\").rollup(\"p99\").last(\"1w\").multiplier(1.5)"
+    },
+    "variables": [
+      {
+        "name": "query1",
+        "data_source": "metrics",
+        "query": "sum:trace.http.request.errors{*}.as_count()"
+      },
+      {
+        "name": "query2",
+        "data_source": "metrics",
+        "query": "sum:trace.http.request.hits{*}.as_count()"
+      }
+    ]
+  }
+}
