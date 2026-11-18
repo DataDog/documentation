@@ -57,7 +57,7 @@ Steps in the XAA flow:
 5. Datadog verifies the issuer's signature, confirms the user exists in your organization, and returns an access token scoped to the user's permissions and the agent's allowed scopes.
 6. The agent calls the Datadog API with that access token.
 
-Each product names this feature differently: Okta calls it Cross App Access, Claude calls it managed authorization, and the MCP specification calls it Enterprise-Managed Authorization. All three describe the same exchange.
+Each product names this feature differently. Okta calls it Cross App Access, and Claude calls it managed authorization. The MCP specification calls it Enterprise-Managed Authorization. All three describe the same exchange.
 
 ### Permissions and auditing
 
@@ -133,7 +133,7 @@ Every issuer URL must use `https` and a fully qualified, lowercase domain name, 
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Allowed issuer URLs{{< /ui >}} list. Datadog will stop accepting new ID-JAGs from the issuer immediately. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][2].
+To stop trusting an issuer, remove it from the {{< ui >}}Allowed issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer immediately. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][2].
 
 ### Copy your organization UUID
 
@@ -200,7 +200,7 @@ Complete the following steps in the Okta Admin Console as a Super Administrator.
     1. Set {{< ui >}}Scopes{{< /ui >}} to {{< ui >}}Allow any scope{{< /ui >}}. Okta does not filter scopes: Okta copies whatever the agent requests into the token, and Datadog decides what to grant. See the [Control scopes](#control-scopes) section.
     1. Click {{< ui >}}Add{{< /ui >}}.
 
-    <div class="alert alert-warning">Do not use {{< ui >}}Allow specific scopes{{< /ui >}}. Okta rejects any token request that contains a scope outside the list, so the integration fails with an error instead of falling back to narrower access.</div>
+    <div class="alert alert-warning">Do not use {{< ui >}}Allow specific scopes{{< /ui >}}. Okta rejects any token request that contains a scope outside the list. The integration then fails with an error instead of falling back to narrower access.</div>
 
 1. **Activate the agent.** On the AI agent page, select {{< ui >}}Activate{{< /ui >}} from the {{< ui >}}Actions{{< /ui >}} menu and wait for Okta to confirm.
 
@@ -233,7 +233,7 @@ Use Claude as the issuer (Claude Auto-Connect) when you manage the Datadog conne
 
 Claude does not need the agent client ID.
 
-The Claude issuer URL is the {{< ui >}}Issuer URL{{< /ui >}} shown in the Datadog connector in Claude, under {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}}. It uses the host `claude.ai` or `identity.anthropic.com`, followed by the path for your Claude organization. Datadog rejects subdomains of these hosts. Copy the URL exactly as Claude shows it.
+To find the Claude issuer URL, open the Datadog connector in Claude and go to {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}}. The {{< ui >}}Issuer URL{{< /ui >}} shown there uses the host `claude.ai` or `identity.anthropic.com`, followed by the path for your Claude organization. Datadog rejects subdomains of these hosts. Copy the URL exactly as Claude shows it.
 
 #### Configure Claude
 
@@ -263,7 +263,7 @@ The scopes you select in the {{< ui >}}Scopes{{< /ui >}} step limit what Claude 
 
 {{% tab "Custom issuer" %}}
 
-A custom issuer is an identity provider, other than Okta and Claude, that issues ID-JAGs for users of your organization's SAML single sign-on. It is not a plain OIDC integration. Datadog uses the issuer's OpenID configuration only to find its signing keys. It identifies each user through the SAML identity in the token. An Okta org that issues tokens from a custom domain is a custom issuer.
+A custom issuer is any identity provider other than Okta or Claude that issues ID-JAGs. It issues them for users who sign in to your organization through SAML. It is not a plain OIDC integration. Datadog uses the issuer's OpenID configuration only to find its signing keys. It identifies each user through the SAML identity in the token. An Okta org that issues tokens from a custom domain is a custom issuer.
 
 #### Values you exchange
 
