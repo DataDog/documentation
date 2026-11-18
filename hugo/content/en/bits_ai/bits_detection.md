@@ -7,6 +7,10 @@ further_reading:
     text: "Autonomously monitor for impactful degradations with Bits Detection"
 ---
 
+{{< callout url="#" btn_hidden="true" header="false">}}
+  Bits Detection is in Preview. Contact your Datadog representative to request access.
+{{< /callout >}}
+
 ## Overview
 
 Monitoring coverage drifts as engineers add endpoints, move dependencies, and change user flows. A service can look healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps that coverage current. Your existing monitors stay in place, and Bits Detection works alongside them.

@@ -26,7 +26,7 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 
 ## Prerequisites
 
-- [Create monitors][7] for the services that you want Bits to cover. Bits triages alerts from these monitors.
+- [Create monitors][7] that alert when your systems might be unhealthy. Bits triages alerts from these monitors to identify unique issues that warrant deeper investigation. In Preview, Bits can also create and manage monitors for you. For more information, see the [Create a scope](#create-a-scope) section.
 - To let Bits create pull requests for code fixes, [enable automatic code fixes][16].
 - To let Bits take infrastructure actions after you approve them:
   1. Set up the type of action that you want Bits to take:
@@ -55,7 +55,7 @@ For information about the permissions available in Datadog, see [Datadog Role Pe
 
 ### Create a scope
 
-These steps describe how to create a scope in Datadog. You can also ask Bits to create a scope from [Bits Chat][6] or Slack.
+These steps describe how to create a scope in Datadog. You can also ask Bits to create a scope from [Bits Chat][6], Slack, or the [Datadog MCP Server][4].
 
 To create a scope:
 
