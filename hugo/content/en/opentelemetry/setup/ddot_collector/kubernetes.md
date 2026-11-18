@@ -832,9 +832,9 @@ After your application sends telemetry, check for it in Datadog. Data can take u
 | Logs from your application | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | If your application sends logs over OTLP: your service's logs. |
 | Container logs | [Log Explorer][62]: search for `kube_namespace:<NAMESPACE>`, where `<NAMESPACE>` is your application's namespace. | If you turned on container log collection (the `filelog` receiver or the `logsCollection` preset): the logs of the containers in that namespace. With the example configurations, these logs don't have the `service` and `env` tags. |
 
-## Add the Datadog Agent (optional) {#install-the-core-datadog-agent-alongside-ddot}
+## Add the Datadog Agent (recommended) {#install-the-core-datadog-agent-alongside-ddot}
 
-Some Datadog features need the Datadog Agent alongside the DDOT Collector. For which ones, see [Feature Compatibility][68]. To add the Agent, install it separately with the [Datadog Operator][57].
+Datadog recommends running the Datadog Agent alongside the DDOT Collector. Some Datadog features need it. For which ones, see [Feature Compatibility][68]. To add the Agent, install it separately with the [Datadog Operator][57].
 
 The DDOT Collector already collects some of the data the Agent can collect, and it uses host ports on every node. Before you deploy the Agent, check these settings in the `DatadogAgent` resource:
 
