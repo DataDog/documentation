@@ -590,16 +590,21 @@ menu:
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
       weight: 805
+    - name: Modify Tags
+      identifier: modify_tags
+      url: agent/fleet_automation/modify_tags
+      parent: agent_fleet_automation
+      weight: 806
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 807
+      weight: 808
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
