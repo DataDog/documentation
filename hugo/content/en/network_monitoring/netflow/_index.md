@@ -234,11 +234,11 @@ In the **Conversations** view, you can view the Public IP address of the Destina
 
 The {{< ui >}}Applications{{< /ui >}} section of the [NetFlow page][5] shows which applications use the most traffic on your network. Use it to identify the applications that drive bandwidth usage, performance issues, or congestion.
 
+{{< img src="network_device_monitoring/netflow/netflow_top_applications.png" alt="The Applications section of the NetFlow page, showing a Top Applications pie chart and a table of applications with bit rate, packet rate, and total bytes" width="100%" >}}
+
 To filter NetFlow data by application, use the {{< ui >}}Initiator Application{{< /ui >}} and {{< ui >}}Responder Application{{< /ui >}} filters in the {{< ui >}}Bidirectional{{< /ui >}} view, or the {{< ui >}}Source Application{{< /ui >}} and {{< ui >}}Destination Application{{< /ui >}} filters in the {{< ui >}}Unidirectional{{< /ui >}} view.
 
 To see the top applications for traffic through a single device, open the device's page and select the {{< ui >}}Traffic{{< /ui >}} tab.
-
-{{< img src="network_device_monitoring/netflow/netflow_top_applications.png" alt="The Applications section of the NetFlow page, showing a Top Applications pie chart and a table of applications with bit rate, packet rate, and total bytes" width="100%" >}}
 
 Each flow is assigned one application name, which Datadog selects from several enrichment sources: your custom IP and port mappings, DPI data from your devices, reverse DNS hostnames, GeoIP data, and default port mappings. Datadog then groups flows by application name to build the Applications view. For the order in which Datadog checks these sources, see [Application name assignment](#application-name-assignment).
 
