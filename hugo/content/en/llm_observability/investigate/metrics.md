@@ -148,9 +148,9 @@ These tags describe request routing and outcomes:
 | `gateway_last_action` | `fallback`, `retry`, `none`, or `unknown`. `none` means no retry or fallback call was attempted. |
 | `gateway_last_outcome` | Last provider attempt result: `ok`, `error`, `canceled`, or `unknown`. |
 
-The `gateway_initial_error_category` and `gateway_last_*` tags are available only on the failure metric. The last attempt result can differ from the request result if the gateway returns an earlier attempt's response.
+The `gateway_initial_error_category` and `gateway_last_*` tags are available only on the failure metric. The last attempt result can differ from the request result if the gateway rejects the response or returns an earlier attempt's response.
 
-Provider and model tags identify the first failed target, or the first attempted target for requests without a failure. The `gateway_router_id` tag identifies the entry route. Requests without a provider call omit target tags, and direct calls omit the route tag. Only the tags listed above are available. Custom cost tags aren't included, and `span_kind` filters exclude request samples.
+Provider and model tags identify the first failed target, or the first attempted target for requests without a failure. Model names use the provider-reported version when available, or the requested name otherwise. The `gateway_model_canonical` tag retains the catalog name. The `gateway_router_id` tag identifies the entry route. Requests without a provider call omit target tags, and direct calls omit the route tag. Only the tags listed above are available. Custom cost tags aren't included, and `span_kind` filters exclude request samples.
 
 Counts arrive after a request finishes and use its start time, so recent intervals can fill in later. Earlier traffic without request-level data has no request-metric history. Missing coverage is unknown, not zero. Traces used to inspect individual attempts follow span retention.
 
