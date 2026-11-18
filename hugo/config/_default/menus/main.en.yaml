@@ -2803,6 +2803,11 @@ menu:
       identifier: incident_ai
       parent: incident_investigate
       weight: 106
+    - name: Meeting Summaries and Transcripts
+      url: incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+      identifier: incident_meeting_summaries_transcripts
+      parent: incident_investigate
+      weight: 107
     - name: Setup and Configuration
       url: incident_response/incident_management/setup_and_configuration
       parent: incidents
