@@ -2821,7 +2821,13 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 
 ### Submit conversation costs (unreleased)
 
-These APIs require Datadog backend support and a released tracer exposing the method. They submit conversation billing independently of token-based LLM span pricing. Only ElevenLabs is supported.
+Automatic collection and these APIs require Datadog backend support and a tracer release containing this feature (unreleased). Only ElevenLabs is supported. Conversation billing is independent of token-based LLM span pricing.
+
+With LLM Observability and ElevenLabs instrumentation enabled, the tracer automatically uses the conversation's existing SDK client and credentials to retrieve post-call billing. Credentials must permit reading conversation details. It makes up to five additional requests within a 30-second retry window, with SDK retries disabled and request timeouts of at most three seconds. Up to eight conversations collect concurrently; additional conversations are skipped. Collection runs in the background and does not keep the process alive. Collection errors do not affect the conversation. Closed clients, missing permissions, delayed billing, capacity limits, and process exit can leave costs unavailable.
+
+Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` before starting the application to disable these requests. You can also use `ddtrace.config.elevenlabs["conversation_cost_enabled"] = False` in Python or `tracer.use('elevenlabs', { conversationCostEnabled: false })` in Node.js. Explicit submissions remain available.
+
+For delivery that must survive process exit, use an application-verified post-call transcription webhook with the APIs below. These methods make no provider requests.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2860,9 +2866,9 @@ llmobs.submitConversationCost(verifiedEvent.data, {
 {{% /tab %}}
 {{< /tabs >}}
 
-The application verifies webhook authenticity before submission. No new tracer environment variable is required. The return value is `false` when disabled, unfinished, or invalid, and when provider amounts are absent without an override. A `true` result describes local submission; delivery and conflict rejection are asynchronous. The active tenant routing context is retained.
+The application verifies webhook authenticity before submission. The automatic-collection opt-out does not disable these explicit methods. The return value is `false` when disabled, unfinished, or invalid, and when provider amounts are absent without an override. A `true` result describes local submission; delivery and conflict rejection are asynchronous. The active tenant routing context is retained.
 
-An optional `total_cost` (Python) or `totalCost` (Node.js) supplies a finite, nonnegative USD total, including zero. Supply it on the first submission. Raw provider amounts remain unchanged. Repeated sources share one billing owner; late missing values can be filled, while conflicting known amounts are rejected. Do not also annotate the same conversation charge onto response spans.
+An optional `total_cost` (Python) or `totalCost` (Node.js) supplies a finite, nonnegative USD total, including zero. Supply it on the first submission. Disable automatic collection when supplying an override asynchronously. Raw provider amounts remain unchanged. Repeated sources share one billing owner; late missing values can be filled, while conflicting known amounts are rejected. Do not also annotate the same conversation charge onto response spans.
 
 This API uses reported USD billing, without inferring tokens or allocating a platform charge across turns. It does not backfill per-turn usage. See [cost coverage and units](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased).
 

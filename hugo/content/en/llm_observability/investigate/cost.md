@@ -55,7 +55,9 @@ ElevenLabs reports its conversation-level USD total in `metadata.cost_fiat`. Dat
 
 One dedicated conversation billing workflow owns the charge. For example, a total of **$0.12**, with **$0.02 LLM** and **$0.10 platform**, contributes **$0.12 once**. Conversation totals are not copied onto turns or added to their component charges. Keep the hosted provider as `elevenlabs`, including when its configured model is an OpenAI or Anthropic model.
 
-Submit details your application already obtained, or data from an application-verified [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks). Billing can arrive after completion. Retries and missing-to-known enrichment are supported; changes to known amounts are rejected. Supply any user override on the first submission.
+The supported tracers automatically retrieve post-call billing when LLM Observability and ElevenLabs instrumentation are enabled. Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` to disable the additional requests. Collection is best effort; a closed client, missing permissions, capacity limits, process exit, or delayed provider billing can leave costs unavailable.
+
+You can also submit details your application already obtained, or data from an application-verified [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks). Billing can arrive after completion. Retries and missing-to-known enrichment are supported; changes to known amounts are rejected. Supply any user override on the first submission. Disable automatic collection when submitting overrides asynchronously, so an automatic observation does not arrive first.
 
 USD inputs are stored in nanodollars (USD multiplied by 1e9, rounded to the nearest nanodollar), while original USD amounts and provenance remain on the billing workflow. The [conversation cost metric](/llm_observability/investigate/metrics/#conversation-costs-unreleased) is attributed to when Datadog first accepts a known total.
 

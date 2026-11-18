@@ -33,11 +33,16 @@ Agent Observability also stores two other kinds of data, which have their own re
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
+| `ml_obs.span.llm.cost` | Disjoint cost contributions in nanodollars, including reported conversation charges. | Count | `ml_app`, `service`, `env`, `version`, `model_provider`, `charge_scope`, `cost_source`, `cost_component` |
 | `ml_obs.span.conversation.cost` | Accepted conversation total in nanodollars (USD × 1e9), once per conversation. | Count | `ml_app`, `service`, `env`, `version`, `model_provider`, `charge_scope`, `cost_source` |
 
 For ElevenLabs, `model_provider:elevenlabs` and `charge_scope:conversation` identify hosted conversation billing. `cost_source:provider` uses the reported USD total or complete USD component pair; `cost_source:user` uses an explicit user override. Unavailable totals do not emit a zero point. Explicit zeros are retained.
 
 Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Component enrichment updates the billing workflow without another total metric.
+
+For conversation contributions to `ml_obs.span.llm.cost`, `cost_component:llm` and `cost_component:platform` identify the reported components when both are known and their rounded sum equals the accepted total. Otherwise, `cost_component:unattributed` carries the entire accepted total. These contributions sum to the total once. The partition is fixed when Datadog first accepts a known total; late component details enrich the billing workflow but do not rewrite the metric. Ordinary token-priced LLM contributions use `cost_component:llm`; token metrics and their `token_modality` tags are unchanged.
+
+Query either cost metric family with `sum` and `.as_count()`. Do not add `ml_obs.span.llm.cost` to `ml_obs.span.conversation.cost`, because they include the same conversation charges.
 
 Platform charges are separate from token counts and token-modality pricing. Do not add the conversation total to its LLM/platform breakdowns. See [provider-reported conversation costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased) for availability and covered charges.
 
