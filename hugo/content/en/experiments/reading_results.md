@@ -135,7 +135,7 @@ To open a recommended chart:
 
 The chart opens in a new tab with the metric split by the recommended property. It uses the experiment's [CUPED][15] setting. Hover over a recommendation to see its p-value, significance threshold, and number of property values tested.
 
-The panel shows up to eight recommendations at first. Use the show and hide controls to expand or collapse the list. The panel is hidden when no qualifying findings are available.
+The panel shows up to eight recommendations at first. Click {{< ui >}}Show N more{{< /ui >}} to expand the list or {{< ui >}}Hide N{{< /ui >}} to collapse it. N is the number of additional recommendations. The panel is hidden when no qualifying findings are available.
 
 Use recommendations to choose results to investigate further. See [Property Analysis][16] for the statistical test and how to interpret its findings.
 
