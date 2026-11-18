@@ -145,7 +145,7 @@ Switch between live mode and indexed search by using the time selector in the to
 
 ### Requirements
 
-Live mode requires the Python ddtrace SDK (`ddtrace` 4.12.0 or later). Other SDKs only support displaying spans in the Trace Explorer after indexing and sampling, not in live mode.
+Live mode requires the Python ddtrace SDK (`ddtrace` 4.11.0 or later), with the Datadog Agent or agentless. Other SDKs and [OpenTelemetry instrumentation][9] only support displaying spans in the Trace Explorer after indexing and sampling, not in live mode.
 
 **Note**: Live mode requires the ddtrace SDK to send APM traces with the `v0.4` trace API. Live mode is not supported with the `v0.5` trace API.
 
@@ -154,9 +154,14 @@ Live mode requires the Python ddtrace SDK (`ddtrace` 4.12.0 or later). Other SDK
 Live mode reads spans before Datadog enriches them after ingestion. As a result, live mode does not support these fields:
 
 - [Evaluations](#evaluation-queries) (`@evaluation.*`) and [end-user feedback][8] (`@feedback.*`)
-- [Trace-level queries](#trace-level-queries) (`@trace.*` and `@child.*`)
+- [Trace-level attributes](#trace-level-queries) (`@trace.*` and `@child.*`). The {{< ui >}}Traces{{< /ui >}} view still works in live mode and lists root spans.
 
 The Trace Explorer hides these facets and columns while live mode is on. To query them, choose a time range longer than 15 minutes.
+
+Live mode is best-effort:
+
+- Long string values, such as large span inputs and outputs, can be truncated in live mode. The full values are available after the span is indexed.
+- Very large traces, and traces that arrive more than 15 minutes after they end, might not appear in live mode.
 
 ## Further reading
 
@@ -170,5 +175,6 @@ The Trace Explorer hides these facets and columns while live mode is on. To quer
 [6]: /tracing/trace_explorer/query_syntax/
 [7]: /llm_observability/instrument/sdk/#annotating-metadata
 [8]: /llm_observability/investigate/evaluations/end_user_feedback
+[9]: /llm_observability/instrument/otel_instrumentation/
 [10]: /llm_observability/instrument/sdk/#trace-sampling
 [11]: /llm_observability/instrument/sdk/#tag-based-sampling-rules
