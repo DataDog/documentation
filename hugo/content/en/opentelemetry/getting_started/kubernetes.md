@@ -90,14 +90,14 @@ Replace the placeholders:
    ./install
    ```
 
-2. Wait for the Operator to be ready, then list the pods. The Operator only instruments pods that start after it's ready.
+2. Wait for the OpenTelemetry Operator to be ready, then list the pods. It only instruments pods that start after it's ready.
 
    ```shell
    kubectl rollout status deployment/opentelemetry-kube-stack-opentelemetry-operator -n opentelemetry-operator-system --timeout=5m
    kubectl get pods -n opentelemetry-operator-system
    ```
 
-   Within a minute or two, these pods are `Running`: the Operator, kube-state-metrics, the `cluster` Collector, and one `daemon` Collector for each node.
+   Within a minute or two, these pods are `Running`: the OpenTelemetry Operator, kube-state-metrics, the `cluster` Collector, and one `daemon` Collector for each node.
 
 ## 4. Instrument your application
 
@@ -138,7 +138,7 @@ A `403` or `401` usually means the API key or the site is wrong.
 
 ### Your service doesn't appear
 
-Check that the annotation names your application's language. If it does, the pods probably started before the Operator was ready. Restart the Deployment so its pods start with instrumentation:
+Check that the annotation names your application's language. If it does, the pods probably started before the OpenTelemetry Operator was ready. Restart the Deployment so its pods start with instrumentation:
 
 ```shell
 kubectl rollout restart deployment <DEPLOYMENT_NAME> -n <NAMESPACE>
@@ -160,7 +160,7 @@ The installer applies your file on top of its own values files. For what you can
 
 - **Instrument more services**: Annotate their Deployments as in [step 4](#4-instrument-your-application). To add custom spans and metrics, see [Instrument Your Applications][8].
 - **Tag your data**: Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version` in [Unified service tagging][18].
-- **Manage the Collector yourself (optional)**: To install and manage the Collector with your own Helm or Operator configuration instead of the installer, see [Install the DDOT Collector on Kubernetes][19] or [Set up the upstream OpenTelemetry Collector][20].
+- **Manage the Collector yourself (optional)**: To install and manage the Collector with your own Helm charts or OpenTelemetry Operator configuration instead of the installer, see [Install the DDOT Collector on Kubernetes][19] or [Set up the upstream OpenTelemetry Collector][20].
 
 ## Uninstall
 
