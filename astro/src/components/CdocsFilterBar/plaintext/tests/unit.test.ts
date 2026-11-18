@@ -65,7 +65,7 @@ describe("cdocsFilterBarNodes", () => {
   it("lists each filter's options as links to their plaintext variants", async () => {
     await expect(
       buildMarkdocStr(cdocsFilterBarNodes(filterLinks)),
-    ).toMatchFileSnapshot("./__snapshots__/variantList.md");
+    ).toMatchFileSnapshot("./__snapshots__/plaintextFilterBar.md");
   });
 
   it("returns nothing when no filter is shown", () => {
