@@ -1,12 +1,12 @@
 export const prerender = true;
 /**
- * `pages-index.json` — the metadata sidecar for `pages.json`.
+ * `pages-index.json` — the metadata intermediate file for `pages.json`.
  *
  * Emits every page's `{ key, file, metadata }` with NO content hash, so it is
  * cheap (no page body is built). The `pagesJson` integration reads this after
  * the build, hashes each already-emitted `.md` from disk, writes the final
- * `dist/client/pages.json`, and deletes this sidecar. It therefore never appears
- * in a real deploy; it is excluded from the sitemap.
+ * `dist/client/pages.json`, and deletes this intermediate file. It therefore
+ * never appears in a real deploy; it is excluded from the sitemap.
  */
 
 import type { APIRoute } from "astro";

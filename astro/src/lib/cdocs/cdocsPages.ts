@@ -16,7 +16,10 @@ import type {
 } from "cdocs-data";
 import configByLang from "virtual:cdocs-config";
 import type { CdocContentFilter } from "./filters";
-import { CDOCS_TRAITS_SIDECAR, cdocsTraitsListPath } from "./traitsListFile";
+import {
+  CDOCS_TRAITS_INTERMEDIATE_FILE,
+  cdocsTraitsListPath,
+} from "./traitsListFile";
 
 const DEFAULT_LANG = "en";
 
@@ -143,14 +146,14 @@ export function getCdocsTraitsListJson(): Promise<string> {
  * The root-relative URL of the traits list, the same on every page. Apply
  * `prefixed()` before rendering it as an href.
  *
- * Built output serves the content-hashed file the `cdocsTraitsList`
- * integration writes. `astro dev` has no build step, so it serves the sidecar
+ * Built output serves the content-hashed file the `cdocsTraitsList` integration
+ * writes. `astro dev` has no build step, so it serves the intermediate file's
  * route instead.
  */
 export async function getCdocsTraitsListUrl(
   p: { isDev: boolean } = { isDev: import.meta.env.DEV },
 ): Promise<string> {
-  if (p.isDev) return `/${CDOCS_TRAITS_SIDECAR}`;
+  if (p.isDev) return `/${CDOCS_TRAITS_INTERMEDIATE_FILE}`;
   return `/${cdocsTraitsListPath(await getCdocsTraitsListJson())}`;
 }
 

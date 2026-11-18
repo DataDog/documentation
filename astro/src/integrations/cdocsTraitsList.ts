@@ -1,21 +1,21 @@
 import type { AstroConfig, AstroIntegration } from "astro";
 import { mkdir, readFile, rename } from "node:fs/promises";
 import {
-  CDOCS_TRAITS_SIDECAR,
+  CDOCS_TRAITS_INTERMEDIATE_FILE,
   cdocsTraitsListPath,
 } from "../lib/cdocs/traitsListFile";
 
 /**
- * Moves the Cdocs traits list from its build-time sidecar to its
+ * Moves the Cdocs traits list from its build-time intermediate file to its
  * content-hashed path under `_astro/`, so it can be cached indefinitely.
  *
- * The `cdocs-traits-index.json` route emits the sidecar during the static
- * build. The server computes the same hashed path from the same JSON at
+ * The `cdocs-traits-index.json` route emits the intermediate file during the
+ * static build. The server computes the same hashed path from the same JSON at
  * request time (see `getCdocsTraitsListUrl`), so it links to the file without
  * reading anything this integration writes.
  *
- * Runs only at build time. In `astro dev`, the server links to the sidecar
- * route instead.
+ * Runs only at build time. In `astro dev`, the server links to the intermediate
+ * file's route instead.
  *
  * Imports must stay alias-free (relative + npm only): this code runs in Node
  * during build orchestration, outside Vite's module graph, so `@lib` aliases do
@@ -33,10 +33,13 @@ export function cdocsTraitsList(): AstroIntegration {
         clientDir = config.build.client;
       },
       "astro:build:done": async ({ logger }) => {
-        const sidecarUrl = new URL(CDOCS_TRAITS_SIDECAR, clientDir);
+        const intermediateFileUrl = new URL(
+          CDOCS_TRAITS_INTERMEDIATE_FILE,
+          clientDir,
+        );
         let traitsListJson: string;
         try {
-          traitsListJson = await readFile(sidecarUrl, "utf8");
+          traitsListJson = await readFile(intermediateFileUrl, "utf8");
         } catch {
           // A build that skips the route (for example, a filtered build)
           // has no traits list to write.
@@ -48,9 +51,9 @@ export function cdocsTraitsList(): AstroIntegration {
         const outputPath = cdocsTraitsListPath(traitsListJson);
         const outputUrl = new URL(outputPath, clientDir);
         await mkdir(new URL(".", outputUrl), { recursive: true });
-        await rename(sidecarUrl, outputUrl);
+        await rename(intermediateFileUrl, outputUrl);
 
-        logger.info(`moved ${CDOCS_TRAITS_SIDECAR} to ${outputPath}`);
+        logger.info(`moved ${CDOCS_TRAITS_INTERMEDIATE_FILE} to ${outputPath}`);
       },
     },
   };

@@ -65,12 +65,12 @@ describe("buildLlmsIndex", () => {
     ]);
   });
 
-  it("produces a sidecar that validates against LlmsIndexSchema", async () => {
+  it("produces an intermediate file that validates against LlmsIndexSchema", async () => {
     const index = await buildLlmsIndex([apiSource, cdocsSource]);
     expect(() => LlmsIndexSchema.parse(index)).not.toThrow();
   });
 
-  it("bakes in no site URL, so the sidecar is origin-independent", async () => {
+  it("bakes in no site URL, so the intermediate file is origin-independent", async () => {
     const index = await buildLlmsIndex([apiSource, cdocsSource]);
     expect(JSON.stringify(index)).not.toMatch(/https?:/);
   });

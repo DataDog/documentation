@@ -26,7 +26,7 @@ describe("isSitemapPage", () => {
     expect(isSitemapPage("https://docs.datadoghq.com/")).toBe(false);
   });
 
-  it("excludes the build-time metadata sidecars", () => {
+  it("excludes the build-time metadata intermediate files", () => {
     expect(isSitemapPage("https://docs.datadoghq.com/pages-index.json")).toBe(
       false,
     );

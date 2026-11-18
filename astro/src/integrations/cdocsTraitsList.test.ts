@@ -12,7 +12,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { cdocsTraitsList } from "./cdocsTraitsList";
 import {
-  CDOCS_TRAITS_SIDECAR,
+  CDOCS_TRAITS_INTERMEDIATE_FILE,
   cdocsTraitsListPath,
 } from "../lib/cdocs/traitsListFile";
 
@@ -48,7 +48,7 @@ beforeEach(async () => {
   clientDir = pathToFileURL(join(tmpRoot, "client") + "/");
   await mkdir(clientDir, { recursive: true });
   await writeFile(
-    new URL(CDOCS_TRAITS_SIDECAR, clientDir),
+    new URL(CDOCS_TRAITS_INTERMEDIATE_FILE, clientDir),
     traitsListJson,
     "utf8",
   );
@@ -68,14 +68,14 @@ describe("cdocsTraitsList integration", () => {
     );
   });
 
-  it("removes the sidecar", async () => {
+  it("removes the intermediate file", async () => {
     await runBuild();
 
-    expect(await exists(CDOCS_TRAITS_SIDECAR)).toBe(false);
+    expect(await exists(CDOCS_TRAITS_INTERMEDIATE_FILE)).toBe(false);
   });
 
-  it("does nothing when there's no sidecar", async () => {
-    await rm(new URL(CDOCS_TRAITS_SIDECAR, clientDir));
+  it("does nothing when there's no intermediate file", async () => {
+    await rm(new URL(CDOCS_TRAITS_INTERMEDIATE_FILE, clientDir));
 
     await expect(runBuild()).resolves.toBeUndefined();
   });
