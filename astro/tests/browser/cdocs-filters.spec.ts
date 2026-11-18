@@ -233,3 +233,94 @@ test.describe("links to cdocs pages", () => {
     );
   });
 });
+
+test.describe("bare cdocs URLs", () => {
+  const LINKS_URL = "/dd_e2e/cdocs/links/";
+
+  /** Store preferences in Hugo's format, from a page on the site. */
+  async function storePreferences(
+    page: import("@playwright/test").Page,
+    valsByTraitId: Record<string, string>,
+  ) {
+    await page.goto(LINKS_URL);
+    await page.evaluate((vals) => {
+      const stored = Object.fromEntries(
+        Object.entries(vals).map(([traitId, value]) => [
+          traitId,
+          { value, timestamp: 1 },
+        ]),
+      );
+      localStorage.setItem(
+        "datadog-docs-content-filters",
+        JSON.stringify(stored),
+      );
+    }, valsByTraitId);
+  }
+
+  test("a bare URL redirects to the stored preferences, and stays out of the history", async ({
+    page,
+  }) => {
+    await storePreferences(page, { prog_lang: "python" });
+
+    await page.goto(CDOC_URL);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+
+    // Back skips the bare URL, which `location.replace` swapped out.
+    await page.goBack();
+    await expect(page).toHaveURL(new RegExp(`${LINKS_URL}$`));
+  });
+
+  test("params already in the URL are kept", async ({ page }) => {
+    await storePreferences(page, { prog_lang: "python", api_type: "dd_api" });
+
+    await page.goto(`${CDOC_URL}?prog_lang=cpp`);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=dd_api&prog_lang=cpp$`),
+    );
+  });
+
+  test("without stored preferences, the URL gets the defaults in place", async ({
+    page,
+  }) => {
+    await page.goto(CDOC_URL);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=java$`),
+    );
+    await expect(pill(page, "Java")).toHaveAttribute("aria-checked", "true");
+  });
+
+  test("a view-transition navigation to a bare URL gets the stored preferences", async ({
+    page,
+  }) => {
+    await storePreferences(page, { prog_lang: "python" });
+    // Hold the traits list back, so the link isn't updated before the click.
+    await page.route("**/cdocs-traits-index.json*", async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await route.continue();
+    });
+    await page.reload();
+    await page.evaluate(
+      () => ((window as unknown as { __noReload?: boolean }).__noReload = true),
+    );
+
+    await page
+      .getByRole("link", { name: "Custom instrumentation", exact: true })
+      .click();
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+    expect(
+      await page.evaluate(
+        () => (window as unknown as { __noReload?: boolean }).__noReload,
+      ),
+    ).toBe(true);
+  });
+});
