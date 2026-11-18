@@ -138,38 +138,38 @@ The Worker checks for configuration changes every five seconds, so a Worker that
 
 **Note**: Use [pipeline metrics][30] and [monitors][31] to detect pipeline issues, and use Worker error and warning logs to investigate the cause.
 
-#### Errors that require action
+#### Errors to investigate
 
 Take the action listed for each of the following errors:
 
 `Fatal error, worker will now exit.`
 : **Description**: The configuration reload encountered an unrecoverable error.
-: **Data impact**: The Worker stops.
+: **Impact**: The Worker stops.
 : **Action**: Investigate immediately. Check the error details and whether the Worker is restarting.
 
 `Please ensure that the API key you are using is scoped for RC...` or `Please ensure your organisation is enabled for RC...`
 : **Description**: The API key doesn't have the Remote Configuration scope, or Remote Configuration isn't enabled for your organization.
-: **Data impact**: The Worker doesn't load a pipeline.
+: **Impact**: The Worker doesn't load a pipeline.
 : **Action**: Make sure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
 
 `Configuration is invalid.`
 : **Description**: The deployed pipeline failed validation.
-: **Data impact**: The previous pipeline continues to run, and the Worker reports `status:errored`.
+: **Impact**: The previous pipeline continues to run. The Worker reports `status:errored`.
 : **Action**: Check the `errors` field in the log for details, then fix the pipeline in the Observability Pipelines UI. If the issue persists, contact [Datadog support][1].
 
 `Failed to reload remote configuration.`
 : **Description**: The new pipeline was built but failed to start. For example, a port is already in use or a destination setting is invalid. This message often appears with `Old configuration rolled back.`
-: **Data impact**: The previous pipeline continues to run, and the Worker reports `status:errored`.
+: **Impact**: The previous pipeline continues to run. The Worker reports `status:errored`.
 : **Action**: Check the `errors` field in the log for details, then fix and redeploy the pipeline. If the issue persists, contact [Datadog support][1].
 
 `RC client wasn't initialized, will retry.`
 : **Description**: The Worker can't reach Remote Configuration at startup. The Worker retries every 30 seconds.
-: **Data impact**: No pipeline runs on that Worker.
-: **Action**: If the error persists for more than five minutes, check your network, proxy, DNS, and `DD_SITE` settings. See [Add domains to firewall allowlist][21].
+: **Impact**: No pipeline runs on that Worker.
+: **Action**: If the error persists for more than 5 minutes, check your network, proxy, DNS, and `DD_SITE` settings. See [Add domains to firewall allowlist][21] for more information.
 
 `Received config is not valid JSON.`, `Received config version is invalid.`, or `Unexpected config type`
 : **Description**: The Worker received a malformed payload from Remote Configuration.
-: **Data impact**: The configuration change isn't applied.
+: **Impact**: The configuration change isn't applied.
 : **Action**: Contact [Datadog support][1].
 
 #### Transient errors that usually resolve on their own
@@ -178,7 +178,7 @@ Investigate the following errors only if they persist:
 
 `Failed to update remote configuration.` or `Failed to fetch remote configuration target(s).`
 : **Description**: A single request to Remote Configuration failed because of a network issue, timeout, or server error.
-: **Data impact**: None. The current pipeline continues to run.
+: **Impact**: None. The current pipeline continues to run.
 : **When to investigate**: When the error persists for more than 15 minutes or occurs on all Workers at the same time. In that case, the Workers don't receive pipeline changes you make in the UI. Check that your firewall and proxy settings allow outbound traffic from the Workers to your [Datadog site][32]. See [Add domains to firewall allowlist][21] for the list of domains to allow.
 
 ### The Worker is not receiving logs from the source
