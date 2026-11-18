@@ -111,7 +111,7 @@ Insights appear on an application's overview page. Cost Insights also appear on 
 
 ## Use Insights with a coding agent
 
-Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an insight's root cause and evidence, and its recommended fix and validation guidance when available, to implement and test a change.
+Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an insight's root cause and evidence to implement and test a change. When the insight includes a recommended fix and validation guidance, the agent can retrieve those as well.
 
 ### Automate insight reviews and fixes
 
