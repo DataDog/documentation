@@ -10841,6 +10841,19 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Create a Bits Security Analyst investigation
+      url: /api/latest/bits-security-analyst/create-a-bits-security-analyst-investigation/
+      identifier: bits-security-analyst-create-a-bits-security-analyst-investigation
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityAgentInvestigation
+        unstable:
+          - v2
+        order: 4
     - name: List Bits Security Analyst investigations
       url: /api/latest/bits-security-analyst/list-bits-security-analyst-investigations/
       identifier: bits-security-analyst-list-bits-security-analyst-investigations
