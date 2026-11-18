@@ -131,7 +131,7 @@ To monitor Codex, set up the [OpenAI Codex][5] integration. The integration coll
 
 ### ChatGPT Work
 
-To monitor ChatGPT Work, set up the [OpenAI][12] integration. The integration collects activity, token, and estimated cost analytics.
+To monitor ChatGPT Work, set up the [OpenAI][12] integration. The integration collects activity, token, and estimated cost analytics. For ChatGPT Enterprise data, Agent Console applies OpenAI corrections and rollbacks to the original hour, so token usage, credits, and estimated costs reflect those adjustments and previously reported totals can decrease. Activity counts distinct original usage records from OpenAI, not individual requests or user actions. Corrections and rollbacks do not add to this count.
 
 ### Cursor
 
