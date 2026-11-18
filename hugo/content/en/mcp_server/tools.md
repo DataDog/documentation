@@ -1041,7 +1041,7 @@ Returns the latest metric collection error for each table covered by a data qual
 
 ### `get_data_entity_monitor_health`
 *Toolset: **data-observability***\
-*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries Query`*\
+*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries`*\
 Returns the health of every data quality monitor on a data entity (table), including any metric collection errors.
 
 - Show the health of all data quality monitors on this table.
