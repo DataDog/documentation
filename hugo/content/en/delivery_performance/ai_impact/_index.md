@@ -28,10 +28,6 @@ further_reading:
   text: "How to measure developer experience in the AI era"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-AI Impact is available to all Datadog customers in Preview.
-{{< /callout >}}
-
 ## Overview
 
 AI Impact measures how AI coding tools—including coding assistants, review agents, and autonomous agents—affect your software delivery performance. Datadog detects AI contribution from several types of sources. Sources include co-author patterns in commit metadata, provider integrations, pull request labels, and data you send yourself.
