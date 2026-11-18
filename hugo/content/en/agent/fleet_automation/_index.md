@@ -68,23 +68,14 @@ You can also create and manage Agent upgrade schedules with the Datadog Terrafor
 
 ## Control access to Fleet Automation
 
-Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
-
-| Permission | Description |
-|--------------|---------------|
-| `API Keys Read`| Restricts which users can view and search Agents by API key. |
-| `Agent Flare Collection` | Restricts which users can remotely send flares from Fleet Automation. |
-| `Agent Upgrade` | Restricts which users have access to upgrade Agents from Fleet Automation. |
-| `Agent Configuration Management` | Restricts which users have access to configure Agents from Fleet Automation. |
-
-For information on setting up roles and permissions, see [Access Control][2].
+Use role permissions to control which Fleet Automation actions users can take, such as upgrading or configuring Agents. Use scoped permissions (in Preview) to control which Agents they can take those actions on. For details, see [Control Access to Fleet Automation][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/fleet-automation/
-[2]: /account_management/rbac/
+[2]: /agent/fleet_automation/access_control/
 [3]: /agent/fleet_automation/fleet_view/
 [4]: /agent/fleet_automation/configure_agents/
 [5]: /agent/fleet_automation/upgrade_agents/
