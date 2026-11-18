@@ -92,6 +92,30 @@ test.describe("cdocs filterable doc (SSR)", () => {
       });
   });
 
+  test("clicking a pill stores the new value in localStorage", async ({
+    page,
+  }) => {
+    await page.goto(CDOC_URL);
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
+
+    await pill(page, "Datadog").click();
+    await expect(page).toHaveURL(new RegExp("api_type=dd_api"));
+
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          JSON.parse(
+            localStorage.getItem("datadog-docs-content-filters") ?? "{}",
+          ),
+        ),
+      )
+      .toMatchObject({
+        api_type: { value: "dd_api", timestamp: expect.any(Number) },
+      });
+  });
+
   test("a bare URL renders the defaults, whatever the cookies say", async ({
     page,
     context,

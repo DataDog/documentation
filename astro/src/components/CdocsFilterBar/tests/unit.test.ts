@@ -12,7 +12,6 @@ vi.mock("astro:transitions/client", () => ({
 }));
 
 import CdocsFilterBar from "../CdocsFilterBar";
-import { readPreferences } from "@lib/cdocs/preferences";
 import type { ResolvedFilter } from "@lib/cdocs/types";
 
 const filters: ResolvedFilter[] = [
@@ -47,7 +46,6 @@ const pill = (label: string) =>
 
 beforeEach(() => {
   navigate.mockReset();
-  localStorage.clear();
   window.history.replaceState({}, "", "/dd_e2e/cdocs/custom_instrumentation/");
 });
 
@@ -99,13 +97,6 @@ describe("CdocsFilterBar", () => {
     expect(navigate).toHaveBeenCalledWith(
       "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=python",
     );
-  });
-
-  it("stores the selected value as a preference", async () => {
-    const user = userEvent.setup();
-    mount();
-    await user.click(pill("Python"));
-    expect(readPreferences()).toEqual({ prog_lang: "python" });
   });
 
   it("preserves other params already in the URL", async () => {

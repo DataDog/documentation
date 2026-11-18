@@ -4,7 +4,6 @@ import styles from "./CdocsFilterBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import type { ResolvedFilter } from "@lib/cdocs/types";
-import { writePreferences } from "@lib/cdocs/preferences";
 
 const cl = classListFactory(styles);
 
@@ -19,8 +18,7 @@ interface Props {
  * Selecting a pill sets the matching URL query param and does a client-side
  * navigation via `navigate()` from astro:transitions/client, so the freshly
  * SSR-rendered (re-filtered) content swaps in under Astro's view transitions
- * rather than a full-page reload. The selection is also stored as a
- * preference, in the same localStorage format as Hugo.
+ * rather than a full-page reload.
  */
 export default function CdocsFilterBar({ filters }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -34,7 +32,6 @@ export default function CdocsFilterBar({ filters }: Props) {
   if (filters.length === 0) return null;
 
   const selectOption = (traitId: string, optionId: string) => {
-    writePreferences({ [traitId]: optionId });
     const url = new URL(window.location.href);
     url.searchParams.set(traitId, optionId);
     navigate(url.pathname + url.search);
