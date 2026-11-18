@@ -49,7 +49,6 @@ Dynamic signals don't change AI Guard evaluations or blocking: the investigation
 ### How dynamic signals work
 
 1. An out-of-the-box AI Guard detection rule creates a signal.
-1. About five minutes later, the investigation starts. The delay lets later turns of the conversation reach Datadog.
 1. The investigation collects the AI Guard evaluations of the conversations that triggered the signal, from the same service and environment. When your application sets `usr.session_id` on AI Guard evaluations, the investigation uses it to link the turns of a conversation.
 1. The investigation reads metadata from the related APM spans, such as the operation, resource, duration, status, and errors.
 1. Datadog updates the signal with the investigation result.
@@ -156,7 +155,7 @@ For more information, see [Notification Rules][16].
 
 **Notes**:
 - A notification rule on `ai_guard_rule:true` alone notifies twice for each signal: when the signal is created, and again after the investigation.
-- Datadog sends notifications after the investigation only for signals that are still active. Automatic investigations run a few minutes after the signal is created, while it is still active.
+- Datadog sends notifications after the investigation only for signals that are still active. Automatic investigations run while the signal is still active.
 - [Suppression rules][17] still apply.
 
 ### Troubleshoot investigations
