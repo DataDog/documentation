@@ -1,0 +1,19 @@
+host_options:
+  - id: aws
+    default: true
+  - id: azure
+
+aws_database_options:
+  - id: aurora
+    default: true
+  - id: postgres
+
+azure_database_options:
+  - id: cosmos_db
+    default: true
+  - id: postgres
+
+os_options:
+  - id: linux
+    default: true
+  - id: windows

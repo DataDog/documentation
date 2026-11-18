@@ -20,6 +20,7 @@ import { resolveSiteEnv } from "./src/lib/site/siteEnv.ts";
 import { resolveWebsitesModulesPath } from "./src/lib/site/websitesModulesPath.ts";
 import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
+import { cdocsTraitsList } from "./src/integrations/cdocsTraitsList.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
@@ -143,6 +144,10 @@ export default defineConfig({
     // build, from the llms-index.json sidecar. Same reasoning as pagesJson for
     // ordering.
     llmsTxt(),
+    // Moves the Cdocs traits list sidecar to its content-hashed path under
+    // _astro/. Must come before staticApiGuard, which rejects the sidecar's
+    // root-level path.
+    cdocsTraitsList(),
     // Fails the build if any /api route stops being prerendered, if anything
     // is emitted outside api/ or {fr,ja,ko,es}/api/, or if the category count
     // collapses (spec-parsing regression). Registered last so it inspects the

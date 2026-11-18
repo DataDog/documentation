@@ -33,6 +33,9 @@ describe("isSitemapPage", () => {
     expect(isSitemapPage("https://docs.datadoghq.com/llms-index.json")).toBe(
       false,
     );
+    expect(
+      isSitemapPage("https://docs.datadoghq.com/cdocs-traits-index.json"),
+    ).toBe(false);
   });
 
   it("excludes the mobile nav data file", () => {

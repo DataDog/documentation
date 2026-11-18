@@ -1,0 +1,15 @@
+options:
+  - id: aws
+    label: AWS
+  - id: azure
+    label: Azure
+  - id: aurora
+    label: Aurora
+  - id: cosmos_db
+    label: Cosmos DB
+  - id: postgres
+    label: Postgres
+  - id: linux
+    label: Linux
+  - id: windows
+    label: Windows

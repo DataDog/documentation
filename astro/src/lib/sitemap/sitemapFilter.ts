@@ -9,6 +9,8 @@ export function isSitemapPage(url: string): boolean {
   // Build-time sidecars for pages.json and llms.txt; deleted after the build.
   if (pathname === "/pages-index.json") return false;
   if (pathname === "/llms-index.json") return false;
+  // Build-time sidecar for the Cdocs traits list; moved after the build.
+  if (pathname === "/cdocs-traits-index.json") return false;
   // Client-side data for the mobile nav, not a page.
   if (pathname.endsWith("/api/mobile-nav.json")) return false;
   if (isSecondaryChangelogPage(pathname)) return false;
