@@ -7,7 +7,7 @@ import { describe, test, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import * as rootExports from '../../src';
-import { Frontmatter } from '../../src';
+import { CustomizationConfig, CustomizationConfigByLang, Frontmatter } from '../../src';
 import { loadCustomizationConfig } from '../../src/api/compilation/loadCustomizationConfig';
 import { buildFiltersManifest } from '../../src/api/compilation/buildFiltersManifest';
 import { resolveFilters } from '../../src/api/shared/resolveFilters';
@@ -29,14 +29,22 @@ const FILESYSTEM_FREE_ENTRIES = ['.', ...SERVER_SUBPATHS];
 // Modules that read the file system or parse YAML
 const FILESYSTEM_MODULES = ['fs', 'path', 'js-yaml'];
 
+interface PackageExport {
+  import: string;
+  types: string;
+}
+
 describe('Resolving filters from config passed as data', () => {
   const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: CUSTOMIZATION_CONFIG_DIR,
     langs: ['en'],
   });
 
-  // What a server receives: the loaded config, serialized and parsed again
-  const configAsData = JSON.parse(JSON.stringify(customizationConfigByLang));
+  // What a server receives: the loaded config, serialized and parsed again.
+  // The annotation is what a server's module declaration claims, too.
+  const configAsData: CustomizationConfigByLang = JSON.parse(
+    JSON.stringify(customizationConfigByLang),
+  );
 
   const frontmatter: Frontmatter = {
     title: 'Animals',
@@ -54,7 +62,7 @@ describe('Resolving filters from config passed as data', () => {
     ],
   };
 
-  function resolveWith(customizationConfig: typeof configAsData.en) {
+  function resolveWith(customizationConfig: CustomizationConfig) {
     const filtersManifest = buildFiltersManifest({ frontmatter, customizationConfig });
     return resolveFilters({
       valsByTraitId: { habitat: 'ocean' },
@@ -69,28 +77,22 @@ describe('Resolving filters from config passed as data', () => {
   });
 
   test('exposes the server functions as subpath exports', () => {
-    const packageJson = JSON.parse(
-      fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
-    );
+    const packageExports = readPackageExports();
     for (const subpath of SERVER_SUBPATHS) {
-      expect(packageJson.exports[subpath], subpath).toBeDefined();
+      expect(packageExports[subpath], subpath).toBeDefined();
     }
   });
 
   test('exposes the YAML loader only as its own subpath export', () => {
-    const packageJson = JSON.parse(
-      fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
-    );
-    expect(packageJson.exports['./loadCustomizationConfig']).toBeDefined();
+    const packageExports = readPackageExports();
+    expect(packageExports['./loadCustomizationConfig']).toBeDefined();
     expect(rootExports).not.toHaveProperty('loadCustomizationConfig');
   });
 
   test('the root and server exports do not import file system modules', () => {
-    const packageJson = JSON.parse(
-      fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
-    );
+    const packageExports = readPackageExports();
     for (const subpath of FILESYSTEM_FREE_ENTRIES) {
-      const entryPath = path.join(PACKAGE_DIR, packageJson.exports[subpath].import);
+      const entryPath = path.join(PACKAGE_DIR, packageExports[subpath].import);
       const bareImports = collectBareImports(entryPath);
       const filesystemImports = bareImports.filter(
         (specifier) =>
@@ -101,6 +103,14 @@ describe('Resolving filters from config passed as data', () => {
     }
   });
 });
+
+/** The `exports` map from the package's `package.json`. */
+function readPackageExports(): Record<string, PackageExport> {
+  const packageJson: { exports: Record<string, PackageExport> } = JSON.parse(
+    fs.readFileSync(path.join(PACKAGE_DIR, 'package.json'), 'utf8'),
+  );
+  return packageJson.exports;
+}
 
 /**
  * Follow the relative imports of a built module, and return every
@@ -114,7 +124,8 @@ function collectBareImports(entryPath: string): string[] {
   const bareImports = new Set<string>();
   const visited = new Set<string>();
   const queue = [entryPath];
-  const importRegex = /(?:import|export)[^'"]*from\s*['"]([^'"]+)['"]|import\(['"]([^'"]+)['"]\)/g;
+  const importRegex =
+    /(?:import|export)[^'"]*from\s*['"]([^'"]+)['"]|import\(['"]([^'"]+)['"]\)/g;
 
   while (queue.length > 0) {
     const modulePath = queue.pop()!;
