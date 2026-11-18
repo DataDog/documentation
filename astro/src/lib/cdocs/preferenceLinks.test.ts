@@ -1,12 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { fileURLToPath } from "node:url";
-import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig";
 import {
   addOfferedParamsToHref,
   addPreferencesToHref,
 } from "./preferenceLinks";
-import { buildCdocsLinkTarget, type CdocsTraitsList } from "./cdocsPages";
+import { buildCdocsLinkTarget } from "./linkTargets";
+import type { CdocsTraitsList } from "./pageLists";
 import type { CdocContentFilter } from "./filters";
+import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const traitsList: CdocsTraitsList = {
   traits: ["api_type", "os", "prog_lang"],
@@ -97,16 +97,6 @@ describe("addPreferencesToHref", () => {
 });
 
 describe("addOfferedParamsToHref", () => {
-  const customizationConfig = loadCustomizationConfig({
-    configDir: fileURLToPath(
-      new URL(
-        "../../../tests/fixtures/cdocsPages/customization_config",
-        import.meta.url,
-      ),
-    ),
-    langs: ["en"],
-  }).customizationConfigByLang.en;
-
   const hostFilter: CdocContentFilter = {
     trait_id: "host",
     option_group_id: "host_options",
@@ -191,9 +181,9 @@ describe("addOfferedParamsToHref", () => {
   });
 
   it("ignores the link's own params when they don't hold", () => {
-    expect(addParams("/guides/database/?host=gcp", { database: "aurora" })).toBe(
-      "/guides/database/?database=aurora&host=gcp",
-    );
+    expect(
+      addParams("/guides/database/?host=gcp", { database: "aurora" }),
+    ).toBe("/guides/database/?database=aurora&host=gcp");
   });
 
   it("leaves links to pages that aren't Cdocs pages alone", () => {

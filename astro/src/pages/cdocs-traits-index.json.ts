@@ -10,7 +10,7 @@ export const prerender = true;
  */
 
 import type { APIRoute } from "astro";
-import { getCdocsTraitsListJson } from "@lib/cdocs/cdocsPages";
+import { getCdocsTraitsListJson } from "@lib/cdocs/pageLists";
 
 export const GET: APIRoute = async () => {
   return new Response(await getCdocsTraitsListJson(), {

@@ -21,8 +21,8 @@ import { rewriteInternalDocLink } from "@lib/plaintext/rewriteDocLink";
 import type {
   CdocsFilterLinks,
   CdocsFilterOptionLink,
-  CdocsVariantLabel,
-} from "@lib/cdocs/cdocsPages";
+} from "@lib/cdocs/filterOptionLinks";
+import type { CdocsVariantLabel } from "@lib/cdocs/variants";
 
 // MISSING_TRANSLATION_LABEL: the variant list text is not in the i18n file yet.
 const INTRO =

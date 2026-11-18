@@ -1,33 +1,19 @@
 import { describe, it, expect } from "vitest";
-import { fileURLToPath } from "node:url";
-import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig";
 import {
   buildCdocsPage,
   buildCdocsTraitsList,
-  buildFilterOptionLinks,
-  getCdocsLinkTargets,
   getCdocsPages,
   getCdocsTraitsListJson,
   getCdocsTraitsListUrl,
   type CdocsPage,
-} from "./cdocsPages";
+} from "./pageLists";
 import {
   CDOCS_TRAITS_INTERMEDIATE_FILE,
   cdocsTraitsListPath,
 } from "./traitsListFile";
 import { GET as getTraitsListRoute } from "../../pages/cdocs-traits-index.json";
 import type { CdocContentFilter } from "./filters";
-
-const configDir = fileURLToPath(
-  new URL(
-    "../../../tests/fixtures/cdocsPages/customization_config",
-    import.meta.url,
-  ),
-);
-const customizationConfig = loadCustomizationConfig({
-  configDir,
-  langs: ["en"],
-}).customizationConfigByLang.en;
+import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const hostFilter: CdocContentFilter = {
   trait_id: "host",
@@ -216,115 +202,6 @@ describe("variant descriptions", () => {
   });
 });
 
-describe("buildFilterOptionLinks", () => {
-  function buildLinks(
-    contentFilters: CdocContentFilter[],
-    valsByTraitId: Record<string, string>,
-  ) {
-    return buildFilterOptionLinks({
-      bareUrl: "/guides/setup/",
-      contentFilters,
-      valsByTraitId,
-      customizationConfig,
-    });
-  }
-
-  const optionUrls = (links: ReturnType<typeof buildLinks>, traitId: string) =>
-    Object.fromEntries(
-      links
-        .find((filter) => filter.traitId === traitId)!
-        .options.map((option) => [option.id, option.url]),
-    );
-
-  it("links each option to its variant, keeping the other values", () => {
-    const links = buildLinks([osFilter, hostFilter], {
-      os: "windows",
-      host: "aws",
-    });
-
-    expect(optionUrls(links, "host")).toEqual({
-      aws: "/guides/setup/?host=aws&os=windows",
-      azure: "/guides/setup/?host=azure&os=windows",
-    });
-  });
-
-  it("marks the current value as selected", () => {
-    const links = buildLinks([osFilter], { os: "windows" });
-
-    expect(
-      links[0].options.map((option) => [option.id, option.isSelected]),
-    ).toEqual([
-      ["linux", false],
-      ["windows", true],
-    ]);
-  });
-
-  it("resets a dependent value the new option doesn't offer", () => {
-    const links = buildLinks([hostFilter, databaseFilter], {
-      host: "aws",
-      database: "aurora",
-    });
-
-    // Aurora isn't an Azure option, so the Azure link uses Azure's default.
-    expect(optionUrls(links, "host").azure).toBe(
-      "/guides/setup/?database=cosmos_db&host=azure",
-    );
-  });
-
-  it("keeps a dependent value the new option also offers", () => {
-    const links = buildLinks([hostFilter, databaseFilter], {
-      host: "aws",
-      database: "postgres",
-    });
-
-    expect(optionUrls(links, "host").azure).toBe(
-      "/guides/setup/?database=postgres&host=azure",
-    );
-  });
-
-  it("drops a filter the new option hides", () => {
-    const azureOnlyOsFilter: CdocContentFilter = {
-      ...osFilter,
-      show_if: [{ host: ["azure"] }],
-    };
-    const links = buildLinks([hostFilter, azureOnlyOsFilter], {
-      host: "azure",
-      os: "windows",
-    });
-
-    expect(optionUrls(links, "host")).toEqual({
-      aws: "/guides/setup/?host=aws",
-      azure: "/guides/setup/?host=azure&os=windows",
-    });
-  });
-
-  it("lists only shown filters, with the labels of each option's variant", () => {
-    const azureOnlyOsFilter: CdocContentFilter = {
-      ...osFilter,
-      show_if: [{ host: ["azure"] }],
-    };
-    const links = buildLinks([hostFilter, azureOnlyOsFilter], { host: "aws" });
-
-    expect(links.map((filter) => [filter.traitId, filter.label])).toEqual([
-      ["host", "Host"],
-    ]);
-    expect(links[0].options[1].labels).toEqual([
-      {
-        traitId: "host",
-        traitLabel: "Host",
-        optionId: "azure",
-        optionLabel: "Azure",
-      },
-      {
-        traitId: "os",
-        traitLabel: "Operating system",
-        optionId: "linux",
-        optionLabel: "Linux",
-      },
-    ]);
-  });
-});
-
 describe("buildCdocsTraitsList", () => {
   it("lists every trait once, and each page's traits by index", () => {
     const pages = [
@@ -368,18 +245,6 @@ describe("getCdocsPages", () => {
     expect(customInstrumentation?.variants[0].url).toBe(
       "/dd_e2e/cdocs/custom_instrumentation/?api_type=otel_api&prog_lang=java",
     );
-  });
-});
-
-describe("getCdocsLinkTargets", () => {
-  it("checks values against each cdocs page's own options", async () => {
-    const target = (await getCdocsLinkTargets()).get(
-      "dd_e2e/cdocs/custom_instrumentation",
-    );
-
-    expect(target?.traitIds).toEqual(["prog_lang", "api_type"]);
-    expect(target?.showsValues({ prog_lang: "python" })).toBe(true);
-    expect(target?.showsValues({ prog_lang: "cobol" })).toBe(false);
   });
 });
 

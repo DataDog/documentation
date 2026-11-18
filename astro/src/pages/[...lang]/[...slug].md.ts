@@ -29,10 +29,8 @@ import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
-import {
-  buildFilterOptionLinks,
-  getCdocsLinkTargets,
-} from "@lib/cdocs/cdocsPages";
+import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
+import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
 import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
 import { cdocsFilterBarNodes } from "@components/CdocsFilterBar/plaintext/CdocsFilterBar";

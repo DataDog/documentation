@@ -6,7 +6,8 @@
  * the reader hovers over, touches, or focuses a link. The plaintext route adds
  * the request's params on the server instead, with `addOfferedParamsToHref`.
  */
-import type { CdocsLinkTarget, CdocsTraitsList } from "./cdocsPages";
+import type { CdocsLinkTarget } from "./linkTargets";
+import type { CdocsTraitsList } from "./pageLists";
 
 /**
  * The link's href with the stored preferences its page accepts added as

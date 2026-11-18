@@ -1,9 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { buildMarkdocStr } from "@lib/plaintext/helpers";
-import type {
-  CdocsFilterLinks,
-  CdocsVariantLabel,
-} from "@lib/cdocs/cdocsPages";
+import type { CdocsFilterLinks } from "@lib/cdocs/filterOptionLinks";
+import type { CdocsVariantLabel } from "@lib/cdocs/variants";
 import { cdocsFilterBarNodes } from "../CdocsFilterBar";
 
 const label = (

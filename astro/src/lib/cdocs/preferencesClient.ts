@@ -8,7 +8,7 @@
  * - When the reader hovers over, touches, or focuses a link to a Cdocs page,
  *   adds the stored preferences that page accepts as params.
  */
-import type { CdocsTraitsList } from "./cdocsPages";
+import type { CdocsTraitsList } from "./pageLists";
 import { readCdocsPageState, type CdocsPageState } from "./pageState";
 import { addPreferencesToHref } from "./preferenceLinks";
 import { readPreferences, writePreferences } from "./preferences";
