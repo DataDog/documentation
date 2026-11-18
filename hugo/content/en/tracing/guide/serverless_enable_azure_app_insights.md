@@ -39,7 +39,7 @@ To set up the Azure App Insights Integration, complete the following steps:
 
 1. **Enable Azure Application Insights** on the Azure workloads you want to trace, using the classic Application Insights SDK. If your workload uses the [Azure Monitor OpenTelemetry Distro][5], see [OpenTelemetry in Datadog][6] instead.
 2. **Configure [Azure Automated Log Forwarding][2]** to forward Azure App Insights Logs to Datadog. Confirm that metrics and resource collection are enabled in the [Microsoft Azure integration][1], so spans can be enriched with Azure resource metadata.
-3. **Enable trace generation** in Datadog. This setting is available only after Datadog confirms your [Preview access](#request-access).
+3. **Enable trace generation** in Datadog. This setting is available only after Datadog confirms your Preview access. See the [Request access](#request-access) section.
    1. Go to [**Logs** > **Configuration** > **Generate APM Traces**][7].
    2. In the **Azure Application Insights** row, click **Set Up**.
    3. Turn on **Generate traces**, then click **Save**.
