@@ -19,7 +19,7 @@ further_reading:
 
 Bayesian analysis reports two statistics that help you decide whether to stop an experiment or keep it running:
 
-- **Minimum expected regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is.
+- **Minimum expected regret**: The lift you lose if the better-looking variant turns out to be the wrong choice, averaged over the chance that it is.
 - **Expected value of sample information (EVSI)**: How much the minimum expected regret is likely to drop if the experiment keeps running at its recent traffic. Datadog bases EVSI on one more week of data, as described in the [How Datadog projects the extra data](#how-datadog-projects-the-extra-data) section.
 
 Both statistics appear in the [Statistical details tab][1] of the experiment results page. They are available only for experiments that use [Bayesian analysis][2].
@@ -47,7 +47,7 @@ $$R\_T=E[\max(-Θ,0)∣\text\"data\"]$$
 
 $$R\_C=E[\max(Θ,0)∣\text\"data\"]$$
 
-The two regrets differ by the posterior mean, $R\_C-R\_T=m\_{\text\"post\"}$. When the posterior mean is positive, shipping the treatment has the lower expected regret. When it is negative, keeping the control does. Datadog reports the **minimum expected regret**:
+The two expected regrets differ by the posterior mean, $R\_C-R\_T=m\_{\text\"post\"}$. When the posterior mean is positive, shipping the treatment has the lower expected regret. When it is negative, keeping the control does. Datadog reports the **minimum expected regret**:
 
 $$R=\min(R\_T,R\_C)$$
 
@@ -118,11 +118,14 @@ Datadog doesn't calculate EVSI, and the {{< ui >}}EVSI{{< /ui >}} column shows a
 
 - The experiment doesn't have seven complete days of traffic yet, not counting the first and most recent days.
 - No first exposures were recorded in the last seven complete days.
-- Traffic data or the standard error can't be used for a forecast.
+- No exposures have been recorded for the experiment.
+- Traffic data isn't available for the experiment.
+- The recorded traffic counts are negative, or the last seven days have more first exposures than the whole experiment.
+- The standard error of the lift estimate is zero or isn't a valid number.
 
 Hover over the dash to see the reason for a specific result.
 
-## Interpret the results
+## Interpret minimum expected regret and EVSI
 
 Minimum expected regret and EVSI are on the same scale, so you can compare them directly:
 
@@ -136,9 +139,9 @@ Both statistics depend on the prior. A tighter prior shrinks the posterior towar
 
 ## Example
 
-This example uses a conversion metric with 10,000 subjects in each group. The control conversion rate is 10%, and the treatment conversion rate is 10.3%. The analysis uses the default normal prior for relative lift, with $τ=0.05$.
+This example differs from the one in [Lift and Interval Calculations][3]. It uses a conversion metric with 10,000 subjects in each group. The control conversion rate is 10%, and the treatment conversion rate is 10.3%. The analysis uses the default normal prior for relative lift, with $τ=0.05$.
 
-The observed relative lift is 3%, with a standard error of about 0.0433. The posterior mean is about **1.71%**, with a posterior standard deviation of about 0.0328, or 3.28%. The probability that the treatment beats the control is about **70.0%**.
+The observed relative lift is 3%, with a standard error of about 0.0433, or 4.33 percentage points. The posterior mean is about **1.71%**, with a posterior standard deviation of about 0.0328, or 3.28 percentage points. The probability that the treatment beats the control is about **70.0%**.
 
 The expected regrets are:
 

@@ -86,19 +86,19 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 ### Statistical details
 
-Beyond the group means and lift estimates, additional statistics can help support decision making. The {{< ui >}}Statistical details{{< /ui >}} tab (calculator icon) on the metric scorecard includes statistics for the experiment's [analysis method][2]. When [CUPED][15] is on, the statistics use the CUPED-adjusted results. See [Lift and Interval Calculations][12] and [Expected Regret and EVSI][13] for the full methodology.
+The {{< ui >}}Statistical details{{< /ui >}} tab (calculator icon) on the metric scorecard shows additional statistics for the experiment's [analysis method][2], beyond the group means and lift estimates. When [CUPED][15] is on, the statistics use the CUPED-adjusted results. See [Lift and Interval Calculations][12] and [Expected Regret and EVSI][13] for the full methodology.
 
 For fixed-sample, sequential, and sequential hybrid analysis, the tab includes:
 
 - **Standard Error**: The standard error of the relative lift estimate, in percentage points. A smaller value means a more precise estimate.
-- **p-value**: Smaller values mean stronger evidence of a real effect. For the technical interpretation of this value in fixed-sample, sequential, and sequential hybrid analysis, see [Lift and Interval Calculations][14].
+- **p-value**: Smaller values mean stronger evidence of a real effect. For the technical interpretation for each analysis method, see [Lift and Interval Calculations][14].
 - **z-score**: The number of standard errors between the lift estimate and zero. The sign shows the direction of the change, not whether it is desirable.
 
 For Bayesian analysis, the tab includes:
 
 - **Prob. Beats Control**: The posterior probability that the treatment moves the metric in the desired direction.
-- **Min. Expected Regret**: The lift you would lose if the better-looking variant is the wrong choice, averaged over the chance that it is. Datadog shows it as a percentage of the control value.
-- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI quantifies how much the minimum expected regret would decrease if the experiment kept running at its recent traffic. It helps you decide whether there is value in collecting more data. If EVSI is small compared with the minimum expected regret, collecting more data is expected to add little value. The column heading's tooltip shows the period and traffic that Datadog assumes.
+- **Min. Expected Regret**: The lift you lose if the better-looking variant turns out to be the wrong choice, averaged over the chance that it is. Datadog shows it as a percentage of the control value.
+- **EVSI**: The expected value of sample information, as a percentage of the control value. EVSI quantifies how much the minimum expected regret would decrease if the experiment kept running at its recent traffic. If EVSI is small compared with the minimum expected regret, collecting more data is expected to add little value. The column heading's tooltip shows the period and traffic that Datadog assumes.
 
 A dash (—) means that a statistic isn't available. For EVSI, hover over the dash to see why.
 
