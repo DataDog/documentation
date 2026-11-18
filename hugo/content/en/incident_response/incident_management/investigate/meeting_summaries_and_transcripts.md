@@ -16,14 +16,14 @@ further_reading:
 
 ## Overview
 
-Incident Management can summarize and transcribe incident meetings in Zoom, Google Meet, and Microsoft Teams:
+Incident Management supports three meeting platforms: [Zoom][1], [Google Meet][2], and [Microsoft Teams][3]. For incident meetings on these platforms, Incident Management can summarize and transcribe the conversation:
 
 - **Meeting summaries**: AI-generated summaries of the call, posted to the incident timeline and chat channel. Summaries post periodically during the meeting and again when it ends.
 - **Live meeting transcripts**: A full, unedited transcript of the call, saved in a Datadog notebook that updates during the meeting. The transcript gives responders a record of the conversation, and Bits AI can use it during investigations.
 
 {{< img src="/incident_response/incident_management/investigate/meeting_summaries_transcripts.png" alt="Zoom integration settings for an incident type, with the Generate AI meeting summaries and Generate meeting transcripts toggles turned on" style="width:100%;" >}}
 
-Live meeting transcripts are an optional addition to meeting summaries. Turning off meeting summaries also turns off transcripts. To set up either feature, see the integration page for your meeting platform: [Zoom][1], [Google Meet][2], or [Microsoft Teams][3].
+Live meeting transcripts are an optional addition to meeting summaries. Turning off meeting summaries also turns off transcripts. To set up either feature, see your meeting platform's integration page.
 
 Both features use the Datadog Transcriber. When a meeting attached to an incident starts, the Datadog Transcriber attempts to join the meeting. Joining can take 10 to 30 seconds. If the meeting has a lobby or waiting room, a participant must admit the Datadog Transcriber before transcription can begin.
 
@@ -78,7 +78,7 @@ Changes to responders or incident visibility update notebook access. Re-inviting
 
 ## Retention and deletion
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data. Live meeting transcripts are not subject to this retention period: they remain in their Datadog notebook for as long as the notebook exists. If you enable live meeting transcripts, meeting content is kept beyond seven days.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data. Live meeting transcripts are not subject to this retention period. They remain in their Datadog notebook for as long as the notebook exists. If you enable live meeting transcripts, meeting content is kept beyond seven days.</div>
 
 To remove meeting summaries and transcripts:
 
