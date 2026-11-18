@@ -92,20 +92,20 @@ Pup uses the [Observability Pipelines API][3] format. For the arguments and opti
 
 - **Changes go live immediately.** Pup pushes the new configuration to your Workers through Remote Configuration. There is no draft, review, or deploy step, and no automatic rollback.
 - **Validation is not enough for older Workers.** `pup obs-pipelines validate` checks the configuration against the latest Worker version. A configuration that passes validation can still be incompatible with an older Worker. The pipeline builder UI runs additional checks and warns you when a configuration is not compatible with your Worker version, but Pup and the API do not.
-- **Some errors are only detected on the Worker.** For example, a configuration that references a file or an environment variable that doesn't exist on the Worker host can pass validation but fail when applied on the the Worker.
-- **A broken configuration stays broken.** If a Worker can't load the new configuration, the pipeline stays in that state until you push a corrected configuration.
+- **Some errors are only detected on the Worker.** For example, a configuration that references a file or an environment variable that doesn't exist on the Worker host can pass validation but fail when applied on the Worker.
+- **A configuration that fails to load stops the pipeline.** If a Worker can't load the new configuration, it stops running the pipeline instead of falling back to the previous configuration. The pipeline doesn't process data on that Worker until you push a corrected configuration.
+- **Pup does not report Worker errors.** `pup obs-pipelines update` succeeds as soon as the API accepts the configuration. It doesn't tell you whether the Workers loaded it.
 
 To update a pipeline with Pup:
 
 1. [Upgrade every Worker][9] running the pipeline to the latest version. If you can't, make the change with [Bits in the pipeline builder](#bits-in-the-pipeline-builder) or in the UI instead.
-1. Save the current configuration to a backup file with `pup obs-pipelines get` so you can restore it.
+1. Save the current configuration to a backup file with `pup obs-pipelines get` so you can restore it. Remove the `processors` field from the file and keep `processor_groups`: the API rejects a configuration that has both.
 1. Make a copy of the backup and edit it, such as change a processor's settings.
 1. Check that every secret, file, and [environment variable][10] the configuration references exists on each Worker host.
 1. Check the changes with `pup obs-pipelines validate` and `pup obs-pipelines diff`.
 1. Apply them with `pup obs-pipelines update`.
-1. Confirm that the Workers loaded the new configuration and that data is flowing. See [Monitoring and Troubleshooting][11] to investigate the issue. You can restore the backup with `pup obs-pipelines update`.
-
-If you add, update, or delete a source, destination, or their secrets, restart the Worker for the change to take effect. See [Update Existing Pipelines][7].
+1. If you added, updated, or deleted a source, destination, or corresponding secrets, restart the Worker for the change to take effect. See [Update Existing Pipelines][7].
+1. Confirm that the Workers loaded the new configuration and that data is flowing. See [Monitoring and Troubleshooting][11] to investigate the issue. If data isn't flowing, restore the backup with `pup obs-pipelines update` right away.
 
 If an AI agent runs Pup for you, configure the agent to ask for your approval before it runs `pup obs-pipelines update` or `pup obs-pipelines delete`.
 
