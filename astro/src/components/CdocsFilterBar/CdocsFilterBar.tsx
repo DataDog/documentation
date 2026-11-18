@@ -1,27 +1,40 @@
 import { navigate } from "astro:transitions/client";
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import styles from "./CdocsFilterBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
-import type { ResolvedFilter } from "@lib/cdocs/types";
+import type {
+  CdocsFilterLinks,
+  CdocsFilterOptionLink,
+} from "@lib/cdocs/filterOptionLinks";
 
 const cl = classListFactory(styles);
 
 interface Props {
-  filters: ResolvedFilter[];
+  filterLinks: CdocsFilterLinks[];
+}
+
+/** The pill a reader clicked, shown as selected until the new page arrives. */
+interface PendingSelection {
+  traitId: string;
+  optionId: string;
 }
 
 /**
  * The cdocs customization menu: one group of "pills" per filter, with the
  * selected pill in Datadog purple.
  *
- * Selecting a pill sets the matching URL query param and does a client-side
- * navigation via `navigate()` from astro:transitions/client, so the freshly
- * SSR-rendered (re-filtered) content swaps in under Astro's view transitions
- * rather than a full-page reload.
+ * Selecting a pill does a client-side navigation via `navigate()` from
+ * astro:transitions/client to that option's URL, so the freshly SSR-rendered
+ * (re-filtered) content swaps in under Astro's view transitions rather than a
+ * full-page reload. The server builds each URL, so a value the new option
+ * doesn't offer is already dropped or reset. The clicked pill shows as
+ * selected right away, since the new page takes a server render to arrive.
  */
-export default function CdocsFilterBar({ filters }: Props) {
+export default function CdocsFilterBar({ filterLinks }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const [pendingSelection, setPendingSelection] =
+    useState<PendingSelection | null>(null);
 
   // Signal hydration so tests (and any consumer) can wait for the pill click
   // handlers to be live; a click landing before hydration is silently dropped.
@@ -29,20 +42,29 @@ export default function CdocsFilterBar({ filters }: Props) {
     markSelfAsHydrated(rootRef);
   }, []);
 
-  if (filters.length === 0) return null;
+  // New props mean the new page arrived, and its selection is the real one.
+  useEffect(() => {
+    setPendingSelection(null);
+  }, [filterLinks]);
 
-  const selectOption = (traitId: string, optionId: string) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set(traitId, optionId);
-    navigate(url.pathname + url.search);
+  if (filterLinks.length === 0) return null;
+
+  const selectOption = (traitId: string, option: CdocsFilterOptionLink) => {
+    setPendingSelection({ traitId, optionId: option.id });
+    navigate(option.url);
   };
 
   return (
     <div class={cl("cdocs-filter-bar")} ref={rootRef}>
-      {filters.map((filter) => (
+      {filterLinks.map((filter) => (
         <FilterPillGroup
           key={filter.traitId}
           filter={filter}
+          pendingOptionId={
+            pendingSelection?.traitId === filter.traitId
+              ? pendingSelection.optionId
+              : undefined
+          }
           onSelect={selectOption}
         />
       ))}
@@ -51,12 +73,18 @@ export default function CdocsFilterBar({ filters }: Props) {
 }
 
 interface FilterPillGroupProps {
-  filter: ResolvedFilter;
-  onSelect: (traitId: string, optionId: string) => void;
+  filter: CdocsFilterLinks;
+  /** The clicked option, when its page hasn't arrived yet. */
+  pendingOptionId?: string;
+  onSelect: (traitId: string, option: CdocsFilterOptionLink) => void;
 }
 
 /** A single filter rendered as a labeled radiogroup of pill buttons. */
-function FilterPillGroup({ filter, onSelect }: FilterPillGroupProps) {
+function FilterPillGroup({
+  filter,
+  pendingOptionId,
+  onSelect,
+}: FilterPillGroupProps) {
   const labelId = `cdocs-filter-${filter.traitId}-label`;
 
   return (
@@ -70,7 +98,9 @@ function FilterPillGroup({ filter, onSelect }: FilterPillGroupProps) {
         aria-labelledby={labelId}
       >
         {filter.options.map((option) => {
-          const selected = option.id === filter.currentValue;
+          const selected = pendingOptionId
+            ? option.id === pendingOptionId
+            : option.isSelected;
           return (
             <button
               key={option.id}
@@ -83,7 +113,7 @@ function FilterPillGroup({ filter, onSelect }: FilterPillGroupProps) {
                 "cdocs-filter-bar__pill",
                 selected && "cdocs-filter-bar__pill--selected",
               )}
-              onClick={() => onSelect(filter.traitId, option.id)}
+              onClick={() => onSelect(filter.traitId, option)}
             >
               {option.label}
             </button>

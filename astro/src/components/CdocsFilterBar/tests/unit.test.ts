@@ -12,41 +12,66 @@ vi.mock("astro:transitions/client", () => ({
 }));
 
 import CdocsFilterBar from "../CdocsFilterBar";
-import type { ResolvedFilter } from "@lib/cdocs/types";
+import type { CdocsFilterLinks } from "@lib/cdocs/filterOptionLinks";
 
-const filters: ResolvedFilter[] = [
+const BARE_URL = "/dd_e2e/cdocs/custom_instrumentation/";
+
+const filterLinks: CdocsFilterLinks[] = [
   {
     traitId: "prog_lang",
     label: "Language",
-    defaultValue: "java",
-    currentValue: "java",
     options: [
-      { id: "java", label: "Java" },
-      { id: "python", label: "Python" },
+      {
+        id: "java",
+        label: "Java",
+        isSelected: true,
+        url: `${BARE_URL}?api_type=dd_api&prog_lang=java`,
+        labels: [],
+      },
+      {
+        id: "python",
+        label: "Python",
+        isSelected: false,
+        url: `${BARE_URL}?api_type=dd_api&prog_lang=python`,
+        labels: [],
+      },
     ],
   },
   {
     traitId: "api_type",
     label: "API",
-    defaultValue: "otel_api",
-    currentValue: "dd_api",
     options: [
-      { id: "otel_api", label: "OpenTelemetry API" },
-      { id: "dd_api", label: "Datadog API" },
+      {
+        id: "otel_api",
+        label: "OpenTelemetry API",
+        isSelected: false,
+        url: `${BARE_URL}?api_type=otel_api&prog_lang=java`,
+        labels: [],
+      },
+      {
+        id: "dd_api",
+        label: "Datadog API",
+        isSelected: true,
+        url: `${BARE_URL}?api_type=dd_api&prog_lang=java`,
+        labels: [],
+      },
     ],
   },
 ];
 
-const mount = (props = { filters }) => render(h(CdocsFilterBar, props));
+const mount = (props = { filterLinks }) => render(h(CdocsFilterBar, props));
 
 const pill = (label: string) =>
   [
     ...document.querySelectorAll<HTMLButtonElement>(".cdocs-filter-bar__pill"),
   ].find((button) => button.textContent === label)!;
 
+const isSelected = (label: string) =>
+  pill(label).classList.contains("cdocs-filter-bar__pill--selected");
+
 beforeEach(() => {
   navigate.mockReset();
-  window.history.replaceState({}, "", "/dd_e2e/cdocs/custom_instrumentation/");
+  window.history.replaceState({}, "", BARE_URL);
 });
 
 afterEach(() => {
@@ -73,44 +98,54 @@ describe("CdocsFilterBar", () => {
 
   it("marks the current value as the selected pill", () => {
     mount();
-    expect(
-      pill("Java").classList.contains("cdocs-filter-bar__pill--selected"),
-    ).toBe(true);
+    expect(isSelected("Java")).toBe(true);
     expect(pill("Java").getAttribute("aria-checked")).toBe("true");
     expect(pill("Python").getAttribute("aria-checked")).toBe("false");
     // Second filter's resolved value drives its selection independently.
-    expect(
-      pill("Datadog API").classList.contains(
-        "cdocs-filter-bar__pill--selected",
-      ),
-    ).toBe(true);
+    expect(isSelected("Datadog API")).toBe(true);
     expect(pill("OpenTelemetry API").getAttribute("aria-checked")).toBe(
       "false",
     );
   });
 
-  it("navigates with the trait set as a URL param when a pill is clicked", async () => {
+  it("navigates to the clicked option's URL", async () => {
     const user = userEvent.setup();
+    window.history.replaceState({}, "", `${BARE_URL}?prog_lang=java&stale=1`);
     mount();
     await user.click(pill("Python"));
     expect(navigate).toHaveBeenCalledTimes(1);
     expect(navigate).toHaveBeenCalledWith(
-      "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=python",
+      `${BARE_URL}?api_type=dd_api&prog_lang=python`,
     );
   });
 
-  it("preserves other params already in the URL", async () => {
+  it("selects the clicked pill before the new page arrives", async () => {
     const user = userEvent.setup();
-    window.history.replaceState({}, "", "/doc/?prog_lang=java&api_type=dd_api");
     mount();
     await user.click(pill("Python"));
-    expect(navigate).toHaveBeenCalledWith(
-      "/doc/?prog_lang=python&api_type=dd_api",
-    );
+
+    expect(isSelected("Python")).toBe(true);
+    expect(pill("Python").getAttribute("aria-checked")).toBe("true");
+    expect(isSelected("Java")).toBe(false);
+    expect(pill("Java").getAttribute("aria-checked")).toBe("false");
+    // Other filters keep their selection until the new page says otherwise.
+    expect(isSelected("Datadog API")).toBe(true);
+  });
+
+  it("shows the new page's selection when its props arrive", async () => {
+    const user = userEvent.setup();
+    const { rerender } = mount();
+    await user.click(pill("Python"));
+
+    // The server resolved Java after all (say, Python was dropped).
+    rerender(h(CdocsFilterBar, { filterLinks: structuredClone(filterLinks) }));
+
+    expect(isSelected("Java")).toBe(true);
+    expect(isSelected("Python")).toBe(false);
   });
 
   it("renders nothing when there are no filters", () => {
-    mount({ filters: [] });
+    mount({ filterLinks: [] });
     expect(document.querySelector(".cdocs-filter-bar")).toBeNull();
   });
 });

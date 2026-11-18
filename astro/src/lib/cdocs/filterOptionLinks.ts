@@ -2,8 +2,9 @@
  * The filter bar's options as links: for each shown filter on a variant,
  * where a reader ends up by picking each option.
  *
- * The plaintext filter bar lists these links, so an agent can reach the
- * other variants.
+ * The filter bar navigates to these links when a reader picks an option, and
+ * the plaintext filter bar lists them, so an agent can reach the other
+ * variants.
  */
 import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest";
 import type { CustomizationConfig } from "cdocs-data";

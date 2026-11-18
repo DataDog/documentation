@@ -72,6 +72,23 @@ test.describe("cdocs filterable doc (SSR)", () => {
     ).toBe(true);
   });
 
+  test("clicking a pill goes to the variant URL, with every value in alphabetical order", async ({
+    page,
+  }) => {
+    await page.goto(`${CDOC_URL}?prog_lang=java&unknown=1`);
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
+
+    await pill(page, "Python").click();
+
+    // The unknown param is dropped, and the default API value is filled in.
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+  });
+
   test("the URL's filter values are stored in localStorage, in Hugo's format", async ({
     page,
   }) => {

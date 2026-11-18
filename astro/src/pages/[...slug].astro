@@ -19,6 +19,10 @@ import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIslan
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
 import {
+  buildFilterOptionLinks,
+  type CdocsFilterLinks,
+} from "@lib/cdocs/filterOptionLinks";
+import {
   CDOCS_PAGE_STATE_ID,
   serializeCdocsPageState,
 } from "@lib/cdocs/pageState";
@@ -43,18 +47,20 @@ if (!entry) {
 const contentFilters = entry.data.content_filters;
 const isFilterable = contentFilters !== undefined;
 
-// Filterable docs resolve their filters; plain docs render with no filter
-// state.
-let resolvedFilters: ReturnType<typeof resolveCdocRender>["resolvedFilters"] =
-  [];
+// Filterable docs resolve their filters, and the filter bar gets each option's
+// URL; plain docs render with no filter state.
 let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
+let filterLinks: CdocsFilterLinks[] = [];
 if (isFilterable) {
-  const resolved = resolveCdocRender({
+  valsByTraitId = resolveCdocRender({
     contentFilters,
     searchParams: Astro.url.searchParams,
+  }).valsByTraitId;
+  filterLinks = buildFilterOptionLinks({
+    bareUrl: prefixed(`/${slug}/`),
+    contentFilters,
+    valsByTraitId,
   });
-  resolvedFilters = resolved.resolvedFilters;
-  valsByTraitId = resolved.valsByTraitId;
 }
 
 // Read by `preferencesClient`, which stores the URL's filter values and adds
@@ -104,7 +110,7 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
         id={CDOCS_PAGE_STATE_ID}
         set:html={cdocsPageState}
       />
-      {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
+      {isFilterable && <CdocsFilterBar client:load filterLinks={filterLinks} />}
       <div class="cdoc__content prose" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
       </div>
