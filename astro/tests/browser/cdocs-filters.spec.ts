@@ -72,16 +72,147 @@ test.describe("cdocs filterable doc (SSR)", () => {
     ).toBe(true);
   });
 
-  test("a selection persists across navigation via the cookie", async ({
+  test("the URL's filter values are stored in localStorage, in Hugo's format", async ({
     page,
   }) => {
     await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
     await expect(content(page)).toContainText("ddtrace");
 
-    // Navigate back to the bare URL (no params); the cookie should restore the
-    // previous selection.
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          JSON.parse(
+            localStorage.getItem("datadog-docs-content-filters") ?? "{}",
+          ),
+        ),
+      )
+      .toMatchObject({
+        prog_lang: { value: "python", timestamp: expect.any(Number) },
+        api_type: { value: "dd_api", timestamp: expect.any(Number) },
+      });
+  });
+
+  test("clicking a pill stores the new value in localStorage", async ({
+    page,
+  }) => {
     await page.goto(CDOC_URL);
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
+
+    await pill(page, "Datadog").click();
+    await expect(page).toHaveURL(new RegExp("api_type=dd_api"));
+
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          JSON.parse(
+            localStorage.getItem("datadog-docs-content-filters") ?? "{}",
+          ),
+        ),
+      )
+      .toMatchObject({
+        api_type: { value: "dd_api", timestamp: expect.any(Number) },
+      });
+  });
+
+  test("a bare URL renders the defaults, whatever the cookies say", async ({
+    page,
+    context,
+    baseURL,
+  }) => {
+    await context.addCookies([
+      {
+        name: "cdocs_prefs",
+        value: JSON.stringify({
+          prog_lang: { value: "python", timestamp: Date.now() },
+        }),
+        url: baseURL,
+      },
+    ]);
+    await page.goto(CDOC_URL);
+    await expect(pill(page, "Java")).toHaveAttribute("aria-checked", "true");
+  });
+
+  test("the resolved values are in the HTML", async ({ page }) => {
+    await page.goto(`${CDOC_URL}?prog_lang=python`);
+    const state = await page
+      .locator("#cdocs-page-state")
+      .evaluate((element) => JSON.parse(element.textContent ?? ""));
+    expect(state.valsByTraitId).toEqual({
+      prog_lang: "python",
+      api_type: "otel_api",
+    });
+  });
+});
+
+test.describe("links to cdocs pages", () => {
+  const LINKS_URL = "/dd_e2e/cdocs/links/";
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto(LINKS_URL);
+    await page.evaluate(() =>
+      localStorage.setItem(
+        "datadog-docs-content-filters",
+        JSON.stringify({ prog_lang: { value: "python", timestamp: 1 } }),
+      ),
+    );
+    await page.reload();
+  });
+
+  test("hovering a bare Cdocs link adds the stored preferences", async ({
+    page,
+  }) => {
+    const link = page.getByRole("link", {
+      name: "Custom instrumentation",
+      exact: true,
+    });
+
+    // The traits list loads when the page is idle, so hover until it's in.
+    await expect(async () => {
+      await link.hover();
+      await expect(link).toHaveAttribute(
+        "href",
+        "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=python",
+      );
+    }).toPass();
+
+    await link.click();
     await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
-    await expect(content(page)).toContainText("ddtrace");
+  });
+
+  test("params already on a link are kept", async ({ page }) => {
+    const link = page.getByRole("link", {
+      name: "Custom instrumentation with the Datadog API",
+    });
+
+    await expect(async () => {
+      await link.hover();
+      await expect(link).toHaveAttribute(
+        "href",
+        "/dd_e2e/cdocs/custom_instrumentation/?api_type=dd_api&prog_lang=python",
+      );
+    }).toPass();
+  });
+
+  test("links to pages that aren't Cdocs pages are left alone", async ({
+    page,
+  }) => {
+    const cdocsLink = page.getByRole("link", {
+      name: "Custom instrumentation",
+      exact: true,
+    });
+    const otherLink = page.getByRole("link", { name: "Alert component" });
+
+    // Wait until Cdocs links are being updated, then check the other one.
+    await expect(async () => {
+      await cdocsLink.hover();
+      await expect(cdocsLink).toHaveAttribute("href", /prog_lang=python/);
+    }).toPass();
+    await otherLink.hover();
+    await expect(otherLink).toHaveAttribute(
+      "href",
+      "/dd_e2e/components/alert/",
+    );
   });
 });

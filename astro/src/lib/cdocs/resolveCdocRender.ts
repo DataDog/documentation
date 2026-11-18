@@ -1,17 +1,17 @@
 /**
- * Per-request cdoc render resolution, shared by the catch-all cdoc route.
+ * Per-request cdoc render resolution, shared by the catch-all cdoc route and
+ * its plaintext twin.
  *
- * Given a doc's `content_filters` and the raw request primitives (URL query and
- * the prefs cookie), it resolves each filter's active value with the precedence
- * URL param > cookie > option-group default (via `resolvePageFilters`), and
- * returns both the UI-ready filters and the new cookie value to persist.
+ * Given a doc's `content_filters` and the request URL's query, it resolves each
+ * filter's active value with the precedence URL param > option-group default
+ * (via `resolvePageFilters`). Nothing else about the request is read, so the
+ * same URL always renders the same content. The reader's stored preferences
+ * are applied in the browser instead, by adding them to the URL.
  *
  * Kept free of `astro:content` and Astro globals so it stays unit-testable; the
- * route supplies `searchParams`/`cookieRaw`/`now` and handles the actual entry
- * lookup, cookie write, and rendering.
+ * route supplies `searchParams` and handles the entry lookup and rendering.
  */
 import { resolvePageFilters, type CdocContentFilter } from "./filters";
-import { readPrefs, writePrefs } from "./cookiePrefs";
 import type { ResolvedFilter } from "./types";
 
 export interface ResolveCdocRenderInput {
@@ -19,10 +19,6 @@ export interface ResolveCdocRenderInput {
   contentFilters: CdocContentFilter[];
   /** The request URL's query string. */
   searchParams: URLSearchParams;
-  /** The raw `cdocs_prefs` cookie value, if any. */
-  cookieRaw: string | undefined;
-  /** Timestamp stamped onto cookie entries written this request. */
-  now: number;
 }
 
 export interface ResolveCdocRenderResult {
@@ -30,14 +26,12 @@ export interface ResolveCdocRenderResult {
   resolvedFilters: ResolvedFilter[];
   /** Active value per trait id — passed to Markdoc as variables. */
   valsByTraitId: Record<string, string>;
-  /** New raw cookie value to persist (resolved selections, oldest evicted). */
-  cookieValue: string;
 }
 
 export function resolveCdocRender(
   input: ResolveCdocRenderInput,
 ): ResolveCdocRenderResult {
-  const { contentFilters, searchParams, cookieRaw, now } = input;
+  const { contentFilters, searchParams } = input;
 
   // Collect the filter values expressed in the URL query string.
   const urlVals: Record<string, string> = {};
@@ -46,15 +40,5 @@ export function resolveCdocRender(
     if (value) urlVals[filter.trait_id] = value;
   }
 
-  const cookieVals = readPrefs(cookieRaw);
-
-  const { resolvedFilters, valsByTraitId } = resolvePageFilters({
-    contentFilters,
-    urlVals,
-    cookieVals,
-  });
-
-  const cookieValue = writePrefs(cookieRaw, valsByTraitId, now);
-
-  return { resolvedFilters, valsByTraitId, cookieValue };
+  return resolvePageFilters({ contentFilters, urlVals });
 }
