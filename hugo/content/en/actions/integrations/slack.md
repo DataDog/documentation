@@ -85,6 +85,7 @@ Slack execution policies apply only to private channels. Channel selectors match
 
 - Enter an exact channel name, such as `incident-response`.
 - Use `*` to match any sequence of characters, such as `incident-*`. `*` is the only wildcard. All other characters are matched literally.
+- Use Slack UserIDs to target Slack Users
 - Leave **Channels** empty to match all private channels in the selected workspaces.
 
 Selectors follow these rules:
