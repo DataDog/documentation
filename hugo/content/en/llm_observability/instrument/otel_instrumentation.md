@@ -83,7 +83,7 @@ OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
 
 #### Using code
 
-You can also set the attribute programmatically. Set it on the resource so that it is included in every span your tracer provider exports:
+To set the attribute programmatically, add it to the resource so that every span your tracer provider exports includes it:
 
 ```python
 from opentelemetry import trace
