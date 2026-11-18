@@ -3370,6 +3370,16 @@ menu:
       parent: private_actions
       identifier: private_actions_reference
       weight: 208
+    - name: Integrations
+      url: actions/integrations/
+      parent: action_catalog
+      identifier: actions_integrations
+      weight: 4
+    - name: Slack
+      url: actions/integrations/slack/
+      parent: actions_integrations
+      identifier: actions_integrations_slack
+      weight: 401
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
