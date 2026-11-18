@@ -10786,6 +10786,11 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_lift_and_interval_calculations
       weight: 6
+    - name: Expected Regret and EVSI
+      url: experiments/statistics/expected_regret_and_evsi
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_expected_regret_and_evsi
+      weight: 7
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
