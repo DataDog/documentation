@@ -41,7 +41,7 @@ For example, an organization can measure impact at three levels:
 - **Department:** A selective holdout covers experiments from one department.
 - **Team:** Another selective holdout covers experiments from a team within that department.
 
-Select the experiments for each department or team holdout. An eligible experiment from that team can belong to all three holdouts.
+On the experiment's setup page, add the department and team selective holdouts. The organization's global holdout applies automatically when the experiment is eligible.
 
 ## Holdout phases
 
@@ -186,14 +186,6 @@ Use the primary analysis to assess the combined changes during the analysis phas
 The scorecard compares the shipped-changes group with the control group. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
 Primary results become available after the analysis phase starts and an analysis run processes metric data from that phase.
-
-### Compare results across scopes
-
-Each comparison uses subjects who reach that holdout after earlier holdout checks. On shared experiments, both groups of an earlier holdout are excluded from the later holdout's comparison.
-
-Both groups follow the same assignment rules for changes outside the measured scope. Those changes can interact with the scoped changes. The result measures the scoped changes in that surrounding product experience, including those interactions.
-
-Do not add narrower holdout results to calculate the global result. Nested scopes include some of the same changes, and the comparisons can use different populations and analysis periods. Even separate scopes can interact. Use the global holdout's own result to assess the combined impact of the changes it covers across the organization.
 
 ## Analyze holdouts with your own exposure data
 
