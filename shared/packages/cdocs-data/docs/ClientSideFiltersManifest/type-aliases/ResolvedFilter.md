@@ -6,56 +6,39 @@
 
 # Type Alias: ResolvedFilter
 
-> **ResolvedFilter**: `object`
+> **ResolvedFilter**: \{ `currentValue`: `string`; `defaultValue`: `string`; `id`: `string`; `isShown`: `true`; `label`: `string`; `options`: `object`[]; \} \| \{ `currentValue`: `"cdocs_noop"`; `defaultValue`: `"cdocs_noop"`; `id`: `string`; `isShown`: `false`; `label`: `string`; `options`: \[\{ `id`: `"cdocs_noop"`; `label`: `"cdocs_noop"`; \}\]; \}
 
-Defined in: [src/schemas/pageFilters.ts:72](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/pageFilters.ts#L72)
+Defined in: [src/schemas/pageFilters.ts:84](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/pageFilters.ts#L84)
 
 A page filter that has been "resolved" into
 its current value and available options.
-The current value can be derived from default values
-or user selections, and the available options
-can sometimes be narrowed by previous user selections
-that this selection depends on.
 
-For example, assume the user must select dbm_host (such as `aws`)
-before they can select a dbm_host_type (such as `ec2`).
-The options for dbm_host_type will be
-"resolved" (narrowed) based on the user's selection of dbm_host,
-since not every possible host type option is valid for all hosts.
-
-## Type declaration
-
-### currentValue
-
-> **currentValue**: `string`
-
-### defaultValue
-
-> **defaultValue**: `string`
-
-### id
-
-> **id**: `string`
-
-### label
-
-> **label**: `string`
-
-### options
-
-> **options**: `object`[]
-
-## Example
+## Examples
 
 ```ts
+// Displayed filter:
 {
- *   id: 'category',
- *   label: 'Category',
- *   defaultValue: 'all',
- *   options: [
- *     { id: 'all', label: 'All' },
- *     { id: 'news', label: 'News' },
- *     { id: 'events', label: 'Events' }
- *   ]
- * }
+  id: 'category',
+  label: 'Category',
+  isShown: true,
+  defaultValue: 'all',
+  currentValue: 'news',
+  options: [
+    { id: 'all', label: 'All' },
+    { id: 'news', label: 'News' },
+    { id: 'events', label: 'Events' }
+  ]
+}
+```
+
+```ts
+// Hidden filter:
+{
+  id: 'runtime',
+  label: 'Runtime',
+  isShown: false,
+  defaultValue: 'cdocs_noop',
+  currentValue: 'cdocs_noop',
+  options: [{ id: 'cdocs_noop', label: 'cdocs_noop' }]
+}
 ```

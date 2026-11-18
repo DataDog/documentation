@@ -8,7 +8,7 @@
 
 > **writeTraitValsToUrl**(`p`): `URL`
 
-Defined in: [src/api/browser/writeTraitValsToUrl.ts:10](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/api/browser/writeTraitValsToUrl.ts#L10)
+Defined in: [src/api/browser/writeTraitValsToUrl.ts:10](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/api/browser/writeTraitValsToUrl.ts#L10)
 
 Write a record of trait values to a URL,
 forwarding any non-trait params.

@@ -8,7 +8,7 @@
 
 > **ClientSideFiltersManifest**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:262](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/schemas/pageFilters.ts#L262)
+Defined in: [src/schemas/pageFilters.ts:270](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/schemas/pageFilters.ts#L270)
 
 A lighter version of the FiltersManifest schema,
 designed to be used client-side.
@@ -21,7 +21,7 @@ designed to be used client-side.
 
 ### filtersByTraitId
 
-> **filtersByTraitId**: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; \}\>
+> **filtersByTraitId**: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `hide_if`: `Record`\<`string`, `string`[]\>[]; `label`: `string`; `option_group_id`: `string`; `show_if`: `Record`\<`string`, `string`[]\>[]; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; \}\>
 
 ### optionGroupsById
 

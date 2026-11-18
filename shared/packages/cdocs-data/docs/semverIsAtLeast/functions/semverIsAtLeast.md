@@ -8,7 +8,7 @@
 
 > **semverIsAtLeast**(`p`): `boolean`
 
-Defined in: [src/api/shared/semverIsAtLeast.ts:10](https://github.com/DataDog/corp-node-packages/blob/5c24c72746b7247ccfbceb0819de8cf59d2217ff/packages/cdocs-data/src/api/shared/semverIsAtLeast.ts#L10)
+Defined in: [src/api/shared/semverIsAtLeast.ts:12](https://github.com/DataDog/documentation/blob/795d5bed8eccc011660a1ae19654780b058983f8/shared/packages/cdocs-data/src/api/shared/semverIsAtLeast.ts#L12)
 
 Given a trait value that represents a semver,
 such as 1_2_3 or gte_1_2_3, and a target semver,
