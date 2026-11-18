@@ -1033,7 +1033,7 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 ### `get_data_observability_monitor_errors`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` and `APM Read`*\
-Returns the latest metric collection error for each table covered by a data quality monitor. Errors include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`; optionally, provide `entity_id` to check a single table. Without `entity_id`, checks up to 500 tables.
+Returns the latest metric collection error for each table covered by a data quality monitor. Errors can include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this tool to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`. To check a single table, provide `entity_id`. Otherwise, the tool checks up to 500 tables.
 
 - Show the latest metric collection errors for monitor `12345`.
 - Why does this data quality monitor show No Data?
