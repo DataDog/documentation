@@ -30,11 +30,11 @@ export interface LlmsTree {
  * omitted from both the index and the detail files. This is the single place
  * llms.txt honors privacy.
  *
- * Takes the resolved `llms-index.json` sidecar rather than the page sources, so
- * the whole tree — every file's path and its contents — is produced by one call
- * in the `llmsTxt` integration after the build. There is no separate path
- * enumeration step that has to agree with this one about where the size-driven
- * split boundaries fall.
+ * Takes the resolved `llms-index.json` intermediate file rather than the page
+ * sources, so the whole tree — every file's path and its contents — is produced
+ * by one call in the `llmsTxt` integration after the build. There is no
+ * separate path enumeration step that has to agree with this one about where
+ * the size-driven split boundaries fall.
  */
 export function buildLlmsTree(
   llmsIndex: LlmsIndex,

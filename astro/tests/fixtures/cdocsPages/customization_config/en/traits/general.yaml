@@ -1,0 +1,10 @@
+traits:
+  - id: host
+    label: Host
+    type: text
+  - id: database
+    label: Database
+    type: text
+  - id: os
+    label: Operating system
+    type: text

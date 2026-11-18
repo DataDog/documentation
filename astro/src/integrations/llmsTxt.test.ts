@@ -8,7 +8,7 @@ import type { LlmsIndex } from "../lib/pagesListing/types";
 
 const SITE = "https://docs.datadoghq.com";
 const PREVIEW_SITE = "https://docs-staging.datadoghq.com/my-branch";
-const SIDECAR = "llms-index.json";
+const INTERMEDIATE_FILE = "llms-index.json";
 
 function page(urlPath: string, title: string, isPrivate = false) {
   return {
@@ -17,7 +17,7 @@ function page(urlPath: string, title: string, isPrivate = false) {
   };
 }
 
-const sidecar: LlmsIndex = [
+const intermediateFile: LlmsIndex = [
   {
     title: "API Reference",
     rootPages: [page("/api/latest.md", "API Reference")],
@@ -62,7 +62,11 @@ beforeEach(async () => {
   // matching Astro's `config.build.client`.
   clientDir = pathToFileURL(join(tmpRoot, "client") + "/");
   await mkdir(clientDir, { recursive: true });
-  await writeFile(new URL(SIDECAR, clientDir), JSON.stringify(sidecar), "utf8");
+  await writeFile(
+    new URL(INTERMEDIATE_FILE, clientDir),
+    JSON.stringify(intermediateFile),
+    "utf8",
+  );
 });
 
 afterEach(async () => {
@@ -95,9 +99,9 @@ describe("llmsTxt integration", () => {
     expect(metrics).not.toContain("secret.md");
   });
 
-  it("removes the sidecar so it never reaches a deploy", async () => {
+  it("removes the intermediate file so it never reaches a deploy", async () => {
     await runBuild(SITE);
-    await expect(readOutput(SIDECAR)).rejects.toThrow();
+    await expect(readOutput(INTERMEDIATE_FILE)).rejects.toThrow();
   });
 
   it("keeps the preview base path in links but not in disk paths", async () => {

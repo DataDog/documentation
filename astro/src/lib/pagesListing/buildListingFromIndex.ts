@@ -13,16 +13,16 @@ function md5Hex(input: string): string {
 }
 
 /**
- * Turns the metadata sidecar into the final `pages.json` listing by hashing each
- * page's already-emitted plaintext.
+ * Turns the metadata intermediate file into the final `pages.json` listing by
+ * hashing each page's already-emitted plaintext.
  *
- * `readFile` is injected so the disk read is the only side effect and the core is
- * unit-testable without a filesystem. Files are read and hashed one at a time, so
- * peak memory is a single body regardless of page count. The result is validated
- * against `PagesListingSchema`, so a malformed hash or shape fails the build
- * rather than shipping. Key order is the sidecar's, which `buildPageIndex` has
- * already deduped and sorted. Alias-free for use from the `astro:build:done`
- * integration.
+ * `readFile` is injected so the disk read is the only side effect and the core
+ * is unit-testable without a filesystem. Files are read and hashed one at a
+ * time, so peak memory is a single body regardless of page count. The result is
+ * validated against `PagesListingSchema`, so a malformed hash or shape fails
+ * the build rather than shipping. Key order is the intermediate file's, which
+ * `buildPageIndex` has already deduped and sorted. Alias-free for use from the
+ * `astro:build:done` integration.
  */
 export async function buildListingFromIndex(
   index: PageIndexEntry[],

@@ -20,6 +20,7 @@ import { resolveSiteEnv } from "./src/lib/site/siteEnv.ts";
 import { resolveWebsitesModulesPath } from "./src/lib/site/websitesModulesPath.ts";
 import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
+import { cdocsTraitsList } from "./src/integrations/cdocsTraitsList.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
@@ -137,12 +138,17 @@ export default defineConfig({
     }),
     // Emits dist/client/api/pages.json after the build by hashing each emitted
     // .md from disk (no page body is built twice). Must come after sitemap so
-    // the sidecar is deleted only once every build:done consumer has run.
+    // the intermediate file is deleted only once every build:done consumer has
+    // run.
     pagesJson(),
     // Emits dist/client/api/llms.txt and every section detail file after the
-    // build, from the llms-index.json sidecar. Same reasoning as pagesJson for
-    // ordering.
+    // build, from the llms-index.json intermediate file. Same reasoning as
+    // pagesJson for ordering.
     llmsTxt(),
+    // Moves the Cdocs traits list's intermediate file to its content-hashed
+    // path under _astro/. Must come before staticApiGuard, which rejects the
+    // intermediate file's root-level path.
+    cdocsTraitsList(),
     // Fails the build if any /api route stops being prerendered, if anything
     // is emitted outside api/ or {fr,ja,ko,es}/api/, or if the category count
     // collapses (spec-parsing regression). Registered last so it inspects the
