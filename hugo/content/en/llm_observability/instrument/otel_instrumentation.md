@@ -129,7 +129,7 @@ service:
       exporters: [datadog]
 ```
 
-Replace `<DATADOG_SITE>` with your Datadog site ({{< region-param key="dd_site" code="true" >}}).
+Replace `<DATADOG_SITE>` with your Datadog site ({{< region-param key="dd_site" code="true" >}}), and set the `DD_API_KEY` environment variable on the Collector to your [Datadog API key][2].
 
 ### 2. Configure the exporter {#configuration}
 
