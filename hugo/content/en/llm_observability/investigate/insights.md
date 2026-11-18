@@ -73,7 +73,7 @@ Apply the recommended fix for the cause, such as correcting argument validation,
 
 Model deprecation insights identify models that the application still calls after their provider announced a shutdown date. Datadog raises this insight regardless of how much the application spends on those models.
 
-The **Announced deprecations** table lists each model with these columns, sorted by shutdown date, earliest first:
+The **Announced deprecations** table lists each deprecated model, sorted by shutdown date with the earliest first. The table includes the following columns:
 
 - **Provider**: The model provider
 - **Model**: The deprecated model
