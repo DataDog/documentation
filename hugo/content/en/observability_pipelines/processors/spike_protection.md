@@ -62,7 +62,7 @@ If you group logs by `service`, `status`, and `env`, the processor tracks a sepa
 - `service:checkout` with `env:dev` and `status:info`
 - `service:checkout` with `env:dev` and `status:error`
 
-If the `checkout` service in the `prod` environment starts sending 50 times more `info` logs than usual, only the `service:checkout`, `env:prod`, and `status:info` group is spiking. The processor continues to send logs from all other groups to the next step in the pipeline, such as:
+If the `checkout` service in the `prod` environment starts sending 50 times more `info` logs than usual, only the `service:checkout`, `env:prod`, and `status:info` group is spiking. The processor continues to send logs from all other groups to the next step in the pipeline, including logs from the following groups:
 
 - `service:checkout` with `env:prod` and `status:error`
 - `service:checkout` with `env:dev` and `status:info`
