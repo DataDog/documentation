@@ -53,9 +53,9 @@ To use the Cloud Cost skill in Bits Chat, you must:
 
 When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
-To find savings opportunities, click {{< ui >}}Optimize{{< /ui >}} on the [Cloud Cost Recommendations][17] page. For more information, see [Savings analysis](#savings-analysis).
-
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open Bits Chat and ask a cost question.
+
+To find savings opportunities, click {{< ui >}}Optimize{{< /ui >}} on the [Cloud Cost Recommendations][17] page. For more information, see the [Savings analysis](#savings-analysis) section.
 
 Example prompts:
 
@@ -102,7 +102,7 @@ After the initial summary, Bits Chat can:
 
 ### Savings analysis
 
-Ask Bits Chat to find savings in a team, service, or other scope, or click {{< ui >}}Optimize{{< /ui >}} on the [Cloud Cost Recommendations][17] page. Bits Chat investigates the scope's cost and usage data, then summarizes the savings opportunities it finds. The summary typically includes:
+Ask Bits Chat to find savings opportunities in a team, service, or other scope, or click {{< ui >}}Optimize{{< /ui >}} in the filter bar of the [Cloud Cost Recommendations][17] page. Bits Chat investigates the scope's cost and usage data, then summarizes the savings opportunities it finds. The summary typically includes:
 
 - The scope's current yearly cost and total estimated yearly savings
 - A table of savings opportunities, each with an owning team, estimated yearly savings, and **Effort**, **Risk**, and **Confidence** ratings
