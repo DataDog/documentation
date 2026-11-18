@@ -31,7 +31,7 @@ After conversion, the spans behave like any other Datadog APM spans. They appear
 
 ## Request access
 
-The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form][4]. The Datadog team responds within one week to confirm access. After Datadog confirms access, the **Azure Application Insights** option appears on the **Generate APM Traces** page, and you can [enable trace generation](#setup).
+The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form][4]. The Datadog team responds within one week to confirm access. After Datadog confirms access, the **Azure Application Insights** option appears on the **Generate APM Traces** page. To enable trace generation, follow the steps in the [Setup](#setup) section.
 
 ## Setup
 
