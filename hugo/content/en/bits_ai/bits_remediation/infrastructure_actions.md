@@ -210,7 +210,9 @@ The following table lists the Kubernetes actions that Bits supports. You allow a
 
 ## AWS actions
 
-{{< callout >}} AWS actions are in Preview. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities" >}}
+  AWS actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 Bits runs AWS actions through your Datadog AWS integration. This means you don't need a Private Action Runner or a separate connection for them.
 
