@@ -54,7 +54,7 @@ The L1/L7 Map has no Agent version requirement of its own. It builds the map fro
 | [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
 | [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
 | [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
-| [Network Device Monitoring][6] | No | The status of a network path hop that is a monitored network device. |
+| [Network Device Monitoring][6] | No | The status and side panel of a network path hop that is a monitored network device. |
 
 Before you use the map, open [CNM][14] and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in [Network Path][15].
 
@@ -236,7 +236,7 @@ When you click an item on the map, the details pane shows details for that item:
 - **An AS group on a network path**: The hops in the group and their status, such as **OK** or **UNREACHABLE**.
 - **A network path segment**: The map filters to the segment, and the details pane shows its reachability, end-to-end latency, and packet loss, with a link to open the segment in Network Path.
 
-<!-- TODO: In the prototype, clicking a device hop does nothing, and its hover summary shows Filter and Explore as disabled. Ask the PM what clicking a device hop does at Preview (details pane, device side panel, or a link to NDM), and add it to this list. -->
+When you click a resource, its side panel opens over the map, such as the host side panel for a host. When you click a hop that is a network device, the device's side panel from NDM opens.
 
 ## Investigate an issue with the L1/L7 Map
 
@@ -261,7 +261,7 @@ Use this workflow when two resources cannot communicate, or communicate slowly, 
 1. Set the time frame to when the issue started.
 1. Hover over the network connections between the two stacks to check their retransmits, TCP failures, and RTT.
 1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss. To investigate a degraded segment on its own, hover over it and click **Explore connection**.
-1. If a hop is a network device monitored by [NDM][6], hover over the hop to see the device's status.
+1. If a hop is a network device monitored by [NDM][6], hover over the hop to see its status. Click the hop to open the device's side panel.
 1. To examine the underlying data, click **View connections** in the details pane to open the connections in CNM. To open the path in Network Path, hover over a network path segment and click **View connection in Network Path**, which opens the connection's [path view][19].
 
 ## Limitations
@@ -269,7 +269,6 @@ Use this workflow when two resources cannot communicate, or communicate slowly, 
 - You cannot search for a network device to start an investigation. Network devices appear as hops on a network path. To investigate the connection between two hops, use **Explore connection** on the network path segment between them.
 - The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][13].
 - The map does not compare forward and reverse paths, compare paths over time, or detect route changes. To compare a path before and after an incident, use the [visual comparison][21] in Network Path.
-- The map does not correlate deployments with network changes. To see deployments and infrastructure changes for a service, use [Change Tracking][22].
 - The map shows only what Datadog observed during the selected time frame. A missing connection or hop does not mean that an outage occurred or that no dependency exists.
 
 ## Troubleshooting
@@ -290,10 +289,6 @@ The map is empty when CNM has no traffic data for the selected resource or pair 
 
 Check that the workload appears in the corresponding product, such as [APM][2], the [Containers Explorer][18], or the [Kubernetes Explorer][16]. If the service layer is missing, start the investigation from the host, pod, or container. Workloads that do not run in containers do not have a container layer, and workloads that do not run on Kubernetes do not have a pod layer.
 
-If your environment uses CNM sidecar attribution, an app container whose traffic goes entirely through its sidecar container does not appear on the map. Its traffic appears on the sidecar container instead, and exploring the app container shows an empty map. Investigate the sidecar container or the pod.
-
-<!-- TODO: Sidecar support is out of scope for M1 (Slack, 2026-11-16), and Angelina plans to update her draft. If her update drops this paragraph, remove it. If it stays, link "CNM sidecar attribution" to its setup doc, if one exists. -->
-
 ### A host appears as an IP address
 
 If a host in your infrastructure appears as an IP address, the Datadog Agent might not be installed on it. [Install the Agent][9] on the host to see its composition stack.
@@ -304,7 +299,7 @@ Check that [Network Path is set up][10] for the source and destination, and that
 
 ### A hop appears as an IP address instead of a device
 
-Check whether the device is monitored by Network Device Monitoring. If it is not, the hop appears as an IP address or external endpoint, with the AS or location information that is available. To see the device's status on the hop, [set up NDM][11] for the device.
+Check whether the device is monitored by Network Device Monitoring. If it is not, the hop appears as an IP address or external endpoint, with the AS or location information that is available. To see the device's status and side panel from the hop, [set up NDM][11] for the device.
 
 ### A status or metric is different in another product
 
@@ -337,4 +332,3 @@ Compare the same resource or pair over the same time frame, and check which sign
 [19]: /network_monitoring/network_path/path_view/
 [20]: /network_monitoring/cloud_network_monitoring/network_map/
 [21]: /network_monitoring/network_path/path_view/#visual-comparison
-[22]: /change_tracking/
