@@ -48974,19 +48974,10 @@ components:
           example: "2023-01-01T00:00:00Z"
           format: date-time
           type: string
-        description:
-          description: The description of the environment.
-          example: "Test environment XYZ789"
-          nullable: true
-          type: string
         is_production:
           description: Indicates whether this is a production environment.
           example: false
           type: boolean
-        key:
-          description: The unique key of the environment.
-          example: "env-search-term"
-          type: string
         name:
           description: The name of the environment.
           example: "env-search-term"
