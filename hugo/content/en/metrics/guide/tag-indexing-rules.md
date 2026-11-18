@@ -45,6 +45,9 @@ Metric names or prefixes
 Prefix exceptions
 : Exclude specific prefixes from the rule scope (for example, apply to `http.*` but exclude `http.client.*`)
 
+Note
+: Metric name patterns support only a single trailing `*`. Substring patterns, such as `*http*` or `*.http.*`, and wildcards at the start or in the middle of a pattern are not supported. A rule with an unsupported pattern matches no metrics, so the preview shows **0** affected metrics. To scope a rule to a group of metrics, use the namespace prefix (for example, `http.*`) or list multiple patterns in the same rule.
+
 {{< img src="metrics/guide/tag_indexing_rules/define_rule_scope.png" alt="The Choose Metrics step showing a rule scoped to http.* with http.client.* excluded as a sub-prefix." style="width:80%;">}}
 
 If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use {{< ui >}}Override{{< /ui >}} behavior to replace previously evaluated rules for the selected metrics.
