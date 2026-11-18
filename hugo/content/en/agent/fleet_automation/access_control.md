@@ -26,7 +26,7 @@ Fleet Automation uses two layers of access control:
 
 To upgrade or configure an Agent, a user needs the role permission for that action. If your organization uses scoped permissions, the user also needs Edit access to a scoped permission that includes that Agent.
 
-**Note**: Neither layer restricts viewing. Any user who can open Fleet Automation can see every Agent and its configuration.
+**Note**: Neither layer restricts which Agents users can see. Any user who can open Fleet Automation can see every Agent and its configuration.
 
 ## Role permissions for Fleet Automation
 
@@ -34,8 +34,8 @@ Assign the following permissions through [roles][1] to control which Fleet Autom
 
 | Permission | Allows users to |
 |---|---|
-| Hosts Read | View Fleet Automation. <!-- TODO(Emil): The index page said Fleet is "available to all users." Is Hosts Read the gate? It's in all default roles. --> |
-| API Keys Read | View and search Agents by API key. |
+| Hosts Read | View Fleet Automation. |
+| API Keys Read | View API key details on Agents and filter Agents by API key. |
 | Agent Upgrade | Upgrade Agents and create upgrade schedules. |
 | Agent Configuration Management | Create Agent configurations. Deploying a configuration also requires Agent Upgrade. |
 | Agent Flare Collection | Send flares remotely from Fleet Automation. |
@@ -52,9 +52,9 @@ Scoped permissions for Fleet Automation are in Preview. To request access, conta
 
 Scoped permissions limit which Agents a team, role, or user can upgrade or configure. For example, you can let each application team manage only the Agents tagged with their team name, while a central platform team manages every Agent.
 
-Scoped permissions apply to every deployment, whether it starts in the Fleet Automation UI, the API, Terraform, or the Datadog MCP Server.
+Scoped permissions are checked whenever an upgrade or configuration deployment starts, whether from the Fleet Automation UI, the API, or the Datadog MCP Server. For API requests, Datadog checks the access of the user or service account that owns the application key. For MCP Server requests, it checks the signed-in user's access. Upgrade schedules managed with Terraform follow the same rules as schedules created in the UI.
 
-<!-- TODO(Emil): Page description says scopes cover "Agents and collectors." Which OTel Collectors (DDOT, standalone), and for which features? -->
+Scoped permissions also cover the [Datadog Distribution of OpenTelemetry (DDOT) Collector][10], which runs as part of the Agent. DDOT configuration changes are checked like any other Agent configuration deployment, and DDOT is upgraded with its Agent.
 
 ### How scoped permissions work
 
@@ -67,10 +67,10 @@ Each scoped permission has the following parts:
 : The actions the scoped permission covers: {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
 
 **Scope**
-: A tag filter that selects a group of Agents, such as `team:checkout` or `env:prod`. Scopes match host tags. A scope with no filters matches all Agents, and appears as {{< ui >}}Any Agent{{< /ui >}}. <!-- TODO(Emil): What counts as an "Agent-side tag" that doesn't match? Do scopes update immediately when host tags change? -->
+: A tag filter that selects a group of Agents, such as `team:checkout` or `env:prod`. Scopes match host tags as they appear on the Host Map and Infrastructure List. A scope with no filters matches all Agents, and appears as {{< ui >}}Any Agent{{< /ui >}}. Datadog checks scopes each time a deployment starts. A host tag change applies to the next deployment after the new tag appears on the host.
 
 **Has access**
-: The Datadog Teams, roles, users, and service accounts that get Edit access to the Agents in the scope. Granting access to a team includes its subteams. <!-- TODO(Emil): Confirm subteams are included. -->
+: The Datadog Teams, roles, users, and service accounts that get Edit access to the Agents in the scope. Granting access to a team includes its [subteams][9].
 
 ### How scoped permissions combine
 
@@ -94,43 +94,39 @@ Members of the platform team can upgrade and configure every Agent, including th
 - To create, edit, or delete scoped permissions, you need the User Access Manage permission. Users without it see the {{< ui >}}Access Controls{{< /ui >}} page in read-only mode.
 - Make sure the Agents you want to group share a host tag, such as `team` or `env`.
 
-### Replace the starter scoped permission
+### Replace the Default scoped permission
 
-When Datadog enables scoped permissions for your organization, it creates a starter scoped permission. The starter scoped permission covers all Agents and grants access to every user who already has the Agent Upgrade or Agent Configuration Management permission. As a result, nobody gains or loses access when the Preview is enabled.
+When Datadog enables scoped permissions for your organization, it creates a starter scoped permission called {{< ui >}}Default{{< /ui >}}. The Default scoped permission covers all Agents and grants access to every user who already has the Agent Upgrade or Agent Configuration Management permission. As a result, nobody gains or loses access when the Preview is enabled.
 
-<!-- TODO(Emil): What is the starter scoped permission called in the UI? Is it created automatically when the flag is enabled, or by a backfill script? -->
-
-To move from the starter scoped permission to your own:
+To move from the Default scoped permission to your own:
 
 1. [Create scoped permissions](#create-a-scoped-permission) for each group of Agents and the teams that manage them.
 1. Confirm that every team that needs to upgrade or configure Agents has access through one of your new scoped permissions.
-1. Delete the starter scoped permission.
+1. Delete the Default scoped permission. Until you delete it, your other scoped permissions don't restrict access.
 
-<div class="alert alert-danger">If you delete the starter scoped permission before you create your own, users cannot upgrade or configure any Agents until you add new scoped permissions.</div>
+<div class="alert alert-warning">If you delete your last scoped permission, Datadog restores the Default scoped permission, which gives every user with the matching role permission Upgrades and Configurations access to all Agents.</div>
 
 ### Create a scoped permission
 
 1. In [Fleet Automation][3], click {{< ui >}}Permissions{{< /ui >}} to open the [{{< ui >}}Access Controls{{< /ui >}} page][4].
 1. Click {{< ui >}}Add Permission{{< /ui >}}.
 1. Enter a description.
-1. Under {{< ui >}}Grant access to{{< /ui >}}, select {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
+1. Under {{< ui >}}Grant access to{{< /ui >}}, choose {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
 1. Under {{< ui >}}Select the Agents this permission applies to{{< /ui >}}, use the {{< ui >}}env{{< /ui >}} dropdown or click {{< ui >}}Filter{{< /ui >}} to filter by tag. The table lists the matching Agents.
 1. Click {{< ui >}}Save & Define Access{{< /ui >}}. The scoped permission is created as Unrestricted.
 1. In the {{< ui >}}Who has access?{{< /ui >}} dialog, click {{< ui >}}Restrict Access{{< /ui >}}.
 1. Select teams, roles, users, or service accounts, then click {{< ui >}}Add{{< /ui >}}. You are added as an Editor by default. To remove yourself, select {{< ui >}}Remove Access{{< /ui >}} from the dropdown next to your name.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-<!-- TODO(Emil): What does Organization access Viewer vs. Editor do here? If Editor gives everyone edit access, add a step and a warning. -->
-
-<div class="alert alert-warning">If you click <strong>Do It Later</strong> instead of restricting access, the scoped permission stays Unrestricted. Any user with the matching role permission can act on its Agents.</div>
+<div class="alert alert-warning">A scoped permission is Unrestricted if you click <strong>Do It Later</strong> instead of restricting access, or if you set <strong>Organization access</strong> to <strong>Editor</strong>. Any user with the matching role permission can act on its Agents. To restrict access, leave <strong>Organization access</strong> set to <strong>Viewer</strong>.</div>
 
 ### Edit or delete a scoped permission
 
-On the [{{< ui >}}Access Controls{{< /ui >}} page][4], hover over a scoped permission, then click one of the following icons:
+On the [{{< ui >}}Access Controls{{< /ui >}} page][4], hover over a scoped permission, then click one of the following:
 
-- **Pencil**: Edit the description, features, or scope.
-- **People**: Change who has access.
-- **Trash can**: Delete the scoped permission.
+- {{< ui >}}Edit Definition{{< /ui >}} (pencil icon): Change the description, features, or scope.
+- {{< ui >}}Modify who has access{{< /ui >}} (people icon): Add or remove teams, roles, users, or service accounts.
+- {{< ui >}}Delete{{< /ui >}} (trash can icon): Delete the scoped permission.
 
 ### Example setups
 
@@ -155,7 +151,7 @@ In this example, only site reliability engineers (SREs) can upgrade production A
 | Production upgrades | `env:prod` | Upgrades | SRE role |
 | Staging configuration | `env:staging` | Configurations | Developer role |
 
-Because deploying a configuration requires the Agent Upgrade permission, the developers need both Agent Upgrade and Agent Configuration Management in their role.
+Because deploying a configuration requires the Agent Upgrade permission, the developers need both Agent Upgrade and Agent Configuration Management in their role. They still can't upgrade any Agents, because no scoped permission grants them Upgrades.
 
 ### Troubleshooting
 
@@ -163,7 +159,8 @@ Because deploying a configuration requires the Agent Upgrade permission, the dev
 
 - Check that the user's role has the required permission: Agent Upgrade for upgrades, and both Agent Configuration Management and Agent Upgrade for configuration deployments.
 - Check that a scoped permission grants the user access to that feature, with a scope that includes the Agent.
-- When the user starts an upgrade or configuration change, open the {{< ui >}}Excluded from deployment{{< /ui >}} tab to see why each Agent was excluded. Agents the user doesn't have access to are listed under {{< ui >}}Outside your access{{< /ui >}}. Agents can also be excluded for other reasons, such as [Remote Agent Management][5] not being enabled. <!-- TODO(Emil): Confirm the "Outside your access" label in the Excluded from deployment tab. -->
+- When the user starts an upgrade or configuration change, open the {{< ui >}}Excluded from deployment{{< /ui >}} tab to see why each Agent was excluded. Agents the user doesn't have access to are listed under {{< ui >}}Outside your access{{< /ui >}}. Agents can also be excluded for other reasons, such as [Remote Agent Management][5] not being enabled.
+- If an Agent matches your deployment filter but is listed under {{< ui >}}Outside your access{{< /ui >}}, compare its host tags on the Host Map with the tags in your filter. Scopes match host tags, but deployment filters match the tags that the Agent reports, and the two can differ.
 
 #### A user can still upgrade or configure an Agent you restricted
 
@@ -171,18 +168,18 @@ Scoped permissions only add access, so another scoped permission might grant it.
 
 - Unrestricted, including any with the scope {{< ui >}}Any Agent{{< /ui >}}
 - Granted to a team or role that the user belongs to
-- The starter scoped permission
+- The Default scoped permission
 
 #### An upgrade schedule skipped some Agents
 
 [Upgrade schedules][6] run with the access of the user who created them. Each time a schedule runs, it skips Agents outside that user's upgrade access, without a warning. The default upgrade schedule is not affected.
 
-To fix this, give the schedule's creator access to the skipped Agents, or have a user with access recreate the schedule.
+To fix this, give the schedule's creator access to the skipped Agents, or have a user with access recreate the schedule. Editing the schedule doesn't change whose access it runs with.
 
 ### Limitations
 
 - Scoped permissions do not restrict viewing. To keep sensitive values out of Agent configurations, use [secrets management][7].
-- Scoped permissions do not apply to flares, failover policies, Kubernetes deployments, or Agent installation. <!-- TODO(Emil): Confirm "failover policies" is a customer-facing term. -->
+- Scoped permissions do not apply to flares, failover policies, Kubernetes deployments, or Agent installation.
 - You can manage scoped permissions only in the Datadog UI. The API and Terraform do not support creating or editing scoped permissions.
 - Scoped permissions are separate from [Data Access Control][8]. Data Access Control does not hide Agents in Fleet Automation, and scoped permissions do not restrict data elsewhere in Datadog.
 
@@ -198,3 +195,5 @@ To fix this, give the schedule's creator access to the skipped Agents, or have a
 [6]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades
 [7]: /agent/configuration/secrets-management/
 [8]: /account_management/rbac/data_access/
+[9]: /account_management/teams/manage/#team-hierarchies
+[10]: /opentelemetry/setup/ddot_collector/
