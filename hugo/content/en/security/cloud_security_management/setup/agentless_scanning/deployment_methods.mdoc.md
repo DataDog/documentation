@@ -95,7 +95,7 @@ Do not increase the Autoscaling Group (ASG) desired count beyond four scanners p
 
 Datadog recommends using a **dedicated scanner account** to deploy scanners in, and using **cross-account delegate roles** to grant scanners access to target accounts (including the scanner account).
 
-For AWS Organizations, use a [CloudFormation StackSet][4] to deploy a delegate role across all member accounts, automating onboarding for cross-account scanning.
+For AWS Organizations, use a [CloudFormation StackSet][4] to deploy a delegate role across all member accounts, automating onboarding for cross-account scanning. This StackSet is separate from the StackSet that sets up the Datadog AWS integration in your member accounts, so you deploy both.
 
 The following diagram illustrates cross-account scanning from a central account (Account 4):
 
@@ -144,19 +144,18 @@ By default, the scanner creates a new VPC during deployment. If your organizatio
 
 You enable Datadog-hosted scanning for each AWS account individually, not for your whole Datadog organization. You can use Datadog-hosted scanning for some AWS accounts and self-hosted scanners for others, for as long as you need.
 
-To scan an AWS account, [enable Datadog-hosted scanning][7] in that account. Repeat the setup for each account you want to scan.
-
-<!-- TODO(DOCS-16346): Confirm with SME whether AWS Organizations / multi-account onboarding (for example, a StackSet) is available for Datadog-hosted scanning. -->
+To scan a single AWS account, [enable Datadog-hosted scanning][7] in that account. To onboard several accounts in an AWS organization at once, use the CloudFormation StackSet setup in Datadog. For instructions, see [Enabling Agentless Scanning][7].
 
 ## Move an account from self-hosted to Datadog Hosted (SaaS) Agentless Scanning {% #move-an-account-from-self-hosted-to-datadog-hosted-scanning %}
 
-Because you set the hosting mode for each account, you can move accounts one at a time:
+Because you set the hosting mode for each account, you can move accounts one at a time. Moving an account doesn't create duplicate findings.
 
-1. [Enable Datadog-hosted scanning][7] in the AWS account.
+1. [Enable Datadog-hosted scanning][7] in the AWS account using CloudFormation or Terraform.
 1. In the [Cloud Security Vulnerabilities Explorer][8], confirm that scan results from Datadog-hosted scanning appear for the account.
-1. Decommission the self-hosted scanner. For instructions, see [Uninstall Agentless Scanning][9].
-
-<!-- TODO(DOCS-16346): Confirm with SME how to migrate accounts that a central self-hosted scanner scans through delegate roles, and whether results from both modes can overlap during migration. -->
+1. Wait 24 hours. This gives the self-hosted scanner time to clean up any snapshots it left in the account.
+1. Remove self-hosted scanner access to the account:
+   - If a central scanner scans the account through a delegate role, delete the delegate role stack in the account.
+   - If a scanner runs in the account itself, uninstall it. For instructions, see [Uninstall Agentless Scanning][9].
 {% /if %}
 <!-- end Datadog-hosted -->
 

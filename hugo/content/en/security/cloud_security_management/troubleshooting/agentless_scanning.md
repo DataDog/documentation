@@ -23,9 +23,14 @@ If no results appear after two hours:
 - For self-hosted scanners:
   - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
   - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
-- For Datadog-hosted scanning, verify that the Agentless Scanning IAM policy is attached to the Datadog integration role in your AWS account.
+- For Datadog-hosted scanning, verify the following:
+  - The Datadog integration role is set up in your AWS account, and Datadog is collecting data from the account through the [AWS integration][13].
+  - The Agentless Scanning IAM policy is attached to the Datadog integration role.
+  - Scanning is enabled for the account:
+    - If you set up scanning using CloudFormation, check the account's Agentless Scanning settings on the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, or use the [Agentless Scanning API][14].
+    - If you set up scanning using Terraform, check the [`datadog_agentless_scanning_aws_scan_options`][15] resource for the account.
+  - Datadog has detected any recent changes to the IAM role or policy. Detection can take some time after you make a change.
 
-<!-- TODO(DOCS-16346): Confirm with SME the Datadog-hosted troubleshooting steps (policy name, how Datadog detects the policy, common failures). -->
 ## Enable Remote Configuration on the API key
 
 To authenticate and authorize Agentless scanners to receive scan instructions, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
@@ -100,3 +105,6 @@ With Datadog-hosted scanning, Datadog scans your resources in the region of your
 [10]: https://app.datadoghq.com/organization-settings/remote-config
 [12]: /security/cloud_security_management/setup/agentless_scanning#datadog-hosted-data-residency
 [11]: https://app.datadoghq.com/organization-settings/api-keys
+[13]: /integrations/amazon_web_services/
+[14]: /api/latest/agentless-scanning/#get-aws-scan-options
+[15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/agentless_scanning_aws_scan_options
