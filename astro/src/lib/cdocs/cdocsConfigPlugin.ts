@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { loadCustomizationConfig } from "cdocs-data";
+import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig";
 import type { Plugin } from "vite";
 
 const VIRTUAL_ID = "virtual:cdocs-config";
