@@ -205,7 +205,7 @@ Version updates imply the following changes to runtime support:
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
-[13]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[13]: /opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=dotnet
 [15]: https://github.com/dotnet/runtime/pull/73760
 [16]: https://github.com/dotnet/runtime/issues/11885
 [17]: https://github.com/dotnet/runtime/issues/85777
