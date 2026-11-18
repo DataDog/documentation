@@ -23,6 +23,8 @@ The Logs overlay shows logs from your cloud resources in the context of your Clo
 
 To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram. The overlay adds a pin to each supported resource that has logs. If a resource has logs with more than one status, the pin shows the most severe status.
 
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Logs overlay in Cloudcraft showing the log search panel with a list of recent logs on the left, and red log pins and status counts such as Emergency, Error, and Warn on resources in an AWS architecture diagram." style="width:100%;" >}}
+
 ### Supported resource types
 
 The Logs overlay supports the following resource types:
