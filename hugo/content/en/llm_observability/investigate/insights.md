@@ -87,7 +87,7 @@ Migrate each call site to a supported model before the deprecated model's shutdo
 
 ## Understand impact and evidence
 
-Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem. Model deprecations insights show the deprecated models and the next shutdown date instead.
+Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem. Model deprecations insights show the deprecated models and the next shutdown date instead of affected calls or sessions.
 
 Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
 
