@@ -134,7 +134,7 @@ In Network Devices settings, select {{< ui >}}Port Enrichment{{< /ui >}} under {
 
 ### Deep packet inspection
 
-**Note**: Deep packet inspection requires Agent version <!-- TODO: confirm minimum Agent version with PM -->7.XX or later.
+**Note**: Deep packet inspection requires Agent version 7.86.0 or later.
 
 Deep packet inspection (DPI) identifies the application on a flow by inspecting traffic on the exporter, instead of inferring it from the port number. Datadog does not inspect packet payloads. Instead, the Agent reads the application that the device already classified (using Cisco NBAR2 or Palo Alto Networks App-ID) from the NetFlow or IPFIX records.
 
@@ -218,7 +218,7 @@ Datadog assigns each flow a single `application_name` attribute. The value comes
 
 1. [Custom IP enrichment](#custom-ip-enrichment) mappings for private IP addresses
 2. [Custom port enrichment](#custom-port-enrichment) mappings
-3. [Deep packet inspection (DPI)](#deep-packet-inspection), for the responder only
+3. [Deep packet inspection (DPI)](#deep-packet-inspection), for the responder only (the endpoint that receives the connection, usually the server). For more information about initiators and responders, see [Conversation stitching](#conversation-stitching).
 4. [Reverse DNS](#reverse-dns-private-ip-enrichment) hostname
 5. GeoIP Autonomous System (AS) domain
 6. [Default port enrichment](#default-port-enrichment) (Datadog port-to-protocol mapping)
@@ -236,7 +236,7 @@ In the **Conversations** view, you can view the Public IP address of the Destina
 
 The {{< ui >}}Applications{{< /ui >}} section of the [NetFlow page][5] shows which applications use the most traffic on your network. Use it to identify the applications that drive bandwidth usage, performance issues, or congestion.
 
-<!-- TODO: add screenshot of the Applications view -->
+{{< img src="network_device_monitoring/netflow/netflow_top_applications.png" alt="The Applications section of the NetFlow page, showing a Top Applications pie chart and a table of applications with bit rate, packet rate, and total bytes" width="100%" >}}
 
 Each flow is assigned one application name, which Datadog selects from several enrichment sources: your custom IP and port mappings, DPI data from your devices, reverse DNS hostnames, GeoIP data, and default port mappings. Datadog then groups flows by application name to build the Applications view. For the order in which Datadog checks these sources, see [Application name assignment](#application-name-assignment).
 
