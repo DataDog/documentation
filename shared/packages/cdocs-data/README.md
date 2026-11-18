@@ -191,13 +191,13 @@ When a conditional filter has a dynamic `option_group_id` (using placeholders), 
 
 ## cdocs-data API
 
-Key features are covered below, but for full details, see [the generated documentation](./docs).
+Key features are covered below. For full details, see the TSDoc comments in each linked source file.
 
 ### Compilation functions
 
-- [`loadCustomizationConfig()`](./docs/loadCustomizationConfig/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
-- [`buildFiltersManifest()`](./docs/buildFiltersManifest/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
-- [`pruneManifestForClient()`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
+- [`loadCustomizationConfig()`](./src/api/compilation/loadCustomizationConfig.ts), which merges all of a site's YAML files into one customization config object
+- [`buildFiltersManifest()`](./src/api/compilation/buildFiltersManifest.ts), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
+- [`pruneManifestForClient()`](./src/api/compilation/pruneManifestForClient.ts), which removes manifest keys that are unnecessary for client-side filtering
 
 `loadCustomizationConfig()` reads the configuration from disk, so call it at build time. It isn't exported from the package root, so that importing from `cdocs-data` never bundles the file system or the YAML parser. Import it by subpath: `import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig"`.
 
@@ -205,21 +205,21 @@ Key features are covered below, but for full details, see [the generated documen
 
 ### Shared (compilation + browser) functions
 
-- [`resolveFilters()`](./docs/resolveFilters/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and current option group for each filter.
-- [`semverIsAtLeast()`](./docs/semverIsAtLeast/functions/semverIsAtLeast.md), which takes an option value (such as `lte_1_0_0`) and a target version requirement (such as `2.1.5`), and returns `true` if the actual value meets the target requirement.
-- [`convertTraitValueToSemver()`](./docs/convertTraitValueToSemver/functions/convertTraitValueToSemver.md), which converts an option value such as `gt_1_0_0` to a version string such as `>1.0.0`. This is useful for validating an option value as a valid semver, and when working with packages such as `semver`.
+- [`resolveFilters()`](./src/api/shared/resolveFilters.ts), which combines the `FiltersManifest` with the user's selections in order to derive the current value and current option group for each filter.
+- [`semverIsAtLeast()`](./src/api/shared/semverIsAtLeast.ts), which takes an option value (such as `lte_1_0_0`) and a target version requirement (such as `2.1.5`), and returns `true` if the actual value meets the target requirement.
+- [`convertTraitValueToSemver()`](./src/api/shared/convertTraitValueToSemver.ts), which converts an option value such as `gt_1_0_0` to a version string such as `>1.0.0`. This is useful for validating an option value as a valid semver, and when working with packages such as `semver`.
 
 ### Browser functions and classes
 
-- [`getTraitValsFromUrl()`](./docs/getTraitValsFromUrl/functions/getTraitValsFromUrl.md), which retrieves trait values from any search params present in a URL.
-- [`writeTraitValsToUrl()`](./docs/writeTraitValsToUrl/functions/writeTraitValsToUrl.md), which writes updated trait values to a URL, ordering them consistently for SEO purposes.
-- [`CdocsClientStorage`](./docs/CdocsClientStorage/classes/CdocsClientStorage.md), which manages reading/writing trait values to local storage, pruning older values when appropriate.
+- [`getTraitValsFromUrl()`](./src/api/browser/getTraitValsFromUrl.ts), which retrieves trait values from any search params present in a URL.
+- [`writeTraitValsToUrl()`](./src/api/browser/writeTraitValsToUrl.ts), which writes updated trait values to a URL, ordering them consistently for SEO purposes.
+- [`CdocsClientStorage`](./src/api/browser/CdocsClientStorage.ts), which manages reading/writing trait values to local storage, pruning older values when appropriate.
 
 To reduce client bundle size, these can each be imported individually: `import { writeTraitValsToUrl } from "cdocs-data/writeTraitValsToUrl"`.
 
 ### Types and schemas
 
-The package exports all relevant [types](./docs/type-aliases/) and [schemas](./docs/variables/) for creating or validating data, such as the `FiltersManifest`.
+The package exports all relevant [types and schemas](./src/schemas/) for creating or validating data, such as the `FiltersManifest`.
 
 ## Usage examples
 
