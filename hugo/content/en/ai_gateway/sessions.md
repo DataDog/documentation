@@ -1,6 +1,6 @@
 ---
 title: AI Gateway Sessions
-description: Group AI Gateway requests into sessions with the x-session-id header, keep each session on one destination so prompt caches stay warm, and separate the conversations or agent roles that share a routing rule.
+description: Identify AI Gateway sessions with the x-session-id header or a coding agent's own session signal, and separate the conversations or agent roles that share a routing rule.
 
 further_reading:
   - link: "/ai_gateway/"
@@ -21,8 +21,8 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 
 A session is the set of [AI Gateway][1] requests that belong to one conversation or one agent run. AI Gateway uses a request's session to:
 
-- Keep the session on the same destination of a [weighted routing step](#weighted-routing-steps), so the provider's prompt cache stays warm across turns.
-- Remember the destination that served the session with [session pinning](#session-pinning), so later turns, including turns that depend on provider-side state, return to it.
+- Keep the session on the same destination of a [weighted routing step](/ai_gateway/routing/#weighted-routing-steps), so the provider's prompt cache stays warm across turns.
+- Remember the destination that served the session with [session pinning](/ai_gateway/routing/#session-pinning), so later turns, including turns that depend on provider-side state, return to it.
 - Group the session's requests as one session in Agent Observability.
 
 Send a session ID with the `x-session-id` request header. Claude Code and Codex send their own session IDs, so you do not need to set the header for them. See [Claude Code and Codex sessions](#claude-code-and-codex-sessions).
@@ -68,8 +68,8 @@ The same value produces the same session, whichever signal carries it. For examp
 
 If a request carries no valid session signal:
 
-- In a [weighted routing step](#weighted-routing-steps), AI Gateway groups the request by a fingerprint of the conversation's opening content: its tools, system instructions, and first message. Conversations with identical openings share a destination, even when they are unrelated. OpenAI Responses requests are an exception and use the step's configured order. See [Weighted routing steps](#weighted-routing-steps).
-- [Session pinning](#session-pinning) does not apply.
+- In a [weighted routing step](/ai_gateway/routing/#weighted-routing-steps), AI Gateway groups the request by a fingerprint of the conversation's opening content: its tools, system instructions, and first message. Conversations with identical openings share a destination, even when they are unrelated. OpenAI Responses requests are an exception and use the step's configured order. See [Weighted routing steps](/ai_gateway/routing/#weighted-routing-steps).
+- [Session pinning](/ai_gateway/routing/#session-pinning) does not apply.
 - The request's span in Agent Observability has no session, unless the request sends an `x-dd-tag-session_id` header. See [Sessions and request tags](#sessions-and-request-tags).
 
 ### Opt out of session routing
@@ -96,70 +96,7 @@ If you set `x-session-id` for a coding agent, for example in Claude Code's `ANTH
 
 ## How sessions affect routing
 
-### Weighted routing steps
-
-In a {{< ui >}}Weighted{{< /ui >}} step of a [routing rule][2], weights divide sessions between destinations, not individual requests. AI Gateway computes an order of the step's destinations from the session and the weights. The same session always gets the same order, so its requests start at the same destination and reuse its prompt cache.
-
-For example, with destination A at weight 70 and destination B at weight 30, about 70% of sessions start at A and 30% start at B. Weights are relative: 7 and 3 produce the same split as 70 and 30. Because each session has its own volume, the split of requests, tokens, or spend can differ from the weights.
-
-When the first destination returns a [fallback status][3], AI Gateway tries the next destination in the session's order, then the rule's later steps. Without session pinning, the next request of the session starts again at the session's first destination.
-
-Weighted ordering applies to OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, and Gemini requests. Other operations use the step's configured order.
-
-OpenAI Responses requests need a session signal for weighted ordering. Without one, a weighted step uses its configured order, so every such request starts at the first destination listed in the step. The exception is a request that sets `store` to `false` and references no stored state: no `previous_response_id`, no `conversation`, and no input item that references a stored item. Such a request can be ordered by its opening-content fingerprint.
-
-Without session pinning, changes to a weighted step, such as new weights or an added or removed destination, can move active sessions to another destination. Moving a session can cost a prompt-cache miss, or a failed request when the conversation depends on provider-side state.
-
-### Session pinning
-
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Session pinning is in Preview. To enable it for your organization, contact your Customer Success Manager.
-{{< /callout >}}
-
-Session pinning remembers which destination served a session and sends the session's later requests there. It applies to requests that have a session signal and call a routing rule (`router/<RULE_SLUG>`). Requests to a specific model (`<PROVIDER_SLUG>/<MODEL_ID>`) are not pinned, because they have only one destination.
-
-AI Gateway keeps one record per session, routing rule, and request format. The same session ID used with two routing rules, or with both `/chat/completions` and `/responses`, has a separate record for each.
-
-A record is created by the session's first successful response and expires 4 hours after the session's last successful response. Each successful response resets the 4 hours. Failed requests do not extend or shorten it, and a session that keeps succeeding stays pinned with no maximum duration.
-
-A pinned session is in one of two states:
-
-| State | When | Routing |
-|---|---|---|
-| Preferred | The session holds no provider-side state. | AI Gateway tries the pinned destination first. If it returns a fallback status, AI Gateway continues through the rule's ordinary order, skipping the pinned destination. |
-| Stateful | A request of the session carried or might have created provider-side state. | AI Gateway sends every request of the session to the pinned destination only, and never falls back to another destination. |
-
-A session becomes stateful when a successful request might leave state that only its destination can use, and it stays stateful until its record expires. Examples include:
-
-- OpenAI Responses requests that store responses (`store` is `true` or omitted), reference `previous_response_id`, a `conversation`, or a stored item, or request encrypted reasoning.
-- Anthropic Messages requests with extended thinking enabled, or that carry thinking blocks, server web search or code execution tools, a code execution container, or uploaded files.
-- Gemini requests with a `thinkingConfig`, thought signatures, a `cachedContent` reference, or a Files API or Cloud Storage file reference.
-- Requests that reference uploaded files or stored audio by ID.
-- Requests translated between API formats, when AI Gateway returns reasoning state that only the original destination can read.
-
-Most coding agent sessions become stateful after their first response, because coding agents use extended thinking, stored responses, or encrypted reasoning.
-
-#### Pinning, weights, and fallback
-
-- **Weight and order changes**: Changing a routing rule's weights or order does not move pinned sessions. New sessions, and sessions whose record has expired, use the new configuration.
-- **Fallback in a preferred session**: If the pinned destination fails and another destination serves the request, the session moves to the destination that served it, where its prompt cache is warm. The session stays there after the original destination recovers, until its record expires or a later fallback moves it again.
-- **Errors in a stateful session**: If the pinned destination returns an error, AI Gateway returns that error instead of falling back. A [budget][4] in Block mode or a [rate limit][5] in Enforce mode that blocks the pinned destination returns its `402` or `429` response, even when another destination is within its limits.
-- **Pinned destination no longer available**: If a stateful session's destination is removed from the routing rule, is no longer allowed by an [access policy][6], or no longer supports the request's format, AI Gateway returns HTTP `409` with the `session_destination_unavailable` error code. See [Session destination unavailable](#session-destination-unavailable).
-
-If AI Gateway cannot read or write a session's record, it routes the request as if session pinning were off, and does not fail the request.
-
-#### Session destination unavailable
-
-AI Gateway returns this error when a stateful session's pinned destination can no longer serve it:
-
-| Field | Value |
-|---|---|
-| HTTP status | `409`. For Gemini, the error status is `ABORTED`. |
-| `X-Ai-Gateway-Error-Code` header | `session_destination_unavailable` |
-| `X-Should-Retry` header | `false`. The OpenAI and Anthropic SDKs, which retry `409` responses by default, read this header and do not retry. |
-| Error message | `this conversation is bound to a provider destination that is no longer available; start a new conversation or session` |
-
-Retrying the same request returns the same error. To recover, start a new conversation with a new session ID. The record expires 4 hours after the session's last successful response, and the session's requests then use ordinary routing. A request that carries the old destination's state, such as a `previous_response_id`, can still fail on the new destination.
+Sessions decide where a routing rule sends a conversation: weighted steps split sessions, not requests, and session pinning keeps a session on the destination that served it. See [Sessions and routing](/ai_gateway/routing/#sessions-and-routing).
 
 ## Sessions and request tags
 
@@ -169,7 +106,7 @@ Sessions and `x-dd-tag-<KEY>` request tags do different jobs:
 |---|---|---|
 | Purpose | Identifies one conversation or agent run | Labels traffic with your own dimensions, such as a team, an agent, or an environment |
 | Routing | Drives weighted ordering and session pinning | No effect |
-| [Budgets][4], [rate limits][5], and [data capture overrides][7] | Not matched | Matched by custom tag filters |
+| [Budgets][2], [rate limits][3], and [data capture overrides][4] | Not matched | Matched by custom tag filters |
 | Agent Observability | Groups the requests into one session | Adds the tags to the request's span |
 
 A session does not have a budget or rate limit of its own. To cap spend or traffic for a workload, send a request tag, such as `x-dd-tag-eval_run: <RUN_ID>`, and create a budget or rate limit that filters on it.
@@ -240,9 +177,6 @@ Sessions of the same routing rule are distributed independently, so in a weighte
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ai_gateway/
-[2]: /ai_gateway/routing/
-[3]: /ai_gateway/routing/#fallback-behavior
-[4]: /ai_gateway/spend_controls/#set-budgets
-[5]: /ai_gateway/spend_controls/#set-rate-limits
-[6]: /ai_gateway/access_control/
-[7]: /ai_gateway/security/#configure-data-capture
+[2]: /ai_gateway/spend_controls/#set-budgets
+[3]: /ai_gateway/spend_controls/#set-rate-limits
+[4]: /ai_gateway/security/#configure-data-capture
