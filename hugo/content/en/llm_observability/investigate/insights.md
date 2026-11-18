@@ -81,7 +81,7 @@ The **Announced deprecations** table lists each deprecated model, sorted by shut
 - **Calls**: The number of calls to the model in the analysis window
 - **Status**: The time left before the shutdown, shown as `<N> days left`, or `Shut down on <DATE>` if the model has already shut down
 
-A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window, and rises as that date approaches. This insight type does not include an impact estimate or a recommended fix.
+A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window and rises as that date approaches. This insight type does not include an impact assessment or a recommended fix.
 
 Migrate each call site to a supported model before its shutdown date, and validate quality, latency, and cost on the replacement.
 
