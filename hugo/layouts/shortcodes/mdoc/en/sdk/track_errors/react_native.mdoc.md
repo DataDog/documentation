@@ -104,7 +104,7 @@ npx datadog-ci react-native upload \
   --build-version [YOUR_BUILD_VERSION]
 ```
 
-Source maps and mapping files are limited to 500 MB each, and dSYM files to 2 GB each. For upload options, custom release versions, and manual alternatives to the wizard, see [React Native Crash Reporting and Error Tracking][5] and [Expo Crash Reporting and Error Tracking][6]. To view uploaded symbols, see the [RUM Debug Symbols][7] page.
+Source maps are limited to 800 MB each, compressed. Mapping files are limited to 500 MB each, and dSYM files to 2 GB each. For upload options, custom release versions, and manual alternatives to the wizard, see [React Native Crash Reporting and Error Tracking][5] and [Expo Crash Reporting and Error Tracking][6]. To view uploaded symbols, see the [RUM Debug Symbols][7] page.
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=react_native
 [2]: https://github.com/DataDog/datadog-react-native-wizard

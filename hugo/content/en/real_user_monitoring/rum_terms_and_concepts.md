@@ -125,11 +125,12 @@ To learn more, see [Enrich RUM Data][12].
 | Maximum duration of a session              | 4 hours                  |
 | Timeout of a session                       | 15 minutes of inactivity |
 | Maximum number of events per session       | 10 million               |
-| Maximum number of attributes per event     | 1,000                    |
+| Maximum number of attributes per event     | 2,048                    |
 | Maximum attribute depth per event          | 20                       |
 | Maximum event size                         | 1 MB                     |
 | Maximum intake payload size                | 5 MB                     |
-| Maximum source maps and mapping files size | 500 MB per file          |
+| Maximum source map size                    | 800 MB per file, compressed |
+| Maximum mapping files size                 | 500 MB per file          |
 | Maximum dSYM files size                    | 2 GB per file, uncompressed |
 | Maximum Android mapping files size         | 2 GB per file, uncompressed |
 | Maximum delay at ingestion                 | 24 hours                 |
