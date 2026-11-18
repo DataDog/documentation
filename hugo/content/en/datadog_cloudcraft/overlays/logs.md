@@ -58,10 +58,16 @@ Enable Log Management in your Datadog organization. To start collecting logs, se
 
 ## Investigate logs
 
-The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. To investigate logs:
+The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. On the diagram, resources show the number of logs for each status, such as `260 Emergency` or `28 Error`.
+
+To investigate logs:
 
 1. In the search bar, enter a query to filter the logs. The search bar uses the standard [log search syntax][2].
+1. To change the time range, use the time selector next to the {{< ui >}}Group Patterns{{< /ui >}} toggle.
+1. (Optional) To group similar logs, turn on {{< ui >}}Group Patterns{{< /ui >}}. For more information, see [Patterns][4].
 1. In the list of results, click a log to open the log side panel and see the details of that log.
+
+To view the logs in the Log Explorer, click the open icon at the top right of the list of results.
 
 ## Further reading
 
@@ -70,3 +76,4 @@ The Logs overlay shows a search bar, a list of log results, and the pins on your
 [1]: /logs/log_collection/
 [2]: /logs/explorer/search_syntax/
 [3]: /containers/amazon_ecs/logs/
+[4]: /logs/explorer/analytics/patterns/
