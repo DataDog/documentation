@@ -162,7 +162,7 @@
     "summary": "List active Agent Health issues"
   },
   "ListAgentHealthIssues": {
-    "description": "List Agent Health issues across your organization. Only open issues are returned.\nReturns `403` if you lack the `hosts_read` permission.\n\nResults use a stable order: severity rank (`high`, `medium`, `low`, then other values),\nthen `first_seen_at` descending with missing timestamps last, then issue ID ascending.\nUse `page[size]` and the zero-based `page[number]` to paginate. Invalid page values\nreturn a `400` JSON:API error response. `meta.page.total_filtered_count` is the number\nof issues matching the filters, and `meta.page.total_count` the number of open issues\nin the organization.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nSet `count_by=issue_type` to include `meta.page`, where `total_count` is the number of\nopen issues matching the filters and `counts_by_issue_type` holds the per-type counts.\n`meta` is omitted when `count_by` is not requested.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
     "summary": "List Agent Health issues"
   },
   "GetAgentHealthIssue": {
@@ -799,7 +799,7 @@
     "summary": "List work item views"
   },
   "CreateCaseView": {
-    "description": "Creates a new saved work item view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
+    "description": "Creates a new saved work item view with a name, filter query, and associated project.",
     "summary": "Create a work item view",
     "request_description": "Work item view payload.",
     "request_schema_description": "Request payload for creating a work item view."
@@ -813,7 +813,7 @@
     "summary": "Get a work item view"
   },
   "UpdateCaseView": {
-    "description": "Updates the name, query, or notification rule of an existing work item view.",
+    "description": "Updates the name or query of an existing work item view.",
     "summary": "Update a work item view",
     "request_description": "Work item view payload.",
     "request_schema_description": "Request payload for updating a work item view."
@@ -1681,23 +1681,23 @@
     "summary": "Get usage stats for a dashboard"
   },
   "GetAiGatewayDataCaptureConfiguration": {
-    "description": "Get the organization default mode, scoped capture overrides, and configuration revision.",
+    "description": "Get the organization default mode, scoped capture overrides, and configuration revision. Requires `ai_gateway_config_read`. Only overrides the caller can View are returned. Hidden overrides remain effective and contribute to `configuration_revision`. An override missing from the response is not necessarily deleted.",
     "summary": "Get the AI Gateway data capture configuration"
   },
   "CreateAiGatewayDataCaptureOverride": {
-    "description": "Create a scoped override with a client-generated UUID and the current `configuration_revision`. If the override can enable full capture for more traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` is stale, the UUID already exists, or the organization has 100 overrides. Missing `configuration_revision` or required full-capture confirmation returns HTTP 400. Retrying an accepted create with the same UUID returns HTTP 409. To undo a create, read the current configuration revision and delete the override using its returned override revision.",
+    "description": "Create a scoped override with a client-generated UUID and the current `configuration_revision`. If the override can enable full capture for more traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` is stale, the UUID already exists, or the organization has 100 overrides. Missing `configuration_revision` or required full-capture confirmation returns HTTP 400. Retrying an accepted create with the same UUID returns HTTP 409. To undo a create, read the current configuration revision and delete the override using its returned override revision. Requires `ai_gateway_config_write`. Restriction policies are saved separately after the returned UUID and revision acknowledge creation. A lost response is an unknown outcome; absence from a filtered configuration response does not prove creation failed.",
     "summary": "Create an AI Gateway data capture override",
     "request_description": "",
     "request_schema_description": "Request body for creating a scoped data capture override."
   },
   "DeleteAiGatewayDataCaptureOverride": {
-    "description": "Delete an override using its `revision` and the current `configuration_revision`. If deleting the override can enable full capture for affected traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during deletion. Missing revisions or required full-capture confirmation returns HTTP 400.",
+    "description": "Delete an override using its `revision` and the current `configuration_revision`. If deleting the override can enable full capture for affected traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during deletion. Missing revisions or required full-capture confirmation returns HTTP 400. Requires `ai_gateway_config_write` and View and Edit access to this override. Hidden overrides return HTTP 404; visible overrides without Edit return HTTP 403. Authorization failures return HTTP 503. If permission cleanup fails after the deletion is committed, the response is HTTP 500 with code `deletion_permission_cleanup_failed`, `meta.configuration_deleted=true`, and `meta.permissions_cleanup_failed=true`. Do not retry the deletion.",
     "summary": "Delete an AI Gateway data capture override",
     "request_description": "",
     "request_schema_description": "Request body for deleting a scoped data capture override."
   },
   "UpdateAiGatewayDataCaptureOverride": {
-    "description": "Replace an override using its `revision` and the current `configuration_revision`. Changes to capture overrides don't affect routing rules. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during replacement. Missing revisions or required full-capture confirmation returns HTTP 400.",
+    "description": "Replace an override using its `revision` and the current `configuration_revision`. Changes to capture overrides don't affect routing rules. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during replacement. Missing revisions or required full-capture confirmation returns HTTP 400. Requires `ai_gateway_config_write` and View and Edit access to this override. Hidden overrides return HTTP 404; visible overrides without Edit return HTTP 403. Authorization failures return HTTP 503. The returned UUID and revision acknowledge the saved configuration even if the caller can no longer list it. Restriction policies are saved separately.",
     "summary": "Replace an AI Gateway data capture override",
     "request_description": "",
     "request_schema_description": "Request body for replacing a scoped data capture override."
@@ -5898,7 +5898,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- AI Gateway Routes: `ai-gateway-route`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.\nThe editor relation includes View. Providers and routes have no Run relation; restriction policies don't affect inference.\nReading provider or route policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders and routes without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nAI Gateway Routes           | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- AI Gateway Routes: `ai-gateway-route`\n- AI Gateway Capture Overrides: `ai-gateway-capture-override`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility. Route policies control route configuration and identifying nested references.\nCapture override policies control who can view and edit override configuration. Hidden overrides remain effective for traffic.\nThe editor relation includes View. Providers, routes, and capture overrides have no Run relation; restriction policies don't affect inference.\nReading provider, route, or capture override policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders, routes, and capture overrides without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nAI Gateway Routes           | `viewer`, `editor`\nAI Gateway Capture Overrides | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -5994,17 +5994,17 @@
     "summary": "Get an AI Gateway routing rule"
   },
   "AggregateRUMEvents": {
-    "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
+    "description": "Aggregate RUM events into buckets of computed metrics and timeseries. Use this endpoint for counts, percentiles, top-N breakdowns, and timeseries. To read individual events, use `SearchRUMEvents` or `ListRUMEvents`.\n\n`filter` selects the events with the [RUM search syntax][1] and a time range (`from` and `to` accept date math such as `now-15m`, ISO 8601 dates, and timestamps in milliseconds). Each `compute` rule produces one value (`type: total`) or one list of time points (`type: timeseries`) per bucket, keyed `c0`, `c1`, and so on, in the response. Each `group_by` rule splits the events into buckets by a facet, returned in `by`. Use `histogram` on a numeric facet to bucket it by ranges.\n\n[1]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Aggregate RUM events",
     "request_description": "",
-    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization.\n`filter.indexes` is not supported and is ignored."
   },
   "GetRUMApplications": {
-    "description": "List all the RUM applications in your organization.",
+    "description": "List the enabled RUM applications of your organization. Applications deleted with `DeleteRUMApplication` are not returned.\nThe response is not paginated and does not include the `client_token`. Use `GetRUMApplication` to retrieve it.\nUse the `application_id` of an item as the `id` path parameter of the other application operations, and as `@application.id` in RUM event queries.",
     "summary": "List all the RUM applications"
   },
   "CreateRUMApplication": {
-    "description": "Create a new RUM application in your organization.",
+    "description": "Create a RUM application in your organization.\nThe application ID is generated by Datadog and returned in `data.attributes.application_id`. A client token is created with the application and returned in `data.attributes.client_token`. Use both to initialize the RUM SDK.\nThe application is created with the default retention filters unless `create_default_retention_filters` is `false`.",
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
@@ -6078,15 +6078,15 @@
     "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
-    "description": "Delete an existing RUM application in your organization.",
+    "description": "Delete an existing RUM application in your organization.\nThe application is disabled and its client token is revoked, so the RUM SDK stops sending events for it. The application cannot be re-enabled through the API, and its application ID cannot be reused.\nDeleting an application with Product Analytics enabled requires the `product_analytics_apps_write` permission.",
     "summary": "Delete a RUM application"
   },
   "GetRUMApplication": {
-    "description": "Get the RUM application with given ID in your organization.",
+    "description": "Get the RUM application with the given ID in your organization.\nUnlike `GetRUMApplications`, the response includes the `client_token` used to initialize the RUM SDK.",
     "summary": "Get a RUM application"
   },
   "UpdateRUMApplication": {
-    "description": "Update the RUM application with given ID in your organization.",
+    "description": "Update the RUM application with the given ID in your organization.\nThis is a partial update: only the attributes present in the request are changed. `data.id` must match the `id` path parameter.",
     "summary": "Update a RUM application",
     "request_description": "",
     "request_schema_description": "RUM application update request."
@@ -6192,14 +6192,14 @@
     "summary": "List teams ownership rules"
   },
   "ListRUMEvents": {
-    "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range. Use this endpoint to see your latest RUM events with a simple query. For long filters, use `SearchRUMEvents`. To compute counts, percentiles, or timeseries, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. Without `filter[from]` and `filter[to]`, the endpoint searches the last 15 minutes.\n\n[Results are paginated][1]: `page[limit]` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after` and `links.next`. Request `links.next`, or send `meta.page.after` as `page[cursor]` with the same other parameters, and repeat until they are absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Get a list of RUM events"
   },
   "SearchRUMEvents": {
-    "description": "List endpoint returns RUM events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex RUM events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "description": "Returns the RUM events that match a RUM search query within a time range, as a list of individual events. Use this endpoint when the filter is too long for a query string, or to set `options`. To compute counts, percentiles, or timeseries instead of reading events, use `AggregateRUMEvents`.\n\nThe query follows the [RUM search syntax][2]. `filter.from` and `filter.to` accept date math (`now-15m`), ISO 8601 dates, and timestamps in milliseconds.\n\n[Results are paginated][1]: `page.limit` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after`. Send it as `page.cursor`, with the same `filter` and `sort`, to get the next page, and repeat until `meta.page.after` is absent.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/",
     "summary": "Search RUM events",
     "request_description": "",
-    "request_schema_description": "The request for a RUM events list."
+    "request_schema_description": "The request for a RUM events list. All attributes are optional: without any, the request returns the first 10 events of the last 15 minutes."
   },
   "CreateRUMOperation": {
     "description": "Create a new RUM operation, defining the journey used to detect it from RUM events.",
