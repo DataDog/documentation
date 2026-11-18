@@ -5,6 +5,9 @@ further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
+  - link: "/ai_gateway/sessions/"
+    tag: "Documentation"
+    text: "AI Gateway sessions"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
@@ -25,6 +28,8 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 6. Review and save the rule, then copy its identifier into the `model` field of your requests.
 
 Configure [data capture](/ai_gateway/security/#configure-data-capture) through organization defaults and scoped overrides under {{< ui >}}Policies{{< /ui >}}.
+
+A {{< ui >}}Weighted{{< /ui >}} step assigns traffic shares to sessions, not to individual requests, so each conversation keeps returning to the same destination. To identify a conversation, send the `x-session-id` header. See [AI Gateway sessions](/ai_gateway/sessions/).
 
 ## Model served by any provider
 

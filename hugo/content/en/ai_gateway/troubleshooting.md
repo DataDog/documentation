@@ -80,6 +80,9 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 `websocket_not_supported`
 : HTTP `426`. A `GET /responses` request, such as a Codex WebSocket connection, was rejected. AI Gateway serves OpenAI Responses only over `POST /responses`. Responses can be buffered or streamed with `stream: true`. In Codex, set `supports_websockets=false` for the AI Gateway provider.
 
+`session_destination_unavailable`
+: HTTP `409`. The request's session is pinned to a destination that can no longer serve it, for example because the destination was removed from the routing rule. The response sets `X-Should-Retry: false`. Start a new conversation with a new session ID. See [Session destination unavailable](/ai_gateway/sessions/#session-destination-unavailable).
+
 `requested_provider_unavailable`
 : HTTP `400`. The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active.
 
