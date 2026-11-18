@@ -25,7 +25,7 @@ For each metric and segmentation property, Datadog estimates each treatment's re
 
 The test produces one p-value for the metric and property pair. A smaller p-value means stronger evidence that relative lift differs across property values. This is a test of differences in effects, rather than a test of whether a single segment's lift differs from zero.
 
-At least two property values must have usable results for the control and every treatment variant. Datadog excludes values without usable results. It skips the test if fewer than two values remain.
+Each property value needs data for the control and every treatment variant. Datadog excludes values with missing data or unstable relative lift estimates. For example, a control mean or ratio denominator near zero can make relative lift unstable. A result requires at least two remaining property values, finite lift estimates, and positive sampling variances.
 
 Recommendations use the latest successful experiment analysis and match the experiment's [CUPED][3] setting.
 
