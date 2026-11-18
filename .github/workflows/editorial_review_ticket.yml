@@ -1,4 +1,4 @@
-# When a PR has both the "Editorial Review" and "okr9" labels, send the PR's DOCS
+# When a PR has both the "editorial review" and "okr9" labels, send the PR's DOCS
 # ticket keys to a Jira Automation incoming webhook. Runs when either label is added,
 # so the order the labels are applied in doesn't matter. The Jira rule decides whether
 # to create an Editorial Review ticket and skips tickets that already have one.
@@ -13,8 +13,8 @@ permissions: {}
 jobs:
   notify-jira:
     if: >-
-      (github.event.label.name == 'Editorial Review' || github.event.label.name == 'okr9') &&
-      contains(github.event.pull_request.labels.*.name, 'Editorial Review') &&
+      (github.event.label.name == 'editorial review' || github.event.label.name == 'okr9') &&
+      contains(github.event.pull_request.labels.*.name, 'editorial review') &&
       contains(github.event.pull_request.labels.*.name, 'okr9')
     runs-on: ubuntu-latest
     name: Send DOCS ticket keys to Jira Automation
@@ -33,8 +33,10 @@ jobs:
             exit 0
           fi
 
-          keys=$( { printf '%s\n%s\n' "$TITLE" "$BRANCH"; printf '%s' "$BODY" | grep -oE 'Fixes DOCS-[0-9]+' || true; } \
-            | grep -oE 'DOCS-[0-9]+' | sort -u | jq -R . | jq -sc .)
+          # Each grep is wrapped in "|| true" because GitHub runs this script with
+          # "set -eo pipefail", and grep exits 1 when it finds no match.
+          keys=$( { printf '%s\n%s\n' "$TITLE" "$BRANCH"; printf '%s\n' "$BODY" | { grep -oiE 'Fixes DOCS-[0-9]+' || true; }; } \
+            | { grep -oiE 'DOCS-[0-9]+' || true; } | tr '[:lower:]' '[:upper:]' | sort -u | jq -R . | jq -sc .)
 
           if [ "$keys" = "[]" ]; then
             echo "No DOCS ticket key found in the PR title, branch name, or description."
