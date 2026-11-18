@@ -21,7 +21,7 @@ On US1-FED and US2-FED, remote upgrades require Agent 7.85.0 or later on both Li
 {{< /site-region >}}
 
 - [Remote Configuration][7] enabled for your organization and the Agent's API key
-- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
+- [Remote updates][8] enabled on each target VM Agent older than 7.73 (`remote_updates: true`). Remote updates are enabled by default in Agent 7.73 and later.
 - Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
 - Linux VMs or Windows VMs
 - At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
