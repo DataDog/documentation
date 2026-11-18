@@ -19,6 +19,13 @@ This document walks you through the process of configuring your AWS environment 
 
 ## Prerequisites
 
+For a new deployment, choose one of these methods:
+
+- **[Datadog Operator][8]**: Use Operator v1.33.0 or later to manage the engine and Observability Pipelines Workers with a `DatadogBYOCCluster` resource. This method uses the reverse connection to Datadog.
+- **Helm charts**: Follow this page to deploy the engine, then configure ingestion separately.
+
+If you need Ingress for an Operator deployment, contact your Datadog representative.
+
 To deploy BYOC Logs on AWS, you must configure:
 - AWS credentials and authentication.
 - AWS region selection.
@@ -114,6 +121,8 @@ POLICY_ARN=$(aws iam list-policies --query \
 
 4. Create the IAM role and service account:
 
+   The following command creates the service account used by the Helm example. For an Operator deployment, follow [Configure the IAM role][9] instead.
+
 ```bash
 eksctl create iamserviceaccount \
   --name byoclogs \
@@ -170,6 +179,8 @@ echo ""
 ```
 
 ## Installation steps
+
+The following installation, verification, and uninstall commands apply to the BYOC Logs Helm chart. For an Operator deployment, follow [Install BYOC Logs with the Datadog Operator][8].
 
 1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
@@ -251,6 +262,8 @@ echo ""
 
    # BYOC Logs node configuration
    config:
+     # A meaningful, stable name that identifies the cluster in Datadog.
+     cluster_id: <CLUSTER_ID>
      # The root URI where index data is stored. This should be an S3 path.
      # All indexes created in BYOC Logs are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
@@ -358,3 +371,5 @@ helm uninstall <RELEASE_NAME> \
 [5]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
 [7]: /byoc-logs/ingest/agent/
+[8]: /byoc-logs/install/datadog_operator/
+[9]: /byoc-logs/install/datadog_operator/#configure-the-iam-role

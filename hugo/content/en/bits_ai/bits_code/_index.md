@@ -38,6 +38,7 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 - Enter a freeform prompt at [{{< ui >}}Sessions{{< /ui >}}][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 - Set up a Bits Code [automation][28]
+- Invoke the {{< ui >}}Create code session{{< /ui >}} action from the [Action Catalog][42], for example, in a workflow in [Workflow Automation][43] or an app in [App Builder][44]
 - In Slack, ask [Bits Chat][16] (with `@Datadog`) to make a code change, which hands off the task to Bits Code and creates a [code channel][40]
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
@@ -170,3 +171,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
 [40]: /bits_ai/bits_code/slack_code_channels/
 [41]: https://bitbucket.org/product/premium
+[42]: /actions/actions_catalog/
+[43]: /actions/workflows/
+[44]: /actions/app_builder/

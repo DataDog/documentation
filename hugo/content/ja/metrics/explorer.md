@@ -5,7 +5,7 @@ description: すべてのメトリクスを調査し分析する
 further_reading:
 - link: /metrics/summary/
   tag: ドキュメント
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
@@ -20,7 +20,7 @@ further_reading:
   text: 自然言語クエリを使用して、Datadog メトリクスを調べる
 title: Metrics Explorer
 ---
-## 概要{#overview}
+## 概要 {#overview}
 
 [Metrics Explorer][1] は、Datadog でメトリクスを調査するための基本的なインターフェイスです。より高度なオプションを使用するには、[ノートブック][2]またはダッシュボード ([スクリーンボード][3]または[タイムボード][4]) を作成してください。
 

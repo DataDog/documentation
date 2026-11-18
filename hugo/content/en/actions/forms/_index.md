@@ -123,9 +123,42 @@ The following options are available:
 - **Anyone with a link**: Generate a link that anyone can use to access the form after verifying their email address.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Share in Slack" level="h3" expanded=false %}}
+Post a form to a Slack channel so your team can respond without leaving Slack.
+
+To share a form in Slack:
+1. Invite the Datadog app to the Slack channel. For setup steps, see the [Slack integration][7].
+1. In the channel, run `/dd` and select {{< ui >}}Share a Form{{< /ui >}}.
+1. Search for the form by name, then select it.
+1. Click {{< ui >}}Send to Channel{{< /ui >}}.
+
+You can also paste a form link, such as `https://app.datadoghq.com/forms/<FORM_ID>`, in a channel that includes the Datadog app. Datadog unfurls the link into a form card.
+
+Datadog posts a card with the form's title and description. Respondents click {{< ui >}}Fill Out{{< /ui >}} to complete the form in a Slack modal, or {{< ui >}}Open in Datadog{{< /ui >}} to complete it in the browser.
+
+{{< img src="/actions/forms/slack_form_link.png" alt="A form link unfurled in Slack, showing the form title, response type, and the Fill Out and Open in Datadog buttons" style="width:90%;" >}}
+
+**Note**: Sharing a form is not supported in direct messages.
+
+#### Forms that must be completed in Datadog
+
+Not every field can be rendered in a Slack modal. The following are not available in Slack:
+
+- Ranking components
+- Dropdowns that use [dynamic options][8]
+- [Conditional fields][9]
+- Checkbox components with minimum or maximum selection limits
+
+If only optional fields are affected, the form is still fillable in Slack and Datadog warns that `Some fields aren't available in Slack and won't appear in the fill-out modal.` Those fields do not appear in the modal.
+
+If a **required** field is affected, or the form is too large for a Slack modal, the form cannot be completed in Slack. Datadog asks you to confirm with {{< ui >}}Share Anyway{{< /ui >}}, then posts the card with only {{< ui >}}Open in Datadog{{< /ui >}}.
+
+Forms that are no longer accepting responses cannot be shared.
+{{% /collapse-content %}}
+
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
 
-To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][7].
+To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][10].
 
 ## Add a form to a dashboard
 
@@ -135,7 +168,7 @@ To add a form to a dashboard from the form editor:
 1. Under {{< ui >}}Add to Dashboard{{< /ui >}}, select an existing dashboard or create one, then click {{< ui >}}Add{{< /ui >}}.
 
 You can also add a form to a dashboard directly from the dashboard:
-1. Navigate to a [dashboard][8].
+1. Navigate to a [dashboard][11].
 1. Click **Add Widgets** to open the side panel.
 1. Click the **Apps** tab.
 1. Select **Form Widget**.
@@ -143,18 +176,18 @@ You can also add a form to a dashboard directly from the dashboard:
 
 ## Add automation
 
-After creating a form, you can add an [action][9] or [workflow blueprint][10] that triggers automatically when a form is submitted.
+After creating a form, you can add an [action][12] or [workflow blueprint][13] that triggers automatically when a form is submitted.
 1. From the [Forms][2] page, click a form.
 1. At the top of the form, select {{< ui >}}Automation{{< /ui >}}.
 1. Choose an action or blueprint.
-1. The action or blueprint opens in a workflow canvas, where you can [edit it][11].
+1. The action or blueprint opens in a workflow canvas, where you can [edit it][14].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
-**Note**: Automations triggered by forms appear under [Workflow Automation][12].
+**Note**: Automations triggered by forms appear under [Workflow Automation][15].
 
 ## Create and manage forms with MCP
 
-Connect an external AI agent to the [Datadog MCP Server][13] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][14]. You can also ask [Bits Chat][15] to build a form from anywhere in Datadog. For a list of available tools, see [Forms][16] in the Datadog MCP Server tools reference.
+Connect an external AI agent to the [Datadog MCP Server][16] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][17]. You can also ask [Bits Chat][18] to build a form from anywhere in Datadog. For a list of available tools, see [Forms][19] in the Datadog MCP Server tools reference.
 
 ## Manage access
 
@@ -175,13 +208,16 @@ By default, only the creator of a form can access it. To change the permissions 
 [4]: /actions/forms/components/
 [5]: /actions/forms/responses/
 [6]: /internal_developer_portal/self_service_actions/
-[7]: /actions/forms/guide/prefill/
-[8]: /dashboards/
-[9]: https://app.datadoghq.com/actions/action-catalog/
-[10]: https://app.datadoghq.com/workflow/blueprints
-[11]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
-[12]: https://app.datadoghq.com/workflow
-[13]: /mcp_server/
-[14]: /mcp_server/setup/#toolsets
-[15]: /bits_ai/bits_chat/
-[16]: /mcp_server/tools/#forms
+[7]: /integrations/slack/
+[8]: /actions/forms/components/#dynamic-dropdown-options
+[9]: /actions/forms/components/#conditional-fields
+[10]: /actions/forms/guide/prefill/
+[11]: /dashboards/
+[12]: https://app.datadoghq.com/actions/action-catalog/
+[13]: https://app.datadoghq.com/workflow/blueprints
+[14]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
+[15]: https://app.datadoghq.com/workflow
+[16]: /mcp_server/
+[17]: /mcp_server/setup/#toolsets
+[18]: /bits_ai/bits_chat/
+[19]: /mcp_server/tools/#forms

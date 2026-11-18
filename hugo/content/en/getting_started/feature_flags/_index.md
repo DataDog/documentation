@@ -100,7 +100,7 @@ yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][2]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][1]. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
 
-Add the following to your project to initialize the SDK:
+Add the following to your project to initialize the SDK. Replace `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
@@ -113,7 +113,7 @@ const provider = new DatadogProvider({
     // Required client-side Datadog credentials
     applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
-    site: '{{< region-param key="dd_site" code="true" >}}',
+    site: '<YOUR_DD_SITE>',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
     version: '1.0.0',

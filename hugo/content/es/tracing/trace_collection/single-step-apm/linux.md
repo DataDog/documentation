@@ -66,26 +66,19 @@ Luego, copie y ejecute el comando generado.
 
 ### Instalación de Agent existente {#existing-agent-installation}
 
-Si ya tiene instalado un Datadog Agent, vuelva a ejecutar el comando de instalación del Agent desde [Nueva instalación del Agent](#new-agent-installation) en el servidor. El comando actualiza el Agent existente y habilita SSI.
+Si ya tiene instalado un Datadog Agent, habilite SSI de forma remota desde Datadog. No necesita ejecutar comandos en cada servidor.
 
-Alternativamente, utilice Fleet Automation para habilitar SSI desde Datadog:
+1. En Datadog, vaya a [**APM > Instrument a Service**][21].
 
-1. En Datadog, vaya a [**Fleet Automation > Configuration**][21].
-1. Haga clic en {{< ui >}}Configure Agents{{< /ui >}}.
-1. Aplique filtros para seleccionar los Agent que desea configurar, luego haga clic en **Siguiente**.
+1. En {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, seleccione {{< ui >}}Deploy on existing hosts{{< /ui >}} para instrumentar sus servicios de forma remota a través del Datadog Agent.
 
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="La pantalla de filtrado de Agent en Fleet Automation, con opciones para definir el contexto por entorno, sistema operativo y nombre de host" style="width:100%;" >}}
+1. En {{< ui >}}Which hosts should we instrument?{{< /ui >}}, utilice los filtros de contexto ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) para limitar los servidores. Luego seleccione los Agents en los que desea realizar la instrumentación en la pestaña {{< ui >}}Eligible for deployment{{< /ui >}}. Los servidores que no se pueden instrumentar aparecen en la pestaña {{< ui >}}Excluded from deployment{{< /ui >}}.
 
-1. Haga clic en el mosaico {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}, luego haga clic en {{< ui >}}Next{{< /ui >}}.
+1. En {{< ui >}}Configure SDKs installation{{< /ui >}}, haga clic en {{< ui >}}Yes{{< /ui >}} para que Datadog instale automáticamente los SDKs de rastreo. Para fijar versiones específicas del SDK en lugar de la más reciente, expanda {{< ui >}}Customize library versions{{< /ui >}}.
 
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="La pantalla de selección de productos en Fleet Automation, que muestra el mosaico de Application Performance Monitoring (APM)" style="width:80%;" >}}
+1. En {{< ui >}}Configure rollout strategy{{< /ui >}}, elija el porcentaje de Agents en los que desea realizar la implementación a la vez. Datadog muestra las etapas resultantes y una duración estimada. Las implementaciones se pausan automáticamente si fallan tres Agents consecutivos o si las fallas alcanzan el 10 % del total. Puede volver a ejecutar la implementación más tarde.
 
-1. En la pantalla {{< ui >}}Configure SDKs Installation{{< /ui >}}, haga clic en {{< ui >}}Yes{{< /ui >}} para instalar automáticamente el SDK. Seleccione {{< ui >}}Use latest version{{< /ui >}}, o desmarque para especificar versiones individuales de SDK.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="La pantalla Configurar instalación de SDK en Fleet Automation, con opciones para habilitar la instalación automática de SDK y seleccionar versiones." style="width:60%;" >}}
-
-1. Haga clic en **Siguiente**.
-1. Revise su configuración y haga clic en {{< ui >}}Deploy Configuration{{< /ui >}}.
+1. En {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, verifique {{< ui >}}Configuration Summary{{< /ui >}} (cambie entre {{< ui >}}Summary{{< /ui >}} y {{< ui >}}YAML{{< /ui >}}) y luego haga clic en {{< ui >}}Apply Instrumentation{{< /ui >}}.
 
 ## Verifique la instalación {#verify-the-installation}
 
@@ -238,6 +231,6 @@ Si encuentra problemas al habilitar APM con SSI, consulte la [guía de solución
 [18]: /es/tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: https://app.datadoghq.com/fleet/agent-management
+[21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services

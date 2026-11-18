@@ -2,6 +2,10 @@
 aliases:
 - /ko/cloudprem/introduction/features/
 description: BYOC Logs에서 지원되는 Datadog Log Explorer 기능 알아보기
+further_reading:
+- link: https://www.datadoghq.com/blog/byoc-cross-cluster-queries/
+  tag: 블로그
+  text: 팀과 AI 에이전트를 위한 클러스터 간 쿼리로 Datadog BYOC 전반에서 데이터 통합하기
 title: 지원되는 기능
 ---
 ## 개요 {#overview}
@@ -68,5 +72,9 @@ BYOC Logs에서는 다음 기능을 지원하지 않습니다:
 - 고급 쿼리 기능:
   - 계산된 필드
   - Grok 추출(쿼리 시 구문 분석)
+
+## 추가 자료
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/api/latest/logs-restriction-queries/

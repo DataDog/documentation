@@ -79,4 +79,4 @@ Agent Observability는 외부 평가를 실행하기 위한 스팬을 검색할 
 [11]: /ko/llm_observability/investigate/annotation_queues
 [12]: /ko/security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /ko/llm_observability/investigate/evaluations/end_user_feedback
-[14]: /ko/llm_observability/improve/access_control/
+[14]: /ko/llm_observability/data_governance/access_control/

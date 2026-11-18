@@ -5,7 +5,7 @@ description: 모든 메트릭을 살펴보고 분석을 수행하세요.
 further_reading:
 - link: /metrics/summary/
   tag: 설명서
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: 설명서
   text: Metrics Distributions
@@ -27,7 +27,7 @@ title: Metrics Explorer
 ## 자연어 쿼리 {#natural-language-queries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">Metrics Explorer용 자연어 쿼리는 선택한 Datadog 사이트({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
+<div class="alert alert-info">Metrics Explorer용 자연어 쿼리는 선택한 Datadog 사이트({{< region-param key="dd_site_name" >}})에 대해 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 자연어 쿼리(NLQ)를 사용하여 찾고 있는 내용을 쉬운 영어로 설명하세요. Datadog은 서비스, 속성, 태그와 같은 컨텍스트를 이해하여 요청을 구조화된 메트릭 쿼리로 자동 변환합니다. 이를 통해 복잡한 구문을 작성할 필요 없이 메트릭을 더 쉽게 탐색할 수 있습니다.
@@ -53,7 +53,7 @@ Metrics Explorer는 최근 조사 기록을 자동으로 유지하므로 이전 
 
 {{< img src="metrics/explorer/09282026_metric_explorer_sessions.png" alt="Metrics Explorer 세션 예시" style="width:80%;" >}}
 
-## Graphing {#graphing}
+## 그래프화 {#graphing}
 
 쿼리 편집기를 사용하여 Metrics Explorer 페이지에 표시된 그래프를 사용자 지정하세요.
 

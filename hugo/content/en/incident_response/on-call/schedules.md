@@ -55,7 +55,12 @@ To completely or partially override a shift, select the shift and click **Overri
 
 #### Request overrides in Slack or Microsoft Teams
 
-If you are part of an On-Call rotation, and you know that you will be out of office during your shift, you can request an override in Slack or Microsoft Teams. Type `/dd override`, select the timeframe to be overridden, and add a description. This sends a request to the channel:
+If you are part of an On-Call rotation, and you know that you will be out of office during your shift, you can request an override in Slack or Microsoft Teams:
+
+- **Slack**: Type `/dd override`, select the timeframe to be overridden, and add a description.
+- **Microsoft Teams**: In the channel, click **+** and select **Request an Override**, then select the timeframe and add a description.
+
+This sends a request to the channel:
 
 {{< img src="incident_response/on-call/schedules/schedule_override_request.png" alt="In Slack, a message from Datadog Staging reads: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' A button labeled 'Take it' appears at the end of the message." style="width:80%;" >}}
 

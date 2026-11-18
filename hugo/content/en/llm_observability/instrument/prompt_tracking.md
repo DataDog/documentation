@@ -5,12 +5,15 @@ aliases:
 description: Use Prompt Tracking to track your prompt templates and versions.
 
 further_reading:
-  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
-    tag: Blog
-    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
   - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
     tag: "Learning Center"
     text: "Investigate with LLM Observability"
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+  - link: "https://www.datadoghq.com/blog/agent-observability-prompt-management/"
+    tag: "Blog"
+    text: "Manage and deploy LLM prompts with Datadog"
 
 ---
 
@@ -29,7 +32,15 @@ Prompt Tracking enables you to:
 
 ## Set up Prompt Tracking
 
-When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in the Prompt Management documentation. The following setup options apply to prompts defined outside the registry.
+{{< agent-only >}}
+Include Prompt Tracking in the default Agent Observability instrumentation. For each selected LLM call, identify where the application builds the prompt. Keep the template separate from its variable values and preserve the existing local prompt construction.
+
+Do not replace local prompts with Datadog Prompt Management retrieval unless the user requested or approved that integration. Preserve existing managed-prompt integrations. If automatic tracking captures the prompt metadata, do not add duplicate manual annotations. For copied or transformed managed prompts, follow [Track prompt usage](/llm_observability/configure/prompt_management.md#track-prompt-usage).
+{{< /agent-only >}}
+
+In Python, when Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()`.
+
+In Node.js, retrieve managed prompts with `tracer.llmobs.prompts.getPrompt()` and attach metadata with `tracer.llmobs.annotationContext()` and `prompt.toAnnotation()`. See [Track prompt usage][9] for examples in both languages. The following setup options apply to prompts defined outside the registry.
 
 ### With structured prompt metadata
 To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).
@@ -76,6 +87,16 @@ span.setAttribute("_dd.ml_obs.prompt_tracking", JSON.stringify({
 span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
     `{"name":"greeting-prompt","version":"v1","template":"Hello {{name}}, tell me about {{topic}}","variables":{"name":"Alice","topic":"weather"}}`,
 ))
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+import io.opentelemetry.api.trace.Span;
+
+String json = "{\"name\":\"greeting-prompt\",\"version\":\"v1\","
+    + "\"template\":\"Hello {{name}}, tell me about {{topic}}\","
+    + "\"variables\":{\"name\":\"Alice\",\"topic\":\"weather\"}}";
+span.setAttribute("_dd.ml_obs.prompt_tracking", json);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -127,3 +148,4 @@ You can use the Agent Observability Trace Explorer to locate requests by prompt 
 [6]: /llm_observability/instrument/sdk/?tab=nodejs#prompt-tracking
 [7]: /llm_observability/instrument/otel_instrumentation
 [8]: /llm_observability/configure/prompt_management
+[9]: /llm_observability/configure/prompt_management/#track-prompt-usage
