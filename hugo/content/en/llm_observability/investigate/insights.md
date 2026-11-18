@@ -79,7 +79,7 @@ The **Announced deprecations** table lists each deprecated model, sorted by shut
 - **Model**: The deprecated model
 - **Shutdown date**: The date the provider announced for the shutdown
 - **Calls**: The number of calls to the model in the analysis window
-- **Status**: The number of days left before the shutdown, shown as `<N> days left`, or `Shut down on <date>` if the model has already shut down
+- **Status**: The time left before the shutdown, shown as `<N> days left`, or `Shut down on <DATE>` if the model has already shut down
 
 A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window, and rises as that date approaches. This insight type does not include an impact estimate or a recommended fix.
 
