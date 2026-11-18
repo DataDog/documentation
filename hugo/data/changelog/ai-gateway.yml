@@ -107,3 +107,12 @@ entries:
       - UpdateAiGatewayModelPricing
       - UpdateAiGatewayProvider
     title: Document AI Gateway budget, provider, and model catalog fields
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41767
+    operations:
+      - CreateAiGatewayModelGroup
+      - GetAiGatewayModelGroup
+      - ListAiGatewayModelGroups
+      - UpdateAiGatewayModelGroup
+    title: Document AI Gateway policy visibility and safe membership updates
