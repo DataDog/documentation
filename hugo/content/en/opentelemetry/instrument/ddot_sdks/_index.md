@@ -20,9 +20,9 @@ algolia:
 
 DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They emit traces, metrics, and logs that follow OpenTelemetry Semantic Conventions over OTLP. They use standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities. DDOT SDKs are available for Java, .NET, Node.js, Python, and Go.
 
-DDOT SDKs add capabilities such as Live Debugger, Dynamic Instrumentation, SQL query-level Database Monitoring, and Data Streams Monitoring. Some capabilities require the Datadog Agent for Remote Configuration or data delivery. See [feature compatibility][8] for additional capabilities and requirements.
+DDOT SDKs add capabilities such as Live Debugger, Dynamic Instrumentation, SQL query-level Database Monitoring, and Data Streams Monitoring. Some capabilities require the Datadog Agent. See [feature compatibility][8] for additional capabilities and requirements.
 
-You can replace a DDOT SDK with its upstream equivalent and keep OpenTelemetry API instrumentation and standard OpenTelemetry configuration. Change the SDK package or auto-instrumentation image, or, for Go, the build-time instrumentation. OpenTelemetry telemetry remains available; Datadog-specific capabilities are no longer available. Code that uses Datadog-specific APIs or initializes the SDK directly may need changes.
+You can replace a DDOT SDK with its upstream equivalent and keep OpenTelemetry API instrumentation and standard OpenTelemetry configuration. Change the SDK package or auto-instrumentation image, or, for Go, the build-time instrumentation. OpenTelemetry telemetry remains available; Datadog-specific capabilities are no longer available. Code that uses Datadog-specific APIs may need changes when switching SDKs.
 
 ## Deployment methods
 
@@ -31,7 +31,7 @@ DDOT SDKs support OpenTelemetry deployment methods, including Operator injection
 | Environment | Method | What it does |
 |---|---|---|
 | Kubernetes | [OpenTelemetry Operator][9] | Injects the auto-instrumentation image configured in an `Instrumentation` resource. |
-| Kubernetes, other containers, hosts, or serverless | [Language-specific SDK setup][5] | Installs the SDK in the application build or deployment. |
+| Kubernetes, other containers, hosts, or serverless | [SDK package installation][5] | Installs the SDK in the application build or deployment. |
 
 ### Kubernetes deployment
 
@@ -43,7 +43,7 @@ Go applications include the SDK and instrumentation at build time. The Operator'
 
 ### Application installation
 
-For installation without the Operator, follow the [SDK installation instructions for your language][5], then configure OpenTelemetry mode below. Your Collector receives OTLP telemetry; the Datadog Agent is optional except for [capabilities that require it][8].
+For installation without the Operator, follow the [installation instructions for your language][5], then apply the [OpenTelemetry configuration below](#configure-opentelemetry-mode-and-export). Your Collector receives OTLP telemetry; the Datadog Agent is optional except for [capabilities that require it][8].
 
 ## Configure OpenTelemetry mode and export
 
@@ -51,7 +51,7 @@ DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector
 
 Set the following environment variables to enable OpenTelemetry APIs, trace semantic conventions, and OTLP export:
 
-```shell
+```text
 OTEL_TRACES_EXPORTER=otlp
 DD_TRACE_OTEL_ENABLED=true
 DD_TRACE_OTEL_SEMANTICS_ENABLED=true
@@ -62,8 +62,6 @@ DD_LOGS_OTEL_ENABLED=true
 Configure the OTLP endpoints and protocols to match your Collector. Support varies by language, signal, and SDK version. For configuration details, see [OTLP trace export][2], [OpenTelemetry API support][1], and the [environment variable reference][7]. For HTTP trace conventions and SDK versions, see [OpenTelemetry trace semantics][16].
 
 For an existing Datadog SDK installation, apply these settings to the installed SDK and retain your instrumentation configuration. When replacing an upstream SDK, retain OpenTelemetry API instrumentation and review SDK-specific provider, processor, and exporter configuration. The [existing-configuration guide][15] covers these migration paths.
-
-Live Debugger, Dynamic Instrumentation, and remotely configured head sampling require the Datadog Agent for configuration or data delivery. Traces, metrics, and logs continue to use OTLP through the Collector.
 
 ## Configure capabilities
 

@@ -17,6 +17,8 @@ further_reading:
 
 Upstream OpenTelemetry SDKs use the API, SDK, and instrumentation maintained by the OpenTelemetry project. They follow the community project's release life cycle and export telemetry with OTLP.
 
+<div class="alert alert-info">Datadog feature availability depends on your SDK and deployment configuration. See <a href="/opentelemetry/compatibility/">Feature Compatibility</a> for supported features when using upstream OpenTelemetry SDKs.</div>
+
 ## Deployment methods
 
 An existing upstream OpenTelemetry SDK can send telemetry to Datadog without being replaced. For a new installation, follow the OpenTelemetry documentation for your environment and language.
@@ -26,21 +28,9 @@ An existing upstream OpenTelemetry SDK can send telemetry to Datadog without bei
 | Kubernetes | [OpenTelemetry Operator][3] | Centrally managed auto-instrumentation and configuration through Kubernetes resources and workload annotations. |
 | Kubernetes, other containers, hosts, or serverless | [Language-specific SDK installation][4] | Installing the SDK or auto-instrumentation in the application build or deployment. |
 
-## Choose how telemetry reaches Datadog
+## Send telemetry to Datadog
 
-The SDK installation method and telemetry route are independent decisions.
-
-| Route | Use when | Considerations |
-|---|---|---|
-| [DDOT or an upstream OpenTelemetry Collector][7] | You need centralized batching, enrichment, transformation, sampling, or routing. | Configure the SDK's OTLP exporter to reach the Collector. Install and operate the Collector separately from the application SDK. |
-| [Datadog Agent OTLP endpoint][8] | You already run the Agent and want a local OTLP receiver without managing a separate pipeline. | The application must be able to reach the Agent endpoint. Review feature compatibility for this route. |
-| [Direct OTLP ingest][9] | An intermediary is impractical, such as in supported serverless or managed environments. | Configure authentication and required resource attributes in the workload. Centralized Collector processing is not available. |
-
-With a Collector, the telemetry pipeline is:
-
-{{< img src="/opentelemetry/setup/oss-collector.png" alt="An upstream OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which processes and exports the data to Datadog." style="width:100%;" >}}
-
-The Collector receives OTLP data, applies configured processors such as batching or resource enrichment, and exports the result to Datadog. It is not required for every upstream SDK deployment.
+For telemetry routing and setup instructions, see [Send OpenTelemetry Data to Datadog][7]. SDK installation and telemetry routing are separate choices.
 
 ## View your telemetry
 
@@ -53,8 +43,6 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [3]: https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/
 [4]: https://opentelemetry.io/docs/languages/
 [7]: /opentelemetry/setup/
-[8]: /opentelemetry/setup/agent/#otlp-ingest-in-the-agent
-[9]: /opentelemetry/setup/otlp_ingest/
 [10]: /tracing/trace_explorer/
 [11]: /metrics/explorer/
 [12]: /logs/explorer/
