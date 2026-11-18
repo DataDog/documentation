@@ -39,6 +39,57 @@ test.describe("cdocs plaintext (.md)", () => {
     expect(body).not.toContain("<!--");
   });
 
+  test("the .md endpoint lists the other variants below the title", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      "/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python&api_type=dd_api",
+    );
+    const body = await response.text();
+
+    expect(body).toContain(
+      "This version is for Language: Python, API: Datadog.",
+    );
+    expect(body).toContain("- Python (this version)");
+    expect(body).toContain(
+      "- [Java](/dd_e2e/cdocs/custom_instrumentation.md?api_type=dd_api&prog_lang=java): Language: Java, API: Datadog",
+    );
+    expect(body).toContain(
+      "- [OpenTelemetry](/dd_e2e/cdocs/custom_instrumentation.md?api_type=otel_api&prog_lang=python): Language: Python, API: OpenTelemetry",
+    );
+    // The list comes right after the title, before the page content.
+    expect(body.indexOf("This page has a version")).toBeLessThan(
+      body.indexOf("## Overview"),
+    );
+  });
+
+  test("links to other Cdocs pages get the params they accept", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      "/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python&api_type=dd_api",
+    );
+    const body = await response.text();
+
+    // The API support page accepts `prog_lang` but not `api_type`.
+    expect(body).toContain(
+      "[OpenTelemetry API support](/dd_e2e/cdocs/api_support.md?prog_lang=python)",
+    );
+  });
+
+  test("links to other Cdocs pages stay bare without params", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      "/dd_e2e/cdocs/custom_instrumentation.md",
+    );
+    const body = await response.text();
+
+    expect(body).toContain(
+      "[OpenTelemetry API support](/dd_e2e/cdocs/api_support.md)",
+    );
+  });
+
   test("a .md path with no matching entry 404s", async ({ request }) => {
     const response = await request.get("/this/is/not/a/page.md");
     expect(response.status()).toBe(404);

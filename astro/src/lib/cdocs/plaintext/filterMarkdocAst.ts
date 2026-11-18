@@ -8,7 +8,7 @@
  *   - inlines `{% partial /%}` includes by parsing their source and processing
  *     it in turn (so conditionals inside partials are evaluated too);
  *   - rewrites internal doc links to their `.md` twin (so following a link in
- *     plaintext stays in plaintext);
+ *     plaintext stays in plaintext), after the caller's own `rewriteHref`;
  *   - strips explicit heading IDs (both the `{% #id %}` tag form and the
  *     `{#id}` text form), which anchor in-page links in HTML but are clutter
  *     in plaintext;
@@ -27,6 +27,11 @@ const { parse } = Markdoc;
 
 /** Returns the raw source of a partial for a `{% partial file=... /%}` ref, or null. */
 export type PartialResolver = (file: string) => string | null | undefined;
+
+/** Rewrites an authored href before it's pointed at its `.md` twin. */
+export type HrefRewriter = (href: string) => string;
+
+const keepHref: HrefRewriter = (href) => href;
 
 const HTML_COMMENT = /<!--[\s\S]*?-->/g;
 
@@ -176,9 +181,10 @@ export function processNodes(
   config: Config,
   resolvePartial: PartialResolver | undefined,
   seenPartials: Set<string>,
+  rewriteHref: HrefRewriter = keepHref,
 ): Node[] {
   return nodes.flatMap((node) =>
-    processNode(node, config, resolvePartial, seenPartials),
+    processNode(node, config, resolvePartial, seenPartials, rewriteHref),
   );
 }
 
@@ -187,6 +193,7 @@ function processNode(
   config: Config,
   resolvePartial: PartialResolver | undefined,
   seenPartials: Set<string>,
+  rewriteHref: HrefRewriter = keepHref,
 ): Node[] {
   if (node.type === "comment") {
     return [];
@@ -199,15 +206,23 @@ function processNode(
     return [node];
   }
   if (node.type === "tag" && node.tag === "if") {
-    return processIf(node, config, resolvePartial, seenPartials);
+    return processIf(node, config, resolvePartial, seenPartials, rewriteHref);
   }
   if (node.type === "tag" && node.tag === "partial") {
-    return processPartial(node, config, resolvePartial, seenPartials);
+    return processPartial(
+      node,
+      config,
+      resolvePartial,
+      seenPartials,
+      rewriteHref,
+    );
   }
   // Point internal doc links at their `.md` twin (external/asset/anchor links
   // are left as-is by the rewriter). Children (the link text) still recurse.
   if (node.type === "link" && typeof node.attributes?.href === "string") {
-    node.attributes.href = rewriteInternalDocLink(node.attributes.href);
+    node.attributes.href = rewriteInternalDocLink(
+      rewriteHref(node.attributes.href),
+    );
   }
   // Drop explicit heading IDs — they anchor in-page links in HTML but are just
   // clutter in plaintext.
@@ -216,7 +231,13 @@ function processNode(
   // then strip HTML comments across the (now-processed) sibling list — comments
   // are internal authoring notes and never belong in plaintext output.
   node.children = stripCommentsFromSiblings(
-    processNodes(node.children ?? [], config, resolvePartial, seenPartials),
+    processNodes(
+      node.children ?? [],
+      config,
+      resolvePartial,
+      seenPartials,
+      rewriteHref,
+    ),
   );
   // Drop paragraphs that held nothing but comments/whitespace (so stripping
   // comments doesn't leave stray blank blocks) or nothing but now-orphaned
@@ -235,6 +256,7 @@ function processIf(
   config: Config,
   resolvePartial: PartialResolver | undefined,
   seenPartials: Set<string>,
+  rewriteHref: HrefRewriter = keepHref,
 ): Node[] {
   const condition = node.attributes?.primary;
   const truthy = Boolean(
@@ -255,7 +277,13 @@ function processIf(
   }
 
   const chosen = truthy ? before : after;
-  return processNodes(chosen, config, resolvePartial, seenPartials);
+  return processNodes(
+    chosen,
+    config,
+    resolvePartial,
+    seenPartials,
+    rewriteHref,
+  );
 }
 
 function processPartial(
@@ -263,6 +291,7 @@ function processPartial(
   config: Config,
   resolvePartial: PartialResolver | undefined,
   seenPartials: Set<string>,
+  rewriteHref: HrefRewriter = keepHref,
 ): Node[] {
   const file = node.attributes?.file;
   if (typeof file !== "string" || !resolvePartial) {
@@ -284,5 +313,6 @@ function processPartial(
     config,
     resolvePartial,
     nextSeen,
+    rewriteHref,
   );
 }

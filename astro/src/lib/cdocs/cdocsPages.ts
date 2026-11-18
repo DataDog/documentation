@@ -65,6 +65,25 @@ export interface CdocsPage {
   variants: CdocsVariant[];
 }
 
+/** A filter option, with the URL a reader gets by picking it. */
+export interface CdocsFilterOptionLink {
+  id: string;
+  label: string;
+  /** Whether this is the filter's current value. */
+  isSelected: boolean;
+  /** The variant URL with this option picked, alphabetical by trait. */
+  url: string;
+  /** Labels for each value of that variant, in frontmatter order. */
+  labels: CdocsVariantLabel[];
+}
+
+/** A shown filter, with a link for each of its options. */
+export interface CdocsFilterLinks {
+  traitId: string;
+  label: string;
+  options: CdocsFilterOptionLink[];
+}
+
 /**
  * The traits list the link-hover script reads to find which URLs are Cdocs
  * pages and which params each one accepts. Pages refer to traits by index, to
@@ -125,6 +144,61 @@ export function buildCdocsPage(p: {
   };
 }
 
+/**
+ * Each shown filter on a variant, with the URL a reader gets by picking each
+ * of its options.
+ *
+ * Picking an option keeps the other values where they're still valid. A
+ * dependent value the new option doesn't offer resets to its default, and a
+ * filter the new option hides is dropped, so every URL is a valid variant.
+ */
+export function buildFilterOptionLinks(p: {
+  bareUrl: string;
+  contentFilters: CdocContentFilter[];
+  /** The variant's current values. */
+  valsByTraitId: Record<string, string>;
+  customizationConfig?: CustomizationConfig;
+}): CdocsFilterLinks[] {
+  const filtersManifest = buildFiltersManifest({
+    frontmatter: { title: "", content_filters: p.contentFilters },
+    customizationConfig: p.customizationConfig ?? configByLang[DEFAULT_LANG],
+  });
+  const current = settleValues(
+    filtersManifest,
+    p.contentFilters,
+    p.valsByTraitId,
+  );
+  const currentVals = shownValues(current);
+
+  const filterLinks: CdocsFilterLinks[] = [];
+  for (const filter of p.contentFilters) {
+    const resolvedFilter = current.resolvedFilters[filter.trait_id];
+    if (!resolvedFilter.isShown) continue;
+    filterLinks.push({
+      traitId: filter.trait_id,
+      label: resolvedFilter.label,
+      options: resolvedFilter.options.map((option) => {
+        const { variant } = buildVariant(
+          p.bareUrl,
+          undefined,
+          settleValues(filtersManifest, p.contentFilters, {
+            ...currentVals,
+            [filter.trait_id]: option.id,
+          }),
+        );
+        return {
+          id: option.id,
+          label: option.label,
+          isSelected: option.id === resolvedFilter.currentValue,
+          url: variant.url,
+          labels: variant.labels,
+        };
+      }),
+    });
+  }
+  return filterLinks;
+}
+
 export function buildCdocsTraitsList(pages: CdocsPage[]): CdocsTraitsList {
   const traits = [...new Set(pages.flatMap((page) => page.traitIds))].sort();
   const traitIndexById = new Map(
@@ -143,15 +217,22 @@ export function buildCdocsTraitsList(pages: CdocsPage[]): CdocsTraitsList {
   return { traits, pages: pagesById };
 }
 
+let traitsListPromise: Promise<CdocsTraitsList> | null = null;
 let traitsListJsonPromise: Promise<string> | null = null;
 
 /**
- * The traits list, serialized. Computed once per server process, since the
- * content collection doesn't change while the server runs.
+ * The traits list. Computed once per server process, since the content
+ * collection doesn't change while the server runs.
  */
+export function getCdocsTraitsList(): Promise<CdocsTraitsList> {
+  traitsListPromise ??= getCdocsPages().then(buildCdocsTraitsList);
+  return traitsListPromise;
+}
+
+/** The traits list, serialized. */
 export function getCdocsTraitsListJson(): Promise<string> {
-  traitsListJsonPromise ??= getCdocsPages().then((pages) =>
-    JSON.stringify(buildCdocsTraitsList(pages)),
+  traitsListJsonPromise ??= getCdocsTraitsList().then((traitsList) =>
+    JSON.stringify(traitsList),
   );
   return traitsListJsonPromise;
 }
