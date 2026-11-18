@@ -87,7 +87,7 @@ Assertions define what an expected test result is. After you click {{< ui >}}Tes
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
 
-SSL tests connect with TLS 1.2 or TLS 1.3, so the server must support at least one of these versions. The `minimum TLS version` assertion checks the lowest of these two versions that the server accepts. It doesn't test TLS 1.0 or TLS 1.1.
+SSL tests connect with TLS 1.2 or TLS 1.3, so the server must support at least one of these versions. The `minimum TLS version` assertion checks the lowest of these two versions that the server accepts. SSL tests don't test TLS 1.0 or TLS 1.1.
 
 You can create up to 20 assertions per API test by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview:
 
