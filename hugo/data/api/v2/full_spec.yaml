@@ -122881,6 +122881,19 @@ components:
     RumCrossProductSampling:
       description: The configuration for cross-product retention filters.
       properties:
+        session_replay_enabled:
+          description: Whether the cross-product retention filter for Session Replay is enabled.
+          example: true
+          type: boolean
+        session_replay_sample_rate:
+          description: |-
+            The percentage (0-100) of retained sessions with an ingested replay that keep their replay data.
+            Values returned by the API are rounded to two decimal places.
+          example: 75.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
         trace_enabled:
           description: Whether the cross-product retention filter for APM traces is enabled.
           example: true
@@ -124237,6 +124250,8 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterQuery"
         sample_rate:
           $ref: "#/components/schemas/RumRetentionFilterSampleRate"
+        track:
+          $ref: "#/components/schemas/RumRetentionFilterTrack"
       type: object
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
@@ -124284,9 +124299,25 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterAttributes"
         id:
           $ref: "#/components/schemas/RumRetentionFilterID"
+        meta:
+          $ref: "#/components/schemas/RumRetentionFilterMeta"
         type:
           $ref: "#/components/schemas/RumRetentionFilterType"
       type: object
+    RumRetentionFilterEditionMode:
+      description: |-
+        The types of changes the retention filter accepts. `complete` filters can be updated and deleted.
+        `limited` filters are default retention filters that can't be deleted.
+      enum:
+        - unknown
+        - complete
+        - limited
+      example: complete
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - COMPLETE
+        - LIMITED
     RumRetentionFilterEnabled:
       description: Whether the retention filter is enabled.
       example: true
@@ -124301,6 +124332,37 @@ components:
       description: ID of retention filter in UUID.
       example: "051601eb-54a0-abc0-03f9-cc02efa18892"
       type: string
+    RumRetentionFilterMeta:
+      description: Metadata about the retention filter.
+      properties:
+        edition_mode:
+          $ref: "#/components/schemas/RumRetentionFilterEditionMode"
+        source:
+          $ref: "#/components/schemas/RumRetentionFilterMetaSource"
+        updated_at:
+          description: The time of the last update, as a Unix timestamp in milliseconds.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: The handle of the user who last updated the retention filter.
+          example: jane.doe@example.com
+          type: string
+      type: object
+    RumRetentionFilterMetaSource:
+      description: The source of the last update to the retention filter. The value is `unknown` if the request doesn't specify a source.
+      enum:
+        - default
+        - ui
+        - terraform
+        - unknown
+      example: ui
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - UI
+        - TERRAFORM
+        - UNKNOWN
     RumRetentionFilterQuery:
       description: The query string for a RUM retention filter.
       example: "@session.has_replay:true"
@@ -124318,6 +124380,16 @@ components:
       maximum: 100
       minimum: 0.1
       type: number
+    RumRetentionFilterTrack:
+      description: The product whose events the retention filter applies to.
+      enum:
+        - rum
+        - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames:
+        - RUM
+        - PRODUCT_ANALYTICS
     RumRetentionFilterType:
       default: retention_filters
       description: The type of the resource. The value should always be retention_filters.
