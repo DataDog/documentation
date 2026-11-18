@@ -5,12 +5,8 @@
  * then the results are tested piece by piece.
  */
 import { describe, test, expect } from 'vitest';
-import {
-  Frontmatter,
-  loadCustomizationConfig,
-  buildFiltersManifest,
-  resolveFilters,
-} from '../../../src';
+import { Frontmatter, buildFiltersManifest, resolveFilters } from '../../../src';
+import { loadCustomizationConfig } from '../../../src/api/compilation/loadCustomizationConfig';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 
 const CUSTOMIZATION_CONFIG_DIR = __dirname + '/customization_config';

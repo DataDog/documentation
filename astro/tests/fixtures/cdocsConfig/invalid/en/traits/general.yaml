@@ -1,0 +1,4 @@
+traits:
+  - id: prog_lang
+    label: Language
+    type: text

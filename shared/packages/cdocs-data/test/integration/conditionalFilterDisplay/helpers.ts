@@ -1,9 +1,5 @@
-import {
-  Frontmatter,
-  loadCustomizationConfig,
-  buildFiltersManifest,
-  resolveFilters,
-} from '../../../src';
+import { Frontmatter, buildFiltersManifest, resolveFilters } from '../../../src';
+import { loadCustomizationConfig } from '../../../src/api/compilation/loadCustomizationConfig';
 
 const CUSTOMIZATION_CONFIG_DIR = __dirname + '/customization_config';
 const langs = ['en'];

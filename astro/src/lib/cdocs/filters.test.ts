@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { resolvePageFilters, type CdocContentFilter } from "./filters";
 
-// Exercises the real cdocs-data pipeline (loadCustomizationConfig ->
-// buildFiltersManifest -> resolveFilters) against the checked-in
-// customization_config YAML.
+// Exercises the real cdocs-data pipeline (buildFiltersManifest ->
+// resolveFilters) against the checked-in customization_config YAML, which
+// `cdocsConfigPlugin` loads into `virtual:cdocs-config`.
 const contentFilters: CdocContentFilter[] = [
   {
     trait_id: "prog_lang",

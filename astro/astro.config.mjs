@@ -23,6 +23,7 @@ import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
+import { cdocsConfigPlugin } from "./src/lib/cdocs/cdocsConfigPlugin.ts";
 import {
   readStampIfAny,
   sdkVersionsFromStamp,
@@ -259,6 +260,13 @@ export default defineConfig({
     plugins: [
       // `chunk-url:` imports, so a lazy chunk can be preloaded at low priority.
       chunkUrlPlugin(),
+      // `virtual:cdocs-config`: the cdocs customization config, validated and
+      // inlined at build time so the server never reads it from disk.
+      cdocsConfigPlugin({
+        configDir: fileURLToPath(
+          new URL("./src/customization_config", import.meta.url),
+        ),
+      }),
       process.env.VISUALIZE &&
         visualizer({
           open: true,

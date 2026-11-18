@@ -45,3 +45,13 @@ declare module "*?raw" {
   const content: string;
   export default content;
 }
+
+/**
+ * The cdocs customization config for each language, loaded and validated at
+ * build time. Provided by `cdocsConfigPlugin`.
+ */
+declare module "virtual:cdocs-config" {
+  import type { CustomizationConfigByLang } from "cdocs-data";
+  const configByLang: CustomizationConfigByLang;
+  export default configByLang;
+}
