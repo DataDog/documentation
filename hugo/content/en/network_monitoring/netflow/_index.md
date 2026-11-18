@@ -224,8 +224,6 @@ Datadog assigns each flow a single `application_name` attribute. The value comes
 6. [Default port enrichment](#default-port-enrichment) (Datadog port-to-protocol mapping)
 7. `unknown`, if no other source matches
 
-To view this priority order in Datadog, open the [{{< ui >}}IP Enrichment{{< /ui >}} settings page][10] and expand {{< ui >}}How application names are assigned{{< /ui >}}.
-
 ## IP details
 
 In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display rich metadata about the IP and a link to {{< ui >}}View Related Network Connections{{< /ui >}} where you can inspect the connectivity in more detail.
