@@ -25,7 +25,6 @@ To create a guardrail:
 1. Select the type of infrastructure to target.
 1. Select one or more available actions for the guardrail to target. For example, for a Kubernetes integration, you can select actions such as rolling back deployments and patching or deleting Kubernetes objects.
 1. Add tags that identify the resources the guardrail applies to, such as `service:checkout`. For information about how multiple tags work together, see the [About targeting resources with tags](#about-targeting-resources-with-tags) section.
-   <div class="alert alert-warning">A guardrail with no tags applies to every resource. Add at least one tag unless you want the guardrail to apply to all resources.</div>
 1. For the selected actions and scope, decide when Bits can take action:
    - {{< ui >}}Ask{{< /ui >}}: Requires user approval before Bits executes actions. Choose at least one team, role, or individual who can approve.
    - {{< ui >}}Deny{{< /ui >}}: Bits can recommend an action but cannot take it.
