@@ -3236,7 +3236,7 @@ Permanently deletes an IaC custom rule by ID. This action cannot be undone.
 
 ## Session Replay
 
-Tools for searching [Session Replay][69] recordings and summarizing session activity.
+Tools for searching [Session Replay][69] recordings, summarizing session activity, and linking to specific moments of a replay.
 
 ### `search_replays`
 *Toolset: **session-replay***\
@@ -3253,6 +3253,14 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 
 - Summarize what happened in session `abc-123-def`.
 - Give me a play-by-play of the replay for the user who reported a checkout error.
+
+### `get_replay_link`
+*Toolset: **session-replay***\
+*Permissions Required: `RUM Apps Read` and `RUM Session Replay Read`*\
+Returns links that open a session replay at specific moments, so you land on what matters instead of scrubbing through the recording. Each moment is an offset from the start of the replay (such as a chapter from `get_replay_summary`), the timestamp of an event in the session (such as an error, click, or request found in RUM events), or the start of a visit to a view. Accepts up to 20 moments per call; with no moments, returns a link to the start of the replay. Moments outside the recording are moved to its start or end.
+
+- Show me exactly where checkout fails in john@example.com's replay from yesterday.
+- Give me links to both visits to `/pricing` in this session.
 
 ## Sheets
 
