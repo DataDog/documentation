@@ -71,7 +71,8 @@ Incident AI can generate summaries of incident Google Meet meetings and optional
 
 - AI features must be enabled for your organization.
 - You must use an account with permission to edit incident settings.
-- If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][4].
+
+**Note**:If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][4].
 
 #### Enable meeting summaries and transcripts
 
