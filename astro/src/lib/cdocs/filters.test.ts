@@ -17,10 +17,8 @@ const contentFilters: CdocContentFilter[] = [
   },
 ];
 
-const resolve = (
-  urlVals: Record<string, string> = {},
-  cookieVals: Record<string, string> = {},
-) => resolvePageFilters({ contentFilters, urlVals, cookieVals });
+const resolve = (urlVals: Record<string, string> = {}) =>
+  resolvePageFilters({ contentFilters, urlVals });
 
 describe("resolvePageFilters (backed by cdocs-data)", () => {
   it("falls back to option-group defaults when nothing is set", () => {
@@ -30,30 +28,14 @@ describe("resolvePageFilters (backed by cdocs-data)", () => {
     });
   });
 
-  it("applies cookie values when there is no URL param", () => {
-    const { valsByTraitId } = resolve(
-      {},
-      { prog_lang: "python", api_type: "dd_api" },
-    );
-    expect(valsByTraitId).toEqual({ prog_lang: "python", api_type: "dd_api" });
-  });
-
-  it("prefers the URL param over the cookie", () => {
+  it("applies a URL param", () => {
     expect(
-      resolve({ prog_lang: "cpp" }, { prog_lang: "python" }).valsByTraitId
-        .prog_lang,
-    ).toBe("cpp");
+      resolve({ prog_lang: "python", api_type: "dd_api" }).valsByTraitId,
+    ).toEqual({ prog_lang: "python", api_type: "dd_api" });
   });
 
-  it("ignores an invalid URL value and falls through to the cookie", () => {
-    expect(
-      resolve({ prog_lang: "cobol" }, { prog_lang: "python" }).valsByTraitId
-        .prog_lang,
-    ).toBe("python");
-  });
-
-  it("ignores an invalid cookie value and falls through to the default", () => {
-    expect(resolve({}, { prog_lang: "cobol" }).valsByTraitId.prog_lang).toBe(
+  it("ignores an invalid URL value and falls back to the default", () => {
+    expect(resolve({ prog_lang: "cobol" }).valsByTraitId.prog_lang).toBe(
       "java",
     );
   });
@@ -76,7 +58,6 @@ describe("resolvePageFilters (backed by cdocs-data)", () => {
   it("honors a frontmatter default_value override", () => {
     const { valsByTraitId } = resolvePageFilters({
       urlVals: {},
-      cookieVals: {},
       contentFilters: [
         {
           trait_id: "prog_lang",

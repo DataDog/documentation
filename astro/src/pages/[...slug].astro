@@ -2,8 +2,9 @@
 // Catch-all on-demand route for every `en` collection entry. Whether or not a
 // doc is filterable, it renders here on the server. Filterable docs (those with
 // `content_filters`) additionally resolve their filters per request (URL param
-// > cookie > default) so non-matching content is dropped by vanilla Markdoc
-// before the HTML is sent; non-filterable docs simply render their content.
+// > default) so non-matching content is dropped by vanilla Markdoc before the
+// HTML is sent; non-filterable docs simply render their content. Nothing but
+// the URL affects the render, so the same URL always gets the same HTML.
 //
 // This is the lowest-priority route, so more specific ones (`/`,
 // `/[...lang]/api/...`) still win; only otherwise-unmatched paths reach here.
@@ -16,7 +17,12 @@ import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.a
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
-import { COOKIE_NAME } from "@lib/cdocs/cookiePrefs";
+import { getCdocsTraitsListUrl } from "@lib/cdocs/cdocsPages";
+import {
+  CDOCS_PAGE_STATE_ID,
+  serializeCdocsPageState,
+} from "@lib/cdocs/pageState";
+import { pathPrefix, prefixed } from "@lib/site/pathPrefix";
 
 // `[...slug]` yields the full path with no leading/trailing slash, which is
 // exactly an `en` entry id (path under content/en, without the extension).
@@ -37,8 +43,8 @@ if (!entry) {
 const contentFilters = entry.data.content_filters;
 const isFilterable = contentFilters !== undefined;
 
-// Filterable docs resolve their filters (and persist the selection); plain docs
-// render with no filter state.
+// Filterable docs resolve their filters; plain docs render with no filter
+// state.
 let resolvedFilters: ReturnType<typeof resolveCdocRender>["resolvedFilters"] =
   [];
 let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
@@ -46,20 +52,19 @@ if (isFilterable) {
   const resolved = resolveCdocRender({
     contentFilters,
     searchParams: Astro.url.searchParams,
-    cookieRaw: Astro.cookies.get(COOKIE_NAME)?.value,
-    now: Date.now(),
   });
   resolvedFilters = resolved.resolvedFilters;
   valsByTraitId = resolved.valsByTraitId;
-
-  // Persist the resolved values (trait-keyed, oldest evicted past the cap) so a
-  // selection survives navigation to other cdocs.
-  Astro.cookies.set(COOKIE_NAME, resolved.cookieValue, {
-    path: "/",
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-  });
 }
+
+// Read by `preferencesClient`, which stores the URL's filter values and adds
+// stored preferences to Cdocs links. Every product doc gets it, since any page
+// can link to a Cdocs page.
+const cdocsPageState = serializeCdocsPageState({
+  valsByTraitId,
+  traitsListUrl: prefixed(await getCdocsTraitsListUrl()),
+  pathPrefix: pathPrefix(),
+});
 
 // The resolved values become Markdoc variables ($prog_lang, ...), which the
 // built-in `if` tags evaluate to drop non-matching content at render time.
@@ -93,6 +98,12 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
         siteSupportId={entry.data.site_support_id}
       />
       <h1 transition:name="cdoc-title">{entry.data.title}</h1>
+      <script
+        is:inline
+        type="application/json"
+        id={CDOCS_PAGE_STATE_ID}
+        set:html={cdocsPageState}
+      />
       {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
       <div class="cdoc__content prose" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
@@ -114,6 +125,12 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
     </nav>
   </div>
 </BaseLayout>
+
+<script>
+  import { startCdocsPreferences } from "@lib/cdocs/preferencesClient";
+
+  startCdocsPreferences();
+</script>
 
 <style>
   .cdoc-layout {

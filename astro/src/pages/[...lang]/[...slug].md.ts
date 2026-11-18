@@ -1,6 +1,6 @@
 // Catch-all `.md` endpoint: the plaintext twin of the `[...slug].astro` route.
 // Serves a plaintext version of every `content/en` page. Cdocs (pages with
-// `content_filters`) resolve their filters — URL param > cookie > default, via
+// `content_filters`) resolve their filters — URL param > default, via
 // the shared `resolveCdocRender` — and render through the cdocs plaintext
 // pipeline; every other page renders through the component plaintext twins.
 // Either way the frontmatter title is prepended as an H1, mirroring the HTML
@@ -16,16 +16,14 @@
 // guard pins that ordering. Translated content is not served here yet: the
 // captured locale is used to 404, not to pick a collection.
 //
-// Filters resolve identically to the HTML page even without query params: the
-// HTML route sets the `cdocs_prefs` cookie on load, and this same-origin fetch
-// carries it.
+// Filters resolve from the URL only, the same way as the HTML page, so a `.md`
+// URL with the same query as an HTML URL gets the same variant.
 export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
-import { COOKIE_NAME } from "@lib/cdocs/cookiePrefs";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
 import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
 import { renderMdocWithTwins } from "@lib/plaintext/twinTransform";
@@ -56,7 +54,7 @@ function insertAfterTitle(text: string, block: string): string {
   return `${head}${block}${text.slice(afterHeading + 2)}`;
 }
 
-export const GET: APIRoute = async ({ params, url, cookies, site }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   // Two adjacent rest params are ambiguous, so the leading path segment is
   // captured as `lang` whether or not it is a locale; `resolveUnprefixedSlug`
   // puts it back and 404s a real locale prefix. The result is the path without
@@ -104,8 +102,6 @@ export const GET: APIRoute = async ({ params, url, cookies, site }) => {
     const { valsByTraitId } = resolveCdocRender({
       contentFilters,
       searchParams: url.searchParams,
-      cookieRaw: cookies.get(COOKIE_NAME)?.value,
-      now: Date.now(),
     });
     // `renderCdocPlaintext` prepends the title itself, so the note is spliced
     // in after that H1 rather than ahead of it.
