@@ -24,8 +24,6 @@ With image source labels in place, Datadog can:
 - Display a preview of the Dockerfile in the Container Image Vulnerabilities panel
 - Enable source-based remediation, so you can fix issues in the file that introduced them
 
-Datadog reads image source labels for images scanned by [Agentless Scanning][1] and by the [Datadog Security CLI][2] in CI/CD.
-
 ## Image source labels
 
 Datadog uses the following labels:
@@ -39,15 +37,9 @@ Datadog uses the following labels:
 
 The following labels are also supported:
 
-- `org.opencontainers.image.revision` (recommended): The commit SHA used to build the image. This pins the Dockerfile link to the commit that built the image. Without it, Datadog links to the Dockerfile on the repository's default branch.
+- `org.opencontainers.image.revision` (optional): The commit SHA used to build the image. This pins the Dockerfile link to the commit that built the image. Without it, Datadog links to the Dockerfile on the repository's default branch.
 - `org.opencontainers.image.base.name` (optional): The base image name, for example `ubuntu:22.04`. Improves base image remediation suggestions.
 - `org.opencontainers.image.base.digest` (optional): The base image digest.
-
-Keep the following in mind:
-- Set labels in the **final build stage** of a multi-stage Dockerfile. Labels set in earlier stages are not part of the final image.
-- Labels are inherited from base images. Labels you set in your Dockerfile override inherited values.
-- The filename in `com.datadoghq.image.source_path` must be a Dockerfile or Containerfile name, such as `Dockerfile`, `Dockerfile.prod`, `api.Dockerfile`, or `Containerfile`.
-- Datadog builds Dockerfile links for repositories hosted on GitHub, GitLab, Bitbucket, and Azure DevOps.
 
 ## Choose a method
 
@@ -66,63 +58,20 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
 
 - The [GitHub integration][4] is set up, and the Datadog GitHub App is installed on the repositories that contain your Dockerfiles. The GitHub App needs the following repository permissions:
   - **Contents**: Read & write
-  - **Pull Requests**: Read & write
+  - **Pull requests**: Read & write
 - Your GitHub user account is connected to Datadog and has write access to the repositories. Datadog opens pull requests on your behalf.
 
 ### Create pull requests
 
 1. On the [Cloud Security Setup page][5], find your GitHub account and turn on {{< ui >}}Dockerfile scanning{{< /ui >}}.
-
-   Datadog scans the default branch of each repository for files named `Dockerfile`, `Dockerfile.*`, `*.Dockerfile`, `*.dockerfile`, and `Containerfile`. Datadog rescans when a push to the default branch changes one of these files.
 1. Click {{< ui >}}Select Dockerfiles{{< /ui >}}. A side panel lists your Dockerfiles, grouped by repository, with one of the following statuses:
    - {{< ui >}}Need label{{< /ui >}}: The Dockerfile is missing one or both image source labels.
    - {{< ui >}}In progress{{< /ui >}}: A Datadog pull request for the Dockerfile is open.
    - {{< ui >}}Labeled{{< /ui >}}: The final build stage has both image source labels.
 
    To find specific Dockerfiles, search, filter by repository, or filter by status.
-1. Select the Dockerfiles to label, create the pull requests, and confirm. Datadog opens one pull request per repository, with up to 20 Dockerfiles per pull request and up to 10 pull requests per submission.
-1. Review and merge the pull requests in GitHub, then rebuild and redeploy your images. Datadog links vulnerabilities to Dockerfiles for images built after the merge.
-
-### What the pull request changes
-
-Each pull request targets the repository's default branch and is titled `Add image source labels to <path>`, or `Add image source labels to <N> Dockerfiles` when it covers more than one file.
-
-Datadog edits only the final build stage of each Dockerfile:
-- If a label is missing, Datadog adds it after the last `LABEL` instruction in the stage, or after the `FROM` instruction if the stage has no labels.
-- If a label has an outdated value, Datadog updates it in place.
-- If a label value comes from a build variable, such as `$REPO`, Datadog leaves it unchanged.
-- Dockerfiles that already have both labels with the correct values are skipped.
-
-The rest of the file is unchanged. For example, for a Dockerfile at `docker/api/Dockerfile` in `https://github.com/org/repo`:
-
-**Before**:
-
-```dockerfile
-FROM golang:1.22 AS build
-WORKDIR /src
-COPY . .
-RUN go build -o /app ./cmd/api
-
-FROM gcr.io/distroless/base-debian12
-COPY --from=build /app /app
-ENTRYPOINT ["/app"]
-```
-
-**After**:
-
-```dockerfile
-FROM golang:1.22 AS build
-WORKDIR /src
-COPY . .
-RUN go build -o /app ./cmd/api
-
-FROM gcr.io/distroless/base-debian12
-# Image source labels, added by Datadog.
-LABEL org.opencontainers.image.source="https://github.com/org/repo"
-LABEL com.datadoghq.image.source_path="docker/api/Dockerfile"
-COPY --from=build /app /app
-ENTRYPOINT ["/app"]
-```
+1. Select the Dockerfiles to label, create the pull requests, and confirm. Datadog groups the selected Dockerfiles by repository and opens pull requests with up to 20 Dockerfiles each. A repository with more than 20 selected Dockerfiles gets more than one pull request.
+1. Review and merge the pull requests in GitHub. Datadog links vulnerabilities to Dockerfiles for images built after the merge.
 
 ## Add labels at build time
 
@@ -157,8 +106,6 @@ The Datadog Security CLI can also add this metadata at scan time with the `--doc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
-[2]: /security/cloud_security_management/setup/ci_cd
 [3]: https://specs.opencontainers.org/image-spec/annotations/
 [4]: /integrations/github/
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
