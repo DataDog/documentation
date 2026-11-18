@@ -102563,6 +102563,14 @@ components:
           items:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
           type: array
+        name:
+          description: |-
+            Optional name identifying this include-based Grok rule in worker diagnostics.
+            Names must be unique within the processor.
+          example: "payments"
+          maxLength: 128
+          minLength: 1
+          type: string
         support_rules:
           description: A list of Grok helper rules that can be referenced by the parsing rules.
           example:
