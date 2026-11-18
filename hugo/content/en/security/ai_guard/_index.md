@@ -146,7 +146,7 @@ AI Guard features vary by integration method, so some features might not be avai
 | Sensitive data findings | Yes | No | Yes | Yes |
 | Sensitive data redaction | No | No | Yes | Yes |
 | Per-call blocking options | No | No | Yes | No |
-| Middleware | Python only | Yes | Python only | No |
+| Middleware | Python only | Python only | Python only | No |
 
 ## Specifications and limitations
 
