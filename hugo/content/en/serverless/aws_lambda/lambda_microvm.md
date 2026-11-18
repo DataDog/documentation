@@ -32,21 +32,23 @@ further_reading:
 Datadog Serverless Monitoring for AWS Lambda MicroVMs is in Preview. To sign up, contact your Datadog representative.
 {{< /callout >}}
 
-Datadog collects logs, traces, and metrics, including CPU utilization, from your [AWS Lambda MicroVMs][11] throughout their life cycle. MicroVMs run applications in isolated [Firecracker][12] virtual machines. Each instance starts from an image snapshot and can suspend when idle, then resume with its memory and disk state intact.
+Datadog collects logs, traces, and metrics, including CPU utilization, from your [AWS Lambda MicroVMs][11] throughout their lifecycle. MicroVMs run applications in isolated [Firecracker][12] virtual machines. Each instance starts from an image snapshot and can suspend when idle, then resume with its memory and disk state intact.
 
 ## Prerequisites
 
-- A Datadog API key and network egress to Datadog.
-- An application that follows the AWS MicroVM service model.
+To use Datadog Serverless Monitoring for AWS Lambda MicroVMs, you must have the following:
 
-Optionally, to collect traces, install a Datadog tracer that meets the following minimum version. Without a tracer, `serverless-init` still collects logs and metrics.
+- A Datadog API key and network egress to Datadog
+- An application that follows the AWS MicroVM service model
+
+Optionally, to collect traces, install a Datadog SDK that meets the following minimum version. Without an SDK, `serverless-init` still collects logs and metrics.
 
 | Component | Minimum version |
 |---|---|
-| Node.js tracer (`dd-trace`) | 6.15.0 |
-| Python tracer (`ddtrace`) | 4.17.0 |
+| Node.js SDK (`dd-trace`) | 6.15.0 |
+| Python SDK (`ddtrace`) | 4.17.0 |
 
-If your application uses OpenSSL, use a snapshot-compatible version. AWS provides one in the `public.ecr.aws/lambda/microvms:al2023-minimal` container base image. You can also use your own base image with the patched OpenSSL library. See [AWS guidance on snapshots][10].
+If your application uses OpenSSL, use a snapshot-compatible version. AWS provides one in the `public.ecr.aws/lambda/microvms:al2023-minimal` container base image. You can also use your own base image with the patched OpenSSL library. See [AWS guidance on snapshots][10] for more information.
 
 ## Setup
 
@@ -54,13 +56,13 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
 1. Add `serverless-init` v1.11.4 or later to your MicroVM image. Set it as the container entrypoint, with your application as the command. Sidecar mode is not supported. The image is available on [Docker Hub][7] and the [Amazon ECR Public Gallery][8].
 
-   The following examples include optional tracing and use an application on port `8080` and life cycle hooks on port `9000`. Replace the application filenames and startup commands as needed.
+   The following examples include optional tracing and use an application on port `8080` and lifecycle hooks on port `9000`. Replace the application filenames and startup commands as needed.
 
    {{< tabs >}}
 
    {{% tab "Node.js" %}}
 
-   Add `dd-trace` v6.15.0 or later to `package.json` and update `package-lock.json`, for example, with `npm install dd-trace@6.15.0`. Install Node.js from the Amazon Linux packages to use snapshot-compatible OpenSSL.
+   Add `dd-trace` v6.15.0 or later to `package.json` and update `package-lock.json`, such as with `npm install dd-trace@6.15.0`. Install Node.js from the Amazon Linux packages to use snapshot-compatible OpenSSL.
 
    ```dockerfile
    FROM public.ecr.aws/lambda/microvms:al2023-minimal
@@ -111,9 +113,9 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
    {{< /tabs >}}
 
-   Each example forwards the `/run` hook to your application. MicroVM instances start from the same image snapshot, so without this, instances can share trace and span IDs. When the tracer receives `/run`, it generates new IDs for the instance.
+   For tracing, forward the `/run` hook to your application, as shown in the examples. MicroVM instances start from the same image snapshot, so trace and span IDs can collide across instances. Forwarding `/run` allows the tracer to generate new IDs for each instance.
 
-   <div class="alert alert-info">To collect logs and metrics without tracing, omit the tracer dependency and initialization. Use <code>CMD ["node", "app.js"]</code> for Node.js or <code>CMD ["python3.12", "app.py"]</code> for Python. You can also omit <code>DD_AWS_MICROVM_USER_APP_PORT</code> and <code>DD_AWS_MICROVM_ENABLE_RUN</code> unless your application needs forwarded life cycle hooks.</div>
+   <div class="alert alert-info">To collect logs and metrics without tracing, omit the SDK dependency and tracer initialization. Use <code>CMD ["node", "app.js"]</code> for Node.js or <code>CMD ["python3.12", "app.py"]</code> for Python. You can also omit <code>DD_AWS_MICROVM_USER_APP_PORT</code> and <code>DD_AWS_MICROVM_ENABLE_RUN</code> unless your application needs forwarded lifecycle hooks.</div>
 
 2. Set the following environment variables:
 
@@ -127,7 +129,7 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
    Set `DD_SITE` to your [Datadog site][1]: {{< region-param key="dd_site" code="true" >}}.
 
-3. Enable the AWS Lambda MicroVM life cycle hooks in the image configuration.
+3. Enable the AWS Lambda MicroVM lifecycle hooks in the image configuration.
 
    `serverless-init` starts and supervises your application. It handles the `/ready` and `/validate` hooks during image setup, and the `/run`, `/resume`, `/suspend`, and `/terminate` hooks at runtime.
 
@@ -137,11 +139,11 @@ Set `DD_LOGS_ENABLED=true` to collect logs. To correlate logs with traces, enabl
 
 See [correlating logs and traces][4] for [Node.js][5] and [Python][6].
 
-### (Optional) Forward life cycle hooks to your application
+### (Optional) Forward additional lifecycle hooks to your application
 
 The Dockerfile examples in the [Instrument the image](#instrument-the-image) section already forward the `/run` hook for tracing.
 
-By default, `serverless-init` handles life cycle hooks on port `9000` and does not forward them to your application. To forward a hook, set `DD_AWS_MICROVM_USER_APP_PORT` to the port your application listens on at `127.0.0.1`, then set the matching `DD_AWS_MICROVM_ENABLE_<HOOK>` variable to `true`. The app and life cycle ports must differ. You need both settings; either one alone leaves forwarding disabled.
+By default, `serverless-init` handles lifecycle hooks on port `9000` and does not forward them to your application. To forward a hook, set `DD_AWS_MICROVM_USER_APP_PORT` to the port your application listens on at `127.0.0.1`, then set the matching `DD_AWS_MICROVM_ENABLE_<HOOK>` variable to `true`. The app and lifecycle ports must differ. You need both settings. Either one alone leaves forwarding disabled.
 
 <table>
   <thead>
@@ -154,7 +156,7 @@ By default, `serverless-init` handles life cycle hooks on port `9000` and does n
   <tbody>
     <tr>
       <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_LIFECYCLE_PORT</code></td>
-      <td>Port <code>serverless-init</code> listens on for life cycle hooks.</td>
+      <td>Port <code>serverless-init</code> listens on for lifecycle hooks.</td>
       <td><code>9000</code></td>
     </tr>
     <tr>
@@ -216,12 +218,12 @@ Timeouts apply only to forwarded hooks. You don't need to forward hooks to colle
 
 ### Metrics
 
-Datadog collects these CPU utilization and life cycle metrics for each MicroVM without additional setup:
+Datadog collects the following CPU utilization and lifecycle metrics for each MicroVM without additional setup:
 
 | Metric | Description |
 |---|---|
 | `aws.lambda.microvm.enhanced.cpu.usage` | CPU usage for the MicroVM, in nanocores. |
-| `aws.lambda.microvm.enhanced.cpu.limit` | Number of CPUs available to the guest, expressed in nanocores. |
+| `aws.lambda.microvm.enhanced.cpu.limit` | Number of CPUs available to the guest, in nanocores. |
 | `aws.lambda.microvm.enhanced.validate` | Number of validation hook events. |
 | `aws.lambda.microvm.enhanced.run` | Number of run hook events. |
 | `aws.lambda.microvm.enhanced.resume` | Number of resume hook events. |
@@ -229,19 +231,19 @@ Datadog collects these CPU utilization and life cycle metrics for each MicroVM w
 | `aws.lambda.microvm.enhanced.terminate` | Number of termination hook events. |
 | `aws.lambda.microvm.enhanced.active_instances` | Periodic heartbeat while a MicroVM is running or resumed. This is a periodic sample, not an exact instance count. |
 
-#### Processor usage
+#### CPU metrics
 
-`serverless-init` samples CPU metrics every 3 seconds, starting when the MicroVM starts. CPU metrics are enabled by default. To disable them, set `DD_ENHANCED_METRICS_ENABLED=false`. Life cycle and heartbeat metrics are still reported.
+`serverless-init` samples CPU metrics every 3 seconds, starting when the MicroVM starts. CPU metrics are enabled by default. To disable them, set `DD_ENHANCED_METRICS_ENABLED=false`. Lifecycle and heartbeat metrics are still reported.
 
 Both CPU metrics report raw values in nanocores: 1 CPU core equals 1,000,000,000 nanocores. The provided dashboard converts them to cores, the unit AWS uses for CPU capacity, by dividing the values by `1e9`. The metrics use the same units as [`container.cpu.usage` and `container.cpu.limit`][9].
 
-CPU metrics are available with or without cgroups. When cgroups are unavailable, `cpu.limit` reflects the CPU count visible to the MicroVM, which may differ from its AWS CPU capacity.
+CPU metrics are available with or without cgroups. When cgroups are unavailable, `cpu.limit` reflects the CPU count visible to the MicroVM, which can differ from its AWS CPU capacity.
 
 ### Tags
 
-Logs and traces include the MicroVM image ARN as `resource_id`, the image name as `image_name`, and the image version as `lambda_microvm_image_version`. CPU and life cycle metrics include the `resource_id` and `image_name` tags. The instance heartbeat also includes the image ARN as `microvm_image_arn`.
+Logs and traces include the MicroVM image ARN as `resource_id`, the image name as `image_name`, and the image version as `lambda_microvm_image_version`. CPU and lifecycle metrics include the `resource_id` and `image_name` tags. The instance heartbeat also includes the image ARN as `microvm_image_arn`.
 
-After AWS sends the `/run` hook, logs, traces, life cycle metrics, and the instance heartbeat also include the `lambda_microvm_id` instance ID tag. CPU metrics use image tags, not instance tags. Usage metrics include the unified service tags `env`, `service`, and `version`.
+After AWS sends the `/run` hook, logs, traces, lifecycle metrics, and the instance heartbeat also include the `lambda_microvm_id` instance ID tag. CPU metrics use image tags, not instance tags. When configured, CPU metrics, lifecycle metrics, and the instance heartbeat include the unified service tags `env`, `service`, and `version`.
 
 ### Data flush on suspend and terminate
 
