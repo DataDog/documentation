@@ -106,9 +106,7 @@ To add a skill:
 
 {{< img src="/actions/agents/agent-builder-add-skills.png" alt="The Bits Agent Builder editor with the Skills section highlighted, showing the plus button for adding a skill" style="width:80%;" >}}
 
-For information about how to create skills, see [Skills Library][18].
-
-For information about how to decide which instructions to move into skills, see [Improve Agents Using Their Execution Traces][19].
+To create skills, see [Skills Library][18]. To decide which instructions to move into skills, see [Improve Agents Using Their Execution Traces][19].
 
 ### Automations
 
