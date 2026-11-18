@@ -83,7 +83,7 @@ The **Announced deprecations** table lists each deprecated model, sorted by shut
 
 A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window and rises as that date approaches. This insight type does not include an impact assessment or a recommended fix.
 
-Migrate each call site to a supported model before its shutdown date, and validate quality, latency, and cost on the replacement.
+Migrate each call site to a supported model before the deprecated model's shutdown date, and validate quality, latency, and cost on the replacement model.
 
 ## Understand impact and evidence
 
