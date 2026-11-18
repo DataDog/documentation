@@ -688,7 +688,9 @@ To stop session recordings, set `sessionReplaySampleRate` to `0` in the main pro
 {% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ### Start or stop the recording manually
 
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
+{% /if %}
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
