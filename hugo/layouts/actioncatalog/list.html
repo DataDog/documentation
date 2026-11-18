@@ -93,9 +93,9 @@
         {{ $gov_available = index . "govAvailable" }}
       {{ end }}
       {{ $supported_regions := slice }}
-      {{ range site.Params.allowedRegions }}
-        {{ if or $gov_available (not (hasPrefix .value "gov")) }}
-          {{ $supported_regions = $supported_regions | append .value }}
+      {{ range site.Data.regions.regions }}
+        {{ if or $gov_available (not (hasPrefix .key "gov")) }}
+          {{ $supported_regions = $supported_regions | append .key }}
         {{ end }}
       {{ end }}
 

@@ -25,7 +25,7 @@ Por ejemplo, el archivo `metadata.yaml` de [`dockerstatsreceiver`][15] lista las
 
 ## Integraciones de OpenTelemetry compatibles con Datadog {#datadog-supported-opentelemetry-integrations}
 
-Datadog admite las siguientes integraciones de OpenTelemetry:
+Datadog admite las siguientes Integrations de OpenTelemetry. ¿No ve la integración que necesita? [Solicítela][21].
 
 ### APM (Application Performance Monitoring) {#apm-application-performance-monitoring}
 
@@ -63,16 +63,23 @@ Supervise servidores web y tecnologías de proxy:
 
 Supervise sistemas de bases de datos y mensajería:
 
+- [MongoDB Metrics][22] - Realice un seguimiento del rendimiento de la base de datos MongoDB
 - [Métricas de MySQL][11] - Haga un seguimiento del rendimiento de la base de datos MySQL
 - [Métricas de PostgreSQL][19] - Haga un seguimiento del rendimiento de la base de datos PostgreSQL
+- [Redis Metrics][23] - Realice un seguimiento del rendimiento y el uso de memoria de Redis
 - [Métricas de SQL Server][20] - Haga un seguimiento del rendimiento de la base de datos SQL Server
 - [Métricas de Kafka][12] - Haga un seguimiento de la plataforma de mensajería Apache Kafka
+- [RabbitMQ Metrics][24] - Supervise los brokers y las colas de RabbitMQ
 
 ### Big data y procesamiento {#big-data-and-processing}
 
 Haga un seguimiento de los marcos de procesamiento de big data:
 
 - [Métricas de Apache Spark][13] - Haga un seguimiento de las métricas de rendimiento de Apache Spark
+
+## Solicite una integración o comparta sus comentarios {#request-an-integration-or-share-feedback}
+
+Para solicitar una nueva integración o compartir comentarios sobre una existente, complete el [formulario OpenTelemetry Integrations Product Preview][21].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -98,3 +105,7 @@ Haga un seguimiento de los marcos de procesamiento de big data:
 [18]: /es/opentelemetry/integrations/kubernetes_metrics/
 [19]: /es/opentelemetry/integrations/postgres_metrics/
 [20]: /es/opentelemetry/integrations/sqlserver_metrics/
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/
+[22]: /es/opentelemetry/integrations/mongodb_metrics/
+[23]: /es/opentelemetry/integrations/redis_metrics/
+[24]: /es/opentelemetry/integrations/rabbitmq_metrics/

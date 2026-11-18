@@ -1,7 +1,9 @@
 # `shared/`
 
 Data read by more than one site in this monorepo. Astro reads these files
-through the `@shared` alias. Hugo will mount them as it adopts each one.
+through the `@shared` alias. Hugo mounts `i18n/` and `regions.yaml` in
+`hugo/config/_default/config.yaml`, and will mount the others as it adopts
+each one.
 
 Documentation lives here rather than in file headers, because these files are
 edited by scripts as well as by hand, and most YAML libraries drop comments on a
@@ -30,7 +32,9 @@ the build rather than rendering an empty hostname on a live page.
 All `values` entries are strings, ports included. Quote anything that would lose
 a leading zero (`"065115117704"`) or that YAML would read as a number.
 
-To add a region, add one block. See `astro/src/config/regions.ts`.
+To add a region, add one block. Astro reads it through
+`astro/src/config/regions.ts`. Hugo reads it as `site.Data.regions` in templates,
+and its scripts get it through `hugo/assets/scripts/config/regions.config.js`.
 
 ## `site_support.yaml`
 
@@ -76,9 +80,16 @@ site_support_ids:
             - /api/latest/on-call-paging/**
 ```
 
+`**` must be a whole path segment: `/a/**/b` is valid, `/a**` is not.
+
 The subset is restricted because Hugo has no glob function for arbitrary
-strings and must translate these patterns to regex for `findRE` when it adopts
-this file. Keeping the subset small keeps that translation trivial.
+strings, so it translates these patterns to regex for `findRE`. Keeping the
+subset small keeps that translation trivial.
+
+Both sites must agree on what each pattern matches. The cases in
+`tests/site_support_globs.yaml` define that behavior. Astro checks them in a
+unit test. Hugo checks them on every build and fails the build on a mismatch.
+To change glob behavior, change those cases first.
 
 These are **URL** paths, not content paths. They differ from Hugo's cascade
 `_target.path` by locale prefix, `_index.md` naming, and the `_vendor` tree.
@@ -86,25 +97,17 @@ These are **URL** paths, not content paths. They differ from Hugo's cascade
 Two IDs may not claim overlapping `url_paths`. A page resolving to two IDs is
 ambiguous, so it fails the build rather than picking one.
 
-### Hugo and Astro match differently
+### Hugo and Astro
 
-Hugo also matches an ID against page **path segments**: it splits the page path
-and uses the first segment that is itself an ID. That is why `agentless-scanning`
-and `agentless_scanning` both exist — one product, two IDs, split only so one
-matches a hyphenated API URL and the other an underscored docs path.
+Both sites read this file. Hugo mounts it as `data/site_support.yaml`, and
+matches pages in the same two steps: frontmatter first, then `url_paths`
+against the page URL.
 
-**Astro does not do this.** It matches only frontmatter IDs and `url_paths`.
+An ID name has no effect on matching. A page whose path contains an ID, such as
+`/logs/cloudprem`, gets no banner unless it sets `site_support_id` or an ID's
+`url_paths` covers it. When you move a page, check that its new URL is still
+covered.
 
-Three IDs match an Astro API route by segment — `agentless-scanning`, `on-call`
-and `workflow-automation` — and all three carry explicit `url_paths`, so both
-sites agree. A test fails if any other ID starts colliding with an Astro route,
-which would mean Hugo shows a banner that Astro does not.
-
-Removing Hugo's segment matching means giving explicit `url_paths` to every ID
-that relies on it.
-
-### While both sites run
-
-Hugo reads its own copy of this data at `hugo/config/_default/params.yaml` under
-`unsupported_sites`. The two are kept in step by an equivalence test in
-`astro/src/config/`. Delete that test when Hugo reads this file directly.
+Some `url_paths` entries cover paths that exist only in translated content,
+because the English pages moved and the translations have not caught up yet.
+You can remove such an entry when no translated page is left at that path.

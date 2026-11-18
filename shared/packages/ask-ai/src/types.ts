@@ -47,6 +47,23 @@ export interface ChatMessage {
   content: string;
 }
 
+/** What a rating click or the reasons form sends for one signed answer. */
+export interface FeedbackRequest {
+  rating?: "up" | "down";
+  reasons?: string[];
+}
+
+/** Sends feedback for one answer; rejects so the buttons can offer a retry. */
+export type FeedbackSender = (feedback: FeedbackRequest) => Promise<void>;
+
+/** Research counts from the timeline, reported with the answer. */
+export interface ActivitySummaryFields {
+  research_ms?: number;
+  searches?: number;
+  pages_found?: number;
+  pages_read?: number;
+}
+
 /**
  * Every telemetry payload the widget emits, discriminated by `action`. Adding
  * an event means adding a member to this union.
@@ -82,12 +99,23 @@ export type AskAiActionPayload =
       messages_sent: number;
       responses_received: number;
     }
-  | { action: "response_received"; response_length: number; latency_ms: number }
+  | ({
+      action: "response_received";
+      response_length: number;
+      latency_ms: number;
+    } & ActivitySummaryFields)
+  | ({
+      action: "response_stopped";
+      partial_length: number;
+    } & ActivitySummaryFields)
+  | { action: "activity_toggled"; expanded: boolean }
+  | { action: "retry_clicked" }
   | {
       action: "feedback";
       feedback: "positive" | "negative";
       response_content: string;
     }
+  | { action: "feedback_reasons"; feedback_reasons: string[] }
   | {
       action: "copy";
       copy_type: "snippet" | "full_response";

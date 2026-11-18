@@ -292,6 +292,10 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Record exposures in your own data store
+
+Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-trace-go` 2.12.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][7].
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
@@ -366,6 +370,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
 [6]: /feature_flags/concepts/configuration_sources/#agent-availability
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 
 ## Further reading
 

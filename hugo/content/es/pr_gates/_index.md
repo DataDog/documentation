@@ -158,7 +158,7 @@ Puede ver todas las reglas definidas por la organización.
 [9]: /es/monitors/
 [10]: /es/security/code_security/secret_scanning/
 [11]: /es/tests/flaky_tests/
-[12]: /es/source_code/features/#pr-comments
+[12]: /es/source_code/pr-comments/
 [13]: /es/integrations/gitlab-source-code/
 [14]: /es/integrations/bitbucket-source-code/
 [15]: /es/pr_gates/setup/

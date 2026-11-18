@@ -198,6 +198,8 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 
+**Note**: The Datadog Logs destination truncates log events larger than 900 KB.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/search_syntax/logs/

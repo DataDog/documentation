@@ -20,7 +20,6 @@ further_reading:
 - link: /logs/guide/log-collection-troubleshooting-guide/
   tag: Documentación
   text: Guía de solución de problemas de recopilación de registros
-site_support_id: fleet-automation-standard-features
 title: Configurar registros personalizados
 ---
 Utilice [Fleet Automation][2] para administrar la configuración de [recopilación de registros personalizados][4] en sus Agents de forma remota y a escala. En lugar de editar los archivos de configuración `conf.d` servidor por servidor, defina el contexto de un cambio según la información o las etiquetas del servidor e impleméntelo en todos los Agents que coincidan a la vez. Antes de implementar, revise las diferencias de configuración de cada Agent en el contexto.

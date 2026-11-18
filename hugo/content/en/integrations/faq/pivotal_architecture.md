@@ -53,7 +53,7 @@ Autodiscovery tags are added at the CAPI level as metadata for the application. 
 
 ### Firehose Nozzle
 
-The Datadog Firehose Nozzle consumes information from your deployment's Loggregator (PCF's system for aggregating deployment metrics and application logs). The nozzle collects internal nozzle metrics, application metrics, organization metrics, and logs from the Firehose, and adds the corresponding tags and application metadata it collects from the CAPI. You can configure the metadata filter from the Cluster Monitoring Tile for the Datadog Firehose Nozzle with an allow- and deny-list mechanism. Specify which metadata to add to the metrics collected from the nozzle, and view the metrics and their corresponding tags in the [Metrics Summary][5] and [Metrics Explorer][6].
+The Datadog Firehose Nozzle consumes information from your deployment's Loggregator (PCF's system for aggregating deployment metrics and application logs). The nozzle collects internal nozzle metrics, application metrics, organization metrics, and logs from the Firehose, and adds the corresponding tags and application metadata it collects from the CAPI. You can configure the metadata filter from the Cluster Monitoring Tile for the Datadog Firehose Nozzle with an allow- and deny-list mechanism. Specify which metadata to add to the metrics collected from the nozzle, and view the metrics and their corresponding tags in the [Metrics Catalog][5] and the [Metrics Explorer][6].
 
 #### Metadata Collected
 
@@ -70,7 +70,7 @@ The Datadog Buildpack installs the lightweight Datadog Container Agent and Datad
    - Tags extracted from the `VCAP_APPLICATION` environment variable (for example, `application_id`, `name`, `instance_index`, `space_name`, `uris`), and the `CF_INSTANCE_IP` environment variable for the `cf_instance_ip` tag.
    - Tags added using the `DD_TAGS` environment variable.
 
-These tags are present in the metrics, traces, and logs collected by the Datadog Agent. Depending on the data collected, view it in the [Metrics Explorer][5] or [Metrics Summary][6], the [Trace Explorer][8], or the [Log Explorer][9].
+These tags are present in the metrics, traces, and logs collected by the Datadog Agent. Depending on the data collected, view it in the [Metrics Explorer][5] or the [Metrics Catalog][6], the [Trace Explorer][8], or the [Log Explorer][9].
 
 ## Further Reading
 
