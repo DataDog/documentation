@@ -116,6 +116,18 @@ describe("startCdocsPreferences", () => {
     expect(link(1).getAttribute("href")).toContain("prog_lang=go");
   });
 
+  it("adds them on pointer down, for a click without a hover first", async () => {
+    writePreferences({ prog_lang: "go" });
+    renderPage({
+      url: "/guides/other/",
+      links: ["/dd_e2e/cdocs/custom_instrumentation/"],
+    });
+    await start();
+    link(0).dispatchEvent(new Event("pointerdown", { bubbles: true }));
+
+    expect(link(0).getAttribute("href")).toContain("prog_lang=go");
+  });
+
   it("prefers the current URL's params to stored ones", async () => {
     writePreferences({ prog_lang: "go" });
     renderPage({

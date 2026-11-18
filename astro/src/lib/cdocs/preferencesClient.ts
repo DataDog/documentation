@@ -19,7 +19,14 @@ interface StartOptions {
   fetchTraitsList?: (url: string) => Promise<CdocsTraitsList>;
 }
 
-const LINK_INTENT_EVENTS = ["pointerover", "touchstart", "focusin"] as const;
+// `pointerdown` covers a click on a link that was already under the pointer
+// when the page appeared, which gets no `pointerover` until the pointer moves.
+const LINK_INTENT_EVENTS = [
+  "pointerover",
+  "pointerdown",
+  "touchstart",
+  "focusin",
+] as const;
 
 /** Start the script. Returns a function that stops it, for tests. */
 export function startCdocsPreferences(options: StartOptions = {}): () => void {
