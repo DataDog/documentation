@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { loadCustomizationConfig } from '../../../src';
+import { loadCustomizationConfig } from '../../../src/api/compilation/loadCustomizationConfig';
 import {
   INVALID_CONFIGS_DIR,
   VALID_CUSTOMIZATION_CONFIG_DIR,

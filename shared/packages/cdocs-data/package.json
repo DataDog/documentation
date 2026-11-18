@@ -1,6 +1,6 @@
 {
   "name": "cdocs-data",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Utilities for working with customizable docs data",
   "packageManager": "yarn@4.10.3",
   "type": "module",
@@ -29,6 +29,10 @@
     "./CdocsClientStorage": {
       "import": "./dist/api/browser/CdocsClientStorage.js",
       "types": "./dist/api/browser/CdocsClientStorage.d.ts"
+    },
+    "./loadCustomizationConfig": {
+      "import": "./dist/api/compilation/loadCustomizationConfig.js",
+      "types": "./dist/api/compilation/loadCustomizationConfig.d.ts"
     },
     "./buildFiltersManifest": {
       "import": "./dist/api/compilation/buildFiltersManifest.js",
