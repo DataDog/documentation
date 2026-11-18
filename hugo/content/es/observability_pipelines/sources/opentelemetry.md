@@ -27,7 +27,7 @@ title: Fuente de OpenTelemetry
 Utilice la fuente de OpenTelemetry (OTel) de Observability Pipelines para recopilar registros o métricas desde su OTel Collector a través de HTTP o gRPC.
 
 **Notas**:
-- Si está utilizando la distribución de Datadog del Collector de OpenTelemetry (DDOT), utilice la fuente de OpenTelemetry para [enviar datos a Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- Si está utilizando el Collector del Agent, el OpenTelemetry Collector que se ejecuta junto al Datadog Agent como un proceso independiente, utilice la fuente OpenTelemetry para [enviar datos a Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
 - Si está utilizando la distribución de Splunk HEC del Collector de OpenTelemetry, utilice la [fuente Splunk HEC][4] para enviar registros a Observability Pipelines.
 
 ### Cuándo utilizar esta fuente {#when-to-use-this-source}
@@ -55,7 +55,7 @@ Después de seleccionar la fuente OpenTelemetry en la interfaz de usuario de la 
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
-### Configuración de TLS opcional {#optional-tls-settings}
+### Configuración opcional de TLS {#optional-tls-settings}
 
 {{% observability_pipelines/tls_settings %}}
 
@@ -166,13 +166,13 @@ Establezca las variables de entorno de la dirección de escucha en los siguiente
 {{% /tab %}}
 {{< /tabs >}}
 
-## Enviar datos desde la distribución de Datadog del OpenTelemetry Collector a Observability Pipelines {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
+## Enviar datos desde el Collector del Agent a Observability Pipelines {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
 
 {{< tabs >}}
 {{% tab "Registros" %}}
 
-Para enviar registros desde la distribución de Datadog del OpenTelemetry (DDOT) Collector:
-1. Despliegue el DDOT Collector usando Helm. Consulte [Instalar el DDOT Collector como un DaemonSet de Kubernetes][5] para obtener instrucciones.
+Para enviar registros desde el Collector del Agent:
+1. Implemente el Collector del Agent mediante Helm. Consulte [Configurar el Collector del Agent como un DaemonSet de Kubernetes][5] para obtener instrucciones.
 1. [Configure una canalización][6] en Observability Pipelines usando la [fuente de OpenTelemetry](#set-up-the-source-in-the-pipeline-ui).
     1. (Opcional) Datadog recomienda agregar un [procesador de edición de campos][7] a la canalización que añada el campo `op_otel_ddot:true` en caso de que el registro no tenga el campo `source`.
     1. Cuando instale el Worker, para las variables de entorno de la fuente de OpenTelemetry:
@@ -198,11 +198,11 @@ Para enviar registros desde la distribución de Datadog del OpenTelemetry (DDOT)
         ```
 
 **Notas**:
-- Debido a que DDOT envía registros a Observability Pipelines y no al Datadog Agent, la siguiente configuración no funciona para enviar registros desde DDOT a Observability Pipelines:
+- Debido a que el Collector del Agent envía registros a Observability Pipelines y no al Datadog Agent en sí, los siguientes ajustes no funcionan para enviar registros desde el Collector del Agent a Observability Pipelines:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
-- Los registros enviados desde DDOT pueden tener objetos anidados que impiden que Datadog realice el parseo de los registros correctamente. Para resolver esto, Datadog recomienda usar el [Custom Processor][8] para aplanar el objeto `resource` anidado.
-- Si el DDOT Collector y el Observability Pipelines Worker se ejecutan en el mismo servidor, sus puertos de receptor OTLP predeterminados (4317/4318) pueden entrar en conflicto. En una implementación típica de Kubernetes, el Collector y el Worker se ejecutan en pods separados, por lo que esto no es un problema.
+- Los registros enviados desde el Collector del Agent pueden tener objetos anidados que impiden que Datadog realice el parseo de los registros correctamente. Para resolver esto, Datadog recomienda usar el [Custom Processor][8] para aplanar el objeto `resource` anidado.
+- Si el Collector del Agent y el Observability Pipelines Worker se ejecutan en el mismo servidor, sus puertos de receptor OTLP predeterminados (4317/4318) pueden entrar en conflicto. En una implementación típica de Kubernetes, el Collector y el Worker se ejecutan en pods separados, por lo que esto no es un problema.
 
 [5]: /es/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /es/observability_pipelines/configuration/set_up_pipelines/
@@ -214,8 +214,8 @@ Para enviar registros desde la distribución de Datadog del OpenTelemetry (DDOT)
 
 {{% tab "Métricas" %}}
 
-Para enviar métricas desde la distribución de Datadog del OpenTelemetry (DDOT) Collector:
-1. Despliegue el DDOT Collector usando Helm. Consulte [Instalar el DDOT Collector como un DaemonSet de Kubernetes][5] para obtener instrucciones.
+Para enviar métricas desde el Collector del Agent:
+1. Implemente el Collector del Agent mediante Helm. Consulte [Configurar el Collector del Agent como un DaemonSet de Kubernetes][5] para obtener instrucciones.
 1. [Configure una canalización][6] en Observability Pipelines usando la [fuente de OpenTelemetry](#set-up-the-source-in-the-pipeline-ui).
     1. (Opcional) Datadog recomienda agregar un [procesador de edición de campos][7] a la canalización que anexe el campo `op_otel_ddot:true`.
     1. Cuando instale el Worker, para las variables de entorno de la fuente de OpenTelemetry:
@@ -241,11 +241,11 @@ Para enviar métricas desde la distribución de Datadog del OpenTelemetry (DDOT)
         ```
 
 **Notas**:
-- Debido a que DDOT envía métricas a Observability Pipelines, y no al Datadog Agent, la siguiente configuración no funciona para enviar métricas desde DDOT a Observability Pipelines:
+- Debido a que el Collector del Agent envía métricas a Observability Pipelines y no al Datadog Agent en sí, los siguientes ajustes no funcionan para enviar métricas desde el Collector del Agent a Observability Pipelines:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
-- Las métricas enviadas desde DDOT pueden tener objetos anidados que impiden que Datadog realice el parseo de las métricas correctamente. Para resolver esto, Datadog recomienda usar el [Custom Processor][8] para aplanar el objeto `resource` anidado.
-- Si el DDOT Collector y el Observability Pipelines Worker se ejecutan en el mismo servidor, sus puertos de receptor OTLP predeterminados (4317/4318) pueden entrar en conflicto. En una implementación típica de Kubernetes, el Collector y el Worker se ejecutan en pods separados, por lo que esto no es un problema.
+- Las métricas enviadas desde el Collector del Agent pueden tener objetos anidados que impiden que Datadog realice el parseo de las métricas correctamente. Para resolver esto, Datadog recomienda usar el [Custom Processor][8] para aplanar el objeto `resource` anidado.
+- Si el Collector del Agent y el Observability Pipelines Worker se ejecutan en el mismo servidor, sus puertos de receptor OTLP predeterminados (4317/4318) pueden entrar en conflicto. En una implementación típica de Kubernetes, el Collector y el Worker se ejecutan en pods separados, por lo que esto no es un problema.
 
 [5]: /es/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /es/observability_pipelines/configuration/set_up_pipelines/

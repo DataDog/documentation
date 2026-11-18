@@ -7,7 +7,7 @@ Para configurar Database Monitoring, revise las arquitecturas de configuración 
 
 {{< whatsnext desc="Planifique su configuración:" >}}
     {{< nextlink href="database_monitoring/architecture" >}}<strong>Arquitecturas de configuración</strong>: Aprenda cómo se conecta el Agent a bases de datos autohospedadas y administradas.{{< /nextlink >}}
-    {{< nextlink href="database_monitoring/agent_integration_overhead" >}}<strong>Sobrecarga de integración del Agent</strong>: Conozca la sobrecarga que supone integrar el Datadog Agent con su base de datos.{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/agent_integration_overhead" >}}<strong>Sobrecarga de integración del Agent</strong>: Aprenda sobre la sobrecarga de integrar el Datadog Agent con su base de datos.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Configure su base de datos:" >}}
@@ -18,6 +18,7 @@ Para configurar Database Monitoring, revise las arquitecturas de configuración 
     {{< nextlink href="database_monitoring/setup_oracle" >}}Oracle{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_mongodb" >}}MongoDB{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_clickhouse" >}}ClickHouse{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/setup_db2" >}}IBM Db2{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_documentdb" >}}Amazon DocumentDB{{< /nextlink >}}
 {{< /whatsnext >}}
 

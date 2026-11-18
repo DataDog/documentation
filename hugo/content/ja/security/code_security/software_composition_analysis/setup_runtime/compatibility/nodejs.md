@@ -4,20 +4,19 @@ code_lang_weight: 50
 title: Node.js 互換性要件
 type: multi-code-lang
 ---
+## Code Security 機能 {#code-security-capabilities}
 
-## Code Security capabilities
+指定されたトレーサーバージョンにおいて、Node.js ライブラリでサポートされている Code Security 機能は以下のとおりです。
 
-The following code security capabilities are supported in the Node.js library, for the specified tracer version:
-
-| Code Security capability                       | Minimum Node.js tracer version                     |
+| Code Security 機能                       | 必要な Node.js tracer の最小バージョン                     |
 |------------------------------------------------|----------------------------------------------------|
 | Runtime Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Runtime Code Analysis (IAST)                   | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
+| Runtime Code Analysis (IAST)                   | Node.js 16+ の場合は 4.18.0、Node.js 18+ の場合は 5.0.0   |
 
 Node.js でサポートされるすべてのアプリケーションセキュリティ機能を利用するための最小トレーサーバージョンは、Node.js 16+ の場合は 4.18.0、Node.js 18+ の場合は 5.0.0 です。
 
-### サポートされるデプロイメントタイプ
-| タイプ        | Threat Detection のサポート | ソフトウェア構成分析 |
+### サポートされているデプロイメントタイプ {#supported-deployment-types}
+| タイプ        | Threat Detection のサポート | Software Composition Analysis |
 |-------------|--------------------------|-------------------------------|
 | Docker      | {{< X >}}                | {{< X >}}                     |
 | Kubernetes  | {{< X >}}                | {{< X >}}                     |
@@ -33,25 +32,45 @@ Node.js でサポートされるすべてのアプリケーションセキュリ
 | AWS Fargate       | {{< X >}}                                   | Preview (4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+)  |
 | AWS Lambda        |                                             |                                                             |
 
-## 言語とフレームワークの互換性
+## 言語とフレームワークの互換性 {#language-and-framework-compatibility}
 
-### Node.js のバージョンサポート
+### Node.js のバージョンサポート {#nodejs-version-support}
 
-Node.js プロジェクトが LTS のメジャーリリースラインのサポートを終了すると (EOL になると)、次のメジャーバージョンの `dd-trace` でそのサポートが停止されます。
-`dd-trace` ライブラリの最後のメジャーサポートリリースラインは、メンテナンスモードベースで、少なくともあと 1 年間はその EOL バージョンの Node.js をサポートします。
+Node.js プロジェクトが LTS メジャーリリースラインのサポートを終了 (EOL) すると、`dd-trace` の次のメジャーバージョンでもそのサポートが終了します。
+`dd-trace` ライブラリの最後のメジャーサポートリリースラインは、その EOL バージョンの Node.js をメンテナンスモードで少なくともあと 1 年間サポートします。
 
-いくつかの問題は `dd-trace` で解決できず、代わりに Node.js で解決しなければなりません。このような場合、問題のある Node.js のリリースが EOL であれば、EOL ではない別のリリースに移行しなければ問題を解決することは不可能です。
-Datadog は、LTS でない Node.js のメジャーリリースライン (奇数バージョン) に対する特定のサポートを提供するために、`dd-trace` の新しいリリースを作成することはありません。
+一部の問題は `dd-trace` では解決できず、Node.js 側で解決する必要があります。これが発生し、該当する Node.js リリースが EOL である場合、EOL ではない別のリリースに移行せずに問題を解決することはできません。
+Datadog は、非 LTS の Node.js メジャーリリースライン (奇数番号のバージョン) に対する特定のサポートを提供するための `dd-trace` の新しいリリースを作成しません。
 
-最高のサポートレベルを得るためには、常に最新の LTS リリースの Node.js と、最新のメジャーバージョンの `dd-trace` を実行します。Node.js のどのリリースラインを使用する場合でも、最新のセキュリティ修正を確実に行うために、そのリリースラインの最新バージョンの Node.js を使用します。
+最良のサポートを受けるには、常に最新の LTS リリースの Node.js と、`dd-trace` の最新メジャーバージョンを実行してください。どの Node.js リリースラインを使用する場合でも、そのリリースラインにおける最新バージョンの Node.js を使用して、最新のセキュリティ修正が適用されていることを確認してください。
 
 Node.js のリリースについては、[Node.js の公式ドキュメント][4]を参照してください。
 
+### ECMAScript モジュール (ESM) {#ecmascript-modules-esm}
 
+Runtime Software Composition Analysis は、アプリケーションが読み込むパッケージを報告します。`import` ステートメントまたは `import()` 呼び出しを通じて ECMAScript モジュール (ESM) として読み込まれたパッケージは、Datadog ESM ローダーが登録されている場合にのみ報告されます。これには `dd-trace` 6.24.0 以降 (v5 リリースラインでは 5.135.0 以降) が必要です。
 
-### オペレーティングシステム対応
+```sh
+node --import dd-trace/register.js --require dd-trace/init app.js
+```
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example application security capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+ESM ローダーがない場合、`require()` を使用して読み込まれたパッケージのみが報告されます。
+
+これは、Next.js など実行時に `import()` を使用してパッケージを読み込むフレームワークにも適用されます。[トレーサーのセットアップ][45] の起動オプションはそのままで、ESM ローダーを追加します。
+
+```sh
+NODE_OPTIONS='--import dd-trace/register.js --require dd-trace/init' next start
+```
+
+#### 制限事項 {#limitations}
+
+- Node.js 18.19 以降では、`--import dd-trace/register.js` を使用します。ESM として読み込まれたパッケージは、`--loader dd-trace/loader-hook.mjs` では報告されません。
+- アプリケーションの出力にバンドルされたパッケージ (たとえば esbuild や webpack を使用したもの) は、実行時に `node_modules` から読み込まれないため、報告されません。バンドルされなかったパッケージは報告されます。
+- Yarn Plug'n'Play を使用する場合は、Yarn 4.11.0 以降を使用します。Node.js 22.22.3+、24.11.1+、25.1+、または 26 で ESM ローダーが登録されている場合、以前のバージョンでは起動時に失敗します。
+
+### オペレーティングシステム対応 {#operating-system-support}
+
+以下のオペレーティングシステムは、`dd-trace` によって公式にサポートされています。リストに記載されていないオペレーティングシステムでも動作する可能性はありますが、アプリケーションセキュリティ機能、プロファイリング、ランタイムメトリクスなどの一部の機能を利用できない場合があります。一般的に、メジャーバージョンの初期リリース時にアクティブにメンテナンスされているオペレーティングシステムはサポートされます。
 
 
 | オペレーティングシステム | アーキテクチャ | 最小バージョン                         |
@@ -65,14 +84,14 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 
 
-### Web フレームワークの互換性
+### Web フレームワークの互換性 {#web-framework-compatibility}
 
 - HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
+- アプリケーション内の攻撃フローを確認するための分散トレーシング
 
-##### Code Security Capability Notes
-- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
-- フレームワークが下記に記載されていない場合でも、**Runtime Code Analysis (IAST)** は、弱い暗号 (Weak Cipher)、弱いハッシュ (Weak Hashing)、安全でないクッキー (Insecure Cookie)、HttpOnly フラグのないクッキー、SameSite フラグのないクッキーの脆弱性を検出します。
+##### Code Security 機能に関する注意事項 {#code-security-capability-notes}
+- **Runtime Software Composition Analysis (SCA)** はすべてのフレームワークでサポートされています
+- お使いのフレームワークが以下に記載されていない場合でも、**Runtime Code Analysis (IAST)** は Weak Cipher、Weak Hashing、Insecure Cookie、HttpOnly フラグのない Cookie、および SameSite フラグのない Cookie の脆弱性を検出します。
 
 
 | フレームワーク | バージョン | Runtime Code Analysis (IAST) |
@@ -80,61 +99,61 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | express   | >=4      | {{< X >}}                    |
 | nextjs    | >=11.1   |                              |
 
-<div class="alert alert-info">サポートされていない機能または Node.js フレームワークのサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">サポートされていない機能や、お使いの Node.js フレームワークのサポートの追加をご希望の場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
 
-### ネットワーキングフレームワークの互換性
+### ネットワーキングフレームワークの互換性 {#networking-framework-compatibility}
 
 
-**ネットワーキングのトレーシングでは以下の確認が可能です**
+**ネットワーキングのトレーシングでは以下の確認が可能です。**
 
-- アプリケーションの分散型トレーシング
+- アプリケーションの分散トレーシング
 - リクエストベースのブロッキング
 
-##### Code Security Capability Notes
-- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
+##### Code Security 機能に関する注意事項 {#code-security-capability-notes-1}
+- **Runtime Software Composition Analysis (SCA)** はすべてのフレームワークでサポートされています
 
 | フレームワーク | Runtime Code Analysis (IAST) | 
 |-----------|------------------------------|
 | http      | {{< X >}}                    |
 | https     | {{< X >}}                    |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">お使いのフレームワークがリストにない場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
-### データストアの互換性
+### データストアの互換性 {#data-store-compatibility}
 
-**データストアのトレーシングでは以下の確認が可能です**
+**データストアのトレーシングでは以下の確認が可能です。**
 
-- クエリ情報 (サニタイジングされたクエリ文字列など)
+- クエリ情報 (サニタイズされたクエリ文字列など)
 - エラーとスタックトレースの取得
 
-##### Code Security Capability Notes
-- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
+##### Code Security 機能に関する注意事項 {#code-security-capability-notes-2}
+- **Runtime Software Composition Analysis (SCA)** はすべてのフレームワークでサポートされています
 
 | フレームワーク                | バージョン  | Runtime Code Analysis (IAST) |
 |--------------------------|-----------|------------------------------|
-| [@apollo/server][43]     | `4 以降`     |                              |
-| [apollo-server-core][44] | `3 以降`     |                              |
-| [cassandra-driver][28]   | `3 以降`     |                              |
-| [couchbase][29]          | `2.4.2 以降`  |                              |
-| [elasticsearch][30]      | `10 以降`    |                              |
-| [ioredis][31]            | `2 以降`     |                              |
-| [knex][32]               | `0.8 以降`   |                              |
-| [mariadb][5]             | `3 以降`     |                              |
-| [memcached][33]          | `2.2 以降`   |                              |
-| [mongodb-core][34]       | `2 以降`     | {{< X >}}                    |
-| [mysql][35]              | `2 以降`     | {{< X >}}                    |
-| [mysql2][36]             | `1 以降`     | {{< X >}}                    |
+| [@apollo/server][43]     | `>=4`     |                              |
+| [apollo-server-core][44] | `>=3`     |                              |
+| [cassandra-driver][28]   | `>=3`     |                              |
+| [couchbase][29]          | `^2.4.2`  |                              |
+| [elasticsearch][30]      | `>=10`    |                              |
+| [ioredis][31]            | `>=2`     |                              |
+| [knex][32]               | `>=0.8`   |                              |
+| [mariadb][5]             | `>=3`     |                              |
+| [memcached][33]          | `>=2.2`   |                              |
+| [mongodb-core][34]       | `>=2`     | {{< X >}}                    |
+| [mysql][35]              | `>=2`     | {{< X >}}                    |
+| [mysql2][36]             | `>=1`     | {{< X >}}                    |
 | [oracledb][37]           | `>=5`     |                              |
-| [pg][38]                 | `4 以降`     | {{< X >}}                    |
-| [redis][39]              | `0.12 以降`  |                              |
-| [sharedb][40]            | `1 以降`     |                              |
-| [tedious][41]            | `1 以降`     |                              |
-| [sequelize][42]          | `4 以降`     | {{< X >}}                    |
+| [pg][38]                 | `>=4`     | {{< X >}}                    |
+| [redis][39]              | `>=0.12`  |                              |
+| [sharedb][40]            | `>=1`     |                              |
+| [tedious][41]            | `>=1`     |                              |
+| [sequelize][42]          | `>=4`     | {{< X >}}                    |
 
 
 [1]: /ja/tracing/trace_collection/compatibility/nodejs/
-[2]: /ja/agent/remote_config/#enabling-remote-configuration
+[2]: /ja/remote_configuration#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -154,3 +173,4 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 [42]: https://github.com/sequelize/sequelize
 [43]: https://github.com/apollographql/apollo-server
 [44]: https://www.npmjs.com/package/apollo-server-core
+[45]: /ja/tracing/trace_collection/dd_libraries/nodejs/

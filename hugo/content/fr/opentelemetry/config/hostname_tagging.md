@@ -35,7 +35,7 @@ La configuration appropriée dépend de la manière dont vous envoyez la télém
 
 ### Ingestion OTLP par le Datadog Agent {#otlp-ingestion-by-the-datadog-agent}
 
-Déployez le Datadog Agent sur chaque host qui génère de la télémétrie OTLP. Datadog ne prend pas en charge l'envoi de télémétrie depuis un host vers un Agent sur un autre host. Pour obtenir des instructions de configuration, consultez [Ingestion OTLP par le Datadog Agent][11].
+Déployez le Datadog Agent sur chaque host qui génère de la télémétrie OTLP. Datadog ne prend pas en charge l'envoi de télémétrie depuis un host vers un Agent sur un autre host. Pour obtenir des instructions de configuration, consultez [Configurer l’endpoint OTLP de l’Agent][11].
 
 Si la télémétrie entrante ne contient pas d'[attributs de nom de host][8] valides, Datadog utilise le nom de host de l'Agent. Si vous définissez `host.name`, `host.id` ou un autre attribut de nom de host, définissez-le sur le nom de host de l'Agent pour éviter les hosts en double. Pour remplacer la résolution du nom de host, définissez l'attribut de ressource `datadog.host.name` sur le nom de host de l'Agent.
 
@@ -49,7 +49,7 @@ Le reste de la configuration dépend du fait que le Collector DDOT s'exécute ou
 
 Cela s'applique au Collector DDOT en tant que [DaemonSet Kubernetes][9] et sur les hosts [Linux][14] et [Windows][15].
 
-Comme le Collector DDOT s'exécute à l'intérieur du Datadog Agent, les attributs de nom de host sur la télémétrie entrante peuvent correspondre à un nom différent de celui du nom de host de l'Agent. Un seul nœud apparaît alors comme deux hosts. Pour utiliser le nom de host de l'Agent à la place, activez `allow_hostname_override` :
+Comme le Collector de l’Agent s’exécute dans un processus distinct du Datadog Agent, les attributs de nom d’hôte de la télémétrie entrante peuvent correspondre à un nom différent de celui de l’Agent. Un seul nœud apparaît alors comme deux hosts. Pour utiliser le nom de host de l'Agent à la place, activez `allow_hostname_override` :
 
 ```yaml
 processors:

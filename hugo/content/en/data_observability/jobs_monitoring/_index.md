@@ -13,6 +13,9 @@ further_reading:
   - link: '/data_observability/cicd/'
     tag: 'Documentation'
     text: 'CI/CD'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitor'
   - link: "https://www.datadoghq.com/blog/data-observability/"
     tag: "Blog"
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"

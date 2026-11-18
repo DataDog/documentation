@@ -11,9 +11,9 @@ further_reading:
   text: "Database Monitoring"
 ---
 
-<div class="alert alert-info">
-This feature is in preview and requires Datadog Agent v7.86 or later. Customers who participate in the Datadog Database Monitoring for IBM Db2 preview <strong>are not charged</strong> for usage incurred during the preview period. To request access, contact your Datadog account team.
-</div>
+{{< callout url="https://app.datadoghq.com/forms/share/425ec42e050693d6be9304a14b0df5eb1d1c32c191bedbb58ada77718464dc81" btn_hidden="false" header="Join the Preview!" >}}
+Database Monitoring for IBM Db2 is available in Preview for organizations using Datadog Agent version 7.86 or later! Request access and share feedback about what functionality would help the most with your IBM Db2 instances.
+{{< /callout >}}
 
 <!-- vale Datadog.headings = NO -->
 ### IBM Db2 versions supported
