@@ -3977,7 +3977,7 @@ function internalWorkflow() {
 
 {{% tab "Java" %}}
 
-Span processors require dd-trace-java v1.66.0 or later. Implement `LLMObsSpanProcessor` and register it with `LLMObs.registerProcessor()`. Only one processor can be registered at a time: registering a second one throws an `IllegalStateException`. To replace a processor, call `LLMObs.deregisterProcessor()` first.
+Span processors require `dd-trace-java` 1.66.0 or later. Implement `LLMObsSpanProcessor` and register it with `LLMObs.registerProcessor()`. You can register only one processor at a time. Registering a second processor throws an `IllegalStateException`. To replace a processor, call `LLMObs.deregisterProcessor()` first.
 
 ### Example
 
