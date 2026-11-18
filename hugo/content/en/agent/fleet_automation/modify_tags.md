@@ -11,7 +11,7 @@ further_reading:
 
 ## Prerequisites
 
-- Agent version 7.82 or later. To upgrade your Agents, see [Upgrade Agents][5].
+- Agent version 7.82 or later. To upgrade your Agents, see [Upgrade Agents][4].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
 - [Remote Configuration][3] enabled for your organization and for the API key your Agents use. Both are enabled by default.
 
@@ -38,7 +38,7 @@ When a deployment has multiple tag rules, Fleet Automation applies them in order
     <div class="alert alert-tip">To check how your changes affect a specific Agent, preview its configuration diff in the <strong>Configuration Summary</strong> panel.</div>
 
 1. Review the deployment plan. Fleet Automation generates a configuration diff for each affected Agent so you can verify the exact changes.
-1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][6].
+1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][5].
 
 ## Further Reading
 
@@ -47,6 +47,5 @@ When a deployment has multiple tag rules, Fleet Automation applies them in order
 [1]: https://app.datadoghq.com/fleet/agent-management
 [2]: /getting_started/tagging/
 [3]: /agent/guide/setup_remote_config
-[4]: /agent/guide/setup_remote_config/#enable-remote-agent-management
-[5]: /agent/fleet_automation/upgrade_agents/
-[6]: https://app.datadoghq.com/fleet/deployments
+[4]: /agent/fleet_automation/upgrade_agents/
+[5]: https://app.datadoghq.com/fleet/deployments
