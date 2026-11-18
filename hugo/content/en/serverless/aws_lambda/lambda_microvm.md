@@ -79,7 +79,7 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
    CMD ["node", "--require", "dd-trace/init", "app.js"]
    ```
 
-   The `--require dd-trace/init` option initializes the tracer before loading application code. If `app.js` already calls `require('dd-trace').init()` before importing other libraries, use `CMD ["node", "app.js"]` instead.
+   The `--require dd-trace/init` option initializes the SDK before loading application code. If `app.js` already calls `require('dd-trace').init()` before importing other libraries, use `CMD ["node", "app.js"]` instead.
 
    For more information, see [Tracing Node.js Applications](/tracing/trace_collection/dd_libraries/nodejs/).
 
