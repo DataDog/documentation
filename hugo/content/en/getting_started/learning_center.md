@@ -43,5 +43,11 @@ Datadog is an extensive platform for understanding your infrastructure. [The Dat
 
 For a list of available courses, see [Courses][2].
 
+## Browse the catalog
+
+The [Learning Center Course Catalog][3] lists every public course by product area, and [Learning Center Learning Paths][4] lists each learning path with its courses in order.
+
 [1]: https://learn.datadoghq.com
 [2]: https://learn.datadoghq.com/collections
+[3]: /getting_started/learning_center/courses/
+[4]: /getting_started/learning_center/learning_paths/
