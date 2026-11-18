@@ -67,11 +67,13 @@ For more information, see [Bits Autonomous Operations][8].
 
 ## Custom automations
 
-Custom automations are agents built with [Bits Agent Builder][10] that do a specific task.
+Custom automations orchestrate agents built with [Bits Agent Builder][10] to do specific tasks.
 
 You can build a custom automation for almost any task in Datadog that requires an agent step. For example, a custom automation can send your team's Slack channel a daily summary of error rates for a service. Or, a custom automation can review the logs for each new security signal, decide if the signal is a false positive, then notify the team if the signal needs follow-up.
 
-To create and manage custom automations, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Custom Automations{{< /ui >}}][12]. From there, you can create automations, turn them on or off, review each automation run, and manage the agents that your automations use.
+To create and manage custom automations in Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Custom Automations{{< /ui >}}][12]. From there, you can create automations, turn them on or off, review each automation run, and manage the agents that your automations use.
+
+You can also build and manage custom automations with [Bits Chat][2] or with a coding agent.
 
 <div class="alert alert-info">For a preconfigured agent that handles ongoing operational work, use <a href="#autonomous-ops">Autonomous Ops</a> instead of a custom automation.</div>
 
