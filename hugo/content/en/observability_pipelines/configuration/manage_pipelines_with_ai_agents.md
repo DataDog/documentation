@@ -35,7 +35,7 @@ A new pipeline does not process data until you [install the Worker][1] for it. C
 How an update is made to an active pipeline depends on the tool used to make the change:
 
 - **Bits in the pipeline builder**: Changes stay on the pipeline's Edit page. The pipeline keeps running its deployed configuration until you click {{< ui >}}Next: Deploy changes{{< /ui >}}.
-- **Pup CLI and the API**: There is no review or deploy step. The new configuration is pushed to your Workers through Remote Configuration and **goes live immediately** on every Worker running the pipeline.
+- **Pup CLI and the API**: There is no review or deploy step. The new configuration is pushed to your Workers and **goes live immediately** on every Worker running the pipeline.
 
 <div class="alert alert-danger">Updating an active pipeline with Pup or the API is <b>unsafe</b>. See <a href="#risks-of-updating-pipelines-with-pup-or-the-api">Risks of updating pipelines with Pup</a> before you let an agent update a pipeline.</div>
 
