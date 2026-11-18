@@ -28,3 +28,15 @@ entries:
       - DeleteCloudWorkloadSecurityAgentRule
       - UpdateCloudWorkloadSecurityAgentRule
     title: Make legacy Workload Protection agent rule write operations private
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41917
+    operations:
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentRule
+      - GetCSMThreatsAgentRule
+      - GetCloudWorkloadSecurityAgentRule
+      - ListCSMThreatsAgentRules
+      - ListCloudWorkloadSecurityAgentRules
+      - UpdateCSMThreatsAgentRule
+    title: Fix CSM Threats agent rule error response schemas

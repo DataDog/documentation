@@ -241199,7 +241199,11 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all Workload Protection agent rules
@@ -241249,11 +241253,23 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a Workload Protection agent rule
@@ -241274,9 +241290,17 @@ paths:
         "204":
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Workload Protection agent rule
@@ -241310,9 +241334,17 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Workload Protection agent rule
@@ -241366,13 +241398,29 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConcurrentModificationResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Concurrent Modification
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a Workload Protection agent rule
@@ -259003,7 +259051,11 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all Workload Protection agent rules (US1-FED)
@@ -259041,9 +259093,17 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Workload Protection agent rule (US1-FED)
