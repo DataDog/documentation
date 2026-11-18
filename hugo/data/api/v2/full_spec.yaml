@@ -175549,14 +175549,25 @@ paths:
       operationId: ListContainerImages
       parameters:
         - description: |-
-            Comma-separated `key:value` tags. An image must match every tag. Wildcards, negation
-            (`-key:value`), spaces, and `IN (...)` are not supported. Use keys such as `image_registry`
-            and `image_tag`. To match any of several values of the same key, make one request per value.
-          example: short_image:redis,status:running
+            Comma-separated `key:value` tags. An image must match every tag. Use keys such as `short_image`,
+            `image_tag`, `image_registry`, and `image_repository`. Each tag starts with a letter and contains only
+            letters, digits, `_`, `-`, `.`, `/`, `@`, and `:`. Values match exactly and are case-sensitive
+            (`short_image:Redis` matches nothing if the image is `redis`).
+            In a value, `*` matches any run of characters, including none. It can appear anywhere in the value and
+            more than once, and it can't be escaped. For example, `short_image:redis*` matches `redis` and
+            `redis-stack`, and `image_tag:v1.*` matches `v1.2.0`.
+            These return `400 Bad Request`, with the reason in `errors[0].detail`: a `*` in a key or in a tag
+            without `:` (`image_*:latest`, `*:latest`, `redis*`), a `?`, a leading `-` (negation), spaces (so `OR`
+            and `IN (...)` can't be used), an empty value (`image_tag:`), and more than 1024 characters in total.
+            A `*` in the value of the numeric and date keys `size`, `container_count`, `built_at`, `published_at`,
+            and `vulnerability_scan_at` also returns 400, but its `detail` is only `Bad Request`. To match unrelated
+            values of one key, make one request per value.
+          example: short_image:redis*,status:running
           in: query
           name: filter[tags]
           required: false
           schema:
+            maxLength: 1024
             type: string
         - description: |-
             Comma-separated list of up to three tag keys, such as `image_registry,image_tag`. Returns
@@ -175709,14 +175720,23 @@ paths:
       operationId: ListContainers
       parameters:
         - description: |-
-            Comma-separated `key:value` tags. A container must match every tag. Wildcards, negation
-            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
-            request per host.
-          example: env:prod,short_image:cassandra
+            Comma-separated `key:value` tags. A container must match every tag. Each tag starts with a letter and
+            contains only letters, digits, `_`, `-`, `.`, `/`, `@`, and `:`. Values match exactly and are
+            case-sensitive (tags are usually lowercase).
+            In a value, `*` matches any run of characters, including none. It can appear anywhere in the value and
+            more than once, and it can't be escaped. For example, `env:prod*` matches `env:prod` and `env:prod-eu`,
+            `kube_namespace:*-web` matches `kube_namespace:shop-web`, and `container_id:a4cf*` matches containers
+            whose ID starts with `a4cf`.
+            These return `400 Bad Request`, with the reason in `errors[0].detail`: a `*` in a key or in a tag
+            without `:` (`kube_*:prod`, `*:prod`, `prod*`), a `?`, a leading `-` (negation), spaces (so `OR` and
+            `IN (...)` can't be used), an empty value (`env:`), and more than 1024 characters in total. To match
+            unrelated values of one key, make one request per value.
+          example: env:prod*,short_image:cassandra
           in: query
           name: filter[tags]
           required: false
           schema:
+            maxLength: 1024
             type: string
         - description: |-
             Comma-separated list of up to three tag keys to group containers by. Returns `container_group`
@@ -235324,14 +235344,23 @@ paths:
           schema:
             type: string
         - description: |-
-            Comma-separated `key:value` tags. A process must match every tag. Wildcards, negation
-            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
-            request per host.
-          example: account:prod,user:admin
+            Comma-separated `key:value` tags. A process must match every tag. Each tag starts with a letter and
+            contains only letters, digits, `_`, `-`, `.`, `/`, `@`, and `:`. Values match exactly and are
+            case-sensitive (tags are usually lowercase, so `env:PROD` matches nothing if the tag is `env:prod`).
+            In a value, `*` matches any run of characters, including none. It can appear anywhere in the value and
+            more than once, and it can't be escaped. For example, `env:prod*` matches `env:prod` and `env:prod-eu`,
+            `service:*web*` matches `service:checkout-web-1`, and `env:*` matches any process with an `env` tag.
+            These return `400 Bad Request`, with the reason in `errors[0].detail`: a `*` in a key or in a tag
+            without `:` (`kube_*:prod`, `*:prod`, `prod*`), a `?`, a leading `-` (negation), spaces (so `OR` and
+            `IN (...)` can't be used), an empty value (`env:`), and more than 1024 characters in total. A `*` in the
+            value of `started`, `infra_type`, or `apm_instrumented` also returns 400, but its `detail` is only
+            `Bad Request`. To match unrelated values of one key, make one request per value.
+          example: env:prod*,user:admin
           in: query
           name: tags
           required: false
           schema:
+            maxLength: 1024
             type: string
         - description: |-
             Start of the query window, in Unix seconds. Must be within the past 36 hours and at most 1 hour
