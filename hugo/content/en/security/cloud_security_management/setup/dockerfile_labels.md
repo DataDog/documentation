@@ -60,8 +60,6 @@ You can combine both methods. For example, merge Datadog pull requests to add th
 
 ## Add labels with Datadog pull requests
 
-<div class="alert alert-info">Adding labels with Datadog pull requests is in Preview.</div>
-
 Datadog can scan your GitHub repositories for Dockerfiles and open pull requests that add the image source labels.
 
 ### Prerequisites
