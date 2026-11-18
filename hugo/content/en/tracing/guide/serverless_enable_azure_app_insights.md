@@ -29,12 +29,20 @@ When Application Insights is enabled on your workloads and your Azure logs are f
 
 After conversion, the spans behave like any other Datadog APM spans. They appear in the same waterfall view, support trace search, and correlate with your logs and metrics.
 
-## Prerequisites
+## Request access
 
-Before you can use the Azure App Insights Integration, set up the following:
+The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form][4]. The Datadog team responds within one week to confirm access. After Datadog confirms access, the **Azure Application Insights** option appears on the **Generate APM Traces** page, and you can [enable trace generation](#setup).
+
+## Setup
+
+To set up the Azure App Insights Integration, complete the following steps:
 
 1. **Enable Azure Application Insights** on the Azure workloads you want to trace, using the classic Application Insights SDK. If your workload uses the [Azure Monitor OpenTelemetry Distro][5], see [OpenTelemetry in Datadog][6] instead.
 2. **Configure [Azure Automated Log Forwarding][2]** to forward Azure App Insights Logs to Datadog. Confirm that metrics and resource collection are enabled in the [Microsoft Azure integration][1], so spans can be enriched with Azure resource metadata.
+3. **Enable trace generation** in Datadog. This setting is available only after Datadog confirms your [Preview access](#request-access).
+   1. Go to [**Logs** > **Configuration** > **Generate APM Traces**][7].
+   2. In the **Azure Application Insights** row, click **Set Up**.
+   3. Turn on **Generate traces**, then click **Save**.
 
 {{% serverless/log_to_trace_indexing_note %}}
 
@@ -51,13 +59,10 @@ Datadog enriches converted spans with Azure resource metadata for the following 
 
 Traces from other Azure services are converted into APM spans, but without Azure resource metadata enrichment.
 
-## Request access
-
-The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form][4]. The Datadog team responds within one week to confirm access.
-
 ## Limitations
 
 - **Preview status.** The integration is in Preview with a limited design-partner cohort. Access is granted after sign-up through the Preview form.
+- **No trace sampling.** Datadog converts 100% of incoming Application Insights logs into traces. Datadog does not support sampling for these traces. To reduce trace volume, configure [sampling in Application Insights][8].
 - **Resource metadata enrichment is service-specific.** Spans for Azure services outside the [supported list](#supported-azure-services) are converted but not enriched with Azure resource metadata.
 - **Mixed-format trace hierarchy depends on span links.** Some Azure workloads emit a mix of the legacy hierarchical Request-Id format and W3C Trace Context. Datadog connects the two formats with [span links][3], so you can navigate between related traces.
 
@@ -71,3 +76,5 @@ The Azure App Insights Integration is in Preview. To request access, sign up thr
 [4]: https://www.datadoghq.com/product-preview/azure-app-insights-integration/
 [5]: https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable
 [6]: /opentelemetry/
+[7]: https://app.datadoghq.com/logs/apm-traces#azure_app_insights
+[8]: https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/app/sampling-classic-api
