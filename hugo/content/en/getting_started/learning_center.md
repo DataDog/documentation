@@ -45,7 +45,7 @@ For a list of available courses, see [Courses][2].
 
 ## Browse the catalog
 
-The [Learning Center Course Catalog][3] lists every public course by product area, and [Learning Center Learning Paths][4] lists each learning path with its courses in order.
+The [Learning Center Course Catalog][3] lists self-paced courses by product area, and [Learning Center Learning Paths][4] lists learning paths with their courses in order. For the full catalog, see [Courses][2].
 
 [1]: https://learn.datadoghq.com
 [2]: https://learn.datadoghq.com/collections

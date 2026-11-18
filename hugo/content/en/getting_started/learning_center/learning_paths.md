@@ -5,9 +5,9 @@ description: Curated sequences of Datadog Learning Center courses, listed in the
 
 ## Overview
 
-Learning paths group Learning Center courses into a recommended sequence for a role or product area. Take the courses in the order listed. For every available course, see the [Learning Center Course Catalog][1].
+Learning paths group Learning Center courses into a recommended sequence for a role or product area. Take the courses in the order listed. For course descriptions, see the [Learning Center Course Catalog][1].
 
-## Core Skills Learning Path
+## Core skills learning path
 
 This learning path covers the basics of navigation, tagging best practices, Metrics, Monitors, and Dashboards in Datadog.
 
@@ -20,9 +20,9 @@ This learning path covers the basics of navigation, tagging best practices, Metr
 5. [Introduction to Dashboards][7]
 6. [Getting Started with Notebooks][8]
 
-## Configuration Learning Path
+## Configuration learning path
 
-This learning path covers the basics of Datadog Agent on a Host and on Docker, Integrations, Universal Service Monitoring (USM) & Software Catalog, and tagging best practices.
+This learning path covers the basics of Datadog Agent on a Host and on Docker, Integrations, Universal Service Monitoring (USM) & Catalog, and tagging best practices.
 
 [View the learning path][9]
 
@@ -32,7 +32,7 @@ This learning path covers the basics of Datadog Agent on a Host and on Docker, I
 4. [Getting Started with Integrations][12]
 5. [Getting Started with Universal Service Monitoring (USM)][13]
 
-## Backend Engineer Learning Path
+## Backend engineer learning path
 
 This learning path covers the basics of Application Performance Monitoring (APM), Log Explorer, and Infrastructure & Cloud Network Monitoring (CNM) in Datadog.
 
@@ -42,9 +42,9 @@ This learning path covers the basics of Application Performance Monitoring (APM)
 2. [Getting Started with Log Explorer][16]
 3. [Getting Started with Infrastructure and Cloud Network Monitoring][17]
 
-## Frontend Engineer Learning Path
+## Frontend engineer learning path
 
-This learning path covers the basics of Real User Monitoring (RUM), Synthetics Monitoring & Browser Testing, Application Performance Monitoring (APM), and Log Explorer in Datadog.
+This learning path covers the basics of Real User Monitoring (RUM), Synthetic Monitoring & Browser Testing, Application Performance Monitoring (APM), and Log Explorer in Datadog.
 
 [View the learning path][18]
 
@@ -53,9 +53,9 @@ This learning path covers the basics of Real User Monitoring (RUM), Synthetics M
 3. [Getting Started with APM Metrics & Traces][15]
 4. [Getting Started with Log Explorer][16]
 
-## Site Reliability Engineer Learning Path
+## Site reliability engineer learning path
 
-This learning path covers the basics of Application Performance Monitoring (APM), Infrastructure & Cloud Network Monitoring (CNM), and Service Level Objectives (SLOs), and Incident Response in Datadog.
+This learning path covers the basics of Application Performance Monitoring (APM), Infrastructure & Cloud Network Monitoring (CNM), and service level objectives (SLOs), and Incident Response in Datadog.
 
 [View the learning path][21]
 
@@ -64,7 +64,7 @@ This learning path covers the basics of Application Performance Monitoring (APM)
 3. [Getting Started with Infrastructure and Cloud Network Monitoring][17]
 4. [Getting Started with Service Level Objectives (SLOs)][23]
 
-## Application Security Engineer Learning Path
+## Application security engineer learning path
 
 This learning path covers the basics of Application Performance Monitoring (APM), Application and API Protection (AAP), and Incident Response in Datadog.
 
@@ -75,7 +75,7 @@ This learning path covers the basics of Application Performance Monitoring (APM)
 3. [Block Application Attacks with Application & API Protection][26]
 4. [Getting Started with Incident Management][22]
 
-## Cloud Security Engineer - Cloud SIEM Learning Path
+## Cloud Security engineer - Cloud SIEM learning path
 
 This learning path covers the basics of Log Explorer, Cloud SIEM, and Incident Response in Datadog.
 
@@ -85,7 +85,7 @@ This learning path covers the basics of Log Explorer, Cloud SIEM, and Incident R
 2. [Detect and Investigate Threats with Cloud SIEM][28]
 3. [Getting Started with Incident Management][22]
 
-## Cloud Security Engineer Learning Path
+## Cloud Security engineer learning path
 
 This learning path covers the basics of Infrastructure & Cloud Network Monitoring (CNM), Cloud Security, Workload Protection, and Incident Response in Datadog.
 
@@ -96,7 +96,7 @@ This learning path covers the basics of Infrastructure & Cloud Network Monitorin
 3. [Detect Host and Container Compromises with Workload Protection][31]
 4. [Getting Started with Incident Management][22]
 
-## Dashboards Learning Path
+## Dashboards learning path
 
 This learning path covers creating, customizing, and optimizing dashboards for real-time data monitoring in Datadog.
 
@@ -106,9 +106,9 @@ This learning path covers creating, customizing, and optimizing dashboards for r
 2. [Discovering Graph Widgets][33]
 3. [Discovering Table, List, SLO, and Architecture Widgets][34]
 
-## Application Performance Monitoring Learning Path
+## Application Performance Monitoring learning path
 
-This learning path covers investigating, tracking, and managing metrics and traces in Datadog Application Performance Management (APM).
+This learning path covers investigating, tracking, and managing metrics and traces in Datadog APM.
 
 [View the learning path][35]
 
@@ -119,7 +119,7 @@ This learning path covers investigating, tracking, and managing metrics and trac
 5. [Create Custom Spans and Span Tags with APM][39]
 6. [APM Rate Limiting and Retention][40]
 
-## Log Querying & Analytics Learning Path
+## Log querying & analytics learning path
 
 This learning path covers querying, analyzing, and investigating logs using Datadog Log Management.
 
@@ -131,7 +131,7 @@ This learning path covers querying, analyzing, and investigating logs using Data
 4. [Track Logs for Alerting and Investigations][44]
 5. [Log Analytics with Notebooks][45]
 
-## Log Configuration & Processing Learning Path
+## Log configuration & processing learning path
 
 This learning path covers log configuration, collection, processing and indexing for Datadog Log Management.
 
@@ -145,7 +145,7 @@ This learning path covers log configuration, collection, processing and indexing
 6. [Manage and Monitor Indexed Log Volumes][52]
 7. [Getting Started with Observability Pipelines][53]
 
-## Kubernetes Monitoring Learning Path
+## Kubernetes monitoring learning path
 
 This learning path covers the foundation of monitoring Kubernetes with Datadog.
 
@@ -157,7 +157,7 @@ This learning path covers the foundation of monitoring Kubernetes with Datadog.
 4. [Monitoring a Kubernetes Cluster: Troubleshooting Workloads][58]
 5. [Progressive Delivery on Kubernetes][59]
 
-## Attacks & Threat Detection Learning Path
+## Attacks & threat detection learning path
 
 This learning path covers detecting, investigating, and responding to threats and attacks using Datadog.
 
@@ -168,7 +168,7 @@ This learning path covers detecting, investigating, and responding to threats an
 3. [Detect and Investigate Threats with Cloud SIEM][28]
 4. [Detect Web Application Attacks with App & API Protection][25]
 
-## Agent Observability Metrics & Traces Learning Path
+## Agent Observability metrics & traces learning path
 
 This learning path covers building observability into AI-powered systems and using Agent Observability metrics and traces to analyze performance, errors, and model behavior.
 
@@ -178,9 +178,9 @@ This learning path covers building observability into AI-powered systems and usi
 2. [Tracing AI Applications][63]
 3. [Investigate with Agent Observability][64]
 
-## Actions & Remediations Learning Path
+## Actions & remediations learning path
 
-This learning path covers automating actions and remediations using Datadog App Builder and Workflow Automation.
+This learning path covers automating actions and remediations using App Builder and Workflow Automation in Datadog.
 
 [View the learning path][65]
 
@@ -189,7 +189,7 @@ This learning path covers automating actions and remediations using Datadog App 
 3. [Remediate Issues with Workflow Automation][68]
 4. [Automating Meaningful Actions with Datadog Workflow Automation][69]
 
-## AWS Configuration
+## AWS configuration
 
 This learning path covers configuring the Datadog AWS integration, installing the Datadog Agent on Amazon EC2, and sending AWS logs to Datadog.
 
@@ -199,7 +199,7 @@ This learning path covers configuring the Datadog AWS integration, installing th
 2. [Install the Datadog Agent on Amazon EC2][72]
 3. [Send AWS Logs to Datadog][73]
 
-## Code Security Learning Path
+## Code Security learning path
 
 This learning path covers finding and fixing code vulnerabilities with Static Code Analysis (SAST), detecting and blocking leaked secrets, and remediating Infrastructure as Code (IaC) misconfigurations with Datadog Code Security.
 
