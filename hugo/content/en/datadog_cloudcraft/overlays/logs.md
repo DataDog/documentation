@@ -19,11 +19,13 @@ site_support_id: cloudcraft_logs_overlay
 
 ## Overview
 
-The Logs overlay shows logs from your cloud resources in the context of your Cloudcraft diagram. Use it to view the logs from a resource without leaving the architecture view.
+The Logs overlay shows logs from your cloud resources in the context of your Cloudcraft diagram. Use it to investigate a resource's logs without leaving the architecture view.
 
-To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram. The overlay adds a pin to each supported resource that has logs. If a resource has logs with more than one status, the pin shows the most severe status.
+To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Logs overlay in Cloudcraft showing the log search panel with a list of recent logs on the left, and red log pins and status counts such as Emergency, Error, and Warn on resources in an AWS architecture diagram." style="width:100%;" >}}
+The overlay adds a pin to each supported resource that has logs. If a resource has logs with more than one status, the pin shows the most severe status.
+
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay with a log search panel, and log pins and status counts on resources in an AWS diagram." style="width:100%;" >}}
 
 ### Supported resource types
 
@@ -58,16 +60,16 @@ Enable Log Management in your Datadog organization. To start collecting logs, se
 
 ## Investigate logs
 
-The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. On the diagram, resources show the number of logs for each status, such as `260 Emergency` or `28 Error`.
+The Logs overlay shows a search bar, a list of log results, and the pins on your diagram. On the diagram, resources show the number of logs for each status, for example, **260 Emergency** or **28 Error**.
 
 To investigate logs:
 
 1. In the search bar, enter a query to filter the logs. The search bar uses the standard [log search syntax][2].
-1. To change the time range, use the time selector next to the {{< ui >}}Group Patterns{{< /ui >}} toggle.
-1. (Optional) To group similar logs, turn on {{< ui >}}Group Patterns{{< /ui >}}. For more information, see [Patterns][4].
-1. In the list of results, click a log to open the log side panel and see the details of that log.
+1. Use the time selector next to the {{< ui >}}Group Patterns{{< /ui >}} toggle to change the time range.
+1. (Optional) Turn on {{< ui >}}Group Patterns{{< /ui >}} to group similar logs. For more information, see [Grouping Logs Into Patterns][4].
+1. In the list of results, click a log to see its details in the log side panel.
 
-To view the logs in the Log Explorer, click the open icon at the top right of the list of results.
+To view the logs in the Log Explorer, click {{< ui >}}Open in Log Explorer{{< /ui >}} at the top right of the list of results.
 
 ## Further reading
 
