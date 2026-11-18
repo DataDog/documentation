@@ -16,7 +16,6 @@ Use [granular access control][100] to limit who has access to your test based on
 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- |
-| No access    |                         |                         |                   |           |
 | Viewer       | Yes                     |                         | Yes               |           |
 | Runner       | Yes                     |                         | Yes               | Yes       |
 | Editor       | Yes                     | Yes                     | Yes               | Yes       |

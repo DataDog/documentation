@@ -373,12 +373,11 @@ Use [granular access control][17] to limit who has access to your test based on 
 
 <div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
-| Access level | View test configuration | Edit test configuration | View test results | View step results | Run test  | View recording | Edit recording |
-| ------------ | ----------------------- | ----------------------- | ------------------| ----------------- | --------- | -------------- | -------------- |
-| No access    |                         |                         |                   |                   |           |                |                |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         | {{< X >}}         |           |                |                |
-| Runner       | {{< X >}}               |                         | {{< X >}}         | {{< X >}}         | {{< X >}} |                |                |
-| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
+| Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
+| ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Runner       | {{< X >}}               |                         | {{< X >}}         | {{< X >}} |                |                |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 Viewing or editing a recording opens the recorder, which requires Editor access. Viewers and Runners can see each step and its screenshots in test results.
 
