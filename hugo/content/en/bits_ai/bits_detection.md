@@ -15,20 +15,21 @@ further_reading:
 
 Monitoring coverage drifts as engineers add endpoints, move dependencies, and change user flows. A service can look healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps that coverage current. Your existing monitors stay in place, and Bits Detection works alongside them.
 
+Bits Detection manages monitoring in three stages:
+
+- **Identify critical resources**: Bits Detection evaluates supported services and resources to determine which endpoints, dependencies, or flows are likely to be important to your users and business.
+- **Detect meaningful degradations**: Bits Detection creates and tunes managed monitors for critical resources.
+- **Adapt as services change**: Bits Detection keeps monitoring aligned with production by reassessing resource criticality, monitoring coverage, and alerting behavior as your services evolve.
+
 Bits Detection is the detection stage of [Bits Autonomous Operations][6] (Autonomous Ops). When Bits Detection flags an issue, Bits triages it and, if it needs action, investigates it with [Bits Investigation][4] and addresses it with [Bits Remediation][9].
 
-## Enable Bits Detection in an Autonomous Ops scope
+## Enable Bits Detection
 
-Bits Detection coverage is part of [Bits Autonomous Operations][6]. To enable it, create a scope that watches parts of your system.
+You enable Bits Detection by creating an Autonomous Ops scope. When you create a scope, Bits Detection provisions monitoring for the infrastructure resources in the scope. For services, Bits provisions monitoring when you turn on the Bits Managed Monitors option in the scope.
 
-1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}}][5] and click {{< ui >}}Create scope{{< /ui >}}.
-1. Select {{< ui >}}Watch parts of my system{{< /ui >}}, and enter tags for the services that you want Bits to cover.
-1. Turn on {{< ui >}}Enable Bits Managed Monitors for services{{< /ui >}}.
-1. Complete the rest of the scope, then click {{< ui >}}Create Scope{{< /ui >}}.
+For information about how to create scopes, see [Create a scope][7].
 
-For more information, see [Create a scope][7].
-
-### Permissions {#permissions}
+## Permissions {#permissions}
 
 Bits Detection uses existing Datadog role-based access control (RBAC) permissions. There are no permissions specific to Bits Detection.
 
@@ -80,14 +81,6 @@ Use feedback and guidance to tune how Bits detects and handles issues in your en
 ### Provide feedback on resource criticality
 
 Bits Detection uses criticality to determine which resources should have managed monitoring coverage. From the [service monitoring overview][2], click {{< ui >}}Mark as Not Critical{{< /ui >}} next to an endpoint that should not have critical coverage, or {{< ui >}}Add a New Endpoint{{< /ui >}} to mark one as critical.
-
-### Give Bits guidance for a scope
-
-When you create or edit an Autonomous Ops scope, use {{< ui >}}Give Bits guidance on how to operate{{< /ui >}} to describe in natural language which alerts are most important to your team. Bits uses this guidance when it triages issues in the scope. To update the guidance for an existing scope, open the scope and click {{< ui >}}Edit scope{{< /ui >}}. For more information, see [Create a scope][7].
-
-### Give feedback on investigations
-
-When Bits investigates an issue, use the thumbs-up or thumbs-down buttons on the conclusion and next steps to tell Bits whether it got the issue right. Bits saves your feedback as memories and applies them in future investigations. To review or delete memories, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Memories{{< /ui >}}][10]. For more information, see [Feedback and memories][11].
 
 ## Further reading
 

@@ -26,7 +26,7 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 
 ## Prerequisites
 
-- [Create monitors][7] that alert when your systems might be unhealthy. Bits triages alerts from these monitors to identify unique issues that warrant deeper investigation. In Preview, Bits can also create and manage monitors for you. For more information, see the [Create a scope](#create-a-scope) section.
+- [Create monitors][7] that alert when your systems might be unhealthy. Bits triages alerts from these monitors to identify unique issues that warrant deeper investigation.
 - To let Bits create pull requests for code fixes, [enable automatic code fixes][16].
 - To let Bits take infrastructure actions after you approve them:
   1. Set up the type of action that you want Bits to take:
@@ -41,7 +41,7 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 Some scope options are in Preview and might not be available in your organization. Contact your account manager for access.
 {{< /callout >}}
 
-You enable Autonomous Ops by creating one or more _scopes_. Each scope defines where Bits detects, triages, and investigates health and performance issues. A scope can cover the services that your team owns, the monitors for those services, or your team's Slack ops channel.
+You enable Autonomous Ops by creating one or more _scopes_. Each scope defines where Bits detects, triages, and investigates health and performance issues.
 
 ### Requirements
 
@@ -68,10 +68,13 @@ To create a scope:
    | {{< ui >}}Watch&nbsp;monitor&nbsp;alerts{{< /ui >}} | Enter a tag or query for the monitors that you want Bits to watch. |
    | {{< ui >}}Watch&nbsp;a&nbsp;Slack&nbsp;channel{{< /ui >}} | Select the Slack channel for Bits to join. Optionally, exclude monitors by tag. |
 
-1. Under {{< ui >}}Give Bits guidance on how to operate{{< /ui >}}, describe in natural language which alerts are most important to your team.
+1. Describe in natural language which alerts are most important to your team. You can also add specific runbook steps for Bits to follow.
+1. Configure Bits to post to one or more Slack channels when there is activity in this scope.
 1. Click {{< ui >}}Create Scope{{< /ui >}}.
 
-   After you create a scope, Bits watches the resources, monitors, or Slack channel in the scope for issues. Bits triages and investigates issues, then creates a remediation plan. Bits can apply the remediation plan within the [guardrails][18] that you set.
+   After you create a scope, Bits watches the monitors or Slack channel in the scope for issues. Bits triages and investigates issues, then creates a remediation plan. Bits can apply the remediation plan within the [guardrails][18] that you set.
+
+For information about how to add a quote for AI credit usage to your scopes, see the [Manage credit usage](#manage-credit-usage) section.
 
 ### View and manage scopes
 
