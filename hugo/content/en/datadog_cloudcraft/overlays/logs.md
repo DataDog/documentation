@@ -23,7 +23,7 @@ The Logs overlay shows logs from your cloud resources in the context of your Clo
 
 To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram.
 
-The overlay adds a pin to each supported resource that has logs. The pin shows the status of the most severe logs for that resource. It also shows the number of logs with that status, and a combined count of logs with all other statuses, for example, **9 Emergency, 14k other**.
+The overlay adds a pin to each supported resource that has logs. The pin shows the most severe log status for that resource and the number of logs with that status. A second count combines the logs with all other statuses, for example, **9 Emergency, 14k other**.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay with a log search panel, and log pins and status counts on resources in an AWS diagram." style="width:100%;" >}}
 
