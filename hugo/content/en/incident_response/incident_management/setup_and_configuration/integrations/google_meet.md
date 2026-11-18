@@ -67,11 +67,11 @@ Incident AI can generate summaries of incident Google Meet meetings and optional
 
 <div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion</a> in Meeting Summaries and Transcripts.</div>
 
-#### Prerequisites
+#### Prerequisites for meeting summaries and transcripts
 
 - AI features must be enabled for your organization.
 - You must use an account with permission to edit incident settings.
-- To save live meeting transcripts, your organization must have access to live meeting transcripts. If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][4].
+- If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][4].
 
 #### Enable meeting summaries and transcripts
 
