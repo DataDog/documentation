@@ -86,7 +86,7 @@ Scanning permissions:
 - `ec2:CreateTags`
 - `ec2:DeleteSnapshot`
 - `ec2:DeregisterImage`
-- `ec2:DescribeSnapshotAttribute`
+- `ec2:DescribeImages`
 - `ec2:DescribeSnapshots`
 - `ec2:DescribeVolumes`
 - `ecr:BatchGetImage`
@@ -118,7 +118,11 @@ Only when Sensitive Data Scanning (DSPM) is enabled:
 - `Microsoft.Compute/disks/read`
 - `Microsoft.Compute/disks/beginGetAccess/action`
 - `Microsoft.Compute/disks/endGetAccess/action`
+- `Microsoft.Compute/galleries/images/versions/read`
 - `Microsoft.ContainerRegistry/registries/pull/read`
+- `Microsoft.ContainerRegistry/registries/repositories/content/read` (data action)
+- `Microsoft.Web/sites/read`
+- `Microsoft.Web/sites/publish/Action`
 {% /collapse-content %}
 {% /if %}
 
@@ -254,7 +258,7 @@ This setup deploys the delegate role required for [cross-account scanning][2] ac
 1. Select {% ui %}Service-managed permissions{% /ui %}.
 1. Under {% ui %}Specify template{% /ui %}, select {% ui %}Amazon S3 URL{% /ui %} and enter the following URL:
    ```
-   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.9.1/datadog_agentless_delegate_role_stackset.yaml
+   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.22.1/datadog_agentless_delegate_role_stackset.yaml
    ```
 1. Enter a {% ui %}StackSet name{% /ui %} (for example, `DatadogAgentlessScanningStackSet`).
 1. Configure the {% ui %}ScannerInstanceRoleARN{% /ui %} parameter, which is the ARN of the IAM role attached to your Agentless scanner instances.

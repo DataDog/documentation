@@ -268,6 +268,7 @@ Utilisez les attributs suivants pour représenter l'objet conteneur dans vos rè
 | `container.pod.name`        | Le nom du pod exécutant le conteneur.                              |
 | `container.pod.namespace`   | L'espace de nom Kubernetes du pod.                                    |
 | `container.pod.annotations` | Les annotations appliquées au pod (carte clé-valeur).                     |
+| `container.pod.labels`      | Les étiquettes appliquées au pod (mappage clé-valeur). Nécessite **Agent v7.85+**. |
 
 ### Structure de configuration {#configuration-structure}
 
@@ -431,6 +432,12 @@ Pour exclure le conteneur avec une annotation de pod spécifique :
 container.pod.annotations["monitoring"] == "false"
 ```
 
+Pour exclure le conteneur portant une étiquette de pod spécifique :
+
+```yaml
+container.pod.labels["app"] == "redis"
+```
+
 Pour exclure le conteneur dans les espaces de noms sans la sous-chaîne `-dev` :
 
 ```yaml
@@ -523,7 +530,7 @@ spec:
 
 ### Tolérer les pods non prêts {#tolerate-unready-pods}
 
-Par défaut, les pods `unready` sont ignorés lorsque Datadog Agent planifie les vérifications. Par conséquent, les métriques, les vérifications de service et les logs ne sont pas collectés à partir de ces pods. Pour remplacer ce comportement, définissez l'annotation `ad.datadoghq.com/tolerate-unready` sur `"true"`. Exemple :
+Par défaut, les pods `unready` sont ignorés lorsque Datadog Agent planifie les vérifications. Par conséquent, les métriques, les vérifications de service et les logs ne sont pas collectés à partir de ces pods. Pour remplacer ce comportement, définissez l'annotation `ad.datadoghq.com/tolerate-unready` sur `"true"`. Par exemple :
 
 ```yaml
 apiVersion: v1

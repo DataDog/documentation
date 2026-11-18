@@ -11,6 +11,8 @@ further_reading:
 
 The steps on this page apply to self-hosted scanners. If you use Datadog-hosted scanning, Datadog updates the scanner automatically, and you don't need to take any action. For more information, see [Choose where scanners run][4].
 
+Scanner instances are replaced every 24 hours and install the latest patch release of the scanner version pinned by your deployment. Update your deployment to get new scanner versions, permission changes, and infrastructure fixes.
+
 ## Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly so you can get access to new features and bug fixes as they are released.

@@ -104,6 +104,7 @@ Les modèles de nom de canal prennent en charge un ensemble de variables différ
 | `{{dd}}` | The two-digit day of month the incident was created, in the timezone you configure for the channel name template. |
 | `{{severity}}` | The incident's severity. |
 | `{{severity_number}}` | The incident's severity, as a number (for example, `1` for `SEV-1`). |
+| `{{status}}` | The incident's status (for example, `active`, `stable`, or `resolved`). |
 | `{{random_adjective}}` | A random adjective. |
 | `{{random_noun}}` | A random noun. |
 | `{{slug}}` | A slug value. When the slug source is set to `servicenow`, ceci affiche le numéro d'enregistrement ServiceNow. |

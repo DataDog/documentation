@@ -63,3 +63,19 @@ entries:
       - ListFeatureFlagsEnvironments
       - UpdateFeatureFlagsEnvironment
     title: Document environment privacy settings and update behavior
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - UpdateAllocationsForFeatureFlagInEnvironment
+    title: Add the bandit reads to the Experiments API
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41822
+    operations:
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlagsEnvironments
+      - UpdateFeatureFlagsEnvironment
+    title: Remove key and description from Feature Flags environment responses

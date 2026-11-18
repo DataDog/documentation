@@ -29,7 +29,7 @@ You can run Agentless scanners in one of two ways:
 
 Both modes use the same scanning engine and produce the same findings. The difference is where the scanner runs. Self-hosted scanning remains fully supported. To compare the two, see [Choose where scanners run](#choose-where-scanners-run).
 
-<div class="alert alert-info">Agentless Scanning excludes resources that have the Datadog Agent installed.</div>
+<div class="alert alert-info">Agentless Scanning skips hosts where the Datadog Agent runs with both Cloud Security Vulnerabilities and Misconfigurations enabled. For other hosts with the Agent, Agentless Scanning only covers the features the Agent does not. See <a href="/security/cloud_security_management/troubleshooting/agentless_scanning#hosts-with-the-datadog-agent-are-not-scanned">Troubleshooting</a>.</div>
 
 ## Choose where scanners run
 
