@@ -4025,7 +4025,7 @@ LLMObsSpanProcessor filterProcessor = span -> {
 
 LLMObs.registerProcessor(filterProcessor);
 
-// This span will be filtered out and not sent to Datadog
+// This span is filtered out and not sent to Datadog
 LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("internal_workflow", null, null);
 workflowSpan.setTag("internal", "true");
 // ... workflow logic
