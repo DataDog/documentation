@@ -31,7 +31,9 @@ Custom OAuth Clients is in Preview for selected organizations. To request access
 
 ## Overview
 
-Custom OAuth Clients let you create private OAuth 2.0 clients in your Datadog organization. Use them to connect your own apps, internal tools, and AI agents to the Datadog API and the [Datadog MCP server][1]. You don't need to publish an app in the Datadog Marketplace.
+Custom OAuth Clients let you create private OAuth 2.0 clients in your Datadog organization. Use them to connect your own apps, internal tools, and AI agents to the Datadog API and the [Datadog MCP server][1].
+
+Custom clients are different from the apps in the Datadog Marketplace. A custom client belongs to the organization that created it. It isn't shared with other organizations, and only users in that organization can authorize it. Partners who build apps for other Datadog customers should keep using the [Datadog Marketplace][6].
 
 Each user signs in with their own Datadog account and approves the access the client requests. The client gets a short-lived access token tied to that user. Compared to API and application keys:
 
@@ -39,8 +41,6 @@ Each user signs in with their own Datadog account and approves the access the cl
 - Tokens are scoped to the permissions the client requests and the user holds.
 - Access tokens are short-lived, and the client renews them with a refresh token.
 - Admins can see and disable every custom client in one place.
-
-A custom client belongs to the organization that created it. Only users in that organization can authorize it.
 
 ### Supported flow
 
@@ -53,10 +53,7 @@ Custom OAuth Clients in Preview support:
 
 The following are not supported in Preview:
 
-- The Client Credentials grant (machine-to-machine access without a user).
 - Public clients without a client secret.
-- Secret rotation. Each client has one secret. To replace it, create another client and disable the old one.
-- Custom-scheme or loopback (`http://localhost`) redirect URIs.
 - Managing clients through the public API or Terraform. Use Organization Settings.
 
 ## Prerequisites
@@ -129,19 +126,11 @@ Your app uses the client ID and secret to run the standard Authorization Code fl
 
 For the full list of request parameters and responses, see [OAuth2 authorization endpoints][4].
 
-### What a token can do
-
-An access token can only use scopes that:
-
-- the client is allowed to request,
-- the user approved on the consent page, and
-- the user's own Datadog role grants.
-
-A user can't give an app more access than they have.
-
 ## Manage clients
 
-On the **Custom Clients** tab, you can see each active client and when a user last authorized it. Use the filter to show disabled clients.
+The **Custom Clients** tab lists your organization's custom clients. For each client, it shows the status, client ID, number of scopes, creator, creation date, and the last time a user authorized it. Use the **Status** filter to show active or disabled clients.
+
+{{< img src="account_management/custom_oauth_clients/custom-clients-list.png" alt="The Custom Clients tab in Organization Settings, showing one active custom client with its client ID, scopes, creator, creation date, and last authorization" style="width:100%;" >}}
 
 Click a client to open its details. From there you can:
 
@@ -172,3 +161,4 @@ Datadog records an event in [Audit Trail][5] when an admin creates, updates, or 
 [3]: /account_management/rbac/
 [4]: /extend/authorization/oauth2_endpoints/
 [5]: /account_management/audit_trail/
+[6]: /extend/integrations/marketplace_offering/
