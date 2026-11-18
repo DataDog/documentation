@@ -1,6 +1,6 @@
 ---
 title: Integrate Google Meet with Datadog Incident Management
-description: Create Google Meet meetings for Datadog incidents with one click or automatically, and generate AI meeting summaries.
+description: Create Google Meet meetings for Datadog incidents with one click or automatically, and generate AI meeting summaries and live transcript notebooks.
 further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/integrations"
   tag: "Documentation"
@@ -8,14 +8,14 @@ further_reading:
 - link: "/integrations/google-meet-incident-management/"
   tag: "Documentation"
   text: "Google Meet Incident Management Integration"
-- link: "/incident_response/incident_management/investigate/incident_ai/#meeting-summaries"
+- link: "/incident_response/incident_management/investigate/meeting_summaries_and_transcripts"
   tag: "Documentation"
-  text: "Meeting summaries in Incident AI"
+  text: "Meeting Summaries and Transcripts"
 ---
 
 ## Overview
 
-The Google Meet integration for Datadog Incident Management lets your team start a Google Meet meeting for an incident. You can create meetings with one click or automatically, based on criteria you define. You can also generate AI summaries of incident Google Meet meetings.
+The Google Meet integration for Datadog Incident Management lets your team start a Google Meet meeting for an incident. You can create meetings with one click or automatically, based on criteria you define. You can also generate live transcript notebooks and AI summaries of incident Google Meet meetings.
 
 ## Prerequisites
 
@@ -57,25 +57,34 @@ If the incident has a Slack channel, Datadog adds a bookmark for the Google Meet
 
 For more Slack features, see [Integrate Slack with Datadog Incident Management][3].
 
-### Meeting summaries
+### Meeting summaries and transcripts {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Meeting summaries and live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable AI-generated meeting summaries to automatically summarize incident Google Meet meetings.
+Incident AI can generate summaries of incident Google Meet meetings and optionally save live meeting transcripts in Datadog notebooks.
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. For retention details, see <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">Retention and deletion</a> in Meeting Summaries and Transcripts.</div>
 
-To enable meeting summaries for incident Google Meet meetings:
+#### Prerequisites
+
+- AI features must be enabled for your organization.
+- You must use an account with permission to edit incident settings.
+- To save live meeting transcripts, your organization must have access to live meeting transcripts. If the **Generate meeting transcripts** setting is unavailable, contact [Datadog Support][4].
+
+#### Enable meeting summaries and transcripts
+
+To enable meeting summaries and transcripts for incident Google Meet meetings:
 
 1. Navigate to [**Settings > Integrations**][2] and select **Google Meet**.
 2. Toggle on **Enable Google Meet creation**.
 3. Toggle on **Generate AI meeting summaries**.
-4. (Optional) Add conditions to prevent summarization for specific incidents. By default, Incident AI does not summarize meetings for private incidents.
-5. Save your settings.
+4. (Optional) To save live meeting transcripts, toggle on **Generate meeting transcripts**, which appears under **Generate AI meeting summaries**.
+5. (Optional) Add conditions to prevent summarization for specific incidents.
+6. Save your settings.
 
-For prerequisites, where summaries are posted, reviewing summaries, and re-inviting the transcriber, see [Meeting summaries in Incident AI][4].
+To review summaries, view transcripts, manage transcript notebook access, and re-invite the transcriber, see [Meeting Summaries and Transcripts][5].
 
 ## Further reading
 
@@ -84,4 +93,5 @@ For prerequisites, where summaries are posted, reviewing summaries, and re-invit
 [1]: /integrations/google-meet-incident-management/
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack
-[4]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+[4]: /help/
+[5]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts

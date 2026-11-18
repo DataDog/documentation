@@ -26,11 +26,11 @@ Les entrées <code>ml_obs.*</code> sur cette page sont des <a href="/metrics/">m
 Elles se distinguent de deux autres éléments dans Agent Observability :
 <ul>
 <li><strong>Données opérationnelles par span</strong> (coût, jetons, latence, erreurs sur chaque trace ou span individuel) : les valeurs brutes à partir desquelles ces métriques sont agrégées. Stockés avec les spans, ils suivent la <a href="/llm_observability/data_governance/#traces-and-spans">rétention des traces d'Agent Observability</a> et sont interrogés depuis le Trace Explorer plutôt que comme des métriques.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">Scores d'évaluation</a></strong> (également appelés « evals ») : jugements de qualité et de sécurité (par exemple, hallucination, fidélité, LLM-as-a-judge personnalisé) associés à des spans individuels ou à des lignes d'expérience. Ceux-ci ne sont pas dérivés de la télémétrie opérationnelle et suivent la <a href="/llm_observability/data_governance/">rétention des traces et des expériences d'Agent Observability</a> plutôt que la rétention des métriques Datadog.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">Scores d'évaluation</a></strong> (également appelés « evals ») : jugements de qualité et de sécurité (par exemple, hallucination, fidélité, LLM-as-a-judge personnalisé) associés à des spans individuels ou à des lignes d'expérimentation hors ligne. Ces scores ne sont pas issus de la télémétrie opérationnelle et suivent la <a href="/llm_observability/data_governance/">politique de conservation des traces Agent Observability et des expérimentations hors ligne</a>, plutôt que celle des métriques Datadog.</li>
 </ul>
 </div>
 
-<div class="alert alert-info">Les autres tags définis sur les spans ne sont pas disponibles en tant que tags sur les métriques d'Agent Observability.</div>
+<div class="alert alert-info">Les autres tags définis sur les spans ne sont pas disponibles en tant que tags sur les métriques Agent Observability, à l'exception des tags des métriques de tokens LLM et de coût. Consultez <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Tags personnalisés sur les métriques de coût et de tokens</a> pour plus d'informations.</div>
 
 ### Métriques de span {#span-metrics}
 

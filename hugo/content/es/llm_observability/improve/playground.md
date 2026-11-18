@@ -1,19 +1,19 @@
 ---
 aliases:
 - /es/llm_observability/playground/
-description: Utilice el Playground de Agent Observability para probar prompts de forma
-  interactiva con cualquier proveedor de modelos conectado y ejecutar experimentos
-  con evaluadores desde una interfaz basada en navegador.
+description: Utilice Agent Observability Playground para probar prompts de forma interactiva
+  con cualquier proveedor de modelos conectado y ejecutar experimentos offline con
+  evaluadores desde una interfaz basada en navegador.
 further_reading:
-- link: /llm_observability/improve/experiments
+- link: /llm_observability/improve/offline_experiments
   tag: Documentación
-  text: Experimentos de Agent Observability
+  text: Agent Observability Offline Experiments
 - link: /llm_observability/improve/datasets
   tag: Documentación
   text: Conjuntos de datos
-- link: /llm_observability/improve/experiments/analyzing_results
+- link: /llm_observability/guide/analyzing_experiment_results
   tag: Documentación
-  text: Análisis de los resultados del experimento
+  text: Análisis de resultados de experimentos offline
 title: Área de pruebas
 ---
 El [Playground][1] es una interfaz basada en navegador para probar y evaluar prompts de LLM. Puede probar un prompt con entrada arbitraria frente a cualquier proveedor de modelos conectado, o cargar un conjunto de datos, adjuntar evaluadores, obtener una vista previa de los resultados y guardar la configuración como un experimento reproducible, todo sin escribir código.
@@ -57,7 +57,7 @@ Edite los mensajes, los valores de las variables o la configuración del modelo,
 
 {{< img src="llm_observability/playground/playground-experiment-preview.png" alt="Agent Observability Playground en modo de experimento con todos los pasos completados y 'Guardar y ejecutar como experimento' activo. La tabla de vista previa del experimento muestra las columnas OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT y EXPECTEDOUTPUT con insignias PASS y FAIL por fila y un banner de resumen que indica que 6 de 20 registros pasaron." style="width:100%;" >}}
 
-Utilice el modo Experimentos para probar su prompt en un conjunto de datos, calificar los resultados con evaluadores y guardar la configuración como un experimento reproducible.
+Utilice el modo Offline Experiments para probar su prompt en un conjunto de datos, calificar los resultados con evaluadores y guardar la configuración como un experimento reproducible.
 
 ### Configure su prompt {#configure-your-prompt}
 
@@ -134,7 +134,7 @@ En el cuadro de diálogo:
 1. Seleccione {{< ui >}}Project{{< /ui >}}.
 1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-El experimento se ejecuta en todos los registros del conjunto de datos, no solo en la muestra de vista previa de 20 registros. Cuando termine, visualice los resultados en [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}}][2].
+El experimento se ejecuta en todos los registros del conjunto de datos, no solo en la muestra de vista previa de 20 registros. Cuando termine, visualice los resultados en [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Offline Experiments{{< /ui >}}][2].
 
 ## Lecturas adicionales {#further-reading}
 

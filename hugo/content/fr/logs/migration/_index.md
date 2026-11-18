@@ -23,7 +23,7 @@ Configurez le [Datadog Agent][1] pour collecter les logs à partir de fichiers, 
 
 ## Traduisez vos requêtes et ressources {#translate-your-queries-and-assets}
 
-Une fois vos logs dans Datadog, utilisez [Query Translation][3] pour convertir le Splunk Processing Language (SPL) en [syntaxe de recherche de logs][4] Datadog. Traduisez une requête à la fois, ou traduisez en masse les requêtes des alertes et des tableaux de bord Splunk, puis utilisez-les pour créer des monitors et des tableaux de bord Datadog. Query Translation prend uniquement en charge Splunk comme plateforme source.
+Une fois vos logs dans Datadog, utilisez les [Migration Tools][3] pour convertir le Splunk Processing Language (SPL) en [syntaxe de recherche de logs][4] Datadog. Traduisez une requête à la fois, ou traduisez en masse les requêtes des alertes et tableaux de bord Splunk et utilisez-les pour créer des monitors et des tableaux de bord Datadog. Les Migration Tools prennent uniquement en charge Splunk comme plateforme source.
 
 ## Pour aller plus loin {#further-reading}
 
@@ -31,5 +31,5 @@ Une fois vos logs dans Datadog, utilisez [Query Translation][3] pour convertir l
 
 [1]: /fr/agent/logs/
 [2]: /fr/integrations/
-[3]: /fr/logs/migration/query_translation/
+[3]: /fr/logs/migration/migration_tools/
 [4]: /fr/logs/explorer/search_syntax/

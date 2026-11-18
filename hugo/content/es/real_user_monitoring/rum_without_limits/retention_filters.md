@@ -1,9 +1,6 @@
 ---
 description: Aprenda cómo funcionan los filtros de retención en RUM without Limits.
 further_reading:
-- link: /real_user_monitoring/guide/retention_filter_best_practices/
-  tag: Guía
-  text: Prácticas recomendadas para filtros de retención
 - link: /real_user_monitoring/rum_without_limits/
   tag: Documentación
   text: RUM without Limits
@@ -13,12 +10,15 @@ further_reading:
 - link: /real_user_monitoring/rum_without_limits/retention_quotas
   tag: Documentación
   text: Controle los costos con cuotas de retención
-- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
-  tag: Blog
-  text: Unifique y correlacione datos de frontend y backend con filtros de retención
+- link: /real_user_monitoring/guide/retention_filter_best_practices/
+  tag: Guía
+  text: Prácticas recomendadas para filtros de retención
 - link: https://learn.datadoghq.com/courses/rum-retention-filters
   tag: Centro de aprendizaje
   text: 'Laboratorio interactivo: Filtros de retención de RUM'
+- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
+  tag: Blog
+  text: Unifique y correlacione datos de frontend y backend con filtros de retención
 title: Retenga datos con filtros de retención
 ---
 {{< learning-center-callout header="Pruebe los filtros de retención de RUM en el Centro de aprendizaje" btn_title="Inscríbase ahora" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}

@@ -34,10 +34,10 @@ title: Configurer le Collector OpenTelemetry
 ---
 ## Présentation {#overview}
 
-Envoyez des traces, des métriques et des logs à Datadog en utilisant le Collector OpenTelemetry. Les configurations sur cette page sont testées avec la distribution OpenTelemetry Collector Contrib v0.154.0 et utilisent un pipeline de télémétrie basé sur OTLP avec les composants clés suivants :
+Envoyez des traces, des métriques et des logs à Datadog en utilisant le Collector OpenTelemetry. Les configurations intégrées à cette page sont testées avec la distribution OpenTelemetry Collector Contrib v0.161.0 et utilisent un pipeline de télémétrie basé sur OTLP avec les composants clés suivants :
 
 - **Exportateur HTTP OTLP** : envoie la télémétrie aux endpoints d'ingestion OTLP de Datadog.
-- **Span metrics connector** : génère des métriques RED (Rate, Error, Duration) à partir des données de trace pour alimenter les fonctionnalités APM telles que Catalog et Service Page.
+- **Connecteur de métriques de span** : génère des métriques RED (taux, erreurs, durée) à partir des données de trace pour alimenter les fonctionnalités APM telles que Catalog et Service Page.
 - **Processeur de détection de ressources** : détecte les attributs des ressources de host et de cloud, que Datadog utilise pour la résolution du nom de host et le marquage.
 - **Extension Datadog** : Transmet la configuration du Collector à Datadog pour Fleet Automation. Elle n'exporte pas de données de télémétrie.
 
@@ -256,10 +256,10 @@ Consultez les [fichiers de configuration complets][500] pour une configuration o
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-Exécutez le Collector :
+Exécutez le Collector. Remplacez `<YOUR_DD_SITE>` par votre site Datadog : {{< region-param key="dd_site" code="true" >}}.
 
 ```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
   otelcol-contrib --config collector.yaml
 ```
 
@@ -464,7 +464,7 @@ docker run \
     -e OTEL_RESOURCE_ATTRIBUTES \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
-    otel/opentelemetry-collector-contrib:0.154.0 \
+    otel/opentelemetry-collector-contrib:0.161.0 \
     --config /etc/otelcol-contrib/config.yaml
 ```
 
@@ -969,7 +969,7 @@ Exemple avec les métriques d'instrumentation activées :
 }
 ```
 
-<div class="alert alert-info">La configuration recommandée du Collector OpenTelemetry utilise le connecteur <code>span_metrics</code> pour générer les métriques RED qui alimentent les vues APM. Les champs <code>trace_metrics.instrumentation_metrics_calc</code> et <code>raw_instrumentation_metrics_drop</code> prennent en charge une configuration alternative pour les installations qui dérivent les métriques de trace APM à partir des métriques d'instrumentation HTTP à la place. N'activez pas <code>instrumentation_metrics_calc</code> aux côtés du connecteur <code>span_metrics</code> car cela calcule les métriques de trace à partir des deux sources.</div>
+<div class="alert alert-info">La configuration recommandée du Collector OpenTelemetry utilise le connecteur <code>span_metrics</code> pour générer les métriques RED qui alimentent les vues APM. Le format <code>trace_metrics.instrumentation_metrics_calc</code> et <code>raw_instrumentation_metrics_drop</code> prennent en charge une configuration alternative pour les installations qui dérivent les métriques de trace APM à partir des métriques d'instrumentation HTTP à la place. N'activez pas <code>instrumentation_metrics_calc</code> aux côtés du connecteur <code>span_metrics</code> car cela calcule les métriques de trace à partir des deux sources.</div>
 
 ### Connecteur de transfert de traces {#trace-forward-connector}
 

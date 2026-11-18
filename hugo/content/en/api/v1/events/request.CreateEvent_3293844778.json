@@ -1,0 +1,7 @@
+{
+  "title": "Example-Event",
+  "text": "An event whose ID exceeds Number.MAX_SAFE_INTEGER.",
+  "tags": [
+    "test:ExampleEvent"
+  ]
+}

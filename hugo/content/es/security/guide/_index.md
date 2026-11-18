@@ -21,7 +21,6 @@ title: Guías de Security
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Guía de configuración de Azure para Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Haga un seguimiento de los registros de autenticación en busca de amenazas de seguridad{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Personalice qué registros analiza Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/" >}}Ingiera inteligencia de amenazas STIX{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security Guides:" >}}
