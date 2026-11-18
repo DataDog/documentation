@@ -46,7 +46,7 @@
     "request_schema_description": "Request to create or update a custom Agent Observability evaluator configuration."
   },
   "ListDatastores": {
-    "description": "Lists all datastores for the organization.",
+    "description": "Lists all datastores in the organization.",
     "summary": "List datastores"
   },
   "CreateDatastore": {
@@ -4526,7 +4526,7 @@
     "summary": "Delete a derived metric"
   },
   "GetDerivedMetric": {
-    "description": "Get the definition of a derived metric by name.",
+    "description": "Get the definition of a derived metric from its name.",
     "summary": "Get a derived metric"
   },
   "UpdateDerivedMetric": {

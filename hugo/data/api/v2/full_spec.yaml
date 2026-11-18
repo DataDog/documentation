@@ -161892,7 +161892,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/actions-datastores:
     get:
-      description: Lists all datastores for the organization.
+      description: Lists all datastores in the organization.
       operationId: ListDatastores
       responses:
         "200":
@@ -222828,7 +222828,7 @@ paths:
         permissions:
           - metric_tags_write
     get:
-      description: Get the definition of a derived metric by name.
+      description: Get the definition of a derived metric from its name.
       operationId: GetDerivedMetric
       parameters:
         - $ref: "#/components/parameters/MetricName"
