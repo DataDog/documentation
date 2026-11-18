@@ -123,6 +123,22 @@ The example below shows a segment-level breakout by country. Use this view to un
 
 {{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of a metric split by Country ISO Code, showing a bar chart of relative lift and a data table with control and treatment values per country." style="width:90%;" >}}
 
+### Interesting property breakouts
+
+Property analysis recommends charts where relative lift appears to differ across segmentation property values, such as device type or country. These properties describe subjects at their first experiment exposure.
+
+To open a recommended chart:
+
+1. Open the experiment's {{< ui >}}Overview{{< /ui >}} tab.
+1. Go to {{< ui >}}Deep-dive analysis{{< /ui >}}.
+1. In {{< ui >}}Interesting property breakouts{{< /ui >}}, click a metric and property pair, such as **Conversion Rate by Device Type**.
+
+The chart opens in a new tab with the metric split by the recommended property. It uses the experiment's [CUPED][15] setting. Hover over a recommendation to see its p-value, significance threshold, and number of property values tested.
+
+The panel shows up to eight recommendations at first. Use the show and hide controls to expand or collapse the list. The panel is hidden when no qualifying findings are available.
+
+Use recommendations to choose results to investigate further. See [Property Analysis][16] for the statistical test and how to interpret its findings.
+
 ### Copy SQL
 
 For [warehouse-native metrics][3], click {{< ui >}}Copy SQL{{< /ui >}} to copy a simplified version of the pipeline logic Datadog used to calculate the result. Paste the query into your warehouse to audit the result or run follow-up analysis.
@@ -151,3 +167,4 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [13]: /experiments/statistics/expected_regret_and_evsi/
 [14]: /experiments/statistics/lift_and_interval_calculations/#calculate-the-interval
 [15]: /experiments/statistics/cuped/
+[16]: /experiments/statistics/property_analysis/
