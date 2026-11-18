@@ -2,37 +2,46 @@
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación
-  text: Configuración de OpenTelemetry Collector
+  text: Configuración del OpenTelemetry Collector
 title: Métricas de Apache Web Server
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="Métricas de Apache de OpenTelemetry en un panel de Apache" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="Métricas de OpenTelemetry Apache en un dashboard de Apache" style="width:100%;" >}}
+El [receptor de Apache][1] recopila métricas de Apache Web Server.
 
-El [receptor de Apache][1] permite recopilar métricas de Apache Web Server. Configura el receptor de acuerdo con las especificaciones de la última versión de `apachereceiver`.
+Para obtener más información, consulte la documentación del proyecto OpenTelemetry para el [receptor de Apache][1].
 
-Para más información, consulta la documentación del proyecto de OpenTelemetry para el [receptor de Apache][1].
+## Configuración {#setup}
 
-## Configuración
+Este ejemplo utiliza identificadores de componentes de OpenTelemetry Collector Contrib v0.154.0. Para otras versiones o distribuciones, utilice los identificadores que admita su distribución.
 
-Para recopilar métricas de Apache Web Server con OpenTelemetry para su uso con Datadog:
+El receptor de Apache lee la página `server-status?auto` de su servidor. Antes de comenzar, [habilite `mod_status`][5] en su servidor Apache. Limite el acceso a la página de estado, por ejemplo a localhost, ya que muestra detalles sobre su servidor y sus solicitudes.
 
-1. Configura el [receptor de Apache][1] en tu configuración de OpenTelemetry Collector.
-2. Asegúrate de que OpenTelemetry Collector está [configurado para exportar a Datadog][4].
+Agregue las siguientes líneas a su configuración del Collector y establezca `endpoint` en la dirección de su página de estado:
 
-Consulta la [documentación del receptor de Apache][1] para obtener información detallada sobre las opciones y requisitos de configuración.
+```yaml
+receivers:
+  apache:
+    endpoint: http://localhost:8080/server-status?auto
+```
 
-## Datos recopilados
+Agregue `apache` a la lista `receivers` del pipeline de métricas en su configuración. Mantenga los procesadores que ya están en ese pipeline. La ingesta de métricas OTLP de Datadog solo acepta métricas delta y este receptor produce sumas acumulativas, por lo que el pipeline necesita `cumulativetodelta`. La [configuración recomendada del Collector][4] lo incluye.
+
+Para ver todas las opciones de configuración, consulte la [documentación del receptor de Apache][1].
+
+## Datos recopilados {#data-collected}
 
 {{< mapping-table resource="apache.csv">}}
 
-Consulta [Asignación de métricas de OpenTelemetry][2] para obtener más información.
+Para ver la asignación completa entre los nombres de métricas de OpenTelemetry y Datadog, consulte [Asignación de métricas de OpenTelemetry][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/apachereceiver
 [2]: /es/opentelemetry/guide/metrics_mapping/
 [4]: /es/opentelemetry/setup/collector_exporter/
+[5]: https://httpd.apache.org/docs/2.4/mod/mod_status.html

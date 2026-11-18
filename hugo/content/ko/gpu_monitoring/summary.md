@@ -19,6 +19,7 @@ title: GPU Monitoring Summary 페이지
 
 해당 섹션으로 이동하려면 아래 섹션 제목을 클릭하세요.
 - [전체 플릿 사용량](#usage-across-fleet)
+- [플릿 상태](#fleet-health)
 - [비용 및 활용도](#cost--utilization)
 - [할당 및 프로비저닝](#allocation-and-provisioning)
 - [워크로드 최적화 기회](#workload-optimization-opportunities)
@@ -31,11 +32,11 @@ title: GPU Monitoring Summary 페이지
 
 Datadog GPU Monitoring은 온프레미스 및 클라우드 장치 모두에 대한 관측 가능성을 하나의 통합된 보기에서 제공합니다.
 
-이 시각화에서는 주요 클라우드 공급자(AWS, GCP, Azure, Oracle Cloud), 온프레미스 환경 또는 Coreweave 및 Lambda Labs와 같은 GPUaaS 공급자에 걸친 전체 GPU 플릿을 세부적으로 분석하여 모든 Kubernetes 클러스터, 호스트 및 GPU 장치를 보여줍니다.
+이 시각화에서는 주요 클라우드 공급자(AWS, GCP, Azure, Oracle Cloud), 온프레미스 환경 또는 Coreweave 및 Lambda Labs와 같은 GPUaaS 공급자에 걸친 전체 GPU 플릿을 세부적으로 실시간 분석하여 모든 Kubernetes 클러스터, 호스트 및 GPU 장치를 보여줍니다.
 
-이 퍼널은 유휴 장치, 사용률이 낮은 GPU 코어, 리소스 재조정이 필요한 리소스 부족 등 팀의 리소스 활용 과정에서 발생하는 성능 문제나 프로비저닝 비효율성도 보여줍니다.
+또한 이 퍼널은 유휴 상태이거나 비효율적인 GPU 장치와 같은 성능 문제 또는 프로비저닝 비효율성을 강조하며, 이러한 문제가 월별로 어떻게 변화하는지 보여줍니다.
 
-{{< img src="gpu_monitoring/funnel-5.jpg" alt="'한눈에 보는 GPU 플릿'이라는 제목의 퍼널 시각화 전체, 활성 및 유효 장치 수, Kubernetes 할당 현황, 1주일 예측을 포함한 시간대별 장치 할당 현황을 표시합니다." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="'Your GPU fleet at a glance.'이라는 제목의 퍼널 시각화 클러스터, 호스트 및 장치별 플릿 규모, 월별 추세가 포함된 각 퍼널 스테이지별 장치 수, Kubernetes 할당량을 표시합니다." style="width:90%;" >}}
 
 퍼널의 단계는 다음과 같이 정의됩니다.
 - {{< ui >}}Total Devices{{< /ui >}}: GPU Monitoring이 올바르게 구성되어 메트릭을 보고하고 있는 GPU 장치 수
@@ -44,11 +45,32 @@ Datadog GPU Monitoring은 온프레미스 및 클라우드 장치 모두에 대�
 
 Kubernetes를 사용하고 Kubernetes 통합을 활성화한 경우, Kubernetes Allocation에 관한 추가 정보가 표시되어 GPU 장치 중 몇 개가 Kubernetes 워크로드에 {{< ui >}}Allocated{{< /ui >}}되는지 확인할 수 있습니다.
 
-### 시간 경과에 따른 장치 할당 {#device-allocation-over-time}
+### 용량 예측 {#capacity-forecasting}
 
 AI 워크로드에서 리소스 사용량이 예기치 않게 급증할 수 있습니다. 따라서 사용 가능한 GPU를 새로 유입되는 워크로드에 맞게 할당하는 것이 중요합니다. 이 섹션에서는 GPU를 과도하게 할당하여 유휴 상태로 두고 있는지, 리소스를 충분히 프로비저닝하지 않아 중요한 작업이 지연되고 있는지 파악할 수 있습니다.
 
 예를 들어, 할당된 장치 수의 예측값이 급증한다면 향후 워크로드에 추가 GPU 장치가 필요할 수 있습니다.
+
+하드웨어 조달은 시간이 많이 걸리는 과정일 수 있습니다. **Device Allocation Over Time** 위젯을 사용하여 선택한 기간의 과거 수요를 파악하고 향후 용량 요구 사항을 예측하세요.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="지난 일주일 동안의 총 장치 수, 할당된 장치 수, 활성 장치 수 및 유효 장치 수를 보여주는 Device Allocation Over Time 위젯으로, 현재 시점 이후로 연장되는 점선 형태의 일주일 예측치가 포함되어 있습니다." style="width:90%;" >}}
+
+또한 {{< ui >}}Group by{{< /ui >}}를 사용하여 장치 할당을 클러스터, 공급자, GPU 장치, 장치 유형 또는 클라우드 공급자와 같은 태그별로 그룹화할 수 있습니다. 이 기능은 해당 태그별로 플릿의 총 장치 수, 할당된 장치 수, 활성 장치 수 및 유효 장치 수를 세부적으로 분석합니다.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Active 보기가 선택된 상태에서 클러스터별로 그룹화된 Device Allocation Over Time 위젯으로, 지난 일주일 동안 클러스터별 활성 장치를 보여주는 누적 막대 차트와 활성 장치 수 기준 상위 클러스터 목록을 표시합니다." style="width:90%;" >}}
+
+## 플릿 상태 {#fleet-health}
+
+Fleet Health 섹션에서는 전체 플릿의 하드웨어 상태 문제를 한눈에 파악할 수 있습니다. 클러스터, 랙, NVLink 도메인 또는 공급자별로 그룹화하여 선택한 기간 동안의 상태 토폴로지 시각화를 확인할 수 있습니다. 예를 들어 랙별로 그룹화하면 각 타일은 랙을 나타내고, 타일 내의 각 사각형은 해당 랙의 호스트를 나타냅니다. 호스트를 클릭하여 관련 GPU 장치를 확인할 수 있습니다.
+
+시각화는 XID 오류 심각도에 따라 다음과 같이 색상이 지정됩니다.
+- 빨간색: 위험한 XID
+- 주황색: 치명적이지 않은 XID
+- 녹색: 정상
+
+이 색상 코딩을 사용하면 하드웨어 문제가 특정 그룹에 국한된 것인지 확인할 수 있습니다. 정확한 XID 오류 코드를 보려면 호스트 위에 마우스 포인터를 올리세요.
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="클러스터별로 그룹화된 Fleet Health 페이지로, 각 클러스터의 타일에는 호스트마다 GPU 상태에 따라 색상이 지정된 사각형이 표시됩니다. 각 타일에는 호스트 및 GPU 수가 나열됩니다." style="width:90%;" >}}
 
 ## 비용 및 활용도 {#cost-utilization}
 

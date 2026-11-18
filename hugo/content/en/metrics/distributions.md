@@ -48,7 +48,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
-However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Catalog page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
+However, on the Metrics Catalog page, you can enable advanced query functionality for your distribution, such as the calculation of globally accurate percentile aggregations for all queryable tags. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also adds support for threshold queries and standard deviation queries.
 
 {{< img src="metrics/distributions/metric_detail_enable_percentiles.mp4" alt="A user enabling advanced percentiles and threshold query functionality by clicking on configure under the advanced section of a metric detail panel" video=true width=80% >}}
 
@@ -72,8 +72,8 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Catalog page][4] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
-1. Select {{< ui >}}Enable percentiles{{< /ui >}}.
+1. Navigate to the [Metrics Catalog page][4] and click the {{< ui >}}Actions{{< /ui >}} dropdown.
+1. Select {{< ui >}}Manage Percentile Aggregations{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable percentiles for all metrics in the namespace, click the {{< ui >}}Percentile aggregations{{< /ui >}} toggle.
 
@@ -105,7 +105,7 @@ Distributions provide functionality that allows you to control the tagging for c
 
 To customize tagging:
 
-1. Click on your custom distribution metric name in the Metrics Catalog table to open the metrics details sidepanel.
+1. Click your custom distribution metric name in the metrics table on the Metrics Catalog page to open the metric's details side panel.
 2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
 3. Click the {{< ui >}}Custom...{{< /ui >}} tab to customize the tags you'd like to keep available for query. 
 

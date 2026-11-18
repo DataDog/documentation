@@ -111,7 +111,7 @@ Establecer un objetivo del 100% significa tener un presupuesto de error del 0%, 
 
 Todos los usuarios pueden visualizar los SLO y las [correcciones de estado de SLO](#slo-status-corrections), independientemente de su [rol][10] asociado. Solo los usuarios vinculados a roles con el permiso `slos_write` pueden crear, editar y eliminar SLO.
 
-Para crear, editar y eliminar correcciones de estado, los usuarios requieren los permisos `slos_corrections`. Un usuario con este permiso puede realizar correcciones de estado, incluso si no tiene permiso para editar esos SLO. Para obtener la lista completa de permisos, consulte la [documentación de RBAC][11].
+Para crear, editar y eliminar correcciones de estado, los usuarios requieren el permiso `slos_corrections`. Un usuario con este permiso puede realizar correcciones de estado, incluso si no tiene el permiso `slos_write`. Para crear una corrección para un solo SLO que tenga [controles de acceso granulares](#granular-access-controls), un usuario también debe tener acceso de edición a ese SLO. [Las correcciones basadas en etiquetas](#tag-based-corrections) no verifican los controles de acceso granulares, por lo que se aplican a todos los SLO que coincidan con la consulta, incluidos los SLO restringidos. Para obtener la lista completa de permisos, consulte la [documentación de RBAC][11].
 
 ### Controles de acceso granulares {#granular-access-controls}
 
@@ -299,16 +299,20 @@ Las correcciones de estado le permiten excluir periodos de tiempo específicos d
 - Asegúrese de que los problemas temporales causados por implementaciones no afecten negativamente sus SLO.
 
 Cuando aplica una corrección, el periodo de tiempo que especifica se elimina del cálculo del SLO.
-- Para los SLO basados en monitores, no se cuenta la ventana de tiempo de corrección.
 - Para los SLO basados en métricas, no se cuentan todos los eventos buenos y malos en la ventana de corrección.
-- Para los SLO de Time Slice, la ventana de tiempo de corrección se trata como tiempo de actividad.
+- Para los SLO de intervalos de tiempo, la ventana de tiempo de corrección se trata como tiempo de actividad.
+- Para los SLO basados en monitores, no se cuenta la ventana de tiempo de corrección.
 
-Usted tiene la opción de crear correcciones únicas para ajustes ad hoc, o correcciones recurrentes para ajustes predecibles que ocurren con una frecuencia regular. Las correcciones únicas requieren una hora de inicio y de finalización, mientras que las correcciones recurrentes requieren una hora de inicio, una duración y un intervalo. Las correcciones recurrentes se basan en la [especificación RRULE de iCalendar RFC 5545][24]. Las reglas admitidas son `FREQ`, `INTERVAL`, `COUNT` y `UNTIL`. Especificar una fecha de finalización para las correcciones recurrentes es opcional en caso de que necesite que la corrección se repita indefinidamente.
+Cada corrección se aplica a un solo SLO o a todos los SLO que coincidan con una consulta de etiqueta:
+- **Por nombre de SLO**: La corrección se aplica a un SLO.
+- **Por etiquetas**: La corrección se aplica a cada SLO cuyas etiquetas coincidan con una consulta, como `env:prod service:checkout`. Esto incluye los SLO que usted cree o etiquete después de crear la corrección. Para obtener más información, consulte [Correcciones basadas en etiquetas](#tag-based-corrections).
+
+Usted tiene la opción de crear correcciones únicas para ajustes ad hoc, o correcciones recurrentes para ajustes predecibles que ocurren con una frecuencia regular. Las correcciones únicas requieren una hora de inicio y de finalización, mientras que las correcciones recurrentes requieren una hora de inicio, una duración y un intervalo. Las correcciones recurrentes se basan en la [especificación RRULE de iCalendar RFC 5545][24]. Las reglas admitidas son `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` y `BYDAY`. Especificar una fecha de finalización para las correcciones recurrentes es opcional en caso de que necesite que la corrección se repita indefinidamente.
 
 Para cualquiera de los tipos de corrección, debe seleccionar una categoría de corrección que indique por qué se está realizando la corrección. Las categorías disponibles son {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}} y {{< ui >}}Other{{< /ui >}}. Opcionalmente, puede incluir una descripción para proporcionar contexto adicional si es necesario.
 
 Cada SLO tiene un límite máximo de correcciones que se pueden configurar para garantizar el rendimiento de las consultas. Estos límites solo se aplican a los últimos 90 días por SLO, por lo que las correcciones para períodos de tiempo anteriores a los últimos 90 días no cuentan para su límite. Esto significa que:
-- Si la hora de finalización de una corrección única es anterior a los últimos 90 días, sí cuenta para su límite.
+- Si la hora de finalización de una corrección única fue hace más de 90 días, no cuenta para su límite.
 - Si la hora de finalización de la repetición final de una corrección recurrente es anterior a los últimos 90 días, no cuenta para su límite.
 
 Los límites de 90 días por SLO son los siguientes:
@@ -319,24 +323,71 @@ Los límites de 90 días por SLO son los siguientes:
 | Recurrente diaria   | 2             |
 | Recurrente semanal  | 3             |
 | Recurrente mensual | 5             |
+| Recurrente anual  | 20            |
 
-Puede configurar correcciones de estado a través de la interfaz de usuario seleccionando {{< ui >}}Correct status{{< /ui >}} en el panel lateral de su SLO, la [API de correcciones de estado de SLO][25] o un [recurso de Terraform][26].
+Estos límites se aplican solo a las correcciones creadas por nombre de SLO. No se aplican a las [correcciones basadas en etiquetas](#tag-based-corrections).
+
+Puede configurar correcciones de estado en la interfaz de usuario, con la [API de correcciones de estado de SLO][25] o con un [recurso de Terraform][26].
+
+Para crear una corrección basada en etiquetas con la API o Terraform, configure el atributo `slo_query` en lugar de `slo_id`.
+
+#### Correcciones basadas en etiquetas {#tag-based-corrections}
+
+Una corrección basada en etiquetas utiliza una consulta para seleccionar los SLO por sus etiquetas, por lo que puede aplicar una corrección a muchos SLO. Por ejemplo, utilice una corrección basada en etiquetas para cubrir las horas fuera del horario laboral de todos los SLO de un equipo o de todos los SLO de un entorno.
+
+Las correcciones basadas en etiquetas se evalúan cuando se calcula el estado del SLO, por lo que la corrección se aplica a todos los SLO que coinciden con la consulta en ese momento. Si crea un nuevo SLO o agrega etiquetas a un SLO existente que coincida con la consulta, la corrección también se aplica a ese SLO.
+
+Las consultas utilizan la [sintaxis de búsqueda de Events][29], y cada término se compara con las etiquetas de SLO. Puede combinar términos con `AND`, `OR` y `NOT` (o `-`), agrupar términos con paréntesis y utilizar `*` como comodín. Los términos separados por un espacio se combinan con `AND`.
+
+| Consulta                          | Coincide con los SLO                                            |
+| ------------------------------ | ------------------------------------------------------- |
+| `env:prod`                     | Etiquetados con `env:prod`                                       |
+| `team:payments -env:staging`   | Etiquetados con `team:payments` y sin la etiqueta `env:staging`     |
+| `team:(payments OR checkout)`  | Etiquetados con `team:payments` o `team:checkout`               |
+| `service:web-*`                | Con una etiqueta `service` cuyo valor comienza con `web-`     |
+
+Una consulta no puede estar vacía ni consistir únicamente en `*`.
+
+#### Administre las correcciones en toda su organización {#manage-corrections-across-your-organization}
+
+La [pestaña {{< ui >}}Corrections{{< /ui >}}][31] de la [página de administración de SLO][2] enumera todas las correcciones de estado en su organización, incluidas las correcciones de un solo SLO y las basadas en etiquetas. Desde esta página, puede crear, editar y eliminar correcciones. Utilice la barra de búsqueda y las facetas a la izquierda para filtrar las correcciones por {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}} y {{< ui >}}SLO Tags{{< /ui >}}. 
+
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="La pestaña Corrections de la página de administración de SLO, que enumera las correcciones con su contexto, duración, horario y creador, con facetas a la izquierda para filtrar." style="width:80%;">}}
+
+#### Crear correcciones a partir de tiempos de inactividad del monitor {#create-corrections-from-monitor-downtimes}
+
+Para crear una corrección a partir de un tiempo de inactividad, necesita el permiso `slos_corrections`.
+
+Cuando programa un nuevo [tiempo de inactividad del monitor][30] por etiquetas de monitor, Datadog busca los SLO que tienen las mismas etiquetas. Si algún SLO coincide, el editor de tiempo de inactividad muestra una tarjeta con la cantidad de SLO coincidentes. Para crear una corrección para el mismo período de tiempo:
+
+1. En la tarjeta, haga clic en {{< ui >}}Preview SLO Correction{{< /ui >}}. El formulario de corrección se abre con {{< ui >}}By Tags{{< /ui >}} seleccionado, las etiquetas de los monitores del tiempo de inactividad como consulta, y el horario y el mensaje del tiempo de inactividad completados.
+2. Revise la consulta y los SLO que coinciden con ella, seleccione un {{< ui >}}Category{{< /ui >}} y haga clic en {{< ui >}}Apply{{< /ui >}}.
+3. Guarde el tiempo de inactividad. Datadog crea la corrección de SLO.
+
+**Nota**: La tarjeta no aparece cuando edita un tiempo de inactividad existente.
+
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="La página Schedule Downtime con el contexto definido por las etiquetas de los monitores. Una tarjeta resaltada en la parte inferior derecha dice \"We found 5 SLOs with this scope\" e incluye un enlace Preview SLO Correction." style="width:80%;">}}
 
 #### Acceso en la UI {#access-in-the-ui}
 
-Para acceder a las correcciones de estado de SLO en la UI:
+Para crear una corrección de estado en la interfaz de usuario:
 
-1. Cree un nuevo SLO o haga clic en uno existente.
-2. Navegue a la vista de detalles del SLO en el panel lateral.
-3. Debajo del icono de engranaje, seleccione {{< ui >}}Correct status{{< /ui >}} para abrir el modal de creación de correcciones.
-4. Seleccione {{< ui >}}Correction Category{{< /ui >}}.
-5. Elija entre {{< ui >}}One-Time{{< /ui >}} y {{< ui >}}Recurring{{< /ui >}} en el {{< ui >}}Select the Time Correction Window{{< /ui >}}, y especifique el período de tiempo que desea corregir.
-6. Opcionalmente, agregue {{< ui >}}Notes{{< /ui >}}.
-7. Haga clic en {{< ui >}}Apply Correction{{< /ui >}}.
+1. Abra el formulario de corrección de una de las siguientes maneras:
+   - En la pestaña [{{< ui >}}Corrections{{< /ui >}}][31] de la [página de administración de SLO][2], haga clic en {{< ui >}}New Correction{{< /ui >}}.
+   - En el panel lateral de detalles de un SLO, debajo del icono de engranaje, seleccione {{< ui >}}Correct status{{< /ui >}}. El formulario se abre con ese SLO seleccionado.
+2. En {{< ui >}}Select SLOs and category{{< /ui >}}, elija el contexto de la corrección:
+   - {{< ui >}}By Tags{{< /ui >}}: Ingrese una consulta de etiquetas. El formulario muestra los SLO que coinciden con la consulta.
+   - {{< ui >}}By SLO Name{{< /ui >}}: Busque y seleccione un único SLO.
+3. Seleccione un {{< ui >}}Category{{< /ui >}}.
+4. En {{< ui >}}Select time window{{< /ui >}}, elija {{< ui >}}One-Time{{< /ui >}} o {{< ui >}}Recurring{{< /ui >}}, y especifique el período de tiempo a corregir. Para correcciones recurrentes, utilice la pestaña {{< ui >}}Basic{{< /ui >}} para establecer un horario o la pestaña {{< ui >}}Advanced{{< /ui >}} para ingresar una RRULE.
+5. Opcionalmente, agregue notas en {{< ui >}}Add any notes{{< /ui >}}.
+6. Haga clic en {{< ui >}}Apply{{< /ui >}}.
 
-{{< img src="service_level_objectives/slo-corrections-ui.png" alt="Interfaz de usuario de corrección de SLO" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="El formulario New SLO Correction, con By Tags y One-Time seleccionados, muestra campos para una consulta de etiquetas, categoría, ventana de tiempo y notas." style="width:80%;">}}
 
-Para visualizar, editar y eliminar correcciones de estado existentes, haga clic en la pestaña {{< ui >}}Corrections{{< /ui >}} en la parte superior del panel lateral detallado de un SLO.
+**Nota**: Después de crear una corrección, no puede cambiar su contexto ni cambiarla entre única vez y recurrente.
+
+Para ver, editar y eliminar correcciones de estado existentes, utilice la pestaña {{< ui >}}Corrections{{< /ui >}} en la [página de administración de SLO][2] o la pestaña {{< ui >}}Corrections{{< /ui >}} en el panel lateral de detalles de un SLO. La pestaña del panel lateral incluye correcciones basadas en etiquetas que se aplican al SLO.
 
 #### Visualización de correcciones de estado {#visualizing-status-corrections}
 
@@ -382,3 +433,6 @@ La visualización de calendario de SLO está disponible en la [página de admini
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /es/events/explorer/
 [28]: /es/monitors/types/event/
+[29]: /es/events/explorer/searching/
+[30]: /es/monitors/downtimes/
+[31]: https://app.datadoghq.com/slo/corrections

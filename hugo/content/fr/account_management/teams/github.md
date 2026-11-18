@@ -10,6 +10,9 @@ further_reading:
   tag: Blog
   text: Maintenez la propriété des services à jour grâce à l'intégration GitHub de
     Datadog Teams.
+- link: /account_management/teams/servicenow/
+  tag: Documentation
+  text: Provisionner Datadog Teams avec ServiceNow
 title: Provisionnez Datadog Teams avec GitHub
 ---
 ## Présentation {#overview}
@@ -18,7 +21,7 @@ Liez vos équipes GitHub à Datadog Teams pour provisionner automatiquement Data
 - Créez des équipes Datadog Teams basées sur la configuration de vos équipes GitHub.
 - Synchronisez l'appartenance aux équipes entre Datadog et GitHub. Nécessite que les utilisateurs individuels connectent leurs comptes Datadog à GitHub.
 
-Datadog associe les équipes existantes en effectuant une correspondance exacte des noms entre les slugs d'équipe GitHub et les [handles][1] d'équipe Datadog. La correspondance ne tient pas compte de la casse et ignore les différences d'espaces.
+Datadog associe les équipes existantes en effectuant une correspondance exacte des noms entre les slugs d'équipe GitHub et les [identifiants][1] d'équipe Datadog. La correspondance ne tient pas compte de la casse et ignore les différences d'espaces.
 
 Si vos équipes GitHub ont une structure hiérarchique, Datadog reproduit cette même structure lors du provisionnement.
 

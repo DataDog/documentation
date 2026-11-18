@@ -40,7 +40,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {{% /tab %}}
 {{% tab "MCP server" %}}
 
-Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run functions with AI assistance. After you connect, try a prompt like:
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run functions with AI assistance. After you connect, try a prompt like:
 
 ```
 Help me monitor my GCP Cloud Run functions with Datadog using Terraform.
@@ -62,4 +62,4 @@ Then, select your runtime below for instructions on how to instrument your appli
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/google-cloud-platform/
-[2]: /agentic_onboarding/setup
+[2]: /agentic_onboarding/
