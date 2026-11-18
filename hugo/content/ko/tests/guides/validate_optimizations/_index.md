@@ -16,33 +16,131 @@ further_reading:
   text: 불안정한 테스트(Flaky Test) 관리에 대해 알아보기
 title: 최적화 검증
 ---
-이 페이지에서는 Test Optimization에서 제공하는 최적화 기능이 의도대로 작동하는지 검사하는 방법을 설명합니다. 이 가이드는 [Test Optimization][12]이 검증 대상 리포지토리에서 이미 작동하고 있다고 가정하며, **단일 리포지토리**에 대한 최적화 검사 단계를 보여줍니다.
+이 페이지에서는 [Test Optimization][12]에서 제공하는 최적화 기능이 **단일 리포지토리**에서 의도대로 작동하는지 검사하는 방법을 설명합니다. 로컬 검증을 사용하여 라이브러리 호환성 및 지원되는 기능을 확인하거나, Test Optimization을 설정한 후 Datadog에서 전체 워크플로를 검증하세요.
 
-<div class="alert alert-warning">이 검사는 기능 브랜치에서만 실행하고 기본 브랜치나 메인 브랜치에는 병합하지 마세요.</div>
+<div class="alert alert-warning">기능 브랜치에서 이러한 검증을 실행하세요. 옵션 2의 임시 테스트나 전용 서비스 구성을 기본 또는 메인 브랜치에 병합하지 마세요.</div>
 
 ## 전제 조건 {#prerequisites}
 
 이러한 최적화에는 [지원되는 네이티브 라이브러리][12]가 필요합니다. JUnit XML 업로드는 지원되지 않습니다.
 
-## 옵션 1: 코딩 에이전트로 로컬 검증 {#option-1-validate-locally-with-a-coding-agent}
+## 옵션 1: ddtest로 로컬 검증 {#option-1-validate-locally-with-ddtest}
 
 {{< callout url="#" btn_hidden="true" header="미리 보기에 참여하세요!" >}}
-  로컬 코딩 에이전트 검증은 현재 미리 보기 상태이며, npm [`dd-trace` 패키지][15]를 사용하는 JavaScript 및 TypeScript 프로젝트만 지원합니다.
-  
-  [15]: https://www.npmjs.com/package/dd-trace
+  ddtest를 사용한 로컬 검증은 현재 미리 보기로 제공되고 있습니다.
 {{< /callout >}}
 
-아래 제공된 프롬프트를 사용하여 로컬 코딩 에이전트(로컬 리포지토리를 검사하고 명령을 실행할 수 있는 AI 어시스턴트)에게 설치된 `dd-trace` 패키지를 검사하고 Test Optimization 검사 런북을 실행하도록 요청하세요. 이 방법은 로컬 라이브러리 호환성과 CI 구성을 검증합니다. 또한 Datadog 설정을 변경하거나 Datadog에 검증 결과를 전송하지 않고 조기 불안정성 탐지, 자동 테스트 재시도, 테스트 관리를 검증합니다.
+[ddtest][15]를 사용하여 로컬에서 Test Optimization을 검사하세요. ddtest는 계측을 적용한 경우와 적용하지 않은 경우의 테스트 결과를 비교합니다. 그런 다음 임시 테스트를 사용하여 Early Flake Detection, Auto Test Retries 및 Test Management를 포함한 지원되는 기능을 확인합니다. 검증에는 로컬 수집이 사용되므로 Datadog 계정, API 키 또는 Datadog Agent가 필요하지 않습니다. 검증 결과를 Datadog으로 전송하거나 Datadog 설정을 변경하지도 않습니다.
 
-런북은 설치된 `ci/runbook.md` 패키지 루트를 기준으로 `dd-trace`에 위치합니다.
+Datadog에서는 온보딩과 로컬 검증에 로컬 코딩 에이전트를 사용할 것을 권장합니다. 에이전트는 ddtest의 지침에 따라 계측을 설정하고, 검증을 실행하고, 진행을 방해하는 문제를 해결하고, 결과를 설명합니다. 명령어를 직접 실행하려면 [수동 지침](#run-ddtest-yourself)을 사용하세요.
 
-다음 프롬프트를 로컬 코딩 에이전트에 전달하세요.
+로컬 검증은 다음 언어 및 프레임워크를 지원합니다.
 
-```text
-Locate the installed dd-trace package, then read and execute its ci/runbook.md.
+| 언어 | 테스트 프레임워크 |
+| --- | --- |
+| JavaScript 및 TypeScript | Jest, Vitest, Mocha, Playwright, Cypress, Cucumber, WebdriverIO |
+| Python | pytest |
+| Ruby | RSpec, Minitest |
+| Java(Maven 또는 Gradle) | JUnit 4, JUnit 5, TestNG, Spock, Cucumber JVM, Karate, ScalaTest, MUnit |
+
+런타임 요구 사항, 프레임워크별 설정 및 기능 제한 사항은 [ddtest 문서][15]를 참조하세요.
+
+### ddtest 설치 {#install-ddtest}
+
+로컬 검증을 위해서는 [ddtest v1.16.0][18] 이상이 필요합니다. ddtest가 이미 설치되어 있는 경우 `ddtest --version`으로 버전을 확인하고 설치 프로그램을 다시 실행하여 업그레이드하세요.
+
+macOS 또는 Linux에 최신 릴리스를 설치하세요.
+
+```bash
+curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
-이 코딩 에이전트 방식은 전체 Datadog 워크플로를 실행하지 않는 로컬 검사입니다. 전체 [예방](#step-2-prevention), [완화](#step-3-mitigation), [수정](#step-4-remediation) 워크플로를 검증하거나 JavaScript 또는 TypeScript 이외의 언어를 검증하려면 아래의 [옵션 2](#option-2-validate-the-full-workflow)를 사용하세요.
+Windows에서는 PowerShell에서 설치 프로그램을 실행하세요.
+
+```powershell
+irm https://github.com/DataDog/ddtest/releases/latest/download/install.ps1 | iex
+```
+
+설치 프로그램은 릴리스의 체크섬을 기준으로 다운로드를 확인합니다. 버전 선택 및 사용자 지정 설치 디렉터리에 대해서는 [ddtest 설치][17]를 참조하세요.
+
+### 로컬 코딩 에이전트 사용(권장) {#use-a-local-coding-agent-recommended}
+
+파일을 검사하고 명령을 실행할 수 있는 코딩 에이전트에서 리포지토리의 로컬 Git 체크아웃을 여세요. ddtest를 설치한 후 다음 프롬프트를 제공하세요.
+
+```text
+Use ddtest to onboard this repository to Test Optimization.
+```
+
+제안된 변경 사항을 검토하고 에이전트가 요청하는 환경 세부 정보를 제공하세요. 에이전트가 로컬 검증을 실행하고, HTML 보고서 링크와 실패했거나 검증되지 않은 검사 항목을 포함한 결과를 보고합니다.
+
+### 직접 ddtest 실행 {#run-ddtest-yourself}
+
+#### 1단계: 테스트 설정 검사 {#step-1-inspect-the-test-setup}
+
+리포지토리의 로컬 Git 체크아웃에서 시작하세요. 프로젝트의 테스트 종속성을 설치하고 테스트에 필요한 브라우저, 데이터베이스 또는 기타 서비스를 준비하세요. 그리고 다음을 실행합니다.
+
+```bash
+ddtest onboard
+```
+
+이 명령은 언어, 테스트 프레임워크 및 CI 공급자를 감지한 다음 후속 설정 또는 검증 작업을 반환합니다.
+
+지원되는 JavaScript 설정에서는 `--apply`를 사용하여 설정에 적용될 정확한 편집 내용을 미리 보세요. 예:
+
+```bash
+ddtest onboard --framework jest --apply
+```
+
+편집 내용을 검토한 후 `--yes`를 추가하여 적용하고 로컬 검증을 실행하세요.
+
+```bash
+ddtest onboard --framework jest --apply --yes
+```
+
+검증이 성공하면 [결과 검토](#step-3-review-the-results)로 이동하세요.
+
+자동 편집 기능이 없는 설정의 경우 `ddtest onboard`에서 반환된 설정 지침을 따르세요. 자세한 수동 설정 지침을 출력하려면 `ddtest onboard --instructions`을 실행하세요.
+
+리포지토리에 여러 프레임워크나 CI 공급자가 포함되어 있는 경우 하나를 명시적으로 선택하세요. 예:
+
+```bash
+ddtest onboard --framework jest --ci-provider github
+```
+
+후속 검증 명령에 동일한 선택 항목을 사용하세요. 확인하려는 각 프레임워크 및 CI 공급자에 대해 검증을 별도로 실행하세요.
+
+#### 2단계: 로컬 검증 실행 {#step-2-run-local-validation}
+
+Datadog SDK를 설치하거나 테스트를 실행하지 않고 발견된 모든 CI 테스트 구성을 검사하려면 다음을 실행하세요.
+
+```bash
+ddtest testdrive --all --check-only
+```
+
+구성 확인만으로는 기능 동작을 검증할 수 없습니다. 전체 로컬 검증 실행:
+
+```bash
+ddtest testdrive --all
+```
+
+명령 및 변경 사항의 미리 보기를 검토한 후 실행을 확인하세요. 비대화형 터미널에서는 미리 보기를 검토한 후 `--yes`를 추가하세요.
+
+특정 테스트 명령을 검증하려면 `--all` 대신 `--command`를 사용하세요. 예:
+
+```bash
+ddtest testdrive --framework jest --command "npm test"
+```
+
+하나의 명령에 대한 검사가 성공했다고 해서 다른 CI 구성까지 검증된 것은 아닙니다. ddtest에서 보고한 누락된 종속 항목, 지원되지 않는 구성 또는 기타 진행 방해 요인을 해결한 후 검증을 다시 실행하세요.
+
+#### 3단계: 결과 검토 {#step-3-review-the-results}
+
+명령 출력에 연결된 HTML 보고서(일반적으로 `.testoptimization/report.html`)를 여세요. 해당 `.testoptimization/testdrive.json`에는 기계 판독 가능한 결과가 포함되어 있습니다. 기준 비교, 기능 확인 및 아직 검증되지 않은 구성을 검토하세요. 기능 지원은 프레임워크 및 Datadog SDK에 따라 다르며, 지원되지 않는 기능은 보고서에 나열되어 있습니다.
+
+보고서를 검토용으로 보관하고, 소스 파일, 종속성 또는 런타임을 변경한 후 전체 검증을 다시 실행하세요. 로컬 보고서가 커밋에 포함되지 않도록 `.gitignore`에 `.testoptimization/`를 추가하세요.
+
+로컬 검증은 라이브러리 동작 및 CI 구성을 확인합니다. Datadog 처리, PR Gates 및 전체 [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), [Remediation](#step-4-remediation) 워크플로를 검증하거나 지원되지 않는 언어 또는 프레임워크를 검증하려면 [옵션 2](#option-2-validate-the-full-workflow)를 사용하세요.
 
 ## 옵션 2: 전체 워크플로 검증 {#option-2-validate-the-full-workflow}
 
@@ -260,15 +358,15 @@ Locate the installed dd-trace package, then read and execute its ci/runbook.md.
    git push origin validate-test-optimization
    ```
 
-3. CI가 실행될 때까지 기다립니다. 조기 불안정성 감지가 새 테스트를 재시도하고, 신규 불안정한 테스트 PR 게이트가 결과를 평가합니다. 풀 리퀘스트에 대한 GitHub 검사에서 신규 불안정한 테스트 PR 게이트가 실패하는지 확인합니다:
+3. CI가 실행될 때까지 기다립니다. 조기 불안정성 감지가 새 테스트를 재시도하고, 신규 불안정한 테스트 PR 게이트가 결과를 평가합니다. 풀 리퀘스트에 대한 GitHub 검사에서 신규 불안정한 테스트 PR 게이트가 실패하는지 확인합니다.
 
    {{< img src="pr_gates/setup/failed_pr_gate.png" alt="새로운 불안정한 테스트가 감지되어 실패한 GitHub 풀 리퀘스트 검사" style="width:100%" >}}
 
-4. 실패한 GitHub 검사를 클릭하고 해당 테스트가 새로운 불안정한 테스트 목록에 포함되어 있는지 확인합니다:
+4. 실패한 GitHub 검사를 클릭하고 해당 테스트가 새로운 불안정한 테스트 목록에 포함되어 있는지 확인합니다.
 
    {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR 게이트 세부 정보 보기" style="width:100%" >}}
 
-5. [테스트 실행][7]에서 조기 불안정성 탐지가 테스트를 재시도했는지, 그리고 다음 필터를 사용하는 [이 쿼리][7]를 사용하여 새로운 불안정한 테스트로 감지했는지 확인합니다:
+5. [테스트 실행][7]에서 조기 불안정성 탐지가 테스트를 재시도했는지, 그리고 다음 필터를 사용하는 [이 쿼리][7]를 사용하여 새로운 불안정한 테스트로 감지했는지 확인합니다.
 
    - `@test.name:*flaky*validation*`
    - `@git.branch:validate-test-optimization`
@@ -277,7 +375,7 @@ Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 
 ### 3단계: 완화 {#step-3-mitigation}
 
-완화는 [자동 테스트 재시도][4], [불안정한 테스트 관리][5], 및 [불안정한 테스트 정책][6]을 통해 이루어집니다. 이러한 기능은 불안정한 테스트를 재시도하고 알려진 불안정한 실패를 격리하여 CI를 차단하지 않도록 합니다.
+완화는 [자동 테스트 재시도][4], [불안정한 테스트 관리][5] 및 [불안정한 테스트 정책][6]을 통해 이루어집니다. 이러한 기능은 불안정한 테스트를 재시도하고 알려진 불안정한 실패를 격리하여 CI를 차단하지 않도록 합니다.
 
 1. [예방](#step-2-prevention)을 위해 추가한 동일한 테스트에서 마커 파일 이름을 `dd-validation-flaky`에서 `dd-validation-flaky-mitigation`으로 변경합니다. 테스트 함수나 테스트 케이스의 이름을 변경하지 마세요. 새 마커는 또 다른 의도적인 첫 번째 시도 실패를 유발합니다. 테스트 이름을 변경하지 않고 유지하면 Datadog이 해당 실행을 [예방](#step-2-prevention) 중에 감지된 불안정한 테스트와 연결할 수 있습니다. 추가적인 Datadog 구성은 필요하지 않으며, 자동 테스트 재시도 및 불안정한 테스트 관리가 이 실행 중에 테스트를 처리합니다. 사용 중인 언어에 맞게 테스트를 업데이트합니다.
 
@@ -445,7 +543,7 @@ Locate the installed dd-trace package, then read and execute its ci/runbook.md.
      - `@test.name:*flaky*validation*`
      - `@git.branch:validate-test-optimization`
      - `@test.retry_reason:auto_test_retry`
-   - [불안정한 테스트 관리][9]에서 테스트가 {{< ui >}}QUARANTINED{{< /ui >}}로 표시됩니다. 해당 실패는 더 이상 테스트 작업을 차단하지 않습니다. [이 쿼리][9]를 다음 필터와 함께 사용하세요:
+   - [불안정한 테스트 관리][9]에서 테스트가 {{< ui >}}QUARANTINED{{< /ui >}}로 표시됩니다. 해당 실패는 더 이상 테스트 작업을 차단하지 않습니다. [이 쿼리][9]를 다음 필터와 함께 사용하세요.
      - `@test.name:*flaky*validation*`
      - `first_flaked_branch:validate-test-optimization`
      - `flaky_test_state:quarantined`
@@ -572,4 +670,7 @@ Test Optimization은 수정 시도 및 [Bits AI 기반 불안정한 테스트 �
 [12]: /ko/tests/
 [13]: /ko/tests/test_impact_analysis/
 [14]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20fix_in_progress%3Atrue
+[15]: https://github.com/DataDog/ddtest#try-test-optimization-locally
 [16]: /ko/tests/flaky_management/#bits-ai-powered-flaky-test-fixes
+[17]: https://github.com/DataDog/ddtest#installation
+[18]: https://github.com/DataDog/ddtest/releases/tag/v1.16.0

@@ -20,26 +20,53 @@ title: Access Control
 
 ## Descripción general {#overview}
 
-El sistema de gestión de acceso de Datadog utiliza control de acceso basado en roles, lo que le permite definir el nivel de acceso que tienen los usuarios a los recursos de Datadog. Los usuarios se asignan a roles que definen los permisos de su cuenta, incluyendo qué datos pueden leer y qué activos de la cuenta pueden modificar. Cuando se otorgan permisos a un rol, cualquier usuario asociado con ese rol recibe dichos permisos. Consulte la documentación de [gestión de cuentas Access Control][1] para obtener más información.
+El sistema de gestión de acceso de Datadog utiliza control de acceso basado en roles, lo que le permite definir el nivel de acceso que tienen los usuarios a los recursos de Datadog. Los usuarios se asignan a roles que definen sus permisos de cuenta, incluidos qué datos pueden leer y qué activos de la cuenta pueden modificar. Cuando se otorgan permisos a un rol, cualquier usuario asociado con ese rol recibe dichos permisos. Consulte la documentación de [Access Control de gestión de cuentas][1] para obtener más información.
 
-Para los productos de Datadog Security, el [control de acceso granular][3] está disponible para [reglas de detección](#restrict-access-to-detection-rules), [supresiones](#restrict-access-to-suppression-rules) y [reglas de gravedad dinámica](#restrict-access-to-dynamic-severity-rules), lo que le permite restringir el acceso por equipos, roles o cuentas de servicio.
+Para los productos de Datadog Security, el [control de acceso granular][3] está disponible para [reglas de detección](#restrict-access-to-detection-rules), [supresiones](#restrict-access-to-suppression-rules) y [reglas de severidad dinámica](#restrict-access-to-dynamic-severity-rules), lo que le permite restringir el acceso por equipos, roles o cuentas de servicio.
+
+Para restringir el acceso a los datos de seguridad en sí, utilice [Data Access Control](#restrict-access-to-security-data).
 
 ## Permisos {#permissions}
 
-Consulte la [lista de permisos][2] para los productos de Security.
+Consulte la [lista de permisos][2] para los productos de seguridad.
 
-## Restringir el acceso a las reglas de detección {#restrict-access-to-detection-rules}
+## Restringir el acceso a reglas de detección {#restrict-access-to-detection-rules}
 
 {{% security-products/detection-rules-granular-access %}}
 
-## Restringir el acceso a las reglas de supresión {#restrict-access-to-suppression-rules}
+## Restringir el acceso a reglas de supresión {#restrict-access-to-suppression-rules}
 
 {{% security-products/suppressions-granular-access %}}
 
-## Restringir el acceso a las reglas de gravedad dinámica {#restrict-access-to-dynamic-severity-rules}
+## Restringir el acceso a reglas de severidad dinámica {#restrict-access-to-dynamic-severity-rules}
 
 {{% security-products/dynamic-severity-granular-access %}}
+
+## Restringir el acceso a datos de seguridad {#restrict-access-to-security-data}
+
+Utilice [Data Access Control][4] para restringir qué datos de seguridad puede ver un usuario, según las etiquetas y los atributos de los datos. Defina un [Restricted Dataset][8] con una consulta y, a continuación, otorgue acceso a equipos o roles específicos. Hay tres opciones de seguridad disponibles al crear un Restricted Dataset:
+
+- **Security Signals**: señales de Cloud SIEM y Workload Protection
+- **Workload Protection Agent Events**
+- **Security Findings** (en Preview, disponible previa solicitud): hallazgos de Cloud Security, Code Security, Workload Protection y App and API Protection
+
+Los datos de seguridad que no están incluidos en ningún Restricted Dataset permanecen visibles para todos los usuarios con los permisos adecuados, a menos que los marque como [Restricted][5].
+
+### Restringir el acceso a los hallazgos según el equipo al que pertenecen {#restrict-findings-by-team-ownership}
+
+{{< callout btn_hidden="true" >}}
+El control de acceso basado en la propiedad está en Preview y disponible previa solicitud.
+{{< /callout >}}
+
+El control de acceso basado en la propiedad restringe el acceso a los hallazgos de seguridad según la pertenencia al equipo y requiere menos configuración que los Restricted Datasets. Cada usuario ve los hallazgos que pertenecen a los [equipos][6] a los que pertenece, sin necesidad de un conjunto de datos separado para cada grupo de hallazgos.
+
+El control de acceso basado en la propiedad está disponible para Security Findings, que abarca los hallazgos de Cloud Security, Code Security, Workload Protection y App and API Protection. Datadog determina la propiedad a partir de la etiqueta `team`. Los hallazgos sin esta etiqueta solo son visibles para los equipos y roles con [acceso sin restricciones][7].
 
 [1]: /es/account_management/rbac/#role-based-access-control
 [2]: /es/account_management/rbac/permissions/#cloud-security-platform
 [3]: /es/account_management/rbac/granular_access/
+[4]: /es/account_management/rbac/data_access/
+[5]: /es/account_management/rbac/data_access/#strict-mode
+[6]: /es/account_management/teams/
+[7]: /es/account_management/rbac/data_access/#unrestricted-user-groups
+[8]: /es/account_management/rbac/data_access/#configure-data-access

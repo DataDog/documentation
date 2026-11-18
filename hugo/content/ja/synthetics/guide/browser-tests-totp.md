@@ -2,48 +2,58 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/
   tag: ブログ
-  text: Introducing multi-factor authentication in Datadog Synthetic tests
+  text: Datadog Synthetic テストでの多要素認証の導入
 - link: /synthetics/guide/browser-tests-passkeys
   tag: ドキュメント
-  text: ブラウザテストのパスキーについて
+  text: ブラウザテストにおけるパスキーについて学ぶ
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: ドキュメント
-  text: グローバル変数について
-title: ブラウザテストにおいて、多要素認証 (MFA) に時間ベースのワンタイムパスワード (TOTP) を使用する
+  text: グローバル変数の詳細はこちら
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: ブログ
+  text: クライアントが Datadog を使ってブラウザテストをスケールするのを手助けした方法
+title: ブラウザテストで多要素認証 (MFA) に時間ベースのワンタイムパスワード (TOTP) を使用する
 ---
+## 概要 {#overview}
 
-## 概要
+TFA や MFA などの多要素認証方法は、不正アクセスからアプリケーションを保護するのに役立ちますが、これらの方法によって機能のテストが難しくなる場合があります。
 
-TFA や MFA などの多要素認証方法は不正なアクセスからアプリケーションを保護するのに役立ちますが、これらの方法を使用しながら機能のテストを行うのは困難です。
+Datadog Synthetic MFA グローバル変数を使用すると、重要なセキュリティ対策を無効にしたり、別のツールで認証コードを手動で入力したりすることなく、アプリケーションの TOTP ベースの MFA モジュールや重要なユーザー体験をテストできます。MFA 対応のユーザー体験をテストするために、専用の環境を作成または維持する必要はありません。
 
-Datadog Synthetic MFA グローバル変数を使用すると、重要なセキュリティ対策を無効にしたり、異なるツールで認証コードを手動で入力したりすることなく、アプリケーションの TOTP ベースの MFA モジュールと重要なユーザジャーニーをテストすることができます。MFA 対応のユーザージャーニーをテストするために専用の環境を構築・維持する必要はありません。
+**注**: Datadog は SHA-1 アルゴリズムで TOTP を生成するため、他のアルゴリズムを使用するトークンはサポートしていません。お使いの TOTP トークンが Google Authenticator で動作する場合、Datadog と互換性がある可能性が高いです。
 
-## シークレットキーや QR コードをグローバル変数に格納する
 
-シークレットキーを入力したり、認証プロバイダーから QR コードをアップロードするためのグローバル変数を作成します。**Settings** ページの **Global Variables** タブで、**Create Global Variable** をクリックします。
-1. **Choose variable type** で **MFA Token** を選択します。
-2. **Define variable** で、**Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。
-3. 変数の **Description** を入力します（任意）。
-4. **Tags** を選択して変数と関連付けます（任意）。
-5. 変数に**シークレットキー**を入力するか、QR コードイメージをアップロードします。
-6. **+ Generate** をクリックして TOTP を作成します。**コピー**アイコンを使用すると、生成した TOTP をコピーできます。
-7. **Permissions settings** で、オーガニゼーション内のロールに基づいて変数へのアクセスを制限します。ロールの詳細については、[RBAC ドキュメント][1]を参照してください。
+## シークレットキーまたは QR コードをグローバル変数に保存します {#store-your-secret-key-or-qr-code-in-a-global-variable}
 
-{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="MFA トークンの作成" style="width:100%;" >}}
+シークレットキーを入力するための、または認証プロバイダーからの QR コードをアップロードするためのグローバル変数を作成してください。[{{< ui >}}Settings{{< /ui >}}] ページの [{{< ui >}}Global Variables{{< /ui >}}] タブで、[{{< ui >}}Create Global Variable{{< /ui >}}] をクリックしてください。
+1.  [{{< ui >}}Choose variable type{{< /ui >}}] で、[{{< ui >}}MFA Token{{< /ui >}}] を選択します。
+2. [{{< ui >}}Define variable{{< /ui >}}] に、{{< ui >}}Variable Name{{< /ui >}} (変数名) を入力してください。変数名には、大文字の英字、数字、アンダースコアのみを使用できます。
+3. 変数の {{< ui >}}Description{{< /ui >}} (説明) を入力してください (オプション)。
+4. 変数に関連付ける {{< ui >}}Tags{{< /ui >}} (タグ) を選択してください (オプション)。
+5. シークレットキーの作成または新しい QR コードの追加については、認証アプリのドキュメントの手順に従ってください。
+6. 変数に {{< ui >}}Secret Key{{< /ui >}} (シークレットキー) を入力するか、QR コード画像をアップロードしてください。
 
-## Synthetic テストで TOTP を使う
-グローバル変数に格納されたシークレットキーや QR コードは、すべての Synthetic テストで使用することができます。[ブラウザテスト][2]を作成する際に、グローバル変数に格納されたシークレットキーや QR コードから生成された TOTP を挿入して、アプリケーションの認証ワークフローを検証します。
+    **注**: QR コードをアップロードすると、Datadog はシークレットキーのみを読み取ります。プロバイダーが異なるコード長や更新期間を使用している場合は、ステップ 7 で設定してください。
 
-{{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="TOTP 検証を記録" video="true" >}}
+7. (オプション) 異なるコード長や更新期間を使用するには、[{{< ui >}}Generate the OTP{{< /ui >}}] の下の [{{< ui >}}Advanced Options{{< /ui >}}] を展開して値を調整してください。
+8. [{{< ui >}}\+ Generate{{< /ui >}}] をクリックして TOTP を作成してください。生成された TOTP は [{{< ui >}}Copy{{< /ui >}}] アイコンでコピーできます。
+9. [{{< ui >}}Permissions settings{{< /ui >}}] で、組織内のロールに基づいて変数へのアクセスを制限してください。ロールの詳細については、[RBAC のドキュメント][1] を参照してください。
 
-[ブラウザテスト][2]で TOTP を使用するには
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="MFA トークンを作成する" style="width:100%;" >}}
 
-1. グローバル変数をインポートします。
-2. テストを記録する際は、**手の形**のアイコンをクリックして TOTPを生成します。
-3. テスト用のブラウザアプリケーションで、フィールドをクリックして TOTP を貼り付けます。計算されたコードをテストに注入すると別のテストステップが作成されます。
-4. テストの手順を記録したら、**Save & Launch Test** をクリックします。
+## Synthetic テストで TOTP を使用する {#use-totp-in-your-synthetic-tests}
+グローバル変数に保存されたシークレットキーまたは QR コードは、すべての Synthetic テストで使用できます。[ブラウザテスト][2] を作成する際は、グローバル変数に保存されたシークレットキーまたは QR コードから生成された TOTP を挿入して、アプリケーションの認証ワークフローを検証してください。
 
-## その他の参考資料
+{{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="TOTP 検証の記録" video="true" >}}
+
+[ブラウザテスト][2] で TOTP を使用するには:
+
+1. グローバル変数をインポートしてください。
+2. テストの記録中に [{{< ui >}}Hand{{< /ui >}}] アイコンをクリックして、TOTP を生成してください。
+3. テストブラウザアプリケーションで、フィールドをクリックして TOTP を貼り付けてください。計算されたコードをテストに挿入すると、別のテストステップが作成されます。
+4. テストステップの記録後、[{{< ui >}}Save & Launch Test{{< /ui >}}] をクリックしてください。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -590,16 +590,21 @@ menu:
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
       weight: 805
+    - name: Modify Tags
+      identifier: modify_tags
+      url: agent/fleet_automation/modify_tags
+      parent: agent_fleet_automation
+      weight: 806
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 807
+      weight: 808
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -2147,16 +2152,11 @@ menu:
       url: metrics/units/
       parent: metrics_explorer
       weight: 601
-    - name: Summary
-      identifier: metrics_summary
-      url: metrics/summary/
+    - name: Catalog
+      identifier: metrics_catalog
+      url: metrics/catalog/
       parent: metrics_top_level
       weight: 7
-    - name: Volume
-      identifier: metrics_volume
-      url: metrics/volume/
-      parent: metrics_top_level
-      weight: 8
     - name: Advanced Filtering
       url: metrics/advanced-filtering/
       parent: metrics_top_level
@@ -3330,51 +3330,51 @@ menu:
       parent: actions_connections
       identifier: private_actions_creds
       weight: 105
+    - name: Execution Policies
+      url: actions/execution_policies/
+      parent: action_catalog
+      identifier: actions_execution_policies
+      weight: 2
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
       identifier: private_actions
-      weight: 2
+      weight: 3
     - name: Getting Started
       url: actions/private_actions/getting_started/
       parent: private_actions
       identifier: private_actions_getting_started
-      weight: 201
+      weight: 301
     - name: Set Up in the Datadog Agent
       url: actions/private_actions/set_up_agent_based/
       parent: private_actions
       identifier: private_actions_set_up_agent_based
-      weight: 202
+      weight: 302
     - name: Set Up a Standalone Runner
       url: actions/private_actions/set_up_standalone/
       parent: private_actions
       identifier: private_actions_set_up_standalone
-      weight: 203
+      weight: 303
     - name: Enrollment and Ownership
       url: actions/private_actions/enroll_runner/
       parent: private_actions
       identifier: private_actions_enroll_runner
-      weight: 204
+      weight: 304
     - name: Authorize Private Actions
       url: actions/private_actions/authorize_private_actions/
       parent: private_actions
       identifier: private_actions_authorize_private_actions
-      weight: 205
-    - name: Execution Policies
-      url: actions/private_actions/execution_policies/
-      parent: private_actions
-      identifier: private_actions_execution_policies
-      weight: 206
+      weight: 305
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
       identifier: private_actions_run_script
-      weight: 207
+      weight: 306
     - name: Reference
       url: actions/private_actions/reference/
       parent: private_actions
       identifier: private_actions_reference
-      weight: 208
+      weight: 307
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
@@ -5569,16 +5569,21 @@ menu:
       parent: dbm
       identifier: dbm_pr_reviews
       weight: 8
+    - name: Role Observability
+      url: database_monitoring/database_monitoring_role_observability/
+      parent: dbm
+      identifier: dbm_role_observability
+      weight: 9
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 10
+      weight: 11
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5759,11 +5764,16 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Monitors
+      url: monitors/types/data_observability/
+      identifier: quality_monitoring_monitors
+      parent: quality_monitoring
+      weight: 350000
     - name: Guides
       url: data_observability/quality_monitoring/guides
       identifier: quality_monitoring_guides
       parent: quality_monitoring
-      weight: 300000
+      weight: 400000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
@@ -5841,6 +5851,11 @@ menu:
       identifier: openlineage_integrations
       parent: data_jobs
       weight: 700000
+    - name: Monitors
+      url: monitors/types/data_observability/
+      identifier: data_jobs_monitors
+      parent: data_jobs
+      weight: 800000
     - name: Datadog Agent for OpenLineage Proxy
       url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
       identifier: openlineage_datadog_agent_for_openlineage
@@ -6084,6 +6099,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_setup
       weight: 1
+    - name: Dynamic Resource Allocation
+      url: gpu_monitoring/dra/
+      parent: gpu_monitoring_setup
+      identifier: gpu_monitoring_dra
+      weight: 101
     - name: Summary
       url: gpu_monitoring/summary/
       parent: gpu_monitoring
@@ -6114,6 +6134,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_tracing
       weight: 7
+    - name: MCP Tools
+      url: gpu_monitoring/mcp_tools/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_mcp_tools
+      weight: 8
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6356,6 +6381,11 @@ menu:
       parent: cicd_flaky_management
       identifier: cicd_flaky_management_working_with
       weight: 501
+    - name: Code Annotations
+      url: tests/flaky_management/code_annotations/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_code_annotations
+      weight: 502
     - name: Test Impact Analysis
       url: tests/test_impact_analysis/
       parent: cicd_features
@@ -6792,56 +6822,61 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_experiments
       weight: 310
+    - name: Flag Evaluation and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 311
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 311
+      weight: 312
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 312
+      weight: 313
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 313
+      weight: 314
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 314
+      weight: 315
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 315
+      weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 316
+      weight: 317
     - name: Flag Key Obfuscation
       url: feature_flags/concepts/flag_key_obfuscation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
-      weight: 317
+      weight: 318
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_permissions
-      weight: 320
+      weight: 321
     - name: Approvals
       url: feature_flags/concepts/approvals
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
-      weight: 321
+      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 322
+      weight: 323
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -8067,6 +8102,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
       weight: 608
+    - name: Rename a Cluster
+      url: /byoc-logs/operate/rename_cluster
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_rename_cluster
+      weight: 609
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -10746,6 +10786,11 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_lift_and_interval_calculations
       weight: 6
+    - name: Expected Regret and EVSI
+      url: experiments/statistics/expected_regret_and_evsi
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_expected_regret_and_evsi
+      weight: 7
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
@@ -10908,6 +10953,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_request_access
       weight: 404
+    - name: MCP Access
+      url: account_management/rbac/mcp_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_mcp_access
+      weight: 405
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
@@ -11128,6 +11178,16 @@ menu:
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1504
+    - name: Finalized Usage Metrics
+      identifier: account_management_billing_finalized_usage_metrics
+      url: account_management/billing/usage_metrics/finalized_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150401
+    - name: Estimated Usage Metrics
+      identifier: account_management_billing_estimated_usage_metrics
+      url: account_management/billing/usage_metrics/estimated_usage_metrics/
+      parent: account_management_plan_and_usage_usage_metrics
+      weight: 150402
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/

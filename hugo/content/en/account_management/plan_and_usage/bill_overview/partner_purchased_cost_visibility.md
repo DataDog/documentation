@@ -17,7 +17,7 @@ If you purchase Datadog through a partner, you can get greater visibility into y
 ## Key features
 
 - **Estimated month-to-date cost**: See a running total of your Datadog costs at any point during the month, without waiting for your invoice.
-- **Historical cost**: Review costs for previous months after each month closes. Data goes back 15 months, or to your most recent contract change if that is more recent.
+- **Historical cost**: Review costs for previous months after each month closes. Data goes back up to 15 months, for any contract your partner has published rates for. If your contract changes, earlier months continue to show costs at your previous contract's rates.
 - **Daily cost breakdown**: View a day-by-day bar chart of your costs to spot cost changes as they happen.
 - **Group by product**: Break down costs by product category and billing dimension, such as infrastructure hosts, indexed logs, or custom metrics.
 - **Group by sub-organization**: If you use multiple Datadog sub-organizations, filter and view costs for each one individually.
@@ -38,7 +38,6 @@ Your partner shares your rates with Datadog. Datadog uses those rates and your u
 
 ### Estimated cost accuracy
 
-- **Tiered on-demand pricing is not supported.** Cost data is not shown for the active Error Tracking and LLM Observability SKUs.
 - **Percent-based products are not supported.** Cost data is not shown for the Audit Trail or Premier Support SKUs.
 - **All costs are estimated.** Costs are calculated from the rates your partner provides, so historical costs are estimates as well, even after a month closes. In most cases, the costs in Bill Overview match your partner invoice. Minor differences (a few cents) can occur because of nuances in billing calculations. If you notice significant discrepancies, contact your partner.
 

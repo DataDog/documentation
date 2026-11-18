@@ -11,7 +11,6 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentation
   text: API Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Configurer Agent Integrations
 ---
 Fleet Automation peut déployer, mettre à jour et supprimer à distance des fichiers de configuration [d'intégration][1] (`conf.d`) sur vos Agents. Sélectionnez les Agents cibles par host ou par tag, choisissez une intégration et Fleet Automation déploie la modification de configuration sur l'ensemble de votre parc.
