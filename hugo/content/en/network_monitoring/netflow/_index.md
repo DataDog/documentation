@@ -128,7 +128,7 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 You can add custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-In Network Devices settings, select {{< ui >}}Port Enrichment{{< /ui >}} under {{< ui >}}NetFlow{{< /ui >}}, then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
+From the [{{< ui >}}Port Enrichment{{< /ui >}} settings page][13], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping dialog on the Port Enrichment settings page" width="100%" >}}
 
@@ -503,3 +503,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
 [11]: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
 [12]: https://docs.paloaltonetworks.com/ngfw/administration/monitoring/netflow-monitoring/netflow-templates
+[13]: https://app.datadoghq.com/devices/settings/enrichment/port
