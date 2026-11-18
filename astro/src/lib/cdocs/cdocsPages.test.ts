@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { fileURLToPath } from "node:url";
-import { loadCustomizationConfig } from "cdocs-data";
+import { loadCustomizationConfig } from "cdocs-data/loadCustomizationConfig";
 import {
   buildCdocsPage,
   buildCdocsTraitsList,
