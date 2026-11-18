@@ -277,11 +277,12 @@ from openai import OpenAI
 
 from datadog_wif import DatadogToken
 
-token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site="{{< region-param key="dd_site" code="true" >}}")
+site = os.environ["DD_SITE"]
+token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site=site)
 
 client = OpenAI(
     api_key="unused",  # replaced with a Datadog token on each request
-    base_url="https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1",
+    base_url=f"https://ai-gateway.{site}/ai/v1",
 )
 
 response = client.with_options(api_key=token.get()).responses.create(
@@ -300,11 +301,12 @@ from anthropic import Anthropic
 
 from datadog_wif import DatadogToken
 
-token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site="{{< region-param key="dd_site" code="true" >}}")
+site = os.environ["DD_SITE"]
+token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site=site)
 
 client = Anthropic(
     auth_token="unused",  # replaced with a Datadog token on each request
-    base_url="https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
+    base_url=f"https://ai-gateway.{site}/ai",
 )
 
 message = client.with_options(auth_token=token.get()).messages.create(
@@ -391,7 +393,8 @@ func (t *DatadogToken) Get(ctx context.Context) (string, error) {
 
 func main() {
 	ctx := context.Background()
-	token := &DatadogToken{Site: "{{< region-param key="dd_site" code="true" >}}", OrgUUID: os.Getenv("DD_ORG_UUID")}
+	site := os.Getenv("DD_SITE")
+	token := &DatadogToken{Site: site, OrgUUID: os.Getenv("DD_ORG_UUID")}
 
 	bearer, err := token.Get(ctx)
 	if err != nil {
@@ -404,7 +407,7 @@ func main() {
 		"input": "Reply with exactly: Gateway connected.",
 	})
 	req, _ := http.NewRequestWithContext(ctx, http.MethodPost,
-		"https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/responses", bytes.NewReader(body))
+		"https://ai-gateway."+site+"/ai/v1/responses", bytes.NewReader(body))
 	req.Header.Set("Authorization", "Bearer "+bearer)
 	req.Header.Set("Content-Type", "application/json")
 
@@ -422,7 +425,7 @@ func main() {
 {{% /tab %}}
 {{< /tabs >}}
 
-Set `DD_ORG_UUID` to your organization UUID and `DD_AI_GATEWAY_MODEL` to the model identifier, then run the example in an environment that has the AWS role.
+Set `DD_SITE` to your Datadog site ({{< region-param key="dd_site" code="true" >}}), `DD_ORG_UUID` to your organization UUID, and `DD_AI_GATEWAY_MODEL` to the model identifier. Then run the example in an environment that has the AWS role.
 
 If the token exchange returns `401`, no mapping matches the application's role. Check that the source pattern uses the assumed-role ARN, and that the AWS account is connected through the AWS integration. If AI Gateway returns `403`, check that the service account allows `ai_gateway_usage` and has access to the model.
 
