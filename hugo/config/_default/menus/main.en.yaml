@@ -590,16 +590,21 @@ menu:
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
       weight: 805
+    - name: Modify Tags
+      identifier: modify_tags
+      url: agent/fleet_automation/modify_tags
+      parent: agent_fleet_automation
+      weight: 806
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 807
+      weight: 808
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -2798,6 +2803,11 @@ menu:
       identifier: incident_ai
       parent: incident_investigate
       weight: 106
+    - name: Meeting Summaries and Transcripts
+      url: incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+      identifier: incident_meeting_summaries_transcripts
+      parent: incident_investigate
+      weight: 107
     - name: Setup and Configuration
       url: incident_response/incident_management/setup_and_configuration
       parent: incidents
@@ -10786,6 +10796,11 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_lift_and_interval_calculations
       weight: 6
+    - name: Expected Regret and EVSI
+      url: experiments/statistics/expected_regret_and_evsi
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_expected_regret_and_evsi
+      weight: 7
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
