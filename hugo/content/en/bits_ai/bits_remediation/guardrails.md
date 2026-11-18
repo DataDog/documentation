@@ -44,11 +44,11 @@ Tags for guardrails have the following requirements:
 When you add two or more tags, Bits uses the following logic to target resources:
 
 - If the tags have the same key but different values, then the guardrail applies to resources that have _any_ of the values. For example, if you include the tags `env:staging` and `env:prod`, then the guardrail applies to resources in either `staging` or `prod`.
-- If the tags have different keys, then the guardrail applies only to resources that have _all_ the tags. For example, if you include the tags `service:checkout`, `kube_deployment:checkout`, the guardrail applies only to resources that have both tags.
+- If the tags have different keys, then the guardrail applies only to resources that have _all_ the tags. For example, if you include the tags `service:checkout` and `kube_deployment:checkout`, then the guardrail applies only to resources that have both tags.
 
 ## About overlapping guardrails
 
-If more than one guardrail applies to the same action and resource, the strictest guardrail applies. {{< ui >}}Deny{{< /ui >}} takes precedence over {{< ui >}}Ask{{< /ui >}}.
+If more than one guardrail covers the same action and resource, the more restrictive guardrail applies. {{< ui >}}Deny{{< /ui >}} takes precedence over {{< ui >}}Ask{{< /ui >}}.
 
 For example, suppose one {{< ui >}}Deny{{< /ui >}} guardrail is scoped to `env:prod`, and one {{< ui >}}Ask{{< /ui >}} guardrail is scoped to `service:checkout` and `env:prod`. For `checkout` resources in `prod`, the {{< ui >}}Deny{{< /ui >}} guardrail applies.
 
