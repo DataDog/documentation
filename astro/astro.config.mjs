@@ -24,7 +24,7 @@ import { cdocsTraitsList } from "./src/integrations/cdocsTraitsList.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
-import { cdocsConfigPlugin } from "./src/lib/vite/cdocsConfigPlugin.ts";
+import { cdocsConfigPlugin } from "./src/lib/cdocs/cdocsConfigPlugin.ts";
 import {
   readStampIfAny,
   sdkVersionsFromStamp,
