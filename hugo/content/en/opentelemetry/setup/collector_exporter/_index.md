@@ -21,9 +21,9 @@ further_reading:
 - link: "/opentelemetry/config/otlp_receiver"
   tag: "Documentation"
   text: "Enable the OTLP Receiver"
-- link: "/opentelemetry/setup/ddot_collector/"
+- link: "/opentelemetry/setup/ddot_collector/kubernetes/"
   tag: "Documentation"
-  text: "DDOT Collector"
+  text: "Install the DDOT Collector on Kubernetes (Recommended)"
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
@@ -41,7 +41,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
-This is the recommended setup for a Collector you manage yourself. If you want a Collector that Datadog builds, use the [DDOT Collector][12] instead.
+This is the recommended setup for a Collector you manage yourself. If you want a Collector that Datadog builds and supports, use the [DDOT Collector][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
