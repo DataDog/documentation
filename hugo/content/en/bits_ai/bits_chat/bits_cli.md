@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Bits CLI allows you to interact with Bits Chat from your terminal. Ask Bits a question in natural language, and Bits answers using your Datadog data and the files in your current project. Bits can also edit files and run shell commands on your machine, and it asks for your approval before each action.
+Bits CLI brings Bits to your terminal. Ask Bits a question in natural language, and Bits answers using your Datadog data and the files in your current project. Bits can also edit files and run commands on your machine.
 
 The source code, releases, and issue tracker for Bits CLI are in the [bits-cli GitHub repository][1].
 
@@ -28,6 +28,7 @@ Use Bits CLI to:
 - Investigate an alert or incident while you look at the code that produced it.
 - Query logs, metrics, and traces without leaving the terminal.
 - Ask Bits to propose and apply a fix, approving each change before Bits makes it.
+- Continue a Bits Chat conversation from Datadog in your terminal, or open a terminal conversation in Datadog.
 
 ### When to use Bits CLI
 
@@ -46,7 +47,6 @@ Use Bits CLI when you want capabilities that are specific to Bits, such as:
 
 - macOS (Intel or Apple silicon), Linux (x86_64 or arm64), or Windows (x86_64).
 - A Datadog user whose role has the **Bits Chat Access** permission. See [Bits Chat permissions][5].
-- A web browser for the first sign-in. You can also sign in over SSH.
 
 Bits CLI uses your Datadog role to fetch data, the same way Bits Chat does. It can only read or change the Datadog resources that your role allows.
 
@@ -78,13 +78,7 @@ cd <PROJECT_DIRECTORY>
 bits
 ```
 
-Type a question and press <kbd>Enter</kbd>. To add Datadog context, type `@` and search for a service, monitor, incident, or dashboard. To attach an image, drop it onto the prompt.
-
-To continue a conversation you started in Datadog, use `/resume`. Or, open the conversation by ID:
-
-```shell
-bits --conversation <CONVERSATION_ID>
-```
+Type a prompt and press <kbd>Enter</kbd>. To add Datadog context, type `@` and search for a service, monitor, incident, or dashboard. To attach an image, drop it onto the prompt.
 
 ## Bits CLI commands
 
@@ -100,6 +94,22 @@ Use the following commands in a Bits CLI session:
 | `exit`, `quit`, or <kbd>Ctrl</kbd>+<kbd>D</kbd> | Quit Bits CLI. |
 
 For all commands and flags, run `bits --help`.
+
+## Continue a conversation between Datadog and your terminal
+
+Bits CLI conversations are Bits Chat conversations, so you can move a conversation between Bits Chat in Datadog and your terminal at any point. For example, start investigating an alert in Bits Chat. Then, open the same conversation from the service's repository and ask Bits to find and fix the code that caused the alert.
+
+- **From Datadog to your terminal**: Run `/resume` and pick the conversation, or start Bits CLI with the conversation's ID. Bits keeps the full conversation history.
+
+  ```shell
+  bits --conversation <CONVERSATION_ID>
+  ```
+
+- **From your terminal to Datadog**: Run `/web` to open the current conversation in Datadog.
+
+To try a different approach without changing the original conversation, run `/fork` to continue in a copy.
+
+Conversations stay in your [Bits Chat history][9], are private by default, and follow the same sharing rules as other Bits Chat conversations.
 
 ## Approve actions
 
@@ -120,10 +130,6 @@ When Bits asks for approval, you can approve the single action, or approve that 
 To give Bits instructions for a project, such as how to build and test it, add an `AGENTS.md` or `CLAUDE.md` file to the project root. Bits CLI loads the file automatically at the start of each session, without an approval prompt.
 
 Skills that you add appear as slash commands. To see the skills available in the current session, type `/`.
-
-## Bits CLI conversations
-
-Bits CLI conversations are Bits Chat conversations. They appear in your [Bits Chat history][9], are private by default, and follow the same sharing rules as other Bits Chat conversations.
 
 ## Feedback
 
