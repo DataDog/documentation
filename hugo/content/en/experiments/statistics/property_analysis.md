@@ -31,7 +31,7 @@ Recommendations use the latest successful experiment analysis and match the expe
 
 ## Multiple testing correction
 
-For each metric, Datadog applies Bonferroni correction across properties with a computed test for the same CUPED setting. Each property counts once, regardless of its number of values or treatment variants. A chart qualifies when its p-value is at most `0.05 / number of tested properties`.
+For each metric, Datadog applies Bonferroni correction across all properties that produced a p-value with the same CUPED setting. Non-significant results count; skipped tests do not. Each property counts once, regardless of its number of values or treatment variants. A chart qualifies when its p-value is at most `0.05 / number of tested properties`.
 
 This threshold is separate from the optional scorecard correction described in [Multiple Testing Correction][4]. It does not use the experiment's configured confidence level or analysis method.
 
