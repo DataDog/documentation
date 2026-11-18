@@ -41,7 +41,7 @@ Slack execution policies don't change how actions authenticate. They control whi
 ## Prerequisites
 
 - The [Slack integration][5] installed for your Slack workspace.
-- The Datadog Slack app added to each private channel that your actions target. Slack doesn't let apps join private channels on their own.
+- The Datadog app invited to each private channel that your actions target. In the channel, run `/invite @Datadog`. Slack doesn't let apps join private channels on their own. Without the app, actions on a private channel fail, even when a policy allows them. For more information, see [Configure which Slack channels can receive notifications][9].
 - To create, update, or delete Slack execution policies: the **Execution Groups Write** (`ExecutionGroupWrite`) permission. The default **Datadog Admin** role includes this permission. To grant it to other users, add it to a [custom role][6].
 
 ## How Slack execution policies work
@@ -128,6 +128,9 @@ To see only Slack policies on the Execution Policies page, select **Slack** in t
 
 ## Run Slack actions on private channels
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Slack execution policies are not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Slack actions can't act on private channels on this site.</div>
+{{< /site-region >}}
+
 ### From the Action Catalog
 
 1. In the [Action Catalog][3], search for and click an eligible Slack action, such as **Conversations history**.
@@ -146,6 +149,8 @@ Only the workflow owner can turn on execution policies for a workflow.
 You can also turn on execution policies from a Slack step. If execution policies are off, a Slack step that targets a private channel shows the message **Enable Execution Policies to target private Slack channels**. If you're the workflow owner, click **Enable**. Otherwise, contact the workflow owner.
 
 If execution policies are off, Slack steps in the workflow can act only on public channels. The exception is the actions covered by the [default Slack execution policy](#default-slack-execution-policy).
+
+Execution policies don't control who can view action outputs. Anyone who can view a workflow's runs can see the private channel content that its Slack steps return. Restrict access to workflows that read from private channels.
 
 <div class="alert alert-warning">If a workflow runs as its owner, its editors can run Slack actions on any private channel the owner's policies allow. To limit this, set the workflow's <a href="/actions/workflows/access_and_auth/#workflow-identity">Run as</a> identity to <strong>Initiator</strong> or <strong>Service Account</strong>.</div>
 
@@ -168,29 +173,6 @@ Everyone in your organization has **Resolver** access to the default policy, so 
 To restrict these actions on private channels, edit the default policy or create a **Deny** policy. Users with the **Execution Groups Write** permission can edit or delete the default policy.
 
 
-## Security considerations
-
-- **Execution policies don't control who can view action outputs.** Anyone who can view a workflow's runs can see the private channel content that its Slack steps returned. Restrict access to workflows that read from private channels.
-- **Choose the workflow identity carefully.** When a workflow runs as its owner, its editors can use the owner's access to private channels. Use the **Initiator** or **Service Account** identity for workflows that act on private channels.
-- **Scope policies narrowly.** Allow only the actions, workspaces, and channels a team needs. Prefer specific channel names over broad patterns, and avoid leaving **Channels** empty unless the policy needs to cover every private channel.
-- **Review the default policy.** The default policy lets everyone in your organization send messages to, archive, and change the topic of private channels. It covers every private channel that the Datadog Slack app belongs to. Narrow it if your organization doesn't need that access.
-
-## Troubleshooting
-
-`no execution policy accessible to the acting user allows Slack channel`
-: No **Allow** policy applies to the identity running the action. Check that an **Allow** policy covers the action, workspace, and channel, and that the identity has at least **Resolver** access to it. In a workflow, the identity is the workflow's **Run as** identity.
-
-`is denied by a matching execution policy or there are no matching execution policies`
-: A **Deny** policy matches the action and channel, or no policy covers the action and workspace.
-
-`The channel does not exist or we do not have permission to see it`
-: The Datadog Slack app isn't a member of the private channel, or the channel doesn't exist. Add the Datadog Slack app to the channel. If the channel was created recently, use the channel ID instead of the name.
-
-`was not found, does not exist, or is private`
-: The action ran without execution policies, so it can only act on public channels. In a workflow, turn on execution policies in **Edit permissions**.
-
-If a policy doesn't match as expected, check that each channel selector matches the channel's current name exactly, including case.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -203,3 +185,4 @@ If a policy doesn't match as expected, check that each channel selector matches 
 [6]: /account_management/rbac/
 [7]: https://app.datadoghq.com/actions/execution-policies?integration=slack
 [8]: /actions/workflows/access_and_auth/#workflow-identity
+[9]: /integrations/slack/#configure-which-slack-channels-can-receive-notifications
