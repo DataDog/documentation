@@ -4,6 +4,8 @@
 
 **Breaking:** `loadCustomizationConfig` is no longer exported from the package root. Import it from `cdocs-data/loadCustomizationConfig`. The root export no longer imports the file system or the YAML parser.
 
+Remove the generated TypeDoc docs and the `build-docs` script. The README links to each function's source file instead.
+
 ## 2.1.0
 
 Export `buildFiltersManifest` as a subpath, so a server can resolve filters from config passed as data without bundling the file-system loader.
