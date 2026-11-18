@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { build, type Rolldown } from "vite";
 import { fileURLToPath } from "node:url";
+import type { CustomizationConfigByLang } from "cdocs-data";
 import { cdocsConfigPlugin } from "./cdocsConfigPlugin";
 
 const fixtureDir = fileURLToPath(
@@ -42,9 +43,8 @@ async function buildWithConfig(configDirName: string): Promise<string> {
 describe("cdocsConfigPlugin", () => {
   it("bundles the validated config as plain data", async () => {
     const code = await buildWithConfig("valid");
-    const { default: configByLang } = await import(
-      `data:text/javascript,${encodeURIComponent(code)}`
-    );
+    const { default: configByLang }: { default: CustomizationConfigByLang } =
+      await import(`data:text/javascript,${encodeURIComponent(code)}`);
 
     // The option group's labels are filled from the option glossary at load
     // time, so they show the bundle holds the loaded config, not raw YAML.
