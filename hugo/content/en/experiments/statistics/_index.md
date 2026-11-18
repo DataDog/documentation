@@ -15,5 +15,5 @@ Datadog Experiments provides statistical tools for estimating lift, choosing ana
     {{< nextlink href="/experiments/statistics/global_lift" >}}Global Lift: Estimate how an experiment affects metric totals across your entire user population{{< /nextlink >}}
     {{< nextlink href="/experiments/statistics/lift_and_interval_calculations" >}}Lift and Interval Calculations: Reproduce the lift estimates and intervals for each analysis method{{< /nextlink >}}
     {{< nextlink href="/experiments/statistics/expected_regret_and_evsi" >}}Expected Regret and EVSI: Decide whether to stop a Bayesian experiment or collect more data{{< /nextlink >}}
-    {{< nextlink href="/experiments/statistics/property_analysis" >}}Property Analysis: Find differences in treatment effects across segmentation property values{{< /nextlink >}}
+    {{< nextlink href="/experiments/statistics/property_analysis" >}}Treatment Effect Heterogeneity: Understand the test behind recommended property breakout charts{{< /nextlink >}}
 {{< /whatsnext >}}

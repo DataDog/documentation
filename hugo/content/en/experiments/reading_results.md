@@ -125,7 +125,7 @@ The example below shows a segment-level breakout by country. Use this view to un
 
 ### Interesting property breakouts
 
-Property analysis recommends charts where relative lift appears to differ across segmentation property values, such as device type or country. These properties describe subjects at their first experiment exposure.
+Datadog recommends charts where relative lift appears to differ across segmentation property values, such as device type or country. These properties describe subjects at their first experiment exposure.
 
 To open a recommended chart:
 
@@ -137,7 +137,7 @@ The chart opens in a new tab with the metric split by the recommended property. 
 
 The panel shows up to eight recommendations at first. Click {{< ui >}}Show N more{{< /ui >}} to expand the list or {{< ui >}}Hide N{{< /ui >}} to collapse it. N is the number of additional recommendations. The panel is hidden when no qualifying findings are available.
 
-Use recommendations to choose results to investigate further. See [Property Analysis][16] for the statistical test and how to interpret its findings.
+Use recommendations to choose results to investigate further. See [Treatment Effect Heterogeneity][16] for the statistical test and how to interpret its findings.
 
 ### Copy SQL
 
