@@ -35,7 +35,7 @@ import {
 } from "@lib/cdocs/cdocsPages";
 import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
-import { formatVariantList } from "@lib/cdocs/plaintext/variantList";
+import { cdocsFilterBarNodes } from "@components/CdocsFilterBar/plaintext/CdocsFilterBar";
 import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
 import { renderMdocWithTwins } from "@lib/plaintext/twinTransform";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
@@ -115,9 +115,11 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       searchParams: url.searchParams,
     });
     const bareUrl = `/${slug}/`;
-    const variantList = formatVariantList(
-      buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
-    );
+    const variantList = buildMarkdocStr(
+      cdocsFilterBarNodes(
+        buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
+      ),
+    ).trim();
 
     const linkTargetsById = await getCdocsLinkTargets();
     const requestParams = Object.fromEntries(url.searchParams);
@@ -146,7 +148,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     });
     text = insertAfterTitle(
       rendered,
-      notePrefix + (variantList ? `${variantList}\n` : ""),
+      notePrefix + (variantList ? `${variantList}\n\n` : ""),
     );
   } else {
     // Non-cdoc: render component plaintext twins and prepend the title as an H1

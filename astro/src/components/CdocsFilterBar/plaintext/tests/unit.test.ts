@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { formatVariantList } from "./variantList";
-import type { CdocsFilterLinks, CdocsVariantLabel } from "../cdocsPages";
+import { buildMarkdocStr } from "@lib/plaintext/helpers";
+import type {
+  CdocsFilterLinks,
+  CdocsVariantLabel,
+} from "@lib/cdocs/cdocsPages";
+import { cdocsFilterBarNodes } from "../CdocsFilterBar";
 
 const label = (
   traitId: string,
@@ -57,9 +61,9 @@ const filterLinks: CdocsFilterLinks[] = [
   },
 ];
 
-describe("formatVariantList", () => {
+describe("cdocsFilterBarNodes", () => {
   it("lists each filter's options as links to their plaintext variants", () => {
-    expect(formatVariantList(filterLinks)).toBe(
+    expect(buildMarkdocStr(cdocsFilterBarNodes(filterLinks))).toBe(
       [
         "This page has a version for each combination of the filters below. This version is for Language: Java, API: OpenTelemetry. To read another version, follow its link.",
         "",
@@ -78,6 +82,6 @@ describe("formatVariantList", () => {
   });
 
   it("returns nothing when no filter is shown", () => {
-    expect(formatVariantList([])).toBe("");
+    expect(cdocsFilterBarNodes([])).toEqual([]);
   });
 });
