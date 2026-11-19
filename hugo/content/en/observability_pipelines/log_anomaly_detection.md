@@ -16,7 +16,7 @@ Log Anomaly Detection is in Preview. Contact your account manager to request acc
 
 ## Overview
 
-The Observability Pipelines Worker can detect anomalies in logs sent to your destinations. These anomalies include:
+The Observability Pipelines Worker can detect anomalies in logs sent to your destinations. The Worker detects two types of anomalies:
 
 - New patterns of logs with a warning or error status
 - A sudden increase in logs with a warning or error status
@@ -28,11 +28,11 @@ The Worker looks for these anomalies after logs have gone through all processors
 The Worker sends the following data to Datadog:
 
 - **Log signatures**: Tokenized representations of your logs that describe their structure, without including the actual log data.
-- **Sample logs**: A sample log for each pattern, sent every minute. Unlike signatures, sample logs include log data.
+- **Sample logs**: A sample log for each log pattern, sent every minute. See [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) for more information. Unlike signatures, sample logs include log data.
 
-Datadog groups the logs into patterns to determine anomalous behavior. See [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) for more information.
+Datadog groups the logs into patterns to determine anomalous behavior. For details, see the [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) section.
 
-**Note**: When you send logs from a new service or to a new pipeline, the algorithm first establishes a baseline. The first anomaly can take up to 24 hours to trigger.
+**Note**: When you send logs from a new service or to a new pipeline, Datadog first establishes a baseline. Datadog can take up to 24 hours to detect the first anomaly.
 
 ### How logs are grouped by patterns
 
@@ -54,7 +54,7 @@ Each anomaly has one of the following statuses:
 
 - {{< ui >}}Ongoing{{< /ui >}}: The Worker is still receiving logs with the anomalous patterns.
 - {{< ui >}}Resolved{{< /ui >}}: The Worker has not received logs with the anomalous patterns for 48 hours.
-- {{< ui >}}Expired{{< /ui >}}: The anomaly was in {{< ui >}}Ongoing{{< /ui >}} status for more than 48 hours with no action taken, such as adding a Sample processor. Logs with those patterns are no longer considered anomalous.
+- {{< ui >}}Expired{{< /ui >}}: The anomaly was in {{< ui >}}Ongoing{{< /ui >}} status for more than 48 hours with no action taken, such as adding a [Sample processor][1]. Logs with those patterns are no longer considered anomalous.
 
 ## Enable log anomaly detection
 
@@ -62,11 +62,13 @@ To enable log anomaly detection:
 
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
-1. Click the cog and select {{< ui >}}Pipeline Settings{{< /ui >}}
+1. Click the cog on the upper right side of your pipeline's page and select {{< ui >}}Pipeline Settings{{< /ui >}}.
 1. Toggle on {{< ui >}}Anomaly Detection{{< /ui >}}.
 1. Click {{< ui >}}Done{{< /ui >}}.
 
 ## View log anomalies
+
+To view log anomalies:
 
 1. Navigate to [Observability Pipelines][2].
 1. Expand {{< ui >}}Watchdog Insights{{< /ui >}}.
@@ -74,10 +76,10 @@ To enable log anomaly detection:
 
 ### View patterns for logs sent to the Datadog Logs destination
 
-For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you can see a visual breakdown of the log patterns found.
+For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you can see a visual breakdown of the log patterns found. To view the patterns:
 
 1. In the anomaly side panel, go to the {{< ui >}}Next steps{{< /ui >}} section to see the list of patterns.
-1. In the {{< ui >}}Message{{< /ui >}} column, hover over an aggregate value (highlighted in yellow) to preview a distribution of its values.
+1. In the {{< ui >}}Message{{< /ui >}} column, hover over an aggregate value to open {{< ui >}}Distribution of values by Pattern Inspector{{< /ui >}} and preview a distribution of its values.
 
 {{< img src="observability_pipelines/log_anomaly_detection/pattern_distribution.png" alt="The Next steps section showing a list of log patterns and a distribution of values for a highlighted aggregate value." style="width:100%;" >}}
 
