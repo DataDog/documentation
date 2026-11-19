@@ -51,7 +51,27 @@ Middleware errors don't break your application. If a hook raises an exception, t
    register_middleware(InputOnly())
    ```
 
-   <!-- TODO: For LiteLLM Proxy, middleware runs in the proxy process, not in the agents behind the proxy. Where do users call register_middleware for the proxy? For example, in the guardrails.py file that imports the AI Guard guardrail? -->
+   For LiteLLM Proxy, register middleware in the proxy process, not in the agents behind the proxy. Define the middleware in its own Python module that the proxy can import, such as a module on the proxy's `PYTHONPATH`, and import that module from the `guardrails.py` file that imports the AI Guard guardrail. LiteLLM Proxy can load `guardrails.py` more than once, but Python imports your module only one time, so the middleware is registered one time:
+
+   ```python
+   # aiguard_middleware.py, on the proxy's PYTHONPATH
+   from ddtrace.aiguard.middleware import AIGuardMiddleware, register_middleware
+
+
+   class InputOnly(AIGuardMiddleware):
+       ...
+
+
+   register_middleware(InputOnly())
+   ```
+
+   ```python
+   # guardrails.py
+   import aiguard_middleware  # noqa: F401
+   from ddtrace.aiguard.integrations.litellm import DatadogAIGuardGuardrail
+
+   __all__ = ["DatadogAIGuardGuardrail"]
+   ```
 
 Registered middleware can't be unregistered. To remove middleware, remove the `register_middleware` calls from your code.
 
