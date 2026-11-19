@@ -13,18 +13,18 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 ## Prerequisites
 
 - [Datadog Agent][1] v7.35.0 or later is required.
-- The Ruby client library version 1.6.0 or later is required.
+- The Ruby client library version 1.21.0 or later is required.
 
 ## Containers
 
-If you are using Docker containers, you have the following options: using Docker or configuring your application with the `DD_TAGS` environment variable.
+If you are using Docker containers, use Docker or set the `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` environment variables.
 
 {{% collapse-content title="Docker" level="h3" %}}
-{{% sci-docker-ddtags %}}
+{{% sci-docker %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 ## Serverless
@@ -35,16 +35,16 @@ If you are using Serverless, you have the following options depending on your se
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 ## Host
 
-If you are using a host, configure your application with the `DD_TAGS` environment variable.
+If you are using a host, set the `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` environment variables.
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 [1]: /agent/
