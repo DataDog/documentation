@@ -6274,7 +6274,7 @@
     "request_schema_description": "The request body for updating a RUM operation."
   },
   "QueryAggregatedLongTasks": {
-    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",
+    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across\nmultiple view instances.",
     "summary": "Query aggregated long tasks",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
