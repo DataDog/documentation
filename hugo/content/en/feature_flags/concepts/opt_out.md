@@ -19,7 +19,7 @@ Applications can have separate preferences for flag evaluation telemetry collect
 
 These controls are independent. Suppressing flag evaluation telemetry does not exclude a subject from experiments. Excluding a subject from experiments does not suppress flag evaluation telemetry.
 
-This page describes the shared concepts for client and server SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the SDK support tables below before using a control. Each SDK guide provides configuration and examples.
+This page describes the shared concepts for client and server SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Before using a control, check the tables in the [SDK support](#sdk-support) section. Each SDK guide provides configuration and examples.
 
 ## SDK support
 
@@ -37,6 +37,8 @@ Use Android Flags and OpenFeature artifacts from the same release. Precomputed e
 
 ### Server SDKs
 
+The controls have different minimum SDK versions:
+
 | SDK | Flag evaluation telemetry opt-out | Experimentation opt-out |
 | --- | --- | --- |
 | [Go][6] (`dd-trace-go/v2`) | `2.12.0` | `2.12.0` |
@@ -45,7 +47,7 @@ Use Android Flags and OpenFeature artifacts from the same release. Precomputed e
 
 All three server SDKs support immediate and future-experiments-only modes in the listed versions.
 
-The SDK APIs use the term *experimentation opt-out* for randomization opt-out. Configuration can also mark percentage rollouts and completed experiments that still randomize as eligible for exclusion. The control does not force a control variant.
+Configuration can also mark percentage rollouts and completed experiments that still randomize as eligible for exclusion. Experimentation opt-out does not force a control variant.
 
 ## Choose a control
 
@@ -120,7 +122,7 @@ Keep the subject identifier, such as `targetingKey`, unchanged when updating the
 
 For precomputed assignments, the delivery service must support the selected policy. The client must obtain assignments for the updated context. Check the SDK guide for refresh, cache, and error behavior before choosing application default values.
 
-### Server request contexts
+## Configure server SDKs
 
 Configure the provider before initialization. Then supply the subject's preferences in each evaluation's context. Use a request-local context when the SDK supports one. Do not replace a shared global context for individual requests.
 
@@ -131,11 +133,11 @@ export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
 export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
 ```
 
-The first setting enables the Boolean telemetry attribute; it does not suppress telemetry for every subject. The second selects the experimentation policy. Both controls default to disabled. Explicit provider options take precedence where available.
+The first setting enables the Boolean telemetry attribute; it does not suppress telemetry for every subject. The second setting selects the experimentation policy. Both controls are disabled by default. Explicit provider options take precedence where available.
 
 For each subject who opts out, supply Boolean `true` and the stored timestamp in the corresponding context attributes. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value. Do not send `null` or an empty string as an opt-in value.
 
-After configuration is ready, enabled experimentation modes reject malformed timestamps with an invalid-context error and return the application's default. Disabled mode ignores the timestamp attribute. Only SDKs with future-experiments-only support accept `future_experiments_only`.
+After the provider receives a valid configuration, enabled experimentation modes reject malformed timestamps with an invalid-context error and return the application's default. Disabled mode ignores the timestamp attribute. Only SDKs that support future-experiments-only mode accept `future_experiments_only`.
 
 ## Scope of these controls
 

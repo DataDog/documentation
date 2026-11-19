@@ -66,12 +66,6 @@ Select your language or framework to view SDK-specific setup instructions:
 
 For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, version requirements, and telemetry egress.
 
-## Opt out individual subjects
-
-Configure evaluation telemetry and randomized assignments independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][12] for the support matrix, mode behavior, and language-specific examples.
-
-Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
-
 ## Prerequisites
 
 Requirements depend on the selected SDK and configuration source. Standard requirements include:
@@ -197,6 +191,12 @@ const evaluationContext = {
   roles: ['admin', 'user']                   // array - NOT SUPPORTED
 };
 {{< /code-block >}}
+
+## Opt out individual subjects
+
+Configure evaluation telemetry and experiment participation independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][12] for the support matrix, mode behavior, and language-specific examples.
+
+Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
 
 ## Further reading
 

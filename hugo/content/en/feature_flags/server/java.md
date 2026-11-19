@@ -258,9 +258,9 @@ Replace the example timestamp with the subject's stored preference. Preserve exi
 
 For programmatic configuration, use `new Provider.Options().enableEvaluationTelemetryOptOutParameter(true)` and `.experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)`. Import `ExperimentationOptOutMode` from `com.datadog.openfeature`. Explicit options override deployment settings. `DEFAULT` uses deployment settings; `DISABLED` overrides them.
 
-Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
+Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
 
-Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
+Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][22] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -713,3 +713,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [19]: /feature_flags/guide/server_evaluation_events/
 [20]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 [21]: /feature_flags/concepts/opt_out/
+[22]: /feature_flags/concepts/opt_out/#configure-server-sdks

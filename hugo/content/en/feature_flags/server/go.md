@@ -237,11 +237,11 @@ enabled, err := client.BooleanValue(context.Background(), "new-checkout", false,
 
 Place initialization in the application's startup function. Replace the example timestamp with the subject's stored preference.
 
-For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOptOutParameter` to a `*bool`. Set `ProviderConfig.ExperimentationOptOutMode` to `ExperimentationOptOutImmediate`, `ExperimentationOptOutFutureExperimentsOnly`, or `ExperimentationOptOutDisabled`. Explicit values override the environment; a nil Boolean pointer and `ExperimentationOptOutDefault` use the environment.
+For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOptOutParameter` to a `*bool`. Set `ProviderConfig.ExperimentationOptOutMode` to `ExperimentationOptOutImmediate`, `ExperimentationOptOutFutureExperimentsOnly`, or `ExperimentationOptOutDisabled`. Explicit values override the environment. A nil Boolean pointer and `ExperimentationOptOutDefault` use the environment.
 
-Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. This checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future mode.
+Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. Future-experiments-only mode checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
 
-Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][12] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -443,3 +443,4 @@ func TestNewCheckoutFlow(t *testing.T) {
 [8]: /feature_flags/concepts/configuration_sources/
 [9]: /feature_flags/guide/server_evaluation_events/
 [11]: /feature_flags/concepts/opt_out/
+[12]: /feature_flags/concepts/opt_out/#configure-server-sdks

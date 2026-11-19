@@ -186,9 +186,9 @@ Replace the example timestamp with the subject's stored preference.
 
 The equivalent provider options are `enable_evaluation_telemetry_opt_out_parameter: true` and `experimentation_opt_out_mode: :immediate`. Explicit provider options override deployment settings. Use `:disabled` to override an enabled deployment policy, or omit the option to use deployment settings.
 
-Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future mode checks allocation activation, not prior enrollment.
+Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future-experiments-only mode checks allocation activation, not prior enrollment.
 
-Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations where enabled. Exposures remain enabled for eligible allocations. Use a context for each request. To resume telemetry, supply Boolean `false` or remove the attribute from its owning context layer. To permit experimentation again, remove the timestamp from its owning context layer. Omitting an attribute from one evaluation does not remove an inherited value.
+Telemetry opt-out suppresses each of these that the application enables: new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][15] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -453,3 +453,4 @@ Before the first valid configuration, evaluations return caller-provided default
 [12]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 [13]: /feature_flags/guide/server_evaluation_events/
 [14]: /feature_flags/concepts/opt_out/
+[15]: /feature_flags/concepts/opt_out/#configure-server-sdks
