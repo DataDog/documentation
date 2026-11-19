@@ -23,10 +23,8 @@ This guide explains how to install and enable the SDK, create and use a `FlagsCl
 
 ## Installation
 
-Declare `DatadogFlags` as a dependency in your project. The recommended installation method is Swift Package Manager (SPM).
+Declare `DatadogFlags` as a dependency in your project.
 
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
 To install the Datadog Feature Flags SDK using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift` file:
 
 {{< code-block lang="swift" filename="Package.swift" >}}
@@ -39,43 +37,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogFlags
 {{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "CocoaPods" %}}
-To install the Datadog Feature Flags SDK using [CocoaPods][1], declare following pods in your `Podfile`:
-
-{{< code-block lang="swift" >}}
-DatadogCore
-DatadogFlags
-{{< /code-block >}}
-
-[1]: https://cocoapods.org/
-{{% /tab %}}
-
-{{% tab "Carthage" %}}
-To install the Datadog Feature Flags SDK using [Carthage][1], add `dd-sdk-ios` to your `Cartfile`:
-
-{{< code-block lang="swift" >}}
-github "DataDog/dd-sdk-ios"
-{{< /code-block >}}
-
-**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source. To build and integrate the SDK, run:
-
-{{< code-block lang="bash" >}}
-carthage bootstrap --use-xcframeworks --no-use-binaries
-{{< /code-block >}}
-
-After building, add the following XCFrameworks to your Xcode project (in the {{< ui >}}Frameworks, Libraries, and Embedded Content{{< /ui >}} section):
-
-{{< code-block lang="swift" >}}
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogFlags.xcframework
-{{< /code-block >}}
-
-[1]: https://github.com/Carthage/Carthage
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Initialize the SDK
 
