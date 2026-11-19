@@ -34,13 +34,64 @@ The [`datadog_monitor_json`][4] resource sends a monitor definition to the API a
 
 ## Before you start
 
-- Create an [API key and an application key][5] with the `monitors_write` permission.
+- Create an [API key and an application key][5]. The application key acts as the user who created it, so that user needs a role with the Monitors Write permission. If you restrict the application key with scopes, include `monitors_write`, and add `data_observability_monitors_write` to [run monitors on demand](#run-a-monitor-on-demand).
 - Connect the warehouse or job platform you want to monitor. Monitors only find assets that Data Observability has already collected.
 - For Terraform, use version 4.21.0 or later of the [Datadog provider][6]. Sensitivity, model configuration, and source to target settings require 4.21.0.
+
+### Configure the Terraform provider
+
+Set `api_url` to the API endpoint for your [Datadog site][8]. Without it, the provider sends requests to US1 (`https://api.datadoghq.com/`), and requests for an organization on another site fail with an authentication error.
+
+```hcl
+terraform {
+  required_providers {
+    datadog = {
+      source  = "DataDog/datadog"
+      version = ">= 4.21.0"
+    }
+  }
+}
+
+provider "datadog" {
+  # When api_key and app_key are omitted, the provider reads DD_API_KEY and DD_APP_KEY from the environment.
+  api_url = "https://api.datadoghq.eu/"
+}
+```
 
 ### Start from a monitor created in the UI
 
 The fastest way to get a correct definition is to build the monitor in the UI, then export it. Open the monitor, click the settings menu, and select **Export** to copy its JSON or Terraform. Exported definitions reference assets by `entity_id`, which avoids matching two tables that share a name.
+
+### Find an entity ID
+
+Data Observability gives every asset it collects, such as a table, column, job, or warehouse account, an `entity_id`, a hexadecimal ID such as `9f8e7d6c5b4a3921`. [Source to target monitors](#source-to-target-monitors) and [schema change monitors](#schema-change-monitors) require entity IDs, and filtering by `entity_id` is the most precise way to select an asset in any monitor.
+
+To find an entity ID:
+
+- **From the Catalog URL**: Open the asset in the [Catalog][9]. The entity ID is the part of the URL after `/data-obs/catalog/`, before any `?`. For example, in `https://app.datadoghq.com/data-obs/catalog/9f8e7d6c5b4a3921?section=schema-changes`, the entity ID is `9f8e7d6c5b4a3921`.
+- **From an existing monitor**: Export a monitor that covers the asset. The ID appears in the `filter`, for example ``search for database_table where `entity_id:9f8e7d6c5b4a3921` ``.
+- **From an alert**: When a monitor's `group_by` includes `entity_id`, its alerts include an `entity_id:<ID>` tag for each asset.
+- **With the MCP Server**: To look up many assets, such as when you migrate a large set of monitors, use the Data Observability tools of the [Datadog MCP Server](#look-up-entity-ids-with-the-mcp-server).
+
+#### Look up entity IDs with the MCP Server
+
+The [Datadog MCP Server][19] lets an AI agent, such as Claude Code, Cursor, or Codex, search the Data Observability catalog. To look up entity IDs:
+
+1. [Connect your AI client to the MCP Server][19] and enable the `data-observability` toolset, for example by adding `?toolsets=core,data-observability` to the endpoint URL. The tools require the Monitors Read or APM Read permission.
+2. Ask the agent for the IDs you need. For example:
+   - "Find the entity IDs of the ORDERS table in ANALYTICS_DB.PROD and in ANALYTICS_DB.REPLICA."
+   - "List the entity IDs of all Snowflake tables in the ANALYTICS_DB.PROD schema."
+   - "What is the entity ID of my Snowflake account?"
+
+The agent uses these [tools][10]:
+
+| Tool | Use it to |
+|---|---|
+| `search_data_entities` | Find assets by name, wildcard, platform, account, database, or schema. Each result includes its `entity_id`. Set `entity_type` to `account` to find the account entity ID for a schema change monitor, or to a type such as `database_column` or `dbt_model` for other assets. |
+| `get_data_entity_details` | Confirm the name, type, platform, database, and schema of an `entity_id`, for example before you add it to a monitor. |
+| `get_data_entity_hierarchy` | List the columns in a table, or the tables in a schema, with their entity IDs. |
+
+To find the account entity ID without the MCP Server, export a schema change monitor created in the UI.
 
 ### Validate before you create
 
@@ -55,6 +106,8 @@ curl -X POST "https://api.datadoghq.com/api/v1/monitor/validate" \
 ```
 
 Replace `datadoghq.com` with your [Datadog site][8]. A valid definition returns `{}`. Validation checks syntax only: a filter that matches no assets passes validation and creates a monitor that never reports data. Confirm that your filter returns the assets you expect in the [Catalog][9] or with the [MCP Server][10] `search_data_entities` tool before you deploy.
+
+Validation also doesn't check every value against its limits. For example, it accepts a `sensitivity` outside 0.1 to 6, `model_instructions` longer than 500 characters, a schedule more frequent than every 15 minutes, custom SQL that doesn't return a `dd_value` column, and a `job_type` that doesn't match the jobs in `jobs_query`. Check these settings against this guide before you deploy.
 
 ## Data quality monitors
 
@@ -119,6 +172,8 @@ resource "datadog_monitor" "orders_freshness" {
 {{% /tab %}}
 {{< /tabs >}}
 
+The `@slack-data-alerts` handle in `message` sends notifications to a Slack channel and requires the [Slack integration][17]. For other notification channels and template variables, see [Notifications][18].
+
 ### Query
 
 The `query` sets the detection method:
@@ -160,7 +215,7 @@ search for database_table where `database:ANALYTICS_DB AND schema:PROD AND name:
 search for database_column where `database:ANALYTICS_DB AND schema:PROD AND table:USERS AND name:EMAIL`
 ```
 
-For both tables and columns, `name:` is the asset's own name. A column filter uses `table:` for the parent table. Filters support the same syntax as [asset selection in the UI][11]:
+For both tables and columns, `name:` is the asset's own name. A column filter uses `table:` for the parent table. `search for table` and `search for column` are equivalent to `search for database_table` and `search for database_column`, and exported monitors can use either form. Filters support the same syntax as [asset selection in the UI][11]:
 
 - Attributes: `name:`, `schema:`, `database:`, `account:`, `entity_id:`, and any tag key, such as `owner:data-platform`.
 - Lineage score: `lineage_score:(0.90 OR 1.00)`.
@@ -183,7 +238,7 @@ A monitor covers up to 5,000 assets. Each table a filter matches counts as a mon
 
 ### Group by
 
-Always include the asset keys in `group_by` so each asset reports its own status and chart:
+To get a separate status, alert, and chart for each asset, include the asset keys in `group_by`. The UI uses these keys by default:
 
 - Tables: `["entity_id", "table", "schema", "database"]`
 - Columns: `["entity_id", "column", "table", "schema", "database"]`
@@ -289,8 +344,13 @@ Anomaly monitors accept these settings in `monitor_options`. For what each one d
 | `min_lower_bound_size`, `min_upper_bound_size` | The smallest distance between the prediction and each bound, in the metric's unit. |
 | `model_bounds_override` | Alert direction: `UPPER_ONLY` alerts above the range, `LOWER_ONLY` below it. Omit to alert in both directions. Values are case sensitive. |
 | `model_instructions` | Up to 500 characters of plain-language context about behavior you expect. |
+| `auto_resolve_days` | Resolves an open alert automatically after this many days, from 1 to 365. When unset, an alert stays open until the metric returns within the bounds. |
+| `enable_flatline_detection` | Whether to alert when the metric stops changing. Default `true`. |
+| `function` | `DIFF` or `DIFF_PERCENT`. Applies a difference function to the metric before the model compares it with the bounds. |
 
-The Terraform `datadog_monitor` resource supports `sensitivity`, `min_lower_bound_size`, `min_upper_bound_size`, and `model_bounds_override`. It doesn't support `model_instructions`, so use `datadog_monitor_json` if you set instructions. If you apply a `datadog_monitor` resource to a monitor whose instructions were set in the UI, Terraform removes them.
+The Terraform `datadog_monitor` resource supports every setting in this table except `model_instructions`, so use `datadog_monitor_json` if you set instructions. If you apply a `datadog_monitor` resource to a monitor whose instructions were set in the UI, Terraform removes them.
+
+When a `model_configuration` block is present, the provider always sends `enable_flatline_detection`, which defaults to `true`. If you turned off flatline detection in the UI, set `enable_flatline_detection = false` in Terraform, or the next apply turns it back on.
 
 To alert only after several anomalies in a row, widen the window and add a trigger window. For three consecutive anomalies on an hourly monitor:
 
@@ -314,7 +374,7 @@ Set `on_missing_data` to `default`, `show_no_data`, `show_and_notify_no_data`, o
 Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.
 {{< /callout >}}
 
-A source to target monitor is a `data-quality alert` with a `source_to_target_config` in `monitor_options`. The `filter` selects the target asset. Source to target monitors reference both assets by `entity_id`, so export a monitor from the UI or look up the IDs in the Catalog. A table that Data Observability hasn't crawled yet has no `entity_id`.
+A source to target monitor is a `data-quality alert` with a `source_to_target_config` in `monitor_options`. The `filter` selects the target asset. Source to target monitors reference both assets by `entity_id`. See [Find an entity ID](#find-an-entity-id). A table that Data Observability hasn't collected yet has no `entity_id`.
 
 {{< tabs >}}
 {{% tab "API" %}}
@@ -332,13 +392,13 @@ A source to target monitor is a `data-quality alert` with a `source_to_target_co
         "data_source": "data_quality_metrics",
         "schema_version": "0.0.1",
         "measure": "row_count",
-        "filter": "search for database_table where `entity_id:9f8e7d6c5b4a3921`",
+        "filter": "search for database_table where `entity_id:<TARGET_ENTITY_ID>`",
         "group_by": ["entity_id", "table", "schema", "database"],
         "monitor_options": {
           "crontab_override": "0 * * * *",
           "source_to_target_config": {
-            "source": { "entity_id": "1a2b3c4d5e6f7081", "entity_type": "database_table" },
-            "target": { "entity_id": "9f8e7d6c5b4a3921", "entity_type": "database_table" },
+            "source": { "entity_id": "<SOURCE_ENTITY_ID>", "entity_type": "database_table" },
+            "target": { "entity_id": "<TARGET_ENTITY_ID>", "entity_type": "database_table" },
             "diff_type": "absolute"
           }
         }
@@ -368,7 +428,7 @@ resource "datadog_monitor" "orders_replication" {
       data_source    = "data_quality_metrics"
       schema_version = "0.0.1"
       measure        = "row_count"
-      filter         = "search for database_table where `entity_id:9f8e7d6c5b4a3921`"
+      filter         = "search for database_table where `entity_id:<TARGET_ENTITY_ID>`"
       group_by       = ["entity_id", "table", "schema", "database"]
       monitor_options {
         crontab_override = "0 * * * *"
@@ -376,11 +436,11 @@ resource "datadog_monitor" "orders_replication" {
           diff_type   = "absolute"
           entity_type = "database_table"
           source {
-            entity_id   = "1a2b3c4d5e6f7081"
+            entity_id   = "<SOURCE_ENTITY_ID>"
             entity_type = "database_table"
           }
           target {
-            entity_id   = "9f8e7d6c5b4a3921"
+            entity_id   = "<TARGET_ENTITY_ID>"
             entity_type = "database_table"
           }
         }
@@ -394,7 +454,7 @@ resource "datadog_monitor" "orders_replication" {
 {{< /tabs >}}
 
 - `diff_type` is `absolute` (target minus source) or `diff_percent` (the difference as a percent of the source).
-- `entity_type` is `database_table` or `database_column`, and must be the same for the source and the target.
+- `entity_type` is `database_table` or `database_column`. Use the same type for the source and the target. The Terraform resource also requires `entity_type` directly under `source_to_target_config`. The API doesn't.
 - To compare custom metrics, set `measure` to `custom` and add `custom_sql` to both `source` and `target`.
 - An anomaly monitor learns the current difference as normal, so it doesn't alert on a mismatch that already exists when you create it. To alert on any difference, use a threshold, such as `formula("query1").last("2h") != 0` with `critical` set to `0`.
 
@@ -404,7 +464,7 @@ resource "datadog_monitor" "orders_replication" {
 Schema change monitors are in Preview.
 {{< /callout >}}
 
-Schema change monitors use the `schema-change alert` type. The Terraform `datadog_monitor` resource doesn't accept this type, so use `datadog_monitor_json`. Build the JSON with `jsonencode()` rather than a heredoc, because heredocs change the escaped quotes inside the query.
+Schema change monitors use the `schema-change alert` type. The Terraform `datadog_monitor` resource doesn't accept this type, so use `datadog_monitor_json`. Some Datadog API client libraries also reject this type before they send the request, so call the HTTP API directly. Build the JSON with `jsonencode()` rather than a heredoc, because heredocs change the escaped quotes inside the query.
 
 {{< tabs >}}
 {{% tab "API" %}}
@@ -413,7 +473,7 @@ Schema change monitors use the `schema-change alert` type. The Terraform `datado
 {
   "name": "Columns removed, renamed, or retyped in ANALYTICS_DB.PROD",
   "type": "schema-change alert",
-  "query": "schema-changes(\"@account_entity_id:1a2b3c4d5e6f7081 AND @database:ANALYTICS_DB AND @schema:PROD AND @change_type:(removed OR renamed OR type_changed)\").rollup(\"count\").last(\"10m\") > 0",
+  "query": "schema-changes(\"@account_entity_id:<ACCOUNT_ENTITY_ID> @database:ANALYTICS_DB @schema:PROD @change_type:(removed OR renamed OR type_changed)\").rollup(\"count\").last(\"10m\") > 0",
   "message": "Schema change detected in ANALYTICS_DB.PROD. @slack-data-alerts",
   "options": {
     "thresholds": { "critical": 0 }
@@ -429,7 +489,7 @@ resource "datadog_monitor_json" "prod_schema_changes" {
   monitor = jsonencode({
     name    = "Columns removed, renamed, or retyped in ANALYTICS_DB.PROD"
     type    = "schema-change alert"
-    query   = "schema-changes(\"@account_entity_id:1a2b3c4d5e6f7081 AND @database:ANALYTICS_DB AND @schema:PROD AND @change_type:(removed OR renamed OR type_changed)\").rollup(\"count\").last(\"10m\") > 0"
+    query   = "schema-changes(\"@account_entity_id:<ACCOUNT_ENTITY_ID> @database:ANALYTICS_DB @schema:PROD @change_type:(removed OR renamed OR type_changed)\").rollup(\"count\").last(\"10m\") > 0"
     message = "Schema change detected in ANALYTICS_DB.PROD. @slack-data-alerts"
     options = {
       thresholds = { critical = 0 }
@@ -441,10 +501,11 @@ resource "datadog_monitor_json" "prod_schema_changes" {
 {{% /tab %}}
 {{< /tabs >}}
 
-The query filter accepts:
+The query filter accepts the following attributes. Separate them with spaces, as the UI does:
 
 - `@account_entity_id`: the warehouse account. Export a schema change monitor created in the UI to find this ID.
 - `@database`, `@schema`, `@table`, `@column`: the assets to watch.
+- `@entity_id`: specific assets, such as `@entity_id:(<ENTITY_ID_1> OR <ENTITY_ID_2>)`.
 - `@change_type`: `added`, `removed`, `renamed`, or `type_changed`. Omit it to alert on every change.
 
 ## Job monitors
@@ -460,7 +521,7 @@ Job monitors use the `data-jobs alert` type. The query variable must be named `r
 {
   "name": "Databricks nightly job failed",
   "type": "data-jobs alert",
-  "query": "formula(\"failed_runs(run_query)\").by(job_name,workspace_name,entity_id).last(1d) > 0",
+  "query": "formula(\"failed_runs(run_query)\").by(name,platform,workspace_id,workspace_name,entity_id).last(1d) > 0",
   "message": "A Databricks nightly job failed. @slack-data-alerts",
   "options": {
     "thresholds": { "critical": 0 },
@@ -485,7 +546,7 @@ resource "datadog_monitor" "databricks_nightly_failed" {
   name    = "Databricks nightly job failed"
   type    = "data-jobs alert"
   message = "A Databricks nightly job failed. @slack-data-alerts"
-  query   = "formula(\"failed_runs(run_query)\").by(job_name,workspace_name,entity_id).last(1d) > 0"
+  query   = "formula(\"failed_runs(run_query)\").by(name,platform,workspace_id,workspace_name,entity_id).last(1d) > 0"
 
   monitor_thresholds {
     critical = 0
@@ -513,11 +574,11 @@ Use the `job_type` and group-by keys that match the jobs you select. These are t
 
 | Jobs | `jobs_query` asset type | `job_type` | `.by()` keys |
 |---|---|---|---|
-| Databricks jobs | `databricks_job` | `databricks.job` | `job_name`, `workspace_name` |
+| Databricks jobs | `databricks_job` | `databricks.job` | `name`, `platform`, `workspace_id`, `workspace_name` |
 | Spark applications | `spark_application` | `spark.application` | `job_name`, `env` |
 | Airflow DAGs | `airflow_dag` | `airflow.dag` | `name`, `env` |
 | Airflow tasks | `airflow_job` | `airflow.job` | `name`, `dag_name`, `env` |
-| dbt jobs, models, snapshots, tests | `dbt_job`, `dbt_model`, `dbt_snapshot`, `dbt_test` | `dbt.job`, `dbt.model`, `dbt.snapshot`, `dbt.test` | `name`, `project`, `env` |
+| dbt jobs, models, tests | `dbt_job`, `dbt_model`, `dbt_test` | `dbt.job`, `dbt.model`, `dbt.test` | `name`, `project`, `env` |
 | AWS Glue jobs | `glue_job` | `glue.job` | `name`, `env`, `account`, `region` |
 | Azure Data Factory pipelines | `azure_data_factory_pipeline` | `adf.pipeline` | `name`, `tenant`, `subscription`, `factory` |
 | Custom jobs from OpenLineage | `data_job` with `platform:custom AND integration:<NAME>` | `custom.ol.<NAME>` | `integration`, `name`, `env` |
@@ -535,7 +596,7 @@ Duration monitors alert when a run takes longer than a threshold, or longer than
 {
   "name": "Databricks nightly job ran longer than 2 hours",
   "type": "data-jobs alert",
-  "query": "formula(\"job_duration(run_query)\").detection(static).by(job_name,workspace_name,entity_id) > 7200",
+  "query": "formula(\"job_duration(run_query)\").detection(static).by(name,platform,workspace_id,workspace_name,entity_id) > 7200",
   "message": "A Databricks nightly job ran longer than 2 hours. @slack-data-alerts",
   "options": {
     "thresholds": { "critical": 7200, "warning": 5400 },
@@ -546,7 +607,7 @@ Duration monitors alert when a run takes longer than a threshold, or longer than
         "schema_version": "0.0.1",
         "measure": "duration",
         "filter": "search for databricks_job where `name:nightly_* AND workspace_name:prod`",
-        "group_by": ["job_name", "workspace_name", "entity_id"],
+        "group_by": ["name", "platform", "workspace_id", "workspace_name", "entity_id"],
         "run_filter": "",
         "job_duration": {},
         "monitor_options": { "detection_type": "static", "consecutive_runs": 1 }
@@ -564,7 +625,7 @@ resource "datadog_monitor_json" "databricks_nightly_duration" {
   monitor = jsonencode({
     name    = "Databricks nightly job ran longer than 2 hours"
     type    = "data-jobs alert"
-    query   = "formula(\"job_duration(run_query)\").detection(static).by(job_name,workspace_name,entity_id) > 7200"
+    query   = "formula(\"job_duration(run_query)\").detection(static).by(name,platform,workspace_id,workspace_name,entity_id) > 7200"
     message = "A Databricks nightly job ran longer than 2 hours. @slack-data-alerts"
     options = {
       thresholds = { critical = 7200, warning = 5400 }
@@ -574,7 +635,7 @@ resource "datadog_monitor_json" "databricks_nightly_duration" {
         schema_version  = "0.0.1"
         measure         = "duration"
         filter          = "search for databricks_job where `name:nightly_* AND workspace_name:prod`"
-        group_by        = ["job_name", "workspace_name", "entity_id"]
+        group_by        = ["name", "platform", "workspace_id", "workspace_name", "entity_id"]
         run_filter      = ""
         job_duration    = {}
         monitor_options = { detection_type = "static", consecutive_runs = 1 }
@@ -597,7 +658,7 @@ resource "datadog_monitor_json" "databricks_nightly_duration" {
 Running monitors on demand is in Preview.
 {{< /callout >}}
 
-Trigger a run with the [Data Observability API][15], for example after a pipeline finishes:
+Trigger a run with the [Data Observability API][15], for example after a pipeline finishes. You can only trigger monitors whose `crontab_override` is `not_scheduled`.
 
 ```shell
 curl -X POST "https://api.datadoghq.com/api/v2/data-observability/monitors/<MONITOR_ID>/run" \
@@ -605,7 +666,13 @@ curl -X POST "https://api.datadoghq.com/api/v2/data-observability/monitors/<MONI
   -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 
-The response includes a `run_id`. Check the result with `GET /api/v2/data-observability/monitors/runs/<RUN_ID>/status`, which returns `pending`, `ok`, `warn`, `alert`, or `error`. Table freshness and row count monitors on the default schedule can't run on demand. Set a `crontab_override`, such as `not_scheduled`, first.
+The response returns the run ID in `data.id`:
+
+```json
+{ "data": { "id": "abc123def456", "type": "monitor_run" } }
+```
+
+Poll `GET /api/v2/data-observability/monitors/runs/<RUN_ID>/status` until `data.attributes.status` is no longer `pending`. The final status is `ok`, `warn`, `alert`, or `error`. When the status is `error`, `data.attributes.error_message` explains why.
 
 ## Troubleshooting
 
@@ -615,11 +682,20 @@ The monitor shows no data or no groups
 The API rejects the threshold
 : The `critical` threshold must equal the number in the query. For anomaly monitors, use `> 0` with `critical` set to `0`.
 
-`Measure 'nullness' is not supported for 'table' filters`
-: Column metrics need a `search for database_column` filter.
+`Measure 'nullness' is not supported for 'database_table' filters`
+: Column metrics need a `search for database_column` filter. The message names `table` instead if the filter uses `search for table`.
 
-The API rejects custom SQL with an error about extra columns
+`group_by_columns is required when custom_sql returns group columns`
 : Every column the SQL returns other than `dd_value` must be listed in `group_by_columns`.
+
+`job_type must be one of [...]`
+: Use a `job_type` from the table in [Failed runs](#failed-runs), or `custom.ol.<NAME>` for custom jobs.
+
+The monitor is created but never evaluates
+: Validation doesn't catch every mistake. Check that the filter matches assets in the Catalog, that custom SQL returns a numeric `dd_value` column, and that `job_type` matches the asset type in `jobs_query`.
+
+Terraform requests fail with an authentication error
+: The provider sends requests to US1 by default. Set `api_url` for your site. See [Configure the Terraform provider](#configure-the-terraform-provider).
 
 Terraform reverts changes made in the UI
 : Terraform resets a monitor to its configuration on each apply. Make changes in one place, either Terraform or the UI.
@@ -647,3 +723,6 @@ Resolving the monitor has no effect
 [14]: /monitors/types/data_observability/#missing-data
 [15]: /api/latest/data-observability/
 [16]: /monitors/types/data_observability/#annotate-bounds
+[17]: /integrations/slack/
+[18]: /monitors/notify/
+[19]: /mcp_server/setup/
