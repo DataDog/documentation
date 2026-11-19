@@ -29,7 +29,7 @@ Global holdouts with the same subject type use separate time periods, from inclu
 
 Global and selective holdouts can run at the same time. Each holdout has its own randomized comparison.
 
-### Hierarchical holdouts
+### Multiple selective holdouts
 
 A global holdout measures the combined impact of all eligible released changes across the organization. Its coverage follows the subject type and inclusion dates described in [Holdout types](#holdout-types). Covered experiments must meet the [requirements for Datadog Feature Flags](#requirements-for-datadog-feature-flags).
 
@@ -57,7 +57,7 @@ The team sets an analysis phase from October 1 through October 15 to measure the
 
 The **inclusion period** sets the dates when experiments can join the holdout.
 
-During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must complete their rollouts by the end of this phase to remain included in the holdout analysis.
+During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must complete their rollouts by the end of this phase. Experiments that miss this deadline can continue running, but a later rollout is not added to this holdout's primary analysis.
 
 The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created.
 
@@ -69,11 +69,15 @@ The analysis phase starts when or after the inclusion phase ends. Subjects remai
 
 The primary analysis uses metric data from the analysis phase to measure the combined effect of the shipped changes.
 
+After the analysis end date, both groups follow the covered experiments' normal flag rules, including any completed winner rollouts. For experiments that remain covered, subjects from the completed holdout stay outside later holdouts on those experiments.
+
 ## Subject assignment
 
 The **traffic allocation** is the total share of subjects set aside for both groups. Datadog divides this share equally.
 
 For example, a 10% holdout assigns about 5% of eligible subjects to each group. The remaining 90% follows the experiment's normal rules. Holdout subjects are excluded from the individual experiment's comparison.
+
+A smaller traffic allocation leaves more subjects available for individual experiments and fewer subjects in each holdout group. Choose the allocation and analysis duration together to allow enough subjects and time to measure the selected outcomes.
 
 Within each holdout, a subject keeps the same group across covered experiments. Each experiment's targeting and traffic rules still apply.
 
