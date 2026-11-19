@@ -166,7 +166,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 **Ruby & Go SDKs**: The OpenTelemetry SDK activates automatically upon import and configuration, so this setting is not applicable.
 
 ## OTLP Exporter configuration
-Datadog SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
+DDOT SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
 
 Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always take precedence over their general counterparts (like `OTEL_EXPORTER_OTLP_PROTOCOL`).
 
