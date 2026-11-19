@@ -113,6 +113,10 @@ Before you begin, ensure that you have an [AWS][7] account. The CloudFormation t
    1. Add your Datadog [API key][9].
    1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].
    1. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+   1. Optionally, choose whether Datadog can install [instrumentation][64] on your Amazon EC2 instances and AWS Lambda functions. This option appears in the {{< ui >}}Install Datadog on your AWS resources{{< /ui >}} section when it is available for your account:
+      - The {{< ui >}}Grant Datadog permission to manage installations{{< /ui >}} toggle is on by default. It adds the instrumentation permissions to the stack. To leave them out, turn the toggle off.
+      - {{< ui >}}Select resources later{{< /ui >}} is selected by default. Nothing is installed until you choose resources in [Fleet Automation][65].
+      - {{< ui >}}Install on all resources{{< /ui >}} instruments every eligible resource for the platforms you select, which changes running workloads. Lambda functions with less than 256 MB of memory are excluded.
 1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 1. Check the required boxes from AWS and click {{< ui >}}Create stack{{< /ui >}}. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
@@ -166,6 +170,18 @@ To manage metric name filters programmatically, see [Configure AWS metric name f
 
 Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
 
+### Monitor service quotas
+
+[AWS service quotas][62] cap how much of a service an account can use in a region. Service quota monitoring reports how much of each quota an account is consuming in the metric `aws.servicequota.percentage_used`, so you can alert before a quota is reached instead of after a request is throttled or rejected.
+
+On the [AWS integration page][8], on the {{< ui >}}General{{< /ui >}} tab, select an account and turn on {{< ui >}}Enable service quota tracking{{< /ui >}}. The toggle is only available if resource collection is enabled for that account.
+
+<div class="alert alert-info">
+Service quota monitoring calls the CloudWatch <code>GetMetricData</code> API every 30 minutes in each enabled region. AWS bills these calls to your account.
+</div>
+
+For the services covered, the tags available, and how to query the applied quota limits, see [Monitor AWS service quotas][63].
+
 ## Send logs
 
 There are two ways to send AWS service logs to Datadog:
@@ -183,6 +199,8 @@ Once you have enabled logs, find them in the [Log Explorer][15] using either the
 ## Get more from the Datadog platform
 
 ### Deeper visibility with the Datadog Agent on EC2
+
+To install the Agent on your EC2 instances from Datadog, without connecting to each instance, see [Install Datadog Instrumentation through the AWS Integration][64]. The same guide covers adding the Datadog Lambda extension to your Lambda functions.
 
 By default the Datadog AWS integration crawls the CloudWatch API for AWS-provided metrics, but you can gain even deeper visibility into your EC2 instances with the [Datadog Agent][16]. The Agent is a lightweight daemon that reports metrics and events, and can also be configured for logs and traces. The [Agent Installation][17] section of the Datadog application provides instructions for installing the Agent on a wide variety of operating systems. Many operating systems (for example, Amazon Linux) have one-step installation commands that you can run from the instance terminal to install the Agent:
 {{< img src="getting_started/integrations/integrations-agent-installation.png" alt="The 'Agent' section of the 'Integrations' tab in Datadog. Along the left are displayed a list of supported operating systems for the Datadog Agent. 'Amazon Linux' is highlighted from this list. On the right is displayed 'Use our easy one-step install'. The command for installing the Agent is displayed below this, with the DD_API_KEY section obfuscated.">}}
@@ -253,6 +271,15 @@ Use the [Setting Up Cloud Security Misconfigurations][54] guide to detect and as
 
 If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`, see its dedicated [troubleshooting page][2]. For any other issues, see the [AWS integration troubleshooting guide][57].
 
+## Remove the integration
+
+If you installed [Datadog instrumentation][64] through the AWS integration, remove it before you delete the CloudFormation stack or remove the AWS account from Datadog. Datadog removes instrumentation with the integration IAM role. After the stack or the account is gone, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration that Datadog added stay in place.
+
+1. Open the [AWS Install Agents page][65] in Fleet Automation and select the AWS account.
+1. For each instrumented workload type ({{< ui >}}EC2 Instances{{< /ui >}} and {{< ui >}}Lambda Functions{{< /ui >}}), click {{< ui >}}Remove all{{< /ui >}}.
+1. Review the summary and click {{< ui >}}Uninstall Agent{{< /ui >}}.
+1. After the removal completes, delete the CloudFormation stack or remove the account.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -318,3 +345,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [61]: /integrations/guide/aws-metric-name-filters/
+[62]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+[63]: /integrations/guide/aws-service-quotas/
+[64]: /integrations/guide/aws-agent-installation/
+[65]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws

@@ -1,114 +1,113 @@
 ---
-description: Configura localizaciones privadas para monitorizar aplicaciones internas
-  y URL privadas. Crea localizaciones personalizadas para áreas de misión crítica
-  y entornos de pruebas internos.
+description: Configure ubicaciones privadas para supervisar aplicaciones internas
+  y URL privadas. Cree ubicaciones personalizadas para áreas de misión crítica y entornos
+  de prueba internos.
 further_reading:
 - link: https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/
   tag: Blog
-  text: Monitoriza tus localizaciones privadas Synthetic con Datadog
+  text: Haga un seguimiento de sus ubicaciones privadas Synthetic con Datadog
 - link: /synthetics/private_locations
   tag: Documentación
-  text: Más información sobre las localizaciones privadas
+  text: Más información sobre ubicaciones privadas
 - link: /synthetics/guide/kerberos-authentication/
   tag: Guía
-  text: Autenticación Kerberos para la monitorización Synthetic
-title: Empezando con las localizaciones privadas
+  text: Autenticación Kerberos para Synthetic Monitoring
+title: Introducción a Private Locations
 ---
+## Descripción general {#overview}
 
-## Información general
+Las ubicaciones privadas le permiten **supervisar aplicaciones internas** o URL privadas que no son accesibles desde Internet pública. 
 
-Las localizaciones privadas te permiten **monitorizar aplicaciones internas** o direcciones URL privadas que no son accesibles a través de la red pública de Internet. 
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura de cómo funciona una ubicación privada en Synthetic Monitoring" style="width:100%;">}}
 
-{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura que muestra cómo funciona una localización privada durante la monitorización Synthetic" style="width:100%;">}}
+También puede usar ubicaciones privadas para:
 
-También puedes utilizar las localizaciones privadas para:
+- **Crear ubicaciones personalizadas** en áreas de misión crítica de su negocio.
+- **Verificar el rendimiento de la aplicación en su entorno de prueba interno** antes de lanzar nuevas funciones a producción con [pruebas Synthetic en sus Pipelines de CI/CD][1].
+- **Comparar el rendimiento de la aplicación** desde dentro y fuera de su red interna.
+- **[Autentique pruebas de Synthetic Monitoring mediante Kerberos SSO][16]** para sitios y API internos basados en Windows.
 
-- **Crear localizaciones personalizadas** en áreas consideradas críticas para el desarrollo de tu negocio.
-- **Verificar el rendimiento de la aplicación en tu entorno de testeo interno** antes de lanzar nuevas funciones a la fase de producción con [tests Synthetic en tus pipelines de integración/distribución continuas (CI/CD)][1].
-- **Comparar el rendimiento de la aplicación** desde dentro y fuera de tu red interna.
-- **[Autenticar tests de monitorización Synthetic utilizando el inicio de sesión único de Kerberos][16]** para sitios y API internos basados en Windows.
+Las ubicaciones privadas son contenedores de Docker o servicios de Windows que puede instalar en cualquier lugar dentro de su red privada. Obtenga la imagen de Docker en [Docker Hub][2] o descargue el [instalador de Windows][13].**\*** 
 
-Las localizaciones privadas son contenedores Docker o servicios Windows que puedes instalar en cualquier lugar dentro de tu red privada. Busca la imagen Docker en [Google Container Registry][2] o descarga el [instalador de Windows][13].**\***
+**Nota**: Las ubicaciones privadas en contenedores de Docker solo son compatibles con la arquitectura amd64. Si tiene alguna pregunta sobre la compatibilidad con arm64, comuníquese con el [soporte de Datadog][15].
 
-**Nota**: Las localizaciones privadas en Docker sólo son compatibles con la arquitectura amd64. Si tienes alguna pregunta sobre la compatibilidad con arm64, ponte en contacto con el [servicio de asistencia de Datadog][15].
+**\*** **El uso y la operación de este software se rigen por el Acuerdo de licencia de usuario final disponible [aquí][14].**
 
-**\*** **El uso y funcionamiento de este software se rige por el Acuerdo de licencia de usuarios finales, disponible [aquí][14].**
+Una vez que haya creado e instalado su ubicación privada, puede asignar [pruebas Synthetic][3] a su ubicación privada tal como lo haría con una ubicación administrada. 
 
-Una vez que hayas creado e instalado tu localización privada, puedes asignar [tests Synthetic][3] a tu localización privada igual que harías con una localización gestionada.
+Los resultados de las pruebas de sus ubicaciones privadas se muestran de forma idéntica a los resultados de las pruebas de su ubicación administrada. 
 
-Los resultados de los tests de las localizaciones privadas se muestran de forma idéntica a los resultados de los tests de la localización gestionada.
+{{< img src="synthetics/private_locations/test_results_pl.png" alt="Asignar una prueba Synthetic a ubicaciones privadas" style="width:100%;">}}
 
-{{< img src="synthetics/private_locations/test_results_pl.png" alt="Asignar un test Synthetic a localizaciones privadas" style="width:100%;">}}
+## Cree su ubicación privada {#create-your-private-location}
 
-## Creación de tu localización privada
+1. En el sitio de Datadog, pase el cursor sobre {{< ui >}}Digital Experience{{< /ui >}} y seleccione {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Private Locations{{< /ui >}}][5]. 
+2. Haga clic en {{< ui >}}Add Private Location{{< /ui >}}.
+3. Complete los detalles de su ubicación privada. Solo los campos {{< ui >}}Name{{< /ui >}} y {{< ui >}}API key{{< /ui >}} son obligatorios.
+4. Haga clic en {{< ui >}}Save Location and Generate Configuration File{{< /ui >}} para generar el archivo de configuración asociado con su ubicación privada en su worker. 
+5. Dependiendo de dónde haya instalado su ubicación privada, es posible que deba ingresar parámetros adicionales en su archivo de configuración: 
+    - Si utiliza un proxy, ingrese la URL como `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
+    - {{< ui >}}Block reserved IPs{{< /ui >}} está activado de forma predeterminada, lo que limita el acceso de la ubicación privada a las IP reservadas. Para permitir el acceso a puntos de conexión específicos, ingrese rangos de IP y/o nombres de dominio.  
 
-1. En el sitio Datadog, pasa el ratón sobre **Experiencia digital** y selecciona **Configuración** > [**Localizaciones privadas**][5].
-2. Haz clic en **Add Private Location** (Añadir localización privada).
-3. Rellena los datos de tu localización privada. Solo los campos `Name` y `API key` son obligatorios.
-4. Haz clic en **Save Location and Generate Configuration File** (Guardar localización y generar archivo de configuración) para generar el archivo de configuración asociado a tu localización privada en tu worker. 
-5. Dependiendo de dónde hayas instalado tu localización privada, es posible que tengas que introducir parámetros adicionales en el archivo de configuración:
-    - Si utilizas un proxy, introduce la URL del siguiente modo: `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
-    - Si quieres bloquear direcciones IP reservadas, activa **Block reserved IPs** (Bloquear IP reservadas) e introduce los rangos de IP.
+    Para obtener más información, consulte [Opciones de configuración de ubicaciones privadas][6], [Ejecutar pruebas Synthetic desde ubicaciones privadas][7] y [Fortalecimiento de la seguridad de red de ubicaciones privadas][17]. 
 
-    Para obtener más información, consulta las [opciones de configuración de las localizaciones privadas][6] y cómo [realizar tests Synthetic desde localizaciones privadas][7].
+6. Copie y pegue el archivo de configuración de su ubicación privada en su directorio de trabajo.
 
-6. Copia y pega el archivo de configuración de tu localización privada en tu directorio de trabajo.
-
-    **Nota**: El archivo de configuración contiene secretos para autenticar la localización privada, descifrar la configuración del test y cifrar sus resultados. Datadog no almacena estos secretos, así que guárdalos en una unidad local antes de salir del formulario de creación de **localizaciones privadas**. **Para poder añadir más workers a tu localización privada, es necesario que puedas volver a consultar estos secretos**.
-7. Cuando lo tengas todo listo, haz clic en **View Installation Instructions** (Ver instrucciones de instalación).
-8. Sigue las instrucciones de instalación en función del entorno en el que quieras ejecutar el worker de la localización privada.
-9. Si utilizas Docker, lanza tu worker como un contenedor autónomo, utilizando el comando Docker `run` y tu archivo de configuración:
+    **Nota**: El archivo de configuración contiene secretos para la autenticación de la ubicación privada, el descifrado de la configuración de pruebas y el cifrado de los resultados de las pruebas. Datadog no almacena los secretos, así que guárdelos localmente antes de salir del formulario de creación de {{< ui >}}Private Locations{{< /ui >}}. **Necesita poder volver a consultar los secretos para agregar más workers a su ubicación privada**. 
+7. Cuando esté listo, haga clic en {{< ui >}}View Installation Instructions{{< /ui >}}.
+8. Siga las instrucciones de instalación según el entorno en el que desee ejecutar el worker de Private Location.
+9. Si utiliza Docker, inicie su worker como un contenedor independiente utilizando el comando `run` de Docker y su archivo de configuración:
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
+    
+    This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
 
-    Este comando lanza un contenedor Docker y prepara tu localización privada para ejecutar pruebas. Datadog recomienda ejecutar el contenedor en modo separado con la política de reinicio adecuada.
-
-    <div class="alert alert-info">Puedes utilizar otro tiempo de ejecución de contenedor, como por ejemplo Podman. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">documentación sobre localizaciones privadas</a>.</div>
-
-    Si usas Windows, [ejecuta el instalador de localizaciones privadas de Synthetics con una GUI][12] o ejecuta el comando `msiexec` en la línea de comandos, dentro del directorio donde has descargado el instalador:
+    <div class="alert alert-info">Puede utilizar otro entorno de ejecución de contenedores, como Podman. Para obtener más información, consulte la <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">documentación de ubicaciones privadas</a>.</div>
+    
+    If you are using Windows, [run the Synthetics Private Location Installer with a GUI][12] or run the `msiexec` command on the command line inside the directory where you downloaded the installer:
 
     ```shell
     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
     ```
 
-10. Si tu localización privada envía información correctamente a Datadog, aparecerá un `OK` en **Private Location Status** (Estado de la localización privada) y en la lista de **Private Locations** (Localizaciones privadas) de la página **Settings** (Configuración):
+10. Si su ubicación privada informa correctamente a Datadog, se mostrará un estado de salud `OK` en {{< ui >}}Private Location Status{{< /ui >}} y en la lista {{< ui >}}Private Locations{{< /ui >}} en la página {{< ui >}}Settings{{< /ui >}}:
 
-    {{< img src="synthetics/private_locations/pl_health.png" alt="Estado de localización privada" style="width:100%;">}}
+    {{< img src="synthetics/private_locations/pl_health.png" alt="Estado de salud de la ubicación privada" style="width:100%;">}}
 
-    Además, puedes ver los logs de una localización privada en tu terminal:
+    Additionally, you can see private location logs in your terminal:
 
     ```text
     2022-02-28 16:20:03 [info]: Fetching 10 messages from queue - 10 slots available
     2022-02-28 16:20:03 [info]: Fetching 10 messages from queue - 10 slots available
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
-11. Una vez que hayas terminado con todos los tests de tu endpoint interno, haz clic en **OK**.
+11. Una vez que termine de probar su punto de conexión interno, haga clic en {{< ui >}}OK{{< /ui >}}.
 
-## Ejecuta tests Synthetic con tu localización privada
+## Ejecute pruebas Synthetic con su ubicación privada {#run-synthetic-tests-with-your-private-location}
 
-Utiliza tu nueva localización privada como si fuese una localización gestionada en tus tests Synthetic.
+Utilice su nueva ubicación privada tal como lo haría con una ubicación administrada en sus pruebas Synthetic.
 
-1. Crea un [test de API][2], un [test de API multipaso][8] o un [test de navegador][9] en cualquier endpoint interno o aplicación que quieras monitorizar.
-2. En la sección **Private Locations** (Localizaciones privadas), selecciona tu nueva localización privada:
+1. Cree una [prueba de API][2], una [prueba de API en varios pasos][8] o una [prueba de navegador][9] en cualquier punto de conexión o aplicación interna que desee monitorear.
+2. En {{< ui >}}Private Locations{{< /ui >}}, seleccione su nueva ubicación privada:
 
-    {{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Asignar un test Synthetic a una localización privada" style="width:100%;">}}
+    {{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Asigne una prueba Synthetic a una ubicación privada" style="width:100%;">}}
 
-3. ¡Continúa rellenando el test!
+3. ¡Continúe completando su prueba!
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 
 [1]: /es/continuous_testing/cicd_integrations
-[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[2]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [3]: /es/getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/settings/private-locations
-[6]: /es/synthetics/private_locations/configuration/#configuration-options
+[6]: /es/synthetics/platform/private_locations/configuration/#all-configuration-options
 [7]: /es/synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /es/getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /es/getting_started/synthetics/browser_test
@@ -119,3 +118,4 @@ Utiliza tu nueva localización privada como si fuese una localización gestionad
 [14]: https://www.datadoghq.com/legal/eula/
 [15]: https://www.datadoghq.com/support/
 [16]: /es/synthetics/guide/kerberos-authentication/
+[17]: /es/synthetics/platform/private_locations/network_security/

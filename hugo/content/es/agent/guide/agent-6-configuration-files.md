@@ -1,47 +1,42 @@
 ---
 disable_toc: false
 private: true
-title: Archivos de configuración del Agent 6
+title: Archivos de configuración de Agent 6
 ---
+## Archivo de configuración principal de Agent {#agent-main-configuration-file}
 
-## Archivo de configuración principal del Agent
+Los archivos de configuración para las verificaciones e integraciones del Agent se almacenan en el directorio `conf.d`.
 
-Los archivos de configuración para los checks e integraciones del Agent se almacenan en el directorio `conf.d`.
+El archivo de configuración de Agent v6 utiliza **YAML** para admitir mejor las configuraciones complejas y proporcionar una experiencia de configuración coherente, ya que Checks también utiliza archivos de configuración YAML. Por lo tanto, `datadog.conf` (v5) se deja de usar en favor de `datadog.yaml` (v6).
 
-El archivo de configuración del Agent v6 utiliza **YAML** para adaptarse mejor a configuraciones complejas y garantizar la coherencia en el proceso de configuración, ya que los checks también utilizan archivos de configuración YAML. Por este motivo, `datadog.yaml` (v6) pasa a sustituir a `datadog.conf` (v5).
-
-La localización del directorio `conf.d` difiere según el sistema operativo.
+La ubicación del directorio `conf.d` varía según el sistema operativo.
 
 | Plataforma                             | Comando                              |
 |:-------------------------------------|:-------------------------------------|
-| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
 | Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
 
-Consulta el [archivo `config_template.yaml` de ejemplo][1] para ver todas las opciones disponibles de configuración.
+## Directorio de configuración del Agent {#agent-configuration-directory}
 
-## Directorio de configuración del Agent
-
-Las versiones anteriores del Datadog Agent almacenaban los archivos de configuración en `/dd-agent/conf.d/`. A partir de la versión 6.0, los archivos de configuración se almacenan en el directorio `conf.d`. La localización del directorio difiere en función del sistema operativo.
+Las versiones anteriores de Datadog Agent almacenaban los archivos de configuración en `/dd-agent/conf.d/`. A partir de la versión 6.0, los archivos de configuración se almacenan en el directorio `conf.d`. La ubicación del directorio varía según el sistema operativo.
 
 | Plataforma                             | Comando                        |
 |:-------------------------------------|:-------------------------------|
-| AIX                                  | `/etc/datadog-agent/conf.d/`   |
 | Linux                                | `/etc/datadog-agent/conf.d/`   |
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
 | macOS                                | `~/.datadog-agent/conf.d/`     |
-| Red Hat                               | `/etc/datadog-agent/conf.d/`   |
+| RedHat                               | `/etc/datadog-agent/conf.d/`   |
 | Fuente                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
-| Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
+| Ubuntu | `/etc/datadog-agent/conf.d/`   |
 | Windows                              | `%ProgramData%\Datadog\conf.d` |
 
-### Archivos de configuración de checks
+### Archivos de configuración de verificación {#check-configuration-files}
 
-En el archivo `conf.yaml.example`, en la carpeta `<CHECK_NAME>.d/` correspondiente, encontrarás un ejemplo de todos los archivos de configuración de checks del Agent. Cambia el nombre a `conf.yaml` para habilitar el check asociado. **Nota**: El Agent carga los archivos YAML válidos incluidos en la carpeta `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. Con este paso, las configuraciones complejas se dividen en varios archivos. Este sería un ejemplo de configuración de `http_check`:
+Se puede encontrar un ejemplo para cada archivo de configuración de verificación del Agent en el archivo `conf.yaml.example` en la carpeta `<CHECK_NAME>.d/` correspondiente. Cambie el nombre de este archivo a `conf.yaml` para habilitar la verificación asociada. **Nota**: El Agent carga los archivos YAML válidos contenidos en la carpeta: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. Esto permite dividir configuraciones complejas en varios archivos. Por ejemplo, una configuración para `http_check` podría verse así:
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
@@ -49,9 +44,9 @@ En el archivo `conf.yaml.example`, en la carpeta `<CHECK_NAME>.d/` correspondien
 └── frontend.yaml
 ```
 
-Un caso especial son los archivos YAML con el sufijo `.default`. El Agent carga estos archivos por defecto y ayuda a definir el conjunto básico de checks que siempre están activados (CPU, memoria, tiempo de actividad...). Se ignoran si se encuentra cualquier otra configuración para ese check, por lo tanto puedes ignorarlos sin problemas. Si deseas desactivar uno de los checks por defecto, elimina ese archivo. Para configurar estos checks, `conf.yaml.example` se debe utilizar como base.
+Un caso especial son los archivos YAML con el sufijo `.default`. Estos archivos son cargados por el Agent de forma predeterminada y ayudan a definir el conjunto principal de verificaciones que siempre están habilitadas (CPU, memoria, tiempo de actividad...). Se ignoran si se encuentra cualquier otra configuración para esa verificación, por lo tanto, puede ignorarlos de forma segura. Si desea deshabilitar una de las verificaciones predeterminadas, elimine ese archivo. Para configurar estas verificaciones, se debe usar `conf.yaml.example` como base.
 
-Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configuración con el archivo `auto_conf.yaml`. Por ejemplo, en el caso del check de Redis, esta es la configuración de `redisdb.d/`:
+Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configuración con el archivo `auto_conf.yaml`. Por ejemplo, para la verificación de Redis, aquí está la configuración en `redisdb.d/`:
 
 ```text
 /etc/datadog-agent/conf.d/redisdb.d/
@@ -59,13 +54,12 @@ Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configu
 └── conf.yaml.example
 ```
 
-Para la recopilación de logs, si hay varios archivos YAML que apuntan a una misma fuente de logs, el Agent no los acepta para evitar que se envíen duplicados a Datadog. Si se da este caso, el Agent ordena los archivos de manera alfabética y utiliza el primero de la lista.
+Para la recolección de registros, el Agent no acepta múltiples archivos YAML que apunten a la misma fuente de registros para evitar que se envíen registros duplicados a Datadog. En el caso de que haya más de un archivo YAML que apunte a la misma fuente de registros, el Agent considera los archivos en orden alfabético y utiliza el primer archivo.
 
-Para preservar la compatibilidad con versiones anteriores, el Agent sigue aceptando los archivos de configuración en formato `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`. Sin embargo, se recomienda utilizar el formato nuevo.
+Para preservar la compatibilidad con versiones anteriores, el Agent sigue detectando archivos de configuración en el formato `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`, pero se recomienda encarecidamente migrar al nuevo diseño.
 
-## Archivo de configuración de JMX
+## El archivo de configuración de JMX {#jmx-configuration-file}
 
-Los checks del JMX Agent tienen un archivo `metrics.yaml` adicional en su carpeta de configuración. Se trata de una lista de todos los beans que el Datadog Agent recopila por defecto. De esta forma, no es necesario hacer una lista de todos los beans manualmente cuando se configura un check a través de [etiquetas de Docker o anotaciones k8s][2].
+Las verificaciones del Agent de JMX tienen un archivo `metrics.yaml` adicional en su carpeta de configuración. Es una lista de todos los beans que el Datadog Agent recopila de forma predeterminada. De esta manera, no necesita listar todos los beans manualmente cuando configura una verificación a través de [etiquetas de Docker o anotaciones de k8s][2].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /es/agent/kubernetes/integrations/#configuration

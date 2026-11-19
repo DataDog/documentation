@@ -37,7 +37,7 @@ For more information about IoT billing, see the [Datadog Pricing page][7].
 
 To manage your {{< ui >}}Payment Method{{< /ui >}} and view {{< ui >}}Subscription Details{{< /ui >}}, you must be a Datadog Admin user.
 
-Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing_edit`) [permissions][8] can access this data.
+Alternatively, roles with the Billing Read (`billing_read`) and Contract Read (`contract_read`) [permissions][8] can view this data. Managing your payment method also requires Billing Edit (`billing_edit`).
 
 ### Managing your payment method
 
@@ -107,7 +107,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI/CD Optimization{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}

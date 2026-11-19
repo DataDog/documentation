@@ -100,16 +100,16 @@ La pestaña {{< ui >}}Remediation{{< /ui >}} lista todas las automatizaciones de
 - Cambiar el nombre de una automatización
 - Eliminar una automatización
 
-## Historial de ejecución {#execution-history}
+## Historial de ejecuciones {#execution-history}
 
 Abra una automatización y seleccione la pestaña {{< ui >}}Activity{{< /ui >}} para ver las ejecuciones pasadas y próximas. Cada registro de ejecución incluye:
 
-- Hora y estado de la ejecución (éxito, error o pendiente de aprobación)
+- Marca de tiempo y estado de la ejecución (éxito, error o pendiente de aprobación)
 - Los recursos sobre los que se actuó
 - Ahorros estimados obtenidos por la ejecución
 - Un enlace a la ejecución de Workflow Automation subyacente
 
-Utilice los filtros en la parte superior del "visualizar" {{< ui >}}Activity{{< /ui >}} para encontrar ejecuciones por estado, tipo de recomendación o rango de fechas.
+Utilice los filtros en la parte superior de la vista {{< ui >}}Activity{{< /ui >}} para encontrar ejecuciones por estado, tipo de recomendación o rango de fechas.
 
 ## Historial de versiones {#version-history}
 

@@ -463,6 +463,8 @@ class FallbackWrapper {
 {{% /collapse-content %}}
 
 {{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="fallback-javascript" %}}
+Replace `YOUR_DD_SITE` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="javascript" filename="fallback-wrapper.js" >}}
 import * as ld from 'launchdarkly-js-client-sdk';
 import { OpenFeature } from '@openfeature/web-sdk';
@@ -476,7 +478,7 @@ class FallbackWrapper {
             const ddProvider = new DatadogProvider({
                 applicationId: 'YOUR_APP_ID',
                 clientToken: 'YOUR_CLIENT_TOKEN',
-                site: '{{< region-param key="dd_site" code="true" >}}',
+                site: 'YOUR_DD_SITE',
                 env: 'ENV_NAME',
             });
 

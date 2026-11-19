@@ -10,8 +10,6 @@ further_reading:
   text: プライベートアクションランナー
 title: プライベートリンク接続
 ---
-<div class="alert alert-info">プライベートリンク接続を介した Databricks の監視はプレビュー版です。</div>
-
 [プライベートリンク接続][1]を使用してデプロイされた Databricks ワークスペースはパブリックインターネットから隔離されているため、Datadog が Databricks API に直接アクセスすることはできません。これらのワークスペースを監視するには、環境内で[プライベートアクションランナー][2] (PAR) をデプロイします。ランナーは Datadog にリクエストをポーリングし、Databricks API に対してローカルで実行し、既存の [Datadog VPC エンドポイント][3]を通じて結果を返送します。
 
 ## アーキテクチャ {#architecture}
@@ -154,7 +152,7 @@ Datadog へのすべての認証は、基盤となるプライベートアクシ
    1. プライベートアクションランナーの下部に「インストールに成功」と表示されるはずです。
 1. 既存の `values.yaml` を更新します ([Helm チャートの値][4]を参照)。
    1. `image.repository` を `gcr.io/datadoghq/dd-data-observability-par` に設定します。
-   1. `image.tag` を `1.21.0-3` に設定します。
+   1. `image.tag` を `1.22.1-0` に設定します。
 1. 以下の中からいずれか 1 つの方法を使用して、プライベートアクションランナーで資格情報を構成します。
     - `DATABRICKS_CLIENT_ID` および `DATABRICKS_CLIENT_SECRET` 環境変数をランナーに直接設定します。Microsoft Entra ID マネージドサービスプリンシパルを使用する場合は、`DATABRICKS_AZURE_TENANT_ID` も設定します。インテグレーションタイルの「シークレットパス」は空白のままにします。
     - クラウドシークレットストレージを使用します。[ステップ 2](#step-2-databrick-prerequisites) で作成されたシークレットの読み取り権限を持つ ID が Pod に割り当てられていることを確認し ([Azure Workload Identity][5]、[AWS IAM Role][6]、または [GKE Workload Identity][7])、`DATABRICKS_SECRET_PATH` 環境変数を介して、またはインテグレーションタイルの「シークレットパス」フィールドに指定して、シークレットへのパスを提供します。
@@ -177,7 +175,7 @@ Datadog へのすべての認証は、基盤となるプライベートアクシ
    1. **スクリプト**オプションを選択し、**次へ**をクリックします。
    1. **Docker** の手順に従います。
 
-      **重要**: `gcr.io/datadoghq/private-action-runner:v1.21.0-large` を `gcr.io/datadoghq/dd-data-observability-par:1.21.0-3` に置き換えてください。
+      **重要**: `gcr.io/datadoghq/private-action-runner:v1.22.1-large` を `gcr.io/datadoghq/dd-data-observability-par:1.22.1-0` に置き換えます。
 
    1. プライベートアクションランナーの下部に「インストールに成功」と表示されるはずです。
 1. 以下の中からいずれか 1 つの方法を使用して、プライベートアクションランナーで資格情報を構成します。

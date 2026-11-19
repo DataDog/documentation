@@ -1,90 +1,88 @@
 ---
 algolia:
   tags:
-  - workflow (UI) / proceso (generic)
-  - workflows (UI) / procesos (generic)
-  - automatización del workflow (UI) / proceso (generic)
-  - lógica
-  - step (UI) / paso (generic) lógico
-  - flujo
+  - workflow
+  - workflows
+  - workflow automation
+  - logic
+  - logic step
+  - flow
 aliases:
 - /es/workflows/logic_actions
 - /es/service_management/workflows/actions_catalog/logic_actions/
 - /es/service_management/workflows/actions/flow_control
-description: Añade una lógica de control a los workflows (UI) / procesos (generic)
-  mediante condiciones if, sentencias switch, bucles, intervalos de inactividad y
-  acciones de ramificación.
+description: Agregue lógica de control a los flujos de trabajo mediante condiciones
+  if, declaraciones switch, bucles, intervalos de espera y acciones de ramificación.
 disable_toc: false
 further_reading:
 - link: /integrations/
   tag: Documentación
-  text: Más información sobre integraciones
+  text: Obtenga información sobre integraciones
 is_beta: false
-title: Lógica del workflow (UI) / proceso (generic)
-type: workflows (UI) / procesos (generic)
+title: Lógica de flujo de trabajo
+type: workflows
 ---
+Utilice [Logic actions][1] para agregar lógica de control a su flujo de trabajo. Por ejemplo, puede ramificar desde una condición, realizar una acción de forma iterativa, incluir un intervalo de espera y más.
 
-Utiliza [Acciones lógicas][1] para añadir una lógica de control a tu workflow (UI) / proceso (generic). Por ejemplo, puedes ramificar a partir de una condición, realizar una acción de forma iterativa, incluir un intervalo de inactividad, etc.
+## Condición If {#if-condition}
 
-## Condición if
+Puede ramificar la ruta de ejecución de su flujo de trabajo según la evaluación de una o más declaraciones que usted defina. En la captura de pantalla a continuación, una acción {{< ui >}}If condition{{< /ui >}} determina el siguiente paso en el flujo de trabajo según si el código de estado de una acción de solicitud HTTP anterior devuelve `200`.
 
-Puedes ramificar la ruta de ejecución de tu workflow (UI) / proceso (generic) en función de la evaluación de una o más sentencias que definas. En la siguiente captura de pantalla, una acción de **If condition** (condición if) determina el siguiente step (UI) / paso (generic) en el workflow (UI) / proceso (generic) según si el código de estado de una acción de solicitud HTTP anterior devuelve `200`.
+{{< img src="actions/workflows/actions/flow_control/if-condition.png" alt="El lienzo del flujo de trabajo con una acción de condición if seleccionada y la pestaña de configuración abierta. La sección Statements está resaltada con dos declaraciones que especifican que el estado de una solicitud anterior debe ser 200." >}}
 
-{{< img src="actions/workflows/actions/flow_control/if-condition.png" alt="El lienzo del workflow (UI) / proceso (generic) con una acción de condición if seleccionada y la pestaña de configuración abierta. La sección Sentencias está resaltada con dos sentencias en las que se especifica que el estado de una solicitud anterior debe ser 200." >}}
+## Declaración Switch {#switch-statement}
 
-## Sentencia switch
+Utilice la acción de declaración Switch para manejar múltiples rutas de ramificación en un solo paso. Especifique una expresión switch y compárela con uno o más valores de incidencia. Si ninguna incidencia coincide, se ejecuta una rama predeterminada en su lugar. En el ejemplo siguiente, una declaración Switch enruta el flujo de trabajo según si el código de estado de una solicitud HTTP anterior es `200`, `403`, `404`, `500` u otro valor.
 
-Utiliza la acción de sentencia Switch para manejar múltiples rutas de ramificación en un solo step (UI) / paso (generic). Especifica una expresión de conmutación y compárala con uno o varios valores de case (incidencia). Si no coincide ningún case (incidencia), se ejecuta una rama predeterminada en su lugar. En el siguiente ejemplo, una sentencia Switch enruta el workflow (UI) / proceso (generic) según si el código de estado de una solicitud HTTP anterior es `200`, `403`, `404`, `500` u otro valor.
+{{< img src="actions/workflows/actions/flow_control/switch-statement.png" alt="El lienzo del flujo de trabajo que muestra una acción de declaración Switch llamada 'Make_request.status' ramificándose en múltiples incidencias para diferentes códigos de estado HTTP. Cada incidencia envía un mensaje de Slack diferente, y la rama predeterminada arroja un error inesperado si ninguna otra incidencia coincide." >}}
 
-{{< img src="actions/workflows/actions/flow_control/switch-statement.png" alt="El lienzo del workflow (UI) / proceso (generic) que muestra una acción de sentencia Switch denominada ramificación 'Make_request.status' en varias cases (incidencias) para diferentes códigos de estado HTTP. Cada case (incidencia) envía un mensaje Slack diferente y la rama predeterminada arroja un error inesperado si ninguna otra case (incidencia) coincide." >}}
+## Espera {#sleep}
 
-## Inactividad
+La acción {{< ui >}}Sleep{{< /ui >}} pausa la ejecución del flujo de trabajo durante una duración especificada. Seleccione una duración predefinida del menú desplegable {{< ui >}}Duration{{< /ui >}} o ingrese una variable personalizada en segundos.
 
-La acción **Sleep** (Inactividad) detiene la ejecución del workflow (UI) / proceso (generic) durante un tiempo especificado. Selecciona una duración predefinida en el menú desplegable **Duration** (Duración) o introduce una variable personalizada en segundos.
+## Bucle For {#for-loop}
 
-## Bucle For
+La acción {{< ui >}}For loop{{< /ui >}} le permite ejecutar un conjunto de acciones de forma iterativa para cada elemento en una lista de entrada determinada. Los bucles For aceptan una lista de entrada de hasta 2000 elementos. Puede realizar muchas operaciones diferentes dentro de un bucle for, incluyendo la configuración de rutas de error y la actualización de variables.
 
-La acción de **For loop** (bucle For) permite ejecutar un conjunto de acciones de forma iterativa para cada elemento de una lista de entrada dada. Los bucles for aceptan una lista de entrada de hasta 2000 elementos. Puedes realizar muchas operaciones diferentes en un bucle for, incluida la configuración de rutas de error y la actualización de variables.
+En el ejemplo siguiente, un bucle for itera sobre una lista de incidentes y envía un mensaje de Slack para cualquier incidente que tenga más de una semana de antigüedad.
 
-En el ejemplo siguiente, un bucle for itera una lista de incidents (incidentes) y envía un mensaje Slack para cualquier incident (incidente) que tenga más de una semana de antigüedad.
+{{< img src="actions/workflows/actions/flow_control/iteration2.png" alt="Un flujo de trabajo con un bucle for. El bucle itera sobre una lista de incidentes y envía un mensaje a un canal de Slack si el incidente tiene más de una semana de antigüedad." style="width:100%;" >}}
 
-{{< img src="actions/workflows/actions/flow_control/iteration2.png" alt="Un workflow (UI) / proceso (generic) con un bucle for. El bucle itera una lista de incidents (incidentes) y envía un mensaje a un canal slack si el incident (incidente) tiene más de una semana de antigüedad." style="width:100%;" >}}
+Para añadir un bucle for a su flujo de trabajo:
+1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) en el lienzo de su flujo de trabajo para abrir el catálogo de acciones.
+1. Busque y seleccione el paso {{< ui >}}For loop{{< /ui >}}.
+1. Haga clic en el paso de bucle e introduzca una {{< ui >}}Input list{{< /ui >}} sobre la cual iterar el paso. Puede introducir una lista personalizada o utilizar una variable de flujo de trabajo.
+1. Dentro del marco del bucle, haga clic en el icono ({{< ui >}}\+{{< /ui >}}) para añadir un paso al bucle.
+1. Configure la acción en bucle. Para acceder al valor actual en la lista de entrada, utilice el `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
+1. Añada y configure cualquier paso adicional que necesite incluir en el bucle. Puede utilizar un {{< ui >}}if statement{{< /ui >}} y un {{< ui >}}break{{< /ui >}} para salir del bucle antes de tiempo.
+1. {{< ui >}}Save{{< /ui >}} y {{< ui >}}Publish{{< /ui >}} el flujo de trabajo.
 
-Para añadir un bucle for a tu workflow (UI) / proceso (generic):
-1. Haz clic en el icono más (**+**) del lienzo del workflow (UI) / proceso (generic) para abrir el catálogo de acciones.
-1. Busca y selecciona el step (UI) / paso (generic) **For loop** (bucle for).
-1. Haz clic en el step (UI) / paso (generic) de bucle e introduce una **Input list** (Lista de entradas) para que el step (UI) / paso (generic) la itere. Puedes introducir una lista personalizada o utilizar un workflow (UI) / proceso (generic) variable.
-1. En el marco del bucle, haz clic en el icono (**+**) para añadir un step (UI) / paso (generic) al bucle.
-1. Configura la acción del bucle. Para acceder al valor actual de la lista de entrada, utiliza la variable `{{Current.Value}}`. Para acceder al índice del valor actual, utiliza `{{Current.Index}}`.
-1. Añade y configura cualquier step (UI) / paso (generic) adicional que necesites para el bucle. Puedes utilizar una **if statement** (sentencia if) y una **break** (pausa) para salir del bucle antes de tiempo.
-1. **Guarda** y **Publica** el workflow (UI) / proceso (generic).
+Cuando una ejecución se completa, el flujo de trabajo entra en modo {{< ui >}}Debug{{< /ui >}}. Seleccione un paso dentro del bucle para ver una lista de {{< ui >}}All{{< /ui >}}, {{< ui >}}Failed{{< /ui >}} o {{< ui >}}Successful{{< /ui >}} iteraciones para ese paso. Seleccione una iteración para ver la salida o el mensaje de error.
 
-Cuando finaliza una ejecución, el workflow (UI) / proceso (generic) entra en el modo **Debug** (Depurar). Selecciona un step (UI) / paso (generic) en el bucle para ver una lista de **All** (Todas), **Failed** (Fallidas) o iteraciones **Succesful** (Con éxito) para ese step (UI) / paso (generic). Selecciona una iteración para ver el resultado o el mensaje de error.
+## Bucle while {#while-loop}
 
-## Bucle while
+La acción {{< ui >}}While loop{{< /ui >}} le permite ejecutar un conjunto de acciones de forma iterativa según un conjunto de condiciones y se recomienda para patrones de automatización donde el número de repeticiones no se conoce de antemano. Los bucles while ejecutan un máximo de 2000 iteraciones. Puede realizar diferentes operaciones con un bucle while, incluyendo paginación, sondeo de progreso y reintentos hasta lograr el éxito.
 
-La acción de **While loop** (Bucle While) te permite ejecutar un conjunto de acciones de forma iterativa en función de un conjunto de condiciones y se recomienda para patrones de automatización en los que el número de repeticiones no se conoce de antemano. Los bucles while ejecutan un máximo de 2000 iteraciones. Puedes realizar diferentes operaciones con un bucle while, incluidas paginación, sondeo de progreso y reintento hasta el éxito.
+El siguiente ejemplo utiliza un bucle while para paginar la API List Buckets de AWS S3 para una App.
 
-El siguiente ejemplo utiliza un bucle while para paginar la API AWS S3 List Buckets para una aplicación.
+{{< img src="actions/workflows/actions/flow_control/iteration3.png" alt="Un flujo de trabajo con un bucle while. El flujo de trabajo utiliza un bucle while para paginar la API List Buckets de AWS S3 para una App." style="width:100%;" >}}
 
-{{< img src="actions/workflows/actions/flow_control/iteration3.png" alt="Un workflow (UI) / proceso (generic) con un bucle while. El workflow (UI) / proceso (generic) utiliza un bucle while para paginar la API de AWS S3 List Buckets para una aplicación." style="width:100%;" >}}
+Para agregar un bucle while a su flujo de trabajo:
+1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) en el lienzo de su flujo de trabajo para abrir el catálogo de acciones.
+1. Busque y seleccione el paso {{< ui >}}While loop{{< /ui >}}.
+1. Haga clic en el paso de bucle y defina la condición que el bucle While evaluará antes de cada iteración. El bucle continúa si la condición es verdadera y se detiene cuando se evalúa como falsa.
+1. Dentro del marco del bucle, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) para agregar un paso al bucle.
+1. Configure la acción en bucle. Para acceder al índice del valor actual, utilice `{{Current.Index}}`.
+1. Añada y configure cualquier paso adicional que necesite incluir en el bucle. Puede utilizar una acción {{< ui >}}if statement{{< /ui >}} y una {{< ui >}}break{{< /ui >}} para salir de su bucle antes de tiempo.
+1. {{< ui >}}Save{{< /ui >}} y {{< ui >}}Publish{{< /ui >}} el flujo de trabajo.
 
-Para añadir un bucle while a tu workflow (UI) / proceso (generic):
-1. Haz clic en el icono más (**+**) del lienzo del workflow (UI) / proceso (generic) para abrir el catálogo de acciones.
-1. Busca y selecciona el step (UI) / paso (generic) **While loop** (Bucle While).
-1. Haz clic en el step (UI) / paso (generic) de bucle y define la condición que el bucle While evaluará antes de cada iteración. El bucle continúa si la condición es true y se detiene cuando se evalúa como false.
-1. En el marco del bucle, haz clic en el icono más (**+**) para añadir un step (UI) / paso (generic) al bucle.
-1. Configura la acción de bucle. Para acceder al índice del valor actual, utiliza `{{Current.Index}}`.
-1. Añade y configura cualquier step (UI) / paso (generic) adicional que necesites para el bucle. Puedes utilizar una **if statement** (sentencia if) y una acción **break** (pausa) para salir del bucle antes de tiempo.
-1. **Guarda** y **Publica** el workflow (UI) / proceso (generic).
+Cuando una ejecución se completa, el flujo de trabajo entra en modo {{< ui >}}Debug{{< /ui >}}. Seleccione un paso dentro del bucle para ver una lista de {{< ui >}}All{{< /ui >}}, {{< ui >}}Failed{{< /ui >}} o {{< ui >}}Successful{{< /ui >}} iteraciones para ese paso. Seleccione una iteración para ver la salida o el mensaje de error. Seleccione el paso Bucle While y un índice específico para ver la condición evaluada en ese índice.
 
-Cuando finaliza una ejecución, el workflow (UI) / proceso (generic) entra en el modo **Debug** (Depurar). Selecciona un step (UI) / paso (generic) en el bucle para ver una lista de **All** (Todas), **Failed** (Fallidas) o iteraciones **Successful** (con éxito) para ese step (UI) / paso (generic). Selecciona una iteración para ver el resultado o el mensaje de error. Selecciona el step (UI) / paso (generic) del bucle While y un índice específico para ver la condición evaluada en el índice.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>¿Tienes preguntas o comentarios? Únete al canal **#workflows** en [Datadog Community Slack][2].
+<br>¿Tiene preguntas o comentarios? Únase al canal **#workflows** en el [Datadog Community Slack][2].
 
 [1]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
 [2]: https://chat.datadoghq.com/

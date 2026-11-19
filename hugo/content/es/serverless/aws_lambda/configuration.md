@@ -515,9 +515,9 @@ Si está utilizando un tiempo de ejecución o un registrador personalizado que n
 
 La [integración de código fuente de Datadog][26] le permite vincular su telemetría (como trazas de pila) al código fuente de sus funciones Lambda en sus repositorios de Git.
 
-Para obtener instrucciones sobre cómo configurar la integración de código fuente en sus aplicaciones sin servidor, consulte la sección [Insertar información de Git en sus artefactos de compilación][101].
+Para configurar la integración del código fuente, [seleccione su idioma][101] y siga las instrucciones de **Serverless**.
 
-[101]: /es/integrations/guide/source-code-integration/?tab=go#serverless
+[101]: /es/source_code/service-mapping/
 
 ## Excluya las etiquetas autoinyectadas de las métricas personalizadas {#exclude-auto-injected-tags-from-custom-metrics}
 

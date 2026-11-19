@@ -6,77 +6,83 @@ aliases:
 code_lang: swift
 code_lang_weight: 50
 further_reading:
-- link: /continuous_integration/tests
+- link: /tests
   tag: Documentación
-  text: Explore los resultados de los tests y el rendimiento
-- link: /continuous_integration/intelligent_test_runner/swift
+  text: Explorar resultados de pruebas y rendimiento
+- link: /tests/test_impact_analysis/swift
   tag: Documentación
-  text: Para acelerar tus tests con Intelligent Test Runner
-- link: /continuous_integration/troubleshooting/
+  text: Acelere sus trabajos de prueba con Test Impact Analysis
+- link: /tests/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de CI Visibility
-title: Tests Swift
-type: lenguaje de código múltiple
+  text: Solución de problemas de Test Optimization
+title: Pruebas de Swift
+type: multi-code-lang
 ---
+## Compatibilidad {#compatibility}
 
-## Compatibilidad
+Idiomas admitidos:
 
-Lenguajes compatibles:
-
-| Lenguaje | Versión | Notas |
-|---|---|---|
-| Swift |  v5.2 o anterior | Si estás utilizando Swift Concurrency, necesitas Xcode v13.2 o anterior para la representación precisa de tramos (spans) de tareas asíncronas. |
-| Objective-C | v2.0 o anterior | |
+| Idioma    | Versión |
+| ----------- | ------- |
+| Swift       | >= 6.2  |
+| Objective-C | >= 2.0  |
+| Xcode       | >= 26.0 |
 
 Plataformas compatibles:
 
-| Plataforma | Versión |
-|---|---|
-| iOS | v11.0 o anterior |
-| macOS | v10.13 o anterior |
-| tvOS | v11.0 o anterior |
+| Plataforma     | Versión  |
+| ------------ | -------- |
+| iOS / iPadOS | >= 15.0  |
+| macOS        | >= 11.0  |
+| tvOS         | >= 15.0  |
+| macCatalyst  | >= 13.0  |
 
-## Instalación del SDK para tests Swift
+Marcos de prueba compatibles:
 
-Existen tres maneras de instalar el marco para tests:
+| Framework     | Versión del SDK  | Nivel de prueba                                     |
+| ------------- | ------------ | ------------------------------------------------- |
+| XCTest        | Todas las versiones | Soporte completo                                      |
+| Swift Testing | >= 2.7.0     | Soporte completo desde 2.7.1; solo observación en 2.7.0 |
+
+## Instalación del SDK de prueba de Swift {#installing-the-swift-testing-sdk}
+
+Existen tres formas en las que puede instalar el framework de prueba:
 
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
 
-### Uso de un proyecto Xcode
+### Usando proyecto de Xcode {#using-xcode-project}
 
-1. Añade el paquete `dd-sdk-swift-testing` localizado en [`https://github.com/DataDog/dd-sdk-swift-testing`][1] a tu proyecto.
+1. Agregue el paquete `dd-sdk-swift-testing` a su proyecto. Se encuentra en [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
 {{< img src="continuous_integration/swift_package.png" alt="Swift Package" >}}
 
 
-2. Vincula tus objetivos de tests con la librería `DatadogSDKTesting` del paquete.
+2. Vincule sus objetivos de prueba con la biblioteca `DatadogSDKTesting` del paquete.
 
-{{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
+{{< img src="continuous_integration/swift_link2.png" alt="Vinculación de SPM en Swift" >}}
 
-3. Si ejecutas tests de interfaz de usuario, vincula también la aplicación que ejecuta los tests con la librería.
+3. Si ejecuta pruebas de interfaz de usuario (UI Tests) y no utiliza RUM, agregue también la dependencia a sus aplicaciones que ejecutan las pruebas.
 
-### Uso de un proyecto Swift Package
+### Usando proyecto de Swift Package {#using-swift-package-project}
 
-1. Añade `dd-sdk-swift-testing` a la matriz de dependencias de tu paquete. Por ejemplo:
+1. Agregue `dd-sdk-swift-testing` a su matriz de dependencias del paquete, por ejemplo:
 
 {{< code-block lang="swift" >}}
-.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.5.3")
 {{< /code-block >}}
 
-2. Para añadir el marco para tests a las dependencias de tus objetivos de tests añade la siguiente línea a la matriz de dependencias de tus objetivos de tests:
+2. Para agregar el framework de prueba a las dependencias de los objetivos de prueba, agregue la siguiente línea a la matriz de dependencias de los objetivos de prueba:
 {{< code-block lang="swift" >}}
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. Si ejecutas tests de interfaz de usuario, añade también la dependencia a tus aplicaciones que ejecutan los tests.
-
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
-{{% tab "Cocoapods" %}}
+{{% tab "CocoaPods" %}}
 
-1. Añade la dependencia `DatadogSDKTesting` a los objetivos de tests de tu `Podfile`:
+1. Agregue la dependencia `DatadogSDKTesting` a los objetivos de prueba de su `Podfile`:
 
 {{< code-block lang="ruby" >}}
 target 'MyApp' do
@@ -89,219 +95,256 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. Si ejecutas tests de interfaz de usuario, añade también la dependencia a la aplicación que ejecuta los tests.
-
 {{% /tab %}}
-{{% tab "Framework linking" %}}
+{{% tab "Vinculación de framework" %}}
 
-1. Descarga y descomprime `DatadogSDKTesting.zip` desde la página de la [versión][1].
+1. Descargue y descomprima `DatadogSDKTesting.zip` desde la página de [lanzamiento][1].
 
-2. Copia y vincula tus objetivos de tests con el XCFramework resultante.
+2. Copie y vincule sus objetivos de prueba con el XCFramework resultante.
 
-{{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
-
-3. Si ejecutas tests de interfaz de usuario, vincula también la aplicación que ejecuta los tests con esta biblioteca.
+{{< img src="continuous_integration/swift_link.png" alt="Vinculación de XCFramework en Swift" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
-{{% tab "Acciones de GitHub" %}}
-
-Si utilizas GitHub, puedes utilizar la [acción para tests de Swift][1] del Marketplace de GitHub para configurar y ejecutar tus tests automáticamente. Por defecto, es posible omitir el resto de la configuración descrita en esta página (excepto la configuración de la acción misma), aunque puedes utilizar las variables de entorno de configuración para deshabilitar o configurar funcionalidades adicionales.
-
-En comparación con otros métodos, como la vinculación de Cocoapods and Framework, puede que la opción de la acción para tests de Swift presente una configuración y una ejecución menos flexibles, pero no requiere cambios de código.
-
-[1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
-{{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-danger"><strong>Nota</strong>: Este marco sólo es útil para realizar tests y debes vincularlo sólo con la aplicación durante la ejecución de tests. No debes distribuir el marco entre tus usuarios. </div>
 
-## Instrumentación de tus pruebas
+<div class="alert alert-danger">Este framework es útil solo para pruebas y solo debe vincularse con la aplicación al ejecutar pruebas. No distribuya el framework a sus usuarios. </div>
 
-### Configuración de Datadog
+## Instrumentación de sus pruebas {#instrumenting-your-tests}
 
-#### Uso del proyecto Xcode
+### Framework de Swift Testing {#swift-testing-framework}
 
-Para habilitar la instrumentación de los tests añade las siguientes variables de entorno a tu objetivo de test o al archivo `Info.plist`, como [se describe a continuación](##using-infoplist-for-configuration). Si estás utilizando planes de tests, **debes** seleccionar tu objetivo principal en `Expand variables based on` o `Target for Variable Expansion`:
+El SDK de Datadog es compatible con el framework Swift Testing a partir de la versión 2.7.0 (solo observación) y ofrece soporte completo para todas las funciones avanzadas a partir de la versión 2.7.1.
 
-{{< img src="continuous_integration/swift_env.png" alt="Entornos Swift" >}}
+#### Configuración de la observación de Swift Testing {#setting-up-swift-testing-observation}
 
-<div class="alert alert-danger">Tu objetivo principal debe encontrarse en la expansión de variables de las variables de entorno. Si no se selecciona, las variables no son válidas.</div>
+Para habilitar la observación de sus pruebas de Swift Testing:
 
-Para los tests de interfaz de usuario, las variables de entorno sólo deben configurarse en el objetivo del test, ya que el marco inyecta automáticamente estos valores en la aplicación.
+1. Importe `DatadogSDKTesting` en sus archivos fuente de prueba:
 
-#### Uso del proyecto Swift Package
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+import Testing
+{{< /code-block >}}
 
-Para habilitar la instrumentación de los tests debes configurar las siguientes variables de entorno en tu ejecución de línea de comandos para los tests. También puedes configurarlas en el entorno, antes de ejecutar los tests, o puedes anteponerlas al siguiente comando:
+2. Agregue el rasgo `.datadogTesting` a sus suites de prueba o funciones de prueba independientes:
+
+{{< code-block lang="swift" >}}
+@Suite(.datadogTesting)
+struct MyTestSuite {
+    @Test func myTest() {
+        // ...
+    }
+}
+
+// For standalone test functions:
+@Test(.datadogTesting) func myStandaloneTest() {
+    // ...
+}
+{{< /code-block >}}
+
+### Configuración del SDK {#configuring-sdk}
+
+#### Uso de un proyecto de Xcode {#using-xcode-project-1}
+
+Para habilitar la instrumentación de pruebas, agregue las siguientes variables de entorno a su objetivo de prueba o en el archivo `Info.plist` como se [describe a continuación](#using-infoplist-for-configuration). Usted **debe** seleccionar su objetivo principal en {{< ui >}}Expand variables based on{{< /ui >}} o {{< ui >}}Target for Variable Expansion{{< /ui >}} si está utilizando planes de prueba:
+
+{{< img src="continuous_integration/swift_env.png" alt="Entornos de Swift" >}}
+
+<div class="alert alert-danger">Debe tener su objetivo principal en la expansión de variables de las variables de entorno; si no está seleccionado, las variables no son válidas. </div>
+
+Para las pruebas de interfaz de usuario (UI Tests), las variables de entorno solo deben configurarse en el objetivo de prueba, ya que el framework inyecta automáticamente estos valores en la aplicación.
+
+#### Uso de un proyecto de Swift Package {#using-swift-package-project-1}
+
+Para habilitar la instrumentación de pruebas, debe configurar las siguientes variables de entorno para la ejecución de sus pruebas desde la línea de comandos. Alternativamente, puede configurarlas en el entorno antes de ejecutar las pruebas o puede anteponerlas al comando:
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD swift test ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD swift test ...
 
 or
 
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD xcodebuild test -scheme ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme ...
 </code>
 </pre>
 
 
-Configura todas estas variables en tu objetivo de test:
+Configure todas estas variables en su objetivo de prueba:
 
 `DD_TEST_RUNNER`
-: Habilita o deshabilita la instrumentación de los tests. Define este valor en `$(DD_TEST_RUNNER)` para poder habilitar o deshabilitar la instrumentación de los tests con una variable de entorno definida fuera del proceso de test (por ejemplo, en la compilación CI).<br/>
-**Por defecto**: `false`<br/>
+: Habilita o deshabilita la instrumentación de pruebas. Establezca este valor en `$(DD_TEST_RUNNER)` para que pueda habilitar y deshabilitar la instrumentación de pruebas con una variable de entorno definida fuera del proceso de prueba (por ejemplo, en la compilación de CI).<br/>
+**Predeterminado**: `false`<br/>
 **Recomendado**: `$(DD_TEST_RUNNER)`
 
-`DD_API_KEY`
-: La [clave de API de Datadog][2] utilizada para cargar los resultados de los tests.<br/>
-**Por defecto**: `(empty)`
+`DD_API_KEY` (Obligatorio)
+: La [clave de Datadog API][2] utilizada para autenticar las cargas de resultados de pruebas.<br/>
+**Predeterminado**: `(empty)`
 
-`DD_APPLICATION_KEY`
-: La [clave de aplicación de Datadog][5] utilizada para cargar los resultados de los tests.<br/>
-**Por defecto**: `(empty)`
+`DD_TEST_SESSION_NAME` (Opcional)
+: Identifica un grupo de pruebas, como `unit-tests`, `integration-tests` o `smoke-tests`.<br/>
+**Predeterminado**: El nombre del trabajo de CI y el comando de prueba, o el comando de prueba si el nombre del trabajo de CI no está disponible.<br/>
+**Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
 
-`DD_SERVICE`
-: El nombre del servicio o la librería a los que se realizan tests.<br/>
-**Por defecto**: El nombre del repositorio.<br/>
+`DD_SERVICE` (Opcional)
+: Nombre del servicio o biblioteca bajo prueba.<br/>
+**Predeterminado**: El nombre del repositorio<br/>
 **Ejemplo**: `my-ios-app`
 
-`DD_ENV`
-: El nombre del entorno donde se ejecutan los tests. Configura este valor como `$(DD_ENV)` para poder utilizar una variable de entorno en tiempo de ejecución para configurarlo.<br/>
-**Por defecto**: `none`<br/>
+`DD_ENV` (Opcional)
+: Nombre del entorno donde se ejecutan las pruebas.<br/>
+**Predeterminado**: `ci` cuando se detecta un proveedor de CI; de lo contrario, `none`.<br/>
 **Recomendado**: `$(DD_ENV)`<br/>
-**Ejemplos**: `ci`, `local`
+**Ejemplos**: `local`, `ci`
 
 `SRCROOT`
-: La ruta de localización del proyecto. Si utilizas Xcode, utiliza `$(SRCROOT)` para el valor, ya que se define automáticamente por él.<br/>
-**Por defecto**: `(empty)`<br/>
+: La ruta a la ubicación del proyecto. Si usa Xcode, utilice `$(SRCROOT)` para el valor, ya que este lo establece automáticamente.<br/>
+**Predeterminado**: `(empty)`<br/>
 **Recomendado**: `$(SRCROOT)`<br/>
 **Ejemplo**: `/Users/ci/source/MyApp`
 
-Para obtener más información sobre las etiquetas (tags) reservadas `service` y `env`, consulta  [Etiquetado unificado de servicios][8].
+Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulte [Unified Service Tagging][8].
 
-Además, configura el sitio Datadog para utilizar el sitio ({{< region-param key="dd_site_name" >}}) seleccionado:
+Configure `DD_SITE` para su sitio ({{< region-param key="dd_site_name" >}}):
 
-`DD_SITE` (Obligatorio)
-: El [sitio Datadog][3] al que cargar los resultados.<br/>
-**Por defecto**: `datadoghq.com`<br/>
+`DD_SITE` (opcional)
+: El [sitio de Datadog][3] al que cargar los resultados.<br/>
+**Predeterminado**: `datadoghq.com`<br/>
 **Sitio seleccionado**: {{< region-param key="dd_site" code="true" >}}
 
-## Recopilación de metadatos Git
+## Recopilación de metadatos de Git {#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
-### Ejecución de tests
+### Ejecución de pruebas {#running-tests}
 
-Después de la instalación, ejecuta tus tests como lo haces normalmente; por ejemplo, utilizando el comando `xcodebuild test`. Los tests, las solicitudes de red y los fallos de aplicaciones se instrumentan automáticamente. Cuando ejecutes tus tests en el CI, pasa tus variables de entorno, por ejemplo:
+Después de la instalación, ejecute sus pruebas como lo hace normalmente, por ejemplo, utilizando el comando `xcodebuild test`. Las pruebas, las solicitudes de red y los bloqueos de la aplicación se instrumentan automáticamente. Pase sus variables de entorno al ejecutar sus pruebas en la CI, por ejemplo:
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
+DD_TEST_RUNNER=1 DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
+  -destination "platform=macOS,arch=arm64" \
   test
 </code>
 </pre>
 
-### Tests de interfaz de usuario
+### UI Tests {#ui-tests}
 
-En el caso de los tests de interfaz de usuario, tanto el objetivo del test como la aplicación que se ejecuta desde tests de interfaz de usuario, deben vincularse con el marco. Las variables de entorno sólo deben configurarse en el objetivo del test, ya que el marco inyecta automáticamente estos valores en la aplicación.
+### Integración de RUM {#rum-integration}
 
-### Integración RUM
+Si la aplicación que se está probando está instrumentada mediante RUM, los resultados de sus pruebas y las sesiones de RUM generadas se vinculan automáticamente. Obtenga más información sobre RUM en la guía de [Integración de RUM para iOS][4]. Se necesita una versión de RUM para iOS >= 1.10.
 
-Si la aplicación que se está probando está instrumentada con RUM, los resultados de los tests de interfaz de usuario y las sesiones RUM generadas se vinculan automáticamente. Para obtener más información sobre RUM, consulta la guía de la [integración RUM iOS][4]. Se necesita una versión 1.10 o anterior de RUM iOS.
+Las variables de entorno solo deben configurarse en el destino de la prueba, ya que el framework inyecta automáticamente estos valores en la aplicación.
 
+### SDK de optimización de pruebas {#test-optimisation-sdk}
 
-## Configuración opcional adicional
+Si no utiliza RUM, puede vincular el destino de su aplicación con el SDK de pruebas. El SDK añade instrumentación automática a su aplicación, recopila solicitudes de red y registros, y los adjunta a las trazas de las pruebas.
 
-Para los siguientes parámetros de configuración:
- - Las variables `Boolean` pueden utilizar cualquiera de los siguientes valores: `1`, `0`, `true`, `false`, `YES` o `NO`
- - Las variables de lista de `String` aceptan una lista de elementos separados por `,` o `;`
+Las variables de entorno solo deben configurarse en el destino de la prueba, ya que el framework inyecta automáticamente estos valores en la aplicación.
 
-### Habilitación de la instrumentación automática
+## Configuración opcional adicional {#additional-optional-configuration}
+
+Para los siguientes ajustes de configuración:
+ - `Boolean` las variables pueden usar cualquiera de : `1`, `0`, `true`, `false`, `YES`, o `NO`
+ - `String` Las variables de lista aceptan una lista de elementos separados por `,` o `;`
+
+### Habilitar la auto-instrumentación {#enabling-auto-instrumentation}
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
-: Captura los mensajes escritos en `stdout` (por ejemplo, `print()`) y los notifica en forma de logs. Esto puede afectar a tu factura. (Booleano)
+: Captura los mensajes escritos en `stdout` (por ejemplo, `print()`) y los reporta como registros. Esto puede afectar su factura. (Booleano)
 
 `DD_ENABLE_STDERR_INSTRUMENTATION`
-: Captura los mensajes escritos en `stderr` (por ejemplo, `NSLog()`, pasos de test de interfaz de usuario) y los notifica en forma de logs. Esto puede afectar a tu factura. (Booleano)
+: Captura los mensajes escritos en `stderr` (por ejemplo, `NSLog()`, pasos de UI Test) y los reporta como registros. Esto puede afectar su factura. (Booleano)
 
-### Deshabilitación de la instrumentación automática
+### Deshabilitar la auto-instrumentación {#disabling-auto-instrumentation}
 
-El marco habilita la instrumentación automática de todas los bibliotecas compatibles, pero en algunos casos puede que no quieras que esto ocurra. Puedes deshabilitar la instrumentación automática de algunas bibliotecas configurando las siguientes variables de entorno (o en el archivo `Info.plist` como [se describe a continuación](#using-infoplist-for-configuration)):
+El framework habilita la auto-instrumentación de todas las bibliotecas compatibles, pero en algunos casos esto podría no ser deseado. Puede deshabilitar la auto-instrumentación de ciertas bibliotecas configurando las siguientes variables de entorno (o en el archivo `Info.plist` como se [describe a continuación](#using-infoplist-for-configuration)):
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
-: Deshabilita la instrumentación de toda la red. (Booleano)
+: Deshabilita toda la instrumentación de red (Booleano)
 
 `DD_DISABLE_RUM_INTEGRATION`
-: Deshabilita la integración con sesiones RUM. (Booleano)
+: Deshabilita la integración con sesiones RUM (Booleano)
 
 `DD_DISABLE_SOURCE_LOCATION`
-: Deshabilita la localización y los codeowners del código de la fuente de los tests. (Booleano)
+: Deshabilita la ubicación del código fuente de prueba y los Codeowners (Booleano)
 
 `DD_DISABLE_CRASH_HANDLER`
-: Deshabilita la gestión y la notificación de fallos. (Booleano)
-<div class="alert alert-danger"><strong>Importante</strong>: Si deshabilitas la notificación de fallos, los tests fallidos no se notificarán y no aparecerán como fallos del test. Si necesitas deshabilitar la gestión de fallos para alguno de tus tests, ejecútala como un objetivo separado, para no deshabilitarla para los demás.</div>
+: deshabilita el manejo y la notificación de fallos. (Booleano)
+<div class="alert alert-danger">Si deshabilita la notificación de fallos, las pruebas que fallan no se informan en absoluto y no aparecen como errores de prueba. Si necesita deshabilitar el manejo de fallos para alguna de sus pruebas, ejecútelas como un destino separado, para no deshabilitarlo para las demás.</div>
 
-### Instrumentación automática de la red
+### Instrumentación automática de red {#network-auto-instrumentation}
 
-Para la instrumentación automática de la red, puedes configurar los siguientes parámetros adicionales:
+Para la instrumentación automática de red, puede configurar estos ajustes adicionales:
 
 `DD_DISABLE_HEADERS_INJECTION`
-: Deshabilita cualquier inyección de cabeceras de rastreo. (Booleano)
+: Deshabilita toda la inyección de encabezados de rastreo (booleano)
 
 `DD_INSTRUMENTATION_EXTRA_HEADERS`
-: Las cabeceras adicionales específicas que quieres registrar. (Lista de cadenas)
+: Encabezados adicionales específicos que desea incluir en el registro (lista de cadenas)
 
 `DD_EXCLUDED_URLS`
-: Las URL que no quieres registrar o en las que no quieres inyectar cabeceras. (Lista de cadenas)
+: URLs que no desea incluir en el registro ni inyectar encabezados (lista de cadenas)
 
 `DD_ENABLE_RECORD_PAYLOAD`
-: Permite informar un subconjunto (1024 bytes) de cargas útiles en las solicitudes y respuestas. (Booleano)
+: Habilita el informe de un subconjunto (1024 bytes) de las cargas útiles en las solicitudes y respuestas (booleano)
 
 `DD_MAX_PAYLOAD_SIZE`
-: Define el tamaño máximo informado de la carga útil. Por defecto `1024`. (Entero)
+: Establece el tamaño máximo informado de la carga útil. Predeterminado `1024` (entero)
 
 `DD_DISABLE_NETWORK_CALL_STACK`
-: Deshabilita la información de las llamadas del stack tecnológico en los tramos de la red. (Booleano)
+: Deshabilita la información de la pila de llamadas en los tramos de red (booleano)
 
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
-: Muestra la información de las llamadas del stack tecnológico no sólo con el nombre del método, sino también con la información precisa del archivo y la línea. Puede afectar al rendimiento de los tests. (Booleano)
+: Muestra la información de la pila de llamadas no solo con el nombre del método, sino también con la información precisa del archivo y la línea. Puede afectar el rendimiento de sus pruebas (booleano)
 
-### Correlación de tests con la infraestructura
+### Correlación de prueba de infraestructura {#infrastructure-test-correlation}
 
-Si estás ejecutando tests en tu propia infraestructura (tests de macOS o simulador), puedes correlacionar tus tests con las métricas de tu infraestructura instalando el Datadog Agent y configurando lo siguiente:
+Si está ejecutando pruebas en su propia infraestructura (pruebas en macOS o simulador), puede correlacionar sus pruebas con las métricas de su infraestructura instalando el Datadog Agent y configurando lo siguiente:
 
 `DD_CIVISIBILITY_REPORT_HOSTNAME`
-: Informa del nombre de host de la máquina que inicia los tests. (Booleano)
+: Informa el nombre de host de la máquina que inicia las pruebas (booleano)
 
-También puedes deshabilitar o habilitar una instrumentación automática determinada en algunos de los tests de Swift o Objective-C, importando el módulo `DatadogSDKTesting` y utilizando la clase: `DDInstrumentationControl`.
+También puede deshabilitar o habilitar la instrumentación automática específica en algunas de las pruebas desde Swift u Objective-C importando el módulo `DatadogSDKTesting` y usando la clase: `DDInstrumentationControl`.
 
-## Etiquetas personalizadas
+## Etiquetas personalizadas {#custom-tags}
 
-### Variables de entorno
+### Variables de entorno {#environment-variables}
 
-Puedes utilizar la variable de entorno `DD_TAGS` (o en el archivo `Info.plist` como [se describe a continuación](#using-infoplist-for-configuration)). Debe contener pares de `key:tag` separados por espacios. Por ejemplo:
+Puede usar la variable de entorno `DD_TAGS` (o en el archivo `Info.plist` como se [describe a continuación](#using-infoplist-for-configuration)). Debe contener pares de `key:tag` separados por espacios. Por ejemplo:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
 
-Si uno de los valores empieza con el carácter `$`, se sustituye por una variable de entorno con el mismo nombre (si existe). Por ejemplo:
+Si uno de los valores comienza con el carácter `$`, se reemplaza por una variable de entorno del mismo nombre (si existe), por ejemplo:
 {{< code-block lang="bash" >}}
 DD_TAGS=home:$HOME
 {{< /code-block >}}
 
-El uso del carácter `$` también permite sustituir una variable de entorno al principio de un valor si contiene caracteres no compatibles con la variable de entorno (`a-z`, `A-Z` o `_`). Por ejemplo:
+El uso del carácter `$` también permite reemplazar una variable de entorno al principio de un valor si contiene caracteres no compatibles con variables de entorno (`a-z`, `A-Z` o `_`), por ejemplo:
 {{< code-block lang="bash" >}}
 FOO = BAR
 DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 {{< /code-block >}}
 
-### OpenTelemetry
+### Dentro de un método de prueba {#inside-a-test-method}
 
-**Nota**: El uso de OpenTelemetry sólo es compatible con Swift.
+Puede agregar etiquetas personalizadas dentro de sus métodos de prueba. La propiedad estática `DDTest.current` devolverá la instancia actual de prueba si se llama dentro del contexto del método de prueba.
 
-El marco para tests Swift de Datadog utiliza [OpenTelemetry][6] como la tecnología de rastreo subyacente. Puedes acceder al rastreador OpenTelemetry utilizando `DDInstrumentationControl.openTelemetryTracer` y utilizar cualquier API de OpenTelemetry. Por ejemplo, para añadir una etiqueta o un atributo:
+{{< code-block lang="swift" >}}
+// Somewhere inside the test method
+DDTest.current?.setTag(key: "key1", value: "value1")
+// test continues normally
+// ...
+{{< /code-block >}}
+
+### OpenTelemetry {#opentelemetry}
+
+**Nota**: El uso de OpenTelemetry solo es compatible con Swift.
+
+El marco de pruebas de Datadog Swift utiliza [OpenTelemetry][6] como tecnología de rastreo subyacente. Puede acceder al rastreador de OpenTelemetry usando `DDInstrumentationControl.openTelemetryTracer` y utilizar cualquier API de OpenTelemetry. Por ejemplo, para agregar una etiqueta o atributo:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -313,21 +356,21 @@ span?.setAttribute(key: "OTTag2", value: "OTValue2")
 span?.end()
 {{< /code-block >}}
 
-El objetivo de test debe vincularse explícitamente con `opentelemetry-swift`.
+El objetivo de prueba debe vincularse explícitamente con `opentelemetry-swift`.
 
-### Informes sobre la cobertura del código
+### Reportando Code Coverage {#reporting-code-coverage}
 
-Cuando la cobertura del código está disponible, el SDK de Datadog (v2.2.7 y posteriores) lo informa mediante la etiqueta `test.code_coverage.lines_pct` para tus sesiones de tests.
+Cuando la cobertura de código está disponible, el SDK de Datadog (v2.2.7+) la reporta bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-En Xcode, puedes habilitar el informe de cobertura del código en tu esquema de test.
+En Xcode, puede habilitar la recopilación de cobertura de código en su Plan de prueba o Esquema de prueba, dependiendo de la configuración de su proyecto.
 
-Puedes ver la evolución de la cobertura de los tests en la pestaña **Coverage** (Cobertura) de una sesión de tests.
+Puede ver la evolución de Code Coverage en la pestaña {{< ui >}}Coverage{{< /ui >}} de una sesión de prueba.
 
-## Uso de Info.plist para la configuración
+## Uso de Info.plist para la configuración {#using-infoplist-for-configuration}
 
-Como alternativa a la configuración de variables de entorno, se pueden proporcionar todos los valores de configuración añadiéndolos al archivo `Info.plist` del paquete de tests (no del paquete de aplicaciones). Si se define la misma configuración, tanto en una variable de entorno como en el archivo `Info.plist`, la variable de entorno tiene prioridad.
+Como alternativa a establecer variables de entorno, todos los valores de configuración pueden proporcionarse agregándolos al archivo `Info.plist` del paquete de prueba (no del paquete de la aplicación). Si la misma configuración se establece tanto en una variable de entorno como en el archivo `Info.plist`, la variable de entorno tiene prioridad.
 
-## Variables de entorno del proveedor de IC
+## Variables de entorno del proveedor de CI {#ci-provider-environment-variables}
 
 {{< tabs >}}
 {{% tab "Jenkins" %}}
@@ -342,7 +385,7 @@ Como alternativa a la configuración de variables de entorno, se pueden proporci
 | `JOB_NAME`           | `$(JOB_NAME)`          |
 | `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno | Valor           |
 | -------------------- | --------------- |
@@ -363,7 +406,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `CIRCLE_WORKFLOW_ID`       | `$(CIRCLE_WORKFLOW_ID)`       |
 | `CIRCLE_PROJECT_REPONAME`  | `$(CIRCLE_PROJECT_REPONAME)`  |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno    | Valor                      |
 | ----------------------- | -------------------------- |
@@ -373,7 +416,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
 {{% /tab %}}
-{{% tab "CLI GitLab" %}}
+{{% tab "GitLab CI" %}}
 
 | Variable de entorno | Valor                |
 | -------------------- | -------------------- |
@@ -389,7 +432,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
 
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno | Valor                  |
 | -------------------- | ---------------------- |
@@ -415,7 +458,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `TRAVIS_REPO_SLUG`         | `$(TRAVIS_REPO_SLUG)`         |
 | `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno         | Valor                           |
 | ---------------------------- | ------------------------------- |
@@ -426,7 +469,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
 {{% /tab %}}
-{{% tab "Acciones GitHub" %}}
+{{% tab "GitHub Actions" %}}
 
 | Variable de entorno | Valor                   |
 | -------------------- | ----------------------- |
@@ -439,7 +482,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
 | `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno | Valor                  |
 | -------------------- | ---------------------- |
@@ -460,7 +503,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `BUILDKITE_PIPELINE_SLUG`       | `$(BUILDKITE_PIPELINE_SLUG)`       |
 | `BUILDKITE_JOB_ID`              | `$(BUILDKITE_JOB_ID)`              |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno           | Valor                             |
 | ------------------------------ | --------------------------------- |
@@ -473,7 +516,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
 {{% /tab %}}
-{{% tab "Pipelines de Bitbucket" %}}
+{{% tab "Bitbucket Pipelines" %}}
 
 | Variable de entorno       | Valor                         |
 | -------------------------- | ----------------------------- |
@@ -482,7 +525,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `BITBUCKET_PIPELINE_UUID`  | `$(BITBUCKET_PIPELINE_UUID)`  |
 | `BITBUCKET_REPO_FULL_NAME` | `$(BITBUCKET_REPO_FULL_NAME)` |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno       | Valor                         |
 | -------------------------- | ----------------------------- |
@@ -503,7 +546,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `APPVEYOR_REPO_TAG_NAME` | `$(APPVEYOR_REPO_TAG_NAME)` |
 | `APPVEYOR_REPO_NAME`     | `$(APPVEYOR_REPO_NAME)`     |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno                     | Valor                                       |
 | ---------------------------------------- | ------------------------------------------- |
@@ -515,7 +558,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
 {{% /tab %}}
-{{% tab "Pipelines de Azure" %}}
+{{% tab "Azure Pipelines" %}}
 
 | Variable de entorno             | Valor                               |
 | -------------------------------- | ----------------------------------- |
@@ -530,7 +573,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
 | `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno                     | Valor                                       |
 | ---------------------------------------- | ------------------------------------------- |
@@ -555,7 +598,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
 
-Configuración Git adicional para tests de dispositivos físicos:
+Configuración de Git adicional para pruebas en dispositivos físicos:
 
 | Variable de entorno               | Valor                                 |
 | ---------------------------------- | ------------------------------------- |
@@ -573,7 +616,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
-{{% tab "Nube Xcode" %}}
+{{% tab "Xcode Cloud" %}}
 
 | Variable de entorno    | Valor                   |
 | ----------------------- | ----------------------- |
@@ -590,169 +633,59 @@ Configuración Git adicional para tests de dispositivos físicos:
 {{% /tab %}}
 {{< /tabs >}}
 
-## API para tests manuales
+## Mejores prácticas {#best-practices}
 
-Si utilizas XCTests en tus proyectos Swift, el marco `DatadogSDKTesting` los instrumenta automáticamente y envía los resultados al backend de Datadog. Si no utilizas XCTest, puedes utilizar la API para tests manuales Swift/Objective-C, que también informa de los resultados de los tests al backend.
+Siga estas prácticas para aprovechar al máximo el marco de pruebas y Test Optimization.
 
-La API se basa en tres conceptos: *módulo de test*, *conjuntos de tests* y *tests*.
+### Generar archivo de símbolos al compilar {#generate-symbols-file-when-building}
 
-### Módulo de test
+Compile su código en Xcode usando `DWARF with dSYM File` (o `-Xswiftc -debug-info-format=dwarf` si compila con `swift`)
 
-Un módulo de test representa la carga de una biblioteca o un paquete que incluye los tests.
+El marco de pruebas utiliza archivos de símbolos para parte de su funcionalidad, incluyendo: simbolización de bloqueos, informar la ubicación de la fuente de la prueba e informar los propietarios del código. Lo genera automáticamente cuando los símbolos de depuración están integrados en los binarios, pero puede tomar algo de tiempo adicional cargarlos.
 
-Para iniciar un módulo de test, llama a `DDTestModule.start()` y pasa el nombre del módulo o el paquete al que se va a realizar el test.
+### Deshabilitar entorno aislado para UI Tests en macOS {#disable-sandbox-for-ui-tests-on-macos}
 
-Cuando todos tus tests hayan finalizado, llama a `module.end()`, que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
+En algunas versiones de Xcode, los paquetes de pruebas de IU se compilan con un entorno aislado de forma predeterminada. La configuración que viene con un entorno aislado impide que el marco de pruebas se ejecute mediante algunos comandos del sistema con `xcrun`, por lo que debe deshabilitarlo.
 
-### Conjuntos de tests
-
-Un conjunto de tests incluye aquellos tests que comparten una funcionalidad común. Pueden compartir una inicialización y un desmontaje comunes, y también pueden compartir algunas variables.
-
-Crea el conjunto de tests en el módulo de test llamando a `module.suiteStart()` y pasando el nombre del conjunto de tests.
-
-Llama a `suite.end()` cuando todos los tests relacionados del conjunto hayan finalizado su ejecución.
-
-### Tests
-
-Cada test se ejecuta dentro de conjunto y debe terminar en uno de estos tres estados: `pass`, `fail` o `skip`. Un test también puede contener información adicional, como atributos o información de errores.
-
-Crea tests dentro de un conjunto llamando a `suite.testStart()` y pasando el nombre del test. Cuando finaliza un test, debe configurarse uno de los estados predefinidos.
-
-### API de interfaz
-
-{{< code-block lang="swift" >}}
-class DDTestModule {
-    // Inicia el módulo.
-    // - Parámetros:
-    //   - bundleName: Nombre del módulo o el paquete al que se va a realizar un test.
-    //   - startTime (opcional): Hora de inicio del módulo.
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
-    //
-    // Finaliza el módulo.
-    // - Parámetros:
-    //   - endTime (opcional): Hora de finalización del módulo.
-    func end(endTime: Date? = nil)
-    // Añade una etiqueta o un atributo al módulo de test. Se puede agregar cualquier número de etiquetas.
-    // - Parámetros:
-    //   - key: Nombre de la etiqueta. Si ya existe una etiqueta con el mismo nombre,
-    //     se sustituirá su valor por uno nuevo.
-    //   - value: Valor de la etiqueta. Puede ser un número o una cadena.
-    func setTag(key: String, value: Any)
-    //
-    // Inicia un conjunto en este módulo.
-    // - Parámetros:
-    //   - name: Nombre del conjunto.
-    //   - startTime (opcional): Hora de inicio del conjunto.
-    func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
-}
-    //
-public class DDTestSuite : NSObject {
-    // Finaliza el conjunto de tests.
-    // - Parámetros:
-    //   - endTime (opcional): Hora de finalización del conjunto.
-    func end(endTime: Date? = nil)
-    // Añade una etiqueta o un atributo al conjunto de tests. Se puede agregar cualquier número de etiquetas.
-    // - Parámetros:
-    //   - key: Nombre de la etiqueta. Si ya existe una etiqueta con el mismo nombre,
-    //     se sustituirá su valor por uno nuevo.
-    //   - value: Valor de la etiqueta. Puede ser un número o una cadena.
-    func setTag(key: String, value: Any)
-    //
-    // Inicia un test en este conjunto.
-    // - Parámetros:
-    //   - name: Nombre del test.
-    //   - startTime (opcional): Hora de inicio del test.
-    func testStart(name: String, startTime: Date? = nil) -> DDTest
-}
-    //
-public class DDTest : NSObject {
-    // Añade una etiqueta o un atributo al test. Se puede agregar cualquier número de etiquetas.
-    // - Parámetros:
-    //   - key: Nombre de la etiqueta. Si ya existe una etiqueta con el mismo nombre,
-    //     se sustituirá su valor por uno nuevo.
-    //   - value: Valor de la etiqueta. Puede ser un número o una cadena.
-    func setTag(key: String, value: Any)
-    //
-    // Añade información de errores al test. Un test sólo puede notificar una información de error..
-    // - Parámetros:
-    //   - type: Tipo de error que se va a informar.
-    //   - message: Mensaje asociado al error.
-    //   - callstack (opcional): El stack tecnológico de las llamadas asociado al error.
-    func setErrorInfo(type: String, message: String, callstack: String? = nil)
-    //
-    // Finaliza el test.
-    // - Parámetros:
-    //   - status: Estado informado de este test.
-    //   - endTime (opcional): Hora de finalización del test.
-    func end(status: DDTestStatus, endTime: Date? = nil)
-}
-    //
-// Posibles estados informados por un test:
-enum DDTestStatus {
-  // El test ha sido aprobado.
-  case pass
-  //
-  //El test ha fallado.
-  case fail
-  //
-  //El test se ha omitido.
-  case skip
-}
-{{< /code-block >}}
-
-### Ejemplo de código
-
-El siguiente código representa un uso sencillo de la API:
-
-{{< code-block lang="swift" >}}
-import DatadogSDKTesting
-let module = DDTestModule.start(bundleName: "ManualModule")
-let suite1 = module.suiteStart(name: "ManualSuite 1")
-let test1 = suite1.testStart(name: "Test 1")
-test1.setTag(key: "key", value: "value")
-test1.end(status: .pass)
-let test2 = suite1.testStart(name: "Test 2")
-test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
-test2.end(test: test2, status: .fail)
-suite1.end()
-let suite2 = module.suiteStart(name: "ManualSuite 2")
-..
-..
-module.end()
-{{< /code-block >}}
-
-Llama siempre a `module.end()` al finalizar, para que toda la información de los tests se envíe a Datadog.
-
-## Prácticas recomendadas
-
-Sigue estas prácticas para aprovechar al máximo el marco para tests y CI Visibility.
-
-### Generación de archivos de símbolos durante la creación
-
-Crea tu código en Xcode utilizando `DWARF with dSYM File` (o `-Xswiftc -debug-info-format=dwarf` si lo creas utilizando `swift`)
-
-El marco para tests utiliza archivos de símbolos para algunas de sus funciones, entre ellas: simbolizar fallos, informar de la localización original de los tests e informar de los propietarios de códigos. Genera automáticamente el archivo de símbolos cuando se incrustan símbolos de depuración en los binarios, pero puede tardar un poco más en cargarse.
-
-### Deshabilitar el entorno aislado para tests de interfaz de usuario en macOS
-
-En algunas versiones de Xcode, los paquetes de tests de interfaz de usuario se crean utilizando un entorno aislado por defecto. Los parámetros que vienen con un entorno aislado impiden que el marco para tests sea ejecutado por algunos comandos del sistema con `xcrun`, por lo que es necesario deshabilitarlo.
-
-Deshabilita el entorno aislado añadiendo Privilegios al paquete del ejecutador de tests de interfaz de usuario y luego añadiendo `App Sandbox = NO`. También puedes crear un archivo de `.entitlement` y añadirlo a los parámetros de creación de firmas. Este archivo debe incluir el siguiente contenido:
+Deshabilite el entorno aislado agregando Entitlements al paquete de IU de Test Runner y luego agregue `App Sandbox = NO` a estos. También puede crear un archivo `.entitlement` y agregarlo a Signing Build Settings. Este archivo debe incluir el siguiente contenido:
 
 {{< code-block lang="xml" >}}
 <key>com.apple.security.app-sandbox</key>
  <false/>
 {{< /code-block >}}
 
-## Leer más
+### Nombre de la sesión de prueba `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
+
+Use `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de prueba y el grupo de pruebas relacionado. Ejemplos de valores para esta etiqueta serían:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado es el nombre del trabajo de CI y el comando de prueba. Si el nombre del trabajo de CI no está disponible, se utiliza el comando de prueba.
+
+El nombre de la sesión de prueba debe ser único dentro de un repositorio para ayudarle a distinguir diferentes grupos de pruebas.
+
+#### Cuándo usar `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name}
+
+Existe un conjunto de parámetros que Datadog verifica para establecer la correspondencia entre las sesiones de prueba. El comando de prueba utilizado para ejecutar las pruebas es uno de ellos. Si el comando de prueba contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
+
+- `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recomienda usar `DD_TEST_SESSION_NAME` si sus comandos de prueba varían entre ejecuciones.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/continuous_integration/tests/#test-suite-level-visibility
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /es/getting_started/site/
-[4]: /es/continuous_integration/guides/rum_swift_integration
+[4]: /es/tests/swift_tests/
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /es/continuous_integration/intelligent_test_runner/
+[7]: /es/tests/test_impact_analysis/
 [8]: /es/getting_started/tagging/unified_service_tagging

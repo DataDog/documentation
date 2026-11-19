@@ -17,6 +17,8 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them. Some APIs require additional access on the application key before you can use it. See [Actions API access](#actions-api-access).
 
+Application keys are unique to the organization where they are created. A user who belongs to more than one organization, such as a parent organization and its child organizations, needs a separate application key in each.
+
 ### One-Time Read mode
 
 One-Time Read (OTR) mode is a security feature that limits the visibility of application key secrets to creation time only. When OTR mode is enabled, application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
