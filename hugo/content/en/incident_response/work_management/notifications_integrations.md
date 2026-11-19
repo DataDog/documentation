@@ -156,6 +156,37 @@ In Project Settings, you can manage membership, configure the auto-closing of wo
 - Two-way syncing requires [webhook support][6].
 {{% /collapse-content %}}
 
+## GitHub pull requests
+
+Link GitHub pull requests to work items to track code changes alongside the work they address. You can also enable automatic status updates for each project.
+
+### Prerequisites
+
+Configure the [GitHub integration][10] for your Datadog organization, grant it access to the repositories containing your pull requests, and enable pull request events.
+
+### Link pull requests
+
+To link a pull request manually, open the work item, click **Add Resource**, paste the GitHub pull request URL, and click **Add**. If the work item already has resources, click **Add link** in the **Resources** section instead.
+
+To link automatically, include the work item key, such as `PROJ-123`, in the pull request title, description, or source branch name. A work item can have multiple linked pull requests.
+
+### Enable status syncing
+
+1. Go to [**Project Settings**][1] and expand the project settings.
+1. Select **Integrations** > **GitHub**.
+1. Enable **Sync work item statuses with linked GitHub PRs**.
+
+Status updates flow from GitHub to Work Management. Changing a work item status does not change the pull request state.
+
+| Pull request event | Work item status |
+| --- | --- |
+| A linked pull request is opened, reopened, or marked ready for review | **In Progress**. Opening a draft pull request also triggers this update. |
+| A linked pull request is merged or closed without merging | **In Progress** if another linked, non-draft pull request is open. Otherwise, **Closed** if at least one linked pull request is merged. If neither condition applies, the status stays unchanged. |
+
+Linking an existing pull request also evaluates the linked pull requests, unless the work item is closed. An open, non-draft pull request sets the status to **In Progress**. Otherwise, a merged pull request sets it to **Closed**. If there are only draft or unmerged closed pull requests, the status stays unchanged.
+
+Draft pull requests do not prevent closure when another linked pull request has merged and no non-draft pull requests remain open. Converting a pull request to a draft does not trigger a status update.
+
 ## Incident auto-escalation
 
 Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Work Management allows you to automatically declare incidents when work items match your defined criteria, removing the need for manual intervention.
@@ -199,3 +230,4 @@ Slack thread mirroring is enabled by default for all Work Management projects. T
 [7]: /incident_response/work_management/create_work_item#automatic-work-item-creation
 [8]: /incident_response/work_management/notifications_integrations#notifications
 [9]: /integrations/slack/?tab=datadogforslack
+[10]: /integrations/github/
