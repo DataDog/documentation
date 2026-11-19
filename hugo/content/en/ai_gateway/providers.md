@@ -91,11 +91,11 @@ The form generates Azure CLI role-assignment commands for the selected account a
 
 Use **Custom Provider** for endpoints that accept OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, or System One requests. These are the operations available in the Gateway form.
 
-Custom endpoints use bearer API-key authentication. Selecting a provider label in the integration account does not enable provider-specific authentication or native Gemini or Bedrock APIs.
+Custom endpoints authenticate with a bearer API key. The {{< ui >}}Provider{{< /ui >}} field in the account editor only fills in a default base URL. AI Gateway doesn't use it to choose a request format or authentication method: select the request formats under {{< ui >}}Supported operations{{< /ui >}} in step 6.
 
 1. In the account selector, select {{< ui >}}+ Add new account{{< /ui >}} > {{< ui >}}Custom Provider{{< /ui >}}.
 2. Enter a {{< ui >}}Name{{< /ui >}} and select a {{< ui >}}Provider{{< /ui >}} label. The account editor offers OpenAI, Anthropic, Gemini, Azure OpenAI, `AWS Bedrock`, and Custom. Select the actual request formats separately in step 6.
-3. Set {{< ui >}}Base URL{{< /ui >}} to the HTTPS API base URL, including the required base path, for example `https://llm.example.com/v1`.
+3. Set {{< ui >}}Base URL{{< /ui >}} to the HTTPS API base URL, including the required base path, for example `https://llm.example.com/v1`. AI Gateway discovers models by calling `GET <BASE_URL>/models`, so the endpoint must implement the OpenAI [List models](https://platform.openai.com/docs/api-reference/models/list) API and return `{"object": "list", "data": [{"id": "<MODEL_ID>", ...}]}`. If it doesn't, [add its models manually](#add-a-model-manually).
 4. Enter the upstream {{< ui >}}API Key{{< /ui >}}. If the {{< ui >}}Authentication{{< /ui >}} selector is displayed, select {{< ui >}}API key{{< /ui >}} for this setup.
 5. Add any {{< ui >}}Custom Headers{{< /ui >}} required by the endpoint, then click {{< ui >}}Save{{< /ui >}}.
 6. Back in the Gateway provider form, select the saved account. Under {{< ui >}}Supported operations{{< /ui >}}, select the request formats this endpoint accepts.
@@ -122,6 +122,8 @@ For those example values, the application sends:
 Gateway sends `deployment-name` as the upstream model identifier. Use the complete `<PROVIDER_SLUG>/<MODEL_ID>` from the Gateway catalog, rather than the upstream identifier alone.
 
 ### Add a model manually
+
+AI Gateway discovers a provider's models from its model list. Add a model manually when a model the provider serves isn't in that list. For example, OpenAI serves `codex-auto-review`, the model Codex uses for automatic reviews, but doesn't list it in its models API.
 
 1. In the provider's {{< ui >}}Models{{< /ui >}} stage, under {{< ui >}}Manually add model{{< /ui >}}, click {{< ui >}}Add model{{< /ui >}}.
 2. Enter a unique {{< ui >}}Model ID{{< /ui >}} within the provider.
