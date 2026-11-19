@@ -43,7 +43,7 @@ You can create a notebook in two places:
 
 - From the left-hand navigation bar, click {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}New Notebook{{< /ui >}}.
 - On the upper-right-hand corner of the [Notebooks List page][1], click {{< ui >}}New Notebook{{< /ui >}}.
-- From a folder in the Notebooks side panel, click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Notebook{{< /ui >}} to create the notebook inside that folder. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
+- From the Notebooks left side panel, click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Notebook{{< /ui >}} to create the notebook inside that folder. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
 
 ### Notebook templates
 
