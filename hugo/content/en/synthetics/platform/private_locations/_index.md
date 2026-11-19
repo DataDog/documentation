@@ -98,7 +98,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 **Enable FIPS 140-2 cryptographic mode**: </br>
 Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location `v1.63.0` and above.
 
-{{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
+{{< img src="synthetics/private_locations/synthetics_pl_windows_fips_2.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
@@ -551,7 +551,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 1. You can apply the following configuration options:
 
-   {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/synthetics_pl_windows_fips_2.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
    Enable File Logging
    : Allow the Synthetics Private Location Worker to log files in the installation directory.
