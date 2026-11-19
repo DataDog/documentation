@@ -162409,6 +162409,7 @@ components:
             product_analytics_settings_write: Edit Product Analytics Settings.
             product_analytics_warehouse_model_write: Create, edit, and delete Product Analytics Warehouse Models.
             repo_info_read: View data from Git repositories.
+            rum_apps_read: View RUM Applications data.
             security_comments_read: Read comments of vulnerabilities.
             security_monitoring_critical_assets_read: Read Critical Assets.
             security_monitoring_critical_assets_write: Write Critical Assets.
@@ -249706,6 +249707,11 @@ paths:
           description: Unauthorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - rum_apps_read
       summary: Query aggregated long tasks
       tags: ["RUM Insights"]
       x-menu-order: 2
@@ -249810,6 +249816,11 @@ paths:
           description: Unauthorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - rum_apps_read
       summary: Query aggregated waterfall
       tags: ["RUM Insights"]
       x-codegen-request-body-name: body
