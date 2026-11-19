@@ -133,7 +133,7 @@ Puede utilizar estas acciones para crear flujos de trabajo, agentes y aplicacion
 
 ## API {#api}
 
-Puede activar y recuperar investigaciones mediante programación [a través de la API][18].
+Puede activar y recuperar investigaciones mediante programación [via API][18].
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /es/monitors/notify
