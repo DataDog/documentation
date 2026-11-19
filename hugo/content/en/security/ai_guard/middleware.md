@@ -51,7 +51,7 @@ Middleware errors don't break your application. If a hook raises an exception, t
    register_middleware(InputOnly())
    ```
 
-   For LiteLLM Proxy, register middleware in the proxy process, not in the agents behind the proxy. Define the middleware in its own Python module that the proxy can import, such as a module on the proxy's `PYTHONPATH`, and import that module from the `guardrails.py` file that imports the AI Guard guardrail. LiteLLM Proxy can load `guardrails.py` more than once, but Python imports your module only one time, so the middleware is registered one time:
+   If you use LiteLLM Proxy, register middleware in the proxy process, not in the agents behind the proxy. Define the middleware in its own Python module that the proxy can import, such as a module on the proxy's `PYTHONPATH`. Then import that module from the `guardrails.py` file that imports the AI Guard guardrail. LiteLLM Proxy can load `guardrails.py` more than once, but Python imports your module only one time, so the middleware is registered one time:
 
    ```python
    # aiguard_middleware.py, on the proxy's PYTHONPATH
@@ -89,7 +89,7 @@ Skip evaluations for traffic you trust, such as calls through one integration or
 
 After a middleware class skips a request:
 
-- SDK calls return an `ALLOW` action with the reason `skipped by middleware`, no attack tags or Sensitive Data Scanner findings, and the original messages. A skipped request never reaches AI Guard, so sensitive data redaction doesn't apply: if you forward `result.messages` to the model, the model receives the unredacted messages.
+- SDK calls return an `ALLOW` action with the reason `skipped by middleware`, no attack categories or Sensitive Data Scanner findings, and the original messages. A skipped request never reaches AI Guard, so sensitive data redaction doesn't apply. If you forward `result.messages` to the model, the model receives the unredacted messages.
 - Middleware classes registered later don't check the request.
 - No `post_evaluate` hooks run for the request.
 
