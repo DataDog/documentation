@@ -54,14 +54,14 @@ Code executed by the `code-exec` toolset runs against Datadog APIs using your us
 
 ## Enable code execution
 
-To enable code execution, include `code-exec` in the `toolsets` query parameter when you connect your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
+The `execute_code` and `search_datadog_sdk` tools are included in the default `core` toolset. Code execution is available by default when you connect your AI client to the Datadog MCP Server; no additional toolset selection is required. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-For example, based on your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), this URL enables the core toolset alongside code execution:
+For your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), connect with this URL to use the default toolsets, including code execution:
 
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,code-exec</code></pre>
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-`code-exec` is included in `toolsets=all`, so you don't need to add it separately if you already enable all generally available toolsets.
+If you explicitly select toolsets, include `core` or `code-exec` to retain code execution. These tools are also included in `toolsets=all`. Toolset selection does not change the required [role permissions][4].
 
 [6]: /getting_started/site/
 {{< /site-region >}}
