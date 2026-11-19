@@ -29,13 +29,15 @@ For Datadog URLs, v3 is on by default in these versions:
 | Metric type | Datadog Agent | DDOT |
 |---|---|---|
 | Series (counts, gauges, and rates) | 7.81.0 and later | 7.84.0 and later |
-| [Distributions][3] (including OpenTelemetry histograms) | 7.86.0 and later | 7.86.0 and later |
+| [Distributions][3], including converted OpenTelemetry histograms | 7.86.0 and later | 7.86.0 and later |
+
+DDOT converts OpenTelemetry histograms to distributions by default. Native OpenTelemetry histograms have separate requirements. See [Send Native OpenTelemetry Histograms][6].
 
 A Datadog URL is a URL on a [Datadog site][4] domain, such as `https://app.datadoghq.com`. Agent versions 7.86.0 and later also recognize other Datadog-owned URLs, such as PrivateLink endpoints. Earlier versions recognize only `https://app.<DD_SITE>`.
 
 If you send traffic through a proxy with the `proxy` settings, metrics still use v3. In DDOT 7.84 and 7.85, series use v2 in this case.
 
-**Note**: In Agent 7.81.0 and 7.81.1, v3 is on for every destination, including non-Datadog URLs.
+**Note**: In Agent 7.81.0 and 7.81.1, series use v3 for every destination, including non-Datadog URLs.
 
 ## When v2 is used
 
@@ -116,3 +118,4 @@ Run the Agent [`status` command][5]. In the **Forwarder** section, **Successes B
 [3]: /metrics/distributions/
 [4]: /getting_started/site/
 [5]: /agent/configuration/agent-commands/#agent-information
+[6]: /opentelemetry/guide/native_otel_histograms/
