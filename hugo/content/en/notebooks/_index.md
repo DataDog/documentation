@@ -43,7 +43,7 @@ You can create a notebook in two places:
 
 - From the left-hand navigation bar, click {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}New Notebook{{< /ui >}}.
 - On the upper-right-hand corner of the [Notebooks List page][1], click {{< ui >}}New Notebook{{< /ui >}}.
-- From the Notebooks left side panel, click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Notebook{{< /ui >}} to create the notebook inside that folder. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
+- From the Notebooks left side panel, click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Notebook{{< /ui >}} to create the notebook inside that folder. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
 
 ### Notebook templates
 
@@ -277,7 +277,7 @@ Use folders to group related notebooks, such as a team's runbooks or a service's
 
 | Task                  | How |
 |-----------------------|-----|
-| **Create a folder**   | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
+| **Create a folder**   | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
 | **Add notebooks**     | Click {{< ui >}}Add to Folder{{< /ui >}} in a notebook's breadcrumbs, select notebooks in the Notebooks List and click {{< ui >}}Add to Folder{{< /ui >}}, or drag notebooks onto a folder in the side panel. Adding a notebook that is already in a folder moves it. |
 | **Manage a folder**   | From the folder's actions menu, select {{< ui >}}Rename Folder{{< /ui >}}, {{< ui >}}Move Folder{{< /ui >}}, or {{< ui >}}Delete Folder{{< /ui >}}. Click the star icon to add the folder to {{< ui >}}Starred{{< /ui >}}. To take a notebook out of a folder without deleting it, select {{< ui >}}Remove from folder{{< /ui >}}. |
 
