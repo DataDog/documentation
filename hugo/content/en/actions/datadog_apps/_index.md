@@ -37,7 +37,7 @@ Choose Apps when you need:
 
 ## Prerequisites
 
-- **Node.js version 20.12.0 or later**. Check your version:
+- **Node.js version 20.19.0 or later, or 22.13.0 or later**. Check your version:
   ```shell
   node --version
   ```
@@ -99,7 +99,7 @@ The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and 
    ```
 2. Open the URL shown in the terminal (for example, `http://localhost:5173/`) to preview your app.
 
-When the dev server needs to call Datadog, such as when running a backend function locally, it uses OAuth by default. If authorization is required, the command opens a browser prompt. After authorization completes, the token is cached in your operating system credential store.
+When the dev server needs to call Datadog, such as when running a backend function locally, it uses OAuth by default. If authorization is required, the command opens a browser prompt. After authorization completes, the token is stored in a `credentials.json` file on your machine (by default, under `~/.config/datadog-apps`).
 
 If you set both `DD_API_KEY` and `DD_APP_KEY`, the generated app uses those keys instead of OAuth.
 
@@ -193,7 +193,7 @@ DRUIDS components are for use in Datadog Apps and App Builder only. See the pack
 
 Use `npm run build` to build the app locally without uploading it. This is the recommended default for local development, where you typically don't want to upload every build.
 
-Use `npm run upload` to build and upload the app to Datadog. This runs `vite build` with `DD_APPS_UPLOAD_ASSETS=1`.
+Use `npm run upload` to build, upload, and publish the app to Datadog. This runs the `datadog-apps upload` command from `@datadog/apps-cli`.
 
 ```shell
 npm run upload
@@ -209,7 +209,7 @@ The following environment variables are available:
 | `DD_APP_KEY` | Optional. Application key used with `DD_API_KEY` for local development and uploads. |
 | `DD_APPS_AUTH_METHOD` | Optional. Set to `oauth` or `apiKey` to override the generated app's authentication method. |
 | `DD_APPS_VERSION_NAME` | Optional. The version name for the uploaded app version. Must be a unique string per app. If unset, Datadog assigns a version name. |
-| `DD_APPS_UPLOAD_ASSETS` | If set, uploads built assets to Datadog. Set automatically by `npm run upload`. |
+| `DD_APPS_UPLOAD_ASSETS` | If set, uploads built assets to Datadog. |
 
 For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][11] handles the upload step for you.
 
@@ -275,16 +275,14 @@ To automatically upload your app on every push to the `main` branch, use the [`D
 
 CI/CD uploads require API and application key authentication. Create a Datadog API key and an application key with [Actions API Access][5] enabled, then store them as GitHub secrets.
 
-If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
+If your organization is not on US1 (`datadoghq.com`), set `datadogSite` in `datadog-app.config.json` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
 {{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
-```ts
-datadogVitePlugin({
-  auth: {
-    site: '<YOUR_DATADOG_SITE>',
-  },
-});
+```json
+{
+  "datadogSite": "<YOUR_DATADOG_SITE>"
+}
 ```
 {{< /site-region >}}
 
@@ -331,7 +329,7 @@ For local development and uploads, OAuth authentication errors may have one of t
 
 - The OAuth browser flow did not complete.
 - The cached OAuth token is invalid.
-- `auth.site` does not match your Datadog site.
+- `datadogSite` in `datadog-app.config.json` does not match your Datadog site.
 
 Rerun the command and complete the browser authorization flow.
 
@@ -343,7 +341,7 @@ Make sure you ran `npm run upload` (not `npm run build`), and that `dryRun` in `
 
 ### Node.js version errors during scaffolding
 
-The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even on a supported version, upgrade to v22. Use a version manager such as [nvm][16], [Volta][17], or [fnm][18], or download from the [Node.js website][19].
+Scaffolded apps require Node.js 20.19.0 or later, or 22.13.0 or later. If you see errors even on a supported version, upgrade to v22. Use a version manager such as [nvm][16], [Volta][17], or [fnm][18], or download from the [Node.js website][19].
 
 ## Further reading
 
