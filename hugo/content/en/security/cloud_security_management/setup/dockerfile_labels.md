@@ -52,7 +52,7 @@ You can combine both methods. For example, merge Datadog pull requests to add th
 
 ## Add labels with Datadog pull requests
 
-Datadog can scan your GitHub repositories for Dockerfiles and open pull requests that add the image source labels.
+Datadog can scan your GitHub repositories for Dockerfiles and open pull requests that add the image source labels. Datadog pull requests are available for GitHub repositories only.
 
 ### Prerequisites
 
