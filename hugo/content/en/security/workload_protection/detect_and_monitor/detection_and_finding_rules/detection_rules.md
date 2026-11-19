@@ -84,7 +84,7 @@ You can define a matching Agent rule and detection rule in one of these ways:
 - {{< ui >}}Assisted rule creator{{< /ui >}}: In Datadog, start a custom Workload Protection [detection rule][4] and use the wizard to configure both the Agent expression and the backend detection rule logic.
 - {{< ui >}}Manual rule creator{{< /ui >}}: From [Agent Configuration][12], open or create a policy and choose {{< ui >}}Manual rule creator{{< /ui >}} to author the Agent rule first, then add a detection rule that references it. For UI steps and deployment, see [Policy management][11].
 
-Agent rules use Datadog Security Language (SECL) expressions to match events. For SECL syntax, including when to use patterns and regular expressions instead of exact values, see the [SECL guide][15].
+Agent rules use Datadog Security Language (SECL) expressions to match events. For SECL syntax, see the [SECL guide][15]. For guidance on when to use patterns or regular expressions instead of exact matches, see [Rule authoring tips][16].
 
 [1]: /security/workload_protection/investigate_and_triage/agent_events
 [2]: /security/workload_protection/investigate_and_triage/security_signals
