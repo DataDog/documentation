@@ -5,6 +5,7 @@ export const prerender = true;
  * copy button here.
  */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { APIRoute, GetStaticPaths } from "astro";
 import {
   CHANGELOG_INTRO,
@@ -16,11 +17,11 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { buildPlaintextPage } from "@lib/plaintext/helpers";
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths("api", () => {
   return LOCALES.map((lang) => ({
     params: { lang: lang === "en" ? undefined : lang },
   }));
-};
+});
 
 export const GET: APIRoute = async ({ params, site }) => {
   const lang = parseLangParam(params.lang);

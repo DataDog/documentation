@@ -5,16 +5,17 @@ export const prerender = true;
  * Excluded from the sitemap.
  */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 import { buildMobileNavData } from "@lib/api/mobileNavData";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths("api", () => {
   return LOCALES.map((lang) => ({
     params: { lang: lang === "en" ? undefined : lang },
   }));
-};
+});
 
 export const GET: APIRoute = async ({ params }) => {
   const lang = parseLangParam(params.lang);

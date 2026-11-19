@@ -8,6 +8,7 @@ export const prerender = true;
  * `buildPlaintextPage`. Mirrors the HTML category page in `[category].astro`.
  */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
@@ -56,20 +57,23 @@ function endpointSummaryNodes(
   return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: ReturnType<GetStaticPaths> = [];
-  for (const lang of LOCALES) {
-    for (const cat of await getCategoryStubsView(lang)) {
-      paths.push({
-        params: {
-          lang: lang === "en" ? undefined : lang,
-          category: cat.slug,
-        },
-      });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const paths: ReturnType<GetStaticPaths> = [];
+    for (const lang of LOCALES) {
+      for (const cat of await getCategoryStubsView(lang)) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            category: cat.slug,
+          },
+        });
+      }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);

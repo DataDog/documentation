@@ -8,6 +8,7 @@ export const prerender = true;
  * strings. Mirrors the HTML endpoint page in `[operation].astro`.
  */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiOperationView } from "@lib/api/schemas/views";
@@ -39,23 +40,26 @@ function apiOperationBody(
   return contents;
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: ReturnType<GetStaticPaths> = [];
-  for (const lang of LOCALES) {
-    for (const cat of await getCategoriesView(lang)) {
-      for (const op of cat.operations) {
-        paths.push({
-          params: {
-            lang: lang === "en" ? undefined : lang,
-            category: cat.slug,
-            operation: op.slug,
-          },
-        });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const paths: ReturnType<GetStaticPaths> = [];
+    for (const lang of LOCALES) {
+      for (const cat of await getCategoriesView(lang)) {
+        for (const op of cat.operations) {
+          paths.push({
+            params: {
+              lang: lang === "en" ? undefined : lang,
+              category: cat.slug,
+              operation: op.slug,
+            },
+          });
+        }
       }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);

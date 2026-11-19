@@ -1,5 +1,6 @@
 ---
 export const prerender = true;
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import { getCollection, getEntry, render } from "astro:content";
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
@@ -9,26 +10,31 @@ import { apiBreadcrumbs, hugoOverviewContentPath } from "@lib/api/pageMeta";
 import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
 import type { GetStaticPaths } from "astro";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection("en", (entry) => isApiContent(entry.id));
-  const paths: ReturnType<GetStaticPaths> = [];
-  for (const lang of LOCALES) {
-    for (const entry of entries) {
-      paths.push({
-        params: {
-          lang: lang === "en" ? undefined : lang,
-          // Astro's glob loader strips a trailing `/index`, so the root entry is
-          // `api/latest` itself and serves the API root, where `page` is empty.
-          page:
-            entry.id === API_CONTENT_DIR
-              ? undefined
-              : entry.id.slice(`${API_CONTENT_DIR}/`.length),
-        },
-      });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const entries = await getCollection("en", (entry) =>
+      isApiContent(entry.id),
+    );
+    const paths: ReturnType<GetStaticPaths> = [];
+    for (const lang of LOCALES) {
+      for (const entry of entries) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            // Astro's glob loader strips a trailing `/index`, so the root entry is
+            // `api/latest` itself and serves the API root, where `page` is empty.
+            page:
+              entry.id === API_CONTENT_DIR
+                ? undefined
+                : entry.id.slice(`${API_CONTENT_DIR}/`.length),
+          },
+        });
+      }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 const lang = parseLangParam(Astro.params.lang);
 if (!lang) {

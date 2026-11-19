@@ -1,5 +1,6 @@
 ---
 export const prerender = true;
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
 import Tabs from "@components/Tabs/Tabs.astro";
@@ -20,23 +21,26 @@ import {
 } from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: GetStaticPathsResult = [];
-  for (const lang of LOCALES) {
-    for (const cat of await getCategoriesView(lang)) {
-      for (const op of cat.operations) {
-        paths.push({
-          params: {
-            lang: lang === "en" ? undefined : lang,
-            category: cat.slug,
-            operation: op.slug,
-          },
-        });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const paths: GetStaticPathsResult = [];
+    for (const lang of LOCALES) {
+      for (const cat of await getCategoriesView(lang)) {
+        for (const op of cat.operations) {
+          paths.push({
+            params: {
+              lang: lang === "en" ? undefined : lang,
+              category: cat.slug,
+              operation: op.slug,
+            },
+          });
+        }
       }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 const lang = parseLangParam(Astro.params.lang);
 if (!lang) {

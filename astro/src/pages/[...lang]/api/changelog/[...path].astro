@@ -4,6 +4,7 @@ export const prerender = true;
  * One static changelog page per filter and page number, for example
  * `/api/changelog/`, `/api/changelog/2/` and `/api/changelog/added/2/`.
  */
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
 import ApiChangelog from "@components/ApiChangelog/ApiChangelog.astro";
@@ -20,21 +21,24 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import type { GetStaticPaths } from "astro";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: ReturnType<GetStaticPaths> = [];
-  for (const lang of LOCALES) {
-    const pages = buildChangelogPages(await getChangelogView(lang));
-    for (const page of pages) {
-      paths.push({
-        params: {
-          lang: lang === "en" ? undefined : lang,
-          path: page.pathParam,
-        },
-      });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const paths: ReturnType<GetStaticPaths> = [];
+    for (const lang of LOCALES) {
+      const pages = buildChangelogPages(await getChangelogView(lang));
+      for (const page of pages) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            path: page.pathParam,
+          },
+        });
+      }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 const lang = parseLangParam(Astro.params.lang);
 if (!lang) {

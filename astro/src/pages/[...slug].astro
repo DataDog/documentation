@@ -17,6 +17,7 @@ import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.a
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { isApiContent } from "@lib/api/overviewPages";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import {
@@ -39,8 +40,14 @@ if (slug.startsWith("dd_e2e/") && __CI_ENV__ === "live") {
   return new Response(null, { status: 404 });
 }
 
+// API content renders only through the API routes, which normally win anyway.
+// A build that skips the API docs has no API routes, so it 404s instead.
+if (isApiContent(slug)) {
+  return new Response(null, { status: 404 });
+}
+
 const entry = await getEntry("en", slug);
-// Any en entry renders here; a path with no entry 404s.
+// Any other en entry renders here; a path with no entry 404s.
 if (!entry) {
   return new Response(null, { status: 404 });
 }

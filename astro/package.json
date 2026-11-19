@@ -24,6 +24,8 @@
     "dev:proxied": "yarn deps:dev && PROXIED=1 astro dev --port 4321",
     "build": "yarn deps && DOCS_SITE_URL=http://localhost:4322 astro build",
     "build:en": "yarn deps && SKIP_TRANSLATIONS=true DOCS_SITE_URL=http://localhost:4322 astro build",
+    "//build:en-product": "build:en without the API docs, for checking product docs only. Product docs render on demand, so skipping the API docs' prerendering skips nearly the whole build. API pages 404 in `yarn preview`.",
+    "build:en-product": "yarn deps && SKIP_TRANSLATIONS=true SKIP_DOC_TYPES=api DOCS_SITE_URL=http://localhost:4322 astro build",
     "build:preview": "yarn deps && CI_ENVIRONMENT_NAME=preview astro build",
     "build:live": "yarn deps && CI_ENVIRONMENT_NAME=live astro build",
     "verify:dist": "node scripts/verifyDist.mjs",
