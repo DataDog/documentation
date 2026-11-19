@@ -24,11 +24,9 @@ site_support_id: network_l1_l7_map
 The L1 to L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<!-- TODO: The Preview form is still generating. Confirm that the production URL above resolves before merge (staging: corpsite-preview.datadoghq.com/v1/staging/product-preview/l1-to-l7-map). -->
-
 <!-- TODO: All images on this page are placeholders cropped from the staging prototype. Replace them with final demo-org screenshots. -->
 
-<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Failed setup rate, Reset rate, Retransmit rate, Sent, Unanswered run rate, Probe loss rate, End-to-end latency), and status values (Healthy, Degraded, Critical, Unknown, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1 to L7 Map). -->
+<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Failed setup rate, Reset rate, Retransmit rate, Sent, Unanswered run rate, Probe loss rate, End-to-end latency), and status values (Healthy, Degraded, Critical, Unknown, OK, UNREACHABLE). -->
 
 ## Overview
 
@@ -52,7 +50,7 @@ The L1 to L7 Map has no Agent version requirement of its own. It builds the map 
 
 | Product | Required | What it adds to the map |
 |---|---|---|
-| [Cloud Network Monitoring][1] | Yes | The connections between resources, and where each resource runs (its composition stack). Without CNM data, the map is empty, even when Network Path data is available. |
+| [Cloud Network Monitoring][1] | Yes | The connections between resources, and where each resource runs (its composition stack). Without CNM data, the map shows a partial view, without the composition stack or observed traffic. |
 | [APM][2] | No | The service layer. Without APM, start your investigation from a host, pod, or container. |
 | [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
 | [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
@@ -137,23 +135,19 @@ Map status is not a complete assessment of a resource's health. A resource with 
 
 ### Open the map
 
-To open the map, navigate to [**Network Monitoring > L1 to L7 Map**][7].
+To open the map, navigate to [**Network Monitoring > L1 to L7**][7].
 
-<!-- TODO: Confirm final navigation path and URL.
+<!-- TODO: The app URL is changing from /network/cross-osi to /l1-to-l7-map (Slack, 2026-11-19). Confirm the full URL in link [7] after eng updates the route. -->
 
-Entry points from other products, from the product brief's milestone 1 plan. Confirm which ones ship for the Preview, and their link labels, before uncommenting:
-
-You can also open the map from other Datadog products. When you open the map from another product, it loads with that resource or connection already selected:
+You can also open the map from other Datadog products. The map loads with that resource or connection already selected:
 
 | From | Where to find the link |
 |---|---|
-| Cloud Network Monitoring | The side panel for a client/server connection. |
-| Network Path | The details for a hop on a network path. |
-| APM | The **Network** tab of a span in a trace. |
-| Kubernetes Explorer | The **Network** tab of a pod's side panel. |
-| Containers | The **Network** tab of a container's side panel. |
-| Infrastructure List | The **Network** tab of a host's side panel. |
--->
+| Cloud Network Monitoring | In the CNM analytics table, open the action menu for a row, or open the side panel for a connection. Click **Explore connection** to open the connection in source/destination pair mode. |
+| APM | In the **Network** tab of a span in a trace, click **Explore Relationships**. |
+| Kubernetes Explorer | In the **Network** tab of a pod's side panel, click **Explore Relationships**. |
+| Containers | In the **Network** tab of a container's side panel, click **Explore Relationships**. |
+| Infrastructure List | In the **Network** tab of a host's side panel, click **Explore Relationships**. |
 
 {{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1 to L7 Map page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
 
@@ -275,13 +269,15 @@ Use this workflow when two resources cannot communicate, or communicate slowly, 
 
 Check that your organization has access to the Preview. The L1 to L7 Map is not available on Datadog for Government sites. If you still cannot access the map, contact [Datadog Support][12].
 
-### The map is empty
+### The map shows a partial view or is empty
 
-The map is empty when CNM has no traffic data for the selected resource or pair during the selected time frame. An empty map can mean that CNM is not set up for the resource, or that the resource had no traffic. The map does not distinguish between these cases. Network Path data on its own does not populate the map.
+When CNM has no traffic data for the selected resource or pair during the selected time frame, the map shows only part of the data. The map displays **You are seeing a partial view of data**, and composition groups without CNM data display **No observed composition**. Network Path data still appears where it is available.
 
-1. If CNM is not set up for the workloads, [set up Cloud Network Monitoring][8].
+The missing data can mean that CNM is not set up for the resource, or that the resource had no traffic. The map does not distinguish between these cases.
+
+1. If CNM is not set up for the workloads, click **Enable CNM** on the map, or [set up Cloud Network Monitoring][8].
 1. If CNM is set up, open the resource or pair in [CNM][14] and find a time frame with traffic. Select the same time frame on the map.
-1. If CNM shows traffic but the map is still empty, contact [Datadog Support][12]. Include the resource names and the time frame.
+1. If CNM shows traffic but the map still shows a partial view, contact [Datadog Support][12]. Include the resource names and the time frame.
 
 ### A service, container, or pod is missing
 
@@ -293,7 +289,9 @@ If a host in your infrastructure appears as an IP address, the Datadog Agent mig
 
 ### A connection has no hop-by-hop path
 
-Check that [Network Path is set up][10] for the source and destination, and that it has results for the selected time frame. Open the pair in [Network Path][15] to confirm. Traffic in CNM does not mean that a Network Path test or a complete route exists for the same pair.
+If Network Path is not set up, the map displays **Get detailed network route information with Network Path**. Click **Set up Network Path**, or see [Set up Network Path][10]. If Network Path has no tests for the resources on the map, the upstream or downstream group displays a **Create path tests** link.
+
+Check that Network Path has results for the source and destination during the selected time frame. Open the pair in [Network Path][15] to confirm. Traffic in CNM does not mean that a Network Path test or a complete route exists for the same pair.
 
 ### A hop appears as an IP address instead of a device
 
@@ -303,7 +301,7 @@ Check whether the device is monitored by Network Device Monitoring. If it is not
 
 Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or the [Infrastructure List][17]. For more information, see the [Map status and network signals](#map-status-and-network-signals) section.
 
-<!-- TODO: Confirm empty-state behavior and in-app CTA copy with eng before Preview. -->
+<!-- TODO: The empty-state messages above come from design mockups (Slack, 2026-11-18). Check them against staging. -->
 
 ## Further reading
 
@@ -315,7 +313,7 @@ Compare the same resource or pair over the same time frame, and check which sign
 [4]: /containers/kubernetes/
 [5]: /network_monitoring/network_path/
 [6]: /network_monitoring/devices/
-[7]: https://app.datadoghq.com/network/cross-osi
+[7]: https://app.datadoghq.com/network/l1-to-l7-map
 [8]: /network_monitoring/cloud_network_monitoring/setup/
 [9]: /agent/
 [10]: /network_monitoring/network_path/setup/
