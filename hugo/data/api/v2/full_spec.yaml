@@ -1592,6 +1592,15 @@ components:
         example: 42
         format: int64
         type: integer
+    ModelLabUserIDPathParameter:
+      description: The UUID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
     NDMPageNumber:
       description: Specific page number to return. Defaults to 0.
       in: query
@@ -94784,9 +94793,16 @@ components:
           example: active-project
           type: string
         owner_id:
-          description: The UUID of the project owner.
+          description: The UUID of the user that created the project. The creator is always an owner of the project.
           nullable: true
           type: string
+        owner_ids:
+          description: The UUIDs of the project's owners besides its creator, in the order they became owners.
+          example: ["00000000-0000-0000-0000-000000000001"]
+          items:
+            format: uuid
+            type: string
+          type: array
         tags:
           description: The list of tags associated with the project.
           items:
@@ -228308,7 +228324,7 @@ paths:
       summary: Get Model Lab artifact content
       tags:
         - Model Lab API
-      x-menu-order: 16
+      x-menu-order: 18
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228371,7 +228387,7 @@ paths:
       summary: List Model Lab run facet keys
       tags:
         - Model Lab API
-      x-menu-order: 12
+      x-menu-order: 14
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228443,7 +228459,7 @@ paths:
       summary: List Model Lab run facet values
       tags:
         - Model Lab API
-      x-menu-order: 13
+      x-menu-order: 15
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228554,7 +228570,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Filter by owner UUID.
+        - description: Filter by owner UUID. Matches projects the user created and projects the user was added to as an owner.
           in: query
           name: filter[owner_id]
           required: false
@@ -228738,7 +228754,99 @@ paths:
       summary: List Model Lab project artifacts
       tags:
         - Model Lab API
-      x-menu-order: 15
+      x-menu-order: 17
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/model-lab-api/projects/{project_id}/owners/{user_id}:
+    delete:
+      description: |-
+        Remove a user from the owners of a Model Lab project. Removing a user who
+        isn't an owner has no effect. The project's creator is always an owner and
+        can't be removed.
+      operationId: RemoveModelLabProjectOwner
+      parameters:
+        - $ref: "#/components/parameters/ModelLabProjectIDPathParameter"
+        - $ref: "#/components/parameters/ModelLabUserIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Remove an owner from a Model Lab project
+      tags:
+        - Model Lab API
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Add a user as an owner of a Model Lab project. The user must belong to the
+        project's organization. The project's creator is always an owner, so adding
+        the creator, or a user who is already an owner, has no effect.
+        A project can have at most 50 owners besides its creator.
+      operationId: AddModelLabProjectOwner
+      parameters:
+        - $ref: "#/components/parameters/ModelLabProjectIDPathParameter"
+        - $ref: "#/components/parameters/ModelLabUserIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Add an owner to a Model Lab project
+      tags:
+        - Model Lab API
+      x-menu-order: 7
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228975,7 +229083,7 @@ paths:
       summary: List Model Lab runs
       tags:
         - Model Lab API
-      x-menu-order: 7
+      x-menu-order: 9
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229011,7 +229119,7 @@ paths:
       summary: Delete a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 9
+      x-menu-order: 11
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229075,7 +229183,7 @@ paths:
       summary: Get a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 8
+      x-menu-order: 10
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229135,7 +229243,7 @@ paths:
       summary: List Model Lab run artifacts
       tags:
         - Model Lab API
-      x-menu-order: 14
+      x-menu-order: 16
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229177,7 +229285,7 @@ paths:
       summary: Unpin a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 11
+      x-menu-order: 13
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229218,7 +229326,7 @@ paths:
       summary: Pin a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 10
+      x-menu-order: 12
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
