@@ -192,6 +192,12 @@ const evaluationContext = {
 };
 {{< /code-block >}}
 
+## Opt out individual subjects
+
+Configure evaluation telemetry and experiment participation independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][12] for the support matrix, mode behavior, and language-specific examples.
+
+Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
+
 ## Further reading
 
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
@@ -208,3 +214,5 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [9]: /feature_flags/server/nodejs/
 [10]: /feature_flags/server/java/
 [11]: /feature_flags/server/python/
+
+[12]: /feature_flags/concepts/opt_out/
