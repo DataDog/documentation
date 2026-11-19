@@ -79,3 +79,14 @@ entries:
       - ListFeatureFlagsEnvironments
       - UpdateFeatureFlagsEnvironment
     title: Remove key and description from Feature Flags environment responses
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41903
+    operations:
+      - ArchiveFeatureFlag
+      - CreateFeatureFlag
+      - GetFeatureFlag
+      - ListFeatureFlags
+      - UnarchiveFeatureFlag
+      - UpdateFeatureFlag
+    title: Document bucketing_mode on feature flag responses
