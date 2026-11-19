@@ -21,6 +21,8 @@ further_reading:
 
 Bits CLI brings Bits to your terminal. Ask Bits a question in natural language, and Bits answers using your Datadog data and the files in your current project. Bits can also edit files and run commands on your machine.
 
+{{< img src="bits_ai/bits_chat/bits_cli.png" alt="The Bits CLI start screen in a terminal, showing the version, site, and authentication method, a list of recent conversations to resume, and the Ask Bits prompt." style="width:80%;" >}}
+
 The source code, releases, and issue tracker for Bits CLI are in the [bits-cli GitHub repository][1].
 
 Use Bits CLI to:
