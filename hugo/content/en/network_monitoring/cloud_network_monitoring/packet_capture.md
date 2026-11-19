@@ -22,7 +22,7 @@ Cloud Network Monitoring (CNM) shows when a connection is degraded through metri
 
 Packet capture has the following limitations:
 
-- Each capture runs for 30 seconds. You can't configure the duration or set Berkeley Packet Filter filters.
+- Each capture runs for 30 seconds. You cannot configure the duration or filter packets with Berkeley Packet Filter (BPF) expressions.
 - Each capture request can include up to 25 hosts from the selected connection.
 - Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture data is truncated.
 - Only Linux hosts are supported.
@@ -43,11 +43,11 @@ To start a packet capture on a connection:
     - Clear the checkbox for any host you don't want to include.
 1. Click {{< ui >}}Start Packet Capture{{< /ui >}}.
 
-Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take up to 2 minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel while it runs. See the [View packet capture results](#view-packet-capture-results) section for more information on reviewing the results.
+Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take up to 2 minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel. To review the results, see the [View packet capture results](#view-packet-capture-results) section.
 
 ### Host selection
 
-A network connection in CNM is an aggregation based on the tags you group by, so a single connection can span hundreds or thousands of hosts. To focus the capture on the hosts most likely to show the problem, Datadog independently samples up to 25 hosts from the network connection based on:
+A network connection in CNM is an aggregation based on the tags you group by, so a single connection can span hundreds or thousands of hosts. To focus the capture on the hosts most likely to show the problem, Datadog samples up to 25 hosts from the network connection based on:
 
 - Highest resets
 - Highest failure rate
@@ -60,7 +60,7 @@ Hosts are labeled by their role in the connection: client, server, or both, depe
 
 ## View packet capture results
 
-To view packet captures:
+To view packet capture results:
 
 1. Navigate to [Network Analytics][1].
 1. Click the {{< ui >}}Packet Capture{{< /ui >}} tab to see a list of packet capture requests.
@@ -96,7 +96,7 @@ The results for each capture include:
 - **Per-host breakdown**: The findings for each host in the capture.
 - **`.pcap` files**: A `.zip` file of the `.pcap` files from all hosts in the capture. Use the files to analyze raw packets in a third-party tool such as Wireshark, or share them with other users.
 
-### Bits summary
+#### Bits summary
 
 The Bits summary describes the capture results and labels which findings are directly observed and which are inferred. Each finding includes the host it applies to and supporting evidence.
 
@@ -113,11 +113,11 @@ Based on packet header data, the summary can identify:
 
 ## Security and data handling
 
-### Header-only capture
+### Captured data
 
 Packet capture records only packet header metadata, such as IP addresses, ports, TCP flags, sequence and acknowledgment numbers, window size, and time to live (TTL). The Agent uses a dynamic snap length to read each packet only up to the end of its headers. Payload data is not captured and is not included in the `.pcap` files or the summary.
 
-### Auditing and visibility
+### Access and auditing
 
 - For auditing, every packet capture is logged with the user who started it.
 - Packet captures are visible to everyone in the organization.
