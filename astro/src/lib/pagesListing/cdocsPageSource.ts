@@ -88,16 +88,29 @@ function variantPages(
   mdocHash: string,
   isPrivate: boolean,
 ): PlaintextPage[] {
+  const breadcrumbs = folderBreadcrumbs(page.id);
   return page.variants.map((variant) => ({
     urlPath: plaintextUrlPath(variant.canonicalUrl),
     metadata: {
       title: variant.title,
       description: variant.description,
-      breadcrumbs: [...DOCS_CRUMBS],
+      breadcrumbs: [...breadcrumbs],
       isPrivate,
     },
     mdocHash,
   }));
+}
+
+/**
+ * "Docs", then each folder the page is in: "tracing/setup/java" becomes
+ * ["Docs", "tracing", "setup"]. `html-to-mdoc` groups pages by their second
+ * breadcrumb, so every page in a folder has one.
+ *
+ * TODO: use each folder's title from the nav YAML once it exists. Until then,
+ * each breadcrumb is a folder name.
+ */
+function folderBreadcrumbs(pageId: string): string[] {
+  return [...DOCS_CRUMBS, ...pageId.split("/").slice(0, -1)];
 }
 
 /** "/guides/setup/?os=linux" becomes "/guides/setup.md?os=linux". */

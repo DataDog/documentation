@@ -50,6 +50,14 @@ describe("cdocsPageSource", () => {
     );
   });
 
+  it("gives each variant its page's folder path as breadcrumbs", async () => {
+    const pages = await pagesFor(CUSTOM_INSTRUMENTATION_MD);
+
+    for (const page of pages) {
+      expect(page.metadata.breadcrumbs).toEqual(["Docs", "dd_e2e", "cdocs"]);
+    }
+  });
+
   it("gives every variant of a page the same hash, and each page its own", async () => {
     const pages = await allPages();
     const hashesByPagePath = new Map<string, Set<string | undefined>>();
