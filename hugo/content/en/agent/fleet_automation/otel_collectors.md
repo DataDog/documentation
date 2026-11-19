@@ -34,7 +34,7 @@ Remote flare collection from the Agent's Collector is not supported on US1-FED o
 - **The DDOT Collector**: Datadog's version of the OpenTelemetry Collector. It doesn't require the Datadog Agent, but Datadog recommends running the Agent alongside it.
 - **Upstream Collectors**: Collectors from the OpenTelemetry project, such as the contrib distribution or a custom build.
 
-For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. You can [configure](#configure-the-agents-collector), [send flares from](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) only the Agent's Collector, because these features use [Remote Configuration][2].
+For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. For the Agent's Collector, you can [configure](#configure-the-agents-collector), [send flares](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) it from Fleet Automation. These capabilities use [Remote Configuration][2], so they aren't available for the DDOT Collector or upstream Collectors.
 
 The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
 
