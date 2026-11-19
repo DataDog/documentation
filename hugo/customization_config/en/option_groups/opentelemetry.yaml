@@ -42,4 +42,3 @@ otel_compatibility_opentelemetry_sdk_destination_options:
   - id: agents_collector
   - id: direct_otlp_ingest
   - id: ddot_collector
-  - id: agent_otlp_endpoint
