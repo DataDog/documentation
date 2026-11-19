@@ -8,15 +8,17 @@
  * then moves the address bar to `/api/latest/` (see `rewrittenAddressPath`),
  * and the canonical link already points there.
  */
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { GetStaticPaths } from "astro";
 import { DEFAULT_LOCALE, LOCALES, parseLangParam } from "@lib/i18n/locale";
 
 export const prerender = true;
 
-export const getStaticPaths: GetStaticPaths = () =>
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths("api", () =>
   LOCALES.map((lang) => ({
     params: { lang: lang === DEFAULT_LOCALE ? undefined : lang },
-  }));
+  })),
+);
 
 const lang = parseLangParam(Astro.params.lang);
 if (!lang) {

@@ -36,7 +36,7 @@ You can view the component test pages at [http://localhost:4321/dd_e2e/][3].
 
 `yarn dev` is not an accurate representation of how JavaScript will run on the production site. If you need to preview interactive behavior:
 
-1. Run `yarn build:en` (for English only) or `yarn build` (all languages) to create an accurate `dist` folder.
+1. Run `yarn build:en` (for English only) or `yarn build` (all languages) to create an accurate `dist` folder. If you're only checking product docs, `yarn build:en-product` is faster: it skips the API docs, which 404 in the preview.
 2. Run `yarn preview`. The component test pages will be at [http://localhost:4322/dd_e2e/][4].
 
 ### Other commands

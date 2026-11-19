@@ -1,7 +1,7 @@
 // Catch-all `.md` endpoint: the plaintext twin of the `[...slug].astro` route.
 // Serves a plaintext version of every `content/en` page. Cdocs (pages with
 // `content_filters`) resolve their filters — URL param > default, via
-// the shared `resolveCdocRender` — and render through the cdocs plaintext
+// the shared `resolvePageFilterValues` — and render through the cdocs plaintext
 // pipeline; every other page renders through the component plaintext twins.
 // Either way the frontmatter title is prepended as an H1, mirroring the HTML
 // page. A path with no matching entry 404s.
@@ -28,8 +28,10 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
-import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { isApiContent } from "@lib/api/overviewPages";
 import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
+import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
 import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
@@ -78,6 +80,11 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
+  // API content renders only through the API routes, like the HTML route.
+  if (isApiContent(slug)) {
+    return new Response(null, { status: 404 });
+  }
+
   const entry = await getEntry("en", slug);
   if (!entry) {
     return new Response(null, { status: 404 });
@@ -108,14 +115,21 @@ export const GET: APIRoute = async ({ params, url, site }) => {
   if (contentFilters) {
     // Cdoc: resolve filters and render through the cdocs plaintext pipeline,
     // which prepends the title itself.
-    const { valsByTraitId } = resolveCdocRender({
+    const filtersManifest = buildPageFiltersManifest(contentFilters);
+    const valsByTraitId = resolvePageFilterValues({
       contentFilters,
+      filtersManifest,
       searchParams: url.searchParams,
     });
     const bareUrl = `/${slug}/`;
     const variantList = buildMarkdocStr(
       cdocsFilterBarNodes(
-        buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
+        buildFilterOptionLinks({
+          bareUrl,
+          filtersManifest,
+          contentFilters,
+          valsByTraitId,
+        }),
       ),
     ).trim();
 

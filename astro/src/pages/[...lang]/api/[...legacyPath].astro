@@ -14,12 +14,16 @@
  * priority (static segments outrank rest params), and `getStaticPaths` only
  * ever emits the table's own paths, so it can't shadow a real API page.
  */
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import { legacyRedirectStaticPaths } from "@lib/api/legacyRedirects";
 import { localizedHref, parseLangParam } from "@lib/i18n/locale";
 
 export const prerender = true;
 
-export const getStaticPaths = legacyRedirectStaticPaths;
+export const getStaticPaths = docTypeStaticPaths(
+  "api",
+  legacyRedirectStaticPaths,
+);
 
 interface Props {
   to: string;

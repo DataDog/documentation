@@ -1,23 +1,24 @@
 /**
  * Server-side cdocs filter resolution, backed by the real `cdocs-data` package
- * (the same package Hugo uses via `cdocs-hugo-integration`).
+ * (the same package Hugo uses via `cdocs-hugo-integration`). Shared by the
+ * catch-all cdoc route and its plaintext twin.
  *
- * Per request we:
- *   1. look up the customization config (traits/options/option groups),
- *      which is loaded and validated at build time,
- *   2. build the page's filters manifest from its `content_filters` frontmatter,
- *   3. pick each filter's active value with the precedence
+ * Per request, the route builds the page's filters manifest
+ * (`buildPageFiltersManifest`), and we:
+ *   1. pick each filter's active value with the precedence
  *      URL param > option-group default (skipping an invalid URL value),
- *   4. resolve the manifest against those values to get UI-ready options/labels.
+ *   2. settle those values (`settleValues`), the same way the filter bar and
+ *      the variant lists do, so the content always matches the selected pills.
  *
- * The resolved trait values (`valsByTraitId`) become Markdoc variables so the
- * built-in `if` tags drop non-matching content.
+ * Nothing else about the request is read, so the same URL always renders the
+ * same content. The reader's stored preferences are applied in the browser
+ * instead, by adding them to the URL.
+ *
+ * The resolved trait values become Markdoc variables so the built-in `if` tags
+ * drop non-matching content.
  */
-import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest";
-import { resolveFilters } from "cdocs-data/resolveFilters";
-import type { CustomizationConfig } from "cdocs-data";
-import configByLang from "virtual:cdocs-config";
-import type { ResolvedFilter } from "./types";
+import type { FiltersManifest } from "cdocs-data";
+import { settleValues, shownValues } from "./variants";
 
 /**
  * A `content_filters` entry as it appears in a doc's frontmatter (cdocs-data's
@@ -32,41 +33,20 @@ export interface CdocContentFilter {
   hide_if?: Array<Record<string, string[]>>;
 }
 
-const DEFAULT_LANG = "en";
-
-// The customization config arrives as plain data from `cdocsConfigPlugin`,
-// which loads and validates `customization_config/` at build time. Both
-// cdocs-data functions are imported by subpath, so the YAML loader and its
-// `fs` imports stay out of the server bundle.
-function getCustomizationConfig(lang: string): CustomizationConfig {
-  return configByLang[lang] ?? configByLang[DEFAULT_LANG];
-}
-
-export interface ResolvePageFiltersInput {
+export interface ResolvePageFilterValuesInput {
   /** The `content_filters` list from the doc's frontmatter. */
   contentFilters: CdocContentFilter[];
-  /** Values parsed from the URL query string, keyed by trait id. */
-  urlVals: Record<string, string>;
-  lang?: string;
+  /** The page's filters manifest, from `buildPageFiltersManifest`. */
+  filtersManifest: FiltersManifest;
+  /** The request URL's query string. */
+  searchParams: URLSearchParams;
 }
 
-export interface ResolvePageFiltersResult {
-  /** UI-ready filters (only those shown), in frontmatter order. */
-  resolvedFilters: ResolvedFilter[];
-  /** Active value per trait id — used as Markdoc variables and persisted. */
-  valsByTraitId: Record<string, string>;
-}
-
-export function resolvePageFilters(
-  input: ResolvePageFiltersInput,
-): ResolvePageFiltersResult {
-  const { contentFilters, urlVals, lang = DEFAULT_LANG } = input;
-  const customizationConfig = getCustomizationConfig(lang);
-
-  const filtersManifest = buildFiltersManifest({
-    frontmatter: { title: "", content_filters: contentFilters },
-    customizationConfig,
-  });
+/** The active value of every shown filter, keyed by trait id. */
+export function resolvePageFilterValues(
+  input: ResolvePageFilterValuesInput,
+): Record<string, string> {
+  const { contentFilters, filtersManifest, searchParams } = input;
 
   // Apply precedence URL > default, keeping only valid option ids.
   const selectedValsByTraitId: Record<string, string> = {};
@@ -75,7 +55,7 @@ export function resolvePageFilters(
     const validValues = new Set(
       filtersManifest.filtersByTraitId[traitId]?.possibleVals ?? [],
     );
-    const urlVal = urlVals[traitId];
+    const urlVal = searchParams.get(traitId);
     const chosen =
       urlVal && validValues.has(urlVal)
         ? urlVal
@@ -83,25 +63,7 @@ export function resolvePageFilters(
     if (chosen != null) selectedValsByTraitId[traitId] = chosen;
   }
 
-  const resolved = resolveFilters({
-    valsByTraitId: selectedValsByTraitId,
-    filtersManifest,
-  });
-
-  const resolvedFilters: ResolvedFilter[] = [];
-  const valsByTraitId: Record<string, string> = {};
-  for (const filter of contentFilters) {
-    const entry = resolved[filter.trait_id];
-    if (!entry || !entry.isShown) continue;
-    resolvedFilters.push({
-      traitId: entry.id,
-      label: entry.label,
-      options: entry.options,
-      defaultValue: entry.defaultValue,
-      currentValue: entry.currentValue,
-    });
-    valsByTraitId[entry.id] = entry.currentValue;
-  }
-
-  return { resolvedFilters, valsByTraitId };
+  return shownValues(
+    settleValues(filtersManifest, contentFilters, selectedValsByTraitId),
+  );
 }

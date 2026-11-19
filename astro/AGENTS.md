@@ -47,7 +47,7 @@ This site will eventually have tens of thousands of pages, with most of them ren
 
 ## Disallowed actions: Do not do these
 
-- Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step. If `yarn build:en` will suffice, recommend that instead of the full build.
+- Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step. If `yarn build:en` will suffice, recommend that instead of the full build. If the change doesn't affect the API docs, recommend `yarn build:en-product`, which skips them.
 - Do not run irrelevant tests until you're finished with a feature and checking for all regressions.
 
 ## Global operating instructions

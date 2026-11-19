@@ -16,8 +16,14 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
-import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { isApiContent } from "@lib/api/overviewPages";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
+import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
+import {
+  pruneManifestForClient,
+  type ClientSideFiltersManifest,
+} from "cdocs-data";
 import {
   CDOCS_PAGE_STATE_ID,
   serializeCdocsPageState,
@@ -34,8 +40,14 @@ if (slug.startsWith("dd_e2e/") && __CI_ENV__ === "live") {
   return new Response(null, { status: 404 });
 }
 
+// API content renders only through the API routes, which normally win anyway.
+// A build that skips the API docs has no API routes, so it 404s instead.
+if (isApiContent(slug)) {
+  return new Response(null, { status: 404 });
+}
+
 const entry = await getEntry("en", slug);
-// Any en entry renders here; a path with no entry 404s.
+// Any other en entry renders here; a path with no entry 404s.
 if (!entry) {
   return new Response(null, { status: 404 });
 }
@@ -43,18 +55,19 @@ if (!entry) {
 const contentFilters = entry.data.content_filters;
 const isFilterable = contentFilters !== undefined;
 
-// Filterable docs resolve their filters; plain docs render with no filter
-// state.
-let resolvedFilters: ReturnType<typeof resolveCdocRender>["resolvedFilters"] =
-  [];
-let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
+// Filterable docs resolve their filters, and the filter bar gets a pruned
+// manifest, so it can build each option's URL from the reader's picks; plain
+// docs render with no filter state.
+let valsByTraitId: Record<string, string> = {};
+let clientFiltersManifest: ClientSideFiltersManifest | undefined;
 if (isFilterable) {
-  const resolved = resolveCdocRender({
+  const filtersManifest = buildPageFiltersManifest(contentFilters);
+  valsByTraitId = resolvePageFilterValues({
     contentFilters,
+    filtersManifest,
     searchParams: Astro.url.searchParams,
   });
-  resolvedFilters = resolved.resolvedFilters;
-  valsByTraitId = resolved.valsByTraitId;
+  clientFiltersManifest = pruneManifestForClient(filtersManifest);
 }
 
 // Read by `preferencesClient`, which stores the URL's filter values and adds
@@ -104,7 +117,17 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
         id={CDOCS_PAGE_STATE_ID}
         set:html={cdocsPageState}
       />
-      {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
+      {
+        isFilterable && clientFiltersManifest && (
+          <CdocsFilterBar
+            client:load
+            bareUrl={prefixed(`/${slug}/`)}
+            filtersManifest={clientFiltersManifest}
+            contentFilters={contentFilters}
+            valsByTraitId={valsByTraitId}
+          />
+        )
+      }
       <div class="cdoc__content prose" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
       </div>
