@@ -11,12 +11,15 @@
  * Kept free of `astro:content` and Astro globals so it stays unit-testable; the
  * route supplies `searchParams` and handles the entry lookup and rendering.
  */
+import type { FiltersManifest } from "cdocs-data";
 import { resolvePageFilters, type CdocContentFilter } from "./filters";
 import type { ResolvedFilter } from "./types";
 
 export interface ResolveCdocRenderInput {
   /** The doc's `content_filters` frontmatter. */
   contentFilters: CdocContentFilter[];
+  /** The page's filters manifest, from `buildPageFiltersManifest`. */
+  filtersManifest: FiltersManifest;
   /** The request URL's query string. */
   searchParams: URLSearchParams;
 }
@@ -31,7 +34,7 @@ export interface ResolveCdocRenderResult {
 export function resolveCdocRender(
   input: ResolveCdocRenderInput,
 ): ResolveCdocRenderResult {
-  const { contentFilters, searchParams } = input;
+  const { contentFilters, filtersManifest, searchParams } = input;
 
   // Collect the filter values expressed in the URL query string.
   const urlVals: Record<string, string> = {};
@@ -40,5 +43,5 @@ export function resolveCdocRender(
     if (value) urlVals[filter.trait_id] = value;
   }
 
-  return resolvePageFilters({ contentFilters, urlVals });
+  return resolvePageFilters({ contentFilters, filtersManifest, urlVals });
 }

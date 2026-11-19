@@ -54,13 +54,13 @@ const isFilterable = contentFilters !== undefined;
 let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
 let clientFiltersManifest: ClientSideFiltersManifest | undefined;
 if (isFilterable) {
+  const filtersManifest = buildPageFiltersManifest(contentFilters);
   valsByTraitId = resolveCdocRender({
     contentFilters,
+    filtersManifest,
     searchParams: Astro.url.searchParams,
   }).valsByTraitId;
-  clientFiltersManifest = pruneManifestForClient(
-    buildPageFiltersManifest(contentFilters),
-  );
+  clientFiltersManifest = pruneManifestForClient(filtersManifest);
 }
 
 // Read by `preferencesClient`, which stores the URL's filter values and adds
