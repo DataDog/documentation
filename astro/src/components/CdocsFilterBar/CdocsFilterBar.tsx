@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import styles from "./CdocsFilterBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
+import { writePreferences } from "@lib/cdocs/preferences";
 import type { ClientSideFiltersManifest } from "cdocs-data";
 import type { CdocContentFilter } from "@lib/cdocs/filters";
 import {
@@ -36,6 +37,10 @@ interface Props {
  * shows its new options, and every pill's URL keeps the earlier picks. A
  * reader can pick several filters before the page arrives, and the last
  * navigation carries all of them.
+ *
+ * The clicked value is stored as the reader's preference. The bar is the only
+ * place that stores one, so a value the reader didn't pick, such as a default
+ * or a value from a loaded URL, isn't stored.
  */
 export default function CdocsFilterBar({
   bareUrl,
@@ -64,7 +69,8 @@ export default function CdocsFilterBar({
 
   if (filterLinks.length === 0) return null;
 
-  const selectOption = (option: CdocsFilterOptionLink) => {
+  const selectOption = (traitId: string, option: CdocsFilterOptionLink) => {
+    writePreferences({ [traitId]: option.id });
     setPickedValsByTraitId(valsOf(option));
     navigate(option.url);
   };
@@ -91,7 +97,7 @@ function valsOf(option: CdocsFilterOptionLink): Record<string, string> {
 
 interface FilterPillGroupProps {
   filter: CdocsFilterLinks;
-  onSelect: (option: CdocsFilterOptionLink) => void;
+  onSelect: (traitId: string, option: CdocsFilterOptionLink) => void;
 }
 
 /** A single filter rendered as a labeled radiogroup of pill buttons. */
@@ -120,7 +126,7 @@ function FilterPillGroup({ filter, onSelect }: FilterPillGroupProps) {
               "cdocs-filter-bar__pill",
               option.isSelected && "cdocs-filter-bar__pill--selected",
             )}
-            onClick={() => onSelect(option)}
+            onClick={() => onSelect(filter.traitId, option)}
           >
             {option.label}
           </button>

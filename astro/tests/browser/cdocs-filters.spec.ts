@@ -114,27 +114,21 @@ test.describe("cdocs filterable doc (SSR)", () => {
     await expect(pill(page, "Datadog")).toHaveAttribute("aria-checked", "true");
   });
 
-  test("the URL's filter values are stored in localStorage, in Hugo's format", async ({
-    page,
-  }) => {
+  test("a loaded URL's filter values aren't stored", async ({ page }) => {
     await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
     await expect(content(page)).toContainText("ddtrace");
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
 
-    await expect
-      .poll(() =>
-        page.evaluate(() =>
-          JSON.parse(
-            localStorage.getItem("datadog-docs-content-filters") ?? "{}",
-          ),
-        ),
-      )
-      .toMatchObject({
-        prog_lang: { value: "python", timestamp: expect.any(Number) },
-        api_type: { value: "dd_api", timestamp: expect.any(Number) },
-      });
+    expect(
+      await page.evaluate(() =>
+        localStorage.getItem("datadog-docs-content-filters"),
+      ),
+    ).toBeNull();
   });
 
-  test("clicking a pill stores the new value in localStorage", async ({
+  test("clicking a pill stores its value in localStorage, in Hugo's format", async ({
     page,
   }) => {
     await page.goto(CDOC_URL);
@@ -145,6 +139,7 @@ test.describe("cdocs filterable doc (SSR)", () => {
     await pill(page, "Datadog").click();
     await expect(page).toHaveURL(new RegExp("api_type=dd_api"));
 
+    // Only the clicked filter: the language is still the default.
     await expect
       .poll(() =>
         page.evaluate(() =>
@@ -153,7 +148,7 @@ test.describe("cdocs filterable doc (SSR)", () => {
           ),
         ),
       )
-      .toMatchObject({
+      .toEqual({
         api_type: { value: "dd_api", timestamp: expect.any(Number) },
       });
   });

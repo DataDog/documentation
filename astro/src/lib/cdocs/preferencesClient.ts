@@ -1,11 +1,10 @@
 /**
  * The browser side of Cdocs preferences, started once per product docs page:
  *
- * - Stores the filter values set by the page's URL params, on every page load
- *   and view-transition navigation. (The filter bar stores a value when the
- *   reader changes a filter.)
- * - Then adds every resolved filter value to the URL, so the URL bar shows the
- *   variant on screen.
+ * - Adds every resolved filter value to the URL, on every page load and
+ *   view-transition navigation, so the URL bar shows the variant on screen.
+ *   The URL's values aren't stored: only the filter bar stores a value, when
+ *   the reader picks one.
  * - When the page is idle, loads the stored preferences and the traits list.
  * - When the reader hovers over, touches, or focuses a link to a Cdocs page,
  *   adds the stored preferences that page accepts as params.
@@ -17,7 +16,7 @@ import type { TransitionBeforePreparationEvent } from "astro:transitions/client"
 import type { CdocsTraitsList } from "./pageLists";
 import { readCdocsPageState, type CdocsPageState } from "./pageState";
 import { addPreferencesToHref } from "./preferenceLinks";
-import { readPreferences, writePreferences } from "./preferences";
+import { readPreferences } from "./preferences";
 
 interface StartOptions {
   /** Defaults to `requestIdleCallback`, where the browser has it. */
@@ -51,8 +50,6 @@ export function startCdocsPreferences(options: StartOptions = {}): () => void {
     pageState = readCdocsPageState(document);
     if (!pageState) return;
 
-    // Before the URL sync, which would make the defaults look chosen.
-    storeUrlValues(pageState);
     syncUrlWithResolvedValues(pageState);
 
     const state = pageState;
@@ -175,19 +172,6 @@ export function startCdocsPreferences(options: StartOptions = {}): () => void {
 }
 
 // Private functions ------------------------------------------------
-
-/**
- * Store the URL params the page used. A param the page rejected (an unknown
- * option, for example) resolved to something else, so it's skipped.
- */
-function storeUrlValues(pageState: CdocsPageState) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const valsToStore: Record<string, string> = {};
-  for (const [traitId, value] of Object.entries(pageState.valsByTraitId)) {
-    if (urlParams.get(traitId) === value) valsToStore[traitId] = value;
-  }
-  if (Object.keys(valsToStore).length > 0) writePreferences(valsToStore);
-}
 
 /**
  * Put every resolved value in the URL, in place, with params in alphabetical

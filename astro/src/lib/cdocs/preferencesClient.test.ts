@@ -75,37 +75,31 @@ afterEach(() => {
 });
 
 describe("startCdocsPreferences", () => {
-  it("stores the values set by the page's URL params", async () => {
+  it("doesn't store the values in the page's URL", async () => {
     renderPage({
       url: "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=python",
       valsByTraitId: { prog_lang: "python", api_type: "otel_api" },
     });
     await start();
 
-    // The default API value isn't in the URL, so it isn't stored.
-    expect(readPreferences()).toEqual({ prog_lang: "python" });
-  });
-
-  it("doesn't store a URL value the page didn't use", async () => {
-    renderPage({
-      url: "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=cobol",
-      valsByTraitId: { prog_lang: "java", api_type: "otel_api" },
-    });
-    await start();
-
+    // Only the filter bar stores values, when the reader picks one.
     expect(readPreferences()).toEqual({});
   });
 
-  it("stores the URL params again after a view-transition navigation", async () => {
-    renderPage({ url: "/dd_e2e/cdocs/custom_instrumentation/" });
+  it("keeps a stored preference that the URL differs from", async () => {
+    writePreferences({ prog_lang: "python" });
+    renderPage({
+      url: "/dd_e2e/cdocs/custom_instrumentation/?prog_lang=java",
+      valsByTraitId: { prog_lang: "java", api_type: "otel_api" },
+    });
     await start();
     renderPage({
-      url: "/dd_e2e/cdocs/custom_instrumentation/?api_type=dd_api",
-      valsByTraitId: { prog_lang: "java", api_type: "dd_api" },
+      url: "/dd_e2e/cdocs/custom_instrumentation/?api_type=dd_api&prog_lang=cpp",
+      valsByTraitId: { prog_lang: "cpp", api_type: "dd_api" },
     });
     document.dispatchEvent(new Event("astro:page-load"));
 
-    expect(readPreferences()).toEqual({ api_type: "dd_api" });
+    expect(readPreferences()).toEqual({ prog_lang: "python" });
   });
 
   it("adds stored preferences to a Cdocs link on hover", async () => {
