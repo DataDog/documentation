@@ -200,11 +200,7 @@ point the frontmatter at them, and update each row.
 
 DDOT SDKs send traces, metrics, and logs over OTLP to the DDOT Collector or an upstream OpenTelemetry Collector. These signals don't need the Datadog Agent. Because DDOT SDKs use standard OTLP, you can also send their data to other OTLP-compatible backends.
 
-Datadog recommends that you run the Datadog Agent with DDOT SDKs, because some features depend on it:
-
-- These features need the Agent: [Live Debugger][51], [Dynamic Instrumentation][49], [remotely configured head sampling][52], [Database Monitoring][17], [Data Streams Monitoring][25], [Data Observability: Jobs Monitoring][24], the [Infrastructure Host List][14], [Cloud Network Monitoring][18], [Live Container Monitoring][19], [Live Processes][20], and [Universal Service Monitoring][21].
-- With the DDOT Collector, [App and API Protection][22], [Feature Flags][50], [Cloud SIEM][7], and [Kubernetes Monitoring][15] work without the Agent. With an upstream OpenTelemetry Collector, they need the Agent.
-- [App and API Protection][22], [Code Security][48], and [Feature Flags][50] need the Agent for Remote Configuration.
+Datadog recommends that you run the Datadog Agent with DDOT SDKs, because some features need it. In the table, these features show **With Agent**. [App and API Protection][22], [Code Security][48], and [Feature Flags][50] also need the Agent for Remote Configuration.
 
 Availability varies by language and SDK version. See [DDOT SDKs][1].
 
