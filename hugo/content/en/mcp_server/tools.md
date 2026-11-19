@@ -859,24 +859,26 @@ Executes read-only JavaScript authored by an AI agent in a Datadog-managed sandb
 
 ### `execute_code_write`
 *Toolsets: **core**, **code-exec***\
-*Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Dashboards Write` to create a dashboard).*\
+*Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
 Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
+
+Teams access is read-only. Dashboard and notebook creation and updates require the dedicated MCP tools; code execution supports reading and deleting those resources. See [What the sandbox can access][105] for details.
 
 The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][104] before retrying a script.
 
-- Create a dashboard for `checkout-api` with error rate, request volume, and p95 latency for the last 24 hours. Return the dashboard URL and verify that all widgets were created.
+- Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
 - Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
 - Create a case for the current incident, assign it to the on-call team, and include links to the relevant traces and logs.
 
 ### `search_datadog_sdk`
 *Toolset: **code-exec***\
 *Permissions Required: None*\
-Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution separately checks your permissions.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
 - What does the `dd.time` namespace provide?
-- Look up the operation and request and response types for creating a dashboard.
+- Look up the operation and request and response types for creating a monitor.
 
 ## Dashboards
 
@@ -3877,6 +3879,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [102]: /gpu_monitoring/mcp_tools/
 [103]: /mcp_server/setup#required-permissions
 [104]: /mcp_server/code_execution/#review-and-retry-write-operations-safely
+[105]: /mcp_server/code_execution/#what-the-sandbox-can-access
 
 ## Further reading
 

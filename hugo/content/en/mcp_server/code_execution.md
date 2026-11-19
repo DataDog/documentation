@@ -22,7 +22,7 @@ The `code-exec` toolset in the Datadog MCP Server lets your AI agent write and r
 
 Use code execution for investigations that span multiple Datadog products, or that need the agent to join, filter, or summarize data from several calls. An example is correlating error logs with APM latency for the same service and time window.
 
-With `execute_code_write`, agents can also create, update, or delete supported Datadog resources and act on findings in the same workflow. For example, an agent can investigate an error spike, create a summary dashboard, and verify its widgets in one script.
+With `execute_code_write`, agents can also create, update, or delete supported Datadog resources and act on findings in the same workflow. For example, an agent can investigate an error spike, create a case, and verify the case details in one script.
 
 ## Why use code execution
 
@@ -55,7 +55,9 @@ Generated code is JavaScript based on the public [Datadog API Client for TypeScr
 Code executed by the `code-exec` toolset runs against Datadog APIs using your user identity. Every API call is authorized independently with your existing [role permissions][4]. Code execution can't grant access beyond those permissions.
 
 - `execute_code` exposes read-only Datadog API calls for investigations and analysis.
-- `execute_code_write` can create, update, or delete supported resources: dashboards, monitors, SLOs, notebooks, log configurations, incidents, cases, workflows, Synthetic tests, security rules, Catalog entities, teams, and feature flags.
+- `execute_code_write` can create, update, or delete supported resources, such as monitors, SLOs, log configurations, incidents, and cases. Use `search_datadog_sdk` with `target: "execute_code_write"` to confirm which operations are available.
+- Teams access is read-only. Creating or updating teams, changing membership, and other team write operations are unavailable through code execution.
+- Dashboard and notebook creation and updates are unavailable through code execution. Use [`upsert_datadog_dashboard`][8] and the dedicated [notebook tools][9] for those actions. Reading and deleting dashboards and notebooks remain supported.
 - Credential management, user and role management, and other sensitive administrative APIs remain unavailable, even if you can access them elsewhere in Datadog.
 - The sandbox is isolated. Scripts can't access your local machine, file system, arbitrary network destinations, or raw Datadog credentials.
 - Raw API responses stay inside the sandbox while the script processes them. The only data sent back to the agent is the value the code returns. Review what a script returns if the underlying data is sensitive, such as customer data stored in logs.
@@ -80,7 +82,7 @@ The `execute_code_write` tool is included in the `code-exec` toolset, the defaul
 
 To use write operations:
 
-1. Assign your role the `mcp_write` permission and the permissions required for the resources being modified. For example, creating a dashboard requires `Dashboards Write` in addition to `mcp_write`.
+1. Assign your role the `mcp_write` permission and the permissions required for the resources being modified. For example, creating a monitor requires `Monitors Write` in addition to `mcp_write`.
 1. Reauthorize the MCP connection in your AI client if needed to consent to the additional write scopes.
 
 ## Review and retry write operations safely
@@ -99,7 +101,7 @@ To use write operations:
 
 ## Write examples
 
-- Create a dashboard for `checkout-api` with error rate, request volume, and p95 latency for the last 24 hours. Return the dashboard URL and verify that all widgets were created.
+- Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
 - Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
 - Create a case for the current incident, assign it to the on-call team, and include links to the relevant traces and logs.
 
@@ -113,3 +115,5 @@ To use write operations:
 [4]: /account_management/rbac/permissions/
 [5]: /mcp_server/setup
 [7]: /mcp_server/tools/#execute_code_write
+[8]: /mcp_server/tools/#upsert_datadog_dashboard
+[9]: /mcp_server/tools/#create_datadog_notebook
