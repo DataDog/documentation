@@ -26,17 +26,17 @@ A compensation plan defines when on-call time counts as business hours and how m
 ### Create a compensation plan
 
 1. In Datadog, go to [**On-Call** > **Compensation**][2] and select the **Compensation Plans** tab.
-1. Click **Create Plan**.
+1. Click **Create Plan** to open the plan form.
 1. Configure the plan:
 
-   {{< img src="incident_response/on-call/compensation/create_plan.png" alt="The New Compensation Plan form, with business days set to Monday through Friday, the Europe/Paris time zone, business hours from 09:00 to 18:00, the EUR currency, and a rate outside business hours of 4 euros per hour." style="width:70%;" >}}
+   {{< img src="incident_response/on-call/compensation/create_plan.png" alt="The New Compensation Plan form with fields for business days, time zone, business hours, currency, and rates." style="width:70%;" >}}
 
    | Field | Description |
    |-------|-------------|
    | **Plan name** | A name to identify the plan when you generate a report. |
    | **Business days** | The days of the week that count as business days. Defaults to Monday through Friday. |
    | **Timezone** | The time zone in which business hours and the report time window are evaluated. Defaults to your time zone. |
-   | **Business hours start** and **Business hours end** | The start and end of business hours on business days. Defaults to 09:00–18:00. The end time must be after the start time. |
+   | **Business hours start** and **Business hours end** | The start and end of business hours on business days. Defaults to 09:00-18:00. The end time must be after the start time. |
    | **Currency** | The currency for all rates in the plan: EUR, USD, GBP, CHF, or CAD. |
    | **Rate outside business hours** | The hourly rate for on-call time outside of business hours. Required. |
    | **Saturday rate** and **Sunday rate** | Optional hourly rates for on-call time on Saturdays and Sundays. If you leave a rate blank, that day uses the rate outside business hours. |
@@ -67,7 +67,7 @@ If a user is on call for more than one selected schedule at the same time, the o
 
 ### Example
 
-A plan has business days of Monday through Friday, business hours of 09:00–18:00, a rate outside business hours of €5, a Saturday rate of €10, and no Sunday rate. A user is on call from Friday 00:00 to Sunday 24:00:
+A plan has business days of Monday through Friday, business hours of 09:00-18:00, a rate outside business hours of €5, a Saturday rate of €10, and no Sunday rate. A user is on call for all of Friday, Saturday, and Sunday:
 
 | Day | On-call hours | Compensation |
 |-----|---------------|--------------|
@@ -84,11 +84,11 @@ A plan has business days of Monday through Friday, business hours of 09:00–18:
 1. Under **Scope**, select up to 20 schedules to include. Search for schedules by name, or filter by team or tag. You can include deleted schedules.
 1. Click **Generate Report**.
 
-{{< img src="incident_response/on-call/compensation/generate_report.png" alt="The Generate Compensation Report form, with a compensation plan selected, a time window from October 1 to October 31, and one schedule selected in the Scope section." style="width:100%;" >}}
+{{< img src="incident_response/on-call/compensation/generate_report.png" alt="The Generate Compensation Report form with plan, time window, and schedule selections." style="width:100%;" >}}
 
 ## Review a compensation report
 
-The report lists each user who was on call during the time window, with the following columns:
+The report lists each user who was on call during the time window, with the following columns. For more information on how on-call time is assigned to each column, see the [How compensation is calculated](#how-compensation-is-calculated) section.
 
 - **Business Hours**: On-call hours inside business hours, which are not paid
 - **Outside Hours**: On-call hours outside business hours
@@ -96,11 +96,11 @@ The report lists each user who was on call during the time window, with the foll
 - **Total Hours**: The sum of all on-call hours
 - **Compensation**: The total amount to pay the user
 
-{{< img src="incident_response/on-call/compensation/report.png" alt="An On-Call Compensation Report for October, listing three users with their business hours, outside hours, Saturday hours, Sunday hours, total hours, and compensation, followed by a totals row. One user's row is expanded to show their hours and compensation for each schedule." style="width:100%;" >}}
+{{< img src="incident_response/on-call/compensation/report.png" alt="An On-Call Compensation Report listing each user's hours and compensation, with one row expanded to show a per-schedule breakdown." style="width:100%;" >}}
 
 The last row shows the totals for all users. Click a user's row to see a breakdown of their hours and compensation for each schedule.
 
-To change the plan's rates or business hours, click the plan name at the top of the report. After you save your changes, Datadog regenerates the report with the same time window and schedules. To keep the time window accurate, you can't change the plan's time zone from the report. To change it, edit the plan from the **Compensation Plans** tab.
+To change the plan's rates or business hours, click the plan name at the top of the report. After you save your changes, Datadog regenerates the report with the same time window and schedules. You can't change the plan's time zone from the report because the time window depends on it. To change the time zone, edit the plan on the **Compensation Plans** tab.
 
 To generate a report with different settings, click **Start Over**.
 
