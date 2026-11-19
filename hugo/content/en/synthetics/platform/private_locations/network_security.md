@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. Reserved and private IP ranges are blocked by default (`enableDefaultBlockedIpRanges` is `true`). A private location that sets it to `false`, for example in an older configuration file, does not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
+A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. By default, the worker blocks reserved and private IP ranges (`enableDefaultBlockedIpRanges` is `true`). A private location that sets `enableDefaultBlockedIpRanges` to `false`, for example in an older configuration file, does not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
 
 To reduce this risk:
 
