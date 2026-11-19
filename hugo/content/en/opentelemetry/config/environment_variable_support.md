@@ -29,11 +29,11 @@ further_reading:
       text: 'Ruby SDK Configuration'
 ---
 
-DDOT SDKs implement the OpenTelemetry APIs for traces, metrics, and logs. This allows you to use standard OpenTelemetry environment variables to configure your application while receiving additional Datadog telemetry with minimal changes to your existing configuration.
+DDOT SDKs implement the OpenTelemetry APIs for traces, metrics, and logs, and read the standard OpenTelemetry SDK environment variables (`OTEL_*`). You can keep your existing OpenTelemetry configuration when you adopt DDOT SDKs, and use a few Datadog (`DD_*`) settings only for Datadog-specific capabilities.
 
-This page describes the environment variables for configuring DDOT SDKs.
+This page describes the environment variables for configuring DDOT SDKs, including support differences by language.
 
-The precedence rules on this page describe how *Datadog SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
+The precedence rules on this page describe how *DDOT SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
 
 <div class="alert alert-danger">
   To avoid duplicate values appearing in Datadog for the same tag key, don't set both Datadog (<code>DD_*</code>) and OpenTelemetry (<code>OTEL_*</code>) environment variables for the same concept. Choose one convention.

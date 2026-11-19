@@ -21,17 +21,21 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They emit traces, metrics, and logs that follow OpenTelemetry Semantic Conventions over OTLP. They use standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities. DDOT SDKs are available for Java, .NET, Node.js, Python, and Go.
+{{< callout header="false" btn_hidden="true" >}}
+DDOT SDKs are in Preview.
+{{< /callout >}}
+
+DDOT SDKs are Datadog's version of OpenTelemetry SDKs. They emit traces, metrics, and logs that follow OpenTelemetry Semantic Conventions over OTLP. They use standard OpenTelemetry configuration and deployment tooling, and add Datadog-specific capabilities. DDOT SDKs are available for Java, .NET, Node.js, Python, and Go.
 
 DDOT SDKs add capabilities such as Live Debugger, Dynamic Instrumentation, SQL query-level Database Monitoring, and Data Streams Monitoring. Some capabilities require the Datadog Agent. See [feature compatibility][8] for additional capabilities and requirements.
 
 ## Prerequisites
 
-Install and attach a DDOT SDK to your service, and provide a reachable OTLP-compatible receiver that forwards telemetry to Datadog. You can use the [DDOT Collector][export-2] or an [upstream OpenTelemetry Collector][export-3]. For production workloads, Datadog recommends the DDOT Collector for batching, performance, and processing benefits.
+Install and attach a DDOT SDK to your service, and provide a reachable OTLP-compatible receiver that forwards telemetry to Datadog. Datadog recommends the [DDOT Collector][export-2]. DDOT SDKs also work well with the [upstream OpenTelemetry Collector][export-3].
 
 ## Deployment methods
 
-DDOT SDKs support OpenTelemetry deployment methods, including OpenTelemetry Operator injection and installation in the application build or deployment.
+Install DDOT SDKs the same way as upstream OpenTelemetry SDKs. Every installation method available for upstream OpenTelemetry SDKs works for DDOT SDKs, including OpenTelemetry Operator injection and installation in the application build or deployment.
 
 | Environment | Method | What it does |
 |---|---|---|
@@ -44,11 +48,11 @@ The OpenTelemetry Operator's `Instrumentation` resource selects the SDK images i
 
 The [DDOT Kubernetes installation guide][14] includes OpenTelemetry SDK instrumentation images, an `Instrumentation` resource, and workload annotations. For an existing Operator or Collector deployment, see [Adapt an existing configuration for DDOT][15]. For OpenTelemetry Operator concepts and configuration options, see [OpenTelemetry Operator automatic instrumentation][9].
 
-Go applications include the OpenTelemetry SDK and instrumentation at build time. The OpenTelemetry Operator's `instrumentation.opentelemetry.io/inject-sdk` annotation supplies configuration to the application; it does not install an SDK.
+Go applications include the SDK and instrumentation at build time, typically in the Dockerfile. Use [Orchestrion][16] for DDOT Go, where you would use OpenTelemetry Go compile-time instrumentation (`otelc`) for the upstream OpenTelemetry Go SDK. The OpenTelemetry Operator's `instrumentation.opentelemetry.io/inject-sdk` annotation supplies configuration to the application; it does not install an SDK.
 
 ### Application installation
 
-For installation without the OpenTelemetry Operator, follow the [installation instructions for your language][5], then apply the [OpenTelemetry configuration below](#configure-opentelemetry-mode-and-export). Your Collector receives OTLP telemetry. See [Agent requirements](#configure-opentelemetry-mode-and-export) for additional capabilities.
+For installation without the OpenTelemetry Operator, follow the [installation instructions for your language][5], then apply the [OpenTelemetry configuration below](#configure-opentelemetry-mode-and-export) to send OTLP telemetry to your Collector. Some capabilities require the Datadog Agent; see [feature compatibility][8].
 
 ## Configure OpenTelemetry mode and export
 
@@ -87,9 +91,9 @@ Select your language to see the minimum SDK version and supported protocols for 
 
 {{< /programming-lang-wrapper >}}
 
-### Enable OTLP trace export
+### Activate OpenTelemetry mode {#enable-otlp-trace-export}
 
-Set the following environment variables to enable OpenTelemetry APIs, trace semantic conventions, and OTLP export:
+Set the following environment variables to activate OpenTelemetry mode: OTLP export of traces, metrics, and logs, the OpenTelemetry APIs, and OpenTelemetry trace semantic conventions:
 
 ```text
 OTEL_TRACES_EXPORTER=otlp
@@ -99,7 +103,7 @@ DD_METRICS_OTEL_ENABLED=true
 DD_LOGS_OTEL_ENABLED=true
 ```
 
-To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][export-4] documentation for details. See [OpenTelemetry API support][1] and the [environment variable reference][7] for signal-specific configuration.
+To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. DDOT Go versions 2.8.0 to 2.11.2 ignore `OTEL_EXPORTER_OTLP_ENDPOINT`; with these versions, set `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (for example, `http://<collector>:4318/v1/traces`), or upgrade to 2.12.0 or later. See the [OTLP Exporter Configuration][export-4] documentation for details. See [OpenTelemetry API support][1] and the [environment variable reference][7] for signal-specific configuration.
 
 ### OpenTelemetry trace semantics
 
@@ -177,6 +181,7 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [13]: /opentelemetry/troubleshooting/
 [14]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot#instrument-kubernetes-workloads-with-ddot-sdks
 [15]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
+[16]: /tracing/guide/orchestrion_dockerfile/
 
 [export-2]: /opentelemetry/setup/ddot_collector/
 [export-3]: /opentelemetry/setup/collector_exporter/
