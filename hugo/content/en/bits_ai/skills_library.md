@@ -93,8 +93,10 @@ To use the Skills Library, your role needs the following permissions:
 |--------|----------------------|
 | View skills | **MCP Read** |
 | Create, edit, clone, or delete skills | **MCP Read** and **MCP Write** |
+| Change **Enable for you** | **MCP Read** |
+| Change **Enable for your organization** | **Bits Settings Org Write** or **Org Management** |
 
-Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both permissions by default. For custom roles, [update the role][5] to add the permissions.
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have **MCP Read** and **MCP Write** by default. For custom roles, [update the role][5] to add the required permissions.
 
 A skill's visibility also controls who can access it:
 
@@ -102,13 +104,21 @@ A skill's visibility also controls who can access it:
 - **Shared** skills are visible to everyone in the organization. Any user with the required permissions can edit or delete them.
 - Only a skill's creator can change its visibility.
 
+## Configure skill settings
+
+Open the [{{< ui >}}Skills Library{{< /ui >}}][4] and select a skill. Use the availability settings to control which agents can discover it:
+
+- **Enable for you** makes the skill available to agents that use your Datadog identity. Skills you create are enabled for you by default. Other skills are disabled until you enable them.
+- **Enable for your organization** makes a shared skill available to shared agents in your organization. Shared skills are disabled for the organization by default.
+
+Personal and organization settings are independent. Changing one setting does not change the other. Private skills only have the **Enable for you** setting.
+
 ## Use a skill in Bits Chat
 
 To make a skill available to Bits Chat:
 
-1. Open **Settings** in Bits Chat.
-2. Select **Skills**.
-3. Enable the skill.
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] and select the skill.
+2. Turn on {{< ui >}}Enable for you{{< /ui >}}.
 
 After you enable a skill, Bits Chat uses it automatically when the skill is relevant to a request.
 
