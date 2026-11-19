@@ -112,7 +112,7 @@ Sweeps go up to a concurrency of 1,024, or 128 for the AgentX scenario. Each ste
 
 ## Run benchmarks in your Kubernetes cluster
 
-Runs in your cluster execute as Kubernetes Jobs in the `datadog-gpu-benchmark` namespace. Datadog creates and deletes them through the Private Action Runner of your Datadog Cluster Agent. Runner pods need no GPU, never call the Kubernetes API, and report their progress and results through their logs.
+Runs in your cluster execute as Kubernetes Jobs in the `datadog-gpu-benchmark` namespace. Datadog creates and deletes them through the [Private Action Runner](/actions/private_actions) of your Datadog Cluster Agent. Runner pods need no GPU, never call the Kubernetes API, and report their progress and results through their logs.
 
 ### Requirements
 
