@@ -1,6 +1,6 @@
 ---
 title: Embed Apps
-description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, the Catalog side panel, APM service pages, and LLM Observability annotation queues.
+description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, the Catalog side panel, APM service pages, and Agent Observability annotation queues.
 further_reading:
 - link: "/actions/datadog_apps/"
   tag: "Documentation"
@@ -76,7 +76,7 @@ The **Apps** cell uses the notebook's time range. To read the time range in the 
 The app appears as its own section in that mode. To read the service, environment, and time range in the app, use the `datadogServicePage` input.
 
 {{% /tab %}}
-{{% tab "LLM Observability annotation queue" %}}
+{{% tab "Agent Observability annotation queue" %}}
 
 1. Open an interaction in an annotation queue.
 1. Open the view menu.
@@ -323,10 +323,10 @@ When the status is `ready`, `fields` provides:
 }
 ```
 
-Use `scopeFilter` to scope the app's queries to the service, environment, and time range the user is viewing. The values update when the user changes the page's filters or time range.
+Use `scopeFilter` to limit the app's queries to the service, environment, and time range the user is viewing. The values update when the user changes the page's filters or time range.
 
 {{% /tab %}}
-{{% tab "LLM Observability annotation queue" %}}
+{{% tab "Agent Observability annotation queue" %}}
 
 Use `datadogAnnotationInteraction` to read the trace under review in an [annotation queue][1] and the span the reviewer selected. The input is read-only.
 
@@ -345,10 +345,10 @@ When the status is `ready`, `fields` provides:
 }
 ```
 
-`annotationInteraction` has its own `status`, separate from the input state. A `ready` input state means the app is connected to an annotation queue; the trace itself can still be loading:
+`annotationInteraction` has its own `status`, separate from the input state. A `ready` input state means the app is connected to an annotation queue. The trace itself can still be loading, so check `annotationInteraction.status`:
 
 - `loading`: The trace or the selected span's content is still loading.
-- `unavailable`: The trace or the selected span's content can't be loaded, for example because it is outside the retention period. Render a fallback that identifies the interaction with `traceId` and `spanId`.
+- `unavailable`: The trace or the selected span's content can't be loaded, for example, because it is outside the retention period. Render a fallback that identifies the interaction with `traceId` and `spanId`.
 - `ready`: `trace` contains the interaction's spans.
 
 `trace` has the following shape:
@@ -386,9 +386,9 @@ When the status is `ready`, `fields` provides:
 }
 ```
 
-Use `spanId` to find the selected span in `trace.spans`. The full trace is always provided; `spanId` does not limit it. The selected span's content is complete even when `is_preview` is `true`. The values update when the reviewer selects another span or moves to another interaction.
+Use `spanId` to find the selected span in `trace.spans`. The full trace is always provided, and `spanId` does not limit it. The selected span's content is complete even when `is_preview` is `true`. The values update when the reviewer selects another span or moves to another interaction.
 
-The fields above are typed for convenience. Spans, `meta`, and `trace` also keep any additional instrumented fields, so the app can read data that the type does not list.
+The trace type lists only some fields. Spans, `meta`, and `trace` also keep any additional instrumented fields, so the app can read data that the type does not list.
 
 [1]: /llm_observability/investigate/annotation_queues/#annotation-views
 
