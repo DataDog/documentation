@@ -4,7 +4,8 @@
  * llms.txt and pages.json read too, so the listings agree.
  *
  * `@astrojs/sitemap` lists only pages built ahead of time, and Cdocs pages
- * render on the server, so they get their own sitemap.
+ * render on the server, so they get their own sitemap, built ahead of time
+ * by the `sitemap-cdocs.xml` route.
  */
 import type { CdocsPage } from "@lib/cdocs/pageLists";
 import { absoluteUrl } from "@lib/site/siteUrl";

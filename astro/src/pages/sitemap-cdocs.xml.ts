@@ -1,17 +1,15 @@
-// The Cdocs sitemap: every Cdocs variant's canonical URL. See
-// `buildCdocsSitemapXml`.
-//
-// Rendered on demand rather than emitted, since the build emits files only
-// under `api/` (see `staticApiGuard`). It's at the root because a sitemap can
-// only list URLs under its own folder.
-export const prerender = false;
+export const prerender = true;
+/**
+ * `sitemap-cdocs.xml`: every Cdocs variant's canonical URL. See
+ * `buildCdocsSitemapXml`.
+ *
+ * Emitted at the root, since a sitemap can only list URLs under its own
+ * folder. `staticApiGuard` allows this one file outside `api/`.
+ */
 
 import type { APIRoute } from "astro";
 import { getCdocsPages } from "@lib/cdocs/pageLists";
 import { buildCdocsSitemapXml } from "@lib/sitemap/cdocsSitemap";
-
-// The content collection doesn't change while the server runs.
-let sitemapXmlPromise: Promise<string> | null = null;
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) {
@@ -19,10 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
       "astro.config.mjs `site` must be set for sitemap-cdocs.xml to render canonical URLs.",
     );
   }
-  sitemapXmlPromise ??= getCdocsPages().then((pages) =>
-    buildCdocsSitemapXml(pages, site),
-  );
-  return new Response(await sitemapXmlPromise, {
+  return new Response(buildCdocsSitemapXml(await getCdocsPages(), site), {
     headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 };

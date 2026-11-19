@@ -1,6 +1,7 @@
 // Relative, not `@lib`: `astro.config.mjs` imports this file before aliases exist.
 import { stripLocalePrefix } from "../i18n/locale";
 import { CHANGELOG_ROOT_PATH } from "../api/changelogPaths";
+import { CDOCS_SITEMAP_FILE } from "./cdocsSitemapFile";
 
 export function isSitemapPage(url: string): boolean {
   const { pathname } = new URL(url);
@@ -13,6 +14,8 @@ export function isSitemapPage(url: string): boolean {
   // Build-time intermediate file for the Cdocs traits list; moved after the
   // build.
   if (pathname === "/cdocs-traits-index.json") return false;
+  // A sitemap of its own, not a page.
+  if (pathname === `/${CDOCS_SITEMAP_FILE}`) return false;
   // Client-side data for the mobile nav, not a page.
   if (pathname.endsWith("/api/mobile-nav.json")) return false;
   if (isSecondaryChangelogPage(pathname)) return false;

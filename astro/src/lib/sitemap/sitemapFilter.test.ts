@@ -38,6 +38,12 @@ describe("isSitemapPage", () => {
     ).toBe(false);
   });
 
+  it("excludes the Cdocs sitemap, which is a sitemap, not a page", () => {
+    expect(isSitemapPage("https://docs.datadoghq.com/sitemap-cdocs.xml")).toBe(
+      false,
+    );
+  });
+
   it("excludes the mobile nav data file", () => {
     expect(
       isSitemapPage("https://docs.datadoghq.com/api/mobile-nav.json"),

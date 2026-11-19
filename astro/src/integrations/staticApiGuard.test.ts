@@ -48,6 +48,20 @@ describe("findUncontainedPaths", () => {
     expect(offenders).toEqual(["index.html", "favicon.ico"]);
   });
 
+  it("allows the Cdocs sitemap at the root, and nowhere else", () => {
+    const offenders = findUncontainedPaths([
+      "sitemap-cdocs.xml",
+      "fr/sitemap-cdocs.xml",
+      "sitemap-cdocs.xml.bak",
+      "sitemap-other.xml",
+    ]);
+    expect(offenders).toEqual([
+      "fr/sitemap-cdocs.xml",
+      "sitemap-cdocs.xml.bak",
+      "sitemap-other.xml",
+    ]);
+  });
+
   it("allows every locale-prefixed /api subtree, plus the _astro assets", () => {
     const offenders = findUncontainedPaths([
       "api/latest/dashboards/index.html",

@@ -9,9 +9,10 @@
  * build itself — that guard already runs inside `astro build` every time.
  *
  * The two regexes below mirror `CONTAINED_PATH` and the category-directory
- * shape in staticApiGuard.ts. Kept duplicated (rather than imported) because
- * this script runs as plain Node outside Vite/Astro's TS-aware module graph.
- * Keep them in sync if either file changes.
+ * shape in staticApiGuard.ts, and `ALLOWED_ROOT_FILES` mirrors the guard's set
+ * of the same name. Kept duplicated (rather than imported) because this script
+ * runs as plain Node outside Vite/Astro's TS-aware module graph. Keep them in
+ * sync if either file changes.
  *
  * Usage: node scripts/verifyDist.mjs [dist/client] [--min-categories=150]
  */
@@ -19,6 +20,9 @@ import { readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
+// The Cdocs sitemap (`CDOCS_SITEMAP_FILE`), which must be at the root to list
+// URLs outside `api/`.
+const ALLOWED_ROOT_FILES = new Set(["sitemap-cdocs.xml"]);
 
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));
@@ -59,12 +63,13 @@ async function main() {
   const filePaths = await listFilesRecursive(distDir);
 
   const uncontained = filePaths.filter(
-    (filePath) => !CONTAINED_PATH.test(filePath),
+    (filePath) =>
+      !CONTAINED_PATH.test(filePath) && !ALLOWED_ROOT_FILES.has(filePath),
   );
   if (uncontained.length > 0) {
     problems.push(
       `Containment guard: the following emitted files fall outside ` +
-        `api/ and {fr,ja,ko,es}/api/:\n` +
+        `api/ and {fr,ja,ko,es}/api/, and aren't allowed root files:\n` +
         uncontained.map((filePath) => `  - ${filePath}`).join("\n"),
     );
   }

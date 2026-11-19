@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildCdocsSitemapXml } from "./cdocsSitemap";
+import { prerender } from "../../pages/sitemap-cdocs.xml";
 import { buildCdocsPage } from "@lib/cdocs/pageLists";
 import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
@@ -47,5 +48,9 @@ describe("buildCdocsSitemapXml", () => {
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     );
     expect(locs(xml)).toEqual([]);
+  });
+
+  it("is built ahead of time, as a file", () => {
+    expect(prerender).toBe(true);
   });
 });
