@@ -43531,12 +43531,15 @@ components:
           example:
             attributes:
               journey_rum:
+                filter: "@application.id:11111111-2222-3333-4444-555555555555"
                 rum_steps:
                   - nodes:
-                      - query: "action.name:'checkout'"
+                      - app_id: "11111111-2222-3333-4444-555555555555"
+                        query: '@action.name:"Checkout"'
                     type: start
                   - nodes:
-                      - query: "action.name:'confirmation'"
+                      - app_id: "11111111-2222-3333-4444-555555555555"
+                        query: '@view.url_path:"/confirmation"'
                     type: stop
               name: "Checkout Flow"
               tags:
@@ -43635,17 +43638,20 @@ components:
       description: The RUM definition for a DEM journey.
       properties:
         filter:
-          description: An optional RUM query filter applied to the entire journey.
-          example: "env:prod"
+          description: >-
+            An optional RUM query filter applied to the entire journey. For a single-application journey, include the application as `@application.id:<application_id>` in addition to setting `app_id` on every RUM node.
+          example: "@application.id:11111111-2222-3333-4444-555555555555 env:prod"
           type: string
         rum_steps:
           $ref: "#/components/schemas/DemRumSteps"
           example:
             - nodes:
-                - query: "action.name:'checkout'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@action.name:"Checkout"'
               type: start
             - nodes:
-                - query: "action.name:'confirmation'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@view.url_path:"/confirmation"'
               type: stop
         variants:
           $ref: "#/components/schemas/DemVariants"
@@ -43734,12 +43740,15 @@ components:
                   uuid: "00000000-0000-0000-0000-000000000001"
                 description: "Tracks checkout flow."
                 journey_rum:
+                  filter: "@application.id:11111111-2222-3333-4444-555555555555"
                   rum_steps:
                     - nodes:
-                        - query: "action.name:'checkout'"
+                        - app_id: "11111111-2222-3333-4444-555555555555"
+                          query: '@action.name:"Checkout"'
                       type: start
                     - nodes:
-                        - query: "action.name:'confirmation'"
+                        - app_id: "11111111-2222-3333-4444-555555555555"
+                          query: '@view.url_path:"/confirmation"'
                       type: stop
                 name: "Checkout Flow"
                 org_id: 12345
@@ -43843,8 +43852,10 @@ components:
       description: A RUM node within a journey step.
       properties:
         app_id:
-          description: The application ID associated with this node.
-          example: "app-xyz789"
+          description: >-
+            The RUM application ID whose events this node query matches. This value is required for every node when creating or updating a DEM feature or journey, including variants, and is used to discover the resource in application-scoped searches. Use `GET /api/v2/rum/applications` to find RUM application IDs.
+          example: "11111111-2222-3333-4444-555555555555"
+          minLength: 1
           type: string
         id:
           description: The ID of the RUM node element.
@@ -43852,15 +43863,17 @@ components:
           type: string
         query:
           description: The RUM query for matching this node.
-          example: "action.name:'checkout'"
+          example: '@action.name:"Checkout"'
           type: string
       required:
+        - app_id
         - query
       type: object
     DemRumNodes:
       description: List of RUM nodes within a journey step.
       example:
-        - query: "action.name:'checkout'"
+        - app_id: "11111111-2222-3333-4444-555555555555"
+          query: '@action.name:"Checkout"'
       items:
         $ref: "#/components/schemas/DemRumNode"
       type: array
@@ -43870,7 +43883,8 @@ components:
         nodes:
           $ref: "#/components/schemas/DemRumNodes"
           example:
-            - query: "action.name:'checkout'"
+            - app_id: "11111111-2222-3333-4444-555555555555"
+              query: '@action.name:"Checkout"'
         type:
           $ref: "#/components/schemas/DemRumStepType"
       required:
@@ -43893,10 +43907,12 @@ components:
       description: List of RUM journey steps.
       example:
         - nodes:
-            - query: "action.name:'checkout'"
+            - app_id: "11111111-2222-3333-4444-555555555555"
+              query: '@action.name:"Checkout"'
           type: start
         - nodes:
-            - query: "action.name:'confirmation'"
+            - app_id: "11111111-2222-3333-4444-555555555555"
+              query: '@view.url_path:"/confirmation"'
           type: stop
       items:
         $ref: "#/components/schemas/DemRumStep"
@@ -43976,7 +43992,7 @@ components:
       properties:
         filter:
           description: An optional RUM query filter to scope this variant.
-          example: "device.type:mobile"
+          example: "@device.type:mobile"
           type: string
         id:
           description: The unique identifier of the variant.
@@ -43991,10 +44007,12 @@ components:
           $ref: "#/components/schemas/DemRumSteps"
           example:
             - nodes:
-                - query: "action.name:'checkout'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@action.name:"Checkout"'
               type: start
             - nodes:
-                - query: "action.name:'confirmation'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@view.url_path:"/confirmation"'
               type: stop
       required:
         - name
@@ -44005,7 +44023,7 @@ components:
       properties:
         filter:
           description: An optional RUM query filter to scope this variant.
-          example: "device.type:mobile"
+          example: "@device.type:mobile"
           type: string
         name:
           description: The name of the variant.
@@ -44074,10 +44092,12 @@ components:
         - name: "Mobile checkout"
           rum_steps:
             - nodes:
-                - query: "action.name:'checkout'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@action.name:"Checkout"'
               type: start
             - nodes:
-                - query: "action.name:'confirmation'"
+                - app_id: "11111111-2222-3333-4444-555555555555"
+                  query: '@view.url_path:"/confirmation"'
               type: stop
       items:
         $ref: "#/components/schemas/DemVariant"
@@ -184310,12 +184330,15 @@ paths:
                     attributes:
                       description: Tracks the user checkout flow from cart to confirmation.
                       journey_rum:
+                        filter: "@application.id:11111111-2222-3333-4444-555555555555"
                         rum_steps:
                           - nodes:
-                              - query: action.name:'checkout'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@action.name:"Checkout"'
                             type: start
                           - nodes:
-                              - query: action.name:'confirmation'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@view.url_path:"/confirmation"'
                             type: stop
                       name: Checkout Flow
                       tags:
@@ -184341,12 +184364,15 @@ paths:
                           uuid: 00000000-0000-0000-0000-000000000001
                         description: Tracks checkout flow.
                         journey_rum:
+                          filter: "@application.id:11111111-2222-3333-4444-555555555555"
                           rum_steps:
                             - nodes:
-                                - query: action.name:'checkout'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@action.name:"Checkout"'
                               type: start
                             - nodes:
-                                - query: action.name:'confirmation'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@view.url_path:"/confirmation"'
                               type: stop
                         name: Checkout Flow
                         org_id: 12345
@@ -184439,12 +184465,15 @@ paths:
                           created_at: "2024-01-15T10:30:00Z"
                           description:
                           journey_rum:
+                            filter: "@application.id:11111111-2222-3333-4444-555555555555"
                             rum_steps:
                               - nodes:
-                                  - query: action.name:'checkout'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@action.name:"Checkout"'
                                 type: start
                               - nodes:
-                                  - query: action.name:'confirmation'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@view.url_path:"/confirmation"'
                                 type: stop
                           name: Checkout Flow
                           org_id: 12345
@@ -184462,12 +184491,15 @@ paths:
                           created_at: "2024-01-01T00:00:00+00:00"
                           description:
                           journey_rum:
+                            filter: "@application.id:11111111-2222-3333-4444-555555555555"
                             rum_steps:
                               - nodes:
-                                  - query: action.name:'checkout'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@action.name:"Checkout"'
                                 type: start
                               - nodes:
-                                  - query: action.name:'confirmation'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@view.url_path:"/confirmation"'
                                 type: stop
                           name: Checkout Flow
                           org_id: 123
@@ -184485,12 +184517,15 @@ paths:
                           description:
                           ignored_at: "2024-01-16T08:00:00Z"
                           journey_rum:
+                            filter: "@application.id:11111111-2222-3333-4444-555555555555"
                             rum_steps:
                               - nodes:
-                                  - query: action.name:'login'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@action.name:"Login"'
                                 type: start
                               - nodes:
-                                  - query: action.name:'dashboard'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@view.name:"Dashboard"'
                                 type: stop
                           name: Login Flow
                           org_id: 12345
@@ -184616,12 +184651,15 @@ paths:
                             uuid: 00000000-0000-0000-0000-000000000001
                           description: Tracks checkout flow.
                           journey_rum:
+                            filter: "@application.id:11111111-2222-3333-4444-555555555555"
                             rum_steps:
                               - nodes:
-                                  - query: action.name:'checkout'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@action.name:"Checkout"'
                                 type: start
                               - nodes:
-                                  - query: action.name:'confirmation'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@view.url_path:"/confirmation"'
                                 type: stop
                           name: Checkout Flow
                           org_id: 12345
@@ -184694,12 +184732,15 @@ paths:
                             uuid: 00000000-0000-0000-0000-000000000001
                           description: Tracks checkout flow.
                           journey_rum:
+                            filter: "@application.id:11111111-2222-3333-4444-555555555555"
                             rum_steps:
                               - nodes:
-                                  - query: action.name:'checkout'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@action.name:"Checkout"'
                                 type: start
                               - nodes:
-                                  - query: action.name:'confirmation'
+                                  - app_id: "11111111-2222-3333-4444-555555555555"
+                                    query: '@view.url_path:"/confirmation"'
                                 type: stop
                           name: Checkout Flow
                           org_id: 12345
@@ -184786,14 +184827,16 @@ paths:
                 value:
                   data:
                     attributes:
-                      filter: device.type:mobile
+                      filter: "@device.type:mobile"
                       name: Mobile checkout
                       rum_steps:
                         - nodes:
-                            - query: action.name:'checkout'
+                            - app_id: "11111111-2222-3333-4444-555555555555"
+                              query: '@action.name:"Checkout"'
                           type: start
                         - nodes:
-                            - query: action.name:'confirmation'
+                            - app_id: "11111111-2222-3333-4444-555555555555"
+                              query: '@view.url_path:"/confirmation"'
                           type: stop
                     type: variants
             schema:
@@ -184808,14 +184851,16 @@ paths:
                   value:
                     data:
                       attributes:
-                        filter: device.type:mobile
+                        filter: "@device.type:mobile"
                         name: Mobile checkout
                         rum_steps:
                           - nodes:
-                              - query: action.name:'checkout'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@action.name:"Checkout"'
                             type: start
                           - nodes:
-                              - query: action.name:'confirmation'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@view.url_path:"/confirmation"'
                             type: stop
                       id: variant-001
                       type: variants
@@ -184903,12 +184948,15 @@ paths:
                           uuid: 00000000-0000-0000-0000-000000000001
                         description: Tracks checkout flow.
                         journey_rum:
+                          filter: "@application.id:11111111-2222-3333-4444-555555555555"
                           rum_steps:
                             - nodes:
-                                - query: action.name:'checkout'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@action.name:"Checkout"'
                               type: start
                             - nodes:
-                                - query: action.name:'confirmation'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@view.url_path:"/confirmation"'
                               type: stop
                         name: Checkout Flow
                         org_id: 12345
@@ -184960,12 +185008,15 @@ paths:
                     attributes:
                       description: Tracks the user checkout flow from cart to confirmation.
                       journey_rum:
+                        filter: "@application.id:11111111-2222-3333-4444-555555555555"
                         rum_steps:
                           - nodes:
-                              - query: action.name:'checkout'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@action.name:"Checkout"'
                             type: start
                           - nodes:
-                              - query: action.name:'confirmation'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@view.url_path:"/confirmation"'
                             type: stop
                       name: Checkout Flow
                       tags:
@@ -184991,12 +185042,15 @@ paths:
                           uuid: 00000000-0000-0000-0000-000000000001
                         description: Tracks checkout flow.
                         journey_rum:
+                          filter: "@application.id:11111111-2222-3333-4444-555555555555"
                           rum_steps:
                             - nodes:
-                                - query: action.name:'checkout'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@action.name:"Checkout"'
                               type: start
                             - nodes:
-                                - query: action.name:'confirmation'
+                                - app_id: "11111111-2222-3333-4444-555555555555"
+                                  query: '@view.url_path:"/confirmation"'
                               type: stop
                         name: Checkout Flow
                         org_id: 12345
@@ -185015,6 +185069,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/DemJourneyResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "404":
           content:
             application/json:
@@ -185104,14 +185164,16 @@ paths:
                 value:
                   data:
                     attributes:
-                      filter: device.type:mobile
+                      filter: "@device.type:mobile"
                       name: Mobile checkout
                       rum_steps:
                         - nodes:
-                            - query: action.name:'checkout'
+                            - app_id: "11111111-2222-3333-4444-555555555555"
+                              query: '@action.name:"Checkout"'
                           type: start
                         - nodes:
-                            - query: action.name:'confirmation'
+                            - app_id: "11111111-2222-3333-4444-555555555555"
+                              query: '@view.url_path:"/confirmation"'
                           type: stop
                     type: variants
             schema:
@@ -185126,14 +185188,16 @@ paths:
                   value:
                     data:
                       attributes:
-                        filter: device.type:mobile
+                        filter: "@device.type:mobile"
                         name: Mobile checkout
                         rum_steps:
                           - nodes:
-                              - query: action.name:'checkout'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@action.name:"Checkout"'
                             type: start
                           - nodes:
-                              - query: action.name:'confirmation'
+                              - app_id: "11111111-2222-3333-4444-555555555555"
+                                query: '@view.url_path:"/confirmation"'
                             type: stop
                       id: variant-001
                       type: variants
