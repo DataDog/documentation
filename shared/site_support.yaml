@@ -340,6 +340,8 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /journey_monitoring/**
+  kubernetes_actions:
+    regions: [gov, gov2]
   launchdarkly:
     regions: [gov, gov2]
     url_paths:
