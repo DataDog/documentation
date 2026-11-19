@@ -105,8 +105,8 @@ point the frontmatter at them, and update each row.
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
   {% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %} ({% tooltip contents="Doesn't include SQL query-level monitoring, which needs a DDOT SDK." %}Partial{% /tooltip %}){% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Cloud Network Monitoring][18] (CNM)
 -
@@ -154,8 +154,8 @@ point the frontmatter at them, and update each row.
 - [Data Streams Monitoring][25] (DSM)
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Dynamic Instrumentation][49]
 -
@@ -201,7 +201,7 @@ point the frontmatter at them, and update each row.
 
 DDOT SDKs send traces, metrics, and logs over OTLP to the DDOT Collector or an upstream OpenTelemetry Collector. These signals don't need the Datadog Agent. Because DDOT SDKs use standard OTLP, you can also send their data to other OTLP-compatible backends.
 
-Datadog recommends that you run the Datadog Agent with DDOT SDKs, because some features need it. In the table, these features show **With Agent**. [App and API Protection][22], [Code Security][48], and [Feature Flags][50] also need the Agent for Remote Configuration.
+Datadog recommends that you run the Datadog Agent with DDOT SDKs, because some features need it. In the table, these features show **With Agent**. For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application, and the Agent monitors the database or message broker. The Agent can run on those hosts instead of alongside your applications. [App and API Protection][22], [Code Security][48], and [Feature Flags][50] also need the Agent for Remote Configuration.
 
 Availability varies by language and SDK version. See [DDOT SDKs][1].
 
