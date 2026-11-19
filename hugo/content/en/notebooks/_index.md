@@ -271,53 +271,21 @@ To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="ic
 
 ## Organizing notebooks with folders
 
-Use folders to group related notebooks, such as a team's runbooks, the investigations for a service, or a quarter's postmortems. Folders appear in the side panel of the [Notebooks List page][1] and in each notebook's breadcrumbs, so you can browse to a notebook without searching for it.
+Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs.
 
 <!-- TODO Add screenshot of the Notebooks side panel with folders -->
 
-Folders can contain notebooks and other folders, so you can nest them to build a hierarchy. A notebook can belong to only one folder at a time.
+| Task                  | How |
+|-----------------------|-----|
+| **Create a folder**   | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
+| **Add notebooks**     | Click {{< ui >}}Add to Folder{{< /ui >}} in a notebook's breadcrumbs, select notebooks in the Notebooks List and click {{< ui >}}Add to Folder{{< /ui >}}, or drag notebooks onto a folder in the side panel. Adding a notebook that is already in a folder moves it. |
+| **Manage a folder**   | From the folder's actions menu, select {{< ui >}}Rename Folder{{< /ui >}}, {{< ui >}}Move Folder{{< /ui >}}, or {{< ui >}}Delete Folder{{< /ui >}}. Click the star icon to add the folder to {{< ui >}}Starred{{< /ui >}}. To take a notebook out of a folder without deleting it, select {{< ui >}}Remove from folder{{< /ui >}}. |
 
-### Create a folder
+Deleting a folder never deletes its notebooks. By default, the folder's notebooks and subfolders move up to its parent folder, or to the top level. If you clear {{< ui >}}Bubble up all children of this folder to the parent folder{{< /ui >}}, its subfolders are deleted too, and their notebooks no longer belong to a folder.
 
-You can create a folder in the following places:
+### Manage folders with MCP or the API
 
-- On the [Notebooks List page][1], open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}.
-- In the side panel, hover over an existing folder and click {{< ui >}}+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}} to create a subfolder.
-- While viewing a folder, click {{< ui >}}Add to Folder{{< /ui >}} > {{< ui >}}Create a sub-folder{{< /ui >}}.
-
-Enter a name for the folder and, optionally, a description.
-
-### Add notebooks to a folder
-
-You can add notebooks to a folder in the following ways:
-
-| Method                    | Description |
-|---------------------------|-------------|
-| **From a notebook**       | In the breadcrumbs at the top of the notebook, click {{< ui >}}Add to Folder{{< /ui >}} and select a folder, or enter a name to create a new one. |
-| **From the Notebooks List** | Select one or more notebooks and click {{< ui >}}Add to Folder{{< /ui >}}. |
-| **From a folder**         | While viewing a folder, click {{< ui >}}Add to Folder{{< /ui >}} > {{< ui >}}Add existing Notebooks{{< /ui >}}, then search for and select the notebooks to add. To start a new notebook in the folder, select {{< ui >}}Create new Notebook{{< /ui >}} instead. |
-| **From the side panel**   | Drag notebooks onto a folder, or open a notebook's actions menu and select {{< ui >}}Move to Folder{{< /ui >}}. |
-
-Because a notebook can belong to only one folder, adding a notebook that is already in a folder moves it. Datadog asks you to confirm before moving it.
-
-### Manage folders
-
-Open a folder's actions menu in the side panel, or click the settings icon next to the folder name while viewing the folder, to manage it:
-
-| Action                    | Description |
-|---------------------------|-------------|
-| **Rename**                | Select {{< ui >}}Rename Folder{{< /ui >}}, or click the folder name while viewing the folder. |
-| **Describe**              | While viewing a folder, click {{< ui >}}Add a description{{< /ui >}} under the folder name. |
-| **Move**                  | Select {{< ui >}}Move Folder{{< /ui >}} and choose a new parent folder, or {{< ui >}}All folders (top level){{< /ui >}}. A folder cannot be moved into itself or one of its subfolders. |
-| **Star**                  | Click the star icon next to the folder name to add the folder to the {{< ui >}}Starred{{< /ui >}} section of the side panel. |
-| **Remove a notebook**     | While viewing a folder, open a notebook's actions menu and select {{< ui >}}Remove from folder{{< /ui >}}. The notebook is not deleted. |
-
-### Delete a folder
-
-Deleting a folder never deletes the notebooks inside it. To delete a folder, select {{< ui >}}Delete Folder{{< /ui >}} from its actions menu. If the folder contains notebooks or subfolders, choose what happens to them:
-
-- Keep {{< ui >}}Bubble up all children of this folder to the parent folder{{< /ui >}} selected (the default) to move its notebooks and subfolders up one level, or to the top level if the folder has no parent.
-- Clear the option to delete the folder and its subfolders. The notebooks they contained remain in your organization, but no longer belong to a folder.
+You can also manage folders programmatically through the Datadog MCP Server or the API. <!-- TODO Add links to the MCP Server and API docs --> The MCP Server's `notebooks` toolset includes tools to create, find, and delete folders and to add, move, or remove notebooks: `create_notebook_folder`, `search_datadog_folders`, `get_datadog_folder`, `add_notebooks_to_folder`, `move_resources_to_folder`, `remove_items_from_datadog_folder`, and `delete_datadog_folder`.
 
 ## Finding notebooks
 
