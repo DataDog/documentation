@@ -1,0 +1,114 @@
+---
+title: Set up Bits Maintenance
+description: ""
+further_reading:
+- link: "/containers/monitoring/"
+  tag: "Documentation"
+  text: "Container Monitoring"
+---
+
+## Overview
+
+{{< callout url="https://www.datadoghq.com/product-preview/bits-maintenance/" btn_hidden="false" header="Join the Preview!" >}}
+Bits Maintenance is in Preview. Use this form to request access.
+{{< /callout >}}
+
+## Prerequisites
+
+Before starting Bits Maintenance setup, ensure the following prerequistes are met:
+
+- You have [Container Monitoring][2] enabled.
+- The Datadog Agent is installed on each cluster you’d like to enroll in Bits Maintenance.
+
+## Step 1: Verify organization setup connections
+
+1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Organization Setup{{< /ui >}}.
+1. Ensure that the {{< ui >}}Source code integration{{< /ui>}}, {{< ui >}}Bits Code{{< /ui>}}, and {{< ui >}}Remote Configuration{{< /ui>}} connections are properly configured.
+
+## Step 2: Verify your Agent's API key has Private Action Runner enabled
+
+Verify that the Agent running on your clusters is using an API key with Private Action Runner (PAR) enabled:
+
+1. Identify the API key being used by the Agent running on the clusters you'd like to use Bits Maintenance with.
+1. On {{< ui >}}Organization Settings{{< /ui>}} > {{< ui >}}API Keys{{< /ui>}}, find and click the API key.
+1. In the slide-out panel, note whether PAR is enabled. If it is disabled, click {{< ui >}}Enable{{< /ui>}}.
+
+## Step 3: Set up Agent permissions and Private Action Runner
+
+Bits Maintenance requires read-only permissions to access the custom resources and custom resource definitions (CRDs) in your clusters. Bits uses this information to catch compatibility issues and breaking changes in CRDs during upgrades.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+If you installed the Agent with the open-source [Datadog Operator][3], in the `datadogagent` resource, `remoteConfiguration` and `orchestratorExplorer` must have `enabled: true`.
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+...
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+  features:
+    remoteConfiguration:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+{{< /code-block >}}
+
+In the `private-action-runner-configdata` annotation, add the following actions to `private_action_runner.actions_allowlist` so the Private Action Runner can read CRDs and custom objects:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+  annotations:
+    cluster-agent.datadoghq.com/private-action-runner-enabled: "true"
+    cluster-agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        self_enroll: true
+        api_key_only_enrollment: false
+        actions_allowlist:
+          ...
+          - com.datadoghq.kubernetes.apiextensions.getCustomResourceDefinition
+          - com.datadoghq.kubernetes.apiextensions.listCustomResourceDefinition
+          - com.datadoghq.kubernetes.customresources.getCustomObject
+          - com.datadoghq.kubernetes.customresources.listCustomObject
+          - com.datadoghq.kubernetes.customresources.getClusterCustomObject
+          - com.datadoghq.kubernetes.customresources.listClusterCustomObject
+{{< /code-block >}}
+
+For more information about running a Private Action Runner on Kubernetes, see [Set up an Agent-based Private Action Runner][5].
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+If you [installed the Agent with Helm][4], ...
+
+For more information about running a Private Action Runner on Kubernetes, see [Set up an Agent-based Private Action Runner][5].
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Step 4 (Optional): Modify an existing Private Action Runner 
+
+## Step 5:
+
+## Step 6: 
+
+[1]: /bits_ai/bits_maintenance/
+[2]: /containers/monitoring/
+[3]: /containers/datadog_operator/
+[4]: /containers/kubernetes/installation/?tab=helm
+[5]: /actions/private_actions/set_up_agent_based/

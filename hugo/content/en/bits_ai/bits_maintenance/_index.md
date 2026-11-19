@@ -13,7 +13,7 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-Bits Maintenance helps you keep the Open Source Software (OSS) you run up to date. When a project releases a new version, Bits Maintenance researches release changes, identifies how your environment is affected, generates tailored update plans, and executes within your guardrails.
+Bits Maintenance helps you keep the Open Source Software (OSS) you run up to date. When a project releases a new version, Bits Maintenance researches release changes, identifies how your environment is affected, generates a tailored update [campaign][2], and executes within your guardrails.
 
 OSS is constantly changing, often due to CVE remediation or end-of-life decisions. Upgrading by hand can be slow and risky: you must read understand what changed, find breaking changes that apply to your fleet, update configurations, roll out in stages, and verify the result. Instead, use Bits Maintenance as your AI teammate for OSS maintenance.
 
@@ -24,9 +24,8 @@ Bits Maintenance supports a [specific set of OSS projects](#supported-oss-projec
 When an OSS project your team uses releases a new version, Bits Maintenance:
 
 1. Assesses the changes.
-2. Creates a strategy to implement the upgrade.
+2. Creates a [campaign][2] to implement the upgrade.
 3. Executes the upgrade rollout.
-
 
 ## Supported OSS projects
 
@@ -41,4 +40,8 @@ You can work with Bits Maintenance:
 - Using the Datadog MCP, which has Bits Maintenance tools and skills
 - Through [Bits Chat][1] and Slack (with `@Datadog`)
 
+## Bits Maintenance data retention
+<!-- TODO -->
+
 [1]: /bits_ai/bits_chat/
+[2]: /campaigns_plans/
