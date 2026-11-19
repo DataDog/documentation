@@ -19,8 +19,8 @@ Choose an SDK and a Collector or Datadog Agent to process and forward telemetry.
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**DDOT SDK + OpenTelemetry Collector**][49] (Preview) | OTel API              | DDOT SDK    | DDOT Collector or upstream OpenTelemetry Collector (the Datadog Agent is optional) |
 | [**Upstream OpenTelemetry SDK + DDOT Collector**][47] (Preview)        | OTel API                | Upstream OpenTelemetry SDK | DDOT Collector (the Datadog Agent is optional) |
-| [**Datadog SDK + Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
-| [**Upstream OpenTelemetry SDK + Agent's Collector**][29]               | OTel API                | Upstream OpenTelemetry SDK | Agent's Collector (runs alongside the Datadog Agent) |
+| [**Datadog SDK + Datadog Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Datadog Agent's Collector (runs alongside the Datadog Agent) |
+| [**Upstream OpenTelemetry SDK + Datadog Agent's Collector**][29]               | OTel API                | Upstream OpenTelemetry SDK | Datadog Agent's Collector (runs alongside the Datadog Agent) |
 | [**Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | Upstream OpenTelemetry SDK | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | Upstream OpenTelemetry SDK | N/A (Direct to Datadog endpoint)              |
 
@@ -49,32 +49,32 @@ Capabilities and configuration requirements vary by language and SDK version.
 
 Datadog-specific capabilities can also use OTLP. Some require product-specific configuration or additional data destinations. See the linked product documentation for setup requirements.
 
-### Upstream OpenTelemetry SDK and Datadog SDK setups
+### Datadog platform features by setup
 
-This table covers upstream OpenTelemetry SDKs, which send telemetry over OTLP, and Datadog SDKs that send traces to the Datadog Agent using Datadog semantics and protocols.
+This table covers Datadog platform features for each setup. DDOT SDKs and upstream OpenTelemetry SDKs send telemetry over OTLP. Datadog SDKs send traces to the Datadog Agent using Datadog semantics and protocols.
 
-| Feature | Upstream OpenTelemetry SDK + DDOT Collector (Preview) | Datadog SDK + Agent's Collector | Upstream OpenTelemetry SDK + Agent's Collector | Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
-|---|---|---|---|---|---|
-| [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Agent Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| [Source Code Integration][24] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| [Database Monitoring][14] (DBM) |  | {{< X >}} | {{< X >}} |  |  |
-| [Cloud Network Monitoring][21] (CNM) | | {{< X >}} | {{< X >}} | | |
-| [Live Container Monitoring][46] | | {{< X >}} | {{< X >}} | | |
-| [Live Processes][16] | | {{< X >}} | {{< X >}} | | |
-| [Universal Service Monitoring][17] (USM) | | {{< X >}} | {{< X >}} | | |
-| [App and API Protection][11] (AAP) | | {{< X >}} | | | |
-| [Continuous Profiler][12] | | {{< X >}} | | | |
-| [Data Observability: Jobs Monitoring][13] (DJM) | | {{< X >}} | | | |
-| [Data Streams Monitoring][15] (DSM) | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
-| [Real User Monitoring][22] (RUM) | | {{< X >}} | | | |
+| Feature | DDOT SDK + DDOT Collector (Preview) | Upstream OpenTelemetry SDK + DDOT Collector (Preview) | Datadog SDK + Agent's Collector | Upstream OpenTelemetry SDK + Agent's Collector | Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
+|---|---|---|---|---|---|---|
+| [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Agent Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
+| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Source Code Integration][24] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Database Monitoring][14] (DBM) | {{< X >}} |  | {{< X >}} | {{< X >}}<br>(without SQL query-level monitoring, which requires DDOT SDKs) |  |  |
+| [Cloud Network Monitoring][21] (CNM) |  | | {{< X >}} | {{< X >}} | | |
+| [Live Container Monitoring][46] |  | | {{< X >}} | {{< X >}} | | |
+| [Live Processes][16] |  | | {{< X >}} | {{< X >}} | | |
+| [Universal Service Monitoring][17] (USM) |  | | {{< X >}} | {{< X >}} | | |
+| [App and API Protection][11] (AAP) | {{< X >}} | | {{< X >}} | | | |
+| [Continuous Profiler][12] |  | | {{< X >}} | | | |
+| [Data Observability: Jobs Monitoring][13] (DJM) |  | | {{< X >}} | | | |
+| [Data Streams Monitoring][15] (DSM) | {{< X >}} | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< X >}} | | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} |
+| [Real User Monitoring][22] (RUM) |  | | {{< X >}} | | | |
 
 **Note**: Features that need the Datadog Agent, such as [Cloud Network Monitoring][21], [Live Container Monitoring][46], [Live Processes][16], and [Universal Service Monitoring][17], work with the DDOT Collector when you also run the Datadog Agent. See [Add the Datadog Agent][48].
 
