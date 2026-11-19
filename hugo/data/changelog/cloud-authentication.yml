@@ -97,3 +97,12 @@ entries:
       - ListOIDCCloudAuthPersonaMappings
       - ListOIDCCloudAuthProviders
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41945
+    operations:
+      - CreateTerraformCloudAuthPersonaMapping
+      - DeleteTerraformCloudAuthPersonaMapping
+      - GetTerraformCloudAuthPersonaMapping
+      - ListTerraformCloudAuthPersonaMappings
+    title: Publish HCP Terraform persona mapping API

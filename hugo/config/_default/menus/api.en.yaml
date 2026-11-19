@@ -12534,6 +12534,58 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/get-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-get-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/delete-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-delete-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 28
+    - name: Create an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/create-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-create-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 27
+    - name: List HCP Terraform persona mappings
+      url: /api/latest/cloud-authentication/list-hcp-terraform-persona-mappings/
+      identifier: cloud-authentication-list-hcp-terraform-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 25
     - name: Get a Custom OIDC provider
       url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
       identifier: cloud-authentication-get-a-custom-oidc-provider

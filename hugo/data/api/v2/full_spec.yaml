@@ -154026,6 +154026,131 @@ components:
       required:
         - data
       type: object
+    TerraformCloudAuthIssuerURL:
+      description: HCP Terraform workload identity token issuer. Use `https://app.terraform.io` for HCP Terraform in the US or `https://app.eu.terraform.io` for HCP Terraform in Europe.
+      enum:
+        - https://app.terraform.io
+        - https://app.eu.terraform.io
+      example: https://app.terraform.io
+      type: string
+      x-enum-varnames:
+        - US
+        - EU
+    TerraformCloudAuthPersonaMappingAttributesResponse:
+      description: Stored HCP Terraform persona mapping attributes.
+      properties:
+        account_identifier:
+          description: Handle of the mapped Datadog account, resolved when the mapping was created.
+          example: test@example.com
+          type: string
+        account_uuid:
+          description: UUID of the mapped Datadog user or service account.
+          example: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+          type: string
+        audience:
+          description: Audience to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. Datadog computes this value as `datadog/<organization UUID>`.
+          example: datadog/abcdef12-3456-7890-abcd-ef1234567890
+          readOnly: true
+          type: string
+        issuer_url:
+          description: HCP Terraform workload identity token issuer. Empty for mappings created before the issuer was required.
+          example: https://app.terraform.io
+          type: string
+        sub_pattern:
+          description: Pattern matched against the `sub` claim of HCP Terraform workload identity tokens.
+          example: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+          type: string
+      required:
+        - sub_pattern
+        - account_identifier
+        - account_uuid
+      type: object
+    TerraformCloudAuthPersonaMappingCreateAttributes:
+      additionalProperties: false
+      description: Attributes for creating an HCP Terraform persona mapping.
+      properties:
+        account_identifier:
+          description: Handle or email address of the Datadog user or service account that matching tokens authenticate as. Its permissions must not exceed the caller's.
+          example: test@example.com
+          type: string
+        issuer_url:
+          $ref: "#/components/schemas/TerraformCloudAuthIssuerURL"
+        sub_pattern:
+          description: |-
+            Pattern matched against the `sub` claim of HCP Terraform workload identity tokens. Use `organization:<org>:project:<project>:workspace:<workspace>:run_phase:<plan|apply>` for workspace runs, or `organization:<org>:module:<module>:operation:test_run` for module test runs. Segments are HCP Terraform names, not IDs.
+            Any segment except the organization can be `*` to match any value.
+          example: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+          type: string
+      required:
+        - issuer_url
+        - sub_pattern
+        - account_identifier
+      type: object
+    TerraformCloudAuthPersonaMappingCreateData:
+      additionalProperties: false
+      description: Data for creating an HCP Terraform persona mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TerraformCloudAuthPersonaMappingCreateRequest:
+      additionalProperties: false
+      description: Request to create an HCP Terraform persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateData"
+      required:
+        - data
+      type: object
+    TerraformCloudAuthPersonaMappingDataResponse:
+      description: HCP Terraform persona mapping resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingAttributesResponse"
+        id:
+          description: Unique identifier of the persona mapping.
+          example: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+          type: string
+        type:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TerraformCloudAuthPersonaMappingResponse:
+      description: Response containing a single HCP Terraform persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingDataResponse"
+      required:
+        - data
+      type: object
+    TerraformCloudAuthPersonaMappingType:
+      default: terraform_cloud_auth_config
+      description: Type identifier for an HCP Terraform persona mapping.
+      enum:
+        - terraform_cloud_auth_config
+      example: terraform_cloud_auth_config
+      type: string
+      x-enum-varnames:
+        - TERRAFORM_CLOUD_AUTH_CONFIG
+    TerraformCloudAuthPersonaMappingsResponse:
+      description: Response containing a list of HCP Terraform persona mappings.
+      properties:
+        data:
+          description: Configured HCP Terraform persona mappings.
+          items:
+            $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingDataResponse"
+          type: array
+      required:
+        - data
+      type: object
     TestOptimizationDeleteServiceSettingsRequest:
       description: Request object for deleting Test Optimization service settings.
       properties:
@@ -243829,10 +243954,6 @@ paths:
       tags:
         - RUM Remote Config
       x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -249362,10 +249483,6 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 8
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_write
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
       description: Delete the link between a RUM operation and a journey.
@@ -249398,10 +249515,6 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 9
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_write
     put:
       description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
@@ -249471,10 +249584,6 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_write
   /api/v2/rum/operations/{rum_operation_id}:
     delete:
       description: Delete a RUM operation.
@@ -286611,6 +286720,241 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/terraform/persona_mapping:
+    get:
+      description: List all HCP Terraform persona mappings in the organization. Each mapping associates an HCP Terraform workload identity token issuer and `sub` claim pattern with a Datadog user or service account.
+      operationId: ListTerraformCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_identifier: test@example.com
+                          account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                          audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                          issuer_url: https://app.terraform.io
+                          sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                        id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                        type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: List HCP Terraform persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create an HCP Terraform persona mapping. The mapping associates a Datadog user or service account with workload identity tokens from an HCP Terraform issuer whose `sub` claim matches `sub_pattern`.
+
+        The response includes the `audience` value to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. The API returns a 409 error if the pattern duplicates an existing mapping, or if it can match the same token as an existing mapping for a different account.
+      operationId: CreateTerraformCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_identifier: test@example.com
+                      issuer_url: https://app.terraform.io
+                      sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                    type: terraform_cloud_auth_config
+            schema:
+              $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                        audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                        issuer_url: https://app.terraform.io
+                        sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                      id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                      type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Create an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/terraform/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete an HCP Terraform persona mapping by ID. Workload identity tokens that matched only this mapping can no longer be exchanged.
+      operationId: DeleteTerraformCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Delete an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an HCP Terraform persona mapping by ID.
+      operationId: GetTerraformCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                        audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                        issuer_url: https://app.terraform.io
+                        sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                      id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                      type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: Get an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/workflows:
     get:
       description: List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -287438,7 +287782,7 @@ tags:
       url: https://docs.datadoghq.com/integrations/chatgpt-enterprise/
     name: ChatGPT Enterprise Integration
   - description: |-
-      Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
+      Configure AWS, GitHub, HCP Terraform, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
     name: Cloud Authentication
   - description: |-
       The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/).
