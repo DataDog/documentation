@@ -22,7 +22,7 @@ Cloud Network Monitoring (CNM) shows when a connection is degraded through metri
 
 Packet capture has the following limitations:
 
-- Each capture runs for a fixed duration of 30 seconds. You can't configure the duration or set Berkeley Packet Filter filters.
+- Each capture runs for 30 seconds. You can't configure the duration or set Berkeley Packet Filter filters.
 - Each capture request can include up to 25 hosts from the selected connection.
 - Each host is limited to 100 MB of captured data. If a host reaches this limit, the capture data is truncated.
 - Only Linux hosts are supported.
@@ -82,7 +82,7 @@ Packet capture requests have one of the following states:
 | Canceled   | A user manually stopped the packet capture request.                                             |
 | Expired    | The results are past their retention period. See the [Data retention](#data-retention) section. |
 
-A capture can fail for the following reasons:
+A capture can fail for several reasons, including:
 
 - The host shut down after CNM observed it.
 - Permissions on the host don't allow packet capture.
@@ -119,8 +119,8 @@ Packet capture records only packet header metadata, such as IP addresses, ports,
 
 ### Auditing and visibility
 
-- Every packet capture is logged with the user who started it, for auditing.
-- Packet captures are visible to everyone in the organization, which helps with handoffs during an incident.
+- For auditing, every packet capture is logged with the user who started it.
+- Packet captures are visible to everyone in the organization.
 
 ### Data retention
 
