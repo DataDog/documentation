@@ -218,3 +218,10 @@ entries:
       - GetHistoricalMetricsConfiguration
     title: Declare historical metrics config write scope and release historical 
       metrics endpoints
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41934
+    operations:
+      - ListMetricMetadata
+    title: Add ListMetricMetadata endpoint GET /api/v2/metrics/metadata as a 
+      preview

@@ -4643,6 +4643,10 @@
     "description": "Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.\nYou can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching\ntag indexing rule. You can sort results by metric name or by estimated change in indexed volume.",
     "summary": "List tag indexing rule exemptions"
   },
+  "ListMetricMetadata": {
+    "description": "Get metadata for up to 50 metrics in one request: type, description, units, StatsD interval, percentile and\nhistorical metrics settings, how the metric is ingested, and the product that reports it.\nResults are returned in the order the metrics were requested. Metrics that don't exist are left out of `data`.\nThe request doesn't fail, and no not-found entry is returned. To find missing metrics, compare the returned `id`\nvalues with the names you requested.",
+    "summary": "List metadata for multiple metrics"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -8833,24 +8837,6 @@
   "GetOIDCCloudAuthProvider": {
     "description": "Get a Custom OIDC provider by UUID.",
     "summary": "Get a Custom OIDC provider"
-  },
-  "ListTerraformCloudAuthPersonaMappings": {
-    "description": "List all HCP Terraform persona mappings in the organization. Each mapping associates an HCP Terraform workload identity token issuer and `sub` claim pattern with a Datadog user or service account.",
-    "summary": "List HCP Terraform persona mappings"
-  },
-  "CreateTerraformCloudAuthPersonaMapping": {
-    "description": "Create an HCP Terraform persona mapping. The mapping associates a Datadog user or service account with workload identity tokens from an HCP Terraform issuer whose `sub` claim matches `sub_pattern`.\n\nThe response includes the `audience` value to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. The API returns a 409 error if the pattern duplicates an existing mapping, or if it can match the same token as an existing mapping for a different account.",
-    "summary": "Create an HCP Terraform persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request to create an HCP Terraform persona mapping."
-  },
-  "DeleteTerraformCloudAuthPersonaMapping": {
-    "description": "Delete an HCP Terraform persona mapping by ID. Workload identity tokens that matched only this mapping can no longer be exchanged.",
-    "summary": "Delete an HCP Terraform persona mapping"
-  },
-  "GetTerraformCloudAuthPersonaMapping": {
-    "description": "Get an HCP Terraform persona mapping by ID.",
-    "summary": "Get an HCP Terraform persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
