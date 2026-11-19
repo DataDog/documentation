@@ -83,7 +83,7 @@ There are two key decisions to make when using OpenTelemetry with Datadog:
 - [How to instrument your applications](#instrument-your-applications)
 - [How to send your data to Datadog](#send-opentelemetry-data-to-datadog)
 
-SDK and deployment choices determine which Datadog capabilities are available. Datadog supports upstream OpenTelemetry SDKs. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities.
+SDK and deployment choices determine which Datadog capabilities and support options are available. Datadog supports upstream OpenTelemetry SDKs. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities.
 
 For more information, read [Feature Compatibility][9].
 
@@ -91,8 +91,8 @@ For more information, read [Feature Compatibility][9].
 
 Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs and DDOT SDKs. Both use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling.
 
-- **[Upstream OpenTelemetry SDKs][11]** are maintained by the OpenTelemetry project. Choose this approach for the upstream release life cycle and community-maintained instrumentation.
 - **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are Datadog's version of OpenTelemetry SDKs and are in Preview. Choose this approach for additional Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
+- **[Upstream OpenTelemetry SDKs][11]** are maintained by the OpenTelemetry project. Choose this approach for the upstream release life cycle and community-maintained instrumentation.
 
 You can switch between upstream and DDOT SDKs while keeping OpenTelemetry API instrumentation, standard configuration, and telemetry. Switching back removes the Datadog-specific capabilities.
 

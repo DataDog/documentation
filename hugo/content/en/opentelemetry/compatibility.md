@@ -17,10 +17,10 @@ Choose an SDK and a Collector or Datadog Agent to process and forward telemetry.
 
 | Setup Type                                           | API                     | SDK         | Collector/Agent                               |
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
-| [**DDOT SDK + OpenTelemetry Collector**][49] (Preview) | OTel API              | DDOT SDK    | OpenTelemetry Collector (the Datadog Agent is optional) |
+| [**DDOT SDK + OpenTelemetry Collector**][49] (Preview) | OTel API              | DDOT SDK    | Upstream OpenTelemetry Collector or DDOT Collector (the Datadog Agent is optional) |
 | [**Upstream OpenTelemetry SDK + DDOT Collector**][47] (Preview)        | OTel API                | Upstream OpenTelemetry SDK | DDOT Collector (the Datadog Agent is optional) |
-| [**Datadog SDK + Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
-| [**Upstream OpenTelemetry SDK + Agent's Collector**][29]               | OTel API                | Upstream OpenTelemetry SDK | Agent's Collector (runs alongside the Datadog Agent) |
+| [**Datadog SDK + Datadog Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Datadog Agent's Collector (runs alongside the Datadog Agent) |
+| [**Upstream OpenTelemetry SDK + Datadog Agent's Collector**][29]               | OTel API                | Upstream OpenTelemetry SDK | Datadog Agent's Collector (runs alongside the Datadog Agent) |
 | [**Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | Upstream OpenTelemetry SDK | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | Upstream OpenTelemetry SDK | N/A (Direct to Datadog endpoint)              |
 
