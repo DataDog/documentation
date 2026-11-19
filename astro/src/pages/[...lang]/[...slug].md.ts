@@ -1,7 +1,7 @@
 // Catch-all `.md` endpoint: the plaintext twin of the `[...slug].astro` route.
 // Serves a plaintext version of every `content/en` page. Cdocs (pages with
 // `content_filters`) resolve their filters — URL param > default, via
-// the shared `resolveCdocRender` — and render through the cdocs plaintext
+// the shared `resolvePageFilterValues` — and render through the cdocs plaintext
 // pipeline; every other page renders through the component plaintext twins.
 // Either way the frontmatter title is prepended as an H1, mirroring the HTML
 // page. A path with no matching entry 404s.
@@ -28,7 +28,7 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
-import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { resolvePageFilterValues } from "@lib/cdocs/filters";
 import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
@@ -110,7 +110,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     // Cdoc: resolve filters and render through the cdocs plaintext pipeline,
     // which prepends the title itself.
     const filtersManifest = buildPageFiltersManifest(contentFilters);
-    const { valsByTraitId } = resolveCdocRender({
+    const valsByTraitId = resolvePageFilterValues({
       contentFilters,
       filtersManifest,
       searchParams: url.searchParams,

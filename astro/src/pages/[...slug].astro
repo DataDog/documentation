@@ -16,7 +16,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
-import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { resolvePageFilterValues } from "@lib/cdocs/filters";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import {
@@ -51,15 +51,15 @@ const isFilterable = contentFilters !== undefined;
 // Filterable docs resolve their filters, and the filter bar gets a pruned
 // manifest, so it can build each option's URL from the reader's picks; plain
 // docs render with no filter state.
-let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
+let valsByTraitId: Record<string, string> = {};
 let clientFiltersManifest: ClientSideFiltersManifest | undefined;
 if (isFilterable) {
   const filtersManifest = buildPageFiltersManifest(contentFilters);
-  valsByTraitId = resolveCdocRender({
+  valsByTraitId = resolvePageFilterValues({
     contentFilters,
     filtersManifest,
     searchParams: Astro.url.searchParams,
-  }).valsByTraitId;
+  });
   clientFiltersManifest = pruneManifestForClient(filtersManifest);
 }
 
