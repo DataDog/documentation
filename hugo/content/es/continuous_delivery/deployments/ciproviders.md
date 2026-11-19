@@ -28,14 +28,14 @@ Si está ejecutando implementaciones mediante un proveedor de CI, puede hacer un
 ## Configuración {#setup}
 
 <div class="alert alert-info">
-La configuración requiere <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> versión `2.26.0` o posterior.
+La configuración requiere <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> Versión de la CLI </a> <code>2.26.0</code> o posterior.
 </div>
 
 Para configurar CD Visibility, utilice el comando `datadog-ci deployment mark` dentro del trabajo de CI que realiza la implementación.
 
 Se requieren dos variables de entorno:
 
-1. `DD_API_KEY`: Configure esta variable para que apunte a su [clave de Datadog API][4].
+1. `DD_API_KEY`: Configure esta variable para que apunte a su [clave de API de Datadog][4].
 2. `DD_BETA_COMMANDS_ENABLED`: Establézcala en 1.
 
 Opcionalmente, puede establecer la variable de entorno `DD_SITE` en un [sitio de Datadog][3] específico. Su sitio es {{< region-param key="dd_site" code="true" >}}.
