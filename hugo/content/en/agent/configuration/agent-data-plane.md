@@ -33,28 +33,22 @@ ADP requires Agent version 7.84.2 or later.
 
 ## Default enablement
 
-ADP is enabled by default for Linux Agents deployed by the Datadog Operator when the Operator is installed with the [`datadog-operator` Helm chart][6] and the chart's `site` value is set to one of the following sites:
-
-- `ap1.datadoghq.com`
-- `ap2.datadoghq.com`
+ADP is enabled by default for Linux Agents deployed by the Datadog Operator when the Operator is installed with [`datadog-operator` Helm chart][6] version 2.33.0 or later, on all Datadog sites.
 
 The default applies only when `spec.features.dataPlane.enabled` is not set in your `DatadogAgent` resource and the Agent is version 7.84.2 or later. An explicit `spec.features.dataPlane.enabled` setting always takes precedence.
 
-To control the default for all `DatadogAgent` resources managed by the Operator, set `defaultDataPlaneEnabled.linux` in the `datadog-operator` chart's `values.yaml`:
+To turn off the default for all `DatadogAgent` resources managed by the Operator, set `defaultDataPlaneEnabled.linux` to `false` in the `datadog-operator` chart's `values.yaml`:
 
 {{< code-block lang="yaml" >}}
 defaultDataPlaneEnabled:
-  linux: "false" # "auto" (default), "true", or "false"
+  linux: false # true (default) or false
 {{< /code-block >}}
-
-- `"auto"`: Enables ADP only for the sites listed above.
-- `"true"`: Enables ADP for all sites.
-- `"false"`: Disables ADP for all sites.
 
 ### Changelog
 
 | Date       | Change | Version |
 |------------|--------|---------|
+| 2026-11-19 | ADP enabled by default for Linux Agents managed by the Datadog Operator on all sites. | `datadog-operator` Helm chart [2.33.0][9] |
 | 2026-11-09 | ADP enabled by default for Linux Agents managed by the Datadog Operator on the AP1 and AP2 sites. | `datadog-operator` Helm chart [2.32.0][7] |
 
 ## Enable the Agent Data Plane
@@ -320,3 +314,4 @@ DD_DATA_PLANE_ENABLED=false
 [6]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 [7]: https://github.com/DataDog/helm-charts/releases/tag/datadog-operator-2.32.0
 [8]: #default-enablement
+[9]: https://github.com/DataDog/helm-charts/releases/tag/datadog-operator-2.33.0
