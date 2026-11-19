@@ -19,8 +19,8 @@ further_reading:
   text: Obtenga información sobre las variantes de recorridos
 - link: https://www.datadoghq.com/blog/rum-operations-monitoring/
   tag: Blog
-  text: Haga un seguimiento del rendimiento de los pasos críticos en los recorridos
-    de usuario con operaciones de RUM
+  text: Monitoree el rendimiento de los pasos críticos en los recorridos de usuario
+    con operaciones de RUM
 title: Informe de detalles del recorrido
 ---
 ## Descripción general {#overview}
@@ -45,27 +45,27 @@ El [embudo][6] muestra el tráfico, la tasa de conversión y el tiempo promedio 
 
 La sección de tendencias de tráfico y conversión muestra estos indicadores clave de rendimiento (KPI):
 
-- **Volumen de inicios**: Intentos totales de recorrido en todas las sesiones de usuario
-- **Volumen de conversiones**: Intentos de recorrido completados en todas las sesiones de usuario
-- **Tiempo promedio de conversión**: Tiempo promedio requerido para completar el recorrido
-- **Tasa de conversión**: Porcentaje de intentos de recorrido que se completaron
+- **Starts volume**: Intentos totales de recorrido en todas las sesiones de usuario
+- **Conversion volume**: Intentos de recorrido completados en todas las sesiones de usuario
+- **Average time to convert**: Tiempo promedio requerido para completar el recorrido
+- **Conversion rate**: Porcentaje de intentos de recorrido que se completaron
 
 Cada KPI compara el marco de tiempo seleccionado con el marco de tiempo inmediatamente anterior de la misma duración. Por ejemplo, si selecciona una semana, la comparación utiliza la semana anterior. Si selecciona un día, utiliza el día anterior. Las métricas de volumen y tiempo de conversión muestran cambios porcentuales, mientras que la tasa de conversión muestra el cambio en puntos porcentuales.
 
-#### Fuente y retención de KPI {#kpi-source-and-retention}
+#### Fuente y retención de los KPI {#kpi-source-and-retention}
 
-La fuente de datos y el periodo de retención de los KPI dependen del acceso a Product Analytics:
+La fuente de datos de los KPI y el período de retención dependen del acceso a Product Analytics:
 
 - **Preview**: Utiliza todos los datos de Product Analytics de una ventana móvil de 30 días
-- **Trial**: Utiliza todos los datos de Product Analytics del periodo de prueba completo
+- **Trial**: Utiliza todos los datos de Product Analytics del período de prueba completo
 - **Paid**: Utiliza todos los datos de Product Analytics de una ventana móvil de 15 meses
 - **Product Analytics not enabled**: Utiliza métricas de [RUM without Limits&trade;][18]
 
-Con RUM without Limits, el volumen de inicios, el volumen de conversiones y la tasa de conversión utilizan la métrica `rum.measure.journey`. El tiempo promedio de conversión utiliza `rum.measure.journey.duration`.
+Con RUM without Limits, el volumen de inicios, el volumen de conversión y la tasa de conversión utilizan la métrica `rum.measure.journey`. El tiempo promedio de conversión utiliza `rum.measure.journey.duration`.
 
 ## Product Analytics {#product-analytics}
 
-<div class="alert alert-info">Los datos en esta sección solo están disponibles con una prueba activa de Product Analytics o una suscripción de pago.</div>
+<div class="alert alert-info">Los datos en esta sección solo están disponibles con una prueba activa de Product Analytics o una suscripción paga.</div>
 
 {{< img src="journey_monitoring/journey-monitoring-details-report-product-analytics.png" alt="La sección de detalles del informe de Journey Monitoring que muestra las rutas principales y los usuarios de un recorrido específico para las sesiones convertidas y abandonadas." style="width:100%;" >}}
 
@@ -73,21 +73,21 @@ Con RUM without Limits, el volumen de inicios, el volumen de conversiones y la t
 
 La [visualización Top Paths][12] muestra cómo se mueven los usuarios a través del recorrido entre los pasos seleccionados. Compare las rutas de los usuarios que convirtieron con las rutas de los usuarios que abandonaron.
 
-La visualización muestra las rutas más comunes, las cuales podrían no representar el 100% de los recorridos completados. El pie de página muestra el porcentaje y el número de sesiones representadas por las rutas restantes.
+La visualización muestra las rutas más comunes, que pueden no representar el 100 % de los recorridos completados. El pie de página muestra el porcentaje y el número de sesiones representadas por las rutas restantes.
 
 ### Usuarios {#users}
 
-La tabla de usuarios enumera a los principales usuarios que realizaron una conversión o abandonaron durante el recorrido. Haga clic en un usuario para visualizar sus grabaciones de Session Replay de las sesiones en las que experimentó el recorrido.
+La tabla de usuarios enumera a los principales usuarios que convirtieron o abandonaron durante el recorrido. Haga clic en un usuario para ver sus sesiones de Session Replay correspondientes a las sesiones en las que experimentó el recorrido.
 
 ## Real User Monitoring {#real-user-monitoring}
 
 <div class="alert alert-info">Los datos en esta sección están disponibles solo con una prueba activa o una suscripción paga a RUM without Limits&trade;.</div>
 
-{{< img src="journey_monitoring/journey-monitoring-details-report-real-user-monitoring.png" alt="La sección del informe de detalles de Journey Monitoring que muestra las operaciones de RUM de un recorrido específico y series temporales de problemas de frontend." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-real-user-monitoring.png" alt="La sección del informe de detalles de Journey Monitoring que muestra las operaciones de RUM de un recorrido específico y las series temporales de problemas de frontend." style="width:100%;" >}}
 
 ### Operaciones {#operations}
 
-La tabla [operaciones][7] incluye Operaciones de RUM vinculadas y no vinculadas. Las agrupa por estado de [objetivo de nivel de servicio (SLO)][19]:
+La tabla de [operaciones][7] incluye operaciones de RUM vinculadas y no vinculadas. Las agrupa por estado de [objetivo de nivel de servicio (SLO)][19]:
 
 - **Critical**: Operaciones vinculadas al recorrido que tienen al menos un SLO con una tasa de consumo alta.
 - **OK**: Operaciones vinculadas al recorrido que tienen al menos un SLO y cuyos SLO están todos en estado OK.
@@ -101,32 +101,32 @@ Cuando ninguna operación coincidente represente una acción crítica, siga [Cre
 
 Cada fila de operación también muestra su recuento de ejecución y tasa de éxito, calculados usando la métrica `rum.measure.operation`, y su latencia p75, calculada usando la métrica `rum.measure.operation.duration`.
 
-<div class="alert alert-tip">Si Bits AI está habilitado para su organización, inicie una <a href="/real_user_monitoring/ai_investigations/operation_ai_investigation/">Bits Investigation</a> desde una operación para solucionar fallas o regresiones de latencia.</div>
+<div class="alert alert-tip">Si Bits AI está habilitado para su organización, inicie una <a href="/real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring">Bits Investigation</a> desde una operación para solucionar fallas o regresiones de latencia.</div>
 
 Haga clic en una operación para abrir su panel lateral de rendimiento. El panel muestra:
-- La lista de SLO y seguimientos configurados para la operación
+- La lista de SLO y monitores configurados para la operación
 - El volumen, la tasa de éxito y la latencia de la operación
 - Dónde se ejecutó la operación dentro del ciclo de vida del recorrido
 
-Si RUM está conectado a las [trazas de Application Performance Monitoring (APM)][11], el panel lateral también lista las dependencias de los servicios backend y sus métricas de rendimiento. Haga clic en un servicio backend para abrir su entrada en el [Catalog][8] de APM.
+Si RUM está conectado a [trazas de Application Performance Monitoring (APM)][11], el panel lateral también enumera las dependencias de los servicios backend y sus métricas de rendimiento. Haga clic en un servicio backend para abrir su entrada en [Catalog][8] de APM.
 
 ### Recuento de errores {#error-count}
 
-El gráfico de recuento de errores traza los problemas de frontend de [Error Tracking][9] que ocurrieron durante el recorrido. Haga clic en **Investigate** para revisar los problemas principales, luego seleccione un problema para abrirlo en Error Tracking.
+El gráfico de recuento de errores traza los problemas de frontend de [Error Tracking][9] que ocurrieron durante el recorrido. Haga clic en **Investigate** para revisar los problemas principales; luego seleccione un problema para abrirlo en Error Tracking.
 
 ## Synthetic Monitoring & Testing {#synthetic-monitoring-testing}
 
-<div class="alert alert-info">Los datos en esta sección solo están disponibles con una prueba activa o una suscripción de pago a <a href="/synthetics/browser_tests/">Synthetic Browser Tests</a> o <a href="/synthetics/mobile_app_testing/">Synthetic Mobile Tests</a>.</div>
+<div class="alert alert-info">Los datos en esta sección solo están disponibles con un período de prueba activo o una suscripción de pago a <a href="/synthetics/browser_tests/">Synthetic Browser Tests</a> o <a href="/synthetics/mobile_app_testing/">Synthetic Mobile Tests</a>.</div>
 
-{{< img src="journey_monitoring/journey-monitoring-details-report-synthetics.png" alt="La sección de detalles del informe de Journey Monitoring que muestra las pruebas Synthetic de un recorrido específico." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-synthetics.png" alt="La sección del informe de detalles de Journey Monitoring que muestra las pruebas Synthetic de un recorrido específico." style="width:100%;" >}}
 
 ### Cobertura del conjunto de pruebas y del recorrido {#test-suite-and-journey-coverage}
 
-Para recorridos basados en eventos, Datadog crea un [conjunto de pruebas][10] cuando el creador del recorrido tiene acceso de escritura a Synthetic Monitoring. El conjunto de pruebas tiene el mismo nombre que el recorrido. En una configuración solo de Synthetics, el conjunto de pruebas existente define el recorrido.
+Para recorridos basados en eventos, Datadog crea un [conjunto de pruebas][10] cuando el creador del recorrido tiene acceso de escritura a Synthetic Monitoring. El conjunto tiene el mismo nombre que el recorrido. En una configuración solo de Synthetics, el conjunto de pruebas existente define el recorrido.
 
-El widget del conjunto de pruebas muestra el rendimiento del conjunto y el [tiempo de actividad][13]. El SLO de tiempo de actividad del conjunto de pruebas representa el tiempo de actividad del recorrido y contribuye al estado del recorrido. Una tasa de consumo alta en este SLO coloca al recorrido en estado **Degraded**. El SLO tiene un objetivo predeterminado editable del 99,9 %.
+El widget del conjunto de pruebas muestra el rendimiento del conjunto y el [tiempo de actividad][13]. El SLO de tiempo de actividad del conjunto representa el tiempo de actividad del recorrido y contribuye al estado del recorrido. Una tasa de consumo alta en este SLO coloca al recorrido en un estado **Degraded**. El SLO tiene un objetivo predeterminado editable del 99,9 %.
 
-Un recorrido tiene [cobertura Synthetic][20] cuando su conjunto de pruebas contiene al menos una prueba que lo cubre. Para recorridos basados en eventos, Datadog identifica nuevas [pruebas coincidentes][21] a medida que la aplicación cambia. Agregue o elimine pruebas para mantener la cobertura del conjunto de pruebas alineada con el recorrido.
+Un recorrido tiene [cobertura Synthetic][20] cuando su conjunto de pruebas contiene al menos una prueba que lo cubre. Para recorridos basados en eventos, Datadog identifica nuevas [pruebas coincidentes][21] a medida que la aplicación cambia. Agregue o elimine pruebas para mantener la cobertura del conjunto alineada con el recorrido.
 
 ### Tabla de pruebas {#tests-table}
 
@@ -138,9 +138,9 @@ La tabla de pruebas Synthetic incluye pruebas que pertenecen al conjunto de prue
 
 Cada fila de prueba también muestra su nombre, dominio y tiempo de actividad.
 
-<div class="alert alert-tip">Si Bits AI está habilitado para su organización, inicie una <a href="/bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page">Bits Investigation</a> desde una prueba en estado <strong>Alert</strong> para identificar su causa raíz.</div>
+<div class="alert alert-tip">Si Bits AI está habilitado para su organización, inicie una <a href="/bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page">Bits Investigation</a> desde una prueba en el estado <strong>Alert</strong> para identificar su causa raíz.</div>
 
-Haga clic en **Manage Tests** para agregar o eliminar pruebas del conjunto de pruebas, o en **New Test** para crear una prueba.
+Haga clic en **Manage Tests** para agregar o eliminar pruebas del conjunto, o en **New Test** para crear una prueba.
 
 ## Lecturas adicionales {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}

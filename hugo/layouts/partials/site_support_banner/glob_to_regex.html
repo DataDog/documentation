@@ -1,0 +1,27 @@
+{{/*
+    Translates one url_paths glob from shared/site_support.yaml to the body of a
+    regular expression, without anchors.
+
+    Hugo has no glob function for arbitrary strings, so the globs are translated
+    segment by segment:
+      **  (a whole segment, enforced by Astro's schema) -> (?:/.*)?  zero or more segments
+      *   -> [^/]*  inside one segment
+      everything else is literal, with regex metacharacters escaped
+
+    So a trailing ** matches the base path and everything beneath it, and a
+    middle ** can match no segments at all. Don't write a glob with ** followed
+    by a slash in this comment: that closes a Go template comment.
+
+    Caller: layouts/partials/site_support_banner/url_path_matchers.html
+*/}}
+{{ $regex := "" }}
+{{ range after 1 (split . "/") }}
+    {{ if eq . "**" }}
+        {{ $regex = printf "%s(?:/.*)?" $regex }}
+    {{ else }}
+        {{ $segment := replaceRE `([.^$|\\+(){}\[\]?])` `\$1` . }}
+        {{ $segment = replace $segment "*" "[^/]*" }}
+        {{ $regex = printf "%s/%s" $regex $segment }}
+    {{ end }}
+{{ end }}
+{{ return $regex }}

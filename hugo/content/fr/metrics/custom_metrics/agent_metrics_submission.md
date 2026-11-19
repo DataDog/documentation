@@ -2,148 +2,149 @@
 aliases:
 - /fr/developers/metrics/agent_metrics_submission/
 - /fr/metrics/agent_metrics_submission
+description: Soumettez des Custom Metrics à partir d'un check personnalisé de l'Agent
+  en utilisant les fonctions count, gauge, histogram et rate.
 further_reading:
-- link: /developers/custom_checks/write_agent_check/
+- link: /extend/custom_checks/write_agent_check/
   tag: Documentation
-  text: Écrire un check d'Agent custom
-title: 'Envoi de métriques : check custom d''Agent'
+  text: Écrivez un check personnalisé de l'Agent
+title: 'Soumission de métriques : check personnalisé de l''Agent'
 ---
+Les fonctions sont utilisées pour soumettre des métriques avec un [check personnalisé de l'Agent][1]. Différentes fonctions sont disponibles en fonction du [type de métrique][2]. Selon la fonction utilisée, la soumission et le type de métrique réel stocké dans Datadog peuvent différer.
 
-L'envoi de métriques avec un [check custom d'Agent][1] repose sur l'utilisation de fonctions. Les fonctions disponibles varient en fonction du [type de métrique][2]. De même, l'envoi et le type de métrique stocké par Datadog dépendent de la fonction utilisée.
-
-## Fonctions
+## Fonctions {#functions}
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{% tab "Nombre de valeurs" %}}
 
-### `monotonic_count()`
+### `monotonic_count()` {#monotonic-count}
 
-Cette fonction est utilisée pour suivre une métrique COUNT brute qui ne peut qu'augmenter. L'Agent Datadog calcule le delta entre chaque envoi. Les échantillons qui possèdent une valeur plus faible que l'échantillon précédent sont ignorés. En effet, des valeurs plus faibles indiquent généralement que la métrique COUNT brute sous-jacente a été réinitialisée. La fonction peut faire l'objet de plusieurs appels durant l'exécution d'un check.
+Cette fonction est utilisée pour suivre une métrique COUNT brute qui augmente toujours. Le Datadog Agent calcule le delta entre chaque soumission. Les échantillons ayant une valeur inférieure à l'échantillon précédent sont ignorés. Des valeurs inférieures indiquent généralement que la métrique COUNT brute sous-jacente a été réinitialisée. La fonction peut être appelée plusieurs fois pendant l'exécution d'un check.
 
-Par exemple, l'envoi des échantillons 2, 3, 6 et 7 transmet une valeur de 5 (7 - 2) durant l'exécution du premier check. L'envoi des échantillons 10 et 11 avec la même fonction `monotonic_count` transmet une valeur de 4 (11 - 7) durant l'exécution du deuxième check.
+Par exemple, la soumission des échantillons 2, 3, 6, 7 envoie une valeur de 5 (7-2) lors de la première exécution du check. La soumission des échantillons 10, 11 sur le même `monotonic_count` envoie une valeur de 4 (11-7) lors de la deuxième exécution du check.
 
-**Remarque** : les métriques envoyées à l'aide de cette fonction sont stockées en tant que métrique de type `COUNT` dans Datadog. Chaque valeur dans les séries temporelles stockées correspond à un delta de la valeur de la métrique entre les échantillons (sans normalisation temporelle).
+**Remarque** : les métriques soumises avec cette fonction sont stockées avec un type de métrique `COUNT` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta de la valeur de la métrique entre les échantillons (non normalisé par le temps).
 
-Modèle de la fonction :
+Modèle de fonction :
 
 ```python
 self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Paramètre     | Type            | Obligatoire | Valeur par défaut | Description                                                                         |
+| Paramètre     | Type            | Requis | Valeur par défaut | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | Chaîne          | Oui      | -             | Nom de la métrique.                                                             |
-| `value`       | Valeur flottante           | Oui      | -             | Valeur de la métrique.                                                           |
-| `tags`        | Liste de chaînes | Non       | -             | Liste des tags à associer à cette métrique.                                       |
-| `hostname`    | Chaîne          | Non       | Current host  | Hostname à associer à cette métrique.                                           |
-| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
+| `name`        | Chaîne          | Oui      | -             | Le nom de la métrique.                                                             |
+| `value`       | Flottant           | Oui      | -             | La valeur de la métrique.                                                           |
+| `tags`        | Liste de chaînes | Non       | -             | Une liste de tags à associer à cette métrique.                                       |
+| `hostname`    | Chaîne          | Non       | Host actuel  | Un nom d'hôte à associer à cette métrique.                                           |
+| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute plutôt un tag sous la forme `device:<DEVICE_NAME>` à la liste des tags. |
 
-### `count()`
+### `count()` {#count}
 
-Cette fonction envoie le nombre d'événements qui se sont produits durant l'intervalle du check. Elle peut faire l'objet de plusieurs appels durant l'exécution d'un check, chaque échantillon étant ajouté à la valeur transmise.
+Cette fonction soumet le nombre d'événements survenus pendant l'intervalle du check. Elle peut être appelée plusieurs fois au cours de l'exécution d'un check, chaque échantillon étant ajouté à la valeur envoyée.
 
-**Remarque** : les métriques envoyées à l'aide de cette fonction sont stockées en tant que métrique de type `COUNT` dans Datadog. Chaque valeur dans les séries temporelles stockées correspond à un delta de la valeur de la métrique entre les échantillons (sans normalisation temporelle).
+**Remarque** : Les métriques soumises avec cette fonction sont stockées avec un type de métrique `COUNT` dans Datadog.
 
-Modèle de la fonction :
+Modèle de fonction :
 
 ```python
 self.count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Paramètre     | Type            | Obligatoire | Valeur par défaut | Description                                                                         |
+| Paramètre     | Type            | Requis | Valeur par défaut | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | Chaîne          | Oui      | -             | Nom de la métrique.                                                             |
-| `value`       | Valeur flottante           | Oui      | -             | Valeur de la métrique.                                                           |
-| `tags`        | Liste de chaînes | Non       | -             | Liste des tags à associer à cette métrique.                                       |
-| `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
-| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
+| `name`        | Chaîne          | Oui      | -             | Le nom de la métrique.                                                             |
+| `value`       | Flottant           | Oui      | -             | La valeur de la métrique.                                                           |
+| `tags`        | Liste de chaînes | Non       | -             | Une liste de tags à associer à cette métrique.                                       |
+| `hostname`    | Chaîne          | Non       | host actuel  | Un nom d'hôte à associer à cette métrique.                                           |
+| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute plutôt un tag sous la forme `device:<DEVICE_NAME>` à la liste des tags. |
 
 {{% /tab %}}
-{{% tab "Gauge" %}}
+{{% tab "Jauge" %}}
 
-### `gauge()`
+### `gauge()` {#gauge}
 
-Cette fonction envoie la valeur d'une métrique à un timestamp donné. Si elle fait l'objet de plusieurs appels durant l'exécution d'un check pour une métrique, seul le dernier échantillon est utilisé.
+Cette fonction soumet la valeur d'une métrique à un horodatage donné. Si elle est appelée plusieurs fois au cours de l'exécution d'un check pour une métrique, seul le dernier échantillon est utilisé.
 
-**Remarque** : les métriques envoyées à l'aide de cette fonction sont stockées en tant que métrique de type `GAUGE` dans Datadog.
+**Remarque** : Les métriques soumises avec cette fonction sont stockées avec un type de métrique `GAUGE` dans Datadog.
 
-Modèle de la fonction :
+Modèle de fonction :
 
 ```python
 self.gauge(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Paramètre     | Type            | Obligatoire | Valeur par défaut | Description                                                                         |
+| Paramètre     | Type            | Requis | Valeur par défaut | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | Chaîne          | Oui      | -             | Nom de la métrique.                                                             |
-| `value`       | Valeur flottante           | Oui      | -             | Valeur de la métrique.                                                           |
-| `tags`        | Liste de chaînes | Non       | -             | Liste des tags à associer à cette métrique.                                       |
-| `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
-| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
+| `name`        | Chaîne          | Oui      | -             | Le nom de la métrique.                                                             |
+| `value`       | Flottant           | Oui      | -             | La valeur de la métrique.                                                           |
+| `tags`        | Liste de chaînes | Non       | -             | Une liste de tags à associer à cette métrique.                                       |
+| `hostname`    | Chaîne          | Non       | host actuel  | Un nom d'hôte à associer à cette métrique.                                           |
+| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute plutôt un tag sous la forme `device:<DEVICE_NAME>` à la liste des tags. |
 
 {{% /tab %}}
-{{% tab "Rate" %}}
+{{% tab "Taux" %}}
 
-### `rate()`
+### `rate()` {#rate}
 
-Cette fonction envoie la valeur brute échantillonnée de votre métrique RATE. L'Agent Datadog calcule le delta de la valeur de cette métrique entre deux envois, puis le divise par l'intervalle de transmission pour obtenir le taux. Cette fonction doit être appelée une seule fois durant le check, sans quoi elle ignore toutes les valeurs inférieures à la valeur précédemment envoyée.
+Cette fonction soumet la valeur brute échantillonnée de votre métrique RATE. Le Datadog Agent calcule le delta de la valeur de cette métrique entre deux soumissions et le divise par l'intervalle de soumission pour obtenir le taux. Cette fonction ne doit être appelée qu'une seule fois pendant un check, sinon elle rejette toute valeur inférieure à une valeur précédemment soumise.
 
-**Remarque** : les métriques envoyées à l'aide de cette fonction sont stockées en tant que métrique de type `GAUGE` dans Datadog. Chaque valeur dans les séries temporelles stockées correspond à un delta de la valeur de la métrique entre les échantillons (avec normalisation temporelle).
+**Remarque** : Les métriques soumises avec cette fonction sont stockées en tant que type de métrique `GAUGE` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique entre les échantillons.
 
-Modèle de la fonction :
+Modèle de fonction :
 
 ```python
 self.rate(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Paramètre     | Type            | Obligatoire | Valeur par défaut | Description                                                                         |
+| Paramètre     | Type            | Requis | Valeur par défaut | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | Chaîne          | Oui      | -             | Nom de la métrique.                                                             |
-| `value`       | Valeur flottante           | Oui      | -             | Valeur de la métrique.                                                           |
-| `tags`        | Liste de chaînes | Non       | -             | Liste des tags à associer à cette métrique.                                       |
-| `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
-| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
+| `name`        | Chaîne          | Oui      | -             | Le nom de la métrique.                                                             |
+| `value`       | Flottant           | Oui      | -             | La valeur de la métrique.                                                           |
+| `tags`        | Liste de chaînes | Non       | -             | Une liste de tags à associer à cette métrique.                                       |
+| `hostname`    | Chaîne          | Non       | host actuel  | Un nom d'hôte à associer à cette métrique.                                           |
+| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute plutôt un tag sous la forme `device:<DEVICE_NAME>` à la liste des tags. |
 
 {{% /tab %}}
 
-{{% tab "Histogram" %}}
+{{% tab "Histogramme" %}}
 
-### `histogram()`
+### `histogram()` {#histogram}
 
-Cette fonction envoie l'échantillon d'une métrique histogram générée durant l'intervalle du check. Elle peut faire l'objet de plusieurs appels durant l'exécution d'un check. Chaque échantillon est ajouté à la distribution statistique de l'ensemble des valeurs pour cette métrique.
+Cette fonction soumet l'échantillon d'une métrique d'histogramme recueilli pendant l'intervalle du check. Elle peut être appelée plusieurs fois pendant l'exécution d'un check. Chaque échantillon est ajouté à la distribution statistique de l'ensemble des valeurs pour cette métrique.
 
-**Remarque** : toutes les agrégations de métriques générées sont stockées en tant que métrique de type `GAUGE` dans Datadog, sauf pour la fonction `<NOM_MÉTRIQUE>.count`, pour laquelle les métriques sont stockées en tant que métrique de type `RATE` dans Datadog.
+**Remarque** : Toutes les agrégations de métriques produites sont stockées en tant que type de métrique `GAUGE` dans Datadog, à l'exception du `<METRIC_NAME>.count` qui est stocké en tant que type de métrique `RATE` dans Datadog.
 
-Modèle de la fonction :
+Modèle de fonction :
 
 ```python
 self.histogram(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Paramètre     | Type            | Obligatoire | Valeur par défaut | Description                                                                         |
+| Paramètre     | Type            | Requis | Valeur par défaut | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | Chaîne          | Oui      | -             | Nom de la métrique.                                                             |
-| `value`       | Valeur flottante           | Oui      | -             | Valeur de la métrique.                                                           |
-| `tags`        | Liste de chaînes | Non       | -             | Liste des tags à associer à cette métrique.                                       |
-| `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
-| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
+| `name`        | Chaîne          | Oui      | -             | Le nom de la métrique.                                                             |
+| `value`       | Flottant           | Oui      | -             | La valeur de la métrique.                                                           |
+| `tags`        | Liste de chaînes | Non       | -             | Une liste de tags à associer à cette métrique.                                       |
+| `hostname`    | Chaîne          | Non       | host actuel  | Un nom d'hôte à associer à cette métrique.                                           |
+| `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute plutôt un tag sous la forme `device:<DEVICE_NAME>` à la liste des tags. |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tutoriel
+## Tutoriel {#tutorial}
 
-Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui transmet régulièrement tous les types de métriques :
+Suivez les étapes ci-dessous pour créer un [check personnalisé de l'Agent][2] qui envoie périodiquement tous les types de métriques :
 
-1. Créez le répertoire `metrics_example.d/` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
+1. Créez le répertoire `metrics_example.d/` dans le dossier `conf.d/` à la racine de votre [répertoire de configuration de l'Agent][3].
 
-2. Dans le dossier `metrics_example.d/`, créez un fichier de configuration vide `metrics_example.yaml` avec le contenu suivant :
+2. Dans le dossier `metrics_example.d/`, créez un fichier de configuration vide nommé `metrics_example.yaml` avec le contenu suivant :
 
     ```yaml
     instances: [{}]
     ```
 
-3. À un niveau supérieur du dossier `conf.d/`, accédez au dossier `checks.d/`. Créez un fichier de check custom `metrics_example.py` avec le contenu ci-dessous :
+3. Un niveau au-dessus du dossier `conf.d/`, accédez au dossier `checks.d/`. Créez un fichier de check personnalisé nommé `metrics_example.py` avec le contenu ci-dessous :
 
     ```python
     import random
@@ -200,7 +201,7 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
     ```
 
 4. [Redémarrez l'Agent][4].
-5. Vérifiez que votre check custom s'exécute correctement avec la [sous-commande status de l'Agent][5]. Cherchez `metrics_example` dans la section Checks :
+5. Vérifiez que votre check personnalisé fonctionne correctement à l'aide de la [sous-commande status de l'Agent][5]. Recherchez `metrics_example` dans la section {{< ui >}}Checks{{< /ui >}} :
 
     ```text
     =========
@@ -224,15 +225,15 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
         (...)
     ```
 
-6. Vérifiez que vos métriques sont transmises à Datadog sur votre [page Metric Summary][6].
+6. Vérifiez que vos métriques sont transmises à Datadog sur votre [page Metrics Catalog][6].
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/custom_checks/write_agent_check/
+[1]: /fr/extend/custom_checks/write_agent_check/
 [2]: /fr/metrics/types/
-[3]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /fr/agent/guide/agent-commands/#restart-the-agent
-[5]: /fr/agent/guide/agent-commands/#agent-information
-[6]: https://app.datadoghq.com/metric/summary
+[3]: /fr/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[4]: /fr/agent/configuration/agent-commands/#restart-the-agent
+[5]: /fr/agent/configuration/agent-commands/#agent-information
+[6]: https://app.datadoghq.com/metric/catalog

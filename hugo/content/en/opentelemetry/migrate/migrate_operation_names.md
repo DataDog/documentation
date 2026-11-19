@@ -24,7 +24,7 @@ Datadog has introduced new logic for generating operation names for OpenTelemetr
 The `enable_operation_and_resource_name_logic_v2` feature flag controls this new logic. It is enabled by default starting in the following versions:
 
 - **Agent's Collector**: Datadog Agent v7.65+
-- **OpenTelemetry Collector**: OTel Collector v0.126.0+
+- **Upstream OpenTelemetry Collector**: v0.126.0+
 - **Agent's OTLP endpoint**: Datadog Agent v7.66+
 
 If you are using an earlier version and want to use the new logic without upgrading, you can [explicitly enable the new logic](#enabling-the-new-logic-opt-in).
@@ -63,7 +63,7 @@ For example, with the new logic active, a span previously named `go.opentelemetr
 Before enabling the new logic (either by opting-in or by upgrading to a version where it is default), remove any existing legacy span name configurations that might conflict:
 
 {{< tabs >}}
-{{% tab "OpenTelemetry Collector" %}}
+{{% tab "Upstream OpenTelemetry Collector" %}}
 
 Remove `span_name_as_resource_name` and `span_name_remappings` from your Datadog exporter and connector configurations:
 
@@ -104,12 +104,12 @@ otlp_config:
 
 ## Enabling the new logic (opt-in)
 
-If you are using a version of the Datadog Agent or OpenTelemetry Collector prior to the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable the new logic using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
+If you use a version of the Datadog Agent or upstream OpenTelemetry Collector earlier than the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable the new logic using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
 
 {{< tabs >}}
-{{% tab "OpenTelemetry Collector" %}}
+{{% tab "Upstream OpenTelemetry Collector" %}}
 
-Launch the OpenTelemetry Collector with the feature gate (requires Collector v0.98.0+):
+Launch the upstream OpenTelemetry Collector with the feature gate (requires Collector v0.98.0+):
 
 ```shell
 otelcol --config=config.yaml --feature-gates=datadog.EnableOperationAndResourceNameV2
@@ -142,9 +142,9 @@ Enable the feature for OTLP ingest using one of these methods:
 If you are using a version where this logic is enabled by default (see [Rollout Schedule](#default-rollout-schedule)), or if you have manually opted-in, you can disable it and retain the old operation name behavior using the following methods:
 
 {{< tabs >}}
-{{% tab "OpenTelemetry Collector" %}}
+{{% tab "Upstream OpenTelemetry Collector" %}}
 
-Launch the OpenTelemetry Collector with the feature gate explicitly disabled using a minus sign (`-`):
+Launch the upstream OpenTelemetry Collector with the feature gate explicitly disabled using a minus sign (`-`):
 
 ```shell
 otelcol --config=config.yaml --feature-gates=-datadog.EnableOperationAndResourceNameV2
@@ -223,7 +223,7 @@ After the new naming logic is active, take the following steps:
     If you previously used the removed configurations in [Prerequisites](#prerequisites) (`span_name_as_resource_name` or `span_name_remappings`) and need equivalent functionality, you must now use different methods:
 
 {{< tabs >}}
-{{% tab "OpenTelemetry Collector" %}}
+{{% tab "Upstream OpenTelemetry Collector" %}}
 
 Use processors in your Collector pipeline:
 

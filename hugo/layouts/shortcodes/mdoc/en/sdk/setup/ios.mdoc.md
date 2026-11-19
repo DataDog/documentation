@@ -566,7 +566,7 @@ The Datadog iOS SDK depends on the following third-party libraries:
 [2]: /error_tracking/
 [3]: /product_analytics/
 [4]: /session_replay/
-[5]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[5]: /agentic_onboarding/?tab=realusermonitoring
 [6]: /account_management/api-app-keys/#api-keys
 [7]: /account_management/api-app-keys/#client-tokens
 [9]: /real_user_monitoring/remote_configuration/

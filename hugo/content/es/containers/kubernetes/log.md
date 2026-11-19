@@ -2,20 +2,17 @@
 aliases:
 - /es/agent/kubernetes/log
 description: Configure la recopilación de registros de aplicaciones en contenedores
-  que se ejecutan en Kubernetes mediante Datadog Agent
+  que se ejecutan en Kubernetes mediante el Datadog Agent
 further_reading:
-- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
-  tag: Blog
-  text: Hacer un seguimiento de los registros de Amazon EKS en Fargate con Datadog
 - link: /agent/kubernetes/apm/
   tag: Documentación
-  text: Recopilar las trazas de su aplicación
+  text: Recopile las trazas de su aplicación
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
-  text: Recopilar sus métricas de Prometheus
+  text: Recopile sus métricas de Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Recopilar automáticamente las métricas y registros de sus aplicaciones
+  text: Recopile automáticamente las métricas y los registros de sus aplicaciones
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Limitar la recopilación de datos solo a un subconjunto de contenedores
@@ -25,6 +22,12 @@ further_reading:
 - link: /containers/troubleshooting/log-collection
   tag: Documentación
   text: Solución de problemas de recopilación de registros de contenedores
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitoree registros de Amazon EKS en Fargate con Datadog
+- link: https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/
+  tag: Blog
+  text: Administre la observabilidad de Kubernetes con DatadogInstrumentation
 - link: https://www.datadoghq.com/architecture/monitoring-container-apps-logs/
   tag: Centro de arquitectura
   text: Seguimiento de aplicaciones de contenedor - Registros
@@ -269,7 +272,7 @@ spec:
 # (...)
 ```
 
-### DatadogInstrumentation CRD {#datadoginstrumentation-crd}
+### CRD de DatadogInstrumentation {#datadoginstrumentation-crd}
 
 En lugar de anotar sus pods o implementaciones, puede usar un [`DatadogInstrumentation` recurso personalizado][23] para configurar la recopilación de registros. El siguiente ejemplo es para el contenedor `app` del Deployment `example`:
 

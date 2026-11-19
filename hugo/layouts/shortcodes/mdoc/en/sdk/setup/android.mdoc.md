@@ -495,7 +495,7 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/frontend/mobile/android
 [3]: /session_replay/mobile/
 [4]: /product_analytics/
-[5]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[5]: /agentic_onboarding/?tab=realusermonitoring
 [6]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [7]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [8]: /getting_started/tagging/using_tags/#rum--session-replay

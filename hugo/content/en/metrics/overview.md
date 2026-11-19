@@ -32,7 +32,7 @@ This section shows all of your metric sources, the additional processing and con
 
 ### Metric Sources
 
-The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Metrics Catalog][2] scoped to that source. Your Datadog metrics can originate from the following sources:
+The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click any of the sources to open the Metrics Catalog page scoped to that source. For more information, see the [Metrics Catalog documentation][2]. Your Datadog metrics can originate from the following sources:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][3] collects metrics from the hosts where it's installed and forwards them to Datadog. These metrics could originate from:
@@ -96,7 +96,7 @@ Some products incorporate standard metrics to surface insights out of the box (f
 
 ### Available Metrics
 
-The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Catalog page][26] for more detailed insights.
+The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. To manage your custom metrics volume, see the [Best Practices for Custom Metrics Governance][25] guide and the [Metrics Catalog documentation][26].
 
 ## Your metrics by source
 
@@ -115,7 +115,7 @@ Clicking on any of the options below brings you to the corresponding product's {
 
 ## Metrics available for querying
 
-Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the [Metrics Explorer][23] or [Summary][24] pages.
+Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the [Metrics Explorer][23] or [Metrics Catalog][24] pages.
 
 {{< img src="metrics/overview/available_metrics.png" alt="The metrics available for querying section of the metrics overview page" >}}
 
@@ -124,7 +124,7 @@ Use the search bar in this section to view the latest data and configuration opt
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/custom_metrics/
-[2]: /metrics/summary/
+[2]: /metrics/catalog/
 [3]: /agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /agent/guide/integration-management/
@@ -148,4 +148,4 @@ Use the search bar in this section to view the latest data and configuration opt
 [23]: https://app.datadoghq.com/metric/explorer
 [24]: https://app.datadoghq.com/metric/catalog
 [25]: /metrics/guide/custom_metrics_governance/
-[26]: /metrics/volume/
+[26]: /metrics/catalog/

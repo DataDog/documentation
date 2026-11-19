@@ -468,7 +468,7 @@ To request support for a web server that is not listed here, [fill out this form
 [6]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [7]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [8]: /integrations/content_security_policy_logs/
-[9]: /agentic_onboarding/setup/
+[9]: /agentic_onboarding/
 [10]: /real_user_monitoring/setup/install/?platform=browser
 [11]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
 [12]: /real_user_monitoring/remote_configuration/
