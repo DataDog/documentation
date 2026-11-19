@@ -111,7 +111,7 @@ Open the [{{< ui >}}Skills Library{{< /ui >}}][4] and select a skill. Use the av
 | Setting | Products |
 |---------|----------|
 | **Enable for you** | Products that use your Datadog identity, including Bits Chat, Agent Builder, and user-scoped MCP clients. Skills you create are enabled for you by default. Other skills are disabled until you enable them. |
-| **Enable for your organization** | Products that use a shared or managed identity, including Bits AI SRE investigations, Bits Code, Bits AI in Slack ambient mode, and organization-scoped MCP clients. Shared skills are disabled for the organization by default. |
+| **Enable for your organization** | Products that use a shared or managed identity, including Bits AI SRE investigations, Bits Code, and organization-scoped MCP clients. Shared skills are disabled for the organization by default. |
 
 Personal and organization settings are independent. Changing one setting does not change the other. Private skills only have the **Enable for you** setting.
 
