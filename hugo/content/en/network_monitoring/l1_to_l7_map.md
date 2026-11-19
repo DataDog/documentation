@@ -106,10 +106,10 @@ The outline color of a resource and the color of a connection line show their st
 
 - **Red**: Critical
 - **Orange**: Degraded
-- **Gray**: Unknown
-- **No color**: Healthy
+- **Green**: Healthy connection
+- **No color**: Healthy resource, or Unknown resource or connection
 
-<!-- TODO: Confirm the colors against the final screenshots. The bug bash notes, which were drafted from the code, say that degraded is yellow, unknown is uncolored, and healthy connections are green. -->
+Healthy and Unknown resources look the same on the map. To see a resource's status, hover over it or find it in the **Related resources** list in the details pane.
 
 Each group lists its resources from most to least severe status: Critical, Degraded, Healthy, then Unknown.
 
