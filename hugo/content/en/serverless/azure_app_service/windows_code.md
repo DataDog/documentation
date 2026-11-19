@@ -66,12 +66,6 @@ Additionally, if you are using the Azure Native integration, you can use the Dat
 [2]: /integrations/guide/azure-native-integration/
 
 {{% /tab %}}
-{{% tab "Java" %}}
-Support for Java Web Apps is in Preview for extension v2.4+.
-
-There are no billing implications for tracing Java Web Apps during this period.
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Installation
