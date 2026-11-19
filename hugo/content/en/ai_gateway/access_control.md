@@ -29,7 +29,7 @@ Adding a resource to another access policy does not remove access granted by the
 
 ## Access policies
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8] and create a policy.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Model access{{< /ui >}}][8] and create a policy.
 2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias and that rule's direct targets.
 3. Choose the users, teams, and service accounts, and their access level:
    - **No access**: Cannot call the policy's models or routing rules.
