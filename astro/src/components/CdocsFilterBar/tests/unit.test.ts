@@ -12,54 +12,42 @@ vi.mock("astro:transitions/client", () => ({
 }));
 
 import CdocsFilterBar from "../CdocsFilterBar";
-import type { CdocsFilterLinks } from "@lib/cdocs/filterOptionLinks";
+import { pruneManifestForClient } from "cdocs-data";
+import type { CdocContentFilter } from "@lib/cdocs/filters";
+import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
+import { customizationConfig } from "../../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
-const BARE_URL = "/dd_e2e/cdocs/custom_instrumentation/";
+const BARE_URL = "/guides/setup/";
 
-const filterLinks: CdocsFilterLinks[] = [
-  {
-    traitId: "prog_lang",
-    label: "Language",
-    options: [
-      {
-        id: "java",
-        label: "Java",
-        isSelected: true,
-        url: `${BARE_URL}?api_type=dd_api&prog_lang=java`,
-        labels: [],
-      },
-      {
-        id: "python",
-        label: "Python",
-        isSelected: false,
-        url: `${BARE_URL}?api_type=dd_api&prog_lang=python`,
-        labels: [],
-      },
-    ],
-  },
-  {
-    traitId: "api_type",
-    label: "API",
-    options: [
-      {
-        id: "otel_api",
-        label: "OpenTelemetry API",
-        isSelected: false,
-        url: `${BARE_URL}?api_type=otel_api&prog_lang=java`,
-        labels: [],
-      },
-      {
-        id: "dd_api",
-        label: "Datadog API",
-        isSelected: true,
-        url: `${BARE_URL}?api_type=dd_api&prog_lang=java`,
-        labels: [],
-      },
-    ],
-  },
+// The database options depend on the host (`<HOST>_database_options`).
+const contentFilters: CdocContentFilter[] = [
+  { trait_id: "host", option_group_id: "host_options" },
+  { trait_id: "database", option_group_id: "<HOST>_database_options" },
+  { trait_id: "os", option_group_id: "os_options" },
 ];
 
-const mount = (props = { filterLinks }) => render(h(CdocsFilterBar, props));
+const valsByTraitId: Record<string, string> = {
+  host: "aws",
+  database: "aurora",
+  os: "linux",
+};
+
+const props = {
+  bareUrl: BARE_URL,
+  contentFilters,
+  filtersManifest: pruneManifestForClient(
+    buildPageFiltersManifest(contentFilters, customizationConfig),
+  ),
+  valsByTraitId,
+};
+
+const mount = (overrides: Partial<typeof props> = {}) =>
+  render(h(CdocsFilterBar, { ...props, ...overrides }));
+
+const pillLabels = () =>
+  [
+    ...document.querySelectorAll<HTMLButtonElement>(".cdocs-filter-bar__pill"),
+  ].map((button) => button.textContent);
 
 const pill = (label: string) =>
   [
@@ -83,13 +71,13 @@ describe("CdocsFilterBar", () => {
   it("renders a labeled radiogroup of pills per filter", () => {
     mount();
     const groups = document.querySelectorAll(".cdocs-filter-bar__pills");
-    expect(groups.length).toBe(2);
+    expect(groups.length).toBe(3);
     expect(groups[0].getAttribute("role")).toBe("radiogroup");
 
     const labels = [
       ...document.querySelectorAll(".cdocs-filter-bar__label"),
     ].map((el) => el.textContent);
-    expect(labels).toEqual(["Language", "API"]);
+    expect(labels).toEqual(["Host", "Database", "Operating system"]);
 
     // The group is labelled by its heading for assistive tech.
     const labelId = document.querySelector(".cdocs-filter-bar__label")!.id;
@@ -98,54 +86,84 @@ describe("CdocsFilterBar", () => {
 
   it("marks the current value as the selected pill", () => {
     mount();
-    expect(isSelected("Java")).toBe(true);
-    expect(pill("Java").getAttribute("aria-checked")).toBe("true");
-    expect(pill("Python").getAttribute("aria-checked")).toBe("false");
-    // Second filter's resolved value drives its selection independently.
-    expect(isSelected("Datadog API")).toBe(true);
-    expect(pill("OpenTelemetry API").getAttribute("aria-checked")).toBe(
-      "false",
-    );
+    expect(isSelected("AWS")).toBe(true);
+    expect(pill("AWS").getAttribute("aria-checked")).toBe("true");
+    expect(pill("Azure").getAttribute("aria-checked")).toBe("false");
+    // Each filter's resolved value drives its selection independently.
+    expect(isSelected("Aurora")).toBe(true);
+    expect(isSelected("Linux")).toBe(true);
+    expect(pill("Windows").getAttribute("aria-checked")).toBe("false");
   });
 
   it("navigates to the clicked option's URL", async () => {
     const user = userEvent.setup();
-    window.history.replaceState({}, "", `${BARE_URL}?prog_lang=java&stale=1`);
+    window.history.replaceState({}, "", `${BARE_URL}?host=aws&stale=1`);
     mount();
-    await user.click(pill("Python"));
+    await user.click(pill("Windows"));
     expect(navigate).toHaveBeenCalledTimes(1);
     expect(navigate).toHaveBeenCalledWith(
-      `${BARE_URL}?api_type=dd_api&prog_lang=python`,
+      `${BARE_URL}?database=aurora&host=aws&os=windows`,
     );
   });
 
   it("selects the clicked pill before the new page arrives", async () => {
     const user = userEvent.setup();
     mount();
-    await user.click(pill("Python"));
+    await user.click(pill("Windows"));
 
-    expect(isSelected("Python")).toBe(true);
-    expect(pill("Python").getAttribute("aria-checked")).toBe("true");
-    expect(isSelected("Java")).toBe(false);
-    expect(pill("Java").getAttribute("aria-checked")).toBe("false");
-    // Other filters keep their selection until the new page says otherwise.
-    expect(isSelected("Datadog API")).toBe(true);
+    expect(isSelected("Windows")).toBe(true);
+    expect(pill("Windows").getAttribute("aria-checked")).toBe("true");
+    expect(isSelected("Linux")).toBe(false);
+    expect(pill("Linux").getAttribute("aria-checked")).toBe("false");
+    // Other filters keep their selection.
+    expect(isSelected("AWS")).toBe(true);
   });
 
-  it("shows the new page's selection when its props arrive", async () => {
+  it("keeps earlier clicks when another filter is clicked before the new page arrives", async () => {
     const user = userEvent.setup();
-    const { rerender } = mount();
-    await user.click(pill("Python"));
+    mount();
+    await user.click(pill("Windows"));
+    await user.click(pill("Postgres"));
 
-    // The server resolved Java after all (say, Python was dropped).
-    rerender(h(CdocsFilterBar, { filterLinks: structuredClone(filterLinks) }));
+    expect(navigate).toHaveBeenLastCalledWith(
+      `${BARE_URL}?database=postgres&host=aws&os=windows`,
+    );
+    expect(isSelected("Windows")).toBe(true);
+    expect(isSelected("Postgres")).toBe(true);
+  });
 
-    expect(isSelected("Java")).toBe(true);
-    expect(isSelected("Python")).toBe(false);
+  it("shows a dependent filter's new options before the new page arrives", async () => {
+    const user = userEvent.setup();
+    mount();
+    await user.click(pill("Azure"));
+
+    expect(navigate).toHaveBeenLastCalledWith(
+      `${BARE_URL}?database=cosmos_db&host=azure&os=linux`,
+    );
+    expect(pillLabels()).toEqual([
+      "AWS",
+      "Azure",
+      "Cosmos DB",
+      "Postgres",
+      "Linux",
+      "Windows",
+    ]);
+    expect(isSelected("Cosmos DB")).toBe(true);
+
+    await user.click(pill("Postgres"));
+    expect(navigate).toHaveBeenLastCalledWith(
+      `${BARE_URL}?database=postgres&host=azure&os=linux`,
+    );
   });
 
   it("renders nothing when there are no filters", () => {
-    mount({ filterLinks: [] });
+    mount({
+      contentFilters: [],
+      filtersManifest: pruneManifestForClient(
+        buildPageFiltersManifest([], customizationConfig),
+      ),
+      valsByTraitId: {},
+    });
     expect(document.querySelector(".cdocs-filter-bar")).toBeNull();
   });
 });

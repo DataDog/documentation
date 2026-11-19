@@ -89,6 +89,31 @@ test.describe("cdocs filterable doc (SSR)", () => {
     await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
   });
 
+  test("a click on another filter before the new page arrives keeps the first click", async ({
+    page,
+  }) => {
+    await page.goto(CDOC_URL);
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
+
+    // Hold Python's page, so the second click lands before it arrives.
+    await page.route(/prog_lang=python/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // The second click aborts the first request, which closes its route.
+      await route.continue().catch(() => {});
+    });
+
+    await pill(page, "Python").click();
+    await pill(page, "Datadog").click();
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=dd_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+    await expect(pill(page, "Datadog")).toHaveAttribute("aria-checked", "true");
+  });
+
   test("the URL's filter values are stored in localStorage, in Hugo's format", async ({
     page,
   }) => {
