@@ -33,7 +33,7 @@ ADP requires Agent version 7.84.2 or later.
 
 ## Default enablement
 
-ADP is enabled by default for Linux Agents deployed by the Datadog Operator when the Operator is installed with [`datadog-operator` Helm chart][6] version 2.33.0 or later, on all Datadog sites.
+ADP is enabled by default for Linux Agents deployed by the Datadog Operator when the Operator is installed with the [`datadog-operator` Helm chart][6] version 2.33.0 or later, on all Datadog sites.
 
 The default applies only when `spec.features.dataPlane.enabled` is not set in your `DatadogAgent` resource and the Agent is version 7.84.2 or later. An explicit `spec.features.dataPlane.enabled` setting always takes precedence.
 
