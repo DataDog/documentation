@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { resolveCdocRender } from "./resolveCdocRender";
 import type { CdocContentFilter } from "./filters";
+import { buildPageFiltersManifest } from "./pageFiltersManifest";
 
 // The catch-all cdoc route's per-request resolution: pull filter values from the
 // request URL (URL query > default), and produce the UI filters. Backed by the
@@ -21,6 +22,7 @@ const contentFilters: CdocContentFilter[] = [
 const render = (query = "") =>
   resolveCdocRender({
     contentFilters,
+    filtersManifest: buildPageFiltersManifest(contentFilters),
     searchParams: new URLSearchParams(query),
   });
 

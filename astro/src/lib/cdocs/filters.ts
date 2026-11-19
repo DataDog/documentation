@@ -2,22 +2,20 @@
  * Server-side cdocs filter resolution, backed by the real `cdocs-data` package
  * (the same package Hugo uses via `cdocs-hugo-integration`).
  *
- * Per request we:
- *   1. look up the customization config (traits/options/option groups),
- *      which is loaded and validated at build time,
- *   2. build the page's filters manifest from its `content_filters` frontmatter,
- *   3. pick each filter's active value with the precedence
+ * Per request, the route builds the page's filters manifest
+ * (`buildPageFiltersManifest`), and we:
+ *   1. pick each filter's active value with the precedence
  *      URL param > option-group default (skipping an invalid URL value),
- *   4. resolve the manifest against those values to get UI-ready options/labels.
+ *   2. settle those values (`settleValues`), the same way the filter bar and
+ *      the variant lists do, so the content always matches the selected pills,
+ *   3. return UI-ready options/labels for each shown filter.
  *
  * The resolved trait values (`valsByTraitId`) become Markdoc variables so the
  * built-in `if` tags drop non-matching content.
  */
-import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest";
-import { resolveFilters } from "cdocs-data/resolveFilters";
-import type { CustomizationConfig } from "cdocs-data";
-import configByLang from "virtual:cdocs-config";
+import type { FiltersManifest } from "cdocs-data";
 import type { ResolvedFilter } from "./types";
+import { settleValues, shownValues } from "./variants";
 
 /**
  * A `content_filters` entry as it appears in a doc's frontmatter (cdocs-data's
@@ -32,22 +30,13 @@ export interface CdocContentFilter {
   hide_if?: Array<Record<string, string[]>>;
 }
 
-const DEFAULT_LANG = "en";
-
-// The customization config arrives as plain data from `cdocsConfigPlugin`,
-// which loads and validates `customization_config/` at build time. Both
-// cdocs-data functions are imported by subpath, so the YAML loader and its
-// `fs` imports stay out of the server bundle.
-function getCustomizationConfig(lang: string): CustomizationConfig {
-  return configByLang[lang] ?? configByLang[DEFAULT_LANG];
-}
-
 export interface ResolvePageFiltersInput {
   /** The `content_filters` list from the doc's frontmatter. */
   contentFilters: CdocContentFilter[];
+  /** The page's filters manifest, from `buildPageFiltersManifest`. */
+  filtersManifest: FiltersManifest;
   /** Values parsed from the URL query string, keyed by trait id. */
   urlVals: Record<string, string>;
-  lang?: string;
 }
 
 export interface ResolvePageFiltersResult {
@@ -60,13 +49,7 @@ export interface ResolvePageFiltersResult {
 export function resolvePageFilters(
   input: ResolvePageFiltersInput,
 ): ResolvePageFiltersResult {
-  const { contentFilters, urlVals, lang = DEFAULT_LANG } = input;
-  const customizationConfig = getCustomizationConfig(lang);
-
-  const filtersManifest = buildFiltersManifest({
-    frontmatter: { title: "", content_filters: contentFilters },
-    customizationConfig,
-  });
+  const { contentFilters, filtersManifest, urlVals } = input;
 
   // Apply precedence URL > default, keeping only valid option ids.
   const selectedValsByTraitId: Record<string, string> = {};
@@ -83,16 +66,16 @@ export function resolvePageFilters(
     if (chosen != null) selectedValsByTraitId[traitId] = chosen;
   }
 
-  const resolved = resolveFilters({
-    valsByTraitId: selectedValsByTraitId,
+  const combination = settleValues(
     filtersManifest,
-  });
+    contentFilters,
+    selectedValsByTraitId,
+  );
 
   const resolvedFilters: ResolvedFilter[] = [];
-  const valsByTraitId: Record<string, string> = {};
   for (const filter of contentFilters) {
-    const entry = resolved[filter.trait_id];
-    if (!entry || !entry.isShown) continue;
+    const entry = combination.resolvedFilters[filter.trait_id];
+    if (!entry.isShown) continue;
     resolvedFilters.push({
       traitId: entry.id,
       label: entry.label,
@@ -100,8 +83,7 @@ export function resolvePageFilters(
       defaultValue: entry.defaultValue,
       currentValue: entry.currentValue,
     });
-    valsByTraitId[entry.id] = entry.currentValue;
   }
 
-  return { resolvedFilters, valsByTraitId };
+  return { resolvedFilters, valsByTraitId: shownValues(combination) };
 }

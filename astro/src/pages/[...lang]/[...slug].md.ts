@@ -109,8 +109,10 @@ export const GET: APIRoute = async ({ params, url, site }) => {
   if (contentFilters) {
     // Cdoc: resolve filters and render through the cdocs plaintext pipeline,
     // which prepends the title itself.
+    const filtersManifest = buildPageFiltersManifest(contentFilters);
     const { valsByTraitId } = resolveCdocRender({
       contentFilters,
+      filtersManifest,
       searchParams: url.searchParams,
     });
     const bareUrl = `/${slug}/`;
@@ -118,7 +120,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       cdocsFilterBarNodes(
         buildFilterOptionLinks({
           bareUrl,
-          filtersManifest: buildPageFiltersManifest(contentFilters),
+          filtersManifest,
           contentFilters,
           valsByTraitId,
         }),

@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { resolvePageFilters, type CdocContentFilter } from "./filters";
+import { buildPageFiltersManifest } from "./pageFiltersManifest";
+import { customizationConfig as dependentFiltersConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 // Exercises the real cdocs-data pipeline (buildFiltersManifest ->
 // resolveFilters) against the checked-in customization_config YAML, which
@@ -18,7 +20,11 @@ const contentFilters: CdocContentFilter[] = [
 ];
 
 const resolve = (urlVals: Record<string, string> = {}) =>
-  resolvePageFilters({ contentFilters, urlVals });
+  resolvePageFilters({
+    contentFilters,
+    filtersManifest: buildPageFiltersManifest(contentFilters),
+    urlVals,
+  });
 
 describe("resolvePageFilters (backed by cdocs-data)", () => {
   it("falls back to option-group defaults when nothing is set", () => {
@@ -56,16 +62,51 @@ describe("resolvePageFilters (backed by cdocs-data)", () => {
   });
 
   it("honors a frontmatter default_value override", () => {
+    const overriddenFilters: CdocContentFilter[] = [
+      {
+        trait_id: "prog_lang",
+        option_group_id: "custom_instrumentation_language_options",
+        default_value: "python",
+      },
+    ];
     const { valsByTraitId } = resolvePageFilters({
       urlVals: {},
-      contentFilters: [
-        {
-          trait_id: "prog_lang",
-          option_group_id: "custom_instrumentation_language_options",
-          default_value: "python",
-        },
-      ],
+      contentFilters: overriddenFilters,
+      filtersManifest: buildPageFiltersManifest(overriddenFilters),
     });
     expect(valsByTraitId.prog_lang).toBe("python");
+  });
+
+  it("settles a reset that changes whether an earlier filter is shown", () => {
+    // `os` is checked first, while `database` is still aurora. Then the Azure
+    // host resets `database` to Cosmos DB, which shows `os` after all.
+    const chainedFilters: CdocContentFilter[] = [
+      {
+        trait_id: "os",
+        option_group_id: "os_options",
+        show_if: [{ database: ["cosmos_db"] }],
+      },
+      { trait_id: "host", option_group_id: "host_options" },
+      { trait_id: "database", option_group_id: "<HOST>_database_options" },
+    ];
+    const { valsByTraitId, resolvedFilters } = resolvePageFilters({
+      urlVals: { host: "azure", database: "aurora" },
+      contentFilters: chainedFilters,
+      filtersManifest: buildPageFiltersManifest(
+        chainedFilters,
+        dependentFiltersConfig,
+      ),
+    });
+
+    expect(valsByTraitId).toEqual({
+      os: "linux",
+      host: "azure",
+      database: "cosmos_db",
+    });
+    expect(resolvedFilters.map((filter) => filter.traitId)).toEqual([
+      "os",
+      "host",
+      "database",
+    ]);
   });
 });
