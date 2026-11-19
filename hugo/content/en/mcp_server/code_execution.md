@@ -34,6 +34,13 @@ With code execution, the agent expresses the same investigation as a single scri
 
 The MCP Server runs the script and returns only the joined result. The agent completes the investigation in one tool call instead of one call per service.
 
+## Query Teams data
+
+Code execution can read Teams data, such as team members, links, and notification rules. An agent can join that data with service ownership from the Catalog in the same script. For example:
+
+- Which team owns the service with the most errors in the past hour, and who's on it?
+- For `payments-team`, list its team links and notification rules, and summarize how to reach the team.
+
 ## Available tools
 
 The `code-exec` toolset provides:
