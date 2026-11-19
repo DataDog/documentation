@@ -14,20 +14,20 @@ further_reading:
 
 ## Overview
 
-Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs maintained by the OpenTelemetry project.
-
 DDOT SDKs are Datadog's version of OpenTelemetry SDKs and are in Preview. They use OpenTelemetry APIs, Semantic Conventions, OTLP, standard configuration, and deployment tooling, and add Datadog-specific capabilities.
 
-Each application process should use one SDK implementation to avoid duplicate spans.
+Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs maintained by the OpenTelemetry project.
+
+Use one SDK setup per signal in each application process to avoid duplicate instrumentation.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/upstream_otel_sdks/" >}}
-    <h3>Using Upstream OTel SDKs</h3>
-    Install SDKs maintained by the OpenTelemetry project and send traces, metrics, and logs to Datadog with OTLP. Use the OpenTelemetry Operator, application builds, or deployment automation.
-    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/ddot_sdks/" >}}
     <h3>Using DDOT SDKs</h3>
     Deploy Datadog's version of OpenTelemetry SDKs with standard OpenTelemetry tooling. DDOT SDKs add capabilities such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. They are available for Java, .NET, Node.js, Python, and Go.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/upstream_otel_sdks/" >}}
+    <h3>Using Upstream OpenTelemetry SDKs</h3>
+    Install SDKs maintained by the OpenTelemetry project and send traces, metrics, and logs to Datadog with OTLP. Use the OpenTelemetry Operator, application builds, or deployment automation.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

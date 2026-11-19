@@ -791,7 +791,7 @@ Instrument your application with a Datadog SDK or an OpenTelemetry SDK. Either o
 
 ### Datadog SDK
 
-Turn on OTLP export in the Datadog SDK for your language, as described in [Export Traces from Datadog SDKs in OTLP Format][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [upstream OpenTelemetry SDK](#opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
+Turn on OTLP export in the Datadog SDK for your language, as described in [DDOT SDK OTLP trace export][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [upstream OpenTelemetry SDK](#opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
 
 ### OpenTelemetry SDK
 
@@ -954,7 +954,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
-[66]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
+[66]: /opentelemetry/instrument/ddot_sdks/#enable-otlp-trace-export
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline

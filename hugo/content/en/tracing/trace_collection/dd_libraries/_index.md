@@ -14,7 +14,7 @@ To automatically instrument your application with Datadog libraries:
 1. [Install and configure the Agent](#install-and-configure-the-agent).
 2. [Add the Datadog SDK to your code](#instrument-your-application).
 
-To use a DDOT SDK and export traces over OTLP to an OpenTelemetry Collector instead of the Datadog Agent, see [Using DDOT SDKs][16].
+To export traces over OTLP to an OpenTelemetry Collector instead of the Datadog Agent, see [Using DDOT SDKs][16].
 
 ## Install and configure the Agent
 

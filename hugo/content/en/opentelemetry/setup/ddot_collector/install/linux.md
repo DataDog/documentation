@@ -31,7 +31,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and upstream OpenTelemetry SDK + Agent's Collector configurations. In this route, the Agent's Collector receives and forwards OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both DDOT SDK + Agent's Collector and upstream OpenTelemetry SDK + Agent's Collector configurations. In this route, the Agent's Collector receives and forwards OTLP metrics and logs.</div>
 
 ### Installation
 

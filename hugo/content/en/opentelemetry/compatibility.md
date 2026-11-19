@@ -17,22 +17,43 @@ Choose an SDK and a Collector or Datadog Agent to process and forward telemetry.
 
 | Setup Type                                           | API                     | SDK         | Collector/Agent                               |
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
-| [**OTel SDK + DDOT Collector**][47] (Preview)        | OTel API                | OTel SDK    | DDOT Collector (the Datadog Agent is optional) |
 | [**DDOT SDK + OpenTelemetry Collector**][49] (Preview) | OTel API              | DDOT SDK    | OpenTelemetry Collector (the Datadog Agent is optional) |
+| [**Upstream OpenTelemetry SDK + DDOT Collector**][47] (Preview)        | OTel API                | Upstream OpenTelemetry SDK | DDOT Collector (the Datadog Agent is optional) |
 | [**Datadog SDK + Agent's Collector**][29]            | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
-| [**OTel SDK + Agent's Collector**][29]               | OTel API                | OTel SDK    | Agent's Collector (runs alongside the Datadog Agent) |
-| [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
-| [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
+| [**Upstream OpenTelemetry SDK + Agent's Collector**][29]               | OTel API                | Upstream OpenTelemetry SDK | Agent's Collector (runs alongside the Datadog Agent) |
+| [**Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | Upstream OpenTelemetry SDK | OpenTelemetry Collector Contrib               |
+| [**Direct OTLP Ingest**][28]                         | OTel API                | Upstream OpenTelemetry SDK | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
 Use the tables below to check feature availability for your SDK and telemetry route.
 
-### Upstream SDK and Datadog SDK setups
+### DDOT SDK setups
 
-This table covers upstream OpenTelemetry SDKs and Datadog SDKs using Datadog semantics and protocols. For Datadog SDKs in OpenTelemetry mode, see [DDOT SDK setups](#ddot-sdk-setups).
+DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Datadog Agent is optional for these signals.
 
-| Feature | OTel SDK + DDOT Collector (Preview) | Datadog SDK + Agent's Collector | OTel SDK + Agent's Collector | OTel SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
+Capabilities and configuration requirements vary by language and SDK version.
+
+| Capability | Without the Datadog Agent | With the Datadog Agent |
+|---|---|---|
+| [Core traces, metrics, and logs][50] | {{< X >}} | {{< X >}} |
+| [Live Debugger][55] |  | {{< X >}} |
+| [Dynamic Instrumentation][56] |  | {{< X >}} |
+| [Remotely configured head sampling][57] |  | {{< X >}} |
+| [SQL query-level DBM correlation][51] | {{< X >}} | {{< X >}} |
+| [Data Streams Monitoring][15] | {{< X >}} | {{< X >}} |
+| [Feature Flag Management][52] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [App and API Protection][11] (AAP) | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [Code Security][53] (IAST, SCA) | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [Continuous Profiler][12] | Not supported | Not supported |
+
+Datadog-specific capabilities can also use OTLP. Some require product-specific configuration or additional data destinations. See the linked product documentation for setup requirements.
+
+### Upstream OpenTelemetry SDKs and Datadog SDKs with Datadog trace export
+
+This table covers upstream OpenTelemetry SDKs and Datadog SDKs that send traces to the Datadog Agent using Datadog semantics and protocols.
+
+| Feature | Upstream OpenTelemetry SDK + DDOT Collector (Preview) | Datadog SDK + Agent's Collector | Upstream OpenTelemetry SDK + Agent's Collector | Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
 |---|---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -57,31 +78,9 @@ This table covers upstream OpenTelemetry SDKs and Datadog SDKs using Datadog sem
 
 **Note**: Features that need the Datadog Agent, such as [Cloud Network Monitoring][21], [Live Container Monitoring][46], [Live Processes][16], and [Universal Service Monitoring][17], work with the DDOT Collector when you also run the Agent. See [Add the Datadog Agent][48].
 
-### DDOT SDK setups
-
-DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Datadog Agent is optional for these signals.
-
-Capabilities and configuration requirements vary by language and SDK version. The table describes whether the SDK needs a Datadog Agent for configuration or data delivery.
-
-| Capability | Without the Datadog Agent | With the Datadog Agent |
-|---|---|---|
-| [Core traces, metrics, and logs][50] | {{< X >}} | {{< X >}} |
-| [Live Debugger][55] |  | {{< X >}} |
-| [Dynamic Instrumentation][56] |  | {{< X >}} |
-| [Remotely configured head sampling][57] |  | {{< X >}} |
-| [SQL query-level DBM correlation][51] | {{< X >}} | {{< X >}} |
-| [Data Streams Monitoring][15] | {{< X >}} | {{< X >}} |
-| [Feature Flag Management][52] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| [App and API Protection][11] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| [Code Security][53] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| [Continuous Profiler][12] | Not supported | Not supported |
-
-Datadog-specific capabilities can use product-specific configuration and data destinations in addition to OTLP. See the linked product documentation for setup requirements, including [Database Monitoring collection][54].
-
-
 ## API support
 
-Datadog SDKs support the OpenTelemetry Traces, Metrics, and Logs APIs. Select a language for setup guides and support details.
+DDOT SDKs support the OpenTelemetry Traces, Metrics, and Logs APIs. Select a language for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
@@ -102,7 +101,7 @@ OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.
 ### Runtime metrics
 
 - **Datadog SDKs in Datadog mode**: Emit [runtime metrics][23] using DogStatsD (UDP port 8125). Enable DogStatsD in the Datadog Agent.
-- **Datadog SDKs in OpenTelemetry mode (DDOT SDKs)**: Emit [OpenTelemetry runtime metrics][1] over OTLP.
+- **DDOT SDKs**: Supported languages and versions emit runtime metrics over OTLP. See [OTLP runtime metrics prerequisites][58].
 - **Upstream OpenTelemetry SDKs**: Emit [OpenTelemetry runtime metrics][1], typically over OTLP (port 4317/4318).
 
 ### Real User Monitoring (RUM)
@@ -139,9 +138,7 @@ While the OpenTelemetry Collector can be deployed in many environments, certain 
 
 When using Datadog and OpenTelemetry together, Datadog recommends the following best practices to ensure optimal performance and to avoid potential issues:
 
-- **Avoid mixed instrumentation**: In most cases, you should not use both a Datadog SDK and an upstream OpenTelemetry SDK in the same application, as this leads to undefined behavior.
-  - **Exception**: Support for some languages, such as Python, requires both the Datadog SDK and upstream OpenTelemetry SDK packages to be installed.
-  - Always follow the specific [language-specific instrumentation documentation][8] to ensure you are using the correct and supported setup.
+- **Avoid mixed instrumentation**: Do not activate a DDOT SDK and an upstream OpenTelemetry SDK for the same signal in one process. Follow the [language-specific instrumentation documentation][8] for required SDK components and dependencies.
 - **Configure Agent and Collector coexistence**: The Datadog Agent and an OpenTelemetry Collector can run on the same host. Configure their receiver ports and telemetry collection to avoid port conflicts and duplicate data. For a DDOT Collector deployment with an optional Agent, see [Add the Datadog Agent][48].
 
 ## Further reading
@@ -201,7 +198,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [51]: /database_monitoring/connect_dbm_and_apm/
 [52]: /feature_flags/
 [53]: /security/code_security/
-[54]: /database_monitoring/#getting-started
 [55]: /tracing/live_debugger/
 [56]: /tracing/trace_collection/dynamic_instrumentation/
 [57]: /tracing/trace_pipeline/ingestion_controls/
+[58]: /tracing/metrics/runtime_metrics/#export-runtime-metrics-over-otlp

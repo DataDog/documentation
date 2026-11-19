@@ -722,21 +722,16 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Using Upstream OTel SDKs
-      url: /opentelemetry/instrument/upstream_otel_sdks/
-      identifier: otel_sdks
-      parent: otel-instrumentation
-      weight: 301
-    - name: Using DDOT SDKs
+    - name: DDOT SDKs
       url: /opentelemetry/instrument/ddot_sdks/
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
+      weight: 301
+    - name: Upstream OpenTelemetry SDKs
+      url: /opentelemetry/instrument/upstream_otel_sdks/
+      identifier: otel_sdks
+      parent: otel-instrumentation
       weight: 302
-    - name: OTLP Export
-      url: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
-      identifier: otel-otlp-export-dd-sdk
-      parent: otel-dd-sdk-parent
-      weight: 3020
     - name: APIs
       url: /opentelemetry/instrument/ddot_sdks/api_support/
       identifier: otel-api-dd-sdk

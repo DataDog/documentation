@@ -9,9 +9,9 @@ further_reading:
   - link: "/serverless/azure_container_apps/"
     tag: "Documentation"
     text: "Azure Container Apps"
-  - link: "/opentelemetry/instrument/ddot_sdks/otlp_trace_export/"
+  - link: "/opentelemetry/instrument/ddot_sdks/#enable-otlp-trace-export"
     tag: "Documentation"
-    text: "Export Traces from Datadog SDKs in OTLP Format"
+    text: "DDOT SDK OTLP trace export"
   - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps"
     tag: "Documentation"
     text: "Send Azure Container Apps traces to Datadog with OTLP"
@@ -74,7 +74,7 @@ This page documents Java, the only Datadog SDK that exports OTLP traces over gRP
 | Ruby | Not supported |
 | PHP | Not supported |
 
-For the latest protocol support, see [Export Traces from Datadog SDKs in OTLP Format][6].
+For the latest protocol support, see [DDOT SDK OTLP trace export][6].
 
 For other languages, select **OpenTelemetry SDK** at the top of this page, or use [`serverless-init`][2].
 {% /if %}
@@ -262,7 +262,7 @@ You may see repeated errors such as `Failed to upload batch to http://localhost:
 ## Limitations
 
 {% if equals($api_type, "dd_api") %}
-- OTLP trace export from Datadog SDKs supports core APM functionality. Other Datadog features may not be supported, or may require the Datadog Agent. See [Export Traces from Datadog SDKs in OTLP Format][6].
+- OTLP trace export from Datadog SDKs supports core APM functionality. Other Datadog features may not be supported, or may require the Datadog Agent. See [DDOT SDK OTLP trace export][6].
 - The managed agent accepts only the gRPC protocol, which limits the SDKs you can use (see [Language support](#language-support)).
 {% /if %}
 {% if equals($api_type, "otel_api") %}
@@ -277,7 +277,7 @@ For limitations of the managed OpenTelemetry agent itself, see the [Azure docume
 [3]: /opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps
 [4]: /account_management/api-app-keys/
 [5]: /getting_started/site/
-[6]: /opentelemetry/instrument/ddot_sdks/otlp_trace_export/
+[6]: /opentelemetry/instrument/ddot_sdks/#enable-otlp-trace-export
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/opentelemetry-export-datadog
 [8]: https://learn.microsoft.com/en-us/azure/container-apps/environment-variables
 [9]: /tracing/trace_explorer/
