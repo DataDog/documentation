@@ -6280,7 +6280,7 @@
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
   },
   "QueryAggregatedWaterfall": {
-    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
+    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view\ninstances.",
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."

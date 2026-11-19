@@ -7038,7 +7038,9 @@ components:
         - attributes
       type: object
     AggregatedResource:
-      description: Aggregated performance statistics for a single network resource across sampled view instances.
+      description: |-
+        Aggregated performance statistics for a single network resource across sampled view
+        instances.
       properties:
         avg_duration_ms:
           description: Average total duration in milliseconds.
@@ -7068,18 +7070,24 @@ components:
           maximum: 2147483647
           type: integer
         global_p75_duration_ms:
-          description: 75th percentile duration across all view names in the application, present when include_global_appearance is true.
+          description: |-
+            75th percentile duration across all view names in the application, present when
+            include_global_appearance is true.
           example: 500.0
           format: double
           type: number
         global_view_name_count:
-          description: Number of distinct view names in the application that load this resource, present when include_global_appearance is true.
+          description: |-
+            Number of distinct view names in the application that load this resource, present when
+            include_global_appearance is true.
           example: 3
           format: int32
           maximum: 2147483647
           type: integer
         global_view_name_pct:
-          description: Percentage of distinct view names in the application that load this resource, present when include_global_appearance is true.
+          description: |-
+            Percentage of distinct view names in the application that load this resource, present when
+            include_global_appearance is true.
           example: 30.0
           format: double
           type: number
@@ -7286,17 +7294,22 @@ components:
         application_id:
           description: The RUM application ID to analyze.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
         filter:
           description: RUM query string to filter events (for example, @session.type:user @geo.country:US).
           example: "@session.type:user"
+          maxLength: 10000
           type: string
         from:
-          description: Start of the time range as a Unix timestamp in seconds.
+          description: |-
+            Start of the time range as a Unix timestamp in seconds. Must be less than `to`;
+            the range cannot exceed 7 days.
           example: 1762437564
           format: int64
+          maximum: 4102444800
           type: integer
         include_global_appearance:
           description: When true, enriches each resource with cross-view appearance statistics.
@@ -7310,13 +7323,16 @@ components:
           minimum: 1
           type: integer
         to:
-          description: End of the time range as a Unix timestamp in seconds.
+          description: |-
+            End of the time range as a Unix timestamp in seconds. Must be greater than `from`.
           example: 1762523964
           format: int64
+          maximum: 4102444800
           type: integer
         view_name:
           description: The RUM view name to analyze (for example, /account/login).
           example: /account/login(/:type)
+          maxLength: 1000
           type: string
       required:
         - application_id
@@ -7358,6 +7374,7 @@ components:
         application_id:
           description: The RUM application ID that was analyzed.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedWaterfallResponseAttributesCriteria"
@@ -7378,6 +7395,7 @@ components:
             - dfe318df-4ae5-44b8-9fe2-4107885e1a46
           items:
             type: string
+          maxItems: 50
           type: array
         to:
           description: End of the analyzed time range as a Unix timestamp in seconds.
@@ -7411,7 +7429,9 @@ components:
         - resources
       type: object
     AggregatedWaterfallResponseAttributesCriteria:
-      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      description: |-
+        Performance criteria used to filter view instances by a metric threshold, or null if no
+        criteria were applied.
       nullable: true
       properties:
         max:
@@ -60600,8 +60620,6 @@ components:
           format: date-time
           nullable: true
           type: string
-        bucketing_mode:
-          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
@@ -60685,17 +60703,6 @@ components:
         - value_type
         - variants
       type: object
-    FeatureFlagBucketingMode:
-      description: >-
-        How subjects are assigned to variants. `DATADOG` is the native scheme. `EPPO` reproduces the assignments that Eppo made for a flag migrated from Eppo, so its subjects keep their variants. Set when the flag is created and never changed.
-      enum:
-        - DATADOG
-        - EPPO
-      example: DATADOG
-      type: string
-      x-enum-varnames:
-        - DATADOG
-        - EPPO
     FeatureFlagChangeEvent:
       description: A change made to a feature flag.
       properties:
@@ -61176,8 +61183,6 @@ components:
           format: date-time
           nullable: true
           type: string
-        bucketing_mode:
-          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
@@ -247749,7 +247754,8 @@ paths:
   /api/v2/rum/query/insight/aggregated_waterfall:
     post:
       description: |-
-        Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.
+        Get aggregated network resource waterfall data for a RUM view, sampled across multiple view
+        instances.
       operationId: QueryAggregatedWaterfall
       requestBody:
         content:
@@ -247841,6 +247847,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Query aggregated waterfall
       tags: ["RUM Insights"]
+      x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
         operator: OR

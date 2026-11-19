@@ -20,3 +20,9 @@ entries:
       - QueryAggregatedLongTasks
       - QueryAggregatedWaterfall
     title: Document QueryAggregatedLongTasks input bounds and response types
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41901
+    operations:
+      - QueryAggregatedWaterfall
+    title: Document QueryAggregatedWaterfall input bounds and response caps
