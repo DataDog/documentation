@@ -62,6 +62,16 @@ describe("findUncontainedPaths", () => {
     ]);
   });
 
+  it("allows llms.txt files in any folder, and no other files there", () => {
+    const offenders = findUncontainedPaths([
+      "dd_e2e/llms.txt",
+      "dd_e2e/cdocs/part_1/llms.txt",
+      "dd_e2e/notes.txt",
+      "dd_e2e/llms.txt.bak",
+    ]);
+    expect(offenders).toEqual(["dd_e2e/notes.txt", "dd_e2e/llms.txt.bak"]);
+  });
+
   it("allows every locale-prefixed /api subtree, plus the _astro assets", () => {
     const offenders = findUncontainedPaths([
       "api/latest/dashboards/index.html",

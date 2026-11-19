@@ -14,11 +14,16 @@
  * Every variant of a page carries a hash of the page's sources instead (see
  * `hashCdocsSource`).
  *
- * Every variant is a root page. A section would get its own `llms.txt` file
- * next to the page, outside `api/`, where the build doesn't emit files yet.
+ * Each top folder in the content collection, such as `tracing/`, is a
+ * section, with its own `llms.txt` file in that folder. A page with no folder
+ * is a root page.
  */
 
-import type { PlaintextPage, PlaintextPageSource } from "./types";
+import type {
+  PlaintextPage,
+  PlaintextPageSource,
+  PlaintextSection,
+} from "./types";
 import { getCdocsEntries, getCdocsPages } from "@lib/cdocs/pageLists";
 import type { CdocsPage } from "@lib/cdocs/pageLists";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
@@ -30,6 +35,36 @@ const DOCS_CRUMBS = ["Docs"];
 const resolvePartial = makeBundledPartialResolver();
 
 async function listRootPages(): Promise<PlaintextPage[]> {
+  const pagesByTopFolder = await listPagesByTopFolder();
+  return pagesByTopFolder.get("") ?? [];
+}
+
+async function listSections(): Promise<PlaintextSection[]> {
+  const pagesByTopFolder = await listPagesByTopFolder();
+  return [...pagesByTopFolder.keys()]
+    .filter(Boolean)
+    .sort()
+    .map((topFolder) => ({
+      title: topFolder,
+      llmsTxtPath: `/${topFolder}/llms.txt`,
+      pages: pagesByTopFolder.get(topFolder)!,
+    }));
+}
+
+/** Every variant's page, keyed by its page's top folder, or "" for none. */
+async function listPagesByTopFolder(): Promise<Map<string, PlaintextPage[]>> {
+  const pagesByTopFolder = new Map<string, PlaintextPage[]>();
+  for (const page of await listVariantPages()) {
+    const pathSegments = page.urlPath.split("?")[0].split("/").slice(1);
+    const topFolder = pathSegments.length > 1 ? pathSegments[0] : "";
+    const topFolderPages = pagesByTopFolder.get(topFolder) ?? [];
+    topFolderPages.push(page);
+    pagesByTopFolder.set(topFolder, topFolderPages);
+  }
+  return pagesByTopFolder;
+}
+
+async function listVariantPages(): Promise<PlaintextPage[]> {
   const entries = await getCdocsEntries();
   const entriesById = new Map(entries.map((entry) => [entry.id, entry]));
 
@@ -72,5 +107,5 @@ function plaintextUrlPath(htmlUrl: string): string {
 export const cdocsPageSource: PlaintextPageSource = {
   title: "Docs",
   listRootPages,
-  listSections: async () => [],
+  listSections,
 };

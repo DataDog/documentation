@@ -9,8 +9,8 @@
  * build itself — that guard already runs inside `astro build` every time.
  *
  * The two regexes below mirror `CONTAINED_PATH` and the category-directory
- * shape in staticApiGuard.ts, and `ALLOWED_ROOT_FILES` mirrors the guard's set
- * of the same name. Kept duplicated (rather than imported) because this script
+ * shape in staticApiGuard.ts, and `ALLOWED_ROOT_FILES` and `LLMS_TXT_FILE`
+ * mirror the guard's constants of the same names. Kept duplicated (rather than imported) because this script
  * runs as plain Node outside Vite/Astro's TS-aware module graph. Keep them in
  * sync if either file changes.
  *
@@ -23,6 +23,8 @@ const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
 // The Cdocs sitemap (`CDOCS_SITEMAP_FILE`), which must be at the root to list
 // URLs outside `api/`.
 const ALLOWED_ROOT_FILES = new Set(["sitemap-cdocs.xml"]);
+// An llms.txt detail file in any folder, such as `tracing/part_1/llms.txt`.
+const LLMS_TXT_FILE = /^(?:[^/]+\/)+llms\.txt$/;
 
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));
@@ -64,12 +66,14 @@ async function main() {
 
   const uncontained = filePaths.filter(
     (filePath) =>
-      !CONTAINED_PATH.test(filePath) && !ALLOWED_ROOT_FILES.has(filePath),
+      !CONTAINED_PATH.test(filePath) &&
+      !ALLOWED_ROOT_FILES.has(filePath) &&
+      !LLMS_TXT_FILE.test(filePath),
   );
   if (uncontained.length > 0) {
     problems.push(
       `Containment guard: the following emitted files fall outside ` +
-        `api/ and {fr,ja,ko,es}/api/, and aren't allowed root files:\n` +
+        `api/ and {fr,ja,ko,es}/api/, and aren't allowed sitemap or llms.txt files:\n` +
         uncontained.map((filePath) => `  - ${filePath}`).join("\n"),
     );
   }

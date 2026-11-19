@@ -6,8 +6,13 @@ import { buildCdocsSitemapXml } from "@lib/sitemap/cdocsSitemap";
 const SITE = "https://docs.datadoghq.com";
 const CUSTOM_INSTRUMENTATION_MD = "/dd_e2e/cdocs/custom_instrumentation.md";
 
+async function allPages() {
+  const sections = await cdocsPageSource.listSections();
+  return sections.flatMap((section) => section.pages);
+}
+
 async function pagesFor(urlPathPrefix: string) {
-  const pages = await cdocsPageSource.listRootPages();
+  const pages = await allPages();
   return pages.filter(
     (page) =>
       page.urlPath === urlPathPrefix ||
@@ -46,7 +51,7 @@ describe("cdocsPageSource", () => {
   });
 
   it("gives every variant of a page the same hash, and each page its own", async () => {
-    const pages = await cdocsPageSource.listRootPages();
+    const pages = await allPages();
     const hashesByPagePath = new Map<string, Set<string | undefined>>();
     for (const page of pages) {
       const pagePath = page.urlPath.split("?")[0];
@@ -65,8 +70,14 @@ describe("cdocsPageSource", () => {
     expect(new Set(pageHashes).size).toBe(pageHashes.length);
   });
 
-  it("has no sections, since a section's llms.txt file would be outside api/", async () => {
-    expect(await cdocsPageSource.listSections()).toEqual([]);
+  it("has a section for each top folder in the content collection, and no root pages", async () => {
+    const sections = await cdocsPageSource.listSections();
+
+    expect(
+      sections.map(({ title, llmsTxtPath }) => ({ title, llmsTxtPath })),
+    ).toEqual([{ title: "dd_e2e", llmsTxtPath: "/dd_e2e/llms.txt" }]);
+    expect(sections[0].pages).toEqual(await allPages());
+    expect(await cdocsPageSource.listRootPages()).toEqual([]);
   });
 
   it("lists the same variants as the sitemap", async () => {
@@ -75,7 +86,7 @@ describe("cdocsPageSource", () => {
         /<loc>(.*?)<\/loc>/g,
       ),
     ].map(([, loc]) => new URL(loc.replaceAll("&amp;", "&")).href);
-    const sourcePaths = (await cdocsPageSource.listRootPages()).map((page) => {
+    const sourcePaths = (await allPages()).map((page) => {
       const [path, query] = page.urlPath.split("?");
       const htmlPath = path.replace(/\.md$/, "/");
       return new URL(query ? `${htmlPath}?${query}` : htmlPath, SITE).href;

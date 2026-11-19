@@ -5,8 +5,8 @@ import { absoluteUrl } from "../site/siteUrl";
 
 /**
  * Firm ceiling on any single generated llms.txt file's length, matching the
- * `html-to-mdoc` default. A section detail file that exceeds this is
- * split into numbered `part_N` files.
+ * `html-to-mdoc` default. A section detail file that exceeds this is split by
+ * subfolder, then into numbered `part_N` files (see `addFolderFiles`).
  */
 export const DEFAULT_HARD_CHAR_LIMIT = 50_000;
 
@@ -70,7 +70,7 @@ export function buildLlmsTree(
     indexLines.push("");
 
     for (const section of sections) {
-      addSectionDetailFiles(section, site, hardCharLimit, detailFiles);
+      addFolderFiles(section, site, hardCharLimit, detailFiles);
     }
   }
 
@@ -119,34 +119,156 @@ function partPath(llmsTxtPath: string, partNumber: number): string {
   return llmsTxtPath.replace(/\/llms\.txt$/, `/part_${partNumber}/llms.txt`);
 }
 
-function addSectionDetailFiles(
-  section: PlaintextSection,
+/** The pages listed in one detail file, and the file's path. */
+interface FolderListing {
+  title: string;
+  llmsTxtPath: string;
+  pages: PlaintextPage[];
+}
+
+/**
+ * Writes a folder's detail file, splitting it when it's too long, the same way
+ * as `html-to-mdoc`.
+ *
+ * Splitting is folder-first: pages in a subfolder of the file's folder move to
+ * that subfolder's own detail file, which splits the same way. The folder's
+ * file keeps its own pages and links to each subfolder's file. When there's no
+ * subfolder left to split on, or the folder's file is still too long, its own
+ * pages move to numbered `part_N` files instead.
+ */
+function addFolderFiles(
+  folder: FolderListing,
   site: string | URL,
   hardCharLimit: number,
   detailFiles: Map<string, string>,
 ): void {
-  const full = detailContents(section.title, section.pages, site);
+  const full = detailContents(folder.title, folder.pages, site);
   if (full.length <= hardCharLimit) {
-    detailFiles.set(section.llmsTxtPath, full);
+    detailFiles.set(folder.llmsTxtPath, full);
     return;
   }
 
-  // Too long: split into numbered part files, and turn the section's own file
-  // into an index of links to those parts.
-  const chunks = chunkPagesToFit(
-    section.title,
-    section.pages,
+  const { ownPages, pagesBySubfolder } = groupBySubfolder(folder);
+  const subfolders = [...pagesBySubfolder.keys()].sort();
+  const canSplitByFolder =
+    subfolders.length > 1 || (subfolders.length === 1 && ownPages.length > 0);
+  if (!canSplitByFolder) {
+    addPartFiles(folder, folder.pages, [], site, hardCharLimit, detailFiles);
+    return;
+  }
+
+  const folderPath = folderOf(folder.llmsTxtPath);
+  const subfolderLines: string[] = [];
+  for (const subfolder of subfolders) {
+    const llmsTxtPath = `${folderPath}${subfolder}/llms.txt`;
+    addFolderFiles(
+      {
+        title: subfolder,
+        llmsTxtPath,
+        pages: pagesBySubfolder.get(subfolder)!,
+      },
+      site,
+      hardCharLimit,
+      detailFiles,
+    );
+    subfolderLines.push(
+      `## ${subfolder}`,
+      "",
+      `- [Detailed page listing](${absoluteUrl(llmsTxtPath, site)})`,
+      "",
+    );
+  }
+
+  const index = listingContents(
+    folder.title,
+    ownPages.map((page) => pageLine(page, site)),
+    subfolderLines,
+  );
+  if (index.length <= hardCharLimit) {
+    detailFiles.set(folder.llmsTxtPath, index);
+    return;
+  }
+  addPartFiles(
+    folder,
+    ownPages,
+    subfolderLines,
     site,
     hardCharLimit,
+    detailFiles,
   );
-  const indexLines = [`# ${section.title}`, ""];
-  chunks.forEach((chunk, i) => {
+}
+
+/**
+ * Splits pages into numbered part files, and turns the folder's own file into
+ * an index of links to those parts, followed by `trailingLines`.
+ */
+function addPartFiles(
+  folder: FolderListing,
+  pages: PlaintextPage[],
+  trailingLines: string[],
+  site: string | URL,
+  hardCharLimit: number,
+  detailFiles: Map<string, string>,
+): void {
+  const chunks = chunkPagesToFit(folder.title, pages, site, hardCharLimit);
+  const partLines = chunks.map((chunk, i) => {
     const partNumber = i + 1;
-    const path = partPath(section.llmsTxtPath, partNumber);
-    detailFiles.set(path, detailContents(section.title, chunk, site));
-    indexLines.push(`- [Part ${partNumber}](${absoluteUrl(path, site)})`);
+    const path = partPath(folder.llmsTxtPath, partNumber);
+    detailFiles.set(path, detailContents(folder.title, chunk, site));
+    return `- [Part ${partNumber}](${absoluteUrl(path, site)})`;
   });
-  detailFiles.set(section.llmsTxtPath, indexLines.join("\n") + "\n");
+  detailFiles.set(
+    folder.llmsTxtPath,
+    listingContents(folder.title, partLines, trailingLines),
+  );
+}
+
+/** A heading, its link lines, then any trailing lines after a blank line. */
+function listingContents(
+  title: string,
+  linkLines: string[],
+  trailingLines: string[],
+): string {
+  const lines = [`# ${title}`, "", ...linkLines];
+  if (trailingLines.length > 0) {
+    if (linkLines.length > 0) lines.push("");
+    lines.push(...trailingLines);
+  }
+  return lines.join("\n").trimEnd() + "\n";
+}
+
+/**
+ * Splits a folder's pages into the ones in a subfolder of it, keyed by the
+ * subfolder's name, and the rest.
+ */
+function groupBySubfolder(folder: FolderListing): {
+  ownPages: PlaintextPage[];
+  pagesBySubfolder: Map<string, PlaintextPage[]>;
+} {
+  const folderPath = folderOf(folder.llmsTxtPath);
+  const ownPages: PlaintextPage[] = [];
+  const pagesBySubfolder = new Map<string, PlaintextPage[]>();
+
+  for (const page of folder.pages) {
+    const pageFolder = folderOf(page.urlPath.split("?")[0]);
+    const subfolder = pageFolder.startsWith(folderPath)
+      ? pageFolder.slice(folderPath.length).split("/")[0]
+      : "";
+    if (!subfolder) {
+      ownPages.push(page);
+      continue;
+    }
+    const subfolderPages = pagesBySubfolder.get(subfolder) ?? [];
+    subfolderPages.push(page);
+    pagesBySubfolder.set(subfolder, subfolderPages);
+  }
+
+  return { ownPages, pagesBySubfolder };
+}
+
+/** "/guides/setup/llms.txt" becomes "/guides/setup/". */
+function folderOf(urlPath: string): string {
+  return urlPath.slice(0, urlPath.lastIndexOf("/") + 1);
 }
 
 /**
