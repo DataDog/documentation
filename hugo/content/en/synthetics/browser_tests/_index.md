@@ -73,6 +73,12 @@ You may create a test using one of the following options:
   7. Set the {{< ui >}}test frequency{{< /ui >}}: The intervals vary from every one minute to once per week.
   8. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Browser Test.
 
+### Author a test with a Playwright script
+
+Instead of recording steps, you can define a browser test with a [Playwright](https://playwright.dev/) script. When you build a test from scratch, choose the {{< ui >}}Playwright{{< /ui >}} option to author the test as code rather than with the step recorder, then write your script in the in-app editor.
+
+Playwright browser tests run on **Chrome only**. Use Playwright's `page` actions and `expect` assertions to define your scenario, and group related actions with `test.step()` so each step appears on the test result timeline.
+
 ### Locations
 
 {{% managed-locations %}}
