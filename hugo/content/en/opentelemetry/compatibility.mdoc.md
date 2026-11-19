@@ -29,15 +29,16 @@ Use this page to check which Datadog products and features each OpenTelemetry (O
 How to edit this table
 
 Each row has one cell per support state. A setup that matches no condition in
-the cell shows a blank cell, which means not supported. Each setup must match
-at most one condition in a row.
+the cell shows a blank cell, which means not supported or not applicable. Each
+setup must match at most one condition in a row.
 
 - Check mark: the `if` that wraps the `x` tag. List the SDKs and destinations
   that support the feature. The destination menu only offers valid pairs, so
   you can list SDKs and destinations separately.
-- ?: the `if` that wraps `?`. Match the setups that aren't documented yet.
-  Delete it when every setup for the row is documented.
-- Short labels, such as Sampled, N/A, Preview, or With Agent: their own
+- ?: the `if` that wraps `?`, for setups that are waiting on review. Don't
+  publish `?` cells. After review, move each setup to a check mark or a
+  label, or leave it blank.
+- Short labels, such as Sampled, Preview, or With Agent: their own
   `if`, for setups with partial support. Wrap the label in a tooltip that
   explains it.
 
@@ -149,7 +150,6 @@ point the frontmatter at them, and update each row.
 - [Data Streams Monitoring][25] (DSM)
 -
   {% if or(equals($otel_sdk, "ddot_sdk"), and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector"))) %}{% x/ %}{% /if %}
-  {% if and(equals($otel_sdk, "opentelemetry_sdk"), includes($otel_destination, ["upstream_otel_collector", "direct_otlp_ingest", "ddot_collector"])) %}{% tooltip contents="Upstream OpenTelemetry SDKs don't offer DSM." %}N/A{% /tooltip %}{% /if %}
 ---
 - [Dynamic Instrumentation][49]
 -
@@ -160,7 +160,6 @@ point the frontmatter at them, and update each row.
 - [Feature Flags][50]
 -
   {% if or(equals($otel_sdk, "ddot_sdk"), and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector"))) %}{% x/ %}{% /if %}
-  {% if equals($otel_sdk, "opentelemetry_sdk") %}{% tooltip contents="Not documented yet." %}?{% /tooltip %}{% /if %}
 ---
 - [Live Debugger][51]
 -
@@ -182,8 +181,7 @@ point the frontmatter at them, and update each row.
 - [Remote Configuration of the Collector][3]
 -
   {% if equals($otel_destination, "agents_collector") %}{% tooltip contents="This feature is in Preview." %}Preview{% /tooltip %}{% /if %}
-  {% if includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]) %}{% tooltip contents="Not documented yet." %}?{% /tooltip %}{% /if %}
-  {% if equals($otel_destination, "direct_otlp_ingest") %}{% tooltip contents="This setup doesn't use a Collector." %}N/A{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"])) %}{% tooltip contents="Not documented yet." %}?{% /tooltip %}{% /if %}
 {% /table %}
 
 <!-- DDOT Collector -->
