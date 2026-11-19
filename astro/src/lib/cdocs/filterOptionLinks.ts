@@ -2,13 +2,12 @@
  * The filter bar's options as links: for each shown filter on a variant,
  * where a reader ends up by picking each option.
  *
- * The filter bar navigates to these links when a reader picks an option, and
- * the plaintext filter bar lists them, so an agent can reach the other
- * variants.
+ * The filter bar builds these links in the browser, from the reader's picks
+ * so far, and navigates to one when a reader picks an option. The plaintext
+ * filter bar lists them, so an agent can reach the other variants. Keep this
+ * module free of server-only imports, since the filter bar ships it.
  */
-import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest";
-import type { CustomizationConfig } from "cdocs-data";
-import configByLang from "virtual:cdocs-config";
+import type { ClientSideFiltersManifest, FiltersManifest } from "cdocs-data";
 import type { CdocContentFilter } from "./filters";
 import {
   buildVariant,
@@ -16,8 +15,6 @@ import {
   shownValues,
   type CdocsVariantLabel,
 } from "./variants";
-
-const DEFAULT_LANG = "en";
 
 /** A filter option, with the URL a reader gets by picking it. */
 export interface CdocsFilterOptionLink {
@@ -48,15 +45,12 @@ export interface CdocsFilterLinks {
  */
 export function buildFilterOptionLinks(p: {
   bareUrl: string;
+  filtersManifest: FiltersManifest | ClientSideFiltersManifest;
   contentFilters: CdocContentFilter[];
   /** The variant's current values. */
   valsByTraitId: Record<string, string>;
-  customizationConfig?: CustomizationConfig;
 }): CdocsFilterLinks[] {
-  const filtersManifest = buildFiltersManifest({
-    frontmatter: { title: "", content_filters: p.contentFilters },
-    customizationConfig: p.customizationConfig ?? configByLang[DEFAULT_LANG],
-  });
+  const { filtersManifest } = p;
   const current = settleValues(
     filtersManifest,
     p.contentFilters,

@@ -18,10 +18,11 @@ import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
+import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import {
-  buildFilterOptionLinks,
-  type CdocsFilterLinks,
-} from "@lib/cdocs/filterOptionLinks";
+  pruneManifestForClient,
+  type ClientSideFiltersManifest,
+} from "cdocs-data";
 import {
   CDOCS_PAGE_STATE_ID,
   serializeCdocsPageState,
@@ -47,20 +48,19 @@ if (!entry) {
 const contentFilters = entry.data.content_filters;
 const isFilterable = contentFilters !== undefined;
 
-// Filterable docs resolve their filters, and the filter bar gets each option's
-// URL; plain docs render with no filter state.
+// Filterable docs resolve their filters, and the filter bar gets a pruned
+// manifest, so it can build each option's URL from the reader's picks; plain
+// docs render with no filter state.
 let valsByTraitId: ReturnType<typeof resolveCdocRender>["valsByTraitId"] = {};
-let filterLinks: CdocsFilterLinks[] = [];
+let clientFiltersManifest: ClientSideFiltersManifest | undefined;
 if (isFilterable) {
   valsByTraitId = resolveCdocRender({
     contentFilters,
     searchParams: Astro.url.searchParams,
   }).valsByTraitId;
-  filterLinks = buildFilterOptionLinks({
-    bareUrl: prefixed(`/${slug}/`),
-    contentFilters,
-    valsByTraitId,
-  });
+  clientFiltersManifest = pruneManifestForClient(
+    buildPageFiltersManifest(contentFilters),
+  );
 }
 
 // Read by `preferencesClient`, which stores the URL's filter values and adds
@@ -110,7 +110,17 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
         id={CDOCS_PAGE_STATE_ID}
         set:html={cdocsPageState}
       />
-      {isFilterable && <CdocsFilterBar client:load filterLinks={filterLinks} />}
+      {
+        isFilterable && clientFiltersManifest && (
+          <CdocsFilterBar
+            client:load
+            bareUrl={prefixed(`/${slug}/`)}
+            filtersManifest={clientFiltersManifest}
+            contentFilters={contentFilters}
+            valsByTraitId={valsByTraitId}
+          />
+        )
+      }
       <div class="cdoc__content prose" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
       </div>

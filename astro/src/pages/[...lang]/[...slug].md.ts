@@ -30,6 +30,7 @@ import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
 import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
+import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
 import { addOfferedParamsToHref } from "@lib/cdocs/preferenceLinks";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
@@ -115,7 +116,12 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     const bareUrl = `/${slug}/`;
     const variantList = buildMarkdocStr(
       cdocsFilterBarNodes(
-        buildFilterOptionLinks({ bareUrl, contentFilters, valsByTraitId }),
+        buildFilterOptionLinks({
+          bareUrl,
+          filtersManifest: buildPageFiltersManifest(contentFilters),
+          contentFilters,
+          valsByTraitId,
+        }),
       ),
     ).trim();
 

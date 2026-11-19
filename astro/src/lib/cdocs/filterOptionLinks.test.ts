@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { buildFilterOptionLinks } from "./filterOptionLinks";
 import type { CdocContentFilter } from "./filters";
+import { buildPageFiltersManifest } from "./pageFiltersManifest";
 import { customizationConfig } from "../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const hostFilter: CdocContentFilter = {
@@ -23,9 +24,12 @@ describe("buildFilterOptionLinks", () => {
   ) {
     return buildFilterOptionLinks({
       bareUrl: "/guides/setup/",
+      filtersManifest: buildPageFiltersManifest(
+        contentFilters,
+        customizationConfig,
+      ),
       contentFilters,
       valsByTraitId,
-      customizationConfig,
     });
   }
 

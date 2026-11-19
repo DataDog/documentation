@@ -7,7 +7,11 @@
  * lists, the filter bar, and its plaintext twin all agree on them.
  */
 import { resolveFilters } from "cdocs-data/resolveFilters";
-import type { FiltersManifest, ResolvedFilters } from "cdocs-data";
+import type {
+  ClientSideFiltersManifest,
+  FiltersManifest,
+  ResolvedFilters,
+} from "cdocs-data";
 import type { CdocContentFilter } from "./filters";
 
 /** Introduces a variant's filter values in its description. */
@@ -96,7 +100,7 @@ export function findAllValueCombinations(
  * show, hide, or reset another filter, so one pass isn't always enough.
  */
 export function settleValues(
-  filtersManifest: FiltersManifest,
+  filtersManifest: FiltersManifest | ClientSideFiltersManifest,
   contentFilters: CdocContentFilter[],
   requestedValsByTraitId: Record<string, string>,
 ): ValueCombination {
