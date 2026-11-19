@@ -5774,7 +5774,7 @@ menu:
       identifier: quality_monitoring_monitors
       parent: quality_monitoring
       weight: 350000
-    - name: Guides
+    - name: How-To Guides
       url: data_observability/quality_monitoring/guides
       identifier: quality_monitoring_guides
       parent: quality_monitoring
