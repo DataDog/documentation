@@ -37,6 +37,10 @@ Diff-aware scanning, which is available for [Static Code Analysis][18], is not s
 
 ## Key capabilities
 
+### Prioritize secrets with runtime context
+
+Secret Scanning findings show the services that run the affected file and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Runtime Context{{< /ui >}} and {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in live, exposed services. For more information, see [Runtime Context for Static Findings][19].
+
 ### Detect secrets in Git history
 
 Deleting a secret from a file does not remove it from the repository. The secret remains in earlier commits, where anyone with access to the repository can recover it.
@@ -126,3 +130,4 @@ To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details pan
 [16]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [17]: /security/code_security/secret_scanning/secret_validation/
 [18]: /security/code_security/static_analysis/setup/#diff-aware-scanning
+[19]: /security/code_security/runtime_context/
