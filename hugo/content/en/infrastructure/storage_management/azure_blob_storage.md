@@ -91,6 +91,8 @@ Go to **Datadog** > **Storage Management** > **Azure Blob Storage** > [**Enable 
 
 Register each storage account with Storage Management by calling the [Enable Storage Management for a bucket][402] endpoint. The App Registration must be connected to Datadog through the [Azure integration][403].
 
+Before running the example, set `DD_SITE` to your [Datadog site][404], and set `DD_API_KEY` and `DD_APP_KEY` to a Datadog [API key][405] and [application key][406]. The application key must have the **Cloud Inventory Write** [permission][407].
+
 ```bash
 curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
   -H "Accept: application/json" \
@@ -128,6 +130,10 @@ All fields are required. Make one request per storage account. A `200` response 
 [401]: https://app.datadoghq.com/storage-management?mConfigure=true&mView=azure
 [402]: /api/latest/storage-management/#enable-storage-management-for-a-bucket
 [403]: /integrations/azure/#setup
+[404]: /getting_started/site/
+[405]: /account_management/api-app-keys/#api-keys
+[406]: /account_management/api-app-keys/#application-keys
+[407]: /account_management/rbac/permissions/
 
 {{% /tab %}}
 {{< /tabs >}}
