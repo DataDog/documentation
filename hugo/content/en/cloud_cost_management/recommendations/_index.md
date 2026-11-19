@@ -414,6 +414,12 @@ multifiltersearch:
       recommendation_type: Delete AKS Cluster
       recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: AKS Cluster
+      recommendation_type: Downsize AKS Node Pool
+      recommendation_description: Identifies AKS node pools with GPUs where pods requested only part of the GPU capacity, even on their busiest day, and recommends running fewer nodes.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
@@ -731,6 +737,12 @@ multifiltersearch:
       resource_type: BigQuery Dataset
       recommendation_type: Delete Idle BigQuery Dataset
       recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: GCP
+      resource_type: BigQuery Project
+      recommendation_type: Migrate BigQuery Project to Capacity Pricing
+      recommendation_description: Identifies Google Cloud projects whose on-demand BigQuery queries scan many bytes for the slot time they use and recommends running them on Enterprise edition capacity with autoscaling and no commitment.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP

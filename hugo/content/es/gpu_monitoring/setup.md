@@ -21,7 +21,7 @@ Para comenzar a utilizar GPU Monitoring de Datadog, su entorno debe cumplir con 
   - [Instale el Datadog Agent en Kubernetes][1]
   - [Instale el Datadog Agent en Docker][7]
   - [Instale el Datadog Agent en Linux sin contenedores][8]
-- Los controladores de NVIDIA están instalados en los servidores. Si utiliza Kubernetes, el plugin de dispositivo NVIDIA para Kubernetes está instalado ([directamente][3] o a través de [NVIDIA GPU Operator][4])
+- Los controladores de NVIDIA están instalados en los servidores. Si utiliza Kubernetes, el plugin de dispositivo NVIDIA para Kubernetes está instalado ([directamente][3] o a través de [NVIDIA GPU Operator][4]). Si sus GPU se asignan mediante Dynamic Resource Allocation (DRA), siga también las instrucciones de [Configurar GPU Monitoring con Dynamic Resource Allocation][15].
 
 #### Requisitos de versión mínima {#minimum-version-requirements}
 
@@ -38,8 +38,8 @@ Si utiliza Kubernetes, se deben cumplir los siguientes requisitos adicionales:
 
 Si utiliza Google Kubernetes Engine (GKE) con nodos de Container-Optimized OS (COS), se deben cumplir los siguientes requisitos adicionales:
 
-- [**Datadog Operator**][5]: versión 1.29, _o_ [**Datadog Helm chart**][6]: versión 3.231.4
-- El [provider][14] de GKE COS está configurado, como se muestra en los ejemplos de GKE en esta página. Esta configuración monta las bibliotecas de controladores de NVIDIA que GKE instala en los nodos COS en los contenedores del Agent.
+- [**Datadog Operator**][5]: versión 1.29, _o_ [**chart de Helm de Datadog**][6]: versión 3.231.4
+- El [provider][14] de GKE COS está configurado, como se muestra en los ejemplos de GKE en esta página. Esta configuración monta las bibliotecas de controladores de NVIDIA que GKE instala en los nodos COS dentro de los contenedores del Agent.
 
 ## Configuración de GPU Monitoring {#setting-up-gpu-monitoring}
 
@@ -64,7 +64,7 @@ Las siguientes instrucciones son los pasos básicos para configurar GPU Monitori
    : Habilita GPU Monitoring.
 
    `gpu.privilegedMode: true`
-   : _Obligatorio para GKE_. Habilita el módulo GPU Monitoring en `system-probe`. Obligatorio para `gpu.patchCgroupPermissions`.
+   : _Obligatorio para GKE_. Habilita el módulo de GPU Monitoring en `system-probe`. Obligatorio para `gpu.patchCgroupPermissions`.
 
    `gpu.patchCgroupPermissions: true`
    : _Solo para GKE_. Habilita una ruta de código en `system-probe` que ayuda al Agent a acceder a dispositivos GPU.
@@ -112,7 +112,7 @@ Las siguientes instrucciones son los pasos básicos para configurar GPU Monitori
    : Habilita GPU Monitoring.
 
    `gpuMonitoring.privilegedMode: true`
-   : _Obligatorio para GKE_. Habilita el módulo GPU Monitoring en `system-probe`. Obligatorio para `gpuMonitoring.configureCgroupPerms`.
+   : _Obligatorio para GKE_. Habilita el módulo de GPU Monitoring en `system-probe`. Obligatorio para `gpuMonitoring.configureCgroupPerms`.
 
    `gpuMonitoring.configureCgroupPerms: true`
    : _Solo para GKE_. Habilita una ruta de código en `system-probe` que ayuda al Agent a acceder a dispositivos GPU.
@@ -161,7 +161,7 @@ docker run \
 registry.datadoghq.com/agent:latest
 ```
 
-Reemplace `<DATADOG_API_KEY>` con su [clave de Datadog API][1].
+Reemplace `<DATADOG_API_KEY>` con su [clave de API de Datadog][1].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
@@ -267,7 +267,7 @@ Para configurar GPU Monitoring en un clúster mixto, utilice la función [Agent 
 
 2. Modifique su recurso `DatadogAgent` agregando la anotación `agent.datadoghq.com/update-metadata` al recurso `DatadogAgent`.
 
-   Si todos los nodos del clúster usan Container-Optimized OS de GKE, agregue también la anotación `agent.datadoghq.com/cluster-provider: gke-cos` [provider][5]. Si solo algunos nodos usan Container-Optimized OS, establezca la anotación en un [Datadog Agent Profile dirigido a esos nodos][6] en su lugar.
+   Si todos los nodos del clúster usan GKE Container-Optimized OS, agregue también la anotación `agent.datadoghq.com/cluster-provider: gke-cos` [provider][5]. Si solo algunos nodos usan Container-Optimized OS, establezca la anotación en un [Datadog Agent Profile que apunte a esos nodos][6] en su lugar.
 
    Las adiciones al archivo `datadog-agent.yaml` deberían verse así:
 
@@ -444,7 +444,7 @@ Para configurar GPU Monitoring en un clúster mixto con Helm, cree dos implement
    : Habilita GPU Monitoring.
 
    `gpuMonitoring.privilegedMode: true`
-   : _Obligatorio para GKE_. Habilita el módulo GPU Monitoring en `system-probe`. Obligatorio para `gpuMonitoring.configureCgroupPerms`.
+   : _Obligatorio para GKE_. Habilita el módulo de GPU Monitoring en `system-probe`. Obligatorio para `gpuMonitoring.configureCgroupPerms`.
 
    `gpuMonitoring.configureCgroupPerms: true`
    : _Solo para GKE_. Habilita una ruta de código en `system-probe` que ayuda al Agent a acceder a dispositivos GPU.
@@ -528,3 +528,4 @@ Para configurar GPU Monitoring en un clúster mixto con Helm, cree dos implement
 [12]: /es/getting_started/integrations/oci/
 [13]: /es/infrastructure/process?tab=linuxwindows#installation
 [14]: /es/containers/datadog_operator/providers/
+[15]: /es/gpu_monitoring/dra/

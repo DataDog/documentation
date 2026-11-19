@@ -40,60 +40,18 @@ Lorsqu'un incident est marqué comme résolu, Incident AI publie un résumé fin
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Exemple de résumé d'incident dans Slack" style="width:100%;" >}}
 
-## Résumés de réunion {#meeting-summaries}
+## Résumés et transcriptions de réunions {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Les résumés de réunion ne sont pas disponibles pour votre site Datadog sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Les résumés de réunion et les transcriptions de réunion en direct ne sont pas disponibles pour le site Datadog sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Incident AI peut automatiquement résumer les réunions d'incident sur Zoom, Google Meet et Microsoft Teams. Pendant une réunion, il publie périodiquement des résumés en direct sur la chronologie de l'incident et dans le canal de discussion de l'incident. Lorsque la réunion se termine, il publie un résumé final de la réunion.
+Pour les réunions d'incident, Incident AI peut générer des résumés et enregistrer des transcriptions en direct dans des notebooks Datadog :
 
-<div class="alert alert-info">Lorsque les résumés de réunion sont activés, un <a href="https://www.datadoghq.com/legal/subprocessors/">sous-traitant</a> Datadog enregistre et transcrit l'audio de la réunion. Après une période de conservation de sept jours, le sous-traitant supprime automatiquement toutes les données.</div>
+- **Résumés de réunion** : Pendant une réunion, Incident AI publie périodiquement des résumés en direct sur la timeline de l'incident et dans le canal de discussion de l'incident. À la fin de la réunion, il publie un résumé final.
+- **Transcriptions de réunion en direct** : Un notebook Datadog capture la conversation avec les noms des intervenants et les horodatages dans votre fuseau horaire. Le notebook se met à jour pendant la réunion et reste disponible par la suite.
 
-Votre organisation doit avoir activé les fonctionnalités d'IA avant que Datadog Transcriber puisse rejoindre les réunions. Pour activer les résumés de réunion, activez **Generate AI meeting summaries** dans les paramètres d'intégration de votre plateforme de réunion :
-
-- [Zoom][4]
-- [Google Meet][5]
-- [Microsoft Teams][6]
-
-Par défaut, Incident AI ne résume pas les réunions pour les incidents privés. Vous pouvez ajouter des conditions dans les paramètres d'intégration pour empêcher la synthèse d'autres incidents également.
-
-### Fonctionnement des résumés de réunion {#how-meeting-summaries-work}
-
-Lorsqu'une réunion associée à un incident démarre, Datadog Transcriber tente de la rejoindre. Cela peut prendre de 10 à 30 secondes. Si la réunion dispose d'un hall d'accueil ou d'une salle d'attente, un participant doit autoriser Datadog Transcriber à rejoindre la réunion avant que la transcription puisse commencer. Une fois que Datadog Transcriber a rejoint la réunion, il publie périodiquement des résumés en direct aux emplacements suivants pendant la réunion :
-
-- La **chronologie de l'incident**, sous une entrée **Meeting Summary**.
-- Le **canal de discussion d'incident**, à la fois dans le fil de discussion de la carte de réunion et sous forme de message dans le canal.
-
-Lorsque la réunion se termine, il publie un résumé final de la réunion aux mêmes emplacements.
-
-### Examen d'un résumé {#reviewing-a-summary}
-
-Une fois le résumé publié, vous pouvez l'approuver, modifier son texte ou le rejeter. Vous pouvez effectuer ces actions depuis la chronologie de l'incident dans Datadog, ou depuis le canal de discussion de l'incident si le résumé y a été diffusé.
-
-Pour examiner un résumé depuis la chronologie de l'incident :
-
-1. Ouvrez l'incident dans Datadog et recherchez l'entrée **Meeting Summary** sur la chronologie.
-2. Cliquez sur l'icône de coche pour approuver le résumé, sur l'icône de crayon pour modifier son texte, ou sur l'icône de rejet pour le supprimer de la chronologie.
-
-Lorsqu'un utilisateur approuve ou modifie un résumé, Datadog enregistre qui l'a fait. Une fois qu'un résumé est modifié, il ne peut plus être approuvé ; la version modifiée prévaut. Le rejet d'un résumé le supprime de la chronologie de l'incident pour tout le monde et masque son contenu dans les canaux de discussion connectés. Datadog demande une confirmation avant le rejet, car cette action ne peut pas être annulée.
-
-Si le résumé a été diffusé dans le canal de discussion de l'incident, utilisez les boutons **Approve**, **Edit** ou **Reject summary** sur le message.
-
-### Réinviter le transcripteur {#re-inviting-the-transcriber}
-
-Si Datadog Transcriber quitte une réunion, réinvitez-le à la même réunion liée pour reprendre la génération de résumés :
-
-1. Ouvrez l'incident dans Datadog.
-2. Dans l'en-tête de l'incident, ouvrez le menu de la réunion liée.
-3. Cliquez sur **Add Transcriber** (l'icône de robot) à côté de la réunion.
-4. Si nécessaire, autorisez Datadog Transcriber à entrer dans la réunion depuis le hall d'accueil ou la salle d'attente afin que la transcription puisse commencer.
-
-L'icône de robot indique si le transcripteur est en train de rejoindre la réunion ou s'il y est déjà. Si vous ne pouvez pas ajouter le transcripteur, survolez l'icône pour en connaître la raison.
-
-Une invite de réinvitation peut également apparaître dans le fil de discussion de la carte de réunion Slack ou Microsoft Teams de l'incident après le départ du transcripteur. Cela peut se produire après l'expiration du délai d'attente pour l'admission ou l'arrivée de participants, après que tout le monde a quitté la réunion ou lorsque quelqu'un retire le transcripteur de la réunion. Sélectionnez **Oui** pour réinviter le transcripteur ou **Non** pour refuser l'invite.
-
-Pour réinviter le transcripteur, vous devez être autorisé à modifier l'incident et, dans les organisations facturées par utilisateur, disposer d'une [licence Incident Management ou Incident Response][7]. Réinviter le transcripteur ne permet pas de contourner les conditions qui empêchent la génération de résumés, notamment l'exclusion par défaut des incidents privés.
+Pour configurer les résumés et les transcriptions de réunion, consultez la page d'intégration [Zoom][4], [Google Meet][5] ou [Microsoft Teams][6]. Pour consulter les résumés, voir les transcriptions, réinviter le transcripteur et savoir comment les données de réunion sont conservées, consultez [Meeting Summaries and Transcripts][7].
 
 ## Détection d'incidents associés {#related-incident-detection}
 
@@ -155,5 +113,5 @@ Pour une présentation complète du workflow d'investigation, consultez [Bits In
 [4]: /fr/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
 [5]: /fr/incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
 [6]: /fr/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
-[7]: /fr/account_management/billing/incident_response/#allocate-seats
+[7]: /fr/incident_response/incident_management/investigate/meeting_summaries_and_transcripts
 [8]: /fr/bits_ai/bits_investigation
