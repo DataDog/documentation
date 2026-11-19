@@ -31,7 +31,7 @@ Datadog supports official OS packages from vendors listed above. Third-party or 
 
 {{% collapse-content title="Linux kernel packages in container images" level="h3" %}}
 
-Containers run on the host's kernel, not on kernel packages installed in the image. Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images, because they can't affect a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The packages stay in the image's SBOM and package inventory; Datadog only excludes them from vulnerability matching.
+Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images. Containers use the host's kernel, so these packages can't introduce kernel vulnerabilities into a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The CLI's own output and `--fail-on` check can still include these packages. The packages still appear in the Infrastructure Packages Catalog, but without vulnerabilities from container images.
 
 **Not reported in container images:** header and development packages built from the main Linux kernel source:
 - On Debian and Ubuntu: `linux-libc-dev`, `linux-kbuild-*`, and `linux-headers-*` for the standard kernel and its HWE, AWS, GCP, Azure, and Oracle variants.
@@ -41,7 +41,6 @@ Containers run on the host's kernel, not on kernel packages installed in the ima
 - Kernel vulnerabilities on hosts, where the kernel runs.
 - All packages in a container image that also contains a kernel package, such as `linux-image-*`, `linux-modules-*`, or `kernel-core`.
 - All packages in a container image that also contains any other package built from the main kernel source that Datadog doesn't recognize as a header or development package.
-- Some other kernel header packages, such as `linux-headers` on Alpine Linux.
 - Packages with similar names that aren't part of the kernel, such as `linux-firmware`, `linux-pam`, and `util-linux`.
 {{% /collapse-content %}}
 
