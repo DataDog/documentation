@@ -111,7 +111,7 @@ Open the [{{< ui >}}Skills Library{{< /ui >}}][4] and select a skill. Use the av
 | Setting | Products |
 |---------|----------|
 | **Enable for you** | Makes the skill available to you in Bits Chat, Bits Agent Builder, and external agents you connect through the Datadog MCP Server. Skills you create are enabled for you by default. Other skills are disabled until you enable them. |
-| **Enable for your organization** | Makes a shared skill available in Bits AI SRE investigations, Bits Code, and external agents connected through the Datadog MCP Server with a service account. Shared skills are disabled for the organization by default. |
+| **Enable for your organization** | Makes a shared skill available in Bits AI SRE investigations, Bits Code, and external agents that authenticate to Datadog with a service account. Shared skills are disabled for the organization by default. |
 
 Personal and organization settings are independent. Changing one setting does not change the other. Private skills only have the **Enable for you** setting.
 
