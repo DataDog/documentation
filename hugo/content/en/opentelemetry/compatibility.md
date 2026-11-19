@@ -122,15 +122,15 @@ For unsupported languages in OpenTelemetry setups, [configure telemetry tagging]
 
 Datadog provides different levels of support for OpenTelemetry components and configurations:
 
-- **DDOT SDKs**: Datadog's version of OpenTelemetry SDKs, supported by Datadog. During the Preview, support is provided on a best-effort basis.
-
-- **Upstream OpenTelemetry SDKs**: Maintained and supported by the OpenTelemetry community. Datadog supports the traces, metrics, and logs that they send.
-
-- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][39], [Datadog Exporter][40], and [Infra Attribute Processor][41]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements.
-
-- **Community Supported Components**: OpenTelemetry components [included with the DDOT Collector][42] by default. Datadog helps ensure these components are secure, stable, and compatible.
-
-- **Custom Components**: OpenTelemetry components or configurations not included by default, such as [custom Collector components][43] or [instrumentation of unsupported runtimes][44]. Datadog provides guidance and documentation as a starting point but does not directly support these components' functionality. For issues with custom components, engage with the [OpenTelemetry community][45] or the component maintainers.
+- **OpenTelemetry SDKs**
+    - **DDOT SDKs**: Datadog's version of OpenTelemetry SDKs, supported by Datadog. During the Preview, support is provided on a best-effort basis.
+    - **Upstream OpenTelemetry SDKs**: Maintained and supported by the OpenTelemetry community. Datadog supports the traces, metrics, and logs that they send.
+- **OpenTelemetry Collector**
+    - **DDOT Collector**: Datadog's version of the OpenTelemetry Collector. Support depends on the component:
+        - **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][39], [Datadog Exporter][40], and [Infra Attribute Processor][41]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements.
+        - **Community Supported Components**: OpenTelemetry components [included with the DDOT Collector][42] by default. Datadog helps ensure these components are secure, stable, and compatible.
+        - **Custom Components**: OpenTelemetry components or configurations not included by default, such as [custom Collector components][43] or [instrumentation of unsupported runtimes][44]. Datadog provides guidance and documentation as a starting point but does not directly support these components' functionality. For issues with custom components, engage with the [OpenTelemetry community][45] or the component maintainers.
+    - **Upstream OpenTelemetry Collector**: Maintained and supported by the OpenTelemetry community. Datadog supports the traces, metrics, and logs that it sends.
 
 ## Platform and environment support
 
