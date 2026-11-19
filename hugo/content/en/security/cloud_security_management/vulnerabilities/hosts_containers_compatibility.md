@@ -31,7 +31,7 @@ Datadog supports official OS packages from vendors listed above. Third-party or 
 
 {{% collapse-content title="Linux kernel packages in container images" level="h3" %}}
 
-Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images. Containers use the host's kernel, so these packages can't introduce kernel vulnerabilities into a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The CLI's own output and `--fail-on` check can still include these packages. The packages still appear in the Infrastructure Packages Catalog, but without vulnerabilities from container images.
+Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images. Containers use the host's kernel, so these packages can't introduce kernel vulnerabilities into a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The CLI's own output and `--fail-on` check can still include these packages. These packages still appear in the image's SBOM.
 
 **Not reported in container images:** header and development packages built from the main Linux kernel source:
 - On Debian and Ubuntu: `linux-libc-dev`, `linux-kbuild-*`, and `linux-headers-*` for the standard kernel and its HWE, AWS, GCP, Azure, and Oracle variants.
