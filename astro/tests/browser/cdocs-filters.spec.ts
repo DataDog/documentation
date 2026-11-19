@@ -200,22 +200,6 @@ test.describe("cdocs URLs for crawlers", () => {
     );
   });
 
-  test("the Cdocs sitemap lists each variant's canonical URL", async ({
-    request,
-  }) => {
-    const response = await request.get("/sitemap-cdocs.xml");
-    expect(response.status()).toBe(200);
-    expect(response.headers()["content-type"]).toContain("application/xml");
-    const locs = [...(await response.text()).matchAll(/<loc>(.*?)<\/loc>/g)]
-      .map(([, loc]) => new URL(loc.replaceAll("&amp;", "&")))
-      .filter((url) => url.pathname === CDOC_URL)
-      .map((url) => `${url.pathname}${url.search}`);
-    // Four languages, two APIs, with the bare URL for the default variant.
-    expect(locs).toHaveLength(8);
-    expect(locs[0]).toBe(CDOC_URL);
-    expect(locs).toContain(`${CDOC_URL}?api_type=dd_api&prog_lang=python`);
-  });
-
   test("valid params render without a redirect, in any order", async ({
     request,
   }) => {

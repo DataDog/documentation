@@ -48,17 +48,20 @@ describe("findUncontainedPaths", () => {
     expect(offenders).toEqual(["index.html", "favicon.ico"]);
   });
 
-  it("allows the Cdocs sitemap at the root, and nowhere else", () => {
+  it("allows the sitemap files at the root, and nowhere else", () => {
     const offenders = findUncontainedPaths([
-      "sitemap-cdocs.xml",
-      "fr/sitemap-cdocs.xml",
-      "sitemap-cdocs.xml.bak",
+      "sitemap-index.xml",
+      "sitemap-0.xml",
+      "fr/sitemap-0.xml",
+      "sitemap-index.xml.bak",
       "sitemap-other.xml",
+      "sitemap.xml",
     ]);
     expect(offenders).toEqual([
-      "fr/sitemap-cdocs.xml",
-      "sitemap-cdocs.xml.bak",
+      "fr/sitemap-0.xml",
+      "sitemap-index.xml.bak",
       "sitemap-other.xml",
+      "sitemap.xml",
     ]);
   });
 

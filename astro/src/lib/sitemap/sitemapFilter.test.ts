@@ -36,12 +36,9 @@ describe("isSitemapPage", () => {
     expect(
       isSitemapPage("https://docs.datadoghq.com/cdocs-traits-index.json"),
     ).toBe(false);
-  });
-
-  it("excludes the Cdocs sitemap, which is a sitemap, not a page", () => {
-    expect(isSitemapPage("https://docs.datadoghq.com/sitemap-cdocs.xml")).toBe(
-      false,
-    );
+    expect(
+      isSitemapPage("https://docs.datadoghq.com/on-demand-pages-index.json"),
+    ).toBe(false);
   });
 
   it("excludes the mobile nav data file", () => {

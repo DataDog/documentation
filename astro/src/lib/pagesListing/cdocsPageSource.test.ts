@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { cdocsPageSource } from "./cdocsPageSource";
 import { getCdocsPages } from "@lib/cdocs/pageLists";
-import { buildCdocsSitemapXml } from "@lib/sitemap/cdocsSitemap";
+import { listOnDemandSitemapPaths } from "@lib/sitemap/onDemandPages";
 
 const SITE = "https://docs.datadoghq.com";
 const CUSTOM_INSTRUMENTATION_MD = "/dd_e2e/cdocs/custom_instrumentation.md";
@@ -81,11 +81,9 @@ describe("cdocsPageSource", () => {
   });
 
   it("lists the same variants as the sitemap", async () => {
-    const sitemapPaths = [
-      ...buildCdocsSitemapXml(await getCdocsPages(), SITE).matchAll(
-        /<loc>(.*?)<\/loc>/g,
-      ),
-    ].map(([, loc]) => new URL(loc.replaceAll("&amp;", "&")).href);
+    const sitemapPaths = listOnDemandSitemapPaths(await getCdocsPages()).map(
+      (path) => new URL(path, SITE).href,
+    );
     const sourcePaths = (await allPages()).map((page) => {
       const [path, query] = page.urlPath.split("?");
       const htmlPath = path.replace(/\.md$/, "/");
