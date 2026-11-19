@@ -1,6 +1,6 @@
 ---
 title: On-Demand Tests
-description: "Run a Network Path traceroute from a Datadog Agent host on demand, from Network Path or Bits Chat, using a Private Action Runner."
+description: "Run a Network Path traceroute from a Datadog Agent host on demand from Network Path, using a Private Action Runner."
 is_beta: true
 further_reading:
   - link: "/network_monitoring/network_path/setup"
@@ -20,14 +20,14 @@ further_reading:
 
 On-demand tests allow you to run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update. You can also use them to investigate a connectivity issue as it happens.
 
-You can run an on-demand test from the Network Path UI or from Bits Chat. On-demand tests run through a [Private Action Runner (PAR)][4] in the Datadog Agent on the source host.
+You can run an on-demand test from the Network Path UI. On-demand tests run through a [Private Action Runner (PAR)][1] in the Datadog Agent on the source host.
 
 ## Setup
 
 ### Step 1: Check the Agent and API key
 
-1. The Datadog Agent on the source host meets the [Private Action Runner requirements][6].
-2. The Agent uses an API key with the **Private Action Runner** capability. See [Enrollment and ownership][5].
+1. The Datadog Agent on the source host meets the [Private Action Runner requirements][2].
+2. The Agent uses an API key with the **Private Action Runner** capability. See [Enrollment and ownership][3].
 
 ### Step 2: Configure the Agent
 
@@ -96,49 +96,33 @@ You can run an on-demand test from the Network Path UI or from Bits Chat. On-dem
 {{% /tab %}}
 {{< /tabs >}}
 
-After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][7] and confirm that the runner for the source host is listed.
+After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][4] and confirm that the runner for the source host is listed.
 
 ### Step 3: Create an execution policy
 
 Creating an execution policy requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
 
-[Create an Execution Policy][8] that allows the `Run Network Path` action and sets **Targets** for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
+[Create an Execution Policy][5] that allows the `Run Network Path` action and sets **Targets** for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
 
 {{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with red boxes around the fields to fill in: the Allow effect, the Remote Action integration with the Run network path action selected, a target that matches the Agent with the tag hostname:auth-dotnet, and the Access setting" style="width:60%;" >}}
 
 ## Permissions
 
-On-demand tests use the following permissions. To grant permissions, see [Datadog Role Permissions][10].
+On-demand tests use the following permissions. To grant permissions, see [Datadog Role Permissions][6].
 
 | Permission | Allows |
 |---|---|
 | Network Path Test Run (`network_path_test_run`) | Running on-demand tests |
 | Network Path Data Read (`network_path_config_read`) | Viewing test results |
-| Connections Resolve (`connections_resolve`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
-| Private Action Runner Contribute (`on_prem_runner_use`) | Running on-demand tests from the Datadog MCP Server, including Bits Chat |
-
-To use the Datadog MCP Server, users also need the MCP permissions described in [Required permissions][9].
 
 ## Run an on-demand test
 
-### From the Network Path UI
-
-1. Open a path in [Network Path][1].
+1. Open a path in [Network Path][7].
 2. Click {{< ui >}}Run Test Now{{< /ui >}}. Datadog runs the test from the path's source host to its destination with the same protocol and port.
 
-   {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted next to Analyze With Bits AI and Compare" style="width:100%;" >}}
+   {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted" style="width:100%;" >}}
 
 3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click the test run to open its network path.
-
-### From Bits Chat
-
-Ask [Bits Chat][2] to run a test, and include the source host and the destination. For example:
-
-```text
-Run a Network Path test from web-01.example.com to google.com on TCP port 443.
-```
-
-Bits Chat asks you to approve the action, runs the test, and replies with the result and an analysis after the test completes. Bits Chat uses the [`run_network_path`][3] tool in the Datadog MCP Server.
 
 ## View results
 
@@ -151,13 +135,10 @@ On-demand test results appear in the {{< ui >}}Test Runs{{< /ui >}} tab of a par
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/network/path
-[2]: /bits_ai/bits_chat/
-[3]: /mcp_server/tools/#run_network_path
-[4]: /actions/private_actions/
-[5]: /actions/private_actions/enroll_runner/#ownerless-runners
-[6]: /actions/private_actions/set_up_agent_based/#prerequisites
-[7]: https://app.datadoghq.com/actions/private-action-runners
-[8]: /actions/private_actions/execution_policies/#create-an-execution-policy
-[9]: /mcp_server/setup/#required-permissions
-[10]: /account_management/rbac/permissions/
+[1]: /actions/private_actions/
+[2]: /actions/private_actions/set_up_agent_based/#prerequisites
+[3]: /actions/private_actions/enroll_runner/#ownerless-runners
+[4]: https://app.datadoghq.com/actions/private-action-runners
+[5]: /actions/private_actions/execution_policies/#create-an-execution-policy
+[6]: /account_management/rbac/permissions/
+[7]: https://app.datadoghq.com/network/path
