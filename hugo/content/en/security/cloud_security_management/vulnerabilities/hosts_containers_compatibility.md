@@ -31,14 +31,17 @@ Datadog supports official OS packages from vendors listed above. Third-party or 
 
 {{% collapse-content title="Linux kernel packages in container images" level="h3" %}}
 
-Containers run on the host's kernel, not on kernel packages installed in the image. Datadog doesn't report vulnerabilities for kernel header and development packages in container images, because these packages can't affect a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. These packages still appear in the image's software inventory.
+Containers run on the host's kernel, not on kernel packages installed in the image. Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images, because they can't affect a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The packages stay in the image's SBOM and package inventory; Datadog only excludes them from vulnerability matching.
 
-**Not reported in container images:** kernel header and development packages built from the Linux kernel source on Debian, Ubuntu, and RPM-based distributions. Examples include `linux-headers-*`, `linux-libc-dev`, `linux-kbuild-*`, `kernel-headers`, `kernel-devel`, and `kernel-syms`.
+**Not reported in container images:** header and development packages built from the main Linux kernel source:
+- On Debian and Ubuntu: `linux-libc-dev`, `linux-kbuild-*`, and `linux-headers-*` for the standard kernel and its HWE, AWS, GCP, Azure, and Oracle variants.
+- On RPM-based distributions such as RHEL, Amazon Linux, and SUSE: `kernel-headers`, `kernel-devel`, and `kernel-syms`.
 
 **Still reported:**
 - Kernel vulnerabilities on hosts, where the kernel runs.
-- All packages in container images that also include a kernel or other software built from the kernel source, such as `linux-image-*`, `linux-modules-*`, `kernel-core`, or `perf`.
-- Kernel header packages in Alpine Linux images, such as `linux-headers`.
+- All packages in a container image that also contains a kernel package, such as `linux-image-*`, `linux-modules-*`, or `kernel-core`.
+- All packages in a container image that also contains any other package built from the main kernel source that Datadog doesn't recognize as a header or development package.
+- Some other kernel header packages, such as `linux-headers` on Alpine Linux.
 - Packages with similar names that aren't part of the kernel, such as `linux-firmware`, `linux-pam`, and `util-linux`.
 {{% /collapse-content %}}
 
