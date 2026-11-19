@@ -16,7 +16,7 @@ Connect a coding agent or SDK to AI Gateway with a Datadog credential and an app
 Before you begin:
 
 - Complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule.
-- Have a [personal access token or service access token][applications-2] whose principal and scope allow `ai_gateway_usage`.
+- Have a [personal access token, service access token, or Workload Identity Federation token][applications-2] whose principal and scope allow `ai_gateway_usage`.
 - Review the [data capture setting][applications-6] before sending sensitive content.
 - Choose `<PROVIDER_SLUG>/<MODEL_ID>` for a specific provider model, or `router/<RULE_SLUG>` for a routing rule. The target must support the client's request format, either natively or through API translation. Translation supports a subset of each API; available client features depend on the target.
 
@@ -28,8 +28,9 @@ AI Gateway accepts the following Datadog credentials. The user or service accoun
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
 | [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+| [Workload Identity Federation][applications-22] token | `Authorization: Bearer <WIF_TOKEN>` |
 
-For service workloads, use a service access token. Store credentials in your application's secret manager and keep them out of source control and logs.
+For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
 
 The following shell examples use Bash or Zsh. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`, then set the model identifier:
 
@@ -190,6 +191,244 @@ for block in message.content:
 
 Run `python anthropic_example.py` from the terminal where you set the token and model. Only inference operations supported by AI Gateway and the selected model are available. See the [Anthropic Python SDK documentation][applications-21] for client options.
 
+<!-- vale Datadog.headings = NO -->
+## Authenticate AWS workloads with Workload Identity Federation
+<!-- vale Datadog.headings = YES -->
+
+With [Workload Identity Federation][applications-22] (WIF), an application running in AWS exchanges its AWS role for a short-lived Datadog token. It sends that token to AI Gateway as `Authorization: Bearer <WIF_TOKEN>`. You don't create, store, or rotate a Datadog credential for the application.
+
+### Map the AWS role to a service account
+
+1. Connect the application's AWS account to Datadog with the [AWS integration][applications-23].
+2. [Create a service account][applications-24] for the application, and give it a role that allows `ai_gateway_usage`. A service account for each application lets you attribute usage to each one and give each its own [model access][applications-25] and [budgets][applications-4].
+3. From the application's environment, find its assumed-role ARN:
+
+   ```shell
+   aws sts get-caller-identity --query Arn --output text
+   ```
+
+   The ARN has the form `arn:aws:sts::<ACCOUNT_ID>:assumed-role/<ROLE_NAME>/<SESSION_NAME>`. Use this assumed-role ARN, not the IAM role ARN (`arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>`).
+4. Go to **Organization Settings > Workload Identity Federation > Identity Mappings** and click **New Mapping**. Select **AWS**, enter `arn:aws:sts::<ACCOUNT_ID>:assumed-role/<ROLE_NAME>/*` as the source pattern, and select the service account as the target identity. The `*` matches any session name, which Amazon ECS and Amazon EKS generate.
+5. Copy your organization UUID from the **Workload Identity Federation** page.
+
+Creating mappings requires the `workload_identity_federation_config_write` permission. For the full setup, see [Workload Identity Federation][applications-22].
+
+### Get a token in your application
+
+The Datadog API clients for Python and Go perform the token exchange. The application's AWS role needs no additional AWS permissions. Each example reuses the token until shortly before it expires and then requests a new one.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Install the packages:
+
+```shell
+python -m pip install datadog-api-client boto3 openai anthropic
+```
+
+Save the following as `datadog_wif.py`. The Datadog API client reads AWS credentials from environment variables only. `BotoAWSAuth` passes it the credentials that boto3 finds instead, including EC2 instance profiles, Amazon ECS task roles, and Amazon EKS service account roles:
+
+```python
+import threading
+from datetime import datetime, timedelta
+
+import boto3
+from datadog_api_client import Configuration
+from datadog_api_client.aws import PROVIDER_AWS, AWSAuth, AWSCredentials
+from datadog_api_client.delegated_auth import DelegatedTokenConfig
+
+
+class BotoAWSAuth(AWSAuth):
+    """Signs the token exchange with the AWS credentials that boto3 finds."""
+
+    def __init__(self, session=None, aws_region=None):
+        super().__init__(aws_region=aws_region)
+        self._session = session or boto3.Session()
+
+    def get_credentials(self) -> AWSCredentials:
+        creds = self._session.get_credentials().get_frozen_credentials()
+        return AWSCredentials(creds.access_key, creds.secret_key, creds.token)
+
+
+class DatadogToken:
+    """Holds a short-lived Datadog token and refreshes it before it expires."""
+
+    def __init__(self, org_uuid: str, site: str, refresh_margin=timedelta(minutes=2)):
+        self._api_config = Configuration(host=f"https://api.{site}")
+        self._auth = BotoAWSAuth()
+        self._config = DelegatedTokenConfig(org_uuid, PROVIDER_AWS, self._auth)
+        self._margin = refresh_margin
+        self._creds = None
+        self._lock = threading.Lock()
+
+    def get(self) -> str:
+        with self._lock:
+            if self._creds is None or datetime.now() >= self._creds.expiration - self._margin:
+                self._creds = self._auth.authenticate(self._config, self._api_config)
+            return self._creds.delegated_token
+```
+
+Pass a current token on each request with `with_options`. With the OpenAI Python SDK:
+
+```python
+import os
+
+from openai import OpenAI
+
+from datadog_wif import DatadogToken
+
+site = os.environ["DD_SITE"]
+token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site=site)
+
+client = OpenAI(
+    api_key="unused",  # replaced with a Datadog token on each request
+    base_url=f"https://ai-gateway.{site}/ai/v1",
+)
+
+response = client.with_options(api_key=token.get()).responses.create(
+    model=os.environ["DD_AI_GATEWAY_MODEL"],
+    input="Reply with exactly: Gateway connected.",
+)
+print(response.output_text)
+```
+
+With the Anthropic Python SDK:
+
+```python
+import os
+
+from anthropic import Anthropic
+
+from datadog_wif import DatadogToken
+
+site = os.environ["DD_SITE"]
+token = DatadogToken(org_uuid=os.environ["DD_ORG_UUID"], site=site)
+
+client = Anthropic(
+    auth_token="unused",  # replaced with a Datadog token on each request
+    base_url=f"https://ai-gateway.{site}/ai",
+)
+
+message = client.with_options(auth_token=token.get()).messages.create(
+    model=os.environ["DD_AI_GATEWAY_MODEL"],
+    max_tokens=128,
+    messages=[{"role": "user", "content": "Reply with exactly: Gateway connected."}],
+)
+for block in message.content:
+    if block.type == "text":
+        print(block.text)
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Add the modules:
+
+```shell
+go get github.com/DataDog/datadog-api-client-go/v2 github.com/aws/aws-sdk-go-v2/config
+```
+
+The Datadog API client reads AWS credentials from the request context. `DatadogToken` passes it the credentials that the AWS SDK finds, including EC2 instance profiles, Amazon ECS task roles, and Amazon EKS service account roles:
+
+```go
+package main
+
+import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"sync"
+	"time"
+
+	datadog "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+	"github.com/aws/aws-sdk-go-v2/config"
+)
+
+// DatadogToken holds a short-lived Datadog token and refreshes it before it expires.
+type DatadogToken struct {
+	Site    string
+	OrgUUID string
+
+	mu      sync.Mutex
+	token   string
+	expires time.Time
+}
+
+func (t *DatadogToken) Get(ctx context.Context) (string, error) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	if t.token != "" && time.Until(t.expires) > 2*time.Minute {
+		return t.token, nil
+	}
+	awsCfg, err := config.LoadDefaultConfig(ctx)
+	if err != nil {
+		return "", err
+	}
+	creds, err := awsCfg.Credentials.Retrieve(ctx)
+	if err != nil {
+		return "", err
+	}
+	ctx = context.WithValue(ctx, datadog.ContextServerVariables, map[string]string{"site": t.Site})
+	ctx = context.WithValue(ctx, datadog.ContextAWSVariables, map[string]string{
+		datadog.AWSAccessKeyIdName:     creds.AccessKeyID,
+		datadog.AWSSecretAccessKeyName: creds.SecretAccessKey,
+		datadog.AWSSessionTokenName:    creds.SessionToken,
+	})
+	cfg := &datadog.DelegatedTokenConfig{
+		OrgUUID:      t.OrgUUID,
+		Provider:     datadog.ProviderAWS,
+		ProviderAuth: &datadog.AWSAuth{},
+	}
+	res, err := cfg.ProviderAuth.Authenticate(ctx, cfg)
+	if err != nil {
+		return "", err
+	}
+	t.token, t.expires = res.DelegatedToken, res.Expiration
+	return t.token, nil
+}
+
+func main() {
+	ctx := context.Background()
+	site := os.Getenv("DD_SITE")
+	token := &DatadogToken{Site: site, OrgUUID: os.Getenv("DD_ORG_UUID")}
+
+	bearer, err := token.Get(ctx)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "get Datadog token:", err)
+		os.Exit(1)
+	}
+
+	body, _ := json.Marshal(map[string]any{
+		"model": os.Getenv("DD_AI_GATEWAY_MODEL"),
+		"input": "Reply with exactly: Gateway connected.",
+	})
+	req, _ := http.NewRequestWithContext(ctx, http.MethodPost,
+		"https://ai-gateway."+site+"/ai/v1/responses", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+bearer)
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "call AI Gateway:", err)
+		os.Exit(1)
+	}
+	defer resp.Body.Close()
+	out, _ := io.ReadAll(resp.Body)
+	fmt.Println(resp.Status, string(out))
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Set `DD_SITE` to your Datadog site ({{< region-param key="dd_site" code="true" >}}), `DD_ORG_UUID` to your organization UUID, and `DD_AI_GATEWAY_MODEL` to the model identifier. Then run the example in an environment that has the AWS role.
+
+If the token exchange returns `401`, no mapping matches the application's role. Check that the source pattern uses the assumed-role ARN, and that the AWS account is connected through the AWS integration. If AI Gateway returns `403`, check that the service account allows `ai_gateway_usage` and has access to the model.
+
 ## Attribute requests to an application
 
 By default, Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
@@ -248,3 +487,7 @@ See [Gateway troubleshooting][applications-7] for Gateway error codes.
 [applications-19]: https://code.claude.com/docs/en/model-config
 [applications-20]: https://learn.chatgpt.com/docs/enterprise/roll-out-a-gateway
 [applications-21]: https://platform.claude.com/docs/en/cli-sdks-libraries/overview
+[applications-22]: /account_management/workload_identity_federation/
+[applications-23]: /integrations/amazon_web_services/
+[applications-24]: /account_management/org_settings/service_accounts/
+[applications-25]: /ai_gateway/access_control/
