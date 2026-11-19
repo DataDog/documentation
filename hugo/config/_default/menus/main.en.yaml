@@ -9068,11 +9068,16 @@ menu:
       identifier: ai_guard_sensitive_data_redaction
       parent: ai_guard
       weight: 4
+    - name: Control Evaluations in Code
+      url: /security/ai_guard/middleware/
+      identifier: ai_guard_middleware
+      parent: ai_guard
+      weight: 5
     - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 5
+      weight: 6
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
