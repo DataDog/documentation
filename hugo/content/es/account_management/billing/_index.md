@@ -8,29 +8,29 @@ title: Facturación
 
 El ciclo de facturación comienza el primero del mes (UTC) independientemente de cuándo se registre. Su primer mes se prorratea según su fecha real de registro.
 
-Datadog mide cada hora el número de servidores y de Custom Metrics. La cantidad facturable de servidores se calcula al final del mes utilizando la cantidad máxima (marca de agua alta) del 99 por ciento inferior de uso para esas horas. Datadog excluye el 1 por ciento superior para reducir el impacto de los picos de uso en su factura. El conteo facturable de Custom Metrics se basa en el número promedio de horas de Custom Metrics durante el mes. Consulte su [Usage][1] en Datadog. Las páginas de facturación solo son accesibles para usuarios con el rol de Datadog Admin.
+Datadog mide el conteo de servidores y Custom Metrics cada hora. La cantidad facturable de servidores se calcula al final del mes utilizando la cantidad máxima (marca de agua alta) del 99 por ciento inferior de uso para esas horas. Datadog excluye el 1 por ciento superior para reducir el impacto de los picos de uso en su factura. El conteo facturable de Custom Metrics se basa en el número promedio de horas de Custom Metrics durante el mes. Consulte su [Usage][1] en Datadog. Las páginas de facturación solo son accesibles para usuarios con el rol de Datadog Admin.
 
 ### Hosts {#hosts}
 
-Un servidor es cualquier instancia física o virtual de un sistema operativo que usted monitorea con Datadog. Podría ser un servidor, una VM, un nodo (en el caso de Kubernetes), una instancia de App Service Plan (en el caso de Azure App Service) o un dyno de Heroku (en el caso de la plataforma Heroku). Los servidores pueden ser instancias con el Datadog Agent instalado, además de instancias de Amazon EC2 o VM de Google Cloud, Azure o vSphere monitoreadas mediante Integrations de Datadog. Cualquier instancia de EC2 o VM con el Agent instalado cuenta como una sola instancia (sin doble facturación).
+Un servidor es cualquier instancia de sistema operativo física o virtual que usted monitorea con Datadog. Podría ser un servidor, una VM, un nodo (en el caso de Kubernetes), una instancia de App Service Plan (en el caso de Azure App Service) o un dyno de Heroku (en el caso de la plataforma Heroku). Los servidores pueden ser instancias con el Datadog Agent instalado, además de cualquier VM de Amazon EC2, Google Cloud, Azure o vSphere monitoreada con integraciones de Datadog. Cualquier instancia de EC2 o VM con el Agent instalado cuenta como una sola instancia (sin doble facturación).
 
-Los servidores que no reportan (estado `INACTIVE` en su [Infrastructure list][2]) no cuentan para la facturación. Estos servidores pueden tardar hasta 2 horas en desaparecer de la [Infrastructure List][2]. Datadog conserva los datos históricos de estos servidores (cuentas pagas). Las métricas se pueden graficar en un tablero conociendo el nombre específico del servidor o las etiquetas.
+Los servidores que no reportan (estado `INACTIVE` en su [Infrastructure list][2]) no cuentan para la facturación. Estos servidores pueden tardar hasta 2 horas en desaparecer de la [Infrastructure List][2]. Datadog conserva los datos históricos de estos servidores (cuentas pagas). Las métricas se pueden graficar en un panel conociendo el nombre específico del servidor o las etiquetas.
 
 ### Containers {#containers}
 
-Se recomienda monitorear los contenedores con un solo Agent en un contenedor por servidor. Este Agent recopila métricas tanto del contenedor como del servidor. Si elige instalar el Agent directamente en cada contenedor, cada contenedor se cuenta como un servidor a efectos de facturación. Puede encontrar más detalles en la documentación de [instalación del Agent][3].
+Se recomienda que los contenedores sean monitoreados con un solo Agent contenedorizado por servidor. Este Agent recopila métricas tanto del contenedor como del servidor. Si elige instalar el Agent directamente en cada contenedor, cada contenedor se cuenta como un servidor desde una perspectiva de facturación. Puede encontrar más detalles en la documentación de [instalación del Agent][3].
 
 ### Serverless {#serverless}
 
 Datadog factura en función del número promedio de funciones por hora a lo largo del mes para sus cuentas. Cada hora, Datadog registra el número de funciones que se ejecutaron una o más veces y que fueron monitoreadas por su cuenta de Datadog. Al final del mes, Datadog realiza el cobro calculando el promedio del número de funciones registradas por hora. Los planes Pro y Enterprise incluyen cinco Custom Metrics por función facturable.
 
-La facturación de APM de Serverless se basa en la suma de las invocaciones de AWS Lambda conectadas a los spans ingeridos por APM en un mes determinado. También se le facturará por el número total de [spans indexados][4] enviados al servicio Datadog APM que excedan la cantidad incluida al final del mes. No hay [hosts de APM][4] facturables cuando se utiliza Serverless.
+La facturación de APM de Serverless se basa en la suma de las invocaciones de AWS Lambda conectadas a los spans ingeridos por APM en un mes determinado. También se le facturará por el número total de [spans indexados][4] enviados al servicio Datadog APM que excedan la cantidad incluida al final del mes. No hay [APM Hosts][4] facturables cuando se utiliza Serverless.
 
 Para obtener más información, consulte la [página de facturación de Serverless][5] y la [página de precios de Datadog][6].
 
 ### IoT {#iot}
 
-Datadog mide el recuento de dispositivos IoT cada hora. El recuento facturable de dispositivos IoT se calcula al final del mes utilizando el recuento máximo (marca de nivel alto) del 99 por ciento inferior de uso para esas horas, excluyendo el 1 por ciento superior para reducir el impacto de los picos de uso en su factura.
+Datadog mide el recuento de dispositivos IoT cada hora. El recuento facturable de dispositivos IoT se calcula al final del mes utilizando el recuento máximo (marca de nivel alto) del 99 % inferior de uso para esas horas, excluyendo el 1 % superior para reducir el impacto de los picos de uso en su factura.
 
 Para obtener más información sobre la facturación de IoT, consulte la [página de precios de Datadog][7].
 
@@ -38,7 +38,7 @@ Para obtener más información sobre la facturación de IoT, consulte la [págin
 
 Para administrar su {{< ui >}}Payment Method{{< /ui >}} y ver {{< ui >}}Subscription Details{{< /ui >}}, debe ser un usuario Datadog Admin.
 
-Alternativamente, los roles con los [permisos][8] Billing Read (`billing_read`) y Contract Read (`contract_read`) pueden ver estos datos. Para administrar su método de pago también se requiere el permiso Billing Edit (`billing_edit`).
+Alternativamente, los roles con los [permisos][8] Billing Read (`billing_read`) y Contract Read (`contract_read`) pueden ver estos datos. La administración de su método de pago también requiere el permiso Billing Edit (`billing_edit`).
 
 ### Administración de su método de pago {#managing-your-payment-method}
 
@@ -62,11 +62,11 @@ Puede ver sus datos de contacto de facturación en la sección [**Billing Contac
 
 **Nota**: La dirección de correo electrónico no tiene que pertenecer a un miembro del equipo de Datadog. Por ejemplo, podría usar `invoices@example.com`.
 
-### Consulte los detalles de su suscripción {#view-your-subscription-details}
+### Ver los detalles de su suscripción {#view-your-subscription-details}
 
 La sección [Subscription Details][9] incluye la cantidad, el precio del contrato y el precio bajo demanda de todos los productos contratados.
 
-{{< img src="/account_management/billing/subscription_details.png" alt="Página Account Plan & Usage que resalta la sección Subscription Details" style="width:90%;" >}}
+{{< img src="/account_management/billing/subscription_details.png" alt="Página Account Plan & Usage con la sección Subscription Details resaltada" style="width:90%;" >}}
 
 **Nota**: Si su facturación se gestiona directamente a través de un socio de Datadog, Subscription Details no está disponible.
 
@@ -78,15 +78,15 @@ Existen dos opciones para el método de pago:
 
 ### Tarjeta de crédito {#credit-card}
 
-Si paga con tarjeta de crédito, los recibos de los meses anteriores están disponibles para los [Administrators][10] en [Billing History][11]. Para obtener copias de su factura, envíe un correo electrónico a [Datadog billing][13].
+Si paga con tarjeta de crédito, los recibos de los meses anteriores están disponibles para los [Administrators][10] en [Billing History][11]. Para obtener copias de su factura, envíe un correo electrónico a [Facturación de Datadog][13].
 
 Consulte [Facturación con tarjeta de crédito][12] para obtener más detalles.
 
 ### Facturación {#invoicing}
 
-Si paga con cheque, ACH o transferencia bancaria, las facturas se envían por correo electrónico a las direcciones de facturación alrededor del décimo día hábil de cada mes. Para solicitar una copia adicional, envíe un correo electrónico a [Datadog billing][13]. Los detalles sobre dónde realizar el pago se pueden encontrar en la factura.
+Si paga con cheque, ACH o transferencia bancaria, las facturas se envían a las direcciones de correo electrónico de facturación alrededor del décimo día hábil de cada mes. Para solicitar una copia adicional, envíe un correo electrónico a [Facturación de Datadog][13]. Los detalles sobre dónde realizar el pago se pueden encontrar en la factura.
 
-## Contáctenos {#contact}
+## Contacto {#contact}
 
 | Pregunta o inquietud                                                                                                                                                                               | Contacto                      |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
@@ -108,7 +108,7 @@ Si paga con cheque, ACH o transferencia bancaria, las facturas se envían por co
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (rastreo distribuido y Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}Optimización de CI/CD{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}Integración de AWS{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Integración de Azure{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Integración de Alibaba{{< /nextlink >}}

@@ -12,7 +12,7 @@ further_reading:
 - link: "/actions/private_actions/set_up_agent_based/"
   tag: "Documentation"
   text: "Set up a private action runner"
-- link: "/actions/private_actions/execution_policies/"
+- link: "/actions/execution_policies/"
   tag: "Documentation"
   text: "Execution Policies"
 - link: "/actions/connections/"
@@ -77,5 +77,5 @@ For the full setup instructions (creating, editing, and restricting connections,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /actions/private_actions/enroll_runner/
-[2]: /actions/private_actions/execution_policies/
+[2]: /actions/execution_policies/
 [3]: /actions/connections/

@@ -14,7 +14,7 @@ further_reading:
 - link: "/actions/private_actions/enroll_runner"
   tag: "Documentation"
   text: "Enrollment and ownership"
-- link: "/actions/private_actions/execution_policies"
+- link: "/actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
 - link: "/actions/private_actions/set_up_standalone"
@@ -444,7 +444,7 @@ terraform apply -var="datadog_api_key=<YOUR_API_KEY>" -var="datadog_app_key=<YOU
 [2]: /remote_configuration
 [3]: https://app.datadoghq.com/fleet/install-agent/latest
 [4]: /actions/connections/
-[5]: /actions/private_actions/execution_policies/
+[5]: /actions/execution_policies/
 [6]: https://app.datadoghq.com/actions/action-catalog
 [7]: /actions/private_actions/reference/
 [8]: /actions/private_actions/enroll_runner/

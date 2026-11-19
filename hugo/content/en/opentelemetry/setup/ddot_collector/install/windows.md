@@ -6,7 +6,7 @@ code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 ---
 
 ## Overview
