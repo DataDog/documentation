@@ -31,14 +31,14 @@ Your SDK and your Collector are separate choices. A DDOT SDK or an upstream Open
 
 | Option | When to use it | Datadog Agent | Platforms |
 |---|---|---|---|
-| [DDOT Collector](#ddot-collector) (Preview) | You want a Datadog-supported Collector on Kubernetes | Recommended | Kubernetes |
+| [DDOT Collector](#ddot-collector) (recommended, Preview) | You want a Datadog-supported Collector on Kubernetes | Recommended | Kubernetes |
 | [Upstream OpenTelemetry Collector](#upstream-opentelemetry-collector) | You use an upstream Collector, or your own build | Not used | Hosts, VMs, Docker, and Kubernetes |
 | [Direct OTLP ingest](#direct-otlp-ingest) | You can't run a Collector | Not used | Serverless functions, managed platforms, and any application that can reach Datadog |
 | [Datadog Agent](#datadog-agent) | You already run the Datadog Agent | Required | [Datadog Agent-supported platforms][7] |
 
 To check which Datadog features each option supports, see [Feature Compatibility][8].
 
-## DDOT Collector
+## DDOT Collector (recommended) {#ddot-collector}
 
 {{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
