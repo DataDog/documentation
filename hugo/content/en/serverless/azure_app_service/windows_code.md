@@ -902,8 +902,7 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-danger">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
-    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
+<div class="alert alert-danger">Programmatic management is not available for Java Web Apps.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
