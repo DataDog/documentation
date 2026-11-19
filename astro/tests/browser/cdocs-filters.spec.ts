@@ -183,6 +183,55 @@ test.describe("cdocs filterable doc (SSR)", () => {
   });
 });
 
+test.describe("cdocs URLs for crawlers", () => {
+  const canonical = (page: import("@playwright/test").Page) =>
+    page.locator('link[rel="canonical"]');
+
+  test("a value the page doesn't offer redirects to the one it shows", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      `${CDOC_URL}?utm_source=x&prog_lang=cobol&api_type=dd_api`,
+      { maxRedirects: 0 },
+    );
+    expect(response.status()).toBe(301);
+    expect(response.headers().location).toBe(
+      `${CDOC_URL}?api_type=dd_api&prog_lang=java&utm_source=x`,
+    );
+  });
+
+  test("valid params render without a redirect, in any order", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      `${CDOC_URL}?prog_lang=python&api_type=dd_api`,
+      { maxRedirects: 0 },
+    );
+    expect(response.status()).toBe(200);
+  });
+
+  test("the default variant's canonical URL is the bare URL, and its URL keeps its params", async ({
+    page,
+  }) => {
+    await page.goto(`${CDOC_URL}?prog_lang=java`);
+    await expect(canonical(page)).toHaveAttribute(
+      "href",
+      new RegExp(`${CDOC_URL}$`),
+    );
+    await expect(page).toHaveURL(new RegExp("prog_lang=java"));
+  });
+
+  test("another variant's canonical URL has its values, in alphabetical order", async ({
+    page,
+  }) => {
+    await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
+    await expect(canonical(page)).toHaveAttribute(
+      "href",
+      new RegExp(`${CDOC_URL}\\?api_type=dd_api&prog_lang=python$`),
+    );
+  });
+});
+
 test.describe("links to cdocs pages", () => {
   const LINKS_URL = "/dd_e2e/cdocs/links/";
 

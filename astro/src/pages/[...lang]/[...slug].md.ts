@@ -17,7 +17,8 @@
 // captured locale is used to 404, not to pick a collection.
 //
 // Filters resolve from the URL only, the same way as the HTML page, so a `.md`
-// URL with the same query as an HTML URL gets the same variant. Below the
+// URL with the same query as an HTML URL gets the same variant, and a filter
+// param the page can't use redirects the same way. Below the
 // title, a Cdoc lists its other variants, since the plaintext holds only one.
 //
 // Plaintext has no JavaScript to add stored preferences to links, so the
@@ -29,6 +30,7 @@ import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { findParamRedirect } from "@lib/cdocs/paramRedirect";
 import { isApiContent } from "@lib/api/overviewPages";
 import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
@@ -65,7 +67,7 @@ function insertAfterTitle(text: string, block: string): string {
   return `${head}${block}${text.slice(afterHeading + 2)}`;
 }
 
-export const GET: APIRoute = async ({ params, url, site }) => {
+export const GET: APIRoute = async ({ params, url, site, redirect }) => {
   // Two adjacent rest params are ambiguous, so the leading path segment is
   // captured as `lang` whether or not it is a locale; `resolveUnprefixedSlug`
   // puts it back and 404s a real locale prefix. The result is the path without
@@ -121,6 +123,15 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       filtersManifest,
       searchParams: url.searchParams,
     });
+    const redirectQuery = findParamRedirect({
+      contentFilters,
+      filtersManifest,
+      searchParams: url.searchParams,
+      valsByTraitId,
+    });
+    if (redirectQuery !== null) {
+      return redirect(`${url.pathname}${redirectQuery}`, 301);
+    }
     const bareUrl = `/${slug}/`;
     const variantList = buildMarkdocStr(
       cdocsFilterBarNodes(

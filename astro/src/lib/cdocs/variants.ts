@@ -205,6 +205,20 @@ export function compareCodeUnits(stringA: string, stringB: string): number {
   return stringA < stringB ? -1 : 1;
 }
 
+/** The bare URL with each value as a param, alphabetical by trait. */
+export function buildVariantUrl(
+  bareUrl: string,
+  valsByTraitId: Record<string, string>,
+): string {
+  const params = new URLSearchParams(
+    Object.entries(valsByTraitId).sort(([traitIdA], [traitIdB]) =>
+      compareCodeUnits(traitIdA, traitIdB),
+    ),
+  );
+  const query = params.toString();
+  return query ? `${bareUrl}?${query}` : bareUrl;
+}
+
 // Private functions ------------------------------------------------
 
 /**
@@ -232,18 +246,4 @@ function describeVariant(
     sentences.push(`${VARIANT_FILTERS_INTRO} ${filterValues}.`);
   }
   return sentences.join(" ");
-}
-
-/** The bare URL with each value as a param, alphabetical by trait. */
-function buildVariantUrl(
-  bareUrl: string,
-  valsByTraitId: Record<string, string>,
-): string {
-  const params = new URLSearchParams(
-    Object.entries(valsByTraitId).sort(([traitIdA], [traitIdB]) =>
-      compareCodeUnits(traitIdA, traitIdB),
-    ),
-  );
-  const query = params.toString();
-  return query ? `${bareUrl}?${query}` : bareUrl;
 }
