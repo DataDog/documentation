@@ -27,7 +27,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_gcp_tab.mp4" alt="Video showing a Cloudcraft diagram in the security overlay. A resource is selected, opening a side panel with its details. The Changes option is selected from the left hand side of the side panel. In the Security section of the side panel, several misconfigurations are listed. The Investigate button next to one of the misconfigurations is clicked, opening a new side panel with details of the misconfiguration and a Next Steps section with options for Triage, Remediation, and More Actions" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_gcp_tab_2.mp4" alt="Video showing a Cloudcraft diagram with the Security overlay. An EC2 instance is selected, opening a mini panel, and View Full Details opens the side panel. In the Security section of the side panel, misconfigurations are listed. The Investigate button next to one of the misconfigurations is clicked, opening a panel with details of the misconfiguration, a Next Steps section with remediation options, and a Context Graph" video=true >}}
 
 ## Prerequisites
 
@@ -178,7 +178,7 @@ To apply a saved view to your diagram:
 
 Use the zoom feature to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Clicking on a resource opens a mini panel with basic information. In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_security_3.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_security_4.mp4" alt="Video showing zooming into a Cloudcraft diagram, clicking an S3 bucket to open its mini panel, and clicking View Full Details to open the side panel with the bucket's security findings" video=true >}}
 
 #### Projection toggle
 
@@ -196,7 +196,7 @@ In {{< ui >}}Full Map Controls{{< /ui >}}, click the {{< ui >}}\+ Filter{{< /ui 
 
 Use the search bar to locate resources on the diagram by name, ID, or tag. This feature is effective for finding specific resources within your cloud architecture. It highlights the search criteria in the diagram, without creating a new diagram, by greying out the elements that do not match the search criteria.
 
-{{< img src="datadog_cloudcraft/search_highlight_5.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/search_highlight_6.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
 ## Permissions
 
