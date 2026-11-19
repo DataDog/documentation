@@ -165,6 +165,8 @@ AI Gateway supports these model families on each provider. It also supports cust
 | Anthropic Claude | | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Gemini | | | {{< X >}} | | |
 
+Gemini models are available only through GCP Vertex AI. AI Gateway does not yet support the Gemini API (`generativelanguage.googleapis.com`) as a provider, or the Gemini Interactions API on Vertex AI.
+
 Open a provider from the list to review its connection, models, generated requests, and traffic. Click {{< ui >}}Edit provider{{< /ui >}} to change its display name or model settings. Manage caller access through access policies.
 
 The slug, provider type, integration account, and connection configuration cannot be changed after you create the provider. To move to a different integration account or slug, create another provider, verify it, then update dependent applications and routing rules. Before deleting a provider, review the dependency impact shown in the confirmation. A decision model chooses the destination for a smart routing rule. If a rule uses this provider as its decision model, select another decision model before deleting the provider.
