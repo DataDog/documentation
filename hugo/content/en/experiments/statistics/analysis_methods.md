@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/two-ways-to-measure-cumulative-impact/"
   tag: "Blog"
   text: "Two ways to measure the cumulative impact of experiments"
+- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
+  tag: "Blog"
+  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview

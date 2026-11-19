@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview
