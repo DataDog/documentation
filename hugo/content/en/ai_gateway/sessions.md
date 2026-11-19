@@ -25,7 +25,7 @@ A session is the set of [AI Gateway][1] requests that belong to one conversation
 - Remember the destination that served the session with [session pinning](/ai_gateway/routing/#session-pinning), so later turns, including turns that depend on provider-side state, return to it.
 - Group the session's requests as one session in Agent Observability.
 
-Send a session ID with the `x-session-id` request header. Claude Code and Codex send their own session IDs, so you do not need to set the header for them. See [Claude Code and Codex sessions](#claude-code-and-codex-sessions).
+Send a session ID with the `x-session-id` request header. Claude Code, Codex, and several other coding agents send their own session IDs, so you do not need to set the header for them. See [Claude Code and Codex sessions](#claude-code-and-codex-sessions) and [Other client sessions](#other-client-sessions).
 
 ## Set the session for a request
 
@@ -55,12 +55,15 @@ AI Gateway reads the session from the first valid signal in this order:
 
 | Order | Signal | Sent by |
 |---|---|---|
-| 1 | `x-session-id` header | Your application |
-| 2 | `x-claude-code-session-id` header. For a subagent, combined with the `x-claude-code-agent-id` header. | Claude Code |
+| 1 | `x-session-id` header | Your application, OpenCode 1.17 and later, Kilo Code 7, and clients that follow OpenRouter's `x-session-id` convention |
+| 2 | `x-claude-code-session-id` header. For a subagent, combined with the `x-claude-code-agent-id` header. | Claude Code, including applications built with the Claude Agent SDK |
 | 3 | `client_metadata.session_id` in the request body, or `client_metadata.thread_id` when `session_id` is absent. OpenAI Responses requests only. | Codex |
 | 4 | `x-dd-tag-client_session_id` header, sent exactly once | Any client |
+| 5 | `x-session-affinity` header | OpenCode 1.4 to 1.16, Kilo Code 7, pi, and OpenClaw |
+| 6 | `session-id` header, or `session_id` header when `session-id` is absent or invalid. OpenAI Responses requests only. | pi, OpenClaw, and the OpenAI providers of Roo Code and OpenCode |
+| 7 | `x-litellm-session-id` header | OpenHands SDK |
 
-A missing or invalid signal does not reject the request. AI Gateway ignores it and checks the next signal.
+Header signals follow the same rules as `x-session-id`: each must be sent exactly once, with a valid value. A missing or invalid signal does not reject the request. AI Gateway ignores it and checks the next signal. AI Gateway does not read `x-client-request-id`, because that header identifies a single request rather than a session.
 
 The same value produces the same session, whichever signal carries it. For example, `x-session-id: abc` and `x-dd-tag-client_session_id: abc` name the same session. A Claude Code subagent is the exception. Its session combines the parent session ID and the agent ID, so each subagent has a session of its own.
 
@@ -76,7 +79,7 @@ If a request carries no valid session signal:
 
 To route a request without session affinity or session pinning, send the `x-session-id` header with an empty value. With curl, `-H "x-session-id;"` sends an empty header.
 
-An empty `x-session-id` header is different from no header. For routing, AI Gateway does not fall back to a coding agent's session signal or to the opening-content fingerprint. Weighted steps use their configured order, and session pinning does not apply.
+An empty `x-session-id` header is different from no header. For routing, AI Gateway does not fall back to any other session signal or to the opening-content fingerprint. Weighted steps use their configured order, and session pinning does not apply.
 
 <!-- vale Datadog.headings = NO -->
 
@@ -87,12 +90,33 @@ An empty `x-session-id` header is different from no header. For routing, AI Gate
 Claude Code and Codex identify their sessions without extra configuration:
 
 Claude Code
-: Sends `x-claude-code-session-id` on every request of a session, including background requests. Subagent requests keep the parent's session ID and add `x-claude-code-agent-id`, so each subagent has its own session for routing and pinning. In Agent Observability, subagent requests appear in the parent's session.
+: Sends `x-claude-code-session-id` on every request of a session, including background requests. Subagent requests keep the parent's session ID and add `x-claude-code-agent-id`, so each subagent has its own session for routing and pinning. In Agent Observability, subagent requests appear in the parent's session. The Claude Agent SDK runs Claude Code, so applications built with it send the same headers.
 
 Codex
 : Sends `client_metadata.session_id` in the body of OpenAI Responses requests. The value stays the same across a session's turns and when you resume a session, and changes when you start a new one.
 
 If you set `x-session-id` for a coding agent, for example in Claude Code's `ANTHROPIC_CUSTOM_HEADERS` setting, it takes precedence over the agent's own signal. All requests, including subagent requests, then share that one session.
+
+## Other client sessions
+
+AI Gateway also reads the session headers that the following clients send. Most need no configuration. OpenClaw, and pi on OpenAI Chat Completions and Anthropic Messages requests, send their session header only when an option is set on the model:
+
+| Client | Session header | Configuration |
+|---|---|---|
+| OpenCode 1.17 and later | `x-session-id` | None |
+| OpenCode 1.4 to 1.16 | `x-session-affinity` | None |
+| OpenCode, OpenAI provider | `session-id`, on OpenAI Responses requests | None |
+| Kilo Code 7 | `x-session-id` and `x-session-affinity` | None |
+| pi | `session-id` or `session_id`, on OpenAI Responses requests | None |
+| pi | `x-session-affinity`, on OpenAI Chat Completions and Anthropic Messages requests | Set the model's `compat.sendSessionAffinityHeaders` option |
+| OpenClaw | `x-session-affinity`, on OpenAI Chat Completions and Anthropic Messages requests | Set the model's `compat.sendSessionAffinityHeaders` option |
+| OpenClaw | `session_id`, on OpenAI Responses requests | Set the model's `compat.sendSessionIdHeader` option |
+| Roo Code, OpenAI provider | `session_id`, on OpenAI Responses requests | None |
+| OpenHands SDK | `x-litellm-session-id` | None |
+
+When a client sends more than one of these headers, AI Gateway uses the first valid one in the [precedence order](#session-signals-and-precedence).
+
+Any other client that can add request headers can send `x-session-id`, for example Qwen Code with its `customHeaders` setting. Use a value that is unique to each conversation: if every conversation sends the same value, they all share one session.
 
 ## How sessions affect routing
 

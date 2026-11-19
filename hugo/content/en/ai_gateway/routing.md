@@ -43,7 +43,7 @@ AI Gateway tries the next provider or fallback destination when the current one 
 
 ## Sessions and routing
 
-A routing rule uses each request's [session](/ai_gateway/sessions/) to keep a conversation on one destination, so the provider's prompt cache stays warm and turns that depend on provider-side state reach the destination that holds it. To set a request's session, send the `x-session-id` header. Claude Code and Codex send their own session IDs. See [AI Gateway sessions](/ai_gateway/sessions/).
+A routing rule uses each request's [session](/ai_gateway/sessions/) to keep a conversation on one destination, so the provider's prompt cache stays warm and turns that depend on provider-side state reach the destination that holds it. To set a request's session, send the `x-session-id` header. Claude Code, Codex, and several other coding agents send their own session IDs. See [AI Gateway sessions](/ai_gateway/sessions/).
 
 ### Weighted routing steps
 
