@@ -6827,7 +6827,9 @@ components:
       description: Aggregated long task statistics for a single invoker type.
       properties:
         criteria_view_occurrences:
-          description: Number of sampled views where this invoker type had long tasks contributing to the criteria metric.
+          description: |-
+            Number of sampled views where this invoker type had long tasks contributing to the criteria
+            metric.
           example: 40
           format: int32
           maximum: 2147483647
@@ -6874,17 +6876,22 @@ components:
         application_id:
           description: The RUM application ID to analyze.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
         filter:
           description: RUM query string to filter events (for example, @session.type:user @geo.country:US).
           example: "@session.type:user"
+          maxLength: 10000
           type: string
         from:
-          description: Start of the time range as a Unix timestamp in seconds.
+          description: |-
+            Start of the time range as a Unix timestamp in seconds. Must be less than `to`;
+            the range cannot exceed 7 days.
           example: 1762437564
           format: int64
+          maximum: 4102444800
           type: integer
         sample_size:
           description: Number of view instances to sample, between 1 and 500.
@@ -6894,13 +6901,16 @@ components:
           minimum: 1
           type: integer
         to:
-          description: End of the time range as a Unix timestamp in seconds.
+          description: |-
+            End of the time range as a Unix timestamp in seconds. Must be greater than `from`.
           example: 1762523964
           format: int64
+          maximum: 4102444800
           type: integer
         view_name:
           description: The RUM view name to analyze (for example, /account/login).
           example: /account/login(/:type)
+          maxLength: 1000
           type: string
       required:
         - application_id
@@ -6942,6 +6952,7 @@ components:
         application_id:
           description: The RUM application ID that was analyzed.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedLongTasksResponseAttributesCriteria"
@@ -6956,11 +6967,12 @@ components:
             $ref: "#/components/schemas/AggregatedLongTasksByInvokerType"
           type: array
         sampled_view_ids:
-          description: List of RUM view IDs sampled for this aggregation, capped at 50.
+          description: IDs of sampled views that contain at least one long task. At most 50 IDs are returned.
           example:
             - 6fbf69b6-9455-436a-b894-a6bf64126d40
           items:
             type: string
+          maxItems: 50
           type: array
         to:
           description: End of the analyzed time range as a Unix timestamp in seconds.
@@ -6968,7 +6980,7 @@ components:
           format: int64
           type: integer
         view_count:
-          description: Number of view instances included in the analysis.
+          description: Number of sampled views that contain at least one long task.
           example: 50
           format: int32
           maximum: 2147483647
@@ -6988,7 +7000,9 @@ components:
         - long_tasks_by_invoker_type
       type: object
     AggregatedLongTasksResponseAttributesCriteria:
-      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      description: |-
+        Performance criteria used to filter view instances by a metric threshold, or null if no
+        criteria were applied.
       nullable: true
       properties:
         max:
@@ -7012,8 +7026,9 @@ components:
         attributes:
           $ref: "#/components/schemas/AggregatedLongTasksResponseAttributes"
         id:
-          description: Hash-based unique identifier for this aggregation.
-          example: 2f0b3455
+          description: Unique UUID identifying this response.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
           type: string
         type:
           $ref: "#/components/schemas/AggregatedLongTasksRequestType"
@@ -7230,6 +7245,7 @@ components:
           description: Maximum threshold in seconds (inclusive).
           example: 5.0
           format: double
+          maximum: 3600
           type: number
         metric:
           $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteriaMetric"
@@ -7237,6 +7253,7 @@ components:
           description: Minimum threshold in seconds (inclusive).
           example: 2.5
           format: double
+          maximum: 3600
           type: number
       required:
         - metric
@@ -155016,7 +155033,9 @@ components:
       description: A top long task invoker within an invoker type.
       properties:
         criteria_view_occurrences:
-          description: Number of sampled views where this invoker had long tasks contributing to the criteria metric.
+          description: |-
+            Number of sampled views where this invoker had long tasks contributing to the criteria
+            metric.
           example: 40
           format: int32
           maximum: 2147483647
@@ -155045,6 +155064,7 @@ components:
           type: integer
       required:
         - invoker
+        - file
         - view_occurrences
         - stats_per_view
       type: object
@@ -247621,7 +247641,8 @@ paths:
   /api/v2/rum/query/insight/aggregated_long_tasks:
     post:
       description: |-
-        Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.
+        Get aggregated long task data for a RUM view, grouped by invoker type and sampled across
+        multiple view instances.
       operationId: QueryAggregatedLongTasks
       requestBody:
         content:
@@ -247680,7 +247701,7 @@ paths:
                         to: 1762523964
                         view_count: 20
                         view_name: /account/login(/:type)
-                      id: 2f0b3455
+                      id: 550e8400-e29b-41d4-a716-446655440000
                       type: aggregated_long_tasks
               schema:
                 $ref: "#/components/schemas/AggregatedLongTasksResponse"
@@ -247701,6 +247722,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Query aggregated long tasks
       tags: ["RUM Insights"]
+      x-codegen-request-body-name: body
       x-menu-order: 2
       x-permission:
         operator: OR
