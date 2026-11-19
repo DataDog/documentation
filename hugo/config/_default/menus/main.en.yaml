@@ -6186,11 +6186,16 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_api
       weight: 10
+    - name: Manage with Terraform
+      url: ai_gateway/terraform/
+      parent: ai_gateway
+      identifier: ai_gateway_terraform
+      weight: 11
     - name: Troubleshooting
       url: ai_gateway/troubleshooting/
       parent: ai_gateway
       identifier: ai_gateway_troubleshooting
-      weight: 11
+      weight: 12
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
