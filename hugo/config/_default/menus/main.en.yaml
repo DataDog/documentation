@@ -847,7 +847,7 @@ menu:
       identifier: otel-setup-ddot-install
       parent: otel-setup-agent
       weight: 4042
-    - name: Custom Components in the Agent
+    - name: Add Components to the Agent's Collector
       url: /opentelemetry/setup/ddot_collector/custom_components
       identifier: otel-setup-ddot-custom
       parent: otel-setup-agent
@@ -2803,6 +2803,11 @@ menu:
       identifier: incident_ai
       parent: incident_investigate
       weight: 106
+    - name: Meeting Summaries and Transcripts
+      url: incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+      identifier: incident_meeting_summaries_transcripts
+      parent: incident_investigate
+      weight: 107
     - name: Setup and Configuration
       url: incident_response/incident_management/setup_and_configuration
       parent: incidents
@@ -7115,6 +7120,11 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
       weight: 110
+    - name: Manage Pipelines with AI Agents
+      url: observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_manage_pipelines_with_ai_agents
+      weight: 111
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines

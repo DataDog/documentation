@@ -9,13 +9,13 @@ further_reading:
   text: Metrics Explorer
 - link: /metrics/summary/
   tag: Documentation
-  text: Metrics Catalog
+  text: Catalogue de métriques
 - link: /metrics/distributions/
   tag: Documentation
   text: Distributions de métriques
 - link: /logs/explorer/search_syntax/
   tag: Documentation
-  text: Syntaxe de filtrage et de recherche des requêtes de logs
+  text: Syntaxe de recherche et de filtrage des requêtes de logs
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: Fonctions d'exclusion
@@ -23,13 +23,13 @@ title: Filtrage avancé
 ---
 ## Présentation {#overview}
 
-Lorsque vous utilisez Metrics Explorer, les moniteurs ou les Dashboards pour interroger des données de métriques, vous pouvez filtrer les données pour restreindre le périmètre des séries temporelles renvoyées. Toute métrique peut être filtrée par tag(s) en utilisant le champ {{< ui >}}from{{< /ui >}} à droite de la métrique. 
+Lorsque vous utilisez Metrics Explorer, les moniteurs ou les dashboards pour interroger des données de métriques, vous pouvez filtrer les données pour restreindre le périmètre des séries temporelles renvoyées. Toute métrique peut être filtrée par tags à l'aide du champ {{< ui >}}from{{< /ui >}} situé à droite de la métrique. 
 
-Vous pouvez également effectuer un filtrage avancé avec des filtres de valeurs de tag booléens ou Wildcard. Pour les requêtes portant sur d'autres données que les métriques, telles que les logs, les traces, Network Monitoring, Real User Monitoring, Synthetics ou Security, consultez la documentation [Log Search Syntax][1] pour connaître la configuration.
+Vous pouvez également effectuer un filtrage avancé à l'aide de filtres booléens ou Wildcard sur les valeurs des tags. Pour les requêtes portant sur d'autres données que les métriques, telles que les logs, les traces, Network Monitoring, Real User Monitoring, Synthetics ou Security, consultez la documentation [Log Search Syntax][1] pour savoir comment les configurer.
 
-## Requêtes filtrées par opérateurs booléens {#boolean-filtered-queries}
+## Requêtes filtrées à l'aide d'opérateurs booléens {#boolean-filtered-queries}
 
-La syntaxe suivante est prise en charge pour les requêtes de métriques filtrées par opérateurs booléens : 
+La syntaxe suivante est prise en charge pour les requêtes de métriques filtrées à l'aide d'opérateurs booléens : 
 
 - `!`
 - `,`
@@ -45,10 +45,7 @@ Lorsque vous souhaitez inclure ou exclure plusieurs tags :
 
 Pour plus d'informations sur les tags, consultez le guide [Getting Started With Using Tags][2].
 
-**Remarque :** La syntaxe booléenne symbolique (`!`, `,`) ne peut pas être utilisée avec les opérateurs de syntaxe fonctionnelle (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La requête suivante est considérée comme _invalide_ : 
-`avg:mymetric{env:prod AND !region:us-east}`
-
-### Exemples de requêtes filtrées par opérateurs booléens {#boolean-filtered-query-examples}
+### Exemples de requêtes filtrées à l'aide d'opérateurs booléens {#boolean-filtered-query-examples}
 
 Pour utiliser les exemples ci-dessous, cliquez sur l'icône de code {{< ui >}}</>{{< /ui >}} pour afficher l'éditeur de requête dans l'interface utilisateur, puis copiez et collez l'exemple de requête dans l'éditeur de requête.
 
@@ -72,7 +69,7 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## Requêtes filtrées par Wildcard {#wildcard-filtered-queries}
 
-Le filtrage des tags par Wildcard en préfixe, en suffixe et en sous-chaîne est pris en charge : 
+Le filtrage des valeurs de tags par Wildcard en préfixe, en suffixe ou en sous-chaîne est pris en charge : 
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
@@ -102,7 +99,7 @@ avg:system.disk.utilized{region:*east*} by {region}
 Ajoutez une [fonction d'exclusion][3] à votre requête pour : 
 - Exclure les valeurs N/A.
 - Appliquer une valeur minimale ou maximale aux métriques qui atteignent le seuil.
-- Exclure les valeurs situées au-dessus ou en dessous des valeurs seuils.
+- Exclure les valeurs supérieures ou inférieures aux valeurs seuils.
 
 Les fonctions ne suppriment pas les points de données de Datadog, mais elles les retirent de vos visualisations.
 

@@ -7023,7 +7023,9 @@ components:
         - attributes
       type: object
     AggregatedResource:
-      description: Aggregated performance statistics for a single network resource across sampled view instances.
+      description: |-
+        Aggregated performance statistics for a single network resource across sampled view
+        instances.
       properties:
         avg_duration_ms:
           description: Average total duration in milliseconds.
@@ -7053,18 +7055,24 @@ components:
           maximum: 2147483647
           type: integer
         global_p75_duration_ms:
-          description: 75th percentile duration across all view names in the application, present when include_global_appearance is true.
+          description: |-
+            75th percentile duration across all view names in the application, present when
+            include_global_appearance is true.
           example: 500.0
           format: double
           type: number
         global_view_name_count:
-          description: Number of distinct view names in the application that load this resource, present when include_global_appearance is true.
+          description: |-
+            Number of distinct view names in the application that load this resource, present when
+            include_global_appearance is true.
           example: 3
           format: int32
           maximum: 2147483647
           type: integer
         global_view_name_pct:
-          description: Percentage of distinct view names in the application that load this resource, present when include_global_appearance is true.
+          description: |-
+            Percentage of distinct view names in the application that load this resource, present when
+            include_global_appearance is true.
           example: 30.0
           format: double
           type: number
@@ -7269,17 +7277,22 @@ components:
         application_id:
           description: The RUM application ID to analyze.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
         filter:
           description: RUM query string to filter events (for example, @session.type:user @geo.country:US).
           example: "@session.type:user"
+          maxLength: 10000
           type: string
         from:
-          description: Start of the time range as a Unix timestamp in seconds.
+          description: |-
+            Start of the time range as a Unix timestamp in seconds. Must be less than `to`;
+            the range cannot exceed 7 days.
           example: 1762437564
           format: int64
+          maximum: 4102444800
           type: integer
         include_global_appearance:
           description: When true, enriches each resource with cross-view appearance statistics.
@@ -7293,13 +7306,16 @@ components:
           minimum: 1
           type: integer
         to:
-          description: End of the time range as a Unix timestamp in seconds.
+          description: |-
+            End of the time range as a Unix timestamp in seconds. Must be greater than `from`.
           example: 1762523964
           format: int64
+          maximum: 4102444800
           type: integer
         view_name:
           description: The RUM view name to analyze (for example, /account/login).
           example: /account/login(/:type)
+          maxLength: 1000
           type: string
       required:
         - application_id
@@ -7341,6 +7357,7 @@ components:
         application_id:
           description: The RUM application ID that was analyzed.
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+          format: uuid
           type: string
         criteria:
           $ref: "#/components/schemas/AggregatedWaterfallResponseAttributesCriteria"
@@ -7361,6 +7378,7 @@ components:
             - dfe318df-4ae5-44b8-9fe2-4107885e1a46
           items:
             type: string
+          maxItems: 50
           type: array
         to:
           description: End of the analyzed time range as a Unix timestamp in seconds.
@@ -7394,7 +7412,9 @@ components:
         - resources
       type: object
     AggregatedWaterfallResponseAttributesCriteria:
-      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      description: |-
+        Performance criteria used to filter view instances by a metric threshold, or null if no
+        criteria were applied.
       nullable: true
       properties:
         max:
@@ -48974,19 +48994,10 @@ components:
           example: "2023-01-01T00:00:00Z"
           format: date-time
           type: string
-        description:
-          description: The description of the environment.
-          example: "Test environment XYZ789"
-          nullable: true
-          type: string
         is_production:
           description: Indicates whether this is a production environment.
           example: false
           type: boolean
-        key:
-          description: The unique key of the environment.
-          example: "env-search-term"
-          type: string
         name:
           description: The name of the environment.
           example: "env-search-term"
@@ -51202,6 +51213,29 @@ components:
         - ZERO_VARIANCE
         - POOLED_WITHIN_VARIANCE
         - POOLED_TOTAL_VARIANCE
+    ExperimentsBanditBayesianPriorInputV2:
+      description: >-
+        The prior the bandit's estimates start from, in the metric's units. Omitted fields keep their current values, or their defaults on create. A change takes effect on the next refresh.
+      properties:
+        arm_standard_deviation:
+          description: >-
+            Prior standard deviation of each arm's mean around the shared mean. Must be between 1e-12 and 1e12. Defaults to 100.
+          example: 100
+          format: double
+          type: number
+        grand_mean:
+          description: >-
+            Prior mean of the shared mean of the arms. Its absolute value must be at most 1e12 times `grand_mean_standard_deviation`. Defaults to 0.
+          example: 0
+          format: double
+          type: number
+        grand_mean_standard_deviation:
+          description: >-
+            Prior standard deviation of the shared mean of the arms. Must be between 1e-12 and 1e12, and at most 1e7 times `arm_standard_deviation`. Defaults to 10000.
+          example: 10000
+          format: double
+          type: number
+      type: object
     ExperimentsBanditBayesianPriorV2:
       description: "The prior the bandit's estimates start from."
       properties:
@@ -51303,6 +51337,28 @@ components:
       x-enum-varnames:
         - METRIC_INCREASES
         - METRIC_DECREASES
+    ExperimentsBanditFlagConfigurationInputV2:
+      description: >-
+        The flag and environment the bandit serves on, and who it serves there. The server chooses the rule's `allocation_key`. On create, `feature_flag_id` and `environment_id` are required, and `null` is the same as omitting it. On update, omitted fields are unchanged, and `null` takes a draft off its flag, which also clears its variants and scheduled end. Moving a draft to another flag clears its variants unless the request sets them. Only a draft can change it.
+      nullable: true
+      properties:
+        environment_id:
+          description: "The environment the bandit serves in."
+          example: 660e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        feature_flag_id:
+          description: "The flag the bandit serves through."
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        targeting_rules:
+          description: "Who the bandit serves. When empty, the bandit serves everyone in the environment."
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsTargetingRule"
+          type: array
+      type: object
     ExperimentsBanditFlagConfigurationV2:
       description: >-
         The flag rule the bandit serves through. Absent until a draft is added to a flag. Also absent when the caller lacks feature flag or environment read permissions, in which case `meta.warnings` includes `datadog_flag_configuration_omitted`.
@@ -51443,6 +51499,101 @@ components:
         - point_estimate
         - confidence_interval
       type: object
+    ExperimentsBanditPolicyHistoryV2DTOArray:
+      description: "Response containing a page of a bandit's policy history."
+      properties:
+        data:
+          description: "Policies on this page."
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditPolicyHistoryV2DTOData"
+          type: array
+        links:
+          $ref: "#/components/schemas/ExperimentsOffsetLinks"
+        meta:
+          $ref: "#/components/schemas/ExperimentsOffsetMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    ExperimentsBanditPolicyHistoryV2DTOData:
+      description: "JSON:API resource containing a policy the bandit served."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyHistoryV2DTODataAttributes"
+        id:
+          description: >-
+            The policy ID. Each exposure logs it as `bandit.policy_id`, except exposures logged after the bandit ends.
+          example: dd0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyHistoryV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditPolicyHistoryV2DTODataAttributes:
+      description: "A traffic split the bandit served, with the same fields as `active_policy`."
+      properties:
+        applied_at:
+          description: "When the policy was saved. SDKs pick it up on their next configuration fetch."
+          example: "2026-10-30T02:15:00Z"
+          format: date-time
+          type: string
+        config_version:
+          description: "The configuration version the policy was made for."
+          example: 2
+          format: int64
+          type: integer
+        is_active:
+          description: >-
+            Whether this is the policy the bandit serves now, the one Get bandit returns as `active_policy`. A paused bandit keeps serving it, and an ended bandit serves its fallback.
+          example: true
+          type: boolean
+        kind:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyKind"
+        policy_number:
+          description: >-
+            The policy's place in the bandit's policy history. It follows `applied_at` and orders policies saved at the same time.
+          example: 9
+          format: int64
+          type: integer
+        reason:
+          $ref: "#/components/schemas/ExperimentsBanditPolicyReason"
+        refresh_id:
+          description: >-
+            The refresh that proposed the policy. `null` for policies no refresh proposed, such as the first split and the policy served after the bandit ends.
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        variants:
+          description: >-
+            Each variant's share of traffic. The probabilities add up to 1. A variant served as an arm keeps the key the arm had, even if the arm was removed later.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditPolicyVariantV2"
+          type: array
+      required:
+        - policy_number
+        - applied_at
+        - refresh_id
+        - config_version
+        - kind
+        - reason
+        - is_active
+        - variants
+      type: object
+    ExperimentsBanditPolicyHistoryV2DTODataType:
+      default: bandit-policies
+      description: Bandit policy resource type.
+      enum:
+        - bandit-policies
+      example: bandit-policies
+      type: string
+      x-enum-varnames:
+        - BANDIT_POLICIES
     ExperimentsBanditPolicyKind:
       description: >-
         `WARMUP` serves the arms equally. `ADAPTIVE` serves the initial split or a split from a refresh. `FALLBACK` serves one variant after the bandit ends.
@@ -51493,8 +51644,21 @@ components:
           type: string
         kind:
           $ref: "#/components/schemas/ExperimentsBanditPolicyKind"
+        policy_number:
+          description: >-
+            The policy's place in the bandit's policy history. It follows `applied_at` and orders policies saved at the same time.
+          example: 9
+          format: int64
+          type: integer
         reason:
           $ref: "#/components/schemas/ExperimentsBanditPolicyReason"
+        refresh_id:
+          description: >-
+            The refresh that proposed the policy. `null` for policies no refresh proposed, such as the first split and the policy served after the bandit ends.
+          example: bb0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
         variants:
           description: "Each variant's share of traffic. The probabilities add up to 1."
           items:
@@ -51502,10 +51666,12 @@ components:
           type: array
       required:
         - id
+        - policy_number
         - applied_at
         - config_version
         - kind
         - reason
+        - refresh_id
         - variants
       type: object
     ExperimentsBanditPolicyVariantV2:
@@ -51596,6 +51762,51 @@ components:
         - started_at
         - ended_at
       type: object
+    ExperimentsBanditRefreshV2DTO:
+      description: "Response acknowledging a refresh that has started."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsBanditRefreshV2DTOData"
+      required:
+        - data
+      type: object
+    ExperimentsBanditRefreshV2DTOData:
+      description: "The refresh that started."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsBanditRefreshV2DTODataAttributes"
+        id:
+          description: "The refresh ID. The bandit reports it as `latest_refresh`."
+          example: cc1e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditRefreshV2DTODataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExperimentsBanditRefreshV2DTODataAttributes:
+      description: "The bandit being refreshed."
+      properties:
+        bandit_id:
+          description: "The ID of the bandit being refreshed."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+      required:
+        - bandit_id
+      type: object
+    ExperimentsBanditRefreshV2DTODataType:
+      default: bandit-refresh
+      description: Bandit refresh resource type.
+      enum:
+        - bandit-refresh
+      example: bandit-refresh
+      type: string
+      x-enum-varnames:
+        - BANDIT_REFRESH
     ExperimentsBanditResultsState:
       description: >-
         `WAITING_FOR_FIRST_REFRESH` until a refresh saves results. `STATS_UNAVAILABLE` when the latest saved refresh has no complete probabilities of being optimal. `ENDED` after the bandit is stopped or completed, and its last estimates are kept. Otherwise, `WARMUP` or `OPTIMIZING` indicates which policy the bandit serves. A paused bandit keeps its state.
@@ -52216,6 +52427,29 @@ components:
         - code
         - detail
       type: object
+    ExperimentsBanditVariantInputV2:
+      description: >-
+        A flag variant the bandit uses, named by its ID. The variant's `key` and `name` come from the flag and can't be set.
+      properties:
+        feature_flag_variant_id:
+          description: "The variant's ID on the flag."
+          example: 770e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        is_active:
+          default: true
+          description: "Whether the variant is one of the arms the bandit chooses between. Defaults to `true`."
+          example: true
+          type: boolean
+        is_fallback:
+          default: false
+          description: >-
+            Whether the variant is served when the bandit reaches its scheduled end. At most one variant is the fallback, and it doesn't have to be an arm. Defaults to `false`.
+          example: true
+          type: boolean
+      required:
+        - feature_flag_variant_id
+      type: object
     ExperimentsBanditVariantResultV2:
       description: "An arm's estimates from the latest saved refresh."
       properties:
@@ -52418,6 +52652,107 @@ components:
           description: "Upper bound of the reported interval."
           format: double
           type: number
+      type: object
+    ExperimentsCreateBanditV2Request:
+      description: "Request to create a draft bandit."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsCreateBanditV2RequestData"
+      required:
+        - data
+      type: object
+    ExperimentsCreateBanditV2RequestData:
+      description: "Bandit resource to create."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsCreateBanditV2RequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTODataType"
+      required:
+        - type
+        - attributes
+      type: object
+    ExperimentsCreateBanditV2RequestDataAttributes:
+      description: >-
+        The new draft's setup. Only `name` is required. Whether the draft is ready to run is checked when it starts.
+      properties:
+        aggregation_window_seconds:
+          description: >-
+            The aggregation window: how long after an exposure the bandit keeps counting its reward, in seconds. Defaults to 3600 (1 hour).
+          example: 3600
+          format: int64
+          type: integer
+        bayesian_prior:
+          $ref: "#/components/schemas/ExperimentsBanditBayesianPriorInputV2"
+        datadog_flag_configuration:
+          $ref: "#/components/schemas/ExperimentsBanditFlagConfigurationInputV2"
+        description:
+          description: "The bandit's description. Defaults to empty."
+          example: Find the button color that maximizes checkout revenue.
+          type: string
+        exposure_sql_model_id:
+          description: "The exposure SQL model the bandit reads its exposures from."
+          example: aa0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        lookback_seconds:
+          description: "How far back each refresh reads observations, in seconds. Defaults to 2592000 (30 days)."
+          example: 2592000
+          format: int64
+          type: integer
+        metric_id:
+          description: "The metric the bandit optimizes. It must read a warehouse metric source."
+          example: 990e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        name:
+          description: "The bandit's name."
+          example: Checkout button color
+          type: string
+        refresh_schedule_id:
+          description: "The schedule the bandit refreshes on. Defaults to the organization's default schedule."
+          example: cc0e8400-e29b-41d4-a716-446655440000
+          type: string
+        scheduled_end_at:
+          description: "When the bandit ends and serves its fallback. Needs a fallback variant."
+          example: "2026-12-01T00:00:00Z"
+          format: date-time
+          type: string
+        subject_type_id:
+          description: "The subject type the bandit randomizes and measures by."
+          example: 880e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        tags:
+          description: "Tags for the bandit. The flag's tags are added too."
+          example:
+            - checkout
+          items:
+            description: "A tag on the bandit."
+            type: string
+          type: array
+        teams:
+          description: "Handles of the teams that own the bandit."
+          example:
+            - growth
+          items:
+            description: "A team handle."
+            type: string
+          type: array
+        variants:
+          description: >-
+            The flag variants the bandit uses. Needs `datadog_flag_configuration`. The server fills in each variant's `key` and `name` from the flag.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditVariantInputV2"
+          type: array
+        warmup_seconds:
+          description: >-
+            How long the bandit serves its arms equally after it starts, in seconds. Defaults to no warmup.
+          example: 86400
+          format: int64
+          type: integer
+      required:
+        - name
       type: object
     ExperimentsCreateExperimentMetricGroupV2Request:
       description: "Request to create a metric group on an experiment."
@@ -56359,6 +56694,120 @@ components:
           description: "Pagination method used for this result set."
           type: string
       type: object
+    ExperimentsPatchBanditV2Request:
+      description: "Request to update a bandit."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsPatchBanditV2RequestData"
+      required:
+        - data
+      type: object
+    ExperimentsPatchBanditV2RequestData:
+      description: "Bandit resource with the attributes to change."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsPatchBanditV2RequestDataAttributes"
+        id:
+          description: "The bandit ID. When present, it must match the path."
+          example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/ExperimentsBanditV2DTODataType"
+      required:
+        - type
+        - attributes
+      type: object
+    ExperimentsPatchBanditV2RequestDataAttributes:
+      description: >-
+        The attributes to change. Omitted attributes are unchanged. Which ones can change depends on the bandit's status.
+      properties:
+        aggregation_window_seconds:
+          description: >-
+            The aggregation window: how long after an exposure the bandit keeps counting its reward, in seconds. `null` restores the default of 3600 (1 hour). Only a draft can change it.
+          example: 3600
+          format: int64
+          nullable: true
+          type: integer
+        bayesian_prior:
+          $ref: "#/components/schemas/ExperimentsBanditBayesianPriorInputV2"
+        datadog_flag_configuration:
+          $ref: "#/components/schemas/ExperimentsBanditFlagConfigurationInputV2"
+        description:
+          description: "The bandit's description."
+          example: Find the button color that maximizes checkout revenue.
+          type: string
+        exposure_sql_model_id:
+          description: "The exposure SQL model the bandit reads its exposures from. Only a draft can change it."
+          example: aa0e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        lookback_seconds:
+          description: >-
+            How far back each refresh reads observations, in seconds. `null` restores the default of 2592000 (30 days). Only a draft can change it.
+          example: 2592000
+          format: int64
+          nullable: true
+          type: integer
+        metric_id:
+          description: >-
+            The metric the bandit optimizes. It must read a warehouse metric source. Only a draft can change it.
+          example: 990e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        name:
+          description: "The bandit's name."
+          example: Checkout button color
+          type: string
+        refresh_schedule_id:
+          description: "The schedule the bandit refreshes on."
+          example: cc0e8400-e29b-41d4-a716-446655440000
+          type: string
+        scheduled_end_at:
+          description: >-
+            When the bandit ends and serves its fallback. Needs a fallback variant. `null` removes the scheduled end.
+          example: "2026-12-08T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        subject_type_id:
+          description: "The subject type the bandit randomizes and measures by. Only a draft can change it."
+          example: 880e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          nullable: true
+          type: string
+        tags:
+          description: "Replaces the bandit's tags and keeps its teams. Allowed in any status."
+          example:
+            - checkout
+          items:
+            description: "A tag on the bandit."
+            type: string
+          type: array
+        teams:
+          description: "Replaces the bandit's teams and keeps its tags. Allowed in any status."
+          example:
+            - growth
+          items:
+            description: "A team handle."
+            type: string
+          type: array
+        variants:
+          description: >-
+            Replaces the variants the bandit uses. Once the bandit has started, only `is_fallback` can change, so send the current arms with a different `is_fallback`. Only a draft can have an empty list.
+          items:
+            $ref: "#/components/schemas/ExperimentsBanditVariantInputV2"
+          type: array
+        warmup_seconds:
+          description: >-
+            How long the bandit serves its arms equally after it starts, in seconds. `null` removes the warmup. Only a draft can change it.
+          example: 86400
+          format: int64
+          nullable: true
+          type: integer
+      type: object
     ExperimentsPatchExperimentMetricGroupV2Request:
       description: "Request to update the experiment metric group."
       example:
@@ -58652,6 +59101,47 @@ components:
       type: string
       x-enum-varnames:
         - START_EXPERIMENT_REQUEST
+    ExperimentsStopBanditV2Request:
+      description: "Request to stop a bandit and serve one variant."
+      properties:
+        data:
+          $ref: "#/components/schemas/ExperimentsStopBanditV2RequestData"
+      required:
+        - data
+      type: object
+    ExperimentsStopBanditV2RequestData:
+      description: "The variant to serve once the bandit stops."
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExperimentsStopBanditV2RequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/ExperimentsStopBanditV2RequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    ExperimentsStopBanditV2RequestDataAttributes:
+      description: "The variant to serve once the bandit stops."
+      properties:
+        served_variant_key:
+          description: >-
+            Key of the flag variant to serve to everyone once the bandit stops. It can be any of the flag's variants, and overrides the configured fallback.
+          example: green
+          minLength: 1
+          pattern: ".*\\S.*"
+          type: string
+      required:
+        - served_variant_key
+      type: object
+    ExperimentsStopBanditV2RequestDataType:
+      default: stop-bandit-request
+      description: Stop bandit request resource type.
+      enum:
+        - stop-bandit-request
+      example: stop-bandit-request
+      type: string
+      x-enum-varnames:
+        - STOP_BANDIT_REQUEST
     ExperimentsStructuredMetadataResponse:
       description: "Metadata field values with their display name and type."
       example:
@@ -102572,6 +103062,14 @@ components:
           items:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
           type: array
+        name:
+          description: |-
+            Optional name identifying this include-based Grok rule in worker diagnostics.
+            Names must be unique within the processor.
+          example: "payments"
+          maxLength: 128
+          minLength: 1
+          type: string
         support_rules:
           description: A list of Grok helper rules that can be referenced by the parsing rules.
           example:
@@ -106283,6 +106781,302 @@ components:
       oneOf:
         - $ref: "#/components/schemas/ActionConnectionLiteralValue"
         - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    OpenAICodexDoraIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        A daily per-engineer engagement signal that [AI Impact](https://docs.datadoghq.com/delivery_performance/ai_impact/) uses to attribute AI-assisted pull requests.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `true`. Set to `false` to stop collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAICodexDoraIntegrationDataflowResponse:
+      description: >-
+        A daily per-engineer engagement signal that [AI Impact](https://docs.datadoghq.com/delivery_performance/ai_impact/) uses to attribute AI-assisted pull requests.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    OpenAICodexIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the OpenAI Codex integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthRequest"
+    OpenAICodexIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the OpenAI Codex integration account.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthResponse"
+    OpenAICodexIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the OpenAI Codex integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthUpdate"
+    OpenAICodexIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI Codex.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    OpenAICodexIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    OpenAICodexIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    OpenAICodexIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI Codex.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    OpenAICodexIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an OpenAI Codex integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/OpenAICodexIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Codex integration account.
+          example: openai-codex-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    OpenAICodexIntegrationAccountCreateData:
+      description: Data envelope for creating an OpenAI Codex integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    OpenAICodexIntegrationAccountCreateRequest:
+      description: Request payload to create an OpenAI Codex integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    OpenAICodexIntegrationAccountResponse:
+      description: Response payload for a single OpenAI Codex integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    OpenAICodexIntegrationAccountResponseAttributes:
+      description: Attributes of an OpenAI Codex integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/OpenAICodexIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the OpenAI Codex integration account.
+          example: openai-codex-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    OpenAICodexIntegrationAccountResponseData:
+      description: Data envelope of an OpenAI Codex integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the OpenAI Codex integration account.
+          example: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    OpenAICodexIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the OpenAI Codex integration account.
+      properties:
+        codex_workspace_id:
+          description: ID of the Codex workspace to collect data from.
+          example: your-workspace-id
+          type: string
+      required:
+        - codex_workspace_id
+      type: object
+    OpenAICodexIntegrationAccountSettingsResponse:
+      description: Settings configured on the OpenAI Codex integration account.
+      properties:
+        codex_workspace_id:
+          description: ID of the Codex workspace to collect data from.
+          example: your-workspace-id
+          type: string
+      required:
+        - codex_workspace_id
+      type: object
+    OpenAICodexIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: >-
+        Settings for updating the OpenAI Codex integration account. Only the fields provided are changed.
+      properties:
+        codex_workspace_id:
+          description: ID of the Codex workspace to collect data from.
+          example: your-workspace-id
+          type: string
+      type: object
+    OpenAICodexIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an OpenAI Codex integration account. Every field is optional. Only the provided fields are changed. When `dataflows` is provided, only the dataflow IDs in the request are modified. Dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/OpenAICodexIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Codex integration account.
+          example: openai-codex-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountSettingsUpdate"
+      type: object
+    OpenAICodexIntegrationAccountUpdateData:
+      description: Data envelope for updating an OpenAI Codex integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the OpenAI Codex integration account to update.
+          example: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OpenAICodexIntegrationAccountUpdateRequest:
+      description: Request payload to update an OpenAI Codex integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAICodexIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    OpenAICodexIntegrationAccountsResponse:
+      description: Response payload for a list of OpenAI Codex integration accounts.
+      properties:
+        data:
+          description: List of OpenAI Codex integration accounts.
+          items:
+            $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    OpenAICodexIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from OpenAI Codex, keyed by dataflow ID. Datadog always collects daily Codex analytics metrics. Each dataflow in this object adds another type of collection. Set `enabled` to start or stop a dataflow. The default for each dataflow applies when the account is created. On update, omitted fields keep their current values. Every dataflow requires an OpenAI enterprise subscription with Codex enabled. If you enable a dataflow without this subscription, Datadog stores the setting but collects no data.
+      properties:
+        openai-codex-dora:
+          $ref: "#/components/schemas/OpenAICodexDoraIntegrationDataflowRequest"
+        openai-codex-turn-metrics:
+          $ref: "#/components/schemas/OpenAICodexTurnMetricsIntegrationDataflowRequest"
+      type: object
+    OpenAICodexIntegrationDataflowsResponse:
+      description: Data Datadog collects from OpenAI Codex, keyed by dataflow ID.
+      properties:
+        openai-codex-dora:
+          $ref: "#/components/schemas/OpenAICodexDoraIntegrationDataflowResponse"
+        openai-codex-metrics:
+          $ref: "#/components/schemas/OpenAICodexMetricsIntegrationDataflowResponse"
+        openai-codex-turn-metrics:
+          $ref: "#/components/schemas/OpenAICodexTurnMetricsIntegrationDataflowResponse"
+      type: object
+    OpenAICodexMetricsIntegrationDataflowResponse:
+      description: >-
+        Daily Codex analytics metrics under the `openai.codex.*` namespace: usage totals, token counts by model, thread and turn counts by client, lines of code attributable to Codex, and code reviews. This dataflow is always on and cannot be turned off, so it appears only in responses.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    OpenAICodexTurnMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Hourly turn-level metrics from the OpenAI Compliance Logs Platform, including turn and session identity, Work Insights classification, token usage, credits, estimated cost, duration, and activity for skills, plugins, and artifacts. Turn cost is a provider estimate and can differ from invoiced charges. Requires the `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` scope on the key in `authentication`. Without this scope, the dataflow collects no data.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`. Set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAICodexTurnMetricsIntegrationDataflowResponse:
+      description: >-
+        Hourly turn-level metrics from the OpenAI Compliance Logs Platform, including turn and session identity, Work Insights classification, token usage, credits, estimated cost, duration, and activity for skills, plugins, and artifacts. Turn cost is a provider estimate and can differ from invoiced charges. Requires the `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` scope on the key in `authentication`. Without this scope, the dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     OpenAICredentials:
       description: The definition of the `OpenAICredentials` object.
       oneOf:
@@ -122882,6 +123676,19 @@ components:
     RumCrossProductSampling:
       description: The configuration for cross-product retention filters.
       properties:
+        session_replay_enabled:
+          description: Whether the cross-product retention filter for Session Replay is enabled.
+          example: true
+          type: boolean
+        session_replay_sample_rate:
+          description: |-
+            The percentage (0-100) of retained sessions with an ingested replay that keep their replay data.
+            Values returned by the API are rounded to two decimal places.
+          example: 75.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
         trace_enabled:
           description: Whether the cross-product retention filter for APM traces is enabled.
           example: true
@@ -124238,6 +125045,8 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterQuery"
         sample_rate:
           $ref: "#/components/schemas/RumRetentionFilterSampleRate"
+        track:
+          $ref: "#/components/schemas/RumRetentionFilterTrack"
       type: object
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
@@ -124285,9 +125094,25 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterAttributes"
         id:
           $ref: "#/components/schemas/RumRetentionFilterID"
+        meta:
+          $ref: "#/components/schemas/RumRetentionFilterMeta"
         type:
           $ref: "#/components/schemas/RumRetentionFilterType"
       type: object
+    RumRetentionFilterEditionMode:
+      description: |-
+        The types of changes the retention filter accepts. `complete` filters can be updated and deleted.
+        `limited` filters are default retention filters that can't be deleted.
+      enum:
+        - unknown
+        - complete
+        - limited
+      example: complete
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - COMPLETE
+        - LIMITED
     RumRetentionFilterEnabled:
       description: Whether the retention filter is enabled.
       example: true
@@ -124302,6 +125127,37 @@ components:
       description: ID of retention filter in UUID.
       example: "051601eb-54a0-abc0-03f9-cc02efa18892"
       type: string
+    RumRetentionFilterMeta:
+      description: Metadata about the retention filter.
+      properties:
+        edition_mode:
+          $ref: "#/components/schemas/RumRetentionFilterEditionMode"
+        source:
+          $ref: "#/components/schemas/RumRetentionFilterMetaSource"
+        updated_at:
+          description: The time of the last update, as a Unix timestamp in milliseconds.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: The handle of the user who last updated the retention filter.
+          example: jane.doe@example.com
+          type: string
+      type: object
+    RumRetentionFilterMetaSource:
+      description: The source of the last update to the retention filter. The value is `unknown` if the request doesn't specify a source.
+      enum:
+        - default
+        - ui
+        - terraform
+        - unknown
+      example: ui
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - UI
+        - TERRAFORM
+        - UNKNOWN
     RumRetentionFilterQuery:
       description: The query string for a RUM retention filter.
       example: "@session.has_replay:true"
@@ -124319,6 +125175,16 @@ components:
       maximum: 100
       minimum: 0.1
       type: number
+    RumRetentionFilterTrack:
+      description: The product whose events the retention filter applies to.
+      enum:
+        - rum
+        - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames:
+        - RUM
+        - PRODUCT_ANALYTICS
     RumRetentionFilterType:
       default: retention_filters
       description: The type of the resource. The value should always be retention_filters.
@@ -189127,7 +189993,220 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: >-
+        Create a draft bandit. `name` is required; you can set everything else now, or later with PATCH `/api/v2/experiments/bandits/{bandit_id}`. A draft on a flag holds a targeting rule that doesn't serve traffic until the bandit starts. `variants` lists the flag variants the bandit uses by `feature_flag_variant_id`: `is_active` makes a variant an arm (the default), and `is_fallback` marks the variant served after a scheduled end. The server fills in each variant's `key` and `name` from the flag. A scheduled end needs a fallback. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Whether the draft is ready to run is checked when it starts. Validation can return several field errors at once. This endpoint is not idempotent. Bandits must be enabled for the organization.
+      operationId: CreateBandit
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      datadog_flag_configuration:
+                        environment_id: 660e8400-e29b-41d4-a716-446655440000
+                        feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                        targeting_rules: []
+                      description: Find the button color that maximizes checkout revenue.
+                      exposure_sql_model_id: aa0e8400-e29b-41d4-a716-446655440000
+                      metric_id: 990e8400-e29b-41d4-a716-446655440000
+                      name: Checkout button color
+                      scheduled_end_at: "2026-12-01T00:00:00Z"
+                      subject_type_id: 880e8400-e29b-41d4-a716-446655440000
+                      tags:
+                        - checkout
+                      teams:
+                        - growth
+                      variants:
+                        - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                          is_fallback: true
+                        - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                      warmup_seconds: 86400
+                    type: bandits
+            schema:
+              $ref: "#/components/schemas/ExperimentsCreateBanditV2Request"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        active_policy:
+                        aggregation_window_seconds: 3600
+                        bayesian_prior:
+                          arm_standard_deviation: 100
+                          grand_mean: 0
+                          grand_mean_standard_deviation: 10000
+                        config_version: 1
+                        created_at: "2026-10-22T12:00:00Z"
+                        datadog_flag_configuration:
+                          allocation_key: bandit-4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                          environment_id: 660e8400-e29b-41d4-a716-446655440000
+                          feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                          targeting_rules: []
+                        description: Find the button color that maximizes checkout revenue.
+                        ended_at:
+                        exposure_sql_model_id: aa0e8400-e29b-41d4-a716-446655440000
+                        latest_refresh:
+                        lookback_seconds: 2592000
+                        metric_id: 990e8400-e29b-41d4-a716-446655440000
+                        name: Checkout button color
+                        optimal_variant_key:
+                        optimal_variant_unavailable_reason: NO_RESULTS_YET
+                        refresh_schedule_id: cc0e8400-e29b-41d4-a716-446655440000
+                        scheduled_end_at: "2026-12-01T00:00:00Z"
+                        started_at:
+                        status: DRAFT
+                        subject_type_id: 880e8400-e29b-41d4-a716-446655440000
+                        tags:
+                          - checkout
+                        teams:
+                          - growth
+                        updated_at: "2026-10-22T12:00:00Z"
+                        variants:
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            is_active: true
+                            is_fallback: true
+                            key: blue
+                            name: Blue
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            is_active: true
+                            is_fallback: false
+                            key: green
+                            name: Green
+                        warmup_seconds: 86400
+                      id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      type: bandits
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditV2DTO"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Invalid request body: a missing name, a malformed or unknown attribute, a read-only attribute, invalid variants or prior, or a referenced flag, variant, environment, metric, subject type, exposure SQL model, or schedule that doesn't exist for the organization. May return several errors.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the request sets `datadog_flag_configuration` or `variants` without feature flag and environment read permissions or edit access to the flag and environment.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The request conflicts with the flag's current state; for example, a pending change request touches its targeting rules.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Request body sent with a media type other than application/json or application/vnd.api+json.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Create bandit
+      tags:
+        - Experiments
+      x-menu-order: 60
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/experiments/bandits/{bandit_id}:
+    delete:
+      description: >-
+        Delete a bandit in any status, with its targeting rule, in one transaction. As with deleting an experiment, a running bandit's rule stops serving and traffic falls through to the flag's other rules; the flag can then be used by another bandit or experiment. After deletion the API no longer returns the bandit. Deleting a bandit cannot be undone. Bandits must be enabled for the organization.
+      operationId: DeleteBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: The bandit was deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The bandit's rule is live on a flag environment that requires approvals, a pending change request touches the flag's targeting rules, the flag is archived, or the bandit moved to another flag during the delete. Nothing was deleted.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Delete bandit
+      tags:
+        - Experiments
+      x-menu-order: 62
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: >-
         Get a bandit: its setup, the policy it serves, its latest refresh, and the arm most likely to be best. When the caller lacks feature flag or environment read permissions, the response omits `datadog_flag_configuration` and `meta.warnings` includes `datadog_flag_configuration_omitted`. Bandits must be enabled for the organization.
@@ -189156,7 +190235,9 @@ paths:
                           config_version: 2
                           id: dd0e8400-e29b-41d4-a716-446655440000
                           kind: ADAPTIVE
+                          policy_number: 9
                           reason: REFRESH
+                          refresh_id: bb0e8400-e29b-41d4-a716-446655440000
                           variants:
                             - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
                               probability: 0.3
@@ -189257,6 +190338,491 @@ paths:
         operator: AND
         permissions:
           - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update a bandit. Omitted attributes, including omitted fields of `datadog_flag_configuration` and `bayesian_prior`, are unchanged. `variants`, `tags`, and `teams` replace the stored lists. Setting a nullable attribute to `null` clears it; `datadog_flag_configuration: null` takes a draft off its flag. What can change depends on the status. A draft can change anything. A running or paused bandit can change its name, description, refresh schedule, scheduled end, prior, fallback (send the current arms in `variants` with a different `is_fallback`), tags, and teams. A stopped or completed bandit can change only its tags and teams. Values that don't change can be sent again in any status. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Validation can return several field errors at once: HTTP 400 if any is about invalid input, or 409 if all are status conflicts. Bandits must be enabled for the organization.
+      operationId: PatchBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      scheduled_end_at: "2026-12-08T00:00:00Z"
+                      variants:
+                        - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                        - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                          is_fallback: true
+                    id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                    type: bandits
+            schema:
+              $ref: "#/components/schemas/ExperimentsPatchBanditV2Request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        active_policy:
+                          applied_at: "2026-10-30T02:15:00Z"
+                          config_version: 2
+                          id: dd0e8400-e29b-41d4-a716-446655440000
+                          kind: ADAPTIVE
+                          policy_number: 9
+                          reason: REFRESH
+                          refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                          variants:
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                              probability: 0.3
+                              variant_key: blue
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                              probability: 0.7
+                              variant_key: green
+                        aggregation_window_seconds: 3600
+                        bayesian_prior:
+                          arm_standard_deviation: 100
+                          grand_mean: 0
+                          grand_mean_standard_deviation: 10000
+                        config_version: 3
+                        created_at: "2026-10-22T12:00:00Z"
+                        datadog_flag_configuration:
+                          allocation_key: checkout-button-color-bandit
+                          environment_id: 660e8400-e29b-41d4-a716-446655440000
+                          feature_flag_id: 550e8400-e29b-41d4-a716-446655440000
+                          targeting_rules: []
+                        description: Find the button color that maximizes checkout revenue.
+                        ended_at:
+                        exposure_sql_model_id: aa0e8400-e29b-41d4-a716-446655440000
+                        latest_refresh:
+                          created_at: "2026-10-30T00:00:00Z"
+                          ended_at: "2026-10-30T02:15:00Z"
+                          id: bb0e8400-e29b-41d4-a716-446655440000
+                          started_at: "2026-10-30T00:02:00Z"
+                          status: SUCCEEDED
+                        lookback_seconds: 2592000
+                        metric_id: 990e8400-e29b-41d4-a716-446655440000
+                        name: Checkout button color
+                        optimal_variant_key: green
+                        refresh_schedule_id: cc0e8400-e29b-41d4-a716-446655440000
+                        scheduled_end_at: "2026-12-08T00:00:00Z"
+                        started_at: "2026-10-23T09:00:00Z"
+                        status: RUNNING
+                        subject_type_id: 880e8400-e29b-41d4-a716-446655440000
+                        tags:
+                          - checkout
+                        teams:
+                          - growth
+                        updated_at: "2026-11-02T09:00:00Z"
+                        variants:
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                            is_active: true
+                            is_fallback: false
+                            key: blue
+                            name: Blue
+                          - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                            is_active: true
+                            is_fallback: true
+                            key: green
+                            name: Green
+                        warmup_seconds: 86400
+                      id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      type: bandits
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditV2DTO"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Malformed bandit ID, or an invalid request body: a malformed, unknown, read-only, or wrongly `null` attribute, invalid variants or prior, `data.id` not matching the path, or a referenced record that doesn't exist for the organization. May return several errors.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the request changes `datadog_flag_configuration` or `variants` without feature flag and environment read permissions or edit access to the flag and environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The bandit's status doesn't let a requested attribute change (one error per attribute), the bandit moved to another flag during the edit, or a pending change request touches the flag's targeting rules.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Request body sent with a media type other than application/json or application/vnd.api+json.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Update bandit
+      tags:
+        - Experiments
+      x-menu-order: 61
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/pause:
+    post:
+      description: >-
+        Pause a running bandit. Its targeting rule keeps serving the current traffic split, and refreshes stop changing the split until the bandit is resumed. Pausing a bandit that isn't running returns 409. Bandits must be enabled for the organization.
+      operationId: PauseBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: The bandit is paused.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The bandit isn't running, or another change to it happened at the same time.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Pause bandit
+      tags:
+        - Experiments
+      x-menu-order: 64
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/policies:
+    get:
+      description: >-
+        List the policies a bandit has served, newest first by default, including the policy it serves after it ends. Each policy is the traffic split SDKs served from when it was applied until the next one. Exposures log the policy's ID as `bandit.policy_id`, so the history tells you the split behind each exposure. Exposures logged after the bandit ends have no policy ID. `filter[from]` and `filter[to]` keep the policies in effect during the range, including the one already in effect at `filter[from]`. Bandits must be enabled for the organization.
+      operationId: ListBanditPolicies
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+        - description: >-
+            Return only the policies in effect at or after this RFC 3339 time (inclusive), including the one already in effect at it.
+          in: query
+          name: filter[from]
+          schema:
+            description: |-
+              Return only the policies in effect at or after this RFC 3339 time (inclusive), including the one already
+              in effect at it.
+            example: "2026-10-01T00:00:00Z"
+            format: date-time
+            type: string
+        - description: Return only the policies applied before this RFC 3339 time (exclusive).
+          in: query
+          name: filter[to]
+          schema:
+            description: "Return only the policies applied before this RFC 3339 time (exclusive)."
+            example: "2026-11-01T00:00:00Z"
+            format: date-time
+            type: string
+        - description: Number of results to skip for pagination. Defaults to 0 when omitted.
+          in: query
+          name: page[offset]
+          schema:
+            description: "Number of results to skip for pagination. Defaults to 0 when omitted."
+            format: int64
+            type: integer
+        - description: >-
+            Maximum number of results to return. Defaults to 25 when omitted, and is capped at 50 (larger values are clamped to 50). The response includes meta.page (with total) and pagination links.
+          in: query
+          name: page[limit]
+          schema:
+            description: |-
+              Maximum number of results to return. Defaults to 25 when omitted, and is capped at 50 (larger values are
+              clamped to 50). The response includes meta.page (with total) and pagination links.
+            format: int64
+            type: integer
+        - description: "`applied_at` for oldest first, or `-applied_at` for newest first. Defaults to `-applied_at`."
+          in: query
+          name: sort
+          schema:
+            description: "`applied_at` for oldest first, or `-applied_at` for newest first. Defaults to `-applied_at`."
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          applied_at: "2026-10-30T02:15:00Z"
+                          config_version: 2
+                          is_active: true
+                          kind: ADAPTIVE
+                          policy_number: 9
+                          reason: REFRESH
+                          refresh_id: bb0e8400-e29b-41d4-a716-446655440000
+                          variants:
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                              probability: 0.3
+                              variant_key: blue
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                              probability: 0.7
+                              variant_key: green
+                        id: dd0e8400-e29b-41d4-a716-446655440000
+                        type: bandit-policies
+                      - attributes:
+                          applied_at: "2026-10-29T02:15:00Z"
+                          config_version: 2
+                          is_active: false
+                          kind: ADAPTIVE
+                          policy_number: 8
+                          reason: REFRESH
+                          refresh_id: bb0e8400-e29b-41d4-a716-446655440001
+                          variants:
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440001
+                              probability: 0.42
+                              variant_key: blue
+                            - feature_flag_variant_id: 770e8400-e29b-41d4-a716-446655440002
+                              probability: 0.58
+                              variant_key: green
+                        id: dd0e8400-e29b-41d4-a716-446655440001
+                        type: bandit-policies
+                    links:
+                      first: https://api.datadoghq.com/api/v2/experiments/bandits/4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f/policies?page%5Blimit%5D=2&page%5Boffset%5D=0
+                      last: https://api.datadoghq.com/api/v2/experiments/bandits/4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f/policies?page%5Blimit%5D=2&page%5Boffset%5D=8
+                      next: https://api.datadoghq.com/api/v2/experiments/bandits/4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f/policies?page%5Blimit%5D=2&page%5Boffset%5D=2
+                      self: https://api.datadoghq.com/api/v2/experiments/bandits/4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f/policies?page%5Blimit%5D=2
+                    meta:
+                      page:
+                        first_offset: 0
+                        last_offset: 8
+                        limit: 2
+                        next_offset: 2
+                        offset: 0
+                        prev_offset:
+                        total: 9
+                        type: offset_limit
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditPolicyHistoryV2DTOArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Malformed bandit ID (not a valid UUID), a sort other than `applied_at` or `-applied_at`, a malformed page parameter, `filter[from]` or `filter[to]` isn't an RFC 3339 time, or `filter[from]` isn't before `filter[to]`.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, or the caller lacks the product_analytics_experiments_read permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_read
+      summary: List bandit policies
+      tags:
+        - Experiments
+      x-menu-order: 68
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/refresh:
+    post:
+      description: >-
+        Start a refresh of a running bandit now, instead of waiting for its schedule. The refresh reads the bandit's latest data and saves new results. Outside warmup it also serves the traffic split it proposes, so it can change traffic. HTTP 202 confirms the refresh started, not that it finished. The response returns the refresh ID, which the bandit then reports as `latest_refresh`. Bandits must be enabled for the organization.
+      operationId: RefreshBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+        - description: >-
+            Recompute the bandit's whole history instead of updating its latest refresh; for example, after its exposure or metric data was backfilled. Defaults to `false`.
+          in: query
+          name: full_refresh
+          schema:
+            description: |-
+              Recompute the bandit's whole history instead of updating its latest refresh; for example, after its
+              exposure or metric data was backfilled. Defaults to `false`.
+            type: boolean
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        bandit_id: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+                      id: cc1e8400-e29b-41d4-a716-446655440000
+                      type: bandit-refresh
+              schema:
+                $ref: "#/components/schemas/ExperimentsBanditRefreshV2DTO"
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID), or `full_refresh` is not a valid boolean.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The bandit isn't running, or a refresh of it is already running.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Refresh bandit
+      tags:
+        - Experiments
+      x-menu-order: 67
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -189393,6 +190959,232 @@ paths:
         operator: AND
         permissions:
           - product_analytics_experiments_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/resume:
+    post:
+      description: >-
+        Resume a paused bandit, so refreshes change its traffic split again. Resuming a bandit that isn't paused returns 409. Bandits must be enabled for the organization.
+      operationId: ResumeBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: The bandit is running.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The bandit isn't paused, or another change to it happened at the same time.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Resume bandit
+      tags:
+        - Experiments
+      x-menu-order: 65
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/start:
+    post:
+      description: >-
+        Start a draft bandit. Its targeting rule is published serving every arm equally, and each refresh then shifts traffic toward the arms that do best. The bandit starts exactly as it is configured; set it up with PATCH `/api/v2/experiments/bandits/{bandit_id}` first. It needs a flag, at least two arms, a subject type, a metric, and an exposure SQL model. The request is idempotent: a bandit that is already running still returns 204, so a retry after a timeout is safe. Stop is not idempotent. A start is blocked when the flag environment requires an approval or a pending change request touches the flag's targeting rules; retrying alone does not resolve an approval requirement. Bandits must be enabled for the organization.
+      operationId: StartBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: The bandit is running. Get the bandit to read its status and active policy.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Malformed bandit ID (not a valid UUID).
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits or bandit starts are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The bandit is paused or has ended, its setup is incomplete, or an approval or a pending change request blocks the start.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Start bandit
+      tags:
+        - Experiments
+      x-menu-order: 63
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/experiments/bandits/{bandit_id}/stop:
+    post:
+      description: >-
+        Stop a running or paused bandit. From then on its targeting rule serves `served_variant_key` to everyone, overriding any configured fallback, and the bandit stops refreshing. `served_variant_key` can be any of the flag's variants. Stopping can't be reversed and is not idempotent: stopping a bandit that has already stopped or completed returns 409. Bandits must be enabled for the organization.
+      operationId: StopBandit
+      parameters:
+        - description: "The UUID of the bandit."
+          in: path
+          name: bandit_id
+          required: true
+          schema:
+            description: "The UUID of the bandit."
+            example: 4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      served_variant_key: green
+                    type: stop-bandit-request
+            schema:
+              $ref: "#/components/schemas/ExperimentsStopBanditV2Request"
+        required: true
+      responses:
+        "204":
+          description: The bandit is stopped and serves the chosen variant.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Malformed bandit ID, a malformed request body, a missing `served_variant_key`, or a `served_variant_key` that isn't a variant of the bandit's flag.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Missing or invalid authentication (dd-api-key + dd-application-key headers, or a valid user session).
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Bandits are not enabled for the organization, the caller lacks the product_analytics_experiments_write permission, or the caller lacks edit access to the bandit's flag or environment.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: No bandit with this ID exists for the organization.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            The bandit isn't running or paused, its flag environment requires an approval, or a pending change request touches the flag's targeting rules. Retrying alone does not resolve an approval requirement.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Request body sent with a media type other than application/json or application/vnd.api+json.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - product_analytics_experiments_write
+      summary: Stop bandit
+      tags:
+        - Experiments
+      x-menu-order: 66
+      x-permission:
+        operator: AND
+        permissions:
+          - product_analytics_experiments_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -207932,6 +209724,285 @@ paths:
       summary: Update a Nebius Cloud integration account
       tags:
         - Nebius Cloud Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-codex/accounts:
+    get:
+      description: List OpenAI Codex integration accounts.
+      operationId: ListOpenAICodexIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            openai-codex-dora:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            openai-codex-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            openai-codex-turn-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: openai-codex-acme
+                          settings:
+                            codex_workspace_id: your-workspace-id
+                        id: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAICodexIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List OpenAI Codex integration accounts
+      tags:
+        - OpenAI Codex Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an OpenAI Codex integration account.
+      operationId: CreateOpenAICodexIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAICodexIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-codex-dora:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-turn-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-codex-acme
+                        settings:
+                          codex_workspace_id: your-workspace-id
+                      id: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an OpenAI Codex integration account
+      tags:
+        - OpenAI Codex Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-codex/accounts/{account_id}:
+    delete:
+      description: Delete an OpenAI Codex integration account.
+      operationId: DeleteOpenAICodexIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an OpenAI Codex integration account
+      tags:
+        - OpenAI Codex Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an OpenAI Codex integration account.
+      operationId: GetOpenAICodexIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-codex-dora:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-turn-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-codex-acme
+                        settings:
+                          codex_workspace_id: your-workspace-id
+                      id: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an OpenAI Codex integration account
+      tags:
+        - OpenAI Codex Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an OpenAI Codex integration account. Only the fields provided are changed.
+      operationId: UpdateOpenAICodexIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAICodexIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-codex-dora:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-codex-turn-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-codex-acme
+                        settings:
+                          codex_workspace_id: your-workspace-id
+                      id: 7d2f9c4e-3a1b-4c8e-9f6d-2b5a8e1c0d47
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAICodexIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an OpenAI Codex integration account
+      tags:
+        - OpenAI Codex Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -241199,7 +243270,11 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all Workload Protection agent rules
@@ -241249,11 +243324,23 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a Workload Protection agent rule
@@ -241274,9 +243361,17 @@ paths:
         "204":
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Workload Protection agent rule
@@ -241310,9 +243405,17 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Workload Protection agent rule
@@ -241366,13 +243469,29 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConcurrentModificationResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Concurrent Modification
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a Workload Protection agent rule
@@ -247593,7 +249712,8 @@ paths:
   /api/v2/rum/query/insight/aggregated_waterfall:
     post:
       description: |-
-        Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.
+        Get aggregated network resource waterfall data for a RUM view, sampled across multiple view
+        instances.
       operationId: QueryAggregatedWaterfall
       requestBody:
         content:
@@ -247685,6 +249805,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Query aggregated waterfall
       tags: ["RUM Insights"]
+      x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
         operator: OR
@@ -259003,7 +261124,11 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all Workload Protection agent rules (US1-FED)
@@ -259041,9 +261166,17 @@ paths:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleResponse"
           description: OK
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Authorized
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Workload Protection agent rule (US1-FED)
@@ -285592,6 +287725,15 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/service_management/on-call/
     name: On-Call Paging
+  - description: |-
+      Manage your Datadog OpenAI Codex integration accounts and account resources
+      directly through the Datadog API. See the
+      [OpenAI Codex integration page](https://docs.datadoghq.com/integrations/openai-codex/) for
+      more information.
+    externalDocs:
+      description: OpenAI Codex integration.
+      url: https://docs.datadoghq.com/integrations/openai-codex/
+    name: OpenAI Codex Integration
   - description: |-
       Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
       directly through the Datadog API.

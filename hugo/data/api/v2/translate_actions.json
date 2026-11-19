@@ -2062,13 +2062,55 @@
     "description": "List the organization's bandits, newest first by default. Each item is a summary. For a bandit's setup, active policy, and latest refresh, use Get bandit. Bandits must be enabled for the organization.",
     "summary": "List bandits"
   },
+  "CreateBandit": {
+    "description": "Create a draft bandit. `name` is required; you can set everything else now, or later with PATCH `/api/v2/experiments/bandits/{bandit_id}`. A draft on a flag holds a targeting rule that doesn't serve traffic until the bandit starts. `variants` lists the flag variants the bandit uses by `feature_flag_variant_id`: `is_active` makes a variant an arm (the default), and `is_fallback` marks the variant served after a scheduled end. The server fills in each variant's `key` and `name` from the flag. A scheduled end needs a fallback. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Whether the draft is ready to run is checked when it starts. Validation can return several field errors at once. This endpoint is not idempotent. Bandits must be enabled for the organization.",
+    "summary": "Create bandit",
+    "request_description": "",
+    "request_schema_description": "Request to create a draft bandit."
+  },
+  "DeleteBandit": {
+    "description": "Delete a bandit in any status, with its targeting rule, in one transaction. As with deleting an experiment, a running bandit's rule stops serving and traffic falls through to the flag's other rules; the flag can then be used by another bandit or experiment. After deletion the API no longer returns the bandit. Deleting a bandit cannot be undone. Bandits must be enabled for the organization.",
+    "summary": "Delete bandit"
+  },
   "GetBandit": {
     "description": "Get a bandit: its setup, the policy it serves, its latest refresh, and the arm most likely to be best. When the caller lacks feature flag or environment read permissions, the response omits `datadog_flag_configuration` and `meta.warnings` includes `datadog_flag_configuration_omitted`. Bandits must be enabled for the organization.",
     "summary": "Get bandit"
   },
+  "PatchBandit": {
+    "description": "Update a bandit. Omitted attributes, including omitted fields of `datadog_flag_configuration` and `bayesian_prior`, are unchanged. `variants`, `tags`, and `teams` replace the stored lists. Setting a nullable attribute to `null` clears it; `datadog_flag_configuration: null` takes a draft off its flag. What can change depends on the status. A draft can change anything. A running or paused bandit can change its name, description, refresh schedule, scheduled end, prior, fallback (send the current arms in `variants` with a different `is_fallback`), tags, and teams. A stopped or completed bandit can change only its tags and teams. Values that don't change can be sent again in any status. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Validation can return several field errors at once: HTTP 400 if any is about invalid input, or 409 if all are status conflicts. Bandits must be enabled for the organization.",
+    "summary": "Update bandit",
+    "request_description": "",
+    "request_schema_description": "Request to update a bandit."
+  },
+  "PauseBandit": {
+    "description": "Pause a running bandit. Its targeting rule keeps serving the current traffic split, and refreshes stop changing the split until the bandit is resumed. Pausing a bandit that isn't running returns 409. Bandits must be enabled for the organization.",
+    "summary": "Pause bandit"
+  },
+  "ListBanditPolicies": {
+    "description": "List the policies a bandit has served, newest first by default, including the policy it serves after it ends. Each policy is the traffic split SDKs served from when it was applied until the next one. Exposures log the policy's ID as `bandit.policy_id`, so the history tells you the split behind each exposure. Exposures logged after the bandit ends have no policy ID. `filter[from]` and `filter[to]` keep the policies in effect during the range, including the one already in effect at `filter[from]`. Bandits must be enabled for the organization.",
+    "summary": "List bandit policies"
+  },
+  "RefreshBandit": {
+    "description": "Start a refresh of a running bandit now, instead of waiting for its schedule. The refresh reads the bandit's latest data and saves new results. Outside warmup it also serves the traffic split it proposes, so it can change traffic. HTTP 202 confirms the refresh started, not that it finished. The response returns the refresh ID, which the bandit then reports as `latest_refresh`. Bandits must be enabled for the organization.",
+    "summary": "Refresh bandit"
+  },
   "GetBanditResults": {
     "description": "Get what a bandit's refreshes have learned: each arm's estimate and probability of being best from the latest saved refresh, and each arm's point estimate over time. `filter[from]` and `filter[to]` narrow only `point_estimates`, not the latest estimates. For observation counts, use Get bandit traffic summary. Bandits must be enabled for the organization.",
     "summary": "Get bandit results"
+  },
+  "ResumeBandit": {
+    "description": "Resume a paused bandit, so refreshes change its traffic split again. Resuming a bandit that isn't paused returns 409. Bandits must be enabled for the organization.",
+    "summary": "Resume bandit"
+  },
+  "StartBandit": {
+    "description": "Start a draft bandit. Its targeting rule is published serving every arm equally, and each refresh then shifts traffic toward the arms that do best. The bandit starts exactly as it is configured; set it up with PATCH `/api/v2/experiments/bandits/{bandit_id}` first. It needs a flag, at least two arms, a subject type, a metric, and an exposure SQL model. The request is idempotent: a bandit that is already running still returns 204, so a retry after a timeout is safe. Stop is not idempotent. A start is blocked when the flag environment requires an approval or a pending change request touches the flag's targeting rules; retrying alone does not resolve an approval requirement. Bandits must be enabled for the organization.",
+    "summary": "Start bandit"
+  },
+  "StopBandit": {
+    "description": "Stop a running or paused bandit. From then on its targeting rule serves `served_variant_key` to everyone, overriding any configured fallback, and the bandit stops refreshing. `served_variant_key` can be any of the flag's variants. Stopping can't be reversed and is not idempotent: stopping a bandit that has already stopped or completed returns 409. Bandits must be enabled for the organization.",
+    "summary": "Stop bandit",
+    "request_description": "",
+    "request_schema_description": "Request to stop a bandit and serve one variant."
   },
   "GetBanditTrafficSummary": {
     "description": "Get what a bandit has observed, as of its latest saved refresh: observation counts, subjects, and each arm's valid observations and subjects in total and per UTC day. An observation is a subject's reward on the arm it was exposed to, counted on the UTC day of its anchor time. `filter[from]` and `filter[to]` narrow only `daily`, not the totals. Bandits must be enabled for the organization.",
@@ -3261,6 +3303,30 @@
     "summary": "Update a Nebius Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update a Nebius Cloud integration account."
+  },
+  "ListOpenAICodexIntegrationAccounts": {
+    "description": "List OpenAI Codex integration accounts.",
+    "summary": "List OpenAI Codex integration accounts"
+  },
+  "CreateOpenAICodexIntegrationAccount": {
+    "description": "Create an OpenAI Codex integration account.",
+    "summary": "Create an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Codex integration account."
+  },
+  "DeleteOpenAICodexIntegrationAccount": {
+    "description": "Delete an OpenAI Codex integration account.",
+    "summary": "Delete an OpenAI Codex integration account"
+  },
+  "GetOpenAICodexIntegrationAccount": {
+    "description": "Get an OpenAI Codex integration account.",
+    "summary": "Get an OpenAI Codex integration account"
+  },
+  "UpdateOpenAICodexIntegrationAccount": {
+    "description": "Update an OpenAI Codex integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Codex integration account."
   },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
@@ -6280,7 +6346,7 @@
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
   },
   "QueryAggregatedWaterfall": {
-    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
+    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view\ninstances.",
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
