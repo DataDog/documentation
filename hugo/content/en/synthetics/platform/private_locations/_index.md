@@ -565,6 +565,8 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    Enable FIPS 140-2 cryptographic mode
    : Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
+   <div class="alert alert-info">Windows Firewall cannot block loopback addresses. The private location still blocks other reserved and private IP ranges for Chrome, Edge, and Firefox browser tests.</div>
+
 1. Click {{< ui >}}Next{{< /ui >}} and {{< ui >}}Install{{< /ui >}} to start the installation process.
 
 Once the process is complete, click {{< ui >}}Finish{{< /ui >}} on the installation completion page.
@@ -602,6 +604,8 @@ Additional parameters can be added:
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 | ENABLE_FIPS | Enables FIPS 140-2 cryptographic mode. The Windows host must be running in Windows FIPS mode to use this option. Available in private location v1.63.0 or later. | 0 | N/A | 0: Disabled<br>1: Enabled |
+
+**Note**: Windows Firewall cannot block loopback addresses. The private location still blocks other reserved and private IP ranges for Chrome, Edge, and Firefox browser tests.
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
