@@ -128,6 +128,26 @@ describe("buildPageIndex", () => {
     ]);
   });
 
+  it("keeps a page's query in its key", async () => {
+    const index = await buildPageIndex(
+      [stubSource([stubPage("/guides/setup.md?os=linux")])],
+      SITE,
+    );
+    expect(index[0].key).toBe(
+      "https://docs.datadoghq.com/guides/setup.md?os=linux",
+    );
+  });
+
+  it("carries a page's own hash instead of a file to hash", async () => {
+    const hash = "a".repeat(32);
+    const index = await buildPageIndex(
+      [stubSource([{ ...stubPage("/guides/setup.md"), mdocHash: hash }])],
+      SITE,
+    );
+    expect(index[0]).not.toHaveProperty("file");
+    expect(index[0].mdocHash).toBe(hash);
+  });
+
   it("throws on duplicate urlPath across sources", async () => {
     await expect(
       buildPageIndex(

@@ -4,13 +4,15 @@
  *
  * Each combination of filter values on a Cdocs page has its own content, so
  * the sitemap, llms.txt, pages.json, and the traits list all need to agree on
- * which variant URLs exist. They all read them from here.
+ * which variant URLs exist. They all read them from here, and list each
+ * variant by its canonical URL.
  */
 import { getCollection } from "astro:content";
 import { buildFiltersManifest } from "cdocs-data/buildFiltersManifest";
 import type { CustomizationConfig } from "cdocs-data";
 import configByLang from "virtual:cdocs-config";
 import type { CdocContentFilter } from "./filters";
+import { buildCanonicalPath } from "./canonicalUrl";
 import {
   CDOCS_TRAITS_INTERMEDIATE_FILE,
   cdocsTraitsListPath,
@@ -35,7 +37,15 @@ export interface CdocsPage {
   bareUrl: string;
   /** Every trait the page accepts as a param, alphabetical. Includes conditional filters. */
   traitIds: string[];
-  variants: CdocsVariant[];
+  variants: CdocsPageVariant[];
+}
+
+export interface CdocsPageVariant extends CdocsVariant {
+  /**
+   * The variant's canonical URL: the bare URL for the default variant, and
+   * `url` for any other. The listings use it, so they match the canonical tag.
+   */
+  canonicalUrl: string;
 }
 
 /**
@@ -99,7 +109,15 @@ export function buildCdocsPage(p: {
     ...(p.description !== undefined && { description: p.description }),
     bareUrl,
     traitIds: p.contentFilters.map((filter) => filter.trait_id).sort(),
-    variants: variants.map(({ variant }) => variant),
+    variants: variants.map(({ variant }) => ({
+      ...variant,
+      canonicalUrl: buildCanonicalPath({
+        bareUrl,
+        contentFilters: p.contentFilters,
+        filtersManifest,
+        valsByTraitId: variant.valsByTraitId,
+      }),
+    })),
   };
 }
 

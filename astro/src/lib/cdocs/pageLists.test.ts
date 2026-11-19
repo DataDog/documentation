@@ -140,6 +140,30 @@ describe("buildCdocsPage", () => {
   });
 });
 
+describe("variant canonical URLs", () => {
+  it("is the bare URL for the default variant, and the variant URL otherwise", () => {
+    const page = buildPage([hostFilter, databaseFilter]);
+
+    expect(
+      page.variants.map((variant) => [variant.url, variant.canonicalUrl]),
+    ).toEqual([
+      ["/guides/setup/?database=aurora&host=aws", "/guides/setup/"],
+      [
+        "/guides/setup/?database=postgres&host=aws",
+        "/guides/setup/?database=postgres&host=aws",
+      ],
+      [
+        "/guides/setup/?database=cosmos_db&host=azure",
+        "/guides/setup/?database=cosmos_db&host=azure",
+      ],
+      [
+        "/guides/setup/?database=postgres&host=azure",
+        "/guides/setup/?database=postgres&host=azure",
+      ],
+    ]);
+  });
+});
+
 describe("variant descriptions", () => {
   const findVariant = (page: CdocsPage, url: string) =>
     page.variants.find((variant) => variant.url === url);

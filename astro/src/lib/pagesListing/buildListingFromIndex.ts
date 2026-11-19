@@ -14,7 +14,8 @@ function md5Hex(input: string): string {
 
 /**
  * Turns the metadata intermediate file into the final `pages.json` listing by
- * hashing each page's already-emitted plaintext.
+ * hashing each page's already-emitted plaintext. An entry with its own
+ * `mdocHash` keeps it, with no file read.
  *
  * `readFile` is injected so the disk read is the only side effect and the core
  * is unit-testable without a filesystem. Files are read and hashed one at a
@@ -32,7 +33,10 @@ export async function buildListingFromIndex(
   for (const entry of index) {
     listing[entry.key] = {
       metadata: entry.metadata,
-      mdocHash: md5Hex(await readFile(entry.file)),
+      mdocHash:
+        entry.file === undefined
+          ? entry.mdocHash
+          : md5Hex(await readFile(entry.file)),
       source: "astro",
     };
   }

@@ -49,12 +49,17 @@ export async function buildPageIndex(
     if (entriesByKey.has(key)) {
       throw new Error(`buildPageIndex: duplicate page URL "${key}".`);
     }
-    entriesByKey.set(key, {
+    entriesByKey.set(
       key,
-      // Disk paths carry no site base path: Astro emits at the output root.
-      file: page.urlPath.replace(/^\//, ""),
-      metadata: page.metadata,
-    });
+      page.mdocHash === undefined
+        ? {
+            key,
+            // Disk paths carry no site base path: Astro emits at the output root.
+            file: page.urlPath.replace(/^\//, ""),
+            metadata: page.metadata,
+          }
+        : { key, mdocHash: page.mdocHash, metadata: page.metadata },
+    );
   }
 
   return [...entriesByKey.values()].sort((a, b) => a.key.localeCompare(b.key));

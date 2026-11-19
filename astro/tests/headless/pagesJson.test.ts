@@ -135,9 +135,18 @@ async function builtFilesByRoute(): Promise<Map<string, RouteName>> {
   return routeNamesByFile;
 }
 
+type FileIndexEntry = PageIndexEntry & { file: string };
+
 async function readIndex(): Promise<PageIndexEntry[]> {
   const res = (await pageIndexGET(ctx(SITE))) as Response;
   return JSON.parse(await res.text());
+}
+
+/** The entries hashed from an emitted `.md` file. Cdocs entries carry their own hash. */
+function fileEntries(index: PageIndexEntry[]): FileIndexEntry[] {
+  return index.filter(
+    (entry): entry is FileIndexEntry => entry.file !== undefined,
+  );
 }
 
 describe("GET /pages-index.json (metadata intermediate file)", () => {
@@ -150,8 +159,8 @@ describe("GET /pages-index.json (metadata intermediate file)", () => {
 
   it("emits sorted entries with absolute .md keys and disk-relative files", async () => {
     const index = await readIndex();
-    expect(index.length).toBeGreaterThan(0);
-    for (const entry of index) {
+    expect(fileEntries(index).length).toBeGreaterThan(0);
+    for (const entry of fileEntries(index)) {
       expect(entry.key.startsWith("https://docs.datadoghq.com/")).toBe(true);
       expect(entry.key.endsWith(".md")).toBe(true);
       expect(entry.file).toBe(
@@ -163,6 +172,19 @@ describe("GET /pages-index.json (metadata intermediate file)", () => {
     expect(keys).toEqual([...keys].sort());
   });
 
+  it("gives each Cdocs variant its own hash and no file", async () => {
+    const cdocsEntries = (await readIndex()).filter(
+      (entry) => entry.file === undefined,
+    );
+    expect(cdocsEntries.length).toBeGreaterThan(0);
+    for (const entry of cdocsEntries) {
+      expect(entry.key).toMatch(
+        /^https:\/\/docs\.datadoghq\.com\/.+\.md(\?.+)?$/,
+      );
+      expect(entry.mdocHash).toMatch(/^[0-9a-f]{32}$/);
+    }
+  });
+
   it("keys pages under the site's base path when one is configured", async () => {
     const index = await buildPageIndex(
       pageSources,
@@ -172,6 +194,8 @@ describe("GET /pages-index.json (metadata intermediate file)", () => {
       expect(
         entry.key.startsWith("https://docs-staging.datadoghq.com/my-branch/"),
       ).toBe(true);
+    }
+    for (const entry of fileEntries(index)) {
       // The file on disk has no branch prefix, so the integration can find it.
       expect(entry.file.startsWith("my-branch/")).toBe(false);
     }
@@ -189,7 +213,7 @@ describe("GET /pages-index.json (metadata intermediate file)", () => {
 describe("pages.json assembly (hash from emitted plaintext)", () => {
   it("lists only pages the .md routes build", async () => {
     const routeNamesByFile = await builtFilesByRoute();
-    for (const entry of await readIndex()) {
+    for (const entry of fileEntries(await readIndex())) {
       expect(
         routeNamesByFile.has(entry.file),
         `${entry.file} is listed, but no .md route builds it`,
@@ -200,7 +224,7 @@ describe("pages.json assembly (hash from emitted plaintext)", () => {
   it("serves a non-empty body for one listed page per route", async () => {
     const routeNamesByFile = await builtFilesByRoute();
     const sampleFilesByRoute = new Map<RouteName, string>();
-    for (const entry of await readIndex()) {
+    for (const entry of fileEntries(await readIndex())) {
       const routeName = routeNamesByFile.get(entry.file);
       if (routeName && !sampleFilesByRoute.has(routeName)) {
         sampleFilesByRoute.set(routeName, entry.file);
@@ -224,7 +248,9 @@ describe("pages.json assembly (hash from emitted plaintext)", () => {
     // The build hashes each emitted .md straight off disk. Here the route stands
     // in for the disk read, so the resulting hash is the one the build produces.
     const index = await readIndex();
-    const landing = index.find((entry) => entry.file === "api/latest.md")!;
+    const landing = fileEntries(index).find(
+      (entry) => entry.file === "api/latest.md",
+    )!;
     const listing = await buildListingFromIndex([landing], serveMarkdown);
     expect(() => PagesListingSchema.parse(listing)).not.toThrow();
 
