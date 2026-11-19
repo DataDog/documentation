@@ -218,26 +218,26 @@ describe("viewsBuilder dated API versions", () => {
     const operation = spec.paths["/api/v1/dashboard"]?.post;
     expect(operation && getOperationDateVersions(spec, operation)).toEqual([
       "base",
-      "2027-04-15",
+      "2027-01-01",
     ]);
     const view = await getOperationView("dashboards", "create-a-new-dashboard");
     const endpoint = view?.variants.find((variant) => variant.version === "v1");
     const dated = endpoint?.dateVersions?.[0];
 
-    expect(dated?.apiVersion).toBe("2027-04-15");
+    expect(dated?.apiVersion).toBe("2027-01-01");
     const response = dated?.responses.find(
       (candidate) => candidate.statusCode === "200",
     );
     expect(response?.schema).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          name: "owner",
-          versionChange: { type: "added", version: "2027-04-15" },
+          name: "default_timeframe",
+          versionChange: { type: "added", version: "2027-01-01" },
         }),
       ]),
     );
     const curl = dated?.codeExamples.find((set) => set.language === "curl");
-    expect(curl?.entries[0].code).toContain('-H "DD-API-Version: 2027-04-15"');
+    expect(curl?.entries[0].code).toContain('-H "DD-API-Version: 2027-01-01"');
   });
 });
 
