@@ -301,7 +301,6 @@ Check whether the device is monitored by Network Device Monitoring. If it is not
 
 Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or the [Infrastructure List][17]. For more information, see the [Map status and network signals](#map-status-and-network-signals) section.
 
-<!-- TODO: The empty-state messages above come from the eight design mockups in Slack (2026-11-18). Check them against staging. -->
 
 ## Further reading
 
