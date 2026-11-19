@@ -68,7 +68,6 @@ export function buildFilterOptionLinks(p: {
       options: resolvedFilter.options.map((option) => {
         const { variant } = buildVariant(
           p.bareUrl,
-          undefined,
           settleValues(filtersManifest, p.contentFilters, {
             ...currentVals,
             [filter.trait_id]: option.id,

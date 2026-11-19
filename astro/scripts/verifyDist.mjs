@@ -9,9 +9,11 @@
  * build itself — that guard already runs inside `astro build` every time.
  *
  * The two regexes below mirror `CONTAINED_PATH` and the category-directory
- * shape in staticApiGuard.ts. Kept duplicated (rather than imported) because
- * this script runs as plain Node outside Vite/Astro's TS-aware module graph.
- * Keep them in sync if either file changes.
+ * shape in staticApiGuard.ts, `SITEMAP_FILE` mirrors `isSitemapFile` in
+ * src/lib/sitemap/sitemapFiles.ts, and `LLMS_TXT_FILE` mirrors the guard's
+ * constant of the same name. Kept duplicated (rather than imported) because this script
+ * runs as plain Node outside Vite/Astro's TS-aware module graph. Keep them in
+ * sync if either file changes.
  *
  * Usage: node scripts/verifyDist.mjs [dist/client] [--min-categories=150]
  */
@@ -19,6 +21,10 @@ import { readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
+// The sitemap index and its chunks, at the root like any site's.
+const SITEMAP_FILE = /^sitemap-(?:index|\d+)\.xml$/;
+// An llms.txt detail file in any folder, such as `tracing/part_1/llms.txt`.
+const LLMS_TXT_FILE = /^(?:[^/]+\/)+llms\.txt$/;
 
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));
@@ -59,12 +65,15 @@ async function main() {
   const filePaths = await listFilesRecursive(distDir);
 
   const uncontained = filePaths.filter(
-    (filePath) => !CONTAINED_PATH.test(filePath),
+    (filePath) =>
+      !CONTAINED_PATH.test(filePath) &&
+      !SITEMAP_FILE.test(filePath) &&
+      !LLMS_TXT_FILE.test(filePath),
   );
   if (uncontained.length > 0) {
     problems.push(
       `Containment guard: the following emitted files fall outside ` +
-        `api/ and {fr,ja,ko,es}/api/:\n` +
+        `api/ and {fr,ja,ko,es}/api/, and aren't allowed sitemap or llms.txt files:\n` +
         uncontained.map((filePath) => `  - ${filePath}`).join("\n"),
     );
   }

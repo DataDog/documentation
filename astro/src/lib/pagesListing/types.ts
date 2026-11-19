@@ -30,7 +30,10 @@ export const PageMetadataSchema = z
 export const PagesListingEntrySchema = z
   .object({
     metadata: PageMetadataSchema,
-    /** md5 of the exact plaintext served at this URL, hex, 32 chars. */
+    /**
+     * md5, hex, 32 chars: of the exact plaintext served at this URL, or, for a
+     * Cdocs page, of its source (see `hashCdocsSource`).
+     */
     mdocHash: z.string().length(32),
     /** Provenance marker so this file can be blended with Hugo's pages.json. */
     source: z.literal("astro"),
@@ -59,9 +62,17 @@ export type PagesListing = z.infer<typeof PagesListingSchema>;
  */
 export const PlaintextPageSchema = z
   .object({
-    /** Path portion of the URL, ending in `.md`, e.g. "/api/latest/metrics/get-a-metric.md". */
+    /**
+     * Path portion of the URL, ending in `.md`, e.g. "/api/latest/metrics/get-a-metric.md".
+     * A Cdocs variant's also has its filter params, e.g. "/tracing/setup.md?os=linux".
+     */
     urlPath: z.string(),
     metadata: PageMetadataSchema,
+    /**
+     * The page's hash, for a page with no `.md` file to hash, such as a Cdocs
+     * page, which renders on the server. Pages with a file leave it out.
+     */
+    mdocHash: z.string().length(32).optional(),
   })
   .strict();
 
@@ -129,12 +140,22 @@ export interface PlaintextPageSource {
  * This is the cheap half of `pages.json`: everything except the content hash.
  * `file` is the disk-relative path of the emitted `.md`, so the
  * `astro:build:done` integration can read it out of `dist/client` and hash it
- * without rebuilding the body.
+ * without rebuilding the body. A page with no emitted file carries its own
+ * `mdocHash` instead.
  */
-export interface PageIndexEntry {
-  /** Full absolute URL of the page's plaintext twin, ending in `.md`. */
+export type PageIndexEntry = {
+  /** Full absolute URL of the page's plaintext twin, ending in `.md` and any filter params. */
   key: string;
-  /** Disk-relative path under the client output dir, e.g. "api/latest/a.md". */
-  file: string;
   metadata: PageMetadata;
-}
+} & (
+  | {
+      /** Disk-relative path under the client output dir, e.g. "api/latest/a.md". */
+      file: string;
+      mdocHash?: never;
+    }
+  | {
+      /** The page's own hash, from `PlaintextPage.mdocHash`. */
+      mdocHash: string;
+      file?: never;
+    }
+);

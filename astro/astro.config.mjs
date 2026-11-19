@@ -8,7 +8,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath } from "node:url";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
-import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
+import { sitemapOptions } from "./src/lib/sitemap/sitemapOptions.ts";
 import {
   branchRef,
   deriveSiteUrl,
@@ -19,6 +19,7 @@ import { pathPrefix } from "./src/lib/site/pathPrefix.ts";
 import { resolveSiteEnv } from "./src/lib/site/siteEnv.ts";
 import { resolveWebsitesModulesPath } from "./src/lib/site/websitesModulesPath.ts";
 import { pagesJson } from "./src/integrations/pagesJson.ts";
+import { onDemandSitemapPages } from "./src/integrations/onDemandSitemapPages.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 import { cdocsTraitsList } from "./src/integrations/cdocsTraitsList.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
@@ -118,6 +119,9 @@ function deriveHugoDocsUrl() {
     : `http://localhost:${hugoDevPort}`;
 }
 
+// Filled by `onDemandSitemapPages` after the build, for `@astrojs/sitemap`.
+const onDemandSitemapUrls = [];
+
 export default defineConfig({
   site: deriveSiteUrl(),
   // On-demand rendering: cdocs resolve their filters at request time (reading
@@ -133,10 +137,11 @@ export default defineConfig({
   integrations: [
     markdoc(),
     preact(),
-    sitemap({
-      filenameBase: "api/sitemap",
-      filter: isSitemapPage,
-    }),
+    // Adds the pages that render on demand, such as Cdocs variants, to
+    // `onDemandSitemapUrls`. Must come before sitemap, which reads them in the
+    // same hook.
+    onDemandSitemapPages(onDemandSitemapUrls),
+    sitemap(sitemapOptions(onDemandSitemapUrls)),
     // Emits dist/client/api/pages.json after the build by hashing each emitted
     // .md from disk (no page body is built twice). Must come after sitemap so
     // the intermediate file is deleted only once every build:done consumer has

@@ -40,7 +40,10 @@ describe("pages.json coverage against full spec", () => {
       const listing = await buildFullListing();
       expect(() => PagesListingSchema.parse(listing)).not.toThrow();
 
-      const keys = new Set(Object.keys(listing));
+      // Cdocs variants are covered in `cdocsPageSource.test.ts`.
+      const keys = new Set(
+        Object.keys(listing).filter((key) => key.startsWith(`${SITE}/api/`)),
+      );
       const categories = await getCategoriesView("en");
 
       // Fixed pages.

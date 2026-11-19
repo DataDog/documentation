@@ -25,6 +25,18 @@ const index: PageIndexEntry[] = [
 ];
 
 describe("buildListingFromIndex", () => {
+  it("uses an entry's own hash without reading a file", async () => {
+    const hash = "a".repeat(32);
+    const listing = await buildListingFromIndex(
+      [{ key: "https://x/c.md?os=linux", mdocHash: hash, metadata }],
+      async (file) => {
+        throw new Error(`read ${file}`);
+      },
+    );
+
+    expect(listing["https://x/c.md?os=linux"].mdocHash).toBe(hash);
+  });
+
   it("hashes each entry's file contents via the injected reader", async () => {
     const bodies: Record<string, string> = {
       "a.md": "body A",

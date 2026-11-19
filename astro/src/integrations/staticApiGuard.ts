@@ -1,5 +1,6 @@
 import type { AstroConfig, AstroIntegration } from "astro";
 import { readdir } from "node:fs/promises";
+import { isSitemapFile } from "../lib/sitemap/sitemapFiles";
 
 /**
  * Build-time guard that makes "confined to /api" and "fully static" mechanical
@@ -9,7 +10,9 @@ import { readdir } from "node:fs/promises";
  *   1. Prerender guard — every `/api` route must be `prerender: true`.
  *   2. Containment guard — every emitted file must live under `api/` or
  *      `{fr,ja,ko,es}/api/` (Astro emits locale-prefixed output per directory,
- *      not `api/{lang}/...`).
+ *      not `api/{lang}/...`). The exceptions are the sitemap files, which
+ *      are at the root like any site's, and the llms.txt detail files for
+ *      docs outside `api/`, which go in those docs' folders.
  *   3. Coverage guard — the emitted category count clears a floor, so a spec
  *      parsing regression can't silently ship a near-empty tree that a
  *      `--delete` upload would then use to wipe out Hugo's ~170 categories.
@@ -137,9 +140,17 @@ export function findUnprerenderedApiRoutes(routes: RouteLike[]): string[] {
     .map((route) => route.route);
 }
 
+// An llms.txt detail file in any folder, such as `tracing/part_1/llms.txt`.
+const LLMS_TXT_FILE = /^(?:[^/]+\/)+llms\.txt$/;
+
 /** Returns any emitted file path that falls outside the `/api` containment. */
 export function findUncontainedPaths(filePaths: string[]): string[] {
-  return filePaths.filter((filePath) => !CONTAINED_PATH.test(filePath));
+  return filePaths.filter(
+    (filePath) =>
+      !CONTAINED_PATH.test(filePath) &&
+      !isSitemapFile(filePath) &&
+      !LLMS_TXT_FILE.test(filePath),
+  );
 }
 
 /**
@@ -231,7 +242,7 @@ export function staticApiGuard(
         if (uncontained.length > 0) {
           problems.push(
             `Containment guard: the following emitted files fall outside ` +
-              `api/ and {fr,ja,ko,es}/api/:\n` +
+              `api/ and {fr,ja,ko,es}/api/, and aren't allowed sitemap or llms.txt files:\n` +
               uncontained.map((filePath) => `  - ${filePath}`).join("\n"),
           );
         }

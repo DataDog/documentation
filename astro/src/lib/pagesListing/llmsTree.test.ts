@@ -184,6 +184,95 @@ describe("buildLlmsTree", () => {
     }
   });
 
+  describe("an oversized section with subfolders", () => {
+    const LIMIT = 1000;
+    const pagesIn = (folder: string, count: number) =>
+      Array.from({ length: count }, (_, i) =>
+        stubPage(
+          `${folder}page-${i}.md?os=linux`,
+          `Page number ${i} in ${folder}`,
+        ),
+      );
+    const treeFor = (pages: PlaintextPage[]) =>
+      buildLlmsTree(
+        [
+          stubSource(
+            "Docs",
+            [],
+            [{ title: "guides", llmsTxtPath: "/guides/llms.txt", pages }],
+          ),
+        ],
+        SITE,
+        LIMIT,
+      ).detailFiles;
+    const expectAllWithinLimit = (detailFiles: Map<string, string>) => {
+      for (const [path, contents] of detailFiles) {
+        expect(contents.length, path).toBeLessThanOrEqual(LIMIT);
+      }
+    };
+
+    it("splits by subfolder first, keeping its own folder's pages inline", () => {
+      const detailFiles = treeFor([
+        stubPage("/guides/overview.md", "Overview"),
+        ...pagesIn("/guides/setup/", 8),
+        ...pagesIn("/guides/tuning/", 8),
+      ]);
+
+      expect([...detailFiles.keys()].sort()).toEqual([
+        "/guides/llms.txt",
+        "/guides/setup/llms.txt",
+        "/guides/tuning/llms.txt",
+      ]);
+      const sectionFile = detailFiles.get("/guides/llms.txt")!;
+      expect(sectionFile).toContain(`- [Overview](${SITE}/guides/overview.md)`);
+      expect(sectionFile).toContain(
+        `## setup\n\n- [Detailed page listing](${SITE}/guides/setup/llms.txt)`,
+      );
+      const setupFile = detailFiles.get("/guides/setup/llms.txt")!;
+      expect(setupFile.startsWith("# setup\n")).toBe(true);
+      expect(setupFile).toContain(`${SITE}/guides/setup/page-7.md?os=linux`);
+      expectAllWithinLimit(detailFiles);
+    });
+
+    it("splits a subfolder that's still too long by its own subfolders", () => {
+      const detailFiles = treeFor([
+        ...pagesIn("/guides/setup/aws/", 8),
+        ...pagesIn("/guides/setup/azure/", 8),
+        ...pagesIn("/guides/tuning/", 2),
+      ]);
+
+      expect(detailFiles.has("/guides/setup/aws/llms.txt")).toBe(true);
+      expect(detailFiles.has("/guides/setup/azure/llms.txt")).toBe(true);
+      expect(detailFiles.get("/guides/setup/llms.txt")).toContain(
+        `${SITE}/guides/setup/aws/llms.txt`,
+      );
+      expectAllWithinLimit(detailFiles);
+    });
+
+    it("falls back to part files when every page is in one subfolder", () => {
+      const detailFiles = treeFor(pagesIn("/guides/setup/", 16));
+
+      expect(detailFiles.has("/guides/setup/llms.txt")).toBe(false);
+      expect(detailFiles.has("/guides/part_1/llms.txt")).toBe(true);
+      expect(detailFiles.has("/guides/part_2/llms.txt")).toBe(true);
+      expectAllWithinLimit(detailFiles);
+    });
+
+    it("moves its own folder's pages into part files when its index is still too long", () => {
+      const detailFiles = treeFor([
+        ...pagesIn("/guides/", 16),
+        ...pagesIn("/guides/setup/", 2),
+      ]);
+
+      expect(detailFiles.has("/guides/part_1/llms.txt")).toBe(true);
+      expect(detailFiles.has("/guides/setup/llms.txt")).toBe(true);
+      const sectionFile = detailFiles.get("/guides/llms.txt")!;
+      expect(sectionFile).toContain(`${SITE}/guides/part_1/llms.txt`);
+      expect(sectionFile).toContain(`${SITE}/guides/setup/llms.txt`);
+      expectAllWithinLimit(detailFiles);
+    });
+  });
+
   it("does not split when sections fit the default limit", () => {
     const { detailFiles } = buildLlmsTree([stubApiSource()], SITE);
     for (const contents of detailFiles.values()) {
