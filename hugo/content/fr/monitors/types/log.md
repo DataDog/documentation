@@ -2,113 +2,153 @@
 aliases:
 - /fr/monitors/monitor_types/log
 - /fr/monitors/create/types/log/
+description: Surveillez les logs indexés pour détecter les menaces de sécurité, résoudre
+  les problèmes et vous alerter lorsque les modèles de logs dépassent les seuils définis.
 further_reading:
+- link: /logs/
+  tag: Documentation
+  text: Présentation de Log Management
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
 - link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentation
   text: Vérifier le statut de votre monitor
-title: Log Monitors
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: Blog
+  text: Utilisez des requêtes en notation CIDR pour filtrer vos logs de trafic réseau
+- link: https://learn.datadoghq.com/courses/log-investigations
+  tag: Centre d'apprentissage
+  text: Suivez les logs pour les alertes et les enquêtes
+title: Monitor de logs
 ---
+## Présentation {#overview}
 
-## Présentation
+Les logs sont essentiels pour les enquêtes de sécurité, car ils facilitent la détection des menaces, le suivi de la conformité et la surveillance de la sécurité. Les systèmes de Log Management corrèlent les logs avec les données d'observabilité pour une détection rapide de la cause racine. Le Log Management permet également un dépannage efficace, la résolution des problèmes et les audits de sécurité.
 
-Une fois la fonctionnalité [Log Management][1] activée pour votre organisation, vous pouvez créer des log monitors afin de recevoir une alerte lorsqu'un type de log spécifique dépasse un seuil défini par l'utilisateur sur une période donnée. Les log monitors peuvent uniquement évaluer les [logs indexés][2].
+Une fois que le [Log Management est activé][1] pour votre organisation, vous pouvez créer un monitor de logs pour vous alerter lorsqu'un type de log spécifié dépasse un seuil défini par l'utilisateur sur une période donnée. Le monitor de logs évalue uniquement les [logs indexés][2].
 
-## Création d'un monitor
+**Remarque** : les monitors de logs ont une fenêtre temporelle glissante maximale de `2 days`.
 
-Pour créer un [log monitor][3] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Logs*.
+## Création de monitor {#monitor-creation}
 
-<div class="alert alert-info"><strong>Remarque</strong> : par défaut, chaque compte est limité à 1 000 log monitors. Si cette limite est trop basse, utilisez les <a href="/monitors/configuration/?tab=thresholdalert#groupe-d-alertes">alertes multiples</a> ou <a href="/help/">contactez l'assistance</a>.</div>
+Pour créer un monitor de logs dans Datadog, utilisez la navigation principale : [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Logs{{< /ui >}}][3].
 
-### Définir la requête de recherche
+<div class="alert alert-info">Il existe une limite par défaut de 1 000 monitors de logs par compte. Si vous atteignez cette limite, envisagez d'utiliser des <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a> ou de sélectionner <a href="/help/">Contact Support</a>.</div>
 
-À mesure que vous définissez votre requête de recherche, le graphique au-dessus des champs de recherche se met à jour.
+### Définissez la requête de recherche {#define-the-search-query}
 
-1. Créez votre requête de recherche en utilisant la même logique que pour une [recherche dans le Log Explorer][4].
-2. Choisissez de surveiller un nombre de logs, une [facette][5] ou une [mesure][6] :
-    * **Monitor over a log count** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de logs sur une période sélectionnée, puis le compare aux conditions de seuil.
-    * **Monitor over a facet** : si vous sélectionnez une [facette][5], le monitor envoie une alerte en fonction du nombre de valeurs uniques de la facette (`Unique value count`). Par exemple, si vous avez une facette `user.email`, le nombre de valeurs uniques correspond au nombre d'adresses e-mail uniques.
-    * **Monitor over a measure** : si vous sélectionnez une [mesure][6], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
-3. Regroupez les logs en fonction de plusieurs dimensions (facultatif) :
+À mesure que vous définissez la requête de recherche, le graphique au-dessus des champs de recherche se met à jour.
 
-   Tous les logs correspondant à la requête sont agrégés sous forme de groupes en fonction de la valeur d'un maximum de quatre facettes de log. Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la deuxième dans la fourchette des valeurs les plus élevées de la première dimension, et ainsi de suite jusqu'à la dernière dimension. La limite de dimensions dépend du nombre total de dimensions :
-   * **1 facette** : 1 000 valeurs les plus élevées
-   * **2 facettes** : 30 valeurs les plus élevées par facette (900 groupes maximum)
-   * **3 facettes** : 10 valeurs les plus élevées par facette (1 000 groupes maximum)
-   * **4 facettes** : 5 valeurs les plus élevées par facette (625 groupes maximum)
-4. Configurez la stratégie de regroupement pour les alertes (facultatif) :
-    * **Simple-Alert** : les alertes simples agrègent vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies. Ces alertes sont particulièrement utiles pour surveiller une métrique issue d'un seul host ou une métrique agrégée à partir de nombreux hosts. Vous pouvez sélectionner cette stratégie pour réduire le nombre de notifications inutiles.
-    * **Multi-Alert** : les alertes multiples appliquent l'alerte à chaque source en fonction des paramètres de votre groupe. Un événement d'alerte est créé pour chaque groupe qui répond aux conditions définies. Par exemple, vous pouvez regrouper `system.disk.in_use` par `device` pour recevoir une alerte distincte pour chaque appareil qui manque d'espace disque.
+1. Construisez une requête de recherche en utilisant la même logique qu'une [recherche dans le Log Explorer][4]. Notez que les [logs Flex Tier][10], qui peuvent être affichés dans le Log Explorer, ne sont pas pris en charge pour les monitors. Seuls les logs Standard Tier sont pris en charge.
+2. Choisissez de surveiller un nombre de logs, une [facette][5], un attribut ou une [mesure][6] :
+    * {{< ui >}}Monitor over a log count{{< /ui >}} : Utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** d'attribut ou de mesure. Datadog évalue le nombre de logs sur une période sélectionnée, puis le compare aux conditions de seuil.
+    * {{< ui >}}Monitor over a facet or an attribute{{< /ui >}} : Si un attribut est sélectionné, le monitor envoie des alertes sur le {{< ui >}}Unique value count{{< /ui >}} de l'attribut. Par exemple, si vous avez un attribut tel que `user.email`, le nombre de valeurs uniques correspond au nombre d'adresses e-mail d'utilisateurs uniques. Tout attribut peut être utilisé dans un monitor, mais seules les facettes sont affichées dans l'autocomplétion.
+    * {{< ui >}}Monitor over measure{{< /ui >}} : Si une [mesure][6] est sélectionnée, le monitor déclenche une alerte sur la valeur numérique de la facette de log (similaire à un monitor de métrique) et une agrégation doit être sélectionnée (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
+3. Groupez les logs par plusieurs dimensions (facultatif) :
 
-### Définir vos conditions d'alerte
+   Datadog agrège tous les logs correspondant à la requête en groupes basés sur les valeurs des tags, des attributs et jusqu'à quatre facettes. Lorsque plusieurs dimensions sont présentes, les valeurs principales sont déterminées selon la première dimension, puis selon la deuxième dimension parmi les valeurs principales de la première, et ainsi de suite jusqu'à la dernière dimension. La limite des dimensions dépend du nombre total de dimensions :
+   * **1 facette** : 1000 valeurs principales
+   * **2 facettes** : 30 valeurs principales par facette (au maximum 900 groupes)
+   * **3 facettes** : 10 valeurs principales par facette (1000 groupes au maximum)
+   * **4 facettes** : 5 valeurs principales par facette (625 groupes au maximum)
 
-* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure ou égale à) :
-* au seuil sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou sur un intervalle `custom` (entre `5 minutes` et `2 days`)
-* au seuil d'alerte `<NOMBRE>` ;
-* au seuil d'avertissement `<NOMBRE>`.
+   Si plusieurs requêtes ou formules sont définies dans un monitor de logs, vous pouvez sélectionner le nombre de valeurs les plus élevées ou les plus basses pour chaque dimension.
 
-#### Absence de données et alertes Below
+   La limite totale, indépendamment du nombre de facettes, est de 1 000 valeurs les plus élevées. Si vous augmentez cette valeur au-delà de 1 000, Datadog ajuste le nombre de valeurs les plus élevées pour les autres dimensions afin de garantir que le nombre de combinaisons résultantes soit inférieur à 1 000. Le nombre de valeurs les plus élevées par défaut pour chaque regroupement est de 10, à l'exception du quatrième, pour lequel il est de 5.
 
-`NO DATA` est un état affiché lorsqu'aucun log ne correspond à la requête du monitor pendant l'intervalle de temps.
+   Par exemple, un monitor de logs avec quatre regroupements sur la requête de recherche pourrait avoir :
+   * **Première facette** : 10 valeurs principales
+   * **Deuxième facette** : 10 valeurs principales
+   * **Troisième facette** : 5 valeurs principales
+   * **Quatrième facette** : 2 valeurs principales
 
-Définissez la condition `below 1` pour recevoir une notification lorsque les groupes correspondant à une requête spécifique ont tous arrêté d'envoyer des logs. Vous serez ainsi alerté lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné pour tous les groupes d'agrégation.
+4. En option, utilisez le menu {{< ui >}}Σ Modify Query{{< /ui >}} pour affiner la requête avec :
+   * **Functions and formulas** : Transformez et combinez les résultats de votre requête. Consultez les [fonctions][11] et les [formules][12].
+   * **Advanced search** : Définissez le périmètre des alertes à l'aide de jeux de données sélectionnés, tels que des listes d'entités, des niveaux de clients ou des événements corrélés. Consultez les [sous-requêtes][13] et les [Reference Tables][14].
 
-Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte se déclenche **uniquement** s'il existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.  
+   Vous pouvez également créer un monitor directement à partir d'une recherche avancée dans [Log Explorer][4].
+
+5. Configurez la stratégie de regroupement des alertes (facultatif) :
+    * {{< ui >}}Simple-Alert{{< /ui >}} : Les alertes simples agrègent les données de toutes les sources qui en transmettent. Vous recevez une alerte lorsque la valeur regroupée remplit les conditions définies. Ceci fonctionne mieux pour surveiller une métrique provenant d'un seul host ou la somme d'une métrique sur plusieurs hosts. Cette stratégie peut être sélectionnée pour réduire le bruit des notifications.
+    * {{< ui >}}Multi Alert{{< /ui >}} : Les alertes multiples appliquent l'alerte à chaque source selon vos paramètres de groupe. Un événement d'alerte est généré pour chaque groupe qui remplit les conditions définies. Par exemple, vous pourriez grouper `system.disk.in_use` par `device` pour recevoir une alerte distincte pour chaque appareil qui manque d'espace.
+
+### Définir les conditions d'alerte {#set-alert-conditions}
+
+Déclencher lorsque la requête remplit l'une des conditions suivantes par rapport à une valeur seuil :
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
+
+#### Alertes NO DATA et Below {#no-data-and-below-alerts}
+
+Par défaut, un monitor de logs n'entre pas dans l'état NO DATA. Les requêtes de type Count évaluent les données manquantes comme zéro par rapport aux seuils, et les autres agrégations, comme la moyenne, affichent le dernier état connu. Pour afficher NO DATA lorsqu'aucun log ne correspond à la requête, ou lorsqu'un groupe qui envoyait précédemment des données cesse de le faire, définissez l'option missing-data sur {{< ui >}}Show NO DATA{{< /ui >}} ou {{< ui >}}Show NO DATA and notify{{< /ui >}}.
+
+Pour recevoir une notification lorsque tous les groupes correspondant à une requête spécifique ont cessé d'envoyer des logs, définissez la condition sur `below 1`. Ceci envoie une notification lorsqu'aucun log ne correspond à la requête du monitor dans un intervalle de temps donné pour l'ensemble des groupes agrégés.
+
+Lorsque vous segmentez le monitor par une dimension (tag ou facette) et que vous utilisez une condition `below`, l'alerte est déclenchée **si et seulement si** il existe des logs pour un groupe donné et que leur nombre est inférieur au seuil, ou s'il n'y a aucun log pour **l'ensemble** des groupes.
 
 **Exemples** :
 
-* Le monitor suivant se déclenche uniquement s'il n'y a aucun log pour tous les services :
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service" style="width:60%;" >}}
-* Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :  
+* Ce monitor se déclenche si et seulement s'il n'y a aucun log pour l'ensemble des services :
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below par service" style="width:60%;" >}}
+* Ce monitor se déclenche s'il n'y a aucun log pour le service `backend` :
   {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend" style="width:60%;" >}}
 
-#### Conditions d'alerte avancées
+#### Conditions d'alerte avancées {#advanced-alert-conditions}
 
-Pour obtenir des instructions détaillées concernant les options d'alerte avancées (délai d'évaluation, délai pour les nouveaux groupes, etc.), consultez la documentation relative à la [configuration des monitors][7].
+Pour obtenir des instructions détaillées concernant les options d'alerte avancées (délai d'évaluation, délai pour les nouveaux groupes, etc.), consultez la page [Monitor configuration][7].
 
-### Notifications
+### Notifications {#notifications}
 
-Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][8].
+Pour des instructions détaillées sur la section {{< ui >}}Configure notifications and automations{{< /ui >}}, consultez la page [Notifications][8].
 
-#### Exemples de logs et top list des valeurs dépassant le seuil
+#### Classement des échantillons de logs et des valeurs dépassant le seuil {#log-samples-and-breaching-values-toplist}
 
-Lorsqu'un log monitor se déclenche, des exemples ou valeurs peuvent être ajoutés au message de notification.
+Lorsqu'un monitor de logs est déclenché, des échantillons ou des valeurs peuvent être ajoutés au message de notification. Les logs sans message ne sont pas inclus dans les échantillons. Afin d'ajouter le contenu d'un attribut de log au message du monitor, utilisez directement les [variables de modèle][9] du monitor de logs dans le corps du message du monitor.
 
 | Configuration du monitor                    | Peut être ajouté au message de notification |
 |----------------------------------|--------------------------------------|
-| Nombre de logs, alerte simple, pas de regroupement | Jusqu'à 10 échantillons de log.                |
-| Nombre de logs, alerte simple, avec regroupement   | Jusqu'à 10 valeurs de facette ou de mesure.    |
-| Nombre de logs, alertes multiples, avec regroupement    | Jusqu'à 10 échantillons de log.                |
-| Mesure, alerte simple, pas de regroupement   | Jusqu'à 10 échantillons de log.                |
-| Mesure, alerte simple, avec regroupement     | Jusqu'à 10 valeurs de facette ou de mesure.    |
-| Nombre de logs, alertes multiples, avec regroupement    | Jusqu'à 10 valeurs de facette ou de mesure.    |
+| Nombre de logs, alerte simple non groupée | Jusqu'à 10 échantillons de logs.                |
+| Nombre de logs d'alerte simple groupée   | Jusqu'à 10 valeurs de facette ou de mesure.    |
+| Nombre de logs d'alerte multiple groupée    | Jusqu'à 10 échantillons de logs.                |
+| Mesure d'alerte simple non groupée   | Jusqu'à 10 échantillons de logs.                |
+| Mesure d'alerte simple groupée     | Jusqu'à 10 valeurs de facette ou de mesure.    |
+| Mesure de log d'alerte multiple groupée  | Jusqu'à 10 valeurs de facette ou de mesure.    |
 
-Ces informations peuvent être envoyées via Slack, Jira, Webhook, Microsoft Teams, PagerDuty ou e-mail. **Remarque** : les notifications de rétablissement n'affichent aucun exemple de log.
+Ils sont disponibles pour les notifications envoyées à Slack, à Jira, aux webhooks, à Microsoft Teams et à Pagerduty, ainsi que par e-mail. **Remarque** : Les échantillons ne sont pas affichés pour les notifications de rétablissement.
 
-Pour désactiver les exemples de logs, décochez la case correspondante en bas de la section **Say what's happening**. Le texte affiché à côté de la case reflète les groupes définis pour votre monitor (comme indiqué ci-dessus).
+Pour désactiver les échantillons de journaux, décochez la case en bas de la section {{< ui >}}Configure notification & automations{{< /ui >}}. Le texte à côté de la case est basé sur le regroupement de votre monitor (comme indiqué ci-dessus).
 
-#### Exemples
+#### Exemples {#examples}
 
-Inclure un tableau des 10 principales valeurs dépassant le seuil :
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 principales valeurs dépassant le seuil" style="width:60%;" >}}
+Incluez un tableau des 10 valeurs les plus élevées dépassant le seuil :
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 valeurs les plus élevées dépassant le seuil" style="width:60%;" >}}
 
-Inclure 10 exemples de log dans la notification d'alerte :
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="10 principales valeurs dépassant le seuil" style="width:60%;" >}}
+Incluez un échantillon de 10 journaux dans la notification d’alerte :
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="10 valeurs les plus élevées dépassant le seuil" style="width:60%;" >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/
 [2]: /fr/logs/log_configuration/indexes/
-[3]: https://app.datadoghq.com/monitors#create/log
+[3]: https://app.datadoghq.com/monitors/create/log
 [4]: /fr/logs/explorer/search/
 [5]: /fr/logs/explorer/facets/
 [6]: /fr/logs/explorer/facets/#measures
 [7]: /fr/monitors/configuration/#advanced-alert-conditions
 [8]: /fr/monitors/notify/
+[9]: /fr/monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
+[10]: /fr/logs/log_configuration/flex_logs/
+[11]: /fr/logs/explorer/analytics/#functions
+[12]: /fr/logs/explorer/analytics/#formulas
+[13]: /fr/logs/explorer/advanced_search/#filter-logs-with-subqueries
+[14]: /fr/logs/explorer/advanced_search/#filter-logs-based-on-reference-tables

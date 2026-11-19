@@ -8,7 +8,7 @@ further_reading:
 - link: "/actions/private_actions/set_up_agent_based/"
   tag: "Documentation"
   text: "Set up a private action runner"
-- link: "/actions/private_actions/execution_policies/"
+- link: "/actions/execution_policies/"
   tag: "Documentation"
   text: "Execution Policies"
 - link: "/actions/connections/private_action_credentials/"
@@ -74,7 +74,7 @@ For the full set of credential file formats and examples, see [Handling private 
 [1]: /actions/private_actions/
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/private_action_runner.yaml
 [3]: /actions/private_actions/enroll_runner/
-[4]: /actions/private_actions/execution_policies/
+[4]: /actions/execution_policies/
 [5]: /actions/private_actions/run_script/
 [6]: /actions/connections/
 [7]: /actions/connections/private_action_credentials/

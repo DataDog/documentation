@@ -20,9 +20,9 @@ further_reading:
 - link: /opentelemetry/config/otlp_receiver
   tag: Documentación
   text: Habilite el receptor OTLP
-- link: /opentelemetry/setup/ddot_collector/install/
+- link: /opentelemetry/setup/ddot_collector/kubernetes/
   tag: Documentación
-  text: Instale el DDOT Collector (Recomendado)
+  text: Instale el DDOT Collector en Kubernetes (recomendado)
 - link: /opentelemetry/compatibility/
   tag: Documentación
   text: Compatibilidad de funciones
@@ -34,14 +34,14 @@ title: Configure el OpenTelemetry Collector
 ---
 ## Descripción general {#overview}
 
-Envíe trazas, métricas y registros a Datadog utilizando el OpenTelemetry Collector. Las configuraciones incluidas en esta página se probaron con la distribución OpenTelemetry Collector Contrib v0.161.0 y utilizan un pipeline de telemetría basado en OTLP con los siguientes componentes clave:
+Envíe trazas, métricas y registros a Datadog utilizando el OpenTelemetry Collector. Las configuraciones incluidas en esta página se han probado con la distribución OpenTelemetry Collector Contrib v0.161.0 y utilizan una canalización de telemetría basada en OTLP con los siguientes componentes clave:
 
 - **Exportador HTTP de OTLP**: Envía telemetría a los puntos de conexión de ingesta de OTLP de Datadog.
-- **Conector de métricas de tramos**: Genera métricas RED (tasa, errores y duración) a partir de datos de trazas para habilitar funciones de APM como Catalog y Service Page.
+- **Conector de métricas de tramo**: Genera métricas RED (tasa, error, duración) a partir de datos de trazas para potenciar funciones de APM como el Catalog y la Service Page. Para otras formas de calcular estas métricas, consulte [Trace Metrics][14].
 - **Procesador de detección de recursos**: Detecta atributos de recursos de servidor y nube, que Datadog utiliza para la resolución de nombres de servidor y el etiquetado.
 - **Datadog extension**: Informa la configuración del Collector a Datadog para Fleet Automation. No exporta datos de telemetría.
 
-Esta es la configuración recomendada para un OpenTelemetry Collector que usted mismo administra. Si desea una distribución de OpenTelemetry Collector que Datadog mantenga y admita, utilice en su lugar el [Datadog Distribution of OTel Collector (DDOT)][12].
+Esta es la configuración recomendada para un OpenTelemetry Collector que usted mismo administra. Si desea un Collector que Datadog desarrolle y al que brinde soporte, utilice el [DDOT Collector][12] en su lugar.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Un SDK de OpenTelemetry envía datos de OTLP a un OpenTelemetry Collector, el cual los exporta a Datadog a través de OTLP HTTP." style="width:100%;" >}}
 
@@ -58,7 +58,7 @@ Esta configuración es compatible con bare metal, VM, Docker y Kubernetes. Las d
 Esta configuración no es compatible con entornos de ejecución de contenedores sin servidor o basados en tareas, como ECS Fargate, EKS Fargate o AWS Lambda. Para conocer las funciones de Datadog compatibles, consulte la [tabla de compatibilidad de funciones][7] en **OTel SDK + Upstream OpenTelemetry Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 o posterior
-- Una [clave de Datadog API][2]
+- Una [clave de API de Datadog][2]
 - Su [sitio de Datadog][3] (por ejemplo, `datadoghq.com` o `datadoghq.eu`)
 
 ## Instale y configure {#install-and-configure}
@@ -256,7 +256,7 @@ Consulte los [archivos de configuración completos][500] para obtener una config
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-Ejecute el Collector. Reemplace `<YOUR_DD_SITE>` con su sitio de Datadog: {{< region-param key="dd_site" code="true" >}}.
+Ejecute el Collector. Reemplace `<YOUR_DD_SITE>` por su sitio de Datadog: {{< region-param key="dd_site" code="true" >}}.
 
 ```shell
 DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -474,9 +474,9 @@ docker run \
 
 Utilice el [chart de Helm oficial de OpenTelemetry Collector][102] para implementar el Collector como un DaemonSet en Kubernetes. Los archivos de valores de ejemplo se prueban con el chart v0.147.1, fijan el OpenTelemetry Collector a la v0.154.0 y configuran los montajes, las variables de entorno, los recursos RBAC y la exposición de puertos necesarios.
 
-Para recopilar métricas de todo el clúster o enviar datos de recursos de Kubernetes a Kubernetes Explorer, implemente un OpenTelemetry Collector de clúster junto con el DaemonSet. Consulte [Kubernetes Metrics][13].
+Para recopilar métricas de todo el clúster o enviar datos de recursos de Kubernetes a Kubernetes Explorer, implemente un OpenTelemetry Collector de clúster junto con el DaemonSet. Consulte [Métricas de Kubernetes][110].
 
-1. Cree un secreto de Kubernetes con su clave de Datadog API:
+1. Cree un secreto de Kubernetes con su clave de API de Datadog:
 
    ```shell
    kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
@@ -519,6 +519,7 @@ Para recopilar métricas de todo el clúster o enviar datos de recursos de Kuber
 [107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
 [108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[110]: /es/opentelemetry/integrations/kubernetes_metrics/
 
 {{% /tab %}}
 
@@ -929,7 +930,7 @@ Después de que su aplicación envíe telemetría al Collector, verifique que lo
 
 ### Conector de métricas de tramo {#span-metrics-connector}
 
-El conector `span_metrics` genera métricas RED a partir de datos de trazas. Estas métricas permiten utilizar funciones de APM como Catalog, Service Page y Resource Page. El conector se configura con dimensiones que permiten a Datadog calcular etiquetas de servidor, servicios pares y nombres de operaciones a partir de sus trazas.
+El conector `span_metrics` genera métricas RED a partir de datos de trazas. Estas métricas potencian funciones de APM como el Catalog, la Service Page y la Resource Page. El conector se configura con dimensiones que permiten a Datadog calcular etiquetas de servidor, servicios pares y nombres de operaciones a partir de sus trazas. Para comparar el conector con otras fuentes de métricas de traza, consulte [Trace Metrics][14].
 
 Cada configuración específica del entorno en [Configure y despliegue el OpenTelemetry Collector](#2-configure-and-deploy-the-collector) incluye el bloque de conector `span_metrics` completo. Conserve todas sus dimensiones al adaptar la configuración para que Datadog pueda derivar las etiquetas de servidor, los servicios pares, los nombres de operación y los nombres de recursos necesarios.
 
@@ -969,7 +970,7 @@ Ejemplo con métricas de instrumentación habilitadas:
 }
 ```
 
-<div class="alert alert-info">La configuración recomendada del OpenTelemetry Collector utiliza el <code>span_metrics</code> conector para generar las métricas RED que potencian las vistas de APM. El <code>trace_metrics.instrumentation_metrics_calc</code> y <code>raw_instrumentation_metrics_drop</code> los campos admiten una configuración alternativa para configuraciones que derivan métricas de trazas de APM a partir de métricas de instrumentación HTTP en su lugar. No habilite <code>instrumentation_metrics_calc</code> junto con el <code>span_metrics</code> conector, ya que esto calcula métricas de trazas de ambas fuentes.</div>
+<div class="alert alert-info">El <code>trace_metrics.instrumentation_metrics_calc</code> y <code>raw_instrumentation_metrics_drop</code> los campos controlan si las métricas de instrumentación HTTP potencian las métricas de traza de APM y si Datadog las mantiene como métricas personalizadas. No habilite <code>instrumentation_metrics_calc</code> junto con el <code>span_metrics</code> conector, porque Datadog entonces calcula las métricas de traza de ambas fuentes. Para cada combinación de estos campos, consulte <a href="/opentelemetry/integrations/trace_metrics/#use-http-metrics-from-the-sdk">Trace Metrics</a>.</div>
 
 ### Conector de reenvío de trazas {#trace-forward-connector}
 
@@ -1016,6 +1017,7 @@ Datadog aplica los siguientes límites al ingerir datos OTLP. Los datos que exce
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /es/opentelemetry/setup/ddot_collector/install/
+[12]: /es/opentelemetry/setup/ddot_collector/
 [13]: /es/opentelemetry/integrations/kubernetes_metrics/
+[14]: /es/opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

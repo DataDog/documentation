@@ -7,6 +7,9 @@ further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Observability: Jobs Monitoring'
+    - link: '/monitors/types/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Monitor'
     - link: "https://www.datadoghq.com/blog/databricks-serverless-jobs-datadog/"
       tag: "Blog"
       text: "Detect issues and optimize spend with Databricks serverless job monitoring"

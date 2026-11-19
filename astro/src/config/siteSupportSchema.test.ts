@@ -63,8 +63,22 @@ describe("SiteSupportFileSchema", () => {
     }
   });
 
+  it("rejects ** that is not a whole path segment", () => {
+    // Hugo translates url_paths to regex. Keeping ** to whole segments keeps
+    // that translation free of edge cases.
+    for (const bad of ["/a**", "/**a", "/a/**b/c", "/a/b**/c"]) {
+      expect(
+        () =>
+          SiteSupportFileSchema.parse({
+            site_support_ids: { thing: { regions: ["gov"], url_paths: [bad] } },
+          }),
+        `expected ${bad} to be rejected`,
+      ).toThrow(/whole path segment/);
+    }
+  });
+
   it("accepts the * and ** wildcards", () => {
-    for (const good of ["/a/*", "/a/**", "/a/*/b", "/a"]) {
+    for (const good of ["/a/*", "/a/**", "/a/*/b", "/a/**/b", "/a/b*", "/a"]) {
       expect(
         () =>
           SiteSupportFileSchema.parse({

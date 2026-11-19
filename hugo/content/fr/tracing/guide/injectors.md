@@ -40,6 +40,11 @@ Dans les environnements Kubernetes, l'injection est gérée par le Datadog Admis
 
 Par défaut, SSI sélectionne la méthode de livraison la mieux adaptée à votre cluster. Vous pouvez également choisir explicitement un [mode d'injection][2].
 
+Les deux méthodes de livraison fonctionnent comme suit :
+
+- **Conteneurs d'initialisation** : Un conteneur d'initialisation s'exécute dans chaque pod avant le démarrage de l'application et copie les fichiers de l'injecteur et du SDK dans le conteneur d'application.
+- **Datadog CSI driver** : Un DaemonSet s'exécute sur chaque nœud. Le pilote monte les fichiers de l'injecteur et du SDK directement depuis le système de fichiers du nœud dans le conteneur, de sorte qu'aucun conteneur d'initialisation n'est créé. La première fois qu'un nœud utilise un SDK, le pilote le télécharge et le met en cache. Les pods ultérieurs sur ce nœud montent le SDK depuis le cache, ce qui réduit la surcharge des ressources et diminue le temps de démarrage des pods à grande échelle.
+
 ### Windows {#windows}
 
 Sous Windows, l'injecteur est fourni sous forme de DLL. Un pilote de noyau Datadog charge la DLL de l'injecteur dans chaque nouveau processus, et la fonction `DllMain` de la DLL s'exécute avant le point d'entrée de l'application. Après le chargement, l'injecteur suit le même flux que celui décrit dans [Comportement de l'injecteur](#injector-behavior). Windows prend uniquement en charge Java et .NET. La détection de l'environnement d'exécution sous Windows diffère de celle sous Linux en termes d'implémentation, mais le comportement d'instrumentation qui en résulte est identique.
@@ -104,7 +109,7 @@ Les exigences de privilèges au moment de l'installation dépendent du mode de d
   - Les montages de volumes utilisés pour communiquer avec l'Agent (généralement un montage `hostPath` vers un répertoire de sockets).
   - Des autorisations spécifiques pour `SecurityContext` ou les SCC.
 
-  Vous pouvez maintenir le conteneur d'initialisation injecté et le conteneur d'application soumis à des restrictions (exécution sans droits root, capacités supprimées, aucune élévation de privilèges) tant que vos politiques autorisent les montages requis.
+  Vous pouvez maintenir le conteneur d'application soumis à des restrictions (exécution sans droits root, capacités supprimées, aucune élévation de privilèges) tant que vos politiques autorisent les montages requis. Si SSI utilise des conteneurs d'initialisation, il en va de même pour le conteneur d'initialisation injecté.
 
 #### Host Linux {#linux-host}
 
