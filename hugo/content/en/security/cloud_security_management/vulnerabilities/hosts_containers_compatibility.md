@@ -29,6 +29,19 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 Datadog supports official OS packages from vendors listed above. Third-party or self-compiled packages are not supported.
 </div>
 
+{{% collapse-content title="Linux kernel packages in container images" level="h3" %}}
+
+Containers run on the host's kernel, not on kernel packages installed in the image. Datadog doesn't report vulnerabilities for kernel header and development packages in container images, because these packages can't affect a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. These packages still appear in the image's software inventory.
+
+**Not reported in container images:** kernel header and development packages built from the Linux kernel source on Debian, Ubuntu, and RPM-based distributions. Examples include `linux-headers-*`, `linux-libc-dev`, `linux-kbuild-*`, `kernel-headers`, `kernel-devel`, and `kernel-syms`.
+
+**Still reported:**
+- Kernel vulnerabilities on hosts, where the kernel runs.
+- All packages in container images that also include a kernel or other software built from the kernel source, such as `linux-image-*`, `linux-modules-*`, `kernel-core`, or `perf`.
+- Kernel header packages in Alpine Linux images, such as `linux-headers`.
+- Packages with similar names that aren't part of the kernel, such as `linux-firmware`, `linux-pam`, and `util-linux`.
+{{% /collapse-content %}}
+
 {{% collapse-content title="Windows limitations" level="h3" %}}
 - Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.
 - Datadog can't track vulnerability fixes that Windows applies outside of KB updates.
