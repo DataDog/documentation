@@ -4300,7 +4300,7 @@ menu:
       identifier: network_path_glossary
       weight: 508
     - name: L1 to L7 Map
-      url: network_monitoring/l1_l7_map/
+      url: network_monitoring/l1_to_l7_map/
       parent: nm_parent
       identifier: nm_l1_l7_map
       weight: 6
