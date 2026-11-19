@@ -90,3 +90,9 @@ entries:
       - UnarchiveFeatureFlag
       - UpdateFeatureFlag
     title: Document bucketing_mode on feature flag responses
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41996
+    operations:
+      - UpdateSavedFilterAttributes
+    title: Document denied_environments in the saved-filter 403

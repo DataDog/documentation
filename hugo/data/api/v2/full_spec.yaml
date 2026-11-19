@@ -127426,6 +127426,22 @@ components:
       type: string
       x-enum-varnames:
         - SAVED_FILTERS
+    SavedFilterEnvironmentReference:
+      description: An environment of a feature flag that references the saved filter.
+      properties:
+        id:
+          description: The ID of the environment.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        name:
+          description: The name of the environment.
+          example: Production
+          type: string
+      required:
+        - id
+        - name
+      type: object
     SavedFilterFlagReference:
       description: A feature flag that references the saved filter.
       properties:
@@ -127460,8 +127476,14 @@ components:
         - errors
       type: object
     SavedFilterPermissionDeniedAttributes:
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
+        denied_environments:
+          description: Environments preventing this update.
+          items:
+            $ref: "#/components/schemas/SavedFilterEnvironmentReference"
+          type: array
         denied_flags:
           description: Feature flags preventing this update.
           items:
@@ -127476,7 +127498,8 @@ components:
         - denied_flags
       type: object
     SavedFilterPermissionDeniedData:
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
         attributes:
           $ref: "#/components/schemas/SavedFilterPermissionDeniedAttributes"
@@ -127494,7 +127517,8 @@ components:
       type: object
     SavedFilterPermissionDeniedResponse:
       additionalProperties: false
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
         data:
           $ref: "#/components/schemas/SavedFilterPermissionDeniedData"
@@ -244062,6 +244086,10 @@ paths:
       tags:
         - RUM Remote Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -249591,6 +249619,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
       description: Delete the link between a RUM operation and a journey.
@@ -249623,6 +249655,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
     put:
       description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
@@ -249692,6 +249728,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/{rum_operation_id}:
     delete:
       description: Delete a RUM operation.
