@@ -37,7 +37,7 @@ further_reading:
 
 For each storage account you want to monitor, follow these steps:
 
-{{% collapse-content title="1. Create a blob inventory policy" level="h3" expanded=false id="azure-portal-step1" %}}
+{{% collapse-content title="1. Create a blob inventory policy" level="h4" expanded=false id="azure-portal-step1" %}}
 
 1. In the Azure portal, navigate to your Storage Account.
 2. Go to **Data management** > **Blob inventory**.
@@ -63,7 +63,7 @@ For each storage account you want to monitor, follow these steps:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="2. Add the role assignment" level="h3" expanded=false id="azure-portal-step2" %}}
+{{% collapse-content title="2. Add the role assignment" level="h4" expanded=false id="azure-portal-step2" %}}
 
 1. In the Azure portal, navigate to your Storage Account.
 2. Go to **Data storage** > **Containers**.
@@ -79,7 +79,7 @@ For each storage account you want to monitor, follow these steps:
 
 {{% /collapse-content %}}
 
-### Post-setup steps
+### Enable storage accounts in Datadog
 
 After you configure the blob inventory policy and role assignment, enable each storage account in Datadog. Use either the Datadog UI or the API.
 
@@ -115,15 +115,15 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
   }'
 ```
 
-To use the example above:
+To use the preceding example:
 - Replace `<CLIENT_ID>` with the **Application (client) ID** of the App Registration that has the **Storage Blob Data Reader** role on the inventory container.
 - Replace `<TENANT_ID>` with the **Directory (tenant) ID** of that App Registration.
 - Replace `<SUBSCRIPTION_ID>` with the ID of the Azure subscription that contains the storage account.
 - Replace `<RESOURCE_GROUP>` with the name of the resource group that contains the storage account.
 - Replace `<STORAGE_ACCOUNT>` with the name of the storage account the blob inventory policy is configured on.
-- Replace `<INVENTORY_CONTAINER>` with the name of the destination container for the blob inventory reports, for example `datadog-storage-monitoring`. Datadog reads inventory reports from the entire container.
+- Replace `<INVENTORY_CONTAINER>` with the name of the destination container for the blob inventory reports, for example, `datadog-storage-monitoring`. Datadog reads inventory reports from the entire container.
 
-All fields are required. Make one request per storage account. A `200` response confirms Storage Management is enabled for the storage account.
+All fields are required. Make one request per storage account. A `200` response confirms that Storage Management is enabled for the storage account.
 
 [401]: https://app.datadoghq.com/storage-management?mConfigure=true&mView=azure
 [402]: /api/latest/storage-management/#enable-storage-management-for-a-bucket
