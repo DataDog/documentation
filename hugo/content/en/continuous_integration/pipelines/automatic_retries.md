@@ -94,7 +94,7 @@ On Azure Pipelines, Datadog retries stages instead of individual jobs:
 - **Retries happen after the pipeline run finishes.** Datadog waits for the run to reach a final state before it retries a stage.
 - **Datadog retries each stage at most once.** If the retried jobs fail again, Datadog does not retry the stage a second time.
 
-After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see automatic retries, use CI Visibility in Datadog.
+After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see the jobs Datadog retried, open [**CI/CD Optimization** > **Executions**][13], filtered on `@ci.job.retry_reason:auto_retry`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,3 +125,4 @@ A failed job is not retried when:
 [10]: /integrations/azure-devops-source-code/
 [11]: /continuous_integration/pipelines/azure/#logs-analysis
 [12]: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions?view=azure-devops#set-pipeline-permissions-in-azure-pipelines
+[13]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Aazurepipelines%20%40ci.job.retry_reason%3Aauto_retry
