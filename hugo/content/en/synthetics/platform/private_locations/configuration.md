@@ -279,7 +279,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `true`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. See [Private Location Network Security Hardening][6].
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registries), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. See [Private Location Network Security Hardening][6].
 
 `--allowedDomainNames`
 : **Type**: Array <br>
