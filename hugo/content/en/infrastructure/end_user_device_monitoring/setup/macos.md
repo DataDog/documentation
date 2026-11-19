@@ -151,9 +151,9 @@ For Agent versions earlier than 7.85, see [Earlier Agent versions](#earlier-agen
 
 ### Basic dynamic tests
 
-Agent 7.85 or later is required, with `infrastructure_mode: end_user_device` set. Basic dynamic tests turn on with that configuration.
+Agent 7.85 or later is required for basic dynamic tests, with `infrastructure_mode: end_user_device` set.
 
-The Agent enables traceroute for these tests. If `traceroute.enabled` is set to `false` in `/opt/datadog-agent/etc/system-probe.yaml`, basic dynamic tests do not run. Remove that setting, or set it to `true`, and restart the Agent.
+The Agent enables traceroute for basic dynamic tests. If `traceroute.enabled` is set to `false` in `/opt/datadog-agent/etc/system-probe.yaml`, basic dynamic tests do not run. Remove that setting, or set it to `true`, and restart the Agent.
 
 By default, basic dynamic tests skip destinations that have no domain name. To include those destinations, add the following to `/opt/datadog-agent/etc/datadog.yaml`:
 
@@ -186,7 +186,7 @@ Restart the Agent after you save the file.
 
 #### Confirm that tests are running
 
-About five minutes after the Agent starts, open [Network Path][5]. Paths from the device appear with that device as the source. If no paths appear, confirm that the Agent is 7.85 or later, that the device has traffic to a destination with a domain name, and that your filters do not exclude that destination.
+About five minutes after the Agent starts, open [Network Path][5]. If no paths appear, confirm that the Agent is 7.85 or later, that devices have traffic to a destination with a domain name, and that your filters do not exclude that destination.
 
 #### Turn off basic dynamic tests
 
