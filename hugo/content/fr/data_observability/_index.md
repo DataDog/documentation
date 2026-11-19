@@ -3,6 +3,9 @@ description: Surveillez la qualité, les performances et les coûts des données
   à Data Observability pour détecter les anomalies, analyser la lignée des données
   et prévenir les problèmes affectant les systèmes en aval.
 further_reading:
+- link: /monitors/types/data_observability/
+  tag: Documentation
+  text: Monitor Data Observability
 - link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/
   tag: Blog
   text: Datadog apporte l'observabilité aux équipes de données en acquérant Metaplane.

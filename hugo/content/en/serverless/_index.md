@@ -40,7 +40,7 @@ Learn how serverless monitoring enables your teams to stay agile and focus their
 
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
+Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), [Google Cloud Run](#google-cloud-run), and [Vercel](#vercel).
 
 ### AWS Lambda
 
@@ -92,6 +92,14 @@ Google Cloud Run is a lightweight, event-based, asynchronous compute solution th
 
 Datadog also provides a solution for [instrumenting your Cloud Run applications][12] with a Serverless Agent to enable tracing, custom metrics, and direct log collection.
 
+### Vercel
+
+Vercel is a platform for deploying frontend frameworks and serverless functions, such as Next.js applications. The [Vercel integration][15] collects logs, metrics, and traces through Vercel's Log Drains and Trace Drains. It requires no Datadog library or code changes. The {{< ui >}}Serverless{{< /ui >}} app view shows each Vercel project's requests, errors, and logs.
+
+Errors in Vercel Functions logs are grouped into issues in [Error Tracking][16]. This includes `console.error` output, errors logged with Pino or Winston, uncaught exceptions, and function crashes. Error Tracking works from logs alone, without traces, but Error Tracking for logs must be enabled in your organization. Issues use the Vercel project name as the `service` and appear on each project's page in the {{< ui >}}Serverless{{< /ui >}} app view. See [Vercel Error Tracking][17] for what the integration's log pipeline extracts.
+
+To get started, install [Datadog from the Vercel Marketplace][18], then follow the [Vercel integration setup][19].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -110,3 +118,8 @@ Datadog also provides a solution for [instrumenting your Cloud Run applications]
 [12]: /serverless/google_cloud_run
 [13]: /integrations/amazon_step_functions
 [14]: /serverless/step_functions/installation
+[15]: /integrations/vercel/
+[16]: /error_tracking/backend/logs/
+[17]: /integrations/vercel/#error-tracking
+[18]: https://vercel.com/marketplace/datadog
+[19]: /integrations/vercel/#setup

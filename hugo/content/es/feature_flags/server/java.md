@@ -342,6 +342,7 @@ Utilice [Server SDK Configuration Sources][9] como referencia canónica para la 
 - [Utilice un punto de conexión Agentless personalizado][10] para pruebas avanzadas, desarrollo local o un proxy gestionado por el operador
 - [Utilice Remote Configuration del Agent][13] para conservar la entrega gestionada por el Agent
 - [Migre una configuración de Remote Configuration existente][11] y elimine el ajuste `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` obsoleto
+- [Inicie el Agent antes de que se inicie la aplicación][18] cuando utilice Remote Configuration del Agent
 
 En el modo Agentless, Java prefiere un relay de telemetría local compatible para la exposición a experimentos y eventos de evaluación de flags agregados. Envía ambos tipos de eventos directamente cuando no hay un relay compatible disponible. La ruta directa utiliza los ajustes `DD_API_KEY` y `DD_SITE` de la aplicación. Para entornos serverless sin Agent, puede utilizar [`serverless-init`][17] como relay de telemetría local.
 
@@ -376,7 +377,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` es un evento opcional de OpenFeature. Consulte la documentación del proveedor de Datadog para verificar si este evento es compatible con su versión.
+Después de que el proveedor esté listo, emite `PROVIDER_CONFIGURATION_CHANGED` para cada nueva configuración de flag que recibe.
 
 ### Múltiples clientes {#multiple-clients}
 
@@ -401,6 +402,10 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 {{< /code-block >}}
 
 La instancia `Provider` se comparte globalmente. Los nombres de los clientes son solo para fines organizativos y no crean instancias de proveedor separadas. Todos los clientes usan el mismo proveedor de Datadog subyacente y las mismas configuraciones de flags.
+
+## Registre las exposiciones en su propio almacén de datos {#record-exposures-in-your-own-data-store}
+
+Utilice `ExposureHook` para registrar las exposiciones en sus propios registros, almacén de datos o pipeline de análisis. Llama a su código después de cada evaluación de flag con la misma decisión de exposición que el proveedor utiliza para Datadog. Para dejar de enviar exposiciones a Datadog, configure `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. Esto requiere `dd-java-agent` y `dd-openfeature` 1.68.0 o posterior. Consulte [Registre las exposiciones de Feature Flag en su propio almacén de datos][19].
 
 ## Mejores prácticas {#best-practices}
 
@@ -642,6 +647,7 @@ Cuando la ruta de configuración seleccionada admite exposiciones, las exposicio
 
 1. Verifique que la Feature Flag esté asociada con un experimento en la interfaz de usuario de Datadog.
 2. Verifique la clave de API de Agent y la conectividad.
+3. Si utiliza Remote Configuration del Agent, verifique que el Agent estuviera disponible cuando se inició la aplicación. Si no lo estaba, reinicie la aplicación. Consulte [Disponibilidad del Agent][18].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -663,3 +669,5 @@ Cuando la ruta de configuración seleccionada admite exposiciones, las exposicio
 [15]: /es/serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /es/serverless/google_cloud_run/containers/in_container/java/
 [17]: /es/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /es/feature_flags/concepts/configuration_sources/#agent-availability
+[19]: /es/feature_flags/guide/record_exposures_in_your_own_data_store/

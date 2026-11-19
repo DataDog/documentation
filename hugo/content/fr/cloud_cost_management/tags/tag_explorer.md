@@ -18,14 +18,14 @@ further_reading:
   text: En savoir plus sur les SaaS and AI Costs
 - link: /cloud_cost_management/allocation/tag_pipelines
   tag: Documentation
-  text: En savoir plus sur les Tag Pipelines
+  text: En savoir plus sur les pipelines de tags
 title: Tag Explorer
 ---
 ## Présentation {#overview}
 
-[Cloud Cost Management][1] détecte les sources de tous vos tags liés aux coûts. Vous pouvez rechercher et gérer des tags pour ventiler les coûts, y compris [Custom Costs][4], [Datadog costs][5] et [SaaS cost integrations][6].
+[Cloud Cost Management][1] détecte les sources de tous vos tags liés aux coûts. Vous pouvez rechercher et gérer des tags pour ventiler les coûts, y compris les [coûts personnalisés][4], les [coûts Datadog][5] et les [intégrations des coûts du SaaS][6].
 
-Utilisez le [Tag Explorer][2] pour comprendre les sources et afficher les descriptions de chaque tag. Cela inclut les tags gérés via [Tag Pipelines][3]. Les Tag Pipelines vous permettent de créer et de gérer des règles de tags qui corrigent les tags manquants ou incorrects sur votre facture cloud, ou de créer des tags inférés selon votre logique métier.
+Utilisez le [Tag Explorer][2] pour comprendre les sources et afficher les descriptions de chaque tag. Cela inclut les tags gérés via des [pipelines de tags][3]. Les pipelines de tags vous permettent de créer et de gérer des règles de tags qui corrigent les tags manquants ou incorrects sur votre facture cloud, ou de créer des tags inférés selon votre logique métier.
 
 ## Configuration {#setup}
 
@@ -37,11 +37,12 @@ Consultez la documentation respective de votre fournisseur cloud :
   {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
   {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
   {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/oracle/" src="integrations_logos/oracle-cloud-infrastructure_avatar.svg" alt="oracle cloud" >}}
 {{< /card-grid >}}
 
 ## Rechercher et gérer les tags {#search-and-manage-tags}
 
-Accédez à [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}}][2] et sélectionnez l'onglet {{< ui >}}Tags{{< /ui >}} pour rechercher des tags à partir de vos factures de fournisseur cloud, [Custom Costs][4], [Datadog costs][5], [SaaS cost integrations][6] et [Tag Pipelines][3].
+Accédez à [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}}][2] et sélectionnez l'onglet {{< ui >}}Tags{{< /ui >}} pour rechercher des tags à partir de vos factures de fournisseur cloud, [coûts personnalisés][4], [coûts Datadog][5], [intégrations des coûts du SaaS][6] et [pipelines de tags][3].
 
 Pour voir les tags d'un fournisseur, sélectionnez-le dans le menu déroulant {{< ui >}}Provider{{< /ui >}} dans le coin supérieur gauche. Utilisez le panneau {{< ui >}}Tag Sources{{< /ui >}} pour affiner davantage les résultats selon l'origine de chaque tag.
 
@@ -68,7 +69,7 @@ Vous pouvez définir jusqu'à cinq tags préférés pour mettre en évidence les
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Les tags préférés sont affichés dans tout CCM" style="width:100%;" >}}
 
-Vous pouvez choisir des tags préférés parmi tous vos tags de données de coût existants, y compris les [Tag Pipelines][3]. Ces paramètres s'appliquent à l'ensemble de votre organisation.
+Vous pouvez choisir des tags préférés parmi tous vos tags de données de coût existants, y compris les [pipelines de tags][3]. Ces paramètres s'appliquent à l'ensemble de votre organisation.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_2.png" alt="Sélectionnez vos tags préférés dans Tag Explorer" style="width:100%;" >}}
 

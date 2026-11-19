@@ -8,25 +8,21 @@ cascade:
     - ci/cd
     - continuous integration
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
-  tag: Notes de version
-  text: Découvrez les dernières versions de la livraison de logiciels (connexion à
-    l'application requise).
-- link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
-  tag: Blog
-  text: Surveiller votre environnement CircleCI avec Datadog
-- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
-  tag: Blog
-  text: Configurer des alertes de pipeline avec les monitors CI Datadog
-- link: /continuous_integration/pipelines
+- link: /continuous_integration/pipelines/
   tag: Documentation
-  text: Explorer les données de pipeline pour résoudre les problèmes liés aux builds
+  text: Explorez les données de pipeline pour résoudre les problèmes de build
 - link: /account_management/billing/ci_visibility
   tag: Documentation
-  text: En savoir plus sur les considérations relatives à la facturation de CI Visibility
+  text: Découvrez les considérations de facturation pour CI Visibility
 - link: /continuous_integration/tests/
   tag: Documentation
-  text: Explorer les données de test pour identifier et résoudre les tests problématiques
+  text: Explorez les données de test pour trouver et corriger les tests problématiques
+- link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  tag: Blog
+  text: Surveillez votre environnement CircleCI avec Datadog
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: Blog
+  text: Configurez les alertes de pipeline avec les monitors CI de Datadog
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: Blog
   text: Meilleures pratiques pour la surveillance des applications Web statiques
@@ -35,70 +31,78 @@ further_reading:
   text: Meilleures pratiques pour la surveillance CI/CD
 - link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
   tag: Blog
-  text: Meilleures pratiques pour la surveillance de tests logiciels en CI/CD
+  text: Bonnes pratiques pour la surveillance des tests logiciels en CI/CD
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: Blog
-  text: Surveiller vos modernisations CI/CD avec Datadog CI Pipeline Visibility
+  text: Surveillez vos modernisations CI/CD avec Datadog CI Pipeline Visibility
 - link: https://www.datadoghq.com/blog/datadog-detection-as-code/
   tag: Blog
   text: Comment nous utilisons Datadog pour la détection en tant que code
 - link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
   tag: Blog
-  text: Patterns pour une purge du cache à la fois efficace et sûre dans les pipelines
-    de CI/CD
+  text: Modèles pour une purge de cache sûre et efficace dans les pipelines CI/CD
 - link: https://www.datadoghq.com/blog/gitlab-source-code-integration
   tag: Blog
-  text: Dépannage plus rapide grâce à l'intégration du code source GitLab dans Datadog
+  text: Résolvez les problèmes plus rapidement avec l'intégration GitLab Source Code
+    dans Datadog
+- link: https://www.datadoghq.com/blog/platform-engineering-metrics/
+  tag: Blog
+  text: Métriques de succès pour les équipes d'ingénierie de plateforme
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: Notes de version
+  text: Découvrez les dernières versions de Software Delivery ! (Connexion à l'application
+    requise)
 title: Continuous Integration Visibility
 ---
+{{< callout url=# btn_hidden="true" header="CI Visibility fait partie de CI/CD Optimization">}}CI/CD Optimization combine CI Visibility et Test Optimization dans une interface unifiée. Cette page couvre CI Visibility ; pour les fonctionnalités partagées avec Test Optimization, consultez [CI/CD Optimization][1].
 
-<div class="alert alert-info">Cette page concerne l'ajout de vos métriques et données de CI dans des dashboards Datadog. Si vous souhaitez exécuter des tests Continuous Testing dans vos pipelines de CI, consultez la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
+[1]: /fr/cicd/
+{{< /callout >}}
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Participer" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
-  Participez à la session de présentation de CI Visibility pour mieux comprendre comment cette solution améliore l'efficacité des pipelines de CI et comment configurer les solutions Testing Visibility et Pipeline Visibility. 
+{{< learning-center-callout header="Rejoignez une session de webinaire de formation" hide_image="true" btn_title="S'inscrire" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Rejoignez la session d'introduction à CI Visibility pour comprendre comment Datadog CI Visibility améliore l'efficacité des pipelines CI et comment configurer les produits Testing Visibility et Pipeline Visibility. 
 {{< /learning-center-callout >}}
 
+## Présentation {#overview}
 
-## Présentation
+<div class="alert alert-info">Cette page explique comment intégrer vos métriques et données de Continuous Integration (CI) dans les Dashboards Datadog. Si vous souhaitez exécuter des tests Continuous Testing dans vos pipelines CI, consultez la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a>.</div>
 
-La solution Continuous Integration (CI) Visibility de Datadog propose une vue unifiée des résultats, des performances, des tendances et de la fiabilité des pipelines sur l'ensemble de vos environnements CI. En intégrant Datadog à vos pipelines CI, vous pouvez créer des monitors, afficher des données dans des [dashboards][1] et des [notebooks][2] Datadog, et créer des vues pour la santé de lʼintégration continue de votre organisation.
+Datadog Continuous Integration (CI) Visibility offre une vue unifiée des résultats, des performances, des tendances et de la fiabilité des pipelines dans vos environnements CI. En intégrant Datadog à vos pipelines CI, vous pouvez créer des monitors, afficher des données dans des [Dashboards Datadog][1] et des [notebooks][2], et créer des visualisations de l'état de santé de la CI de votre organisation.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 </br>
 
-La solution CI Visibility aide les développeurs à comprendre les causes des perturbations des pipelines et à surveiller les tendances des temps d'exécution des pipelines. Elle fournit également aux ingénieurs build des informations sur l'état de santé de lʼintégration continue au sein de l'organisation et sur les performances des pipelines au fil du temps.
+CI Visibility aide les développeurs à comprendre les causes des interruptions de pipeline et à surveiller les tendances des temps d'exécution des pipelines. Il offre également aux ingénieurs build des informations sur l'état de la CI et les performances des pipelines à l'échelle de plusieurs organisations au fil du temps.
 
-## Améliorer la fiabilité des pipelines et créer des traces
+## Améliorez la fiabilité des pipelines et créez des traces {#improve-pipeline-reliability-and-create-traces}
 
-CI Visibility vous aide à corriger les erreurs liées aux builds défectueux et aux échecs de pipelines en associant les problèmes de développement les plus urgents aux commits qui en sont à lʼorigine. Vous pouvez instrumenter vos pipelines et générer, pendant leur exécution, des traces afin dʼobtenir des informations plus détaillées sur les performances du pipeline.
+CI Visibility vous aide à résoudre les échecs de pipeline et les builds défaillants en reliant les incidents de développement les plus importants aux commits qui les ont causés. Vous pouvez instrumenter vos pipelines et les tracer au fur et à mesure de leur exécution, ce qui permet d'obtenir des informations plus approfondies sur les performances des pipelines.
 
-## Gagner en efficacité grâce aux intégrations directes
+## Gagnez en efficacité grâce à des intégrations fluides {#increase-efficiency-through-seamless-integrations}
 
-Datadog s'intègre à une variété de fournisseurs de CI pour collecter des métriques qui suivent les performances de vos pipelines de CI, du commit au déploiement. Ces métriques sont utilisées pour identifier les tendances de performances et les opportunités d'amélioration.
+Datadog s'intègre à divers fournisseurs de CI pour collecter des métriques qui suivent les performances de vos pipelines CI, du commit au déploiement. Ces métriques sont utilisées pour identifier les tendances de performance et les opportunités d'amélioration.
 
 {{< card-grid >}}
   {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
-  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="extension Azure DevOps" >}}
   {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
-  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="CircleCI orb" >}}
   {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="codefresh" >}}
   {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="github actions" >}}
   {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="gitlab" >}}
   {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
   {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
-  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="autres fournisseurs CI" >}}
 {{< /card-grid >}}
 
-</br>
+Vous pouvez utiliser l'interface de ligne de commande `datadog-ci` pour [tracer des commandes][8] et ajouter des [tags et mesures personnalisés][9], ce qui vous permet d'ajouter des tags textuels et numériques définis par l'utilisateur dans vos traces de pipeline.
 
-Vous pouvez utiliser l'interface de ligne de commande `datadog-ci` pour [tracer des commandes][8] et ajouter des [tags et des mesures personnalisés][9], afin d'ajouter du texte défini par l'utilisateur et des tags numériques à vos traces de pipeline.
+## Prêt à commencer ? {#ready-to-start}
 
-## Prêt à vous lancer ?
+Consultez [Pipeline Visibility][3] pour obtenir des instructions sur la configuration de CI Visibility avec vos fournisseurs de CI, y compris des détails sur les exigences de compatibilité et les étapes de configuration de la collecte de données. Ensuite, commencez à explorer les détails de vos exécutions de pipeline dans [CI Visibility Explorer][7] et exportez votre requête de recherche dans un [CI Pipeline Monitor][6].
 
-Consultez la section [Pipeline Visibility][3] pour apprendre à configurer CI Visibility avec vos fournisseurs CI, en savoir plus sur les exigences en matière de compatibilité, et découvrir comment configurer la collecte de données. Commencez ensuite à explorer les données de vos exécutions de pipeline depuis le [CI Visibility Explorer][7] et exportez votre requête de recherche dans un [monitor de pipeline CI][6].
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

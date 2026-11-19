@@ -72,7 +72,7 @@ Utilisez cette configuration lorsque votre application Flutter initialise déjà
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Les Feature Flags Flutter ne sont pas pris en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
@@ -94,7 +94,7 @@ final configuration = DatadogConfiguration(
   );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
-{{< /code-block >}}
+```
 
 Après l'initialisation, récupérez un client de flags depuis le plugin et initialisez-le avec le contexte d'évaluation pour le sujet actuel :
 
@@ -130,7 +130,7 @@ Activez Datadog Feature Flags dès le démarrage de votre application. Pour la c
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Les Feature Flags Dart et Flutter ne sont pas pris en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
@@ -146,7 +146,7 @@ await datadogFlags.enable(
     ),
   ),
 );
-{{< /code-block >}}
+```
 
 `applicationId`, `service` et `version` sont facultatifs. Lorsqu'ils sont présents, le SDK les inclut dans le contexte de télémétrie des Feature Flags.
 
@@ -337,7 +337,7 @@ DatadogFlagsConfiguration(
 
   Pour une configuration intégrée à Flutter, transmettez ces options via `DatadogFlagsPluginConfiguration` :
 
-  {{< code-block lang="dart" >}}
+  ```dart
   final configuration = DatadogConfiguration(
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENV_NAME>',
@@ -355,14 +355,14 @@ DatadogFlagsConfiguration(
         rumIntegrationEnabled: true,
       ),
     );
-  {{< /code-block >}}
+  ```
 
 `rumIntegrationEnabled`
-: Lorsque `true` (par défaut), les évaluations réussies qui renvoient une variante sont ajoutées à la vue RUM active en tant qu'évaluations d'indicateurs de fonctionnalité. Si votre application n'utilise pas RUM, cette option n'a aucun effet.
+: When `true` (default), successful evaluations that return a variant are added to the active RUM view as feature flag evaluations. If your app does not use RUM, this option has no effect.
 
-## Stockage des dernières affectations connues {#last-known-assignment-storage}
+## Last-known assignment storage 
 
-Le SDK conserve les affectations en mémoire après la réussite de `initialize()`. Pour restaurer les dernières affectations connues entre les instances du SDK, fournissez un `DatadogFlagsStore` :
+The SDK keeps assignments in memory after `initialize()` succeeds. To restore last-known assignments across SDK instances, provide a `DatadogFlagsStore`:
 
 {{< code-block lang="dart" >}}
 class MyFlagsStore implements DatadogFlagsStore {
@@ -384,29 +384,29 @@ class MyFlagsStore implements DatadogFlagsStore {
 }
 {{< /code-block >}}
 
-Les affectations stockées ne sont utilisées que lorsque leur contexte d'évaluation correspond au contexte actif. Une récupération réussie en direct déplace toujours le client vers le nouvel état d'affectation et réécrit cet état dans le magasin.
+Stored assignments are used only when their evaluation context matches the active context. A live successful fetch always moves the client to the newest assignment state and writes that state back to the store.
 
-Le paquet Dart ne choisit pas d'emplacement sur le disque et ne fournit pas de magasin sur disque spécifique à Flutter. Les applications Flutter peuvent implémenter `DatadogFlagsStore` avec leur mécanisme de stockage d'application préféré.
+The Dart package does not choose a disk location or ship a Flutter-specific disk store. Flutter apps can implement `DatadogFlagsStore` with their preferred app storage mechanism.
 
-## Arrêt {#shutdown}
+## Shutdown 
 
-Appelez `shutdown()` lorsqu'un client n'est plus nécessaire. Cela vide les téléversements en attente d'exposition et d'évaluation des flags avant d'effacer les affectations en mémoire du client.
+Call `shutdown()` when a client is no longer needed. This drains pending exposure and flag evaluation uploads before clearing the client's in-memory assignments.
 
 {{< code-block lang="dart" >}}
 await flagsClient.shutdown();
 {{< /code-block >}}
 
-Appelez `DatadogFlags.instance.disable()` lorsque l'application arrête le SDK des flags :
+Call `DatadogFlags.instance.disable()` when the application is tearing down the flags SDK:
 
 {{< code-block lang="dart" >}}
 await DatadogFlags.instance.disable();
 {{< /code-block >}}
 
-## Exemple complet {#complete-example}
+## Complete example 
 
-L'exemple suivant active le SDK, initialise un client avec un contexte d'évaluation et évalue un flag booléen :
+The following example enables the SDK, initializes a client with an evaluation context, and evaluates a Boolean flag:
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags/datadog_flags.dart';
 
 Future<void> initializeFlags() async {
@@ -450,11 +450,11 @@ Future<void> initializeFlags() async {
     showNewCheckoutFlow();
   }
 }
-{{< /code-block >}}
+```
 
-## Tests {#testing}
+## Testing 
 
-Vous pouvez effectuer des tests sur un environnement de test Datadog dédié avec le `DatadogFlagsClient` réel, ou isoler le code de l'application derrière une petite interface et substituer une implémentation fictive dans les tests unitaires. Cette section présente l'approche fictive, qui permet de garder les tests autonomes et hors ligne.
+You can test against a dedicated Datadog test environment with the real `DatadogFlagsClient`, or isolate application code behind a small interface and substitute a fake implementation in unit tests. This section shows the fake approach, which keeps tests self-contained and offline.
 
 {{< code-block lang="dart" >}}
 abstract interface class CheckoutFlags {
@@ -483,9 +483,9 @@ final class TestCheckoutFlags implements CheckoutFlags {
 }
 {{< /code-block >}}
 
-Ensuite, injectez `TestCheckoutFlags` dans les tests unitaires et `DatadogCheckoutFlags` en production.
+Then inject `TestCheckoutFlags` into unit tests and `DatadogCheckoutFlags` in production.
 
-## Pour aller plus loin {#further-reading}
+## Further reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 

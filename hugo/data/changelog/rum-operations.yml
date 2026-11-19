@@ -23,3 +23,27 @@ entries:
       - ListRUMOperations
       - UpdateRUMOperation
     title: Align RUM operations spec with responses
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateRUMOperation
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperation
+      - DeleteRUMOperationStrongLink
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperationStrongLinks
+      - ListRUMOperations
+      - UpdateRUMOperation
+      - UpdateRUMOperationStrongLink
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41964
+    operations:
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperationStrongLink
+      - UpdateRUMOperationStrongLink
+    title: Add RUM API permissions for operation strong links and sdk remote 
+      config
