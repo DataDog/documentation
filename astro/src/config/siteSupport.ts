@@ -44,6 +44,9 @@ const UrlPathSchema = z
     message:
       "url_paths entries may only use the * and ** wildcards; " +
       "?, [], {}, () and extglobs are not supported",
+  })
+  .refine((p) => p.split("/").every((s) => !s.includes("**") || s === "**"), {
+    message: "** must be a whole path segment, as in /a/** or /a/**/b",
   });
 
 const SiteSupportEntrySchema = z.object({
@@ -155,15 +158,29 @@ function sortByWeight(regions: string[]): string[] {
 }
 
 /**
- * Path matchers, compiled once at module load. `picomatch` compiles a pattern
- * to a regex, which is the expensive part; doing it per page would repeat that
- * work across tens of thousands of pages.
+ * Compile one `url_paths` glob to a matcher for normalized paths.
+ *
+ * HUGO_DUPLICATE: Hugo has its own copy of this logic. It converts the same
+ * globs to regex in `hugo/layouts/partials/site_support_banner/glob_to_regex.html`.
+ *
+ * Both copies are tested against the cases in
+ * `shared/tests/site_support_globs.yaml`. To change what a glob matches,
+ * update those cases first, then change both copies until they pass.
+ */
+export function compileUrlPath(pattern: string): (path: string) => boolean {
+  return picomatch(pattern);
+}
+
+/**
+ * Path matchers, compiled once at module load. Compiling a pattern to a regex
+ * is the expensive part; doing it per page would repeat that work across tens
+ * of thousands of pages.
  */
 const PATH_MATCHERS: { id: string; isMatch: (p: string) => boolean }[] =
   Object.entries(DATASET.site_support_ids).flatMap(([id, entry]) =>
     entry.url_paths.map((pattern) => ({
       id,
-      isMatch: picomatch(pattern),
+      isMatch: compileUrlPath(pattern),
     })),
   );
 

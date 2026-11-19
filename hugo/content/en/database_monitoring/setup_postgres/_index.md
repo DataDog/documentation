@@ -4,6 +4,9 @@ description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
 ---
 
+{{< callout url="https://app.datadoghq.com/forms/share/6e2190e2620a128d61c63c4b85a0ed71bebe258f8d81e4b4cfac4967bd2eb078" btn_hidden="false" header="Interested in PG Proxy?" >}}Sign up for updates on the open source release of PG Proxy, a consolidated solution for PostgreSQL connection pooling, load balancing, and traffic management at scale.
+{{< /callout >}}
+
 ### Postgres versions supported
 
 | Version      | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  | Databricks Lakebase |

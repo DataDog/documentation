@@ -143,6 +143,8 @@ Cloud cost data can only be as recent as the data supplied by your provider. If 
 
 Use the [Cloud Cost Skill in Bits Chat][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams.
 
+You can also ask Bits Chat to run a [savings analysis][12] on a team, service, or other scope. A savings analysis finds savings opportunities beyond [Cloud Cost Recommendations][13].
+
 {{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Chat's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 ## Further reading
@@ -160,3 +162,5 @@ Use the [Cloud Cost Skill in Bits Chat][10] to investigate cost changes, identif
 [9]: /cloud_cost_management/setup/permissions
 [10]: /cloud_cost_management/cloud_cost_skill/
 [11]: /help/
+[12]: /cloud_cost_management/cloud_cost_skill/#savings-analysis
+[13]: /cloud_cost_management/recommendations/

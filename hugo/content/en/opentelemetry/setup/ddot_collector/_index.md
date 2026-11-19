@@ -61,7 +61,7 @@ Datadog recommends running the Datadog Agent alongside the Collector. Some Datad
 
 ## Included components
 
-The DDOT Collector includes the OpenTelemetry Collector components listed in this section. To add components to the Agent's Collector, see the [custom components guide][2].
+The DDOT Collector includes the OpenTelemetry Collector components listed in this section. To build the Agent's Collector with other components, see [Add Components to the Agent's Collector][2].
 
 ### Support levels
 
@@ -170,12 +170,12 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 | 7.83.x       | v0.158.0     | v1.64.0        |
 | 7.82.x       | v0.155.0     | v1.61.0        |
 | 7.81.x       | v0.154.0     | v1.60.0        |
-| 7.80.x       | v0.152.0     | v1.58.0        |
 
 {{% collapse-content title="Earlier versions" level="p" %}}
 
 | DDOT version | Beta version | Stable version |
 |--------------|--------------|----------------|
+| 7.80.x       | v0.152.0     | v1.58.0        |
 | 7.79.x       | v0.150.0     | v1.56.0        |
 | 7.78.x       | v0.147.0     | v1.53.0        |
 | 7.77.x       | v0.145.0     | v1.51.0        |
