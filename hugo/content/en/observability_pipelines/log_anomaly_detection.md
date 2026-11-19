@@ -58,7 +58,13 @@ Each anomaly has one of the following statuses:
 
 ## Enable log anomaly detection
 
-To enable log anomaly detection, set the Worker environment variable `DD_OP_ANOMALY_DETECTION_ENABLED` to `true`.
+To enable log anomaly detection:
+
+1. Navigate to [Observability Pipelines][2].
+1. Select your pipeline.
+1. Click the cog and select {{< ui >}}Pipeline Settings{{< /ui >}}
+1. Toggle on {{< ui >}}Anomaly Detection{{< /ui >}}.
+1. Click {{< ui >}}Done{{< /ui >}}.
 
 ## View log anomalies
 
