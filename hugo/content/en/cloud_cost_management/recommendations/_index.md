@@ -472,7 +472,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Cosmos DB Account
       recommendation_type: Downsize Cosmos DB Throughput
-      recommendation_description: Identifies Cosmos DB accounts whose containers' peak request unit consumption would stay low with less provisioned throughput, and recommends lowering each container's manual throughput to cut on-demand throughput charges.
+      recommendation_description: Identifies Cosmos DB accounts with containers whose peak request unit consumption fits within less provisioned throughput, and recommends lowering their manual throughput to cut on-demand charges.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Azure
