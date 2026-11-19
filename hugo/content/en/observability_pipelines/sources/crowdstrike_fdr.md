@@ -1,0 +1,162 @@
+---
+title: CrowdStrike Falcon Data Replicator (FDR) Source
+description: Learn how to collect CrowdStrike Falcon Data Replicator logs using the Observability Pipelines Worker.
+disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+further_reading:
+- link: "/observability_pipelines/packs/crowdstrike/"
+  tag: "Documentation"
+  text: "CrowdStrike FDR pack"
+- link: "/observability_pipelines/sources/amazon_s3/"
+  tag: "Documentation"
+  text: "Amazon S3 source"
+---
+
+{{< product-availability >}}
+
+## Overview
+
+Use Observability Pipelines' CrowdStrike Falcon Data Replicator (FDR) source to receive logs directly from your CrowdStrike FDR feed. CrowdStrike stores FDR data in a CrowdStrike-managed Amazon S3 bucket and sends a notification for each new batch of files to a CrowdStrike-managed Amazon SQS queue. The Worker polls the queue, reads the files listed in each notification, and then deletes the message from the queue.
+
+**Note**: The CrowdStrike FDR source requires Worker version 2.26.0 or later.
+
+<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not point more than one pipeline, or another tool, at the same FDR queue, or each consumer receives only part of the data.</div>
+
+### Direct ingestion versus the FDR replicator
+
+You can collect FDR data in one of two ways:
+
+- **Direct ingestion (recommended)**: Use the CrowdStrike FDR source to read from CrowdStrike's bucket and queue. You don't need to copy the data. The rest of this page covers this option.
+- **FDR replicator**: Use CrowdStrike's [FDR replicator][10] to copy the data into an S3 bucket that you own, then collect it with the [Amazon S3 source][1]. Use this option if you need your own copy of the data. Storing the copy adds storage and data transfer costs.
+
+To use the FDR replicator:
+
+1. In the replicator's `falcon_data_replicator.ini` file, set `TARGET_BUCKET` and `TARGET_REGION` in the `[Destination Data]` section to your existing S3 bucket and its region.
+1. Configure the bucket to send event notifications to an SQS queue. See the [Amazon S3 source prerequisites][11].
+1. Set up the [Amazon S3 source][1] with that SQS queue.
+
+## Prerequisites
+
+To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed and the following information from CrowdStrike:
+
+- The SQS queue URL
+- The AWS region of the SQS queue and S3 bucket
+- The AWS access key ID and secret access key for the feed
+
+The source authenticates with the feed's access key ID and secret access key. Assuming an IAM role is not supported.
+
+To create a feed and get this information, in the CrowdStrike Falcon console, navigate to **Support and resources** > **Falcon Data Replicator** and create a feed.
+
+## Setup
+
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the SQS URL, AWS access key ID, AWS secret access key, and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+Set up this source when you [set up a pipeline][2]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
+
+After you select the CrowdStrike FDR source in the pipeline UI:
+
+1. Enter the identifier for your SQS queue URL in {{< ui >}}SQS Queue URL Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your AWS access key ID in {{< ui >}}AWS Access Key ID Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
+1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed.
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+### Optional settings
+
+Click {{< ui >}}Advanced Options{{< /ui >}} to configure these settings.
+
+#### SQS settings
+
+- {{< ui >}}Visibility timeout{{< /ui >}}: The number of seconds a received SQS message is hidden from other receivers while the Worker processes its files. Enter a value from `0` to `43200` (12 hours). Defaults to `300` (5 minutes). If the Worker takes longer than the timeout to process the files in a message, the message is delivered again, which can result in duplicate logs. Increase this value if your feed contains large files.
+- {{< ui >}}Number of receivers{{< /ui >}}: The number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+- {{< ui >}}Messages per poll{{< /ui >}}: The maximum number of SQS messages to receive in each poll. Enter a value from `1` to `10`. Defaults to `1`. SQS can return fewer messages than the maximum. This setting limits the number of notifications per request, not the number of files in each notification.
+
+#### Configure TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- CrowdStrike FDR SQS URL identifier:
+	- References the URL of the CrowdStrike-managed SQS queue that receives the FDR notifications.
+	- The default identifier is `SOURCE_CROWDSTRIKE_FDR_SQS_URL`.
+- CrowdStrike FDR AWS access key ID identifier:
+	- References the AWS access key ID for your FDR feed.
+	- The default identifier is `SOURCE_CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID`.
+- CrowdStrike FDR AWS secret access key identifier:
+	- References the AWS secret access key for your FDR feed.
+	- The default identifier is `SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY`.
+- CrowdStrike FDR TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `SOURCE_CROWDSTRIKE_FDR_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/crowdstrike_fdr %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Process FDR logs with the CrowdStrike FDR pack
+
+After you add the source, add the [CrowdStrike FDR pack][6] to parse your FDR events, drop high-volume and low-signal events, and generate metrics.
+
+## Health metrics
+
+For [component metrics][7] and [source buffer metrics][8] emitted by all sources, see the [Pipelines Usage Metrics][9] documentation. To filter or group by CrowdStrike FDR source metrics, use the tag `component_type:crowdstrike_fdr`.
+
+
+### CrowdStrike FDR metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the source type.
+
+`pipelines.sqs_message_received_messages_total`
+: **Description**: The number of SQS messages received.
+: **Metric type**: count
+
+`pipelines.sqs_message_processing_succeeded_total`
+: **Description**: The number of SQS messages successfully processed.
+: **Metric type**: count
+
+`pipelines.sqs_message_delete_succeeded_total`
+: **Description**: The number of successful deletions of SQS messages.
+: **Metric type**: count
+
+`pipelines.sqs_message_defer_succeeded_total`
+: **Description**: The number of SQS messages for which visibility-timeout deferral succeeded.
+: **Metric type**: count
+
+`pipelines.s3_object_processing_succeeded_duration_seconds`
+: **Description**: Time, in seconds, taken to successfully process an S3 object.
+: **Metric type**: distribution
+
+`pipelines.s3_object_processing_failed_duration_seconds`
+: **Description**: Time, in seconds, taken to process an S3 object that failed.
+: **Metric type**: distribution
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/sources/amazon_s3/
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/packs/crowdstrike/
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: https://github.com/CrowdStrike/FDR
+[11]: /observability_pipelines/sources/amazon_s3/#prerequisites

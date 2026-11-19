@@ -40,6 +40,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike FDR" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/crowdstrike_fdr %}}
+
+{{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}

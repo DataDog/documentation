@@ -34,6 +34,7 @@ These are the available sources:
 - [Amazon S3][3]
 - [Azure Event Hubs][4]
 - [Cloudflare Logpush][5]
+- [CrowdStrike Falcon Data Replicator (FDR)][26]
 - [Datadog Agent][6]
 - [Filebeat][7]
 - [Fluentd and Fluent Bit][8]
@@ -78,6 +79,7 @@ These are the available sources:
 [22]: /observability_pipelines/sources/sumo_logic/
 [23]: /observability_pipelines/sources/syslog/
 [24]: /observability_pipelines/sources/websocket/
+[26]: /observability_pipelines/sources/crowdstrike_fdr/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}

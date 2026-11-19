@@ -7160,6 +7160,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_cloudflare_logpush
       weight: 205
+    - name: CrowdStrike FDR
+      url: observability_pipelines/sources/crowdstrike_fdr/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_crowdstrike_fdr
+      weight: 205
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources

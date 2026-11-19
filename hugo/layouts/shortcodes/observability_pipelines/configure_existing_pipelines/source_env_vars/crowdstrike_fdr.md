@@ -1,0 +1,11 @@
+- CrowdStrike FDR SQS URL:
+    - The URL of the CrowdStrike-managed SQS queue that receives the FDR notifications.
+    - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_SQS_URL`.
+- CrowdStrike FDR AWS access key ID:
+    - The AWS access key ID for your FDR feed.
+    - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID`.
+- CrowdStrike FDR AWS secret access key:
+    - The AWS secret access key for your FDR feed.
+    - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY`.
+- CrowdStrike FDR TLS passphrase (when enabled):
+    - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_KEY_PASS`.
