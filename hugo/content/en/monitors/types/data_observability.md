@@ -374,9 +374,9 @@ You can add both checks in one monitor definition. Datadog then creates two moni
 2. Under {{< ui >}}Select jobs{{< /ui >}}, choose the jobs to monitor:
     - In {{< ui >}}Technology{{< /ui >}}, select the kind of job. You cannot change the technology after you create the monitor.
     - In {{< ui >}}Filter to jobs{{< /ui >}}, search for jobs by name, or filter with `key:value` tags or attributes to match a set of jobs.
-    - For Airflow DAGs and tasks, Databricks jobs, and custom OpenLineage jobs, use {{< ui >}}Filter runs{{< /ui >}}. Filter monitored runs by tags or attributes that change per run of the same job.
+    - In {{< ui >}}Filter runs{{< /ui >}}, filter monitored runs by tags or attributes that change per run of the same job. This option is available only for Airflow DAGs and tasks, Databricks jobs, and custom OpenLineage jobs.
 
-    {{< img src="monitors/monitor_types/data_observability/job_monitor_select_jobs.png" alt="Select an Airflow DAG and filter jobs and runs in the job monitor creation flow." style="width:100%;" >}}
+    {{< img src="monitors/monitor_types/data_observability/job_monitor_select_jobs.png" alt="The Select jobs step with DAG selected as the technology, a name filter applied, and two matching jobs listed." style="width:100%;" >}}
 
 3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both. Configure each check as described in [Job failure](#job-failure) and [Job duration](#job-duration).
 4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, the failure count, the error, and links to the job and the failed run. Use the message for routing, @-mentions, and team context.
@@ -407,7 +407,7 @@ The {{< ui >}}Job failure{{< /ui >}} check alerts when consecutive runs of a job
 
 The monitor recovers automatically when a later run succeeds.
 
-{{< img src="monitors/monitor_types/data_observability/job_monitor_failure.png" alt="Configure a job failure check with alert and warning thresholds for consecutive failed runs." style="width:100%;" >}}
+{{< img src="monitors/monitor_types/data_observability/job_monitor_failure.png" alt="A Job failure check with alert and warning thresholds for consecutive failed runs and a graph of failed runs." style="width:100%;" >}}
 
 ### Job duration
 
@@ -425,7 +425,7 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 - A job needs 24 hours of completed-run history before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
-{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="Configure a job duration check with the Anomalies detection method." style="width:100%;" >}}
+{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="A Job duration check using the Anomalies detection method, with a graph of recent run durations." style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Thresholds" %}}
@@ -437,7 +437,7 @@ The {{< ui >}}Thresholds{{< /ui >}} method alerts when a run crosses a fixed dur
 
 One threshold applies to every job that the monitor matches. If the selected jobs have different typical run times, create a monitor for each group of similar jobs, or use {{< ui >}}Anomalies{{< /ui >}}.
 
-{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_thresholds.png" alt="Configure a job duration check with alert and warning duration thresholds." style="width:100%;" >}}
+{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_thresholds.png" alt="A Job duration check using the Thresholds detection method, with alert and warning thresholds shown on the run duration graph." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
