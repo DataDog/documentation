@@ -61,9 +61,7 @@ The following are not supported in Preview:
 
 - Your organization is enrolled in the Preview.
 - Your organization is on a Pro or Enterprise plan.
-- You have the **Custom OAuth Clients Manage** (`org_custom_oauth_clients_manage`) permission to create, change, and disable clients. Users with only the **Custom OAuth Clients Read** (`org_custom_oauth_clients_read`) permission can view clients without changing them.
-
-The Datadog Admin role has both permissions by default. The Datadog Standard and Datadog Read Only roles have neither. You can add them to a [custom role][3].
+- You have the **Custom OAuth Clients Manage** (`org_custom_oauth_clients_manage`) permission. See [Permissions](#permissions).
 
 ### Limits
 
@@ -79,7 +77,7 @@ Organizations on other plans can't create custom clients. Disabled clients don't
 1. In Datadog, go to **Organization Settings** > **OAuth Clients** and open the **Custom Clients** tab.
 2. Click **New Client**.
 3. Enter a **Name** and a **Description**. Users see the name on the consent page.
-4. Add one to ten **Redirect URIs**. Each must be an absolute HTTPS URI without a fragment (`#`). Datadog compares redirect URIs exactly, including the port, path, and any query string.
+4. Add up to 10 **Redirect URIs**. Each must be an absolute HTTPS URI without a fragment (`#`). Datadog compares redirect URIs exactly, including the port, path, and any query string.
 5. Select the **Scopes** the client can request. Choose only what your app needs. The list includes the API scopes and the MCP server scope that custom clients support.
 6. Click **Create**.
 7. Copy the **Client ID** and **Client Secret**, and store the secret in a secure place.
@@ -129,9 +127,14 @@ Your app uses the client ID and secret to run the standard Authorization Code fl
 
    Refresh tokens last 90 days. After a refresh token expires, the user must authorize the client again.
 
-If the token endpoint rejects a code or refresh token with `invalid_grant` or `invalid_scope`, the user's authorization has ended. For example, an admin removed one of its scopes, or the refresh token expired. Send the user through authorization again instead of retrying the request. An `invalid_client` error means the client ID or secret is wrong, or the client is disabled, so retrying doesn't help.
-
 For the full list of request parameters and responses, see [OAuth2 authorization endpoints][4].
+
+### Handle token errors
+
+If the token endpoint rejects a request, check the `error` value:
+
+- `invalid_grant` or `invalid_scope`: The user's authorization has ended, for example because an admin removed one of its scopes or the refresh token expired. Send the user through authorization again instead of retrying the request.
+- `invalid_client`: The client ID or secret is wrong, or the client is disabled. Retrying doesn't help.
 
 ## Manage clients
 
@@ -149,14 +152,23 @@ Click a client to open its details. From there you can:
 Disabling a client is permanent. After you disable it:
 
 - Users can't authorize it.
-- It can't get new tokens or refresh existing ones. Access tokens that were already issued can keep working for a short time, until they expire.
+- It can't get new tokens or refresh existing ones. Access tokens that Datadog already issued can keep working until they expire.
 - It can't be enabled again.
 
 The disabled client stays in the list, so you keep its history. To restore access, create another client.
 
+## Permissions
+
+| Permission | Description |
+|------------|-------------|
+| `org_custom_oauth_clients_manage` | Create custom clients, change their scopes, and disable them |
+| `org_custom_oauth_clients_read` | View custom clients |
+
+The Datadog Admin Role has both permissions by default. The Datadog Standard Role and Datadog Read Only Role have neither. You can add them to a [custom role][3].
+
 ## Audit your clients
 
-Datadog records an event in [Audit Trail][5] when an admin creates a custom client, changes its scopes, or disables it, and when a user authorizes it. API calls made with a custom client's token are attributed to the user who authorized it.
+Datadog records an event in [Audit Trail][5] when an admin creates a custom client, changes its scopes, or disables it. It also records an event when a user authorizes a client. API calls made with a custom client's token are attributed to the user who authorized it.
 
 ## Further reading
 
