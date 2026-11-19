@@ -1,5 +1,5 @@
 ---
-title: L1/L7 Map
+title: L1 to L7 Map
 description: Visualize how services, containers, pods, hosts, and network paths connect, and narrow an investigation to a specific resource or connection.
 further_reading:
   - link: "/network_monitoring/cloud_network_monitoring/setup/"
@@ -20,32 +20,35 @@ further_reading:
 site_support_id: network_l1_l7_map
 ---
 
-{{< callout url="TODO_PREVIEW_FORM_URL" btn_hidden="false" header="Join the Preview!">}}
-The L1/L7 Map is in Preview. Complete the form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/l1-to-l7-map/" btn_hidden="false" header="Join the Preview!">}}
+The L1 to L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
+
+<!-- TODO: The Preview form is still generating. Confirm that the production URL above resolves before merge (staging: corpsite-preview.datadoghq.com/v1/staging/product-preview/l1-to-l7-map). -->
 
 <!-- TODO: All images on this page are placeholders cropped from the staging prototype. Replace them with final demo-org screenshots. -->
 
-<!-- TODO: "L1/L7" is a working name. Update the title, menu entry, and all references when the name is final. -->
-
-<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Retransmits, TCP failures, Sent / received, RTT, Reachability, End-to-end latency, Packet loss), and status values (CRITICAL, DEGRADED, HEALTHY, DOWN, UP, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1/L7). -->
+<!-- TODO (when final demo-org screenshots arrive): Every bolded UI label on this page comes from the staging prototype. Check each one against the screenshots and update it to match. This includes mode names (Single resource, Source/destination pair), buttons (Filter, Explore, Explore connection, View connection in CNM, View connection in Network Path, View connections, View details, View in APM, View in Kubernetes, Add destination, Add as source, Add as destination), group and section labels (Upstream, Downstream, Services, Containers, Pods, Hosts, Popular across your network, Related resources, Filtered to, +N more), metric labels (Failed setup rate, Reset rate, Retransmit rate, Sent, Unanswered run rate, Probe loss rate, End-to-end latency), and status values (Healthy, Degraded, Critical, Unknown, OK, UNREACHABLE). Also confirm the navigation path (Network Monitoring > L1 to L7 Map). -->
 
 ## Overview
 
-The L1/L7 Map brings application, infrastructure, and network context into one map. Use it to troubleshoot issues, such as a degraded service or a slow connection between two services. The map shows which containers, pods, and hosts a service runs on, which resources it communicates with, and where along the path between two resources a network signal degrades.
+The L1 to L7 Map visualizes network relationships to help you find out what is wrong with a resource, or why one resource cannot reach another. Use it to:
 
-The map combines data from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM). After you narrow an investigation to a specific resource or connection, open it in the product that collected the data, such as CNM or APM, for deeper analysis.
+- **Investigate a resource**: See what a service, pod, container, or host runs on, and its upstream and downstream connections, with network health signals such as retransmits and failed connections.
+- **Investigate a connection**: Select a source and a destination to compare their supporting resources, observed traffic, and Network Path hops. See where along the path the connection degrades.
 
-The L1/L7 Map is different from other network maps in Datadog:
+The map combines context from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM). It helps you identify dependencies and likely causes of issues in one place.
 
-- The [CNM Network Map][20] shows traffic between groups of resources across your environment. Use the L1/L7 Map to investigate one resource or one connection across the application, infrastructure, and network layers.
-- The [Device Topology Map][13] shows the physical connections between network devices. The L1/L7 Map shows network devices as hops on a network path.
+The L1 to L7 Map is different from other network maps in Datadog:
 
-{{< img src="network_performance_monitoring/l1_l7_map/map-overview.png" alt="The L1/L7 Map in single resource mode, showing a service with its upstream and downstream resources, its composition stack, and the details pane" >}}
+- The [CNM Network Map][20] shows traffic between groups of resources across your environment. Use the L1 to L7 Map to investigate one resource or one connection across the application, infrastructure, and network layers.
+- The [Device Topology Map][13] shows the physical connections between network devices. The L1 to L7 Map shows network devices as hops on a network path.
+
+{{< img src="network_performance_monitoring/l1_l7_map/map-overview.png" alt="The L1 to L7 Map in single resource mode, showing a service with its upstream and downstream resources, its composition stack, and the details pane" >}}
 
 ## Prerequisites
 
-The L1/L7 Map has no Agent version requirement of its own. It builds the map from data that the following Datadog products collect. Follow the Agent and platform requirements for each product that you use.
+The L1 to L7 Map has no Agent version requirement of its own. It builds the map from data that the following Datadog products collect. Follow the Agent and platform requirements for each product that you use.
 
 | Product | Required | What it adds to the map |
 |---|---|---|
@@ -53,12 +56,12 @@ The L1/L7 Map has no Agent version requirement of its own. It builds the map fro
 | [APM][2] | No | The service layer. Without APM, start your investigation from a host, pod, or container. |
 | [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
 | [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
-| [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with reachability, latency, and packet loss. |
+| [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with end-to-end latency, probe loss, and unanswered test runs. |
 | [Network Device Monitoring][6] | No | The status and side panel of a network path hop that is a monitored network device. |
 
 Before you use the map, open [CNM][14] and check that traffic appears for the resources you want to investigate. If you set up Network Path, check that the path between your source and destination appears in [Network Path][15].
 
-## How the L1/L7 Map works
+## How the L1 to L7 Map works
 
 ### Map layout
 
@@ -97,6 +100,8 @@ In source/destination pair mode, the map shows the source's composition stack on
 
 ### Map status and network signals
 
+Each resource and connection on the map has a status of **Healthy**, **Degraded**, **Critical**, or **Unknown**. Status is based on network traffic signals from CNM and Network Path data for the selected time frame. **Unknown** means that the map cannot determine a status, for example because neither product has data for the resource or connection.
+
 The outline color of a resource and the color of a connection line show their status:
 
 - **Red**: Critical
@@ -104,33 +109,35 @@ The outline color of a resource and the color of a connection line show their st
 - **Gray**: Unknown
 - **No color**: Healthy
 
-The map sorts resources by status, so the resources with the most severe status appear at the top of each group.
+<!-- TODO: Confirm the colors against the final screenshots. The bug bash notes, which were drafted from the code, say that degraded is yellow, unknown is uncolored, and healthy connections are green. -->
 
-<!-- TODO: When final screenshots arrive, confirm how the other status values on this page (DOWN, UP, OK, UNREACHABLE) map to these colors. -->
+Each group lists its resources from most to least severe status: Critical, Degraded, Healthy, then Unknown.
 
-Map status is based on the following network signals:
+The following signals appear on the map. Some of them set status, and the rest are for context only:
 
-| Signal | Source | What it measures |
-|---|---|---|
-| Round-trip time (RTT) | CNM | The time for traffic to travel to the destination and back. |
-| Retransmits | CNM | The percentage of TCP packets that were retransmitted. |
-| TCP failures | CNM | The number of failed TCP connections. |
-| Sent / received | CNM | The throughput in each direction. |
-| Reachability | Network Path | Whether the destination is reachable. |
-| End-to-end latency | Network Path | The latency between the source and the destination. |
-| Packet loss | Network Path | The percentage of packets that do not reach the destination. |
+| Signal | Source | What it measures | Effect on status |
+|---|---|---|---|
+| Failed setup rate | CNM | The percentage of TCP connections that failed to open, for example because they were refused or timed out. | Can set Critical or Degraded |
+| Reset rate | CNM | The percentage of TCP connections that were reset. | Can set Critical |
+| Retransmit rate | CNM | The percentage of TCP packets that were retransmitted. | Can set Degraded |
+| Sent | CNM | The average throughput that the client sends. | None |
+| Unanswered run rate | Network Path | The percentage of test runs that received no response. | Can set Critical |
+| Probe loss rate | Network Path | The percentage of probes that did not reach the destination. | Can set Degraded |
+| End-to-end latency | Network Path | The average round-trip time between the source and the destination. | None |
 
-<!-- TODO: Ask the PM how a resource's status is determined (from its connections' signals, its own metrics, or both), and whether throughput, packet drops, CPU, or memory affect status. -->
+When CNM has data for a resource or connection, the CNM signals set its status. The Network Path signals set the status only when the CNM status is Unknown. Network Path signals count only for TCP tests, so a path with only UDP or ICMP tests has an Unknown status.
 
-The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal. Network Path signals affect status only for TCP tests. Paths from UDP and ICMP tests have an unknown status.
+Latency, throughput, and data from other products do not affect map status. For example, APM errors, Kubernetes pod states, host utilization, and NDM device status do not change a resource's status on the map.
+
+The map shows only the signals that are available for each resource or connection. The hover summary for a resource or connection shows which signal determines its status. If a signal is missing, such as when Network Path does not test a connection, the map cannot detect issues with that signal.
 
 Map status is not a complete assessment of a resource's health. A resource with a healthy map status can still have issues that network signals do not capture, and a red or orange resource is a starting point for an investigation, not proof that it caused the issue. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
-## Navigate the L1/L7 Map
+## Navigate the L1 to L7 Map
 
 ### Open the map
 
-To open the map, navigate to [**Network Monitoring > L1/L7**][7].
+To open the map, navigate to [**Network Monitoring > L1 to L7 Map**][7].
 
 <!-- TODO: Confirm final navigation path and URL.
 
@@ -148,14 +155,14 @@ You can also open the map from other Datadog products. When you open the map fro
 | Infrastructure List | The **Network** tab of a host's side panel. |
 -->
 
-{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1/L7 page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1 to L7 Map page, with options to select single resource mode or source/destination pair mode and a search field" style="width:70%;" >}}
 
-On the L1/L7 page, select an investigation mode:
+On the L1 to L7 Map page, select an investigation mode:
 
 - **Single resource**: Start with one service, container, pod, or host. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list. For a walkthrough, see the [Find the cause of a degraded resource](#find-the-cause-of-a-degraded-resource) section.
 - **Source/destination pair**: Search for and select a **Source** and a **Destination**. For a walkthrough, see the [Find where a connection degrades](#find-where-a-connection-degrades) section.
 
-{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1/L7 page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1 to L7 Map page in single resource mode, with the search menu open to resource types and popular resources" style="width:70%;" >}}
 
 ### Change what the map shows
 
@@ -184,7 +191,7 @@ The summary for a resource shows its type, status, and available metrics. From t
 
 #### Network connection summaries
 
-The summary for a network connection shows its **Retransmits**, **TCP failures**, **Sent / received** throughput, and **RTT**. For what each signal measures, see the [Map status and network signals](#map-status-and-network-signals) section.
+The summary for a network connection shows its **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput. For what each signal measures, see the [Map status and network signals](#map-status-and-network-signals) section.
 
 From the summary, click **Explore connection** to open the connection in source/destination pair mode, or click **View connection in CNM**.
 
@@ -192,7 +199,7 @@ From the summary, click **Explore connection** to open the connection in source/
 
 #### Network path segment summaries
 
-The summary for a network path segment shows its **Reachability**, **End-to-end latency**, and **Packet loss**. From the summary, click **Explore connection** to investigate the segment in source/destination pair mode, with its two hops as the source and the destination. You can also click **View connection in Network Path**.
+The summary for a network path segment shows its **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**. From the summary, click **Explore connection** to investigate the segment in source/destination pair mode, with its two hops as the source and the destination. You can also click **View connection in Network Path**.
 
 The summary for a hop that is a network device shows the device's status.
 
@@ -206,11 +213,11 @@ The details pane, to the right of the map, shows information about the explored 
 
 In single resource mode, the details pane shows the following for the explored or filtered resource:
 
-- The resource's status, such as **CRITICAL** or **DOWN**.
+- The resource's status, such as **Critical** or **Degraded**.
 - **View details**, which opens the resource's side panel over the map, with more data about the resource, such as its logs and traces.
 - A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a container. Use the dropdown next to the link to open the resource in another product.
 - Infrastructure context, such as the availability zone, VPC, data center, and security groups.
-- The available metrics for the resource, and a graph of network metrics, such as RTT, over the selected time frame.
+- The available metrics for the resource, and a graph of network metrics over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/filtered-resource-side-pane.png" alt="The details pane for a filtered container, showing its status, links to view details and open it in Kubernetes, infrastructure context, metrics, and an RTT graph" >}}
@@ -219,10 +226,10 @@ In single resource mode, the details pane shows the following for the explored o
 
 In source/destination pair mode, the details pane shows the following for the connection between the source and the destination:
 
-- The status of the source and the destination, such as **UP** or **DOWN**.
+- The status of the source and the destination, such as **Healthy** or **Critical**.
 - **View connections**, which opens the connections in CNM. Use the dropdown next to the link to open the connections in another product.
 - The network signals for the connection. For definitions, see the [Map status and network signals](#map-status-and-network-signals) section.
-- A graph of network metrics, such as RTT, over the selected time frame.
+- A graph of network metrics over the selected time frame.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in source/destination pair mode, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
@@ -234,11 +241,11 @@ When you click an item on the map, the details pane shows details for that item:
 - **The +N more item in a resource group**: A list of the collapsed resources.
 - **A connection, or the +N more item on a connection**: A searchable list of the individual network connections that the line represents.
 - **An AS group on a network path**: The hops in the group and their status, such as **OK** or **UNREACHABLE**.
-- **A network path segment**: The map filters to the segment, and the details pane shows its reachability, end-to-end latency, and packet loss, with a link to open the segment in Network Path.
+- **A network path segment**: The map filters to the segment, and the details pane shows its end-to-end latency, probe loss rate, and unanswered run rate, with a link to open the segment in Network Path.
 
 When you click a resource, its side panel opens over the map, such as the host side panel for a host. When you click a hop that is a network device, the device's side panel from NDM opens.
 
-## Investigate an issue with the L1/L7 Map
+## Investigate an issue with the L1 to L7 Map
 
 ### Find the cause of a degraded resource
 
@@ -257,25 +264,18 @@ Use this workflow when a resource, such as a service, is slow or failing, and yo
 
 Use this workflow when two resources cannot communicate, or communicate slowly, and you want to find the point on the path where a network signal degrades.
 
-1. Open source/destination pair mode for the two resources. You can select them on the L1/L7 page, click **Add destination** while the source is the explored resource, or click **Explore connection** on the connection between them. For details, see the [Change what the map shows](#change-what-the-map-shows) section.
+1. Open source/destination pair mode for the two resources. You can select them on the L1 to L7 Map page, click **Add destination** while the source is the explored resource, or click **Explore connection** on the connection between them. For details, see the [Change what the map shows](#change-what-the-map-shows) section.
 1. Set the time frame to when the issue started.
-1. Hover over the network connections between the two stacks to check their retransmits, TCP failures, and RTT.
-1. Hover over the network path segments, and click the AS groups, to find a hop with degraded reachability, latency, or packet loss. To investigate a degraded segment on its own, hover over it and click **Explore connection**.
+1. Hover over the network connections between the two stacks to check their failed setup, reset, and retransmit rates.
+1. Hover over the network path segments, and click the AS groups, to find where along the path latency, probe loss, or unanswered test runs begin. To investigate a degraded segment on its own, hover over it and click **Explore connection**.
 1. If a hop is a network device monitored by [NDM][6], hover over the hop to see its status. Click the hop to open the device's side panel.
 1. To examine the underlying data, click **View connections** in the details pane to open the connections in CNM. To open the path in Network Path, hover over a network path segment and click **View connection in Network Path**, which opens the connection's [path view][19].
-
-## Limitations
-
-- You cannot search for a network device to start an investigation. Network devices appear as hops on a network path. To investigate the connection between two hops, use **Explore connection** on the network path segment between them.
-- The map does not show physical topology or routing relationships, such as connections derived from ARP or routing tables. To see physical connections between network devices, use the [Device Topology Map][13].
-- The map does not compare forward and reverse paths, compare paths over time, or detect route changes. To compare a path before and after an incident, use the [visual comparison][21] in Network Path.
-- The map shows only what Datadog observed during the selected time frame. A missing connection or hop does not mean that an outage occurred or that no dependency exists.
 
 ## Troubleshooting
 
 ### The map is not available
 
-Check that your organization has access to the Preview. The L1/L7 Map is not available on Datadog for Government sites. If you still cannot access the map, contact [Datadog Support][12].
+Check that your organization has access to the Preview. The L1 to L7 Map is not available on Datadog for Government sites. If you still cannot access the map, contact [Datadog Support][12].
 
 ### The map is empty
 
@@ -331,4 +331,3 @@ Compare the same resource or pair over the same time frame, and check which sign
 [18]: /containers/monitoring/containers_explorer/
 [19]: /network_monitoring/network_path/path_view/
 [20]: /network_monitoring/cloud_network_monitoring/network_map/
-[21]: /network_monitoring/network_path/path_view/#visual-comparison
