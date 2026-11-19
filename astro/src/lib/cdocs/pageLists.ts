@@ -23,6 +23,7 @@ import {
   compareVariants,
   findAllValueCombinations,
   type CdocsVariant,
+  type CdocsVariantLabel,
 } from "./variants";
 
 const DEFAULT_LANG = "en";
@@ -46,6 +47,16 @@ export interface CdocsPageVariant extends CdocsVariant {
    * `url` for any other. The listings use it, so they match the canonical tag.
    */
   canonicalUrl: string;
+  /**
+   * The page title followed by the variant's filter values, such as
+   * "Setup (Host: Azure, Database: Cosmos DB)", for the listings.
+   */
+  title: string;
+  /**
+   * Says the variant is a version of the page for the filter values in its
+   * title, followed by the page description, for the listings.
+   */
+  description: string;
 }
 
 /**
@@ -100,7 +111,7 @@ export function buildCdocsPage(p: {
   });
 
   const variants = findAllValueCombinations(filtersManifest, p.contentFilters)
-    .map((combination) => buildVariant(bareUrl, p.description, combination))
+    .map((combination) => buildVariant(bareUrl, combination))
     .sort(compareVariants);
 
   return {
@@ -117,6 +128,8 @@ export function buildCdocsPage(p: {
         filtersManifest,
         valsByTraitId: variant.valsByTraitId,
       }),
+      title: titleVariant(p.title, variant.labels),
+      description: describeVariant(p.title, p.description),
     })),
   };
 }
@@ -168,6 +181,26 @@ export async function getCdocsTraitsListUrl(
 }
 
 // Private functions ------------------------------------------------
+
+/** The page title, then each filter value as "Trait: Option" in parentheses. */
+function titleVariant(pageTitle: string, labels: CdocsVariantLabel[]): string {
+  if (labels.length === 0) return pageTitle;
+  const filterValues = labels
+    .map((label) => `${label.traitLabel}: ${label.optionLabel}`)
+    .join(", ");
+  return `${pageTitle} (${filterValues})`;
+}
+
+function describeVariant(
+  pageTitle: string,
+  pageDescription: string | undefined,
+): string {
+  const versionNote = `A version of the "${pageTitle}" page, scoped to the customer preferences in its title.`;
+  const trimmedDescription = pageDescription?.trim();
+  return trimmedDescription
+    ? `${versionNote} ${trimmedDescription}`
+    : versionNote;
+}
 
 /**
  * `dd_e2e/` test pages 404 in the live build, so they aren't listed there.

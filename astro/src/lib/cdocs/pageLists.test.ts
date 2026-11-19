@@ -164,7 +164,7 @@ describe("variant canonical URLs", () => {
   });
 });
 
-describe("variant descriptions", () => {
+describe("variant titles and descriptions", () => {
   const findVariant = (page: CdocsPage, url: string) =>
     page.variants.find((variant) => variant.url === url);
 
@@ -174,14 +174,22 @@ describe("variant descriptions", () => {
     expect(page.description).toBe("Set up the agent.");
   });
 
-  it("adds each shown filter to the page description, in frontmatter order", () => {
+  it("adds each shown filter to the page title, in frontmatter order", () => {
+    const page = buildPage([hostFilter, databaseFilter]);
+
+    expect(
+      findVariant(page, "/guides/setup/?database=cosmos_db&host=azure")?.title,
+    ).toBe("Setup (Host: Azure, Database: Cosmos DB)");
+  });
+
+  it("describes the variant as a version of the page, then gives the page description", () => {
     const page = buildPage([hostFilter, databaseFilter], "Set up the agent.");
 
     expect(
       findVariant(page, "/guides/setup/?database=cosmos_db&host=azure")
         ?.description,
     ).toBe(
-      "Set up the agent. For customers using the following: Host: Azure, Database: Cosmos DB.",
+      'A version of the "Setup" page, scoped to the customer preferences in its title. Set up the agent.',
     );
   });
 
@@ -190,38 +198,27 @@ describe("variant descriptions", () => {
       ...osFilter,
       show_if: [{ host: ["azure"] }],
     };
-    const page = buildPage(
-      [hostFilter, azureOnlyOsFilter],
-      "Set up the agent.",
-    );
+    const page = buildPage([hostFilter, azureOnlyOsFilter]);
 
-    expect(findVariant(page, "/guides/setup/?host=aws")?.description).toBe(
-      "Set up the agent. For customers using the following: Host: AWS.",
+    expect(findVariant(page, "/guides/setup/?host=aws")?.title).toBe(
+      "Setup (Host: AWS)",
     );
   });
 
   it("uses a filter's frontmatter label over the trait's label", () => {
-    const page = buildPage([{ ...osFilter, label: "OS" }], "Set up the agent.");
+    const page = buildPage([{ ...osFilter, label: "OS" }]);
 
-    expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
-      "Set up the agent. For customers using the following: OS: Linux.",
+    expect(findVariant(page, "/guides/setup/?os=linux")?.title).toBe(
+      "Setup (OS: Linux)",
     );
   });
 
-  it("ends the page description with a period before adding the filters", () => {
-    const page = buildPage([osFilter], "Set up the agent");
-
-    expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
-      "Set up the agent. For customers using the following: Operating system: Linux.",
-    );
-  });
-
-  it("lists only the filters when the page has no description", () => {
+  it("describes the variant without a page description when the page has none", () => {
     const page = buildPage([osFilter]);
 
     expect(page.description).toBeUndefined();
     expect(findVariant(page, "/guides/setup/?os=linux")?.description).toBe(
-      "For customers using the following: Operating system: Linux.",
+      'A version of the "Setup" page, scoped to the customer preferences in its title.',
     );
   });
 });

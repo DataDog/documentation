@@ -34,7 +34,7 @@ describe("cdocsPageSource", () => {
     );
   });
 
-  it("labels each variant with its filter values", async () => {
+  it("labels each variant's title with its filter values, and describes it as a version of the page", async () => {
     const pages = await pagesFor(CUSTOM_INSTRUMENTATION_MD);
     const pythonDatadogPage = pages.find(
       (page) =>
@@ -43,10 +43,10 @@ describe("cdocsPageSource", () => {
     );
 
     expect(pythonDatadogPage?.metadata.title).toBe(
-      "Cdocs Test Page: Filterable Content (E2E Fixture)",
+      "Cdocs Test Page: Filterable Content (E2E Fixture) (Language: Python, API: Datadog)",
     );
     expect(pythonDatadogPage?.metadata.description).toMatch(
-      /For customers using the following: Language: Python, API: Datadog\.$/,
+      /^A version of the "Cdocs Test Page: Filterable Content \(E2E Fixture\)" page, scoped to the customer preferences in its title\. Proof-of-concept/,
     );
   });
 

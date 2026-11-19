@@ -14,9 +14,6 @@ import type {
 } from "cdocs-data";
 import type { CdocContentFilter } from "./filters";
 
-/** Introduces a variant's filter values in its description. */
-const VARIANT_FILTERS_INTRO = "For customers using the following:";
-
 /** One filter value on a variant, with labels for display. */
 export interface CdocsVariantLabel {
   traitId: string;
@@ -35,12 +32,6 @@ export interface CdocsVariant {
   valsByTraitId: Record<string, string>;
   /** Labels for each value in `valsByTraitId`, in frontmatter order. */
   labels: CdocsVariantLabel[];
-  /**
-   * The page description followed by the variant's filter values, such as
-   * "Set up the agent. For customers using the following: Host: Azure,
-   * Database: Cosmos DB."
-   */
-  description: string;
 }
 
 /** A settled set of resolved filters, for one combination of values. */
@@ -146,7 +137,6 @@ export function shownValues(
 
 export function buildVariant(
   bareUrl: string,
-  pageDescription: string | undefined,
   combination: ValueCombination,
 ): SortableVariant {
   const valsByTraitId = shownValues(combination);
@@ -176,7 +166,6 @@ export function buildVariant(
       url: buildVariantUrl(bareUrl, valsByTraitId),
       valsByTraitId,
       labels,
-      description: describeVariant(pageDescription, labels),
     },
     optionIndices,
   };
@@ -217,33 +206,4 @@ export function buildVariantUrl(
   );
   const query = params.toString();
   return query ? `${bareUrl}?${query}` : bareUrl;
-}
-
-// Private functions ------------------------------------------------
-
-/**
- * The page description, then each filter value as "Trait: Option". A
- * description without ending punctuation gets a period, so the two read as
- * separate sentences.
- */
-function describeVariant(
-  pageDescription: string | undefined,
-  labels: CdocsVariantLabel[],
-): string {
-  const sentences: string[] = [];
-  const trimmedDescription = pageDescription?.trim();
-  if (trimmedDescription) {
-    sentences.push(
-      /[.!?]$/.test(trimmedDescription)
-        ? trimmedDescription
-        : `${trimmedDescription}.`,
-    );
-  }
-  if (labels.length > 0) {
-    const filterValues = labels
-      .map((label) => `${label.traitLabel}: ${label.optionLabel}`)
-      .join(", ");
-    sentences.push(`${VARIANT_FILTERS_INTRO} ${filterValues}.`);
-  }
-  return sentences.join(" ");
 }

@@ -7,8 +7,9 @@
  * param for any other. The variants come from the shared Cdocs page lists,
  * which the sitemap reads too, so the listings agree.
  *
- * Each variant's description ends with its filter values, such as "Language:
- * Python", to tell the variants apart.
+ * Each variant's title ends with its filter values, such as "(Language:
+ * Python)", to tell the variants apart, and its description says it's a
+ * version of the page for those values.
  *
  * Cdocs plaintext renders on the server, so there's no `.md` file to hash.
  * Every variant of a page carries a hash of the page's sources instead (see
@@ -88,7 +89,7 @@ function variantPages(
   return page.variants.map((variant) => ({
     urlPath: plaintextUrlPath(variant.canonicalUrl),
     metadata: {
-      title: page.title,
+      title: variant.title,
       description: variant.description,
       breadcrumbs: [...DOCS_CRUMBS],
       isPrivate,
