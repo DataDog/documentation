@@ -1,6 +1,6 @@
 ---
-description: Créez des règles de détection pour les évaluations AI Guard, examinez
-  les signaux qu'elles génèrent et configurez des alertes sur l'activité d'AI Guard.
+description: Créez des règles de détection pour les évaluations d'AI Guard, examinez
+  les signaux qu'elles génèrent et alertez sur l'activité d'AI Guard.
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
@@ -11,7 +11,10 @@ further_reading:
 - link: /security/detection_rules/
   tag: Documentation
   text: Règles de détection
-title: Triez et examinez les signaux AI Guard
+- link: https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/
+  tag: Blog
+  text: Détectez quand votre agent IA copie une injection de prompt auto-réplicable
+title: Effectuez le triage et examinez les signaux d'AI Guard
 ---
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard n'est pas disponible dans le {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
@@ -57,9 +60,9 @@ Pour créer des règles de détection AI Guard :
          <td>Cibler des types d'attaques spécifiques</td>
          <td>
            <ul>
-             <li><a href="/security/ai_guard/#attack-categories">Tags de catégorie d'attaque</a></li>
-             <li><code>tool-blocked</code> et <code>tool-allowed</code>, ajoutés par les politiques d'outils</li>
-             <li><code>regexp-blocked</code>, ajoutés par des règles personnalisées</li>
+             <li><a href="/security/ai_guard/#attack-categories">Tags de catégorie d’attaque</a></li>
+             <li><code>tool-blocked</code> et <code>tool-allowed</code>, ajoutées par les politiques d'outils</li>
+             <li><code>regexp-blocked</code>, ajoutées par des règles personnalisées</li>
            </ul>
          </td>
        </tr>
@@ -127,20 +130,20 @@ Lorsque vous cliquez sur un span dans l'Explorer, vous pouvez voir :
 
 De plus, vous pouvez cliquer sur {{< ui >}}Explore in graph view{{< /ui >}} pour voir les requêtes de la conversation sous forme de graphique, ou afficher le span dans [APM][8] ou [Agent Observability][9].
 
-## Alertez sur l'activité d'AI Guard avec Datadog Monitors {#set-up-datadog-monitors}
+## Soyez alerté de l’activité d’AI Guard avec Datadog Monitors {#set-up-datadog-monitors}
 
-Pour créer des moniteurs qui déclenchent des alertes lorsque certains seuils sont atteints, vous pouvez utiliser [Datadog Monitors][10]. Vous pouvez surveiller les évaluations AI Guard à l'aide de traces APM ou de métriques. Pour les deux types de moniteurs, définissez les conditions d'alerte, le nom de l'alerte et les Notifications ; Datadog recommande d'utiliser Slack.
+Pour créer des moniteurs qui déclenchent des alertes à certains seuils, vous pouvez utiliser [Datadog Monitors][10]. Vous pouvez surveiller les évaluations d’AI Guard à l’aide de traces APM ou de métriques. Pour les deux types de moniteurs, vous devez définir les conditions d’alerte et le nom de l’alerte, puis configurer les notifications ; Datadog recommande d’utiliser Slack.
 
 ### Moniteur APM {#apm-monitor}
 
-Suivez les instructions pour créer un [moniteur APM][11], dont le périmètre est défini sur {{< ui >}}Trace Analytics{{< /ui >}}.
+Suivez les instructions pour créer un [moniteur APM][11], en définissant son périmètre sur {{< ui >}}Trace Analytics{{< /ui >}}.
 
 - Pour surveiller les évaluations refusées, utilisez la requête `@ai_guard.action:DENY`.
 - Pour surveiller le trafic bloqué, utilisez la requête `@ai_guard.blocked:true`.
 
-### Moniteur de métrique {#metric-monitor}
+### Moniteur de métriques {#metric-monitor}
 
-Suivez les instructions pour créer un [moniteur de métrique][12].
+Suivez les instructions pour créer un [moniteur de métriques][12].
 
 - Pour surveiller les évaluations refusées, utilisez la métrique `datadog.ai_guard.evaluations` avec le tag `action:deny`.
 - Pour surveiller le trafic bloqué, utilisez la métrique `datadog.ai_guard.evaluations` avec le tag `blocking_enabled:true`.

@@ -540,4 +540,4 @@ Collectez les détails suivants si vous cherchez à résoudre des problèmes d'i
 [11]: /fr/tracing/guide/injectors/
 [12]: /fr/tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /fr/tracing/troubleshooting/tracer_debug_logs/
-[14]: /fr/tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation
+[14]: /fr/tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdv785#enable-apm-with-datadoginstrumentation

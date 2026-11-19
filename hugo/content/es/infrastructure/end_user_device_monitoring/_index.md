@@ -8,10 +8,6 @@ further_reading:
   text: Detecte y resuelva problemas de puntos de conexión en toda su flota con Datadog
 title: End User Device Monitoring
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
-End User Device Monitoring está en versión preliminar. Para inscribirse, haga clic en <b>Solicitar acceso</b>.
-{{< /callout >}}
-
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="Página de Dispositivos de usuario que muestra cuatro dispositivos en buen estado, gráficos para tipos de dispositivos y sistemas operativos, y una tabla con una computadora portátil marcada por fallas del sistema." style="width:100%;" >}}
 
 End User Device Monitoring brinda a los equipos de TI visibilidad sobre el estado y el rendimiento de las computadoras de escritorio y portátiles de los empleados, tanto físicas como virtuales. Ayuda a identificar problemas de rendimiento y conectividad que afectan a los empleados y proporciona una visualización unificada del estado del dispositivo, la red y la aplicación en toda su fuerza laboral para ayudar a responder preguntas como:
@@ -37,10 +33,13 @@ Utilice [Fleet Automation][6] para administrar los Agentes instalados en esos di
 | Capacidad                        | Descripción                                                                                                                                                                                               |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Monitoreo del rendimiento del dispositivo** | Haga un seguimiento de las métricas generales de salud del sistema, como la utilización de CPU, memoria, disco y red, para identificar dispositivos con bajo rendimiento.                                                                             |
+| **Rendimiento de inicio** | Mida cuánto tiempo tardan los dispositivos en iniciarse y estar listos para su uso, y encuentre dispositivos con inicios lentos. |
 | **Salud de la batería** | Planifique los ciclos de vida del hardware con métricas de batería como la capacidad máxima, el conteo de ciclos y el estado de carga.                                                                              |
 | **Visibilidad de procesos**            | Utilice [Live Processes][1] para hacer un seguimiento del uso de recursos por procesos individuales e identificar las aplicaciones que afectan el rendimiento del dispositivo.                                                                         |
 | **Recopilación de registros**               | Utilice [Logs][7] para recopilar y explorar registros de dispositivos de usuario y aplicaciones para solucionar fallas, errores y problemas de rendimiento.                                                             |
+| **Eventos** | Revise eventos seleccionados manualmente del dispositivo, como bloqueos y fallas de aplicaciones, instalaciones fallidas y reinicios inesperados, para reconstruir lo que sucedió. |
 | **Monitoreo de Wi-Fi**              | Haga un seguimiento de las métricas de Wi-Fi como la calidad de la señal, la tasa de transmisión y las transiciones de puntos de acceso con la [WiFi/WLAN integration][2], lo que ayuda a identificar problemas de conectividad y puntos de acceso sobrecargados. |
+| **Conexiones de red para puntos de acceso** | Vea la conexión de red entre un dispositivo y el punto de acceso con el que está asociado. |
 | **Detección de fallas de Windows**       | Detecte eventos de Pantalla Azul de la Muerte (BSOD) en dispositivos Windows con la [Windows Crash Detection integration][3], que genera eventos de Datadog que muestran cuándo ocurren las fallas del sistema.                         |
 | **Tráfico de red**         | Vea el volumen de tráfico por destino junto con la latencia y la tasa de error.                                                        |
 | **Trazado de rutas de red**         | Utilice [Network Path][4] para trazar el tráfico de red desde un dispositivo de usuario hasta su destino e identificar dónde ocurren los problemas de latencia o conectividad.                                                        |
@@ -48,6 +47,14 @@ Utilice [Fleet Automation][6] para administrar los Agentes instalados en esos di
 | **Mapeo de identidad**         | Mapee los dispositivos con el usuario para realizar análisis de patrones y cohortes.                                          | 
 
 ## Flujos de trabajo destacados {#featured-workflows}
+
+### Revise los problemas de la flota en Command Center {#review-fleet-issues-in-command-center}
+
+Abra [Command Center][5] para ver los problemas activos de los puntos de conexión en toda la flota, clasificados por gravedad. Cada problema incluye los dispositivos afectados, un resumen de la causa raíz de [Bits Investigation][8] y un siguiente paso recomendado. Cada problema también es un [elemento de trabajo][9], por lo que puede asignar un responsable, establecer una prioridad y realizar un seguimiento del problema hasta su resolución. Lea [Detecte y resuelva problemas de puntos de conexión en toda su flota con Datadog][10] para conocer este flujo de trabajo.
+
+### Abra un punto de acceso en Network Device Monitoring {#open-an-access-point-in-network-device-monitoring}
+
+Desde un dispositivo, abra el punto de acceso al que está conectado en [Network Device Monitoring][11]. Compare la conexión de ese dispositivo con el estado del punto de acceso y las conexiones de red en el punto de acceso para ver si un problema de conectividad afecta a un dispositivo o a todos los asociados con ese punto de acceso. Los dispositivos de usuario final también aparecen junto a los dispositivos de red en el [mapa de topología de dispositivos][12].
 
 ### Trazar rutas de red desde dispositivos de usuario hasta aplicaciones SaaS {#trace-network-paths-from-user-devices-to-saas-applications}
 
@@ -68,6 +75,15 @@ Con el trazado de rutas de red, usted puede:
 [5]: https://app.datadoghq.com/end-user-devices
 [6]: /es/agent/fleet_automation/
 [7]: /es/logs/
+[8]: /es/bits_ai/bits_investigation/
+[9]: /es/incident_response/work_management/view_and_manage/
+[10]: https://www.datadoghq.com/blog/auto-detected-endpoint-issues/
+[11]: /es/network_monitoring/devices/
+[12]: /es/network_monitoring/devices/topology/
+
+## Configure End User Device Monitoring {#set-up-end-user-device-monitoring}
+
+Siga [Configurar End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) para conocer las plataformas compatibles y las instrucciones de instalación específicas de cada dispositivo.
 
 ## Lecturas adicionales {#further-reading}
 

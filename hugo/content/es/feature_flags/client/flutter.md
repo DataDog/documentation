@@ -17,15 +17,15 @@ title: Feature Flags para Dart y Flutter
 ---
 ## Descripción general {#overview}
 
-Esta página describe cómo instrumentar aplicaciones Dart y Flutter con el SDK de Feature Flags de Datadog. Los Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación y experimentar de forma segura.
+Esta página describe cómo instrumentar aplicaciones Dart y Flutter con el SDK de Datadog Feature Flags. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación y experimentar de forma segura.
 
-El SDK de Feature Flags de Datadog para Dart es un paquete nativo de Dart. Obtiene asignaciones precalculadas de Datadog, evalúa localmente los valores tipados de los Feature Flags, e informa la telemetría de evaluación de los Feature Flags a Datadog. Las aplicaciones Flutter pueden usar el paquete Dart independiente directamente o instalar `datadog_flags_flutter` para derivar la configuración de `datadog_flutter_plugin` y agregar evaluaciones exitosas a RUM.
+El SDK de Datadog Feature Flags para Dart es un paquete nativo de Dart. Obtiene asignaciones precalculadas de Datadog, evalúa localmente valores tipados de flags e informa a Datadog la telemetría de exposición y evaluación de flags. Las aplicaciones Flutter pueden usar el paquete Dart independiente directamente o instalar `datadog_flags_flutter` para derivar la configuración de `datadog_flutter_plugin` y agregar evaluaciones exitosas a RUM.
 
-<div class="alert alert-info">Este paquete proporciona una API compatible con OpenFeature para Dart y Flutter, pero no está construido sobre el SDK de OpenFeature para Dart. Utilice las API de esta página directamente. Datadog está desarrollando una integración basada en proveedores de OpenFeature para Dart y Flutter.</div>
+<div class="alert alert-info">Este paquete proporciona una API compatible con OpenFeature para Dart y Flutter, pero no está construido sobre el SDK de OpenFeature para Dart. Use las API de esta página directamente. Datadog está desarrollando una integración basada en un proveedor de OpenFeature para Dart y Flutter.</div>
 
 ## Instalación {#installation}
 
-Para una aplicación Flutter que ya utiliza el SDK de Flutter de Datadog, instale `datadog_flags_flutter`:
+Para una aplicación Flutter que ya utiliza el SDK de Datadog Flutter, instale `datadog_flags_flutter`:
 
 {{< code-block lang="bash" >}}
 flutter pub add datadog_flags_flutter
@@ -33,7 +33,7 @@ flutter pub add datadog_flags_flutter
 
 `datadog_flags_flutter` depende de `datadog_flutter_plugin` 3.4.0 o posterior.
 
-Para uso independiente en Dart, instale `datadog_flags`:
+Para el uso independiente de Dart, instale `datadog_flags`:
 
 {{< tabs >}}
 {{% tab "Dart" %}}
@@ -68,11 +68,11 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
 ## Configuración integrada con Flutter {#flutter-integrated-setup}
 
-Utilice esta configuración cuando su aplicación Flutter ya inicialice `datadog_flutter_plugin`. Agregue `DatadogFlagsPluginConfiguration` a su `DatadogConfiguration` existente antes de inicializar el SDK de Datadog. El plugin deriva el token de cliente, el entorno, el sitio, el servicio, la versión y el ID de la aplicación RUM de la configuración del SDK de Flutter. Para crear un token de cliente, consulte [Client tokens][1].
+Utilice esta configuración cuando su aplicación Flutter ya inicialice `datadog_flutter_plugin`. Agregue `DatadogFlagsPluginConfiguration` a su `DatadogConfiguration` existente antes de inicializar el SDK de Datadog. El plugin deriva el token de cliente, el entorno, el sitio, el servicio, la versión y el ID de aplicación RUM de la configuración del SDK de Flutter. Para crear un token de cliente, consulte [Tokens de cliente][1].
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Los Flutter Feature Flags no son compatibles con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Las Feature Flags de Flutter no son compatibles con el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
@@ -94,7 +94,7 @@ final configuration = DatadogConfiguration(
   );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
-{{< /code-block >}}
+```
 
 Después de la inicialización, recupere un cliente de Feature Flags del plugin e inicialícelo con el contexto de evaluación para el sujeto actual:
 
@@ -120,17 +120,17 @@ try {
 }
 {{< /code-block >}}
 
-Las evaluaciones exitosas se envían a través de la canalización de telemetría de Datadog Feature Flags. Con la configuración integrada de Flutter, las evaluaciones exitosas que devuelven una variante también se agregan al visualizar RUM activo como evaluaciones de Feature Flags.
+Las evaluaciones exitosas se envían a través de la canalización de telemetría de Feature Flags de Datadog. Con la configuración integrada con Flutter, las evaluaciones exitosas que devuelven una variante también se agregan a la vista RUM activa como evaluaciones de Feature Flags.
 
 ## Configuración independiente de Dart {#standalone-dart-setup}
 
-Utilice esta configuración cuando no esté utilizando `datadog_flutter_plugin`, o cuando desee gestionar los Feature Flags independientemente de la inicialización del SDK de Flutter.
+Utilice esta configuración cuando no esté utilizando `datadog_flutter_plugin` o cuando desee gestionar las Feature Flags independientemente de la inicialización del SDK de Flutter.
 
-Habilite Datadog Feature Flags temprano en el inicio de su aplicación. Para la configuración en vivo de los Feature Flags, se requieren `clientToken`, `env` y `site`. Para crear un token de cliente, consulte [Client tokens][1].
+Habilite las Feature Flags de Datadog al inicio de su aplicación. Para la configuración en vivo de las Feature Flags, se requieren `clientToken`, `env` y `site`. Para crear un token de cliente, consulte [Tokens de cliente][1].
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Los Dart and Flutter Feature Flags no son compatibles con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Las Feature Flags de Dart y Flutter no son compatibles con el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
@@ -146,11 +146,11 @@ await datadogFlags.enable(
     ),
   ),
 );
-{{< /code-block >}}
+```
 
-`applicationId`, `service` y `version` son opcionales. Cuando están presentes, el SDK los incluye en el contexto de telemetría de los Feature Flags.
+`applicationId`, `service` y `version` son opcionales. Cuando están presentes, el SDK los incluye en el contexto de telemetría de las Feature Flags.
 
-Utilice el valor `DatadogFlagsSite` que coincida con su organización de Datadog.
+Utilice el valor `DatadogFlagsSite` que corresponda a su organización de Datadog.
 
 ## Crear y recuperar un cliente {#create-and-retrieve-a-client}
 
@@ -167,11 +167,11 @@ final orgFlags = DatadogFlags.instance.sharedClient(name: 'org');
 final userFlags = DatadogFlags.instance.sharedClient(name: 'user');
 {{< /code-block >}}
 
-Los clientes son locales al aislamiento de Dart donde se crean. Los aislamientos en segundo plano no comparten el estado de `DatadogFlags` ni las cachés de asignación con el aislamiento principal. Si un aislamiento en segundo plano necesita evaluar Feature Flags, llame a `DatadogFlags.instance.enable()`, cree los clientes que necesite e inicialícelos de forma independiente.
+Los clientes son locales al isolate de Dart en el que se crean. Los isolates en segundo plano no comparten el estado de `DatadogFlags` ni las cachés de asignaciones con el isolate principal. Si un isolate en segundo plano necesita evaluar flags, llame a `DatadogFlags.instance.enable()`, cree los clientes que necesite e inicialícelos de forma independiente.
 
 ## Establezca el contexto de evaluación {#set-the-evaluation-context}
 
-Defina a quién o a qué se aplica la evaluación del Feature Flag mediante `FlagsEvaluationContext`. El contexto de evaluación incluye información del usuario, la organización, la sesión o el dispositivo utilizada para determinar qué variaciones de los Feature Flags deben devolverse. Llame a `initialize()` antes de evaluar los Feature Flags para que el cliente pueda obtener las asignaciones para el contexto.
+Defina a quién o a qué se aplica la evaluación del flag mediante `FlagsEvaluationContext`. El contexto de evaluación incluye información del usuario, la organización, la sesión o el dispositivo que se utiliza para determinar qué variantes de flags deben devolverse. Llame a `initialize()` antes de evaluar flags para que el cliente pueda obtener las asignaciones para el contexto.
 
 <div class="alert alert-warning">Datadog Feature Flags requiere que los atributos del contexto de evaluación sean valores primitivos planos: cadenas, números y booleanos. No pase objetos o arreglos anidados; no son compatibles y pueden causar que los datos de exposición se descarten.</div>
 
@@ -188,11 +188,11 @@ await flagsClient.initialize(
 );
 {{< /code-block >}}
 
-El `targetingKey` es el sujeto de aleatorización para los despliegues porcentuales. Los usuarios con la misma clave de segmentación siempre reciben la misma variante para un Feature Flag dado.
+El `targetingKey` es el sujeto de aleatorización para los despliegues porcentuales. Los usuarios con la misma clave de segmentación siempre reciben la misma variante para un flag determinado.
 
-`targetingKey` es opcional. Si inicializa un contexto antes de que se conozca un ID de usuario u organización, el SDK envía una cadena vacía para la solicitud de asignación de precomputación.
+`targetingKey` es opcional. Si inicializa un contexto antes de que se conozca un ID de usuario u organización, el SDK envía una cadena vacía para la solicitud de asignaciones precalculadas.
 
-Utilice clientes con nombre independientes para sujetos de evaluación separados, como usuarios que han cerrado sesión y usuarios que han iniciado sesión, o segmentación a nivel de organización y a nivel de usuario:
+Utilice clientes con nombre independientes para sujetos de evaluación distintos, como usuarios que han cerrado sesión y usuarios que han iniciado sesión, o segmentación a nivel de organización y a nivel de usuario:
 
 {{< code-block lang="dart" >}}
 await orgFlags.initialize(
@@ -206,13 +206,13 @@ await userFlags.initialize(
 
 ## Evalúe marcadores {#evaluate-flags}
 
-Después de inicializar un cliente, puede leer los valores de los Feature Flags en toda su aplicación. La evaluación de Feature Flags es _local e instantánea_ porque el SDK utiliza datos de asignación almacenados en caché localmente. No se produce ninguna solicitud de red durante una evaluación tipada.
+Después de inicializar un cliente, puede leer los valores de los flags en toda su aplicación. La evaluación de flags es _local e instantánea_ porque el SDK utiliza datos de asignación almacenados en caché localmente. No se realiza ninguna solicitud de red durante una evaluación tipada.
 
-Cada método de evaluación requiere un valor predeterminado proporcionado por el llamador. Los métodos de evaluación no generan errores por la preparación del proveedor, por la ausencia de Feature Flags o discrepancias de tipo. Devuelven un valor `FlagDetails<T>` con el valor evaluado, los metadatos de asignación y un error programático cuando el SDK devuelve el valor predeterminado.
+Cada método de evaluación requiere un valor predeterminado proporcionado por el llamador. Los métodos de evaluación no lanzan excepciones por la falta de disponibilidad del proveedor, la ausencia de flags o las discrepancias de tipo. Devuelven un valor `FlagDetails<T>` con el valor evaluado, metadatos de asignación y un error programático cuando el SDK devuelve el valor predeterminado.
 
 ### Marcadores booleanos {#boolean-flags}
 
-Utilice `getBooleanDetails()` para Feature Flags que representen condiciones de encendido/apagado o verdadero/falso:
+Utilice `getBooleanDetails()` para flags que representen condiciones de encendido/apagado o verdadero/falso:
 
 {{< code-block lang="dart" >}}
 final details = flagsClient.getBooleanDetails(
@@ -229,7 +229,7 @@ if (details.error == null && details.value) {
 
 ### Marcadores de cadena {#string-flags}
 
-Utilice `getStringDetails()` para Feature Flags que seleccionen entre múltiples variantes o cadenas de configuración:
+Utilice `getStringDetails()` para flags que seleccionen entre múltiples variantes o cadenas de configuración:
 
 {{< code-block lang="dart" >}}
 final details = flagsClient.getStringDetails(
@@ -246,7 +246,7 @@ if (details.value == 'dark') {
 
 ### Marcadores de tipo entero y doble{#integer-and-double-flags}
 
-Utilice `getIntegerDetails()` o `getDoubleDetails()` para Feature Flags numéricos, como límites, porcentajes o multiplicadores:
+Utilice `getIntegerDetails()` o `getDoubleDetails()` para flags numéricos, como límites, porcentajes o multiplicadores:
 
 {{< code-block lang="dart" >}}
 final maxItems = flagsClient.getIntegerDetails(
@@ -262,7 +262,7 @@ final priceMultiplier = flagsClient.getDoubleDetails(
 
 ### Marcadores de objeto {#object-flags}
 
-Utilice `getObjectDetails()` para una configuración estructurada compatible con JSON:
+Utilice `getObjectDetails()` para configuraciones estructuradas compatibles con JSON:
 
 {{< code-block lang="dart" >}}
 final config = flagsClient.getObjectDetails(
@@ -290,7 +290,7 @@ print(details.reason);
 print(details.error?.code);
 {{< /code-block >}}
 
-`FlagDetails.error` se establece cuando el SDK devuelve el valor predeterminado porque el proveedor no está listo, el Feature Flag no se encuentra o el valor de asignación no coincide con el método de evaluación tipado. Los detalles exitosos incluyen el valor evaluado más los metadatos de asignación, como `variant` y `reason`, cuando Datadog los devolvió.
+`FlagDetails.error` se establece cuando el SDK devuelve el valor predeterminado porque el proveedor no está listo, no se encuentra el flag o el valor de asignación no coincide con el método de evaluación tipado. Los detalles exitosos incluyen el valor evaluado más los metadatos de asignación, como `variant` y `reason`, cuando Datadog los devolvió.
 
 ## Configuración avanzada {#advanced-configuration}
 
@@ -308,36 +308,36 @@ DatadogFlagsConfiguration(
 {{< /code-block >}}
 
 `trackExposures`
-: Cuando `true` (predeterminado), el SDK registra eventos de exposición para evaluaciones exitosas cuyas asignaciones están marcadas para registro. Establezca en `false` para deshabilitar el seguimiento de exposición.
+: Cuando `true` (predeterminado), el SDK registra eventos de exposición para evaluaciones exitosas cuyas asignaciones están marcadas para el registro. Establézcalo en `false` para deshabilitar el seguimiento de exposición.
 
 `trackEvaluations`
-: Cuando `true` (predeterminado), el SDK registra la telemetría de evaluación de Feature Flags agregada. Establezca en `false` para deshabilitar el seguimiento de evaluación.
+: Cuando `true` (predeterminado), el SDK registra la telemetría agregada de evaluación de flags. Establézcalo en `false` para deshabilitar el seguimiento de la evaluación.
 
 `initializationTimeout`
-: Tiempo máximo de espera para que el primer contexto de evaluación esté listo. El tiempo de espera utiliza un presupuesto de reloj de pared para la operación de inicialización completa. Cubre la carga de asignaciones almacenadas, la codificación de la solicitud, la obtención de asignaciones, la lectura del cuerpo de la respuesta, la decodificación de JSON, la publicación de asignaciones y el almacenamiento de asignaciones. No cambia el tiempo de espera del cliente HTTP.
+: Tiempo máximo de espera para que el primer contexto de evaluación esté listo. El tiempo de espera utiliza un único presupuesto de tiempo transcurrido para toda la operación de inicialización. Cubre la carga de asignaciones almacenadas, la codificación de la solicitud, la obtención de asignaciones, la lectura del cuerpo de la respuesta, la decodificación de JSON, la publicación de asignaciones y el almacenamiento de asignaciones. No cambia el tiempo de espera del cliente HTTP.
 
-  <br>El tiempo de espera se aplica solo a la primera llamada `initialize()` para cada cliente. La primera llamada consume el tiempo de espera incluso si la operación falla o es reemplazada. Las llamadas posteriores no tienen temporizador de inicialización. El valor predeterminado es 5 segundos. Establezca el valor en `null`, cero o una duración negativa para desactivar el tiempo de espera.
+  <br>El tiempo de espera se aplica solo a la primera llamada de `initialize()` para cada cliente. La primera llamada consume el tiempo de espera incluso si la operación falla o es reemplazada. Las llamadas posteriores no tienen temporizador de inicialización. El valor predeterminado es 5 segundos. Establezca el valor en `null`, cero o una duración negativa para deshabilitar el tiempo de espera.
 
   Cuando el tiempo de espera expira, `initialize()` lanza `FlagsInitializationTimeoutException`. La operación de asignación continúa y puede publicar un resultado exitoso tardío. Las asignaciones almacenadas coincidentes permanecen disponibles. Las evaluaciones sin asignaciones devuelven el valor predeterminado proporcionado por el llamador con `FlagEvaluationError.providerNotReady`.
 
-  Dart ejecuta el temporizador de tiempo de espera en el mismo aislado que el trabajo de inicialización sincrónica. Por lo tanto, el trabajo sincrónico puede hacer que la espera observada sea más larga que el tiempo de espera configurado.
+  Dart ejecuta el temporizador de tiempo de espera en el mismo isolate que el trabajo de inicialización sincrónica. Por lo tanto, el trabajo sincrónico puede hacer que la espera observada sea más larga que el tiempo de espera configurado.
 
   <div class="alert alert-info"><code>initializationTimeout</code> está disponible en <code>datadog_flags</code> y <code>datadog_flags_flutter</code> 1.1.0 y versiones posteriores.</div>
 
 `evaluationFlushInterval`
-: El intervalo en el que se envía la telemetría de evaluación de Feature Flags agregada a Datadog. Los valores aceptados están entre 1 y 60 segundos. El valor predeterminado es 10 segundos.
+: El intervalo en el que se envía a Datadog la telemetría agregada de evaluación de flags. Los valores aceptados están entre 1 y 60 segundos. El valor predeterminado es 10 segundos.
 
 `store`
 : Almacenamiento opcional de la última asignación conocida. El SDK puede usar asignaciones almacenadas coincidentes mientras una solicitud de red nueva está en curso o no está disponible.
 
-`httpClient`, `customFlagsEndpoint`, `customExposureEndpoint`, y `customEvaluationEndpoint`
+`httpClient`, `customFlagsEndpoint`, `customExposureEndpoint` y `customEvaluationEndpoint`
 : Anulaciones avanzadas para pruebas, proxies o enrutamiento personalizado.
 
   <br>Si se llama a `enable()` sin un `datadogConfig`, el SDK no crea un proveedor activo. Las evaluaciones devuelven el valor predeterminado proporcionado por el llamador con `FlagEvaluationError.providerNotReady`.
 
-  Para una configuración integrada con Flutter, pase estas opciones a través de `DatadogFlagsPluginConfiguration`:
+  Para la configuración integrada de Flutter, pase estas opciones a través de `DatadogFlagsPluginConfiguration`:
 
-  {{< code-block lang="dart" >}}
+  ```dart
   final configuration = DatadogConfiguration(
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENV_NAME>',
@@ -355,14 +355,14 @@ DatadogFlagsConfiguration(
         rumIntegrationEnabled: true,
       ),
     );
-  {{< /code-block >}}
+  ```
 
 `rumIntegrationEnabled`
-: Cuando `true` (predeterminado), las evaluaciones exitosas que devuelven una variante se agregan al visualizar RUM activo como evaluaciones de Feature Flags. Si su aplicación no utiliza RUM, esta opción no tiene efecto.
+: When `true` (default), successful evaluations that return a variant are added to the active RUM view as feature flag evaluations. If your app does not use RUM, this option has no effect.
 
-## Almacenamiento de la última asignación conocida {#last-known-assignment-storage}
+## Last-known assignment storage 
 
-El SDK mantiene las asignaciones en memoria después de que `initialize()` tenga éxito. Para restaurar las últimas asignaciones conocidas entre instancias del SDK, proporcione un `DatadogFlagsStore`:
+The SDK keeps assignments in memory after `initialize()` succeeds. To restore last-known assignments across SDK instances, provide a `DatadogFlagsStore`:
 
 {{< code-block lang="dart" >}}
 class MyFlagsStore implements DatadogFlagsStore {
@@ -384,29 +384,29 @@ class MyFlagsStore implements DatadogFlagsStore {
 }
 {{< /code-block >}}
 
-Las asignaciones almacenadas se utilizan solo cuando su contexto de evaluación coincide con el contexto activo. Una obtención exitosa en vivo siempre mueve al cliente al estado de asignación más reciente y escribe ese estado de nuevo en el almacenamiento.
+Stored assignments are used only when their evaluation context matches the active context. A live successful fetch always moves the client to the newest assignment state and writes that state back to the store.
 
-El paquete Dart no elige una ubicación en disco ni incluye un almacenamiento en disco específico para Flutter. Las aplicaciones de Flutter pueden implementar `DatadogFlagsStore` con su mecanismo de almacenamiento de aplicaciones preferido.
+The Dart package does not choose a disk location or ship a Flutter-specific disk store. Flutter apps can implement `DatadogFlagsStore` with their preferred app storage mechanism.
 
-## Apagado {#shutdown}
+## Shutdown 
 
-Llame a `shutdown()` cuando ya no necesite un cliente. Esto vacía las cargas pendientes de exposición y evaluación de flags antes de borrar las asignaciones en memoria del cliente.
+Call `shutdown()` when a client is no longer needed. This drains pending exposure and flag evaluation uploads before clearing the client's in-memory assignments.
 
 {{< code-block lang="dart" >}}
 await flagsClient.shutdown();
 {{< /code-block >}}
 
-Llame a `DatadogFlags.instance.disable()` cuando la aplicación esté cerrando el SDK de flags:
+Call `DatadogFlags.instance.disable()` when the application is tearing down the flags SDK:
 
 {{< code-block lang="dart" >}}
 await DatadogFlags.instance.disable();
 {{< /code-block >}}
 
-## Ejemplo completo {#complete-example}
+## Complete example 
 
-El siguiente ejemplo habilita el SDK, inicializa un cliente con un contexto de evaluación y evalúa un flag booleano:
+The following example enables the SDK, initializes a client with an evaluation context, and evaluates a Boolean flag:
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags/datadog_flags.dart';
 
 Future<void> initializeFlags() async {
@@ -450,11 +450,11 @@ Future<void> initializeFlags() async {
     showNewCheckoutFlow();
   }
 }
-{{< /code-block >}}
+```
 
-## Pruebas {#testing}
+## Testing 
 
-Puede realizar pruebas en un entorno de prueba dedicado de Datadog con el `DatadogFlagsClient` real, o aislar el código de la aplicación detrás de una interfaz pequeña y sustituir una implementación falsa en las pruebas unitarias. Esta sección muestra el enfoque simulado, que mantiene las pruebas autocontenidas y sin conexión.
+You can test against a dedicated Datadog test environment with the real `DatadogFlagsClient`, or isolate application code behind a small interface and substitute a fake implementation in unit tests. This section shows the fake approach, which keeps tests self-contained and offline.
 
 {{< code-block lang="dart" >}}
 abstract interface class CheckoutFlags {
@@ -483,9 +483,9 @@ final class TestCheckoutFlags implements CheckoutFlags {
 }
 {{< /code-block >}}
 
-Luego, inyecte `TestCheckoutFlags` en las pruebas unitarias y `DatadogCheckoutFlags` en producción.
+Then inject `TestCheckoutFlags` into unit tests and `DatadogCheckoutFlags` in production.
 
-## Lecturas adicionales {#further-reading}
+## Further reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 

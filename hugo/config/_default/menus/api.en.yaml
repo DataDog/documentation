@@ -6812,6 +6812,18 @@ menu:
           - GetUsageObservabilityPipelines
         unstable: []
         order: 3
+    - name: Get monthly usage by resource
+      url: /api/latest/usage-metering/get-monthly-usage-by-resource/
+      identifier: usage-metering-get-monthly-usage-by-resource
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageMonthlyResources
+        unstable: []
+        order: 28
     - name: Get hourly usage for Lambda traced invocations
       url: /api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/
       identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -7913,6 +7925,19 @@ menu:
         unstable:
           - v2
         order: 45
+    - name: List AI Gateway rate limit counter summaries
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counter-summaries/
+      identifier: ai-gateway-list-ai-gateway-rate-limit-counter-summaries
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimitInstancesSummaries
+        unstable:
+          - v2
+        order: 55
     - name: Create an AI Gateway rate limit
       url: /api/latest/ai-gateway/create-an-ai-gateway-rate-limit/
       identifier: ai-gateway-create-an-ai-gateway-rate-limit
@@ -12439,6 +12464,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: ChatGPT Enterprise Integration
+      url: /api/latest/chatgpt-enterprise-integration/
+      identifier: chatgpt-enterprise-integration
+      generated: true
+    - name: Update a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/update-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-update-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/get-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-get-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/delete-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-delete-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/create-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-create-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List ChatGPT Enterprise integration accounts
+      url: /api/latest/chatgpt-enterprise-integration/list-chatgpt-enterprise-integration-accounts/
+      identifier: chatgpt-enterprise-integration-list-chatgpt-enterprise-integration-accounts
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListChatGPTEnterpriseIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
@@ -14034,6 +14128,75 @@ menu:
           - ListContainers
         unstable: []
         order: 1
+    - name: CoreWeave Integration
+      url: /api/latest/coreweave-integration/
+      identifier: coreweave-integration
+      generated: true
+    - name: Update a CoreWeave integration account
+      url: /api/latest/coreweave-integration/update-a-coreweave-integration-account/
+      identifier: coreweave-integration-update-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a CoreWeave integration account
+      url: /api/latest/coreweave-integration/get-a-coreweave-integration-account/
+      identifier: coreweave-integration-get-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a CoreWeave integration account
+      url: /api/latest/coreweave-integration/delete-a-coreweave-integration-account/
+      identifier: coreweave-integration-delete-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a CoreWeave integration account
+      url: /api/latest/coreweave-integration/create-a-coreweave-integration-account/
+      identifier: coreweave-integration-create-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List CoreWeave integration accounts
+      url: /api/latest/coreweave-integration/list-coreweave-integration-accounts/
+      identifier: coreweave-integration-list-coreweave-integration-accounts
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCoreWeaveCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Customer Org
       url: /api/latest/customer-org/
       identifier: customer-org
@@ -15082,6 +15245,32 @@ menu:
           - UpdateIssueState
         unstable: []
         order: 3
+    - name: Snooze an issue
+      url: /api/latest/error-tracking/snooze-an-issue/
+      identifier: error-tracking-snooze-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SnoozeIssue
+        unstable:
+          - v2
+        order: 7
+    - name: Get the impact of an error tracking issue
+      url: /api/latest/error-tracking/get-the-impact-of-an-error-tracking-issue/
+      identifier: error-tracking-get-the-impact-of-an-error-tracking-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIssueImpact
+        unstable:
+          - v2
+        order: 6
     - name: Update the assignee of an issue
       url: /api/latest/error-tracking/update-the-assignee-of-an-issue/
       identifier: error-tracking-update-the-assignee-of-an-issue
@@ -15839,6 +16028,58 @@ menu:
           - ListExposureSQLModels
         unstable: []
         order: 20
+    - name: Get bandit traffic summary
+      url: /api/latest/experiments/get-bandit-traffic-summary/
+      identifier: experiments-get-bandit-traffic-summary
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditTrafficSummary
+        unstable:
+          - v2
+        order: 59
+    - name: Get bandit results
+      url: /api/latest/experiments/get-bandit-results/
+      identifier: experiments-get-bandit-results
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditResults
+        unstable:
+          - v2
+        order: 58
+    - name: Get bandit
+      url: /api/latest/experiments/get-bandit/
+      identifier: experiments-get-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBandit
+        unstable:
+          - v2
+        order: 57
+    - name: List bandits
+      url: /api/latest/experiments/list-bandits/
+      identifier: experiments-list-bandits
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBandits
+        unstable:
+          - v2
+        order: 56
     - name: Create experiment
       url: /api/latest/experiments/create-experiment/
       identifier: experiments-create-experiment
@@ -19242,6 +19483,75 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Nebius Cloud Integration
+      url: /api/latest/nebius-cloud-integration/
+      identifier: nebius-cloud-integration
+      generated: true
+    - name: Update a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/update-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-update-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/get-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-get-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/delete-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-delete-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/create-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-create-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Nebius Cloud integration accounts
+      url: /api/latest/nebius-cloud-integration/list-nebius-cloud-integration-accounts/
+      identifier: nebius-cloud-integration-list-nebius-cloud-integration-accounts
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNebiusCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
@@ -19896,6 +20206,18 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Create On-Call Page comment
+      url: /api/latest/on-call/create-on-call-page-comment/
+      identifier: on-call-create-on-call-page-comment
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageComment
+        unstable: []
+        order: 30
     - name: Get On-Call Page
       url: /api/latest/on-call/get-on-call-page/
       identifier: on-call-get-on-call-page
