@@ -160,6 +160,8 @@ The [existing-configuration guide][15] covers these migration paths.
 
 <span id="verify"></span>
 
+Use the [SDK startup logs][16] to check the effective OpenTelemetry configuration when troubleshooting missing telemetry or unexpected behavior. The settings reported depend on the SDK language and version.
+
 View your application's traces in [Trace Explorer][10], metrics in [Metrics Explorer][11], and logs in [Log Explorer][12]. For missing telemetry, see [OpenTelemetry troubleshooting][13].
 
 ## Further reading
@@ -177,6 +179,7 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [13]: /opentelemetry/troubleshooting/
 [14]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot#instrument-kubernetes-workloads-with-ddot-sdks
 [15]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
+[16]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration
 
 [export-2]: /opentelemetry/setup/ddot_collector/
 [export-3]: /opentelemetry/setup/collector_exporter/
