@@ -28,7 +28,7 @@ The Worker looks for these anomalies after logs have gone through all processors
 The Worker sends the following data to Datadog:
 
 - **Log signatures**: Tokenized representations of your logs that describe their structure, without including the actual log data.
-- **Sample logs**: A sample log for each log pattern, sent every minute. See [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) for more information. Unlike signatures, sample logs include log data.
+- **Sample logs**: A sample log for each [log pattern](#how-logs-are-grouped-by-patterns), sent every minute. Unlike signatures, sample logs include log data.
 
 Datadog groups the logs into patterns to determine anomalous behavior. For details, see the [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) section.
 
