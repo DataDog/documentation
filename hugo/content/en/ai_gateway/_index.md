@@ -80,8 +80,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 | Connect provider accounts and discover models | [Connect Providers](/ai_gateway/providers/) |
 | Authenticate applications and attribute their requests | [Connect Applications](/ai_gateway/applications/) |
 | Choose request formats, endpoints, and model identifiers | [Send Requests](/ai_gateway/requests/) |
-| Identify conversations and agent runs with session IDs | [Sessions](/ai_gateway/sessions/) |
-| Create model aliases and fallback destinations, and keep sessions on one destination | [Route Requests](/ai_gateway/routing/) |
+| Create model aliases, split traffic by session, route by task, and add fallbacks | [Route Requests](/ai_gateway/routing/) |
 | Grant access to models and routing rules | [Control Model Access](/ai_gateway/access_control/) |
 | Set budgets and rate limits | [Control Spend and Usage](/ai_gateway/spend_controls/) |
 | Control recorded prompt and response content | [Security and Data Capture](/ai_gateway/security/) |

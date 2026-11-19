@@ -6151,11 +6151,6 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_requests
       weight: 4
-    - name: Sessions
-      url: ai_gateway/sessions/
-      parent: ai_gateway
-      identifier: ai_gateway_sessions
-      weight: 4
     - name: Route Requests
       url: ai_gateway/routing/
       parent: ai_gateway
