@@ -6,11 +6,11 @@ This folder contains the Astro-rendered portion of the docs site. The API refere
 
 Only the API docs have been migrated from Hugo to Astro.
 
-| Doc type            | Description                                                                                                                   | Status                                                  |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| API docs            | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | Live.                                                   |
-| Product docs        | All other docs. `.mdoc` files in `src/content/en/`, rendered on demand (SSR).                                                 | Proof of concept only. Only test fixtures in `dd_e2e/`. |
-| Single-sourced docs | Docs located in other repositories or content-management systems. These are imported into our build.                          | Development not started.                                |
+| Doc type | Description | Status |
+| --- | --- | --- |
+| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | Live. |
+| Product docs | All other docs. `.mdoc` files in `src/content/en/`, rendered on demand (SSR). | Proof of concept only. Only test fixtures in `dd_e2e/`. |
+| Single-sourced docs | Docs located in other repositories or content-management systems. These are imported into our build. | Development not started. |
 
 ## Build the Astro docs locally
 
