@@ -165,7 +165,7 @@ AI Gateway supports these model families on each provider. It also supports cust
 | Anthropic Claude | | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Gemini | | | {{< X >}} | | |
 
-Gemini models are available only through GCP Vertex AI. AI Gateway does not yet support the Gemini API (`generativelanguage.googleapis.com`) as a provider, or the Gemini Interactions API on Vertex AI.
+Gemini models are available only through Google Cloud Vertex AI providers. AI Gateway does not support the Gemini API (`generativelanguage.googleapis.com`) as a provider, and does not support the Gemini Interactions API on Vertex AI.
 
 Open a provider from the list to review its connection, models, generated requests, and traffic. Click {{< ui >}}Edit provider{{< /ui >}} to change its display name or model settings. Manage caller access through access policies.
 
