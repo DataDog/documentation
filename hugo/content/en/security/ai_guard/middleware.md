@@ -89,7 +89,7 @@ Skip evaluations for traffic you trust, such as calls through one integration or
 
 After a middleware class skips a request:
 
-- SDK calls return an `ALLOW` action with the reason `skipped by middleware`, and the original messages without redaction. <!-- TODO: Please confirm. A skipped request never reaches AI Guard, so Sensitive Data Scanner redaction doesn't apply, and result.messages holds the original, unredacted messages. Is that right? This matters for SDK users who forward result.messages to the model, as the Redact Sensitive Data page instructs. -->
+- SDK calls return an `ALLOW` action with the reason `skipped by middleware`, no attack tags or Sensitive Data Scanner findings, and the original messages. A skipped request never reaches AI Guard, so sensitive data redaction doesn't apply: if you forward `result.messages` to the model, the model receives the unredacted messages.
 - Middleware classes registered later don't check the request.
 - No `post_evaluate` hooks run for the request.
 
