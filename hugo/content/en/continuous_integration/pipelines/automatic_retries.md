@@ -71,9 +71,13 @@ GitHub Actions imposes two provider-level limitations that shape how retries wor
 - **Retries happen after the workflow finishes.** The GitHub API does not allow retrying an individual job while the rest of the workflow is still running. Datadog waits for the workflow to reach a final state before issuing retries.
 - **All failed jobs are retried together, even those classified as non-retriable.** The GitHub API does not support retrying a single job when other jobs in the workflow have also failed. Datadog reruns every failed job in the workflow through a single GitHub API call. This may increase your GitHub Actions compute usage.
 
+To see the jobs Datadog retried on GitHub Actions, open [**CI/CD Optimization** > **Executions**][101].
+
 ### Protected branches
 
 The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app org-wide Maintainer-level access. Review your organization's policies before expanding permissions.
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Agithub%20%40ci.job.retry_reason%3Aauto_retry
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
@@ -83,6 +87,10 @@ The Datadog GitHub App's default permissions do not allow retries on protected b
 As soon as a job fails in GitLab, Datadog re-runs that specific job (if it is classified as retriable). Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected. There is no additional CI cost beyond the retried job(s).
 
 Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
+
+To see the jobs Datadog retried on GitLab, open [**CI/CD Optimization** > **Executions**][101].
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Agitlab%20%40ci.job.retry_reason%3Aauto_retry
 
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
@@ -96,9 +104,9 @@ On Azure Pipelines, Datadog retries stages instead of individual jobs:
 - **Retries happen after the pipeline run finishes.** Datadog waits for the run to reach a final state before it retries a stage.
 - **Datadog retries each stage at most once.** If the retried jobs fail again, Datadog does not retry the stage a second time.
 
-After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see the jobs Datadog retried, open [**CI/CD Optimization** > **Executions**][101] and filter on the Azure Pipelines provider.
+After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see the jobs Datadog retried on Azure Pipelines, open [**CI/CD Optimization** > **Executions**][101].
 
-[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.job.retry_reason%3Aauto_retry
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Aazurepipelines%20%40ci.job.retry_reason%3Aauto_retry
 
 {{% /tab %}}
 {{< /tabs >}}
