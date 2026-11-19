@@ -1,55 +1,75 @@
 ---
-description: Aprende a configurar el destino de las métricas de Datadog.
+description: Aprenda a configurar el destino de Datadog Metrics.
 disable_toc: false
 products:
-- icon: métricas
+- icon: metrics
   name: Métricas
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
-title: Métricas de Datadog
+title: Datadog Metrics
 ---
-
 {{< product-availability >}}
 
-Utiliza el destino de métricas de Observability Pipelines de Datadog para enviar métricas a Datadog. También puedes utilizar [AWS PrivateLink](#aws-privatelink) para enviar métricas de Observability Pipelines a Datadog.
+## Descripción general {#overview}
 
-## Instalación
+Utilice el destino de Datadog Metrics de Observability Pipelines para enviar métricas a Datadog. También puede utilizar [AWS PrivateLink](#aws-privatelink) para enviar métricas desde Observability Pipelines a Datadog.
 
-Configura el destino de métricas de Datadog y sus variables de entorno cuando [configures un pipeline][1]. La siguiente información se configura en la interfaz de usuario de pipelines.
+## Configuración {#setup}
 
-{{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="Los parámetros del destino de métricas de Datadog" style="width:40%;" >}}
+Configure el destino de Datadog Metrics cuando [configure una canalización][5]. Puede configurar un pipeline en la [UI][1], utilizando la [API][6] o con [Terraform][7]. Los pasos de esta sección se configuran en la interfaz de usuario.
 
-### Configurar el destino
+{{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="La configuración del destino de Datadog Metrics" style="width:40%;" >}}
 
-Opcionalmente, activa **Buffering Options** (Opciones de almacenamiento en búfer) para configurar cómo se almacenan en búfer los eventos antes de ser enviados.
-**Nota**: Las opciones de almacenamiento en búfer están en {{< tooltip glossary="preview" case="title" >}}. Ponte en contacto con el administrador de tu cuenta para solicitar acceso.
+### Almacenamiento en búfer opcional {#optional-buffering}
 
-- Si está desactivado, el búfer contiene un máximo de 500 eventos. Los eventos que superan este límite se descartan.
-- Si está activado:
-  - Selecciona el tipo de búfer que desees configurar (Memoria o Disco).
-  - Introduce el tamaño del buffer y selecciona la unidad.
+Después de seleccionar el destino de Datadog Metrics en la pipeline UI, puede configurar el almacenamiento en búfer.
 
-### Configurar las variables de entorno
+{{% observability_pipelines/destination_buffer %}}
+
+## Valores predeterminados de Secret {#secret-defaults}
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Gestión de secretos" %}}
+
+No hay identificadores de secreto para este destino.
+
+{{% /tab %}}
+
+{{% tab "Variables de entorno" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
-## Cómo funciona el destino
+{{% /tab %}}
+{{< /tabs >}}
 
-Un lote de eventos se descarga cuando se cumple uno de estos parámetros. Consulta los [eventos por lotes][2] para obtener más información.
+## AWS PrivateLink {#aws-privatelink}
 
-| Eventos máximos     | Bytes máximos       | Tiempo de espera (segundos)   |
-|----------------|-----------------|---------------------|
-| 100 000        | Ninguno            | 2                   |
-
-## AWS PrivateLink
-
-Para enviar métricas de Observability Pipelines a Datadog con AWS PrivateLink, consulta [Conectarse a Datadog a través de AWS PrivateLink][3] para obtener instrucciones de configuración. Los dos endpoints que necesitas configurar son:
+Para enviar métricas desde Observability Pipelines a Datadog mediante AWS PrivateLink, consulte [Conectarse a Datadog a través de AWS PrivateLink][3] para obtener instrucciones de configuración. Los dos puntos de conexión que debe configurar son:
 
 - Métricas: {{< region-param key=metrics_endpoint_private_link code="true" >}}
-- Configuración remota: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
+- Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
 
-**Nota**: El endpoint `obpipeline-intake.datadoghq.com` se utiliza para Live Capture y no está disponible como endpoint de PrivateLink.
+**Nota**: El punto de conexión `obpipeline-intake.datadoghq.com` se utiliza para Live Capture y no está disponible como punto de conexión de PrivateLink.
+
+## Cómo funciona el destino {#how-the-destination-works}
+
+### Agregación de métricas {#metrics-aggregation}
+
+El destino de Datadog Metrics agrega métricas que tienen el mismo nombre de métrica, valores de etiqueta y marca de tiempo en una sola métrica antes de enviarlas a Datadog. La ingesta de métricas de Datadog acepta solo un valor por combinación única de nombre de métrica, valores de etiqueta y marca de tiempo, por lo que la agregación en el destino preserva los valores que, de lo contrario, la ingesta descartaría.
+
+### Procesamiento por lotes de eventos {#event-batching}
+
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Agrupamiento de eventos de destino][2] para obtener más información.
+
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
+|----------------|-------------------|---------------------|
+| 100,000        | Ninguno              | 2                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://docs.datadoghq.com/es/observability_pipelines/destinations/#event-batching
 [3]: https://docs.datadoghq.com/es/agent/guide/private-link/?tab=crossregionprivatelinkendpoints
 [4]: http://config.datadoghq.com
+[5]: /es/observability_pipelines/configuration/set_up_pipelines/
+[6]: /es/api/latest/observability-pipelines/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -3,30 +3,26 @@ description: 직원의 데스크톱과 노트북을 모니터링하여 조직 �
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-detected-endpoint-issues/
   tag: 블로그
-  text: Datadog을 사용하여 전체 장치에서 엔드포인트 문제 탐지 및 해결
+  text: Datadog을 사용하여 전체 장치에서 엔드포인트 문제 탐지 및 해결하기
 title: End User Device Monitoring
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
-End User Device Monitoring은 미리 보기로 제공되고 있습니다. 등록하려면 <b>Request Access</b>를 클릭하세요.
-{{< /callout >}}
-
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="정상 상태인 장치 4개, 장치 유형 및 운영 체제별 차트, 시스템 충돌이 표시된 노트북 1대가 포함된 장치 표를 보여주는 End User Devices 페이지" style="width:100%;" >}}
 
 End User Device Monitoring은 IT 팀이 직원의 물리적 및 가상 데스크톱과 노트북의 상태와 성능을 파악할 수 있도록 지원합니다. 직원에게 영향을 미치는 성능 및 연결 문제를 파악하고 조직 내 장치, 네트워크 및 애플리케이션의 상태를 통합적으로 확인하여 다음과 같은 질문에 답할 수 있도록 지원합니다.
-- 이 직원의 노트북은 특정 애플리케이션을 열 때마다 왜 느려집니까?
-- 사무실의 과부하가 발생한 Wi-Fi 액세스 포인트로 인해 영향을 받는 직원은 누구입니까?
-- Zoom, Microsoft Teams 또는 Google Meet 통화가 지연되는 원인은 장치, 네트워크, 애플리케이션 중 무엇입니까?
-- SaaS 애플리케이션으로 가는 경로 중 어디에서 지연 시간이 발생합니까?
-- 어떤 장치에서 블루스크린(Blue Screen of Death)으로 인한 충돌이 발생하며 그 빈도는 얼마나 됩니까?
-- 하드웨어 및 라이선스 인벤토리 계획을 위해 전체 장치에 설치된 소프트웨어와 각 소프트웨어의 버전은 무엇입니까?
-- 어떤 장치가 CPU, 메모리 또는 디스크 성능이 저하되어 점검이나 교체가 필요합니까?
-- 보고된 문제가 발생하기 직전에 장치에서 어떤 프로세스가 실행되고 어떤 로그나 이벤트가 발생했습니까?
+- 이 직원의 노트북은 특정 애플리케이션을 열 때마다 왜 느려지나요?
+- 사무실의 과부하가 발생한 Wi-Fi 액세스 포인트로 인해 영향을 받는 직원은 누구인가요?
+- Zoom, Microsoft Teams 또는 Google Meet 통화가 지연되는 원인은 장치, 네트워크, 애플리케이션 중 무엇인가요?
+- SaaS 애플리케이션으로 가는 경로 중 어디에서 지연 시간이 발생하나요?
+- 어떤 장치에서 블루스크린 충돌이 발생하며 그 빈도는 얼마나 되나요?
+- 하드웨어 및 라이선스 인벤토리 계획을 위해 전체 장치에 설치된 소프트웨어와 각 소프트웨어의 버전은 무엇인가요?
+- 어떤 장치가 CPU, 메모리 또는 디스크 성능이 저하되어 점검이나 교체가 필요하나요?
+- 보고된 문제가 발생하기 직전에 장치에서 어떤 프로세스가 실행되고 어떤 로그나 이벤트가 발생했나요?
 
 ## 작동 방식 {#how-it-works}
 
 End User Device Monitoring은 Datadog Agent를 사용하여 직원 데스크톱, 노트북 및 워크스테이션에서 직접 데이터를 수집합니다. Agent는 각 장치에서 시스템 메트릭, 네트워크 정보 및 로그를 수집하여 Datadog으로 전송하며, Datadog에서 해당 데이터를 모니터링하고 시각화할 수 있습니다.
 
-[End User Devices][5] 페이지는 조직의 장치 전반에 걸친 상태와 성능을 요약하는 기본 제공 대시보드 및 메트릭을 제공합니다. CPU, 메모리 및 네트워크 사용량을 포함하여 전체 장치의 요약 메트릭과 개별 장치의 상세 메트릭을 확인할 수 있습니다.
+[End User Devices][5] 페이지는 조직의 장치 전반에 걸친 상태와 성능을 요약하는 내장 대시보드 및 메트릭을 제공합니다. CPU, 메모리 및 네트워크 사용량을 포함하여 전체 장치의 요약 메트릭과 개별 장치의 상세 메트릭을 확인할 수 있습니다.
 
 [Fleet Automation][6]을 사용하여 해당 장치에 설치된 Agent를 관리하고 버전 상태 확인, 구성 일관성 검증, 필요한 통합의 활성화 여부 확인 등의 작업을 수행합니다.
 
@@ -35,17 +31,28 @@ End User Device Monitoring은 Datadog Agent를 사용하여 직원 데스크톱,
 | 기능                        | 설명                                                                                                                                                                                               |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **장치 성능 모니터링** | CPU, 메모리, 디스크 및 네트워크 사용률 등 전반적인 시스템 상태 메트릭을 모니터링하여 성능이 저하된 장치를 식별합니다.                                                                             |
+| **부팅 성능** | 장치가 부팅되어 사용할 준비가 되기까지 걸리는 시간을 측정하고 부팅 속도가 느린 장치를 찾으세요. |
 | **배터리 상태** | 최대 용량, 충전 사이클 수 및 충전 상태 등 배터리 메트릭을 활용하여 하드웨어 수명 주기를 계획합니다.                                                                              |
 | **프로세스 가시성**            | [Live Processes][1]를 사용하여 개별 프로세스의 리소스 사용량을 모니터링하고 장치 성능에 영향을 주는 애플리케이션을 식별합니다.                                                                         |
 | **로그 수집**               | [Logs][7]을 사용하여 최종 사용자 장치와 애플리케이션의 로그를 수집하고 탐색하여 충돌, 오류 및 성능 문제를 해결합니다.                                                             |
+| **이벤트** | 애플리케이션 응답 없음 및 충돌, 설치 실패, 예기치 않은 재부팅 등 장치에서 엄선된 이벤트를 검토하여 발생한 상황을 재구성하세요. |
 | **Wi-Fi 모니터링**              | [WiFi/WLAN 통합][2]을 사용하여 신호 품질, 전송 속도, 액세스 포인트 전환과 같은 Wi-Fi 메트릭을 모니터링하고 연결 문제와 과부하가 발생한 액세스 포인트를 식별합니다. |
-| **Windows 충돌 탐지**       | [Windows Crash Detection 통합][3]을 사용하여 Windows 장치에서 블루스크린(BSOD) 이벤트를 탐지합니다. 이 통합은 시스템 충돌 발생 시점을 보여주는 Datadog 이벤트를 생성합니다.                         |
+| **액세스 지점에 대한 네트워크 연결** | 장치와 해당 장치가 연결된 액세스 지점 간의 네트워크 연결을 확인하세요. |
+| **Windows 충돌 탐지**       | [Windows Crash Detection 통합][3]을 사용하여 Windows 장치에서 BSOD(블루스크린 충돌) 이벤트를 탐지합니다. 이 통합은 시스템 충돌 발생 시점을 보여주는 Datadog 이벤트를 생성합니다.                         |
 | **네트워크 트래픽**         | 대상별 트래픽 양과 지연 시간 및 오류율을 확인합니다.                                                        |
 | **네트워크 경로 추적**         | [Network Path][4]를 사용하여 최종 사용자 장치에서 대상까지 네트워크 트래픽을 추적하고 지연 시간이나 연결 문제가 발생하는 위치를 식별합니다.                                                        |
 | **애플리케이션 인벤토리**         | 장치에서 실행 중인 애플리케이션의 정보를 수집하여 버전 업데이트 여부를 확인합니다.                                          |
 | **ID 매핑**         | 패턴 및 코호트 분석을 위해 장치를 해당 최종 사용자와 연결합니다.                                          | 
 
 ## 주요 워크플로 {#featured-workflows}
+
+### Command Center에서 전체 장치 문제 검토 {#review-fleet-issues-in-command-center}
+
+[Command Center][5]를 열어 심각도별로 정렬된 전체 장치의 활성 엔드포인트 문제를 확인하세요. 각 문제에는 영향을 받는 장치, [Bits Investigation][8]의 근본 원인 요약, 권장되는 다음 단계가 포함되어 있습니다. 각 문제는 [작업 항목][9]이기도 하므로 담당자를 지정하고 우선순위를 설정하며 해결될 때까지 문제를 추적할 수 있습니다. 이 워크플로에 대해서는 [Datadog을 사용하여 전체 장치에서 엔드포인트 문제 탐지 및 해결][10]을 읽어보세요.
+
+### Network Device Monitoring에서 액세스 지점 열기 {#open-an-access-point-in-network-device-monitoring}
+
+장치에서 해당 장치가 연결된 액세스 지점을 [Network Device Monitoring][11]에서 여세요. 해당 장치의 연결 상태를 액세스 지점 상태 및 액세스 지점의 네트워크 연결과 비교하여 연결 문제가 한 장치에만 영향을 미치는지, 아니면 해당 액세스 지점에 연결된 모든 장치에 영향을 미치는지 확인하세요. 최종 사용자 장치는 [장치 토폴로지 맵][12]에서 네트워크 장치 옆에도 표시됩니다.
 
 ### 사용자 장치에서 SaaS 애플리케이션까지의 네트워크 경로 추적 {#trace-network-paths-from-user-devices-to-saas-applications}
 
@@ -66,6 +73,15 @@ Traceroute 시각화에서는 로컬 라우터와 ISP에서 공용 인터넷을 
 [5]: https://app.datadoghq.com/end-user-devices
 [6]: /ko/agent/fleet_automation/
 [7]: /ko/logs/
+[8]: /ko/bits_ai/bits_investigation/
+[9]: /ko/incident_response/work_management/view_and_manage/
+[10]: https://www.datadoghq.com/blog/auto-detected-endpoint-issues/
+[11]: /ko/network_monitoring/devices/
+[12]: /ko/network_monitoring/devices/topology/
+
+## End User Device Monitoring 설정 {#set-up-end-user-device-monitoring}
+
+지원되는 플랫폼 및 장치별 설치 지침은 [End User Device Monitoring 설정](/infrastructure/end_user_device_monitoring/setup/)을 참조하세요.
 
 ## 추가 자료 {#further-reading}
 

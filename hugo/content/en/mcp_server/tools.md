@@ -2286,7 +2286,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits in the pipeline builder. You can also update or delete pipelines with [Pup][104] or the [Observability Pipelines API][88], but these updates go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][105].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3558,6 +3558,14 @@ Retrieves external provider outages, including their status and impacted regions
 - Check for external provider outages affecting the checkout service.
 - Show AWS outages from the last 24 hours, including resolved outages.
 
+### `get_faulty_change_status`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Assess whether a service deployment introduced errors or degradations. Provide the service name, environment, and version. Returns impacted endpoints or operations and analysis completion times.
+
+- Check whether the deployment of checkout-service version v2.3.1 introduced errors in production.
+- The service user-management seems broken on staging since version 0.4.2 was deployed. Should it be reverted?
+
 ### `find_new_jumps`
 *Toolset: **watchdog***\
 *Permissions Required: `APM Read`*\
@@ -3856,6 +3864,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [101]: /gpu_monitoring/
 [102]: /gpu_monitoring/mcp_tools/
 [103]: /mcp_server/setup#required-permissions
+[104]: /cli/
+[105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 
 ## Further reading
 

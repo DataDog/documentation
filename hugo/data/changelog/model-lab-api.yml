@@ -20,3 +20,27 @@ entries:
       - UnpinModelLabRun
       - UnstarModelLabProject
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41982
+    operations:
+      - AddModelLabProjectOwner
+      - RemoveModelLabProjectOwner
+    title: Add Model Lab project owner endpoints
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41982
+    operations:
+      - DeleteModelLabRun
+      - GetModelLabArtifactContent
+      - GetModelLabProject
+      - GetModelLabRun
+      - ListModelLabProjectArtifacts
+      - ListModelLabProjects
+      - ListModelLabRunArtifacts
+      - ListModelLabRunFacetKeys
+      - ListModelLabRunFacetValues
+      - ListModelLabRuns
+      - PinModelLabRun
+      - UnpinModelLabRun
+    title: Add Model Lab project owner endpoints

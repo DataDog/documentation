@@ -24,7 +24,7 @@ Utilice Metric Sync cuando desee:
 - Aplicar los cambios de métricas desde CI una vez que se aprueben.
 - Marcar las métricas sincronizadas como certificadas de forma predeterminada para la toma de decisiones sobre experimentos.
 
-Metric Sync admite un flujo de trabajo de planificar y aplicar. El comando `plan` valida su YAML y previsualiza los cambios que Datadog realizaría. El comando `execute` valida el YAML, envía una operación de escritura y espera a que se complete. Los resultados incluyen conteos de cambios, IDs de objetos, cambios en campos, motivos de bloqueo, advertencias y detalles de errores disponibles. Los planes muestran los cambios propuestos; una operación fallida no confirma que esos cambios se hayan aplicado.
+Metric Sync admite un flujo de trabajo de planificar y aplicar. El comando `plan` valida su YAML y previsualiza los cambios que Datadog realizaría. El comando `execute` valida el YAML, envía una operación de escritura y espera a que se complete. Los resultados incluyen conteos de cambios, IDs de objetos, cambios en campos, motivos de bloqueo, advertencias y detalles de errores disponibles.
 
 ## Requisitos previos {#prerequisites}
 
@@ -33,8 +33,18 @@ Antes de usar Metric Sync, necesita:
 - Una cuenta de Datadog con Product Analytics y Experiments habilitados.
 - Un almacén de datos conectado. Consulte [Conectar un almacén de datos][1].
 - Un tipo de sujeto existente, como `User`, para asignarlo a una columna de la consulta de la fuente.
-- Los permisos de Product Analytics necesarios para crear y actualizar métricas de experimentos. Las métricas sincronizadas están certificadas de forma predeterminada, por lo que los roles personalizados también necesitan el permiso Product Analytics Certified Metrics Write. Consulte [Permisos de Product Analytics][2].
+- Los permisos de escritura de Product Analytics descritos en [Permisos para planes y ejecución][7]. Consulte [Permisos de Product Analytics][2].
 - Una clave de Datadog API y una clave de aplicación de para la autenticación de CI. Consulte [Claves de API y de aplicación][3].
+
+### Permisos para planes y ejecución {#permissions-for-plans-and-execution}
+
+Los comandos `plan`, `execute`, `status` y `result` requieren tanto Product Analytics Warehouse Model Write (`product_analytics_warehouse_model_write`) como Product Analytics Metrics Write (`product_analytics_metrics_write`). Un plan del lado del servidor no cambia las definiciones, pero requiere los mismos permisos de escritura que la ejecución. No existe un contexto de clave de aplicación solo para planes.
+
+Para `plan` y `execute`, `options.is_certified: true` también requiere Product Analytics Certified Metrics Write (`product_analytics_certified_metrics_write`). Esta opción tiene como valor predeterminado `true`. Configurarla en `false` elimina solo este requisito de métricas certificadas.
+
+Para verificar YAML sin credenciales, ejecute `metric-sync validate ./metrics`. La validación se ejecuta localmente y no reemplaza a un `plan` del lado del servidor.
+
+<div class="alert alert-warning">Otorgue la clave de aplicación con capacidad de escritura solo a trabajos de CI de confianza, incluidos los trabajos que ejecutan <code>plan</code>.</div>
 
 ## Instale la CLI {#install-the-cli}
 
@@ -176,7 +186,35 @@ Los comandos realizan lo siguiente:
 - `result`: Obtiene el resultado final del plan o de la ejecución.
 - `version`: Imprime los metadatos de compilación.
 
-Utilice `--timeout 20m` para cambiar el tiempo de espera predeterminado de 10 minutos del comando. Si un comando agota el tiempo de espera después del envío, verifique el ID de operación impreso con `status` antes de volver a enviarlo. Para enviar sin esperar, utilice `--no-poll`, luego verifique `status` y `result`. Un comando `--no-poll` exitoso solo confirma el envío.
+Utilice `--timeout 20m` para cambiar el tiempo de espera predeterminado de 10 minutos del comando. Para enviar sin esperar, utilice `--no-poll`, luego verifique `status` y `result`. Un comando `--no-poll` exitoso solo confirma el envío.
+
+### Operaciones interrumpidas y fallidas {#interrupted-and-failed-operations}
+
+Una operación de ejecución aplica todos sus cambios de fuentes y métricas en conjunto. Si la operación falla en cualquier paso, Datadog no aplica ninguno de sus cambios.
+
+Después de que Datadog acepta el envío, la operación se ejecuta independientemente de la CLI. Detener la CLI, cancelar un trabajo de CI o alcanzar el tiempo de espera del comando no cancela la operación del servidor, y un error de sondeo no significa que la operación haya fallado. Use el ID de operación (`metric_sync_id`) con `status` y `result` para confirmar el resultado. El ID de la operación difiere de los valores `sync_id` estables en YAML.
+
+### Reintentar un envío {#retry-a-submission}
+
+Si un comando se detiene antes de que vea el resultado, siga estos pasos antes de volver a enviar:
+
+1. Ejecute `metric-sync status <METRIC_SYNC_ID>` con el ID de operación impreso.
+2. Si la operación aún se está ejecutando, espere a que termine.
+3. Si la operación tuvo éxito, no necesita volver a intentarlo.
+4. Si la operación falló, corrija la causa y envíe con una nueva clave de idempotencia.
+5. Si no puede confirmar que Datadog recibió el envío, vuelva a enviar las mismas definiciones y opciones con la misma `--idempotency-key`:
+
+   ```shell
+   metric-sync execute ./metrics --idempotency-key <EXECUTION_KEY>
+   ```
+
+Elija la clave antes de enviar y reutilícela para los reintentos de esa solicitud. Para una clave y solicitud coincidentes, Datadog devuelve la operación existente en lugar de crear una nueva. Reutilizar una clave con una solicitud diferente devuelve un conflicto, así que use claves separadas para `plan` y `execute`.
+
+Cuando omite `--idempotency-key`, la CLI genera una clave. Una nueva ejecución de un trabajo de CI o un nuevo comando local puede generar una clave diferente, por lo que Datadog lo trata como un envío nuevo. Para reintentar el mismo envío, establezca la clave explícitamente.
+
+Un reintento de CI que envía los mismos archivos y opciones también puede reutilizar la clave generada y devolver el resultado anterior.
+
+Si la operación del servidor falló, reutilizar su clave devuelve la misma operación fallida. Corrija la causa y use una clave nueva para el siguiente intento.
 
 ## Ejemplo de GitHub Actions {#github-actions-example}
 
@@ -226,12 +264,14 @@ jobs:
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync execute ./metrics
+        run: metric-sync execute ./metrics --idempotency-key "example-checkout-execute-${GITHUB_RUN_ID}"
 ```
 
 Almacene su clave de Datadog API y su clave de aplicación como secretos de GitHub Actions. Si su organización utiliza un sitio de Datadog distinto a `datadoghq.com`, agregue `DD_SITE` al entorno del flujo de trabajo.
 
 Utilice un grupo de concurrencia para cada etiqueta de sincronización para evitar ejecuciones superpuestas de este flujo de trabajo. El trabajo de plan se ejecuta solo para solicitudes de extracción del mismo repositorio. Las solicitudes de extracción de bifurcaciones no reciben estos secretos; ejecute `validate` sin credenciales para esas contribuciones, luego ejecute `plan` en un flujo de trabajo confiable.
+
+La clave de ejecución incluye la etiqueta de sincronización, el comando y el ID de ejecución de GitHub. Permanece igual cuando vuelve a ejecutar trabajos en esa ejecución de flujo de trabajo. Mantenga las definiciones y opciones sin cambios para dichos reintentos. Una nueva ejecución de flujo de trabajo utiliza una clave diferente. Si una operación anterior aún se está ejecutando, verifique su resultado antes de iniciar otra.
 
 ## Referencia de definición {#yaml-reference}
 
@@ -258,6 +298,10 @@ Para administrar una fuente o métrica manual existente con YAML:
 3. Establezca `options.upgrade_mode: by_id` en cada archivo enviado, luego ejecute `plan` y revise los cambios antes de `execute`.
 
 La adopción aplica la definición de YAML y asigna la propiedad de sincronización al objeto existente. Las sincronizaciones posteriores lo identifican mediante el mismo `sync_tag` y `sync_id`. Incluya la configuración y las asignaciones de fuente que desee conservar; los campos omitidos pueden usar valores predeterminados o eliminar asignaciones.
+
+La adopción mantiene los UUID de las fuentes y las métricas existentes, pero aplica cada configuración en el YAML, incluido `options.is_certified` (predeterminado `true`), incluso cuando el cálculo de la métrica no cambia. Establezca esta opción explícitamente. Un valor se aplica a cada fuente y métrica en el envío, por lo que no puede establecer un estado de certificación diferente para cada objeto.
+
+La adopción no vuelve a calcular los resultados de experimentos existentes. Revise todas las configuraciones de definición antes de adoptar objetos utilizados por experimentos en ejecución. Después de la ejecución, verifique los ID de objeto, la configuración y la certificación en Datadog. Después de la adopción, cambiar solo `options.is_certified` no actualiza la certificación; consulte [limitaciones de la CLI][6].
 
 ### Campos de nivel superior {#top-level-fields}
 
@@ -562,6 +606,8 @@ La API de sincronización no admite `warehouse_metric_measure_id`. Reemplace los
 
 ## Limitaciones de la CLI {#cli-limitations}
 
+Metric Sync administra las fuentes de métricas del almacén y las métricas. No administra las fuentes de asignación (exposición) del almacén; adminístrelas en Datadog.
+
 Cambiar solo `options.is_certified` no actualiza la certificación de una fuente o métrica existente que no haya cambiado de otro modo. Verifique la certificación en Datadog después de administrar definiciones existentes con YAML; una sincronización exitosa por sí sola no confirma un cambio de certificación.
 
 La CLI no exporta definiciones existentes ni convierte YAML de Eppo automáticamente. Cree y revise las definiciones completas antes de administrar métricas existentes con YAML.
@@ -572,12 +618,13 @@ Para la adopción, use `existing_id` con `options.upgrade_mode: by_id`. Configur
 
 | Error | Qué verificar |
 | ----- | ------------- |
-| La API devuelve `403`. | Confirme que la clave de API o la clave de aplicación tenga los permisos de Product Analytics necesarios para escribir métricas. Si `is_certified` está habilitado, confirme que el rol también tenga Product Analytics Certified Metrics Write. |
+| La API devuelve `403`, incluso para `plan`, `status` o `result`. | Consulte los [permisos para planes y ejecución][7]. Estos comandos requieren permisos de escritura. `plan` y `execute` con `is_certified: true` también requieren Product Analytics Certified Metrics Write. |
+| El sondeo falla, la CLI agota el tiempo de espera o se cancela un trabajo de CI. | La operación del servidor puede continuar. Verifique `status` y `result` con el ID de operación guardado. Para volver a intentarlo, vuelva a enviar los mismos archivos y opciones con la misma `--idempotency-key`. Consulte [Reintentar un envío](#retry-a-submission). |
 | No se encontró una conexión de almacén. | Confirme que la organización de Datadog de destino tenga una conexión de almacén configurada. Si configura `warehouse_connection_id`, confirme que pertenece a la organización de destino. |
 | No se encontró un tipo de sujeto. | Confirme que el valor `subject_types[].name` coincide con un tipo de sujeto de Datadog existente. |
 | Un resultado exitoso no muestra cambios. | El servicio no detectó cambios que aplicar. Si cambió solo `options.is_certified`, verifique la certificación en Datadog; una sincronización exitosa no confirma que esta configuración haya cambiado. Una operación fallida no establece que el YAML coincida con Datadog. |
 | Una sincronización está bloqueada. | Lea los detalles del objeto y los motivos del bloqueo en la salida de la consola. Para guardar la respuesta de la API, ejecute `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync.log`. Las posibles causas incluyen referencias de experimentos, métricas fuera de la etiqueta de sincronización que hacen referencia a una fuente y conflictos de adopción. Un resultado bloqueado finaliza con un estado distinto de cero. |
-| Una operación falla. | Ejecute `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log` para recuperar los errores disponibles e inspeccionar la respuesta de la API. No se ha confirmado que se hayan aplicado los cambios mostrados para una operación fallida. Algunas fallas del servidor no devuelven detalles del error; conserve el ID de la operación para soporte. |
+| Una operación falla. | Ejecute `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log` para recuperar los errores disponibles e inspeccionar la respuesta de la API. Algunas fallas del servidor no devuelven detalles del error; conserve el ID de la operación para soporte. |
 | La validación local es correcta, pero `plan` rechaza el YAML. | Las verificaciones locales no verifican las consultas del almacén. Lea los detalles del error en la salida de la consola. Para guardar la respuesta de la API, ejecute `metric-sync plan ./metrics --log-file ./metric-sync.log`. Utilice esos detalles para corregir la definición. |
 
 [1]: /es/experiments/guide/connecting_a_data_warehouse/
@@ -585,3 +632,5 @@ Para la adopción, use `existing_id` con `options.upgrade_mode: by_id`. Configur
 [3]: /es/account_management/api-app-keys/
 [4]: #measure-references
 [5]: #filters
+[6]: #cli-limitations
+[7]: #permissions-for-plans-and-execution

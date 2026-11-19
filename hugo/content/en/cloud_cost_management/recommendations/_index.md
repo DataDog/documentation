@@ -18,6 +18,9 @@ further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
     text: "Learn about Cloud Cost Management"
+  - link: "/cloud_cost_management/cloud_cost_skill/#savings-analysis"
+    tag: "Documentation"
+    text: "Find savings opportunities with the Cloud Cost skill in Bits Chat"
   - link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
     tag: "Documentation"
     text: "AWS Integration and CloudWatch FAQ"
@@ -323,13 +326,13 @@ multifiltersearch:
       resource_type: S3 Bucket
       recommendation_type: Clean up old versions to reduce storage costs
       recommendation_description: A bucket with versioning enabled has significant storage costs from old object versions.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
       recommendation_type: Delete S3 Bucket
       recommendation_description: An S3 bucket with minimal storage costs and no meaningful object API usage (Get, Put, Copy, Head, or multipart upload activity).
-      recommendation_prerequisites: '[Cloud Cost Management](https://www.datadoghq.com/product/cloud-cost-management) or [Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
@@ -365,13 +368,13 @@ multifiltersearch:
       resource_type: S3 Bucket
       recommendation_type: Transition S3 objects to Infrequent Access by Prefix
       recommendation_description: A bucket prefix's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects in the prefix are accessed.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
       resource_type: S3 Bucket
       recommendation_type: Transition old Standard-class data
       recommendation_description: A bucket prefix has old Standard-class data with no lifecycle transition rule to move it to cheaper storage.
-      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: SageMaker Endpoint
@@ -414,11 +417,23 @@ multifiltersearch:
       recommendation_type: Delete AKS Cluster
       recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: AKS Cluster
+      recommendation_type: Downsize AKS Node Pool
+      recommendation_description: Identifies AKS node pools with GPUs where pods requested only part of the GPU capacity, even on their busiest day, and recommends running fewer nodes.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
       recommendation_type: Delete Empty Azure App Service Plan
       recommendation_description: Identifies dedicated Azure App Service Plans that have hosted no apps for at least two weeks, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: App Service Plan
+      recommendation_type: Delete Idle Azure Functions Premium Plan
+      recommendation_description: Identifies Azure Functions Premium plans with no function executions or HTTP requests, and recommends deleting the plan and its function apps.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -600,6 +615,12 @@ multifiltersearch:
       recommendation_type: Downsize Azure SQL Elastic Pool
       recommendation_description: Identifies Azure SQL elastic pools whose peak utilization would stay low on a smaller size, and recommends downsizing them, at most two sizes at a time, to cut on-demand eDTU or vCore charges.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Delete Idle SQL Managed Instance
+      recommendation_description: Identifies running SQL Managed Instances with near-zero CPU and low I/O over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Managed Instance
@@ -609,8 +630,20 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: Storage Account
+      recommendation_type: Delete Previous Blob Versions
+      recommendation_description: Identifies storage accounts whose previous blob versions hold a large share of their storage, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Storage Account
       recommendation_type: Delete Storage Account
       recommendation_description: Storage Account with no transactions and negligible used capacity over the last 14 days.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Storage Account
+      recommendation_type: Transition old Hot-tier data to Cool
+      recommendation_description: Identifies storage account prefixes with Hot-tier block blob data that hasn't been modified in at least 90 days, and recommends moving that data to the Cool tier.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -707,6 +740,12 @@ multifiltersearch:
       resource_type: BigQuery Dataset
       recommendation_type: Delete Idle BigQuery Dataset
       recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: GCP
+      resource_type: BigQuery Project
+      recommendation_type: Migrate BigQuery Project to Capacity Pricing
+      recommendation_description: Identifies Google Cloud projects whose on-demand BigQuery queries scan many bytes for the slot time they use and recommends running them on Enterprise edition capacity with autoscaling and no commitment.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
@@ -872,6 +911,8 @@ Recommendations support [Tag Pipelines][11], allowing you to filter, group, and 
 
 You can also query your recommendations from an AI agent with the [`cost_recommendations`][17] tool in the Datadog MCP Server.
 
+To find savings beyond these rule-based recommendations, run a [savings analysis][20] in Bits Chat. Click {{< ui >}}Optimize{{< /ui >}} in the filter bar to analyze the scope that your filters describe. Bits Chat investigates the scope's cost and usage data. It then writes savings opportunities, each with an owner, an estimated savings range, and supporting evidence. You can also start a savings analysis from the {{< ui >}}Ask Bits for new savings opportunities{{< /ui >}} banner.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -973,6 +1014,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 
 - **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
 - **Copy Fix Prompt**: For recommendations where a prompt fix is available, click {{< ui >}}Copy Fix Prompt{{< /ui >}} in the recommendation side panel. This copies a ready-to-use prompt to your clipboard, describing the recommendation, the affected resource, and the suggested change. Paste the prompt into the AI coding agent you already use, such as Cursor, GitHub Copilot, or Claude Code. The agent can then implement the change in your repository. This differs from [Bits Code][14], which automatically opens a pull request for a narrower set of recommendation types. No additional setup is required.
+- **[Savings analysis in Bits Chat][20]**: Click {{< ui >}}Optimize{{< /ui >}} in the filter bar to have Bits Chat find savings opportunities in the filtered scope. Bits Chat can create Work Management work items or Notebooks so that each owning team can act on them.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
 - **[Cost Optimization Automations][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **[Notifications][16]**: Set up notification rules that send a recurring Slack or Microsoft Teams summary of matching recommendations, without taking any action.
@@ -1006,3 +1048,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [17]: /mcp_server/tools/#cost_recommendations
 [18]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
 [19]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+[20]: /cloud_cost_management/cloud_cost_skill/#savings-analysis

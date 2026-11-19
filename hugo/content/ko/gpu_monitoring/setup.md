@@ -26,7 +26,7 @@ Datadog의 GPU Monitoring을 사용하려면 환경이 다음 조건을 충족�
 #### 최소 버전 요구 사항 {#minimum-version-requirements}
 
 - **Datadog Agent**: v7.80
-  - (권장 버전: [최신 Agent 버전][2]) Datadog은 예기치 않은 커널 패닉을 유발하는 버그가 있으므로 v7.82.0을 사용하지 않을 것을 권장합니다. 
+  - (권장 버전: [최신 Agent 버전][2]) Datadog은 예기치 않은 커널 패닉을 유발하는 버그가 있으므로 v7.82.0을 사용하지 않을 것을 권장합니다.
 - **운영 체제**: Linux
 - **Linux 커널**: 5.8 이상
 - **NVIDIA 드라이버**: 버전 450.51
@@ -36,7 +36,10 @@ Kubernetes를 사용하는 경우, 다음 추가 요구 사항을 충족해야 �
 - [**Datadog Operator**][5]: 버전 1.18, _또는_ [**Datadog Helm chart**][6]: 버전 3.137.3
 - **Kubernetes**: PodResources API가 활성화된 버전 1.22
 
-Google Kubernetes Engine을 사용하는 경우, 커널 및 권한 시스템의 제한으로 인해 Container-Optimized OS 노드는 지원되지 _않습니다_.
+GKE(Google Kubernetes Engine)에서 COS(Container-Optimized OS) 노드를 사용하는 경우 다음 추가 요구 사항을 충족해야 합니다.
+
+- [**Datadog Operator**][5]: 버전 1.29, _또는_ [**Datadog Helm 차트**][6]: 버전 3.231.4
+- 이 페이지의 GKE 예시에 표시된 대로 GKE COS [공급자][14]가 설정되어 있습니다. 이 설정은 GKE가 COS 노드에 설치하는 NVIDIA 드라이버 라이브러리를 Agent 컨테이너에 마운트합니다.
 
 ## GPU Monitoring 설정 {#setting-up-gpu-monitoring}
 
@@ -60,11 +63,19 @@ GPU Monitoring 메트릭 수집을 활성화한 후, 더욱 심층적인 인사�
    `gpu.enabled: true`
    : GPU Monitoring을 활성화합니다.
 
+   `gpu.privilegedMode: true`
+   : _GKE에 필수_입니다. `system-probe`에서 GPU Monitoring 모듈을 활성화합니다. `gpu.patchCgroupPermissions`에 필수입니다.
+
    `gpu.patchCgroupPermissions: true`
    : _GKE에서만 사용합니다_. Agent가 GPU 장치에 액세스할 수 있도록 지원하는 `system-probe`의 코드 경로를 활성화합니다.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS 및 Oracle Cloud에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS, Oracle Cloud 및 GKE에서 관리하는 GPU 드라이버를 사용하는 GKE에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+
+   GKE 노드가 Container-Optimized OS를 사용하는 경우에도 `DatadogAgent` 메타데이터에 다음 [공급자][3] 주석도 추가하세요.
+
+   `agent.datadoghq.com/cluster-provider: gke-cos`
+   : COS 호스트의 NVIDIA 드라이버 라이브러리를 Agent 컨테이너에 마운트합니다.
 
    GKE에서 실행되는 예시 `datadog-agent.yaml`:
 
@@ -73,18 +84,22 @@ GPU Monitoring 메트릭 수집을 활성화한 후, 더욱 심층적인 인사�
    kind: DatadogAgent
    metadata:
      name: datadog
+     annotations:
+       agent.datadoghq.com/cluster-provider: gke-cos # Only for GKE with Container-Optimized OS nodes
    spec:
      features:
        gpu:
          enabled: true
+         privilegedMode: true # Required for GKE
          patchCgroupPermissions: true # Only for GKE
-         requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
+         requiredRuntimeClassName: "" # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
    ```
 
 3. 변경 사항을 적용하고 Datadog Agent를 다시 시작합니다.
 
 [1]: /ko/containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases
+[3]: /ko/containers/datadog_operator/providers/#on-a-datadogagent
 
 {{% /tab %}}
 
@@ -96,11 +111,17 @@ GPU Monitoring 메트릭 수집을 활성화한 후, 더욱 심층적인 인사�
    `gpuMonitoring.enabled: true`
    : GPU Monitoring을 활성화합니다.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _GKE에 필수_입니다. `system-probe`에서 GPU Monitoring 모듈을 활성화합니다. `gpuMonitoring.configureCgroupPerms`에 필수입니다.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _GKE에서만 사용합니다_. Agent가 GPU 장치에 액세스할 수 있도록 지원하는 `system-probe`의 코드 경로를 활성화합니다.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS 및 Oracle Cloud에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS, Oracle Cloud 및 GKE에서 관리하는 GPU 드라이버를 사용하는 GKE에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+
+   `providers.gke.cos: true`
+   : _Container-Optimized OS 노드를 사용하는 GKE에만 해당_합니다. COS 호스트의 NVIDIA 드라이버 라이브러리를 Agent 컨테이너에 마운트합니다.
 
    GKE에서 실행되는 예시 `datadog-values.yaml`:
 
@@ -108,8 +129,13 @@ GPU Monitoring 메트릭 수집을 활성화한 후, 더욱 심층적인 인사�
    datadog:
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
    ```
 
 3. Helm 차트를 업그레이드하고 Datadog Agent를 다시 시작합니다.
@@ -231,15 +257,17 @@ GPU Monitoring을 사용하려면 `datadog.yaml` 및 `system-probe.yaml` **두 �
    datadogAgentInternal:
      enabled: true
 
-    datadogCRDs:
-      crds:
-        datadogAgentProfiles: true
-        datadogAgentInternal: true
+   datadogCRDs:
+     crds:
+       datadogAgentProfiles: true
+       datadogAgentInternal: true
    ```
 
    그런 다음 `helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml`을 사용하여 Datadog Operator를 다시 배포합니다.
 
 2. `DatadogAgent` 리소스에 `agent.datadoghq.com/update-metadata` 주석을 추가하여 `DatadogAgent` 리소스를 수정합니다.
+
+   클러스터의 모든 노드가 GKE Container-Optimized OS를 사용하는 경우에도 `agent.datadoghq.com/cluster-provider: gke-cos` [공급자][5] 주석을 추가하세요. 일부 노드만 Container-Optimized OS를 사용하는 경우, 대신 [해당 노드를 대상으로 하는 Datadog Agent Profile][6]에 주석을 설정하세요.
 
    `datadog-agent.yaml` 파일에 추가할 내용은 다음과 같습니다.
 
@@ -250,6 +278,7 @@ GPU Monitoring을 사용하려면 `datadog.yaml` 및 `system-probe.yaml` **두 �
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
+       agent.datadoghq.com/cluster-provider: gke-cos # Only when every node in the cluster uses Container-Optimized OS
    ```
 
 3. `DatadogAgent` 리소스에 변경 사항을 적용합니다. 이러한 변경 사항은 GPU 노드에서 실행되는지 여부와 관계없이 모든 Datadog Agent에 안전하게 적용할 수 있습니다.
@@ -274,6 +303,7 @@ GPU Monitoring을 사용하려면 `datadog.yaml` 및 `system-probe.yaml` **두 �
        features:
          gpu:
            enabled: true
+           privilegedMode: true # Required for GKE
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -283,6 +313,8 @@ GPU Monitoring을 사용하려면 `datadog.yaml` 및 `system-probe.yaml` **두 �
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
 [4]: https://github.com/DataDog/datadog-agent/releases
+[5]: /ko/containers/datadog_operator/providers/#on-a-datadogagent
+[6]: /ko/containers/datadog_operator/providers/#on-a-datadogagentprofile
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 또는 1.19)" %}}
@@ -411,11 +443,17 @@ Helm을 사용하여 혼합 클러스터에서 GPU Monitoring을 설정하려면
    `gpuMonitoring.enabled: true`
    : GPU Monitoring을 활성화합니다.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _GKE에 필수_입니다. `system-probe`에서 GPU Monitoring 모듈을 활성화합니다. `gpuMonitoring.configureCgroupPerms`에 필수입니다.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _GKE에서만 사용합니다_. Agent가 GPU 장치에 액세스할 수 있도록 지원하는 `system-probe`의 코드 경로를 활성화합니다.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS 및 Oracle Cloud에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+   : _선택 사항_. GPU 장치에 액세스해야 하는 포드의 컨테이너 런타임을 지정합니다(예: `nvidia`, `nvidia-cdi`, `nvidia-legacy`). 기본값은 `nvidia`이며, 이는 NVIDIA GPU Operator에서 정의한 기본 런타임입니다. EKS, Oracle Cloud 및 GKE에서 관리하는 GPU 드라이버를 사용하는 GKE에서는 기본 런타임 클래스가 이미 GPU 장치에 대한 액세스를 허용하므로 이 값을 빈 문자열로 설정해야 합니다.
+
+   `providers.gke.cos: true`
+   : _Container-Optimized OS 노드를 사용하는 GKE에만 해당_합니다. COS 호스트의 NVIDIA 드라이버 라이브러리를 Agent 컨테이너에 마운트합니다.
 
    예시 `datadog-gpu-values.yaml`:
 
@@ -425,8 +463,13 @@ Helm을 사용하여 혼합 클러스터에서 GPU Monitoring을 설정하려면
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
 
    agents:
      affinity:
@@ -484,3 +527,4 @@ Helm을 사용하여 혼합 클러스터에서 GPU Monitoring을 설정하려면
 [11]: /ko/getting_started/integrations/azure/?tab=createanappregistration
 [12]: /ko/getting_started/integrations/oci/
 [13]: /ko/infrastructure/process?tab=linuxwindows#installation
+[14]: /ko/containers/datadog_operator/providers/

@@ -26,7 +26,7 @@ Les administrateurs ou les utilisateurs disposant de l'autorisation Usage Read p
 
 Cette fonctionnalité ne prend pas en charge l'utilisation de produits qui ne peuvent pas être tagués lors de l'instrumentation. Par exemple, Incident Management Users, Parallel Testing Slots et Audit Trail.
 
-**Remarque** : pour ventiler la facturation de CI Pipeline et de Test Optimization par équipe ou par d'autres tags organisationnels, consultez [Billing enrichment][5] dans la documentation de facturation de CI Visibility.
+**Remarque** : pour ventiler la facturation de CI Pipeline et de Test Optimization par équipe ou par d'autres tags organisationnels, consultez [Billing enrichment][5] dans la documentation de facturation de CI/CD Optimization.
 
 ## Mise en route {#getting-started}
 
