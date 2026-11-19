@@ -61,7 +61,7 @@ terraform {
 }
 
 provider "datadog" {
-  api_url = "{{< region-param key="dd_api" code="true" >}}/"
+  api_url = "{{< region-param key="dd_api" >}}/"
 }
 ```
 
