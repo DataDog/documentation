@@ -46,6 +46,8 @@ async function listSections(): Promise<PlaintextSection[]> {
     .filter(Boolean)
     .sort()
     .map((topFolder) => ({
+      // TODO: use the folder's title from the nav YAML once it exists. Until
+      // then, a section is titled with its folder name, such as "dd_e2e".
       title: topFolder,
       llmsTxtPath: `/${topFolder}/llms.txt`,
       pages: pagesByTopFolder.get(topFolder)!,

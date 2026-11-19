@@ -163,6 +163,8 @@ function addFolderFiles(
     const llmsTxtPath = `${folderPath}${subfolder}/llms.txt`;
     addFolderFiles(
       {
+        // TODO: use the subfolder's title from the nav YAML once it exists.
+        // Until then, a subfolder's file is titled with its folder name.
         title: subfolder,
         llmsTxtPath,
         pages: pagesBySubfolder.get(subfolder)!,
