@@ -100,7 +100,7 @@ In source/destination pair mode, the map shows the source's composition stack on
 
 ### Map status and network signals
 
-Each resource and connection on the map has a status of **Healthy**, **Degraded**, **Critical**, or **Unknown**. Status is based on network traffic signals from CNM and Network Path data for the selected time frame. **Unknown** means that the map cannot determine a status, for example because neither product has data for the resource or connection.
+Each resource and connection on the map has a status of **Healthy**, **Degraded**, **Critical**, or **Unknown**. Status is based on network traffic signals from CNM and Network Path data for the selected time frame. **Unknown** means that the map cannot determine a status, for example because neither product has data for the resource or connection. In hover summaries, a Healthy status appears as **OK**.
 
 The outline color of a resource and the color of a connection line show their status:
 
@@ -213,11 +213,10 @@ The details pane, to the right of the map, shows information about the explored 
 
 In single resource mode, the details pane shows the following for the explored or filtered resource:
 
-- The resource's status, such as **Critical** or **Degraded**.
+- The resource's status, such as **HEALTHY** or **CRITICAL**.
 - **View details**, which opens the resource's side panel over the map, with more data about the resource, such as its logs and traces.
 - A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a container. Use the dropdown next to the link to open the resource in another product.
-- Infrastructure context, such as the availability zone, VPC, data center, and security groups.
-- The available metrics for the resource, and a graph of network metrics over the selected time frame.
+- Infrastructure context, such as the environment, availability zone, VPC, data center, and security groups.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/filtered-resource-side-pane.png" alt="The details pane for a filtered container, showing its status, links to view details and open it in Kubernetes, infrastructure context, metrics, and an RTT graph" >}}
@@ -226,10 +225,9 @@ In single resource mode, the details pane shows the following for the explored o
 
 In source/destination pair mode, the details pane shows the following for the connection between the source and the destination:
 
-- The status of the source and the destination, such as **Healthy** or **Critical**.
+- The status of the source and the destination, such as **HEALTHY** or **CRITICAL**.
 - **View connections**, which opens the connections in CNM. Use the dropdown next to the link to open the connections in another product.
 - The network signals for the connection. For definitions, see the [Map status and network signals](#map-status-and-network-signals) section.
-- A graph of network metrics over the selected time frame.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in source/destination pair mode, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
