@@ -46,6 +46,9 @@ Supported Agent versions
 : 7.67.0+
 
 ## Setup
+
+<div class="alert alert-info">If you created the <code>datadog_query_completions</code> session with an earlier version of this guide, drop it and create it again with the definition below. Its new filters keep stored procedures called through RPC, which the earlier <code>sql_text</code> filter dropped.</div>
+
 {{< tabs >}}
 {{% tab "Non-Azure SQL Server" %}}
 
