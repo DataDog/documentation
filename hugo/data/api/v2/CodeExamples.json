@@ -902,6 +902,13 @@
       "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
     }
   ],
+  "CreateBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create bandit returns \"Created\" response"
+    }
+  ],
   "CreateExperimentMetricGroup": [
     {
       "group": "experiments",
@@ -963,6 +970,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
+  "PatchBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update bandit returns \"OK\" response"
     }
   ],
   "UpdateExperimentAnalysisPlanAttributes": [
