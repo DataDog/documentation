@@ -51,6 +51,7 @@ export const GenerateCurlOptionsSchema = z
   .object({
     method: z.string(),
     path: z.string(),
+    apiVersionDate: z.string().optional(),
     commentLines: z
       .array(z.string())
       .optional()

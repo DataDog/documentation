@@ -66,6 +66,15 @@ function text(element: Element | null): string {
 }
 
 describe("ApiChangelogEntry", () => {
+  it("shows the API version on a dated entry", async () => {
+    const doc = await render(ApiChangelogEntry, {
+      entry: makeEntry({ apiVersion: "2027-04-15" }),
+    });
+    expect(text(doc.querySelector(".api-changelog-entry__version"))).toBe(
+      "API version: 2027-04-15",
+    );
+  });
+
   it.each([
     ["added", "Added"],
     ["modified", "Modified"],

@@ -619,6 +619,26 @@ components:
         - layout_type
         - widgets
       type: object
+    DashboardVersioned:
+      x-datadog-api-versioned: true
+      oneOf:
+        - $ref: "#/components/schemas/DashboardVersioned_V1"
+        - $ref: "#/components/schemas/DashboardVersioned_20270415"
+    DashboardVersioned_V1:
+      type: object
+      properties:
+        title:
+          description: Dashboard title.
+          type: string
+    DashboardVersioned_20270415:
+      type: object
+      properties:
+        title:
+          description: Dashboard title.
+          type: string
+        owner:
+          description: Dashboard owner.
+          type: string
     DashboardBulkActionData:
       description: Dashboard bulk action request data.
       example:
@@ -12147,7 +12167,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Dashboard"
+                $ref: "#/components/schemas/DashboardVersioned"
           description: OK
         "400":
           content:

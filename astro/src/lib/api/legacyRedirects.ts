@@ -26,6 +26,7 @@ export interface LegacyRedirect {
 export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   // The bare `/api/` root isn't here: it's a real page
   // (`src/pages/[...lang]/api/index.astro`) so view transitions survive.
+  { from: "/api/versions/", to: "/api/latest/versions/" },
   { from: "/api/screenboards/", to: "/api/latest/dashboards/" },
   { from: "/api/latest/downtimes/s", to: "/api/latest/downtimes/" },
   {

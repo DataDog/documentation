@@ -102,6 +102,10 @@ function getFieldType(field: SchemaField): string {
 
 function getFieldDescription(field: SchemaField): string {
   const parts: string[] = [];
+  if (field.versionChange) {
+    const action = field.versionChange.type === "added" ? "Added" : "Removed";
+    parts.push(`**${action} in ${field.versionChange.version}.**`);
+  }
   // Hugo and both HTML pages lead with the label.
   if (field.deprecated) {
     parts.push("**DEPRECATED**:");

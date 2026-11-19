@@ -71,6 +71,13 @@ import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
 import type { SplitParams } from "./schemas/params";
 import type { SchemaField } from "./schemas/schemaField";
+import {
+  API_BASE_VERSION,
+  diffVersionedSchemaFields,
+  getOperationDateVersions,
+  projectOperationForDateVersion,
+  versionSdkCodeExamples,
+} from "./apiVersioning";
 import type {
   ApiOperationStub,
   ApiOperationView,
@@ -78,6 +85,7 @@ import type {
   ApiCategoryStub,
   EndpointData,
   RequestBodyData,
+  EndpointVersionContent,
 } from "./schemas/views";
 
 const HTTP_METHODS = [
@@ -576,23 +584,54 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     op.version,
     op.categorySlug,
   );
-  const requestBody = buildLocalizedRequestBodyForOperation(
+  const apiVersions = getOperationDateVersions(spec, op.operation);
+  const baseOperation = apiVersions.includes(API_BASE_VERSION)
+    ? projectOperationForDateVersion(spec, op.operation, API_BASE_VERSION)
+    : op.operation;
+  const baseOp: RawOperation = {
+    ...op,
+    operation: baseOperation as ApiOperationObject,
+  };
+  const baseContent = buildEndpointVersionContent(
     spec,
-    op,
+    baseOp,
+    params.split,
     action,
     requestFileExamples,
-  );
-  const responses = extractResponses(spec, op.operation);
-
-  const codeExamples = buildCodeExamplesForOperation(
-    spec,
-    op,
-    params.split,
-    extractCurlExamples(spec, op.operation, requestFileExamples),
     summary,
-    // Matches Hugo: only English SDK captions are relabeled.
     lang === DEFAULT_LOCALE ? displaySummary : undefined,
   );
+
+  let previousContent = baseContent;
+  const dateVersions = apiVersions
+    .filter((apiVersion) => apiVersion !== API_BASE_VERSION)
+    .map((apiVersion) => {
+      const versionedOp = {
+        ...op,
+        operation: projectOperationForDateVersion(
+          spec,
+          op.operation,
+          apiVersion,
+        ) as ApiOperationObject,
+      };
+      const currentContent = buildEndpointVersionContent(
+        spec,
+        versionedOp,
+        params.split,
+        action,
+        requestFileExamples,
+        summary,
+        lang === DEFAULT_LOCALE ? displaySummary : undefined,
+        apiVersion,
+      );
+      const withDiff = withSchemaVersionDiff(
+        currentContent,
+        previousContent,
+        apiVersion,
+      );
+      previousContent = currentContent;
+      return { apiVersion, ...withDiff };
+    });
 
   return {
     operationId,
@@ -614,10 +653,76 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     pathParams: params.pathFields,
     queryParams: params.queryFields,
     headerParams: params.headerFields,
-    requestBody,
-    responses,
-    codeExamples,
+    ...baseContent,
+    ...(dateVersions.length > 0 && { dateVersions }),
   };
+}
+
+type EndpointContent = Pick<
+  EndpointData,
+  "requestBody" | "responses" | "codeExamples"
+>;
+
+function buildEndpointVersionContent(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  params: SplitParams,
+  action: ActionTranslation,
+  requestFileExamples: RequestFileExamples,
+  summary: string,
+  sdkCaptionLabel: string | undefined,
+  apiVersionDate?: string,
+): EndpointContent {
+  return {
+    requestBody: buildLocalizedRequestBodyForOperation(
+      spec,
+      op,
+      action,
+      requestFileExamples,
+    ),
+    responses: extractResponses(spec, op.operation),
+    codeExamples: buildCodeExamplesForOperation(
+      spec,
+      op,
+      params,
+      extractCurlExamples(spec, op.operation, requestFileExamples),
+      summary,
+      sdkCaptionLabel,
+      apiVersionDate,
+    ),
+  };
+}
+
+function withSchemaVersionDiff(
+  current: EndpointContent,
+  previous: EndpointContent,
+  apiVersion: string,
+): Omit<EndpointVersionContent, "apiVersion"> {
+  const requestBody = current.requestBody
+    ? {
+        ...current.requestBody,
+        schema: diffVersionedSchemaFields(
+          current.requestBody.schema,
+          previous.requestBody?.schema ?? [],
+          apiVersion,
+        ),
+      }
+    : undefined;
+  const previousResponses = new Map(
+    previous.responses.map((response) => [response.statusCode, response]),
+  );
+  const responses = current.responses.map((response) => {
+    if (!response.schema) return response;
+    return {
+      ...response,
+      schema: diffVersionedSchemaFields(
+        response.schema,
+        previousResponses.get(response.statusCode)?.schema ?? [],
+        apiVersion,
+      ),
+    };
+  });
+  return { requestBody, responses, codeExamples: current.codeExamples };
 }
 
 /**
@@ -716,6 +821,7 @@ function buildCodeExamplesForOperation(
   curlExamples: CurlExample[],
   summary: string,
   sdkCaptionLabel: string | undefined,
+  apiVersionDate?: string,
 ): CodeExampleSet[] {
   const sdkExamples = getCodeExamplesForOperation(
     op.operation.operationId,
@@ -728,16 +834,19 @@ function buildCodeExamplesForOperation(
     .map((set) => withSummaryFallbackCaptions(set, summary))
     .map((set) => withRunInstructions(spec, op.operation, set));
 
-  return [
+  const examples = [
     {
       language: "curl",
       label: "Curl",
       entries: curlExamples.map((curlExample) =>
-        buildCurlEntry(spec, op, params, curlExample, summary),
+        buildCurlEntry(spec, op, params, curlExample, summary, apiVersionDate),
       ),
     },
     ...sdkExamples,
   ];
+  return apiVersionDate
+    ? versionSdkCodeExamples(examples, apiVersionDate, op.version)
+    : examples;
 }
 
 /**
@@ -750,13 +859,30 @@ function buildCurlEntry(
   params: SplitParams,
   curlExample: CurlExample,
   summary: string,
+  apiVersionDate?: string,
 ): CodeExampleEntry {
   const curlsByRegion = curlExample.bodies.map((body) =>
-    buildCurlByRegion(spec, op.method, op.pathStr, op.operation, params, body),
+    buildCurlByRegion(
+      spec,
+      op.method,
+      op.pathStr,
+      op.operation,
+      params,
+      body,
+      apiVersionDate,
+    ),
   );
   // The HTML renders `regionVariants`, so `code` only reaches the .md.
   const plaintextCurls = curlExample.bodies.map((body) =>
-    buildPlaintextCurl(spec, op.method, op.pathStr, op.operation, params, body),
+    buildPlaintextCurl(
+      spec,
+      op.method,
+      op.pathStr,
+      op.operation,
+      params,
+      body,
+      apiVersionDate,
+    ),
   );
 
   const regionVariants: Record<string, { code: string }> = {};

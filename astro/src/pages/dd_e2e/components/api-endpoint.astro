@@ -86,6 +86,42 @@ const completeEndpointJson = JSON.stringify({
       ],
     },
   ],
+  dateVersions: [
+    {
+      apiVersion: "2027-04-15",
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          schema: [
+            {
+              name: "owner",
+              type: "string",
+              required: false,
+              deprecated: false,
+              readOnly: false,
+              description: "Dashboard owner.",
+              versionChange: { type: "added", version: "2027-04-15" },
+            },
+          ],
+          examples: [{ name: "Example", value: "{ }" }],
+        },
+      ],
+      codeExamples: [
+        {
+          language: "curl",
+          label: "Curl",
+          entries: [
+            {
+              description: "Get a dashboard",
+              code: 'curl -H "DD-API-Version: 2027-04-15"',
+              syntax: "bash",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 });
 
 const deprecatedEndpointJson = JSON.stringify({

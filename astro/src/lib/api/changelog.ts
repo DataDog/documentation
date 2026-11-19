@@ -49,6 +49,7 @@ export const CHANGELOG_BUCKET_LABELS: Record<ChangelogBucket, string> = {
 export interface ChangelogEntry {
   productSlug: string;
   date: string;
+  apiVersion?: string;
   bucket: ChangelogBucket;
   title: string;
   operationIds: string[];
@@ -60,6 +61,7 @@ export interface ResolvedChangelogEntry extends ChangelogEntry {
 }
 
 export interface ChangelogPage<Entry extends ChangelogEntry = ChangelogEntry> {
+  apiVersion?: string;
   filter: ChangelogFilter;
   pageNumber: number;
   totalPages: number;
@@ -184,8 +186,28 @@ export function buildChangelogPages<Entry extends ChangelogEntry>(
   entries: Entry[],
   pageSize = CHANGELOG_PAGE_SIZE,
 ): ChangelogPage<Entry>[] {
-  return CHANGELOG_FILTERS.flatMap((filter) =>
-    paginate(filterEntries(entries, filter), filter, pageSize),
+  const versions = [undefined, ...getChangelogApiVersions(entries)];
+  return versions.flatMap((apiVersion) => {
+    const versionEntries = apiVersion
+      ? entries.filter((entry) => entry.apiVersion === apiVersion)
+      : entries;
+    return CHANGELOG_FILTERS.flatMap((filter) =>
+      paginate(
+        filterEntries(versionEntries, filter),
+        filter,
+        pageSize,
+        apiVersion,
+      ),
+    );
+  });
+}
+
+/** Distinct API version dates in newest-first order. */
+export function getChangelogApiVersions<Entry extends ChangelogEntry>(
+  entries: Entry[],
+): string[] {
+  return [...new Set(entries.flatMap((entry) => entry.apiVersion ?? []))].sort(
+    (a, b) => b.localeCompare(a),
   );
 }
 
@@ -194,8 +216,9 @@ export function changelogHref(
   lang: Locale,
   filter: ChangelogFilter,
   pageNumber: number,
+  apiVersion?: string,
 ): string {
-  const pathParam = toPathParam(filter, pageNumber);
+  const pathParam = toPathParam(filter, pageNumber, apiVersion);
   const path = pathParam
     ? `${CHANGELOG_ROOT_PATH}${pathParam}/`
     : CHANGELOG_ROOT_PATH;
@@ -214,11 +237,15 @@ export function changelogMarkdownHref(lang: Locale): string {
 export function changelogPageTitle(
   filter: ChangelogFilter,
   pageNumber: number,
+  apiVersion?: string,
 ): string {
   // MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
   const pageQualifier = pageNumber > 1 ? `, page ${pageNumber}` : "";
-  if (filter === "all") return `API Changelog${pageQualifier}`;
-  return `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
+  const title =
+    filter === "all"
+      ? `API Changelog${pageQualifier}`
+      : `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
+  return apiVersion ? `${title} - API version ${apiVersion}` : title;
 }
 
 /** Groups consecutive same-date entries, keeping their order. */
@@ -281,6 +308,7 @@ function parseChangelogFile(
     bucket: toChangelogBucket(rawEntry.change_type),
     title: rawEntry.title || DEFAULT_TITLE,
     operationIds: rawEntry.operations ?? [],
+    ...(rawEntry.api_version && { apiVersion: rawEntry.api_version }),
   }));
 }
 
@@ -386,6 +414,7 @@ function paginate<Entry extends ChangelogEntry>(
   entries: Entry[],
   filter: ChangelogFilter,
   pageSize: number,
+  apiVersion?: string,
 ): ChangelogPage<Entry>[] {
   const totalPages = Math.max(1, Math.ceil(entries.length / pageSize));
   return Array.from({ length: totalPages }, (_, index) => {
@@ -395,7 +424,8 @@ function paginate<Entry extends ChangelogEntry>(
       pageNumber,
       totalPages,
       entries: entries.slice(index * pageSize, pageNumber * pageSize),
-      pathParam: toPathParam(filter, pageNumber),
+      pathParam: toPathParam(filter, pageNumber, apiVersion),
+      ...(apiVersion && { apiVersion }),
     };
   });
 }
@@ -403,8 +433,10 @@ function paginate<Entry extends ChangelogEntry>(
 function toPathParam(
   filter: ChangelogFilter,
   pageNumber: number,
+  apiVersion?: string,
 ): string | undefined {
   const segments = [
+    ...(apiVersion ? ["version", apiVersion] : []),
     filter === "all" ? undefined : filter,
     pageNumber === 1 ? undefined : String(pageNumber),
   ].filter((segment) => segment !== undefined);

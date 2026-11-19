@@ -79,6 +79,7 @@ const optionFields: SchemaField[] =
     cl("schema-table__row"),
     field.readOnly && cl("schema-table__row--readonly"),
     field.deprecated && cl("schema-table__row--deprecated"),
+    field.versionChange && cl(`schema-table__row--${field.versionChange.type}`),
   ]}
   data-field-name={field.name}
   data-depth={depth}
@@ -111,6 +112,14 @@ const optionFields: SchemaField[] =
       {
         field.deprecated && (
           <span class={cl("schema-table__deprecated")}> [deprecated]</span>
+        )
+      }
+      {
+        field.versionChange && (
+          <span class={cl("schema-table__version-change")}>
+            {field.versionChange.type === "added" ? "Added" : "Removed"} in{" "}
+            {field.versionChange.version}
+          </span>
         )
       }
     </span>

@@ -346,6 +346,58 @@
         ssr
         client="load"
         before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"ApiChangelogVersionSelect","value":true}'
+        await-children
+        ><div class="version-select _version-select_c19daa">
+          <span id="changelog-version-label" class="version-select__label _version-select__label_c19daa"
+            >API version</span
+          ><span data-value="all" class="select _select_d4facd"
+            ><button
+              id="changelog-version-select"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="changelog-version-select-listbox"
+              aria-labelledby="changelog-version-label changelog-version-select"
+              class="select__button _select__button_d4facd"
+            >
+              All versions
+            </button>
+            <ul
+              id="changelog-version-select-listbox"
+              role="listbox"
+              tabindex="-1"
+              aria-labelledby="changelog-version-label"
+              hidden
+              class="select__menu _select__menu_d4facd"
+            >
+              <li
+                id="changelog-version-select-option-all"
+                role="option"
+                aria-selected="true"
+                data-value="all"
+                class="select__option _select__option_d4facd select__option--selected _select__option--selected_d4facd"
+              >
+                All versions
+              </li>
+              <li
+                id="changelog-version-select-option-2027-04-15"
+                role="option"
+                aria-selected="false"
+                data-value="2027-04-15"
+                class="select__option _select__option_d4facd"
+              >
+                2027-04-15
+              </li>
+            </ul></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      ><astro-island
+        uid="X6"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
         opts='{"name":"ApiChangelogFilterBar","value":true}'
         await-children
         ><nav aria-label="Filter by change type" class="api-changelog-filter-bar _api-changelog-filter-bar_0fe17b">
@@ -403,6 +455,8 @@
                       href="/api/latest/dashboards/"
                       >Dashboards</a
                     ></span
+                  ><span class="api-changelog-entry__version _api-changelog-entry__version_5c615a"
+                    >API version: 2027-04-15</span
                   >
                 </div>
                 <h3 class="api-changelog-entry__title _api-changelog-entry__title_5c615a">

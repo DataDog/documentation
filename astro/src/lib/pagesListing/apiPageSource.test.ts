@@ -13,6 +13,7 @@ describe("apiPageSource", () => {
       "/api/latest/rate-limits.md",
       "/api/latest/scopes.md",
       "/api/latest/using-the-api.md",
+      "/api/latest/versions.md",
       "/api/changelog.md",
     ]);
     const landing = roots[0];

@@ -1,0 +1,20 @@
+---
+title: "API Versioning"
+description: "Learn how to select a date-based version for supported Datadog API operations."
+---
+
+Datadog API operations use their default behavior unless you select a date-based API version. Operations that support date-based versions include an **API version** selector in the API reference.
+
+To request a dated version directly, send its date in the `DD-API-Version` header:
+
+```bash
+DD-API-Version: YYYY-MM-DD
+```
+
+The version selector updates the request and response schemas, cURL command, and client library examples together. Schema fields that changed from the preceding version are marked as added or removed.
+
+You can also link to a selected operation version. The API reference stores the selection in the `datadog-api-version` query parameter, using the format `v1-YYYY-MM-DD`.
+
+See the [API changelog][1] for changes associated with each version.
+
+[1]: /api/changelog/

@@ -12,7 +12,7 @@ Review recent changes to Datadog API operations, ordered newest first. Entries a
 
 ## 2026-10-08
 
-- Modified: [Dashboards](https://docs.datadoghq.com/api/latest/dashboards.md): Add Heatgrid dashboard widget support (Operations: [`CreateDashboard`](https://docs.datadoghq.com/api/latest/dashboards/create-a-new-dashboard.md), [`ListDashboards`](https://docs.datadoghq.com/api/latest/dashboards/get-all-dashboards.md))
+- Modified: [Dashboards](https://docs.datadoghq.com/api/latest/dashboards.md): Add Heatgrid dashboard widget support (API version: 2027-04-15) (Operations: [`CreateDashboard`](https://docs.datadoghq.com/api/latest/dashboards/create-a-new-dashboard.md), [`ListDashboards`](https://docs.datadoghq.com/api/latest/dashboards/get-all-dashboards.md))
 - Breaking: Deployment Gates: Remove legacy Deployment Gate evaluation endpoint (Operations: `ListDeploymentGateEvaluations`)
 - Added: [Incidents](https://docs.datadoghq.com/api/latest/incidents.md): Add incident listing endpoint (Operations: [`ListIncidents`](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-incidents.md))
 
