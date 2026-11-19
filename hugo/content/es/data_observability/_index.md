@@ -3,6 +3,9 @@ description: Haga un seguimiento de la calidad, el rendimiento y el costo de los
   con Data Observability para detectar anomalías, analizar el linaje de datos y prevenir
   problemas que afecten a los sistemas posteriores.
 further_reading:
+- link: /monitors/types/data_observability/
+  tag: Documentación
+  text: Seguimiento de Data Observability
 - link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/
   tag: Blog
   text: Datadog lleva la observabilidad a los equipos de datos mediante la adquisición

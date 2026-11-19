@@ -2,47 +2,78 @@
 further_reading:
 - link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
   tag: Blog
-  text: Blog de AWS con ejemplos de uso de destinos de API
+  text: Blog de AWS con casos de uso de ejemplo de destinos de API
 - link: /logs/guide/reduce_data_transfer_fees
   tag: Guía
-  text: Enviar logs a Datadog mientras se reducen los costes de transferencia de datos
+  text: Cómo enviar registros a Datadog mientras reduce las tarifas de transferencia
+    de datos
 site_support_id: amazon-event-bridge
-title: Envío de eventos y logs a Datadog con destinos de API de Amazon EventBridge
+title: Envío de eventos y registros a Datadog con Amazon EventBridge API Destinations
 ---
+Amazon EventBridge es un bus de eventos sin servidor que le permite crear aplicaciones basadas en eventos. EventBridge puede integrarse con sus servicios de AWS, pero la función de destinos de API le permite enviar datos fuera de AWS y obtener datos de fuentes externas a AWS mediante API. Esta guía ofrece pasos para enviar sus eventos y registros desde EventBridge a Datadog. Para obtener más información sobre cómo enviar sus eventos desde Datadog a EventBridge, [consulte la documentación de integración de EventBridge][1].
 
-Amazon EventBridge es un bus de eventos serverless que te permite crear aplicaciones basadas en eventos. EventBridge puede integrarse con tus servicios AWS, pero la función de destinos de API te permite enviar y recibir datos fuera de AWS utilizando las API. En esta guía se indican los pasos necesarios para enviar tus eventos y logs desde EventBridge a Datadog. Para obtener más información sobre el envío de tus eventos desde Datadog a EventBridge, consulta la [documentación de la integración EventBridge][1].
+## Configuración {#setup}
 
-## Configurar
+Antes de comenzar, necesita una [cuenta de Datadog][2], con [una clave de API][3], y necesita acceso a los [destinos de API de Amazon EventBridge][4].
 
-Antes de empezar, necesitas una [cuenta Datadog][2] con [una clave de API][3] y también necesitas acceso a [destinos de API Amazon Eventbridge][4].
+### Configuración {#configuration}
 
-### Configuración
+1. Siga los pasos en la [documentación de creación de un destino de API de Amazon][5] para agregar a Datadog como destino de API.
+    - Utilice la autorización con clave de API, con `DD-API-KEY` como nombre de su clave y su [clave de Datadog API][3] como valor.
+    - Para su punto de conexión de destino, utilice `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` for logs and `https://event-management-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/events` for events, and set `POST` como método HTTP. Para obtener más información sobre las diferencias entre registros y eventos, consulte [Reducción de riesgos relacionados con los datos][8].
+2. Una vez que haya configurado el destino, consulte la documentación de Amazon para [crear una regla de EventBridge][10], donde establecerá a Datadog como su destino.
 
-1. Para añadir Datadog como destino de API, sigue los pasos indicados en la documentación de Amazon [Crear un destino de API[5].
-    - Utiliza la autorización de la clave de API, con `DD-API-KEY` como nombre de tu clave y tu [clave de API Datadog][3] como valor.
-    - Para tu endpoint de destino, utiliza `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` para logs y `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` para eventos, y configura `POST` como método HTTP. Para obtener más información sobre las diferencias entre logs y eventos, consulta [Reducir los riesgos relacionados con los datos][8].
-    - Si utilizas el endpoint de eventos, debes incluir `title` y `text` como parámetros `body.field` en la conexión del destino de la API. Estos son los valores necesarios para `POST` al endpoint de eventos. Para obtener más información, consulta la documentación [Publicar un evento][9].
-2. Una vez configurado el destino, consulta la documentación de Amazon para [crear una regla EventBridge][10], donde configuras Datadog como tu destino.
-3. Una vez configurada la regla con Datadog como destino, activa un evento publicando un evento para EventBridge. Para obtener más información sobre cómo enviar eventos a EventBridge desde Datadog, consulta la documentación [de la integración EventBridge][1]. Por ejemplo, para activar un evento de test [cargando los objetos a un bucket de S3][11] en tu cuenta, utiliza este comando AWS CloudShell:
+    If you're using the events endpoint, configure an [input transformer][16] on the target so the rule sends events in the format the endpoint expects. Use the following input path to extract values from the original event:
+
+    ```json
+    {
+      "detailType": "$.detail-type",
+      "source": "$.source",
+      "time": "$.time"
+    }
+    ```
+
+    Then, use the following input template to build the request body:
+
+    ```json
+    {
+      "data": {
+        "type": "event",
+        "attributes": {
+          "title": <detailType>,
+          "message": "<detailType> from <source>",
+          "category": "alert",
+          "timestamp": <time>,
+          "tags": ["source:<source>"],
+          "attributes": {
+            "status": "ok"
+          }
+        }
+      }
+    }
+    ```
+
+    Set `status` to `warn` or `error` for events that represent a problem. For AWS events that represent a configuration change, you can instead send `"category": "change"` with a `changed_resource` object. For the full list of accepted fields, see [Post an event][9].
+3. Una vez que haya configurado la regla con Datadog como destino, active un evento enviando un evento a EventBridge. Para obtener más información sobre cómo enviar eventos a EventBridge desde Datadog, consulte la [documentación de integración de EventBridge][1]. Por ejemplo, para activar un evento de prueba [cargando los objetos en un bucket de S3][11] en su cuenta, utilice este comando de AWS CloudShell:
 
     ```bash
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. Una vez que se envían los eventos y los logs, al cabo de unos cinco minutos los datos están disponibles en la [consola de logs][12] o en el [Explorador de eventos][13] de Datadog, dependiendo del endpoint al que los estés enviando.
+4. Una vez que se envíen los eventos y registros, los datos estarán disponibles al cabo de unos cinco minutos en [Logs Console][12] o [Events Explorer][13] de Datadog, según el punto de conexión al que los envíe.
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Para ver más detalles sobre las cargas útiles enviadas a Datadog y ver la respuesta de los endpoints de la API, configura una cola de Amazon SQS:  
-1. Crea una cola en [Amazon SQS][14].
-2. Ve a la [regla EventBridge][15] que has creado en la sección [Configuración](#configuration).
-3. Selecciona la pestaña **Targets** (Destinos) y haz clic en **Edit** (Editar).
-4. Amplía la sección **Additional settings** (Parámetros adicionales). 
-4. En la sección *Dead-letter queue* (Cola de mensajes fallidos), elige **Select an Amazon SQS queue in the current AWS account to use as the dead-letter queue** (Seleccionar una cola de Amazon SQS en la cuenta AWS actual para utilizarla como cola de emnsajes fallidos).
-5. Selecciona la cola SQS que acabas de crear.
-6. Actualiza la regla.
+Para ver más detalles sobre las cargas útiles enviadas a Datadog y visualizar la respuesta de los puntos de conexión de la API, configure una cola de Amazon SQS:  
+1. Cree una cola en [Amazon SQS][14].
+2. Vaya a la [regla de EventBridge][15] que creó en la sección [Configuration](#configuration).
+3. Seleccione la pestaña {{< ui >}}Targets{{< /ui >}} y haga clic en {{< ui >}}Edit{{< /ui >}}.
+4. Expanda la sección {{< ui >}}Additional settings{{< /ui >}}. 
+4. En la sección {{< ui >}}Dead-letter queue{{< /ui >}}, elija {{< ui >}}Select an Amazon SQS queue in the current AWS account to use as the dead-letter queue{{< /ui >}}.
+5. Seleccione la cola de SQS que acaba de crear.
+6. Actualice la regla.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -60,3 +91,4 @@ Para ver más detalles sobre las cargas útiles enviadas a Datadog y ver la resp
 [13]: https://app.datadoghq.com/event/explorer
 [14]: https://console.aws.amazon.com/sqs/
 [15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html

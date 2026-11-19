@@ -11,10 +11,9 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentación
   text: API de Fleet Automation
-site_support_id: fleet-automation-standard-features
 title: Campos de configuración de datadog.yaml compatibles
 ---
-Fleet Automation admite un subconjunto de campos de `datadog.yaml` cuando [configura Agent][1]. Cada cambio que proporcione se valida con un esquema, y cualquier campo que no aparezca aquí se rechaza con un error de validación de esquema.
+Fleet Automation admite un subconjunto de campos de `datadog.yaml` cuando [configure los Agents][1]. Cada cambio que proporcione se valida con un esquema, y cualquier campo que no aparezca aquí será rechazado con un error de validación de esquema.
 
 Expanda una sección a continuación para ver cada campo compatible con su tipo, descripción y valores válidos.
 

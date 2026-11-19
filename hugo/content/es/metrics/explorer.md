@@ -5,7 +5,7 @@ description: Explore todas sus métricas y realice análisis.
 further_reading:
 - link: /metrics/summary/
   tag: Documentación
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: Documentación
   text: Distribución de métricas

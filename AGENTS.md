@@ -175,6 +175,10 @@ The full Vale linter rules are at https://github.com/DataDog/datadog-vale. Key s
 
 Avoid temporal words: currently, now, will, won't
 
+## Jira cards
+
+After opening a PR against this repo, do not create an associated Jira card on the DOCS board to prompt an editorial review. Doing so may interfere with the Docs team's own processes for creating Jira cards to track PR reviews.
+
 ## Hugo-Specific Details
 
 ### Shortcodes
@@ -183,6 +187,17 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - Integration-specific content
 - API documentation
 - Security and compliance sections
+
+### Ask AI
+Hugo's Ask AI widget has a port in `shared/packages/ask-ai/`, which the Astro site uses. Hugo doesn't use the package yet, so the two copies drift unless every change lands in both.
+
+When you change Hugo's Ask AI code, make the same change in `shared/packages/ask-ai/` in the same PR. Hugo's Ask AI code includes:
+- `hugo/assets/scripts/components/conversational-search/`
+- `hugo/assets/styles/components/conversational-search/`
+- `hugo/layouts/partials/conversational-search.html`
+- `hugo/assets/scripts/tests/conversational-search-*.test.js`
+
+The package is TypeScript and builds its markup in `markup.ts`, so a change to Hugo's partial goes there. SCSS changes go into the package's `styles.css` as plain CSS on its custom properties. See the [package README](/shared/packages/ask-ai/README.md) and [AGENTS.md](/shared/packages/ask-ai/AGENTS.md) before editing it.
 
 ### Content Types
 - Regular markdown pages

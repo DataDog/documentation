@@ -1,28 +1,29 @@
 ---
+description: メインプロセス、Collector や Forwarder などのコンポーネント、ポート構成を含む Datadog Agent アーキテクチャの概要。
 disable_toc: false
 further_reading:
 - link: /agent/supported_platforms/
   tag: ドキュメント
-  text: サポートされているプラットフォーム
+  text: サポート対象のプラットフォーム
 - link: /agent/configuration/
   tag: ドキュメント
   text: Agent 構成
 title: Agent アーキテクチャ
 ---
+## Agent アーキテクチャ {#agent-architecture}
 
-## Agent アーキテクチャ
-
-Agent 6 と 7 は、インフラストラクチャーメトリクスとログの収集、および [DogStatsD メトリクス][1]の受信を担当するメインプロセスで構成されています。このプロセスの主なコンポーネントは次のとおりです:
+Agent 6 および Agent 7 は、インフラストラクチャーのメトリクスとログの収集、および [DogStatsD メトリクス][1] の受信に対応するメインプロセスで構成されています。このプロセスの主なコンポーネントは次のとおりです。
 
 * Collector: チェックを実行し、メトリクスを収集します。
-* Forwarder: ペイロードを Datadog へ送信します。
+* Forwarder: ペイロードを Datadog に送信します。
 
-`datadog.yaml` 構成ファイルで有効にすると、次の 2 つのオプションのプロセスが Agent によって生成されます。
+以下のオプションのプロセスは、`datadog.yaml` 構成ファイルで有効にされている場合、Agent によって生成されます。
 
-* APM Agent: [トレース][2]を収集するプロセス。デフォルトで有効です。
-* Process Agent: 実行中のプロセス情報を収集するプロセス。デフォルトでは利用可能なコンテナのみを収集し、それ以外の場合は無効です。
+* APM Agent は、[トレース][2] を収集するプロセスです。デフォルトでは、有効になっています。
+* Process Agent は、ライブプロセス情報を収集するプロセスです。デフォルトでは、Process Agent は利用可能な Containers のみを収集し、利用可能な Containers がない場合は無効になります。
+* [Agent Data Plane][8] (プレビュー) は、メインプロセスの代わりに [DogStatsD メトリクス][1] を受信、集計、転送するプロセスです。デフォルトでは無効になっています。
 
-Windows では、サービスは次のように一覧表示されます。
+Windows では、サービスは次のようにリストされます。
 
 | サービス               | 説明           |
 |-----------------------|-----------------------|
@@ -30,30 +31,39 @@ Windows では、サービスは次のように一覧表示されます。
 | datadog-trace-agent   | Datadog Trace Agent   |
 | datadog-process-agent | Datadog Process Agent |
 
-デフォルトでは、Agent は Linux で 3 つ、Windows と macOS で 4 つの[ポート][3]をバインドします:
+デフォルトでは、Agent は Linux で 3 つの [ポート][3]、Windows と macOS で 4 つのポートをバインドします。
 
 | ポート | 説明                                                                                 |
 |------|---------------------------------------------------------------------------------------------|
-| 5000 | Agent に関するランタイムメトリクスを公開します。                                                    |
-| 5001 | Agent の CLI と GUI で使用され、コマンドを送信して実行中の Agent から情報を取得します。 |
-| 5002 | Windows と macOS で GUI サーバを提供します。                                                   |
-| 8125 | DogStatsD サーバーで使用され、外部メトリクスを受信します。                                  |
+| 5000 | Agent に関するランタイムメトリクスを公開します。                                                   |
+| 5001 | Agent CLI および GUI がコマンドを送信し、実行中の Agent から情報を取得するために使用されます。|
+| 5002 | Windows と macOS で GUI サーバーを提供します。                                                  |
+| 8125 | DogStatsD サーバーが外部メトリクスを受信するために使用されます。                                 |
 
-ポートの構成については、[ネットワークトラフィック][4]を参照してください。
+Agent Data Plane が有効な場合、メインプロセスの代わりにポート 8125 にバインドされ、さらに以下のポートにバインドされます。
 
-### コレクター
+| ポート | 説明                                                                                           |
+|------|-------------------------------------------------------------------------------------------------------|
+| 5100 | Agent Data Plane に関するランタイムメトリクスを公開します。                                                  |
+| 5101 | Agent Data Plane CLI およびメイン Agent プロセスが Agent Data Plane にコマンドを送信するために使用されます。|
 
-Collector はすべての標準メトリクスを 15 秒ごとに収集します。Agent 6 には統合および[カスタムチェック][5]を実行するための Python 2.7 インタープリタが組み込まれています。
+ポートの設定に関する詳細については、[ネットワークトラフィック][4] を参照してください。
 
-### Forwarder
+### コレクター {#collector}
 
-Agent Forwarder はメトリクスを HTTPS 経由で Datadog へ送信します。バッファリングによりネットワーク分断がメトリクスレポートへ影響することを防ぎます。メトリクスはメモリ内にバッファされ、サイズまたは未送信リクエスト数が上限に達すると、Forwarder のメモリ使用量を抑えるために最も古いメトリクスから破棄されます。ログは SSL で暗号化された TCP 接続により Datadog へ送信されます。
+コレクターは、15 秒ごとにすべての標準メトリクスを収集します。Agent 6 には、Integrations と [カスタムチェック][5] を実行するための Python 2.7 インタープリターが組み込まれています。
 
-### DogStatsD
+### Forwarder {#forwarder}
 
-Agent 6 では、DogStatsD は [Etsy の StatsD][6] メトリクス集約デーモンを Golang で実装したものです。DogStatsD は UDP または UNIX ソケット経由で任意のメトリクスを受信してロールアップし、レイテンシを追加することなくカスタムコードを計測できます。詳細は [DogStatsD][7] を参照してください。
+Agent Forwarder は、HTTPS 経由で Datadog にメトリクスを送信します。バッファリングにより、ネットワークの分断がメトリクスのレポートに影響を与えるのを防ぎます。メトリクスは、サイズの制限に達するまで、または未完了の送信リクエスト数の制限に達するまで、メモリ内にバッファリングされます。その後、Forwarder のメモリ使用量を適切な範囲に抑えるため、最も古いメトリクスから破棄されます。ログは、SSL で暗号化された TCP コネクション経由で Datadog に送信されます。
 
-## 参考資料
+### DogStatsD {#dogstatsd}
+
+Agent 6 において、DogStatsD は [Etsy の StatsD][6] メトリクス集計デーモンの Golang 実装です。DogStatsD は、UDP または UNIX ソケット経由で任意のメトリクスを受信して集計するため、レイテンシーを増加させることなくカスタムコードをインスツルメントできます。[DogStatsD][7] についての詳細をご覧ください。
+
+[Agent Data Plane][8] が有効な場合、メインの Agent プロセスの代わりに DogStatsD サーバーが実行されます。チェックからのメトリクスは、引き続きメインの Agent プロセスによって処理されます。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -61,6 +71,7 @@ Agent 6 では、DogStatsD は [Etsy の StatsD][6] メトリクス集約デー�
 [2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/configuration/network/#open-ports
 [4]: /ja/agent/configuration/network#configure-ports
-[5]: /ja/developers/custom_checks/write_agent_check/
+[5]: /ja/extend/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
 [7]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[8]: /ja/agent/configuration/agent-data-plane/
