@@ -265,8 +265,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 - **Avoid mixed instrumentation**: In most cases, you should not use both a Datadog SDK and an upstream OpenTelemetry SDK in the same application, as this leads to undefined behavior.
   - **Exception**: Support for some languages, such as Python, requires both the Datadog SDK and upstream OpenTelemetry SDK packages to be installed.
   - Always follow the specific [language-specific instrumentation documentation][46] to ensure you are using the correct and supported setup.
-- **Avoid Agent and separate Collector on same host**: Do not run the Datadog Agent and a separate upstream OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
-  - **Exception**: You can run the Datadog Agent on the same nodes as the DDOT Collector. See [Add the Datadog Agent][27].
+- **Run the Datadog Agent with the DDOT Collector**: Datadog recommends running the Agent alongside the DDOT Collector, including on the same nodes. To avoid duplicate logs and port conflicts, check the settings in [Add the Datadog Agent][27] before you deploy the Agent.
 
 [1]: /opentelemetry/instrument/ddot_sdks/
 [3]: /opentelemetry/setup/agent/#agents-collector
