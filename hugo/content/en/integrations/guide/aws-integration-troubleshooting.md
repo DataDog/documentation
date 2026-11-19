@@ -43,11 +43,13 @@ Clicking <strong>Resolve All AWS Permissions Issues</strong>:<br>
 
 ### Discrepancy between your data in CloudWatch and Datadog
 
-The sections below describe three important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy).
+The sections below describe three important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy). For a full list of the statistic, period, and unit differences to check, see [How do I adjust my data on Datadog to match the data displayed in CloudWatch?][31].
 
 #### 1. Time aggregation
 
-Datadog displays raw data from AWS in per-second values, regardless of the time frame selected in AWS. This is why Datadog's value could appear lower. See [Time aggregation][20] in the metric documentation for more information.
+For most metrics, Datadog stores the value CloudWatch returns for a statistic over a one-minute period, without converting it. If the CloudWatch graph uses a longer **Period**, each CloudWatch point aggregates more data than a Datadog datapoint. When you view a long time range in Datadog, Datadog also rolls multiple datapoints up into each displayed point, using an average by default. Both differences can make values appear higher or lower in one tool. See [Time aggregation][20] in the metric documentation for more information.
+
+A small number of metrics, such as `aws.elb.request_count`, are converted from the CloudWatch per-minute `Sum` to a per-second rate. Their values in Datadog are 60 times lower than the CloudWatch one-minute `Sum`.
 
 #### 2. Space aggregation
 
@@ -73,21 +75,29 @@ To avoid inflated aggregation, use the `_deduped` metric variants when available
 
 4. Confirm that the query in CloudWatch is scoped identically to the query in Datadog:
    - Any [Dimensions][17] used in the CloudWatch metric query should match tags used in the Datadog metric query
-   - Datadog queries metrics with one-minute granularity, so the **Period** of the CloudWatch metric query should also be set to one-minute precision
+   - Datadog collects most metrics as one-minute datapoints, so the **Period** of the CloudWatch metric query should also be set to one minute
+   - The **Statistic** of the CloudWatch metric query should match the statistic of the Datadog metric (for example, `Sum` for a `.sum` metric)
    - Region
    - Metric namespace and name
 5. Hover over a datapoint on the graph to display the timestamp and value.
-6. Find the same point in time in the Datadog graph and compare the values. If the values are equal, the original discrepancy was due to differences in either time or space aggregation between the two graphs.
+6. Find the same point in time in the Datadog graph and compare the values. If the values are equal, the original discrepancy was due to differences in either time or space aggregation between the two graphs. If the Datadog value is 60 times lower, the metric is one of the few that Datadog converts to a per-second rate.
 
 ## Metrics
 
 ### Metrics delayed
 
-When using the AWS integration, Datadog pulls in your metrics through the CloudWatch API. You may see a delay in metrics from AWS due to some constraints that exist for their API.
+When using the AWS integration, Datadog collects your metrics by polling the CloudWatch API on a schedule set for each namespace. A delay between AWS and Datadog is expected and combines the AWS publication delay, the collection schedule, and processing time. See [Cloud Metric Delay][32] for schedules and details.
 
-The CloudWatch API only offers a metric-by-metric crawl to pull data. CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more frequently. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
+To determine whether a delay is expected, check the following:
 
-Install the Datadog Agent on the host to avoid metric delay. See the [Datadog Agent documentation][3] to get started. Datadog has the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Contact [Datadog support][4] for additional information.
+1. **Collection schedule**: Compare the delay to the [collection schedule][33] for the metric's namespace. Most namespaces are collected every 10 minutes, and some namespaces, such as `AWS/Billing`, are collected every few hours.
+2. **Adaptive polling**: If the metric has not been queried in Datadog for at least 30 days, [adaptive polling][34] collects it about once an hour. After you query the metric, it returns to its namespace schedule within a few minutes.
+3. **Metric resolution in AWS**: Metrics that AWS publishes in five-minute periods, such as EC2 instance metrics without [detailed monitoring][35], receive one datapoint every five minutes. Some metrics, such as S3 storage metrics and billing metrics, are published only a few times a day.
+4. **Datapoints in CloudWatch**: Open the CloudWatch console and confirm that the datapoints for the delayed period exist. If they are missing in CloudWatch too, the delay is on the AWS side. Datadog collects late CloudWatch datapoints on a later collection run.
+
+If the delay is longer than these factors explain, see [Missing metrics](#missing-metrics), or contact [Datadog support][4].
+
+To reduce delay, use [CloudWatch Metric Streams][23], or install the [Datadog Agent][3] on your hosts to collect host-level metrics directly. Contact [Datadog support][4] to discuss adjusting the collection schedule for a namespace.
 
 ### Expected metric delays
 
@@ -95,15 +105,9 @@ The delay between when a metric is generated in AWS and when it appears in Datad
 
 | Collection method | Typical delay | Notes |
 |---|---|---|
-| API polling (default) | Approximately 10 minutes | CloudWatch API rate limits and account size can increase delay. |
-| [CloudWatch Metric Streams][23] | 2 to 3 minutes | Requires separate setup with Amazon Data Firehose. |
+| API polling (default) | AWS publication delay plus up to one [collection schedule][33] interval (every 10 minutes for most namespaces) | Unqueried metrics under [adaptive polling][34], CloudWatch API throttling, and large numbers of resources can increase delay. |
+| [CloudWatch Metric Streams][23] | A few minutes | Requires separate setup with Amazon Data Firehose. |
 | [Datadog Agent][3] | Real-time | Collects host-level metrics directly, without CloudWatch. |
-
-In addition to collection method delays, some AWS services introduce their own latency on the CloudWatch side:
-
-- **S3 Storage Lens** metrics are published daily, not continuously.
-- **AWS billing metrics** are delayed by several hours and update infrequently.
-- **Detailed monitoring** for EC2 provides one-minute metrics (instead of the default five-minute granularity) but requires enablement per instance in AWS.
 
 **Note**: Datadog does not backfill historical metric data. See [What to expect after setup][25] for details.
 
@@ -115,9 +119,10 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 2. **Verify the AWS region is enabled.** In the [AWS integration page][16], confirm that the region where your resources are deployed is selected under the **General** tab. Metrics are only collected from enabled regions.
 3. **Verify the service is emitting metrics to CloudWatch.** Open the CloudWatch console in AWS and confirm that the expected metrics exist. CloudWatch's API returns only metrics with datapoints, so if a resource is idle or has no attached components (for example, an ELB with no attached instances), CloudWatch may not report metrics for it.
 4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default and require extra configuration in the AWS console. See [Which AWS services require additional setup beyond the core integration?][26] for a full list.
-5. **Wait for the polling interval.** Allow at least one collection cycle before investigating further. See [Expected metric delays](#expected-metric-delays) for timing by collection method.
-6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or organizational unit (OU) level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
-7. **Check for permissions boundaries.** A [permissions boundary][30] sets the maximum permissions a role can have. If the boundary does not include an action required by the Datadog integration, AWS returns `AccessDenied` for that action even when the integration role policy appears to grant it. In the AWS IAM console, open the integration role and check the **Permissions boundary** tab to see whether a boundary is attached.
+5. **Wait for the collection schedule.** Allow the AWS publication delay plus at least one collection run for the metric's namespace before investigating further. See [Expected metric delays](#expected-metric-delays) for timing by collection method, and [Cloud Metric Delay][32] for namespace schedules.
+6. **Check whether the metric is under adaptive polling.** A metric that has not been queried for at least 30 days receives new datapoints about once an hour, which can look like gaps. See [Adaptive Polling of CloudWatch Metrics][34].
+7. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or organizational unit (OU) level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
+8. **Check for permissions boundaries.** A [permissions boundary][30] sets the maximum permissions a role can have. If the boundary does not include an action required by the Datadog integration, AWS returns `AccessDenied` for that action even when the integration role policy appears to grant it. In the AWS IAM console, open the integration role and check the **Permissions boundary** tab to see whether a boundary is attached.
 
 ### Wrong count of aws.elb.healthy_host_count
 
@@ -177,7 +182,7 @@ See the [Transition to using Instance Metadata Service Version 2][7] documentati
 AWS tags are collected as part of the integration's crawl cycle. Expect tag propagation to take 15 minutes to several hours after you apply tags in AWS, depending on the AWS service and the volume of resources in your account.
 
 If you recently added or changed tags in AWS and do not see them reflected in Datadog:
-1. Wait at least one full crawl cycle (approximately 10 minutes for API polling).
+1. Wait at least one full collection run for the resource's namespace. See [Cloud Metric Delay][32] for schedules.
 2. Verify that the `DatadogAWSIntegrationRole` has the required tag-related permissions (for example, `tag:GetResources`).
 3. Confirm that the resource type supports tag collection. Datadog collects tags through the [AWS Resource Groups Tagging API][28]. See the [supported resource types][29] in the AWS documentation to verify that your resource type is supported.
 
@@ -223,3 +228,8 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [28]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
 [29]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
 [30]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+[31]: /integrations/guide/aws-integration-and-cloudwatch-faq/#how-do-i-adjust-my-data-on-datadog-to-match-the-data-displayed-in-cloudwatch
+[32]: /integrations/guide/cloud-metric-delay/#aws
+[33]: /integrations/guide/cloud-metric-delay/#collection-schedules
+[34]: /integrations/guide/adaptive-cloudwatch-polling/
+[35]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html
