@@ -29,7 +29,7 @@ further_reading:
 Data Observability: Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Observability: Jobs Monitoring enables you to:
 
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
-- Receive an alert when a job fails or takes too long to complete, with [job monitors][3].
+- Use [job monitors][3] to get an alert when a job fails or takes too long to complete.
 - Analyze job execution details and stack traces.
 - Use [Lineage][2] to assess upstream causes and downstream impact for failing or delayed jobs.
 - Correlate infrastructure metrics, Spark metrics from the Spark UI, logs, and cluster configuration.
