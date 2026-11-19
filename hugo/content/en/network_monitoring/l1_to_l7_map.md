@@ -100,7 +100,7 @@ In source/destination pair mode, the map shows the source's composition stack on
 
 ### Map status and network signals
 
-Each resource and connection on the map has a status of **Healthy**, **Degraded**, **Critical**, or **Unknown**. Status is based on network traffic signals from CNM and Network Path data for the selected time frame. **Unknown** means that the map cannot determine a status, for example because neither product has data for the resource or connection. In hover summaries, a Healthy status appears as **OK**.
+Each resource and connection on the map has a status of **Healthy**, **Degraded**, **Critical**, or **Unknown**. Status is based on network traffic signals from CNM and Network Path data for the selected time frame. **Unknown** means that the map cannot determine a status, for example because neither product has data for the resource or connection. In hover summaries, Healthy appears as **OK** and Degraded appears as **WARNING**.
 
 The outline color of a resource and the color of a connection line show their status:
 
