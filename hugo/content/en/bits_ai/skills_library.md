@@ -94,9 +94,9 @@ To use the Skills Library, your role needs the following permissions:
 | View skills | **MCP Read** |
 | Create, edit, clone, or delete skills | **MCP Read** and **MCP Write** |
 | Change **Enable for you** | **MCP Read** |
-| Change **Enable for your organization** | **Bits Settings Org Write** or **Org Management** |
+| Change **Enable for your organization** | **MCP Read** and either **Bits Settings Org Write** or **Org Management** |
 
-Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have **MCP Read** and **MCP Write** by default. For custom roles, [update the role][5] to add the required permissions.
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have **MCP Read** and **MCP Write** by default, including permission to change **Enable for you**. Users with the {{< ui >}}Datadog Admin Role{{< /ui >}} can also change **Enable for your organization**. For custom roles, [update the role][5] to add the required permissions.
 
 A skill's visibility also controls who can access it:
 
@@ -110,7 +110,7 @@ Open the [{{< ui >}}Skills Library{{< /ui >}}][4] and select a skill. Use the av
 
 | Setting | Products |
 |---------|----------|
-| **Enable for you** | Makes the skill available to you in Bits Chat, Bits Agent Builder, and external agents you connect through the Datadog MCP Server. Skills you create are enabled for you by default. Other skills are disabled until you enable them. |
+| **Enable for you** | Makes the skill available to you in Bits Chat, the Datadog app for Slack, and external agents you connect through the Datadog MCP Server. Skills you create are enabled for you by default. Other skills are disabled until you enable them. |
 | **Enable for your organization** | Makes a shared skill available in Bits AI SRE investigations, Bits Code, and external agents that authenticate to Datadog with a service account. Shared skills are disabled for the organization by default. |
 
 Personal and organization settings are independent. Changing one setting does not change the other. Private skills only have the **Enable for you** setting.
@@ -136,6 +136,8 @@ You can include additional context in the same message or continue the conversat
 
 In the agent configuration, select each skill that the agent needs. The agent automatically loads selected skills.
 
+Selecting a skill in an agent's configuration makes it available to that agent, regardless of your **Enable for you** setting.
+
 To invoke a skill explicitly during a conversation, enter its slash command:
 
 ```text
@@ -145,6 +147,8 @@ To invoke a skill explicitly during a conversation, enter its slash command:
 For more information about creating and testing agents, see [Bits Agent Builder][2].
 
 ## Use a skill in Slack
+
+Before invoking a skill in Slack, turn on **Enable for you** from the skill's details page.
 
 After you connect the Datadog app for Slack, mention `@Datadog` and add the skill's slash command:
 
