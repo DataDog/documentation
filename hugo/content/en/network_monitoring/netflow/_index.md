@@ -94,7 +94,9 @@ Datadog supports the following types of IP enrichment.
 
 You can add custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). Custom IP enrichment lets network engineers and their teams interpret and query NetFlow data with human-readable names.
 
-Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}IP Enrichment{{< /ui >}}][10], then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
+Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}IP Enrichment{{< /ui >}}][10], then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload a CSV file of mappings.
+
+To add a single mapping manually, click the down arrow next to {{< ui >}}\+ Add Enrichment{{< /ui >}} and select {{< ui >}}Single Entry{{< /ui >}}.
 
 To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For the full order, see the [Application name assignment](#application-name-assignment) section.
 
@@ -104,7 +106,11 @@ Reverse DNS private IP enrichment adds hostnames to your NetFlow records. When y
 
 Reverse DNS enrichment is disabled by default. To enable it, set `reverse_dns_enrichment_enabled: true` under `network_devices.netflow` in your [`datadog.yaml`][3] file, then [restart the Agent][4]. For the full configuration example, see the [Configuration](#configuration) section.
 
-Search for DNS in the {{< ui >}}\+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
+To filter flows by hostname:
+
+1. Go to the [NetFlow page][5].
+2. Click {{< ui >}}\+ Filter{{< /ui >}}.
+3. Select {{< ui >}}Source Reverse DNS Hostname{{< /ui >}} or {{< ui >}}Destination Reverse DNS Hostname{{< /ui >}}.
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Filter menu enhanced to show the reverse DNS destination and source facets" width="100%" >}}
 
@@ -130,15 +136,13 @@ You can add custom enrichments to map ports and protocols to specific applicatio
 
 Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}Port Enrichment{{< /ui >}}][13], then click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
-{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping dialog on the Port Enrichment settings page" width="100%" >}}
-
 ### Deep packet inspection
 
 **Note**: Deep packet inspection requires Agent version 7.86.0 or later.
 
 With deep packet inspection (DPI), your network device identifies the application for each flow by inspecting its traffic, instead of Datadog inferring the application from the port number. Datadog does not inspect packet payloads. The Agent reads the application that the device classified (using Cisco NBAR2 or Palo Alto Networks App-ID) from NetFlow v9 or IPFIX records.
 
-DPI does not require you to map IP addresses or ports to applications manually. To use DPI, configure both your network device and the Datadog Agent.
+DPI does not require you to map IP addresses or ports to applications manually. To use DPI, configure both the Datadog Agent and your network device.
 
 #### Configure the Agent
 
@@ -181,7 +185,7 @@ Cisco Next Generation Network-Based Application Recognition (NBAR2) is supported
    exit
    ```
 
-3. Add the application table option to your flow exporter. This makes the device periodically send a table that maps each application ID to an application name and description:
+3. Add the application table option to your flow exporter. The device periodically sends a table that maps each application ID to an application name and description:
 
    ```text
    configure terminal
@@ -206,7 +210,7 @@ Cisco Next Generation Network-Based Application Recognition (NBAR2) is supported
 **Notes**:
 
 - Application IDs are specific to each exporter because they depend on the device's NBAR protocol pack and engine version. The Agent keeps a separate application table for each exporter.
-- The Agent keeps each application table entry for one hour after the exporter last sends it. Set the `option application-table` timeout to less than 3600 seconds. Otherwise, flows from that exporter might not have an application name until the exporter resends the table.
+- The Agent keeps each application table entry for one hour after the exporter last sends it. To keep application names on all flows from the exporter, set the `option application-table` timeout to less than 3600 seconds.
 
 #### Configure Palo Alto Networks App-ID
 
