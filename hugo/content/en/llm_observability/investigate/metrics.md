@@ -40,7 +40,15 @@ For ElevenLabs, `model_provider:elevenlabs` and `charge_scope:conversation` iden
 
 Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Component enrichment updates the billing workflow without another total metric.
 
-For conversation contributions to `ml_obs.span.llm.cost`, `cost_component:llm` and `cost_component:platform` identify the reported components when both are known and their rounded sum equals the accepted total. Otherwise, `cost_component:unattributed` carries the entire accepted total. These contributions sum to the total once. The partition is fixed when Datadog first accepts a known total; late component details enrich the billing workflow but do not rewrite the metric. Ordinary token-priced LLM contributions use `cost_component:llm`; token metrics and their `token_modality` tags are unchanged.
+The `cost_component` tag on `ml_obs.span.llm.cost` identifies each cost contribution:
+
+| Value | Covered charges |
+|-------|-----------------|
+| `llm` | The LLM portion of a conversation charge, or ordinary token-priced LLM and embedding costs. |
+| `platform` | Non-token platform charges reported by the hosted provider. |
+| `unattributed` | Tool costs, or the accepted conversation total when the complete LLM/platform breakdown is unavailable or does not match after rounding. |
+
+Conversation contributions use separate `llm` and `platform` components only when both are known and their rounded sum equals the accepted total. These contributions sum to the total once. The partition is fixed when Datadog first accepts a known total; late component details enrich the billing workflow but do not rewrite the metric. Token metrics and their `token_modality` tags are unchanged.
 
 Query either cost metric family with `sum` and `.as_count()`. Do not add `ml_obs.span.llm.cost` to `ml_obs.span.conversation.cost`, because they include the same conversation charges.
 
