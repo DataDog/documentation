@@ -44,9 +44,9 @@ To start collecting data, set up [RUM Browser Monitoring][2].
         });
     ```
 
-3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data.
+3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session receives profiling data.
 
-    If you use a [proxy][3] or [CSP][4], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][5] section, and refer to the [proxy setup documentation][3] for details on routing subdomain-specific requests.
+    If you use a [proxy][3] or [CSP][4], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][5] section, and see the [proxy setup documentation][3] for details on routing subdomain-specific requests.
 
 4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
@@ -68,7 +68,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 
 {% collapse-content title="Browser profiling and CORS" id="cors"%}
 
-##### Requirements for Cross-Origin Scripts (CORS)
+##### Requirements for cross-origin scripts (CORS)
 
 If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
 

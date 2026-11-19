@@ -261,7 +261,7 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 ## Direct Boot mode support
 
-**Note:** If your application supports [Direct Boot mode][10], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
+**Note:** If your application supports [Direct Boot mode][10], data from before the device is unlocked isn't captured, because the credential encrypted storage isn't available until then.
 
 [1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android#manually-track-actions-and-send-custom-events
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views

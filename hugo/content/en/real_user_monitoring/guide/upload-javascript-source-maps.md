@@ -31,7 +31,7 @@ If your front-end JavaScript source code is minified, upload your source maps to
 Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
 
 <div class="alert alert-danger">
-Ensure that the compressed size of each source map, combined with the related minified file, does not exceed the limit of <b>800 MB</b>.
+Make sure that the compressed size of each source map, combined with the related minified file, does not exceed the limit of <b>800 MB</b>.
 </div>
 
 See the following configurations for popular JavaScript bundlers.

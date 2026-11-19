@@ -24,7 +24,7 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 -   Symbolicated React Native (JavaScript and native iOS or Android) crash reports
 -   Trend analysis with React Native Error Tracking
 
-In order to symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
+To symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
 
 Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
@@ -56,11 +56,11 @@ const config = new DatadogProviderConfiguration(
 
 ## Get deobfuscated stack traces
 
-Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. Regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
 For React Native applications, the matching of stack traces and source maps relies on the `debug_id`. If not available, it relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
-In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
+To make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
 -   JavaScript source maps for your iOS JavaScript bundle
 -   JavaScript source maps for your Android JavaScript bundle
@@ -71,7 +71,7 @@ To set your project up to send the symbolication files automatically, run `npx d
 
 See the wizard [official documentation][13] for options.
 
-### Use Datadog Metro Configuration
+### Use Datadog Metro configuration
 
 Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
 
@@ -148,7 +148,7 @@ To verify your React Native Crash Reporting and Error Tracking configuration, yo
 
 To test your implementation:
 
-1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
+1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, make sure the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 2. Execute some code containing an error or crash. For example:
 
    ```javascript
@@ -315,7 +315,7 @@ yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $
 
 There is a bug in React Native versions up to 0.71 that generates an incorrect source map when using Hermes.
 
-To resolve this, you need to add more lines **at the very end** of the build phase to generate a correct source map file.
+To resolve this, you need to add more lines **at the end** of the build phase to generate a correct source map file.
 
 Edit your build phase like so:
 
@@ -435,7 +435,7 @@ For more information, see the [iOS Crash Reporting and Error Tracking documentat
 
 #### Upload Android Proguard mapping files
 
-First, ensure that Proguard minification is enabled on your project. By default, this is not enabled on React Native projects.
+First, make sure that Proguard minification is enabled on your project. By default, this is not enabled on React Native projects.
 
 For more information, see [the React Native Proguard documentation][5].
 

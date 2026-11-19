@@ -556,7 +556,7 @@ To compute a similar hang rate on Datadog, make sure:
 2. That the app hang threshold is equal or below 250 ms.
 3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are available in your facets (this should be the case by default. If it's not, you can manually [create facets][18]).
 
-If all these prerequisites are met, then create a new [Timeseries widget][19] on a Dashboard or a Notebook, and paste the following snippet in the {{< ui >}}JSON{{< /ui >}} tab of your widget, under the {{< ui >}}Graph your data{{< /ui >}} section:
+If all these prerequisites are met, then create a [Timeseries widget][19] on a Dashboard or a Notebook, and paste the following snippet in the {{< ui >}}JSON{{< /ui >}} tab of your widget, under the {{< ui >}}Graph your data{{< /ui >}} section:
 
 {{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
 

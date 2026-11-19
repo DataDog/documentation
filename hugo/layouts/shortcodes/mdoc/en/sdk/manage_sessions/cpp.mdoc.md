@@ -24,7 +24,7 @@ You can adjust the session sample rate, but Datadog recommends using [retention 
 
 Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
 
-To access the RUM session ID at runtime, register a context receiver when you configure RUM (requires C++ SDK v0.8.0 or later). The SDK calls the receiver once at startup with the current state, and again whenever the session, view, or anonymous user ID changes. The receiver runs on an SDK-internal thread, so it must be thread-safe and return quickly.
+To access the RUM session ID at runtime, register a context receiver when you configure RUM (requires C++ SDK v0.8.0 or later). The SDK calls the receiver once at startup with the current state, and again whenever the session, view, or anonymous user ID changes. The receiver runs on an SDK-internal thread, so it must be thread-safe and return promptly.
 
 The session ID is all zeroes when there is no active session, or when the active session isn't sampled.
 

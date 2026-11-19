@@ -27,7 +27,7 @@ To enable crash and error reporting, see [Track errors and crashes][7].
 
 ## Get deobfuscated and symbolicated stack traces
 
-Mapping files are used to deobfuscate and symbolicate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+Mapping files are used to deobfuscate and symbolicate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. Regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
 ### File and line mapping with IL2CPP
 
@@ -81,8 +81,8 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 
 To verify your Unity Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
 
-1. Ensure you are not running a development build. Uncheck the {{< ui >}}Development Build{{< /ui >}} box in Unity's build settings.
-2. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
+1. Make sure you are not running a development build. Uncheck the {{< ui >}}Development Build{{< /ui >}} box in Unity's build settings.
+2. Run your application on a simulator, emulator, or a real device. If you are running on iOS, make sure the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 3. Execute code containing an error or crash. For example:
 
    ```cs
