@@ -19,7 +19,7 @@ Benchmarks in GPU Monitoring are in Preview. To request access, contact <a href=
 
 ## Overview
 
-Before you change a model server's version, its deployments settings, kernels, or the GPUs it runs on, you need to know how the change affects your users. Benchmarks in GPU Monitoring send controlled load to an ChatCompletion endpoint and measure what users experience: how long the first token takes, how fast tokens stream after it, and how many requests and tokens the endpoint serves per second. Because the runs are in Datadog, you can read them next to your GPU, inference server, and cost data, and compare each run with earlier ones.
+Before you change a model server's version, its deployment settings, kernels, or the GPUs it runs on, you need to know how the change affects your users. Benchmarks in GPU Monitoring send controlled load to an OpenAI-compatible Chat Completion endpoint and measure what users experience: how long the first token takes, how fast tokens stream after it, and how many requests and tokens the endpoint serves per second. Because the runs are in Datadog, you can read them next to your GPU, inference server, and cost data, and compare each run with earlier ones.
 
 With Benchmarks, you can answer questions such as:
 
