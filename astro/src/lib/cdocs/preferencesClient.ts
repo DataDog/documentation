@@ -22,7 +22,18 @@ interface StartOptions {
   /** Defaults to `requestIdleCallback`, where the browser has it. */
   scheduleIdle?: (callback: () => void) => void;
   fetchTraitsList?: (url: string) => Promise<CdocsTraitsList>;
+  /** How long a navigation waits for the traits list. */
+  traitsListWaitMs?: number;
 }
+
+/**
+ * Most navigations don't wait at all: the traits list loads once, when the
+ * first page goes idle, and then stays loaded across view transitions. A
+ * navigation waits only when the reader follows a link to another page before
+ * that first fetch finishes, such as on a slow connection. Past this cap, it
+ * goes ahead without preferences rather than leave the click unanswered.
+ */
+const TRAITS_LIST_WAIT_MS = 300;
 
 // `pointerdown` covers a click on a link that was already under the pointer
 // when the page appeared, which gets no `pointerover` until the pointer moves.
@@ -37,6 +48,7 @@ const LINK_INTENT_EVENTS = [
 export function startCdocsPreferences(options: StartOptions = {}): () => void {
   const scheduleIdle = options.scheduleIdle ?? scheduleWhenIdle;
   const fetchTraitsList = options.fetchTraitsList ?? fetchTraitsListJson;
+  const traitsListWaitMs = options.traitsListWaitMs ?? TRAITS_LIST_WAIT_MS;
 
   let pageState: CdocsPageState | null = null;
   let preferences: Record<string, string> = {};
@@ -99,7 +111,7 @@ export function startCdocsPreferences(options: StartOptions = {}): () => void {
   /**
    * Add the stored preferences to a view-transition navigation to another
    * Cdocs page. The traits list may not be loaded yet, so this happens in the
-   * page loader, which Astro waits for.
+   * page loader, which Astro waits for, up to `traitsListWaitMs`.
    *
    * A navigation within the page, like a filter bar change, already has the
    * page's values, and a back or forward navigation returns to a URL as it was.
@@ -113,7 +125,10 @@ export function startCdocsPreferences(options: StartOptions = {}): () => void {
 
     const loadPage = preparation.loader;
     preparation.loader = async () => {
-      const loadedTraitsList = await loadTraitsList(state.traitsListUrl);
+      const loadedTraitsList = await Promise.race([
+        loadTraitsList(state.traitsListUrl),
+        wait(traitsListWaitMs).then(() => null),
+      ]);
       if (loadedTraitsList) {
         preferences = readPreferences();
         const newHref = hrefWithPreferences(
@@ -195,6 +210,10 @@ function syncUrlWithResolvedValues(pageState: CdocsPageState) {
     "",
     url.pathname + url.search + url.hash,
   );
+}
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function currentUrlParams(): Record<string, string> {

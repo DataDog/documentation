@@ -319,9 +319,14 @@ test.describe("bare cdocs URLs", () => {
     page,
   }) => {
     await storePreferences(page, { prog_lang: "python" });
-    // Hold the traits list back, so the link isn't updated before the click.
+    // Hold the traits list back until the click, so the link isn't updated
+    // first. Releasing it right after stays inside the navigation's wait cap.
+    let releaseTraitsList = () => {};
+    const traitsListReleased = new Promise<void>(
+      (resolve) => (releaseTraitsList = resolve),
+    );
     await page.route("**/cdocs-traits-index.json*", async (route) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await traitsListReleased;
       await route.continue();
     });
     await page.reload();
@@ -332,6 +337,7 @@ test.describe("bare cdocs URLs", () => {
     await page
       .getByRole("link", { name: "Custom instrumentation", exact: true })
       .click();
+    releaseTraitsList();
 
     await expect(page).toHaveURL(
       new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),

@@ -258,6 +258,21 @@ describe("startCdocsPreferences", () => {
     expect(fetchTraitsList).toHaveBeenCalledTimes(1);
   });
 
+  it("doesn't wait long for the traits list, and navigates without preferences", async () => {
+    writePreferences({ prog_lang: "go" });
+    renderPage({ url: "/guides/other/" });
+    await start({
+      scheduleIdle: () => {},
+      // The traits list never arrives.
+      fetchTraitsList: () => new Promise(() => {}),
+      traitsListWaitMs: 10,
+    });
+
+    expect(await navigateTo("/dd_e2e/cdocs/custom_instrumentation/")).toBe(
+      "/dd_e2e/cdocs/custom_instrumentation/",
+    );
+  });
+
   it("leaves navigations within the same page alone, like filter bar changes", async () => {
     writePreferences({ prog_lang: "go", api_type: "dd_api" });
     renderPage({
