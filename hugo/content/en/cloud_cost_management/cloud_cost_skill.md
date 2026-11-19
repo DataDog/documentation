@@ -172,5 +172,5 @@ For connection instructions, supported clients, and toolset configuration, see [
 [14]: /mcp_server/tools/
 [15]: /notebooks/
 [16]: /mcp_server/tools/#cost_recommendations
-[17]: /cloud_cost_management/recommendations/
+[17]: https://app.datadoghq.com/cost/optimize/recommendations
 [18]: /incident_response/work_management/
