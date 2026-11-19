@@ -47,7 +47,7 @@ By default, Datadog collects most AWS namespaces every 10 minutes, and some name
 
 To reduce latency:
 
-- Use [Amazon CloudWatch Metric Streams and Amazon Data Firehose][6] to send metrics to Datadog as AWS publishes them. Streamed metrics typically arrive within a few minutes.
+- Use [Amazon CloudWatch Metric Streams and Amazon Data Firehose][6] to send metrics to Datadog as AWS publishes them, with a 2-3 minute latency.
 - For EC2 instances, enable [detailed monitoring][12] to get one-minute datapoints instead of five-minute datapoints.
 - Contact [Datadog support][5] to discuss adjusting the collection schedule for a namespace.
 
@@ -105,13 +105,13 @@ If you recently enabled a new AWS service integration but are not seeing metrics
 1. **IAM permissions**: Confirm that the IAM role or IAM user associated with the Datadog integration includes the permissions required by the service. See the individual [AWS integration pages][8] for service-specific permission requirements.
 2. **Region**: Confirm that the AWS region where your resources are deployed is enabled in the [AWS integration page][1].
 3. **CloudWatch availability**: Open the CloudWatch console in AWS and confirm the expected metrics exist. Some services do not emit CloudWatch metrics until specific conditions are met (for example, an ELB with no attached instances does not emit metrics).
-4. **Collection delay**: API polling collects each namespace on its own schedule, every 10 minutes for most namespaces. Allow the AWS publication delay plus at least one collection run for the namespace before investigating further. If you use [CloudWatch Metric Streams][6], metrics typically arrive within a few minutes. See [Cloud Metric Delay][4] for schedules.
+4. **Collection delay**: API polling collects each namespace on its own schedule, every 10 minutes for most namespaces. Allow the AWS publication delay plus at least one collection run for the namespace before investigating further. If you use [CloudWatch Metric Streams][6], expect a 2-3 minute delay. See [Cloud Metric Delay][4] for schedules.
 
 ### What is the difference between API polling and CloudWatch Metric Streams?
 
 | &nbsp; | API polling (default) | CloudWatch Metric Streams |
 |---|---|---|
-| **Typical latency** | AWS publication delay plus the namespace collection schedule (every 10 minutes for most namespaces). See [Cloud Metric Delay][4]. | A few minutes |
+| **Typical latency** | AWS publication delay plus the namespace collection schedule (every 10 minutes for most namespaces). See [Cloud Metric Delay][4]. | 2-3 minutes |
 | **Setup** | Included with the AWS integration | Requires separate setup with [Amazon Data Firehose][6] |
 | **AWS cost** | CloudWatch `GetMetricData` API calls | CloudWatch Metric Streams and Firehose delivery charges |
 | **Coverage** | All standard CloudWatch namespaces; custom namespaces require **Collect Custom Metrics** to be enabled | Most CloudWatch namespaces (some exclusions apply) |
