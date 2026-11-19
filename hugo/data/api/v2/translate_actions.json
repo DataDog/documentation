@@ -4602,7 +4602,7 @@
     "request_schema_description": "Request body for creating or updating a derived metric."
   },
   "CreateHistoricalMetricsConfiguration": {
-    "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
+    "description": "Enable historical metrics ingestion for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
     "summary": "Enable historical metrics ingestion",
     "request_description": "",
     "request_schema_description": "Request body for enabling historical metrics ingestion for a metric."

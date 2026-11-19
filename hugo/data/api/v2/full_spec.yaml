@@ -61099,6 +61099,8 @@ components:
           format: date-time
           nullable: true
           type: string
+        bucketing_mode:
+          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
@@ -61182,6 +61184,17 @@ components:
         - value_type
         - variants
       type: object
+    FeatureFlagBucketingMode:
+      description: >-
+        How subjects are assigned to variants. `DATADOG` is the native scheme. `EPPO` reproduces the assignments that Eppo made for a flag migrated from Eppo, so its subjects keep their variants. Set when the flag is created and never changed.
+      enum:
+        - DATADOG
+        - EPPO
+      example: DATADOG
+      type: string
+      x-enum-varnames:
+        - DATADOG
+        - EPPO
     FeatureFlagChangeEvent:
       description: A change made to a feature flag.
       properties:
@@ -61662,6 +61675,8 @@ components:
           format: date-time
           nullable: true
           type: string
+        bucketing_mode:
+          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
@@ -162095,6 +162110,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             integrations_read: View configured integrations and their settings.
+            late_metrics_config_write: Edit and save historical metrics configurations.
             logs_modify_indexes: Modify log indexes, filters, exclusion filters, and configurations.
             logs_read_data: Read log data.
             logs_read_index_data: Read indexed log data.
@@ -225358,7 +225374,7 @@ paths:
   /api/v2/metrics/historical-metrics-configurations:
     post:
       description: |-
-        Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:
+        Enable historical metrics ingestion for a metric. Idempotent:
         enabling an already-enabled metric returns 200 instead of 201. Not supported for
         distribution metrics, metrics with an existing tag configuration, or most standard
         (non-custom) metrics.
@@ -225438,9 +225454,6 @@ paths:
         operator: OR
         permissions:
           - late_metrics_config_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/historical-metrics-configurations/{metric_name}:
     delete:
       description: |-
@@ -225474,9 +225487,6 @@ paths:
         operator: OR
         permissions:
           - late_metrics_config_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         Get the historical metrics ingestion configuration for a metric. Existence of the
@@ -225527,9 +225537,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/list-tag-indexing-rule-exemptions:
     get:
       description: |-
