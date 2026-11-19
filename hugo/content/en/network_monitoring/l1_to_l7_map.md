@@ -271,7 +271,7 @@ Check that your organization has access to the Preview. The L1 to L7 Map is not 
 
 ### The map shows a partial view or is empty
 
-When CNM has no traffic data for the selected resource or pair during the selected time frame, the map shows only part of the data. The map displays **You are seeing a partial view of data**, and composition groups without CNM data display **No observed composition**. Network Path data still appears where it is available.
+When CNM has no traffic data for the selected resource or pair during the selected time frame, the map shows only part of the data. The map displays **You are seeing a partial view of data**, and composition groups without CNM data display **No observed composition**. In source/destination pair mode, when CNM observes no traffic between the source and the destination, the map displays **No observed traffic** between them. Network Path data still appears where it is available.
 
 The missing data can mean that CNM is not set up for the resource, or that the resource had no traffic. The map does not distinguish between these cases.
 
@@ -289,7 +289,7 @@ If a host in your infrastructure appears as an IP address, the Datadog Agent mig
 
 ### A connection has no hop-by-hop path
 
-If Network Path is not set up, the map displays **Get detailed network route information with Network Path**. Click **Set up Network Path**, or see [Set up Network Path][10]. If Network Path has no tests for the resources on the map, the upstream or downstream group displays a **Create path tests** link.
+If Network Path is not set up, the map displays **Get detailed network route information with Network Path**. Click **Set up Network Path**, or see [Set up Network Path][10]. If Network Path has no tests for the resources on the map, the map displays a link to create path tests. In single resource mode, the link appears in the **Upstream** and **Downstream** groups. In source/destination pair mode, it appears between the source and destination hosts.
 
 Check that Network Path has results for the source and destination during the selected time frame. Open the pair in [Network Path][15] to confirm. Traffic in CNM does not mean that a Network Path test or a complete route exists for the same pair.
 
@@ -301,7 +301,7 @@ Check whether the device is monitored by Network Device Monitoring. If it is not
 
 Compare the same resource or pair over the same time frame, and check which signal each product shows. Map status is based on network signals, so it can be different from the resource's health in [APM][2] or the [Infrastructure List][17]. For more information, see the [Map status and network signals](#map-status-and-network-signals) section.
 
-<!-- TODO: The empty-state messages above come from design mockups (Slack, 2026-11-18). Check them against staging. -->
+<!-- TODO: The empty-state messages above come from the eight design mockups in Slack (2026-11-18). Check them against staging. -->
 
 ## Further reading
 
