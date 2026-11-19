@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41944
+    operations:
+      - CreateDowntime
+      - GetDowntime
+      - ListDowntimes
+      - UpdateDowntime
+    title: Add run_as to v2 downtime create/update and return it as user 
+      principals

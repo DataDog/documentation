@@ -46176,6 +46176,8 @@ components:
           $ref: "#/components/schemas/DowntimeNotifyEndStates"
         notify_end_types:
           $ref: "#/components/schemas/DowntimeNotifyEndTypes"
+        run_as:
+          $ref: "#/components/schemas/DowntimeRunAs"
         schedule:
           $ref: "#/components/schemas/DowntimeScheduleCreateRequest"
         scope:
@@ -46456,47 +46458,32 @@ components:
         - $ref: "#/components/schemas/DowntimeMonitorIncludedItem"
     DowntimeRunAs:
       description: |-
-        The principals (users, roles, or teams) allowed to act on behalf of the downtime.
+        The user the downtime runs as. The downtime only silences monitors this user can mute.
 
         **Note**: This feature is currently in Preview and may not be available for all organizations.
       items:
         $ref: "#/components/schemas/DowntimeRunAsItem"
-      readOnly: true
+      maxItems: 1
+      minItems: 1
       type: array
     DowntimeRunAsItem:
-      description: A set of principals allowed to act on behalf of the downtime.
+      description: A set of principals the downtime runs as.
       properties:
         principals:
-          description: List of principals allowed to act on behalf of the downtime.
+          description: The principal the downtime runs as. Only one user is supported.
+          example:
+            - "user:00000000-0000-1234-0000-000000000000"
           items:
-            $ref: "#/components/schemas/DowntimeRunAsPrincipal"
+            description: The principal identifier, formatted as `user:uuid`.
+            example: "user:00000000-0000-1234-0000-000000000000"
+            pattern: "^user:"
+            type: string
+          maxItems: 1
+          minItems: 1
           type: array
-      type: object
-    DowntimeRunAsPrincipal:
-      description: A principal (user, role, or team) allowed to act on behalf of the downtime.
-      properties:
-        id:
-          description: The ID of the principal.
-          example: "00000000-0000-1234-0000-000000000000"
-          type: string
-        type:
-          $ref: "#/components/schemas/DowntimeRunAsPrincipalType"
       required:
-        - id
-        - type
+        - principals
       type: object
-    DowntimeRunAsPrincipalType:
-      description: The type of principal allowed to act on behalf of the downtime.
-      enum:
-        - user
-        - role
-        - team
-      example: "user"
-      type: string
-      x-enum-varnames:
-        - USER
-        - ROLE
-        - TEAM
     DowntimeScheduleCreateRequest:
       description: Schedule for the downtime.
       oneOf:
@@ -46713,6 +46700,8 @@ components:
           $ref: "#/components/schemas/DowntimeNotifyEndStates"
         notify_end_types:
           $ref: "#/components/schemas/DowntimeNotifyEndTypes"
+        run_as:
+          $ref: "#/components/schemas/DowntimeRunAs"
         schedule:
           $ref: "#/components/schemas/DowntimeScheduleUpdateRequest"
         scope:
@@ -187847,6 +187836,9 @@ paths:
                         notify_end_types:
                           - canceled
                           - expired
+                        run_as:
+                          - principals:
+                              - "user:00000000-0000-1234-0000-000000000000"
                         scope: env:(staging OR prod) AND datacenter:us-east-1
                         status: active
                       id: "00000000-0000-1234-0000-000000000000"
@@ -187948,8 +187940,7 @@ paths:
             example: "created_by,monitor"
             type: string
         - description: |-
-            If `true`, include the `run_as` attribute in the response, which lists the principals allowed to
-            act on behalf of the downtime.
+            If `true`, include the `run_as` attribute in the response, which lists the user the downtime runs as.
 
             **Note**: This feature is currently in Preview and may not be available for all organizations.
           in: query
@@ -187981,6 +187972,9 @@ paths:
                         notify_end_types:
                           - canceled
                           - expired
+                        run_as:
+                          - principals:
+                              - "user:00000000-0000-1234-0000-000000000000"
                         scope: env:(staging OR prod) AND datacenter:us-east-1
                         status: active
                       id: "00000000-0000-1234-0000-000000000000"
@@ -188083,6 +188077,9 @@ paths:
                         notify_end_types:
                           - canceled
                           - expired
+                        run_as:
+                          - principals:
+                              - "user:00000000-0000-1234-0000-000000000000"
                         scope: env:(staging OR prod) AND datacenter:us-east-1
                         status: active
                       id: "00000000-0000-1234-0000-000000000000"
