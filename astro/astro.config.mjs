@@ -22,6 +22,7 @@ import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 import { cdocsTraitsList } from "./src/integrations/cdocsTraitsList.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
+import { isDocTypeSkipped } from "./src/lib/site/skippedDocTypes.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
 import { cdocsConfigPlugin } from "./src/lib/cdocs/cdocsConfigPlugin.ts";
@@ -152,8 +153,9 @@ export default defineConfig({
     // Fails the build if any /api route stops being prerendered, if anything
     // is emitted outside api/ or {fr,ja,ko,es}/api/, or if the category count
     // collapses (spec-parsing regression). Registered last so it inspects the
-    // final output of every other integration above.
-    staticApiGuard(),
+    // final output of every other integration above. A build that skips the
+    // API docs has no categories, so it gets no floor.
+    staticApiGuard(isDocTypeSkipped("api") ? { minCategoryCount: 0 } : {}),
     // Emits dist/sourcemap-upload.json describing what a `datadog-ci
     // sourcemaps upload` invocation needs. Reads the resolved config only and
     // writes outside dist/client, so it neither inspects nor perturbs the

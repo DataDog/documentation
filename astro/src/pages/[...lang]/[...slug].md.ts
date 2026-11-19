@@ -29,6 +29,7 @@ import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { isApiContent } from "@lib/api/overviewPages";
 import { buildFilterOptionLinks } from "@lib/cdocs/filterOptionLinks";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
 import { getCdocsLinkTargets } from "@lib/cdocs/linkTargets";
@@ -76,6 +77,11 @@ export const GET: APIRoute = async ({ params, url, site }) => {
 
   // dd_e2e/* are test pages; hidden in the live build like the HTML route.
   if (slug.startsWith("dd_e2e/") && __CI_ENV__ === "live") {
+    return new Response(null, { status: 404 });
+  }
+
+  // API content renders only through the API routes, like the HTML route.
+  if (isApiContent(slug)) {
     return new Response(null, { status: 404 });
   }
 

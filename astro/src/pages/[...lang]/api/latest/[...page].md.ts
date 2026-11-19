@@ -1,6 +1,7 @@
 export const prerender = true;
 /** Plaintext twin of `[...page].astro`. The API root has never had one. */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCollection, getEntry } from "astro:content";
@@ -33,21 +34,26 @@ function withScopesTables(
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
-  const paths: ReturnType<GetStaticPaths> = [];
-  for (const lang of LOCALES) {
-    for (const entry of entries) {
-      paths.push({
-        params: {
-          lang: lang === "en" ? undefined : lang,
-          page: entry.id.slice(`${API_CONTENT_DIR}/`.length),
-        },
-      });
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths(
+  "api",
+  async () => {
+    const entries = await getCollection("en", (entry) =>
+      isApiSubPage(entry.id),
+    );
+    const paths: ReturnType<GetStaticPaths> = [];
+    for (const lang of LOCALES) {
+      for (const entry of entries) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            page: entry.id.slice(`${API_CONTENT_DIR}/`.length),
+          },
+        });
+      }
     }
-  }
-  return paths;
-};
+    return paths;
+  },
+);
 
 export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);

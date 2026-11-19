@@ -7,6 +7,7 @@ export const prerender = true;
  * content (getting started, client libraries).
  */
 
+import { docTypeStaticPaths } from "@lib/site/skippedDocTypes";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { CollectionEntry } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
@@ -32,11 +33,11 @@ function apiLandingBody(
   ];
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = docTypeStaticPaths("api", () => {
   return LOCALES.map((lang) => ({
     params: { lang: lang === "en" ? undefined : lang },
   }));
-};
+});
 
 export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
