@@ -108,14 +108,14 @@ Actual counts vary with random assignment. Each holdout share includes both hold
 
 <a id="requirements-for-datadog-feature-flags"></a>
 
-## Requirements for managed holdouts
+## Holdout requirements
 
 For holdouts that use Datadog Feature Flags, included experiments must:
 
 - Use Datadog Feature Flags to assign subjects at random.
 - Use the same subject type as the holdout.
 - Use a consistent subject ID across covered experiments. See [Subject Types][1].
-- Be standard experiments.
+- Be A/B experiments.
 
 Attach selective holdouts while experiments are drafts. The holdout must be waiting to start or within its inclusion period.
 
@@ -124,7 +124,8 @@ Attach selective holdouts while experiments are drafts. The holdout must be wait
 Create the holdout before starting the experiments:
 
 1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
-1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}. If {{< ui >}}Managed by{{< /ui >}} is shown, select {{< ui >}}Datadog (Managed){{< /ui >}}.
+1. Enter a {{< ui >}}Holdout name{{< /ui >}}. If {{< ui >}}Managed by{{< /ui >}} is shown, select {{< ui >}}Datadog (Managed){{< /ui >}}.
+1. Under {{< ui >}}Type{{< /ui >}}, select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}. If {{< ui >}}Exposure source{{< /ui >}} is shown, select {{< ui >}}Datadog{{< /ui >}}.
 1. Set the start and end dates for the {{< ui >}}Experiment inclusion phase{{< /ui >}}. Allow time for the covered experiments to run and complete their rollouts within this period.
 1. Review the start and end dates for {{< ui >}}Analysis phase{{< /ui >}} and adjust them as needed. Analysis starts at or after inclusion ends.
 1. Set {{< ui >}}Holdout traffic exposure{{< /ui >}}. This share includes both holdout groups.
@@ -183,7 +184,7 @@ The primary analysis uses [CUPED][7] when it is enabled in the analysis settings
 
 Use the primary analysis to assess the combined changes during the analysis phase. See [Holdout phases](#holdout-phases) for the distinction between preliminary and primary results.
 
-The scorecard compares the shipped-changes group with the control group. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
+Under {{< ui >}}Combined effect of all shipped changes{{< /ui >}}, compare the shipped-changes group with the control group. Interpret the results as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
 Primary results become available after the analysis phase starts and an analysis run processes metric data from that phase.
 
@@ -194,7 +195,7 @@ Use an [Exposure SQL Model][3] to analyze holdouts when you manage experiment ra
 Configure the [warehouse exposure model](#warehouse-exposure-model), then create the holdout:
 
 1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} and click {{< ui >}}Create Holdout{{< /ui >}}.
-1. Enter a name and select how the holdout is managed:
+1. Enter a {{< ui >}}Holdout name{{< /ui >}} and select how subjects are assigned:
    - For external randomization, select {{< ui >}}Your flagging system (External){{< /ui >}} under {{< ui >}}Managed by{{< /ui >}}. Enter the {{< ui >}}Holdout key{{< /ui >}} used in your exposure records.
    - For Datadog Feature Flags with warehouse logging, select {{< ui >}}Datadog (Managed){{< /ui >}}, then {{< ui >}}Your exposure SQL model{{< /ui >}} under {{< ui >}}Exposure source{{< /ui >}}. Select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}.
 1. Set the inclusion and analysis dates. For external randomization, enter the {{< ui >}}Share of subjects in the holdout{{< /ui >}} and {{< ui >}}Control group share{{< /ui >}} used by your system. For Datadog Feature Flags, set {{< ui >}}Holdout traffic exposure{{< /ui >}}.
@@ -220,18 +221,19 @@ SELECT
 FROM analytics.holdout_exposures
 ```
 
-Keep the standard exposure mappings and add the following holdout mappings.
+Keep the standard exposure mappings and enable {{< ui >}}Add holdouts{{< /ui >}}. Under {{< ui >}}Where are these experiments randomized?{{< /ui >}}, select:
+
+- {{< ui >}}Datadog Feature Flags{{< /ui >}}: Map all four holdout columns in the following table.
+- {{< ui >}}Another provider{{< /ui >}}: Map {{< ui >}}Holdout key column{{< /ui >}} and {{< ui >}}Holdout assignment group column{{< /ui >}}. The query must return [qualifying exposures](#exposure-criteria) only.
 
 | Field | Example column | Value |
 | --- | --- | --- |
 | Holdout key column | `holdout_key` | The holdout key recorded in the exposure events. |
 | Holdout assignment group column | `holdout_assignment_group` | `status_quo` or `all_shipped`. Convert your system's group names to these values in the query if needed. |
-| Include in holdout analysis column | `should_include_in_holdout_analysis` | Optional for external randomization. Required when using Datadog Feature Flags with your own warehouse logging. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
-| Allocation key column | `allocation_key` | The allocation key from the exposure event. Only required for selective holdouts using Datadog Feature Flags with your own warehouse logging. |
+| Include in holdout analysis column | `should_include_in_holdout_analysis` | For Datadog Feature Flags. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
+| Allocation key column | `allocation_key` | For Datadog Feature Flags. The allocation key from the exposure event. |
 
 Datadog uses the holdout key and assignment group to identify the exposure records for each holdout group.
-
-For external randomization, map the inclusion field when the model contains exposures from before and after changes ship. The preliminary analysis uses both values. The primary analysis uses records marked `true`. A model that contains [qualifying exposures](#exposure-criteria) only can omit this mapping.
 
 [1]: /experiments/concepts/subject_types/
 [2]: /experiments/statistics/analysis_methods/
