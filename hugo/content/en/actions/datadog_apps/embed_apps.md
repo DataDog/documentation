@@ -58,13 +58,33 @@ You can embed an app from the app itself, or from the surface where you want it 
 The **Apps** cell uses the notebook's time range. To read the time range in the app, use the `datadogNotebook` input.
 
 {{% /tab %}}
-{{% tab "Catalog" %}}
+{{% tab "Catalog side panel" %}}
 
 1. Navigate to [Catalog][1] and select a service.
 1. In the service's side panel, select the **+ Add App** tab.
 1. Choose the app from the dropdown. To limit the list to apps you own, enable **My Apps Only**.
 
 [1]: https://app.datadoghq.com/services
+
+{{% /tab %}}
+{{% tab "APM service page" %}}
+
+1. Open the APM service page for the service.
+1. In the left navigation, click **Add app** under the mode where you want the app to appear: **Info**, **Health**, **Govern**, or **Configuration**.
+1. In the **Add an App** dialog, choose the app from the **Select an app** dropdown, then click **Add**.
+
+The app appears as its own section in that mode. To read the service, environment, and time range in the app, use the `datadogServicePage` input.
+
+{{% /tab %}}
+{{% tab "LLM Observability annotation queue" %}}
+
+1. Open an interaction in an annotation queue.
+1. Open the view menu.
+1. Under **My Custom Views** or **All Custom Views**, select the app.
+
+The app replaces the default display of the interaction. For more information, see [Annotation views][1]. To read the trace and selected span in the app, use the `datadogAnnotationInteraction` input.
+
+[1]: /llm_observability/investigate/annotation_queues/#annotation-views
 
 {{% /tab %}}
 {{< /tabs >}}
