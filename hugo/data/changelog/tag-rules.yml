@@ -10,3 +10,14 @@ entries:
       - ListTagRules
       - UpdateTagRule
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41728
+    operations:
+      - CreateTagRule
+      - DeleteTagRule
+      - GetTagRule
+      - GetTagRuleScore
+      - ListTagRules
+      - UpdateTagRule
+    title: Align Tag Rules API documentation with backend behavior

@@ -3,8 +3,8 @@ algolia:
   rank: 80
   tags:
   - fips
-  - proxy de fips
-  - conformidad
+  - fips proxy
+  - compliance
   - fedramp
   - govcloud
   - fips agent
@@ -12,148 +12,146 @@ aliases:
 - /es/agent/guide/agent-fips-proxy
 - /es/agent/guide/fips-agent
 - /es/configuration/agent-fips-proxy
-description: Configura módulos criptográficos conforme a FIPS para el Datadog Agent
-  en entornos altamente regulados como FedRAMP.
+description: Configure módulos criptográficos compatibles con FIPS para el Datadog
+  Agent en entornos altamente regulados como FedRAMP.
 disable_toc: false
 further_reading:
 - link: agent/configuration/proxy
   tag: Documentación
-  text: Configuración del proxy del Agent
+  text: Configuración de proxy de Agent
 - link: https://www.datadoghq.com/blog/datadog-fips-enabled-agent/
   tag: Blog
-  text: Monitorizar cargas de trabajo altamente reguladas con el Agent de Datadog
-    habilitado por FIPS
-title: Conformidad de Datadog con los estándares FIPS
+  text: Monitoree cargas de trabajo altamente reguladas con el Agent de Datadog habilitado
+    para FIPS
+- link: https://www.datadoghq.com/blog/engineering-the-datadog-agent-for-fedramp-high/
+  tag: Blog
+  text: Ingeniería del Datadog Agent para la certificación FedRAMP High®
+title: Cumplimiento de FIPS de Datadog
 ---
+## Descripción general {#overview}
 
-## Información general
+El FIPS Agent es una versión del Datadog Agent que admite de forma nativa el cumplimiento de los Estándares Federales de Procesamiento de Información (FIPS). El cumplimiento del FIPS Agent se basa en su uso del [Módulo criptográfico - Certificado n.º 4282][1] validado por FIPS 140-2. Consulte la [política de seguridad][2] relacionada para obtener información sobre entornos operativos validados y restricciones. 
 
-FIPS Agent es una versión del Datadog Agent que admite de forma nativa la conformidad de las Normas Federales de Procesamiento de la Información (FIPS). La conformidad de FIPS Agent se basa en el uso del [Módulo criptográfico - Certificado nº 4282][1] validado por FIPS 140-2. Consulta la [política de seguridad][2] relacionada para obtener información sobre los entornos operativos validados y las restricciones. 
+El FIPS Agent también incluye [soporte limitado para integraciones][3] que necesitan recopilar datos de observabilidad externos al servidor.
 
-FIPS Agent también incluye [compatibilidad limitada para integraciones][3] que necesitan recopilar datos de observabilidad externos al host.
+**Es su responsabilidad garantizar el cumplimiento del entorno operativo con la política de seguridad y la guía FIPS más amplia.**
 
-**Es responsabilidad del usuario garantizar que el entorno de funcionamiento cumple la política de seguridad y las directrices generales de FIPS.
-
-## Plataformas compatibles y limitaciones
+## Plataformas compatibles y limitaciones {#supported-platforms-and-limitations}
 
 Plataformas compatibles:
 
 |      |             |
 | ---  | ----------- |
-| Bare metal y máquinas virtuales (VM) | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12<br>Windows Server >= 2016<br>Windows >= 10|
-| Nube y contenedor| Amazon ECS<br>AWS EKS (Helm)<br>Docker|
+| Servidores físicos y máquinas virtuales | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12<br>Windows Server >= 2016<br>Windows >= 10|
+| Nube y contenedores| Amazon ECS<br>AWS EKS (Helm)<br>Docker|
 
-Productos compatibles (Agent 7.65.0 y superiores):
+Productos compatibles (Agent 7.65.0 y superior):
 - Métricas
 - Logs
 - Trazas de APM
-- Perfiles APM
+- Perfiles de APM
 - Procesos
 - Orchestrator Explorer
-- Seguridad en tiempo de ejecución
+- Runtime Security
 - Serverless Monitoring
+- [Collector del Agent][4] (el Collector de OpenTelemetry que se ejecuta junto al Agent como un proceso independiente)
 
-El Datadog FIPS Agent **no** admite lo siguiente:
-- Comunicación entre el Agent de clúster y los Agents de nodo
-- Comunicación saliente a un destino distinto de GovCloud
-- Datadog [Datadog distribution of OpenTelemetry (DDOT) Collector][4]
+El FIPS Agent de Datadog **no** admite lo siguiente:
+- Comunicación entre el Cluster Agent y los Node Agents
+- Comunicación saliente hacia cualquier destino que no sea GovCloud
 
 
-## Directrices de conformidad
+## Pautas de cumplimiento {#compliance-guidelines}
 <div class="alert alert-danger">
-No se trata de una lista exhaustiva. Estos requisitos son solo una referencia. Tú eres responsable de evaluar tu entorno e implantar los controles adicionales necesarios para lograr la plena conformidad con FIPS.
+Esta no es una lista exhaustiva. Estos requisitos son solo una base. Usted es responsable de evaluar su entorno e implementar los controles adicionales necesarios para lograr el cumplimiento total de FIPS.
 </div>
-Los siguientes controles básicos se aplican a cada plataforma. Tu sistema puede requerir controles adicionales:
+Los siguientes controles básicos se aplican a cada plataforma. Es posible que su sistema requiera controles adicionales:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-- Un host Linux no contenedorizado.
-- Tu sistema operativo Linux debe estar en modo compatible con FIPS. Consulta la documentación del proveedor de tu sistema operativo para conocer los pasos necesarios para cumplir este requisito.
-- Almacenamiento compatible con FIPS que respalda el sistema de archivos del host.
+- Un servidor Linux no contenedorizado.
+- Su sistema operativo Linux debe estar en modo compatible con FIPS. Consulte la documentación del proveedor de su sistema operativo sobre los pasos necesarios para cumplir con este requisito.
+- Almacenamiento compatible con FIPS que respalde el sistema de archivos del servidor.
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-- Un host Windows no contenerizado.
+- Un servidor Windows no contenedorizado.
 - Windows debe estar en [modo compatible con FIPS][1].
-- Almacenamiento compatible con FIPS que respalda el sistema de archivos del host.
+- Almacenamiento compatible con FIPS que respalde el sistema de archivos del servidor.
 
 [1]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
-- Utiliza una región conforme a FIPS (por ejemplo, AWS GovCloud)
+- Utilice una región compatible con FIPS (por ejemplo, AWS GovCloud)
 {{% /tab %}}
 
 {{% tab "AWS ECS" %}}
-- Utiliza una región conforme a FIPS (por ejemplo, AWS GovCloud)
-- Configura los servicios informáticos de AWS (EC2 o Fargate) en modo FIPS.
-- Utiliza el almacenamiento conforme a FIPS para tus tareas de ECS
+- Utilice una región compatible con FIPS (por ejemplo, AWS GovCloud)
+- Configure los servicios de cómputo de AWS (EC2 o Fargate) en modo FIPS
+- Utilice almacenamiento compatible con FIPS para sus tareas de ECS
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
-- Utiliza una región conforme a FIPS (por ejemplo, AWS GovCloud)
-- Configura los nodos trabajadores EKS en modo FIPS
-- Utiliza el almacenamiento conforme a FIPS para tus nodos de trabajo EKS
+- Utilice una región compatible con FIPS (por ejemplo, AWS GovCloud)
+- Configure los nodos de trabajo de EKS en modo FIPS
+- Utilice almacenamiento compatible con FIPS para sus nodos de trabajo de EKS
 {{% /tab %}}
 
 {{< /tabs >}}
 
-Además de los requisitos del sistema operativo (SO) mencionados anteriormente:
-- Debes tener acceso a un entorno de Datadog conforme a FIPS (US1-FED).
-- La versión del Agent debe ser 7.65.0 y superior para acceder al FIPS Agent
+Además de los requisitos del sistema operativo (SO) anteriores:
+- Debe tener acceso a un entorno de Datadog compatible con FIPS (US1-FED o US2-FED).
+- La versión del Agent debe ser 7.65.0 o superior para acceder al FIPS Agent
 
-## Instalación
+## Instalación {#installation}
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Instala el Agent con compatibilidad con FIPS.
+1. Instale el Agent con compatibilidad con FIPS.
 
-   **Nota:** La compatibilidad con FIPS solo está disponible en el Agent a partir de la versión 7.65.0:
-   1. Si utilizas el script de instalación del Agent, especifica la variable de entorno `DD_AGENT_FLAVOR="datadog-fips-agent"` en tu comando de instalación. Por ejemplo:
+   **Nota:** La compatibilidad con FIPS solo está disponible en las versiones 7.65.0 y superiores del Agent:
+   1. Si utiliza el script de instalación del Agent, especifique la variable de entorno `DD_AGENT_FLAVOR="datadog-fips-agent"` en su comando de instalación. Por ejemplo:
 
-      ```sh
-      DD_SITE="ddog-gov.com" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" ... bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-      ```
-   1. Si vas a instalar con un paquete, [sigue las instrucciones][1] para instalar el último paquete `datadog-fips-agent` disponible para tu plataforma.
-   1. Añade `GOFIPS=1` a tus variables de entorno Datadog, vuelve a cargar todas las unidades de servicio y reinicia el servicio del Datadog Agent (`datadog-agent.service`). Por ejemplo, si tu host utiliza systemd:
+      <pre><code>DD_SITE="{{< region-param key="dd_site" >}}" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" … bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"</code></pre>
+   1. Si realiza la instalación con un paquete, [siga las instrucciones][1] para instalar el paquete `datadog-fips-agent` más reciente disponible para su plataforma.
+   1. Agregue `GOFIPS=1` a sus variables de entorno de Datadog, recargue todas las unidades de servicio y reinicie el servicio Datadog Agent (`datadog-agent.service`). Por ejemplo, si su servidor utiliza systemd:
 
       ```sh
       echo "GOFIPS=1" | sudo tee -a /etc/datadog-agent/environment
       systemctl daemon-reload
       systemctl restart 'datadog-agent*'
       ```
-1. Ejecuta el comando `datadog-agent status` y asegúrate de ver `FIPS Mode: enabled` en el resultado del estado.
+1. Ejecute el comando `datadog-agent status` y asegúrese de ver `FIPS Mode: enabled` en la salida de estado.
 
-{{< img src="/agent/fips-linux.png" alt="Resultado del comando del Agent con el modo FIPS activado - Linux" style="width:100%;" >}}
+{{< img src="/agent/fips-linux.png" alt="Salida del comando de estado del Agent con el modo FIPS habilitado: Linux" style="width:100%;" >}}
 
 [1]: /es/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 
-1. Sigue las [instrucciones de Wiindows][1] para desinstalar cualquier Datadog Agent existente en la máquina.
-1. Ejecuta el siguiente comando para instalar el FIPS Agent, sustituyendo `DATADOG_API_KEY` por tu clave de API:
+1. Siga las [instrucciones para Windows][1] para desinstalar cualquier Datadog Agent existente en la máquina.
+1. Ejecute el siguiente comando para instalar el FIPS Agent, reemplazando `DATADOG_API_KEY` con su clave de API:
 
-   **Nota:** La compatibilidad con FIPS solo está disponible en el Agent a partir de la versión 7.65.0:
+   **Nota:** La compatibilidad con FIPS solo está disponible en las versiones 7.65.0 y superiores del Agent:
 
-   {{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
+   <pre><code>$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="&lt;DATADOG_API_KEY&gt;" SITE="{{< region-param key="dd_site" >}}"'
 if ($p.ExitCode -ne 0) {
    Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
-}
-{{< /code-block >}}
+}</code></pre>
 
-3. Ejecuta el comando `status` y asegúrate de ver `FIPS Mode: enabled` en el resultado del estado.
+3. Ejecute el comando `status` del Agent y asegúrese de ver `FIPS Mode: enabled` en la salida de estado.
 
    ```powershell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
    ```
 
-   {{< img src="/agent/fips-powershell.png" alt="Resultado del comando del Agent con el modo FIPS activado - Windows" style="width:100%;" >}}
+   {{< img src="/agent/fips-powershell.png" alt="Salida del comando de estado del Agent con el modo FIPS habilitado: Windows" style="width:100%;" >}}
 
 
-**Nota**: El nombre del programa del Agent FIPS en **Add or Remove Programs** (Añadir o quitar programas) es "Datadog FIPS Agent." (FIPS Agent de Datadog)
+**Nota**: El nombre del programa del FIPS Agent en {{< ui >}}Add or Remove Programs{{< /ui >}} es "Datadog FIPS Agent".
 
 [1]: /es/agent/basic_agent_usage/windows/#uninstall-the-agent
 
@@ -161,7 +159,7 @@ if ($p.ExitCode -ne 0) {
 
 {{% tab "AWS Lambda" %}}
 
-Para la conformidad de FIPS de AWS Lambda, sigue las instrucciones de la documentación [Conformidad de FIPS de AWS Lambda][1].
+Para garantizar el cumplimiento de FIPS en AWS Lambda, siga las instrucciones de la documentación [AWS Lambda FIPS Compliance][1].
 
 [1]: /es/serverless/aws_lambda/fips-compliance/
 
@@ -169,52 +167,48 @@ Para la conformidad de FIPS de AWS Lambda, sigue las instrucciones de la documen
 
 {{% tab "AWS ECS" %}}
 
-Cuando sigas las [instrucciones de instalación de ECS][1], asegúrate de utilizar estos valores de configuración específicos de FIPS para tu Definición de tarea:
-- Configura `image` en el objeto `containerDefinitions` en `public.ecr.aws/datadog/agent:7-fips` 
-- Configura la variable de entorno `DD_SITE` en `ddog-gov.com`
+Al seguir las [instrucciones de instalación de ECS][1], asegúrese de utilizar estos valores de configuración específicos de FIPS para su Task Definition:
+- Establezca `image` en el objeto `containerDefinitions` en `public.ecr.aws/datadog/agent:7-fips`  
+- Establezca la variable de entorno `DD_SITE` en {{< region-param key="dd_site" code="true" >}}
 
 [1]: /es/containers/amazon_ecs/
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
 
-Cuando sigas las instrucciones de [Instalación del Datadog Agent en Kubernetes][1], asegúrate de incluir estos valores de configuración específicos de FIPS en el archivo `datadog-agent.yaml` en función del método de instalación elegido:
+Al seguir las instrucciones de [instalación del Datadog Agent en Kubernetes][1], asegúrese de incluir estos valores de configuración específicos de FIPS en el archivo `datadog-agent.yaml` según el método de instalación elegido:
 
 Para el Datadog Operator:
-```yaml
-spec:
+<pre><code>spec:
    global:
-      site: "ddog-gov.com"
-      useFIPSAgent: true
-```
+      site: "{{< region-param key="dd_site" >}}"
+      useFIPSAgent: true</code></pre>
 
-Para Helm Chart de Datadog:
-```yaml
-datadog:
-   site: "ddog-gov.com"
-useFIPSAgent: true
-```
+Para el Datadog Helm Chart:
+<pre><code>datadog:
+   site: "{{< region-param key="dd_site" >}}"
+useFIPSAgent: true</code></pre>
 
 [1]: /es/containers/kubernetes/installation/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Seguridad y endurecimiento
+## Security y fortalecimiento {#security-and-hardening}
 
-Como cliente de Datadog, eres responsable de la seguridad y el endurecimiento del **host**.
+Usted, como cliente de Datadog, es responsable de la seguridad y el fortalecimiento del **servidor**.
 
-**Consideraciones de seguridad:**
-- Aunque las imágenes de Datadog que se proporcionan fueron creadas teniendo en cuenta la seguridad, no se han evaluado en función de las recomendaciones de referencia del CIS ni de las normas STIG de DISA.
-- Si reconstruyes, reconfiguras o modificas el Datadog FIPS Agent para adaptarlo a tus necesidades de despliegue o prueba, es posible que termines con una configuración técnicamente funcional, pero Datadog no puede garantizar la conformidad con FIPS si el Datadog FIPS Agent no se utiliza exactamente como se explica en la documentación.
-- Si no has seguido exactamente los pasos de instalación indicados en la documentación, Datadog no puede garantizar la conformidad con FIPS.
-- Algunas distribuciones de Linux con `urllib3 ≤ 1.26.20` pueden fallar en el cifrado FIPS debido a bibliotecas no compatibles. Consulta tu proveedor de Linux para asegurarte de que admita el cifrado conforme a FIPS.
+**Consideraciones de Security:**
+- Aunque las imágenes de Datadog proporcionadas se crean teniendo en cuenta la seguridad, no se han evaluado conforme a las recomendaciones de los benchmarks de CIS ni a los estándares DISA STIG.
+- Si reconstruye, reconfigura o modifica el Datadog FIPS Agent para adaptarlo a sus necesidades de implementación o prueba, es posible que obtenga una configuración que funcione técnicamente, pero Datadog no puede garantizar el cumplimiento de FIPS si el Datadog FIPS Agent no se utiliza exactamente como se explica en la documentación.
+- Si no siguió los pasos de instalación enumerados anteriormente exactamente como se documentaron, Datadog no puede garantizar el cumplimiento de FIPS.
+- Es posible que algunas distribuciones de Linux con `urllib3 ≤ 1.26.20` no puedan realizar un cifrado conforme a FIPS debido a bibliotecas que no cumplen con los requisitos. Consulte con su proveedor de Linux para asegurarse de que haya soporte de cifrado compatible con FIPS.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [3]: /es/integrations/guide/fips-integrations
-[4]: /es/opentelemetry/setup/ddot_collector
+[4]: /es/opentelemetry/setup/agent/#agents-collector

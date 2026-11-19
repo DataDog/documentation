@@ -135,11 +135,11 @@
     "responses": {
       "200": {
         "json": {
-          "description": "string",
+          "description": "Number of requests received.",
           "integration": "string",
           "per_unit": "second",
-          "short_name": "string",
-          "statsd_interval": "integer",
+          "short_name": "requests",
+          "statsd_interval": 10,
           "type": "count",
           "unit": "byte"
         },
@@ -180,11 +180,11 @@
     "responses": {
       "200": {
         "json": {
-          "description": "string",
+          "description": "Number of requests received.",
           "integration": "string",
           "per_unit": "second",
-          "short_name": "string",
-          "statsd_interval": "integer",
+          "short_name": "requests",
+          "statsd_interval": 10,
           "type": "count",
           "unit": "byte"
         },
@@ -226,10 +226,10 @@
     "request": {
       "json_curl": {},
       "json": {
-        "description": "string",
+        "description": "Number of requests received.",
         "per_unit": "second",
-        "short_name": "string",
-        "statsd_interval": "integer",
+        "short_name": "requests",
+        "statsd_interval": 10,
         "type": "count",
         "unit": "byte"
       },

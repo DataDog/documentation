@@ -44,16 +44,16 @@ Le processus de démarrage rapide configure vos fonctions Lambda à la volée. P
 
 Utilisez l'onboarding assisté par agent pour configurer la surveillance de vos fonctions Lambda avec l'assistance de l'IA. L'onboarding assisté par agent détecte les frameworks de votre projet, applique la configuration requise sur place et vérifie que les données circulent. Deux chemins complémentaires utilisent le même compte Datadog :
 
-- **AI Setup CLI** : un outil de terminal autonome. Utilisez-le lorsque vous ne souhaitez pas installer de serveur MCP.
+- **Pup CLI** : exécutez `pup setup` depuis votre terminal. Il ne nécessite pas votre propre assistant de codage ni votre propre modèle d’IA : sa configuration ne consomme donc pas les tokens de votre modèle.
 - **MCP Server** : Configurez-le depuis votre IDE via un assistant de codage tel que Claude Code ou Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Interface de ligne de commande Pup" %}}
 
-Exécutez la CLI dans le répertoire de votre projet (nécessite Node.js 22+). Il lie votre compte Datadog, puis instrumente votre fonction Lambda :
+Exécutez `pup setup` dans le répertoire de votre projet (nécessite Node.js 22+). Il lie votre compte Datadog, puis instrumente votre fonction Lambda :
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda
 ```
 
 Omettez `--product` pour exécuter de manière interactive, ou ajoutez `--site` pour cibler votre site Datadog.

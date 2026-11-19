@@ -1,5 +1,5 @@
 ---
-description: Configure Datadog Feature Flags para aplicaciones Angular.
+description: Configure las Feature Flags de Datadog para aplicaciones Angular.
 further_reading:
 - link: /feature_flags/client/
   tag: Documentación
@@ -10,13 +10,13 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/browser/
   tag: Documentación
   text: Browser Monitoring
-title: Feature Flags de Angular
+title: Angular Feature Flags
 ---
 ## Descripción general {#overview}
 
-Esta página describe cómo instrumentar su aplicación Angular con el Datadog Feature Flags SDK. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
+Esta página describe cómo instrumentar su aplicación Angular con el SDK de Feature Flags de Datadog. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
 
-El Datadog Feature Flags SDK para Angular está construido sobre [OpenFeature][1], un estándar abierto para la gestión de Feature Flags. Esta guía explica cómo instalar el SDK, configurar el proveedor de Datadog y evaluar Feature Flags en sus componentes Angular utilizando directivas estructurales o el FeatureFlagService.
+El SDK de Feature Flags de Datadog para Angular está construido sobre [OpenFeature][1], un estándar abierto para la gestión de Feature Flags. Esta guía explica cómo instalar el SDK, configurar el proveedor de Datadog y evaluar Feature Flags en sus componentes Angular utilizando directivas estructurales o el FeatureFlagService.
 
 ## Requisitos {#requirements}
 
@@ -145,9 +145,9 @@ const provider = new DatadogProvider({
 export class AppModule {}
 ```
 
-### Actualizar el contexto de evaluación {#update-the-evaluation-context}
+### Actualice el contexto de evaluación {#update-the-evaluation-context}
 
-Para actualizar el contexto de evaluación después de la inicialización (por ejemplo, cuando un usuario inicia sesión), use `OpenFeature.setContext()`:
+Para actualizar el contexto de evaluación después de la inicialización (por ejemplo, cuando un usuario inicia sesión), utilice `OpenFeature.setContext()`:
 
 {{< code-block lang="typescript" >}}
 import { OpenFeature } from '@openfeature/angular-sdk';
@@ -162,10 +162,10 @@ await OpenFeature.setContext({
 
 ## Evalúe marcadores {#evaluate-flags}
 
-El OpenFeature Angular SDK proporciona dos formas principales de trabajar con Feature Flags:
+El SDK de OpenFeature para Angular proporciona dos formas principales de trabajar con Feature Flags:
 
-1. **Directivas estructurales**: para renderizado condicional basado en plantillas
-2. **FeatureFlagService**: para acceso programático con **Observables** o **Signals**
+1. **Directivas estructurales** - Para renderizado condicional basado en plantillas
+2. **FeatureFlagService** - Para acceso programático con **Observables** o **Signals**
 
 ### Marcadores booleanos {#boolean-flags}
 
@@ -209,7 +209,7 @@ export class MyComponent {
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Signals" %}}
+{{% tab "Señales" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -273,7 +273,7 @@ export class MyComponent {
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Signals" %}}
+{{% tab "Señales" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -335,7 +335,7 @@ export class MyComponent {
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Signals" %}}
+{{% tab "Señales" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -399,7 +399,7 @@ export class MyComponent {
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Signals" %}}
+{{% tab "Señales" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -425,7 +425,7 @@ export class MyComponent {
 
 #### Deshabilitar el renderizado automático {#disable-automatic-re-rendering}
 
-De forma predeterminada, las directivas se vuelven a renderizar cuando el valor de la Feature Flag cambia o cuando cambia el contexto. Puede deshabilitar este comportamiento:
+De forma predeterminada, las directivas se vuelven a renderizar cuando cambia el valor de la Feature Flag o el contexto. Puede deshabilitar este comportamiento:
 
 {{< code-block lang="html" >}}
 <div
@@ -459,7 +459,7 @@ Puede acceder a los detalles de evaluación en sus plantillas:
 </ng-template>
 {{< /code-block >}}
 
-Cuando se omite el valor esperado de la Feature Flag, la plantilla siempre se renderiza. Esto se puede utilizar para renderizar solo el valor de la Feature Flag o los detalles sin renderizado condicional.
+Cuando se omite el valor esperado de la Feature Flag, la plantilla siempre se renderiza. Esto se puede utilizar para renderizar solo el valor de la Feature Flag o los detalles sin renderizado condicional:
 
 {{< code-block lang="html" >}}
 <div *stringFeatureFlag="'themeColor'; default: 'light'; let value;">
@@ -496,26 +496,26 @@ export class MyComponent {
 }
 {{< /code-block >}}
 
-## Configurar las opciones del proveedor del navegador {#configure-browser-provider-options}
+## Configurar opciones del proveedor del navegador {#configure-browser-provider-options}
 
-El proveedor de Angular utiliza el proveedor de navegador de Datadog, que también admite estos ajustes opcionales:
+El proveedor de Angular utiliza el proveedor del navegador de Datadog, que también admite estos ajustes opcionales:
 
 | Opción | Predeterminado | Uso |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Enviar eventos de exposición a la ingesta de exposiciones. |
+| `trackExposures` | `true` | Enviar eventos de exposición a la ingesta de exposiciones. Disponible en la versión 2.3.0 y posteriores. Reemplaza la opción obsoleta `enableExposureLogging`. Para registrar exposiciones en su propio almacén de datos, consulte [Registrar exposiciones de Feature Flags en su propio almacén de datos][5]. |
 | `enableFlagEvaluationTracking` | `true` | Enviar telemetría de evaluación agregada. |
-| `enableRumFeatureFlagTracking` | `true` | Agregar evaluaciones de Feature Flags a los eventos de RUM cuando Browser RUM esté disponible. Habilitar esta opción puede aumentar el conteo de eventos facturados de RUM. |
+| `enableRumFeatureFlagTracking` | `true` | Agregar evaluaciones de Feature Flags a eventos RUM cuando Browser RUM esté disponible. Habilitar esta opción puede aumentar el conteo de eventos facturados de RUM. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Intervalo de vaciado para la telemetría de evaluación. |
-| `initialFlagsConfiguration` | unset | Proporcione datos precalculados que coincidan con el contexto como respaldo si la obtención falla. Consulte [Initial precomputed fallback data][3]. |
+| `initialFlagsConfiguration` | unset | Proporcionar datos precalculados que coincidan con el contexto como alternativa si falla la obtención de datos. Consulte [Datos precalculados iniciales de respaldo][3]. |
 | `flaggingProxy` | unset | Obtener Feature Flags a través de un proxy en lugar de `site`. |
 | `customHeaders` | unset | Agregar encabezados a las solicitudes de obtención de Feature Flags. |
 | `overwriteRequestHeaders` | `false` | Reemplazar los encabezados de solicitud predeterminados con `customHeaders`. |
 
-`DatadogProvider` sigue siendo el proveedor de navegador recomendado para aplicaciones Angular. Para la entrega de configuración propiedad de la aplicación o la evaluación de reglas locales a través de cambios de contexto, consulte [Evaluación basada en reglas del navegador][4]. Esta configuración avanzada requiere una actualización de configuración explícita y la gestión del ciclo de vida del seguimiento.
+`DatadogProvider` sigue siendo el proveedor de navegador recomendado para aplicaciones Angular. Para la entrega de configuración controlada por la aplicación o la evaluación local de reglas ante cambios de contexto, consulte [Evaluación basada en reglas del navegador][4]. Esta configuración avanzada requiere una actualización de configuración explícita y la gestión del ciclo de vida del seguimiento.
 
 ## Pruebas {#testing}
 
-Puede realizar pruebas en un entorno de prueba de Datadog dedicado con el `DatadogProvider` real, o cambiarlo por el `TypedInMemoryProvider` de OpenFeature para controlar los valores de las Feature Flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. `TypedInMemoryProvider` se exporta desde `@openfeature/web-sdk`, que ya está instalado para las Feature Flags de Angular.
+Puede realizar pruebas en un entorno de prueba dedicado de Datadog con el `DatadogProvider` real, o cambiarlo por el `TypedInMemoryProvider` de OpenFeature para controlar los valores de las Feature Flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. `TypedInMemoryProvider` se exporta desde `@openfeature/web-sdk`, que ya está instalado para Angular Feature Flags.
 
 {{< code-block lang="typescript" >}}
 import { TestBed } from '@angular/core/testing';
@@ -554,7 +554,7 @@ it('uses in-memory flag values', async () => {
 });
 {{< /code-block >}}
 
-La estructura de Feature Flags del Web SDK requiere `variants`, `defaultVariant` y `disabled`. Registre el proveedor en memoria antes de inyectar servicios o renderizar componentes que lean Feature Flags.
+La estructura de la Feature Flag del SDK web requiere `variants`, `defaultVariant` y `disabled`. Registre el proveedor en memoria antes de inyectar servicios o renderizar componentes que lean Feature Flags.
 
 ## Lecturas adicionales {#further-reading}
 
@@ -564,3 +564,4 @@ La estructura de Feature Flags del Web SDK requiere `variants`, `defaultVariant`
 [2]: /es/account_management/api-app-keys/#client-tokens
 [3]: /es/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /es/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /es/feature_flags/guide/record_exposures_in_your_own_data_store/

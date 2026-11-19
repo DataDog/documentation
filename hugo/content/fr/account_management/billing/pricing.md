@@ -102,10 +102,18 @@ Vous pouvez mettre en place des contrôles pour les volumes de spans indexés et
 
 ## CI Visibility {#ci-visibility}
 
-* Datadog suit le nombre de contributeurs git uniques qui envoient des données de test et de pipeline au service CI Visibility.
+* Datadog suit le nombre de contributeurs Git uniques qui envoient des données de pipeline au service CI Visibility.
 * Un **contributeur git** désigne un contributeur git actif, identifié par son adresse e-mail d'auteur git. Un contributeur est comptabilisé dans la facturation s'il effectue au moins trois commits au cours d'un mois donné.
   * Dans le cas où un pipeline n'est pas associé à un dépôt git, ou si les métadonnées git ne sont pas disponibles, le nom d'utilisateur de la personne déclenchant l'exécution du pipeline est utilisé comme contributeur facturable.
-* Pour Pipeline Visibility, chaque pipeline, phase de pipeline et job de pipeline compte comme un **span de pipeline**. Pour Testing Visibility, chaque exécution de test individuelle compte comme un **span de test**.
+* Chaque pipeline, phase de pipeline et job de pipeline compte comme un **span de pipeline**.
+
+## Test Optimization {#test-optimization}
+
+* Datadog suit le nombre de contributeurs Git uniques qui envoient des données de test à Test Optimization.
+* Un **contributeur Git** désigne un contributeur Git actif, identifié par son adresse e-mail d'auteur Git. Un contributeur Git est comptabilisé dans la facturation s'il effectue au moins trois commits au cours d'un mois donné.
+* Chaque exécution de test individuelle compte comme un **span de test**. Les spans de test générés par les fonctionnalités de Test Optimization, tels que les nouvelles tentatives ajoutées par Auto Test Retries, ne sont pas facturés. Les tests ignorés par Test Impact Analysis ne sont pas non plus facturés.
+
+Pour plus d'informations, consultez [Facturation de CI/CD Optimization][13].
 
 ## Dépannage {#troubleshooting}
 
@@ -125,3 +133,4 @@ Contactez le [service commercial][8] ou votre [chargé de compte][9] pour toute 
 [10]: /fr/real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /fr/account_management/billing/metric_name_pricing/
+[13]: /fr/account_management/billing/ci_visibility/#counting-test-spans

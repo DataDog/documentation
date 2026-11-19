@@ -208,7 +208,7 @@
       "json": {
         "data": {
           "attributes": {
-            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
+            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "components": [
               {
                 "components": [
@@ -224,13 +224,13 @@
               }
             ],
             "domain_prefix": "status-page-us1",
-            "email_header_image": "data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF",
+            "email_header_image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "email_notifications_enabled": false,
-            "favicon": "data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA",
+            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "ms_teams_subscriptions_enabled": false,
             "name": "Status Page US1",
             "rss_feed_enabled": false,
-            "slack_app_icon": "data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA",
+            "slack_app_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "slack_subscriptions_enabled": false,
             "subscriptions_enabled": true,
             "type": "public",
@@ -687,15 +687,15 @@
       "json": {
         "data": {
           "attributes": {
-            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
+            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "domain_prefix": "status-page-us1",
-            "email_header_image": "data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF",
+            "email_header_image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "email_notifications_enabled": false,
-            "favicon": "data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA",
+            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "ms_teams_subscriptions_enabled": false,
             "name": "Status Page US1",
             "rss_feed_enabled": false,
-            "slack_app_icon": "data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA",
+            "slack_app_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
             "slack_subscriptions_enabled": false,
             "subscriptions_enabled": true,
             "type": "public",

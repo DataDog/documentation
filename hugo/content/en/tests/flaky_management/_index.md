@@ -1,5 +1,5 @@
 ---
-title: Flaky Tests Management
+title: Flaky Management
 description: Track, triage, and manage flaky tests.
 further_reading:
 - link: "/continuous_integration/tests/"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create work items and Jira issues to track work toward fixes.
 
@@ -38,6 +38,12 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 | {{< ui >}}Fixed{{< /ui >}} | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
+
+## Control automation with code annotations
+
+Use code annotations to protect individual tests from Datadog quarantine and disabling, or exclude them from automatic retries. Explicit framework retries remain available.
+
+For supported languages, examples, and version requirements, see [Control Test Automation with Code Annotations][23].
 
 ## Configure policies to automate the flaky test lifecycle
 
@@ -308,3 +314,4 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [21]: /tests/setup/junit_xml/#adding-code-owners
 [22]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[23]: /tests/flaky_management/code_annotations/

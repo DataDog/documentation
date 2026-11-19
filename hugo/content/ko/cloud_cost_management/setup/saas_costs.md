@@ -4,22 +4,22 @@ aliases:
 disable_toc: false
 further_reading:
 - link: /cloud_cost_management/
-  tag: 문서
+  tag: 설명서
   text: Cloud Cost Management
 - link: /cloud_cost_management/setup/aws
-  tag: 문서
+  tag: 설명서
   text: AWS 청구서에 대한 인사이트 확보
 - link: /cloud_cost_management/setup/azure
-  tag: 문서
+  tag: 설명서
   text: Azure 청구서에 대한 인사이트 확보
 - link: /cloud_cost_management/setup/google_cloud
-  tag: 문서
+  tag: 설명서
   text: Google Cloud 청구서에 대한 인사이트 확보
 - link: /cloud_cost_management/setup/oracle
-  tag: 문서
+  tag: 설명서
   text: Oracle 청구서에 대한 인사이트 확보
 - link: /cloud_cost_management/setup/custom
-  tag: 문서
+  tag: 설명서
   text: 사용자 지정 비용에 대한 인사이트 확보
 - link: https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/
   tag: 블로그
@@ -38,6 +38,7 @@ SaaS 및 AI 비용을 사용하면 Datadog에서 클라우드 비용 데이터�
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=chatgptenterprise#configure-your-saas-accounts" src="integrations_logos/chatgpt-enterprise-lockup.svg" alt="ChatGPT Enterprise" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts" src="integrations_logos/temporal_small.svg" alt="temporal cloud" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
@@ -52,7 +53,7 @@ SaaS 및 AI 비용을 사용하면 Datadog에서 클라우드 비용 데이터�
 
 ## 설정 {#setup}
 
-[**Cloud Cost** > **Settings**, select **Accounts**][8]로 이동한 다음 비용 데이터를 수집할 공급자에서 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
+[**Cloud Cost** > **Settings**로 이동한 후 **Accounts**][8]를 선택하고 비용 데이터를 수집할 공급자에서 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="비용 데이터를 수집하려는 AWS, Azure, Google Cloud 계정을 추가합니다. Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, GitHub, Cursor 및 Temporal Cloud 계정을 추가할 수도 있습니다." style="width:100%" >}}
 
@@ -116,7 +117,7 @@ ALTER SESSION SET QUERY_TAG = '{"team": "devops", "application": "CI_job_executo
 {{% tab "Databricks" %}}
 
 1. Datadog에서 [Databricks 통합 타일][101]로 이동하여 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
-2. Databricks 서비스 주체에 해당하는 작업 공간 이름, URL, 클라이언트 ID, 클라이언트 암호를 입력합니다.
+2. Databricks 서비스 주체에 해당하는 작업 공간 이름, URL, 클라이언트 ID, 클라이언트 시크릿을 입력합니다.
 3.  {{< ui >}}Select products to set up integration{{< /ui >}} 섹션에서 각 계정의 토글을 클릭하여 Databricks `Cloud Cost Management`를 활성화합니다.
 4. Databricks 인스턴스의 웨어하우스에 해당하는 `System Tables SQL Warehouse ID`를 입력하여 시스템 테이블 청구 데이터를 쿼리합니다.
 5. {{< ui >}}Save Databricks Workspace{{< /ui >}}를 클릭합니다.
@@ -144,7 +145,7 @@ GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 
 1. OpenAI 계정 설정에서 [관리자 API 키][103]를 생성합니다.
    - [OpenAI 계정][104]에 로그인합니다.
-   - [관리자 키 페이지][105]로 이동하거나 {{< ui >}}Organization settings{{< /ui >}} 아래의 {{< ui >}}API keys{{< /ui >}} 로 이동한 후 {{< ui >}}Admin keys{{< /ui >}} 탭을 선택합니다.
+   - [Admin Keys 페이지][105]로 이동하거나 {{< ui >}}Organization settings{{< /ui >}} 아래의 {{< ui >}}API keys{{< /ui >}}로 이동한 후 {{< ui >}}Admin keys{{< /ui >}} 탭을 선택합니다.
    - {{< ui >}}Create a new secret key{{< /ui >}}를 클릭한 후 생성된 관리자 API 키를 복사합니다.
 2. Datadog에서 [OpenAI 통합 타일][102]로 이동하여 {{< ui >}}Add Account{{< /ui >}}를 클릭합니다.
 3. OpenAI 계정 이름을 입력하고, 관리자 API 키를 입력한 다음, 필요시 태그를 지정합니다.
@@ -183,6 +184,46 @@ GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 
 {{% /tab %}}
 
+{{% tab "ChatGPT Enterprise" %}}
+
+### 1. Costs 전용 관리자 API 키 생성 {#1-create-a-costs-only-admin-api-key}
+
+OpenAI의 Costs API에 액세스할 수 있는 ChatGPT Enterprise 워크스페이스를 사용하세요. 반드시 워크스페이스 소유자나 관리자가 키를 생성해야 합니다.
+
+1. ChatGPT Admin Console을 열고 ChatGPT Enterprise 워크스페이스를 선택하세요.
+2. {{< ui >}}Credentials{{< /ui >}} > {{< ui >}}Admin keys{{< /ui >}} > {{< ui >}}Create new admin key{{< /ui >}}로 이동하세요.
+3. 워크스페이스 소유자인 경우 {{< ui >}}Custom permissions{{< /ui >}}을 선택하세요. {{< ui >}}Costs{{< /ui >}}를 {{< ui >}}Read{{< /ui >}}로 설정하고 다른 권한 범주는 {{< ui >}}None{{< /ui >}}으로 유지하세요.
+4. 키를 생성하고 해당 키의 시크릿을 안전한 위치에 복사하세요.
+
+이 키는 OpenAI API Platform의 관리자 키 콘솔이 아니라 ChatGPT Admin Console에서 생성하세요. 자세한 내용은 [ChatGPT Enterprise 통합 설정][101]을 참조하세요.
+
+### 2. Datadog 통합 구성 {#2-configure-the-datadog-integration-1}
+
+1. Datadog에서 [ChatGPT Enterprise 통합 타일][102]을 여세요.
+2. {{< ui >}}Install{{< /ui >}}을 선택하고 {{< ui >}}Configure{{< /ui >}}를 연 다음 {{< ui >}}Add Account{{< /ui >}}를 선택하세요.
+3. {{< ui >}}Account name{{< /ui >}}, {{< ui >}}ChatGPT Enterprise Admin API Key{{< /ui >}} 및 {{< ui >}}OpenAI Organization ID{{< /ui >}}을 입력하세요.
+4. 계정에 대한 Cloud Cost Management 데이터 수집을 활성화하고 구성을 저장하세요.
+
+조직 ID는 워크스페이스의 Enterprise 사용량에 대해 Costs API에서 사용하는 `org-...` ID여야 합니다. ChatGPT 워크스페이스 UUID나 Datadog 조직 ID를 입력하지 마세요. 조직 ID를 모르는 경우 워크스페이스 소유자나 OpenAI 지원팀에 문의하세요.
+
+Cloud Cost Management를 활성화하면 Datadog은 최대 30일 분량의 사용 가능한 과거 비용을 수집합니다. 이후 수집은 매시간 수행됩니다. OpenAI 보고 지연 및 Datadog 처리로 인해 최근 사용량이 나중에 표시될 수 있습니다.
+
+비용 데이터가 수집되면 [Cloud Cost Management 공급자][103]를 열어 계정을 확인하세요. 그런 다음 [AI Cost Summary 페이지][104]에서 {{< ui >}}ChatGPT Enterprise{{< /ui >}}를 선택하세요. OpenAI API Platform 비용은 별도의 OpenAI 통합을 사용합니다.
+
+### 비용 보고 {#cost-reporting}
+
+ChatGPT Enterprise는 ChatGPT Chat, ChatGPT Work 및 Codex 전반의 사용량을 보고합니다. 크레딧을 기준으로 요금이 책정되는 사용량의 경우, Cloud Cost Management는 사용된 크레딧 수가 아니라 OpenAI에서 산정한 미화(USD) 기준 예상 금액을 총비용에 포함합니다. 미화로 직접 청구되는 사용량의 경우에는 보고된 미화 금액이 포함됩니다. 이러한 사용 비용은 최종 청구서의 금액과 다를 수 있습니다.
+
+모델별 및 사용자별 세부 내역은 OpenAI가 제공하는 필드에 따라 달라집니다. 사용 가능한 차원에 대해서는 [수집된 데이터][105]를 참조하세요.
+
+[101]: /ko/integrations/chatgpt-enterprise/#setup
+[102]: https://app.datadoghq.com/integrations/chatgpt-enterprise
+[103]: https://app.datadoghq.com/cost/settings/providers
+[104]: /ko/cloud_cost_management/ai_costs/
+[105]: #data-collected
+
+{{% /tab %}}
+
 {{% tab "Cursor" %}}
 
 <div class="alert alert-warning">Cursor 관리자 API 키를 생성하려면 Enterprise 플랜과 팀 관리자 역할이 필요합니다. 표준 팀 플랜 계정은 액세스 거부 오류를 반환합니다.</div>
@@ -194,11 +235,11 @@ GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 1. Cursor 대시보드에서 **Settings > Advanced > Admin API Keys**로 이동합니다.
 2. 새 관리자 API 키를 생성하고 안전한 위치에 복사합니다.
 
-### 2. Datadog 통합 구성 {#2-configure-the-datadog-integration-1}
+### 2. Datadog 통합 구성 {#2-configure-the-datadog-integration-2}
 
 1. Datadog에서 [**Integrations > Cursor**][101]로 이동합니다.
 2. {{< ui >}}Configure{{< /ui >}} 탭의 {{< ui >}}Account details{{< /ui >}} 아래에 Cursor에서 복사한 {{< ui >}}Admin API Key{{< /ui >}}를 붙여넣습니다.
-3. {{< ui >}}Resources{{< /ui >}} 섹션 아래에서 각 계정의 토글을 클릭하여 `Cursor in Cloud Cost Management`를 활성화합니다.
+3. {{< ui >}}Resources{{< /ui >}} 섹션에서 각 계정의 토글을 클릭하여 `Cursor in Cloud Cost Management`를 활성화합니다.
 4. {{< ui >}}Save{{< /ui >}}를 클릭합니다.
 
 구성을 저장하면 Datadog에서 이 키를 사용하여 Cursor 사용량 및 비용 엔드포인트를 폴링하기 시작하며, 환경에서 메트릭을 채웁니다. 지난 15개월간의 Cursor 비용 데이터는 24시간 후 Cloud Cost Management에서 액세스할 수 있습니다. 각 SaaS 비용 통합에서 수집하여 사용 가능한 데이터에 액세스하려면 [수집된 데이터 섹션](#data-collected)을 참조하세요.
@@ -215,9 +256,9 @@ GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 
 1. Temporal Cloud에서 **Settings > Service Accounts > Create Service Account**로 이동합니다.
 2. 서비스 계정에 **재무 관리자** 또는 **계정 소유자** 역할을 할당합니다.
-3. 서비스 계정에 대한 API 키를 생성하고 안전한 위치에 복사합니다. Temporal Cloud는 키를 한 번만 표시합니다.
+3. 서비스 계정에 대한 API 키를 생성하고 안전한 위치에 복사합니다. Temporal Cloud는 키를 1번만 표시합니다.
 
-### 2. Datadog 통합 구성 {#2-configure-the-datadog-integration-2}
+### 2. Datadog 통합 구성 {#2-configure-the-datadog-integration-3}
 
 1. Datadog에서 [**Integrations > Temporal Cloud Cost Management**][110]로 이동합니다.
 2. {{< ui >}}Install Integration{{< /ui >}}을 클릭한 다음 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
@@ -456,7 +497,7 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
     </tr>
     <tr>
       <td><code>cloud</code></td>
-      <td>이 사용량은 클라우드와 관련이 있습니다. 가능한 값은 AWS, AZURE, GCP입니다.</td>
+      <td>이 사용량과 관련된 클라우드입니다. 가능한 값은 AWS, AZURE, GCP입니다.</td>
     </tr>
     <tr>
       <td><code>cluster_id</code></td>
@@ -508,7 +549,7 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
     </tr>
     <tr>
       <td><code>job_id</code></td>
-      <td>Databricks 내 작업에 대한 고유 식별자입니다</td>
+      <td>Databricks 내 작업에 대한 고유 식별자입니다.</td>
     </tr>
     <tr>
       <td><code>job_name</code></td>
@@ -611,6 +652,20 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
 
 {{% /tab %}}
 
+{{% tab "ChatGPT Enterprise" %}}
+
+| 태그 이름 | 태그 설명 |
+|---|---|
+| `model` | OpenAI에서 보고한 모델 식별자입니다. |
+| `product` | ChatGPT Chat, ChatGPT Work, Codex 등 사용량을 생성한 제품입니다. |
+| `user_email` | OpenAI에서 제공한 경우, 사용량을 생성한 사용자의 이메일 주소입니다. |
+| `billing_mode` | 청구 단위: 크레딧 기준으로 요금이 측정되는 사용량은 `credits`, 미화(USD)로 직접 청구되는 사용량은 `usd`입니다. |
+| `service_tier` | 사용량에 대해 보고된 서비스 계층입니다. |
+
+사용 가능한 태그는 소스 레코드에 따라 다릅니다. 크레딧을 기준으로 요금이 책정되는 사용량은 사용된 크레딧 수가 아니라 미화 기준 예상 비용으로 환산되어 Cloud Cost Management의 총비용에 반영됩니다.
+
+{{% /tab %}}
+
 {{% tab "Cursor" %}}
 
 | 태그 이름 | 태그 설명 |
@@ -653,10 +708,10 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
 |---|---|
 | `enterprise_name` | GitHub 엔터프라이즈 계정을 식별하는 영숫자 문자열입니다. |
 | `charge_description` | 청구에 대한 설명입니다. |
-| `product` | 사용 제품입니다(예: "actions" 또는 "storage"). |
+| `product` | 사용 제품입니다(예: 'actions' 또는 'storage'). |
 | `organization_name` | GitHub 조직입니다. |
 | `repository_name` | GitHub 리포지토리입니다. |
-| `billing_currency` | 청구 통화입니다(예: "USD"). |
+| `billing_currency` | 청구 통화입니다(예:'USD'). |
 | `discount` | 비용 항목이 할인인 경우입니다. |
 
 {{% /tab %}}
@@ -681,11 +736,11 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
     </tr>
     <tr>
       <td><code>network_access_type</code></td>
-      <td>클러스터의 네트워크 액세스 유형입니다. 가능한 값은 <code>INTERNET</code>, <code>TRANSIT_GATEWAY</code>, <code>PRIVATE_LINK</code>, 및 <code>PEERED_VPC</code>).</td>
+      <td>클러스터의 네트워크 액세스 유형입니다. 가능한 값은 <code>INTERNET</code>, <code>TRANSIT_GATEWAY</code>, <code>PRIVATE_LINK</code>및 <code>PEERED_VPC</code>입니다.</td>
     </tr>
     <tr>
       <td><code>product</code></td>
-      <td>제품 이름입니다. 가능한 값은 <code>KAFKA</code>, <code>CONNECT</code>, <code>KSQL</code>, <code>AUDIT_LOG</code>, <code>STREAM_GOVERNANCE</code>, <code>CLUSTER_LINK</code>, <code>CUSTOM_CONNECT</code>, <code>FLINK</code>, <code>SUPPORT_CLOUD_BASIC</code>, <code>SUPPORT_CLOUD_DEVELOPER</code>, <code>SUPPORT_CLOUD_BUSINESS</code>, 및 <code>SUPPORT_CLOUD_PREMIER</code>).</td>
+      <td>제품 이름입니다. 가능한 값은 <code>KAFKA</code>, <code>CONNECT</code>, <code>KSQL</code>, <code>AUDIT_LOG</code>, <code>STREAM_GOVERNANCE</code>, <code>CLUSTER_LINK</code>, <code>CUSTOM_CONNECT</code>, <code>FLINK</code>, <code>SUPPORT_CLOUD_BASIC</code>, <code>SUPPORT_CLOUD_DEVELOPER</code>, <code>SUPPORT_CLOUD_BUSINESS</code>및 <code>SUPPORT_CLOUD_PREMIER</code>입니다.</td>
     </tr>
     <tr>
       <td><code>resource_id</code></td>
@@ -765,7 +820,7 @@ Confluent Cloud 비용 데이터는 설정 후 24시간이 지나면 Cloud Cost 
     </tr>
     <tr>
       <td><code>service_name</code></td>
-      <td>이 비용 항목과 관련된 서비스의 이름으로, 종종 다음 항목과 일치합니다. <code>product_name</code>).</td>
+      <td>이 비용 항목과 관련된 서비스의 이름으로, 종종 <code>product_name</code>과 일치합니다.</td>
     </tr>
     <tr>
       <td><code>usage_type</code></td>

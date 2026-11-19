@@ -12,6 +12,9 @@ further_reading:
 - link: /llm_observability/instrument/api/
   tag: Documentación
   text: Referencia de la API HTTP de Agent Observability
+- link: https://www.datadoghq.com/blog/agent-observability-voice-agent/
+  tag: Blog
+  text: Rastree agentes de voz con Datadog Agent Observability
 title: Soporte multimodal
 ---
 ## Descripción general {#overview}
@@ -35,7 +38,7 @@ No se aplica ninguna versión mínima del SDK de Datadog a la [API HTTP de Agent
 
 ## Instrumentación automática {#automatic-instrumentation}
 
-Habilite la [instrumentación automática][3] para capturar medios de las siguientes bibliotecas.
+Habilite [la instrumentación automática][3] para capturar medios de las siguientes bibliotecas.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -63,15 +66,18 @@ El audio en las finalizaciones de chat transmitidas (`stream=True`) no se captur
 | Finalizaciones de chat de OpenAI | Contenido de entrada `input_audio` y audio de salida, incluida la transcripción de audio del modelo | v6: >= 6.7.0; v5: >= 5.118.0 |
 | Agentes de OpenAI | Audio de entrada y salida, a través del formato de finalizaciones de chat de OpenAI | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Realtime API | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | v6: >= 6.17.0; v5: >= 5.128.0 |
+| OpenAI Agents Realtime SDK | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas para conexiones WebSocket y sideband SIP | v6: >= 6.25.0; v5: >= 5.136.0 |
 | Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Audio de entrada y salida por turno, transcripciones, uso de tokens y llamadas a herramientas | v6: >= 6.22.0; v5: >= 5.133.0 |
-| ElevenLabs Agents (WebSocket) | Audio de entrada y salida de la conversación, transcripciones y llamadas a herramientas del cliente | Próximamente |
+| ElevenLabs Agents (WebSocket) | Audio de entrada y salida de la conversación, transcripciones y llamadas a herramientas del cliente | v6: >= 6.25.0; v5: >= 5.136.0 |
+
+La instrumentación de OpenAI Agents Realtime SDK requiere `@openai/agents-realtime` 0.20.0 o posterior. Para deshabilitar las recuperaciones de audio emitidas por el rastreador para sidebands SIP, configure `DD_OPENAI_REALTIME_SIDEBAND_AUDIO_RETRIEVAL_ENABLED=false`.
 
 El audio en las finalizaciones de chat transmitidas no se captura.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Conversación de voz en Agent Observability con una línea de tiempo de reproducción de audio, segmentos de habla del usuario y del Agent, indicadores de latencia de respuesta y transcripciones de turnos." caption="Reproducción de conversaciones de voz y transcripciones de turnos capturadas con instrumentación automática." style="width:100%;" >}}
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Conversación de voz en Agent Observability con una línea de tiempo de reproducción de audio, segmentos de habla del usuario y del agente, insignias de latencia de respuesta y transcripciones de turnos." caption="Reproducción de conversaciones de voz y transcripciones de turnos capturadas mediante instrumentación automática." style="width:100%;" >}}
 
 Integrations no obtienen imágenes referenciadas por una URL remota o un ID de archivo. Solo capturan las imágenes que la aplicación envía en línea como datos base64. Cuando una integración no puede capturar medios, registra un marcador de texto como `[image]` o `[audio]` en el mensaje.
 

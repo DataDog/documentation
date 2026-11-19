@@ -3,7 +3,7 @@ description: Datadog Feature Flag SDK 네트워크 요청을 사용자 도메인
 further_reading:
 - link: /feature_flags/guide/proxy_server_setup/
   tag: 가이드
-  text: Feature Flag SDK 트래픽을 위한 프록시 서버 설정
+  text: Feature Flag SDK 트래픽을 위한 프록시 서버 설정하기
 - link: /feature_flags/client/
   tag: 설명서
   text: 클라이언트 측 Feature Flags
@@ -14,7 +14,7 @@ title: Feature Flag SDK 트래픽 프록시
 ---
 ## 개요 {#overview}
 
-Datadog Feature Flag SDK는 애플리케이션에서 다음과 같은 두 가지 유형의 아웃바운드 네트워크 요청을 수행합니다.
+Datadog Feature Flag SDK는 애플리케이션에서 다음과 같은 2가지 유형의 아웃바운드 네트워크 요청을 수행합니다.
 
 1. **플래그 구성 다운로드**: SDK는 시작 시와 평가 컨텍스트가 변경될 때 Datadog CDN에서 미리 계산된 플래그 할당을 가져옵니다. 이 요청은 어떤 플래그 변형이 애플리케이션으로 반환되는지 결정합니다.
 2. **이벤트 업로드**: SDK는 노출 및 평가 이벤트 데이터를 Datadog 수집 엔드포인트로 보냅니다.
@@ -173,18 +173,20 @@ await DdFlags.enable({
 
 {{% tab "브라우저" %}}
 
-`DatadogBrowserFlagging.init()`에 설정 옵션을 전달합니다.
+`@datadog/openfeature-browser`에서 `DatadogProvider`에 이 옵션을 전달하세요.
 
 ### 플래그 구성 프록시 {#flag-configuration-proxy-3}
 
 플래그 구성 다운로드를 프록시를 통해 라우팅하려면 `flaggingProxy`를 프록시 엔드포인트의 URL로 설정합니다. SDK는 평가 컨텍스트가 포함된 본문과 함께 POST 요청을 이 URL로 직접 전송하여 기본 Datadog CDN 엔드포인트를 대체합니다.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
+import { DatadogProvider } from '@datadog/openfeature-browser';
 
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
 });
 {{< /code-block >}}
@@ -194,22 +196,28 @@ DatadogBrowserFlagging.init({
 플래그 구성 요청에 사용자 지정 헤더를 추가하려면(예: 프록시 인증용), `customHeaders`를 사용합니다.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
 {{< /code-block >}}
+
+[`flagSelection`][3]을 사용하여 플래그의 하위 집합을 로드하는 경우, 프록시는 `DD-Flag-Selection-Ignored` 응답 헤더를 변경하지 않고 그대로 브라우저에 반환해야 합니다. Datadog은 선택 항목을 무시하고 전체 플래그 구성을 반환할 때 이 헤더를 설정합니다. 프록시가 애플리케이션과 다른 오리진에 있는 경우, `Access-Control-Expose-Headers` 응답 헤더에도 해당 헤더를 나열하세요. 브라우저가 헤더를 읽을 수 없는 경우 전체 구성은 계속 로드되지만, SDK는 선택 항목이 무시되었음을 보고할 수 없습니다.
 
 ### 이벤트 업로드 프록시 {#event-upload-proxy-3}
 
 브라우저 플래그 이벤트 데이터(노출 및 평가)는 표준 브라우저 SDK 수집 파이프라인을 통해 전송됩니다. 이 트래픽을 프록시를 통해 라우팅하려면 `proxy` 옵션을 도메인의 URL로 설정합니다.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
@@ -221,7 +229,7 @@ SDK는 프록시로 전송되는 각 요청에 `ddforward` 쿼리 파라미터�
 POST https://proxy.example.com/intake?ddforward=%2Fapi%2Fv2%2Fexposures%3Fddsource%3Dbrowser...
 ```
 
-프록시는 `ddforward` 값을 디코딩하고 Datadog 수집 URL을 구성합니다:
+프록시는 `ddforward` 값을 디코딩하고 Datadog 수집 URL을 구성합니다.
 
 ```
 https://browser-intake-datadoghq.com/api/v2/exposures?ddsource=browser...
@@ -233,6 +241,7 @@ Datadog 수집 출처는 [Datadog 사이트][1]에 따라 다릅니다. 예를 �
 
 [1]: /ko/getting_started/site/
 [2]: /ko/real_user_monitoring/guide/proxy-rum-data/
+[3]: /ko/feature_flags/client/javascript/#load-a-subset-of-flags
 
 {{% /tab %}}
 

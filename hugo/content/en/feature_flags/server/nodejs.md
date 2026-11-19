@@ -296,6 +296,10 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+## Record exposures in your own data store
+
+Use `ExposureHook` from `dd-trace/openfeature/exposure-hook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][13] for minimum SDK requirements and other details.
+
 ## Advanced configuration
 
 Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
@@ -312,7 +316,7 @@ The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Serve
 
 ## Evaluation events and privacy
 
-In `dd-trace` 6.20.0 or later on 6.x, the provider sends aggregated flag evaluation events by default. On 5.x, use version 5.131.0 or later. In agentless mode, it uses a local relay or direct fallback. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. See [Server-Side Evaluation Events and Privacy][13] for targeting-key hashing, context collection, and the Node.js bundling requirements.
+In `dd-trace` 6.20.0 or later on 6.x, the provider sends aggregated flag evaluation events by default. On 5.x, use version 5.131.0 or later. In agentless mode, it uses a local relay or direct fallback. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. See [Server-Side Evaluation Events and Privacy][14] for targeting-key hashing, context collection, and the Node.js bundling requirements.
 
 ## Testing
 
@@ -390,4 +394,5 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [12]: /feature_flags/concepts/configuration_sources/#agent-availability
-[13]: /feature_flags/guide/server_evaluation_events/
+[13]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[14]: /feature_flags/guide/server_evaluation_events/

@@ -9,6 +9,8 @@ further_reading:
     text: "Cloud Security Agentless Scanning"
 ---
 
+Scanner instances are replaced every 24 hours and install the latest patch release of the scanner version pinned by your deployment. Update your deployment to get new scanner versions, permission changes, and infrastructure fixes.
+
 ## Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly so you can get access to new features and bug fixes as they are released.

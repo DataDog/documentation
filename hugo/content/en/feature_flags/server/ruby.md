@@ -273,9 +273,13 @@ if maintenance_mode
 end
 ```
 
+## Record exposures in your own data store
+
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][12] for minimum SDK requirements and other details.
+
 ## Evaluation events and privacy
 
-Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][12] for the data collected, opt-out scope, and delivery requirements.
+Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][13] for the data collected, opt-out scope, and delivery requirements.
 
 ## Testing
 
@@ -405,4 +409,5 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
-[12]: /feature_flags/guide/server_evaluation_events/
+[12]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[13]: /feature_flags/guide/server_evaluation_events/
