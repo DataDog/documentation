@@ -152,7 +152,7 @@ Maximum duration for API test execution, in milliseconds. Default is one minute 
 
 ### Network security configuration
 
-A private location can reach any network address that its host can reach, unless its configuration restricts egress. Reserved and private IP ranges are blocked by default (`enableDefaultBlockedIpRanges` is `true`). Restrict egress with the following options:
+A private location can reach any network address that its host can reach, unless its configuration restricts egress. By default, the worker blocks reserved and private IP ranges (`enableDefaultBlockedIpRanges` is `true`). Restrict egress with the following options:
 
 `allowedIPRanges`, `blockedIPRanges`, `enableDefaultBlockedIpRanges`, `allowedDomainNames`, `blockedDomainNames`
 
