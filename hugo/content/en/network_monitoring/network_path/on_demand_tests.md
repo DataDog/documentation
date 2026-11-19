@@ -18,18 +18,29 @@ further_reading:
 
 ## Overview
 
-On-demand tests allow you to run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update. You can also use them to investigate a connectivity issue as it happens.
+On-demand tests let you run a Network Path test from a source host to a destination at any time. Use them to check a path right after a network change, such as a firewall rule or routing update. You can also use them to investigate a connectivity issue as it happens.
 
-You can run an on-demand test from the Network Path UI. On-demand tests run through a [Private Action Runner (PAR)][1] in the Datadog Agent on the source host.
+You can run an on-demand test from the Network Path UI. On-demand tests run through a [Private Action Runner][1] in the Datadog Agent on the source host.
+
+## Prerequisites
+
+- The Datadog Agent on the source host meets the [Private Action Runner requirements][2].
+- The Agent uses an API key with the **Private Action Runner** capability. See [Enrollment and ownership][3] for more information.
+- You have the permissions for on-demand tests. To grant permissions, see [Datadog Role Permissions][6].
+
+  | Permission                                           | Allows                  |
+  |------------------------------------------------------|-------------------------|
+  | Network Path Test Run (`network_path_test_run`)      | Running on-demand tests |
+  | Network Path Data Read (`network_path_config_read`)  | Viewing test results    |
 
 ## Setup
 
-### Step 1: Check the Agent and API key
+To set up on-demand tests:
 
-1. The Datadog Agent on the source host meets the [Private Action Runner requirements][2].
-2. The Agent uses an API key with the **Private Action Runner** capability. See [Enrollment and ownership][3].
+1. [Configure the Agent](#configure-the-agent) on each source host.
+1. [Create an Execution Policy](#create-an-execution-policy) that lets users run Network Path tests from those hosts.
 
-### Step 2: Configure the Agent
+### Configure the Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -96,40 +107,30 @@ You can run an on-demand test from the Network Path UI. On-demand tests run thro
 {{% /tab %}}
 {{< /tabs >}}
 
-After the Agent restarts, the runner enrolls with Datadog. Go to [**Actions > Private Action Runners**][4] and confirm that the runner for the source host is listed.
+After the Agent restarts, the runner enrolls with Datadog. Go to [{{< ui >}}Actions > Private Action Runners{{< /ui >}}][4] and confirm that the runner for the source host is listed.
 
-### Step 3: Create an execution policy
+### Create an Execution Policy
 
-Creating an execution policy requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
+Creating an Execution Policy requires the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
 
 [Create an Execution Policy][5] that allows the `Run Network Path` action and sets **Targets** for the Agents on the source hosts. Give access to the users and teams that run on-demand tests.
 
-{{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with red boxes around the fields to fill in: the Allow effect, the Remote Action integration with the Run network path action selected, a target that matches the Agent with the tag hostname:auth-dotnet, and the Access setting" style="width:60%;" >}}
-
-## Permissions
-
-On-demand tests use the following permissions. To grant permissions, see [Datadog Role Permissions][6].
-
-| Permission | Allows |
-|---|---|
-| Network Path Test Run (`network_path_test_run`) | Running on-demand tests |
-| Network Path Data Read (`network_path_config_read`) | Viewing test results |
+{{< img src="network_performance_monitoring/network_path/on_demand_execution_policy.png" alt="Execution Policy form with Allow effect, the Run network path action, a target with tag hostname:auth-dotnet, and Access set." style="width:60%;" >}}
 
 ## Run an on-demand test
 
 1. Open a path in [Network Path][7].
 2. Click {{< ui >}}Run Test Now{{< /ui >}}. Datadog runs the test from the path's source host to its destination with the same protocol and port.
 
-   {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted" style="width:100%;" >}}
+   {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted." style="width:100%;" >}}
 
-3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click the test run to open its network path.
+3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click it to view the hop-by-hop path for that run.
 
 ## View results
 
 On-demand test results appear in the {{< ui >}}Test Runs{{< /ui >}} tab of a particular path along with its other test runs.
 
-{{< img src="network_performance_monitoring/network_path/on_demand_test_runs_tab.png" alt="Test Runs tab for the path from auth-dotnet to 1.1.1.1, listing three reachable runs with the Triggered run type and their RTT, packet loss, hop count, and jitter" style="width:100%;" >}}
-
+{{< img src="network_performance_monitoring/network_path/on_demand_test_runs_tab.png" alt="Test Runs tab for the path from auth-dotnet to 1.1.1.1, listing three Triggered runs with RTT, packet loss, hops, and jitter." style="width:100%;" >}}
 
 ## Further Reading
 
