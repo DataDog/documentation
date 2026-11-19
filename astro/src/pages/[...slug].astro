@@ -18,6 +18,8 @@ import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CdocsBareUrlRedirect from "@components/CdocsBareUrlRedirect/CdocsBareUrlRedirect.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolvePageFilterValues } from "@lib/cdocs/filters";
+import { findParamRedirect } from "@lib/cdocs/paramRedirect";
+import { buildCanonicalPath } from "@lib/cdocs/canonicalUrl";
 import { isApiContent } from "@lib/api/overviewPages";
 import { getCdocsTraitsListUrl } from "@lib/cdocs/pageLists";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
@@ -61,6 +63,10 @@ const isFilterable = contentFilters !== undefined;
 // docs render with no filter state.
 let valsByTraitId: Record<string, string> = {};
 let clientFiltersManifest: ClientSideFiltersManifest | undefined;
+// Crawler metadata: the bare URL for the default variant, and a URL that pins
+// the resolved filter values for every other variant, so each variant has a
+// stable, indexable address.
+let canonicalPath = Astro.url.pathname;
 if (isFilterable) {
   const filtersManifest = buildPageFiltersManifest(contentFilters);
   valsByTraitId = resolvePageFilterValues({
@@ -68,7 +74,22 @@ if (isFilterable) {
     filtersManifest,
     searchParams: Astro.url.searchParams,
   });
+  const redirectQuery = findParamRedirect({
+    contentFilters,
+    filtersManifest,
+    searchParams: Astro.url.searchParams,
+    valsByTraitId,
+  });
+  if (redirectQuery !== null) {
+    return Astro.redirect(`${Astro.url.pathname}${redirectQuery}`, 301);
+  }
   clientFiltersManifest = pruneManifestForClient(filtersManifest);
+  canonicalPath = buildCanonicalPath({
+    bareUrl: Astro.url.pathname,
+    contentFilters,
+    filtersManifest,
+    valsByTraitId,
+  });
 }
 
 // Read by `preferencesClient`, which stores the URL's filter values and adds
@@ -84,12 +105,7 @@ const cdocsPageState = serializeCdocsPageState({
 // built-in `if` tags evaluate to drop non-matching content at render time.
 const { Content } = await render(entry);
 
-// Crawler metadata: a canonical URL that pins the resolved filter values, so
-// each filtered variant has a stable, indexable address.
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-for (const [traitId, value] of Object.entries(valsByTraitId)) {
-  canonicalUrl.searchParams.set(traitId, value);
-}
+const canonicalUrl = new URL(canonicalPath, Astro.site);
 
 // Plaintext (`.md`) twin of this page, preserving the current filter query so
 // the plaintext reflects the same resolved state. Trailing slash is stripped so

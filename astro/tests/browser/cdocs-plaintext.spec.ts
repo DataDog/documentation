@@ -104,6 +104,19 @@ test.describe("cdocs plaintext (.md)", () => {
     );
   });
 
+  test("a .md URL with a value the page doesn't offer redirects", async ({
+    request,
+  }) => {
+    const response = await request.get(
+      "/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=cobol",
+      { maxRedirects: 0 },
+    );
+    expect(response.status()).toBe(301);
+    expect(response.headers().location).toBe(
+      "/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=java",
+    );
+  });
+
   test("a .md path with no matching entry 404s", async ({ request }) => {
     const response = await request.get("/this/is/not/a/page.md");
     expect(response.status()).toBe(404);
