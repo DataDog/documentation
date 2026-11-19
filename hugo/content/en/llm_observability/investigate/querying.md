@@ -139,6 +139,8 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 
 When you use live mode, Datadog displays spans as soon as your LLM applications send them, before they are indexed. All ingested spans from the last 15 minutes (rolling window) are available, including spans that [trace sampling][10] or [tag-based sampling rules][11] later drop. After 15 minutes, you can only search the spans that sampling kept.
 
+**Note**: Live mode shows only spans that are sent with the APM trace. If you send data through the Datadog Agent, spans from traces that [APM ingestion sampling][12] doesn't keep go to Datadog through a separate intake. These spans don't appear in live mode, but you can find them in the Trace Explorer after they are indexed. In agentless mode, all spans are sent with the APM trace.
+
 Use live mode to watch a deployment roll out, confirm that new instrumentation is reporting, or follow a test session as it happens.
 
 Switch between live mode and indexed search by using the time selector in the top right-hand corner of the [Trace Explorer][1]. Live mode is the {{< ui >}}15 minutes{{< /ui >}} option marked with a lightning icon. Any other option searches indexed spans.
@@ -178,3 +180,4 @@ Live mode is best-effort:
 [9]: /llm_observability/instrument/otel_instrumentation/
 [10]: /llm_observability/instrument/sdk/#trace-sampling
 [11]: /llm_observability/instrument/sdk/#tag-based-sampling-rules
+[12]: /tracing/trace_pipeline/ingestion_mechanisms/
