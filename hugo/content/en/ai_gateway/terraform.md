@@ -73,8 +73,8 @@ The following [module][16] onboards a workload from one `module` block. For each
 
 - A routing rule that the workload's applications call as the model `router/<NAME>`. It spreads requests across the models you choose and falls back to other models in order.
 - A model group that contains the routing rule, and a restriction policy that gives the workload's team **Runner** access to it.
-- A monthly budget for the team's spend.
-- Optional: A per-minute request rate limit for the team.
+- A monthly budget for the team's spend that blocks the team's requests once it's spent.
+- Optional: A per-minute request rate limit for the team that rejects requests over the limit.
 
 ### Create the module
 
@@ -121,9 +121,9 @@ variable "monthly_budget_usd" {
 }
 
 variable "budget_enforcement" {
-  description = "NOTIFY sends alerts. BLOCK also rejects the team's requests until the next month."
+  description = "BLOCK rejects the team's requests until the next month once the budget is spent. NOTIFY only sends alerts."
   type        = string
-  default     = "NOTIFY"
+  default     = "BLOCK"
 }
 
 variable "requests_per_minute" {
@@ -133,9 +133,15 @@ variable "requests_per_minute" {
 }
 
 variable "rate_limit_mode" {
-  description = "ALERT reports requests over the limit. ENFORCE also rejects them."
+  description = "ENFORCE rejects requests over the limit. ALERT only reports them."
   type        = string
-  default     = "ALERT"
+  default     = "ENFORCE"
+}
+
+variable "scope_tags" {
+  description = "Request tags, such as { ml_app = \"search-assistant\" }, that narrow the budget and rate limit to the workload's requests."
+  type        = map(string)
+  default     = {}
 }
 
 data "datadog_current_user" "this" {}
@@ -202,6 +208,7 @@ resource "datadog_ai_gateway_budget" "this" {
   capacity_microcents = ceil(var.monthly_budget_usd * 100000000)
   window_policy       = "MONTHLY"
   enforcement         = var.budget_enforcement
+  tags                = length(var.scope_tags) > 0 ? var.scope_tags : null
 }
 
 resource "datadog_ai_gateway_rate_limit" "this" {
@@ -211,6 +218,7 @@ resource "datadog_ai_gateway_rate_limit" "this" {
   team_id             = local.team_id
   mode                = var.rate_limit_mode
   requests_per_minute = var.requests_per_minute
+  tags                = length(var.scope_tags) > 0 ? var.scope_tags : null
 }
 
 output "model" {
@@ -219,11 +227,11 @@ output "model" {
 }
 ```
 
-The module makes the user or service account that runs Terraform the model group's editor. A budget's `capacity_microcents` is in millionths of a US cent, so the module multiplies the dollar amount by 100,000,000. To limit tokens instead of requests, or to scope the budget and rate limit to [custom tags](/ai_gateway/spend_controls/#set-budgets), add the matching attributes from the [budget][7] and [rate limit][8] resources.
+The module makes the user or service account that runs Terraform the model group's editor. A budget's `capacity_microcents` is in millionths of a US cent, so the module multiplies the dollar amount by 100,000,000. To limit tokens instead of requests, add the matching attributes from the [budget][7] and [rate limit][8] resources.
 
 ### Add a workload
 
-Add one `module` block for each workload. The following workload sends 70% of the `search` team's requests to `gpt-4o` and 30% to `gpt-4o-mini`, and falls back to `gpt-4.1-mini` when both fail. It blocks the team's requests after $500 of spend in a month and rejects requests over 600 per minute:
+Add one `module` block for each workload. The following workload sends 70% of the `search` team's requests to `gpt-4o` and 30% to `gpt-4o-mini`, and falls back to `gpt-4.1-mini` when both fail. It blocks the workload's requests after $500 of spend in a month and rejects requests over 600 per minute:
 
 ```hcl
 module "search_assistant" {
@@ -237,9 +245,8 @@ module "search_assistant" {
   fallback_models = ["gpt-4.1-mini"]
 
   monthly_budget_usd  = 500
-  budget_enforcement  = "BLOCK"
   requests_per_minute = 600
-  rate_limit_mode     = "ENFORCE"
+  scope_tags          = { ml_app = "search-assistant" }
 }
 
 output "search_assistant_model" {
@@ -247,9 +254,9 @@ output "search_assistant_model" {
 }
 ```
 
-By default, the budget only sends alerts (`NOTIFY`) and the rate limit only reports requests over the limit (`ALERT`), so you can review a workload's traffic before you enforce limits.
+Run `terraform init`, `terraform plan`, and `terraform apply`. After you apply the configuration, members of the team can send requests with `router/search-assistant` as the model. Their credential needs the `ai_gateway_usage` permission. Because the example sets `scope_tags`, requests count toward the budget and rate limit when they send the tag as a header: `x-dd-tag-ml_app: search-assistant`. See [Send a request](/ai_gateway/getting_started/#send-a-request).
 
-Run `terraform init`, `terraform plan`, and `terraform apply`. After you apply the configuration, members of the team can send requests with `router/search-assistant` as the model. Their credential needs the `ai_gateway_usage` permission. See [Send a request](/ai_gateway/getting_started/#send-a-request).
+A `BLOCK` budget needs to price each request, so use a provider whose models have pricing. A request through a provider without pricing fails with `budget_pricing_unavailable`.
 
 ### Change or remove a workload
 
@@ -284,7 +291,8 @@ resource "datadog_ai_gateway_data_capture_override" "search_assistant" {
 
 - Declare `datadog_ai_gateway_governance` at most once for each organization. Removing it from your configuration leaves the organization's settings unchanged.
 - Terraform changes the zero data retention (ZDR) requirement only if you set `zdr_mode`.
-- An override change that can turn on full capture for more requests requires `confirm_full_capture = true`. This includes creating a `full_capture` override and deleting a `metadata_only` override. Review this attribute in pull requests to control where full capture is turned on.
+- An override change that can turn on full capture for more requests requires `confirm_full_capture = true`. This includes creating a `full_capture` override, and deleting a `metadata_only` override when another override with `full_capture` matches some of the same requests. Review this attribute in pull requests to control where full capture is turned on.
+- Terraform sends the `confirm_full_capture` value from its state when it deletes an override. If a deletion is rejected, set `confirm_full_capture = true`, apply, and then delete the override.
 
 ## Limitations
 
@@ -292,6 +300,7 @@ resource "datadog_ai_gateway_data_capture_override" "search_assistant" {
 - Manage models and model pricing in Datadog.
 - Terraform doesn't manage the [default policy](/ai_gateway/access_control/#default-policy). If the default policy includes a workload's provider, everyone in your organization can call that provider's models directly, not only the workload's team.
 - Access granted to a team also applies to members of its sub-teams.
+- A `NOTIFY` budget and an `ALERT` rate limit each create a monitor. If your organization has a [monitor configuration policy][18] that requires tags, AI Gateway's monitors don't carry them, and creating the budget or rate limit fails. `BLOCK` budgets and `ENFORCE` rate limits, the module's defaults, are created without a monitor.
 - A team bound to a model group must be invite-only. AI Gateway rejects a team that anyone in your organization can join. To fix this, limit who can add members in the team's settings.
 
 ## Further reading
@@ -315,3 +324,4 @@ resource "datadog_ai_gateway_data_capture_override" "search_assistant" {
 [15]: /integrations/terraform/
 [16]: https://developer.hashicorp.com/terraform/language/modules
 [17]: https://developer.hashicorp.com/terraform/cli/import
+[18]: /monitors/settings/#tag-policies
