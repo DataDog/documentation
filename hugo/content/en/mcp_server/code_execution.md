@@ -58,7 +58,7 @@ Code execution is available in the default `core` toolset when you connect your 
 
 If you explicitly select toolsets, include `core` or `code-exec` to retain code execution. These tools are also included in `toolsets=all`. Toolset selection does not change the required [role permissions][4].
 
-`execute_code_write` is included in `core` and requires `mcp_write` plus the permissions for the resources being modified.
+`execute_code_write` is included in `core` and requires the MCP Write permission (`mcp_write`) plus the permissions for the resources being modified.
 
 ## Further reading
 
