@@ -49,18 +49,21 @@ Custom OAuth Clients in Preview support:
 - The [Authorization Code grant][2], with PKCE using the `S256` method. PKCE is required.
 - Refresh tokens.
 - Confidential clients only. Each client has a client secret, so it must run on a backend that can keep the secret safe.
-- Exact HTTPS redirect URIs.
+- Exact HTTPS redirect URIs. An HTTPS `localhost` redirect URI works with an exact port, such as `https://localhost:8443/callback`.
 
 The following are not supported in Preview:
 
 - Public clients without a client secret.
+- HTTP redirect URIs, including `http://localhost`.
 - Managing clients through the public API or Terraform. Use Organization Settings.
 
 ## Prerequisites
 
 - Your organization is enrolled in the Preview.
 - Your organization is on a Pro or Enterprise plan.
-- You have the **Custom OAuth Clients Manage** (`org_custom_oauth_clients_manage`) permission. The Datadog Admin role has it by default. You can add it to a [custom role][3].
+- You have the **Custom OAuth Clients Manage** (`org_custom_oauth_clients_manage`) permission to create, change, and disable clients. Users with only the **Custom OAuth Clients Read** (`org_custom_oauth_clients_read`) permission can view clients without changing them.
+
+The Datadog Admin role has both permissions by default. The Datadog Standard and Datadog Read Only roles have neither. You can add them to a [custom role][3].
 
 ### Limits
 
@@ -69,19 +72,19 @@ The following are not supported in Preview:
 | Pro        | 3                                      |
 | Enterprise | 10                                     |
 
-Disabled clients don't count toward the limit.
+Organizations on other plans can't create custom clients. Disabled clients don't count toward the limit.
 
 ## Create a client
 
 1. In Datadog, go to **Organization Settings** > **OAuth Clients** and open the **Custom Clients** tab.
 2. Click **New Client**.
 3. Enter a **Name** and a **Description**. Users see the name on the consent page.
-4. Add one to ten **Redirect URIs**. Each must be an absolute HTTPS URI. Datadog compares redirect URIs exactly, including the path and any query string.
+4. Add one to ten **Redirect URIs**. Each must be an absolute HTTPS URI without a fragment (`#`). Datadog compares redirect URIs exactly, including the port, path, and any query string.
 5. Select the **Scopes** the client can request. Choose only what your app needs. The list includes the API scopes and the MCP server scope that custom clients support.
 6. Click **Create**.
 7. Copy the **Client ID** and **Client Secret**, and store the secret in a secure place.
 
-<div class="alert alert-warning">The client secret is shown only once. If you lose it, disable the client and create another one.</div>
+<div class="alert alert-warning">The client secret is shown only once. If you lose it, create another client, move your app to it, and then disable the old one.</div>
 
 Redirect URIs and the client secret can't be changed after you create the client. To change them, create another client and disable the old one.
 
@@ -89,24 +92,26 @@ Redirect URIs and the client secret can't be changed after you create the client
 
 Your app uses the client ID and secret to run the standard Authorization Code flow with PKCE.
 
-1. Send the user to the authorization endpoint with your client ID, an exact redirect URI, the scopes you need, a `state` value, and a PKCE `code_challenge` with `code_challenge_method=S256`:
+1. Send the user to the authorization endpoint with your client ID, an exact redirect URI, the scopes you need, a `state` value, and a PKCE `code_challenge` with `code_challenge_method=S256`. URL-encode each value. For example:
 
    ```text
-   https://{{< region-param key="dd_full_site" >}}/oauth2/v1/authorize
+   https://{{< region-param key="dd_full_site" >}}/oauth2/v1/authorize?response_type=code&client_id=<CLIENT_ID>&redirect_uri=https%3A%2F%2Fapp.example.com%2Foauth%2Fcallback&scope=dashboards_read%20monitors_read&state=<STATE>&code_challenge=<CODE_CHALLENGE>&code_challenge_method=S256
    ```
 
+   Request only scopes the client has. If you leave out `scope`, or request only `mcp_all`, the consent page asks for all of the client's scopes. A scope the client doesn't have ends the flow with an `invalid_scope` error.
+
 2. The user signs in to Datadog and reviews the consent page. It shows the client name and every scope the client requests.
-3. After the user approves, Datadog redirects to your redirect URI with an authorization `code`.
-4. Exchange the code for an access token and a refresh token at the token endpoint. Authenticate with your client ID and secret, and send the PKCE `code_verifier`:
+3. After the user approves, Datadog redirects to your redirect URI with an authorization `code` and your `state` value. Check that `state` matches the value you sent before you continue.
+4. Exchange the code for an access token and a refresh token at the token endpoint. Custom clients must use `/api/v2/oauth2/token`. Authenticate with your client ID and secret, and send the PKCE `code_verifier`. Use `--data-urlencode` so that values such as a redirect URI with a query string reach Datadog unchanged:
 
    ```shell
    curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/oauth2/token" \
      -u "<CLIENT_ID>:<CLIENT_SECRET>" \
      -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=authorization_code" \
-     -d "code=<AUTHORIZATION_CODE>" \
-     -d "redirect_uri=<REDIRECT_URI>" \
-     -d "code_verifier=<CODE_VERIFIER>"
+     --data-urlencode "grant_type=authorization_code" \
+     --data-urlencode "code=<AUTHORIZATION_CODE>" \
+     --data-urlencode "redirect_uri=<REDIRECT_URI>" \
+     --data-urlencode "code_verifier=<CODE_VERIFIER>"
    ```
 
    The example uses HTTP Basic authentication (`client_secret_basic`). You can instead send `client_id` and `client_secret` in the request body (`client_secret_post`). If a request includes both, Datadog uses the HTTP Basic credentials.
@@ -118,11 +123,13 @@ Your app uses the client ID and secret to run the standard Authorization Code fl
    curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/oauth2/token" \
      -u "<CLIENT_ID>:<CLIENT_SECRET>" \
      -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=refresh_token" \
-     -d "refresh_token=<REFRESH_TOKEN>"
+     --data-urlencode "grant_type=refresh_token" \
+     --data-urlencode "refresh_token=<REFRESH_TOKEN>"
    ```
 
    Refresh tokens last 90 days. After a refresh token expires, the user must authorize the client again.
+
+If the token endpoint rejects a code or refresh token with `invalid_grant` or `invalid_scope`, the user's authorization has ended. For example, an admin removed one of its scopes, or the refresh token expired. Send the user through authorization again instead of retrying the request. An `invalid_client` error means the client ID or secret is wrong, or the client is disabled, so retrying doesn't help.
 
 For the full list of request parameters and responses, see [OAuth2 authorization endpoints][4].
 
@@ -134,8 +141,7 @@ The **Custom Clients** tab lists your organization's custom clients. For each cl
 
 Click a client to open its details. From there you can:
 
-- **Edit the name and description.**
-- **Change scopes.** Removing a scope revokes the existing authorizations that include it. Users must authorize the client again to grant a scope you add.
+- **Change scopes.** Add or remove the scopes the client can request. A client must keep at least one scope. Removing a scope revokes the user authorizations that include it, so those users must authorize the client again. Users must also authorize the client again to grant a scope you add.
 - **Disable the client.**
 
 ### Disable a client
@@ -143,14 +149,14 @@ Click a client to open its details. From there you can:
 Disabling a client is permanent. After you disable it:
 
 - Users can't authorize it.
-- Datadog rejects requests that use its tokens, and it can't get new tokens.
+- It can't get new tokens or refresh existing ones. Access tokens that were already issued can keep working for a short time, until they expire.
 - It can't be enabled again.
 
 The disabled client stays in the list, so you keep its history. To restore access, create another client.
 
 ## Audit your clients
 
-Datadog records an event in [Audit Trail][5] when an admin creates, updates, or disables a custom client. API calls made with a custom client's token are attributed to the user who authorized it.
+Datadog records an event in [Audit Trail][5] when an admin creates a custom client, changes its scopes, or disables it, and when a user authorizes it. API calls made with a custom client's token are attributed to the user who authorized it.
 
 ## Further reading
 
