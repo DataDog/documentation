@@ -114,27 +114,21 @@ test.describe("cdocs filterable doc (SSR)", () => {
     await expect(pill(page, "Datadog")).toHaveAttribute("aria-checked", "true");
   });
 
-  test("the URL's filter values are stored in localStorage, in Hugo's format", async ({
-    page,
-  }) => {
+  test("a loaded URL's filter values aren't stored", async ({ page }) => {
     await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
     await expect(content(page)).toContainText("ddtrace");
+    await expect(
+      page.locator('.cdocs-filter-bar[data-hydrated="true"]'),
+    ).toBeAttached();
 
-    await expect
-      .poll(() =>
-        page.evaluate(() =>
-          JSON.parse(
-            localStorage.getItem("datadog-docs-content-filters") ?? "{}",
-          ),
-        ),
-      )
-      .toMatchObject({
-        prog_lang: { value: "python", timestamp: expect.any(Number) },
-        api_type: { value: "dd_api", timestamp: expect.any(Number) },
-      });
+    expect(
+      await page.evaluate(() =>
+        localStorage.getItem("datadog-docs-content-filters"),
+      ),
+    ).toBeNull();
   });
 
-  test("clicking a pill stores the new value in localStorage", async ({
+  test("clicking a pill stores its value in localStorage, in Hugo's format", async ({
     page,
   }) => {
     await page.goto(CDOC_URL);
@@ -145,6 +139,7 @@ test.describe("cdocs filterable doc (SSR)", () => {
     await pill(page, "Datadog").click();
     await expect(page).toHaveURL(new RegExp("api_type=dd_api"));
 
+    // Only the clicked filter: the language is still the default.
     await expect
       .poll(() =>
         page.evaluate(() =>
@@ -153,7 +148,7 @@ test.describe("cdocs filterable doc (SSR)", () => {
           ),
         ),
       )
-      .toMatchObject({
+      .toEqual({
         api_type: { value: "dd_api", timestamp: expect.any(Number) },
       });
   });
@@ -256,5 +251,102 @@ test.describe("links to cdocs pages", () => {
       "href",
       "/dd_e2e/components/alert/",
     );
+  });
+});
+
+test.describe("bare cdocs URLs", () => {
+  const LINKS_URL = "/dd_e2e/cdocs/links/";
+
+  /** Store preferences in Hugo's format, from a page on the site. */
+  async function storePreferences(
+    page: import("@playwright/test").Page,
+    valsByTraitId: Record<string, string>,
+  ) {
+    await page.goto(LINKS_URL);
+    await page.evaluate((vals) => {
+      const stored = Object.fromEntries(
+        Object.entries(vals).map(([traitId, value]) => [
+          traitId,
+          { value, timestamp: 1 },
+        ]),
+      );
+      localStorage.setItem(
+        "datadog-docs-content-filters",
+        JSON.stringify(stored),
+      );
+    }, valsByTraitId);
+  }
+
+  test("a bare URL redirects to the stored preferences, and stays out of the history", async ({
+    page,
+  }) => {
+    await storePreferences(page, { prog_lang: "python" });
+
+    await page.goto(CDOC_URL);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+
+    // Back skips the bare URL, which `location.replace` swapped out.
+    await page.goBack();
+    await expect(page).toHaveURL(new RegExp(`${LINKS_URL}$`));
+  });
+
+  test("params already in the URL are kept", async ({ page }) => {
+    await storePreferences(page, { prog_lang: "python", api_type: "dd_api" });
+
+    await page.goto(`${CDOC_URL}?prog_lang=cpp`);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=dd_api&prog_lang=cpp$`),
+    );
+  });
+
+  test("without stored preferences, the URL gets the defaults in place", async ({
+    page,
+  }) => {
+    await page.goto(CDOC_URL);
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=java$`),
+    );
+    await expect(pill(page, "Java")).toHaveAttribute("aria-checked", "true");
+  });
+
+  test("a view-transition navigation to a bare URL gets the stored preferences", async ({
+    page,
+  }) => {
+    await storePreferences(page, { prog_lang: "python" });
+    // Hold the traits list back until the click, so the link isn't updated
+    // first. Releasing it right after stays inside the navigation's wait cap.
+    let releaseTraitsList = () => {};
+    const traitsListReleased = new Promise<void>(
+      (resolve) => (releaseTraitsList = resolve),
+    );
+    await page.route("**/cdocs-traits-index.json*", async (route) => {
+      await traitsListReleased;
+      await route.continue();
+    });
+    await page.reload();
+    await page.evaluate(
+      () => ((window as unknown as { __noReload?: boolean }).__noReload = true),
+    );
+
+    await page
+      .getByRole("link", { name: "Custom instrumentation", exact: true })
+      .click();
+    releaseTraitsList();
+
+    await expect(page).toHaveURL(
+      new RegExp(`${CDOC_URL}\\?api_type=otel_api&prog_lang=python$`),
+    );
+    await expect(pill(page, "Python")).toHaveAttribute("aria-checked", "true");
+    expect(
+      await page.evaluate(
+        () => (window as unknown as { __noReload?: boolean }).__noReload,
+      ),
+    ).toBe(true);
   });
 });

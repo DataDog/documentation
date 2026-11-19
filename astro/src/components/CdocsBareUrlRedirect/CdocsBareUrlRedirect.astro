@@ -1,0 +1,56 @@
+---
+/**
+ * A blocking `<head>` script for Cdocs pages. When the URL is missing a trait
+ * the page accepts, and the reader has a stored preference for it, the script
+ * adds that param and reloads with `location.replace`, before anything shows.
+ * The bare URL stays out of the browser history.
+ *
+ * It never changes a param that's already in the URL, and it does nothing when
+ * storage isn't available. It runs on full page loads only. View-transition
+ * navigations get stored preferences from `preferencesClient` instead.
+ *
+ * Inline, since it has to run before the body is parsed, so it reads storage
+ * itself rather than through `preferences.ts`. The stored format is Hugo's:
+ * `{ [traitId]: { value, timestamp } }`.
+ */
+import { PREFERENCES_STORAGE_KEY } from "@lib/cdocs/preferences";
+
+interface Props {
+  /** Every trait the page accepts. */
+  traitIds: string[];
+}
+
+const { traitIds } = Astro.props;
+const storageKey = PREFERENCES_STORAGE_KEY;
+---
+
+<script is:inline define:vars={{ traitIds, storageKey }}>
+  // A view-transition swap runs new head scripts too, after the page has
+  // loaded, so check that this is the first parse.
+  if (document.readyState === "loading") {
+    let storedPreferences = null;
+    try {
+      storedPreferences = JSON.parse(localStorage.getItem(storageKey));
+    } catch {
+      // Storage is blocked, or holds something else. Load the page as is.
+    }
+
+    if (storedPreferences && typeof storedPreferences === "object") {
+      const url = new URL(location.href);
+      let changed = false;
+      for (const traitId of traitIds) {
+        const preference = storedPreferences[traitId];
+        if (url.searchParams.has(traitId)) continue;
+        if (!preference || typeof preference.value !== "string") continue;
+        if (!preference.value) continue;
+        url.searchParams.set(traitId, preference.value);
+        changed = true;
+      }
+      if (changed) {
+        // The same order as variant URLs.
+        url.searchParams.sort();
+        location.replace(url.href);
+      }
+    }
+  }
+</script>

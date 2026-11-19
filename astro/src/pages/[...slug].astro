@@ -15,6 +15,7 @@ import { getEntry, render } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
+import CdocsBareUrlRedirect from "@components/CdocsBareUrlRedirect/CdocsBareUrlRedirect.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolvePageFilterValues } from "@lib/cdocs/filters";
 import { isApiContent } from "@lib/api/overviewPages";
@@ -104,6 +105,14 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
   contentPath={`${entry.id}.md`}
   enableViewTransitions
 >
+  {
+    isFilterable && (
+      <CdocsBareUrlRedirect
+        slot="head"
+        traitIds={contentFilters.map((filter) => filter.trait_id)}
+      />
+    )
+  }
   <div class="cdoc-layout">
     <main class="cdoc">
       <SiteSupportBanner

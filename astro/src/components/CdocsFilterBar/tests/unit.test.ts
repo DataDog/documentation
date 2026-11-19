@@ -15,6 +15,7 @@ import CdocsFilterBar from "../CdocsFilterBar";
 import { pruneManifestForClient } from "cdocs-data";
 import type { CdocContentFilter } from "@lib/cdocs/filters";
 import { buildPageFiltersManifest } from "@lib/cdocs/pageFiltersManifest";
+import { readPreferences } from "@lib/cdocs/preferences";
 import { customizationConfig } from "../../../../tests/fixtures/cdocsDependentFilters/customizationConfig";
 
 const BARE_URL = "/guides/setup/";
@@ -59,6 +60,7 @@ const isSelected = (label: string) =>
 
 beforeEach(() => {
   navigate.mockReset();
+  localStorage.clear();
   window.history.replaceState({}, "", BARE_URL);
 });
 
@@ -154,6 +156,24 @@ describe("CdocsFilterBar", () => {
     expect(navigate).toHaveBeenLastCalledWith(
       `${BARE_URL}?database=postgres&host=azure&os=linux`,
     );
+  });
+
+  it("stores the clicked value as the reader's preference", async () => {
+    const user = userEvent.setup();
+    mount();
+    await user.click(pill("Windows"));
+
+    // The other filters' values weren't picked, so they aren't stored.
+    expect(readPreferences()).toEqual({ os: "windows" });
+  });
+
+  it("doesn't store a dependent filter's value that a click reset", async () => {
+    const user = userEvent.setup();
+    mount();
+    await user.click(pill("Azure"));
+
+    // The database resets to Cosmos DB, which the reader didn't pick.
+    expect(readPreferences()).toEqual({ host: "azure" });
   });
 
   it("renders nothing when there are no filters", () => {
