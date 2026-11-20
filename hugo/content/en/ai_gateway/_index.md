@@ -31,6 +31,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Track and cap spend with [budgets](/ai_gateway/spend_controls/#set-budgets)
 - Cap requests, tokens, and spend per minute with [rate limits](/ai_gateway/spend_controls/#set-rate-limits)
 - Investigate requests with spans in Agent Observability
+- Manage providers, routing rules, access policies, budgets, and rate limits as code with the [AI Gateway API](/ai_gateway/api/) or [Terraform](/ai_gateway/terraform/)
 
 ## Get started
 
@@ -48,6 +49,8 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 | Set budgets and rate limits | [Control Spend and Usage](/ai_gateway/spend_controls/) |
 | Control recorded prompt and response content | [Security and Data Capture](/ai_gateway/security/) |
 | Review usage and inspect requests | [Observe AI Gateway Activity](/ai_gateway/observability/) |
+| Manage configuration from scripts, CI jobs, or agents | [Configure with the API](/ai_gateway/api/) |
+| Manage configuration as code with Terraform | [Manage with Terraform](/ai_gateway/terraform/) |
 | Diagnose failed or missing requests | [Troubleshooting](/ai_gateway/troubleshooting/) |
 
 ## Further reading
