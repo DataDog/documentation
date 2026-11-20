@@ -2989,6 +2989,11 @@ menu:
       parent: oncall_integrations
       identifier: oncall_integrations_servicenow
       weight: 801
+    - name: Jira
+      url: incident_response/on-call/integrations/jira/
+      parent: oncall_integrations
+      identifier: oncall_integrations_jira
+      weight: 802
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
