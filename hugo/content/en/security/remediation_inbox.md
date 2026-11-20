@@ -65,7 +65,8 @@ You also need the [permissions][13] for the actions you take:
 | Action | Required permissions |
 |---|---|
 | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
-| Create cases, assign owners, link pull requests, and generate fixes with Bits Code | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Create cases, assign owners, and link pull requests | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Generate fixes with Bits Code | `security_monitoring_findings_read` or `appsec_vm_read`, `cases_write`, and `bits_dev_write` (Bits Code Write) |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see the [Enable remediation capabilities](#enable-remediation-capabilities) section.
 
