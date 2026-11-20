@@ -5913,11 +5913,11 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
-  "GetRumSdkConfig": {
+  "GetRUMSdkConfig": {
     "description": "Retrieve a RUM SDK configuration by its identifier.",
     "summary": "Get a RUM SDK configuration"
   },
-  "UpdateRumSdkConfig": {
+  "UpdateRUMSdkConfig": {
     "description": "Update an existing RUM SDK configuration by its identifier.\nReturns the updated configuration when successful.",
     "summary": "Update a RUM SDK configuration",
     "request_description": "The RUM SDK configuration update.",
@@ -6189,17 +6189,17 @@
     "request_description": "",
     "request_schema_description": "RUM application update request."
   },
-  "GetRumConfig": {
+  "GetRUMConfig": {
     "description": "Get the RUM configuration for your organization.",
     "summary": "Get the RUM configuration"
   },
-  "UpdateRumConfig": {
+  "UpdateRUMConfig": {
     "description": "Update the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
     "summary": "Update the RUM configuration",
     "request_description": "New definition of the RUM configuration.",
     "request_schema_description": "Request body for updating the RUM configuration."
   },
-  "CreateRumConfig": {
+  "CreateRUMConfig": {
     "description": "Create the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
     "summary": "Create the RUM configuration",
     "request_description": "The definition of the RUM configuration to create.",
@@ -6223,39 +6223,39 @@
     "request_description": "JSON:API request body.",
     "request_schema_description": "JSON:API document."
   },
-  "ListRumMetrics": {
-    "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
+  "ListRUMMetrics": {
+    "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRUMMetric`.",
     "summary": "Get all RUM-based metrics"
   },
-  "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nThe metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.\nThe `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.\n`uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.\nWhen `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.\nReturns the created RUM-based metric when the request is successful.\nThe request returns a `409 Conflict` error if a metric with the same name already exists.",
+  "CreateRUMMetric": {
+    "description": "Create a metric based on your organization's RUM data.\nThe metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.\nThe `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRUMMetric`.\n`uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.\nWhen `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.\nReturns the created RUM-based metric when the request is successful.\nThe request returns a `409 Conflict` error if a metric with the same name already exists.",
     "summary": "Create a RUM-based metric",
     "request_description": "The definition of the new RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
   },
-  "DeleteRumMetric": {
+  "DeleteRUMMetric": {
     "description": "Delete a specific RUM-based metric from your organization.\nMetric data that was already generated is not deleted. Deleting a metric cannot be undone.",
     "summary": "Delete a RUM-based metric"
   },
-  "GetRumMetric": {
-    "description": "Get a specific RUM-based metric from your organization.\nThe `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.",
+  "GetRUMMetric": {
+    "description": "Get a specific RUM-based metric from your organization.\nThe `metric_id` is the metric name returned in `data.id` by `ListRUMMetrics` and `CreateRUMMetric`.",
     "summary": "Get a RUM-based metric"
   },
-  "UpdateRumMetric": {
+  "UpdateRUMMetric": {
     "description": "Update a specific RUM-based metric from your organization.\nOnly `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.\nOmitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.\n`data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.\nThe request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.\nReturns the updated RUM-based metric when the request is successful.",
     "summary": "Update a RUM-based metric",
     "request_description": "New definition of the RUM-based metric.",
     "request_schema_description": "The RUM-based metric update body."
   },
-  "DeleteRumQuotaConfig": {
+  "DeleteRUMQuotaConfig": {
     "description": "Delete the RUM retention quota configuration for a given scope.",
     "summary": "Delete a RUM retention quota configuration"
   },
-  "GetRumQuotaConfig": {
+  "GetRUMQuotaConfig": {
     "description": "Get the RUM retention quota configuration for a given scope.",
     "summary": "Get a RUM retention quota configuration"
   },
-  "UpsertRumQuotaConfig": {
+  "UpsertRUMQuotaConfig": {
     "description": "Create or update the RUM retention quota configuration for a given scope.\nReturns the retention quota configuration object when the request is successful.",
     "summary": "Create or update a RUM retention quota config",
     "request_description": "The definition of the RUM retention quota configuration to create or update.",
@@ -6391,45 +6391,45 @@
     "request_description": "JSON:API request body.",
     "request_schema_description": "JSON:API document."
   },
-  "ListRumReplayPlaylists": {
+  "ListRUMReplayPlaylists": {
     "description": "List playlists.",
     "summary": "List RUM replay playlists"
   },
-  "CreateRumReplayPlaylist": {
+  "CreateRUMReplayPlaylist": {
     "description": "Create a playlist.",
     "summary": "Create RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
-  "DeleteRumReplayPlaylist": {
+  "DeleteRUMReplayPlaylist": {
     "description": "Delete a playlist.",
     "summary": "Delete RUM replay playlist"
   },
-  "GetRumReplayPlaylist": {
+  "GetRUMReplayPlaylist": {
     "description": "Get a playlist.",
     "summary": "Get RUM replay playlist"
   },
-  "UpdateRumReplayPlaylist": {
+  "UpdateRUMReplayPlaylist": {
     "description": "Update a playlist.",
     "summary": "Update RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
-  "BulkRemoveRumReplayPlaylistSessions": {
+  "BulkRemoveRUMReplayPlaylistSessions": {
     "description": "Remove sessions from a playlist.",
     "summary": "Bulk remove RUM replay playlist sessions",
     "request_description": "",
     "request_schema_description": "A collection of session identifiers used for bulk add or remove operations on a playlist."
   },
-  "ListRumReplayPlaylistSessions": {
+  "ListRUMReplayPlaylistSessions": {
     "description": "List sessions in a playlist.",
     "summary": "List RUM replay playlist sessions"
   },
-  "RemoveRumReplaySessionFromPlaylist": {
+  "RemoveRUMReplaySessionFromPlaylist": {
     "description": "Remove a session from a playlist.",
     "summary": "Remove RUM replay session from playlist"
   },
-  "AddRumReplaySessionToPlaylist": {
+  "AddRUMReplaySessionToPlaylist": {
     "description": "Add a session to a playlist.",
     "summary": "Add RUM replay session to playlist"
   },
@@ -6437,21 +6437,21 @@
     "description": "Get segments for a view.",
     "summary": "Get segments"
   },
-  "ListRumReplaySessionWatchers": {
+  "ListRUMReplaySessionWatchers": {
     "description": "List session watchers.",
     "summary": "List RUM replay session watchers"
   },
-  "DeleteRumReplaySessionWatch": {
+  "DeleteRUMReplaySessionWatch": {
     "description": "Delete session watch history.",
     "summary": "Delete RUM replay session watch"
   },
-  "CreateRumReplaySessionWatch": {
+  "CreateRUMReplaySessionWatch": {
     "description": "Record a session watch.",
     "summary": "Create RUM replay session watch",
     "request_description": "",
     "request_schema_description": "A single RUM replay session watch resource returned by create operations."
   },
-  "ListRumReplayViewershipHistorySessions": {
+  "ListRUMReplayViewershipHistorySessions": {
     "description": "List watched sessions.",
     "summary": "List RUM replay viewership history sessions"
   },

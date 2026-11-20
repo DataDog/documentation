@@ -7,3 +7,11 @@ entries:
       - GetRumQuotaConfig
       - UpsertRumQuotaConfig
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - DeleteRUMQuotaConfig
+      - GetRUMQuotaConfig
+      - UpsertRUMQuotaConfig
+    title: Uppercase RUM acronym in tags, operationIds and schemas
