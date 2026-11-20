@@ -21640,7 +21640,7 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
-    - name: Rum Audience Management
+    - name: RUM Audience Management
       url: /api/latest/rum-audience-management/
       identifier: rum-audience-management
       generated: true
@@ -22650,7 +22650,7 @@ menu:
           - DeleteRUMQuotaConfig
         unstable: []
         order: 3
-    - name: Rum Teams Ownership
+    - name: RUM Teams Ownership
       url: /api/latest/rum-teams-ownership/
       identifier: rum-teams-ownership
       generated: true
