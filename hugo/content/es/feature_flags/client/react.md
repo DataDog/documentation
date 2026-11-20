@@ -14,13 +14,13 @@ title: Feature Flags de React
 ---
 ## Descripción general {#overview}
 
-Esta página describe cómo instrumentar su aplicación de React con el SDK de Feature Flags de Datadog. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
+Esta página describe cómo instrumentar su aplicación React con el SDK de Feature Flags de Datadog. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
 
 El SDK de Feature Flags de Datadog para React está construido sobre [OpenFeature][1], un estándar abierto para la gestión de Feature Flags. Esta guía explica cómo instalar el SDK, configurar el proveedor de Datadog y evaluar Feature Flags en sus componentes de React.
 
 ## Instalación {#installation}
 
-Instale el proveedor de OpenFeature de Datadog y el SDK de React de OpenFeature utilizando su gestor de paquetes preferido:
+Instale el proveedor de OpenFeature de Datadog y el SDK de OpenFeature para React utilizando su gestor de paquetes preferido:
 
 {{< tabs >}}
 {{% tab "npm" %}}
@@ -146,7 +146,7 @@ function ThemedComponent() {
 
 ### Feature Flags numéricos {#number-flags}
 
-Utilice `useNumberFlagValue(key, defaultValue)` para Feature Flags numéricas, tales como límites, porcentajes o multiplicadores:
+Utilice `useNumberFlagValue(key, defaultValue)` para Feature Flags numéricas como límites, porcentajes o multiplicadores:
 
 {{< code-block lang="jsx" >}}
 import { useNumberFlagValue } from '@openfeature/react-sdk';
@@ -177,7 +177,7 @@ function Banner() {
 
 ### Soporte para Suspense {#suspense-support}
 
-El soporte integrado para [suspense](https://react.dev/reference/react/Suspense) le permite evitar mostrar componentes con Feature Flags hasta que se complete la inicialización del proveedor, o cuando el contexto cambia. Pase `{ suspend: true }` en las opciones del hook para usar esta funcionalidad.
+El soporte integrado para [suspense](https://react.dev/reference/react/Suspense) le permite evitar mostrar componentes con Feature Flags hasta que la inicialización del proveedor se complete, o cuando el contexto cambie. Pase `{ suspend: true }` en las opciones del hook para usar esta funcionalidad.
 
 Por ejemplo:
 
@@ -238,7 +238,7 @@ Los detalles del marcador le ayudan a depurar el comportamiento de evaluación y
 
 ## Ejemplo completo {#complete-example}
 
-Aquí tiene un ejemplo completo que muestra cómo configurar y usar Feature Flags de Datadog en una aplicación de React:
+Aquí tiene un ejemplo completo que muestra cómo configurar y usar Feature Flags de Datadog en una aplicación React:
 
 ```jsx
 import { Suspense } from 'react';
@@ -301,24 +301,24 @@ await OpenFeature.setContext({
 
 ## Configurar las opciones del proveedor del navegador {#configure-browser-provider-options}
 
-El proveedor de React utiliza el proveedor de navegador de Datadog, que también admite estos ajustes opcionales:
+El proveedor de React utiliza el proveedor del navegador de Datadog, que también admite estos ajustes opcionales:
 
 | Opción | Predeterminado | Uso |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Enviar eventos de exposición a la ingesta de exposiciones. |
-| `enableFlagEvaluationTracking` | `true` | Enviar telemetría de evaluación agregada. |
-| `enableRumFeatureFlagTracking` | `true` | Agregar evaluaciones de Feature Flags a los eventos de RUM cuando Browser RUM esté disponible. Habilitar esta opción puede aumentar el conteo de eventos facturados de RUM. |
+| `trackExposures` | `true` | Envíe eventos de exposición al servicio de ingesta de exposiciones. Disponible en la versión 2.3.0 y posteriores. Reemplaza la opción `enableExposureLogging` en desuso. Para registrar exposiciones en su propio almacén de datos, consulte [Registrar exposiciones de Feature Flag en su propio almacén de datos][5]. |
+| `enableFlagEvaluationTracking` | `true` | Envíe telemetría de evaluación agregada. |
+| `enableRumFeatureFlagTracking` | `true` | Agregue evaluaciones de flags a los eventos de RUM cuando Browser RUM esté disponible. Habilitar esta opción puede aumentar el conteo de eventos facturados de RUM. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Intervalo de vaciado para la telemetría de evaluación. |
-| `initialFlagsConfiguration` | unset | Proporcione datos precalculados que coincidan con el contexto como alternativa si la obtención falla. Consulte [Initial precomputed fallback data][3]. |
-| `flaggingProxy` | unset | Obtener Feature Flags a través de un proxy en lugar de `site`. |
-| `customHeaders` | unset | Agregar encabezados a las solicitudes de obtención de Feature Flags. |
-| `overwriteRequestHeaders` | `false` | Reemplazar los encabezados de solicitud predeterminados con `customHeaders`. |
+| `initialFlagsConfiguration` | unset | Proporcione datos precalculados que coincidan con el contexto como alternativa si la obtención falla. Consulte [Datos de respaldo precalculados iniciales][3]. |
+| `flaggingProxy` | unset | Obtenga los flags a través de un proxy en lugar de `site`. |
+| `customHeaders` | unset | Agregue encabezados a las solicitudes de obtención de flags. |
+| `overwriteRequestHeaders` | `false` | Reemplace los encabezados de solicitud predeterminados con `customHeaders`. |
 
-`DatadogProvider` sigue siendo el proveedor de navegador recomendado para aplicaciones de React. Para la entrega de configuración propiedad de la aplicación o la evaluación de reglas locales a través de cambios de contexto, consulte [Evaluación basada en reglas del navegador][4]. Esta configuración avanzada requiere una actualización explícita de la configuración y la gestión del ciclo de vida del seguimiento.
+`DatadogProvider` sigue siendo el proveedor de navegador recomendado para aplicaciones React. Para la entrega de configuración gestionada por la aplicación o la evaluación local de reglas cuando cambia el contexto, consulte [Evaluación basada en reglas del navegador][4]. Esta configuración avanzada requiere actualizar explícitamente la configuración y gestionar el ciclo de vida del seguimiento.
 
 ## Pruebas {#testing}
 
-Puede realizar pruebas en un entorno de prueba de Datadog dedicado con el `DatadogProvider` real, o cambiarlo por el `TypedInMemoryProvider` de OpenFeature para controlar los valores de las Feature Flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. `TypedInMemoryProvider` se exporta desde `@openfeature/web-sdk`; instálelo como una dependencia de desarrollo y regístrelo antes de renderizar los componentes bajo prueba:
+Puede probar en un entorno de prueba dedicado de Datadog con el `DatadogProvider` real o sustituirlo por el `TypedInMemoryProvider` de OpenFeature para controlar los valores de los flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. `TypedInMemoryProvider` se exporta desde `@openfeature/web-sdk`; instálelo como una dependencia de desarrollo y regístrelo antes de renderizar los componentes bajo prueba:
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
@@ -333,7 +333,7 @@ await OpenFeature.setProviderAndWait(new TypedInMemoryProvider({
 }));
 {{< /code-block >}}
 
-La estructura de Feature Flags del Web SDK requiere `variants`, `defaultVariant` y `disabled`. Utilice `setProviderAndWait` (no `setProvider`) para evitar condiciones de carrera de suspense cuando el código de prueba renderice de inmediato los componentes controlados por Feature Flags. Para pruebas de componentes que montan un árbol de React, `@openfeature/react-sdk` también exporta un componente `OpenFeatureTestProvider` que envuelve a los hijos con un proveedor en memoria; consulte la [documentación del SDK de React de OpenFeature](https://openfeature.dev/docs/reference/technologies/client/web/react) para obtener más detalles.
+La estructura de los flags del Web SDK requiere `variants`, `defaultVariant` y `disabled`. Utilice `setProviderAndWait` (no `setProvider`) para evitar condiciones de carrera de Suspense cuando la prueba renderiza inmediatamente componentes controlados por flags. Para pruebas de componentes que montan un árbol de React, `@openfeature/react-sdk` también exporta un componente `OpenFeatureTestProvider` que envuelve a los hijos con un proveedor en memoria; consulte la [documentación del SDK de React de OpenFeature](https://openfeature.dev/docs/reference/technologies/client/web/react) para obtener más detalles.
 
 ## Lecturas adicionales {#further-reading}
 
@@ -343,3 +343,4 @@ La estructura de Feature Flags del Web SDK requiere `variants`, `defaultVariant`
 [2]: /es/account_management/api-app-keys/#client-tokens
 [3]: /es/feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /es/feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /es/feature_flags/guide/record_exposures_in_your_own_data_store/

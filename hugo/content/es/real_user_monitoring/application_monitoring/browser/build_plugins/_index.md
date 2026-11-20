@@ -9,8 +9,9 @@ algolia:
   - rspack
   - bundler
 description: Integre los complementos de compilación de Datadog con su empaquetador
-  de JavaScript para automatizar la carga de mapas del código fuente, la desofuscación
-  de nombres de acciones y otras tareas de RUM en el momento de la compilación.
+  de JavaScript para automatizar la carga de mapas del código fuente, la generación
+  de listas de permitidos de privacidad y otras tareas de RUM en el momento de la
+  compilación.
 further_reading:
 - link: https://github.com/DataDog/build-plugins
   tag: Código fuente
@@ -173,7 +174,7 @@ datadogWebpackPlugin({
 
 {{< whatsnext desc="Configure plugins de compilación individuales:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Mapas del código fuente</u>: cargue automáticamente los mapas del código fuente en Datadog durante la compilación, permitiendo trazas de pila desofuscadas.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Desofuscación de nombres de acción</u>: restaure nombres de acción legibles en compilaciones minificadas.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u>: Genere una lista de permitidos de cadenas seguras en el momento de la compilación para que los nombres de las acciones y el texto de reproducción de sesiones sigan siendo útiles mientras se enmascaran los datos confidenciales.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Contexto del código fuente</u>: muestre el código fuente en línea en las trazas de pila de Error Tracking.{{< /nextlink >}}
 {{< /whatsnext >}}
 

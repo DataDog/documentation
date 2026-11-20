@@ -17,6 +17,7 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 - Confirm that the user or service account and the credential scope allow `ai_gateway_usage`.
 - Confirm that an access policy or the default policy allows that user or service account to use the requested model or routing rule.
 - Send a personal access token or a service access token in the `Authorization: Bearer` header.
+- For a coding agent signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers), send a personal access token, not an application key, in the `dd-application-key` header.
 
 ## 402 responses
 

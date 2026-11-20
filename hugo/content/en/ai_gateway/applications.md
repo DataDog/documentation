@@ -27,8 +27,16 @@ AI Gateway accepts the following Datadog credentials. The user or service accoun
 | Credential | Request headers |
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
+| [Personal access token][4], for coding agents signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
 | [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
 | [Workload Identity Federation][applications-22] token | `Authorization: Bearer <WIF_TOKEN>` |
+
+Coding agents signed in with a subscription send two headers:
+
+- `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
+- `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
+
+Despite its name, `dd-application-key` takes a personal access token, not an application key.
 
 For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
 

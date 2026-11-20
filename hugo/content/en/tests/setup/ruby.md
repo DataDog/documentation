@@ -2,7 +2,7 @@
 title: Ruby Tests
 code_lang: ruby
 type: multi-code-lang
-code_lang_weight: 40
+code_lang_weight: 50
 aliases:
     - /continuous_integration/setup_tests/ruby
     - /continuous_integration/tests/ruby

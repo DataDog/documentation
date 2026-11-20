@@ -11,9 +11,17 @@ import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
 import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/no-cycle
+import { isDifferentPage } from '../helpers/history';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
+
+// pathname of the page in #mainContent, so the popstate handler can tell when Back or Forward changes pages
+let loadedPath = window.location.pathname;
+
+function getLoadedPath() {
+    return loadedPath;
+}
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
@@ -28,6 +36,7 @@ function loadPage(newUrl) {
     }
 
     const pathName = new URL(newUrl).pathname;
+    loadedPath = pathName;
     const commitRef = document.documentElement.dataset.commitRef
     const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
 
@@ -42,8 +51,11 @@ function loadPage(newUrl) {
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function () {
             // cancel httprequest if hash is changed to prevent page replacing
-            window.addEventListener('hashchange', function () {
-                httpRequest.abort();
+            // Back or Forward to a different page that has a hash also fires hashchange, so only cancel on same-page changes
+            window.addEventListener('hashchange', function (event) {
+                if (!isDifferentPage(new URL(event.oldURL).pathname, event.newURL)) {
+                    httpRequest.abort();
+                }
             });
 
             if (httpRequest.readyState !== XMLHttpRequest.DONE) {
@@ -302,6 +314,6 @@ function loadPage(newUrl) {
     }
 }
 
-export {loadPage};
+export {loadPage, getLoadedPath};
 
 

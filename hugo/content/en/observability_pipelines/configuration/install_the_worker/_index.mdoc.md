@@ -278,7 +278,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
-1. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
+1. Select one of the options in the dropdown to provide the expected log or metrics volume for the pipeline:
     |   Option   | Description |
     | ---------- | ----------- |
     | Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
@@ -444,7 +444,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% /if %}
 
-3. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
+3. Select one of the options in the dropdown to provide the expected log or metrics volume for the pipeline:
 
     |   Option   | Description |
     | ---------- | ----------- |

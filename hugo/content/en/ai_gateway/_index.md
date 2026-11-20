@@ -22,6 +22,14 @@ legacy_anchors:
   default-policy: /ai_gateway/access_control/#default-policy
   access-policies: /ai_gateway/access_control/#access-policies
   recommended-setup: /ai_gateway/access_control/#recommended-setup
+  use-subscription-providers: /ai_gateway/providers/#use-subscription-providers
+  create-a-subscription-provider: /ai_gateway/providers/#create-a-subscription-provider
+  grant-access-to-a-subscription-provider: /ai_gateway/providers/#grant-access-to-a-subscription-provider
+  set-up-claude-code: /ai_gateway/providers/#set-up-claude-code
+  set-up-codex: /ai_gateway/providers/#set-up-codex
+  verify-subscription-traffic: /ai_gateway/providers/#verify-subscription-traffic
+  how-ai-gateway-handles-subscription-traffic: /ai_gateway/providers/#how-ai-gateway-handles-subscription-traffic
+  troubleshoot-subscription-providers: /ai_gateway/providers/#troubleshoot-subscription-providers
   set-budgets: /ai_gateway/spend_controls/#set-budgets
   set-rate-limits: /ai_gateway/spend_controls/#set-rate-limits
   create-a-rate-limit: /ai_gateway/spend_controls/#create-a-rate-limit
@@ -64,6 +72,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Call models from multiple providers through one endpoint and one set of Datadog credentials
 - Give callers a stable model identifier with [routing rules](/ai_gateway/routing/) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](/ai_gateway/access_control/)
+- Bill Claude Code and Codex usage to each user's own Claude or ChatGPT subscription with [subscription providers](/ai_gateway/providers/#use-subscription-providers)
 - Track and cap spend with [budgets](/ai_gateway/spend_controls/#set-budgets)
 - Cap requests, tokens, and spend over rolling windows with [rate limits](/ai_gateway/spend_controls/#set-rate-limits)
 - Investigate requests with spans in Agent Observability
