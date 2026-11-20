@@ -3142,27 +3142,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -93292,9 +93271,12 @@ components:
       description: Object containing the definition of a metric's distinct volume.
       properties:
         distinct_volume:
-          description: Distinct volume for the given metric.
+          description: |-
+            Distinct volume for the given metric. This value is `null` for standard metrics in organizations on
+            Metric Name Pricing.
           example: 10
           format: int64
+          nullable: true
           type: integer
       type: object
     MetricDistinctVolumeType:
@@ -93375,9 +93357,10 @@ components:
       description: Object containing the definition of a metric's ingested and indexed volume.
       properties:
         indexed_volume:
-          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour.
+          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour. This value is `null` when no estimated usage data is available for the metric.
           example: 10
           format: int64
+          nullable: true
           type: integer
         indexed_volume_delta:
           description: |-
@@ -93387,9 +93370,10 @@ components:
           format: int64
           type: integer
         ingested_volume:
-          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour.
+          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour. This value can be `null` when ingested volume is not available for the metric.
           example: 20
           format: int64
+          nullable: true
           type: integer
         ingested_volume_delta:
           description: |-
