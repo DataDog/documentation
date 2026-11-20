@@ -285,7 +285,7 @@ Deleting a folder never deletes its notebooks. By default, the folder's notebook
 
 ### Manage folders with MCP or the API
 
-You can also manage folders programmatically through the Datadog MCP Server or the API. <!-- TODO Add links to the MCP Server and API docs -->
+You can also manage folders programmatically. Folder operations are available through the Datadog MCP Server and the API.
 
 ## Finding notebooks
 
