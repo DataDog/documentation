@@ -49,6 +49,7 @@ describe("pages.json coverage against full spec", () => {
         "/api/latest/using-the-api.md",
         "/api/latest/scopes.md",
         "/api/latest/rate-limits.md",
+        "/api/latest/versions.md",
         "/api/changelog.md",
       ]) {
         expect(keys.has(`${SITE}${path}`), `missing ${path}`).toBe(true);
@@ -70,8 +71,8 @@ describe("pages.json coverage against full spec", () => {
         }
       }
 
-      // Total count == fixed(5) + categories + operations.
-      expect(keys.size).toBe(5 + categories.length + expectedOps);
+      // Total count == fixed(6) + categories + operations.
+      expect(keys.size).toBe(6 + categories.length + expectedOps);
       expect(expectedOps).toBeGreaterThan(100);
     },
   );

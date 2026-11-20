@@ -46,6 +46,13 @@ const operationsLabel = "Operations";
           )
         }
       </span>
+      {
+        entry.apiVersion && (
+          <span class={cl("api-changelog-entry__version")}>
+            API version: {entry.apiVersion}
+          </span>
+        )
+      }
     </div>
     <h3 class={cl("api-changelog-entry__title")}>
       {

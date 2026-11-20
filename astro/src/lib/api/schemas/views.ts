@@ -64,6 +64,15 @@ export const RequestBodyDataSchema = z
   })
   .strict();
 
+export const EndpointVersionContentSchema = z
+  .object({
+    apiVersion: z.string(),
+    requestBody: RequestBodyDataSchema.optional(),
+    responses: z.array(ResponseDataSchema),
+    codeExamples: z.array(CodeExampleSetSchema),
+  })
+  .strict();
+
 export const EndpointDataSchema = z
   .object({
     operationId: z.string(),
@@ -88,6 +97,7 @@ export const EndpointDataSchema = z
     requestBody: RequestBodyDataSchema.optional(),
     responses: z.array(ResponseDataSchema),
     codeExamples: z.array(CodeExampleSetSchema),
+    dateVersions: z.array(EndpointVersionContentSchema).optional(),
   })
   .strict();
 
@@ -106,4 +116,7 @@ export type ApiCategory = z.infer<typeof ApiCategorySchema>;
 export type ResponseData = z.infer<typeof ResponseDataSchema>;
 export type RequestBodyData = z.infer<typeof RequestBodyDataSchema>;
 export type EndpointData = z.infer<typeof EndpointDataSchema>;
+export type EndpointVersionContent = z.infer<
+  typeof EndpointVersionContentSchema
+>;
 export type ApiOperationView = z.infer<typeof ApiOperationViewSchema>;

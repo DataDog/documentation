@@ -26,6 +26,14 @@ export const SchemaFieldSchema = z.strictObject({
     .describe("Markdown string from the spec's description field"),
   enumValues: z.array(z.string()).optional(),
   defaultValue: z.string().optional(),
+  versionChange: z
+    .object({
+      type: z.enum(["added", "removed"]),
+      version: z.string(),
+    })
+    .strict()
+    .optional()
+    .describe("How this field changed in a dated API schema version"),
   get children() {
     return z
       .array(SchemaFieldSchema)

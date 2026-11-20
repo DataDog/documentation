@@ -80,6 +80,12 @@
   font-weight: var(--font-weight-medium);
 }
 
+.api-changelog-entry__version {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 a.api-changelog-entry__product-name {
   color: var(--color-brand);
 }

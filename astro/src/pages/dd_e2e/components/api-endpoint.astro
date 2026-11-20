@@ -3,9 +3,11 @@ if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
+import ApiVersionSelect from "@components/ApiEndpoint/ApiVersionSelect";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
 
 const title = "ApiEndpoint";
+const versionedEndpointId = "versioned-api-endpoint";
 
 const completeEndpointJson = JSON.stringify({
   operationId: "GetDashboard",
@@ -86,6 +88,42 @@ const completeEndpointJson = JSON.stringify({
       ],
     },
   ],
+  dateVersions: [
+    {
+      apiVersion: "2027-04-15",
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          schema: [
+            {
+              name: "owner",
+              type: "string",
+              required: false,
+              deprecated: false,
+              readOnly: false,
+              description: "Dashboard owner.",
+              versionChange: { type: "added", version: "2027-04-15" },
+            },
+          ],
+          examples: [{ name: "Example", value: "{ }" }],
+        },
+      ],
+      codeExamples: [
+        {
+          language: "curl",
+          label: "Curl",
+          entries: [
+            {
+              description: "Get a dashboard",
+              code: 'curl -H "DD-API-Version: 2027-04-15"',
+              syntax: "bash",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 });
 
 const deprecatedEndpointJson = JSON.stringify({
@@ -147,9 +185,19 @@ const deprecatedEndpointJson = JSON.stringify({
       <h2>Examples</h2>
 
       <h3>Complete endpoint</h3>
-      <ApiEndpoint data={completeEndpointJson}>
-        <p>Get a dashboard using the specified ID.</p>
-      </ApiEndpoint>
+      <ApiVersionSelect
+        client:load
+        appearance="pill"
+        majorVersion="v1"
+        dates={["2027-04-15"]}
+        operationId="GetDashboard"
+        targetId={versionedEndpointId}
+      />
+      <div id={versionedEndpointId}>
+        <ApiEndpoint data={completeEndpointJson} showDateVersionSelect={false}>
+          <p>Get a dashboard using the specified ID.</p>
+        </ApiEndpoint>
+      </div>
 
       <h3>Deprecated endpoint</h3>
       <ApiEndpoint data={deprecatedEndpointJson}>

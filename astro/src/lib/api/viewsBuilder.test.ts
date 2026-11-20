@@ -22,6 +22,8 @@ import {
   getCategoryViewBySlug,
   getOperationView,
 } from "./viewsBuilder";
+import { getOperationDateVersions } from "./apiVersioning";
+import { getOpenApiDocument } from "./specParser";
 import {
   ApiCategorySchema,
   ApiCategoryStubSchema,
@@ -207,6 +209,35 @@ describe("viewsBuilder curl examples", () => {
         expect(code).toContain(`"type": "${monitorTypes[index]}"`);
       }
     });
+  });
+});
+
+describe("viewsBuilder dated API versions", () => {
+  it("projects schemas, marks field changes, and versions curl", async () => {
+    const spec = getOpenApiDocument("v1");
+    const operation = spec.paths["/api/v1/dashboard"]?.post;
+    expect(operation && getOperationDateVersions(spec, operation)).toEqual([
+      "base",
+      "2027-01-01",
+    ]);
+    const view = await getOperationView("dashboards", "create-a-new-dashboard");
+    const endpoint = view?.variants.find((variant) => variant.version === "v1");
+    const dated = endpoint?.dateVersions?.[0];
+
+    expect(dated?.apiVersion).toBe("2027-01-01");
+    const response = dated?.responses.find(
+      (candidate) => candidate.statusCode === "200",
+    );
+    expect(response?.schema).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "default_timeframe",
+          versionChange: { type: "added", version: "2027-01-01" },
+        }),
+      ]),
+    );
+    const curl = dated?.codeExamples.find((set) => set.language === "curl");
+    expect(curl?.entries[0].code).toContain('-H "DD-API-Version: 2027-01-01"');
   });
 });
 

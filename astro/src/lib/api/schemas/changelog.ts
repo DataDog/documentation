@@ -8,6 +8,10 @@ export const ChangelogFileSchema = z.object({
   entries: z.array(
     z.object({
       change_type: z.string().optional(),
+      api_version: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/)
+        .optional(),
       date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
       link: z.string().optional(),
       operations: z.array(z.string()).optional(),

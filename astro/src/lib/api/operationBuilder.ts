@@ -574,6 +574,7 @@ export function buildCurlByRegion(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   body: CurlBody = curlBody(undefined),
+  apiVersionDate?: string,
 ): Record<string, string> {
   const options = curlOptionsForOperation(
     spec,
@@ -582,6 +583,7 @@ export function buildCurlByRegion(
     operation,
     splitParams,
     body,
+    apiVersionDate,
   );
   const hostsByRegion = getRegionHosts(spec, operation);
   const result: Record<string, string> = {};
@@ -607,6 +609,7 @@ export function buildPlaintextCurl(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   body: CurlBody = curlBody(undefined),
+  apiVersionDate?: string,
 ): string {
   const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
   const hostsByRegion = getRegionHosts(spec, operation);
@@ -618,6 +621,7 @@ export function buildPlaintextCurl(
       operation,
       splitParams,
       body,
+      apiVersionDate,
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
@@ -637,11 +641,13 @@ function curlOptionsForOperation(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   body: CurlBody,
+  apiVersionDate?: string,
 ): GenerateCurlOptions {
   const servers = operation?.servers ?? spec?.servers;
   return {
     method,
     path,
+    apiVersionDate,
     commentLines: body.commentLines,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
     pathParams: toCurlParams(spec, splitParams.path),

@@ -72,6 +72,18 @@ describe("toChangelogBucket", () => {
 });
 
 describe("normalizeChangelog", () => {
+  it("preserves an API version date for versioned changes", () => {
+    const [entry] = normalizeChangelog({
+      dashboards: `entries:
+  - change_type: breaking
+    date: "2026-10-08"
+    api_version: "2027-01-01"
+    title: "Versioned dashboard response"`,
+    });
+
+    expect(entry.apiVersion).toBe("2027-01-01");
+  });
+
   it("sorts by date descending, then product slug, then title", () => {
     const entries = normalizeChangelog({
       zeta: `entries:
@@ -254,6 +266,24 @@ describe("resolveChangelogEntries", () => {
 });
 
 describe("buildChangelogPages", () => {
+  it("builds separately paginated pages for each API version", () => {
+    const pages = buildChangelogPages([
+      makeEntry({ apiVersion: "2027-04-15", title: "Newer" }),
+      makeEntry({ apiVersion: "2027-01-01", title: "Older" }),
+      makeEntry({ title: "Unversioned" }),
+    ]);
+
+    expect(
+      pages
+        .filter((page) => page.filter === "all")
+        .map((page) => [page.apiVersion, page.pathParam, page.entries.length]),
+    ).toEqual([
+      [undefined, undefined, 3],
+      ["2027-04-15", "version/2027-04-15", 1],
+      ["2027-01-01", "version/2027-01-01", 1],
+    ]);
+  });
+
   function summarize(pages: ReturnType<typeof buildChangelogPages>) {
     return pages.map((page) => ({
       pathParam: page.pathParam,
@@ -316,6 +346,12 @@ describe("buildChangelogPages", () => {
 });
 
 describe("changelogHref", () => {
+  it("links a filtered dated version without losing either selection", () => {
+    expect(changelogHref("en", "added", 2, "2027-04-15")).toBe(
+      "/api/changelog/version/2027-04-15/added/2/",
+    );
+  });
+
   it.each([
     ["en", "all", 1, "/api/changelog/"],
     ["en", "all", 2, "/api/changelog/2/"],

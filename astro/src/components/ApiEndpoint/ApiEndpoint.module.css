@@ -84,3 +84,51 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.api-endpoint__version-select {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-block: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* On a single-major-version operation, the date selector replaces the static
+   major-version pill instead of rendering as a second control below it. */
+.api-endpoint__version-select--pill {
+  display: block;
+  margin-block: 0 var(--space-md);
+}
+
+.api-endpoint__version-select-label--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.api-endpoint__version-select--pill :global(.select__button) {
+  padding: 6px var(--space-xl) 7px var(--space-sm);
+  color: var(--color-text-inverse);
+  background: var(--color-brand);
+  border: none;
+  box-shadow: var(--shadow-pill);
+}
+
+.api-endpoint__version-select--pill :global(.select__button:hover) {
+  background: var(--color-brand-hover);
+}
+
+.api-endpoint__version-select--pill :global(.select)::after {
+  border-color: var(--color-text-inverse);
+}
+
+.api-endpoint__version-content[hidden] {
+  display: none;
+}

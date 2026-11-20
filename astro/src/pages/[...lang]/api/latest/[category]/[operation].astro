@@ -2,6 +2,7 @@
 export const prerender = true;
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
+import ApiVersionSelect from "@components/ApiEndpoint/ApiVersionSelect";
 import Tabs from "@components/Tabs/Tabs.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
 import {
@@ -73,6 +74,12 @@ const tabLabels = operation.variants.map(variantLabel);
 const tabDisabled = operation.variants.map(
   (_, _i) => operation.variants.length === 1,
 );
+const singleVersionedVariant =
+  operation.variants.length === 1 &&
+  operation.variants[0].dateVersions &&
+  operation.variants[0].dateVersions.length > 0
+    ? operation.variants[0]
+    : undefined;
 ---
 
 <ApiLayout
@@ -85,26 +92,51 @@ const tabDisabled = operation.variants.map(
   contentPath={hugoOperationContentPath(catSlug, opSlug)}
 >
   <ApiPageHeader title={operation.summary} />
-  <Tabs
-    id={tabsId}
-    labels={tabLabels}
-    panelIds={panelIds}
-    variant="pills"
-    disabled={tabDisabled}
-  >
-    {
-      operation.variants.map((variant, i) => (
-        <div
-          id={`${operation.slug}-${variant.version}`}
-          class:list={["tabs__panel", i === 0 && "tabs__panel--active"]}
-          role="tabpanel"
-          hidden={i !== 0}
-        >
-          <ApiEndpoint data={JSON.stringify(variant)}>
-            <Fragment set:html={renderMarkdown(variant.description)} />
+  {
+    singleVersionedVariant ? (
+      <>
+        <ApiVersionSelect
+          client:load
+          appearance="pill"
+          majorVersion={singleVersionedVariant.version}
+          dates={singleVersionedVariant
+            .dateVersions!.map((version) => version.apiVersion)
+            .toReversed()}
+          operationId={singleVersionedVariant.operationId}
+          targetId={panelIds[0]}
+        />
+        <div id={panelIds[0]}>
+          <ApiEndpoint
+            data={JSON.stringify(singleVersionedVariant)}
+            showDateVersionSelect={false}
+          >
+            <Fragment
+              set:html={renderMarkdown(singleVersionedVariant.description)}
+            />
           </ApiEndpoint>
         </div>
-      ))
-    }
-  </Tabs>
+      </>
+    ) : (
+      <Tabs
+        id={tabsId}
+        labels={tabLabels}
+        panelIds={panelIds}
+        variant="pills"
+        disabled={tabDisabled}
+      >
+        {operation.variants.map((variant, i) => (
+          <div
+            id={`${operation.slug}-${variant.version}`}
+            class:list={["tabs__panel", i === 0 && "tabs__panel--active"]}
+            role="tabpanel"
+            hidden={i !== 0}
+          >
+            <ApiEndpoint data={JSON.stringify(variant)}>
+              <Fragment set:html={renderMarkdown(variant.description)} />
+            </ApiEndpoint>
+          </div>
+        ))}
+      </Tabs>
+    )
+  }
 </ApiLayout>

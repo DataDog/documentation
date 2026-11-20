@@ -14,6 +14,7 @@ import {
   changelogMarkdownHref,
   changelogPageTitle,
   getChangelogView,
+  getChangelogApiVersions,
 } from "@lib/api/changelog";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
@@ -43,7 +44,8 @@ if (!lang) {
 
 // Found from the params rather than passed as props, so dev mode and the
 // test container 404 on any path `getStaticPaths` doesn't emit.
-const page = buildChangelogPages(await getChangelogView(lang)).find(
+const changelog = await getChangelogView(lang);
+const page = buildChangelogPages(changelog).find(
   (changelogPage) => changelogPage.pathParam === Astro.params.path,
 );
 if (!page) {
@@ -54,7 +56,7 @@ const categories = await getCategoryStubsView(lang);
 ---
 
 <ApiLayout
-  title={changelogPageTitle(page.filter, page.pageNumber)}
+  title={changelogPageTitle(page.filter, page.pageNumber, page.apiVersion)}
   description={CHANGELOG_INTRO}
   categories={categories}
   breadcrumbs={apiBreadcrumbs(lang, CHANGELOG_TITLE)}
@@ -62,5 +64,9 @@ const categories = await getCategoryStubsView(lang);
   markdownHref={changelogMarkdownHref(lang)}
 >
   <ApiPageHeader title={CHANGELOG_TITLE} />
-  <ApiChangelog lang={lang} page={page} />
+  <ApiChangelog
+    lang={lang}
+    page={page}
+    apiVersions={getChangelogApiVersions(changelog)}
+  />
 </ApiLayout>

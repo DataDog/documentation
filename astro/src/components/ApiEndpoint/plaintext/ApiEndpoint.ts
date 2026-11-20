@@ -34,7 +34,7 @@ export function apiEndpointNodes(
   ep: EndpointData,
   lang: Locale = DEFAULT_LOCALE,
 ): MarkdocNode[] {
-  return [
+  const baseNodes = [
     ...statusNotice(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
     ...overviewNodes(ep, lang),
@@ -43,6 +43,13 @@ export function apiEndpointNodes(
     ...responseNodes(ep),
     ...codeExampleNodes(ep),
   ];
+  const datedNodes = (ep.dateVersions ?? []).flatMap((version) => [
+    heading(3, `API version ${ep.version} - ${version.apiVersion}`),
+    ...requestBodyNodes({ ...ep, requestBody: version.requestBody }),
+    ...responseNodes({ ...ep, responses: version.responses }),
+    ...codeExampleNodes({ ...ep, codeExamples: version.codeExamples }),
+  ]);
+  return [...baseNodes, ...datedNodes];
 }
 
 function statusNotice(ep: EndpointData): MarkdocNode[] {
