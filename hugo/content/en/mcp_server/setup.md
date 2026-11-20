@@ -583,6 +583,39 @@ To enable all generally available toolsets (except for the [`chat` toolset][2]),
 [3]: https://opencode.ai/
 {{% /tab %}}
 
+{{% tab "Pi" %}}
+
+Install the [Datadog Pi plugin][1] to connect the [Pi coding agent][2] to the Datadog MCP Server. The plugin handles sign-in, connections to one or more Datadog organizations, and [toolset](#toolsets) selection.
+
+[1]: https://github.com/datadog-labs/pi-plugin
+[2]: https://pi.dev/
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. Install the plugin:
+
+   <pre><code>pi install npm:@datadog/pi-plugin</code></pre>
+
+1. Restart Pi.
+
+1. Run `/datadog` in Pi to open the connection screen. Select your [Datadog site][3] and complete the OAuth login flow in your browser. Your first connection becomes the default.
+
+1. Run `/datadog toolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+To connect another Datadog organization, run `/datadog` and select {{< ui >}}Connect another organization{{< /ui >}}. If your authorization expires, run `/datadog` and select {{< ui >}}Sign in again{{< /ui >}}. After updating the plugin, run `/reload` in Pi.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/pi-plugin">plugin repository</a> for all available commands, API key authentication for headless usage, and configuration options.</div>
+
+[3]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "VS Code" %}}
 
 For Copilot, install the [Datadog Copilot plugin][2] from the marketplace. For more information, see the instructions for the [Copilot CLI][3].
@@ -755,13 +788,13 @@ Provide tool names as a comma-separated list. When both parameters are present, 
 
 These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
-- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, notebooks, and code execution.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
 - `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
-- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
+- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
@@ -818,6 +851,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
+| [Pi][94] | Earendil | Datadog [Pi plugin][95] recommended. |
 | [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -1083,3 +1117,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [91]: /account_management/rbac/mcp_access/
 [92]: https://app.datadoghq.com/organization-settings/oauth-applications
 [93]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client
+[94]: https://pi.dev/
+[95]: https://github.com/datadog-labs/pi-plugin

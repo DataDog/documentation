@@ -2,7 +2,7 @@
 title: Java Tests
 code_lang: java
 type: multi-code-lang
-code_lang_weight: 10
+code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/java
   - /continuous_integration/tests/java

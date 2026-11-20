@@ -194,6 +194,41 @@ EvaluationContext context = new MutableContext("user-123")
 
 The `targetingKey` (for example, `user-123`) is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.
 
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimentation opt-out requires `dd-openfeature` version `1.69.0` or later. The combined example requires `1.69.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][24] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass both preferences in a context for each evaluation:
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new Provider());
+
+MutableContext context = new MutableContext("user-123")
+    .add("dd_evaluation_telemetry_opt_out", true)
+    .add("dd_experimentation_opt_out_at", "2026-10-30T12:00:00Z");
+boolean enabled = api.getClient().getBooleanValue("new-checkout", false, context);
+```
+
+Replace the example timestamp with the subject's stored preference. Preserve existing configuration delivery and Java agent requirements for the selected setup.
+
+For programmatic configuration, use `new Provider.Options().enableEvaluationTelemetryOptOutParameter(true)` and `.experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)`. Import `ExperimentationOptOutMode` from `com.datadog.openfeature`. Explicit options override deployment settings. `DEFAULT` uses deployment settings; `DISABLED` overrides them.
+
+Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
+
+Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][25] for how inherited context values apply.
+
 ## Evaluate flags
 
 Evaluate feature flags using the OpenFeature client. All flag types are supported: Boolean, string, integer, double, and object.
@@ -481,6 +516,10 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 );
 {{< /code-block >}}
 
+## Evaluation events and privacy
+
+Use `dd-openfeature` and `dd-java-agent` 1.68.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][23] for the data collected, opt-out scope, and delivery requirements.
+
 ## Testing
 
 Test against a dedicated Datadog environment with `com.datadog.openfeature.Provider`, or use OpenFeature's `InMemoryProvider` to control flag values in tests. The following example uses `InMemoryProvider` for offline tests. It ships in the OpenFeature SDK dependency included with `dd-openfeature`.
@@ -677,3 +716,6 @@ When the selected configuration path supports exposures, exposures appear only f
 [20]: /tracing/trace_collection/dd_libraries/java/#add-the-java-sdk-to-the-jvm
 [21]: /feature_flags/guide/apm_trace_enrichment/
 [22]: /tracing/trace_collection/dd_libraries/java/
+[23]: /feature_flags/guide/server_evaluation_events/
+[24]: /feature_flags/concepts/opt_out/
+[25]: /feature_flags/concepts/opt_out/#configure-server-sdks

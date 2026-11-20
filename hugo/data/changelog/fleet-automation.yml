@@ -1,0 +1,22 @@
+entries:
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CancelFleetDeploymentV2
+      - CreateFleetDeploymentConfigureV2
+      - CreateFleetDeploymentUpgradeV2
+      - CreateFleetSchedule
+      - DeleteFleetSchedule
+      - GetFleetAgentDetailV2
+      - GetFleetDeploymentV2
+      - GetFleetScheduleV2
+      - ListFleetAgentTracers
+      - ListFleetAgentVersionsV2
+      - ListFleetAgentsV2
+      - ListFleetDeploymentsV2
+      - ListFleetSchedulesV2
+      - ListFleetTracers
+      - TriggerFleetSchedule
+      - UpdateFleetSchedule
+    title: Document rate-limit headers on the shared 429 responses

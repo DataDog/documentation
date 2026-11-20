@@ -22,7 +22,7 @@ La página Metrics Overview proporciona a los usuarios de todos los niveles de e
 Con la página Metrics Overview puede aprender a: 
 - Explorar las fuentes de sus métricas
 - Generar métricas adicionales a partir de productos de Datadog
-- Habilitar capacidades avanzadas de la plataforma, como percentiles, Metrics without Limits™ e ingesta de métricas históricas
+- Habilitar capacidades avanzadas de la plataforma como percentiles, Metrics without Limits™ e ingesta de métricas históricas
 
 ## Cómo fluyen sus métricas a través de Datadog {#how-your-metrics-flow-through-datadog}
 
@@ -30,19 +30,19 @@ Con la página Metrics Overview puede aprender a:
 
 Esta sección muestra todas sus fuentes de métricas, el procesamiento y la configuración adicionales que se aplican a sus datos de métricas, y un desglose del volumen de métricas estándar y personalizadas.
 
-**Nota**: la página Overview no está dedicada a gestionar los costos de las métricas. Consulte [Prácticas recomendadas para la gobernanza de Custom Metrics][25] para obtener más detalles sobre cómo optimizar los costos.
+**Nota**: la página Overview no está dedicada a gestionar los costos de las métricas. Consulte [Mejores prácticas para la gobernanza de métricas personalizadas][25] para obtener más detalles sobre cómo optimizar los costos.
 
 ### Fuentes de métricas {#metric-sources}
 
-La columna {{< ui >}}Metric Sources{{< /ui >}} muestra un resumen de las fuentes de métricas que reportan a Datadog. Haga clic en cualquiera de las fuentes para abrir [Metrics Catalog][2] con el alcance limitado a esa fuente. Sus métricas de Datadog pueden originarse de las siguientes fuentes:
+La columna {{< ui >}}Metric Sources{{< /ui >}} muestra un resumen de las fuentes de métricas que envían datos a Datadog. Haga clic en cualquiera de las fuentes para abrir la página Metrics Catalog filtrada por esa fuente. Para obtener más información, consulte la [documentación de Metrics Catalog][2]. Sus métricas de Datadog pueden originarse de las siguientes fuentes:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
-El [Datadog Agent][3] recopila métricas de los hosts donde está instalado y las reenvía a Datadog. Estas métricas podrían originarse de:
+El [Datadog Agent][3] recopila métricas de los hosts donde está instalado y las envía a Datadog. Estas métricas podrían originarse de:
 
-   - Cualquiera de las integraciones oficiales de Datadog que vienen incluidas con el Agent. Consulte el [repositorio integrations-core][4] para obtener una lista completa de las integraciones disponibles basadas en el Agent.
+   - Cualquiera de las integraciones oficiales de Datadog que vienen incluidas con el Agent. Consulte el [repositorio integrations-core][4] para obtener una lista completa de las integraciones basadas en el Agent disponibles.
    - [DogStatsD][6], un servicio de agregación de métricas incluido con el Datadog Agent. DogStatsD implementa el protocolo [StatsD][7] con algunas extensiones específicas de Datadog.
-   - [Verificaciones personalizadas][8], que se utilizan para recopilar métricas de aplicaciones personalizadas o sistemas únicos. Usted mismo define la lógica de la verificación en los archivos de configuración del Agent. Consulte [Cómo escribir una verificación personalizada del Agent][9] para obtener más información.
-   - [Integraciones de Marketplace][10] instaladas en el Agent. El [Datadog Marketplace][11] es un mercado digital donde los socios tecnológicos pueden listar sus ofertas pagas para los usuarios de Datadog.
+   - [Comprobaciones personalizadas][8], que se utilizan para recopilar métricas de aplicaciones personalizadas o sistemas únicos. Usted mismo define la lógica de la comprobación en los archivos de configuración del Agent. Consulte [Cómo escribir una comprobación personalizada del Agent][9] para obtener más información.
+   - [Integraciones de Marketplace][10] instaladas en el Agent. El [Datadog Marketplace][11] es un mercado digital donde los socios tecnológicos pueden listar sus ofertas de pago para los usuarios de Datadog.
 
 {{% /collapse-content %}}
 
@@ -51,17 +51,17 @@ También conocidas como integraciones basadas en autenticación, estas integraci
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Datadog API" level="h4" %}}
-Puede enviar métricas directamente a la [API de métricas][13].
+Puede enviar métricas directamente a la [Metrics API][13].
 {{% /collapse-content %}} 
 
-En total, Datadog tiene más de {{< translate key="integration_count" >}} integraciones. Consulte [Integration Management][5] para obtener más información sobre cómo gestionar sus integraciones.
+En total, Datadog tiene más de {{< translate key="integration_count" >}} integraciones. Consulte [Gestión de integraciones][5] para obtener más información sobre cómo gestionar sus integraciones.
 
 ### Procesamiento configurable {#configurable-processing}
 
 La columna {{< ui >}}Configurable Processing{{< /ui >}} enumera las diversas opciones de configuración avanzada que puede utilizar para aumentar el valor de sus métricas. Haga clic en cualquiera de las opciones para obtener más información y un enlace a la pantalla de configuración correspondiente.
 
-{{% collapse-content title="Optimice sus costos de métricas personalizadas con Metrics without Limits™" level="h4" %}}
-[Metrics without Limits™][19] le ayuda a gestionar los costos de las métricas personalizadas al indexar solo las etiquetas de métricas más valiosas para su organización. Su uso de Metrics without Limits™ se refleja en la sección superior de la página Overview como {{< ui >}}Selected Metrics{{< /ui >}}. Para obtener más información sobre cómo gestionar sus costos de métricas personalizadas, consulte [Prácticas recomendadas para la gobernanza de Custom Metrics][22].
+{{% collapse-content title="Optimice los costos de sus métricas personalizadas con Metrics without Limits™" level="h4" %}}
+[Metrics without Limits™][19] le ayuda a gestionar los costos de las métricas personalizadas al indexar solo las etiquetas de métricas más valiosas para su organización. Su uso de Metrics without Limits™ se refleja en la sección superior de la página Overview como {{< ui >}}Selected Metrics{{< /ui >}}. Para obtener más información sobre cómo gestionar los costos de sus métricas personalizadas, consulte [Mejores prácticas para la gobernanza de métricas personalizadas][22].
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Habilite percentiles en métricas de distribución" level="h4" %}}
@@ -73,7 +73,7 @@ Algunos productos incorporan métricas estándar para ofrecer información lista
 
 ##### Logs {#logs}
 
-[Genere métricas personalizadas a partir de registros ingeridos][14] para resumir los datos de todos los registros ingeridos por Datadog. Esto le permite visualizar los datos de registro importantes para su entorno y alertar sobre ellos, incluso si los registros no están indexados para búsquedas a largo plazo.
+[Genere métricas personalizadas a partir de logs ingeridos][14] para resumir los datos de todos los logs ingeridos por Datadog. Esto le permite visualizar y alertar sobre datos de logs importantes para su entorno, incluso si los logs no están indexados para búsquedas a largo plazo.
 
 ##### APM {#apm}
 
@@ -81,7 +81,7 @@ Algunos productos incorporan métricas estándar para ofrecer información lista
 
 ##### Real User Monitoring (RUM) {#real-user-monitoring-rum}
 
-[Genere métricas personalizadas a partir de eventos de RUM][16] para resumir los datos de sus eventos de RUM, de modo que pueda visualizar los comportamientos de los usuarios que tienen mayor impacto en su organización y alertar sobre ellos.
+[Genere métricas personalizadas a partir de eventos de RUM][16] para resumir los datos de sus eventos de RUM, de modo que pueda visualizar y alertar sobre los comportamientos de los usuarios que tienen mayor impacto en su organización.
 
 ##### Processes {#processes}
 
@@ -93,40 +93,40 @@ Algunos productos incorporan métricas estándar para ofrecer información lista
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Ingiera métricas históricas" level="h4" %}}
-[Historical Metrics Ingestion][21] le permite ingerir valores de métricas con marcas de tiempo de más de una hora de antigüedad al momento del envío.
+[Historical Metrics Ingestion][21] le permite ingerir valores de métricas con marcas de tiempo de más de una hora de antigüedad en el momento del envío.
 {{% /collapse-content %}} 
 
 ### Métricas disponibles {#available-metrics}
 
-La columna {{< ui >}}Available Metrics{{< /ui >}} desglosa su volumen total de métricas por métricas estándar y personalizadas durante el último mes. Si le interesa administrar su volumen de métricas personalizadas, consulte la [página de prácticas recomendadas para la gobernanza de Custom Metrics][25] y la [página Metrics Catalog][26] para obtener información más detallada.
+La columna {{< ui >}}Available Metrics{{< /ui >}} desglosa su volumen total de métricas por métricas estándar y personalizadas durante el último mes. Para administrar su volumen de métricas personalizadas, consulte la guía de [Mejores prácticas para la gobernanza de métricas personalizadas][25] y la [documentación de Metrics Catalog][26].
 
 ## Sus métricas por fuente {#your-metrics-by-source}
 
-Esta sección contiene un mapa de árbol que describe sus fuentes de métricas y sus volúmenes respectivos.
+Esta sección contiene un mapa de árbol que describe sus fuentes de métricas y sus respectivos volúmenes.
 
-{{< img src="metrics/overview/metrics_by_source.png" alt="La sección Sus métricas por fuente de la página Metrics Overview" >}}
+{{< img src="metrics/overview/metrics_by_source.png" alt="La sección \"Sus métricas por fuente\" de la página Metrics Overview" >}}
 
 ## Genere métricas desde cualquier fuente {#generate-metrics-from-any-source}
 
 Al hacer clic en cualquiera de las opciones a continuación, accederá a la página {{< ui >}}Generate Metrics{{< /ui >}} del producto correspondiente, donde podrá crear métricas personalizadas a partir de ese producto:
-   - [Logs ingeridos][14]
-   - [Spans ingeridos][15]
-   - [Eventos de RUM][16]
+   - [Ingested logs][14]
+   - [Ingested spans][15]
+   - [RUM events][16]
    - [Processes][17]
    - [Events][18]
 
 ## Métricas disponibles para consulta {#metrics-available-for-querying}
 
-Utilice la barra de búsqueda en esta sección para ver los datos más recientes y las opciones de configuración de cualquiera de sus métricas. Puede buscar todas sus etiquetas o hacer clic para investigar la métrica más a fondo en las páginas [Metrics Explorer][23] o [Summary][24].
+Utilice la barra de búsqueda en esta sección para ver los datos más recientes y las opciones de configuración de cualquiera de sus métricas. Puede buscar todas sus etiquetas o hacer clic para investigar la métrica más a fondo en las páginas [Metrics Explorer][23] o [Metrics Catalog][24].
 
-{{< img src="metrics/overview/available_metrics.png" alt="La sección Métricas disponibles para consulta de la página Metrics Overview" >}}
+{{< img src="metrics/overview/available_metrics.png" alt="La sección de métricas disponibles para consulta de la página Metrics Overview" >}}
 
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/metrics/custom_metrics/
-[2]: /es/metrics/summary/
+[2]: /es/metrics/catalog/
 [3]: /es/agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /es/agent/guide/integration-management/
@@ -150,4 +150,4 @@ Utilice la barra de búsqueda en esta sección para ver los datos más recientes
 [23]: https://app.datadoghq.com/metric/explorer
 [24]: https://app.datadoghq.com/metric/catalog
 [25]: /es/metrics/guide/custom_metrics_governance/
-[26]: /es/metrics/volume/
+[26]: /es/metrics/catalog/

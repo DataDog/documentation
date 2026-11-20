@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Set Up the Agent's Collector"
@@ -26,7 +26,7 @@ Before starting the migration process, ensure you have:
 
 - A valid Datadog account
 - An OpenTelemetry-instrumented application ready to send telemetry data
-- Access to your current OpenTelemetry Collector configurations
+- Access to your current upstream OpenTelemetry Collector configurations
 - Administrative access to your Kubernetes cluster (Kubernetes v1.29+ is required)
   - **Note**: EKS Fargate environments are not supported
 - Helm v3+
@@ -35,12 +35,12 @@ Before starting the migration process, ensure you have:
 
 Before you begin, review your configuration to see if your existing config is supported by default:
 
-1. Examine your existing OpenTelemetry Collector configuration file (`otel-config.yaml`).
+1. Examine your existing upstream OpenTelemetry Collector configuration file (`otel-config.yaml`).
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
-1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+1. If your setup uses components not included in the Agent by default, follow [Add Components to the Agent's Collector][4].
 1. If your configuration uses `span_name_as_resource_name` or `span_name_remappings`, review the [New Operation Name Mappings guide][11]. The Agent's Collector enables these new mappings by default.
 
-<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from the upstream Collector.</div>
+<div class="alert alert-info">The Agent's Collector can use different configuration defaults than the upstream OpenTelemetry Collector. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from the upstream Collector.</div>
 
 ### Example configuration
 
@@ -94,7 +94,7 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+In this case, follow [Add Components to the Agent's Collector][4].
 
 [4]: /opentelemetry/setup/ddot_collector/custom_components
 {{% /tab %}}
@@ -146,7 +146,7 @@ In this case, you can proceed to installing the Agent's Collector.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Agent with OpenTelemetry Collector
+## Install the Agent's Collector {#install-the-agent-with-opentelemetry-collector}
 
 Follow these steps to install the Agent's Collector.
 
@@ -186,7 +186,7 @@ datadog:
    {{< /code-block >}}
    Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-1. Enable the OpenTelemetry Collector and configure the essential ports:
+1. Enable the Agent's Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...
@@ -239,9 +239,9 @@ datadog:
     release: helm_release
 {{< /code-block >}}
 
-## Deploy the Agent with OpenTelemetry Collector
+## Deploy the Agent's Collector {#deploy-the-agent-with-opentelemetry-collector}
 
-1. Install or upgrade the Datadog Agent with OpenTelemetry Collector to your Kubernetes environment:
+1. Install or upgrade the Datadog Agent and the Agent's Collector in your Kubernetes environment:
    ```sh
    helm upgrade -i <RELEASE_NAME> datadog/datadog \
      -f datadog-values.yaml \
@@ -249,7 +249,7 @@ datadog:
    ```
 1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
 1. Select the {{< ui >}}OTel Collector Version{{< /ui >}} facet.
-1. Select an Agent and inspect its configuration to verify the new Agent with OpenTelemetry Collector is installed successfully.
+1. Select an Agent and inspect its configuration to verify that the Agent's Collector is installed successfully.
 
 ## Configure your application
 
@@ -337,7 +337,7 @@ After configuring your application, verify that data is flowing correctly to Dat
 After you've confirmed that all data is being collected correctly in Datadog, you can remove the upstream OpenTelemetry Collector:
 
 1. Ensure all required data is being collected and displayed in Datadog.
-1. Uninstall the open source OpenTelemetry Collector from your environment:
+1. Uninstall the upstream OpenTelemetry Collector from your environment:
    ```sh
    kubectl delete deployment old-otel-collector
    ```

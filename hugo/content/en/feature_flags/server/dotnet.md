@@ -58,7 +58,7 @@ Console.WriteLine(enabled);
 
 No Feature Flags enablement or source setting is required for a new setup. Provider initialization starts configuration polling and waits up to 30 seconds for the first configuration. If the wait expires, polling continues and evaluations return default values until configuration arrives. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][11].
 
-With agentless delivery, the SDK sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][6].
+With agentless delivery, the SDK sends experiment exposures through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][6]. Provider versions through 2.3.2 do not emit aggregated flag evaluation events.
 
 ## Use Agent delivery
 
@@ -283,6 +283,12 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
+## Evaluation events and privacy
+
+With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
+
+Provider versions through `Datadog.FeatureFlags.OpenFeature` 2.3.2 do not emit aggregated EVP flag evaluation events. Experiment exposures and the `feature_flag.evaluations` OTLP metric are separate signals. See [Server-Side Evaluation Events and Privacy][12] for evaluation-event support in other server SDKs.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
@@ -390,3 +396,4 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 {{< partial name="whats-next/whats-next.html" >}}
 
 [11]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[12]: /feature_flags/guide/server_evaluation_events/

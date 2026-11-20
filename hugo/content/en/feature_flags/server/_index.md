@@ -90,6 +90,7 @@ To add only Feature Flags to an existing OpenTelemetry setup, use [Option B: Run
 Configuration delivery, event delivery, metrics, and APM tracing use separate paths:
 
 - [Send feature flag telemetry][15]: experiment exposures and aggregated flag evaluation events, with supported direct delivery or a local relay.
+- [Server-side evaluation events and privacy][19]: evaluation-event collection controls, targeting-key hashing, and direct-delivery limits.
 - [Server-side flag evaluation metrics][6]: the separate `feature_flag.evaluations` OTLP metric.
 - [APM trace enrichment][13]: flag evaluation data attached to APM traces.
 
@@ -158,6 +159,12 @@ const evaluationContext = {
 };
 {{< /code-block >}}
 
+## Opt out individual subjects
+
+Configure evaluation telemetry and experiment participation independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][18] for the support matrix, mode behavior, and language-specific examples.
+
+Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
+
 ## Further reading
 
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
@@ -183,3 +190,5 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [15]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [16]: /feature_flags/server/java/#collect-traces-with-flag-evaluations
 [17]: /feature_flags/implementation_patterns/opentelemetry/#option-b-run-the-datadog-sdk-alongside-opentelemetry
+[18]: /feature_flags/concepts/opt_out/
+[19]: /feature_flags/guide/server_evaluation_events/

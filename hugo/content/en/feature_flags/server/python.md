@@ -217,7 +217,11 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent delivery][9] to receive configuration through Remote Configuration
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-With agentless delivery, Python sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. [`serverless-init`][11] is an optional relay. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+With agentless delivery, Python sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. [`serverless-init`][11] is an optional relay.
+
+## Evaluation events and privacy
+
+Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path without disabling experiment exposures or the separate `feature_flag.evaluations` OTLP metric. Use `ddtrace` 4.16.0 or later for the privacy and direct-delivery behavior in [Server-Side Evaluation Events and Privacy][13].
 
 ## Cleanup
 
@@ -313,3 +317,5 @@ Verify the following:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[13]: /feature_flags/guide/server_evaluation_events/

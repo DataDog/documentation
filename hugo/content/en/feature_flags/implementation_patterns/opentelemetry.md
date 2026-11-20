@@ -5,7 +5,7 @@ further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
-- link: "/opentelemetry/instrument/dd_sdks/api_support/"
+- link: "/opentelemetry/instrument/ddot_sdks/api_support/"
   tag: "Documentation"
   text: "OpenTelemetry API Support"
 - link: "/remote_configuration/"
@@ -63,7 +63,7 @@ var client = Api.Instance.GetClient("my-service");
 // Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for .NET](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces).
+For more detail, see [OpenTelemetry API Support for .NET](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=dot_net&platform=traces).
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -115,7 +115,7 @@ func main() {
 }
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces).
+For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=go&platform=traces).
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -151,7 +151,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -185,7 +185,7 @@ const otelTracer = otel.trace.getTracer('my-service');
 otelTracer.startActiveSpan('my-operation', (span) => { ... });
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Node.js](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces).
+For more detail, see [OpenTelemetry API Support for Node.js](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=node_js&platform=traces).
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -214,7 +214,7 @@ client = api.get_client()
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Python](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces).
+For more detail, see [OpenTelemetry API Support for Python](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=python&platform=traces).
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -242,7 +242,7 @@ client = OpenFeature::SDK.build_client
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Ruby](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces).
+For more detail, see [OpenTelemetry API Support for Ruby](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=ruby&platform=traces).
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -275,7 +275,7 @@ $client = $api->getClient('my-service');
 // Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for PHP](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php&platform=traces).
+For more detail, see [OpenTelemetry API Support for PHP](/opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=php&platform=traces).
 
 {{% /tab %}}
 {{< /tabs >}}

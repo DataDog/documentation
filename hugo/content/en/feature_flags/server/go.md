@@ -132,6 +132,52 @@ evalCtx := openfeature.NewEvaluationContext(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Control flag evaluation telemetry and experiment participation
+
+Both controls require `dd-trace-go/v2` version `2.12.0` or later. They are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][10] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Register the provider during startup. Pass both preferences with each subject's evaluation:
+
+```go
+import (
+    "context"
+    "log"
+
+    ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
+if err != nil {
+    log.Fatal(err)
+}
+if err := openfeature.SetProviderAndWait(provider); err != nil {
+    log.Printf("Feature Flags initialization failed: %v", err)
+}
+client := openfeature.NewClient("my-service")
+
+evalCtx := openfeature.NewEvaluationContext("user-123", map[string]any{
+    "dd_evaluation_telemetry_opt_out": true,
+    "dd_experimentation_opt_out_at": "2026-10-30T12:00:00Z",
+})
+enabled, err := client.BooleanValue(context.Background(), "new-checkout", false, evalCtx)
+```
+
+Place initialization in the application's startup function. Replace the example timestamp with the subject's stored preference.
+
+For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOptOutParameter` to a `*bool`. Set `ProviderConfig.ExperimentationOptOutMode` to `ExperimentationOptOutImmediate`, `ExperimentationOptOutFutureExperimentsOnly`, or `ExperimentationOptOutDisabled`. Explicit values override the environment. A nil Boolean pointer and `ExperimentationOptOutDefault` use the environment.
+
+Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. Future-experiments-only mode checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
+
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][11] for how inherited context values apply.
+
 ## Evaluate flags
 
 After setting up the provider and creating a client, you can evaluate flags throughout your application. Flag evaluation is local and fast—the SDK uses locally cached configuration data, so no network requests occur during evaluation.
@@ -232,6 +278,18 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Configure polling and initialization timeouts
+
+See [Server SDK Configuration Sources][12] for custom endpoints, source selection, and migration. Agentless polling defaults to 30 seconds, with a 5-second request timeout. Go falls back to those defaults for invalid values; supported upper limits are 3600 seconds for polling and 300 seconds for requests.
+
+Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the default 10-second initialization wait. A deadline passed to `SetProviderWithContextAndWait` takes precedence.
+
+## Evaluation events and privacy
+
+Go sends aggregated EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. In agentless mode, both evaluation events and experiment exposures prefer a compatible local relay. They can fall back to direct intake with the application's `DD_API_KEY` and `DD_SITE`.
+
+See [Server-Side Evaluation Events and Privacy][9] for targeting-key hashing, context collection, and direct-delivery limits. Event delivery is separate from the `feature_flag.evaluations` OTLP metric.
+
 ## Record exposures in your own data store
 
 Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][7].
@@ -317,3 +375,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[9]: /feature_flags/guide/server_evaluation_events/
+[10]: /feature_flags/concepts/opt_out/
+[11]: /feature_flags/concepts/opt_out/#configure-server-sdks
+[12]: /feature_flags/concepts/configuration_sources/

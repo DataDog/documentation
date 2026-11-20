@@ -42,14 +42,14 @@ Flag configuration, experiment exposures, aggregated evaluation events, and OTLP
 | SDK | Experiment exposures | Aggregated flag evaluation events | Event path with agentless delivery |
 |---|---|---|---|
 | Java | Supported | Supported | Direct HTTPS; a compatible local relay can be used with the Java agent |
-| Node.js | Supported | Not supported | Prefer a compatible relay; use direct HTTPS fallback |
+| Node.js | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | Python | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
-| .NET | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
+| .NET | Supported | Not supported by provider versions through 2.3.2 | Prefer a compatible relay; use direct HTTPS fallback for exposures |
 | Ruby | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | Go | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 | PHP | Supported | Supported | Prefer a compatible relay; use direct HTTPS fallback |
 
-These capabilities apply to the [documented SDK versions][1]. Direct event delivery uses the application's API key and Datadog site. With Agent delivery, events go through the Agent.
+These capabilities apply to the [documented SDK versions][1]. Direct event delivery uses the application's API key and Datadog site. With Agent delivery, events go through the Agent. See [Server-Side Evaluation Events and Privacy][8] for collection controls, targeting-key hashing, `DD_FLAGGING_EVALUATION_COUNTS_ENABLED`, and direct-delivery limits.
 
 Experiment exposures are generated only for flags associated with an experiment. Aggregated evaluation events and the separate `feature_flag.evaluations` OTLP metric are different signals. Configure the metric through [Server-Side Flag Evaluation Metrics][4]. Agentless delivery does not configure an OTLP exporter.
 
@@ -110,3 +110,4 @@ The public Feature Flags API manages flags and environments. Use the server SDK 
 [5]: /serverless/
 [6]: /feature_flags/server/java/#use-agent-delivery
 [7]: /feature_flags/server/ruby/#getting-started
+[8]: /feature_flags/guide/server_evaluation_events/

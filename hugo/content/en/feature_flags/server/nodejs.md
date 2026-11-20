@@ -285,6 +285,10 @@ With agentless delivery, Node.js uses a compatible local telemetry relay when av
 
 The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. It requires a supported Agent or serverless telemetry receiver. For more information on available graphing, see [Feature Flag Graphs][5].
 
+## Evaluation events and privacy
+
+In `dd-trace` 6.20.0 or later on 6.x, the provider sends aggregated flag evaluation events by default. On 5.x, use version 5.131.0 or later. In agentless mode, it uses a local relay or direct fallback. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. See [Server-Side Evaluation Events and Privacy][14] for targeting-key hashing, context collection, and the Node.js bundling requirements.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `tracer.openfeature` provider, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` ships with `@openfeature/server-sdk`, so no additional dependency is required.
@@ -362,3 +366,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [12]: /feature_flags/concepts/configuration_sources/#agent-availability
 [13]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[14]: /feature_flags/guide/server_evaluation_events/
