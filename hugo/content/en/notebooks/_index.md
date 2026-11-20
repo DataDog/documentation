@@ -283,8 +283,6 @@ Use folders to group related notebooks, such as a team's runbooks or a service's
 
 Deleting a folder never deletes its notebooks. By default, the folder's notebooks and subfolders move up to its parent folder, or to the top level. If you clear the bubble-up option when deleting, its subfolders are deleted too, and their notebooks no longer belong to a folder.
 
-### Manage folders with MCP or the API
-
 You can also manage folders programmatically. Folder operations are available through the Datadog MCP Server and the API.
 
 ## Finding notebooks
