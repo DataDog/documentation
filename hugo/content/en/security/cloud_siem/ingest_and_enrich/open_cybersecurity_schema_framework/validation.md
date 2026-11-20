@@ -20,7 +20,7 @@ Cloud SIEM validates samples of security logs mapped to OCSF against the schema 
 
 ## Configure validation outputs
 
-1. Navigate to [**Security > Cloud SIEM > Settings > OCSF Validation**][2].
+1. Navigate to **Security** > **Cloud SIEM** > **Settings** > [**OCSF Validation**][2].
 1. Turn on **Enable OCSF validation outputs** to send validation metrics to your organization. This setting is on by default.
 1. Optionally, turn on **Send detailed finding logs** to receive a log for each validation error or warning found in sampled records. This setting is off by default.
 
