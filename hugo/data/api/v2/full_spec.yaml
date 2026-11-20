@@ -100354,6 +100354,10 @@ components:
           description: A descriptive name for this remap rule.
           example: "Parse JSON from message field"
           type: string
+        sample:
+          description: A sample event used to test the VRL script in the pipeline editor.
+          example: '{"message":"{\"service\":\"api\"}"}'
+          type: string
         source:
           description: The VRL script source code that defines the processing logic.
           example: ". = parse_json!(.message)"
@@ -100524,7 +100528,7 @@ components:
           type: array
         routes:
           description: A list of routing rules that forward matching logs to Datadog using dedicated API keys.
-          example: [{"api_key_key": "API_KEY_IDENTIFIER", "include": "service:api", "route_id": "datadog-logs-route-us1", "site": "us1"}]
+          example: [{"api_key_key": "API_KEY_IDENTIFIER", "include": "service:api", "name": "Production logs", "route_id": "datadog-logs-route-us1", "site": "us1"}]
           items:
             $ref: "#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute"
           maxItems: 100
@@ -100547,6 +100551,10 @@ components:
         include:
           description: A Datadog search query that determines which logs are forwarded using this route.
           example: service:api
+          type: string
+        name:
+          description: A human-readable name for this route.
+          example: Production logs
           type: string
         route_id:
           description: Unique identifier for this route within the destination.
