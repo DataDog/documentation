@@ -13,3 +13,12 @@ entries:
       - ListLogs
       - ListLogsGet
     title: Correct logs search maximum page size to 5000
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AggregateLogs
+      - ListLogs
+      - ListLogsGet
+      - SubmitLog
+    title: Document rate-limit headers on the shared 429 responses
