@@ -248,7 +248,7 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
 ### Verify subscription traffic
 
 1. Send a prompt from Claude Code or Codex.
-2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][subscription-3] and find the request under the subscription provider. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect its span.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][subscription-3] and find the request under the subscription provider. To inspect its span, click a bar and select {{< ui >}}View traces{{< /ui >}}, or click a row in a ranking.
 3. Confirm that the usage appears on the usage page of your Claude or ChatGPT plan.
 
 ### How AI Gateway handles subscription traffic
@@ -283,7 +283,7 @@ If your setup is correct, Anthropic returns HTTP `401` with an `authentication_e
 | The subscription option doesn't appear, or creating the provider returns HTTP `403` with `subscription_providers_disabled`. | Subscription providers are not enabled for your organization. | Contact your Customer Success Manager. |
 | A request returns HTTP `403` with `no_permitted_target`. | The user's access does not include the provider or the model. | Grant access to the whole provider or to the model. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider). |
 | Claude Code shows `Failed to authenticate.` followed by `access denied: model "<PROVIDER_SLUG>/<MODEL_ID>" is not allowed by your access policies`. | AI Gateway denied the model. Claude Code adds `Failed to authenticate.` to every `403` response, so the error is not a sign-in problem. | Grant access to the model or to the whole provider. |
-| A request returns HTTP `400` with `requested_provider_unavailable`. | The `x-ai-gateway-provider` slug doesn't match an active provider. | Check the slug on the provider's page. |
+| A request returns HTTP `400` with `model_not_found`. | The `x-ai-gateway-provider` slug doesn't match a configured provider. | Check the slug on the provider's page. |
 | A request returns HTTP `400` with `unsupported_operation`. | The request used an API that the subscription provider doesn't serve. | Use Anthropic Messages with an Anthropic subscription provider, and OpenAI Responses with an OpenAI subscription provider. |
 | Anthropic or OpenAI returns HTTP `401` during a session. | The subscription sign-in is missing or expired. | Sign in again: run `/login` in Claude Code, or run `codex login`. |
 | Usage is billed per token instead of to the subscription. | Claude Code sends an API credential from `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`. | Remove the setting, then sign in with `/login`. |
