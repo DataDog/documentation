@@ -1,6 +1,6 @@
 ---
 title: Send Azure Container Apps Traces with the Managed OpenTelemetry Agent
-description: "Export traces from a Datadog SDK or an OpenTelemetry SDK to Datadog through the Azure Container Apps managed OpenTelemetry agent."
+description: "Export traces from a DDOT SDK or an upstream OpenTelemetry SDK to Datadog through the Azure Container Apps managed OpenTelemetry agent."
 content_filters:
   - trait_id: api_type
     option_group_id: aca_otel_managed_agent_sdk_options
@@ -38,7 +38,7 @@ The Azure Container Apps managed OpenTelemetry agent is in Preview.
 
 The Azure Container Apps managed OpenTelemetry agent receives OTLP data from your apps and forwards it to Datadog. Use this setup if you want Azure to manage the collection layer instead of running a Datadog Agent or OpenTelemetry Collector sidecar.
 
-You can send traces to the managed agent with a Datadog SDK or an OpenTelemetry SDK. Select your SDK at the top of this page.
+You can send traces to the managed agent with a DDOT SDK or an upstream OpenTelemetry SDK. Select your SDK at the top of this page.
 
 Your app sends traces in OTLP format over gRPC to the managed agent. The managed agent forwards them to Datadog using the Datadog site and API key configured on your Container Apps environment.
 
@@ -63,7 +63,7 @@ Other ways to send traces from Azure Container Apps to Datadog include:
 The managed agent accepts only the gRPC protocol.
 
 {% if equals($api_type, "dd_api") %}
-This page documents Java, the only Datadog SDK that exports OTLP traces over gRPC. Other Datadog SDKs export OTLP traces only over HTTP or do not support OTLP trace export, so they cannot send traces to the managed agent:
+This page documents Java, the only DDOT SDK that exports OTLP traces over gRPC. Other DDOT SDKs export OTLP traces only over HTTP, and the other Datadog SDKs don't support OTLP trace export, so they cannot send traces to the managed agent:
 
 | SDK | Supported OTLP protocols |
 |---|---|
@@ -140,7 +140,7 @@ az containerapp update \
 
 {% /step %}
 {% step title="Confirm the OTLP endpoint" %}
-The Datadog SDK sends traces to the URL in `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure documents this variable as injected automatically (see [Environment variables][13] in the Azure documentation), but it may be missing from your container. If it is missing, the SDK sends traces to its default endpoint on `localhost`, where nothing listens, and traces are dropped without errors.
+The DDOT SDK sends traces to the URL in `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure documents this variable as injected automatically (see [Environment variables][13] in the Azure documentation), but it may be missing from your container. If it is missing, the SDK sends traces to its default endpoint on `localhost`, where nothing listens, and traces are dropped without errors.
 
 After you deploy, list the environment variables in your running container:
 
@@ -262,7 +262,7 @@ You may see repeated errors such as `Failed to upload batch to http://localhost:
 ## Limitations
 
 {% if equals($api_type, "dd_api") %}
-- OTLP trace export from Datadog SDKs supports core APM functionality. Other Datadog features may not be supported, or may require the Datadog Agent. See [DDOT SDK OTLP trace export][6].
+- OTLP trace export from DDOT SDKs supports core APM functionality. Capabilities that need the Datadog Agent, such as Live Debugger and Dynamic Instrumentation, aren't available in this setup, which has no Datadog Agent. See [Activate OpenTelemetry mode][6].
 - The managed agent accepts only the gRPC protocol, which limits the SDKs you can use (see [Language support](#language-support)).
 {% /if %}
 {% if equals($api_type, "otel_api") %}

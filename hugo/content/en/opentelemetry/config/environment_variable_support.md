@@ -29,11 +29,11 @@ further_reading:
       text: 'Ruby SDK Configuration'
 ---
 
-DDOT SDKs implement the OpenTelemetry APIs for traces, metrics, and logs. This allows you to use standard OpenTelemetry environment variables to configure your application while receiving additional Datadog telemetry with minimal changes to your existing configuration.
+DDOT SDKs implement the OpenTelemetry APIs for traces, metrics, and logs, and read the standard OpenTelemetry SDK environment variables (`OTEL_*`). You can keep your existing OpenTelemetry configuration when you adopt DDOT SDKs, and use a few Datadog (`DD_*`) settings only for Datadog-specific capabilities.
 
-This page describes the environment variables for configuring DDOT SDKs.
+This page describes the environment variables for configuring DDOT SDKs, including support differences by language. It also covers the Datadog SDKs for Ruby and PHP, which read these OpenTelemetry environment variables for the OpenTelemetry Metrics and Logs APIs but aren't DDOT SDKs.
 
-The precedence rules on this page describe how *Datadog SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
+The precedence rules on this page describe how *DDOT SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
 
 <div class="alert alert-danger">
   To avoid duplicate values appearing in Datadog for the same tag key, don't set both Datadog (<code>DD_*</code>) and OpenTelemetry (<code>OTEL_*</code>) environment variables for the same concept. Choose one convention.
@@ -166,7 +166,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 **Ruby & Go SDKs**: The OpenTelemetry SDK activates automatically upon import and configuration, so this setting is not applicable.
 
 ## OTLP Exporter configuration
-Datadog SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
+DDOT SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
 
 Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always take precedence over their general counterparts (like `OTEL_EXPORTER_OTLP_PROTOCOL`).
 

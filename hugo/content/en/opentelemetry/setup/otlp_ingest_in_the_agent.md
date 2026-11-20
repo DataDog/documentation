@@ -1,5 +1,5 @@
 ---
-title: Set Up the Agent's OTLP Endpoint
+title: Set Up the Datadog Agent's OTLP Endpoint
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
@@ -19,23 +19,23 @@ further_reading:
 ---
 
 
-The Agent's OTLP endpoint is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to the Datadog Agent. It's part of the core Agent, so you don't run a separate Collector. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
+The Datadog Agent's OTLP endpoint is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to the Datadog Agent. It's part of the core Datadog Agent, so you don't run a separate Collector. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
 
-The Agent's OTLP endpoint allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
+The Datadog Agent's OTLP endpoint allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 
 ## Initial setup
 
-To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the Agent's OTLP endpoint is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Agent `go.mod` file.
+To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the Datadog Agent's OTLP endpoint is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Datadog Agent `go.mod` file.
 
-Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
+Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Datadog Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
 
-<div class="alert alert-warning">The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running on one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
+<div class="alert alert-warning">The supported setup is an ingesting Datadog Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running on one host to a Datadog Agent on a different host. But, provided the Datadog Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 
 For hostname recommendations for OTLP ingestion by the Datadog Agent, see [Hostname and Tagging][11].
 
-## Enable the Agent's OTLP endpoint {#enabling-otlp-ingestion-on-the-datadog-agent}
+## Enable the Datadog Agent's OTLP endpoint {#enabling-otlp-ingestion-on-the-datadog-agent}
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -72,7 +72,7 @@ Alternatively, configure the endpoints by providing the port through the environ
 - For gRPC (`localhost:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT`
 - For HTTP (`localhost:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
 
-These must be passed to both the core Agent and trace Agent processes. If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure the server is available on non-local interfaces.
+These must be passed to both Datadog Agent processes, the core Agent and the trace Agent. If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure the server is available on non-local interfaces.
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
@@ -87,18 +87,18 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
 
 <div class="alert alert-danger">
-<strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
+<strong>Known Issue</strong>: Starting with Datadog Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
 If you are using an affected version, you can use one of these workarounds:<br><br>
-1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
-2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
-3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br><br>
+1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Datadog Agent Docker container.<br>
+2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Datadog Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Datadog Agent Docker container.<br><br>
 These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
 
 [1]: /agent/docker/
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-1.  Follow the [Kubernetes Agent setup][1] for the base installation.
+1.  Follow the [Datadog Agent setup for Kubernetes][1] for the base installation.
 
 2.  Enable the preferred protocol gRPC or HTTP in your Operator's `datadog-agent.yaml` manifest:
 
@@ -142,7 +142,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1.  Follow the [Kubernetes Agent setup][1] for the base installation.
+1.  Follow the [Datadog Agent setup for Kubernetes][1] for the base installation.
 
 2.  Enable the preferred protocol gRPC or HTTP in your Helm's `datadog-values.yaml` file:
 
@@ -235,7 +235,7 @@ OTLP logs ingestion is disabled by default to avoid unexpected billing. To enabl
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Enable log collection by following [Host Agent Log collection setup][7]:
+1. Enable log collection by following [Datadog Agent log collection setup for hosts][7]:
 
    ```yaml
    logs_enabled: true
@@ -302,7 +302,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Manual (Daemonset)" %}}
 
-Set the following environment variables in the core Agent container:
+Set the following environment variables in the core Datadog Agent container:
 
 ```yaml
 - name: DD_LOGS_ENABLED
@@ -317,11 +317,11 @@ For more information, see [log collection with your DaemonSet][8].
 {{% /tab %}}
 {{< /tabs >}}
 
-There are many other environment variables and settings supported in the Datadog Agent. For an overview, see [Agent configuration files][6].
+There are many other environment variables and settings supported in the Datadog Agent. For an overview, see [Datadog Agent configuration files][6].
 
 ## Sending OpenTelemetry traces, metrics, and logs to Datadog Agent
 
-After enabling OTLP ingestion on the Datadog Agent, configure your OpenTelemetry-instrumented application to export telemetry data to the Agent's OTLP endpoint. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable in your **application** environment to direct data to the Agent. Without this configuration, your application does not send telemetry data to the Agent, even if the Agent's OTLP receiver is enabled.
+After enabling OTLP ingestion on the Datadog Agent, configure your OpenTelemetry-instrumented application to export telemetry data to the Datadog Agent's OTLP endpoint. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable in your **application** environment to direct data to the Datadog Agent. Without this configuration, your application does not send telemetry data to the Datadog Agent, even if the Datadog Agent's OTLP receiver is enabled.
 
 {{< tabs >}}
 {{% tab "Host" %}}

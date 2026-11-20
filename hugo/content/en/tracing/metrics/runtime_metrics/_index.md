@@ -263,13 +263,14 @@ You can only enable runtime metrics with [environment variables](#environment-va
 
 ## Export runtime metrics over OTLP
 
-Use one of the following Datadog SDKs to export runtime metrics over OTLP:
+Use one of the following DDOT SDKs to export runtime metrics over OTLP:
 
 | SDK | Minimum SDK version | Runtime requirement |
 |-----|---------------------|---------------------|
 | Java | v1.63.0 | Java 8+ |
 | .NET | v3.44.0 | .NET 6+ |
 | Node.js | v5.107.0 | A Node.js version supported by the SDK |
+| Go | v2.10.0 | A Go version supported by the SDK |
 
 For the environment variables and endpoint settings, see [Export runtime metrics over OTLP][11].
 

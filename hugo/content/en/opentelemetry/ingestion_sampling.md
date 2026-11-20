@@ -67,7 +67,7 @@ Use the [ingestion volume control guide][8] to read more about the implications 
 
 #### Trace metric extrapolation for Datadog SDKs
 
-DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
+DDOT SDKs record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
 
 Use these minimum versions for automatic extrapolation:
 
