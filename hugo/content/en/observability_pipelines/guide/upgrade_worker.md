@@ -39,6 +39,7 @@ Worker version 2.26.0 gives you access to the following:
 
 - The Custom Processor now includes a `range` function that creates an array of integers from an inclusive start to an exclusive end, with an optional step.
 - The Datadog Agent source now accepts the v3 series metrics intake format used by Datadog Agent 7.81.0 and newer.
+- The [Spike Protection processor][70] is now available.
 
 #### Enhancements
 
@@ -1136,3 +1137,4 @@ Worker version 2.7.0 gives you access to the following:
 [67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
 [68]: /observability_pipelines/destinations/azure_data_explorer/
 [69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
+[70]: /observability_pipelines/processors/spike_protection/
