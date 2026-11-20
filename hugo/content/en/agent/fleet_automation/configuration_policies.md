@@ -24,7 +24,6 @@ A policy adds to the existing local configuration on each Agent. If a policy set
 ## Prerequisites
 
 - [Remote Configuration][6] enabled for your organization and for the API key your Agents use. Both are enabled by default.
-- [Remote updates][7] enabled on each target VM Agent (`remote_updates: true`).
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][8].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
 - The `Agent Configuration Management` permission.
@@ -72,5 +71,4 @@ Click the three-dot menu to the right of any policy name to enable or disable th
 [4]: /agent/fleet_automation/configure_logs/
 [5]: /agent/fleet_automation/modify_tags/
 [6]: /agent/guide/setup_remote_config
-[7]: /agent/guide/setup_remote_config/#enable-remote-agent-management
 [8]: /agent/fleet_automation/upgrade_agents/
