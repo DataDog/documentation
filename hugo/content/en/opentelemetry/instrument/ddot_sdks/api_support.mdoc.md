@@ -117,20 +117,36 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 
 Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
-<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
-{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
+<!-- Native implementation (.NET, Node.js, Go, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
+
+The DDOT SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+
+{% alert level="info" %}
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+{% /alert %}
+{% /if %}
+
+<!-- Native implementation (Rust) -->
+{% if equals($prog_lang, "rust") %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
-You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK (for Rust, the Datadog SDK) provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The Datadog SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if includes($prog_lang, ["python", "ruby", "php"]) %}
+<!-- Exporter-based implementation (Python) -->
+{% if equals($prog_lang, "python") %}
 
-This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK (for Ruby and PHP, the Datadog SDK) detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
+{% /if %}
+
+<!-- Exporter-based implementation (Ruby, PHP) -->
+{% if includes($prog_lang, ["ruby", "php"]) %}
+
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
 
 ## Prerequisites
@@ -923,20 +939,36 @@ Here is the minimum version required for each instrument type:
 
 Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
-<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
-{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
+<!-- Native implementation (.NET, Node.js, Go, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
+
+The DDOT SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+
+{% alert level="info" %}
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+{% /alert %}
+{% /if %}
+
+<!-- Native implementation (Rust) -->
+{% if equals($prog_lang, "rust") %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
-You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK (for Rust, the Datadog SDK) provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The Datadog SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if includes($prog_lang, ["python", "ruby", "php"]) %}
+<!-- Exporter-based implementation (Python) -->
+{% if equals($prog_lang, "python") %}
 
-This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK (for Ruby and PHP, the Datadog SDK) detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
+{% /if %}
+
+<!-- Exporter-based implementation (Ruby, PHP) -->
+{% if includes($prog_lang, ["ruby", "php"]) %}
+
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
 
 {% if equals($prog_lang, "ruby") %}
@@ -1755,7 +1787,7 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and the Datadog Agent to tail log files:
 
 1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+2. The SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
 3. Verify your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
 4. Disable any file-based log collection for this service to avoid duplicate logs.
 
