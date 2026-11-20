@@ -110,6 +110,7 @@ Use the filter bar to focus on the remediations your team can act on. Filters ap
 
 - **Ownership**: Filter by team, code owner, repository, or service to see the fixes your team owns.
 - **Risk**: Filter by severity or exploit availability to focus on the most urgent fixes.
+- **Finding type**: Filter by the type of finding, such as library or container image vulnerabilities.
 - **Vulnerability**: Filter by CVE or package to track a specific issue across your environment.
 - **Triage**: Filter by the assignee of the remediation case to see the remediations assigned to you.
 
@@ -128,7 +129,7 @@ Click a remediation to open its side panel:
 
 ## Act on a remediation
 
-Taking action on a remediation creates its remediation case in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
+Assigning an owner, adding a ticket, or starting a fix creates the remediation case in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
 
 ### Assign an owner
 
@@ -162,7 +163,7 @@ From the side panel, click **Remediate with AI** and choose one of the following
 - **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
 - **Fix with Cursor**: Open the fix prompt in Cursor.
 
-To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default, so add `cases` to the `toolsets` parameter.
+To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default, so add `cases` to the `toolsets` parameter, for example `toolsets=core,cases`.
 
 To check the fix from your coding agent, set up the [Code Security MCP Server][7]. The server rescans your local code and confirms the findings are resolved before you commit.
 
@@ -194,7 +195,6 @@ Status updates can take up to an hour to appear.
 
 | Capability | What it enables | How to enable |
 |---|---|---|
-| Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Create a case or ticket](#create-a-case-or-ticket). |
 | AI summary | The **Know before you remediate** summary. | Available by default. Not available for organizations that opted out of AI features or have HIPAA compliance enabled. |
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8], connect your GitHub repositories, and turn on the **AI Products** toggle in [AI Credits admin controls][16]. |
