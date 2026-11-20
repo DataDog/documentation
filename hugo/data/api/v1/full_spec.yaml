@@ -33,27 +33,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
   schemas:
     APIErrorResponse:
       description: Error response object.
